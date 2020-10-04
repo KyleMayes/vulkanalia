@@ -1,0 +1,16 @@
+[package]
+
+edition = "2018"
+
+name = "vulkanalia-sys"
+authors = ["Kyle Mayes <kyle@mayeses.com>"]
+
+version = "0.1.0"
+
+readme = "../README.md"
+license = "Apache-2.0"
+
+description = "Raw Vulkan bindings for Rust."
+
+documentation = "https://docs.rs/vulkanalia-sys"
+repository = "https://github.com/KyleMayes/vulkanalia"

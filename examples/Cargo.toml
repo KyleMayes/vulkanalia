@@ -1,0 +1,20 @@
+[package]
+
+publish = false
+
+edition = "2018"
+
+name = "examples"
+authors = ["Kyle Mayes <kyle@mayeses.com>"]
+
+version = "0.1.0"
+
+readme = "../README.md"
+license = "Apache-2.0"
+
+description = "Examples."
+
+[dependencies]
+
+anyhow = "1"
+vulkanalia = { path = "../vulkanalia" }
