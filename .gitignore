@@ -1,3 +1,6 @@
 Cargo.lock
 
+.gradle/
+.idea/
+build/
 target/
