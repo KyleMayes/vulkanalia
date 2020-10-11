@@ -19,6 +19,11 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    implementation("com.github.ajalt.clikt:clikt:3.0.1")
+    implementation("io.github.microutils:kotlin-logging-jvm:2.0.2")
+    implementation("org.jetbrains:annotations:20.0.0")
+    implementation("org.kohsuke:github-api:1.116")
+    implementation("org.slf4j:slf4j-simple:1.7.29")
 }
 
 tasks.withType<KotlinCompile> {

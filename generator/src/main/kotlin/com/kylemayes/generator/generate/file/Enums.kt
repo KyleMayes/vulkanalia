@@ -1,0 +1,111 @@
+// SPDX-License-Identifier: Apache-2.0
+
+package com.kylemayes.generator.generate.file
+
+import com.kylemayes.generator.generate.support.generateAliases
+import com.kylemayes.generator.generate.support.generateManualUrl
+import com.kylemayes.generator.registry.Enum
+import com.kylemayes.generator.registry.Registry
+import com.kylemayes.generator.registry.Variant
+
+/** Generates Rust structs for Vulkan enums. */
+fun Registry.generateEnums() =
+    """
+use std::error;
+use std::fmt;
+
+${enums.values.sortedBy { it.name }.joinToString("\n") { generateEnum(it) }}
+${generateAliases(enums.keys)}
+    """
+
+/** Generates a Rust struct for a Vulkan enum. */
+private fun Registry.generateEnum(enum: Enum): String {
+    val debug = generateFmtImpl(enum, "Debug", "self.0.fmt(f)") { "\"${it.name}\"" }
+
+    val (display, error) = if (enum.name.value == "Result") {
+        val default = "write!(f, \"unknown Vulkan result (code = {})\", self.0)"
+        val display = generateFmtImpl(enum, "Display", default) { "\"${results[it.value] ?: it.name.value}\"" }
+        display to "impl error::Error for ${enum.name} { }"
+    } else {
+        "" to ""
+    }
+
+    return """
+/// <${generateManualUrl(enum)}>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct ${enum.name}(i32);
+
+impl ${enum.name} {
+    ${enum.variants.joinToString("") { "pub const ${it.name}: Self = Self(${it.value});" }}
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+$debug
+$display
+$error
+    """
+}
+
+/** Generates a Rust `Debug` or `Display` trait implementation for an enum. */
+private fun generateFmtImpl(enum: Enum, trait: String, default: String, f: (Variant) -> String) =
+    """
+impl fmt::$trait for ${enum.name} {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            ${enum.variants.joinToString(",\n            ") { "${it.value} => write!(f, ${f(it)})" }},
+            _ => $default,
+        }
+    }
+}
+    """
+
+/** The descriptions for Vulkan result codes. */
+private val results = mapOf(
+    0L to "Command successfully completed.",
+    1L to "A fence or query has not yet completed.",
+    2L to "A wait operation has not completed in the specified time.",
+    3L to "An event is signaled.",
+    4L to "An event is unsignaled.",
+    5L to "A return array was too small for the result.",
+    -1L to "A host memory allocation has failed.",
+    -2L to "A device memory allocation has failed.",
+    -3L to "Initialization of an object could not be completed for implementation-specific reasons.",
+    -4L to "The logical or physical device has been lost. See Lost Device.",
+    -5L to "Mapping of a memory object has failed.",
+    -6L to "A requested layer is not present or could not be loaded.",
+    -7L to "A requested extension is not supported.",
+    -8L to "A requested feature is not supported.",
+    -9L to "The requested version of Vulkan is not supported by the driver or is otherwise incompatible for implementation-specific reasons.",
+    -10L to "Too many objects of the type have already been created.",
+    -11L to "A requested format is not supported on this device.",
+    -12L to "A pool allocation has failed due to fragmentation of the pool's memory. This must only be returned if no attempt to allocate host or device memory was made to accommodate the new allocation. This should be returned in preference to VK_ERROR_OUT_OF_POOL_MEMORY, but only if the implementation is certain that the pool allocation failure was due to fragmentation.",
+    -13L to "An unknown error has occurred; either the application has provided invalid input, or an implementation failure has occurred.",
+    1000001003L to "A swapchain no longer matches the surface properties exactly, but can still be used to present to the surface successfully.",
+    1000268000L to "A deferred operation is not complete but there is currently no work for this thread to do at the time of this call.",
+    1000268001L to "A deferred operation is not complete but there is no work remaining to assign to additional threads.",
+    1000268002L to "A deferred operation was requested and at least some of the work was deferred.",
+    1000268003L to "A deferred operation was requested and no operations were deferred.",
+    1000297000L to "A requested pipeline creation would have required compilation, but the application requested compilation to not be performed.",
+    -1000000000L to "A surface is no longer available.",
+    -1000000001L to "The requested window is already in use by Vulkan or another API in a manner which prevents it from being used again.",
+    -1000001004L to "A surface has changed in such a way that it is no longer compatible with the swapchain, and further presentation requests using the swapchain will fail. Applications must query the new surface properties and recreate their swapchain if they wish to continue presenting to the surface.",
+    -1000003001L to "The display used by a swapchain does not use the same presentable image layout, or is incompatible in a way that prevents sharing an image.",
+    -1000012000L to "One or more shaders failed to compile or link. More details are reported back to the application via VK_EXT_debug_report if enabled.",
+    -1000069000L to "A pool memory allocation has failed. This must only be returned if no attempt to allocate host or device memory was made to accommodate the new allocation. If the failure was definitely due to fragmentation of the pool, VK_ERROR_FRAGMENTED_POOL should be returned instead.",
+    -1000072003L to "An external handle is not a valid handle of the specified type.",
+    -1000161000L to "A descriptor pool creation has failed due to fragmentation.",
+    -1000255000L to "An operation on a swapchain created with VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT failed as it did not have exclusive full-screen access. This may occur due to implementation-dependent reasons, outside of the application's control.",
+    -1000257000L to "A buffer creation or memory allocation failed because the requested address is not available. A shader group handle assignment failed because the requested shader group handle information is no longer valid.",
+)
