@@ -1,0 +1,109 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+
+  test-vulkanalia:
+    name: Test - Vulkanalia
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      # Dependencies
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: 1.47.0
+          components: clippy, rustfmt
+      # Test
+      - name: Cargo Test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --verbose
+
+  format-vulkanalia:
+    name: Format - Vulkanalia
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      # Dependencies
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: 1.47.0
+          components: clippy, rustfmt
+      # Format
+      - name: Cargo Format
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --verbose -- --check
+
+  clippy-vulkanalia:
+    name: Clippy - Vulkanalia
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      # Dependencies
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: 1.47.0
+          components: clippy, rustfmt
+      # Clippy
+      - name: Cargo Clippy
+        uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  check-generator:
+    name: Check - Generator
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      # Dependencies
+      - name: Install Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 14
+      # Check
+      - name: ktlint Check
+        working-directory: ./generator
+        run: ./gradlew ktlintCheck
+
+  check-bindings:
+    name: Check - Bindings
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      # Dependencies
+      - name: Install Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 14
+      # Check
+      - name: Check Bindings
+        working-directory: ./generator
+        run: |
+          ./gradlew run --args="\
+            --directory=.. \
+            --username=KyleMayes \
+            --token=${{ secrets.PERSONAL_ACCESS_TOKEN }} \
+            check"
