@@ -477,10 +477,10 @@ impl<'b> AccelerationStructureCreateInfoKHRBuilder<'b> {
     #[inline]
     pub fn geometry_infos(
         mut self,
-        geometry_infos: &'b [AccelerationStructureCreateGeometryTypeInfoKHR],
+        geometry_infos: &'b [impl Cast<Target = AccelerationStructureCreateGeometryTypeInfoKHR>],
     ) -> Self {
         self.value.max_geometry_count = geometry_infos.len() as u32;
-        self.value.geometry_infos = geometry_infos.as_ptr();
+        self.value.geometry_infos = geometry_infos.as_ptr().cast();
         self
     }
 
@@ -974,9 +974,9 @@ impl<'b> AccelerationStructureInfoNVBuilder<'b> {
     }
 
     #[inline]
-    pub fn geometries(mut self, geometries: &'b [GeometryNV]) -> Self {
+    pub fn geometries(mut self, geometries: &'b [impl Cast<Target = GeometryNV>]) -> Self {
         self.value.geometry_count = geometries.len() as u32;
-        self.value.geometries = geometries.as_ptr();
+        self.value.geometries = geometries.as_ptr().cast();
         self
     }
 
@@ -2881,10 +2881,10 @@ impl<'b> BindImageMemoryDeviceGroupInfoBuilder<'b> {
     #[inline]
     pub fn split_instance_bind_regions(
         mut self,
-        split_instance_bind_regions: &'b [Rect2D],
+        split_instance_bind_regions: &'b [impl Cast<Target = Rect2D>],
     ) -> Self {
         self.value.split_instance_bind_region_count = split_instance_bind_regions.len() as u32;
-        self.value.split_instance_bind_regions = split_instance_bind_regions.as_ptr();
+        self.value.split_instance_bind_regions = split_instance_bind_regions.as_ptr().cast();
         self
     }
 
@@ -3303,26 +3303,32 @@ impl<'b> BindSparseInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn buffer_binds(mut self, buffer_binds: &'b [SparseBufferMemoryBindInfo]) -> Self {
+    pub fn buffer_binds(
+        mut self,
+        buffer_binds: &'b [impl Cast<Target = SparseBufferMemoryBindInfo>],
+    ) -> Self {
         self.value.buffer_bind_count = buffer_binds.len() as u32;
-        self.value.buffer_binds = buffer_binds.as_ptr();
+        self.value.buffer_binds = buffer_binds.as_ptr().cast();
         self
     }
 
     #[inline]
     pub fn image_opaque_binds(
         mut self,
-        image_opaque_binds: &'b [SparseImageOpaqueMemoryBindInfo],
+        image_opaque_binds: &'b [impl Cast<Target = SparseImageOpaqueMemoryBindInfo>],
     ) -> Self {
         self.value.image_opaque_bind_count = image_opaque_binds.len() as u32;
-        self.value.image_opaque_binds = image_opaque_binds.as_ptr();
+        self.value.image_opaque_binds = image_opaque_binds.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn image_binds(mut self, image_binds: &'b [SparseImageMemoryBindInfo]) -> Self {
+    pub fn image_binds(
+        mut self,
+        image_binds: &'b [impl Cast<Target = SparseImageMemoryBindInfo>],
+    ) -> Self {
         self.value.image_bind_count = image_binds.len() as u32;
-        self.value.image_binds = image_binds.as_ptr();
+        self.value.image_binds = image_binds.as_ptr().cast();
         self
     }
 
@@ -3481,9 +3487,9 @@ impl<'b> BlitImageInfo2KHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn regions(mut self, regions: &'b [ImageBlit2KHR]) -> Self {
+    pub fn regions(mut self, regions: &'b [impl Cast<Target = ImageBlit2KHR>]) -> Self {
         self.value.region_count = regions.len() as u32;
-        self.value.regions = regions.as_ptr();
+        self.value.regions = regions.as_ptr().cast();
         self
     }
 
@@ -4788,9 +4794,12 @@ impl<'b> CoarseSampleOrderCustomNVBuilder<'b> {
     }
 
     #[inline]
-    pub fn sample_locations(mut self, sample_locations: &'b [CoarseSampleLocationNV]) -> Self {
+    pub fn sample_locations(
+        mut self,
+        sample_locations: &'b [impl Cast<Target = CoarseSampleLocationNV>],
+    ) -> Self {
         self.value.sample_location_count = sample_locations.len() as u32;
-        self.value.sample_locations = sample_locations.as_ptr();
+        self.value.sample_locations = sample_locations.as_ptr().cast();
         self
     }
 
@@ -5903,9 +5912,9 @@ impl<'b> CopyBufferInfo2KHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn regions(mut self, regions: &'b [BufferCopy2KHR]) -> Self {
+    pub fn regions(mut self, regions: &'b [impl Cast<Target = BufferCopy2KHR>]) -> Self {
         self.value.region_count = regions.len() as u32;
-        self.value.regions = regions.as_ptr();
+        self.value.regions = regions.as_ptr().cast();
         self
     }
 
@@ -5981,9 +5990,9 @@ impl<'b> CopyBufferToImageInfo2KHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn regions(mut self, regions: &'b [BufferImageCopy2KHR]) -> Self {
+    pub fn regions(mut self, regions: &'b [impl Cast<Target = BufferImageCopy2KHR>]) -> Self {
         self.value.region_count = regions.len() as u32;
-        self.value.regions = regions.as_ptr();
+        self.value.regions = regions.as_ptr().cast();
         self
     }
 
@@ -6159,9 +6168,9 @@ impl<'b> CopyImageInfo2KHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn regions(mut self, regions: &'b [ImageCopy2KHR]) -> Self {
+    pub fn regions(mut self, regions: &'b [impl Cast<Target = ImageCopy2KHR>]) -> Self {
         self.value.region_count = regions.len() as u32;
-        self.value.regions = regions.as_ptr();
+        self.value.regions = regions.as_ptr().cast();
         self
     }
 
@@ -6237,9 +6246,9 @@ impl<'b> CopyImageToBufferInfo2KHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn regions(mut self, regions: &'b [BufferImageCopy2KHR]) -> Self {
+    pub fn regions(mut self, regions: &'b [impl Cast<Target = BufferImageCopy2KHR>]) -> Self {
         self.value.region_count = regions.len() as u32;
-        self.value.regions = regions.as_ptr();
+        self.value.regions = regions.as_ptr().cast();
         self
     }
 
@@ -6824,23 +6833,32 @@ impl<'b> DebugUtilsMessengerCallbackDataEXTBuilder<'b> {
     }
 
     #[inline]
-    pub fn queue_labels(mut self, queue_labels: &'b [DebugUtilsLabelEXT]) -> Self {
+    pub fn queue_labels(
+        mut self,
+        queue_labels: &'b [impl Cast<Target = DebugUtilsLabelEXT>],
+    ) -> Self {
         self.value.queue_label_count = queue_labels.len() as u32;
-        self.value.queue_labels = queue_labels.as_ptr();
+        self.value.queue_labels = queue_labels.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn cmd_buf_labels(mut self, cmd_buf_labels: &'b [DebugUtilsLabelEXT]) -> Self {
+    pub fn cmd_buf_labels(
+        mut self,
+        cmd_buf_labels: &'b [impl Cast<Target = DebugUtilsLabelEXT>],
+    ) -> Self {
         self.value.cmd_buf_label_count = cmd_buf_labels.len() as u32;
-        self.value.cmd_buf_labels = cmd_buf_labels.as_ptr();
+        self.value.cmd_buf_labels = cmd_buf_labels.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn objects(mut self, objects: &'b [DebugUtilsObjectNameInfoEXT]) -> Self {
+    pub fn objects(
+        mut self,
+        objects: &'b [impl Cast<Target = DebugUtilsObjectNameInfoEXT>],
+    ) -> Self {
         self.value.object_count = objects.len() as u32;
-        self.value.objects = objects.as_ptr();
+        self.value.objects = objects.as_ptr().cast();
         self
     }
 
@@ -7535,9 +7553,9 @@ impl<'b> DescriptorPoolCreateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn pool_sizes(mut self, pool_sizes: &'b [DescriptorPoolSize]) -> Self {
+    pub fn pool_sizes(mut self, pool_sizes: &'b [impl Cast<Target = DescriptorPoolSize>]) -> Self {
         self.value.pool_size_count = pool_sizes.len() as u32;
-        self.value.pool_sizes = pool_sizes.as_ptr();
+        self.value.pool_sizes = pool_sizes.as_ptr().cast();
         self
     }
 
@@ -7960,9 +7978,12 @@ impl<'b> DescriptorSetLayoutCreateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn bindings(mut self, bindings: &'b [DescriptorSetLayoutBinding]) -> Self {
+    pub fn bindings(
+        mut self,
+        bindings: &'b [impl Cast<Target = DescriptorSetLayoutBinding>],
+    ) -> Self {
         self.value.binding_count = bindings.len() as u32;
-        self.value.bindings = bindings.as_ptr();
+        self.value.bindings = bindings.as_ptr().cast();
         self
     }
 
@@ -8223,10 +8244,10 @@ impl<'b> DescriptorUpdateTemplateCreateInfoBuilder<'b> {
     #[inline]
     pub fn descriptor_update_entries(
         mut self,
-        descriptor_update_entries: &'b [DescriptorUpdateTemplateEntry],
+        descriptor_update_entries: &'b [impl Cast<Target = DescriptorUpdateTemplateEntry>],
     ) -> Self {
         self.value.descriptor_update_entry_count = descriptor_update_entries.len() as u32;
-        self.value.descriptor_update_entries = descriptor_update_entries.as_ptr();
+        self.value.descriptor_update_entries = descriptor_update_entries.as_ptr().cast();
         self
     }
 
@@ -8499,9 +8520,12 @@ impl<'b> DeviceCreateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn queue_create_infos(mut self, queue_create_infos: &'b [DeviceQueueCreateInfo]) -> Self {
+    pub fn queue_create_infos(
+        mut self,
+        queue_create_infos: &'b [impl Cast<Target = DeviceQueueCreateInfo>],
+    ) -> Self {
         self.value.queue_create_info_count = queue_create_infos.len() as u32;
-        self.value.queue_create_infos = queue_create_infos.as_ptr();
+        self.value.queue_create_infos = queue_create_infos.as_ptr().cast();
         self
     }
 
@@ -9087,9 +9111,12 @@ impl<'b> DeviceGroupRenderPassBeginInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn device_render_areas(mut self, device_render_areas: &'b [Rect2D]) -> Self {
+    pub fn device_render_areas(
+        mut self,
+        device_render_areas: &'b [impl Cast<Target = Rect2D>],
+    ) -> Self {
         self.value.device_render_area_count = device_render_areas.len() as u32;
-        self.value.device_render_areas = device_render_areas.as_ptr();
+        self.value.device_render_areas = device_render_areas.as_ptr().cast();
         self
     }
 
@@ -11325,10 +11352,11 @@ impl<'b> DrmFormatModifierPropertiesListEXTBuilder<'b> {
     #[inline]
     pub fn drm_format_modifier_properties(
         mut self,
-        drm_format_modifier_properties: &'b mut [DrmFormatModifierPropertiesEXT],
+        drm_format_modifier_properties: &'b mut [impl Cast<Target = DrmFormatModifierPropertiesEXT>],
     ) -> Self {
         self.value.drm_format_modifier_count = drm_format_modifier_properties.len() as u32;
-        self.value.drm_format_modifier_properties = drm_format_modifier_properties.as_mut_ptr();
+        self.value.drm_format_modifier_properties =
+            drm_format_modifier_properties.as_mut_ptr().cast();
         self
     }
 
@@ -13337,10 +13365,10 @@ impl<'b> FramebufferAttachmentsCreateInfoBuilder<'b> {
     #[inline]
     pub fn attachment_image_infos(
         mut self,
-        attachment_image_infos: &'b [FramebufferAttachmentImageInfo],
+        attachment_image_infos: &'b [impl Cast<Target = FramebufferAttachmentImageInfo>],
     ) -> Self {
         self.value.attachment_image_info_count = attachment_image_infos.len() as u32;
-        self.value.attachment_image_infos = attachment_image_infos.as_ptr();
+        self.value.attachment_image_infos = attachment_image_infos.as_ptr().cast();
         self
     }
 
@@ -13603,9 +13631,9 @@ impl<'b> GeneratedCommandsInfoNVBuilder<'b> {
     }
 
     #[inline]
-    pub fn streams(mut self, streams: &'b [IndirectCommandsStreamNV]) -> Self {
+    pub fn streams(mut self, streams: &'b [impl Cast<Target = IndirectCommandsStreamNV>]) -> Self {
         self.value.stream_count = streams.len() as u32;
-        self.value.streams = streams.as_ptr();
+        self.value.streams = streams.as_ptr().cast();
         self
     }
 
@@ -14146,9 +14174,12 @@ impl<'b> GraphicsPipelineCreateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn stages(mut self, stages: &'b [PipelineShaderStageCreateInfo]) -> Self {
+    pub fn stages(
+        mut self,
+        stages: &'b [impl Cast<Target = PipelineShaderStageCreateInfo>],
+    ) -> Self {
         self.value.stage_count = stages.len() as u32;
-        self.value.stages = stages.as_ptr();
+        self.value.stages = stages.as_ptr().cast();
         self
     }
 
@@ -14317,9 +14348,12 @@ pub struct GraphicsPipelineShaderGroupsCreateInfoNVBuilder<'b> {
 
 impl<'b> GraphicsPipelineShaderGroupsCreateInfoNVBuilder<'b> {
     #[inline]
-    pub fn groups(mut self, groups: &'b [GraphicsShaderGroupCreateInfoNV]) -> Self {
+    pub fn groups(
+        mut self,
+        groups: &'b [impl Cast<Target = GraphicsShaderGroupCreateInfoNV>],
+    ) -> Self {
         self.value.group_count = groups.len() as u32;
-        self.value.groups = groups.as_ptr();
+        self.value.groups = groups.as_ptr().cast();
         self
     }
 
@@ -14384,9 +14418,12 @@ pub struct GraphicsShaderGroupCreateInfoNVBuilder<'b> {
 
 impl<'b> GraphicsShaderGroupCreateInfoNVBuilder<'b> {
     #[inline]
-    pub fn stages(mut self, stages: &'b [PipelineShaderStageCreateInfo]) -> Self {
+    pub fn stages(
+        mut self,
+        stages: &'b [impl Cast<Target = PipelineShaderStageCreateInfo>],
+    ) -> Self {
         self.value.stage_count = stages.len() as u32;
-        self.value.stages = stages.as_ptr();
+        self.value.stages = stages.as_ptr().cast();
         self
     }
 
@@ -15189,9 +15226,12 @@ impl<'b> ImageDrmFormatModifierExplicitCreateInfoEXTBuilder<'b> {
     }
 
     #[inline]
-    pub fn plane_layouts(mut self, plane_layouts: &'b [SubresourceLayout]) -> Self {
+    pub fn plane_layouts(
+        mut self,
+        plane_layouts: &'b [impl Cast<Target = SubresourceLayout>],
+    ) -> Self {
         self.value.drm_format_modifier_plane_count = plane_layouts.len() as u32;
-        self.value.plane_layouts = plane_layouts.as_ptr();
+        self.value.plane_layouts = plane_layouts.as_ptr().cast();
         self
     }
 
@@ -17492,9 +17532,12 @@ impl<'b> IndirectCommandsLayoutCreateInfoNVBuilder<'b> {
     }
 
     #[inline]
-    pub fn tokens(mut self, tokens: &'b [IndirectCommandsLayoutTokenNV]) -> Self {
+    pub fn tokens(
+        mut self,
+        tokens: &'b [impl Cast<Target = IndirectCommandsLayoutTokenNV>],
+    ) -> Self {
         self.value.token_count = tokens.len() as u32;
-        self.value.tokens = tokens.as_ptr();
+        self.value.tokens = tokens.as_ptr().cast();
         self
     }
 
@@ -33120,9 +33163,12 @@ impl<'b> PipelineColorBlendStateCreateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn attachments(mut self, attachments: &'b [PipelineColorBlendAttachmentState]) -> Self {
+    pub fn attachments(
+        mut self,
+        attachments: &'b [impl Cast<Target = PipelineColorBlendAttachmentState>],
+    ) -> Self {
         self.value.attachment_count = attachments.len() as u32;
-        self.value.attachments = attachments.as_ptr();
+        self.value.attachments = attachments.as_ptr().cast();
         self
     }
 
@@ -33479,12 +33525,12 @@ impl<'b> PipelineCreationFeedbackCreateInfoEXTBuilder<'b> {
     #[inline]
     pub fn pipeline_stage_creation_feedbacks(
         mut self,
-        pipeline_stage_creation_feedbacks: &'b mut [PipelineCreationFeedbackEXT],
+        pipeline_stage_creation_feedbacks: &'b mut [impl Cast<Target = PipelineCreationFeedbackEXT>],
     ) -> Self {
         self.value.pipeline_stage_creation_feedback_count =
             pipeline_stage_creation_feedbacks.len() as u32;
         self.value.pipeline_stage_creation_feedbacks =
-            pipeline_stage_creation_feedbacks.as_mut_ptr();
+            pipeline_stage_creation_feedbacks.as_mut_ptr().cast();
         self
     }
 
@@ -33733,9 +33779,12 @@ impl<'b> PipelineDiscardRectangleStateCreateInfoEXTBuilder<'b> {
     }
 
     #[inline]
-    pub fn discard_rectangles(mut self, discard_rectangles: &'b [Rect2D]) -> Self {
+    pub fn discard_rectangles(
+        mut self,
+        discard_rectangles: &'b [impl Cast<Target = Rect2D>],
+    ) -> Self {
         self.value.discard_rectangle_count = discard_rectangles.len() as u32;
-        self.value.discard_rectangles = discard_rectangles.as_ptr();
+        self.value.discard_rectangles = discard_rectangles.as_ptr().cast();
         self
     }
 
@@ -34294,9 +34343,12 @@ impl<'b> PipelineLayoutCreateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn push_constant_ranges(mut self, push_constant_ranges: &'b [PushConstantRange]) -> Self {
+    pub fn push_constant_ranges(
+        mut self,
+        push_constant_ranges: &'b [impl Cast<Target = PushConstantRange>],
+    ) -> Self {
         self.value.push_constant_range_count = push_constant_ranges.len() as u32;
-        self.value.push_constant_ranges = push_constant_ranges.as_ptr();
+        self.value.push_constant_ranges = push_constant_ranges.as_ptr().cast();
         self
     }
 
@@ -35465,10 +35517,10 @@ impl<'b> PipelineVertexInputDivisorStateCreateInfoEXTBuilder<'b> {
     #[inline]
     pub fn vertex_binding_divisors(
         mut self,
-        vertex_binding_divisors: &'b [VertexInputBindingDivisorDescriptionEXT],
+        vertex_binding_divisors: &'b [impl Cast<Target = VertexInputBindingDivisorDescriptionEXT>],
     ) -> Self {
         self.value.vertex_binding_divisor_count = vertex_binding_divisors.len() as u32;
-        self.value.vertex_binding_divisors = vertex_binding_divisors.as_ptr();
+        self.value.vertex_binding_divisors = vertex_binding_divisors.as_ptr().cast();
         self
     }
 
@@ -35552,20 +35604,20 @@ impl<'b> PipelineVertexInputStateCreateInfoBuilder<'b> {
     #[inline]
     pub fn vertex_binding_descriptions(
         mut self,
-        vertex_binding_descriptions: &'b [VertexInputBindingDescription],
+        vertex_binding_descriptions: &'b [impl Cast<Target = VertexInputBindingDescription>],
     ) -> Self {
         self.value.vertex_binding_description_count = vertex_binding_descriptions.len() as u32;
-        self.value.vertex_binding_descriptions = vertex_binding_descriptions.as_ptr();
+        self.value.vertex_binding_descriptions = vertex_binding_descriptions.as_ptr().cast();
         self
     }
 
     #[inline]
     pub fn vertex_attribute_descriptions(
         mut self,
-        vertex_attribute_descriptions: &'b [VertexInputAttributeDescription],
+        vertex_attribute_descriptions: &'b [impl Cast<Target = VertexInputAttributeDescription>],
     ) -> Self {
         self.value.vertex_attribute_description_count = vertex_attribute_descriptions.len() as u32;
-        self.value.vertex_attribute_descriptions = vertex_attribute_descriptions.as_ptr();
+        self.value.vertex_attribute_descriptions = vertex_attribute_descriptions.as_ptr().cast();
         self
     }
 
@@ -35631,10 +35683,10 @@ impl<'b> PipelineViewportCoarseSampleOrderStateCreateInfoNVBuilder<'b> {
     #[inline]
     pub fn custom_sample_orders(
         mut self,
-        custom_sample_orders: &'b [CoarseSampleOrderCustomNV],
+        custom_sample_orders: &'b [impl Cast<Target = CoarseSampleOrderCustomNV>],
     ) -> Self {
         self.value.custom_sample_order_count = custom_sample_orders.len() as u32;
-        self.value.custom_sample_orders = custom_sample_orders.as_ptr();
+        self.value.custom_sample_orders = custom_sample_orders.as_ptr().cast();
         self
     }
 
@@ -35692,9 +35744,12 @@ pub struct PipelineViewportExclusiveScissorStateCreateInfoNVBuilder<'b> {
 
 impl<'b> PipelineViewportExclusiveScissorStateCreateInfoNVBuilder<'b> {
     #[inline]
-    pub fn exclusive_scissors(mut self, exclusive_scissors: &'b [Rect2D]) -> Self {
+    pub fn exclusive_scissors(
+        mut self,
+        exclusive_scissors: &'b [impl Cast<Target = Rect2D>],
+    ) -> Self {
         self.value.exclusive_scissor_count = exclusive_scissors.len() as u32;
-        self.value.exclusive_scissors = exclusive_scissors.as_ptr();
+        self.value.exclusive_scissors = exclusive_scissors.as_ptr().cast();
         self
     }
 
@@ -35760,10 +35815,10 @@ impl<'b> PipelineViewportShadingRateImageStateCreateInfoNVBuilder<'b> {
     #[inline]
     pub fn shading_rate_palettes(
         mut self,
-        shading_rate_palettes: &'b [ShadingRatePaletteNV],
+        shading_rate_palettes: &'b [impl Cast<Target = ShadingRatePaletteNV>],
     ) -> Self {
         self.value.viewport_count = shading_rate_palettes.len() as u32;
-        self.value.shading_rate_palettes = shading_rate_palettes.as_ptr();
+        self.value.shading_rate_palettes = shading_rate_palettes.as_ptr().cast();
         self
     }
 
@@ -35855,16 +35910,16 @@ impl<'b> PipelineViewportStateCreateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn viewports(mut self, viewports: &'b [Viewport]) -> Self {
+    pub fn viewports(mut self, viewports: &'b [impl Cast<Target = Viewport>]) -> Self {
         self.value.viewport_count = viewports.len() as u32;
-        self.value.viewports = viewports.as_ptr();
+        self.value.viewports = viewports.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn scissors(mut self, scissors: &'b [Rect2D]) -> Self {
+    pub fn scissors(mut self, scissors: &'b [impl Cast<Target = Rect2D>]) -> Self {
         self.value.scissor_count = scissors.len() as u32;
-        self.value.scissors = scissors.as_ptr();
+        self.value.scissors = scissors.as_ptr().cast();
         self
     }
 
@@ -35928,9 +35983,12 @@ impl<'b> PipelineViewportSwizzleStateCreateInfoNVBuilder<'b> {
     }
 
     #[inline]
-    pub fn viewport_swizzles(mut self, viewport_swizzles: &'b [ViewportSwizzleNV]) -> Self {
+    pub fn viewport_swizzles(
+        mut self,
+        viewport_swizzles: &'b [impl Cast<Target = ViewportSwizzleNV>],
+    ) -> Self {
         self.value.viewport_count = viewport_swizzles.len() as u32;
-        self.value.viewport_swizzles = viewport_swizzles.as_ptr();
+        self.value.viewport_swizzles = viewport_swizzles.as_ptr().cast();
         self
     }
 
@@ -35994,9 +36052,12 @@ impl<'b> PipelineViewportWScalingStateCreateInfoNVBuilder<'b> {
     }
 
     #[inline]
-    pub fn viewport_w_scalings(mut self, viewport_w_scalings: &'b [ViewportWScalingNV]) -> Self {
+    pub fn viewport_w_scalings(
+        mut self,
+        viewport_w_scalings: &'b [impl Cast<Target = ViewportWScalingNV>],
+    ) -> Self {
         self.value.viewport_count = viewport_w_scalings.len() as u32;
-        self.value.viewport_w_scalings = viewport_w_scalings.as_ptr();
+        self.value.viewport_w_scalings = viewport_w_scalings.as_ptr().cast();
         self
     }
 
@@ -36212,9 +36273,9 @@ pub struct PresentRegionKHRBuilder<'b> {
 
 impl<'b> PresentRegionKHRBuilder<'b> {
     #[inline]
-    pub fn rectangles(mut self, rectangles: &'b [RectLayerKHR]) -> Self {
+    pub fn rectangles(mut self, rectangles: &'b [impl Cast<Target = RectLayerKHR>]) -> Self {
         self.value.rectangle_count = rectangles.len() as u32;
-        self.value.rectangles = rectangles.as_ptr();
+        self.value.rectangles = rectangles.as_ptr().cast();
         self
     }
 
@@ -36272,9 +36333,9 @@ pub struct PresentRegionsKHRBuilder<'b> {
 
 impl<'b> PresentRegionsKHRBuilder<'b> {
     #[inline]
-    pub fn regions(mut self, regions: &'b [PresentRegionKHR]) -> Self {
+    pub fn regions(mut self, regions: &'b [impl Cast<Target = PresentRegionKHR>]) -> Self {
         self.value.swapchain_count = regions.len() as u32;
-        self.value.regions = regions.as_ptr();
+        self.value.regions = regions.as_ptr().cast();
         self
     }
 
@@ -36396,9 +36457,9 @@ pub struct PresentTimesInfoGOOGLEBuilder<'b> {
 
 impl<'b> PresentTimesInfoGOOGLEBuilder<'b> {
     #[inline]
-    pub fn times(mut self, times: &'b [PresentTimeGOOGLE]) -> Self {
+    pub fn times(mut self, times: &'b [impl Cast<Target = PresentTimeGOOGLE>]) -> Self {
         self.value.swapchain_count = times.len() as u32;
-        self.value.times = times.as_ptr();
+        self.value.times = times.as_ptr().cast();
         self
     }
 
@@ -37101,16 +37162,22 @@ impl<'b> RayTracingPipelineCreateInfoKHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn stages(mut self, stages: &'b [PipelineShaderStageCreateInfo]) -> Self {
+    pub fn stages(
+        mut self,
+        stages: &'b [impl Cast<Target = PipelineShaderStageCreateInfo>],
+    ) -> Self {
         self.value.stage_count = stages.len() as u32;
-        self.value.stages = stages.as_ptr();
+        self.value.stages = stages.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn groups(mut self, groups: &'b [RayTracingShaderGroupCreateInfoKHR]) -> Self {
+    pub fn groups(
+        mut self,
+        groups: &'b [impl Cast<Target = RayTracingShaderGroupCreateInfoKHR>],
+    ) -> Self {
         self.value.group_count = groups.len() as u32;
-        self.value.groups = groups.as_ptr();
+        self.value.groups = groups.as_ptr().cast();
         self
     }
 
@@ -37231,16 +37298,22 @@ impl<'b> RayTracingPipelineCreateInfoNVBuilder<'b> {
     }
 
     #[inline]
-    pub fn stages(mut self, stages: &'b [PipelineShaderStageCreateInfo]) -> Self {
+    pub fn stages(
+        mut self,
+        stages: &'b [impl Cast<Target = PipelineShaderStageCreateInfo>],
+    ) -> Self {
         self.value.stage_count = stages.len() as u32;
-        self.value.stages = stages.as_ptr();
+        self.value.stages = stages.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn groups(mut self, groups: &'b [RayTracingShaderGroupCreateInfoNV]) -> Self {
+    pub fn groups(
+        mut self,
+        groups: &'b [impl Cast<Target = RayTracingShaderGroupCreateInfoNV>],
+    ) -> Self {
         self.value.group_count = groups.len() as u32;
-        self.value.groups = groups.as_ptr();
+        self.value.groups = groups.as_ptr().cast();
         self
     }
 
@@ -37938,23 +38011,29 @@ impl<'b> RenderPassCreateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn attachments(mut self, attachments: &'b [AttachmentDescription]) -> Self {
+    pub fn attachments(
+        mut self,
+        attachments: &'b [impl Cast<Target = AttachmentDescription>],
+    ) -> Self {
         self.value.attachment_count = attachments.len() as u32;
-        self.value.attachments = attachments.as_ptr();
+        self.value.attachments = attachments.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn subpasses(mut self, subpasses: &'b [SubpassDescription]) -> Self {
+    pub fn subpasses(mut self, subpasses: &'b [impl Cast<Target = SubpassDescription>]) -> Self {
         self.value.subpass_count = subpasses.len() as u32;
-        self.value.subpasses = subpasses.as_ptr();
+        self.value.subpasses = subpasses.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn dependencies(mut self, dependencies: &'b [SubpassDependency]) -> Self {
+    pub fn dependencies(
+        mut self,
+        dependencies: &'b [impl Cast<Target = SubpassDependency>],
+    ) -> Self {
         self.value.dependency_count = dependencies.len() as u32;
-        self.value.dependencies = dependencies.as_ptr();
+        self.value.dependencies = dependencies.as_ptr().cast();
         self
     }
 
@@ -38033,23 +38112,29 @@ impl<'b> RenderPassCreateInfo2Builder<'b> {
     }
 
     #[inline]
-    pub fn attachments(mut self, attachments: &'b [AttachmentDescription2]) -> Self {
+    pub fn attachments(
+        mut self,
+        attachments: &'b [impl Cast<Target = AttachmentDescription2>],
+    ) -> Self {
         self.value.attachment_count = attachments.len() as u32;
-        self.value.attachments = attachments.as_ptr();
+        self.value.attachments = attachments.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn subpasses(mut self, subpasses: &'b [SubpassDescription2]) -> Self {
+    pub fn subpasses(mut self, subpasses: &'b [impl Cast<Target = SubpassDescription2>]) -> Self {
         self.value.subpass_count = subpasses.len() as u32;
-        self.value.subpasses = subpasses.as_ptr();
+        self.value.subpasses = subpasses.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn dependencies(mut self, dependencies: &'b [SubpassDependency2]) -> Self {
+    pub fn dependencies(
+        mut self,
+        dependencies: &'b [impl Cast<Target = SubpassDependency2>],
+    ) -> Self {
         self.value.dependency_count = dependencies.len() as u32;
-        self.value.dependencies = dependencies.as_ptr();
+        self.value.dependencies = dependencies.as_ptr().cast();
         self
     }
 
@@ -38177,10 +38262,10 @@ impl<'b> RenderPassInputAttachmentAspectCreateInfoBuilder<'b> {
     #[inline]
     pub fn aspect_references(
         mut self,
-        aspect_references: &'b [InputAttachmentAspectReference],
+        aspect_references: &'b [impl Cast<Target = InputAttachmentAspectReference>],
     ) -> Self {
         self.value.aspect_reference_count = aspect_references.len() as u32;
-        self.value.aspect_references = aspect_references.as_ptr();
+        self.value.aspect_references = aspect_references.as_ptr().cast();
         self
     }
 
@@ -38314,22 +38399,22 @@ impl<'b> RenderPassSampleLocationsBeginInfoEXTBuilder<'b> {
     #[inline]
     pub fn attachment_initial_sample_locations(
         mut self,
-        attachment_initial_sample_locations: &'b [AttachmentSampleLocationsEXT],
+        attachment_initial_sample_locations: &'b [impl Cast<Target = AttachmentSampleLocationsEXT>],
     ) -> Self {
         self.value.attachment_initial_sample_locations_count =
             attachment_initial_sample_locations.len() as u32;
         self.value.attachment_initial_sample_locations =
-            attachment_initial_sample_locations.as_ptr();
+            attachment_initial_sample_locations.as_ptr().cast();
         self
     }
 
     #[inline]
     pub fn post_subpass_sample_locations(
         mut self,
-        post_subpass_sample_locations: &'b [SubpassSampleLocationsEXT],
+        post_subpass_sample_locations: &'b [impl Cast<Target = SubpassSampleLocationsEXT>],
     ) -> Self {
         self.value.post_subpass_sample_locations_count = post_subpass_sample_locations.len() as u32;
-        self.value.post_subpass_sample_locations = post_subpass_sample_locations.as_ptr();
+        self.value.post_subpass_sample_locations = post_subpass_sample_locations.as_ptr().cast();
         self
     }
 
@@ -38469,9 +38554,9 @@ impl<'b> ResolveImageInfo2KHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn regions(mut self, regions: &'b [ImageResolve2KHR]) -> Self {
+    pub fn regions(mut self, regions: &'b [impl Cast<Target = ImageResolve2KHR>]) -> Self {
         self.value.region_count = regions.len() as u32;
-        self.value.regions = regions.as_ptr();
+        self.value.regions = regions.as_ptr().cast();
         self
     }
 
@@ -38611,9 +38696,12 @@ impl<'b> SampleLocationsInfoEXTBuilder<'b> {
     }
 
     #[inline]
-    pub fn sample_locations(mut self, sample_locations: &'b [SampleLocationEXT]) -> Self {
+    pub fn sample_locations(
+        mut self,
+        sample_locations: &'b [impl Cast<Target = SampleLocationEXT>],
+    ) -> Self {
         self.value.sample_locations_count = sample_locations.len() as u32;
-        self.value.sample_locations = sample_locations.as_ptr();
+        self.value.sample_locations = sample_locations.as_ptr().cast();
         self
     }
 
@@ -40111,9 +40199,9 @@ impl<'b> SparseBufferMemoryBindInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn binds(mut self, binds: &'b [SparseMemoryBind]) -> Self {
+    pub fn binds(mut self, binds: &'b [impl Cast<Target = SparseMemoryBind>]) -> Self {
         self.value.bind_count = binds.len() as u32;
-        self.value.binds = binds.as_ptr();
+        self.value.binds = binds.as_ptr().cast();
         self
     }
 
@@ -40396,9 +40484,9 @@ impl<'b> SparseImageMemoryBindInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn binds(mut self, binds: &'b [SparseImageMemoryBind]) -> Self {
+    pub fn binds(mut self, binds: &'b [impl Cast<Target = SparseImageMemoryBind>]) -> Self {
         self.value.bind_count = binds.len() as u32;
-        self.value.binds = binds.as_ptr();
+        self.value.binds = binds.as_ptr().cast();
         self
     }
 
@@ -40608,9 +40696,9 @@ impl<'b> SparseImageOpaqueMemoryBindInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn binds(mut self, binds: &'b [SparseMemoryBind]) -> Self {
+    pub fn binds(mut self, binds: &'b [impl Cast<Target = SparseMemoryBind>]) -> Self {
         self.value.bind_count = binds.len() as u32;
-        self.value.binds = binds.as_ptr();
+        self.value.binds = binds.as_ptr().cast();
         self
     }
 
@@ -40750,9 +40838,12 @@ pub struct SpecializationInfoBuilder<'b> {
 
 impl<'b> SpecializationInfoBuilder<'b> {
     #[inline]
-    pub fn map_entries(mut self, map_entries: &'b [SpecializationMapEntry]) -> Self {
+    pub fn map_entries(
+        mut self,
+        map_entries: &'b [impl Cast<Target = SpecializationMapEntry>],
+    ) -> Self {
         self.value.map_entry_count = map_entries.len() as u32;
-        self.value.map_entries = map_entries.as_ptr();
+        self.value.map_entries = map_entries.as_ptr().cast();
         self
     }
 
@@ -41487,23 +41578,32 @@ impl<'b> SubpassDescriptionBuilder<'b> {
     }
 
     #[inline]
-    pub fn input_attachments(mut self, input_attachments: &'b [AttachmentReference]) -> Self {
+    pub fn input_attachments(
+        mut self,
+        input_attachments: &'b [impl Cast<Target = AttachmentReference>],
+    ) -> Self {
         self.value.input_attachment_count = input_attachments.len() as u32;
-        self.value.input_attachments = input_attachments.as_ptr();
+        self.value.input_attachments = input_attachments.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn color_attachments(mut self, color_attachments: &'b [AttachmentReference]) -> Self {
+    pub fn color_attachments(
+        mut self,
+        color_attachments: &'b [impl Cast<Target = AttachmentReference>],
+    ) -> Self {
         self.value.color_attachment_count = color_attachments.len() as u32;
-        self.value.color_attachments = color_attachments.as_ptr();
+        self.value.color_attachments = color_attachments.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn resolve_attachments(mut self, resolve_attachments: &'b [AttachmentReference]) -> Self {
+    pub fn resolve_attachments(
+        mut self,
+        resolve_attachments: &'b [impl Cast<Target = AttachmentReference>],
+    ) -> Self {
         self.value.color_attachment_count = resolve_attachments.len() as u32;
-        self.value.resolve_attachments = resolve_attachments.as_ptr();
+        self.value.resolve_attachments = resolve_attachments.as_ptr().cast();
         self
     }
 
@@ -41610,23 +41710,32 @@ impl<'b> SubpassDescription2Builder<'b> {
     }
 
     #[inline]
-    pub fn input_attachments(mut self, input_attachments: &'b [AttachmentReference2]) -> Self {
+    pub fn input_attachments(
+        mut self,
+        input_attachments: &'b [impl Cast<Target = AttachmentReference2>],
+    ) -> Self {
         self.value.input_attachment_count = input_attachments.len() as u32;
-        self.value.input_attachments = input_attachments.as_ptr();
+        self.value.input_attachments = input_attachments.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn color_attachments(mut self, color_attachments: &'b [AttachmentReference2]) -> Self {
+    pub fn color_attachments(
+        mut self,
+        color_attachments: &'b [impl Cast<Target = AttachmentReference2>],
+    ) -> Self {
         self.value.color_attachment_count = color_attachments.len() as u32;
-        self.value.color_attachments = color_attachments.as_ptr();
+        self.value.color_attachments = color_attachments.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn resolve_attachments(mut self, resolve_attachments: &'b [AttachmentReference2]) -> Self {
+    pub fn resolve_attachments(
+        mut self,
+        resolve_attachments: &'b [impl Cast<Target = AttachmentReference2>],
+    ) -> Self {
         self.value.color_attachment_count = resolve_attachments.len() as u32;
-        self.value.resolve_attachments = resolve_attachments.as_ptr();
+        self.value.resolve_attachments = resolve_attachments.as_ptr().cast();
         self
     }
 
@@ -44309,16 +44418,19 @@ impl<'b> WriteDescriptorSetBuilder<'b> {
     }
 
     #[inline]
-    pub fn image_info(mut self, image_info: &'b [DescriptorImageInfo]) -> Self {
+    pub fn image_info(mut self, image_info: &'b [impl Cast<Target = DescriptorImageInfo>]) -> Self {
         self.value.descriptor_count = image_info.len() as u32;
-        self.value.image_info = image_info.as_ptr();
+        self.value.image_info = image_info.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn buffer_info(mut self, buffer_info: &'b [DescriptorBufferInfo]) -> Self {
+    pub fn buffer_info(
+        mut self,
+        buffer_info: &'b [impl Cast<Target = DescriptorBufferInfo>],
+    ) -> Self {
         self.value.descriptor_count = buffer_info.len() as u32;
-        self.value.buffer_info = buffer_info.as_ptr();
+        self.value.buffer_info = buffer_info.as_ptr().cast();
         self
     }
 

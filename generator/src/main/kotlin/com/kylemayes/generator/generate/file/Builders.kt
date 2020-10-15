@@ -194,13 +194,21 @@ private fun Registry.generateMethods(struct: Structure): String {
 /** Generates a Rust builder method for an array value. */
 private fun Registry.generateArrayMethod(member: Member, length: Pair<String, String>? = null): String {
     val pointer = member.type as PointerType
-    val type = "[${pointer.pointee.generate()}]".generateRef(pointer.const, lifetime = "b")
+
+    val (item, cast) = if (structs.containsKey(pointer.pointee.getIdentifier())) {
+        "impl Cast<Target = ${pointer.pointee.generate()}>" to ".cast()"
+    } else {
+        pointer.pointee.generate() to ""
+    }
+
+    val type = "[$item]".generateRef(pointer.const, lifetime = "b")
     val method = if (pointer.const) { "as_ptr" } else { "as_mut_ptr" }
+
     return """
 #[inline]
 pub fn ${member.name}(mut self, ${member.name}: $type) -> Self {
     ${if (length != null) { "self.value.${length.first} = ${member.name}.len() as ${length.second};" } else { "" }}
-    self.value.${member.name} = ${member.name}.$method();
+    self.value.${member.name} = ${member.name}.$method()$cast;
     self
 }
     """
