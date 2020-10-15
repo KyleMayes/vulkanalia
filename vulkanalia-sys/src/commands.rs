@@ -2514,7 +2514,7 @@ pub type PFN_vkGetPhysicalDeviceXcbPresentationSupportKHR = extern "system" fn(
     _physical_device: PhysicalDevice,
     _queue_family_index: u32,
     _connection: *mut xcb_connection_t,
-    _visual__id: xcb_visualid_t,
+    _visual_id: xcb_visualid_t,
 ) -> Bool32;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceXlibPresentationSupportKHR.html>

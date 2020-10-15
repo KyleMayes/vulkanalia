@@ -40,6 +40,11 @@ fun String.toSnakeCase(): String {
     while (iterator.hasNext()) {
         val window = iterator.next()
 
+        // Handle identifiers that are already `snake_case` (e.g., `visual_id`).
+        if (window[0] == '_') {
+            return this
+        }
+
         // The default case conversion logic groups digits with any preceding
         // lowercase characters (e.g., `shaderBufferInt64Atomics` would be
         // converted to `shader_buffer_int64_atomics`). However, there are cases
