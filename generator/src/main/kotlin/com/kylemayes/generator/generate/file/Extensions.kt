@@ -17,7 +17,7 @@ use crate::MAX_EXTENSION_NAME_SIZE;
 /// A Vulkan extension name.
 pub type ExtensionName = [c_char; MAX_EXTENSION_NAME_SIZE];
 
-${getExtensionGroups().entries.sortedBy { it.key }.joinToString("") { generateGroup(it.key, it.value) }}
+${getExtensionGroups().values.flatten().sortedBy { it.name }.joinToString("") { generateExtension(it) }}
 
 #[inline]
 const fn name(bytes: &[u8]) -> ExtensionName {
@@ -37,28 +37,12 @@ const fn name(bytes: &[u8]) -> ExtensionName {
 }
     """
 
-/** Generates a Rust module and constants for a group of Vulkan extensions. */
-private fun Registry.generateGroup(author: String, extensions: List<Extension>) =
-    """
-/// `$author` extensions.
-pub mod ${author.toLowerCase()} {
-    use super::*;
-
-    ${extensions.sortedBy { it.name.value }.joinToString("\n") { generateExtension(author, it) }}
-}
-    """
-
 /** Generates a Rust constant for a Vulkan extension. */
-private fun Registry.generateExtension(author: String, extension: Extension): String {
+private fun Registry.generateExtension(extension: Extension): String {
     val deprecation = generateDeprecation(extension)?.let { "\n$it" } ?: ""
-
-    val name = extension.name.value
-        .removePrefix("${author}_")
-        .replace(Regex("^([0-9])"), "_$1")
-
     return """
 /// <${generateManualUrl(extension)}>$deprecation
-pub const $name: ExtensionName = name(b"${extension.name.original}");
+pub const ${extension.name}_EXTENSION: ExtensionName = name(b"${extension.name.original}");
     """.trim()
 }
 
