@@ -13,7 +13,7 @@ fun Registry.generateFunctions() =
 
 use std::os::raw::{c_char, c_void};
 
-use crate::vk::*;
+use crate::*;
 
 ${functions.values.sortedBy { it.name }.joinToString("\n") { generateFunction(it) }}
     """

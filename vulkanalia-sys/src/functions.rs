@@ -9,7 +9,7 @@
 
 use std::os::raw::{c_char, c_void};
 
-use crate::vk::*;
+use crate::*;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/PFN_vkAllocationFunction.html>
 pub type PFN_vkAllocationFunction = Option<

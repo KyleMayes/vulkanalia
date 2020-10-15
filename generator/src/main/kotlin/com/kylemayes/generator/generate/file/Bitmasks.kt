@@ -14,7 +14,7 @@ fun Registry.generateBitmasks() =
     """
 use bitflags::bitflags;
 
-use crate::typedefs::Flags;
+use crate::Flags;
 
 ${bitmasks.values.sortedBy { it.name }.joinToString("\n") { generateBitmask(it) }}
 ${generateAliases(bitmasks.keys)}

@@ -14,7 +14,7 @@ use std::fmt;
 use std::mem::MaybeUninit;
 use std::os::raw::{c_char, c_void};
 
-use crate::vk::*;
+use crate::*;
 
 ${unions.values.sortedBy { it.name }.joinToString("\n") { generateUnion(it) }}
 ${generateAliases(unions.keys)}

@@ -7,7 +7,7 @@
 
 use std::os::raw::c_char;
 
-use crate::constants::MAX_EXTENSION_NAME_SIZE;
+use crate::MAX_EXTENSION_NAME_SIZE;
 
 /// A Vulkan extension name.
 pub type ExtensionName = [c_char; MAX_EXTENSION_NAME_SIZE];

@@ -8,7 +8,7 @@
 use std::fmt;
 use std::hash::Hash;
 
-use crate::enums::ObjectType;
+use crate::ObjectType;
 
 /// A Vulkan handle type.
 pub trait Handle: Copy + Clone + fmt::Debug + PartialEq + Eq + Hash + Default + Sized {

@@ -3,39 +3,36 @@
 //! Raw Vulkan bindings for Rust.
 
 #[rustfmt::skip]
-pub mod bitmasks;
+mod bitmasks;
 #[rustfmt::skip]
-pub mod commands;
+mod commands;
 #[rustfmt::skip]
-pub mod constants;
+mod constants;
 #[rustfmt::skip]
-pub mod enums;
+mod enums;
 #[rustfmt::skip]
-pub mod extensions;
+mod extensions;
 #[rustfmt::skip]
-pub mod functions;
+mod functions;
 #[rustfmt::skip]
-pub mod handles;
+mod handles;
 #[rustfmt::skip]
-pub mod macros;
+mod macros;
 #[rustfmt::skip]
-pub mod structs;
+mod structs;
 #[rustfmt::skip]
-pub mod typedefs;
+mod typedefs;
 #[rustfmt::skip]
-pub mod unions;
+mod unions;
 
-/// Raw Vulkan bindings for Rust.
-pub mod vk {
-    pub use super::bitmasks::*;
-    pub use super::commands::*;
-    pub use super::constants::*;
-    pub use super::enums::*;
-    pub use super::extensions::*;
-    pub use super::functions::*;
-    pub use super::handles::*;
-    pub use super::macros::*;
-    pub use super::structs::*;
-    pub use super::typedefs::*;
-    pub use super::unions::*;
-}
+pub use self::bitmasks::*;
+pub use self::commands::*;
+pub use self::constants::*;
+pub use self::enums::*;
+pub use self::extensions::*;
+pub use self::functions::*;
+pub use self::handles::*;
+pub use self::macros::*;
+pub use self::structs::*;
+pub use self::typedefs::*;
+pub use self::unions::*;

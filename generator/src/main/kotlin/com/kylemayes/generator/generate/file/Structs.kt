@@ -20,7 +20,7 @@ use std::fmt;
 use std::os::raw::{c_char, c_int, c_void};
 use std::ptr;
 
-use crate::vk::*;
+use crate::*;
 
 ${structs.values.sortedBy { it.name }.joinToString("\n") { generateStruct(it) }}
 ${generateAliases(structs.keys)}

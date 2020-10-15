@@ -13,7 +13,7 @@ fun Registry.generateCommands() =
 
 use std::os::raw::{c_char, c_int, c_void};
 
-use crate::vk::*;
+use crate::*;
 
 ${commands.values.sortedBy { it.name }.joinToString("\n") { generateCommand(it) }}
     """

@@ -7,7 +7,7 @@
 
 use bitflags::bitflags;
 
-use crate::typedefs::Flags;
+use crate::Flags;
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccessFlags.html>

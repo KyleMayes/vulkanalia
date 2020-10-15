@@ -9,7 +9,7 @@
 
 use std::os::raw::{c_char, c_int, c_void};
 
-use crate::vk::*;
+use crate::*;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireFullScreenExclusiveModeEXT.html>
 pub type PFN_vkAcquireFullScreenExclusiveModeEXT =
