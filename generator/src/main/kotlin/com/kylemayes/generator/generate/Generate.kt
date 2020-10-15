@@ -3,9 +3,12 @@
 package com.kylemayes.generator.generate
 
 import com.kylemayes.generator.generate.file.generateBitmasks
+import com.kylemayes.generator.generate.file.generateBuilders
+import com.kylemayes.generator.generate.file.generateCommandStructs
 import com.kylemayes.generator.generate.file.generateCommands
 import com.kylemayes.generator.generate.file.generateConstants
 import com.kylemayes.generator.generate.file.generateEnums
+import com.kylemayes.generator.generate.file.generateExtensionTraits
 import com.kylemayes.generator.generate.file.generateExtensions
 import com.kylemayes.generator.generate.file.generateFunctions
 import com.kylemayes.generator.generate.file.generateHandles
@@ -13,6 +16,7 @@ import com.kylemayes.generator.generate.file.generateMacros
 import com.kylemayes.generator.generate.file.generateStructs
 import com.kylemayes.generator.generate.file.generateTypedefs
 import com.kylemayes.generator.generate.file.generateUnions
+import com.kylemayes.generator.generate.file.generateVersionTraits
 import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.support.rustfmt
 import mu.KotlinLogging
@@ -34,6 +38,10 @@ fun generateRustFiles(registry: Registry) = listOf(
     generateRustFile("vulkanalia-sys", "structs.rs", registry.generateStructs()),
     generateRustFile("vulkanalia-sys", "typedefs.rs", registry.generateTypedefs()),
     generateRustFile("vulkanalia-sys", "unions.rs", registry.generateUnions()),
+    generateRustFile("vulkanalia", "vk/builders.rs", registry.generateBuilders()),
+    generateRustFile("vulkanalia", "vk/commands.rs", registry.generateCommandStructs()),
+    generateRustFile("vulkanalia", "vk/extensions.rs", registry.generateExtensionTraits()),
+    generateRustFile("vulkanalia", "vk/versions.rs", registry.generateVersionTraits()),
 )
 
 /** A generated Rust file. */

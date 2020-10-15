@@ -538,8 +538,23 @@ data class PointerType(val pointee: Type, val const: Boolean) : Type {
 
 fun Type.getPointee() = if (this is PointerType) { pointee } else { null }
 fun Type.isPointer() = this is PointerType || isPlatformPointer()
+fun Type.isOpaquePointer() = getPointee()?.getIdentifier()?.let { opaque.contains(it.value) } ?: false
 fun Type.isPlatformPointer() = platformPointers.contains(getIdentifier()?.value)
 fun Type.isStringPointer() = getPointee()?.getIdentifier()?.value == "char"
+
+/** The types which are used in opaque pointers (i.e., `void` and `void` typedefs). */
+private val opaque = setOf(
+    "c_void",
+    "ANativeWindow",
+    "AHardwareBuffer",
+    "IDirectFB",
+    "IDirectFBSurface",
+    "CAMetalLayer",
+    "wl_display",
+    "wl_surface",
+    "SECURITY_ATTRIBUTES",
+    "xcb_connection_t",
+)
 
 /** The platform typedefs which are aliases of pointer types. */
 private val platformPointers = setOf(

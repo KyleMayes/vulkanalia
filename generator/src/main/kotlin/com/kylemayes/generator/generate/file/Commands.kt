@@ -2,7 +2,9 @@
 
 package com.kylemayes.generator.generate.file
 
+import com.kylemayes.generator.generate.support.CommandType
 import com.kylemayes.generator.generate.support.generateManualUrl
+import com.kylemayes.generator.generate.support.getCommandType
 import com.kylemayes.generator.registry.Command
 import com.kylemayes.generator.registry.Registry
 
@@ -27,6 +29,58 @@ private fun Registry.generateCommand(command: Command): String {
 pub type PFN_${command.name.original} = $type;
     """
 }
+
+/** Generates Rust structs for Vulkan commands. */
+fun Registry.generateCommandStructs(): String {
+    val structs = commands.values
+        .groupBy { getCommandType(it) }
+        .entries
+        .sortedBy { it.key.display }
+        .joinToString("") { generateCommandStruct(it.key, it.value) }
+    return """
+#![allow(non_snake_case)]
+
+use std::mem;
+use std::os::raw::{c_char, c_int, c_void};
+
+use super::*;
+
+$structs
+    """
+}
+
+/** Generates a Rust struct for a group of Vulkan commands of the same type. */
+private fun Registry.generateCommandStruct(type: CommandType, commands: List<Command>) =
+    """
+/// Loaded Vulkan ${type.display.toLowerCase()} commands.
+#[derive(Copy, Clone)]
+pub struct ${type.display}Commands {
+    ${commands.joinToString { "pub ${it.name}: PFN_${it.name.original}" }}
+}
+
+impl ${type.display}Commands {
+    #[inline]
+    pub fn load(mut loader: impl FnMut(*const c_char) -> Option<extern "system" fn()>) -> Self {
+        Self { ${commands.joinToString { generateLoad(it) }} }
+    }
+}
+    """
+
+/** Generates a Rust struct field-value pair to load a command. */
+private fun Registry.generateLoad(command: Command) =
+    """
+${command.name}: unsafe {
+    let value = loader(b"${command.name.original}\0".as_ptr().cast());
+    if let Some(value) = value {
+        mem::transmute(value)
+    } else {
+        ${generateSignature(command, "fallback")} {
+            panic!("could not load ${command.name.original}")
+        }
+        fallback
+    }
+}
+    """
 
 /** Generates a Rust function signature for a Vulkan command. */
 private fun generateSignature(command: Command, name: String = ""): String {

@@ -3,6 +3,7 @@
 package com.kylemayes.generator.generate.support
 
 import com.kylemayes.generator.registry.Identifier
+import com.kylemayes.generator.registry.PointerType
 import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.Structure
 import com.kylemayes.generator.registry.Type
@@ -72,4 +73,40 @@ private fun Registry.getMaxArrayLength(type: Type): Long? {
     val length = getLengthValue(type) ?: return null
     val elementLength = type.getElement()?.let { getMaxArrayLength(it) } ?: 0
     return max(length, elementLength)
+}
+
+/** Gets the Vulkan structs that can be used to extend other Vulkan structs. */
+val getStructExtensions = thunk { ->
+    structs.values
+        .filter { it.structextends != null }
+        .flatMap { it.structextends!!.map { e -> e to it.name } }
+        .groupBy({ it.first }, { it.second })
+}
+
+private val getStructLifetimeResults = HashMap<Identifier, Boolean>()
+
+/** Gets whether a Vulkan struct requires a lifetime for its builder. */
+fun Registry.getStructLifetime(struct: Structure): Boolean {
+    val memoized = getStructLifetimeResults[struct.name]
+    if (memoized != null) {
+        return memoized
+    }
+
+    // Builder methods for pointer members will use references with lifetimes
+    // so any struct that contains a pointer will need a lifetime. An exception
+    // is made for the `next` member if there are no extending structs since
+    // the corresponding builder method will be omitted in this case.
+    val members = struct.members.any {
+        it.type is PointerType &&
+            (it.name.value != "next" || getStructExtensions()[struct.name]?.isNotEmpty() ?: false)
+    }
+
+    // Builder method for struct members will use
+    val dependencies = getStructDependencies(struct).any {
+        getStructLifetime(structs[it] ?: error("Missing struct."))
+    }
+
+    val result = members || dependencies
+    getStructLifetimeResults[struct.name] = result
+    return result
 }

@@ -14,3 +14,24 @@ description = "Vulkan bindings for Rust."
 
 documentation = "https://docs.rs/vulkanalia"
 repository = "https://github.com/KyleMayes/vulkanalia"
+
+[features]
+
+libloading_ = ["libloading"]
+winit_ = ["winit", "cocoa", "metal", "objc"]
+
+[dependencies]
+
+libloading = { version = "0.6", optional = true }
+vulkanalia-sys = { version = "0.1", path = "../vulkanalia-sys" }
+winit = { version = "0.22", optional = true }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+
+cocoa = { version = "0.23", optional = true }
+metal = { version = "0.20", optional = true }
+objc = { version = "0.2", optional = true }
+
+[package.metadata.docs.rs]
+
+features = ["libloading_", "winit_"]
