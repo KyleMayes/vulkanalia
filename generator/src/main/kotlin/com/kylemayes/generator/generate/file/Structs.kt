@@ -4,14 +4,12 @@ package com.kylemayes.generator.generate.file
 
 import com.kylemayes.generator.generate.support.generateAliases
 import com.kylemayes.generator.generate.support.generateManualUrl
-import com.kylemayes.generator.generate.support.getLengthValue
 import com.kylemayes.generator.generate.support.getStructDerives
 import com.kylemayes.generator.registry.Member
 import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.Structure
 import com.kylemayes.generator.registry.getIdentifier
 import com.kylemayes.generator.registry.isPlatformPointer
-import com.kylemayes.generator.registry.isPointer
 
 /** Generates Rust structs for Vulkan structs. */
 fun Registry.generateStructs() =
@@ -63,29 +61,15 @@ private fun Registry.generateDebugField(member: Member) =
     }
 
 /** Generates a Rust `Default` trait implementation for a Vulkan struct. */
-private fun Registry.generateDefaultImpl(struct: Structure): String {
-    val members = struct.members.filter {
-        (it.name.value == "s_type" && it.values != null) ||
-            it.type.isPointer() ||
-            (getLengthValue(it.type) ?: 0) > 32
-    }
-
-    val exprs = members.joinToString { "${it.name}: ${generateDefaultField(it)}" }
-    val trailing = if (members.size < struct.members.size) {
-        ", ..Default::default()"
-    } else {
-        ""
-    }
-
-    return """
+private fun Registry.generateDefaultImpl(struct: Structure) =
+    """
 impl Default for ${struct.name} {
     #[inline]
     fn default() -> Self {
-        Self { $exprs$trailing }
+        Self { ${struct.members.joinToString { "${it.name}: ${generateDefaultField(it)}" }} }
     }
 }
     """
-}
 
 /** Generates a Rust expression for defaulting a Vulkan struct field. */
 private fun Registry.generateDefaultField(member: Member) = when {

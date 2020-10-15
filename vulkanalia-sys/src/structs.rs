@@ -46,8 +46,15 @@ impl Default for AccelerationStructureBuildGeometryInfoKHR {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR,
             next: ptr::null(),
+            type_: AccelerationStructureTypeKHR::default(),
+            flags: BuildAccelerationStructureFlagsKHR::default(),
+            update: Bool32::default(),
+            src_acceleration_structure: AccelerationStructureKHR::default(),
+            dst_acceleration_structure: AccelerationStructureKHR::default(),
+            geometry_array_of_pointers: Bool32::default(),
+            geometry_count: u32::default(),
             geometries: ptr::null(),
-            ..Default::default()
+            scratch_data: DeviceOrHostAddressKHR::default(),
         }
     }
 }
@@ -82,7 +89,12 @@ impl Default for AccelerationStructureCreateGeometryTypeInfoKHR {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_CREATE_GEOMETRY_TYPE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            geometry_type: GeometryTypeKHR::default(),
+            max_primitive_count: u32::default(),
+            index_type: IndexType::default(),
+            max_vertex_count: u32::default(),
+            vertex_format: Format::default(),
+            allows_transforms: Bool32::default(),
         }
     }
 }
@@ -107,8 +119,12 @@ impl Default for AccelerationStructureCreateInfoKHR {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_CREATE_INFO_KHR,
             next: ptr::null(),
+            compacted_size: DeviceSize::default(),
+            type_: AccelerationStructureTypeKHR::default(),
+            flags: BuildAccelerationStructureFlagsKHR::default(),
+            max_geometry_count: u32::default(),
             geometry_infos: ptr::null(),
-            ..Default::default()
+            device_address: DeviceAddress::default(),
         }
     }
 }
@@ -129,7 +145,8 @@ impl Default for AccelerationStructureCreateInfoNV {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_CREATE_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            compacted_size: DeviceSize::default(),
+            info: AccelerationStructureInfoNV::default(),
         }
     }
 }
@@ -149,7 +166,7 @@ impl Default for AccelerationStructureDeviceAddressInfoKHR {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            acceleration_structure: AccelerationStructureKHR::default(),
         }
     }
 }
@@ -170,7 +187,8 @@ impl Default for AccelerationStructureGeometryAabbsDataKHR {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR,
             next: ptr::null(),
-            ..Default::default()
+            data: DeviceOrHostAddressConstKHR::default(),
+            stride: DeviceSize::default(),
         }
     }
 }
@@ -191,7 +209,8 @@ impl Default for AccelerationStructureGeometryInstancesDataKHR {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_GEOMETRY_INSTANCES_DATA_KHR,
             next: ptr::null(),
-            ..Default::default()
+            array_of_pointers: Bool32::default(),
+            data: DeviceOrHostAddressConstKHR::default(),
         }
     }
 }
@@ -213,7 +232,9 @@ impl Default for AccelerationStructureGeometryKHR {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_GEOMETRY_KHR,
             next: ptr::null(),
-            ..Default::default()
+            geometry_type: GeometryTypeKHR::default(),
+            geometry: AccelerationStructureGeometryDataKHR::default(),
+            flags: GeometryFlagsKHR::default(),
         }
     }
 }
@@ -238,7 +259,12 @@ impl Default for AccelerationStructureGeometryTrianglesDataKHR {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR,
             next: ptr::null(),
-            ..Default::default()
+            vertex_format: Format::default(),
+            vertex_data: DeviceOrHostAddressConstKHR::default(),
+            vertex_stride: DeviceSize::default(),
+            index_type: IndexType::default(),
+            index_data: DeviceOrHostAddressConstKHR::default(),
+            transform_data: DeviceOrHostAddressConstKHR::default(),
         }
     }
 }
@@ -262,8 +288,11 @@ impl Default for AccelerationStructureInfoNV {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_INFO_NV,
             next: ptr::null(),
+            type_: AccelerationStructureTypeNV::default(),
+            flags: BuildAccelerationStructureFlagsNV::default(),
+            instance_count: u32::default(),
+            geometry_count: u32::default(),
             geometries: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -297,7 +326,9 @@ impl Default for AccelerationStructureMemoryRequirementsInfoKHR {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            type_: AccelerationStructureMemoryRequirementsTypeKHR::default(),
+            build_type: AccelerationStructureBuildTypeKHR::default(),
+            acceleration_structure: AccelerationStructureKHR::default(),
         }
     }
 }
@@ -318,7 +349,8 @@ impl Default for AccelerationStructureMemoryRequirementsInfoNV {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            type_: AccelerationStructureMemoryRequirementsTypeNV::default(),
+            acceleration_structure: AccelerationStructureNV::default(),
         }
     }
 }
@@ -362,7 +394,11 @@ impl Default for AcquireNextImageInfoKHR {
         Self {
             s_type: StructureType::ACQUIRE_NEXT_IMAGE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            swapchain: SwapchainKHR::default(),
+            timeout: u64::default(),
+            semaphore: Semaphore::default(),
+            fence: Fence::default(),
+            device_mask: u32::default(),
         }
     }
 }
@@ -383,7 +419,8 @@ impl Default for AcquireProfilingLockInfoKHR {
         Self {
             s_type: StructureType::ACQUIRE_PROFILING_LOCK_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            flags: AcquireProfilingLockFlagsKHR::default(),
+            timeout: u64::default(),
         }
     }
 }
@@ -424,7 +461,11 @@ impl Default for AllocationCallbacks {
     fn default() -> Self {
         Self {
             user_data: ptr::null_mut(),
-            ..Default::default()
+            allocation: PFN_vkAllocationFunction::default(),
+            reallocation: PFN_vkReallocationFunction::default(),
+            free: PFN_vkFreeFunction::default(),
+            internal_allocation: PFN_vkInternalAllocationNotification::default(),
+            internal_free: PFN_vkInternalFreeNotification::default(),
         }
     }
 }
@@ -451,7 +492,14 @@ impl Default for AndroidHardwareBufferFormatPropertiesANDROID {
         Self {
             s_type: StructureType::ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID,
             next: ptr::null_mut(),
-            ..Default::default()
+            format: Format::default(),
+            external_format: u64::default(),
+            format_features: FormatFeatureFlags::default(),
+            sampler_ycbcr_conversion_components: ComponentMapping::default(),
+            suggested_ycbcr_model: SamplerYcbcrModelConversion::default(),
+            suggested_ycbcr_range: SamplerYcbcrRange::default(),
+            suggested_x_chroma_offset: ChromaLocation::default(),
+            suggested_y_chroma_offset: ChromaLocation::default(),
         }
     }
 }
@@ -472,7 +520,8 @@ impl Default for AndroidHardwareBufferPropertiesANDROID {
         Self {
             s_type: StructureType::ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID,
             next: ptr::null_mut(),
-            ..Default::default()
+            allocation_size: DeviceSize::default(),
+            memory_type_bits: u32::default(),
         }
     }
 }
@@ -492,7 +541,7 @@ impl Default for AndroidHardwareBufferUsageANDROID {
         Self {
             s_type: StructureType::ANDROID_HARDWARE_BUFFER_USAGE_ANDROID,
             next: ptr::null_mut(),
-            ..Default::default()
+            android_hardware_buffer_usage: u64::default(),
         }
     }
 }
@@ -513,8 +562,8 @@ impl Default for AndroidSurfaceCreateInfoKHR {
         Self {
             s_type: StructureType::ANDROID_SURFACE_CREATE_INFO_KHR,
             next: ptr::null(),
+            flags: AndroidSurfaceCreateFlagsKHR::default(),
             window: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -539,8 +588,10 @@ impl Default for ApplicationInfo {
             s_type: StructureType::APPLICATION_INFO,
             next: ptr::null(),
             application_name: ptr::null(),
+            application_version: u32::default(),
             engine_name: ptr::null(),
-            ..Default::default()
+            engine_version: u32::default(),
+            api_version: u32::default(),
         }
     }
 }
@@ -583,7 +634,15 @@ impl Default for AttachmentDescription2 {
         Self {
             s_type: StructureType::ATTACHMENT_DESCRIPTION_2,
             next: ptr::null(),
-            ..Default::default()
+            flags: AttachmentDescriptionFlags::default(),
+            format: Format::default(),
+            samples: SampleCountFlags::default(),
+            load_op: AttachmentLoadOp::default(),
+            store_op: AttachmentStoreOp::default(),
+            stencil_load_op: AttachmentLoadOp::default(),
+            stencil_store_op: AttachmentStoreOp::default(),
+            initial_layout: ImageLayout::default(),
+            final_layout: ImageLayout::default(),
         }
     }
 }
@@ -604,7 +663,8 @@ impl Default for AttachmentDescriptionStencilLayout {
         Self {
             s_type: StructureType::ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT,
             next: ptr::null_mut(),
-            ..Default::default()
+            stencil_initial_layout: ImageLayout::default(),
+            stencil_final_layout: ImageLayout::default(),
         }
     }
 }
@@ -634,7 +694,9 @@ impl Default for AttachmentReference2 {
         Self {
             s_type: StructureType::ATTACHMENT_REFERENCE_2,
             next: ptr::null(),
-            ..Default::default()
+            attachment: u32::default(),
+            layout: ImageLayout::default(),
+            aspect_mask: ImageAspectFlags::default(),
         }
     }
 }
@@ -654,7 +716,7 @@ impl Default for AttachmentReferenceStencilLayout {
         Self {
             s_type: StructureType::ATTACHMENT_REFERENCE_STENCIL_LAYOUT,
             next: ptr::null_mut(),
-            ..Default::default()
+            stencil_layout: ImageLayout::default(),
         }
     }
 }
@@ -679,8 +741,8 @@ impl Default for BaseInStructure {
     #[inline]
     fn default() -> Self {
         Self {
+            s_type: StructureType::default(),
             next: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -697,8 +759,8 @@ impl Default for BaseOutStructure {
     #[inline]
     fn default() -> Self {
         Self {
+            s_type: StructureType::default(),
             next: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -722,8 +784,11 @@ impl Default for BindAccelerationStructureMemoryInfoKHR {
         Self {
             s_type: StructureType::BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_KHR,
             next: ptr::null(),
+            acceleration_structure: AccelerationStructureKHR::default(),
+            memory: DeviceMemory::default(),
+            memory_offset: DeviceSize::default(),
+            device_index_count: u32::default(),
             device_indices: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -744,8 +809,8 @@ impl Default for BindBufferMemoryDeviceGroupInfo {
         Self {
             s_type: StructureType::BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO,
             next: ptr::null(),
+            device_index_count: u32::default(),
             device_indices: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -767,7 +832,9 @@ impl Default for BindBufferMemoryInfo {
         Self {
             s_type: StructureType::BIND_BUFFER_MEMORY_INFO,
             next: ptr::null(),
-            ..Default::default()
+            buffer: Buffer::default(),
+            memory: DeviceMemory::default(),
+            memory_offset: DeviceSize::default(),
         }
     }
 }
@@ -790,9 +857,10 @@ impl Default for BindImageMemoryDeviceGroupInfo {
         Self {
             s_type: StructureType::BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO,
             next: ptr::null(),
+            device_index_count: u32::default(),
             device_indices: ptr::null(),
+            split_instance_bind_region_count: u32::default(),
             split_instance_bind_regions: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -814,7 +882,9 @@ impl Default for BindImageMemoryInfo {
         Self {
             s_type: StructureType::BIND_IMAGE_MEMORY_INFO,
             next: ptr::null(),
-            ..Default::default()
+            image: Image::default(),
+            memory: DeviceMemory::default(),
+            memory_offset: DeviceSize::default(),
         }
     }
 }
@@ -835,7 +905,8 @@ impl Default for BindImageMemorySwapchainInfoKHR {
         Self {
             s_type: StructureType::BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            swapchain: SwapchainKHR::default(),
+            image_index: u32::default(),
         }
     }
 }
@@ -855,7 +926,7 @@ impl Default for BindImagePlaneMemoryInfo {
         Self {
             s_type: StructureType::BIND_IMAGE_PLANE_MEMORY_INFO,
             next: ptr::null(),
-            ..Default::default()
+            plane_aspect: ImageAspectFlags::default(),
         }
     }
 }
@@ -900,12 +971,16 @@ impl Default for BindSparseInfo {
         Self {
             s_type: StructureType::BIND_SPARSE_INFO,
             next: ptr::null(),
+            wait_semaphore_count: u32::default(),
             wait_semaphores: ptr::null(),
+            buffer_bind_count: u32::default(),
             buffer_binds: ptr::null(),
+            image_opaque_bind_count: u32::default(),
             image_opaque_binds: ptr::null(),
+            image_bind_count: u32::default(),
             image_binds: ptr::null(),
+            signal_semaphore_count: u32::default(),
             signal_semaphores: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -940,8 +1015,13 @@ impl Default for BlitImageInfo2KHR {
         Self {
             s_type: StructureType::BLIT_IMAGE_INFO_2_KHR,
             next: ptr::null(),
+            src_image: Image::default(),
+            src_image_layout: ImageLayout::default(),
+            dst_image: Image::default(),
+            dst_image_layout: ImageLayout::default(),
+            region_count: u32::default(),
             regions: ptr::null(),
-            ..Default::default()
+            filter: Filter::default(),
         }
     }
 }
@@ -972,7 +1052,9 @@ impl Default for BufferCopy2KHR {
         Self {
             s_type: StructureType::BUFFER_COPY_2_KHR,
             next: ptr::null(),
-            ..Default::default()
+            src_offset: DeviceSize::default(),
+            dst_offset: DeviceSize::default(),
+            size: DeviceSize::default(),
         }
     }
 }
@@ -997,8 +1079,12 @@ impl Default for BufferCreateInfo {
         Self {
             s_type: StructureType::BUFFER_CREATE_INFO,
             next: ptr::null(),
+            flags: BufferCreateFlags::default(),
+            size: DeviceSize::default(),
+            usage: BufferUsageFlags::default(),
+            sharing_mode: SharingMode::default(),
+            queue_family_index_count: u32::default(),
             queue_family_indices: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1018,7 +1104,7 @@ impl Default for BufferDeviceAddressCreateInfoEXT {
         Self {
             s_type: StructureType::BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            device_address: DeviceAddress::default(),
         }
     }
 }
@@ -1038,7 +1124,7 @@ impl Default for BufferDeviceAddressInfo {
         Self {
             s_type: StructureType::BUFFER_DEVICE_ADDRESS_INFO,
             next: ptr::null(),
-            ..Default::default()
+            buffer: Buffer::default(),
         }
     }
 }
@@ -1075,7 +1161,12 @@ impl Default for BufferImageCopy2KHR {
         Self {
             s_type: StructureType::BUFFER_IMAGE_COPY_2_KHR,
             next: ptr::null(),
-            ..Default::default()
+            buffer_offset: DeviceSize::default(),
+            buffer_row_length: u32::default(),
+            buffer_image_height: u32::default(),
+            image_subresource: ImageSubresourceLayers::default(),
+            image_offset: Offset3D::default(),
+            image_extent: Extent3D::default(),
         }
     }
 }
@@ -1101,7 +1192,13 @@ impl Default for BufferMemoryBarrier {
         Self {
             s_type: StructureType::BUFFER_MEMORY_BARRIER,
             next: ptr::null(),
-            ..Default::default()
+            src_access_mask: AccessFlags::default(),
+            dst_access_mask: AccessFlags::default(),
+            src_queue_family_index: u32::default(),
+            dst_queue_family_index: u32::default(),
+            buffer: Buffer::default(),
+            offset: DeviceSize::default(),
+            size: DeviceSize::default(),
         }
     }
 }
@@ -1121,7 +1218,7 @@ impl Default for BufferMemoryRequirementsInfo2 {
         Self {
             s_type: StructureType::BUFFER_MEMORY_REQUIREMENTS_INFO_2,
             next: ptr::null(),
-            ..Default::default()
+            buffer: Buffer::default(),
         }
     }
 }
@@ -1141,7 +1238,7 @@ impl Default for BufferOpaqueCaptureAddressCreateInfo {
         Self {
             s_type: StructureType::BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            opaque_capture_address: u64::default(),
         }
     }
 }
@@ -1165,7 +1262,11 @@ impl Default for BufferViewCreateInfo {
         Self {
             s_type: StructureType::BUFFER_VIEW_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: BufferViewCreateFlags::default(),
+            buffer: Buffer::default(),
+            format: Format::default(),
+            offset: DeviceSize::default(),
+            range: DeviceSize::default(),
         }
     }
 }
@@ -1185,7 +1286,7 @@ impl Default for CalibratedTimestampInfoEXT {
         Self {
             s_type: StructureType::CALIBRATED_TIMESTAMP_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            time_domain: TimeDomainEXT::default(),
         }
     }
 }
@@ -1206,8 +1307,8 @@ impl Default for CheckpointDataNV {
         Self {
             s_type: StructureType::CHECKPOINT_DATA_NV,
             next: ptr::null_mut(),
+            stage: PipelineStageFlags::default(),
             checkpoint_marker: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -1261,8 +1362,10 @@ impl Default for CoarseSampleOrderCustomNV {
     #[inline]
     fn default() -> Self {
         Self {
+            shading_rate: ShadingRatePaletteEntryNV::default(),
+            sample_count: u32::default(),
+            sample_location_count: u32::default(),
             sample_locations: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1284,7 +1387,9 @@ impl Default for CommandBufferAllocateInfo {
         Self {
             s_type: StructureType::COMMAND_BUFFER_ALLOCATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            command_pool: CommandPool::default(),
+            level: CommandBufferLevel::default(),
+            command_buffer_count: u32::default(),
         }
     }
 }
@@ -1305,8 +1410,8 @@ impl Default for CommandBufferBeginInfo {
         Self {
             s_type: StructureType::COMMAND_BUFFER_BEGIN_INFO,
             next: ptr::null(),
+            flags: CommandBufferUsageFlags::default(),
             inheritance_info: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1326,7 +1431,7 @@ impl Default for CommandBufferInheritanceConditionalRenderingInfoEXT {
         Self {
             s_type: StructureType::COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            conditional_rendering_enable: Bool32::default(),
         }
     }
 }
@@ -1351,7 +1456,12 @@ impl Default for CommandBufferInheritanceInfo {
         Self {
             s_type: StructureType::COMMAND_BUFFER_INHERITANCE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            render_pass: RenderPass::default(),
+            subpass: u32::default(),
+            framebuffer: Framebuffer::default(),
+            occlusion_query_enable: Bool32::default(),
+            query_flags: QueryControlFlags::default(),
+            pipeline_statistics: QueryPipelineStatisticFlags::default(),
         }
     }
 }
@@ -1372,7 +1482,8 @@ impl Default for CommandBufferInheritanceRenderPassTransformInfoQCOM {
         Self {
             s_type: StructureType::COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM,
             next: ptr::null_mut(),
-            ..Default::default()
+            transform: SurfaceTransformFlagsKHR::default(),
+            render_area: Rect2D::default(),
         }
     }
 }
@@ -1393,7 +1504,8 @@ impl Default for CommandPoolCreateInfo {
         Self {
             s_type: StructureType::COMMAND_POOL_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: CommandPoolCreateFlags::default(),
+            queue_family_index: u32::default(),
         }
     }
 }
@@ -1427,7 +1539,11 @@ impl Default for ComputePipelineCreateInfo {
         Self {
             s_type: StructureType::COMPUTE_PIPELINE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: PipelineCreateFlags::default(),
+            stage: PipelineShaderStageCreateInfo::default(),
+            layout: PipelineLayout::default(),
+            base_pipeline_handle: Pipeline::default(),
+            base_pipeline_index: i32::default(),
         }
     }
 }
@@ -1449,7 +1565,9 @@ impl Default for ConditionalRenderingBeginInfoEXT {
         Self {
             s_type: StructureType::CONDITIONAL_RENDERING_BEGIN_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            buffer: Buffer::default(),
+            offset: DeviceSize::default(),
+            flags: ConditionalRenderingFlagsEXT::default(),
         }
     }
 }
@@ -1486,7 +1604,14 @@ impl Default for CooperativeMatrixPropertiesNV {
         Self {
             s_type: StructureType::COOPERATIVE_MATRIX_PROPERTIES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            m_size: u32::default(),
+            n_size: u32::default(),
+            k_size: u32::default(),
+            a_type: ComponentTypeNV::default(),
+            b_type: ComponentTypeNV::default(),
+            c_type: ComponentTypeNV::default(),
+            d_type: ComponentTypeNV::default(),
+            scope: ScopeNV::default(),
         }
     }
 }
@@ -1508,7 +1633,9 @@ impl Default for CopyAccelerationStructureInfoKHR {
         Self {
             s_type: StructureType::COPY_ACCELERATION_STRUCTURE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            src: AccelerationStructureKHR::default(),
+            dst: AccelerationStructureKHR::default(),
+            mode: CopyAccelerationStructureModeKHR::default(),
         }
     }
 }
@@ -1530,7 +1657,9 @@ impl Default for CopyAccelerationStructureToMemoryInfoKHR {
         Self {
             s_type: StructureType::COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            src: AccelerationStructureKHR::default(),
+            dst: DeviceOrHostAddressKHR::default(),
+            mode: CopyAccelerationStructureModeKHR::default(),
         }
     }
 }
@@ -1553,8 +1682,10 @@ impl Default for CopyBufferInfo2KHR {
         Self {
             s_type: StructureType::COPY_BUFFER_INFO_2_KHR,
             next: ptr::null(),
+            src_buffer: Buffer::default(),
+            dst_buffer: Buffer::default(),
+            region_count: u32::default(),
             regions: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1578,8 +1709,11 @@ impl Default for CopyBufferToImageInfo2KHR {
         Self {
             s_type: StructureType::COPY_BUFFER_TO_IMAGE_INFO_2_KHR,
             next: ptr::null(),
+            src_buffer: Buffer::default(),
+            dst_image: Image::default(),
+            dst_image_layout: ImageLayout::default(),
+            region_count: u32::default(),
             regions: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1605,7 +1739,13 @@ impl Default for CopyDescriptorSet {
         Self {
             s_type: StructureType::COPY_DESCRIPTOR_SET,
             next: ptr::null(),
-            ..Default::default()
+            src_set: DescriptorSet::default(),
+            src_binding: u32::default(),
+            src_array_element: u32::default(),
+            dst_set: DescriptorSet::default(),
+            dst_binding: u32::default(),
+            dst_array_element: u32::default(),
+            descriptor_count: u32::default(),
         }
     }
 }
@@ -1630,8 +1770,12 @@ impl Default for CopyImageInfo2KHR {
         Self {
             s_type: StructureType::COPY_IMAGE_INFO_2_KHR,
             next: ptr::null(),
+            src_image: Image::default(),
+            src_image_layout: ImageLayout::default(),
+            dst_image: Image::default(),
+            dst_image_layout: ImageLayout::default(),
+            region_count: u32::default(),
             regions: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1655,8 +1799,11 @@ impl Default for CopyImageToBufferInfo2KHR {
         Self {
             s_type: StructureType::COPY_IMAGE_TO_BUFFER_INFO_2_KHR,
             next: ptr::null(),
+            src_image: Image::default(),
+            src_image_layout: ImageLayout::default(),
+            dst_buffer: Buffer::default(),
+            region_count: u32::default(),
             regions: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1678,7 +1825,9 @@ impl Default for CopyMemoryToAccelerationStructureInfoKHR {
         Self {
             s_type: StructureType::COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            src: DeviceOrHostAddressConstKHR::default(),
+            dst: AccelerationStructureKHR::default(),
+            mode: CopyAccelerationStructureModeKHR::default(),
         }
     }
 }
@@ -1701,9 +1850,10 @@ impl Default for D3D12FenceSubmitInfoKHR {
         Self {
             s_type: StructureType::D3D12_FENCE_SUBMIT_INFO_KHR,
             next: ptr::null(),
+            wait_semaphore_values_count: u32::default(),
             wait_semaphore_values: ptr::null(),
+            signal_semaphore_values_count: u32::default(),
             signal_semaphore_values: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1725,7 +1875,7 @@ impl Default for DebugMarkerMarkerInfoEXT {
             s_type: StructureType::DEBUG_MARKER_MARKER_INFO_EXT,
             next: ptr::null(),
             marker_name: ptr::null(),
-            ..Default::default()
+            color: [f32::default(); 4],
         }
     }
 }
@@ -1747,8 +1897,9 @@ impl Default for DebugMarkerObjectNameInfoEXT {
         Self {
             s_type: StructureType::DEBUG_MARKER_OBJECT_NAME_INFO_EXT,
             next: ptr::null(),
+            object_type: DebugReportObjectTypeEXT::default(),
+            object: u64::default(),
             object_name: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1772,8 +1923,11 @@ impl Default for DebugMarkerObjectTagInfoEXT {
         Self {
             s_type: StructureType::DEBUG_MARKER_OBJECT_TAG_INFO_EXT,
             next: ptr::null(),
+            object_type: DebugReportObjectTypeEXT::default(),
+            object: u64::default(),
+            tag_name: u64::default(),
+            tag_size: usize::default(),
             tag: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1807,8 +1961,9 @@ impl Default for DebugReportCallbackCreateInfoEXT {
         Self {
             s_type: StructureType::DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT,
             next: ptr::null(),
+            flags: DebugReportFlagsEXT::default(),
+            callback: PFN_vkDebugReportCallbackEXT::default(),
             user_data: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -1830,7 +1985,7 @@ impl Default for DebugUtilsLabelEXT {
             s_type: StructureType::DEBUG_UTILS_LABEL_EXT,
             next: ptr::null(),
             label_name: ptr::null(),
-            ..Default::default()
+            color: [f32::default(); 4],
         }
     }
 }
@@ -1859,12 +2014,16 @@ impl Default for DebugUtilsMessengerCallbackDataEXT {
         Self {
             s_type: StructureType::DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT,
             next: ptr::null(),
+            flags: DebugUtilsMessengerCallbackDataFlagsEXT::default(),
             message_id_name: ptr::null(),
+            message_id_number: i32::default(),
             message: ptr::null(),
+            queue_label_count: u32::default(),
             queue_labels: ptr::null(),
+            cmd_buf_label_count: u32::default(),
             cmd_buf_labels: ptr::null(),
+            object_count: u32::default(),
             objects: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1905,8 +2064,11 @@ impl Default for DebugUtilsMessengerCreateInfoEXT {
         Self {
             s_type: StructureType::DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
             next: ptr::null(),
+            flags: DebugUtilsMessengerCreateFlagsEXT::default(),
+            message_severity: DebugUtilsMessageSeverityFlagsEXT::default(),
+            message_type: DebugUtilsMessageTypeFlagsEXT::default(),
+            user_callback: PFN_vkDebugUtilsMessengerCallbackEXT::default(),
             user_data: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -1928,8 +2090,9 @@ impl Default for DebugUtilsObjectNameInfoEXT {
         Self {
             s_type: StructureType::DEBUG_UTILS_OBJECT_NAME_INFO_EXT,
             next: ptr::null(),
+            object_type: ObjectType::default(),
+            object_handle: u64::default(),
             object_name: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1953,8 +2116,11 @@ impl Default for DebugUtilsObjectTagInfoEXT {
         Self {
             s_type: StructureType::DEBUG_UTILS_OBJECT_TAG_INFO_EXT,
             next: ptr::null(),
+            object_type: ObjectType::default(),
+            object_handle: u64::default(),
+            tag_name: u64::default(),
+            tag_size: usize::default(),
             tag: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -1974,7 +2140,7 @@ impl Default for DedicatedAllocationBufferCreateInfoNV {
         Self {
             s_type: StructureType::DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            dedicated_allocation: Bool32::default(),
         }
     }
 }
@@ -1994,7 +2160,7 @@ impl Default for DedicatedAllocationImageCreateInfoNV {
         Self {
             s_type: StructureType::DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            dedicated_allocation: Bool32::default(),
         }
     }
 }
@@ -2015,7 +2181,8 @@ impl Default for DedicatedAllocationMemoryAllocateInfoNV {
         Self {
             s_type: StructureType::DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            image: Image::default(),
+            buffer: Buffer::default(),
         }
     }
 }
@@ -2035,7 +2202,7 @@ impl Default for DeferredOperationInfoKHR {
         Self {
             s_type: StructureType::DEFERRED_OPERATION_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            operation_handle: DeferredOperationKHR::default(),
         }
     }
 }
@@ -2076,8 +2243,10 @@ impl Default for DescriptorPoolCreateInfo {
         Self {
             s_type: StructureType::DESCRIPTOR_POOL_CREATE_INFO,
             next: ptr::null(),
+            flags: DescriptorPoolCreateFlags::default(),
+            max_sets: u32::default(),
+            pool_size_count: u32::default(),
             pool_sizes: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -2097,7 +2266,7 @@ impl Default for DescriptorPoolInlineUniformBlockCreateInfoEXT {
         Self {
             s_type: StructureType::DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            max_inline_uniform_block_bindings: u32::default(),
         }
     }
 }
@@ -2127,8 +2296,9 @@ impl Default for DescriptorSetAllocateInfo {
         Self {
             s_type: StructureType::DESCRIPTOR_SET_ALLOCATE_INFO,
             next: ptr::null(),
+            descriptor_pool: DescriptorPool::default(),
+            descriptor_set_count: u32::default(),
             set_layouts: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -2148,8 +2318,11 @@ impl Default for DescriptorSetLayoutBinding {
     #[inline]
     fn default() -> Self {
         Self {
+            binding: u32::default(),
+            descriptor_type: DescriptorType::default(),
+            descriptor_count: u32::default(),
+            stage_flags: ShaderStageFlags::default(),
             immutable_samplers: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -2170,8 +2343,8 @@ impl Default for DescriptorSetLayoutBindingFlagsCreateInfo {
         Self {
             s_type: StructureType::DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO,
             next: ptr::null(),
+            binding_count: u32::default(),
             binding_flags: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -2193,8 +2366,9 @@ impl Default for DescriptorSetLayoutCreateInfo {
         Self {
             s_type: StructureType::DESCRIPTOR_SET_LAYOUT_CREATE_INFO,
             next: ptr::null(),
+            flags: DescriptorSetLayoutCreateFlags::default(),
+            binding_count: u32::default(),
             bindings: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -2214,7 +2388,7 @@ impl Default for DescriptorSetLayoutSupport {
         Self {
             s_type: StructureType::DESCRIPTOR_SET_LAYOUT_SUPPORT,
             next: ptr::null_mut(),
-            ..Default::default()
+            supported: Bool32::default(),
         }
     }
 }
@@ -2235,8 +2409,8 @@ impl Default for DescriptorSetVariableDescriptorCountAllocateInfo {
         Self {
             s_type: StructureType::DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO,
             next: ptr::null(),
+            descriptor_set_count: u32::default(),
             descriptor_counts: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -2256,7 +2430,7 @@ impl Default for DescriptorSetVariableDescriptorCountLayoutSupport {
         Self {
             s_type: StructureType::DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_variable_descriptor_count: u32::default(),
         }
     }
 }
@@ -2283,8 +2457,14 @@ impl Default for DescriptorUpdateTemplateCreateInfo {
         Self {
             s_type: StructureType::DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO,
             next: ptr::null(),
+            flags: DescriptorUpdateTemplateCreateFlags::default(),
+            descriptor_update_entry_count: u32::default(),
             descriptor_update_entries: ptr::null(),
-            ..Default::default()
+            template_type: DescriptorUpdateTemplateType::default(),
+            descriptor_set_layout: DescriptorSetLayout::default(),
+            pipeline_bind_point: PipelineBindPoint::default(),
+            pipeline_layout: PipelineLayout::default(),
+            set: u32::default(),
         }
     }
 }
@@ -2323,11 +2503,14 @@ impl Default for DeviceCreateInfo {
         Self {
             s_type: StructureType::DEVICE_CREATE_INFO,
             next: ptr::null(),
+            flags: DeviceCreateFlags::default(),
+            queue_create_info_count: u32::default(),
             queue_create_infos: ptr::null(),
+            enabled_layer_count: u32::default(),
             enabled_layer_names: ptr::null(),
+            enabled_extension_count: u32::default(),
             enabled_extension_names: ptr::null(),
             enabled_features: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -2364,8 +2547,9 @@ impl Default for DeviceDeviceMemoryReportCreateInfoEXT {
         Self {
             s_type: StructureType::DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT,
             next: ptr::null(),
+            flags: DeviceMemoryReportFlagsEXT::default(),
+            user_callback: PFN_vkDeviceMemoryReportCallbackEXT::default(),
             user_data: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -2385,7 +2569,7 @@ impl Default for DeviceDiagnosticsConfigCreateInfoNV {
         Self {
             s_type: StructureType::DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            flags: DeviceDiagnosticsConfigFlagsNV::default(),
         }
     }
 }
@@ -2405,7 +2589,7 @@ impl Default for DeviceEventInfoEXT {
         Self {
             s_type: StructureType::DEVICE_EVENT_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            device_event: DeviceEventTypeEXT::default(),
         }
     }
 }
@@ -2426,7 +2610,8 @@ impl Default for DeviceGroupBindSparseInfo {
         Self {
             s_type: StructureType::DEVICE_GROUP_BIND_SPARSE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            resource_device_index: u32::default(),
+            memory_device_index: u32::default(),
         }
     }
 }
@@ -2446,7 +2631,7 @@ impl Default for DeviceGroupCommandBufferBeginInfo {
         Self {
             s_type: StructureType::DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO,
             next: ptr::null(),
-            ..Default::default()
+            device_mask: u32::default(),
         }
     }
 }
@@ -2467,8 +2652,8 @@ impl Default for DeviceGroupDeviceCreateInfo {
         Self {
             s_type: StructureType::DEVICE_GROUP_DEVICE_CREATE_INFO,
             next: ptr::null(),
+            physical_device_count: u32::default(),
             physical_devices: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -2489,7 +2674,8 @@ impl Default for DeviceGroupPresentCapabilitiesKHR {
         Self {
             s_type: StructureType::DEVICE_GROUP_PRESENT_CAPABILITIES_KHR,
             next: ptr::null(),
-            ..Default::default()
+            present_mask: [u32::default(); MAX_DEVICE_GROUP_SIZE],
+            modes: DeviceGroupPresentModeFlagsKHR::default(),
         }
     }
 }
@@ -2511,8 +2697,9 @@ impl Default for DeviceGroupPresentInfoKHR {
         Self {
             s_type: StructureType::DEVICE_GROUP_PRESENT_INFO_KHR,
             next: ptr::null(),
+            swapchain_count: u32::default(),
             device_masks: ptr::null(),
-            ..Default::default()
+            mode: DeviceGroupPresentModeFlagsKHR::default(),
         }
     }
 }
@@ -2534,8 +2721,9 @@ impl Default for DeviceGroupRenderPassBeginInfo {
         Self {
             s_type: StructureType::DEVICE_GROUP_RENDER_PASS_BEGIN_INFO,
             next: ptr::null(),
+            device_mask: u32::default(),
+            device_render_area_count: u32::default(),
             device_render_areas: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -2560,10 +2748,12 @@ impl Default for DeviceGroupSubmitInfo {
         Self {
             s_type: StructureType::DEVICE_GROUP_SUBMIT_INFO,
             next: ptr::null(),
+            wait_semaphore_count: u32::default(),
             wait_semaphore_device_indices: ptr::null(),
+            command_buffer_count: u32::default(),
             command_buffer_device_masks: ptr::null(),
+            signal_semaphore_count: u32::default(),
             signal_semaphore_device_indices: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -2583,7 +2773,7 @@ impl Default for DeviceGroupSwapchainCreateInfoKHR {
         Self {
             s_type: StructureType::DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            modes: DeviceGroupPresentModeFlagsKHR::default(),
         }
     }
 }
@@ -2603,7 +2793,7 @@ impl Default for DeviceMemoryOpaqueCaptureAddressInfo {
         Self {
             s_type: StructureType::DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO,
             next: ptr::null(),
-            ..Default::default()
+            memory: DeviceMemory::default(),
         }
     }
 }
@@ -2623,7 +2813,7 @@ impl Default for DeviceMemoryOverallocationCreateInfoAMD {
         Self {
             s_type: StructureType::DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD,
             next: ptr::null(),
-            ..Default::default()
+            overallocation_behavior: MemoryOverallocationBehaviorAMD::default(),
         }
     }
 }
@@ -2649,7 +2839,13 @@ impl Default for DeviceMemoryReportCallbackDataEXT {
         Self {
             s_type: StructureType::DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT,
             next: ptr::null(),
-            ..Default::default()
+            flags: DeviceMemoryReportFlagsEXT::default(),
+            type_: DeviceMemoryReportEventTypeEXT::default(),
+            memory_object_id: u64::default(),
+            size: DeviceSize::default(),
+            object_type: ObjectType::default(),
+            object_handle: u64::default(),
+            heap_index: u32::default(),
         }
     }
 }
@@ -2669,7 +2865,7 @@ impl Default for DevicePrivateDataCreateInfoEXT {
         Self {
             s_type: StructureType::DEVICE_PRIVATE_DATA_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            private_data_slot_request_count: u32::default(),
         }
     }
 }
@@ -2692,8 +2888,10 @@ impl Default for DeviceQueueCreateInfo {
         Self {
             s_type: StructureType::DEVICE_QUEUE_CREATE_INFO,
             next: ptr::null(),
+            flags: DeviceQueueCreateFlags::default(),
+            queue_family_index: u32::default(),
+            queue_count: u32::default(),
             queue_priorities: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -2713,7 +2911,7 @@ impl Default for DeviceQueueGlobalPriorityCreateInfoEXT {
         Self {
             s_type: StructureType::DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            global_priority: QueueGlobalPriorityEXT::default(),
         }
     }
 }
@@ -2735,7 +2933,9 @@ impl Default for DeviceQueueInfo2 {
         Self {
             s_type: StructureType::DEVICE_QUEUE_INFO_2,
             next: ptr::null(),
-            ..Default::default()
+            flags: DeviceQueueCreateFlags::default(),
+            queue_family_index: u32::default(),
+            queue_index: u32::default(),
         }
     }
 }
@@ -2757,9 +2957,9 @@ impl Default for DirectFBSurfaceCreateInfoEXT {
         Self {
             s_type: StructureType::DIRECTFB_SURFACE_CREATE_INFO_EXT,
             next: ptr::null(),
+            flags: DirectFBSurfaceCreateFlagsEXT::default(),
             dfb: ptr::null_mut(),
             surface: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -2788,7 +2988,7 @@ impl Default for DisplayEventInfoEXT {
         Self {
             s_type: StructureType::DISPLAY_EVENT_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            display_event: DisplayEventTypeEXT::default(),
         }
     }
 }
@@ -2809,7 +3009,8 @@ impl Default for DisplayModeCreateInfoKHR {
         Self {
             s_type: StructureType::DISPLAY_MODE_CREATE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            flags: DisplayModeCreateFlagsKHR::default(),
+            parameters: DisplayModeParametersKHR::default(),
         }
     }
 }
@@ -2837,7 +3038,7 @@ impl Default for DisplayModeProperties2KHR {
         Self {
             s_type: StructureType::DISPLAY_MODE_PROPERTIES_2_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            display_mode_properties: DisplayModePropertiesKHR::default(),
         }
     }
 }
@@ -2865,7 +3066,7 @@ impl Default for DisplayNativeHdrSurfaceCapabilitiesAMD {
         Self {
             s_type: StructureType::DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD,
             next: ptr::null_mut(),
-            ..Default::default()
+            local_dimming_support: Bool32::default(),
         }
     }
 }
@@ -2885,7 +3086,7 @@ impl Default for DisplayPlaneCapabilities2KHR {
         Self {
             s_type: StructureType::DISPLAY_PLANE_CAPABILITIES_2_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            capabilities: DisplayPlaneCapabilitiesKHR::default(),
         }
     }
 }
@@ -2921,7 +3122,8 @@ impl Default for DisplayPlaneInfo2KHR {
         Self {
             s_type: StructureType::DISPLAY_PLANE_INFO_2_KHR,
             next: ptr::null(),
-            ..Default::default()
+            mode: DisplayModeKHR::default(),
+            plane_index: u32::default(),
         }
     }
 }
@@ -2941,7 +3143,7 @@ impl Default for DisplayPlaneProperties2KHR {
         Self {
             s_type: StructureType::DISPLAY_PLANE_PROPERTIES_2_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            display_plane_properties: DisplayPlanePropertiesKHR::default(),
         }
     }
 }
@@ -2969,7 +3171,7 @@ impl Default for DisplayPowerInfoEXT {
         Self {
             s_type: StructureType::DISPLAY_POWER_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            power_state: DisplayPowerStateEXT::default(),
         }
     }
 }
@@ -2991,7 +3193,9 @@ impl Default for DisplayPresentInfoKHR {
         Self {
             s_type: StructureType::DISPLAY_PRESENT_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            src_rect: Rect2D::default(),
+            dst_rect: Rect2D::default(),
+            persistent: Bool32::default(),
         }
     }
 }
@@ -3011,7 +3215,7 @@ impl Default for DisplayProperties2KHR {
         Self {
             s_type: StructureType::DISPLAY_PROPERTIES_2_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            display_properties: DisplayPropertiesKHR::default(),
         }
     }
 }
@@ -3033,8 +3237,13 @@ impl Default for DisplayPropertiesKHR {
     #[inline]
     fn default() -> Self {
         Self {
+            display: DisplayKHR::default(),
             display_name: ptr::null(),
-            ..Default::default()
+            physical_dimensions: Extent2D::default(),
+            physical_resolution: Extent2D::default(),
+            supported_transforms: SurfaceTransformFlagsKHR::default(),
+            plane_reorder_possible: Bool32::default(),
+            persistent_content: Bool32::default(),
         }
     }
 }
@@ -3061,7 +3270,14 @@ impl Default for DisplaySurfaceCreateInfoKHR {
         Self {
             s_type: StructureType::DISPLAY_SURFACE_CREATE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            flags: DisplaySurfaceCreateFlagsKHR::default(),
+            display_mode: DisplayModeKHR::default(),
+            plane_index: u32::default(),
+            plane_stack_index: u32::default(),
+            transform: SurfaceTransformFlagsKHR::default(),
+            global_alpha: f32::default(),
+            alpha_mode: DisplayPlaneAlphaFlagsKHR::default(),
+            image_extent: Extent2D::default(),
         }
     }
 }
@@ -3120,8 +3336,8 @@ impl Default for DrmFormatModifierPropertiesListEXT {
         Self {
             s_type: StructureType::DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT,
             next: ptr::null_mut(),
+            drm_format_modifier_count: u32::default(),
             drm_format_modifier_properties: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -3141,7 +3357,7 @@ impl Default for EventCreateInfo {
         Self {
             s_type: StructureType::EVENT_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: EventCreateFlags::default(),
         }
     }
 }
@@ -3161,7 +3377,7 @@ impl Default for ExportFenceCreateInfo {
         Self {
             s_type: StructureType::EXPORT_FENCE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            handle_types: ExternalFenceHandleTypeFlags::default(),
         }
     }
 }
@@ -3184,8 +3400,8 @@ impl Default for ExportFenceWin32HandleInfoKHR {
             s_type: StructureType::EXPORT_FENCE_WIN32_HANDLE_INFO_KHR,
             next: ptr::null(),
             attributes: ptr::null(),
+            dw_access: DWORD::default(),
             name: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -3205,7 +3421,7 @@ impl Default for ExportMemoryAllocateInfo {
         Self {
             s_type: StructureType::EXPORT_MEMORY_ALLOCATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            handle_types: ExternalMemoryHandleTypeFlags::default(),
         }
     }
 }
@@ -3225,7 +3441,7 @@ impl Default for ExportMemoryAllocateInfoNV {
         Self {
             s_type: StructureType::EXPORT_MEMORY_ALLOCATE_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            handle_types: ExternalMemoryHandleTypeFlagsNV::default(),
         }
     }
 }
@@ -3248,8 +3464,8 @@ impl Default for ExportMemoryWin32HandleInfoKHR {
             s_type: StructureType::EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR,
             next: ptr::null(),
             attributes: ptr::null(),
+            dw_access: DWORD::default(),
             name: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -3271,7 +3487,7 @@ impl Default for ExportMemoryWin32HandleInfoNV {
             s_type: StructureType::EXPORT_MEMORY_WIN32_HANDLE_INFO_NV,
             next: ptr::null(),
             attributes: ptr::null(),
-            ..Default::default()
+            dw_access: DWORD::default(),
         }
     }
 }
@@ -3291,7 +3507,7 @@ impl Default for ExportSemaphoreCreateInfo {
         Self {
             s_type: StructureType::EXPORT_SEMAPHORE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            handle_types: ExternalSemaphoreHandleTypeFlags::default(),
         }
     }
 }
@@ -3314,8 +3530,8 @@ impl Default for ExportSemaphoreWin32HandleInfoKHR {
             s_type: StructureType::EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR,
             next: ptr::null(),
             attributes: ptr::null(),
+            dw_access: DWORD::default(),
             name: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -3333,7 +3549,7 @@ impl Default for ExtensionProperties {
     fn default() -> Self {
         Self {
             extension_name: [c_char::default(); MAX_EXTENSION_NAME_SIZE],
-            ..Default::default()
+            spec_version: u32::default(),
         }
     }
 }
@@ -3370,7 +3586,7 @@ impl Default for ExternalBufferProperties {
         Self {
             s_type: StructureType::EXTERNAL_BUFFER_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            external_memory_properties: ExternalMemoryProperties::default(),
         }
     }
 }
@@ -3392,7 +3608,9 @@ impl Default for ExternalFenceProperties {
         Self {
             s_type: StructureType::EXTERNAL_FENCE_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            export_from_imported_handle_types: ExternalFenceHandleTypeFlags::default(),
+            compatible_handle_types: ExternalFenceHandleTypeFlags::default(),
+            external_fence_features: ExternalFenceFeatureFlags::default(),
         }
     }
 }
@@ -3412,7 +3630,7 @@ impl Default for ExternalFormatANDROID {
         Self {
             s_type: StructureType::EXTERNAL_FORMAT_ANDROID,
             next: ptr::null_mut(),
-            ..Default::default()
+            external_format: u64::default(),
         }
     }
 }
@@ -3432,7 +3650,7 @@ impl Default for ExternalImageFormatProperties {
         Self {
             s_type: StructureType::EXTERNAL_IMAGE_FORMAT_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            external_memory_properties: ExternalMemoryProperties::default(),
         }
     }
 }
@@ -3462,7 +3680,7 @@ impl Default for ExternalMemoryBufferCreateInfo {
         Self {
             s_type: StructureType::EXTERNAL_MEMORY_BUFFER_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            handle_types: ExternalMemoryHandleTypeFlags::default(),
         }
     }
 }
@@ -3482,7 +3700,7 @@ impl Default for ExternalMemoryImageCreateInfo {
         Self {
             s_type: StructureType::EXTERNAL_MEMORY_IMAGE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            handle_types: ExternalMemoryHandleTypeFlags::default(),
         }
     }
 }
@@ -3502,7 +3720,7 @@ impl Default for ExternalMemoryImageCreateInfoNV {
         Self {
             s_type: StructureType::EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            handle_types: ExternalMemoryHandleTypeFlagsNV::default(),
         }
     }
 }
@@ -3533,7 +3751,9 @@ impl Default for ExternalSemaphoreProperties {
         Self {
             s_type: StructureType::EXTERNAL_SEMAPHORE_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            export_from_imported_handle_types: ExternalSemaphoreHandleTypeFlags::default(),
+            compatible_handle_types: ExternalSemaphoreHandleTypeFlags::default(),
+            external_semaphore_features: ExternalSemaphoreFeatureFlags::default(),
         }
     }
 }
@@ -3553,7 +3773,7 @@ impl Default for FenceCreateInfo {
         Self {
             s_type: StructureType::FENCE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: FenceCreateFlags::default(),
         }
     }
 }
@@ -3574,7 +3794,8 @@ impl Default for FenceGetFdInfoKHR {
         Self {
             s_type: StructureType::FENCE_GET_FD_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            fence: Fence::default(),
+            handle_type: ExternalFenceHandleTypeFlags::default(),
         }
     }
 }
@@ -3595,7 +3816,8 @@ impl Default for FenceGetWin32HandleInfoKHR {
         Self {
             s_type: StructureType::FENCE_GET_WIN32_HANDLE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            fence: Fence::default(),
+            handle_type: ExternalFenceHandleTypeFlags::default(),
         }
     }
 }
@@ -3616,7 +3838,8 @@ impl Default for FilterCubicImageViewImageFormatPropertiesEXT {
         Self {
             s_type: StructureType::FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            filter_cubic: Bool32::default(),
+            filter_cubic_minmax: Bool32::default(),
         }
     }
 }
@@ -3645,7 +3868,7 @@ impl Default for FormatProperties2 {
         Self {
             s_type: StructureType::FORMAT_PROPERTIES_2,
             next: ptr::null_mut(),
-            ..Default::default()
+            format_properties: FormatProperties::default(),
         }
     }
 }
@@ -3671,8 +3894,13 @@ impl Default for FramebufferAttachmentImageInfo {
         Self {
             s_type: StructureType::FRAMEBUFFER_ATTACHMENT_IMAGE_INFO,
             next: ptr::null(),
+            flags: ImageCreateFlags::default(),
+            usage: ImageUsageFlags::default(),
+            width: u32::default(),
+            height: u32::default(),
+            layer_count: u32::default(),
+            view_format_count: u32::default(),
             view_formats: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -3693,8 +3921,8 @@ impl Default for FramebufferAttachmentsCreateInfo {
         Self {
             s_type: StructureType::FRAMEBUFFER_ATTACHMENTS_CREATE_INFO,
             next: ptr::null(),
+            attachment_image_info_count: u32::default(),
             attachment_image_infos: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -3720,8 +3948,13 @@ impl Default for FramebufferCreateInfo {
         Self {
             s_type: StructureType::FRAMEBUFFER_CREATE_INFO,
             next: ptr::null(),
+            flags: FramebufferCreateFlags::default(),
+            render_pass: RenderPass::default(),
+            attachment_count: u32::default(),
             attachments: ptr::null(),
-            ..Default::default()
+            width: u32::default(),
+            height: u32::default(),
+            layers: u32::default(),
         }
     }
 }
@@ -3744,7 +3977,10 @@ impl Default for FramebufferMixedSamplesCombinationNV {
         Self {
             s_type: StructureType::FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            coverage_reduction_mode: CoverageReductionModeNV::default(),
+            rasterization_samples: SampleCountFlags::default(),
+            depth_stencil_samples: SampleCountFlags::default(),
+            color_samples: SampleCountFlags::default(),
         }
     }
 }
@@ -3776,8 +4012,19 @@ impl Default for GeneratedCommandsInfoNV {
         Self {
             s_type: StructureType::GENERATED_COMMANDS_INFO_NV,
             next: ptr::null(),
+            pipeline_bind_point: PipelineBindPoint::default(),
+            pipeline: Pipeline::default(),
+            indirect_commands_layout: IndirectCommandsLayoutNV::default(),
+            stream_count: u32::default(),
             streams: ptr::null(),
-            ..Default::default()
+            sequences_count: u32::default(),
+            preprocess_buffer: Buffer::default(),
+            preprocess_offset: DeviceSize::default(),
+            preprocess_size: DeviceSize::default(),
+            sequences_count_buffer: Buffer::default(),
+            sequences_count_offset: DeviceSize::default(),
+            sequences_index_buffer: Buffer::default(),
+            sequences_index_offset: DeviceSize::default(),
         }
     }
 }
@@ -3800,7 +4047,10 @@ impl Default for GeneratedCommandsMemoryRequirementsInfoNV {
         Self {
             s_type: StructureType::GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            pipeline_bind_point: PipelineBindPoint::default(),
+            pipeline: Pipeline::default(),
+            indirect_commands_layout: IndirectCommandsLayoutNV::default(),
+            max_sequences_count: u32::default(),
         }
     }
 }
@@ -3823,7 +4073,10 @@ impl Default for GeometryAABBNV {
         Self {
             s_type: StructureType::GEOMETRY_AABB_NV,
             next: ptr::null(),
-            ..Default::default()
+            aabb_data: Buffer::default(),
+            num_aab_bs: u32::default(),
+            stride: u32::default(),
+            offset: DeviceSize::default(),
         }
     }
 }
@@ -3853,7 +4106,9 @@ impl Default for GeometryNV {
         Self {
             s_type: StructureType::GEOMETRY_NV,
             next: ptr::null(),
-            ..Default::default()
+            geometry_type: GeometryTypeKHR::default(),
+            geometry: GeometryDataNV::default(),
+            flags: GeometryFlagsKHR::default(),
         }
     }
 }
@@ -3883,7 +4138,17 @@ impl Default for GeometryTrianglesNV {
         Self {
             s_type: StructureType::GEOMETRY_TRIANGLES_NV,
             next: ptr::null(),
-            ..Default::default()
+            vertex_data: Buffer::default(),
+            vertex_offset: DeviceSize::default(),
+            vertex_count: u32::default(),
+            vertex_stride: DeviceSize::default(),
+            vertex_format: Format::default(),
+            index_data: Buffer::default(),
+            index_offset: DeviceSize::default(),
+            index_count: u32::default(),
+            index_type: IndexType::default(),
+            transform_data: Buffer::default(),
+            transform_offset: DeviceSize::default(),
         }
     }
 }
@@ -3919,6 +4184,8 @@ impl Default for GraphicsPipelineCreateInfo {
         Self {
             s_type: StructureType::GRAPHICS_PIPELINE_CREATE_INFO,
             next: ptr::null(),
+            flags: PipelineCreateFlags::default(),
+            stage_count: u32::default(),
             stages: ptr::null(),
             vertex_input_state: ptr::null(),
             input_assembly_state: ptr::null(),
@@ -3929,7 +4196,11 @@ impl Default for GraphicsPipelineCreateInfo {
             depth_stencil_state: ptr::null(),
             color_blend_state: ptr::null(),
             dynamic_state: ptr::null(),
-            ..Default::default()
+            layout: PipelineLayout::default(),
+            render_pass: RenderPass::default(),
+            subpass: u32::default(),
+            base_pipeline_handle: Pipeline::default(),
+            base_pipeline_index: i32::default(),
         }
     }
 }
@@ -3952,9 +4223,10 @@ impl Default for GraphicsPipelineShaderGroupsCreateInfoNV {
         Self {
             s_type: StructureType::GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV,
             next: ptr::null(),
+            group_count: u32::default(),
             groups: ptr::null(),
+            pipeline_count: u32::default(),
             pipelines: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -3977,10 +4249,10 @@ impl Default for GraphicsShaderGroupCreateInfoNV {
         Self {
             s_type: StructureType::GRAPHICS_SHADER_GROUP_CREATE_INFO_NV,
             next: ptr::null(),
+            stage_count: u32::default(),
             stages: ptr::null(),
             vertex_input_state: ptr::null(),
             tessellation_state: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -4007,7 +4279,14 @@ impl Default for HdrMetadataEXT {
         Self {
             s_type: StructureType::HDR_METADATA_EXT,
             next: ptr::null(),
-            ..Default::default()
+            display_primary_red: XYColorEXT::default(),
+            display_primary_green: XYColorEXT::default(),
+            display_primary_blue: XYColorEXT::default(),
+            white_point: XYColorEXT::default(),
+            max_luminance: f32::default(),
+            min_luminance: f32::default(),
+            max_content_light_level: f32::default(),
+            max_frame_average_light_level: f32::default(),
         }
     }
 }
@@ -4027,7 +4306,7 @@ impl Default for HeadlessSurfaceCreateInfoEXT {
         Self {
             s_type: StructureType::HEADLESS_SURFACE_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            flags: HeadlessSurfaceCreateFlagsEXT::default(),
         }
     }
 }
@@ -4048,8 +4327,8 @@ impl Default for IOSSurfaceCreateInfoMVK {
         Self {
             s_type: StructureType::IOS_SURFACE_CREATE_INFO_MVK,
             next: ptr::null(),
+            flags: IOSSurfaceCreateFlagsMVK::default(),
             view: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -4082,7 +4361,10 @@ impl Default for ImageBlit2KHR {
         Self {
             s_type: StructureType::IMAGE_BLIT_2_KHR,
             next: ptr::null(),
-            ..Default::default()
+            src_subresource: ImageSubresourceLayers::default(),
+            src_offsets: [Offset3D::default(); 2],
+            dst_subresource: ImageSubresourceLayers::default(),
+            dst_offsets: [Offset3D::default(); 2],
         }
     }
 }
@@ -4117,7 +4399,11 @@ impl Default for ImageCopy2KHR {
         Self {
             s_type: StructureType::IMAGE_COPY_2_KHR,
             next: ptr::null(),
-            ..Default::default()
+            src_subresource: ImageSubresourceLayers::default(),
+            src_offset: Offset3D::default(),
+            dst_subresource: ImageSubresourceLayers::default(),
+            dst_offset: Offset3D::default(),
+            extent: Extent3D::default(),
         }
     }
 }
@@ -4149,8 +4435,19 @@ impl Default for ImageCreateInfo {
         Self {
             s_type: StructureType::IMAGE_CREATE_INFO,
             next: ptr::null(),
+            flags: ImageCreateFlags::default(),
+            image_type: ImageType::default(),
+            format: Format::default(),
+            extent: Extent3D::default(),
+            mip_levels: u32::default(),
+            array_layers: u32::default(),
+            samples: SampleCountFlags::default(),
+            tiling: ImageTiling::default(),
+            usage: ImageUsageFlags::default(),
+            sharing_mode: SharingMode::default(),
+            queue_family_index_count: u32::default(),
             queue_family_indices: ptr::null(),
-            ..Default::default()
+            initial_layout: ImageLayout::default(),
         }
     }
 }
@@ -4172,8 +4469,9 @@ impl Default for ImageDrmFormatModifierExplicitCreateInfoEXT {
         Self {
             s_type: StructureType::IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT,
             next: ptr::null(),
+            drm_format_modifier: u64::default(),
+            drm_format_modifier_plane_count: u32::default(),
             plane_layouts: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -4194,8 +4492,8 @@ impl Default for ImageDrmFormatModifierListCreateInfoEXT {
         Self {
             s_type: StructureType::IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT,
             next: ptr::null(),
+            drm_format_modifier_count: u32::default(),
             drm_format_modifiers: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -4215,7 +4513,7 @@ impl Default for ImageDrmFormatModifierPropertiesEXT {
         Self {
             s_type: StructureType::IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            drm_format_modifier: u64::default(),
         }
     }
 }
@@ -4236,8 +4534,8 @@ impl Default for ImageFormatListCreateInfo {
         Self {
             s_type: StructureType::IMAGE_FORMAT_LIST_CREATE_INFO,
             next: ptr::null(),
+            view_format_count: u32::default(),
             view_formats: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -4268,7 +4566,7 @@ impl Default for ImageFormatProperties2 {
         Self {
             s_type: StructureType::IMAGE_FORMAT_PROPERTIES_2,
             next: ptr::null_mut(),
-            ..Default::default()
+            image_format_properties: ImageFormatProperties::default(),
         }
     }
 }
@@ -4295,7 +4593,14 @@ impl Default for ImageMemoryBarrier {
         Self {
             s_type: StructureType::IMAGE_MEMORY_BARRIER,
             next: ptr::null(),
-            ..Default::default()
+            src_access_mask: AccessFlags::default(),
+            dst_access_mask: AccessFlags::default(),
+            old_layout: ImageLayout::default(),
+            new_layout: ImageLayout::default(),
+            src_queue_family_index: u32::default(),
+            dst_queue_family_index: u32::default(),
+            image: Image::default(),
+            subresource_range: ImageSubresourceRange::default(),
         }
     }
 }
@@ -4315,7 +4620,7 @@ impl Default for ImageMemoryRequirementsInfo2 {
         Self {
             s_type: StructureType::IMAGE_MEMORY_REQUIREMENTS_INFO_2,
             next: ptr::null(),
-            ..Default::default()
+            image: Image::default(),
         }
     }
 }
@@ -4336,7 +4641,8 @@ impl Default for ImagePipeSurfaceCreateInfoFUCHSIA {
         Self {
             s_type: StructureType::IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA,
             next: ptr::null(),
-            ..Default::default()
+            flags: ImagePipeSurfaceCreateFlagsFUCHSIA::default(),
+            image_pipe_handle: zx_handle_t::default(),
         }
     }
 }
@@ -4356,7 +4662,7 @@ impl Default for ImagePlaneMemoryRequirementsInfo {
         Self {
             s_type: StructureType::IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO,
             next: ptr::null(),
-            ..Default::default()
+            plane_aspect: ImageAspectFlags::default(),
         }
     }
 }
@@ -4391,7 +4697,11 @@ impl Default for ImageResolve2KHR {
         Self {
             s_type: StructureType::IMAGE_RESOLVE_2_KHR,
             next: ptr::null(),
-            ..Default::default()
+            src_subresource: ImageSubresourceLayers::default(),
+            src_offset: Offset3D::default(),
+            dst_subresource: ImageSubresourceLayers::default(),
+            dst_offset: Offset3D::default(),
+            extent: Extent3D::default(),
         }
     }
 }
@@ -4411,7 +4721,7 @@ impl Default for ImageSparseMemoryRequirementsInfo2 {
         Self {
             s_type: StructureType::IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2,
             next: ptr::null(),
-            ..Default::default()
+            image: Image::default(),
         }
     }
 }
@@ -4431,7 +4741,7 @@ impl Default for ImageStencilUsageCreateInfo {
         Self {
             s_type: StructureType::IMAGE_STENCIL_USAGE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            stencil_usage: ImageUsageFlags::default(),
         }
     }
 }
@@ -4481,7 +4791,7 @@ impl Default for ImageSwapchainCreateInfoKHR {
         Self {
             s_type: StructureType::IMAGE_SWAPCHAIN_CREATE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            swapchain: SwapchainKHR::default(),
         }
     }
 }
@@ -4501,7 +4811,7 @@ impl Default for ImageViewASTCDecodeModeEXT {
         Self {
             s_type: StructureType::IMAGE_VIEW_ASTC_DECODE_MODE_EXT,
             next: ptr::null(),
-            ..Default::default()
+            decode_mode: Format::default(),
         }
     }
 }
@@ -4522,7 +4832,8 @@ impl Default for ImageViewAddressPropertiesNVX {
         Self {
             s_type: StructureType::IMAGE_VIEW_ADDRESS_PROPERTIES_NVX,
             next: ptr::null_mut(),
-            ..Default::default()
+            device_address: DeviceAddress::default(),
+            size: DeviceSize::default(),
         }
     }
 }
@@ -4547,7 +4858,12 @@ impl Default for ImageViewCreateInfo {
         Self {
             s_type: StructureType::IMAGE_VIEW_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: ImageViewCreateFlags::default(),
+            image: Image::default(),
+            view_type: ImageViewType::default(),
+            format: Format::default(),
+            components: ComponentMapping::default(),
+            subresource_range: ImageSubresourceRange::default(),
         }
     }
 }
@@ -4569,7 +4885,9 @@ impl Default for ImageViewHandleInfoNVX {
         Self {
             s_type: StructureType::IMAGE_VIEW_HANDLE_INFO_NVX,
             next: ptr::null(),
-            ..Default::default()
+            image_view: ImageView::default(),
+            descriptor_type: DescriptorType::default(),
+            sampler: Sampler::default(),
         }
     }
 }
@@ -4589,7 +4907,7 @@ impl Default for ImageViewUsageCreateInfo {
         Self {
             s_type: StructureType::IMAGE_VIEW_USAGE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            usage: ImageUsageFlags::default(),
         }
     }
 }
@@ -4632,7 +4950,10 @@ impl Default for ImportFenceFdInfoKHR {
         Self {
             s_type: StructureType::IMPORT_FENCE_FD_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            fence: Fence::default(),
+            flags: FenceImportFlags::default(),
+            handle_type: ExternalFenceHandleTypeFlags::default(),
+            fd: c_int::default(),
         }
     }
 }
@@ -4656,9 +4977,11 @@ impl Default for ImportFenceWin32HandleInfoKHR {
         Self {
             s_type: StructureType::IMPORT_FENCE_WIN32_HANDLE_INFO_KHR,
             next: ptr::null(),
+            fence: Fence::default(),
+            flags: FenceImportFlags::default(),
+            handle_type: ExternalFenceHandleTypeFlags::default(),
             handle: ptr::null_mut(),
             name: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -4679,7 +5002,8 @@ impl Default for ImportMemoryFdInfoKHR {
         Self {
             s_type: StructureType::IMPORT_MEMORY_FD_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
+            fd: c_int::default(),
         }
     }
 }
@@ -4700,8 +5024,8 @@ impl Default for ImportMemoryHostPointerInfoEXT {
         Self {
             s_type: StructureType::IMPORT_MEMORY_HOST_POINTER_INFO_EXT,
             next: ptr::null(),
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
             host_pointer: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -4723,9 +5047,9 @@ impl Default for ImportMemoryWin32HandleInfoKHR {
         Self {
             s_type: StructureType::IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR,
             next: ptr::null(),
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
             handle: ptr::null_mut(),
             name: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -4746,8 +5070,8 @@ impl Default for ImportMemoryWin32HandleInfoNV {
         Self {
             s_type: StructureType::IMPORT_MEMORY_WIN32_HANDLE_INFO_NV,
             next: ptr::null(),
+            handle_type: ExternalMemoryHandleTypeFlagsNV::default(),
             handle: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -4770,7 +5094,10 @@ impl Default for ImportSemaphoreFdInfoKHR {
         Self {
             s_type: StructureType::IMPORT_SEMAPHORE_FD_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            semaphore: Semaphore::default(),
+            flags: SemaphoreImportFlags::default(),
+            handle_type: ExternalSemaphoreHandleTypeFlags::default(),
+            fd: c_int::default(),
         }
     }
 }
@@ -4794,9 +5121,11 @@ impl Default for ImportSemaphoreWin32HandleInfoKHR {
         Self {
             s_type: StructureType::IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR,
             next: ptr::null(),
+            semaphore: Semaphore::default(),
+            flags: SemaphoreImportFlags::default(),
+            handle_type: ExternalSemaphoreHandleTypeFlags::default(),
             handle: ptr::null_mut(),
             name: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -4821,9 +5150,12 @@ impl Default for IndirectCommandsLayoutCreateInfoNV {
         Self {
             s_type: StructureType::INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV,
             next: ptr::null(),
+            flags: IndirectCommandsLayoutUsageFlagsNV::default(),
+            pipeline_bind_point: PipelineBindPoint::default(),
+            token_count: u32::default(),
             tokens: ptr::null(),
+            stream_count: u32::default(),
             stream_strides: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -4855,9 +5187,19 @@ impl Default for IndirectCommandsLayoutTokenNV {
         Self {
             s_type: StructureType::INDIRECT_COMMANDS_LAYOUT_TOKEN_NV,
             next: ptr::null(),
+            token_type: IndirectCommandsTokenTypeNV::default(),
+            stream: u32::default(),
+            offset: u32::default(),
+            vertex_binding_unit: u32::default(),
+            vertex_dynamic_stride: Bool32::default(),
+            pushconstant_pipeline_layout: PipelineLayout::default(),
+            pushconstant_shader_stage_flags: ShaderStageFlags::default(),
+            pushconstant_offset: u32::default(),
+            pushconstant_size: u32::default(),
+            indirect_state_flags: IndirectStateFlagsNV::default(),
+            index_type_count: u32::default(),
             index_types: ptr::null(),
             index_type_values: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -4919,10 +5261,12 @@ impl Default for InstanceCreateInfo {
         Self {
             s_type: StructureType::INSTANCE_CREATE_INFO,
             next: ptr::null(),
+            flags: InstanceCreateFlags::default(),
             application_info: ptr::null(),
+            enabled_layer_count: u32::default(),
             enabled_layer_names: ptr::null(),
+            enabled_extension_count: u32::default(),
             enabled_extension_names: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -4942,8 +5286,9 @@ impl Default for LayerProperties {
     fn default() -> Self {
         Self {
             layer_name: [c_char::default(); MAX_EXTENSION_NAME_SIZE],
+            spec_version: u32::default(),
+            implementation_version: u32::default(),
             description: [c_char::default(); MAX_DESCRIPTION_SIZE],
-            ..Default::default()
         }
     }
 }
@@ -4964,8 +5309,8 @@ impl Default for MacOSSurfaceCreateInfoMVK {
         Self {
             s_type: StructureType::MACOS_SURFACE_CREATE_INFO_MVK,
             next: ptr::null(),
+            flags: MacOSSurfaceCreateFlagsMVK::default(),
             view: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -4987,7 +5332,9 @@ impl Default for MappedMemoryRange {
         Self {
             s_type: StructureType::MAPPED_MEMORY_RANGE,
             next: ptr::null(),
-            ..Default::default()
+            memory: DeviceMemory::default(),
+            offset: DeviceSize::default(),
+            size: DeviceSize::default(),
         }
     }
 }
@@ -5008,7 +5355,8 @@ impl Default for MemoryAllocateFlagsInfo {
         Self {
             s_type: StructureType::MEMORY_ALLOCATE_FLAGS_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: MemoryAllocateFlags::default(),
+            device_mask: u32::default(),
         }
     }
 }
@@ -5029,7 +5377,8 @@ impl Default for MemoryAllocateInfo {
         Self {
             s_type: StructureType::MEMORY_ALLOCATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            allocation_size: DeviceSize::default(),
+            memory_type_index: u32::default(),
         }
     }
 }
@@ -5050,7 +5399,8 @@ impl Default for MemoryBarrier {
         Self {
             s_type: StructureType::MEMORY_BARRIER,
             next: ptr::null(),
-            ..Default::default()
+            src_access_mask: AccessFlags::default(),
+            dst_access_mask: AccessFlags::default(),
         }
     }
 }
@@ -5071,7 +5421,8 @@ impl Default for MemoryDedicatedAllocateInfo {
         Self {
             s_type: StructureType::MEMORY_DEDICATED_ALLOCATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            image: Image::default(),
+            buffer: Buffer::default(),
         }
     }
 }
@@ -5092,7 +5443,8 @@ impl Default for MemoryDedicatedRequirements {
         Self {
             s_type: StructureType::MEMORY_DEDICATED_REQUIREMENTS,
             next: ptr::null_mut(),
-            ..Default::default()
+            prefers_dedicated_allocation: Bool32::default(),
+            requires_dedicated_allocation: Bool32::default(),
         }
     }
 }
@@ -5112,7 +5464,7 @@ impl Default for MemoryFdPropertiesKHR {
         Self {
             s_type: StructureType::MEMORY_FD_PROPERTIES_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            memory_type_bits: u32::default(),
         }
     }
 }
@@ -5132,7 +5484,7 @@ impl Default for MemoryGetAndroidHardwareBufferInfoANDROID {
         Self {
             s_type: StructureType::MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID,
             next: ptr::null(),
-            ..Default::default()
+            memory: DeviceMemory::default(),
         }
     }
 }
@@ -5153,7 +5505,8 @@ impl Default for MemoryGetFdInfoKHR {
         Self {
             s_type: StructureType::MEMORY_GET_FD_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            memory: DeviceMemory::default(),
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
         }
     }
 }
@@ -5174,7 +5527,8 @@ impl Default for MemoryGetWin32HandleInfoKHR {
         Self {
             s_type: StructureType::MEMORY_GET_WIN32_HANDLE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            memory: DeviceMemory::default(),
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
         }
     }
 }
@@ -5202,7 +5556,7 @@ impl Default for MemoryHostPointerPropertiesEXT {
         Self {
             s_type: StructureType::MEMORY_HOST_POINTER_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            memory_type_bits: u32::default(),
         }
     }
 }
@@ -5222,7 +5576,7 @@ impl Default for MemoryOpaqueCaptureAddressAllocateInfo {
         Self {
             s_type: StructureType::MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            opaque_capture_address: u64::default(),
         }
     }
 }
@@ -5242,7 +5596,7 @@ impl Default for MemoryPriorityAllocateInfoEXT {
         Self {
             s_type: StructureType::MEMORY_PRIORITY_ALLOCATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            priority: f32::default(),
         }
     }
 }
@@ -5271,7 +5625,7 @@ impl Default for MemoryRequirements2 {
         Self {
             s_type: StructureType::MEMORY_REQUIREMENTS_2,
             next: ptr::null_mut(),
-            ..Default::default()
+            memory_requirements: MemoryRequirements::default(),
         }
     }
 }
@@ -5299,7 +5653,7 @@ impl Default for MemoryWin32HandlePropertiesKHR {
         Self {
             s_type: StructureType::MEMORY_WIN32_HANDLE_PROPERTIES_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            memory_type_bits: u32::default(),
         }
     }
 }
@@ -5320,8 +5674,8 @@ impl Default for MetalSurfaceCreateInfoEXT {
         Self {
             s_type: StructureType::METAL_SURFACE_CREATE_INFO_EXT,
             next: ptr::null(),
+            flags: MetalSurfaceCreateFlagsEXT::default(),
             layer: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -5341,7 +5695,7 @@ impl Default for MultisamplePropertiesEXT {
         Self {
             s_type: StructureType::MULTISAMPLE_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_sample_location_grid_size: Extent2D::default(),
         }
     }
 }
@@ -5366,7 +5720,10 @@ impl Default for NativeBufferANDROID {
             s_type: StructureType::NATIVE_BUFFER_ANDROID,
             next: ptr::null(),
             handle: ptr::null(),
-            ..Default::default()
+            stride: c_int::default(),
+            format: c_int::default(),
+            usage: c_int::default(),
+            usage2: NativeBufferUsage2ANDROID::default(),
         }
     }
 }
@@ -5422,7 +5779,7 @@ impl Default for PerformanceConfigurationAcquireInfoINTEL {
         Self {
             s_type: StructureType::PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL,
             next: ptr::null(),
-            ..Default::default()
+            type_: PerformanceConfigurationTypeINTEL::default(),
         }
     }
 }
@@ -5445,10 +5802,10 @@ impl Default for PerformanceCounterDescriptionKHR {
         Self {
             s_type: StructureType::PERFORMANCE_COUNTER_DESCRIPTION_KHR,
             next: ptr::null(),
+            flags: PerformanceCounterDescriptionFlagsKHR::default(),
             name: [c_char::default(); MAX_DESCRIPTION_SIZE],
             category: [c_char::default(); MAX_DESCRIPTION_SIZE],
             description: [c_char::default(); MAX_DESCRIPTION_SIZE],
-            ..Default::default()
         }
     }
 }
@@ -5471,7 +5828,10 @@ impl Default for PerformanceCounterKHR {
         Self {
             s_type: StructureType::PERFORMANCE_COUNTER_KHR,
             next: ptr::null(),
-            ..Default::default()
+            unit: PerformanceCounterUnitKHR::default(),
+            scope: PerformanceCounterScopeKHR::default(),
+            storage: PerformanceCounterStorageKHR::default(),
+            uuid: [u8::default(); UUID_SIZE],
         }
     }
 }
@@ -5491,7 +5851,7 @@ impl Default for PerformanceMarkerInfoINTEL {
         Self {
             s_type: StructureType::PERFORMANCE_MARKER_INFO_INTEL,
             next: ptr::null(),
-            ..Default::default()
+            marker: u64::default(),
         }
     }
 }
@@ -5513,7 +5873,9 @@ impl Default for PerformanceOverrideInfoINTEL {
         Self {
             s_type: StructureType::PERFORMANCE_OVERRIDE_INFO_INTEL,
             next: ptr::null(),
-            ..Default::default()
+            type_: PerformanceOverrideTypeINTEL::default(),
+            enable: Bool32::default(),
+            parameter: u64::default(),
         }
     }
 }
@@ -5533,7 +5895,7 @@ impl Default for PerformanceQuerySubmitInfoKHR {
         Self {
             s_type: StructureType::PERFORMANCE_QUERY_SUBMIT_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            counter_pass_index: u32::default(),
         }
     }
 }
@@ -5553,7 +5915,7 @@ impl Default for PerformanceStreamMarkerInfoINTEL {
         Self {
             s_type: StructureType::PERFORMANCE_STREAM_MARKER_INFO_INTEL,
             next: ptr::null(),
-            ..Default::default()
+            marker: u32::default(),
         }
     }
 }
@@ -5584,7 +5946,10 @@ impl Default for PhysicalDevice16BitStorageFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            storage_buffer_16bit_access: Bool32::default(),
+            uniform_and_storage_buffer_16bit_access: Bool32::default(),
+            storage_push_constant16: Bool32::default(),
+            storage_input_output16: Bool32::default(),
         }
     }
 }
@@ -5605,7 +5970,8 @@ impl Default for PhysicalDevice4444FormatsFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            format_a4_r4_g4_b4: Bool32::default(),
+            format_a4_b4_g4_r4: Bool32::default(),
         }
     }
 }
@@ -5627,7 +5993,9 @@ impl Default for PhysicalDevice8BitStorageFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            storage_buffer_8bit_access: Bool32::default(),
+            uniform_and_storage_buffer_8bit_access: Bool32::default(),
+            storage_push_constant8: Bool32::default(),
         }
     }
 }
@@ -5647,7 +6015,7 @@ impl Default for PhysicalDeviceASTCDecodeFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            decode_mode_shared_exponent: Bool32::default(),
         }
     }
 }
@@ -5667,7 +6035,7 @@ impl Default for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            advanced_blend_coherent_operations: Bool32::default(),
         }
     }
 }
@@ -5692,7 +6060,12 @@ impl Default for PhysicalDeviceBlendOperationAdvancedPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            advanced_blend_max_color_attachments: u32::default(),
+            advanced_blend_independent_blend: Bool32::default(),
+            advanced_blend_non_premultiplied_src_color: Bool32::default(),
+            advanced_blend_non_premultiplied_dst_color: Bool32::default(),
+            advanced_blend_correlated_overlap: Bool32::default(),
+            advanced_blend_all_operations: Bool32::default(),
         }
     }
 }
@@ -5714,7 +6087,9 @@ impl Default for PhysicalDeviceBufferDeviceAddressFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            buffer_device_address: Bool32::default(),
+            buffer_device_address_capture_replay: Bool32::default(),
+            buffer_device_address_multi_device: Bool32::default(),
         }
     }
 }
@@ -5736,7 +6111,9 @@ impl Default for PhysicalDeviceBufferDeviceAddressFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            buffer_device_address: Bool32::default(),
+            buffer_device_address_capture_replay: Bool32::default(),
+            buffer_device_address_multi_device: Bool32::default(),
         }
     }
 }
@@ -5756,7 +6133,7 @@ impl Default for PhysicalDeviceCoherentMemoryFeaturesAMD {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD,
             next: ptr::null_mut(),
-            ..Default::default()
+            device_coherent_memory: Bool32::default(),
         }
     }
 }
@@ -5777,7 +6154,8 @@ impl Default for PhysicalDeviceComputeShaderDerivativesFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            compute_derivative_group_quads: Bool32::default(),
+            compute_derivative_group_linear: Bool32::default(),
         }
     }
 }
@@ -5798,7 +6176,8 @@ impl Default for PhysicalDeviceConditionalRenderingFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            conditional_rendering: Bool32::default(),
+            inherited_conditional_rendering: Bool32::default(),
         }
     }
 }
@@ -5826,7 +6205,15 @@ impl Default for PhysicalDeviceConservativeRasterizationPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            primitive_overestimation_size: f32::default(),
+            max_extra_primitive_overestimation_size: f32::default(),
+            extra_primitive_overestimation_size_granularity: f32::default(),
+            primitive_underestimation: Bool32::default(),
+            conservative_point_and_line_rasterization: Bool32::default(),
+            degenerate_triangles_rasterized: Bool32::default(),
+            degenerate_lines_rasterized: Bool32::default(),
+            fully_covered_fragment_shader_input_variable: Bool32::default(),
+            conservative_rasterization_post_depth_coverage: Bool32::default(),
         }
     }
 }
@@ -5847,7 +6234,8 @@ impl Default for PhysicalDeviceCooperativeMatrixFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            cooperative_matrix: Bool32::default(),
+            cooperative_matrix_robust_buffer_access: Bool32::default(),
         }
     }
 }
@@ -5867,7 +6255,7 @@ impl Default for PhysicalDeviceCooperativeMatrixPropertiesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            cooperative_matrix_supported_stages: ShaderStageFlags::default(),
         }
     }
 }
@@ -5887,7 +6275,7 @@ impl Default for PhysicalDeviceCornerSampledImageFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            corner_sampled_image: Bool32::default(),
         }
     }
 }
@@ -5907,7 +6295,7 @@ impl Default for PhysicalDeviceCoverageReductionModeFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            coverage_reduction_mode: Bool32::default(),
         }
     }
 }
@@ -5928,7 +6316,8 @@ impl Default for PhysicalDeviceCustomBorderColorFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            custom_border_colors: Bool32::default(),
+            custom_border_color_without_format: Bool32::default(),
         }
     }
 }
@@ -5948,7 +6337,7 @@ impl Default for PhysicalDeviceCustomBorderColorPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_custom_border_color_samplers: u32::default(),
         }
     }
 }
@@ -5968,7 +6357,7 @@ impl Default for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            dedicated_allocation_image_aliasing: Bool32::default(),
         }
     }
 }
@@ -5988,7 +6377,7 @@ impl Default for PhysicalDeviceDepthClipEnableFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            depth_clip_enable: Bool32::default(),
         }
     }
 }
@@ -6011,7 +6400,10 @@ impl Default for PhysicalDeviceDepthStencilResolveProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            supported_depth_resolve_modes: ResolveModeFlags::default(),
+            supported_stencil_resolve_modes: ResolveModeFlags::default(),
+            independent_resolve_none: Bool32::default(),
+            independent_resolve: Bool32::default(),
         }
     }
 }
@@ -6050,7 +6442,26 @@ impl Default for PhysicalDeviceDescriptorIndexingFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_input_attachment_array_dynamic_indexing: Bool32::default(),
+            shader_uniform_texel_buffer_array_dynamic_indexing: Bool32::default(),
+            shader_storage_texel_buffer_array_dynamic_indexing: Bool32::default(),
+            shader_uniform_buffer_array_non_uniform_indexing: Bool32::default(),
+            shader_sampled_image_array_non_uniform_indexing: Bool32::default(),
+            shader_storage_buffer_array_non_uniform_indexing: Bool32::default(),
+            shader_storage_image_array_non_uniform_indexing: Bool32::default(),
+            shader_input_attachment_array_non_uniform_indexing: Bool32::default(),
+            shader_uniform_texel_buffer_array_non_uniform_indexing: Bool32::default(),
+            shader_storage_texel_buffer_array_non_uniform_indexing: Bool32::default(),
+            descriptor_binding_uniform_buffer_update_after_bind: Bool32::default(),
+            descriptor_binding_sampled_image_update_after_bind: Bool32::default(),
+            descriptor_binding_storage_image_update_after_bind: Bool32::default(),
+            descriptor_binding_storage_buffer_update_after_bind: Bool32::default(),
+            descriptor_binding_uniform_texel_buffer_update_after_bind: Bool32::default(),
+            descriptor_binding_storage_texel_buffer_update_after_bind: Bool32::default(),
+            descriptor_binding_update_unused_while_pending: Bool32::default(),
+            descriptor_binding_partially_bound: Bool32::default(),
+            descriptor_binding_variable_descriptor_count: Bool32::default(),
+            runtime_descriptor_array: Bool32::default(),
         }
     }
 }
@@ -6092,7 +6503,29 @@ impl Default for PhysicalDeviceDescriptorIndexingProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_update_after_bind_descriptors_in_all_pools: u32::default(),
+            shader_uniform_buffer_array_non_uniform_indexing_native: Bool32::default(),
+            shader_sampled_image_array_non_uniform_indexing_native: Bool32::default(),
+            shader_storage_buffer_array_non_uniform_indexing_native: Bool32::default(),
+            shader_storage_image_array_non_uniform_indexing_native: Bool32::default(),
+            shader_input_attachment_array_non_uniform_indexing_native: Bool32::default(),
+            robust_buffer_access_update_after_bind: Bool32::default(),
+            quad_divergent_implicit_lod: Bool32::default(),
+            max_per_stage_descriptor_update_after_bind_samplers: u32::default(),
+            max_per_stage_descriptor_update_after_bind_uniform_buffers: u32::default(),
+            max_per_stage_descriptor_update_after_bind_storage_buffers: u32::default(),
+            max_per_stage_descriptor_update_after_bind_sampled_images: u32::default(),
+            max_per_stage_descriptor_update_after_bind_storage_images: u32::default(),
+            max_per_stage_descriptor_update_after_bind_input_attachments: u32::default(),
+            max_per_stage_update_after_bind_resources: u32::default(),
+            max_descriptor_set_update_after_bind_samplers: u32::default(),
+            max_descriptor_set_update_after_bind_uniform_buffers: u32::default(),
+            max_descriptor_set_update_after_bind_uniform_buffers_dynamic: u32::default(),
+            max_descriptor_set_update_after_bind_storage_buffers: u32::default(),
+            max_descriptor_set_update_after_bind_storage_buffers_dynamic: u32::default(),
+            max_descriptor_set_update_after_bind_sampled_images: u32::default(),
+            max_descriptor_set_update_after_bind_storage_images: u32::default(),
+            max_descriptor_set_update_after_bind_input_attachments: u32::default(),
         }
     }
 }
@@ -6112,7 +6545,7 @@ impl Default for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            device_generated_commands: Bool32::default(),
         }
     }
 }
@@ -6140,7 +6573,15 @@ impl Default for PhysicalDeviceDeviceGeneratedCommandsPropertiesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_graphics_shader_group_count: u32::default(),
+            max_indirect_sequence_count: u32::default(),
+            max_indirect_commands_token_count: u32::default(),
+            max_indirect_commands_stream_count: u32::default(),
+            max_indirect_commands_token_offset: u32::default(),
+            max_indirect_commands_stream_stride: u32::default(),
+            min_sequences_count_buffer_offset_alignment: u32::default(),
+            min_sequences_index_buffer_offset_alignment: u32::default(),
+            min_indirect_commands_buffer_offset_alignment: u32::default(),
         }
     }
 }
@@ -6160,7 +6601,7 @@ impl Default for PhysicalDeviceDeviceMemoryReportFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            device_memory_report: Bool32::default(),
         }
     }
 }
@@ -6180,7 +6621,7 @@ impl Default for PhysicalDeviceDiagnosticsConfigFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            diagnostics_config: Bool32::default(),
         }
     }
 }
@@ -6200,7 +6641,7 @@ impl Default for PhysicalDeviceDiscardRectanglePropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_discard_rectangles: u32::default(),
         }
     }
 }
@@ -6223,9 +6664,10 @@ impl Default for PhysicalDeviceDriverProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_DRIVER_PROPERTIES,
             next: ptr::null_mut(),
+            driver_id: DriverId::default(),
             driver_name: [c_char::default(); MAX_DRIVER_NAME_SIZE],
             driver_info: [c_char::default(); MAX_DRIVER_INFO_SIZE],
-            ..Default::default()
+            conformance_version: ConformanceVersion::default(),
         }
     }
 }
@@ -6245,7 +6687,7 @@ impl Default for PhysicalDeviceExclusiveScissorFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            exclusive_scissor: Bool32::default(),
         }
     }
 }
@@ -6265,7 +6707,7 @@ impl Default for PhysicalDeviceExtendedDynamicStateFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            extended_dynamic_state: Bool32::default(),
         }
     }
 }
@@ -6287,7 +6729,9 @@ impl Default for PhysicalDeviceExternalBufferInfo {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: BufferCreateFlags::default(),
+            usage: BufferUsageFlags::default(),
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
         }
     }
 }
@@ -6307,7 +6751,7 @@ impl Default for PhysicalDeviceExternalFenceInfo {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            handle_type: ExternalFenceHandleTypeFlags::default(),
         }
     }
 }
@@ -6327,7 +6771,7 @@ impl Default for PhysicalDeviceExternalImageFormatInfo {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO,
             next: ptr::null(),
-            ..Default::default()
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
         }
     }
 }
@@ -6347,7 +6791,7 @@ impl Default for PhysicalDeviceExternalMemoryHostPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            min_imported_host_pointer_alignment: DeviceSize::default(),
         }
     }
 }
@@ -6367,7 +6811,7 @@ impl Default for PhysicalDeviceExternalSemaphoreInfo {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            handle_type: ExternalSemaphoreHandleTypeFlags::default(),
         }
     }
 }
@@ -6448,7 +6892,7 @@ impl Default for PhysicalDeviceFeatures2 {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_FEATURES_2,
             next: ptr::null_mut(),
-            ..Default::default()
+            features: PhysicalDeviceFeatures::default(),
         }
     }
 }
@@ -6484,7 +6928,23 @@ impl Default for PhysicalDeviceFloatControlsProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            denorm_behavior_independence: ShaderFloatControlsIndependence::default(),
+            rounding_mode_independence: ShaderFloatControlsIndependence::default(),
+            shader_signed_zero_inf_nan_preserve_float16: Bool32::default(),
+            shader_signed_zero_inf_nan_preserve_float32: Bool32::default(),
+            shader_signed_zero_inf_nan_preserve_float64: Bool32::default(),
+            shader_denorm_preserve_float16: Bool32::default(),
+            shader_denorm_preserve_float32: Bool32::default(),
+            shader_denorm_preserve_float64: Bool32::default(),
+            shader_denorm_flush_to_zero_float16: Bool32::default(),
+            shader_denorm_flush_to_zero_float32: Bool32::default(),
+            shader_denorm_flush_to_zero_float64: Bool32::default(),
+            shader_rounding_mode_rte_float16: Bool32::default(),
+            shader_rounding_mode_rte_float32: Bool32::default(),
+            shader_rounding_mode_rte_float64: Bool32::default(),
+            shader_rounding_mode_rtz_float16: Bool32::default(),
+            shader_rounding_mode_rtz_float32: Bool32::default(),
+            shader_rounding_mode_rtz_float64: Bool32::default(),
         }
     }
 }
@@ -6504,7 +6964,7 @@ impl Default for PhysicalDeviceFragmentDensityMap2FeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            fragment_density_map_deferred: Bool32::default(),
         }
     }
 }
@@ -6527,7 +6987,10 @@ impl Default for PhysicalDeviceFragmentDensityMap2PropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            subsampled_loads: Bool32::default(),
+            subsampled_coarse_reconstruction_early_access: Bool32::default(),
+            max_subsampled_array_layers: u32::default(),
+            max_descriptor_set_subsampled_samplers: u32::default(),
         }
     }
 }
@@ -6549,7 +7012,9 @@ impl Default for PhysicalDeviceFragmentDensityMapFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            fragment_density_map: Bool32::default(),
+            fragment_density_map_dynamic: Bool32::default(),
+            fragment_density_map_non_subsampled_images: Bool32::default(),
         }
     }
 }
@@ -6571,7 +7036,9 @@ impl Default for PhysicalDeviceFragmentDensityMapPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            min_fragment_density_texel_size: Extent2D::default(),
+            max_fragment_density_texel_size: Extent2D::default(),
+            fragment_density_invocations: Bool32::default(),
         }
     }
 }
@@ -6591,7 +7058,7 @@ impl Default for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            fragment_shader_barycentric: Bool32::default(),
         }
     }
 }
@@ -6613,7 +7080,9 @@ impl Default for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            fragment_shader_sample_interlock: Bool32::default(),
+            fragment_shader_pixel_interlock: Bool32::default(),
+            fragment_shader_shading_rate_interlock: Bool32::default(),
         }
     }
 }
@@ -6635,7 +7104,9 @@ impl Default for PhysicalDeviceGroupProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_GROUP_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            physical_device_count: u32::default(),
+            physical_devices: [PhysicalDevice::default(); MAX_DEVICE_GROUP_SIZE],
+            subset_allocation: Bool32::default(),
         }
     }
 }
@@ -6655,7 +7126,7 @@ impl Default for PhysicalDeviceHostQueryResetFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            host_query_reset: Bool32::default(),
         }
     }
 }
@@ -6679,7 +7150,11 @@ impl Default for PhysicalDeviceIDProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_ID_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            device_uuid: [u8::default(); UUID_SIZE],
+            driver_uuid: [u8::default(); UUID_SIZE],
+            device_luid: [u8::default(); LUID_SIZE],
+            device_node_mask: u32::default(),
+            device_luid_valid: Bool32::default(),
         }
     }
 }
@@ -6702,8 +7177,10 @@ impl Default for PhysicalDeviceImageDrmFormatModifierInfoEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT,
             next: ptr::null(),
+            drm_format_modifier: u64::default(),
+            sharing_mode: SharingMode::default(),
+            queue_family_index_count: u32::default(),
             queue_family_indices: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -6727,7 +7204,11 @@ impl Default for PhysicalDeviceImageFormatInfo2 {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2,
             next: ptr::null(),
-            ..Default::default()
+            format: Format::default(),
+            type_: ImageType::default(),
+            tiling: ImageTiling::default(),
+            usage: ImageUsageFlags::default(),
+            flags: ImageCreateFlags::default(),
         }
     }
 }
@@ -6747,7 +7228,7 @@ impl Default for PhysicalDeviceImageRobustnessFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            robust_image_access: Bool32::default(),
         }
     }
 }
@@ -6767,7 +7248,7 @@ impl Default for PhysicalDeviceImageViewImageFormatInfoEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            image_view_type: ImageViewType::default(),
         }
     }
 }
@@ -6787,7 +7268,7 @@ impl Default for PhysicalDeviceImagelessFramebufferFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            imageless_framebuffer: Bool32::default(),
         }
     }
 }
@@ -6807,7 +7288,7 @@ impl Default for PhysicalDeviceIndexTypeUint8FeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            index_type_uint8: Bool32::default(),
         }
     }
 }
@@ -6828,7 +7309,8 @@ impl Default for PhysicalDeviceInlineUniformBlockFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            inline_uniform_block: Bool32::default(),
+            descriptor_binding_inline_uniform_block_update_after_bind: Bool32::default(),
         }
     }
 }
@@ -6852,7 +7334,11 @@ impl Default for PhysicalDeviceInlineUniformBlockPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_inline_uniform_block_size: u32::default(),
+            max_per_stage_descriptor_inline_uniform_blocks: u32::default(),
+            max_per_stage_descriptor_update_after_bind_inline_uniform_blocks: u32::default(),
+            max_descriptor_set_inline_uniform_blocks: u32::default(),
+            max_descriptor_set_update_after_bind_inline_uniform_blocks: u32::default(),
         }
     }
 }
@@ -6989,7 +7475,12 @@ impl Default for PhysicalDeviceLineRasterizationFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            rectangular_lines: Bool32::default(),
+            bresenham_lines: Bool32::default(),
+            smooth_lines: Bool32::default(),
+            stippled_rectangular_lines: Bool32::default(),
+            stippled_bresenham_lines: Bool32::default(),
+            stippled_smooth_lines: Bool32::default(),
         }
     }
 }
@@ -7009,7 +7500,7 @@ impl Default for PhysicalDeviceLineRasterizationPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            line_sub_pixel_precision_bits: u32::default(),
         }
     }
 }
@@ -7030,7 +7521,8 @@ impl Default for PhysicalDeviceMaintenance3Properties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_per_set_descriptors: u32::default(),
+            max_memory_allocation_size: DeviceSize::default(),
         }
     }
 }
@@ -7051,7 +7543,8 @@ impl Default for PhysicalDeviceMemoryBudgetPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            heap_budget: [DeviceSize::default(); MAX_MEMORY_HEAPS],
+            heap_usage: [DeviceSize::default(); MAX_MEMORY_HEAPS],
         }
     }
 }
@@ -7071,7 +7564,7 @@ impl Default for PhysicalDeviceMemoryPriorityFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            memory_priority: Bool32::default(),
         }
     }
 }
@@ -7101,7 +7594,7 @@ impl Default for PhysicalDeviceMemoryProperties2 {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_MEMORY_PROPERTIES_2,
             next: ptr::null_mut(),
-            ..Default::default()
+            memory_properties: PhysicalDeviceMemoryProperties::default(),
         }
     }
 }
@@ -7122,7 +7615,8 @@ impl Default for PhysicalDeviceMeshShaderFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            task_shader: Bool32::default(),
+            mesh_shader: Bool32::default(),
         }
     }
 }
@@ -7154,7 +7648,19 @@ impl Default for PhysicalDeviceMeshShaderPropertiesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_draw_mesh_tasks_count: u32::default(),
+            max_task_work_group_invocations: u32::default(),
+            max_task_work_group_size: [u32::default(); 3],
+            max_task_total_memory_size: u32::default(),
+            max_task_output_count: u32::default(),
+            max_mesh_work_group_invocations: u32::default(),
+            max_mesh_work_group_size: [u32::default(); 3],
+            max_mesh_total_memory_size: u32::default(),
+            max_mesh_output_vertices: u32::default(),
+            max_mesh_output_primitives: u32::default(),
+            max_mesh_multiview_view_count: u32::default(),
+            mesh_output_per_vertex_granularity: u32::default(),
+            mesh_output_per_primitive_granularity: u32::default(),
         }
     }
 }
@@ -7176,7 +7682,9 @@ impl Default for PhysicalDeviceMultiviewFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_MULTIVIEW_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            multiview: Bool32::default(),
+            multiview_geometry_shader: Bool32::default(),
+            multiview_tessellation_shader: Bool32::default(),
         }
     }
 }
@@ -7196,7 +7704,7 @@ impl Default for PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX,
             next: ptr::null_mut(),
-            ..Default::default()
+            per_view_position_all_components: Bool32::default(),
         }
     }
 }
@@ -7217,7 +7725,8 @@ impl Default for PhysicalDeviceMultiviewProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_multiview_view_count: u32::default(),
+            max_multiview_instance_index: u32::default(),
         }
     }
 }
@@ -7240,7 +7749,10 @@ impl Default for PhysicalDevicePCIBusInfoPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            pci_domain: u32::default(),
+            pci_bus: u32::default(),
+            pci_device: u32::default(),
+            pci_function: u32::default(),
         }
     }
 }
@@ -7261,7 +7773,8 @@ impl Default for PhysicalDevicePerformanceQueryFeaturesKHR {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            performance_counter_query_pools: Bool32::default(),
+            performance_counter_multiple_query_pools: Bool32::default(),
         }
     }
 }
@@ -7281,7 +7794,7 @@ impl Default for PhysicalDevicePerformanceQueryPropertiesKHR {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            allow_command_buffer_query_copies: Bool32::default(),
         }
     }
 }
@@ -7301,7 +7814,7 @@ impl Default for PhysicalDevicePipelineCreationCacheControlFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            pipeline_creation_cache_control: Bool32::default(),
         }
     }
 }
@@ -7321,7 +7834,7 @@ impl Default for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            pipeline_executable_info: Bool32::default(),
         }
     }
 }
@@ -7341,7 +7854,7 @@ impl Default for PhysicalDevicePointClippingProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            point_clipping_behavior: PointClippingBehavior::default(),
         }
     }
 }
@@ -7375,7 +7888,21 @@ impl Default for PhysicalDevicePortabilitySubsetFeaturesKHR {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            constant_alpha_color_blend_factors: Bool32::default(),
+            events: Bool32::default(),
+            image_view_format_reinterpretation: Bool32::default(),
+            image_view_format_swizzle: Bool32::default(),
+            image_view_2d_on_3d_image: Bool32::default(),
+            multisample_array_image: Bool32::default(),
+            mutable_comparison_samplers: Bool32::default(),
+            point_polygons: Bool32::default(),
+            sampler_mip_lod_bias: Bool32::default(),
+            separate_stencil_mask_ref: Bool32::default(),
+            shader_sample_rate_interpolation_functions: Bool32::default(),
+            tessellation_isolines: Bool32::default(),
+            tessellation_point_mode: Bool32::default(),
+            triangle_fans: Bool32::default(),
+            vertex_attribute_access_beyond_stride: Bool32::default(),
         }
     }
 }
@@ -7395,7 +7922,7 @@ impl Default for PhysicalDevicePortabilitySubsetPropertiesKHR {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            min_vertex_input_binding_stride_alignment: u32::default(),
         }
     }
 }
@@ -7415,7 +7942,7 @@ impl Default for PhysicalDevicePresentationPropertiesANDROID {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PRESENTATION_PROPERTIES_ANDROID,
             next: ptr::null(),
-            ..Default::default()
+            shared_image: Bool32::default(),
         }
     }
 }
@@ -7435,7 +7962,7 @@ impl Default for PhysicalDevicePrivateDataFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            private_data: Bool32::default(),
         }
     }
 }
@@ -7459,8 +7986,15 @@ impl Default for PhysicalDeviceProperties {
     #[inline]
     fn default() -> Self {
         Self {
+            api_version: u32::default(),
+            driver_version: u32::default(),
+            vendor_id: u32::default(),
+            device_id: u32::default(),
+            device_type: PhysicalDeviceType::default(),
             device_name: [c_char::default(); MAX_PHYSICAL_DEVICE_NAME_SIZE],
-            ..Default::default()
+            pipeline_cache_uuid: [u8::default(); UUID_SIZE],
+            limits: PhysicalDeviceLimits::default(),
+            sparse_properties: PhysicalDeviceSparseProperties::default(),
         }
     }
 }
@@ -7480,7 +8014,7 @@ impl Default for PhysicalDeviceProperties2 {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PROPERTIES_2,
             next: ptr::null_mut(),
-            ..Default::default()
+            properties: PhysicalDeviceProperties::default(),
         }
     }
 }
@@ -7500,7 +8034,7 @@ impl Default for PhysicalDeviceProtectedMemoryFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            protected_memory: Bool32::default(),
         }
     }
 }
@@ -7520,7 +8054,7 @@ impl Default for PhysicalDeviceProtectedMemoryProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            protected_no_fault: Bool32::default(),
         }
     }
 }
@@ -7540,7 +8074,7 @@ impl Default for PhysicalDevicePushDescriptorPropertiesKHR {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_push_descriptors: u32::default(),
         }
     }
 }
@@ -7568,7 +8102,15 @@ impl Default for PhysicalDeviceRayTracingFeaturesKHR {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_FEATURES_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            ray_tracing: Bool32::default(),
+            ray_tracing_shader_group_handle_capture_replay: Bool32::default(),
+            ray_tracing_shader_group_handle_capture_replay_mixed: Bool32::default(),
+            ray_tracing_acceleration_structure_capture_replay: Bool32::default(),
+            ray_tracing_indirect_trace_rays: Bool32::default(),
+            ray_tracing_indirect_acceleration_structure_build: Bool32::default(),
+            ray_tracing_host_acceleration_structure_commands: Bool32::default(),
+            ray_query: Bool32::default(),
+            ray_tracing_primitive_culling: Bool32::default(),
         }
     }
 }
@@ -7596,7 +8138,15 @@ impl Default for PhysicalDeviceRayTracingPropertiesKHR {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_group_handle_size: u32::default(),
+            max_recursion_depth: u32::default(),
+            max_shader_group_stride: u32::default(),
+            shader_group_base_alignment: u32::default(),
+            max_geometry_count: u64::default(),
+            max_instance_count: u64::default(),
+            max_primitive_count: u64::default(),
+            max_descriptor_set_acceleration_structures: u32::default(),
+            shader_group_handle_capture_replay_size: u32::default(),
         }
     }
 }
@@ -7623,7 +8173,14 @@ impl Default for PhysicalDeviceRayTracingPropertiesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_group_handle_size: u32::default(),
+            max_recursion_depth: u32::default(),
+            max_shader_group_stride: u32::default(),
+            shader_group_base_alignment: u32::default(),
+            max_geometry_count: u64::default(),
+            max_instance_count: u64::default(),
+            max_triangle_count: u64::default(),
+            max_descriptor_set_acceleration_structures: u32::default(),
         }
     }
 }
@@ -7643,7 +8200,7 @@ impl Default for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            representative_fragment_test: Bool32::default(),
         }
     }
 }
@@ -7665,7 +8222,9 @@ impl Default for PhysicalDeviceRobustness2FeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            robust_buffer_access2: Bool32::default(),
+            robust_image_access2: Bool32::default(),
+            null_descriptor: Bool32::default(),
         }
     }
 }
@@ -7686,7 +8245,8 @@ impl Default for PhysicalDeviceRobustness2PropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            robust_storage_buffer_access_size_alignment: DeviceSize::default(),
+            robust_uniform_buffer_access_size_alignment: DeviceSize::default(),
         }
     }
 }
@@ -7710,7 +8270,11 @@ impl Default for PhysicalDeviceSampleLocationsPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            sample_location_sample_counts: SampleCountFlags::default(),
+            max_sample_location_grid_size: Extent2D::default(),
+            sample_location_coordinate_range: [f32::default(); 2],
+            sample_location_sub_pixel_bits: u32::default(),
+            variable_sample_locations: Bool32::default(),
         }
     }
 }
@@ -7731,7 +8295,8 @@ impl Default for PhysicalDeviceSamplerFilterMinmaxProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            filter_minmax_single_component_formats: Bool32::default(),
+            filter_minmax_image_component_mapping: Bool32::default(),
         }
     }
 }
@@ -7751,7 +8316,7 @@ impl Default for PhysicalDeviceSamplerYcbcrConversionFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            sampler_ycbcr_conversion: Bool32::default(),
         }
     }
 }
@@ -7771,7 +8336,7 @@ impl Default for PhysicalDeviceScalarBlockLayoutFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            scalar_block_layout: Bool32::default(),
         }
     }
 }
@@ -7791,7 +8356,7 @@ impl Default for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            separate_depth_stencil_layouts: Bool32::default(),
         }
     }
 }
@@ -7822,7 +8387,18 @@ impl Default for PhysicalDeviceShaderAtomicFloatFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_buffer_float32_atomics: Bool32::default(),
+            shader_buffer_float32_atomic_add: Bool32::default(),
+            shader_buffer_float64_atomics: Bool32::default(),
+            shader_buffer_float64_atomic_add: Bool32::default(),
+            shader_shared_float32_atomics: Bool32::default(),
+            shader_shared_float32_atomic_add: Bool32::default(),
+            shader_shared_float64_atomics: Bool32::default(),
+            shader_shared_float64_atomic_add: Bool32::default(),
+            shader_image_float32_atomics: Bool32::default(),
+            shader_image_float32_atomic_add: Bool32::default(),
+            sparse_image_float32_atomics: Bool32::default(),
+            sparse_image_float32_atomic_add: Bool32::default(),
         }
     }
 }
@@ -7843,7 +8419,8 @@ impl Default for PhysicalDeviceShaderAtomicInt64Features {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_buffer_int64_atomics: Bool32::default(),
+            shader_shared_int64_atomics: Bool32::default(),
         }
     }
 }
@@ -7864,7 +8441,8 @@ impl Default for PhysicalDeviceShaderClockFeaturesKHR {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_subgroup_clock: Bool32::default(),
+            shader_device_clock: Bool32::default(),
         }
     }
 }
@@ -7885,7 +8463,8 @@ impl Default for PhysicalDeviceShaderCoreProperties2AMD {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_core_features: ShaderCorePropertiesFlagsAMD::default(),
+            active_compute_unit_count: u32::default(),
         }
     }
 }
@@ -7918,7 +8497,20 @@ impl Default for PhysicalDeviceShaderCorePropertiesAMD {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_engine_count: u32::default(),
+            shader_arrays_per_engine_count: u32::default(),
+            compute_units_per_shader_array: u32::default(),
+            simd_per_compute_unit: u32::default(),
+            wavefronts_per_simd: u32::default(),
+            wavefront_size: u32::default(),
+            sgprs_per_simd: u32::default(),
+            min_sgpr_allocation: u32::default(),
+            max_sgpr_allocation: u32::default(),
+            sgpr_allocation_granularity: u32::default(),
+            vgprs_per_simd: u32::default(),
+            min_vgpr_allocation: u32::default(),
+            max_vgpr_allocation: u32::default(),
+            vgpr_allocation_granularity: u32::default(),
         }
     }
 }
@@ -7938,7 +8530,7 @@ impl Default for PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_demote_to_helper_invocation: Bool32::default(),
         }
     }
 }
@@ -7958,7 +8550,7 @@ impl Default for PhysicalDeviceShaderDrawParametersFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_draw_parameters: Bool32::default(),
         }
     }
 }
@@ -7979,7 +8571,8 @@ impl Default for PhysicalDeviceShaderFloat16Int8Features {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_float16: Bool32::default(),
+            shader_int8: Bool32::default(),
         }
     }
 }
@@ -8000,7 +8593,8 @@ impl Default for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_image_int64_atomics: Bool32::default(),
+            sparse_image_int64_atomics: Bool32::default(),
         }
     }
 }
@@ -8020,7 +8614,7 @@ impl Default for PhysicalDeviceShaderImageFootprintFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            image_footprint: Bool32::default(),
         }
     }
 }
@@ -8040,7 +8634,7 @@ impl Default for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_integer_functions2: Bool32::default(),
         }
     }
 }
@@ -8060,7 +8654,7 @@ impl Default for PhysicalDeviceShaderSMBuiltinsFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_sm_builtins: Bool32::default(),
         }
     }
 }
@@ -8081,7 +8675,8 @@ impl Default for PhysicalDeviceShaderSMBuiltinsPropertiesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_sm_count: u32::default(),
+            shader_warps_per_sm: u32::default(),
         }
     }
 }
@@ -8101,7 +8696,7 @@ impl Default for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            shader_subgroup_extended_types: Bool32::default(),
         }
     }
 }
@@ -8122,7 +8717,8 @@ impl Default for PhysicalDeviceShadingRateImageFeaturesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            shading_rate_image: Bool32::default(),
+            shading_rate_coarse_sample_order: Bool32::default(),
         }
     }
 }
@@ -8144,7 +8740,9 @@ impl Default for PhysicalDeviceShadingRateImagePropertiesNV {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            shading_rate_texel_size: Extent2D::default(),
+            shading_rate_palette_size: u32::default(),
+            shading_rate_max_coarse_samples: u32::default(),
         }
     }
 }
@@ -8168,7 +8766,11 @@ impl Default for PhysicalDeviceSparseImageFormatInfo2 {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2,
             next: ptr::null(),
-            ..Default::default()
+            format: Format::default(),
+            type_: ImageType::default(),
+            samples: SampleCountFlags::default(),
+            usage: ImageUsageFlags::default(),
+            tiling: ImageTiling::default(),
         }
     }
 }
@@ -8202,7 +8804,10 @@ impl Default for PhysicalDeviceSubgroupProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SUBGROUP_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            subgroup_size: u32::default(),
+            supported_stages: ShaderStageFlags::default(),
+            supported_operations: SubgroupFeatureFlags::default(),
+            quad_operations_in_all_stages: Bool32::default(),
         }
     }
 }
@@ -8223,7 +8828,8 @@ impl Default for PhysicalDeviceSubgroupSizeControlFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            subgroup_size_control: Bool32::default(),
+            compute_full_subgroups: Bool32::default(),
         }
     }
 }
@@ -8246,7 +8852,10 @@ impl Default for PhysicalDeviceSubgroupSizeControlPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            min_subgroup_size: u32::default(),
+            max_subgroup_size: u32::default(),
+            max_compute_workgroup_subgroups: u32::default(),
+            required_subgroup_size_stages: ShaderStageFlags::default(),
         }
     }
 }
@@ -8266,7 +8875,7 @@ impl Default for PhysicalDeviceSurfaceInfo2KHR {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SURFACE_INFO_2_KHR,
             next: ptr::null(),
-            ..Default::default()
+            surface: SurfaceKHR::default(),
         }
     }
 }
@@ -8286,7 +8895,7 @@ impl Default for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            texel_buffer_alignment: Bool32::default(),
         }
     }
 }
@@ -8309,7 +8918,10 @@ impl Default for PhysicalDeviceTexelBufferAlignmentPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            storage_texel_buffer_offset_alignment_bytes: DeviceSize::default(),
+            storage_texel_buffer_offset_single_texel_alignment: Bool32::default(),
+            uniform_texel_buffer_offset_alignment_bytes: DeviceSize::default(),
+            uniform_texel_buffer_offset_single_texel_alignment: Bool32::default(),
         }
     }
 }
@@ -8329,7 +8941,7 @@ impl Default for PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            texture_compression_astc_hdr: Bool32::default(),
         }
     }
 }
@@ -8349,7 +8961,7 @@ impl Default for PhysicalDeviceTimelineSemaphoreFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            timeline_semaphore: Bool32::default(),
         }
     }
 }
@@ -8369,7 +8981,7 @@ impl Default for PhysicalDeviceTimelineSemaphoreProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_timeline_semaphore_value_difference: u64::default(),
         }
     }
 }
@@ -8395,9 +9007,9 @@ impl Default for PhysicalDeviceToolPropertiesEXT {
             next: ptr::null_mut(),
             name: [c_char::default(); MAX_EXTENSION_NAME_SIZE],
             version: [c_char::default(); MAX_EXTENSION_NAME_SIZE],
+            purposes: ToolPurposeFlagsEXT::default(),
             description: [c_char::default(); MAX_DESCRIPTION_SIZE],
             layer: [c_char::default(); MAX_EXTENSION_NAME_SIZE],
-            ..Default::default()
         }
     }
 }
@@ -8418,7 +9030,8 @@ impl Default for PhysicalDeviceTransformFeedbackFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            transform_feedback: Bool32::default(),
+            geometry_streams: Bool32::default(),
         }
     }
 }
@@ -8447,7 +9060,16 @@ impl Default for PhysicalDeviceTransformFeedbackPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_transform_feedback_streams: u32::default(),
+            max_transform_feedback_buffers: u32::default(),
+            max_transform_feedback_buffer_size: DeviceSize::default(),
+            max_transform_feedback_stream_data_size: u32::default(),
+            max_transform_feedback_buffer_data_size: u32::default(),
+            max_transform_feedback_buffer_data_stride: u32::default(),
+            transform_feedback_queries: Bool32::default(),
+            transform_feedback_streams_lines_triangles: Bool32::default(),
+            transform_feedback_rasterization_stream_select: Bool32::default(),
+            transform_feedback_draw: Bool32::default(),
         }
     }
 }
@@ -8467,7 +9089,7 @@ impl Default for PhysicalDeviceUniformBufferStandardLayoutFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            uniform_buffer_standard_layout: Bool32::default(),
         }
     }
 }
@@ -8488,7 +9110,8 @@ impl Default for PhysicalDeviceVariablePointersFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            variable_pointers_storage_buffer: Bool32::default(),
+            variable_pointers: Bool32::default(),
         }
     }
 }
@@ -8509,7 +9132,8 @@ impl Default for PhysicalDeviceVertexAttributeDivisorFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            vertex_attribute_instance_rate_divisor: Bool32::default(),
+            vertex_attribute_instance_rate_zero_divisor: Bool32::default(),
         }
     }
 }
@@ -8529,7 +9153,7 @@ impl Default for PhysicalDeviceVertexAttributeDivisorPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            max_vertex_attrib_divisor: u32::default(),
         }
     }
 }
@@ -8560,7 +9184,18 @@ impl Default for PhysicalDeviceVulkan11Features {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_VULKAN_1_1_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            storage_buffer_16bit_access: Bool32::default(),
+            uniform_and_storage_buffer_16bit_access: Bool32::default(),
+            storage_push_constant16: Bool32::default(),
+            storage_input_output16: Bool32::default(),
+            multiview: Bool32::default(),
+            multiview_geometry_shader: Bool32::default(),
+            multiview_tessellation_shader: Bool32::default(),
+            variable_pointers_storage_buffer: Bool32::default(),
+            variable_pointers: Bool32::default(),
+            protected_memory: Bool32::default(),
+            sampler_ycbcr_conversion: Bool32::default(),
+            shader_draw_parameters: Bool32::default(),
         }
     }
 }
@@ -8594,7 +9229,21 @@ impl Default for PhysicalDeviceVulkan11Properties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            device_uuid: [u8::default(); UUID_SIZE],
+            driver_uuid: [u8::default(); UUID_SIZE],
+            device_luid: [u8::default(); LUID_SIZE],
+            device_node_mask: u32::default(),
+            device_luid_valid: Bool32::default(),
+            subgroup_size: u32::default(),
+            subgroup_supported_stages: ShaderStageFlags::default(),
+            subgroup_supported_operations: SubgroupFeatureFlags::default(),
+            subgroup_quad_operations_in_all_stages: Bool32::default(),
+            point_clipping_behavior: PointClippingBehavior::default(),
+            max_multiview_view_count: u32::default(),
+            max_multiview_instance_index: u32::default(),
+            protected_no_fault: Bool32::default(),
+            max_per_set_descriptors: u32::default(),
+            max_memory_allocation_size: DeviceSize::default(),
         }
     }
 }
@@ -8660,7 +9309,53 @@ impl Default for PhysicalDeviceVulkan12Features {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_VULKAN_1_2_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            sampler_mirror_clamp_to_edge: Bool32::default(),
+            draw_indirect_count: Bool32::default(),
+            storage_buffer_8bit_access: Bool32::default(),
+            uniform_and_storage_buffer_8bit_access: Bool32::default(),
+            storage_push_constant8: Bool32::default(),
+            shader_buffer_int64_atomics: Bool32::default(),
+            shader_shared_int64_atomics: Bool32::default(),
+            shader_float16: Bool32::default(),
+            shader_int8: Bool32::default(),
+            descriptor_indexing: Bool32::default(),
+            shader_input_attachment_array_dynamic_indexing: Bool32::default(),
+            shader_uniform_texel_buffer_array_dynamic_indexing: Bool32::default(),
+            shader_storage_texel_buffer_array_dynamic_indexing: Bool32::default(),
+            shader_uniform_buffer_array_non_uniform_indexing: Bool32::default(),
+            shader_sampled_image_array_non_uniform_indexing: Bool32::default(),
+            shader_storage_buffer_array_non_uniform_indexing: Bool32::default(),
+            shader_storage_image_array_non_uniform_indexing: Bool32::default(),
+            shader_input_attachment_array_non_uniform_indexing: Bool32::default(),
+            shader_uniform_texel_buffer_array_non_uniform_indexing: Bool32::default(),
+            shader_storage_texel_buffer_array_non_uniform_indexing: Bool32::default(),
+            descriptor_binding_uniform_buffer_update_after_bind: Bool32::default(),
+            descriptor_binding_sampled_image_update_after_bind: Bool32::default(),
+            descriptor_binding_storage_image_update_after_bind: Bool32::default(),
+            descriptor_binding_storage_buffer_update_after_bind: Bool32::default(),
+            descriptor_binding_uniform_texel_buffer_update_after_bind: Bool32::default(),
+            descriptor_binding_storage_texel_buffer_update_after_bind: Bool32::default(),
+            descriptor_binding_update_unused_while_pending: Bool32::default(),
+            descriptor_binding_partially_bound: Bool32::default(),
+            descriptor_binding_variable_descriptor_count: Bool32::default(),
+            runtime_descriptor_array: Bool32::default(),
+            sampler_filter_minmax: Bool32::default(),
+            scalar_block_layout: Bool32::default(),
+            imageless_framebuffer: Bool32::default(),
+            uniform_buffer_standard_layout: Bool32::default(),
+            shader_subgroup_extended_types: Bool32::default(),
+            separate_depth_stencil_layouts: Bool32::default(),
+            host_query_reset: Bool32::default(),
+            timeline_semaphore: Bool32::default(),
+            buffer_device_address: Bool32::default(),
+            buffer_device_address_capture_replay: Bool32::default(),
+            buffer_device_address_multi_device: Bool32::default(),
+            vulkan_memory_model: Bool32::default(),
+            vulkan_memory_model_device_scope: Bool32::default(),
+            vulkan_memory_model_availability_visibility_chains: Bool32::default(),
+            shader_output_viewport_index: Bool32::default(),
+            shader_output_layer: Bool32::default(),
+            subgroup_broadcast_dynamic_id: Bool32::default(),
         }
     }
 }
@@ -8731,9 +9426,58 @@ impl Default for PhysicalDeviceVulkan12Properties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES,
             next: ptr::null_mut(),
+            driver_id: DriverId::default(),
             driver_name: [c_char::default(); MAX_DRIVER_NAME_SIZE],
             driver_info: [c_char::default(); MAX_DRIVER_INFO_SIZE],
-            ..Default::default()
+            conformance_version: ConformanceVersion::default(),
+            denorm_behavior_independence: ShaderFloatControlsIndependence::default(),
+            rounding_mode_independence: ShaderFloatControlsIndependence::default(),
+            shader_signed_zero_inf_nan_preserve_float16: Bool32::default(),
+            shader_signed_zero_inf_nan_preserve_float32: Bool32::default(),
+            shader_signed_zero_inf_nan_preserve_float64: Bool32::default(),
+            shader_denorm_preserve_float16: Bool32::default(),
+            shader_denorm_preserve_float32: Bool32::default(),
+            shader_denorm_preserve_float64: Bool32::default(),
+            shader_denorm_flush_to_zero_float16: Bool32::default(),
+            shader_denorm_flush_to_zero_float32: Bool32::default(),
+            shader_denorm_flush_to_zero_float64: Bool32::default(),
+            shader_rounding_mode_rte_float16: Bool32::default(),
+            shader_rounding_mode_rte_float32: Bool32::default(),
+            shader_rounding_mode_rte_float64: Bool32::default(),
+            shader_rounding_mode_rtz_float16: Bool32::default(),
+            shader_rounding_mode_rtz_float32: Bool32::default(),
+            shader_rounding_mode_rtz_float64: Bool32::default(),
+            max_update_after_bind_descriptors_in_all_pools: u32::default(),
+            shader_uniform_buffer_array_non_uniform_indexing_native: Bool32::default(),
+            shader_sampled_image_array_non_uniform_indexing_native: Bool32::default(),
+            shader_storage_buffer_array_non_uniform_indexing_native: Bool32::default(),
+            shader_storage_image_array_non_uniform_indexing_native: Bool32::default(),
+            shader_input_attachment_array_non_uniform_indexing_native: Bool32::default(),
+            robust_buffer_access_update_after_bind: Bool32::default(),
+            quad_divergent_implicit_lod: Bool32::default(),
+            max_per_stage_descriptor_update_after_bind_samplers: u32::default(),
+            max_per_stage_descriptor_update_after_bind_uniform_buffers: u32::default(),
+            max_per_stage_descriptor_update_after_bind_storage_buffers: u32::default(),
+            max_per_stage_descriptor_update_after_bind_sampled_images: u32::default(),
+            max_per_stage_descriptor_update_after_bind_storage_images: u32::default(),
+            max_per_stage_descriptor_update_after_bind_input_attachments: u32::default(),
+            max_per_stage_update_after_bind_resources: u32::default(),
+            max_descriptor_set_update_after_bind_samplers: u32::default(),
+            max_descriptor_set_update_after_bind_uniform_buffers: u32::default(),
+            max_descriptor_set_update_after_bind_uniform_buffers_dynamic: u32::default(),
+            max_descriptor_set_update_after_bind_storage_buffers: u32::default(),
+            max_descriptor_set_update_after_bind_storage_buffers_dynamic: u32::default(),
+            max_descriptor_set_update_after_bind_sampled_images: u32::default(),
+            max_descriptor_set_update_after_bind_storage_images: u32::default(),
+            max_descriptor_set_update_after_bind_input_attachments: u32::default(),
+            supported_depth_resolve_modes: ResolveModeFlags::default(),
+            supported_stencil_resolve_modes: ResolveModeFlags::default(),
+            independent_resolve_none: Bool32::default(),
+            independent_resolve: Bool32::default(),
+            filter_minmax_single_component_formats: Bool32::default(),
+            filter_minmax_image_component_mapping: Bool32::default(),
+            max_timeline_semaphore_value_difference: u64::default(),
+            framebuffer_integer_color_sample_counts: SampleCountFlags::default(),
         }
     }
 }
@@ -8755,7 +9499,9 @@ impl Default for PhysicalDeviceVulkanMemoryModelFeatures {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES,
             next: ptr::null_mut(),
-            ..Default::default()
+            vulkan_memory_model: Bool32::default(),
+            vulkan_memory_model_device_scope: Bool32::default(),
+            vulkan_memory_model_availability_visibility_chains: Bool32::default(),
         }
     }
 }
@@ -8775,7 +9521,7 @@ impl Default for PhysicalDeviceYcbcrImageArraysFeaturesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            ycbcr_image_arrays: Bool32::default(),
         }
     }
 }
@@ -8797,8 +9543,9 @@ impl Default for PipelineCacheCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_CACHE_CREATE_INFO,
             next: ptr::null(),
+            flags: PipelineCacheCreateFlags::default(),
+            initial_data_size: usize::default(),
             initial_data: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -8820,7 +9567,9 @@ impl Default for PipelineColorBlendAdvancedStateCreateInfoEXT {
         Self {
             s_type: StructureType::PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            src_premultiplied: Bool32::default(),
+            dst_premultiplied: Bool32::default(),
+            blend_overlap: BlendOverlapEXT::default(),
         }
     }
 }
@@ -8859,8 +9608,12 @@ impl Default for PipelineColorBlendStateCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_COLOR_BLEND_STATE_CREATE_INFO,
             next: ptr::null(),
+            flags: PipelineColorBlendStateCreateFlags::default(),
+            logic_op_enable: Bool32::default(),
+            logic_op: LogicOp::default(),
+            attachment_count: u32::default(),
             attachments: ptr::null(),
-            ..Default::default()
+            blend_constants: [f32::default(); 4],
         }
     }
 }
@@ -8880,7 +9633,7 @@ impl Default for PipelineCompilerControlCreateInfoAMD {
         Self {
             s_type: StructureType::PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD,
             next: ptr::null(),
-            ..Default::default()
+            compiler_control_flags: PipelineCompilerControlFlagsAMD::default(),
         }
     }
 }
@@ -8904,8 +9657,11 @@ impl Default for PipelineCoverageModulationStateCreateInfoNV {
         Self {
             s_type: StructureType::PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV,
             next: ptr::null(),
+            flags: PipelineCoverageModulationStateCreateFlagsNV::default(),
+            coverage_modulation_mode: CoverageModulationModeNV::default(),
+            coverage_modulation_table_enable: Bool32::default(),
+            coverage_modulation_table_count: u32::default(),
             coverage_modulation_table: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -8926,7 +9682,8 @@ impl Default for PipelineCoverageReductionStateCreateInfoNV {
         Self {
             s_type: StructureType::PIPELINE_COVERAGE_REDUCTION_STATE_CREATE_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            flags: PipelineCoverageReductionStateCreateFlagsNV::default(),
+            coverage_reduction_mode: CoverageReductionModeNV::default(),
         }
     }
 }
@@ -8948,7 +9705,9 @@ impl Default for PipelineCoverageToColorStateCreateInfoNV {
         Self {
             s_type: StructureType::PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            flags: PipelineCoverageToColorStateCreateFlagsNV::default(),
+            coverage_to_color_enable: Bool32::default(),
+            coverage_to_color_location: u32::default(),
         }
     }
 }
@@ -8971,8 +9730,8 @@ impl Default for PipelineCreationFeedbackCreateInfoEXT {
             s_type: StructureType::PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT,
             next: ptr::null(),
             pipeline_creation_feedback: ptr::null_mut(),
+            pipeline_stage_creation_feedback_count: u32::default(),
             pipeline_stage_creation_feedbacks: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -9009,7 +9768,16 @@ impl Default for PipelineDepthStencilStateCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: PipelineDepthStencilStateCreateFlags::default(),
+            depth_test_enable: Bool32::default(),
+            depth_write_enable: Bool32::default(),
+            depth_compare_op: CompareOp::default(),
+            depth_bounds_test_enable: Bool32::default(),
+            stencil_test_enable: Bool32::default(),
+            front: StencilOpState::default(),
+            back: StencilOpState::default(),
+            min_depth_bounds: f32::default(),
+            max_depth_bounds: f32::default(),
         }
     }
 }
@@ -9032,8 +9800,10 @@ impl Default for PipelineDiscardRectangleStateCreateInfoEXT {
         Self {
             s_type: StructureType::PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT,
             next: ptr::null(),
+            flags: PipelineDiscardRectangleStateCreateFlagsEXT::default(),
+            discard_rectangle_mode: DiscardRectangleModeEXT::default(),
+            discard_rectangle_count: u32::default(),
             discard_rectangles: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9055,8 +9825,9 @@ impl Default for PipelineDynamicStateCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_DYNAMIC_STATE_CREATE_INFO,
             next: ptr::null(),
+            flags: PipelineDynamicStateCreateFlags::default(),
+            dynamic_state_count: u32::default(),
             dynamic_states: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9077,7 +9848,8 @@ impl Default for PipelineExecutableInfoKHR {
         Self {
             s_type: StructureType::PIPELINE_EXECUTABLE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            pipeline: Pipeline::default(),
+            executable_index: u32::default(),
         }
     }
 }
@@ -9103,8 +9875,9 @@ impl Default for PipelineExecutableInternalRepresentationKHR {
             next: ptr::null_mut(),
             name: [c_char::default(); MAX_DESCRIPTION_SIZE],
             description: [c_char::default(); MAX_DESCRIPTION_SIZE],
+            is_text: Bool32::default(),
+            data_size: usize::default(),
             data: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -9127,9 +9900,10 @@ impl Default for PipelineExecutablePropertiesKHR {
         Self {
             s_type: StructureType::PIPELINE_EXECUTABLE_PROPERTIES_KHR,
             next: ptr::null_mut(),
+            stages: ShaderStageFlags::default(),
             name: [c_char::default(); MAX_DESCRIPTION_SIZE],
             description: [c_char::default(); MAX_DESCRIPTION_SIZE],
-            ..Default::default()
+            subgroup_size: u32::default(),
         }
     }
 }
@@ -9154,7 +9928,8 @@ impl Default for PipelineExecutableStatisticKHR {
             next: ptr::null_mut(),
             name: [c_char::default(); MAX_DESCRIPTION_SIZE],
             description: [c_char::default(); MAX_DESCRIPTION_SIZE],
-            ..Default::default()
+            format: PipelineExecutableStatisticFormatKHR::default(),
+            value: PipelineExecutableStatisticValueKHR::default(),
         }
     }
 }
@@ -9174,7 +9949,7 @@ impl Default for PipelineInfoKHR {
         Self {
             s_type: StructureType::PIPELINE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            pipeline: Pipeline::default(),
         }
     }
 }
@@ -9196,7 +9971,9 @@ impl Default for PipelineInputAssemblyStateCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: PipelineInputAssemblyStateCreateFlags::default(),
+            topology: PrimitiveTopology::default(),
+            primitive_restart_enable: Bool32::default(),
         }
     }
 }
@@ -9220,9 +9997,11 @@ impl Default for PipelineLayoutCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_LAYOUT_CREATE_INFO,
             next: ptr::null(),
+            flags: PipelineLayoutCreateFlags::default(),
+            set_layout_count: u32::default(),
             set_layouts: ptr::null(),
+            push_constant_range_count: u32::default(),
             push_constant_ranges: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9243,8 +10022,8 @@ impl Default for PipelineLibraryCreateInfoKHR {
         Self {
             s_type: StructureType::PIPELINE_LIBRARY_CREATE_INFO_KHR,
             next: ptr::null(),
+            library_count: u32::default(),
             libraries: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9270,8 +10049,13 @@ impl Default for PipelineMultisampleStateCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_MULTISAMPLE_STATE_CREATE_INFO,
             next: ptr::null(),
+            flags: PipelineMultisampleStateCreateFlags::default(),
+            rasterization_samples: SampleCountFlags::default(),
+            sample_shading_enable: Bool32::default(),
+            min_sample_shading: f32::default(),
             sample_mask: ptr::null(),
-            ..Default::default()
+            alpha_to_coverage_enable: Bool32::default(),
+            alpha_to_one_enable: Bool32::default(),
         }
     }
 }
@@ -9293,7 +10077,9 @@ impl Default for PipelineRasterizationConservativeStateCreateInfoEXT {
         Self {
             s_type: StructureType::PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            flags: PipelineRasterizationConservativeStateCreateFlagsEXT::default(),
+            conservative_rasterization_mode: ConservativeRasterizationModeEXT::default(),
+            extra_primitive_overestimation_size: f32::default(),
         }
     }
 }
@@ -9314,7 +10100,8 @@ impl Default for PipelineRasterizationDepthClipStateCreateInfoEXT {
         Self {
             s_type: StructureType::PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            flags: PipelineRasterizationDepthClipStateCreateFlagsEXT::default(),
+            depth_clip_enable: Bool32::default(),
         }
     }
 }
@@ -9337,7 +10124,10 @@ impl Default for PipelineRasterizationLineStateCreateInfoEXT {
         Self {
             s_type: StructureType::PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            line_rasterization_mode: LineRasterizationModeEXT::default(),
+            stippled_line_enable: Bool32::default(),
+            line_stipple_factor: u32::default(),
+            line_stipple_pattern: u16::default(),
         }
     }
 }
@@ -9367,7 +10157,17 @@ impl Default for PipelineRasterizationStateCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_RASTERIZATION_STATE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: PipelineRasterizationStateCreateFlags::default(),
+            depth_clamp_enable: Bool32::default(),
+            rasterizer_discard_enable: Bool32::default(),
+            polygon_mode: PolygonMode::default(),
+            cull_mode: CullModeFlags::default(),
+            front_face: FrontFace::default(),
+            depth_bias_enable: Bool32::default(),
+            depth_bias_constant_factor: f32::default(),
+            depth_bias_clamp: f32::default(),
+            depth_bias_slope_factor: f32::default(),
+            line_width: f32::default(),
         }
     }
 }
@@ -9387,7 +10187,7 @@ impl Default for PipelineRasterizationStateRasterizationOrderAMD {
         Self {
             s_type: StructureType::PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD,
             next: ptr::null(),
-            ..Default::default()
+            rasterization_order: RasterizationOrderAMD::default(),
         }
     }
 }
@@ -9408,7 +10208,8 @@ impl Default for PipelineRasterizationStateStreamCreateInfoEXT {
         Self {
             s_type: StructureType::PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            flags: PipelineRasterizationStateStreamCreateFlagsEXT::default(),
+            rasterization_stream: u32::default(),
         }
     }
 }
@@ -9428,7 +10229,7 @@ impl Default for PipelineRepresentativeFragmentTestStateCreateInfoNV {
         Self {
             s_type: StructureType::PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            representative_fragment_test_enable: Bool32::default(),
         }
     }
 }
@@ -9449,7 +10250,8 @@ impl Default for PipelineSampleLocationsStateCreateInfoEXT {
         Self {
             s_type: StructureType::PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            sample_locations_enable: Bool32::default(),
+            sample_locations_info: SampleLocationsInfoEXT::default(),
         }
     }
 }
@@ -9473,9 +10275,11 @@ impl Default for PipelineShaderStageCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_SHADER_STAGE_CREATE_INFO,
             next: ptr::null(),
+            flags: PipelineShaderStageCreateFlags::default(),
+            stage: ShaderStageFlags::default(),
+            module: ShaderModule::default(),
             name: ptr::null(),
             specialization_info: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9495,7 +10299,7 @@ impl Default for PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT {
         Self {
             s_type: StructureType::PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            required_subgroup_size: u32::default(),
         }
     }
 }
@@ -9515,7 +10319,7 @@ impl Default for PipelineTessellationDomainOriginStateCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            domain_origin: TessellationDomainOrigin::default(),
         }
     }
 }
@@ -9536,7 +10340,8 @@ impl Default for PipelineTessellationStateCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_TESSELLATION_STATE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: PipelineTessellationStateCreateFlags::default(),
+            patch_control_points: u32::default(),
         }
     }
 }
@@ -9557,8 +10362,8 @@ impl Default for PipelineVertexInputDivisorStateCreateInfoEXT {
         Self {
             s_type: StructureType::PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT,
             next: ptr::null(),
+            vertex_binding_divisor_count: u32::default(),
             vertex_binding_divisors: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9582,9 +10387,11 @@ impl Default for PipelineVertexInputStateCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO,
             next: ptr::null(),
+            flags: PipelineVertexInputStateCreateFlags::default(),
+            vertex_binding_description_count: u32::default(),
             vertex_binding_descriptions: ptr::null(),
+            vertex_attribute_description_count: u32::default(),
             vertex_attribute_descriptions: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9606,8 +10413,9 @@ impl Default for PipelineViewportCoarseSampleOrderStateCreateInfoNV {
         Self {
             s_type: StructureType::PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV,
             next: ptr::null(),
+            sample_order_type: CoarseSampleOrderTypeNV::default(),
+            custom_sample_order_count: u32::default(),
             custom_sample_orders: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9628,8 +10436,8 @@ impl Default for PipelineViewportExclusiveScissorStateCreateInfoNV {
         Self {
             s_type: StructureType::PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV,
             next: ptr::null(),
+            exclusive_scissor_count: u32::default(),
             exclusive_scissors: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9651,8 +10459,9 @@ impl Default for PipelineViewportShadingRateImageStateCreateInfoNV {
         Self {
             s_type: StructureType::PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV,
             next: ptr::null(),
+            shading_rate_image_enable: Bool32::default(),
+            viewport_count: u32::default(),
             shading_rate_palettes: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9676,9 +10485,11 @@ impl Default for PipelineViewportStateCreateInfo {
         Self {
             s_type: StructureType::PIPELINE_VIEWPORT_STATE_CREATE_INFO,
             next: ptr::null(),
+            flags: PipelineViewportStateCreateFlags::default(),
+            viewport_count: u32::default(),
             viewports: ptr::null(),
+            scissor_count: u32::default(),
             scissors: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9700,8 +10511,9 @@ impl Default for PipelineViewportSwizzleStateCreateInfoNV {
         Self {
             s_type: StructureType::PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV,
             next: ptr::null(),
+            flags: PipelineViewportSwizzleStateCreateFlagsNV::default(),
+            viewport_count: u32::default(),
             viewport_swizzles: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9723,8 +10535,9 @@ impl Default for PipelineViewportWScalingStateCreateInfoNV {
         Self {
             s_type: StructureType::PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV,
             next: ptr::null(),
+            viewport_w_scaling_enable: Bool32::default(),
+            viewport_count: u32::default(),
             viewport_w_scalings: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9744,7 +10557,7 @@ impl Default for PresentFrameTokenGGP {
         Self {
             s_type: StructureType::PRESENT_FRAME_TOKEN_GGP,
             next: ptr::null(),
-            ..Default::default()
+            frame_token: GgpFrameToken::default(),
         }
     }
 }
@@ -9769,11 +10582,12 @@ impl Default for PresentInfoKHR {
         Self {
             s_type: StructureType::PRESENT_INFO_KHR,
             next: ptr::null(),
+            wait_semaphore_count: u32::default(),
             wait_semaphores: ptr::null(),
+            swapchain_count: u32::default(),
             swapchains: ptr::null(),
             image_indices: ptr::null(),
             results: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -9790,8 +10604,8 @@ impl Default for PresentRegionKHR {
     #[inline]
     fn default() -> Self {
         Self {
+            rectangle_count: u32::default(),
             rectangles: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9812,8 +10626,8 @@ impl Default for PresentRegionsKHR {
         Self {
             s_type: StructureType::PRESENT_REGIONS_KHR,
             next: ptr::null(),
+            swapchain_count: u32::default(),
             regions: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9842,8 +10656,8 @@ impl Default for PresentTimesInfoGOOGLE {
         Self {
             s_type: StructureType::PRESENT_TIMES_INFO_GOOGLE,
             next: ptr::null(),
+            swapchain_count: u32::default(),
             times: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9863,7 +10677,7 @@ impl Default for PrivateDataSlotCreateInfoEXT {
         Self {
             s_type: StructureType::PRIVATE_DATA_SLOT_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            flags: PrivateDataSlotCreateFlagsEXT::default(),
         }
     }
 }
@@ -9883,7 +10697,7 @@ impl Default for ProtectedSubmitInfo {
         Self {
             s_type: StructureType::PROTECTED_SUBMIT_INFO,
             next: ptr::null(),
-            ..Default::default()
+            protected_submit: Bool32::default(),
         }
     }
 }
@@ -9915,7 +10729,10 @@ impl Default for QueryPoolCreateInfo {
         Self {
             s_type: StructureType::QUERY_POOL_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: QueryPoolCreateFlags::default(),
+            query_type: QueryType::default(),
+            query_count: u32::default(),
+            pipeline_statistics: QueryPipelineStatisticFlags::default(),
         }
     }
 }
@@ -9937,8 +10754,9 @@ impl Default for QueryPoolPerformanceCreateInfoKHR {
         Self {
             s_type: StructureType::QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR,
             next: ptr::null(),
+            queue_family_index: u32::default(),
+            counter_index_count: u32::default(),
             counter_indices: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -9958,7 +10776,7 @@ impl Default for QueryPoolPerformanceQueryCreateInfoINTEL {
         Self {
             s_type: StructureType::QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL,
             next: ptr::null(),
-            ..Default::default()
+            performance_counters_sampling: QueryPoolSamplingModeINTEL::default(),
         }
     }
 }
@@ -9978,7 +10796,7 @@ impl Default for QueueFamilyCheckpointPropertiesNV {
         Self {
             s_type: StructureType::QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV,
             next: ptr::null_mut(),
-            ..Default::default()
+            checkpoint_execution_stage_mask: PipelineStageFlags::default(),
         }
     }
 }
@@ -10008,7 +10826,7 @@ impl Default for QueueFamilyProperties2 {
         Self {
             s_type: StructureType::QUEUE_FAMILY_PROPERTIES_2,
             next: ptr::null_mut(),
-            ..Default::default()
+            queue_family_properties: QueueFamilyProperties::default(),
         }
     }
 }
@@ -10038,10 +10856,17 @@ impl Default for RayTracingPipelineCreateInfoKHR {
         Self {
             s_type: StructureType::RAY_TRACING_PIPELINE_CREATE_INFO_KHR,
             next: ptr::null(),
+            flags: PipelineCreateFlags::default(),
+            stage_count: u32::default(),
             stages: ptr::null(),
+            group_count: u32::default(),
             groups: ptr::null(),
+            max_recursion_depth: u32::default(),
+            libraries: PipelineLibraryCreateInfoKHR::default(),
             library_interface: ptr::null(),
-            ..Default::default()
+            layout: PipelineLayout::default(),
+            base_pipeline_handle: Pipeline::default(),
+            base_pipeline_index: i32::default(),
         }
     }
 }
@@ -10069,9 +10894,15 @@ impl Default for RayTracingPipelineCreateInfoNV {
         Self {
             s_type: StructureType::RAY_TRACING_PIPELINE_CREATE_INFO_NV,
             next: ptr::null(),
+            flags: PipelineCreateFlags::default(),
+            stage_count: u32::default(),
             stages: ptr::null(),
+            group_count: u32::default(),
             groups: ptr::null(),
-            ..Default::default()
+            max_recursion_depth: u32::default(),
+            layout: PipelineLayout::default(),
+            base_pipeline_handle: Pipeline::default(),
+            base_pipeline_index: i32::default(),
         }
     }
 }
@@ -10093,7 +10924,9 @@ impl Default for RayTracingPipelineInterfaceCreateInfoKHR {
         Self {
             s_type: StructureType::RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            max_payload_size: u32::default(),
+            max_attribute_size: u32::default(),
+            max_callable_size: u32::default(),
         }
     }
 }
@@ -10118,8 +10951,12 @@ impl Default for RayTracingShaderGroupCreateInfoKHR {
         Self {
             s_type: StructureType::RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR,
             next: ptr::null(),
+            type_: RayTracingShaderGroupTypeKHR::default(),
+            general_shader: u32::default(),
+            closest_hit_shader: u32::default(),
+            any_hit_shader: u32::default(),
+            intersection_shader: u32::default(),
             shader_group_capture_replay_handle: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10143,7 +10980,11 @@ impl Default for RayTracingShaderGroupCreateInfoNV {
         Self {
             s_type: StructureType::RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV,
             next: ptr::null(),
-            ..Default::default()
+            type_: RayTracingShaderGroupTypeKHR::default(),
+            general_shader: u32::default(),
+            closest_hit_shader: u32::default(),
+            any_hit_shader: u32::default(),
+            intersection_shader: u32::default(),
         }
     }
 }
@@ -10188,8 +11029,8 @@ impl Default for RenderPassAttachmentBeginInfo {
         Self {
             s_type: StructureType::RENDER_PASS_ATTACHMENT_BEGIN_INFO,
             next: ptr::null(),
+            attachment_count: u32::default(),
             attachments: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10213,8 +11054,11 @@ impl Default for RenderPassBeginInfo {
         Self {
             s_type: StructureType::RENDER_PASS_BEGIN_INFO,
             next: ptr::null(),
+            render_pass: RenderPass::default(),
+            framebuffer: Framebuffer::default(),
+            render_area: Rect2D::default(),
+            clear_value_count: u32::default(),
             clear_values: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10240,10 +11084,13 @@ impl Default for RenderPassCreateInfo {
         Self {
             s_type: StructureType::RENDER_PASS_CREATE_INFO,
             next: ptr::null(),
+            flags: RenderPassCreateFlags::default(),
+            attachment_count: u32::default(),
             attachments: ptr::null(),
+            subpass_count: u32::default(),
             subpasses: ptr::null(),
+            dependency_count: u32::default(),
             dependencies: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10271,11 +11118,15 @@ impl Default for RenderPassCreateInfo2 {
         Self {
             s_type: StructureType::RENDER_PASS_CREATE_INFO_2,
             next: ptr::null(),
+            flags: RenderPassCreateFlags::default(),
+            attachment_count: u32::default(),
             attachments: ptr::null(),
+            subpass_count: u32::default(),
             subpasses: ptr::null(),
+            dependency_count: u32::default(),
             dependencies: ptr::null(),
+            correlated_view_mask_count: u32::default(),
             correlated_view_masks: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10295,7 +11146,7 @@ impl Default for RenderPassFragmentDensityMapCreateInfoEXT {
         Self {
             s_type: StructureType::RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            fragment_density_map_attachment: AttachmentReference::default(),
         }
     }
 }
@@ -10316,8 +11167,8 @@ impl Default for RenderPassInputAttachmentAspectCreateInfo {
         Self {
             s_type: StructureType::RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO,
             next: ptr::null(),
+            aspect_reference_count: u32::default(),
             aspect_references: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10342,10 +11193,12 @@ impl Default for RenderPassMultiviewCreateInfo {
         Self {
             s_type: StructureType::RENDER_PASS_MULTIVIEW_CREATE_INFO,
             next: ptr::null(),
+            subpass_count: u32::default(),
             view_masks: ptr::null(),
+            dependency_count: u32::default(),
             view_offsets: ptr::null(),
+            correlation_mask_count: u32::default(),
             correlation_masks: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10368,9 +11221,10 @@ impl Default for RenderPassSampleLocationsBeginInfoEXT {
         Self {
             s_type: StructureType::RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT,
             next: ptr::null(),
+            attachment_initial_sample_locations_count: u32::default(),
             attachment_initial_sample_locations: ptr::null(),
+            post_subpass_sample_locations_count: u32::default(),
             post_subpass_sample_locations: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10390,7 +11244,7 @@ impl Default for RenderPassTransformBeginInfoQCOM {
         Self {
             s_type: StructureType::RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM,
             next: ptr::null_mut(),
-            ..Default::default()
+            transform: SurfaceTransformFlagsKHR::default(),
         }
     }
 }
@@ -10415,8 +11269,12 @@ impl Default for ResolveImageInfo2KHR {
         Self {
             s_type: StructureType::RESOLVE_IMAGE_INFO_2_KHR,
             next: ptr::null(),
+            src_image: Image::default(),
+            src_image_layout: ImageLayout::default(),
+            dst_image: Image::default(),
+            dst_image_layout: ImageLayout::default(),
+            region_count: u32::default(),
             regions: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10447,8 +11305,10 @@ impl Default for SampleLocationsInfoEXT {
         Self {
             s_type: StructureType::SAMPLE_LOCATIONS_INFO_EXT,
             next: ptr::null(),
+            sample_locations_per_pixel: SampleCountFlags::default(),
+            sample_location_grid_size: Extent2D::default(),
+            sample_locations_count: u32::default(),
             sample_locations: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10483,7 +11343,22 @@ impl Default for SamplerCreateInfo {
         Self {
             s_type: StructureType::SAMPLER_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: SamplerCreateFlags::default(),
+            mag_filter: Filter::default(),
+            min_filter: Filter::default(),
+            mipmap_mode: SamplerMipmapMode::default(),
+            address_mode_u: SamplerAddressMode::default(),
+            address_mode_v: SamplerAddressMode::default(),
+            address_mode_w: SamplerAddressMode::default(),
+            mip_lod_bias: f32::default(),
+            anisotropy_enable: Bool32::default(),
+            max_anisotropy: f32::default(),
+            compare_enable: Bool32::default(),
+            compare_op: CompareOp::default(),
+            min_lod: f32::default(),
+            max_lod: f32::default(),
+            border_color: BorderColor::default(),
+            unnormalized_coordinates: Bool32::default(),
         }
     }
 }
@@ -10504,7 +11379,8 @@ impl Default for SamplerCustomBorderColorCreateInfoEXT {
         Self {
             s_type: StructureType::SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            custom_border_color: ClearColorValue::default(),
+            format: Format::default(),
         }
     }
 }
@@ -10524,7 +11400,7 @@ impl Default for SamplerReductionModeCreateInfo {
         Self {
             s_type: StructureType::SAMPLER_REDUCTION_MODE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            reduction_mode: SamplerReductionMode::default(),
         }
     }
 }
@@ -10551,7 +11427,14 @@ impl Default for SamplerYcbcrConversionCreateInfo {
         Self {
             s_type: StructureType::SAMPLER_YCBCR_CONVERSION_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            format: Format::default(),
+            ycbcr_model: SamplerYcbcrModelConversion::default(),
+            ycbcr_range: SamplerYcbcrRange::default(),
+            components: ComponentMapping::default(),
+            x_chroma_offset: ChromaLocation::default(),
+            y_chroma_offset: ChromaLocation::default(),
+            chroma_filter: Filter::default(),
+            force_explicit_reconstruction: Bool32::default(),
         }
     }
 }
@@ -10571,7 +11454,7 @@ impl Default for SamplerYcbcrConversionImageFormatProperties {
         Self {
             s_type: StructureType::SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES,
             next: ptr::null_mut(),
-            ..Default::default()
+            combined_image_sampler_descriptor_count: u32::default(),
         }
     }
 }
@@ -10591,7 +11474,7 @@ impl Default for SamplerYcbcrConversionInfo {
         Self {
             s_type: StructureType::SAMPLER_YCBCR_CONVERSION_INFO,
             next: ptr::null(),
-            ..Default::default()
+            conversion: SamplerYcbcrConversion::default(),
         }
     }
 }
@@ -10611,7 +11494,7 @@ impl Default for SemaphoreCreateInfo {
         Self {
             s_type: StructureType::SEMAPHORE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            flags: SemaphoreCreateFlags::default(),
         }
     }
 }
@@ -10632,7 +11515,8 @@ impl Default for SemaphoreGetFdInfoKHR {
         Self {
             s_type: StructureType::SEMAPHORE_GET_FD_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            semaphore: Semaphore::default(),
+            handle_type: ExternalSemaphoreHandleTypeFlags::default(),
         }
     }
 }
@@ -10653,7 +11537,8 @@ impl Default for SemaphoreGetWin32HandleInfoKHR {
         Self {
             s_type: StructureType::SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR,
             next: ptr::null(),
-            ..Default::default()
+            semaphore: Semaphore::default(),
+            handle_type: ExternalSemaphoreHandleTypeFlags::default(),
         }
     }
 }
@@ -10674,7 +11559,8 @@ impl Default for SemaphoreSignalInfo {
         Self {
             s_type: StructureType::SEMAPHORE_SIGNAL_INFO,
             next: ptr::null(),
-            ..Default::default()
+            semaphore: Semaphore::default(),
+            value: u64::default(),
         }
     }
 }
@@ -10695,7 +11581,8 @@ impl Default for SemaphoreTypeCreateInfo {
         Self {
             s_type: StructureType::SEMAPHORE_TYPE_CREATE_INFO,
             next: ptr::null(),
-            ..Default::default()
+            semaphore_type: SemaphoreType::default(),
+            initial_value: u64::default(),
         }
     }
 }
@@ -10718,9 +11605,10 @@ impl Default for SemaphoreWaitInfo {
         Self {
             s_type: StructureType::SEMAPHORE_WAIT_INFO,
             next: ptr::null(),
+            flags: SemaphoreWaitFlags::default(),
+            semaphore_count: u32::default(),
             semaphores: ptr::null(),
             values: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10749,8 +11637,9 @@ impl Default for ShaderModuleCreateInfo {
         Self {
             s_type: StructureType::SHADER_MODULE_CREATE_INFO,
             next: ptr::null(),
+            flags: ShaderModuleCreateFlags::default(),
+            code_size: usize::default(),
             code: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10770,7 +11659,7 @@ impl Default for ShaderModuleValidationCacheCreateInfoEXT {
         Self {
             s_type: StructureType::SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            validation_cache: ValidationCacheEXT::default(),
         }
     }
 }
@@ -10811,8 +11700,8 @@ impl Default for ShadingRatePaletteNV {
     #[inline]
     fn default() -> Self {
         Self {
+            shading_rate_palette_entry_count: u32::default(),
             shading_rate_palette_entries: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10832,7 +11721,7 @@ impl Default for SharedPresentSurfaceCapabilitiesKHR {
         Self {
             s_type: StructureType::SHARED_PRESENT_SURFACE_CAPABILITIES_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            shared_present_supported_usage_flags: ImageUsageFlags::default(),
         }
     }
 }
@@ -10850,8 +11739,9 @@ impl Default for SparseBufferMemoryBindInfo {
     #[inline]
     fn default() -> Self {
         Self {
+            buffer: Buffer::default(),
+            bind_count: u32::default(),
             binds: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10880,7 +11770,7 @@ impl Default for SparseImageFormatProperties2 {
         Self {
             s_type: StructureType::SPARSE_IMAGE_FORMAT_PROPERTIES_2,
             next: ptr::null_mut(),
-            ..Default::default()
+            properties: SparseImageFormatProperties::default(),
         }
     }
 }
@@ -10910,8 +11800,9 @@ impl Default for SparseImageMemoryBindInfo {
     #[inline]
     fn default() -> Self {
         Self {
+            image: Image::default(),
+            bind_count: u32::default(),
             binds: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10942,7 +11833,7 @@ impl Default for SparseImageMemoryRequirements2 {
         Self {
             s_type: StructureType::SPARSE_IMAGE_MEMORY_REQUIREMENTS_2,
             next: ptr::null_mut(),
-            ..Default::default()
+            memory_requirements: SparseImageMemoryRequirements::default(),
         }
     }
 }
@@ -10960,8 +11851,9 @@ impl Default for SparseImageOpaqueMemoryBindInfo {
     #[inline]
     fn default() -> Self {
         Self {
+            image: Image::default(),
+            bind_count: u32::default(),
             binds: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -10991,9 +11883,10 @@ impl Default for SpecializationInfo {
     #[inline]
     fn default() -> Self {
         Self {
+            map_entry_count: u32::default(),
             map_entries: ptr::null(),
+            data_size: usize::default(),
             data: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11036,7 +11929,8 @@ impl Default for StreamDescriptorSurfaceCreateInfoGGP {
         Self {
             s_type: StructureType::STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP,
             next: ptr::null(),
-            ..Default::default()
+            flags: StreamDescriptorSurfaceCreateFlagsGGP::default(),
+            stream_descriptor: GgpStreamDescriptor::default(),
         }
     }
 }
@@ -11072,11 +11966,13 @@ impl Default for SubmitInfo {
         Self {
             s_type: StructureType::SUBMIT_INFO,
             next: ptr::null(),
+            wait_semaphore_count: u32::default(),
             wait_semaphores: ptr::null(),
             wait_dst_stage_mask: ptr::null(),
+            command_buffer_count: u32::default(),
             command_buffers: ptr::null(),
+            signal_semaphore_count: u32::default(),
             signal_semaphores: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11096,7 +11992,7 @@ impl Default for SubpassBeginInfo {
         Self {
             s_type: StructureType::SUBPASS_BEGIN_INFO,
             next: ptr::null(),
-            ..Default::default()
+            contents: SubpassContents::default(),
         }
     }
 }
@@ -11136,7 +12032,14 @@ impl Default for SubpassDependency2 {
         Self {
             s_type: StructureType::SUBPASS_DEPENDENCY_2,
             next: ptr::null(),
-            ..Default::default()
+            src_subpass: u32::default(),
+            dst_subpass: u32::default(),
+            src_stage_mask: PipelineStageFlags::default(),
+            dst_stage_mask: PipelineStageFlags::default(),
+            src_access_mask: AccessFlags::default(),
+            dst_access_mask: AccessFlags::default(),
+            dependency_flags: DependencyFlags::default(),
+            view_offset: i32::default(),
         }
     }
 }
@@ -11161,12 +12064,16 @@ impl Default for SubpassDescription {
     #[inline]
     fn default() -> Self {
         Self {
+            flags: SubpassDescriptionFlags::default(),
+            pipeline_bind_point: PipelineBindPoint::default(),
+            input_attachment_count: u32::default(),
             input_attachments: ptr::null(),
+            color_attachment_count: u32::default(),
             color_attachments: ptr::null(),
             resolve_attachments: ptr::null(),
             depth_stencil_attachment: ptr::null(),
+            preserve_attachment_count: u32::default(),
             preserve_attachments: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11196,12 +12103,17 @@ impl Default for SubpassDescription2 {
         Self {
             s_type: StructureType::SUBPASS_DESCRIPTION_2,
             next: ptr::null(),
+            flags: SubpassDescriptionFlags::default(),
+            pipeline_bind_point: PipelineBindPoint::default(),
+            view_mask: u32::default(),
+            input_attachment_count: u32::default(),
             input_attachments: ptr::null(),
+            color_attachment_count: u32::default(),
             color_attachments: ptr::null(),
             resolve_attachments: ptr::null(),
             depth_stencil_attachment: ptr::null(),
+            preserve_attachment_count: u32::default(),
             preserve_attachments: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11223,8 +12135,9 @@ impl Default for SubpassDescriptionDepthStencilResolve {
         Self {
             s_type: StructureType::SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE,
             next: ptr::null(),
+            depth_resolve_mode: ResolveModeFlags::default(),
+            stencil_resolve_mode: ResolveModeFlags::default(),
             depth_stencil_resolve_attachment: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11291,7 +12204,17 @@ impl Default for SurfaceCapabilities2EXT {
         Self {
             s_type: StructureType::SURFACE_CAPABILITIES_2_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            min_image_count: u32::default(),
+            max_image_count: u32::default(),
+            current_extent: Extent2D::default(),
+            min_image_extent: Extent2D::default(),
+            max_image_extent: Extent2D::default(),
+            max_image_array_layers: u32::default(),
+            supported_transforms: SurfaceTransformFlagsKHR::default(),
+            current_transform: SurfaceTransformFlagsKHR::default(),
+            supported_composite_alpha: CompositeAlphaFlagsKHR::default(),
+            supported_usage_flags: ImageUsageFlags::default(),
+            supported_surface_counters: SurfaceCounterFlagsEXT::default(),
         }
     }
 }
@@ -11311,7 +12234,7 @@ impl Default for SurfaceCapabilities2KHR {
         Self {
             s_type: StructureType::SURFACE_CAPABILITIES_2_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            surface_capabilities: SurfaceCapabilitiesKHR::default(),
         }
     }
 }
@@ -11331,7 +12254,7 @@ impl Default for SurfaceCapabilitiesFullScreenExclusiveEXT {
         Self {
             s_type: StructureType::SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            full_screen_exclusive_supported: Bool32::default(),
         }
     }
 }
@@ -11367,7 +12290,7 @@ impl Default for SurfaceFormat2KHR {
         Self {
             s_type: StructureType::SURFACE_FORMAT_2_KHR,
             next: ptr::null_mut(),
-            ..Default::default()
+            surface_format: SurfaceFormatKHR::default(),
         }
     }
 }
@@ -11395,7 +12318,7 @@ impl Default for SurfaceFullScreenExclusiveInfoEXT {
         Self {
             s_type: StructureType::SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT,
             next: ptr::null_mut(),
-            ..Default::default()
+            full_screen_exclusive: FullScreenExclusiveEXT::default(),
         }
     }
 }
@@ -11435,7 +12358,7 @@ impl Default for SurfaceProtectedCapabilitiesKHR {
         Self {
             s_type: StructureType::SURFACE_PROTECTED_CAPABILITIES_KHR,
             next: ptr::null(),
-            ..Default::default()
+            supports_protected: Bool32::default(),
         }
     }
 }
@@ -11455,7 +12378,7 @@ impl Default for SwapchainCounterCreateInfoEXT {
         Self {
             s_type: StructureType::SWAPCHAIN_COUNTER_CREATE_INFO_EXT,
             next: ptr::null(),
-            ..Default::default()
+            surface_counters: SurfaceCounterFlagsEXT::default(),
         }
     }
 }
@@ -11490,8 +12413,22 @@ impl Default for SwapchainCreateInfoKHR {
         Self {
             s_type: StructureType::SWAPCHAIN_CREATE_INFO_KHR,
             next: ptr::null(),
+            flags: SwapchainCreateFlagsKHR::default(),
+            surface: SurfaceKHR::default(),
+            min_image_count: u32::default(),
+            image_format: Format::default(),
+            image_color_space: ColorSpaceKHR::default(),
+            image_extent: Extent2D::default(),
+            image_array_layers: u32::default(),
+            image_usage: ImageUsageFlags::default(),
+            image_sharing_mode: SharingMode::default(),
+            queue_family_index_count: u32::default(),
             queue_family_indices: ptr::null(),
-            ..Default::default()
+            pre_transform: SurfaceTransformFlagsKHR::default(),
+            composite_alpha: CompositeAlphaFlagsKHR::default(),
+            present_mode: PresentModeKHR::default(),
+            clipped: Bool32::default(),
+            old_swapchain: SwapchainKHR::default(),
         }
     }
 }
@@ -11511,7 +12448,7 @@ impl Default for SwapchainDisplayNativeHdrCreateInfoAMD {
         Self {
             s_type: StructureType::SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD,
             next: ptr::null(),
-            ..Default::default()
+            local_dimming_enable: Bool32::default(),
         }
     }
 }
@@ -11531,7 +12468,7 @@ impl Default for SwapchainImageCreateInfoANDROID {
         Self {
             s_type: StructureType::SWAPCHAIN_IMAGE_CREATE_INFO_ANDROID,
             next: ptr::null(),
-            ..Default::default()
+            usage: SwapchainImageUsageFlagsANDROID::default(),
         }
     }
 }
@@ -11551,7 +12488,7 @@ impl Default for TextureLODGatherFormatPropertiesAMD {
         Self {
             s_type: StructureType::TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD,
             next: ptr::null_mut(),
-            ..Default::default()
+            supports_texture_gather_lod_bias_amd: Bool32::default(),
         }
     }
 }
@@ -11574,9 +12511,10 @@ impl Default for TimelineSemaphoreSubmitInfo {
         Self {
             s_type: StructureType::TIMELINE_SEMAPHORE_SUBMIT_INFO,
             next: ptr::null(),
+            wait_semaphore_value_count: u32::default(),
             wait_semaphore_values: ptr::null(),
+            signal_semaphore_value_count: u32::default(),
             signal_semaphore_values: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11614,8 +12552,9 @@ impl Default for ValidationCacheCreateInfoEXT {
         Self {
             s_type: StructureType::VALIDATION_CACHE_CREATE_INFO_EXT,
             next: ptr::null(),
+            flags: ValidationCacheCreateFlagsEXT::default(),
+            initial_data_size: usize::default(),
             initial_data: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11638,9 +12577,10 @@ impl Default for ValidationFeaturesEXT {
         Self {
             s_type: StructureType::VALIDATION_FEATURES_EXT,
             next: ptr::null(),
+            enabled_validation_feature_count: u32::default(),
             enabled_validation_features: ptr::null(),
+            disabled_validation_feature_count: u32::default(),
             disabled_validation_features: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11661,8 +12601,8 @@ impl Default for ValidationFlagsEXT {
         Self {
             s_type: StructureType::VALIDATION_FLAGS_EXT,
             next: ptr::null(),
+            disabled_validation_check_count: u32::default(),
             disabled_validation_checks: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11710,8 +12650,8 @@ impl Default for ViSurfaceCreateInfoNN {
         Self {
             s_type: StructureType::VI_SURFACE_CREATE_INFO_NN,
             next: ptr::null(),
+            flags: ViSurfaceCreateFlagsNN::default(),
             window: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -11763,9 +12703,9 @@ impl Default for WaylandSurfaceCreateInfoKHR {
         Self {
             s_type: StructureType::WAYLAND_SURFACE_CREATE_INFO_KHR,
             next: ptr::null(),
+            flags: WaylandSurfaceCreateFlagsKHR::default(),
             display: ptr::null_mut(),
             surface: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -11791,12 +12731,13 @@ impl Default for Win32KeyedMutexAcquireReleaseInfoKHR {
         Self {
             s_type: StructureType::WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR,
             next: ptr::null(),
+            acquire_count: u32::default(),
             acquire_syncs: ptr::null(),
             acquire_keys: ptr::null(),
             acquire_timeouts: ptr::null(),
+            release_count: u32::default(),
             release_syncs: ptr::null(),
             release_keys: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11822,12 +12763,13 @@ impl Default for Win32KeyedMutexAcquireReleaseInfoNV {
         Self {
             s_type: StructureType::WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV,
             next: ptr::null(),
+            acquire_count: u32::default(),
             acquire_syncs: ptr::null(),
             acquire_keys: ptr::null(),
             acquire_timeout_milliseconds: ptr::null(),
+            release_count: u32::default(),
             release_syncs: ptr::null(),
             release_keys: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11849,9 +12791,9 @@ impl Default for Win32SurfaceCreateInfoKHR {
         Self {
             s_type: StructureType::WIN32_SURFACE_CREATE_INFO_KHR,
             next: ptr::null(),
+            flags: Win32SurfaceCreateFlagsKHR::default(),
             hinstance: ptr::null_mut(),
             hwnd: ptr::null_mut(),
-            ..Default::default()
         }
     }
 }
@@ -11878,10 +12820,14 @@ impl Default for WriteDescriptorSet {
         Self {
             s_type: StructureType::WRITE_DESCRIPTOR_SET,
             next: ptr::null(),
+            dst_set: DescriptorSet::default(),
+            dst_binding: u32::default(),
+            dst_array_element: u32::default(),
+            descriptor_count: u32::default(),
+            descriptor_type: DescriptorType::default(),
             image_info: ptr::null(),
             buffer_info: ptr::null(),
             texel_buffer_view: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11902,8 +12848,8 @@ impl Default for WriteDescriptorSetAccelerationStructureKHR {
         Self {
             s_type: StructureType::WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR,
             next: ptr::null(),
+            acceleration_structure_count: u32::default(),
             acceleration_structures: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11924,8 +12870,8 @@ impl Default for WriteDescriptorSetInlineUniformBlockEXT {
         Self {
             s_type: StructureType::WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT,
             next: ptr::null(),
+            data_size: u32::default(),
             data: ptr::null(),
-            ..Default::default()
         }
     }
 }
@@ -11955,8 +12901,9 @@ impl Default for XcbSurfaceCreateInfoKHR {
         Self {
             s_type: StructureType::XCB_SURFACE_CREATE_INFO_KHR,
             next: ptr::null(),
+            flags: XcbSurfaceCreateFlagsKHR::default(),
             connection: ptr::null_mut(),
-            ..Default::default()
+            window: xcb_window_t::default(),
         }
     }
 }
@@ -11978,8 +12925,9 @@ impl Default for XlibSurfaceCreateInfoKHR {
         Self {
             s_type: StructureType::XLIB_SURFACE_CREATE_INFO_KHR,
             next: ptr::null(),
+            flags: XlibSurfaceCreateFlagsKHR::default(),
             dpy: ptr::null_mut(),
-            ..Default::default()
+            window: Window::default(),
         }
     }
 }
