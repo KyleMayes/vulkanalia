@@ -21,8 +21,9 @@ pub type ExtensionName = [c_char; MAX_EXTENSION_NAME_SIZE];
 
 ${getExtensionGroups().values.flatten().sortedBy { it.name }.joinToString("") { generateExtension(it) }}
 
+/// Converts a byte string into a Vulkan extension name.
 #[inline]
-const fn name(bytes: &[u8]) -> ExtensionName {
+pub const fn to_extension_name(bytes: &[u8]) -> ExtensionName {
     let mut name = [0; MAX_EXTENSION_NAME_SIZE];
 
     let mut index = 0;
@@ -44,7 +45,8 @@ private fun Registry.generateExtension(extension: Extension): String {
     val deprecation = generateDeprecation(extension)?.let { "\n$it" } ?: ""
     return """
 /// <${generateManualUrl(extension)}>$deprecation
-pub const ${extension.name}_EXTENSION: ExtensionName = name(b"${extension.name.original}");
+pub const ${extension.name}_EXTENSION: ExtensionName =
+    to_extension_name(b"${extension.name.original}");
     """.trim()
 }
 

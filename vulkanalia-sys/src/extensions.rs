@@ -13,543 +13,620 @@ use crate::MAX_EXTENSION_NAME_SIZE;
 pub type ExtensionName = [c_char; MAX_EXTENSION_NAME_SIZE];
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_buffer_marker.html>
-pub const AMD_BUFFER_MARKER_EXTENSION: ExtensionName = name(b"VK_AMD_buffer_marker");
+pub const AMD_BUFFER_MARKER_EXTENSION: ExtensionName = to_extension_name(b"VK_AMD_buffer_marker");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_device_coherent_memory.html>
 pub const AMD_DEVICE_COHERENT_MEMORY_EXTENSION: ExtensionName =
-    name(b"VK_AMD_device_coherent_memory");
+    to_extension_name(b"VK_AMD_device_coherent_memory");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_display_native_hdr.html>
-pub const AMD_DISPLAY_NATIVE_HDR_EXTENSION: ExtensionName = name(b"VK_AMD_display_native_hdr");
+pub const AMD_DISPLAY_NATIVE_HDR_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_AMD_display_native_hdr");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_draw_indirect_count.html>
-pub const AMD_DRAW_INDIRECT_COUNT_EXTENSION: ExtensionName = name(b"VK_AMD_draw_indirect_count");
+pub const AMD_DRAW_INDIRECT_COUNT_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_AMD_draw_indirect_count");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_gcn_shader.html>
-pub const AMD_GCN_SHADER_EXTENSION: ExtensionName = name(b"VK_AMD_gcn_shader");
+pub const AMD_GCN_SHADER_EXTENSION: ExtensionName = to_extension_name(b"VK_AMD_gcn_shader");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_gpu_shader_half_float.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_shader_float16_int8`")]
 pub const AMD_GPU_SHADER_HALF_FLOAT_EXTENSION: ExtensionName =
-    name(b"VK_AMD_gpu_shader_half_float");
+    to_extension_name(b"VK_AMD_gpu_shader_half_float");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_gpu_shader_int16.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_shader_float16_int8`")]
-pub const AMD_GPU_SHADER_INT16_EXTENSION: ExtensionName = name(b"VK_AMD_gpu_shader_int16");
+pub const AMD_GPU_SHADER_INT16_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_AMD_gpu_shader_int16");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_memory_overallocation_behavior.html>
 pub const AMD_MEMORY_OVERALLOCATION_BEHAVIOR_EXTENSION: ExtensionName =
-    name(b"VK_AMD_memory_overallocation_behavior");
+    to_extension_name(b"VK_AMD_memory_overallocation_behavior");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_mixed_attachment_samples.html>
 pub const AMD_MIXED_ATTACHMENT_SAMPLES_EXTENSION: ExtensionName =
-    name(b"VK_AMD_mixed_attachment_samples");
+    to_extension_name(b"VK_AMD_mixed_attachment_samples");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_negative_viewport_height.html>
 pub const AMD_NEGATIVE_VIEWPORT_HEIGHT_EXTENSION: ExtensionName =
-    name(b"VK_AMD_negative_viewport_height");
+    to_extension_name(b"VK_AMD_negative_viewport_height");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_pipeline_compiler_control.html>
 pub const AMD_PIPELINE_COMPILER_CONTROL_EXTENSION: ExtensionName =
-    name(b"VK_AMD_pipeline_compiler_control");
+    to_extension_name(b"VK_AMD_pipeline_compiler_control");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_rasterization_order.html>
-pub const AMD_RASTERIZATION_ORDER_EXTENSION: ExtensionName = name(b"VK_AMD_rasterization_order");
+pub const AMD_RASTERIZATION_ORDER_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_AMD_rasterization_order");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_ballot.html>
-pub const AMD_SHADER_BALLOT_EXTENSION: ExtensionName = name(b"VK_AMD_shader_ballot");
+pub const AMD_SHADER_BALLOT_EXTENSION: ExtensionName = to_extension_name(b"VK_AMD_shader_ballot");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_core_properties.html>
 pub const AMD_SHADER_CORE_PROPERTIES_EXTENSION: ExtensionName =
-    name(b"VK_AMD_shader_core_properties");
+    to_extension_name(b"VK_AMD_shader_core_properties");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_core_properties2.html>
 pub const AMD_SHADER_CORE_PROPERTIES2_EXTENSION: ExtensionName =
-    name(b"VK_AMD_shader_core_properties2");
+    to_extension_name(b"VK_AMD_shader_core_properties2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_explicit_vertex_parameter.html>
 pub const AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION: ExtensionName =
-    name(b"VK_AMD_shader_explicit_vertex_parameter");
+    to_extension_name(b"VK_AMD_shader_explicit_vertex_parameter");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_fragment_mask.html>
-pub const AMD_SHADER_FRAGMENT_MASK_EXTENSION: ExtensionName = name(b"VK_AMD_shader_fragment_mask");
+pub const AMD_SHADER_FRAGMENT_MASK_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_AMD_shader_fragment_mask");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_image_load_store_lod.html>
 pub const AMD_SHADER_IMAGE_LOAD_STORE_LOD_EXTENSION: ExtensionName =
-    name(b"VK_AMD_shader_image_load_store_lod");
+    to_extension_name(b"VK_AMD_shader_image_load_store_lod");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_info.html>
-pub const AMD_SHADER_INFO_EXTENSION: ExtensionName = name(b"VK_AMD_shader_info");
+pub const AMD_SHADER_INFO_EXTENSION: ExtensionName = to_extension_name(b"VK_AMD_shader_info");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_trinary_minmax.html>
 pub const AMD_SHADER_TRINARY_MINMAX_EXTENSION: ExtensionName =
-    name(b"VK_AMD_shader_trinary_minmax");
+    to_extension_name(b"VK_AMD_shader_trinary_minmax");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_texture_gather_bias_lod.html>
 pub const AMD_TEXTURE_GATHER_BIAS_LOD_EXTENSION: ExtensionName =
-    name(b"VK_AMD_texture_gather_bias_lod");
+    to_extension_name(b"VK_AMD_texture_gather_bias_lod");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_ANDROID_external_memory_android_hardware_buffer.html>
 pub const ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION: ExtensionName =
-    name(b"VK_ANDROID_external_memory_android_hardware_buffer");
+    to_extension_name(b"VK_ANDROID_external_memory_android_hardware_buffer");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_4444_formats.html>
-pub const EXT_4444_FORMATS_EXTENSION: ExtensionName = name(b"VK_EXT_4444_formats");
+pub const EXT_4444_FORMATS_EXTENSION: ExtensionName = to_extension_name(b"VK_EXT_4444_formats");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_acquire_xlib_display.html>
-pub const EXT_ACQUIRE_XLIB_DISPLAY_EXTENSION: ExtensionName = name(b"VK_EXT_acquire_xlib_display");
+pub const EXT_ACQUIRE_XLIB_DISPLAY_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_acquire_xlib_display");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_astc_decode_mode.html>
-pub const EXT_ASTC_DECODE_MODE_EXTENSION: ExtensionName = name(b"VK_EXT_astc_decode_mode");
+pub const EXT_ASTC_DECODE_MODE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_astc_decode_mode");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_blend_operation_advanced.html>
 pub const EXT_BLEND_OPERATION_ADVANCED_EXTENSION: ExtensionName =
-    name(b"VK_EXT_blend_operation_advanced");
+    to_extension_name(b"VK_EXT_blend_operation_advanced");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_buffer_device_address.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_buffer_device_address`")]
 pub const EXT_BUFFER_DEVICE_ADDRESS_EXTENSION: ExtensionName =
-    name(b"VK_EXT_buffer_device_address");
+    to_extension_name(b"VK_EXT_buffer_device_address");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_calibrated_timestamps.html>
 pub const EXT_CALIBRATED_TIMESTAMPS_EXTENSION: ExtensionName =
-    name(b"VK_EXT_calibrated_timestamps");
+    to_extension_name(b"VK_EXT_calibrated_timestamps");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_conditional_rendering.html>
 pub const EXT_CONDITIONAL_RENDERING_EXTENSION: ExtensionName =
-    name(b"VK_EXT_conditional_rendering");
+    to_extension_name(b"VK_EXT_conditional_rendering");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_conservative_rasterization.html>
 pub const EXT_CONSERVATIVE_RASTERIZATION_EXTENSION: ExtensionName =
-    name(b"VK_EXT_conservative_rasterization");
+    to_extension_name(b"VK_EXT_conservative_rasterization");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_custom_border_color.html>
-pub const EXT_CUSTOM_BORDER_COLOR_EXTENSION: ExtensionName = name(b"VK_EXT_custom_border_color");
+pub const EXT_CUSTOM_BORDER_COLOR_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_custom_border_color");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_debug_marker.html>
-pub const EXT_DEBUG_MARKER_EXTENSION: ExtensionName = name(b"VK_EXT_debug_marker");
+pub const EXT_DEBUG_MARKER_EXTENSION: ExtensionName = to_extension_name(b"VK_EXT_debug_marker");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_debug_report.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_debug_utils`")]
-pub const EXT_DEBUG_REPORT_EXTENSION: ExtensionName = name(b"VK_EXT_debug_report");
+pub const EXT_DEBUG_REPORT_EXTENSION: ExtensionName = to_extension_name(b"VK_EXT_debug_report");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_debug_utils.html>
-pub const EXT_DEBUG_UTILS_EXTENSION: ExtensionName = name(b"VK_EXT_debug_utils");
+pub const EXT_DEBUG_UTILS_EXTENSION: ExtensionName = to_extension_name(b"VK_EXT_debug_utils");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_depth_clip_enable.html>
-pub const EXT_DEPTH_CLIP_ENABLE_EXTENSION: ExtensionName = name(b"VK_EXT_depth_clip_enable");
+pub const EXT_DEPTH_CLIP_ENABLE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_depth_clip_enable");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_depth_range_unrestricted.html>
 pub const EXT_DEPTH_RANGE_UNRESTRICTED_EXTENSION: ExtensionName =
-    name(b"VK_EXT_depth_range_unrestricted");
+    to_extension_name(b"VK_EXT_depth_range_unrestricted");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_descriptor_indexing.html>
-pub const EXT_DESCRIPTOR_INDEXING_EXTENSION: ExtensionName = name(b"VK_EXT_descriptor_indexing");
+pub const EXT_DESCRIPTOR_INDEXING_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_descriptor_indexing");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_device_memory_report.html>
-pub const EXT_DEVICE_MEMORY_REPORT_EXTENSION: ExtensionName = name(b"VK_EXT_device_memory_report");
+pub const EXT_DEVICE_MEMORY_REPORT_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_device_memory_report");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_direct_mode_display.html>
-pub const EXT_DIRECT_MODE_DISPLAY_EXTENSION: ExtensionName = name(b"VK_EXT_direct_mode_display");
+pub const EXT_DIRECT_MODE_DISPLAY_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_direct_mode_display");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_directfb_surface.html>
-pub const EXT_DIRECTFB_SURFACE_EXTENSION: ExtensionName = name(b"VK_EXT_directfb_surface");
+pub const EXT_DIRECTFB_SURFACE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_directfb_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_discard_rectangles.html>
-pub const EXT_DISCARD_RECTANGLES_EXTENSION: ExtensionName = name(b"VK_EXT_discard_rectangles");
+pub const EXT_DISCARD_RECTANGLES_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_discard_rectangles");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_display_control.html>
-pub const EXT_DISPLAY_CONTROL_EXTENSION: ExtensionName = name(b"VK_EXT_display_control");
+pub const EXT_DISPLAY_CONTROL_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_display_control");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_display_surface_counter.html>
 pub const EXT_DISPLAY_SURFACE_COUNTER_EXTENSION: ExtensionName =
-    name(b"VK_EXT_display_surface_counter");
+    to_extension_name(b"VK_EXT_display_surface_counter");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_extended_dynamic_state.html>
 pub const EXT_EXTENDED_DYNAMIC_STATE_EXTENSION: ExtensionName =
-    name(b"VK_EXT_extended_dynamic_state");
+    to_extension_name(b"VK_EXT_extended_dynamic_state");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_external_memory_dma_buf.html>
 pub const EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION: ExtensionName =
-    name(b"VK_EXT_external_memory_dma_buf");
+    to_extension_name(b"VK_EXT_external_memory_dma_buf");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_external_memory_host.html>
-pub const EXT_EXTERNAL_MEMORY_HOST_EXTENSION: ExtensionName = name(b"VK_EXT_external_memory_host");
+pub const EXT_EXTERNAL_MEMORY_HOST_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_external_memory_host");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_filter_cubic.html>
-pub const EXT_FILTER_CUBIC_EXTENSION: ExtensionName = name(b"VK_EXT_filter_cubic");
+pub const EXT_FILTER_CUBIC_EXTENSION: ExtensionName = to_extension_name(b"VK_EXT_filter_cubic");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_fragment_density_map.html>
-pub const EXT_FRAGMENT_DENSITY_MAP_EXTENSION: ExtensionName = name(b"VK_EXT_fragment_density_map");
+pub const EXT_FRAGMENT_DENSITY_MAP_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_fragment_density_map");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_fragment_density_map2.html>
 pub const EXT_FRAGMENT_DENSITY_MAP2_EXTENSION: ExtensionName =
-    name(b"VK_EXT_fragment_density_map2");
+    to_extension_name(b"VK_EXT_fragment_density_map2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_fragment_shader_interlock.html>
 pub const EXT_FRAGMENT_SHADER_INTERLOCK_EXTENSION: ExtensionName =
-    name(b"VK_EXT_fragment_shader_interlock");
+    to_extension_name(b"VK_EXT_fragment_shader_interlock");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_full_screen_exclusive.html>
 pub const EXT_FULL_SCREEN_EXCLUSIVE_EXTENSION: ExtensionName =
-    name(b"VK_EXT_full_screen_exclusive");
+    to_extension_name(b"VK_EXT_full_screen_exclusive");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_global_priority.html>
-pub const EXT_GLOBAL_PRIORITY_EXTENSION: ExtensionName = name(b"VK_EXT_global_priority");
+pub const EXT_GLOBAL_PRIORITY_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_global_priority");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_hdr_metadata.html>
-pub const EXT_HDR_METADATA_EXTENSION: ExtensionName = name(b"VK_EXT_hdr_metadata");
+pub const EXT_HDR_METADATA_EXTENSION: ExtensionName = to_extension_name(b"VK_EXT_hdr_metadata");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_headless_surface.html>
-pub const EXT_HEADLESS_SURFACE_EXTENSION: ExtensionName = name(b"VK_EXT_headless_surface");
+pub const EXT_HEADLESS_SURFACE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_headless_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_host_query_reset.html>
-pub const EXT_HOST_QUERY_RESET_EXTENSION: ExtensionName = name(b"VK_EXT_host_query_reset");
+pub const EXT_HOST_QUERY_RESET_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_host_query_reset");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_image_drm_format_modifier.html>
 pub const EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION: ExtensionName =
-    name(b"VK_EXT_image_drm_format_modifier");
+    to_extension_name(b"VK_EXT_image_drm_format_modifier");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_image_robustness.html>
-pub const EXT_IMAGE_ROBUSTNESS_EXTENSION: ExtensionName = name(b"VK_EXT_image_robustness");
+pub const EXT_IMAGE_ROBUSTNESS_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_image_robustness");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_index_type_uint8.html>
-pub const EXT_INDEX_TYPE_UINT8_EXTENSION: ExtensionName = name(b"VK_EXT_index_type_uint8");
+pub const EXT_INDEX_TYPE_UINT8_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_index_type_uint8");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_inline_uniform_block.html>
-pub const EXT_INLINE_UNIFORM_BLOCK_EXTENSION: ExtensionName = name(b"VK_EXT_inline_uniform_block");
+pub const EXT_INLINE_UNIFORM_BLOCK_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_inline_uniform_block");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_line_rasterization.html>
-pub const EXT_LINE_RASTERIZATION_EXTENSION: ExtensionName = name(b"VK_EXT_line_rasterization");
+pub const EXT_LINE_RASTERIZATION_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_line_rasterization");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_memory_budget.html>
-pub const EXT_MEMORY_BUDGET_EXTENSION: ExtensionName = name(b"VK_EXT_memory_budget");
+pub const EXT_MEMORY_BUDGET_EXTENSION: ExtensionName = to_extension_name(b"VK_EXT_memory_budget");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_memory_priority.html>
-pub const EXT_MEMORY_PRIORITY_EXTENSION: ExtensionName = name(b"VK_EXT_memory_priority");
+pub const EXT_MEMORY_PRIORITY_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_memory_priority");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_metal_surface.html>
-pub const EXT_METAL_SURFACE_EXTENSION: ExtensionName = name(b"VK_EXT_metal_surface");
+pub const EXT_METAL_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_EXT_metal_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pci_bus_info.html>
-pub const EXT_PCI_BUS_INFO_EXTENSION: ExtensionName = name(b"VK_EXT_pci_bus_info");
+pub const EXT_PCI_BUS_INFO_EXTENSION: ExtensionName = to_extension_name(b"VK_EXT_pci_bus_info");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pipeline_creation_cache_control.html>
 pub const EXT_PIPELINE_CREATION_CACHE_CONTROL_EXTENSION: ExtensionName =
-    name(b"VK_EXT_pipeline_creation_cache_control");
+    to_extension_name(b"VK_EXT_pipeline_creation_cache_control");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pipeline_creation_feedback.html>
 pub const EXT_PIPELINE_CREATION_FEEDBACK_EXTENSION: ExtensionName =
-    name(b"VK_EXT_pipeline_creation_feedback");
+    to_extension_name(b"VK_EXT_pipeline_creation_feedback");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_post_depth_coverage.html>
-pub const EXT_POST_DEPTH_COVERAGE_EXTENSION: ExtensionName = name(b"VK_EXT_post_depth_coverage");
+pub const EXT_POST_DEPTH_COVERAGE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_post_depth_coverage");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_private_data.html>
-pub const EXT_PRIVATE_DATA_EXTENSION: ExtensionName = name(b"VK_EXT_private_data");
+pub const EXT_PRIVATE_DATA_EXTENSION: ExtensionName = to_extension_name(b"VK_EXT_private_data");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_queue_family_foreign.html>
-pub const EXT_QUEUE_FAMILY_FOREIGN_EXTENSION: ExtensionName = name(b"VK_EXT_queue_family_foreign");
+pub const EXT_QUEUE_FAMILY_FOREIGN_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_queue_family_foreign");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_robustness2.html>
-pub const EXT_ROBUSTNESS2_EXTENSION: ExtensionName = name(b"VK_EXT_robustness2");
+pub const EXT_ROBUSTNESS2_EXTENSION: ExtensionName = to_extension_name(b"VK_EXT_robustness2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_sample_locations.html>
-pub const EXT_SAMPLE_LOCATIONS_EXTENSION: ExtensionName = name(b"VK_EXT_sample_locations");
+pub const EXT_SAMPLE_LOCATIONS_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_sample_locations");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_sampler_filter_minmax.html>
 pub const EXT_SAMPLER_FILTER_MINMAX_EXTENSION: ExtensionName =
-    name(b"VK_EXT_sampler_filter_minmax");
+    to_extension_name(b"VK_EXT_sampler_filter_minmax");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_scalar_block_layout.html>
-pub const EXT_SCALAR_BLOCK_LAYOUT_EXTENSION: ExtensionName = name(b"VK_EXT_scalar_block_layout");
+pub const EXT_SCALAR_BLOCK_LAYOUT_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_scalar_block_layout");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_separate_stencil_usage.html>
 pub const EXT_SEPARATE_STENCIL_USAGE_EXTENSION: ExtensionName =
-    name(b"VK_EXT_separate_stencil_usage");
+    to_extension_name(b"VK_EXT_separate_stencil_usage");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_atomic_float.html>
-pub const EXT_SHADER_ATOMIC_FLOAT_EXTENSION: ExtensionName = name(b"VK_EXT_shader_atomic_float");
+pub const EXT_SHADER_ATOMIC_FLOAT_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_shader_atomic_float");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_demote_to_helper_invocation.html>
 pub const EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_EXTENSION: ExtensionName =
-    name(b"VK_EXT_shader_demote_to_helper_invocation");
+    to_extension_name(b"VK_EXT_shader_demote_to_helper_invocation");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_image_atomic_int64.html>
 pub const EXT_SHADER_IMAGE_ATOMIC_INT64_EXTENSION: ExtensionName =
-    name(b"VK_EXT_shader_image_atomic_int64");
+    to_extension_name(b"VK_EXT_shader_image_atomic_int64");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_stencil_export.html>
 pub const EXT_SHADER_STENCIL_EXPORT_EXTENSION: ExtensionName =
-    name(b"VK_EXT_shader_stencil_export");
+    to_extension_name(b"VK_EXT_shader_stencil_export");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_subgroup_ballot.html>
 #[deprecated(note = "deprecated in favor of `VK_VERSION_1_2`")]
 pub const EXT_SHADER_SUBGROUP_BALLOT_EXTENSION: ExtensionName =
-    name(b"VK_EXT_shader_subgroup_ballot");
+    to_extension_name(b"VK_EXT_shader_subgroup_ballot");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_subgroup_vote.html>
 #[deprecated(note = "deprecated in favor of `VK_VERSION_1_1`")]
-pub const EXT_SHADER_SUBGROUP_VOTE_EXTENSION: ExtensionName = name(b"VK_EXT_shader_subgroup_vote");
+pub const EXT_SHADER_SUBGROUP_VOTE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_shader_subgroup_vote");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_viewport_index_layer.html>
 pub const EXT_SHADER_VIEWPORT_INDEX_LAYER_EXTENSION: ExtensionName =
-    name(b"VK_EXT_shader_viewport_index_layer");
+    to_extension_name(b"VK_EXT_shader_viewport_index_layer");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_subgroup_size_control.html>
 pub const EXT_SUBGROUP_SIZE_CONTROL_EXTENSION: ExtensionName =
-    name(b"VK_EXT_subgroup_size_control");
+    to_extension_name(b"VK_EXT_subgroup_size_control");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_swapchain_colorspace.html>
-pub const EXT_SWAPCHAIN_COLORSPACE_EXTENSION: ExtensionName = name(b"VK_EXT_swapchain_colorspace");
+pub const EXT_SWAPCHAIN_COLORSPACE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_swapchain_colorspace");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_texel_buffer_alignment.html>
 pub const EXT_TEXEL_BUFFER_ALIGNMENT_EXTENSION: ExtensionName =
-    name(b"VK_EXT_texel_buffer_alignment");
+    to_extension_name(b"VK_EXT_texel_buffer_alignment");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_texture_compression_astc_hdr.html>
 pub const EXT_TEXTURE_COMPRESSION_ASTC_HDR_EXTENSION: ExtensionName =
-    name(b"VK_EXT_texture_compression_astc_hdr");
+    to_extension_name(b"VK_EXT_texture_compression_astc_hdr");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_tooling_info.html>
-pub const EXT_TOOLING_INFO_EXTENSION: ExtensionName = name(b"VK_EXT_tooling_info");
+pub const EXT_TOOLING_INFO_EXTENSION: ExtensionName = to_extension_name(b"VK_EXT_tooling_info");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_transform_feedback.html>
-pub const EXT_TRANSFORM_FEEDBACK_EXTENSION: ExtensionName = name(b"VK_EXT_transform_feedback");
+pub const EXT_TRANSFORM_FEEDBACK_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_transform_feedback");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_validation_cache.html>
-pub const EXT_VALIDATION_CACHE_EXTENSION: ExtensionName = name(b"VK_EXT_validation_cache");
+pub const EXT_VALIDATION_CACHE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_validation_cache");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_validation_features.html>
-pub const EXT_VALIDATION_FEATURES_EXTENSION: ExtensionName = name(b"VK_EXT_validation_features");
+pub const EXT_VALIDATION_FEATURES_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_validation_features");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_validation_flags.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_validation_features`")]
-pub const EXT_VALIDATION_FLAGS_EXTENSION: ExtensionName = name(b"VK_EXT_validation_flags");
+pub const EXT_VALIDATION_FLAGS_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_validation_flags");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_vertex_attribute_divisor.html>
 pub const EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION: ExtensionName =
-    name(b"VK_EXT_vertex_attribute_divisor");
+    to_extension_name(b"VK_EXT_vertex_attribute_divisor");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_ycbcr_image_arrays.html>
-pub const EXT_YCBCR_IMAGE_ARRAYS_EXTENSION: ExtensionName = name(b"VK_EXT_ycbcr_image_arrays");
+pub const EXT_YCBCR_IMAGE_ARRAYS_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_EXT_ycbcr_image_arrays");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_FUCHSIA_imagepipe_surface.html>
 pub const FUCHSIA_IMAGEPIPE_SURFACE_EXTENSION: ExtensionName =
-    name(b"VK_FUCHSIA_imagepipe_surface");
+    to_extension_name(b"VK_FUCHSIA_imagepipe_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GGP_frame_token.html>
-pub const GGP_FRAME_TOKEN_EXTENSION: ExtensionName = name(b"VK_GGP_frame_token");
+pub const GGP_FRAME_TOKEN_EXTENSION: ExtensionName = to_extension_name(b"VK_GGP_frame_token");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GGP_stream_descriptor_surface.html>
 pub const GGP_STREAM_DESCRIPTOR_SURFACE_EXTENSION: ExtensionName =
-    name(b"VK_GGP_stream_descriptor_surface");
+    to_extension_name(b"VK_GGP_stream_descriptor_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GOOGLE_decorate_string.html>
-pub const GOOGLE_DECORATE_STRING_EXTENSION: ExtensionName = name(b"VK_GOOGLE_decorate_string");
+pub const GOOGLE_DECORATE_STRING_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_GOOGLE_decorate_string");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GOOGLE_display_timing.html>
-pub const GOOGLE_DISPLAY_TIMING_EXTENSION: ExtensionName = name(b"VK_GOOGLE_display_timing");
+pub const GOOGLE_DISPLAY_TIMING_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_GOOGLE_display_timing");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GOOGLE_hlsl_functionality1.html>
 pub const GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION: ExtensionName =
-    name(b"VK_GOOGLE_hlsl_functionality1");
+    to_extension_name(b"VK_GOOGLE_hlsl_functionality1");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GOOGLE_user_type.html>
-pub const GOOGLE_USER_TYPE_EXTENSION: ExtensionName = name(b"VK_GOOGLE_user_type");
+pub const GOOGLE_USER_TYPE_EXTENSION: ExtensionName = to_extension_name(b"VK_GOOGLE_user_type");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_IMG_filter_cubic.html>
-pub const IMG_FILTER_CUBIC_EXTENSION: ExtensionName = name(b"VK_IMG_filter_cubic");
+pub const IMG_FILTER_CUBIC_EXTENSION: ExtensionName = to_extension_name(b"VK_IMG_filter_cubic");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_IMG_format_pvrtc.html>
-pub const IMG_FORMAT_PVRTC_EXTENSION: ExtensionName = name(b"VK_IMG_format_pvrtc");
+pub const IMG_FORMAT_PVRTC_EXTENSION: ExtensionName = to_extension_name(b"VK_IMG_format_pvrtc");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_INTEL_performance_query.html>
-pub const INTEL_PERFORMANCE_QUERY_EXTENSION: ExtensionName = name(b"VK_INTEL_performance_query");
+pub const INTEL_PERFORMANCE_QUERY_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_INTEL_performance_query");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_INTEL_shader_integer_functions2.html>
 pub const INTEL_SHADER_INTEGER_FUNCTIONS2_EXTENSION: ExtensionName =
-    name(b"VK_INTEL_shader_integer_functions2");
+    to_extension_name(b"VK_INTEL_shader_integer_functions2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_16bit_storage.html>
-pub const KHR_16BIT_STORAGE_EXTENSION: ExtensionName = name(b"VK_KHR_16bit_storage");
+pub const KHR_16BIT_STORAGE_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_16bit_storage");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_8bit_storage.html>
-pub const KHR_8BIT_STORAGE_EXTENSION: ExtensionName = name(b"VK_KHR_8bit_storage");
+pub const KHR_8BIT_STORAGE_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_8bit_storage");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_android_surface.html>
-pub const KHR_ANDROID_SURFACE_EXTENSION: ExtensionName = name(b"VK_KHR_android_surface");
+pub const KHR_ANDROID_SURFACE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_android_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_bind_memory2.html>
-pub const KHR_BIND_MEMORY2_EXTENSION: ExtensionName = name(b"VK_KHR_bind_memory2");
+pub const KHR_BIND_MEMORY2_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_bind_memory2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_buffer_device_address.html>
 pub const KHR_BUFFER_DEVICE_ADDRESS_EXTENSION: ExtensionName =
-    name(b"VK_KHR_buffer_device_address");
+    to_extension_name(b"VK_KHR_buffer_device_address");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_copy_commands2.html>
-pub const KHR_COPY_COMMANDS2_EXTENSION: ExtensionName = name(b"VK_KHR_copy_commands2");
+pub const KHR_COPY_COMMANDS2_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_copy_commands2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_create_renderpass2.html>
-pub const KHR_CREATE_RENDERPASS2_EXTENSION: ExtensionName = name(b"VK_KHR_create_renderpass2");
+pub const KHR_CREATE_RENDERPASS2_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_create_renderpass2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_dedicated_allocation.html>
-pub const KHR_DEDICATED_ALLOCATION_EXTENSION: ExtensionName = name(b"VK_KHR_dedicated_allocation");
+pub const KHR_DEDICATED_ALLOCATION_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_dedicated_allocation");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_deferred_host_operations.html>
 pub const KHR_DEFERRED_HOST_OPERATIONS_EXTENSION: ExtensionName =
-    name(b"VK_KHR_deferred_host_operations");
+    to_extension_name(b"VK_KHR_deferred_host_operations");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_depth_stencil_resolve.html>
 pub const KHR_DEPTH_STENCIL_RESOLVE_EXTENSION: ExtensionName =
-    name(b"VK_KHR_depth_stencil_resolve");
+    to_extension_name(b"VK_KHR_depth_stencil_resolve");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_descriptor_update_template.html>
 pub const KHR_DESCRIPTOR_UPDATE_TEMPLATE_EXTENSION: ExtensionName =
-    name(b"VK_KHR_descriptor_update_template");
+    to_extension_name(b"VK_KHR_descriptor_update_template");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_device_group.html>
-pub const KHR_DEVICE_GROUP_EXTENSION: ExtensionName = name(b"VK_KHR_device_group");
+pub const KHR_DEVICE_GROUP_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_device_group");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_device_group_creation.html>
 pub const KHR_DEVICE_GROUP_CREATION_EXTENSION: ExtensionName =
-    name(b"VK_KHR_device_group_creation");
+    to_extension_name(b"VK_KHR_device_group_creation");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_display.html>
-pub const KHR_DISPLAY_EXTENSION: ExtensionName = name(b"VK_KHR_display");
+pub const KHR_DISPLAY_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_display");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_display_swapchain.html>
-pub const KHR_DISPLAY_SWAPCHAIN_EXTENSION: ExtensionName = name(b"VK_KHR_display_swapchain");
+pub const KHR_DISPLAY_SWAPCHAIN_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_display_swapchain");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_draw_indirect_count.html>
-pub const KHR_DRAW_INDIRECT_COUNT_EXTENSION: ExtensionName = name(b"VK_KHR_draw_indirect_count");
+pub const KHR_DRAW_INDIRECT_COUNT_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_draw_indirect_count");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_driver_properties.html>
-pub const KHR_DRIVER_PROPERTIES_EXTENSION: ExtensionName = name(b"VK_KHR_driver_properties");
+pub const KHR_DRIVER_PROPERTIES_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_driver_properties");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_fence.html>
-pub const KHR_EXTERNAL_FENCE_EXTENSION: ExtensionName = name(b"VK_KHR_external_fence");
+pub const KHR_EXTERNAL_FENCE_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_external_fence");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_fence_capabilities.html>
 pub const KHR_EXTERNAL_FENCE_CAPABILITIES_EXTENSION: ExtensionName =
-    name(b"VK_KHR_external_fence_capabilities");
+    to_extension_name(b"VK_KHR_external_fence_capabilities");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_fence_fd.html>
-pub const KHR_EXTERNAL_FENCE_FD_EXTENSION: ExtensionName = name(b"VK_KHR_external_fence_fd");
+pub const KHR_EXTERNAL_FENCE_FD_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_external_fence_fd");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_fence_win32.html>
-pub const KHR_EXTERNAL_FENCE_WIN32_EXTENSION: ExtensionName = name(b"VK_KHR_external_fence_win32");
+pub const KHR_EXTERNAL_FENCE_WIN32_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_external_fence_win32");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_memory.html>
-pub const KHR_EXTERNAL_MEMORY_EXTENSION: ExtensionName = name(b"VK_KHR_external_memory");
+pub const KHR_EXTERNAL_MEMORY_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_external_memory");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_memory_capabilities.html>
 pub const KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION: ExtensionName =
-    name(b"VK_KHR_external_memory_capabilities");
+    to_extension_name(b"VK_KHR_external_memory_capabilities");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_memory_fd.html>
-pub const KHR_EXTERNAL_MEMORY_FD_EXTENSION: ExtensionName = name(b"VK_KHR_external_memory_fd");
+pub const KHR_EXTERNAL_MEMORY_FD_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_external_memory_fd");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_memory_win32.html>
 pub const KHR_EXTERNAL_MEMORY_WIN32_EXTENSION: ExtensionName =
-    name(b"VK_KHR_external_memory_win32");
+    to_extension_name(b"VK_KHR_external_memory_win32");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_semaphore.html>
-pub const KHR_EXTERNAL_SEMAPHORE_EXTENSION: ExtensionName = name(b"VK_KHR_external_semaphore");
+pub const KHR_EXTERNAL_SEMAPHORE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_external_semaphore");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_semaphore_capabilities.html>
 pub const KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION: ExtensionName =
-    name(b"VK_KHR_external_semaphore_capabilities");
+    to_extension_name(b"VK_KHR_external_semaphore_capabilities");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_semaphore_fd.html>
 pub const KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION: ExtensionName =
-    name(b"VK_KHR_external_semaphore_fd");
+    to_extension_name(b"VK_KHR_external_semaphore_fd");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_semaphore_win32.html>
 pub const KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION: ExtensionName =
-    name(b"VK_KHR_external_semaphore_win32");
+    to_extension_name(b"VK_KHR_external_semaphore_win32");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_get_display_properties2.html>
 pub const KHR_GET_DISPLAY_PROPERTIES2_EXTENSION: ExtensionName =
-    name(b"VK_KHR_get_display_properties2");
+    to_extension_name(b"VK_KHR_get_display_properties2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_get_memory_requirements2.html>
 pub const KHR_GET_MEMORY_REQUIREMENTS2_EXTENSION: ExtensionName =
-    name(b"VK_KHR_get_memory_requirements2");
+    to_extension_name(b"VK_KHR_get_memory_requirements2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_get_physical_device_properties2.html>
 pub const KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION: ExtensionName =
-    name(b"VK_KHR_get_physical_device_properties2");
+    to_extension_name(b"VK_KHR_get_physical_device_properties2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_get_surface_capabilities2.html>
 pub const KHR_GET_SURFACE_CAPABILITIES2_EXTENSION: ExtensionName =
-    name(b"VK_KHR_get_surface_capabilities2");
+    to_extension_name(b"VK_KHR_get_surface_capabilities2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_image_format_list.html>
-pub const KHR_IMAGE_FORMAT_LIST_EXTENSION: ExtensionName = name(b"VK_KHR_image_format_list");
+pub const KHR_IMAGE_FORMAT_LIST_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_image_format_list");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_imageless_framebuffer.html>
 pub const KHR_IMAGELESS_FRAMEBUFFER_EXTENSION: ExtensionName =
-    name(b"VK_KHR_imageless_framebuffer");
+    to_extension_name(b"VK_KHR_imageless_framebuffer");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_incremental_present.html>
-pub const KHR_INCREMENTAL_PRESENT_EXTENSION: ExtensionName = name(b"VK_KHR_incremental_present");
+pub const KHR_INCREMENTAL_PRESENT_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_incremental_present");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_maintenance1.html>
-pub const KHR_MAINTENANCE1_EXTENSION: ExtensionName = name(b"VK_KHR_maintenance1");
+pub const KHR_MAINTENANCE1_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_maintenance1");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_maintenance2.html>
-pub const KHR_MAINTENANCE2_EXTENSION: ExtensionName = name(b"VK_KHR_maintenance2");
+pub const KHR_MAINTENANCE2_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_maintenance2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_maintenance3.html>
-pub const KHR_MAINTENANCE3_EXTENSION: ExtensionName = name(b"VK_KHR_maintenance3");
+pub const KHR_MAINTENANCE3_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_maintenance3");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_multiview.html>
-pub const KHR_MULTIVIEW_EXTENSION: ExtensionName = name(b"VK_KHR_multiview");
+pub const KHR_MULTIVIEW_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_multiview");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_performance_query.html>
-pub const KHR_PERFORMANCE_QUERY_EXTENSION: ExtensionName = name(b"VK_KHR_performance_query");
+pub const KHR_PERFORMANCE_QUERY_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_performance_query");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_pipeline_executable_properties.html>
 pub const KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION: ExtensionName =
-    name(b"VK_KHR_pipeline_executable_properties");
+    to_extension_name(b"VK_KHR_pipeline_executable_properties");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_pipeline_library.html>
-pub const KHR_PIPELINE_LIBRARY_EXTENSION: ExtensionName = name(b"VK_KHR_pipeline_library");
+pub const KHR_PIPELINE_LIBRARY_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_pipeline_library");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_portability_subset.html>
-pub const KHR_PORTABILITY_SUBSET_EXTENSION: ExtensionName = name(b"VK_KHR_portability_subset");
+pub const KHR_PORTABILITY_SUBSET_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_portability_subset");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_push_descriptor.html>
-pub const KHR_PUSH_DESCRIPTOR_EXTENSION: ExtensionName = name(b"VK_KHR_push_descriptor");
+pub const KHR_PUSH_DESCRIPTOR_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_push_descriptor");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_ray_tracing.html>
-pub const KHR_RAY_TRACING_EXTENSION: ExtensionName = name(b"VK_KHR_ray_tracing");
+pub const KHR_RAY_TRACING_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_ray_tracing");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_relaxed_block_layout.html>
-pub const KHR_RELAXED_BLOCK_LAYOUT_EXTENSION: ExtensionName = name(b"VK_KHR_relaxed_block_layout");
+pub const KHR_RELAXED_BLOCK_LAYOUT_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_relaxed_block_layout");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_sampler_mirror_clamp_to_edge.html>
 pub const KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION: ExtensionName =
-    name(b"VK_KHR_sampler_mirror_clamp_to_edge");
+    to_extension_name(b"VK_KHR_sampler_mirror_clamp_to_edge");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_sampler_ycbcr_conversion.html>
 pub const KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION: ExtensionName =
-    name(b"VK_KHR_sampler_ycbcr_conversion");
+    to_extension_name(b"VK_KHR_sampler_ycbcr_conversion");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_separate_depth_stencil_layouts.html>
 pub const KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_EXTENSION: ExtensionName =
-    name(b"VK_KHR_separate_depth_stencil_layouts");
+    to_extension_name(b"VK_KHR_separate_depth_stencil_layouts");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_atomic_int64.html>
-pub const KHR_SHADER_ATOMIC_INT64_EXTENSION: ExtensionName = name(b"VK_KHR_shader_atomic_int64");
+pub const KHR_SHADER_ATOMIC_INT64_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_shader_atomic_int64");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_clock.html>
-pub const KHR_SHADER_CLOCK_EXTENSION: ExtensionName = name(b"VK_KHR_shader_clock");
+pub const KHR_SHADER_CLOCK_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_shader_clock");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_draw_parameters.html>
 pub const KHR_SHADER_DRAW_PARAMETERS_EXTENSION: ExtensionName =
-    name(b"VK_KHR_shader_draw_parameters");
+    to_extension_name(b"VK_KHR_shader_draw_parameters");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_float16_int8.html>
-pub const KHR_SHADER_FLOAT16_INT8_EXTENSION: ExtensionName = name(b"VK_KHR_shader_float16_int8");
+pub const KHR_SHADER_FLOAT16_INT8_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_shader_float16_int8");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_float_controls.html>
 pub const KHR_SHADER_FLOAT_CONTROLS_EXTENSION: ExtensionName =
-    name(b"VK_KHR_shader_float_controls");
+    to_extension_name(b"VK_KHR_shader_float_controls");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_non_semantic_info.html>
 pub const KHR_SHADER_NON_SEMANTIC_INFO_EXTENSION: ExtensionName =
-    name(b"VK_KHR_shader_non_semantic_info");
+    to_extension_name(b"VK_KHR_shader_non_semantic_info");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_subgroup_extended_types.html>
 pub const KHR_SHADER_SUBGROUP_EXTENDED_TYPES_EXTENSION: ExtensionName =
-    name(b"VK_KHR_shader_subgroup_extended_types");
+    to_extension_name(b"VK_KHR_shader_subgroup_extended_types");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shared_presentable_image.html>
 pub const KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION: ExtensionName =
-    name(b"VK_KHR_shared_presentable_image");
+    to_extension_name(b"VK_KHR_shared_presentable_image");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_spirv_1_4.html>
-pub const KHR_SPIRV_1_4_EXTENSION: ExtensionName = name(b"VK_KHR_spirv_1_4");
+pub const KHR_SPIRV_1_4_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_spirv_1_4");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_storage_buffer_storage_class.html>
 pub const KHR_STORAGE_BUFFER_STORAGE_CLASS_EXTENSION: ExtensionName =
-    name(b"VK_KHR_storage_buffer_storage_class");
+    to_extension_name(b"VK_KHR_storage_buffer_storage_class");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html>
-pub const KHR_SURFACE_EXTENSION: ExtensionName = name(b"VK_KHR_surface");
+pub const KHR_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface_protected_capabilities.html>
 pub const KHR_SURFACE_PROTECTED_CAPABILITIES_EXTENSION: ExtensionName =
-    name(b"VK_KHR_surface_protected_capabilities");
+    to_extension_name(b"VK_KHR_surface_protected_capabilities");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_swapchain.html>
-pub const KHR_SWAPCHAIN_EXTENSION: ExtensionName = name(b"VK_KHR_swapchain");
+pub const KHR_SWAPCHAIN_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_swapchain");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_swapchain_mutable_format.html>
 pub const KHR_SWAPCHAIN_MUTABLE_FORMAT_EXTENSION: ExtensionName =
-    name(b"VK_KHR_swapchain_mutable_format");
+    to_extension_name(b"VK_KHR_swapchain_mutable_format");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_timeline_semaphore.html>
-pub const KHR_TIMELINE_SEMAPHORE_EXTENSION: ExtensionName = name(b"VK_KHR_timeline_semaphore");
+pub const KHR_TIMELINE_SEMAPHORE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_timeline_semaphore");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_uniform_buffer_standard_layout.html>
 pub const KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_EXTENSION: ExtensionName =
-    name(b"VK_KHR_uniform_buffer_standard_layout");
+    to_extension_name(b"VK_KHR_uniform_buffer_standard_layout");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_variable_pointers.html>
-pub const KHR_VARIABLE_POINTERS_EXTENSION: ExtensionName = name(b"VK_KHR_variable_pointers");
+pub const KHR_VARIABLE_POINTERS_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_variable_pointers");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_vulkan_memory_model.html>
-pub const KHR_VULKAN_MEMORY_MODEL_EXTENSION: ExtensionName = name(b"VK_KHR_vulkan_memory_model");
+pub const KHR_VULKAN_MEMORY_MODEL_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_vulkan_memory_model");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_wayland_surface.html>
-pub const KHR_WAYLAND_SURFACE_EXTENSION: ExtensionName = name(b"VK_KHR_wayland_surface");
+pub const KHR_WAYLAND_SURFACE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_wayland_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_win32_keyed_mutex.html>
-pub const KHR_WIN32_KEYED_MUTEX_EXTENSION: ExtensionName = name(b"VK_KHR_win32_keyed_mutex");
+pub const KHR_WIN32_KEYED_MUTEX_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_win32_keyed_mutex");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_win32_surface.html>
-pub const KHR_WIN32_SURFACE_EXTENSION: ExtensionName = name(b"VK_KHR_win32_surface");
+pub const KHR_WIN32_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_win32_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_xcb_surface.html>
-pub const KHR_XCB_SURFACE_EXTENSION: ExtensionName = name(b"VK_KHR_xcb_surface");
+pub const KHR_XCB_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_xcb_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_xlib_surface.html>
-pub const KHR_XLIB_SURFACE_EXTENSION: ExtensionName = name(b"VK_KHR_xlib_surface");
+pub const KHR_XLIB_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_xlib_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_MVK_ios_surface.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_metal_surface`")]
-pub const MVK_IOS_SURFACE_EXTENSION: ExtensionName = name(b"VK_MVK_ios_surface");
+pub const MVK_IOS_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_MVK_ios_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_MVK_macos_surface.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_metal_surface`")]
-pub const MVK_MACOS_SURFACE_EXTENSION: ExtensionName = name(b"VK_MVK_macos_surface");
+pub const MVK_MACOS_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_MVK_macos_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NN_vi_surface.html>
-pub const NN_VI_SURFACE_EXTENSION: ExtensionName = name(b"VK_NN_vi_surface");
+pub const NN_VI_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_NN_vi_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NVX_image_view_handle.html>
-pub const NVX_IMAGE_VIEW_HANDLE_EXTENSION: ExtensionName = name(b"VK_NVX_image_view_handle");
+pub const NVX_IMAGE_VIEW_HANDLE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NVX_image_view_handle");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NVX_multiview_per_view_attributes.html>
 pub const NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_EXTENSION: ExtensionName =
-    name(b"VK_NVX_multiview_per_view_attributes");
+    to_extension_name(b"VK_NVX_multiview_per_view_attributes");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_clip_space_w_scaling.html>
-pub const NV_CLIP_SPACE_W_SCALING_EXTENSION: ExtensionName = name(b"VK_NV_clip_space_w_scaling");
+pub const NV_CLIP_SPACE_W_SCALING_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NV_clip_space_w_scaling");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_compute_shader_derivatives.html>
 pub const NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION: ExtensionName =
-    name(b"VK_NV_compute_shader_derivatives");
+    to_extension_name(b"VK_NV_compute_shader_derivatives");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_cooperative_matrix.html>
-pub const NV_COOPERATIVE_MATRIX_EXTENSION: ExtensionName = name(b"VK_NV_cooperative_matrix");
+pub const NV_COOPERATIVE_MATRIX_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NV_cooperative_matrix");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_corner_sampled_image.html>
-pub const NV_CORNER_SAMPLED_IMAGE_EXTENSION: ExtensionName = name(b"VK_NV_corner_sampled_image");
+pub const NV_CORNER_SAMPLED_IMAGE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NV_corner_sampled_image");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_coverage_reduction_mode.html>
 pub const NV_COVERAGE_REDUCTION_MODE_EXTENSION: ExtensionName =
-    name(b"VK_NV_coverage_reduction_mode");
+    to_extension_name(b"VK_NV_coverage_reduction_mode");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_dedicated_allocation.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_dedicated_allocation`")]
-pub const NV_DEDICATED_ALLOCATION_EXTENSION: ExtensionName = name(b"VK_NV_dedicated_allocation");
+pub const NV_DEDICATED_ALLOCATION_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NV_dedicated_allocation");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_dedicated_allocation_image_aliasing.html>
 pub const NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_EXTENSION: ExtensionName =
-    name(b"VK_NV_dedicated_allocation_image_aliasing");
+    to_extension_name(b"VK_NV_dedicated_allocation_image_aliasing");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_device_diagnostic_checkpoints.html>
 pub const NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_EXTENSION: ExtensionName =
-    name(b"VK_NV_device_diagnostic_checkpoints");
+    to_extension_name(b"VK_NV_device_diagnostic_checkpoints");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_device_diagnostics_config.html>
 pub const NV_DEVICE_DIAGNOSTICS_CONFIG_EXTENSION: ExtensionName =
-    name(b"VK_NV_device_diagnostics_config");
+    to_extension_name(b"VK_NV_device_diagnostics_config");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_device_generated_commands.html>
 pub const NV_DEVICE_GENERATED_COMMANDS_EXTENSION: ExtensionName =
-    name(b"VK_NV_device_generated_commands");
+    to_extension_name(b"VK_NV_device_generated_commands");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_external_memory.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory`")]
-pub const NV_EXTERNAL_MEMORY_EXTENSION: ExtensionName = name(b"VK_NV_external_memory");
+pub const NV_EXTERNAL_MEMORY_EXTENSION: ExtensionName = to_extension_name(b"VK_NV_external_memory");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_external_memory_capabilities.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory_capabilities`")]
 pub const NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION: ExtensionName =
-    name(b"VK_NV_external_memory_capabilities");
+    to_extension_name(b"VK_NV_external_memory_capabilities");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_external_memory_win32.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory_win32`")]
-pub const NV_EXTERNAL_MEMORY_WIN32_EXTENSION: ExtensionName = name(b"VK_NV_external_memory_win32");
+pub const NV_EXTERNAL_MEMORY_WIN32_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NV_external_memory_win32");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_fill_rectangle.html>
-pub const NV_FILL_RECTANGLE_EXTENSION: ExtensionName = name(b"VK_NV_fill_rectangle");
+pub const NV_FILL_RECTANGLE_EXTENSION: ExtensionName = to_extension_name(b"VK_NV_fill_rectangle");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_fragment_coverage_to_color.html>
 pub const NV_FRAGMENT_COVERAGE_TO_COLOR_EXTENSION: ExtensionName =
-    name(b"VK_NV_fragment_coverage_to_color");
+    to_extension_name(b"VK_NV_fragment_coverage_to_color");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_fragment_shader_barycentric.html>
 pub const NV_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION: ExtensionName =
-    name(b"VK_NV_fragment_shader_barycentric");
+    to_extension_name(b"VK_NV_fragment_shader_barycentric");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_framebuffer_mixed_samples.html>
 pub const NV_FRAMEBUFFER_MIXED_SAMPLES_EXTENSION: ExtensionName =
-    name(b"VK_NV_framebuffer_mixed_samples");
+    to_extension_name(b"VK_NV_framebuffer_mixed_samples");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_geometry_shader_passthrough.html>
 pub const NV_GEOMETRY_SHADER_PASSTHROUGH_EXTENSION: ExtensionName =
-    name(b"VK_NV_geometry_shader_passthrough");
+    to_extension_name(b"VK_NV_geometry_shader_passthrough");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_glsl_shader.html>
 #[deprecated]
-pub const NV_GLSL_SHADER_EXTENSION: ExtensionName = name(b"VK_NV_glsl_shader");
+pub const NV_GLSL_SHADER_EXTENSION: ExtensionName = to_extension_name(b"VK_NV_glsl_shader");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_mesh_shader.html>
-pub const NV_MESH_SHADER_EXTENSION: ExtensionName = name(b"VK_NV_mesh_shader");
+pub const NV_MESH_SHADER_EXTENSION: ExtensionName = to_extension_name(b"VK_NV_mesh_shader");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_ray_tracing.html>
-pub const NV_RAY_TRACING_EXTENSION: ExtensionName = name(b"VK_NV_ray_tracing");
+pub const NV_RAY_TRACING_EXTENSION: ExtensionName = to_extension_name(b"VK_NV_ray_tracing");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_representative_fragment_test.html>
 pub const NV_REPRESENTATIVE_FRAGMENT_TEST_EXTENSION: ExtensionName =
-    name(b"VK_NV_representative_fragment_test");
+    to_extension_name(b"VK_NV_representative_fragment_test");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_sample_mask_override_coverage.html>
 pub const NV_SAMPLE_MASK_OVERRIDE_COVERAGE_EXTENSION: ExtensionName =
-    name(b"VK_NV_sample_mask_override_coverage");
+    to_extension_name(b"VK_NV_sample_mask_override_coverage");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_scissor_exclusive.html>
-pub const NV_SCISSOR_EXCLUSIVE_EXTENSION: ExtensionName = name(b"VK_NV_scissor_exclusive");
+pub const NV_SCISSOR_EXCLUSIVE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NV_scissor_exclusive");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_shader_image_footprint.html>
 pub const NV_SHADER_IMAGE_FOOTPRINT_EXTENSION: ExtensionName =
-    name(b"VK_NV_shader_image_footprint");
+    to_extension_name(b"VK_NV_shader_image_footprint");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_shader_sm_builtins.html>
-pub const NV_SHADER_SM_BUILTINS_EXTENSION: ExtensionName = name(b"VK_NV_shader_sm_builtins");
+pub const NV_SHADER_SM_BUILTINS_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NV_shader_sm_builtins");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_shader_subgroup_partitioned.html>
 pub const NV_SHADER_SUBGROUP_PARTITIONED_EXTENSION: ExtensionName =
-    name(b"VK_NV_shader_subgroup_partitioned");
+    to_extension_name(b"VK_NV_shader_subgroup_partitioned");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_shading_rate_image.html>
-pub const NV_SHADING_RATE_IMAGE_EXTENSION: ExtensionName = name(b"VK_NV_shading_rate_image");
+pub const NV_SHADING_RATE_IMAGE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NV_shading_rate_image");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_viewport_array2.html>
-pub const NV_VIEWPORT_ARRAY2_EXTENSION: ExtensionName = name(b"VK_NV_viewport_array2");
+pub const NV_VIEWPORT_ARRAY2_EXTENSION: ExtensionName = to_extension_name(b"VK_NV_viewport_array2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_viewport_swizzle.html>
-pub const NV_VIEWPORT_SWIZZLE_EXTENSION: ExtensionName = name(b"VK_NV_viewport_swizzle");
+pub const NV_VIEWPORT_SWIZZLE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NV_viewport_swizzle");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_win32_keyed_mutex.html>
-pub const NV_WIN32_KEYED_MUTEX_EXTENSION: ExtensionName = name(b"VK_NV_win32_keyed_mutex");
+pub const NV_WIN32_KEYED_MUTEX_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NV_win32_keyed_mutex");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_render_pass_shader_resolve.html>
 pub const QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION: ExtensionName =
-    name(b"VK_QCOM_render_pass_shader_resolve");
+    to_extension_name(b"VK_QCOM_render_pass_shader_resolve");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_render_pass_store_ops.html>
 pub const QCOM_RENDER_PASS_STORE_OPS_EXTENSION: ExtensionName =
-    name(b"VK_QCOM_render_pass_store_ops");
+    to_extension_name(b"VK_QCOM_render_pass_store_ops");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_render_pass_transform.html>
 pub const QCOM_RENDER_PASS_TRANSFORM_EXTENSION: ExtensionName =
-    name(b"VK_QCOM_render_pass_transform");
+    to_extension_name(b"VK_QCOM_render_pass_transform");
 
+/// Converts a byte string into a Vulkan extension name.
 #[inline]
-const fn name(bytes: &[u8]) -> ExtensionName {
+pub const fn to_extension_name(bytes: &[u8]) -> ExtensionName {
     let mut name = [0; MAX_EXTENSION_NAME_SIZE];
 
     let mut index = 0;
