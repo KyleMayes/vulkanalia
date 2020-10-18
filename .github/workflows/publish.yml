@@ -1,0 +1,37 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  publish-tutorial:
+    name: Publish - Tutorial
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      # Dependencies
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: 1.47.0
+      - name: Install mdbook
+        uses: actions-rs/cargo@v1
+        with:
+          command: install
+          args: mdbook --no-default-features
+      # Publish
+      - name: Build Tutorial
+        working-directory: ./tutorial/book
+        run: mdbook build
+      - name: Publish Tutorial
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: ./tutorial/book/book
+          CLEAN: true
