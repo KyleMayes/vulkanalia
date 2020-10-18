@@ -24,7 +24,7 @@ png = "0.16"
 pretty_env_logger = "0.4"
 tobj = { version = "2", features = ["log"] }
 vulkanalia = { path = "../vulkanalia", features = ["libloading_", "winit_"] }
-winit = "0.22"
+winit = "0.23"
 
 [[bin]]
 

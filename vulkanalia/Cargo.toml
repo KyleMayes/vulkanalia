@@ -24,11 +24,11 @@ winit_ = ["winit", "cocoa", "metal", "objc"]
 
 libloading = { version = "0.6", optional = true }
 vulkanalia-sys = { version = "0.1", path = "../vulkanalia-sys" }
-winit = { version = "0.22", optional = true }
+winit = { version = "0.23", optional = true }
 
 [target.'cfg(target_os = "macos")'.dependencies]
 
-cocoa = { version = "0.23", optional = true }
+cocoa = { version = "0.24", optional = true }
 metal = { version = "0.20", optional = true }
 objc = { version = "0.2", optional = true }
 

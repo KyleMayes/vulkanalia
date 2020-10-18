@@ -21,7 +21,7 @@ png = "0.16"
 pretty_env_logger = "0.4"
 tobj = "2"
 vulkanalia = { version = "*", features = ["libloading_", "winit_"] }
-winit = "0.22"
+winit = "0.23"
 ```
 
  * `anyhow` &ndash; used for simple error handling
