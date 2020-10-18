@@ -1,0 +1,11 @@
+[book]
+
+title = "Vulkan Tutorial (Rust)"
+authors = ["Kyle Mayes"]
+
+language = "en"
+multilingual = false
+
+src = "src"
+
+edition = "edition2018"

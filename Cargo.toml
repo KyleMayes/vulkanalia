@@ -2,6 +2,7 @@
 
 members = [
     "examples",
+    "tutorial",
     "vulkanalia",
     "vulkanalia-sys",
 ]

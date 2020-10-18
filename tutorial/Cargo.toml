@@ -1,0 +1,32 @@
+[package]
+
+publish = false
+
+edition = "2018"
+
+name = "tutorial"
+authors = ["Kyle Mayes <kyle@mayeses.com>"]
+
+version = "0.1.0"
+
+readme = "../README.md"
+license = "Apache-2.0"
+
+description = "Tutorial."
+
+[dependencies]
+
+anyhow = "1"
+lazy_static = "1"
+log = "0.4"
+nalgebra-glm = "0.3"
+png = "0.16"
+pretty_env_logger = "0.4"
+tobj = { version = "2", features = ["log"] }
+vulkanalia = { path = "../vulkanalia", features = ["libloading_", "winit_"] }
+winit = "0.22"
+
+[[bin]]
+
+name = "00_base_code"
+path = "src/00_base_code.rs"
