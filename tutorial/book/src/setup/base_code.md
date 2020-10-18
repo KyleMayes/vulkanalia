@@ -5,7 +5,7 @@
 In the `Development environment` chapter we created a Cargo project and added the necessary dependencies. In this chapter we will be replacing the code in the `src/main.rs` file with the following code:
 
 ```rust
-use anyhow::Result;
+use anyhow::*;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};
