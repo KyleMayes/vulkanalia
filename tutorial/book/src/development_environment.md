@@ -42,11 +42,11 @@ The most important component you'll need for developing Vulkan applications is t
 
 The SDK can be downloaded from the [LunarG website](https://vulkan.lunarg.com/) using the buttons at the bottom of the page. You don't have to create an account, but it will give you access to some additional documentation that may be useful to you.
 
-![](/images/vulkan_sdk_download_buttons.png)
+![](../images/vulkan_sdk_download_buttons.png)
 
 Proceed through the installation and pay attention to the install location of the SDK. The first thing we'll do is verify that your graphics card and driver properly support Vulkan. Go to the directory where you installed the SDK, open the `Bin` directory and run the `vkcube.exe` demo. You should see the following:
 
-![](/images/cube_demo.png)
+![](../images/cube_demo.png)
 
 If you receive an error message then ensure that your drivers are up-to-date, include the Vulkan runtime and that your graphics card is supported. See the [introduction chapter](introduction.html) for links to drivers from the major vendors.
 
@@ -66,7 +66,7 @@ The most important components you'll need for developing Vulkan applications on 
 
 If installation was successful, you should be all set with the Vulkan portion. Remember to run `vkcube` and ensure you see the following pop up in a window:
 
-![](/images/cube_demo_nowindow.png)
+![](../images/cube_demo_nowindow.png)
 
 If you receive an error message then ensure that your drivers are up-to-date, include the Vulkan runtime and that your graphics card is supported. See the [introduction chapter](introduction.html) for links to drivers from the major vendors.
 
@@ -76,10 +76,10 @@ These instructions will assume you are using the [Homebrew package manager](http
 
 The SDK can be downloaded from the [LunarG website](https://vulkan.lunarg.com/) using the buttons at the bottom of the page. You don't have to create an account, but it will give you access to some additional documentation that may be useful to you.
 
-![](/images/vulkan_sdk_download_buttons.png)
+![](../images/vulkan_sdk_download_buttons.png)
 
 The SDK version for MacOS internally uses [MoltenVK](https://moltengl.com/). There is no native support for Vulkan on MacOS, so what MoltenVK does is actually act as a layer that translates Vulkan API calls to Apple's Metal graphics framework. With this you can take advantage of debugging and performance benefits of Apple's Metal framework.
 
 After downloading it, simply extract the contents to a folder of your choice. Inside the extracted folder, in the `Applications` folder you should have some executable files that will run a few demos using the SDK. Run the `vkcube` executable and you will see the following:
 
-![](/images/cube_demo_mac.png)
+![](../images/cube_demo_mac.png)

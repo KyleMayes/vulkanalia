@@ -14,4 +14,4 @@ This page lists solutions to common problems that you may encounter while develo
 
 Example:
 
-![](/images/steam_layers_env.png)
+![](../images/steam_layers_env.png)
