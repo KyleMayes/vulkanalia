@@ -30,3 +30,8 @@ winit = "0.23"
 
 name = "00_base_code"
 path = "src/00_base_code.rs"
+
+[[bin]]
+
+name = "01_instance_creation"
+path = "src/01_instance_creation.rs"
