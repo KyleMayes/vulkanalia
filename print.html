@@ -1,0 +1,676 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Vulkan Tutorial (Rust)</title>
+        
+        <meta name="robots" content="noindex" />
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="overview.html"><strong aria-hidden="true">2.</strong> Overview</a></li><li class="chapter-item expanded "><a href="development_environment.html"><strong aria-hidden="true">3.</strong> Development environment</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">4.</strong> FAQ</a></li><li class="chapter-item expanded affix "><li class="part-title">Setup</li><li class="chapter-item expanded "><a href="setup/base_code.html"><strong aria-hidden="true">5.</strong> Base code</a></li><li class="chapter-item expanded "><a href="setup/instance.html"><strong aria-hidden="true">6.</strong> Instance</a></li><li class="chapter-item expanded "><a href="setup/validation_layers.html"><strong aria-hidden="true">7.</strong> Validation layers</a></li><li class="chapter-item expanded "><a href="setup/physical_devices_and_queue_families.html"><strong aria-hidden="true">8.</strong> Physical devices and queue families</a></li><li class="chapter-item expanded "><a href="setup/logical_device_and_queues.html"><strong aria-hidden="true">9.</strong> Logical device and queues</a></li><li class="chapter-item expanded affix "><li class="part-title">Presentation</li><li class="chapter-item expanded "><a href="presentation/window_surface.html"><strong aria-hidden="true">10.</strong> Window surface</a></li><li class="chapter-item expanded "><a href="presentation/swapchain.html"><strong aria-hidden="true">11.</strong> Swapchain</a></li><li class="chapter-item expanded "><a href="presentation/image_views.html"><strong aria-hidden="true">12.</strong> Image views</a></li><li class="chapter-item expanded affix "><li class="part-title">Pipeline</li><li class="chapter-item expanded "><a href="pipeline/introduction.html"><strong aria-hidden="true">13.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="pipeline/shader_modules.html"><strong aria-hidden="true">14.</strong> Shader modules</a></li><li class="chapter-item expanded "><a href="pipeline/fixed_functions.html"><strong aria-hidden="true">15.</strong> Fixed functions</a></li><li class="chapter-item expanded "><a href="pipeline/render_passes.html"><strong aria-hidden="true">16.</strong> Render passes</a></li><li class="chapter-item expanded "><a href="pipeline/conclusion.html"><strong aria-hidden="true">17.</strong> Conclusion</a></li><li class="chapter-item expanded affix "><li class="part-title">Drawing</li><li class="chapter-item expanded "><a href="drawing/framebuffers.html"><strong aria-hidden="true">18.</strong> Framebuffers</a></li><li class="chapter-item expanded "><a href="drawing/command_buffers.html"><strong aria-hidden="true">19.</strong> Command buffers</a></li><li class="chapter-item expanded "><a href="drawing/rendering_and_presentation.html"><strong aria-hidden="true">20.</strong> Rendering and presentation</a></li><li class="chapter-item expanded affix "><li class="part-title">Swapchain</li><li class="chapter-item expanded "><a href="swapchain/recreation.html"><strong aria-hidden="true">21.</strong> Recreation</a></li><li class="chapter-item expanded affix "><li class="part-title">Vertex buffers</li><li class="chapter-item expanded "><a href="vertex/vertex_input_description.html"><strong aria-hidden="true">22.</strong> Vertex input description</a></li><li class="chapter-item expanded "><a href="vertex/vertex_buffer_creation.html"><strong aria-hidden="true">23.</strong> Vertex buffer creation</a></li><li class="chapter-item expanded "><a href="vertex/staging_buffer.html"><strong aria-hidden="true">24.</strong> Staging buffer</a></li><li class="chapter-item expanded "><a href="vertex/index_buffer.html"><strong aria-hidden="true">25.</strong> Index buffer</a></li><li class="chapter-item expanded affix "><li class="part-title">Uniform buffers</li><li class="chapter-item expanded "><a href="uniform/descriptor_layout_and_buffer.html"><strong aria-hidden="true">26.</strong> Descriptor layout and buffer</a></li><li class="chapter-item expanded "><a href="uniform/descriptor_pool_and_sets.html"><strong aria-hidden="true">27.</strong> Descriptor pool and sets</a></li><li class="chapter-item expanded affix "><li class="part-title">Texture mapping</li><li class="chapter-item expanded "><a href="texture/images.html"><strong aria-hidden="true">28.</strong> Images</a></li><li class="chapter-item expanded "><a href="texture/image_view_and_sampler.html"><strong aria-hidden="true">29.</strong> Image view and sampler</a></li><li class="chapter-item expanded "><a href="texture/combined_image_sampler.html"><strong aria-hidden="true">30.</strong> Combined image sampler</a></li><li class="chapter-item expanded affix "><li class="part-title">Model</li><li class="chapter-item expanded "><a href="model/depth_buffering.html"><strong aria-hidden="true">31.</strong> Depth buffering</a></li><li class="chapter-item expanded "><a href="model/loading_models.html"><strong aria-hidden="true">32.</strong> Loading models</a></li><li class="chapter-item expanded affix "><li class="part-title">Advanced</li><li class="chapter-item expanded "><a href="advanced/generating_mipmaps.html"><strong aria-hidden="true">33.</strong> Generating mipmaps</a></li><li class="chapter-item expanded "><a href="advanced/multisampling.html"><strong aria-hidden="true">34.</strong> Multisampling</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
+<p>This tutorial is an adaptation of <a href="https://vulkan-tutorial.com">https://vulkan-tutorial.com</a> to use Rust instead of C/C++.</p>
+<p>The vast majority of the credit for this tutorial should go the author of <a href="https://vulkan-tutorial.com">https://vulkan-tutorial.com</a>, <a href="https://github.com/Overv">Alexander Overvoorde</a>.</p>
+<h2><a class="header" href="#about" id="about">About</a></h2>
+<p>This tutorial will teach you the basics of using the <a href="https://www.khronos.org/vulkan/">Vulkan</a> graphics and compute API. Vulkan is a new API by the <a href="https://www.khronos.org/">Khronos group</a> (known for OpenGL) that provides a much better abstraction of modern graphics cards. This new interface allows you to better describe what your application intends to do, which can lead to better performance and less surprising driver behavior compared to existing APIs like <a href="https://en.wikipedia.org/wiki/OpenGL">OpenGL</a> and <a href="https://en.wikipedia.org/wiki/Direct3D">Direct3D</a>. The ideas behind Vulkan are similar to those of <a href="https://en.wikipedia.org/wiki/Direct3D#Direct3D_12">Direct3D 12</a> and <a href="https://en.wikipedia.org/wiki/Metal_(API)">Metal</a>, but Vulkan has the advantage of being fully cross-platform and allows you to develop for Windows, Linux and Android at the same time (and iOS and macOS via <a href="https://github.com/KhronosGroup/MoltenVK">MoltenVK</a>).</p>
+<p>However, the price you pay for these benefits is that you have to work with a significantly more verbose API. Every detail related to the graphics API needs to be set up from scratch by your application, including initial frame buffer creation and memory management for objects like buffers and texture images. The graphics driver will do a lot less hand holding, which means that you will have to do more work in your application to ensure correct behavior.</p>
+<p>The takeaway message here is that Vulkan is not for everyone. It is targeted at programmers who are enthusiastic about high performance computer graphics, and are willing to put some work in. If you are more interested in game development, rather than computer graphics, then you may wish to stick to OpenGL or Direct3D, which will not be deprecated in favor of Vulkan anytime soon. Another alternative is to use an engine like <a href="https://en.wikipedia.org/wiki/Unreal_Engine#Unreal_Engine_4">Unreal Engine</a> or <a href="https://en.wikipedia.org/wiki/Unity_(game_engine)">Unity</a>, which will be able to use Vulkan while exposing a much higher level API to you.</p>
+<p>With that out of the way, let's cover some prerequisites for following this tutorial:</p>
+<ul>
+<li>A graphics card and driver compatible with Vulkan (<a href="https://developer.nvidia.com/vulkan-driver">NVIDIA</a>, <a href="http://www.amd.com/en-us/innovations/software-technologies/technologies-gaming/vulkan">AMD</a>, <a href="https://software.intel.com/en-us/blogs/2016/03/14/new-intel-vulkan-beta-1540204404-graphics-driver-for-windows-78110-1540">Intel</a>)</li>
+<li>Experience with Rust</li>
+<li>Rust 1.47 or later</li>
+<li>Some existing experience with 3D computer graphics</li>
+</ul>
+<p>This tutorial will not assume knowledge of OpenGL or Direct3D concepts, but it does require you to know the basics of 3D computer graphics. It will not explain the math behind perspective projection, for example. See <a href="https://paroj.github.io/gltut/">this online book</a> for a great introduction of computer graphics concepts. Some other great computer graphics resources are:</p>
+<ul>
+<li><a href="https://github.com/petershirley/raytracinginoneweekend">Ray tracing in one weekend</a></li>
+<li><a href="http://www.pbr-book.org/">Physically Based Rendering book</a></li>
+<li>Vulkan being used in a real engine in the open-source <a href="https://github.com/Novum/vkQuake">Quake</a> and <a href="https://github.com/DustinHLand/vkDOOM3">DOOM 3</a></li>
+</ul>
+<p>If you want a C or C++ tutorial instead, see the original tutorial: <a href="https://vulkan-tutorial.com">https://vulkan-tutorial.com</a></p>
+<p>This tutorial will be using the <a href="https://github.com/KyleMayes/vulkanalia"><code>vulkanalia</code></a> crate to provide access to the Vulkan API from Rust. <code>vulkanalia</code> only provides a thin wrapper over the Vulkan API to make it a bit easier to use from Rust. This means that while you should have never have any difficulty in determining exactly how your Rust programs are interacting with the Vulkan API, you will be shielded from very little of the danger and verbosity of the Vulkan API.</p>
+<p>If you want a Rust Vulkan tutorial that uses a crate which provides a safe and relatively concise wrapper around the Vulkan API, see this tutorial: <a href="https://github.com/bwasty/vulkan-tutorial-rs">https://github.com/bwasty/vulkan-tutorial-rs</a></p>
+<h2><a class="header" href="#tutorial-structure" id="tutorial-structure">Tutorial structure</a></h2>
+<p>We'll start with an overview of how Vulkan works and the work we'll have to do to get the first triangle on the screen. The purpose of all the smaller steps will make more sense after you've understood their basic role in the whole picture. Next, we'll set up the development environment with the <a href="https://lunarg.com/vulkan-sdk/">Vulkan SDK</a>.</p>
+<p>After that we'll implement all of the basic components of a Vulkan program that are necessary to render your first triangle. Each chapter will follow roughly the following structure:</p>
+<ul>
+<li>Introduce a new concept and its purpose</li>
+<li>Use all of the relevant API calls to integrate it into your program</li>
+<li>Abstract parts of it into helper functions</li>
+</ul>
+<p>Although each chapter is written as a follow-up on the previous one, it is also possible to read the chapters as standalone articles introducing a certain Vulkan feature. That means that the site is also useful as a reference. All of the Vulkan functions and types are linked to the specification, so you can click them to learn more. Vulkan is a very new API, so there may be some shortcomings in the specification itself. You are encouraged to submit feedback to <a href="https://github.com/KhronosGroup/Vulkan-Docs">this Khronos repository</a>.</p>
+<p>As mentioned before, the Vulkan API has a rather verbose API with many parameters to give you maximum control over the graphics hardware. This causes basic operations like creating a texture to take a lot of steps that have to be repeated every time. Therefore we'll be creating our own collection of helper functions throughout the tutorial.</p>
+<p>Every chapter will also conclude with a link to the full code listing up to that point. You can refer to it if you have any doubts about the structure of the code, or if you're dealing with a bug and want to compare. All of the code files have been tested on graphics cards from multiple vendors to verify correctness. Each chapter also has a comment section at the end where you can ask any questions that are relevant to the specific subject matter. Please specify your platform, driver version, source code, expected behavior and actual behavior to help us help you.</p>
+<p>This tutorial is intended to be a community effort. Vulkan is still a very new API and best practices have not really been established yet. If you have any type of feedback on the tutorial and site itself, then please don't hesitate to submit an issue or pull request to the <a href="https://github.com/KyleMayes/vulkanalia">GitHub repository</a>.</p>
+<p>After you've gone through the ritual of drawing your very first Vulkan powered triangle onscreen, we'll start expanding the program to include linear transformations, textures and 3D models.</p>
+<p>If you've played with graphics APIs before, then you'll know that there can be a lot of steps until the first geometry shows up on the screen. There are many of these initial steps in Vulkan, but you'll see that each of the individual steps is easy to understand and does not feel redundant. It's also important to keep in mind that once you have that boring looking triangle, drawing fully textured 3D models does not take that much extra work, and each step beyond that point is much more rewarding.</p>
+<p>If you encounter any problems while following the tutorial, check the FAQ to see if your problem and its solution is already listed there. Next, you might find someone who had the same problem (if it is not Rust-specific) in the comment section for the corresponding chapter in the <a href="https://vulkan-tutorial.com/">original tutorial</a>.</p>
+<h1><a class="header" href="#overview" id="overview">Overview</a></h1>
+<p>This chapter will start off with an introduction of Vulkan and the problems it addresses. After that we're going to look at the ingredients that are required for the first triangle. This will give you a big picture to place each of the subsequent chapters in. We will conclude by covering the structure of the Vulkan API as implemented by <code>vulkanalia</code>.</p>
+<h2><a class="header" href="#origin-of-vulkan" id="origin-of-vulkan">Origin of Vulkan</a></h2>
+<p>Just like the previous graphics APIs, Vulkan is designed as a cross-platform abstraction over <a href="https://en.wikipedia.org/wiki/Graphics_processing_unit">GPUs</a>. The problem with most of these APIs is that the era in which they were designed featured graphics hardware that was mostly limited to configurable fixed functionality. Programmers had to provide the vertex data in a standard format and were at the mercy of the GPU manufacturers with regards to lighting and shading options.</p>
+<p>As graphics card architectures matured, they started offering more and more programmable functionality. All this new functionality had to be integrated with the existing APIs somehow. This resulted in less than ideal abstractions and a lot of guesswork on the graphics driver side to map the programmer's intent to the modern graphics architectures. That's why there are so many driver updates for improving the performance in games, sometimes by significant margins. Because of the complexity of these drivers, application developers also need to deal with inconsistencies between vendors, like the syntax that is accepted for <a href="https://en.wikipedia.org/wiki/Shader">shaders</a>. Aside from these new features, the past decade also saw an influx of mobile devices with powerful graphics hardware. These mobile GPUs have different architectures based on their energy and space requirements. One such example is <a href="https://en.wikipedia.org/wiki/Tiled_rendering">tiled rendering</a>, which would benefit from improved performance by offering the programmer more control over this functionality. Another limitation originating from the age of these APIs is limited multi-threading support, which can result in a bottleneck on the CPU side.</p>
+<p>Vulkan solves these problems by being designed from scratch for modern graphics architectures. It reduces driver overhead by allowing programmers to clearly specify their intent using a more verbose API, and allows multiple threads to create and submit commands in parallel. It reduces inconsistencies in shader compilation by switching to a standardized byte code format with a single compiler. Lastly, it acknowledges the general purpose processing capabilities of modern graphics cards by unifying the graphics and compute functionality into a single API.</p>
+<h2><a class="header" href="#what-it-takes-to-draw-a-triangle" id="what-it-takes-to-draw-a-triangle">What it takes to draw a triangle</a></h2>
+<p>We'll now look at an overview of all the steps it takes to render a triangle in a well-behaved Vulkan program. All of the concepts introduced here will be elaborated on in the next chapters. This is just to give you a big picture to relate all of the individual components to.</p>
+<h3><a class="header" href="#step-1---instance-and-physical-device-selection" id="step-1---instance-and-physical-device-selection">Step 1 - Instance and physical device selection</a></h3>
+<p>A Vulkan application starts by setting up the Vulkan API through a <code>VkInstance</code>. An instance is created by describing your application and any API extensions you will be using. After creating the instance, you can query for Vulkan supported hardware and select one or more <code>VkPhysicalDevice</code>s to use for operations. You can query for properties like VRAM size and device capabilities to select desired devices, for example to prefer using dedicated graphics cards.</p>
+<h3><a class="header" href="#step-2---logical-device-and-queue-families" id="step-2---logical-device-and-queue-families">Step 2 - Logical device and queue families</a></h3>
+<p>After selecting the right hardware device to use, you need to create a <code>VkDevice</code> (logical device), where you describe more specifically which <code>VkPhysicalDeviceFeatures</code> you will be using, like multi-viewport rendering and 64-bit floats. You also need to specify which queue families you would like to use. Most operations performed with Vulkan, like draw commands and memory operations, are asynchronously executed by submitting them to a <code>VkQueue</code>. Queues are allocated from queue families, where each queue family supports a specific set of operations in its queues. For example, there could be separate queue families for graphics, compute and memory transfer operations. The availability of queue families could also be used as a distinguishing factor in physical device selection. It is possible for a device with Vulkan support to not offer any graphics functionality, however all graphics cards with Vulkan support today will generally support all queue operations that we're interested in.</p>
+<h3><a class="header" href="#step-3---window-surface-and-swap-chain" id="step-3---window-surface-and-swap-chain">Step 3 - Window surface and swap chain</a></h3>
+<p>Unless you're only interested in offscreen rendering, you will need to create a window to present rendered images to. Windows can be created with the native platform APIs or libraries like <a href="http://www.glfw.org/">GLFW</a>, <a href="https://www.libsdl.org/">SDL</a>, or the <a href="https://github.com/rust-windowing/winit"><code>winit</code></a> crate. We will be using the <code>winit</code> crate in this tutorial, but more about that in the next chapter.</p>
+<p>We need two more components to actually render to a window: a window surface (<code>VkSurfaceKHR</code>) and a swap chain (<code>VkSwapchainKHR</code>). Note the <code>KHR</code> postfix, which means that these objects are part of a Vulkan extension. The Vulkan API itself is completely platform agnostic, which is why we need to use the standardized WSI (Window System Interface) extension to interact with the window manager. The surface is a cross-platform abstraction over windows to render to and is generally instantiated by providing a reference to the native window handle, for example <code>HWND</code> on Windows. However, <code>vulkanalia</code> has optional integration with the <code>winit</code> crate which we will be leveraging to handle the platform-specific details of creating a window and associated surface for us.</p>
+<p>The swap chain is a collection of render targets. Its basic purpose is to ensure that the image that we're currently rendering to is different from the one that is currently on the screen. This is important to make sure that only complete images are shown. Every time we want to draw a frame we have to ask the swap chain to provide us with an image to render to. When we've finished drawing a frame, the image is returned to the swap chain for it to be presented to the screen at some point. The number of render targets and conditions for presenting finished images to the screen depends on the present mode. Common present modes are  double buffering (vsync) and triple buffering. We'll look into these in the swap chain creation chapter.</p>
+<p>Some platforms allow you to render directly to a display without interacting with any window manager through the <code>VK_KHR_display</code> and <code>VK_KHR_display_swapchain</code> extensions. These allow you to create a surface that represents the entire screen and could be used to implement your own window manager, for example.</p>
+<h3><a class="header" href="#step-4---image-views-and-framebuffers" id="step-4---image-views-and-framebuffers">Step 4 - Image views and framebuffers</a></h3>
+<p>To draw to an image acquired from the swap chain, we have to wrap it into a <code>VkImageView</code> and <code>VkFramebuffer</code>. An image view references a specific part of an image to be used, and a framebuffer references image views that are to be used for color, depth and stencil targets. Because there could be many different images in the swap chain, we'll preemptively create an image view and framebuffer for each of them and select the right one at draw time.</p>
+<h3><a class="header" href="#step-5---render-passes" id="step-5---render-passes">Step 5 - Render passes</a></h3>
+<p>Render passes in Vulkan describe the type of images that are used during rendering operations, how they will be used, and how their contents should be treated. In our initial triangle rendering application, we'll tell Vulkan that we will use a single image as color target and that we want it to be cleared to a solid color right before the drawing operation. Whereas a render pass only describes the type of images, a <code>VkFramebuffer</code> actually binds specific images to these slots.</p>
+<h3><a class="header" href="#step-6---graphics-pipeline" id="step-6---graphics-pipeline">Step 6 - Graphics pipeline</a></h3>
+<p>The graphics pipeline in Vulkan is set up by creating a <code>VkPipeline</code> object. It describes the configurable state of the graphics card, like the viewport size and depth buffer operation and the programmable state using <code>VkShaderModule</code> objects. The <code>VkShaderModule</code> objects are created from shader byte code. The driver also needs to know which render targets will be used in the pipeline, which we specify by referencing the render pass.</p>
+<p>One of the most distinctive features of Vulkan compared to existing APIs, is that almost all configuration of the graphics pipeline needs to be set in advance. That means that if you want to switch to a different shader or slightly change your vertex layout, then you need to entirely recreate the graphics pipeline. That means that you will have to create many <code>VkPipeline</code> objects in advance for all the different combinations you need for your rendering operations. Only some basic configuration, like viewport size and clear color, can be changed dynamically. All of the state also needs to be described explicitly, there is no default color blend state, for example.</p>
+<p>The good news is that because you're doing the equivalent of ahead-of-time compilation versus just-in-time compilation, there are more optimization opportunities for the driver and runtime performance is more predictable, because large state changes like switching to a different graphics pipeline are made very explicit.</p>
+<h3><a class="header" href="#step-7---command-pools-and-command-buffers" id="step-7---command-pools-and-command-buffers">Step 7 - Command pools and command buffers</a></h3>
+<p>As mentioned earlier, many of the operations in Vulkan that we want to execute, like drawing operations, need to be submitted to a queue. These operations first need to be recorded into a <code>VkCommandBuffer</code> before they can be submitted. These command buffers are allocated from a <code>VkCommandPool</code> that is associated with a specific queue family. To draw a simple triangle, we need to record a command buffer with the following operations:</p>
+<ul>
+<li>Begin the render pass</li>
+<li>Bind the graphics pipeline</li>
+<li>Draw 3 vertices</li>
+<li>End the render pass</li>
+</ul>
+<p>Because the image in the framebuffer depends on which specific image the swap chain will give us, we need to record a command buffer for each possible image and select the right one at draw time. The alternative would be to record the command buffer again every frame, which is not as efficient.</p>
+<h3><a class="header" href="#step-8---main-loop" id="step-8---main-loop">Step 8 - Main loop</a></h3>
+<p>Now that the drawing commands have been wrapped into a command buffer, the main loop is quite straightforward. We first acquire an image from the swap chain with <code>vkAcquireNextImageKHR</code>. We can then select the appropriate command buffer for that image and execute it with <code>vkQueueSubmit</code>. Finally, we return the image to the swap chain for presentation to the screen with <code>vkQueuePresentKHR</code>.</p>
+<p>Operations that are submitted to queues are executed asynchronously. Therefore we have to use synchronization objects like semaphores to ensure a correct order of execution. Execution of the draw command buffer must be set up to wait on image acquisition to finish, otherwise it may occur that we start rendering to an image that is still being read for presentation on the screen. The <code>vkQueuePresentKHR</code> call in turn needs to wait for rendering to be finished, for which we'll use a second semaphore that is signaled after rendering completes.</p>
+<h3><a class="header" href="#summary" id="summary">Summary</a></h3>
+<p>This whirlwind tour should give you a basic understanding of the work ahead for drawing the first triangle. A real-world program contains more steps, like allocating vertex buffers, creating uniform buffers and uploading texture images that will be covered in subsequent chapters, but we'll start simple because Vulkan has enough of a steep learning curve as it is. Note that we'll cheat a bit by initially embedding the vertex coordinates in the vertex shader instead of using a vertex buffer. That's because managing vertex buffers requires some familiarity with command buffers first.</p>
+<p>So in short, to draw the first triangle we need to:</p>
+<ul>
+<li>Create a <code>VkInstance</code></li>
+<li>Select a supported graphics card (<code>VkPhysicalDevice</code>)</li>
+<li>Create a <code>VkDevice</code> and <code>VkQueue</code> for drawing and presentation</li>
+<li>Create a window, window surface and swap chain</li>
+<li>Wrap the swap chain images into <code>VkImageView</code></li>
+<li>Create a render pass that specifies the render targets and usage</li>
+<li>Create framebuffers for the render pass</li>
+<li>Set up the graphics pipeline</li>
+<li>Allocate and record a command buffer with the draw commands for every possible swap chain image</li>
+<li>Draw frames by acquiring images, submitting the right draw command buffer and returning the images back to the swap chain</li>
+</ul>
+<p>It's a lot of steps, but the purpose of each individual step will be made very simple and clear in the upcoming chapters. If you're confused about the relation of a single step compared to the whole program, you should refer back to this chapter.</p>
+<h2><a class="header" href="#api-concepts" id="api-concepts">API concepts</a></h2>
+<p>The Vulkan API is defined in terms of the C programming language. This API is defined in the Vulkan API Registry which is <a href="https://github.com/KhronosGroup/Vulkan-Docs/blob/main/xml/vk.xml">an XML file</a> which serves the purpose of being a machine readable definition of the Vulkan API.</p>
+<p>The Vulkan <a href="https://github.com/KhronosGroup/Vulkan-Headers">C and C++ headers</a> that are part of the Vulkan SDK you will be installing in the next chapter are generated from this Vulkan API Registry. However, we will not be using these headers, directly or indirectly, because <code>vulkanalia</code> includes a Rust interface to the Vulkan API generated from the Vulkan API registry.</p>
+<p>Underneath <code>vulkanalia</code> is the <a href="https://docs.rs/vulkanalia-sys"><code>vulkanalia-sys</code></a> crate which defines the raw types (commands, enums, bitmasks, structs, etc.) defined by the Vulkan API Registry. These raw types are re-exported from the <code>vulkanalia</code> crate in the <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/index.html"><code>vk</code></a> module along with some other types generated from the Vulkan API Registry which allow for somewhat simpler and less error-prone usage of the Vulkan API from Rust.</p>
+<h3><a class="header" href="#type-names" id="type-names">Type Names</a></h3>
+<p>Because Rust has support for namespaces unlike C, the <code>vulkanalia</code> API omits the parts of Vulkan type names that are used for namespacing purposes in C. Types such as structs, unions, and enums lose their <code>Vk</code> prefix (e.g., <code>VkInstance</code> becomes <code>vk::Instance</code> where <code>vk</code> is the the module of the same name in <code>vulkanalia</code>).</p>
+<h3><a class="header" href="#enums" id="enums">Enums</a></h3>
+<p>Vulkan enums are modeled as structs and the enum values are modeled as associated constants on the struct. Rust enums are not used to model Vulkan enums because use of Rust enums in FFI can lead to <a href="https://github.com/rust-lang/rust/issues/36927">undefined behavior</a>.</p>
+<p>Since we don't need to worry about name conflicts between the enum values for different enums (or different libraries), the portions of the enum value names used for namespacing purposes are omitted.</p>
+<p>For example, the <code>VK_OBJECT_TYPE_INSTANCE</code> enum value is the <code>INSTANCE</code> value for the <code>VkObjectType</code> enum. In <code>vulkanalia</code>, this enum value becomes <code>vk::ObjectType::INSTANCE</code>.</p>
+<h3><a class="header" href="#bitmasks" id="bitmasks">Bitmasks</a></h3>
+<p>Vulkan bitmasks are modeled as structs with the bitflags as associated constants (similarly to enums) which are generated by the <code>bitflags!</code> macro from the <a href="https://github.com/bitflags/bitflags"><code>bitflags</code></a> crate.</p>
+<p>Like with enums values, the portions of bitmask names used for namespacing purposes are omitted.</p>
+<p>For example, the <code>VK_BUFFER_USAGE_TRANSFER_SRC_BIT</code> bitflag is the <code>TRANSFER_SRC</code> bitflag for the <code>VkBufferUsageFlags</code> bitmask. In <code>vulkanalia</code>, this becomes <code>vk::BufferUsageFlags::TRANSFER_SRC</code>.</p>
+<h3><a class="header" href="#commands" id="commands">Commands</a></h3>
+<p>The raw Vulkan commands are defined in <code>vulkanalia</code> with the <code>PFN_</code> (pointer to function) prefix. So <code>vk::PFN_vkEnumerateInstanceExtensionProperties</code> refers to a function pointer for the <code>vkEnumerateInstanceExtensionProperties</code> Vulkan command.</p>
+<p>If we want to actually call these Vulkan commands, we first need to load them. Vulkan commands are loaded by and stored in four structs, the contents of which are determined by how those commands are loaded. Only two Vulkan commands are directly loaded from a Vulkan shared library, <code>vkGetInstanceProcAddr</code> and <code>vkGetDeviceProcAddr</code>. These commands are then used to load all of the other Vulkan commands. The four structs are (note that Vulkan instances and devices are a topic that will be covered in future chapters):</p>
+<ul>
+<li><code>vk::StaticCommands</code> – the Vulkan commands listed above which are loaded directly from a Vulkan shared library</li>
+<li><code>vk::EntryCommands</code> – the Vulkan commands loaded using <code>vkGetInstanceProcAddr</code> and a null Vulkan instance (i.e., Vulkan commands not tied to a particular Vulkan instance)</li>
+<li><code>vk::InstanceCommands</code> – the Vulkan commands loaded using <code>vkGetInstanceProcAddr</code> and a valid Vulkan instance</li>
+<li><code>vk::DeviceCommands</code> – the Vulkan commands loaded using <code>vkGetDeviceProcAddr</code> and a valid Vulkan device</li>
+</ul>
+<p>These structs allow you to easily load and call raw Vulkan commands from Rust, but <code>vulkanalia</code> offers wrappers around the raw Vulkan commands which make calling them from Rust easier and less error-prone.</p>
+<h3><a class="header" href="#command-wrappers" id="command-wrappers">Command wrappers</a></h3>
+<p>An example of a typical Vulkan command signature looks like this in C:</p>
+<pre><code class="language-c">VkResult vkEnumerateInstanceExtensionProperties(
+    const char* pLayerName,
+    uint32_t* pPropertyCount,
+    VkExtensionProperties* pProperties
+);
+</code></pre>
+<p>Someone who is familiar with the conventions of the Vulkan API could quickly see how this command is supposed to be used from this signature alone despite it not including some key information.</p>
+<p>For those new to the Vulkan API, a look at the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateDeviceExtensionProperties.html">documentation</a> for this command will be more illuminating. The description of the behavior of this command in the documentation suggests that using this command to list the available extensions will be a multi-step process:</p>
+<ol>
+<li>Call the command to get the number of extensions</li>
+<li>Allocate a buffer that can contain the specified number of extensions</li>
+<li>Call the command again to populate the buffer with the extensions</li>
+</ol>
+<p>So in C++, this might look like this (ignoring the result of the command for simplicity):</p>
+<pre><code class="language-c++">// 1.
+uint32_t pPropertyCount;
+vkEnumerateInstanceExtensionProperties(NULL, &amp;pPropertyCount, NULL);
+
+// 2.
+std::vector&lt;VkExtensionProperties&gt; pProperties{pPropertyCount};
+
+// 3.
+vkEnumerateInstanceExtensionProperties(NULL, &amp;pPropertyCount, pProperties.data());
+</code></pre>
+<p>The Rust signature for the command wrapper looks like this:</p>
+<pre><code class="language-rust noplaypen">fn enumerate_instance_extension_properties(
+    &amp;self,
+    layer_name: Option&lt;&amp;[u8]&gt;,
+) -&gt; VkResult&lt;Vec&lt;ExtensionProperties&gt;&gt;;
+</code></pre>
+<p>These command wrappers simplify usage of Vulkan commands by handling the need to call some commands twice such as in this case as well as capturing the fallibility of the underlying command by returning a (Rust) <code>Result</code> (<code>VkResult&lt;T&gt;</code> in this case is a type alias for <code>Result&lt;T, vk::Result&gt;</code>). Note that the <code>layer_name</code> argument is optional, a fact which is defined by the Vulkan API Registry but cannot be indicated by a C function signature alone.</p>
+<p>You likely noticed the <code>&amp;self</code> parameter in the above command wrapper. These command wrappers are defined in traits which are implemented for types exposed by <code>vulkanalia</code>. The traits can be separated into two categories: version traits and extension traits. The version traits offer command wrappers for the commands which are a standard part of Vulkan whereas the extension traits offer command wrappers for the commands which are defined as part of Vulkan extensions.</p>
+<p>For example, the above command wrapper is in the <code>vk::EntryV1_0</code> trait since it is a standard Vulkan command that is part of Vulkan 1.0 and is not dependent on a valid Vulkan instance or version (as described in the previous section).</p>
+<p>A Vulkan device command that was added in Vulkan 1.2 would be in the <code>vk::Device1_2</code> trait. <code>vk::KhrSurfaceExtension</code> is an example of an extension trait that we will be using in future chapters to call Vulkan commands that are defined as part of the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html"><code>VK_KHR_surface</code></a> extension.</p>
+<p>These traits are defined for types which contain both the loaded commands and the required Vulkan instance or device (if any). These types have been lovingly hand-crafted and are not part of the generated Vulkan bindings in the <code>vk</code> module of <code>vulkanalia</code>. They will be used in future chapters and are the <code>Entry</code>, <code>Instance</code>, and <code>Device</code> structs and can be found in the <code>Structs</code> section of the <a href="https://docs.rs/vulkanalia"><code>vulkanalia</code> documentation</a>.</p>
+<h3><a class="header" href="#builders" id="builders">Builders</a></h3>
+<p>The Vulkan API heavily utilizes structs as parameters for Vulkan commands. Many of these structs have a field which indicates the type of the struct. In the C API (called from C++ in this example), this field (<code>sType</code>) would need to be set explicitly, for example:</p>
+<pre><code class="language-c++">std::vector&lt;const char*&gt; extensions{/* 3 extension names */};
+
+VkInstanceCreateInfo info;
+info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+info.enabledExtensionCount = static_cast&lt;uint32_t&gt;(extensions.size());
+info.ppEnabledExtensionNames = extensions.data();
+
+VkInstance instance;
+vkCreateInstance(&amp;info, NULL, &amp;instance);
+</code></pre>
+<p><code>vulkanalia</code> retains this approach but makes it a bit easier to work with while also preventing certain classes of errors. <code>vulkanalia</code> has builder structs which simplify the construction of Vulkan structs by populating the struct with defaults which will include the appropriate value for structure type field when present. These builder structs also simplify the setting of linked fields that represent arrays such as <code>enabledExtensionCount</code> and <code>ppEnabledExtensionNames</code> in the above code. Using <code>vulkanalia</code> the above code would become:</p>
+<pre><code class="language-rust noplaypen">let extensions = &amp;[/* 3 extensions */];
+
+let info = vk::InstanceCreateInfo::builder()
+    .enabled_extension_names(extensions)
+    .build();
+
+let instance = entry.create_instance(&amp;info, None).unwrap();
+</code></pre>
+<p>Here we create a builder struct instance for the <code>vk::InstanceCreateInfo</code> struct that will be initially be populated with default values which includes setting the <code>s_type</code> field to <code>vk::StructureType::INSTANCE_CREATE_INFO</code>. Then we set the enabled extension names (which will set both the <code>enabled_extension_count</code> and <code>enabled_extension_name</code> fields). Then we can build our <code>vk::InstanceCreateInfo</code> struct and pass it to the Vulkan command wrapper.</p>
+<p>However, the above Rust code involves a certain degree of danger. The builder structs have lifetimes which enforce that the references stored in them live at least as long as the struct. In the above example, this means that the Rust compiler will make sure that the value passed to the <code>enabled_extension_names</code> method lives at least as long as the builder struct. However, as soon as we call <code>build()</code> to get the raw Vulkan struct these lifetimes are discarded which means the Rust compiler can't prevent us from attempting to access a value that has been dropped.</p>
+<p>The following code will (hopefully) crash since the temporary <code>Vec</code> passed to the <code>enabled_extension_names</code> value will have been dropped by the time we call the Vulkan command with our <code>vk::InstanceCreateInfo</code> struct:</p>
+<pre><code class="language-rust noplaypen">let info = vk::InstanceCreateInfo::builder()
+    .enabled_extension_names(&amp;vec![/* 3 extensions */])
+    .build();
+
+let instance = entry.create_instance(&amp;info, None).unwrap();
+</code></pre>
+<p>Fortunately, <code>vulkanalia</code> has a solution for this. Simply don't call <code>build()</code> and instead pass the builder struct to the command wrapper instead! Anywhere a Vulkan struct is expected in a command wrapper you can instead provide the associated builder struct. If you remove the <code>build()</code> call from the above code the Rust compiler will be able to use the lifetimes on the builder struct to reject this incorrect code with <code>error[E0716]: temporary value dropped while borrowed</code>.</p>
+<h3><a class="header" href="#preludes" id="preludes">Preludes</a></h3>
+<p><code>vulkanalia</code> offers prelude modules that expose the basic types needed to use the crate. One prelude module is available per Vulkan version and each will expose the relevant command traits along with other very frequently used types:</p>
+<pre><code class="language-rust noplaypen">// Vulkan 1.0
+use vulkanalia::prelude::v1_0::*;
+
+// Vulkan 1.1
+use vulkanalia::prelude::v1_1::*;
+
+// Vulkan 1.2
+use vulkanalia::prelude::v1_2::*;
+</code></pre>
+<h2><a class="header" href="#validation-layers" id="validation-layers">Validation layers</a></h2>
+<p>As mentioned earlier, Vulkan is designed for high performance and low driver overhead. Therefore it will include very limited error checking and debugging capabilities by default. The driver will often crash instead of returning an error code if you do something wrong, or worse, it will appear to work on your graphics card and completely fail on others.</p>
+<p>Vulkan allows you to enable extensive checks through a feature known as <em>validation layers</em>. Validation layers are pieces of code that can be inserted between the API and the graphics driver to do things like running extra checks on function parameters and tracking memory management problems. The nice thing is that you can enable them during development and then completely disable them when releasing your application for zero overhead. Anyone can write their own validation layers, but the Vulkan SDK by LunarG provides a standard set of validation layers that we'll be using in this tutorial. You also need to register a callback function to receive debug messages from the layers.</p>
+<p>Because Vulkan is so explicit about every operation and the validation layers are so extensive, it can actually be a lot easier to find out why your screen is black compared to OpenGL and Direct3D!</p>
+<h1><a class="header" href="#development-environment" id="development-environment">Development environment</a></h1>
+<p>In this chapter we'll set up your environment for developing Vulkan applications by installing the Vulkan SDK for your operating system. This tutorial assumes you already have a working Rust (1.47+) development environment.</p>
+<h2><a class="header" href="#cargo-project" id="cargo-project">Cargo project</a></h2>
+<p>First let's create our Cargo project:</p>
+<p><code>cargo new vulkan-tutorial</code></p>
+<p>After this command has executed, you'll have a folder called <code>vulkan-tutorial</code> containing a minimal Cargo project which produces a Rust executable.</p>
+<p>Open the <code>Cargo.toml</code> file in the folder and add these dependencies in the pre-existing <code>[dependencies]</code> section:</p>
+<pre><code class="language-toml">anyhow = &quot;1&quot;
+lazy_static = &quot;1&quot;
+log = &quot;0.4&quot;
+nalgebra-glm = &quot;0.3&quot;
+png = &quot;0.16&quot;
+pretty_env_logger = &quot;0.4&quot;
+tobj = &quot;2&quot;
+vulkanalia = { version = &quot;*&quot;, features = [&quot;libloading_&quot;, &quot;winit_&quot;] }
+winit = &quot;0.23&quot;
+</code></pre>
+<ul>
+<li><code>anyhow</code> – used for simple error handling</li>
+<li><code>lazy_static</code> – used to store static data like vertices</li>
+<li><code>log</code> – used for logging statements</li>
+<li><code>nalgebra-glm</code> – used as a Rust replacement for <a href="https://glm.g-truc.net">GLM</a> (graphics math library)</li>
+<li><code>png</code> – used to load PNGs to use as textures</li>
+<li><code>pretty_env_logger</code> – used to print our logs to the console</li>
+<li><code>tobj</code> – used to load 3D models in the <a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file">Wavefront .obj format</a></li>
+<li><code>vulkanalia</code> – used to call the Vulkan API</li>
+<li><code>winit</code> – used to create a window to render to</li>
+</ul>
+<h2><a class="header" href="#vulkan-sdk" id="vulkan-sdk">Vulkan SDK</a></h2>
+<p>The most important component you'll need for developing Vulkan applications is the SDK. It includes the headers, standard validation layers, debugging tools and a loader for the Vulkan functions. The loader looks up the functions in the driver at runtime, similarly to GLEW for OpenGL - if you're familiar with that.</p>
+<h3><a class="header" href="#windows" id="windows">Windows</a></h3>
+<p>The SDK can be downloaded from the <a href="https://vulkan.lunarg.com/">LunarG website</a> using the buttons at the bottom of the page. You don't have to create an account, but it will give you access to some additional documentation that may be useful to you.</p>
+<p><img src="/images/vulkan_sdk_download_buttons.png" alt="" /></p>
+<p>Proceed through the installation and pay attention to the install location of the SDK. The first thing we'll do is verify that your graphics card and driver properly support Vulkan. Go to the directory where you installed the SDK, open the <code>Bin</code> directory and run the <code>vkcube.exe</code> demo. You should see the following:</p>
+<p><img src="/images/cube_demo.png" alt="" /></p>
+<p>If you receive an error message then ensure that your drivers are up-to-date, include the Vulkan runtime and that your graphics card is supported. See the <a href="introduction.html">introduction chapter</a> for links to drivers from the major vendors.</p>
+<p>There is another program in this directory that will be useful for development. The <code>glslangValidator.exe</code> and <code>glslc.exe</code> programs will be used to compile shaders from the human-readable <a href="https://en.wikipedia.org/wiki/OpenGL_Shading_Language">GLSL</a> to bytecode. We'll cover this in depth in the <a href="pipeline/shader_modules.html">shader modules chapter</a>. The <code>Bin</code> directory also contains the binaries of the Vulkan loader and the validation layers, while the <code>Lib</code> directory contains the libraries.</p>
+<p>Feel free to explore the other files, but we won't need them for this tutorial.</p>
+<h3><a class="header" href="#linux" id="linux">Linux</a></h3>
+<p>These instructions will be aimed at Ubuntu users, but you may be able to follow along by changing the <code>apt</code> commands to the package manager commands that are appropriate for you.</p>
+<p>The most important components you'll need for developing Vulkan applications on Linux are the Vulkan loader, validation layers, and a couple of command-line utilities to test whether your machine is Vulkan-capable:</p>
+<ul>
+<li><code>sudo apt install vulkan-tools</code>: Command-line utilities, most importantly <code>vulkaninfo</code> and <code>vkcube</code>. Run these to confirm your machine supports Vulkan.</li>
+<li><code>sudo apt install libvulkan-dev</code>: Installs Vulkan loader. The loader looks up the functions in the driver at runtime, similarly to GLEW for OpenGL - if you're familiar with that.</li>
+<li><code>sudo apt install vulkan-validationlayers-dev</code>: Installs the standard validation layers. These are crucial when debugging Vulkan applications, and we'll discuss them in the upcoming chapter.</li>
+</ul>
+<p>If installation was successful, you should be all set with the Vulkan portion. Remember to run <code>vkcube</code> and ensure you see the following pop up in a window:</p>
+<p><img src="/images/cube_demo_nowindow.png" alt="" /></p>
+<p>If you receive an error message then ensure that your drivers are up-to-date, include the Vulkan runtime and that your graphics card is supported. See the <a href="introduction.html">introduction chapter</a> for links to drivers from the major vendors.</p>
+<h3><a class="header" href="#macos" id="macos">macOS</a></h3>
+<p>These instructions will assume you are using the <a href="https://brew.sh/">Homebrew package manager</a>. Also, keep in mind that you will need at least MacOS version 10.11, and your device needs to support the <a href="https://en.wikipedia.org/wiki/Metal_(API)#Supported_GPUs">Metal API</a>.</p>
+<p>The SDK can be downloaded from the <a href="https://vulkan.lunarg.com/">LunarG website</a> using the buttons at the bottom of the page. You don't have to create an account, but it will give you access to some additional documentation that may be useful to you.</p>
+<p><img src="/images/vulkan_sdk_download_buttons.png" alt="" /></p>
+<p>The SDK version for MacOS internally uses <a href="https://moltengl.com/">MoltenVK</a>. There is no native support for Vulkan on MacOS, so what MoltenVK does is actually act as a layer that translates Vulkan API calls to Apple's Metal graphics framework. With this you can take advantage of debugging and performance benefits of Apple's Metal framework.</p>
+<p>After downloading it, simply extract the contents to a folder of your choice. Inside the extracted folder, in the <code>Applications</code> folder you should have some executable files that will run a few demos using the SDK. Run the <code>vkcube</code> executable and you will see the following:</p>
+<p><img src="/images/cube_demo_mac.png" alt="" /></p>
+<h1><a class="header" href="#faq" id="faq">FAQ</a></h1>
+<p>This page lists solutions to common problems that you may encounter while developing Vulkan applications.</p>
+<ul>
+<li>
+<p><strong>I get an access violation error in the core validation layer</strong>: Make sure that MSI Afterburner / RivaTuner Statistics Server is not running, because it has some compatibility problems with Vulkan.</p>
+</li>
+<li>
+<p><strong>I don't see any messages from the validation layers / Validation layers are not available</strong>: First make sure that the validation layers get a chance to print errors by keeping the terminal open after your program exits. You can do this from Visual Studio by running your program with Ctrl-F5 instead of F5, and on Linux by executing your program from a terminal window. If there are still no messages and you are sure that validation layers are turned on, then you should ensure that your Vulkan SDK is correctly installed by following the &quot;Verify the Installation&quot; instructions <a href="https://vulkan.lunarg.com/doc/view/1.2.135.0/windows/getting_started.html">on this page</a>. Also ensure that your SDK version is at least 1.1.106.0 to support the <code>VK_LAYER_KHRONOS_validation</code> layer.</p>
+</li>
+<li>
+<p><strong>vkCreateSwapchainKHR triggers an error in SteamOverlayVulkanLayer64.dll</strong>: This appears to be a compatibility problem in the Steam client beta. There are a few possible workarounds:</p>
+<ul>
+<li>Opt out of the Steam beta program.</li>
+<li>Set the <code>DISABLE_VK_LAYER_VALVE_steam_overlay_1</code> environment variable to <code>1</code></li>
+<li>Delete the Steam overlay Vulkan layer entry in the registry under <code>HKEY_LOCAL_MACHINE\SOFTWARE\Khronos\Vulkan\ImplicitLayers</code></li>
+</ul>
+</li>
+</ul>
+<p>Example:</p>
+<p><img src="/images/steam_layers_env.png" alt="" /></p>
+<h1><a class="header" href="#base-code" id="base-code">Base code</a></h1>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/00_base_code.rs">main.rs</a></p>
+<p>In the <code>Development environment</code> chapter we created a Cargo project and added the necessary dependencies. In this chapter we will be replacing the code in the <code>src/main.rs</code> file with the following code:</p>
+<pre><pre class="playground"><code class="language-rust">use anyhow::*;
+use winit::dpi::LogicalSize;
+use winit::event::{Event, WindowEvent};
+use winit::event_loop::{ControlFlow, EventLoop};
+use winit::window::{Window, WindowBuilder};
+
+fn main() -&gt; Result&lt;()&gt; {
+    pretty_env_logger::init();
+    info!(&quot;Starting program...&quot;);
+
+    // Window
+
+    let event_loop = EventLoop::new();
+    let window = WindowBuilder::new()
+        .with_title(&quot;Vulkan Tutorial (Rust)&quot;)
+        .with_inner_size(LogicalSize::new(1024, 768))
+        .build(&amp;event_loop)?;
+
+    // App
+
+    let mut app = App::create(&amp;window)?;
+    let mut destroying = false;
+    event_loop.run(move |event, _, control_flow| {
+        *control_flow = ControlFlow::Poll;
+        match event {
+            // Render a frame if our Vulkan app is not being destroyed.
+            Event::MainEventsCleared if !destroying =&gt; app.render(&amp;window).unwrap(),
+            // Destroy our Vulkan app.
+            Event::WindowEvent { event: WindowEvent::CloseRequested, .. } =&gt; {
+                destroying = true;
+                *control_flow = ControlFlow::Exit;
+                app.destroy();
+            }
+            _ =&gt; {}
+        }
+    });
+}
+
+/// Our Vulkan app.
+#[derive(Clone, Debug)]
+struct App {}
+
+impl App {
+    /// Creates our Vulkan app.
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        Ok(Self {})
+    }
+
+    /// Renders a frame for our Vulkan app.
+    fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+        Ok(())
+    }
+
+    /// Destroys our Vulkan app.
+    fn destroy(&amp;mut self) {}
+}
+
+/// The Vulkan handles and associated properties used by our Vulkan app.
+#[derive(Clone, Debug, Default)]
+struct AppData {}
+</code></pre></pre>
+<p>We first import <code>anyhow::Result</code> which will be used to easily represent all of the results in our program. Next we import all of the <code>winit</code> types we need to create a window and start an event loop for that window.</p>
+<p>Next comes our <code>main</code> function (which returns the imported <code>anyhow::Result</code> type). This function starts by initializing <code>pretty_env_logger</code> which will print our logs to the console (as shown later).</p>
+<p>Then we create an event loop and window to render to using <code>winit</code> using <code>LogicalSize</code> which will scale the window according to the DPI of your display. If you want to know more about UI scaling you can read the <a href="https://docs.rs/winit/latest/winit/dpi/index.html">relevant <code>winit</code> documentation</a>.</p>
+<p>Next we create an instance of our Vulkan app (<code>App</code>) and enter into our rendering loop. This loop will continually render our scene to the window until you request the window to be closed at which point the app will be destroyed and the program will exit. The <code>destroying</code> flag is necessary to not keep attempting to render the scene while the app is being destroyed which would most likely result in the program crashing after attempting to access Vulkan resources that have been destroyed.</p>
+<p>Lastly comes <code>App</code> and <code>AppData</code>. <code>App</code> will be used to implement the setup, rendering, and destruction logic required for the Vulkan program we will be building over the course of the following chapters. <code>AppData</code> will serve simply as a container for the large number of Vulkan resources we will need to create and initialize which will allow for them to be easily passed to functions to be read and/or modified.</p>
+<p>This will come in handy because many of the following chapters consist of adding a function which takes a <code>&amp;mut AppData</code> and creates and initializes Vulkan resources. These functions will then be called from our <code>App::create</code> constructor method to set up our Vulkan app. Then, before our program exits, these Vulkan resources will be released by our <code>App::destroy</code> method.</p>
+<h2><a class="header" href="#resource-management" id="resource-management">Resource management</a></h2>
+<p>Just like each chunk of memory allocated in C with <code>malloc</code> requires a corresponding call to <code>free</code>, every Vulkan object that we create needs to be explicitly destroyed when we no longer need it. In Rust it is possible to perform automatic resource management using <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">RAII</a> possible combined with smart pointers like <code>Rc</code> or <code>Arc</code>. However, the author of <a href="https://vulkan-tutorial.com">https://vulkan-tutorial.com</a> chose to be explicit about allocation and deallocation of Vulkan objects in this tutorial and I have decided to take the same approach. After all, Vulkan's niche is to be explicit about every operation to avoid mistakes, so it's good to be explicit about the lifetime of objects to learn how the API works.</p>
+<p>After following this tutorial, you could implement automatic resource management by writing Rust structs that wrap Vulkan objects and release them in their <code>Drop</code> implementation. RAII is the recommended model for larger Vulkan programs, but for learning purposes it's always good to know what's going on behind the scenes.</p>
+<p>Vulkan objects are either created directly with commands like <code>vkCreateXXX</code>, or allocated through another object with commands like <code>vkAllocateXXX</code>. After making sure that an object is no longer used anywhere, you need to destroy it with the counterparts <code>vkDestroyXXX</code> and <code>vkFreeXXX</code>. The parameters for these commands generally vary for different types of objects, but there is one parameter that they all share: <code>pAllocator</code>. This is an optional parameter that allows you to specify callbacks for a custom memory allocator. We will ignore this parameter in the tutorial and always pass <code>None</code> as argument.</p>
+<h1><a class="header" href="#instance" id="instance">Instance</a></h1>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/01_instance_creation.rs">main.rs</a></p>
+<p>The very first thing you will want to do is initialize the Vulkan library by creating an <em>instance</em>. The instance is the connection between your application and the Vulkan library and creating it involves specifying some details about your application to the driver. To get started, add the following imports:</p>
+<pre><code class="language-rust noplaypen">use vulkanalia::loader::{LibloadingLoader, LIBRARY};
+use vulkanalia::winit as vk_winit;
+use vulkanalia::prelude::v1_0::*;
+</code></pre>
+<p>Here we first import <code>LibloadingLoader</code> which serves as <code>vulkanalia</code>'s <code>libloading</code> integration which we will use to load the initial Vulkan commands from the Vulkan shared library. The standard name of the Vulkan shared library on your operating system (e.g., <code>vulkan-1.dll</code> on Windows) is then imported as <code>LIBRARY</code>.</p>
+<p>Next we import <code>vulkanalia</code>'s <code>winit</code> integration as <code>vk_winit</code> which in this chapter we will use to enumerate the global Vulkan extensions required to render to a <code>winit</code> window. In a future chapter we will also use <code>vk_winit</code> to link our Vulkan instance with our window.</p>
+<p>Lastly we import the Vulkan 1.0 prelude from <code>vulkanalia</code> which will provide all of the other Vulkan-related imports we will need for this and future chapters.</p>
+<p>Now, to create an instance we'll next have to fill in a struct with some information about our application. This data is technically optional, but it may provide some useful information to the driver in order to optimize our specific application (e.g., because it uses a well-known graphics engine with certain special behavior). This struct is called <code>vk::ApplicationInfo</code> and we'll create it in a new function called <code>create_instance</code> that takes a Vulkan entry point (which we will create later) and returns a Vulkan instance:</p>
+<pre><code class="language-rust noplaypen">fn create_instance(entry: &amp;Entry) -&gt; Result&lt;Instance&gt; {
+    let application_info = vk::ApplicationInfo::builder()
+        .application_name(b&quot;Vulkan Tutorial\0&quot;)
+        .application_version(vk::make_version(1, 0, 0))
+        .engine_name(b&quot;No Engine\0&quot;)
+        .engine_version(vk::make_version(1, 0, 0))
+        .api_version(vk::make_version(1, 0, 0));
+}
+</code></pre>
+<p>A lot of information in Vulkan is passed through structs instead of function parameters and we'll have to fill in one more struct to provide sufficient information for creating an instance. This next struct is not optional and tells the Vulkan driver which global extensions and validation layers we want to use. Global here means that they apply to the entire program and not a specific device, which will become clear in the next few chapters. First we'll need to use <code>vulkanalia</code>'s <code>winit</code> integration to enumerate the required global extensions and convert them into null-terminated C strings (<code>*const c_char</code>):</p>
+<pre><code class="language-rust noplaypen">let extensions = vk_winit::get_required_instance_extensions(entry)?
+    .iter()
+    .map(|e| e.to_cstr().as_ptr())
+    .collect::&lt;Vec&lt;_&gt;&gt;();
+</code></pre>
+<p>With our list of required global extensions in hand we can create and return a Vulkan instance using the Vulkan entry point passed into this function:</p>
+<pre><code class="language-rust noplaypen">let info = vk::InstanceCreateInfo::builder()
+    .application_info(&amp;application_info)
+    .enabled_extension_names(&amp;extensions);
+
+Ok(entry.create_instance(&amp;info, None)?)
+</code></pre>
+<p>As you'll see, the general pattern that object creation function parameters in Vulkan follow is:</p>
+<ul>
+<li>Reference to struct with creation info</li>
+<li>Optional reference to custom allocator callbacks, always <code>None</code> in this tutorial</li>
+</ul>
+<p>Now that we have a function to create Vulkan instances from entry points, we next need to create a Vulkan entry point. This entry point will load the Vulkan commands used to query instance support and create instances. But before we do that, let's add some fields to our <code>App</code> struct to store the Vulkan entry point and instance we will be creating:</p>
+<pre><code class="language-rust noplaypen">struct App {
+    entry: Entry,
+    instance: Instance,
+}
+</code></pre>
+<p>To populate these fields, update the <code>App::create</code> method to the following:</p>
+<pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    let loader = LibloadingLoader::new(LIBRARY)?;
+    let entry = Entry::new(loader).map_err(|b| anyhow!(&quot;{}&quot;, b))?;
+
+    let instance = create_instance(&amp;entry)?;
+
+    Ok(Self { entry, instance })
+}
+</code></pre>
+<p>Here we first create a Vulkan function loader which will be used to load the initial Vulkan commands from the Vulkan shared library. Next we create the Vulkan entry point using the function loader which will load all of the commands we need to manage Vulkan instances. Lastly we are now able to call our <code>create_instance</code> function with the Vulkan entry point.</p>
+<h2><a class="header" href="#cleaning-up" id="cleaning-up">Cleaning up</a></h2>
+<p>The <code>Instance</code> should only be destroyed right before the program exits. It can be destroyed in the <code>App::destroy</code> method using the <code>destroy_instance</code> command wrapper:</p>
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.instance.destroy_instance(None);
+}
+</code></pre>
+<p>Like the Vulkan commands used to create objects, the commands used to destroy objects also take an optional reference to custom allocator callbacks. So like before, we pass <code>None</code> to indicate we are content with the default allocation behavior.</p>
+<h2><a class="header" href="#instance-vs-vkinstance" id="instance-vs-vkinstance"><code>Instance</code> vs <code>vk::Instance</code></a></h2>
+<p>When we call <code>create_instance</code>, what we get back is not a raw Vulkan instance as would be returned by the Vulkan command <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateInstance.html"><code>vkCreateInstance</code></a>. Instead what we got back is a custom type defined by <code>vulkanalia</code> which combines both a raw Vulkan instance and the commands loaded for that specific instance.</p>
+<p>This is the <code>Instance</code> type we have been using (imported from the <code>vulkanalia</code> prelude) which should not be confused with the <code>vk::Instance</code> type which represents a raw Vulkan instance. In future chapters we will also use the <code>Device</code> type which, like <code>Instance</code>, is a pairing of a raw Vulkan device (<code>vk::Device</code>) and the commands loaded for that specific device. Fortunately we will not be using <code>vk::Instance</code> or <code>vk::Device</code> directly so you won't need to worry about getting them mixed up.</p>
+<p>Because an <code>Instance</code> contains both a Vulkan instance and the associated commands, the command wrappers like <code>destroy_instance</code> implemented for an <code>Instance</code> are able to provide the Vulkan instance when it is required by the underlying Vulkan command.</p>
+<p>If you look at the documentation for the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyInstance.html"><code>vkDestroyInstance</code></a> command, you will see that it takes two parameters: the instance to destroy and the optional custom allocator callbacks. However, <code>destroy_instance</code> only takes the optional custom allocator callbacks because it is able to provide the raw Vulkan handle as the first parameter itself as described above.</p>
+<h1><a class="header" href="#validation-layers-1" id="validation-layers-1">Validation layers</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#physical-devices-and-queue-families" id="physical-devices-and-queue-families">Physical devices and queue families</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#logical-device-and-queues" id="logical-device-and-queues">Logical device and queues</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#window-surface" id="window-surface">Window surface</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#swapchain" id="swapchain">Swapchain</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#image-views" id="image-views">Image views</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#introduction-1" id="introduction-1">Introduction</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#shader-modules" id="shader-modules">Shader modules</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#fixed-functions" id="fixed-functions">Fixed functions</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#render-passes" id="render-passes">Render passes</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#framebuffers" id="framebuffers">Framebuffers</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#command-buffers" id="command-buffers">Command buffers</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#rendering-and-presentation" id="rendering-and-presentation">Rendering and presentation</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#recreation" id="recreation">Recreation</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#vertex-input-description" id="vertex-input-description">Vertex input description</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#vertex-buffer-creation" id="vertex-buffer-creation">Vertex buffer creation</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#staging-buffer" id="staging-buffer">Staging buffer</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#index-buffer" id="index-buffer">Index buffer</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#descriptor-layout-and-buffer" id="descriptor-layout-and-buffer">Descriptor layout and buffer</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#descriptor-pool-and-sets" id="descriptor-pool-and-sets">Descriptor pool and sets</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#images" id="images">Images</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#image-view-and-sampler" id="image-view-and-sampler">Image view and sampler</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#combined-image-sampler" id="combined-image-sampler">Combined image sampler</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#depth-buffering" id="depth-buffering">Depth buffering</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#loading-models" id="loading-models">Loading models</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#generating-mipmaps" id="generating-mipmaps">Generating mipmaps</a></h1>
+<p>Coming soon™.</p>
+<h1><a class="header" href="#multisampling" id="multisampling">Multisampling</a></h1>
+<p>Coming soon™.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>

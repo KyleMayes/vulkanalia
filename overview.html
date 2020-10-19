@@ -1,0 +1,371 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Overview - Vulkan Tutorial (Rust)</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="overview.html" class="active"><strong aria-hidden="true">2.</strong> Overview</a></li><li class="chapter-item expanded "><a href="development_environment.html"><strong aria-hidden="true">3.</strong> Development environment</a></li><li class="chapter-item expanded "><a href="faq.html"><strong aria-hidden="true">4.</strong> FAQ</a></li><li class="chapter-item expanded affix "><li class="part-title">Setup</li><li class="chapter-item expanded "><a href="setup/base_code.html"><strong aria-hidden="true">5.</strong> Base code</a></li><li class="chapter-item expanded "><a href="setup/instance.html"><strong aria-hidden="true">6.</strong> Instance</a></li><li class="chapter-item expanded "><a href="setup/validation_layers.html"><strong aria-hidden="true">7.</strong> Validation layers</a></li><li class="chapter-item expanded "><a href="setup/physical_devices_and_queue_families.html"><strong aria-hidden="true">8.</strong> Physical devices and queue families</a></li><li class="chapter-item expanded "><a href="setup/logical_device_and_queues.html"><strong aria-hidden="true">9.</strong> Logical device and queues</a></li><li class="chapter-item expanded affix "><li class="part-title">Presentation</li><li class="chapter-item expanded "><a href="presentation/window_surface.html"><strong aria-hidden="true">10.</strong> Window surface</a></li><li class="chapter-item expanded "><a href="presentation/swapchain.html"><strong aria-hidden="true">11.</strong> Swapchain</a></li><li class="chapter-item expanded "><a href="presentation/image_views.html"><strong aria-hidden="true">12.</strong> Image views</a></li><li class="chapter-item expanded affix "><li class="part-title">Pipeline</li><li class="chapter-item expanded "><a href="pipeline/introduction.html"><strong aria-hidden="true">13.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="pipeline/shader_modules.html"><strong aria-hidden="true">14.</strong> Shader modules</a></li><li class="chapter-item expanded "><a href="pipeline/fixed_functions.html"><strong aria-hidden="true">15.</strong> Fixed functions</a></li><li class="chapter-item expanded "><a href="pipeline/render_passes.html"><strong aria-hidden="true">16.</strong> Render passes</a></li><li class="chapter-item expanded "><a href="pipeline/conclusion.html"><strong aria-hidden="true">17.</strong> Conclusion</a></li><li class="chapter-item expanded affix "><li class="part-title">Drawing</li><li class="chapter-item expanded "><a href="drawing/framebuffers.html"><strong aria-hidden="true">18.</strong> Framebuffers</a></li><li class="chapter-item expanded "><a href="drawing/command_buffers.html"><strong aria-hidden="true">19.</strong> Command buffers</a></li><li class="chapter-item expanded "><a href="drawing/rendering_and_presentation.html"><strong aria-hidden="true">20.</strong> Rendering and presentation</a></li><li class="chapter-item expanded affix "><li class="part-title">Swapchain</li><li class="chapter-item expanded "><a href="swapchain/recreation.html"><strong aria-hidden="true">21.</strong> Recreation</a></li><li class="chapter-item expanded affix "><li class="part-title">Vertex buffers</li><li class="chapter-item expanded "><a href="vertex/vertex_input_description.html"><strong aria-hidden="true">22.</strong> Vertex input description</a></li><li class="chapter-item expanded "><a href="vertex/vertex_buffer_creation.html"><strong aria-hidden="true">23.</strong> Vertex buffer creation</a></li><li class="chapter-item expanded "><a href="vertex/staging_buffer.html"><strong aria-hidden="true">24.</strong> Staging buffer</a></li><li class="chapter-item expanded "><a href="vertex/index_buffer.html"><strong aria-hidden="true">25.</strong> Index buffer</a></li><li class="chapter-item expanded affix "><li class="part-title">Uniform buffers</li><li class="chapter-item expanded "><a href="uniform/descriptor_layout_and_buffer.html"><strong aria-hidden="true">26.</strong> Descriptor layout and buffer</a></li><li class="chapter-item expanded "><a href="uniform/descriptor_pool_and_sets.html"><strong aria-hidden="true">27.</strong> Descriptor pool and sets</a></li><li class="chapter-item expanded affix "><li class="part-title">Texture mapping</li><li class="chapter-item expanded "><a href="texture/images.html"><strong aria-hidden="true">28.</strong> Images</a></li><li class="chapter-item expanded "><a href="texture/image_view_and_sampler.html"><strong aria-hidden="true">29.</strong> Image view and sampler</a></li><li class="chapter-item expanded "><a href="texture/combined_image_sampler.html"><strong aria-hidden="true">30.</strong> Combined image sampler</a></li><li class="chapter-item expanded affix "><li class="part-title">Model</li><li class="chapter-item expanded "><a href="model/depth_buffering.html"><strong aria-hidden="true">31.</strong> Depth buffering</a></li><li class="chapter-item expanded "><a href="model/loading_models.html"><strong aria-hidden="true">32.</strong> Loading models</a></li><li class="chapter-item expanded affix "><li class="part-title">Advanced</li><li class="chapter-item expanded "><a href="advanced/generating_mipmaps.html"><strong aria-hidden="true">33.</strong> Generating mipmaps</a></li><li class="chapter-item expanded "><a href="advanced/multisampling.html"><strong aria-hidden="true">34.</strong> Multisampling</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#overview" id="overview">Overview</a></h1>
+<p>This chapter will start off with an introduction of Vulkan and the problems it addresses. After that we're going to look at the ingredients that are required for the first triangle. This will give you a big picture to place each of the subsequent chapters in. We will conclude by covering the structure of the Vulkan API as implemented by <code>vulkanalia</code>.</p>
+<h2><a class="header" href="#origin-of-vulkan" id="origin-of-vulkan">Origin of Vulkan</a></h2>
+<p>Just like the previous graphics APIs, Vulkan is designed as a cross-platform abstraction over <a href="https://en.wikipedia.org/wiki/Graphics_processing_unit">GPUs</a>. The problem with most of these APIs is that the era in which they were designed featured graphics hardware that was mostly limited to configurable fixed functionality. Programmers had to provide the vertex data in a standard format and were at the mercy of the GPU manufacturers with regards to lighting and shading options.</p>
+<p>As graphics card architectures matured, they started offering more and more programmable functionality. All this new functionality had to be integrated with the existing APIs somehow. This resulted in less than ideal abstractions and a lot of guesswork on the graphics driver side to map the programmer's intent to the modern graphics architectures. That's why there are so many driver updates for improving the performance in games, sometimes by significant margins. Because of the complexity of these drivers, application developers also need to deal with inconsistencies between vendors, like the syntax that is accepted for <a href="https://en.wikipedia.org/wiki/Shader">shaders</a>. Aside from these new features, the past decade also saw an influx of mobile devices with powerful graphics hardware. These mobile GPUs have different architectures based on their energy and space requirements. One such example is <a href="https://en.wikipedia.org/wiki/Tiled_rendering">tiled rendering</a>, which would benefit from improved performance by offering the programmer more control over this functionality. Another limitation originating from the age of these APIs is limited multi-threading support, which can result in a bottleneck on the CPU side.</p>
+<p>Vulkan solves these problems by being designed from scratch for modern graphics architectures. It reduces driver overhead by allowing programmers to clearly specify their intent using a more verbose API, and allows multiple threads to create and submit commands in parallel. It reduces inconsistencies in shader compilation by switching to a standardized byte code format with a single compiler. Lastly, it acknowledges the general purpose processing capabilities of modern graphics cards by unifying the graphics and compute functionality into a single API.</p>
+<h2><a class="header" href="#what-it-takes-to-draw-a-triangle" id="what-it-takes-to-draw-a-triangle">What it takes to draw a triangle</a></h2>
+<p>We'll now look at an overview of all the steps it takes to render a triangle in a well-behaved Vulkan program. All of the concepts introduced here will be elaborated on in the next chapters. This is just to give you a big picture to relate all of the individual components to.</p>
+<h3><a class="header" href="#step-1---instance-and-physical-device-selection" id="step-1---instance-and-physical-device-selection">Step 1 - Instance and physical device selection</a></h3>
+<p>A Vulkan application starts by setting up the Vulkan API through a <code>VkInstance</code>. An instance is created by describing your application and any API extensions you will be using. After creating the instance, you can query for Vulkan supported hardware and select one or more <code>VkPhysicalDevice</code>s to use for operations. You can query for properties like VRAM size and device capabilities to select desired devices, for example to prefer using dedicated graphics cards.</p>
+<h3><a class="header" href="#step-2---logical-device-and-queue-families" id="step-2---logical-device-and-queue-families">Step 2 - Logical device and queue families</a></h3>
+<p>After selecting the right hardware device to use, you need to create a <code>VkDevice</code> (logical device), where you describe more specifically which <code>VkPhysicalDeviceFeatures</code> you will be using, like multi-viewport rendering and 64-bit floats. You also need to specify which queue families you would like to use. Most operations performed with Vulkan, like draw commands and memory operations, are asynchronously executed by submitting them to a <code>VkQueue</code>. Queues are allocated from queue families, where each queue family supports a specific set of operations in its queues. For example, there could be separate queue families for graphics, compute and memory transfer operations. The availability of queue families could also be used as a distinguishing factor in physical device selection. It is possible for a device with Vulkan support to not offer any graphics functionality, however all graphics cards with Vulkan support today will generally support all queue operations that we're interested in.</p>
+<h3><a class="header" href="#step-3---window-surface-and-swap-chain" id="step-3---window-surface-and-swap-chain">Step 3 - Window surface and swap chain</a></h3>
+<p>Unless you're only interested in offscreen rendering, you will need to create a window to present rendered images to. Windows can be created with the native platform APIs or libraries like <a href="http://www.glfw.org/">GLFW</a>, <a href="https://www.libsdl.org/">SDL</a>, or the <a href="https://github.com/rust-windowing/winit"><code>winit</code></a> crate. We will be using the <code>winit</code> crate in this tutorial, but more about that in the next chapter.</p>
+<p>We need two more components to actually render to a window: a window surface (<code>VkSurfaceKHR</code>) and a swap chain (<code>VkSwapchainKHR</code>). Note the <code>KHR</code> postfix, which means that these objects are part of a Vulkan extension. The Vulkan API itself is completely platform agnostic, which is why we need to use the standardized WSI (Window System Interface) extension to interact with the window manager. The surface is a cross-platform abstraction over windows to render to and is generally instantiated by providing a reference to the native window handle, for example <code>HWND</code> on Windows. However, <code>vulkanalia</code> has optional integration with the <code>winit</code> crate which we will be leveraging to handle the platform-specific details of creating a window and associated surface for us.</p>
+<p>The swap chain is a collection of render targets. Its basic purpose is to ensure that the image that we're currently rendering to is different from the one that is currently on the screen. This is important to make sure that only complete images are shown. Every time we want to draw a frame we have to ask the swap chain to provide us with an image to render to. When we've finished drawing a frame, the image is returned to the swap chain for it to be presented to the screen at some point. The number of render targets and conditions for presenting finished images to the screen depends on the present mode. Common present modes are  double buffering (vsync) and triple buffering. We'll look into these in the swap chain creation chapter.</p>
+<p>Some platforms allow you to render directly to a display without interacting with any window manager through the <code>VK_KHR_display</code> and <code>VK_KHR_display_swapchain</code> extensions. These allow you to create a surface that represents the entire screen and could be used to implement your own window manager, for example.</p>
+<h3><a class="header" href="#step-4---image-views-and-framebuffers" id="step-4---image-views-and-framebuffers">Step 4 - Image views and framebuffers</a></h3>
+<p>To draw to an image acquired from the swap chain, we have to wrap it into a <code>VkImageView</code> and <code>VkFramebuffer</code>. An image view references a specific part of an image to be used, and a framebuffer references image views that are to be used for color, depth and stencil targets. Because there could be many different images in the swap chain, we'll preemptively create an image view and framebuffer for each of them and select the right one at draw time.</p>
+<h3><a class="header" href="#step-5---render-passes" id="step-5---render-passes">Step 5 - Render passes</a></h3>
+<p>Render passes in Vulkan describe the type of images that are used during rendering operations, how they will be used, and how their contents should be treated. In our initial triangle rendering application, we'll tell Vulkan that we will use a single image as color target and that we want it to be cleared to a solid color right before the drawing operation. Whereas a render pass only describes the type of images, a <code>VkFramebuffer</code> actually binds specific images to these slots.</p>
+<h3><a class="header" href="#step-6---graphics-pipeline" id="step-6---graphics-pipeline">Step 6 - Graphics pipeline</a></h3>
+<p>The graphics pipeline in Vulkan is set up by creating a <code>VkPipeline</code> object. It describes the configurable state of the graphics card, like the viewport size and depth buffer operation and the programmable state using <code>VkShaderModule</code> objects. The <code>VkShaderModule</code> objects are created from shader byte code. The driver also needs to know which render targets will be used in the pipeline, which we specify by referencing the render pass.</p>
+<p>One of the most distinctive features of Vulkan compared to existing APIs, is that almost all configuration of the graphics pipeline needs to be set in advance. That means that if you want to switch to a different shader or slightly change your vertex layout, then you need to entirely recreate the graphics pipeline. That means that you will have to create many <code>VkPipeline</code> objects in advance for all the different combinations you need for your rendering operations. Only some basic configuration, like viewport size and clear color, can be changed dynamically. All of the state also needs to be described explicitly, there is no default color blend state, for example.</p>
+<p>The good news is that because you're doing the equivalent of ahead-of-time compilation versus just-in-time compilation, there are more optimization opportunities for the driver and runtime performance is more predictable, because large state changes like switching to a different graphics pipeline are made very explicit.</p>
+<h3><a class="header" href="#step-7---command-pools-and-command-buffers" id="step-7---command-pools-and-command-buffers">Step 7 - Command pools and command buffers</a></h3>
+<p>As mentioned earlier, many of the operations in Vulkan that we want to execute, like drawing operations, need to be submitted to a queue. These operations first need to be recorded into a <code>VkCommandBuffer</code> before they can be submitted. These command buffers are allocated from a <code>VkCommandPool</code> that is associated with a specific queue family. To draw a simple triangle, we need to record a command buffer with the following operations:</p>
+<ul>
+<li>Begin the render pass</li>
+<li>Bind the graphics pipeline</li>
+<li>Draw 3 vertices</li>
+<li>End the render pass</li>
+</ul>
+<p>Because the image in the framebuffer depends on which specific image the swap chain will give us, we need to record a command buffer for each possible image and select the right one at draw time. The alternative would be to record the command buffer again every frame, which is not as efficient.</p>
+<h3><a class="header" href="#step-8---main-loop" id="step-8---main-loop">Step 8 - Main loop</a></h3>
+<p>Now that the drawing commands have been wrapped into a command buffer, the main loop is quite straightforward. We first acquire an image from the swap chain with <code>vkAcquireNextImageKHR</code>. We can then select the appropriate command buffer for that image and execute it with <code>vkQueueSubmit</code>. Finally, we return the image to the swap chain for presentation to the screen with <code>vkQueuePresentKHR</code>.</p>
+<p>Operations that are submitted to queues are executed asynchronously. Therefore we have to use synchronization objects like semaphores to ensure a correct order of execution. Execution of the draw command buffer must be set up to wait on image acquisition to finish, otherwise it may occur that we start rendering to an image that is still being read for presentation on the screen. The <code>vkQueuePresentKHR</code> call in turn needs to wait for rendering to be finished, for which we'll use a second semaphore that is signaled after rendering completes.</p>
+<h3><a class="header" href="#summary" id="summary">Summary</a></h3>
+<p>This whirlwind tour should give you a basic understanding of the work ahead for drawing the first triangle. A real-world program contains more steps, like allocating vertex buffers, creating uniform buffers and uploading texture images that will be covered in subsequent chapters, but we'll start simple because Vulkan has enough of a steep learning curve as it is. Note that we'll cheat a bit by initially embedding the vertex coordinates in the vertex shader instead of using a vertex buffer. That's because managing vertex buffers requires some familiarity with command buffers first.</p>
+<p>So in short, to draw the first triangle we need to:</p>
+<ul>
+<li>Create a <code>VkInstance</code></li>
+<li>Select a supported graphics card (<code>VkPhysicalDevice</code>)</li>
+<li>Create a <code>VkDevice</code> and <code>VkQueue</code> for drawing and presentation</li>
+<li>Create a window, window surface and swap chain</li>
+<li>Wrap the swap chain images into <code>VkImageView</code></li>
+<li>Create a render pass that specifies the render targets and usage</li>
+<li>Create framebuffers for the render pass</li>
+<li>Set up the graphics pipeline</li>
+<li>Allocate and record a command buffer with the draw commands for every possible swap chain image</li>
+<li>Draw frames by acquiring images, submitting the right draw command buffer and returning the images back to the swap chain</li>
+</ul>
+<p>It's a lot of steps, but the purpose of each individual step will be made very simple and clear in the upcoming chapters. If you're confused about the relation of a single step compared to the whole program, you should refer back to this chapter.</p>
+<h2><a class="header" href="#api-concepts" id="api-concepts">API concepts</a></h2>
+<p>The Vulkan API is defined in terms of the C programming language. This API is defined in the Vulkan API Registry which is <a href="https://github.com/KhronosGroup/Vulkan-Docs/blob/main/xml/vk.xml">an XML file</a> which serves the purpose of being a machine readable definition of the Vulkan API.</p>
+<p>The Vulkan <a href="https://github.com/KhronosGroup/Vulkan-Headers">C and C++ headers</a> that are part of the Vulkan SDK you will be installing in the next chapter are generated from this Vulkan API Registry. However, we will not be using these headers, directly or indirectly, because <code>vulkanalia</code> includes a Rust interface to the Vulkan API generated from the Vulkan API registry.</p>
+<p>Underneath <code>vulkanalia</code> is the <a href="https://docs.rs/vulkanalia-sys"><code>vulkanalia-sys</code></a> crate which defines the raw types (commands, enums, bitmasks, structs, etc.) defined by the Vulkan API Registry. These raw types are re-exported from the <code>vulkanalia</code> crate in the <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/index.html"><code>vk</code></a> module along with some other types generated from the Vulkan API Registry which allow for somewhat simpler and less error-prone usage of the Vulkan API from Rust.</p>
+<h3><a class="header" href="#type-names" id="type-names">Type Names</a></h3>
+<p>Because Rust has support for namespaces unlike C, the <code>vulkanalia</code> API omits the parts of Vulkan type names that are used for namespacing purposes in C. Types such as structs, unions, and enums lose their <code>Vk</code> prefix (e.g., <code>VkInstance</code> becomes <code>vk::Instance</code> where <code>vk</code> is the the module of the same name in <code>vulkanalia</code>).</p>
+<h3><a class="header" href="#enums" id="enums">Enums</a></h3>
+<p>Vulkan enums are modeled as structs and the enum values are modeled as associated constants on the struct. Rust enums are not used to model Vulkan enums because use of Rust enums in FFI can lead to <a href="https://github.com/rust-lang/rust/issues/36927">undefined behavior</a>.</p>
+<p>Since we don't need to worry about name conflicts between the enum values for different enums (or different libraries), the portions of the enum value names used for namespacing purposes are omitted.</p>
+<p>For example, the <code>VK_OBJECT_TYPE_INSTANCE</code> enum value is the <code>INSTANCE</code> value for the <code>VkObjectType</code> enum. In <code>vulkanalia</code>, this enum value becomes <code>vk::ObjectType::INSTANCE</code>.</p>
+<h3><a class="header" href="#bitmasks" id="bitmasks">Bitmasks</a></h3>
+<p>Vulkan bitmasks are modeled as structs with the bitflags as associated constants (similarly to enums) which are generated by the <code>bitflags!</code> macro from the <a href="https://github.com/bitflags/bitflags"><code>bitflags</code></a> crate.</p>
+<p>Like with enums values, the portions of bitmask names used for namespacing purposes are omitted.</p>
+<p>For example, the <code>VK_BUFFER_USAGE_TRANSFER_SRC_BIT</code> bitflag is the <code>TRANSFER_SRC</code> bitflag for the <code>VkBufferUsageFlags</code> bitmask. In <code>vulkanalia</code>, this becomes <code>vk::BufferUsageFlags::TRANSFER_SRC</code>.</p>
+<h3><a class="header" href="#commands" id="commands">Commands</a></h3>
+<p>The raw Vulkan commands are defined in <code>vulkanalia</code> with the <code>PFN_</code> (pointer to function) prefix. So <code>vk::PFN_vkEnumerateInstanceExtensionProperties</code> refers to a function pointer for the <code>vkEnumerateInstanceExtensionProperties</code> Vulkan command.</p>
+<p>If we want to actually call these Vulkan commands, we first need to load them. Vulkan commands are loaded by and stored in four structs, the contents of which are determined by how those commands are loaded. Only two Vulkan commands are directly loaded from a Vulkan shared library, <code>vkGetInstanceProcAddr</code> and <code>vkGetDeviceProcAddr</code>. These commands are then used to load all of the other Vulkan commands. The four structs are (note that Vulkan instances and devices are a topic that will be covered in future chapters):</p>
+<ul>
+<li><code>vk::StaticCommands</code> – the Vulkan commands listed above which are loaded directly from a Vulkan shared library</li>
+<li><code>vk::EntryCommands</code> – the Vulkan commands loaded using <code>vkGetInstanceProcAddr</code> and a null Vulkan instance (i.e., Vulkan commands not tied to a particular Vulkan instance)</li>
+<li><code>vk::InstanceCommands</code> – the Vulkan commands loaded using <code>vkGetInstanceProcAddr</code> and a valid Vulkan instance</li>
+<li><code>vk::DeviceCommands</code> – the Vulkan commands loaded using <code>vkGetDeviceProcAddr</code> and a valid Vulkan device</li>
+</ul>
+<p>These structs allow you to easily load and call raw Vulkan commands from Rust, but <code>vulkanalia</code> offers wrappers around the raw Vulkan commands which make calling them from Rust easier and less error-prone.</p>
+<h3><a class="header" href="#command-wrappers" id="command-wrappers">Command wrappers</a></h3>
+<p>An example of a typical Vulkan command signature looks like this in C:</p>
+<pre><code class="language-c">VkResult vkEnumerateInstanceExtensionProperties(
+    const char* pLayerName,
+    uint32_t* pPropertyCount,
+    VkExtensionProperties* pProperties
+);
+</code></pre>
+<p>Someone who is familiar with the conventions of the Vulkan API could quickly see how this command is supposed to be used from this signature alone despite it not including some key information.</p>
+<p>For those new to the Vulkan API, a look at the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateDeviceExtensionProperties.html">documentation</a> for this command will be more illuminating. The description of the behavior of this command in the documentation suggests that using this command to list the available extensions will be a multi-step process:</p>
+<ol>
+<li>Call the command to get the number of extensions</li>
+<li>Allocate a buffer that can contain the specified number of extensions</li>
+<li>Call the command again to populate the buffer with the extensions</li>
+</ol>
+<p>So in C++, this might look like this (ignoring the result of the command for simplicity):</p>
+<pre><code class="language-c++">// 1.
+uint32_t pPropertyCount;
+vkEnumerateInstanceExtensionProperties(NULL, &amp;pPropertyCount, NULL);
+
+// 2.
+std::vector&lt;VkExtensionProperties&gt; pProperties{pPropertyCount};
+
+// 3.
+vkEnumerateInstanceExtensionProperties(NULL, &amp;pPropertyCount, pProperties.data());
+</code></pre>
+<p>The Rust signature for the command wrapper looks like this:</p>
+<pre><code class="language-rust noplaypen">fn enumerate_instance_extension_properties(
+    &amp;self,
+    layer_name: Option&lt;&amp;[u8]&gt;,
+) -&gt; VkResult&lt;Vec&lt;ExtensionProperties&gt;&gt;;
+</code></pre>
+<p>These command wrappers simplify usage of Vulkan commands by handling the need to call some commands twice such as in this case as well as capturing the fallibility of the underlying command by returning a (Rust) <code>Result</code> (<code>VkResult&lt;T&gt;</code> in this case is a type alias for <code>Result&lt;T, vk::Result&gt;</code>). Note that the <code>layer_name</code> argument is optional, a fact which is defined by the Vulkan API Registry but cannot be indicated by a C function signature alone.</p>
+<p>You likely noticed the <code>&amp;self</code> parameter in the above command wrapper. These command wrappers are defined in traits which are implemented for types exposed by <code>vulkanalia</code>. The traits can be separated into two categories: version traits and extension traits. The version traits offer command wrappers for the commands which are a standard part of Vulkan whereas the extension traits offer command wrappers for the commands which are defined as part of Vulkan extensions.</p>
+<p>For example, the above command wrapper is in the <code>vk::EntryV1_0</code> trait since it is a standard Vulkan command that is part of Vulkan 1.0 and is not dependent on a valid Vulkan instance or version (as described in the previous section).</p>
+<p>A Vulkan device command that was added in Vulkan 1.2 would be in the <code>vk::Device1_2</code> trait. <code>vk::KhrSurfaceExtension</code> is an example of an extension trait that we will be using in future chapters to call Vulkan commands that are defined as part of the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html"><code>VK_KHR_surface</code></a> extension.</p>
+<p>These traits are defined for types which contain both the loaded commands and the required Vulkan instance or device (if any). These types have been lovingly hand-crafted and are not part of the generated Vulkan bindings in the <code>vk</code> module of <code>vulkanalia</code>. They will be used in future chapters and are the <code>Entry</code>, <code>Instance</code>, and <code>Device</code> structs and can be found in the <code>Structs</code> section of the <a href="https://docs.rs/vulkanalia"><code>vulkanalia</code> documentation</a>.</p>
+<h3><a class="header" href="#builders" id="builders">Builders</a></h3>
+<p>The Vulkan API heavily utilizes structs as parameters for Vulkan commands. Many of these structs have a field which indicates the type of the struct. In the C API (called from C++ in this example), this field (<code>sType</code>) would need to be set explicitly, for example:</p>
+<pre><code class="language-c++">std::vector&lt;const char*&gt; extensions{/* 3 extension names */};
+
+VkInstanceCreateInfo info;
+info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+info.enabledExtensionCount = static_cast&lt;uint32_t&gt;(extensions.size());
+info.ppEnabledExtensionNames = extensions.data();
+
+VkInstance instance;
+vkCreateInstance(&amp;info, NULL, &amp;instance);
+</code></pre>
+<p><code>vulkanalia</code> retains this approach but makes it a bit easier to work with while also preventing certain classes of errors. <code>vulkanalia</code> has builder structs which simplify the construction of Vulkan structs by populating the struct with defaults which will include the appropriate value for structure type field when present. These builder structs also simplify the setting of linked fields that represent arrays such as <code>enabledExtensionCount</code> and <code>ppEnabledExtensionNames</code> in the above code. Using <code>vulkanalia</code> the above code would become:</p>
+<pre><code class="language-rust noplaypen">let extensions = &amp;[/* 3 extensions */];
+
+let info = vk::InstanceCreateInfo::builder()
+    .enabled_extension_names(extensions)
+    .build();
+
+let instance = entry.create_instance(&amp;info, None).unwrap();
+</code></pre>
+<p>Here we create a builder struct instance for the <code>vk::InstanceCreateInfo</code> struct that will be initially be populated with default values which includes setting the <code>s_type</code> field to <code>vk::StructureType::INSTANCE_CREATE_INFO</code>. Then we set the enabled extension names (which will set both the <code>enabled_extension_count</code> and <code>enabled_extension_name</code> fields). Then we can build our <code>vk::InstanceCreateInfo</code> struct and pass it to the Vulkan command wrapper.</p>
+<p>However, the above Rust code involves a certain degree of danger. The builder structs have lifetimes which enforce that the references stored in them live at least as long as the struct. In the above example, this means that the Rust compiler will make sure that the value passed to the <code>enabled_extension_names</code> method lives at least as long as the builder struct. However, as soon as we call <code>build()</code> to get the raw Vulkan struct these lifetimes are discarded which means the Rust compiler can't prevent us from attempting to access a value that has been dropped.</p>
+<p>The following code will (hopefully) crash since the temporary <code>Vec</code> passed to the <code>enabled_extension_names</code> value will have been dropped by the time we call the Vulkan command with our <code>vk::InstanceCreateInfo</code> struct:</p>
+<pre><code class="language-rust noplaypen">let info = vk::InstanceCreateInfo::builder()
+    .enabled_extension_names(&amp;vec![/* 3 extensions */])
+    .build();
+
+let instance = entry.create_instance(&amp;info, None).unwrap();
+</code></pre>
+<p>Fortunately, <code>vulkanalia</code> has a solution for this. Simply don't call <code>build()</code> and instead pass the builder struct to the command wrapper instead! Anywhere a Vulkan struct is expected in a command wrapper you can instead provide the associated builder struct. If you remove the <code>build()</code> call from the above code the Rust compiler will be able to use the lifetimes on the builder struct to reject this incorrect code with <code>error[E0716]: temporary value dropped while borrowed</code>.</p>
+<h3><a class="header" href="#preludes" id="preludes">Preludes</a></h3>
+<p><code>vulkanalia</code> offers prelude modules that expose the basic types needed to use the crate. One prelude module is available per Vulkan version and each will expose the relevant command traits along with other very frequently used types:</p>
+<pre><code class="language-rust noplaypen">// Vulkan 1.0
+use vulkanalia::prelude::v1_0::*;
+
+// Vulkan 1.1
+use vulkanalia::prelude::v1_1::*;
+
+// Vulkan 1.2
+use vulkanalia::prelude::v1_2::*;
+</code></pre>
+<h2><a class="header" href="#validation-layers" id="validation-layers">Validation layers</a></h2>
+<p>As mentioned earlier, Vulkan is designed for high performance and low driver overhead. Therefore it will include very limited error checking and debugging capabilities by default. The driver will often crash instead of returning an error code if you do something wrong, or worse, it will appear to work on your graphics card and completely fail on others.</p>
+<p>Vulkan allows you to enable extensive checks through a feature known as <em>validation layers</em>. Validation layers are pieces of code that can be inserted between the API and the graphics driver to do things like running extra checks on function parameters and tracking memory management problems. The nice thing is that you can enable them during development and then completely disable them when releasing your application for zero overhead. Anyone can write their own validation layers, but the Vulkan SDK by LunarG provides a standard set of validation layers that we'll be using in this tutorial. You also need to register a callback function to receive debug messages from the layers.</p>
+<p>Because Vulkan is so explicit about every operation and the validation layers are so extensive, it can actually be a lot easier to find out why your screen is black compared to OpenGL and Direct3D!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="development_environment.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="development_environment.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
