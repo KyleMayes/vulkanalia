@@ -828,6 +828,13 @@ pub type PFN_vkCmdSetExclusiveScissorNV = extern "system" fn(
     _exclusive_scissors: *const Rect2D,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateKHR.html>
+pub type PFN_vkCmdSetFragmentShadingRateKHR = extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _fragment_size: *const Extent2D,
+    _combiner_ops: *const FragmentShadingRateCombinerOpKHR,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFrontFaceEXT.html>
 pub type PFN_vkCmdSetFrontFaceEXT =
     extern "system" fn(_command_buffer: CommandBuffer, _front_face: FrontFace);
@@ -2305,6 +2312,13 @@ pub type PFN_vkGetPhysicalDeviceFormatProperties2 = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFormatProperties2KHR.html>
 pub type PFN_vkGetPhysicalDeviceFormatProperties2KHR = PFN_vkGetPhysicalDeviceFormatProperties2;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFragmentShadingRatesKHR.html>
+pub type PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR = extern "system" fn(
+    _physical_device: PhysicalDevice,
+    _fragment_shading_rate_count: *mut u32,
+    _fragment_shading_rates: *mut PhysicalDeviceFragmentShadingRateKHR,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceImageFormatProperties.html>
 pub type PFN_vkGetPhysicalDeviceImageFormatProperties = extern "system" fn(

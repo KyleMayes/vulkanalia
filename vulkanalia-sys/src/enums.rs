@@ -1309,6 +1309,7 @@ impl DynamicState {
     pub const VIEWPORT_SHADING_RATE_PALETTE_NV: Self = Self(1000164004);
     pub const VIEWPORT_COARSE_SAMPLE_ORDER_NV: Self = Self(1000164006);
     pub const EXCLUSIVE_SCISSOR_NV: Self = Self(1000205001);
+    pub const FRAGMENT_SHADING_RATE_KHR: Self = Self(1000226000);
     pub const LINE_STIPPLE_EXT: Self = Self(1000259000);
     pub const CULL_MODE_EXT: Self = Self(1000267000);
     pub const FRONT_FACE_EXT: Self = Self(1000267001);
@@ -1354,6 +1355,7 @@ impl fmt::Debug for DynamicState {
             1000164004 => write!(f, "VIEWPORT_SHADING_RATE_PALETTE_NV"),
             1000164006 => write!(f, "VIEWPORT_COARSE_SAMPLE_ORDER_NV"),
             1000205001 => write!(f, "EXCLUSIVE_SCISSOR_NV"),
+            1000226000 => write!(f, "FRAGMENT_SHADING_RATE_KHR"),
             1000259000 => write!(f, "LINE_STIPPLE_EXT"),
             1000267000 => write!(f, "CULL_MODE_EXT"),
             1000267001 => write!(f, "FRONT_FACE_EXT"),
@@ -1975,6 +1977,44 @@ impl fmt::Debug for Format {
             1000288029 => write!(f, "ASTC_6X6X6_SFLOAT_BLOCK_EXT"),
             1000340000 => write!(f, "A4R4G4B4_UNORM_PACK16_EXT"),
             1000340001 => write!(f, "A4B4G4R4_UNORM_PACK16_EXT"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFragmentShadingRateCombinerOpKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct FragmentShadingRateCombinerOpKHR(i32);
+
+impl FragmentShadingRateCombinerOpKHR {
+    pub const KEEP: Self = Self(0);
+    pub const REPLACE: Self = Self(1);
+    pub const MIN: Self = Self(2);
+    pub const MAX: Self = Self(3);
+    pub const MUL: Self = Self(4);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for FragmentShadingRateCombinerOpKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "KEEP"),
+            1 => write!(f, "REPLACE"),
+            2 => write!(f, "MIN"),
+            3 => write!(f, "MAX"),
+            4 => write!(f, "MUL"),
             _ => self.0.fmt(f),
         }
     }
@@ -4311,6 +4351,7 @@ impl StructureType {
     pub const DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD: Self = Self(1000213000);
     pub const SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD: Self = Self(1000213001);
     pub const IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA: Self = Self(1000214000);
+    pub const PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR: Self = Self(1000215000);
     pub const METAL_SURFACE_CREATE_INFO_EXT: Self = Self(1000217000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT: Self = Self(1000218000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT: Self = Self(1000218001);
@@ -4318,6 +4359,11 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT: Self = Self(1000225000);
     pub const PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT: Self = Self(1000225001);
     pub const PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT: Self = Self(1000225002);
+    pub const FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR: Self = Self(1000226000);
+    pub const PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR: Self = Self(1000226001);
+    pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR: Self = Self(1000226002);
+    pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR: Self = Self(1000226003);
+    pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR: Self = Self(1000226004);
     pub const PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD: Self = Self(1000227000);
     pub const PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD: Self = Self(1000229000);
     pub const PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT: Self = Self(1000234000);
@@ -4826,6 +4872,10 @@ impl fmt::Debug for StructureType {
             1000213000 => write!(f, "DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD"),
             1000213001 => write!(f, "SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD"),
             1000214000 => write!(f, "IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA"),
+            1000215000 => write!(
+                f,
+                "PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR"
+            ),
             1000217000 => write!(f, "METAL_SURFACE_CREATE_INFO_EXT"),
             1000218000 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT"),
             1000218001 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT"),
@@ -4836,6 +4886,11 @@ impl fmt::Debug for StructureType {
                 "PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT"
             ),
             1000225002 => write!(f, "PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT"),
+            1000226000 => write!(f, "FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR"),
+            1000226001 => write!(f, "PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR"),
+            1000226002 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR"),
+            1000226003 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR"),
+            1000226004 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR"),
             1000227000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD"),
             1000229000 => write!(f, "PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD"),
             1000234000 => write!(f, "PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT"),

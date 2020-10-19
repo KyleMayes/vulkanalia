@@ -8434,6 +8434,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMap2Feature
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageRobustnessFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImagelessFramebufferFeatures {}
@@ -8466,6 +8467,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageFootprintFeatur
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderTerminateInvocationFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShadingRateImageFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSubgroupSizeControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {}
@@ -13250,6 +13252,77 @@ unsafe impl<'b> Cast for FormatProperties2Builder<'b> {
     }
 }
 
+unsafe impl Cast for FragmentShadingRateAttachmentInfoKHR {
+    type Target = FragmentShadingRateAttachmentInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for FragmentShadingRateAttachmentInfoKHR {
+    type Builder = FragmentShadingRateAttachmentInfoKHRBuilder<'b>;
+}
+
+/// A builder for a [FragmentShadingRateAttachmentInfoKHR](struct.FragmentShadingRateAttachmentInfoKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct FragmentShadingRateAttachmentInfoKHRBuilder<'b> {
+    value: FragmentShadingRateAttachmentInfoKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> FragmentShadingRateAttachmentInfoKHRBuilder<'b> {
+    #[inline]
+    pub fn fragment_shading_rate_attachment(
+        mut self,
+        fragment_shading_rate_attachment: &'b impl Cast<Target = AttachmentReference2>,
+    ) -> Self {
+        self.value.fragment_shading_rate_attachment = fragment_shading_rate_attachment.as_ref();
+        self
+    }
+
+    #[inline]
+    pub fn shading_rate_attachment_texel_size(
+        mut self,
+        shading_rate_attachment_texel_size: impl Cast<Target = Extent2D>,
+    ) -> Self {
+        self.value.shading_rate_attachment_texel_size = shading_rate_attachment_texel_size.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> FragmentShadingRateAttachmentInfoKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for FragmentShadingRateAttachmentInfoKHRBuilder<'b> {
+    type Target = FragmentShadingRateAttachmentInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for FragmentShadingRateAttachmentInfoKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for FragmentShadingRateAttachmentInfoKHRBuilder<'b> {
+    type Target = FragmentShadingRateAttachmentInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for FramebufferAttachmentImageInfo {
     type Target = FramebufferAttachmentImageInfo;
 
@@ -14129,6 +14202,7 @@ unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineShaderGroupsCr
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCreationFeedbackCreateInfoEXT {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineDiscardRectangleStateCreateInfoEXT {}
+unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineFragmentShadingRateStateCreateInfoKHR {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo
     for PipelineRepresentativeFragmentTestStateCreateInfoNV
 {
@@ -23704,6 +23778,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMap2
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageRobustnessFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImagelessFramebufferFeatures {}
@@ -23745,6 +23820,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageFootprin
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderTerminateInvocationFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShadingRateImageFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSubgroupSizeControlFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {}
@@ -24453,6 +24529,365 @@ impl ops::DerefMut for PhysicalDeviceFragmentShaderInterlockFeaturesEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceFragmentShaderInterlockFeaturesEXTBuilder {
     type Target = PhysicalDeviceFragmentShaderInterlockFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentShadingRateFeaturesKHR {
+    type Target = PhysicalDeviceFragmentShadingRateFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceFragmentShadingRateFeaturesKHR {
+    type Builder = PhysicalDeviceFragmentShadingRateFeaturesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDeviceFragmentShadingRateFeaturesKHR](struct.PhysicalDeviceFragmentShadingRateFeaturesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceFragmentShadingRateFeaturesKHRBuilder {
+    value: PhysicalDeviceFragmentShadingRateFeaturesKHR,
+}
+
+impl PhysicalDeviceFragmentShadingRateFeaturesKHRBuilder {
+    #[inline]
+    pub fn pipeline_fragment_shading_rate(mut self, pipeline_fragment_shading_rate: bool) -> Self {
+        self.value.pipeline_fragment_shading_rate = pipeline_fragment_shading_rate as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn primitive_fragment_shading_rate(
+        mut self,
+        primitive_fragment_shading_rate: bool,
+    ) -> Self {
+        self.value.primitive_fragment_shading_rate = primitive_fragment_shading_rate as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn attachment_fragment_shading_rate(
+        mut self,
+        attachment_fragment_shading_rate: bool,
+    ) -> Self {
+        self.value.attachment_fragment_shading_rate = attachment_fragment_shading_rate as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceFragmentShadingRateFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceFragmentShadingRateFeaturesKHRBuilder {
+    type Target = PhysicalDeviceFragmentShadingRateFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceFragmentShadingRateFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentShadingRateFeaturesKHRBuilder {
+    type Target = PhysicalDeviceFragmentShadingRateFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentShadingRateKHR {
+    type Target = PhysicalDeviceFragmentShadingRateKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceFragmentShadingRateKHR {
+    type Builder = PhysicalDeviceFragmentShadingRateKHRBuilder;
+}
+
+/// A builder for a [PhysicalDeviceFragmentShadingRateKHR](struct.PhysicalDeviceFragmentShadingRateKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceFragmentShadingRateKHRBuilder {
+    value: PhysicalDeviceFragmentShadingRateKHR,
+}
+
+impl PhysicalDeviceFragmentShadingRateKHRBuilder {
+    #[inline]
+    pub fn sample_counts(mut self, sample_counts: SampleCountFlags) -> Self {
+        self.value.sample_counts = sample_counts;
+        self
+    }
+
+    #[inline]
+    pub fn fragment_size(mut self, fragment_size: impl Cast<Target = Extent2D>) -> Self {
+        self.value.fragment_size = fragment_size.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceFragmentShadingRateKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceFragmentShadingRateKHRBuilder {
+    type Target = PhysicalDeviceFragmentShadingRateKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceFragmentShadingRateKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentShadingRateKHRBuilder {
+    type Target = PhysicalDeviceFragmentShadingRateKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentShadingRatePropertiesKHR {
+    type Target = PhysicalDeviceFragmentShadingRatePropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceFragmentShadingRatePropertiesKHR {
+    type Builder = PhysicalDeviceFragmentShadingRatePropertiesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDeviceFragmentShadingRatePropertiesKHR](struct.PhysicalDeviceFragmentShadingRatePropertiesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceFragmentShadingRatePropertiesKHRBuilder {
+    value: PhysicalDeviceFragmentShadingRatePropertiesKHR,
+}
+
+impl PhysicalDeviceFragmentShadingRatePropertiesKHRBuilder {
+    #[inline]
+    pub fn min_fragment_shading_rate_attachment_texel_size(
+        mut self,
+        min_fragment_shading_rate_attachment_texel_size: impl Cast<Target = Extent2D>,
+    ) -> Self {
+        self.value.min_fragment_shading_rate_attachment_texel_size =
+            min_fragment_shading_rate_attachment_texel_size.into();
+        self
+    }
+
+    #[inline]
+    pub fn max_fragment_shading_rate_attachment_texel_size(
+        mut self,
+        max_fragment_shading_rate_attachment_texel_size: impl Cast<Target = Extent2D>,
+    ) -> Self {
+        self.value.max_fragment_shading_rate_attachment_texel_size =
+            max_fragment_shading_rate_attachment_texel_size.into();
+        self
+    }
+
+    #[inline]
+    pub fn max_fragment_shading_rate_attachment_texel_size_aspect_ratio(
+        mut self,
+        max_fragment_shading_rate_attachment_texel_size_aspect_ratio: u32,
+    ) -> Self {
+        self.value
+            .max_fragment_shading_rate_attachment_texel_size_aspect_ratio =
+            max_fragment_shading_rate_attachment_texel_size_aspect_ratio;
+        self
+    }
+
+    #[inline]
+    pub fn primitive_fragment_shading_rate_with_multiple_viewports(
+        mut self,
+        primitive_fragment_shading_rate_with_multiple_viewports: bool,
+    ) -> Self {
+        self.value
+            .primitive_fragment_shading_rate_with_multiple_viewports =
+            primitive_fragment_shading_rate_with_multiple_viewports as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn layered_shading_rate_attachments(
+        mut self,
+        layered_shading_rate_attachments: bool,
+    ) -> Self {
+        self.value.layered_shading_rate_attachments = layered_shading_rate_attachments as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn fragment_shading_rate_non_trivial_combiner_ops(
+        mut self,
+        fragment_shading_rate_non_trivial_combiner_ops: bool,
+    ) -> Self {
+        self.value.fragment_shading_rate_non_trivial_combiner_ops =
+            fragment_shading_rate_non_trivial_combiner_ops as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn max_fragment_size(mut self, max_fragment_size: impl Cast<Target = Extent2D>) -> Self {
+        self.value.max_fragment_size = max_fragment_size.into();
+        self
+    }
+
+    #[inline]
+    pub fn max_fragment_size_aspect_ratio(mut self, max_fragment_size_aspect_ratio: u32) -> Self {
+        self.value.max_fragment_size_aspect_ratio = max_fragment_size_aspect_ratio;
+        self
+    }
+
+    #[inline]
+    pub fn max_fragment_shading_rate_coverage_samples(
+        mut self,
+        max_fragment_shading_rate_coverage_samples: u32,
+    ) -> Self {
+        self.value.max_fragment_shading_rate_coverage_samples =
+            max_fragment_shading_rate_coverage_samples;
+        self
+    }
+
+    #[inline]
+    pub fn max_fragment_shading_rate_rasterization_samples(
+        mut self,
+        max_fragment_shading_rate_rasterization_samples: SampleCountFlags,
+    ) -> Self {
+        self.value.max_fragment_shading_rate_rasterization_samples =
+            max_fragment_shading_rate_rasterization_samples;
+        self
+    }
+
+    #[inline]
+    pub fn fragment_shading_rate_with_shader_depth_stencil_writes(
+        mut self,
+        fragment_shading_rate_with_shader_depth_stencil_writes: bool,
+    ) -> Self {
+        self.value
+            .fragment_shading_rate_with_shader_depth_stencil_writes =
+            fragment_shading_rate_with_shader_depth_stencil_writes as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn fragment_shading_rate_with_sample_mask(
+        mut self,
+        fragment_shading_rate_with_sample_mask: bool,
+    ) -> Self {
+        self.value.fragment_shading_rate_with_sample_mask =
+            fragment_shading_rate_with_sample_mask as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn fragment_shading_rate_with_shader_sample_mask(
+        mut self,
+        fragment_shading_rate_with_shader_sample_mask: bool,
+    ) -> Self {
+        self.value.fragment_shading_rate_with_shader_sample_mask =
+            fragment_shading_rate_with_shader_sample_mask as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn fragment_shading_rate_with_conservative_rasterization(
+        mut self,
+        fragment_shading_rate_with_conservative_rasterization: bool,
+    ) -> Self {
+        self.value
+            .fragment_shading_rate_with_conservative_rasterization =
+            fragment_shading_rate_with_conservative_rasterization as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn fragment_shading_rate_with_fragment_shader_interlock(
+        mut self,
+        fragment_shading_rate_with_fragment_shader_interlock: bool,
+    ) -> Self {
+        self.value
+            .fragment_shading_rate_with_fragment_shader_interlock =
+            fragment_shading_rate_with_fragment_shader_interlock as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn fragment_shading_rate_with_custom_sample_locations(
+        mut self,
+        fragment_shading_rate_with_custom_sample_locations: bool,
+    ) -> Self {
+        self.value
+            .fragment_shading_rate_with_custom_sample_locations =
+            fragment_shading_rate_with_custom_sample_locations as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn fragment_shading_rate_strict_multiply_combiner(
+        mut self,
+        fragment_shading_rate_strict_multiply_combiner: bool,
+    ) -> Self {
+        self.value.fragment_shading_rate_strict_multiply_combiner =
+            fragment_shading_rate_strict_multiply_combiner as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceFragmentShadingRatePropertiesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceFragmentShadingRatePropertiesKHRBuilder {
+    type Target = PhysicalDeviceFragmentShadingRatePropertiesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceFragmentShadingRatePropertiesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentShadingRatePropertiesKHRBuilder {
+    type Target = PhysicalDeviceFragmentShadingRatePropertiesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -27808,6 +28243,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceExternalMemoryHos
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFloatControlsProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentDensityMap2PropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentDensityMapPropertiesEXT {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentShadingRatePropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceIDProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBlockPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLineRasterizationPropertiesEXT {}
@@ -29981,6 +30417,64 @@ impl ops::DerefMut for PhysicalDeviceShaderSubgroupExtendedTypesFeaturesBuilder 
 
 unsafe impl Cast for PhysicalDeviceShaderSubgroupExtendedTypesFeaturesBuilder {
     type Target = PhysicalDeviceShaderSubgroupExtendedTypesFeatures;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderTerminateInvocationFeaturesKHR {
+    type Target = PhysicalDeviceShaderTerminateInvocationFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderTerminateInvocationFeaturesKHR {
+    type Builder = PhysicalDeviceShaderTerminateInvocationFeaturesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDeviceShaderTerminateInvocationFeaturesKHR](struct.PhysicalDeviceShaderTerminateInvocationFeaturesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderTerminateInvocationFeaturesKHRBuilder {
+    value: PhysicalDeviceShaderTerminateInvocationFeaturesKHR,
+}
+
+impl PhysicalDeviceShaderTerminateInvocationFeaturesKHRBuilder {
+    #[inline]
+    pub fn shader_terminate_invocation(mut self, shader_terminate_invocation: bool) -> Self {
+        self.value.shader_terminate_invocation = shader_terminate_invocation as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderTerminateInvocationFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderTerminateInvocationFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderTerminateInvocationFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderTerminateInvocationFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderTerminateInvocationFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderTerminateInvocationFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -34172,6 +34666,70 @@ impl ops::DerefMut for PipelineExecutableStatisticKHRBuilder {
 
 unsafe impl Cast for PipelineExecutableStatisticKHRBuilder {
     type Target = PipelineExecutableStatisticKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineFragmentShadingRateStateCreateInfoKHR {
+    type Target = PipelineFragmentShadingRateStateCreateInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineFragmentShadingRateStateCreateInfoKHR {
+    type Builder = PipelineFragmentShadingRateStateCreateInfoKHRBuilder;
+}
+
+/// A builder for a [PipelineFragmentShadingRateStateCreateInfoKHR](struct.PipelineFragmentShadingRateStateCreateInfoKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineFragmentShadingRateStateCreateInfoKHRBuilder {
+    value: PipelineFragmentShadingRateStateCreateInfoKHR,
+}
+
+impl PipelineFragmentShadingRateStateCreateInfoKHRBuilder {
+    #[inline]
+    pub fn fragment_size(mut self, fragment_size: impl Cast<Target = Extent2D>) -> Self {
+        self.value.fragment_size = fragment_size.into();
+        self
+    }
+
+    #[inline]
+    pub fn combiner_ops(mut self, combiner_ops: [FragmentShadingRateCombinerOpKHR; 2]) -> Self {
+        self.value.combiner_ops = combiner_ops;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineFragmentShadingRateStateCreateInfoKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineFragmentShadingRateStateCreateInfoKHRBuilder {
+    type Target = PipelineFragmentShadingRateStateCreateInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineFragmentShadingRateStateCreateInfoKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineFragmentShadingRateStateCreateInfoKHRBuilder {
+    type Target = PipelineFragmentShadingRateStateCreateInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -41656,6 +42214,7 @@ unsafe impl<'b> Cast for SubpassDescriptionBuilder<'b> {
 
 /// A Vulkan struct that can be used to extend a [SubpassDescription2](struct.SubpassDescription2.html).
 pub unsafe trait ExtendsSubpassDescription2 {}
+unsafe impl ExtendsSubpassDescription2 for FragmentShadingRateAttachmentInfoKHR {}
 unsafe impl ExtendsSubpassDescription2 for SubpassDescriptionDepthStencilResolve {}
 
 unsafe impl Cast for SubpassDescription2 {

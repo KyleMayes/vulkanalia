@@ -388,6 +388,9 @@ pub const KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION: ExtensionName =
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_semaphore_win32.html>
 pub const KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION: ExtensionName =
     to_extension_name(b"VK_KHR_external_semaphore_win32");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_fragment_shading_rate.html>
+pub const KHR_FRAGMENT_SHADING_RATE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_fragment_shading_rate");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_get_display_properties2.html>
 pub const KHR_GET_DISPLAY_PROPERTIES2_EXTENSION: ExtensionName =
     to_extension_name(b"VK_KHR_get_display_properties2");
@@ -466,6 +469,9 @@ pub const KHR_SHADER_NON_SEMANTIC_INFO_EXTENSION: ExtensionName =
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_subgroup_extended_types.html>
 pub const KHR_SHADER_SUBGROUP_EXTENDED_TYPES_EXTENSION: ExtensionName =
     to_extension_name(b"VK_KHR_shader_subgroup_extended_types");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_terminate_invocation.html>
+pub const KHR_SHADER_TERMINATE_INVOCATION_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_shader_terminate_invocation");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shared_presentable_image.html>
 pub const KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION: ExtensionName =
     to_extension_name(b"VK_KHR_shared_presentable_image");

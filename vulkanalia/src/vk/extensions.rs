@@ -3520,6 +3520,62 @@ pub trait KhrExternalSemaphoreWin32Extension: DeviceV1_0 {
 
 impl KhrExternalSemaphoreWin32Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_fragment_shading_rate.html>
+pub trait KhrFragmentShadingRateExtension: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateKHR.html>
+    #[inline]
+    fn cmd_set_fragment_shading_rate_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        fragment_size: &Extent2D,
+        combiner_ops: [FragmentShadingRateCombinerOpKHR; 2],
+    ) {
+        let __result = (self.commands().cmd_set_fragment_shading_rate_khr)(
+            command_buffer,
+            fragment_size,
+            combiner_ops.as_ptr(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFragmentShadingRatesKHR.html>
+    #[inline]
+    fn get_physical_device_fragment_shading_rates_khr(
+        &self,
+        physical_device: PhysicalDevice,
+    ) -> crate::VkResult<Vec<PhysicalDeviceFragmentShadingRateKHR>> {
+        let mut fragment_shading_rate_count = 0;
+
+        (self
+            .commands()
+            .get_physical_device_fragment_shading_rates_khr)(
+            physical_device,
+            &mut fragment_shading_rate_count,
+            ptr::null_mut(),
+        );
+
+        let mut fragment_shading_rates = Vec::with_capacity(fragment_shading_rate_count as usize);
+
+        let __result = (self
+            .commands()
+            .get_physical_device_fragment_shading_rates_khr)(
+            physical_device,
+            &mut fragment_shading_rate_count,
+            fragment_shading_rates.as_mut_ptr(),
+        );
+
+        debug_assert!(fragment_shading_rates.capacity() == fragment_shading_rate_count as usize);
+        unsafe { fragment_shading_rates.set_len(fragment_shading_rate_count as usize) };
+
+        if __result == Result::SUCCESS {
+            Ok(fragment_shading_rates)
+        } else {
+            Err(__result)
+        }
+    }
+}
+
+impl KhrFragmentShadingRateExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_get_display_properties2.html>
 pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayModeProperties2KHR.html>
@@ -4784,6 +4840,11 @@ impl KhrShaderNonSemanticInfoExtension for crate::Device {}
 pub trait KhrShaderSubgroupExtendedTypesExtension: DeviceV1_0 {}
 
 impl KhrShaderSubgroupExtendedTypesExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_terminate_invocation.html>
+pub trait KhrShaderTerminateInvocationExtension: DeviceV1_0 {}
+
+impl KhrShaderTerminateInvocationExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shared_presentable_image.html>
 pub trait KhrSharedPresentableImageExtension: DeviceV1_0 {

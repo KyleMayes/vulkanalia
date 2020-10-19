@@ -639,7 +639,7 @@ bitflags! {
         const RESERVED_27_KHR = 1 << 27;
         const RESERVED_28_KHR = 1 << 28;
         const ACCELERATION_STRUCTURE_VERTEX_BUFFER_KHR = 1 << 29;
-        const AMD_RESERVED_30 = 1 << 30;
+        const FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 30;
     }
 }
 

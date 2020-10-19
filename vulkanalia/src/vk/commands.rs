@@ -349,6 +349,9 @@ pub struct DeviceCommands {
     pub cmd_copy_buffer_to_image2_khr: PFN_vkCmdCopyBufferToImage2KHR,
     pub cmd_copy_image_to_buffer2_khr: PFN_vkCmdCopyImageToBuffer2KHR,
     pub cmd_resolve_image2_khr: PFN_vkCmdResolveImage2KHR,
+    pub cmd_set_fragment_shading_rate_khr: PFN_vkCmdSetFragmentShadingRateKHR,
+    pub get_physical_device_fragment_shading_rates_khr:
+        PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR,
     pub reset_query_pool_ext: PFN_vkResetQueryPoolEXT,
     pub trim_command_pool_khr: PFN_vkTrimCommandPoolKHR,
     pub get_device_group_peer_memory_features_khr: PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR,
@@ -5348,6 +5351,40 @@ impl DeviceCommands {
                         _resolve_image_info: *const ResolveImageInfo2KHR,
                     ) {
                         panic!("could not load vkCmdResolveImage2KHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_fragment_shading_rate_khr: unsafe {
+                let value = loader(b"vkCmdSetFragmentShadingRateKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _fragment_size: *const Extent2D,
+                        _combiner_ops: *const FragmentShadingRateCombinerOpKHR,
+                    ) {
+                        panic!("could not load vkCmdSetFragmentShadingRateKHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_fragment_shading_rates_khr: unsafe {
+                let value = loader(
+                    b"vkGetPhysicalDeviceFragmentShadingRatesKHR\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _fragment_shading_rate_count: *mut u32,
+                        _fragment_shading_rates: *mut PhysicalDeviceFragmentShadingRateKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceFragmentShadingRatesKHR")
                     }
                     fallback
                 }
