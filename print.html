@@ -376,9 +376,9 @@ winit = &quot;0.23&quot;
 <p>The most important component you'll need for developing Vulkan applications is the SDK. It includes the headers, standard validation layers, debugging tools and a loader for the Vulkan functions. The loader looks up the functions in the driver at runtime, similarly to GLEW for OpenGL - if you're familiar with that.</p>
 <h3><a class="header" href="#windows" id="windows">Windows</a></h3>
 <p>The SDK can be downloaded from the <a href="https://vulkan.lunarg.com/">LunarG website</a> using the buttons at the bottom of the page. You don't have to create an account, but it will give you access to some additional documentation that may be useful to you.</p>
-<p><img src="../images/vulkan_sdk_download_buttons.png" alt="" /></p>
+<p><img src="./images/vulkan_sdk_download_buttons.png" alt="" /></p>
 <p>Proceed through the installation and pay attention to the install location of the SDK. The first thing we'll do is verify that your graphics card and driver properly support Vulkan. Go to the directory where you installed the SDK, open the <code>Bin</code> directory and run the <code>vkcube.exe</code> demo. You should see the following:</p>
-<p><img src="../images/cube_demo.png" alt="" /></p>
+<p><img src="./images/cube_demo.png" alt="" /></p>
 <p>If you receive an error message then ensure that your drivers are up-to-date, include the Vulkan runtime and that your graphics card is supported. See the <a href="introduction.html">introduction chapter</a> for links to drivers from the major vendors.</p>
 <p>There is another program in this directory that will be useful for development. The <code>glslangValidator.exe</code> and <code>glslc.exe</code> programs will be used to compile shaders from the human-readable <a href="https://en.wikipedia.org/wiki/OpenGL_Shading_Language">GLSL</a> to bytecode. We'll cover this in depth in the <a href="pipeline/shader_modules.html">shader modules chapter</a>. The <code>Bin</code> directory also contains the binaries of the Vulkan loader and the validation layers, while the <code>Lib</code> directory contains the libraries.</p>
 <p>Feel free to explore the other files, but we won't need them for this tutorial.</p>
@@ -391,15 +391,15 @@ winit = &quot;0.23&quot;
 <li><code>sudo apt install vulkan-validationlayers-dev</code>: Installs the standard validation layers. These are crucial when debugging Vulkan applications, and we'll discuss them in the upcoming chapter.</li>
 </ul>
 <p>If installation was successful, you should be all set with the Vulkan portion. Remember to run <code>vkcube</code> and ensure you see the following pop up in a window:</p>
-<p><img src="../images/cube_demo_nowindow.png" alt="" /></p>
+<p><img src="./images/cube_demo_nowindow.png" alt="" /></p>
 <p>If you receive an error message then ensure that your drivers are up-to-date, include the Vulkan runtime and that your graphics card is supported. See the <a href="introduction.html">introduction chapter</a> for links to drivers from the major vendors.</p>
 <h3><a class="header" href="#macos" id="macos">macOS</a></h3>
 <p>These instructions will assume you are using the <a href="https://brew.sh/">Homebrew package manager</a>. Also, keep in mind that you will need at least MacOS version 10.11, and your device needs to support the <a href="https://en.wikipedia.org/wiki/Metal_(API)#Supported_GPUs">Metal API</a>.</p>
 <p>The SDK can be downloaded from the <a href="https://vulkan.lunarg.com/">LunarG website</a> using the buttons at the bottom of the page. You don't have to create an account, but it will give you access to some additional documentation that may be useful to you.</p>
-<p><img src="../images/vulkan_sdk_download_buttons.png" alt="" /></p>
+<p><img src="./images/vulkan_sdk_download_buttons.png" alt="" /></p>
 <p>The SDK version for MacOS internally uses <a href="https://moltengl.com/">MoltenVK</a>. There is no native support for Vulkan on MacOS, so what MoltenVK does is actually act as a layer that translates Vulkan API calls to Apple's Metal graphics framework. With this you can take advantage of debugging and performance benefits of Apple's Metal framework.</p>
 <p>After downloading it, simply extract the contents to a folder of your choice. Inside the extracted folder, in the <code>Applications</code> folder you should have some executable files that will run a few demos using the SDK. Run the <code>vkcube</code> executable and you will see the following:</p>
-<p><img src="../images/cube_demo_mac.png" alt="" /></p>
+<p><img src="./images/cube_demo_mac.png" alt="" /></p>
 <h1><a class="header" href="#faq" id="faq">FAQ</a></h1>
 <p>This page lists solutions to common problems that you may encounter while developing Vulkan applications.</p>
 <ul>
@@ -419,7 +419,7 @@ winit = &quot;0.23&quot;
 </li>
 </ul>
 <p>Example:</p>
-<p><img src="../images/steam_layers_env.png" alt="" /></p>
+<p><img src="./images/steam_layers_env.png" alt="" /></p>
 <h1><a class="header" href="#base-code" id="base-code">Base code</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/00_base_code.rs">main.rs</a></p>
 <p>In the <code>Development environment</code> chapter we created a Cargo project and added the necessary dependencies. In this chapter we will be replacing the code in the <code>src/main.rs</code> file with the following code:</p>
