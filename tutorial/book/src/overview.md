@@ -102,7 +102,7 @@ Vulkan enums are modeled as structs and the enum values are modeled as associate
 
 Since we don't need to worry about name conflicts between the enum values for different enums (or different libraries), the portions of the enum value names used for namespacing purposes are omitted.
 
-For example, the `VK_OBJECT_TYPE_INSTANCE` enum value is the `INSTANCE` value for the `VkObjectType` enum. In `vulkanalia`, this enum value becomes `vk::ObjectType::INSTANCE`.
+For example, the `VK_OBJECT_TYPE_INSTANCE` enum value is the `INSTANCE` value for the `VkObjectType` enum. In `vulkanalia`, this enum value becomes [`vk::ObjectType::INSTANCE`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.ObjectType.html#associatedconstant.INSTANCE).
 
 ### Bitmasks
 
@@ -110,18 +110,18 @@ Vulkan bitmasks are modeled as structs with the bitflags as associated constants
 
 Like with enums values, the portions of bitmask names used for namespacing purposes are omitted.
 
-For example, the `VK_BUFFER_USAGE_TRANSFER_SRC_BIT` bitflag is the `TRANSFER_SRC` bitflag for the `VkBufferUsageFlags` bitmask. In `vulkanalia`, this becomes `vk::BufferUsageFlags::TRANSFER_SRC`.
+For example, the `VK_BUFFER_USAGE_TRANSFER_SRC_BIT` bitflag is the `TRANSFER_SRC` bitflag for the `VkBufferUsageFlags` bitmask. In `vulkanalia`, this becomes [`vk::BufferUsageFlags::TRANSFER_SRC`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.BufferUsageFlags.html#associatedconstant.TRANSFER_SRC).
 
 ### Commands
 
-The raw Vulkan commands are defined in `vulkanalia` with the `PFN_` (pointer to function) prefix. So `vk::PFN_vkEnumerateInstanceExtensionProperties` refers to a function pointer for the `vkEnumerateInstanceExtensionProperties` Vulkan command.
+The raw Vulkan commands are defined in `vulkanalia` with the `PFN_` (pointer to function) prefix. So [`vk::PFN_vkEnumerateInstanceExtensionProperties`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/type.PFN_vkEnumerateInstanceExtensionProperties.html) refers to a function pointer for the `vkEnumerateInstanceExtensionProperties` Vulkan command.
 
 If we want to actually call these Vulkan commands, we first need to load them. Vulkan commands are loaded by and stored in four structs, the contents of which are determined by how those commands are loaded. Only two Vulkan commands are directly loaded from a Vulkan shared library, `vkGetInstanceProcAddr` and `vkGetDeviceProcAddr`. These commands are then used to load all of the other Vulkan commands. The four structs are (note that Vulkan instances and devices are a topic that will be covered in future chapters):
 
- * `vk::StaticCommands` &ndash; the Vulkan commands listed above which are loaded directly from a Vulkan shared library
- * `vk::EntryCommands` &ndash; the Vulkan commands loaded using `vkGetInstanceProcAddr` and a null Vulkan instance (i.e., Vulkan commands not tied to a particular Vulkan instance)
- * `vk::InstanceCommands` &ndash; the Vulkan commands loaded using `vkGetInstanceProcAddr` and a valid Vulkan instance
- * `vk::DeviceCommands` &ndash; the Vulkan commands loaded using `vkGetDeviceProcAddr` and a valid Vulkan device
+ * [`vk::StaticCommands`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.StaticCommands.html) &ndash; the Vulkan commands listed above which are loaded directly from a Vulkan shared library
+ * [`vk::EntryCommands`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.EntryCommands.html) &ndash; the Vulkan commands loaded using `vkGetInstanceProcAddr` and a null Vulkan instance (i.e., Vulkan commands not tied to a particular Vulkan instance)
+ * [`vk::InstanceCommands`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.InstanceCommands.html) &ndash; the Vulkan commands loaded using `vkGetInstanceProcAddr` and a valid Vulkan instance
+ * [`vk::DeviceCommands`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.DeviceCommands.html) &ndash; the Vulkan commands loaded using `vkGetDeviceProcAddr` and a valid Vulkan device
 
 These structs allow you to easily load and call raw Vulkan commands from Rust, but `vulkanalia` offers wrappers around the raw Vulkan commands which make calling them from Rust easier and less error-prone.
 
@@ -168,13 +168,13 @@ fn enumerate_instance_extension_properties(
 ) -> VkResult<Vec<ExtensionProperties>>;
 ```
 
-These command wrappers simplify usage of Vulkan commands by handling the need to call some commands twice such as in this case as well as capturing the fallibility of the underlying command by returning a (Rust) `Result` (`VkResult<T>` in this case is a type alias for `Result<T, vk::Result>`). Note that the `layer_name` argument is optional, a fact which is defined by the Vulkan API Registry but cannot be indicated by a C function signature alone.
+These command wrappers simplify usage of Vulkan commands by handling the need to call some commands twice such as in this case as well as capturing the fallibility of the underlying command by returning a (Rust) `Result` ([`VkResult<T>`](https://docs.rs/vulkanalia/latest/vulkanalia/type.VkResult.html) in this case is a type alias for `Result<T, vk::Result>`). Note that the `layer_name` argument is optional, a fact which is defined by the Vulkan API Registry but cannot be indicated by a C function signature alone.
 
 You likely noticed the `&self` parameter in the above command wrapper. These command wrappers are defined in traits which are implemented for types exposed by `vulkanalia`. The traits can be separated into two categories: version traits and extension traits. The version traits offer command wrappers for the commands which are a standard part of Vulkan whereas the extension traits offer command wrappers for the commands which are defined as part of Vulkan extensions.
 
-For example, the above command wrapper is in the `vk::EntryV1_0` trait since it is a standard Vulkan command that is part of Vulkan 1.0 and is not dependent on a valid Vulkan instance or version (as described in the previous section).
+For example, the above command wrapper is in the [`vk::EntryV1_0`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.EntryV1_0.html) trait since it is a standard Vulkan command that is part of Vulkan 1.0 and is not dependent on a valid Vulkan instance or version (as described in the previous section).
 
-A Vulkan device command that was added in Vulkan 1.2 would be in the `vk::Device1_2` trait. `vk::KhrSurfaceExtension` is an example of an extension trait that we will be using in future chapters to call Vulkan commands that are defined as part of the [`VK_KHR_surface`](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html) extension.
+A Vulkan device command that was added in Vulkan 1.2 would be in the [`vk::DeviceV1_2`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_2.html) trait. [`vk::KhrSurfaceExtension`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.KhrSurfaceExtension.html) is an example of an extension trait that we will be using in future chapters to call Vulkan commands that are defined as part of the [`VK_KHR_surface`](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html) extension.
 
 These traits are defined for types which contain both the loaded commands and the required Vulkan instance or device (if any). These types have been lovingly hand-crafted and are not part of the generated Vulkan bindings in the `vk` module of `vulkanalia`. They will be used in future chapters and are the `Entry`, `Instance`, and `Device` structs and can be found in the `Structs` section of the [`vulkanalia` documentation](https://docs.rs/vulkanalia).
 
@@ -206,7 +206,7 @@ let info = vk::InstanceCreateInfo::builder()
 let instance = entry.create_instance(&info, None).unwrap();
 ```
 
-Here we create a builder struct instance for the `vk::InstanceCreateInfo` struct that will be initially be populated with default values which includes setting the `s_type` field to `vk::StructureType::INSTANCE_CREATE_INFO`. Then we set the enabled extension names (which will set both the `enabled_extension_count` and `enabled_extension_name` fields). Then we can build our `vk::InstanceCreateInfo` struct and pass it to the Vulkan command wrapper.
+Here we create a builder struct instance ([`vk::InstanceCreateInfoBuilder`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.InstanceCreateInfoBuilder.html)) for the [`vk::InstanceCreateInfo`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.InstanceCreateInfo.html) struct that will be initially be populated with default values which includes setting the `s_type` field to `vk::StructureType::INSTANCE_CREATE_INFO`. Then we set the enabled extension names (which will set both the `enabled_extension_count` and `enabled_extension_name` fields). Then we can build our `vk::InstanceCreateInfo` struct and pass it to the Vulkan command wrapper.
 
 However, the above Rust code involves a certain degree of danger. The builder structs have lifetimes which enforce that the references stored in them live at least as long as the struct. In the above example, this means that the Rust compiler will make sure that the value passed to the `enabled_extension_names` method lives at least as long as the builder struct. However, as soon as we call `build()` to get the raw Vulkan struct these lifetimes are discarded which means the Rust compiler can't prevent us from attempting to access a value that has been dropped.
 
@@ -224,7 +224,7 @@ Fortunately, `vulkanalia` has a solution for this. Simply don't call `build()` a
 
 ### Preludes
 
-`vulkanalia` offers prelude modules that expose the basic types needed to use the crate. One prelude module is available per Vulkan version and each will expose the relevant command traits along with other very frequently used types:
+`vulkanalia` offers [prelude modules](https://docs.rs/vulkanalia/latest/vulkanalia/prelude/index.html) that expose the basic types needed to use the crate. One prelude module is available per Vulkan version and each will expose the relevant command traits along with other very frequently used types:
 
 ```rust,noplaypen
 // Vulkan 1.0
