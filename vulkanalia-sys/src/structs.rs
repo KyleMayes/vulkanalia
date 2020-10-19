@@ -3873,6 +3873,28 @@ impl Default for FormatProperties2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFragmentShadingRateAttachmentInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct FragmentShadingRateAttachmentInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub fragment_shading_rate_attachment: *const AttachmentReference2,
+    pub shading_rate_attachment_texel_size: Extent2D,
+}
+
+impl Default for FragmentShadingRateAttachmentInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR,
+            next: ptr::null(),
+            fragment_shading_rate_attachment: ptr::null(),
+            shading_rate_attachment_texel_size: Extent2D::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFramebufferAttachmentImageInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7087,6 +7109,104 @@ impl Default for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentShadingRateFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceFragmentShadingRateFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub pipeline_fragment_shading_rate: Bool32,
+    pub primitive_fragment_shading_rate: Bool32,
+    pub attachment_fragment_shading_rate: Bool32,
+}
+
+impl Default for PhysicalDeviceFragmentShadingRateFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR,
+            next: ptr::null_mut(),
+            pipeline_fragment_shading_rate: Bool32::default(),
+            primitive_fragment_shading_rate: Bool32::default(),
+            attachment_fragment_shading_rate: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentShadingRateKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceFragmentShadingRateKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub sample_counts: SampleCountFlags,
+    pub fragment_size: Extent2D,
+}
+
+impl Default for PhysicalDeviceFragmentShadingRateKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR,
+            next: ptr::null_mut(),
+            sample_counts: SampleCountFlags::default(),
+            fragment_size: Extent2D::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentShadingRatePropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceFragmentShadingRatePropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub min_fragment_shading_rate_attachment_texel_size: Extent2D,
+    pub max_fragment_shading_rate_attachment_texel_size: Extent2D,
+    pub max_fragment_shading_rate_attachment_texel_size_aspect_ratio: u32,
+    pub primitive_fragment_shading_rate_with_multiple_viewports: Bool32,
+    pub layered_shading_rate_attachments: Bool32,
+    pub fragment_shading_rate_non_trivial_combiner_ops: Bool32,
+    pub max_fragment_size: Extent2D,
+    pub max_fragment_size_aspect_ratio: u32,
+    pub max_fragment_shading_rate_coverage_samples: u32,
+    pub max_fragment_shading_rate_rasterization_samples: SampleCountFlags,
+    pub fragment_shading_rate_with_shader_depth_stencil_writes: Bool32,
+    pub fragment_shading_rate_with_sample_mask: Bool32,
+    pub fragment_shading_rate_with_shader_sample_mask: Bool32,
+    pub fragment_shading_rate_with_conservative_rasterization: Bool32,
+    pub fragment_shading_rate_with_fragment_shader_interlock: Bool32,
+    pub fragment_shading_rate_with_custom_sample_locations: Bool32,
+    pub fragment_shading_rate_strict_multiply_combiner: Bool32,
+}
+
+impl Default for PhysicalDeviceFragmentShadingRatePropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            min_fragment_shading_rate_attachment_texel_size: Extent2D::default(),
+            max_fragment_shading_rate_attachment_texel_size: Extent2D::default(),
+            max_fragment_shading_rate_attachment_texel_size_aspect_ratio: u32::default(),
+            primitive_fragment_shading_rate_with_multiple_viewports: Bool32::default(),
+            layered_shading_rate_attachments: Bool32::default(),
+            fragment_shading_rate_non_trivial_combiner_ops: Bool32::default(),
+            max_fragment_size: Extent2D::default(),
+            max_fragment_size_aspect_ratio: u32::default(),
+            max_fragment_shading_rate_coverage_samples: u32::default(),
+            max_fragment_shading_rate_rasterization_samples: SampleCountFlags::default(),
+            fragment_shading_rate_with_shader_depth_stencil_writes: Bool32::default(),
+            fragment_shading_rate_with_sample_mask: Bool32::default(),
+            fragment_shading_rate_with_shader_sample_mask: Bool32::default(),
+            fragment_shading_rate_with_conservative_rasterization: Bool32::default(),
+            fragment_shading_rate_with_fragment_shader_interlock: Bool32::default(),
+            fragment_shading_rate_with_custom_sample_locations: Bool32::default(),
+            fragment_shading_rate_strict_multiply_combiner: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceGroupProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8701,6 +8821,26 @@ impl Default for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderTerminateInvocationFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_terminate_invocation: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderTerminateInvocationFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR,
+            next: ptr::null_mut(),
+            shader_terminate_invocation: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceShadingRateImageFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9930,6 +10070,28 @@ impl Default for PipelineExecutableStatisticKHR {
             description: [c_char::default(); MAX_DESCRIPTION_SIZE],
             format: PipelineExecutableStatisticFormatKHR::default(),
             value: PipelineExecutableStatisticValueKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineFragmentShadingRateStateCreateInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineFragmentShadingRateStateCreateInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub fragment_size: Extent2D,
+    pub combiner_ops: [FragmentShadingRateCombinerOpKHR; 2],
+}
+
+impl Default for PipelineFragmentShadingRateStateCreateInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR,
+            next: ptr::null(),
+            fragment_size: Extent2D::default(),
+            combiner_ops: [FragmentShadingRateCombinerOpKHR::default(); 2],
         }
     }
 }
