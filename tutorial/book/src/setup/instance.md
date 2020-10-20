@@ -98,3 +98,5 @@ This is the `Instance` type we have been using (imported from the `vulkanalia` p
 Because an `Instance` contains both a Vulkan instance and the associated commands, the command wrappers like `destroy_instance` implemented for an `Instance` are able to provide the Vulkan instance when it is required by the underlying Vulkan command.
 
 If you look at the documentation for the [`vkDestroyInstance`](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyInstance.html) command, you will see that it takes two parameters: the instance to destroy and the optional custom allocator callbacks. However, `destroy_instance` only takes the optional custom allocator callbacks because it is able to provide the raw Vulkan handle as the first parameter itself as described above.
+
+Before continuing with the more complex steps after instance creation, it's time to evaluate our debugging options by checking out validation layers.
