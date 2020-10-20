@@ -26,7 +26,9 @@
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
+        
         <link rel="stylesheet" href="../css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
@@ -124,9 +126,11 @@
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -211,6 +215,7 @@ Ok(entry.create_instance(&amp;info, None)?)
 <p>This is the <code>Instance</code> type we have been using (imported from the <code>vulkanalia</code> prelude) which should not be confused with the <code>vk::Instance</code> type which represents a raw Vulkan instance. In future chapters we will also use the <code>Device</code> type which, like <code>Instance</code>, is a pairing of a raw Vulkan device (<code>vk::Device</code>) and the commands loaded for that specific device. Fortunately we will not be using <code>vk::Instance</code> or <code>vk::Device</code> directly so you won't need to worry about getting them mixed up.</p>
 <p>Because an <code>Instance</code> contains both a Vulkan instance and the associated commands, the command wrappers like <code>destroy_instance</code> implemented for an <code>Instance</code> are able to provide the Vulkan instance when it is required by the underlying Vulkan command.</p>
 <p>If you look at the documentation for the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyInstance.html"><code>vkDestroyInstance</code></a> command, you will see that it takes two parameters: the instance to destroy and the optional custom allocator callbacks. However, <code>destroy_instance</code> only takes the optional custom allocator callbacks because it is able to provide the raw Vulkan handle as the first parameter itself as described above.</p>
+<p>Before continuing with the more complex steps after instance creation, it's time to evaluate our debugging options by checking out validation layers.</p>
 
                     </main>
 
