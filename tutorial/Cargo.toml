@@ -40,3 +40,8 @@ path = "src/01_instance_creation.rs"
 
 name = "02_validation_layers"
 path = "src/02_validation_layers.rs"
+
+[[bin]]
+
+name = "03_physical_device_selection"
+path = "src/03_physical_device_selection.rs"
