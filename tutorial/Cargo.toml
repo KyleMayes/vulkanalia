@@ -35,3 +35,8 @@ path = "src/00_base_code.rs"
 
 name = "01_instance_creation"
 path = "src/01_instance_creation.rs"
+
+[[bin]]
+
+name = "02_validation_layers"
+path = "src/02_validation_layers.rs"
