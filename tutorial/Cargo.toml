@@ -45,3 +45,8 @@ path = "src/02_validation_layers.rs"
 
 name = "03_physical_device_selection"
 path = "src/03_physical_device_selection.rs"
+
+[[bin]]
+
+name = "04_logical_device"
+path = "src/04_logical_device.rs"
