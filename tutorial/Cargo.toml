@@ -50,3 +50,8 @@ path = "src/03_physical_device_selection.rs"
 
 name = "04_logical_device"
 path = "src/04_logical_device.rs"
+
+[[bin]]
+
+name = "05_window_surface"
+path = "src/05_window_surface.rs"
