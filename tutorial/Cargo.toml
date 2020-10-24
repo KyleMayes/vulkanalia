@@ -55,3 +55,8 @@ path = "src/04_logical_device.rs"
 
 name = "05_window_surface"
 path = "src/05_window_surface.rs"
+
+[[bin]]
+
+name = "06_swapchain_creation"
+path = "src/06_swapchain_creation.rs"
