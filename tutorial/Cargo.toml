@@ -60,3 +60,8 @@ path = "src/05_window_surface.rs"
 
 name = "06_swapchain_creation"
 path = "src/06_swapchain_creation.rs"
+
+[[bin]]
+
+name = "07_image_views"
+path = "src/07_image_views.rs"
