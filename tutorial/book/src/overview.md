@@ -22,19 +22,19 @@ A Vulkan application starts by setting up the Vulkan API through a `VkInstance`.
 
 After selecting the right hardware device to use, you need to create a `VkDevice` (logical device), where you describe more specifically which `VkPhysicalDeviceFeatures` you will be using, like multi-viewport rendering and 64-bit floats. You also need to specify which queue families you would like to use. Most operations performed with Vulkan, like draw commands and memory operations, are asynchronously executed by submitting them to a `VkQueue`. Queues are allocated from queue families, where each queue family supports a specific set of operations in its queues. For example, there could be separate queue families for graphics, compute and memory transfer operations. The availability of queue families could also be used as a distinguishing factor in physical device selection. It is possible for a device with Vulkan support to not offer any graphics functionality, however all graphics cards with Vulkan support today will generally support all queue operations that we're interested in.
 
-### Step 3 - Window surface and swap chain
+### Step 3 - Window surface and swapchain
 
 Unless you're only interested in offscreen rendering, you will need to create a window to present rendered images to. Windows can be created with the native platform APIs or libraries like [GLFW](http://www.glfw.org/), [SDL](https://www.libsdl.org/), or the [`winit`](https://github.com/rust-windowing/winit) crate. We will be using the `winit` crate in this tutorial, but more about that in the next chapter.
 
-We need two more components to actually render to a window: a window surface (`VkSurfaceKHR`) and a swap chain (`VkSwapchainKHR`). Note the `KHR` postfix, which means that these objects are part of a Vulkan extension. The Vulkan API itself is completely platform agnostic, which is why we need to use the standardized WSI (Window System Interface) extension to interact with the window manager. The surface is a cross-platform abstraction over windows to render to and is generally instantiated by providing a reference to the native window handle, for example `HWND` on Windows. However, `vulkanalia` has optional integration with the `winit` crate which we will be leveraging to handle the platform-specific details of creating a window and associated surface for us.
+We need two more components to actually render to a window: a window surface (`VkSurfaceKHR`) and a swapchain (`VkSwapchainKHR`). Note the `KHR` postfix, which means that these objects are part of a Vulkan extension. The Vulkan API itself is completely platform agnostic, which is why we need to use the standardized WSI (Window System Interface) extension to interact with the window manager. The surface is a cross-platform abstraction over windows to render to and is generally instantiated by providing a reference to the native window handle, for example `HWND` on Windows. However, `vulkanalia` has optional integration with the `winit` crate which we will be leveraging to handle the platform-specific details of creating a window and associated surface for us.
 
-The swap chain is a collection of render targets. Its basic purpose is to ensure that the image that we're currently rendering to is different from the one that is currently on the screen. This is important to make sure that only complete images are shown. Every time we want to draw a frame we have to ask the swap chain to provide us with an image to render to. When we've finished drawing a frame, the image is returned to the swap chain for it to be presented to the screen at some point. The number of render targets and conditions for presenting finished images to the screen depends on the present mode. Common present modes are  double buffering (vsync) and triple buffering. We'll look into these in the swap chain creation chapter.
+The swapchain is a collection of render targets. Its basic purpose is to ensure that the image that we're currently rendering to is different from the one that is currently on the screen. This is important to make sure that only complete images are shown. Every time we want to draw a frame we have to ask the swapchain to provide us with an image to render to. When we've finished drawing a frame, the image is returned to the swapchain for it to be presented to the screen at some point. The number of render targets and conditions for presenting finished images to the screen depends on the present mode. Common present modes are  double buffering (vsync) and triple buffering. We'll look into these in the swapchain creation chapter.
 
 Some platforms allow you to render directly to a display without interacting with any window manager through the `VK_KHR_display` and `VK_KHR_display_swapchain` extensions. These allow you to create a surface that represents the entire screen and could be used to implement your own window manager, for example.
 
 ### Step 4 - Image views and framebuffers
 
-To draw to an image acquired from the swap chain, we have to wrap it into a `VkImageView` and `VkFramebuffer`. An image view references a specific part of an image to be used, and a framebuffer references image views that are to be used for color, depth and stencil targets. Because there could be many different images in the swap chain, we'll preemptively create an image view and framebuffer for each of them and select the right one at draw time.
+To draw to an image acquired from the swapchain, we have to wrap it into a `VkImageView` and `VkFramebuffer`. An image view references a specific part of an image to be used, and a framebuffer references image views that are to be used for color, depth and stencil targets. Because there could be many different images in the swapchain, we'll preemptively create an image view and framebuffer for each of them and select the right one at draw time.
 
 ### Step 5 - Render passes
 
@@ -57,11 +57,11 @@ As mentioned earlier, many of the operations in Vulkan that we want to execute, 
 * Draw 3 vertices
 * End the render pass
 
-Because the image in the framebuffer depends on which specific image the swap chain will give us, we need to record a command buffer for each possible image and select the right one at draw time. The alternative would be to record the command buffer again every frame, which is not as efficient.
+Because the image in the framebuffer depends on which specific image the swapchain will give us, we need to record a command buffer for each possible image and select the right one at draw time. The alternative would be to record the command buffer again every frame, which is not as efficient.
 
 ### Step 8 - Main loop
 
-Now that the drawing commands have been wrapped into a command buffer, the main loop is quite straightforward. We first acquire an image from the swap chain with `vkAcquireNextImageKHR`. We can then select the appropriate command buffer for that image and execute it with `vkQueueSubmit`. Finally, we return the image to the swap chain for presentation to the screen with `vkQueuePresentKHR`.
+Now that the drawing commands have been wrapped into a command buffer, the main loop is quite straightforward. We first acquire an image from the swapchain with `vkAcquireNextImageKHR`. We can then select the appropriate command buffer for that image and execute it with `vkQueueSubmit`. Finally, we return the image to the swapchain for presentation to the screen with `vkQueuePresentKHR`.
 
 Operations that are submitted to queues are executed asynchronously. Therefore we have to use synchronization objects like semaphores to ensure a correct order of execution. Execution of the draw command buffer must be set up to wait on image acquisition to finish, otherwise it may occur that we start rendering to an image that is still being read for presentation on the screen. The `vkQueuePresentKHR` call in turn needs to wait for rendering to be finished, for which we'll use a second semaphore that is signaled after rendering completes.
 
@@ -74,13 +74,13 @@ So in short, to draw the first triangle we need to:
 * Create a `VkInstance`
 * Select a supported graphics card (`VkPhysicalDevice`)
 * Create a `VkDevice` and `VkQueue` for drawing and presentation
-* Create a window, window surface and swap chain
-* Wrap the swap chain images into `VkImageView`
+* Create a window, window surface and swapchain
+* Wrap the swapchain images into `VkImageView`
 * Create a render pass that specifies the render targets and usage
 * Create framebuffers for the render pass
 * Set up the graphics pipeline
-* Allocate and record a command buffer with the draw commands for every possible swap chain image
-* Draw frames by acquiring images, submitting the right draw command buffer and returning the images back to the swap chain
+* Allocate and record a command buffer with the draw commands for every possible swapchain image
+* Draw frames by acquiring images, submitting the right draw command buffer and returning the images back to the swapchain
 
 It's a lot of steps, but the purpose of each individual step will be made very simple and clear in the upcoming chapters. If you're confused about the relation of a single step compared to the whole program, you should refer back to this chapter.
 

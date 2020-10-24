@@ -2,9 +2,9 @@
 
 **Code:** [main.rs](https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/06_swapchain_creation.rs)
 
-Vulkan does not have the concept of a "default framebuffer", hence it requires an infrastructure that will own the buffers we will render to before we visualize them on the screen. This infrastructure is known as the *swap chain* and must be created explicitly in Vulkan. The swap chain is essentially a queue of images that are waiting to be presented to the screen. Our application will acquire such an image to draw to it, and then return it to the queue. How exactly the queue works and the conditions for presenting an image from the queue depend on how the swap chain is set up, but the general purpose of the swap chain is to synchronize the presentation of images with the refresh rate of the screen.
+Vulkan does not have the concept of a "default framebuffer", hence it requires an infrastructure that will own the buffers we will render to before we visualize them on the screen. This infrastructure is known as the *swapchain* and must be created explicitly in Vulkan. The swapchain is essentially a queue of images that are waiting to be presented to the screen. Our application will acquire such an image to draw to it, and then return it to the queue. How exactly the queue works and the conditions for presenting an image from the queue depend on how the swapchain is set up, but the general purpose of the swapchain is to synchronize the presentation of images with the refresh rate of the screen.
 
-## Checking for swap chain support
+## Checking for swapchain support
 
 Not all graphics cards are capable of presenting images directly to a screen for various reasons, for example because they are designed for servers and don't have any display outputs. Secondly, since image presentation is heavily tied into the window system and the surfaces associated with windows, it is not actually part of the Vulkan core. You have to enable the `VK_KHR_swapchain` device extension after querying for its support. Also, like before, you need to import the `vulkanalia` extension trait for `VK_KHR_swapchain`:
 
@@ -57,7 +57,7 @@ fn check_physical_device_extensions(
 }
 ```
 
-Now run the code and verify that your graphics card is indeed capable of creating a swap chain. It should be noted that the availability of a presentation queue, as we checked in the previous chapter, implies that the swap chain extension must be supported. However, it's still good to be explicit about things, and the extension does have to be explicitly enabled.
+Now run the code and verify that your graphics card is indeed capable of creating a swapchain. It should be noted that the availability of a presentation queue, as we checked in the previous chapter, implies that the swapchain extension must be supported. However, it's still good to be explicit about things, and the extension does have to be explicitly enabled.
 
 ## Enabling device extensions
 
@@ -80,13 +80,13 @@ let info = vk::DeviceCreateInfo::builder()
     .enabled_features(&features);
 ```
 
-## Querying details of swap chain support
+## Querying details of swapchain support
 
-Just checking if a swap chain is available is not sufficient, because it may not actually be compatible with our window surface. Creating a swap chain also involves a lot more settings than instance and device creation, so we need to query for some more details before we're able to proceed.
+Just checking if a swapchain is available is not sufficient, because it may not actually be compatible with our window surface. Creating a swapchain also involves a lot more settings than instance and device creation, so we need to query for some more details before we're able to proceed.
 
 There are basically three kinds of properties we need to check:
 
-* Basic surface capabilities (min/max number of images in swap chain, min/max width and height of images)
+* Basic surface capabilities (min/max number of images in swapchain, min/max width and height of images)
 * Surface formats (pixel format, color space)
 * Available presentation modes
 
@@ -127,26 +127,26 @@ impl SwapchainSupport {
 
 The meaning of these structs and exactly which data they contain is discussed in the next section.
 
-All of the details are in the struct now, so let's extend `check_physical_device` once more to utilize this method to verify that swap chain support is adequate. Swap chain support is sufficient for this tutorial if there is at least one supported image format and one supported presentation mode given the window surface we have.
+All of the details are in the struct now, so let's extend `check_physical_device` once more to utilize this method to verify that swapchain support is adequate. swapchain support is sufficient for this tutorial if there is at least one supported image format and one supported presentation mode given the window surface we have.
 
 ```rust,noplaypen
 let support = SwapchainSupport::get(instance, data, physical_device)?;
 let swapchain = !support.formats.is_empty() && !support.present_modes.is_empty();
 ```
 
-It is important that we only try to query for swap chain support after verifying that the extension is available. The last line of the function changes to:
+It is important that we only try to query for swapchain support after verifying that the extension is available. The last line of the function changes to:
 
 ```rust,noplaypen
 Ok(extensions && swapchain)
 ```
 
-## Choosing the right settings for the swap chain
+## Choosing the right settings for the swapchain
 
-If the conditions we just added were met then the support is definitely sufficient, but there may still be many different modes of varying optimality. We'll now write a couple of functions to find the right settings for the best possible swap chain. There are three types of settings to determine:
+If the conditions we just added were met then the support is definitely sufficient, but there may still be many different modes of varying optimality. We'll now write a couple of functions to find the right settings for the best possible swapchain. There are three types of settings to determine:
 
 * Surface format (color depth)
 * Presentation mode (conditions for "swapping" images to the screen)
-* Swap extent (resolution of images in swap chain)
+* Swap extent (resolution of images in swapchain)
 
 For each of these settings we'll have an ideal value in mind that we'll go with if it's available and otherwise we'll create some logic to find the next best thing.
 
@@ -186,10 +186,10 @@ If that also fails then we could rank the available formats based on how "good" 
 
 ### Presentation mode
 
-The presentation mode is arguably the most important setting for the swap chain, because it represents the actual conditions for showing images to the screen. There are four possible modes available in Vulkan:
+The presentation mode is arguably the most important setting for the swapchain, because it represents the actual conditions for showing images to the screen. There are four possible modes available in Vulkan:
 
 * `vk::PresentModeKHR::IMMEDIATE`: Images submitted by your application are transferred to the screen right away, which may result in tearing.
-* `vk::PresentModeKHR::FIFO`: The swap chain is a queue where the display takes an image from the front of the queue when the display is refreshed and the program inserts rendered images at the back of the queue. If the queue is full then the program has to wait. This is most similar to vertical sync as found in modern games. The moment that the display is refreshed is known as "vertical blank".
+* `vk::PresentModeKHR::FIFO`: The swapchain is a queue where the display takes an image from the front of the queue when the display is refreshed and the program inserts rendered images at the back of the queue. If the queue is full then the program has to wait. This is most similar to vertical sync as found in modern games. The moment that the display is refreshed is known as "vertical blank".
 * `vk::PresentModeKHR::FIFO_RELAXED`: This mode only differs from the previous one if the application is late and the queue was empty at the last vertical blank. Instead of waiting for the next vertical blank, the image is transferred right away when it finally arrives. This may result in visible tearing.
 * `vk::PresentModeKHR::MAILBOX`: This is another variation of the second mode. Instead of blocking the application when the queue is full, the images that are already queued are simply replaced with the newer ones. This mode can be used to implement triple buffering, which allows you to avoid tearing with significantly less latency issues than standard vertical sync that uses double buffering.
 
@@ -228,7 +228,7 @@ fn get_swapchain_extent(
 }
 ```
 
-The swap extent is the resolution of the swap chain images and it's almost always exactly equal to the resolution of the window that we're drawing to. The range of the possible resolutions is defined in the `vk::SurfaceCapabilitiesKHR` structure. Vulkan tells us to match the resolution of the window by setting the width and height in the `current_extent` member. However, some window managers do allow us to differ here and this is indicated by setting the width and height in `current_extent` to a special value: the maximum value of `u32`. In that case we'll pick the resolution that best matches the window within the `min_image_extent` and `max_image_extent` bounds.
+The swap extent is the resolution of the swapchain images and it's almost always exactly equal to the resolution of the window that we're drawing to. The range of the possible resolutions is defined in the `vk::SurfaceCapabilitiesKHR` structure. Vulkan tells us to match the resolution of the window by setting the width and height in the `current_extent` member. However, some window managers do allow us to differ here and this is indicated by setting the width and height in `current_extent` to a special value: the maximum value of `u32`. In that case we'll pick the resolution that best matches the window within the `min_image_extent` and `max_image_extent` bounds.
 
 ```rust,noplaypen
 fn get_swapchain_extent(
@@ -258,9 +258,9 @@ fn get_swapchain_extent(
 
 We define the `clamp` function to restrict the actual size of the window within the supported range supported by the Vulkan device.
 
-## Creating the swap chain
+## Creating the swapchain
 
-Now that we have all of these helper functions assisting us with the choices we have to make at runtime, we finally have all the information that is needed to create a working swap chain.
+Now that we have all of these helper functions assisting us with the choices we have to make at runtime, we finally have all the information that is needed to create a working swapchain.
 
 Create a `create_swapchain` function that starts out with the results of these calls and make sure to call it from `App::create` after logical device creation.
 
@@ -293,7 +293,7 @@ fn create_swapchain(
 }
 ```
 
-Aside from these properties we also have to decide how many images we would like to have in the swap chain. The implementation specifies the minimum number that it requires to function:
+Aside from these properties we also have to decide how many images we would like to have in the swapchain. The implementation specifies the minimum number that it requires to function:
 
 ```rust,noplaypen
 let image_count = support.capabilities.min_image_count;
@@ -316,7 +316,7 @@ if support.capabilities.max_image_count != 0
 }
 ```
 
-Next, we need to specify how to handle swap chain images that will be used across multiple queue families. That will be the case in our application if the graphics queue family is different from the presentation queue. We'll be drawing on the images in the swap chain from the graphics queue and then submitting them on the presentation queue. There are two ways to handle images that are accessed from multiple queues:
+Next, we need to specify how to handle swapchain images that will be used across multiple queue families. That will be the case in our application if the graphics queue family is different from the presentation queue. We'll be drawing on the images in the swapchain from the graphics queue and then submitting them on the presentation queue. There are two ways to handle images that are accessed from multiple queues:
 
 * `vk::SharingMode::EXCLUSIVE`: An image is owned by one queue family at a time and ownership must be explicitly transferred before using it in another queue family. This option offers the best performance.
 * `vk::SharingMode::CONCURRENT`: Images can be used across multiple queue families without explicit ownership transfers.
@@ -334,7 +334,7 @@ let image_sharing_mode = if indices.graphics != indices.present {
 };
 ```
 
-As is tradition with Vulkan objects, creating the swap chain object requires filling in a large structure. It starts out very familiarly:
+As is tradition with Vulkan objects, creating the swapchain object requires filling in a large structure. It starts out very familiarly:
 
 ```rust,noplaypen
 let info = vk::SwapchainCreateInfoKHR::builder()
@@ -342,7 +342,7 @@ let info = vk::SwapchainCreateInfoKHR::builder()
     // continued...
 ```
 
-After specifying which surface the swap chain should be tied to, the details of the swap chain images are specified:
+After specifying which surface the swapchain should be tied to, the details of the swapchain images are specified:
 
 ```rust,noplaypen
     .min_image_count(image_count)
@@ -353,20 +353,20 @@ After specifying which surface the swap chain should be tied to, the details of 
     .image_usage(vk::ImageUsageFlags::COLOR_ATTACHMENT)
 ```
 
-The `image_array_layers` specifies the amount of layers each image consists of. This is always `1` unless you are developing a stereoscopic 3D application. The `image_usage` bitmask specifies what kind of operations we'll use the images in the swap chain for. In this tutorial we're going to render directly to them, which means that they're used as color attachment. It is also possible that you'll render images to a separate image first to perform operations like post-processing. In that case you may use a value like `vk::ImageUsageFlags::TRANSFER_DST` instead and use a memory operation to transfer the rendered image to a swap chain image.
+The `image_array_layers` specifies the amount of layers each image consists of. This is always `1` unless you are developing a stereoscopic 3D application. The `image_usage` bitmask specifies what kind of operations we'll use the images in the swapchain for. In this tutorial we're going to render directly to them, which means that they're used as color attachment. It is also possible that you'll render images to a separate image first to perform operations like post-processing. In that case you may use a value like `vk::ImageUsageFlags::TRANSFER_DST` instead and use a memory operation to transfer the rendered image to a swapchain image.
 
 ```rust,noplaypen
     .image_sharing_mode(image_sharing_mode)
     .queue_family_indices(&queue_family_indices)
 ```
 
-Next we'll provide the image sharing mode and indices of the queue families permitted to share the swap chain images.
+Next we'll provide the image sharing mode and indices of the queue families permitted to share the swapchain images.
 
 ```rust,noplaypen
     .pre_transform(support.capabilities.current_transform)
 ```
 
-We can specify that a certain transform should be applied to images in the swap chain if it is supported (`supported_transforms` in `capabilities`), like a 90 degree clockwise rotation or horizontal flip. To specify that you do not want any transformation, simply specify the current transformation.
+We can specify that a certain transform should be applied to images in the swapchain if it is supported (`supported_transforms` in `capabilities`), like a 90 degree clockwise rotation or horizontal flip. To specify that you do not want any transformation, simply specify the current transformation.
 
 ```rust,noplaypen
     .composite_alpha(vk::CompositeAlphaFlagsKHR::OPAQUE)
@@ -385,7 +385,7 @@ The `present_mode` member speaks for itself. If the `clipped` member is set to `
     .old_swapchain(vk::SwapchainKHR::null());
 ```
 
-That leaves one last method, `old_swapchain`. With Vulkan it's possible that your swap chain becomes invalid or unoptimized while your application is running, for example because the window was resized. In that case the swap chain actually needs to be recreated from scratch and a reference to the old one must be specified in this method. This is a complex topic that we'll learn more about in a future chapter. For now we'll assume that we'll only ever create one swap chain. We could omit this method since the underlying field will default to a null handle, but we'll leave it in for completeness.
+That leaves one last method, `old_swapchain`. With Vulkan it's possible that your swapchain becomes invalid or unoptimized while your application is running, for example because the window was resized. In that case the swapchain actually needs to be recreated from scratch and a reference to the old one must be specified in this method. This is a complex topic that we'll learn more about in a future chapter. For now we'll assume that we'll only ever create one swapchain. We could omit this method since the underlying field will default to a null handle, but we'll leave it in for completeness.
 
 Now add an `AppData` field to store the `vk::SwapchainKHR` object:
 
@@ -396,13 +396,13 @@ struct AppData {
 }
 ```
 
-Creating the swap chain is now as simple as calling [`vk::KhrSwapchainExtension::create_swapchain`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.create_swapchain_khr):
+Creating the swapchain is now as simple as calling [`vk::KhrSwapchainExtension::create_swapchain`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.create_swapchain_khr):
 
 ```rust,noplaypen
 data.swapchain = device.create_swapchain_khr(&info, None)?;
 ```
 
-The parameters are the swap chain creation info and optional custom allocators. No surprises there. It should be cleaned up in `App::destroy` before the device:
+The parameters are the swapchain creation info and optional custom allocators. No surprises there. It should be cleaned up in `App::destroy` before the device:
 
 ```rust,noplaypen
 impl App {
@@ -413,15 +413,15 @@ impl App {
 }
 ```
 
-Now run the application to ensure that the swap chain is created successfully! If at this point you get an access violation error in `vkCreateSwapchainKHR` or see a message like `Failed to find 'vkGetInstanceProcAddress' in layer SteamOverlayVulkanLayer.dll`, then see the [FAQ entry](../faq.html) about the Steam overlay layer.
+Now run the application to ensure that the swapchain is created successfully! If at this point you get an access violation error in `vkCreateSwapchainKHR` or see a message like `Failed to find 'vkGetInstanceProcAddress' in layer SteamOverlayVulkanLayer.dll`, then see the [FAQ entry](../faq.html) about the Steam overlay layer.
 
 Try removing the `.image_extent(extent)` line from where you are building the `vk::SwapchainCreateInfoKHR` struct with validation layers enabled. You'll see that one of the validation layers immediately catches the mistake and some helpful messages are printed which call out the illegal value provided for `image_extent`:
 
-![](../images/swap_chain_validation_layer.png)
+![](../images/swapchain_validation_layer.png)
 
-## Retrieving the swap chain images
+## Retrieving the swapchain images
 
-The swap chain has been created now, so all that remains is retrieving the handles of the `vk::Image`s in it. We'll reference these during rendering operations in later chapters. Add an `AppData` field to store the handles:
+The swapchain has been created now, so all that remains is retrieving the handles of the `vk::Image`s in it. We'll reference these during rendering operations in later chapters. Add an `AppData` field to store the handles:
 
 ```rust,noplaypen
 struct AppData {
@@ -430,7 +430,7 @@ struct AppData {
 }
 ```
 
-The images were created by the implementation for the swap chain and they will be automatically cleaned up once the swap chain has been destroyed, therefore we don't need to add any cleanup code.
+The images were created by the implementation for the swapchain and they will be automatically cleaned up once the swapchain has been destroyed, therefore we don't need to add any cleanup code.
 
 I'm adding the code to retrieve the handles to the end of the `create_swapchain` function, right after the `device.create_swapchain_khr(...)` call.
 
@@ -438,7 +438,7 @@ I'm adding the code to retrieve the handles to the end of the `create_swapchain`
 data.swapchain_images = device.get_swapchain_images_khr(data.swapchain)?;
 ```
 
-One last thing, store the format and extent we've chosen for the swap chain images in `AppData` fields. We'll need them in future chapters.
+One last thing, store the format and extent we've chosen for the swapchain images in `AppData` fields. We'll need them in future chapters.
 
 ```rust,noplaypen
 impl AppData {

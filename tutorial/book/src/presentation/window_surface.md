@@ -169,4 +169,4 @@ If the queue families are the same, then we only need to pass its index once. Fi
 data.present_queue = device.get_device_queue(indices.present, 0);
 ```
 
-In case the queue families are the same, the two handles will most likely have the same value now. In the next chapter we're going to look at swap chains and how they give us the ability to present images to the surface.
+In case the queue families are the same, the two handles will most likely have the same value now. In the next chapter we're going to look at swapchains and how they give us the ability to present images to the surface.

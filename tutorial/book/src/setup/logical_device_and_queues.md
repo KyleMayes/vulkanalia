@@ -51,7 +51,7 @@ Vulkan lets you assign priorities to queues to influence the scheduling of comma
 
 The next piece of information we need to provide bears a resemblance to the `vk::CreateInstanceInfo` struct. Once again we need to specify any layers or extensions we want to enable, but this time any specified extensions are device specific rather than global.
 
-An example of a device specific extension is `VK_KHR_swapchain`, which allows you to present rendered images from that device to windows. It is possible that there are Vulkan devices in the system that lack this ability, for example because they only support compute operations. We will come back to this extension in the swap chain chapter.
+An example of a device specific extension is `VK_KHR_swapchain`, which allows you to present rendered images from that device to windows. It is possible that there are Vulkan devices in the system that lack this ability, for example because they only support compute operations. We will come back to this extension in the swapchain chapter.
 
 Previous implementations of Vulkan made a distinction between instance and device specific validation layers, but this is no longer the case. That means that the layer names we pass to `enabled_layer_names` later are ignored by up-to-date implementations. However, it is still a good idea to set them anyway to be compatible with older implementations.
 
