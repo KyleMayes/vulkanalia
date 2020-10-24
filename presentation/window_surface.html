@@ -132,6 +132,10 @@
                         </a>
                         
                         
+                        <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -264,7 +268,7 @@ let queue_infos = unique_indices
 <p>If the queue families are the same, then we only need to pass its index once. Finally, add a call to retrieve the queue handle:</p>
 <pre><code class="language-rust noplaypen">data.present_queue = device.get_device_queue(indices.present, 0);
 </code></pre>
-<p>In case the queue families are the same, the two handles will most likely have the same value now. In the next chapter we're going to look at swap chains and how they give us the ability to present images to the surface.</p>
+<p>In case the queue families are the same, the two handles will most likely have the same value now. In the next chapter we're going to look at swapchains and how they give us the ability to present images to the surface.</p>
 
                     </main>
 

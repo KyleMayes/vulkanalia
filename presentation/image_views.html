@@ -132,6 +132,10 @@
                         </a>
                         
                         
+                        <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -149,7 +153,81 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#image-views" id="image-views">Image views</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/07_image_views.rs">main.rs</a></p>
+<p>To use any <code>vk::Image</code>, including those in the swap chain, in the render pipeline we have to create a <code>vk::ImageView</code> object. An image view is quite literally a view into an image. It describes how to access the image and which part of the image to access, for example if it should be treated as a 2D texture depth texture without any mipmapping levels.</p>
+<p>In this chapter we'll write a <code>create_image_views</code> function that creates a basic image view for every image in the swap chain so that we can use them as color targets later on.</p>
+<p>First add an <code>AppData</code> field to store the image views in:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    swapchain_image_views: Vec&lt;vk::ImageView&gt;,
+}
+
+</code></pre>
+<p>Create the <code>create_image_views</code> function and call it right after swap chain creation in <code>App::create</code>.</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_swapchain_image_views(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>What we next need to do is iterate over the swap chain images to create an image view for each:</p>
+<pre><code class="language-rust noplaypen">fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    data.swapchain_image_views = data
+        .swapchain_images
+        .iter()
+        .map(|i| {
+
+        })
+        .collect::&lt;Result&lt;Vec&lt;_&gt;, _&gt;&gt;()?;
+
+    Ok(())
+}
+</code></pre>
+<p>For each image view we are creating we'll first need to define the color component mapping for the image view. This allows you to swizzle the color channels around. For example, you can map all of the channels to the red channel for a monochrome texture. You can also map constant values of <code>0</code> and <code>1</code> to a channel. In our case we'll stick to the default mapping.</p>
+<pre><code class="language-rust noplaypen">let components = vk::ComponentMapping::builder()
+    .r(vk::ComponentSwizzle::IDENTITY)
+    .g(vk::ComponentSwizzle::IDENTITY)
+    .b(vk::ComponentSwizzle::IDENTITY)
+    .a(vk::ComponentSwizzle::IDENTITY);
+</code></pre>
+<p>Next we will define the subresource range for the image view which describes the image's purpose and which part of the image should be accessed. Our images will be used as color targets without any mipmapping levels or multiple layers.</p>
+<pre><code class="language-rust noplaypen">let subresource_range = vk::ImageSubresourceRange::builder()
+    .aspect_mask(vk::ImageAspectFlags::COLOR)
+    .base_mip_level(0)
+    .level_count(1)
+    .base_array_layer(0)
+    .layer_count(1);
+</code></pre>
+<p>If you were working on a stereographic 3D application, then you would create a swap chain with multiple layers. You could then create multiple image views for each image representing the views for the left and right eyes by accessing different layers.</p>
+<p>We can now create a <code>vk::ImageViewCreateInfo</code> struct which provides the parameters for image view creation.</p>
+<pre><code class="language-rust noplaypen">let info = vk::ImageViewCreateInfo::builder()
+    .image(*i)
+    .view_type(vk::ImageViewType::_2D)
+    .format(data.swapchain_format)
+    .components(components)
+    .subresource_range(subresource_range);
+</code></pre>
+<p>The <code>view_type</code> and <code>format</code> fields specify how the image data should be interpreted. The <code>view_type</code> field allows you to treat images as 1D textures, 2D textures, 3D textures, and cube maps.</p>
+<p>Creating the image view is now a matter of calling <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.create_image_view"><code>DeviceV1_0::create_image_view</code></a>:</p>
+<pre><code class="language-rust noplaypen">device.create_image_view(&amp;info, None)
+</code></pre>
+<p>Unlike images, the image views were explicitly created by us, so we need to add a similar loop to destroy them again in <code>App::destroy</code>:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn destroy(&amp;mut self) {
+        self.data.swapchain_image_views
+            .iter()
+            .for_each(|v| self.device.destroy_image_view(*v, None));
+        // ...
+    }
+}
+</code></pre>
+<p>An image view is sufficient to start using an image as a texture, but it's not quite ready to be used as a render target just yet. That requires one more step of indirection, known as a framebuffer. But first we'll have to set up the graphics pipeline.</p>
 
                     </main>
 
