@@ -65,3 +65,8 @@ path = "src/06_swapchain_creation.rs"
 
 name = "07_image_views"
 path = "src/07_image_views.rs"
+
+[[bin]]
+
+name = "08_graphics_pipeline"
+path = "src/08_graphics_pipeline.rs"
