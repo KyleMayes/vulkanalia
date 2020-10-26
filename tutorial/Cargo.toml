@@ -75,3 +75,8 @@ path = "src/08_graphics_pipeline.rs"
 
 name = "09_shader_modules"
 path = "src/09_shader_modules.rs"
+
+[[bin]]
+
+name = "10_fixed_functions"
+path = "src/10_fixed_functions.rs"
