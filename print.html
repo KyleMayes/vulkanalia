@@ -1388,8 +1388,8 @@ data.swapchain_extent = extent;
 <p>We now have a set of images that can be drawn onto and can be presented to the window. The next chapter will begin to cover how we can set up the images as render targets and then we start looking into the actual graphics pipeline and drawing commands!</p>
 <h1><a class="header" href="#image-views" id="image-views">Image views</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/07_image_views.rs">main.rs</a></p>
-<p>To use any <code>vk::Image</code>, including those in the swap chain, in the render pipeline we have to create a <code>vk::ImageView</code> object. An image view is quite literally a view into an image. It describes how to access the image and which part of the image to access, for example if it should be treated as a 2D texture depth texture without any mipmapping levels.</p>
-<p>In this chapter we'll write a <code>create_image_views</code> function that creates a basic image view for every image in the swap chain so that we can use them as color targets later on.</p>
+<p>To use any <code>vk::Image</code>, including those in the swapchain, in the render pipeline we have to create a <code>vk::ImageView</code> object. An image view is quite literally a view into an image. It describes how to access the image and which part of the image to access, for example if it should be treated as a 2D texture depth texture without any mipmapping levels.</p>
+<p>In this chapter we'll write a <code>create_image_views</code> function that creates a basic image view for every image in the swapchain so that we can use them as color targets later on.</p>
 <p>First add an <code>AppData</code> field to store the image views in:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
@@ -1397,7 +1397,7 @@ data.swapchain_extent = extent;
 }
 
 </code></pre>
-<p>Create the <code>create_image_views</code> function and call it right after swap chain creation in <code>App::create</code>.</p>
+<p>Create the <code>create_image_views</code> function and call it right after swapchain creation in <code>App::create</code>.</p>
 <pre><code class="language-rust noplaypen">impl App {
     fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
@@ -1410,7 +1410,7 @@ fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&g
     Ok(())
 }
 </code></pre>
-<p>What we next need to do is iterate over the swap chain images to create an image view for each:</p>
+<p>What we next need to do is iterate over the swapchain images to create an image view for each:</p>
 <pre><code class="language-rust noplaypen">fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     data.swapchain_image_views = data
         .swapchain_images
@@ -1438,7 +1438,7 @@ fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&g
     .base_array_layer(0)
     .layer_count(1);
 </code></pre>
-<p>If you were working on a stereographic 3D application, then you would create a swap chain with multiple layers. You could then create multiple image views for each image representing the views for the left and right eyes by accessing different layers.</p>
+<p>If you were working on a stereographic 3D application, then you would create a swapchain with multiple layers. You could then create multiple image views for each image representing the views for the left and right eyes by accessing different layers.</p>
 <p>We can now create a <code>vk::ImageViewCreateInfo</code> struct which provides the parameters for image view creation.</p>
 <pre><code class="language-rust noplaypen">let info = vk::ImageViewCreateInfo::builder()
     .image(*i)
@@ -1463,14 +1463,410 @@ fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&g
 </code></pre>
 <p>An image view is sufficient to start using an image as a texture, but it's not quite ready to be used as a render target just yet. That requires one more step of indirection, known as a framebuffer. But first we'll have to set up the graphics pipeline.</p>
 <h1><a class="header" href="#introduction-1" id="introduction-1">Introduction</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/08_graphics_pipeline.rs">main.rs</a></p>
+<p>Over the course of the next few chapters we'll be setting up a graphics pipeline that is configured to draw our first triangle. The graphics pipeline is the sequence of operations that take the vertices and textures of your meshes all the way to the pixels in the render targets. A simplified overview is displayed below:</p>
+<p><img src="pipeline/../images/vulkan_simplified_pipeline.svg" alt="" /></p>
+<p>The <em>input assembler</em> collects the raw vertex data from the buffers you specify and may also use an index buffer to repeat certain elements without having to duplicate the vertex data itself.</p>
+<p>The <em>vertex shader</em> is run for every vertex and generally applies transformations to turn vertex positions from model space to screen space. It also passes per-vertex data down the pipeline.</p>
+<p>The <em>tessellation shaders</em> allow you to subdivide geometry based on certain rules to increase the mesh quality. This is often used to make surfaces like brick walls and staircases look less flat when they are nearby.</p>
+<p>The <em>geometry shader</em> is run on every primitive (triangle, line, point) and can discard it or output more primitives than came in. This is similar to the tessellation shader, but much more flexible. However, it is not used much in today's applications because the performance is not that good on most graphics cards except for Intel's integrated GPUs.</p>
+<p>The <em>rasterization</em> stage discretizes the primitives into <em>fragments</em>. These are the pixel elements that they fill on the framebuffer. Any fragments that fall outside the screen are discarded and the attributes outputted by the vertex shader are interpolated across the fragments, as shown in the figure. Usually the fragments that are behind other primitive fragments are also discarded here because of depth testing.</p>
+<p>The <em>fragment shader</em> is invoked for every fragment that survives and determines which framebuffer(s) the fragments are written to and with which color and depth values. It can do this using the interpolated data from the vertex shader, which can include things like texture coordinates and normals for lighting.</p>
+<p>The <em>color blending</em> stage applies operations to mix different fragments that map to the same pixel in the framebuffer. Fragments can simply overwrite each other, add up or be mixed based upon transparency.</p>
+<p>Stages with a green color are known as <em>fixed-function</em> stages. These stages allow you to tweak their operations using parameters, but the way they work is predefined.</p>
+<p>Stages with an orange color on the other hand are <em>programmable</em>, which means that you can upload your own code to the graphics card to apply exactly the operations you want. This allows you to use fragment shaders, for example, to implement anything from texturing and lighting to ray tracers. These programs run on many GPU cores simultaneously to process many objects, like vertices and fragments in parallel.</p>
+<p>If you've used older APIs like OpenGL and Direct3D before, then you'll be used to being able to change any pipeline settings at will with calls like <code>glBlendFunc</code> and <code>OMSetBlendState</code>. The graphics pipeline in Vulkan is almost completely immutable, so you must recreate the pipeline from scratch if you want to change shaders, bind different framebuffers or change the blend function. The disadvantage is that you'll have to create a number of pipelines that represent all of the different combinations of states you want to use in your rendering operations. However, because all of the operations you'll be doing in the pipeline are known in advance, the driver can optimize for it much better.</p>
+<p>Some of the programmable stages are optional based on what you intend to do. For example, the tessellation and geometry stages can be disabled if you are just drawing simple geometry. If you are only interested in depth values then you can disable the fragment shader stage, which is useful for <a href="https://en.wikipedia.org/wiki/Shadow_mapping">shadow map</a> generation.</p>
+<p>In the next chapter we'll first create the two programmable stages required to put a triangle onto the screen: the vertex shader and fragment shader. The fixed-function configuration like blending mode, viewport, rasterization will be set up in the chapter after that. The final part of setting up the graphics pipeline in Vulkan involves the specification of input and output framebuffers.</p>
+<p>Create a <code>create_pipeline</code> function that is called right after <code>create_swapchain_image_views</code> in <code>App::create</code>. We'll work on this function throughout the following chapters.</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_swapchain_image_views(&amp;device, &amp;mut data)?;
+        create_pipeline(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
 <h1><a class="header" href="#shader-modules" id="shader-modules">Shader modules</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/09_shader_modules.rs">main.rs</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/09/shader.vert">shader.vert</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/09/shader.frag">shader.frag</a></p>
+<p>Unlike earlier APIs, shader code in Vulkan has to be specified in a bytecode format as opposed to human-readable syntax like <a href="https://en.wikipedia.org/wiki/OpenGL_Shading_Language">GLSL</a> and <a href="https://en.wikipedia.org/wiki/High-Level_Shading_Language">HLSL</a>. This bytecode format is called <a href="https://www.khronos.org/spir">SPIR-V</a> and is designed to be used with both Vulkan and OpenCL (both Khronos APIs). It is a format that can be used to write graphics and compute shaders, but we will focus on shaders used in Vulkan's graphics pipelines in this tutorial.</p>
+<p>The advantage of using a bytecode format is that the compilers written by GPU vendors to turn shader code into native code are significantly less complex. The past has shown that with human-readable syntax like GLSL, some GPU vendors were rather flexible with their interpretation of the standard. If you happen to write non-trivial shaders with a GPU from one of these vendors, then you'd risk other vendor's drivers rejecting your code due to syntax errors, or worse, your shader running differently because of compiler bugs. With a straightforward bytecode format like SPIR-V that will hopefully be avoided.</p>
+<p>However, that does not mean that we need to write this bytecode by hand. Khronos has released their own vendor-independent compiler that compiles GLSL to SPIR-V. This compiler is designed to verify that your shader code is fully standards compliant and produces one SPIR-V binary that you can ship with your program. You can also include this compiler as a library to produce SPIR-V at runtime, but we won't be doing that in this tutorial. Although we can use this compiler directly via <code>glslangValidator.exe</code>, we will be using <code>glslc.exe</code> by Google instead. The advantage of <code>glslc</code> is that it uses the same parameter format as well-known compilers like GCC and Clang and includes some extra functionality like <em>includes</em>. Both of them are already included in the Vulkan SDK, so you don't need to download anything extra.</p>
+<p>GLSL is a shading language with a C-style syntax. Programs written in it have a <code>main</code> function that is invoked for every object. Instead of using parameters for input and a return value as output, GLSL uses global variables to handle input and output. The language includes many features to aid in graphics programming, like built-in vector and matrix primitives. Functions for operations like cross products, matrix-vector products and reflections around a vector are included. The vector type is called <code>vec</code> with a number indicating the amount of elements. For example, a 3D position would be stored in a <code>vec3</code>. It is possible to access single components through fields like <code>.x</code>, but it's also possible to create a new vector from multiple components at the same time. For example, the expression <code>vec3(1.0, 2.0, 3.0).xy</code> would result in <code>vec2</code>. The constructors of vectors can also take combinations of vector objects and scalar values. For example, a <code>vec3</code> can be constructed with <code>vec3(vec2(1.0, 2.0), 3.0)</code>.</p>
+<p>As the previous chapter mentioned, we need to write a vertex shader and a fragment shader to get a triangle on the screen. The next two sections will cover the GLSL code of each of those and after that I'll show you how to produce two SPIR-V binaries and load them into the program.</p>
+<h2><a class="header" href="#vertex-shader" id="vertex-shader">Vertex shader</a></h2>
+<p>The vertex shader processes each incoming vertex. It takes its attributes, like world position, color, normal and texture coordinates as input. The output is the final position in clip coordinates and the attributes that need to be passed on to the fragment shader, like color and texture coordinates. These values will then be interpolated over the fragments by the rasterizer to produce a smooth gradient.</p>
+<p>A <em>clip coordinate</em> is a four dimensional vector from the vertex shader that is subsequently turned into a <em>normalized device coordinate</em> by dividing the whole vector by its last component. These normalized device coordinates are <a href="https://en.wikipedia.org/wiki/Homogeneous_coordinates">homogeneous coordinates</a> that map the framebuffer to a [-1, 1] by [-1, 1] coordinate system that looks like the following:</p>
+<p><img src="pipeline/../images/normalized_device_coordinates.svg" alt="" /></p>
+<p>You should already be familiar with these if you have dabbled in computer graphics before. If you have used OpenGL before, then you'll notice that the sign of the Y coordinates is now flipped. The Z coordinate now uses the same range as it does in Direct3D, from 0 to 1.</p>
+<p>For our first triangle we won't be applying any transformations, we'll just specify the positions of the three vertices directly as normalized device coordinates to create the following shape:</p>
+<p><img src="pipeline/../images/triangle_coordinates.svg" alt="" /></p>
+<p>We can directly output normalized device coordinates by outputting them as clip coordinates from the vertex shader with the last component set to <code>1</code>. That way the division to transform clip coordinates to normalized device coordinates will not change anything.</p>
+<p>Normally these coordinates would be stored in a vertex buffer, but creating a vertex buffer in Vulkan and filling it with data is not trivial. Therefore I've decided to postpone that until after we've had the satisfaction of seeing a triangle pop up on the screen. We're going to do something a little unorthodox in the meanwhile: include the coordinates directly inside the vertex shader. The code looks like this:</p>
+<pre><code class="language-glsl">#version 450
+
+vec2 positions[3] = vec2[](
+    vec2(0.0, -0.5),
+    vec2(0.5, 0.5),
+    vec2(-0.5, 0.5)
+);
+
+void main() {
+    gl_Position = vec4(positions[gl_VertexIndex], 0.0, 1.0);
+}
+</code></pre>
+<p>The <code>main</code> function is invoked for every vertex. The built-in <code>gl_VertexIndex</code> variable contains the index of the current vertex. This is usually an index into the vertex buffer, but in our case it will be an index into a hardcoded array of vertex data. The position of each vertex is accessed from the constant array in the shader and combined with dummy <code>z</code> and <code>w</code> components to produce a position in clip coordinates. The built-in variable <code>gl_Position</code> functions as the output.</p>
+<h2><a class="header" href="#fragment-shader" id="fragment-shader">Fragment shader</a></h2>
+<p>The triangle that is formed by the positions from the vertex shader fills an area on the screen with fragments. The fragment shader is invoked on these fragments to produce a color and depth for the framebuffer (or framebuffers). A simple fragment shader that outputs the color red for the entire triangle looks like this:</p>
+<pre><code class="language-glsl">#version 450
+
+layout(location = 0) out vec4 outColor;
+
+void main() {
+    outColor = vec4(1.0, 0.0, 0.0, 1.0);
+}
+</code></pre>
+<p>The <code>main</code> function is called for every fragment just like the vertex shader <code>main</code> function is called for every vertex. Colors in GLSL are 4-component vectors with the R, G, B and alpha channels within the [0, 1] range. Unlike <code>gl_Position</code> in the vertex shader, there is no built-in variable to output a color for the current fragment. You have to specify your own output variable for each framebuffer where the <code>layout(location = 0)</code> modifier specifies the index of the framebuffer. The color red is written to this <code>outColor</code> variable that is linked to the first (and only) framebuffer at index <code>0</code>.</p>
+<h2><a class="header" href="#per-vertex-colors" id="per-vertex-colors">Per-vertex colors</a></h2>
+<p>Making the entire triangle red is not very interesting, wouldn't something like the following look a lot nicer?</p>
+<p><img src="pipeline/../images/triangle_coordinates_colors.png" alt="" /></p>
+<p>We have to make a couple of changes to both shaders to accomplish this. First off, we need to specify a distinct color for each of the three vertices. The vertex shader should now include an array with colors just like it does for positions:</p>
+<pre><code class="language-glsl">vec3 colors[3] = vec3[](
+    vec3(1.0, 0.0, 0.0),
+    vec3(0.0, 1.0, 0.0),
+    vec3(0.0, 0.0, 1.0)
+);
+</code></pre>
+<p>Now we just need to pass these per-vertex colors to the fragment shader so it can output their interpolated values to the framebuffer. Add an output for color to the vertex shader and write to it in the <code>main</code> function:</p>
+<pre><code class="language-glsl">layout(location = 0) out vec3 fragColor;
+
+void main() {
+    gl_Position = vec4(positions[gl_VertexIndex], 0.0, 1.0);
+    fragColor = colors[gl_VertexIndex];
+}
+</code></pre>
+<p>Next, we need to add a matching input in the fragment shader:</p>
+<pre><code class="language-glsl">layout(location = 0) in vec3 fragColor;
+
+void main() {
+    outColor = vec4(fragColor, 1.0);
+}
+</code></pre>
+<p>The input variable does not necessarily have to use the same name, they will be linked together using the indexes specified by the <code>location</code> directives. The <code>main</code> function has been modified to output the color along with an alpha value. As shown in the image above, the values for <code>fragColor</code> will be automatically interpolated for the fragments between the three vertices, resulting in a smooth gradient.</p>
+<h2><a class="header" href="#compiling-the-shaders" id="compiling-the-shaders">Compiling the shaders</a></h2>
+<p>Create a directory called <code>shaders</code> in the root directory of your project (adjacent to the <code>src</code> directory) and store the vertex shader in a file called <code>shader.vert</code> and the fragment shader in a file called <code>shader.frag</code> in that directory. GLSL shaders don't have an official extension, but these two are commonly used to distinguish them.</p>
+<p>The contents of <code>shader.vert</code> should be:</p>
+<pre><code class="language-glsl">#version 450
+
+layout(location = 0) out vec3 fragColor;
+
+vec2 positions[3] = vec2[](
+    vec2(0.0, -0.5),
+    vec2(0.5, 0.5),
+    vec2(-0.5, 0.5)
+);
+
+vec3 colors[3] = vec3[](
+    vec3(1.0, 0.0, 0.0),
+    vec3(0.0, 1.0, 0.0),
+    vec3(0.0, 0.0, 1.0)
+);
+
+void main() {
+    gl_Position = vec4(positions[gl_VertexIndex], 0.0, 1.0);
+    fragColor = colors[gl_VertexIndex];
+}
+</code></pre>
+<p>And the contents of <code>shader.frag</code> should be:</p>
+<pre><code class="language-glsl">#version 450
+
+layout(location = 0) in vec3 fragColor;
+
+layout(location = 0) out vec4 outColor;
+
+void main() {
+    outColor = vec4(fragColor, 1.0);
+}
+</code></pre>
+<p>We're now going to compile these into SPIR-V bytecode using the <code>glslc</code> program.</p>
+<p><strong>Windows</strong></p>
+<p>Create a <code>compile.bat</code> file with the following contents:</p>
+<pre><code class="language-bash">C:/VulkanSDK/x.x.x.x/Bin32/glslc.exe shader.vert -o vert.spv
+C:/VulkanSDK/x.x.x.x/Bin32/glslc.exe shader.frag -o frag.spv
+pause
+</code></pre>
+<p>Replace the path to <code>glslc.exe</code> with the path to where you installed the Vulkan SDK. Double click the file to run it.</p>
+<p><strong>Linux</strong></p>
+<p>Create a <code>compile.sh</code> file with the following contents:</p>
+<pre><code class="language-bash">/home/user/VulkanSDK/x.x.x.x/x86_64/bin/glslc shader.vert -o vert.spv
+/home/user/VulkanSDK/x.x.x.x/x86_64/bin/glslc shader.frag -o frag.spv
+</code></pre>
+<p>Replace the path to <code>glslc</code> with the path to where you installed the Vulkan SDK. Make the script executable with <code>chmod +x compile.sh</code> and run it.</p>
+<p><strong>End of platform-specific instructions</strong></p>
+<p>These two commands tell the compiler to read the GLSL source file and output a SPIR-V bytecode file using the <code>-o</code> (output) flag.</p>
+<p>If your shader contains a syntax error then the compiler will tell you the line number and problem, as you would expect. Try leaving out a semicolon for example and run the compile script again. Also try running the compiler without any arguments to see what kinds of flags it supports. It can, for example, also output the bytecode into a human-readable format so you can see exactly what your shader is doing and any optimizations that have been applied at this stage.</p>
+<p>Compiling shaders on the commandline is one of the most straightforward options and it's the one that we'll use in this tutorial, but it's also possible to compile shaders directly from your own code. The Vulkan SDK includes <a href="https://github.com/google/shaderc">libshaderc</a>, which is a library to compile GLSL code to SPIR-V from within your program.</p>
+<h2><a class="header" href="#loading-a-shader" id="loading-a-shader">Loading a shader</a></h2>
+<p>Now that we have a way of producing SPIR-V shaders, it's time to bring them into our program to plug them into the graphics pipeline at some point. We'll start by using <a href="https://doc.rust-lang.org/stable/std/macro.include_bytes.html"><code>include_bytes!</code></a> from the Rust standard library to include the compiled SPIR-V bytecode for the shaders in our executable.</p>
+<pre><code class="language-rust noplaypen">fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    let vert = include_bytes!(&quot;../shaders/vert.spv&quot;);
+    let frag = include_bytes!(&quot;../shaders/frag.spv&quot;);
+
+    Ok(())
+}
+</code></pre>
+<h2><a class="header" href="#creating-shader-modules" id="creating-shader-modules">Creating shader modules</a></h2>
+<p>Before we can pass the code to the pipeline, we have to wrap it in a <code>vk::ShaderModule</code> object. Let's create a helper function <code>create_shader_module</code> to do that.</p>
+<pre><code class="language-rust noplaypen">fn create_shader_module(
+    device: &amp;Device,
+    bytecode: &amp;[u8],
+) -&gt; Result&lt;vk::ShaderModule&gt; {
+}
+</code></pre>
+<p>The function will take a slice containing the bytecode as parameter and create a <code>vk::ShaderModule</code> from it using our logical device.</p>
+<p>Creating a shader module is simple, we only need to specify the length of our bytecode slice and the bytecode slice itself. This information is specified in a <code>vk::ShaderModuleCreateInfo</code> structure. The one catch is that the size of the bytecode is specified in bytes, but the bytecode slice expected by this struct is a <code>&amp;[u32]</code> instead of a <code>&amp;[u8]</code>. Therefore we will first need to convert our <code>&amp;[u8]</code> into an <code>&amp;[u32]</code>. We will accomplish this with <a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.align_to"><code>slice::align_to</code></a> which can be used to convert a slice into a slice containing a type with a different size and/or alignment requirements.</p>
+<pre><code class="language-rust noplaypen">let (prefix, code, suffix) = unsafe { bytecode.align_to::&lt;u32&gt;() };
+if !prefix.is_empty() || !suffix.is_empty() {
+    return Err(anyhow!(&quot;Shader bytecode is not properly aligned.&quot;));
+}
+</code></pre>
+<p>The middle slice returned by this method (<code>code</code>) is a <code>&amp;[u32]</code> and is guaranteed to be correctly aligned. Any <code>u8</code>s in our <code>bytecode</code> slice that fell outside this alignment guarantee will appear in the first or third slices returned (<code>prefix</code> and <code>suffix</code>). We'll require that both of these slices are empty to ensure that our entire <code>bytecode</code> slice has been converted to a <code>&amp;[u32]</code> though you shouldn't have to worry about this failure case in practice.</p>
+<p>We can then construct a <code>vk::ShaderModuleCreateInfo</code> and use it to call <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.create_shader_module"><code>DeviceV1_0::create_shader_module</code></a> to create the shader module:</p>
+<pre><code class="language-rust noplaypen">let info = vk::ShaderModuleCreateInfo::builder()
+    .code_size(bytecode.len())
+    .code(code);
+
+Ok(device.create_shader_module(&amp;info, None)?)
+</code></pre>
+<p>The parameters are the same as those in previous object creation functions: the create info structure and the optional custom allocators.</p>
+<p>Shader modules are just a thin wrapper around the shader bytecode that we've previously loaded from a file and the functions defined in it. The compilation and linking of the SPIR-V bytecode to machine code for execution by the GPU doesn't happen until the graphics pipeline is created. That means that we're allowed to destroy the shader modules again as soon as pipeline creation is finished, which is why we'll make them local variables in the <code>create_pipeline</code> function instead of fields in <code>AppData</code>:</p>
+<pre><code class="language-rust noplaypen">fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    let vert = include_bytes!(&quot;../shaders/vert.spv&quot;);
+    let frag = include_bytes!(&quot;../shaders/frag.spv&quot;);
+
+    let vert_shader_module = create_shader_module(device, &amp;vert[..])?;
+    let frag_shader_module = create_shader_module(device, &amp;frag[..])?;
+
+    // ...
+</code></pre>
+<p>The cleanup should then happen at the end of the function by adding two calls to <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.destroy_shader_module"><code>DeviceV1_0::destroy_shader_module</code></a>. All of the remaining code in this chapter will be inserted before these lines.</p>
+<pre><code class="language-rust noplaypen">    // ...
+
+    device.destroy_shader_module(vert_shader_module, None);
+    device.destroy_shader_module(frag_shader_module, None);
+
+    Ok(())
+}
+</code></pre>
+<h2><a class="header" href="#shader-stage-creation" id="shader-stage-creation">Shader stage creation</a></h2>
+<p>To actually use the shaders we'll need to assign them to a specific pipeline stage through <code>vk::PipelineShaderStageCreateInfo</code> structures as part of the actual pipeline creation process.</p>
+<p>We'll start by filling in the structure for the vertex shader, again in the <code>create_pipeline</code> function.</p>
+<pre><code class="language-rust noplaypen">let vert_stage = vk::PipelineShaderStageCreateInfo::builder()
+    .stage(vk::ShaderStageFlags::VERTEX)
+    .module(vert_shader_module)
+    .name(b&quot;main\0&quot;[..].into());
+</code></pre>
+<p>The first step is telling Vulkan in which pipeline stage the shader is going to be used. There is an enum value for each of the programmable stages described in the previous chapter.</p>
+<p>The next two fields specify the shader module containing the code, and the function to invoke, known as the <em>entrypoint</em>. That means that it's possible to combine multiple fragment shaders into a single shader module and use different entry points to differentiate between their behaviors. In this case we'll stick to the standard <code>main</code>, however.</p>
+<p>There is one more (optional) member, <code>specialization_info</code>, which we won't be using here, but is worth discussing. It allows you to specify values for shader constants. You can use a single shader module where its behavior can be configured at pipeline creation by specifying different values for the constants used in it. This is more efficient than configuring the shader using variables at render time, because the compiler can do optimizations like eliminating <code>if</code> statements that depend on these values. If you don't have any constants like that, then you can just skip setting it as we are doing here.</p>
+<p>Modifying the structure to suit the fragment shader is easy:</p>
+<pre><code class="language-rust noplaypen">let frag_stage = vk::PipelineShaderStageCreateInfo::builder()
+    .stage(vk::ShaderStageFlags::FRAGMENT)
+    .module(frag_shader_module)
+    .name(b&quot;main\0&quot;[..].into());
+</code></pre>
+<p>That's all there is to describing the programmable stages of the pipeline. In the next chapter we'll look at the fixed-function stages.</p>
 <h1><a class="header" href="#fixed-functions" id="fixed-functions">Fixed functions</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/10_fixed_functions.rs">main.rs</a></p>
+<p>The older graphics APIs provided default state for most of the stages of the graphics pipeline. In Vulkan you have to be explicit about everything, from viewport size to color blending function. In this chapter we'll fill in all of the structures to configure these fixed-function operations.</p>
+<h2><a class="header" href="#vertex-input" id="vertex-input">Vertex input</a></h2>
+<p>The <code>vk::PipelineVertexInputStateCreateInfo</code> structure describes the format of the vertex data that will be passed to the vertex shader. It describes this in roughly two ways:</p>
+<ul>
+<li>Bindings: spacing between data and whether the data is per-vertex or per-instance (see <a href="https://en.wikipedia.org/wiki/Geometry_instancing">instancing</a>)</li>
+<li>Attribute descriptions: type of the attributes passed to the vertex shader, which binding to load them from and at which offset</li>
+</ul>
+<p>Because we're hard coding the vertex data directly in the vertex shader, we'll leave this structure with the defaults to specify that there is no vertex data to load for now. We'll get back to it in the vertex buffer chapter.</p>
+<pre><code class="language-rust noplaypen">let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder();
+</code></pre>
+<p>The <code>vertex_binding_descriptions</code> and <code>vertex_attribute_descriptions</code> fields for this struct that could have been set here would be slices of structs that describe the aforementioned details for loading vertex data. Add this structure to the <code>create_pipeline</code> function right after the <code>vk::PipelineShaderStageCreateInfo</code> structs.</p>
+<h2><a class="header" href="#input-assembly" id="input-assembly">Input assembly</a></h2>
+<p>The <code>vk::PipelineInputAssemblyStateCreateInfo</code> struct describes two things: what kind of geometry will be drawn from the vertices and if primitive restart should be enabled. The former is specified in the <code>topology</code> member and can have values like:</p>
+<ul>
+<li><code>vk::PrimitiveTopology::POINT_LIST</code>: points from vertices</li>
+<li><code>vk::PrimitiveTopology::LINE_LIST</code>: line from every 2 vertices without reuse</li>
+<li><code>vk::PrimitiveTopology::LINE_STRIP</code>: the end vertex of every line is used as start vertex for the next line</li>
+<li><code>vk::PrimitiveTopology::TRIANGLE_LIST</code>: triangle from every 3 vertices without reuse</li>
+<li><code>vk::PrimitiveTopology::TRIANGLE_STRIP </code>: the second and third vertex of every triangle are used as first two vertices of the next triangle</li>
+</ul>
+<p>Normally, the vertices are loaded from the vertex buffer by index in sequential order, but with an <em>element buffer</em> you can specify the indices to use yourself. This allows you to perform optimizations like reusing vertices. If you set the <code>primitive_restart_enable</code> member to <code>true</code>, then it's possible to break up lines and triangles in the <code>_STRIP</code> topology modes by using a special index of <code>0xFFFF</code> or <code>0xFFFFFFFF</code>.</p>
+<p>We intend to draw triangles throughout this tutorial, so we'll stick to the following data for the structure:</p>
+<pre><code class="language-rust noplaypen">let input_assembly_state = vk::PipelineInputAssemblyStateCreateInfo::builder()
+    .topology(vk::PrimitiveTopology::TRIANGLE_LIST)
+    .primitive_restart_enable(false);
+</code></pre>
+<h2><a class="header" href="#viewports-and-scissors" id="viewports-and-scissors">Viewports and scissors</a></h2>
+<p>A viewport basically describes the region of the framebuffer that the output will be rendered to. This will almost always be <code>(0, 0)</code> to <code>(width, height)</code> and in this tutorial that will also be the case.</p>
+<pre><code class="language-rust noplaypen">let viewport = vk::Viewport::builder()
+    .x(0.0)
+    .y(0.0)
+    .width(data.swapchain_extent.width as f32)
+    .height(data.swapchain_extent.height as f32)
+    .min_depth(0.0)
+    .max_depth(1.0);
+</code></pre>
+<p>Remember that the size of the swapchain and its images may differ from the <code>WIDTH</code> and <code>HEIGHT</code> of the window. The swapchain images will be used as framebuffers later on, so we should stick to their size.</p>
+<p>The <code>min_depth</code> and <code>max_depth</code> values specify the range of depth values to use for the framebuffer. These values must be within the <code>[0.0, 1.0]</code> range, but <code>min_depth</code> may be higher than <code>max_depth</code>. If you aren't doing anything special, then you should stick to the standard values of <code>0.0</code> and <code>1.0</code>.</p>
+<p>While viewports define the transformation from the image to the framebuffer, scissor rectangles define in which regions pixels will actually be stored. Any pixels outside the scissor rectangles will be discarded by the rasterizer. They function like a filter rather than a transformation. The difference is illustrated below. Note that the left scissor rectangle is just one of the many possibilities that would result in that image, as long as it's larger than the viewport.</p>
+<p><img src="pipeline/../images/viewports_scissors.png" alt="" /></p>
+<p>In this tutorial we simply want to draw to the entire framebuffer, so we'll specify a scissor rectangle that covers it entirely:</p>
+<pre><code class="language-rust noplaypen">let scissor = vk::Rect2D::builder()
+    .offset(vk::Offset2D { x: 0, y: 0 })
+    .extent(data.swapchain_extent);
+</code></pre>
+<p>Now this viewport and scissor rectangle need to be combined into a viewport state using the <code>vk::PipelineViewportStateCreateInfo</code> struct. It is possible to use multiple viewports and scissor rectangles on some graphics cards, so its members reference an array of them. Using multiple requires enabling a GPU feature (see logical device creation).</p>
+<pre><code class="language-rust noplaypen">let viewports = &amp;[viewport];
+let scissors = &amp;[scissor];
+let viewport_state = vk::PipelineViewportStateCreateInfo::builder()
+    .viewports(viewports)
+    .scissors(scissors);
+</code></pre>
+<h2><a class="header" href="#rasterizer" id="rasterizer">Rasterizer</a></h2>
+<p>The rasterizer takes the geometry that is shaped by the vertices from the vertex shader and turns it into fragments to be colored by the fragment shader. It also performs <a href="https://en.wikipedia.org/wiki/Z-buffering">depth testing</a>, <a href="https://en.wikipedia.org/wiki/Back-face_culling">face culling</a> and the scissor test, and it can be configured to output fragments that fill entire polygons or just the edges (wireframe rendering). All this is configured using the <code>vk::PipelineRasterizationStateCreateInfo</code> structure.</p>
+<pre><code class="language-rust noplaypen">let rasterization_state = vk::PipelineRasterizationStateCreateInfo::builder()
+    .depth_clamp_enable(false)
+    // continued...
+</code></pre>
+<p>If <code>depth_clamp_enable</code> is set to <code>true</code>, then fragments that are beyond the near and far planes are clamped to them as opposed to discarding them. This is useful in some special cases like shadow maps. Using this requires enabling a GPU feature.</p>
+<pre><code class="language-rust noplaypen">    .rasterizer_discard_enable(false)
+</code></pre>
+<p>If <code>rasterizer_discard_enable</code> is set to <code>true</code>, then geometry never passes through the rasterizer stage. This basically disables any output to the framebuffer.</p>
+<pre><code class="language-rust noplaypen">    .polygon_mode(vk::PolygonMode::FILL)
+</code></pre>
+<p>The <code>polygon_mode</code> determines how fragments are generated for geometry. The following modes are available:</p>
+<ul>
+<li><code>vk::PolygonMode::FILL</code>: fill the area of the polygon with fragments</li>
+<li><code>vk::PolygonMode::LINE</code>: polygon edges are drawn as lines</li>
+<li><code>vk::PolygonMode::POINT</code>: polygon vertices are drawn as points</li>
+</ul>
+<p>Using any mode other than fill requires enabling a GPU feature.</p>
+<pre><code class="language-rust noplaypen">    .line_width(1.0)
+</code></pre>
+<p>The <code>line_width</code> member is straightforward, it describes the thickness of lines in terms of number of fragments. The maximum line width that is supported depends on the hardware and any line thicker than <code>1.0</code> requires you to enable the <code>wide_lines</code> GPU feature.</p>
+<pre><code class="language-rust noplaypen">    .cull_mode(vk::CullModeFlags::BACK)
+    .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
+</code></pre>
+<p>The <code>cull_mode</code> variable determines the type of face culling to use. You can disable culling, cull the front faces, cull the back faces or both. The <code>front_face</code> variable specifies the vertex order for faces to be considered front-facing and can be clockwise or counterclockwise.</p>
+<pre><code class="language-rust noplaypen">    .depth_bias_enable(false);
+</code></pre>
+<p>The rasterizer can alter the depth values by adding a constant value or biasing them based on a fragment's slope. This is sometimes used for shadow mapping, but we won't be using it. Just set <code>depth_bias_enable</code> to <code>false</code>.</p>
+<h2><a class="header" href="#multisampling" id="multisampling">Multisampling</a></h2>
+<p>The <code>vk::PipelineMultisampleStateCreateInfo</code> struct configures multisampling, which is one of the ways to perform <a href="https://en.wikipedia.org/wiki/Multisample_anti-aliasing">anti-aliasing</a>. It works by combining the fragment shader results of multiple polygons that rasterize to the same pixel. This mainly occurs along edges, which is also where the most noticeable aliasing artifacts occur. Because it doesn't need to run the fragment shader multiple times if only one polygon maps to a pixel, it is significantly less expensive than simply rendering to a higher resolution and then downscaling. Enabling it requires enabling a GPU feature.</p>
+<pre><code class="language-rust noplaypen">let multisample_state = vk::PipelineMultisampleStateCreateInfo::builder()
+    .sample_shading_enable(false)
+    .rasterization_samples(vk::SampleCountFlags::_1);
+</code></pre>
+<p>We'll revisit multisampling in a later chapter, for now let's keep it disabled.</p>
+<h2><a class="header" href="#depth-and-stencil-testing" id="depth-and-stencil-testing">Depth and stencil testing</a></h2>
+<p>If you are using a depth and/or stencil buffer, then you also need to configure the depth and stencil tests using <code>vk::PipelineDepthStencilStateCreateInfo</code>. We don't have one right now, so we can simply ignore it for now. We'll get back to it in the depth buffering chapter.</p>
+<h2><a class="header" href="#color-blending" id="color-blending">Color blending</a></h2>
+<p>After a fragment shader has returned a color, it needs to be combined with the color that is already in the framebuffer. This transformation is known as color blending and there are two ways to do it:</p>
+<ul>
+<li>Mix the old and new value to produce a final color</li>
+<li>Combine the old and new value using a bitwise operation</li>
+</ul>
+<p>There are two types of structs to configure color blending. The first struct, <code>vk::PipelineColorBlendAttachmentState</code> contains the configuration per attached framebuffer and the second struct, <code>vk::PipelineColorBlendStateCreateInfo</code> contains the <em>global</em> color blending settings. In our case we only have one framebuffer:</p>
+<pre><code class="language-rust noplaypen">let attachment = vk::PipelineColorBlendAttachmentState::builder()
+    .color_write_mask(vk::ColorComponentFlags::all())
+    .blend_enable(false)
+    .src_color_blend_factor(vk::BlendFactor::ONE)  // Optional
+    .dst_color_blend_factor(vk::BlendFactor::ZERO) // Optional
+    .color_blend_op(vk::BlendOp::ADD)              // Optional
+    .src_alpha_blend_factor(vk::BlendFactor::ONE)  // Optional
+    .dst_alpha_blend_factor(vk::BlendFactor::ZERO) // Optional
+    .alpha_blend_op(vk::BlendOp::ADD);             // Optional
+</code></pre>
+<p>This per-framebuffer struct allows you to configure the first way of color blending. The operations that will be performed are best demonstrated using the following pseudocode:</p>
+<pre><code class="language-rust noplaypen">if blend_enable {
+    final_color.rgb = (src_color_blend_factor * new_color.rgb)
+        &lt;color_blend_op&gt; (dst_color_blend_factor * old_color.rgb);
+    final_color.a = (src_alpha_blend_factor * new_color.a)
+        &lt;alpha_blend_op&gt; (dst_alpha_blend_factor * old_color.a);
+} else {
+    final_color = new_color;
+}
+
+final_color = final_color &amp; color_write_mask;
+</code></pre>
+<p>If <code>blend_enable</code> is set to <code>false</code>, then the new color from the fragment shader is passed through unmodified. Otherwise, the two mixing operations are performed to compute a new color. The resulting color is AND'd with the <code>color_write_mask</code> to determine which channels are actually passed through.</p>
+<p>The most common way to use color blending is to implement alpha blending, where we want the new color to be blended with the old color based on its opacity. The <code>final_color</code> should then be computed as follows:</p>
+<pre><code class="language-c++">final_color.rgb = new_alpha * new_color + (1 - new_alpha) * old_color;
+final_color.a = new_alpha.a;
+</code></pre>
+<p>This can be accomplished with the following parameters:</p>
+<pre><code class="language-rust noplaypen">let attachment = vk::PipelineColorBlendAttachmentState::builder()
+    .color_write_mask(vk::ColorComponentFlags::all())
+    .blend_enable(true)
+    .src_color_blend_factor(vk::BlendFactor::SRC_ALPHA)
+    .dst_color_blend_factor(vk::BlendFactor::ONE_MINUS_SRC_ALPHA)
+    .color_blend_op(vk::BlendOp::ADD)
+    .src_alpha_blend_factor(vk::BlendFactor::ONE)
+    .dst_alpha_blend_factor(vk::BlendFactor::ZERO)
+    .alpha_blend_op(vk::BlendOp::ADD);
+</code></pre>
+<p>You can find all of the possible operations in the <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.BlendFactor.html"><code>vk::BlendFactor</code></a> and <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.BlendOp.html"><code>vk::BlendOp</code></a> enumerations in the specification (or <code>vulkanalia</code>'s documentation).</p>
+<p>The second structure references the array of structures for all of the framebuffers and allows you to set blend constants that you can use as blend factors in the aforementioned calculations.</p>
+<pre><code class="language-rust noplaypen">let attachments = &amp;[attachment];
+let color_blend_state = vk::PipelineColorBlendStateCreateInfo::builder()
+    .logic_op_enable(false)
+    .logic_op(vk::LogicOp::COPY)
+    .attachments(attachments)
+    .blend_constants([0.0, 0.0, 0.0, 0.0]);
+</code></pre>
+<p>If you want to use the second method of blending (bitwise combination), then you should set <code>logic_op_enable</code> to <code>true</code>. The bitwise operation can then be specified in the <code>logic_op</code> field. Note that this will automatically disable the first method, as if you had set <code>blend_enable</code> to <code>false</code> for every attached framebuffer! The <code>color_write_mask</code> will also be used in this mode to determine which channels in the framebuffer will actually be affected. It is also possible to disable both modes, as we've done here, in which case the fragment colors will be written to the framebuffer unmodified.</p>
+<h2><a class="header" href="#dynamic-state" id="dynamic-state">Dynamic state</a></h2>
+<p>A limited amount of the state that we've specified in the previous structs <em>can</em> actually be changed without recreating the pipeline. Examples are the size of the viewport, line width and blend constants. If you want to do that, then you'll have to fill in a <code>vk::PipelineDynamicStateCreateInfo</code> structure like this:</p>
+<pre><code class="language-rust noplaypen">let dynamic_states = &amp;[
+    vk::DynamicState::VIEWPORT,
+    vk::DynamicState::LINE_WIDTH,
+];
+
+let dynamic_state = vk::PipelineDynamicStateCreateInfo::builder()
+    .dynamic_states(dynamic_states);
+</code></pre>
+<p>This will cause the configuration of these values to be ignored and you will be required to specify the data at drawing time. We'll get back to this in a future chapter. This struct can be omitted if you don't have any dynamic state.</p>
+<h2><a class="header" href="#pipeline-layout" id="pipeline-layout">Pipeline layout</a></h2>
+<p>You can use <code>uniform</code> values in shaders, which are globals similar to dynamic state variables that can be changed at drawing time to alter the behavior of your shaders without having to recreate them. They are commonly used to pass the transformation matrix to the vertex shader, or to create texture samplers in the fragment shader.</p>
+<p>These uniform values need to be specified during pipeline creation by creating a <code>vk::PipelineLayout</code> object. Even though we won't be using them until a future chapter, we are still required to create an empty pipeline layout.</p>
+<p>Create an <code>AppData</code> field to hold this object, because we'll refer to it from other functions at a later point in time:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    pipeline_layout: vk::PipelineLayout,
+}
+</code></pre>
+<p>And then create the object in the <code>create_pipeline</code> function:</p>
+<pre><code class="language-rust noplaypen">let layout_info = vk::PipelineLayoutCreateInfo::builder();
+
+data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
+</code></pre>
+<p>The structure also specifies <em>push constants</em>, which are another way of passing dynamic values to shaders that we may get into in a future chapter. The pipeline layout will be referenced throughout the program's lifetime, so it should be destroyed in <code>App::destroy</code>:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn destroy(&amp;mut self) {
+        self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
+        // ...
+    }
+}
+</code></pre>
+<h2><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h2>
+<p>That's it for all of the fixed-function state! It's a lot of work to set all of this up from scratch, but the advantage is that we're now nearly fully aware of everything that is going on in the graphics pipeline! This reduces the chance of running into unexpected behavior because the default state of certain components is not what you expect.</p>
+<p>There is however one more object to create before we can finally create the graphics pipeline and that is a render pass.</p>
 <h1><a class="header" href="#render-passes" id="render-passes">Render passes</a></h1>
 <p>Coming soon™.</p>
-<h1><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h1>
+<h1><a class="header" href="#conclusion-1" id="conclusion-1">Conclusion</a></h1>
 <p>Coming soon™.</p>
 <h1><a class="header" href="#framebuffers" id="framebuffers">Framebuffers</a></h1>
 <p>Coming soon™.</p>
@@ -1504,7 +1900,7 @@ fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&g
 <p>Coming soon™.</p>
 <h1><a class="header" href="#generating-mipmaps" id="generating-mipmaps">Generating mipmaps</a></h1>
 <p>Coming soon™.</p>
-<h1><a class="header" href="#multisampling" id="multisampling">Multisampling</a></h1>
+<h1><a class="header" href="#multisampling-1" id="multisampling-1">Multisampling</a></h1>
 <p>Coming soon™.</p>
 
                     </main>

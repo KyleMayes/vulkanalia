@@ -153,7 +153,188 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#fixed-functions" id="fixed-functions">Fixed functions</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/10_fixed_functions.rs">main.rs</a></p>
+<p>The older graphics APIs provided default state for most of the stages of the graphics pipeline. In Vulkan you have to be explicit about everything, from viewport size to color blending function. In this chapter we'll fill in all of the structures to configure these fixed-function operations.</p>
+<h2><a class="header" href="#vertex-input" id="vertex-input">Vertex input</a></h2>
+<p>The <code>vk::PipelineVertexInputStateCreateInfo</code> structure describes the format of the vertex data that will be passed to the vertex shader. It describes this in roughly two ways:</p>
+<ul>
+<li>Bindings: spacing between data and whether the data is per-vertex or per-instance (see <a href="https://en.wikipedia.org/wiki/Geometry_instancing">instancing</a>)</li>
+<li>Attribute descriptions: type of the attributes passed to the vertex shader, which binding to load them from and at which offset</li>
+</ul>
+<p>Because we're hard coding the vertex data directly in the vertex shader, we'll leave this structure with the defaults to specify that there is no vertex data to load for now. We'll get back to it in the vertex buffer chapter.</p>
+<pre><code class="language-rust noplaypen">let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder();
+</code></pre>
+<p>The <code>vertex_binding_descriptions</code> and <code>vertex_attribute_descriptions</code> fields for this struct that could have been set here would be slices of structs that describe the aforementioned details for loading vertex data. Add this structure to the <code>create_pipeline</code> function right after the <code>vk::PipelineShaderStageCreateInfo</code> structs.</p>
+<h2><a class="header" href="#input-assembly" id="input-assembly">Input assembly</a></h2>
+<p>The <code>vk::PipelineInputAssemblyStateCreateInfo</code> struct describes two things: what kind of geometry will be drawn from the vertices and if primitive restart should be enabled. The former is specified in the <code>topology</code> member and can have values like:</p>
+<ul>
+<li><code>vk::PrimitiveTopology::POINT_LIST</code>: points from vertices</li>
+<li><code>vk::PrimitiveTopology::LINE_LIST</code>: line from every 2 vertices without reuse</li>
+<li><code>vk::PrimitiveTopology::LINE_STRIP</code>: the end vertex of every line is used as start vertex for the next line</li>
+<li><code>vk::PrimitiveTopology::TRIANGLE_LIST</code>: triangle from every 3 vertices without reuse</li>
+<li><code>vk::PrimitiveTopology::TRIANGLE_STRIP </code>: the second and third vertex of every triangle are used as first two vertices of the next triangle</li>
+</ul>
+<p>Normally, the vertices are loaded from the vertex buffer by index in sequential order, but with an <em>element buffer</em> you can specify the indices to use yourself. This allows you to perform optimizations like reusing vertices. If you set the <code>primitive_restart_enable</code> member to <code>true</code>, then it's possible to break up lines and triangles in the <code>_STRIP</code> topology modes by using a special index of <code>0xFFFF</code> or <code>0xFFFFFFFF</code>.</p>
+<p>We intend to draw triangles throughout this tutorial, so we'll stick to the following data for the structure:</p>
+<pre><code class="language-rust noplaypen">let input_assembly_state = vk::PipelineInputAssemblyStateCreateInfo::builder()
+    .topology(vk::PrimitiveTopology::TRIANGLE_LIST)
+    .primitive_restart_enable(false);
+</code></pre>
+<h2><a class="header" href="#viewports-and-scissors" id="viewports-and-scissors">Viewports and scissors</a></h2>
+<p>A viewport basically describes the region of the framebuffer that the output will be rendered to. This will almost always be <code>(0, 0)</code> to <code>(width, height)</code> and in this tutorial that will also be the case.</p>
+<pre><code class="language-rust noplaypen">let viewport = vk::Viewport::builder()
+    .x(0.0)
+    .y(0.0)
+    .width(data.swapchain_extent.width as f32)
+    .height(data.swapchain_extent.height as f32)
+    .min_depth(0.0)
+    .max_depth(1.0);
+</code></pre>
+<p>Remember that the size of the swapchain and its images may differ from the <code>WIDTH</code> and <code>HEIGHT</code> of the window. The swapchain images will be used as framebuffers later on, so we should stick to their size.</p>
+<p>The <code>min_depth</code> and <code>max_depth</code> values specify the range of depth values to use for the framebuffer. These values must be within the <code>[0.0, 1.0]</code> range, but <code>min_depth</code> may be higher than <code>max_depth</code>. If you aren't doing anything special, then you should stick to the standard values of <code>0.0</code> and <code>1.0</code>.</p>
+<p>While viewports define the transformation from the image to the framebuffer, scissor rectangles define in which regions pixels will actually be stored. Any pixels outside the scissor rectangles will be discarded by the rasterizer. They function like a filter rather than a transformation. The difference is illustrated below. Note that the left scissor rectangle is just one of the many possibilities that would result in that image, as long as it's larger than the viewport.</p>
+<p><img src="../images/viewports_scissors.png" alt="" /></p>
+<p>In this tutorial we simply want to draw to the entire framebuffer, so we'll specify a scissor rectangle that covers it entirely:</p>
+<pre><code class="language-rust noplaypen">let scissor = vk::Rect2D::builder()
+    .offset(vk::Offset2D { x: 0, y: 0 })
+    .extent(data.swapchain_extent);
+</code></pre>
+<p>Now this viewport and scissor rectangle need to be combined into a viewport state using the <code>vk::PipelineViewportStateCreateInfo</code> struct. It is possible to use multiple viewports and scissor rectangles on some graphics cards, so its members reference an array of them. Using multiple requires enabling a GPU feature (see logical device creation).</p>
+<pre><code class="language-rust noplaypen">let viewports = &amp;[viewport];
+let scissors = &amp;[scissor];
+let viewport_state = vk::PipelineViewportStateCreateInfo::builder()
+    .viewports(viewports)
+    .scissors(scissors);
+</code></pre>
+<h2><a class="header" href="#rasterizer" id="rasterizer">Rasterizer</a></h2>
+<p>The rasterizer takes the geometry that is shaped by the vertices from the vertex shader and turns it into fragments to be colored by the fragment shader. It also performs <a href="https://en.wikipedia.org/wiki/Z-buffering">depth testing</a>, <a href="https://en.wikipedia.org/wiki/Back-face_culling">face culling</a> and the scissor test, and it can be configured to output fragments that fill entire polygons or just the edges (wireframe rendering). All this is configured using the <code>vk::PipelineRasterizationStateCreateInfo</code> structure.</p>
+<pre><code class="language-rust noplaypen">let rasterization_state = vk::PipelineRasterizationStateCreateInfo::builder()
+    .depth_clamp_enable(false)
+    // continued...
+</code></pre>
+<p>If <code>depth_clamp_enable</code> is set to <code>true</code>, then fragments that are beyond the near and far planes are clamped to them as opposed to discarding them. This is useful in some special cases like shadow maps. Using this requires enabling a GPU feature.</p>
+<pre><code class="language-rust noplaypen">    .rasterizer_discard_enable(false)
+</code></pre>
+<p>If <code>rasterizer_discard_enable</code> is set to <code>true</code>, then geometry never passes through the rasterizer stage. This basically disables any output to the framebuffer.</p>
+<pre><code class="language-rust noplaypen">    .polygon_mode(vk::PolygonMode::FILL)
+</code></pre>
+<p>The <code>polygon_mode</code> determines how fragments are generated for geometry. The following modes are available:</p>
+<ul>
+<li><code>vk::PolygonMode::FILL</code>: fill the area of the polygon with fragments</li>
+<li><code>vk::PolygonMode::LINE</code>: polygon edges are drawn as lines</li>
+<li><code>vk::PolygonMode::POINT</code>: polygon vertices are drawn as points</li>
+</ul>
+<p>Using any mode other than fill requires enabling a GPU feature.</p>
+<pre><code class="language-rust noplaypen">    .line_width(1.0)
+</code></pre>
+<p>The <code>line_width</code> member is straightforward, it describes the thickness of lines in terms of number of fragments. The maximum line width that is supported depends on the hardware and any line thicker than <code>1.0</code> requires you to enable the <code>wide_lines</code> GPU feature.</p>
+<pre><code class="language-rust noplaypen">    .cull_mode(vk::CullModeFlags::BACK)
+    .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
+</code></pre>
+<p>The <code>cull_mode</code> variable determines the type of face culling to use. You can disable culling, cull the front faces, cull the back faces or both. The <code>front_face</code> variable specifies the vertex order for faces to be considered front-facing and can be clockwise or counterclockwise.</p>
+<pre><code class="language-rust noplaypen">    .depth_bias_enable(false);
+</code></pre>
+<p>The rasterizer can alter the depth values by adding a constant value or biasing them based on a fragment's slope. This is sometimes used for shadow mapping, but we won't be using it. Just set <code>depth_bias_enable</code> to <code>false</code>.</p>
+<h2><a class="header" href="#multisampling" id="multisampling">Multisampling</a></h2>
+<p>The <code>vk::PipelineMultisampleStateCreateInfo</code> struct configures multisampling, which is one of the ways to perform <a href="https://en.wikipedia.org/wiki/Multisample_anti-aliasing">anti-aliasing</a>. It works by combining the fragment shader results of multiple polygons that rasterize to the same pixel. This mainly occurs along edges, which is also where the most noticeable aliasing artifacts occur. Because it doesn't need to run the fragment shader multiple times if only one polygon maps to a pixel, it is significantly less expensive than simply rendering to a higher resolution and then downscaling. Enabling it requires enabling a GPU feature.</p>
+<pre><code class="language-rust noplaypen">let multisample_state = vk::PipelineMultisampleStateCreateInfo::builder()
+    .sample_shading_enable(false)
+    .rasterization_samples(vk::SampleCountFlags::_1);
+</code></pre>
+<p>We'll revisit multisampling in a later chapter, for now let's keep it disabled.</p>
+<h2><a class="header" href="#depth-and-stencil-testing" id="depth-and-stencil-testing">Depth and stencil testing</a></h2>
+<p>If you are using a depth and/or stencil buffer, then you also need to configure the depth and stencil tests using <code>vk::PipelineDepthStencilStateCreateInfo</code>. We don't have one right now, so we can simply ignore it for now. We'll get back to it in the depth buffering chapter.</p>
+<h2><a class="header" href="#color-blending" id="color-blending">Color blending</a></h2>
+<p>After a fragment shader has returned a color, it needs to be combined with the color that is already in the framebuffer. This transformation is known as color blending and there are two ways to do it:</p>
+<ul>
+<li>Mix the old and new value to produce a final color</li>
+<li>Combine the old and new value using a bitwise operation</li>
+</ul>
+<p>There are two types of structs to configure color blending. The first struct, <code>vk::PipelineColorBlendAttachmentState</code> contains the configuration per attached framebuffer and the second struct, <code>vk::PipelineColorBlendStateCreateInfo</code> contains the <em>global</em> color blending settings. In our case we only have one framebuffer:</p>
+<pre><code class="language-rust noplaypen">let attachment = vk::PipelineColorBlendAttachmentState::builder()
+    .color_write_mask(vk::ColorComponentFlags::all())
+    .blend_enable(false)
+    .src_color_blend_factor(vk::BlendFactor::ONE)  // Optional
+    .dst_color_blend_factor(vk::BlendFactor::ZERO) // Optional
+    .color_blend_op(vk::BlendOp::ADD)              // Optional
+    .src_alpha_blend_factor(vk::BlendFactor::ONE)  // Optional
+    .dst_alpha_blend_factor(vk::BlendFactor::ZERO) // Optional
+    .alpha_blend_op(vk::BlendOp::ADD);             // Optional
+</code></pre>
+<p>This per-framebuffer struct allows you to configure the first way of color blending. The operations that will be performed are best demonstrated using the following pseudocode:</p>
+<pre><code class="language-rust noplaypen">if blend_enable {
+    final_color.rgb = (src_color_blend_factor * new_color.rgb)
+        &lt;color_blend_op&gt; (dst_color_blend_factor * old_color.rgb);
+    final_color.a = (src_alpha_blend_factor * new_color.a)
+        &lt;alpha_blend_op&gt; (dst_alpha_blend_factor * old_color.a);
+} else {
+    final_color = new_color;
+}
+
+final_color = final_color &amp; color_write_mask;
+</code></pre>
+<p>If <code>blend_enable</code> is set to <code>false</code>, then the new color from the fragment shader is passed through unmodified. Otherwise, the two mixing operations are performed to compute a new color. The resulting color is AND'd with the <code>color_write_mask</code> to determine which channels are actually passed through.</p>
+<p>The most common way to use color blending is to implement alpha blending, where we want the new color to be blended with the old color based on its opacity. The <code>final_color</code> should then be computed as follows:</p>
+<pre><code class="language-c++">final_color.rgb = new_alpha * new_color + (1 - new_alpha) * old_color;
+final_color.a = new_alpha.a;
+</code></pre>
+<p>This can be accomplished with the following parameters:</p>
+<pre><code class="language-rust noplaypen">let attachment = vk::PipelineColorBlendAttachmentState::builder()
+    .color_write_mask(vk::ColorComponentFlags::all())
+    .blend_enable(true)
+    .src_color_blend_factor(vk::BlendFactor::SRC_ALPHA)
+    .dst_color_blend_factor(vk::BlendFactor::ONE_MINUS_SRC_ALPHA)
+    .color_blend_op(vk::BlendOp::ADD)
+    .src_alpha_blend_factor(vk::BlendFactor::ONE)
+    .dst_alpha_blend_factor(vk::BlendFactor::ZERO)
+    .alpha_blend_op(vk::BlendOp::ADD);
+</code></pre>
+<p>You can find all of the possible operations in the <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.BlendFactor.html"><code>vk::BlendFactor</code></a> and <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.BlendOp.html"><code>vk::BlendOp</code></a> enumerations in the specification (or <code>vulkanalia</code>'s documentation).</p>
+<p>The second structure references the array of structures for all of the framebuffers and allows you to set blend constants that you can use as blend factors in the aforementioned calculations.</p>
+<pre><code class="language-rust noplaypen">let attachments = &amp;[attachment];
+let color_blend_state = vk::PipelineColorBlendStateCreateInfo::builder()
+    .logic_op_enable(false)
+    .logic_op(vk::LogicOp::COPY)
+    .attachments(attachments)
+    .blend_constants([0.0, 0.0, 0.0, 0.0]);
+</code></pre>
+<p>If you want to use the second method of blending (bitwise combination), then you should set <code>logic_op_enable</code> to <code>true</code>. The bitwise operation can then be specified in the <code>logic_op</code> field. Note that this will automatically disable the first method, as if you had set <code>blend_enable</code> to <code>false</code> for every attached framebuffer! The <code>color_write_mask</code> will also be used in this mode to determine which channels in the framebuffer will actually be affected. It is also possible to disable both modes, as we've done here, in which case the fragment colors will be written to the framebuffer unmodified.</p>
+<h2><a class="header" href="#dynamic-state" id="dynamic-state">Dynamic state</a></h2>
+<p>A limited amount of the state that we've specified in the previous structs <em>can</em> actually be changed without recreating the pipeline. Examples are the size of the viewport, line width and blend constants. If you want to do that, then you'll have to fill in a <code>vk::PipelineDynamicStateCreateInfo</code> structure like this:</p>
+<pre><code class="language-rust noplaypen">let dynamic_states = &amp;[
+    vk::DynamicState::VIEWPORT,
+    vk::DynamicState::LINE_WIDTH,
+];
+
+let dynamic_state = vk::PipelineDynamicStateCreateInfo::builder()
+    .dynamic_states(dynamic_states);
+</code></pre>
+<p>This will cause the configuration of these values to be ignored and you will be required to specify the data at drawing time. We'll get back to this in a future chapter. This struct can be omitted if you don't have any dynamic state.</p>
+<h2><a class="header" href="#pipeline-layout" id="pipeline-layout">Pipeline layout</a></h2>
+<p>You can use <code>uniform</code> values in shaders, which are globals similar to dynamic state variables that can be changed at drawing time to alter the behavior of your shaders without having to recreate them. They are commonly used to pass the transformation matrix to the vertex shader, or to create texture samplers in the fragment shader.</p>
+<p>These uniform values need to be specified during pipeline creation by creating a <code>vk::PipelineLayout</code> object. Even though we won't be using them until a future chapter, we are still required to create an empty pipeline layout.</p>
+<p>Create an <code>AppData</code> field to hold this object, because we'll refer to it from other functions at a later point in time:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    pipeline_layout: vk::PipelineLayout,
+}
+</code></pre>
+<p>And then create the object in the <code>create_pipeline</code> function:</p>
+<pre><code class="language-rust noplaypen">let layout_info = vk::PipelineLayoutCreateInfo::builder();
+
+data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
+</code></pre>
+<p>The structure also specifies <em>push constants</em>, which are another way of passing dynamic values to shaders that we may get into in a future chapter. The pipeline layout will be referenced throughout the program's lifetime, so it should be destroyed in <code>App::destroy</code>:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn destroy(&amp;mut self) {
+        self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
+        // ...
+    }
+}
+</code></pre>
+<h2><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h2>
+<p>That's it for all of the fixed-function state! It's a lot of work to set all of this up from scratch, but the advantage is that we're now nearly fully aware of everything that is going on in the graphics pipeline! This reduces the chance of running into unexpected behavior because the default state of certain components is not what you expect.</p>
+<p>There is however one more object to create before we can finally create the graphics pipeline and that is a render pass.</p>
 
                     </main>
 

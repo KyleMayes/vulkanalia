@@ -153,7 +153,35 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/08_graphics_pipeline.rs">main.rs</a></p>
+<p>Over the course of the next few chapters we'll be setting up a graphics pipeline that is configured to draw our first triangle. The graphics pipeline is the sequence of operations that take the vertices and textures of your meshes all the way to the pixels in the render targets. A simplified overview is displayed below:</p>
+<p><img src="../images/vulkan_simplified_pipeline.svg" alt="" /></p>
+<p>The <em>input assembler</em> collects the raw vertex data from the buffers you specify and may also use an index buffer to repeat certain elements without having to duplicate the vertex data itself.</p>
+<p>The <em>vertex shader</em> is run for every vertex and generally applies transformations to turn vertex positions from model space to screen space. It also passes per-vertex data down the pipeline.</p>
+<p>The <em>tessellation shaders</em> allow you to subdivide geometry based on certain rules to increase the mesh quality. This is often used to make surfaces like brick walls and staircases look less flat when they are nearby.</p>
+<p>The <em>geometry shader</em> is run on every primitive (triangle, line, point) and can discard it or output more primitives than came in. This is similar to the tessellation shader, but much more flexible. However, it is not used much in today's applications because the performance is not that good on most graphics cards except for Intel's integrated GPUs.</p>
+<p>The <em>rasterization</em> stage discretizes the primitives into <em>fragments</em>. These are the pixel elements that they fill on the framebuffer. Any fragments that fall outside the screen are discarded and the attributes outputted by the vertex shader are interpolated across the fragments, as shown in the figure. Usually the fragments that are behind other primitive fragments are also discarded here because of depth testing.</p>
+<p>The <em>fragment shader</em> is invoked for every fragment that survives and determines which framebuffer(s) the fragments are written to and with which color and depth values. It can do this using the interpolated data from the vertex shader, which can include things like texture coordinates and normals for lighting.</p>
+<p>The <em>color blending</em> stage applies operations to mix different fragments that map to the same pixel in the framebuffer. Fragments can simply overwrite each other, add up or be mixed based upon transparency.</p>
+<p>Stages with a green color are known as <em>fixed-function</em> stages. These stages allow you to tweak their operations using parameters, but the way they work is predefined.</p>
+<p>Stages with an orange color on the other hand are <em>programmable</em>, which means that you can upload your own code to the graphics card to apply exactly the operations you want. This allows you to use fragment shaders, for example, to implement anything from texturing and lighting to ray tracers. These programs run on many GPU cores simultaneously to process many objects, like vertices and fragments in parallel.</p>
+<p>If you've used older APIs like OpenGL and Direct3D before, then you'll be used to being able to change any pipeline settings at will with calls like <code>glBlendFunc</code> and <code>OMSetBlendState</code>. The graphics pipeline in Vulkan is almost completely immutable, so you must recreate the pipeline from scratch if you want to change shaders, bind different framebuffers or change the blend function. The disadvantage is that you'll have to create a number of pipelines that represent all of the different combinations of states you want to use in your rendering operations. However, because all of the operations you'll be doing in the pipeline are known in advance, the driver can optimize for it much better.</p>
+<p>Some of the programmable stages are optional based on what you intend to do. For example, the tessellation and geometry stages can be disabled if you are just drawing simple geometry. If you are only interested in depth values then you can disable the fragment shader stage, which is useful for <a href="https://en.wikipedia.org/wiki/Shadow_mapping">shadow map</a> generation.</p>
+<p>In the next chapter we'll first create the two programmable stages required to put a triangle onto the screen: the vertex shader and fragment shader. The fixed-function configuration like blending mode, viewport, rasterization will be set up in the chapter after that. The final part of setting up the graphics pipeline in Vulkan involves the specification of input and output framebuffers.</p>
+<p>Create a <code>create_pipeline</code> function that is called right after <code>create_swapchain_image_views</code> in <code>App::create</code>. We'll work on this function throughout the following chapters.</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_swapchain_image_views(&amp;device, &amp;mut data)?;
+        create_pipeline(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
 
                     </main>
 

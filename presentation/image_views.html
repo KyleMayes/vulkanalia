@@ -154,8 +154,8 @@
                     <main>
                         <h1><a class="header" href="#image-views" id="image-views">Image views</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/07_image_views.rs">main.rs</a></p>
-<p>To use any <code>vk::Image</code>, including those in the swap chain, in the render pipeline we have to create a <code>vk::ImageView</code> object. An image view is quite literally a view into an image. It describes how to access the image and which part of the image to access, for example if it should be treated as a 2D texture depth texture without any mipmapping levels.</p>
-<p>In this chapter we'll write a <code>create_image_views</code> function that creates a basic image view for every image in the swap chain so that we can use them as color targets later on.</p>
+<p>To use any <code>vk::Image</code>, including those in the swapchain, in the render pipeline we have to create a <code>vk::ImageView</code> object. An image view is quite literally a view into an image. It describes how to access the image and which part of the image to access, for example if it should be treated as a 2D texture depth texture without any mipmapping levels.</p>
+<p>In this chapter we'll write a <code>create_image_views</code> function that creates a basic image view for every image in the swapchain so that we can use them as color targets later on.</p>
 <p>First add an <code>AppData</code> field to store the image views in:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
@@ -163,7 +163,7 @@
 }
 
 </code></pre>
-<p>Create the <code>create_image_views</code> function and call it right after swap chain creation in <code>App::create</code>.</p>
+<p>Create the <code>create_image_views</code> function and call it right after swapchain creation in <code>App::create</code>.</p>
 <pre><code class="language-rust noplaypen">impl App {
     fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
@@ -176,7 +176,7 @@ fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&g
     Ok(())
 }
 </code></pre>
-<p>What we next need to do is iterate over the swap chain images to create an image view for each:</p>
+<p>What we next need to do is iterate over the swapchain images to create an image view for each:</p>
 <pre><code class="language-rust noplaypen">fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     data.swapchain_image_views = data
         .swapchain_images
@@ -204,7 +204,7 @@ fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&g
     .base_array_layer(0)
     .layer_count(1);
 </code></pre>
-<p>If you were working on a stereographic 3D application, then you would create a swap chain with multiple layers. You could then create multiple image views for each image representing the views for the left and right eyes by accessing different layers.</p>
+<p>If you were working on a stereographic 3D application, then you would create a swapchain with multiple layers. You could then create multiple image views for each image representing the views for the left and right eyes by accessing different layers.</p>
 <p>We can now create a <code>vk::ImageViewCreateInfo</code> struct which provides the parameters for image view creation.</p>
 <pre><code class="language-rust noplaypen">let info = vk::ImageViewCreateInfo::builder()
     .image(*i)
