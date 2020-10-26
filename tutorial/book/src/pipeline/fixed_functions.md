@@ -53,7 +53,7 @@ let viewport = vk::Viewport::builder()
     .max_depth(1.0);
 ```
 
-Remember that the size of the swap chain and its images may differ from the `WIDTH` and `HEIGHT` of the window. The swap chain images will be used as framebuffers later on, so we should stick to their size.
+Remember that the size of the swapchain and its images may differ from the `WIDTH` and `HEIGHT` of the window. The swapchain images will be used as framebuffers later on, so we should stick to their size.
 
 The `min_depth` and `max_depth` values specify the range of depth values to use for the framebuffer. These values must be within the `[0.0, 1.0]` range, but `min_depth` may be higher than `max_depth`. If you aren't doing anything special, then you should stick to the standard values of `0.0` and `1.0`.
 

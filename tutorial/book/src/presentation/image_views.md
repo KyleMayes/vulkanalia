@@ -2,9 +2,9 @@
 
 **Code:** [main.rs](https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/07_image_views.rs)
 
-To use any `vk::Image`, including those in the swap chain, in the render pipeline we have to create a `vk::ImageView` object. An image view is quite literally a view into an image. It describes how to access the image and which part of the image to access, for example if it should be treated as a 2D texture depth texture without any mipmapping levels.
+To use any `vk::Image`, including those in the swapchain, in the render pipeline we have to create a `vk::ImageView` object. An image view is quite literally a view into an image. It describes how to access the image and which part of the image to access, for example if it should be treated as a 2D texture depth texture without any mipmapping levels.
 
-In this chapter we'll write a `create_image_views` function that creates a basic image view for every image in the swap chain so that we can use them as color targets later on.
+In this chapter we'll write a `create_image_views` function that creates a basic image view for every image in the swapchain so that we can use them as color targets later on.
 
 First add an `AppData` field to store the image views in:
 
@@ -16,7 +16,7 @@ struct AppData {
 
 ```
 
-Create the `create_image_views` function and call it right after swap chain creation in `App::create`.
+Create the `create_image_views` function and call it right after swapchain creation in `App::create`.
 
 ```rust,noplaypen
 impl App {
@@ -32,7 +32,7 @@ fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<(
 }
 ```
 
-What we next need to do is iterate over the swap chain images to create an image view for each:
+What we next need to do is iterate over the swapchain images to create an image view for each:
 
 ```rust,noplaypen
 fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<()> {
@@ -69,7 +69,7 @@ let subresource_range = vk::ImageSubresourceRange::builder()
     .layer_count(1);
 ```
 
-If you were working on a stereographic 3D application, then you would create a swap chain with multiple layers. You could then create multiple image views for each image representing the views for the left and right eyes by accessing different layers.
+If you were working on a stereographic 3D application, then you would create a swapchain with multiple layers. You could then create multiple image views for each image representing the views for the left and right eyes by accessing different layers.
 
 We can now create a `vk::ImageViewCreateInfo` struct which provides the parameters for image view creation.
 
