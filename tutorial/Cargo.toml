@@ -85,3 +85,8 @@ path = "src/10_fixed_functions.rs"
 
 name = "11_render_passes"
 path = "src/11_render_passes.rs"
+
+[[bin]]
+
+name = "12_graphics_pipeline_complete"
+path = "src/12_graphics_pipeline_complete.rs"
