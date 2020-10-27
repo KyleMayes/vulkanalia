@@ -117,7 +117,7 @@ The `line_width` member is straightforward, it describes the thickness of lines 
 
 ```rust,noplaypen
     .cull_mode(vk::CullModeFlags::BACK)
-    .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
+    .front_face(vk::FrontFace::CLOCKWISE)
 ```
 
 The `cull_mode` variable determines the type of face culling to use. You can disable culling, cull the front faces, cull the back faces or both. The `front_face` variable specifies the vertex order for faces to be considered front-facing and can be clockwise or counterclockwise.
