@@ -90,3 +90,8 @@ path = "src/11_render_passes.rs"
 
 name = "12_graphics_pipeline_complete"
 path = "src/12_graphics_pipeline_complete.rs"
+
+[[bin]]
+
+name = "13_framebuffers"
+path = "src/13_framebuffers.rs"
