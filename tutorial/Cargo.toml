@@ -95,3 +95,8 @@ path = "src/12_graphics_pipeline_complete.rs"
 
 name = "13_framebuffers"
 path = "src/13_framebuffers.rs"
+
+[[bin]]
+
+name = "14_command_buffers"
+path = "src/14_command_buffers.rs"
