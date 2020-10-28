@@ -16,6 +16,8 @@ use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};
 use winit::window::{Window, WindowBuilder};
 
+use vulkanalia::vk::ExtDebugUtilsExtension;
+
 /// Whether the validation layers should be enabled.
 const VALIDATION_ENABLED: bool = cfg!(debug_assertions);
 /// The name of the validation layers.
@@ -67,12 +69,10 @@ impl App {
     fn create(window: &Window) -> Result<Self> {
         let loader = LibloadingLoader::new(LIBRARY)?;
         let entry = Entry::new(loader).map_err(|b| anyhow!("{}", b))?;
-        let instance = create_instance(&entry)?;
-
         let mut data = AppData::default();
+        let instance = create_instance(&entry, &mut data)?;
         pick_physical_device(&instance, &mut data)?;
         let device = create_logical_device(&instance, &mut data)?;
-
         Ok(Self {
             entry,
             instance,
@@ -87,8 +87,14 @@ impl App {
     }
 
     /// Destroys our Vulkan app.
+    #[rustfmt::skip]
     fn destroy(&mut self) {
         self.device.destroy_device(None);
+
+        if VALIDATION_ENABLED {
+            self.instance.destroy_debug_utils_messenger_ext(self.data.messenger, None);
+        }
+
         self.instance.destroy_instance(None);
     }
 }
@@ -96,6 +102,8 @@ impl App {
 /// The Vulkan handles and associated properties used by our Vulkan app.
 #[derive(Clone, Debug, Default)]
 struct AppData {
+    // Debug
+    messenger: vk::DebugUtilsMessengerEXT,
     // Physical Device / Logical Device
     physical_device: vk::PhysicalDevice,
     graphics_queue: vk::Queue,
@@ -105,7 +113,7 @@ struct AppData {
 // Instance
 //================================================
 
-fn create_instance(entry: &Entry) -> Result<Instance> {
+fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
     // Application Info
 
     let application_info = vk::ApplicationInfo::builder()
@@ -160,7 +168,15 @@ fn create_instance(entry: &Entry) -> Result<Instance> {
         info = info.push_next(&mut debug_info);
     }
 
-    Ok(entry.create_instance(&info, None)?)
+    let instance = entry.create_instance(&info, None)?;
+
+    // Messenger
+
+    if VALIDATION_ENABLED {
+        data.messenger = instance.create_debug_utils_messenger_ext(&debug_info, None)?;
+    }
+
+    Ok(instance)
 }
 
 extern "system" fn debug_callback(

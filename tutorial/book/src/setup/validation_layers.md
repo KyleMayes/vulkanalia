@@ -45,9 +45,11 @@ use std::ffi::CStr;
 use std::os::raw::c_void;
 
 use log::*;
+
+use vulkanalia::vk::ExtDebugUtilsExtension;
 ```
 
-`HashSet` will be used for storing and querying supported layers and the other imports will be used in the function we will be writing to log messages from the validation layer.
+`HashSet` will be used for storing and querying supported layers and the other imports will be used in the function we will be writing to log messages from the validation layer with the exception of `vk::ExtDebugUtilsExtension` which provides the commands for managing debugging functionality.
 
 ## Using validation layers
 
@@ -166,13 +168,70 @@ Finally, the last parameter, here ignored as `_`, contains a pointer that was sp
 
 The callback returns a (Vulkan) boolean that indicates if the Vulkan call that triggered the validation layer message should be aborted. If the callback returns true, then the call is aborted with the `vk::Result::ERROR_VALIDATION_FAILED_EXT` error. This is normally only used to test the validation layers themselves, so you should always return `vk::FALSE`.
 
-All that remains now is telling Vulkan about the callback function. We'll accomplish this by *extending* the `vk::InstanceCreateInfo` struct we used to create the Vulkan instance in the `create_instance` function with additional instance creation information.
+All that remains now is telling Vulkan about the callback function. Perhaps somewhat surprisingly, even the debug callback in Vulkan is managed with a handle that needs to be explicitly created and destroyed. Such a callback is part of a debug messenger and you can have as many of them as you want. Add a field to the `AppData` struct:
 
-## Adding the debug callback
+```rust,noplaypen
+struct AppData {
+    messenger: vk::DebugUtilsMessengerEXT,
+}
+```
+
+Now modify the end of the `create_instance` function to look like this:
+
+```rust,noplaypen
+fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
+    // ...
+
+    let instance = entry.create_instance(&info, None)?;
+
+    if VALIDATION_ENABLED {
+        let debug_info = vk::DebugUtilsMessengerCreateInfoEXT::builder()
+            .message_severity(vk::DebugUtilsMessageSeverityFlagsEXT::all())
+            .message_type(vk::DebugUtilsMessageTypeFlagsEXT::all())
+            .user_callback(Some(debug_callback));
+
+        data.messenger = instance.create_debug_utils_messenger_ext(&debug_info, None)?;
+    }
+
+    Ok(instance)
+}
+```
+
+We have first extracted our Vulkan instance out of the return expression so we can use it to add our debug callback.
+
+Then we construct a `vk::DebugUtilsMessengerCreateInfoEXT` struct which provides information about our debug callback and how it will be called.
+
+The `message_severity` field allows you to specify all the types of severities you would like your callback to be called for. I've requested that messages of all severity be included. This would normally produce a lot of verbose general debug info but we can filter that out using a log level when we are not interested in it.
+
+Similarly the `message_type` field lets you filter which types of messages your callback is notified about. I've simply enabled all types here. You can always disable some if they're not useful to you.
+
+Finally, the `user_callback` field specifies the callback function. You can optionally pass a mutable reference to the `user_data` field which will be passed along to the callback function via the `data` parameter. You could use this to pass a pointer to the `AppData` struct, for example.
+
+Lastly we call [`vk::ExtDebugUtilsExtension::create_debug_utils_messenger_ext`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.ExtDebugUtilsExtension.html#method.create_debug_utils_messenger_ext) to register our debug callback with the Vulkan instance.
+
+The `vk::DebugUtilsMessengerEXT` object we created needs to cleaned up before our app exits. We'll do this in `App::destroy` before we destroy the instance:
+
+```rust,noplaypen
+impl App {
+    fn destroy(&mut self) {
+        if VALIDATION_ENABLED {
+            self.instance.destroy_debug_utils_messenger_ext(self.data.messenger, None);
+        }
+
+        self.instance.destroy_instance(None);
+    }
+}
+```
+
+## Debugging instance creation and destruction
+
+Although we've now added debugging with validation layers to the program we're not covering everything quite yet. The `instance.create_debug_utils_messenger_ext(...)` call requires a valid instance to have been created and `instance.destroy_debug_utils_messenger_ext(...)` must be called before the instance is destroyed. This currently leaves us unable to debug any issues in the `entry.create_instance(...)` and `entry.destroy_instance(...)` calls.
+
+However, if you closely read the [extension documentation](https://github.com/KhronosGroup/Vulkan-Docs/blob/77d9f42e075e6a483a37351c14c5e9e3122f9113/appendices/VK_EXT_debug_utils.txt#L84-L91), you'll see that there is a way to create a separate debug utils messenger specifically for those two function calls. It requires you to simply pass a pointer to a `vk::DebugUtilsMessengerCreateInfoEXT` struct in the `next` extension field of `vk::InstanceCreateInfo`. Before we do this, let's first discuss how extending structs works in Vulkan.
 
 The `s_type` field that is present on many Vulkan structs was briefly mentioned in the [Builders section](../overview.html#builders) of the Overview chapter. It was said that this field must be set to the [`vk::StructureType`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.StructureType.html) enum value indicating the type of the struct (e.g., `vk::StructureType::APPLICATION_INFO` for a `vk::ApplicationInfo` struct).
 
-You may have wondered what the purpose of this field is; doesn't Vulkan already know the type of structs passed to its commands? The purpose of this field is wrapped up with the purpose of the `next` field that always accompanies the `s_type` field in Vulkan structs: the ability to *extend* a Vulkan struct with other Vulkan structs.
+You may have wondered what the purpose of this field is: doesn't Vulkan already know the type of structs passed to its commands? The purpose of this field is wrapped up with the purpose of the `next` field that always accompanies the `s_type` field in Vulkan structs: the ability to *extend* a Vulkan struct with other Vulkan structs.
 
 The `next` field in a Vulkan struct may be used to specify a [structure pointer chain](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fundamentals-validusage-pNext). `next` can be either be null or a pointer to a Vulkan struct that is permitted by Vulkan to extend the struct. Each struct in this chain of structs is used to provide additional information to the Vulkan command the root structure is passed to. This feature of Vulkan allows for extending the functionality of Vulkan commands without breaking backwards compabilitity.
 
@@ -180,7 +239,7 @@ When you pass such a chain of structs to a Vulkan command, it must iterate throu
 
 The builder structs provided by `vulkanalia` allow for easily building these pointer chains in a type-safe manner. For example, take a look at the [`vk::InstanceCreateInfoBuilder`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.InstanceCreateInfoBuilder.html) builder struct, specifically the `push_next` method. This method allows adding any Vulkan struct for which the [`vk::ExtendsInstanceCreateInfo`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.ExtendsInstanceCreateInfo.html) trait is implemented for to the pointer chain for a `vk::InstanceCreateInfo`.
 
-One such struct is [`vk::DebugUtilsMessengerCreateInfoEXT`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.DebugUtilsMessengerCreateInfoEXT.html), which we will now use to extend our `vk::InstanceCreateInfo` struct to set up our debug callback. To do this we'll continue to modify our `create_instance` function, this time making the `info` variable mutable and then building and pushing a `vk::DebugUtilsMessengerCreateInfoEXT` struct onto its pointer chain:
+One such struct is [`vk::DebugUtilsMessengerCreateInfoEXT`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.DebugUtilsMessengerCreateInfoEXT.html), which we will now use to extend our `vk::InstanceCreateInfo` struct to set up our debug callback. To do this we'll continue to modify our `create_instance` function. This time we'll make the `info` struct mutable so we can modify its pointer chain before moving the `debug_info` struct, now also mutable, below it so we can push it onto `info`'s pointer chain:
 
 ```rust,noplaypen
 let mut info = vk::InstanceCreateInfo::builder()
@@ -208,17 +267,8 @@ If everything is working you shouldn't see any warning or error messages. Going 
 
 ## Configuration
 
-There are a lot more settings for the behavior of validation layers than just
-the flags specified in the `vk::DebugUtilsMessengerCreateInfoEXT` struct. Browse
-to the Vulkan SDK and go to the `Config` directory. There you will find a
-`vk_layer_settings.txt` file that explains how to configure the layers.
+There are a lot more settings for the behavior of validation layers than just the flags specified in the `vk::DebugUtilsMessengerCreateInfoEXT` struct. Browse to the Vulkan SDK and go to the `Config` directory. There you will find a `vk_layer_settings.txt` file that explains how to configure the layers.
 
-To configure the layer settings for your own application, copy the file to the
-working directory of your project's executable and follow the instructions to
-set the desired behavior. However, for the remainder of this tutorial I'll
-assume that you're using the default settings.
+To configure the layer settings for your own application, copy the file to the working directory of your project's executable and follow the instructions to set the desired behavior. However, for the remainder of this tutorial I'll assume that you're using the default settings.
 
-Throughout this tutorial I'll be making a couple of intentional mistakes to show
-you how helpful the validation layers are with catching them and to teach you
-how important it is to know exactly what you're doing with Vulkan. Now it's time
-to look at Vulkan devices in the system.
+Throughout this tutorial I'll be making a couple of intentional mistakes to show you how helpful the validation layers are with catching them and to teach you how important it is to know exactly what you're doing with Vulkan. Now it's time to look at Vulkan devices in the system.

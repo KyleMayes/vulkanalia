@@ -56,7 +56,6 @@ impl App {
         let loader = LibloadingLoader::new(LIBRARY)?;
         let entry = Entry::new(loader).map_err(|b| anyhow!("{}", b))?;
         let instance = create_instance(&entry)?;
-
         Ok(Self { entry, instance })
     }
 

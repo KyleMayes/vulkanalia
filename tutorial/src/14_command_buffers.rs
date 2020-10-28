@@ -16,6 +16,7 @@ use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};
 use winit::window::{Window, WindowBuilder};
 
+use vulkanalia::vk::ExtDebugUtilsExtension;
 use vulkanalia::vk::KhrSurfaceExtension;
 use vulkanalia::vk::KhrSwapchainExtension;
 
@@ -73,9 +74,8 @@ impl App {
     fn create(window: &Window) -> Result<Self> {
         let loader = LibloadingLoader::new(LIBRARY)?;
         let entry = Entry::new(loader).map_err(|b| anyhow!("{}", b))?;
-        let instance = create_instance(&entry)?;
-
         let mut data = AppData::default();
+        let instance = create_instance(&entry, &mut data)?;
         data.surface = vk_winit::create_surface(&instance, window)?;
         pick_physical_device(&instance, &mut data)?;
         let device = create_logical_device(&instance, &mut data)?;
@@ -86,7 +86,6 @@ impl App {
         create_framebuffers(&device, &mut data)?;
         create_command_pool(&instance, &device, &mut data)?;
         create_command_buffers(&device, &mut data)?;
-
         Ok(Self {
             entry,
             instance,
@@ -112,6 +111,11 @@ impl App {
         self.device.destroy_swapchain_khr(self.data.swapchain, None);
         self.device.destroy_device(None);
         self.instance.destroy_surface_khr(self.data.surface, None);
+
+        if VALIDATION_ENABLED {
+            self.instance.destroy_debug_utils_messenger_ext(self.data.messenger, None);
+        }
+
         self.instance.destroy_instance(None);
     }
 }
@@ -119,6 +123,8 @@ impl App {
 /// The Vulkan handles and associated properties used by our Vulkan app.
 #[derive(Clone, Debug, Default)]
 struct AppData {
+    // Debug
+    messenger: vk::DebugUtilsMessengerEXT,
     // Surface
     surface: vk::SurfaceKHR,
     // Physical Device / Logical Device
@@ -147,7 +153,7 @@ struct AppData {
 // Instance
 //================================================
 
-fn create_instance(entry: &Entry) -> Result<Instance> {
+fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
     // Application Info
 
     let application_info = vk::ApplicationInfo::builder()
@@ -202,7 +208,15 @@ fn create_instance(entry: &Entry) -> Result<Instance> {
         info = info.push_next(&mut debug_info);
     }
 
-    Ok(entry.create_instance(&info, None)?)
+    let instance = entry.create_instance(&info, None)?;
+
+    // Messenger
+
+    if VALIDATION_ENABLED {
+        data.messenger = instance.create_debug_utils_messenger_ext(&debug_info, None)?;
+    }
+
+    Ok(instance)
 }
 
 extern "system" fn debug_callback(
