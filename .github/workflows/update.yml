@@ -29,5 +29,4 @@ jobs:
             --username=KyleMayes \
             --token=${{ secrets.PERSONAL_ACCESS_TOKEN }} \
             update \
-            --repo=${{ github.repository }} \
-            --publish"
+            --repo=${{ github.repository }}"

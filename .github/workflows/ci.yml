@@ -101,9 +101,4 @@ jobs:
       # Check
       - name: Check Bindings
         working-directory: ./generator
-        run: |
-          ./gradlew run --args="\
-            --directory=.. \
-            --username=KyleMayes \
-            --token=${{ secrets.PERSONAL_ACCESS_TOKEN }} \
-            check"
+        run: ./gradlew run --args="--directory=.. check"

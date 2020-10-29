@@ -31,19 +31,26 @@ fun main(args: Array<String>) = Generator()
 
 class Generator : CliktCommand(help = "Manages generated Vulkan bindings") {
     private val directory by option(help = "Vulkanalia directory").required()
-    private val username by option(help = "GitHub username").required()
-    private val token by option(help = "GitHub personal access token").required()
+    private val username by option(help = "GitHub username")
+    private val token by option(help = "GitHub personal access token")
 
     private val context by findOrSetObject {
         val directory = Path.of(directory).toAbsolutePath().normalize()
-        val github = GitHub.connect(username, token)
-        directory to github
+        if (username != null && token != null) {
+            Triple(directory, GitHub.connect(username, token), false)
+        } else {
+            Triple(directory, GitHub.connectAnonymously(), true)
+        }
     }
 
     override fun run() {
-        val (directory, github) = context
+        val (directory, github, anonymous) = context
         log.info { "Working in $directory" }
-        log.info { "Acting as ${github.myself.login} (${github.myself.email})" }
+        if (anonymous) {
+            log.info { "Acting as an anonymous GitHub user" }
+        } else {
+            log.info { "Acting as ${github.myself.login} (${github.myself.email})" }
+        }
     }
 }
 
@@ -52,10 +59,10 @@ class Generator : CliktCommand(help = "Manages generated Vulkan bindings") {
 // ===============================================
 
 class Check : CliktCommand(help = "Checks generated Vulkan bindings") {
-    private val context by requireObject<Pair<Path, GitHub>>()
+    private val context by requireObject<Triple<Path, GitHub, Boolean>>()
 
     override fun run() {
-        val directory = context.first
+        val (directory, _, _) = context
 
         // Parse
 
@@ -88,14 +95,13 @@ class Check : CliktCommand(help = "Checks generated Vulkan bindings") {
 // ===============================================
 
 class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
-    private val context by requireObject<Pair<Path, GitHub>>()
+    private val context by requireObject<Triple<Path, GitHub, Boolean>>()
 
-    private val repo by option(help = "GitHub repository").required()
     private val force by option(help = "Force update of generated Vulkan bindings").flag()
-    private val publish by option(help = "Publish changes to GitHub").flag()
+    private val repo by option(help = "GitHub repository to publish changes to")
 
     override fun run() {
-        val (directory, github) = context
+        val (directory, github, anonymous) = context
 
         // Parse
 
@@ -138,11 +144,16 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
         // Publish
 
-        if (!publish) {
+        if (repo == null) {
             return
         }
 
         log.info { "Publishing changes ($repo)..." }
+
+        if (anonymous) {
+            log.error { "Cannot publish changes while acting as an anonymous GitHub user." }
+            exitProcess(1)
+        }
 
         val repo = github.getRepository(repo)
         val head = "vk-$latestCommit"
