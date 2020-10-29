@@ -19,6 +19,8 @@ import com.kylemayes.generator.registry.isStringPointer
 /** Generates Rust structs to build Vulkan structs. */
 fun Registry.generateBuilders() =
     """
+#![allow(non_camel_case_types)]
+
 use std::fmt;
 use std::marker::PhantomData;
 use std::ops;
@@ -237,6 +239,20 @@ where
 
 /** Generates a Rust builder method for a non-array value. */
 private fun Registry.generateOtherMethod(member: Member): String {
+    // Void pointer.
+    if (member.type.getPointee()?.getIdentifier()?.value == "void") {
+        val pointer = member.type as PointerType
+        val ref = "T".generateRef(pointer.const, lifetime = "b")
+        val ptr = "T".generatePtr(pointer.const)
+        return """
+#[inline]
+pub fn ${member.name}<T>(mut self, ${member.name}: $ref) -> Self {
+    self.value.${member.name} = (${member.name} as $ptr).cast();
+    self
+}
+        """
+    }
+
     val (type, cast) = when {
         // Boolean.
         member.type.getIdentifier()?.value == "Bool32" -> Pair("bool", { m: String -> "$m as Bool32" })
@@ -250,8 +266,6 @@ private fun Registry.generateOtherMethod(member: Member): String {
             val cast = if (pointer.const) { ".as_ref()" } else { ".as_mut()" }
             Pair(type, { m: String -> "$m$cast" })
         }
-        // Pointer to opaque.
-        member.type.isOpaquePointer() -> Pair(member.type.generate(), { m: String -> m })
         // Pointer to string.
         member.type.isStringPointer() -> Pair("&'b [u8]", { m: String -> "$m.as_ptr().cast()" })
         // Pointer to pointer.
@@ -266,8 +280,8 @@ private fun Registry.generateOtherMethod(member: Member): String {
                 Pair("&'b [&'b $item]", { m: String -> "$m.as_ptr().cast()" })
             }
         }
-        // Pointer to other type.
-        member.type is PointerType -> {
+        // Pointer to other type (non-opaque).
+        member.type is PointerType && !member.type.isOpaquePointer() -> {
             val item = member.type.pointee.generate()
             val type = item.generateRef(member.type.const, lifetime = "b")
             val cast = item.generatePtr(member.type.const)
