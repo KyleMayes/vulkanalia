@@ -10,7 +10,7 @@
 use std::fmt;
 use std::marker::PhantomData;
 use std::ops;
-use std::os::raw::{c_char, c_int, c_void};
+use std::os::raw::{c_char, c_int};
 
 use super::*;
 
@@ -6615,9 +6615,9 @@ impl<'b> DebugMarkerObjectTagInfoEXTBuilder<'b> {
     }
 
     #[inline]
-    pub fn tag(mut self, tag: &'b [c_void]) -> Self {
+    pub fn tag(mut self, tag: &'b [u8]) -> Self {
         self.value.tag_size = tag.len() as usize;
-        self.value.tag = tag.as_ptr();
+        self.value.tag = tag.as_ptr().cast();
         self
     }
 
@@ -7090,9 +7090,9 @@ impl<'b> DebugUtilsObjectTagInfoEXTBuilder<'b> {
     }
 
     #[inline]
-    pub fn tag(mut self, tag: &'b [c_void]) -> Self {
+    pub fn tag(mut self, tag: &'b [u8]) -> Self {
         self.value.tag_size = tag.len() as usize;
-        self.value.tag = tag.as_ptr();
+        self.value.tag = tag.as_ptr().cast();
         self
     }
 
@@ -33393,9 +33393,9 @@ impl<'b> PipelineCacheCreateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn initial_data(mut self, initial_data: &'b [c_void]) -> Self {
+    pub fn initial_data(mut self, initial_data: &'b [u8]) -> Self {
         self.value.initial_data_size = initial_data.len() as usize;
-        self.value.initial_data = initial_data.as_ptr();
+        self.value.initial_data = initial_data.as_ptr().cast();
         self
     }
 
@@ -34486,9 +34486,9 @@ impl<'b> PipelineExecutableInternalRepresentationKHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn data(mut self, data: &'b mut [c_void]) -> Self {
+    pub fn data(mut self, data: &'b mut [u8]) -> Self {
         self.value.data_size = data.len() as usize;
-        self.value.data = data.as_mut_ptr();
+        self.value.data = data.as_mut_ptr().cast();
         self
     }
 
@@ -41408,9 +41408,9 @@ impl<'b> SpecializationInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn data(mut self, data: &'b [c_void]) -> Self {
+    pub fn data(mut self, data: &'b [u8]) -> Self {
         self.value.data_size = data.len() as usize;
-        self.value.data = data.as_ptr();
+        self.value.data = data.as_ptr().cast();
         self
     }
 
@@ -43923,9 +43923,9 @@ impl<'b> ValidationCacheCreateInfoEXTBuilder<'b> {
     }
 
     #[inline]
-    pub fn initial_data(mut self, initial_data: &'b [c_void]) -> Self {
+    pub fn initial_data(mut self, initial_data: &'b [u8]) -> Self {
         self.value.initial_data_size = initial_data.len() as usize;
-        self.value.initial_data = initial_data.as_ptr();
+        self.value.initial_data = initial_data.as_ptr().cast();
         self
     }
 
@@ -45119,9 +45119,9 @@ pub struct WriteDescriptorSetInlineUniformBlockEXTBuilder<'b> {
 
 impl<'b> WriteDescriptorSetInlineUniformBlockEXTBuilder<'b> {
     #[inline]
-    pub fn data(mut self, data: &'b [c_void]) -> Self {
+    pub fn data(mut self, data: &'b [u8]) -> Self {
         self.value.data_size = data.len() as u32;
-        self.value.data = data.as_ptr();
+        self.value.data = data.as_ptr().cast();
         self
     }
 

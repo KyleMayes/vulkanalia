@@ -24,7 +24,7 @@ fun Registry.generateBuilders() =
 use std::fmt;
 use std::marker::PhantomData;
 use std::ops;
-use std::os::raw::{c_char, c_int, c_void};
+use std::os::raw::{c_char, c_int};
 
 use super::*;
 
@@ -196,11 +196,12 @@ private fun Registry.generateMethods(struct: Structure): String {
 /** Generates a Rust builder method for an array value. */
 private fun Registry.generateArrayMethod(member: Member, length: Pair<String, String>? = null): String {
     val pointer = member.type as PointerType
+    val identifier = pointer.pointee.getIdentifier()
 
-    val (item, cast) = if (structs.containsKey(pointer.pointee.getIdentifier())) {
-        "impl Cast<Target = ${pointer.pointee.generate()}>" to ".cast()"
-    } else {
-        pointer.pointee.generate() to ""
+    val (item, cast) = when {
+        structs.containsKey(identifier) -> "impl Cast<Target = ${pointer.pointee.generate()}>" to ".cast()"
+        identifier?.value == "void" -> "u8" to ".cast()"
+        else -> pointer.pointee.generate() to ""
     }
 
     val type = "[$item]".generateRef(pointer.const, lifetime = "b")
