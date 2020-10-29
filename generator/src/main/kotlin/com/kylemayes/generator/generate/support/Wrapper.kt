@@ -176,7 +176,7 @@ fun Registry.generateCommandWrapper(command: Command): String {
         } else if (current.type.getIdentifier()?.value == "Bool32") {
             // Value parameter (boolean).
             params.add("${current.name}: bool")
-            addArgument("if ${current.name} { TRUE } else { FALSE }")
+            addArgument("${current.name} as Bool32")
         } else {
             // Value parameter (non-boolean).
             params.add("${current.name}: ${current.type.generate()}")

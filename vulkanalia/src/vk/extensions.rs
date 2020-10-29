@@ -75,7 +75,7 @@ pub trait AmdDisplayNativeHdrExtension: DeviceV1_0 {
         let __result = (self.commands().set_local_dimming_amd)(
             self.handle(),
             swap_chain,
-            if local_dimming_enable { TRUE } else { FALSE },
+            local_dimming_enable as Bool32,
         );
     }
 }
@@ -1027,11 +1027,7 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
     ) {
         let __result = (self.commands().cmd_set_depth_bounds_test_enable_ext)(
             command_buffer,
-            if depth_bounds_test_enable {
-                TRUE
-            } else {
-                FALSE
-            },
+            depth_bounds_test_enable as Bool32,
         );
     }
 
@@ -1055,7 +1051,7 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
     ) {
         let __result = (self.commands().cmd_set_depth_test_enable_ext)(
             command_buffer,
-            if depth_test_enable { TRUE } else { FALSE },
+            depth_test_enable as Bool32,
         );
     }
 
@@ -1068,7 +1064,7 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
     ) {
         let __result = (self.commands().cmd_set_depth_write_enable_ext)(
             command_buffer,
-            if depth_write_enable { TRUE } else { FALSE },
+            depth_write_enable as Bool32,
         );
     }
 
@@ -1133,7 +1129,7 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
     ) {
         let __result = (self.commands().cmd_set_stencil_test_enable_ext)(
             command_buffer,
-            if stencil_test_enable { TRUE } else { FALSE },
+            stencil_test_enable as Bool32,
         );
     }
 
@@ -5813,7 +5809,7 @@ pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
     ) {
         let __result = (self.commands().cmd_execute_generated_commands_nv)(
             command_buffer,
-            if is_preprocessed { TRUE } else { FALSE },
+            is_preprocessed as Bool32,
             generated_commands_info,
         );
     }
@@ -6100,7 +6096,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
             info,
             instance_data,
             instance_offset,
-            if update { TRUE } else { FALSE },
+            update as Bool32,
             dst,
             src,
             scratch,

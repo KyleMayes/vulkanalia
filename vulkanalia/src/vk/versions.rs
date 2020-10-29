@@ -2456,7 +2456,7 @@ pub trait DeviceV1_0 {
             self.handle(),
             fences.len() as u32,
             fences.as_ptr(),
-            if wait_all { TRUE } else { FALSE },
+            wait_all as Bool32,
             timeout,
         );
 
