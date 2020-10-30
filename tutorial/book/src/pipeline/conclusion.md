@@ -64,7 +64,7 @@ And finally create the graphics pipeline:
 
 ```rust,noplaypen
 data.pipeline = device.create_graphics_pipelines(
-    vk::PipelineCache::null(), &[info], None)?;
+    vk::PipelineCache::null(), &[info], None)?.0;
 ```
 
 The [`vk::DeviceV1_0::create_graphics_pipeline`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.create_graphics_pipelines) function actually has more parameters than the usual object creation functions in Vulkan. It is designed to take multiple `vk::GraphicsPipelineCreateInfo` objects and create multiple `vk::Pipeline` objects in a single call.

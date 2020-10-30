@@ -13,6 +13,7 @@ import com.kylemayes.generator.generate.file.generateExtensions
 import com.kylemayes.generator.generate.file.generateFunctions
 import com.kylemayes.generator.generate.file.generateHandles
 import com.kylemayes.generator.generate.file.generateMacros
+import com.kylemayes.generator.generate.file.generateResultEnums
 import com.kylemayes.generator.generate.file.generateStructs
 import com.kylemayes.generator.generate.file.generateTypedefs
 import com.kylemayes.generator.generate.file.generateUnions
@@ -40,6 +41,7 @@ fun generateRustFiles(registry: Registry) = listOf(
     generateRustFile("vulkanalia-sys", "unions.rs", registry.generateUnions()),
     generateRustFile("vulkanalia", "vk/builders.rs", registry.generateBuilders()),
     generateRustFile("vulkanalia", "vk/commands.rs", registry.generateCommandStructs()),
+    generateRustFile("vulkanalia", "vk/enums.rs", registry.generateResultEnums()),
     generateRustFile("vulkanalia", "vk/extensions.rs", registry.generateExtensionTraits()),
     generateRustFile("vulkanalia", "vk/versions.rs", registry.generateVersionTraits()),
 )

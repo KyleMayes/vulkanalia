@@ -606,7 +606,9 @@ fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
         .render_pass(data.render_pass)
         .subpass(0);
 
-    data.pipeline = device.create_graphics_pipelines(vk::PipelineCache::null(), &[info], None)?;
+    data.pipeline = device
+        .create_graphics_pipelines(vk::PipelineCache::null(), &[info], None)?
+        .0;
 
     // Cleanup
 

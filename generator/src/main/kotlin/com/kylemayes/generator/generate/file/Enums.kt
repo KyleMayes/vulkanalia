@@ -7,6 +7,7 @@ import com.kylemayes.generator.generate.support.generateManualUrl
 import com.kylemayes.generator.registry.Enum
 import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.Variant
+import com.kylemayes.generator.registry.intern
 
 /** Generates Rust structs for Vulkan enums. */
 fun Registry.generateEnums() =
@@ -18,11 +19,53 @@ ${enums.values.sortedBy { it.name }.joinToString("\n") { generateEnum(it) }}
 ${generateAliases(enums.keys)}
     """
 
+/** Generates Rust structs for success result and error result enums. */
+fun Registry.generateResultEnums() =
+    """
+use std::error;
+use std::fmt;
+
+use super::Result;
+
+${generateResultEnum("SuccessCode", "Result codes that indicate successes.") { it.value >= 0 }}
+${generateResultEnum("ErrorCode", "Result codes that indicate errors.") { it.value < 0 }}
+    """
+
+/** Generates a struct for a success enum for a Vulkan command with non-`SUCCESS` success codes. */
+private fun Registry.generateResultEnum(name: String, documentation: String, predicate: (Variant) -> Boolean): String {
+    val result = enums["VkResult".intern()] ?: error("Missing Result enum.")
+
+    val variants = result.variants
+        .filter(predicate)
+        .map { it.copy(name = it.name.value.replace(Regex("^ERROR_"), "").intern()) }
+        .toMutableList()
+
+    val enum = Enum(name.intern(), variants)
+
+    return """
+${generateEnum(enum, documentation = documentation)}
+
+impl From<Result> for $name {
+    #[inline]
+    fn from(result: Result) -> Self {
+        Self::from_raw(result.as_raw())
+    }
+}
+
+impl From<$name> for Result {
+    #[inline]
+    fn from(code: $name) -> Self {
+        Result::from_raw(code.as_raw())
+    }
+}
+    """
+}
+
 /** Generates a Rust struct for a Vulkan enum. */
-private fun Registry.generateEnum(enum: Enum): String {
+private fun Registry.generateEnum(enum: Enum, documentation: String? = null): String {
     val debug = generateFmtImpl(enum, "Debug", "self.0.fmt(f)") { "\"${it.name}\"" }
 
-    val (display, error) = if (enum.name.value == "Result") {
+    val (display, error) = if (enum.name.value == "Result" || enum.name.value == "ErrorCode") {
         val default = "write!(f, \"unknown Vulkan result (code = {})\", self.0)"
         val display = generateFmtImpl(enum, "Display", default) { "\"${results[it.value] ?: it.name.value}\"" }
         display to "impl error::Error for ${enum.name} { }"
@@ -31,7 +74,7 @@ private fun Registry.generateEnum(enum: Enum): String {
     }
 
     return """
-/// <${generateManualUrl(enum)}>
+/// ${documentation ?: "<${generateManualUrl(enum)}>"}
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ${enum.name}(i32);

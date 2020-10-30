@@ -83,12 +83,15 @@ As mentioned before, the first thing we need to do in the `App::render` function
 ```rust,noplaypen
 impl App {
     fn render(&mut self, window: &Window) -> Result<()> {
-        let image_index = self.device.acquire_next_image_khr(
-            self.data.swapchain,
-            u64::max_value(),
-            self.data.image_available_semaphore,
-            vk::Fence::null(),
-        )?;
+        let image_index = self
+            .device
+            .acquire_next_image_khr(
+                self.data.swapchain,
+                u64::max_value(),
+                self.data.image_available_semaphore,
+                vk::Fence::null(),
+            )?
+            .0 as usize;
 
         Ok(())
     }
@@ -306,12 +309,15 @@ The `App::render` function can now be modified to use the right objects:
 
 ```rust,noplaypen
 fn render(&mut self, window: &Window) -> Result<()> {
-    let image_index = self.device.acquire_next_image_khr(
-        self.data.swapchain,
-        u64::max_value(),
-        self.data.image_available_semaphores[self.frame],
-        vk::Fence::null(),
-    )?;
+    let image_index = self
+        .device
+        .acquire_next_image_khr(
+            self.data.swapchain,
+            u64::max_value(),
+            self.data.image_available_semaphores[self.frame],
+            vk::Fence::null(),
+        )?
+        .0 as usize;
 
     // ...
 
@@ -465,12 +471,15 @@ Initially not a single frame is using an image so we explicitly initialize it to
 fn render(&mut self, window: &Window) -> Result<()> {
     // ...
 
-    let image_index = self.device.acquire_next_image_khr(
-        self.data.swapchain,
-        u64::max_value(),
-        self.data.image_available_semaphores[self.frame],
-        vk::Fence::null(),
-    )?;
+    let image_index = self
+        .device
+        .acquire_next_image_khr(
+            self.data.swapchain,
+            u64::max_value(),
+            self.data.image_available_semaphores[self.frame],
+            vk::Fence::null(),
+        )?
+        .0 as usize;
 
     if !self.data.images_in_flight[image_index as usize].is_null() {
         self.device.wait_for_fences(

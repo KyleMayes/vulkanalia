@@ -174,7 +174,9 @@ impl Example for TriangleExample {
             .subpass(0)
             .base_pipeline_handle(vk::Pipeline::null());
 
-        data.pipeline = device.create_graphics_pipelines(vk::PipelineCache::null(), &[info], None)?;
+        data.pipeline = device
+            .create_graphics_pipelines(vk::PipelineCache::null(), &[info], None)?
+            .0;
 
         // Cleanup
 

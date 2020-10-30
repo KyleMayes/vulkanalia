@@ -107,12 +107,15 @@ impl App {
         self.device
             .wait_for_fences(&[in_flight_fence], true, u64::max_value())?;
 
-        let image_index = self.device.acquire_next_image_khr(
-            self.data.swapchain,
-            u64::max_value(),
-            self.data.image_available_semaphores[self.frame],
-            vk::Fence::null(),
-        )? as usize;
+        let image_index = self
+            .device
+            .acquire_next_image_khr(
+                self.data.swapchain,
+                u64::max_value(),
+                self.data.image_available_semaphores[self.frame],
+                vk::Fence::null(),
+            )?
+            .0 as usize;
 
         let image_in_flight = self.data.images_in_flight[image_index];
         if !image_in_flight.is_null() {
@@ -681,7 +684,9 @@ fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
         .render_pass(data.render_pass)
         .subpass(0);
 
-    data.pipeline = device.create_graphics_pipelines(vk::PipelineCache::null(), &[info], None)?;
+    data.pipeline = device
+        .create_graphics_pipelines(vk::PipelineCache::null(), &[info], None)?
+        .0;
 
     // Cleanup
 

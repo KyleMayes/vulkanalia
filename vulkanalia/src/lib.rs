@@ -28,7 +28,7 @@ pub mod prelude {
         pub use crate::vk;
         pub use crate::vk::{ConvertCStr, Handle, HasBuilder};
         pub use crate::vk::{DeviceV1_0, EntryV1_0, InstanceV1_0};
-        pub use crate::{Device, Entry, Instance, VkResult};
+        pub use crate::{Device, Entry, Instance, VkResult, VkSuccessResult};
     }
 
     /// Vulkan 1.1 prelude.
@@ -45,7 +45,9 @@ pub mod prelude {
 }
 
 /// The result of a executing a fallible Vulkan command.
-pub type VkResult<T> = Result<T, vk::Result>;
+pub type VkResult<T> = Result<T, vk::ErrorCode>;
+/// The result of a executing a fallible Vulkan command with multiple success codes.
+pub type VkSuccessResult<T> = Result<(T, vk::SuccessCode), vk::ErrorCode>;
 
 /// A Vulkan version.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -135,7 +137,7 @@ impl Entry {
             let mut version = 0;
             match enumerate(&mut version) {
                 vk::Result::SUCCESS => Ok(Version::from(version)),
-                error => Err(error),
+                error => Err(error.into()),
             }
         } else {
             Ok(Version::default())

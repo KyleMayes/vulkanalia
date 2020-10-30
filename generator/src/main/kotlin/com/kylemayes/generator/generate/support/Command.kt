@@ -50,3 +50,10 @@ private val getExtensionCommandTypes = thunk { ->
         .flatMap { e -> e.require.commands.map { c -> Pair(e, c) } }
         .associate { (e, c) -> c to CommandType.valueOf(e.type!!.toUpperCase()) }
 }
+
+/** Gets the non-`SUCCESS` and non-`INCOMPLETE` success codes for a Vulkan command. */
+val getCommandSuccessCodes = thunk { command: Command ->
+    command.successcodes
+        .filter { it.value != "SUCCESS" && it.value != "INCOMPLETE" }
+        .toSet()
+}

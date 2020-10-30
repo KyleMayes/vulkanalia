@@ -13,7 +13,7 @@ import com.kylemayes.generator.registry.Version
 fun Registry.generateVersionTraits(): String {
     var versions =
         """
-#![allow(non_camel_case_types, clippy::too_many_arguments)]
+#![allow(non_camel_case_types, clippy::too_many_arguments, clippy::type_complexity)]
 
 use std::mem::MaybeUninit;
 use std::os::raw::c_void;

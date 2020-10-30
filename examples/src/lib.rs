@@ -140,8 +140,9 @@ impl App {
 
         // Recreate the swapchain if the swapchain image is out of date.
         let image_index = match result {
-            Ok(image_index) => image_index,
-            Err(vk::Result::ERROR_OUT_OF_DATE_KHR) => return self.recreate_swapchain(),
+            Ok((_, vk::SuccessCode::SUBOPTIMAL_KHR)) => return self.recreate_swapchain(),
+            Ok((image_index, _)) => image_index,
+            Err(vk::ErrorCode::OUT_OF_DATE_KHR) => return self.recreate_swapchain(),
             Err(e) => return Err(anyhow!(e)),
         };
 
@@ -180,7 +181,7 @@ impl App {
         // Present the current swapchain image and recreate the swapchain if the
         // current swapchain image is out of date or suboptimal.
         let result = self.device.queue_present_khr(self.data.present_queue, &present_info);
-        let changed = result == Err(vk::Result::ERROR_OUT_OF_DATE_KHR) || result == Err(vk::Result::SUBOPTIMAL_KHR);
+        let changed = result == Ok(vk::SuccessCode::SUBOPTIMAL_KHR) || result == Err(vk::ErrorCode::OUT_OF_DATE_KHR);
         if self.resized || changed {
             self.resized = false;
             self.recreate_swapchain()?;

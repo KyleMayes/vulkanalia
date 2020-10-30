@@ -14,6 +14,7 @@ import com.kylemayes.generator.support.PeekableIterator
 /** Generates a more Rust-friendly wrapper method around a command for a version or extension trait. */
 fun Registry.generateCommandWrapper(command: Command): String {
     val type = getCommandType(command)
+    val hasSuccessCodes = getCommandSuccessCodes(command).isNotEmpty()
 
     // The Rust method type parameters.
     val typeParams = mutableListOf<String>()
@@ -190,6 +191,8 @@ fun Registry.generateCommandWrapper(command: Command): String {
     val fallible = command.result.getIdentifier()?.value == "Result"
     val resultType = resultTypes.joinTuple()
     val outputType = when {
+        hasSuccessCodes && resultType == "()" -> "-> crate::VkResult<SuccessCode>"
+        hasSuccessCodes -> "-> crate::VkSuccessResult<$resultType>"
         fallible -> "-> crate::VkResult<$resultType>"
         resultType != "()" -> " -> $resultType"
         else -> ""
@@ -211,7 +214,22 @@ ${generateInvocation(command, setupArgs)};
 
     val resultExpr = resultExprs.joinTuple()
     val outputExpr = when {
-        fallible -> "if __result == Result::SUCCESS { Ok($resultExpr) } else { Err(__result) }"
+        hasSuccessCodes ->
+            """
+if __result >= Result::SUCCESS {
+    Ok(${if (resultExpr != "()") { "($resultExpr, __result.into())" } else { "__result.into()" }})
+} else {
+    Err(__result.into())
+}
+            """
+        fallible ->
+            """
+if __result == Result::SUCCESS {
+    Ok($resultExpr)
+} else {
+    Err(__result.into())
+}
+            """
         resultExpr != "()" -> resultExpr
         else -> ""
     }
