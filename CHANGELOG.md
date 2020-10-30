@@ -1,4 +1,4 @@
-## [0.2.0] - UNRELEASED
+## [0.2.0] - 2020-10-30
 
 ### Changed
 - Changed wrapper methods with possible success codes other than `SUCCESS` or `INCOMPLETE` to return `VkSuccessResult` (new typedef) instead of `VkResult`
