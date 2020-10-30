@@ -751,7 +751,11 @@ pub fn create_buffer(
 
 /// Creates a shader module from a compiled shader.
 pub fn create_shader_module(device: &Device, spv: &[u8]) -> Result<vk::ShaderModule> {
-    let code = unsafe { spv.align_to::<u32>().1 };
+    let spv = Vec::<u8>::from(spv);
+    let (prefix, code, suffix) = unsafe { spv.align_to::<u32>() };
+    if !prefix.is_empty() || !suffix.is_empty() {
+        return Err(anyhow!("Shader bytecode is not properly aligned."));
+    }
 
     let info = vk::ShaderModuleCreateInfo::builder().code_size(spv.len()).code(code);
 
