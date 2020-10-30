@@ -153,7 +153,61 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/12_graphics_pipeline_complete.rs">main.rs</a></p>
+<p>We can now combine all of the structures and objects from the previous chapters to create the graphics pipeline! Here's the types of objects we have now, as a quick recap:</p>
+<ul>
+<li>Shader stages: the shader modules that define the functionality of the programmable stages of the graphics pipeline</li>
+<li>Fixed-function state: all of the structures that define the fixed-function stages of the pipeline, like input assembly, rasterizer, viewport and color blending</li>
+<li>Pipeline layout: the uniform and push values referenced by the shader that can be updated at draw time</li>
+<li>Render pass: the attachments referenced by the pipeline stages and their usage</li>
+</ul>
+<p>All of these combined fully define the functionality of the graphics pipeline, so we can now begin filling in the <code>vk::GraphicsPipelineCreateInfo</code> structure at the end of the <code>create_pipeline</code> function. But before the calls to <code>DeviceV1_0:::destroy_shader_module</code> because these are still to be used during the creation.</p>
+<pre><code class="language-rust noplaypen">let stages = &amp;[vert_stage, frag_stage];
+let info = vk::GraphicsPipelineCreateInfo::builder()
+    .stages(stages)
+    // continued...
+</code></pre>
+<p>We start by providing an array of the <code>vk::PipelineShaderStageCreateInfo</code> structs.</p>
+<pre><code class="language-rust noplaypen">    .vertex_input_state(&amp;vertex_input_state)
+    .input_assembly_state(&amp;input_assembly_state)
+    .viewport_state(&amp;viewport_state)
+    .rasterization_state(&amp;rasterization_state)
+    .multisample_state(&amp;multisample_state)
+    .color_blend_state(&amp;color_blend_state)
+</code></pre>
+<p>Then we reference all of the structures describing the fixed-function stage.</p>
+<pre><code class="language-rust noplaypen">    .layout(data.pipeline_layout)
+</code></pre>
+<p>After that comes the pipeline layout, which is a Vulkan handle rather than a struct reference.</p>
+<pre><code class="language-rust noplaypen">    .render_pass(data.render_pass)
+    .subpass(0);
+</code></pre>
+<p>And finally we have the reference to the render pass and the index of the sub pass where this graphics pipeline will be used. It is also possible to use other render passes with this pipeline instead of this specific instance, but they have to be <em>compatible</em> with <code>render_pass</code>. The requirements for compatibility are described <a href="https://www.khronos.org/registry/vulkan/specs/1.2/html/vkspec.html#renderpass-compatibility">here</a>, but we won't be using that feature in this tutorial.</p>
+<pre><code class="language-rust noplaypen">    .base_pipeline_handle(vk::Pipeline::null()) // Optional.
+    .base_pipeline_index(-1)                    // Optional.
+</code></pre>
+<p>There are actually two more parameters: <code>base_pipeline_handle</code> and <code>base_pipeline_index</code>. Vulkan allows you to create a new graphics pipeline by deriving from an existing pipeline. The idea of pipeline derivatives is that it is less expensive to set up pipelines when they have much functionality in common with an existing pipeline and switching between pipelines from the same parent can also be done quicker. You can either specify the handle of an existing pipeline with <code>base_pipeline_handle</code> or reference another pipeline that is about to be created by index with <code>base_pipeline_index</code>. Right now there is only a single pipeline, so we'll simply specify a null handle and an invalid index. These values are only used if the <code>vk::PipelineCreateFlags::DERIVATIVE</code> flag is also specified in the <code>flags</code> field of <code>vk::GraphicsPipelineCreateInfo</code>.</p>
+<p>Now prepare for the final step by creating a field in <code>AppData</code> to hold the <code>vk::Pipeline</code> object:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    pipeline: vk::Pipeline,
+}
+</code></pre>
+<p>And finally create the graphics pipeline:</p>
+<pre><code class="language-rust noplaypen">data.pipeline = device.create_graphics_pipelines(
+    vk::PipelineCache::null(), &amp;[info], None)?.0;
+</code></pre>
+<p>The <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.create_graphics_pipelines"><code>vk::DeviceV1_0::create_graphics_pipeline</code></a> function actually has more parameters than the usual object creation functions in Vulkan. It is designed to take multiple <code>vk::GraphicsPipelineCreateInfo</code> objects and create multiple <code>vk::Pipeline</code> objects in a single call.</p>
+<p>The first parameter, for which we've passed the <code>vk::PipelineCache::null()</code> argument, references an optional <code>vk::PipelineCache</code> object. A pipeline cache can be used to store and reuse data relevant to pipeline creation across multiple calls to <code>vk::DeviceV1_0::create_graphics_pipeline</code> and even across program executions if the cache is stored to a file. This makes it possible to significantly speed up pipeline creation at a later time. We'll get into this in the pipeline cache chapter.</p>
+<p>The graphics pipeline is required for all common drawing operations, so it should also only be destroyed at the end of the program in <code>App::destroy</code>:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn destroy(&amp;mut self) {
+        self.device.destroy_pipeline(self.data.pipeline, None);
+        // ...
+    }
+}
+</code></pre>
+<p>Now run your program to confirm that all this hard work has resulted in a successful pipeline creation! We are already getting quite close to seeing something pop up on the screen. In the next couple of chapters we'll set up the actual framebuffers from the swapchain images and prepare the drawing commands.</p>
 
                     </main>
 

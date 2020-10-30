@@ -605,8 +605,10 @@ use std::ffi::CStr;
 use std::os::raw::c_void;
 
 use log::*;
+
+use vulkanalia::vk::ExtDebugUtilsExtension;
 </code></pre>
-<p><code>HashSet</code> will be used for storing and querying supported layers and the other imports will be used in the function we will be writing to log messages from the validation layer.</p>
+<p><code>HashSet</code> will be used for storing and querying supported layers and the other imports will be used in the function we will be writing to log messages from the validation layer with the exception of <code>vk::ExtDebugUtilsExtension</code> which provides the commands for managing debugging functionality.</p>
 <h2><a class="header" href="#using-validation-layers" id="using-validation-layers">Using validation layers</a></h2>
 <p>In this section we'll see how to enable the standard diagnostics layers provided by the Vulkan SDK. Just like extensions, validation layers need to be enabled by specifying their name. All of the useful standard validation is bundled into a layer included in the SDK that is known as <code>VK_LAYER_KHRONOS_validation</code>.</p>
 <p>Let's first add two configuration variables to the program to specify the layers to enable and whether to enable them or not. I've chosen to base that value on whether the program is being compiled in debug mode or not.</p>
@@ -699,14 +701,55 @@ if VALIDATION_ENABLED {
 </ul>
 <p>Finally, the last parameter, here ignored as <code>_</code>, contains a pointer that was specified during the setup of the callback and allows you to pass your own data to it.</p>
 <p>The callback returns a (Vulkan) boolean that indicates if the Vulkan call that triggered the validation layer message should be aborted. If the callback returns true, then the call is aborted with the <code>vk::Result::ERROR_VALIDATION_FAILED_EXT</code> error. This is normally only used to test the validation layers themselves, so you should always return <code>vk::FALSE</code>.</p>
-<p>All that remains now is telling Vulkan about the callback function. We'll accomplish this by <em>extending</em> the <code>vk::InstanceCreateInfo</code> struct we used to create the Vulkan instance in the <code>create_instance</code> function with additional instance creation information.</p>
-<h2><a class="header" href="#adding-the-debug-callback" id="adding-the-debug-callback">Adding the debug callback</a></h2>
+<p>All that remains now is telling Vulkan about the callback function. Perhaps somewhat surprisingly, even the debug callback in Vulkan is managed with a handle that needs to be explicitly created and destroyed. Such a callback is part of a debug messenger and you can have as many of them as you want. Add a field to the <code>AppData</code> struct:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    messenger: vk::DebugUtilsMessengerEXT,
+}
+</code></pre>
+<p>Now modify the end of the <code>create_instance</code> function to look like this:</p>
+<pre><code class="language-rust noplaypen">fn create_instance(entry: &amp;Entry, data: &amp;mut AppData) -&gt; Result&lt;Instance&gt; {
+    // ...
+
+    let instance = entry.create_instance(&amp;info, None)?;
+
+    if VALIDATION_ENABLED {
+        let debug_info = vk::DebugUtilsMessengerCreateInfoEXT::builder()
+            .message_severity(vk::DebugUtilsMessageSeverityFlagsEXT::all())
+            .message_type(vk::DebugUtilsMessageTypeFlagsEXT::all())
+            .user_callback(Some(debug_callback));
+
+        data.messenger = instance.create_debug_utils_messenger_ext(&amp;debug_info, None)?;
+    }
+
+    Ok(instance)
+}
+</code></pre>
+<p>We have first extracted our Vulkan instance out of the return expression so we can use it to add our debug callback.</p>
+<p>Then we construct a <code>vk::DebugUtilsMessengerCreateInfoEXT</code> struct which provides information about our debug callback and how it will be called.</p>
+<p>The <code>message_severity</code> field allows you to specify all the types of severities you would like your callback to be called for. I've requested that messages of all severity be included. This would normally produce a lot of verbose general debug info but we can filter that out using a log level when we are not interested in it.</p>
+<p>Similarly the <code>message_type</code> field lets you filter which types of messages your callback is notified about. I've simply enabled all types here. You can always disable some if they're not useful to you.</p>
+<p>Finally, the <code>user_callback</code> field specifies the callback function. You can optionally pass a mutable reference to the <code>user_data</code> field which will be passed along to the callback function via the <code>data</code> parameter. You could use this to pass a pointer to the <code>AppData</code> struct, for example.</p>
+<p>Lastly we call <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.ExtDebugUtilsExtension.html#method.create_debug_utils_messenger_ext"><code>vk::ExtDebugUtilsExtension::create_debug_utils_messenger_ext</code></a> to register our debug callback with the Vulkan instance.</p>
+<p>The <code>vk::DebugUtilsMessengerEXT</code> object we created needs to cleaned up before our app exits. We'll do this in <code>App::destroy</code> before we destroy the instance:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn destroy(&amp;mut self) {
+        if VALIDATION_ENABLED {
+            self.instance.destroy_debug_utils_messenger_ext(self.data.messenger, None);
+        }
+
+        self.instance.destroy_instance(None);
+    }
+}
+</code></pre>
+<h2><a class="header" href="#debugging-instance-creation-and-destruction" id="debugging-instance-creation-and-destruction">Debugging instance creation and destruction</a></h2>
+<p>Although we've now added debugging with validation layers to the program we're not covering everything quite yet. The <code>instance.create_debug_utils_messenger_ext(...)</code> call requires a valid instance to have been created and <code>instance.destroy_debug_utils_messenger_ext(...)</code> must be called before the instance is destroyed. This currently leaves us unable to debug any issues in the <code>entry.create_instance(...)</code> and <code>entry.destroy_instance(...)</code> calls.</p>
+<p>However, if you closely read the <a href="https://github.com/KhronosGroup/Vulkan-Docs/blob/77d9f42e075e6a483a37351c14c5e9e3122f9113/appendices/VK_EXT_debug_utils.txt#L84-L91">extension documentation</a>, you'll see that there is a way to create a separate debug utils messenger specifically for those two function calls. It requires you to simply pass a pointer to a <code>vk::DebugUtilsMessengerCreateInfoEXT</code> struct in the <code>next</code> extension field of <code>vk::InstanceCreateInfo</code>. Before we do this, let's first discuss how extending structs works in Vulkan.</p>
 <p>The <code>s_type</code> field that is present on many Vulkan structs was briefly mentioned in the <a href="setup/../overview.html#builders">Builders section</a> of the Overview chapter. It was said that this field must be set to the <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.StructureType.html"><code>vk::StructureType</code></a> enum value indicating the type of the struct (e.g., <code>vk::StructureType::APPLICATION_INFO</code> for a <code>vk::ApplicationInfo</code> struct).</p>
-<p>You may have wondered what the purpose of this field is; doesn't Vulkan already know the type of structs passed to its commands? The purpose of this field is wrapped up with the purpose of the <code>next</code> field that always accompanies the <code>s_type</code> field in Vulkan structs: the ability to <em>extend</em> a Vulkan struct with other Vulkan structs.</p>
+<p>You may have wondered what the purpose of this field is: doesn't Vulkan already know the type of structs passed to its commands? The purpose of this field is wrapped up with the purpose of the <code>next</code> field that always accompanies the <code>s_type</code> field in Vulkan structs: the ability to <em>extend</em> a Vulkan struct with other Vulkan structs.</p>
 <p>The <code>next</code> field in a Vulkan struct may be used to specify a <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fundamentals-validusage-pNext">structure pointer chain</a>. <code>next</code> can be either be null or a pointer to a Vulkan struct that is permitted by Vulkan to extend the struct. Each struct in this chain of structs is used to provide additional information to the Vulkan command the root structure is passed to. This feature of Vulkan allows for extending the functionality of Vulkan commands without breaking backwards compabilitity.</p>
 <p>When you pass such a chain of structs to a Vulkan command, it must iterate through the structs to collect all of the information from the structs. Because of this, Vulkan can't know the type of each structure in the chain, hence the need for the <code>s_type</code> field.</p>
 <p>The builder structs provided by <code>vulkanalia</code> allow for easily building these pointer chains in a type-safe manner. For example, take a look at the <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.InstanceCreateInfoBuilder.html"><code>vk::InstanceCreateInfoBuilder</code></a> builder struct, specifically the <code>push_next</code> method. This method allows adding any Vulkan struct for which the <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.ExtendsInstanceCreateInfo.html"><code>vk::ExtendsInstanceCreateInfo</code></a> trait is implemented for to the pointer chain for a <code>vk::InstanceCreateInfo</code>.</p>
-<p>One such struct is <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.DebugUtilsMessengerCreateInfoEXT.html"><code>vk::DebugUtilsMessengerCreateInfoEXT</code></a>, which we will now use to extend our <code>vk::InstanceCreateInfo</code> struct to set up our debug callback. To do this we'll continue to modify our <code>create_instance</code> function, this time making the <code>info</code> variable mutable and then building and pushing a <code>vk::DebugUtilsMessengerCreateInfoEXT</code> struct onto its pointer chain:</p>
+<p>One such struct is <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.DebugUtilsMessengerCreateInfoEXT.html"><code>vk::DebugUtilsMessengerCreateInfoEXT</code></a>, which we will now use to extend our <code>vk::InstanceCreateInfo</code> struct to set up our debug callback. To do this we'll continue to modify our <code>create_instance</code> function. This time we'll make the <code>info</code> struct mutable so we can modify its pointer chain before moving the <code>debug_info</code> struct, now also mutable, below it so we can push it onto <code>info</code>'s pointer chain:</p>
 <pre><code class="language-rust noplaypen">let mut info = vk::InstanceCreateInfo::builder()
     .application_info(&amp;application_info)
     .enabled_layer_names(&amp;layers)
@@ -726,18 +769,9 @@ if VALIDATION_ENABLED {
 <p><img src="setup/../images/validation_layer_test.png" alt="" /></p>
 <p>If everything is working you shouldn't see any warning or error messages. Going forward you may want to increase the minimum log level to <code>info</code> using <code>RUST_LOG</code> to reduce the verbosity of the logs unless you are trying to debug an error.</p>
 <h2><a class="header" href="#configuration" id="configuration">Configuration</a></h2>
-<p>There are a lot more settings for the behavior of validation layers than just
-the flags specified in the <code>vk::DebugUtilsMessengerCreateInfoEXT</code> struct. Browse
-to the Vulkan SDK and go to the <code>Config</code> directory. There you will find a
-<code>vk_layer_settings.txt</code> file that explains how to configure the layers.</p>
-<p>To configure the layer settings for your own application, copy the file to the
-working directory of your project's executable and follow the instructions to
-set the desired behavior. However, for the remainder of this tutorial I'll
-assume that you're using the default settings.</p>
-<p>Throughout this tutorial I'll be making a couple of intentional mistakes to show
-you how helpful the validation layers are with catching them and to teach you
-how important it is to know exactly what you're doing with Vulkan. Now it's time
-to look at Vulkan devices in the system.</p>
+<p>There are a lot more settings for the behavior of validation layers than just the flags specified in the <code>vk::DebugUtilsMessengerCreateInfoEXT</code> struct. Browse to the Vulkan SDK and go to the <code>Config</code> directory. There you will find a <code>vk_layer_settings.txt</code> file that explains how to configure the layers.</p>
+<p>To configure the layer settings for your own application, copy the file to the working directory of your project's executable and follow the instructions to set the desired behavior. However, for the remainder of this tutorial I'll assume that you're using the default settings.</p>
+<p>Throughout this tutorial I'll be making a couple of intentional mistakes to show you how helpful the validation layers are with catching them and to teach you how important it is to know exactly what you're doing with Vulkan. Now it's time to look at Vulkan devices in the system.</p>
 <h1><a class="header" href="#physical-devices-and-queue-families" id="physical-devices-and-queue-families">Physical devices and queue families</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/03_physical_device_selection.rs">main.rs</a></p>
 <p>After initializing the Vulkan library through an <code>Instance</code> we need to look for and select a graphics card in the system that supports the features we need. In fact we can select any number of graphics cards and use them simultaneously, but in this tutorial we'll stick to the first graphics card that suits our needs.</p>
@@ -1758,7 +1792,7 @@ let viewport_state = vk::PipelineViewportStateCreateInfo::builder()
 </code></pre>
 <p>The <code>line_width</code> member is straightforward, it describes the thickness of lines in terms of number of fragments. The maximum line width that is supported depends on the hardware and any line thicker than <code>1.0</code> requires you to enable the <code>wide_lines</code> GPU feature.</p>
 <pre><code class="language-rust noplaypen">    .cull_mode(vk::CullModeFlags::BACK)
-    .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
+    .front_face(vk::FrontFace::CLOCKWISE)
 </code></pre>
 <p>The <code>cull_mode</code> variable determines the type of face culling to use. You can disable culling, cull the front faces, cull the back faces or both. The <code>front_face</code> variable specifies the vertex order for faces to be considered front-facing and can be clockwise or counterclockwise.</p>
 <pre><code class="language-rust noplaypen">    .depth_bias_enable(false);
@@ -1865,15 +1899,782 @@ data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
 <p>That's it for all of the fixed-function state! It's a lot of work to set all of this up from scratch, but the advantage is that we're now nearly fully aware of everything that is going on in the graphics pipeline! This reduces the chance of running into unexpected behavior because the default state of certain components is not what you expect.</p>
 <p>There is however one more object to create before we can finally create the graphics pipeline and that is a render pass.</p>
 <h1><a class="header" href="#render-passes" id="render-passes">Render passes</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/11_render_passes.rs">main.rs</a></p>
+<p>Before we can finish creating the pipeline, we need to tell Vulkan about the framebuffer attachments that will be used while rendering. We need to specify how many color and depth buffers there will be, how many samples to use for each of them and how their contents should be handled throughout the rendering operations. All of this information is wrapped in a <em>render pass</em> object, for which we'll create a new <code>create_render_pass</code> function. Call this function from <code>App::create</code> before <code>create_pipeline</code>.</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_render_pass(&amp;instance, &amp;device, &amp;mut data)?;
+        create_pipeline(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_render_pass(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<h2><a class="header" href="#attachment-description" id="attachment-description">Attachment description</a></h2>
+<p>In our case we'll have just a single color buffer attachment represented by one of the images from the swapchain. This will be represented by a <code>vk::AttachmentDescription</code> which we will build in <code>create_render_pass</code>.</p>
+<pre><code class="language-rust noplaypen">let color_attachment = vk::AttachmentDescription::builder()
+    .format(data.swapchain_format)
+    .samples(vk::SampleCountFlags::_1)
+    // continued...
+</code></pre>
+<p>The <code>format</code> of the color attachment should match the format of the swapchain images, and we're not doing anything with multisampling yet, so we'll stick to 1 sample.</p>
+<pre><code class="language-rust noplaypen">    .load_op(vk::AttachmentLoadOp::CLEAR)
+    .store_op(vk::AttachmentStoreOp::STORE)
+</code></pre>
+<p>The <code>load_op</code> and <code>store_op</code> determine what to do with the data in the attachment before rendering and after rendering. We have the following choices for <code>load_op</code>:</p>
+<ul>
+<li><code>vk::AttachmentLoadOp::LOAD</code>: Preserve the existing contents of the attachment</li>
+<li><code>vk::AttachmentLoadOp::CLEAR</code>: Clear the values to a constant at the start</li>
+<li><code>vk::AttachmentLoadOp::DONT_CARE</code>: Existing contents are undefined; we don't care about them</li>
+</ul>
+<p>In our case we're going to use the clear operation to clear the framebuffer to black before drawing a new frame. There are only two possibilities for the <code>store_op</code>:</p>
+<ul>
+<li><code>vk::AttachmentStoreOp::STORE</code>: Rendered contents will be stored in memory and can be read later</li>
+<li><code>vk::AttachmentStoreOp::DONT_CARE</code>: Contents of the framebuffer will be undefined after the rendering operation</li>
+</ul>
+<p>We're interested in seeing the rendered triangle on the screen, so we're going with the store operation here.</p>
+<pre><code class="language-rust noplaypen">    .stencil_load_op(vk::AttachmentLoadOp::DONT_CARE)
+    .stencil_store_op(vk::AttachmentStoreOp::DONT_CARE)
+</code></pre>
+<p>The <code>load_op</code> and <code>store_op</code> apply to color and depth data, and <code>stencil_load_op</code> / <code>stencil_store_op</code> apply to stencil data. Our application won't do anything with the stencil buffer, so the results of loading and storing are irrelevant.</p>
+<pre><code class="language-rust noplaypen">    .initial_layout(vk::ImageLayout::UNDEFINED)
+    .final_layout(vk::ImageLayout::PRESENT_SRC_KHR);
+</code></pre>
+<p>Textures and framebuffers in Vulkan are represented by <code>vk::Image</code> objects with a certain pixel format, however the layout of the pixels in memory can change based on what you're trying to do with an image.</p>
+<p>Some of the most common layouts are:</p>
+<ul>
+<li><code>vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL</code>: Images used as color attachment</li>
+<li><code>vk::ImageLayout::PRESENT_SRC_KHR</code>: Images to be presented in the swapchain</li>
+<li><code>vk::ImageLayout::TRANSFER_DST_OPTIMAL</code>: Images to be used as destination for a memory copy operation</li>
+</ul>
+<p>We'll discuss this topic in more depth in the texturing chapter, but what's important to know right now is that images need to be transitioned to specific layouts that are suitable for the operation that they're going to be involved in next.</p>
+<p>The <code>initial_layout</code> specifies which layout the image will have before the render pass begins. The <code>final_layout</code> specifies the layout to automatically transition to when the render pass finishes. Using <code>vk::ImageLayout::UNDEFINED</code> for <code>initial_layout</code> means that we don't care what previous layout the image was in. The caveat of this special value is that the contents of the image are not guaranteed to be preserved, but that doesn't matter since we're going to clear it anyway. We want the image to be ready for presentation using the swapchain after rendering, which is why we use <code>vk::ImageLayout::PRESENT_SRC_KHR</code> as <code>final_layout</code>.</p>
+<h2><a class="header" href="#subpasses-and-attachment-references" id="subpasses-and-attachment-references">Subpasses and attachment references</a></h2>
+<p>A single render pass can consist of multiple subpasses. Subpasses are subsequent rendering operations that depend on the contents of framebuffers in previous passes, for example a sequence of post-processing effects that are applied one after another. If you group these rendering operations into one render pass, then Vulkan is able to reorder the operations and conserve memory bandwidth for possibly better performance. For our very first triangle, however, we'll stick to a single subpass.</p>
+<p>Every subpass references one or more of the attachments that we've described using the structure in the previous sections. These references are themselves <code>vk::AttachmentReference</code> structs that look like this:</p>
+<pre><code class="language-rust noplaypen">let color_attachment_ref = vk::AttachmentReference::builder()
+    .attachment(0)
+    .layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
+</code></pre>
+<p>The <code>attachment</code> parameter specifies which attachment to reference by its index in the attachment descriptions array. Our array consists of a single <code>vk::AttachmentDescription</code>, so its index is <code>0</code>. The <code>layout</code> specifies which layout we would like the attachment to have during a subpass that uses this reference. Vulkan will automatically transition the attachment to this layout when the subpass is started. We intend to use the attachment to function as a color buffer and the <code>vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL</code> layout will give us the best performance, as its name implies.</p>
+<p>The subpass is described using a <code>vk::SubpassDescription</code> structure:</p>
+<pre><code class="language-rust noplaypen">let color_attachments = &amp;[color_attachment_ref];
+let subpass = vk::SubpassDescription::builder()
+    .pipeline_bind_point(vk::PipelineBindPoint::GRAPHICS)
+    .color_attachments(color_attachments);
+</code></pre>
+<p>Vulkan may also support compute subpasses in the future, so we have to be explicit about this being a graphics subpass. Then we specify the reference to the color attachment.</p>
+<p>The index of the attachment in this array is directly referenced from the fragment shader with the <code>layout(location = 0) out vec4 outColor</code> directive!</p>
+<p>The following other types of attachments can be referenced by a subpass:</p>
+<ul>
+<li><code>input_attachments</code>: Attachments that are read from a shader</li>
+<li><code>resolve_attachments</code>: Attachments used for multisampling color attachments</li>
+<li><code>depth_stencil_attachment</code>: Attachment for depth and stencil data</li>
+<li><code>preserve_attachments</code>: Attachments that are not used by this subpass, but for which the data must be preserved</li>
+</ul>
+<h2><a class="header" href="#render-pass" id="render-pass">Render pass</a></h2>
+<p>Now that the attachment and a basic subpass referencing it have been described, we can create the render pass itself. Create a new class member variable to hold the <code>vk::RenderPass</code> object right above the <code>pipeline_layout</code> field in <code>AppData</code>:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    render_pass: vk::RenderPass,
+    pipeline_layout: vk::PipelineLayout,
+}
+</code></pre>
+<p>The render pass object can then be created by filling in the <code>vk::RenderPassCreateInfo</code> structure with an array of attachments and subpasses. The <code>vk::AttachmentReference</code> objects reference attachments using the indices of this array.</p>
+<pre><code class="language-rust noplaypen">let attachments = &amp;[color_attachment];
+let subpasses = &amp;[subpass];
+let info = vk::RenderPassCreateInfo::builder()
+    .attachments(attachments)
+    .subpasses(subpasses);
+
+data.render_pass = device.create_render_pass(&amp;info, None)?;
+</code></pre>
+<p>Just like the pipeline layout, the render pass will be referenced throughout the program, so it should only be cleaned up at the end in <code>App::destroy</code>:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn destroy(&amp;mut self) {
+        self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
+        self.device.destroy_render_pass(self.data.render_pass, None);
+        // ...
+    }
+}
+</code></pre>
+<p>That was a lot of work, but in the next chapter it all comes together to finally create the graphics pipeline object!</p>
 <h1><a class="header" href="#conclusion-1" id="conclusion-1">Conclusion</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/12_graphics_pipeline_complete.rs">main.rs</a></p>
+<p>We can now combine all of the structures and objects from the previous chapters to create the graphics pipeline! Here's the types of objects we have now, as a quick recap:</p>
+<ul>
+<li>Shader stages: the shader modules that define the functionality of the programmable stages of the graphics pipeline</li>
+<li>Fixed-function state: all of the structures that define the fixed-function stages of the pipeline, like input assembly, rasterizer, viewport and color blending</li>
+<li>Pipeline layout: the uniform and push values referenced by the shader that can be updated at draw time</li>
+<li>Render pass: the attachments referenced by the pipeline stages and their usage</li>
+</ul>
+<p>All of these combined fully define the functionality of the graphics pipeline, so we can now begin filling in the <code>vk::GraphicsPipelineCreateInfo</code> structure at the end of the <code>create_pipeline</code> function. But before the calls to <code>DeviceV1_0:::destroy_shader_module</code> because these are still to be used during the creation.</p>
+<pre><code class="language-rust noplaypen">let stages = &amp;[vert_stage, frag_stage];
+let info = vk::GraphicsPipelineCreateInfo::builder()
+    .stages(stages)
+    // continued...
+</code></pre>
+<p>We start by providing an array of the <code>vk::PipelineShaderStageCreateInfo</code> structs.</p>
+<pre><code class="language-rust noplaypen">    .vertex_input_state(&amp;vertex_input_state)
+    .input_assembly_state(&amp;input_assembly_state)
+    .viewport_state(&amp;viewport_state)
+    .rasterization_state(&amp;rasterization_state)
+    .multisample_state(&amp;multisample_state)
+    .color_blend_state(&amp;color_blend_state)
+</code></pre>
+<p>Then we reference all of the structures describing the fixed-function stage.</p>
+<pre><code class="language-rust noplaypen">    .layout(data.pipeline_layout)
+</code></pre>
+<p>After that comes the pipeline layout, which is a Vulkan handle rather than a struct reference.</p>
+<pre><code class="language-rust noplaypen">    .render_pass(data.render_pass)
+    .subpass(0);
+</code></pre>
+<p>And finally we have the reference to the render pass and the index of the sub pass where this graphics pipeline will be used. It is also possible to use other render passes with this pipeline instead of this specific instance, but they have to be <em>compatible</em> with <code>render_pass</code>. The requirements for compatibility are described <a href="https://www.khronos.org/registry/vulkan/specs/1.2/html/vkspec.html#renderpass-compatibility">here</a>, but we won't be using that feature in this tutorial.</p>
+<pre><code class="language-rust noplaypen">    .base_pipeline_handle(vk::Pipeline::null()) // Optional.
+    .base_pipeline_index(-1)                    // Optional.
+</code></pre>
+<p>There are actually two more parameters: <code>base_pipeline_handle</code> and <code>base_pipeline_index</code>. Vulkan allows you to create a new graphics pipeline by deriving from an existing pipeline. The idea of pipeline derivatives is that it is less expensive to set up pipelines when they have much functionality in common with an existing pipeline and switching between pipelines from the same parent can also be done quicker. You can either specify the handle of an existing pipeline with <code>base_pipeline_handle</code> or reference another pipeline that is about to be created by index with <code>base_pipeline_index</code>. Right now there is only a single pipeline, so we'll simply specify a null handle and an invalid index. These values are only used if the <code>vk::PipelineCreateFlags::DERIVATIVE</code> flag is also specified in the <code>flags</code> field of <code>vk::GraphicsPipelineCreateInfo</code>.</p>
+<p>Now prepare for the final step by creating a field in <code>AppData</code> to hold the <code>vk::Pipeline</code> object:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    pipeline: vk::Pipeline,
+}
+</code></pre>
+<p>And finally create the graphics pipeline:</p>
+<pre><code class="language-rust noplaypen">data.pipeline = device.create_graphics_pipelines(
+    vk::PipelineCache::null(), &amp;[info], None)?.0;
+</code></pre>
+<p>The <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.create_graphics_pipelines"><code>vk::DeviceV1_0::create_graphics_pipeline</code></a> function actually has more parameters than the usual object creation functions in Vulkan. It is designed to take multiple <code>vk::GraphicsPipelineCreateInfo</code> objects and create multiple <code>vk::Pipeline</code> objects in a single call.</p>
+<p>The first parameter, for which we've passed the <code>vk::PipelineCache::null()</code> argument, references an optional <code>vk::PipelineCache</code> object. A pipeline cache can be used to store and reuse data relevant to pipeline creation across multiple calls to <code>vk::DeviceV1_0::create_graphics_pipeline</code> and even across program executions if the cache is stored to a file. This makes it possible to significantly speed up pipeline creation at a later time. We'll get into this in the pipeline cache chapter.</p>
+<p>The graphics pipeline is required for all common drawing operations, so it should also only be destroyed at the end of the program in <code>App::destroy</code>:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn destroy(&amp;mut self) {
+        self.device.destroy_pipeline(self.data.pipeline, None);
+        // ...
+    }
+}
+</code></pre>
+<p>Now run your program to confirm that all this hard work has resulted in a successful pipeline creation! We are already getting quite close to seeing something pop up on the screen. In the next couple of chapters we'll set up the actual framebuffers from the swapchain images and prepare the drawing commands.</p>
 <h1><a class="header" href="#framebuffers" id="framebuffers">Framebuffers</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/13_framebuffers.rs">main.rs</a></p>
+<p>We've talked a lot about framebuffers in the past few chapters and we've set up the render pass to expect a single framebuffer with the same format as the swapchain images, but we haven't actually created any yet.</p>
+<p>The attachments specified during render pass creation are bound by wrapping them into a <code>vk::Framebuffer</code> object. A framebuffer object references all of the <code>vk::ImageView</code> objects that represent the attachments. In our case that will be only a single one: the color attachment. However, the image that we have to use for the attachment depends on which image the swapchain returns when we retrieve one for presentation. That means that we have to create a framebuffer for all of the images in the swapchain and use the one that corresponds to the retrieved image at drawing time.</p>
+<p>To that end, create another <code>Vec</code> field in <code>AppData</code> to hold the framebuffers:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    framebuffers: Vec&lt;vk::Framebuffer&gt;,
+}
+</code></pre>
+<p>We'll create the objects for this array in a new function <code>create_framebuffers</code> that is called from <code>App::create</code> right after creating the graphics pipeline:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_pipeline(&amp;device, &amp;mut data)?;
+        create_framebuffers(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_framebuffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>Start by mapping over the swapchain image views:</p>
+<pre><code class="language-rust noplaypen">fn create_framebuffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    data.framebuffers = data
+        .swapchain_image_views
+        .iter()
+        .map(|i| {
+
+        })
+        .collect::&lt;Result&lt;Vec&lt;_&gt;, _&gt;&gt;()?;
+
+    Ok(())
+}
+</code></pre>
+<p>We'll then create a framebuffer for each image view:</p>
+<pre><code class="language-rust noplaypen">let attachments = &amp;[*i];
+let create_info = vk::FramebufferCreateInfo::builder()
+    .render_pass(data.render_pass)
+    .attachments(attachments)
+    .width(data.swapchain_extent.width)
+    .height(data.swapchain_extent.height)
+    .layers(1);
+
+device.create_framebuffer(&amp;create_info, None)
+</code></pre>
+<p>As you can see, creation of framebuffers is quite straightforward. We first need to specify with which <code>render_pass</code> the framebuffer needs to be compatible. You can only use a framebuffer with the render passes that it is compatible with, which roughly means that they use the same number and type of attachments.</p>
+<p>The <code>attachments</code> field specifies the <code>vk::ImageView</code> objects that should be bound to the respective attachment descriptions in the render pass <code>attachment</code> array.</p>
+<p>The <code>width</code> and <code>height</code> parameters are self-explanatory and <code>layers</code> refers to the number of layers in image arrays. Our swapchain images are single images, so the number of layers is <code>1</code>.</p>
+<p>We should delete the framebuffers before the image views and render pass that they are based on, but only after we've finished rendering:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn destroy(&amp;mut self) {
+        self.data.framebuffers
+            .iter()
+            .for_each(|f| self.device.destroy_framebuffer(*f, None));
+        // ...
+    }
+}
+</code></pre>
+<p>We've now reached the milestone where we have all of the objects that are required for rendering. In the next chapter we're going to write the first actual drawing commands.</p>
 <h1><a class="header" href="#command-buffers" id="command-buffers">Command buffers</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/14_command_buffers.rs">main.rs</a></p>
+<p>Commands in Vulkan, like drawing operations and memory transfers, are not executed directly using function calls. You have to record all of the operations you want to perform in command buffer objects. The advantage of this is that all of the hard work of setting up the drawing commands can be done in advance and in multiple threads. After that, you just have to tell Vulkan to execute the commands in the main loop.</p>
+<h2><a class="header" href="#command-pools" id="command-pools">Command pools</a></h2>
+<p>We have to create a command pool before we can create command buffers. Command pools manage the memory that is used to store the buffers and command buffers are allocated from them. Add a new <code>AppData</code> field to store a <code>vk::CommandPool</code>:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    command_pool: vk::CommandPool,
+}
+</code></pre>
+<p>Then create a new function <code>create_command_pool</code> and call it from <code>App::create</code> after the framebuffers were created.</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_framebuffers(&amp;device, &amp;mut data)?;
+        create_command_pool(&amp;instance, &amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_command_pool(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>Command pool creation only takes two parameters:</p>
+<pre><code class="language-rust noplaypen">let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
+
+let info = vk::CommandPoolCreateInfo::builder()
+    .flags(vk::CommandPoolCreateFlags::empty()) // Optional.
+    .queue_family_index(indices.graphics);
+</code></pre>
+<p>Command buffers are executed by submitting them on one of the device queues, like the graphics and presentation queues we retrieved. Each command pool can only allocate command buffers that are submitted on a single type of queue. We're going to record commands for drawing, which is why we've chosen the graphics queue family.</p>
+<p>There are three possible flags for command pools:</p>
+<ul>
+<li><code>vk::CommandPoolCreateFlags::TRANSIENT</code>: Hint that command buffers are rerecorded with new commands very often (may change memory allocation behavior)</li>
+<li><code>vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER</code>: Allow command buffers to be rerecorded individually, without this flag they all have to be reset together</li>
+<li><code>vk::CommandPoolCreateFlags::PROTECTED</code>: Creates &quot;protected&quot; command buffers which are stored in <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-protected-access-rules">&quot;protected&quot; memory</a> where Vulkan prevents unauthorized operations from accessing the memory</li>
+</ul>
+<p>We will only record the command buffers at the beginning of the program and then execute them many times in the main loop and we don't need to protect our triangle with DRM, so we're not going to use any of these flags.</p>
+<pre><code class="language-rust noplaypen">data.command_pool = device.create_command_pool(&amp;info, None)?;
+</code></pre>
+<p>Commands will be used throughout the program to draw things on the screen, so the pool should only be destroyed at the end:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn destroy(&amp;mut self) {
+        self.device.destroy_command_pool(self.data.command_pool, None);
+        // ...
+    }
+}
+</code></pre>
+<h2><a class="header" href="#command-buffer-allocation" id="command-buffer-allocation">Command buffer allocation</a></h2>
+<p>We can now start allocating command buffers and recording drawing commands in them. Because one of the drawing commands involves binding the right <code>vk::Framebuffer</code>, we'll actually have to record a command buffer for every image in the swapchain once again. To that end, create a list of <code>vk::CommandBuffer</code> objects as an <code>AppData</code> field. Command buffers will be automatically freed when their command pool is destroyed, so we don't need any explicit cleanup.</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    command_buffers: Vec&lt;vk::CommandBuffer&gt;,
+}
+</code></pre>
+<p>We'll now start working on a <code>create_command_buffers</code> function that allocates and records the commands for each swapchain image.</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_command_pool(&amp;instance, &amp;device, &amp;mut data)?;
+        create_command_buffers(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_command_buffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>Command buffers are allocated with the <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_command_buffers"><code>vk::DeviceV1_0::allocate_command_buffers</code></a> function, which takes a <code>vk::CommandBufferAllocateInfo</code> struct as parameter that specifies the command pool and number of buffers to allocate:</p>
+<pre><code class="language-rust noplaypen">let allocate_info = vk::CommandBufferAllocateInfo::builder()
+    .command_pool(data.command_pool)
+    .level(vk::CommandBufferLevel::PRIMARY)
+    .command_buffer_count(data.framebuffers.len() as u32);
+
+data.command_buffers = device.allocate_command_buffers(&amp;allocate_info)?;
+</code></pre>
+<p>The <code>level</code> parameter specifies if the allocated command buffers are primary or secondary command buffers.</p>
+<ul>
+<li><code>vk::CommandBufferLevel::PRIMARY</code>: Can be submitted to a queue for execution, but cannot be called from other command buffers.</li>
+<li><code>vk::CommandBufferLevel::SECONDARY</code>: Cannot be submitted directly, but can be called from primary command buffers.</li>
+</ul>
+<p>We won't make use of the secondary command buffer functionality here, but you can imagine that it's helpful to reuse common operations from primary command buffers.</p>
+<h2><a class="header" href="#starting-command-buffer-recording" id="starting-command-buffer-recording">Starting command buffer recording</a></h2>
+<p>We begin recording a command buffer by calling <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.begin_command_buffer"><code>vk::DeviceV1_0::begin_command_buffer</code></a> with a small <code>vk::CommandBufferBeginInfo</code> structure as argument that specifies some details about the usage of this specific command buffer.</p>
+<pre><code class="language-rust noplaypen">for (framebuffer, command_buffer) in data.framebuffers.iter().zip(data.command_buffers.iter()) {
+    let inheritance = vk::CommandBufferInheritanceInfo::builder();
+
+    let info = vk::CommandBufferBeginInfo::builder()
+        .flags(vk::CommandBufferUsageFlags::empty()) // Optional.
+        .inheritance_info(&amp;inheritance);             // Optional.
+
+    device.begin_command_buffer(*command_buffer, &amp;info)?;
+}
+</code></pre>
+<p>The <code>flags</code> parameter specifies how we're going to use the command buffer. The following values are available:</p>
+<ul>
+<li><code>vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT</code>: The command buffer will be rerecorded right after executing it once.</li>
+<li><code>vk::CommandBufferUsageFlags::RENDER_PASS_CONTINUE</code>: This is a secondary command buffer that will be entirely within a single render pass.</li>
+<li><code>vk::CommandBufferUsageFlags::SIMULTANEOUS_USE</code>: The command buffer can be resubmitted while it is also already pending execution.</li>
+</ul>
+<p>None of these flags are applicable for us right now.</p>
+<p>The <code>inheritance_info</code> parameter is only relevant for secondary command buffers. It specifies which state to inherit from the calling primary command buffers.</p>
+<p>If the command buffer was already recorded once, then a call to <code>vk::DeviceV1_0::begin_command_buffer</code> will implicitly reset it. It's not possible to append commands to a buffer at a later time.</p>
+<h2><a class="header" href="#starting-a-render-pass" id="starting-a-render-pass">Starting a render pass</a></h2>
+<p>Before we can start a render pass we'll need to build some parameters.</p>
+<pre><code class="language-rust noplaypen">let render_area = vk::Rect2D::builder()
+    .offset(vk::Offset2D::default())
+    .extent(data.swapchain_extent);
+</code></pre>
+<p>Here we define the size of the render area. The render area defines where shader loads and stores will take place during the execution of the render pass. The pixels outside this region will have undefined values. It should match the size of the attachments for best performance.</p>
+<pre><code class="language-rust noplaypen">let clear_value = vk::ClearValue {
+    color: vk::ClearColorValue {
+        float32: [0.0, 0.0, 0.0, 1.0],
+    },
+};
+</code></pre>
+<p>Next we define a clear value that will be used to clear the framebuffer at the beginning of the render pass (because we used <code>vk::AttachmentLoadOp::CLEAR</code> when creating the render pass). <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/union.ClearValue.html"><code>vk::ClearValue</code></a> is a union that can be used to set clear values for color attachments or for depth/stencil attachments. Here we are setting the <code>color</code> field with a <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/union.ClearColorValue.html"><code>vk::ClearColorValue</code></a> union with 4 <code>f32</code>s that define a black clear color with 100% opacity.</p>
+<p>Drawing starts by beginning the render pass with <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_begin_render_pass"><code>DeviceV1_0::begin_render_pass</code></a>. The render pass is configured using some parameters in a <code>vk::RenderPassBeginInfo</code> struct.</p>
+<pre><code class="language-rust noplaypen">let clear_values = &amp;[clear_value];
+let info = vk::RenderPassBeginInfo::builder()
+    .render_pass(data.render_pass)
+    .framebuffer(*framebuffer)
+    .render_area(render_area)
+    .clear_values(clear_values);
+</code></pre>
+<p>The first parameters are the render pass itself and the attachments to bind. We created a framebuffer for each swapchain image that specifies it as color attachment. Then we provide the previously constructed render area and clear value.</p>
+<pre><code class="language-rust noplaypen">device.cmd_begin_render_pass(
+    *command_buffer, &amp;info, vk::SubpassContents::INLINE);
+</code></pre>
+<p>The render pass can now begin. All of the functions that record commands can be recognized by their <code>cmd_</code> prefix. They all return <code>()</code>, so there is no need for error handling until we've finished recording.</p>
+<p>The first parameter for every command is always the command buffer to record the command to. The second parameter specifies the details of the render pass we've just provided. The final parameter controls how the drawing commands within the render pass will be provided. It can have one of two values:</p>
+<ul>
+<li><code>vk::SubpassContents::INLINE</code>: The render pass commands will be embedded in the primary command buffer itself and no secondary command buffers will be executed.</li>
+<li><code>vk::SubpassContents::SECONDARY_COMMAND_BUFFERS</code>: The render pass commands will be executed from secondary command buffers.</li>
+</ul>
+<p>We will not be using secondary command buffers, so we'll go with the first option.</p>
+<h2><a class="header" href="#basic-drawing-commands" id="basic-drawing-commands">Basic drawing commands</a></h2>
+<p>We can now bind the graphics pipeline:</p>
+<pre><code class="language-rust noplaypen">device.cmd_bind_pipeline(
+    *command_buffer, vk::PipelineBindPoint::GRAPHICS, data.pipeline);
+</code></pre>
+<p>The second parameter specifies if the pipeline object is a graphics or compute pipeline. We've now told Vulkan which operations to execute in the graphics pipeline and which attachment to use in the fragment shader, so all that remains is telling it to draw the triangle:</p>
+<pre><code class="language-rust noplaypen">device.cmd_draw(*command_buffer, 3, 1, 0, 0);
+</code></pre>
+<p>The actual drawing function is a bit anticlimactic, but it's so simple because of all the information we specified in advance. It has the following parameters, aside from the command buffer:</p>
+<ul>
+<li><code>vertex_count</code>: Even though we don't have a vertex buffer, we technically still have 3 vertices to draw.</li>
+<li><code>instance_count</code>: Used for instanced rendering, use <code>1</code> if you're not doing that.</li>
+<li><code>first_vertex</code>: Used as an offset into the vertex buffer, defines the lowest value of <code>gl_VertexIndex</code>.</li>
+<li><code>first_instance</code>: Used as an offset for instanced rendering, defines the lowest value of <code>gl_InstanceIndex</code>.</li>
+</ul>
+<h2><a class="header" href="#finishing-up" id="finishing-up">Finishing up</a></h2>
+<p>The render pass can now be ended:</p>
+<pre><code class="language-rust noplaypen">device.cmd_end_render_pass(*command_buffer);
+</code></pre>
+<p>And we've finished recording the command buffer:</p>
+<pre><code class="language-rust noplaypen">device.end_command_buffer(*command_buffer)?;
+</code></pre>
+<p>In the next chapter we'll write the code for the main loop, which will acquire an image from the swapchain, execute the right command buffer and return the finished image to the swapchain.</p>
 <h1><a class="header" href="#rendering-and-presentation" id="rendering-and-presentation">Rendering and presentation</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/15_hello_triangle.rs">main.rs</a></p>
+<p>This is the chapter where everything is going to come together. We're going to implement the <code>App::render</code> function that will be called from the main loop to put the triangle on the screen.</p>
+<h2><a class="header" href="#synchronization" id="synchronization">Synchronization</a></h2>
+<p>The <code>App::render</code> function will perform the following operations:</p>
+<ul>
+<li>Acquire an image from the swapchain</li>
+<li>Execute the command buffer with that image as attachment in the framebuffer</li>
+<li>Return the image to the swapchain for presentation</li>
+</ul>
+<p>Each of these events is set in motion using a single function call, but they are executed asynchronously. The function calls will return before the operations are actually finished and the order of execution is also undefined. That is unfortunate, because each of the operations depends on the previous one finishing.</p>
+<p>There are two ways of synchronizing swapchain events: fences and semaphores. They're both objects that can be used for coordinating operations by having one operation signal and another operation wait for a fence or semaphore to go from the unsignaled to signaled state.</p>
+<p>The difference is that the state of fences can be accessed from your program using calls like <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.wait_for_fences"><code>vk::DeviceV1_0::wait_for_fences</code></a> and semaphores cannot be. Fences are mainly designed to synchronize your application itself with rendering operation, whereas semaphores are used to synchronize operations within or across command queues. We want to synchronize the queue operations of draw commands and presentation, which makes semaphores the best fit.</p>
+<h2><a class="header" href="#semaphores" id="semaphores">Semaphores</a></h2>
+<p>We'll need one semaphore to signal that an image has been acquired and is ready for rendering, and another one to signal that rendering has finished and presentation can happen. Create two <code>AppData</code> fields to store these semaphore objects:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    image_available_semaphore: vk::Semaphore,
+    render_finished_semaphore: vk::Semaphore,
+}
+</code></pre>
+<p>To create the semaphores, we'll add the last <code>create</code> function for this part of the tutorial, <code>create_sync_objects</code>:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_command_buffers(&amp;device, &amp;mut data)?;
+        create_sync_objects(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>Creating semaphores requires filling in the <code>vk::SemaphoreCreateInfo</code>, but in the current version of the API it doesn't actually have any required fields.</p>
+<pre><code class="language-rust noplaypen">fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    let semaphore_info = vk::SemaphoreCreateInfo::builder();
+
+    Ok(())
+}
+</code></pre>
+<p>Future versions of the Vulkan API or extensions may add functionality for the <code>flags</code> and <code>p_next</code> parameters like it does for the other structures. Creating the semaphores follows the familiar pattern:</p>
+<pre><code class="language-rust noplaypen">data.image_available_semaphore = device.create_semaphore(&amp;semaphore_info, None)?;
+data.render_finished_semaphore = device.create_semaphore(&amp;semaphore_info, None)?;
+</code></pre>
+<p>The semaphores should be cleaned up at the end of the program, when all commands have finished and no more synchronization is necessary:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn destroy(&amp;mut self) {
+        self.device.destroy_semaphore(self.data.render_finished_semaphore, None);
+        self.device.destroy_semaphore(self.data.image_available_semaphore, None);
+        // ...
+    }
+}
+</code></pre>
+<h2><a class="header" href="#acquiring-an-image-from-the-swapchain" id="acquiring-an-image-from-the-swapchain">Acquiring an image from the swapchain</a></h2>
+<p>As mentioned before, the first thing we need to do in the <code>App::render</code> function is acquire an image from the swapchain. Recall that the swapchain is an extension feature, so we must use a function with the <code>*_khr</code> naming convention:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+        let image_index = self
+            .device
+            .acquire_next_image_khr(
+                self.data.swapchain,
+                u64::max_value(),
+                self.data.image_available_semaphore,
+                vk::Fence::null(),
+            )?
+            .0 as usize;
+
+        Ok(())
+    }
+}
+</code></pre>
+<p>The first parameter of <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.acquire_next_image_khr"><code>vk::KhrSwapchainExtension::acquire_next_image_khr</code></a> is the swapchain from which we wish to acquire an image. The second parameter specifies a timeout in nanoseconds for an image to become available. Using the maximum value of a 64 bit unsigned integer disables the timeout.</p>
+<p>The next two parameters specify synchronization objects that are to be signaled when the presentation engine is finished using the image. That's the point in time where we can start drawing to it. It is possible to specify a semaphore, fence or both. We're going to use our <code>image_available_semaphore</code> for that purpose here.</p>
+<p>This function returns the index of the swapchain image that has become available. The index refers to the <code>vk::Image</code> in our <code>swapchain_images</code> array. We're going to use that index to pick the right command buffer.</p>
+<h2><a class="header" href="#submitting-the-command-buffer" id="submitting-the-command-buffer">Submitting the command buffer</a></h2>
+<p>Queue submission and synchronization is configured through parameters in the <code>vk::SubmitInfo</code> structure.</p>
+<pre><code class="language-rust noplaypen">let wait_semaphores = &amp;[self.data.image_available_semaphore];
+let wait_stages = &amp;[vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT];
+let command_buffers = &amp;[self.data.command_buffers[image_index as usize]];
+let signal_semaphores = &amp;[self.data.render_finished_semaphore];
+let submit_info = vk::SubmitInfo::builder()
+    .wait_semaphores(wait_semaphores)
+    .wait_dst_stage_mask(wait_stages)
+    .command_buffers(command_buffers)
+    .signal_semaphores(signal_semaphores);
+</code></pre>
+<p>The first two parameters, <code>wait_semaphores</code> and <code>wait_dst_stage_mask</code>, specifies which semaphores to wait on before execution begins and in which stage(s) of the pipeline to wait. We want to wait with writing colors to the image until it's available, so we're specifying the stage of the graphics pipeline that writes to the color attachment. That means that theoretically the implementation can already start executing our vertex shader and such while the image is not yet available. Each entry in the <code>wait_stages</code> array corresponds to the semaphore with the same index in <code>wait_semaphores</code>.</p>
+<p>The next parameter, <code>command_buffers</code>, specifies which command buffers to actually submit for execution. As mentioned earlier, we should submit the command buffer that binds the swapchain image we just acquired as color attachment.</p>
+<p>Lastly <code>signal_semaphores</code> specifies which semaphores to signal once the command buffer(s) have finished execution. In our case we're using the <code>render_finished_semaphore</code> for that purpose.</p>
+<pre><code class="language-rust noplaypen">self.device.queue_submit(
+    self.data.graphics_queue, &amp;[submit_info], vk::Fence::null())?;
+</code></pre>
+<p>We can now submit the command buffer to the graphics queue using <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_submit"><code>vk::DeviceV1_0::queue_submit</code></a>. The function takes an array of <code>vk::SubmitInfo</code> structures as argument for efficiency when the workload is much larger. The last parameter references an optional fence that will be signaled when the command buffers finish execution. We're using semaphores for synchronization, so we'll just pass a <code>vk::Fence::null()</code>.</p>
+<h2><a class="header" href="#subpass-dependencies" id="subpass-dependencies">Subpass dependencies</a></h2>
+<p>Remember that the subpasses in a render pass automatically take care of image layout transitions. These transitions are controlled by <em>subpass dependencies</em>, which specify memory and execution dependencies between subpasses. We have only a single subpass right now, but the operations right before and right after this subpass also count as implicit &quot;subpasses&quot;.</p>
+<p>There are two built-in dependencies that take care of the transition at the start of the render pass and at the end of the render pass, but the former does not occur at the right time. It assumes that the transition occurs at the start of the pipeline, but we haven't acquired the image yet at that point! There are two ways to deal with this problem. We could change the <code>wait_stages</code> for the <code>image_available_semaphore</code> to <code>vk::PipelineStageFlags::TOP_OF_PIPE</code> to ensure that the render passes don't begin until the image is available, or we can make the render pass wait for the <code>vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT</code> stage. I've decided to go with the second option here, because it's a good excuse to have a look at subpass dependencies and how they work.</p>
+<p>Subpass dependencies are specified in <code>vk::SubpassDependency</code> structs. Go to the <code>create_render_pass</code> function and add one:</p>
+<pre><code class="language-rust noplaypen">let dependency = vk::SubpassDependency::builder()
+    .src_subpass(vk::SUBPASS_EXTERNAL)
+    .dst_subpass(0)
+    // continued...
+</code></pre>
+<p>The first two fields specify the indices of the dependency and the dependent subpass. The special value <code>vk::SUBPASS_EXTERNAL</code> refers to the implicit subpass before or after the render pass depending on whether it is specified in <code>src_subpass</code> or <code>dst_subpass</code>. The index <code>0</code> refers to our subpass, which is the first and only one. The <code>dst_subpass</code> must always be higher than <code>src_subpass</code> to prevent cycles in the dependency graph (unless one of the subpasses is <code>vk::SUBPASS_EXTERNAL</code>).</p>
+<pre><code class="language-rust noplaypen">    .src_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT)
+    .src_access_mask(vk::AccessFlags::empty())
+</code></pre>
+<p>The next two fields specify the operations to wait on and the stages in which these operations occur. We need to wait for the swapchain to finish reading from the image before we can access it. This can be accomplished by waiting on the color attachment output stage itself.</p>
+<pre><code class="language-rust noplaypen">    .dst_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT)
+    .dst_access_mask(vk::AccessFlags::COLOR_ATTACHMENT_WRITE)
+</code></pre>
+<p>The operations that should wait on this are in the color attachment stage and involve the writing of the color attachment. These settings will prevent the transition from happening until it's actually necessary (and allowed): when we want to start writing colors to it.</p>
+<pre><code class="language-rust noplaypen">let attachments = &amp;[color_attachment];
+let subpasses = &amp;[subpass];
+let dependencies = &amp;[dependency];
+let info = vk::RenderPassCreateInfo::builder()
+    .attachments(attachments)
+    .subpasses(subpasses)
+    .dependencies(dependencies);
+</code></pre>
+<p>The <code>vk::RenderPassCreateInfo</code> struct has a field to specify an array of dependencies.</p>
+<h2><a class="header" href="#presentation" id="presentation">Presentation</a></h2>
+<p>The last step of drawing a frame is submitting the result back to the swapchain to have it eventually show up on the screen. Presentation is configured through a <code>vk::PresentInfoKHR</code> structure at the end of the <code>App::render</code> function.</p>
+<pre><code class="language-rust noplaypen">let swapchains = &amp;[self.data.swapchain];
+let image_indices = &amp;[image_index as u32];
+let present_info = vk::PresentInfoKHR::builder()
+    .wait_semaphores(signal_semaphores)
+    .swapchains(swapchains)
+    .image_indices(image_indices);
+</code></pre>
+<p>The first parameter specifies which semaphores to wait on before presentation can happen, just like <code>vk::SubmitInfo</code>.</p>
+<p>The next two parameters specify the swapchains to present images to and the index of the image for each swapchain. This will almost always be a single one.</p>
+<p>There is one last optional parameter called <code>results</code>. It allows you to specify an array of <code>vk::Result</code> values to check for every individual swapchain if presentation was successful. It's not necessary if you're only using a single swapchain, because you can simply use the return value of the present function.</p>
+<pre><code class="language-rust noplaypen">self.device.queue_present_khr(self.data.present_queue, &amp;present_info)?;
+</code></pre>
+<p>The <a href="https://docs.rs/vulkanalia/0.1.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code>vk::KhrSwapchainExtension::queue_present_khr</code></a> function submits the request to present an image to the swapchain. We'll modify the error handling for both <code>vk::KhrSwapchainExtension::acquire_next_image_khr</code> and <code>vk::KhrSwapchainExtension::queue_present_khr</code> in the next chapter, because their failure does not necessarily mean that the program should terminate, unlike the functions we've seen so far.</p>
+<p>If you did everything correctly up to this point, then you should now see something resembling the following when you run your program:</p>
+<p><img src="drawing/../images/triangle.png" alt="" /></p>
+<blockquote>
+<p>This colored triangle may look a bit different from the one you're used to seeing in graphics tutorials. That's because this tutorial lets the shader interpolate in linear color space and converts to sRGB color space afterwards. See <a href="https://medium.com/@heypete/hello-triangle-meet-swift-and-wide-color-6f9e246616d9">this blog post</a> for a discussion of the difference.</p>
+</blockquote>
+<p>Yay! Unfortunately, you'll see that when validation layers are enabled, the program crashes as soon as you close it. The messages printed to the terminal from <code>debug_callback</code> tell us why:</p>
+<p><img src="drawing/../images/semaphore_in_use.png" alt="" /></p>
+<p>Remember that all of the operations in <code>App::render</code> are asynchronous. That means that when we call <code>App::destroy</code> before exiting the loop in <code>main</code>, drawing and presentation operations may still be going on. Cleaning up resources while that is happening is a bad idea.</p>
+<p>To fix that problem, we should wait for the logical device to finish operations using <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.device_wait_idle"><code>vk::DeviceV1_0::device_wait_idle</code></a> before calling <code>App::destroy</code>:</p>
+<pre><code class="language-rust noplaypen">Event::WindowEvent { event: WindowEvent::CloseRequested, .. } =&gt; {
+    destroying = true;
+    *control_flow = ControlFlow::Exit;
+    app.device.device_wait_idle().unwrap();
+    app.destroy();
+}
+</code></pre>
+<p>You can also wait for operations in a specific command queue to be finished with <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_wait_idle"><code>vk::DeviceV1_0::queue_wait_idle</code></a>. These functions can be used as a very rudimentary way to perform synchronization. You'll see that the program now exits without problems when closing the window.</p>
+<h2><a class="header" href="#frames-in-flight" id="frames-in-flight">Frames in flight</a></h2>
+<p>If you run your application with validation layers enabled now you may either get errors or notice that the memory usage slowly grows. The reason for this is that the application is rapidly submitting work in the <code>App::render</code> function, but doesn't actually check if any of it finishes. If the CPU is submitting work faster than the GPU can keep up with then the queue will slowly fill up with work. Worse, even, is that we are reusing the <code>image_available_semaphore</code> and <code>render_finished_semaphore</code> semaphores, along with the command buffers, for multiple frames at the same time!</p>
+<p>The easy way to solve this is to wait for work to finish right after submitting it, for example by using <code>vk::DeviceV1_0::queue_wait_idle</code>:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+        // ...
+
+        self.device.queue_present_khr(self.data.present_queue, &amp;present_info)?;
+        self.device.queue_wait_idle(self.data.present_queue)?;
+
+        Ok(())
+    }
+}
+</code></pre>
+<p>However, we are likely not optimally using the GPU in this way, because the whole graphics pipeline is only used for one frame at a time right now. The stages that the current frame has already progressed through are idle and could already be used for a next frame. We will now extend our application to allow for multiple frames to be <em>in-flight</em> while still bounding the amount of work that piles up.</p>
+<p>Start by adding a constant at the top of the program that defines how many frames should be processed concurrently:</p>
+<pre><code class="language-rust noplaypen">const MAX_FRAMES_IN_FLIGHT: usize = 2;
+</code></pre>
+<p>Each frame should have its own set of semaphores in <code>AppData</code>:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    image_available_semaphores: Vec&lt;vk::Semaphore&gt;,
+    render_finished_semaphores: Vec&lt;vk::Semaphore&gt;,
+}
+</code></pre>
+<p>The <code>create_sync_objects</code> function should be changed to create all of these:</p>
+<pre><code class="language-rust noplaypen">fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    let semaphore_info = vk::SemaphoreCreateInfo::builder();
+
+    for _ in 0..MAX_FRAMES_IN_FLIGHT {
+        data.image_available_semaphores
+            .push(device.create_semaphore(&amp;semaphore_info, None)?);
+        data.render_finished_semaphores
+            .push(device.create_semaphore(&amp;semaphore_info, None)?);
+    }
+
+    Ok(())
+}
+</code></pre>
+<p>Similarly, they should also all be cleaned up:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn destroy(&amp;mut self) {
+        self.data.render_finished_semaphores
+            .iter()
+            .for_each(|s| self.device.destroy_semaphore(*s, None));
+        self.data.image_available_semaphores
+            .iter()
+            .for_each(|s| self.device.destroy_semaphore(*s, None));
+        // ...
+    }
+}
+</code></pre>
+<p>To use the right pair of semaphores every time, we need to keep track of the current frame. We will use a frame index for that purpose which we'll add to <code>App</code> (initialize it to <code>0</code> in <code>App::create</code>):</p>
+<pre><code class="language-rust noplaypen">struct App {
+    // ...
+    frame: usize,
+}
+</code></pre>
+<p>The <code>App::render</code> function can now be modified to use the right objects:</p>
+<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    let image_index = self
+        .device
+        .acquire_next_image_khr(
+            self.data.swapchain,
+            u64::max_value(),
+            self.data.image_available_semaphores[self.frame],
+            vk::Fence::null(),
+        )?
+        .0 as usize;
+
+    // ...
+
+    let wait_semaphores = &amp;[self.data.image_available_semaphores[self.frame]];
+
+    // ...
+
+    let signal_semaphores = &amp;[self.data.render_finished_semaphores[self.frame]];
+
+    // ...
+
+    Ok(())
+}
+</code></pre>
+<p>Of course, we shouldn't forget to advance to the next frame every time:</p>
+<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    // ...
+
+    self.frame = (self.frame + 1) % MAX_FRAMES_IN_FLIGHT;
+
+    Ok(())
+}
+</code></pre>
+<p>By using the modulo (%) operator, we ensure that the frame index loops around after every <code>MAX_FRAMES_IN_FLIGHT</code> enqueued frames.</p>
+<p>Although we've now set up the required objects to facilitate processing of multiple frames simultaneously, we still don't actually prevent more than <code>MAX_FRAMES_IN_FLIGHT</code> from being submitted. Right now there is only GPU-GPU synchronization and no CPU-GPU synchronization going on to keep track of how the work is going. We may be using the frame #0 objects while frame #0 is still in-flight!</p>
+<p>To perform CPU-GPU synchronization, Vulkan offers a second type of synchronization primitive called <em>fences</em>. Fences are similar to semaphores in the sense that they can be signaled and waited for, but this time we actually wait for them in our own code. We'll first create a fence for each frame in <code>AppData</code>:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    in_flight_fences: Vec&lt;vk::Fence&gt;,
+}
+</code></pre>
+<p>We'll create the fences together with the semaphores in the <code>create_sync_objects</code> function:</p>
+<pre><code class="language-rust noplaypen">fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    let semaphore_info = vk::SemaphoreCreateInfo::builder();
+    let fence_info = vk::FenceCreateInfo::builder();
+
+    for _ in 0..MAX_FRAMES_IN_FLIGHT {
+        data.image_available_semaphores
+            .push(device.create_semaphore(&amp;semaphore_info, None)?);
+        data.render_finished_semaphores
+            .push(device.create_semaphore(&amp;semaphore_info, None)?);
+
+        data.in_flight_fences.push(device.create_fence(&amp;fence_info, None)?);
+    }
+
+    Ok(())
+}
+</code></pre>
+<p>The creation of fences (<code>vk::Fence</code>) is very similar to the creation of semaphores. Also make sure to clean up the fences in <code>App::destroy</code>:</p>
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.data.in_flight_fences
+        .iter()
+        .for_each(|f| self.device.destroy_fence(*f, None));
+    // ...
+}
+</code></pre>
+<p>We will now change <code>App::render</code> to use the fences for synchronization. The <code>device.queue_submit(...)</code> call includes an optional parameter to pass a fence that should be signaled when the command buffer finishes executing. We can use this to signal that a frame has finished.</p>
+<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    // ...
+
+    self.device.queue_submit(
+        self.data.graphics_queue,
+        &amp;[submit_info],
+        self.data.in_flight_fences[self.frame],
+    )?;
+
+    // ...
+}
+</code></pre>
+<p>Now the only thing remaining is to change the beginning of <code>App::render</code> to wait for the frame to be finished:</p>
+<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    self.device.wait_for_fences(
+        &amp;[self.data.in_flight_fences[self.frame]],
+        true,
+        u64::max_value(),
+    )?;
+
+    self.device.reset_fences(&amp;[self.data.in_flight_fences[self.frame]])?;
+
+    // ...
+}
+</code></pre>
+<p>The <code>vk::DeviceV1_0::wait_for_fences</code> function takes an array of fences and waits for either any or all of them to be signaled before returning. The <code>true</code> we pass here indicates that we want to wait for all fences, but in the case of a single one it obviously doesn't matter. Just like <code>vk::KhrSwapchainExtension::acquire_next_image_khr</code> this function also takes a timeout. Unlike the semaphores, we manually need to restore the fence to the unsignaled state by resetting it with the <code>vk::DeviceV1_0::reset_fences</code> call.</p>
+<p>If you run the program now, you'll notice something something strange. The application no longer seems to be rendering anything and might even be frozen.</p>
+<p>That means that we're waiting for a fence that has not been submitted. The problem here is that, by default, fences are created in the unsignaled state. That means that <code>vk::DeviceV1_0::wait_for_fences</code> will wait forever if we haven't used the fence before. To solve that, we can change the fence creation to initialize it in the signaled state as if we had rendered an initial frame that finished:</p>
+<pre><code class="language-rust noplaypen">fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    // ...
+
+    let fence_info = vk::FenceCreateInfo::builder()
+        .flags(vk::FenceCreateFlags::SIGNALED);
+
+    // ...
+}
+</code></pre>
+<p>The memory leak is gone now, but the program is not quite working correctly yet. If <code>MAX_FRAMES_IN_FLIGHT</code> is higher than the number of swapchain images or <code>vk::KhrSwapchainExtension::acquire_next_image_khr</code> returns images out-of-order then it's possible that we may start rendering to a swapchain image that is already <em>in flight</em>. To avoid this, we need to track for each swapchain image if a frame in flight is currently using it. This mapping will refer to frames in flight by their fences so we'll immediately have a synchronization object to wait on before a new frame can use that image.</p>
+<p>First add a new list called <code>images_in_flight</code> to <code>AppData</code> to track this:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    in_flight_fences: Vec&lt;vk::Fence&gt;,
+    images_in_flight: Vec&lt;vk::Fence&gt;,
+}
+</code></pre>
+<p>Prepare it in <code>create_sync_objects</code>:</p>
+<pre><code class="language-rust noplaypen">fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    // ...
+
+    data.images_in_flight = data.swapchain_images
+        .iter()
+        .map(|_| vk::Fence::null())
+        .collect();
+
+    Ok(())
+}
+</code></pre>
+<p>Initially not a single frame is using an image so we explicitly initialize it to <em>no fence</em>. Now we'll modify <code>App::render</code> to wait on any previous frame that is using the image that we've just been assigned for the new frame:</p>
+<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    // ...
+
+    let image_index = self
+        .device
+        .acquire_next_image_khr(
+            self.data.swapchain,
+            u64::max_value(),
+            self.data.image_available_semaphores[self.frame],
+            vk::Fence::null(),
+        )?
+        .0 as usize;
+
+    if !self.data.images_in_flight[image_index as usize].is_null() {
+        self.device.wait_for_fences(
+            &amp;[self.data.images_in_flight[image_index as usize]],
+            true,
+            u64::max_value(),
+        )?;
+    }
+
+    self.data.images_in_flight[image_index as usize] =
+        self.data.in_flight_fences[self.frame];
+
+    // ...
+}
+</code></pre>
+<p>Because we now have more calls to <code>vk::DeviceV1_0::wait_for_fences</code>, the <code>vk::DeviceV1_0::reset_fences</code> call should be <strong>moved</strong>. It's best to simply call it right before actually using the fence:</p>
+<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    // ...
+
+    self.device.reset_fences(&amp;[self.data.in_flight_fences[self.frame]])?;
+
+    self.device.queue_submit(
+        self.data.graphics_queue,
+        &amp;[submit_info],
+        self.data.in_flight_fences[self.frame],
+    )?;
+
+    // ...
+}
+</code></pre>
+<p>We've now implemented all the needed synchronization to ensure that there are no more than two frames of work enqueued and that these frames are not accidentally using the same image. Note that it is fine for other parts of the code, like the final cleanup, to rely on more rough synchronization like <code>vkDeviceWaitIdle</code>. You should decide on which approach to use based on performance requirements.</p>
+<p>To learn more about synchronization through examples, have a look at <a href="https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples#swapchain-image-acquire-and-present">this extensive overview</a> by Khronos.</p>
+<h2><a class="header" href="#conclusion-2" id="conclusion-2">Conclusion</a></h2>
+<p>A little over 600 lines of code later, we've finally gotten to the stage of seeing something pop up on the screen! Bootstrapping a Vulkan program is definitely a lot of work, but the take-away message is that Vulkan gives you an immense amount of control through its explicitness. I recommend you to take some time now to reread the code and build a mental model of the purpose of all of the Vulkan objects in the program and how they relate to each other. We'll be building on top of that knowledge to extend the functionality of the program from this point on.</p>
+<p>In the next chapter we'll deal with one more small thing that is required for a well-behaved Vulkan program.</p>
 <h1><a class="header" href="#recreation" id="recreation">Recreation</a></h1>
 <p>Coming soon™.</p>
 <h1><a class="header" href="#vertex-input-description" id="vertex-input-description">Vertex input description</a></h1>

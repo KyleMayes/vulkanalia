@@ -153,7 +153,67 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#framebuffers" id="framebuffers">Framebuffers</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/13_framebuffers.rs">main.rs</a></p>
+<p>We've talked a lot about framebuffers in the past few chapters and we've set up the render pass to expect a single framebuffer with the same format as the swapchain images, but we haven't actually created any yet.</p>
+<p>The attachments specified during render pass creation are bound by wrapping them into a <code>vk::Framebuffer</code> object. A framebuffer object references all of the <code>vk::ImageView</code> objects that represent the attachments. In our case that will be only a single one: the color attachment. However, the image that we have to use for the attachment depends on which image the swapchain returns when we retrieve one for presentation. That means that we have to create a framebuffer for all of the images in the swapchain and use the one that corresponds to the retrieved image at drawing time.</p>
+<p>To that end, create another <code>Vec</code> field in <code>AppData</code> to hold the framebuffers:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    framebuffers: Vec&lt;vk::Framebuffer&gt;,
+}
+</code></pre>
+<p>We'll create the objects for this array in a new function <code>create_framebuffers</code> that is called from <code>App::create</code> right after creating the graphics pipeline:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_pipeline(&amp;device, &amp;mut data)?;
+        create_framebuffers(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_framebuffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>Start by mapping over the swapchain image views:</p>
+<pre><code class="language-rust noplaypen">fn create_framebuffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    data.framebuffers = data
+        .swapchain_image_views
+        .iter()
+        .map(|i| {
+
+        })
+        .collect::&lt;Result&lt;Vec&lt;_&gt;, _&gt;&gt;()?;
+
+    Ok(())
+}
+</code></pre>
+<p>We'll then create a framebuffer for each image view:</p>
+<pre><code class="language-rust noplaypen">let attachments = &amp;[*i];
+let create_info = vk::FramebufferCreateInfo::builder()
+    .render_pass(data.render_pass)
+    .attachments(attachments)
+    .width(data.swapchain_extent.width)
+    .height(data.swapchain_extent.height)
+    .layers(1);
+
+device.create_framebuffer(&amp;create_info, None)
+</code></pre>
+<p>As you can see, creation of framebuffers is quite straightforward. We first need to specify with which <code>render_pass</code> the framebuffer needs to be compatible. You can only use a framebuffer with the render passes that it is compatible with, which roughly means that they use the same number and type of attachments.</p>
+<p>The <code>attachments</code> field specifies the <code>vk::ImageView</code> objects that should be bound to the respective attachment descriptions in the render pass <code>attachment</code> array.</p>
+<p>The <code>width</code> and <code>height</code> parameters are self-explanatory and <code>layers</code> refers to the number of layers in image arrays. Our swapchain images are single images, so the number of layers is <code>1</code>.</p>
+<p>We should delete the framebuffers before the image views and render pass that they are based on, but only after we've finished rendering:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn destroy(&amp;mut self) {
+        self.data.framebuffers
+            .iter()
+            .for_each(|f| self.device.destroy_framebuffer(*f, None));
+        // ...
+    }
+}
+</code></pre>
+<p>We've now reached the milestone where we have all of the objects that are required for rendering. In the next chapter we're going to write the first actual drawing commands.</p>
 
                     </main>
 

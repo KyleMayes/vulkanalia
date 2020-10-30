@@ -229,7 +229,7 @@ let viewport_state = vk::PipelineViewportStateCreateInfo::builder()
 </code></pre>
 <p>The <code>line_width</code> member is straightforward, it describes the thickness of lines in terms of number of fragments. The maximum line width that is supported depends on the hardware and any line thicker than <code>1.0</code> requires you to enable the <code>wide_lines</code> GPU feature.</p>
 <pre><code class="language-rust noplaypen">    .cull_mode(vk::CullModeFlags::BACK)
-    .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
+    .front_face(vk::FrontFace::CLOCKWISE)
 </code></pre>
 <p>The <code>cull_mode</code> variable determines the type of face culling to use. You can disable culling, cull the front faces, cull the back faces or both. The <code>front_face</code> variable specifies the vertex order for faces to be considered front-facing and can be clockwise or counterclockwise.</p>
 <pre><code class="language-rust noplaypen">    .depth_bias_enable(false);
