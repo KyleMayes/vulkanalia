@@ -281,15 +281,15 @@ pause
 }
 </code></pre>
 <h2><a class="header" href="#creating-shader-modules" id="creating-shader-modules">Creating shader modules</a></h2>
-<p>Before we can pass the code to the pipeline, we have to wrap it in a <code>vk::ShaderModule</code> object. Let's create a helper function <code>create_shader_module</code> to do that.</p>
+<p>Before we can pass the code to the pipeline, we have to wrap it in a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.ShaderModule.html"><code class="hljs">vk::ShaderModule</code></a> object. Let's create a helper function <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_shader_module"><code class="hljs">create_shader_module</code></a> to do that.</p>
 <pre><code class="language-rust noplaypen">fn create_shader_module(
     device: &amp;Device,
     bytecode: &amp;[u8],
 ) -&gt; Result&lt;vk::ShaderModule&gt; {
 }
 </code></pre>
-<p>The function will take a slice containing the bytecode as parameter and create a <code>vk::ShaderModule</code> from it using our logical device.</p>
-<p>Creating a shader module is simple, we only need to specify the length of our bytecode slice and the bytecode slice itself. This information is specified in a <code>vk::ShaderModuleCreateInfo</code> structure. The one catch is that the size of the bytecode is specified in bytes, but the bytecode slice expected by this struct is a <code>&amp;[u32]</code> instead of a <code>&amp;[u8]</code>. Therefore we will first need to convert our <code>&amp;[u8]</code> into an <code>&amp;[u32]</code>. We will accomplish this with <a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.align_to"><code>slice::align_to</code></a> which can be used to convert a slice into a slice containing a type with a different size and/or alignment requirements. However, the <code>&amp;[u8]</code> returned by <code>include_bytes!</code> may not meet our alignment requirements, so we'll first copy it into a <code>Vec</code>.</p>
+<p>The function will take a slice containing the bytecode as parameter and create a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.ShaderModule.html"><code class="hljs">vk::ShaderModule</code></a> from it using our logical device.</p>
+<p>Creating a shader module is simple, we only need to specify the length of our bytecode slice and the bytecode slice itself. This information is specified in a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.ShaderModuleCreateInfo.html"><code class="hljs">vk::ShaderModuleCreateInfo</code></a> structure. The one catch is that the size of the bytecode is specified in bytes, but the bytecode slice expected by this struct is a <code>&amp;[u32]</code> instead of a <code>&amp;[u8]</code>. Therefore we will first need to convert our <code>&amp;[u8]</code> into an <code>&amp;[u32]</code>. We will accomplish this with <a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.align_to"><code>slice::align_to</code></a> which can be used to convert a slice into a slice containing a type with a different size and/or alignment requirements. However, the <code>&amp;[u8]</code> returned by <code>include_bytes!</code> may not meet our alignment requirements, so we'll first copy it into a <code>Vec</code>.</p>
 <pre><code class="language-rust noplaypen">let bytecode = Vec::&lt;u8&gt;::from(bytecode);
 let (prefix, code, suffix) = unsafe { bytecode.align_to::&lt;u32&gt;() };
 if !prefix.is_empty() || !suffix.is_empty() {
@@ -297,7 +297,7 @@ if !prefix.is_empty() || !suffix.is_empty() {
 }
 </code></pre>
 <p>The middle slice returned by this method (<code>code</code>) is a <code>&amp;[u32]</code> and is guaranteed to be correctly aligned. Any <code>u8</code>s in our <code>bytecode</code> slice that fell outside this alignment guarantee will appear in the first or third slices returned (<code>prefix</code> and <code>suffix</code>). We'll require that both of these slices are empty to ensure that our entire <code>bytecode</code> slice has been converted to a <code>&amp;[u32]</code> though you shouldn't have to worry about this failure case in practice.</p>
-<p>We can then construct a <code>vk::ShaderModuleCreateInfo</code> and use it to call <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.create_shader_module"><code>DeviceV1_0::create_shader_module</code></a> to create the shader module:</p>
+<p>We can then construct a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.ShaderModuleCreateInfo.html"><code class="hljs">vk::ShaderModuleCreateInfo</code></a> and use it to call <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_shader_module"><code class="hljs">create_shader_module</code></a> to create the shader module:</p>
 <pre><code class="language-rust noplaypen">let info = vk::ShaderModuleCreateInfo::builder()
     .code_size(bytecode.len())
     .code(code);
@@ -315,7 +315,7 @@ Ok(device.create_shader_module(&amp;info, None)?)
 
     // ...
 </code></pre>
-<p>The cleanup should then happen at the end of the function by adding two calls to <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.destroy_shader_module"><code>DeviceV1_0::destroy_shader_module</code></a>. All of the remaining code in this chapter will be inserted before these lines.</p>
+<p>The cleanup should then happen at the end of the function by adding two calls to <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.destroy_shader_module"><code class="hljs">destroy_shader_module</code></a>. All of the remaining code in this chapter will be inserted before these lines.</p>
 <pre><code class="language-rust noplaypen">    // ...
 
     device.destroy_shader_module(vert_shader_module, None);
@@ -325,7 +325,7 @@ Ok(device.create_shader_module(&amp;info, None)?)
 }
 </code></pre>
 <h2><a class="header" href="#shader-stage-creation" id="shader-stage-creation">Shader stage creation</a></h2>
-<p>To actually use the shaders we'll need to assign them to a specific pipeline stage through <code>vk::PipelineShaderStageCreateInfo</code> structures as part of the actual pipeline creation process.</p>
+<p>To actually use the shaders we'll need to assign them to a specific pipeline stage through <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.PipelineShaderStageCreateInfo.html"><code class="hljs">vk::PipelineShaderStageCreateInfo</code></a> structures as part of the actual pipeline creation process.</p>
 <p>We'll start by filling in the structure for the vertex shader, again in the <code>create_pipeline</code> function.</p>
 <pre><code class="language-rust noplaypen">let vert_stage = vk::PipelineShaderStageCreateInfo::builder()
     .stage(vk::ShaderStageFlags::VERTEX)
