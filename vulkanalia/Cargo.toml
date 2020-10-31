@@ -15,6 +15,9 @@ description = "Vulkan bindings for Rust."
 documentation = "https://docs.rs/vulkanalia"
 repository = "https://github.com/KyleMayes/vulkanalia"
 
+keywords = ["graphics", "vulkan"]
+categories = ["graphics"]
+
 [features]
 
 libloading_ = ["libloading"]

@@ -15,6 +15,9 @@ description = "Raw Vulkan bindings for Rust."
 documentation = "https://docs.rs/vulkanalia-sys"
 repository = "https://github.com/KyleMayes/vulkanalia"
 
+keywords = ["graphics", "vulkan"]
+categories = ["graphics"]
+
 [dependencies]
 
 bitflags = "1"
