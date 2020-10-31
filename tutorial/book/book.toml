@@ -13,3 +13,8 @@ edition = "edition2018"
 [output.html]
 
 git-repository-url = "https://github.com/KyleMayes/vulkanalia"
+
+[preprocessor.vk]
+
+command = "vk-preprocessor"
+renderer = ["html"]

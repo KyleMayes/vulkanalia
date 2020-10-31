@@ -16,7 +16,7 @@ Each of these events is set in motion using a single function call, but they are
 
 There are two ways of synchronizing swapchain events: fences and semaphores. They're both objects that can be used for coordinating operations by having one operation signal and another operation wait for a fence or semaphore to go from the unsignaled to signaled state.
 
-The difference is that the state of fences can be accessed from your program using calls like [`vk::DeviceV1_0::wait_for_fences`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.wait_for_fences) and semaphores cannot be. Fences are mainly designed to synchronize your application itself with rendering operation, whereas semaphores are used to synchronize operations within or across command queues. We want to synchronize the queue operations of draw commands and presentation, which makes semaphores the best fit.
+The difference is that the state of fences can be accessed from your program using calls like `wait_for_fences` and semaphores cannot be. Fences are mainly designed to synchronize your application itself with rendering operation, whereas semaphores are used to synchronize operations within or across command queues. We want to synchronize the queue operations of draw commands and presentation, which makes semaphores the best fit.
 
 ## Semaphores
 
@@ -98,7 +98,7 @@ impl App {
 }
 ```
 
-The first parameter of [`vk::KhrSwapchainExtension::acquire_next_image_khr`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.acquire_next_image_khr) is the swapchain from which we wish to acquire an image. The second parameter specifies a timeout in nanoseconds for an image to become available. Using the maximum value of a 64 bit unsigned integer disables the timeout.
+The first parameter of `acquire_next_image_khr` is the swapchain from which we wish to acquire an image. The second parameter specifies a timeout in nanoseconds for an image to become available. Using the maximum value of a 64 bit unsigned integer disables the timeout.
 
 The next two parameters specify synchronization objects that are to be signaled when the presentation engine is finished using the image. That's the point in time where we can start drawing to it. It is possible to specify a semaphore, fence or both. We're going to use our `image_available_semaphore` for that purpose here.
 
@@ -131,7 +131,7 @@ self.device.queue_submit(
     self.data.graphics_queue, &[submit_info], vk::Fence::null())?;
 ```
 
-We can now submit the command buffer to the graphics queue using [`vk::DeviceV1_0::queue_submit`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_submit). The function takes an array of `vk::SubmitInfo` structures as argument for efficiency when the workload is much larger. The last parameter references an optional fence that will be signaled when the command buffers finish execution. We're using semaphores for synchronization, so we'll just pass a `vk::Fence::null()`.
+We can now submit the command buffer to the graphics queue using `queue_submit`. The function takes an array of `vk::SubmitInfo` structures as argument for efficiency when the workload is much larger. The last parameter references an optional fence that will be signaled when the command buffers finish execution. We're using semaphores for synchronization, so we'll just pass a `vk::Fence::null()`.
 
 ## Subpass dependencies
 
@@ -199,7 +199,7 @@ There is one last optional parameter called `results`. It allows you to specify 
 self.device.queue_present_khr(self.data.present_queue, &present_info)?;
 ```
 
-The [`vk::KhrSwapchainExtension::queue_present_khr`](https://docs.rs/vulkanalia/0.1.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr) function submits the request to present an image to the swapchain. We'll modify the error handling for both `vk::KhrSwapchainExtension::acquire_next_image_khr` and `vk::KhrSwapchainExtension::queue_present_khr` in the next chapter, because their failure does not necessarily mean that the program should terminate, unlike the functions we've seen so far.
+The `queue_present_khr` function submits the request to present an image to the swapchain. We'll modify the error handling for both `acquire_next_image_khr` and `queue_present_khr` in the next chapter, because their failure does not necessarily mean that the program should terminate, unlike the functions we've seen so far.
 
 If you did everything correctly up to this point, then you should now see something resembling the following when you run your program:
 
@@ -213,7 +213,7 @@ Yay! Unfortunately, you'll see that when validation layers are enabled, the prog
 
 Remember that all of the operations in `App::render` are asynchronous. That means that when we call `App::destroy` before exiting the loop in `main`, drawing and presentation operations may still be going on. Cleaning up resources while that is happening is a bad idea.
 
-To fix that problem, we should wait for the logical device to finish operations using [`vk::DeviceV1_0::device_wait_idle`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.device_wait_idle) before calling `App::destroy`:
+To fix that problem, we should wait for the logical device to finish operations using `device_wait_idle` before calling `App::destroy`:
 
 ```rust,noplaypen
 Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
@@ -224,13 +224,13 @@ Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
 }
 ```
 
-You can also wait for operations in a specific command queue to be finished with [`vk::DeviceV1_0::queue_wait_idle`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_wait_idle). These functions can be used as a very rudimentary way to perform synchronization. You'll see that the program now exits without problems when closing the window.
+You can also wait for operations in a specific command queue to be finished with `queue_wait_idle`. These functions can be used as a very rudimentary way to perform synchronization. You'll see that the program now exits without problems when closing the window.
 
 ## Frames in flight
 
 If you run your application with validation layers enabled now you may either get errors or notice that the memory usage slowly grows. The reason for this is that the application is rapidly submitting work in the `App::render` function, but doesn't actually check if any of it finishes. If the CPU is submitting work faster than the GPU can keep up with then the queue will slowly fill up with work. Worse, even, is that we are reusing the `image_available_semaphore` and `render_finished_semaphore` semaphores, along with the command buffers, for multiple frames at the same time!
 
-The easy way to solve this is to wait for work to finish right after submitting it, for example by using `vk::DeviceV1_0::queue_wait_idle`:
+The easy way to solve this is to wait for work to finish right after submitting it, for example by using `queue_wait_idle`:
 
 ```rust,noplaypen
 impl App {
@@ -389,7 +389,7 @@ fn destroy(&mut self) {
 }
 ```
 
-We will now change `App::render` to use the fences for synchronization. The `device.queue_submit(...)` call includes an optional parameter to pass a fence that should be signaled when the command buffer finishes executing. We can use this to signal that a frame has finished.
+We will now change `App::render` to use the fences for synchronization. The `queue_submit` call includes an optional parameter to pass a fence that should be signaled when the command buffer finishes executing. We can use this to signal that a frame has finished.
 
 ```rust,noplaypen
 fn render(&mut self, window: &Window) -> Result<()> {
@@ -421,11 +421,11 @@ fn render(&mut self, window: &Window) -> Result<()> {
 }
 ```
 
-The `vk::DeviceV1_0::wait_for_fences` function takes an array of fences and waits for either any or all of them to be signaled before returning. The `true` we pass here indicates that we want to wait for all fences, but in the case of a single one it obviously doesn't matter. Just like `vk::KhrSwapchainExtension::acquire_next_image_khr` this function also takes a timeout. Unlike the semaphores, we manually need to restore the fence to the unsignaled state by resetting it with the `vk::DeviceV1_0::reset_fences` call.
+The `wait_for_fences` function takes an array of fences and waits for either any or all of them to be signaled before returning. The `true` we pass here indicates that we want to wait for all fences, but in the case of a single one it obviously doesn't matter. Just like `acquire_next_image_khr` this function also takes a timeout. Unlike the semaphores, we manually need to restore the fence to the unsignaled state by resetting it with the `reset_fences` call.
 
 If you run the program now, you'll notice something something strange. The application no longer seems to be rendering anything and might even be frozen.
 
-That means that we're waiting for a fence that has not been submitted. The problem here is that, by default, fences are created in the unsignaled state. That means that `vk::DeviceV1_0::wait_for_fences` will wait forever if we haven't used the fence before. To solve that, we can change the fence creation to initialize it in the signaled state as if we had rendered an initial frame that finished:
+That means that we're waiting for a fence that has not been submitted. The problem here is that, by default, fences are created in the unsignaled state. That means that `wait_for_fences` will wait forever if we haven't used the fence before. To solve that, we can change the fence creation to initialize it in the signaled state as if we had rendered an initial frame that finished:
 
 ```rust,noplaypen
 fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
@@ -438,7 +438,7 @@ fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
 }
 ```
 
-The memory leak is gone now, but the program is not quite working correctly yet. If `MAX_FRAMES_IN_FLIGHT` is higher than the number of swapchain images or `vk::KhrSwapchainExtension::acquire_next_image_khr` returns images out-of-order then it's possible that we may start rendering to a swapchain image that is already *in flight*. To avoid this, we need to track for each swapchain image if a frame in flight is currently using it. This mapping will refer to frames in flight by their fences so we'll immediately have a synchronization object to wait on before a new frame can use that image.
+The memory leak is gone now, but the program is not quite working correctly yet. If `MAX_FRAMES_IN_FLIGHT` is higher than the number of swapchain images or `acquire_next_image_khr` returns images out-of-order then it's possible that we may start rendering to a swapchain image that is already *in flight*. To avoid this, we need to track for each swapchain image if a frame in flight is currently using it. This mapping will refer to frames in flight by their fences so we'll immediately have a synchronization object to wait on before a new frame can use that image.
 
 First add a new list called `images_in_flight` to `AppData` to track this:
 
@@ -496,7 +496,7 @@ fn render(&mut self, window: &Window) -> Result<()> {
 }
 ```
 
-Because we now have more calls to `vk::DeviceV1_0::wait_for_fences`, the `vk::DeviceV1_0::reset_fences` call should be **moved**. It's best to simply call it right before actually using the fence:
+Because we now have more calls to `wait_for_fences`, the `reset_fences` call should be **moved**. It's best to simply call it right before actually using the fence:
 
 ```rust,noplaypen
 fn render(&mut self, window: &Window) -> Result<()> {

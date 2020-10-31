@@ -16,7 +16,7 @@ Next we import `vulkanalia`'s `winit` integration as `vk_winit` which in this ch
 
 Lastly we import the Vulkan 1.0 prelude from `vulkanalia` which will provide all of the other Vulkan-related imports we will need for this and future chapters.
 
-Now, to create an instance we'll next have to fill in a struct with some information about our application. This data is technically optional, but it may provide some useful information to the driver in order to optimize our specific application (e.g., because it uses a well-known graphics engine with certain special behavior). This struct is called `vk::ApplicationInfo` and we'll create it in a new function called `create_instance` that takes a Vulkan entry point (which we will create later) and returns a Vulkan instance:
+Now, to create an instance we'll next have to fill in a struct with some information about our application. This data is technically optional, but it may provide some useful information to the driver in order to optimize our specific application (e.g., because it uses a well-known graphics engine with certain special behavior). This struct is called `vk::ApplicationInfo` and we'll create it in a new function called `^create_instance` that takes a Vulkan entry point (which we will create later) and returns a Vulkan instance:
 
 ```rust,noplaypen
 fn create_instance(entry: &Entry) -> Result<Instance> {
@@ -75,7 +75,7 @@ fn create(window: &Window) -> Result<Self> {
 }
 ```
 
-Here we first create a Vulkan function loader which will be used to load the initial Vulkan commands from the Vulkan shared library. Next we create the Vulkan entry point using the function loader which will load all of the commands we need to manage Vulkan instances. Lastly we are now able to call our `create_instance` function with the Vulkan entry point.
+Here we first create a Vulkan function loader which will be used to load the initial Vulkan commands from the Vulkan shared library. Next we create the Vulkan entry point using the function loader which will load all of the commands we need to manage Vulkan instances. Lastly we are now able to call our `^create_instance` function with the Vulkan entry point.
 
 ## Cleaning up
 
@@ -91,12 +91,12 @@ Like the Vulkan commands used to create objects, the commands used to destroy ob
 
 ## `Instance` vs `vk::Instance`
 
-When we call `create_instance`, what we get back is not a raw Vulkan instance as would be returned by the Vulkan command [`vkCreateInstance`](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateInstance.html). Instead what we got back is a custom type defined by `vulkanalia` which combines both a raw Vulkan instance and the commands loaded for that specific instance.
+When we call `^create_instance`, what we get back is not a raw Vulkan instance as would be returned by the Vulkan command `vkCreateInstance`. Instead what we got back is a custom type defined by `vulkanalia` which combines both a raw Vulkan instance and the commands loaded for that specific instance.
 
 This is the `Instance` type we have been using (imported from the `vulkanalia` prelude) which should not be confused with the `vk::Instance` type which represents a raw Vulkan instance. In future chapters we will also use the `Device` type which, like `Instance`, is a pairing of a raw Vulkan device (`vk::Device`) and the commands loaded for that specific device. Fortunately we will not be using `vk::Instance` or `vk::Device` directly so you won't need to worry about getting them mixed up.
 
 Because an `Instance` contains both a Vulkan instance and the associated commands, the command wrappers like `destroy_instance` implemented for an `Instance` are able to provide the Vulkan instance when it is required by the underlying Vulkan command.
 
-If you look at the documentation for the [`vkDestroyInstance`](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyInstance.html) command, you will see that it takes two parameters: the instance to destroy and the optional custom allocator callbacks. However, `destroy_instance` only takes the optional custom allocator callbacks because it is able to provide the raw Vulkan handle as the first parameter itself as described above.
+If you look at the documentation for the `vkDestroyInstance` command, you will see that it takes two parameters: the instance to destroy and the optional custom allocator callbacks. However, `destroy_instance` only takes the optional custom allocator callbacks because it is able to provide the raw Vulkan handle as the first parameter itself as described above.
 
 Before continuing with the more complex steps after instance creation, it's time to evaluate our debugging options by checking out validation layers.

@@ -50,14 +50,14 @@ fn check_physical_device(
 }
 ```
 
-To evaluate whether a physical device meets our needs we can start by querying for some details. Basic device properties like the name, type, and supported Vulkan version can be queried using [`vk::InstanceV1_0::get_physical_device_properties`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_properties):
+To evaluate whether a physical device meets our needs we can start by querying for some details. Basic device properties like the name, type, and supported Vulkan version can be queried using `get_physical_device_properties`:
 
 ```rust,noplaypen
 let properties = instance
     .get_physical_device_properties(physical_device);
 ```
 
-The support for optional features like texture compression, 64 bit floats, and multi viewport rendering (useful for VR) can be queried using [`vk::InstanceV1_0::get_physical_device_features`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features):
+The support for optional features like texture compression, 64 bit floats, and multi viewport rendering (useful for VR) can be queried using `get_physical_device_features`:
 
 ```rust,noplaypen
 let features = instance

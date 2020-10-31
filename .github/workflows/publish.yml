@@ -15,6 +15,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       # Dependencies
+      - name: Install Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 14
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -23,8 +27,16 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: install
-          args: mdbook --no-default-features
+          args: mdbook --version 0.4.4 --no-default-features
       # Publish
+      - name: Build Index
+        working-directory: ./generator
+        run: ./gradlew run --args="--directory=.. index"
+      - name: Build Preprocessor
+        uses: actions-rs/cargo@v1
+        with:
+          command: install
+          args: --path ./tutorial/book/preprocessor
       - name: Build Tutorial
         working-directory: ./tutorial/book
         run: mdbook build

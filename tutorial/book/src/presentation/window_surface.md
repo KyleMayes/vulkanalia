@@ -8,7 +8,7 @@ The `VK_KHR_surface` extension is an instance level extension and we've actually
 
 The window surface needs to be created right after the instance creation, because it can actually influence the physical device selection. The reason we postponed this is because window surfaces are part of the larger topic of render targets and presentation for which the explanation would have cluttered the basic setup. It should also be noted that window surfaces are an entirely optional component in Vulkan, if you just need off-screen rendering. Vulkan allows you to do that without hacks like creating an invisible window (necessary for OpenGL).
 
-While we can freely import types for extensions like the struct `vk::SurfaceKHR`, we need to import the `vulkanalia` extension trait for `VK_KHR_surface` before we can call any of the Vulkan commands added by the extension. Add the following import for [`vk::KhrSurfaceExtension`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.KhrSurfaceExtension.html):
+While we can freely import types for extensions like the struct `vk::SurfaceKHR`, we need to import the `vulkanalia` extension trait for `VK_KHR_surface` before we can call any of the Vulkan commands added by the extension. Add the following import for `vk::KhrSurfaceExtension`:
 
 ```rust,noplaypen
 use vulkanalia::vk::KhrSurfaceExtension;
@@ -41,7 +41,7 @@ let info = vk::Win32SurfaceCreateInfoKHR::builder()
 
 The `WindowExtWindows` trait is imported from `winit` because it allows us to access platform-specific methods on the `winit` `Window` struct. In this case, it permits us to get the process and window handles for the window created by `winit`.
 
-After that the surface can be created with [`vk::KhrWin32SurfaceExtension::create_win32_surface_khr`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.KhrWin32SurfaceExtension.html#method.create_win32_surface_khr), which includes parameters for the surface creation details and custom allocators. Technically this is a WSI extension function, but it is so commonly used that the standard Vulkan loader includes it, so unlike other extensions you don't need to explicitly load it. However, we do need to import the `vulkanalia` extension trait for `VK_KHR_win32_surface`.
+After that the surface can be created with `create_win32_surface_khr`, which includes parameters for the surface creation details and custom allocators. Technically this is a WSI extension function, but it is so commonly used that the standard Vulkan loader includes it, so unlike other extensions you don't need to explicitly load it. However, we do need to import the `vulkanalia` extension trait for `VK_KHR_win32_surface`.
 
 ```rust,noplaypen
 use vk::KhrWin32SurfaceExtension;
@@ -49,7 +49,7 @@ use vk::KhrWin32SurfaceExtension;
 let surface = instance.create_win32_surface_khr(&info, None).unwrap();
 ```
 
-The process is similar for other platforms like Linux, where [`vk::KhrXcbSurfaceExtension::create_xcb_surface_khr`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.KhrXcbSurfaceExtension.html#method.create_xcb_surface_khr) takes an XCB connection and window as creation details with X11.
+The process is similar for other platforms like Linux, where `create_xcb_surface_khr` takes an XCB connection and window as creation details with X11.
 
 The `vk_winit::create_surface` function performs exactly this operation with a different implementation for each platform. We'll now integrate it into our program. Add a call to the function in `App::create` right before we pick a physical device.
 
@@ -94,7 +94,7 @@ struct QueueFamilyIndices {
 }
 ```
 
-Next, we'll modify the `QueueFamilyIndices::get` method to look for a queue family that has the capability of presenting to our window surface. The function to check for that is [`vk::KhrSurfaceExtension::get_physical_device_surface_support_khr`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.KhrSurfaceExtension.html#method.get_physical_device_surface_support_khr), which takes the physical device, queue family index. and surface as parameters and returns whether presentation is supported for that combination of physical device, queue family, and surface.
+Next, we'll modify the `QueueFamilyIndices::get` method to look for a queue family that has the capability of presenting to our window surface. The function to check for that is `get_physical_device_surface_support_khr`, which takes the physical device, queue family index. and surface as parameters and returns whether presentation is supported for that combination of physical device, queue family, and surface.
 
 Modify `QueueFamilyIndices::get` to find a presentation queue family index below where a graphics queue family index is found.
 

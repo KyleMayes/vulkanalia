@@ -203,7 +203,7 @@ let attachment = vk::PipelineColorBlendAttachmentState::builder()
     .alpha_blend_op(vk::BlendOp::ADD);
 ```
 
-You can find all of the possible operations in the [`vk::BlendFactor`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.BlendFactor.html) and [`vk::BlendOp`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.BlendOp.html) enumerations in the specification (or `vulkanalia`'s documentation).
+You can find all of the possible operations in the `vk::BlendFactor` and `vk::BlendOp` enumerations in the specification (or `vulkanalia`'s documentation).
 
 The second structure references the array of structures for all of the framebuffers and allows you to set blend constants that you can use as blend factors in the aforementioned calculations.
 

@@ -1,0 +1,31 @@
+[package]
+
+publish = false
+
+edition = "2018"
+
+name = "preprocessor"
+authors = ["Kyle Mayes <kyle@mayeses.com>"]
+
+version = "0.1.0"
+
+readme = "../README.md"
+license = "Apache-2.0"
+
+description = "Preprocessor."
+
+build = "build.rs"
+
+[dependencies]
+
+anyhow = "1"
+clap = "2"
+mdbook = { version = "=0.4.4", default-features = false }
+pulldown-cmark = "0.8"
+pulldown-cmark-to-cmark = "6"
+serde_json = "1"
+
+[[bin]]
+
+name = "vk-preprocessor"
+path = "main.rs"

@@ -49,7 +49,7 @@ Vulkan lets you assign priorities to queues to influence the scheduling of comma
 
 ## Specifying the layers to enable
 
-The next piece of information we need to provide bears a resemblance to the `vk::CreateInstanceInfo` struct. Once again we need to specify any layers or extensions we want to enable, but this time any specified extensions are device specific rather than global.
+The next piece of information we need to provide bears a resemblance to the `vk::InstanceCreateInfo` struct. Once again we need to specify any layers or extensions we want to enable, but this time any specified extensions are device specific rather than global.
 
 An example of a device specific extension is `VK_KHR_swapchain`, which allows you to present rendered images from that device to windows. It is possible that there are Vulkan devices in the system that lack this ability, for example because they only support compute operations. We will come back to this extension in the swapchain chapter.
 
@@ -67,7 +67,7 @@ let layers = if VALIDATION_ENABLED {
 
 ## Specifying used device features
 
-The next information to specify is the set of device features that we'll be using. These are the features that we queried support for with `vk::InstanceV1_0::get_physical_device_features` in the previous chapter, like geometry shaders. Right now we don't need anything special, so we can simply define it and leave everything to the default values (`false`). We'll come back to this structure once we're about to start doing more interesting things with Vulkan.
+The next information to specify is the set of device features that we'll be using. These are the features that we queried support for with `get_physical_device_features` in the previous chapter, like geometry shaders. Right now we don't need anything special, so we can simply define it and leave everything to the default values (`false`). We'll come back to this structure once we're about to start doing more interesting things with Vulkan.
 
 ```rust,noplaypen
 let features = vk::PhysicalDeviceFeatures::builder();
@@ -85,7 +85,7 @@ let info = vk::DeviceCreateInfo::builder()
     .enabled_features(&features);
 ```
 
-That's it, we're now ready to instantiate the logical device with a call to the appropriately named [`Instance::create_device`](https://docs.rs/vulkanalia/latest/vulkanalia/struct.Instance.html#method.create_device) method.
+That's it, we're now ready to instantiate the logical device with a call to the appropriately named [`create_device`](https://docs.rs/vulkanalia/latest/vulkanalia/struct.Instance.html#method.create_device) method.
 
 ```rust,noplaypen
 let device = instance.create_device(data.physical_device, &info, None)?;
@@ -117,7 +117,7 @@ struct AppData {
 
 Device queues are implicitly cleaned up when the device is destroyed, so we don't need to do anything in `App::destroy`.
 
-We can use the [`DeviceV1_0::get_device_queue`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.get_device_queue) function to retrieve queue handles for each queue family. The parameters are the logical device, queue family, and queue index. Because we're only creating a single queue from this family, we'll simply use index 0.
+We can use the `get_device_queue` function to retrieve queue handles for each queue family. The parameters are the logical device, queue family, and queue index. Because we're only creating a single queue from this family, we'll simply use index 0.
 
 ```rust,noplaypen
 data.graphics_queue = device.get_device_queue(indices.graphics, 0);

@@ -217,7 +217,7 @@ if !prefix.is_empty() || !suffix.is_empty() {
 
 The middle slice returned by this method (`code`) is a `&[u32]` and is guaranteed to be correctly aligned. Any `u8`s in our `bytecode` slice that fell outside this alignment guarantee will appear in the first or third slices returned (`prefix` and `suffix`). We'll require that both of these slices are empty to ensure that our entire `bytecode` slice has been converted to a `&[u32]` though you shouldn't have to worry about this failure case in practice.
 
-We can then construct a `vk::ShaderModuleCreateInfo` and use it to call [`DeviceV1_0::create_shader_module`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.create_shader_module) to create the shader module:
+We can then construct a `vk::ShaderModuleCreateInfo` and use it to call `create_shader_module` to create the shader module:
 
 ```rust,noplaypen
 let info = vk::ShaderModuleCreateInfo::builder()
@@ -242,7 +242,7 @@ fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
     // ...
 ```
 
-The cleanup should then happen at the end of the function by adding two calls to [`DeviceV1_0::destroy_shader_module`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.destroy_shader_module). All of the remaining code in this chapter will be inserted before these lines.
+The cleanup should then happen at the end of the function by adding two calls to `destroy_shader_module`. All of the remaining code in this chapter will be inserted before these lines.
 
 ```rust,noplaypen
     // ...

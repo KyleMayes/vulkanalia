@@ -99,7 +99,7 @@ fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
 }
 ```
 
-Command buffers are allocated with the [`vk::DeviceV1_0::allocate_command_buffers`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_command_buffers) function, which takes a `vk::CommandBufferAllocateInfo` struct as parameter that specifies the command pool and number of buffers to allocate:
+Command buffers are allocated with the `allocate_command_buffers` function, which takes a `vk::CommandBufferAllocateInfo` struct as parameter that specifies the command pool and number of buffers to allocate:
 
 ```rust,noplaypen
 let allocate_info = vk::CommandBufferAllocateInfo::builder()
@@ -119,7 +119,7 @@ We won't make use of the secondary command buffer functionality here, but you ca
 
 ## Starting command buffer recording
 
-We begin recording a command buffer by calling [`vk::DeviceV1_0::begin_command_buffer`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.begin_command_buffer) with a small `vk::CommandBufferBeginInfo` structure as argument that specifies some details about the usage of this specific command buffer.
+We begin recording a command buffer by calling `begin_command_buffer` with a small `vk::CommandBufferBeginInfo` structure as argument that specifies some details about the usage of this specific command buffer.
 
 ```rust,noplaypen
 for (framebuffer, command_buffer) in data.framebuffers.iter().zip(data.command_buffers.iter()) {
@@ -165,9 +165,9 @@ let clear_value = vk::ClearValue {
 };
 ```
 
-Next we define a clear value that will be used to clear the framebuffer at the beginning of the render pass (because we used `vk::AttachmentLoadOp::CLEAR` when creating the render pass). [`vk::ClearValue`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/union.ClearValue.html) is a union that can be used to set clear values for color attachments or for depth/stencil attachments. Here we are setting the `color` field with a [`vk::ClearColorValue`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/union.ClearColorValue.html) union with 4 `f32`s that define a black clear color with 100% opacity.
+Next we define a clear value that will be used to clear the framebuffer at the beginning of the render pass (because we used `vk::AttachmentLoadOp::CLEAR` when creating the render pass). `vk::ClearValue` is a union that can be used to set clear values for color attachments or for depth/stencil attachments. Here we are setting the `color` field with a `vk::ClearColorValue` union with 4 `f32`s that define a black clear color with 100% opacity.
 
-Drawing starts by beginning the render pass with [`DeviceV1_0::begin_render_pass`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_begin_render_pass). The render pass is configured using some parameters in a `vk::RenderPassBeginInfo` struct.
+Drawing starts by beginning the render pass with `cmd_begin_render_pass`. The render pass is configured using some parameters in a `vk::RenderPassBeginInfo` struct.
 
 ```rust,noplaypen
 let clear_values = &[clear_value];

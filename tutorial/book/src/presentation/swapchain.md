@@ -396,7 +396,7 @@ struct AppData {
 }
 ```
 
-Creating the swapchain is now as simple as calling [`vk::KhrSwapchainExtension::create_swapchain`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.create_swapchain_khr):
+Creating the swapchain is now as simple as calling `create_swapchain_khr`:
 
 ```rust,noplaypen
 data.swapchain = device.create_swapchain_khr(&info, None)?;

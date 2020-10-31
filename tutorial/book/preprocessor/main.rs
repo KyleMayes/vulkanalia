@@ -1,0 +1,88 @@
+// SPDX-License-Identifier: Apache-2.0
+
+use std::collections::HashMap;
+use std::io;
+use std::process;
+
+use anyhow::*;
+use clap::{App, Arg, SubCommand};
+use mdbook::book::BookItem;
+use mdbook::preprocess::CmdPreprocessor;
+use pulldown_cmark::{Event, Parser};
+use pulldown_cmark_to_cmark::cmark;
+
+/// The Vulkan API Registry index.
+const INDEX: &str = include_str!("../../../index.txt");
+/// The version of `vulkanalia` used by the tutorial.
+const VERSION: &str = "0.2.0";
+
+#[rustfmt::skip]
+pub fn app() -> App<'static, 'static> {
+    App::new("vk-preprocessor")
+        .about("An mdbook preprocessor for the tutorial book.")
+        .subcommand(SubCommand::with_name("supports")
+            .arg(Arg::with_name("renderer").required(true))
+            .about("Check whether a renderer is supported by this preprocessor"))
+}
+
+fn main() -> Result<()> {
+    // Check renderer support.
+    if let Some(args) = app().get_matches().subcommand_matches("supports") {
+        let renderer = args.value_of("renderer").unwrap();
+        process::exit(if renderer == "html" { 0 } else { 1 });
+    }
+
+    // Parse the book and check version compatibility.
+    let (context, mut book) = CmdPreprocessor::parse_input(io::stdin())?;
+    if context.mdbook_version != mdbook::MDBOOK_VERSION {
+        return Err(anyhow!(
+            "Preprocessor build with mdbook {}, called with mdbook {}.",
+            mdbook::MDBOOK_VERSION,
+            context.mdbook_version
+        ));
+    }
+
+    // Parse the index.
+    let index = INDEX
+        .lines()
+        .map(|l| {
+            let mut tokens = l.split('\t');
+            let name = tokens.next().unwrap();
+            let path = tokens.next().unwrap();
+            (name, path)
+        })
+        .collect::<HashMap<_, _>>();
+
+    // Preprocess the book.
+    book.for_each_mut(|i| preprocess_item(i, &index).unwrap());
+    serde_json::to_writer(io::stdout(), &book)?;
+
+    Ok(())
+}
+
+fn preprocess_item(item: &mut BookItem, index: &HashMap<&str, &str>) -> Result<()> {
+    if let BookItem::Chapter(ref mut chapter) = item {
+        let parser = Parser::new(&chapter.content);
+        let events = parser.into_iter().map(|e| map_event(e, index));
+        let mut buffer = String::with_capacity(chapter.content.len() * 2);
+        cmark(events, &mut buffer, None)?;
+        chapter.content = buffer;
+    }
+
+    Ok(())
+}
+
+fn map_event<'e>(event: Event<'e>, index: &HashMap<&str, &str>) -> Event<'e> {
+    if let Event::Code(code) = &event {
+        if let Some(url) = index.get(&code[..]) {
+            let url = url.replace("%VERSION%", VERSION);
+            Event::Html(format!("<a href=\"{}\"><code class=\"hljs\">{}</code></a>", url, code).into())
+        } else if code.starts_with("^") {
+            Event::Code((&code[1..]).to_string().into())
+        } else {
+            event
+        }
+    } else {
+        event
+    }
+}

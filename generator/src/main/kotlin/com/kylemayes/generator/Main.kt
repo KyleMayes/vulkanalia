@@ -10,6 +10,7 @@ import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.kylemayes.generator.generate.generateRustFiles
+import com.kylemayes.generator.registry.indexEntities
 import com.kylemayes.generator.registry.parseRegistry
 import com.kylemayes.generator.support.git
 import com.kylemayes.generator.support.time
@@ -26,7 +27,7 @@ import kotlin.system.exitProcess
 private val log = KotlinLogging.logger { /* */ }
 
 fun main(args: Array<String>) = Generator()
-    .subcommands(Check(), Update())
+    .subcommands(Check(), Index(), Update())
     .main(args)
 
 class Generator : CliktCommand(help = "Manages generated Vulkan bindings") {
@@ -87,6 +88,32 @@ class Check : CliktCommand(help = "Checks generated Vulkan bindings") {
             log.error { "One or more files did not match what is on disk." }
             exitProcess(1)
         }
+    }
+}
+
+// ===============================================
+// Index
+// ===============================================
+
+class Index : CliktCommand(help = "Generates an index for generated Vulkan bindings") {
+    private val context by requireObject<Triple<Path, GitHub, Boolean>>()
+
+    override fun run() {
+        val (directory, _, _) = context
+
+        // Parse
+
+        val currentCommit = getCurrentCommit(directory)
+        log.info { "Current commit = $currentCommit" }
+
+        val xml = getFileContents(currentCommit, "xml/vk.xml")
+        val registry = log.time("Parse Registry") { parseRegistry(xml) }
+
+        // Index
+
+        log.info { "Generating index..." }
+        val index = registry.indexEntities()
+        Files.writeString(directory.resolve("index.txt"), index)
     }
 }
 

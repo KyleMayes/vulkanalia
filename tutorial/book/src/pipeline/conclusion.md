@@ -67,9 +67,9 @@ data.pipeline = device.create_graphics_pipelines(
     vk::PipelineCache::null(), &[info], None)?.0;
 ```
 
-The [`vk::DeviceV1_0::create_graphics_pipeline`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.create_graphics_pipelines) function actually has more parameters than the usual object creation functions in Vulkan. It is designed to take multiple `vk::GraphicsPipelineCreateInfo` objects and create multiple `vk::Pipeline` objects in a single call.
+The `create_graphics_pipeline` function actually has more parameters than the usual object creation functions in Vulkan. It is designed to take multiple `vk::GraphicsPipelineCreateInfo` objects and create multiple `vk::Pipeline` objects in a single call.
 
-The first parameter, for which we've passed the `vk::PipelineCache::null()` argument, references an optional `vk::PipelineCache` object. A pipeline cache can be used to store and reuse data relevant to pipeline creation across multiple calls to `vk::DeviceV1_0::create_graphics_pipeline` and even across program executions if the cache is stored to a file. This makes it possible to significantly speed up pipeline creation at a later time. We'll get into this in the pipeline cache chapter.
+The first parameter, for which we've passed the `vk::PipelineCache::null()` argument, references an optional `vk::PipelineCache` object. A pipeline cache can be used to store and reuse data relevant to pipeline creation across multiple calls to `create_graphics_pipeline` and even across program executions if the cache is stored to a file. This makes it possible to significantly speed up pipeline creation at a later time. We'll get into this in the pipeline cache chapter.
 
 The graphics pipeline is required for all common drawing operations, so it should also only be destroyed at the end of the program in `App::destroy`:
 

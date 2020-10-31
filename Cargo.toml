@@ -3,6 +3,7 @@
 members = [
     "examples",
     "tutorial",
+    "tutorial/book/preprocessor",
     "vulkanalia",
     "vulkanalia-sys",
 ]

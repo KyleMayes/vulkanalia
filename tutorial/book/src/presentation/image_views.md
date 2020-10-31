@@ -84,7 +84,7 @@ let info = vk::ImageViewCreateInfo::builder()
 
 The `view_type` and `format` fields specify how the image data should be interpreted. The `view_type` field allows you to treat images as 1D textures, 2D textures, 3D textures, and cube maps.
 
-Creating the image view is now a matter of calling [`DeviceV1_0::create_image_view`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/trait.DeviceV1_0.html#method.create_image_view):
+Creating the image view is now a matter of calling `create_image_view`:
 
 ```rust,noplaypen
 device.create_image_view(&info, None)
