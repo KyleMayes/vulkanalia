@@ -67,12 +67,10 @@ data.render_finished_semaphore = device.create_semaphore(&semaphore_info, None)?
 The semaphores should be cleaned up at the end of the program, when all commands have finished and no more synchronization is necessary:
 
 ```rust,noplaypen
-impl App {
-    fn destroy(&mut self) {
-        self.device.destroy_semaphore(self.data.render_finished_semaphore, None);
-        self.device.destroy_semaphore(self.data.image_available_semaphore, None);
-        // ...
-    }
+fn destroy(&mut self) {
+    self.device.destroy_semaphore(self.data.render_finished_semaphore, None);
+    self.device.destroy_semaphore(self.data.image_available_semaphore, None);
+    // ...
 }
 ```
 
@@ -81,20 +79,18 @@ impl App {
 As mentioned before, the first thing we need to do in the `App::render` function is acquire an image from the swapchain. Recall that the swapchain is an extension feature, so we must use a function with the `*_khr` naming convention:
 
 ```rust,noplaypen
-impl App {
-    fn render(&mut self, window: &Window) -> Result<()> {
-        let image_index = self
-            .device
-            .acquire_next_image_khr(
-                self.data.swapchain,
-                u64::max_value(),
-                self.data.image_available_semaphore,
-                vk::Fence::null(),
-            )?
-            .0 as usize;
+fn render(&mut self, window: &Window) -> Result<()> {
+    let image_index = self
+        .device
+        .acquire_next_image_khr(
+            self.data.swapchain,
+            u64::max_value(),
+            self.data.image_available_semaphore,
+            vk::Fence::null(),
+        )?
+        .0 as usize;
 
-        Ok(())
-    }
+    Ok(())
 }
 ```
 
@@ -120,7 +116,7 @@ let submit_info = vk::SubmitInfo::builder()
     .signal_semaphores(signal_semaphores);
 ```
 
-The first two parameters, `wait_semaphores` and `wait_dst_stage_mask`, specifies which semaphores to wait on before execution begins and in which stage(s) of the pipeline to wait. We want to wait with writing colors to the image until it's available, so we're specifying the stage of the graphics pipeline that writes to the color attachment. That means that theoretically the implementation can already start executing our vertex shader and such while the image is not yet available. Each entry in the `wait_stages` array corresponds to the semaphore with the same index in `wait_semaphores`.
+The first two parameters, `^wait_semaphores` and `wait_dst_stage_mask`, specifies which semaphores to wait on before execution begins and in which stage(s) of the pipeline to wait. We want to wait with writing colors to the image until it's available, so we're specifying the stage of the graphics pipeline that writes to the color attachment. That means that theoretically the implementation can already start executing our vertex shader and such while the image is not yet available. Each entry in the `wait_stages` array corresponds to the semaphore with the same index in `^wait_semaphores`.
 
 The next parameter, `command_buffers`, specifies which command buffers to actually submit for execution. As mentioned earlier, we should submit the command buffer that binds the swapchain image we just acquired as color attachment.
 
@@ -139,7 +135,7 @@ Remember that the subpasses in a render pass automatically take care of image la
 
 There are two built-in dependencies that take care of the transition at the start of the render pass and at the end of the render pass, but the former does not occur at the right time. It assumes that the transition occurs at the start of the pipeline, but we haven't acquired the image yet at that point! There are two ways to deal with this problem. We could change the `wait_stages` for the `image_available_semaphore` to `vk::PipelineStageFlags::TOP_OF_PIPE` to ensure that the render passes don't begin until the image is available, or we can make the render pass wait for the `vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT` stage. I've decided to go with the second option here, because it's a good excuse to have a look at subpass dependencies and how they work.
 
-Subpass dependencies are specified in `vk::SubpassDependency` structs. Go to the `create_render_pass` function and add one:
+Subpass dependencies are specified in `vk::SubpassDependency` structs. Go to our `^create_render_pass` function and add one:
 
 ```rust,noplaypen
 let dependency = vk::SubpassDependency::builder()
@@ -233,15 +229,13 @@ If you run your application with validation layers enabled now you may either ge
 The easy way to solve this is to wait for work to finish right after submitting it, for example by using `queue_wait_idle`:
 
 ```rust,noplaypen
-impl App {
-    fn render(&mut self, window: &Window) -> Result<()> {
-        // ...
+fn render(&mut self, window: &Window) -> Result<()> {
+    // ...
 
-        self.device.queue_present_khr(self.data.present_queue, &present_info)?;
-        self.device.queue_wait_idle(self.data.present_queue)?;
+    self.device.queue_present_khr(self.data.present_queue, &present_info)?;
+    self.device.queue_wait_idle(self.data.present_queue)?;
 
-        Ok(())
-    }
+    Ok(())
 }
 ```
 
@@ -283,16 +277,14 @@ fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
 Similarly, they should also all be cleaned up:
 
 ```rust,noplaypen
-impl App {
-    fn destroy(&mut self) {
-        self.data.render_finished_semaphores
-            .iter()
-            .for_each(|s| self.device.destroy_semaphore(*s, None));
-        self.data.image_available_semaphores
-            .iter()
-            .for_each(|s| self.device.destroy_semaphore(*s, None));
-        // ...
-    }
+fn destroy(&mut self) {
+    self.data.render_finished_semaphores
+        .iter()
+        .for_each(|s| self.device.destroy_semaphore(*s, None));
+    self.data.image_available_semaphores
+        .iter()
+        .for_each(|s| self.device.destroy_semaphore(*s, None));
+    // ...
 }
 ```
 
@@ -514,7 +506,7 @@ fn render(&mut self, window: &Window) -> Result<()> {
 }
 ```
 
-We've now implemented all the needed synchronization to ensure that there are no more than two frames of work enqueued and that these frames are not accidentally using the same image. Note that it is fine for other parts of the code, like the final cleanup, to rely on more rough synchronization like `vkDeviceWaitIdle`. You should decide on which approach to use based on performance requirements.
+We've now implemented all the needed synchronization to ensure that there are no more than two frames of work enqueued and that these frames are not accidentally using the same image. Note that it is fine for other parts of the code, like the final cleanup, to rely on more rough synchronization like `device_wait_idle`. You should decide on which approach to use based on performance requirements.
 
 To learn more about synchronization through examples, have a look at [this extensive overview](https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples#swapchain-image-acquire-and-present) by Khronos.
 

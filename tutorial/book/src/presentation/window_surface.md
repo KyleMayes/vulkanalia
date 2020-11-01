@@ -54,28 +54,22 @@ The process is similar for other platforms like Linux, where `create_xcb_surface
 The `vk_winit::create_surface` function performs exactly this operation with a different implementation for each platform. We'll now integrate it into our program. Add a call to the function in `App::create` right before we pick a physical device.
 
 ```rust,noplaypen
-impl App {
-    fn create(window: &Window) -> Result<Self> {
-        // ...
-
-        let mut data = AppData::default();
-        data.surface = vk_winit::create_surface(&instance, window)?;
-        pick_physical_device(&instance, &mut data)?;
-
-        // ...
-    }
+fn create(window: &Window) -> Result<Self> {
+    // ...
+    let mut data = AppData::default();
+    data.surface = vk_winit::create_surface(&instance, window)?;
+    pick_physical_device(&instance, &mut data)?;
+    // ...
 }
 ```
 
 The parameters are the Vulkan instance and the `winit` window. Once we have our surface, it can be destroyed in `App::destroy` using the Vulkan API:
 
 ```rust,noplaypen
-impl App {
-    fn destroy(&mut self) {
-        // ...
-        self.instance.destroy_surface_khr(self.data.surface, None);
-        self.instance.destroy_instance(None);
-    }
+fn destroy(&mut self) {
+    // ...
+    self.instance.destroy_surface_khr(self.data.surface, None);
+    self.instance.destroy_instance(None);
 }
 ```
 
@@ -125,7 +119,7 @@ Note that it's very likely that these end up being the same queue family after a
 
 ## Creating the presentation queue
 
-The one thing that remains is modifying the logical device creation procedure to create the presentation queue and retrieve the `VkQueue` handle. Add a field to `AppData` for the handle:
+The one thing that remains is modifying the logical device creation procedure to create the presentation queue and retrieve the `vk::Queue` handle. Add a field to `AppData` for the handle:
 
 ```rust,noplaypen
 struct AppData {
@@ -134,7 +128,7 @@ struct AppData {
 }
 ```
 
-Next, we need to have multiple `vk::DeviceQueueCreateInfo` structs to create a queue from both families. An elegant way to do that is to create a set of all unique queue families that are necessary for the required queues. We'll do this in the `create_logical_device` function:
+Next, we need to have multiple `vk::DeviceQueueCreateInfo` structs to create a queue from both families. An easy way to do that is to create a set of all unique queue families that are necessary for the required queues. We'll do this in the `create_logical_device` function:
 
 ```rust,noplaypen
 let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;

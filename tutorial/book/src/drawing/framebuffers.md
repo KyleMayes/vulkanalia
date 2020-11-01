@@ -71,13 +71,11 @@ The `width` and `height` parameters are self-explanatory and `layers` refers to 
 We should delete the framebuffers before the image views and render pass that they are based on, but only after we've finished rendering:
 
 ```rust,noplaypen
-impl App {
-    fn destroy(&mut self) {
-        self.data.framebuffers
-            .iter()
-            .for_each(|f| self.device.destroy_framebuffer(*f, None));
-        // ...
-    }
+fn destroy(&mut self) {
+    self.data.framebuffers
+        .iter()
+        .for_each(|f| self.device.destroy_framebuffer(*f, None));
+    // ...
 }
 ```
 

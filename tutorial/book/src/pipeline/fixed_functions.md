@@ -260,11 +260,9 @@ data.pipeline_layout = device.create_pipeline_layout(&layout_info, None)?;
 The structure also specifies *push constants*, which are another way of passing dynamic values to shaders that we may get into in a future chapter. The pipeline layout will be referenced throughout the program's lifetime, so it should be destroyed in `App::destroy`:
 
 ```rust,noplaypen
-impl App {
-    fn destroy(&mut self) {
-        self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
-        // ...
-    }
+fn destroy(&mut self) {
+    self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
+    // ...
 }
 ```
 

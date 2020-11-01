@@ -267,7 +267,7 @@ let vert_stage = vk::PipelineShaderStageCreateInfo::builder()
     .name(b"main\0"[..].into());
 ```
 
-The first step is telling Vulkan in which pipeline stage the shader is going to be used. There is an enum value for each of the programmable stages described in the previous chapter.
+The first step is telling Vulkan in which pipeline stage the shader is going to be used. There is a variant for each of the programmable stages described in the previous chapter.
 
 The next two fields specify the shader module containing the code, and the function to invoke, known as the *entrypoint*. That means that it's possible to combine multiple fragment shaders into a single shader module and use different entry points to differentiate between their behaviors. In this case we'll stick to the standard `main`, however.
 

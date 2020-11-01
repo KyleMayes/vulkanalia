@@ -93,13 +93,11 @@ device.create_image_view(&info, None)
 Unlike images, the image views were explicitly created by us, so we need to add a similar loop to destroy them again in `App::destroy`:
 
 ```rust,noplaypen
-impl App {
-    fn destroy(&mut self) {
-        self.data.swapchain_image_views
-            .iter()
-            .for_each(|v| self.device.destroy_image_view(*v, None));
-        // ...
-    }
+fn destroy(&mut self) {
+    self.data.swapchain_image_views
+        .iter()
+        .for_each(|v| self.device.destroy_image_view(*v, None));
+    // ...
 }
 ```
 

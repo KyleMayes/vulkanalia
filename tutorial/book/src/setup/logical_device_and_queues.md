@@ -19,9 +19,7 @@ Next, add a `create_logical_device` function that is called from `App:create` an
 impl App {
     fn create(window: &Window) -> Result<Self> {
         // ...
-
         let device = create_logical_device(&instance, &mut data)?;
-
         Ok(Self { entry, instance, data, device })
     }
 }
@@ -85,7 +83,7 @@ let info = vk::DeviceCreateInfo::builder()
     .enabled_features(&features);
 ```
 
-That's it, we're now ready to instantiate the logical device with a call to the appropriately named [`create_device`](https://docs.rs/vulkanalia/latest/vulkanalia/struct.Instance.html#method.create_device) method.
+That's it, we're now ready to instantiate the logical device with a call to the appropriately named `create_device` method.
 
 ```rust,noplaypen
 let device = instance.create_device(data.physical_device, &info, None)?;

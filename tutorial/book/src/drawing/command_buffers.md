@@ -63,11 +63,9 @@ data.command_pool = device.create_command_pool(&info, None)?;
 Commands will be used throughout the program to draw things on the screen, so the pool should only be destroyed at the end:
 
 ```rust,noplaypen
-impl App {
-    fn destroy(&mut self) {
-        self.device.destroy_command_pool(self.data.command_pool, None);
-        // ...
-    }
+fn destroy(&mut self) {
+    self.device.destroy_command_pool(self.data.command_pool, None);
+    // ...
 }
 ```
 
@@ -143,7 +141,7 @@ None of these flags are applicable for us right now.
 
 The `inheritance_info` parameter is only relevant for secondary command buffers. It specifies which state to inherit from the calling primary command buffers.
 
-If the command buffer was already recorded once, then a call to `vk::DeviceV1_0::begin_command_buffer` will implicitly reset it. It's not possible to append commands to a buffer at a later time.
+If the command buffer was already recorded once, then a call to `begin_command_buffer` will implicitly reset it. It's not possible to append commands to a buffer at a later time.
 
 ## Starting a render pass
 

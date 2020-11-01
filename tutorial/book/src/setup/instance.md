@@ -50,8 +50,8 @@ Ok(entry.create_instance(&info, None)?)
 
 As you'll see, the general pattern that object creation function parameters in Vulkan follow is:
 
- * Reference to struct with creation info
- * Optional reference to custom allocator callbacks, always `None` in this tutorial
+* Reference to struct with creation info
+* Optional reference to custom allocator callbacks, always `None` in this tutorial
 
 Now that we have a function to create Vulkan instances from entry points, we next need to create a Vulkan entry point. This entry point will load the Vulkan commands used to query instance support and create instances. But before we do that, let's add some fields to our `App` struct to store the Vulkan entry point and instance we will be creating:
 
@@ -68,9 +68,7 @@ To populate these fields, update the `App::create` method to the following:
 fn create(window: &Window) -> Result<Self> {
     let loader = LibloadingLoader::new(LIBRARY)?;
     let entry = Entry::new(loader).map_err(|b| anyhow!("{}", b))?;
-
     let instance = create_instance(&entry)?;
-
     Ok(Self { entry, instance })
 }
 ```
@@ -79,7 +77,7 @@ Here we first create a Vulkan function loader which will be used to load the ini
 
 ## Cleaning up
 
-The `Instance` should only be destroyed right before the program exits. It can be destroyed in the `App::destroy` method using the `destroy_instance` command wrapper:
+The `Instance` should only be destroyed right before the program exits. It can be destroyed in the `App::destroy` method using `destroy_instance`:
 
 ```rust,noplaypen
 fn destroy(&mut self) {
@@ -91,11 +89,11 @@ Like the Vulkan commands used to create objects, the commands used to destroy ob
 
 ## `Instance` vs `vk::Instance`
 
-When we call `^create_instance`, what we get back is not a raw Vulkan instance as would be returned by the Vulkan command `vkCreateInstance`. Instead what we got back is a custom type defined by `vulkanalia` which combines both a raw Vulkan instance and the commands loaded for that specific instance.
+When we call our `^create_instance` function, what we get back is not a raw Vulkan instance as would be returned by the Vulkan command `vkCreateInstance` (`vk::Instance`). Instead what we got back is a custom type defined by `vulkanalia` which combines both a raw Vulkan instance and the commands loaded for that specific instance.
 
-This is the `Instance` type we have been using (imported from the `vulkanalia` prelude) which should not be confused with the `vk::Instance` type which represents a raw Vulkan instance. In future chapters we will also use the `Device` type which, like `Instance`, is a pairing of a raw Vulkan device (`vk::Device`) and the commands loaded for that specific device. Fortunately we will not be using `vk::Instance` or `vk::Device` directly so you won't need to worry about getting them mixed up.
+This is the `Instance` type we have been using (imported from the `vulkanalia` prelude) which should not be confused with the `vk::Instance` type which represents a raw Vulkan instance. In future chapters we will also use the `Device` type which, like `Instance`, is a pairing of a raw Vulkan device (`vk::Device`) and the commands loaded for that specific device. Fortunately we will not be using `vk::Instance` or `vk::Device` directly in this tutorial so you don't need to worry about getting them mixed up.
 
-Because an `Instance` contains both a Vulkan instance and the associated commands, the command wrappers like `destroy_instance` implemented for an `Instance` are able to provide the Vulkan instance when it is required by the underlying Vulkan command.
+Because an `Instance` contains both a Vulkan instance and the associated commands, the command wrappers implemented for an `Instance` are able to provide the Vulkan instance when it is required by the underlying Vulkan command.
 
 If you look at the documentation for the `vkDestroyInstance` command, you will see that it takes two parameters: the instance to destroy and the optional custom allocator callbacks. However, `destroy_instance` only takes the optional custom allocator callbacks because it is able to provide the raw Vulkan handle as the first parameter itself as described above.
 

@@ -20,19 +20,19 @@ nalgebra-glm = "0.3"
 png = "0.16"
 pretty_env_logger = "0.4"
 tobj = "2"
-vulkanalia = { version = "*", features = ["libloading_", "winit_"] }
+vulkanalia = { version = "=0.2.0", features = ["libloading_", "winit_"] }
 winit = "0.23"
 ```
 
- * `anyhow` &ndash; used for simple error handling
- * `lazy_static` &ndash; used to store static data like vertices
- * `log` &ndash; used for logging statements
- * `nalgebra-glm` &ndash; used as a Rust replacement for [GLM](https://glm.g-truc.net) (graphics math library)
- * `png` &ndash; used to load PNGs to use as textures
- * `pretty_env_logger` &ndash; used to print our logs to the console
- * `tobj` &ndash; used to load 3D models in the [Wavefront .obj format](https://en.wikipedia.org/wiki/Wavefront_.obj_file)
- * `vulkanalia` &ndash; used to call the Vulkan API
- * `winit` &ndash; used to create a window to render to
+* `anyhow` &ndash; used for simple error handling
+* `lazy_static` &ndash; used to store static data like vertices
+* `log` &ndash; used for logging statements
+* `nalgebra-glm` &ndash; used as a Rust replacement for [GLM](https://glmg-truc.net) (graphics math library)
+* `png` &ndash; used to load PNGs to use as textures
+* `pretty_env_logger` &ndash; used to print our logs to the console
+* `tobj` &ndash; used to load 3D models in the [Wavefront .obj format](https:/en.wikipedia.org/wiki/Wavefront_.obj_file)
+* `vulkanalia` &ndash; used to call the Vulkan API
+* `winit` &ndash; used to create a window to render to
 
 ## Vulkan SDK
 

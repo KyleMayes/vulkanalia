@@ -15,10 +15,8 @@ struct App {
 impl App {
     fn create(window: &Window) -> Result<Self> {
         // ...
-
         let mut data = AppData::default();
         pick_physical_device(&instance, &mut data)?;
-
         Ok(Self { entry, instance, data })
     }
 }
@@ -124,7 +122,7 @@ impl QueueFamilyIndices {
 }
 ```
 
-The queue properties returned by `instance.get_physical_device_queue_family_properties(...)` contains various details about the queue families supported by the physical device, including the type of operations supported and the number of queues that can be created based on that family. Here we are looking for the first queue family that supports graphics operations as indicated by `vk::QueueFlags::GRAPHICS`.
+The queue properties returned by `get_physical_device_queue_family_properties` contains various details about the queue families supported by the physical device, including the type of operations supported and the number of queues that can be created based on that family. Here we are looking for the first queue family that supports graphics operations as indicated by `vk::QueueFlags::GRAPHICS`.
 
 Now that we have this fancy queue family lookup method, we can use it as a check in the `check_physical_device` function to ensure the device can process the commands we want to use:
 

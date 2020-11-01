@@ -161,7 +161,7 @@ fn get_swapchain_surface_format(
 }
 ```
 
-Each `vk::SurfaceFormatKHR` entry contains a `format` and a `color_space` member. The `format` member specifies the color channels and types. For example, `vk::Format::B8G8R8A8_SRGB` means that we store the B, G, R and alpha channels in that order with an 8 bit unsigned integer for a total of 32 bits per pixel. The `color_space` member indicates if the SRGB color space is supported or not using the `vk::ColorSpace::SRGB_NONLINEAR_KHR` flag.
+Each `vk::SurfaceFormatKHR` entry contains a `format` and a `color_space` member. The `format` member specifies the color channels and types. For example, `vk::Format::B8G8R8A8_SRGB` means that we store the B, G, R and alpha channels in that order with an 8 bit unsigned integer for a total of 32 bits per pixel. The `color_space` member indicates if the SRGB color space is supported or not using the `vk::ColorSpaceKHR::SRGB_NONLINEAR` flag.
 
 For the color space we'll use SRGB if it is available, because it [results in more accurate perceived colors](http://stackoverflow.com/questions/12524623/). It is also pretty much the standard color space for images, like the textures we'll use later on. Because of that we should also use an SRGB color format, of which one of the most common ones is `vk::Format::B8G8R8A8_SRGB`.
 
@@ -268,10 +268,8 @@ Create a `create_swapchain` function that starts out with the results of these c
 impl App {
     fn create(window: &Window) -> Result<Self> {
         // ...
-
         let device = create_logical_device(&instance, &mut data)?;
         create_swapchain(window, &instance, &device, &mut data)?;
-
         // ...
     }
 }
@@ -321,7 +319,7 @@ Next, we need to specify how to handle swapchain images that will be used across
 * `vk::SharingMode::EXCLUSIVE`: An image is owned by one queue family at a time and ownership must be explicitly transferred before using it in another queue family. This option offers the best performance.
 * `vk::SharingMode::CONCURRENT`: Images can be used across multiple queue families without explicit ownership transfers.
 
-If the queue families differ, then we'll be using the concurrent mode in this tutorial to avoid having to do the ownership chapters, because these involve some concepts that are better explained at a later time. Concurrent mode requires you to specify in advance between which queue families ownership will be shared using the `queue_family_indices` builder struct method If the graphics queue family and presentation queue family are the same, which will be the case on most hardware, then we should stick to exclusive mode, because concurrent mode requires you to specify at least two distinct queue families.
+If the queue families differ, then we'll be using the concurrent mode in this tutorial to avoid having to do the ownership chapters, because these involve some concepts that are better explained at a later time. Concurrent mode requires you to specify in advance between which queue families ownership will be shared using the `queue_family_indices` builder method If the graphics queue family and presentation queue family are the same, which will be the case on most hardware, then we should stick to exclusive mode, because concurrent mode requires you to specify at least two distinct queue families.
 
 ```rust,noplaypen
 let mut queue_family_indices = vec![];
@@ -405,11 +403,9 @@ data.swapchain = device.create_swapchain_khr(&info, None)?;
 The parameters are the swapchain creation info and optional custom allocators. No surprises there. It should be cleaned up in `App::destroy` before the device:
 
 ```rust,noplaypen
-impl App {
-    fn destroy(&mut self) {
-        self.device.destroy_swapchain_khr(self.data.swapchain, None);
-        // ...
-    }
+fn destroy(&mut self) {
+    self.device.destroy_swapchain_khr(self.data.swapchain, None);
+    // ...
 }
 ```
 
@@ -432,7 +428,7 @@ struct AppData {
 
 The images were created by the implementation for the swapchain and they will be automatically cleaned up once the swapchain has been destroyed, therefore we don't need to add any cleanup code.
 
-I'm adding the code to retrieve the handles to the end of the `create_swapchain` function, right after the `device.create_swapchain_khr(...)` call.
+I'm adding the code to retrieve the handles to the end of the `create_swapchain` function, right after the `create_swapchain_khr` call.
 
 ```rust,noplaypen
 data.swapchain_images = device.get_swapchain_images_khr(data.swapchain)?;

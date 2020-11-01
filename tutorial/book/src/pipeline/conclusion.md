@@ -74,11 +74,9 @@ The first parameter, for which we've passed the `vk::PipelineCache::null()` argu
 The graphics pipeline is required for all common drawing operations, so it should also only be destroyed at the end of the program in `App::destroy`:
 
 ```rust,noplaypen
-impl App {
-    fn destroy(&mut self) {
-        self.device.destroy_pipeline(self.data.pipeline, None);
-        // ...
-    }
+fn destroy(&mut self) {
+    self.device.destroy_pipeline(self.data.pipeline, None);
+    // ...
 }
 ```
 

@@ -2,7 +2,7 @@
 
 **Code:** [main.rs](https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/11_render_passes.rs)
 
-Before we can finish creating the pipeline, we need to tell Vulkan about the framebuffer attachments that will be used while rendering. We need to specify how many color and depth buffers there will be, how many samples to use for each of them and how their contents should be handled throughout the rendering operations. All of this information is wrapped in a *render pass* object, for which we'll create a new `create_render_pass` function. Call this function from `App::create` before `create_pipeline`.
+Before we can finish creating the pipeline, we need to tell Vulkan about the framebuffer attachments that will be used while rendering. We need to specify how many color and depth buffers there will be, how many samples to use for each of them and how their contents should be handled throughout the rendering operations. All of this information is wrapped in a *render pass* object, for which we'll create a new `^create_render_pass` function. Call this function from `App::create` before `create_pipeline`.
 
 ```rust,noplaypen
 impl App {
@@ -25,7 +25,7 @@ fn create_render_pass(
 
 ## Attachment description
 
-In our case we'll have just a single color buffer attachment represented by one of the images from the swapchain. This will be represented by a `vk::AttachmentDescription` which we will build in `create_render_pass`.
+In our case we'll have just a single color buffer attachment represented by one of the images from the swapchain. This will be represented by a `vk::AttachmentDescription` which we will build in `^create_render_pass`.
 
 ```rust,noplaypen
 let color_attachment = vk::AttachmentDescription::builder()
@@ -139,12 +139,10 @@ data.render_pass = device.create_render_pass(&info, None)?;
 Just like the pipeline layout, the render pass will be referenced throughout the program, so it should only be cleaned up at the end in `App::destroy`:
 
 ```rust,noplaypen
-impl App {
-    fn destroy(&mut self) {
-        self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
-        self.device.destroy_render_pass(self.data.render_pass, None);
-        // ...
-    }
+fn destroy(&mut self) {
+    self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
+    self.device.destroy_render_pass(self.data.render_pass, None);
+    // ...
 }
 ```
 

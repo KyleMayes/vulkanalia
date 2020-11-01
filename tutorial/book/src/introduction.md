@@ -1,8 +1,6 @@
 # Introduction
 
-This tutorial is an adaptation of <https://vulkan-tutorial.com> to use Rust instead of C/C++.
-
-The vast majority of the credit for this tutorial should go the author of <https://vulkan-tutorial.com>, [Alexander Overvoorde](https://github.com/Overv).
+This tutorial is an adaptation of <https://vulkan-tutorial.com> to use Rust instead of C++. The majority of the credit for this tutorial should go the author of the original tutorial, [Alexander Overvoorde](https://github.com/Overv).
 
 ## About
 
@@ -25,11 +23,11 @@ This tutorial will not assume knowledge of OpenGL or Direct3D concepts, but it d
 * [Physically Based Rendering book](http://www.pbr-book.org/)
 * Vulkan being used in a real engine in the open-source [Quake](https://github.com/Novum/vkQuake) and [DOOM 3](https://github.com/DustinHLand/vkDOOM3)
 
-If you want a C or C++ tutorial instead, see the original tutorial: <https://vulkan-tutorial.com>
+If you want a C++ tutorial instead, see the original tutorial:<br/><https://vulkan-tutorial.com>
 
-This tutorial will be using the [`vulkanalia`](https://github.com/KyleMayes/vulkanalia) crate to provide access to the Vulkan API from Rust. `vulkanalia` only provides a thin wrapper over the Vulkan API to make it a bit easier to use from Rust. This means that while you should have never have any difficulty in determining exactly how your Rust programs are interacting with the Vulkan API, you will be shielded from very little of the danger and verbosity of the Vulkan API.
+This tutorial uses the [`vulkanalia`](https://github.com/KyleMayes/vulkanalia) crate to provide access to the Vulkan API from Rust. `vulkanalia` provides raw bindings to the Vulkan API as well as a thin wrapper over said bindings to make them easier and more idiomatic to use from Rust (more on this in the next chapter). This means that while you should have never have any difficulty in determining exactly how your Rust programs are interacting with the Vulkan API, you will be shielded from little of the danger and verbosity of the Vulkan API.
 
-If you want a Rust Vulkan tutorial that uses a crate which provides a safe and relatively concise wrapper around the Vulkan API, see this tutorial: <https://github.com/bwasty/vulkan-tutorial-rs>
+If you want a Rust Vulkan tutorial that uses a crate which provides a safe and relatively concise wrapper around the Vulkan API ([`vulkano`](https://vulkano.rs)), see this tutorial:<br/><https://github.com/bwasty/vulkan-tutorial-rs>
 
 ## Tutorial structure
 
@@ -41,13 +39,13 @@ After that we'll implement all of the basic components of a Vulkan program that 
 * Use all of the relevant API calls to integrate it into your program
 * Abstract parts of it into helper functions
 
-Although each chapter is written as a follow-up on the previous one, it is also possible to read the chapters as standalone articles introducing a certain Vulkan feature. That means that the site is also useful as a reference. All of the Vulkan functions and types are linked to the specification, so you can click them to learn more. Vulkan is a very new API, so there may be some shortcomings in the specification itself. You are encouraged to submit feedback to [this Khronos repository](https://github.com/KhronosGroup/Vulkan-Docs).
+Although each chapter is written as a follow-up on the previous one, it is also possible to read the chapters as standalone articles introducing a certain Vulkan feature. That means that the site is also useful as a reference. All of the Vulkan functions and types are linked to the either the Vulkan specification or to the `vulkanalia` documentation, so you can click them to learn more. Vulkan is still a fairly young API, so there may be some shortcomings in the specification itself. You are encouraged to submit feedback to [this Khronos repository](https://github.com/KhronosGroup/Vulkan-Docs).
 
 As mentioned before, the Vulkan API has a rather verbose API with many parameters to give you maximum control over the graphics hardware. This causes basic operations like creating a texture to take a lot of steps that have to be repeated every time. Therefore we'll be creating our own collection of helper functions throughout the tutorial.
 
-Every chapter will also conclude with a link to the full code listing up to that point. You can refer to it if you have any doubts about the structure of the code, or if you're dealing with a bug and want to compare. All of the code files have been tested on graphics cards from multiple vendors to verify correctness. Each chapter also has a comment section at the end where you can ask any questions that are relevant to the specific subject matter. Please specify your platform, driver version, source code, expected behavior and actual behavior to help us help you.
+Every chapter will also start with a link to the final code for that chapter. You can refer to it if you have any doubts about the structure of the code, or if you're dealing with a bug and want to compare.
 
-This tutorial is intended to be a community effort. Vulkan is still a very new API and best practices have not really been established yet. If you have any type of feedback on the tutorial and site itself, then please don't hesitate to submit an issue or pull request to the [GitHub repository](https://github.com/KyleMayes/vulkanalia).
+This tutorial is intended to be a community effort. Vulkan is still a fairly new API and best practices have been fully established. If you have any type of feedback on the tutorial and site itself, then please don't hesitate to submit an issue or pull request to the [GitHub repository](https://github.com/KyleMayes/vulkanalia).
 
 After you've gone through the ritual of drawing your very first Vulkan powered triangle onscreen, we'll start expanding the program to include linear transformations, textures and 3D models.
 
