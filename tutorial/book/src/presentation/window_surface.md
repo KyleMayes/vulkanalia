@@ -27,7 +27,7 @@ struct AppData {
 
 Although the `vk::SurfaceKHR` object and its usage is platform agnostic, its creation isn't because it depends on window system details. For example, it needs the `HWND` and `HMODULE` handles on Windows. Therefore there is a platform-specific addition to the extension, which on Windows is called `VK_KHR_win32_surface` and is also automatically included in the list from `vk_winit::get_required_instance_extensions`.
 
-I will demonstrate how this platform specific extension can be used to create a surface on Windows, but we won't actually use it in this tutorial. It doesn't make any sense to use a library like GLFW and then proceed to use platform-specific code anyway. `vulkanalia` has [`vk_winit::create_surface`](https://docs.rs/vulkanalia/latest/vulkanalia/winit/fn.create_surface.html) that handles the platform differences for us. Still, it's good to see what it does behind the scenes before we start relying on it.
+I will demonstrate how this platform specific extension can be used to create a surface on Windows, but we won't actually use it in this tutorial. It doesn't make any sense to use a library like GLFW and then proceed to use platform-specific code anyway. `vulkanalia` has `vk_winit::create_surface` that handles the platform differences for us. Still, it's good to see what it does behind the scenes before we start relying on it.
 
 Because a window surface is a Vulkan object, it comes with a `vk::Win32SurfaceCreateInfoKHR` struct that needs to be filled in. It has two important parameters: `hinstance` and `hwnd`. These are the handles to the process and the window.
 

@@ -8,7 +8,7 @@ use anyhow::*;
 use clap::{App, Arg, SubCommand};
 use mdbook::book::BookItem;
 use mdbook::preprocess::CmdPreprocessor;
-use pulldown_cmark::{Event, Parser};
+use pulldown_cmark::{Event, Parser, Tag};
 use pulldown_cmark_to_cmark::cmark;
 
 /// The Vulkan API Registry index.
@@ -42,8 +42,17 @@ fn main() -> Result<()> {
         ));
     }
 
-    // Parse the index.
-    let index = INDEX
+    // Preprocess the book.
+    let index = load_index();
+    book.for_each_mut(|i| preprocess_item(i, &index).unwrap());
+    serde_json::to_writer(io::stdout(), &book)?;
+
+    Ok(())
+}
+
+#[rustfmt::skip]
+fn load_index() -> HashMap<&'static str, &'static str> {
+    let mut index = INDEX
         .lines()
         .map(|l| {
             let mut tokens = l.split('\t');
@@ -53,11 +62,14 @@ fn main() -> Result<()> {
         })
         .collect::<HashMap<_, _>>();
 
-    // Preprocess the book.
-    book.for_each_mut(|i| preprocess_item(i, &index).unwrap());
-    serde_json::to_writer(io::stdout(), &book)?;
+    // Add entries for non-generated items.
+    index.insert("Device", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/struct.Device.html");
+    index.insert("Entry", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/struct.Entry.html");
+    index.insert("Instance", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/struct.Instance.html");
+    index.insert("vk_winit::create_surface", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/winit/fn.create_surface.html");
+    index.insert("vk_winit::get_required_instance_extensions", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/winit/fn.get_required_instance_extensions.html");
 
-    Ok(())
+    index
 }
 
 fn preprocess_item(item: &mut BookItem, index: &HashMap<&str, &str>) -> Result<()> {
@@ -82,6 +94,9 @@ fn map_event<'e>(event: Event<'e>, index: &HashMap<&str, &str>) -> Event<'e> {
         } else {
             event
         }
+    } else if let Event::End(Tag::Link(ltype, url, title)) = &event {
+        let url = url.replace("%VERSION%", VERSION).to_string().into();
+        Event::End(Tag::Link(*ltype, url, title.clone()))
     } else {
         event
     }

@@ -90,11 +90,11 @@ The Vulkan API is defined in terms of the C programming language. The canonical 
 
 The [Vulkan headers](https://github.com/KhronosGroup/Vulkan-Headers) that are part of the Vulkan SDK you will be installing in the next chapter are generated from this Vulkan API Registry. However, we will not be using these headers, directly or indirectly, because `vulkanalia` includes a Rust interface to the Vulkan API generated from the Vulkan API registry that is independent of the C interface provided by the Vulkan SDK.
 
-The foundation of `vulkanalia` is the [`vulkanalia-sys`](https://docs.rs/vulkanalia-sys) crate which defines the raw types (commands, enums, bitmasks, structs, etc.) defined by the Vulkan API Registry. These raw types are re-exported from the `vulkanalia` crate in the [`vk`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/index.html) module along with some other items generated from the Vulkan API Registry which serve as the thin wrapper around the Vulkan API previously mentioned in the introduction.
+The foundation of `vulkanalia` is the [`vulkanalia-sys`](https://docs.rs/vulkanalia-sys) crate which defines the raw types (commands, enums, bitmasks, structs, etc.) defined by the Vulkan API Registry. These raw types are re-exported from the `vulkanalia` crate in the [`vk`](https://docs.rs/vulkanalia/%VERSION%/vulkanalia/vk/index.html) module along with some other items generated from the Vulkan API Registry which serve as the thin wrapper around the Vulkan API previously mentioned in the introduction.
 
 ### Type Names
 
-Because Rust has support for namespaces unlike C, the `vulkanalia` API omits the parts of Vulkan type names that are used for namespacing purposes in C. More specifically, Vulkan types such as structs, unions, and enums lose their `Vk` prefix. For example, the `VkInstanceCreateInfo` struct becomes the [`InstanceCreateInfo`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/struct.InstanceCreateInfo.html) struct in `vulkanalia` and can be found in the previously mentioned [`vk`](https://docs.rs/vulkanalia/latest/vulkanalia/vk/index.html) module.
+Because Rust has support for namespaces unlike C, the `vulkanalia` API omits the parts of Vulkan type names that are used for namespacing purposes in C. More specifically, Vulkan types such as structs, unions, and enums lose their `Vk` prefix. For example, the `VkInstanceCreateInfo` struct becomes the [`InstanceCreateInfo`](https://docs.rs/vulkanalia/%VERSION%/vulkanalia/vk/struct.InstanceCreateInfo.html) struct in `vulkanalia` and can be found in the previously mentioned [`vk`](https://docs.rs/vulkanalia/%VERSION%/vulkanalia/vk/index.html) module.
 
 Going forward, this tutorial will refer to the Vulkan types defined by `vulkanalia` using the `vk::` module prefix to make it clear the type represents something generated from the Vulkan API Registry.
 
@@ -189,7 +189,7 @@ fn enumerate_instance_extension_properties(
 This command wrapper makes the usage of `vkEnumerateInstanceExtensionProperties` from Rust easier, less error-prone, and more idiomatic in several ways:
 
 * The optionality of the `layer_name` parameter is encoded in the function signature. That this parameter is optional is not captured in the C function signature, one would need to check the Vulkan specification for this information
-* The fallibility of the command is modelled by returning a `Result` ([`VkResult<T>`](https://docs.rs/vulkanalia/latest/vulkanalia/type.VkResult.html) is a type alias for `Result<T, vk::ErrorCode>`). This allows us to take advantage of Rust's strong error handling capabilities as well as be warned by the compiler if we neglect to check the result of a fallible command
+* The fallibility of the command is modelled by returning a `Result` ([`VkResult<T>`](https://docs.rs/vulkanalia/%VERSION%/vulkanalia/type.VkResult.html) is a type alias for `Result<T, vk::ErrorCode>`). This allows us to take advantage of Rust's strong error handling capabilities as well as be warned by the compiler if we neglect to check the result of a fallible command
 * The command wrapper handles the three step process described above internally and returns a `Vec` containing the extension properties
 
 You likely noticed the `&self` parameter in the above command wrapper. These command wrappers are defined in traits which are implemented for types exposed by `vulkanalia`. These traits can be separated into two categories: version traits and extension traits. The version traits offer command wrappers for the commands which are a standard part of Vulkan whereas the extension traits offer command wrappers for the commands which are defined as part of Vulkan extensions.
@@ -198,7 +198,7 @@ For example, `enumerate_instance_extension_properties` is in the `vk::EntryV1_0`
 
 `vk::KhrSurfaceExtension` is an example of an extension trait that we will be using in future chapters to call Vulkan commands like `destroy_surface_khr` that are defined in the `VK_KHR_surface` extension.
 
-These version and extension traits are defined for types which contain both the loaded commands and the required Vulkan instance or device (if any). These types have been lovingly hand-crafted and are not part of the generated Vulkan bindings in the `vk` module of `vulkanalia`. They will be used in future chapters and are the `Entry`, `Instance`, and `Device` structs and can be found in the `Structs` section of the [`vulkanalia` documentation](https://docs.rs/vulkanalia).
+These version and extension traits are defined for types which contain both the loaded commands and the required Vulkan instance or device (if any). These types have been lovingly hand-crafted and are not part of the generated Vulkan bindings in the `vk` module of `vulkanalia`. They will be used in future chapters and are the `Entry`, `Instance`, and `Device` structs.
 
 Going forward, this tutorial will continue to refer to these command wrappers directly by name as in this section (e.g., `create_instance`). You can visit the `vulkanalia` documentation for the command wrapper for more information like which trait the command wrapper is defined in.
 
@@ -251,7 +251,7 @@ Fortunately, `vulkanalia` has a solution for this. Simply don't call `build()` a
 
 ### Preludes
 
-`vulkanalia` offers [prelude modules](https://docs.rs/vulkanalia/latest/vulkanalia/prelude/index.html) that expose the basic types needed to use the crate. One prelude module is available per Vulkan version and each will expose the relevant command traits along with other very frequently used types:
+`vulkanalia` offers [prelude modules](https://docs.rs/vulkanalia/%VERSION%/vulkanalia/prelude/index.html) that expose the basic types needed to use the crate. One prelude module is available per Vulkan version and each will expose the relevant command traits along with other very frequently used types:
 
 ```rust,noplaypen
 // Vulkan 1.0
