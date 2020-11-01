@@ -155,8 +155,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
-<p>This tutorial is an adaptation of <a href="https://vulkan-tutorial.com">https://vulkan-tutorial.com</a> to use Rust instead of C/C++.</p>
-<p>The vast majority of the credit for this tutorial should go the author of <a href="https://vulkan-tutorial.com">https://vulkan-tutorial.com</a>, <a href="https://github.com/Overv">Alexander Overvoorde</a>.</p>
+<p>This tutorial is an adaptation of <a href="https://vulkan-tutorial.com">https://vulkan-tutorial.com</a> to use Rust instead of C++. The majority of the credit for this tutorial should go the author of the original tutorial, <a href="https://github.com/Overv">Alexander Overvoorde</a>.</p>
 <h2><a class="header" href="#about" id="about">About</a></h2>
 <p>This tutorial will teach you the basics of using the <a href="https://www.khronos.org/vulkan/">Vulkan</a> graphics and compute API. Vulkan is a new API by the <a href="https://www.khronos.org/">Khronos group</a> (known for OpenGL) that provides a much better abstraction of modern graphics cards. This new interface allows you to better describe what your application intends to do, which can lead to better performance and less surprising driver behavior compared to existing APIs like <a href="https://en.wikipedia.org/wiki/OpenGL">OpenGL</a> and <a href="https://en.wikipedia.org/wiki/Direct3D">Direct3D</a>. The ideas behind Vulkan are similar to those of <a href="https://en.wikipedia.org/wiki/Direct3D#Direct3D_12">Direct3D 12</a> and <a href="https://en.wikipedia.org/wiki/Metal_(API)">Metal</a>, but Vulkan has the advantage of being fully cross-platform and allows you to develop for Windows, Linux and Android at the same time (and iOS and macOS via <a href="https://github.com/KhronosGroup/MoltenVK">MoltenVK</a>).</p>
 <p>However, the price you pay for these benefits is that you have to work with a significantly more verbose API. Every detail related to the graphics API needs to be set up from scratch by your application, including initial frame buffer creation and memory management for objects like buffers and texture images. The graphics driver will do a lot less hand holding, which means that you will have to do more work in your application to ensure correct behavior.</p>
@@ -174,9 +173,11 @@
 <li><a href="http://www.pbr-book.org/">Physically Based Rendering book</a></li>
 <li>Vulkan being used in a real engine in the open-source <a href="https://github.com/Novum/vkQuake">Quake</a> and <a href="https://github.com/DustinHLand/vkDOOM3">DOOM 3</a></li>
 </ul>
-<p>If you want a C or C++ tutorial instead, see the original tutorial: <a href="https://vulkan-tutorial.com">https://vulkan-tutorial.com</a></p>
-<p>This tutorial will be using the <a href="https://github.com/KyleMayes/vulkanalia"><code>vulkanalia</code></a> crate to provide access to the Vulkan API from Rust. <code>vulkanalia</code> only provides a thin wrapper over the Vulkan API to make it a bit easier to use from Rust. This means that while you should have never have any difficulty in determining exactly how your Rust programs are interacting with the Vulkan API, you will be shielded from very little of the danger and verbosity of the Vulkan API.</p>
-<p>If you want a Rust Vulkan tutorial that uses a crate which provides a safe and relatively concise wrapper around the Vulkan API, see this tutorial: <a href="https://github.com/bwasty/vulkan-tutorial-rs">https://github.com/bwasty/vulkan-tutorial-rs</a></p>
+<p>If you want a C++ tutorial instead, see the original tutorial:<br/>
+<a href="https://vulkan-tutorial.com">https://vulkan-tutorial.com</a></p>
+<p>This tutorial uses the <a href="https://github.com/KyleMayes/vulkanalia"><code>vulkanalia</code></a> crate to provide access to the Vulkan API from Rust. <code>vulkanalia</code> provides raw bindings to the Vulkan API as well as a thin wrapper over said bindings to make them easier and more idiomatic to use from Rust (more on this in the next chapter). This means that while you should have never have any difficulty in determining exactly how your Rust programs are interacting with the Vulkan API, you will be shielded from little of the danger and verbosity of the Vulkan API.</p>
+<p>If you want a Rust Vulkan tutorial that uses a crate which provides a safe and relatively concise wrapper around the Vulkan API (<a href="https://vulkano.rs"><code>vulkano</code></a>), see this tutorial:<br/>
+<a href="https://github.com/bwasty/vulkan-tutorial-rs">https://github.com/bwasty/vulkan-tutorial-rs</a></p>
 <h2><a class="header" href="#tutorial-structure" id="tutorial-structure">Tutorial structure</a></h2>
 <p>We'll start with an overview of how Vulkan works and the work we'll have to do to get the first triangle on the screen. The purpose of all the smaller steps will make more sense after you've understood their basic role in the whole picture. Next, we'll set up the development environment with the <a href="https://lunarg.com/vulkan-sdk/">Vulkan SDK</a>.</p>
 <p>After that we'll implement all of the basic components of a Vulkan program that are necessary to render your first triangle. Each chapter will follow roughly the following structure:</p>
@@ -185,10 +186,10 @@
 <li>Use all of the relevant API calls to integrate it into your program</li>
 <li>Abstract parts of it into helper functions</li>
 </ul>
-<p>Although each chapter is written as a follow-up on the previous one, it is also possible to read the chapters as standalone articles introducing a certain Vulkan feature. That means that the site is also useful as a reference. All of the Vulkan functions and types are linked to the specification, so you can click them to learn more. Vulkan is a very new API, so there may be some shortcomings in the specification itself. You are encouraged to submit feedback to <a href="https://github.com/KhronosGroup/Vulkan-Docs">this Khronos repository</a>.</p>
+<p>Although each chapter is written as a follow-up on the previous one, it is also possible to read the chapters as standalone articles introducing a certain Vulkan feature. That means that the site is also useful as a reference. All of the Vulkan functions and types are linked to the either the Vulkan specification or to the <code>vulkanalia</code> documentation, so you can click them to learn more. Vulkan is still a fairly young API, so there may be some shortcomings in the specification itself. You are encouraged to submit feedback to <a href="https://github.com/KhronosGroup/Vulkan-Docs">this Khronos repository</a>.</p>
 <p>As mentioned before, the Vulkan API has a rather verbose API with many parameters to give you maximum control over the graphics hardware. This causes basic operations like creating a texture to take a lot of steps that have to be repeated every time. Therefore we'll be creating our own collection of helper functions throughout the tutorial.</p>
-<p>Every chapter will also conclude with a link to the full code listing up to that point. You can refer to it if you have any doubts about the structure of the code, or if you're dealing with a bug and want to compare. All of the code files have been tested on graphics cards from multiple vendors to verify correctness. Each chapter also has a comment section at the end where you can ask any questions that are relevant to the specific subject matter. Please specify your platform, driver version, source code, expected behavior and actual behavior to help us help you.</p>
-<p>This tutorial is intended to be a community effort. Vulkan is still a very new API and best practices have not really been established yet. If you have any type of feedback on the tutorial and site itself, then please don't hesitate to submit an issue or pull request to the <a href="https://github.com/KyleMayes/vulkanalia">GitHub repository</a>.</p>
+<p>Every chapter will also start with a link to the final code for that chapter. You can refer to it if you have any doubts about the structure of the code, or if you're dealing with a bug and want to compare.</p>
+<p>This tutorial is intended to be a community effort. Vulkan is still a fairly new API and best practices have been fully established. If you have any type of feedback on the tutorial and site itself, then please don't hesitate to submit an issue or pull request to the <a href="https://github.com/KyleMayes/vulkanalia">GitHub repository</a>.</p>
 <p>After you've gone through the ritual of drawing your very first Vulkan powered triangle onscreen, we'll start expanding the program to include linear transformations, textures and 3D models.</p>
 <p>If you've played with graphics APIs before, then you'll know that there can be a lot of steps until the first geometry shows up on the screen. There are many of these initial steps in Vulkan, but you'll see that each of the individual steps is easy to understand and does not feel redundant. It's also important to keep in mind that once you have that boring looking triangle, drawing fully textured 3D models does not take that much extra work, and each step beyond that point is much more rewarding.</p>
 <p>If you encounter any problems while following the tutorial, check the FAQ to see if your problem and its solution is already listed there. Next, you might find someone who had the same problem (if it is not Rust-specific) in the comment section for the corresponding chapter in the <a href="https://vulkan-tutorial.com/">original tutorial</a>.</p>
@@ -266,27 +267,45 @@
 </ul>
 <p>It's a lot of steps, but the purpose of each individual step will be made very simple and clear in the upcoming chapters. If you're confused about the relation of a single step compared to the whole program, you should refer back to this chapter.</p>
 <h2><a class="header" href="#api-concepts" id="api-concepts">API concepts</a></h2>
-<p>The Vulkan API is defined in terms of the C programming language. This API is defined in the Vulkan API Registry which is <a href="https://github.com/KhronosGroup/Vulkan-Docs/blob/main/xml/vk.xml">an XML file</a> which serves the purpose of being a machine readable definition of the Vulkan API.</p>
-<p>The Vulkan <a href="https://github.com/KhronosGroup/Vulkan-Headers">C and C++ headers</a> that are part of the Vulkan SDK you will be installing in the next chapter are generated from this Vulkan API Registry. However, we will not be using these headers, directly or indirectly, because <code>vulkanalia</code> includes a Rust interface to the Vulkan API generated from the Vulkan API registry.</p>
-<p>Underneath <code>vulkanalia</code> is the <a href="https://docs.rs/vulkanalia-sys"><code>vulkanalia-sys</code></a> crate which defines the raw types (commands, enums, bitmasks, structs, etc.) defined by the Vulkan API Registry. These raw types are re-exported from the <code>vulkanalia</code> crate in the <a href="https://docs.rs/vulkanalia/latest/vulkanalia/vk/index.html"><code>vk</code></a> module along with some other types generated from the Vulkan API Registry which allow for somewhat simpler and less error-prone usage of the Vulkan API from Rust.</p>
+<p>The Vulkan API is defined in terms of the C programming language. The canonical version of the Vulkan API is defined in the Vulkan API Registry which is <a href="https://github.com/KhronosGroup/Vulkan-Docs/blob/main/xml/vk.xml">an XML file</a> which serves as a machine readable definition of the Vulkan API.</p>
+<p>The <a href="https://github.com/KhronosGroup/Vulkan-Headers">Vulkan headers</a> that are part of the Vulkan SDK you will be installing in the next chapter are generated from this Vulkan API Registry. However, we will not be using these headers, directly or indirectly, because <code>vulkanalia</code> includes a Rust interface to the Vulkan API generated from the Vulkan API registry that is independent of the C interface provided by the Vulkan SDK.</p>
+<p>The foundation of <code>vulkanalia</code> is the <a href="https://docs.rs/vulkanalia-sys"><code>vulkanalia-sys</code></a> crate which defines the raw types (commands, enums, bitmasks, structs, etc.) defined by the Vulkan API Registry. These raw types are re-exported from the <code>vulkanalia</code> crate in the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/index.html"><code>vk</code></a> module along with some other items generated from the Vulkan API Registry which serve as the thin wrapper around the Vulkan API previously mentioned in the introduction.</p>
 <h3><a class="header" href="#type-names" id="type-names">Type Names</a></h3>
-<p>Because Rust has support for namespaces unlike C, the <code>vulkanalia</code> API omits the parts of Vulkan type names that are used for namespacing purposes in C. Types such as structs, unions, and enums lose their <code>Vk</code> prefix (e.g., <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkInstance.html"><code class="hljs">VkInstance</code></a> becomes <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a> where <code>vk</code> is the the module of the same name in <code>vulkanalia</code>).</p>
+<p>Because Rust has support for namespaces unlike C, the <code>vulkanalia</code> API omits the parts of Vulkan type names that are used for namespacing purposes in C. More specifically, Vulkan types such as structs, unions, and enums lose their <code>Vk</code> prefix. For example, the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkInstanceCreateInfo.html"><code class="hljs">VkInstanceCreateInfo</code></a> struct becomes the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code>InstanceCreateInfo</code></a> struct in <code>vulkanalia</code> and can be found in the previously mentioned <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/index.html"><code>vk</code></a> module.</p>
+<p>Going forward, this tutorial will refer to the Vulkan types defined by <code>vulkanalia</code> using the <code>vk::</code> module prefix to make it clear the type represents something generated from the Vulkan API Registry.</p>
+<p>These type names will each be links to the <code>vulkanalia</code> documentation for the referenced type. The <code>vulkanalia</code> documentation for Vulkan types will also contain a link to the Vulkan specification for the type which you can use to learn more about the purpose and usage of the type.</p>
+<p>A few type name examples:</p>
+<ul>
+<li>
+<p><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a></p>
+</li>
+<li>
+<p><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a></p>
+</li>
+<li>
+<p><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateFlags.html"><code class="hljs">vk::InstanceCreateFlags</code></a></p>
+</li>
+</ul>
 <h3><a class="header" href="#enums" id="enums">Enums</a></h3>
-<p>Vulkan enums are modeled as structs and the enum values are modeled as associated constants on the struct. Rust enums are not used to model Vulkan enums because use of Rust enums in FFI can lead to <a href="https://github.com/rust-lang/rust/issues/36927">undefined behavior</a>.</p>
-<p>Since we don't need to worry about name conflicts between the enum values for different enums (or different libraries), the portions of the enum value names used for namespacing purposes are omitted.</p>
-<p>For example, the <code>VK_OBJECT_TYPE_INSTANCE</code> enum value is the <code>INSTANCE</code> value for the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkObjectType.html"><code class="hljs">VkObjectType</code></a> enum. In <code>vulkanalia</code>, this enum value becomes <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.ObjectType.html#associatedconstant.INSTANCE"><code class="hljs">vk::ObjectType::INSTANCE</code></a>.</p>
+<p><code>vulkanalia</code> models Vulkan enums as structs and models variants as associated constants for these structs. Rust enums are not used for Vulkan enums because the use of Rust enums in FFI can lead to <a href="https://github.com/rust-lang/rust/issues/36927">undefined behavior</a>.</p>
+<p>Since associated constants are namespaced to the struct they are for, we don't need to worry about name conflicts between the values of different Vulkan enums (or enums from other libraries) like we would in C. So like with type names, <code>vulkanalia</code> omits the parts of variant names used for namespacing purposes.</p>
+<p>For example, the <code>VK_OBJECT_TYPE_INSTANCE</code> variant is the <code>INSTANCE</code> value for the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkObjectType.html"><code class="hljs">VkObjectType</code></a> enum. In <code>vulkanalia</code>, this variant becomes <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.ObjectType.html#associatedconstant.INSTANCE"><code class="hljs">vk::ObjectType::INSTANCE</code></a>.</p>
 <h3><a class="header" href="#bitmasks" id="bitmasks">Bitmasks</a></h3>
-<p>Vulkan bitmasks are modeled as structs with the bitflags as associated constants (similarly to enums) which are generated by the <code>bitflags!</code> macro from the <a href="https://github.com/bitflags/bitflags"><code>bitflags</code></a> crate.</p>
-<p>Like with enums values, the portions of bitmask names used for namespacing purposes are omitted.</p>
+<p><code>vulkanalia</code> models Vulkan bitmasks as structs and models bitflags as associated constants for these structs. These structs and associated constants are generated by the <code>bitflags!</code> macro from the <a href="https://github.com/bitflags/bitflags"><code>bitflags</code></a> crate.</p>
+<p>Like with variants, the parts of bitmask names used for namespacing purposes are omitted.</p>
 <p>For example, the <code>VK_BUFFER_USAGE_TRANSFER_SRC_BIT</code> bitflag is the <code>TRANSFER_SRC</code> bitflag for the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferUsageFlags.html"><code class="hljs">VkBufferUsageFlags</code></a> bitmask. In <code>vulkanalia</code>, this becomes <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.BufferUsageFlags.html#associatedconstant.TRANSFER_SRC"><code class="hljs">vk::BufferUsageFlags::TRANSFER_SRC</code></a>.</p>
 <h3><a class="header" href="#commands" id="commands">Commands</a></h3>
-<p>The raw Vulkan commands are defined in <code>vulkanalia</code> with the <code>PFN_</code> (pointer to function) prefix. So <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/type.PFN_vkEnumerateInstanceExtensionProperties.html"><code class="hljs">vk::PFN_vkEnumerateInstanceExtensionProperties</code></a> refers to a function pointer for the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateInstanceExtensionProperties.html"><code class="hljs">vkEnumerateInstanceExtensionProperties</code></a> Vulkan command.</p>
-<p>If we want to actually call these Vulkan commands, we first need to load them. Vulkan commands are loaded by and stored in four structs, the contents of which are determined by how those commands are loaded. Only two Vulkan commands are directly loaded from a Vulkan shared library, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetInstanceProcAddr.html"><code class="hljs">vkGetInstanceProcAddr</code></a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceProcAddr.html"><code class="hljs">vkGetDeviceProcAddr</code></a>. These commands are then used to load all of the other Vulkan commands. The four structs are (note that Vulkan instances and devices are a topic that will be covered in future chapters):</p>
+<p>The types for raw Vulkan commands like <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateInstance.html"><code class="hljs">vkCreateInstance</code></a> are defined in <code>vulkanalia</code> as function pointer type aliases with the <code>PFN_</code> (pointer to function) prefix. So the <code>vulkanalia</code> type alias for <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateInstance.html"><code class="hljs">vkCreateInstance</code></a> is <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/type.PFN_vkCreateInstance.html"><code class="hljs">vk::PFN_vkCreateInstance</code></a>.</p>
+<p>These function pointer types are not enough on their own to call Vulkan commands, we first need to load the commands described by these types. The Vulkan specification has a <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#initialization-functionpointers">detailed description</a> of how this is done, but I will present a simplified version here.</p>
+<p>The first Vulkan command to load is <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetInstanceProcAddr.html"><code class="hljs">vkGetInstanceProcAddr</code></a>. This command is loaded in a platform-specific manner but <code>vulkanalia</code> provides an optional integration with <a href="https://crates.io/crates/libloading"><code>libloading</code></a> to load this command from a Vulkan dynamic library which we will be using in this tutorial. <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetInstanceProcAddr.html"><code class="hljs">vkGetInstanceProcAddr</code></a> can be then used to load the other Vulkan commands we want to call.</p>
+<p>However, there may be multiple versions of Vulkan commands available depending on the Vulkan implementations on your system. For example, if your system has both a dedicated NVIDIA GPU and an integrated Intel GPU, there may be separate implementations of device-specific Vulkan commands like <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_memory"><code class="hljs">allocate_memory</code></a> for each device. In cases like this, <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetInstanceProcAddr.html"><code class="hljs">vkGetInstanceProcAddr</code></a> will return a command that will dispatch calls to the appropriate device-specific command depending on the device in use.</p>
+<p>To avoid the runtime overhead of this dispatch, the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceProcAddr.html"><code class="hljs">vkGetDeviceProcAddr</code></a> command can be used to directly load these device-specific Vulkan commands. This command is loaded in the same manner as <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetInstanceProcAddr.html"><code class="hljs">vkGetInstanceProcAddr</code></a>.</p>
+<p>We will be calling dozens of Vulkan commands in this tutorial. Fortunately we won't have to load them manually, <code>vulkanalia</code> provides structs which can be used to easily load all the Vulkan commands in one of four categories:</p>
 <ul>
-<li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.StaticCommands.html"><code class="hljs">vk::StaticCommands</code></a> – the Vulkan commands listed above which are loaded directly from a Vulkan shared library</li>
-<li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.EntryCommands.html"><code class="hljs">vk::EntryCommands</code></a> the Vulkan commands loaded using <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetInstanceProcAddr.html"><code class="hljs">vkGetInstanceProcAddr</code></a> and a null Vulkan instance (i.e., Vulkan commands not tied to a particular Vulkan instance)</li>
-<li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCommands.html"><code class="hljs">vk::InstanceCommands</code></a> – the Vulkan commands loaded using <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetInstanceProcAddr.html"><code class="hljs">vkGetInstanceProcAddr</code></a> and a valid Vulkan instance</li>
-<li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.DeviceCommands.html"><code class="hljs">vk::DeviceCommands</code></a> – the Vulkan commands loaded using <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceProcAddr.html"><code class="hljs">vkGetDeviceProcAddr</code></a> and a valid Vulkan device</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.StaticCommands.html"><code class="hljs">vk::StaticCommands</code></a> – The Vulkan commands loaded in a platform-specific manner that can then used to load the other commands (i.e., <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetInstanceProcAddr.html"><code class="hljs">vkGetInstanceProcAddr</code></a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceProcAddr.html"><code class="hljs">vkGetDeviceProcAddr</code></a>)</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.EntryCommands.html"><code class="hljs">vk::EntryCommands</code></a> – The Vulkan commands loaded using <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetInstanceProcAddr.html"><code class="hljs">vkGetInstanceProcAddr</code></a> and a null Vulkan instance. These commands are not tied to a specific Vulkan instance and are used to query instance support and create instances</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCommands.html"><code class="hljs">vk::InstanceCommands</code></a> – The Vulkan commands loaded using <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetInstanceProcAddr.html"><code class="hljs">vkGetInstanceProcAddr</code></a> and a valid Vulkan instance. These commands are tied to a specific Vulkan instance and, among other things, are used to query device support and create devices</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.DeviceCommands.html"><code class="hljs">vk::DeviceCommands</code></a> – The Vulkan commands loaded using <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceProcAddr.html"><code class="hljs">vkGetDeviceProcAddr</code></a> and a valid Vulkan device. These commands are tied to a specific Vulkan device and expose most of the functionality you would expect from a graphics API</li>
 </ul>
 <p>These structs allow you to easily load and call raw Vulkan commands from Rust, but <code>vulkanalia</code> offers wrappers around the raw Vulkan commands which make calling them from Rust easier and less error-prone.</p>
 <h3><a class="header" href="#command-wrappers" id="command-wrappers">Command wrappers</a></h3>
@@ -298,10 +317,10 @@
 );
 </code></pre>
 <p>Someone who is familiar with the conventions of the Vulkan API could quickly see how this command is supposed to be used from this signature alone despite it not including some key information.</p>
-<p>For those new to the Vulkan API, a look at the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateDeviceExtensionProperties.html">documentation</a> for this command will be more illuminating. The description of the behavior of this command in the documentation suggests that using this command to list the available extensions will be a multi-step process:</p>
+<p>For those new to the Vulkan API, a look at the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateDeviceExtensionProperties.html">documentation</a> for this command will likely be more illuminating. The description of the behavior of this command in the documentation suggests that using this command to list the available extensions for the Vulkan instance will be a multi-step process:</p>
 <ol>
 <li>Call the command to get the number of extensions</li>
-<li>Allocate a buffer that can contain the specified number of extensions</li>
+<li>Allocate a buffer that can contain the outputted number of extensions</li>
 <li>Call the command again to populate the buffer with the extensions</li>
 </ol>
 <p>So in C++, this might look like this (ignoring the result of the command for simplicity):</p>
@@ -315,19 +334,25 @@ std::vector&lt;VkExtensionProperties&gt; pProperties{pPropertyCount};
 // 3.
 vkEnumerateInstanceExtensionProperties(NULL, &amp;pPropertyCount, pProperties.data());
 </code></pre>
-<p>The Rust signature for the command wrapper looks like this:</p>
+<p>The Rust signature of the wrapper for <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateInstanceExtensionProperties.html"><code class="hljs">vkEnumerateInstanceExtensionProperties</code></a> looks like this:</p>
 <pre><code class="language-rust noplaypen">fn enumerate_instance_extension_properties(
     &amp;self,
     layer_name: Option&lt;&amp;[u8]&gt;,
 ) -&gt; VkResult&lt;Vec&lt;ExtensionProperties&gt;&gt;;
 </code></pre>
-<p>These command wrappers simplify usage of Vulkan commands by handling the need to call some commands twice such as in this case as well as capturing the fallibility of the underlying command by returning a (Rust) <code>Result</code> (<a href="https://docs.rs/vulkanalia/latest/vulkanalia/type.VkResult.html"><code>VkResult&lt;T&gt;</code></a> in this case is a type alias for <code>Result&lt;T, vk::Result&gt;</code>). Note that the <code>layer_name</code> argument is optional, a fact which is defined by the Vulkan API Registry but cannot be indicated by a C function signature alone.</p>
-<p>You likely noticed the <code>&amp;self</code> parameter in the above command wrapper. These command wrappers are defined in traits which are implemented for types exposed by <code>vulkanalia</code>. The traits can be separated into two categories: version traits and extension traits. The version traits offer command wrappers for the commands which are a standard part of Vulkan whereas the extension traits offer command wrappers for the commands which are defined as part of Vulkan extensions.</p>
-<p>For example, the above command wrapper is in the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.EntryV1_0.html"><code class="hljs">vk::EntryV1_0</code></a> trait since it is a standard Vulkan command that is part of Vulkan 1.0 and is not dependent on a valid Vulkan instance or version (as described in the previous section).</p>
-<p>A Vulkan device command that was added in Vulkan 1.2 would be in the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_2.html"><code class="hljs">vk::DeviceV1_2</code></a> trait. <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.KhrSurfaceExtension.html"><code class="hljs">vk::KhrSurfaceExtension</code></a> is an example of an extension trait that we will be using in future chapters to call Vulkan commands that are defined as part of the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html"><code class="hljs">VK_KHR_surface</code></a> extension.</p>
-<p>These traits are defined for types which contain both the loaded commands and the required Vulkan instance or device (if any). These types have been lovingly hand-crafted and are not part of the generated Vulkan bindings in the <code>vk</code> module of <code>vulkanalia</code>. They will be used in future chapters and are the <code>Entry</code>, <code>Instance</code>, and <code>Device</code> structs and can be found in the <code>Structs</code> section of the <a href="https://docs.rs/vulkanalia"><code>vulkanalia</code> documentation</a>.</p>
+<p>This command wrapper makes the usage of <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateInstanceExtensionProperties.html"><code class="hljs">vkEnumerateInstanceExtensionProperties</code></a> from Rust easier, less error-prone, and more idiomatic in several ways:</p>
+<ul>
+<li>The optionality of the <code>layer_name</code> parameter is encoded in the function signature. That this parameter is optional is not captured in the C function signature, one would need to check the Vulkan specification for this information</li>
+<li>The fallibility of the command is modelled by returning a <code>Result</code> (<a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/type.VkResult.html"><code>VkResult&lt;T&gt;</code></a> is a type alias for <code>Result&lt;T, vk::ErrorCode&gt;</code>). This allows us to take advantage of Rust's strong error handling capabilities as well as be warned by the compiler if we neglect to check the result of a fallible command</li>
+<li>The command wrapper handles the three step process described above internally and returns a <code>Vec</code> containing the extension properties</li>
+</ul>
+<p>You likely noticed the <code>&amp;self</code> parameter in the above command wrapper. These command wrappers are defined in traits which are implemented for types exposed by <code>vulkanalia</code>. These traits can be separated into two categories: version traits and extension traits. The version traits offer command wrappers for the commands which are a standard part of Vulkan whereas the extension traits offer command wrappers for the commands which are defined as part of Vulkan extensions.</p>
+<p>For example, <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.EntryV1_0.html#method.enumerate_instance_extension_properties"><code class="hljs">enumerate_instance_extension_properties</code></a> is in the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.EntryV1_0.html"><code class="hljs">vk::EntryV1_0</code></a> trait since it is a non-extension Vulkan command that is part of Vulkan 1.0 and not dependent on a Vulkan instance or device. A Vulkan command like <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_2.html#method.cmd_draw_indirect_count"><code class="hljs">cmd_draw_indirect_count</code></a> that was added in Vulkan 1.2 and is dependent on a Vulkan device would be in the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_2.html"><code class="hljs">vk::DeviceV1_2</code></a> trait.</p>
+<p><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.KhrSurfaceExtension.html"><code class="hljs">vk::KhrSurfaceExtension</code></a> is an example of an extension trait that we will be using in future chapters to call Vulkan commands like <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.KhrSurfaceExtension.html#method.destroy_surface_khr"><code class="hljs">destroy_surface_khr</code></a> that are defined in the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html"><code class="hljs">VK_KHR_surface</code></a> extension.</p>
+<p>These version and extension traits are defined for types which contain both the loaded commands and the required Vulkan instance or device (if any). These types have been lovingly hand-crafted and are not part of the generated Vulkan bindings in the <code>vk</code> module of <code>vulkanalia</code>. They will be used in future chapters and are the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/struct.Entry.html"><code class="hljs">Entry</code></a>, <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a>, and <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/struct.Device.html"><code class="hljs">Device</code></a> structs.</p>
+<p>Going forward, this tutorial will continue to refer to these command wrappers directly by name as in this section (e.g., <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.EntryV1_0.html#method.create_instance"><code class="hljs">create_instance</code></a>). You can visit the <code>vulkanalia</code> documentation for the command wrapper for more information like which trait the command wrapper is defined in.</p>
 <h3><a class="header" href="#builders" id="builders">Builders</a></h3>
-<p>The Vulkan API heavily utilizes structs as parameters for Vulkan commands. Many of these structs have a field which indicates the type of the struct. In the C API (called from C++ in this example), this field (<code>sType</code>) would need to be set explicitly, for example:</p>
+<p>The Vulkan API heavily utilizes structs as parameters for Vulkan commands. The Vulkan structs used as command parameters have a field which indicates the type of the struct. In the C API, this field (<code>sType</code>) would need to be set explicitly. For example, here we are populating an instance of <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkInstanceCreateInfo.html"><code class="hljs">VkInstanceCreateInfo</code></a> and then using it to call <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateInstance.html"><code class="hljs">vkCreateInstance</code></a>:</p>
 <pre><code class="language-c++">std::vector&lt;const char*&gt; extensions{/* 3 extension names */};
 
 VkInstanceCreateInfo info;
@@ -338,8 +363,8 @@ info.ppEnabledExtensionNames = extensions.data();
 VkInstance instance;
 vkCreateInstance(&amp;info, NULL, &amp;instance);
 </code></pre>
-<p><code>vulkanalia</code> retains this approach but makes it a bit easier to work with while also preventing certain classes of errors. <code>vulkanalia</code> has builder structs which simplify the construction of Vulkan structs by populating the struct with defaults which will include the appropriate value for structure type field when present. These builder structs also simplify the setting of linked fields that represent arrays such as <code>enabledExtensionCount</code> and <code>ppEnabledExtensionNames</code> in the above code. Using <code>vulkanalia</code> the above code would become:</p>
-<pre><code class="language-rust noplaypen">let extensions = &amp;[/* 3 extensions */];
+<p>You can still populate parameter structs in this manner when using <code>vulkanalia</code>, but <code>vulkanalia</code> provides builders which simplify the construction of these parameter structs. The <code>vulkanalia</code> builder for <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a> is <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfoBuilder.html"><code class="hljs">vk::InstanceCreateInfoBuilder</code></a>. Using this builder the above code would become:</p>
+<pre><code class="language-rust noplaypen">let extensions = &amp;[/* 3 extension names */];
 
 let info = vk::InstanceCreateInfo::builder()
     .enabled_extension_names(extensions)
@@ -347,18 +372,22 @@ let info = vk::InstanceCreateInfo::builder()
 
 let instance = entry.create_instance(&amp;info, None).unwrap();
 </code></pre>
-<p>Here we create a builder struct instance <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfoBuilder.html"><code class="hljs">vk::InstanceCreateInfoBuilder</code></a> for the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a> struct that will be initially be populated with default values which includes setting the <code>s_type</code> field to <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.StructureType.html#associatedconstant.INSTANCE_CREATE_INFO"><code class="hljs">vk::StructureType::INSTANCE_CREATE_INFO</code></a>. Then we set the enabled extension names (which will set both the <code>enabled_extension_count</code> and <code>enabled_extension_name</code> fields). Then we can build our <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a> struct and pass it to the Vulkan command wrapper.</p>
-<p>However, the above Rust code involves a certain degree of danger. The builder structs have lifetimes which enforce that the references stored in them live at least as long as the struct. In the above example, this means that the Rust compiler will make sure that the value passed to the <code>enabled_extension_names</code> method lives at least as long as the builder struct. However, as soon as we call <code>build()</code> to get the raw Vulkan struct these lifetimes are discarded which means the Rust compiler can't prevent us from attempting to access a value that has been dropped.</p>
-<p>The following code will (hopefully) crash since the temporary <code>Vec</code> passed to the <code>enabled_extension_names</code> value will have been dropped by the time we call the Vulkan command with our <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a> struct:</p>
+<p>Note the following differences:</p>
+<ul>
+<li>A value is not provided for the <code>s_type</code> field. This is because the builder provides the correct value for this field (<a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.StructureType.html#associatedconstant.INSTANCE_CREATE_INFO"><code class="hljs">vk::StructureType::INSTANCE_CREATE_INFO</code></a>) automatically</li>
+<li>A value is not provided for the <code>enabled_extension_count</code> field. This is because the <code>enabled_extension_names</code> builder method uses the length of the provided slice to set this field automatically</li>
+</ul>
+<p>However, the above Rust code involves a certain degree of danger. The builders have lifetimes which enforce that the references stored in them live at least as long as the builders themselves. In the above example, this means that the Rust compiler will make sure that the slice passed to the <code>enabled_extension_names</code> method lives at least as long as the builder. However, as soon as we call <code>.build()</code> to get the underlying <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a> struct the builder lifetimes are discarded. This means that the Rust compiler can no longer prevent us from shooting ourselves in the foot if we try to dereference a pointer to a slice that no longer exists.</p>
+<p>The following code will (hopefully) crash since the temporary <code>Vec</code> passed to <code>enabled_extension_names</code> will have been dropped by the time we call <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.EntryV1_0.html#method.create_instance"><code class="hljs">create_instance</code></a> with our <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a> struct:</p>
 <pre><code class="language-rust noplaypen">let info = vk::InstanceCreateInfo::builder()
-    .enabled_extension_names(&amp;vec![/* 3 extensions */])
+    .enabled_extension_names(&amp;vec![/* 3 extension names */])
     .build();
 
 let instance = entry.create_instance(&amp;info, None).unwrap();
 </code></pre>
-<p>Fortunately, <code>vulkanalia</code> has a solution for this. Simply don't call <code>build()</code> and instead pass the builder struct to the command wrapper instead! Anywhere a Vulkan struct is expected in a command wrapper you can instead provide the associated builder struct. If you remove the <code>build()</code> call from the above code the Rust compiler will be able to use the lifetimes on the builder struct to reject this incorrect code with <code>error[E0716]: temporary value dropped while borrowed</code>.</p>
+<p>Fortunately, <code>vulkanalia</code> has a solution for this. Simply don't call <code>build()</code> and instead pass the builder to the command wrapper instead! Anywhere a Vulkan struct is expected in a command wrapper you can instead provide the associated builder. If you remove the <code>build()</code> call from the above code the Rust compiler will be able to use the lifetimes on the builder to reject this bad code with <code>error[E0716]: temporary value dropped while borrowed</code>.</p>
 <h3><a class="header" href="#preludes" id="preludes">Preludes</a></h3>
-<p><code>vulkanalia</code> offers <a href="https://docs.rs/vulkanalia/latest/vulkanalia/prelude/index.html">prelude modules</a> that expose the basic types needed to use the crate. One prelude module is available per Vulkan version and each will expose the relevant command traits along with other very frequently used types:</p>
+<p><code>vulkanalia</code> offers <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/prelude/index.html">prelude modules</a> that expose the basic types needed to use the crate. One prelude module is available per Vulkan version and each will expose the relevant command traits along with other very frequently used types:</p>
 <pre><code class="language-rust noplaypen">// Vulkan 1.0
 use vulkanalia::prelude::v1_0::*;
 
@@ -386,17 +415,17 @@ nalgebra-glm = &quot;0.3&quot;
 png = &quot;0.16&quot;
 pretty_env_logger = &quot;0.4&quot;
 tobj = &quot;2&quot;
-vulkanalia = { version = &quot;*&quot;, features = [&quot;libloading_&quot;, &quot;winit_&quot;] }
+vulkanalia = { version = &quot;=0.2.0&quot;, features = [&quot;libloading_&quot;, &quot;winit_&quot;] }
 winit = &quot;0.23&quot;
 </code></pre>
 <ul>
 <li><code>anyhow</code> – used for simple error handling</li>
 <li><code>lazy_static</code> – used to store static data like vertices</li>
 <li><code>log</code> – used for logging statements</li>
-<li><code>nalgebra-glm</code> – used as a Rust replacement for <a href="https://glm.g-truc.net">GLM</a> (graphics math library)</li>
+<li><code>nalgebra-glm</code> – used as a Rust replacement for <a href="https://glmg-truc.net">GLM</a> (graphics math library)</li>
 <li><code>png</code> – used to load PNGs to use as textures</li>
 <li><code>pretty_env_logger</code> – used to print our logs to the console</li>
-<li><code>tobj</code> – used to load 3D models in the <a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file">Wavefront .obj format</a></li>
+<li><code>tobj</code> – used to load 3D models in the <a href="https:/en.wikipedia.org/wiki/Wavefront_.obj_file">Wavefront .obj format</a></li>
 <li><code>vulkanalia</code> – used to call the Vulkan API</li>
 <li><code>winit</code> – used to create a window to render to</li>
 </ul>
@@ -521,7 +550,7 @@ struct AppData {}
 <h2><a class="header" href="#resource-management" id="resource-management">Resource management</a></h2>
 <p>Just like each chunk of memory allocated in C with <code>malloc</code> requires a corresponding call to <code>free</code>, every Vulkan object that we create needs to be explicitly destroyed when we no longer need it. In Rust it is possible to perform automatic resource management using <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">RAII</a> possibly combined with smart pointers like <code>Rc</code> or <code>Arc</code>. However, the author of <a href="https://vulkan-tutorial.com">https://vulkan-tutorial.com</a> chose to be explicit about allocation and deallocation of Vulkan objects in this tutorial and I have decided to take the same approach. After all, Vulkan's niche is to be explicit about every operation to avoid mistakes, so it's good to be explicit about the lifetime of objects to learn how the API works.</p>
 <p>After following this tutorial, you could implement automatic resource management by writing Rust structs that wrap Vulkan objects and release them in their <code>Drop</code> implementation. RAII is the recommended model for larger Vulkan programs, but for learning purposes it's always good to know what's going on behind the scenes.</p>
-<p>Vulkan objects are either created directly with commands like <code>vkCreateXXX</code>, or allocated through another object with commands like <code>vkAllocateXXX</code>. After making sure that an object is no longer used anywhere, you need to destroy it with the counterparts <code>vkDestroyXXX</code> and <code>vkFreeXXX</code>. The parameters for these commands generally vary for different types of objects, but there is one parameter that they all share: <code>pAllocator</code>. This is an optional parameter that allows you to specify callbacks for a custom memory allocator. We will ignore this parameter in the tutorial and always pass <code>None</code> as argument.</p>
+<p>Vulkan objects are either created directly with commands like <code>create_xxx</code>, or allocated through another object with commands like <code>allocate_xxx</code>. After making sure that an object is no longer used anywhere, you need to destroy it with the counterparts <code>destroy_xxx</code> and <code>free_xxx</code>. The parameters for these commands generally vary for different types of objects, but there is one parameter that they all share: <code>allocator</code>. This is an optional parameter that allows you to specify callbacks for a custom memory allocator. We will ignore this parameter in the tutorial and always pass <code>None</code> as argument.</p>
 <h1><a class="header" href="#instance" id="instance">Instance</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/01_instance_creation.rs">main.rs</a></p>
 <p>The very first thing you will want to do is initialize the Vulkan library by creating an <em>instance</em>. The instance is the connection between your application and the Vulkan library and creating it involves specifying some details about your application to the driver. To get started, add the following imports:</p>
@@ -570,24 +599,22 @@ Ok(entry.create_instance(&amp;info, None)?)
 <pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
     let loader = LibloadingLoader::new(LIBRARY)?;
     let entry = Entry::new(loader).map_err(|b| anyhow!(&quot;{}&quot;, b))?;
-
     let instance = create_instance(&amp;entry)?;
-
     Ok(Self { entry, instance })
 }
 </code></pre>
 <p>Here we first create a Vulkan function loader which will be used to load the initial Vulkan commands from the Vulkan shared library. Next we create the Vulkan entry point using the function loader which will load all of the commands we need to manage Vulkan instances. Lastly we are now able to call our <code>create_instance</code> function with the Vulkan entry point.</p>
 <h2><a class="header" href="#cleaning-up" id="cleaning-up">Cleaning up</a></h2>
-<p>The <code>Instance</code> should only be destroyed right before the program exits. It can be destroyed in the <code>App::destroy</code> method using the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.InstanceV1_0.html#method.destroy_instance"><code class="hljs">destroy_instance</code></a> command wrapper:</p>
+<p>The <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> should only be destroyed right before the program exits. It can be destroyed in the <code>App::destroy</code> method using <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.InstanceV1_0.html#method.destroy_instance"><code class="hljs">destroy_instance</code></a>:</p>
 <pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
     self.instance.destroy_instance(None);
 }
 </code></pre>
 <p>Like the Vulkan commands used to create objects, the commands used to destroy objects also take an optional reference to custom allocator callbacks. So like before, we pass <code>None</code> to indicate we are content with the default allocation behavior.</p>
-<h2><a class="header" href="#instance-vs-a-hrefhttpsdocsrsvulkanalia020vulkanaliavkstructinstancehtmlcode-classhljsvkinstancea" id="instance-vs-a-hrefhttpsdocsrsvulkanalia020vulkanaliavkstructinstancehtmlcode-classhljsvkinstancea"><code>Instance</code> vs <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a></a></h2>
-<p>When we call <code>create_instance</code>, what we get back is not a raw Vulkan instance as would be returned by the Vulkan command <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateInstance.html"><code class="hljs">vkCreateInstance</code></a>. Instead what we got back is a custom type defined by <code>vulkanalia</code> which combines both a raw Vulkan instance and the commands loaded for that specific instance.</p>
-<p>This is the <code>Instance</code> type we have been using (imported from the <code>vulkanalia</code> prelude) which should not be confused with the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a> type which represents a raw Vulkan instance. In future chapters we will also use the <code>Device</code> type which, like <code>Instance</code>, is a pairing of a raw Vulkan device (<a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Device.html"><code class="hljs">vk::Device</code></a>) and the commands loaded for that specific device. Fortunately we will not be using <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a> or <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Device.html"><code class="hljs">vk::Device</code></a> directly so you won't need to worry about getting them mixed up.</p>
-<p>Because an <code>Instance</code> contains both a Vulkan instance and the associated commands, the command wrappers like <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.InstanceV1_0.html#method.destroy_instance"><code class="hljs">destroy_instance</code></a> implemented for an <code>Instance</code> are able to provide the Vulkan instance when it is required by the underlying Vulkan command.</p>
+<h2><a class="header" href="#a-hrefhttpsdocsrsvulkanalia020vulkanaliastructinstancehtmlcode-classhljsinstancea-vs-a-hrefhttpsdocsrsvulkanalia020vulkanaliavkstructinstancehtmlcode-classhljsvkinstancea" id="a-hrefhttpsdocsrsvulkanalia020vulkanaliastructinstancehtmlcode-classhljsinstancea-vs-a-hrefhttpsdocsrsvulkanalia020vulkanaliavkstructinstancehtmlcode-classhljsvkinstancea"><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> vs <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a></a></h2>
+<p>When we call our <code>create_instance</code> function, what we get back is not a raw Vulkan instance as would be returned by the Vulkan command <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateInstance.html"><code class="hljs">vkCreateInstance</code></a> (<a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a>). Instead what we got back is a custom type defined by <code>vulkanalia</code> which combines both a raw Vulkan instance and the commands loaded for that specific instance.</p>
+<p>This is the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> type we have been using (imported from the <code>vulkanalia</code> prelude) which should not be confused with the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a> type which represents a raw Vulkan instance. In future chapters we will also use the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/struct.Device.html"><code class="hljs">Device</code></a> type which, like <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a>, is a pairing of a raw Vulkan device (<a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Device.html"><code class="hljs">vk::Device</code></a>) and the commands loaded for that specific device. Fortunately we will not be using <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a> or <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Device.html"><code class="hljs">vk::Device</code></a> directly in this tutorial so you don't need to worry about getting them mixed up.</p>
+<p>Because an <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> contains both a Vulkan instance and the associated commands, the command wrappers implemented for an <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> are able to provide the Vulkan instance when it is required by the underlying Vulkan command.</p>
 <p>If you look at the documentation for the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyInstance.html"><code class="hljs">vkDestroyInstance</code></a> command, you will see that it takes two parameters: the instance to destroy and the optional custom allocator callbacks. However, <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.InstanceV1_0.html#method.destroy_instance"><code class="hljs">destroy_instance</code></a> only takes the optional custom allocator callbacks because it is able to provide the raw Vulkan handle as the first parameter itself as described above.</p>
 <p>Before continuing with the more complex steps after instance creation, it's time to evaluate our debugging options by checking out validation layers.</p>
 <h1><a class="header" href="#validation-layers-1" id="validation-layers-1">Validation layers</a></h1>
@@ -628,7 +655,7 @@ use log::*;
 
 use vulkanalia::vk::ExtDebugUtilsExtension;
 </code></pre>
-<p><code>HashSet</code> will be used for storing and querying supported layers and the other imports will be used in the function we will be writing to log messages from the validation layer with the exception of <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.ExtDebugUtilsExtension.html"><code class="hljs">vk::ExtDebugUtilsExtension</code></a> which provides the commands for managing debugging functionality.</p>
+<p><code>HashSet</code> will be used for storing and querying supported layers and the other imports will be used in the function we will be writing to log messages from the validation layer with the exception of <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.ExtDebugUtilsExtension.html"><code class="hljs">vk::ExtDebugUtilsExtension</code></a> which provides the command wrappers for managing debugging functionality.</p>
 <h2><a class="header" href="#using-validation-layers" id="using-validation-layers">Using validation layers</a></h2>
 <p>In this section we'll see how to enable the standard diagnostics layers provided by the Vulkan SDK. Just like extensions, validation layers need to be enabled by specifying their name. All of the useful standard validation is bundled into a layer included in the SDK that is known as <code>VK_LAYER_KHRONOS_validation</code>.</p>
 <p>Let's first add two configuration variables to the program to specify the layers to enable and whether to enable them or not. I've chosen to base that value on whether the program is being compiled in debug mode or not.</p>
@@ -661,7 +688,7 @@ let layers = if VALIDATION_ENABLED {
     .enabled_layer_names(&amp;layers)
     .enabled_extension_names(&amp;extensions);
 </code></pre>
-<p>Now run the program in debug mode and ensure that the <code>Validation layer requested but not supported.</code> error does not occur. If it does, then have a look at the FAQ. If you get past that check, then <code>entry.create_instance(...)</code> should never return a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Result.html#associatedconstant.ERROR_LAYER_NOT_PRESENT"><code class="hljs">vk::Result::ERROR_LAYER_NOT_PRESENT</code></a> error but you should still run the program to be sure.</p>
+<p>Now run the program in debug mode and ensure that the <code>Validation layer requested but not supported.</code> error does not occur. If it does, then have a look at the FAQ. If you get past that check, then <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.EntryV1_0.html#method.create_instance"><code class="hljs">create_instance</code></a> should never return a <code>vk::ErrorCode::LAYER_NOT_PRESENT</code> error code but you should still run the program to be sure.</p>
 <h2><a class="header" href="#message-callback" id="message-callback">Message callback</a></h2>
 <p>The validation layers will print debug messages to the standard output by default, but we can also handle them ourselves by providing an explicit callback in our program. This will also allow you to decide which kind of messages you would like to see, because not all are necessarily (fatal) errors. If you don't want to do that right now then you may skip to the last section in this chapter.</p>
 <p>To set up a callback in the program to handle messages and the associated details, we have to set up a debug messenger with a callback using the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_debug_utils.html"><code class="hljs">VK_EXT_debug_utils</code></a> extension.</p>
@@ -675,8 +702,8 @@ if VALIDATION_ENABLED {
     extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.to_cstr().as_ptr());
 }
 </code></pre>
-<p>Run the program to make sure you don't receive a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Result.html#associatedconstant.ERROR_EXTENSION_NOT_PRESENT"><code class="hljs">vk::Result::ERROR_EXTENSION_NOT_PRESENT</code></a> error. We don't really need to check for the existence of this extension, because it should be implied by the availability of the validation layers.</p>
-<p>Now let's see what a debug callback function looks like. Add a new <code>extern &quot;system&quot;</code> function called <code>debugCallback</code> with the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/type.PFN_vkDebugUtilsMessengerCallbackEXT.html"><code class="hljs">vk::PFN_vkDebugUtilsMessengerCallbackEXT</code></a> prototype. The <code>extern &quot;system&quot;</code> is necessary to support Vulkan calling it from C.</p>
+<p>Run the program to make sure you don't receive a <code>vk::ErrorCode::EXTENSION_NOT_PRESENT</code> error code. We don't really need to check for the existence of this extension, because it should be implied by the availability of the validation layers.</p>
+<p>Now let's see what a debug callback function looks like. Add a new <code>extern &quot;system&quot;</code> function called <code>debug_callback</code> that matches the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/type.PFN_vkDebugUtilsMessengerCallbackEXT.html"><code class="hljs">vk::PFN_vkDebugUtilsMessengerCallbackEXT</code></a> prototype. The <code>extern &quot;system&quot;</code> is necessary to allow Vulkan to call our Rust function.</p>
 <pre><code class="language-rust noplaypen">extern &quot;system&quot; fn debug_callback(
     severity: vk::DebugUtilsMessageSeverityFlagsEXT,
     type_: vk::DebugUtilsMessageTypeFlagsEXT,
@@ -713,14 +740,14 @@ if VALIDATION_ENABLED {
 <li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.DebugUtilsMessageTypeFlagsEXT.html#associatedconstant.VALIDATION"><code class="hljs">vk::DebugUtilsMessageTypeFlagsEXT::VALIDATION</code></a>: Something has happened that violates the specification or indicates a possible mistake</li>
 <li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.DebugUtilsMessageTypeFlagsEXT.html#associatedconstant.PERFORMANCE"><code class="hljs">vk::DebugUtilsMessageTypeFlagsEXT::PERFORMANCE</code></a>: Potential non-optimal use of Vulkan</li>
 </ul>
-<p>The <code>pCallbackData</code> parameter refers to a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.DebugUtilsMessengerCallbackDataEXT.html"><code class="hljs">vk::DebugUtilsMessengerCallbackDataEXT</code></a> struct containing the details of the message itself, with the most important members being:</p>
+<p>The <code>data</code> parameter refers to a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.DebugUtilsMessengerCallbackDataEXT.html"><code class="hljs">vk::DebugUtilsMessengerCallbackDataEXT</code></a> struct containing the details of the message itself, with the most important members being:</p>
 <ul>
 <li><code>message</code>: The debug message as a null-terminated string (<code>*const c_char</code>)</li>
 <li><code>objects</code>: Array of Vulkan object handles related to the message</li>
 <li><code>object_count</code>: Number of objects in array</li>
 </ul>
 <p>Finally, the last parameter, here ignored as <code>_</code>, contains a pointer that was specified during the setup of the callback and allows you to pass your own data to it.</p>
-<p>The callback returns a (Vulkan) boolean that indicates if the Vulkan call that triggered the validation layer message should be aborted. If the callback returns true, then the call is aborted with the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Result.html#associatedconstant.ERROR_VALIDATION_FAILED_EXT"><code class="hljs">vk::Result::ERROR_VALIDATION_FAILED_EXT</code></a> error. This is normally only used to test the validation layers themselves, so you should always return <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/constant.FALSE.html"><code class="hljs">vk::FALSE</code></a>.</p>
+<p>The callback returns a (Vulkan) boolean that indicates if the Vulkan call that triggered the validation layer message should be aborted. If the callback returns true, then the call is aborted with the <code>vk::ErrorCode::VALIDATION_FAILED_EXT</code> error code. This is normally only used to test the validation layers themselves, so you should always return <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/constant.FALSE.html"><code class="hljs">vk::FALSE</code></a>.</p>
 <p>All that remains now is telling Vulkan about the callback function. Perhaps somewhat surprisingly, even the debug callback in Vulkan is managed with a handle that needs to be explicitly created and destroyed. Such a callback is part of a debug messenger and you can have as many of them as you want. Add a field to the <code>AppData</code> struct:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     messenger: vk::DebugUtilsMessengerEXT,
@@ -748,27 +775,25 @@ if VALIDATION_ENABLED {
 <p>Then we construct a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.DebugUtilsMessengerCreateInfoEXT.html"><code class="hljs">vk::DebugUtilsMessengerCreateInfoEXT</code></a> struct which provides information about our debug callback and how it will be called.</p>
 <p>The <code>message_severity</code> field allows you to specify all the types of severities you would like your callback to be called for. I've requested that messages of all severity be included. This would normally produce a lot of verbose general debug info but we can filter that out using a log level when we are not interested in it.</p>
 <p>Similarly the <code>message_type</code> field lets you filter which types of messages your callback is notified about. I've simply enabled all types here. You can always disable some if they're not useful to you.</p>
-<p>Finally, the <code>user_callback</code> field specifies the callback function. You can optionally pass a mutable reference to the <code>user_data</code> field which will be passed along to the callback function via the <code>data</code> parameter. You could use this to pass a pointer to the <code>AppData</code> struct, for example.</p>
+<p>Finally, the <code>user_callback</code> field specifies the callback function. You can optionally pass a mutable reference to the <code>user_data</code> field which will be passed along to the callback function via the final parameter. You could use this to pass a pointer to the <code>AppData</code> struct, for example.</p>
 <p>Lastly we call <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.ExtDebugUtilsExtension.html#method.create_debug_utils_messenger_ext"><code class="hljs">create_debug_utils_messenger_ext</code></a> to register our debug callback with the Vulkan instance.</p>
 <p>The <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.DebugUtilsMessengerEXT.html"><code class="hljs">vk::DebugUtilsMessengerEXT</code></a> object we created needs to cleaned up before our app exits. We'll do this in <code>App::destroy</code> before we destroy the instance:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        if VALIDATION_ENABLED {
-            self.instance.destroy_debug_utils_messenger_ext(self.data.messenger, None);
-        }
-
-        self.instance.destroy_instance(None);
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    if VALIDATION_ENABLED {
+        self.instance.destroy_debug_utils_messenger_ext(self.data.messenger, None);
     }
+
+    self.instance.destroy_instance(None);
 }
 </code></pre>
 <h2><a class="header" href="#debugging-instance-creation-and-destruction" id="debugging-instance-creation-and-destruction">Debugging instance creation and destruction</a></h2>
-<p>Although we've now added debugging with validation layers to the program we're not covering everything quite yet. The <code>instance.create_debug_utils_messenger_ext(...)</code> call requires a valid instance to have been created and <code>instance.destroy_debug_utils_messenger_ext(...)</code> must be called before the instance is destroyed. This currently leaves us unable to debug any issues in the <code>entry.create_instance(...)</code> and <code>entry.destroy_instance(...)</code> calls.</p>
+<p>Although we've now added debugging with validation layers to the program we're not covering everything quite yet. The <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.ExtDebugUtilsExtension.html#method.create_debug_utils_messenger_ext"><code class="hljs">create_debug_utils_messenger_ext</code></a> call requires a valid instance to have been created and <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.ExtDebugUtilsExtension.html#method.destroy_debug_utils_messenger_ext"><code class="hljs">destroy_debug_utils_messenger_ext</code></a> must be called before the instance is destroyed. This currently leaves us unable to debug any issues in the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.EntryV1_0.html#method.create_instance"><code class="hljs">create_instance</code></a> and <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.InstanceV1_0.html#method.destroy_instance"><code class="hljs">destroy_instance</code></a> calls.</p>
 <p>However, if you closely read the <a href="https://github.com/KhronosGroup/Vulkan-Docs/blob/77d9f42e075e6a483a37351c14c5e9e3122f9113/appendices/VK_EXT_debug_utils.txt#L84-L91">extension documentation</a>, you'll see that there is a way to create a separate debug utils messenger specifically for those two function calls. It requires you to simply pass a pointer to a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.DebugUtilsMessengerCreateInfoEXT.html"><code class="hljs">vk::DebugUtilsMessengerCreateInfoEXT</code></a> struct in the <code>next</code> extension field of <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a>. Before we do this, let's first discuss how extending structs works in Vulkan.</p>
-<p>The <code>s_type</code> field that is present on many Vulkan structs was briefly mentioned in the <a href="setup/../overview.html#builders">Builders section</a> of the Overview chapter. It was said that this field must be set to the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.StructureType.html"><code class="hljs">vk::StructureType</code></a> enum value indicating the type of the struct (e.g., <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.StructureType.html#associatedconstant.APPLICATION_INFO"><code class="hljs">vk::StructureType::APPLICATION_INFO</code></a> for a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.ApplicationInfo.html"><code class="hljs">vk::ApplicationInfo</code></a> struct).</p>
+<p>The <code>s_type</code> field that is present on many Vulkan structs was briefly mentioned in the <a href="setup/../overview.html#builders">Builders section</a> of the Overview chapter. It was said that this field must be set to the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.StructureType.html"><code class="hljs">vk::StructureType</code></a> variant indicating the type of the struct (e.g., <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.StructureType.html#associatedconstant.APPLICATION_INFO"><code class="hljs">vk::StructureType::APPLICATION_INFO</code></a> for a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.ApplicationInfo.html"><code class="hljs">vk::ApplicationInfo</code></a> struct).</p>
 <p>You may have wondered what the purpose of this field is: doesn't Vulkan already know the type of structs passed to its commands? The purpose of this field is wrapped up with the purpose of the <code>next</code> field that always accompanies the <code>s_type</code> field in Vulkan structs: the ability to <em>extend</em> a Vulkan struct with other Vulkan structs.</p>
 <p>The <code>next</code> field in a Vulkan struct may be used to specify a <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#fundamentals-validusage-pNext">structure pointer chain</a>. <code>next</code> can be either be null or a pointer to a Vulkan struct that is permitted by Vulkan to extend the struct. Each struct in this chain of structs is used to provide additional information to the Vulkan command the root structure is passed to. This feature of Vulkan allows for extending the functionality of Vulkan commands without breaking backwards compabilitity.</p>
 <p>When you pass such a chain of structs to a Vulkan command, it must iterate through the structs to collect all of the information from the structs. Because of this, Vulkan can't know the type of each structure in the chain, hence the need for the <code>s_type</code> field.</p>
-<p>The builder structs provided by <code>vulkanalia</code> allow for easily building these pointer chains in a type-safe manner. For example, take a look at the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfoBuilder.html"><code class="hljs">vk::InstanceCreateInfoBuilder</code></a> builder struct, specifically the <code>push_next</code> method. This method allows adding any Vulkan struct for which the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.ExtendsInstanceCreateInfo.html"><code class="hljs">vk::ExtendsInstanceCreateInfo</code></a> trait is implemented for to the pointer chain for a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a>.</p>
+<p>The builders provided by <code>vulkanalia</code> allow for easily building these pointer chains in a type-safe manner. For example, take a look at the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfoBuilder.html"><code class="hljs">vk::InstanceCreateInfoBuilder</code></a> builder, specifically the <code>push_next</code> method. This method allows adding any Vulkan struct for which the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.ExtendsInstanceCreateInfo.html"><code class="hljs">vk::ExtendsInstanceCreateInfo</code></a> trait is implemented for to the pointer chain for a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a>.</p>
 <p>One such struct is <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.DebugUtilsMessengerCreateInfoEXT.html"><code class="hljs">vk::DebugUtilsMessengerCreateInfoEXT</code></a>, which we will now use to extend our <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a> struct to set up our debug callback. To do this we'll continue to modify our <code>create_instance</code> function. This time we'll make the <code>info</code> struct mutable so we can modify its pointer chain before moving the <code>debug_info</code> struct, now also mutable, below it so we can push it onto <code>info</code>'s pointer chain:</p>
 <pre><code class="language-rust noplaypen">let mut info = vk::InstanceCreateInfo::builder()
     .application_info(&amp;application_info)
@@ -784,7 +809,7 @@ if VALIDATION_ENABLED {
     info = info.push_next(&amp;mut debug_info);
 }
 </code></pre>
-<p><code>debug_info</code> needs to be defined outside of the conditional since it needs to live until we are done calling <code>entry.create_instance(...)</code>. Fortunately we can rely on the Rust compiler to protect us from pushing a struct that doesn't live long enough onto a pointer chain due to the lifetimes defined for the <code>vulkanalia</code> builder structs.</p>
+<p><code>debug_info</code> needs to be defined outside of the conditional since it needs to live until we are done calling <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.EntryV1_0.html#method.create_instance"><code class="hljs">create_instance</code></a>. Fortunately we can rely on the Rust compiler to protect us from pushing a struct that doesn't live long enough onto a pointer chain due to the lifetimes defined for the <code>vulkanalia</code> builders.</p>
 <p>Now we should be able to run our program and see logs from our debug callback, but first we'll need to set the <code>RUST_LOG</code> environment variable so that <code>pretty_env_logger</code> will enable the log levels we are interested in. Initially set the log level to <code>debug</code> so we can be sure it is working, here is an example on Windows (Powershell):</p>
 <p><img src="setup/../images/validation_layer_test.png" alt="" /></p>
 <p>If everything is working you shouldn't see any warning or error messages. Going forward you may want to increase the minimum log level to <code>info</code> using <code>RUST_LOG</code> to reduce the verbosity of the logs unless you are trying to debug an error.</p>
@@ -794,7 +819,7 @@ if VALIDATION_ENABLED {
 <p>Throughout this tutorial I'll be making a couple of intentional mistakes to show you how helpful the validation layers are with catching them and to teach you how important it is to know exactly what you're doing with Vulkan. Now it's time to look at Vulkan devices in the system.</p>
 <h1><a class="header" href="#physical-devices-and-queue-families" id="physical-devices-and-queue-families">Physical devices and queue families</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/03_physical_device_selection.rs">main.rs</a></p>
-<p>After initializing the Vulkan library through an <code>Instance</code> we need to look for and select a graphics card in the system that supports the features we need. In fact we can select any number of graphics cards and use them simultaneously, but in this tutorial we'll stick to the first graphics card that suits our needs.</p>
+<p>After initializing the Vulkan library through an <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> we need to look for and select a graphics card in the system that supports the features we need. In fact we can select any number of graphics cards and use them simultaneously, but in this tutorial we'll stick to the first graphics card that suits our needs.</p>
 <p>We'll add a <code>pick_physical_device</code> function which will accomplish this task and write the physical device and related information to an instance of <code>AppData</code>. We'll also need a <code>data: AppData</code> field in our <code>App</code> struct which will be used to store all of the Vulkan objects and related properties for our app. With this in place we can construct and populate an <code>AppData</code> instance in our <code>App::create</code> method.</p>
 <pre><code class="language-rust noplaypen">struct App {
     // ...
@@ -804,10 +829,8 @@ if VALIDATION_ENABLED {
 impl App {
     fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
-
         let mut data = AppData::default();
         pick_physical_device(&amp;instance, &amp;mut data)?;
-
         Ok(Self { entry, instance, data })
     }
 }
@@ -816,7 +839,7 @@ fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; R
     Ok(())
 }
 </code></pre>
-<p>The graphics card that we'll end up selecting will be stored in a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.PhysicalDevice.html"><code class="hljs">vk::PhysicalDevice</code></a> handle that is added as a new field to the <code>AppData</code> struct. This object will be implicitly destroyed when the <code>Instance</code> is destroyed, so we won't need to do anything new in the <code>App::destroy</code> method.</p>
+<p>The graphics card that we'll end up selecting will be stored in a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.PhysicalDevice.html"><code class="hljs">vk::PhysicalDevice</code></a> handle that is added as a new field to the <code>AppData</code> struct. This object will be implicitly destroyed when the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> is destroyed, so we won't need to do anything new in the <code>App::destroy</code> method.</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     physical_device: vk::PhysicalDevice,
 }
@@ -887,7 +910,7 @@ impl QueueFamilyIndices {
     }
 }
 </code></pre>
-<p>The queue properties returned by <code>instance.get_physical_device_queue_family_properties(...)</code> contains various details about the queue families supported by the physical device, including the type of operations supported and the number of queues that can be created based on that family. Here we are looking for the first queue family that supports graphics operations as indicated by <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.GRAPHICS"><code class="hljs">vk::QueueFlags::GRAPHICS</code></a>.</p>
+<p>The queue properties returned by <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_queue_family_properties"><code class="hljs">get_physical_device_queue_family_properties</code></a> contains various details about the queue families supported by the physical device, including the type of operations supported and the number of queues that can be created based on that family. Here we are looking for the first queue family that supports graphics operations as indicated by <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.GRAPHICS"><code class="hljs">vk::QueueFlags::GRAPHICS</code></a>.</p>
 <p>Now that we have this fancy queue family lookup method, we can use it as a check in the <code>check_physical_device</code> function to ensure the device can process the commands we want to use:</p>
 <pre><code class="language-rust noplaypen">fn check_physical_device(
     instance: &amp;Instance,
@@ -925,9 +948,7 @@ impl QueueFamilyIndices {
 <pre><code class="language-rust noplaypen">impl App {
     fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
-
         let device = create_logical_device(&amp;instance, &amp;mut data)?;
-
         Ok(Self { entry, instance, data, device })
     }
 }
@@ -969,8 +990,7 @@ let info = vk::DeviceCreateInfo::builder()
     .enabled_layer_names(&amp;layers)
     .enabled_features(&amp;features);
 </code></pre>
-<p>That's it, we're now ready to instantiate the logical device with a call to the appropriately named <a href="https://docs.rs/vulkanalia/latest/vulkanalia/struct.Instance.html#method.create_device"><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.InstanceV1_0.html#method.create_device"><code class="hljs">create_device</code></a>
-</a> method.</p>
+<p>That's it, we're now ready to instantiate the logical device with a call to the appropriately named <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.InstanceV1_0.html#method.create_device"><code class="hljs">create_device</code></a> method.</p>
 <pre><code class="language-rust noplaypen">let device = instance.create_device(data.physical_device, &amp;info, None)?;
 </code></pre>
 <p>The parameters are the physical device to interface with, the queue and usage info we just specified, and the optional allocation callbacks. Similarly to the instance creation function, this call can return errors based on enabling non-existent extensions or specifying the desired usage of unsupported features.</p>
@@ -999,7 +1019,7 @@ let info = vk::DeviceCreateInfo::builder()
 <h1><a class="header" href="#window-surface" id="window-surface">Window surface</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/05_window_surface.rs">main.rs</a></p>
 <p>Since Vulkan is a platform agnostic API, it can not interface directly with the window system on its own. To establish the connection between Vulkan and the window system to present results to the screen, we need to use the WSI (Window System Integration) extensions. In this chapter we'll discuss the first one, which is <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html"><code class="hljs">VK_KHR_surface</code></a>. It exposes a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SurfaceKHR.html"><code class="hljs">vk::SurfaceKHR</code></a> object that represents an abstract type of surface to present rendered images to. The surface in our program will be backed by the window that we've already opened with <code>winit</code>.</p>
-<p>The <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html"><code class="hljs">VK_KHR_surface</code></a> extension is an instance level extension and we've actually already enabled it, because it's included in the list returned by <code>vk_winit::get_required_instance_extensions</code>. The list also includes some other WSI extensions that we'll use in the next couple of chapters.</p>
+<p>The <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html"><code class="hljs">VK_KHR_surface</code></a> extension is an instance level extension and we've actually already enabled it, because it's included in the list returned by <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/winit/fn.get_required_instance_extensions.html"><code class="hljs">vk_winit::get_required_instance_extensions</code></a>. The list also includes some other WSI extensions that we'll use in the next couple of chapters.</p>
 <p>The window surface needs to be created right after the instance creation, because it can actually influence the physical device selection. The reason we postponed this is because window surfaces are part of the larger topic of render targets and presentation for which the explanation would have cluttered the basic setup. It should also be noted that window surfaces are an entirely optional component in Vulkan, if you just need off-screen rendering. Vulkan allows you to do that without hacks like creating an invisible window (necessary for OpenGL).</p>
 <p>While we can freely import types for extensions like the struct <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SurfaceKHR.html"><code class="hljs">vk::SurfaceKHR</code></a>, we need to import the <code>vulkanalia</code> extension trait for <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html"><code class="hljs">VK_KHR_surface</code></a> before we can call any of the Vulkan commands added by the extension. Add the following import for <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.KhrSurfaceExtension.html"><code class="hljs">vk::KhrSurfaceExtension</code></a>:</p>
 <pre><code class="language-rust noplaypen">use vulkanalia::vk::KhrSurfaceExtension;
@@ -1011,8 +1031,8 @@ let info = vk::DeviceCreateInfo::builder()
     // ...
 }
 </code></pre>
-<p>Although the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SurfaceKHR.html"><code class="hljs">vk::SurfaceKHR</code></a> object and its usage is platform agnostic, its creation isn't because it depends on window system details. For example, it needs the <code>HWND</code> and <code>HMODULE</code> handles on Windows. Therefore there is a platform-specific addition to the extension, which on Windows is called <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_win32_surface.html"><code class="hljs">VK_KHR_win32_surface</code></a> and is also automatically included in the list from <code>vk_winit::get_required_instance_extensions</code>.</p>
-<p>I will demonstrate how this platform specific extension can be used to create a surface on Windows, but we won't actually use it in this tutorial. It doesn't make any sense to use a library like GLFW and then proceed to use platform-specific code anyway. <code>vulkanalia</code> has <a href="https://docs.rs/vulkanalia/latest/vulkanalia/winit/fn.create_surface.html"><code>vk_winit::create_surface</code></a> that handles the platform differences for us. Still, it's good to see what it does behind the scenes before we start relying on it.</p>
+<p>Although the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SurfaceKHR.html"><code class="hljs">vk::SurfaceKHR</code></a> object and its usage is platform agnostic, its creation isn't because it depends on window system details. For example, it needs the <code>HWND</code> and <code>HMODULE</code> handles on Windows. Therefore there is a platform-specific addition to the extension, which on Windows is called <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_win32_surface.html"><code class="hljs">VK_KHR_win32_surface</code></a> and is also automatically included in the list from <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/winit/fn.get_required_instance_extensions.html"><code class="hljs">vk_winit::get_required_instance_extensions</code></a>.</p>
+<p>I will demonstrate how this platform specific extension can be used to create a surface on Windows, but we won't actually use it in this tutorial. It doesn't make any sense to use a library like GLFW and then proceed to use platform-specific code anyway. <code>vulkanalia</code> has <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/winit/fn.create_surface.html"><code class="hljs">vk_winit::create_surface</code></a> that handles the platform differences for us. Still, it's good to see what it does behind the scenes before we start relying on it.</p>
 <p>Because a window surface is a Vulkan object, it comes with a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Win32SurfaceCreateInfoKHR.html"><code class="hljs">vk::Win32SurfaceCreateInfoKHR</code></a> struct that needs to be filled in. It has two important parameters: <code>hinstance</code> and <code>hwnd</code>. These are the handles to the process and the window.</p>
 <pre><code class="language-rust noplaypen">use winit::platform::windows::WindowExtWindows;
 
@@ -1027,26 +1047,20 @@ let info = vk::Win32SurfaceCreateInfoKHR::builder()
 let surface = instance.create_win32_surface_khr(&amp;info, None).unwrap();
 </code></pre>
 <p>The process is similar for other platforms like Linux, where <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.KhrXcbSurfaceExtension.html#method.create_xcb_surface_khr"><code class="hljs">create_xcb_surface_khr</code></a> takes an XCB connection and window as creation details with X11.</p>
-<p>The <code>vk_winit::create_surface</code> function performs exactly this operation with a different implementation for each platform. We'll now integrate it into our program. Add a call to the function in <code>App::create</code> right before we pick a physical device.</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
-        // ...
-
-        let mut data = AppData::default();
-        data.surface = vk_winit::create_surface(&amp;instance, window)?;
-        pick_physical_device(&amp;instance, &amp;mut data)?;
-
-        // ...
-    }
+<p>The <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/winit/fn.create_surface.html"><code class="hljs">vk_winit::create_surface</code></a> function performs exactly this operation with a different implementation for each platform. We'll now integrate it into our program. Add a call to the function in <code>App::create</code> right before we pick a physical device.</p>
+<pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    // ...
+    let mut data = AppData::default();
+    data.surface = vk_winit::create_surface(&amp;instance, window)?;
+    pick_physical_device(&amp;instance, &amp;mut data)?;
+    // ...
 }
 </code></pre>
 <p>The parameters are the Vulkan instance and the <code>winit</code> window. Once we have our surface, it can be destroyed in <code>App::destroy</code> using the Vulkan API:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        // ...
-        self.instance.destroy_surface_khr(self.data.surface, None);
-        self.instance.destroy_instance(None);
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    // ...
+    self.instance.destroy_surface_khr(self.data.surface, None);
+    self.instance.destroy_instance(None);
 }
 </code></pre>
 <p>Make sure that the surface is destroyed before the instance.</p>
@@ -1080,13 +1094,13 @@ for (index, properties) in properties.iter().enumerate() {
 </code></pre>
 <p>Note that it's very likely that these end up being the same queue family after all, but throughout the program we will treat them as if they were separate queues for a uniform approach. Nevertheless, you could add logic to explicitly prefer a physical device that supports drawing and presentation in the same queue for improved performance.</p>
 <h2><a class="header" href="#creating-the-presentation-queue" id="creating-the-presentation-queue">Creating the presentation queue</a></h2>
-<p>The one thing that remains is modifying the logical device creation procedure to create the presentation queue and retrieve the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueue.html"><code class="hljs">VkQueue</code></a> handle. Add a field to <code>AppData</code> for the handle:</p>
+<p>The one thing that remains is modifying the logical device creation procedure to create the presentation queue and retrieve the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Queue.html"><code class="hljs">vk::Queue</code></a> handle. Add a field to <code>AppData</code> for the handle:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
     present_queue: vk::Queue,
 }
 </code></pre>
-<p>Next, we need to have multiple <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.DeviceQueueCreateInfo.html"><code class="hljs">vk::DeviceQueueCreateInfo</code></a> structs to create a queue from both families. An elegant way to do that is to create a set of all unique queue families that are necessary for the required queues. We'll do this in the <code>create_logical_device</code> function:</p>
+<p>Next, we need to have multiple <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.DeviceQueueCreateInfo.html"><code class="hljs">vk::DeviceQueueCreateInfo</code></a> structs to create a queue from both families. An easy way to do that is to create a set of all unique queue families that are necessary for the required queues. We'll do this in the <code>create_logical_device</code> function:</p>
 <pre><code class="language-rust noplaypen">let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
 
 let mut unique_indices = HashSet::new();
@@ -1230,7 +1244,7 @@ let swapchain = !support.formats.is_empty() &amp;&amp; !support.present_modes.is
 ) -&gt; vk::SurfaceFormatKHR {
 }
 </code></pre>
-<p>Each <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SurfaceFormatKHR.html"><code class="hljs">vk::SurfaceFormatKHR</code></a> entry contains a <code>format</code> and a <code>color_space</code> member. The <code>format</code> member specifies the color channels and types. For example, <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Format.html#associatedconstant.B8G8R8A8_SRGB"><code class="hljs">vk::Format::B8G8R8A8_SRGB</code></a> means that we store the B, G, R and alpha channels in that order with an 8 bit unsigned integer for a total of 32 bits per pixel. The <code>color_space</code> member indicates if the SRGB color space is supported or not using the <code>vk::ColorSpace::SRGB_NONLINEAR_KHR</code> flag.</p>
+<p>Each <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SurfaceFormatKHR.html"><code class="hljs">vk::SurfaceFormatKHR</code></a> entry contains a <code>format</code> and a <code>color_space</code> member. The <code>format</code> member specifies the color channels and types. For example, <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Format.html#associatedconstant.B8G8R8A8_SRGB"><code class="hljs">vk::Format::B8G8R8A8_SRGB</code></a> means that we store the B, G, R and alpha channels in that order with an 8 bit unsigned integer for a total of 32 bits per pixel. The <code>color_space</code> member indicates if the SRGB color space is supported or not using the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.ColorSpaceKHR.html#associatedconstant.SRGB_NONLINEAR"><code class="hljs">vk::ColorSpaceKHR::SRGB_NONLINEAR</code></a> flag.</p>
 <p>For the color space we'll use SRGB if it is available, because it <a href="http://stackoverflow.com/questions/12524623/">results in more accurate perceived colors</a>. It is also pretty much the standard color space for images, like the textures we'll use later on. Because of that we should also use an SRGB color format, of which one of the most common ones is <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Format.html#associatedconstant.B8G8R8A8_SRGB"><code class="hljs">vk::Format::B8G8R8A8_SRGB</code></a>.</p>
 <p>Let's go through the list and see if the preferred combination is available:</p>
 <pre><code class="language-rust noplaypen">fn get_swapchain_surface_format(
@@ -1312,10 +1326,8 @@ let swapchain = !support.formats.is_empty() &amp;&amp; !support.present_modes.is
 <pre><code class="language-rust noplaypen">impl App {
     fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
-
         let device = create_logical_device(&amp;instance, &amp;mut data)?;
         create_swapchain(window, &amp;instance, &amp;device, &amp;mut data)?;
-
         // ...
     }
 }
@@ -1355,7 +1367,7 @@ if support.capabilities.max_image_count != 0
 <li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SharingMode.html#associatedconstant.EXCLUSIVE"><code class="hljs">vk::SharingMode::EXCLUSIVE</code></a>: An image is owned by one queue family at a time and ownership must be explicitly transferred before using it in another queue family. This option offers the best performance.</li>
 <li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SharingMode.html#associatedconstant.CONCURRENT"><code class="hljs">vk::SharingMode::CONCURRENT</code></a>: Images can be used across multiple queue families without explicit ownership transfers.</li>
 </ul>
-<p>If the queue families differ, then we'll be using the concurrent mode in this tutorial to avoid having to do the ownership chapters, because these involve some concepts that are better explained at a later time. Concurrent mode requires you to specify in advance between which queue families ownership will be shared using the <code>queue_family_indices</code> builder struct method If the graphics queue family and presentation queue family are the same, which will be the case on most hardware, then we should stick to exclusive mode, because concurrent mode requires you to specify at least two distinct queue families.</p>
+<p>If the queue families differ, then we'll be using the concurrent mode in this tutorial to avoid having to do the ownership chapters, because these involve some concepts that are better explained at a later time. Concurrent mode requires you to specify in advance between which queue families ownership will be shared using the <code>queue_family_indices</code> builder method If the graphics queue family and presentation queue family are the same, which will be the case on most hardware, then we should stick to exclusive mode, because concurrent mode requires you to specify at least two distinct queue families.</p>
 <pre><code class="language-rust noplaypen">let mut queue_family_indices = vec![];
 let image_sharing_mode = if indices.graphics != indices.present {
     queue_family_indices.push(indices.graphics);
@@ -1406,11 +1418,9 @@ let image_sharing_mode = if indices.graphics != indices.present {
 <pre><code class="language-rust noplaypen">data.swapchain = device.create_swapchain_khr(&amp;info, None)?;
 </code></pre>
 <p>The parameters are the swapchain creation info and optional custom allocators. No surprises there. It should be cleaned up in <code>App::destroy</code> before the device:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.device.destroy_swapchain_khr(self.data.swapchain, None);
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.device.destroy_swapchain_khr(self.data.swapchain, None);
+    // ...
 }
 </code></pre>
 <p>Now run the application to ensure that the swapchain is created successfully! If at this point you get an access violation error in <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSwapchainKHR.html"><code class="hljs">vkCreateSwapchainKHR</code></a> or see a message like <code>Failed to find 'vkGetInstanceProcAddress' in layer SteamOverlayVulkanLayer.dll</code>, then see the <a href="presentation/../faq.html">FAQ entry</a> about the Steam overlay layer.</p>
@@ -1424,7 +1434,7 @@ let image_sharing_mode = if indices.graphics != indices.present {
 }
 </code></pre>
 <p>The images were created by the implementation for the swapchain and they will be automatically cleaned up once the swapchain has been destroyed, therefore we don't need to add any cleanup code.</p>
-<p>I'm adding the code to retrieve the handles to the end of the <code>create_swapchain</code> function, right after the <code>device.create_swapchain_khr(...)</code> call.</p>
+<p>I'm adding the code to retrieve the handles to the end of the <code>create_swapchain</code> function, right after the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.create_swapchain_khr"><code class="hljs">create_swapchain_khr</code></a> call.</p>
 <pre><code class="language-rust noplaypen">data.swapchain_images = device.get_swapchain_images_khr(data.swapchain)?;
 </code></pre>
 <p>One last thing, store the format and extent we've chosen for the swapchain images in <code>AppData</code> fields. We'll need them in future chapters.</p>
@@ -1507,13 +1517,11 @@ fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&g
 <pre><code class="language-rust noplaypen">device.create_image_view(&amp;info, None)
 </code></pre>
 <p>Unlike images, the image views were explicitly created by us, so we need to add a similar loop to destroy them again in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.data.swapchain_image_views
-            .iter()
-            .for_each(|v| self.device.destroy_image_view(*v, None));
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.data.swapchain_image_views
+        .iter()
+        .for_each(|v| self.device.destroy_image_view(*v, None));
+    // ...
 }
 </code></pre>
 <p>An image view is sufficient to start using an image as a texture, but it's not quite ready to be used as a render target just yet. That requires one more step of indirection, known as a framebuffer. But first we'll have to set up the graphics pipeline.</p>
@@ -1727,7 +1735,7 @@ Ok(device.create_shader_module(&amp;info, None)?)
     .module(vert_shader_module)
     .name(b&quot;main\0&quot;[..].into());
 </code></pre>
-<p>The first step is telling Vulkan in which pipeline stage the shader is going to be used. There is an enum value for each of the programmable stages described in the previous chapter.</p>
+<p>The first step is telling Vulkan in which pipeline stage the shader is going to be used. There is a variant for each of the programmable stages described in the previous chapter.</p>
 <p>The next two fields specify the shader module containing the code, and the function to invoke, known as the <em>entrypoint</em>. That means that it's possible to combine multiple fragment shaders into a single shader module and use different entry points to differentiate between their behaviors. In this case we'll stick to the standard <code>main</code>, however.</p>
 <p>There is one more (optional) member, <code>specialization_info</code>, which we won't be using here, but is worth discussing. It allows you to specify values for shader constants. You can use a single shader module where its behavior can be configured at pipeline creation by specifying different values for the constants used in it. This is more efficient than configuring the shader using variables at render time, because the compiler can do optimizations like eliminating <code>if</code> statements that depend on these values. If you don't have any constants like that, then you can just skip setting it as we are doing here.</p>
 <p>Modifying the structure to suit the fragment shader is easy:</p>
@@ -1910,11 +1918,9 @@ let dynamic_state = vk::PipelineDynamicStateCreateInfo::builder()
 data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
 </code></pre>
 <p>The structure also specifies <em>push constants</em>, which are another way of passing dynamic values to shaders that we may get into in a future chapter. The pipeline layout will be referenced throughout the program's lifetime, so it should be destroyed in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
+    // ...
 }
 </code></pre>
 <h2><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h2>
@@ -1922,7 +1928,7 @@ data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
 <p>There is however one more object to create before we can finally create the graphics pipeline and that is a render pass.</p>
 <h1><a class="header" href="#render-passes" id="render-passes">Render passes</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/11_render_passes.rs">main.rs</a></p>
-<p>Before we can finish creating the pipeline, we need to tell Vulkan about the framebuffer attachments that will be used while rendering. We need to specify how many color and depth buffers there will be, how many samples to use for each of them and how their contents should be handled throughout the rendering operations. All of this information is wrapped in a <em>render pass</em> object, for which we'll create a new <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_render_pass"><code class="hljs">create_render_pass</code></a> function. Call this function from <code>App::create</code> before <code>create_pipeline</code>.</p>
+<p>Before we can finish creating the pipeline, we need to tell Vulkan about the framebuffer attachments that will be used while rendering. We need to specify how many color and depth buffers there will be, how many samples to use for each of them and how their contents should be handled throughout the rendering operations. All of this information is wrapped in a <em>render pass</em> object, for which we'll create a new <code>create_render_pass</code> function. Call this function from <code>App::create</code> before <code>create_pipeline</code>.</p>
 <pre><code class="language-rust noplaypen">impl App {
     fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
@@ -1941,7 +1947,7 @@ fn create_render_pass(
 }
 </code></pre>
 <h2><a class="header" href="#attachment-description" id="attachment-description">Attachment description</a></h2>
-<p>In our case we'll have just a single color buffer attachment represented by one of the images from the swapchain. This will be represented by a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.AttachmentDescription.html"><code class="hljs">vk::AttachmentDescription</code></a> which we will build in <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_render_pass"><code class="hljs">create_render_pass</code></a>.</p>
+<p>In our case we'll have just a single color buffer attachment represented by one of the images from the swapchain. This will be represented by a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.AttachmentDescription.html"><code class="hljs">vk::AttachmentDescription</code></a> which we will build in <code>create_render_pass</code>.</p>
 <pre><code class="language-rust noplaypen">let color_attachment = vk::AttachmentDescription::builder()
     .format(data.swapchain_format)
     .samples(vk::SampleCountFlags::_1)
@@ -2020,12 +2026,10 @@ let info = vk::RenderPassCreateInfo::builder()
 data.render_pass = device.create_render_pass(&amp;info, None)?;
 </code></pre>
 <p>Just like the pipeline layout, the render pass will be referenced throughout the program, so it should only be cleaned up at the end in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
-        self.device.destroy_render_pass(self.data.render_pass, None);
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
+    self.device.destroy_render_pass(self.data.render_pass, None);
+    // ...
 }
 </code></pre>
 <p>That was a lot of work, but in the next chapter it all comes together to finally create the graphics pipeline object!</p>
@@ -2077,11 +2081,9 @@ let info = vk::GraphicsPipelineCreateInfo::builder()
 <p>The <code>create_graphics_pipeline</code> function actually has more parameters than the usual object creation functions in Vulkan. It is designed to take multiple <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.GraphicsPipelineCreateInfo.html"><code class="hljs">vk::GraphicsPipelineCreateInfo</code></a> objects and create multiple <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Pipeline.html"><code class="hljs">vk::Pipeline</code></a> objects in a single call.</p>
 <p>The first parameter, for which we've passed the <code>vk::PipelineCache::null()</code> argument, references an optional <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.PipelineCache.html"><code class="hljs">vk::PipelineCache</code></a> object. A pipeline cache can be used to store and reuse data relevant to pipeline creation across multiple calls to <code>create_graphics_pipeline</code> and even across program executions if the cache is stored to a file. This makes it possible to significantly speed up pipeline creation at a later time. We'll get into this in the pipeline cache chapter.</p>
 <p>The graphics pipeline is required for all common drawing operations, so it should also only be destroyed at the end of the program in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.device.destroy_pipeline(self.data.pipeline, None);
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.device.destroy_pipeline(self.data.pipeline, None);
+    // ...
 }
 </code></pre>
 <p>Now run your program to confirm that all this hard work has resulted in a successful pipeline creation! We are already getting quite close to seeing something pop up on the screen. In the next couple of chapters we'll set up the actual framebuffers from the swapchain images and prepare the drawing commands.</p>
@@ -2137,13 +2139,11 @@ device.create_framebuffer(&amp;create_info, None)
 <p>The <code>attachments</code> field specifies the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.ImageView.html"><code class="hljs">vk::ImageView</code></a> objects that should be bound to the respective attachment descriptions in the render pass <code>attachment</code> array.</p>
 <p>The <code>width</code> and <code>height</code> parameters are self-explanatory and <code>layers</code> refers to the number of layers in image arrays. Our swapchain images are single images, so the number of layers is <code>1</code>.</p>
 <p>We should delete the framebuffers before the image views and render pass that they are based on, but only after we've finished rendering:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.data.framebuffers
-            .iter()
-            .for_each(|f| self.device.destroy_framebuffer(*f, None));
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.data.framebuffers
+        .iter()
+        .for_each(|f| self.device.destroy_framebuffer(*f, None));
+    // ...
 }
 </code></pre>
 <p>We've now reached the milestone where we have all of the objects that are required for rendering. In the next chapter we're going to write the first actual drawing commands.</p>
@@ -2193,11 +2193,9 @@ let info = vk::CommandPoolCreateInfo::builder()
 <pre><code class="language-rust noplaypen">data.command_pool = device.create_command_pool(&amp;info, None)?;
 </code></pre>
 <p>Commands will be used throughout the program to draw things on the screen, so the pool should only be destroyed at the end:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.device.destroy_command_pool(self.data.command_pool, None);
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.device.destroy_command_pool(self.data.command_pool, None);
+    // ...
 }
 </code></pre>
 <h2><a class="header" href="#command-buffer-allocation" id="command-buffer-allocation">Command buffer allocation</a></h2>
@@ -2255,7 +2253,7 @@ data.command_buffers = device.allocate_command_buffers(&amp;allocate_info)?;
 </ul>
 <p>None of these flags are applicable for us right now.</p>
 <p>The <code>inheritance_info</code> parameter is only relevant for secondary command buffers. It specifies which state to inherit from the calling primary command buffers.</p>
-<p>If the command buffer was already recorded once, then a call to <code>vk::DeviceV1_0::begin_command_buffer</code> will implicitly reset it. It's not possible to append commands to a buffer at a later time.</p>
+<p>If the command buffer was already recorded once, then a call to <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.begin_command_buffer"><code class="hljs">begin_command_buffer</code></a> will implicitly reset it. It's not possible to append commands to a buffer at a later time.</p>
 <h2><a class="header" href="#starting-a-render-pass" id="starting-a-render-pass">Starting a render pass</a></h2>
 <p>Before we can start a render pass we'll need to build some parameters.</p>
 <pre><code class="language-rust noplaypen">let render_area = vk::Rect2D::builder()
@@ -2359,30 +2357,26 @@ fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result
 data.render_finished_semaphore = device.create_semaphore(&amp;semaphore_info, None)?;
 </code></pre>
 <p>The semaphores should be cleaned up at the end of the program, when all commands have finished and no more synchronization is necessary:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.device.destroy_semaphore(self.data.render_finished_semaphore, None);
-        self.device.destroy_semaphore(self.data.image_available_semaphore, None);
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.device.destroy_semaphore(self.data.render_finished_semaphore, None);
+    self.device.destroy_semaphore(self.data.image_available_semaphore, None);
+    // ...
 }
 </code></pre>
 <h2><a class="header" href="#acquiring-an-image-from-the-swapchain" id="acquiring-an-image-from-the-swapchain">Acquiring an image from the swapchain</a></h2>
 <p>As mentioned before, the first thing we need to do in the <code>App::render</code> function is acquire an image from the swapchain. Recall that the swapchain is an extension feature, so we must use a function with the <code>*_khr</code> naming convention:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
-        let image_index = self
-            .device
-            .acquire_next_image_khr(
-                self.data.swapchain,
-                u64::max_value(),
-                self.data.image_available_semaphore,
-                vk::Fence::null(),
-            )?
-            .0 as usize;
+<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    let image_index = self
+        .device
+        .acquire_next_image_khr(
+            self.data.swapchain,
+            u64::max_value(),
+            self.data.image_available_semaphore,
+            vk::Fence::null(),
+        )?
+        .0 as usize;
 
-        Ok(())
-    }
+    Ok(())
 }
 </code></pre>
 <p>The first parameter of <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.acquire_next_image_khr"><code class="hljs">acquire_next_image_khr</code></a> is the swapchain from which we wish to acquire an image. The second parameter specifies a timeout in nanoseconds for an image to become available. Using the maximum value of a 64 bit unsigned integer disables the timeout.</p>
@@ -2400,7 +2394,7 @@ let submit_info = vk::SubmitInfo::builder()
     .command_buffers(command_buffers)
     .signal_semaphores(signal_semaphores);
 </code></pre>
-<p>The first two parameters, <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_2.html#method.wait_semaphores"><code class="hljs">wait_semaphores</code></a> and <code>wait_dst_stage_mask</code>, specifies which semaphores to wait on before execution begins and in which stage(s) of the pipeline to wait. We want to wait with writing colors to the image until it's available, so we're specifying the stage of the graphics pipeline that writes to the color attachment. That means that theoretically the implementation can already start executing our vertex shader and such while the image is not yet available. Each entry in the <code>wait_stages</code> array corresponds to the semaphore with the same index in <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_2.html#method.wait_semaphores"><code class="hljs">wait_semaphores</code></a>.</p>
+<p>The first two parameters, <code>wait_semaphores</code> and <code>wait_dst_stage_mask</code>, specifies which semaphores to wait on before execution begins and in which stage(s) of the pipeline to wait. We want to wait with writing colors to the image until it's available, so we're specifying the stage of the graphics pipeline that writes to the color attachment. That means that theoretically the implementation can already start executing our vertex shader and such while the image is not yet available. Each entry in the <code>wait_stages</code> array corresponds to the semaphore with the same index in <code>wait_semaphores</code>.</p>
 <p>The next parameter, <code>command_buffers</code>, specifies which command buffers to actually submit for execution. As mentioned earlier, we should submit the command buffer that binds the swapchain image we just acquired as color attachment.</p>
 <p>Lastly <code>signal_semaphores</code> specifies which semaphores to signal once the command buffer(s) have finished execution. In our case we're using the <code>render_finished_semaphore</code> for that purpose.</p>
 <pre><code class="language-rust noplaypen">self.device.queue_submit(
@@ -2410,7 +2404,7 @@ let submit_info = vk::SubmitInfo::builder()
 <h2><a class="header" href="#subpass-dependencies" id="subpass-dependencies">Subpass dependencies</a></h2>
 <p>Remember that the subpasses in a render pass automatically take care of image layout transitions. These transitions are controlled by <em>subpass dependencies</em>, which specify memory and execution dependencies between subpasses. We have only a single subpass right now, but the operations right before and right after this subpass also count as implicit &quot;subpasses&quot;.</p>
 <p>There are two built-in dependencies that take care of the transition at the start of the render pass and at the end of the render pass, but the former does not occur at the right time. It assumes that the transition occurs at the start of the pipeline, but we haven't acquired the image yet at that point! There are two ways to deal with this problem. We could change the <code>wait_stages</code> for the <code>image_available_semaphore</code> to <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.TOP_OF_PIPE"><code class="hljs">vk::PipelineStageFlags::TOP_OF_PIPE</code></a> to ensure that the render passes don't begin until the image is available, or we can make the render pass wait for the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.COLOR_ATTACHMENT_OUTPUT"><code class="hljs">vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT</code></a> stage. I've decided to go with the second option here, because it's a good excuse to have a look at subpass dependencies and how they work.</p>
-<p>Subpass dependencies are specified in <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SubpassDependency.html"><code class="hljs">vk::SubpassDependency</code></a> structs. Go to the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_render_pass"><code class="hljs">create_render_pass</code></a> function and add one:</p>
+<p>Subpass dependencies are specified in <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SubpassDependency.html"><code class="hljs">vk::SubpassDependency</code></a> structs. Go to our <code>create_render_pass</code> function and add one:</p>
 <pre><code class="language-rust noplaypen">let dependency = vk::SubpassDependency::builder()
     .src_subpass(vk::SUBPASS_EXTERNAL)
     .dst_subpass(0)
@@ -2469,15 +2463,13 @@ let present_info = vk::PresentInfoKHR::builder()
 <h2><a class="header" href="#frames-in-flight" id="frames-in-flight">Frames in flight</a></h2>
 <p>If you run your application with validation layers enabled now you may either get errors or notice that the memory usage slowly grows. The reason for this is that the application is rapidly submitting work in the <code>App::render</code> function, but doesn't actually check if any of it finishes. If the CPU is submitting work faster than the GPU can keep up with then the queue will slowly fill up with work. Worse, even, is that we are reusing the <code>image_available_semaphore</code> and <code>render_finished_semaphore</code> semaphores, along with the command buffers, for multiple frames at the same time!</p>
 <p>The easy way to solve this is to wait for work to finish right after submitting it, for example by using <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_wait_idle"><code class="hljs">queue_wait_idle</code></a>:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
-        // ...
+<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    // ...
 
-        self.device.queue_present_khr(self.data.present_queue, &amp;present_info)?;
-        self.device.queue_wait_idle(self.data.present_queue)?;
+    self.device.queue_present_khr(self.data.present_queue, &amp;present_info)?;
+    self.device.queue_wait_idle(self.data.present_queue)?;
 
-        Ok(())
-    }
+    Ok(())
 }
 </code></pre>
 <p>However, we are likely not optimally using the GPU in this way, because the whole graphics pipeline is only used for one frame at a time right now. The stages that the current frame has already progressed through are idle and could already be used for a next frame. We will now extend our application to allow for multiple frames to be <em>in-flight</em> while still bounding the amount of work that piles up.</p>
@@ -2506,16 +2498,14 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>Similarly, they should also all be cleaned up:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.data.render_finished_semaphores
-            .iter()
-            .for_each(|s| self.device.destroy_semaphore(*s, None));
-        self.data.image_available_semaphores
-            .iter()
-            .for_each(|s| self.device.destroy_semaphore(*s, None));
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.data.render_finished_semaphores
+        .iter()
+        .for_each(|s| self.device.destroy_semaphore(*s, None));
+    self.data.image_available_semaphores
+        .iter()
+        .for_each(|s| self.device.destroy_semaphore(*s, None));
+    // ...
 }
 </code></pre>
 <p>To use the right pair of semaphores every time, we need to keep track of the current frame. We will use a frame index for that purpose which we'll add to <code>App</code> (initialize it to <code>0</code> in <code>App::create</code>):</p>
@@ -2692,7 +2682,7 @@ let present_info = vk::PresentInfoKHR::builder()
     // ...
 }
 </code></pre>
-<p>We've now implemented all the needed synchronization to ensure that there are no more than two frames of work enqueued and that these frames are not accidentally using the same image. Note that it is fine for other parts of the code, like the final cleanup, to rely on more rough synchronization like <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDeviceWaitIdle.html"><code class="hljs">vkDeviceWaitIdle</code></a>. You should decide on which approach to use based on performance requirements.</p>
+<p>We've now implemented all the needed synchronization to ensure that there are no more than two frames of work enqueued and that these frames are not accidentally using the same image. Note that it is fine for other parts of the code, like the final cleanup, to rely on more rough synchronization like <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.device_wait_idle"><code class="hljs">device_wait_idle</code></a>. You should decide on which approach to use based on performance requirements.</p>
 <p>To learn more about synchronization through examples, have a look at <a href="https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples#swapchain-image-acquire-and-present">this extensive overview</a> by Khronos.</p>
 <h2><a class="header" href="#conclusion-2" id="conclusion-2">Conclusion</a></h2>
 <p>A little over 600 lines of code later, we've finally gotten to the stage of seeing something pop up on the screen! Bootstrapping a Vulkan program is definitely a lot of work, but the take-away message is that Vulkan gives you an immense amount of control through its explicitness. I recommend you to take some time now to reread the code and build a mental model of the purpose of all of the Vulkan objects in the program and how they relate to each other. We'll be building on top of that knowledge to extend the functionality of the program from this point on.</p>

@@ -218,13 +218,11 @@ fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&g
 <pre><code class="language-rust noplaypen">device.create_image_view(&amp;info, None)
 </code></pre>
 <p>Unlike images, the image views were explicitly created by us, so we need to add a similar loop to destroy them again in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.data.swapchain_image_views
-            .iter()
-            .for_each(|v| self.device.destroy_image_view(*v, None));
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.data.swapchain_image_views
+        .iter()
+        .for_each(|v| self.device.destroy_image_view(*v, None));
+    // ...
 }
 </code></pre>
 <p>An image view is sufficient to start using an image as a texture, but it's not quite ready to be used as a render target just yet. That requires one more step of indirection, known as a framebuffer. But first we'll have to set up the graphics pipeline.</p>

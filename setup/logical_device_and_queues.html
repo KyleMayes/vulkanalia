@@ -165,9 +165,7 @@
 <pre><code class="language-rust noplaypen">impl App {
     fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
-
         let device = create_logical_device(&amp;instance, &amp;mut data)?;
-
         Ok(Self { entry, instance, data, device })
     }
 }
@@ -209,8 +207,7 @@ let info = vk::DeviceCreateInfo::builder()
     .enabled_layer_names(&amp;layers)
     .enabled_features(&amp;features);
 </code></pre>
-<p>That's it, we're now ready to instantiate the logical device with a call to the appropriately named <a href="https://docs.rs/vulkanalia/latest/vulkanalia/struct.Instance.html#method.create_device"><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.InstanceV1_0.html#method.create_device"><code class="hljs">create_device</code></a>
-</a> method.</p>
+<p>That's it, we're now ready to instantiate the logical device with a call to the appropriately named <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.InstanceV1_0.html#method.create_device"><code class="hljs">create_device</code></a> method.</p>
 <pre><code class="language-rust noplaypen">let device = instance.create_device(data.physical_device, &amp;info, None)?;
 </code></pre>
 <p>The parameters are the physical device to interface with, the queue and usage info we just specified, and the optional allocation callbacks. Similarly to the instance creation function, this call can return errors based on enabling non-existent extensions or specifying the desired usage of unsupported features.</p>

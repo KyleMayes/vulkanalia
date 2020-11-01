@@ -198,11 +198,9 @@ let info = vk::CommandPoolCreateInfo::builder()
 <pre><code class="language-rust noplaypen">data.command_pool = device.create_command_pool(&amp;info, None)?;
 </code></pre>
 <p>Commands will be used throughout the program to draw things on the screen, so the pool should only be destroyed at the end:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.device.destroy_command_pool(self.data.command_pool, None);
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.device.destroy_command_pool(self.data.command_pool, None);
+    // ...
 }
 </code></pre>
 <h2><a class="header" href="#command-buffer-allocation" id="command-buffer-allocation">Command buffer allocation</a></h2>
@@ -260,7 +258,7 @@ data.command_buffers = device.allocate_command_buffers(&amp;allocate_info)?;
 </ul>
 <p>None of these flags are applicable for us right now.</p>
 <p>The <code>inheritance_info</code> parameter is only relevant for secondary command buffers. It specifies which state to inherit from the calling primary command buffers.</p>
-<p>If the command buffer was already recorded once, then a call to <code>vk::DeviceV1_0::begin_command_buffer</code> will implicitly reset it. It's not possible to append commands to a buffer at a later time.</p>
+<p>If the command buffer was already recorded once, then a call to <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.begin_command_buffer"><code class="hljs">begin_command_buffer</code></a> will implicitly reset it. It's not possible to append commands to a buffer at a later time.</p>
 <h2><a class="header" href="#starting-a-render-pass" id="starting-a-render-pass">Starting a render pass</a></h2>
 <p>Before we can start a render pass we'll need to build some parameters.</p>
 <pre><code class="language-rust noplaypen">let render_area = vk::Rect2D::builder()

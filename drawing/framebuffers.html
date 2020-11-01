@@ -204,13 +204,11 @@ device.create_framebuffer(&amp;create_info, None)
 <p>The <code>attachments</code> field specifies the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.ImageView.html"><code class="hljs">vk::ImageView</code></a> objects that should be bound to the respective attachment descriptions in the render pass <code>attachment</code> array.</p>
 <p>The <code>width</code> and <code>height</code> parameters are self-explanatory and <code>layers</code> refers to the number of layers in image arrays. Our swapchain images are single images, so the number of layers is <code>1</code>.</p>
 <p>We should delete the framebuffers before the image views and render pass that they are based on, but only after we've finished rendering:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.data.framebuffers
-            .iter()
-            .for_each(|f| self.device.destroy_framebuffer(*f, None));
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.data.framebuffers
+        .iter()
+        .for_each(|f| self.device.destroy_framebuffer(*f, None));
+    // ...
 }
 </code></pre>
 <p>We've now reached the milestone where we have all of the objects that are required for rendering. In the next chapter we're going to write the first actual drawing commands.</p>

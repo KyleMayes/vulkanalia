@@ -199,30 +199,26 @@ fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result
 data.render_finished_semaphore = device.create_semaphore(&amp;semaphore_info, None)?;
 </code></pre>
 <p>The semaphores should be cleaned up at the end of the program, when all commands have finished and no more synchronization is necessary:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.device.destroy_semaphore(self.data.render_finished_semaphore, None);
-        self.device.destroy_semaphore(self.data.image_available_semaphore, None);
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.device.destroy_semaphore(self.data.render_finished_semaphore, None);
+    self.device.destroy_semaphore(self.data.image_available_semaphore, None);
+    // ...
 }
 </code></pre>
 <h2><a class="header" href="#acquiring-an-image-from-the-swapchain" id="acquiring-an-image-from-the-swapchain">Acquiring an image from the swapchain</a></h2>
 <p>As mentioned before, the first thing we need to do in the <code>App::render</code> function is acquire an image from the swapchain. Recall that the swapchain is an extension feature, so we must use a function with the <code>*_khr</code> naming convention:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
-        let image_index = self
-            .device
-            .acquire_next_image_khr(
-                self.data.swapchain,
-                u64::max_value(),
-                self.data.image_available_semaphore,
-                vk::Fence::null(),
-            )?
-            .0 as usize;
+<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    let image_index = self
+        .device
+        .acquire_next_image_khr(
+            self.data.swapchain,
+            u64::max_value(),
+            self.data.image_available_semaphore,
+            vk::Fence::null(),
+        )?
+        .0 as usize;
 
-        Ok(())
-    }
+    Ok(())
 }
 </code></pre>
 <p>The first parameter of <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.acquire_next_image_khr"><code class="hljs">acquire_next_image_khr</code></a> is the swapchain from which we wish to acquire an image. The second parameter specifies a timeout in nanoseconds for an image to become available. Using the maximum value of a 64 bit unsigned integer disables the timeout.</p>
@@ -240,7 +236,7 @@ let submit_info = vk::SubmitInfo::builder()
     .command_buffers(command_buffers)
     .signal_semaphores(signal_semaphores);
 </code></pre>
-<p>The first two parameters, <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_2.html#method.wait_semaphores"><code class="hljs">wait_semaphores</code></a> and <code>wait_dst_stage_mask</code>, specifies which semaphores to wait on before execution begins and in which stage(s) of the pipeline to wait. We want to wait with writing colors to the image until it's available, so we're specifying the stage of the graphics pipeline that writes to the color attachment. That means that theoretically the implementation can already start executing our vertex shader and such while the image is not yet available. Each entry in the <code>wait_stages</code> array corresponds to the semaphore with the same index in <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_2.html#method.wait_semaphores"><code class="hljs">wait_semaphores</code></a>.</p>
+<p>The first two parameters, <code>wait_semaphores</code> and <code>wait_dst_stage_mask</code>, specifies which semaphores to wait on before execution begins and in which stage(s) of the pipeline to wait. We want to wait with writing colors to the image until it's available, so we're specifying the stage of the graphics pipeline that writes to the color attachment. That means that theoretically the implementation can already start executing our vertex shader and such while the image is not yet available. Each entry in the <code>wait_stages</code> array corresponds to the semaphore with the same index in <code>wait_semaphores</code>.</p>
 <p>The next parameter, <code>command_buffers</code>, specifies which command buffers to actually submit for execution. As mentioned earlier, we should submit the command buffer that binds the swapchain image we just acquired as color attachment.</p>
 <p>Lastly <code>signal_semaphores</code> specifies which semaphores to signal once the command buffer(s) have finished execution. In our case we're using the <code>render_finished_semaphore</code> for that purpose.</p>
 <pre><code class="language-rust noplaypen">self.device.queue_submit(
@@ -250,7 +246,7 @@ let submit_info = vk::SubmitInfo::builder()
 <h2><a class="header" href="#subpass-dependencies" id="subpass-dependencies">Subpass dependencies</a></h2>
 <p>Remember that the subpasses in a render pass automatically take care of image layout transitions. These transitions are controlled by <em>subpass dependencies</em>, which specify memory and execution dependencies between subpasses. We have only a single subpass right now, but the operations right before and right after this subpass also count as implicit &quot;subpasses&quot;.</p>
 <p>There are two built-in dependencies that take care of the transition at the start of the render pass and at the end of the render pass, but the former does not occur at the right time. It assumes that the transition occurs at the start of the pipeline, but we haven't acquired the image yet at that point! There are two ways to deal with this problem. We could change the <code>wait_stages</code> for the <code>image_available_semaphore</code> to <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.TOP_OF_PIPE"><code class="hljs">vk::PipelineStageFlags::TOP_OF_PIPE</code></a> to ensure that the render passes don't begin until the image is available, or we can make the render pass wait for the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.COLOR_ATTACHMENT_OUTPUT"><code class="hljs">vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT</code></a> stage. I've decided to go with the second option here, because it's a good excuse to have a look at subpass dependencies and how they work.</p>
-<p>Subpass dependencies are specified in <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SubpassDependency.html"><code class="hljs">vk::SubpassDependency</code></a> structs. Go to the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_render_pass"><code class="hljs">create_render_pass</code></a> function and add one:</p>
+<p>Subpass dependencies are specified in <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SubpassDependency.html"><code class="hljs">vk::SubpassDependency</code></a> structs. Go to our <code>create_render_pass</code> function and add one:</p>
 <pre><code class="language-rust noplaypen">let dependency = vk::SubpassDependency::builder()
     .src_subpass(vk::SUBPASS_EXTERNAL)
     .dst_subpass(0)
@@ -309,15 +305,13 @@ let present_info = vk::PresentInfoKHR::builder()
 <h2><a class="header" href="#frames-in-flight" id="frames-in-flight">Frames in flight</a></h2>
 <p>If you run your application with validation layers enabled now you may either get errors or notice that the memory usage slowly grows. The reason for this is that the application is rapidly submitting work in the <code>App::render</code> function, but doesn't actually check if any of it finishes. If the CPU is submitting work faster than the GPU can keep up with then the queue will slowly fill up with work. Worse, even, is that we are reusing the <code>image_available_semaphore</code> and <code>render_finished_semaphore</code> semaphores, along with the command buffers, for multiple frames at the same time!</p>
 <p>The easy way to solve this is to wait for work to finish right after submitting it, for example by using <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_wait_idle"><code class="hljs">queue_wait_idle</code></a>:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
-        // ...
+<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    // ...
 
-        self.device.queue_present_khr(self.data.present_queue, &amp;present_info)?;
-        self.device.queue_wait_idle(self.data.present_queue)?;
+    self.device.queue_present_khr(self.data.present_queue, &amp;present_info)?;
+    self.device.queue_wait_idle(self.data.present_queue)?;
 
-        Ok(())
-    }
+    Ok(())
 }
 </code></pre>
 <p>However, we are likely not optimally using the GPU in this way, because the whole graphics pipeline is only used for one frame at a time right now. The stages that the current frame has already progressed through are idle and could already be used for a next frame. We will now extend our application to allow for multiple frames to be <em>in-flight</em> while still bounding the amount of work that piles up.</p>
@@ -346,16 +340,14 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>Similarly, they should also all be cleaned up:</p>
-<pre><code class="language-rust noplaypen">impl App {
-    fn destroy(&amp;mut self) {
-        self.data.render_finished_semaphores
-            .iter()
-            .for_each(|s| self.device.destroy_semaphore(*s, None));
-        self.data.image_available_semaphores
-            .iter()
-            .for_each(|s| self.device.destroy_semaphore(*s, None));
-        // ...
-    }
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.data.render_finished_semaphores
+        .iter()
+        .for_each(|s| self.device.destroy_semaphore(*s, None));
+    self.data.image_available_semaphores
+        .iter()
+        .for_each(|s| self.device.destroy_semaphore(*s, None));
+    // ...
 }
 </code></pre>
 <p>To use the right pair of semaphores every time, we need to keep track of the current frame. We will use a frame index for that purpose which we'll add to <code>App</code> (initialize it to <code>0</code> in <code>App::create</code>):</p>
@@ -532,7 +524,7 @@ let present_info = vk::PresentInfoKHR::builder()
     // ...
 }
 </code></pre>
-<p>We've now implemented all the needed synchronization to ensure that there are no more than two frames of work enqueued and that these frames are not accidentally using the same image. Note that it is fine for other parts of the code, like the final cleanup, to rely on more rough synchronization like <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDeviceWaitIdle.html"><code class="hljs">vkDeviceWaitIdle</code></a>. You should decide on which approach to use based on performance requirements.</p>
+<p>We've now implemented all the needed synchronization to ensure that there are no more than two frames of work enqueued and that these frames are not accidentally using the same image. Note that it is fine for other parts of the code, like the final cleanup, to rely on more rough synchronization like <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.device_wait_idle"><code class="hljs">device_wait_idle</code></a>. You should decide on which approach to use based on performance requirements.</p>
 <p>To learn more about synchronization through examples, have a look at <a href="https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples#swapchain-image-acquire-and-present">this extensive overview</a> by Khronos.</p>
 <h2><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h2>
 <p>A little over 600 lines of code later, we've finally gotten to the stage of seeing something pop up on the screen! Bootstrapping a Vulkan program is definitely a lot of work, but the take-away message is that Vulkan gives you an immense amount of control through its explicitness. I recommend you to take some time now to reread the code and build a mental model of the purpose of all of the Vulkan objects in the program and how they relate to each other. We'll be building on top of that knowledge to extend the functionality of the program from this point on.</p>

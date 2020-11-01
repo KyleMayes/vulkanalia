@@ -332,7 +332,7 @@ Ok(device.create_shader_module(&amp;info, None)?)
     .module(vert_shader_module)
     .name(b&quot;main\0&quot;[..].into());
 </code></pre>
-<p>The first step is telling Vulkan in which pipeline stage the shader is going to be used. There is an enum value for each of the programmable stages described in the previous chapter.</p>
+<p>The first step is telling Vulkan in which pipeline stage the shader is going to be used. There is a variant for each of the programmable stages described in the previous chapter.</p>
 <p>The next two fields specify the shader module containing the code, and the function to invoke, known as the <em>entrypoint</em>. That means that it's possible to combine multiple fragment shaders into a single shader module and use different entry points to differentiate between their behaviors. In this case we'll stick to the standard <code>main</code>, however.</p>
 <p>There is one more (optional) member, <code>specialization_info</code>, which we won't be using here, but is worth discussing. It allows you to specify values for shader constants. You can use a single shader module where its behavior can be configured at pipeline creation by specifying different values for the constants used in it. This is more efficient than configuring the shader using variables at render time, because the compiler can do optimizations like eliminating <code>if</code> statements that depend on these values. If you don't have any constants like that, then you can just skip setting it as we are doing here.</p>
 <p>Modifying the structure to suit the fragment shader is easy:</p>
