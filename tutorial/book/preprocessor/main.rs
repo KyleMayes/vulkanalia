@@ -89,13 +89,13 @@ fn map_event<'e>(event: Event<'e>, index: &HashMap<&str, &str>) -> Event<'e> {
         if let Some(url) = index.get(&code[..]) {
             let url = url.replace("%VERSION%", VERSION);
             Event::Html(format!("<a href=\"{}\"><code class=\"hljs\">{}</code></a>", url, code).into())
-        } else if code.starts_with("^") {
+        } else if code.starts_with('^') {
             Event::Code((&code[1..]).to_string().into())
         } else {
             event
         }
     } else if let Event::End(Tag::Link(ltype, url, title)) = &event {
-        let url = url.replace("%VERSION%", VERSION).to_string().into();
+        let url = url.replace("%VERSION%", VERSION).into();
         Event::End(Tag::Link(*ltype, url, title.clone()))
     } else {
         event
