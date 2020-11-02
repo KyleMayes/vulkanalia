@@ -66,6 +66,7 @@ fn main() -> Result<()> {
             Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
                 destroying = true;
                 *control_flow = ControlFlow::Exit;
+                app.device.device_wait_idle().unwrap();
                 app.destroy();
             }
             _ => {}
@@ -170,9 +171,6 @@ impl App {
         } else if let Err(e) = result {
             return Err(anyhow!(e));
         }
-
-        self.device.queue_wait_idle(self.data.present_queue)?;
-        self.device.device_wait_idle()?;
 
         self.frame = (self.frame + 1) % MAX_FRAMES_IN_FLIGHT;
 
