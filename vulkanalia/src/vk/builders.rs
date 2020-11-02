@@ -3981,6 +3981,10 @@ unsafe impl Cast for BufferImageCopyBuilder {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [BufferImageCopy2KHR](struct.BufferImageCopy2KHR.html).
+pub unsafe trait ExtendsBufferImageCopy2KHR {}
+unsafe impl ExtendsBufferImageCopy2KHR for CopyCommandTransformInfoQCOM {}
+
 unsafe impl Cast for BufferImageCopy2KHR {
     type Target = BufferImageCopy2KHR;
 
@@ -3990,18 +3994,30 @@ unsafe impl Cast for BufferImageCopy2KHR {
     }
 }
 
-impl HasBuilder<'static> for BufferImageCopy2KHR {
-    type Builder = BufferImageCopy2KHRBuilder;
+impl<'b> HasBuilder<'b> for BufferImageCopy2KHR {
+    type Builder = BufferImageCopy2KHRBuilder<'b>;
 }
 
 /// A builder for a [BufferImageCopy2KHR](struct.BufferImageCopy2KHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct BufferImageCopy2KHRBuilder {
+pub struct BufferImageCopy2KHRBuilder<'b> {
     value: BufferImageCopy2KHR,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl BufferImageCopy2KHRBuilder {
+impl<'b> BufferImageCopy2KHRBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsBufferImageCopy2KHR,
+    {
+        let next = (next.as_mut() as *mut T).cast::<BufferImageCopy2KHR>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn buffer_offset(mut self, buffer_offset: DeviceSize) -> Self {
         self.value.buffer_offset = buffer_offset;
@@ -4047,7 +4063,7 @@ impl BufferImageCopy2KHRBuilder {
     }
 }
 
-impl ops::Deref for BufferImageCopy2KHRBuilder {
+impl<'b> ops::Deref for BufferImageCopy2KHRBuilder<'b> {
     type Target = BufferImageCopy2KHR;
 
     #[inline]
@@ -4056,14 +4072,14 @@ impl ops::Deref for BufferImageCopy2KHRBuilder {
     }
 }
 
-impl ops::DerefMut for BufferImageCopy2KHRBuilder {
+impl<'b> ops::DerefMut for BufferImageCopy2KHRBuilder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for BufferImageCopy2KHRBuilder {
+unsafe impl<'b> Cast for BufferImageCopy2KHRBuilder<'b> {
     type Target = BufferImageCopy2KHR;
 
     #[inline]
@@ -6022,6 +6038,64 @@ impl<'b> ops::DerefMut for CopyBufferToImageInfo2KHRBuilder<'b> {
 
 unsafe impl<'b> Cast for CopyBufferToImageInfo2KHRBuilder<'b> {
     type Target = CopyBufferToImageInfo2KHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CopyCommandTransformInfoQCOM {
+    type Target = CopyCommandTransformInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for CopyCommandTransformInfoQCOM {
+    type Builder = CopyCommandTransformInfoQCOMBuilder;
+}
+
+/// A builder for a [CopyCommandTransformInfoQCOM](struct.CopyCommandTransformInfoQCOM.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CopyCommandTransformInfoQCOMBuilder {
+    value: CopyCommandTransformInfoQCOM,
+}
+
+impl CopyCommandTransformInfoQCOMBuilder {
+    #[inline]
+    pub fn transform(mut self, transform: SurfaceTransformFlagsKHR) -> Self {
+        self.value.transform = transform;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CopyCommandTransformInfoQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for CopyCommandTransformInfoQCOMBuilder {
+    type Target = CopyCommandTransformInfoQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for CopyCommandTransformInfoQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for CopyCommandTransformInfoQCOMBuilder {
+    type Target = CopyCommandTransformInfoQCOM;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -14866,6 +14940,10 @@ unsafe impl Cast for ImageBlitBuilder {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [ImageBlit2KHR](struct.ImageBlit2KHR.html).
+pub unsafe trait ExtendsImageBlit2KHR {}
+unsafe impl ExtendsImageBlit2KHR for CopyCommandTransformInfoQCOM {}
+
 unsafe impl Cast for ImageBlit2KHR {
     type Target = ImageBlit2KHR;
 
@@ -14875,18 +14953,30 @@ unsafe impl Cast for ImageBlit2KHR {
     }
 }
 
-impl HasBuilder<'static> for ImageBlit2KHR {
-    type Builder = ImageBlit2KHRBuilder;
+impl<'b> HasBuilder<'b> for ImageBlit2KHR {
+    type Builder = ImageBlit2KHRBuilder<'b>;
 }
 
 /// A builder for a [ImageBlit2KHR](struct.ImageBlit2KHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct ImageBlit2KHRBuilder {
+pub struct ImageBlit2KHRBuilder<'b> {
     value: ImageBlit2KHR,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl ImageBlit2KHRBuilder {
+impl<'b> ImageBlit2KHRBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsImageBlit2KHR,
+    {
+        let next = (next.as_mut() as *mut T).cast::<ImageBlit2KHR>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn src_subresource(
         mut self,
@@ -14923,7 +15013,7 @@ impl ImageBlit2KHRBuilder {
     }
 }
 
-impl ops::Deref for ImageBlit2KHRBuilder {
+impl<'b> ops::Deref for ImageBlit2KHRBuilder<'b> {
     type Target = ImageBlit2KHR;
 
     #[inline]
@@ -14932,14 +15022,14 @@ impl ops::Deref for ImageBlit2KHRBuilder {
     }
 }
 
-impl ops::DerefMut for ImageBlit2KHRBuilder {
+impl<'b> ops::DerefMut for ImageBlit2KHRBuilder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for ImageBlit2KHRBuilder {
+unsafe impl<'b> Cast for ImageBlit2KHRBuilder<'b> {
     type Target = ImageBlit2KHR;
 
     #[inline]

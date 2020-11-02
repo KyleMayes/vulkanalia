@@ -629,6 +629,9 @@ pub const QCOM_RENDER_PASS_STORE_OPS_EXTENSION: ExtensionName =
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_render_pass_transform.html>
 pub const QCOM_RENDER_PASS_TRANSFORM_EXTENSION: ExtensionName =
     to_extension_name(b"VK_QCOM_render_pass_transform");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_rotated_copy_commands.html>
+pub const QCOM_ROTATED_COPY_COMMANDS_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_QCOM_rotated_copy_commands");
 
 /// Converts a byte string into a Vulkan extension name.
 #[inline]

@@ -6455,3 +6455,8 @@ impl QcomRenderPassStoreOpsExtension for crate::Device {}
 pub trait QcomRenderPassTransformExtension: DeviceV1_0 {}
 
 impl QcomRenderPassTransformExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_rotated_copy_commands.html>
+pub trait QcomRotatedCopyCommandsExtension: DeviceV1_0 {}
+
+impl QcomRotatedCopyCommandsExtension for crate::Device {}
