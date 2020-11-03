@@ -1,4 +1,12 @@
+## [0.2.1] - UNRELEASED
+
+### Bindings Updates
+- [November 1, 2020 Vulkan 1.2.159](https://github.com/KhronosGroup/Vulkan-Docs/commit/9adbc1846ddad202a0584f5c03a1916cf9801179)
+
 ## [0.2.0] - 2020-10-30
+
+### Bindings Updates
+- [October 19, 2020 Vulkan 1.2.158](https://github.com/KhronosGroup/Vulkan-Docs/commit/9fd8fd599b47a67b2eb078b2f5c9e6a2adc922a4)
 
 ### Changed
 - Changed wrapper methods with possible success codes other than `SUCCESS` or `INCOMPLETE` to return `VkSuccessResult` (new typedef) instead of `VkResult`
@@ -8,8 +16,6 @@
 ### Added
 - Added `SuccessCode` and `ErrorCode` enums
 - Added `VkSuccessResult` type alias
-- Added support for `VK_KHR_fragment_shading_rate` extension
-- Added support for `VK_KHR_shader_terminate_invocation` extension
 
 ## [0.1.0] - 2020-10-19
 - Initial release
