@@ -2839,13 +2839,628 @@ event_loop.run(move |event, _, control_flow| {
 </code></pre>
 <p>Congratulations, you've now finished your very first well-behaved Vulkan program! In the next chapter we're going to get rid of the hardcoded vertices in the vertex shader and actually use a vertex buffer.</p>
 <h1><a class="header" href="#vertex-input-description" id="vertex-input-description">Vertex input description</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/17_vertex_input.rs">main.rs</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/17/shader.vert">shader.vert</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/17/shader.frag">shader.frag</a></p>
+<p>In the next few chapters, we're going to replace the hardcoded vertex data in the vertex shader with a vertex buffer in memory. We'll start with the easiest approach of creating a CPU visible buffer copying the vertex data into it directly, and after that we'll see how to use a staging buffer to copy the vertex data to high performance memory.</p>
+<h2><a class="header" href="#vertex-shader-1" id="vertex-shader-1">Vertex shader</a></h2>
+<p>First change the vertex shader to no longer include the vertex data in the shader code itself. The vertex shader takes input from a vertex buffer using the <code>in</code> keyword.</p>
+<pre><code class="language-glsl">#version 450
+
+layout(location = 0) in vec2 inPosition;
+layout(location = 1) in vec3 inColor;
+
+layout(location = 0) out vec3 fragColor;
+
+void main() {
+    gl_Position = vec4(inPosition, 0.0, 1.0);
+    fragColor = inColor;
+}
+</code></pre>
+<p>The <code>inPosition</code> and <code>inColor</code> variables are <em>vertex attributes</em>. They're properties that are specified per-vertex in the vertex buffer, just like we manually specified a position and color per vertex using the two arrays. Make sure to recompile the vertex shader!</p>
+<p>Just like <code>fragColor</code>, the <code>layout(location = x)</code> annotations assign indices to the inputs that we can later use to reference them. It is important to know that some types, like <code>dvec3</code> 64 bit vectors, use multiple <em>slots</em>. That means that the index after it must be at least 2 higher:</p>
+<pre><code class="language-glsl">layout(location = 0) in dvec3 inPosition;
+layout(location = 2) in vec3 inColor;
+</code></pre>
+<p>You can find more info about the layout qualifier in the <a href="https://www.khronos.org/opengl/wiki/Layout_Qualifier_(GLSL)">OpenGL wiki</a>.</p>
+<h2><a class="header" href="#vertex-data" id="vertex-data">Vertex data</a></h2>
+<p>We're moving the vertex data from the shader code to an array in the code of our program. We'll start by adding a few more imports to our program.</p>
+<pre><code class="language-rust noplaypen">use std::mem::size_of;
+
+use nalgebra_glm as glm;
+use lazy_static::lazy_static;
+</code></pre>
+<p><code>size_of</code> will be used to calculate the size of the vertex data we'll be defining while <code>nalgebra-glm</code> defines the vector types we need. The <code>lazy_static!</code> macro will be used to define the vertex data since the vector constructors in <code>nalgebra-glm</code> are not yet <code>const fn</code>s.</p>
+<p>Next, create a new <code>#[repr(C)]</code> structure called <code>Vertex</code> with the two attributes that we're going to use in the vertex shader inside it and add a simple constructor:</p>
+<pre><code class="language-rust noplaypen">#[repr(C)]
+struct Vertex {
+    pos: glm::Vec2,
+    color: glm::Vec3,
+}
+
+impl Vertex {
+    fn new(pos: glm::Vec2, color: glm::Vec3) -&gt; Self {
+        Self { pos, color }
+    }
+}
+</code></pre>
+<p><code>nalgebra-glm</code> conveniently provides us with Rust types that exactly match the vector types used in the shader language.</p>
+<pre><code class="language-rust noplaypen">lazy_static! {
+    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
+        Vertex::new(glm::vec2(0.0, -0.5), glm::vec3(1.0, 0.0, 0.0)),
+        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 1.0, 0.0)),
+        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(0.0, 0.0, 1.0)),
+    ];
+}
+</code></pre>
+<p>Now use the <code>Vertex</code> structure to specify a list of vertex data. We're using exactly the same position and color values as before, but now they're combined into one array of vertices. This is known as <em>interleaving</em> vertex attributes.</p>
+<h2><a class="header" href="#binding-descriptions" id="binding-descriptions">Binding descriptions</a></h2>
+<p>The next step is to tell Vulkan how to pass this data format to the vertex shader once it's been uploaded into GPU memory. There are two types of structures needed to convey this information.</p>
+<p>The first structure is <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.VertexInputBindingDescription.html"><code class="hljs">vk::VertexInputBindingDescription</code></a> and we'll add a method to the <code>Vertex</code> struct to populate it with the right data.</p>
+<pre><code class="language-rust noplaypen">impl Vertex {
+    fn binding_description() -&gt; vk::VertexInputBindingDescription {
+    }
+}
+</code></pre>
+<p>A vertex binding describes at which rate to load data from memory throughout the vertices. It specifies the number of bytes between data entries and whether to move to the next data entry after each vertex or after each instance.</p>
+<pre><code class="language-rust noplaypen">vk::VertexInputBindingDescription::builder()
+    .binding(0)
+    .stride(size_of::&lt;Vertex&gt;() as u32)
+    .input_rate(vk::VertexInputRate::VERTEX)
+    .build()
+</code></pre>
+<p>All of our per-vertex data is packed together in one array, so we're only going to have one binding. The <code>binding</code> parameter specifies the index of the binding in the array of bindings. The <code>stride</code> parameter specifies the number of bytes from one entry to the next, and the <code>input_rate</code> parameter can have one of the following values:</p>
+<ul>
+<li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.VertexInputRate.html#associatedconstant.VERTEX"><code class="hljs">vk::VertexInputRate::VERTEX</code></a>: Move to the next data entry after each vertex</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.VertexInputRate.html#associatedconstant.INSTANCE"><code class="hljs">vk::VertexInputRate::INSTANCE</code></a>: Move to the next data entry after each instance</li>
+</ul>
+<p>We're not going to use instanced rendering, so we'll stick to per-vertex data.</p>
+<h2><a class="header" href="#attribute-descriptions" id="attribute-descriptions">Attribute descriptions</a></h2>
+<p>The second structure that describes how to handle vertex input is <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.VertexInputAttributeDescription.html"><code class="hljs">vk::VertexInputAttributeDescription</code></a>. We're going to add another helper method to <code>Vertex</code> to fill in these structs.</p>
+<pre><code class="language-rust noplaypen">impl Vertex {
+    fn attribute_descriptions() -&gt; [vk::VertexInputAttributeDescription; 2] {
+    }
+}
+</code></pre>
+<p>As the function prototype indicates, there are going to be two of these structures. An attribute description struct describes how to extract a vertex attribute from a chunk of vertex data originating from a binding description. We have two attributes, position and color, so we need two attribute description structs.</p>
+<pre><code class="language-rust noplaypen">let pos = vk::VertexInputAttributeDescription::builder()
+    .binding(0)
+    .location(0)
+    .format(vk::Format::R32G32_SFLOAT)
+    .offset(0)
+    .build();
+</code></pre>
+<p>The <code>binding</code> parameter tells Vulkan from which binding the per-vertex data comes. The <code>location</code> parameter references the <code>location</code> directive of the input in the vertex shader. The input in the vertex shader with location <code>0</code> is the position, which has two 32-bit float components.</p>
+<p>The <code>format</code> parameter describes the type of data for the attribute. A bit confusingly, the formats are specified using the same enumeration as color formats. The following shader types and formats are commonly used together:</p>
+<ul>
+<li><code>f32</code> – <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32_SFLOAT"><code class="hljs">vk::Format::R32_SFLOAT</code></a> </li>
+<li><code>glm::Vec2</code> – <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SFLOAT"><code class="hljs">vk::Format::R32G32_SFLOAT</code></a> </li>
+<li><code>glm::Vec3</code> – <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32_SFLOAT"><code class="hljs">vk::Format::R32G32B32_SFLOAT</code></a> </li>
+<li><code>glm::Vec4</code> – <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_SFLOAT"><code class="hljs">vk::Format::R32G32B32A32_SFLOAT</code></a> </li>
+</ul>
+<p>As you can see, you should use the format where the amount of color channels matches the number of components in the shader data type. It is allowed to use more channels than the number of components in the shader, but they will be silently discarded. If the number of channels is lower than the number of components, then the BGA components will use default values of <code>(0, 0, 1)</code>. The color type (<code>SFLOAT</code>, <code>UINT</code>, <code>SINT</code>) and bit width should also match the type of the shader input. See the following examples:</p>
+<ul>
+<li><code>glm::IVec2</code> – <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SINT"><code class="hljs">vk::Format::R32G32_SINT</code></a>, a 2-component vector of <code>i32</code>s</li>
+<li><code>glm::UVec4</code> – <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_UINT"><code class="hljs">vk::Format::R32G32B32A32_UINT</code></a>, a 4-component vector of <code>u32</code>s</li>
+<li><code>f64</code> – <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Format.html#associatedconstant.R64_SFLOAT"><code class="hljs">vk::Format::R64_SFLOAT</code></a>, a double-precision (64-bit) float</li>
+</ul>
+<p>The <code>format</code> parameter implicitly defines the byte size of attribute data and the <code>offset</code> parameter specifies the number of bytes since the start of the per-vertex data to read from. The binding is loading one <code>Vertex</code> at a time and the position attribute (<code>pos</code>) is at an offset of <code>0</code> bytes from the beginning of this struct.</p>
+<pre><code class="language-rust noplaypen">let color = vk::VertexInputAttributeDescription::builder()
+    .binding(0)
+    .location(1)
+    .format(vk::Format::R32G32B32_SFLOAT)
+    .offset(size_of::&lt;glm::Vec2&gt;() as u32)
+    .build();
+</code></pre>
+<p>The color attribute is described in much the same way.</p>
+<p>Lastly, construct the array to return from the helper method:</p>
+<pre><code class="language-rust noplaypen">[pos, color]
+</code></pre>
+<h2><a class="header" href="#pipeline-vertex-input" id="pipeline-vertex-input">Pipeline vertex input</a></h2>
+<p>We now need to set up the graphics pipeline to accept vertex data in this format by referencing the structures in <code>create_pipeline</code>. Find the <code>vertex_input_state</code> struct and modify it to reference the two descriptions:</p>
+<pre><code class="language-rust noplaypen">let binding_descriptions = &amp;[Vertex::binding_description()];
+let attribute_descriptions = Vertex::attribute_descriptions();
+let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder()
+    .vertex_binding_descriptions(binding_descriptions)
+    .vertex_attribute_descriptions(&amp;attribute_descriptions);
+</code></pre>
+<p>The pipeline is now ready to accept vertex data in the format of the <code>vertices</code> container and pass it on to our vertex shader. If you run the program now with validation layers enabled, you'll see that it complains that there is no vertex buffer bound to the binding. The next step is to create a vertex buffer and move the vertex data to it so the GPU is able to access it.</p>
 <h1><a class="header" href="#vertex-buffer-creation" id="vertex-buffer-creation">Vertex buffer creation</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/18_vertex_buffer.rs">main.rs</a></p>
+<p>Buffers in Vulkan are regions of memory used for storing arbitrary data that can be read by the graphics card. They can be used to store vertex data, which we'll do in this chapter, but they can also be used for many other purposes that we'll explore in future chapters. Unlike the Vulkan objects we've been dealing with so far, buffers do not automatically allocate memory for themselves. The work from the previous chapters has shown that the Vulkan API puts the programmer in control of almost everything and memory management is one of those things.</p>
+<h2><a class="header" href="#buffer-creation" id="buffer-creation">Buffer creation</a></h2>
+<p>Create a new function <code>create_vertex_buffer</code> and call it from <code>App::create</code> right before <code>create_command_buffers</code>.</p>
+<pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    // ...
+    create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;
+    create_command_buffers(&amp;device, &amp;mut data)?;
+    // ...
+}
+
+
+fn create_vertex_buffer(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>Creating a buffer requires us to fill a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.BufferCreateInfo.html"><code class="hljs">vk::BufferCreateInfo</code></a> structure.</p>
+<pre><code class="language-rust noplaypen">let buffer_info = vk::BufferCreateInfo::builder()
+    .size((size_of::&lt;Vertex&gt;() * VERTICES.len()) as u64)
+    // continued...
+</code></pre>
+<p>The first field of the struct is <code>size</code>, which specifies the size of the buffer in bytes. Calculating the byte size of the vertex data is straightforward with <code>size_of</code>.</p>
+<pre><code class="language-rust noplaypen">    .usage(vk::BufferUsageFlags::VERTEX_BUFFER)
+</code></pre>
+<p>The second field is <code>usage</code>, which indicates for which purposes the data in the buffer is going to be used. It is possible to specify multiple purposes using a bitwise or. Our use case will be a vertex buffer, we'll look at other types of usage in future chapters.</p>
+<pre><code class="language-rust noplaypen">    .sharing_mode(vk::SharingMode::EXCLUSIVE);
+</code></pre>
+<p>Just like the images in the swapchain, buffers can also be owned by a specific queue family or be shared between multiple at the same time. The buffer will only be used from the graphics queue, so we can stick to exclusive access.</p>
+<p>The <code>flags</code> parameter is used to configure sparse buffer memory, which is not relevant right now. We'll leave it at the default value of <code>0</code>.</p>
+<p>We can now create the buffer with <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_buffer"><code class="hljs">create_buffer</code></a>. First, define an <code>AppData</code> field to hold the buffer handle and call it <code>vertex_buffer</code>.</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    vertex_buffer: vk::Buffer,
+}
+</code></pre>
+<p>Next add the call to <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_buffer"><code class="hljs">create_buffer</code></a>:</p>
+<pre><code class="language-rust noplaypen">fn create_vertex_buffer(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
+    let buffer_info = vk::BufferCreateInfo::builder()
+        .size((size_of::&lt;Vertex&gt;() * VERTICES.len()) as u64)
+        .usage(vk::BufferUsageFlags::VERTEX_BUFFER)
+        .sharing_mode(vk::SharingMode::EXCLUSIVE);
+
+    data.vertex_buffer = device.create_buffer(&amp;buffer_info, None)?;
+
+    Ok(())
+}
+</code></pre>
+<p>The buffer should be available for use in rendering commands until the end of the program and it does not depend on the swapchain, so we'll clean it up in the original <code>App::destroy</code> method:</p>
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.destroy_swapchain();
+    self.device.destroy_buffer(self.data.vertex_buffer, None);
+    // ...
+}
+</code></pre>
+<h2><a class="header" href="#memory-requirements" id="memory-requirements">Memory requirements</a></h2>
+<p>The buffer has been created, but it doesn't actually have any memory assigned to it yet. The first step of allocating memory for the buffer is to query its memory requirements using the aptly named <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.get_buffer_memory_requirements"><code class="hljs">get_buffer_memory_requirements</code></a> command.</p>
+<pre><code class="language-rust noplaypen">let requirements = device.get_buffer_memory_requirements(data.vertex_buffer);
+</code></pre>
+<p>The <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.MemoryRequirements.html"><code class="hljs">vk::MemoryRequirements</code></a> struct this command returns has three fields:</p>
+<ul>
+<li><code>size</code> – The size of the required amount of memory in bytes, may differ from <code>bufferInfo.size</code>.</li>
+<li><code>alignment</code> – The offset in bytes where the buffer begins in the allocated region of memory, depends on <code>buffer_info.usage</code> and <code>buffer_info.flags</code>.</li>
+<li><code>memory_type_bits</code> – Bit field of the memory types that are suitable for the buffer.</li>
+</ul>
+<p>Graphics cards can offer different types of memory to allocate from. Each type of memory varies in terms of allowed operations and performance characteristics. We need to combine the requirements of the buffer and our own application requirements to find the right type of memory to use. Let's create a new function <code>get_memory_type_index</code> for this purpose.</p>
+<pre><code class="language-rust noplaypen">fn get_memory_type_index(
+    instance: &amp;Instance,
+    data: &amp;AppData,
+    properties: vk::MemoryPropertyFlags,
+    requirements: vk::MemoryRequirements,
+) -&gt; Result&lt;u32&gt; {
+}
+</code></pre>
+<p>First we need to query info about the available types of memory using <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_memory_properties"><code class="hljs">get_physical_device_memory_properties</code></a>.</p>
+<pre><code class="language-rust noplaypen">let memory = instance.get_physical_device_memory_properties(data.physical_device);
+</code></pre>
+<p>The returned <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.PhysicalDeviceMemoryProperties.html"><code class="hljs">vk::PhysicalDeviceMemoryProperties</code></a> structure has two arrays <code>memory_types</code> and <code>memory_heaps</code>. Memory heaps are distinct memory resources like dedicated VRAM and swap space in RAM for when VRAM runs out. The different types of memory exist within these heaps. Right now we'll only concern ourselves with the type of memory and not the heap it comes from, but you can imagine that this can affect performance.</p>
+<p>Let's first find a memory type that is suitable for the buffer itself:</p>
+<pre><code class="language-rust noplaypen">(0..memory.memory_type_count)
+    .find(|i| (requirements.memory_type_bits &amp; (1 &lt;&lt; i)) != 0)
+    .ok_or_else(|| anyhow!(&quot;Failed to find suitable memory type.&quot;))
+</code></pre>
+<p>The <code>memory_type_bits</code> field from the <code>requirements</code> parameter will be used to specify the bit field of memory types that are suitable. That means that we can find the index of a suitable memory type by simply iterating over them and checking if the corresponding bit is set to <code>1</code>.</p>
+<p>However, we're not just interested in a memory type that is suitable for the vertex buffer. We also need to be able to write our vertex data to that memory. The <code>memory_types</code> array consists of <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.MemoryType.html"><code class="hljs">vk::MemoryType</code></a> structs that specify the heap and properties of each type of memory. The properties define special features of the memory, like being able to map it so we can write to it from the CPU. This property is indicated with <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.MemoryPropertyFlags.html#associatedconstant.HOST_VISIBLE"><code class="hljs">vk::MemoryPropertyFlags::HOST_VISIBLE</code></a>, but we also need to use the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.MemoryPropertyFlags.html#associatedconstant.HOST_COHERENT"><code class="hljs">vk::MemoryPropertyFlags::HOST_COHERENT</code></a> property. We'll see why when we map the memory.</p>
+<p>We can now modify the loop to also check for the support of this property:</p>
+<pre><code class="language-rust noplaypen">(0..memory.memory_type_count)
+    .find(|i| {
+        let suitable = (requirements.memory_type_bits &amp; (1 &lt;&lt; i)) != 0;
+        let memory_type = memory.memory_types[*i as usize];
+        suitable &amp;&amp; memory_type.property_flags.contains(properties)
+    })
+    .ok_or_else(|| anyhow!(&quot;Failed to find suitable memory type.&quot;))
+</code></pre>
+<p>If there is a memory type suitable for the buffer that also has all of the properties we need, then we return its index, otherwise we return an error.</p>
+<h2><a class="header" href="#memory-allocation" id="memory-allocation">Memory allocation</a></h2>
+<p>We now have a way to determine the right memory type, so we can actually allocate the memory by filling in the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.MemoryAllocateInfo.html"><code class="hljs">vk::MemoryAllocateInfo</code></a> structure.</p>
+<pre><code class="language-rust noplaypen">let memory_info = vk::MemoryAllocateInfo::builder()
+    .allocation_size(requirements.size)
+    .memory_type_index(get_memory_type_index(
+        instance,
+        data,
+        vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+        requirements,
+    )?);
+</code></pre>
+<p>Memory allocation is now as simple as specifying the size and type, both of which are derived from the memory requirements of the vertex buffer and the desired property. Create an <code>AppData</code> field to store the handle to the memory:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    vertex_buffer: vk::Buffer,
+    vertex_buffer_memory: vk::DeviceMemory,
+}
+</code></pre>
+<p>Populate that new field by calling <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_memory"><code class="hljs">allocate_memory</code></a>:</p>
+<pre><code class="language-rust noplaypen">data.vertex_buffer_memory = device.allocate_memory(&amp;memory_info, None)?;
+</code></pre>
+<p>If memory allocation was successful, then we can now associate this memory with the buffer using <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.bind_buffer_memory"><code class="hljs">bind_buffer_memory</code></a>:</p>
+<pre><code class="language-rust noplaypen">device.bind_buffer_memory(data.vertex_buffer, data.vertex_buffer_memory, 0)?;
+</code></pre>
+<p>The first two parameters are self-explanatory and the third parameter is the offset within the region of memory. Since this memory is allocated specifically for this the vertex buffer, the offset is simply <code>0</code>. If the offset is non-zero, then it is required to be divisible by <code>requirements.alignment</code>.</p>
+<p>Of course, just like dynamic memory allocation in C, the memory should be freed at some point. Memory that is bound to a buffer object may be freed once the buffer is no longer used, so let's free it after the buffer has been destroyed:</p>
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.destroy_swapchain();
+    self.device.destroy_buffer(self.data.vertex_buffer, None);
+    self.device.free_memory(self.data.vertex_buffer_memory, None);
+    // ...
+}
+</code></pre>
+<h2><a class="header" href="#filling-the-vertex-buffer" id="filling-the-vertex-buffer">Filling the vertex buffer</a></h2>
+<p>It is now time to copy the vertex data to the buffer. This is done by <a href="https://en.wikipedia.org/wiki/Memory-mapped_I/O">mapping the buffer memory</a> into CPU accessible memory with <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.map_memory"><code class="hljs">map_memory</code></a>.</p>
+<pre><code class="language-rust noplaypen">let memory = device.map_memory(
+    data.vertex_buffer_memory,
+    0,
+    buffer_info.size,
+    vk::MemoryMapFlags::empty(),
+)?;
+</code></pre>
+<p>This command allows us to access a region of the specified memory resource defined by an offset and size. The offset and size here are <code>0</code> and <code>buffer_info.size</code>, respectively. It is also possible to specify the special value <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/constant.WHOLE_SIZE.html"><code class="hljs">vk::WHOLE_SIZE</code></a> to map all of the memory. The last parameter can be used to specify flags, but there aren't any available yet in the current API. It must be set to an empty set of flags. The returned value is the pointer to the mapped value.</p>
+<p>Before we continue, we'll need to be able copy memory from our vertex list to the mapped memory. Add this import to your program:</p>
+<pre><code class="language-rust noplaypen">use std::ptr::copy_nonoverlapping as memcpy;
+</code></pre>
+<p>Now we can copy the vertex data into the buffer memory and then unmap it again using <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.unmap_memory"><code class="hljs">unmap_memory</code></a>.</p>
+<pre><code class="language-rust noplaypen">unsafe { memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len()) };
+device.unmap_memory(data.vertex_buffer_memory);
+</code></pre>
+<p>Unfortunately the driver may not immediately copy the data into the buffer memory, for example because of caching. It is also possible that writes to the buffer are not visible in the mapped memory yet. There are two ways to deal with that problem:</p>
+<ul>
+<li>
+<p>Use a memory heap that is host coherent, indicated with <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.MemoryPropertyFlags.html#associatedconstant.HOST_COHERENT"><code class="hljs">vk::MemoryPropertyFlags::HOST_COHERENT</code></a></p>
+</li>
+<li>
+<p>Call <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.flush_mapped_memory_ranges"><code class="hljs">flush_mapped_memory_ranges</code></a> after writing to the mapped memory, and call <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.invalidate_mapped_memory_ranges"><code class="hljs">invalidate_mapped_memory_ranges</code></a> before reading from the mapped memory</p>
+</li>
+</ul>
+<p>We went for the first approach, which ensures that the mapped memory always matches the contents of the allocated memory. Do keep in mind that this may lead to slightly worse performance than explicit flushing, but we'll see why that doesn't matter in the next chapter.</p>
+<p>Flushing memory ranges or using a coherent memory heap means that the driver will be aware of our writes to the buffer, but it doesn't mean that they are actually visible on the GPU yet. The transfer of data to the GPU is an operation that happens in the background and the specification simply <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-submission-host-writes">tells us</a> that it is guaranteed to be complete as of the next call to <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_submit"><code class="hljs">queue_submit</code></a>.</p>
+<h2><a class="header" href="#binding-the-vertex-buffer" id="binding-the-vertex-buffer">Binding the vertex buffer</a></h2>
+<p>All that remains now is binding the vertex buffer during rendering operations. We're going to extend the <code>create_command_buffers</code> function to do that.</p>
+<pre><code class="language-rust noplaypen">// ...
+device.cmd_bind_vertex_buffers(*command_buffer, 0, &amp;[data.vertex_buffer], &amp;[0]);
+device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
+// ...
+</code></pre>
+<p>The <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_vertex_buffers"><code class="hljs">cmd_bind_vertex_buffers</code></a> command is used to bind vertex buffers to bindings, like the one we set up in the previous chapter. The second parameter specifies the index of the vertex input binding we are using. The last two parameters specify the vertex buffers to bind and the byte offsets to start reading vertex data from. You should also change the call to <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw"><code class="hljs">cmd_draw</code></a> to pass the number of vertices in the buffer as opposed to the hardcoded number <code>3</code>.</p>
+<p>Now run the program and you should see the familiar triangle again:</p>
+<p><img src="vertex//images/triangle.png" alt="" /></p>
+<p>Try changing the color of the top vertex to white by modifying the <code>VERTICES</code> list:</p>
+<pre><code class="language-rust noplaypen">lazy_static! {
+    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
+        Vertex::new(glm::vec2(0.0, -0.5), glm::vec3(1.0, 1.0, 1.0)),
+        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 1.0, 0.0)),
+        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(0.0, 0.0, 1.0)),
+    ];
+}
+</code></pre>
+<p>Run the program again and you should see the following:</p>
+<p><img src="vertex//images/triangle_white.png" alt="" /></p>
+<p>In the next chapter we'll look at a different way to copy vertex data to a vertex buffer that results in better performance, but takes some more work.</p>
 <h1><a class="header" href="#staging-buffer" id="staging-buffer">Staging buffer</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/19_staging_buffer.rs">main.rs</a></p>
+<p>The vertex buffer we have right now works correctly, but the memory type that allows us to access it from the CPU may not be the most optimal memory type for the graphics card itself to read from. The most optimal memory has the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.MemoryPropertyFlags.html#associatedconstant.DEVICE_LOCAL"><code class="hljs">vk::MemoryPropertyFlags::DEVICE_LOCAL</code></a> flag and is usually not accessible by the CPU on dedicated graphics cards. In this chapter we're going to create two vertex buffers. One <em>staging buffer</em> in CPU accessible memory to upload the data from the vertex array to, and the final vertex buffer in device local memory. We'll then use a buffer copy command to move the data from the staging buffer to the actual vertex buffer.</p>
+<h2><a class="header" href="#transfer-queue" id="transfer-queue">Transfer queue</a></h2>
+<p>The buffer copy command requires a queue family that supports transfer operations, which is indicated using <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.TRANSFER"><code class="hljs">vk::QueueFlags::TRANSFER</code></a>. The good news is that any queue family with <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.GRAPHICS"><code class="hljs">vk::QueueFlags::GRAPHICS</code></a> or <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.COMPUTE"><code class="hljs">vk::QueueFlags::COMPUTE</code></a> capabilities already implicitly support <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.TRANSFER"><code class="hljs">vk::QueueFlags::TRANSFER</code></a> operations. The implementation is not required to explicitly list it in <code>queue_flags</code> in those cases.</p>
+<p>If you like a challenge, then you can still try to use a different queue family specifically for transfer operations. It will require you to make the following modifications to your program:</p>
+<ul>
+<li>Modify <code>QueueFamilyIndices</code> and <code>QueueFamilyIndices::get</code> to explicitly look for a queue family with the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.TRANSFER"><code class="hljs">vk::QueueFlags::TRANSFER</code></a> bit, but not the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.GRAPHICS"><code class="hljs">vk::QueueFlags::GRAPHICS</code></a>.</li>
+<li>Modify <code>create_logical_device</code> to request a handle to the transfer queue</li>
+<li>Create a second command pool for command buffers that are submitted on the transfer queue family</li>
+<li>Change the <code>sharing_mode</code> of resources to be <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.SharingMode.html#associatedconstant.CONCURRENT"><code class="hljs">vk::SharingMode::CONCURRENT</code></a> and specify both the graphics and transfer queue families</li>
+<li>Submit any transfer commands like <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_copy_buffer"><code class="hljs">cmd_copy_buffer</code></a> (which we'll be using in this chapter) to the transfer queue instead of the graphics queue</li>
+</ul>
+<p>It's a bit of work, but it'll teach you a lot about how resources are shared between queue families.</p>
+<h2><a class="header" href="#abstracting-buffer-creation" id="abstracting-buffer-creation">Abstracting buffer creation</a></h2>
+<p>Because we're going to create multiple buffers in this chapter, it's a good idea to move buffer creation to a helper function. Create a new function <code>create_buffer</code> and move the code in <code>create_vertex_buffer</code> (except mapping) to it.</p>
+<pre><code class="language-rust noplaypen">fn create_buffer(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;AppData,
+    size: vk::DeviceSize,
+    usage: vk::BufferUsageFlags,
+    properties: vk::MemoryPropertyFlags,
+) -&gt; Result&lt;(vk::Buffer, vk::DeviceMemory)&gt; {
+    let buffer_info = vk::BufferCreateInfo::builder()
+        .size(size)
+        .usage(usage)
+        .sharing_mode(vk::SharingMode::EXCLUSIVE);
+
+    let buffer = device.create_buffer(&amp;buffer_info, None)?;
+
+    let requirements = device.get_buffer_memory_requirements(buffer);
+
+    let memory_info = vk::MemoryAllocateInfo::builder()
+        .allocation_size(requirements.size)
+        .memory_type_index(get_memory_type_index(
+            instance,
+            data,
+            properties,
+            requirements,
+        )?);
+
+    let buffer_memory = device.allocate_memory(&amp;memory_info, None)?;
+
+    device.bind_buffer_memory(buffer, buffer_memory, 0)?;
+
+    Ok((buffer, buffer_memory))
+}
+</code></pre>
+<p>Make sure to add parameters for the buffer size, usage and memory properties so that we can use this function to create many different types of buffers.</p>
+<p>You can now remove the buffer creation and memory allocation code from <code>create_vertex_buffer</code> and just call <code>create_buffer</code> instead:</p>
+<pre><code class="language-rust noplaypen">fn create_vertex_buffer(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
+    let size = (size_of::&lt;Vertex&gt;() * VERTICES.len()) as u64;
+
+    let (vertex_buffer, vertex_buffer_memory) = create_buffer(
+        instance,
+        device,
+        data,
+        size,
+        vk::BufferUsageFlags::VERTEX_BUFFER,
+        vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+    )?;
+
+    data.vertex_buffer = vertex_buffer;
+    data.vertex_buffer_memory = vertex_buffer_memory;
+
+    let memory = device.map_memory(
+        vertex_buffer_memory,
+        0,
+        size,
+        vk::MemoryMapFlags::empty(),
+    )?;
+
+    unsafe { memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len()) };
+
+    device.unmap_memory(vertex_buffer_memory);
+
+    Ok(())
+}
+</code></pre>
+<p>Run your program to make sure that the vertex buffer still works properly.</p>
+<h2><a class="header" href="#using-a-staging-buffer" id="using-a-staging-buffer">Using a staging buffer</a></h2>
+<p>We're now going to change <code>create_vertex_buffer</code> to only use a host visible buffer as temporary buffer and use a device local one as actual vertex buffer.</p>
+<pre><code class="language-rust noplaypen">fn create_vertex_buffer(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
+    let size = (size_of::&lt;Vertex&gt;() * VERTICES.len()) as u64;
+
+    let (staging_buffer, staging_buffer_memory) = create_buffer(
+        instance,
+        device,
+        data,
+        size,
+        vk::BufferUsageFlags::TRANSFER_SRC,
+        vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+    )?;
+
+    let memory = device.map_memory(
+        staging_buffer_memory,
+        0,
+        size,
+        vk::MemoryMapFlags::empty(),
+    )?;
+
+    unsafe { memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len()) };
+
+    device.unmap_memory(staging_buffer_memory);
+
+    let (vertex_buffer, vertex_buffer_memory) = create_buffer(
+        instance,
+        device,
+        data,
+        size,
+        vk::BufferUsageFlags::TRANSFER_DST | vk::BufferUsageFlags::VERTEX_BUFFER,
+        vk::MemoryPropertyFlags::DEVICE_LOCAL,
+    )?;
+
+    data.vertex_buffer = vertex_buffer;
+    data.vertex_buffer_memory = vertex_buffer_memory;
+
+    Ok(())
+}
+</code></pre>
+<p>We're now using a new <code>staging_buffer</code> with <code>staging_buffer_memory</code> for mapping and copying the vertex data. In this chapter we're going to use two new buffer usage flags:</p>
+<ul>
+<li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.BufferUsageFlags.html#associatedconstant.TRANSFER_SRC"><code class="hljs">vk::BufferUsageFlags::TRANSFER_SRC</code></a> – Buffer can be used as source in a memory transfer operation.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.BufferUsageFlags.html#associatedconstant.TRANSFER_DST"><code class="hljs">vk::BufferUsageFlags::TRANSFER_DST</code></a> – Buffer can be used as destination in a memory transfer operation.</li>
+</ul>
+<p>The <code>vertex_buffer</code> is now allocated from a memory type that is device local, which generally means that we're not able to use <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.map_memory"><code class="hljs">map_memory</code></a>. However, we can copy data from the <code>staging_buffer</code> to the <code>vertex_buffer</code>. We have to indicate that we intend to do that by specifying the transfer source flag for the <code>staging_buffer</code> and the transfer destination flag for the <code>vertex_buffer</code>, along with the vertex buffer usage flag.</p>
+<p>We're now going to write a function to copy the contents from one buffer to another, called <code>copy_buffer</code>.</p>
+<pre><code class="language-rust noplaypen">fn copy_buffer(
+    device: &amp;Device,
+    data: &amp;AppData,
+    source: vk::Buffer,
+    destination: vk::Buffer,
+    size: vk::DeviceSize,
+) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>Memory transfer operations are executed using command buffers, just like drawing commands. Therefore we must first allocate a temporary command buffer. You may wish to create a separate command pool for these kinds of short-lived buffers, because the implementation may be able to apply memory allocation optimizations. You should use the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.CommandPoolCreateFlags.html#associatedconstant.TRANSIENT"><code class="hljs">vk::CommandPoolCreateFlags::TRANSIENT</code></a> flag during command pool generation in that case.</p>
+<pre><code class="language-rust noplaypen">fn copy_buffer(
+    device: &amp;Device,
+    data: &amp;AppData,
+    source: vk::Buffer,
+    destination: vk::Buffer,
+    size: vk::DeviceSize,
+) -&gt; Result&lt;()&gt; {
+    let info = vk::CommandBufferAllocateInfo::builder()
+        .level(vk::CommandBufferLevel::PRIMARY)
+        .command_pool(data.command_pool)
+        .command_buffer_count(1);
+
+    let command_buffer = device.allocate_command_buffers(&amp;info)?[0];
+
+    Ok(())
+}
+</code></pre>
+<p>And immediately start recording the command buffer:</p>
+<pre><code class="language-rust noplaypen">let info = vk::CommandBufferBeginInfo::builder()
+    .flags(vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT);
+
+device.begin_command_buffer(command_buffer, &amp;info)?;
+</code></pre>
+<p>We're only going to use the command buffer once and wait with returning from the function until the copy operation has finished executing. It's good practice to tell the driver about our intent using <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.CommandBufferUsageFlags.html#associatedconstant.ONE_TIME_SUBMIT"><code class="hljs">vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT</code></a>.</p>
+<pre><code class="language-rust noplaypen">let regions = vk::BufferCopy::builder().size(size);
+device.cmd_copy_buffer(command_buffer, source, destination, &amp;[regions]);
+</code></pre>
+<p>Contents of buffers are transferred using the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_copy_buffer"><code class="hljs">cmd_copy_buffer</code></a> command. It takes the source and destination buffers as arguments, and an array of regions to copy. The regions are defined in <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.BufferCopy.html"><code class="hljs">vk::BufferCopy</code></a> structs and consist of a source buffer offset, destination buffer offset and size. It is not possible to specify <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/constant.WHOLE_SIZE.html"><code class="hljs">vk::WHOLE_SIZE</code></a> here, unlike the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.map_memory"><code class="hljs">map_memory</code></a> command.</p>
+<pre><code class="language-rust noplaypen">device.end_command_buffer(command_buffer)?;
+</code></pre>
+<p>This command buffer only contains the copy command, so we can stop recording right after that. Now execute the command buffer to complete the transfer:</p>
+<pre><code class="language-rust noplaypen">let command_buffers = &amp;[command_buffer];
+let info = vk::SubmitInfo::builder()
+    .command_buffers(command_buffers);
+
+device.queue_submit(data.graphics_queue, &amp;[info], vk::Fence::null())?;
+device.queue_wait_idle(data.graphics_queue)?;
+</code></pre>
+<p>Unlike the draw commands, there are no events we need to wait on this time. We just want to execute the transfer on the buffers immediately. There are again two possible ways to wait on this transfer to complete. We could use a fence and wait with <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.wait_for_fences"><code class="hljs">wait_for_fences</code></a>, or simply wait for the transfer queue to become idle with <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_wait_idle"><code class="hljs">queue_wait_idle</code></a>. A fence would allow you to schedule multiple transfers simultaneously and wait for all of them complete, instead of executing one at a time. That may give the driver more opportunities to optimize.</p>
+<pre><code class="language-rust noplaypen">device.free_command_buffers(data.command_pool, &amp;[command_buffer]);
+</code></pre>
+<p>Don't forget to clean up the command buffer used for the transfer operation.</p>
+<p>We can now call <code>copy_buffer</code> from the <code>create_vertex_buffer</code> function to move the vertex data to the device local buffer:</p>
+<pre><code class="language-rust noplaypen">copy_buffer(device, data, staging_buffer, vertex_buffer, size)?;
+</code></pre>
+<p>After copying the data from the staging buffer to the device buffer, we should clean it up:</p>
+<pre><code class="language-rust noplaypen">device.destroy_buffer(staging_buffer, None);
+device.free_memory(staging_buffer_memory, None);
+</code></pre>
+<p>Run your program to verify that you're seeing the familiar triangle again. The improvement may not be visible right now, but its vertex data is now being loaded from high performance memory. This will matter when we're going to start rendering more complex geometry.</p>
+<h2><a class="header" href="#conclusion-3" id="conclusion-3">Conclusion</a></h2>
+<p>It should be noted that in a real world application, you're not supposed to actually call <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_memory"><code class="hljs">allocate_memory</code></a> for every individual buffer. The maximum number of simultaneous memory allocations is limited by the <code>max_memory_allocation_count</code> physical device limit, which may be as low as <code>4096</code> even on high end hardware like an NVIDIA GTX 1080. The right way to allocate memory for a large number of objects at the same time is to create a custom allocator that splits up a single allocation among many different objects by using the <code>offset</code> parameters that we've seen in many functions.</p>
+<p>However, for this tutorial it's okay to use a separate allocation for every resource, because we won't come close to hitting any of these limits for now.</p>
 <h1><a class="header" href="#index-buffer" id="index-buffer">Index buffer</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/20_index_buffer.rs">main.rs</a></p>
+<p>The 3D meshes you'll be rendering in a real world application will often share vertices between multiple triangles. This already happens even with something simple like drawing a rectangle:</p>
+<p><img src="vertex/../images/vertex_vs_index.svg" alt="" /></p>
+<p>Drawing a rectangle takes two triangles, which means that we need a vertex buffer with 6 vertices. The problem is that the data of two vertices needs to be duplicated resulting in 50% redundancy. It only gets worse with more complex meshes, where vertices are reused in an average number of 3 triangles. The solution to this problem is to use an <em>index buffer</em>.</p>
+<p>An index buffer is essentially an array of pointers into the vertex buffer. It allows you to reorder the vertex data, and reuse existing data for multiple vertices. The illustration above demonstrates what the index buffer would look like for the rectangle if we have a vertex buffer containing each of the four unique vertices. The first three indices define the upper-right triangle and the last three indices define the vertices for the bottom-left triangle.</p>
+<h2><a class="header" href="#index-buffer-creation" id="index-buffer-creation">Index buffer creation</a></h2>
+<p>In this chapter we're going to modify the vertex data and add index data to draw a rectangle like the one in the illustration. Modify the vertex data to represent the four corners:</p>
+<pre><code class="language-rust noplaypen">lazy_static! {
+    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
+        Vertex::new(glm::vec2(-0.5, -0.5), glm::vec3(1.0, 0.0, 0.0)),
+        Vertex::new(glm::vec2(0.5, -0.5), glm::vec3(0.0, 1.0, 0.0)),
+        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 0.0, 1.0)),
+        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(1.0, 1.0, 1.0)),
+    ];
+}
+</code></pre>
+<p>The top-left corner is red, top-right is green, bottom-right is blue and the bottom-left is white. We'll add a new array <code>INDICES</code> to represent the contents of the index buffer. It should match the indices in the illustration to draw the upper-right triangle and bottom-left triangle.</p>
+<pre><code class="language-rust noplaypen">const INDICES: &amp;[u16] = &amp;[0, 1, 2, 2, 3, 0];
+</code></pre>
+<p>It is possible to use either <code>u16</code> or <code>u32</code> for your index buffer depending on the number of entries in <code>VERTICES</code>. We can stick to <code>u16</code> for now because we're using less than 65,536 unique vertices.</p>
+<p>Just like the vertex data, the indices need to be uploaded into a <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a> for the GPU to be able to access them. Define two new <code>AppData</code> fields to hold the resources for the index buffer:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    vertex_buffer: vk::Buffer,
+    vertex_buffer_memory: vk::DeviceMemory,
+    index_buffer: vk::Buffer,
+    index_buffer_memory: vk::DeviceMemory,
+}
+</code></pre>
+<p>The <code>create_index_buffer</code> function that we'll add now is almost identical to <code>create_vertex_buffer</code>:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;
+        create_index_buffer(&amp;instance, &amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_index_buffer(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
+    let size = (size_of::&lt;u16&gt;() * INDICES.len()) as u64;
+
+    let (staging_buffer, staging_buffer_memory) = create_buffer(
+        instance,
+        device,
+        data,
+        size,
+        vk::BufferUsageFlags::TRANSFER_SRC,
+        vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+    )?;
+
+    let memory = device.map_memory(
+        staging_buffer_memory,
+        0,
+        size,
+        vk::MemoryMapFlags::empty(),
+    )?;
+
+    unsafe { memcpy(INDICES.as_ptr(), memory.cast(), INDICES.len()) };
+
+    device.unmap_memory(staging_buffer_memory);
+
+    let (index_buffer, index_buffer_memory) = create_buffer(
+        instance,
+        device,
+        data,
+        size,
+        vk::BufferUsageFlags::TRANSFER_DST | vk::BufferUsageFlags::INDEX_BUFFER,
+        vk::MemoryPropertyFlags::DEVICE_LOCAL,
+    )?;
+
+    data.index_buffer = index_buffer;
+    data.index_buffer_memory = index_buffer_memory;
+
+    copy_buffer(device, data, staging_buffer, index_buffer, size)?;
+
+    device.destroy_buffer(staging_buffer, None);
+    device.free_memory(staging_buffer_memory, None);
+
+    Ok(())
+}
+</code></pre>
+<p>There are only two notable differences. The <code>size</code> is now equal to the number of indices times the size of the index type, either <code>u16</code> or <code>u32</code>. The usage of the <code>index_buffer</code> should be <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.BufferUsageFlags.html#associatedconstant.INDEX_BUFFER"><code class="hljs">vk::BufferUsageFlags::INDEX_BUFFER</code></a> instead of <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.BufferUsageFlags.html#associatedconstant.VERTEX_BUFFER"><code class="hljs">vk::BufferUsageFlags::VERTEX_BUFFER</code></a>, which makes sense. Other than that, the process is exactly the same. We create a staging buffer to copy the contents of <code>INDICES</code> to and then copy it to the final device local index buffer.</p>
+<p>The index buffer should be cleaned up at the end of the program, just like the vertex buffer:</p>
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.destroy_swapchain();
+    self.device.destroy_buffer(self.data.index_buffer, None);
+    self.device.free_memory(self.data.index_buffer_memory, None);
+    self.device.destroy_buffer(self.data.vertex_buffer, None);
+    self.device.free_memory(self.data.vertex_buffer_memory, None);
+    // ...
+}
+</code></pre>
+<h2><a class="header" href="#using-an-index-buffer" id="using-an-index-buffer">Using an index buffer</a></h2>
+<p>Using an index buffer for drawing involves two changes to <code>create_command_buffers</code>. We first need to bind the index buffer, just like we did for the vertex buffer. The difference is that you can only have a single index buffer. It's unfortunately not possible to use different indices for each vertex attribute, so we do still have to completely duplicate vertex data even if just one attribute varies.</p>
+<pre><code class="language-rust noplaypen">device.cmd_bind_vertex_buffers(*command_buffer, 0, &amp;[data.vertex_buffer], &amp;[0]);
+device.cmd_bind_index_buffer(*command_buffer, data.index_buffer, 0, vk::IndexType::UINT16);
+</code></pre>
+<p>An index buffer is bound with <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_index_buffer"><code class="hljs">cmd_bind_index_buffer</code></a> which has the index buffer, a byte offset into it, and the type of index data as parameters. As mentioned before, the possible types are <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.IndexType.html#associatedconstant.UINT16"><code class="hljs">vk::IndexType::UINT16</code></a> and <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.IndexType.html#associatedconstant.UINT32"><code class="hljs">vk::IndexType::UINT32</code></a>.</p>
+<p>Just binding an index buffer doesn't change anything yet, we also need to change the drawing command to tell Vulkan to use the index buffer. Remove the <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw"><code class="hljs">cmd_draw</code></a> line and replace it with <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw_indexed"><code class="hljs">cmd_draw_indexed</code></a>:</p>
+<pre><code class="language-rust noplaypen">device.cmd_draw_indexed(*command_buffer, INDICES.len() as u32, 1, 0, 0, 0);
+</code></pre>
+<p>A call to this function is very similar to <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw"><code class="hljs">cmd_draw</code></a>. The first two parameters after the command buffer specify the number of indices and the number of instances. We're not using instancing, so just specify <code>1</code> instance. The number of indices represents the number of vertices that will be passed to the vertex buffer. The next parameter specifies an offset into the index buffer, using a value of <code>1</code> would cause the graphics card to start reading at the second index. The second to last parameter specifies an offset to add to the indices in the index buffer. The final parameter specifies an offset for instancing, which we're not using.</p>
+<p>Now run your program and you should see the following:</p>
+<p><img src="vertex/../images/indexed_rectangle.png" alt="" /></p>
+<p>You now know how to save memory by reusing vertices with index buffers. This will become especially important in a future chapter where we're going to load complex 3D models.</p>
+<p>The previous chapter already mentioned that you should allocate multiple resources like buffers from a single memory allocation, but in fact you should go a step further. <a href="https://developer.nvidia.com/vulkan-memory-management">Driver developers recommend</a> that you also store multiple buffers, like the vertex and index buffer, into a single <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a> and use offsets in commands like <a href="https://docs.rs/vulkanalia/0.2.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_vertex_buffers"><code class="hljs">cmd_bind_vertex_buffers</code></a>. The advantage is that your data is more cache friendly in that case, because it's closer together. It is even possible to reuse the same chunk of memory for multiple resources if they are not used during the same render operations, provided that their data is refreshed, of course. This is known as <em>aliasing</em> and some Vulkan functions have explicit flags to specify that you want to do this.</p>
 <h1><a class="header" href="#descriptor-layout-and-buffer" id="descriptor-layout-and-buffer">Descriptor layout and buffer</a></h1>
 <p>Coming soon™.</p>
 <h1><a class="header" href="#descriptor-pool-and-sets" id="descriptor-pool-and-sets">Descriptor pool and sets</a></h1>
