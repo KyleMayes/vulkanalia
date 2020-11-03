@@ -110,3 +110,8 @@ path = "src/15_hello_triangle.rs"
 
 name = "16_swapchain_recreation"
 path = "src/16_swapchain_recreation.rs"
+
+[[bin]]
+
+name = "17_vertex_input"
+path = "src/17_vertex_input.rs"
