@@ -1718,6 +1718,26 @@ impl Default for CopyBufferToImageInfo2KHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCopyCommandTransformInfoQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CopyCommandTransformInfoQCOM {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub transform: SurfaceTransformFlagsKHR,
+}
+
+impl Default for CopyCommandTransformInfoQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COPY_COMMAND_TRANSFORM_INFO_QCOM,
+            next: ptr::null(),
+            transform: SurfaceTransformFlagsKHR::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCopyDescriptorSet.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
