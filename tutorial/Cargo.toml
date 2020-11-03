@@ -115,3 +115,8 @@ path = "src/16_swapchain_recreation.rs"
 
 name = "17_vertex_input"
 path = "src/17_vertex_input.rs"
+
+[[bin]]
+
+name = "18_vertex_buffer"
+path = "src/18_vertex_buffer.rs"
