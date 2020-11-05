@@ -6468,9 +6468,21 @@ pub struct D3D12FenceSubmitInfoKHRBuilder<'b> {
 
 impl<'b> D3D12FenceSubmitInfoKHRBuilder<'b> {
     #[inline]
+    pub fn wait_semaphore_values_count(mut self, wait_semaphore_values_count: u32) -> Self {
+        self.value.wait_semaphore_values_count = wait_semaphore_values_count;
+        self
+    }
+
+    #[inline]
     pub fn wait_semaphore_values(mut self, wait_semaphore_values: &'b [u64]) -> Self {
         self.value.wait_semaphore_values_count = wait_semaphore_values.len() as u32;
         self.value.wait_semaphore_values = wait_semaphore_values.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn signal_semaphore_values_count(mut self, signal_semaphore_values_count: u32) -> Self {
+        self.value.signal_semaphore_values_count = signal_semaphore_values_count;
         self
     }
 
@@ -7903,6 +7915,12 @@ impl<'b> DescriptorSetLayoutBindingBuilder<'b> {
     #[inline]
     pub fn descriptor_type(mut self, descriptor_type: DescriptorType) -> Self {
         self.value.descriptor_type = descriptor_type;
+        self
+    }
+
+    #[inline]
+    pub fn descriptor_count(mut self, descriptor_count: u32) -> Self {
+        self.value.descriptor_count = descriptor_count;
         self
     }
 
@@ -33903,6 +33921,12 @@ impl<'b> PipelineCoverageModulationStateCreateInfoNVBuilder<'b> {
     }
 
     #[inline]
+    pub fn coverage_modulation_table_count(mut self, coverage_modulation_table_count: u32) -> Self {
+        self.value.coverage_modulation_table_count = coverage_modulation_table_count;
+        self
+    }
+
+    #[inline]
     pub fn coverage_modulation_table(mut self, coverage_modulation_table: &'b [f32]) -> Self {
         self.value.coverage_modulation_table_count = coverage_modulation_table.len() as u32;
         self.value.coverage_modulation_table = coverage_modulation_table.as_ptr();
@@ -34572,6 +34596,12 @@ impl<'b> PipelineExecutableInternalRepresentationKHRBuilder<'b> {
     #[inline]
     pub fn is_text(mut self, is_text: bool) -> Self {
         self.value.is_text = is_text as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn data_size(mut self, data_size: usize) -> Self {
+        self.value.data_size = data_size;
         self
     }
 
@@ -36560,9 +36590,21 @@ impl<'b> PipelineViewportStateCreateInfoBuilder<'b> {
     }
 
     #[inline]
+    pub fn viewport_count(mut self, viewport_count: u32) -> Self {
+        self.value.viewport_count = viewport_count;
+        self
+    }
+
+    #[inline]
     pub fn viewports(mut self, viewports: &'b [impl Cast<Target = Viewport>]) -> Self {
         self.value.viewport_count = viewports.len() as u32;
         self.value.viewports = viewports.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn scissor_count(mut self, scissor_count: u32) -> Self {
+        self.value.scissor_count = scissor_count;
         self
     }
 
@@ -36698,6 +36740,12 @@ impl<'b> PipelineViewportWScalingStateCreateInfoNVBuilder<'b> {
     #[inline]
     pub fn viewport_w_scaling_enable(mut self, viewport_w_scaling_enable: bool) -> Self {
         self.value.viewport_w_scaling_enable = viewport_w_scaling_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn viewport_count(mut self, viewport_count: u32) -> Self {
+        self.value.viewport_count = viewport_count;
         self
     }
 
@@ -36849,6 +36897,12 @@ impl<'b> PresentInfoKHRBuilder<'b> {
     }
 
     #[inline]
+    pub fn swapchain_count(mut self, swapchain_count: u32) -> Self {
+        self.value.swapchain_count = swapchain_count;
+        self
+    }
+
+    #[inline]
     pub fn swapchains(mut self, swapchains: &'b [SwapchainKHR]) -> Self {
         self.value.swapchain_count = swapchains.len() as u32;
         self.value.swapchains = swapchains.as_ptr();
@@ -36923,6 +36977,12 @@ pub struct PresentRegionKHRBuilder<'b> {
 
 impl<'b> PresentRegionKHRBuilder<'b> {
     #[inline]
+    pub fn rectangle_count(mut self, rectangle_count: u32) -> Self {
+        self.value.rectangle_count = rectangle_count;
+        self
+    }
+
+    #[inline]
     pub fn rectangles(mut self, rectangles: &'b [impl Cast<Target = RectLayerKHR>]) -> Self {
         self.value.rectangle_count = rectangles.len() as u32;
         self.value.rectangles = rectangles.as_ptr().cast();
@@ -36982,6 +37042,12 @@ pub struct PresentRegionsKHRBuilder<'b> {
 }
 
 impl<'b> PresentRegionsKHRBuilder<'b> {
+    #[inline]
+    pub fn swapchain_count(mut self, swapchain_count: u32) -> Self {
+        self.value.swapchain_count = swapchain_count;
+        self
+    }
+
     #[inline]
     pub fn regions(mut self, regions: &'b [impl Cast<Target = PresentRegionKHR>]) -> Self {
         self.value.swapchain_count = regions.len() as u32;
@@ -37106,6 +37172,12 @@ pub struct PresentTimesInfoGOOGLEBuilder<'b> {
 }
 
 impl<'b> PresentTimesInfoGOOGLEBuilder<'b> {
+    #[inline]
+    pub fn swapchain_count(mut self, swapchain_count: u32) -> Self {
+        self.value.swapchain_count = swapchain_count;
+        self
+    }
+
     #[inline]
     pub fn times(mut self, times: &'b [impl Cast<Target = PresentTimeGOOGLE>]) -> Self {
         self.value.swapchain_count = times.len() as u32;
@@ -42238,6 +42310,12 @@ impl<'b> SubpassDescriptionBuilder<'b> {
     }
 
     #[inline]
+    pub fn color_attachment_count(mut self, color_attachment_count: u32) -> Self {
+        self.value.color_attachment_count = color_attachment_count;
+        self
+    }
+
+    #[inline]
     pub fn color_attachments(
         mut self,
         color_attachments: &'b [impl Cast<Target = AttachmentReference>],
@@ -42367,6 +42445,12 @@ impl<'b> SubpassDescription2Builder<'b> {
     ) -> Self {
         self.value.input_attachment_count = input_attachments.len() as u32;
         self.value.input_attachments = input_attachments.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn color_attachment_count(mut self, color_attachment_count: u32) -> Self {
+        self.value.color_attachment_count = color_attachment_count;
         self
     }
 
@@ -43812,9 +43896,21 @@ pub struct TimelineSemaphoreSubmitInfoBuilder<'b> {
 
 impl<'b> TimelineSemaphoreSubmitInfoBuilder<'b> {
     #[inline]
+    pub fn wait_semaphore_value_count(mut self, wait_semaphore_value_count: u32) -> Self {
+        self.value.wait_semaphore_value_count = wait_semaphore_value_count;
+        self
+    }
+
+    #[inline]
     pub fn wait_semaphore_values(mut self, wait_semaphore_values: &'b [u64]) -> Self {
         self.value.wait_semaphore_value_count = wait_semaphore_values.len() as u32;
         self.value.wait_semaphore_values = wait_semaphore_values.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn signal_semaphore_value_count(mut self, signal_semaphore_value_count: u32) -> Self {
+        self.value.signal_semaphore_value_count = signal_semaphore_value_count;
         self
     }
 

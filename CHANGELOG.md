@@ -3,6 +3,9 @@
 ### Bindings Updates
 - [November 1, 2020 Vulkan 1.2.159](https://github.com/KhronosGroup/Vulkan-Docs/commit/9adbc1846ddad202a0584f5c03a1916cf9801179)
 
+### Added
+- Added builder methods for array length fields associated with optional array fields
+
 ## [0.2.0] - 2020-10-30
 
 ### Bindings Updates

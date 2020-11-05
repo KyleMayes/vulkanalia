@@ -284,6 +284,7 @@ data class Member(
     val values: Identifier?,
     val len: List<Identifier>?,
     val altlen: String,
+    val optional: Boolean,
 ) : Entity
 
 private fun extractMember(e: Element) = Member(
@@ -292,6 +293,7 @@ private fun extractMember(e: Element) = Member(
     values = e.getAttributeText("values")?.intern(),
     len = e.getAttributeText("len")?.split(",")?.map { it.intern() },
     altlen = e.getAttribute("altlen"),
+    optional = e.getAttributeText("optional") == "true",
 )
 
 // ===============================================

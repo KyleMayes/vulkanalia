@@ -151,24 +151,29 @@ ${extends.sorted().joinToString("\n") { "unsafe impl Extends${struct.name} for $
 
 /** Generates Rust builder methods for a Vulkan struct. */
 private fun Registry.generateMethods(struct: Structure): String {
-    // Determine the length fields which will be set by array builder methods
-    // and therefore do not need builder methods of their own.
     val members = struct.members.associateBy { it.name }
-    val lengthMembers = mutableMapOf<Identifier, Member>()
+    val arraysByLength = mutableMapOf<Identifier, Member>()
     for (member in members.values) {
         val length = members[member.len?.get(0)]
         if (length != null) {
-            lengthMembers[length.name] = length
+            arraysByLength[length.name] = member
         }
+    }
+
+    // Filter out the fields that do not require builder methods since they will
+    // be set by other builder methods (i.e., array length fields for
+    // non-optional array fields).
+    val requireBuilders = members.values.filter {
+        arraysByLength[it.name].let { a -> a?.optional ?: true }
     }
 
     // Generate the builder methods.
     val methods = ArrayList<String>()
-    for (member in members.values.filter { !lengthMembers.containsKey(it.name) }) {
+    for (member in requireBuilders) {
         val len = member.len?.get(0)
         if (len != null && len.value != "null-terminated") {
-            val lengthMember = lengthMembers[len]
-            if (lengthMember != null) {
+            if (arraysByLength.containsKey(len)) {
+                val lengthMember = members[len] ?: error("Missing length member.")
                 val length = Pair(lengthMember.name.value, lengthMember.type.generate())
                 methods.add(generateArrayMethod(member, length))
             } else {
