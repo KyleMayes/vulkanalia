@@ -23,7 +23,7 @@ nalgebra-glm = "0.3"
 png = "0.16"
 pretty_env_logger = "0.4"
 tobj = { version = "2", features = ["log"] }
-vulkanalia = { version = "=0.2.0", features = ["libloading_", "winit_"] }
+vulkanalia = { version = "=0.2.1", features = ["libloading_", "winit_"] }
 winit = "0.23"
 
 [[bin]]
