@@ -26,7 +26,7 @@ fn create_descriptor_pool(device: &Device, data: &mut AppData) -> Result<()> {
 We first need to describe which descriptor types our descriptor sets are going to contain and how many of them, using `vk::DescriptorPoolSize` structures.
 
 ```rust,noplaypen
-let size = vk::DescriptorPoolSize::builder()
+let ubo_size = vk::DescriptorPoolSize::builder()
     .type_(vk::DescriptorType::UNIFORM_BUFFER)
     .descriptor_count(data.swapchain_images.len() as u32);
 ```
@@ -34,7 +34,7 @@ let size = vk::DescriptorPoolSize::builder()
 We will allocate one of these descriptors for every frame. This pool size structure is referenced by the main `vk::DescriptorPoolCreateInfo` along with the maximum number of descriptor sets that may be allocated:
 
 ```rust,noplaypen
-let pool_sizes = &[size];
+let pool_sizes = &[ubo_size];
 let info = vk::DescriptorPoolCreateInfo::builder()
     .pool_sizes(pool_sizes)
     .max_sets(data.swapchain_images.len() as u32);
@@ -158,7 +158,7 @@ If you're overwriting the whole buffer, like we are in this case, then it is is 
 
 ```rust,noplaypen
 let buffer_info = &[info];
-let write = vk::WriteDescriptorSet::builder()
+let ubo_write = vk::WriteDescriptorSet::builder()
     .dst_set(data.descriptor_sets[i])
     .dst_binding(0)
     .dst_array_element(0)
@@ -180,7 +180,7 @@ We need to specify the type of descriptor again. It's possible to update multipl
 The last field references an array with `descriptor_count` structs that actually configure the descriptors. It depends on the type of descriptor which one of the three you actually need to use. The `buffer_info` field is used for descriptors that refer to buffer data, `image_info` is used for descriptors that refer to image data, and `texel_buffer_view` is used for descriptors that refer to buffer views. Our descriptor is based on buffers, so we're using `buffer_info`.
 
 ```rust,noplaypen
-device.update_descriptor_sets(&[write], &[] as &[vk::CopyDescriptorSet]);
+device.update_descriptor_sets(&[ubo_write], &[] as &[vk::CopyDescriptorSet]);
 ```
 
 The updates are applied using `update_descriptor_sets`. It accepts two kinds of arrays as parameters: an array of `vk::WriteDescriptorSet` and an array of `vk::CopyDescriptorSet`. The latter can be used to copy descriptors to each other, as its name implies.

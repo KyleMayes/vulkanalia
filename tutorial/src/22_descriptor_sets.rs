@@ -708,13 +708,13 @@ fn create_render_pass(instance: &Instance, device: &Device, data: &mut AppData) 
 }
 
 fn create_descriptor_set_layout(device: &Device, data: &mut AppData) -> Result<()> {
-    let binding = vk::DescriptorSetLayoutBinding::builder()
+    let ubo_binding = vk::DescriptorSetLayoutBinding::builder()
         .binding(0)
         .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
         .descriptor_count(1)
         .stage_flags(vk::ShaderStageFlags::VERTEX);
 
-    let bindings = &[binding];
+    let bindings = &[ubo_binding];
     let info = vk::DescriptorSetLayoutCreateInfo::builder().bindings(bindings);
 
     data.descriptor_set_layout = device.create_descriptor_set_layout(&info, None)?;
@@ -1017,11 +1017,11 @@ fn create_uniform_buffers(instance: &Instance, device: &Device, data: &mut AppDa
 //================================================
 
 fn create_descriptor_pool(device: &Device, data: &mut AppData) -> Result<()> {
-    let size = vk::DescriptorPoolSize::builder()
+    let ubo_size = vk::DescriptorPoolSize::builder()
         .type_(vk::DescriptorType::UNIFORM_BUFFER)
         .descriptor_count(data.swapchain_images.len() as u32);
 
-    let pool_sizes = &[size];
+    let pool_sizes = &[ubo_size];
     let info = vk::DescriptorPoolCreateInfo::builder()
         .pool_sizes(pool_sizes)
         .max_sets(data.swapchain_images.len() as u32);
@@ -1050,14 +1050,14 @@ fn create_descriptor_sets(device: &Device, data: &mut AppData) -> Result<()> {
             .range(size_of::<UniformBufferObject>() as u64);
 
         let buffer_info = &[info];
-        let write = vk::WriteDescriptorSet::builder()
+        let ubo_write = vk::WriteDescriptorSet::builder()
             .dst_set(data.descriptor_sets[i])
             .dst_binding(0)
             .dst_array_element(0)
             .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
             .buffer_info(buffer_info);
 
-        device.update_descriptor_sets(&[write], &[] as &[vk::CopyDescriptorSet]);
+        device.update_descriptor_sets(&[ubo_write], &[] as &[vk::CopyDescriptorSet]);
     }
 
     Ok(())
