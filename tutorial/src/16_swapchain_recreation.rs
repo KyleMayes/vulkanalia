@@ -805,7 +805,7 @@ fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
 
     // Commands
 
-    for (framebuffer, command_buffer) in data.framebuffers.iter().zip(data.command_buffers.iter()) {
+    for (i, command_buffer) in data.command_buffers.iter().enumerate() {
         let info = vk::CommandBufferBeginInfo::builder();
 
         device.begin_command_buffer(*command_buffer, &info)?;
@@ -823,7 +823,7 @@ fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
         let clear_values = &[clear_value];
         let info = vk::RenderPassBeginInfo::builder()
             .render_pass(data.render_pass)
-            .framebuffer(*framebuffer)
+            .framebuffer(data.framebuffers[i])
             .render_area(render_area)
             .clear_values(clear_values);
 

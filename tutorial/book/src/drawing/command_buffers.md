@@ -120,7 +120,7 @@ We won't make use of the secondary command buffer functionality here, but you ca
 We begin recording a command buffer by calling `begin_command_buffer` with a small `vk::CommandBufferBeginInfo` structure as argument that specifies some details about the usage of this specific command buffer.
 
 ```rust,noplaypen
-for (framebuffer, command_buffer) in data.framebuffers.iter().zip(data.command_buffers.iter()) {
+for (i, command_buffer) in data.command_buffers.iter().enumerate() {
     let inheritance = vk::CommandBufferInheritanceInfo::builder();
 
     let info = vk::CommandBufferBeginInfo::builder()
@@ -171,7 +171,7 @@ Drawing starts by beginning the render pass with `cmd_begin_render_pass`. The re
 let clear_values = &[clear_value];
 let info = vk::RenderPassBeginInfo::builder()
     .render_pass(data.render_pass)
-    .framebuffer(*framebuffer)
+    .framebuffer(data.framebuffers[i])
     .render_area(render_area)
     .clear_values(clear_values);
 ```
