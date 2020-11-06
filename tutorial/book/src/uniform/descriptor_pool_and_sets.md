@@ -212,7 +212,7 @@ If you run your program now, then you'll notice that unfortunately nothing is vi
 
 Run your program again and you should now see the following:
 
-![](/images/spinning_quad.png)
+![](../images/spinning_quad.png)
 
 The rectangle has changed into a square because the projection matrix now corrects for aspect ratio. The `App::update_uniform_buffer` method takes care of screen resizing, so we don't need to recreate the descriptor set in `App::recreate_swapchain`.
 

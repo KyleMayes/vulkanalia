@@ -250,7 +250,7 @@ The `cmd_bind_vertex_buffers` command is used to bind vertex buffers to bindings
 
 Now run the program and you should see the familiar triangle again:
 
-![](/images/triangle.png)
+![](../images/triangle.png)
 
 Try changing the color of the top vertex to white by modifying the `VERTICES` list:
 
@@ -266,6 +266,6 @@ lazy_static! {
 
 Run the program again and you should see the following:
 
-![](/images/triangle_white.png)
+![](../images/triangle_white.png)
 
 In the next chapter we'll look at a different way to copy vertex data to a vertex buffer that results in better performance, but takes some more work.
