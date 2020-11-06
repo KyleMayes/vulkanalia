@@ -130,3 +130,8 @@ path = "src/19_staging_buffer.rs"
 
 name = "20_index_buffer"
 path = "src/20_index_buffer.rs"
+
+[[bin]]
+
+name = "21_descriptor_layout"
+path = "src/21_descriptor_layout.rs"
