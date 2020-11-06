@@ -153,7 +153,211 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#descriptor-pool-and-sets" id="descriptor-pool-and-sets">Descriptor pool and sets</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/22_descriptor_sets.rs">main.rs</a></p>
+<p>The descriptor layout from the previous chapter describes the type of descriptors that can be bound. In this chapter we're going to create a descriptor set for each <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a> resource to bind it to the uniform buffer descriptor.</p>
+<h2><a class="header" href="#descriptor-pool" id="descriptor-pool">Descriptor pool</a></h2>
+<p>Descriptor sets can't be created directly, they must be allocated from a pool like command buffers. The equivalent for descriptor sets is unsurprisingly called a <em>descriptor pool</em>. We'll write a new function <code>create_descriptor_pool</code> to set it up.</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_uniform_buffers(&amp;instance, &amp;device, &amp;mut data)?;
+        create_descriptor_pool(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_descriptor_pool(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>We first need to describe which descriptor types our descriptor sets are going to contain and how many of them, using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorPoolSize.html"><code class="hljs">vk::DescriptorPoolSize</code></a> structures.</p>
+<pre><code class="language-rust noplaypen">let size = vk::DescriptorPoolSize::builder()
+    .type_(vk::DescriptorType::UNIFORM_BUFFER)
+    .descriptor_count(data.swapchain_images.len() as u32);
+</code></pre>
+<p>We will allocate one of these descriptors for every frame. This pool size structure is referenced by the main <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorPoolCreateInfo.html"><code class="hljs">vk::DescriptorPoolCreateInfo</code></a> along with the maximum number of descriptor sets that may be allocated:</p>
+<pre><code class="language-rust noplaypen">let pool_sizes = &amp;[size];
+let info = vk::DescriptorPoolCreateInfo::builder()
+    .pool_sizes(pool_sizes)
+    .max_sets(data.swapchain_images.len() as u32);
+</code></pre>
+<p>The structure has an optional flag similar to command pools that determines if individual descriptor sets can be freed or not: <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorPoolCreateFlags.html#associatedconstant.FREE_DESCRIPTOR_SET"><code class="hljs">vk::DescriptorPoolCreateFlags::FREE_DESCRIPTOR_SET</code></a>. We're not going to touch the descriptor set after creating it, so we don't need this flag.</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    uniform_buffers: Vec&lt;vk::Buffer&gt;,
+    uniform_buffers_memory: Vec&lt;vk::DeviceMemory&gt;,
+    descriptor_pool: vk::DescriptorPool,
+    // ...
+}
+</code></pre>
+<p>Add a new <code>AppData</code> field to store the handle of the descriptor pool so you can call <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_descriptor_pool"><code class="hljs">create_descriptor_pool</code></a> to create it.</p>
+<pre><code class="language-rust noplaypen">data.descriptor_pool = device.create_descriptor_pool(&amp;info, None)?;
+</code></pre>
+<p>The descriptor pool should be destroyed when the swap chain is recreated because it depends on the number of images:</p>
+<pre><code class="language-rust noplaypen">fn destroy_swapchain(&amp;mut self) {
+    self.device.destroy_descriptor_pool(self.data.descriptor_pool, None);
+    // ...
+}
+</code></pre>
+<p>And recreated in <code>App::recreate_swapchain</code>:</p>
+<pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    // ...
+    create_uniform_buffers(&amp;self.instance, &amp;self.device, &amp;mut self.data)?;
+    create_descriptor_pool(&amp;self.device, &amp;mut self.data)?;
+    // ...
+}
+</code></pre>
+<h2><a class="header" href="#descriptor-set" id="descriptor-set">Descriptor set</a></h2>
+<p>We can now allocate the descriptor sets themselves. Add a <code>create_descriptor_sets</code> function for that purpose:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_descriptor_pool(&amp;device, &amp;mut data)?;
+        create_descriptor_sets(&amp;device, &amp;mut data)?;
+        // ...
+    }
+
+    fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+        // ..
+        create_descriptor_pool(&amp;self.device, &amp;mut self.data)?;
+        create_descriptor_sets(&amp;self.device, &amp;mut self.data)?;
+        // ..
+    }
+}
+
+
+fn create_descriptor_sets(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>A descriptor set allocation is described with a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorSetAllocateInfo.html"><code class="hljs">vk::DescriptorSetAllocateInfo</code></a> struct. You need to specify the descriptor pool to allocate from, the number of descriptor sets to allocate, and the descriptor layout to base them on:</p>
+<pre><code class="language-rust noplaypen">let layouts = vec![data.descriptor_set_layout; data.swapchain_images.len()];
+let info = vk::DescriptorSetAllocateInfo::builder()
+    .descriptor_pool(data.descriptor_pool)
+    .set_layouts(&amp;layouts);
+</code></pre>
+<p>In our case we will create one descriptor set for each swap chain image, all with the same layout. Unfortunately we do need all the copies of the layout because the next function expects an array matching the number of sets.</p>
+<p>Add an <code>AppData</code> field to hold the descriptor set handles:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    descriptor_pool: vk::DescriptorPool,
+    descriptor_sets: Vec&lt;vk::DescriptorSet&gt;,
+    // ...
+}
+</code></pre>
+<p>And then allocate them with <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_descriptor_sets"><code class="hljs">allocate_descriptor_sets</code></a>:</p>
+<pre><code class="language-rust noplaypen">data.descriptor_sets = device.allocate_descriptor_sets(&amp;info)?;
+</code></pre>
+<p>You don't need to explicitly clean up descriptor sets, because they will be automatically freed when the descriptor pool is destroyed. The call to <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_descriptor_sets"><code class="hljs">allocate_descriptor_sets</code></a> will allocate descriptor sets, each with one uniform buffer descriptor.</p>
+<p>The descriptor sets have been allocated now, but the descriptors within still need to be configured. We'll now add a loop to populate every descriptor:</p>
+<pre><code class="language-rust noplaypen">for i in 0..data.swapchain_images.len() {
+
+}
+</code></pre>
+<p>Descriptors that refer to buffers, like our uniform buffer descriptor, are configured with a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorBufferInfo.html"><code class="hljs">vk::DescriptorBufferInfo</code></a> struct. This structure specifies the buffer and the region within it that contains the data for the descriptor.</p>
+<pre><code class="language-rust noplaypen">for i in 0..data.swapchain_images.len() {
+    let info = vk::DescriptorBufferInfo::builder()
+        .buffer(data.uniform_buffers[i])
+        .offset(0)
+        .range(size_of::&lt;UniformBufferObject&gt;() as u64);
+}
+</code></pre>
+<p>If you're overwriting the whole buffer, like we are in this case, then it is is also possible to use the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/constant.WHOLE_SIZE.html"><code class="hljs">vk::WHOLE_SIZE</code></a> value for the range. The configuration of descriptors is updated using the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.update_descriptor_sets"><code class="hljs">update_descriptor_sets</code></a> function, which takes an array of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.WriteDescriptorSet.html"><code class="hljs">vk::WriteDescriptorSet</code></a> structs as parameter.</p>
+<pre><code class="language-rust noplaypen">let buffer_info = &amp;[info];
+let write = vk::WriteDescriptorSet::builder()
+    .dst_set(data.descriptor_sets[i])
+    .dst_binding(0)
+    .dst_array_element(0)
+    // continued...
+</code></pre>
+<p>The first two fields specify the descriptor set to update and the binding. We gave our uniform buffer binding index <code>0</code>. Remember that descriptors can be arrays, so we also need to specify the first index in the array that we want to update. We're not using an array, so the index is simply <code>0</code>.</p>
+<pre><code class="language-rust noplaypen">    .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
+</code></pre>
+<p>We need to specify the type of descriptor again. It's possible to update multiple descriptors at once in an array, starting at index <code>dst_array_element</code>.</p>
+<pre><code class="language-rust noplaypen">    .buffer_info(buffer_info);
+</code></pre>
+<p>The last field references an array with <code>descriptor_count</code> structs that actually configure the descriptors. It depends on the type of descriptor which one of the three you actually need to use. The <code>buffer_info</code> field is used for descriptors that refer to buffer data, <code>image_info</code> is used for descriptors that refer to image data, and <code>texel_buffer_view</code> is used for descriptors that refer to buffer views. Our descriptor is based on buffers, so we're using <code>buffer_info</code>.</p>
+<pre><code class="language-rust noplaypen">device.update_descriptor_sets(&amp;[write], &amp;[] as &amp;[vk::CopyDescriptorSet]);
+</code></pre>
+<p>The updates are applied using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.update_descriptor_sets"><code class="hljs">update_descriptor_sets</code></a>. It accepts two kinds of arrays as parameters: an array of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.WriteDescriptorSet.html"><code class="hljs">vk::WriteDescriptorSet</code></a> and an array of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CopyDescriptorSet.html"><code class="hljs">vk::CopyDescriptorSet</code></a>. The latter can be used to copy descriptors to each other, as its name implies.</p>
+<h2><a class="header" href="#using-descriptor-sets" id="using-descriptor-sets">Using descriptor sets</a></h2>
+<p>We now need to update the <code>create_command_buffers</code> function to actually bind the right descriptor set for each swap chain image to the descriptors in the shader with <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_descriptor_sets"><code class="hljs">cmd_bind_descriptor_sets</code></a>. This needs to be done before the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw_indexed"><code class="hljs">cmd_draw_indexed</code></a> call:</p>
+<pre><code class="language-rust noplaypen">device.cmd_bind_descriptor_sets(
+    *command_buffer,
+    vk::PipelineBindPoint::GRAPHICS,
+    data.pipeline_layout,
+    0,
+    &amp;[data.descriptor_sets[i]],
+    &amp;[],
+);
+device.cmd_draw_indexed(*command_buffer, INDICES.len() as u32, 1, 0, 0, 0);
+</code></pre>
+<p>Unlike vertex and index buffers, descriptor sets are not unique to graphics pipelines. Therefore we need to specify if we want to bind descriptor sets to the graphics or compute pipeline. The next parameter is the layout that the descriptors are based on. The next three parameters specify the index of the first descriptor set, the number of sets to bind, and the array of sets to bind. We'll get back to this in a moment. The last two parameters specify an array of offsets that are used for dynamic descriptors. We'll look at these in a future chapter.</p>
+<p>If you run your program now, then you'll notice that unfortunately nothing is visible. The problem is that because of the Y-flip we did in the projection matrix, the vertices are now being drawn in counter-clockwise order instead of clockwise order. This causes backface culling to kick in and prevents any geometry from being drawn. Go to the <code>create_pipeline</code> function and modify the <code>front_face</code> in <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineRasterizationStateCreateInfo.html"><code class="hljs">vk::PipelineRasterizationStateCreateInfo</code></a> to correct this:</p>
+<pre><code class="language-rust noplaypen">    .cull_mode(vk::CullModeFlags::BACK)
+    .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
+</code></pre>
+<p>Run your program again and you should now see the following:</p>
+<p><img src="/images/spinning_quad.png" alt="" /></p>
+<p>The rectangle has changed into a square because the projection matrix now corrects for aspect ratio. The <code>App::update_uniform_buffer</code> method takes care of screen resizing, so we don't need to recreate the descriptor set in <code>App::recreate_swapchain</code>.</p>
+<h2><a class="header" href="#alignment-requirements" id="alignment-requirements">Alignment requirements</a></h2>
+<p>One thing we've glossed over so far is how exactly the data in the C++ structure should match with the uniform definition in the shader. It seems obvious enough to simply use the same types in both:</p>
+<pre><code class="language-rust noplaypen">#[repr(C)]
+struct UniformBufferObject {
+    model: glm::Mat4,
+    view: glm::Mat4,
+    proj: glm::Mat4,
+}
+</code></pre>
+<pre><code class="language-glsl">layout(binding = 0) uniform UniformBufferObject {
+    mat4 model;
+    mat4 view;
+    mat4 proj;
+} ubo;
+</code></pre>
+<p>However, that's not all there is to it. For example, try modifying the struct and shader to look like this:</p>
+<pre><code class="language-rust noplaypen">#[repr(C)]
+struct UniformBufferObject {
+    foo: glm::Vec2,
+    model: glm::Mat4,
+    view: glm::Mat4,
+    proj: glm::Mat4,
+}
+</code></pre>
+<pre><code class="language-glsl">layout(binding = 0) uniform UniformBufferObject {
+    vec2 foo;
+    mat4 model;
+    mat4 view;
+    mat4 proj;
+} ubo;
+</code></pre>
+<p>Recompile your shader and your program and run it and you'll find that the colorful square you worked so far has disappeared! That's because we haven't taken into account the <em>alignment requirements</em>.</p>
+<p>Vulkan expects the data in your structure to be aligned in memory in a specific way, for example:</p>
+<ul>
+<li>Scalars have to be aligned by N (= 4 bytes given 32 bit floats).</li>
+<li>A <code>vec2</code> must be aligned by 2N (= 8 bytes)</li>
+<li>A <code>vec3</code> or <code>vec4</code> must be aligned by 4N (= 16 bytes)</li>
+<li>A nested structure must be aligned by the base alignment of its members rounded up to a multiple of 16.</li>
+<li>A <code>mat4</code> matrix must have the same alignment as a <code>vec4</code>.</li>
+</ul>
+<p>You can find the full list of alignment requirements in <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/chap14.html#interfaces-resources-layout">the specification</a>.</p>
+<p>Our original shader with just three <code>mat4</code> fields already met the alignment requirements. As each <code>mat4</code> is 4 x 4 x 4 = 64 bytes in size, <code>model</code> has an offset of <code>0</code>, <code>view</code> has an offset of 64 and <code>proj</code> has an offset of 128. All of these are multiples of 16 and that's why it worked fine.</p>
+<p>The new structure starts with a <code>vec2</code> which is only 8 bytes in size and therefore throws off all of the offsets. Now <code>model</code> has an offset of <code>8</code>, <code>view</code> an offset of <code>72</code> and <code>proj</code> an offset of <code>136</code>, none of which are multiples of 16. Unfortunately Rust does not have great support for controlling the alignment of fields in structs, but we can use some manual padding to fix the alignment issues:</p>
+<pre><code class="language-rust noplaypen">#[repr(C)]
+struct UniformBufferObject {
+    foo: glm::Vec2,
+    _padding: [u8; 8],
+    model: glm::Mat4,
+    view: glm::Mat4,
+    proj: glm::Mat4,
+}
+</code></pre>
+<p>If you now compile and run your program again you should see that the shader correctly receives its matrix values once again.</p>
+<h2><a class="header" href="#multiple-descriptor-sets" id="multiple-descriptor-sets">Multiple descriptor sets</a></h2>
+<p>As some of the structures and function calls hinted at, it is actually possible to bind multiple descriptor sets simultaneously. You need to specify a descriptor layout for each descriptor set when creating the pipeline layout. Shaders can then reference specific descriptor sets like this:</p>
+<pre><code class="language-glsl">layout(set = 0, binding = 0) uniform UniformBufferObject { ... }
+</code></pre>
+<p>You can use this feature to put descriptors that vary per-object and descriptors that are shared into separate descriptor sets. In that case you avoid rebinding most of the descriptors across draw calls which is potentially more efficient.</p>
 
                     </main>
 

@@ -153,7 +153,276 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#descriptor-layout-and-buffer" id="descriptor-layout-and-buffer">Descriptor layout and buffer</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/21_descriptor_layout.rs">main.rs</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/21/shader.vert">shader.vert</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/21/shader.frag">shader.frag</a></p>
+<p>We're now able to pass arbitrary attributes to the vertex shader for each vertex, but what about global variables? We're going to move on to 3D graphics from this chapter on and that requires a model-view-projection matrix. We could include it as vertex data, but that's a waste of memory and it would require us to update the vertex buffer whenever the transformation changes. The transformation could easily change every single frame.</p>
+<p>The right way to tackle this in Vulkan is to use <em>resource descriptors</em>. A descriptor is a way for shaders to freely access resources like buffers and images. We're going to set up a buffer that contains the transformation matrices and have the vertex shader access them through a descriptor. Usage of descriptors consists of three parts:</p>
+<ul>
+<li>Specify a descriptor layout during pipeline creation</li>
+<li>Allocate a descriptor set from a descriptor pool</li>
+<li>Bind the descriptor set during rendering</li>
+</ul>
+<p>The <em>descriptor layout</em> specifies the types of resources that are going to be accessed by the pipeline, just like a render pass specifies the types of attachments that will be accessed. A <em>descriptor set</em> specifies the actual buffer or image resources that will be bound to the descriptors, just like a framebuffer specifies the actual image views to bind to render pass attachments. The descriptor set is then bound for the drawing commands just like the vertex buffers and framebuffer.</p>
+<p>There are many types of descriptors, but in this chapter we'll work with uniform buffer objects (UBO). We'll look at other types of descriptors in future chapters, but the basic process is the same. Let's say we have the data we want the vertex shader to have in a struct like this:</p>
+<pre><code class="language-rust noplaypen">#[repr(C)]
+struct UniformBufferObject {
+    model: glm::Mat4,
+    view: glm::Mat4,
+    proj: glm::Mat4,
+}
+</code></pre>
+<p>Then we can copy the data to a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a> and access it through a uniform buffer object descriptor from the vertex shader like this:</p>
+<pre><code class="language-glsl">layout(binding = 0) uniform UniformBufferObject {
+    mat4 model;
+    mat4 view;
+    mat4 proj;
+} ubo;
+
+// ...
+
+void main() {
+    gl_Position = ubo.proj * ubo.view * ubo.model * vec4(inPosition, 0.0, 1.0);
+    fragColor = inColor;
+}
+</code></pre>
+<p>We're going to update the model, view and projection matrices every frame to make the rectangle from the previous chapter spin around in 3D.</p>
+<h2><a class="header" href="#vertex-shader" id="vertex-shader">Vertex shader</a></h2>
+<p>Modify the vertex shader to include the uniform buffer object like it was specified above. I will assume that you are familiar with MVP transformations. If you're not, see <a href="https://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/">the resource</a> mentioned in the first chapter.</p>
+<pre><code class="language-glsl">#version 450
+
+layout(binding = 0) uniform UniformBufferObject {
+    mat4 model;
+    mat4 view;
+    mat4 proj;
+} ubo;
+
+layout(location = 0) in vec2 inPosition;
+layout(location = 1) in vec3 inColor;
+
+layout(location = 0) out vec3 fragColor;
+
+void main() {
+    gl_Position = ubo.proj * ubo.view * ubo.model * vec4(inPosition, 0.0, 1.0);
+    fragColor = inColor;
+}
+</code></pre>
+<p>Note that the order of the <code>uniform</code>, <code>in</code> and <code>out</code> declarations doesn't matter. The <code>binding</code> directive is similar to the <code>location</code> directive for attributes. We're going to reference this binding in the descriptor layout. The line with <code>gl_Position</code> is changed to use the transformations to compute the final position in clip coordinates. Unlike the 2D triangles, the last component of the clip coordinates may not be <code>1</code>, which will result in a division when converted to the final normalized device coordinates on the screen. This is used in perspective projection as the <em>perspective division</em> and is essential for making closer objects look larger than objects that are further away.</p>
+<h2><a class="header" href="#descriptor-set-layout" id="descriptor-set-layout">Descriptor set layout</a></h2>
+<p>The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader.</p>
+<pre><code class="language-rust noplaypen">#[repr(C)]
+struct UniformBufferObject {
+    model: glm::Mat4,
+    view: glm::Mat4,
+    proj: glm::Mat4,
+}
+</code></pre>
+<p>We can exactly match the definition in the shader using data types in GLM. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a <code>UniformBufferObject</code> to a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>.</p>
+<p>We need to provide details about every descriptor binding used in the shaders for pipeline creation, just like we had to do for every vertex attribute and its <code>location</code> index. We'll set up a new function to define all of this information called <code>create_descriptor_set_layout</code>. It should be called right before pipeline creation, because we're going to need it there.</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_descriptor_set_layout(&amp;device, &amp;mut data)?;
+        create_pipeline(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+
+fn create_descriptor_set_layout(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>Every binding needs to be described through a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorSetLayoutBinding.html"><code class="hljs">vk::DescriptorSetLayoutBinding</code></a> struct.</p>
+<pre><code class="language-rust noplaypen">fn create_descriptor_set_layout(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    let binding = vk::DescriptorSetLayoutBinding::builder()
+        .binding(0)
+        .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
+        .descriptor_count(1)
+        .stage_flags(vk::ShaderStageFlags::VERTEX);
+
+    Ok(())
+}
+</code></pre>
+<p>The first two fields specify the <code>binding</code> used in the shader and the type of descriptor, which is a uniform buffer object. It is possible for the shader variable to represent an array of uniform buffer objects, and <code>descriptor_count</code> specifies the number of values in the array. This could be used to specify a transformation for each of the bones in a skeleton for skeletal animation, for example. Our MVP transformation is in a single uniform buffer object, so we're using a <code>descriptor_count</code> of <code>1</code>.</p>
+<p>We also need to specify in which shader stages the descriptor is going to be referenced. The <code>stage_flags</code> field can be a combination of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ShaderStageFlags.html"><code class="hljs">vk::ShaderStageFlags</code></a> values or the value <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ShaderStageFlags.html#associatedconstant.ALL_GRAPHICS"><code class="hljs">vk::ShaderStageFlags::ALL_GRAPHICS</code></a>. In our case, we're only referencing the descriptor from the vertex shader.</p>
+<p>There is also an <code>immutable_samplers</code> field which is only relevant for image sampling related descriptors, which we'll look at later. You can leave this to its default value.</p>
+<p>All of the descriptor bindings are combined into a single <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorSetLayout.html"><code class="hljs">vk::DescriptorSetLayout</code></a> object. Define a new <code>AppData</code> field above <code>pipeline_layout</code>:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    descriptor_set_layout: vk::DescriptorSetLayout,
+    pipeline_layout: vk::PipelineLayout,
+    // ...
+}
+</code></pre>
+<p>We can then create it using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_descriptor_set_layout"><code class="hljs">create_descriptor_set_layout</code></a>. This function accepts a simple <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorSetLayoutCreateInfo.html"><code class="hljs">vk::DescriptorSetLayoutCreateInfo</code></a> with the array of bindings:</p>
+<pre><code class="language-rust noplaypen">let bindings = &amp;[binding];
+let info = vk::DescriptorSetLayoutCreateInfo::builder()
+    .bindings(bindings);
+
+data.descriptor_set_layout = device.create_descriptor_set_layout(&amp;info, None)?;
+</code></pre>
+<p>We need to specify the descriptor set layout during pipeline creation to tell Vulkan which descriptors the shaders will be using. Descriptor set layouts are specified in the pipeline layout object. Modify the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineLayoutCreateInfo.html"><code class="hljs">vk::PipelineLayoutCreateInfo</code></a> to reference the layout object:</p>
+<pre><code class="language-rust noplaypen">let set_layouts = &amp;[data.descriptor_set_layout];
+let layout_info = vk::PipelineLayoutCreateInfo::builder()
+    .set_layouts(set_layouts);
+</code></pre>
+<p>You may be wondering why it's possible to specify multiple descriptor set layouts here, because a single one already includes all of the bindings. We'll get back to that in the next chapter, where we'll look into descriptor pools and descriptor sets.</p>
+<p>The descriptor layout should stick around while we may create new graphics pipelines i.e. until the program ends:</p>
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.destroy_swapchain();
+    self.device.destroy_descriptor_set_layout(self.data.descriptor_set_layout, None);
+    // ...
+}
+</code></pre>
+<h2><a class="header" href="#uniform-buffer" id="uniform-buffer">Uniform buffer</a></h2>
+<p>In the next chapter we'll specify the buffer that contains the UBO data for the shader, but we need to create this buffer first. We're going to copy new data to the uniform buffer every frame, so it doesn't really make any sense to have a staging buffer. It would just add extra overhead in this case and likely degrade performance instead of improving it.</p>
+<p>We should have multiple buffers, because multiple frames may be in flight at the same time and we don't want to update the buffer in preparation of the next frame while a previous one is still reading from it! We could either have a uniform buffer per frame or per swapchain image. However, since we need to refer to the uniform buffer from the command buffer that we have per swapchain image, it makes the most sense to also have a uniform buffer per swapchain image.</p>
+<p>To that end, add new <code>AppData</code> fields for <code>uniform_buffers</code>, and <code>uniform_buffers_memory</code>:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    index_buffer: vk::Buffer,
+    index_buffer_memory: vk::DeviceMemory,
+    uniform_buffers: Vec&lt;vk::Buffer&gt;,
+    uniform_buffers_memory: Vec&lt;vk::DeviceMemory&gt;,
+    // ...
+}
+</code></pre>
+<p>Similarly, create a new function <code>create_uniform_buffers</code> that is called after <code>create_index_buffer</code> and allocates the buffers:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;
+        create_index_buffer(&amp;instance, &amp;device, &amp;mut data)?;
+        create_uniform_buffers(&amp;instance, &amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_uniform_buffers(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
+    data.uniform_buffers.clear();
+    data.uniform_buffers_memory.clear();
+
+    for _ in 0..data.swapchain_images.len() {
+        let (uniform_buffer, uniform_buffer_memory) = create_buffer(
+            instance,
+            device,
+            data,
+            size_of::&lt;UniformBufferObject&gt;() as u64,
+            vk::BufferUsageFlags::UNIFORM_BUFFER,
+            vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+        )?;
+
+        data.uniform_buffers.push(uniform_buffer);
+        data.uniform_buffers_memory.push(uniform_buffer_memory);
+    }
+
+    Ok(())
+}
+</code></pre>
+<p>We're going to write a separate function that updates the uniform buffer with a new transformation every frame, so there will be no <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.map_memory"><code class="hljs">map_memory</code></a> here. The uniform data will be used for all draw calls, so the buffer containing it should only be destroyed when we stop rendering. Since it also depends on the number of swapchain images, which could change after a recreation, we'll clean it up in <code>destroy_swapchain</code>:</p>
+<pre><code class="language-rust noplaypen">fn destroy_swapchain(&amp;mut self) {
+    self.data.uniform_buffers
+        .iter()
+        .for_each(|b| self.device.destroy_buffer(*b, None));
+    self.data.uniform_buffers_memory
+        .iter()
+        .for_each(|m| self.device.free_memory(*m, None));
+    // ...
+}
+</code></pre>
+<p>This means that we also need to recreate it in <code>recreate_swapchain</code>:</p>
+<pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    // ...
+    create_framebuffers(&amp;self.device, &amp;mut self.data)?;
+    create_uniform_buffers(&amp;self.instance, &amp;self.device, &amp;mut self.data)?;
+    create_command_buffers(&amp;self.device, &amp;mut self.data)?;
+    Ok(())
+}
+</code></pre>
+<h2><a class="header" href="#updating-uniform-data" id="updating-uniform-data">Updating uniform data</a></h2>
+<p>Create a new method <code>App::update_uniform_buffer</code> and add a call to it from the <code>App::render</code> method right after we know which swapchain image we're going to acquire:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+        // ...
+
+        let image_index = match result {
+            Ok((image_index, _)) =&gt; image_index as usize,
+            Err(vk::ErrorCode::OUT_OF_DATE_KHR) =&gt; return self.recreate_swapchain(window),
+            Err(e) =&gt; return Err(anyhow!(e)),
+        };
+
+        self.update_uniform_buffer(image_index)?;
+
+        // ...
+    }
+
+    fn update_uniform_buffer(&amp;self, image_index: usize) -&gt; Result&lt;()&gt; {
+        Ok(())
+    }
+}
+</code></pre>
+<p>This function will generate a new transformation every frame to make the geometry spin around. We need to add an import to implement this functionality:</p>
+<pre><code class="language-rust noplaypen">use std::time::Instant;
+</code></pre>
+<p>The <code>Instant</code> struct will allow us to do precise timekeeping. We'll use this to make sure that the geometry rotates 90 degrees per second regardless of frame rate. Add a field to <code>App</code> to track the time the application started and initialize the field to <code>Instant::now()</code> in <code>App::create</code>:</p>
+<pre><code class="language-rust noplaypen">struct App {
+    // ...
+    start: Instant,
+}
+</code></pre>
+<p>We can now use that field to determine how many seconds it has been since the application started:</p>
+<pre><code class="language-rust noplaypen">fn update_uniform_buffer(&amp;self, image_index: usize) -&gt; Result&lt;()&gt; {
+    let time = self.start.elapsed().as_secs_f32();
+
+    Ok(())
+}
+</code></pre>
+<p>We will now define the model, view and projection transformations in the uniform buffer object. The model rotation will be a simple rotation around the Z-axis using the <code>time</code> variable:</p>
+<pre><code class="language-rust noplaypen">let model = glm::rotate(
+    &amp;glm::identity(),
+    time * glm::radians(&amp;glm::vec1(90.0))[0],
+    &amp;glm::vec3(0.0, 0.0, 1.0),
+);
+</code></pre>
+<p>The <code>glm::rotate</code> function takes an existing transformation, rotation angle and rotation axis as parameters. The <code>glm::identity()</code> constructor returns an identity matrix. Using a rotation angle of <code>time * glm::radians(&amp;glm::vec1(90.0))[0]</code> accomplishes the purpose of rotating 90 degrees per second.</p>
+<pre><code class="language-rust noplaypen">let view = glm::look_at(
+    &amp;glm::vec3(2.0, 2.0, 2.0),
+    &amp;glm::vec3(0.0, 0.0, 0.0),
+    &amp;glm::vec3(0.0, 0.0, 1.0),
+);
+</code></pre>
+<p>For the view transformation I've decided to look at the geometry from above at a 45 degree angle. The <code>glm::look_at</code> function takes the eye position, center position and up axis as parameters.</p>
+<pre><code class="language-rust noplaypen">let mut proj = glm::perspective(
+    glm::radians(&amp;glm::vec1(45.0))[0],
+    self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+    0.1,
+    10.0,
+);
+</code></pre>
+<p>I've chosen to use a perspective projection with a 45 degree vertical field-of-view. The other parameters are the aspect ratio, near and far view planes. It is important to use the current swapchain extent to calculate the aspect ratio to take into account the new width and height of the window after a resize.</p>
+<pre><code class="language-rust noplaypen">proj[(1, 1)] *= -1.0;
+</code></pre>
+<p>GLM was originally designed for OpenGL, where the Y coordinate of the clip coordinates is inverted. The easiest way to compensate for that is to flip the sign on the scaling factor of the Y axis in the projection matrix. If you don't do this, then the image will be rendered upside down.</p>
+<pre><code class="language-rust noplaypen">let ubo = UniformBufferObject { model, view, proj };
+</code></pre>
+<p>Lastly we combine our matrices into a uniform buffer object.</p>
+<p>All of the transformations are defined now, so we can copy the data in the uniform buffer object to the current uniform buffer. This happens in exactly the same way as we did for vertex buffers, except without a staging buffer:</p>
+<pre><code class="language-rust noplaypen">let memory = self.device.map_memory(
+    self.data.uniform_buffers_memory[image_index],
+    0,
+    size_of::&lt;UniformBufferObject&gt;() as u64,
+    vk::MemoryMapFlags::empty(),
+)?;
+
+unsafe { memcpy(&amp;ubo, memory.cast(), 1) };
+
+self.device.unmap_memory(self.data.uniform_buffers_memory[image_index]);
+</code></pre>
+<p>Using a UBO this way is not the most efficient way to pass frequently changing values to the shader. A more efficient way to pass a small buffer of data to shaders are <em>push constants</em>. We may look at these in a future chapter.</p>
+<p>In the next chapter we'll look at descriptor sets, which will actually bind the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>s to the uniform buffer descriptors so that the shader can access this transformation data.</p>
 
                     </main>
 
