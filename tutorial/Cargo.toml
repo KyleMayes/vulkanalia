@@ -145,3 +145,8 @@ path = "src/22_descriptor_sets.rs"
 
 name = "23_texture_image"
 path = "src/23_texture_image.rs"
+
+[[bin]]
+
+name = "24_sampler"
+path = "src/24_sampler.rs"
