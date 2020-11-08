@@ -3136,7 +3136,7 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
 </code></pre>
 <p>The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_vertex_buffers"><code class="hljs">cmd_bind_vertex_buffers</code></a> command is used to bind vertex buffers to bindings, like the one we set up in the previous chapter. The second parameter specifies the index of the vertex input binding we are using. The last two parameters specify the vertex buffers to bind and the byte offsets to start reading vertex data from. You should also change the call to <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw"><code class="hljs">cmd_draw</code></a> to pass the number of vertices in the buffer as opposed to the hardcoded number <code>3</code>.</p>
 <p>Now run the program and you should see the familiar triangle again:</p>
-<p><img src="vertex//images/triangle.png" alt="" /></p>
+<p><img src="vertex/../images/triangle.png" alt="" /></p>
 <p>Try changing the color of the top vertex to white by modifying the <code>VERTICES</code> list:</p>
 <pre><code class="language-rust noplaypen">lazy_static! {
     static ref VERTICES: Vec&lt;Vertex&gt; = vec![
@@ -3147,7 +3147,7 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
 }
 </code></pre>
 <p>Run the program again and you should see the following:</p>
-<p><img src="vertex//images/triangle_white.png" alt="" /></p>
+<p><img src="vertex/../images/triangle_white.png" alt="" /></p>
 <p>In the next chapter we'll look at a different way to copy vertex data to a vertex buffer that results in better performance, but takes some more work.</p>
 <h1><a class="header" href="#staging-buffer" id="staging-buffer">Staging buffer</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/19_staging_buffer.rs">main.rs</a></p>
@@ -3542,7 +3542,7 @@ fn create_descriptor_set_layout(device: &amp;Device, data: &amp;mut AppData) -&g
 </code></pre>
 <p>Every binding needs to be described through a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorSetLayoutBinding.html"><code class="hljs">vk::DescriptorSetLayoutBinding</code></a> struct.</p>
 <pre><code class="language-rust noplaypen">fn create_descriptor_set_layout(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
-    let binding = vk::DescriptorSetLayoutBinding::builder()
+    let ubo_binding = vk::DescriptorSetLayoutBinding::builder()
         .binding(0)
         .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
         .descriptor_count(1)
@@ -3563,7 +3563,7 @@ fn create_descriptor_set_layout(device: &amp;Device, data: &amp;mut AppData) -&g
 }
 </code></pre>
 <p>We can then create it using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_descriptor_set_layout"><code class="hljs">create_descriptor_set_layout</code></a>. This function accepts a simple <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorSetLayoutCreateInfo.html"><code class="hljs">vk::DescriptorSetLayoutCreateInfo</code></a> with the array of bindings:</p>
-<pre><code class="language-rust noplaypen">let bindings = &amp;[binding];
+<pre><code class="language-rust noplaypen">let bindings = &amp;[ubo_binding];
 let info = vk::DescriptorSetLayoutCreateInfo::builder()
     .bindings(bindings);
 
@@ -3751,12 +3751,12 @@ fn create_descriptor_pool(device: &amp;Device, data: &amp;mut AppData) -&gt; Res
 }
 </code></pre>
 <p>We first need to describe which descriptor types our descriptor sets are going to contain and how many of them, using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorPoolSize.html"><code class="hljs">vk::DescriptorPoolSize</code></a> structures.</p>
-<pre><code class="language-rust noplaypen">let size = vk::DescriptorPoolSize::builder()
+<pre><code class="language-rust noplaypen">let ubo_size = vk::DescriptorPoolSize::builder()
     .type_(vk::DescriptorType::UNIFORM_BUFFER)
     .descriptor_count(data.swapchain_images.len() as u32);
 </code></pre>
 <p>We will allocate one of these descriptors for every frame. This pool size structure is referenced by the main <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorPoolCreateInfo.html"><code class="hljs">vk::DescriptorPoolCreateInfo</code></a> along with the maximum number of descriptor sets that may be allocated:</p>
-<pre><code class="language-rust noplaypen">let pool_sizes = &amp;[size];
+<pre><code class="language-rust noplaypen">let pool_sizes = &amp;[ubo_size];
 let info = vk::DescriptorPoolCreateInfo::builder()
     .pool_sizes(pool_sizes)
     .max_sets(data.swapchain_images.len() as u32);
@@ -3844,7 +3844,7 @@ let info = vk::DescriptorSetAllocateInfo::builder()
 </code></pre>
 <p>If you're overwriting the whole buffer, like we are in this case, then it is is also possible to use the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/constant.WHOLE_SIZE.html"><code class="hljs">vk::WHOLE_SIZE</code></a> value for the range. The configuration of descriptors is updated using the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.update_descriptor_sets"><code class="hljs">update_descriptor_sets</code></a> function, which takes an array of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.WriteDescriptorSet.html"><code class="hljs">vk::WriteDescriptorSet</code></a> structs as parameter.</p>
 <pre><code class="language-rust noplaypen">let buffer_info = &amp;[info];
-let write = vk::WriteDescriptorSet::builder()
+let ubo_write = vk::WriteDescriptorSet::builder()
     .dst_set(data.descriptor_sets[i])
     .dst_binding(0)
     .dst_array_element(0)
@@ -3857,7 +3857,7 @@ let write = vk::WriteDescriptorSet::builder()
 <pre><code class="language-rust noplaypen">    .buffer_info(buffer_info);
 </code></pre>
 <p>The last field references an array with <code>descriptor_count</code> structs that actually configure the descriptors. It depends on the type of descriptor which one of the three you actually need to use. The <code>buffer_info</code> field is used for descriptors that refer to buffer data, <code>image_info</code> is used for descriptors that refer to image data, and <code>texel_buffer_view</code> is used for descriptors that refer to buffer views. Our descriptor is based on buffers, so we're using <code>buffer_info</code>.</p>
-<pre><code class="language-rust noplaypen">device.update_descriptor_sets(&amp;[write], &amp;[] as &amp;[vk::CopyDescriptorSet]);
+<pre><code class="language-rust noplaypen">device.update_descriptor_sets(&amp;[ubo_write], &amp;[] as &amp;[vk::CopyDescriptorSet]);
 </code></pre>
 <p>The updates are applied using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.update_descriptor_sets"><code class="hljs">update_descriptor_sets</code></a>. It accepts two kinds of arrays as parameters: an array of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.WriteDescriptorSet.html"><code class="hljs">vk::WriteDescriptorSet</code></a> and an array of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CopyDescriptorSet.html"><code class="hljs">vk::CopyDescriptorSet</code></a>. The latter can be used to copy descriptors to each other, as its name implies.</p>
 <h2><a class="header" href="#using-descriptor-sets" id="using-descriptor-sets">Using descriptor sets</a></h2>
@@ -3878,7 +3878,7 @@ device.cmd_draw_indexed(*command_buffer, INDICES.len() as u32, 1, 0, 0, 0);
     .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
 </code></pre>
 <p>Run your program again and you should now see the following:</p>
-<p><img src="uniform//images/spinning_quad.png" alt="" /></p>
+<p><img src="uniform/../images/spinning_quad.png" alt="" /></p>
 <p>The rectangle has changed into a square because the projection matrix now corrects for aspect ratio. The <code>App::update_uniform_buffer</code> method takes care of screen resizing, so we don't need to recreate the descriptor set in <code>App::recreate_swapchain</code>.</p>
 <h2><a class="header" href="#alignment-requirements" id="alignment-requirements">Alignment requirements</a></h2>
 <p>One thing we've glossed over so far is how exactly the data in the C++ structure should match with the uniform definition in the shader. It seems obvious enough to simply use the same types in both:</p>
@@ -3939,9 +3939,729 @@ struct UniformBufferObject {
 </code></pre>
 <p>You can use this feature to put descriptors that vary per-object and descriptors that are shared into separate descriptor sets. In that case you avoid rebinding most of the descriptors across draw calls which is potentially more efficient.</p>
 <h1><a class="header" href="#images" id="images">Images</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/23_texture_image.rs">main.rs</a></p>
+<p>The geometry has been colored using per-vertex colors so far, which is a rather limited approach. In this part of the tutorial we're going to implement texture mapping to make the geometry look more interesting. This will also allow us to load and draw basic 3D models in a future chapter.</p>
+<p>Adding a texture to our application will involve the following steps:</p>
+<ul>
+<li>Create an image object backed by device memory</li>
+<li>Fill it with pixels from an image file</li>
+<li>Create an image sampler</li>
+<li>Add a combined image sampler descriptor to sample colors from the texture</li>
+</ul>
+<p>We've already worked with image objects before, but those were automatically created by the swapchain extension. This time we'll have to create one by ourselves. Creating an image and filling it with data is similar to vertex buffer creation. We'll start by creating a staging resource and filling it with pixel data and then we copy this to the final image object that we'll use for rendering. Although it is possible to create a staging image for this purpose, Vulkan also allows you to copy pixels from a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a> to an image and the API for this is actually <a href="https://developer.nvidia.com/vulkan-memory-management">faster on some hardware</a>. We'll first create this buffer and fill it with pixel values, and then we'll create an image to copy the pixels to. Creating an image is not very different from creating buffers. It involves querying the memory requirements, allocating device memory and binding it, just like we've seen before.</p>
+<p>However, there is something extra that we'll have to take care of when working with images. Images can have different <em>layouts</em> that affect how the pixels are organized in memory. Due to the way graphics hardware works, simply storing the pixels row by row may not lead to the best performance, for example. When performing any operation on images, you must make sure that they have the layout that is optimal for use in that operation. We've actually already seen some of these layouts when we specified the render pass:</p>
+<ul>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.PRESENT_SRC_KHR"><code class="hljs">vk::ImageLayout::PRESENT_SRC_KHR</code></a> – Optimal for presentation </li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.COLOR_ATTACHMENT_OPTIMAL"><code class="hljs">vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL</code></a> – Optimal as attachment for writing colors from the fragment shader </li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.TRANSFER_SRC_OPTIMAL"><code class="hljs">vk::ImageLayout::TRANSFER_SRC_OPTIMAL</code></a> – Optimal as source in a transfer operation, like <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_copy_image_to_buffer"><code class="hljs">cmd_copy_image_to_buffer</code></a> </li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.TRANSFER_DST_OPTIMAL"><code class="hljs">vk::ImageLayout::TRANSFER_DST_OPTIMAL</code></a> – Optimal as destination in a transfer operation, like <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_copy_buffer_to_image"><code class="hljs">cmd_copy_buffer_to_image</code></a> </li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.SHADER_READ_ONLY_OPTIMAL"><code class="hljs">vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL</code></a> – Optimal for sampling from a shader </li>
+</ul>
+<p>One of the most common ways to transition the layout of an image is a <em>pipeline barrier</em>. Pipeline barriers are primarily used for synchronizing access to resources, like making sure that an image was written to before it is read, but they can also be used to transition layouts. In this chapter we'll see how pipeline barriers are used for this purpose. Barriers can additionally be used to transfer queue family ownership when using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SharingMode.html#associatedconstant.EXCLUSIVE"><code class="hljs">vk::SharingMode::EXCLUSIVE</code></a>.</p>
+<h2><a class="header" href="#image-library" id="image-library">Image library</a></h2>
+<p>There are many libraries available for loading images, and you can even write your own code to load simple formats like BMP and PPM. In this tutorial we'll be using the <a href="https://crates.io/crates/png"><code>png</code></a> crate which you should have already added to your program's dependencies.</p>
+<h2><a class="header" href="#loading-an-image" id="loading-an-image">Loading an image</a></h2>
+<p>We'll need to open the image file, so add the following import:</p>
+<pre><code class="language-rust noplaypen">use std::fs::File;
+</code></pre>
+<p>Create a new function <code>create_texture_image</code> where we'll load an image and upload it into a Vulkan image object. We're going to use command buffers, so it should be called after <code>create_command_pool</code>.</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_command_pool(&amp;instance, &amp;device, &amp;mut data)?;
+        create_texture_image(&amp;instance, &amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_texture_image(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>Create a new directory <code>resources</code> next to the <code>shaders</code> directory to store texture images in. We're going to load an image called <code>texture.png</code> from that directory. I've chosen to use the following <a href="https://pixabay.com/en/statue-sculpture-fig-historically-1275469/">CC0 licensed image</a> resized to 512 x 512 pixels, but feel free to pick any PNG image (with an alpha channel) you want.</p>
+<p><img src="texture/../images/texture.png" alt="" /></p>
+<p>Loading an image with this library is really easy:</p>
+<pre><code class="language-rust noplaypen">fn create_texture_image(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
+    let image = File::open(&quot;resources/texture.png&quot;)?;
+
+    let decoder = png::Decoder::new(image);
+    let (info, mut reader) = decoder.read_info()?;
+
+    let mut pixels = vec![0; info.buffer_size()];
+    reader.next_frame(&amp;mut pixels)?;
+
+    let size = info.buffer_size() as u64;
+
+    Ok(())
+}
+</code></pre>
+<p>This code will populate the <code>pixels</code> list with the pixels data with 4 bytes per pixel which will result in a total of <code>width * height * 4</code> values. Note that the <code>png</code> crate <a href="https://github.com/image-rs/image-png/issues/239">does not have support for converting RGB images into RGBA images (at the time of writing)</a> and the following code is expecting the pixel data to have an alpha channel. As a result you will need to make sure you use PNG images with alpha channels (such as the above image).</p>
+<h2><a class="header" href="#staging-buffer-1" id="staging-buffer-1">Staging buffer</a></h2>
+<p>We're now going to create a buffer in host visible memory so that we can use <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.map_memory"><code class="hljs">map_memory</code></a> and copy the pixels to it. The buffer should be in host visible memory so that we can map it and it should be usable as a transfer source so that we can copy it to an image later on:</p>
+<pre><code class="language-rust noplaypen">let (staging_buffer, staging_buffer_memory) = create_buffer(
+    instance,
+    device,
+    data,
+    size,
+    vk::BufferUsageFlags::TRANSFER_SRC,
+    vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+)?;
+</code></pre>
+<p>We can then directly copy the pixel values that we got from the image loading library to the buffer:</p>
+<pre><code class="language-rust noplaypen">let memory = device.map_memory(
+    staging_buffer_memory,
+    0,
+    size,
+    vk::MemoryMapFlags::empty(),
+)?;
+
+unsafe { memcpy(pixels.as_ptr(), memory.cast(), pixels.len()) };
+
+device.unmap_memory(staging_buffer_memory);
+</code></pre>
+<h2><a class="header" href="#texture-image" id="texture-image">Texture Image</a></h2>
+<p>Although we could set up the shader to access the pixel values in the buffer, it's better to use image objects in Vulkan for this purpose. Image objects will make it easier and faster to retrieve colors by allowing us to use 2D coordinates, for one. Pixels within an image object are known as texels and we'll use that name from this point on. Add the following new <code>AppData</code> fields:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    texture_image: vk::Image,
+    texture_image_memory: vk::DeviceMemory,
+}
+</code></pre>
+<p>The parameters for an image are specified in a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageCreateInfo.html"><code class="hljs">vk::ImageCreateInfo</code></a> struct:</p>
+<pre><code class="language-rust noplaypen">let info = vk::ImageCreateInfo::builder()
+    .image_type(vk::ImageType::_2D)
+    .extent(vk::Extent3D { width: info.width, height: info.height, depth: 1 })
+    .mip_levels(1)
+    .array_layers(1)
+    // continued...
+</code></pre>
+<p>The image type, specified in the <code>image_type</code> field, tells Vulkan with what kind of coordinate system the texels in the image are going to be addressed. It is possible to create 1D, 2D and 3D images. One dimensional images can be used to store an array of data or gradient, two dimensional images are mainly used for textures, and three dimensional images can be used to store voxel volumes, for example. The <code>extent</code> field specifies the dimensions of the image, basically how many texels there are on each axis. That's why <code>depth</code> must be <code>1</code> instead of <code>0</code>. Our texture will not be an array and we won't be using mipmapping for now.</p>
+<pre><code class="language-rust noplaypen">    .format(vk::Format::R8G8B8A8_SRGB)
+</code></pre>
+<p>Vulkan supports many possible image formats, but we should use the same format for the texels as the pixels in the buffer, otherwise the copy operation will fail.</p>
+<pre><code class="language-rust noplaypen">    .tiling(vk::ImageTiling::OPTIMAL)
+</code></pre>
+<p>The <code>tiling</code> field can have one of two values:</p>
+<ul>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageTiling.html#associatedconstant.LINEAR"><code class="hljs">vk::ImageTiling::LINEAR</code></a> – Texels are laid out in row-major order like our <code>pixels</code> array</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageTiling.html#associatedconstant.OPTIMAL"><code class="hljs">vk::ImageTiling::OPTIMAL</code></a> – Texels are laid out in an implementation defined order for optimal access</li>
+</ul>
+<p>Unlike the layout of an image, the tiling mode cannot be changed at a later time. If you want to be able to directly access texels in the memory of the image, then you must use <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageTiling.html#associatedconstant.LINEAR"><code class="hljs">vk::ImageTiling::LINEAR</code></a>. We will be using a staging buffer instead of a staging image, so this won't be necessary. We will be using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageTiling.html#associatedconstant.OPTIMAL"><code class="hljs">vk::ImageTiling::OPTIMAL</code></a> for efficient access from the shader.</p>
+<pre><code class="language-rust noplaypen">    .initial_layout(vk::ImageLayout::UNDEFINED)
+</code></pre>
+<p>There are only two possible values for the <code>initial_layout</code> of an image:</p>
+<ul>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.UNDEFINED"><code class="hljs">vk::ImageLayout::UNDEFINED</code></a> – Not usable by the GPU and the very first transition will discard the texels.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.PREINITIALIZED"><code class="hljs">vk::ImageLayout::PREINITIALIZED</code></a> – Not usable by the GPU, but the first transition will preserve the texels.</li>
+</ul>
+<p>There are few situations where it is necessary for the texels to be preserved during the first transition. One example, however, would be if you wanted to use an image as a staging image in combination with the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageTiling.html#associatedconstant.LINEAR"><code class="hljs">vk::ImageTiling::LINEAR</code></a> layout. In that case, you'd want to upload the texel data to it and then transition the image to be a transfer source without losing the data. In our case, however, we're first going to transition the image to be a transfer destination and then copy texel data to it from a buffer object, so we don't need this property and can safely use <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.UNDEFINED"><code class="hljs">vk::ImageLayout::UNDEFINED</code></a>.</p>
+<pre><code class="language-rust noplaypen">    .usage(vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST)
+</code></pre>
+<p>The <code>usage</code> field has the same semantics as the one during buffer creation. The image is going to be used as destination for the buffer copy, so it should be set up as a transfer destination. We also want to be able to access the image from the shader to color our mesh, so the usage should include <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageUsageFlags.html#associatedconstant.SAMPLED"><code class="hljs">vk::ImageUsageFlags::SAMPLED</code></a>.</p>
+<pre><code class="language-rust noplaypen">    .samples(vk::SampleCountFlags::_1)
+</code></pre>
+<p>The <code>samples</code> flag is related to multisampling. This is only relevant for images that will be used as attachments, so stick to one sample. There are some optional flags for images that are related to sparse images. Sparse images are images where only certain regions are actually backed by memory. If you were using a 3D texture for a voxel terrain, for example, then you could use this to avoid allocating memory to store large volumes of &quot;air&quot; values. We won't be using it in this tutorial, so leave it to its default value of <code>0</code>.</p>
+<pre><code class="language-rust noplaypen">    .sharing_mode(vk::SharingMode::EXCLUSIVE);
+</code></pre>
+<p>The image will only be used by one queue family: the one that supports graphics (and therefore also) transfer operations.</p>
+<pre><code class="language-c++">data.texture_image = device.create_image(&amp;info, None)?;
+</code></pre>
+<p>The image is created using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_image"><code class="hljs">create_image</code></a>, which doesn't have any particularly noteworthy parameters. It is possible that the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Format.html#associatedconstant.R8G8B8A8_SRGB"><code class="hljs">vk::Format::R8G8B8A8_SRGB</code></a> format is not supported by the graphics hardware. You should have a list of acceptable alternatives and go with the best one that is supported. However, support for this particular format is so widespread that we'll skip this step. Using different formats would also require annoying conversions. We will get back to this in the depth buffer chapter, where we'll implement such a system.</p>
+<pre><code class="language-rust noplaypen">let requirements = device.get_image_memory_requirements(data.texture_image);
+
+let info = vk::MemoryAllocateInfo::builder()
+    .allocation_size(requirements.size)
+    .memory_type_index(get_memory_type_index(
+        instance,
+        data,
+        vk::MemoryPropertyFlags::DEVICE_LOCAL,
+        requirements,
+    )?);
+
+data.texture_image_memory = device.allocate_memory(&amp;info, None)?;
+
+device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
+</code></pre>
+<p>Allocating memory for an image works in exactly the same way as allocating memory for a buffer. Use <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.get_image_memory_requirements"><code class="hljs">get_image_memory_requirements</code></a> instead of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.get_buffer_memory_requirements"><code class="hljs">get_buffer_memory_requirements</code></a>, and use <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.bind_image_memory"><code class="hljs">bind_image_memory</code></a> instead of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.bind_buffer_memory"><code class="hljs">bind_buffer_memory</code></a>.</p>
+<p>This function is already getting quite large and there'll be a need to create more images in later chapters, so we should abstract image creation into a <code>create_image</code> function, like we did for buffers. Create the function and move the image object creation and memory allocation to it:</p>
+<pre><code class="language-rust noplaypen">fn create_image(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+    width: u32,
+    height: u32,
+    format: vk::Format,
+    tiling: vk::ImageTiling,
+    usage: vk::ImageUsageFlags,
+    properties: vk::MemoryPropertyFlags,
+) -&gt; Result&lt;(vk::Image, vk::DeviceMemory)&gt; {
+    let info = vk::ImageCreateInfo::builder()
+        .image_type(vk::ImageType::_2D)
+        .extent(vk::Extent3D {
+            width,
+            height,
+            depth: 1,
+        })
+        .mip_levels(1)
+        .array_layers(1)
+        .format(format)
+        .tiling(tiling)
+        .initial_layout(vk::ImageLayout::UNDEFINED)
+        .usage(usage)
+        .samples(vk::SampleCountFlags::_1)
+        .sharing_mode(vk::SharingMode::EXCLUSIVE);
+
+    let image = device.create_image(&amp;info, None)?;
+
+    let requirements = device.get_image_memory_requirements(image);
+
+    let info = vk::MemoryAllocateInfo::builder()
+        .allocation_size(requirements.size)
+        .memory_type_index(get_memory_type_index(
+            instance,
+            data,
+            properties,
+            requirements,
+        )?);
+
+    let image_memory = device.allocate_memory(&amp;info, None)?;
+
+    device.bind_image_memory(image, image_memory, 0)?;
+
+    Ok((image, image_memory))
+}
+</code></pre>
+<p>I've made the width, height, format, tiling mode, usage, and memory properties parameters, because these will all vary between the images we'll be creating throughout this tutorial.</p>
+<p>The <code>create_texture_image</code> function can now be simplified to:</p>
+<pre><code class="language-rust noplaypen">fn create_texture_image(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
+    let image = File::open(&quot;resources/texture.png&quot;)?;
+
+    let decoder = png::Decoder::new(image);
+    let (info, mut reader) = decoder.read_info()?;
+
+    let mut pixels = vec![0; info.buffer_size()];
+    reader.next_frame(&amp;mut pixels)?;
+
+    let size = info.buffer_size() as u64;
+
+    let (staging_buffer, staging_buffer_memory) = create_buffer(
+        instance,
+        device,
+        data,
+        size,
+        vk::BufferUsageFlags::TRANSFER_SRC,
+        vk::MemoryPropertyFlags::HOST_COHERENT | vk::MemoryPropertyFlags::HOST_VISIBLE,
+    )?;
+
+    let memory = device.map_memory(
+        staging_buffer_memory,
+        0,
+        size,
+        vk::MemoryMapFlags::empty(),
+    )?;
+
+    unsafe { memcpy(pixels.as_ptr(), memory.cast(), pixels.len()) };
+
+    device.unmap_memory(staging_buffer_memory);
+
+    let (texture_image, texture_image_memory) = create_image(
+        instance,
+        device,
+        data,
+        info.width,
+        info.height,
+        vk::Format::R8G8B8A8_SRGB,
+        vk::ImageTiling::OPTIMAL,
+        vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST,
+        vk::MemoryPropertyFlags::DEVICE_LOCAL,
+    )?;
+
+    data.texture_image = texture_image;
+    data.texture_image_memory = texture_image_memory;
+
+    Ok(())
+}
+</code></pre>
+<h2><a class="header" href="#layout-transitions" id="layout-transitions">Layout transitions</a></h2>
+<p>The function we're going to write now involves recording and executing a command buffer again, so now's a good time to move that logic into a helper function or two:</p>
+<pre><code class="language-rust noplaypen">fn begin_single_time_commands(
+    device: &amp;Device,
+    data: &amp;AppData,
+) -&gt; Result&lt;vk::CommandBuffer&gt; {
+    let info = vk::CommandBufferAllocateInfo::builder()
+        .level(vk::CommandBufferLevel::PRIMARY)
+        .command_pool(data.command_pool)
+        .command_buffer_count(1);
+
+    let command_buffer = device.allocate_command_buffers(&amp;info)?[0];
+
+    let info = vk::CommandBufferBeginInfo::builder()
+        .flags(vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT);
+
+    device.begin_command_buffer(command_buffer, &amp;info)?;
+
+    Ok(command_buffer)
+}
+
+fn end_single_time_commands(
+    device: &amp;Device,
+    data: &amp;AppData,
+    command_buffer: vk::CommandBuffer,
+) -&gt; Result&lt;()&gt; {
+    device.end_command_buffer(command_buffer)?;
+
+    let command_buffers = &amp;[command_buffer];
+    let info = vk::SubmitInfo::builder()
+        .command_buffers(command_buffers);
+
+    device.queue_submit(data.graphics_queue, &amp;[info], vk::Fence::null())?;
+    device.queue_wait_idle(data.graphics_queue)?;
+
+    device.free_command_buffers(data.command_pool, &amp;[command_buffer]);
+
+    Ok(())
+}
+</code></pre>
+<p>The code for these functions is based on the existing code in <code>copy_buffer</code>. You can now simplify that function to:</p>
+<pre><code class="language-rust noplaypen">fn copy_buffer(
+    device: &amp;Device,
+    data: &amp;AppData,
+    source: vk::Buffer,
+    destination: vk::Buffer,
+    size: vk::DeviceSize,
+) -&gt; Result&lt;()&gt; {
+    let command_buffer = begin_single_time_commands(device, data)?;
+
+    let regions = vk::BufferCopy::builder().size(size);
+    device.cmd_copy_buffer(command_buffer, source, destination, &amp;[regions]);
+
+    end_single_time_commands(device, data, command_buffer)?;
+
+    Ok(())
+}
+</code></pre>
+<p>If we were still using buffers, then we could now write a function to record and execute <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_copy_buffer_to_image"><code class="hljs">cmd_copy_buffer_to_image</code></a> to finish the job, but this command requires the image to be in the right layout first. Create a new function to handle layout transitions:</p>
+<pre><code class="language-rust noplaypen">fn transition_image_layout(
+    device: &amp;Device,
+    data: &amp;AppData,
+    image: vk::Image,
+    format: vk::Format,
+    old_layout: vk::ImageLayout,
+    new_layout: vk::ImageLayout,
+) -&gt; Result&lt;()&gt; {
+    let command_buffer = begin_single_time_commands(device, data)?;
+
+    end_single_time_commands(device, data, command_buffer)?;
+
+    Ok(())
+}
+</code></pre>
+<p>One of the most common ways to perform layout transitions is using an <em>image memory barrier</em>. A pipeline barrier like that is generally used to synchronize access to resources, like ensuring that a write to a buffer completes before reading from it, but it can also be used to transition image layouts and transfer queue family ownership when <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SharingMode.html#associatedconstant.EXCLUSIVE"><code class="hljs">vk::SharingMode::EXCLUSIVE</code></a> is used. There is an equivalent <em>buffer memory barrier</em> to do this for buffers.</p>
+<pre><code class="language-rust noplaypen">let barrier = vk::ImageMemoryBarrier::builder()
+    .old_layout(old_layout)
+    .new_layout(new_layout)
+    // continued...
+</code></pre>
+<p>The first two fields specify layout transition. It is possible to use <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.UNDEFINED"><code class="hljs">vk::ImageLayout::UNDEFINED</code></a> as <code>old_layout</code> if you don't care about the existing contents of the image.</p>
+<pre><code class="language-rust noplaypen">    .src_queue_family_index(vk::QUEUE_FAMILY_IGNORED)
+    .dst_queue_family_index(vk::QUEUE_FAMILY_IGNORED)
+</code></pre>
+<p>If you are using the barrier to transfer queue family ownership, then these two fields should be the indices of the queue families. They must be set to <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/constant.QUEUE_FAMILY_IGNORED.html"><code class="hljs">vk::QUEUE_FAMILY_IGNORED</code></a> if you don't want to do this (not the default value!).</p>
+<pre><code class="language-rust noplaypen">    .image(image)
+    .subresource_range(subresource)
+</code></pre>
+<p>The <code>image</code> and <code>subresource_range</code> specify the image that is affected and the specific part of the image. We'll need to define <code>subresource</code> before our image memory barrier:</p>
+<pre><code class="language-rust noplaypen">let subresource = vk::ImageSubresourceRange::builder()
+    .aspect_mask(vk::ImageAspectFlags::COLOR)
+    .base_mip_level(0)
+    .level_count(1)
+    .base_array_layer(0)
+    .layer_count(1);
+</code></pre>
+<p>Our image is not an array and does not have mipmapping levels, so only one level and layer are specified.</p>
+<pre><code class="language-rust noplaypen">    .src_access_mask(vk::AccessFlags::empty())  // TODO
+    .dst_access_mask(vk::AccessFlags::empty()); // TODO
+</code></pre>
+<p>Barriers are primarily used for synchronization purposes, so you must specify which types of operations that involve the resource must happen before the barrier, and which operations that involve the resource must wait on the barrier. We need to do that despite already using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_wait_idle"><code class="hljs">queue_wait_idle</code></a> to manually synchronize. The right values depend on the old and new layout, so we'll get back to this once we've figured out which transitions we're going to use.</p>
+<pre><code class="language-rust noplaypen">device.cmd_pipeline_barrier(
+    command_buffer,
+    vk::PipelineStageFlags::empty(), // TODO
+    vk::PipelineStageFlags::empty(), // TODO
+    vk::DependencyFlags::empty(),
+    &amp;[] as &amp;[vk::MemoryBarrier],
+    &amp;[] as &amp;[vk::BufferMemoryBarrier],
+    &amp;[barrier],
+);
+</code></pre>
+<p>All types of pipeline barriers are submitted using the same function. The first parameter after the command buffer specifies in which pipeline stage the operations occur that should happen before the barrier. The second parameter specifies the pipeline stage in which operations will wait on the barrier. The pipeline stages that you are allowed to specify before and after the barrier depend on how you use the resource before and after the barrier. The allowed values are listed in <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-access-types-supported">this table</a> of the specification. For example, if you're going to read from a uniform after the barrier, you would specify a usage of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.AccessFlags.html#associatedconstant.UNIFORM_READ"><code class="hljs">vk::AccessFlags::UNIFORM_READ</code></a> and the earliest shader that will read from the uniform as pipeline stage, for example <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.FRAGMENT_SHADER"><code class="hljs">vk::PipelineStageFlags::FRAGMENT_SHADER</code></a>. It would not make sense to specify a non-shader pipeline stage for this type of usage and the validation layers will warn you when you specify a pipeline stage that does not match the type of usage.</p>
+<p>The fourth parameter is either an empty set of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DependencyFlags.html"><code class="hljs">vk::DependencyFlags</code></a> or <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DependencyFlags.html#associatedconstant.BY_REGION"><code class="hljs">vk::DependencyFlags::BY_REGION</code></a>. The latter turns the barrier into a per-region condition. That means that the implementation is allowed to already begin reading from the parts of a resource that were written so far, for example.</p>
+<p>The last three parameters reference slices of pipeline barriers of the three available types: memory barriers, buffer memory barriers, and image memory barriers like the one we're using here. Note that we're not using the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Format.html"><code class="hljs">vk::Format</code></a> parameter yet, but we'll be using that one for special transitions in the depth buffer chapter.</p>
+<h2><a class="header" href="#copying-buffer-to-image" id="copying-buffer-to-image">Copying buffer to image</a></h2>
+<p>Before we get back to <code>create_texture_image</code>, we're going to write one more helper function: <code>copy_bufer_to_image</code>:</p>
+<pre><code class="language-rust noplaypen">fn copy_buffer_to_image(
+    device: &amp;Device,
+    data: &amp;AppData,
+    buffer: vk::Buffer,
+    image: vk::Image,
+    width: u32,
+    height: u32,
+) -&gt; Result&lt;()&gt; {
+    let command_buffer = begin_single_time_commands(device, data)?;
+
+    end_single_time_commands(device, data, command_buffer)?;
+
+    Ok(())
+}
+</code></pre>
+<p>Just like with buffer copies, you need to specify which part of the buffer is going to be copied to which part of the image. This happens through <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.BufferImageCopy.html"><code class="hljs">vk::BufferImageCopy</code></a> structs:</p>
+<pre><code class="language-rust noplaypen">let subresource = vk::ImageSubresourceLayers::builder()
+    .aspect_mask(vk::ImageAspectFlags::COLOR)
+    .mip_level(0)
+    .base_array_layer(0)
+    .layer_count(1);
+
+let region = vk::BufferImageCopy::builder()
+    .buffer_offset(0)
+    .buffer_row_length(0)
+    .buffer_image_height(0)
+    .image_subresource(subresource)
+    .image_offset(vk::Offset3D { x: 0, y: 0, z: 0 })
+    .image_extent(vk::Extent3D { width, height, depth: 1 });
+</code></pre>
+<p>Most of these fields are self-explanatory. The <code>buffer_offset</code> specifies the byte offset in the buffer at which the pixel values start. The <code>buffer_row_length</code> and <code>buffer_image_height</code> fields specify how the pixels are laid out in memory. For example, you could have some padding bytes between rows of the image. Specifying <code>0</code> for both indicates that the pixels are simply tightly packed like they are in our case. The <code>image_subresource</code>, <code>image_offset</code> and <code>image_extent</code> fields indicate to which part of the image we want to copy the pixels.</p>
+<p>Buffer to image copy operations are enqueued using the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_copy_buffer_to_image"><code class="hljs">cmd_copy_buffer_to_image</code></a> function:</p>
+<pre><code class="language-rust noplaypen">device.cmd_copy_buffer_to_image(
+    command_buffer,
+    buffer,
+    image,
+    vk::ImageLayout::TRANSFER_DST_OPTIMAL,
+    &amp;[region],
+);
+</code></pre>
+<p>The fourth parameter indicates which layout the image is currently using. I'm assuming here that the image has already been transitioned to the layout that is optimal for copying pixels to. Right now we're only copying one chunk of pixels to the whole image, but it's possible to specify an array of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.BufferImageCopy.html"><code class="hljs">vk::BufferImageCopy</code></a> to perform many different copies from this buffer to the image in one operation.</p>
+<h2><a class="header" href="#preparing-the-texture-image" id="preparing-the-texture-image">Preparing the texture image</a></h2>
+<p>We now have all of the tools we need to finish setting up the texture image, so we're going back to the <code>create_texture_image</code> function. The last thing we did there was creating the texture image. The next step is to copy the staging buffer to the texture image. This involves two steps:</p>
+<ul>
+<li>Transition the texture image to <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.TRANSFER_DST_OPTIMAL"><code class="hljs">vk::ImageLayout::TRANSFER_DST_OPTIMAL</code></a> </li>
+<li>Execute the buffer to image copy operation</li>
+</ul>
+<p>This is easy to do with the functions we just created:</p>
+<pre><code class="language-rust noplaypen">transition_image_layout(
+    device,
+    data,
+    data.texture_image,
+    vk::Format::R8G8B8A8_SRGB,
+    vk::ImageLayout::UNDEFINED,
+    vk::ImageLayout::TRANSFER_DST_OPTIMAL,
+)?;
+
+copy_buffer_to_image(
+    device,
+    data,
+    staging_buffer,
+    data.texture_image,
+    info.width,
+    info.height,
+)?;
+</code></pre>
+<p>The image was created with the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.UNDEFINED"><code class="hljs">vk::ImageLayout::UNDEFINED</code></a> layout, so that one should be specified as old layout when transitioning <code>texture_image</code>. Remember that we can do this because we don't care about its contents before performing the copy operation.</p>
+<p>To be able to start sampling from the texture image in the shader, we need one last transition to prepare it for shader access:</p>
+<pre><code class="language-rust noplaypen">transition_image_layout(
+    device,
+    data,
+    data.texture_image,
+    vk::Format::R8G8B8A8_SRGB,
+    vk::ImageLayout::TRANSFER_DST_OPTIMAL,
+    vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL,
+)?;
+</code></pre>
+<h2><a class="header" href="#transition-barrier-masks" id="transition-barrier-masks">Transition barrier masks</a></h2>
+<p>If you run your application with validation layers enabled now, then you'll see that it complains about the access masks and pipeline stages in <code>transition_image_layout</code> being invalid. We still need to set those based on the layouts in the transition.</p>
+<p>There are two transitions we need to handle:</p>
+<ul>
+<li>Undefined → transfer destination: transfer writes that don't need to wait on anything</li>
+<li>Transfer destination → shader reading: shader reads should wait on transfer writes, specifically the shader reads in the fragment shader, because that's where we're going to use the texture</li>
+</ul>
+<p>These rules are specified using the following access masks and pipeline stages which should be added at the beginning of <code>transition_image_layout</code>:</p>
+<pre><code class="language-rust noplaypen">let (
+    src_access_mask,
+    dst_access_mask,
+    src_stage_mask,
+    dst_stage_mask,
+) = match (old_layout, new_layout) {
+    (vk::ImageLayout::UNDEFINED, vk::ImageLayout::TRANSFER_DST_OPTIMAL) =&gt; (
+        vk::AccessFlags::empty(),
+        vk::AccessFlags::TRANSFER_WRITE,
+        vk::PipelineStageFlags::TOP_OF_PIPE,
+        vk::PipelineStageFlags::TRANSFER,
+    ),
+    (vk::ImageLayout::TRANSFER_DST_OPTIMAL, vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL) =&gt; (
+        vk::AccessFlags::TRANSFER_WRITE,
+        vk::AccessFlags::SHADER_READ,
+        vk::PipelineStageFlags::TRANSFER,
+        vk::PipelineStageFlags::FRAGMENT_SHADER,
+    ),
+    _ =&gt; return Err(anyhow!(&quot;Unsupported image layout transition!&quot;)),
+};
+</code></pre>
+<p>Then update the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageMemoryBarrier.html"><code class="hljs">vk::ImageMemoryBarrier</code></a> struct and the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_pipeline_barrier"><code class="hljs">cmd_pipeline_barrier</code></a> call with the access flags and pipeline stage masks:</p>
+<pre><code class="language-rust noplaypen">let barrier = vk::ImageMemoryBarrier::builder()
+    .old_layout(old_layout)
+    .new_layout(new_layout)
+    .src_queue_family_index(vk::QUEUE_FAMILY_IGNORED)
+    .dst_queue_family_index(vk::QUEUE_FAMILY_IGNORED)
+    .image(image)
+    .subresource_range(subresource)
+    .src_access_mask(src_access_mask)
+    .dst_access_mask(dst_access_mask);
+
+device.cmd_pipeline_barrier(
+    command_buffer,
+    src_stage_mask,
+    dst_stage_mask,
+    vk::DependencyFlags::empty(),
+    &amp;[] as &amp;[vk::MemoryBarrier],
+    &amp;[] as &amp;[vk::BufferMemoryBarrier],
+    &amp;[barrier],
+);
+</code></pre>
+<p>As you can see in the aforementioned table, transfer writes must occur in the pipeline transfer stage. Since the writes don't have to wait on anything, you may specify an empty access mask and the earliest possible pipeline stage <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.TOP_OF_PIPE"><code class="hljs">vk::PipelineStageFlags::TOP_OF_PIPE</code></a> for the pre-barrier operations. It should be noted that <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.TRANSFER"><code class="hljs">vk::PipelineStageFlags::TRANSFER</code></a> is not a <em>real</em> stage within the graphics and compute pipelines. It is more of a pseudo-stage where transfers happen. See <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/man/html/VkPipelineStageFlagBits.html">the documentation</a> for more information and other examples of pseudo-stages.</p>
+<p>The image will be written in the same pipeline stage and subsequently read by the fragment shader, which is why we specify shader reading access in the fragment shader pipeline stage.</p>
+<p>If we need to do more transitions in the future, then we'll extend the function. The application should now run successfully, although there are of course no visual changes yet.</p>
+<p>One thing to note is that command buffer submission results in implicit <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.AccessFlags.html#associatedconstant.HOST_WRITE"><code class="hljs">vk::AccessFlags::HOST_WRITE</code></a> synchronization at the beginning. Since the <code>transition_image_layout</code> function executes a command buffer with only a single command, you could use this implicit synchronization and set <code>src_access_mask</code> to <code>vk::AccessFlags::empty()</code> if you ever needed a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.AccessFlags.html#associatedconstant.HOST_WRITE"><code class="hljs">vk::AccessFlags::HOST_WRITE</code></a> dependency in a layout transition. It's up to you if you want to be explicit about it or not, but I'm personally not a fan of relying on these OpenGL-like &quot;hidden&quot; operations.</p>
+<p>There is actually a special type of image layout that supports all operations, <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.GENERAL"><code class="hljs">vk::ImageLayout::GENERAL</code></a>. The problem with it, of course, is that it doesn't necessarily offer the best performance for any operation. It is required for some special cases, like using an image as both input and output, or for reading an image after it has left the preinitialized layout.</p>
+<p>All of the helper functions that submit commands so far have been set up to execute synchronously by waiting for the queue to become idle. For practical applications it is recommended to combine these operations in a single command buffer and execute them asynchronously for higher throughput, especially the transitions and copy in the <code>create_texture_image</code> function. Try to experiment with this by creating a <code>setup_command_buffer</code> that the helper functions record commands into, and add a <code>flush_setup_commands</code> to execute the commands that have been recorded so far. It's best to do this after the texture mapping works to check if the texture resources are still set up correctly.</p>
+<h2><a class="header" href="#cleanup" id="cleanup">Cleanup</a></h2>
+<p>Finish the <code>create_texture_image</code> function by cleaning up the staging buffer and its memory at the end:</p>
+<pre><code class="language-rust noplaypen">device.destroy_buffer(staging_buffer, None);
+device.free_memory(staging_buffer_memory, None);
+</code></pre>
+<p>The main texture image is used until the end of the program:</p>
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.destroy_swapchain();
+    self.device.destroy_image(self.data.texture_image, None);
+    self.device.free_memory(self.data.texture_image_memory, None);
+    // ...
+}
+</code></pre>
+<p>The image now contains the texture, but we still need a way to access it from the graphics pipeline. We'll work on that in the next chapter.</p>
 <h1><a class="header" href="#image-view-and-sampler" id="image-view-and-sampler">Image view and sampler</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/24_sampler.rs">main.rs</a></p>
+<p>In this chapter we're going to create two more resources that are needed for the graphics pipeline to sample an image. The first resource is one that we've already seen before while working with the swapchain images, but the second one is new - it relates to how the shader will read texels from the image.</p>
+<h2><a class="header" href="#texture-image-view" id="texture-image-view">Texture image view</a></h2>
+<p>We've seen before, with the swapchain images and the framebuffer, that images are accessed through image views rather than directly. We will also need to create such an image view for the texture image.</p>
+<p>Add an <code>AppData</code> field to hold a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageView.html"><code class="hljs">vk::ImageView</code></a> for the texture image and create a new function <code>create_texture_image_view</code> where we'll create it:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_texture_image(&amp;instance, &amp;device, &amp;mut data)?;
+        create_texture_image_view(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+struct AppData {
+    // ...
+    texture_image: vk::Image,
+    texture_image_memory: vk::DeviceMemory,
+    texture_image_view: vk::ImageView,
+    // ...
+}
+
+fn create_texture_image_view(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>The code for this function can be based directly on <code>create_swapchain_image_views</code>. The only two changes you have to make are the <code>format</code> and the <code>image</code>:</p>
+<pre><code class="language-rust noplaypen">let subresource_range = vk::ImageSubresourceRange::builder()
+    .aspect_mask(vk::ImageAspectFlags::COLOR)
+    .base_mip_level(0)
+    .level_count(1)
+    .base_array_layer(0)
+    .layer_count(1);
+
+let info = vk::ImageViewCreateInfo::builder()
+    .image(data.texture_image)
+    .view_type(vk::ImageViewType::_2D)
+    .format(vk::Format::R8G8B8A8_SRGB)
+    .subresource_range(subresource_range);
+</code></pre>
+<p>I've left out the explicit <code>components</code> initialization, because <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ComponentSwizzle.html#associatedconstant.IDENTITY"><code class="hljs">vk::ComponentSwizzle::IDENTITY</code></a> is defined as <code>0</code> anyway. Finish creating the image view by calling <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_image_view"><code class="hljs">create_image_view</code></a>:</p>
+<pre><code class="language-rust noplaypen">data.texture_image_view = device.create_image_view(&amp;info, None)?;
+</code></pre>
+<p>Because so much of the logic is duplicated from <code>create_swapchain_image_views</code>, you may wish to abstract it into a new <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_image_view"><code class="hljs">create_image_view</code></a> function:</p>
+<pre><code class="language-rust noplaypen">fn create_image_view(
+    device: &amp;Device,
+    image: vk::Image,
+    format: vk::Format,
+) -&gt; Result&lt;vk::ImageView&gt; {
+    let subresource_range = vk::ImageSubresourceRange::builder()
+        .aspect_mask(vk::ImageAspectFlags::COLOR)
+        .base_mip_level(0)
+        .level_count(1)
+        .base_array_layer(0)
+        .layer_count(1);
+
+    let info = vk::ImageViewCreateInfo::builder()
+        .image(image)
+        .view_type(vk::ImageViewType::_2D)
+        .format(format)
+        .subresource_range(subresource_range);
+
+    Ok(device.create_image_view(&amp;info, None)?)
+}
+</code></pre>
+<p>The <code>create_texture_image_view</code> function can now be simplified to:</p>
+<pre><code class="language-rust noplaypen">fn create_texture_image_view(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    data.texture_image_view = create_image_view(
+        device,
+        data.texture_image,
+        vk::Format::R8G8B8A8_SRGB,
+    )?;
+
+    Ok(())
+}
+</code></pre>
+<p>And <code>create_swapchain_image_views</code> can be simplified to:</p>
+<pre><code class="language-rust noplaypen">fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    data.swapchain_image_views = data
+        .swapchain_images
+        .iter()
+        .map(|i| create_image_view(device, *i, data.swapchain_format))
+        .collect::&lt;Result&lt;Vec&lt;_&gt;, _&gt;&gt;()?;
+
+    Ok(())
+}
+</code></pre>
+<p>Make sure to destroy the image view at the end of the program, right before destroying the image itself:</p>
+<pre><code class="language-c++">fn destroy(&amp;mut self) {
+    self.destroy_swapchain();
+    self.device.destroy_sampler(self.data.texture_sampler, None);
+    self.device.free_memory(self.data.texture_image_memory, None);
+    self.device.destroy_image_view(self.data.texture_image_view, None);
+    // ...
+}
+</code></pre>
+<h2><a class="header" href="#samplers" id="samplers">Samplers</a></h2>
+<p>It is possible for shaders to read texels directly from images, but that is not very common when they are used as textures. Textures are usually accessed through samplers, which will apply filtering and transformations to compute the final color that is retrieved.</p>
+<p>These filters are helpful to deal with problems like oversampling. Consider a texture that is mapped to geometry with more fragments than texels. If you simply took the closest texel for the texture coordinate in each fragment, then you would get a result like the first image:</p>
+<p><img src="texture/../images/texture_filtering.png" alt="" /></p>
+<p>If you combined the 4 closest texels through linear interpolation, then you would get a smoother result like the one on the right. Of course your application may have art style requirements that fit the left style more (think Minecraft), but the right is preferred in conventional graphics applications. A sampler object automatically applies this filtering for you when reading a color from the texture.</p>
+<p>Undersampling is the opposite problem, where you have more texels than fragments. This will lead to artifacts when sampling high frequency patterns like a checkerboard texture at a sharp angle:</p>
+<p><img src="texture/../images/anisotropic_filtering.png" alt="" /></p>
+<p>As shown in the left image, the texture turns into a blurry mess in the distance. The solution to this is <a href="https://en.wikipedia.org/wiki/Anisotropic_filtering">anisotropic filtering</a>, which can also be applied automatically by a sampler.</p>
+<p>Aside from these filters, a sampler can also take care of transformations. It determines what happens when you try to read texels outside the image through its <em>addressing mode</em>. The image below displays some of the possibilities:</p>
+<p><img src="texture/../images/texture_addressing.png" alt="" /></p>
+<p>We will now create a function <code>create_texture_sampler</code> to set up such a sampler object. We'll be using that sampler to read colors from the texture in the shader later on.</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_texture_image(&amp;instance, &amp;device, &amp;mut data)?;
+        create_texture_image_view(&amp;device, &amp;mut data)?;
+        create_texture_sampler(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>Samplers are configured through a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerCreateInfo.html"><code class="hljs">vk::SamplerCreateInfo</code></a> structure, which specifies all filters and transformations that it should apply.</p>
+<pre><code class="language-rust noplaypen">let info = vk::SamplerCreateInfo::builder()
+    .mag_filter(vk::Filter::LINEAR)
+    .min_filter(vk::Filter::LINEAR)
+    // continued...
+</code></pre>
+<p>The <code>mag_filter</code> and <code>min_filter</code> fields specify how to interpolate texels that are magnified or minified. Magnification concerns the oversampling problem describes above, and minification concerns undersampling. The choices are <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Filter.html#associatedconstant.NEAREST"><code class="hljs">vk::Filter::NEAREST</code></a> and <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Filter.html#associatedconstant.LINEAR"><code class="hljs">vk::Filter::LINEAR</code></a>, corresponding to the modes demonstrated in the images above.</p>
+<pre><code class="language-rust noplaypen">    .address_mode_u(vk::SamplerAddressMode::REPEAT)
+    .address_mode_v(vk::SamplerAddressMode::REPEAT)
+    .address_mode_w(vk::SamplerAddressMode::REPEAT)
+</code></pre>
+<p>The addressing mode can be specified per axis using the <code>address_mode</code> fields. The available values are listed below. Most of these are demonstrated in the image above. Note that the axes are called U, V and W instead of X, Y and Z. This is a convention for texture space coordinates.</p>
+<ul>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.REPEAT"><code class="hljs">vk::SamplerAddressMode::REPEAT</code></a> – Repeat the texture when going beyond the image dimensions.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.MIRRORED_REPEAT"><code class="hljs">vk::SamplerAddressMode::MIRRORED_REPEAT</code></a> – Like repeat, but inverts the coordinates to mirror the image when going beyond the dimensions.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.CLAMP_TO_EDGE"><code class="hljs">vk::SamplerAddressMode::CLAMP_TO_EDGE</code></a> – Take the color of the edge closest to the coordinate beyond the image dimensions.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.MIRROR_CLAMP_TO_EDGE"><code class="hljs">vk::SamplerAddressMode::MIRROR_CLAMP_TO_EDGE</code></a> – Like clamp to edge, but instead uses the edge opposite to the closest edge.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.CLAMP_TO_BORDER"><code class="hljs">vk::SamplerAddressMode::CLAMP_TO_BORDER</code></a> – Return a solid color when sampling beyond the dimensions of the image.</li>
+</ul>
+<p>It doesn't really matter which addressing mode we use here, because we're not going to sample outside of the image in this tutorial. However, the repeat mode is probably the most common mode, because it can be used to tile textures like floors and walls.</p>
+<pre><code class="language-rust noplaypen">    .anisotropy_enable(true)
+    .max_anisotropy(16.0)
+</code></pre>
+<p>These two fields specify if anisotropic filtering should be used. There is no reason not to use this unless performance is a concern. The <code>max_anisotropy</code> field limits the amount of texel samples that can be used to calculate the final color. A lower value results in better performance, but lower quality results. There is no graphics hardware available today that will use more than 16 samples, because the difference is negligible beyond that point.</p>
+<pre><code class="language-rust noplaypen">    .border_color(vk::BorderColor::INT_OPAQUE_BLACK)
+</code></pre>
+<p>The <code>border_color</code> field specifies which color is returned when sampling beyond the image with clamp to border addressing mode. It is possible to return black, white or transparent in either float or int formats. You cannot specify an arbitrary color.</p>
+<pre><code class="language-rust noplaypen">    .unnormalized_coordinates(false)
+</code></pre>
+<p>The <code>unnormalized_coordinates</code> field specifies which coordinate system you want to use to address texels in an image. If this field is <code>true</code>, then you can simply use coordinates within the <code>[0, width)</code> and <code>[0, height)</code> range. If it is <code>false</code>, then the texels are addressed using the <code>[0, 1)</code> range on all axes. Real-world applications almost always use normalized coordinates, because then it's possible to use textures of varying resolutions with the exact same coordinates.</p>
+<pre><code class="language-rust noplaypen">    .compare_enable(false)
+    .compare_op(vk::CompareOp::ALWAYS)
+</code></pre>
+<p>If a comparison function is enabled, then texels will first be compared to a value, and the result of that comparison is used in filtering operations. This is mainly used for <a href="https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch11.html">percentage-closer filtering</a> on shadow maps. We'll look at this in a future chapter.</p>
+<pre><code class="language-rust noplaypen">    .mipmap_mode(vk::SamplerMipmapMode::LINEAR)
+    .mip_lod_bias(0.0)
+    .min_lod(0.0)
+    .max_lod(0.0);
+</code></pre>
+<p>All of these fields apply to mipmapping. We will look at mipmapping in a <a href="texture//Generating_Mipmaps">later chapter</a>, but basically it's another type of filter that can be applied.</p>
+<p>The functioning of the sampler is now fully defined. Add an <code>AppData</code> field to hold the handle of the sampler object:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    texture_image_view: vk::ImageView,
+    texture_sampler: vk::Sampler,
+    // ...
+}
+</code></pre>
+<p>Then create the sampler with <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_sampler"><code class="hljs">create_sampler</code></a>:</p>
+<pre><code class="language-rust noplaypen">data.texture_sampler = device.create_sampler(&amp;info, None)?;
+</code></pre>
+<p>Note the sampler does not reference a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Image.html"><code class="hljs">vk::Image</code></a> anywhere. The sampler is a distinct object that provides an interface to extract colors from a texture. It can be applied to any image you want, whether it is 1D, 2D or 3D. This is different from many older APIs, which combined texture images and filtering into a single state.</p>
+<p>Destroy the sampler at the end of the program when we'll no longer be accessing the image:</p>
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.destroy_swapchain();
+    self.device.destroy_sampler(self.data.texture_sampler, None);
+    // ...
+}
+</code></pre>
+<h2><a class="header" href="#anisotropy-device-feature" id="anisotropy-device-feature">Anisotropy device feature</a></h2>
+<p>If you run your program right now, you'll see a validation layer message like this:</p>
+<p><img src="texture/../images/validation_layer_anisotropy.png" alt="" /></p>
+<p>That's because anisotropic filtering is actually an optional device feature. We need to update the <code>create_logical_device</code> function to request it:</p>
+<pre><code class="language-rust noplaypen">let features = vk::PhysicalDeviceFeatures::builder()
+    .sampler_anisotropy(true);
+</code></pre>
+<p>And even though it is very unlikely that a modern graphics card will not support it, we should update <code>check_physical_device</code> to check if it is available:</p>
+<pre><code class="language-rust noplaypen">fn check_physical_device(
+    instance: &amp;Instance,
+    data: &amp;AppData,
+    physical_device: vk::PhysicalDevice,
+) -&gt; Result&lt;bool&gt; {
+    // ...
+    let features = instance.get_physical_device_features(physical_device);
+    Ok(extensions &amp;&amp; swapchain &amp;&amp; features.sampler_anisotropy == vk::TRUE)
+}
+</code></pre>
+<p>The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features"><code class="hljs">get_physical_device_features</code></a> repurposes the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PhysicalDeviceFeatures.html"><code class="hljs">vk::PhysicalDeviceFeatures</code></a> struct to indicate which features are supported rather than requested by setting the boolean values.</p>
+<p>Instead of enforcing the availability of anisotropic filtering, it's also possible to simply not use it by conditionally setting:</p>
+<pre><code class="language-rust noplaypen">    .anisotropy_enable(false)
+    .max_anisotropy(1.0)
+</code></pre>
+<p>In the next chapter we will expose the image and sampler objects to the shaders to draw the texture onto the square.</p>
 <h1><a class="header" href="#combined-image-sampler" id="combined-image-sampler">Combined image sampler</a></h1>
 <p>Coming soon™.</p>
 <h1><a class="header" href="#depth-buffering" id="depth-buffering">Depth buffering</a></h1>

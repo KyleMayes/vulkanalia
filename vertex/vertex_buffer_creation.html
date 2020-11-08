@@ -325,7 +325,7 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
 </code></pre>
 <p>The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_vertex_buffers"><code class="hljs">cmd_bind_vertex_buffers</code></a> command is used to bind vertex buffers to bindings, like the one we set up in the previous chapter. The second parameter specifies the index of the vertex input binding we are using. The last two parameters specify the vertex buffers to bind and the byte offsets to start reading vertex data from. You should also change the call to <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw"><code class="hljs">cmd_draw</code></a> to pass the number of vertices in the buffer as opposed to the hardcoded number <code>3</code>.</p>
 <p>Now run the program and you should see the familiar triangle again:</p>
-<p><img src="/images/triangle.png" alt="" /></p>
+<p><img src="../images/triangle.png" alt="" /></p>
 <p>Try changing the color of the top vertex to white by modifying the <code>VERTICES</code> list:</p>
 <pre><code class="language-rust noplaypen">lazy_static! {
     static ref VERTICES: Vec&lt;Vertex&gt; = vec![
@@ -336,7 +336,7 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
 }
 </code></pre>
 <p>Run the program again and you should see the following:</p>
-<p><img src="/images/triangle_white.png" alt="" /></p>
+<p><img src="../images/triangle_white.png" alt="" /></p>
 <p>In the next chapter we'll look at a different way to copy vertex data to a vertex buffer that results in better performance, but takes some more work.</p>
 
                     </main>

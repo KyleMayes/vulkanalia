@@ -153,7 +153,210 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#image-view-and-sampler" id="image-view-and-sampler">Image view and sampler</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/24_sampler.rs">main.rs</a></p>
+<p>In this chapter we're going to create two more resources that are needed for the graphics pipeline to sample an image. The first resource is one that we've already seen before while working with the swapchain images, but the second one is new - it relates to how the shader will read texels from the image.</p>
+<h2><a class="header" href="#texture-image-view" id="texture-image-view">Texture image view</a></h2>
+<p>We've seen before, with the swapchain images and the framebuffer, that images are accessed through image views rather than directly. We will also need to create such an image view for the texture image.</p>
+<p>Add an <code>AppData</code> field to hold a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageView.html"><code class="hljs">vk::ImageView</code></a> for the texture image and create a new function <code>create_texture_image_view</code> where we'll create it:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_texture_image(&amp;instance, &amp;device, &amp;mut data)?;
+        create_texture_image_view(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+struct AppData {
+    // ...
+    texture_image: vk::Image,
+    texture_image_memory: vk::DeviceMemory,
+    texture_image_view: vk::ImageView,
+    // ...
+}
+
+fn create_texture_image_view(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>The code for this function can be based directly on <code>create_swapchain_image_views</code>. The only two changes you have to make are the <code>format</code> and the <code>image</code>:</p>
+<pre><code class="language-rust noplaypen">let subresource_range = vk::ImageSubresourceRange::builder()
+    .aspect_mask(vk::ImageAspectFlags::COLOR)
+    .base_mip_level(0)
+    .level_count(1)
+    .base_array_layer(0)
+    .layer_count(1);
+
+let info = vk::ImageViewCreateInfo::builder()
+    .image(data.texture_image)
+    .view_type(vk::ImageViewType::_2D)
+    .format(vk::Format::R8G8B8A8_SRGB)
+    .subresource_range(subresource_range);
+</code></pre>
+<p>I've left out the explicit <code>components</code> initialization, because <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ComponentSwizzle.html#associatedconstant.IDENTITY"><code class="hljs">vk::ComponentSwizzle::IDENTITY</code></a> is defined as <code>0</code> anyway. Finish creating the image view by calling <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_image_view"><code class="hljs">create_image_view</code></a>:</p>
+<pre><code class="language-rust noplaypen">data.texture_image_view = device.create_image_view(&amp;info, None)?;
+</code></pre>
+<p>Because so much of the logic is duplicated from <code>create_swapchain_image_views</code>, you may wish to abstract it into a new <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_image_view"><code class="hljs">create_image_view</code></a> function:</p>
+<pre><code class="language-rust noplaypen">fn create_image_view(
+    device: &amp;Device,
+    image: vk::Image,
+    format: vk::Format,
+) -&gt; Result&lt;vk::ImageView&gt; {
+    let subresource_range = vk::ImageSubresourceRange::builder()
+        .aspect_mask(vk::ImageAspectFlags::COLOR)
+        .base_mip_level(0)
+        .level_count(1)
+        .base_array_layer(0)
+        .layer_count(1);
+
+    let info = vk::ImageViewCreateInfo::builder()
+        .image(image)
+        .view_type(vk::ImageViewType::_2D)
+        .format(format)
+        .subresource_range(subresource_range);
+
+    Ok(device.create_image_view(&amp;info, None)?)
+}
+</code></pre>
+<p>The <code>create_texture_image_view</code> function can now be simplified to:</p>
+<pre><code class="language-rust noplaypen">fn create_texture_image_view(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    data.texture_image_view = create_image_view(
+        device,
+        data.texture_image,
+        vk::Format::R8G8B8A8_SRGB,
+    )?;
+
+    Ok(())
+}
+</code></pre>
+<p>And <code>create_swapchain_image_views</code> can be simplified to:</p>
+<pre><code class="language-rust noplaypen">fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    data.swapchain_image_views = data
+        .swapchain_images
+        .iter()
+        .map(|i| create_image_view(device, *i, data.swapchain_format))
+        .collect::&lt;Result&lt;Vec&lt;_&gt;, _&gt;&gt;()?;
+
+    Ok(())
+}
+</code></pre>
+<p>Make sure to destroy the image view at the end of the program, right before destroying the image itself:</p>
+<pre><code class="language-c++">fn destroy(&amp;mut self) {
+    self.destroy_swapchain();
+    self.device.destroy_sampler(self.data.texture_sampler, None);
+    self.device.free_memory(self.data.texture_image_memory, None);
+    self.device.destroy_image_view(self.data.texture_image_view, None);
+    // ...
+}
+</code></pre>
+<h2><a class="header" href="#samplers" id="samplers">Samplers</a></h2>
+<p>It is possible for shaders to read texels directly from images, but that is not very common when they are used as textures. Textures are usually accessed through samplers, which will apply filtering and transformations to compute the final color that is retrieved.</p>
+<p>These filters are helpful to deal with problems like oversampling. Consider a texture that is mapped to geometry with more fragments than texels. If you simply took the closest texel for the texture coordinate in each fragment, then you would get a result like the first image:</p>
+<p><img src="../images/texture_filtering.png" alt="" /></p>
+<p>If you combined the 4 closest texels through linear interpolation, then you would get a smoother result like the one on the right. Of course your application may have art style requirements that fit the left style more (think Minecraft), but the right is preferred in conventional graphics applications. A sampler object automatically applies this filtering for you when reading a color from the texture.</p>
+<p>Undersampling is the opposite problem, where you have more texels than fragments. This will lead to artifacts when sampling high frequency patterns like a checkerboard texture at a sharp angle:</p>
+<p><img src="../images/anisotropic_filtering.png" alt="" /></p>
+<p>As shown in the left image, the texture turns into a blurry mess in the distance. The solution to this is <a href="https://en.wikipedia.org/wiki/Anisotropic_filtering">anisotropic filtering</a>, which can also be applied automatically by a sampler.</p>
+<p>Aside from these filters, a sampler can also take care of transformations. It determines what happens when you try to read texels outside the image through its <em>addressing mode</em>. The image below displays some of the possibilities:</p>
+<p><img src="../images/texture_addressing.png" alt="" /></p>
+<p>We will now create a function <code>create_texture_sampler</code> to set up such a sampler object. We'll be using that sampler to read colors from the texture in the shader later on.</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_texture_image(&amp;instance, &amp;device, &amp;mut data)?;
+        create_texture_image_view(&amp;device, &amp;mut data)?;
+        create_texture_sampler(&amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>Samplers are configured through a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerCreateInfo.html"><code class="hljs">vk::SamplerCreateInfo</code></a> structure, which specifies all filters and transformations that it should apply.</p>
+<pre><code class="language-rust noplaypen">let info = vk::SamplerCreateInfo::builder()
+    .mag_filter(vk::Filter::LINEAR)
+    .min_filter(vk::Filter::LINEAR)
+    // continued...
+</code></pre>
+<p>The <code>mag_filter</code> and <code>min_filter</code> fields specify how to interpolate texels that are magnified or minified. Magnification concerns the oversampling problem describes above, and minification concerns undersampling. The choices are <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Filter.html#associatedconstant.NEAREST"><code class="hljs">vk::Filter::NEAREST</code></a> and <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Filter.html#associatedconstant.LINEAR"><code class="hljs">vk::Filter::LINEAR</code></a>, corresponding to the modes demonstrated in the images above.</p>
+<pre><code class="language-rust noplaypen">    .address_mode_u(vk::SamplerAddressMode::REPEAT)
+    .address_mode_v(vk::SamplerAddressMode::REPEAT)
+    .address_mode_w(vk::SamplerAddressMode::REPEAT)
+</code></pre>
+<p>The addressing mode can be specified per axis using the <code>address_mode</code> fields. The available values are listed below. Most of these are demonstrated in the image above. Note that the axes are called U, V and W instead of X, Y and Z. This is a convention for texture space coordinates.</p>
+<ul>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.REPEAT"><code class="hljs">vk::SamplerAddressMode::REPEAT</code></a> – Repeat the texture when going beyond the image dimensions.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.MIRRORED_REPEAT"><code class="hljs">vk::SamplerAddressMode::MIRRORED_REPEAT</code></a> – Like repeat, but inverts the coordinates to mirror the image when going beyond the dimensions.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.CLAMP_TO_EDGE"><code class="hljs">vk::SamplerAddressMode::CLAMP_TO_EDGE</code></a> – Take the color of the edge closest to the coordinate beyond the image dimensions.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.MIRROR_CLAMP_TO_EDGE"><code class="hljs">vk::SamplerAddressMode::MIRROR_CLAMP_TO_EDGE</code></a> – Like clamp to edge, but instead uses the edge opposite to the closest edge.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.CLAMP_TO_BORDER"><code class="hljs">vk::SamplerAddressMode::CLAMP_TO_BORDER</code></a> – Return a solid color when sampling beyond the dimensions of the image.</li>
+</ul>
+<p>It doesn't really matter which addressing mode we use here, because we're not going to sample outside of the image in this tutorial. However, the repeat mode is probably the most common mode, because it can be used to tile textures like floors and walls.</p>
+<pre><code class="language-rust noplaypen">    .anisotropy_enable(true)
+    .max_anisotropy(16.0)
+</code></pre>
+<p>These two fields specify if anisotropic filtering should be used. There is no reason not to use this unless performance is a concern. The <code>max_anisotropy</code> field limits the amount of texel samples that can be used to calculate the final color. A lower value results in better performance, but lower quality results. There is no graphics hardware available today that will use more than 16 samples, because the difference is negligible beyond that point.</p>
+<pre><code class="language-rust noplaypen">    .border_color(vk::BorderColor::INT_OPAQUE_BLACK)
+</code></pre>
+<p>The <code>border_color</code> field specifies which color is returned when sampling beyond the image with clamp to border addressing mode. It is possible to return black, white or transparent in either float or int formats. You cannot specify an arbitrary color.</p>
+<pre><code class="language-rust noplaypen">    .unnormalized_coordinates(false)
+</code></pre>
+<p>The <code>unnormalized_coordinates</code> field specifies which coordinate system you want to use to address texels in an image. If this field is <code>true</code>, then you can simply use coordinates within the <code>[0, width)</code> and <code>[0, height)</code> range. If it is <code>false</code>, then the texels are addressed using the <code>[0, 1)</code> range on all axes. Real-world applications almost always use normalized coordinates, because then it's possible to use textures of varying resolutions with the exact same coordinates.</p>
+<pre><code class="language-rust noplaypen">    .compare_enable(false)
+    .compare_op(vk::CompareOp::ALWAYS)
+</code></pre>
+<p>If a comparison function is enabled, then texels will first be compared to a value, and the result of that comparison is used in filtering operations. This is mainly used for <a href="https://developer.nvidia.com/gpugems/GPUGems/gpugems_ch11.html">percentage-closer filtering</a> on shadow maps. We'll look at this in a future chapter.</p>
+<pre><code class="language-rust noplaypen">    .mipmap_mode(vk::SamplerMipmapMode::LINEAR)
+    .mip_lod_bias(0.0)
+    .min_lod(0.0)
+    .max_lod(0.0);
+</code></pre>
+<p>All of these fields apply to mipmapping. We will look at mipmapping in a <a href="/Generating_Mipmaps">later chapter</a>, but basically it's another type of filter that can be applied.</p>
+<p>The functioning of the sampler is now fully defined. Add an <code>AppData</code> field to hold the handle of the sampler object:</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    texture_image_view: vk::ImageView,
+    texture_sampler: vk::Sampler,
+    // ...
+}
+</code></pre>
+<p>Then create the sampler with <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_sampler"><code class="hljs">create_sampler</code></a>:</p>
+<pre><code class="language-rust noplaypen">data.texture_sampler = device.create_sampler(&amp;info, None)?;
+</code></pre>
+<p>Note the sampler does not reference a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Image.html"><code class="hljs">vk::Image</code></a> anywhere. The sampler is a distinct object that provides an interface to extract colors from a texture. It can be applied to any image you want, whether it is 1D, 2D or 3D. This is different from many older APIs, which combined texture images and filtering into a single state.</p>
+<p>Destroy the sampler at the end of the program when we'll no longer be accessing the image:</p>
+<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+    self.destroy_swapchain();
+    self.device.destroy_sampler(self.data.texture_sampler, None);
+    // ...
+}
+</code></pre>
+<h2><a class="header" href="#anisotropy-device-feature" id="anisotropy-device-feature">Anisotropy device feature</a></h2>
+<p>If you run your program right now, you'll see a validation layer message like this:</p>
+<p><img src="../images/validation_layer_anisotropy.png" alt="" /></p>
+<p>That's because anisotropic filtering is actually an optional device feature. We need to update the <code>create_logical_device</code> function to request it:</p>
+<pre><code class="language-rust noplaypen">let features = vk::PhysicalDeviceFeatures::builder()
+    .sampler_anisotropy(true);
+</code></pre>
+<p>And even though it is very unlikely that a modern graphics card will not support it, we should update <code>check_physical_device</code> to check if it is available:</p>
+<pre><code class="language-rust noplaypen">fn check_physical_device(
+    instance: &amp;Instance,
+    data: &amp;AppData,
+    physical_device: vk::PhysicalDevice,
+) -&gt; Result&lt;bool&gt; {
+    // ...
+    let features = instance.get_physical_device_features(physical_device);
+    Ok(extensions &amp;&amp; swapchain &amp;&amp; features.sampler_anisotropy == vk::TRUE)
+}
+</code></pre>
+<p>The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features"><code class="hljs">get_physical_device_features</code></a> repurposes the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PhysicalDeviceFeatures.html"><code class="hljs">vk::PhysicalDeviceFeatures</code></a> struct to indicate which features are supported rather than requested by setting the boolean values.</p>
+<p>Instead of enforcing the availability of anisotropic filtering, it's also possible to simply not use it by conditionally setting:</p>
+<pre><code class="language-rust noplaypen">    .anisotropy_enable(false)
+    .max_anisotropy(1.0)
+</code></pre>
+<p>In the next chapter we will expose the image and sampler objects to the shaders to draw the texture onto the square.</p>
 
                     </main>
 

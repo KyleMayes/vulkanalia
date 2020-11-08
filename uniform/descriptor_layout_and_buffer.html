@@ -233,7 +233,7 @@ fn create_descriptor_set_layout(device: &amp;Device, data: &amp;mut AppData) -&g
 </code></pre>
 <p>Every binding needs to be described through a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorSetLayoutBinding.html"><code class="hljs">vk::DescriptorSetLayoutBinding</code></a> struct.</p>
 <pre><code class="language-rust noplaypen">fn create_descriptor_set_layout(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
-    let binding = vk::DescriptorSetLayoutBinding::builder()
+    let ubo_binding = vk::DescriptorSetLayoutBinding::builder()
         .binding(0)
         .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
         .descriptor_count(1)
@@ -254,7 +254,7 @@ fn create_descriptor_set_layout(device: &amp;Device, data: &amp;mut AppData) -&g
 }
 </code></pre>
 <p>We can then create it using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_descriptor_set_layout"><code class="hljs">create_descriptor_set_layout</code></a>. This function accepts a simple <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorSetLayoutCreateInfo.html"><code class="hljs">vk::DescriptorSetLayoutCreateInfo</code></a> with the array of bindings:</p>
-<pre><code class="language-rust noplaypen">let bindings = &amp;[binding];
+<pre><code class="language-rust noplaypen">let bindings = &amp;[ubo_binding];
 let info = vk::DescriptorSetLayoutCreateInfo::builder()
     .bindings(bindings);
 
