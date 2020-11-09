@@ -58,7 +58,7 @@ Add a new `AppData` field to store the handle of the descriptor pool so you can 
 data.descriptor_pool = device.create_descriptor_pool(&info, None)?;
 ```
 
-The descriptor pool should be destroyed when the swap chain is recreated because it depends on the number of images:
+The descriptor pool should be destroyed when the swapchain is recreated because it depends on the number of images:
 
 ```rust,noplaypen
 fn destroy_swapchain(&mut self) {
@@ -114,7 +114,7 @@ let info = vk::DescriptorSetAllocateInfo::builder()
     .set_layouts(&layouts);
 ```
 
-In our case we will create one descriptor set for each swap chain image, all with the same layout. Unfortunately we do need all the copies of the layout because the next function expects an array matching the number of sets.
+In our case we will create one descriptor set for each swapchain image, all with the same layout. Unfortunately we do need all the copies of the layout because the next function expects an array matching the number of sets.
 
 Add an `AppData` field to hold the descriptor set handles:
 
@@ -187,7 +187,7 @@ The updates are applied using `update_descriptor_sets`. It accepts two kinds of 
 
 ## Using descriptor sets
 
-We now need to update the `create_command_buffers` function to actually bind the right descriptor set for each swap chain image to the descriptors in the shader with `cmd_bind_descriptor_sets`. This needs to be done before the `cmd_draw_indexed` call:
+We now need to update the `create_command_buffers` function to actually bind the right descriptor set for each swapchain image to the descriptors in the shader with `cmd_bind_descriptor_sets`. This needs to be done before the `cmd_draw_indexed` call:
 
 ```rust,noplaypen
 device.cmd_bind_descriptor_sets(

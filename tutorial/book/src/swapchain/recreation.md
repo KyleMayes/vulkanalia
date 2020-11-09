@@ -37,7 +37,7 @@ fn destroy_swapchain(&mut self) {
 }
 ```
 
-We'll move the cleanup code of all objects that are recreated as part of a swap chain refresh from `App::destroy` to `App::destroy_swapchain`:
+We'll move the cleanup code of all objects that are recreated as part of a swapchain refresh from `App::destroy` to `App::destroy_swapchain`:
 
 ```rust,noplaypen
 fn destroy(&mut self) {
@@ -80,7 +80,7 @@ fn destroy_swapchain(&mut self) {
 
 We could recreate the command pool from scratch, but that is rather wasteful. Instead I've opted to clean up the existing command buffers with the `free_command_buffers` command. This way we can reuse the existing pool to allocate the new command buffers.
 
-That's all it takes to recreate the swapchain! However, the disadvantage of this approach is that we need to stop all rendering before creating the new swap chain. It is possible to create a new swapchain while drawing commands on an image from the old swapchain are still in-flight. You need to pass the previous swapchain to the `old_swapchain` field in the `vk::SwapchainCreateInfoKHR` struct and destroy the old swapchain as soon as you've finished using it.
+That's all it takes to recreate the swapchain! However, the disadvantage of this approach is that we need to stop all rendering before creating the new swapchain. It is possible to create a new swapchain while drawing commands on an image from the old swapchain are still in-flight. You need to pass the previous swapchain to the `old_swapchain` field in the `vk::SwapchainCreateInfoKHR` struct and destroy the old swapchain as soon as you've finished using it.
 
 ## Suboptimal or out-of-date swapchain
 
