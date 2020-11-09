@@ -828,6 +828,13 @@ pub type PFN_vkCmdSetExclusiveScissorNV = extern "system" fn(
     _exclusive_scissors: *const Rect2D,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateEnumNV.html>
+pub type PFN_vkCmdSetFragmentShadingRateEnumNV = extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _shading_rate: FragmentShadingRateNV,
+    _combiner_ops: *const FragmentShadingRateCombinerOpKHR,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateKHR.html>
 pub type PFN_vkCmdSetFragmentShadingRateKHR = extern "system" fn(
     _command_buffer: CommandBuffer,

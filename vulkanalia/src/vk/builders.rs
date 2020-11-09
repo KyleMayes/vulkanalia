@@ -8528,6 +8528,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMap2Feature
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageRobustnessFeaturesEXT {}
@@ -14296,6 +14297,7 @@ unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineShaderGroupsCr
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCreationFeedbackCreateInfoEXT {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineDiscardRectangleStateCreateInfoEXT {}
+unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineFragmentShadingRateEnumStateCreateInfoNV {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineFragmentShadingRateStateCreateInfoKHR {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo
     for PipelineRepresentativeFragmentTestStateCreateInfoNV
@@ -23888,6 +23890,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMap2
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageRobustnessFeaturesEXT {}
@@ -24639,6 +24642,146 @@ impl ops::DerefMut for PhysicalDeviceFragmentShaderInterlockFeaturesEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceFragmentShaderInterlockFeaturesEXTBuilder {
     type Target = PhysicalDeviceFragmentShaderInterlockFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {
+    type Target = PhysicalDeviceFragmentShadingRateEnumsFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {
+    type Builder = PhysicalDeviceFragmentShadingRateEnumsFeaturesNVBuilder;
+}
+
+/// A builder for a [PhysicalDeviceFragmentShadingRateEnumsFeaturesNV](struct.PhysicalDeviceFragmentShadingRateEnumsFeaturesNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceFragmentShadingRateEnumsFeaturesNVBuilder {
+    value: PhysicalDeviceFragmentShadingRateEnumsFeaturesNV,
+}
+
+impl PhysicalDeviceFragmentShadingRateEnumsFeaturesNVBuilder {
+    #[inline]
+    pub fn fragment_shading_rate_enums(mut self, fragment_shading_rate_enums: bool) -> Self {
+        self.value.fragment_shading_rate_enums = fragment_shading_rate_enums as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn supersample_fragment_shading_rates(
+        mut self,
+        supersample_fragment_shading_rates: bool,
+    ) -> Self {
+        self.value.supersample_fragment_shading_rates =
+            supersample_fragment_shading_rates as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn no_invocation_fragment_shading_rates(
+        mut self,
+        no_invocation_fragment_shading_rates: bool,
+    ) -> Self {
+        self.value.no_invocation_fragment_shading_rates =
+            no_invocation_fragment_shading_rates as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceFragmentShadingRateEnumsFeaturesNVBuilder {
+    type Target = PhysicalDeviceFragmentShadingRateEnumsFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceFragmentShadingRateEnumsFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentShadingRateEnumsFeaturesNVBuilder {
+    type Target = PhysicalDeviceFragmentShadingRateEnumsFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentShadingRateEnumsPropertiesNV {
+    type Target = PhysicalDeviceFragmentShadingRateEnumsPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceFragmentShadingRateEnumsPropertiesNV {
+    type Builder = PhysicalDeviceFragmentShadingRateEnumsPropertiesNVBuilder;
+}
+
+/// A builder for a [PhysicalDeviceFragmentShadingRateEnumsPropertiesNV](struct.PhysicalDeviceFragmentShadingRateEnumsPropertiesNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceFragmentShadingRateEnumsPropertiesNVBuilder {
+    value: PhysicalDeviceFragmentShadingRateEnumsPropertiesNV,
+}
+
+impl PhysicalDeviceFragmentShadingRateEnumsPropertiesNVBuilder {
+    #[inline]
+    pub fn max_fragment_shading_rate_invocation_count(
+        mut self,
+        max_fragment_shading_rate_invocation_count: SampleCountFlags,
+    ) -> Self {
+        self.value.max_fragment_shading_rate_invocation_count =
+            max_fragment_shading_rate_invocation_count;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceFragmentShadingRateEnumsPropertiesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceFragmentShadingRateEnumsPropertiesNVBuilder {
+    type Target = PhysicalDeviceFragmentShadingRateEnumsPropertiesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceFragmentShadingRateEnumsPropertiesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentShadingRateEnumsPropertiesNVBuilder {
+    type Target = PhysicalDeviceFragmentShadingRateEnumsPropertiesNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -28353,6 +28496,10 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceExternalMemoryHos
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFloatControlsProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentDensityMap2PropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentDensityMapPropertiesEXT {}
+unsafe impl ExtendsPhysicalDeviceProperties2
+    for PhysicalDeviceFragmentShadingRateEnumsPropertiesNV
+{
+}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentShadingRatePropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceIDProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBlockPropertiesEXT {}
@@ -34788,6 +34935,76 @@ impl ops::DerefMut for PipelineExecutableStatisticKHRBuilder {
 
 unsafe impl Cast for PipelineExecutableStatisticKHRBuilder {
     type Target = PipelineExecutableStatisticKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineFragmentShadingRateEnumStateCreateInfoNV {
+    type Target = PipelineFragmentShadingRateEnumStateCreateInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineFragmentShadingRateEnumStateCreateInfoNV {
+    type Builder = PipelineFragmentShadingRateEnumStateCreateInfoNVBuilder;
+}
+
+/// A builder for a [PipelineFragmentShadingRateEnumStateCreateInfoNV](struct.PipelineFragmentShadingRateEnumStateCreateInfoNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineFragmentShadingRateEnumStateCreateInfoNVBuilder {
+    value: PipelineFragmentShadingRateEnumStateCreateInfoNV,
+}
+
+impl PipelineFragmentShadingRateEnumStateCreateInfoNVBuilder {
+    #[inline]
+    pub fn shading_rate_type(mut self, shading_rate_type: FragmentShadingRateTypeNV) -> Self {
+        self.value.shading_rate_type = shading_rate_type;
+        self
+    }
+
+    #[inline]
+    pub fn shading_rate(mut self, shading_rate: FragmentShadingRateNV) -> Self {
+        self.value.shading_rate = shading_rate;
+        self
+    }
+
+    #[inline]
+    pub fn combiner_ops(mut self, combiner_ops: [FragmentShadingRateCombinerOpKHR; 2]) -> Self {
+        self.value.combiner_ops = combiner_ops;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineFragmentShadingRateEnumStateCreateInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineFragmentShadingRateEnumStateCreateInfoNVBuilder {
+    type Target = PipelineFragmentShadingRateEnumStateCreateInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineFragmentShadingRateEnumStateCreateInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineFragmentShadingRateEnumStateCreateInfoNVBuilder {
+    type Target = PipelineFragmentShadingRateEnumStateCreateInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
