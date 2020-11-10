@@ -578,6 +578,9 @@ pub const NV_FRAGMENT_COVERAGE_TO_COLOR_EXTENSION: ExtensionName =
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_fragment_shader_barycentric.html>
 pub const NV_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION: ExtensionName =
     to_extension_name(b"VK_NV_fragment_shader_barycentric");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_fragment_shading_rate_enums.html>
+pub const NV_FRAGMENT_SHADING_RATE_ENUMS_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NV_fragment_shading_rate_enums");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_framebuffer_mixed_samples.html>
 pub const NV_FRAMEBUFFER_MIXED_SAMPLES_EXTENSION: ExtensionName =
     to_extension_name(b"VK_NV_framebuffer_mixed_samples");

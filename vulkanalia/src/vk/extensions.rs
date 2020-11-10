@@ -5987,6 +5987,26 @@ pub trait NvFragmentShaderBarycentricExtension: DeviceV1_0 {}
 
 impl NvFragmentShaderBarycentricExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_fragment_shading_rate_enums.html>
+pub trait NvFragmentShadingRateEnumsExtension: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateEnumNV.html>
+    #[inline]
+    fn cmd_set_fragment_shading_rate_enum_nv(
+        &self,
+        command_buffer: CommandBuffer,
+        shading_rate: FragmentShadingRateNV,
+        combiner_ops: [FragmentShadingRateCombinerOpKHR; 2],
+    ) {
+        let __result = (self.commands().cmd_set_fragment_shading_rate_enum_nv)(
+            command_buffer,
+            shading_rate,
+            combiner_ops.as_ptr(),
+        );
+    }
+}
+
+impl NvFragmentShadingRateEnumsExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_framebuffer_mixed_samples.html>
 pub trait NvFramebufferMixedSamplesExtension: DeviceV1_0 {}
 

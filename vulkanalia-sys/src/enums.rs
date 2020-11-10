@@ -2020,6 +2020,90 @@ impl fmt::Debug for FragmentShadingRateCombinerOpKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFragmentShadingRateNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct FragmentShadingRateNV(i32);
+
+impl FragmentShadingRateNV {
+    pub const _1_INVOCATION_PER_PIXEL: Self = Self(0);
+    pub const _1_INVOCATION_PER_1X2_PIXELS: Self = Self(1);
+    pub const _1_INVOCATION_PER_2X1_PIXELS: Self = Self(4);
+    pub const _1_INVOCATION_PER_2X2_PIXELS: Self = Self(5);
+    pub const _1_INVOCATION_PER_2X4_PIXELS: Self = Self(6);
+    pub const _1_INVOCATION_PER_4X2_PIXELS: Self = Self(9);
+    pub const _1_INVOCATION_PER_4X4_PIXELS: Self = Self(10);
+    pub const _2_INVOCATIONS_PER_PIXEL: Self = Self(11);
+    pub const _4_INVOCATIONS_PER_PIXEL: Self = Self(12);
+    pub const _8_INVOCATIONS_PER_PIXEL: Self = Self(13);
+    pub const _16_INVOCATIONS_PER_PIXEL: Self = Self(14);
+    pub const NO_INVOCATIONS: Self = Self(15);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for FragmentShadingRateNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "_1_INVOCATION_PER_PIXEL"),
+            1 => write!(f, "_1_INVOCATION_PER_1X2_PIXELS"),
+            4 => write!(f, "_1_INVOCATION_PER_2X1_PIXELS"),
+            5 => write!(f, "_1_INVOCATION_PER_2X2_PIXELS"),
+            6 => write!(f, "_1_INVOCATION_PER_2X4_PIXELS"),
+            9 => write!(f, "_1_INVOCATION_PER_4X2_PIXELS"),
+            10 => write!(f, "_1_INVOCATION_PER_4X4_PIXELS"),
+            11 => write!(f, "_2_INVOCATIONS_PER_PIXEL"),
+            12 => write!(f, "_4_INVOCATIONS_PER_PIXEL"),
+            13 => write!(f, "_8_INVOCATIONS_PER_PIXEL"),
+            14 => write!(f, "_16_INVOCATIONS_PER_PIXEL"),
+            15 => write!(f, "NO_INVOCATIONS"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFragmentShadingRateTypeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct FragmentShadingRateTypeNV(i32);
+
+impl FragmentShadingRateTypeNV {
+    pub const FRAGMENT_SIZE: Self = Self(0);
+    pub const ENUMS: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for FragmentShadingRateTypeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "FRAGMENT_SIZE"),
+            1 => write!(f, "ENUMS"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFrontFace.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -4432,6 +4516,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV: Self = Self(1000300000);
     pub const DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV: Self = Self(1000300001);
     pub const RESERVED_QCOM: Self = Self(1000309000);
+    pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV: Self = Self(1000326000);
+    pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV: Self = Self(1000326001);
+    pub const PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV: Self = Self(1000326002);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT: Self = Self(1000332000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT: Self = Self(1000332001);
     pub const COPY_COMMAND_TRANSFORM_INFO_QCOM: Self = Self(1000333000);
@@ -4973,6 +5060,15 @@ impl fmt::Debug for StructureType {
             1000300000 => write!(f, "PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV"),
             1000300001 => write!(f, "DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV"),
             1000309000 => write!(f, "RESERVED_QCOM"),
+            1000326000 => write!(
+                f,
+                "PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV"
+            ),
+            1000326001 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV"),
+            1000326002 => write!(
+                f,
+                "PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV"
+            ),
             1000332000 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT"),
             1000332001 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT"),
             1000333000 => write!(f, "COPY_COMMAND_TRANSFORM_INFO_QCOM"),

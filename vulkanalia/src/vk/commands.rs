@@ -352,6 +352,7 @@ pub struct DeviceCommands {
     pub cmd_set_fragment_shading_rate_khr: PFN_vkCmdSetFragmentShadingRateKHR,
     pub get_physical_device_fragment_shading_rates_khr:
         PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR,
+    pub cmd_set_fragment_shading_rate_enum_nv: PFN_vkCmdSetFragmentShadingRateEnumNV,
     pub reset_query_pool_ext: PFN_vkResetQueryPoolEXT,
     pub trim_command_pool_khr: PFN_vkTrimCommandPoolKHR,
     pub get_device_group_peer_memory_features_khr: PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR,
@@ -5385,6 +5386,21 @@ impl DeviceCommands {
                         _fragment_shading_rates: *mut PhysicalDeviceFragmentShadingRateKHR,
                     ) -> Result {
                         panic!("could not load vkGetPhysicalDeviceFragmentShadingRatesKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_fragment_shading_rate_enum_nv: unsafe {
+                let value = loader(b"vkCmdSetFragmentShadingRateEnumNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _shading_rate: FragmentShadingRateNV,
+                        _combiner_ops: *const FragmentShadingRateCombinerOpKHR,
+                    ) {
+                        panic!("could not load vkCmdSetFragmentShadingRateEnumNV")
                     }
                     fallback
                 }

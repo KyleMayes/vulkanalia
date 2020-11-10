@@ -7129,6 +7129,50 @@ impl Default for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub fragment_shading_rate_enums: Bool32,
+    pub supersample_fragment_shading_rates: Bool32,
+    pub no_invocation_fragment_shading_rates: Bool32,
+}
+
+impl Default for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV,
+            next: ptr::null_mut(),
+            fragment_shading_rate_enums: Bool32::default(),
+            supersample_fragment_shading_rates: Bool32::default(),
+            no_invocation_fragment_shading_rates: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceFragmentShadingRateEnumsPropertiesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_fragment_shading_rate_invocation_count: SampleCountFlags,
+}
+
+impl Default for PhysicalDeviceFragmentShadingRateEnumsPropertiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV,
+            next: ptr::null_mut(),
+            max_fragment_shading_rate_invocation_count: SampleCountFlags::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentShadingRateFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10090,6 +10134,30 @@ impl Default for PipelineExecutableStatisticKHR {
             description: [c_char::default(); MAX_DESCRIPTION_SIZE],
             format: PipelineExecutableStatisticFormatKHR::default(),
             value: PipelineExecutableStatisticValueKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineFragmentShadingRateEnumStateCreateInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineFragmentShadingRateEnumStateCreateInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub shading_rate_type: FragmentShadingRateTypeNV,
+    pub shading_rate: FragmentShadingRateNV,
+    pub combiner_ops: [FragmentShadingRateCombinerOpKHR; 2],
+}
+
+impl Default for PipelineFragmentShadingRateEnumStateCreateInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV,
+            next: ptr::null(),
+            shading_rate_type: FragmentShadingRateTypeNV::default(),
+            shading_rate: FragmentShadingRateNV::default(),
+            combiner_ops: [FragmentShadingRateCombinerOpKHR::default(); 2],
         }
     }
 }
