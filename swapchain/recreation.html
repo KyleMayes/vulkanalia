@@ -180,7 +180,7 @@ fn destroy_swapchain(&amp;mut self) {
 
 }
 </code></pre>
-<p>We'll move the cleanup code of all objects that are recreated as part of a swap chain refresh from <code>App::destroy</code> to <code>App::destroy_swapchain</code>:</p>
+<p>We'll move the cleanup code of all objects that are recreated as part of a swapchain refresh from <code>App::destroy</code> to <code>App::destroy_swapchain</code>:</p>
 <pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
     self.destroy_swapchain();
 
@@ -219,7 +219,7 @@ fn destroy_swapchain(&amp;mut self) {
 }
 </code></pre>
 <p>We could recreate the command pool from scratch, but that is rather wasteful. Instead I've opted to clean up the existing command buffers with the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.free_command_buffers"><code class="hljs">free_command_buffers</code></a> command. This way we can reuse the existing pool to allocate the new command buffers.</p>
-<p>That's all it takes to recreate the swapchain! However, the disadvantage of this approach is that we need to stop all rendering before creating the new swap chain. It is possible to create a new swapchain while drawing commands on an image from the old swapchain are still in-flight. You need to pass the previous swapchain to the <code>old_swapchain</code> field in the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SwapchainCreateInfoKHR.html"><code class="hljs">vk::SwapchainCreateInfoKHR</code></a> struct and destroy the old swapchain as soon as you've finished using it.</p>
+<p>That's all it takes to recreate the swapchain! However, the disadvantage of this approach is that we need to stop all rendering before creating the new swapchain. It is possible to create a new swapchain while drawing commands on an image from the old swapchain are still in-flight. You need to pass the previous swapchain to the <code>old_swapchain</code> field in the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SwapchainCreateInfoKHR.html"><code class="hljs">vk::SwapchainCreateInfoKHR</code></a> struct and destroy the old swapchain as soon as you've finished using it.</p>
 <h2><a class="header" href="#suboptimal-or-out-of-date-swapchain" id="suboptimal-or-out-of-date-swapchain">Suboptimal or out-of-date swapchain</a></h2>
 <p>Now we just need to figure out when swapchain recreation is necessary and call our new <code>App::recreate_swapchain</code> method. Luckily, Vulkan will usually just tell us that the swapchain is no longer adequate during presentation. The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.acquire_next_image_khr"><code class="hljs">acquire_next_image_khr</code></a> and <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code class="hljs">queue_present_khr</code></a> commands can return the following special values to indicate this.</p>
 <ul>

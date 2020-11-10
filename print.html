@@ -2715,7 +2715,7 @@ fn destroy_swapchain(&amp;mut self) {
 
 }
 </code></pre>
-<p>We'll move the cleanup code of all objects that are recreated as part of a swap chain refresh from <code>App::destroy</code> to <code>App::destroy_swapchain</code>:</p>
+<p>We'll move the cleanup code of all objects that are recreated as part of a swapchain refresh from <code>App::destroy</code> to <code>App::destroy_swapchain</code>:</p>
 <pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
     self.destroy_swapchain();
 
@@ -2754,7 +2754,7 @@ fn destroy_swapchain(&amp;mut self) {
 }
 </code></pre>
 <p>We could recreate the command pool from scratch, but that is rather wasteful. Instead I've opted to clean up the existing command buffers with the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.free_command_buffers"><code class="hljs">free_command_buffers</code></a> command. This way we can reuse the existing pool to allocate the new command buffers.</p>
-<p>That's all it takes to recreate the swapchain! However, the disadvantage of this approach is that we need to stop all rendering before creating the new swap chain. It is possible to create a new swapchain while drawing commands on an image from the old swapchain are still in-flight. You need to pass the previous swapchain to the <code>old_swapchain</code> field in the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SwapchainCreateInfoKHR.html"><code class="hljs">vk::SwapchainCreateInfoKHR</code></a> struct and destroy the old swapchain as soon as you've finished using it.</p>
+<p>That's all it takes to recreate the swapchain! However, the disadvantage of this approach is that we need to stop all rendering before creating the new swapchain. It is possible to create a new swapchain while drawing commands on an image from the old swapchain are still in-flight. You need to pass the previous swapchain to the <code>old_swapchain</code> field in the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SwapchainCreateInfoKHR.html"><code class="hljs">vk::SwapchainCreateInfoKHR</code></a> struct and destroy the old swapchain as soon as you've finished using it.</p>
 <h2><a class="header" href="#suboptimal-or-out-of-date-swapchain" id="suboptimal-or-out-of-date-swapchain">Suboptimal or out-of-date swapchain</a></h2>
 <p>Now we just need to figure out when swapchain recreation is necessary and call our new <code>App::recreate_swapchain</code> method. Luckily, Vulkan will usually just tell us that the swapchain is no longer adequate during presentation. The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.acquire_next_image_khr"><code class="hljs">acquire_next_image_khr</code></a> and <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code class="hljs">queue_present_khr</code></a> commands can return the following special values to indicate this.</p>
 <ul>
@@ -3773,7 +3773,7 @@ let info = vk::DescriptorPoolCreateInfo::builder()
 <p>Add a new <code>AppData</code> field to store the handle of the descriptor pool so you can call <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_descriptor_pool"><code class="hljs">create_descriptor_pool</code></a> to create it.</p>
 <pre><code class="language-rust noplaypen">data.descriptor_pool = device.create_descriptor_pool(&amp;info, None)?;
 </code></pre>
-<p>The descriptor pool should be destroyed when the swap chain is recreated because it depends on the number of images:</p>
+<p>The descriptor pool should be destroyed when the swapchain is recreated because it depends on the number of images:</p>
 <pre><code class="language-rust noplaypen">fn destroy_swapchain(&amp;mut self) {
     self.device.destroy_descriptor_pool(self.data.descriptor_pool, None);
     // ...
@@ -3816,7 +3816,7 @@ let info = vk::DescriptorSetAllocateInfo::builder()
     .descriptor_pool(data.descriptor_pool)
     .set_layouts(&amp;layouts);
 </code></pre>
-<p>In our case we will create one descriptor set for each swap chain image, all with the same layout. Unfortunately we do need all the copies of the layout because the next function expects an array matching the number of sets.</p>
+<p>In our case we will create one descriptor set for each swapchain image, all with the same layout. Unfortunately we do need all the copies of the layout because the next function expects an array matching the number of sets.</p>
 <p>Add an <code>AppData</code> field to hold the descriptor set handles:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
@@ -3861,7 +3861,7 @@ let ubo_write = vk::WriteDescriptorSet::builder()
 </code></pre>
 <p>The updates are applied using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.update_descriptor_sets"><code class="hljs">update_descriptor_sets</code></a>. It accepts two kinds of arrays as parameters: an array of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.WriteDescriptorSet.html"><code class="hljs">vk::WriteDescriptorSet</code></a> and an array of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CopyDescriptorSet.html"><code class="hljs">vk::CopyDescriptorSet</code></a>. The latter can be used to copy descriptors to each other, as its name implies.</p>
 <h2><a class="header" href="#using-descriptor-sets" id="using-descriptor-sets">Using descriptor sets</a></h2>
-<p>We now need to update the <code>create_command_buffers</code> function to actually bind the right descriptor set for each swap chain image to the descriptors in the shader with <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_descriptor_sets"><code class="hljs">cmd_bind_descriptor_sets</code></a>. This needs to be done before the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw_indexed"><code class="hljs">cmd_draw_indexed</code></a> call:</p>
+<p>We now need to update the <code>create_command_buffers</code> function to actually bind the right descriptor set for each swapchain image to the descriptors in the shader with <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_descriptor_sets"><code class="hljs">cmd_bind_descriptor_sets</code></a>. This needs to be done before the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw_indexed"><code class="hljs">cmd_draw_indexed</code></a> call:</p>
 <pre><code class="language-rust noplaypen">device.cmd_bind_descriptor_sets(
     *command_buffer,
     vk::PipelineBindPoint::GRAPHICS,
@@ -4663,7 +4663,162 @@ fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Res
 </code></pre>
 <p>In the next chapter we will expose the image and sampler objects to the shaders to draw the texture onto the square.</p>
 <h1><a class="header" href="#combined-image-sampler" id="combined-image-sampler">Combined image sampler</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/25_texture_mapping.rs">main.rs</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/25/shader.vert">shader.vert</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/25/shader.frag">shader.frag</a></p>
+<p>We looked at descriptors for the first time in the uniform buffers part of the tutorial. In this chapter we will look at a new type of descriptor: <em>combined image sampler</em>. This descriptor makes it possible for shaders to access an image resource through a sampler object like the one we created in the previous chapter.</p>
+<p>We'll start by modifying the descriptor layout, descriptor pool and descriptor set to include such a combined image sampler descriptor. After that, we're going to add texture coordinates to <code>Vertex</code> and modify the fragment shader to read colors from the texture instead of just interpolating the vertex colors.</p>
+<h2><a class="header" href="#updating-the-descriptors" id="updating-the-descriptors">Updating the descriptors</a></h2>
+<p>Browse to the <code>create_descriptor_set_layout</code> function and add a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorSetLayoutBinding.html"><code class="hljs">vk::DescriptorSetLayoutBinding</code></a> for a combined image sampler descriptor. We'll simply put it in the binding after the uniform buffer:</p>
+<pre><code class="language-rust noplaypen">let sampler_binding = vk::DescriptorSetLayoutBinding::builder()
+    .binding(1)
+    .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+    .descriptor_count(1)
+    .stage_flags(vk::ShaderStageFlags::FRAGMENT);
+
+let bindings = &amp;[ubo_binding, sampler_binding];
+let info = vk::DescriptorSetLayoutCreateInfo::builder()
+    .bindings(bindings);
+</code></pre>
+<p>Make sure to set the <code>stage_flags</code> to indicate that we intend to use the combined image sampler descriptor in the fragment shader. That's where the color of the fragment is going to be determined. It is possible to use texture sampling in the vertex shader, for example to dynamically deform a grid of vertices by a <a href="https://en.wikipedia.org/wiki/Heightmap">heightmap</a>.</p>
+<p>If you would run the application with validation layers now, then you'll see that it complains that the descriptor pool cannot allocate descriptor sets with this layout, because it doesn't have any combined image sampler descriptors. Go to the <code>create_descriptor_pool</code> function and modify it to include a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorPoolSize.html"><code class="hljs">vk::DescriptorPoolSize</code></a> for this descriptor:</p>
+<pre><code class="language-rust noplaypen">let sampler_size = vk::DescriptorPoolSize::builder()
+    .type_(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+    .descriptor_count(data.swapchain_images.len() as u32);
+
+let pool_sizes = &amp;[ubo_size, sampler_size];
+let info = vk::DescriptorPoolCreateInfo::builder()
+    .pool_sizes(pool_sizes)
+    .max_sets(data.swapchain_images.len() as u32);
+</code></pre>
+<p>The final step is to bind the actual image and sampler resources to the descriptors in the descriptor set. Go to the <code>create_descriptor_sets</code> function. The resources for a combined image sampler structure must be specified in a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorImageInfo.html"><code class="hljs">vk::DescriptorImageInfo</code></a> struct, just like the buffer resource for a uniform buffer descriptor is specified in a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorBufferInfo.html"><code class="hljs">vk::DescriptorBufferInfo</code></a> struct. This is where the objects from the previous chapter come together.</p>
+<pre><code class="language-rust noplaypen">let info = vk::DescriptorImageInfo::builder()
+    .image_layout(vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL)
+    .image_view(data.texture_image_view)
+    .sampler(data.texture_sampler);
+
+let image_info = &amp;[info];
+let sampler_write = vk::WriteDescriptorSet::builder()
+    .dst_set(data.descriptor_sets[i])
+    .dst_binding(1)
+    .dst_array_element(0)
+    .descriptor_type(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
+    .image_info(image_info);
+
+device.update_descriptor_sets(
+    &amp;[ubo_write, sampler_write],
+    &amp;[] as &amp;[vk::CopyDescriptorSet],
+);
+</code></pre>
+<p>The descriptors must be updated with this image info, just like the buffer. This time we're using the <code>image_info</code> array instead of <code>buffer_info</code>. The descriptors are now ready to be used by the shaders!</p>
+<h2><a class="header" href="#texture-coordinates" id="texture-coordinates">Texture coordinates</a></h2>
+<p>There is one important ingredient for texture mapping that is still missing, and that's the actual coordinates for each vertex. The coordinates determine how the image is actually mapped to the geometry.</p>
+<pre><code class="language-rust noplaypen">#[repr(C)]
+struct Vertex {
+    pos: glm::Vec2,
+    color: glm::Vec3,
+    tex_coord: glm::Vec2,
+}
+
+impl Vertex {
+    fn new(pos: glm::Vec2, color: glm::Vec3, tex_coord: glm::Vec2) -&gt; Self {
+        Self { pos, color, tex_coord }
+    }
+
+    fn binding_description() -&gt; vk::VertexInputBindingDescription {
+        vk::VertexInputBindingDescription::builder()
+            .binding(0)
+            .stride(size_of::&lt;Vertex&gt;() as u32)
+            .input_rate(vk::VertexInputRate::VERTEX)
+            .build()
+    }
+
+    fn attribute_descriptions() -&gt; [vk::VertexInputAttributeDescription; 3] {
+        let pos = vk::VertexInputAttributeDescription::builder()
+            .binding(0)
+            .location(0)
+            .format(vk::Format::R32G32_SFLOAT)
+            .offset(0)
+            .build();
+        let color = vk::VertexInputAttributeDescription::builder()
+            .binding(0)
+            .location(1)
+            .format(vk::Format::R32G32B32_SFLOAT)
+            .offset(size_of::&lt;glm::Vec2&gt;() as u32)
+            .build();
+        let tex_coord = vk::VertexInputAttributeDescription::builder()
+            .binding(0)
+            .location(2)
+            .format(vk::Format::R32G32_SFLOAT)
+            .offset((size_of::&lt;glm::Vec2&gt;() + size_of::&lt;glm::Vec3&gt;()) as u32)
+            .build();
+        [pos, color, tex_coord]
+    }
+}
+</code></pre>
+<p>Modify the <code>Vertex</code> struct to include a <code>glm::Vec2</code> for texture coordinates. Make sure to also add a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.VertexInputAttributeDescription.html"><code class="hljs">vk::VertexInputAttributeDescription</code></a> so that we can use access texture coordinates as input in the vertex shader. That is necessary to be able to pass them to the fragment shader for interpolation across the surface of the square.</p>
+<pre><code class="language-rust noplaypen">lazy_static! {
+    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
+        Vertex::new(glm::vec2(-0.5, -0.5), glm::vec3(1.0, 0.0, 0.0), glm::vec2(1.0, 0.0)),
+        Vertex::new(glm::vec2(0.5, -0.5), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
+        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
+        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
+    ];
+}
+</code></pre>
+<p>In this tutorial, I will simply fill the square with the texture by using coordinates from <code>0, 0</code> in the top-left corner to <code>1, 1</code> in the bottom-right corner. Feel free to experiment with different coordinates. Try using coordinates below <code>0</code> or above <code>1</code> to see the addressing modes in action!</p>
+<h2><a class="header" href="#shaders" id="shaders">Shaders</a></h2>
+<p>The final step is modifying the shaders to sample colors from the texture. We first need to modify the vertex shader to pass through the texture coordinates to the fragment shader:</p>
+<pre><code class="language-glsl">layout(location = 0) in vec2 inPosition;
+layout(location = 1) in vec3 inColor;
+layout(location = 2) in vec2 inTexCoord;
+
+layout(location = 0) out vec3 fragColor;
+layout(location = 1) out vec2 fragTexCoord;
+
+void main() {
+    gl_Position = ubo.proj * ubo.view * ubo.model * vec4(inPosition, 0.0, 1.0);
+    fragColor = inColor;
+    fragTexCoord = inTexCoord;
+}
+</code></pre>
+<p>Just like the per vertex colors, the <code>fragTexCoord</code> values will be smoothly interpolated across the area of the square by the rasterizer. We can visualize this by having the fragment shader output the texture coordinates as colors:</p>
+<pre><code class="language-glsl">#version 450
+
+layout(location = 0) in vec3 fragColor;
+layout(location = 1) in vec2 fragTexCoord;
+
+layout(location = 0) out vec4 outColor;
+
+void main() {
+    outColor = vec4(fragTexCoord, 0.0, 1.0);
+}
+</code></pre>
+<p>You should see something like the image below. Don't forget to recompile the shaders!</p>
+<p><img src="texture/../images/texcoord_visualization.png" alt="" /></p>
+<p>The green channel represents the horizontal coordinates and the red channel the vertical coordinates. The black and yellow corners confirm that the texture coordinates are correctly interpolated from <code>0, 0</code> to <code>1, 1</code> across the square. Visualizing data using colors is the shader programming equivalent of <code>printf</code> debugging, for lack of a better option!</p>
+<p>A combined image sampler descriptor is represented in GLSL by a sampler uniform. Add a reference to it in the fragment shader:</p>
+<pre><code class="language-glsl">layout(binding = 1) uniform sampler2D texSampler;
+</code></pre>
+<p>There are equivalent <code>sampler1D</code> and <code>sampler3D</code> types for other types of images. Make sure to use the correct binding here.</p>
+<pre><code class="language-glsl">void main() {
+    outColor = texture(texSampler, fragTexCoord);
+}
+</code></pre>
+<p>Textures are sampled using the built-in <code>texture</code> function. It takes a <code>sampler</code> and coordinate as arguments. The sampler automatically takes care of the filtering and transformations in the background. You should now see the texture on the square when you run the application:</p>
+<p><img src="texture/../images/texture_on_square.png" alt="" /></p>
+<p>Try experimenting with the addressing modes by scaling the texture coordinates to values higher than <code>1</code>. For example, the following fragment shader produces the result in the image below when using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.REPEAT"><code class="hljs">vk::SamplerAddressMode::REPEAT</code></a>:</p>
+<pre><code class="language-glsl">void main() {
+    outColor = texture(texSampler, fragTexCoord * 2.0);
+}
+</code></pre>
+<p><img src="texture/../images/texture_on_square_repeated.png" alt="" /></p>
+<p>You can also manipulate the texture colors using the vertex colors:</p>
+<pre><code class="language-glsl">void main() {
+    outColor = vec4(fragColor * texture(texSampler, fragTexCoord).rgb, 1.0);
+}
+</code></pre>
+<p>I've separated the RGB and alpha channels here to not scale the alpha channel.</p>
+<p><img src="texture/../images/texture_on_square_colorized.png" alt="" /></p>
+<p>You now know how to access images in shaders! This is a very powerful technique when combined with images that are also written to in framebuffers. You can use these images as inputs to implement cool effects like post-processing and camera displays within the 3D world.</p>
 <h1><a class="header" href="#depth-buffering" id="depth-buffering">Depth buffering</a></h1>
 <p>Coming soon™.</p>
 <h1><a class="header" href="#loading-models" id="loading-models">Loading models</a></h1>

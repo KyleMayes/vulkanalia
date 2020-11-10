@@ -193,7 +193,7 @@ let info = vk::DescriptorPoolCreateInfo::builder()
 <p>Add a new <code>AppData</code> field to store the handle of the descriptor pool so you can call <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_descriptor_pool"><code class="hljs">create_descriptor_pool</code></a> to create it.</p>
 <pre><code class="language-rust noplaypen">data.descriptor_pool = device.create_descriptor_pool(&amp;info, None)?;
 </code></pre>
-<p>The descriptor pool should be destroyed when the swap chain is recreated because it depends on the number of images:</p>
+<p>The descriptor pool should be destroyed when the swapchain is recreated because it depends on the number of images:</p>
 <pre><code class="language-rust noplaypen">fn destroy_swapchain(&amp;mut self) {
     self.device.destroy_descriptor_pool(self.data.descriptor_pool, None);
     // ...
@@ -236,7 +236,7 @@ let info = vk::DescriptorSetAllocateInfo::builder()
     .descriptor_pool(data.descriptor_pool)
     .set_layouts(&amp;layouts);
 </code></pre>
-<p>In our case we will create one descriptor set for each swap chain image, all with the same layout. Unfortunately we do need all the copies of the layout because the next function expects an array matching the number of sets.</p>
+<p>In our case we will create one descriptor set for each swapchain image, all with the same layout. Unfortunately we do need all the copies of the layout because the next function expects an array matching the number of sets.</p>
 <p>Add an <code>AppData</code> field to hold the descriptor set handles:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
@@ -281,7 +281,7 @@ let ubo_write = vk::WriteDescriptorSet::builder()
 </code></pre>
 <p>The updates are applied using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.update_descriptor_sets"><code class="hljs">update_descriptor_sets</code></a>. It accepts two kinds of arrays as parameters: an array of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.WriteDescriptorSet.html"><code class="hljs">vk::WriteDescriptorSet</code></a> and an array of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CopyDescriptorSet.html"><code class="hljs">vk::CopyDescriptorSet</code></a>. The latter can be used to copy descriptors to each other, as its name implies.</p>
 <h2><a class="header" href="#using-descriptor-sets" id="using-descriptor-sets">Using descriptor sets</a></h2>
-<p>We now need to update the <code>create_command_buffers</code> function to actually bind the right descriptor set for each swap chain image to the descriptors in the shader with <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_descriptor_sets"><code class="hljs">cmd_bind_descriptor_sets</code></a>. This needs to be done before the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw_indexed"><code class="hljs">cmd_draw_indexed</code></a> call:</p>
+<p>We now need to update the <code>create_command_buffers</code> function to actually bind the right descriptor set for each swapchain image to the descriptors in the shader with <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_descriptor_sets"><code class="hljs">cmd_bind_descriptor_sets</code></a>. This needs to be done before the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw_indexed"><code class="hljs">cmd_draw_indexed</code></a> call:</p>
 <pre><code class="language-rust noplaypen">device.cmd_bind_descriptor_sets(
     *command_buffer,
     vk::PipelineBindPoint::GRAPHICS,
