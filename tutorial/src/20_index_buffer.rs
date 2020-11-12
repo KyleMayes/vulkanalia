@@ -933,13 +933,13 @@ fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
             .offset(vk::Offset2D::default())
             .extent(data.swapchain_extent);
 
-        let clear_value = vk::ClearValue {
+        let color_clear_value = vk::ClearValue {
             color: vk::ClearColorValue {
                 float32: [0.0, 0.0, 0.0, 1.0],
             },
         };
 
-        let clear_values = &[clear_value];
+        let clear_values = &[color_clear_value];
         let info = vk::RenderPassBeginInfo::builder()
             .render_pass(data.render_pass)
             .framebuffer(data.framebuffers[i])

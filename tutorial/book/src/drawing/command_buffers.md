@@ -156,7 +156,7 @@ let render_area = vk::Rect2D::builder()
 Here we define the size of the render area. The render area defines where shader loads and stores will take place during the execution of the render pass. The pixels outside this region will have undefined values. It should match the size of the attachments for best performance.
 
 ```rust,noplaypen
-let clear_value = vk::ClearValue {
+let color_clear_value = vk::ClearValue {
     color: vk::ClearColorValue {
         float32: [0.0, 0.0, 0.0, 1.0],
     },
@@ -168,7 +168,7 @@ Next we define a clear value that will be used to clear the framebuffer at the b
 Drawing starts by beginning the render pass with `cmd_begin_render_pass`. The render pass is configured using some parameters in a `vk::RenderPassBeginInfo` struct.
 
 ```rust,noplaypen
-let clear_values = &[clear_value];
+let clear_values = &[color_clear_value];
 let info = vk::RenderPassBeginInfo::builder()
     .render_pass(data.render_pass)
     .framebuffer(data.framebuffers[i])
