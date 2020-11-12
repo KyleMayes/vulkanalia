@@ -1403,7 +1403,7 @@ fn copy_buffer(
 fn create_image(
     instance: &Instance,
     device: &Device,
-    data: &mut AppData,
+    data: &AppData,
     width: u32,
     height: u32,
     format: vk::Format,

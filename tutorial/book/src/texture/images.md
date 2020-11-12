@@ -216,7 +216,7 @@ This function is already getting quite large and there'll be a need to create mo
 fn create_image(
     instance: &Instance,
     device: &Device,
-    data: &mut AppData,
+    data: &AppData,
     width: u32,
     height: u32,
     format: vk::Format,
