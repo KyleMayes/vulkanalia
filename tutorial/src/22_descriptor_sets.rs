@@ -1207,6 +1207,7 @@ lazy_static! {
 const INDICES: &[u16] = &[0, 1, 2, 2, 3, 0];
 
 #[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct Vertex {
     pos: glm::Vec2,
     color: glm::Vec3,
@@ -1333,6 +1334,7 @@ fn get_memory_type_index(
 }
 
 #[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     model: glm::Mat4,
     view: glm::Mat4,

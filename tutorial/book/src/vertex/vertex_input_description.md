@@ -50,6 +50,7 @@ Next, create a new `#[repr(C)]` structure called `Vertex` with the two attribute
 
 ```rust,noplaypen
 #[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct Vertex {
     pos: glm::Vec2,
     color: glm::Vec3,

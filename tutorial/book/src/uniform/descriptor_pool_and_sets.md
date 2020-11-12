@@ -222,6 +222,7 @@ One thing we've glossed over so far is how exactly the data in the C++ structure
 
 ```rust,noplaypen
 #[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     model: glm::Mat4,
     view: glm::Mat4,
@@ -241,6 +242,7 @@ However, that's not all there is to it. For example, try modifying the struct an
 
 ```rust,noplaypen
 #[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     foo: glm::Vec2,
     model: glm::Mat4,
@@ -276,6 +278,7 @@ The new structure starts with a `vec2` which is only 8 bytes in size and therefo
 
 ```rust,noplaypen
 #[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     foo: glm::Vec2,
     _padding: [u8; 8],

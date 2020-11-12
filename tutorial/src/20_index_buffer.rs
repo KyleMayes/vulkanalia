@@ -1044,6 +1044,7 @@ lazy_static! {
 const INDICES: &[u16] = &[0, 1, 2, 2, 3, 0];
 
 #[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct Vertex {
     pos: glm::Vec2,
     color: glm::Vec3,

@@ -927,6 +927,7 @@ lazy_static! {
 }
 
 #[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct Vertex {
     pos: glm::Vec2,
     color: glm::Vec3,

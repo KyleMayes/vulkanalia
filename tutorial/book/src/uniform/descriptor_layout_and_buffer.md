@@ -16,6 +16,7 @@ There are many types of descriptors, but in this chapter we'll work with uniform
 
 ```rust,noplaypen
 #[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     model: glm::Mat4,
     view: glm::Mat4,
@@ -74,6 +75,7 @@ The next step is to define the UBO on the Rust side and to tell Vulkan about thi
 
 ```rust,noplaypen
 #[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     model: glm::Mat4,
     view: glm::Mat4,

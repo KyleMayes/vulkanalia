@@ -66,7 +66,6 @@ The descriptors must be updated with this image info, just like the buffer. This
 There is one important ingredient for texture mapping that is still missing, and that's the actual coordinates for each vertex. The coordinates determine how the image is actually mapped to the geometry.
 
 ```rust,noplaypen
-#[repr(C)]
 struct Vertex {
     pos: glm::Vec2,
     color: glm::Vec3,
