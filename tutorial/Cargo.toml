@@ -155,3 +155,8 @@ path = "src/24_sampler.rs"
 
 name = "25_texture_mapping"
 path = "src/25_texture_mapping.rs"
+
+[[bin]]
+
+name = "26_depth_buffering"
+path = "src/26_depth_buffering.rs"
