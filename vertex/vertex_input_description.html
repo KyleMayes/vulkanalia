@@ -185,6 +185,7 @@ use lazy_static::lazy_static;
 <p><code>size_of</code> will be used to calculate the size of the vertex data we'll be defining while <code>nalgebra-glm</code> defines the vector types we need. The <code>lazy_static!</code> macro will be used to define the vertex data since the vector constructors in <code>nalgebra-glm</code> are not yet <code>const fn</code>s.</p>
 <p>Next, create a new <code>#[repr(C)]</code> structure called <code>Vertex</code> with the two attributes that we're going to use in the vertex shader inside it and add a simple constructor:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct Vertex {
     pos: glm::Vec2,
     color: glm::Vec3,

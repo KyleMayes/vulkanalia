@@ -2261,7 +2261,7 @@ data.command_buffers = device.allocate_command_buffers(&amp;allocate_info)?;
     .extent(data.swapchain_extent);
 </code></pre>
 <p>Here we define the size of the render area. The render area defines where shader loads and stores will take place during the execution of the render pass. The pixels outside this region will have undefined values. It should match the size of the attachments for best performance.</p>
-<pre><code class="language-rust noplaypen">let clear_value = vk::ClearValue {
+<pre><code class="language-rust noplaypen">let color_clear_value = vk::ClearValue {
     color: vk::ClearColorValue {
         float32: [0.0, 0.0, 0.0, 1.0],
     },
@@ -2269,7 +2269,7 @@ data.command_buffers = device.allocate_command_buffers(&amp;allocate_info)?;
 </code></pre>
 <p>Next we define a clear value that will be used to clear the framebuffer at the beginning of the render pass (because we used <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.AttachmentLoadOp.html#associatedconstant.CLEAR"><code class="hljs">vk::AttachmentLoadOp::CLEAR</code></a> when creating the render pass). <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/union.ClearValue.html"><code class="hljs">vk::ClearValue</code></a> is a union that can be used to set clear values for color attachments or for depth/stencil attachments. Here we are setting the <code>color</code> field with a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/union.ClearColorValue.html"><code class="hljs">vk::ClearColorValue</code></a> union with 4 <code>f32</code>s that define a black clear color with 100% opacity.</p>
 <p>Drawing starts by beginning the render pass with <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_begin_render_pass"><code class="hljs">cmd_begin_render_pass</code></a>. The render pass is configured using some parameters in a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.RenderPassBeginInfo.html"><code class="hljs">vk::RenderPassBeginInfo</code></a> struct.</p>
-<pre><code class="language-rust noplaypen">let clear_values = &amp;[clear_value];
+<pre><code class="language-rust noplaypen">let clear_values = &amp;[color_clear_value];
 let info = vk::RenderPassBeginInfo::builder()
     .render_pass(data.render_pass)
     .framebuffer(data.framebuffers[i])
@@ -2871,6 +2871,7 @@ use lazy_static::lazy_static;
 <p><code>size_of</code> will be used to calculate the size of the vertex data we'll be defining while <code>nalgebra-glm</code> defines the vector types we need. The <code>lazy_static!</code> macro will be used to define the vertex data since the vector constructors in <code>nalgebra-glm</code> are not yet <code>const fn</code>s.</p>
 <p>Next, create a new <code>#[repr(C)]</code> structure called <code>Vertex</code> with the two attributes that we're going to use in the vertex shader inside it and add a simple constructor:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct Vertex {
     pos: glm::Vec2,
     color: glm::Vec3,
@@ -3473,6 +3474,7 @@ device.cmd_bind_index_buffer(*command_buffer, data.index_buffer, 0, vk::IndexTyp
 <p>The <em>descriptor layout</em> specifies the types of resources that are going to be accessed by the pipeline, just like a render pass specifies the types of attachments that will be accessed. A <em>descriptor set</em> specifies the actual buffer or image resources that will be bound to the descriptors, just like a framebuffer specifies the actual image views to bind to render pass attachments. The descriptor set is then bound for the drawing commands just like the vertex buffers and framebuffer.</p>
 <p>There are many types of descriptors, but in this chapter we'll work with uniform buffer objects (UBO). We'll look at other types of descriptors in future chapters, but the basic process is the same. Let's say we have the data we want the vertex shader to have in a struct like this:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     model: glm::Mat4,
     view: glm::Mat4,
@@ -3518,6 +3520,7 @@ void main() {
 <h2><a class="header" href="#descriptor-set-layout" id="descriptor-set-layout">Descriptor set layout</a></h2>
 <p>The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader.</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     model: glm::Mat4,
     view: glm::Mat4,
@@ -3883,6 +3886,7 @@ device.cmd_draw_indexed(*command_buffer, INDICES.len() as u32, 1, 0, 0, 0);
 <h2><a class="header" href="#alignment-requirements" id="alignment-requirements">Alignment requirements</a></h2>
 <p>One thing we've glossed over so far is how exactly the data in the C++ structure should match with the uniform definition in the shader. It seems obvious enough to simply use the same types in both:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     model: glm::Mat4,
     view: glm::Mat4,
@@ -3897,6 +3901,7 @@ struct UniformBufferObject {
 </code></pre>
 <p>However, that's not all there is to it. For example, try modifying the struct and shader to look like this:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     foo: glm::Vec2,
     model: glm::Mat4,
@@ -3924,6 +3929,7 @@ struct UniformBufferObject {
 <p>Our original shader with just three <code>mat4</code> fields already met the alignment requirements. As each <code>mat4</code> is 4 x 4 x 4 = 64 bytes in size, <code>model</code> has an offset of <code>0</code>, <code>view</code> has an offset of 64 and <code>proj</code> has an offset of 128. All of these are multiples of 16 and that's why it worked fine.</p>
 <p>The new structure starts with a <code>vec2</code> which is only 8 bytes in size and therefore throws off all of the offsets. Now <code>model</code> has an offset of <code>8</code>, <code>view</code> an offset of <code>72</code> and <code>proj</code> an offset of <code>136</code>, none of which are multiples of 16. Unfortunately Rust does not have great support for controlling the alignment of fields in structs, but we can use some manual padding to fix the alignment issues:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     foo: glm::Vec2,
     _padding: [u8; 8],
@@ -4095,7 +4101,7 @@ device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
 <pre><code class="language-rust noplaypen">fn create_image(
     instance: &amp;Instance,
     device: &amp;Device,
-    data: &amp;mut AppData,
+    data: &amp;AppData,
     width: u32,
     height: u32,
     format: vk::Format,
@@ -4711,8 +4717,7 @@ device.update_descriptor_sets(
 <p>The descriptors must be updated with this image info, just like the buffer. This time we're using the <code>image_info</code> array instead of <code>buffer_info</code>. The descriptors are now ready to be used by the shaders!</p>
 <h2><a class="header" href="#texture-coordinates" id="texture-coordinates">Texture coordinates</a></h2>
 <p>There is one important ingredient for texture mapping that is still missing, and that's the actual coordinates for each vertex. The coordinates determine how the image is actually mapped to the geometry.</p>
-<pre><code class="language-rust noplaypen">#[repr(C)]
-struct Vertex {
+<pre><code class="language-rust noplaypen">struct Vertex {
     pos: glm::Vec2,
     color: glm::Vec3,
     tex_coord: glm::Vec2,
@@ -4820,7 +4825,433 @@ void main() {
 <p><img src="texture/../images/texture_on_square_colorized.png" alt="" /></p>
 <p>You now know how to access images in shaders! This is a very powerful technique when combined with images that are also written to in framebuffers. You can use these images as inputs to implement cool effects like post-processing and camera displays within the 3D world.</p>
 <h1><a class="header" href="#depth-buffering" id="depth-buffering">Depth buffering</a></h1>
-<p>Coming soon™.</p>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/26_depth_buffering.rs">main.rs</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/26/shader.vert">shader.vert</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/26/shader.frag">shader.frag</a></p>
+<p>The geometry we've worked with so far is projected into 3D, but it's still completely flat. In this chapter we're going to add a Z coordinate to the position to prepare for 3D meshes. We'll use this third coordinate to place a square over the current square to see a problem that arises when geometry is not sorted by depth.</p>
+<h2><a class="header" href="#3d-geometry" id="3d-geometry">3D geometry</a></h2>
+<p>Change the <code>Vertex</code> struct to use a 3D vector for the position, and update the <code>format</code> in the corresponding <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.VertexInputAttributeDescription.html"><code class="hljs">vk::VertexInputAttributeDescription</code></a> and update the offsets in the others:</p>
+<pre><code class="language-rust noplaypen">struct Vertex {
+    pos: glm::Vec3,
+    color: glm::Vec3,
+    tex_coord: glm::Vec2,
+}
+
+impl Vertex {
+    fn attribute_descriptions() -&gt; [vk::VertexInputAttributeDescription; 3] {
+        let pos = vk::VertexInputAttributeDescription::builder()
+            .binding(0)
+            .location(0)
+            .format(vk::Format::R32G32B32_SFLOAT)
+            .offset(0)
+            .build();
+        let color = vk::VertexInputAttributeDescription::builder()
+            .binding(0)
+            .location(1)
+            .format(vk::Format::R32G32B32_SFLOAT)
+            .offset(size_of::&lt;glm::Vec3&gt;() as u32)
+            .build();
+        let tex_coord = vk::VertexInputAttributeDescription::builder()
+            .binding(0)
+            .location(2)
+            .format(vk::Format::R32G32_SFLOAT)
+            .offset((size_of::&lt;glm::Vec3&gt;() + size_of::&lt;glm::Vec3&gt;()) as u32)
+            .build();
+        [pos, color, tex_coord]
+    }
+}
+</code></pre>
+<p>Next, update the vertex shader to accept and transform 3D coordinates as input. Don't forget to recompile it afterwards!</p>
+<pre><code class="language-glsl">layout(location = 0) in vec3 inPosition;
+
+// ...
+
+void main() {
+    gl_Position = ubo.proj * ubo.view * ubo.model * vec4(inPosition, 1.0);
+    fragColor = inColor;
+    fragTexCoord = inTexCoord;
+}
+</code></pre>
+<p>Lastly, update the <code>vertices</code> container to include Z coordinates:</p>
+<pre><code class="language-rust noplaypen">lazy_static! {
+    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
+        Vertex::new(glm::vec3(-0.5, -0.5, 0.0),glm::vec3(1.0, 0.0, 0.0),glm::vec2(1.0, 0.0)),
+        Vertex::new(glm::vec3(0.5, -0.5, 0.0), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
+        Vertex::new(glm::vec3(0.5, 0.5, 0.0), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
+        Vertex::new(glm::vec3(-0.5, 0.5, 0.0), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
+    ];
+}
+</code></pre>
+<p>If you run your application now, then you should see exactly the same result as before. It's time to add some extra geometry to make the scene more interesting, and to demonstrate the problem that we're going to tackle in this chapter. Duplicate the vertices to define positions for a square right under the current one like this:</p>
+<p><img src="model/../images/extra_square.svg" alt="" /></p>
+<p>Use Z coordinates of <code>-0.5</code> and add the appropriate indices for the extra square:</p>
+<pre><code class="language-rust noplaypen">lazy_static! {
+    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
+        Vertex::new(glm::vec3(-0.5, -0.5, 0.0),glm::vec3(1.0, 0.0, 0.0),glm::vec2(1.0, 0.0)),
+        Vertex::new(glm::vec3(0.5, -0.5, 0.0), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
+        Vertex::new(glm::vec3(0.5, 0.5, 0.0), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
+        Vertex::new(glm::vec3(-0.5, 0.5, 0.0), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
+        //
+        Vertex::new(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(1.0, 0.0, 0.0), glm::vec2(1.0, 0.0)),
+        Vertex::new(glm::vec3(0.5, -0.5, -0.5), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
+        Vertex::new(glm::vec3(0.5, 0.5, -0.5), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
+        Vertex::new(glm::vec3(-0.5, 0.5, -0.5), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
+    ];
+}
+
+const INDICES: &amp;[u16] = &amp;[
+    0, 1, 2, 2, 3, 0,
+    //
+    4, 5, 6, 6, 7, 4
+];
+</code></pre>
+<p>Run your program now and you'll see something resembling an Escher illustration:</p>
+<p><img src="model/../images/depth_issues.png" alt="" /></p>
+<p>The problem is that the fragments of the lower square are drawn over the fragments of the upper square, simply because it comes later in the index array. There are two ways to solve this:</p>
+<ul>
+<li>Sort all of the draw calls by depth from back to front</li>
+<li>Use depth testing with a depth buffer</li>
+</ul>
+<p>The first approach is commonly used for drawing transparent objects, because order-independent transparency is a difficult challenge to solve. However, the problem of ordering fragments by depth is much more commonly solved using a <em>depth buffer</em>. A depth buffer is an additional attachment that stores the depth for every position, just like the color attachment stores the color of every position. Every time the rasterizer produces a fragment, the depth test will check if the new fragment is closer than the previous one. If it isn't, then the new fragment is discarded. A fragment that passes the depth test writes its own depth to the depth buffer. It is possible to manipulate this value from the fragment shader, just like you can manipulate the color output.</p>
+<p>Before we continue, there is one issue we need to fix. The perspective projection matrix generated by <code>glm::perspective</code> in <code>App::update_uniform_buffer</code> uses OpenGL depth range of <code>-1.0</code> to <code>1.0</code>. We want to use the Vulkan range of <code>0.0</code> to <code>1.0</code> instead so we'll use the <code>glm::perspective_rh_zo</code> (<code>zo</code> = zero-to-one) function instead.</p>
+<pre><code class="language-rust noplaypen">let mut proj = glm::perspective_rh_zo(
+    glm::radians(&amp;glm::vec1(45.0))[0],
+    self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+    0.1,
+    10.0,
+);
+</code></pre>
+<h2><a class="header" href="#depth-image-and-view" id="depth-image-and-view">Depth image and view</a></h2>
+<p>A depth attachment is based on an image, just like the color attachment. The difference is that the swapchain will not automatically create depth images for us. We only need a single depth image, because only one draw operation is running at once. The depth image will again require the trifecta of resources: image, memory and image view.</p>
+<pre><code class="language-rust noplaypen">struct AppData {
+    // ...
+    depth_image: vk::Image,
+    depth_image_memory: vk::DeviceMemory,
+    depth_image_view: vk::ImageView,
+}
+</code></pre>
+<p>Create a new function <code>create_depth_objects</code> to set up these resources:</p>
+<pre><code class="language-rust noplaypen">impl App {
+    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_command_pool(&amp;instance, &amp;device, &amp;mut data)?;
+        create_depth_objects(&amp;instance, &amp;device, &amp;mut data)?;
+        // ...
+    }
+}
+
+fn create_depth_objects(
+    instance: &amp;Instance,
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
+    Ok(())
+}
+</code></pre>
+<p>Creating a depth image is fairly straightforward. It should have the same resolution as the color attachment, defined by the swapchain extent, an image usage appropriate for a depth attachment, optimal tiling and device local memory. The only question is: what is the right format for a depth image? The format must contain a depth component, indicated by <code>D??_</code> in the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Format.html"><code class="hljs">vk::Format</code></a> variant.</p>
+<p>Unlike the texture image, we don't necessarily need a specific format, because we won't be directly accessing the texels from the program. It just needs to have a reasonable accuracy, at least 24 bits is common in real-world applications. There are several formats that fit this requirement:</p>
+<ul>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Format.html#associatedconstant.D32_SFLOAT"><code class="hljs">vk::Format::D32_SFLOAT</code></a> – 32-bit float for depth</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Format.html#associatedconstant.D32_SFLOAT_S8_UINT"><code class="hljs">vk::Format::D32_SFLOAT_S8_UINT</code></a> – 32-bit signed float for depth and 8 bit stencil component</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Format.html#associatedconstant.D24_UNORM_S8_UINT"><code class="hljs">vk::Format::D24_UNORM_S8_UINT</code></a> – 24-bit float for depth and 8 bit stencil component</li>
+</ul>
+<p>The stencil component is used for <a href="https://en.wikipedia.org/wiki/Stencil_buffer">stencil tests</a>, which is an additional test that can be combined with depth testing. We'll look at this in a future chapter.</p>
+<p>We could simply go for the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Format.html#associatedconstant.D32_SFLOAT"><code class="hljs">vk::Format::D32_SFLOAT</code></a> format, because support for it is extremely common (see the hardware database), but it's nice to add some extra flexibility to our application where possible. We're going to write a <code>get_supported_format</code> function that takes a list of candidate formats in order from most desirable to least desirable and returns the first that satisfies our requirements:</p>
+<pre><code class="language-rust noplaypen">fn get_supported_format(
+    instance: &amp;Instance,
+    data: &amp;AppData,
+    candidates: &amp;[vk::Format],
+    tiling: vk::ImageTiling,
+    features: vk::FormatFeatureFlags,
+) -&gt; Result&lt;vk::Format&gt; {
+    candidates
+        .iter()
+        .cloned()
+        .find(|f| {
+
+        })
+        .ok_or_else(|| anyhow!(&quot;Failed to find supported format!&quot;))
+}
+</code></pre>
+<p>The support of a format depends on the tiling mode and usage, so we must also include these as parameters. The support of a format can be queried using the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_format_properties"><code class="hljs">get_physical_device_format_properties</code></a> function:</p>
+<pre><code class="language-rust noplaypen">let properties = instance.get_physical_device_format_properties(
+    data.physical_device,
+    *f,
+);
+</code></pre>
+<p>The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.FormatProperties.html"><code class="hljs">vk::FormatProperties</code></a> struct contains three fields:</p>
+<ul>
+<li><code>linear_tiling_features</code> – Use cases that are supported with linear tiling</li>
+<li><code>optimal_tiling_features</code> – Use cases that are supported with optimal tiling</li>
+<li><code>buffer_features</code> – Use cases that are supported for buffers</li>
+</ul>
+<p>Only the first two are relevant here, and the one we check depends on the value provided for the <code>tiling</code> parameter of the function:</p>
+<pre><code class="language-rust noplaypen">match tiling {
+    vk::ImageTiling::LINEAR =&gt; properties.linear_tiling_features.contains(features),
+    vk::ImageTiling::OPTIMAL =&gt; properties.optimal_tiling_features.contains(features),
+    _ =&gt; false,
+}
+</code></pre>
+<p>We'll use this function now to create a <code>get_depth_format</code> helper function to select a format with a depth component that supports usage as depth attachment:</p>
+<pre><code class="language-rust noplaypen">fn get_depth_format(instance: &amp;Instance, data: &amp;AppData) -&gt; Result&lt;vk::Format&gt; {
+    let candidates = &amp;[
+        vk::Format::D32_SFLOAT,
+        vk::Format::D32_SFLOAT_S8_UINT,
+        vk::Format::D24_UNORM_S8_UINT,
+    ];
+
+    get_supported_format(
+        instance,
+        data,
+        candidates,
+        vk::ImageTiling::OPTIMAL,
+        vk::FormatFeatureFlags::DEPTH_STENCIL_ATTACHMENT,
+    )
+}
+</code></pre>
+<p>Call the function to find a depth format from <code>create_depth_objects</code>:</p>
+<pre><code class="language-rust noplaypen">let format = get_depth_format(instance, data)?;
+</code></pre>
+<p>We now have all the required information to invoke our <code>create_image</code> and <code>create_image_view</code> helper functions:</p>
+<pre><code class="language-rust noplaypen">let (depth_image, depth_image_memory) = create_image(
+    instance,
+    device,
+    data,
+    data.swapchain_extent.width,
+    data.swapchain_extent.height,
+    format,
+    vk::ImageTiling::OPTIMAL,
+    vk::ImageUsageFlags::DEPTH_STENCIL_ATTACHMENT,
+    vk::MemoryPropertyFlags::DEVICE_LOCAL,
+)?;
+
+data.depth_image = depth_image;
+data.depth_image_memory = depth_image_memory;
+
+// Image View
+
+data.depth_image_view = create_image_view(device, data.depth_image, format)?;
+</code></pre>
+<p>However, the <code>create_image_view</code> function currently assumes that the subresource always uses <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageAspectFlags.html#associatedconstant.COLOR"><code class="hljs">vk::ImageAspectFlags::COLOR</code></a>, so we will need to turn that field into a parameter:</p>
+<pre><code class="language-rust noplaypen">fn create_image_view(
+    device: &amp;Device,
+    image: vk::Image,
+    format: vk::Format,
+    aspects: vk::ImageAspectFlags,
+) -&gt; Result&lt;vk::ImageView&gt; {
+    let subresource_range = vk::ImageSubresourceRange::builder()
+        .aspect_mask(aspects)
+        .base_mip_level(0)
+        .level_count(1)
+        .base_array_layer(0)
+        .layer_count(1);
+
+    // ...
+}
+</code></pre>
+<p>Update all calls to this function to use the right aspect:</p>
+<pre><code class="language-rust noplaypen">create_image_view(device, *i, data.swapchain_format, vk::ImageAspectFlags::COLOR)
+
+// ...
+
+data.depth_image_view = create_image_view(
+    device,
+    data.depth_image,
+    format,
+    vk::ImageAspectFlags::DEPTH,
+)?;
+
+// ...
+
+data.texture_image_view = create_image_view(
+    device,
+    data.texture_image,
+    vk::Format::R8G8B8A8_SRGB,
+    vk::ImageAspectFlags::COLOR,
+)?;
+</code></pre>
+<p>That's it for creating the depth image. We don't need to map it or copy another image to it, because we're going to clear it at the start of the render pass like the color attachment.</p>
+<h3><a class="header" href="#explicitly-transitioning-the-depth-image" id="explicitly-transitioning-the-depth-image">Explicitly transitioning the depth image</a></h3>
+<p>We don't need to explicitly transition the layout of the image to a depth attachment because we'll take care of this in the render pass. However, for completeness I'll still describe the process in this section. You may skip it if you like.</p>
+<p>Make a call to <code>transition_image_layout</code> at the end of the <code>create_depth_objects</code> function like so:</p>
+<pre><code class="language-rust noplaypen">transition_image_layout(
+    device,
+    data,
+    data.depth_image,
+    format,
+    vk::ImageLayout::UNDEFINED,
+    vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL,
+)?;
+</code></pre>
+<p>The undefined layout can be used as initial layout, because there are no existing depth image contents that matter. We need to update some of the logic in <code>transition_image_layout</code> to use the right subresource aspect:</p>
+<pre><code class="language-rust noplaypen">let aspect_mask = if new_layout == vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL {
+    match format {
+        vk::Format::D32_SFLOAT_S8_UINT | vk::Format::D24_UNORM_S8_UINT =&gt;
+            vk::ImageAspectFlags::DEPTH | vk::ImageAspectFlags::STENCIL,
+        _ =&gt; vk::ImageAspectFlags::COLOR
+    }
+} else {
+    vk::ImageAspectFlags::COLOR
+};
+
+let subresource = vk::ImageSubresourceRange::builder()
+    .aspect_mask(aspect_mask)
+    .base_mip_level(0)
+    .level_count(1)
+    .base_array_layer(0)
+    .layer_count(1);
+</code></pre>
+<p>Although we're not using the stencil component, we do need to include it in the layout transitions of the depth image.</p>
+<p>Finally, add the correct access masks and pipeline stages:</p>
+<pre><code class="language-rust noplaypen">let (
+    src_access_mask,
+    dst_access_mask,
+    src_stage_mask,
+    dst_stage_mask,
+) = match (old_layout, new_layout) {
+    (vk::ImageLayout::UNDEFINED, vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL) =&gt; (
+        vk::AccessFlags::empty(),
+        vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_READ | vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_WRITE,
+        vk::PipelineStageFlags::TOP_OF_PIPE,
+        vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS,
+    ),
+    // ...
+};
+</code></pre>
+<p>The depth buffer will be read from to perform depth tests to see if a fragment is visible, and will be written to when a new fragment is drawn. The reading happens in the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.EARLY_FRAGMENT_TESTS"><code class="hljs">vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS</code></a> stage and the writing in the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.LATE_FRAGMENT_TESTS"><code class="hljs">vk::PipelineStageFlags::LATE_FRAGMENT_TESTS</code></a>. You should pick the earliest pipeline stage that matches the specified operations, so that it is ready for usage as depth attachment when it needs to be.</p>
+<h2><a class="header" href="#render-pass-1" id="render-pass-1">Render pass</a></h2>
+<p>We're now going to modify <code>create_render_pass</code> to include a depth attachment. First specify the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.AttachmentDescription.html"><code class="hljs">vk::AttachmentDescription</code></a>:</p>
+<pre><code class="language-rust noplaypen">let depth_stencil_attachment = vk::AttachmentDescription::builder()
+    .format(get_depth_format(instance, data)?)
+    .samples(vk::SampleCountFlags::_1)
+    .load_op(vk::AttachmentLoadOp::CLEAR)
+    .store_op(vk::AttachmentStoreOp::DONT_CARE)
+    .stencil_load_op(vk::AttachmentLoadOp::DONT_CARE)
+    .stencil_store_op(vk::AttachmentStoreOp::DONT_CARE)
+    .initial_layout(vk::ImageLayout::UNDEFINED)
+    .final_layout(vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
+</code></pre>
+<p>The <code>format</code> should be the same as the depth image itself. This time we don't care about storing the depth data (<code>store_op</code>), because it will not be used after drawing has finished. This may allow the hardware to perform additional optimizations. Just like the color buffer, we don't care about the previous depth contents, so we can use <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.UNDEFINED"><code class="hljs">vk::ImageLayout::UNDEFINED</code></a> as <code>initial_layout</code>.</p>
+<pre><code class="language-rust noplaypen">let depth_stencil_attachment_ref = vk::AttachmentReference::builder()
+    .attachment(1)
+    .layout(vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
+</code></pre>
+<p>Add a reference to the attachment for the first (and only) subpass:</p>
+<pre><code class="language-rust noplaypen">let subpass = vk::SubpassDescription::builder()
+    .pipeline_bind_point(vk::PipelineBindPoint::GRAPHICS)
+    .color_attachments(color_attachments)
+    .depth_stencil_attachment(&amp;depth_stencil_attachment_ref);
+</code></pre>
+<p>Unlike color attachments, a subpass can only use a single depth (+stencil) attachment. It wouldn't really make any sense to do depth tests on multiple buffers.</p>
+<pre><code class="language-rust noplaypen">let attachments = &amp;[color_attachment, depth_stencil_attachment];
+let subpasses = &amp;[subpass];
+let dependencies = &amp;[dependency];
+let info = vk::RenderPassCreateInfo::builder()
+    .attachments(attachments)
+    .subpasses(subpasses)
+    .dependencies(dependencies);
+</code></pre>
+<p>Finally, update the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.RenderPassCreateInfo.html"><code class="hljs">vk::RenderPassCreateInfo</code></a> struct to refer to both attachments.</p>
+<h2><a class="header" href="#framebuffer" id="framebuffer">Framebuffer</a></h2>
+<p>The next step is to modify the framebuffer creation to bind the depth image to the depth attachment. Go to <code>create_framebuffers</code> and specify the depth image view as second attachment:</p>
+<pre><code class="language-rust noplaypen">let attachments = &amp;[*i, data.depth_image_view];
+let create_info = vk::FramebufferCreateInfo::builder()
+    .render_pass(data.render_pass)
+    .attachments(attachments)
+    .width(data.swapchain_extent.width)
+    .height(data.swapchain_extent.height)
+    .layers(1);
+</code></pre>
+<p>The color attachment differs for every swapchain image, but the same depth image can be used by all of them because only a single subpass is running at the same time due to our semaphores.</p>
+<p>You'll also need to move the call to <code>create_framebuffers</code> to make sure that it is called after the depth image view has actually been created:</p>
+<pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    // ...
+    create_depth_objects(&amp;instance, &amp;device, &amp;mut data)?;
+    create_framebuffers(&amp;device, &amp;mut data)?;
+    // ...
+}
+</code></pre>
+<h2><a class="header" href="#clear-values" id="clear-values">Clear values</a></h2>
+<p>Because we now have multiple attachments with <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.AttachmentLoadOp.html#associatedconstant.CLEAR"><code class="hljs">vk::AttachmentLoadOp::CLEAR</code></a>, we also need to specify multiple clear values. Go to <code>create_command_buffers</code> and add an instance of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/union.ClearValue.html"><code class="hljs">vk::ClearValue</code></a> to the <code>clear_values</code> array:</p>
+<pre><code class="language-rust noplaypen">let color_clear_value = vk::ClearValue {
+    color: vk::ClearColorValue {
+        float32: [0.0, 0.0, 0.0, 1.0],
+    },
+};
+
+let depth_clear_value = vk::ClearValue {
+    depth_stencil: vk::ClearDepthStencilValue {
+        depth: 1.0,
+        stencil: 0,
+    },
+};
+
+let clear_values = &amp;[color_clear_value, depth_clear_value];
+</code></pre>
+<p>The range of depths in the depth buffer is <code>0.0</code> to <code>1.0</code> in Vulkan, where <code>1.0</code> lies at the far view plane and <code>0.0</code> at the near view plane. The initial value at each point in the depth buffer should be the furthest possible depth, which is <code>1.0</code>.</p>
+<p>Note that the order of <code>clear_values</code> should be identical to the order of your attachments.</p>
+<h2><a class="header" href="#depth-and-stencil-state" id="depth-and-stencil-state">Depth and stencil state</a></h2>
+<p>The depth attachment is ready to be used now, but depth testing still needs to be enabled in the graphics pipeline. It is configured through the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineDepthStencilStateCreateInfo.html"><code class="hljs">vk::PipelineDepthStencilStateCreateInfo</code></a> struct:</p>
+<pre><code class="language-rust noplaypen">let depth_stencil_state = vk::PipelineDepthStencilStateCreateInfo::builder()
+    .depth_test_enable(true)
+    .depth_write_enable(true)
+    // continued ...
+</code></pre>
+<p>The <code>depth_test_enable</code> field specifies if the depth of new fragments should be compared to the depth buffer to see if they should be discarded. The <code>depth_write_enable</code> field specifies if the new depth of fragments that pass the depth test should actually be written to the depth buffer.</p>
+<pre><code class="language-rust noplaypen">    .depth_compare_op(vk::CompareOp::LESS)
+</code></pre>
+<p>The <code>depth_compare_op</code> field specifies the comparison that is performed to keep or discard fragments. We're sticking to the convention of lower depth = closer, so the depth of new fragments should be <em>less</em>.</p>
+<pre><code class="language-rust noplaypen">    .depth_bounds_test_enable(false)
+    .min_depth_bounds(0.0) // Optional.
+    .max_depth_bounds(1.0) // Optional.
+</code></pre>
+<p>The <code>depth_bounds_test_enable</code>, <code>min_depth_bounds</code> and <code>max_depth_bounds</code> fields are used for the optional depth bound test. Basically, this allows you to only keep fragments that fall within the specified depth range. We won't be using this functionality.</p>
+<pre><code class="language-rust noplaypen">    .stencil_test_enable(false)
+    .front(/* vk::StencilOpState */) // Optional.
+    .back(/* vk::StencilOpState */); // Optional.
+</code></pre>
+<p>The last three fields configure stencil buffer operations, which we also won't be using in this tutorial. If you want to use these operations, then you will have to make sure that the format of the depth/stencil image contains a stencil component.</p>
+<pre><code class="language-rust noplaypen">let info = vk::GraphicsPipelineCreateInfo::builder()
+    .stages(stages)
+    .vertex_input_state(&amp;vertex_input_state)
+    .input_assembly_state(&amp;input_assembly_state)
+    .viewport_state(&amp;viewport_state)
+    .rasterization_state(&amp;rasterization_state)
+    .multisample_state(&amp;multisample_state)
+    .depth_stencil_state(&amp;depth_stencil_state)
+    .color_blend_state(&amp;color_blend_state)
+    .layout(data.pipeline_layout)
+    .render_pass(data.render_pass)
+    .subpass(0);
+</code></pre>
+<p>Update the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.GraphicsPipelineCreateInfo.html"><code class="hljs">vk::GraphicsPipelineCreateInfo</code></a> struct to reference the depth stencil state we just filled in. A depth stencil state must always be specified if the render pass contains a depth stencil attachment.</p>
+<p>If you run your program now, then you should see that the fragments of the geometry are now correctly ordered:</p>
+<p><img src="model/../images/depth_correct.png" alt="" /></p>
+<h2><a class="header" href="#handling-window-resize" id="handling-window-resize">Handling window resize</a></h2>
+<p>The resolution of the depth buffer should change when the window is resized to match the new color attachment resolution. Extend the <code>App::recreate_swapchain</code> method to recreate the depth resources in that case:</p>
+<pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    self.device.device_wait_idle()?;
+    self.destroy_swapchain();
+    create_swapchain(window, &amp;self.instance, &amp;self.device, &amp;mut self.data)?;
+    create_swapchain_image_views(&amp;self.device, &amp;mut self.data)?;
+    create_render_pass(&amp;self.instance, &amp;self.device, &amp;mut self.data)?;
+    create_pipeline(&amp;self.device, &amp;mut self.data)?;
+    create_depth_objects(&amp;self.instance, &amp;self.device, &amp;mut self.data)?;
+    create_framebuffers(&amp;self.device, &amp;mut self.data)?;
+    create_uniform_buffers(&amp;self.instance, &amp;self.device, &amp;mut self.data)?;
+    create_descriptor_pool(&amp;self.device, &amp;mut self.data)?;
+    create_descriptor_sets(&amp;self.device, &amp;mut self.data)?;
+    create_command_buffers(&amp;self.device, &amp;mut self.data)?;
+    Ok(())
+}
+</code></pre>
+<p>The cleanup operations should happen in the swapchain cleanup function:</p>
+<pre><code class="language-rust noplaypen">fn destroy_swapchain(&amp;mut self) {
+    self.device.destroy_image_view(self.data.depth_image_view, None);
+    self.device.free_memory(self.data.depth_image_memory, None);
+    self.device.destroy_image(self.data.depth_image, None);
+    // ...
+}
+</code></pre>
+<p>Congratulations, your application is now finally ready to render arbitrary 3D geometry and have it look right. We're going to try this out in the next chapter by drawing a textured model!</p>
 <h1><a class="header" href="#loading-models" id="loading-models">Loading models</a></h1>
 <p>Coming soon™.</p>
 <h1><a class="header" href="#generating-mipmaps" id="generating-mipmaps">Generating mipmaps</a></h1>

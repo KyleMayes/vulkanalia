@@ -303,6 +303,7 @@ device.cmd_draw_indexed(*command_buffer, INDICES.len() as u32, 1, 0, 0, 0);
 <h2><a class="header" href="#alignment-requirements" id="alignment-requirements">Alignment requirements</a></h2>
 <p>One thing we've glossed over so far is how exactly the data in the C++ structure should match with the uniform definition in the shader. It seems obvious enough to simply use the same types in both:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     model: glm::Mat4,
     view: glm::Mat4,
@@ -317,6 +318,7 @@ struct UniformBufferObject {
 </code></pre>
 <p>However, that's not all there is to it. For example, try modifying the struct and shader to look like this:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     foo: glm::Vec2,
     model: glm::Mat4,
@@ -344,6 +346,7 @@ struct UniformBufferObject {
 <p>Our original shader with just three <code>mat4</code> fields already met the alignment requirements. As each <code>mat4</code> is 4 x 4 x 4 = 64 bytes in size, <code>model</code> has an offset of <code>0</code>, <code>view</code> has an offset of 64 and <code>proj</code> has an offset of 128. All of these are multiples of 16 and that's why it worked fine.</p>
 <p>The new structure starts with a <code>vec2</code> which is only 8 bytes in size and therefore throws off all of the offsets. Now <code>model</code> has an offset of <code>8</code>, <code>view</code> an offset of <code>72</code> and <code>proj</code> an offset of <code>136</code>, none of which are multiples of 16. Unfortunately Rust does not have great support for controlling the alignment of fields in structs, but we can use some manual padding to fix the alignment issues:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     foo: glm::Vec2,
     _padding: [u8; 8],

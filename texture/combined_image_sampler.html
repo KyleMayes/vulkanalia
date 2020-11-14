@@ -201,8 +201,7 @@ device.update_descriptor_sets(
 <p>The descriptors must be updated with this image info, just like the buffer. This time we're using the <code>image_info</code> array instead of <code>buffer_info</code>. The descriptors are now ready to be used by the shaders!</p>
 <h2><a class="header" href="#texture-coordinates" id="texture-coordinates">Texture coordinates</a></h2>
 <p>There is one important ingredient for texture mapping that is still missing, and that's the actual coordinates for each vertex. The coordinates determine how the image is actually mapped to the geometry.</p>
-<pre><code class="language-rust noplaypen">#[repr(C)]
-struct Vertex {
+<pre><code class="language-rust noplaypen">struct Vertex {
     pos: glm::Vec2,
     color: glm::Vec3,
     tex_coord: glm::Vec2,

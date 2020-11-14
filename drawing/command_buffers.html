@@ -266,7 +266,7 @@ data.command_buffers = device.allocate_command_buffers(&amp;allocate_info)?;
     .extent(data.swapchain_extent);
 </code></pre>
 <p>Here we define the size of the render area. The render area defines where shader loads and stores will take place during the execution of the render pass. The pixels outside this region will have undefined values. It should match the size of the attachments for best performance.</p>
-<pre><code class="language-rust noplaypen">let clear_value = vk::ClearValue {
+<pre><code class="language-rust noplaypen">let color_clear_value = vk::ClearValue {
     color: vk::ClearColorValue {
         float32: [0.0, 0.0, 0.0, 1.0],
     },
@@ -274,7 +274,7 @@ data.command_buffers = device.allocate_command_buffers(&amp;allocate_info)?;
 </code></pre>
 <p>Next we define a clear value that will be used to clear the framebuffer at the beginning of the render pass (because we used <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.AttachmentLoadOp.html#associatedconstant.CLEAR"><code class="hljs">vk::AttachmentLoadOp::CLEAR</code></a> when creating the render pass). <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/union.ClearValue.html"><code class="hljs">vk::ClearValue</code></a> is a union that can be used to set clear values for color attachments or for depth/stencil attachments. Here we are setting the <code>color</code> field with a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/union.ClearColorValue.html"><code class="hljs">vk::ClearColorValue</code></a> union with 4 <code>f32</code>s that define a black clear color with 100% opacity.</p>
 <p>Drawing starts by beginning the render pass with <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_begin_render_pass"><code class="hljs">cmd_begin_render_pass</code></a>. The render pass is configured using some parameters in a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.RenderPassBeginInfo.html"><code class="hljs">vk::RenderPassBeginInfo</code></a> struct.</p>
-<pre><code class="language-rust noplaypen">let clear_values = &amp;[clear_value];
+<pre><code class="language-rust noplaypen">let clear_values = &amp;[color_clear_value];
 let info = vk::RenderPassBeginInfo::builder()
     .render_pass(data.render_pass)
     .framebuffer(data.framebuffers[i])

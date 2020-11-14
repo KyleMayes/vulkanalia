@@ -164,6 +164,7 @@
 <p>The <em>descriptor layout</em> specifies the types of resources that are going to be accessed by the pipeline, just like a render pass specifies the types of attachments that will be accessed. A <em>descriptor set</em> specifies the actual buffer or image resources that will be bound to the descriptors, just like a framebuffer specifies the actual image views to bind to render pass attachments. The descriptor set is then bound for the drawing commands just like the vertex buffers and framebuffer.</p>
 <p>There are many types of descriptors, but in this chapter we'll work with uniform buffer objects (UBO). We'll look at other types of descriptors in future chapters, but the basic process is the same. Let's say we have the data we want the vertex shader to have in a struct like this:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     model: glm::Mat4,
     view: glm::Mat4,
@@ -209,6 +210,7 @@ void main() {
 <h2><a class="header" href="#descriptor-set-layout" id="descriptor-set-layout">Descriptor set layout</a></h2>
 <p>The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader.</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
     model: glm::Mat4,
     view: glm::Mat4,

@@ -309,7 +309,7 @@ device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
 <pre><code class="language-rust noplaypen">fn create_image(
     instance: &amp;Instance,
     device: &amp;Device,
-    data: &amp;mut AppData,
+    data: &amp;AppData,
     width: u32,
     height: u32,
     format: vk::Format,
