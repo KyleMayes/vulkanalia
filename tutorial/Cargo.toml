@@ -165,3 +165,8 @@ path = "src/26_depth_buffering.rs"
 
 name = "27_model_loading"
 path = "src/27_model_loading.rs"
+
+[[bin]]
+
+name = "28_mipmapping"
+path = "src/28_mipmapping.rs"
