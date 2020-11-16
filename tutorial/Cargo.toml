@@ -170,3 +170,8 @@ path = "src/27_model_loading.rs"
 
 name = "28_mipmapping"
 path = "src/28_mipmapping.rs"
+
+[[bin]]
+
+name = "29_multisampling"
+path = "src/29_multisampling.rs"
