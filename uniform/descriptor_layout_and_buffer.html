@@ -398,8 +398,8 @@ fn create_uniform_buffers(
 </code></pre>
 <p>For the view transformation I've decided to look at the geometry from above at a 45 degree angle. The <code>glm::look_at</code> function takes the eye position, center position and up axis as parameters.</p>
 <pre><code class="language-rust noplaypen">let mut proj = glm::perspective(
-    glm::radians(&amp;glm::vec1(45.0))[0],
     self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+    glm::radians(&amp;glm::vec1(45.0))[0],
     0.1,
     10.0,
 );
