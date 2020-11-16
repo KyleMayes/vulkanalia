@@ -216,8 +216,8 @@ impl App {
         );
 
         let mut proj = glm::perspective_rh_zo(
-            glm::radians(&glm::vec1(45.0))[0],
             self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+            glm::radians(&glm::vec1(45.0))[0],
             0.1,
             10.0,
         );

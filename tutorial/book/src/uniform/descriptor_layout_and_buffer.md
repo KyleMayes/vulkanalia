@@ -323,8 +323,8 @@ For the view transformation I've decided to look at the geometry from above at a
 
 ```rust,noplaypen
 let mut proj = glm::perspective(
-    glm::radians(&glm::vec1(45.0))[0],
     self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+    glm::radians(&glm::vec1(45.0))[0],
     0.1,
     10.0,
 );
