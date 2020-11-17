@@ -10,6 +10,9 @@ jobs:
   publish-tutorial:
     name: Publish - Tutorial
     runs-on: ubuntu-latest
+    env:
+      RUST_VERSION: 1.47.0
+      MDBOOK_VERSION: 0.4.4
     steps:
       # Checkout
       - name: Checkout Repository
@@ -22,18 +25,39 @@ jobs:
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.47.0
+          toolchain: ${{ env.RUST_VERSION }}
+      - name: Cache mdbook
+        id: cache-mdbook
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo/bin/mdbook
+          key: ${{ runner.os }}-${{ env.RUST_VERSION }}-${{ env.MDBOOK_VERSION }}
       - name: Install mdbook
         uses: actions-rs/cargo@v1
+        if: steps.cache-mdbook.outputs.cache-hit != 'true'
         with:
           command: install
-          args: mdbook --version 0.4.4 --no-default-features
+          args: mdbook --version ${{ env.MDBOOK_VERSION }} --no-default-features
       # Publish
+      - name: Cache Index
+        id: cache-index
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.GITHUB_WORKSPACE }}/index.txt
+          key: ${{ hashFiles('Vulkan-Docs', 'generator/**') }}
       - name: Build Index
+        if: steps.cache-index.outputs.cache-hit != 'true'
         working-directory: ./generator
         run: ./gradlew run --args="--directory=.. index"
+      - name: Cache Preprocessor
+        id: cache-preprocessor
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo/bin/vk-preprocessor
+          key: ${{ hashFiles('index.txt', 'tutorial/book/preprocessor/**') }}
       - name: Build Preprocessor
         uses: actions-rs/cargo@v1
+        if: steps.cache-preprocessor.outputs.cache-hit != 'true'
         with:
           command: install
           args: --path ./tutorial/book/preprocessor
