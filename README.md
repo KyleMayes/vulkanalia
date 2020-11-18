@@ -8,6 +8,8 @@ Vulkan bindings for Rust.
 
 Released under the Apache License 2.0.
 
+*Heavily inspired by the [`ash`](https://github.com/MaikKlein/ash) crate.*
+
 ## Overview
 
 [`vulkanalia-sys`](https://docs.rs/vulkanalia-sys/latest/vulkanalia_sys) consists of the Vulkan types and command signatures generated from the [Vulkan API Registry](https://github.com/KhronosGroup/Vulkan-Docs/blob/main/xml/vk.xml). If you want to use the raw Vulkan API and are willing to handle function loading yourself you can use this crate.
@@ -20,4 +22,4 @@ See the `examples` directory for an implementation of the classic triangle examp
 
 ## [Vulkan Tutorial](https://kylemayes.github.io/vulkanalia)
 
-For users new to Vulkan, there is a complete adaptation of https://vulkan-tutorial.com to use Rust and `vulkanalia` instead of C++. The published version of this tutorial can be found [here](https://kylemayes.github.io/vulkanalia) and the sources for the tutorial (including standalone working code examples for each chapter) are in this repository in the `tutorial` directory.
+For users new to Vulkan, there is a complete adaptation of https://vulkan-tutorial.com by [Alexander Overvoorde](https://github.com/Overv) to use Rust and `vulkanalia` instead of C++. The published version of this tutorial can be found [here](https://kylemayes.github.io/vulkanalia) and the sources for the tutorial (including standalone working code examples for each chapter) are in this repository in the `tutorial` directory.
