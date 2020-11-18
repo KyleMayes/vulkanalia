@@ -10,6 +10,15 @@ use lazy_static::lazy_static;
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::vk;
 
+lazy_static! {
+    /// The triangle vertices.
+    static ref VERTICES: Vec<Vertex> = vec![
+        Vertex { pos: glm::vec2(0.0, -0.5), color: glm::vec3(1.0, 0.0, 0.0) },
+        Vertex { pos: glm::vec2(0.5, 0.5), color: glm::vec3(0.0, 1.0, 0.0) },
+        Vertex { pos: glm::vec2(-0.5, 0.5), color: glm::vec3(0.0, 0.0, 1.0) },
+    ];
+}
+
 fn main() -> Result<()> {
     App::new("Triangle", TriangleExample::default())?.run()
 }
@@ -243,15 +252,6 @@ impl Example for TriangleExample {
         device.destroy_buffer(self.vertex_buffer, None);
         device.free_memory(self.vertex_buffer_memory, None)
     }
-}
-
-lazy_static! {
-    /// The triangle vertices.
-    static ref VERTICES: Vec<Vertex> = vec![
-        Vertex { pos: glm::vec2(0.0, -0.5), color: glm::vec3(1.0, 0.0, 0.0) },
-        Vertex { pos: glm::vec2(0.5, 0.5), color: glm::vec3(0.0, 1.0, 0.0) },
-        Vertex { pos: glm::vec2(-0.5, 0.5), color: glm::vec3(0.0, 0.0, 1.0) },
-    ];
 }
 
 /// A triangle vertex.

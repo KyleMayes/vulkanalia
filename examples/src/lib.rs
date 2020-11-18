@@ -663,7 +663,7 @@ fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
 }
 
 //================================================
-// Shared
+// Structs
 //================================================
 
 /// The indices of the required queue families for a physical device.
@@ -717,6 +717,10 @@ impl SwapchainSupport {
     }
 }
 
+//================================================
+// Shared (buffers)
+//================================================
+
 /// Creates a device buffer.
 pub fn create_buffer(
     instance: &Instance,
@@ -749,6 +753,22 @@ pub fn create_buffer(
     Ok((buffer, memory))
 }
 
+/// Fills a device buffer with data.
+#[rustfmt::skip]
+pub fn fill_buffer(device: &Device, buffer: vk::Buffer, memory: vk::DeviceMemory, data: &[impl Copy]) -> Result<()> {
+    device.bind_buffer_memory(buffer, memory, 0)?;
+
+    let dst = device.map_memory(memory, 0, mem::size_of_val(data) as u64, vk::MemoryMapFlags::empty())?;
+    unsafe { memcpy(data.as_ptr(), dst.cast(), data.len()); }
+    device.unmap_memory(memory);
+
+    Ok(())
+}
+
+//================================================
+// Shared (shaders)
+//================================================
+
 /// Creates a shader module from a compiled shader.
 pub fn create_shader_module(device: &Device, spv: &[u8]) -> Result<vk::ShaderModule> {
     let spv = Vec::<u8>::from(spv);
@@ -762,17 +782,9 @@ pub fn create_shader_module(device: &Device, spv: &[u8]) -> Result<vk::ShaderMod
     Ok(device.create_shader_module(&info, None)?)
 }
 
-/// Fills a device buffer with data.
-#[rustfmt::skip]
-pub fn fill_buffer(device: &Device, buffer: vk::Buffer, memory: vk::DeviceMemory, data: &[impl Copy]) -> Result<()> {
-    device.bind_buffer_memory(buffer, memory, 0)?;
-
-    let dst = device.map_memory(memory, 0, mem::size_of_val(data) as u64, vk::MemoryMapFlags::empty())?;
-    unsafe { memcpy(data.as_ptr(), dst.cast(), data.len()); }
-    device.unmap_memory(memory);
-
-    Ok(())
-}
+//================================================
+// Shared (other)
+//================================================
 
 /// Gets a suitable memory type index for a device buffer.
 pub fn get_memory_type_index(
