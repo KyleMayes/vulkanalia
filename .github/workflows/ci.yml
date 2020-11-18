@@ -84,7 +84,7 @@ jobs:
       # Check
       - name: ktlint Check
         working-directory: ./generator
-        run: ./gradlew ktlintCheck
+        run: ./gradlew check
 
   check-bindings:
     name: Check - Bindings

@@ -12,7 +12,10 @@ import com.github.ajalt.clikt.parameters.options.required
 import com.kylemayes.generator.generate.generateRustFiles
 import com.kylemayes.generator.registry.indexEntities
 import com.kylemayes.generator.registry.parseRegistry
+import com.kylemayes.generator.support.addBindingsUpdates
+import com.kylemayes.generator.support.generateMarkdown
 import com.kylemayes.generator.support.git
+import com.kylemayes.generator.support.parseMarkdown
 import com.kylemayes.generator.support.time
 import mu.KotlinLogging
 import org.kohsuke.github.GitHub
@@ -169,6 +172,11 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
             exitProcess(1)
         }
 
+        val markdown = directory.resolve("CHANGELOG.md")
+        val changelog = parseMarkdown(Files.readString(markdown))
+        changelog.addBindingsUpdates(latestCommit, getCommitMessage(github, latestCommit))
+        Files.writeString(markdown, changelog.generateMarkdown())
+
         // Publish
 
         if (repo == null) {
@@ -214,7 +222,7 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 }
 
 // ===============================================
-// Structs
+// Shared
 // ===============================================
 
 /** Gets the current `Vulkan-Docs` commit from the `Vulkan-Docs` file. */
@@ -240,6 +248,13 @@ fun getLatestCommit(github: GitHub, path: String): String =
         .list()
         .first()
         .shA1
+
+/** Gets the commit message for a `Vulkan-Docs` commit from GitHub. */
+fun getCommitMessage(github: GitHub, commit: String): String =
+    github.getRepository("KhronosGroup/Vulkan-Docs")
+        .getCommit(commit)
+        .commitShortInfo
+        .message
 
 /** Gets the contents of a `Vulkan-Docs` file from GitHub. */
 fun getFileContents(commit: String, path: String): String {

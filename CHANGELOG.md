@@ -1,12 +1,12 @@
 ## [0.2.2] - 2020-11-17
 
 ### Bindings Updates
-- [November 9, 2020 Vulkan 1.2.160](https://github.com/KhronosGroup/Vulkan-Docs/commit/f90136facacd25f016e523064f03713bdfe1b22d)
+- [November 9, 2020 Vulkan 1.2.160 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/f90136facacd25f016e523064f03713bdfe1b22d)
 
 ## [0.2.1] - 2020-11-04
 
 ### Bindings Updates
-- [November 1, 2020 Vulkan 1.2.159](https://github.com/KhronosGroup/Vulkan-Docs/commit/9adbc1846ddad202a0584f5c03a1916cf9801179)
+- [November 1, 2020 Vulkan 1.2.159 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9adbc1846ddad202a0584f5c03a1916cf9801179)
 
 ### Added
 - Added builder methods for array length fields associated with optional array fields
@@ -14,7 +14,7 @@
 ## [0.2.0] - 2020-10-30
 
 ### Bindings Updates
-- [October 19, 2020 Vulkan 1.2.158](https://github.com/KhronosGroup/Vulkan-Docs/commit/9fd8fd599b47a67b2eb078b2f5c9e6a2adc922a4)
+- [October 19, 2020 Vulkan 1.2.158 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9fd8fd599b47a67b2eb078b2f5c9e6a2adc922a4)
 
 ### Changed
 - Changed wrapper methods with possible success codes other than `SUCCESS` or `INCOMPLETE` to return `VkSuccessResult` (new typedef) instead of `VkResult`
