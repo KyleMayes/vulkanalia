@@ -720,7 +720,7 @@ fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
 }
 
 //================================================
-// Shared
+// Structs
 //================================================
 
 #[derive(Copy, Clone, Debug)]

@@ -650,7 +650,7 @@ fn create_framebuffers(device: &Device, data: &mut AppData) -> Result<()> {
 }
 
 //================================================
-// Shared
+// Structs
 //================================================
 
 #[derive(Copy, Clone, Debug)]

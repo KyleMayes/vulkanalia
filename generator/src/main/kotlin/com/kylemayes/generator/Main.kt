@@ -214,7 +214,7 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 }
 
 // ===============================================
-// Shared
+// Structs
 // ===============================================
 
 /** Gets the current `Vulkan-Docs` commit from the `Vulkan-Docs` file. */

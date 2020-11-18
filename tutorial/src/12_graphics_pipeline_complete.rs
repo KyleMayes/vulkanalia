@@ -622,7 +622,7 @@ fn create_shader_module(device: &Device, bytecode: &[u8]) -> Result<vk::ShaderMo
 }
 
 //================================================
-// Shared
+// Structs
 //================================================
 
 #[derive(Copy, Clone, Debug)]

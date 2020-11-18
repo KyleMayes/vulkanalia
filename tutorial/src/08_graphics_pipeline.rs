@@ -455,7 +455,7 @@ fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
 }
 
 //================================================
-// Shared
+// Structs
 //================================================
 
 #[derive(Copy, Clone, Debug)]

@@ -411,7 +411,7 @@ fn get_swapchain_extent(window: &Window, capabilities: vk::SurfaceCapabilitiesKH
 }
 
 //================================================
-// Shared
+// Structs
 //================================================
 
 #[derive(Copy, Clone, Debug)]

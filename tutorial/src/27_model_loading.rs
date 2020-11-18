@@ -1121,14 +1121,15 @@ fn create_texture_sampler(device: &Device, data: &mut AppData) -> Result<()> {
 // Model
 //================================================
 
-#[rustfmt::skip]
 fn load_model(data: &mut AppData) -> Result<()> {
     // Model
 
     let mut reader = BufReader::new(File::open("tutorial/resources/viking_room.obj")?);
 
     let (models, _) = tobj::load_obj_buf(&mut reader, true, |_| {
-        Ok((vec![tobj::Material::empty()], HashMap::new()))
+        let mut map = HashMap::new();
+        map.insert("Texture1".to_string(), 0);
+        Ok((vec![tobj::Material::empty()], map))
     })?;
 
     // Vertices / Indices
@@ -1442,7 +1443,7 @@ fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
 }
 
 //================================================
-// Shared
+// Structs
 //================================================
 
 #[derive(Copy, Clone, Debug)]
@@ -1490,6 +1491,14 @@ impl SwapchainSupport {
             present_modes: instance.get_physical_device_surface_present_modes_khr(physical_device, data.surface)?,
         })
     }
+}
+
+#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+struct UniformBufferObject {
+    model: glm::Mat4,
+    view: glm::Mat4,
+    proj: glm::Mat4,
 }
 
 #[repr(C)]
@@ -1557,6 +1566,10 @@ impl Hash for Vertex {
     }
 }
 
+//================================================
+// Shared (Buffers)
+//================================================
+
 fn create_buffer(
     instance: &Instance,
     device: &Device,
@@ -1606,6 +1619,10 @@ fn copy_buffer(
     Ok(())
 }
 
+//================================================
+// Shared (Images)
+//================================================
+
 fn create_image(
     instance: &Instance,
     device: &Device,
@@ -1650,6 +1667,28 @@ fn create_image(
     device.bind_image_memory(image, image_memory, 0)?;
 
     Ok((image, image_memory))
+}
+
+fn create_image_view(
+    device: &Device,
+    image: vk::Image,
+    format: vk::Format,
+    aspects: vk::ImageAspectFlags,
+) -> Result<vk::ImageView> {
+    let subresource_range = vk::ImageSubresourceRange::builder()
+        .aspect_mask(aspects)
+        .base_mip_level(0)
+        .level_count(1)
+        .base_array_layer(0)
+        .layer_count(1);
+
+    let info = vk::ImageViewCreateInfo::builder()
+        .image(image)
+        .view_type(vk::ImageViewType::_2D)
+        .format(format)
+        .subresource_range(subresource_range);
+
+    Ok(device.create_image_view(&info, None)?)
 }
 
 fn transition_image_layout(
@@ -1751,6 +1790,26 @@ fn copy_buffer_to_image(
     Ok(())
 }
 
+//================================================
+// Shared (Other)
+//================================================
+
+fn get_memory_type_index(
+    instance: &Instance,
+    data: &AppData,
+    properties: vk::MemoryPropertyFlags,
+    requirements: vk::MemoryRequirements,
+) -> Result<u32> {
+    let memory = instance.get_physical_device_memory_properties(data.physical_device);
+    (0..memory.memory_type_count)
+        .find(|i| {
+            let suitable = (requirements.memory_type_bits & (1 << i)) != 0;
+            let memory_type = memory.memory_types[*i as usize];
+            suitable && memory_type.property_flags.contains(properties)
+        })
+        .ok_or_else(|| anyhow!("Failed to find suitable memory type."))
+}
+
 fn begin_single_time_commands(device: &Device, data: &AppData) -> Result<vk::CommandBuffer> {
     // Allocate
 
@@ -1788,50 +1847,4 @@ fn end_single_time_commands(device: &Device, data: &AppData, command_buffer: vk:
     device.free_command_buffers(data.command_pool, &[command_buffer]);
 
     Ok(())
-}
-
-fn get_memory_type_index(
-    instance: &Instance,
-    data: &AppData,
-    properties: vk::MemoryPropertyFlags,
-    requirements: vk::MemoryRequirements,
-) -> Result<u32> {
-    let memory = instance.get_physical_device_memory_properties(data.physical_device);
-    (0..memory.memory_type_count)
-        .find(|i| {
-            let suitable = (requirements.memory_type_bits & (1 << i)) != 0;
-            let memory_type = memory.memory_types[*i as usize];
-            suitable && memory_type.property_flags.contains(properties)
-        })
-        .ok_or_else(|| anyhow!("Failed to find suitable memory type."))
-}
-
-#[repr(C)]
-#[derive(Copy, Clone, Debug)]
-struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
-}
-
-fn create_image_view(
-    device: &Device,
-    image: vk::Image,
-    format: vk::Format,
-    aspects: vk::ImageAspectFlags,
-) -> Result<vk::ImageView> {
-    let subresource_range = vk::ImageSubresourceRange::builder()
-        .aspect_mask(aspects)
-        .base_mip_level(0)
-        .level_count(1)
-        .base_array_layer(0)
-        .layer_count(1);
-
-    let info = vk::ImageViewCreateInfo::builder()
-        .image(image)
-        .view_type(vk::ImageViewType::_2D)
-        .format(format)
-        .subresource_range(subresource_range);
-
-    Ok(device.create_image_view(&info, None)?)
 }

@@ -270,7 +270,7 @@ fn create_logical_device(instance: &Instance, data: &mut AppData) -> Result<Devi
 }
 
 //================================================
-// Shared
+// Structs
 //================================================
 
 #[derive(Copy, Clone, Debug)]

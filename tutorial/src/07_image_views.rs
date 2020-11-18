@@ -446,7 +446,7 @@ fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<(
 }
 
 //================================================
-// Shared
+// Structs
 //================================================
 
 #[derive(Copy, Clone, Debug)]

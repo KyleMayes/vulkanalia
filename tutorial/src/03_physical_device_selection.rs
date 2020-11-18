@@ -217,7 +217,7 @@ fn check_physical_device(instance: &Instance, data: &AppData, physical_device: v
 }
 
 //================================================
-// Shared
+// Structs
 //================================================
 
 #[derive(Copy, Clone, Debug)]
