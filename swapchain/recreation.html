@@ -223,8 +223,8 @@ fn destroy_swapchain(&amp;mut self) {
 <h2><a class="header" href="#suboptimal-or-out-of-date-swapchain" id="suboptimal-or-out-of-date-swapchain">Suboptimal or out-of-date swapchain</a></h2>
 <p>Now we just need to figure out when swapchain recreation is necessary and call our new <code>App::recreate_swapchain</code> method. Luckily, Vulkan will usually just tell us that the swapchain is no longer adequate during presentation. The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.acquire_next_image_khr"><code class="hljs">acquire_next_image_khr</code></a> and <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code class="hljs">queue_present_khr</code></a> commands can return the following special values to indicate this.</p>
 <ul>
-<li><code>vk::ErrorCode::OUT_OF_DATE_KHR</code>: The swapchain has become incompatible with the surface and can no longer be used for rendering. Usually happens after a window resize.</li>
-<li><code>vk::SuccessCode::SUBOPTIMAL_KHR</code>: The swapchain can still be used to successfully present to the surface, but the surface properties are no longer matched exactly.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.OUT_OF_DATE_KHR"><code class="hljs">vk::ErrorCode::OUT_OF_DATE_KHR</code></a>: The swapchain has become incompatible with the surface and can no longer be used for rendering. Usually happens after a window resize.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SuccessCode.html#associatedconstant.SUBOPTIMAL_KHR"><code class="hljs">vk::SuccessCode::SUBOPTIMAL_KHR</code></a>: The swapchain can still be used to successfully present to the surface, but the surface properties are no longer matched exactly.</li>
 </ul>
 <pre><code class="language-rust noplaypen">let result = self.device.acquire_next_image_khr(
     self.data.swapchain,
@@ -240,7 +240,7 @@ let image_index = match result {
 };
 </code></pre>
 <p>If the swapchain turns out to be out of date when attempting to acquire an image, then it is no longer possible to present to it. Therefore we should immediately recreate the swapchain and try again in the next <code>App::render</code> call.</p>
-<p>You could also decide to do that if the swapchain is suboptimal, but I've chosen to proceed anyway in that case because we've already acquired an image. Since <code>vk::SuccessCode::SUBOPTIMAL_KHR</code> is considered a success code rather than an error code, it will be handled by the <code>Ok</code> arm in the <code>match</code> block.</p>
+<p>You could also decide to do that if the swapchain is suboptimal, but I've chosen to proceed anyway in that case because we've already acquired an image. Since <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SuccessCode.html#associatedconstant.SUBOPTIMAL_KHR"><code class="hljs">vk::SuccessCode::SUBOPTIMAL_KHR</code></a> is considered a success code rather than an error code, it will be handled by the <code>Ok</code> arm in the <code>match</code> block.</p>
 <pre><code class="language-rust noplaypen">let result = self.device.queue_present_khr(self.data.present_queue, &amp;present_info);
 
 let changed = result == Ok(vk::SuccessCode::SUBOPTIMAL_KHR)
@@ -254,7 +254,7 @@ if changed {
 </code></pre>
 <p>The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code class="hljs">queue_present_khr</code></a> function returns the same values with the same meaning. In this case we will also recreate the swapchain if it is suboptimal, because we want the best possible result.</p>
 <h2><a class="header" href="#handling-resizes-explicitly" id="handling-resizes-explicitly">Handling resizes explicitly</a></h2>
-<p>Although many drivers and platforms trigger <code>vk::ErrorCode::OUT_OF_DATE_KHR</code> automatically after a window resize, it is not guaranteed to happen. That's why we'll add some extra code to also handle resizes explicitly. First add a new field to the <code>App</code> struct to track whether a resize has happpened:</p>
+<p>Although many drivers and platforms trigger <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.OUT_OF_DATE_KHR"><code class="hljs">vk::ErrorCode::OUT_OF_DATE_KHR</code></a> automatically after a window resize, it is not guaranteed to happen. That's why we'll add some extra code to also handle resizes explicitly. First add a new field to the <code>App</code> struct to track whether a resize has happpened:</p>
 <pre><code class="language-rust noplaypen">struct App {
     // ...
     resized: bool,

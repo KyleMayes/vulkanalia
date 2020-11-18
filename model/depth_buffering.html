@@ -477,7 +477,19 @@ let info = vk::RenderPassCreateInfo::builder()
     .subpasses(subpasses)
     .dependencies(dependencies);
 </code></pre>
-<p>Finally, update the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.RenderPassCreateInfo.html"><code class="hljs">vk::RenderPassCreateInfo</code></a> struct to refer to both attachments.</p>
+<p>Next, update the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.RenderPassCreateInfo.html"><code class="hljs">vk::RenderPassCreateInfo</code></a> struct to refer to both attachments.</p>
+<pre><code class="language-rust noplaypen">let dependency = vk::SubpassDependency::builder()
+    .src_subpass(vk::SUBPASS_EXTERNAL)
+    .dst_subpass(0)
+    .src_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT
+        | vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS)
+    .src_access_mask(vk::AccessFlags::empty())
+    .dst_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT
+        | vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS)
+    .dst_access_mask(vk::AccessFlags::COLOR_ATTACHMENT_WRITE
+        | vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_WRITE);
+</code></pre>
+<p>Finally, we need to extend our subpass dependencies to make sure that there is no conflict between the transitioning of the depth image and it being cleared as part of its load operation. The depth image is first accessed in the early fragment test pipeline stage and because we have a load operation that <em>clears</em>, we should specify the access mask for writes.</p>
 <h2><a class="header" href="#framebuffer" id="framebuffer">Framebuffer</a></h2>
 <p>The next step is to modify the framebuffer creation to bind the depth image to the depth attachment. Go to <code>create_framebuffers</code> and specify the depth image view as second attachment:</p>
 <pre><code class="language-rust noplaypen">let attachments = &amp;[*i, data.depth_image_view];

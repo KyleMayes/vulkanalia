@@ -688,7 +688,7 @@ let layers = if VALIDATION_ENABLED {
     .enabled_layer_names(&amp;layers)
     .enabled_extension_names(&amp;extensions);
 </code></pre>
-<p>Now run the program in debug mode and ensure that the <code>Validation layer requested but not supported.</code> error does not occur. If it does, then have a look at the FAQ. If you get past that check, then <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.EntryV1_0.html#method.create_instance"><code class="hljs">create_instance</code></a> should never return a <code>vk::ErrorCode::LAYER_NOT_PRESENT</code> error code but you should still run the program to be sure.</p>
+<p>Now run the program in debug mode and ensure that the <code>Validation layer requested but not supported.</code> error does not occur. If it does, then have a look at the FAQ. If you get past that check, then <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.EntryV1_0.html#method.create_instance"><code class="hljs">create_instance</code></a> should never return a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.LAYER_NOT_PRESENT"><code class="hljs">vk::ErrorCode::LAYER_NOT_PRESENT</code></a> error code but you should still run the program to be sure.</p>
 <h2><a class="header" href="#message-callback" id="message-callback">Message callback</a></h2>
 <p>The validation layers will print debug messages to the standard output by default, but we can also handle them ourselves by providing an explicit callback in our program. This will also allow you to decide which kind of messages you would like to see, because not all are necessarily (fatal) errors. If you don't want to do that right now then you may skip to the last section in this chapter.</p>
 <p>To set up a callback in the program to handle messages and the associated details, we have to set up a debug messenger with a callback using the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_debug_utils.html"><code class="hljs">VK_EXT_debug_utils</code></a> extension.</p>
@@ -702,7 +702,7 @@ if VALIDATION_ENABLED {
     extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.to_cstr().as_ptr());
 }
 </code></pre>
-<p>Run the program to make sure you don't receive a <code>vk::ErrorCode::EXTENSION_NOT_PRESENT</code> error code. We don't really need to check for the existence of this extension, because it should be implied by the availability of the validation layers.</p>
+<p>Run the program to make sure you don't receive a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.EXTENSION_NOT_PRESENT"><code class="hljs">vk::ErrorCode::EXTENSION_NOT_PRESENT</code></a> error code. We don't really need to check for the existence of this extension, because it should be implied by the availability of the validation layers.</p>
 <p>Now let's see what a debug callback function looks like. Add a new <code>extern &quot;system&quot;</code> function called <code>debug_callback</code> that matches the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/type.PFN_vkDebugUtilsMessengerCallbackEXT.html"><code class="hljs">vk::PFN_vkDebugUtilsMessengerCallbackEXT</code></a> prototype. The <code>extern &quot;system&quot;</code> is necessary to allow Vulkan to call our Rust function.</p>
 <pre><code class="language-rust noplaypen">extern &quot;system&quot; fn debug_callback(
     severity: vk::DebugUtilsMessageSeverityFlagsEXT,
@@ -747,7 +747,7 @@ if VALIDATION_ENABLED {
 <li><code>object_count</code>: Number of objects in array</li>
 </ul>
 <p>Finally, the last parameter, here ignored as <code>_</code>, contains a pointer that was specified during the setup of the callback and allows you to pass your own data to it.</p>
-<p>The callback returns a (Vulkan) boolean that indicates if the Vulkan call that triggered the validation layer message should be aborted. If the callback returns true, then the call is aborted with the <code>vk::ErrorCode::VALIDATION_FAILED_EXT</code> error code. This is normally only used to test the validation layers themselves, so you should always return <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/constant.FALSE.html"><code class="hljs">vk::FALSE</code></a>.</p>
+<p>The callback returns a (Vulkan) boolean that indicates if the Vulkan call that triggered the validation layer message should be aborted. If the callback returns true, then the call is aborted with the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.VALIDATION_FAILED_EXT"><code class="hljs">vk::ErrorCode::VALIDATION_FAILED_EXT</code></a> error code. This is normally only used to test the validation layers themselves, so you should always return <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/constant.FALSE.html"><code class="hljs">vk::FALSE</code></a>.</p>
 <p>All that remains now is telling Vulkan about the callback function. Perhaps somewhat surprisingly, even the debug callback in Vulkan is managed with a handle that needs to be explicitly created and destroyed. Such a callback is part of a debug messenger and you can have as many of them as you want. Add a field to the <code>AppData</code> struct:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     messenger: vk::DebugUtilsMessengerEXT,
@@ -2758,8 +2758,8 @@ fn destroy_swapchain(&amp;mut self) {
 <h2><a class="header" href="#suboptimal-or-out-of-date-swapchain" id="suboptimal-or-out-of-date-swapchain">Suboptimal or out-of-date swapchain</a></h2>
 <p>Now we just need to figure out when swapchain recreation is necessary and call our new <code>App::recreate_swapchain</code> method. Luckily, Vulkan will usually just tell us that the swapchain is no longer adequate during presentation. The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.acquire_next_image_khr"><code class="hljs">acquire_next_image_khr</code></a> and <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code class="hljs">queue_present_khr</code></a> commands can return the following special values to indicate this.</p>
 <ul>
-<li><code>vk::ErrorCode::OUT_OF_DATE_KHR</code>: The swapchain has become incompatible with the surface and can no longer be used for rendering. Usually happens after a window resize.</li>
-<li><code>vk::SuccessCode::SUBOPTIMAL_KHR</code>: The swapchain can still be used to successfully present to the surface, but the surface properties are no longer matched exactly.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.OUT_OF_DATE_KHR"><code class="hljs">vk::ErrorCode::OUT_OF_DATE_KHR</code></a>: The swapchain has become incompatible with the surface and can no longer be used for rendering. Usually happens after a window resize.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SuccessCode.html#associatedconstant.SUBOPTIMAL_KHR"><code class="hljs">vk::SuccessCode::SUBOPTIMAL_KHR</code></a>: The swapchain can still be used to successfully present to the surface, but the surface properties are no longer matched exactly.</li>
 </ul>
 <pre><code class="language-rust noplaypen">let result = self.device.acquire_next_image_khr(
     self.data.swapchain,
@@ -2775,7 +2775,7 @@ let image_index = match result {
 };
 </code></pre>
 <p>If the swapchain turns out to be out of date when attempting to acquire an image, then it is no longer possible to present to it. Therefore we should immediately recreate the swapchain and try again in the next <code>App::render</code> call.</p>
-<p>You could also decide to do that if the swapchain is suboptimal, but I've chosen to proceed anyway in that case because we've already acquired an image. Since <code>vk::SuccessCode::SUBOPTIMAL_KHR</code> is considered a success code rather than an error code, it will be handled by the <code>Ok</code> arm in the <code>match</code> block.</p>
+<p>You could also decide to do that if the swapchain is suboptimal, but I've chosen to proceed anyway in that case because we've already acquired an image. Since <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SuccessCode.html#associatedconstant.SUBOPTIMAL_KHR"><code class="hljs">vk::SuccessCode::SUBOPTIMAL_KHR</code></a> is considered a success code rather than an error code, it will be handled by the <code>Ok</code> arm in the <code>match</code> block.</p>
 <pre><code class="language-rust noplaypen">let result = self.device.queue_present_khr(self.data.present_queue, &amp;present_info);
 
 let changed = result == Ok(vk::SuccessCode::SUBOPTIMAL_KHR)
@@ -2789,7 +2789,7 @@ if changed {
 </code></pre>
 <p>The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code class="hljs">queue_present_khr</code></a> function returns the same values with the same meaning. In this case we will also recreate the swapchain if it is suboptimal, because we want the best possible result.</p>
 <h2><a class="header" href="#handling-resizes-explicitly" id="handling-resizes-explicitly">Handling resizes explicitly</a></h2>
-<p>Although many drivers and platforms trigger <code>vk::ErrorCode::OUT_OF_DATE_KHR</code> automatically after a window resize, it is not guaranteed to happen. That's why we'll add some extra code to also handle resizes explicitly. First add a new field to the <code>App</code> struct to track whether a resize has happpened:</p>
+<p>Although many drivers and platforms trigger <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.OUT_OF_DATE_KHR"><code class="hljs">vk::ErrorCode::OUT_OF_DATE_KHR</code></a> automatically after a window resize, it is not guaranteed to happen. That's why we'll add some extra code to also handle resizes explicitly. First add a new field to the <code>App</code> struct to track whether a resize has happpened:</p>
 <pre><code class="language-rust noplaypen">struct App {
     // ...
     resized: bool,
@@ -4685,7 +4685,7 @@ let info = vk::DescriptorSetLayoutCreateInfo::builder()
     .bindings(bindings);
 </code></pre>
 <p>Make sure to set the <code>stage_flags</code> to indicate that we intend to use the combined image sampler descriptor in the fragment shader. That's where the color of the fragment is going to be determined. It is possible to use texture sampling in the vertex shader, for example to dynamically deform a grid of vertices by a <a href="https://en.wikipedia.org/wiki/Heightmap">heightmap</a>.</p>
-<p>If you would run the application with validation layers now, then you'll see that it complains that the descriptor pool cannot allocate descriptor sets with this layout, because it doesn't have any combined image sampler descriptors. Go to the <code>create_descriptor_pool</code> function and modify it to include a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorPoolSize.html"><code class="hljs">vk::DescriptorPoolSize</code></a> for this descriptor:</p>
+<p>We must also create a larger descriptor pool to make room for the allocation of the combined image sampler by adding another <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorPoolSize.html"><code class="hljs">vk::DescriptorPoolSize</code></a> of type <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorType.html#associatedconstant.COMBINED_IMAGE_SAMPLER"><code class="hljs">vk::DescriptorType::COMBINED_IMAGE_SAMPLER</code></a> to the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorPoolCreateInfo.html"><code class="hljs">vk::DescriptorPoolCreateInfo</code></a>. Go to the <code>create_descriptor_pool</code> function and modify it to include a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorPoolSize.html"><code class="hljs">vk::DescriptorPoolSize</code></a> for this descriptor:</p>
 <pre><code class="language-rust noplaypen">let sampler_size = vk::DescriptorPoolSize::builder()
     .type_(vk::DescriptorType::COMBINED_IMAGE_SAMPLER)
     .descriptor_count(data.swapchain_images.len() as u32);
@@ -4695,6 +4695,8 @@ let info = vk::DescriptorPoolCreateInfo::builder()
     .pool_sizes(pool_sizes)
     .max_sets(data.swapchain_images.len() as u32);
 </code></pre>
+<p>Inadequate descriptor pools are a good example of a problem that the validation layers will not catch: As of Vulkan 1.1, <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_descriptor_sets"><code class="hljs">allocate_descriptor_sets</code></a> may fail with the error code <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.OUT_OF_POOL_MEMORY"><code class="hljs">vk::ErrorCode::OUT_OF_POOL_MEMORY</code></a> if the pool is not sufficiently large, but the driver may also try to solve the problem internally. This means that sometimes (depending on hardware, pool size and allocation size) the driver will let us get away with an allocation that exceeds the limits of our descriptor pool. Other times, <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_descriptor_sets"><code class="hljs">allocate_descriptor_sets</code></a> will fail and return <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.OUT_OF_POOL_MEMORY"><code class="hljs">vk::ErrorCode::OUT_OF_POOL_MEMORY</code></a>. This can be particularly frustrating if the allocation succeeds on some machines, but fails on others.</p>
+<p>Since Vulkan shifts the responsiblity for the allocation to the driver, it is no longer a strict requirement to only allocate as many descriptors of a certain type (<a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorType.html#associatedconstant.COMBINED_IMAGE_SAMPLER"><code class="hljs">vk::DescriptorType::COMBINED_IMAGE_SAMPLER</code></a>, etc.) as specified by the corresponding <code>descriptor_count</code> members for the creation of the descriptor pool. However, it remains best practise to do so, and in the future, <code>VK_LAYER_KHRONOS_validation</code> will warn about this type of problem if you enable <a href="https://vulkan.lunarg.com/doc/view/1.1.126.0/windows/best_practices.html">Best Practice Validation</a>.</p>
 <p>The final step is to bind the actual image and sampler resources to the descriptors in the descriptor set. Go to the <code>create_descriptor_sets</code> function. The resources for a combined image sampler structure must be specified in a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorImageInfo.html"><code class="hljs">vk::DescriptorImageInfo</code></a> struct, just like the buffer resource for a uniform buffer descriptor is specified in a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.DescriptorBufferInfo.html"><code class="hljs">vk::DescriptorBufferInfo</code></a> struct. This is where the objects from the previous chapter come together.</p>
 <pre><code class="language-rust noplaypen">let info = vk::DescriptorImageInfo::builder()
     .image_layout(vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL)
@@ -5149,7 +5151,19 @@ let info = vk::RenderPassCreateInfo::builder()
     .subpasses(subpasses)
     .dependencies(dependencies);
 </code></pre>
-<p>Finally, update the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.RenderPassCreateInfo.html"><code class="hljs">vk::RenderPassCreateInfo</code></a> struct to refer to both attachments.</p>
+<p>Next, update the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.RenderPassCreateInfo.html"><code class="hljs">vk::RenderPassCreateInfo</code></a> struct to refer to both attachments.</p>
+<pre><code class="language-rust noplaypen">let dependency = vk::SubpassDependency::builder()
+    .src_subpass(vk::SUBPASS_EXTERNAL)
+    .dst_subpass(0)
+    .src_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT
+        | vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS)
+    .src_access_mask(vk::AccessFlags::empty())
+    .dst_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT
+        | vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS)
+    .dst_access_mask(vk::AccessFlags::COLOR_ATTACHMENT_WRITE
+        | vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_WRITE);
+</code></pre>
+<p>Finally, we need to extend our subpass dependencies to make sure that there is no conflict between the transitioning of the depth image and it being cleared as part of its load operation. The depth image is first accessed in the early fragment test pipeline stage and because we have a load operation that <em>clears</em>, we should specify the access mask for writes.</p>
 <h2><a class="header" href="#framebuffer" id="framebuffer">Framebuffer</a></h2>
 <p>The next step is to modify the framebuffer creation to bind the depth image to the depth attachment. Go to <code>create_framebuffers</code> and specify the depth image view as second attachment:</p>
 <pre><code class="language-rust noplaypen">let attachments = &amp;[*i, data.depth_image_view];
