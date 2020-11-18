@@ -156,13 +156,13 @@
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/14_command_buffers.rs">main.rs</a></p>
 <p>Commands in Vulkan, like drawing operations and memory transfers, are not executed directly using function calls. You have to record all of the operations you want to perform in command buffer objects. The advantage of this is that all of the hard work of setting up the drawing commands can be done in advance and in multiple threads. After that, you just have to tell Vulkan to execute the commands in the main loop.</p>
 <h2><a class="header" href="#command-pools" id="command-pools">Command pools</a></h2>
-<p>We have to create a command pool before we can create command buffers. Command pools manage the memory that is used to store the buffers and command buffers are allocated from them. Add a new <code>AppData</code> field to store a <code>vk::CommandPool</code>:</p>
+<p>We have to create a command pool before we can create command buffers. Command pools manage the memory that is used to store the buffers and command buffers are allocated from them. Add a new <code>AppData</code> field to store a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CommandPool.html"><code class="hljs">vk::CommandPool</code></a>:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
     command_pool: vk::CommandPool,
 }
 </code></pre>
-<p>Then create a new function <code>create_command_pool</code> and call it from <code>App::create</code> after the framebuffers were created.</p>
+<p>Then create a new function <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.create_command_pool"><code class="hljs">create_command_pool</code></a> and call it from <code>App::create</code> after the framebuffers were created.</p>
 <pre><code class="language-rust noplaypen">impl App {
     fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
@@ -190,9 +190,9 @@ let info = vk::CommandPoolCreateInfo::builder()
 <p>Command buffers are executed by submitting them on one of the device queues, like the graphics and presentation queues we retrieved. Each command pool can only allocate command buffers that are submitted on a single type of queue. We're going to record commands for drawing, which is why we've chosen the graphics queue family.</p>
 <p>There are three possible flags for command pools:</p>
 <ul>
-<li><code>vk::CommandPoolCreateFlags::TRANSIENT</code>: Hint that command buffers are rerecorded with new commands very often (may change memory allocation behavior)</li>
-<li><code>vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER</code>: Allow command buffers to be rerecorded individually, without this flag they all have to be reset together</li>
-<li><code>vk::CommandPoolCreateFlags::PROTECTED</code>: Creates &quot;protected&quot; command buffers which are stored in <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-protected-access-rules">&quot;protected&quot; memory</a> where Vulkan prevents unauthorized operations from accessing the memory</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CommandPoolCreateFlags.html#associatedconstant.TRANSIENT"><code class="hljs">vk::CommandPoolCreateFlags::TRANSIENT</code></a>: Hint that command buffers are rerecorded with new commands very often (may change memory allocation behavior)</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CommandPoolCreateFlags.html#associatedconstant.RESET_COMMAND_BUFFER"><code class="hljs">vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER</code></a>: Allow command buffers to be rerecorded individually, without this flag they all have to be reset together</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CommandPoolCreateFlags.html#associatedconstant.PROTECTED"><code class="hljs">vk::CommandPoolCreateFlags::PROTECTED</code></a>: Creates &quot;protected&quot; command buffers which are stored in <a href="https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-protected-access-rules">&quot;protected&quot; memory</a> where Vulkan prevents unauthorized operations from accessing the memory</li>
 </ul>
 <p>We will only record the command buffers at the beginning of the program and then execute them many times in the main loop and we don't need to protect our triangle with DRM, so we're not going to use any of these flags.</p>
 <pre><code class="language-rust noplaypen">data.command_pool = device.create_command_pool(&amp;info, None)?;
@@ -204,7 +204,7 @@ let info = vk::CommandPoolCreateInfo::builder()
 }
 </code></pre>
 <h2><a class="header" href="#command-buffer-allocation" id="command-buffer-allocation">Command buffer allocation</a></h2>
-<p>We can now start allocating command buffers and recording drawing commands in them. Because one of the drawing commands involves binding the right <code>vk::Framebuffer</code>, we'll actually have to record a command buffer for every image in the swapchain once again. To that end, create a list of <code>vk::CommandBuffer</code> objects as an <code>AppData</code> field. Command buffers will be automatically freed when their command pool is destroyed, so we don't need any explicit cleanup.</p>
+<p>We can now start allocating command buffers and recording drawing commands in them. Because one of the drawing commands involves binding the right <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.Framebuffer.html"><code class="hljs">vk::Framebuffer</code></a>, we'll actually have to record a command buffer for every image in the swapchain once again. To that end, create a list of <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CommandBuffer.html"><code class="hljs">vk::CommandBuffer</code></a> objects as an <code>AppData</code> field. Command buffers will be automatically freed when their command pool is destroyed, so we don't need any explicit cleanup.</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
     command_buffers: Vec&lt;vk::CommandBuffer&gt;,
@@ -224,7 +224,7 @@ fn create_command_buffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Res
     Ok(())
 }
 </code></pre>
-<p>Command buffers are allocated with the <code>allocate_command_buffers</code> function, which takes a <code>vk::CommandBufferAllocateInfo</code> struct as parameter that specifies the command pool and number of buffers to allocate:</p>
+<p>Command buffers are allocated with the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_command_buffers"><code class="hljs">allocate_command_buffers</code></a> function, which takes a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CommandBufferAllocateInfo.html"><code class="hljs">vk::CommandBufferAllocateInfo</code></a> struct as parameter that specifies the command pool and number of buffers to allocate:</p>
 <pre><code class="language-rust noplaypen">let allocate_info = vk::CommandBufferAllocateInfo::builder()
     .command_pool(data.command_pool)
     .level(vk::CommandBufferLevel::PRIMARY)
@@ -234,12 +234,12 @@ data.command_buffers = device.allocate_command_buffers(&amp;allocate_info)?;
 </code></pre>
 <p>The <code>level</code> parameter specifies if the allocated command buffers are primary or secondary command buffers.</p>
 <ul>
-<li><code>vk::CommandBufferLevel::PRIMARY</code>: Can be submitted to a queue for execution, but cannot be called from other command buffers.</li>
-<li><code>vk::CommandBufferLevel::SECONDARY</code>: Cannot be submitted directly, but can be called from primary command buffers.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CommandBufferLevel.html#associatedconstant.PRIMARY"><code class="hljs">vk::CommandBufferLevel::PRIMARY</code></a>: Can be submitted to a queue for execution, but cannot be called from other command buffers.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CommandBufferLevel.html#associatedconstant.SECONDARY"><code class="hljs">vk::CommandBufferLevel::SECONDARY</code></a>: Cannot be submitted directly, but can be called from primary command buffers.</li>
 </ul>
 <p>We won't make use of the secondary command buffer functionality here, but you can imagine that it's helpful to reuse common operations from primary command buffers.</p>
 <h2><a class="header" href="#starting-command-buffer-recording" id="starting-command-buffer-recording">Starting command buffer recording</a></h2>
-<p>We begin recording a command buffer by calling <code>begin_command_buffer</code> with a small <code>vk::CommandBufferBeginInfo</code> structure as argument that specifies some details about the usage of this specific command buffer.</p>
+<p>We begin recording a command buffer by calling <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.begin_command_buffer"><code class="hljs">begin_command_buffer</code></a> with a small <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CommandBufferBeginInfo.html"><code class="hljs">vk::CommandBufferBeginInfo</code></a> structure as argument that specifies some details about the usage of this specific command buffer.</p>
 <pre><code class="language-rust noplaypen">for (i, command_buffer) in data.command_buffers.iter().enumerate() {
     let inheritance = vk::CommandBufferInheritanceInfo::builder();
 
@@ -252,13 +252,13 @@ data.command_buffers = device.allocate_command_buffers(&amp;allocate_info)?;
 </code></pre>
 <p>The <code>flags</code> parameter specifies how we're going to use the command buffer. The following values are available:</p>
 <ul>
-<li><code>vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT</code>: The command buffer will be rerecorded right after executing it once.</li>
-<li><code>vk::CommandBufferUsageFlags::RENDER_PASS_CONTINUE</code>: This is a secondary command buffer that will be entirely within a single render pass.</li>
-<li><code>vk::CommandBufferUsageFlags::SIMULTANEOUS_USE</code>: The command buffer can be resubmitted while it is also already pending execution.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CommandBufferUsageFlags.html#associatedconstant.ONE_TIME_SUBMIT"><code class="hljs">vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT</code></a>: The command buffer will be rerecorded right after executing it once.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CommandBufferUsageFlags.html#associatedconstant.RENDER_PASS_CONTINUE"><code class="hljs">vk::CommandBufferUsageFlags::RENDER_PASS_CONTINUE</code></a>: This is a secondary command buffer that will be entirely within a single render pass.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.CommandBufferUsageFlags.html#associatedconstant.SIMULTANEOUS_USE"><code class="hljs">vk::CommandBufferUsageFlags::SIMULTANEOUS_USE</code></a>: The command buffer can be resubmitted while it is also already pending execution.</li>
 </ul>
 <p>None of these flags are applicable for us right now.</p>
 <p>The <code>inheritance_info</code> parameter is only relevant for secondary command buffers. It specifies which state to inherit from the calling primary command buffers.</p>
-<p>If the command buffer was already recorded once, then a call to <code>begin_command_buffer</code> will implicitly reset it. It's not possible to append commands to a buffer at a later time.</p>
+<p>If the command buffer was already recorded once, then a call to <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.begin_command_buffer"><code class="hljs">begin_command_buffer</code></a> will implicitly reset it. It's not possible to append commands to a buffer at a later time.</p>
 <h2><a class="header" href="#starting-a-render-pass" id="starting-a-render-pass">Starting a render pass</a></h2>
 <p>Before we can start a render pass we'll need to build some parameters.</p>
 <pre><code class="language-rust noplaypen">let render_area = vk::Rect2D::builder()
@@ -272,8 +272,8 @@ data.command_buffers = device.allocate_command_buffers(&amp;allocate_info)?;
     },
 };
 </code></pre>
-<p>Next we define a clear value that will be used to clear the framebuffer at the beginning of the render pass (because we used <code>vk::AttachmentLoadOp::CLEAR</code> when creating the render pass). <code>vk::ClearValue</code> is a union that can be used to set clear values for color attachments or for depth/stencil attachments. Here we are setting the <code>color</code> field with a <code>vk::ClearColorValue</code> union with 4 <code>f32</code>s that define a black clear color with 100% opacity.</p>
-<p>Drawing starts by beginning the render pass with <code>cmd_begin_render_pass</code>. The render pass is configured using some parameters in a <code>vk::RenderPassBeginInfo</code> struct.</p>
+<p>Next we define a clear value that will be used to clear the framebuffer at the beginning of the render pass (because we used <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.AttachmentLoadOp.html#associatedconstant.CLEAR"><code class="hljs">vk::AttachmentLoadOp::CLEAR</code></a> when creating the render pass). <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/union.ClearValue.html"><code class="hljs">vk::ClearValue</code></a> is a union that can be used to set clear values for color attachments or for depth/stencil attachments. Here we are setting the <code>color</code> field with a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/union.ClearColorValue.html"><code class="hljs">vk::ClearColorValue</code></a> union with 4 <code>f32</code>s that define a black clear color with 100% opacity.</p>
+<p>Drawing starts by beginning the render pass with <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_begin_render_pass"><code class="hljs">cmd_begin_render_pass</code></a>. The render pass is configured using some parameters in a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.RenderPassBeginInfo.html"><code class="hljs">vk::RenderPassBeginInfo</code></a> struct.</p>
 <pre><code class="language-rust noplaypen">let clear_values = &amp;[color_clear_value];
 let info = vk::RenderPassBeginInfo::builder()
     .render_pass(data.render_pass)
@@ -288,8 +288,8 @@ let info = vk::RenderPassBeginInfo::builder()
 <p>The render pass can now begin. All of the functions that record commands can be recognized by their <code>cmd_</code> prefix. They all return <code>()</code>, so there is no need for error handling until we've finished recording.</p>
 <p>The first parameter for every command is always the command buffer to record the command to. The second parameter specifies the details of the render pass we've just provided. The final parameter controls how the drawing commands within the render pass will be provided. It can have one of two values:</p>
 <ul>
-<li><code>vk::SubpassContents::INLINE</code>: The render pass commands will be embedded in the primary command buffer itself and no secondary command buffers will be executed.</li>
-<li><code>vk::SubpassContents::SECONDARY_COMMAND_BUFFERS</code>: The render pass commands will be executed from secondary command buffers.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SubpassContents.html#associatedconstant.INLINE"><code class="hljs">vk::SubpassContents::INLINE</code></a>: The render pass commands will be embedded in the primary command buffer itself and no secondary command buffers will be executed.</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SubpassContents.html#associatedconstant.SECONDARY_COMMAND_BUFFERS"><code class="hljs">vk::SubpassContents::SECONDARY_COMMAND_BUFFERS</code></a>: The render pass commands will be executed from secondary command buffers.</li>
 </ul>
 <p>We will not be using secondary command buffers, so we'll go with the first option.</p>
 <h2><a class="header" href="#basic-drawing-commands" id="basic-drawing-commands">Basic drawing commands</a></h2>
