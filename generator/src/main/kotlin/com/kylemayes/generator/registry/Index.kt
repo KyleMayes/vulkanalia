@@ -93,6 +93,18 @@ fun Registry.indexEntities(): String {
         entities.addEntity("vk::$pfn", "/vk/type.$pfn.html")
     }
 
+    // Add success codes and error codes.
+
+    val results = (enums["VkResult".intern()] ?: error("Missing result.")).variants
+    val (successes, errors) = results.partition { it.value >= 0 }
+    val success = Enum(name = "SuccessCode".intern(), variants = successes.toMutableList())
+    val error = Enum(name = "ErrorCode".intern(), variants = errors.toMutableList())
+    entities.addSubentities("struct", "associatedconstant", mapOf(success.name to success)) { it.variants }
+    entities.addSubentities("struct", "associatedconstant", mapOf(error.name to error)) {
+        // Remove `ERROR_` prefix to match `ErrorCode` variants.
+        it.variants.map { v -> v.copy(name = v.name.value.replace(Regex("^ERROR_"), "").intern()) }
+    }
+
     return entities.joinToString("\n") { "${it.first}\t${it.second}" }
 }
 
