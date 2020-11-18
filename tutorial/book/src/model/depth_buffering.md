@@ -407,7 +407,22 @@ let info = vk::RenderPassCreateInfo::builder()
     .dependencies(dependencies);
 ```
 
-Finally, update the `vk::RenderPassCreateInfo` struct to refer to both attachments.
+Next, update the `vk::RenderPassCreateInfo` struct to refer to both attachments.
+
+```rust,noplaypen
+let dependency = vk::SubpassDependency::builder()
+    .src_subpass(vk::SUBPASS_EXTERNAL)
+    .dst_subpass(0)
+    .src_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT
+        | vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS)
+    .src_access_mask(vk::AccessFlags::empty())
+    .dst_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT
+        | vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS)
+    .dst_access_mask(vk::AccessFlags::COLOR_ATTACHMENT_WRITE
+        | vk::AccessFlags::DEPTH_STENCIL_ATTACHMENT_WRITE);
+```
+
+Finally, we need to extend our subpass dependencies to make sure that there is no conflict between the transitioning of the depth image and it being cleared as part of its load operation. The depth image is first accessed in the early fragment test pipeline stage and because we have a load operation that *clears*, we should specify the access mask for writes.
 
 ## Framebuffer
 
