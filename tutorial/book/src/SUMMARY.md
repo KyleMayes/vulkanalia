@@ -60,7 +60,7 @@
 - [Depth buffering](./model/depth_buffering.md)
 - [Loading models](./model/loading_models.md)
 
-# Advanced
+# Rendering quality
 
-- [Generating mipmaps](./advanced/generating_mipmaps.md)
-- [Multisampling](./advanced/multisampling.md)
+- [Generating mipmaps](./quality/generating_mipmaps.md)
+- [Multisampling](./quality/multisampling.md)
