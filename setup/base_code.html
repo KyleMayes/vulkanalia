@@ -155,7 +155,9 @@
                         <h1><a class="header" href="#base-code" id="base-code">Base code</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/00_base_code.rs">main.rs</a></p>
 <p>In the <code>Development environment</code> chapter we created a Cargo project and added the necessary dependencies. In this chapter we will be replacing the code in the <code>src/main.rs</code> file with the following code:</p>
-<pre><pre class="playground"><code class="language-rust">use anyhow::*;
+<pre><pre class="playground"><code class="language-rust">#![allow(dead_code, unused_variables, clippy::too_many_arguments)]
+
+use anyhow::*;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};
@@ -163,7 +165,6 @@ use winit::window::{Window, WindowBuilder};
 
 fn main() -&gt; Result&lt;()&gt; {
     pretty_env_logger::init();
-    info!(&quot;Starting program...&quot;);
 
     // Window
 
@@ -216,8 +217,8 @@ impl App {
 #[derive(Clone, Debug, Default)]
 struct AppData {}
 </code></pre></pre>
-<p>We first import <code>anyhow::Result</code> which will be used to easily represent all of the results in our program. Next we import all of the <code>winit</code> types we need to create a window and start an event loop for that window.</p>
-<p>Next comes our <code>main</code> function (which returns the imported <code>anyhow::Result</code> type). This function starts by initializing <code>pretty_env_logger</code> which will print our logs to the console (as shown later).</p>
+<p>We first import <code>anyhow::*</code> so we can use <code>anyhow</code>'s <a href="https://docs.rs/anyhow/latest/anyhow/type.Result.html"><code>Result</code></a> type for all of the fallible functions in our program. Next we import all of the <code>winit</code> types we need to create a window and start an event loop for that window.</p>
+<p>Next comes our <code>main</code> function (which returns an <code>anyhow::Result</code> type). This function starts by initializing <code>pretty_env_logger</code> which will print our logs to the console (as shown later).</p>
 <p>Then we create an event loop and window to render to using <code>winit</code> using <code>LogicalSize</code> which will scale the window according to the DPI of your display. If you want to know more about UI scaling you can read the <a href="https://docs.rs/winit/latest/winit/dpi/index.html">relevant <code>winit</code> documentation</a>.</p>
 <p>Next we create an instance of our Vulkan app (<code>App</code>) and enter into our rendering loop. This loop will continually render our scene to the window until you request the window to be closed at which point the app will be destroyed and the program will exit. The <code>destroying</code> flag is necessary to not keep attempting to render the scene while the app is being destroyed which would most likely result in the program crashing after attempting to access Vulkan resources that have been destroyed.</p>
 <p>Lastly comes <code>App</code> and <code>AppData</code>. <code>App</code> will be used to implement the setup, rendering, and destruction logic required for the Vulkan program we will be building over the course of the following chapters. <code>AppData</code> will serve simply as a container for the large number of Vulkan resources we will need to create and initialize which will allow for them to be easily passed to functions to be read and/or modified.</p>

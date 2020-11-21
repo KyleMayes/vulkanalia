@@ -194,9 +194,9 @@ winit = &quot;0.23&quot;
 <p>These instructions will be aimed at Ubuntu users, but you may be able to follow along by changing the <code>apt</code> commands to the package manager commands that are appropriate for you.</p>
 <p>The most important components you'll need for developing Vulkan applications on Linux are the Vulkan loader, validation layers, and a couple of command-line utilities to test whether your machine is Vulkan-capable:</p>
 <ul>
-<li><code>sudo apt install vulkan-tools</code>: Command-line utilities, most importantly <code>vulkaninfo</code> and <code>vkcube</code>. Run these to confirm your machine supports Vulkan.</li>
-<li><code>sudo apt install libvulkan-dev</code>: Installs Vulkan loader. The loader looks up the functions in the driver at runtime, similarly to GLEW for OpenGL - if you're familiar with that.</li>
-<li><code>sudo apt install vulkan-validationlayers-dev</code>: Installs the standard validation layers. These are crucial when debugging Vulkan applications, and we'll discuss them in the upcoming chapter.</li>
+<li><code>sudo apt install vulkan-tools</code> – Command-line utilities, most importantly <code>vulkaninfo</code> and <code>vkcube</code>. Run these to confirm your machine supports Vulkan.</li>
+<li><code>sudo apt install libvulkan-dev</code> – Installs Vulkan loader. The loader looks up the functions in the driver at runtime, similarly to GLEW for OpenGL - if you're familiar with that.</li>
+<li><code>sudo apt install vulkan-validationlayers-dev</code> – Installs the standard validation layers. These are crucial when debugging Vulkan applications, and we'll discuss them in an upcoming chapter.</li>
 </ul>
 <p>If installation was successful, you should be all set with the Vulkan portion. Remember to run <code>vkcube</code> and ensure you see the following pop up in a window:</p>
 <p><img src="./images/cube_demo_nowindow.png" alt="" /></p>

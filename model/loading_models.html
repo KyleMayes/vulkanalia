@@ -181,7 +181,7 @@
 }
 </code></pre>
 <p>You'll also need to replace all the references to the global arrays with the new <code>AppData</code> fields.</p>
-<p>You should change the type of the indices from <code>u16</code> to <code>u32</code>, because there are going to be a lot more vertices than 65,536. Remember to also change the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_index_buffer"><code class="hljs">cmd_bind_index_buffer</code></a> parameter:</p>
+<p>You should change the type of the indices from <code>u16</code> to <code>u32</code>, because there are going to be a lot more vertices than 65,536. Remember to also change the <code>cmd_bind_index_buffer</code> parameter:</p>
 <pre><code class="language-rust noplaypen">device.cmd_bind_index_buffer(
     *command_buffer,
     data.index_buffer,
@@ -259,7 +259,7 @@ let vertex = Vertex {
 };
 </code></pre>
 <p>Unfortunately the <code>attrib.vertices</code> array is an array of <code>float</code> values instead of something like <code>glm::vec3</code>, so you need to multiply the index by <code>3</code>. Similarly, there are two texture coordinate components per entry. The offsets of <code>0</code>, <code>1</code> and <code>2</code> are used to access the X, Y and Z components, or the U and V components in the case of texture coordinates.</p>
-<p>Run your program now with optimization enabled (e.g. <code>Release</code> mode in Visual Studio and with the <code>-O3</code> compiler flag for GCC`). This is necessary, because otherwise loading the model will be very slow. You should see something like the following:</p>
+<p>You may want to start compiling your program in release mode from now on because loading the texture and model can be quite slow without optimizations. If you run your program now you should see something like the following:</p>
 <p><img src="../images/inverted_texture_coordinates.png" alt="" /></p>
 <p>Great, the geometry looks correct, but what's going on with the texture? The OBJ format assumes a coordinate system where a vertical coordinate of <code>0</code> means the bottom of the image, however we've uploaded our image into Vulkan in a top to bottom orientation where <code>0</code> means the top of the image. Solve this by flipping the vertical component of the texture coordinates:</p>
 <pre><code class="language-rust noplaypen">tex_coord: glm::vec2(
