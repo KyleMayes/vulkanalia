@@ -64,3 +64,7 @@
 
 - [Generating mipmaps](./quality/generating_mipmaps.md)
 - [Multisampling](./quality/multisampling.md)
+
+# Conclusion
+
+- [Conclusion](./conclusion.md)
