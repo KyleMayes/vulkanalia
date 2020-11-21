@@ -8,8 +8,8 @@ The older graphics APIs provided default state for most of the stages of the gra
 
 The `vk::PipelineVertexInputStateCreateInfo` structure describes the format of the vertex data that will be passed to the vertex shader. It describes this in roughly two ways:
 
-* Bindings: spacing between data and whether the data is per-vertex or per-instance (see [instancing](https://en.wikipedia.org/wiki/Geometry_instancing))
-* Attribute descriptions: type of the attributes passed to the vertex shader, which binding to load them from and at which offset
+* Bindings &ndash; spacing between data and whether the data is per-vertex or per-instance (see [instancing](https://en.wikipedia.org/wiki/Geometry_instancing))
+* Attribute descriptions &ndash; type of the attributes passed to the vertex shader, which binding to load them from and at which offset
 
 Because we're hard coding the vertex data directly in the vertex shader, we'll leave this structure with the defaults to specify that there is no vertex data to load for now. We'll get back to it in the vertex buffer chapter.
 
@@ -23,11 +23,11 @@ The `vertex_binding_descriptions` and `vertex_attribute_descriptions` fields for
 
 The `vk::PipelineInputAssemblyStateCreateInfo` struct describes two things: what kind of geometry will be drawn from the vertices and if primitive restart should be enabled. The former is specified in the `topology` member and can have values like:
 
-* `vk::PrimitiveTopology::POINT_LIST`: points from vertices
-* `vk::PrimitiveTopology::LINE_LIST`: line from every 2 vertices without reuse
-* `vk::PrimitiveTopology::LINE_STRIP`: the end vertex of every line is used as start vertex for the next line
-* `vk::PrimitiveTopology::TRIANGLE_LIST`: triangle from every 3 vertices without reuse
-* `vk::PrimitiveTopology::TRIANGLE_STRIP `: the second and third vertex of every triangle are used as first two vertices of the next triangle
+* `vk::PrimitiveTopology::POINT_LIST` &ndash; points from vertices
+* `vk::PrimitiveTopology::LINE_LIST` &ndash; line from every 2 vertices without reuse
+* `vk::PrimitiveTopology::LINE_STRIP` &ndash; the end vertex of every line is used as start vertex for the next line
+* `vk::PrimitiveTopology::TRIANGLE_LIST` &ndash; triangle from every 3 vertices without reuse
+* `vk::PrimitiveTopology::TRIANGLE_STRIP` &ndash; the second and third vertex of every triangle are used as first two vertices of the next triangle
 
 Normally, the vertices are loaded from the vertex buffer by index in sequential order, but with an *element buffer* you can specify the indices to use yourself. This allows you to perform optimizations like reusing vertices. If you set the `primitive_restart_enable` member to `true`, then it's possible to break up lines and triangles in the `_STRIP` topology modes by using a special index of `0xFFFF` or `0xFFFFFFFF`.
 
@@ -103,9 +103,9 @@ If `rasterizer_discard_enable` is set to `true`, then geometry never passes thro
 
 The `polygon_mode` determines how fragments are generated for geometry. The following modes are available:
 
-* `vk::PolygonMode::FILL`: fill the area of the polygon with fragments
-* `vk::PolygonMode::LINE`: polygon edges are drawn as lines
-* `vk::PolygonMode::POINT`: polygon vertices are drawn as points
+* `vk::PolygonMode::FILL` &ndash; fill the area of the polygon with fragments
+* `vk::PolygonMode::LINE` &ndash; polygon edges are drawn as lines
+* `vk::PolygonMode::POINT` &ndash; polygon vertices are drawn as points
 
 Using any mode other than fill requires enabling a GPU feature.
 

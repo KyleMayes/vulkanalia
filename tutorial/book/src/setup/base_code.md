@@ -5,6 +5,8 @@
 In the `Development environment` chapter we created a Cargo project and added the necessary dependencies. In this chapter we will be replacing the code in the `src/main.rs` file with the following code:
 
 ```rust
+#![allow(dead_code, unused_variables, clippy::too_many_arguments)]
+
 use anyhow::*;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
@@ -13,7 +15,6 @@ use winit::window::{Window, WindowBuilder};
 
 fn main() -> Result<()> {
     pretty_env_logger::init();
-    info!("Starting program...");
 
     // Window
 
@@ -67,9 +68,9 @@ impl App {
 struct AppData {}
 ```
 
-We first import `anyhow::Result` which will be used to easily represent all of the results in our program. Next we import all of the `winit` types we need to create a window and start an event loop for that window.
+We first import `anyhow::*` so we can use `anyhow`'s [`Result`](https://docs.rs/anyhow/latest/anyhow/type.Result.html) type for all of the fallible functions in our program. Next we import all of the `winit` types we need to create a window and start an event loop for that window.
 
-Next comes our `main` function (which returns the imported `anyhow::Result` type). This function starts by initializing `pretty_env_logger` which will print our logs to the console (as shown later).
+Next comes our `main` function (which returns an `anyhow::Result` type). This function starts by initializing `pretty_env_logger` which will print our logs to the console (as shown later).
 
 Then we create an event loop and window to render to using `winit` using `LogicalSize` which will scale the window according to the DPI of your display. If you want to know more about UI scaling you can read the [relevant `winit` documentation](https://docs.rs/winit/latest/winit/dpi/index.html).
 

@@ -114,8 +114,6 @@ Make sure to destroy the image view at the end of the program, right before dest
 ```c++
 fn destroy(&mut self) {
     self.destroy_swapchain();
-    self.device.destroy_sampler(self.data.texture_sampler, None);
-    self.device.free_memory(self.data.texture_image_memory, None);
     self.device.destroy_image_view(self.data.texture_image_view, None);
     // ...
 }

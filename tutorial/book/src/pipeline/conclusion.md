@@ -4,12 +4,12 @@
 
 We can now combine all of the structures and objects from the previous chapters to create the graphics pipeline! Here's the types of objects we have now, as a quick recap:
 
-* Shader stages: the shader modules that define the functionality of the programmable stages of the graphics pipeline
-* Fixed-function state: all of the structures that define the fixed-function stages of the pipeline, like input assembly, rasterizer, viewport and color blending
-* Pipeline layout: the uniform and push values referenced by the shader that can be updated at draw time
-* Render pass: the attachments referenced by the pipeline stages and their usage
+* Shader stages &ndash; the shader modules that define the functionality of the programmable stages of the graphics pipeline
+* Fixed-function state &ndash; all of the structures that define the fixed-function stages of the pipeline, like input assembly, rasterizer, viewport and color blending
+* Pipeline layout &ndash; the uniform and push values referenced by the shader that can be updated at draw time
+* Render pass &ndash; the attachments referenced by the pipeline stages and their usage
 
-All of these combined fully define the functionality of the graphics pipeline, so we can now begin filling in the `vk::GraphicsPipelineCreateInfo` structure at the end of the `create_pipeline` function. But before the calls to `DeviceV1_0:::destroy_shader_module` because these are still to be used during the creation.
+All of these combined fully define the functionality of the graphics pipeline, so we can now begin filling in the `vk::GraphicsPipelineCreateInfo` structure at the end of the `create_pipeline` function (but before the shader modules are destroyed). But before the calls to `DeviceV1_0:::destroy_shader_module` because these are still to be used during the creation.
 
 ```rust,noplaypen
 let stages = &[vert_stage, frag_stage];
@@ -67,9 +67,9 @@ data.pipeline = device.create_graphics_pipelines(
     vk::PipelineCache::null(), &[info], None)?.0;
 ```
 
-The `create_graphics_pipeline` function actually has more parameters than the usual object creation functions in Vulkan. It is designed to take multiple `vk::GraphicsPipelineCreateInfo` objects and create multiple `vk::Pipeline` objects in a single call.
+The `create_graphics_pipelines` function actually has more parameters than the usual object creation functions in Vulkan. It is designed to take multiple `vk::GraphicsPipelineCreateInfo` objects and create multiple `vk::Pipeline` objects in a single call.
 
-The first parameter, for which we've passed the `vk::PipelineCache::null()` argument, references an optional `vk::PipelineCache` object. A pipeline cache can be used to store and reuse data relevant to pipeline creation across multiple calls to `create_graphics_pipeline` and even across program executions if the cache is stored to a file. This makes it possible to significantly speed up pipeline creation at a later time. We'll get into this in the pipeline cache chapter.
+The first parameter, for which we've passed the `vk::PipelineCache::null()` argument, references an optional `vk::PipelineCache` object. A pipeline cache can be used to store and reuse data relevant to pipeline creation across multiple calls to `create_graphics_pipelines` and even across program executions if the cache is stored to a file. This makes it possible to significantly speed up pipeline creation at a later time.
 
 The graphics pipeline is required for all common drawing operations, so it should also only be destroyed at the end of the program in `App::destroy`:
 

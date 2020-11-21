@@ -161,9 +161,9 @@ fn get_swapchain_surface_format(
 }
 ```
 
-Each `vk::SurfaceFormatKHR` entry contains a `format` and a `color_space` member. The `format` member specifies the color channels and types. For example, `vk::Format::B8G8R8A8_SRGB` means that we store the B, G, R and alpha channels in that order with an 8 bit unsigned integer for a total of 32 bits per pixel. The `color_space` member indicates if the SRGB color space is supported or not using the `vk::ColorSpaceKHR::SRGB_NONLINEAR` flag.
+Each `vk::SurfaceFormatKHR` entry contains a `format` and a `color_space` member. The `format` member specifies the color channels and types. For example, `vk::Format::B8G8R8A8_SRGB` means that we store the B, G, R and alpha channels in that order with an 8 bit unsigned integer for a total of 32 bits per pixel. The `color_space` member indicates if the sRGB color space is supported or not using the `vk::ColorSpaceKHR::SRGB_NONLINEAR` flag.
 
-For the color space we'll use SRGB if it is available, because it [results in more accurate perceived colors](http://stackoverflow.com/questions/12524623/). It is also pretty much the standard color space for images, like the textures we'll use later on. Because of that we should also use an SRGB color format, of which one of the most common ones is `vk::Format::B8G8R8A8_SRGB`.
+For the color space we'll use sRGB if it is available, because it [results in more accurate perceived colors](http://stackoverflow.com/questions/12524623/). It is also pretty much the standard color space for images, like the textures we'll use later on. Because of that we should also use an sRGB color format, of which one of the most common ones is `vk::Format::B8G8R8A8_SRGB`.
 
 Let's go through the list and see if the preferred combination is available:
 
@@ -188,10 +188,10 @@ If that also fails then we could rank the available formats based on how "good" 
 
 The presentation mode is arguably the most important setting for the swapchain, because it represents the actual conditions for showing images to the screen. There are four possible modes available in Vulkan:
 
-* `vk::PresentModeKHR::IMMEDIATE`: Images submitted by your application are transferred to the screen right away, which may result in tearing.
-* `vk::PresentModeKHR::FIFO`: The swapchain is a queue where the display takes an image from the front of the queue when the display is refreshed and the program inserts rendered images at the back of the queue. If the queue is full then the program has to wait. This is most similar to vertical sync as found in modern games. The moment that the display is refreshed is known as "vertical blank".
-* `vk::PresentModeKHR::FIFO_RELAXED`: This mode only differs from the previous one if the application is late and the queue was empty at the last vertical blank. Instead of waiting for the next vertical blank, the image is transferred right away when it finally arrives. This may result in visible tearing.
-* `vk::PresentModeKHR::MAILBOX`: This is another variation of the second mode. Instead of blocking the application when the queue is full, the images that are already queued are simply replaced with the newer ones. This mode can be used to implement triple buffering, which allows you to avoid tearing with significantly less latency issues than standard vertical sync that uses double buffering.
+* `vk::PresentModeKHR::IMMEDIATE` &ndash; Images submitted by your application are transferred to the screen right away, which may result in tearing.
+* `vk::PresentModeKHR::FIFO` &ndash; The swapchain is a queue where the display takes an image from the front of the queue when the display is refreshed and the program inserts rendered images at the back of the queue. If the queue is full then the program has to wait. This is most similar to vertical sync as found in modern games. The moment that the display is refreshed is known as "vertical blank".
+* `vk::PresentModeKHR::FIFO_RELAXED` &ndash; This mode only differs from the previous one if the application is late and the queue was empty at the last vertical blank. Instead of waiting for the next vertical blank, the image is transferred right away when it finally arrives. This may result in visible tearing.
+* `vk::PresentModeKHR::MAILBOX` &ndash; This is another variation of the second mode. Instead of blocking the application when the queue is full, the images that are already queued are simply replaced with the newer ones. This mode can be used to implement triple buffering, which allows you to avoid tearing with significantly less latency issues than standard vertical sync that uses double buffering.
 
 Only the `vk::PresentModeKHR::FIFO` mode is guaranteed to be available, so we'll again have to write a function that looks for the best mode that is available:
 
@@ -316,8 +316,8 @@ if support.capabilities.max_image_count != 0
 
 Next, we need to specify how to handle swapchain images that will be used across multiple queue families. That will be the case in our application if the graphics queue family is different from the presentation queue. We'll be drawing on the images in the swapchain from the graphics queue and then submitting them on the presentation queue. There are two ways to handle images that are accessed from multiple queues:
 
-* `vk::SharingMode::EXCLUSIVE`: An image is owned by one queue family at a time and ownership must be explicitly transferred before using it in another queue family. This option offers the best performance.
-* `vk::SharingMode::CONCURRENT`: Images can be used across multiple queue families without explicit ownership transfers.
+* `vk::SharingMode::EXCLUSIVE` &ndash; An image is owned by one queue family at a time and ownership must be explicitly transferred before using it in another queue family. This option offers the best performance.
+* `vk::SharingMode::CONCURRENT` &ndash; Images can be used across multiple queue families without explicit ownership transfers.
 
 If the queue families differ, then we'll be using the concurrent mode in this tutorial to avoid having to do the ownership chapters, because these involve some concepts that are better explained at a later time. Concurrent mode requires you to specify in advance between which queue families ownership will be shared using the `queue_family_indices` builder method If the graphics queue family and presentation queue family are the same, which will be the case on most hardware, then we should stick to exclusive mode, because concurrent mode requires you to specify at least two distinct queue families.
 

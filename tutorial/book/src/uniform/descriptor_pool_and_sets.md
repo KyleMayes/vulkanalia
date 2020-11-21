@@ -99,7 +99,6 @@ impl App {
     }
 }
 
-
 fn create_descriptor_sets(device: &Device, data: &mut AppData) -> Result<()> {
     Ok(())
 }

@@ -86,8 +86,8 @@ That's all it takes to recreate the swapchain! However, the disadvantage of this
 
 Now we just need to figure out when swapchain recreation is necessary and call our new `App::recreate_swapchain` method. Luckily, Vulkan will usually just tell us that the swapchain is no longer adequate during presentation. The `acquire_next_image_khr` and `queue_present_khr` commands can return the following special values to indicate this.
 
-* `vk::ErrorCode::OUT_OF_DATE_KHR`: The swapchain has become incompatible with the surface and can no longer be used for rendering. Usually happens after a window resize.
-* `vk::SuccessCode::SUBOPTIMAL_KHR`: The swapchain can still be used to successfully present to the surface, but the surface properties are no longer matched exactly.
+* `vk::ErrorCode::OUT_OF_DATE_KHR` &ndash; The swapchain has become incompatible with the surface and can no longer be used for rendering. Usually happens after a window resize.
+* `vk::SuccessCode::SUBOPTIMAL_KHR` &ndash; The swapchain can still be used to successfully present to the surface, but the surface properties are no longer matched exactly.
 
 ```rust,noplaypen
 let result = self.device.acquire_next_image_khr(

@@ -102,8 +102,8 @@ vk::VertexInputBindingDescription::builder()
 
 All of our per-vertex data is packed together in one array, so we're only going to have one binding. The `binding` parameter specifies the index of the binding in the array of bindings. The `stride` parameter specifies the number of bytes from one entry to the next, and the `input_rate` parameter can have one of the following values:
 
-* `vk::VertexInputRate::VERTEX`: Move to the next data entry after each vertex
-* `vk::VertexInputRate::INSTANCE`: Move to the next data entry after each instance
+* `vk::VertexInputRate::VERTEX` &ndash; Move to the next data entry after each vertex
+* `vk::VertexInputRate::INSTANCE` &ndash; Move to the next data entry after each instance
 
 We're not going to use instanced rendering, so we'll stick to per-vertex data.
 

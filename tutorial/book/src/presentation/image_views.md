@@ -4,7 +4,7 @@
 
 To use any `vk::Image`, including those in the swapchain, in the render pipeline we have to create a `vk::ImageView` object. An image view is quite literally a view into an image. It describes how to access the image and which part of the image to access, for example if it should be treated as a 2D texture depth texture without any mipmapping levels.
 
-In this chapter we'll write a `create_image_views` function that creates a basic image view for every image in the swapchain so that we can use them as color targets later on.
+In this chapter we'll write a `create_swapchain_image_views` function that creates a basic image view for every image in the swapchain so that we can use them as color targets later on.
 
 First add an `AppData` field to store the image views in:
 
@@ -16,12 +16,13 @@ struct AppData {
 
 ```
 
-Create the `create_image_views` function and call it right after swapchain creation in `App::create`.
+Create the `create_swapchain_image_views` function and call it right after swapchain creation in `App::create`.
 
 ```rust,noplaypen
 impl App {
     fn create(window: &Window) -> Result<Self> {
         // ...
+        create_swapchain(window, &instance, &device, &mut data)?;
         create_swapchain_image_views(&device, &mut data)?;
         // ...
     }

@@ -570,8 +570,8 @@ If you run your application with validation layers enabled now, then you'll see 
 
 There are two transitions we need to handle:
 
-* Undefined → transfer destination: transfer writes that don't need to wait on anything
-* Transfer destination → shader reading: shader reads should wait on transfer writes, specifically the shader reads in the fragment shader, because that's where we're going to use the texture
+* Undefined → transfer destination &ndash; transfer writes that don't need to wait on anything
+* Transfer destination → shader reading &ndash; shader reads should wait on transfer writes, specifically the shader reads in the fragment shader, because that's where we're going to use the texture
 
 These rules are specified using the following access masks and pipeline stages which should be added at the beginning of `transition_image_layout`:
 

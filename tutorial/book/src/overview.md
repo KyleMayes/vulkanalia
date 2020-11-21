@@ -102,9 +102,9 @@ These type names will each be links to the `vulkanalia` documentation for the re
 
 A few type name examples:
 
-* `vk::Instance`
-* `vk::InstanceCreateInfo`
-* `vk::InstanceCreateFlags`
+* `vk::Instance`&nbsp;
+* `vk::InstanceCreateInfo`&nbsp;
+* `vk::InstanceCreateFlags`&nbsp;
 
 ### Enums
 
@@ -128,7 +128,7 @@ The types for raw Vulkan commands like `vkCreateInstance` are defined in `vulkan
 
 These function pointer types are not enough on their own to call Vulkan commands, we first need to load the commands described by these types. The Vulkan specification has a [detailed description](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#initialization-functionpointers) of how this is done, but I will present a simplified version here.
 
-The first Vulkan command to load is `vkGetInstanceProcAddr`. This command is loaded in a platform-specific manner but `vulkanalia` provides an optional integration with [`libloading`](https://crates.io/crates/libloading) to load this command from a Vulkan dynamic library which we will be using in this tutorial. `vkGetInstanceProcAddr` can be then used to load the other Vulkan commands we want to call.
+The first Vulkan command to load is `vkGetInstanceProcAddr`. This command is loaded in a platform-specific manner, but `vulkanalia` provides an optional integration with [`libloading`](https://crates.io/crates/libloading) that we will be using in this tutorial to load this command from a Vulkan shared library. `vkGetInstanceProcAddr` can be then used to load the other Vulkan commands we want to call.
 
 However, there may be multiple versions of Vulkan commands available depending on the Vulkan implementations on your system. For example, if your system has both a dedicated NVIDIA GPU and an integrated Intel GPU, there may be separate implementations of device-specific Vulkan commands like `allocate_memory` for each device. In cases like this, `vkGetInstanceProcAddr` will return a command that will dispatch calls to the appropriate device-specific command depending on the device in use.
 
@@ -204,7 +204,7 @@ Going forward, this tutorial will continue to refer to these command wrappers di
 
 ### Builders
 
-The Vulkan API heavily utilizes structs as parameters for Vulkan commands. The Vulkan structs used as command parameters have a field which indicates the type of the struct. In the C API, this field (`sType`) would need to be set explicitly. For example, here we are populating an instance of `VkInstanceCreateInfo` and then using it to call `vkCreateInstance`:
+The Vulkan API heavily utilizes structs as parameters for Vulkan commands. The Vulkan structs used as command parameters have a field which indicates the type of the struct. In the C API, this field (`sType`) would need to be set explicitly. For example, here we are populating an instance of `VkInstanceCreateInfo` and then using it to call `vkCreateInstance` in C++:
 
 ```c++
 std::vector<const char*> extensions{/* 3 extension names */};

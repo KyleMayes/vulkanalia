@@ -4,18 +4,12 @@
 
 After initializing the Vulkan library through an `Instance` we need to look for and select a graphics card in the system that supports the features we need. In fact we can select any number of graphics cards and use them simultaneously, but in this tutorial we'll stick to the first graphics card that suits our needs.
 
-We'll add a `pick_physical_device` function which will accomplish this task and write the physical device and related information to an instance of `AppData`. We'll also need a `data: AppData` field in our `App` struct which will be used to store all of the Vulkan objects and related properties for our app. With this in place we can construct and populate an `AppData` instance in our `App::create` method.
+We'll add a `pick_physical_device` function which will accomplish this task and write the physical device and related information to the `AppData` instance. With this in place we can construct and populate an `AppData` instance in our `App::create` method.
 
 ```rust,noplaypen
-struct App {
-    // ...
-    data: AppData,
-}
-
 impl App {
     fn create(window: &Window) -> Result<Self> {
         // ...
-        let mut data = AppData::default();
         pick_physical_device(&instance, &mut data)?;
         Ok(Self { entry, instance, data })
     }
@@ -55,7 +49,7 @@ let properties = instance
     .get_physical_device_properties(physical_device);
 ```
 
-The support for optional features like texture compression, 64 bit floats, and multi viewport rendering (useful for VR) can be queried using `get_physical_device_features`:
+The support for optional features like texture compression, 64 bit floats, and multi-viewport rendering (useful for VR) can be queried using `get_physical_device_features`:
 
 ```rust,noplaypen
 let features = instance

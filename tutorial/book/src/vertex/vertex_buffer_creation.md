@@ -16,7 +16,6 @@ fn create(window: &Window) -> Result<Self> {
     // ...
 }
 
-
 fn create_vertex_buffer(
     instance: &Instance,
     device: &Device,

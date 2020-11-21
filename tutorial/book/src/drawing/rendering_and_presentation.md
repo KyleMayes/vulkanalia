@@ -155,7 +155,7 @@ The next two fields specify the operations to wait on and the stages in which th
 
 ```rust,noplaypen
     .dst_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT)
-    .dst_access_mask(vk::AccessFlags::COLOR_ATTACHMENT_WRITE)
+    .dst_access_mask(vk::AccessFlags::COLOR_ATTACHMENT_WRITE);
 ```
 
 The operations that should wait on this are in the color attachment stage and involve the writing of the color attachment. These settings will prevent the transition from happening until it's actually necessary (and allowed): when we want to start writing colors to it.
@@ -220,13 +220,13 @@ Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
 }
 ```
 
-You can also wait for operations in a specific command queue to be finished with `queue_wait_idle`. These functions can be used as a very rudimentary way to perform synchronization. You'll see that the program now exits without problems when closing the window.
+You can also wait for operations in a specific command queue to be finished with `queue_wait_idle`. These functions can be used as a very rudimentary way to perform synchronization. You'll see that the program no longer crashes when closing the window (though you will see some errors related to synchronization if you have the validation layers enabled).
 
 ## Frames in flight
 
 If you run your application with validation layers enabled now you may either get errors or notice that the memory usage slowly grows. The reason for this is that the application is rapidly submitting work in the `App::render` function, but doesn't actually check if any of it finishes. If the CPU is submitting work faster than the GPU can keep up with then the queue will slowly fill up with work. Worse, even, is that we are reusing the `image_available_semaphore` and `render_finished_semaphore` semaphores, along with the command buffers, for multiple frames at the same time!
 
-The easy way to solve this is to wait for work to finish right after submitting it, for example by using `queue_wait_idle`:
+The easy way to solve this is to wait for work to finish right after submitting it, for example by using `queue_wait_idle` (note: don't actually make this change):
 
 ```rust,noplaypen
 fn render(&mut self, window: &Window) -> Result<()> {
@@ -512,6 +512,6 @@ To learn more about synchronization through examples, have a look at [this exten
 
 ## Conclusion
 
-A little over 600 lines of code later, we've finally gotten to the stage of seeing something pop up on the screen! Bootstrapping a Vulkan program is definitely a lot of work, but the take-away message is that Vulkan gives you an immense amount of control through its explicitness. I recommend you to take some time now to reread the code and build a mental model of the purpose of all of the Vulkan objects in the program and how they relate to each other. We'll be building on top of that knowledge to extend the functionality of the program from this point on.
+A little over 600 (non-empty) lines of code later, we've finally gotten to the stage of seeing something pop up on the screen! Bootstrapping a Vulkan program is definitely a lot of work, but the take-away message is that Vulkan gives you an immense amount of control through its explicitness. I recommend you to take some time now to reread the code and build a mental model of the purpose of all of the Vulkan objects in the program and how they relate to each other. We'll be building on top of that knowledge to extend the functionality of the program from this point on.
 
 In the next chapter we'll deal with one more small thing that is required for a well-behaved Vulkan program.

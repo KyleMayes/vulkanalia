@@ -151,7 +151,7 @@ let vertex = Vertex {
 
 Unfortunately the `attrib.vertices` array is an array of `float` values instead of something like `glm::vec3`, so you need to multiply the index by `3`. Similarly, there are two texture coordinate components per entry. The offsets of `0`, `1` and `2` are used to access the X, Y and Z components, or the U and V components in the case of texture coordinates.
 
-Run your program now with optimization enabled (e.g. `Release` mode in Visual Studio and with the `-O3` compiler flag for GCC`). This is necessary, because otherwise loading the model will be very slow. You should see something like the following:
+You may want to start compiling your program in release mode from now on because loading the texture and model can be quite slow without optimizations. If you run your program now you should see something like the following:
 
 ![](../images/inverted_texture_coordinates.png)
 

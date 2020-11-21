@@ -145,24 +145,24 @@ extern "system" fn debug_callback(
 
 The first parameter specifies the severity of the message, which is one of the following flags:
 
-* `vk::DebugUtilsMessageSeverityFlagsEXT::VERBOSE`: Diagnostic message
-* `vk::DebugUtilsMessageSeverityFlagsEXT::INFO`: Informational message like the creation of a resource
-* `vk::DebugUtilsMessageSeverityFlagsEXT::WARNING`: Message about behavior that is not necessarily an error, but very likely a bug in your application
-* `vk::DebugUtilsMessageSeverityFlagsEXT::ERROR`: Message about behavior that is invalid and may cause crashes
+* `vk::DebugUtilsMessageSeverityFlagsEXT::VERBOSE` &ndash; Diagnostic message
+* `vk::DebugUtilsMessageSeverityFlagsEXT::INFO` &ndash; Informational message like the creation of a resource
+* `vk::DebugUtilsMessageSeverityFlagsEXT::WARNING` &ndash; Message about behavior that is not necessarily an error, but very likely a bug in your application
+* `vk::DebugUtilsMessageSeverityFlagsEXT::ERROR` &ndash; Message about behavior that is invalid and may cause crashes
 
 The values of this enumeration are set up in such a way that you can use a comparison operation to check if a message is equal or worse compared to some level of severity which we use here to decide on which `log` macro is appropriate to use when logging the message.
 
 The `type_` parameter can have the following values:
 
-* `vk::DebugUtilsMessageTypeFlagsEXT::GENERAL`: Some event has happened that is unrelated to the specification or performance
-* `vk::DebugUtilsMessageTypeFlagsEXT::VALIDATION`: Something has happened that violates the specification or indicates a possible mistake
-* `vk::DebugUtilsMessageTypeFlagsEXT::PERFORMANCE`: Potential non-optimal use of Vulkan
+* `vk::DebugUtilsMessageTypeFlagsEXT::GENERAL` &ndash; Some event has happened that is unrelated to the specification or performance
+* `vk::DebugUtilsMessageTypeFlagsEXT::VALIDATION` &ndash; Something has happened that violates the specification or indicates a possible mistake
+* `vk::DebugUtilsMessageTypeFlagsEXT::PERFORMANCE` &ndash; Potential non-optimal use of Vulkan
 
 The `data` parameter refers to a `vk::DebugUtilsMessengerCallbackDataEXT` struct containing the details of the message itself, with the most important members being:
 
-* `message`: The debug message as a null-terminated string (`*const c_char`)
-* `objects`: Array of Vulkan object handles related to the message
-* `object_count`: Number of objects in array
+* `message` &ndash; The debug message as a null-terminated string (`*const c_char`)
+* `objects` &ndash; Array of Vulkan object handles related to the message
+* `object_count` &ndash; Number of objects in array
 
 Finally, the last parameter, here ignored as `_`, contains a pointer that was specified during the setup of the callback and allows you to pass your own data to it.
 
@@ -176,7 +176,7 @@ struct AppData {
 }
 ```
 
-Now modify the end of the `^create_instance` function to look like this:
+Now modify the signature and end of the `^create_instance` function to look like this:
 
 ```rust,noplaypen
 fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
@@ -208,6 +208,25 @@ Similarly the `message_type` field lets you filter which types of messages your 
 Finally, the `user_callback` field specifies the callback function. You can optionally pass a mutable reference to the `user_data` field which will be passed along to the callback function via the final parameter. You could use this to pass a pointer to the `AppData` struct, for example.
 
 Lastly we call `create_debug_utils_messenger_ext` to register our debug callback with the Vulkan instance.
+
+Since our `^create_instance` function takes an `AppData` reference now, we'll also need to update `App` and `App::create`:
+
+```rust,noplaypen
+struct App {
+    entry: Entry,
+    instance: Instance,
+    data: AppData,
+}
+
+impl App {
+    fn create(window: &Window) -> Result<Self> {
+        // ...
+        let mut data = AppData::default();
+        let instance = create_instance(&entry, &mut data)?;
+        Ok(Self { entry, instance, data })
+    }
+}
+```
 
 The `vk::DebugUtilsMessengerEXT` object we created needs to cleaned up before our app exits. We'll do this in `App::destroy` before we destroy the instance:
 
@@ -261,7 +280,7 @@ Now we should be able to run our program and see logs from our debug callback, b
 
 ![](../images/validation_layer_test.png)
 
-If everything is working you shouldn't see any warning or error messages. Going forward you may want to increase the minimum log level to `info` using `RUST_LOG` to reduce the verbosity of the logs unless you are trying to debug an error.
+If everything is working you shouldn't see any warning or error messages. Going forward you will probably want to increase the minimum log level to `info` using `RUST_LOG` to reduce the verbosity of the logs unless you are trying to debug an error.
 
 ## Configuration
 

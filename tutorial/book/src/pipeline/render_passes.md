@@ -43,14 +43,14 @@ The `format` of the color attachment should match the format of the swapchain im
 
 The `load_op` and `store_op` determine what to do with the data in the attachment before rendering and after rendering. We have the following choices for `load_op`:
 
-* `vk::AttachmentLoadOp::LOAD`: Preserve the existing contents of the attachment
-* `vk::AttachmentLoadOp::CLEAR`: Clear the values to a constant at the start
-* `vk::AttachmentLoadOp::DONT_CARE`: Existing contents are undefined; we don't care about them
+* `vk::AttachmentLoadOp::LOAD` &ndash; Preserve the existing contents of the attachment
+* `vk::AttachmentLoadOp::CLEAR` &ndash; Clear the values to a constant at the start
+* `vk::AttachmentLoadOp::DONT_CARE` &ndash; Existing contents are undefined; we don't care about them
 
 In our case we're going to use the clear operation to clear the framebuffer to black before drawing a new frame. There are only two possibilities for the `store_op`:
 
-* `vk::AttachmentStoreOp::STORE`: Rendered contents will be stored in memory and can be read later
-* `vk::AttachmentStoreOp::DONT_CARE`: Contents of the framebuffer will be undefined after the rendering operation
+* `vk::AttachmentStoreOp::STORE` &ndash; Rendered contents will be stored in memory and can be read later
+* `vk::AttachmentStoreOp::DONT_CARE` &ndash; Contents of the framebuffer will be undefined after the rendering operation
 
 We're interested in seeing the rendered triangle on the screen, so we're going with the store operation here.
 
@@ -70,9 +70,9 @@ Textures and framebuffers in Vulkan are represented by `vk::Image` objects with 
 
 Some of the most common layouts are:
 
-* `vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL`: Images used as color attachment
-* `vk::ImageLayout::PRESENT_SRC_KHR`: Images to be presented in the swapchain
-* `vk::ImageLayout::TRANSFER_DST_OPTIMAL`: Images to be used as destination for a memory copy operation
+* `vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL` &ndash; Images used as color attachment
+* `vk::ImageLayout::PRESENT_SRC_KHR` &ndash; Images to be presented in the swapchain
+* `vk::ImageLayout::TRANSFER_DST_OPTIMAL` &ndash; Images to be used as destination for a memory copy operation
 
 We'll discuss this topic in more depth in the texturing chapter, but what's important to know right now is that images need to be transitioned to specific layouts that are suitable for the operation that they're going to be involved in next.
 
@@ -107,10 +107,10 @@ The index of the attachment in this array is directly referenced from the fragme
 
 The following other types of attachments can be referenced by a subpass:
 
-* `input_attachments`: Attachments that are read from a shader
-* `resolve_attachments`: Attachments used for multisampling color attachments
-* `depth_stencil_attachment`: Attachment for depth and stencil data
-* `preserve_attachments`: Attachments that are not used by this subpass, but for which the data must be preserved
+* `input_attachments` &ndash; Attachments that are read from a shader
+* `resolve_attachments` &ndash; Attachments used for multisampling color attachments
+* `depth_stencil_attachment` &ndash; Attachment for depth and stencil data
+* `preserve_attachments` &ndash; Attachments that are not used by this subpass, but for which the data must be preserved
 
 ## Render pass
 

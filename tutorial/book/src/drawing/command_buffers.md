@@ -15,7 +15,7 @@ struct AppData {
 }
 ```
 
-Then create a new function `create_command_pool` and call it from `App::create` after the framebuffers were created.
+Then create a new function `^create_command_pool` and call it from `App::create` after the framebuffers were created.
 
 ```rust,noplaypen
 impl App {
@@ -50,9 +50,9 @@ Command buffers are executed by submitting them on one of the device queues, lik
 
 There are three possible flags for command pools:
 
-* `vk::CommandPoolCreateFlags::TRANSIENT`: Hint that command buffers are rerecorded with new commands very often (may change memory allocation behavior)
-* `vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER`: Allow command buffers to be rerecorded individually, without this flag they all have to be reset together
-* `vk::CommandPoolCreateFlags::PROTECTED`: Creates "protected" command buffers which are stored in ["protected" memory](https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-protected-access-rules) where Vulkan prevents unauthorized operations from accessing the memory
+* `vk::CommandPoolCreateFlags::TRANSIENT` &ndash; Hint that command buffers are rerecorded with new commands very often (may change memory allocation behavior)
+* `vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER` &ndash; Allow command buffers to be rerecorded individually, without this flag they all have to be reset together
+* `vk::CommandPoolCreateFlags::PROTECTED` &ndash; Creates "protected" command buffers which are stored in ["protected" memory](https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html#memory-protected-access-rules) where Vulkan prevents unauthorized operations from accessing the memory
 
 We will only record the command buffers at the beginning of the program and then execute them many times in the main loop and we don't need to protect our triangle with DRM, so we're not going to use any of these flags.
 
@@ -110,8 +110,8 @@ data.command_buffers = device.allocate_command_buffers(&allocate_info)?;
 
 The `level` parameter specifies if the allocated command buffers are primary or secondary command buffers.
 
-* `vk::CommandBufferLevel::PRIMARY`: Can be submitted to a queue for execution, but cannot be called from other command buffers.
-* `vk::CommandBufferLevel::SECONDARY`: Cannot be submitted directly, but can be called from primary command buffers.
+* `vk::CommandBufferLevel::PRIMARY` &ndash; Can be submitted to a queue for execution, but cannot be called from other command buffers.
+* `vk::CommandBufferLevel::SECONDARY` &ndash; Cannot be submitted directly, but can be called from primary command buffers.
 
 We won't make use of the secondary command buffer functionality here, but you can imagine that it's helpful to reuse common operations from primary command buffers.
 
@@ -133,9 +133,9 @@ for (i, command_buffer) in data.command_buffers.iter().enumerate() {
 
 The `flags` parameter specifies how we're going to use the command buffer. The following values are available:
 
-* `vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT`: The command buffer will be rerecorded right after executing it once.
-* `vk::CommandBufferUsageFlags::RENDER_PASS_CONTINUE`: This is a secondary command buffer that will be entirely within a single render pass.
-* `vk::CommandBufferUsageFlags::SIMULTANEOUS_USE`: The command buffer can be resubmitted while it is also already pending execution.
+* `vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT` &ndash; The command buffer will be rerecorded right after executing it once.
+* `vk::CommandBufferUsageFlags::RENDER_PASS_CONTINUE` &ndash; This is a secondary command buffer that will be entirely within a single render pass.
+* `vk::CommandBufferUsageFlags::SIMULTANEOUS_USE` &ndash; The command buffer can be resubmitted while it is also already pending execution.
 
 None of these flags are applicable for us right now.
 
@@ -187,8 +187,8 @@ The render pass can now begin. All of the functions that record commands can be 
 
 The first parameter for every command is always the command buffer to record the command to. The second parameter specifies the details of the render pass we've just provided. The final parameter controls how the drawing commands within the render pass will be provided. It can have one of two values:
 
-* `vk::SubpassContents::INLINE`: The render pass commands will be embedded in the primary command buffer itself and no secondary command buffers will be executed.
-* `vk::SubpassContents::SECONDARY_COMMAND_BUFFERS`: The render pass commands will be executed from secondary command buffers.
+* `vk::SubpassContents::INLINE` &ndash; The render pass commands will be embedded in the primary command buffer itself and no secondary command buffers will be executed.
+* `vk::SubpassContents::SECONDARY_COMMAND_BUFFERS` &ndash; The render pass commands will be executed from secondary command buffers.
 
 We will not be using secondary command buffers, so we'll go with the first option.
 
@@ -209,10 +209,10 @@ device.cmd_draw(*command_buffer, 3, 1, 0, 0);
 
 The actual drawing function is a bit anticlimactic, but it's so simple because of all the information we specified in advance. It has the following parameters, aside from the command buffer:
 
-* `vertex_count`: Even though we don't have a vertex buffer, we technically still have 3 vertices to draw.
-* `instance_count`: Used for instanced rendering, use `1` if you're not doing that.
-* `first_vertex`: Used as an offset into the vertex buffer, defines the lowest value of `gl_VertexIndex`.
-* `first_instance`: Used as an offset for instanced rendering, defines the lowest value of `gl_InstanceIndex`.
+* `vertex_count` &ndash; Even though we don't have a vertex buffer, we technically still have 3 vertices to draw.
+* `instance_count` &ndash; Used for instanced rendering, use `1` if you're not doing that.
+* `first_vertex` &ndash; Used as an offset into the vertex buffer, defines the lowest value of `gl_VertexIndex`.
+* `first_instance` &ndash; Used as an offset for instanced rendering, defines the lowest value of `gl_InstanceIndex`.
 
 ## Finishing up
 
