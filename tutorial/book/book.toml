@@ -3,6 +3,8 @@
 title = "Vulkan Tutorial (Rust)"
 authors = ["Kyle Mayes"]
 
+description = "A Vulkan tutorial for Rust."
+
 language = "en"
 multilingual = false
 
