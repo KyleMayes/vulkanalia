@@ -139,7 +139,9 @@ let (texture_image, texture_image_memory) = create_image(
     vk::SampleCountFlags::_1,
     vk::Format::R8G8B8A8_SRGB,
     vk::ImageTiling::OPTIMAL,
-    vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST,
+    vk::ImageUsageFlags::SAMPLED
+        | vk::ImageUsageFlags::TRANSFER_DST
+        | vk::ImageUsageFlags::TRANSFER_SRC,
     vk::MemoryPropertyFlags::DEVICE_LOCAL,
 )?;
 ```
