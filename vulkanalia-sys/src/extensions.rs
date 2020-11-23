@@ -312,6 +312,9 @@ pub const INTEL_SHADER_INTEGER_FUNCTIONS2_EXTENSION: ExtensionName =
 pub const KHR_16BIT_STORAGE_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_16bit_storage");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_8bit_storage.html>
 pub const KHR_8BIT_STORAGE_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_8bit_storage");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_acceleration_structure.html>
+pub const KHR_ACCELERATION_STRUCTURE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_acceleration_structure");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_android_surface.html>
 pub const KHR_ANDROID_SURFACE_EXTENSION: ExtensionName =
     to_extension_name(b"VK_KHR_android_surface");
@@ -435,8 +438,11 @@ pub const KHR_PORTABILITY_SUBSET_EXTENSION: ExtensionName =
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_push_descriptor.html>
 pub const KHR_PUSH_DESCRIPTOR_EXTENSION: ExtensionName =
     to_extension_name(b"VK_KHR_push_descriptor");
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_ray_tracing.html>
-pub const KHR_RAY_TRACING_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_ray_tracing");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_ray_query.html>
+pub const KHR_RAY_QUERY_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_ray_query");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_ray_tracing_pipeline.html>
+pub const KHR_RAY_TRACING_PIPELINE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_ray_tracing_pipeline");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_relaxed_block_layout.html>
 pub const KHR_RELAXED_BLOCK_LAYOUT_EXTENSION: ExtensionName =
     to_extension_name(b"VK_KHR_relaxed_block_layout");

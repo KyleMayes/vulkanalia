@@ -141,10 +141,6 @@ unsafe impl Cast for AabbPositionsKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [AccelerationStructureBuildGeometryInfoKHR](struct.AccelerationStructureBuildGeometryInfoKHR.html).
-pub unsafe trait ExtendsAccelerationStructureBuildGeometryInfoKHR {}
-unsafe impl ExtendsAccelerationStructureBuildGeometryInfoKHR for DeferredOperationInfoKHR {}
-
 unsafe impl Cast for AccelerationStructureBuildGeometryInfoKHR {
     type Target = AccelerationStructureBuildGeometryInfoKHR;
 
@@ -168,17 +164,6 @@ pub struct AccelerationStructureBuildGeometryInfoKHRBuilder<'b> {
 
 impl<'b> AccelerationStructureBuildGeometryInfoKHRBuilder<'b> {
     #[inline]
-    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
-    where
-        T: ExtendsAccelerationStructureBuildGeometryInfoKHR,
-    {
-        let next = (next.as_mut() as *mut T).cast::<AccelerationStructureBuildGeometryInfoKHR>();
-        unsafe { *next }.next = self.next;
-        self.next = next.cast();
-        self
-    }
-
-    #[inline]
     pub fn type_(mut self, type_: AccelerationStructureTypeKHR) -> Self {
         self.value.type_ = type_;
         self
@@ -191,8 +176,8 @@ impl<'b> AccelerationStructureBuildGeometryInfoKHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn update(mut self, update: bool) -> Self {
-        self.value.update = update as Bool32;
+    pub fn mode(mut self, mode: BuildAccelerationStructureModeKHR) -> Self {
+        self.value.mode = mode;
         self
     }
 
@@ -215,23 +200,19 @@ impl<'b> AccelerationStructureBuildGeometryInfoKHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn geometry_array_of_pointers(mut self, geometry_array_of_pointers: bool) -> Self {
-        self.value.geometry_array_of_pointers = geometry_array_of_pointers as Bool32;
-        self
-    }
-
-    #[inline]
-    pub fn geometry_count(mut self, geometry_count: u32) -> Self {
-        self.value.geometry_count = geometry_count;
-        self
-    }
-
-    #[inline]
     pub fn geometries(
         mut self,
-        geometries: &'b [&'b impl Cast<Target = AccelerationStructureGeometryKHR>],
+        geometries: &'b [impl Cast<Target = AccelerationStructureGeometryKHR>],
     ) -> Self {
+        self.value.geometry_count = geometries.len() as u32;
         self.value.geometries = geometries.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn geometries(mut self, geometries: &'b [*const AccelerationStructureGeometryKHR]) -> Self {
+        self.value.geometry_count = geometries.len() as u32;
+        self.value.geometries = geometries.as_ptr();
         self
     }
 
@@ -272,8 +253,8 @@ unsafe impl<'b> Cast for AccelerationStructureBuildGeometryInfoKHRBuilder<'b> {
     }
 }
 
-unsafe impl Cast for AccelerationStructureBuildOffsetInfoKHR {
-    type Target = AccelerationStructureBuildOffsetInfoKHR;
+unsafe impl Cast for AccelerationStructureBuildRangeInfoKHR {
+    type Target = AccelerationStructureBuildRangeInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -281,18 +262,18 @@ unsafe impl Cast for AccelerationStructureBuildOffsetInfoKHR {
     }
 }
 
-impl HasBuilder<'static> for AccelerationStructureBuildOffsetInfoKHR {
-    type Builder = AccelerationStructureBuildOffsetInfoKHRBuilder;
+impl HasBuilder<'static> for AccelerationStructureBuildRangeInfoKHR {
+    type Builder = AccelerationStructureBuildRangeInfoKHRBuilder;
 }
 
-/// A builder for a [AccelerationStructureBuildOffsetInfoKHR](struct.AccelerationStructureBuildOffsetInfoKHR.html).
+/// A builder for a [AccelerationStructureBuildRangeInfoKHR](struct.AccelerationStructureBuildRangeInfoKHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct AccelerationStructureBuildOffsetInfoKHRBuilder {
-    value: AccelerationStructureBuildOffsetInfoKHR,
+pub struct AccelerationStructureBuildRangeInfoKHRBuilder {
+    value: AccelerationStructureBuildRangeInfoKHR,
 }
 
-impl AccelerationStructureBuildOffsetInfoKHRBuilder {
+impl AccelerationStructureBuildRangeInfoKHRBuilder {
     #[inline]
     pub fn primitive_count(mut self, primitive_count: u32) -> Self {
         self.value.primitive_count = primitive_count;
@@ -318,13 +299,13 @@ impl AccelerationStructureBuildOffsetInfoKHRBuilder {
     }
 
     #[inline]
-    pub fn build(self) -> AccelerationStructureBuildOffsetInfoKHR {
+    pub fn build(self) -> AccelerationStructureBuildRangeInfoKHR {
         self.value
     }
 }
 
-impl ops::Deref for AccelerationStructureBuildOffsetInfoKHRBuilder {
-    type Target = AccelerationStructureBuildOffsetInfoKHR;
+impl ops::Deref for AccelerationStructureBuildRangeInfoKHRBuilder {
+    type Target = AccelerationStructureBuildRangeInfoKHR;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -332,15 +313,15 @@ impl ops::Deref for AccelerationStructureBuildOffsetInfoKHRBuilder {
     }
 }
 
-impl ops::DerefMut for AccelerationStructureBuildOffsetInfoKHRBuilder {
+impl ops::DerefMut for AccelerationStructureBuildRangeInfoKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for AccelerationStructureBuildOffsetInfoKHRBuilder {
-    type Target = AccelerationStructureBuildOffsetInfoKHR;
+unsafe impl Cast for AccelerationStructureBuildRangeInfoKHRBuilder {
+    type Target = AccelerationStructureBuildRangeInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -348,8 +329,8 @@ unsafe impl Cast for AccelerationStructureBuildOffsetInfoKHRBuilder {
     }
 }
 
-unsafe impl Cast for AccelerationStructureCreateGeometryTypeInfoKHR {
-    type Target = AccelerationStructureCreateGeometryTypeInfoKHR;
+unsafe impl Cast for AccelerationStructureBuildSizesInfoKHR {
+    type Target = AccelerationStructureBuildSizesInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -357,62 +338,44 @@ unsafe impl Cast for AccelerationStructureCreateGeometryTypeInfoKHR {
     }
 }
 
-impl HasBuilder<'static> for AccelerationStructureCreateGeometryTypeInfoKHR {
-    type Builder = AccelerationStructureCreateGeometryTypeInfoKHRBuilder;
+impl HasBuilder<'static> for AccelerationStructureBuildSizesInfoKHR {
+    type Builder = AccelerationStructureBuildSizesInfoKHRBuilder;
 }
 
-/// A builder for a [AccelerationStructureCreateGeometryTypeInfoKHR](struct.AccelerationStructureCreateGeometryTypeInfoKHR.html).
+/// A builder for a [AccelerationStructureBuildSizesInfoKHR](struct.AccelerationStructureBuildSizesInfoKHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct AccelerationStructureCreateGeometryTypeInfoKHRBuilder {
-    value: AccelerationStructureCreateGeometryTypeInfoKHR,
+pub struct AccelerationStructureBuildSizesInfoKHRBuilder {
+    value: AccelerationStructureBuildSizesInfoKHR,
 }
 
-impl AccelerationStructureCreateGeometryTypeInfoKHRBuilder {
+impl AccelerationStructureBuildSizesInfoKHRBuilder {
     #[inline]
-    pub fn geometry_type(mut self, geometry_type: GeometryTypeKHR) -> Self {
-        self.value.geometry_type = geometry_type;
+    pub fn acceleration_structure_size(mut self, acceleration_structure_size: DeviceSize) -> Self {
+        self.value.acceleration_structure_size = acceleration_structure_size;
         self
     }
 
     #[inline]
-    pub fn max_primitive_count(mut self, max_primitive_count: u32) -> Self {
-        self.value.max_primitive_count = max_primitive_count;
+    pub fn update_scratch_size(mut self, update_scratch_size: DeviceSize) -> Self {
+        self.value.update_scratch_size = update_scratch_size;
         self
     }
 
     #[inline]
-    pub fn index_type(mut self, index_type: IndexType) -> Self {
-        self.value.index_type = index_type;
+    pub fn build_scratch_size(mut self, build_scratch_size: DeviceSize) -> Self {
+        self.value.build_scratch_size = build_scratch_size;
         self
     }
 
     #[inline]
-    pub fn max_vertex_count(mut self, max_vertex_count: u32) -> Self {
-        self.value.max_vertex_count = max_vertex_count;
-        self
-    }
-
-    #[inline]
-    pub fn vertex_format(mut self, vertex_format: Format) -> Self {
-        self.value.vertex_format = vertex_format;
-        self
-    }
-
-    #[inline]
-    pub fn allows_transforms(mut self, allows_transforms: bool) -> Self {
-        self.value.allows_transforms = allows_transforms as Bool32;
-        self
-    }
-
-    #[inline]
-    pub fn build(self) -> AccelerationStructureCreateGeometryTypeInfoKHR {
+    pub fn build(self) -> AccelerationStructureBuildSizesInfoKHR {
         self.value
     }
 }
 
-impl ops::Deref for AccelerationStructureCreateGeometryTypeInfoKHRBuilder {
-    type Target = AccelerationStructureCreateGeometryTypeInfoKHR;
+impl ops::Deref for AccelerationStructureBuildSizesInfoKHRBuilder {
+    type Target = AccelerationStructureBuildSizesInfoKHR;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -420,15 +383,15 @@ impl ops::Deref for AccelerationStructureCreateGeometryTypeInfoKHRBuilder {
     }
 }
 
-impl ops::DerefMut for AccelerationStructureCreateGeometryTypeInfoKHRBuilder {
+impl ops::DerefMut for AccelerationStructureBuildSizesInfoKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for AccelerationStructureCreateGeometryTypeInfoKHRBuilder {
-    type Target = AccelerationStructureCreateGeometryTypeInfoKHR;
+unsafe impl Cast for AccelerationStructureBuildSizesInfoKHRBuilder {
+    type Target = AccelerationStructureBuildSizesInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -445,44 +408,45 @@ unsafe impl Cast for AccelerationStructureCreateInfoKHR {
     }
 }
 
-impl<'b> HasBuilder<'b> for AccelerationStructureCreateInfoKHR {
-    type Builder = AccelerationStructureCreateInfoKHRBuilder<'b>;
+impl HasBuilder<'static> for AccelerationStructureCreateInfoKHR {
+    type Builder = AccelerationStructureCreateInfoKHRBuilder;
 }
 
 /// A builder for a [AccelerationStructureCreateInfoKHR](struct.AccelerationStructureCreateInfoKHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct AccelerationStructureCreateInfoKHRBuilder<'b> {
+pub struct AccelerationStructureCreateInfoKHRBuilder {
     value: AccelerationStructureCreateInfoKHR,
-    _marker: PhantomData<&'b ()>,
 }
 
-impl<'b> AccelerationStructureCreateInfoKHRBuilder<'b> {
+impl AccelerationStructureCreateInfoKHRBuilder {
     #[inline]
-    pub fn compacted_size(mut self, compacted_size: DeviceSize) -> Self {
-        self.value.compacted_size = compacted_size;
+    pub fn create_flags(mut self, create_flags: AccelerationStructureCreateFlagsKHR) -> Self {
+        self.value.create_flags = create_flags;
+        self
+    }
+
+    #[inline]
+    pub fn buffer(mut self, buffer: Buffer) -> Self {
+        self.value.buffer = buffer;
+        self
+    }
+
+    #[inline]
+    pub fn offset(mut self, offset: DeviceSize) -> Self {
+        self.value.offset = offset;
+        self
+    }
+
+    #[inline]
+    pub fn size(mut self, size: DeviceSize) -> Self {
+        self.value.size = size;
         self
     }
 
     #[inline]
     pub fn type_(mut self, type_: AccelerationStructureTypeKHR) -> Self {
         self.value.type_ = type_;
-        self
-    }
-
-    #[inline]
-    pub fn flags(mut self, flags: BuildAccelerationStructureFlagsKHR) -> Self {
-        self.value.flags = flags;
-        self
-    }
-
-    #[inline]
-    pub fn geometry_infos(
-        mut self,
-        geometry_infos: &'b [impl Cast<Target = AccelerationStructureCreateGeometryTypeInfoKHR>],
-    ) -> Self {
-        self.value.max_geometry_count = geometry_infos.len() as u32;
-        self.value.geometry_infos = geometry_infos.as_ptr().cast();
         self
     }
 
@@ -498,7 +462,7 @@ impl<'b> AccelerationStructureCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AccelerationStructureCreateInfoKHRBuilder<'b> {
+impl ops::Deref for AccelerationStructureCreateInfoKHRBuilder {
     type Target = AccelerationStructureCreateInfoKHR;
 
     #[inline]
@@ -507,14 +471,14 @@ impl<'b> ops::Deref for AccelerationStructureCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AccelerationStructureCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for AccelerationStructureCreateInfoKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AccelerationStructureCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for AccelerationStructureCreateInfoKHRBuilder {
     type Target = AccelerationStructureCreateInfoKHR;
 
     #[inline]
@@ -887,6 +851,12 @@ impl AccelerationStructureGeometryTrianglesDataKHRBuilder {
     }
 
     #[inline]
+    pub fn max_vertex(mut self, max_vertex: u32) -> Self {
+        self.value.max_vertex = max_vertex;
+        self
+    }
+
+    #[inline]
     pub fn index_type(mut self, index_type: IndexType) -> Self {
         self.value.index_type = index_type;
         self
@@ -1108,79 +1078,6 @@ unsafe impl Cast for AccelerationStructureInstanceKHRBuilder {
     }
 }
 
-unsafe impl Cast for AccelerationStructureMemoryRequirementsInfoKHR {
-    type Target = AccelerationStructureMemoryRequirementsInfoKHR;
-
-    #[inline]
-    fn into(self) -> Self::Target {
-        self
-    }
-}
-
-impl HasBuilder<'static> for AccelerationStructureMemoryRequirementsInfoKHR {
-    type Builder = AccelerationStructureMemoryRequirementsInfoKHRBuilder;
-}
-
-/// A builder for a [AccelerationStructureMemoryRequirementsInfoKHR](struct.AccelerationStructureMemoryRequirementsInfoKHR.html).
-#[repr(transparent)]
-#[derive(Copy, Clone, Debug, Default)]
-pub struct AccelerationStructureMemoryRequirementsInfoKHRBuilder {
-    value: AccelerationStructureMemoryRequirementsInfoKHR,
-}
-
-impl AccelerationStructureMemoryRequirementsInfoKHRBuilder {
-    #[inline]
-    pub fn type_(mut self, type_: AccelerationStructureMemoryRequirementsTypeKHR) -> Self {
-        self.value.type_ = type_;
-        self
-    }
-
-    #[inline]
-    pub fn build_type(mut self, build_type: AccelerationStructureBuildTypeKHR) -> Self {
-        self.value.build_type = build_type;
-        self
-    }
-
-    #[inline]
-    pub fn acceleration_structure(
-        mut self,
-        acceleration_structure: AccelerationStructureKHR,
-    ) -> Self {
-        self.value.acceleration_structure = acceleration_structure;
-        self
-    }
-
-    #[inline]
-    pub fn build(self) -> AccelerationStructureMemoryRequirementsInfoKHR {
-        self.value
-    }
-}
-
-impl ops::Deref for AccelerationStructureMemoryRequirementsInfoKHRBuilder {
-    type Target = AccelerationStructureMemoryRequirementsInfoKHR;
-
-    #[inline]
-    fn deref(&self) -> &Self::Target {
-        &self.value
-    }
-}
-
-impl ops::DerefMut for AccelerationStructureMemoryRequirementsInfoKHRBuilder {
-    #[inline]
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.value
-    }
-}
-
-unsafe impl Cast for AccelerationStructureMemoryRequirementsInfoKHRBuilder {
-    type Target = AccelerationStructureMemoryRequirementsInfoKHR;
-
-    #[inline]
-    fn into(self) -> Self::Target {
-        self.value
-    }
-}
-
 unsafe impl Cast for AccelerationStructureMemoryRequirementsInfoNV {
     type Target = AccelerationStructureMemoryRequirementsInfoNV;
 
@@ -1248,8 +1145,8 @@ unsafe impl Cast for AccelerationStructureMemoryRequirementsInfoNVBuilder {
     }
 }
 
-unsafe impl Cast for AccelerationStructureVersionKHR {
-    type Target = AccelerationStructureVersionKHR;
+unsafe impl Cast for AccelerationStructureVersionInfoKHR {
+    type Target = AccelerationStructureVersionInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -1257,19 +1154,19 @@ unsafe impl Cast for AccelerationStructureVersionKHR {
     }
 }
 
-impl<'b> HasBuilder<'b> for AccelerationStructureVersionKHR {
-    type Builder = AccelerationStructureVersionKHRBuilder<'b>;
+impl<'b> HasBuilder<'b> for AccelerationStructureVersionInfoKHR {
+    type Builder = AccelerationStructureVersionInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [AccelerationStructureVersionKHR](struct.AccelerationStructureVersionKHR.html).
+/// A builder for a [AccelerationStructureVersionInfoKHR](struct.AccelerationStructureVersionInfoKHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct AccelerationStructureVersionKHRBuilder<'b> {
-    value: AccelerationStructureVersionKHR,
+pub struct AccelerationStructureVersionInfoKHRBuilder<'b> {
+    value: AccelerationStructureVersionInfoKHR,
     _marker: PhantomData<&'b ()>,
 }
 
-impl<'b> AccelerationStructureVersionKHRBuilder<'b> {
+impl<'b> AccelerationStructureVersionInfoKHRBuilder<'b> {
     #[inline]
     pub fn version_data(mut self, version_data: &'b [u8]) -> Self {
         self.value.version_data = version_data.as_ptr();
@@ -1277,13 +1174,13 @@ impl<'b> AccelerationStructureVersionKHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn build(self) -> AccelerationStructureVersionKHR {
+    pub fn build(self) -> AccelerationStructureVersionInfoKHR {
         self.value
     }
 }
 
-impl<'b> ops::Deref for AccelerationStructureVersionKHRBuilder<'b> {
-    type Target = AccelerationStructureVersionKHR;
+impl<'b> ops::Deref for AccelerationStructureVersionInfoKHRBuilder<'b> {
+    type Target = AccelerationStructureVersionInfoKHR;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -1291,15 +1188,15 @@ impl<'b> ops::Deref for AccelerationStructureVersionKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AccelerationStructureVersionKHRBuilder<'b> {
+impl<'b> ops::DerefMut for AccelerationStructureVersionInfoKHRBuilder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AccelerationStructureVersionKHRBuilder<'b> {
-    type Target = AccelerationStructureVersionKHR;
+unsafe impl<'b> Cast for AccelerationStructureVersionInfoKHRBuilder<'b> {
+    type Target = AccelerationStructureVersionInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -2624,8 +2521,8 @@ unsafe impl Cast for BaseOutStructureBuilder {
     }
 }
 
-unsafe impl Cast for BindAccelerationStructureMemoryInfoKHR {
-    type Target = BindAccelerationStructureMemoryInfoKHR;
+unsafe impl Cast for BindAccelerationStructureMemoryInfoNV {
+    type Target = BindAccelerationStructureMemoryInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -2633,23 +2530,23 @@ unsafe impl Cast for BindAccelerationStructureMemoryInfoKHR {
     }
 }
 
-impl<'b> HasBuilder<'b> for BindAccelerationStructureMemoryInfoKHR {
-    type Builder = BindAccelerationStructureMemoryInfoKHRBuilder<'b>;
+impl<'b> HasBuilder<'b> for BindAccelerationStructureMemoryInfoNV {
+    type Builder = BindAccelerationStructureMemoryInfoNVBuilder<'b>;
 }
 
-/// A builder for a [BindAccelerationStructureMemoryInfoKHR](struct.BindAccelerationStructureMemoryInfoKHR.html).
+/// A builder for a [BindAccelerationStructureMemoryInfoNV](struct.BindAccelerationStructureMemoryInfoNV.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct BindAccelerationStructureMemoryInfoKHRBuilder<'b> {
-    value: BindAccelerationStructureMemoryInfoKHR,
+pub struct BindAccelerationStructureMemoryInfoNVBuilder<'b> {
+    value: BindAccelerationStructureMemoryInfoNV,
     _marker: PhantomData<&'b ()>,
 }
 
-impl<'b> BindAccelerationStructureMemoryInfoKHRBuilder<'b> {
+impl<'b> BindAccelerationStructureMemoryInfoNVBuilder<'b> {
     #[inline]
     pub fn acceleration_structure(
         mut self,
-        acceleration_structure: AccelerationStructureKHR,
+        acceleration_structure: AccelerationStructureNV,
     ) -> Self {
         self.value.acceleration_structure = acceleration_structure;
         self
@@ -2675,13 +2572,13 @@ impl<'b> BindAccelerationStructureMemoryInfoKHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn build(self) -> BindAccelerationStructureMemoryInfoKHR {
+    pub fn build(self) -> BindAccelerationStructureMemoryInfoNV {
         self.value
     }
 }
 
-impl<'b> ops::Deref for BindAccelerationStructureMemoryInfoKHRBuilder<'b> {
-    type Target = BindAccelerationStructureMemoryInfoKHR;
+impl<'b> ops::Deref for BindAccelerationStructureMemoryInfoNVBuilder<'b> {
+    type Target = BindAccelerationStructureMemoryInfoNV;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -2689,15 +2586,15 @@ impl<'b> ops::Deref for BindAccelerationStructureMemoryInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BindAccelerationStructureMemoryInfoKHRBuilder<'b> {
+impl<'b> ops::DerefMut for BindAccelerationStructureMemoryInfoNVBuilder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BindAccelerationStructureMemoryInfoKHRBuilder<'b> {
-    type Target = BindAccelerationStructureMemoryInfoKHR;
+unsafe impl<'b> Cast for BindAccelerationStructureMemoryInfoNVBuilder<'b> {
+    type Target = BindAccelerationStructureMemoryInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -5723,10 +5620,6 @@ unsafe impl Cast for CooperativeMatrixPropertiesNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [CopyAccelerationStructureInfoKHR](struct.CopyAccelerationStructureInfoKHR.html).
-pub unsafe trait ExtendsCopyAccelerationStructureInfoKHR {}
-unsafe impl ExtendsCopyAccelerationStructureInfoKHR for DeferredOperationInfoKHR {}
-
 unsafe impl Cast for CopyAccelerationStructureInfoKHR {
     type Target = CopyAccelerationStructureInfoKHR;
 
@@ -5736,30 +5629,18 @@ unsafe impl Cast for CopyAccelerationStructureInfoKHR {
     }
 }
 
-impl<'b> HasBuilder<'b> for CopyAccelerationStructureInfoKHR {
-    type Builder = CopyAccelerationStructureInfoKHRBuilder<'b>;
+impl HasBuilder<'static> for CopyAccelerationStructureInfoKHR {
+    type Builder = CopyAccelerationStructureInfoKHRBuilder;
 }
 
 /// A builder for a [CopyAccelerationStructureInfoKHR](struct.CopyAccelerationStructureInfoKHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct CopyAccelerationStructureInfoKHRBuilder<'b> {
+pub struct CopyAccelerationStructureInfoKHRBuilder {
     value: CopyAccelerationStructureInfoKHR,
-    _marker: PhantomData<&'b ()>,
 }
 
-impl<'b> CopyAccelerationStructureInfoKHRBuilder<'b> {
-    #[inline]
-    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
-    where
-        T: ExtendsCopyAccelerationStructureInfoKHR,
-    {
-        let next = (next.as_mut() as *mut T).cast::<CopyAccelerationStructureInfoKHR>();
-        unsafe { *next }.next = self.next;
-        self.next = next.cast();
-        self
-    }
-
+impl CopyAccelerationStructureInfoKHRBuilder {
     #[inline]
     pub fn src(mut self, src: AccelerationStructureKHR) -> Self {
         self.value.src = src;
@@ -5784,7 +5665,7 @@ impl<'b> CopyAccelerationStructureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CopyAccelerationStructureInfoKHRBuilder<'b> {
+impl ops::Deref for CopyAccelerationStructureInfoKHRBuilder {
     type Target = CopyAccelerationStructureInfoKHR;
 
     #[inline]
@@ -5793,14 +5674,14 @@ impl<'b> ops::Deref for CopyAccelerationStructureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CopyAccelerationStructureInfoKHRBuilder<'b> {
+impl ops::DerefMut for CopyAccelerationStructureInfoKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CopyAccelerationStructureInfoKHRBuilder<'b> {
+unsafe impl Cast for CopyAccelerationStructureInfoKHRBuilder {
     type Target = CopyAccelerationStructureInfoKHR;
 
     #[inline]
@@ -5808,10 +5689,6 @@ unsafe impl<'b> Cast for CopyAccelerationStructureInfoKHRBuilder<'b> {
         self.value
     }
 }
-
-/// A Vulkan struct that can be used to extend a [CopyAccelerationStructureToMemoryInfoKHR](struct.CopyAccelerationStructureToMemoryInfoKHR.html).
-pub unsafe trait ExtendsCopyAccelerationStructureToMemoryInfoKHR {}
-unsafe impl ExtendsCopyAccelerationStructureToMemoryInfoKHR for DeferredOperationInfoKHR {}
 
 unsafe impl Cast for CopyAccelerationStructureToMemoryInfoKHR {
     type Target = CopyAccelerationStructureToMemoryInfoKHR;
@@ -5822,30 +5699,18 @@ unsafe impl Cast for CopyAccelerationStructureToMemoryInfoKHR {
     }
 }
 
-impl<'b> HasBuilder<'b> for CopyAccelerationStructureToMemoryInfoKHR {
-    type Builder = CopyAccelerationStructureToMemoryInfoKHRBuilder<'b>;
+impl HasBuilder<'static> for CopyAccelerationStructureToMemoryInfoKHR {
+    type Builder = CopyAccelerationStructureToMemoryInfoKHRBuilder;
 }
 
 /// A builder for a [CopyAccelerationStructureToMemoryInfoKHR](struct.CopyAccelerationStructureToMemoryInfoKHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct CopyAccelerationStructureToMemoryInfoKHRBuilder<'b> {
+pub struct CopyAccelerationStructureToMemoryInfoKHRBuilder {
     value: CopyAccelerationStructureToMemoryInfoKHR,
-    _marker: PhantomData<&'b ()>,
 }
 
-impl<'b> CopyAccelerationStructureToMemoryInfoKHRBuilder<'b> {
-    #[inline]
-    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
-    where
-        T: ExtendsCopyAccelerationStructureToMemoryInfoKHR,
-    {
-        let next = (next.as_mut() as *mut T).cast::<CopyAccelerationStructureToMemoryInfoKHR>();
-        unsafe { *next }.next = self.next;
-        self.next = next.cast();
-        self
-    }
-
+impl CopyAccelerationStructureToMemoryInfoKHRBuilder {
     #[inline]
     pub fn src(mut self, src: AccelerationStructureKHR) -> Self {
         self.value.src = src;
@@ -5870,7 +5735,7 @@ impl<'b> CopyAccelerationStructureToMemoryInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CopyAccelerationStructureToMemoryInfoKHRBuilder<'b> {
+impl ops::Deref for CopyAccelerationStructureToMemoryInfoKHRBuilder {
     type Target = CopyAccelerationStructureToMemoryInfoKHR;
 
     #[inline]
@@ -5879,14 +5744,14 @@ impl<'b> ops::Deref for CopyAccelerationStructureToMemoryInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CopyAccelerationStructureToMemoryInfoKHRBuilder<'b> {
+impl ops::DerefMut for CopyAccelerationStructureToMemoryInfoKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CopyAccelerationStructureToMemoryInfoKHRBuilder<'b> {
+unsafe impl Cast for CopyAccelerationStructureToMemoryInfoKHRBuilder {
     type Target = CopyAccelerationStructureToMemoryInfoKHR;
 
     #[inline]
@@ -6359,10 +6224,6 @@ unsafe impl<'b> Cast for CopyImageToBufferInfo2KHRBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [CopyMemoryToAccelerationStructureInfoKHR](struct.CopyMemoryToAccelerationStructureInfoKHR.html).
-pub unsafe trait ExtendsCopyMemoryToAccelerationStructureInfoKHR {}
-unsafe impl ExtendsCopyMemoryToAccelerationStructureInfoKHR for DeferredOperationInfoKHR {}
-
 unsafe impl Cast for CopyMemoryToAccelerationStructureInfoKHR {
     type Target = CopyMemoryToAccelerationStructureInfoKHR;
 
@@ -6372,30 +6233,18 @@ unsafe impl Cast for CopyMemoryToAccelerationStructureInfoKHR {
     }
 }
 
-impl<'b> HasBuilder<'b> for CopyMemoryToAccelerationStructureInfoKHR {
-    type Builder = CopyMemoryToAccelerationStructureInfoKHRBuilder<'b>;
+impl HasBuilder<'static> for CopyMemoryToAccelerationStructureInfoKHR {
+    type Builder = CopyMemoryToAccelerationStructureInfoKHRBuilder;
 }
 
 /// A builder for a [CopyMemoryToAccelerationStructureInfoKHR](struct.CopyMemoryToAccelerationStructureInfoKHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct CopyMemoryToAccelerationStructureInfoKHRBuilder<'b> {
+pub struct CopyMemoryToAccelerationStructureInfoKHRBuilder {
     value: CopyMemoryToAccelerationStructureInfoKHR,
-    _marker: PhantomData<&'b ()>,
 }
 
-impl<'b> CopyMemoryToAccelerationStructureInfoKHRBuilder<'b> {
-    #[inline]
-    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
-    where
-        T: ExtendsCopyMemoryToAccelerationStructureInfoKHR,
-    {
-        let next = (next.as_mut() as *mut T).cast::<CopyMemoryToAccelerationStructureInfoKHR>();
-        unsafe { *next }.next = self.next;
-        self.next = next.cast();
-        self
-    }
-
+impl CopyMemoryToAccelerationStructureInfoKHRBuilder {
     #[inline]
     pub fn src(mut self, src: DeviceOrHostAddressConstKHR) -> Self {
         self.value.src = src;
@@ -6420,7 +6269,7 @@ impl<'b> CopyMemoryToAccelerationStructureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CopyMemoryToAccelerationStructureInfoKHRBuilder<'b> {
+impl ops::Deref for CopyMemoryToAccelerationStructureInfoKHRBuilder {
     type Target = CopyMemoryToAccelerationStructureInfoKHR;
 
     #[inline]
@@ -6429,14 +6278,14 @@ impl<'b> ops::Deref for CopyMemoryToAccelerationStructureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CopyMemoryToAccelerationStructureInfoKHRBuilder<'b> {
+impl ops::DerefMut for CopyMemoryToAccelerationStructureInfoKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CopyMemoryToAccelerationStructureInfoKHRBuilder<'b> {
+unsafe impl Cast for CopyMemoryToAccelerationStructureInfoKHRBuilder {
     type Target = CopyMemoryToAccelerationStructureInfoKHR;
 
     #[inline]
@@ -7386,64 +7235,6 @@ impl ops::DerefMut for DedicatedAllocationMemoryAllocateInfoNVBuilder {
 
 unsafe impl Cast for DedicatedAllocationMemoryAllocateInfoNVBuilder {
     type Target = DedicatedAllocationMemoryAllocateInfoNV;
-
-    #[inline]
-    fn into(self) -> Self::Target {
-        self.value
-    }
-}
-
-unsafe impl Cast for DeferredOperationInfoKHR {
-    type Target = DeferredOperationInfoKHR;
-
-    #[inline]
-    fn into(self) -> Self::Target {
-        self
-    }
-}
-
-impl HasBuilder<'static> for DeferredOperationInfoKHR {
-    type Builder = DeferredOperationInfoKHRBuilder;
-}
-
-/// A builder for a [DeferredOperationInfoKHR](struct.DeferredOperationInfoKHR.html).
-#[repr(transparent)]
-#[derive(Copy, Clone, Debug, Default)]
-pub struct DeferredOperationInfoKHRBuilder {
-    value: DeferredOperationInfoKHR,
-}
-
-impl DeferredOperationInfoKHRBuilder {
-    #[inline]
-    pub fn operation_handle(mut self, operation_handle: DeferredOperationKHR) -> Self {
-        self.value.operation_handle = operation_handle;
-        self
-    }
-
-    #[inline]
-    pub fn build(self) -> DeferredOperationInfoKHR {
-        self.value
-    }
-}
-
-impl ops::Deref for DeferredOperationInfoKHRBuilder {
-    type Target = DeferredOperationInfoKHR;
-
-    #[inline]
-    fn deref(&self) -> &Self::Target {
-        &self.value
-    }
-}
-
-impl ops::DerefMut for DeferredOperationInfoKHRBuilder {
-    #[inline]
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.value
-    }
-}
-
-unsafe impl Cast for DeferredOperationInfoKHRBuilder {
-    type Target = DeferredOperationInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -8505,6 +8296,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice16BitStorageFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice4444FormatsFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice8BitStorageFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceASTCDecodeFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAccelerationStructureFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBufferDeviceAddressFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
@@ -8545,7 +8337,8 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineExecutableProperti
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePortabilitySubsetFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrivateDataFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProtectedMemoryFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayQueryFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRobustness2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSamplerYcbcrConversionFeatures {}
@@ -20785,6 +20578,228 @@ unsafe impl Cast for PhysicalDeviceASTCDecodeFeaturesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceAccelerationStructureFeaturesKHR {
+    type Target = PhysicalDeviceAccelerationStructureFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceAccelerationStructureFeaturesKHR {
+    type Builder = PhysicalDeviceAccelerationStructureFeaturesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDeviceAccelerationStructureFeaturesKHR](struct.PhysicalDeviceAccelerationStructureFeaturesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceAccelerationStructureFeaturesKHRBuilder {
+    value: PhysicalDeviceAccelerationStructureFeaturesKHR,
+}
+
+impl PhysicalDeviceAccelerationStructureFeaturesKHRBuilder {
+    #[inline]
+    pub fn acceleration_structure(mut self, acceleration_structure: bool) -> Self {
+        self.value.acceleration_structure = acceleration_structure as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn acceleration_structure_capture_replay(
+        mut self,
+        acceleration_structure_capture_replay: bool,
+    ) -> Self {
+        self.value.acceleration_structure_capture_replay =
+            acceleration_structure_capture_replay as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn acceleration_structure_indirect_build(
+        mut self,
+        acceleration_structure_indirect_build: bool,
+    ) -> Self {
+        self.value.acceleration_structure_indirect_build =
+            acceleration_structure_indirect_build as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn acceleration_structure_host_commands(
+        mut self,
+        acceleration_structure_host_commands: bool,
+    ) -> Self {
+        self.value.acceleration_structure_host_commands =
+            acceleration_structure_host_commands as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn descriptor_binding_acceleration_structure_update_after_bind(
+        mut self,
+        descriptor_binding_acceleration_structure_update_after_bind: bool,
+    ) -> Self {
+        self.value
+            .descriptor_binding_acceleration_structure_update_after_bind =
+            descriptor_binding_acceleration_structure_update_after_bind as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceAccelerationStructureFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceAccelerationStructureFeaturesKHRBuilder {
+    type Target = PhysicalDeviceAccelerationStructureFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceAccelerationStructureFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceAccelerationStructureFeaturesKHRBuilder {
+    type Target = PhysicalDeviceAccelerationStructureFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceAccelerationStructurePropertiesKHR {
+    type Target = PhysicalDeviceAccelerationStructurePropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceAccelerationStructurePropertiesKHR {
+    type Builder = PhysicalDeviceAccelerationStructurePropertiesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDeviceAccelerationStructurePropertiesKHR](struct.PhysicalDeviceAccelerationStructurePropertiesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceAccelerationStructurePropertiesKHRBuilder {
+    value: PhysicalDeviceAccelerationStructurePropertiesKHR,
+}
+
+impl PhysicalDeviceAccelerationStructurePropertiesKHRBuilder {
+    #[inline]
+    pub fn max_geometry_count(mut self, max_geometry_count: u64) -> Self {
+        self.value.max_geometry_count = max_geometry_count;
+        self
+    }
+
+    #[inline]
+    pub fn max_instance_count(mut self, max_instance_count: u64) -> Self {
+        self.value.max_instance_count = max_instance_count;
+        self
+    }
+
+    #[inline]
+    pub fn max_primitive_count(mut self, max_primitive_count: u64) -> Self {
+        self.value.max_primitive_count = max_primitive_count;
+        self
+    }
+
+    #[inline]
+    pub fn max_per_stage_descriptor_acceleration_structures(
+        mut self,
+        max_per_stage_descriptor_acceleration_structures: u32,
+    ) -> Self {
+        self.value.max_per_stage_descriptor_acceleration_structures =
+            max_per_stage_descriptor_acceleration_structures;
+        self
+    }
+
+    #[inline]
+    pub fn max_per_stage_descriptor_update_after_bind_acceleration_structures(
+        mut self,
+        max_per_stage_descriptor_update_after_bind_acceleration_structures: u32,
+    ) -> Self {
+        self.value
+            .max_per_stage_descriptor_update_after_bind_acceleration_structures =
+            max_per_stage_descriptor_update_after_bind_acceleration_structures;
+        self
+    }
+
+    #[inline]
+    pub fn max_descriptor_set_acceleration_structures(
+        mut self,
+        max_descriptor_set_acceleration_structures: u32,
+    ) -> Self {
+        self.value.max_descriptor_set_acceleration_structures =
+            max_descriptor_set_acceleration_structures;
+        self
+    }
+
+    #[inline]
+    pub fn max_descriptor_set_update_after_bind_acceleration_structures(
+        mut self,
+        max_descriptor_set_update_after_bind_acceleration_structures: u32,
+    ) -> Self {
+        self.value
+            .max_descriptor_set_update_after_bind_acceleration_structures =
+            max_descriptor_set_update_after_bind_acceleration_structures;
+        self
+    }
+
+    #[inline]
+    pub fn min_acceleration_structure_scratch_offset_alignment(
+        mut self,
+        min_acceleration_structure_scratch_offset_alignment: u32,
+    ) -> Self {
+        self.value
+            .min_acceleration_structure_scratch_offset_alignment =
+            min_acceleration_structure_scratch_offset_alignment;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceAccelerationStructurePropertiesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceAccelerationStructurePropertiesKHRBuilder {
+    type Target = PhysicalDeviceAccelerationStructurePropertiesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceAccelerationStructurePropertiesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceAccelerationStructurePropertiesKHRBuilder {
+    type Target = PhysicalDeviceAccelerationStructurePropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {
     type Target = PhysicalDeviceBlendOperationAdvancedFeaturesEXT;
 
@@ -23865,6 +23880,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice16BitStorageFeature
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice4444FormatsFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice8BitStorageFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceASTCDecodeFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAccelerationStructureFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBufferDeviceAddressFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
@@ -23913,7 +23929,8 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePortabilitySubsetFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePrivateDataFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProtectedMemoryFeatures {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayQueryFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRobustness2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSamplerYcbcrConversionFeatures {}
@@ -28480,6 +28497,7 @@ unsafe impl Cast for PhysicalDevicePropertiesBuilder {
 
 /// A Vulkan struct that can be used to extend a [PhysicalDeviceProperties2](struct.PhysicalDeviceProperties2.html).
 pub unsafe trait ExtendsPhysicalDeviceProperties2 {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceAccelerationStructurePropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceBlendOperationAdvancedPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2
     for PhysicalDeviceConservativeRasterizationPropertiesEXT
@@ -28517,7 +28535,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePointClippingProp
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePortabilitySubsetPropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProtectedMemoryProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePushDescriptorPropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPropertiesKHR {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPipelinePropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRobustness2PropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSampleLocationsPropertiesEXT {}
@@ -28779,8 +28797,8 @@ unsafe impl Cast for PhysicalDevicePushDescriptorPropertiesKHRBuilder {
     }
 }
 
-unsafe impl Cast for PhysicalDeviceRayTracingFeaturesKHR {
-    type Target = PhysicalDeviceRayTracingFeaturesKHR;
+unsafe impl Cast for PhysicalDeviceRayQueryFeaturesKHR {
+    type Target = PhysicalDeviceRayQueryFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -28788,84 +28806,18 @@ unsafe impl Cast for PhysicalDeviceRayTracingFeaturesKHR {
     }
 }
 
-impl HasBuilder<'static> for PhysicalDeviceRayTracingFeaturesKHR {
-    type Builder = PhysicalDeviceRayTracingFeaturesKHRBuilder;
+impl HasBuilder<'static> for PhysicalDeviceRayQueryFeaturesKHR {
+    type Builder = PhysicalDeviceRayQueryFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceRayTracingFeaturesKHR](struct.PhysicalDeviceRayTracingFeaturesKHR.html).
+/// A builder for a [PhysicalDeviceRayQueryFeaturesKHR](struct.PhysicalDeviceRayQueryFeaturesKHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct PhysicalDeviceRayTracingFeaturesKHRBuilder {
-    value: PhysicalDeviceRayTracingFeaturesKHR,
+pub struct PhysicalDeviceRayQueryFeaturesKHRBuilder {
+    value: PhysicalDeviceRayQueryFeaturesKHR,
 }
 
-impl PhysicalDeviceRayTracingFeaturesKHRBuilder {
-    #[inline]
-    pub fn ray_tracing(mut self, ray_tracing: bool) -> Self {
-        self.value.ray_tracing = ray_tracing as Bool32;
-        self
-    }
-
-    #[inline]
-    pub fn ray_tracing_shader_group_handle_capture_replay(
-        mut self,
-        ray_tracing_shader_group_handle_capture_replay: bool,
-    ) -> Self {
-        self.value.ray_tracing_shader_group_handle_capture_replay =
-            ray_tracing_shader_group_handle_capture_replay as Bool32;
-        self
-    }
-
-    #[inline]
-    pub fn ray_tracing_shader_group_handle_capture_replay_mixed(
-        mut self,
-        ray_tracing_shader_group_handle_capture_replay_mixed: bool,
-    ) -> Self {
-        self.value
-            .ray_tracing_shader_group_handle_capture_replay_mixed =
-            ray_tracing_shader_group_handle_capture_replay_mixed as Bool32;
-        self
-    }
-
-    #[inline]
-    pub fn ray_tracing_acceleration_structure_capture_replay(
-        mut self,
-        ray_tracing_acceleration_structure_capture_replay: bool,
-    ) -> Self {
-        self.value.ray_tracing_acceleration_structure_capture_replay =
-            ray_tracing_acceleration_structure_capture_replay as Bool32;
-        self
-    }
-
-    #[inline]
-    pub fn ray_tracing_indirect_trace_rays(
-        mut self,
-        ray_tracing_indirect_trace_rays: bool,
-    ) -> Self {
-        self.value.ray_tracing_indirect_trace_rays = ray_tracing_indirect_trace_rays as Bool32;
-        self
-    }
-
-    #[inline]
-    pub fn ray_tracing_indirect_acceleration_structure_build(
-        mut self,
-        ray_tracing_indirect_acceleration_structure_build: bool,
-    ) -> Self {
-        self.value.ray_tracing_indirect_acceleration_structure_build =
-            ray_tracing_indirect_acceleration_structure_build as Bool32;
-        self
-    }
-
-    #[inline]
-    pub fn ray_tracing_host_acceleration_structure_commands(
-        mut self,
-        ray_tracing_host_acceleration_structure_commands: bool,
-    ) -> Self {
-        self.value.ray_tracing_host_acceleration_structure_commands =
-            ray_tracing_host_acceleration_structure_commands as Bool32;
-        self
-    }
-
+impl PhysicalDeviceRayQueryFeaturesKHRBuilder {
     #[inline]
     pub fn ray_query(mut self, ray_query: bool) -> Self {
         self.value.ray_query = ray_query as Bool32;
@@ -28873,19 +28825,13 @@ impl PhysicalDeviceRayTracingFeaturesKHRBuilder {
     }
 
     #[inline]
-    pub fn ray_tracing_primitive_culling(mut self, ray_tracing_primitive_culling: bool) -> Self {
-        self.value.ray_tracing_primitive_culling = ray_tracing_primitive_culling as Bool32;
-        self
-    }
-
-    #[inline]
-    pub fn build(self) -> PhysicalDeviceRayTracingFeaturesKHR {
+    pub fn build(self) -> PhysicalDeviceRayQueryFeaturesKHR {
         self.value
     }
 }
 
-impl ops::Deref for PhysicalDeviceRayTracingFeaturesKHRBuilder {
-    type Target = PhysicalDeviceRayTracingFeaturesKHR;
+impl ops::Deref for PhysicalDeviceRayQueryFeaturesKHRBuilder {
+    type Target = PhysicalDeviceRayQueryFeaturesKHR;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -28893,15 +28839,15 @@ impl ops::Deref for PhysicalDeviceRayTracingFeaturesKHRBuilder {
     }
 }
 
-impl ops::DerefMut for PhysicalDeviceRayTracingFeaturesKHRBuilder {
+impl ops::DerefMut for PhysicalDeviceRayQueryFeaturesKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for PhysicalDeviceRayTracingFeaturesKHRBuilder {
-    type Target = PhysicalDeviceRayTracingFeaturesKHR;
+unsafe impl Cast for PhysicalDeviceRayQueryFeaturesKHRBuilder {
+    type Target = PhysicalDeviceRayQueryFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -28909,8 +28855,8 @@ unsafe impl Cast for PhysicalDeviceRayTracingFeaturesKHRBuilder {
     }
 }
 
-unsafe impl Cast for PhysicalDeviceRayTracingPropertiesKHR {
-    type Target = PhysicalDeviceRayTracingPropertiesKHR;
+unsafe impl Cast for PhysicalDeviceRayTracingPipelineFeaturesKHR {
+    type Target = PhysicalDeviceRayTracingPipelineFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -28918,18 +28864,117 @@ unsafe impl Cast for PhysicalDeviceRayTracingPropertiesKHR {
     }
 }
 
-impl HasBuilder<'static> for PhysicalDeviceRayTracingPropertiesKHR {
-    type Builder = PhysicalDeviceRayTracingPropertiesKHRBuilder;
+impl HasBuilder<'static> for PhysicalDeviceRayTracingPipelineFeaturesKHR {
+    type Builder = PhysicalDeviceRayTracingPipelineFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceRayTracingPropertiesKHR](struct.PhysicalDeviceRayTracingPropertiesKHR.html).
+/// A builder for a [PhysicalDeviceRayTracingPipelineFeaturesKHR](struct.PhysicalDeviceRayTracingPipelineFeaturesKHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct PhysicalDeviceRayTracingPropertiesKHRBuilder {
-    value: PhysicalDeviceRayTracingPropertiesKHR,
+pub struct PhysicalDeviceRayTracingPipelineFeaturesKHRBuilder {
+    value: PhysicalDeviceRayTracingPipelineFeaturesKHR,
 }
 
-impl PhysicalDeviceRayTracingPropertiesKHRBuilder {
+impl PhysicalDeviceRayTracingPipelineFeaturesKHRBuilder {
+    #[inline]
+    pub fn ray_tracing_pipeline(mut self, ray_tracing_pipeline: bool) -> Self {
+        self.value.ray_tracing_pipeline = ray_tracing_pipeline as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn ray_tracing_pipeline_shader_group_handle_capture_replay(
+        mut self,
+        ray_tracing_pipeline_shader_group_handle_capture_replay: bool,
+    ) -> Self {
+        self.value
+            .ray_tracing_pipeline_shader_group_handle_capture_replay =
+            ray_tracing_pipeline_shader_group_handle_capture_replay as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn ray_tracing_pipeline_shader_group_handle_capture_replay_mixed(
+        mut self,
+        ray_tracing_pipeline_shader_group_handle_capture_replay_mixed: bool,
+    ) -> Self {
+        self.value
+            .ray_tracing_pipeline_shader_group_handle_capture_replay_mixed =
+            ray_tracing_pipeline_shader_group_handle_capture_replay_mixed as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn ray_tracing_pipeline_trace_rays_indirect(
+        mut self,
+        ray_tracing_pipeline_trace_rays_indirect: bool,
+    ) -> Self {
+        self.value.ray_tracing_pipeline_trace_rays_indirect =
+            ray_tracing_pipeline_trace_rays_indirect as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn ray_traversal_primitive_culling(
+        mut self,
+        ray_traversal_primitive_culling: bool,
+    ) -> Self {
+        self.value.ray_traversal_primitive_culling = ray_traversal_primitive_culling as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceRayTracingPipelineFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceRayTracingPipelineFeaturesKHRBuilder {
+    type Target = PhysicalDeviceRayTracingPipelineFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceRayTracingPipelineFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingPipelineFeaturesKHRBuilder {
+    type Target = PhysicalDeviceRayTracingPipelineFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingPipelinePropertiesKHR {
+    type Target = PhysicalDeviceRayTracingPipelinePropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceRayTracingPipelinePropertiesKHR {
+    type Builder = PhysicalDeviceRayTracingPipelinePropertiesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDeviceRayTracingPipelinePropertiesKHR](struct.PhysicalDeviceRayTracingPipelinePropertiesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceRayTracingPipelinePropertiesKHRBuilder {
+    value: PhysicalDeviceRayTracingPipelinePropertiesKHR,
+}
+
+impl PhysicalDeviceRayTracingPipelinePropertiesKHRBuilder {
     #[inline]
     pub fn shader_group_handle_size(mut self, shader_group_handle_size: u32) -> Self {
         self.value.shader_group_handle_size = shader_group_handle_size;
@@ -28937,8 +28982,8 @@ impl PhysicalDeviceRayTracingPropertiesKHRBuilder {
     }
 
     #[inline]
-    pub fn max_recursion_depth(mut self, max_recursion_depth: u32) -> Self {
-        self.value.max_recursion_depth = max_recursion_depth;
+    pub fn max_ray_recursion_depth(mut self, max_ray_recursion_depth: u32) -> Self {
+        self.value.max_ray_recursion_depth = max_ray_recursion_depth;
         self
     }
 
@@ -28955,34 +29000,6 @@ impl PhysicalDeviceRayTracingPropertiesKHRBuilder {
     }
 
     #[inline]
-    pub fn max_geometry_count(mut self, max_geometry_count: u64) -> Self {
-        self.value.max_geometry_count = max_geometry_count;
-        self
-    }
-
-    #[inline]
-    pub fn max_instance_count(mut self, max_instance_count: u64) -> Self {
-        self.value.max_instance_count = max_instance_count;
-        self
-    }
-
-    #[inline]
-    pub fn max_primitive_count(mut self, max_primitive_count: u64) -> Self {
-        self.value.max_primitive_count = max_primitive_count;
-        self
-    }
-
-    #[inline]
-    pub fn max_descriptor_set_acceleration_structures(
-        mut self,
-        max_descriptor_set_acceleration_structures: u32,
-    ) -> Self {
-        self.value.max_descriptor_set_acceleration_structures =
-            max_descriptor_set_acceleration_structures;
-        self
-    }
-
-    #[inline]
     pub fn shader_group_handle_capture_replay_size(
         mut self,
         shader_group_handle_capture_replay_size: u32,
@@ -28993,13 +29010,34 @@ impl PhysicalDeviceRayTracingPropertiesKHRBuilder {
     }
 
     #[inline]
-    pub fn build(self) -> PhysicalDeviceRayTracingPropertiesKHR {
+    pub fn max_ray_dispatch_invocation_count(
+        mut self,
+        max_ray_dispatch_invocation_count: u32,
+    ) -> Self {
+        self.value.max_ray_dispatch_invocation_count = max_ray_dispatch_invocation_count;
+        self
+    }
+
+    #[inline]
+    pub fn shader_group_handle_alignment(mut self, shader_group_handle_alignment: u32) -> Self {
+        self.value.shader_group_handle_alignment = shader_group_handle_alignment;
+        self
+    }
+
+    #[inline]
+    pub fn max_ray_hit_attribute_size(mut self, max_ray_hit_attribute_size: u32) -> Self {
+        self.value.max_ray_hit_attribute_size = max_ray_hit_attribute_size;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceRayTracingPipelinePropertiesKHR {
         self.value
     }
 }
 
-impl ops::Deref for PhysicalDeviceRayTracingPropertiesKHRBuilder {
-    type Target = PhysicalDeviceRayTracingPropertiesKHR;
+impl ops::Deref for PhysicalDeviceRayTracingPipelinePropertiesKHRBuilder {
+    type Target = PhysicalDeviceRayTracingPipelinePropertiesKHR;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -29007,15 +29045,15 @@ impl ops::Deref for PhysicalDeviceRayTracingPropertiesKHRBuilder {
     }
 }
 
-impl ops::DerefMut for PhysicalDeviceRayTracingPropertiesKHRBuilder {
+impl ops::DerefMut for PhysicalDeviceRayTracingPipelinePropertiesKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for PhysicalDeviceRayTracingPropertiesKHRBuilder {
-    type Target = PhysicalDeviceRayTracingPropertiesKHR;
+unsafe impl Cast for PhysicalDeviceRayTracingPipelinePropertiesKHRBuilder {
+    type Target = PhysicalDeviceRayTracingPipelinePropertiesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -38058,7 +38096,6 @@ unsafe impl<'b> Cast for QueueFamilyProperties2Builder<'b> {
 
 /// A Vulkan struct that can be used to extend a [RayTracingPipelineCreateInfoKHR](struct.RayTracingPipelineCreateInfoKHR.html).
 pub unsafe trait ExtendsRayTracingPipelineCreateInfoKHR {}
-unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for DeferredOperationInfoKHR {}
 unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineCreationFeedbackCreateInfoEXT {}
 
 unsafe impl Cast for RayTracingPipelineCreateInfoKHR {
@@ -38121,17 +38158,20 @@ impl<'b> RayTracingPipelineCreateInfoKHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn max_recursion_depth(mut self, max_recursion_depth: u32) -> Self {
-        self.value.max_recursion_depth = max_recursion_depth;
+    pub fn max_pipeline_ray_recursion_depth(
+        mut self,
+        max_pipeline_ray_recursion_depth: u32,
+    ) -> Self {
+        self.value.max_pipeline_ray_recursion_depth = max_pipeline_ray_recursion_depth;
         self
     }
 
     #[inline]
-    pub fn libraries(
+    pub fn library_info(
         mut self,
-        libraries: impl Cast<Target = PipelineLibraryCreateInfoKHR>,
+        library_info: &'b impl Cast<Target = PipelineLibraryCreateInfoKHR>,
     ) -> Self {
-        self.value.libraries = libraries.into();
+        self.value.library_info = library_info.as_ref();
         self
     }
 
@@ -38141,6 +38181,15 @@ impl<'b> RayTracingPipelineCreateInfoKHRBuilder<'b> {
         library_interface: &'b impl Cast<Target = RayTracingPipelineInterfaceCreateInfoKHR>,
     ) -> Self {
         self.value.library_interface = library_interface.as_ref();
+        self
+    }
+
+    #[inline]
+    pub fn dynamic_state(
+        mut self,
+        dynamic_state: &'b impl Cast<Target = PipelineDynamicStateCreateInfo>,
+    ) -> Self {
+        self.value.dynamic_state = dynamic_state.as_ref();
         self
     }
 
@@ -38333,20 +38382,17 @@ pub struct RayTracingPipelineInterfaceCreateInfoKHRBuilder {
 
 impl RayTracingPipelineInterfaceCreateInfoKHRBuilder {
     #[inline]
-    pub fn max_payload_size(mut self, max_payload_size: u32) -> Self {
-        self.value.max_payload_size = max_payload_size;
+    pub fn max_pipeline_ray_payload_size(mut self, max_pipeline_ray_payload_size: u32) -> Self {
+        self.value.max_pipeline_ray_payload_size = max_pipeline_ray_payload_size;
         self
     }
 
     #[inline]
-    pub fn max_attribute_size(mut self, max_attribute_size: u32) -> Self {
-        self.value.max_attribute_size = max_attribute_size;
-        self
-    }
-
-    #[inline]
-    pub fn max_callable_size(mut self, max_callable_size: u32) -> Self {
-        self.value.max_callable_size = max_callable_size;
+    pub fn max_pipeline_ray_hit_attribute_size(
+        mut self,
+        max_pipeline_ray_hit_attribute_size: u32,
+    ) -> Self {
+        self.value.max_pipeline_ray_hit_attribute_size = max_pipeline_ray_hit_attribute_size;
         self
     }
 
@@ -42052,8 +42098,8 @@ unsafe impl Cast for StreamDescriptorSurfaceCreateInfoGGPBuilder {
     }
 }
 
-unsafe impl Cast for StridedBufferRegionKHR {
-    type Target = StridedBufferRegionKHR;
+unsafe impl Cast for StridedDeviceAddressRegionKHR {
+    type Target = StridedDeviceAddressRegionKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -42061,27 +42107,21 @@ unsafe impl Cast for StridedBufferRegionKHR {
     }
 }
 
-impl HasBuilder<'static> for StridedBufferRegionKHR {
-    type Builder = StridedBufferRegionKHRBuilder;
+impl HasBuilder<'static> for StridedDeviceAddressRegionKHR {
+    type Builder = StridedDeviceAddressRegionKHRBuilder;
 }
 
-/// A builder for a [StridedBufferRegionKHR](struct.StridedBufferRegionKHR.html).
+/// A builder for a [StridedDeviceAddressRegionKHR](struct.StridedDeviceAddressRegionKHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct StridedBufferRegionKHRBuilder {
-    value: StridedBufferRegionKHR,
+pub struct StridedDeviceAddressRegionKHRBuilder {
+    value: StridedDeviceAddressRegionKHR,
 }
 
-impl StridedBufferRegionKHRBuilder {
+impl StridedDeviceAddressRegionKHRBuilder {
     #[inline]
-    pub fn buffer(mut self, buffer: Buffer) -> Self {
-        self.value.buffer = buffer;
-        self
-    }
-
-    #[inline]
-    pub fn offset(mut self, offset: DeviceSize) -> Self {
-        self.value.offset = offset;
+    pub fn device_address(mut self, device_address: DeviceAddress) -> Self {
+        self.value.device_address = device_address;
         self
     }
 
@@ -42098,13 +42138,13 @@ impl StridedBufferRegionKHRBuilder {
     }
 
     #[inline]
-    pub fn build(self) -> StridedBufferRegionKHR {
+    pub fn build(self) -> StridedDeviceAddressRegionKHR {
         self.value
     }
 }
 
-impl ops::Deref for StridedBufferRegionKHRBuilder {
-    type Target = StridedBufferRegionKHR;
+impl ops::Deref for StridedDeviceAddressRegionKHRBuilder {
+    type Target = StridedDeviceAddressRegionKHR;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -42112,15 +42152,15 @@ impl ops::Deref for StridedBufferRegionKHRBuilder {
     }
 }
 
-impl ops::DerefMut for StridedBufferRegionKHRBuilder {
+impl ops::DerefMut for StridedDeviceAddressRegionKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for StridedBufferRegionKHRBuilder {
-    type Target = StridedBufferRegionKHR;
+unsafe impl Cast for StridedDeviceAddressRegionKHRBuilder {
+    type Target = StridedDeviceAddressRegionKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -45322,6 +45362,7 @@ unsafe impl Cast for Win32SurfaceCreateInfoKHRBuilder {
 /// A Vulkan struct that can be used to extend a [WriteDescriptorSet](struct.WriteDescriptorSet.html).
 pub unsafe trait ExtendsWriteDescriptorSet {}
 unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetAccelerationStructureKHR {}
+unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetAccelerationStructureNV {}
 unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetInlineUniformBlockEXT {}
 
 unsafe impl Cast for WriteDescriptorSet {
@@ -45492,6 +45533,69 @@ impl<'b> ops::DerefMut for WriteDescriptorSetAccelerationStructureKHRBuilder<'b>
 
 unsafe impl<'b> Cast for WriteDescriptorSetAccelerationStructureKHRBuilder<'b> {
     type Target = WriteDescriptorSetAccelerationStructureKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for WriteDescriptorSetAccelerationStructureNV {
+    type Target = WriteDescriptorSetAccelerationStructureNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for WriteDescriptorSetAccelerationStructureNV {
+    type Builder = WriteDescriptorSetAccelerationStructureNVBuilder<'b>;
+}
+
+/// A builder for a [WriteDescriptorSetAccelerationStructureNV](struct.WriteDescriptorSetAccelerationStructureNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct WriteDescriptorSetAccelerationStructureNVBuilder<'b> {
+    value: WriteDescriptorSetAccelerationStructureNV,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> WriteDescriptorSetAccelerationStructureNVBuilder<'b> {
+    #[inline]
+    pub fn acceleration_structures(
+        mut self,
+        acceleration_structures: &'b [AccelerationStructureNV],
+    ) -> Self {
+        self.value.acceleration_structure_count = acceleration_structures.len() as u32;
+        self.value.acceleration_structures = acceleration_structures.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> WriteDescriptorSetAccelerationStructureNV {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for WriteDescriptorSetAccelerationStructureNVBuilder<'b> {
+    type Target = WriteDescriptorSetAccelerationStructureNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for WriteDescriptorSetAccelerationStructureNVBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for WriteDescriptorSetAccelerationStructureNVBuilder<'b> {
+    type Target = WriteDescriptorSetAccelerationStructureNV;
 
     #[inline]
     fn into(self) -> Self::Target {

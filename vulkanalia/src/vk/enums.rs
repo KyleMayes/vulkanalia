@@ -105,7 +105,6 @@ impl ErrorCode {
     pub const INCOMPATIBLE_DISPLAY_KHR: Self = Self(-1000003001);
     pub const VALIDATION_FAILED_EXT: Self = Self(-1000011001);
     pub const INVALID_SHADER_NV: Self = Self(-1000012000);
-    pub const INCOMPATIBLE_VERSION_KHR: Self = Self(-1000150000);
     pub const INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT: Self = Self(-1000158000);
     pub const NOT_PERMITTED_EXT: Self = Self(-1000174001);
     pub const FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT: Self = Self(-1000255000);
@@ -149,7 +148,6 @@ impl fmt::Debug for ErrorCode {
             -1000003001 => write!(f, "INCOMPATIBLE_DISPLAY_KHR"),
             -1000011001 => write!(f, "VALIDATION_FAILED_EXT"),
             -1000012000 => write!(f, "INVALID_SHADER_NV"),
-            -1000150000 => write!(f, "INCOMPATIBLE_VERSION_KHR"),
             -1000158000 => write!(f, "INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
             -1000174001 => write!(f, "NOT_PERMITTED_EXT"),
             -1000255000 => write!(f, "FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT"),
@@ -184,7 +182,6 @@ impl fmt::Display for ErrorCode {
             -1000003001 => write!(f, "The display used by a swapchain does not use the same presentable image layout, or is incompatible in a way that prevents sharing an image."),
             -1000011001 => write!(f, "VALIDATION_FAILED_EXT"),
             -1000012000 => write!(f, "One or more shaders failed to compile or link. More details are reported back to the application via VK_EXT_debug_report if enabled."),
-            -1000150000 => write!(f, "INCOMPATIBLE_VERSION_KHR"),
             -1000158000 => write!(f, "INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
             -1000174001 => write!(f, "NOT_PERMITTED_EXT"),
             -1000255000 => write!(f, "An operation on a swapchain created with VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT failed as it did not have exclusive full-screen access. This may occur due to implementation-dependent reasons, outside of the application's control."),

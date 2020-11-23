@@ -31,11 +31,11 @@ pub struct AccelerationStructureBuildGeometryInfoKHR {
     pub next: *const c_void,
     pub type_: AccelerationStructureTypeKHR,
     pub flags: BuildAccelerationStructureFlagsKHR,
-    pub update: Bool32,
+    pub mode: BuildAccelerationStructureModeKHR,
     pub src_acceleration_structure: AccelerationStructureKHR,
     pub dst_acceleration_structure: AccelerationStructureKHR,
-    pub geometry_array_of_pointers: Bool32,
     pub geometry_count: u32,
+    pub geometries: *const AccelerationStructureGeometryKHR,
     pub geometries: *const *const AccelerationStructureGeometryKHR,
     pub scratch_data: DeviceOrHostAddressKHR,
 }
@@ -48,53 +48,47 @@ impl Default for AccelerationStructureBuildGeometryInfoKHR {
             next: ptr::null(),
             type_: AccelerationStructureTypeKHR::default(),
             flags: BuildAccelerationStructureFlagsKHR::default(),
-            update: Bool32::default(),
+            mode: BuildAccelerationStructureModeKHR::default(),
             src_acceleration_structure: AccelerationStructureKHR::default(),
             dst_acceleration_structure: AccelerationStructureKHR::default(),
-            geometry_array_of_pointers: Bool32::default(),
             geometry_count: u32::default(),
+            geometries: ptr::null(),
             geometries: ptr::null(),
             scratch_data: DeviceOrHostAddressKHR::default(),
         }
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureBuildOffsetInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureBuildRangeInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
-pub struct AccelerationStructureBuildOffsetInfoKHR {
+pub struct AccelerationStructureBuildRangeInfoKHR {
     pub primitive_count: u32,
     pub primitive_offset: u32,
     pub first_vertex: u32,
     pub transform_offset: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureCreateGeometryTypeInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureBuildSizesInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct AccelerationStructureCreateGeometryTypeInfoKHR {
+pub struct AccelerationStructureBuildSizesInfoKHR {
     pub s_type: StructureType,
     pub next: *const c_void,
-    pub geometry_type: GeometryTypeKHR,
-    pub max_primitive_count: u32,
-    pub index_type: IndexType,
-    pub max_vertex_count: u32,
-    pub vertex_format: Format,
-    pub allows_transforms: Bool32,
+    pub acceleration_structure_size: DeviceSize,
+    pub update_scratch_size: DeviceSize,
+    pub build_scratch_size: DeviceSize,
 }
 
-impl Default for AccelerationStructureCreateGeometryTypeInfoKHR {
+impl Default for AccelerationStructureBuildSizesInfoKHR {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::ACCELERATION_STRUCTURE_CREATE_GEOMETRY_TYPE_INFO_KHR,
+            s_type: StructureType::ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR,
             next: ptr::null(),
-            geometry_type: GeometryTypeKHR::default(),
-            max_primitive_count: u32::default(),
-            index_type: IndexType::default(),
-            max_vertex_count: u32::default(),
-            vertex_format: Format::default(),
-            allows_transforms: Bool32::default(),
+            acceleration_structure_size: DeviceSize::default(),
+            update_scratch_size: DeviceSize::default(),
+            build_scratch_size: DeviceSize::default(),
         }
     }
 }
@@ -105,11 +99,11 @@ impl Default for AccelerationStructureCreateGeometryTypeInfoKHR {
 pub struct AccelerationStructureCreateInfoKHR {
     pub s_type: StructureType,
     pub next: *const c_void,
-    pub compacted_size: DeviceSize,
+    pub create_flags: AccelerationStructureCreateFlagsKHR,
+    pub buffer: Buffer,
+    pub offset: DeviceSize,
+    pub size: DeviceSize,
     pub type_: AccelerationStructureTypeKHR,
-    pub flags: BuildAccelerationStructureFlagsKHR,
-    pub max_geometry_count: u32,
-    pub geometry_infos: *const AccelerationStructureCreateGeometryTypeInfoKHR,
     pub device_address: DeviceAddress,
 }
 
@@ -119,11 +113,11 @@ impl Default for AccelerationStructureCreateInfoKHR {
         Self {
             s_type: StructureType::ACCELERATION_STRUCTURE_CREATE_INFO_KHR,
             next: ptr::null(),
-            compacted_size: DeviceSize::default(),
+            create_flags: AccelerationStructureCreateFlagsKHR::default(),
+            buffer: Buffer::default(),
+            offset: DeviceSize::default(),
+            size: DeviceSize::default(),
             type_: AccelerationStructureTypeKHR::default(),
-            flags: BuildAccelerationStructureFlagsKHR::default(),
-            max_geometry_count: u32::default(),
-            geometry_infos: ptr::null(),
             device_address: DeviceAddress::default(),
         }
     }
@@ -248,6 +242,7 @@ pub struct AccelerationStructureGeometryTrianglesDataKHR {
     pub vertex_format: Format,
     pub vertex_data: DeviceOrHostAddressConstKHR,
     pub vertex_stride: DeviceSize,
+    pub max_vertex: u32,
     pub index_type: IndexType,
     pub index_data: DeviceOrHostAddressConstKHR,
     pub transform_data: DeviceOrHostAddressConstKHR,
@@ -262,6 +257,7 @@ impl Default for AccelerationStructureGeometryTrianglesDataKHR {
             vertex_format: Format::default(),
             vertex_data: DeviceOrHostAddressConstKHR::default(),
             vertex_stride: DeviceSize::default(),
+            max_vertex: u32::default(),
             index_type: IndexType::default(),
             index_data: DeviceOrHostAddressConstKHR::default(),
             transform_data: DeviceOrHostAddressConstKHR::default(),
@@ -309,30 +305,6 @@ pub struct AccelerationStructureInstanceKHR {
     pub acceleration_structure_reference: u64,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMemoryRequirementsInfoKHR.html>
-#[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct AccelerationStructureMemoryRequirementsInfoKHR {
-    pub s_type: StructureType,
-    pub next: *const c_void,
-    pub type_: AccelerationStructureMemoryRequirementsTypeKHR,
-    pub build_type: AccelerationStructureBuildTypeKHR,
-    pub acceleration_structure: AccelerationStructureKHR,
-}
-
-impl Default for AccelerationStructureMemoryRequirementsInfoKHR {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            s_type: StructureType::ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_KHR,
-            next: ptr::null(),
-            type_: AccelerationStructureMemoryRequirementsTypeKHR::default(),
-            build_type: AccelerationStructureBuildTypeKHR::default(),
-            acceleration_structure: AccelerationStructureKHR::default(),
-        }
-    }
-}
-
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMemoryRequirementsInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -355,20 +327,20 @@ impl Default for AccelerationStructureMemoryRequirementsInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureVersionKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureVersionInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct AccelerationStructureVersionKHR {
+pub struct AccelerationStructureVersionInfoKHR {
     pub s_type: StructureType,
     pub next: *const c_void,
     pub version_data: *const u8,
 }
 
-impl Default for AccelerationStructureVersionKHR {
+impl Default for AccelerationStructureVersionInfoKHR {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::ACCELERATION_STRUCTURE_VERSION_KHR,
+            s_type: StructureType::ACCELERATION_STRUCTURE_VERSION_INFO_KHR,
             next: ptr::null(),
             version_data: ptr::null(),
         }
@@ -765,26 +737,26 @@ impl Default for BaseOutStructure {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBindAccelerationStructureMemoryInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBindAccelerationStructureMemoryInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct BindAccelerationStructureMemoryInfoKHR {
+pub struct BindAccelerationStructureMemoryInfoNV {
     pub s_type: StructureType,
     pub next: *const c_void,
-    pub acceleration_structure: AccelerationStructureKHR,
+    pub acceleration_structure: AccelerationStructureNV,
     pub memory: DeviceMemory,
     pub memory_offset: DeviceSize,
     pub device_index_count: u32,
     pub device_indices: *const u32,
 }
 
-impl Default for BindAccelerationStructureMemoryInfoKHR {
+impl Default for BindAccelerationStructureMemoryInfoNV {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_KHR,
+            s_type: StructureType::BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV,
             next: ptr::null(),
-            acceleration_structure: AccelerationStructureKHR::default(),
+            acceleration_structure: AccelerationStructureNV::default(),
             memory: DeviceMemory::default(),
             memory_offset: DeviceSize::default(),
             device_index_count: u32::default(),
@@ -2203,26 +2175,6 @@ impl Default for DedicatedAllocationMemoryAllocateInfoNV {
             next: ptr::null(),
             image: Image::default(),
             buffer: Buffer::default(),
-        }
-    }
-}
-
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeferredOperationInfoKHR.html>
-#[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct DeferredOperationInfoKHR {
-    pub s_type: StructureType,
-    pub next: *const c_void,
-    pub operation_handle: DeferredOperationKHR,
-}
-
-impl Default for DeferredOperationInfoKHR {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            s_type: StructureType::DEFERRED_OPERATION_INFO_KHR,
-            next: ptr::null(),
-            operation_handle: DeferredOperationKHR::default(),
         }
     }
 }
@@ -6062,6 +6014,68 @@ impl Default for PhysicalDeviceASTCDecodeFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceAccelerationStructureFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceAccelerationStructureFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub acceleration_structure: Bool32,
+    pub acceleration_structure_capture_replay: Bool32,
+    pub acceleration_structure_indirect_build: Bool32,
+    pub acceleration_structure_host_commands: Bool32,
+    pub descriptor_binding_acceleration_structure_update_after_bind: Bool32,
+}
+
+impl Default for PhysicalDeviceAccelerationStructureFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR,
+            next: ptr::null_mut(),
+            acceleration_structure: Bool32::default(),
+            acceleration_structure_capture_replay: Bool32::default(),
+            acceleration_structure_indirect_build: Bool32::default(),
+            acceleration_structure_host_commands: Bool32::default(),
+            descriptor_binding_acceleration_structure_update_after_bind: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceAccelerationStructurePropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceAccelerationStructurePropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_geometry_count: u64,
+    pub max_instance_count: u64,
+    pub max_primitive_count: u64,
+    pub max_per_stage_descriptor_acceleration_structures: u32,
+    pub max_per_stage_descriptor_update_after_bind_acceleration_structures: u32,
+    pub max_descriptor_set_acceleration_structures: u32,
+    pub max_descriptor_set_update_after_bind_acceleration_structures: u32,
+    pub min_acceleration_structure_scratch_offset_alignment: u32,
+}
+
+impl Default for PhysicalDeviceAccelerationStructurePropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            max_geometry_count: u64::default(),
+            max_instance_count: u64::default(),
+            max_primitive_count: u64::default(),
+            max_per_stage_descriptor_acceleration_structures: u32::default(),
+            max_per_stage_descriptor_update_after_bind_acceleration_structures: u32::default(),
+            max_descriptor_set_acceleration_structures: u32::default(),
+            max_descriptor_set_update_after_bind_acceleration_structures: u32::default(),
+            min_acceleration_structure_scratch_offset_alignment: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8263,74 +8277,84 @@ impl Default for PhysicalDevicePushDescriptorPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceRayTracingFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceRayQueryFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceRayTracingFeaturesKHR {
+pub struct PhysicalDeviceRayQueryFeaturesKHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
-    pub ray_tracing: Bool32,
-    pub ray_tracing_shader_group_handle_capture_replay: Bool32,
-    pub ray_tracing_shader_group_handle_capture_replay_mixed: Bool32,
-    pub ray_tracing_acceleration_structure_capture_replay: Bool32,
-    pub ray_tracing_indirect_trace_rays: Bool32,
-    pub ray_tracing_indirect_acceleration_structure_build: Bool32,
-    pub ray_tracing_host_acceleration_structure_commands: Bool32,
     pub ray_query: Bool32,
-    pub ray_tracing_primitive_culling: Bool32,
 }
 
-impl Default for PhysicalDeviceRayTracingFeaturesKHR {
+impl Default for PhysicalDeviceRayQueryFeaturesKHR {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_FEATURES_KHR,
+            s_type: StructureType::PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR,
             next: ptr::null_mut(),
-            ray_tracing: Bool32::default(),
-            ray_tracing_shader_group_handle_capture_replay: Bool32::default(),
-            ray_tracing_shader_group_handle_capture_replay_mixed: Bool32::default(),
-            ray_tracing_acceleration_structure_capture_replay: Bool32::default(),
-            ray_tracing_indirect_trace_rays: Bool32::default(),
-            ray_tracing_indirect_acceleration_structure_build: Bool32::default(),
-            ray_tracing_host_acceleration_structure_commands: Bool32::default(),
             ray_query: Bool32::default(),
-            ray_tracing_primitive_culling: Bool32::default(),
         }
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceRayTracingPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceRayTracingPipelineFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceRayTracingPropertiesKHR {
+pub struct PhysicalDeviceRayTracingPipelineFeaturesKHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
-    pub shader_group_handle_size: u32,
-    pub max_recursion_depth: u32,
-    pub max_shader_group_stride: u32,
-    pub shader_group_base_alignment: u32,
-    pub max_geometry_count: u64,
-    pub max_instance_count: u64,
-    pub max_primitive_count: u64,
-    pub max_descriptor_set_acceleration_structures: u32,
-    pub shader_group_handle_capture_replay_size: u32,
+    pub ray_tracing_pipeline: Bool32,
+    pub ray_tracing_pipeline_shader_group_handle_capture_replay: Bool32,
+    pub ray_tracing_pipeline_shader_group_handle_capture_replay_mixed: Bool32,
+    pub ray_tracing_pipeline_trace_rays_indirect: Bool32,
+    pub ray_traversal_primitive_culling: Bool32,
 }
 
-impl Default for PhysicalDeviceRayTracingPropertiesKHR {
+impl Default for PhysicalDeviceRayTracingPipelineFeaturesKHR {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_KHR,
+            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR,
+            next: ptr::null_mut(),
+            ray_tracing_pipeline: Bool32::default(),
+            ray_tracing_pipeline_shader_group_handle_capture_replay: Bool32::default(),
+            ray_tracing_pipeline_shader_group_handle_capture_replay_mixed: Bool32::default(),
+            ray_tracing_pipeline_trace_rays_indirect: Bool32::default(),
+            ray_traversal_primitive_culling: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceRayTracingPipelinePropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceRayTracingPipelinePropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_group_handle_size: u32,
+    pub max_ray_recursion_depth: u32,
+    pub max_shader_group_stride: u32,
+    pub shader_group_base_alignment: u32,
+    pub shader_group_handle_capture_replay_size: u32,
+    pub max_ray_dispatch_invocation_count: u32,
+    pub shader_group_handle_alignment: u32,
+    pub max_ray_hit_attribute_size: u32,
+}
+
+impl Default for PhysicalDeviceRayTracingPipelinePropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR,
             next: ptr::null_mut(),
             shader_group_handle_size: u32::default(),
-            max_recursion_depth: u32::default(),
+            max_ray_recursion_depth: u32::default(),
             max_shader_group_stride: u32::default(),
             shader_group_base_alignment: u32::default(),
-            max_geometry_count: u64::default(),
-            max_instance_count: u64::default(),
-            max_primitive_count: u64::default(),
-            max_descriptor_set_acceleration_structures: u32::default(),
             shader_group_handle_capture_replay_size: u32::default(),
+            max_ray_dispatch_invocation_count: u32::default(),
+            shader_group_handle_alignment: u32::default(),
+            max_ray_hit_attribute_size: u32::default(),
         }
     }
 }
@@ -11092,9 +11116,10 @@ pub struct RayTracingPipelineCreateInfoKHR {
     pub stages: *const PipelineShaderStageCreateInfo,
     pub group_count: u32,
     pub groups: *const RayTracingShaderGroupCreateInfoKHR,
-    pub max_recursion_depth: u32,
-    pub libraries: PipelineLibraryCreateInfoKHR,
+    pub max_pipeline_ray_recursion_depth: u32,
+    pub library_info: *const PipelineLibraryCreateInfoKHR,
     pub library_interface: *const RayTracingPipelineInterfaceCreateInfoKHR,
+    pub dynamic_state: *const PipelineDynamicStateCreateInfo,
     pub layout: PipelineLayout,
     pub base_pipeline_handle: Pipeline,
     pub base_pipeline_index: i32,
@@ -11111,9 +11136,10 @@ impl Default for RayTracingPipelineCreateInfoKHR {
             stages: ptr::null(),
             group_count: u32::default(),
             groups: ptr::null(),
-            max_recursion_depth: u32::default(),
-            libraries: PipelineLibraryCreateInfoKHR::default(),
+            max_pipeline_ray_recursion_depth: u32::default(),
+            library_info: ptr::null(),
             library_interface: ptr::null(),
+            dynamic_state: ptr::null(),
             layout: PipelineLayout::default(),
             base_pipeline_handle: Pipeline::default(),
             base_pipeline_index: i32::default(),
@@ -11163,9 +11189,8 @@ impl Default for RayTracingPipelineCreateInfoNV {
 pub struct RayTracingPipelineInterfaceCreateInfoKHR {
     pub s_type: StructureType,
     pub next: *const c_void,
-    pub max_payload_size: u32,
-    pub max_attribute_size: u32,
-    pub max_callable_size: u32,
+    pub max_pipeline_ray_payload_size: u32,
+    pub max_pipeline_ray_hit_attribute_size: u32,
 }
 
 impl Default for RayTracingPipelineInterfaceCreateInfoKHR {
@@ -11174,9 +11199,8 @@ impl Default for RayTracingPipelineInterfaceCreateInfoKHR {
         Self {
             s_type: StructureType::RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR,
             next: ptr::null(),
-            max_payload_size: u32::default(),
-            max_attribute_size: u32::default(),
-            max_callable_size: u32::default(),
+            max_pipeline_ray_payload_size: u32::default(),
+            max_pipeline_ray_hit_attribute_size: u32::default(),
         }
     }
 }
@@ -12185,12 +12209,11 @@ impl Default for StreamDescriptorSurfaceCreateInfoGGP {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkStridedBufferRegionKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkStridedDeviceAddressRegionKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
-pub struct StridedBufferRegionKHR {
-    pub buffer: Buffer,
-    pub offset: DeviceSize,
+pub struct StridedDeviceAddressRegionKHR {
+    pub device_address: DeviceAddress,
     pub stride: DeviceSize,
     pub size: DeviceSize,
 }
@@ -13104,6 +13127,28 @@ impl Default for WriteDescriptorSetAccelerationStructureKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkWriteDescriptorSetAccelerationStructureNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct WriteDescriptorSetAccelerationStructureNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub acceleration_structure_count: u32,
+    pub acceleration_structures: *const AccelerationStructureNV,
+}
+
+impl Default for WriteDescriptorSetAccelerationStructureNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV,
+            next: ptr::null(),
+            acceleration_structure_count: u32::default(),
+            acceleration_structures: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkWriteDescriptorSetInlineUniformBlockEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13194,8 +13239,6 @@ pub type AttachmentDescriptionStencilLayoutKHR = AttachmentDescriptionStencilLay
 pub type AttachmentReference2KHR = AttachmentReference2;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentReferenceStencilLayoutKHR.html>
 pub type AttachmentReferenceStencilLayoutKHR = AttachmentReferenceStencilLayout;
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBindAccelerationStructureMemoryInfoNV.html>
-pub type BindAccelerationStructureMemoryInfoNV = BindAccelerationStructureMemoryInfoKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBindBufferMemoryDeviceGroupInfoKHR.html>
 pub type BindBufferMemoryDeviceGroupInfoKHR = BindBufferMemoryDeviceGroupInfo;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBindBufferMemoryInfoKHR.html>
@@ -13432,5 +13475,3 @@ pub type SubpassEndInfoKHR = SubpassEndInfo;
 pub type TimelineSemaphoreSubmitInfoKHR = TimelineSemaphoreSubmitInfo;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkTransformMatrixNV.html>
 pub type TransformMatrixNV = TransformMatrixKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkWriteDescriptorSetAccelerationStructureNV.html>
-pub type WriteDescriptorSetAccelerationStructureNV = WriteDescriptorSetAccelerationStructureKHR;
