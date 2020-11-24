@@ -10,6 +10,15 @@ use bitflags::bitflags;
 use crate::Flags;
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureCreateFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct AccelerationStructureCreateFlagsKHR: Flags {
+        const DEVICE_ADDRESS_CAPTURE_REPLAY = 1;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccessFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -91,6 +100,7 @@ bitflags! {
         const SPARSE_ALIASED = 1 << 2;
         const PROTECTED = 1 << 3;
         const DEVICE_ADDRESS_CAPTURE_REPLAY = 1 << 4;
+        const RESERVED_5_NV = 1 << 5;
     }
 }
 
@@ -109,7 +119,7 @@ bitflags! {
         const VERTEX_BUFFER = 1 << 7;
         const INDIRECT_BUFFER = 1 << 8;
         const CONDITIONAL_RENDERING_EXT = 1 << 9;
-        const RAY_TRACING_KHR = 1 << 10;
+        const SHADER_BINDING_TABLE_KHR = 1 << 10;
         const TRANSFORM_FEEDBACK_BUFFER_EXT = 1 << 11;
         const TRANSFORM_FEEDBACK_COUNTER_BUFFER_EXT = 1 << 12;
         const RESERVED_13_KHR = 1 << 13;
@@ -118,8 +128,8 @@ bitflags! {
         const RESERVED_16_KHR = 1 << 16;
         const SHADER_DEVICE_ADDRESS = 1 << 17;
         const RESERVED_18_QCOM = 1 << 18;
-        const RESERVED_19_KHR = 1 << 19;
-        const RESERVED_20_KHR = 1 << 20;
+        const ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_KHR = 1 << 19;
+        const ACCELERATION_STRUCTURE_STORAGE_KHR = 1 << 20;
     }
 }
 
@@ -325,6 +335,7 @@ bitflags! {
         const UPDATE_UNUSED_WHILE_PENDING = 1 << 1;
         const PARTIALLY_BOUND = 1 << 2;
         const VARIABLE_DESCRIPTOR_COUNT = 1 << 3;
+        const RESERVED_4_QCOM = 1 << 4;
     }
 }
 
@@ -737,6 +748,7 @@ bitflags! {
         const SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_EXT = 1 << 12;
         const CORNER_SAMPLED_NV = 1 << 13;
         const SUBSAMPLED_EXT = 1 << 14;
+        const RESERVED_15_NV = 1 << 15;
     }
 }
 
@@ -1010,7 +1022,7 @@ bitflags! {
         const RAY_TRACING_NO_NULL_MISS_SHADERS_KHR = 1 << 16;
         const RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_KHR = 1 << 17;
         const INDIRECT_BINDABLE_NV = 1 << 18;
-        const RESERVED_19_KHR = 1 << 19;
+        const RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_KHR = 1 << 19;
     }
 }
 

@@ -249,11 +249,10 @@ pub struct DeviceCommands {
     pub compile_deferred_nv: PFN_vkCompileDeferredNV,
     pub create_acceleration_structure_nv: PFN_vkCreateAccelerationStructureNV,
     pub destroy_acceleration_structure_khr: PFN_vkDestroyAccelerationStructureKHR,
-    pub get_acceleration_structure_memory_requirements_khr:
-        PFN_vkGetAccelerationStructureMemoryRequirementsKHR,
+    pub destroy_acceleration_structure_nv: PFN_vkDestroyAccelerationStructureNV,
     pub get_acceleration_structure_memory_requirements_nv:
         PFN_vkGetAccelerationStructureMemoryRequirementsNV,
-    pub bind_acceleration_structure_memory_khr: PFN_vkBindAccelerationStructureMemoryKHR,
+    pub bind_acceleration_structure_memory_nv: PFN_vkBindAccelerationStructureMemoryNV,
     pub cmd_copy_acceleration_structure_nv: PFN_vkCmdCopyAccelerationStructureNV,
     pub cmd_copy_acceleration_structure_khr: PFN_vkCmdCopyAccelerationStructureKHR,
     pub copy_acceleration_structure_khr: PFN_vkCopyAccelerationStructureKHR,
@@ -265,6 +264,8 @@ pub struct DeviceCommands {
     pub copy_memory_to_acceleration_structure_khr: PFN_vkCopyMemoryToAccelerationStructureKHR,
     pub cmd_write_acceleration_structures_properties_khr:
         PFN_vkCmdWriteAccelerationStructuresPropertiesKHR,
+    pub cmd_write_acceleration_structures_properties_nv:
+        PFN_vkCmdWriteAccelerationStructuresPropertiesNV,
     pub cmd_build_acceleration_structure_nv: PFN_vkCmdBuildAccelerationStructureNV,
     pub write_acceleration_structures_properties_khr:
         PFN_vkWriteAccelerationStructuresPropertiesKHR,
@@ -281,6 +282,8 @@ pub struct DeviceCommands {
     pub cmd_trace_rays_indirect_khr: PFN_vkCmdTraceRaysIndirectKHR,
     pub get_device_acceleration_structure_compatibility_khr:
         PFN_vkGetDeviceAccelerationStructureCompatibilityKHR,
+    pub get_ray_tracing_shader_group_stack_size_khr: PFN_vkGetRayTracingShaderGroupStackSizeKHR,
+    pub cmd_set_ray_tracing_pipeline_stack_size_khr: PFN_vkCmdSetRayTracingPipelineStackSizeKHR,
     pub get_image_view_handle_nvx: PFN_vkGetImageViewHandleNVX,
     pub get_image_view_address_nvx: PFN_vkGetImageViewAddressNVX,
     pub get_physical_device_surface_present_modes2_ext:
@@ -316,10 +319,10 @@ pub struct DeviceCommands {
     pub cmd_set_line_stipple_ext: PFN_vkCmdSetLineStippleEXT,
     pub get_physical_device_tool_properties_ext: PFN_vkGetPhysicalDeviceToolPropertiesEXT,
     pub create_acceleration_structure_khr: PFN_vkCreateAccelerationStructureKHR,
-    pub cmd_build_acceleration_structure_khr: PFN_vkCmdBuildAccelerationStructureKHR,
-    pub cmd_build_acceleration_structure_indirect_khr:
-        PFN_vkCmdBuildAccelerationStructureIndirectKHR,
-    pub build_acceleration_structure_khr: PFN_vkBuildAccelerationStructureKHR,
+    pub cmd_build_acceleration_structures_khr: PFN_vkCmdBuildAccelerationStructuresKHR,
+    pub cmd_build_acceleration_structures_indirect_khr:
+        PFN_vkCmdBuildAccelerationStructuresIndirectKHR,
+    pub build_acceleration_structures_khr: PFN_vkBuildAccelerationStructuresKHR,
     pub get_acceleration_structure_device_address_khr:
         PFN_vkGetAccelerationStructureDeviceAddressKHR,
     pub create_deferred_operation_khr: PFN_vkCreateDeferredOperationKHR,
@@ -353,6 +356,7 @@ pub struct DeviceCommands {
     pub get_physical_device_fragment_shading_rates_khr:
         PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR,
     pub cmd_set_fragment_shading_rate_enum_nv: PFN_vkCmdSetFragmentShadingRateEnumNV,
+    pub get_acceleration_structure_build_sizes_khr: PFN_vkGetAccelerationStructureBuildSizesKHR,
     pub reset_query_pool_ext: PFN_vkResetQueryPoolEXT,
     pub trim_command_pool_khr: PFN_vkTrimCommandPoolKHR,
     pub get_device_group_peer_memory_features_khr: PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR,
@@ -380,10 +384,6 @@ pub struct DeviceCommands {
     pub cmd_draw_indirect_count_amd: PFN_vkCmdDrawIndirectCountAMD,
     pub cmd_draw_indexed_indirect_count_khr: PFN_vkCmdDrawIndexedIndirectCountKHR,
     pub cmd_draw_indexed_indirect_count_amd: PFN_vkCmdDrawIndexedIndirectCountAMD,
-    pub destroy_acceleration_structure_nv: PFN_vkDestroyAccelerationStructureNV,
-    pub bind_acceleration_structure_memory_nv: PFN_vkBindAccelerationStructureMemoryNV,
-    pub cmd_write_acceleration_structures_properties_nv:
-        PFN_vkCmdWriteAccelerationStructuresPropertiesNV,
     pub get_ray_tracing_shader_group_handles_nv: PFN_vkGetRayTracingShaderGroupHandlesNV,
     pub get_buffer_opaque_capture_address_khr: PFN_vkGetBufferOpaqueCaptureAddressKHR,
     pub get_buffer_device_address_khr: PFN_vkGetBufferDeviceAddressKHR,
@@ -4003,21 +4003,17 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_acceleration_structure_memory_requirements_khr: unsafe {
-                let value = loader(
-                    b"vkGetAccelerationStructureMemoryRequirementsKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+            destroy_acceleration_structure_nv: unsafe {
+                let value = loader(b"vkDestroyAccelerationStructureNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
                     extern "system" fn fallback(
                         _device: Device,
-                        _info: *const AccelerationStructureMemoryRequirementsInfoKHR,
-                        _memory_requirements: *mut MemoryRequirements2,
+                        _acceleration_structure: AccelerationStructureNV,
+                        _allocator: *const AllocationCallbacks,
                     ) {
-                        panic!("could not load vkGetAccelerationStructureMemoryRequirementsKHR")
+                        panic!("could not load vkDestroyAccelerationStructureNV")
                     }
                     fallback
                 }
@@ -4041,17 +4037,17 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            bind_acceleration_structure_memory_khr: unsafe {
-                let value = loader(b"vkBindAccelerationStructureMemoryKHR\0".as_ptr().cast());
+            bind_acceleration_structure_memory_nv: unsafe {
+                let value = loader(b"vkBindAccelerationStructureMemoryNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
                     extern "system" fn fallback(
                         _device: Device,
                         _bind_info_count: u32,
-                        _bind_infos: *const BindAccelerationStructureMemoryInfoKHR,
+                        _bind_infos: *const BindAccelerationStructureMemoryInfoNV,
                     ) -> Result {
-                        panic!("could not load vkBindAccelerationStructureMemoryKHR")
+                        panic!("could not load vkBindAccelerationStructureMemoryNV")
                     }
                     fallback
                 }
@@ -4063,8 +4059,8 @@ impl DeviceCommands {
                 } else {
                     extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
-                        _dst: AccelerationStructureKHR,
-                        _src: AccelerationStructureKHR,
+                        _dst: AccelerationStructureNV,
+                        _src: AccelerationStructureNV,
                         _mode: CopyAccelerationStructureModeKHR,
                     ) {
                         panic!("could not load vkCmdCopyAccelerationStructureNV")
@@ -4093,6 +4089,7 @@ impl DeviceCommands {
                 } else {
                     extern "system" fn fallback(
                         _device: Device,
+                        _deferred_operation: DeferredOperationKHR,
                         _info: *const CopyAccelerationStructureInfoKHR,
                     ) -> Result {
                         panic!("could not load vkCopyAccelerationStructureKHR")
@@ -4125,6 +4122,7 @@ impl DeviceCommands {
                 } else {
                     extern "system" fn fallback(
                         _device: Device,
+                        _deferred_operation: DeferredOperationKHR,
                         _info: *const CopyAccelerationStructureToMemoryInfoKHR,
                     ) -> Result {
                         panic!("could not load vkCopyAccelerationStructureToMemoryKHR")
@@ -4157,6 +4155,7 @@ impl DeviceCommands {
                 } else {
                     extern "system" fn fallback(
                         _device: Device,
+                        _deferred_operation: DeferredOperationKHR,
                         _info: *const CopyMemoryToAccelerationStructureInfoKHR,
                     ) -> Result {
                         panic!("could not load vkCopyMemoryToAccelerationStructureKHR")
@@ -4186,6 +4185,28 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_write_acceleration_structures_properties_nv: unsafe {
+                let value = loader(
+                    b"vkCmdWriteAccelerationStructuresPropertiesNV\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _acceleration_structure_count: u32,
+                        _acceleration_structures: *const AccelerationStructureNV,
+                        _query_type: QueryType,
+                        _query_pool: QueryPool,
+                        _first_query: u32,
+                    ) {
+                        panic!("could not load vkCmdWriteAccelerationStructuresPropertiesNV")
+                    }
+                    fallback
+                }
+            },
             cmd_build_acceleration_structure_nv: unsafe {
                 let value = loader(b"vkCmdBuildAccelerationStructureNV\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -4197,8 +4218,8 @@ impl DeviceCommands {
                         _instance_data: Buffer,
                         _instance_offset: DeviceSize,
                         _update: Bool32,
-                        _dst: AccelerationStructureKHR,
-                        _src: AccelerationStructureKHR,
+                        _dst: AccelerationStructureNV,
+                        _src: AccelerationStructureNV,
                         _scratch: Buffer,
                         _scratch_offset: DeviceSize,
                     ) {
@@ -4237,10 +4258,10 @@ impl DeviceCommands {
                 } else {
                     extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
-                        _raygen_shader_binding_table: *const StridedBufferRegionKHR,
-                        _miss_shader_binding_table: *const StridedBufferRegionKHR,
-                        _hit_shader_binding_table: *const StridedBufferRegionKHR,
-                        _callable_shader_binding_table: *const StridedBufferRegionKHR,
+                        _raygen_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+                        _miss_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+                        _hit_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+                        _callable_shader_binding_table: *const StridedDeviceAddressRegionKHR,
                         _width: u32,
                         _height: u32,
                         _depth: u32,
@@ -4324,7 +4345,7 @@ impl DeviceCommands {
                 } else {
                     extern "system" fn fallback(
                         _device: Device,
-                        _acceleration_structure: AccelerationStructureKHR,
+                        _acceleration_structure: AccelerationStructureNV,
                         _data_size: usize,
                         _data: *mut c_void,
                     ) -> Result {
@@ -4358,6 +4379,7 @@ impl DeviceCommands {
                 } else {
                     extern "system" fn fallback(
                         _device: Device,
+                        _deferred_operation: DeferredOperationKHR,
                         _pipeline_cache: PipelineCache,
                         _create_info_count: u32,
                         _create_infos: *const RayTracingPipelineCreateInfoKHR,
@@ -4395,12 +4417,11 @@ impl DeviceCommands {
                 } else {
                     extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
-                        _raygen_shader_binding_table: *const StridedBufferRegionKHR,
-                        _miss_shader_binding_table: *const StridedBufferRegionKHR,
-                        _hit_shader_binding_table: *const StridedBufferRegionKHR,
-                        _callable_shader_binding_table: *const StridedBufferRegionKHR,
-                        _buffer: Buffer,
-                        _offset: DeviceSize,
+                        _raygen_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+                        _miss_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+                        _hit_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+                        _callable_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+                        _indirect_device_address: DeviceAddress,
                     ) {
                         panic!("could not load vkCmdTraceRaysIndirectKHR")
                     }
@@ -4418,9 +4439,40 @@ impl DeviceCommands {
                 } else {
                     extern "system" fn fallback(
                         _device: Device,
-                        _version: *const AccelerationStructureVersionKHR,
-                    ) -> Result {
+                        _version_info: *const AccelerationStructureVersionInfoKHR,
+                        _compatibility: *mut AccelerationStructureCompatibilityKHR,
+                    ) {
                         panic!("could not load vkGetDeviceAccelerationStructureCompatibilityKHR")
+                    }
+                    fallback
+                }
+            },
+            get_ray_tracing_shader_group_stack_size_khr: unsafe {
+                let value = loader(b"vkGetRayTracingShaderGroupStackSizeKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _device: Device,
+                        _pipeline: Pipeline,
+                        _group: u32,
+                        _group_shader: ShaderGroupShaderKHR,
+                    ) -> DeviceSize {
+                        panic!("could not load vkGetRayTracingShaderGroupStackSizeKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_ray_tracing_pipeline_stack_size_khr: unsafe {
+                let value = loader(b"vkCmdSetRayTracingPipelineStackSizeKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _pipeline_stack_size: u32,
+                    ) {
+                        panic!("could not load vkCmdSetRayTracingPipelineStackSizeKHR")
                     }
                     fallback
                 }
@@ -4885,8 +4937,8 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_build_acceleration_structure_khr: unsafe {
-                let value = loader(b"vkCmdBuildAccelerationStructureKHR\0".as_ptr().cast());
+            cmd_build_acceleration_structures_khr: unsafe {
+                let value = loader(b"vkCmdBuildAccelerationStructuresKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4894,16 +4946,16 @@ impl DeviceCommands {
                         _command_buffer: CommandBuffer,
                         _info_count: u32,
                         _infos: *const AccelerationStructureBuildGeometryInfoKHR,
-                        _offset_infos: *const *const AccelerationStructureBuildOffsetInfoKHR,
+                        _build_range_infos: *const *const AccelerationStructureBuildRangeInfoKHR,
                     ) {
-                        panic!("could not load vkCmdBuildAccelerationStructureKHR")
+                        panic!("could not load vkCmdBuildAccelerationStructuresKHR")
                     }
                     fallback
                 }
             },
-            cmd_build_acceleration_structure_indirect_khr: unsafe {
+            cmd_build_acceleration_structures_indirect_khr: unsafe {
                 let value = loader(
-                    b"vkCmdBuildAccelerationStructureIndirectKHR\0"
+                    b"vkCmdBuildAccelerationStructuresIndirectKHR\0"
                         .as_ptr()
                         .cast(),
                 );
@@ -4912,28 +4964,30 @@ impl DeviceCommands {
                 } else {
                     extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
-                        _info: *const AccelerationStructureBuildGeometryInfoKHR,
-                        _indirect_buffer: Buffer,
-                        _indirect_offset: DeviceSize,
-                        _indirect_stride: u32,
+                        _info_count: u32,
+                        _infos: *const AccelerationStructureBuildGeometryInfoKHR,
+                        _indirect_device_addresses: *const DeviceAddress,
+                        _indirect_strides: *const u32,
+                        _max_primitive_counts: *const *const u32,
                     ) {
-                        panic!("could not load vkCmdBuildAccelerationStructureIndirectKHR")
+                        panic!("could not load vkCmdBuildAccelerationStructuresIndirectKHR")
                     }
                     fallback
                 }
             },
-            build_acceleration_structure_khr: unsafe {
-                let value = loader(b"vkBuildAccelerationStructureKHR\0".as_ptr().cast());
+            build_acceleration_structures_khr: unsafe {
+                let value = loader(b"vkBuildAccelerationStructuresKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
                     extern "system" fn fallback(
                         _device: Device,
+                        _deferred_operation: DeferredOperationKHR,
                         _info_count: u32,
                         _infos: *const AccelerationStructureBuildGeometryInfoKHR,
-                        _offset_infos: *const *const AccelerationStructureBuildOffsetInfoKHR,
+                        _build_range_infos: *const *const AccelerationStructureBuildRangeInfoKHR,
                     ) -> Result {
-                        panic!("could not load vkBuildAccelerationStructureKHR")
+                        panic!("could not load vkBuildAccelerationStructuresKHR")
                     }
                     fallback
                 }
@@ -5405,6 +5459,23 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_acceleration_structure_build_sizes_khr: unsafe {
+                let value = loader(b"vkGetAccelerationStructureBuildSizesKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _device: Device,
+                        _build_type: AccelerationStructureBuildTypeKHR,
+                        _build_info: *const AccelerationStructureBuildGeometryInfoKHR,
+                        _max_primitive_counts: *const u32,
+                        _size_info: *mut AccelerationStructureBuildSizesInfoKHR,
+                    ) {
+                        panic!("could not load vkGetAccelerationStructureBuildSizesKHR")
+                    }
+                    fallback
+                }
+            },
             reset_query_pool_ext: unsafe {
                 let value = loader(b"vkResetQueryPoolEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -5828,58 +5899,6 @@ impl DeviceCommands {
                         _stride: u32,
                     ) {
                         panic!("could not load vkCmdDrawIndexedIndirectCountAMD")
-                    }
-                    fallback
-                }
-            },
-            destroy_acceleration_structure_nv: unsafe {
-                let value = loader(b"vkDestroyAccelerationStructureNV\0".as_ptr().cast());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    extern "system" fn fallback(
-                        _device: Device,
-                        _acceleration_structure: AccelerationStructureKHR,
-                        _allocator: *const AllocationCallbacks,
-                    ) {
-                        panic!("could not load vkDestroyAccelerationStructureNV")
-                    }
-                    fallback
-                }
-            },
-            bind_acceleration_structure_memory_nv: unsafe {
-                let value = loader(b"vkBindAccelerationStructureMemoryNV\0".as_ptr().cast());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    extern "system" fn fallback(
-                        _device: Device,
-                        _bind_info_count: u32,
-                        _bind_infos: *const BindAccelerationStructureMemoryInfoKHR,
-                    ) -> Result {
-                        panic!("could not load vkBindAccelerationStructureMemoryNV")
-                    }
-                    fallback
-                }
-            },
-            cmd_write_acceleration_structures_properties_nv: unsafe {
-                let value = loader(
-                    b"vkCmdWriteAccelerationStructuresPropertiesNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    extern "system" fn fallback(
-                        _command_buffer: CommandBuffer,
-                        _acceleration_structure_count: u32,
-                        _acceleration_structures: *const AccelerationStructureKHR,
-                        _query_type: QueryType,
-                        _query_pool: QueryPool,
-                        _first_query: u32,
-                    ) {
-                        panic!("could not load vkCmdWriteAccelerationStructuresPropertiesNV")
                     }
                     fallback
                 }

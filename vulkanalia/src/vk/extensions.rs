@@ -2286,6 +2286,308 @@ pub trait Khr8bitStorageExtension: DeviceV1_0 {}
 
 impl Khr8bitStorageExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_acceleration_structure.html>
+pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBuildAccelerationStructuresKHR.html>
+    #[inline]
+    fn build_acceleration_structures_khr(
+        &self,
+        deferred_operation: DeferredOperationKHR,
+        infos: &[impl Cast<Target = AccelerationStructureBuildGeometryInfoKHR>],
+        build_range_infos: &[&AccelerationStructureBuildRangeInfoKHR],
+    ) -> crate::VkResult<SuccessCode> {
+        let __result = (self.commands().build_acceleration_structures_khr)(
+            self.handle(),
+            deferred_operation,
+            infos.len() as u32,
+            infos.as_ptr().cast(),
+            build_range_infos.as_ptr().cast(),
+        );
+
+        if __result >= Result::SUCCESS {
+            Ok(__result.into())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructuresIndirectKHR.html>
+    #[inline]
+    fn cmd_build_acceleration_structures_indirect_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        infos: &[impl Cast<Target = AccelerationStructureBuildGeometryInfoKHR>],
+        indirect_device_addresses: &[DeviceAddress],
+        indirect_strides: &[u32],
+        max_primitive_counts: &[&u32],
+    ) {
+        let __result = (self
+            .commands()
+            .cmd_build_acceleration_structures_indirect_khr)(
+            command_buffer,
+            infos.len() as u32,
+            infos.as_ptr().cast(),
+            indirect_device_addresses.as_ptr(),
+            indirect_strides.as_ptr(),
+            max_primitive_counts.as_ptr().cast(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructuresKHR.html>
+    #[inline]
+    fn cmd_build_acceleration_structures_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        infos: &[impl Cast<Target = AccelerationStructureBuildGeometryInfoKHR>],
+        build_range_infos: &[&AccelerationStructureBuildRangeInfoKHR],
+    ) {
+        let __result = (self.commands().cmd_build_acceleration_structures_khr)(
+            command_buffer,
+            infos.len() as u32,
+            infos.as_ptr().cast(),
+            build_range_infos.as_ptr().cast(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyAccelerationStructureKHR.html>
+    #[inline]
+    fn cmd_copy_acceleration_structure_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        info: &CopyAccelerationStructureInfoKHR,
+    ) {
+        let __result = (self.commands().cmd_copy_acceleration_structure_khr)(command_buffer, info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyAccelerationStructureToMemoryKHR.html>
+    #[inline]
+    fn cmd_copy_acceleration_structure_to_memory_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        info: &CopyAccelerationStructureToMemoryInfoKHR,
+    ) {
+        let __result =
+            (self
+                .commands()
+                .cmd_copy_acceleration_structure_to_memory_khr)(command_buffer, info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyMemoryToAccelerationStructureKHR.html>
+    #[inline]
+    fn cmd_copy_memory_to_acceleration_structure_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        info: &CopyMemoryToAccelerationStructureInfoKHR,
+    ) {
+        let __result =
+            (self
+                .commands()
+                .cmd_copy_memory_to_acceleration_structure_khr)(command_buffer, info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteAccelerationStructuresPropertiesKHR.html>
+    #[inline]
+    fn cmd_write_acceleration_structures_properties_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        acceleration_structures: &[AccelerationStructureKHR],
+        query_type: QueryType,
+        query_pool: QueryPool,
+        first_query: u32,
+    ) {
+        let __result = (self
+            .commands()
+            .cmd_write_acceleration_structures_properties_khr)(
+            command_buffer,
+            acceleration_structures.len() as u32,
+            acceleration_structures.as_ptr(),
+            query_type,
+            query_pool,
+            first_query,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyAccelerationStructureKHR.html>
+    #[inline]
+    fn copy_acceleration_structure_khr(
+        &self,
+        deferred_operation: DeferredOperationKHR,
+        info: &CopyAccelerationStructureInfoKHR,
+    ) -> crate::VkResult<SuccessCode> {
+        let __result = (self.commands().copy_acceleration_structure_khr)(
+            self.handle(),
+            deferred_operation,
+            info,
+        );
+
+        if __result >= Result::SUCCESS {
+            Ok(__result.into())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyAccelerationStructureToMemoryKHR.html>
+    #[inline]
+    fn copy_acceleration_structure_to_memory_khr(
+        &self,
+        deferred_operation: DeferredOperationKHR,
+        info: &CopyAccelerationStructureToMemoryInfoKHR,
+    ) -> crate::VkResult<SuccessCode> {
+        let __result = (self.commands().copy_acceleration_structure_to_memory_khr)(
+            self.handle(),
+            deferred_operation,
+            info,
+        );
+
+        if __result >= Result::SUCCESS {
+            Ok(__result.into())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyMemoryToAccelerationStructureKHR.html>
+    #[inline]
+    fn copy_memory_to_acceleration_structure_khr(
+        &self,
+        deferred_operation: DeferredOperationKHR,
+        info: &CopyMemoryToAccelerationStructureInfoKHR,
+    ) -> crate::VkResult<SuccessCode> {
+        let __result = (self.commands().copy_memory_to_acceleration_structure_khr)(
+            self.handle(),
+            deferred_operation,
+            info,
+        );
+
+        if __result >= Result::SUCCESS {
+            Ok(__result.into())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateAccelerationStructureKHR.html>
+    #[inline]
+    fn create_acceleration_structure_khr(
+        &self,
+        create_info: &AccelerationStructureCreateInfoKHR,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<AccelerationStructureKHR> {
+        let mut acceleration_structure = MaybeUninit::<AccelerationStructureKHR>::uninit();
+
+        let __result = (self.commands().create_acceleration_structure_khr)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            acceleration_structure.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(unsafe { acceleration_structure.assume_init() })
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyAccelerationStructureKHR.html>
+    #[inline]
+    fn destroy_acceleration_structure_khr(
+        &self,
+        acceleration_structure: AccelerationStructureKHR,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_acceleration_structure_khr)(
+            self.handle(),
+            acceleration_structure,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureBuildSizesKHR.html>
+    #[inline]
+    fn get_acceleration_structure_build_sizes_khr(
+        &self,
+        build_type: AccelerationStructureBuildTypeKHR,
+        build_info: &AccelerationStructureBuildGeometryInfoKHR,
+    ) -> (Vec<u32>, AccelerationStructureBuildSizesInfoKHR) {
+        let mut max_primitive_counts =
+            Vec::with_capacity(build_info.as_ref().geometry_count as usize);
+        let mut size_info = MaybeUninit::<AccelerationStructureBuildSizesInfoKHR>::uninit();
+
+        let __result = (self.commands().get_acceleration_structure_build_sizes_khr)(
+            self.handle(),
+            build_type,
+            build_info,
+            max_primitive_counts.as_mut_ptr(),
+            size_info.as_mut_ptr(),
+        );
+
+        unsafe { max_primitive_counts.set_len(build_info.as_ref().geometry_count as usize) };
+
+        (max_primitive_counts, unsafe { size_info.assume_init() })
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureDeviceAddressKHR.html>
+    #[inline]
+    fn get_acceleration_structure_device_address_khr(
+        &self,
+        info: &AccelerationStructureDeviceAddressInfoKHR,
+    ) {
+        let __result =
+            (self
+                .commands()
+                .get_acceleration_structure_device_address_khr)(self.handle(), info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceAccelerationStructureCompatibilityKHR.html>
+    #[inline]
+    fn get_device_acceleration_structure_compatibility_khr(
+        &self,
+        version_info: &AccelerationStructureVersionInfoKHR,
+    ) -> AccelerationStructureCompatibilityKHR {
+        let mut compatibility = MaybeUninit::<AccelerationStructureCompatibilityKHR>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_device_acceleration_structure_compatibility_khr)(
+            self.handle(),
+            version_info,
+            compatibility.as_mut_ptr(),
+        );
+
+        unsafe { compatibility.assume_init() }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWriteAccelerationStructuresPropertiesKHR.html>
+    #[inline]
+    fn write_acceleration_structures_properties_khr(
+        &self,
+        acceleration_structures: &[AccelerationStructureKHR],
+        query_type: QueryType,
+        data: &mut [u8],
+        stride: usize,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().write_acceleration_structures_properties_khr)(
+            self.handle(),
+            acceleration_structures.len() as u32,
+            acceleration_structures.as_ptr(),
+            query_type,
+            data.len() as usize,
+            data.as_ptr() as *mut c_void,
+            stride,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl KhrAccelerationStructureExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_android_surface.html>
 pub trait KhrAndroidSurfaceExtension: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateAndroidSurfaceKHR.html>
@@ -4326,119 +4628,24 @@ pub trait KhrPushDescriptorExtension: DeviceV1_0 {
 
 impl KhrPushDescriptorExtension for crate::Device {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_ray_tracing.html>
-pub trait KhrRayTracingExtension: DeviceV1_0 {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindAccelerationStructureMemoryKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_ray_query.html>
+pub trait KhrRayQueryExtension: DeviceV1_0 {}
+
+impl KhrRayQueryExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_ray_tracing_pipeline.html>
+pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetRayTracingPipelineStackSizeKHR.html>
     #[inline]
-    fn bind_acceleration_structure_memory_khr(
-        &self,
-        bind_infos: &[impl Cast<Target = BindAccelerationStructureMemoryInfoKHR>],
-    ) -> crate::VkResult<()> {
-        let __result = (self.commands().bind_acceleration_structure_memory_khr)(
-            self.handle(),
-            bind_infos.len() as u32,
-            bind_infos.as_ptr().cast(),
-        );
-
-        if __result == Result::SUCCESS {
-            Ok(())
-        } else {
-            Err(__result.into())
-        }
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBuildAccelerationStructureKHR.html>
-    #[inline]
-    fn build_acceleration_structure_khr(
-        &self,
-        infos: &[impl Cast<Target = AccelerationStructureBuildGeometryInfoKHR>],
-        offset_infos: &[&AccelerationStructureBuildOffsetInfoKHR],
-    ) -> crate::VkResult<SuccessCode> {
-        let __result = (self.commands().build_acceleration_structure_khr)(
-            self.handle(),
-            infos.len() as u32,
-            infos.as_ptr().cast(),
-            offset_infos.as_ptr().cast(),
-        );
-
-        if __result >= Result::SUCCESS {
-            Ok(__result.into())
-        } else {
-            Err(__result.into())
-        }
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructureIndirectKHR.html>
-    #[inline]
-    fn cmd_build_acceleration_structure_indirect_khr(
+    fn cmd_set_ray_tracing_pipeline_stack_size_khr(
         &self,
         command_buffer: CommandBuffer,
-        info: &AccelerationStructureBuildGeometryInfoKHR,
-        indirect_buffer: Buffer,
-        indirect_offset: DeviceSize,
-        indirect_stride: u32,
+        pipeline_stack_size: u32,
     ) {
-        let __result = (self
-            .commands()
-            .cmd_build_acceleration_structure_indirect_khr)(
+        let __result = (self.commands().cmd_set_ray_tracing_pipeline_stack_size_khr)(
             command_buffer,
-            info,
-            indirect_buffer,
-            indirect_offset,
-            indirect_stride,
+            pipeline_stack_size,
         );
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructureKHR.html>
-    #[inline]
-    fn cmd_build_acceleration_structure_khr(
-        &self,
-        command_buffer: CommandBuffer,
-        infos: &[impl Cast<Target = AccelerationStructureBuildGeometryInfoKHR>],
-        offset_infos: &[&AccelerationStructureBuildOffsetInfoKHR],
-    ) {
-        let __result = (self.commands().cmd_build_acceleration_structure_khr)(
-            command_buffer,
-            infos.len() as u32,
-            infos.as_ptr().cast(),
-            offset_infos.as_ptr().cast(),
-        );
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyAccelerationStructureKHR.html>
-    #[inline]
-    fn cmd_copy_acceleration_structure_khr(
-        &self,
-        command_buffer: CommandBuffer,
-        info: &CopyAccelerationStructureInfoKHR,
-    ) {
-        let __result = (self.commands().cmd_copy_acceleration_structure_khr)(command_buffer, info);
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyAccelerationStructureToMemoryKHR.html>
-    #[inline]
-    fn cmd_copy_acceleration_structure_to_memory_khr(
-        &self,
-        command_buffer: CommandBuffer,
-        info: &CopyAccelerationStructureToMemoryInfoKHR,
-    ) {
-        let __result =
-            (self
-                .commands()
-                .cmd_copy_acceleration_structure_to_memory_khr)(command_buffer, info);
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyMemoryToAccelerationStructureKHR.html>
-    #[inline]
-    fn cmd_copy_memory_to_acceleration_structure_khr(
-        &self,
-        command_buffer: CommandBuffer,
-        info: &CopyMemoryToAccelerationStructureInfoKHR,
-    ) {
-        let __result =
-            (self
-                .commands()
-                .cmd_copy_memory_to_acceleration_structure_khr)(command_buffer, info);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdTraceRaysIndirectKHR.html>
@@ -4446,12 +4653,11 @@ pub trait KhrRayTracingExtension: DeviceV1_0 {
     fn cmd_trace_rays_indirect_khr(
         &self,
         command_buffer: CommandBuffer,
-        raygen_shader_binding_table: &StridedBufferRegionKHR,
-        miss_shader_binding_table: &StridedBufferRegionKHR,
-        hit_shader_binding_table: &StridedBufferRegionKHR,
-        callable_shader_binding_table: &StridedBufferRegionKHR,
-        buffer: Buffer,
-        offset: DeviceSize,
+        raygen_shader_binding_table: &StridedDeviceAddressRegionKHR,
+        miss_shader_binding_table: &StridedDeviceAddressRegionKHR,
+        hit_shader_binding_table: &StridedDeviceAddressRegionKHR,
+        callable_shader_binding_table: &StridedDeviceAddressRegionKHR,
+        indirect_device_address: DeviceAddress,
     ) {
         let __result = (self.commands().cmd_trace_rays_indirect_khr)(
             command_buffer,
@@ -4459,8 +4665,7 @@ pub trait KhrRayTracingExtension: DeviceV1_0 {
             miss_shader_binding_table,
             hit_shader_binding_table,
             callable_shader_binding_table,
-            buffer,
-            offset,
+            indirect_device_address,
         );
     }
 
@@ -4469,10 +4674,10 @@ pub trait KhrRayTracingExtension: DeviceV1_0 {
     fn cmd_trace_rays_khr(
         &self,
         command_buffer: CommandBuffer,
-        raygen_shader_binding_table: &StridedBufferRegionKHR,
-        miss_shader_binding_table: &StridedBufferRegionKHR,
-        hit_shader_binding_table: &StridedBufferRegionKHR,
-        callable_shader_binding_table: &StridedBufferRegionKHR,
+        raygen_shader_binding_table: &StridedDeviceAddressRegionKHR,
+        miss_shader_binding_table: &StridedDeviceAddressRegionKHR,
+        hit_shader_binding_table: &StridedDeviceAddressRegionKHR,
+        callable_shader_binding_table: &StridedDeviceAddressRegionKHR,
         width: u32,
         height: u32,
         depth: u32,
@@ -4489,102 +4694,11 @@ pub trait KhrRayTracingExtension: DeviceV1_0 {
         );
     }
 
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteAccelerationStructuresPropertiesKHR.html>
-    #[inline]
-    fn cmd_write_acceleration_structures_properties_khr(
-        &self,
-        command_buffer: CommandBuffer,
-        acceleration_structures: &[AccelerationStructureKHR],
-        query_type: QueryType,
-        query_pool: QueryPool,
-        first_query: u32,
-    ) {
-        let __result = (self
-            .commands()
-            .cmd_write_acceleration_structures_properties_khr)(
-            command_buffer,
-            acceleration_structures.len() as u32,
-            acceleration_structures.as_ptr(),
-            query_type,
-            query_pool,
-            first_query,
-        );
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyAccelerationStructureKHR.html>
-    #[inline]
-    fn copy_acceleration_structure_khr(
-        &self,
-        info: &CopyAccelerationStructureInfoKHR,
-    ) -> crate::VkResult<SuccessCode> {
-        let __result = (self.commands().copy_acceleration_structure_khr)(self.handle(), info);
-
-        if __result >= Result::SUCCESS {
-            Ok(__result.into())
-        } else {
-            Err(__result.into())
-        }
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyAccelerationStructureToMemoryKHR.html>
-    #[inline]
-    fn copy_acceleration_structure_to_memory_khr(
-        &self,
-        info: &CopyAccelerationStructureToMemoryInfoKHR,
-    ) -> crate::VkResult<SuccessCode> {
-        let __result =
-            (self.commands().copy_acceleration_structure_to_memory_khr)(self.handle(), info);
-
-        if __result >= Result::SUCCESS {
-            Ok(__result.into())
-        } else {
-            Err(__result.into())
-        }
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyMemoryToAccelerationStructureKHR.html>
-    #[inline]
-    fn copy_memory_to_acceleration_structure_khr(
-        &self,
-        info: &CopyMemoryToAccelerationStructureInfoKHR,
-    ) -> crate::VkResult<SuccessCode> {
-        let __result =
-            (self.commands().copy_memory_to_acceleration_structure_khr)(self.handle(), info);
-
-        if __result >= Result::SUCCESS {
-            Ok(__result.into())
-        } else {
-            Err(__result.into())
-        }
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateAccelerationStructureKHR.html>
-    #[inline]
-    fn create_acceleration_structure_khr(
-        &self,
-        create_info: &AccelerationStructureCreateInfoKHR,
-        allocator: Option<&AllocationCallbacks>,
-    ) -> crate::VkResult<AccelerationStructureKHR> {
-        let mut acceleration_structure = MaybeUninit::<AccelerationStructureKHR>::uninit();
-
-        let __result = (self.commands().create_acceleration_structure_khr)(
-            self.handle(),
-            create_info,
-            allocator.map_or(ptr::null(), |v| v),
-            acceleration_structure.as_mut_ptr(),
-        );
-
-        if __result == Result::SUCCESS {
-            Ok(unsafe { acceleration_structure.assume_init() })
-        } else {
-            Err(__result.into())
-        }
-    }
-
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateRayTracingPipelinesKHR.html>
     #[inline]
     fn create_ray_tracing_pipelines_khr(
         &self,
+        deferred_operation: DeferredOperationKHR,
         pipeline_cache: PipelineCache,
         create_infos: &[impl Cast<Target = RayTracingPipelineCreateInfoKHR>],
         allocator: Option<&AllocationCallbacks>,
@@ -4593,6 +4707,7 @@ pub trait KhrRayTracingExtension: DeviceV1_0 {
 
         let __result = (self.commands().create_ray_tracing_pipelines_khr)(
             self.handle(),
+            deferred_operation,
             pipeline_cache,
             create_infos.len() as u32,
             create_infos.as_ptr().cast(),
@@ -4602,70 +4717,6 @@ pub trait KhrRayTracingExtension: DeviceV1_0 {
 
         if __result >= Result::SUCCESS {
             Ok((unsafe { pipelines.assume_init() }, __result.into()))
-        } else {
-            Err(__result.into())
-        }
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyAccelerationStructureKHR.html>
-    #[inline]
-    fn destroy_acceleration_structure_khr(
-        &self,
-        acceleration_structure: AccelerationStructureKHR,
-        allocator: Option<&AllocationCallbacks>,
-    ) {
-        let __result = (self.commands().destroy_acceleration_structure_khr)(
-            self.handle(),
-            acceleration_structure,
-            allocator.map_or(ptr::null(), |v| v),
-        );
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureDeviceAddressKHR.html>
-    #[inline]
-    fn get_acceleration_structure_device_address_khr(
-        &self,
-        info: &AccelerationStructureDeviceAddressInfoKHR,
-    ) {
-        let __result =
-            (self
-                .commands()
-                .get_acceleration_structure_device_address_khr)(self.handle(), info);
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureMemoryRequirementsKHR.html>
-    #[inline]
-    fn get_acceleration_structure_memory_requirements_khr(
-        &self,
-        info: &AccelerationStructureMemoryRequirementsInfoKHR,
-    ) -> MemoryRequirements2 {
-        let mut memory_requirements = MaybeUninit::<MemoryRequirements2>::uninit();
-
-        let __result = (self
-            .commands()
-            .get_acceleration_structure_memory_requirements_khr)(
-            self.handle(),
-            info,
-            memory_requirements.as_mut_ptr(),
-        );
-
-        unsafe { memory_requirements.assume_init() }
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceAccelerationStructureCompatibilityKHR.html>
-    #[inline]
-    fn get_device_acceleration_structure_compatibility_khr(
-        &self,
-        version: &AccelerationStructureVersionKHR,
-    ) -> crate::VkResult<()> {
-        let __result = (self
-            .commands()
-            .get_device_acceleration_structure_compatibility_khr)(
-            self.handle(), version
-        );
-
-        if __result == Result::SUCCESS {
-            Ok(())
         } else {
             Err(__result.into())
         }
@@ -4723,34 +4774,24 @@ pub trait KhrRayTracingExtension: DeviceV1_0 {
         }
     }
 
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWriteAccelerationStructuresPropertiesKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRayTracingShaderGroupStackSizeKHR.html>
     #[inline]
-    fn write_acceleration_structures_properties_khr(
+    fn get_ray_tracing_shader_group_stack_size_khr(
         &self,
-        acceleration_structures: &[AccelerationStructureKHR],
-        query_type: QueryType,
-        data: &mut [u8],
-        stride: usize,
-    ) -> crate::VkResult<()> {
-        let __result = (self.commands().write_acceleration_structures_properties_khr)(
+        pipeline: Pipeline,
+        group: u32,
+        group_shader: ShaderGroupShaderKHR,
+    ) {
+        let __result = (self.commands().get_ray_tracing_shader_group_stack_size_khr)(
             self.handle(),
-            acceleration_structures.len() as u32,
-            acceleration_structures.as_ptr(),
-            query_type,
-            data.len() as usize,
-            data.as_ptr() as *mut c_void,
-            stride,
+            pipeline,
+            group,
+            group_shader,
         );
-
-        if __result == Result::SUCCESS {
-            Ok(())
-        } else {
-            Err(__result.into())
-        }
     }
 }
 
-impl KhrRayTracingExtension for crate::Device {}
+impl KhrRayTracingPipelineExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_relaxed_block_layout.html>
 pub trait KhrRelaxedBlockLayoutExtension: DeviceV1_0 {}
@@ -6089,7 +6130,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
     #[inline]
     fn bind_acceleration_structure_memory_nv(
         &self,
-        bind_infos: &[impl Cast<Target = BindAccelerationStructureMemoryInfoKHR>],
+        bind_infos: &[impl Cast<Target = BindAccelerationStructureMemoryInfoNV>],
     ) -> crate::VkResult<()> {
         let __result = (self.commands().bind_acceleration_structure_memory_nv)(
             self.handle(),
@@ -6113,8 +6154,8 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
         instance_data: Buffer,
         instance_offset: DeviceSize,
         update: bool,
-        dst: AccelerationStructureKHR,
-        src: AccelerationStructureKHR,
+        dst: AccelerationStructureNV,
+        src: AccelerationStructureNV,
         scratch: Buffer,
         scratch_offset: DeviceSize,
     ) {
@@ -6136,8 +6177,8 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
     fn cmd_copy_acceleration_structure_nv(
         &self,
         command_buffer: CommandBuffer,
-        dst: AccelerationStructureKHR,
-        src: AccelerationStructureKHR,
+        dst: AccelerationStructureNV,
+        src: AccelerationStructureNV,
         mode: CopyAccelerationStructureModeKHR,
     ) {
         let __result =
@@ -6188,7 +6229,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
     fn cmd_write_acceleration_structures_properties_nv(
         &self,
         command_buffer: CommandBuffer,
-        acceleration_structures: &[AccelerationStructureKHR],
+        acceleration_structures: &[AccelerationStructureNV],
         query_type: QueryType,
         query_pool: QueryPool,
         first_query: u32,
@@ -6270,7 +6311,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
     #[inline]
     fn destroy_acceleration_structure_nv(
         &self,
-        acceleration_structure: AccelerationStructureKHR,
+        acceleration_structure: AccelerationStructureNV,
         allocator: Option<&AllocationCallbacks>,
     ) {
         let __result = (self.commands().destroy_acceleration_structure_nv)(
@@ -6284,7 +6325,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
     #[inline]
     fn get_acceleration_structure_handle_nv(
         &self,
-        acceleration_structure: AccelerationStructureKHR,
+        acceleration_structure: AccelerationStructureNV,
         data: &mut [u8],
     ) -> crate::VkResult<()> {
         let __result = (self.commands().get_acceleration_structure_handle_nv)(

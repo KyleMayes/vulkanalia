@@ -75,6 +75,50 @@ impl fmt::Debug for AccelerationStructureKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct AccelerationStructureNV(u64);
+
+impl Handle for AccelerationStructureNV {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::ACCELERATION_STRUCTURE_NV;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for AccelerationStructureNV {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for AccelerationStructureNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "AccelerationStructureNV({:p})", self.0 as *const u8)
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBuffer.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
@@ -1751,8 +1795,6 @@ impl fmt::Debug for ValidationCacheEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureNV.html>
-pub type AccelerationStructureNV = AccelerationStructureKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDescriptorUpdateTemplateKHR.html>
 pub type DescriptorUpdateTemplateKHR = DescriptorUpdateTemplate;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerYcbcrConversionKHR.html>
