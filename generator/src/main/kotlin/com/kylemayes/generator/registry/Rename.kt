@@ -45,6 +45,26 @@ fun Registry.renameEntities() {
     for (struct in structs.values) {
         struct.rename(::renameType)
         struct.members.forEach { it.rename(::renameMemberOrParameter) }
+
+        // Some structs (e.g., `VkAccelerationStructureBuildGeometryInfoKHR`)
+        // have two fields that, after the pointer prefixes are stripped (`p` or
+        // `pp`), have the same name (e.g., `pGeometries` and `ppGeometries`).
+        //
+        // In this case we need to give one of them a different name, so the
+        // `pp` version will get a `pointer_` prefix.
+        val seen = mutableMapOf<String, Member>()
+        for (member in struct.members) {
+            if (seen[member.name.value] != null) {
+                println(member)
+                if (member.name.original.startsWith("pp")) {
+                    member.name.rename("pointer_${member.name}")
+                } else {
+                    seen[member.name.value]!!.name.rename("pointer_${member.name}")
+                }
+            } else {
+                seen[member.name.value] = member
+            }
+        }
     }
 
     for (union in unions.values) {
