@@ -87,15 +87,12 @@ pub type PFN_vkBeginCommandBuffer = extern "system" fn(
     _begin_info: *const CommandBufferBeginInfo,
 ) -> Result;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindAccelerationStructureMemoryKHR.html>
-pub type PFN_vkBindAccelerationStructureMemoryKHR = extern "system" fn(
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindAccelerationStructureMemoryNV.html>
+pub type PFN_vkBindAccelerationStructureMemoryNV = extern "system" fn(
     _device: Device,
     _bind_info_count: u32,
-    _bind_infos: *const BindAccelerationStructureMemoryInfoKHR,
+    _bind_infos: *const BindAccelerationStructureMemoryInfoNV,
 ) -> Result;
-
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindAccelerationStructureMemoryNV.html>
-pub type PFN_vkBindAccelerationStructureMemoryNV = PFN_vkBindAccelerationStructureMemoryKHR;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindBufferMemory.html>
 pub type PFN_vkBindBufferMemory = extern "system" fn(
@@ -133,12 +130,13 @@ pub type PFN_vkBindImageMemory2 = extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindImageMemory2KHR.html>
 pub type PFN_vkBindImageMemory2KHR = PFN_vkBindImageMemory2;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBuildAccelerationStructureKHR.html>
-pub type PFN_vkBuildAccelerationStructureKHR = extern "system" fn(
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBuildAccelerationStructuresKHR.html>
+pub type PFN_vkBuildAccelerationStructuresKHR = extern "system" fn(
     _device: Device,
+    _deferred_operation: DeferredOperationKHR,
     _info_count: u32,
     _infos: *const AccelerationStructureBuildGeometryInfoKHR,
-    _offset_infos: *const *const AccelerationStructureBuildOffsetInfoKHR,
+    _build_range_infos: *const *const AccelerationStructureBuildRangeInfoKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginConditionalRenderingEXT.html>
@@ -282,23 +280,6 @@ pub type PFN_vkCmdBlitImage = extern "system" fn(
 pub type PFN_vkCmdBlitImage2KHR =
     extern "system" fn(_command_buffer: CommandBuffer, _blit_image_info: *const BlitImageInfo2KHR);
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructureIndirectKHR.html>
-pub type PFN_vkCmdBuildAccelerationStructureIndirectKHR = extern "system" fn(
-    _command_buffer: CommandBuffer,
-    _info: *const AccelerationStructureBuildGeometryInfoKHR,
-    _indirect_buffer: Buffer,
-    _indirect_offset: DeviceSize,
-    _indirect_stride: u32,
-);
-
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructureKHR.html>
-pub type PFN_vkCmdBuildAccelerationStructureKHR = extern "system" fn(
-    _command_buffer: CommandBuffer,
-    _info_count: u32,
-    _infos: *const AccelerationStructureBuildGeometryInfoKHR,
-    _offset_infos: *const *const AccelerationStructureBuildOffsetInfoKHR,
-);
-
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructureNV.html>
 pub type PFN_vkCmdBuildAccelerationStructureNV = extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -306,10 +287,28 @@ pub type PFN_vkCmdBuildAccelerationStructureNV = extern "system" fn(
     _instance_data: Buffer,
     _instance_offset: DeviceSize,
     _update: Bool32,
-    _dst: AccelerationStructureKHR,
-    _src: AccelerationStructureKHR,
+    _dst: AccelerationStructureNV,
+    _src: AccelerationStructureNV,
     _scratch: Buffer,
     _scratch_offset: DeviceSize,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructuresIndirectKHR.html>
+pub type PFN_vkCmdBuildAccelerationStructuresIndirectKHR = extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _info_count: u32,
+    _infos: *const AccelerationStructureBuildGeometryInfoKHR,
+    _indirect_device_addresses: *const DeviceAddress,
+    _indirect_strides: *const u32,
+    _max_primitive_counts: *const *const u32,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructuresKHR.html>
+pub type PFN_vkCmdBuildAccelerationStructuresKHR = extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _info_count: u32,
+    _infos: *const AccelerationStructureBuildGeometryInfoKHR,
+    _build_range_infos: *const *const AccelerationStructureBuildRangeInfoKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdClearAttachments.html>
@@ -350,8 +349,8 @@ pub type PFN_vkCmdCopyAccelerationStructureKHR = extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyAccelerationStructureNV.html>
 pub type PFN_vkCmdCopyAccelerationStructureNV = extern "system" fn(
     _command_buffer: CommandBuffer,
-    _dst: AccelerationStructureKHR,
-    _src: AccelerationStructureKHR,
+    _dst: AccelerationStructureNV,
+    _src: AccelerationStructureNV,
     _mode: CopyAccelerationStructureModeKHR,
 );
 
@@ -879,6 +878,10 @@ pub type PFN_vkCmdSetPerformanceStreamMarkerINTEL = extern "system" fn(
 pub type PFN_vkCmdSetPrimitiveTopologyEXT =
     extern "system" fn(_command_buffer: CommandBuffer, _primitive_topology: PrimitiveTopology);
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetRayTracingPipelineStackSizeKHR.html>
+pub type PFN_vkCmdSetRayTracingPipelineStackSizeKHR =
+    extern "system" fn(_command_buffer: CommandBuffer, _pipeline_stack_size: u32);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetSampleLocationsEXT.html>
 pub type PFN_vkCmdSetSampleLocationsEXT = extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -969,21 +972,20 @@ pub type PFN_vkCmdSetViewportWithCountEXT = extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdTraceRaysIndirectKHR.html>
 pub type PFN_vkCmdTraceRaysIndirectKHR = extern "system" fn(
     _command_buffer: CommandBuffer,
-    _raygen_shader_binding_table: *const StridedBufferRegionKHR,
-    _miss_shader_binding_table: *const StridedBufferRegionKHR,
-    _hit_shader_binding_table: *const StridedBufferRegionKHR,
-    _callable_shader_binding_table: *const StridedBufferRegionKHR,
-    _buffer: Buffer,
-    _offset: DeviceSize,
+    _raygen_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+    _miss_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+    _hit_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+    _callable_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+    _indirect_device_address: DeviceAddress,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdTraceRaysKHR.html>
 pub type PFN_vkCmdTraceRaysKHR = extern "system" fn(
     _command_buffer: CommandBuffer,
-    _raygen_shader_binding_table: *const StridedBufferRegionKHR,
-    _miss_shader_binding_table: *const StridedBufferRegionKHR,
-    _hit_shader_binding_table: *const StridedBufferRegionKHR,
-    _callable_shader_binding_table: *const StridedBufferRegionKHR,
+    _raygen_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+    _miss_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+    _hit_shader_binding_table: *const StridedDeviceAddressRegionKHR,
+    _callable_shader_binding_table: *const StridedDeviceAddressRegionKHR,
     _width: u32,
     _height: u32,
     _depth: u32,
@@ -1043,8 +1045,14 @@ pub type PFN_vkCmdWriteAccelerationStructuresPropertiesKHR = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteAccelerationStructuresPropertiesNV.html>
-pub type PFN_vkCmdWriteAccelerationStructuresPropertiesNV =
-    PFN_vkCmdWriteAccelerationStructuresPropertiesKHR;
+pub type PFN_vkCmdWriteAccelerationStructuresPropertiesNV = extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _acceleration_structure_count: u32,
+    _acceleration_structures: *const AccelerationStructureNV,
+    _query_type: QueryType,
+    _query_pool: QueryPool,
+    _first_query: u32,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteBufferMarkerAMD.html>
 pub type PFN_vkCmdWriteBufferMarkerAMD = extern "system" fn(
@@ -1068,18 +1076,23 @@ pub type PFN_vkCompileDeferredNV =
     extern "system" fn(_device: Device, _pipeline: Pipeline, _shader: u32) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyAccelerationStructureKHR.html>
-pub type PFN_vkCopyAccelerationStructureKHR =
-    extern "system" fn(_device: Device, _info: *const CopyAccelerationStructureInfoKHR) -> Result;
+pub type PFN_vkCopyAccelerationStructureKHR = extern "system" fn(
+    _device: Device,
+    _deferred_operation: DeferredOperationKHR,
+    _info: *const CopyAccelerationStructureInfoKHR,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyAccelerationStructureToMemoryKHR.html>
 pub type PFN_vkCopyAccelerationStructureToMemoryKHR = extern "system" fn(
     _device: Device,
+    _deferred_operation: DeferredOperationKHR,
     _info: *const CopyAccelerationStructureToMemoryInfoKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyMemoryToAccelerationStructureKHR.html>
 pub type PFN_vkCopyMemoryToAccelerationStructureKHR = extern "system" fn(
     _device: Device,
+    _deferred_operation: DeferredOperationKHR,
     _info: *const CopyMemoryToAccelerationStructureInfoKHR,
 ) -> Result;
 
@@ -1364,6 +1377,7 @@ pub type PFN_vkCreateQueryPool = extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateRayTracingPipelinesKHR.html>
 pub type PFN_vkCreateRayTracingPipelinesKHR = extern "system" fn(
     _device: Device,
+    _deferred_operation: DeferredOperationKHR,
     _pipeline_cache: PipelineCache,
     _create_info_count: u32,
     _create_infos: *const RayTracingPipelineCreateInfoKHR,
@@ -1540,7 +1554,11 @@ pub type PFN_vkDestroyAccelerationStructureKHR = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyAccelerationStructureNV.html>
-pub type PFN_vkDestroyAccelerationStructureNV = PFN_vkDestroyAccelerationStructureKHR;
+pub type PFN_vkDestroyAccelerationStructureNV = extern "system" fn(
+    _device: Device,
+    _acceleration_structure: AccelerationStructureNV,
+    _allocator: *const AllocationCallbacks,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyBuffer.html>
 pub type PFN_vkDestroyBuffer =
@@ -1836,6 +1854,15 @@ pub type PFN_vkFreeMemory = extern "system" fn(
     _allocator: *const AllocationCallbacks,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureBuildSizesKHR.html>
+pub type PFN_vkGetAccelerationStructureBuildSizesKHR = extern "system" fn(
+    _device: Device,
+    _build_type: AccelerationStructureBuildTypeKHR,
+    _build_info: *const AccelerationStructureBuildGeometryInfoKHR,
+    _max_primitive_counts: *const u32,
+    _size_info: *mut AccelerationStructureBuildSizesInfoKHR,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureDeviceAddressKHR.html>
 pub type PFN_vkGetAccelerationStructureDeviceAddressKHR = extern "system" fn(
     _device: Device,
@@ -1845,17 +1872,10 @@ pub type PFN_vkGetAccelerationStructureDeviceAddressKHR = extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureHandleNV.html>
 pub type PFN_vkGetAccelerationStructureHandleNV = extern "system" fn(
     _device: Device,
-    _acceleration_structure: AccelerationStructureKHR,
+    _acceleration_structure: AccelerationStructureNV,
     _data_size: usize,
     _data: *mut c_void,
 ) -> Result;
-
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureMemoryRequirementsKHR.html>
-pub type PFN_vkGetAccelerationStructureMemoryRequirementsKHR = extern "system" fn(
-    _device: Device,
-    _info: *const AccelerationStructureMemoryRequirementsInfoKHR,
-    _memory_requirements: *mut MemoryRequirements2,
-);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureMemoryRequirementsNV.html>
 pub type PFN_vkGetAccelerationStructureMemoryRequirementsNV = extern "system" fn(
@@ -1933,8 +1953,11 @@ pub type PFN_vkGetDescriptorSetLayoutSupport = extern "system" fn(
 pub type PFN_vkGetDescriptorSetLayoutSupportKHR = PFN_vkGetDescriptorSetLayoutSupport;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceAccelerationStructureCompatibilityKHR.html>
-pub type PFN_vkGetDeviceAccelerationStructureCompatibilityKHR =
-    extern "system" fn(_device: Device, _version: *const AccelerationStructureVersionKHR) -> Result;
+pub type PFN_vkGetDeviceAccelerationStructureCompatibilityKHR = extern "system" fn(
+    _device: Device,
+    _version_info: *const AccelerationStructureVersionInfoKHR,
+    _compatibility: *mut AccelerationStructureCompatibilityKHR,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupPeerMemoryFeatures.html>
 pub type PFN_vkGetDeviceGroupPeerMemoryFeatures = extern "system" fn(
@@ -2636,6 +2659,14 @@ pub type PFN_vkGetRayTracingShaderGroupHandlesKHR = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRayTracingShaderGroupHandlesNV.html>
 pub type PFN_vkGetRayTracingShaderGroupHandlesNV = PFN_vkGetRayTracingShaderGroupHandlesKHR;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRayTracingShaderGroupStackSizeKHR.html>
+pub type PFN_vkGetRayTracingShaderGroupStackSizeKHR = extern "system" fn(
+    _device: Device,
+    _pipeline: Pipeline,
+    _group: u32,
+    _group_shader: ShaderGroupShaderKHR,
+) -> DeviceSize;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRefreshCycleDurationGOOGLE.html>
 pub type PFN_vkGetRefreshCycleDurationGOOGLE = extern "system" fn(

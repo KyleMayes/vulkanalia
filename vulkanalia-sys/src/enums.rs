@@ -42,12 +42,44 @@ impl fmt::Debug for AccelerationStructureBuildTypeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMemoryRequirementsTypeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureCompatibilityKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct AccelerationStructureMemoryRequirementsTypeKHR(i32);
+pub struct AccelerationStructureCompatibilityKHR(i32);
 
-impl AccelerationStructureMemoryRequirementsTypeKHR {
+impl AccelerationStructureCompatibilityKHR {
+    pub const COMPATIBLE: Self = Self(0);
+    pub const INCOMPATIBLE: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for AccelerationStructureCompatibilityKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "COMPATIBLE"),
+            1 => write!(f, "INCOMPATIBLE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMemoryRequirementsTypeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct AccelerationStructureMemoryRequirementsTypeNV(i32);
+
+impl AccelerationStructureMemoryRequirementsTypeNV {
     pub const OBJECT: Self = Self(0);
     pub const BUILD_SCRATCH: Self = Self(1);
     pub const UPDATE_SCRATCH: Self = Self(2);
@@ -65,7 +97,7 @@ impl AccelerationStructureMemoryRequirementsTypeKHR {
     }
 }
 
-impl fmt::Debug for AccelerationStructureMemoryRequirementsTypeKHR {
+impl fmt::Debug for AccelerationStructureMemoryRequirementsTypeNV {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             0 => write!(f, "OBJECT"),
@@ -84,6 +116,7 @@ pub struct AccelerationStructureTypeKHR(i32);
 impl AccelerationStructureTypeKHR {
     pub const TOP_LEVEL: Self = Self(0);
     pub const BOTTOM_LEVEL: Self = Self(1);
+    pub const GENERIC: Self = Self(2);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -103,6 +136,7 @@ impl fmt::Debug for AccelerationStructureTypeKHR {
         match self.0 {
             0 => write!(f, "TOP_LEVEL"),
             1 => write!(f, "BOTTOM_LEVEL"),
+            2 => write!(f, "GENERIC"),
             _ => self.0.fmt(f),
         }
     }
@@ -445,6 +479,38 @@ impl fmt::Debug for BorderColor {
             5 => write!(f, "INT_OPAQUE_WHITE"),
             1000287003 => write!(f, "FLOAT_CUSTOM_EXT"),
             1000287004 => write!(f, "INT_CUSTOM_EXT"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBuildAccelerationStructureModeKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct BuildAccelerationStructureModeKHR(i32);
+
+impl BuildAccelerationStructureModeKHR {
+    pub const BUILD: Self = Self(0);
+    pub const UPDATE: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for BuildAccelerationStructureModeKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "BUILD"),
+            1 => write!(f, "UPDATE"),
             _ => self.0.fmt(f),
         }
     }
@@ -924,7 +990,8 @@ impl DebugReportObjectTypeEXT {
     pub const VALIDATION_CACHE_EXT: Self = Self(33);
     pub const SAMPLER_YCBCR_CONVERSION: Self = Self(1000156000);
     pub const DESCRIPTOR_UPDATE_TEMPLATE: Self = Self(1000085000);
-    pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000165000);
+    pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000150000);
+    pub const ACCELERATION_STRUCTURE_NV: Self = Self(1000165000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -976,7 +1043,8 @@ impl fmt::Debug for DebugReportObjectTypeEXT {
             33 => write!(f, "VALIDATION_CACHE_EXT"),
             1000156000 => write!(f, "SAMPLER_YCBCR_CONVERSION"),
             1000085000 => write!(f, "DESCRIPTOR_UPDATE_TEMPLATE"),
-            1000165000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
+            1000150000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
+            1000165000 => write!(f, "ACCELERATION_STRUCTURE_NV"),
             _ => self.0.fmt(f),
         }
     }
@@ -1000,7 +1068,8 @@ impl DescriptorType {
     pub const STORAGE_BUFFER_DYNAMIC: Self = Self(9);
     pub const INPUT_ATTACHMENT: Self = Self(10);
     pub const INLINE_UNIFORM_BLOCK_EXT: Self = Self(1000138000);
-    pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000165000);
+    pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000150000);
+    pub const ACCELERATION_STRUCTURE_NV: Self = Self(1000165000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1030,7 +1099,8 @@ impl fmt::Debug for DescriptorType {
             9 => write!(f, "STORAGE_BUFFER_DYNAMIC"),
             10 => write!(f, "INPUT_ATTACHMENT"),
             1000138000 => write!(f, "INLINE_UNIFORM_BLOCK_EXT"),
-            1000165000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
+            1000150000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
+            1000165000 => write!(f, "ACCELERATION_STRUCTURE_NV"),
             _ => self.0.fmt(f),
         }
     }
@@ -1306,6 +1376,7 @@ impl DynamicState {
     pub const VIEWPORT_W_SCALING_NV: Self = Self(1000087000);
     pub const DISCARD_RECTANGLE_EXT: Self = Self(1000099000);
     pub const SAMPLE_LOCATIONS_EXT: Self = Self(1000143000);
+    pub const RAY_TRACING_PIPELINE_STACK_SIZE_KHR: Self = Self(1000347000);
     pub const VIEWPORT_SHADING_RATE_PALETTE_NV: Self = Self(1000164004);
     pub const VIEWPORT_COARSE_SAMPLE_ORDER_NV: Self = Self(1000164006);
     pub const EXCLUSIVE_SCISSOR_NV: Self = Self(1000205001);
@@ -1352,6 +1423,7 @@ impl fmt::Debug for DynamicState {
             1000087000 => write!(f, "VIEWPORT_W_SCALING_NV"),
             1000099000 => write!(f, "DISCARD_RECTANGLE_EXT"),
             1000143000 => write!(f, "SAMPLE_LOCATIONS_EXT"),
+            1000347000 => write!(f, "RAY_TRACING_PIPELINE_STACK_SIZE_KHR"),
             1000164004 => write!(f, "VIEWPORT_SHADING_RATE_PALETTE_NV"),
             1000164006 => write!(f, "VIEWPORT_COARSE_SAMPLE_ORDER_NV"),
             1000205001 => write!(f, "EXCLUSIVE_SCISSOR_NV"),
@@ -2180,7 +2252,7 @@ pub struct GeometryTypeKHR(i32);
 impl GeometryTypeKHR {
     pub const TRIANGLES: Self = Self(0);
     pub const AABBS: Self = Self(1);
-    pub const INSTANCES: Self = Self(1000150000);
+    pub const INSTANCES: Self = Self(2);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2200,7 +2272,7 @@ impl fmt::Debug for GeometryTypeKHR {
         match self.0 {
             0 => write!(f, "TRIANGLES"),
             1 => write!(f, "AABBS"),
-            1000150000 => write!(f, "INSTANCES"),
+            2 => write!(f, "INSTANCES"),
             _ => self.0.fmt(f),
         }
     }
@@ -2662,8 +2734,9 @@ impl ObjectType {
     pub const DISPLAY_MODE_KHR: Self = Self(1000002001);
     pub const DEBUG_REPORT_CALLBACK_EXT: Self = Self(1000011000);
     pub const DEBUG_UTILS_MESSENGER_EXT: Self = Self(1000128000);
-    pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000165000);
+    pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000150000);
     pub const VALIDATION_CACHE_EXT: Self = Self(1000160000);
+    pub const ACCELERATION_STRUCTURE_NV: Self = Self(1000165000);
     pub const PERFORMANCE_CONFIGURATION_INTEL: Self = Self(1000210000);
     pub const DEFERRED_OPERATION_KHR: Self = Self(1000268000);
     pub const INDIRECT_COMMANDS_LAYOUT_NV: Self = Self(1000277000);
@@ -2719,8 +2792,9 @@ impl fmt::Debug for ObjectType {
             1000002001 => write!(f, "DISPLAY_MODE_KHR"),
             1000011000 => write!(f, "DEBUG_REPORT_CALLBACK_EXT"),
             1000128000 => write!(f, "DEBUG_UTILS_MESSENGER_EXT"),
-            1000165000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
+            1000150000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
             1000160000 => write!(f, "VALIDATION_CACHE_EXT"),
+            1000165000 => write!(f, "ACCELERATION_STRUCTURE_NV"),
             1000210000 => write!(f, "PERFORMANCE_CONFIGURATION_INTEL"),
             1000268000 => write!(f, "DEFERRED_OPERATION_KHR"),
             1000277000 => write!(f, "INDIRECT_COMMANDS_LAYOUT_NV"),
@@ -3325,8 +3399,9 @@ impl QueryType {
     pub const RESERVED_4: Self = Self(1000024004);
     pub const TRANSFORM_FEEDBACK_STREAM_EXT: Self = Self(1000028004);
     pub const PERFORMANCE_QUERY_KHR: Self = Self(1000116000);
-    pub const ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR: Self = Self(1000165000);
-    pub const ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR: Self = Self(1000150000);
+    pub const ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR: Self = Self(1000150000);
+    pub const ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR: Self = Self(1000150001);
+    pub const ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV: Self = Self(1000165000);
     pub const PERFORMANCE_QUERY_INTEL: Self = Self(1000210000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
@@ -3352,8 +3427,9 @@ impl fmt::Debug for QueryType {
             1000024004 => write!(f, "RESERVED_4"),
             1000028004 => write!(f, "TRANSFORM_FEEDBACK_STREAM_EXT"),
             1000116000 => write!(f, "PERFORMANCE_QUERY_KHR"),
-            1000165000 => write!(f, "ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR"),
-            1000150000 => write!(f, "ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR"),
+            1000150000 => write!(f, "ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR"),
+            1000150001 => write!(f, "ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR"),
+            1000165000 => write!(f, "ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV"),
             1000210000 => write!(f, "PERFORMANCE_QUERY_INTEL"),
             _ => self.0.fmt(f),
         }
@@ -3498,7 +3574,6 @@ impl Result {
     pub const ERROR_INCOMPATIBLE_DISPLAY_KHR: Self = Self(-1000003001);
     pub const ERROR_VALIDATION_FAILED_EXT: Self = Self(-1000011001);
     pub const ERROR_INVALID_SHADER_NV: Self = Self(-1000012000);
-    pub const ERROR_INCOMPATIBLE_VERSION_KHR: Self = Self(-1000150000);
     pub const ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT: Self = Self(-1000158000);
     pub const ERROR_NOT_PERMITTED_EXT: Self = Self(-1000174001);
     pub const ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT: Self = Self(-1000255000);
@@ -3554,7 +3629,6 @@ impl fmt::Debug for Result {
             -1000003001 => write!(f, "ERROR_INCOMPATIBLE_DISPLAY_KHR"),
             -1000011001 => write!(f, "ERROR_VALIDATION_FAILED_EXT"),
             -1000012000 => write!(f, "ERROR_INVALID_SHADER_NV"),
-            -1000150000 => write!(f, "ERROR_INCOMPATIBLE_VERSION_KHR"),
             -1000158000 => write!(f, "ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
             -1000174001 => write!(f, "ERROR_NOT_PERMITTED_EXT"),
             -1000255000 => write!(f, "ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT"),
@@ -3601,7 +3675,6 @@ impl fmt::Display for Result {
             -1000003001 => write!(f, "The display used by a swapchain does not use the same presentable image layout, or is incompatible in a way that prevents sharing an image."),
             -1000011001 => write!(f, "ERROR_VALIDATION_FAILED_EXT"),
             -1000012000 => write!(f, "One or more shaders failed to compile or link. More details are reported back to the application via VK_EXT_debug_report if enabled."),
-            -1000150000 => write!(f, "ERROR_INCOMPATIBLE_VERSION_KHR"),
             -1000158000 => write!(f, "ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
             -1000174001 => write!(f, "ERROR_NOT_PERMITTED_EXT"),
             -1000255000 => write!(f, "An operation on a swapchain created with VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT failed as it did not have exclusive full-screen access. This may occur due to implementation-dependent reasons, outside of the application's control."),
@@ -3888,6 +3961,42 @@ impl fmt::Debug for ShaderFloatControlsIndependence {
             0 => write!(f, "_32_BIT_ONLY"),
             1 => write!(f, "ALL"),
             2 => write!(f, "NONE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkShaderGroupShaderKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct ShaderGroupShaderKHR(i32);
+
+impl ShaderGroupShaderKHR {
+    pub const GENERAL: Self = Self(0);
+    pub const CLOSEST_HIT: Self = Self(1);
+    pub const ANY_HIT: Self = Self(2);
+    pub const INTERSECTION: Self = Self(3);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for ShaderGroupShaderKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "GENERAL"),
+            1 => write!(f, "CLOSEST_HIT"),
+            2 => write!(f, "ANY_HIT"),
+            3 => write!(f, "INTERSECTION"),
             _ => self.0.fmt(f),
         }
     }
@@ -4352,26 +4461,27 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT: Self = Self(1000148001);
     pub const PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT: Self = Self(1000148002);
     pub const PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV: Self = Self(1000149000);
-    pub const BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_KHR: Self = Self(1000165006);
-    pub const WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR: Self = Self(1000165007);
+    pub const WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR: Self = Self(1000150007);
     pub const ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR: Self = Self(1000150000);
-    pub const ACCELERATION_STRUCTURE_CREATE_GEOMETRY_TYPE_INFO_KHR: Self = Self(1000150001);
     pub const ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR: Self = Self(1000150002);
     pub const ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR: Self = Self(1000150003);
     pub const ACCELERATION_STRUCTURE_GEOMETRY_INSTANCES_DATA_KHR: Self = Self(1000150004);
     pub const ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR: Self = Self(1000150005);
     pub const ACCELERATION_STRUCTURE_GEOMETRY_KHR: Self = Self(1000150006);
-    pub const ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_KHR: Self = Self(1000150008);
-    pub const ACCELERATION_STRUCTURE_VERSION_KHR: Self = Self(1000150009);
+    pub const ACCELERATION_STRUCTURE_VERSION_INFO_KHR: Self = Self(1000150009);
     pub const COPY_ACCELERATION_STRUCTURE_INFO_KHR: Self = Self(1000150010);
     pub const COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR: Self = Self(1000150011);
     pub const COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR: Self = Self(1000150012);
-    pub const PHYSICAL_DEVICE_RAY_TRACING_FEATURES_KHR: Self = Self(1000150013);
-    pub const PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_KHR: Self = Self(1000150014);
+    pub const PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR: Self = Self(1000150013);
+    pub const PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR: Self = Self(1000150014);
+    pub const ACCELERATION_STRUCTURE_CREATE_INFO_KHR: Self = Self(1000150017);
+    pub const ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR: Self = Self(1000150020);
+    pub const PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR: Self = Self(1000347000);
+    pub const PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR: Self = Self(1000347001);
     pub const RAY_TRACING_PIPELINE_CREATE_INFO_KHR: Self = Self(1000150015);
     pub const RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR: Self = Self(1000150016);
-    pub const ACCELERATION_STRUCTURE_CREATE_INFO_KHR: Self = Self(1000150017);
     pub const RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR: Self = Self(1000150018);
+    pub const PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR: Self = Self(1000348013);
     pub const PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV: Self = Self(1000152000);
     pub const PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV: Self = Self(1000154000);
     pub const PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV: Self = Self(1000154001);
@@ -4393,6 +4503,8 @@ impl StructureType {
     pub const GEOMETRY_NV: Self = Self(1000165003);
     pub const GEOMETRY_TRIANGLES_NV: Self = Self(1000165004);
     pub const GEOMETRY_AABB_NV: Self = Self(1000165005);
+    pub const BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV: Self = Self(1000165006);
+    pub const WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV: Self = Self(1000165007);
     pub const ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV: Self = Self(1000165008);
     pub const PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV: Self = Self(1000165009);
     pub const RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV: Self = Self(1000165011);
@@ -4479,7 +4591,6 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT: Self = Self(1000260000);
     pub const PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT: Self = Self(1000265000);
     pub const PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT: Self = Self(1000267000);
-    pub const DEFERRED_OPERATION_INFO_KHR: Self = Self(1000268000);
     pub const PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR: Self = Self(1000269000);
     pub const PIPELINE_INFO_KHR: Self = Self(1000269001);
     pub const PIPELINE_EXECUTABLE_PROPERTIES_KHR: Self = Self(1000269002);
@@ -4859,26 +4970,27 @@ impl fmt::Debug for StructureType {
             1000148001 => write!(f, "PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT"),
             1000148002 => write!(f, "PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT"),
             1000149000 => write!(f, "PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV"),
-            1000165006 => write!(f, "BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_KHR"),
-            1000165007 => write!(f, "WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR"),
+            1000150007 => write!(f, "WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR"),
             1000150000 => write!(f, "ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR"),
-            1000150001 => write!(f, "ACCELERATION_STRUCTURE_CREATE_GEOMETRY_TYPE_INFO_KHR"),
             1000150002 => write!(f, "ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR"),
             1000150003 => write!(f, "ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR"),
             1000150004 => write!(f, "ACCELERATION_STRUCTURE_GEOMETRY_INSTANCES_DATA_KHR"),
             1000150005 => write!(f, "ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR"),
             1000150006 => write!(f, "ACCELERATION_STRUCTURE_GEOMETRY_KHR"),
-            1000150008 => write!(f, "ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_KHR"),
-            1000150009 => write!(f, "ACCELERATION_STRUCTURE_VERSION_KHR"),
+            1000150009 => write!(f, "ACCELERATION_STRUCTURE_VERSION_INFO_KHR"),
             1000150010 => write!(f, "COPY_ACCELERATION_STRUCTURE_INFO_KHR"),
             1000150011 => write!(f, "COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR"),
             1000150012 => write!(f, "COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR"),
-            1000150013 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_FEATURES_KHR"),
-            1000150014 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_KHR"),
+            1000150013 => write!(f, "PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR"),
+            1000150014 => write!(f, "PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR"),
+            1000150017 => write!(f, "ACCELERATION_STRUCTURE_CREATE_INFO_KHR"),
+            1000150020 => write!(f, "ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR"),
+            1000347000 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR"),
+            1000347001 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR"),
             1000150015 => write!(f, "RAY_TRACING_PIPELINE_CREATE_INFO_KHR"),
             1000150016 => write!(f, "RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR"),
-            1000150017 => write!(f, "ACCELERATION_STRUCTURE_CREATE_INFO_KHR"),
             1000150018 => write!(f, "RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR"),
+            1000348013 => write!(f, "PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR"),
             1000152000 => write!(f, "PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV"),
             1000154000 => write!(f, "PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV"),
             1000154001 => write!(f, "PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV"),
@@ -4906,6 +5018,8 @@ impl fmt::Debug for StructureType {
             1000165003 => write!(f, "GEOMETRY_NV"),
             1000165004 => write!(f, "GEOMETRY_TRIANGLES_NV"),
             1000165005 => write!(f, "GEOMETRY_AABB_NV"),
+            1000165006 => write!(f, "BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV"),
+            1000165007 => write!(f, "WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV"),
             1000165008 => write!(f, "ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV"),
             1000165009 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV"),
             1000165011 => write!(f, "RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV"),
@@ -5012,7 +5126,6 @@ impl fmt::Debug for StructureType {
             1000260000 => write!(f, "PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT"),
             1000265000 => write!(f, "PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT"),
             1000267000 => write!(f, "PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT"),
-            1000268000 => write!(f, "DEFERRED_OPERATION_INFO_KHR"),
             1000269000 => write!(
                 f,
                 "PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR"
@@ -5485,9 +5598,6 @@ impl fmt::Debug for ViewportCoordinateSwizzleNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMemoryRequirementsTypeNV.html>
-pub type AccelerationStructureMemoryRequirementsTypeNV =
-    AccelerationStructureMemoryRequirementsTypeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureTypeNV.html>
 pub type AccelerationStructureTypeNV = AccelerationStructureTypeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkChromaLocationKHR.html>
