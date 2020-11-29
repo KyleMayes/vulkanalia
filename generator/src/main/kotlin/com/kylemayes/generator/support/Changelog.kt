@@ -102,7 +102,7 @@ fun Changelog.addBindingsUpdates(commit: String, commitMessage: String) {
 
     if (versions[0].release != null) {
         val latest = versions[0].version.split(".").map { it.toInt() }
-        val next = "${latest[0]}.${latest[1]}.${latest[2] + 1}"
+        val next = "${latest[0]}.${latest[1] + 1}.0"
         versions.add(0, Version(next, null, mutableListOf()))
     }
 
