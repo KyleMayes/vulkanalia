@@ -5495,6 +5495,7 @@ impl VendorId {
     pub const KAZAN: Self = Self(65539);
     pub const CODEPLAY: Self = Self(65540);
     pub const MESA: Self = Self(65541);
+    pub const POCL: Self = Self(65542);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5517,6 +5518,7 @@ impl fmt::Debug for VendorId {
             65539 => write!(f, "KAZAN"),
             65540 => write!(f, "CODEPLAY"),
             65541 => write!(f, "MESA"),
+            65542 => write!(f, "POCL"),
             _ => self.0.fmt(f),
         }
     }
