@@ -52,6 +52,10 @@ pub type PFN_vkAcquirePerformanceConfigurationINTEL = extern "system" fn(
 pub type PFN_vkAcquireProfilingLockKHR =
     extern "system" fn(_device: Device, _info: *const AcquireProfilingLockInfoKHR) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireWinrtDisplayNV.html>
+pub type PFN_vkAcquireWinrtDisplayNV =
+    extern "system" fn(_physical_device: PhysicalDevice, _display: DisplayKHR) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireXlibDisplayEXT.html>
 pub type PFN_vkAcquireXlibDisplayEXT = extern "system" fn(
     _physical_device: PhysicalDevice,
@@ -2754,6 +2758,13 @@ pub type PFN_vkGetValidationCacheDataEXT = extern "system" fn(
     _validation_cache: ValidationCacheEXT,
     _data_size: *mut usize,
     _data: *mut c_void,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetWinrtDisplayNV.html>
+pub type PFN_vkGetWinrtDisplayNV = extern "system" fn(
+    _physical_device: PhysicalDevice,
+    _device_relative_id: u32,
+    _display: *mut DisplayKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportFenceFdKHR.html>

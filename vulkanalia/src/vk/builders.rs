@@ -7388,6 +7388,7 @@ unsafe impl Cast for DescriptorImageInfoBuilder {
 /// A Vulkan struct that can be used to extend a [DescriptorPoolCreateInfo](struct.DescriptorPoolCreateInfo.html).
 pub unsafe trait ExtendsDescriptorPoolCreateInfo {}
 unsafe impl ExtendsDescriptorPoolCreateInfo for DescriptorPoolInlineUniformBlockCreateInfoEXT {}
+unsafe impl ExtendsDescriptorPoolCreateInfo for MutableDescriptorTypeCreateInfoVALVE {}
 
 unsafe impl Cast for DescriptorPoolCreateInfo {
     type Target = DescriptorPoolCreateInfo;
@@ -7641,9 +7642,14 @@ impl<'b> DescriptorSetAllocateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn set_layouts(mut self, set_layouts: &'b [DescriptorSetLayout]) -> Self {
-        self.value.descriptor_set_count = set_layouts.len() as u32;
-        self.value.set_layouts = set_layouts.as_ptr();
+    pub fn descriptor_set_count(mut self, descriptor_set_count: u32) -> Self {
+        self.value.descriptor_set_count = descriptor_set_count;
+        self
+    }
+
+    #[inline]
+    pub fn set_layouts(mut self, set_layouts: &'b DescriptorSetLayout) -> Self {
+        self.value.set_layouts = set_layouts as *const DescriptorSetLayout;
         self
     }
 
@@ -7825,6 +7831,7 @@ unsafe impl<'b> Cast for DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'b> {
 /// A Vulkan struct that can be used to extend a [DescriptorSetLayoutCreateInfo](struct.DescriptorSetLayoutCreateInfo.html).
 pub unsafe trait ExtendsDescriptorSetLayoutCreateInfo {}
 unsafe impl ExtendsDescriptorSetLayoutCreateInfo for DescriptorSetLayoutBindingFlagsCreateInfo {}
+unsafe impl ExtendsDescriptorSetLayoutCreateInfo for MutableDescriptorTypeCreateInfoVALVE {}
 
 unsafe impl Cast for DescriptorSetLayoutCreateInfo {
     type Target = DescriptorSetLayoutCreateInfo;
@@ -8334,6 +8341,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLineRasterizationFeaturesE
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerformanceQueryFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineCreationCacheControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {}
@@ -19424,6 +19432,129 @@ unsafe impl Cast for MultisamplePropertiesEXTBuilder {
     }
 }
 
+unsafe impl Cast for MutableDescriptorTypeCreateInfoVALVE {
+    type Target = MutableDescriptorTypeCreateInfoVALVE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for MutableDescriptorTypeCreateInfoVALVE {
+    type Builder = MutableDescriptorTypeCreateInfoVALVEBuilder<'b>;
+}
+
+/// A builder for a [MutableDescriptorTypeCreateInfoVALVE](struct.MutableDescriptorTypeCreateInfoVALVE.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MutableDescriptorTypeCreateInfoVALVEBuilder<'b> {
+    value: MutableDescriptorTypeCreateInfoVALVE,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> MutableDescriptorTypeCreateInfoVALVEBuilder<'b> {
+    #[inline]
+    pub fn mutable_descriptor_type_lists(
+        mut self,
+        mutable_descriptor_type_lists: &'b [impl Cast<Target = MutableDescriptorTypeListVALVE>],
+    ) -> Self {
+        self.value.mutable_descriptor_type_list_count = mutable_descriptor_type_lists.len() as u32;
+        self.value.mutable_descriptor_type_lists = mutable_descriptor_type_lists.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MutableDescriptorTypeCreateInfoVALVE {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for MutableDescriptorTypeCreateInfoVALVEBuilder<'b> {
+    type Target = MutableDescriptorTypeCreateInfoVALVE;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for MutableDescriptorTypeCreateInfoVALVEBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for MutableDescriptorTypeCreateInfoVALVEBuilder<'b> {
+    type Target = MutableDescriptorTypeCreateInfoVALVE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for MutableDescriptorTypeListVALVE {
+    type Target = MutableDescriptorTypeListVALVE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for MutableDescriptorTypeListVALVE {
+    type Builder = MutableDescriptorTypeListVALVEBuilder<'b>;
+}
+
+/// A builder for a [MutableDescriptorTypeListVALVE](struct.MutableDescriptorTypeListVALVE.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MutableDescriptorTypeListVALVEBuilder<'b> {
+    value: MutableDescriptorTypeListVALVE,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> MutableDescriptorTypeListVALVEBuilder<'b> {
+    #[inline]
+    pub fn descriptor_types(mut self, descriptor_types: &'b [DescriptorType]) -> Self {
+        self.value.descriptor_type_count = descriptor_types.len() as u32;
+        self.value.descriptor_types = descriptor_types.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MutableDescriptorTypeListVALVE {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for MutableDescriptorTypeListVALVEBuilder<'b> {
+    type Target = MutableDescriptorTypeListVALVE;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for MutableDescriptorTypeListVALVEBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for MutableDescriptorTypeListVALVEBuilder<'b> {
+    type Target = MutableDescriptorTypeListVALVE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for NativeBufferANDROID {
     type Target = NativeBufferANDROID;
 
@@ -23920,6 +24051,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLineRasterizationFe
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiviewFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePerformanceQueryFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDevicePipelineCreationCacheControlFeaturesEXT
@@ -27658,6 +27790,64 @@ impl ops::DerefMut for PhysicalDeviceMultiviewPropertiesBuilder {
 
 unsafe impl Cast for PhysicalDeviceMultiviewPropertiesBuilder {
     type Target = PhysicalDeviceMultiviewProperties;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {
+    type Target = PhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {
+    type Builder = PhysicalDeviceMutableDescriptorTypeFeaturesVALVEBuilder;
+}
+
+/// A builder for a [PhysicalDeviceMutableDescriptorTypeFeaturesVALVE](struct.PhysicalDeviceMutableDescriptorTypeFeaturesVALVE.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMutableDescriptorTypeFeaturesVALVEBuilder {
+    value: PhysicalDeviceMutableDescriptorTypeFeaturesVALVE,
+}
+
+impl PhysicalDeviceMutableDescriptorTypeFeaturesVALVEBuilder {
+    #[inline]
+    pub fn mutable_descriptor_type(mut self, mutable_descriptor_type: bool) -> Self {
+        self.value.mutable_descriptor_type = mutable_descriptor_type as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMutableDescriptorTypeFeaturesVALVEBuilder {
+    type Target = PhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMutableDescriptorTypeFeaturesVALVEBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMutableDescriptorTypeFeaturesVALVEBuilder {
+    type Target = PhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
 
     #[inline]
     fn into(self) -> Self::Target {

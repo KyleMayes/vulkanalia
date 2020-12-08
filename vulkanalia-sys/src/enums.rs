@@ -1070,6 +1070,7 @@ impl DescriptorType {
     pub const INLINE_UNIFORM_BLOCK_EXT: Self = Self(1000138000);
     pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000150000);
     pub const ACCELERATION_STRUCTURE_NV: Self = Self(1000165000);
+    pub const MUTABLE_VALVE: Self = Self(1000351000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1101,6 +1102,7 @@ impl fmt::Debug for DescriptorType {
             1000138000 => write!(f, "INLINE_UNIFORM_BLOCK_EXT"),
             1000150000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
             1000165000 => write!(f, "ACCELERATION_STRUCTURE_NV"),
+            1000351000 => write!(f, "MUTABLE_VALVE"),
             _ => self.0.fmt(f),
         }
     }
@@ -4647,6 +4649,8 @@ impl StructureType {
     pub const IMAGE_RESOLVE_2_KHR: Self = Self(1000337010);
     pub const PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT: Self = Self(1000340000);
     pub const DIRECTFB_SURFACE_CREATE_INFO_EXT: Self = Self(1000346000);
+    pub const PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE: Self = Self(1000351000);
+    pub const MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE: Self = Self(1000351002);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5199,6 +5203,8 @@ impl fmt::Debug for StructureType {
             1000337010 => write!(f, "IMAGE_RESOLVE_2_KHR"),
             1000340000 => write!(f, "PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT"),
             1000346000 => write!(f, "DIRECTFB_SURFACE_CREATE_INFO_EXT"),
+            1000351000 => write!(f, "PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE"),
+            1000351002 => write!(f, "MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE"),
             _ => self.0.fmt(f),
         }
     }
