@@ -5694,6 +5694,46 @@ impl Default for MultisamplePropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMutableDescriptorTypeCreateInfoVALVE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MutableDescriptorTypeCreateInfoVALVE {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub mutable_descriptor_type_list_count: u32,
+    pub mutable_descriptor_type_lists: *const MutableDescriptorTypeListVALVE,
+}
+
+impl Default for MutableDescriptorTypeCreateInfoVALVE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE,
+            next: ptr::null(),
+            mutable_descriptor_type_list_count: u32::default(),
+            mutable_descriptor_type_lists: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMutableDescriptorTypeListVALVE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MutableDescriptorTypeListVALVE {
+    pub descriptor_type_count: u32,
+    pub descriptor_types: *const DescriptorType,
+}
+
+impl Default for MutableDescriptorTypeListVALVE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            descriptor_type_count: u32::default(),
+            descriptor_types: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkNativeBufferANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7925,6 +7965,26 @@ impl Default for PhysicalDeviceMultiviewProperties {
             next: ptr::null_mut(),
             max_multiview_view_count: u32::default(),
             max_multiview_instance_index: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub mutable_descriptor_type: Bool32,
+}
+
+impl Default for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE,
+            next: ptr::null_mut(),
+            mutable_descriptor_type: Bool32::default(),
         }
     }
 }

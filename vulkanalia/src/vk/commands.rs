@@ -171,6 +171,8 @@ pub struct DeviceCommands {
     pub import_fence_win32_handle_khr: PFN_vkImportFenceWin32HandleKHR,
     pub get_fence_fd_khr: PFN_vkGetFenceFdKHR,
     pub import_fence_fd_khr: PFN_vkImportFenceFdKHR,
+    pub acquire_winrt_display_nv: PFN_vkAcquireWinrtDisplayNV,
+    pub get_winrt_display_nv: PFN_vkGetWinrtDisplayNV,
     pub display_power_control_ext: PFN_vkDisplayPowerControlEXT,
     pub register_device_event_ext: PFN_vkRegisterDeviceEventEXT,
     pub register_display_event_ext: PFN_vkRegisterDisplayEventEXT,
@@ -2799,6 +2801,35 @@ impl DeviceCommands {
                         _import_fence_fd_info: *const ImportFenceFdInfoKHR,
                     ) -> Result {
                         panic!("could not load vkImportFenceFdKHR")
+                    }
+                    fallback
+                }
+            },
+            acquire_winrt_display_nv: unsafe {
+                let value = loader(b"vkAcquireWinrtDisplayNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _display: DisplayKHR,
+                    ) -> Result {
+                        panic!("could not load vkAcquireWinrtDisplayNV")
+                    }
+                    fallback
+                }
+            },
+            get_winrt_display_nv: unsafe {
+                let value = loader(b"vkGetWinrtDisplayNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _device_relative_id: u32,
+                        _display: *mut DisplayKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetWinrtDisplayNV")
                     }
                     fallback
                 }

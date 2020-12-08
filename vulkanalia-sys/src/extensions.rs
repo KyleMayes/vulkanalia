@@ -534,6 +534,9 @@ pub const NVX_IMAGE_VIEW_HANDLE_EXTENSION: ExtensionName =
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NVX_multiview_per_view_attributes.html>
 pub const NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_EXTENSION: ExtensionName =
     to_extension_name(b"VK_NVX_multiview_per_view_attributes");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_acquire_winrt_display.html>
+pub const NV_ACQUIRE_WINRT_DISPLAY_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_NV_acquire_winrt_display");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_clip_space_w_scaling.html>
 pub const NV_CLIP_SPACE_W_SCALING_EXTENSION: ExtensionName =
     to_extension_name(b"VK_NV_clip_space_w_scaling");
@@ -641,6 +644,9 @@ pub const QCOM_RENDER_PASS_TRANSFORM_EXTENSION: ExtensionName =
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_rotated_copy_commands.html>
 pub const QCOM_ROTATED_COPY_COMMANDS_EXTENSION: ExtensionName =
     to_extension_name(b"VK_QCOM_rotated_copy_commands");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_VALVE_mutable_descriptor_type.html>
+pub const VALVE_MUTABLE_DESCRIPTOR_TYPE_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_VALVE_mutable_descriptor_type");
 
 /// Converts a byte string into a Vulkan extension name.
 #[inline]

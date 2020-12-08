@@ -5662,6 +5662,49 @@ pub trait NvxMultiviewPerViewAttributesExtension: DeviceV1_0 {}
 
 impl NvxMultiviewPerViewAttributesExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_acquire_winrt_display.html>
+pub trait NvAcquireWinrtDisplayExtension: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireWinrtDisplayNV.html>
+    #[inline]
+    fn acquire_winrt_display_nv(
+        &self,
+        physical_device: PhysicalDevice,
+        display: DisplayKHR,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().acquire_winrt_display_nv)(physical_device, display);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetWinrtDisplayNV.html>
+    #[inline]
+    fn get_winrt_display_nv(
+        &self,
+        physical_device: PhysicalDevice,
+        device_relative_id: u32,
+    ) -> crate::VkResult<DisplayKHR> {
+        let mut display = MaybeUninit::<DisplayKHR>::uninit();
+
+        let __result = (self.commands().get_winrt_display_nv)(
+            physical_device,
+            device_relative_id,
+            display.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(unsafe { display.assume_init() })
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl NvAcquireWinrtDisplayExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_clip_space_w_scaling.html>
 pub trait NvClipSpaceWScalingExtension: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewportWScalingNV.html>
@@ -6521,3 +6564,8 @@ impl QcomRenderPassTransformExtension for crate::Device {}
 pub trait QcomRotatedCopyCommandsExtension: DeviceV1_0 {}
 
 impl QcomRotatedCopyCommandsExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_VALVE_mutable_descriptor_type.html>
+pub trait ValveMutableDescriptorTypeExtension: DeviceV1_0 {}
+
+impl ValveMutableDescriptorTypeExtension for crate::Device {}
