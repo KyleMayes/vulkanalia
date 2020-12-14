@@ -7642,14 +7642,9 @@ impl<'b> DescriptorSetAllocateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn descriptor_set_count(mut self, descriptor_set_count: u32) -> Self {
-        self.value.descriptor_set_count = descriptor_set_count;
-        self
-    }
-
-    #[inline]
-    pub fn set_layouts(mut self, set_layouts: &'b DescriptorSetLayout) -> Self {
-        self.value.set_layouts = set_layouts as *const DescriptorSetLayout;
+    pub fn set_layouts(mut self, set_layouts: &'b [DescriptorSetLayout]) -> Self {
+        self.value.descriptor_set_count = set_layouts.len() as u32;
+        self.value.set_layouts = set_layouts.as_ptr();
         self
     }
 
