@@ -4651,6 +4651,7 @@ impl StructureType {
     pub const DIRECTFB_SURFACE_CREATE_INFO_EXT: Self = Self(1000346000);
     pub const PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE: Self = Self(1000351000);
     pub const MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE: Self = Self(1000351002);
+    pub const SCREEN_SURFACE_CREATE_INFO_QNX: Self = Self(1000378000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5205,6 +5206,7 @@ impl fmt::Debug for StructureType {
             1000346000 => write!(f, "DIRECTFB_SURFACE_CREATE_INFO_EXT"),
             1000351000 => write!(f, "PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE"),
             1000351002 => write!(f, "MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE"),
+            1000378000 => write!(f, "SCREEN_SURFACE_CREATE_INFO_QNX"),
             _ => self.0.fmt(f),
         }
     }
