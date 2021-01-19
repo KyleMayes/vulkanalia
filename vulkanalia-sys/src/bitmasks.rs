@@ -520,6 +520,8 @@ bitflags! {
         const OPAQUE_WIN32 = 1 << 1;
         const OPAQUE_WIN32_KMT = 1 << 2;
         const SYNC_FD = 1 << 3;
+        const RESERVED_4_NV = 1 << 4;
+        const RESERVED_5_NV = 1 << 5;
     }
 }
 
@@ -596,6 +598,8 @@ bitflags! {
         const OPAQUE_WIN32_KMT = 1 << 2;
         const D3D12_FENCE = 1 << 3;
         const SYNC_FD = 1 << 4;
+        const RESERVED_5_NV = 1 << 5;
+        const RESERVED_6_NV = 1 << 6;
     }
 }
 
