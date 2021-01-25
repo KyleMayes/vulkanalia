@@ -5437,6 +5437,11 @@ pub trait KhrWin32SurfaceExtension: InstanceV1_0 {
 
 impl KhrWin32SurfaceExtension for crate::Instance {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_workgroup_memory_explicit_layout.html>
+pub trait KhrWorkgroupMemoryExplicitLayoutExtension: DeviceV1_0 {}
+
+impl KhrWorkgroupMemoryExplicitLayoutExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_xcb_surface.html>
 pub trait KhrXcbSurfaceExtension: InstanceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateXcbSurfaceKHR.html>
@@ -5536,6 +5541,11 @@ pub trait KhrXlibSurfaceExtension: InstanceV1_0 {
 }
 
 impl KhrXlibSurfaceExtension for crate::Instance {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_zero_initialize_workgroup_memory.html>
+pub trait KhrZeroInitializeWorkgroupMemoryExtension: DeviceV1_0 {}
+
+impl KhrZeroInitializeWorkgroupMemoryExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_MVK_ios_surface.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_metal_surface`")]
