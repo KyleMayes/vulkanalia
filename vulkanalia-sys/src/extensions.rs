@@ -516,10 +516,16 @@ pub const KHR_WIN32_KEYED_MUTEX_EXTENSION: ExtensionName =
     to_extension_name(b"VK_KHR_win32_keyed_mutex");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_win32_surface.html>
 pub const KHR_WIN32_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_win32_surface");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_workgroup_memory_explicit_layout.html>
+pub const KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_workgroup_memory_explicit_layout");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_xcb_surface.html>
 pub const KHR_XCB_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_xcb_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_xlib_surface.html>
 pub const KHR_XLIB_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_xlib_surface");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_zero_initialize_workgroup_memory.html>
+pub const KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_zero_initialize_workgroup_memory");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_MVK_ios_surface.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_metal_surface`")]
 pub const MVK_IOS_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_MVK_ios_surface");

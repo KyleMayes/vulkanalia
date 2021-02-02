@@ -9794,6 +9794,32 @@ impl Default for PhysicalDeviceVulkanMemoryModelFeatures {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub workgroup_memory_explicit_layout: Bool32,
+    pub workgroup_memory_explicit_layout_scalar_block_layout: Bool32,
+    pub workgroup_memory_explicit_layout_8bit_access: Bool32,
+    pub workgroup_memory_explicit_layout_16bit_access: Bool32,
+}
+
+impl Default for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR,
+            next: ptr::null_mut(),
+            workgroup_memory_explicit_layout: Bool32::default(),
+            workgroup_memory_explicit_layout_scalar_block_layout: Bool32::default(),
+            workgroup_memory_explicit_layout_8bit_access: Bool32::default(),
+            workgroup_memory_explicit_layout_16bit_access: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9810,6 +9836,26 @@ impl Default for PhysicalDeviceYcbcrImageArraysFeaturesEXT {
             s_type: StructureType::PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT,
             next: ptr::null_mut(),
             ycbcr_image_arrays: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_zero_initialize_workgroup_memory: Bool32,
+}
+
+impl Default for PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR,
+            next: ptr::null_mut(),
+            shader_zero_initialize_workgroup_memory: Bool32::default(),
         }
     }
 }
