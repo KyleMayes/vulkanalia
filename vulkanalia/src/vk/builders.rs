@@ -8374,7 +8374,9 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVertexAttributeDivisorFeat
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkan11Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkan12Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkanMemoryModelFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR {}
 
 unsafe impl Cast for DeviceCreateInfo {
     type Target = DeviceCreateInfo;
@@ -24093,7 +24095,15 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVertexAttributeDivi
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkan11Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkan12Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkanMemoryModelFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR
+{
+}
 
 unsafe impl Cast for PhysicalDeviceFeatures2 {
     type Target = PhysicalDeviceFeatures2;
@@ -33787,6 +33797,98 @@ unsafe impl Cast for PhysicalDeviceVulkanMemoryModelFeaturesBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {
+    type Target = PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {
+    type Builder = PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR](struct.PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHRBuilder {
+    value: PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR,
+}
+
+impl PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHRBuilder {
+    #[inline]
+    pub fn workgroup_memory_explicit_layout(
+        mut self,
+        workgroup_memory_explicit_layout: bool,
+    ) -> Self {
+        self.value.workgroup_memory_explicit_layout = workgroup_memory_explicit_layout as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn workgroup_memory_explicit_layout_scalar_block_layout(
+        mut self,
+        workgroup_memory_explicit_layout_scalar_block_layout: bool,
+    ) -> Self {
+        self.value
+            .workgroup_memory_explicit_layout_scalar_block_layout =
+            workgroup_memory_explicit_layout_scalar_block_layout as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn workgroup_memory_explicit_layout_8bit_access(
+        mut self,
+        workgroup_memory_explicit_layout_8bit_access: bool,
+    ) -> Self {
+        self.value.workgroup_memory_explicit_layout_8bit_access =
+            workgroup_memory_explicit_layout_8bit_access as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn workgroup_memory_explicit_layout_16bit_access(
+        mut self,
+        workgroup_memory_explicit_layout_16bit_access: bool,
+    ) -> Self {
+        self.value.workgroup_memory_explicit_layout_16bit_access =
+            workgroup_memory_explicit_layout_16bit_access as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHRBuilder {
+    type Target = PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHRBuilder {
+    type Target = PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceYcbcrImageArraysFeaturesEXT {
     type Target = PhysicalDeviceYcbcrImageArraysFeaturesEXT;
 
@@ -33838,6 +33940,68 @@ impl ops::DerefMut for PhysicalDeviceYcbcrImageArraysFeaturesEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceYcbcrImageArraysFeaturesEXTBuilder {
     type Target = PhysicalDeviceYcbcrImageArraysFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR {
+    type Target = PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR {
+    type Builder = PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR](struct.PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHRBuilder {
+    value: PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR,
+}
+
+impl PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHRBuilder {
+    #[inline]
+    pub fn shader_zero_initialize_workgroup_memory(
+        mut self,
+        shader_zero_initialize_workgroup_memory: bool,
+    ) -> Self {
+        self.value.shader_zero_initialize_workgroup_memory =
+            shader_zero_initialize_workgroup_memory as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHRBuilder {
+    type Target = PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHRBuilder {
+    type Target = PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {

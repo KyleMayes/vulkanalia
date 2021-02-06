@@ -15,6 +15,7 @@ bitflags! {
     #[derive(Default)]
     pub struct AccelerationStructureCreateFlagsKHR: Flags {
         const DEVICE_ADDRESS_CAPTURE_REPLAY = 1;
+        const RESERVED_BIT_2_NV = 1 << 2;
     }
 }
 
@@ -155,6 +156,7 @@ bitflags! {
         const PREFER_FAST_TRACE = 1 << 2;
         const PREFER_FAST_BUILD = 1 << 3;
         const LOW_MEMORY = 1 << 4;
+        const RESERVED_BIT_5_NV = 1 << 5;
     }
 }
 
