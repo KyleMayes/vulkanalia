@@ -496,6 +496,9 @@ pub const KHR_SWAPCHAIN_EXTENSION: ExtensionName = to_extension_name(b"VK_KHR_sw
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_swapchain_mutable_format.html>
 pub const KHR_SWAPCHAIN_MUTABLE_FORMAT_EXTENSION: ExtensionName =
     to_extension_name(b"VK_KHR_swapchain_mutable_format");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_synchronization2.html>
+pub const KHR_SYNCHRONIZATION2_EXTENSION: ExtensionName =
+    to_extension_name(b"VK_KHR_synchronization2");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_timeline_semaphore.html>
 pub const KHR_TIMELINE_SEMAPHORE_EXTENSION: ExtensionName =
     to_extension_name(b"VK_KHR_timeline_semaphore");

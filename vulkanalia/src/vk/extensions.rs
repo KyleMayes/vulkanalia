@@ -5275,6 +5275,138 @@ pub trait KhrSwapchainMutableFormatExtension: DeviceV1_0 {}
 
 impl KhrSwapchainMutableFormatExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_synchronization2.html>
+pub trait KhrSynchronization2Extension: DeviceV1_0 {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier2KHR.html>
+    #[inline]
+    fn cmd_pipeline_barrier2_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        dependency_info: &DependencyInfoKHR,
+    ) {
+        let __result = (self.commands().cmd_pipeline_barrier2_khr)(command_buffer, dependency_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetEvent2KHR.html>
+    #[inline]
+    fn cmd_reset_event2_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        event: Event,
+        stage_mask: PipelineStageFlags2KHR,
+    ) {
+        let __result = (self.commands().cmd_reset_event2_khr)(command_buffer, event, stage_mask);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent2KHR.html>
+    #[inline]
+    fn cmd_set_event2_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        event: Event,
+        dependency_info: &DependencyInfoKHR,
+    ) {
+        let __result = (self.commands().cmd_set_event2_khr)(command_buffer, event, dependency_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWaitEvents2KHR.html>
+    #[inline]
+    fn cmd_wait_events2_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        events: &[Event],
+        dependency_infos: &[impl Cast<Target = DependencyInfoKHR>],
+    ) {
+        let __result = (self.commands().cmd_wait_events2_khr)(
+            command_buffer,
+            events.len() as u32,
+            events.as_ptr(),
+            dependency_infos.as_ptr().cast(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteBufferMarker2AMD.html>
+    #[inline]
+    fn cmd_write_buffer_marker2_amd(
+        &self,
+        command_buffer: CommandBuffer,
+        stage: PipelineStageFlags2KHR,
+        dst_buffer: Buffer,
+        dst_offset: DeviceSize,
+        marker: u32,
+    ) {
+        let __result = (self.commands().cmd_write_buffer_marker2_amd)(
+            command_buffer,
+            stage,
+            dst_buffer,
+            dst_offset,
+            marker,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteTimestamp2KHR.html>
+    #[inline]
+    fn cmd_write_timestamp2_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        stage: PipelineStageFlags2KHR,
+        query_pool: QueryPool,
+        query: u32,
+    ) {
+        let __result =
+            (self.commands().cmd_write_timestamp2_khr)(command_buffer, stage, query_pool, query);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetQueueCheckpointData2NV.html>
+    #[inline]
+    fn get_queue_checkpoint_data2_nv(&self, queue: Queue) -> Vec<CheckpointData2NV> {
+        let mut checkpoint_data_count = 0;
+
+        (self.commands().get_queue_checkpoint_data2_nv)(
+            queue,
+            &mut checkpoint_data_count,
+            ptr::null_mut(),
+        );
+
+        let mut checkpoint_data = Vec::with_capacity(checkpoint_data_count as usize);
+
+        let __result = (self.commands().get_queue_checkpoint_data2_nv)(
+            queue,
+            &mut checkpoint_data_count,
+            checkpoint_data.as_mut_ptr(),
+        );
+
+        debug_assert!(checkpoint_data.capacity() == checkpoint_data_count as usize);
+        unsafe { checkpoint_data.set_len(checkpoint_data_count as usize) };
+
+        checkpoint_data
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit2KHR.html>
+    #[inline]
+    fn queue_submit2_khr(
+        &self,
+        queue: Queue,
+        submits: &[impl Cast<Target = SubmitInfo2KHR>],
+        fence: Fence,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().queue_submit2_khr)(
+            queue,
+            submits.len() as u32,
+            submits.as_ptr().cast(),
+            fence,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl KhrSynchronization2Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_timeline_semaphore.html>
 pub trait KhrTimelineSemaphoreExtension: DeviceV1_0 {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreCounterValueKHR.html>

@@ -2,6 +2,8 @@
 
 package com.kylemayes.generator.registry
 
+import java.math.BigInteger
+
 /** Extends bitmasks and enums with bitflags and variants defined in versions and extensions. */
 fun Registry.extendEntities() {
     val added = HashSet<Entity>()
@@ -30,7 +32,7 @@ private fun extendBitmask(
     val bitmask = bitmasks[ext.extends]
     val bitpos = ext.bitpos
     if (bitmask != null && bitpos != null) {
-        val bitflag = Bitflag(name = ext.name, 1L shl bitpos.toInt())
+        val bitflag = Bitflag(name = ext.name, BigInteger.ONE.shiftLeft(bitpos.toInt()))
         if (added.add(bitflag)) {
             bitmask.bitflags.add(bitflag)
         }

@@ -11,6 +11,7 @@ import com.kylemayes.generator.support.queryElements
 import org.intellij.lang.annotations.Language
 import org.w3c.dom.Element
 import org.w3c.dom.Node
+import java.math.BigInteger
 
 // ===============================================
 // Registry
@@ -102,15 +103,15 @@ private fun extractBitmaskType(e: Element) = Bitmask(
 /** A bitflag. */
 data class Bitflag(
     override val name: Identifier,
-    val value: Long,
+    val value: BigInteger,
 ) : Entity
 
 private fun extractBitflag(e: Element) = Bitflag(
     name = e.getAttribute("name").intern(),
     value = e.getAttributeText("bitpos")
         ?.toNumber()
-        ?.let { 1L shl it.toInt() }
-        ?: e.getAttribute("value").toNumber(),
+        ?.let { BigInteger.ONE.shiftLeft(it.toInt()) }
+        ?: e.getAttribute("value").toNumber().toBigInteger(),
 )
 
 // ===============================================

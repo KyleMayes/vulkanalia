@@ -7,7 +7,7 @@
 
 use bitflags::bitflags;
 
-use crate::Flags;
+use crate::{Flags, Flags64};
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureCreateFlagsKHR.html>
@@ -16,6 +16,46 @@ bitflags! {
     pub struct AccelerationStructureCreateFlagsKHR: Flags {
         const DEVICE_ADDRESS_CAPTURE_REPLAY = 1;
         const RESERVED_BIT_2_NV = 1 << 2;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccessFlagBits2KHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct AccessFlagBits2KHR: Flags64 {
+        const ACCESS_2_NONE = 0;
+        const ACCESS_2_INDIRECT_COMMAND_READ = 1;
+        const ACCESS_2_INDEX_READ = 1 << 1;
+        const ACCESS_2_VERTEX_ATTRIBUTE_READ = 1 << 2;
+        const ACCESS_2_UNIFORM_READ = 1 << 3;
+        const ACCESS_2_INPUT_ATTACHMENT_READ = 1 << 4;
+        const ACCESS_2_SHADER_READ = 1 << 5;
+        const ACCESS_2_SHADER_WRITE = 1 << 6;
+        const ACCESS_2_COLOR_ATTACHMENT_READ = 1 << 7;
+        const ACCESS_2_COLOR_ATTACHMENT_WRITE = 1 << 8;
+        const ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ = 1 << 9;
+        const ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE = 1 << 10;
+        const ACCESS_2_TRANSFER_READ = 1 << 11;
+        const ACCESS_2_TRANSFER_WRITE = 1 << 12;
+        const ACCESS_2_HOST_READ = 1 << 13;
+        const ACCESS_2_HOST_WRITE = 1 << 14;
+        const ACCESS_2_MEMORY_READ = 1 << 15;
+        const ACCESS_2_MEMORY_WRITE = 1 << 16;
+        const ACCESS_2_COMMAND_PREPROCESS_READ_NV = 1 << 17;
+        const ACCESS_2_COMMAND_PREPROCESS_WRITE_NV = 1 << 18;
+        const ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_EXT = 1 << 19;
+        const ACCESS_2_CONDITIONAL_RENDERING_READ_EXT = 1 << 20;
+        const ACCESS_2_ACCELERATION_STRUCTURE_READ = 1 << 21;
+        const ACCESS_2_ACCELERATION_STRUCTURE_WRITE = 1 << 22;
+        const ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ = 1 << 23;
+        const ACCESS_2_FRAGMENT_DENSITY_MAP_READ_EXT = 1 << 24;
+        const ACCESS_2_TRANSFORM_FEEDBACK_WRITE_EXT = 1 << 25;
+        const ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_EXT = 1 << 26;
+        const ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_EXT = 1 << 27;
+        const ACCESS_2_SHADER_SAMPLED_READ = 1 << 32;
+        const ACCESS_2_SHADER_STORAGE_READ = 1 << 33;
+        const ACCESS_2_SHADER_STORAGE_WRITE = 1 << 34;
     }
 }
 
@@ -55,6 +95,18 @@ bitflags! {
         const RESERVED_28_KHR = 1 << 28;
         const RESERVED_29_KHR = 1 << 29;
         const RESERVED_30_KHR = 1 << 30;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccessFlags2KHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct AccessFlags2KHR: Flags {
+        /// Workaround for `bitflags!` not supporting empty bitflags.
+        ///
+        /// <https://github.com/bitflags/bitflags/issues/179>
+        const EMPTY = 0;
     }
 }
 
@@ -496,10 +548,7 @@ bitflags! {
     #[repr(transparent)]
     #[derive(Default)]
     pub struct EventCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
+        const DEVICE_ONLY_KHR = 1;
     }
 }
 
@@ -1031,6 +1080,7 @@ bitflags! {
         const RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_KHR = 1 << 17;
         const INDIRECT_BINDABLE_NV = 1 << 18;
         const RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_KHR = 1 << 19;
+        const RESERVED_BIT_20_NV = 1 << 20;
     }
 }
 
@@ -1178,6 +1228,48 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineStageFlagBits2KHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct PipelineStageFlagBits2KHR: Flags64 {
+        const PIPELINE_STAGE_2_NONE = 0;
+        const PIPELINE_STAGE_2_TOP_OF_PIPE = 1;
+        const PIPELINE_STAGE_2_DRAW_INDIRECT = 1 << 1;
+        const PIPELINE_STAGE_2_VERTEX_INPUT = 1 << 2;
+        const PIPELINE_STAGE_2_VERTEX_SHADER = 1 << 3;
+        const PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER = 1 << 4;
+        const PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER = 1 << 5;
+        const PIPELINE_STAGE_2_GEOMETRY_SHADER = 1 << 6;
+        const PIPELINE_STAGE_2_FRAGMENT_SHADER = 1 << 7;
+        const PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS = 1 << 8;
+        const PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS = 1 << 9;
+        const PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT = 1 << 10;
+        const PIPELINE_STAGE_2_COMPUTE_SHADER = 1 << 11;
+        const PIPELINE_STAGE_2_ALL_TRANSFER = 1 << 12;
+        const PIPELINE_STAGE_2_BOTTOM_OF_PIPE = 1 << 13;
+        const PIPELINE_STAGE_2_HOST = 1 << 14;
+        const PIPELINE_STAGE_2_ALL_GRAPHICS = 1 << 15;
+        const PIPELINE_STAGE_2_ALL_COMMANDS = 1 << 16;
+        const PIPELINE_STAGE_2_COMMAND_PREPROCESS_NV = 1 << 17;
+        const PIPELINE_STAGE_2_CONDITIONAL_RENDERING_EXT = 1 << 18;
+        const PIPELINE_STAGE_2_TASK_SHADER_NV = 1 << 19;
+        const PIPELINE_STAGE_2_MESH_SHADER_NV = 1 << 20;
+        const PIPELINE_STAGE_2_RAY_TRACING_SHADER = 1 << 21;
+        const PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT = 1 << 22;
+        const PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_EXT = 1 << 23;
+        const PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_EXT = 1 << 24;
+        const PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD = 1 << 25;
+        const PIPELINE_STAGE_2_COPY = 1 << 32;
+        const PIPELINE_STAGE_2_RESOLVE = 1 << 33;
+        const PIPELINE_STAGE_2_BLIT = 1 << 34;
+        const PIPELINE_STAGE_2_CLEAR = 1 << 35;
+        const PIPELINE_STAGE_2_INDEX_INPUT = 1 << 36;
+        const PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT = 1 << 37;
+        const PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS = 1 << 38;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineStageFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -1210,6 +1302,18 @@ bitflags! {
         const ACCELERATION_STRUCTURE_BUILD_KHR = 1 << 25;
         const RESERVED_26_KHR = 1 << 26;
         const RESERVED_27_KHR = 1 << 27;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineStageFlags2KHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct PipelineStageFlags2KHR: Flags {
+        /// Workaround for `bitflags!` not supporting empty bitflags.
+        ///
+        /// <https://github.com/bitflags/bitflags/issues/179>
+        const EMPTY = 0;
     }
 }
 
@@ -1520,6 +1624,15 @@ bitflags! {
         const CLUSTERED = 1 << 6;
         const QUAD = 1 << 7;
         const PARTITIONED_NV = 1 << 8;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubmitFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct SubmitFlagsKHR: Flags {
+        const PROTECTED = 1;
     }
 }
 

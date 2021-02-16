@@ -683,6 +683,10 @@ pub type PFN_vkCmdPipelineBarrier = extern "system" fn(
     _image_memory_barriers: *const ImageMemoryBarrier,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier2KHR.html>
+pub type PFN_vkCmdPipelineBarrier2KHR =
+    extern "system" fn(_command_buffer: CommandBuffer, _dependency_info: *const DependencyInfoKHR);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPreprocessGeneratedCommandsNV.html>
 pub type PFN_vkCmdPreprocessGeneratedCommandsNV = extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -723,6 +727,13 @@ pub type PFN_vkCmdResetEvent = extern "system" fn(
     _command_buffer: CommandBuffer,
     _event: Event,
     _stage_mask: PipelineStageFlags,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetEvent2KHR.html>
+pub type PFN_vkCmdResetEvent2KHR = extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _event: Event,
+    _stage_mask: PipelineStageFlags2KHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetQueryPool.html>
@@ -821,6 +832,13 @@ pub type PFN_vkCmdSetEvent = extern "system" fn(
     _command_buffer: CommandBuffer,
     _event: Event,
     _stage_mask: PipelineStageFlags,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent2KHR.html>
+pub type PFN_vkCmdSetEvent2KHR = extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _event: Event,
+    _dependency_info: *const DependencyInfoKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetExclusiveScissorNV.html>
@@ -1038,6 +1056,14 @@ pub type PFN_vkCmdWaitEvents = extern "system" fn(
     _image_memory_barriers: *const ImageMemoryBarrier,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWaitEvents2KHR.html>
+pub type PFN_vkCmdWaitEvents2KHR = extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _event_count: u32,
+    _events: *const Event,
+    _dependency_infos: *const DependencyInfoKHR,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteAccelerationStructuresPropertiesKHR.html>
 pub type PFN_vkCmdWriteAccelerationStructuresPropertiesKHR = extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -1058,6 +1084,15 @@ pub type PFN_vkCmdWriteAccelerationStructuresPropertiesNV = extern "system" fn(
     _first_query: u32,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteBufferMarker2AMD.html>
+pub type PFN_vkCmdWriteBufferMarker2AMD = extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _stage: PipelineStageFlags2KHR,
+    _dst_buffer: Buffer,
+    _dst_offset: DeviceSize,
+    _marker: u32,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteBufferMarkerAMD.html>
 pub type PFN_vkCmdWriteBufferMarkerAMD = extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -1071,6 +1106,14 @@ pub type PFN_vkCmdWriteBufferMarkerAMD = extern "system" fn(
 pub type PFN_vkCmdWriteTimestamp = extern "system" fn(
     _command_buffer: CommandBuffer,
     _pipeline_stage: PipelineStageFlags,
+    _query_pool: QueryPool,
+    _query: u32,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteTimestamp2KHR.html>
+pub type PFN_vkCmdWriteTimestamp2KHR = extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _stage: PipelineStageFlags2KHR,
     _query_pool: QueryPool,
     _query: u32,
 );
@@ -2626,6 +2669,13 @@ pub type PFN_vkGetQueryPoolResults = extern "system" fn(
     _flags: QueryResultFlags,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetQueueCheckpointData2NV.html>
+pub type PFN_vkGetQueueCheckpointData2NV = extern "system" fn(
+    _queue: Queue,
+    _checkpoint_data_count: *mut u32,
+    _checkpoint_data: *mut CheckpointData2NV,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetQueueCheckpointDataNV.html>
 pub type PFN_vkGetQueueCheckpointDataNV = extern "system" fn(
     _queue: Queue,
@@ -2871,6 +2921,14 @@ pub type PFN_vkQueueSubmit = extern "system" fn(
     _queue: Queue,
     _submit_count: u32,
     _submits: *const SubmitInfo,
+    _fence: Fence,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit2KHR.html>
+pub type PFN_vkQueueSubmit2KHR = extern "system" fn(
+    _queue: Queue,
+    _submit_count: u32,
+    _submits: *const SubmitInfo2KHR,
     _fence: Fence,
 ) -> Result;
 

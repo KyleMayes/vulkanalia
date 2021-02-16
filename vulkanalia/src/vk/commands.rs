@@ -359,6 +359,14 @@ pub struct DeviceCommands {
         PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR,
     pub cmd_set_fragment_shading_rate_enum_nv: PFN_vkCmdSetFragmentShadingRateEnumNV,
     pub get_acceleration_structure_build_sizes_khr: PFN_vkGetAccelerationStructureBuildSizesKHR,
+    pub cmd_set_event2_khr: PFN_vkCmdSetEvent2KHR,
+    pub cmd_reset_event2_khr: PFN_vkCmdResetEvent2KHR,
+    pub cmd_wait_events2_khr: PFN_vkCmdWaitEvents2KHR,
+    pub cmd_pipeline_barrier2_khr: PFN_vkCmdPipelineBarrier2KHR,
+    pub queue_submit2_khr: PFN_vkQueueSubmit2KHR,
+    pub cmd_write_timestamp2_khr: PFN_vkCmdWriteTimestamp2KHR,
+    pub cmd_write_buffer_marker2_amd: PFN_vkCmdWriteBufferMarker2AMD,
+    pub get_queue_checkpoint_data2_nv: PFN_vkGetQueueCheckpointData2NV,
     pub reset_query_pool_ext: PFN_vkResetQueryPoolEXT,
     pub trim_command_pool_khr: PFN_vkTrimCommandPoolKHR,
     pub get_device_group_peer_memory_features_khr: PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR,
@@ -5503,6 +5511,130 @@ impl DeviceCommands {
                         _size_info: *mut AccelerationStructureBuildSizesInfoKHR,
                     ) {
                         panic!("could not load vkGetAccelerationStructureBuildSizesKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_event2_khr: unsafe {
+                let value = loader(b"vkCmdSetEvent2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _event: Event,
+                        _dependency_info: *const DependencyInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdSetEvent2KHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_reset_event2_khr: unsafe {
+                let value = loader(b"vkCmdResetEvent2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _event: Event,
+                        _stage_mask: PipelineStageFlags2KHR,
+                    ) {
+                        panic!("could not load vkCmdResetEvent2KHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_wait_events2_khr: unsafe {
+                let value = loader(b"vkCmdWaitEvents2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _event_count: u32,
+                        _events: *const Event,
+                        _dependency_infos: *const DependencyInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdWaitEvents2KHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_pipeline_barrier2_khr: unsafe {
+                let value = loader(b"vkCmdPipelineBarrier2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _dependency_info: *const DependencyInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdPipelineBarrier2KHR")
+                    }
+                    fallback
+                }
+            },
+            queue_submit2_khr: unsafe {
+                let value = loader(b"vkQueueSubmit2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _queue: Queue,
+                        _submit_count: u32,
+                        _submits: *const SubmitInfo2KHR,
+                        _fence: Fence,
+                    ) -> Result {
+                        panic!("could not load vkQueueSubmit2KHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_write_timestamp2_khr: unsafe {
+                let value = loader(b"vkCmdWriteTimestamp2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _stage: PipelineStageFlags2KHR,
+                        _query_pool: QueryPool,
+                        _query: u32,
+                    ) {
+                        panic!("could not load vkCmdWriteTimestamp2KHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_write_buffer_marker2_amd: unsafe {
+                let value = loader(b"vkCmdWriteBufferMarker2AMD\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _stage: PipelineStageFlags2KHR,
+                        _dst_buffer: Buffer,
+                        _dst_offset: DeviceSize,
+                        _marker: u32,
+                    ) {
+                        panic!("could not load vkCmdWriteBufferMarker2AMD")
+                    }
+                    fallback
+                }
+            },
+            get_queue_checkpoint_data2_nv: unsafe {
+                let value = loader(b"vkGetQueueCheckpointData2NV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _queue: Queue,
+                        _checkpoint_data_count: *mut u32,
+                        _checkpoint_data: *mut CheckpointData2NV,
+                    ) {
+                        panic!("could not load vkGetQueueCheckpointData2NV")
                     }
                     fallback
                 }
