@@ -2305,6 +2305,8 @@ impl ImageLayout {
     pub const SHARED_PRESENT_KHR: Self = Self(1000111000);
     pub const SHADING_RATE_OPTIMAL_NV: Self = Self(1000164003);
     pub const FRAGMENT_DENSITY_MAP_OPTIMAL_EXT: Self = Self(1000218000);
+    pub const READ_ONLY_OPTIMAL_KHR: Self = Self(1000314000);
+    pub const ATTACHMENT_OPTIMAL_KHR: Self = Self(1000314001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2341,6 +2343,8 @@ impl fmt::Debug for ImageLayout {
             1000111000 => write!(f, "SHARED_PRESENT_KHR"),
             1000164003 => write!(f, "SHADING_RATE_OPTIMAL_NV"),
             1000218000 => write!(f, "FRAGMENT_DENSITY_MAP_OPTIMAL_EXT"),
+            1000314000 => write!(f, "READ_ONLY_OPTIMAL_KHR"),
+            1000314001 => write!(f, "ATTACHMENT_OPTIMAL_KHR"),
             _ => self.0.fmt(f),
         }
     }
@@ -4629,6 +4633,16 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV: Self = Self(1000300000);
     pub const DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV: Self = Self(1000300001);
     pub const RESERVED_QCOM: Self = Self(1000309000);
+    pub const MEMORY_BARRIER_2_KHR: Self = Self(1000314000);
+    pub const BUFFER_MEMORY_BARRIER_2_KHR: Self = Self(1000314001);
+    pub const IMAGE_MEMORY_BARRIER_2_KHR: Self = Self(1000314002);
+    pub const DEPENDENCY_INFO_KHR: Self = Self(1000314003);
+    pub const SUBMIT_INFO_2_KHR: Self = Self(1000314004);
+    pub const SEMAPHORE_SUBMIT_INFO_KHR: Self = Self(1000314005);
+    pub const COMMAND_BUFFER_SUBMIT_INFO_KHR: Self = Self(1000314006);
+    pub const PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR: Self = Self(1000314007);
+    pub const QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV: Self = Self(1000314008);
+    pub const CHECKPOINT_DATA_2_NV: Self = Self(1000314009);
     pub const PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR: Self =
         Self(1000325000);
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV: Self = Self(1000326000);
@@ -5182,6 +5196,16 @@ impl fmt::Debug for StructureType {
             1000300000 => write!(f, "PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV"),
             1000300001 => write!(f, "DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV"),
             1000309000 => write!(f, "RESERVED_QCOM"),
+            1000314000 => write!(f, "MEMORY_BARRIER_2_KHR"),
+            1000314001 => write!(f, "BUFFER_MEMORY_BARRIER_2_KHR"),
+            1000314002 => write!(f, "IMAGE_MEMORY_BARRIER_2_KHR"),
+            1000314003 => write!(f, "DEPENDENCY_INFO_KHR"),
+            1000314004 => write!(f, "SUBMIT_INFO_2_KHR"),
+            1000314005 => write!(f, "SEMAPHORE_SUBMIT_INFO_KHR"),
+            1000314006 => write!(f, "COMMAND_BUFFER_SUBMIT_INFO_KHR"),
+            1000314007 => write!(f, "PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR"),
+            1000314008 => write!(f, "QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV"),
+            1000314009 => write!(f, "CHECKPOINT_DATA_2_NV"),
             1000325000 => write!(
                 f,
                 "PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR"

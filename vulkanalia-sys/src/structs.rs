@@ -1175,6 +1175,42 @@ impl Default for BufferMemoryBarrier {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferMemoryBarrier2KHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BufferMemoryBarrier2KHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub src_stage_mask: PipelineStageFlags2KHR,
+    pub src_access_mask: AccessFlags2KHR,
+    pub dst_stage_mask: PipelineStageFlags2KHR,
+    pub dst_access_mask: AccessFlags2KHR,
+    pub src_queue_family_index: u32,
+    pub dst_queue_family_index: u32,
+    pub buffer: Buffer,
+    pub offset: DeviceSize,
+    pub size: DeviceSize,
+}
+
+impl Default for BufferMemoryBarrier2KHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BUFFER_MEMORY_BARRIER_2_KHR,
+            next: ptr::null(),
+            src_stage_mask: PipelineStageFlags2KHR::default(),
+            src_access_mask: AccessFlags2KHR::default(),
+            dst_stage_mask: PipelineStageFlags2KHR::default(),
+            dst_access_mask: AccessFlags2KHR::default(),
+            src_queue_family_index: u32::default(),
+            dst_queue_family_index: u32::default(),
+            buffer: Buffer::default(),
+            offset: DeviceSize::default(),
+            size: DeviceSize::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferMemoryRequirementsInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1259,6 +1295,28 @@ impl Default for CalibratedTimestampInfoEXT {
             s_type: StructureType::CALIBRATED_TIMESTAMP_INFO_EXT,
             next: ptr::null(),
             time_domain: TimeDomainEXT::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCheckpointData2NV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CheckpointData2NV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub stage: PipelineStageFlags2KHR,
+    pub checkpoint_marker: *mut c_void,
+}
+
+impl Default for CheckpointData2NV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::CHECKPOINT_DATA_2_NV,
+            next: ptr::null_mut(),
+            stage: PipelineStageFlags2KHR::default(),
+            checkpoint_marker: ptr::null_mut(),
         }
     }
 }
@@ -1456,6 +1514,28 @@ impl Default for CommandBufferInheritanceRenderPassTransformInfoQCOM {
             next: ptr::null_mut(),
             transform: SurfaceTransformFlagsKHR::default(),
             render_area: Rect2D::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferSubmitInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CommandBufferSubmitInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub command_buffer: CommandBuffer,
+    pub device_mask: u32,
+}
+
+impl Default for CommandBufferSubmitInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COMMAND_BUFFER_SUBMIT_INFO_KHR,
+            next: ptr::null(),
+            command_buffer: CommandBuffer::default(),
+            device_mask: u32::default(),
         }
     }
 }
@@ -2175,6 +2255,38 @@ impl Default for DedicatedAllocationMemoryAllocateInfoNV {
             next: ptr::null(),
             image: Image::default(),
             buffer: Buffer::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDependencyInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DependencyInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub dependency_flags: DependencyFlags,
+    pub memory_barrier_count: u32,
+    pub memory_barriers: *const MemoryBarrier2KHR,
+    pub buffer_memory_barrier_count: u32,
+    pub buffer_memory_barriers: *const BufferMemoryBarrier2KHR,
+    pub image_memory_barrier_count: u32,
+    pub image_memory_barriers: *const ImageMemoryBarrier2KHR,
+}
+
+impl Default for DependencyInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEPENDENCY_INFO_KHR,
+            next: ptr::null(),
+            dependency_flags: DependencyFlags::default(),
+            memory_barrier_count: u32::default(),
+            memory_barriers: ptr::null(),
+            buffer_memory_barrier_count: u32::default(),
+            buffer_memory_barriers: ptr::null(),
+            image_memory_barrier_count: u32::default(),
+            image_memory_barriers: ptr::null(),
         }
     }
 }
@@ -4599,6 +4711,44 @@ impl Default for ImageMemoryBarrier {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageMemoryBarrier2KHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImageMemoryBarrier2KHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub src_stage_mask: PipelineStageFlags2KHR,
+    pub src_access_mask: AccessFlags2KHR,
+    pub dst_stage_mask: PipelineStageFlags2KHR,
+    pub dst_access_mask: AccessFlags2KHR,
+    pub old_layout: ImageLayout,
+    pub new_layout: ImageLayout,
+    pub src_queue_family_index: u32,
+    pub dst_queue_family_index: u32,
+    pub image: Image,
+    pub subresource_range: ImageSubresourceRange,
+}
+
+impl Default for ImageMemoryBarrier2KHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_MEMORY_BARRIER_2_KHR,
+            next: ptr::null(),
+            src_stage_mask: PipelineStageFlags2KHR::default(),
+            src_access_mask: AccessFlags2KHR::default(),
+            dst_stage_mask: PipelineStageFlags2KHR::default(),
+            dst_access_mask: AccessFlags2KHR::default(),
+            old_layout: ImageLayout::default(),
+            new_layout: ImageLayout::default(),
+            src_queue_family_index: u32::default(),
+            dst_queue_family_index: u32::default(),
+            image: Image::default(),
+            subresource_range: ImageSubresourceRange::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageMemoryRequirementsInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5395,6 +5545,32 @@ impl Default for MemoryBarrier {
             next: ptr::null(),
             src_access_mask: AccessFlags::default(),
             dst_access_mask: AccessFlags::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryBarrier2KHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryBarrier2KHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub src_stage_mask: PipelineStageFlags2KHR,
+    pub src_access_mask: AccessFlags2KHR,
+    pub dst_stage_mask: PipelineStageFlags2KHR,
+    pub dst_access_mask: AccessFlags2KHR,
+}
+
+impl Default for MemoryBarrier2KHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_BARRIER_2_KHR,
+            next: ptr::null(),
+            src_stage_mask: PipelineStageFlags2KHR::default(),
+            src_access_mask: AccessFlags2KHR::default(),
+            dst_stage_mask: PipelineStageFlags2KHR::default(),
+            dst_access_mask: AccessFlags2KHR::default(),
         }
     }
 }
@@ -9168,6 +9344,26 @@ impl Default for PhysicalDeviceSurfaceInfo2KHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceSynchronization2FeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceSynchronization2FeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub synchronization2: Bool32,
+}
+
+impl Default for PhysicalDeviceSynchronization2FeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR,
+            next: ptr::null_mut(),
+            synchronization2: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11161,6 +11357,26 @@ impl Default for QueryPoolPerformanceQueryCreateInfoINTEL {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFamilyCheckpointProperties2NV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct QueueFamilyCheckpointProperties2NV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub checkpoint_execution_stage_mask: PipelineStageFlags2KHR,
+}
+
+impl Default for QueueFamilyCheckpointProperties2NV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV,
+            next: ptr::null_mut(),
+            checkpoint_execution_stage_mask: PipelineStageFlags2KHR::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFamilyCheckpointPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11945,6 +12161,32 @@ impl Default for SemaphoreSignalInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreSubmitInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SemaphoreSubmitInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub semaphore: Semaphore,
+    pub value: u64,
+    pub stage_mask: PipelineStageFlags2KHR,
+    pub device_index: u32,
+}
+
+impl Default for SemaphoreSubmitInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SEMAPHORE_SUBMIT_INFO_KHR,
+            next: ptr::null(),
+            semaphore: Semaphore::default(),
+            value: u64::default(),
+            stage_mask: PipelineStageFlags2KHR::default(),
+            device_index: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreTypeCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12352,6 +12594,38 @@ impl Default for SubmitInfo {
             command_buffers: ptr::null(),
             signal_semaphore_count: u32::default(),
             signal_semaphores: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubmitInfo2KHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SubmitInfo2KHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: SubmitFlagsKHR,
+    pub wait_semaphore_info_count: u32,
+    pub wait_semaphore_infos: *const SemaphoreSubmitInfoKHR,
+    pub command_buffer_info_count: u32,
+    pub command_buffer_infos: *const CommandBufferSubmitInfoKHR,
+    pub signal_semaphore_info_count: u32,
+    pub signal_semaphore_infos: *const SemaphoreSubmitInfoKHR,
+}
+
+impl Default for SubmitInfo2KHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SUBMIT_INFO_2_KHR,
+            next: ptr::null(),
+            flags: SubmitFlagsKHR::default(),
+            wait_semaphore_info_count: u32::default(),
+            wait_semaphore_infos: ptr::null(),
+            command_buffer_info_count: u32::default(),
+            command_buffer_infos: ptr::null(),
+            signal_semaphore_info_count: u32::default(),
+            signal_semaphore_infos: ptr::null(),
         }
     }
 }
