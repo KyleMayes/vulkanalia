@@ -65,6 +65,10 @@
 - [Generating mipmaps](./quality/generating_mipmaps.md)
 - [Multisampling](./quality/multisampling.md)
 
+# Dynamic scenes
+
+- [Push constants](./dynamic/push_constants.md)
+
 # Conclusion
 
 - [Conclusion](./conclusion.md)

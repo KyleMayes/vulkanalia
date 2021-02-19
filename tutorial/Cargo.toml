@@ -176,3 +176,8 @@ path = "src/28_mipmapping.rs"
 
 name = "29_multisampling"
 path = "src/29_multisampling.rs"
+
+[[bin]]
+
+name = "30_push_constants"
+path = "src/30_push_constants.rs"
