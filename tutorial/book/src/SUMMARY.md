@@ -68,6 +68,7 @@
 # Dynamic scenes
 
 - [Push constants](./dynamic/push_constants.md)
+- [Recycling command buffers](./dynamic/recycling_command_buffers.md)
 
 # Conclusion
 

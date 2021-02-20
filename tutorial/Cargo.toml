@@ -181,3 +181,8 @@ path = "src/29_multisampling.rs"
 
 name = "30_push_constants"
 path = "src/30_push_constants.rs"
+
+[[bin]]
+
+name = "31_recycling_command_buffers"
+path = "src/31_recycling_command_buffers.rs"
