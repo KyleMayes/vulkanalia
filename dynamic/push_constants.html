@@ -1,0 +1,387 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Push constants - Vulkan Tutorial (Rust)</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="A Vulkan tutorial for Rust.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../overview.html"><strong aria-hidden="true">2.</strong> Overview</a></li><li class="chapter-item expanded "><a href="../development_environment.html"><strong aria-hidden="true">3.</strong> Development environment</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">4.</strong> FAQ</a></li><li class="chapter-item expanded affix "><li class="part-title">Setup</li><li class="chapter-item expanded "><a href="../setup/base_code.html"><strong aria-hidden="true">5.</strong> Base code</a></li><li class="chapter-item expanded "><a href="../setup/instance.html"><strong aria-hidden="true">6.</strong> Instance</a></li><li class="chapter-item expanded "><a href="../setup/validation_layers.html"><strong aria-hidden="true">7.</strong> Validation layers</a></li><li class="chapter-item expanded "><a href="../setup/physical_devices_and_queue_families.html"><strong aria-hidden="true">8.</strong> Physical devices and queue families</a></li><li class="chapter-item expanded "><a href="../setup/logical_device_and_queues.html"><strong aria-hidden="true">9.</strong> Logical device and queues</a></li><li class="chapter-item expanded affix "><li class="part-title">Presentation</li><li class="chapter-item expanded "><a href="../presentation/window_surface.html"><strong aria-hidden="true">10.</strong> Window surface</a></li><li class="chapter-item expanded "><a href="../presentation/swapchain.html"><strong aria-hidden="true">11.</strong> Swapchain</a></li><li class="chapter-item expanded "><a href="../presentation/image_views.html"><strong aria-hidden="true">12.</strong> Image views</a></li><li class="chapter-item expanded affix "><li class="part-title">Pipeline</li><li class="chapter-item expanded "><a href="../pipeline/introduction.html"><strong aria-hidden="true">13.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../pipeline/shader_modules.html"><strong aria-hidden="true">14.</strong> Shader modules</a></li><li class="chapter-item expanded "><a href="../pipeline/fixed_functions.html"><strong aria-hidden="true">15.</strong> Fixed functions</a></li><li class="chapter-item expanded "><a href="../pipeline/render_passes.html"><strong aria-hidden="true">16.</strong> Render passes</a></li><li class="chapter-item expanded "><a href="../pipeline/conclusion.html"><strong aria-hidden="true">17.</strong> Conclusion</a></li><li class="chapter-item expanded affix "><li class="part-title">Drawing</li><li class="chapter-item expanded "><a href="../drawing/framebuffers.html"><strong aria-hidden="true">18.</strong> Framebuffers</a></li><li class="chapter-item expanded "><a href="../drawing/command_buffers.html"><strong aria-hidden="true">19.</strong> Command buffers</a></li><li class="chapter-item expanded "><a href="../drawing/rendering_and_presentation.html"><strong aria-hidden="true">20.</strong> Rendering and presentation</a></li><li class="chapter-item expanded affix "><li class="part-title">Swapchain</li><li class="chapter-item expanded "><a href="../swapchain/recreation.html"><strong aria-hidden="true">21.</strong> Recreation</a></li><li class="chapter-item expanded affix "><li class="part-title">Vertex buffers</li><li class="chapter-item expanded "><a href="../vertex/vertex_input_description.html"><strong aria-hidden="true">22.</strong> Vertex input description</a></li><li class="chapter-item expanded "><a href="../vertex/vertex_buffer_creation.html"><strong aria-hidden="true">23.</strong> Vertex buffer creation</a></li><li class="chapter-item expanded "><a href="../vertex/staging_buffer.html"><strong aria-hidden="true">24.</strong> Staging buffer</a></li><li class="chapter-item expanded "><a href="../vertex/index_buffer.html"><strong aria-hidden="true">25.</strong> Index buffer</a></li><li class="chapter-item expanded affix "><li class="part-title">Uniform buffers</li><li class="chapter-item expanded "><a href="../uniform/descriptor_layout_and_buffer.html"><strong aria-hidden="true">26.</strong> Descriptor layout and buffer</a></li><li class="chapter-item expanded "><a href="../uniform/descriptor_pool_and_sets.html"><strong aria-hidden="true">27.</strong> Descriptor pool and sets</a></li><li class="chapter-item expanded affix "><li class="part-title">Texture mapping</li><li class="chapter-item expanded "><a href="../texture/images.html"><strong aria-hidden="true">28.</strong> Images</a></li><li class="chapter-item expanded "><a href="../texture/image_view_and_sampler.html"><strong aria-hidden="true">29.</strong> Image view and sampler</a></li><li class="chapter-item expanded "><a href="../texture/combined_image_sampler.html"><strong aria-hidden="true">30.</strong> Combined image sampler</a></li><li class="chapter-item expanded affix "><li class="part-title">Model</li><li class="chapter-item expanded "><a href="../model/depth_buffering.html"><strong aria-hidden="true">31.</strong> Depth buffering</a></li><li class="chapter-item expanded "><a href="../model/loading_models.html"><strong aria-hidden="true">32.</strong> Loading models</a></li><li class="chapter-item expanded affix "><li class="part-title">Rendering quality</li><li class="chapter-item expanded "><a href="../quality/generating_mipmaps.html"><strong aria-hidden="true">33.</strong> Generating mipmaps</a></li><li class="chapter-item expanded "><a href="../quality/multisampling.html"><strong aria-hidden="true">34.</strong> Multisampling</a></li><li class="chapter-item expanded affix "><li class="part-title">Dynamic scenes</li><li class="chapter-item expanded "><a href="../dynamic/push_constants.html" class="active"><strong aria-hidden="true">35.</strong> Push constants</a></li><li class="chapter-item expanded "><a href="../dynamic/recycling_command_buffers.html"><strong aria-hidden="true">36.</strong> Recycling command buffers</a></li><li class="chapter-item expanded "><a href="../dynamic/secondary_command_buffers.html"><strong aria-hidden="true">37.</strong> Secondary command buffers</a></li><li class="chapter-item expanded affix "><li class="part-title">Conclusion</li><li class="chapter-item expanded "><a href="../conclusion.html"><strong aria-hidden="true">38.</strong> Conclusion</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#push-constants" id="push-constants">Push constants</a></h1>
+<blockquote>
+<p><span style="display: flex; justify-content: center; margin-bottom: 16px"><img src="../images/i_have_no_idea_what_im_doing.jpg" width="256"></span>The previous chapters of this tutorial that are not marked by this disclaimer were directly adapted from <a href="https://github.com/Overv/VulkanTutorial">https://github.com/Overv/VulkanTutorial</a>.<br/><br/>This chapter and the following chapters are instead original creations from someone who is most decidedly not an expert in Vulkan. An authoritative tone has been maintained, but these chapters should be considered a &quot;best effort&quot; by someone still learning Vulkan.<br/><br/>If you have questions, suggestions, or corrections, please <a href="https://github.com/KyleMayes/vulkanalia/issues">open an issue</a>!</p>
+</blockquote>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/30_push_constants.rs">main.rs</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/30/shader.vert">shader.vert</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/30/shader.frag">shader.frag</a></p>
+<p>The scene that we've created in the tutorial thus far is static. While we can rotate and otherwise move the model around on the screen by manipulating the uniform buffers that provide the model, view, and projection (MVP) matrices, we can't alter <em>what</em> is being rendered. This is because the decision of what to render is made during program initialization when our command buffers are allocated and recorded.</p>
+<p>In the next few chapters we are going to explore various techniques we can use to accomplish the rendering of dynamic scenes. First, however, we are going to look at <em>push constants</em>, a Vulkan feature that allows us to easily and efficiently &quot;push&quot; dynamic data to shaders. Push constants alone will not accomplish our goal of a dynamic scene, but their usefulness should become clear over the next few chapters.</p>
+<h2><a class="header" href="#push-constants-vs-uniform-buffers" id="push-constants-vs-uniform-buffers">Push constants vs uniform buffers</a></h2>
+<p>We are already using another Vulkan feature to provide dynamic data to our vertex shader: uniform buffers. Every frame, the <code>App::update_uniform_buffer</code> method calculates the updated MVP matrices for the model's current rotation and copies those matrices to a uniform buffer. The vertex shader then reads those matrices from the uniform buffer to figure out where the vertices of the model belong on the screen.</p>
+<p>This approach works well enough, when would we want to use push constants instead? One advantage of push constants over uniform buffers is speed, updating a push constant will usually be significantly faster than copying new data to a uniform buffer. For a large number of values that need to be updated frequently, this difference can add up quickly.</p>
+<p>Of course there is a catch: the amount of data that can be provided to a shader using push constants has a <em>very</em> limited maximum size. This maximum size varies from device to device and is specified in bytes by the <code>max_push_constants_size</code> field of <code>vk::PhysicalDeviceLimits</code>. Vulkan requires that this limit be <a href="https://www.khronos.org/registry/vulkan/specs/1.2/html/chap33.html#limits-minmax">at least 128 bytes</a> (see table 32), but you won't find values much larger than that in the wild. Even high-end hardware like the RTX 3080 only has a limit of 256 bytes.</p>
+<p>If we wanted to, say, use push constants to provide our MVP matrices to our shaders we would immediately run into this limitation. The MVP matrices are too large to reliably fit in push constants, each matrix is 64 bytes (16 × 4 byte floats) leading to a total of 192 bytes. Of course we could maintain two code paths, one for devices that can handle push constants &gt;= 192 bytes and another for devices that can't, but there are simpler approaches we could take.</p>
+<p>One would be to premultiply our MVP matrices into a single matrix. Another would be to provide only the model matrix as a push constant and leave the view and projection matrices in the uniform buffer. Both would give us at least 64 bytes of headroom for other push constants even on devices providing only the minimum 128 bytes for push constants. In this chapter we will take the second approach to start exploring push constants.</p>
+<p>Why only the model matrix for the second approach? In the <code>App::update_uniform_buffer</code> method, you'll notice that the <code>model</code> matrix changes every frame as <code>time</code> increases, the <code>view</code> matrix is static, and the <code>proj</code> matrix only changes when the window is resized. This would allow us to only update the uniform buffer containing the view and projection matrices when the window is resized and use push constants to provide the constantly changing model matrix.</p>
+<p>Of course, in a more realistic application the view matrix would most likely not be static. For example, if you were building a first-person game, the view matrix would change very frequently as the player moves through the game world. However, the view and projection matrices, even if they change every frame, would be shared between all or at least most of the models you are rendering. This means you could continue updating the uniform buffer once per frame to provide the shared view and projection matrices and use push constants to provide the model matrices for each model in your scene.</p>
+<h2><a class="header" href="#pushing-the-model-matrix" id="pushing-the-model-matrix">Pushing the model matrix</a></h2>
+<p>With that wall of text out of the way, let's get started by moving the model matrix in the vertex shader from the uniform buffer object to a push constant. Don't forget to recompile the vertex shader afterwards!</p>
+<pre><code class="language-glsl">#version 450
+
+layout(binding = 0) uniform UniformBufferObject {
+    mat4 view;
+    mat4 proj;
+} ubo;
+
+layout(push_constant) uniform PushConstants {
+    mat4 model;
+} pcs;
+
+// ...
+
+void main() {
+    gl_Position = ubo.proj * ubo.view * pcs.model * vec4(inPosition, 1.0);
+    // ...
+}
+</code></pre>
+<p>Note that the layout is <code>push_constant</code> and not something like <code>push_constant = 0</code> like how the uniform buffer object is defined. This is because we can only provide one collection of push constants for an invocation of a graphics pipeline and this collection is very limited in size as described previously.</p>
+<p>Remove <code>model</code> from the <code>UniformBufferObject</code> struct since we will be specifying it as a push constant from here on out.</p>
+<pre><code class="language-rust noplaypen">#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+struct UniformBufferObject {
+    view: glm::Mat4,
+    proj: glm::Mat4,
+}
+</code></pre>
+<p>Also remove <code>model</code> from the <code>App::update_command_buffers</code> method.</p>
+<pre><code class="language-rust noplaypen">let view = glm::look_at(
+    &amp;glm::vec3(2.0, 2.0, 2.0),
+    &amp;glm::vec3(0.0, 0.0, 0.0),
+    &amp;glm::vec3(0.0, 0.0, 1.0),
+);
+
+let mut proj = glm::perspective_rh_zo(
+    self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+    glm::radians(&amp;glm::vec1(45.0))[0],
+    0.1,
+    10.0,
+);
+
+proj[(1, 1)] *= -1.0;
+
+let ubo = UniformBufferObject { view, proj };
+
+// ...
+</code></pre>
+<p>We need to tell Vulkan about our new push constant by describing it in the layout of our graphics pipeline. In the <code>create_pipeline</code> function you'll see that we are already providing our descriptor set layout to <code>create_pipeline_layout</code>. This descriptor set layout describes the uniform buffer object and texture sampler used in our shaders and we need to similarly describe any push constants accessed by the shaders in our graphics pipeline using <code>vk::PushConstantRange</code>.</p>
+<pre><code class="language-rust noplaypen">let vert_push_constant_range = vk::PushConstantRange::builder()
+    .stage_flags(vk::ShaderStageFlags::VERTEX)
+    .offset(0)
+    .size(64 /* 16 × 4 byte floats */);
+
+let set_layouts = &amp;[data.descriptor_set_layout];
+let push_constant_ranges = &amp;[vert_push_constant_range];
+let layout_info = vk::PipelineLayoutCreateInfo::builder()
+    .set_layouts(set_layouts)
+    .push_constant_ranges(push_constant_ranges);
+
+data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
+</code></pre>
+<p>The push constant range here specifies that the push constants accessed by the vertex shader can be found at the beginning of the push constants provided to the graphics pipeline and are the size of a <code>mat4</code>.</p>
+<p>With all that in place, we can actually start pushing the model matrix to the vertex shader. Push constants are recorded directly into the command buffers submitted to the GPU which is both why they are so fast and why their size is so limited.</p>
+<p>In the <code>create_command_buffers</code> function, define a model matrix and use <code>cmd_push_constants</code> to add it to the the command buffers as a push constant right before we record the draw command.</p>
+<pre><code class="language-rust noplaypen">let model = glm::rotate(&amp;glm::identity(), 0.0f32, &amp;glm::vec3(0.0, 0.0, 1.0));
+let (_, model_bytes, _) = unsafe { model.as_slice().align_to::&lt;u8&gt;() };
+
+for (i, command_buffer) in data.command_buffers.iter().enumerate() {
+    // ...
+
+    device.cmd_push_constants(
+        *command_buffer,
+        data.pipeline_layout,
+        vk::ShaderStageFlags::VERTEX,
+        0,
+        model_bytes,
+    );
+    device.cmd_draw_indexed(*command_buffer, data.indices.len() as u32, 1, 0, 0, 0);
+
+    // ...
+}
+</code></pre>
+<p>If you run the program now you will see the familiar model, but it is no longer rotating! Instead of updating the model matrix in the uniform buffer object every frame we are now encoding it into the command buffers which, as previously discussed, are never updated. This further highlights the need to somehow update our command buffers, a topic that will be covered in the next chapter. For now, let's round out this chapter by adding a push constant to the fragment shader.</p>
+<h2><a class="header" href="#pushing-the-opacity" id="pushing-the-opacity">Pushing the opacity</a></h2>
+<p>Next we'll add a push constant to the fragment shader which we can use to control the opacity of the model. Start by modifying the fragment shader to include the push constant and to use it as the alpha channel of the fragment color. Again, be sure to recompile the shader!</p>
+<pre><code class="language-glsl">#version 450
+
+layout(binding = 1) uniform sampler2D texSampler;
+
+layout(push_constant) uniform PushConstants {
+    layout(offset = 64) float opacity;
+} pcs;
+
+// ...
+
+void main() {
+    outColor = vec4(texture(texSampler, fragTexCoord).rgb, pcs.opacity);
+}
+</code></pre>
+<p>This time we specify an offset for the push constant value. Remember that push constants are shared between all of the shaders in a graphics pipeline so we need to account for the fact that the first 64 bytes of the push constants are occupied by the model matrix used in the vertex shader.</p>
+<p>Add a push constant range for the new opacity push constant to the pipeline layout.</p>
+<pre><code class="language-rust noplaypen">let vert_push_constant_range = vk::PushConstantRange::builder()
+    .stage_flags(vk::ShaderStageFlags::VERTEX)
+    .offset(0)
+    .size(64 /* 16 × 4 byte floats */);
+
+let frag_push_constant_range = vk::PushConstantRange::builder()
+    .stage_flags(vk::ShaderStageFlags::FRAGMENT)
+    .offset(64)
+    .size(4);
+
+let set_layouts = &amp;[data.descriptor_set_layout];
+let push_constant_ranges = &amp;[vert_push_constant_range, frag_push_constant_range];
+let layout_info = vk::PipelineLayoutCreateInfo::builder()
+    .set_layouts(set_layouts)
+    .push_constant_ranges(push_constant_ranges);
+
+data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
+</code></pre>
+<p>Lastly, add another call to <code>cmd_push_constants</code> in the <code>create_command_buffers</code> after the call for the model matrix.</p>
+<pre><code class="language-rust noplaypen">device.cmd_push_constants(
+    *command_buffer,
+    data.pipeline_layout,
+    vk::ShaderStageFlags::VERTEX,
+    0,
+    model_bytes,
+);
+device.cmd_push_constants(
+    *command_buffer,
+    data.pipeline_layout,
+    vk::ShaderStageFlags::FRAGMENT,
+    64,
+    &amp;0.25f32.to_ne_bytes()[..],
+);
+device.cmd_draw_indexed(*command_buffer, data.indices.len() as u32, 1, 0, 0, 0);
+</code></pre>
+<p>Here we provide an opacity of <code>0.25</code> to the fragment shader by recording it into the command buffer after the 64 bytes of the model matrix. However, if you were to run the program now, you'd find that the model is still entirely opaque!</p>
+<p>Back in the <a href="../pipeline/fixed_functions.html#color-blending">chapter on fixed function operations</a>, we discussed what was necessary to set up alpha blending so that we could render transparent geometries to the framebuffers. However, back then we left alpha blending disabled. Update the <code>vk::PipelineColorBlendAttachmentState</code> in the <code>create_pipeline</code> function to enable alpha blending as described in that chapter.</p>
+<pre><code class="language-rust noplaypen">let attachment = vk::PipelineColorBlendAttachmentState::builder()
+    .color_write_mask(vk::ColorComponentFlags::all())
+    .blend_enable(true)
+    .src_color_blend_factor(vk::BlendFactor::SRC_ALPHA)
+    .dst_color_blend_factor(vk::BlendFactor::ONE_MINUS_SRC_ALPHA)
+    .color_blend_op(vk::BlendOp::ADD)
+    .src_alpha_blend_factor(vk::BlendFactor::ONE)
+    .dst_alpha_blend_factor(vk::BlendFactor::ZERO)
+    .alpha_blend_op(vk::BlendOp::ADD);
+</code></pre>
+<p>Run the program to see our now ghostly model.</p>
+<p><img src="../images/opacity_push_constant.png" alt="" /></p>
+<p>Success!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../quality/multisampling.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../dynamic/recycling_command_buffers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../quality/multisampling.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../dynamic/recycling_command_buffers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

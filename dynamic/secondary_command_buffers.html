@@ -1,0 +1,447 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Secondary command buffers - Vulkan Tutorial (Rust)</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="A Vulkan tutorial for Rust.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../overview.html"><strong aria-hidden="true">2.</strong> Overview</a></li><li class="chapter-item expanded "><a href="../development_environment.html"><strong aria-hidden="true">3.</strong> Development environment</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">4.</strong> FAQ</a></li><li class="chapter-item expanded affix "><li class="part-title">Setup</li><li class="chapter-item expanded "><a href="../setup/base_code.html"><strong aria-hidden="true">5.</strong> Base code</a></li><li class="chapter-item expanded "><a href="../setup/instance.html"><strong aria-hidden="true">6.</strong> Instance</a></li><li class="chapter-item expanded "><a href="../setup/validation_layers.html"><strong aria-hidden="true">7.</strong> Validation layers</a></li><li class="chapter-item expanded "><a href="../setup/physical_devices_and_queue_families.html"><strong aria-hidden="true">8.</strong> Physical devices and queue families</a></li><li class="chapter-item expanded "><a href="../setup/logical_device_and_queues.html"><strong aria-hidden="true">9.</strong> Logical device and queues</a></li><li class="chapter-item expanded affix "><li class="part-title">Presentation</li><li class="chapter-item expanded "><a href="../presentation/window_surface.html"><strong aria-hidden="true">10.</strong> Window surface</a></li><li class="chapter-item expanded "><a href="../presentation/swapchain.html"><strong aria-hidden="true">11.</strong> Swapchain</a></li><li class="chapter-item expanded "><a href="../presentation/image_views.html"><strong aria-hidden="true">12.</strong> Image views</a></li><li class="chapter-item expanded affix "><li class="part-title">Pipeline</li><li class="chapter-item expanded "><a href="../pipeline/introduction.html"><strong aria-hidden="true">13.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../pipeline/shader_modules.html"><strong aria-hidden="true">14.</strong> Shader modules</a></li><li class="chapter-item expanded "><a href="../pipeline/fixed_functions.html"><strong aria-hidden="true">15.</strong> Fixed functions</a></li><li class="chapter-item expanded "><a href="../pipeline/render_passes.html"><strong aria-hidden="true">16.</strong> Render passes</a></li><li class="chapter-item expanded "><a href="../pipeline/conclusion.html"><strong aria-hidden="true">17.</strong> Conclusion</a></li><li class="chapter-item expanded affix "><li class="part-title">Drawing</li><li class="chapter-item expanded "><a href="../drawing/framebuffers.html"><strong aria-hidden="true">18.</strong> Framebuffers</a></li><li class="chapter-item expanded "><a href="../drawing/command_buffers.html"><strong aria-hidden="true">19.</strong> Command buffers</a></li><li class="chapter-item expanded "><a href="../drawing/rendering_and_presentation.html"><strong aria-hidden="true">20.</strong> Rendering and presentation</a></li><li class="chapter-item expanded affix "><li class="part-title">Swapchain</li><li class="chapter-item expanded "><a href="../swapchain/recreation.html"><strong aria-hidden="true">21.</strong> Recreation</a></li><li class="chapter-item expanded affix "><li class="part-title">Vertex buffers</li><li class="chapter-item expanded "><a href="../vertex/vertex_input_description.html"><strong aria-hidden="true">22.</strong> Vertex input description</a></li><li class="chapter-item expanded "><a href="../vertex/vertex_buffer_creation.html"><strong aria-hidden="true">23.</strong> Vertex buffer creation</a></li><li class="chapter-item expanded "><a href="../vertex/staging_buffer.html"><strong aria-hidden="true">24.</strong> Staging buffer</a></li><li class="chapter-item expanded "><a href="../vertex/index_buffer.html"><strong aria-hidden="true">25.</strong> Index buffer</a></li><li class="chapter-item expanded affix "><li class="part-title">Uniform buffers</li><li class="chapter-item expanded "><a href="../uniform/descriptor_layout_and_buffer.html"><strong aria-hidden="true">26.</strong> Descriptor layout and buffer</a></li><li class="chapter-item expanded "><a href="../uniform/descriptor_pool_and_sets.html"><strong aria-hidden="true">27.</strong> Descriptor pool and sets</a></li><li class="chapter-item expanded affix "><li class="part-title">Texture mapping</li><li class="chapter-item expanded "><a href="../texture/images.html"><strong aria-hidden="true">28.</strong> Images</a></li><li class="chapter-item expanded "><a href="../texture/image_view_and_sampler.html"><strong aria-hidden="true">29.</strong> Image view and sampler</a></li><li class="chapter-item expanded "><a href="../texture/combined_image_sampler.html"><strong aria-hidden="true">30.</strong> Combined image sampler</a></li><li class="chapter-item expanded affix "><li class="part-title">Model</li><li class="chapter-item expanded "><a href="../model/depth_buffering.html"><strong aria-hidden="true">31.</strong> Depth buffering</a></li><li class="chapter-item expanded "><a href="../model/loading_models.html"><strong aria-hidden="true">32.</strong> Loading models</a></li><li class="chapter-item expanded affix "><li class="part-title">Rendering quality</li><li class="chapter-item expanded "><a href="../quality/generating_mipmaps.html"><strong aria-hidden="true">33.</strong> Generating mipmaps</a></li><li class="chapter-item expanded "><a href="../quality/multisampling.html"><strong aria-hidden="true">34.</strong> Multisampling</a></li><li class="chapter-item expanded affix "><li class="part-title">Dynamic scenes</li><li class="chapter-item expanded "><a href="../dynamic/push_constants.html"><strong aria-hidden="true">35.</strong> Push constants</a></li><li class="chapter-item expanded "><a href="../dynamic/recycling_command_buffers.html"><strong aria-hidden="true">36.</strong> Recycling command buffers</a></li><li class="chapter-item expanded "><a href="../dynamic/secondary_command_buffers.html" class="active"><strong aria-hidden="true">37.</strong> Secondary command buffers</a></li><li class="chapter-item expanded affix "><li class="part-title">Conclusion</li><li class="chapter-item expanded "><a href="../conclusion.html"><strong aria-hidden="true">38.</strong> Conclusion</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#secondary-command-buffers" id="secondary-command-buffers">Secondary command buffers</a></h1>
+<blockquote>
+<p><span style="display: flex; justify-content: center; margin-bottom: 16px"><img src="../images/i_have_no_idea_what_im_doing.jpg" width="256"></span>The previous chapters of this tutorial that are not marked by this disclaimer were directly adapted from <a href="https://github.com/Overv/VulkanTutorial">https://github.com/Overv/VulkanTutorial</a>.<br/><br/>This chapter and the following chapters are instead original creations from someone who is most decidedly not an expert in Vulkan. An authoritative tone has been maintained, but these chapters should be considered a &quot;best effort&quot; by someone still learning Vulkan.<br/><br/>If you have questions, suggestions, or corrections, please <a href="https://github.com/KyleMayes/vulkanalia/issues">open an issue</a>!</p>
+</blockquote>
+<p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/32_secondary_command_buffers.rs">main.rs</a></p>
+<p>While our program now submits different commands to be executed every frame, we still haven't quite accomplished our original goal of changing <em>what</em> our program renders dynamically. In this chapter we'll alter our program to support rendering between 1 and 4 instances of the model in response to user input.</p>
+<p>We'll accomplish this using <em>secondary command buffers</em>, a Vulkan feature that allows us to build re-usable sequences of commands and then execute those commands from <em>primary command buffers</em>. Secondary command buffers aren't at all necessary to implement this change, but our first time rendering multiple things is a good time to introduce them.</p>
+<h2><a class="header" href="#primary-vs-secondary" id="primary-vs-secondary">Primary vs secondary</a></h2>
+<p>All of the command buffers we've used thus far have been primary command buffers, meaning they can be submitted directly to a Vulkan queue to be executed by the device. Secondary command buffers are instead executed indirectly by being called from primary command buffers and may not be submitted to queues.</p>
+<p>The usage of secondary command buffers offers two primary advantages:</p>
+<ol>
+<li>
+<p>Secondary command buffers may be allocated and recorded in parallel which allows you to better leverage modern hardware with its panoply of CPU cores</p>
+</li>
+<li>
+<p>The lifetime of secondary command buffers can managed independently of one another so you can have a mixture of long-lived or permanent secondary command buffers that intermingle with frequently updated secondary command buffers which allows you to reduce the number of command buffers you need to create every frame</p>
+</li>
+</ol>
+<p>Both of these points are true for primary command buffers as well, but primary command buffers have a significant limitation that effectively prevents them from fulfilling these use cases. Multiple primary command buffers may not be executed within the same render pass instance meaning that if you wanted to execute multiple primary command buffers for a frame, each primary command buffer would need to start with <code>cmd_begin_render_pass</code> and end with <code>cmd_end_render_pass</code>.</p>
+<p>This might not sound like a big deal but beginning a render pass instance can be a pretty heavyweight operation and needing to do this many times per frame can destroy performance on some hardware. Secondary command buffers avoid this problem by being able to inherit the render pass instance as well as other state from the primary command buffer it is called from.</p>
+<h2><a class="header" href="#multiple-model-instances" id="multiple-model-instances">Multiple model instances</a></h2>
+<p>Let's get started by adding a new method for the <code>App</code> struct called <code>update_secondary_command_buffer</code> that will be used to allocate and record a secondary command buffer for one of the 4 model instances we will be rendering. The <code>model_index</code> parameter indicates which of the 4 model instances the secondary command buffer should render.</p>
+<pre><code class="language-rust noplaypen">fn update_secondary_command_buffer(
+    &amp;mut self,
+    image_index: usize,
+    model_index: usize,
+) -&gt; Result&lt;vk::CommandBuffer&gt; {
+    let allocate_info = vk::CommandBufferAllocateInfo::builder()
+        .command_pool(self.data.command_pools[image_index])
+        .level(vk::CommandBufferLevel::SECONDARY)
+        .command_buffer_count(1);
+
+    let command_buffer = self.device.allocate_command_buffers(&amp;allocate_info)?[0];
+
+    let info = vk::CommandBufferBeginInfo::builder();
+
+    self.device.begin_command_buffer(command_buffer, &amp;info)?;
+
+    self.device.end_command_buffer(command_buffer)?;
+
+    Ok(command_buffer)
+}
+</code></pre>
+<p>Note we are still using the per-framebuffer command pool rather than the global command pool but now we are allocating a <code>vk::CommandBufferLevel::SECONDARY</code> command buffer.</p>
+<p>Before we continue, we need to provide some additional information to Vulkan that is unique to secondary command buffers before recording this command buffer. Create an instance of <code>vk::CommandBufferInheritanceInfo</code> that specifies the render pass, subpass index, and framebuffer the secondary command buffer will be used in conjunction with and then provide that inheritance info to <code>begin_command_buffer</code>.</p>
+<pre><code class="language-rust noplaypen">let inheritance_info = vk::CommandBufferInheritanceInfo::builder()
+    .render_pass(self.data.render_pass)
+    .subpass(0)
+    .framebuffer(self.data.framebuffers[image_index]);
+
+let info = vk::CommandBufferBeginInfo::builder()
+    .inheritance_info(&amp;inheritance_info);
+
+self.device.begin_command_buffer(command_buffer, &amp;info)?;
+</code></pre>
+<p>As mentioned previously, secondary command buffers can inherit some state from the primary command buffers they are executed from. This inheritance info describes the command buffer state the secondary command buffer will be compatible with and may validly inherit.</p>
+<p>The render pass and subpass index are <em>required</em> to inherit that state, but the framebuffer is only specified here as a potential performance boost. You may omit it, but Vulkan may be able to better optimize the secondary command buffer to render to the specified framebuffer.</p>
+<p>This isn't enough to actually inherit the render pass, we need to also provide <code>vk::CommandBufferUsageFlags::RENDER_PASS_CONTINUE</code> to <code>begin_command_buffer</code>. This tells Vulkan that this secondary command buffer will be executed entirely inside a render pass.</p>
+<pre><code class="language-rust noplaypen">let info = vk::CommandBufferBeginInfo::builder()
+    .flags(vk::CommandBufferUsageFlags::RENDER_PASS_CONTINUE)
+    .inheritance_info(&amp;inheritance_info);
+
+self.device.begin_command_buffer(command_buffer, &amp;info)?;
+</code></pre>
+<p>With inheritance set up, move the code that calculates the push constant values out of <code>App::update_command_buffer</code> and into <code>App::update_secondary_command_buffer</code> after the secondary command buffer is allocated. While you're at it, have the opacity of the model instance depend on the model index to add some variety to our scene, ranging from 25% to 100%.</p>
+<pre><code class="language-rust noplaypen">fn update_secondary_command_buffer(
+    &amp;mut self,
+    image_index: usize,
+    model_index: usize,
+) -&gt; Result&lt;vk::CommandBuffer&gt; {
+    // ...
+
+    let command_buffer = self.device.allocate_command_buffers(&amp;allocate_info)?[0];
+
+    let time = self.start.elapsed().as_secs_f32();
+
+    let model = glm::rotate(
+        &amp;glm::identity(),
+        time * glm::radians(&amp;glm::vec1(90.0))[0],
+        &amp;glm::vec3(0.0, 0.0, 1.0),
+    );
+
+    let (_, model_bytes, _) = unsafe { model.as_slice().align_to::&lt;u8&gt;() };
+
+    let opacity = (model_index + 1) as f32 * 0.25;
+    let opacity_bytes = &amp;opacity.to_ne_bytes()[..];
+
+    // ...
+}
+</code></pre>
+<p>Next we are going to move the rendering commands out of the primary command buffer and into the secondary command buffer. The primary command buffer will still be used to begin and end the render pass instance since it will be inherited by our secondary command buffers, but all of the commands in <code>App::update_command_buffer</code> between (but not including) <code>cmd_begin_render_pass</code> and <code>cmd_end_render_pass</code> should be moved into <code>App::update_secondary_command_buffer</code>.</p>
+<pre><code class="language-rust noplaypen">fn update_secondary_command_buffer(
+    &amp;mut self,
+    image_index: usize,
+    model_index: usize,
+) -&gt; Result&lt;vk::CommandBuffer&gt; {
+    // ...
+
+    self.device.begin_command_buffer(command_buffer, &amp;info)?;
+
+    self.device.cmd_bind_pipeline(command_buffer, vk::PipelineBindPoint::GRAPHICS, self.data.pipeline);
+    self.device.cmd_bind_vertex_buffers(command_buffer, 0, &amp;[self.data.vertex_buffer], &amp;[0]);
+    self.device.cmd_bind_index_buffer(command_buffer, self.data.index_buffer, 0, vk::IndexType::UINT32);
+    self.device.cmd_bind_descriptor_sets(
+        command_buffer,
+        vk::PipelineBindPoint::GRAPHICS,
+        self.data.pipeline_layout,
+        0,
+        &amp;[self.data.descriptor_sets[image_index]],
+        &amp;[],
+    );
+    self.device.cmd_push_constants(
+        command_buffer,
+        self.data.pipeline_layout,
+        vk::ShaderStageFlags::VERTEX,
+        0,
+        model_bytes,
+    );
+    self.device.cmd_push_constants(
+        command_buffer,
+        self.data.pipeline_layout,
+        vk::ShaderStageFlags::FRAGMENT,
+        64,
+        opacity_bytes,
+    );
+    self.device.cmd_draw_indexed(command_buffer, self.data.indices.len() as u32, 1, 0, 0, 0);
+
+    self.device.end_command_buffer(command_buffer)?;
+
+    // ...
+}
+</code></pre>
+<p>Now that we can easily create secondary command buffers for rendering the model instance, call our new method in <code>App::update_command_buffers</code> and execute the returned secondary command buffer using <code>cmd_execute_commands</code>.</p>
+<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+    // ...
+
+    self.device.cmd_begin_render_pass(command_buffer, &amp;info, vk::SubpassContents::INLINE);
+
+    let secondary_command_buffer = self.update_secondary_command_buffer(image_index, 0)?;
+    self.device.cmd_execute_commands(command_buffer, &amp;[secondary_command_buffer]);
+
+    self.device.cmd_end_render_pass(command_buffer);
+
+    // ...
+}
+</code></pre>
+<p>This change has invalidated our call to <code>cmd_begin_render_pass</code> because we are providing <code>vk::SubpassContents::INLINE</code> which indicates we will be recording rendering commands directly into the primary command buffer. Now that we've moved the rendering commands into the secondary command buffer, we need to use <code>vk::SubpassContents::SECONDARY_COMMAND_BUFFERS</code>.</p>
+<pre><code class="language-rust noplaypen">self.device.cmd_begin_render_pass(
+    command_buffer,
+    &amp;info,
+    vk::SubpassContents::SECONDARY_COMMAND_BUFFERS,
+);
+</code></pre>
+<p>Note that these are mutually exclusive modes, you can't mix secondary command buffers and inline rendering commands in a render pass instance.</p>
+<p>If you run the program now, you should see the same ghostly model rotating exactly as it was before. Let's kick it up a notch by rendering 4 instances of the model by creating 4 secondary command buffers and executing them all from the primary command buffer.</p>
+<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+    // ...
+
+    self.device.cmd_begin_render_pass(command_buffer, &amp;info, vk::SubpassContents::INLINE);
+
+    let secondary_command_buffers = (0..4)
+        .map(|i| self.update_secondary_command_buffer(image_index, i))
+        .collect::&lt;Result&lt;Vec&lt;_&gt;, _&gt;&gt;()?;
+    self.device.cmd_execute_commands(command_buffer, &amp;secondary_command_buffers[..]);
+
+    self.device.cmd_end_render_pass(command_buffer);
+
+    // ...
+}
+</code></pre>
+<p>If you run the program again, you'll see a strange shimmering as the 4 model instances, being rendered at the same coordinates, experience a bad bout of <a href="https://en.wikipedia.org/wiki/Z-fighting">z-fighting</a>.</p>
+<p>Update the model matrix calculation in <code>App::update_secondary_command_buffers</code> to translate the models before rotating them according to their model index.</p>
+<pre><code class="language-rust noplaypen">let y = (((model_index % 2) as f32) * 2.5) - 1.25;
+let z = (((model_index / 2) as f32) * -2.0) + 1.0;
+
+let model = glm::translate(
+    &amp;glm::identity(),
+    &amp;glm::vec3(0.0, y, z),
+);
+
+let time = self.start.elapsed().as_secs_f32();
+
+let model = glm::rotate(
+    &amp;model,
+    time * glm::radians(&amp;glm::vec1(90.0))[0],
+    &amp;glm::vec3(0.0, 0.0, 1.0),
+);
+</code></pre>
+<p>This code places the model instances in a grid on the Y and Z axes. However, due to the view matrix we're using, the camera is looking at this plane at 45 degree angles so let's update the view matrix in <code>App::update_uniform_buffer</code> to look directly at the YZ plane to better view our model instances.</p>
+<pre><code class="language-rust noplaypen">let view = glm::look_at(
+    &amp;glm::vec3(6.0, 0.0, 2.0),
+    &amp;glm::vec3(0.0, 0.0, 0.0),
+    &amp;glm::vec3(0.0, 0.0, 1.0),
+);
+</code></pre>
+<p>With a better vantage point secured, run the program and bask in its glory.</p>
+<p><img src="../images/4_models.png" alt="" /></p>
+<p>Let's kick it up another notch with a hit from the spice weasel by allowing the user to determine how many of these models they want to render. Add a <code>models</code> field to the <code>App</code> struct and initialize it to 1 in the constructor.</p>
+<pre><code class="language-rust noplaypen">struct App {
+    // ...
+    models: usize,
+}
+</code></pre>
+<p>Update the model index range in <code>App::update_command_buffer</code> to range from 0 to the value of the <code>models</code> field.</p>
+<pre><code class="language-rust noplaypen">let secondary_command_buffers = (0..self.models)
+    .map(|i| self.update_secondary_command_buffer(image_index, i))
+    .collect::&lt;Result&lt;Vec&lt;_&gt;, _&gt;&gt;()?;
+</code></pre>
+<p>Now that we have all this in place, we just need to increment and decrement the <code>models</code> field in response to user input. Start by importing the following <code>winit</code> types we'll need to handle keyboard input.</p>
+<pre><code class="language-rust noplaypen">use winit::event::{ElementState, VirtualKeyCode};
+</code></pre>
+<p>Finally, add a case to the event match block in the <code>main</code> function that handles key presses and decrements <code>models</code> when the left arrow key is pressed (to a minimum of 1) and increments <code>models</code> when the right arrow key is pressed (to a maximum of 4).</p>
+<pre><code class="language-rust noplaypen">match event {
+    // ...
+    Event::WindowEvent { event: WindowEvent::KeyboardInput { input, .. }, .. } =&gt; {
+        if input.state == ElementState::Pressed {
+            match input.virtual_keycode {
+                Some(VirtualKeyCode::Left) if app.models &gt; 1 =&gt; app.models -= 1,
+                Some(VirtualKeyCode::Right) if app.models &lt; 4 =&gt; app.models += 1,
+                _ =&gt; { }
+            }
+        }
+    }
+    // ...
+}
+</code></pre>
+<p>Run the program and observe how the number of secondary command buffers we are allocating and executing each frame changes as you press the left and right arrow keys.</p>
+<p><img src="../images/3_models.png" alt="" /></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../dynamic/recycling_command_buffers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../conclusion.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../dynamic/recycling_command_buffers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../conclusion.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
