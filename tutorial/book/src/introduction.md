@@ -1,6 +1,8 @@
 # Introduction
 
-This tutorial is an adaptation of <https://vulkan-tutorial.com> to use Rust instead of C++. The majority of the credit for this tutorial should go the author of the original tutorial, [Alexander Overvoorde](https://github.com/Overv).
+This tutorial is an adaptation of <https://vulkan-tutorial.com> to use Rust instead of C++. The majority of the credit for this tutorial should go the author of the original tutorial ([Alexander Overvoorde](https://github.com/Overv)) and the [other contributors](https://github.com/Overv/VulkanTutorial/graphs/contributors).
+
+This tutorial also includes several additional chapters that are original creations of the author of this adapted tutorial (starting with the `Push Constants` chapter). These chapters introduce important Vulkan concepts and features that will be useful in almost any Vulkan application. However, as noted in the disclaimer for those chapters, they should be considered experimental.
 
 ## About
 

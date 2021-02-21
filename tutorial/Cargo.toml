@@ -176,3 +176,18 @@ path = "src/28_mipmapping.rs"
 
 name = "29_multisampling"
 path = "src/29_multisampling.rs"
+
+[[bin]]
+
+name = "30_push_constants"
+path = "src/30_push_constants.rs"
+
+[[bin]]
+
+name = "31_recycling_command_buffers"
+path = "src/31_recycling_command_buffers.rs"
+
+[[bin]]
+
+name = "32_secondary_command_buffers"
+path = "src/32_secondary_command_buffers.rs"

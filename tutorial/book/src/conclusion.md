@@ -2,7 +2,6 @@
 
 It has taken a lot of work to get to this point, but now you finally have a good base for a Vulkan program. The knowledge of the basic principles of Vulkan that you now possess should be sufficient to start exploring more of the features, like:
 
-* Push constants
 * Instanced rendering
 * Dynamic uniforms
 * Separate images and sampler descriptors
