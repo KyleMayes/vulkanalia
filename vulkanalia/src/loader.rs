@@ -53,7 +53,7 @@ mod libloading_loader {
         /// Constructs a Vulkan function loader from a Vulkan dynamic library.
         #[inline]
         pub fn new(filename: impl AsRef<OsStr>) -> Result<Self, Error> {
-            Library::new(filename).map(Self)
+            unsafe { Library::new(filename).map(Self) }
         }
 
         /// The loaded Vulkan dynamic library.
