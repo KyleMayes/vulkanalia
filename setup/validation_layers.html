@@ -228,7 +228,7 @@ let layers = if VALIDATION_ENABLED {
 <p>The validation layers will print debug messages to the standard output by default, but we can also handle them ourselves by providing an explicit callback in our program. This will also allow you to decide which kind of messages you would like to see, because not all are necessarily (fatal) errors. If you don't want to do that right now then you may skip to the last section in this chapter.</p>
 <p>To set up a callback in the program to handle messages and the associated details, we have to set up a debug messenger with a callback using the <code>VK_EXT_debug_utils</code> extension.</p>
 <p>We'll add some more code to our <code>create_instance</code> function. This time we'll modify the <code>extensions</code> list to be mutable and then add the debug utilities extension to the list when the validation layer is enabled:</p>
-<pre><code class="language-rust noplaypen">let mut extensions = vk_winit::get_required_instance_extensions(entry)?
+<pre><code class="language-rust noplaypen">let mut extensions = vk_window::get_required_instance_extensions(entry)?
     .iter()
     .map(|e| e.to_cstr().as_ptr())
     .collect::&lt;Vec&lt;_&gt;&gt;();
