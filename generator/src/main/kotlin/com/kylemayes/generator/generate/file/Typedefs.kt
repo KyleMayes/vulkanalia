@@ -9,8 +9,6 @@ import com.kylemayes.generator.registry.Typedef
 /** Generates Rust type aliases for Vulkan typedefs and platform types. */
 fun Registry.generateTypedefs() =
     """
-#![allow(non_camel_case_types)]
-
 use std::os::raw::{c_ulong, c_void};
 
 ${basetypes.values.sortedBy { it.name }.joinToString("\n") { generateTypedef(it) }}
