@@ -98,6 +98,17 @@ fun Changelog.generateMarkdown(): String {
 
 /** Adds or extends a `Bindings Updates` section to this changelog. */
 fun Changelog.addBindingsUpdates(commit: String, commitMessage: String) {
+    // Generate the change to add to the changelog.
+
+    val text = commitMessage.lines().first().removePrefix("Change log for ").removeSuffix(":")
+    val change = "[$text](https://github.com/KhronosGroup/Vulkan-Docs/commit/$commit)"
+
+    // Skip adding the change if it has already been applied to the changelog.
+
+    if (versions.any { it.sections.any { s -> s.changes.any { c -> c == change } } }) {
+        return
+    }
+
     // Add an unreleased version if the latest version has been released.
 
     if (versions[0].release != null) {
@@ -114,7 +125,5 @@ fun Changelog.addBindingsUpdates(commit: String, commitMessage: String) {
 
     // Add the change to the `Bindings Updates` section.
 
-    val text = commitMessage.lines().first().removePrefix("Change log for ").removeSuffix(":")
-    val change = "[$text](https://github.com/KhronosGroup/Vulkan-Docs/commit/$commit)"
     versions[0].sections[0].changes.add(change)
 }
