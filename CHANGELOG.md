@@ -13,7 +13,8 @@
 ### Changed
 - Bumped `libloading` version to `0.7`
 - Bumped `metal` version to `0.21`
-- Bumped `winit` version to `0.24`
+- Renamed `libloading_` Cargo feature to `libloading`
+- Removed `winit_` Cargo feature in favor of `window` feature
 
 ## [0.2.3] - 2020-11-23
 
