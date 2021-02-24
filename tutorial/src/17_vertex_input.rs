@@ -188,7 +188,7 @@ impl App {
         Ok(())
     }
 
-    // Recreates the swapchain for our Vulkan app.
+    /// Recreates the swapchain for our Vulkan app.
     fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
         self.device.device_wait_idle()?;
         self.destroy_swapchain();

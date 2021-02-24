@@ -205,7 +205,7 @@ impl App {
         Ok(())
     }
 
-    // Updates the uniform buffer object for our Vulkan app.
+    /// Updates the uniform buffer object for our Vulkan app.
     fn update_uniform_buffer(&self, image_index: usize) -> Result<()> {
         // MVP
 
@@ -250,7 +250,7 @@ impl App {
         Ok(())
     }
 
-    // Recreates the swapchain for our Vulkan app.
+    /// Recreates the swapchain for our Vulkan app.
     fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
         self.device.device_wait_idle()?;
         self.destroy_swapchain();
