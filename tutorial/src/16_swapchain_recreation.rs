@@ -10,7 +10,7 @@ use anyhow::*;
 use log::*;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
-use vulkanalia::winit as vk_winit;
+use vulkanalia::window as vk_window;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};
@@ -92,7 +92,7 @@ impl App {
         let entry = Entry::new(loader).map_err(|b| anyhow!("{}", b))?;
         let mut data = AppData::default();
         let instance = create_instance(&entry, &mut data)?;
-        data.surface = vk_winit::create_surface(&instance, window)?;
+        data.surface = vk_window::create_surface(&instance, window)?;
         pick_physical_device(&instance, &mut data)?;
         let device = create_logical_device(&instance, &mut data)?;
         create_swapchain(window, &instance, &device, &mut data)?;
@@ -290,7 +290,7 @@ fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
 
     // Extensions
 
-    let mut extensions = vk_winit::get_required_instance_extensions(entry)?
+    let mut extensions = vk_window::get_required_instance_extensions(entry)?
         .iter()
         .map(|e| e.to_cstr().as_ptr())
         .collect::<Vec<_>>();

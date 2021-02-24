@@ -105,7 +105,7 @@ To set up a callback in the program to handle messages and the associated detail
 We'll add some more code to our `^create_instance` function. This time we'll modify the `extensions` list to be mutable and then add the debug utilities extension to the list when the validation layer is enabled:
 
 ```rust,noplaypen
-let mut extensions = vk_winit::get_required_instance_extensions(entry)?
+let mut extensions = vk_window::get_required_instance_extensions(entry)?
     .iter()
     .map(|e| e.to_cstr().as_ptr())
     .collect::<Vec<_>>();
