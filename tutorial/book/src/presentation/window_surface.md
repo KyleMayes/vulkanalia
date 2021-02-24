@@ -4,7 +4,7 @@
 
 Since Vulkan is a platform agnostic API, it can not interface directly with the window system on its own. To establish the connection between Vulkan and the window system to present results to the screen, we need to use the WSI (Window System Integration) extensions. In this chapter we'll discuss the first one, which is `VK_KHR_surface`. It exposes a `vk::SurfaceKHR` object that represents an abstract type of surface to present rendered images to. The surface in our program will be backed by the window that we've already opened with `winit`.
 
-The `VK_KHR_surface` extension is an instance level extension and we've actually already enabled it, because it's included in the list returned by `vk_winit::get_required_instance_extensions`. The list also includes some other WSI extensions that we'll use in the next couple of chapters.
+The `VK_KHR_surface` extension is an instance level extension and we've actually already enabled it, because it's included in the list returned by `vk_window::get_required_instance_extensions`. The list also includes some other WSI extensions that we'll use in the next couple of chapters.
 
 The window surface needs to be created right after the instance creation, because it can actually influence the physical device selection. The reason we postponed this is because window surfaces are part of the larger topic of render targets and presentation for which the explanation would have cluttered the basic setup. It should also be noted that window surfaces are an entirely optional component in Vulkan, if you just need off-screen rendering. Vulkan allows you to do that without hacks like creating an invisible window (necessary for OpenGL).
 
@@ -25,9 +25,9 @@ struct AppData {
 }
 ```
 
-Although the `vk::SurfaceKHR` object and its usage is platform agnostic, its creation isn't because it depends on window system details. For example, it needs the `HWND` and `HMODULE` handles on Windows. Therefore there is a platform-specific addition to the extension, which on Windows is called `VK_KHR_win32_surface` and is also automatically included in the list from `vk_winit::get_required_instance_extensions`.
+Although the `vk::SurfaceKHR` object and its usage is platform agnostic, its creation isn't because it depends on window system details. For example, it needs the `HWND` and `HMODULE` handles on Windows. Therefore there is a platform-specific addition to the extension, which on Windows is called `VK_KHR_win32_surface` and is also automatically included in the list from `vk_window::get_required_instance_extensions`.
 
-I will demonstrate how this platform specific extension can be used to create a surface on Windows, but we won't actually use it in this tutorial. `vulkanalia` has `vk_winit::create_surface` that handles the platform differences for us. Still, it's good to see what it does behind the scenes before we start relying on it.
+I will demonstrate how this platform specific extension can be used to create a surface on Windows, but we won't actually use it in this tutorial. `vulkanalia` has `vk_window::create_surface` that handles the platform differences for us. Still, it's good to see what it does behind the scenes before we start relying on it.
 
 Because a window surface is a Vulkan object, it comes with a `vk::Win32SurfaceCreateInfoKHR` struct that needs to be filled in. It has two important parameters: `hinstance` and `hwnd`. These are the handles to the process and the window.
 
@@ -51,13 +51,13 @@ let surface = instance.create_win32_surface_khr(&info, None).unwrap();
 
 The process is similar for other platforms like Linux, where `create_xcb_surface_khr` takes an XCB connection and window as creation details with X11.
 
-The `vk_winit::create_surface` function performs exactly this operation with a different implementation for each platform. We'll now integrate it into our program. Add a call to the function in `App::create` right before we pick a physical device.
+The `vk_window::create_surface` function performs exactly this operation with a different implementation for each platform. We'll now integrate it into our program. Add a call to the function in `App::create` right before we pick a physical device.
 
 ```rust,noplaypen
 fn create(window: &Window) -> Result<Self> {
     // ...
     let mut data = AppData::default();
-    data.surface = vk_winit::create_surface(&instance, window)?;
+    data.surface = vk_window::create_surface(&instance, window)?;
     pick_physical_device(&instance, &mut data)?;
     // ...
 }

@@ -5,7 +5,7 @@
 use anyhow::*;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
-use vulkanalia::winit as vk_winit;
+use vulkanalia::window as vk_window;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};
@@ -90,7 +90,7 @@ fn create_instance(entry: &Entry) -> Result<Instance> {
 
     // Extensions
 
-    let extensions = vk_winit::get_required_instance_extensions(entry)?
+    let extensions = vk_window::get_required_instance_extensions(entry)?
         .iter()
         .map(|e| e.to_cstr().as_ptr())
         .collect::<Vec<_>>();

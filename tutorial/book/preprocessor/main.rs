@@ -14,7 +14,7 @@ use pulldown_cmark_to_cmark::cmark;
 /// The Vulkan API Registry index.
 const INDEX: &str = include_str!("../../../index.txt");
 /// The version of `vulkanalia` used by the tutorial.
-const VERSION: &str = "0.2.1";
+const VERSION: &str = "0.4.0";
 
 #[rustfmt::skip]
 pub fn app() -> App<'static, 'static> {
@@ -66,8 +66,8 @@ fn load_index() -> HashMap<&'static str, &'static str> {
     index.insert("Device", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/struct.Device.html");
     index.insert("Entry", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/struct.Entry.html");
     index.insert("Instance", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/struct.Instance.html");
-    index.insert("vk_winit::create_surface", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/winit/fn.create_surface.html");
-    index.insert("vk_winit::get_required_instance_extensions", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/winit/fn.get_required_instance_extensions.html");
+    index.insert("vk_window::create_surface", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/window/fn.create_surface.html");
+    index.insert("vk_window::get_required_instance_extensions", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/window/fn.get_required_instance_extensions.html");
 
     index
 }

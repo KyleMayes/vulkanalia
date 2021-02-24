@@ -6,13 +6,13 @@ The very first thing you will want to do is initialize the Vulkan library by cre
 
 ```rust,noplaypen
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
-use vulkanalia::winit as vk_winit;
+use vulkanalia::window as vk_window;
 use vulkanalia::prelude::v1_0::*;
 ```
 
 Here we first import `LibloadingLoader` which serves as `vulkanalia`'s `libloading` integration which we will use to load the initial Vulkan commands from the Vulkan shared library. The standard name of the Vulkan shared library on your operating system (e.g., `vulkan-1.dll` on Windows) is then imported as `LIBRARY`.
 
-Next we import `vulkanalia`'s `winit` integration as `vk_winit` which in this chapter we will use to enumerate the global Vulkan extensions required to render to a `winit` window. In a future chapter we will also use `vk_winit` to link our Vulkan instance with our window.
+Next we import `vulkanalia`'s window integration as `vk_window` which in this chapter we will use to enumerate the global Vulkan extensions required to render to a window. In a future chapter we will also use `vk_window` to link our Vulkan instance with our `winit` window.
 
 Lastly we import the Vulkan 1.0 prelude from `vulkanalia` which will provide all of the other Vulkan-related imports we will need for this and future chapters.
 
@@ -29,10 +29,10 @@ fn create_instance(entry: &Entry) -> Result<Instance> {
 }
 ```
 
-A lot of information in Vulkan is passed through structs instead of function parameters and we'll have to fill in one more struct to provide sufficient information for creating an instance. This next struct is not optional and tells the Vulkan driver which global extensions and validation layers we want to use. Global here means that they apply to the entire program and not a specific device, which will become clear in the next few chapters. First we'll need to use `vulkanalia`'s `winit` integration to enumerate the required global extensions and convert them into null-terminated C strings (`*const c_char`):
+A lot of information in Vulkan is passed through structs instead of function parameters and we'll have to fill in one more struct to provide sufficient information for creating an instance. This next struct is not optional and tells the Vulkan driver which global extensions and validation layers we want to use. Global here means that they apply to the entire program and not a specific device, which will become clear in the next few chapters. First we'll need to use `vulkanalia`'s window integration to enumerate the required global extensions and convert them into null-terminated C strings (`*const c_char`):
 
 ```rust,noplaypen
-let extensions = vk_winit::get_required_instance_extensions(entry)?
+let extensions = vk_window::get_required_instance_extensions(entry)?
     .iter()
     .map(|e| e.to_cstr().as_ptr())
     .collect::<Vec<_>>();
