@@ -15,6 +15,7 @@
 - Bumped `metal` version to `0.21`
 - Renamed `libloading_` Cargo feature to `libloading`
 - Removed `winit_` Cargo feature in favor of `window` feature
+- Added `provisional` Cargo feature which exposes provisional extensions
 
 ### Added
 - Added extension metadata to extension traits

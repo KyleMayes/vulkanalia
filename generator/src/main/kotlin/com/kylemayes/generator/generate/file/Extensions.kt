@@ -10,6 +10,19 @@ import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.intern
 import com.kylemayes.generator.support.toPascalCase
 
+/** The warning and `cfg` applied to the documentation for provisional extensions. */
+private val PROVISIONAL: String =
+    """
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+   """.trimEnd()
+
 /** Generates Rust modules and constants for Vulkan extensions. */
 fun Registry.generateExtensions() =
     """
@@ -43,9 +56,10 @@ pub const fn to_extension_name(bytes: &[u8]) -> ExtensionName {
 
 /** Generates a Rust constant for a Vulkan extension. */
 private fun Registry.generateExtension(extension: Extension): String {
+    val provisional = if (extension.provisional) { PROVISIONAL } else { "" }
     val deprecation = generateDeprecation(extension)?.let { "\n$it" } ?: ""
     return """
-/// <${generateManualUrl(extension)}>$deprecation
+/// <${generateManualUrl(extension)}>$provisional$deprecation
 pub const ${extension.name}_EXTENSION: ExtensionName =
     to_extension_name(b"${extension.name.original}");
     """.trim()
@@ -121,12 +135,21 @@ ${getExtensionGroups().values.flatten().sortedBy { it.name }.joinToString("") { 
     """
 /** Generates a Rust trait and implementation for a Vulkan extension. */
 private fun Registry.generateExtensionTrait(extension: Extension): String {
+    val provisional = if (extension.provisional) { PROVISIONAL } else { "" }
     val deprecation = generateDeprecation(extension)?.let { "\n$it" } ?: ""
+
     val name = "${extension.name.value.toPascalCase()}Extension"
     val type = extension.type!!.capitalize()
+
     val commands = extension.require.commands.mapNotNull { commands[it] }.sortedBy { it.name }
+
+    val implAttributes = listOf(
+        if (extension.provisional) { "#[cfg(feature = \"provisional\")]" } else { "" },
+        if (deprecation.isNotEmpty()) { "#[allow(deprecated)]" } else { "" }
+    ).filter { it.isNotBlank() }.joinToString("\n")
+
     return """
-/// <${generateManualUrl(extension)}>$deprecation
+/// <${generateManualUrl(extension)}>$provisional$deprecation
 pub trait $name: ${type}V1_0 {
     /// The metadata for this extension.
     #[allow(deprecated)]
@@ -135,7 +158,7 @@ pub trait $name: ${type}V1_0 {
     ${commands.joinToString("") { generateCommandWrapper(it) }}
 }
 
-${if (deprecation.isNotEmpty()) { "#[allow(deprecated)]" } else { "" }}
+$implAttributes
 impl $name for crate::$type { }
     """
 }

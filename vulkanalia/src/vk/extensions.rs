@@ -7032,6 +7032,14 @@ pub trait KhrPipelineLibraryExtension: DeviceV1_0 {
 impl KhrPipelineLibraryExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_portability_subset.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
 pub trait KhrPortabilitySubsetExtension: DeviceV1_0 {
     /// The metadata for this extension.
     #[allow(deprecated)]
@@ -7050,6 +7058,7 @@ pub trait KhrPortabilitySubsetExtension: DeviceV1_0 {
     };
 }
 
+#[cfg(feature = "provisional")]
 impl KhrPortabilitySubsetExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_push_descriptor.html>

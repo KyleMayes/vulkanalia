@@ -20,6 +20,7 @@ categories = ["graphics"]
 
 [features]
 
+provisional = ["vulkanalia-sys/provisional"]
 window = ["raw-window-handle", "cocoa", "metal", "objc"]
 
 [dependencies]
@@ -36,4 +37,4 @@ objc = { version = "0.2", optional = true }
 
 [package.metadata.docs.rs]
 
-features = ["libloading", "window"]
+features = ["libloading", "provisional", "window"]

@@ -352,6 +352,7 @@ data class Extension(
     val obsoletedby: String?,
     val promotedto: String?,
     val supported: String,
+    val provisional: Boolean,
     val require: Require,
 ) : Entity
 
@@ -368,6 +369,7 @@ private fun extractExtension(e: Element) = Extension(
     obsoletedby = e.getAttributeText("obsoletedby"),
     promotedto = e.getAttributeText("promotedto"),
     supported = e.getAttribute("supported"),
+    provisional = e.getAttributeText("provisional") == "true",
     require = extractRequire(e.getElements("require")),
 )
 

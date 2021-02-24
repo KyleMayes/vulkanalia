@@ -441,6 +441,14 @@ pub const KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION: ExtensionName =
 pub const KHR_PIPELINE_LIBRARY_EXTENSION: ExtensionName =
     to_extension_name(b"VK_KHR_pipeline_library");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_portability_subset.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
 pub const KHR_PORTABILITY_SUBSET_EXTENSION: ExtensionName =
     to_extension_name(b"VK_KHR_portability_subset");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_push_descriptor.html>
