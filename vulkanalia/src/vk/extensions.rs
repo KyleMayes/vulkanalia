@@ -562,7 +562,7 @@ pub trait AmdShaderInfoExtension: DeviceV1_0 {
         pipeline: Pipeline,
         shader_stage: ShaderStageFlags,
         info_type: ShaderInfoTypeAMD,
-    ) -> crate::VkResult<Vec<c_void>> {
+    ) -> crate::VkResult<Vec<u8>> {
         let mut info_size = 0;
 
         (self.commands().get_shader_info_amd)(
@@ -582,7 +582,7 @@ pub trait AmdShaderInfoExtension: DeviceV1_0 {
             shader_stage,
             info_type,
             &mut info_size,
-            info.as_mut_ptr(),
+            info.as_mut_ptr() as *mut c_void,
         );
 
         debug_assert!(info.capacity() == info_size as usize);
@@ -3367,7 +3367,7 @@ pub trait ExtValidationCacheExtension: DeviceV1_0 {
     fn get_validation_cache_data_ext(
         &self,
         validation_cache: ValidationCacheEXT,
-    ) -> crate::VkResult<Vec<c_void>> {
+    ) -> crate::VkResult<Vec<u8>> {
         let mut data_size = 0;
 
         (self.commands().get_validation_cache_data_ext)(
@@ -3383,7 +3383,7 @@ pub trait ExtValidationCacheExtension: DeviceV1_0 {
             self.handle(),
             validation_cache,
             &mut data_size,
-            data.as_mut_ptr(),
+            data.as_mut_ptr() as *mut c_void,
         );
 
         debug_assert!(data.capacity() == data_size as usize);
