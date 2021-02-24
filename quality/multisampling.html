@@ -171,7 +171,7 @@
     // ...
 }
 </code></pre>
-<p>By default we'll be using only one sample per pixel which is equivalent to no multisampling, in which case the final image will remain unchanged. The exact maximum number of samples can be extracted from <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PhysicalDeviceProperties.html"><code class="hljs">vk::PhysicalDeviceProperties</code></a> associated with our selected physical device. We're using a depth buffer, so we have to take into account the sample count for both color and depth. The highest sample count that is supported by both (&amp;) will be the maximum we can support. Add a function that will fetch this information for us:</p>
+<p>By default we'll be using only one sample per pixel which is equivalent to no multisampling, in which case the final image will remain unchanged. The exact maximum number of samples can be extracted from <code>vk::PhysicalDeviceProperties</code> associated with our selected physical device. We're using a depth buffer, so we have to take into account the sample count for both color and depth. The highest sample count that is supported by both (&amp;) will be the maximum we can support. Add a function that will fetch this information for us:</p>
 <pre><code class="language-rust noplaypen">fn get_max_msaa_samples(
     instance: &amp;Instance,
     data: &amp;AppData,
@@ -212,7 +212,7 @@
     // ...
 }
 </code></pre>
-<p>This new image will have to store the desired number of samples per pixel, so we need to pass this number to <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageCreateInfo.html"><code class="hljs">vk::ImageCreateInfo</code></a> during the image creation process. Modify the <code>create_image</code> function by adding a <code>samples</code> parameter:</p>
+<p>This new image will have to store the desired number of samples per pixel, so we need to pass this number to <code>vk::ImageCreateInfo</code> during the image creation process. Modify the <code>create_image</code> function by adding a <code>samples</code> parameter:</p>
 <pre><code class="language-rust noplaypen">fn create_image(
     instance: &amp;Instance,
     device: &amp;Device,
@@ -236,7 +236,7 @@
     // ...
 }
 </code></pre>
-<p>For now, update all calls to this function using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.SampleCountFlags.html#associatedconstant._1"><code class="hljs">vk::SampleCountFlags::_1</code></a> - we will be replacing this with proper values as we progress with implementation:</p>
+<p>For now, update all calls to this function using <code>vk::SampleCountFlags::_1</code> - we will be replacing this with proper values as we progress with implementation:</p>
 <pre><code class="language-rust noplaypen">let (depth_image, depth_image_memory) = create_image(
     instance,
     device,
@@ -375,7 +375,7 @@ let (texture_image, texture_image_memory) = create_image(
     // ...
 }
 </code></pre>
-<p>You'll notice that we have changed the finalLayout from <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.PRESENT_SRC_KHR"><code class="hljs">vk::ImageLayout::PRESENT_SRC_KHR</code></a> to <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.COLOR_ATTACHMENT_OPTIMAL"><code class="hljs">vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL</code></a>. That's because multisampled images cannot be presented directly. We first need to resolve them to a regular image. This requirement does not apply to the depth buffer, since it won't be presented at any point. Therefore we will have to add only one new attachment for color which is a so-called resolve attachment:</p>
+<p>You'll notice that we have changed the finalLayout from <code>vk::ImageLayout::PRESENT_SRC_KHR</code> to <code>vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL</code>. That's because multisampled images cannot be presented directly. We first need to resolve them to a regular image. This requirement does not apply to the depth buffer, since it won't be presented at any point. Therefore we will have to add only one new attachment for color which is a so-called resolve attachment:</p>
 <pre><code class="language-rust noplaypen">let color_resolve_attachment = vk::AttachmentDescription::builder()
     .format(data.swapchain_format)
     .samples(vk::SampleCountFlags::_1)
