@@ -20,8 +20,8 @@ Released under the Apache License 2.0.
 
 The `vulkanalia` crate has the following notable Cargo features:
 
-* `libloading_` (**non-default**) &ndash; enables integration with [`libloading`](https://crates.io/crates/libloading) (adds the [`LibloadingLoader`](https://docs.rs/vulkanalia/latest/vulkanalia/loader/struct.LibloadingLoader.html) struct which can be used to load the initial Vulkan commands from a Vulkan shared library)
-* `winit_` (**non-default**) &ndash; enables integration with [`winit`](https://crates.io/crates/winit) (adds the [`vk_winit`](https://docs.rs/vulkanalia/latest/vulkanalia/winit/index.html) module which can be used to create Vulkan surfaces for `winit` windows and enumerate the required Vulkan extensions)
+* `libloading` (**non-default**) &ndash; enables integration with [`libloading`](https://crates.io/crates/libloading) (adds the [`LibloadingLoader`](https://docs.rs/vulkanalia/latest/vulkanalia/loader/struct.LibloadingLoader.html) struct which can be used to load the initial Vulkan commands from a Vulkan shared library)
+* `window` (**non-default**) &ndash; enables integration with [`raw-window-handle`](https://crates.io/crates/raw-window-handle) (adds the [`window`](https://docs.rs/vulkanalia/latest/vulkanalia/window/index.html) module which can be used to create surfaces for windows from libraries that support `raw-window-handle` (e.g., [`winit`](https://crates.io/crates/winit))
 
 ## Example
 

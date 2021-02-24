@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
-#![allow(dead_code, unused_variables, clippy::too_many_arguments)]
+#![allow(dead_code, unused_variables, clippy::too_many_arguments, clippy::unnecessary_wraps)]
 
 use std::collections::HashSet;
 use std::ffi::CStr;

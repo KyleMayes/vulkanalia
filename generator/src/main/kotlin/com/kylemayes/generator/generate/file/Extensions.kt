@@ -53,8 +53,6 @@ pub const ${extension.name}_EXTENSION: ExtensionName =
 /** Generates Rust modules and traits for Vulkan extensions. */
 fun Registry.generateExtensionTraits() =
     """
-#![allow(non_camel_case_types, clippy::too_many_arguments, clippy::type_complexity)]
-
 use std::ffi::CStr;
 use std::mem::MaybeUninit;
 use std::os::raw::{c_int, c_void};

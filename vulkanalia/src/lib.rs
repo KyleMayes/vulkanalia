@@ -5,8 +5,8 @@
 pub mod loader;
 pub mod vk;
 
-#[cfg(feature = "winit_")]
-pub mod winit;
+#[cfg(feature = "window")]
+pub mod window;
 
 use std::collections::HashSet;
 use std::error;

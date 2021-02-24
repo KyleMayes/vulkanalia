@@ -19,8 +19,6 @@ import com.kylemayes.generator.registry.isStringPointer
 /** Generates Rust structs to build Vulkan structs. */
 fun Registry.generateBuilders() =
     """
-#![allow(non_camel_case_types)]
-
 use std::fmt;
 use std::marker::PhantomData;
 use std::ops;

@@ -11,8 +11,6 @@ import com.kylemayes.generator.registry.Registry
 /** Generates Rust type aliases for Vulkan commands. */
 fun Registry.generateCommands() =
     """
-#![allow(non_camel_case_types)]
-
 use std::os::raw::{c_char, c_int, c_void};
 
 use crate::*;
@@ -38,8 +36,6 @@ fun Registry.generateCommandStructs(): String {
         .sortedBy { it.key.display }
         .joinToString("") { generateCommandStruct(it.key, it.value) }
     return """
-#![allow(non_snake_case)]
-
 use std::mem;
 use std::os::raw::{c_char, c_int, c_void};
 

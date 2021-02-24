@@ -9,8 +9,6 @@ import com.kylemayes.generator.registry.Registry
 /** Generates Rust type aliases for Vulkan function pointer types. */
 fun Registry.generateFunctions() =
     """
-#![allow(non_camel_case_types)]
-
 use std::os::raw::{c_char, c_void};
 
 use crate::*;

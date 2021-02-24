@@ -5,7 +5,7 @@
 In the `Development environment` chapter we created a Cargo project and added the necessary dependencies. In this chapter we will be replacing the code in the `src/main.rs` file with the following code:
 
 ```rust
-#![allow(dead_code, unused_variables, clippy::too_many_arguments)]
+#![allow(dead_code, unused_variables, clippy::too_many_arguments, clippy::unnecessary_wraps)]
 
 use anyhow::*;
 use winit::dpi::LogicalSize;

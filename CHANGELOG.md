@@ -10,6 +10,12 @@
 - [January 25, 2021 Vulkan 1.2.168 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/cd10a156f111cfc930c1821cc41b987661a22c76)
 - [February 15, 2021 Vulkan 1.2.170 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/815e07c850d642d996292f5cdec25d41ecdff0d0)
 
+### Changed
+- Bumped `libloading` version to `0.7`
+- Bumped `metal` version to `0.21`
+- Renamed `libloading_` Cargo feature to `libloading`
+- Removed `winit_` Cargo feature in favor of `window` feature
+
 ## [0.2.3] - 2020-11-23
 
 ### Bindings Updates

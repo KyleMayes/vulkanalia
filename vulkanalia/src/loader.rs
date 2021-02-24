@@ -35,7 +35,7 @@ pub trait Loader {
     ) -> Result<extern "system" fn(), Box<dyn error::Error + 'static>>;
 }
 
-#[cfg(feature = "libloading_")]
+#[cfg(feature = "libloading")]
 mod libloading_loader {
     use std::error;
     use std::ffi::OsStr;
@@ -53,7 +53,7 @@ mod libloading_loader {
         /// Constructs a Vulkan function loader from a Vulkan dynamic library.
         #[inline]
         pub fn new(filename: impl AsRef<OsStr>) -> Result<Self, Error> {
-            Library::new(filename).map(Self)
+            unsafe { Library::new(filename).map(Self) }
         }
 
         /// The loaded Vulkan dynamic library.
@@ -76,5 +76,5 @@ mod libloading_loader {
     }
 }
 
-#[cfg(feature = "libloading_")]
+#[cfg(feature = "libloading")]
 pub use self::libloading_loader::*;
