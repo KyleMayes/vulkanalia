@@ -44,8 +44,56 @@ impl ConvertCStr for ExtensionName {
     }
 }
 
+/// A collection of metadata for a Vulkan extension.
+#[derive(Copy, Clone, Debug)]
+pub struct ExtensionMetadata {
+    /// The name of the extension.
+    pub name: ExtensionName,
+    /// The number assigned to the extension.
+    pub number: i32,
+
+    /// The type of the extension (`device` or `instance`).
+    pub type_: &'static str,
+
+    /// The author of the extension.
+    pub author: &'static str,
+    /// The primary contact(s) for the extension.
+    pub contact: &'static str,
+
+    /// The platform the extension can be used on (e.g., `wayland` or `win32`).
+    pub platform: Option<&'static str>,
+
+    /// The extensions required by the extension.
+    pub requires: Option<&'static [ExtensionName]>,
+    /// The Vulkan version required by the extension (e.g., `1.1`).
+    pub requires_core: Option<&'static str>,
+
+    /// The Vulkan extension or version that deprecated the extension (e.g., `VK_VERSION_1_1`).
+    pub deprecated_by: Option<&'static str>,
+    /// The Vulkan extension or version that obsoleted the extension (e.g., `VK_VERSION_1_1`).
+    pub obsoleted_by: Option<&'static str>,
+    /// The Vulkan version the extension was promoted to core in (e.g., `VK_VERSION_1_1`).
+    pub promoted_to: Option<&'static str>,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_buffer_marker.html>
 pub trait AmdBufferMarkerExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_BUFFER_MARKER_EXTENSION,
+        number: 180,
+        type_: "device",
+        author: "AMD",
+        contact: "Daniel Rakos @drakos-amd",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteBufferMarkerAMD.html>
     #[inline]
     fn cmd_write_buffer_marker_amd(
@@ -69,12 +117,48 @@ pub trait AmdBufferMarkerExtension: DeviceV1_0 {
 impl AmdBufferMarkerExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_device_coherent_memory.html>
-pub trait AmdDeviceCoherentMemoryExtension: DeviceV1_0 {}
+pub trait AmdDeviceCoherentMemoryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_DEVICE_COHERENT_MEMORY_EXTENSION,
+        number: 230,
+        type_: "device",
+        author: "AMD",
+        contact: "Tobias Hector @tobski",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdDeviceCoherentMemoryExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_display_native_hdr.html>
 pub trait AmdDisplayNativeHdrExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_DISPLAY_NATIVE_HDR_EXTENSION,
+        number: 214,
+        type_: "device",
+        author: "AMD",
+        contact: "Matthaeus G. Chajdas @anteru",
+        platform: None,
+        requires: Some(&[
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+            super::KHR_GET_SURFACE_CAPABILITIES2_EXTENSION,
+            super::KHR_SWAPCHAIN_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetLocalDimmingAMD.html>
     #[inline]
     fn set_local_dimming_amd(&self, swap_chain: SwapchainKHR, local_dimming_enable: bool) {
@@ -90,6 +174,22 @@ impl AmdDisplayNativeHdrExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_draw_indirect_count.html>
 pub trait AmdDrawIndirectCountExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_DRAW_INDIRECT_COUNT_EXTENSION,
+        number: 34,
+        type_: "device",
+        author: "AMD",
+        contact: "Daniel Rakos @drakos-amd",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_KHR_draw_indirect_count"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndexedIndirectCountAMD.html>
     #[inline]
     fn cmd_draw_indexed_indirect_count_amd(
@@ -140,81 +240,321 @@ pub trait AmdDrawIndirectCountExtension: DeviceV1_0 {
 impl AmdDrawIndirectCountExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_gcn_shader.html>
-pub trait AmdGcnShaderExtension: DeviceV1_0 {}
+pub trait AmdGcnShaderExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_GCN_SHADER_EXTENSION,
+        number: 26,
+        type_: "device",
+        author: "AMD",
+        contact: "Dominik Witczak @dominikwitczakamd",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdGcnShaderExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_gpu_shader_half_float.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_shader_float16_int8`")]
-pub trait AmdGpuShaderHalfFloatExtension: DeviceV1_0 {}
+pub trait AmdGpuShaderHalfFloatExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_GPU_SHADER_HALF_FLOAT_EXTENSION,
+        number: 37,
+        type_: "device",
+        author: "AMD",
+        contact: "Dominik Witczak @dominikwitczakamd",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: Some("VK_KHR_shader_float16_int8"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 #[allow(deprecated)]
 impl AmdGpuShaderHalfFloatExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_gpu_shader_int16.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_shader_float16_int8`")]
-pub trait AmdGpuShaderInt16Extension: DeviceV1_0 {}
+pub trait AmdGpuShaderInt16Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_GPU_SHADER_INT16_EXTENSION,
+        number: 133,
+        type_: "device",
+        author: "AMD",
+        contact: "Qun Lin @linqun",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: Some("VK_KHR_shader_float16_int8"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 #[allow(deprecated)]
 impl AmdGpuShaderInt16Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_memory_overallocation_behavior.html>
-pub trait AmdMemoryOverallocationBehaviorExtension: DeviceV1_0 {}
+pub trait AmdMemoryOverallocationBehaviorExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_MEMORY_OVERALLOCATION_BEHAVIOR_EXTENSION,
+        number: 190,
+        type_: "device",
+        author: "AMD",
+        contact: "Martin Dinkov @mdinkov",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdMemoryOverallocationBehaviorExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_mixed_attachment_samples.html>
-pub trait AmdMixedAttachmentSamplesExtension: DeviceV1_0 {}
+pub trait AmdMixedAttachmentSamplesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_MIXED_ATTACHMENT_SAMPLES_EXTENSION,
+        number: 137,
+        type_: "device",
+        author: "AMD",
+        contact: "Matthaeus G. Chajdas @anteru",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdMixedAttachmentSamplesExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_negative_viewport_height.html>
-pub trait AmdNegativeViewportHeightExtension: DeviceV1_0 {}
+pub trait AmdNegativeViewportHeightExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_NEGATIVE_VIEWPORT_HEIGHT_EXTENSION,
+        number: 36,
+        type_: "device",
+        author: "AMD",
+        contact: "Matthaeus G. Chajdas @anteru",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: Some("VK_KHR_maintenance1"),
+        promoted_to: None,
+    };
+}
 
 impl AmdNegativeViewportHeightExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_pipeline_compiler_control.html>
-pub trait AmdPipelineCompilerControlExtension: DeviceV1_0 {}
+pub trait AmdPipelineCompilerControlExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_PIPELINE_COMPILER_CONTROL_EXTENSION,
+        number: 184,
+        type_: "device",
+        author: "AMD",
+        contact: "Matthaeus G. Chajdas @anteru",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdPipelineCompilerControlExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_rasterization_order.html>
-pub trait AmdRasterizationOrderExtension: DeviceV1_0 {}
+pub trait AmdRasterizationOrderExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_RASTERIZATION_ORDER_EXTENSION,
+        number: 19,
+        type_: "device",
+        author: "AMD",
+        contact: "Daniel Rakos @drakos-amd",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdRasterizationOrderExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_ballot.html>
-pub trait AmdShaderBallotExtension: DeviceV1_0 {}
+pub trait AmdShaderBallotExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_SHADER_BALLOT_EXTENSION,
+        number: 38,
+        type_: "device",
+        author: "AMD",
+        contact: "Dominik Witczak @dominikwitczakamd",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdShaderBallotExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_core_properties.html>
-pub trait AmdShaderCorePropertiesExtension: DeviceV1_0 {}
+pub trait AmdShaderCorePropertiesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_SHADER_CORE_PROPERTIES_EXTENSION,
+        number: 186,
+        type_: "device",
+        author: "AMD",
+        contact: "Martin Dinkov @mdinkov",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdShaderCorePropertiesExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_core_properties2.html>
-pub trait AmdShaderCoreProperties2Extension: DeviceV1_0 {}
+pub trait AmdShaderCoreProperties2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_SHADER_CORE_PROPERTIES2_EXTENSION,
+        number: 228,
+        type_: "device",
+        author: "AMD",
+        contact: "Matthaeus G. Chajdas @anteru",
+        platform: None,
+        requires: Some(&[super::AMD_SHADER_CORE_PROPERTIES_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdShaderCoreProperties2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_explicit_vertex_parameter.html>
-pub trait AmdShaderExplicitVertexParameterExtension: DeviceV1_0 {}
+pub trait AmdShaderExplicitVertexParameterExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION,
+        number: 22,
+        type_: "device",
+        author: "AMD",
+        contact: "Qun Lin @linqun",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdShaderExplicitVertexParameterExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_fragment_mask.html>
-pub trait AmdShaderFragmentMaskExtension: DeviceV1_0 {}
+pub trait AmdShaderFragmentMaskExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_SHADER_FRAGMENT_MASK_EXTENSION,
+        number: 138,
+        type_: "device",
+        author: "AMD",
+        contact: "Aaron Hagan @AaronHaganAMD",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdShaderFragmentMaskExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_image_load_store_lod.html>
-pub trait AmdShaderImageLoadStoreLodExtension: DeviceV1_0 {}
+pub trait AmdShaderImageLoadStoreLodExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_SHADER_IMAGE_LOAD_STORE_LOD_EXTENSION,
+        number: 47,
+        type_: "device",
+        author: "AMD",
+        contact: "Dominik Witczak @dominikwitczakamd",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdShaderImageLoadStoreLodExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_info.html>
 pub trait AmdShaderInfoExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_SHADER_INFO_EXTENSION,
+        number: 43,
+        type_: "device",
+        author: "AMD",
+        contact: "Jaakko Konttinen @jaakkoamd",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetShaderInfoAMD.html>
     #[inline]
     fn get_shader_info_amd(
@@ -259,17 +599,70 @@ pub trait AmdShaderInfoExtension: DeviceV1_0 {
 impl AmdShaderInfoExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_shader_trinary_minmax.html>
-pub trait AmdShaderTrinaryMinmaxExtension: DeviceV1_0 {}
+pub trait AmdShaderTrinaryMinmaxExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_SHADER_TRINARY_MINMAX_EXTENSION,
+        number: 21,
+        type_: "device",
+        author: "AMD",
+        contact: "Qun Lin @linqun",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdShaderTrinaryMinmaxExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_texture_gather_bias_lod.html>
-pub trait AmdTextureGatherBiasLodExtension: DeviceV1_0 {}
+pub trait AmdTextureGatherBiasLodExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::AMD_TEXTURE_GATHER_BIAS_LOD_EXTENSION,
+        number: 42,
+        type_: "device",
+        author: "AMD",
+        contact: "Rex Xu @amdrexu",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl AmdTextureGatherBiasLodExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_ANDROID_external_memory_android_hardware_buffer.html>
 pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION,
+        number: 130,
+        type_: "device",
+        author: "ANDROID",
+        contact: "Jesse Hall @critsec",
+        platform: Some("android"),
+        requires: Some(&[
+            super::KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION,
+            super::KHR_EXTERNAL_MEMORY_EXTENSION,
+            super::EXT_QUEUE_FAMILY_FOREIGN_EXTENSION,
+            super::KHR_DEDICATED_ALLOCATION_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAndroidHardwareBufferPropertiesANDROID.html>
     #[inline]
     fn get_android_hardware_buffer_properties_android(
@@ -318,12 +711,44 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
 impl AndroidExternalMemoryAndroidHardwareBufferExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_4444_formats.html>
-pub trait Ext4444FormatsExtension: DeviceV1_0 {}
+pub trait Ext4444FormatsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_4444_FORMATS_EXTENSION,
+        number: 341,
+        type_: "device",
+        author: "EXT",
+        contact: "Joshua Ashton @Joshua-Ashton",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl Ext4444FormatsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_acquire_xlib_display.html>
 pub trait ExtAcquireXlibDisplayExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_ACQUIRE_XLIB_DISPLAY_EXTENSION,
+        number: 90,
+        type_: "instance",
+        author: "NV",
+        contact: "James Jones @cubanismo",
+        platform: Some("xlib_xrandr"),
+        requires: Some(&[super::EXT_DIRECT_MODE_DISPLAY_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireXlibDisplayEXT.html>
     #[inline]
     fn acquire_xlib_display_ext(
@@ -373,18 +798,66 @@ pub trait ExtAcquireXlibDisplayExtension: InstanceV1_0 {
 impl ExtAcquireXlibDisplayExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_astc_decode_mode.html>
-pub trait ExtAstcDecodeModeExtension: DeviceV1_0 {}
+pub trait ExtAstcDecodeModeExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_ASTC_DECODE_MODE_EXTENSION,
+        number: 68,
+        type_: "device",
+        author: "ARM",
+        contact: "Jan-Harald Fredriksen @janharaldfredriksen-arm",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtAstcDecodeModeExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_blend_operation_advanced.html>
-pub trait ExtBlendOperationAdvancedExtension: DeviceV1_0 {}
+pub trait ExtBlendOperationAdvancedExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_BLEND_OPERATION_ADVANCED_EXTENSION,
+        number: 149,
+        type_: "device",
+        author: "NV",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtBlendOperationAdvancedExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_buffer_device_address.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_buffer_device_address`")]
 pub trait ExtBufferDeviceAddressExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_BUFFER_DEVICE_ADDRESS_EXTENSION,
+        number: 245,
+        type_: "device",
+        author: "NV",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: Some("VK_KHR_buffer_device_address"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferDeviceAddressEXT.html>
     #[inline]
     fn get_buffer_device_address_ext(&self, info: &BufferDeviceAddressInfo) {
@@ -397,6 +870,22 @@ impl ExtBufferDeviceAddressExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_calibrated_timestamps.html>
 pub trait ExtCalibratedTimestampsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_CALIBRATED_TIMESTAMPS_EXTENSION,
+        number: 185,
+        type_: "device",
+        author: "EXT",
+        contact: "Daniel Rakos @drakos-amd",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetCalibratedTimestampsEXT.html>
     #[inline]
     fn get_calibrated_timestamps_ext(
@@ -465,6 +954,22 @@ impl ExtCalibratedTimestampsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_conditional_rendering.html>
 pub trait ExtConditionalRenderingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_CONDITIONAL_RENDERING_EXTENSION,
+        number: 82,
+        type_: "device",
+        author: "NV",
+        contact: "Vikram Kushwaha @vkushwaha",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginConditionalRenderingEXT.html>
     #[inline]
     fn cmd_begin_conditional_rendering_ext(
@@ -488,17 +993,65 @@ pub trait ExtConditionalRenderingExtension: DeviceV1_0 {
 impl ExtConditionalRenderingExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_conservative_rasterization.html>
-pub trait ExtConservativeRasterizationExtension: DeviceV1_0 {}
+pub trait ExtConservativeRasterizationExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_CONSERVATIVE_RASTERIZATION_EXTENSION,
+        number: 102,
+        type_: "device",
+        author: "NV",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtConservativeRasterizationExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_custom_border_color.html>
-pub trait ExtCustomBorderColorExtension: DeviceV1_0 {}
+pub trait ExtCustomBorderColorExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_CUSTOM_BORDER_COLOR_EXTENSION,
+        number: 288,
+        type_: "device",
+        author: "EXT",
+        contact: "Liam Middlebrook @liam-middlebrook",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtCustomBorderColorExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_debug_marker.html>
 pub trait ExtDebugMarkerExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_DEBUG_MARKER_EXTENSION,
+        number: 23,
+        type_: "device",
+        author: "Baldur Karlsson",
+        contact: "Baldur Karlsson @baldurk",
+        platform: None,
+        requires: Some(&[super::EXT_DEBUG_REPORT_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_EXT_debug_utils"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDebugMarkerBeginEXT.html>
     #[inline]
     fn cmd_debug_marker_begin_ext(
@@ -561,6 +1114,22 @@ impl ExtDebugMarkerExtension for crate::Device {}
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_debug_report.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_debug_utils`")]
 pub trait ExtDebugReportExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_DEBUG_REPORT_EXTENSION,
+        number: 12,
+        type_: "instance",
+        author: "GOOGLE",
+        contact: "Courtney Goeltzenleuchter @courtney-g",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: Some("VK_EXT_debug_utils"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDebugReportCallbackEXT.html>
     #[inline]
     fn create_debug_report_callback_ext(
@@ -628,6 +1197,22 @@ impl ExtDebugReportExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_debug_utils.html>
 pub trait ExtDebugUtilsExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_DEBUG_UTILS_EXTENSION,
+        number: 129,
+        type_: "instance",
+        author: "EXT",
+        contact: "Mark Young @marky-lunarg",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginDebugUtilsLabelEXT.html>
     #[inline]
     fn cmd_begin_debug_utils_label_ext(
@@ -763,27 +1348,110 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
 impl ExtDebugUtilsExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_depth_clip_enable.html>
-pub trait ExtDepthClipEnableExtension: DeviceV1_0 {}
+pub trait ExtDepthClipEnableExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_DEPTH_CLIP_ENABLE_EXTENSION,
+        number: 103,
+        type_: "device",
+        author: "EXT",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtDepthClipEnableExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_depth_range_unrestricted.html>
-pub trait ExtDepthRangeUnrestrictedExtension: DeviceV1_0 {}
+pub trait ExtDepthRangeUnrestrictedExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_DEPTH_RANGE_UNRESTRICTED_EXTENSION,
+        number: 14,
+        type_: "device",
+        author: "NV",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtDepthRangeUnrestrictedExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_descriptor_indexing.html>
-pub trait ExtDescriptorIndexingExtension: DeviceV1_0 {}
+pub trait ExtDescriptorIndexingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_DESCRIPTOR_INDEXING_EXTENSION,
+        number: 162,
+        type_: "device",
+        author: "NV",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+            super::KHR_MAINTENANCE3_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl ExtDescriptorIndexingExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_device_memory_report.html>
-pub trait ExtDeviceMemoryReportExtension: DeviceV1_0 {}
+pub trait ExtDeviceMemoryReportExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_DEVICE_MEMORY_REPORT_EXTENSION,
+        number: 285,
+        type_: "device",
+        author: "EXT",
+        contact: "Yiwei Zhang @zhangyiwei",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtDeviceMemoryReportExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_direct_mode_display.html>
 pub trait ExtDirectModeDisplayExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_DIRECT_MODE_DISPLAY_EXTENSION,
+        number: 89,
+        type_: "instance",
+        author: "NV",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::KHR_DISPLAY_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleaseDisplayEXT.html>
     #[inline]
     fn release_display_ext(
@@ -805,6 +1473,22 @@ impl ExtDirectModeDisplayExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_directfb_surface.html>
 pub trait ExtDirectfbSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_DIRECTFB_SURFACE_EXTENSION,
+        number: 347,
+        type_: "instance",
+        author: "EXT",
+        contact: "Nicolas Caramelli @caramelli",
+        platform: Some("directfb"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDirectFBSurfaceEXT.html>
     #[inline]
     fn create_direct_fb_surface_ext(
@@ -853,6 +1537,22 @@ impl ExtDirectfbSurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_discard_rectangles.html>
 pub trait ExtDiscardRectanglesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_DISCARD_RECTANGLES_EXTENSION,
+        number: 100,
+        type_: "device",
+        author: "NV",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDiscardRectangleEXT.html>
     #[inline]
     fn cmd_set_discard_rectangle_ext(
@@ -874,6 +1574,25 @@ impl ExtDiscardRectanglesExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_display_control.html>
 pub trait ExtDisplayControlExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_DISPLAY_CONTROL_EXTENSION,
+        number: 92,
+        type_: "device",
+        author: "NV",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[
+            super::EXT_DISPLAY_SURFACE_COUNTER_EXTENSION,
+            super::KHR_SWAPCHAIN_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDisplayPowerControlEXT.html>
     #[inline]
     fn display_power_control_ext(
@@ -967,6 +1686,22 @@ impl ExtDisplayControlExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_display_surface_counter.html>
 pub trait ExtDisplaySurfaceCounterExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_DISPLAY_SURFACE_COUNTER_EXTENSION,
+        number: 91,
+        type_: "instance",
+        author: "NV",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::KHR_DISPLAY_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceCapabilities2EXT.html>
     #[inline]
     fn get_physical_device_surface_capabilities2_ext(
@@ -996,6 +1731,22 @@ impl ExtDisplaySurfaceCounterExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_extended_dynamic_state.html>
 pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_EXTENDED_DYNAMIC_STATE_EXTENSION,
+        number: 268,
+        type_: "device",
+        author: "EXT",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindVertexBuffers2EXT.html>
     #[inline]
     fn cmd_bind_vertex_buffers2_ext(
@@ -1157,12 +1908,44 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
 impl ExtExtendedDynamicStateExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_external_memory_dma_buf.html>
-pub trait ExtExternalMemoryDmaBufExtension: DeviceV1_0 {}
+pub trait ExtExternalMemoryDmaBufExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION,
+        number: 126,
+        type_: "device",
+        author: "EXT",
+        contact: "Chad Versace @chadversary",
+        platform: None,
+        requires: Some(&[super::KHR_EXTERNAL_MEMORY_FD_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtExternalMemoryDmaBufExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_external_memory_host.html>
 pub trait ExtExternalMemoryHostExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_EXTERNAL_MEMORY_HOST_EXTENSION,
+        number: 179,
+        type_: "device",
+        author: "EXT",
+        contact: "Daniel Rakos @drakos-amd",
+        platform: None,
+        requires: Some(&[super::KHR_EXTERNAL_MEMORY_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryHostPointerPropertiesEXT.html>
     #[inline]
     fn get_memory_host_pointer_properties_ext(
@@ -1191,27 +1974,112 @@ pub trait ExtExternalMemoryHostExtension: DeviceV1_0 {
 impl ExtExternalMemoryHostExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_filter_cubic.html>
-pub trait ExtFilterCubicExtension: DeviceV1_0 {}
+pub trait ExtFilterCubicExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_FILTER_CUBIC_EXTENSION,
+        number: 171,
+        type_: "device",
+        author: "QCOM",
+        contact: "Bill Licea-Kane @wwlk",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtFilterCubicExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_fragment_density_map.html>
-pub trait ExtFragmentDensityMapExtension: DeviceV1_0 {}
+pub trait ExtFragmentDensityMapExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_FRAGMENT_DENSITY_MAP_EXTENSION,
+        number: 219,
+        type_: "device",
+        author: "EXT",
+        contact: "Matthew Netsch @mnetsch",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtFragmentDensityMapExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_fragment_density_map2.html>
-pub trait ExtFragmentDensityMap2Extension: DeviceV1_0 {}
+pub trait ExtFragmentDensityMap2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_FRAGMENT_DENSITY_MAP2_EXTENSION,
+        number: 333,
+        type_: "device",
+        author: "EXT",
+        contact: "Matthew Netsch @mnetsch",
+        platform: None,
+        requires: Some(&[super::EXT_FRAGMENT_DENSITY_MAP_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtFragmentDensityMap2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_fragment_shader_interlock.html>
-pub trait ExtFragmentShaderInterlockExtension: DeviceV1_0 {}
+pub trait ExtFragmentShaderInterlockExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_FRAGMENT_SHADER_INTERLOCK_EXTENSION,
+        number: 252,
+        type_: "device",
+        author: "EXT",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtFragmentShaderInterlockExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_full_screen_exclusive.html>
 pub trait ExtFullScreenExclusiveExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_FULL_SCREEN_EXCLUSIVE_EXTENSION,
+        number: 256,
+        type_: "device",
+        author: "EXT",
+        contact: "James Jones @cubanismo",
+        platform: Some("win32"),
+        requires: Some(&[
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+            super::KHR_SURFACE_EXTENSION,
+            super::KHR_GET_SURFACE_CAPABILITIES2_EXTENSION,
+            super::KHR_SWAPCHAIN_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireFullScreenExclusiveModeEXT.html>
     #[inline]
     fn acquire_full_screen_exclusive_mode_ext(
@@ -1308,12 +2176,44 @@ pub trait ExtFullScreenExclusiveExtension: DeviceV1_0 {
 impl ExtFullScreenExclusiveExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_global_priority.html>
-pub trait ExtGlobalPriorityExtension: DeviceV1_0 {}
+pub trait ExtGlobalPriorityExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_GLOBAL_PRIORITY_EXTENSION,
+        number: 175,
+        type_: "device",
+        author: "EXT",
+        contact: "Andres Rodriguez @lostgoat",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtGlobalPriorityExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_hdr_metadata.html>
 pub trait ExtHdrMetadataExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_HDR_METADATA_EXTENSION,
+        number: 106,
+        type_: "device",
+        author: "GOOGLE",
+        contact: "Courtney Goeltzenleuchter @courtney-g",
+        platform: None,
+        requires: Some(&[super::KHR_SWAPCHAIN_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetHdrMetadataEXT.html>
     #[inline]
     fn set_hdr_metadata_ext(
@@ -1334,6 +2234,22 @@ impl ExtHdrMetadataExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_headless_surface.html>
 pub trait ExtHeadlessSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_HEADLESS_SURFACE_EXTENSION,
+        number: 257,
+        type_: "instance",
+        author: "EXT",
+        contact: "Lisa Wu @chengtianww",
+        platform: None,
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateHeadlessSurfaceEXT.html>
     #[inline]
     fn create_headless_surface_ext(
@@ -1362,6 +2278,22 @@ impl ExtHeadlessSurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_host_query_reset.html>
 pub trait ExtHostQueryResetExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_HOST_QUERY_RESET_EXTENSION,
+        number: 262,
+        type_: "device",
+        author: "EXT",
+        contact: "Bas Nieuwenhuizen @BNieuwenhuizen",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkResetQueryPoolEXT.html>
     #[inline]
     fn reset_query_pool_ext(&self, query_pool: QueryPool, first_query: u32, query_count: u32) {
@@ -1378,6 +2310,27 @@ impl ExtHostQueryResetExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_image_drm_format_modifier.html>
 pub trait ExtImageDrmFormatModifierExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION,
+        number: 159,
+        type_: "device",
+        author: "EXT",
+        contact: "Chad Versace @chadversary",
+        platform: None,
+        requires: Some(&[
+            super::KHR_BIND_MEMORY2_EXTENSION,
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+            super::KHR_IMAGE_FORMAT_LIST_EXTENSION,
+            super::KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageDrmFormatModifierPropertiesEXT.html>
     #[inline]
     fn get_image_drm_format_modifier_properties_ext(
@@ -1403,22 +2356,89 @@ pub trait ExtImageDrmFormatModifierExtension: DeviceV1_0 {
 impl ExtImageDrmFormatModifierExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_image_robustness.html>
-pub trait ExtImageRobustnessExtension: DeviceV1_0 {}
+pub trait ExtImageRobustnessExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_IMAGE_ROBUSTNESS_EXTENSION,
+        number: 336,
+        type_: "device",
+        author: "EXT",
+        contact: "Graeme Leese @gnl21",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtImageRobustnessExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_index_type_uint8.html>
-pub trait ExtIndexTypeUint8Extension: DeviceV1_0 {}
+pub trait ExtIndexTypeUint8Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_INDEX_TYPE_UINT8_EXTENSION,
+        number: 266,
+        type_: "device",
+        author: "EXT",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtIndexTypeUint8Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_inline_uniform_block.html>
-pub trait ExtInlineUniformBlockExtension: DeviceV1_0 {}
+pub trait ExtInlineUniformBlockExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_INLINE_UNIFORM_BLOCK_EXTENSION,
+        number: 139,
+        type_: "device",
+        author: "EXT",
+        contact: "Daniel Rakos @aqnuep",
+        platform: None,
+        requires: Some(&[
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+            super::KHR_MAINTENANCE1_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtInlineUniformBlockExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_line_rasterization.html>
 pub trait ExtLineRasterizationExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_LINE_RASTERIZATION_EXTENSION,
+        number: 260,
+        type_: "device",
+        author: "EXT",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetLineStippleEXT.html>
     #[inline]
     fn cmd_set_line_stipple_ext(
@@ -1438,17 +2458,65 @@ pub trait ExtLineRasterizationExtension: DeviceV1_0 {
 impl ExtLineRasterizationExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_memory_budget.html>
-pub trait ExtMemoryBudgetExtension: DeviceV1_0 {}
+pub trait ExtMemoryBudgetExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_MEMORY_BUDGET_EXTENSION,
+        number: 238,
+        type_: "device",
+        author: "EXT",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtMemoryBudgetExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_memory_priority.html>
-pub trait ExtMemoryPriorityExtension: DeviceV1_0 {}
+pub trait ExtMemoryPriorityExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_MEMORY_PRIORITY_EXTENSION,
+        number: 239,
+        type_: "device",
+        author: "EXT",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtMemoryPriorityExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_metal_surface.html>
 pub trait ExtMetalSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_METAL_SURFACE_EXTENSION,
+        number: 218,
+        type_: "instance",
+        author: "EXT",
+        contact: "Dzmitry Malyshau @kvark",
+        platform: Some("metal"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateMetalSurfaceEXT.html>
     #[inline]
     fn create_metal_surface_ext(
@@ -1476,27 +2544,107 @@ pub trait ExtMetalSurfaceExtension: InstanceV1_0 {
 impl ExtMetalSurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pci_bus_info.html>
-pub trait ExtPciBusInfoExtension: DeviceV1_0 {}
+pub trait ExtPciBusInfoExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_PCI_BUS_INFO_EXTENSION,
+        number: 213,
+        type_: "device",
+        author: "EXT",
+        contact: "Matthaeus G. Chajdas @anteru",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtPciBusInfoExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pipeline_creation_cache_control.html>
-pub trait ExtPipelineCreationCacheControlExtension: DeviceV1_0 {}
+pub trait ExtPipelineCreationCacheControlExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_PIPELINE_CREATION_CACHE_CONTROL_EXTENSION,
+        number: 298,
+        type_: "device",
+        author: "AMD",
+        contact: "Gregory Grebe @grgrebe_amd",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtPipelineCreationCacheControlExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pipeline_creation_feedback.html>
-pub trait ExtPipelineCreationFeedbackExtension: DeviceV1_0 {}
+pub trait ExtPipelineCreationFeedbackExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_PIPELINE_CREATION_FEEDBACK_EXTENSION,
+        number: 193,
+        type_: "device",
+        author: "GOOGLE",
+        contact: "Jean-Francois Roy @jfroy",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtPipelineCreationFeedbackExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_post_depth_coverage.html>
-pub trait ExtPostDepthCoverageExtension: DeviceV1_0 {}
+pub trait ExtPostDepthCoverageExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_POST_DEPTH_COVERAGE_EXTENSION,
+        number: 156,
+        type_: "device",
+        author: "NV",
+        contact: "Daniel Koch @dgkoch",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtPostDepthCoverageExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_private_data.html>
 pub trait ExtPrivateDataExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_PRIVATE_DATA_EXTENSION,
+        number: 296,
+        type_: "device",
+        author: "NV",
+        contact: "Matthew Rusch @mattruschnv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreatePrivateDataSlotEXT.html>
     #[inline]
     fn create_private_data_slot_ext(
@@ -1583,17 +2731,65 @@ pub trait ExtPrivateDataExtension: DeviceV1_0 {
 impl ExtPrivateDataExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_queue_family_foreign.html>
-pub trait ExtQueueFamilyForeignExtension: DeviceV1_0 {}
+pub trait ExtQueueFamilyForeignExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_QUEUE_FAMILY_FOREIGN_EXTENSION,
+        number: 127,
+        type_: "device",
+        author: "EXT",
+        contact: "Chad Versace @chadversary",
+        platform: None,
+        requires: Some(&[super::KHR_EXTERNAL_MEMORY_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtQueueFamilyForeignExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_robustness2.html>
-pub trait ExtRobustness2Extension: DeviceV1_0 {}
+pub trait ExtRobustness2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_ROBUSTNESS2_EXTENSION,
+        number: 287,
+        type_: "device",
+        author: "EXT",
+        contact: "Liam Middlebrook @liam-middlebrook",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtRobustness2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_sample_locations.html>
 pub trait ExtSampleLocationsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SAMPLE_LOCATIONS_EXTENSION,
+        number: 144,
+        type_: "device",
+        author: "AMD",
+        contact: "Daniel Rakos @drakos-amd",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetSampleLocationsEXT.html>
     #[inline]
     fn cmd_set_sample_locations_ext(
@@ -1629,81 +2825,321 @@ pub trait ExtSampleLocationsExtension: DeviceV1_0 {
 impl ExtSampleLocationsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_sampler_filter_minmax.html>
-pub trait ExtSamplerFilterMinmaxExtension: DeviceV1_0 {}
+pub trait ExtSamplerFilterMinmaxExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SAMPLER_FILTER_MINMAX_EXTENSION,
+        number: 131,
+        type_: "device",
+        author: "NV",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl ExtSamplerFilterMinmaxExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_scalar_block_layout.html>
-pub trait ExtScalarBlockLayoutExtension: DeviceV1_0 {}
+pub trait ExtScalarBlockLayoutExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SCALAR_BLOCK_LAYOUT_EXTENSION,
+        number: 222,
+        type_: "device",
+        author: "EXT",
+        contact: "Tobias Hector @tobski",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl ExtScalarBlockLayoutExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_separate_stencil_usage.html>
-pub trait ExtSeparateStencilUsageExtension: DeviceV1_0 {}
+pub trait ExtSeparateStencilUsageExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SEPARATE_STENCIL_USAGE_EXTENSION,
+        number: 247,
+        type_: "device",
+        author: "EXT",
+        contact: "Daniel Rakos @drakos-amd",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl ExtSeparateStencilUsageExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_atomic_float.html>
-pub trait ExtShaderAtomicFloatExtension: DeviceV1_0 {}
+pub trait ExtShaderAtomicFloatExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SHADER_ATOMIC_FLOAT_EXTENSION,
+        number: 261,
+        type_: "device",
+        author: "NV",
+        contact: "Vikram Kushwaha @vkushwaha-nv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtShaderAtomicFloatExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_demote_to_helper_invocation.html>
-pub trait ExtShaderDemoteToHelperInvocationExtension: DeviceV1_0 {}
+pub trait ExtShaderDemoteToHelperInvocationExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_EXTENSION,
+        number: 277,
+        type_: "device",
+        author: "EXT",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtShaderDemoteToHelperInvocationExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_image_atomic_int64.html>
-pub trait ExtShaderImageAtomicInt64Extension: DeviceV1_0 {}
+pub trait ExtShaderImageAtomicInt64Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SHADER_IMAGE_ATOMIC_INT64_EXTENSION,
+        number: 235,
+        type_: "device",
+        author: "EXT",
+        contact: "Tobias Hector @tobski",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtShaderImageAtomicInt64Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_stencil_export.html>
-pub trait ExtShaderStencilExportExtension: DeviceV1_0 {}
+pub trait ExtShaderStencilExportExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SHADER_STENCIL_EXPORT_EXTENSION,
+        number: 141,
+        type_: "device",
+        author: "EXT",
+        contact: "Dominik Witczak @dominikwitczakamd",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtShaderStencilExportExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_subgroup_ballot.html>
 #[deprecated(note = "deprecated in favor of `VK_VERSION_1_2`")]
-pub trait ExtShaderSubgroupBallotExtension: DeviceV1_0 {}
+pub trait ExtShaderSubgroupBallotExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SHADER_SUBGROUP_BALLOT_EXTENSION,
+        number: 65,
+        type_: "device",
+        author: "NV",
+        contact: "Daniel Koch @dgkoch",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: Some("VK_VERSION_1_2"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 #[allow(deprecated)]
 impl ExtShaderSubgroupBallotExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_subgroup_vote.html>
 #[deprecated(note = "deprecated in favor of `VK_VERSION_1_1`")]
-pub trait ExtShaderSubgroupVoteExtension: DeviceV1_0 {}
+pub trait ExtShaderSubgroupVoteExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SHADER_SUBGROUP_VOTE_EXTENSION,
+        number: 66,
+        type_: "device",
+        author: "NV",
+        contact: "Daniel Koch @dgkoch",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: Some("VK_VERSION_1_1"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 #[allow(deprecated)]
 impl ExtShaderSubgroupVoteExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_viewport_index_layer.html>
-pub trait ExtShaderViewportIndexLayerExtension: DeviceV1_0 {}
+pub trait ExtShaderViewportIndexLayerExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SHADER_VIEWPORT_INDEX_LAYER_EXTENSION,
+        number: 163,
+        type_: "device",
+        author: "NV",
+        contact: "Daniel Koch @dgkoch",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl ExtShaderViewportIndexLayerExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_subgroup_size_control.html>
-pub trait ExtSubgroupSizeControlExtension: DeviceV1_0 {}
+pub trait ExtSubgroupSizeControlExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SUBGROUP_SIZE_CONTROL_EXTENSION,
+        number: 226,
+        type_: "device",
+        author: "EXT",
+        contact: "Neil Henning @sheredom",
+        platform: None,
+        requires: None,
+        requires_core: Some("1.1"),
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtSubgroupSizeControlExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_swapchain_colorspace.html>
-pub trait ExtSwapchainColorspaceExtension: InstanceV1_0 {}
+pub trait ExtSwapchainColorspaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_SWAPCHAIN_COLORSPACE_EXTENSION,
+        number: 105,
+        type_: "instance",
+        author: "GOOGLE",
+        contact: "Courtney Goeltzenleuchter @courtney-g",
+        platform: None,
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtSwapchainColorspaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_texel_buffer_alignment.html>
-pub trait ExtTexelBufferAlignmentExtension: DeviceV1_0 {}
+pub trait ExtTexelBufferAlignmentExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_TEXEL_BUFFER_ALIGNMENT_EXTENSION,
+        number: 282,
+        type_: "device",
+        author: "EXT",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtTexelBufferAlignmentExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_texture_compression_astc_hdr.html>
-pub trait ExtTextureCompressionAstcHdrExtension: DeviceV1_0 {}
+pub trait ExtTextureCompressionAstcHdrExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_TEXTURE_COMPRESSION_ASTC_HDR_EXTENSION,
+        number: 67,
+        type_: "device",
+        author: "ARM",
+        contact: "Jan-Harald Fredriksen @janharaldfredriksen-arm",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtTextureCompressionAstcHdrExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_tooling_info.html>
 pub trait ExtToolingInfoExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_TOOLING_INFO_EXTENSION,
+        number: 246,
+        type_: "device",
+        author: "EXT",
+        contact: "Tobias Hector @tobski",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceToolPropertiesEXT.html>
     #[inline]
     fn get_physical_device_tool_properties_ext(
@@ -1741,6 +3177,22 @@ impl ExtToolingInfoExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_transform_feedback.html>
 pub trait ExtTransformFeedbackExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_TRANSFORM_FEEDBACK_EXTENSION,
+        number: 29,
+        type_: "device",
+        author: "NV",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginQueryIndexedEXT.html>
     #[inline]
     fn cmd_begin_query_indexed_ext(
@@ -1857,6 +3309,22 @@ impl ExtTransformFeedbackExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_validation_cache.html>
 pub trait ExtValidationCacheExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_VALIDATION_CACHE_EXTENSION,
+        number: 161,
+        type_: "device",
+        author: "GOOGLE",
+        contact: "Cort Stratton @cdwfs",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateValidationCacheEXT.html>
     #[inline]
     fn create_validation_cache_ext(
@@ -1953,29 +3421,109 @@ pub trait ExtValidationCacheExtension: DeviceV1_0 {
 impl ExtValidationCacheExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_validation_features.html>
-pub trait ExtValidationFeaturesExtension: InstanceV1_0 {}
+pub trait ExtValidationFeaturesExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_VALIDATION_FEATURES_EXTENSION,
+        number: 248,
+        type_: "instance",
+        author: "LUNARG",
+        contact: "Karl Schultz @karl-lunarg",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtValidationFeaturesExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_validation_flags.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_validation_features`")]
-pub trait ExtValidationFlagsExtension: InstanceV1_0 {}
+pub trait ExtValidationFlagsExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_VALIDATION_FLAGS_EXTENSION,
+        number: 62,
+        type_: "instance",
+        author: "GOOGLE",
+        contact: "Tobin Ehlis @tobine",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: Some("VK_EXT_validation_features"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 #[allow(deprecated)]
 impl ExtValidationFlagsExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_vertex_attribute_divisor.html>
-pub trait ExtVertexAttributeDivisorExtension: DeviceV1_0 {}
+pub trait ExtVertexAttributeDivisorExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION,
+        number: 191,
+        type_: "device",
+        author: "NV",
+        contact: "Vikram Kushwaha @vkushwaha",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtVertexAttributeDivisorExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_ycbcr_image_arrays.html>
-pub trait ExtYcbcrImageArraysExtension: DeviceV1_0 {}
+pub trait ExtYcbcrImageArraysExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::EXT_YCBCR_IMAGE_ARRAYS_EXTENSION,
+        number: 253,
+        type_: "device",
+        author: "EXT",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: Some(&[super::KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ExtYcbcrImageArraysExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_FUCHSIA_imagepipe_surface.html>
 pub trait FuchsiaImagepipeSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::FUCHSIA_IMAGEPIPE_SURFACE_EXTENSION,
+        number: 215,
+        type_: "instance",
+        author: "FUCHSIA",
+        contact: "Craig Stout @cdotstout",
+        platform: Some("fuchsia"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateImagePipeSurfaceFUCHSIA.html>
     #[inline]
     fn create_image_pipe_surface_fuchsia(
@@ -2003,12 +3551,47 @@ pub trait FuchsiaImagepipeSurfaceExtension: InstanceV1_0 {
 impl FuchsiaImagepipeSurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GGP_frame_token.html>
-pub trait GgpFrameTokenExtension: DeviceV1_0 {}
+pub trait GgpFrameTokenExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::GGP_FRAME_TOKEN_EXTENSION,
+        number: 192,
+        type_: "device",
+        author: "GGP",
+        contact: "Jean-Francois Roy @jfroy",
+        platform: Some("ggp"),
+        requires: Some(&[
+            super::KHR_SWAPCHAIN_EXTENSION,
+            super::GGP_STREAM_DESCRIPTOR_SURFACE_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl GgpFrameTokenExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GGP_stream_descriptor_surface.html>
 pub trait GgpStreamDescriptorSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::GGP_STREAM_DESCRIPTOR_SURFACE_EXTENSION,
+        number: 50,
+        type_: "instance",
+        author: "GGP",
+        contact: "Jean-Francois Roy @jfroy",
+        platform: Some("ggp"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateStreamDescriptorSurfaceGGP.html>
     #[inline]
     fn create_stream_descriptor_surface_ggp(
@@ -2036,12 +3619,44 @@ pub trait GgpStreamDescriptorSurfaceExtension: InstanceV1_0 {
 impl GgpStreamDescriptorSurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GOOGLE_decorate_string.html>
-pub trait GoogleDecorateStringExtension: DeviceV1_0 {}
+pub trait GoogleDecorateStringExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::GOOGLE_DECORATE_STRING_EXTENSION,
+        number: 225,
+        type_: "device",
+        author: "GOOGLE",
+        contact: "Hai Nguyen @chaoticbob",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl GoogleDecorateStringExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GOOGLE_display_timing.html>
 pub trait GoogleDisplayTimingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::GOOGLE_DISPLAY_TIMING_EXTENSION,
+        number: 93,
+        type_: "device",
+        author: "GOOGLE",
+        contact: "Ian Elliott @ianelliottus",
+        platform: None,
+        requires: Some(&[super::KHR_SWAPCHAIN_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPastPresentationTimingGOOGLE.html>
     #[inline]
     fn get_past_presentation_timing_google(
@@ -2101,27 +3716,107 @@ pub trait GoogleDisplayTimingExtension: DeviceV1_0 {
 impl GoogleDisplayTimingExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GOOGLE_hlsl_functionality1.html>
-pub trait GoogleHlslFunctionality1Extension: DeviceV1_0 {}
+pub trait GoogleHlslFunctionality1Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION,
+        number: 224,
+        type_: "device",
+        author: "GOOGLE",
+        contact: "Hai Nguyen @chaoticbob",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl GoogleHlslFunctionality1Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GOOGLE_user_type.html>
-pub trait GoogleUserTypeExtension: DeviceV1_0 {}
+pub trait GoogleUserTypeExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::GOOGLE_USER_TYPE_EXTENSION,
+        number: 290,
+        type_: "device",
+        author: "GOOGLE",
+        contact: "Kaye Mason @chaleur",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl GoogleUserTypeExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_IMG_filter_cubic.html>
-pub trait ImgFilterCubicExtension: DeviceV1_0 {}
+pub trait ImgFilterCubicExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::IMG_FILTER_CUBIC_EXTENSION,
+        number: 16,
+        type_: "device",
+        author: "IMG",
+        contact: "Tobias Hector @tobski",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ImgFilterCubicExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_IMG_format_pvrtc.html>
-pub trait ImgFormatPvrtcExtension: DeviceV1_0 {}
+pub trait ImgFormatPvrtcExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::IMG_FORMAT_PVRTC_EXTENSION,
+        number: 55,
+        type_: "device",
+        author: "IMG",
+        contact: "Stuart Smith",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ImgFormatPvrtcExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_INTEL_performance_query.html>
 pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::INTEL_PERFORMANCE_QUERY_EXTENSION,
+        number: 211,
+        type_: "device",
+        author: "INTEL",
+        contact: "Lionel Landwerlin @llandwerlin",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquirePerformanceConfigurationINTEL.html>
     #[inline]
     fn acquire_performance_configuration_intel(
@@ -2274,22 +3969,96 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
 impl IntelPerformanceQueryExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_INTEL_shader_integer_functions2.html>
-pub trait IntelShaderIntegerFunctions2Extension: DeviceV1_0 {}
+pub trait IntelShaderIntegerFunctions2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::INTEL_SHADER_INTEGER_FUNCTIONS2_EXTENSION,
+        number: 210,
+        type_: "device",
+        author: "INTEL",
+        contact: "Ian Romanick @ianromanick",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl IntelShaderIntegerFunctions2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_16bit_storage.html>
-pub trait Khr16bitStorageExtension: DeviceV1_0 {}
+pub trait Khr16bitStorageExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_16BIT_STORAGE_EXTENSION,
+        number: 84,
+        type_: "device",
+        author: "KHR",
+        contact: "Jan-Harald Fredriksen @janharaldfredriksen-arm",
+        platform: None,
+        requires: Some(&[
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+            super::KHR_STORAGE_BUFFER_STORAGE_CLASS_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+}
 
 impl Khr16bitStorageExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_8bit_storage.html>
-pub trait Khr8bitStorageExtension: DeviceV1_0 {}
+pub trait Khr8bitStorageExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_8BIT_STORAGE_EXTENSION,
+        number: 178,
+        type_: "device",
+        author: "KHR",
+        contact: "Alexander Galazin @alegal-arm",
+        platform: None,
+        requires: Some(&[
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+            super::KHR_STORAGE_BUFFER_STORAGE_CLASS_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl Khr8bitStorageExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_acceleration_structure.html>
 pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_ACCELERATION_STRUCTURE_EXTENSION,
+        number: 151,
+        type_: "device",
+        author: "KHR",
+        contact: "Daniel Koch @dgkoch",
+        platform: None,
+        requires: Some(&[
+            super::EXT_DESCRIPTOR_INDEXING_EXTENSION,
+            super::KHR_BUFFER_DEVICE_ADDRESS_EXTENSION,
+            super::KHR_DEFERRED_HOST_OPERATIONS_EXTENSION,
+        ]),
+        requires_core: Some("1.1"),
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBuildAccelerationStructuresKHR.html>
     #[inline]
     fn build_acceleration_structures_khr(
@@ -2592,6 +4361,22 @@ impl KhrAccelerationStructureExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_android_surface.html>
 pub trait KhrAndroidSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_ANDROID_SURFACE_EXTENSION,
+        number: 9,
+        type_: "instance",
+        author: "KHR",
+        contact: "Jesse Hall @critsec",
+        platform: Some("android"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateAndroidSurfaceKHR.html>
     #[inline]
     fn create_android_surface_khr(
@@ -2620,6 +4405,22 @@ impl KhrAndroidSurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_bind_memory2.html>
 pub trait KhrBindMemory2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_BIND_MEMORY2_EXTENSION,
+        number: 158,
+        type_: "device",
+        author: "KHR",
+        contact: "Tobias Hector @tobski",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindBufferMemory2KHR.html>
     #[inline]
     fn bind_buffer_memory2_khr(
@@ -2663,6 +4464,22 @@ impl KhrBindMemory2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_buffer_device_address.html>
 pub trait KhrBufferDeviceAddressExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_BUFFER_DEVICE_ADDRESS_EXTENSION,
+        number: 258,
+        type_: "device",
+        author: "KHR",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferDeviceAddressKHR.html>
     #[inline]
     fn get_buffer_device_address_khr(&self, info: &BufferDeviceAddressInfo) {
@@ -2690,6 +4507,22 @@ impl KhrBufferDeviceAddressExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_copy_commands2.html>
 pub trait KhrCopyCommands2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_COPY_COMMANDS2_EXTENSION,
+        number: 338,
+        type_: "device",
+        author: "KHR",
+        contact: "Jeff Leger @jackohound",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBlitImage2KHR.html>
     #[inline]
     fn cmd_blit_image2_khr(
@@ -2761,6 +4594,25 @@ impl KhrCopyCommands2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_create_renderpass2.html>
 pub trait KhrCreateRenderpass2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_CREATE_RENDERPASS2_EXTENSION,
+        number: 110,
+        type_: "device",
+        author: "",
+        contact: "Tobias Hector @tobias",
+        platform: None,
+        requires: Some(&[
+            super::KHR_MULTIVIEW_EXTENSION,
+            super::KHR_MAINTENANCE2_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass2KHR.html>
     #[inline]
     fn cmd_begin_render_pass2_khr(
@@ -2828,12 +4680,44 @@ pub trait KhrCreateRenderpass2Extension: DeviceV1_0 {
 impl KhrCreateRenderpass2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_dedicated_allocation.html>
-pub trait KhrDedicatedAllocationExtension: DeviceV1_0 {}
+pub trait KhrDedicatedAllocationExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_DEDICATED_ALLOCATION_EXTENSION,
+        number: 128,
+        type_: "device",
+        author: "KHR",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::KHR_GET_MEMORY_REQUIREMENTS2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+}
 
 impl KhrDedicatedAllocationExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_deferred_host_operations.html>
 pub trait KhrDeferredHostOperationsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_DEFERRED_HOST_OPERATIONS_EXTENSION,
+        number: 269,
+        type_: "device",
+        author: "KHR",
+        contact: "Josh Barczak @jbarczak",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDeferredOperationKHR.html>
     #[inline]
     fn create_deferred_operation_khr(
@@ -2911,12 +4795,44 @@ pub trait KhrDeferredHostOperationsExtension: DeviceV1_0 {
 impl KhrDeferredHostOperationsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_depth_stencil_resolve.html>
-pub trait KhrDepthStencilResolveExtension: DeviceV1_0 {}
+pub trait KhrDepthStencilResolveExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_DEPTH_STENCIL_RESOLVE_EXTENSION,
+        number: 200,
+        type_: "device",
+        author: "KHR",
+        contact: "Jan-Harald Fredriksen @janharald",
+        platform: None,
+        requires: Some(&[super::KHR_CREATE_RENDERPASS2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrDepthStencilResolveExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_descriptor_update_template.html>
 pub trait KhrDescriptorUpdateTemplateExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_DESCRIPTOR_UPDATE_TEMPLATE_EXTENSION,
+        number: 86,
+        type_: "device",
+        author: "KHR",
+        contact: "Markus Tavenrath @mtavenrath",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushDescriptorSetWithTemplateKHR.html>
     #[inline]
     fn cmd_push_descriptor_set_with_template_khr(
@@ -2994,6 +4910,22 @@ impl KhrDescriptorUpdateTemplateExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_device_group.html>
 pub trait KhrDeviceGroupExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_DEVICE_GROUP_EXTENSION,
+        number: 61,
+        type_: "device",
+        author: "KHR",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_DEVICE_GROUP_CREATION_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireNextImage2KHR.html>
     #[inline]
     fn acquire_next_image2_khr(
@@ -3146,6 +5078,22 @@ impl KhrDeviceGroupExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_device_group_creation.html>
 pub trait KhrDeviceGroupCreationExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_DEVICE_GROUP_CREATION_EXTENSION,
+        number: 71,
+        type_: "instance",
+        author: "KHR",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumeratePhysicalDeviceGroupsKHR.html>
     #[inline]
     fn enumerate_physical_device_groups_khr(
@@ -3185,6 +5133,22 @@ impl KhrDeviceGroupCreationExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_display.html>
 pub trait KhrDisplayExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_DISPLAY_EXTENSION,
+        number: 3,
+        type_: "instance",
+        author: "KHR",
+        contact: "James Jones @cubanismo,Norbert Nopper @FslNopper",
+        platform: None,
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDisplayModeKHR.html>
     #[inline]
     fn create_display_mode_khr(
@@ -3401,6 +5365,22 @@ impl KhrDisplayExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_display_swapchain.html>
 pub trait KhrDisplaySwapchainExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_DISPLAY_SWAPCHAIN_EXTENSION,
+        number: 4,
+        type_: "device",
+        author: "KHR",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::KHR_SWAPCHAIN_EXTENSION, super::KHR_DISPLAY_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSharedSwapchainsKHR.html>
     #[inline]
     fn create_shared_swapchains_khr(
@@ -3430,6 +5410,22 @@ impl KhrDisplaySwapchainExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_draw_indirect_count.html>
 pub trait KhrDrawIndirectCountExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_DRAW_INDIRECT_COUNT_EXTENSION,
+        number: 170,
+        type_: "device",
+        author: "KHR",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndexedIndirectCountKHR.html>
     #[inline]
     fn cmd_draw_indexed_indirect_count_khr(
@@ -3480,17 +5476,65 @@ pub trait KhrDrawIndirectCountExtension: DeviceV1_0 {
 impl KhrDrawIndirectCountExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_driver_properties.html>
-pub trait KhrDriverPropertiesExtension: DeviceV1_0 {}
+pub trait KhrDriverPropertiesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_DRIVER_PROPERTIES_EXTENSION,
+        number: 197,
+        type_: "device",
+        author: "KHR",
+        contact: "Daniel Rakos @drakos-amd",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrDriverPropertiesExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_fence.html>
-pub trait KhrExternalFenceExtension: DeviceV1_0 {}
+pub trait KhrExternalFenceExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_EXTERNAL_FENCE_EXTENSION,
+        number: 114,
+        type_: "device",
+        author: "KHR",
+        contact: "Jesse Hall @critsec",
+        platform: None,
+        requires: Some(&[super::KHR_EXTERNAL_FENCE_CAPABILITIES_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+}
 
 impl KhrExternalFenceExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_fence_capabilities.html>
 pub trait KhrExternalFenceCapabilitiesExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_EXTERNAL_FENCE_CAPABILITIES_EXTENSION,
+        number: 113,
+        type_: "instance",
+        author: "KHR",
+        contact: "Jesse Hall @critsec",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalFencePropertiesKHR.html>
     #[inline]
     fn get_physical_device_external_fence_properties_khr(
@@ -3516,6 +5560,22 @@ impl KhrExternalFenceCapabilitiesExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_fence_fd.html>
 pub trait KhrExternalFenceFdExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_EXTERNAL_FENCE_FD_EXTENSION,
+        number: 116,
+        type_: "device",
+        author: "KHR",
+        contact: "Jesse Hall @critsec",
+        platform: None,
+        requires: Some(&[super::KHR_EXTERNAL_FENCE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetFenceFdKHR.html>
     #[inline]
     fn get_fence_fd_khr(&self, get_fd_info: &FenceGetFdInfoKHR) -> crate::VkResult<c_int> {
@@ -3551,6 +5611,22 @@ impl KhrExternalFenceFdExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_fence_win32.html>
 pub trait KhrExternalFenceWin32Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_EXTERNAL_FENCE_WIN32_EXTENSION,
+        number: 115,
+        type_: "device",
+        author: "KHR",
+        contact: "Jesse Hall @critsec",
+        platform: Some("win32"),
+        requires: Some(&[super::KHR_EXTERNAL_FENCE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetFenceWin32HandleKHR.html>
     #[inline]
     fn get_fence_win32_handle_khr(
@@ -3594,12 +5670,44 @@ pub trait KhrExternalFenceWin32Extension: DeviceV1_0 {
 impl KhrExternalFenceWin32Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_memory.html>
-pub trait KhrExternalMemoryExtension: DeviceV1_0 {}
+pub trait KhrExternalMemoryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_EXTERNAL_MEMORY_EXTENSION,
+        number: 73,
+        type_: "device",
+        author: "KHR",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+}
 
 impl KhrExternalMemoryExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_memory_capabilities.html>
 pub trait KhrExternalMemoryCapabilitiesExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION,
+        number: 72,
+        type_: "instance",
+        author: "KHR",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalBufferPropertiesKHR.html>
     #[inline]
     fn get_physical_device_external_buffer_properties_khr(
@@ -3625,6 +5733,22 @@ impl KhrExternalMemoryCapabilitiesExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_memory_fd.html>
 pub trait KhrExternalMemoryFdExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_EXTERNAL_MEMORY_FD_EXTENSION,
+        number: 75,
+        type_: "device",
+        author: "KHR",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::KHR_EXTERNAL_MEMORY_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryFdKHR.html>
     #[inline]
     fn get_memory_fd_khr(&self, get_fd_info: &MemoryGetFdInfoKHR) -> crate::VkResult<c_int> {
@@ -3668,6 +5792,22 @@ impl KhrExternalMemoryFdExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_memory_win32.html>
 pub trait KhrExternalMemoryWin32Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_EXTERNAL_MEMORY_WIN32_EXTENSION,
+        number: 74,
+        type_: "device",
+        author: "KHR",
+        contact: "James Jones @cubanismo",
+        platform: Some("win32"),
+        requires: Some(&[super::KHR_EXTERNAL_MEMORY_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryWin32HandleKHR.html>
     #[inline]
     fn get_memory_win32_handle_khr(
@@ -3717,12 +5857,44 @@ pub trait KhrExternalMemoryWin32Extension: DeviceV1_0 {
 impl KhrExternalMemoryWin32Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_semaphore.html>
-pub trait KhrExternalSemaphoreExtension: DeviceV1_0 {}
+pub trait KhrExternalSemaphoreExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_EXTERNAL_SEMAPHORE_EXTENSION,
+        number: 78,
+        type_: "device",
+        author: "KHR",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+}
 
 impl KhrExternalSemaphoreExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_semaphore_capabilities.html>
 pub trait KhrExternalSemaphoreCapabilitiesExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION,
+        number: 77,
+        type_: "instance",
+        author: "KHR",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalSemaphorePropertiesKHR.html>
     #[inline]
     fn get_physical_device_external_semaphore_properties_khr(
@@ -3749,6 +5921,22 @@ impl KhrExternalSemaphoreCapabilitiesExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_semaphore_fd.html>
 pub trait KhrExternalSemaphoreFdExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION,
+        number: 80,
+        type_: "device",
+        author: "KHR",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::KHR_EXTERNAL_SEMAPHORE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreFdKHR.html>
     #[inline]
     fn get_semaphore_fd_khr(&self, get_fd_info: &SemaphoreGetFdInfoKHR) -> crate::VkResult<c_int> {
@@ -3785,6 +5973,22 @@ impl KhrExternalSemaphoreFdExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_semaphore_win32.html>
 pub trait KhrExternalSemaphoreWin32Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION,
+        number: 79,
+        type_: "device",
+        author: "KHR",
+        contact: "James Jones @cubanismo",
+        platform: Some("win32"),
+        requires: Some(&[super::KHR_EXTERNAL_SEMAPHORE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreWin32HandleKHR.html>
     #[inline]
     fn get_semaphore_win32_handle_khr(
@@ -3829,6 +6033,25 @@ impl KhrExternalSemaphoreWin32Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_fragment_shading_rate.html>
 pub trait KhrFragmentShadingRateExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_FRAGMENT_SHADING_RATE_EXTENSION,
+        number: 227,
+        type_: "device",
+        author: "KHR",
+        contact: "Tobias Hector @tobski",
+        platform: None,
+        requires: Some(&[
+            super::KHR_CREATE_RENDERPASS2_EXTENSION,
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateKHR.html>
     #[inline]
     fn cmd_set_fragment_shading_rate_khr(
@@ -3885,6 +6108,22 @@ impl KhrFragmentShadingRateExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_get_display_properties2.html>
 pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_GET_DISPLAY_PROPERTIES2_EXTENSION,
+        number: 122,
+        type_: "instance",
+        author: "KHR",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::KHR_DISPLAY_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayModeProperties2KHR.html>
     #[inline]
     fn get_display_mode_properties2_khr(
@@ -4015,6 +6254,22 @@ impl KhrGetDisplayProperties2Extension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_get_memory_requirements2.html>
 pub trait KhrGetMemoryRequirements2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_GET_MEMORY_REQUIREMENTS2_EXTENSION,
+        number: 147,
+        type_: "device",
+        author: "KHR",
+        contact: "Jason Ekstrand @jekstrand",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferMemoryRequirements2KHR.html>
     #[inline]
     fn get_buffer_memory_requirements2_khr(
@@ -4087,6 +6342,22 @@ impl KhrGetMemoryRequirements2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_get_physical_device_properties2.html>
 pub trait KhrGetPhysicalDeviceProperties2Extension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+        number: 60,
+        type_: "instance",
+        author: "KHR",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFeatures2KHR.html>
     #[inline]
     fn get_physical_device_features2_khr(
@@ -4249,6 +6520,22 @@ impl KhrGetPhysicalDeviceProperties2Extension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_get_surface_capabilities2.html>
 pub trait KhrGetSurfaceCapabilities2Extension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_GET_SURFACE_CAPABILITIES2_EXTENSION,
+        number: 120,
+        type_: "instance",
+        author: "KHR",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceCapabilities2KHR.html>
     #[inline]
     fn get_physical_device_surface_capabilities2_khr(
@@ -4312,22 +6599,89 @@ pub trait KhrGetSurfaceCapabilities2Extension: InstanceV1_0 {
 impl KhrGetSurfaceCapabilities2Extension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_image_format_list.html>
-pub trait KhrImageFormatListExtension: DeviceV1_0 {}
+pub trait KhrImageFormatListExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_IMAGE_FORMAT_LIST_EXTENSION,
+        number: 148,
+        type_: "device",
+        author: "KHR",
+        contact: "Jason Ekstrand @jekstrand",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrImageFormatListExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_imageless_framebuffer.html>
-pub trait KhrImagelessFramebufferExtension: DeviceV1_0 {}
+pub trait KhrImagelessFramebufferExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_IMAGELESS_FRAMEBUFFER_EXTENSION,
+        number: 109,
+        type_: "device",
+        author: "KHR",
+        contact: "Tobias Hector @tobias",
+        platform: None,
+        requires: Some(&[
+            super::KHR_MAINTENANCE2_EXTENSION,
+            super::KHR_IMAGE_FORMAT_LIST_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrImagelessFramebufferExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_incremental_present.html>
-pub trait KhrIncrementalPresentExtension: DeviceV1_0 {}
+pub trait KhrIncrementalPresentExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_INCREMENTAL_PRESENT_EXTENSION,
+        number: 85,
+        type_: "device",
+        author: "KHR",
+        contact: "Ian Elliott @ianelliottus",
+        platform: None,
+        requires: Some(&[super::KHR_SWAPCHAIN_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl KhrIncrementalPresentExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_maintenance1.html>
 pub trait KhrMaintenance1Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_MAINTENANCE1_EXTENSION,
+        number: 70,
+        type_: "device",
+        author: "KHR",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkTrimCommandPoolKHR.html>
     #[inline]
     fn trim_command_pool_khr(&self, command_pool: CommandPool, flags: CommandPoolTrimFlags) {
@@ -4338,12 +6692,44 @@ pub trait KhrMaintenance1Extension: DeviceV1_0 {
 impl KhrMaintenance1Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_maintenance2.html>
-pub trait KhrMaintenance2Extension: DeviceV1_0 {}
+pub trait KhrMaintenance2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_MAINTENANCE2_EXTENSION,
+        number: 118,
+        type_: "device",
+        author: "KHR",
+        contact: "Michael Worcester @michaelworcester",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+}
 
 impl KhrMaintenance2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_maintenance3.html>
 pub trait KhrMaintenance3Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_MAINTENANCE3_EXTENSION,
+        number: 169,
+        type_: "device",
+        author: "KHR",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDescriptorSetLayoutSupportKHR.html>
     #[inline]
     fn get_descriptor_set_layout_support_khr(
@@ -4365,12 +6751,44 @@ pub trait KhrMaintenance3Extension: DeviceV1_0 {
 impl KhrMaintenance3Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_multiview.html>
-pub trait KhrMultiviewExtension: DeviceV1_0 {}
+pub trait KhrMultiviewExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_MULTIVIEW_EXTENSION,
+        number: 54,
+        type_: "device",
+        author: "KHR",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+}
 
 impl KhrMultiviewExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_performance_query.html>
 pub trait KhrPerformanceQueryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_PERFORMANCE_QUERY_EXTENSION,
+        number: 117,
+        type_: "device",
+        author: "KHR",
+        contact: "Alon Or-bach @alonorbach",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireProfilingLockKHR.html>
     #[inline]
     fn acquire_profiling_lock_khr(
@@ -4464,6 +6882,22 @@ impl KhrPerformanceQueryExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_pipeline_executable_properties.html>
 pub trait KhrPipelineExecutablePropertiesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION,
+        number: 270,
+        type_: "device",
+        author: "KHR",
+        contact: "Jason Ekstrand @jekstrand",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutableInternalRepresentationsKHR.html>
     #[inline]
     fn get_pipeline_executable_internal_representations_khr(
@@ -4577,17 +7011,65 @@ pub trait KhrPipelineExecutablePropertiesExtension: DeviceV1_0 {
 impl KhrPipelineExecutablePropertiesExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_pipeline_library.html>
-pub trait KhrPipelineLibraryExtension: DeviceV1_0 {}
+pub trait KhrPipelineLibraryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_PIPELINE_LIBRARY_EXTENSION,
+        number: 291,
+        type_: "device",
+        author: "KHR",
+        contact: "Christoph Kubisch @pixeljetstream",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl KhrPipelineLibraryExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_portability_subset.html>
-pub trait KhrPortabilitySubsetExtension: DeviceV1_0 {}
+pub trait KhrPortabilitySubsetExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_PORTABILITY_SUBSET_EXTENSION,
+        number: 164,
+        type_: "device",
+        author: "KHR",
+        contact: "Bill Hollings @billhollings",
+        platform: Some("provisional"),
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl KhrPortabilitySubsetExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_push_descriptor.html>
 pub trait KhrPushDescriptorExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_PUSH_DESCRIPTOR_EXTENSION,
+        number: 81,
+        type_: "device",
+        author: "KHR",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushDescriptorSetKHR.html>
     #[inline]
     fn cmd_push_descriptor_set_khr(
@@ -4631,12 +7113,50 @@ pub trait KhrPushDescriptorExtension: DeviceV1_0 {
 impl KhrPushDescriptorExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_ray_query.html>
-pub trait KhrRayQueryExtension: DeviceV1_0 {}
+pub trait KhrRayQueryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_RAY_QUERY_EXTENSION,
+        number: 349,
+        type_: "device",
+        author: "KHR",
+        contact: "Daniel Koch @dgkoch",
+        platform: None,
+        requires: Some(&[
+            super::KHR_SPIRV_1_4_EXTENSION,
+            super::KHR_ACCELERATION_STRUCTURE_EXTENSION,
+        ]),
+        requires_core: Some("1.1"),
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl KhrRayQueryExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_ray_tracing_pipeline.html>
 pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_RAY_TRACING_PIPELINE_EXTENSION,
+        number: 348,
+        type_: "device",
+        author: "KHR",
+        contact: "Daniel Koch @dgkoch",
+        platform: None,
+        requires: Some(&[
+            super::KHR_SPIRV_1_4_EXTENSION,
+            super::KHR_ACCELERATION_STRUCTURE_EXTENSION,
+        ]),
+        requires_core: Some("1.1"),
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetRayTracingPipelineStackSizeKHR.html>
     #[inline]
     fn cmd_set_ray_tracing_pipeline_stack_size_khr(
@@ -4796,17 +7316,70 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
 impl KhrRayTracingPipelineExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_relaxed_block_layout.html>
-pub trait KhrRelaxedBlockLayoutExtension: DeviceV1_0 {}
+pub trait KhrRelaxedBlockLayoutExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_RELAXED_BLOCK_LAYOUT_EXTENSION,
+        number: 145,
+        type_: "device",
+        author: "KHR",
+        contact: "John Kessenich @johnkslang",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+}
 
 impl KhrRelaxedBlockLayoutExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_sampler_mirror_clamp_to_edge.html>
-pub trait KhrSamplerMirrorClampToEdgeExtension: DeviceV1_0 {}
+pub trait KhrSamplerMirrorClampToEdgeExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION,
+        number: 15,
+        type_: "device",
+        author: "KHR",
+        contact: "Tobias Hector @tobski",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrSamplerMirrorClampToEdgeExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_sampler_ycbcr_conversion.html>
 pub trait KhrSamplerYcbcrConversionExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION,
+        number: 157,
+        type_: "device",
+        author: "KHR",
+        contact: "Andrew Garrard @fluppeteer",
+        platform: None,
+        requires: Some(&[
+            super::KHR_MAINTENANCE1_EXTENSION,
+            super::KHR_BIND_MEMORY2_EXTENSION,
+            super::KHR_GET_MEMORY_REQUIREMENTS2_EXTENSION,
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSamplerYcbcrConversionKHR.html>
     #[inline]
     fn create_sampler_ycbcr_conversion_khr(
@@ -4848,52 +7421,219 @@ pub trait KhrSamplerYcbcrConversionExtension: DeviceV1_0 {
 impl KhrSamplerYcbcrConversionExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_separate_depth_stencil_layouts.html>
-pub trait KhrSeparateDepthStencilLayoutsExtension: DeviceV1_0 {}
+pub trait KhrSeparateDepthStencilLayoutsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_EXTENSION,
+        number: 242,
+        type_: "device",
+        author: "KHR",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: Some(&[
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+            super::KHR_CREATE_RENDERPASS2_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrSeparateDepthStencilLayoutsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_atomic_int64.html>
-pub trait KhrShaderAtomicInt64Extension: DeviceV1_0 {}
+pub trait KhrShaderAtomicInt64Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SHADER_ATOMIC_INT64_EXTENSION,
+        number: 181,
+        type_: "device",
+        author: "KHR",
+        contact: "Aaron Hagan @ahagan",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrShaderAtomicInt64Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_clock.html>
-pub trait KhrShaderClockExtension: DeviceV1_0 {}
+pub trait KhrShaderClockExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SHADER_CLOCK_EXTENSION,
+        number: 182,
+        type_: "device",
+        author: "KHR",
+        contact: "Aaron Hagan @ahagan",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl KhrShaderClockExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_draw_parameters.html>
-pub trait KhrShaderDrawParametersExtension: DeviceV1_0 {}
+pub trait KhrShaderDrawParametersExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SHADER_DRAW_PARAMETERS_EXTENSION,
+        number: 64,
+        type_: "device",
+        author: "KHR",
+        contact: "Daniel Koch @dgkoch",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+}
 
 impl KhrShaderDrawParametersExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_float16_int8.html>
-pub trait KhrShaderFloat16Int8Extension: DeviceV1_0 {}
+pub trait KhrShaderFloat16Int8Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SHADER_FLOAT16_INT8_EXTENSION,
+        number: 83,
+        type_: "device",
+        author: "KHR",
+        contact: "Alexander Galazin @alegal-arm",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrShaderFloat16Int8Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_float_controls.html>
-pub trait KhrShaderFloatControlsExtension: DeviceV1_0 {}
+pub trait KhrShaderFloatControlsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SHADER_FLOAT_CONTROLS_EXTENSION,
+        number: 198,
+        type_: "device",
+        author: "KHR",
+        contact: "Alexander Galazin @alegal-arm",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrShaderFloatControlsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_non_semantic_info.html>
-pub trait KhrShaderNonSemanticInfoExtension: DeviceV1_0 {}
+pub trait KhrShaderNonSemanticInfoExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SHADER_NON_SEMANTIC_INFO_EXTENSION,
+        number: 294,
+        type_: "device",
+        author: "KHR",
+        contact: "Baldur Karlsson @baldurk",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl KhrShaderNonSemanticInfoExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_subgroup_extended_types.html>
-pub trait KhrShaderSubgroupExtendedTypesExtension: DeviceV1_0 {}
+pub trait KhrShaderSubgroupExtendedTypesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SHADER_SUBGROUP_EXTENDED_TYPES_EXTENSION,
+        number: 176,
+        type_: "device",
+        author: "KHR",
+        contact: "Neil Henning @sheredom",
+        platform: None,
+        requires: None,
+        requires_core: Some("1.1"),
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrShaderSubgroupExtendedTypesExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_terminate_invocation.html>
-pub trait KhrShaderTerminateInvocationExtension: DeviceV1_0 {}
+pub trait KhrShaderTerminateInvocationExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SHADER_TERMINATE_INVOCATION_EXTENSION,
+        number: 216,
+        type_: "device",
+        author: "KHR",
+        contact: "Jesse Hall @critsec",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl KhrShaderTerminateInvocationExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shared_presentable_image.html>
 pub trait KhrSharedPresentableImageExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION,
+        number: 112,
+        type_: "device",
+        author: "KHR",
+        contact: "Alon Or-bach @alonorbach",
+        platform: None,
+        requires: Some(&[
+            super::KHR_SWAPCHAIN_EXTENSION,
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+            super::KHR_GET_SURFACE_CAPABILITIES2_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainStatusKHR.html>
     #[inline]
     fn get_swapchain_status_khr(&self, swapchain: SwapchainKHR) -> crate::VkResult<SuccessCode> {
@@ -4910,17 +7650,65 @@ pub trait KhrSharedPresentableImageExtension: DeviceV1_0 {
 impl KhrSharedPresentableImageExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_spirv_1_4.html>
-pub trait KhrSpirv14Extension: DeviceV1_0 {}
+pub trait KhrSpirv14Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SPIRV_1_4_EXTENSION,
+        number: 237,
+        type_: "device",
+        author: "KHR",
+        contact: "Jesse Hall @critsec",
+        platform: None,
+        requires: Some(&[super::KHR_SHADER_FLOAT_CONTROLS_EXTENSION]),
+        requires_core: Some("1.1"),
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrSpirv14Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_storage_buffer_storage_class.html>
-pub trait KhrStorageBufferStorageClassExtension: DeviceV1_0 {}
+pub trait KhrStorageBufferStorageClassExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_STORAGE_BUFFER_STORAGE_CLASS_EXTENSION,
+        number: 132,
+        type_: "device",
+        author: "KHR",
+        contact: "Alexander Galazin @alegal-arm",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+}
 
 impl KhrStorageBufferStorageClassExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html>
 pub trait KhrSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SURFACE_EXTENSION,
+        number: 1,
+        type_: "instance",
+        author: "KHR",
+        contact: "James Jones @cubanismo,Ian Elliott @ianelliottus",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroySurfaceKHR.html>
     #[inline]
     fn destroy_surface_khr(&self, surface: SurfaceKHR, allocator: Option<&AllocationCallbacks>) {
@@ -5055,12 +7843,44 @@ pub trait KhrSurfaceExtension: InstanceV1_0 {
 impl KhrSurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface_protected_capabilities.html>
-pub trait KhrSurfaceProtectedCapabilitiesExtension: InstanceV1_0 {}
+pub trait KhrSurfaceProtectedCapabilitiesExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SURFACE_PROTECTED_CAPABILITIES_EXTENSION,
+        number: 240,
+        type_: "instance",
+        author: "KHR",
+        contact: "Sandeep Shinde @sashinde",
+        platform: None,
+        requires: Some(&[super::KHR_GET_SURFACE_CAPABILITIES2_EXTENSION]),
+        requires_core: Some("1.1"),
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl KhrSurfaceProtectedCapabilitiesExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_swapchain.html>
 pub trait KhrSwapchainExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SWAPCHAIN_EXTENSION,
+        number: 2,
+        type_: "device",
+        author: "KHR",
+        contact: "James Jones @cubanismo,Ian Elliott @ianelliottus",
+        platform: None,
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireNextImage2KHR.html>
     #[inline]
     fn acquire_next_image2_khr(
@@ -5273,12 +8093,51 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
 impl KhrSwapchainExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_swapchain_mutable_format.html>
-pub trait KhrSwapchainMutableFormatExtension: DeviceV1_0 {}
+pub trait KhrSwapchainMutableFormatExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SWAPCHAIN_MUTABLE_FORMAT_EXTENSION,
+        number: 201,
+        type_: "device",
+        author: "KHR",
+        contact: "Daniel Rakos @drakos-arm",
+        platform: None,
+        requires: Some(&[
+            super::KHR_SWAPCHAIN_EXTENSION,
+            super::KHR_MAINTENANCE2_EXTENSION,
+            super::KHR_IMAGE_FORMAT_LIST_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl KhrSwapchainMutableFormatExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_synchronization2.html>
 pub trait KhrSynchronization2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_SYNCHRONIZATION2_EXTENSION,
+        number: 315,
+        type_: "device",
+        author: "KHR",
+        contact: "Tobias Hector @tobski",
+        platform: None,
+        requires: Some(&[
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+            super::KHR_CREATE_RENDERPASS2_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier2KHR.html>
     #[inline]
     fn cmd_pipeline_barrier2_khr(
@@ -5411,6 +8270,22 @@ impl KhrSynchronization2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_timeline_semaphore.html>
 pub trait KhrTimelineSemaphoreExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_TIMELINE_SEMAPHORE_EXTENSION,
+        number: 208,
+        type_: "device",
+        author: "KHR",
+        contact: "Jason Ekstrand @jekstrand",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreCounterValueKHR.html>
     #[inline]
     fn get_semaphore_counter_value_khr(&self, semaphore: Semaphore) -> crate::VkResult<u64> {
@@ -5461,22 +8336,89 @@ pub trait KhrTimelineSemaphoreExtension: DeviceV1_0 {
 impl KhrTimelineSemaphoreExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_uniform_buffer_standard_layout.html>
-pub trait KhrUniformBufferStandardLayoutExtension: DeviceV1_0 {}
+pub trait KhrUniformBufferStandardLayoutExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_EXTENSION,
+        number: 254,
+        type_: "device",
+        author: "KHR",
+        contact: "Graeme Leese @gnl21",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrUniformBufferStandardLayoutExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_variable_pointers.html>
-pub trait KhrVariablePointersExtension: DeviceV1_0 {}
+pub trait KhrVariablePointersExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_VARIABLE_POINTERS_EXTENSION,
+        number: 121,
+        type_: "device",
+        author: "KHR",
+        contact: "Jesse Hall @critsec",
+        platform: None,
+        requires: Some(&[
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+            super::KHR_STORAGE_BUFFER_STORAGE_CLASS_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_1"),
+    };
+}
 
 impl KhrVariablePointersExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_vulkan_memory_model.html>
-pub trait KhrVulkanMemoryModelExtension: DeviceV1_0 {}
+pub trait KhrVulkanMemoryModelExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_VULKAN_MEMORY_MODEL_EXTENSION,
+        number: 212,
+        type_: "device",
+        author: "KHR",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_VERSION_1_2"),
+    };
+}
 
 impl KhrVulkanMemoryModelExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_wayland_surface.html>
 pub trait KhrWaylandSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_WAYLAND_SURFACE_EXTENSION,
+        number: 7,
+        type_: "instance",
+        author: "KHR",
+        contact: "Jesse Hall @critsec,Ian Elliott @ianelliottus",
+        platform: Some("wayland"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateWaylandSurfaceKHR.html>
     #[inline]
     fn create_wayland_surface_khr(
@@ -5524,12 +8466,44 @@ pub trait KhrWaylandSurfaceExtension: InstanceV1_0 {
 impl KhrWaylandSurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_win32_keyed_mutex.html>
-pub trait KhrWin32KeyedMutexExtension: DeviceV1_0 {}
+pub trait KhrWin32KeyedMutexExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_WIN32_KEYED_MUTEX_EXTENSION,
+        number: 76,
+        type_: "device",
+        author: "KHR",
+        contact: "Carsten Rohde @crohde",
+        platform: Some("win32"),
+        requires: Some(&[super::KHR_EXTERNAL_MEMORY_WIN32_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl KhrWin32KeyedMutexExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_win32_surface.html>
 pub trait KhrWin32SurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_WIN32_SURFACE_EXTENSION,
+        number: 10,
+        type_: "instance",
+        author: "KHR",
+        contact: "Jesse Hall @critsec,Ian Elliott @ianelliottus",
+        platform: Some("win32"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateWin32SurfaceKHR.html>
     #[inline]
     fn create_win32_surface_khr(
@@ -5572,12 +8546,44 @@ pub trait KhrWin32SurfaceExtension: InstanceV1_0 {
 impl KhrWin32SurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_workgroup_memory_explicit_layout.html>
-pub trait KhrWorkgroupMemoryExplicitLayoutExtension: DeviceV1_0 {}
+pub trait KhrWorkgroupMemoryExplicitLayoutExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_EXTENSION,
+        number: 337,
+        type_: "device",
+        author: "KHR",
+        contact: "Caio Marcelo de Oliveira Filho @cmarcelo",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl KhrWorkgroupMemoryExplicitLayoutExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_xcb_surface.html>
 pub trait KhrXcbSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_XCB_SURFACE_EXTENSION,
+        number: 6,
+        type_: "instance",
+        author: "KHR",
+        contact: "Jesse Hall @critsec,Ian Elliott @ianelliottus",
+        platform: Some("xcb"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateXcbSurfaceKHR.html>
     #[inline]
     fn create_xcb_surface_khr(
@@ -5628,6 +8634,22 @@ impl KhrXcbSurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_xlib_surface.html>
 pub trait KhrXlibSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_XLIB_SURFACE_EXTENSION,
+        number: 5,
+        type_: "instance",
+        author: "KHR",
+        contact: "Jesse Hall @critsec,Ian Elliott @ianelliottus",
+        platform: Some("xlib"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateXlibSurfaceKHR.html>
     #[inline]
     fn create_xlib_surface_khr(
@@ -5677,13 +8699,45 @@ pub trait KhrXlibSurfaceExtension: InstanceV1_0 {
 impl KhrXlibSurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_zero_initialize_workgroup_memory.html>
-pub trait KhrZeroInitializeWorkgroupMemoryExtension: DeviceV1_0 {}
+pub trait KhrZeroInitializeWorkgroupMemoryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_EXTENSION,
+        number: 326,
+        type_: "device",
+        author: "KHR",
+        contact: "Alan Baker @alan-baker",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl KhrZeroInitializeWorkgroupMemoryExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_MVK_ios_surface.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_metal_surface`")]
 pub trait MvkIosSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::MVK_IOS_SURFACE_EXTENSION,
+        number: 123,
+        type_: "instance",
+        author: "MVK",
+        contact: "Bill Hollings @billhollings",
+        platform: Some("ios"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: Some("VK_EXT_metal_surface"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateIOSSurfaceMVK.html>
     #[inline]
     fn create_ios_surface_mvk(
@@ -5714,6 +8768,22 @@ impl MvkIosSurfaceExtension for crate::Instance {}
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_MVK_macos_surface.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_metal_surface`")]
 pub trait MvkMacosSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::MVK_MACOS_SURFACE_EXTENSION,
+        number: 124,
+        type_: "instance",
+        author: "MVK",
+        contact: "Bill Hollings @billhollings",
+        platform: Some("macos"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: Some("VK_EXT_metal_surface"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateMacOSSurfaceMVK.html>
     #[inline]
     fn create_mac_os_surface_mvk(
@@ -5743,6 +8813,22 @@ impl MvkMacosSurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NN_vi_surface.html>
 pub trait NnViSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NN_VI_SURFACE_EXTENSION,
+        number: 63,
+        type_: "instance",
+        author: "NN",
+        contact: "Mathias Heyer gitlab:@mheyer",
+        platform: Some("vi"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateViSurfaceNN.html>
     #[inline]
     fn create_vi_surface_nn(
@@ -5771,6 +8857,22 @@ impl NnViSurfaceExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NVX_image_view_handle.html>
 pub trait NvxImageViewHandleExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NVX_IMAGE_VIEW_HANDLE_EXTENSION,
+        number: 31,
+        type_: "device",
+        author: "NVX",
+        contact: "Eric Werness @ewerness",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageViewAddressNVX.html>
     #[inline]
     fn get_image_view_address_nvx(
@@ -5802,12 +8904,44 @@ pub trait NvxImageViewHandleExtension: DeviceV1_0 {
 impl NvxImageViewHandleExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NVX_multiview_per_view_attributes.html>
-pub trait NvxMultiviewPerViewAttributesExtension: DeviceV1_0 {}
+pub trait NvxMultiviewPerViewAttributesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_EXTENSION,
+        number: 98,
+        type_: "device",
+        author: "NVX",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_MULTIVIEW_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvxMultiviewPerViewAttributesExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_acquire_winrt_display.html>
 pub trait NvAcquireWinrtDisplayExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_ACQUIRE_WINRT_DISPLAY_EXTENSION,
+        number: 346,
+        type_: "device",
+        author: "NV",
+        contact: "Jeff Juliano @jjuliano",
+        platform: Some("win32"),
+        requires: Some(&[super::EXT_DIRECT_MODE_DISPLAY_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireWinrtDisplayNV.html>
     #[inline]
     fn acquire_winrt_display_nv(
@@ -5851,6 +8985,22 @@ impl NvAcquireWinrtDisplayExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_clip_space_w_scaling.html>
 pub trait NvClipSpaceWScalingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_CLIP_SPACE_W_SCALING_EXTENSION,
+        number: 88,
+        type_: "device",
+        author: "NV",
+        contact: "Eric Werness @ewerness-nv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewportWScalingNV.html>
     #[inline]
     fn cmd_set_viewport_w_scaling_nv(
@@ -5871,12 +9021,44 @@ pub trait NvClipSpaceWScalingExtension: DeviceV1_0 {
 impl NvClipSpaceWScalingExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_compute_shader_derivatives.html>
-pub trait NvComputeShaderDerivativesExtension: DeviceV1_0 {}
+pub trait NvComputeShaderDerivativesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION,
+        number: 202,
+        type_: "device",
+        author: "NV",
+        contact: "Pat Brown @nvpbrown",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvComputeShaderDerivativesExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_cooperative_matrix.html>
 pub trait NvCooperativeMatrixExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_COOPERATIVE_MATRIX_EXTENSION,
+        number: 250,
+        type_: "device",
+        author: "NV",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceCooperativeMatrixPropertiesNV.html>
     #[inline]
     fn get_physical_device_cooperative_matrix_properties_nv(
@@ -5917,12 +9099,44 @@ pub trait NvCooperativeMatrixExtension: DeviceV1_0 {
 impl NvCooperativeMatrixExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_corner_sampled_image.html>
-pub trait NvCornerSampledImageExtension: DeviceV1_0 {}
+pub trait NvCornerSampledImageExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_CORNER_SAMPLED_IMAGE_EXTENSION,
+        number: 51,
+        type_: "device",
+        author: "NV",
+        contact: "Daniel Koch @dgkoch",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvCornerSampledImageExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_coverage_reduction_mode.html>
 pub trait NvCoverageReductionModeExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_COVERAGE_REDUCTION_MODE_EXTENSION,
+        number: 251,
+        type_: "device",
+        author: "NV",
+        contact: "Kedarnath Thangudu @kthangudu",
+        platform: None,
+        requires: Some(&[super::NV_FRAMEBUFFER_MIXED_SAMPLES_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV.html>
     #[inline]
     fn get_physical_device_supported_framebuffer_mixed_samples_combinations_nv(
@@ -5964,18 +9178,66 @@ impl NvCoverageReductionModeExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_dedicated_allocation.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_dedicated_allocation`")]
-pub trait NvDedicatedAllocationExtension: DeviceV1_0 {}
+pub trait NvDedicatedAllocationExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_DEDICATED_ALLOCATION_EXTENSION,
+        number: 27,
+        type_: "device",
+        author: "NV",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: Some("VK_KHR_dedicated_allocation"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 #[allow(deprecated)]
 impl NvDedicatedAllocationExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_dedicated_allocation_image_aliasing.html>
-pub trait NvDedicatedAllocationImageAliasingExtension: DeviceV1_0 {}
+pub trait NvDedicatedAllocationImageAliasingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_EXTENSION,
+        number: 241,
+        type_: "device",
+        author: "NVIDIA",
+        contact: "Nuno Subtil @nsubtil",
+        platform: None,
+        requires: Some(&[super::KHR_DEDICATED_ALLOCATION_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvDedicatedAllocationImageAliasingExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_device_diagnostic_checkpoints.html>
 pub trait NvDeviceDiagnosticCheckpointsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_EXTENSION,
+        number: 207,
+        type_: "device",
+        author: "NVIDIA",
+        contact: "Nuno Subtil @nsubtil",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetCheckpointNV.html>
     #[inline]
     fn cmd_set_checkpoint_nv(&self, command_buffer: CommandBuffer, checkpoint_marker: &c_void) {
@@ -6011,12 +9273,44 @@ pub trait NvDeviceDiagnosticCheckpointsExtension: DeviceV1_0 {
 impl NvDeviceDiagnosticCheckpointsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_device_diagnostics_config.html>
-pub trait NvDeviceDiagnosticsConfigExtension: DeviceV1_0 {}
+pub trait NvDeviceDiagnosticsConfigExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_DEVICE_DIAGNOSTICS_CONFIG_EXTENSION,
+        number: 301,
+        type_: "device",
+        author: "NV",
+        contact: "Kedarnath Thangudu @kthangudu",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvDeviceDiagnosticsConfigExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_device_generated_commands.html>
 pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_DEVICE_GENERATED_COMMANDS_EXTENSION,
+        number: 278,
+        type_: "device",
+        author: "NV",
+        contact: "Christoph Kubisch @pixeljetstream",
+        platform: None,
+        requires: None,
+        requires_core: Some("1.1"),
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindPipelineShaderGroupNV.html>
     #[inline]
     fn cmd_bind_pipeline_shader_group_nv(
@@ -6123,7 +9417,23 @@ impl NvDeviceGeneratedCommandsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_external_memory.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory`")]
-pub trait NvExternalMemoryExtension: DeviceV1_0 {}
+pub trait NvExternalMemoryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_EXTERNAL_MEMORY_EXTENSION,
+        number: 57,
+        type_: "device",
+        author: "NV",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: Some(&[super::NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION]),
+        requires_core: None,
+        deprecated_by: Some("VK_KHR_external_memory"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 #[allow(deprecated)]
 impl NvExternalMemoryExtension for crate::Device {}
@@ -6131,6 +9441,22 @@ impl NvExternalMemoryExtension for crate::Device {}
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_external_memory_capabilities.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory_capabilities`")]
 pub trait NvExternalMemoryCapabilitiesExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION,
+        number: 56,
+        type_: "instance",
+        author: "NV",
+        contact: "James Jones @cubanismo",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: Some("VK_KHR_external_memory_capabilities"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalImageFormatPropertiesNV.html>
     #[inline]
     fn get_physical_device_external_image_format_properties_nv(
@@ -6173,6 +9499,22 @@ impl NvExternalMemoryCapabilitiesExtension for crate::Instance {}
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_external_memory_win32.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory_win32`")]
 pub trait NvExternalMemoryWin32Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_EXTERNAL_MEMORY_WIN32_EXTENSION,
+        number: 58,
+        type_: "device",
+        author: "NV",
+        contact: "James Jones @cubanismo",
+        platform: Some("win32"),
+        requires: Some(&[super::NV_EXTERNAL_MEMORY_EXTENSION]),
+        requires_core: None,
+        deprecated_by: Some("VK_KHR_external_memory_win32"),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryWin32HandleNV.html>
     #[inline]
     fn get_memory_win32_handle_nv(
@@ -6201,22 +9543,86 @@ pub trait NvExternalMemoryWin32Extension: DeviceV1_0 {
 impl NvExternalMemoryWin32Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_fill_rectangle.html>
-pub trait NvFillRectangleExtension: DeviceV1_0 {}
+pub trait NvFillRectangleExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_FILL_RECTANGLE_EXTENSION,
+        number: 154,
+        type_: "device",
+        author: "NV",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvFillRectangleExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_fragment_coverage_to_color.html>
-pub trait NvFragmentCoverageToColorExtension: DeviceV1_0 {}
+pub trait NvFragmentCoverageToColorExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_FRAGMENT_COVERAGE_TO_COLOR_EXTENSION,
+        number: 150,
+        type_: "device",
+        author: "NV",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvFragmentCoverageToColorExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_fragment_shader_barycentric.html>
-pub trait NvFragmentShaderBarycentricExtension: DeviceV1_0 {}
+pub trait NvFragmentShaderBarycentricExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION,
+        number: 204,
+        type_: "device",
+        author: "NV",
+        contact: "Pat Brown @nvpbrown",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvFragmentShaderBarycentricExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_fragment_shading_rate_enums.html>
 pub trait NvFragmentShadingRateEnumsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_FRAGMENT_SHADING_RATE_ENUMS_EXTENSION,
+        number: 327,
+        type_: "device",
+        author: "NV",
+        contact: "Pat Brown @nvpbrown",
+        platform: None,
+        requires: Some(&[super::KHR_FRAGMENT_SHADING_RATE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateEnumNV.html>
     #[inline]
     fn cmd_set_fragment_shading_rate_enum_nv(
@@ -6236,24 +9642,88 @@ pub trait NvFragmentShadingRateEnumsExtension: DeviceV1_0 {
 impl NvFragmentShadingRateEnumsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_framebuffer_mixed_samples.html>
-pub trait NvFramebufferMixedSamplesExtension: DeviceV1_0 {}
+pub trait NvFramebufferMixedSamplesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_FRAMEBUFFER_MIXED_SAMPLES_EXTENSION,
+        number: 153,
+        type_: "device",
+        author: "NV",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvFramebufferMixedSamplesExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_geometry_shader_passthrough.html>
-pub trait NvGeometryShaderPassthroughExtension: DeviceV1_0 {}
+pub trait NvGeometryShaderPassthroughExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_GEOMETRY_SHADER_PASSTHROUGH_EXTENSION,
+        number: 96,
+        type_: "device",
+        author: "NV",
+        contact: "Daniel Koch @dgkoch",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvGeometryShaderPassthroughExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_glsl_shader.html>
 #[deprecated]
-pub trait NvGlslShaderExtension: DeviceV1_0 {}
+pub trait NvGlslShaderExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_GLSL_SHADER_EXTENSION,
+        number: 13,
+        type_: "device",
+        author: "NV",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: Some(""),
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 #[allow(deprecated)]
 impl NvGlslShaderExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_mesh_shader.html>
 pub trait NvMeshShaderExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_MESH_SHADER_EXTENSION,
+        number: 203,
+        type_: "device",
+        author: "NV",
+        contact: "Christoph Kubisch @pixeljetstream",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMeshTasksIndirectCountNV.html>
     #[inline]
     fn cmd_draw_mesh_tasks_indirect_count_nv(
@@ -6313,6 +9783,25 @@ impl NvMeshShaderExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_ray_tracing.html>
 pub trait NvRayTracingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_RAY_TRACING_EXTENSION,
+        number: 166,
+        type_: "device",
+        author: "NV",
+        contact: "Eric Werness @ewerness",
+        platform: None,
+        requires: Some(&[
+            super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
+            super::KHR_GET_MEMORY_REQUIREMENTS2_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindAccelerationStructureMemoryNV.html>
     #[inline]
     fn bind_acceleration_structure_memory_nv(
@@ -6577,17 +10066,65 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 impl NvRayTracingExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_representative_fragment_test.html>
-pub trait NvRepresentativeFragmentTestExtension: DeviceV1_0 {}
+pub trait NvRepresentativeFragmentTestExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_REPRESENTATIVE_FRAGMENT_TEST_EXTENSION,
+        number: 167,
+        type_: "device",
+        author: "NV",
+        contact: "Kedarnath Thangudu @kthangudu",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvRepresentativeFragmentTestExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_sample_mask_override_coverage.html>
-pub trait NvSampleMaskOverrideCoverageExtension: DeviceV1_0 {}
+pub trait NvSampleMaskOverrideCoverageExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_SAMPLE_MASK_OVERRIDE_COVERAGE_EXTENSION,
+        number: 95,
+        type_: "device",
+        author: "NV",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvSampleMaskOverrideCoverageExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_scissor_exclusive.html>
 pub trait NvScissorExclusiveExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_SCISSOR_EXCLUSIVE_EXTENSION,
+        number: 206,
+        type_: "device",
+        author: "NV",
+        contact: "Pat Brown @nvpbrown",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetExclusiveScissorNV.html>
     #[inline]
     fn cmd_set_exclusive_scissor_nv(
@@ -6608,22 +10145,86 @@ pub trait NvScissorExclusiveExtension: DeviceV1_0 {
 impl NvScissorExclusiveExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_shader_image_footprint.html>
-pub trait NvShaderImageFootprintExtension: DeviceV1_0 {}
+pub trait NvShaderImageFootprintExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_SHADER_IMAGE_FOOTPRINT_EXTENSION,
+        number: 205,
+        type_: "device",
+        author: "NV",
+        contact: "Pat Brown @nvpbrown",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvShaderImageFootprintExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_shader_sm_builtins.html>
-pub trait NvShaderSmBuiltinsExtension: DeviceV1_0 {}
+pub trait NvShaderSmBuiltinsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_SHADER_SM_BUILTINS_EXTENSION,
+        number: 155,
+        type_: "device",
+        author: "NV",
+        contact: "Daniel Koch @dgkoch",
+        platform: None,
+        requires: None,
+        requires_core: Some("1.1"),
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvShaderSmBuiltinsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_shader_subgroup_partitioned.html>
-pub trait NvShaderSubgroupPartitionedExtension: DeviceV1_0 {}
+pub trait NvShaderSubgroupPartitionedExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_SHADER_SUBGROUP_PARTITIONED_EXTENSION,
+        number: 199,
+        type_: "device",
+        author: "NV",
+        contact: "Jeff Bolz @jeffbolznv",
+        platform: None,
+        requires: None,
+        requires_core: Some("1.1"),
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvShaderSubgroupPartitionedExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_shading_rate_image.html>
 pub trait NvShadingRateImageExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_SHADING_RATE_IMAGE_EXTENSION,
+        number: 165,
+        type_: "device",
+        author: "NV",
+        contact: "Pat Brown @nvpbrown",
+        platform: None,
+        requires: Some(&[super::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindShadingRateImageNV.html>
     #[inline]
     fn cmd_bind_shading_rate_image_nv(
@@ -6675,41 +10276,172 @@ pub trait NvShadingRateImageExtension: DeviceV1_0 {
 impl NvShadingRateImageExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_viewport_array2.html>
-pub trait NvViewportArray2Extension: DeviceV1_0 {}
+pub trait NvViewportArray2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_VIEWPORT_ARRAY2_EXTENSION,
+        number: 97,
+        type_: "device",
+        author: "NV",
+        contact: "Daniel Koch @dgkoch",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvViewportArray2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_viewport_swizzle.html>
-pub trait NvViewportSwizzleExtension: DeviceV1_0 {}
+pub trait NvViewportSwizzleExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_VIEWPORT_SWIZZLE_EXTENSION,
+        number: 99,
+        type_: "device",
+        author: "NV",
+        contact: "Piers Daniell @pdaniell-nv",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl NvViewportSwizzleExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_win32_keyed_mutex.html>
-pub trait NvWin32KeyedMutexExtension: DeviceV1_0 {}
+pub trait NvWin32KeyedMutexExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::NV_WIN32_KEYED_MUTEX_EXTENSION,
+        number: 59,
+        type_: "device",
+        author: "NV",
+        contact: "Carsten Rohde @crohde",
+        platform: Some("win32"),
+        requires: Some(&[super::NV_EXTERNAL_MEMORY_WIN32_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: Some("VK_KHR_win32_keyed_mutex"),
+    };
+}
 
 impl NvWin32KeyedMutexExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_render_pass_shader_resolve.html>
-pub trait QcomRenderPassShaderResolveExtension: DeviceV1_0 {}
+pub trait QcomRenderPassShaderResolveExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION,
+        number: 172,
+        type_: "device",
+        author: "QCOM",
+        contact: "Bill Licea-Kane @wwlk",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl QcomRenderPassShaderResolveExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_render_pass_store_ops.html>
-pub trait QcomRenderPassStoreOpsExtension: DeviceV1_0 {}
+pub trait QcomRenderPassStoreOpsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::QCOM_RENDER_PASS_STORE_OPS_EXTENSION,
+        number: 302,
+        type_: "device",
+        author: "QCOM",
+        contact: "Bill Licea-Kane @wwlk",
+        platform: None,
+        requires: None,
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl QcomRenderPassStoreOpsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_render_pass_transform.html>
-pub trait QcomRenderPassTransformExtension: DeviceV1_0 {}
+pub trait QcomRenderPassTransformExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::QCOM_RENDER_PASS_TRANSFORM_EXTENSION,
+        number: 283,
+        type_: "device",
+        author: "QCOM",
+        contact: "Jeff Leger @jackohound",
+        platform: None,
+        requires: Some(&[super::KHR_SWAPCHAIN_EXTENSION, super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl QcomRenderPassTransformExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_rotated_copy_commands.html>
-pub trait QcomRotatedCopyCommandsExtension: DeviceV1_0 {}
+pub trait QcomRotatedCopyCommandsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::QCOM_ROTATED_COPY_COMMANDS_EXTENSION,
+        number: 334,
+        type_: "device",
+        author: "QCOM",
+        contact: "Jeff Leger @jackohound",
+        platform: None,
+        requires: Some(&[
+            super::KHR_SWAPCHAIN_EXTENSION,
+            super::KHR_COPY_COMMANDS2_EXTENSION,
+        ]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl QcomRotatedCopyCommandsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_VALVE_mutable_descriptor_type.html>
-pub trait ValveMutableDescriptorTypeExtension: DeviceV1_0 {}
+pub trait ValveMutableDescriptorTypeExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::VALVE_MUTABLE_DESCRIPTOR_TYPE_EXTENSION,
+        number: 352,
+        type_: "device",
+        author: "VALVE",
+        contact: "Joshua Ashton @Joshua-Ashton,Hans-Kristian Arntzen @HansKristian-Work",
+        platform: None,
+        requires: Some(&[super::KHR_MAINTENANCE3_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+}
 
 impl ValveMutableDescriptorTypeExtension for crate::Device {}

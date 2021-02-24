@@ -16,6 +16,9 @@
 - Renamed `libloading_` Cargo feature to `libloading`
 - Removed `winit_` Cargo feature in favor of `window` feature
 
+### Added
+- Added extension metadata to extension traits
+
 ## [0.2.3] - 2020-11-23
 
 ### Bindings Updates

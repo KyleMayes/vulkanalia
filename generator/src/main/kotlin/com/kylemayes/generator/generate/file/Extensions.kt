@@ -7,6 +7,7 @@ import com.kylemayes.generator.generate.support.generateManualUrl
 import com.kylemayes.generator.generate.support.getExtensionGroups
 import com.kylemayes.generator.registry.Extension
 import com.kylemayes.generator.registry.Registry
+import com.kylemayes.generator.registry.intern
 import com.kylemayes.generator.support.toPascalCase
 
 /** Generates Rust modules and constants for Vulkan extensions. */
@@ -84,9 +85,40 @@ impl ConvertCStr for ExtensionName {
     }
 }
 
+/// A collection of metadata for a Vulkan extension.
+#[derive(Copy, Clone, Debug)]
+pub struct ExtensionMetadata {
+    /// The name of the extension.
+    pub name: ExtensionName,
+    /// The number assigned to the extension.
+    pub number: i32,
+
+    /// The type of the extension (`device` or `instance`).
+    pub type_: &'static str,
+
+    /// The author of the extension.
+    pub author: &'static str,
+    /// The primary contact(s) for the extension.
+    pub contact: &'static str,
+
+    /// The platform the extension can be used on (e.g., `wayland` or `win32`).
+    pub platform: Option<&'static str>,
+
+    /// The extensions required by the extension.
+    pub requires: Option<&'static [ExtensionName]>,
+    /// The Vulkan version required by the extension (e.g., `1.1`).
+    pub requires_core: Option<&'static str>,
+
+    /// The Vulkan extension or version that deprecated the extension (e.g., `VK_VERSION_1_1`).
+    pub deprecated_by: Option<&'static str>,
+    /// The Vulkan extension or version that obsoleted the extension (e.g., `VK_VERSION_1_1`).
+    pub obsoleted_by: Option<&'static str>,
+    /// The Vulkan version the extension was promoted to core in (e.g., `VK_VERSION_1_1`).
+    pub promoted_to: Option<&'static str>,
+}
+
 ${getExtensionGroups().values.flatten().sortedBy { it.name }.joinToString("") { generateExtensionTrait(it) }}
     """
-
 /** Generates a Rust trait and implementation for a Vulkan extension. */
 private fun Registry.generateExtensionTrait(extension: Extension): String {
     val deprecation = generateDeprecation(extension)?.let { "\n$it" } ?: ""
@@ -96,6 +128,10 @@ private fun Registry.generateExtensionTrait(extension: Extension): String {
     return """
 /// <${generateManualUrl(extension)}>$deprecation
 pub trait $name: ${type}V1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ${generateMetadata(extension)};
+
     ${commands.joinToString("") { generateCommandWrapper(it) }}
 }
 
@@ -111,4 +147,33 @@ private fun generateDeprecation(extension: Extension) = extension.deprecatedby?.
     } else {
         "#[deprecated]"
     }
+}
+
+/** Generates a Rust struct for the metadata for a Vulkan extension. */
+private fun Registry.generateMetadata(extension: Extension): String {
+    val requires = if (extension.requires != null) {
+        val names = extension.requires
+            .split(",")
+            .map { extensions[it.intern()]!!.name }
+            .joinToString(", ") { "super::${it}_EXTENSION" }
+        "Some(&[$names])"
+    } else {
+        "None"
+    }
+
+    return """
+ExtensionMetadata {
+    name: super::${extension.name}_EXTENSION,
+    number: ${extension.number},
+    type_: "${extension.type}",
+    author: "${extension.author}",
+    contact: "${extension.contact}",
+    platform: ${extension.platform?.let { "Some(\"$it\")" } ?: "None"},
+    requires: $requires,
+    requires_core: ${extension.requiresCore?.let { "Some(\"$it\")" } ?: "None"},
+    deprecated_by: ${extension.deprecatedby?.let { "Some(\"$it\")" } ?: "None"},
+    obsoleted_by: ${extension.obsoletedby?.let { "Some(\"$it\")" } ?: "None"},
+    promoted_to: ${extension.promotedto?.let { "Some(\"$it\")" } ?: "None"},
+}
+    """
 }
