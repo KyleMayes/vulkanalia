@@ -156,7 +156,7 @@
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/10_fixed_functions.rs">main.rs</a></p>
 <p>The older graphics APIs provided default state for most of the stages of the graphics pipeline. In Vulkan you have to be explicit about everything, from viewport size to color blending function. In this chapter we'll fill in all of the structures to configure these fixed-function operations.</p>
 <h2><a class="header" href="#vertex-input" id="vertex-input">Vertex input</a></h2>
-<p>The <code>vk::PipelineVertexInputStateCreateInfo</code> structure describes the format of the vertex data that will be passed to the vertex shader. It describes this in roughly two ways:</p>
+<p>The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineVertexInputStateCreateInfo.html"><code class="hljs">vk::PipelineVertexInputStateCreateInfo</code></a> structure describes the format of the vertex data that will be passed to the vertex shader. It describes this in roughly two ways:</p>
 <ul>
 <li>Bindings – spacing between data and whether the data is per-vertex or per-instance (see <a href="https://en.wikipedia.org/wiki/Geometry_instancing">instancing</a>)</li>
 <li>Attribute descriptions – type of the attributes passed to the vertex shader, which binding to load them from and at which offset</li>
@@ -164,15 +164,15 @@
 <p>Because we're hard coding the vertex data directly in the vertex shader, we'll leave this structure with the defaults to specify that there is no vertex data to load for now. We'll get back to it in the vertex buffer chapter.</p>
 <pre><code class="language-rust noplaypen">let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder();
 </code></pre>
-<p>The <code>vertex_binding_descriptions</code> and <code>vertex_attribute_descriptions</code> fields for this struct that could have been set here would be slices of structs that describe the aforementioned details for loading vertex data. Add this structure to the <code>create_pipeline</code> function right after the <code>vk::PipelineShaderStageCreateInfo</code> structs.</p>
+<p>The <code>vertex_binding_descriptions</code> and <code>vertex_attribute_descriptions</code> fields for this struct that could have been set here would be slices of structs that describe the aforementioned details for loading vertex data. Add this structure to the <code>create_pipeline</code> function right after the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineShaderStageCreateInfo.html"><code class="hljs">vk::PipelineShaderStageCreateInfo</code></a> structs.</p>
 <h2><a class="header" href="#input-assembly" id="input-assembly">Input assembly</a></h2>
-<p>The <code>vk::PipelineInputAssemblyStateCreateInfo</code> struct describes two things: what kind of geometry will be drawn from the vertices and if primitive restart should be enabled. The former is specified in the <code>topology</code> member and can have values like:</p>
+<p>The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineInputAssemblyStateCreateInfo.html"><code class="hljs">vk::PipelineInputAssemblyStateCreateInfo</code></a> struct describes two things: what kind of geometry will be drawn from the vertices and if primitive restart should be enabled. The former is specified in the <code>topology</code> member and can have values like:</p>
 <ul>
-<li><code>vk::PrimitiveTopology::POINT_LIST</code> – points from vertices</li>
-<li><code>vk::PrimitiveTopology::LINE_LIST</code> – line from every 2 vertices without reuse</li>
-<li><code>vk::PrimitiveTopology::LINE_STRIP</code> – the end vertex of every line is used as start vertex for the next line</li>
-<li><code>vk::PrimitiveTopology::TRIANGLE_LIST</code> – triangle from every 3 vertices without reuse</li>
-<li><code>vk::PrimitiveTopology::TRIANGLE_STRIP</code> – the second and third vertex of every triangle are used as first two vertices of the next triangle</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PrimitiveTopology.html#associatedconstant.POINT_LIST"><code class="hljs">vk::PrimitiveTopology::POINT_LIST</code></a> – points from vertices</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PrimitiveTopology.html#associatedconstant.LINE_LIST"><code class="hljs">vk::PrimitiveTopology::LINE_LIST</code></a> – line from every 2 vertices without reuse</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PrimitiveTopology.html#associatedconstant.LINE_STRIP"><code class="hljs">vk::PrimitiveTopology::LINE_STRIP</code></a> – the end vertex of every line is used as start vertex for the next line</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PrimitiveTopology.html#associatedconstant.TRIANGLE_LIST"><code class="hljs">vk::PrimitiveTopology::TRIANGLE_LIST</code></a> – triangle from every 3 vertices without reuse</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PrimitiveTopology.html#associatedconstant.TRIANGLE_STRIP"><code class="hljs">vk::PrimitiveTopology::TRIANGLE_STRIP</code></a> – the second and third vertex of every triangle are used as first two vertices of the next triangle</li>
 </ul>
 <p>Normally, the vertices are loaded from the vertex buffer by index in sequential order, but with an <em>element buffer</em> you can specify the indices to use yourself. This allows you to perform optimizations like reusing vertices. If you set the <code>primitive_restart_enable</code> member to <code>true</code>, then it's possible to break up lines and triangles in the <code>_STRIP</code> topology modes by using a special index of <code>0xFFFF</code> or <code>0xFFFFFFFF</code>.</p>
 <p>We intend to draw triangles throughout this tutorial, so we'll stick to the following data for the structure:</p>
@@ -199,7 +199,7 @@
     .offset(vk::Offset2D { x: 0, y: 0 })
     .extent(data.swapchain_extent);
 </code></pre>
-<p>Now this viewport and scissor rectangle need to be combined into a viewport state using the <code>vk::PipelineViewportStateCreateInfo</code> struct. It is possible to use multiple viewports and scissor rectangles on some graphics cards, so its members reference an array of them. Using multiple requires enabling a GPU feature (see logical device creation).</p>
+<p>Now this viewport and scissor rectangle need to be combined into a viewport state using the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineViewportStateCreateInfo.html"><code class="hljs">vk::PipelineViewportStateCreateInfo</code></a> struct. It is possible to use multiple viewports and scissor rectangles on some graphics cards, so its members reference an array of them. Using multiple requires enabling a GPU feature (see logical device creation).</p>
 <pre><code class="language-rust noplaypen">let viewports = &amp;[viewport];
 let scissors = &amp;[scissor];
 let viewport_state = vk::PipelineViewportStateCreateInfo::builder()
@@ -207,7 +207,7 @@ let viewport_state = vk::PipelineViewportStateCreateInfo::builder()
     .scissors(scissors);
 </code></pre>
 <h2><a class="header" href="#rasterizer" id="rasterizer">Rasterizer</a></h2>
-<p>The rasterizer takes the geometry that is shaped by the vertices from the vertex shader and turns it into fragments to be colored by the fragment shader. It also performs <a href="https://en.wikipedia.org/wiki/Z-buffering">depth testing</a>, <a href="https://en.wikipedia.org/wiki/Back-face_culling">face culling</a> and the scissor test, and it can be configured to output fragments that fill entire polygons or just the edges (wireframe rendering). All this is configured using the <code>vk::PipelineRasterizationStateCreateInfo</code> structure.</p>
+<p>The rasterizer takes the geometry that is shaped by the vertices from the vertex shader and turns it into fragments to be colored by the fragment shader. It also performs <a href="https://en.wikipedia.org/wiki/Z-buffering">depth testing</a>, <a href="https://en.wikipedia.org/wiki/Back-face_culling">face culling</a> and the scissor test, and it can be configured to output fragments that fill entire polygons or just the edges (wireframe rendering). All this is configured using the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineRasterizationStateCreateInfo.html"><code class="hljs">vk::PipelineRasterizationStateCreateInfo</code></a> structure.</p>
 <pre><code class="language-rust noplaypen">let rasterization_state = vk::PipelineRasterizationStateCreateInfo::builder()
     .depth_clamp_enable(false)
     // continued...
@@ -220,9 +220,9 @@ let viewport_state = vk::PipelineViewportStateCreateInfo::builder()
 </code></pre>
 <p>The <code>polygon_mode</code> determines how fragments are generated for geometry. The following modes are available:</p>
 <ul>
-<li><code>vk::PolygonMode::FILL</code> – fill the area of the polygon with fragments</li>
-<li><code>vk::PolygonMode::LINE</code> – polygon edges are drawn as lines</li>
-<li><code>vk::PolygonMode::POINT</code> – polygon vertices are drawn as points</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PolygonMode.html#associatedconstant.FILL"><code class="hljs">vk::PolygonMode::FILL</code></a> – fill the area of the polygon with fragments</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PolygonMode.html#associatedconstant.LINE"><code class="hljs">vk::PolygonMode::LINE</code></a> – polygon edges are drawn as lines</li>
+<li><a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PolygonMode.html#associatedconstant.POINT"><code class="hljs">vk::PolygonMode::POINT</code></a> – polygon vertices are drawn as points</li>
 </ul>
 <p>Using any mode other than fill requires enabling a GPU feature.</p>
 <pre><code class="language-rust noplaypen">    .line_width(1.0)
@@ -236,21 +236,21 @@ let viewport_state = vk::PipelineViewportStateCreateInfo::builder()
 </code></pre>
 <p>The rasterizer can alter the depth values by adding a constant value or biasing them based on a fragment's slope. This is sometimes used for shadow mapping, but we won't be using it. Just set <code>depth_bias_enable</code> to <code>false</code>.</p>
 <h2><a class="header" href="#multisampling" id="multisampling">Multisampling</a></h2>
-<p>The <code>vk::PipelineMultisampleStateCreateInfo</code> struct configures multisampling, which is one of the ways to perform <a href="https://en.wikipedia.org/wiki/Multisample_anti-aliasing">anti-aliasing</a>. It works by combining the fragment shader results of multiple polygons that rasterize to the same pixel. This mainly occurs along edges, which is also where the most noticeable aliasing artifacts occur. Because it doesn't need to run the fragment shader multiple times if only one polygon maps to a pixel, it is significantly less expensive than simply rendering to a higher resolution and then downscaling. Enabling it requires enabling a GPU feature.</p>
+<p>The <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineMultisampleStateCreateInfo.html"><code class="hljs">vk::PipelineMultisampleStateCreateInfo</code></a> struct configures multisampling, which is one of the ways to perform <a href="https://en.wikipedia.org/wiki/Multisample_anti-aliasing">anti-aliasing</a>. It works by combining the fragment shader results of multiple polygons that rasterize to the same pixel. This mainly occurs along edges, which is also where the most noticeable aliasing artifacts occur. Because it doesn't need to run the fragment shader multiple times if only one polygon maps to a pixel, it is significantly less expensive than simply rendering to a higher resolution and then downscaling. Enabling it requires enabling a GPU feature.</p>
 <pre><code class="language-rust noplaypen">let multisample_state = vk::PipelineMultisampleStateCreateInfo::builder()
     .sample_shading_enable(false)
     .rasterization_samples(vk::SampleCountFlags::_1);
 </code></pre>
 <p>We'll revisit multisampling in a later chapter, for now let's keep it disabled.</p>
 <h2><a class="header" href="#depth-and-stencil-testing" id="depth-and-stencil-testing">Depth and stencil testing</a></h2>
-<p>If you are using a depth and/or stencil buffer, then you also need to configure the depth and stencil tests using <code>vk::PipelineDepthStencilStateCreateInfo</code>. We don't have one right now, so we can simply ignore it for now. We'll get back to it in the depth buffering chapter.</p>
+<p>If you are using a depth and/or stencil buffer, then you also need to configure the depth and stencil tests using <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineDepthStencilStateCreateInfo.html"><code class="hljs">vk::PipelineDepthStencilStateCreateInfo</code></a>. We don't have one right now, so we can simply ignore it for now. We'll get back to it in the depth buffering chapter.</p>
 <h2><a class="header" href="#color-blending" id="color-blending">Color blending</a></h2>
 <p>After a fragment shader has returned a color, it needs to be combined with the color that is already in the framebuffer. This transformation is known as color blending and there are two ways to do it:</p>
 <ul>
 <li>Mix the old and new value to produce a final color</li>
 <li>Combine the old and new value using a bitwise operation</li>
 </ul>
-<p>There are two types of structs to configure color blending. The first struct, <code>vk::PipelineColorBlendAttachmentState</code> contains the configuration per attached framebuffer and the second struct, <code>vk::PipelineColorBlendStateCreateInfo</code> contains the <em>global</em> color blending settings. In our case we only have one framebuffer:</p>
+<p>There are two types of structs to configure color blending. The first struct, <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineColorBlendAttachmentState.html"><code class="hljs">vk::PipelineColorBlendAttachmentState</code></a> contains the configuration per attached framebuffer and the second struct, <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineColorBlendStateCreateInfo.html"><code class="hljs">vk::PipelineColorBlendStateCreateInfo</code></a> contains the <em>global</em> color blending settings. In our case we only have one framebuffer:</p>
 <pre><code class="language-rust noplaypen">let attachment = vk::PipelineColorBlendAttachmentState::builder()
     .color_write_mask(vk::ColorComponentFlags::all())
     .blend_enable(false)
@@ -289,7 +289,7 @@ final_color.a = new_alpha.a;
     .dst_alpha_blend_factor(vk::BlendFactor::ZERO)
     .alpha_blend_op(vk::BlendOp::ADD);
 </code></pre>
-<p>You can find all of the possible operations in the <code>vk::BlendFactor</code> and <code>vk::BlendOp</code> enumerations in the specification (or <code>vulkanalia</code>'s documentation).</p>
+<p>You can find all of the possible operations in the <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.BlendFactor.html"><code class="hljs">vk::BlendFactor</code></a> and <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.BlendOp.html"><code class="hljs">vk::BlendOp</code></a> enumerations in the specification (or <code>vulkanalia</code>'s documentation).</p>
 <p>The second structure references the array of structures for all of the framebuffers and allows you to set blend constants that you can use as blend factors in the aforementioned calculations.</p>
 <pre><code class="language-rust noplaypen">let attachments = &amp;[attachment];
 let color_blend_state = vk::PipelineColorBlendStateCreateInfo::builder()
@@ -300,7 +300,7 @@ let color_blend_state = vk::PipelineColorBlendStateCreateInfo::builder()
 </code></pre>
 <p>If you want to use the second method of blending (bitwise combination), then you should set <code>logic_op_enable</code> to <code>true</code>. The bitwise operation can then be specified in the <code>logic_op</code> field. Note that this will automatically disable the first method, as if you had set <code>blend_enable</code> to <code>false</code> for every attached framebuffer! The <code>color_write_mask</code> will also be used in this mode to determine which channels in the framebuffer will actually be affected. It is also possible to disable both modes, as we've done here, in which case the fragment colors will be written to the framebuffer unmodified.</p>
 <h2><a class="header" href="#dynamic-state" id="dynamic-state">Dynamic state</a></h2>
-<p>A limited amount of the state that we've specified in the previous structs <em>can</em> actually be changed without recreating the pipeline. Examples are the size of the viewport, line width and blend constants. If you want to do that, then you'll have to fill in a <code>vk::PipelineDynamicStateCreateInfo</code> structure like this:</p>
+<p>A limited amount of the state that we've specified in the previous structs <em>can</em> actually be changed without recreating the pipeline. Examples are the size of the viewport, line width and blend constants. If you want to do that, then you'll have to fill in a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineDynamicStateCreateInfo.html"><code class="hljs">vk::PipelineDynamicStateCreateInfo</code></a> structure like this:</p>
 <pre><code class="language-rust noplaypen">let dynamic_states = &amp;[
     vk::DynamicState::VIEWPORT,
     vk::DynamicState::LINE_WIDTH,
@@ -312,7 +312,7 @@ let dynamic_state = vk::PipelineDynamicStateCreateInfo::builder()
 <p>This will cause the configuration of these values to be ignored and you will be required to specify the data at drawing time. We'll get back to this in a future chapter. This struct can be omitted if you don't have any dynamic state.</p>
 <h2><a class="header" href="#pipeline-layout" id="pipeline-layout">Pipeline layout</a></h2>
 <p>You can use <code>uniform</code> values in shaders, which are globals similar to dynamic state variables that can be changed at drawing time to alter the behavior of your shaders without having to recreate them. They are commonly used to pass the transformation matrix to the vertex shader, or to create texture samplers in the fragment shader.</p>
-<p>These uniform values need to be specified during pipeline creation by creating a <code>vk::PipelineLayout</code> object. Even though we won't be using them until a future chapter, we are still required to create an empty pipeline layout.</p>
+<p>These uniform values need to be specified during pipeline creation by creating a <a href="https://docs.rs/vulkanalia/0.2.1/vulkanalia/vk/struct.PipelineLayout.html"><code class="hljs">vk::PipelineLayout</code></a> object. Even though we won't be using them until a future chapter, we are still required to create an empty pipeline layout.</p>
 <p>Create an <code>AppData</code> field to hold this object, because we'll refer to it from other functions at a later point in time:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
