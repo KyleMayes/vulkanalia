@@ -35,7 +35,7 @@ pub trait Loader {
     ) -> Result<extern "system" fn(), Box<dyn error::Error + 'static>>;
 }
 
-#[cfg(feature = "libloading_")]
+#[cfg(feature = "libloading")]
 mod libloading_loader {
     use std::error;
     use std::ffi::OsStr;
@@ -76,5 +76,5 @@ mod libloading_loader {
     }
 }
 
-#[cfg(feature = "libloading_")]
+#[cfg(feature = "libloading")]
 pub use self::libloading_loader::*;

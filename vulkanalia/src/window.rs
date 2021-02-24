@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
-//! `winit` integration.
+//! Window integration.
 
 use std::collections::HashSet;
 
-use winit::window::Window;
+use raw_window_handle::{HasRawWindowHandle, RawWindowHandle};
 
 use crate::prelude::v1_0::*;
 
-/// Gets the required instance extensions for `winit` integration.
+/// Gets the required instance extensions for window integration.
 #[allow(deprecated)]
 pub fn get_required_instance_extensions(
     entry: &Entry,
@@ -36,34 +36,51 @@ pub fn get_required_instance_extensions(
     Ok(required.iter().filter(|e| available.contains(*e)).collect())
 }
 
-/// Creates a surface for a `winit` window (Windows).
+/// Creates a surface for a window (Windows).
 #[cfg(windows)]
-pub fn create_surface(instance: &Instance, window: &Window) -> VkResult<vk::SurfaceKHR> {
+pub fn create_surface(
+    instance: &Instance,
+    window: &dyn HasRawWindowHandle,
+) -> VkResult<vk::SurfaceKHR> {
     use vk::KhrWin32SurfaceExtension;
-    use winit::platform::windows::WindowExtWindows;
+
+    let window = if let RawWindowHandle::Windows(window) = window.raw_window_handle() {
+        window
+    } else {
+        unreachable!()
+    };
 
     let info = vk::Win32SurfaceCreateInfoKHR::builder()
-        .hinstance(window.hinstance())
-        .hwnd(window.hwnd());
+        .hinstance(window.hinstance)
+        .hwnd(window.hwnd);
     instance.create_win32_surface_khr(&info, None)
 }
 
-/// Creates a surface for a `winit` window (Android).
+/// Creates a surface for a window (Android).
 #[cfg(target_os = "android")]
-pub fn create_surface(instance: &Instance, window: &Window) -> VkResult<vk::SurfaceKHR> {
+pub fn create_surface(
+    instance: &Instance,
+    window: &dyn HasRawWindowHandle,
+) -> VkResult<vk::SurfaceKHR> {
     unimplemented!()
 }
 
-/// Creates a surface for a `winit` window (iOS).
+/// Creates a surface for a window (iOS).
 #[cfg(target_os = "ios")]
-pub fn create_surface(instance: &Instance, window: &Window) -> VkResult<vk::SurfaceKHR> {
+pub fn create_surface(
+    instance: &Instance,
+    window: &dyn HasRawWindowHandle,
+) -> VkResult<vk::SurfaceKHR> {
     unimplemented!()
 }
 
-/// Creates a surface for a `winit` window (macOS).
+/// Creates a surface for a window (macOS).
 #[cfg(target_os = "macos")]
 #[allow(deprecated)]
-pub fn create_surface(instance: &Instance, window: &Window) -> VkResult<vk::SurfaceKHR> {
+pub fn create_surface(
+    instance: &Instance,
+    window: &dyn HasRawWindowHandle,
+) -> VkResult<vk::SurfaceKHR> {
     use std::mem;
     use std::os::raw::c_void;
 
@@ -73,10 +90,15 @@ pub fn create_surface(instance: &Instance, window: &Window) -> VkResult<vk::Surf
     use objc::runtime::YES;
     use vk::ExtMetalSurfaceExtension;
     use vk::MvkMacosSurfaceExtension;
-    use winit::platform::macos::WindowExtMacOS;
+
+    let window = if let RawWindowHandle::MacOS(window) = window.raw_window_handle() {
+        window
+    } else {
+        unreachable!()
+    };
 
     let (view, layer) = unsafe {
-        let id = mem::transmute::<_, id>(window.ns_window());
+        let id = mem::transmute::<_, id>(window.ns_window);
 
         let view = id.contentView();
 
@@ -89,7 +111,7 @@ pub fn create_surface(instance: &Instance, window: &Window) -> VkResult<vk::Surf
         view.setLayer(mem::transmute(layer.as_ref()));
         view.setWantsLayer(YES);
 
-        (&mut *window.ns_view(), layer)
+        (&mut *window.ns_view, layer)
     };
 
     if instance
@@ -107,44 +129,40 @@ pub fn create_surface(instance: &Instance, window: &Window) -> VkResult<vk::Surf
     }
 }
 
-/// Creates a surface for a `winit` window (BSD / Linux).
+/// Creates a surface for a window (BSD / Linux).
 #[cfg(all(
     unix,
     not(target_os = "android"),
     not(target_os = "ios"),
     not(target_os = "macos")
 ))]
-pub fn create_surface(instance: &Instance, window: &Window) -> VkResult<vk::SurfaceKHR> {
+pub fn create_surface(
+    instance: &Instance,
+    window: &dyn HasRawWindowHandle,
+) -> VkResult<vk::SurfaceKHR> {
     use vk::KhrWaylandSurfaceExtension;
     use vk::KhrXcbSurfaceExtension;
     use vk::KhrXlibSurfaceExtension;
-    use winit::platform::unix::WindowExtUnix;
 
-    match (window.wayland_display(), window.wayland_surface()) {
-        (Some(display), Some(surface)) => {
-            // 1. Wayland
+    match window.raw_window_handle() {
+        RawWindowHandle::Wayland(window) => {
             let info = vk::WaylandSurfaceCreateInfoKHR::builder()
-                .display(display)
-                .surface(surface);
+                .display(window.display)
+                .surface(window.surface);
             instance.create_wayland_surface_khr(&info, None)
         }
-        _ => {
-            if instance
-                .extensions()
-                .contains(&vk::KHR_XLIB_SURFACE_EXTENSION)
-            {
-                // 2. Xlib
-                let info = vk::XlibSurfaceCreateInfoKHR::builder()
-                    .dpy(unsafe { &mut (*(window.xlib_display().unwrap() as *mut _)) })
-                    .window(window.xlib_window().unwrap());
-                instance.create_xlib_surface_khr(&info, None)
-            } else {
-                // 3. XCB
-                let info = vk::XcbSurfaceCreateInfoKHR::builder()
-                    .connection(window.xcb_connection().unwrap())
-                    .window(window.xlib_window().unwrap() as _);
-                instance.create_xcb_surface_khr(&info, None)
-            }
+        RawWindowHandle::Xlib(window) => {
+            let info = vk::XlibSurfaceCreateInfoKHR::builder()
+                .dpy(unsafe { &mut (*(window.display as *mut _)) })
+                .window(window.window);
+            instance.create_xlib_surface_khr(&info, None)
         }
+        RawWindowHandle::Xcb(window) => {
+            let info = vk::XcbSurfaceCreateInfoKHR::builder()
+                .connection(window.connection)
+                .window(window.window as _);
+            instance.create_xcb_surface_khr(&info, None)
+        }
+        _ => unreachable!(),
     }
 }
