@@ -15,6 +15,11 @@
 - Bumped `metal` version to `0.21`
 - Renamed `libloading_` Cargo feature to `libloading`
 - Removed `winit_` Cargo feature in favor of `window` feature
+- Added `provisional` Cargo feature which exposes provisional extensions
+- Changed commands that returned `Vec<c_void>` to return `Vec<u8>` instead
+
+### Added
+- Added extension metadata to extension traits
 
 ## [0.2.3] - 2020-11-23
 

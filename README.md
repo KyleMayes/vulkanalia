@@ -22,6 +22,7 @@ The `vulkanalia` crate has the following notable Cargo features:
 
 * `libloading` (**non-default**) &ndash; enables integration with [`libloading`](https://crates.io/crates/libloading) (adds the [`LibloadingLoader`](https://docs.rs/vulkanalia/latest/vulkanalia/loader/struct.LibloadingLoader.html) struct which can be used to load the initial Vulkan commands from a Vulkan shared library)
 * `window` (**non-default**) &ndash; enables integration with [`raw-window-handle`](https://crates.io/crates/raw-window-handle) (adds the [`window`](https://docs.rs/vulkanalia/latest/vulkanalia/window/index.html) module which can be used to create surfaces for windows from libraries that support `raw-window-handle` (e.g., [`winit`](https://crates.io/crates/winit))
+* `provisional` (**non-default**) &ndash; enables access to [provisional Vulkan extensions](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html) (**WARNING:** these extensions are not guaranteed to be backwards compatible and are not intended to be used in production applications)
 
 ## Example
 

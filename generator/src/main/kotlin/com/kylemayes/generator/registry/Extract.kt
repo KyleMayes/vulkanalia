@@ -343,18 +343,34 @@ data class Extension(
     override val name: Identifier,
     val number: Long,
     val type: String?,
-    val supported: String,
-    val require: Require,
+    val author: String,
+    val contact: String,
+    val platform: String?,
+    val requires: String?,
+    val requiresCore: String?,
     val deprecatedby: String?,
+    val obsoletedby: String?,
+    val promotedto: String?,
+    val supported: String,
+    val provisional: Boolean,
+    val require: Require,
 ) : Entity
 
 private fun extractExtension(e: Element) = Extension(
     name = e.getAttribute("name").intern(),
     number = e.getAttribute("number").toNumber(),
     type = e.getAttributeText("type"),
-    supported = e.getAttribute("supported"),
-    require = extractRequire(e.getElements("require")),
+    author = e.getAttribute("author"),
+    contact = e.getAttribute("contact"),
+    platform = e.getAttributeText("platform"),
+    requires = e.getAttributeText("requires"),
+    requiresCore = e.getAttributeText("requiresCore"),
     deprecatedby = e.getAttributeText("deprecatedby"),
+    obsoletedby = e.getAttributeText("obsoletedby"),
+    promotedto = e.getAttributeText("promotedto"),
+    supported = e.getAttribute("supported"),
+    provisional = e.getAttributeText("provisional") == "true",
+    require = extractRequire(e.getElements("require")),
 )
 
 /** The commands, types, and enum extensions provided by a version or extension. */

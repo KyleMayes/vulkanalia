@@ -18,6 +18,14 @@ repository = "https://github.com/KyleMayes/vulkanalia"
 keywords = ["graphics", "vulkan"]
 categories = ["graphics"]
 
+[features]
+
+provisional = []
+
 [dependencies]
 
 bitflags = "1"
+
+[package.metadata.docs.rs]
+
+features = ["provisional"]

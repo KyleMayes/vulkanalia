@@ -2144,10 +2144,7 @@ pub trait DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineCacheData.html>
     #[inline]
-    fn get_pipeline_cache_data(
-        &self,
-        pipeline_cache: PipelineCache,
-    ) -> crate::VkResult<Vec<c_void>> {
+    fn get_pipeline_cache_data(&self, pipeline_cache: PipelineCache) -> crate::VkResult<Vec<u8>> {
         let mut data_size = 0;
 
         (self.commands().get_pipeline_cache_data)(
@@ -2163,7 +2160,7 @@ pub trait DeviceV1_0 {
             self.handle(),
             pipeline_cache,
             &mut data_size,
-            data.as_mut_ptr(),
+            data.as_mut_ptr() as *mut c_void,
         );
 
         debug_assert!(data.capacity() == data_size as usize);
