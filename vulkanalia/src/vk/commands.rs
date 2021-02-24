@@ -6275,6 +6275,9 @@ pub struct InstanceCommands {
         PFN_vkGetPhysicalDeviceDirectFBPresentationSupportEXT,
     pub create_image_pipe_surface_fuchsia: PFN_vkCreateImagePipeSurfaceFUCHSIA,
     pub create_stream_descriptor_surface_ggp: PFN_vkCreateStreamDescriptorSurfaceGGP,
+    pub create_screen_surface_qnx: PFN_vkCreateScreenSurfaceQNX,
+    pub get_physical_device_screen_presentation_support_qnx:
+        PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX,
     pub create_debug_report_callback_ext: PFN_vkCreateDebugReportCallbackEXT,
     pub destroy_debug_report_callback_ext: PFN_vkDestroyDebugReportCallbackEXT,
     pub debug_report_message_ext: PFN_vkDebugReportMessageEXT,
@@ -6982,6 +6985,41 @@ impl InstanceCommands {
                         _surface: *mut SurfaceKHR,
                     ) -> Result {
                         panic!("could not load vkCreateStreamDescriptorSurfaceGGP")
+                    }
+                    fallback
+                }
+            },
+            create_screen_surface_qnx: unsafe {
+                let value = loader(b"vkCreateScreenSurfaceQNX\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _instance: Instance,
+                        _create_info: *const ScreenSurfaceCreateInfoQNX,
+                        _allocator: *const AllocationCallbacks,
+                        _surface: *mut SurfaceKHR,
+                    ) -> Result {
+                        panic!("could not load vkCreateScreenSurfaceQNX")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_screen_presentation_support_qnx: unsafe {
+                let value = loader(
+                    b"vkGetPhysicalDeviceScreenPresentationSupportQNX\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _queue_family_index: u32,
+                        _window: *mut _screen_window,
+                    ) -> Bool32 {
+                        panic!("could not load vkGetPhysicalDeviceScreenPresentationSupportQNX")
                     }
                     fallback
                 }

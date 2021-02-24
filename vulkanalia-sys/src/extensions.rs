@@ -669,6 +669,8 @@ pub const QCOM_RENDER_PASS_TRANSFORM_EXTENSION: ExtensionName =
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_rotated_copy_commands.html>
 pub const QCOM_ROTATED_COPY_COMMANDS_EXTENSION: ExtensionName =
     to_extension_name(b"VK_QCOM_rotated_copy_commands");
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QNX_screen_surface.html>
+pub const QNX_SCREEN_SURFACE_EXTENSION: ExtensionName = to_extension_name(b"VK_QNX_screen_surface");
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_VALVE_mutable_descriptor_type.html>
 pub const VALVE_MUTABLE_DESCRIPTOR_TYPE_EXTENSION: ExtensionName =
     to_extension_name(b"VK_VALVE_mutable_descriptor_type");

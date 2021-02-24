@@ -10434,6 +10434,70 @@ pub trait QcomRotatedCopyCommandsExtension: DeviceV1_0 {
 
 impl QcomRotatedCopyCommandsExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QNX_screen_surface.html>
+pub trait QnxScreenSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: ExtensionMetadata = ExtensionMetadata {
+        name: super::QNX_SCREEN_SURFACE_EXTENSION,
+        number: 379,
+        type_: "instance",
+        author: "QNX",
+        contact: "Mike Gorchak @mgorchak-blackberry",
+        platform: Some("screen"),
+        requires: Some(&[super::KHR_SURFACE_EXTENSION]),
+        requires_core: None,
+        deprecated_by: None,
+        obsoleted_by: None,
+        promoted_to: None,
+    };
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateScreenSurfaceQNX.html>
+    #[inline]
+    fn create_screen_surface_qnx(
+        &self,
+        create_info: &ScreenSurfaceCreateInfoQNX,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<SurfaceKHR> {
+        let mut surface = MaybeUninit::<SurfaceKHR>::uninit();
+
+        let __result = (self.commands().create_screen_surface_qnx)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            surface.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(unsafe { surface.assume_init() })
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceScreenPresentationSupportQNX.html>
+    #[inline]
+    fn get_physical_device_screen_presentation_support_qnx(
+        &self,
+        physical_device: PhysicalDevice,
+        queue_family_index: u32,
+    ) -> _screen_window {
+        let mut window = MaybeUninit::<_screen_window>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_physical_device_screen_presentation_support_qnx)(
+            physical_device,
+            queue_family_index,
+            window.as_mut_ptr(),
+        );
+
+        unsafe { window.assume_init() }
+    }
+}
+
+impl QnxScreenSurfaceExtension for crate::Instance {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_VALVE_mutable_descriptor_type.html>
 pub trait ValveMutableDescriptorTypeExtension: DeviceV1_0 {
     /// The metadata for this extension.
