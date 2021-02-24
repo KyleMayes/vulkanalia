@@ -55,7 +55,6 @@ fun Registry.renameEntities() {
         val seen = mutableMapOf<String, Member>()
         for (member in struct.members) {
             if (seen[member.name.value] != null) {
-                println(member)
                 if (member.name.original.startsWith("pp")) {
                     member.name.rename("pointer_${member.name}")
                 } else {
