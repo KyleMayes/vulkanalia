@@ -250,18 +250,23 @@ fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
 
 ## Updating uniform data
 
-Create a new method `App::update_uniform_buffer` and add a call to it from the `App::render` method right after we know which swapchain image we're going to acquire:
+Create a new method `App::update_uniform_buffer` and add a call to it from the `App::render` method right after we wait for the fence for the acquired swapchain image to be signalled:
 
 ```rust,noplaypen
 impl App {
     fn render(&mut self, window: &Window) -> Result<()> {
         // ...
 
-        let image_index = match result {
-            Ok((image_index, _)) => image_index as usize,
-            Err(vk::ErrorCode::OUT_OF_DATE_KHR) => return self.recreate_swapchain(window),
-            Err(e) => return Err(anyhow!(e)),
-        };
+        if !self.data.images_in_flight[image_index as usize].is_null() {
+            self.device.wait_for_fences(
+                &[self.data.images_in_flight[image_index as usize]],
+                true,
+                u64::max_value(),
+            )?;
+        }
+
+        self.data.images_in_flight[image_index as usize] =
+            self.data.in_flight_fences[self.frame];
 
         self.update_uniform_buffer(image_index)?;
 
@@ -274,7 +279,13 @@ impl App {
 }
 ```
 
-This function will generate a new transformation every frame to make the geometry spin around. We need to add an import to implement this functionality:
+It is important that the uniform buffer is not updated until after this fence is signalled!
+
+As a quick refresher on the usage of fences as introduced in the [`Rendering and Presentation` chapter](../drawing/rendering_and_presentation.html#frames-in-flight), we are using fences so that the GPU can notify the CPU once it is done processing a previously submitted frame. These notifications are used for two purposes: to prevent the CPU from submitting more frames when there are already `MAX_FRAMES_IN_FLIGHT` unfinished frames submitted to the GPU and also to ensure the CPU doesn't alter or delete resources like uniform buffers or command buffers while they are still being used by the GPU to process a frame.
+
+Our uniform buffers are associated with our swapchain images, so we need to be sure that any previous frame that rendered to the acquired swapchain image is complete before we can safely update the uniform buffer. By only updating the uniform buffer after the GPU has notified the CPU that this is the case we can safely do whatever we want with the uniform buffer.
+
+Going back to `App::update_uniform_buffer`, this method will generate a new transformation every frame to make the geometry spin around. We need to add an import to implement this functionality:
 
 ```rust,noplaypen
 use std::time::Instant;

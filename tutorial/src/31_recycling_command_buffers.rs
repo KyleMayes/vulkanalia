@@ -154,9 +154,6 @@ impl App {
             Err(e) => return Err(anyhow!(e)),
         };
 
-        self.update_command_buffer(image_index)?;
-        self.update_uniform_buffer(image_index)?;
-
         let image_in_flight = self.data.images_in_flight[image_index];
         if !image_in_flight.is_null() {
             self.device
@@ -164,6 +161,9 @@ impl App {
         }
 
         self.data.images_in_flight[image_index] = in_flight_fence;
+
+        self.update_command_buffer(image_index)?;
+        self.update_uniform_buffer(image_index)?;
 
         let wait_semaphores = &[self.data.image_available_semaphores[self.frame]];
         let wait_stages = &[vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT];
