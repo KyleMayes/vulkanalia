@@ -14,17 +14,17 @@ pub fn get_required_instance_extensions(
     entry: &Entry,
 ) -> VkResult<Vec<&'static vk::ExtensionName>> {
     let required = &[
-        vk::EXT_METAL_SURFACE_EXTENSION,
-        vk::KHR_ANDROID_SURFACE_EXTENSION,
-        vk::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION,
-        vk::KHR_GET_SURFACE_CAPABILITIES2_EXTENSION,
-        vk::KHR_SURFACE_EXTENSION,
-        vk::KHR_WAYLAND_SURFACE_EXTENSION,
-        vk::KHR_WIN32_SURFACE_EXTENSION,
-        vk::KHR_XCB_SURFACE_EXTENSION,
-        vk::KHR_XLIB_SURFACE_EXTENSION,
-        vk::MVK_IOS_SURFACE_EXTENSION,
-        vk::MVK_MACOS_SURFACE_EXTENSION,
+        vk::EXT_METAL_SURFACE_EXTENSION.name,
+        vk::KHR_ANDROID_SURFACE_EXTENSION.name,
+        vk::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+        vk::KHR_GET_SURFACE_CAPABILITIES2_EXTENSION.name,
+        vk::KHR_SURFACE_EXTENSION.name,
+        vk::KHR_WAYLAND_SURFACE_EXTENSION.name,
+        vk::KHR_WIN32_SURFACE_EXTENSION.name,
+        vk::KHR_XCB_SURFACE_EXTENSION.name,
+        vk::KHR_XLIB_SURFACE_EXTENSION.name,
+        vk::MVK_IOS_SURFACE_EXTENSION.name,
+        vk::MVK_MACOS_SURFACE_EXTENSION.name,
     ];
 
     let available = entry
