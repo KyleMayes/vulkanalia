@@ -159,8 +159,6 @@ impl App {
             Err(e) => return Err(anyhow!(e)),
         };
 
-        self.update_uniform_buffer(image_index)?;
-
         let image_in_flight = self.data.images_in_flight[image_index];
         if !image_in_flight.is_null() {
             self.device
@@ -168,6 +166,8 @@ impl App {
         }
 
         self.data.images_in_flight[image_index] = in_flight_fence;
+
+        self.update_uniform_buffer(image_index)?;
 
         let wait_semaphores = &[self.data.image_available_semaphores[self.frame]];
         let wait_stages = &[vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT];
@@ -251,6 +251,7 @@ impl App {
     }
 
     /// Recreates the swapchain for our Vulkan app.
+    #[rustfmt::skip]
     fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
         self.device.device_wait_idle()?;
         self.destroy_swapchain();
@@ -263,6 +264,7 @@ impl App {
         create_descriptor_pool(&self.device, &mut self.data)?;
         create_descriptor_sets(&self.device, &mut self.data)?;
         create_command_buffers(&self.device, &mut self.data)?;
+        self.data.images_in_flight.resize(self.data.swapchain_images.len(), vk::Fence::null());
         Ok(())
     }
 
