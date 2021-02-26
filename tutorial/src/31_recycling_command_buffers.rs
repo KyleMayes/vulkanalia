@@ -333,6 +333,7 @@ impl App {
     }
 
     /// Recreates the swapchain for our Vulkan app.
+    #[rustfmt::skip]
     fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
         self.device.device_wait_idle()?;
         self.destroy_swapchain();
@@ -347,6 +348,7 @@ impl App {
         create_descriptor_pool(&self.device, &mut self.data)?;
         create_descriptor_sets(&self.device, &mut self.data)?;
         create_command_buffers(&self.device, &mut self.data)?;
+        self.data.images_in_flight.resize(self.data.swapchain_images.len(), vk::Fence::null());
         Ok(())
     }
 

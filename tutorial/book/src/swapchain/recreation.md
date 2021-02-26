@@ -17,11 +17,14 @@ fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
     create_pipeline(&self.device, &mut self.data)?;
     create_framebuffers(&self.device, &mut self.data)?;
     create_command_buffers(&self.device, &mut self.data)?;
+    self.data
+        .images_in_flight
+        .resize(self.data.swapchain_images.len(), vk::Fence::null());
     Ok(())
 }
 ```
 
-We first call `device_wait_idle`, because just like in the last chapter, we shouldn't touch resources that may still be in use. Obviously, the first thing we'll have to do is recreate the swapchain itself. The image views need to be recreated because they are based directly on the swapchain images. The render pass needs to be recreated because it depends on the format of the swapchain images. It is rare for the swapchain image format to change during an operation like a window resize, but it should still be handled. Viewport and scissor rectangle size is specified during graphics pipeline creation, so the pipeline also needs to be rebuilt. It is possible to avoid this by using dynamic state for the viewports and scissor rectangles. Finally, the framebuffers and command buffers also directly depend on the swapchain images.
+We first call `device_wait_idle`, because just like in the last chapter, we shouldn't touch resources that may still be in use. Obviously, the first thing we'll have to do is recreate the swapchain itself. The image views need to be recreated because they are based directly on the swapchain images. The render pass needs to be recreated because it depends on the format of the swapchain images. It is rare for the swapchain image format to change during an operation like a window resize, but it should still be handled. Viewport and scissor rectangle size is specified during graphics pipeline creation, so the pipeline also needs to be rebuilt. It is possible to avoid this by using dynamic state for the viewports and scissor rectangles. Then, the framebuffers and command buffers also directly depend on the swapchain images. Lastly we resize our list of fences for the swapchain images since there is a possibility that there might be a different number of swapchain images after recreation.
 
 To make sure that the old versions of these objects are cleaned up before recreating them, we should move some of the cleanup code to a separate method that we can call from the `App::recreate_swapchain` method after waiting for the device to be idle. Let's call it `App::destroy_swapchain`:
 
