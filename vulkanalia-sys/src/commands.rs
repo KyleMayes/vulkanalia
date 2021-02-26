@@ -1486,6 +1486,14 @@ pub type PFN_vkCreateSamplerYcbcrConversion = extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSamplerYcbcrConversionKHR.html>
 pub type PFN_vkCreateSamplerYcbcrConversionKHR = PFN_vkCreateSamplerYcbcrConversion;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateScreenSurfaceQNX.html>
+pub type PFN_vkCreateScreenSurfaceQNX = extern "system" fn(
+    _instance: Instance,
+    _create_info: *const ScreenSurfaceCreateInfoQNX,
+    _allocator: *const AllocationCallbacks,
+    _surface: *mut SurfaceKHR,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSemaphore.html>
 pub type PFN_vkCreateSemaphore = extern "system" fn(
     _device: Device,
@@ -2494,6 +2502,13 @@ pub type PFN_vkGetPhysicalDeviceQueueFamilyProperties2 = extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceQueueFamilyProperties2KHR.html>
 pub type PFN_vkGetPhysicalDeviceQueueFamilyProperties2KHR =
     PFN_vkGetPhysicalDeviceQueueFamilyProperties2;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceScreenPresentationSupportQNX.html>
+pub type PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX = extern "system" fn(
+    _physical_device: PhysicalDevice,
+    _queue_family_index: u32,
+    _window: *mut _screen_window,
+) -> Bool32;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSparseImageFormatProperties.html>
 pub type PFN_vkGetPhysicalDeviceSparseImageFormatProperties = extern "system" fn(

@@ -41256,6 +41256,77 @@ unsafe impl Cast for SamplerYcbcrConversionInfoBuilder {
     }
 }
 
+unsafe impl Cast for ScreenSurfaceCreateInfoQNX {
+    type Target = ScreenSurfaceCreateInfoQNX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for ScreenSurfaceCreateInfoQNX {
+    type Builder = ScreenSurfaceCreateInfoQNXBuilder<'b>;
+}
+
+/// A builder for a [ScreenSurfaceCreateInfoQNX](struct.ScreenSurfaceCreateInfoQNX.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ScreenSurfaceCreateInfoQNXBuilder<'b> {
+    value: ScreenSurfaceCreateInfoQNX,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> ScreenSurfaceCreateInfoQNXBuilder<'b> {
+    #[inline]
+    pub fn flags(mut self, flags: ScreenSurfaceCreateFlagsQNX) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn context(mut self, context: &'b mut _screen_context) -> Self {
+        self.value.context = context as *mut _screen_context;
+        self
+    }
+
+    #[inline]
+    pub fn window(mut self, window: &'b mut _screen_window) -> Self {
+        self.value.window = window as *mut _screen_window;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ScreenSurfaceCreateInfoQNX {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for ScreenSurfaceCreateInfoQNXBuilder<'b> {
+    type Target = ScreenSurfaceCreateInfoQNX;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for ScreenSurfaceCreateInfoQNXBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for ScreenSurfaceCreateInfoQNXBuilder<'b> {
+    type Target = ScreenSurfaceCreateInfoQNX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [SemaphoreCreateInfo](struct.SemaphoreCreateInfo.html).
 pub unsafe trait ExtendsSemaphoreCreateInfo {}
 unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreCreateInfo {}

@@ -44,6 +44,11 @@ pub type CAMetalLayer = c_void;
 pub type GgpFrameToken = u32;
 pub type GgpStreamDescriptor = u32;
 
+// QNX
+
+pub type _screen_context = c_void;
+pub type _screen_window = c_void;
+
 // Wayland
 
 pub type wl_display = c_void;

@@ -1501,6 +1501,18 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkScreenSurfaceCreateFlagsQNX.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct ScreenSurfaceCreateFlagsQNX: Flags {
+        /// Workaround for `bitflags!` not supporting empty bitflags.
+        ///
+        /// <https://github.com/bitflags/bitflags/issues/179>
+        const EMPTY = 0;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]

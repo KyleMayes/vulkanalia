@@ -12083,6 +12083,30 @@ impl Default for SamplerYcbcrConversionInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkScreenSurfaceCreateInfoQNX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ScreenSurfaceCreateInfoQNX {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: ScreenSurfaceCreateFlagsQNX,
+    pub context: *mut _screen_context,
+    pub window: *mut _screen_window,
+}
+
+impl Default for ScreenSurfaceCreateInfoQNX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SCREEN_SURFACE_CREATE_INFO_QNX,
+            next: ptr::null(),
+            flags: ScreenSurfaceCreateFlagsQNX::default(),
+            context: ptr::null_mut(),
+            window: ptr::null_mut(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
