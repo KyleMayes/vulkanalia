@@ -111,9 +111,11 @@ let mut extensions = vk_window::get_required_instance_extensions(entry)?
     .collect::<Vec<_>>();
 
 if VALIDATION_ENABLED {
-    extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.to_cstr().as_ptr());
+    extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.name.to_cstr().as_ptr());
 }
 ```
+
+`vulkanalia` provides a collection of metadata for each Vulkan extension. In this case we just need the name of the extension to load, so we add the value of the `name` field of the `vk::EXT_DEBUG_UTILS_EXTENSION` struct constant to our list of desired extension names.
 
 Run the program to make sure you don't receive a `vk::ErrorCode::EXTENSION_NOT_PRESENT` error code. We don't really need to check for the existence of this extension, because it should be implied by the availability of the validation layers.
 
