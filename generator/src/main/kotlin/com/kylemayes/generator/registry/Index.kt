@@ -74,6 +74,13 @@ fun Registry.indexEntities(): String {
         }
     }
 
+    // Add extension constants.
+
+    for (extension in extensions.values) {
+        val name = "${extension.name}_EXTENSION"
+        entities.addEntity("vk::$name", "/vk/constant.$name.html")
+    }
+
     // Add extension traits.
 
     for (extension in extensions.values) {
