@@ -136,7 +136,7 @@ fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
         .collect::<Vec<_>>();
 
     if VALIDATION_ENABLED {
-        extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.to_cstr().as_ptr());
+        extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.name.to_cstr().as_ptr());
     }
 
     // Create

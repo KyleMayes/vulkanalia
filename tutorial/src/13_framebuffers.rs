@@ -26,7 +26,7 @@ const VALIDATION_ENABLED: bool = cfg!(debug_assertions);
 const VALIDATION_LAYER: vk::ExtensionName = vk::to_extension_name(b"VK_LAYER_KHRONOS_validation\0");
 
 /// The required device extensions.
-const DEVICE_EXTENSIONS: &[vk::ExtensionName] = &[vk::KHR_SWAPCHAIN_EXTENSION];
+const DEVICE_EXTENSIONS: &[vk::ExtensionName] = &[vk::KHR_SWAPCHAIN_EXTENSION.name];
 
 #[rustfmt::skip]
 fn main() -> Result<()> {
@@ -182,7 +182,7 @@ fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
         .collect::<Vec<_>>();
 
     if VALIDATION_ENABLED {
-        extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.to_cstr().as_ptr());
+        extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.name.to_cstr().as_ptr());
     }
 
     // Create

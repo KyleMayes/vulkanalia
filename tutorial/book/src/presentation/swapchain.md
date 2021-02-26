@@ -17,7 +17,7 @@ Then we'll first extend the `check_physical_device` function to check if this ex
 First declare a list of required device extensions, similar to the list of validation layers to enable.
 
 ```rust,noplaypen
-const DEVICE_EXTENSIONS: &[vk::ExtensionName] = &[vk::KHR_SWAPCHAIN_EXTENSION];
+const DEVICE_EXTENSIONS: &[vk::ExtensionName] = &[vk::KHR_SWAPCHAIN_EXTENSION.name];
 ```
 
 Next, create a new function `check_physical_device_extensions` that is called from `check_physical_device` as an additional check:
