@@ -21,7 +21,7 @@ use winit::window::{Window, WindowBuilder};
 use vk::{KhrSurfaceExtension, KhrSwapchainExtension};
 
 /// The required device extensions.
-const DEVICE_EXTENSIONS: &[vk::ExtensionName] = &[vk::KHR_SWAPCHAIN_EXTENSION];
+const DEVICE_EXTENSIONS: &[vk::ExtensionName] = &[vk::KHR_SWAPCHAIN_EXTENSION.name];
 /// The number of frames that will processed concurrently.
 const MAX_FRAMES_IN_FLIGHT: usize = 2;
 /// The required instance and device layers if validation is enabled.
@@ -314,7 +314,7 @@ fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
         .collect::<Vec<_>>();
 
     if data.validation {
-        extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.to_cstr().as_ptr());
+        extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.name.to_cstr().as_ptr());
     }
 
     // Create
