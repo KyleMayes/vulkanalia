@@ -1,4 +1,4 @@
-## [0.5.0] - UNRELEASED
+## [0.5.0] - 2021-02-26
 
 ### Bindings Updates
 - [Finalizing VK_QNX_screen_surface extension (#1449)](https://github.com/KhronosGroup/Vulkan-Docs/commit/256c004b56b981a25a12088d087f086700428de8)
