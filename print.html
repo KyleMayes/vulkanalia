@@ -2687,10 +2687,13 @@ let present_info = vk::PresentInfoKHR::builder()
     create_pipeline(&amp;self.device, &amp;mut self.data)?;
     create_framebuffers(&amp;self.device, &amp;mut self.data)?;
     create_command_buffers(&amp;self.device, &amp;mut self.data)?;
+    self.data
+        .images_in_flight
+        .resize(self.data.swapchain_images.len(), vk::Fence::null());
     Ok(())
 }
 </code></pre>
-<p>We first call <code>device_wait_idle</code>, because just like in the last chapter, we shouldn't touch resources that may still be in use. Obviously, the first thing we'll have to do is recreate the swapchain itself. The image views need to be recreated because they are based directly on the swapchain images. The render pass needs to be recreated because it depends on the format of the swapchain images. It is rare for the swapchain image format to change during an operation like a window resize, but it should still be handled. Viewport and scissor rectangle size is specified during graphics pipeline creation, so the pipeline also needs to be rebuilt. It is possible to avoid this by using dynamic state for the viewports and scissor rectangles. Finally, the framebuffers and command buffers also directly depend on the swapchain images.</p>
+<p>We first call <code>device_wait_idle</code>, because just like in the last chapter, we shouldn't touch resources that may still be in use. Obviously, the first thing we'll have to do is recreate the swapchain itself. The image views need to be recreated because they are based directly on the swapchain images. The render pass needs to be recreated because it depends on the format of the swapchain images. It is rare for the swapchain image format to change during an operation like a window resize, but it should still be handled. Viewport and scissor rectangle size is specified during graphics pipeline creation, so the pipeline also needs to be rebuilt. It is possible to avoid this by using dynamic state for the viewports and scissor rectangles. Then, the framebuffers and command buffers also directly depend on the swapchain images. Lastly we resize our list of fences for the swapchain images since there is a possibility that there might be a different number of swapchain images after recreation.</p>
 <p>To make sure that the old versions of these objects are cleaned up before recreating them, we should move some of the cleanup code to a separate method that we can call from the <code>App::recreate_swapchain</code> method after waiting for the device to be idle. Let's call it <code>App::destroy_swapchain</code>:</p>
 <pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     self.device.device_wait_idle()?;
@@ -3637,16 +3640,21 @@ fn create_uniform_buffers(
 }
 </code></pre>
 <h2><a class="header" href="#updating-uniform-data" id="updating-uniform-data">Updating uniform data</a></h2>
-<p>Create a new method <code>App::update_uniform_buffer</code> and add a call to it from the <code>App::render</code> method right after we know which swapchain image we're going to acquire:</p>
+<p>Create a new method <code>App::update_uniform_buffer</code> and add a call to it from the <code>App::render</code> method right after we wait for the fence for the acquired swapchain image to be signalled:</p>
 <pre><code class="language-rust noplaypen">impl App {
     fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
         // ...
 
-        let image_index = match result {
-            Ok((image_index, _)) =&gt; image_index as usize,
-            Err(vk::ErrorCode::OUT_OF_DATE_KHR) =&gt; return self.recreate_swapchain(window),
-            Err(e) =&gt; return Err(anyhow!(e)),
-        };
+        if !self.data.images_in_flight[image_index as usize].is_null() {
+            self.device.wait_for_fences(
+                &amp;[self.data.images_in_flight[image_index as usize]],
+                true,
+                u64::max_value(),
+            )?;
+        }
+
+        self.data.images_in_flight[image_index as usize] =
+            self.data.in_flight_fences[self.frame];
 
         self.update_uniform_buffer(image_index)?;
 
@@ -3658,7 +3666,10 @@ fn create_uniform_buffers(
     }
 }
 </code></pre>
-<p>This function will generate a new transformation every frame to make the geometry spin around. We need to add an import to implement this functionality:</p>
+<p>It is important that the uniform buffer is not updated until after this fence is signalled!</p>
+<p>As a quick refresher on the usage of fences as introduced in the <a href="uniform/../drawing/rendering_and_presentation.html#frames-in-flight"><code>Rendering and Presentation</code> chapter</a>, we are using fences so that the GPU can notify the CPU once it is done processing a previously submitted frame. These notifications are used for two purposes: to prevent the CPU from submitting more frames when there are already <code>MAX_FRAMES_IN_FLIGHT</code> unfinished frames submitted to the GPU and also to ensure the CPU doesn't alter or delete resources like uniform buffers or command buffers while they are still being used by the GPU to process a frame.</p>
+<p>Our uniform buffers are associated with our swapchain images, so we need to be sure that any previous frame that rendered to the acquired swapchain image is complete before we can safely update the uniform buffer. By only updating the uniform buffer after the GPU has notified the CPU that this is the case we can safely do whatever we want with the uniform buffer.</p>
+<p>Going back to <code>App::update_uniform_buffer</code>, this method will generate a new transformation every frame to make the geometry spin around. We need to add an import to implement this functionality:</p>
 <pre><code class="language-rust noplaypen">use std::time::Instant;
 </code></pre>
 <p>The <code>Instant</code> struct will allow us to do precise timekeeping. We'll use this to make sure that the geometry rotates 90 degrees per second regardless of frame rate. Add a field to <code>App</code> to track the time the application started and initialize the field to <code>Instant::now()</code> in <code>App::create</code>:</p>
@@ -6364,7 +6375,7 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
     // ...
 }
 </code></pre>
-<p>Note that we do need to be careful about when we call <code>update_command_buffer</code>. This method will reset the command buffer which would cause serious issues if the command buffer is still being used to render a previously submitted frame. However, since we put the <code>update_command_buffer</code> call after the call to <code>wait_for_fences</code> we are safe to alter the command buffer because <code>wait_for_fences</code> will block until the previously submitted frame that used the command buffer has finished rendering.</p>
+<p>Note that we do need to be careful about when we call <code>update_command_buffer</code>. This method will reset the command buffer which could cause serious issues if the command buffer is still being used to render a previously submitted frame. This issue was also discussed in the <a href="dynamic/../uniform/descriptor_layout_and_buffer.html#updating-uniform-data"><code>Descriptor layout and buffer</code> chapter</a> which is why the call to <code>App::update_uniform_buffer</code> is where it is. As discussed in more detail in that chapter, both of these calls only happen after the call to <code>wait_for_fences</code> which waits for the GPU to be done with the acquired swapchain image and its associated resources so we are safe to do whatever we want with the command buffer.</p>
 <p>In the new method, reset the command buffer with <code>reset_command_buffer</code>.</p>
 <pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     let command_buffer = self.data.command_buffers[image_index];

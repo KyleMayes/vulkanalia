@@ -189,7 +189,7 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
     // ...
 }
 </code></pre>
-<p>Note that we do need to be careful about when we call <code>update_command_buffer</code>. This method will reset the command buffer which would cause serious issues if the command buffer is still being used to render a previously submitted frame. However, since we put the <code>update_command_buffer</code> call after the call to <code>wait_for_fences</code> we are safe to alter the command buffer because <code>wait_for_fences</code> will block until the previously submitted frame that used the command buffer has finished rendering.</p>
+<p>Note that we do need to be careful about when we call <code>update_command_buffer</code>. This method will reset the command buffer which could cause serious issues if the command buffer is still being used to render a previously submitted frame. This issue was also discussed in the <a href="../uniform/descriptor_layout_and_buffer.html#updating-uniform-data"><code>Descriptor layout and buffer</code> chapter</a> which is why the call to <code>App::update_uniform_buffer</code> is where it is. As discussed in more detail in that chapter, both of these calls only happen after the call to <code>wait_for_fences</code> which waits for the GPU to be done with the acquired swapchain image and its associated resources so we are safe to do whatever we want with the command buffer.</p>
 <p>In the new method, reset the command buffer with <code>reset_command_buffer</code>.</p>
 <pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     let command_buffer = self.data.command_buffers[image_index];
