@@ -64,7 +64,13 @@ pub fn get_required_instance_extensions(
 }
 
 /// Creates a surface for a window.
-pub fn create_surface(
+///
+/// # Safety
+///
+/// The returned `SurfaceKHR` will only be valid while the supplied window is
+/// valid so the supplied window must not be destroyed before the the returned
+/// `SurfaceKHR` is destroyed.
+pub unsafe fn create_surface(
     instance: &Instance,
     window: &dyn HasRawWindowHandle,
 ) -> VkResult<vk::SurfaceKHR> {

@@ -56,7 +56,7 @@ pub struct ${type.display}Commands {
 
 impl ${type.display}Commands {
     #[inline]
-    pub fn load(mut loader: impl FnMut(*const c_char) -> Option<extern "system" fn()>) -> Self {
+    pub unsafe fn load(mut loader: impl FnMut(*const c_char) -> Option<unsafe extern "system" fn()>) -> Self {
         Self { ${commands.joinToString { generateLoad(it) }} }
     }
 }
@@ -65,7 +65,7 @@ impl ${type.display}Commands {
 /** Generates a Rust struct field-value pair to load a command. */
 private fun Registry.generateLoad(command: Command) =
     """
-${command.name}: unsafe {
+${command.name}: {
     let value = loader(b"${command.name.original}\0".as_ptr().cast());
     if let Some(value) = value {
         mem::transmute(value)
@@ -83,5 +83,5 @@ private fun generateSignature(command: Command, name: String = ""): String {
     val params = command.params.joinToString { "_${it.name.value.removePrefix("_")}: ${it.type.generateForCommand()}" }
     val actual = command.result.generateForCommand()
     val result = if (actual != "c_void") { " -> $actual" } else { "" }
-    return "extern \"system\" fn $name($params)$result"
+    return "unsafe extern \"system\" fn $name($params)$result"
 }
