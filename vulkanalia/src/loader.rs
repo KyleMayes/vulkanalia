@@ -28,7 +28,10 @@ pub const LIBRARY: &str = "libvulkan.so.1";
 /// A Vulkan function loader.
 pub trait Loader {
     /// Loads a Vulkan function.
-    #[allow(clippy::missing_safety_doc)]
+    ///
+    /// # Safety
+    ///
+    /// See implementations for safety documentation.
     unsafe fn load(
         &self,
         name: &[u8],
@@ -51,9 +54,13 @@ mod libloading_loader {
 
     impl LibloadingLoader {
         /// Constructs a Vulkan function loader from a Vulkan dynamic library.
+        ///
+        /// # Safety
+        ///
+        /// See [`libloading::Library::new`](https://docs.rs/libloading/0.7/libloading/struct.Library.html#method.new).
         #[inline]
-        pub fn new(filename: impl AsRef<OsStr>) -> Result<Self, Error> {
-            unsafe { Library::new(filename).map(Self) }
+        pub unsafe fn new(filename: impl AsRef<OsStr>) -> Result<Self, Error> {
+            Library::new(filename).map(Self)
         }
 
         /// The loaded Vulkan dynamic library.
@@ -64,6 +71,11 @@ mod libloading_loader {
     }
 
     impl Loader for LibloadingLoader {
+        /// Loads a Vulkan function.
+        ///
+        /// # Safety
+        ///
+        /// See [`libloading::Library::get`](https://docs.rs/libloading/0.7/libloading/struct.Library.html#method.get).
         #[inline]
         unsafe fn load(
             &self,

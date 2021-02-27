@@ -8,6 +8,7 @@
 #![allow(
     non_camel_case_types,
     non_snake_case,
+    clippy::missing_safety_docs,
     clippy::too_many_arguments,
     clippy::type_complexity,
     clippy::upper_case_acronyms
@@ -409,14 +410,16 @@ pub struct DeviceCommands {
 
 impl DeviceCommands {
     #[inline]
-    pub fn load(mut loader: impl FnMut(*const c_char) -> Option<extern "system" fn()>) -> Self {
+    pub unsafe fn load(
+        mut loader: impl FnMut(*const c_char) -> Option<unsafe extern "system" fn()>,
+    ) -> Self {
         Self {
-            destroy_device: unsafe {
+            destroy_device: {
                 let value = loader(b"vkDestroyDevice\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _allocator: *const AllocationCallbacks,
                     ) {
@@ -425,12 +428,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_device_queue: unsafe {
+            get_device_queue: {
                 let value = loader(b"vkGetDeviceQueue\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _queue_family_index: u32,
                         _queue_index: u32,
@@ -441,12 +444,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            queue_submit: unsafe {
+            queue_submit: {
                 let value = loader(b"vkQueueSubmit\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _queue: Queue,
                         _submit_count: u32,
                         _submits: *const SubmitInfo,
@@ -457,34 +460,34 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            queue_wait_idle: unsafe {
+            queue_wait_idle: {
                 let value = loader(b"vkQueueWaitIdle\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_queue: Queue) -> Result {
+                    unsafe extern "system" fn fallback(_queue: Queue) -> Result {
                         panic!("could not load vkQueueWaitIdle")
                     }
                     fallback
                 }
             },
-            device_wait_idle: unsafe {
+            device_wait_idle: {
                 let value = loader(b"vkDeviceWaitIdle\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_device: Device) -> Result {
+                    unsafe extern "system" fn fallback(_device: Device) -> Result {
                         panic!("could not load vkDeviceWaitIdle")
                     }
                     fallback
                 }
             },
-            allocate_memory: unsafe {
+            allocate_memory: {
                 let value = loader(b"vkAllocateMemory\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _allocate_info: *const MemoryAllocateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -495,12 +498,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            free_memory: unsafe {
+            free_memory: {
                 let value = loader(b"vkFreeMemory\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _memory: DeviceMemory,
                         _allocator: *const AllocationCallbacks,
@@ -510,12 +513,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            map_memory: unsafe {
+            map_memory: {
                 let value = loader(b"vkMapMemory\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _memory: DeviceMemory,
                         _offset: DeviceSize,
@@ -528,23 +531,23 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            unmap_memory: unsafe {
+            unmap_memory: {
                 let value = loader(b"vkUnmapMemory\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_device: Device, _memory: DeviceMemory) {
+                    unsafe extern "system" fn fallback(_device: Device, _memory: DeviceMemory) {
                         panic!("could not load vkUnmapMemory")
                     }
                     fallback
                 }
             },
-            flush_mapped_memory_ranges: unsafe {
+            flush_mapped_memory_ranges: {
                 let value = loader(b"vkFlushMappedMemoryRanges\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _memory_range_count: u32,
                         _memory_ranges: *const MappedMemoryRange,
@@ -554,12 +557,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            invalidate_mapped_memory_ranges: unsafe {
+            invalidate_mapped_memory_ranges: {
                 let value = loader(b"vkInvalidateMappedMemoryRanges\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _memory_range_count: u32,
                         _memory_ranges: *const MappedMemoryRange,
@@ -569,12 +572,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_device_memory_commitment: unsafe {
+            get_device_memory_commitment: {
                 let value = loader(b"vkGetDeviceMemoryCommitment\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _memory: DeviceMemory,
                         _committed_memory_in_bytes: *mut DeviceSize,
@@ -584,12 +587,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_buffer_memory_requirements: unsafe {
+            get_buffer_memory_requirements: {
                 let value = loader(b"vkGetBufferMemoryRequirements\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _buffer: Buffer,
                         _memory_requirements: *mut MemoryRequirements,
@@ -599,12 +602,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            bind_buffer_memory: unsafe {
+            bind_buffer_memory: {
                 let value = loader(b"vkBindBufferMemory\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _buffer: Buffer,
                         _memory: DeviceMemory,
@@ -615,12 +618,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_image_memory_requirements: unsafe {
+            get_image_memory_requirements: {
                 let value = loader(b"vkGetImageMemoryRequirements\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _image: Image,
                         _memory_requirements: *mut MemoryRequirements,
@@ -630,12 +633,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            bind_image_memory: unsafe {
+            bind_image_memory: {
                 let value = loader(b"vkBindImageMemory\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _image: Image,
                         _memory: DeviceMemory,
@@ -646,12 +649,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_image_sparse_memory_requirements: unsafe {
+            get_image_sparse_memory_requirements: {
                 let value = loader(b"vkGetImageSparseMemoryRequirements\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _image: Image,
                         _sparse_memory_requirement_count: *mut u32,
@@ -662,12 +665,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            queue_bind_sparse: unsafe {
+            queue_bind_sparse: {
                 let value = loader(b"vkQueueBindSparse\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _queue: Queue,
                         _bind_info_count: u32,
                         _bind_info: *const BindSparseInfo,
@@ -678,12 +681,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_fence: unsafe {
+            create_fence: {
                 let value = loader(b"vkCreateFence\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const FenceCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -694,12 +697,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_fence: unsafe {
+            destroy_fence: {
                 let value = loader(b"vkDestroyFence\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _fence: Fence,
                         _allocator: *const AllocationCallbacks,
@@ -709,12 +712,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            reset_fences: unsafe {
+            reset_fences: {
                 let value = loader(b"vkResetFences\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _fence_count: u32,
                         _fences: *const Fence,
@@ -724,23 +727,23 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_fence_status: unsafe {
+            get_fence_status: {
                 let value = loader(b"vkGetFenceStatus\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_device: Device, _fence: Fence) -> Result {
+                    unsafe extern "system" fn fallback(_device: Device, _fence: Fence) -> Result {
                         panic!("could not load vkGetFenceStatus")
                     }
                     fallback
                 }
             },
-            wait_for_fences: unsafe {
+            wait_for_fences: {
                 let value = loader(b"vkWaitForFences\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _fence_count: u32,
                         _fences: *const Fence,
@@ -752,12 +755,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_semaphore: unsafe {
+            create_semaphore: {
                 let value = loader(b"vkCreateSemaphore\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const SemaphoreCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -768,12 +771,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_semaphore: unsafe {
+            destroy_semaphore: {
                 let value = loader(b"vkDestroySemaphore\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _semaphore: Semaphore,
                         _allocator: *const AllocationCallbacks,
@@ -783,12 +786,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_event: unsafe {
+            create_event: {
                 let value = loader(b"vkCreateEvent\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const EventCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -799,12 +802,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_event: unsafe {
+            destroy_event: {
                 let value = loader(b"vkDestroyEvent\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _event: Event,
                         _allocator: *const AllocationCallbacks,
@@ -814,45 +817,45 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_event_status: unsafe {
+            get_event_status: {
                 let value = loader(b"vkGetEventStatus\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_device: Device, _event: Event) -> Result {
+                    unsafe extern "system" fn fallback(_device: Device, _event: Event) -> Result {
                         panic!("could not load vkGetEventStatus")
                     }
                     fallback
                 }
             },
-            set_event: unsafe {
+            set_event: {
                 let value = loader(b"vkSetEvent\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_device: Device, _event: Event) -> Result {
+                    unsafe extern "system" fn fallback(_device: Device, _event: Event) -> Result {
                         panic!("could not load vkSetEvent")
                     }
                     fallback
                 }
             },
-            reset_event: unsafe {
+            reset_event: {
                 let value = loader(b"vkResetEvent\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_device: Device, _event: Event) -> Result {
+                    unsafe extern "system" fn fallback(_device: Device, _event: Event) -> Result {
                         panic!("could not load vkResetEvent")
                     }
                     fallback
                 }
             },
-            create_query_pool: unsafe {
+            create_query_pool: {
                 let value = loader(b"vkCreateQueryPool\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const QueryPoolCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -863,12 +866,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_query_pool: unsafe {
+            destroy_query_pool: {
                 let value = loader(b"vkDestroyQueryPool\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _query_pool: QueryPool,
                         _allocator: *const AllocationCallbacks,
@@ -878,12 +881,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_query_pool_results: unsafe {
+            get_query_pool_results: {
                 let value = loader(b"vkGetQueryPoolResults\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _query_pool: QueryPool,
                         _first_query: u32,
@@ -898,12 +901,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            reset_query_pool: unsafe {
+            reset_query_pool: {
                 let value = loader(b"vkResetQueryPool\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _query_pool: QueryPool,
                         _first_query: u32,
@@ -914,12 +917,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_buffer: unsafe {
+            create_buffer: {
                 let value = loader(b"vkCreateBuffer\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const BufferCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -930,12 +933,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_buffer: unsafe {
+            destroy_buffer: {
                 let value = loader(b"vkDestroyBuffer\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _buffer: Buffer,
                         _allocator: *const AllocationCallbacks,
@@ -945,12 +948,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_buffer_view: unsafe {
+            create_buffer_view: {
                 let value = loader(b"vkCreateBufferView\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const BufferViewCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -961,12 +964,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_buffer_view: unsafe {
+            destroy_buffer_view: {
                 let value = loader(b"vkDestroyBufferView\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _buffer_view: BufferView,
                         _allocator: *const AllocationCallbacks,
@@ -976,12 +979,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_image: unsafe {
+            create_image: {
                 let value = loader(b"vkCreateImage\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const ImageCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -992,12 +995,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_image: unsafe {
+            destroy_image: {
                 let value = loader(b"vkDestroyImage\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _image: Image,
                         _allocator: *const AllocationCallbacks,
@@ -1007,12 +1010,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_image_subresource_layout: unsafe {
+            get_image_subresource_layout: {
                 let value = loader(b"vkGetImageSubresourceLayout\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _image: Image,
                         _subresource: *const ImageSubresource,
@@ -1023,12 +1026,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_image_view: unsafe {
+            create_image_view: {
                 let value = loader(b"vkCreateImageView\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const ImageViewCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -1039,12 +1042,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_image_view: unsafe {
+            destroy_image_view: {
                 let value = loader(b"vkDestroyImageView\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _image_view: ImageView,
                         _allocator: *const AllocationCallbacks,
@@ -1054,12 +1057,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_shader_module: unsafe {
+            create_shader_module: {
                 let value = loader(b"vkCreateShaderModule\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const ShaderModuleCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -1070,12 +1073,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_shader_module: unsafe {
+            destroy_shader_module: {
                 let value = loader(b"vkDestroyShaderModule\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _shader_module: ShaderModule,
                         _allocator: *const AllocationCallbacks,
@@ -1085,12 +1088,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_pipeline_cache: unsafe {
+            create_pipeline_cache: {
                 let value = loader(b"vkCreatePipelineCache\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const PipelineCacheCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -1101,12 +1104,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_pipeline_cache: unsafe {
+            destroy_pipeline_cache: {
                 let value = loader(b"vkDestroyPipelineCache\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline_cache: PipelineCache,
                         _allocator: *const AllocationCallbacks,
@@ -1116,12 +1119,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_pipeline_cache_data: unsafe {
+            get_pipeline_cache_data: {
                 let value = loader(b"vkGetPipelineCacheData\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline_cache: PipelineCache,
                         _data_size: *mut usize,
@@ -1132,12 +1135,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            merge_pipeline_caches: unsafe {
+            merge_pipeline_caches: {
                 let value = loader(b"vkMergePipelineCaches\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _dst_cache: PipelineCache,
                         _src_cache_count: u32,
@@ -1148,12 +1151,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_graphics_pipelines: unsafe {
+            create_graphics_pipelines: {
                 let value = loader(b"vkCreateGraphicsPipelines\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline_cache: PipelineCache,
                         _create_info_count: u32,
@@ -1166,12 +1169,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_compute_pipelines: unsafe {
+            create_compute_pipelines: {
                 let value = loader(b"vkCreateComputePipelines\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline_cache: PipelineCache,
                         _create_info_count: u32,
@@ -1184,12 +1187,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_pipeline: unsafe {
+            destroy_pipeline: {
                 let value = loader(b"vkDestroyPipeline\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline: Pipeline,
                         _allocator: *const AllocationCallbacks,
@@ -1199,12 +1202,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_pipeline_layout: unsafe {
+            create_pipeline_layout: {
                 let value = loader(b"vkCreatePipelineLayout\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const PipelineLayoutCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -1215,12 +1218,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_pipeline_layout: unsafe {
+            destroy_pipeline_layout: {
                 let value = loader(b"vkDestroyPipelineLayout\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline_layout: PipelineLayout,
                         _allocator: *const AllocationCallbacks,
@@ -1230,12 +1233,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_sampler: unsafe {
+            create_sampler: {
                 let value = loader(b"vkCreateSampler\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const SamplerCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -1246,12 +1249,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_sampler: unsafe {
+            destroy_sampler: {
                 let value = loader(b"vkDestroySampler\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _sampler: Sampler,
                         _allocator: *const AllocationCallbacks,
@@ -1261,12 +1264,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_descriptor_set_layout: unsafe {
+            create_descriptor_set_layout: {
                 let value = loader(b"vkCreateDescriptorSetLayout\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const DescriptorSetLayoutCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -1277,12 +1280,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_descriptor_set_layout: unsafe {
+            destroy_descriptor_set_layout: {
                 let value = loader(b"vkDestroyDescriptorSetLayout\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _descriptor_set_layout: DescriptorSetLayout,
                         _allocator: *const AllocationCallbacks,
@@ -1292,12 +1295,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_descriptor_pool: unsafe {
+            create_descriptor_pool: {
                 let value = loader(b"vkCreateDescriptorPool\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const DescriptorPoolCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -1308,12 +1311,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_descriptor_pool: unsafe {
+            destroy_descriptor_pool: {
                 let value = loader(b"vkDestroyDescriptorPool\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _descriptor_pool: DescriptorPool,
                         _allocator: *const AllocationCallbacks,
@@ -1323,12 +1326,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            reset_descriptor_pool: unsafe {
+            reset_descriptor_pool: {
                 let value = loader(b"vkResetDescriptorPool\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _descriptor_pool: DescriptorPool,
                         _flags: DescriptorPoolResetFlags,
@@ -1338,12 +1341,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            allocate_descriptor_sets: unsafe {
+            allocate_descriptor_sets: {
                 let value = loader(b"vkAllocateDescriptorSets\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _allocate_info: *const DescriptorSetAllocateInfo,
                         _descriptor_sets: *mut DescriptorSet,
@@ -1353,12 +1356,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            free_descriptor_sets: unsafe {
+            free_descriptor_sets: {
                 let value = loader(b"vkFreeDescriptorSets\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _descriptor_pool: DescriptorPool,
                         _descriptor_set_count: u32,
@@ -1369,12 +1372,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            update_descriptor_sets: unsafe {
+            update_descriptor_sets: {
                 let value = loader(b"vkUpdateDescriptorSets\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _descriptor_write_count: u32,
                         _descriptor_writes: *const WriteDescriptorSet,
@@ -1386,12 +1389,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_framebuffer: unsafe {
+            create_framebuffer: {
                 let value = loader(b"vkCreateFramebuffer\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const FramebufferCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -1402,12 +1405,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_framebuffer: unsafe {
+            destroy_framebuffer: {
                 let value = loader(b"vkDestroyFramebuffer\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _framebuffer: Framebuffer,
                         _allocator: *const AllocationCallbacks,
@@ -1417,12 +1420,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_render_pass: unsafe {
+            create_render_pass: {
                 let value = loader(b"vkCreateRenderPass\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const RenderPassCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -1433,12 +1436,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_render_pass: unsafe {
+            destroy_render_pass: {
                 let value = loader(b"vkDestroyRenderPass\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _render_pass: RenderPass,
                         _allocator: *const AllocationCallbacks,
@@ -1448,12 +1451,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_render_area_granularity: unsafe {
+            get_render_area_granularity: {
                 let value = loader(b"vkGetRenderAreaGranularity\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _render_pass: RenderPass,
                         _granularity: *mut Extent2D,
@@ -1463,12 +1466,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_command_pool: unsafe {
+            create_command_pool: {
                 let value = loader(b"vkCreateCommandPool\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const CommandPoolCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -1479,12 +1482,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_command_pool: unsafe {
+            destroy_command_pool: {
                 let value = loader(b"vkDestroyCommandPool\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _command_pool: CommandPool,
                         _allocator: *const AllocationCallbacks,
@@ -1494,12 +1497,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            reset_command_pool: unsafe {
+            reset_command_pool: {
                 let value = loader(b"vkResetCommandPool\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _command_pool: CommandPool,
                         _flags: CommandPoolResetFlags,
@@ -1509,12 +1512,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            allocate_command_buffers: unsafe {
+            allocate_command_buffers: {
                 let value = loader(b"vkAllocateCommandBuffers\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _allocate_info: *const CommandBufferAllocateInfo,
                         _command_buffers: *mut CommandBuffer,
@@ -1524,12 +1527,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            free_command_buffers: unsafe {
+            free_command_buffers: {
                 let value = loader(b"vkFreeCommandBuffers\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _command_pool: CommandPool,
                         _command_buffer_count: u32,
@@ -1540,12 +1543,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            begin_command_buffer: unsafe {
+            begin_command_buffer: {
                 let value = loader(b"vkBeginCommandBuffer\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _begin_info: *const CommandBufferBeginInfo,
                     ) -> Result {
@@ -1554,23 +1557,23 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            end_command_buffer: unsafe {
+            end_command_buffer: {
                 let value = loader(b"vkEndCommandBuffer\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_command_buffer: CommandBuffer) -> Result {
+                    unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) -> Result {
                         panic!("could not load vkEndCommandBuffer")
                     }
                     fallback
                 }
             },
-            reset_command_buffer: unsafe {
+            reset_command_buffer: {
                 let value = loader(b"vkResetCommandBuffer\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _flags: CommandBufferResetFlags,
                     ) -> Result {
@@ -1579,12 +1582,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_bind_pipeline: unsafe {
+            cmd_bind_pipeline: {
                 let value = loader(b"vkCmdBindPipeline\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _pipeline_bind_point: PipelineBindPoint,
                         _pipeline: Pipeline,
@@ -1594,12 +1597,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_viewport: unsafe {
+            cmd_set_viewport: {
                 let value = loader(b"vkCmdSetViewport\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _first_viewport: u32,
                         _viewport_count: u32,
@@ -1610,12 +1613,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_scissor: unsafe {
+            cmd_set_scissor: {
                 let value = loader(b"vkCmdSetScissor\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _first_scissor: u32,
                         _scissor_count: u32,
@@ -1626,23 +1629,26 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_line_width: unsafe {
+            cmd_set_line_width: {
                 let value = loader(b"vkCmdSetLineWidth\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_command_buffer: CommandBuffer, _line_width: f32) {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _line_width: f32,
+                    ) {
                         panic!("could not load vkCmdSetLineWidth")
                     }
                     fallback
                 }
             },
-            cmd_set_depth_bias: unsafe {
+            cmd_set_depth_bias: {
                 let value = loader(b"vkCmdSetDepthBias\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _depth_bias_constant_factor: f32,
                         _depth_bias_clamp: f32,
@@ -1653,12 +1659,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_blend_constants: unsafe {
+            cmd_set_blend_constants: {
                 let value = loader(b"vkCmdSetBlendConstants\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _blend_constants: *const f32,
                     ) {
@@ -1667,12 +1673,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_depth_bounds: unsafe {
+            cmd_set_depth_bounds: {
                 let value = loader(b"vkCmdSetDepthBounds\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _min_depth_bounds: f32,
                         _max_depth_bounds: f32,
@@ -1682,12 +1688,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_stencil_compare_mask: unsafe {
+            cmd_set_stencil_compare_mask: {
                 let value = loader(b"vkCmdSetStencilCompareMask\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _face_mask: StencilFaceFlags,
                         _compare_mask: u32,
@@ -1697,12 +1703,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_stencil_write_mask: unsafe {
+            cmd_set_stencil_write_mask: {
                 let value = loader(b"vkCmdSetStencilWriteMask\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _face_mask: StencilFaceFlags,
                         _write_mask: u32,
@@ -1712,12 +1718,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_stencil_reference: unsafe {
+            cmd_set_stencil_reference: {
                 let value = loader(b"vkCmdSetStencilReference\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _face_mask: StencilFaceFlags,
                         _reference: u32,
@@ -1727,12 +1733,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_bind_descriptor_sets: unsafe {
+            cmd_bind_descriptor_sets: {
                 let value = loader(b"vkCmdBindDescriptorSets\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _pipeline_bind_point: PipelineBindPoint,
                         _layout: PipelineLayout,
@@ -1747,12 +1753,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_bind_index_buffer: unsafe {
+            cmd_bind_index_buffer: {
                 let value = loader(b"vkCmdBindIndexBuffer\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _buffer: Buffer,
                         _offset: DeviceSize,
@@ -1763,12 +1769,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_bind_vertex_buffers: unsafe {
+            cmd_bind_vertex_buffers: {
                 let value = loader(b"vkCmdBindVertexBuffers\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _first_binding: u32,
                         _binding_count: u32,
@@ -1780,12 +1786,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw: unsafe {
+            cmd_draw: {
                 let value = loader(b"vkCmdDraw\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _vertex_count: u32,
                         _instance_count: u32,
@@ -1797,12 +1803,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_indexed: unsafe {
+            cmd_draw_indexed: {
                 let value = loader(b"vkCmdDrawIndexed\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _index_count: u32,
                         _instance_count: u32,
@@ -1815,12 +1821,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_indirect: unsafe {
+            cmd_draw_indirect: {
                 let value = loader(b"vkCmdDrawIndirect\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _buffer: Buffer,
                         _offset: DeviceSize,
@@ -1832,12 +1838,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_indexed_indirect: unsafe {
+            cmd_draw_indexed_indirect: {
                 let value = loader(b"vkCmdDrawIndexedIndirect\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _buffer: Buffer,
                         _offset: DeviceSize,
@@ -1849,12 +1855,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_dispatch: unsafe {
+            cmd_dispatch: {
                 let value = loader(b"vkCmdDispatch\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _group_count_x: u32,
                         _group_count_y: u32,
@@ -1865,12 +1871,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_dispatch_indirect: unsafe {
+            cmd_dispatch_indirect: {
                 let value = loader(b"vkCmdDispatchIndirect\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _buffer: Buffer,
                         _offset: DeviceSize,
@@ -1880,12 +1886,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_buffer: unsafe {
+            cmd_copy_buffer: {
                 let value = loader(b"vkCmdCopyBuffer\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _src_buffer: Buffer,
                         _dst_buffer: Buffer,
@@ -1897,12 +1903,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_image: unsafe {
+            cmd_copy_image: {
                 let value = loader(b"vkCmdCopyImage\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _src_image: Image,
                         _src_image_layout: ImageLayout,
@@ -1916,12 +1922,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_blit_image: unsafe {
+            cmd_blit_image: {
                 let value = loader(b"vkCmdBlitImage\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _src_image: Image,
                         _src_image_layout: ImageLayout,
@@ -1936,12 +1942,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_buffer_to_image: unsafe {
+            cmd_copy_buffer_to_image: {
                 let value = loader(b"vkCmdCopyBufferToImage\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _src_buffer: Buffer,
                         _dst_image: Image,
@@ -1954,12 +1960,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_image_to_buffer: unsafe {
+            cmd_copy_image_to_buffer: {
                 let value = loader(b"vkCmdCopyImageToBuffer\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _src_image: Image,
                         _src_image_layout: ImageLayout,
@@ -1972,12 +1978,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_update_buffer: unsafe {
+            cmd_update_buffer: {
                 let value = loader(b"vkCmdUpdateBuffer\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _dst_buffer: Buffer,
                         _dst_offset: DeviceSize,
@@ -1989,12 +1995,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_fill_buffer: unsafe {
+            cmd_fill_buffer: {
                 let value = loader(b"vkCmdFillBuffer\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _dst_buffer: Buffer,
                         _dst_offset: DeviceSize,
@@ -2006,12 +2012,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_clear_color_image: unsafe {
+            cmd_clear_color_image: {
                 let value = loader(b"vkCmdClearColorImage\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _image: Image,
                         _image_layout: ImageLayout,
@@ -2024,12 +2030,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_clear_depth_stencil_image: unsafe {
+            cmd_clear_depth_stencil_image: {
                 let value = loader(b"vkCmdClearDepthStencilImage\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _image: Image,
                         _image_layout: ImageLayout,
@@ -2042,12 +2048,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_clear_attachments: unsafe {
+            cmd_clear_attachments: {
                 let value = loader(b"vkCmdClearAttachments\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _attachment_count: u32,
                         _attachments: *const ClearAttachment,
@@ -2059,12 +2065,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_resolve_image: unsafe {
+            cmd_resolve_image: {
                 let value = loader(b"vkCmdResolveImage\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _src_image: Image,
                         _src_image_layout: ImageLayout,
@@ -2078,12 +2084,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_event: unsafe {
+            cmd_set_event: {
                 let value = loader(b"vkCmdSetEvent\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _event: Event,
                         _stage_mask: PipelineStageFlags,
@@ -2093,12 +2099,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_reset_event: unsafe {
+            cmd_reset_event: {
                 let value = loader(b"vkCmdResetEvent\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _event: Event,
                         _stage_mask: PipelineStageFlags,
@@ -2108,12 +2114,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_wait_events: unsafe {
+            cmd_wait_events: {
                 let value = loader(b"vkCmdWaitEvents\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _event_count: u32,
                         _events: *const Event,
@@ -2131,12 +2137,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_pipeline_barrier: unsafe {
+            cmd_pipeline_barrier: {
                 let value = loader(b"vkCmdPipelineBarrier\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _src_stage_mask: PipelineStageFlags,
                         _dst_stage_mask: PipelineStageFlags,
@@ -2153,12 +2159,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_begin_query: unsafe {
+            cmd_begin_query: {
                 let value = loader(b"vkCmdBeginQuery\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _query_pool: QueryPool,
                         _query: u32,
@@ -2169,12 +2175,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_end_query: unsafe {
+            cmd_end_query: {
                 let value = loader(b"vkCmdEndQuery\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _query_pool: QueryPool,
                         _query: u32,
@@ -2184,12 +2190,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_begin_conditional_rendering_ext: unsafe {
+            cmd_begin_conditional_rendering_ext: {
                 let value = loader(b"vkCmdBeginConditionalRenderingEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _conditional_rendering_begin: *const ConditionalRenderingBeginInfoEXT,
                     ) {
@@ -2198,23 +2204,23 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_end_conditional_rendering_ext: unsafe {
+            cmd_end_conditional_rendering_ext: {
                 let value = loader(b"vkCmdEndConditionalRenderingEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_command_buffer: CommandBuffer) {
+                    unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) {
                         panic!("could not load vkCmdEndConditionalRenderingEXT")
                     }
                     fallback
                 }
             },
-            cmd_reset_query_pool: unsafe {
+            cmd_reset_query_pool: {
                 let value = loader(b"vkCmdResetQueryPool\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _query_pool: QueryPool,
                         _first_query: u32,
@@ -2225,12 +2231,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_write_timestamp: unsafe {
+            cmd_write_timestamp: {
                 let value = loader(b"vkCmdWriteTimestamp\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _pipeline_stage: PipelineStageFlags,
                         _query_pool: QueryPool,
@@ -2241,12 +2247,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_query_pool_results: unsafe {
+            cmd_copy_query_pool_results: {
                 let value = loader(b"vkCmdCopyQueryPoolResults\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _query_pool: QueryPool,
                         _first_query: u32,
@@ -2261,12 +2267,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_push_constants: unsafe {
+            cmd_push_constants: {
                 let value = loader(b"vkCmdPushConstants\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _layout: PipelineLayout,
                         _stage_flags: ShaderStageFlags,
@@ -2279,12 +2285,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_begin_render_pass: unsafe {
+            cmd_begin_render_pass: {
                 let value = loader(b"vkCmdBeginRenderPass\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _render_pass_begin: *const RenderPassBeginInfo,
                         _contents: SubpassContents,
@@ -2294,12 +2300,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_next_subpass: unsafe {
+            cmd_next_subpass: {
                 let value = loader(b"vkCmdNextSubpass\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _contents: SubpassContents,
                     ) {
@@ -2308,23 +2314,23 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_end_render_pass: unsafe {
+            cmd_end_render_pass: {
                 let value = loader(b"vkCmdEndRenderPass\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_command_buffer: CommandBuffer) {
+                    unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) {
                         panic!("could not load vkCmdEndRenderPass")
                     }
                     fallback
                 }
             },
-            cmd_execute_commands: unsafe {
+            cmd_execute_commands: {
                 let value = loader(b"vkCmdExecuteCommands\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _command_buffer_count: u32,
                         _command_buffers: *const CommandBuffer,
@@ -2334,12 +2340,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_shared_swapchains_khr: unsafe {
+            create_shared_swapchains_khr: {
                 let value = loader(b"vkCreateSharedSwapchainsKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain_count: u32,
                         _create_infos: *const SwapchainCreateInfoKHR,
@@ -2351,12 +2357,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_swapchain_khr: unsafe {
+            create_swapchain_khr: {
                 let value = loader(b"vkCreateSwapchainKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const SwapchainCreateInfoKHR,
                         _allocator: *const AllocationCallbacks,
@@ -2367,12 +2373,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_swapchain_khr: unsafe {
+            destroy_swapchain_khr: {
                 let value = loader(b"vkDestroySwapchainKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
                         _allocator: *const AllocationCallbacks,
@@ -2382,12 +2388,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_swapchain_images_khr: unsafe {
+            get_swapchain_images_khr: {
                 let value = loader(b"vkGetSwapchainImagesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
                         _swapchain_image_count: *mut u32,
@@ -2398,12 +2404,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            acquire_next_image_khr: unsafe {
+            acquire_next_image_khr: {
                 let value = loader(b"vkAcquireNextImageKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
                         _timeout: u64,
@@ -2416,12 +2422,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            queue_present_khr: unsafe {
+            queue_present_khr: {
                 let value = loader(b"vkQueuePresentKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _queue: Queue,
                         _present_info: *const PresentInfoKHR,
                     ) -> Result {
@@ -2430,12 +2436,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            debug_marker_set_object_name_ext: unsafe {
+            debug_marker_set_object_name_ext: {
                 let value = loader(b"vkDebugMarkerSetObjectNameEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _name_info: *const DebugMarkerObjectNameInfoEXT,
                     ) -> Result {
@@ -2444,12 +2450,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            debug_marker_set_object_tag_ext: unsafe {
+            debug_marker_set_object_tag_ext: {
                 let value = loader(b"vkDebugMarkerSetObjectTagEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _tag_info: *const DebugMarkerObjectTagInfoEXT,
                     ) -> Result {
@@ -2458,12 +2464,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_debug_marker_begin_ext: unsafe {
+            cmd_debug_marker_begin_ext: {
                 let value = loader(b"vkCmdDebugMarkerBeginEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _marker_info: *const DebugMarkerMarkerInfoEXT,
                     ) {
@@ -2472,23 +2478,23 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_debug_marker_end_ext: unsafe {
+            cmd_debug_marker_end_ext: {
                 let value = loader(b"vkCmdDebugMarkerEndEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_command_buffer: CommandBuffer) {
+                    unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) {
                         panic!("could not load vkCmdDebugMarkerEndEXT")
                     }
                     fallback
                 }
             },
-            cmd_debug_marker_insert_ext: unsafe {
+            cmd_debug_marker_insert_ext: {
                 let value = loader(b"vkCmdDebugMarkerInsertEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _marker_info: *const DebugMarkerMarkerInfoEXT,
                     ) {
@@ -2497,12 +2503,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_memory_win32_handle_nv: unsafe {
+            get_memory_win32_handle_nv: {
                 let value = loader(b"vkGetMemoryWin32HandleNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _memory: DeviceMemory,
                         _handle_type: ExternalMemoryHandleTypeFlagsNV,
@@ -2513,12 +2519,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_execute_generated_commands_nv: unsafe {
+            cmd_execute_generated_commands_nv: {
                 let value = loader(b"vkCmdExecuteGeneratedCommandsNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _is_preprocessed: Bool32,
                         _generated_commands_info: *const GeneratedCommandsInfoNV,
@@ -2528,12 +2534,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_preprocess_generated_commands_nv: unsafe {
+            cmd_preprocess_generated_commands_nv: {
                 let value = loader(b"vkCmdPreprocessGeneratedCommandsNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _generated_commands_info: *const GeneratedCommandsInfoNV,
                     ) {
@@ -2542,12 +2548,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_bind_pipeline_shader_group_nv: unsafe {
+            cmd_bind_pipeline_shader_group_nv: {
                 let value = loader(b"vkCmdBindPipelineShaderGroupNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _pipeline_bind_point: PipelineBindPoint,
                         _pipeline: Pipeline,
@@ -2558,7 +2564,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_generated_commands_memory_requirements_nv: unsafe {
+            get_generated_commands_memory_requirements_nv: {
                 let value = loader(
                     b"vkGetGeneratedCommandsMemoryRequirementsNV\0"
                         .as_ptr()
@@ -2567,7 +2573,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const GeneratedCommandsMemoryRequirementsInfoNV,
                         _memory_requirements: *mut MemoryRequirements2,
@@ -2577,12 +2583,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_indirect_commands_layout_nv: unsafe {
+            create_indirect_commands_layout_nv: {
                 let value = loader(b"vkCreateIndirectCommandsLayoutNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const IndirectCommandsLayoutCreateInfoNV,
                         _allocator: *const AllocationCallbacks,
@@ -2593,12 +2599,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_indirect_commands_layout_nv: unsafe {
+            destroy_indirect_commands_layout_nv: {
                 let value = loader(b"vkDestroyIndirectCommandsLayoutNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _indirect_commands_layout: IndirectCommandsLayoutNV,
                         _allocator: *const AllocationCallbacks,
@@ -2608,12 +2614,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_push_descriptor_set_khr: unsafe {
+            cmd_push_descriptor_set_khr: {
                 let value = loader(b"vkCmdPushDescriptorSetKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _pipeline_bind_point: PipelineBindPoint,
                         _layout: PipelineLayout,
@@ -2626,12 +2632,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            trim_command_pool: unsafe {
+            trim_command_pool: {
                 let value = loader(b"vkTrimCommandPool\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _command_pool: CommandPool,
                         _flags: CommandPoolTrimFlags,
@@ -2641,12 +2647,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_memory_win32_handle_khr: unsafe {
+            get_memory_win32_handle_khr: {
                 let value = loader(b"vkGetMemoryWin32HandleKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _get_win32_handle_info: *const MemoryGetWin32HandleInfoKHR,
                         _handle: *mut HANDLE,
@@ -2656,12 +2662,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_memory_win32_handle_properties_khr: unsafe {
+            get_memory_win32_handle_properties_khr: {
                 let value = loader(b"vkGetMemoryWin32HandlePropertiesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _handle_type: ExternalMemoryHandleTypeFlags,
                         _handle: HANDLE,
@@ -2672,12 +2678,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_memory_fd_khr: unsafe {
+            get_memory_fd_khr: {
                 let value = loader(b"vkGetMemoryFdKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _get_fd_info: *const MemoryGetFdInfoKHR,
                         _fd: *mut c_int,
@@ -2687,12 +2693,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_memory_fd_properties_khr: unsafe {
+            get_memory_fd_properties_khr: {
                 let value = loader(b"vkGetMemoryFdPropertiesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _handle_type: ExternalMemoryHandleTypeFlags,
                         _fd: c_int,
@@ -2703,12 +2709,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_semaphore_win32_handle_khr: unsafe {
+            get_semaphore_win32_handle_khr: {
                 let value = loader(b"vkGetSemaphoreWin32HandleKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _get_win32_handle_info: *const SemaphoreGetWin32HandleInfoKHR,
                         _handle: *mut HANDLE,
@@ -2718,12 +2724,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            import_semaphore_win32_handle_khr: unsafe {
+            import_semaphore_win32_handle_khr: {
                 let value = loader(b"vkImportSemaphoreWin32HandleKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _import_semaphore_win32_handle_info: *const ImportSemaphoreWin32HandleInfoKHR,
                     ) -> Result {
@@ -2732,12 +2738,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_semaphore_fd_khr: unsafe {
+            get_semaphore_fd_khr: {
                 let value = loader(b"vkGetSemaphoreFdKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _get_fd_info: *const SemaphoreGetFdInfoKHR,
                         _fd: *mut c_int,
@@ -2747,12 +2753,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            import_semaphore_fd_khr: unsafe {
+            import_semaphore_fd_khr: {
                 let value = loader(b"vkImportSemaphoreFdKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _import_semaphore_fd_info: *const ImportSemaphoreFdInfoKHR,
                     ) -> Result {
@@ -2761,12 +2767,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_fence_win32_handle_khr: unsafe {
+            get_fence_win32_handle_khr: {
                 let value = loader(b"vkGetFenceWin32HandleKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _get_win32_handle_info: *const FenceGetWin32HandleInfoKHR,
                         _handle: *mut HANDLE,
@@ -2776,12 +2782,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            import_fence_win32_handle_khr: unsafe {
+            import_fence_win32_handle_khr: {
                 let value = loader(b"vkImportFenceWin32HandleKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _import_fence_win32_handle_info: *const ImportFenceWin32HandleInfoKHR,
                     ) -> Result {
@@ -2790,12 +2796,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_fence_fd_khr: unsafe {
+            get_fence_fd_khr: {
                 let value = loader(b"vkGetFenceFdKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _get_fd_info: *const FenceGetFdInfoKHR,
                         _fd: *mut c_int,
@@ -2805,12 +2811,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            import_fence_fd_khr: unsafe {
+            import_fence_fd_khr: {
                 let value = loader(b"vkImportFenceFdKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _import_fence_fd_info: *const ImportFenceFdInfoKHR,
                     ) -> Result {
@@ -2819,12 +2825,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            acquire_winrt_display_nv: unsafe {
+            acquire_winrt_display_nv: {
                 let value = loader(b"vkAcquireWinrtDisplayNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _display: DisplayKHR,
                     ) -> Result {
@@ -2833,12 +2839,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_winrt_display_nv: unsafe {
+            get_winrt_display_nv: {
                 let value = loader(b"vkGetWinrtDisplayNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _device_relative_id: u32,
                         _display: *mut DisplayKHR,
@@ -2848,12 +2854,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            display_power_control_ext: unsafe {
+            display_power_control_ext: {
                 let value = loader(b"vkDisplayPowerControlEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _display: DisplayKHR,
                         _display_power_info: *const DisplayPowerInfoEXT,
@@ -2863,12 +2869,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            register_device_event_ext: unsafe {
+            register_device_event_ext: {
                 let value = loader(b"vkRegisterDeviceEventEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _device_event_info: *const DeviceEventInfoEXT,
                         _allocator: *const AllocationCallbacks,
@@ -2879,12 +2885,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            register_display_event_ext: unsafe {
+            register_display_event_ext: {
                 let value = loader(b"vkRegisterDisplayEventEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _display: DisplayKHR,
                         _display_event_info: *const DisplayEventInfoEXT,
@@ -2896,12 +2902,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_swapchain_counter_ext: unsafe {
+            get_swapchain_counter_ext: {
                 let value = loader(b"vkGetSwapchainCounterEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
                         _counter: SurfaceCounterFlagsEXT,
@@ -2912,12 +2918,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_device_group_peer_memory_features: unsafe {
+            get_device_group_peer_memory_features: {
                 let value = loader(b"vkGetDeviceGroupPeerMemoryFeatures\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _heap_index: u32,
                         _local_device_index: u32,
@@ -2929,12 +2935,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            bind_buffer_memory2: unsafe {
+            bind_buffer_memory2: {
                 let value = loader(b"vkBindBufferMemory2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _bind_info_count: u32,
                         _bind_infos: *const BindBufferMemoryInfo,
@@ -2944,12 +2950,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            bind_image_memory2: unsafe {
+            bind_image_memory2: {
                 let value = loader(b"vkBindImageMemory2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _bind_info_count: u32,
                         _bind_infos: *const BindImageMemoryInfo,
@@ -2959,23 +2965,26 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_device_mask: unsafe {
+            cmd_set_device_mask: {
                 let value = loader(b"vkCmdSetDeviceMask\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_command_buffer: CommandBuffer, _device_mask: u32) {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _device_mask: u32,
+                    ) {
                         panic!("could not load vkCmdSetDeviceMask")
                     }
                     fallback
                 }
             },
-            get_device_group_present_capabilities_khr: unsafe {
+            get_device_group_present_capabilities_khr: {
                 let value = loader(b"vkGetDeviceGroupPresentCapabilitiesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _device_group_present_capabilities: *mut DeviceGroupPresentCapabilitiesKHR,
                     ) -> Result {
@@ -2984,12 +2993,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_device_group_surface_present_modes_khr: unsafe {
+            get_device_group_surface_present_modes_khr: {
                 let value = loader(b"vkGetDeviceGroupSurfacePresentModesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _surface: SurfaceKHR,
                         _modes: *mut DeviceGroupPresentModeFlagsKHR,
@@ -2999,12 +3008,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            acquire_next_image2_khr: unsafe {
+            acquire_next_image2_khr: {
                 let value = loader(b"vkAcquireNextImage2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _acquire_info: *const AcquireNextImageInfoKHR,
                         _image_index: *mut u32,
@@ -3014,12 +3023,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_dispatch_base: unsafe {
+            cmd_dispatch_base: {
                 let value = loader(b"vkCmdDispatchBase\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _base_group_x: u32,
                         _base_group_y: u32,
@@ -3033,12 +3042,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_physical_device_present_rectangles_khr: unsafe {
+            get_physical_device_present_rectangles_khr: {
                 let value = loader(b"vkGetPhysicalDevicePresentRectanglesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _surface: SurfaceKHR,
                         _rect_count: *mut u32,
@@ -3049,12 +3058,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_descriptor_update_template: unsafe {
+            create_descriptor_update_template: {
                 let value = loader(b"vkCreateDescriptorUpdateTemplate\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const DescriptorUpdateTemplateCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -3065,12 +3074,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_descriptor_update_template: unsafe {
+            destroy_descriptor_update_template: {
                 let value = loader(b"vkDestroyDescriptorUpdateTemplate\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _descriptor_update_template: DescriptorUpdateTemplate,
                         _allocator: *const AllocationCallbacks,
@@ -3080,12 +3089,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            update_descriptor_set_with_template: unsafe {
+            update_descriptor_set_with_template: {
                 let value = loader(b"vkUpdateDescriptorSetWithTemplate\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _descriptor_set: DescriptorSet,
                         _descriptor_update_template: DescriptorUpdateTemplate,
@@ -3096,12 +3105,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_push_descriptor_set_with_template_khr: unsafe {
+            cmd_push_descriptor_set_with_template_khr: {
                 let value = loader(b"vkCmdPushDescriptorSetWithTemplateKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _descriptor_update_template: DescriptorUpdateTemplate,
                         _layout: PipelineLayout,
@@ -3113,12 +3122,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            set_hdr_metadata_ext: unsafe {
+            set_hdr_metadata_ext: {
                 let value = loader(b"vkSetHdrMetadataEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain_count: u32,
                         _swapchains: *const SwapchainKHR,
@@ -3129,12 +3138,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_swapchain_status_khr: unsafe {
+            get_swapchain_status_khr: {
                 let value = loader(b"vkGetSwapchainStatusKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
                     ) -> Result {
@@ -3143,12 +3152,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_refresh_cycle_duration_google: unsafe {
+            get_refresh_cycle_duration_google: {
                 let value = loader(b"vkGetRefreshCycleDurationGOOGLE\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
                         _display_timing_properties: *mut RefreshCycleDurationGOOGLE,
@@ -3158,12 +3167,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_past_presentation_timing_google: unsafe {
+            get_past_presentation_timing_google: {
                 let value = loader(b"vkGetPastPresentationTimingGOOGLE\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
                         _presentation_timing_count: *mut u32,
@@ -3174,12 +3183,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_viewport_w_scaling_nv: unsafe {
+            cmd_set_viewport_w_scaling_nv: {
                 let value = loader(b"vkCmdSetViewportWScalingNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _first_viewport: u32,
                         _viewport_count: u32,
@@ -3190,12 +3199,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_discard_rectangle_ext: unsafe {
+            cmd_set_discard_rectangle_ext: {
                 let value = loader(b"vkCmdSetDiscardRectangleEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _first_discard_rectangle: u32,
                         _discard_rectangle_count: u32,
@@ -3206,12 +3215,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_sample_locations_ext: unsafe {
+            cmd_set_sample_locations_ext: {
                 let value = loader(b"vkCmdSetSampleLocationsEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _sample_locations_info: *const SampleLocationsInfoEXT,
                     ) {
@@ -3220,7 +3229,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_physical_device_multisample_properties_ext: unsafe {
+            get_physical_device_multisample_properties_ext: {
                 let value = loader(
                     b"vkGetPhysicalDeviceMultisamplePropertiesEXT\0"
                         .as_ptr()
@@ -3229,7 +3238,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _samples: SampleCountFlags,
                         _multisample_properties: *mut MultisamplePropertiesEXT,
@@ -3239,12 +3248,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_buffer_memory_requirements2: unsafe {
+            get_buffer_memory_requirements2: {
                 let value = loader(b"vkGetBufferMemoryRequirements2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const BufferMemoryRequirementsInfo2,
                         _memory_requirements: *mut MemoryRequirements2,
@@ -3254,12 +3263,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_image_memory_requirements2: unsafe {
+            get_image_memory_requirements2: {
                 let value = loader(b"vkGetImageMemoryRequirements2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const ImageMemoryRequirementsInfo2,
                         _memory_requirements: *mut MemoryRequirements2,
@@ -3269,12 +3278,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_image_sparse_memory_requirements2: unsafe {
+            get_image_sparse_memory_requirements2: {
                 let value = loader(b"vkGetImageSparseMemoryRequirements2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const ImageSparseMemoryRequirementsInfo2,
                         _sparse_memory_requirement_count: *mut u32,
@@ -3285,12 +3294,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_sampler_ycbcr_conversion: unsafe {
+            create_sampler_ycbcr_conversion: {
                 let value = loader(b"vkCreateSamplerYcbcrConversion\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const SamplerYcbcrConversionCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -3301,12 +3310,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_sampler_ycbcr_conversion: unsafe {
+            destroy_sampler_ycbcr_conversion: {
                 let value = loader(b"vkDestroySamplerYcbcrConversion\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _ycbcr_conversion: SamplerYcbcrConversion,
                         _allocator: *const AllocationCallbacks,
@@ -3316,12 +3325,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_device_queue2: unsafe {
+            get_device_queue2: {
                 let value = loader(b"vkGetDeviceQueue2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _queue_info: *const DeviceQueueInfo2,
                         _queue: *mut Queue,
@@ -3331,12 +3340,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_validation_cache_ext: unsafe {
+            create_validation_cache_ext: {
                 let value = loader(b"vkCreateValidationCacheEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const ValidationCacheCreateInfoEXT,
                         _allocator: *const AllocationCallbacks,
@@ -3347,12 +3356,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_validation_cache_ext: unsafe {
+            destroy_validation_cache_ext: {
                 let value = loader(b"vkDestroyValidationCacheEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _validation_cache: ValidationCacheEXT,
                         _allocator: *const AllocationCallbacks,
@@ -3362,12 +3371,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_validation_cache_data_ext: unsafe {
+            get_validation_cache_data_ext: {
                 let value = loader(b"vkGetValidationCacheDataEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _validation_cache: ValidationCacheEXT,
                         _data_size: *mut usize,
@@ -3378,12 +3387,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            merge_validation_caches_ext: unsafe {
+            merge_validation_caches_ext: {
                 let value = loader(b"vkMergeValidationCachesEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _dst_cache: ValidationCacheEXT,
                         _src_cache_count: u32,
@@ -3394,12 +3403,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_descriptor_set_layout_support: unsafe {
+            get_descriptor_set_layout_support: {
                 let value = loader(b"vkGetDescriptorSetLayoutSupport\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const DescriptorSetLayoutCreateInfo,
                         _support: *mut DescriptorSetLayoutSupport,
@@ -3409,12 +3418,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_swapchain_gralloc_usage_android: unsafe {
+            get_swapchain_gralloc_usage_android: {
                 let value = loader(b"vkGetSwapchainGrallocUsageANDROID\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _format: Format,
                         _image_usage: ImageUsageFlags,
@@ -3425,12 +3434,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_swapchain_gralloc_usage2_android: unsafe {
+            get_swapchain_gralloc_usage2_android: {
                 let value = loader(b"vkGetSwapchainGrallocUsage2ANDROID\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _format: Format,
                         _image_usage: ImageUsageFlags,
@@ -3443,12 +3452,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            acquire_image_android: unsafe {
+            acquire_image_android: {
                 let value = loader(b"vkAcquireImageANDROID\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _image: Image,
                         _native_fence_fd: c_int,
@@ -3460,12 +3469,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            queue_signal_release_image_android: unsafe {
+            queue_signal_release_image_android: {
                 let value = loader(b"vkQueueSignalReleaseImageANDROID\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _queue: Queue,
                         _wait_semaphore_count: u32,
                         _wait_semaphores: *const Semaphore,
@@ -3477,12 +3486,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_shader_info_amd: unsafe {
+            get_shader_info_amd: {
                 let value = loader(b"vkGetShaderInfoAMD\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline: Pipeline,
                         _shader_stage: ShaderStageFlags,
@@ -3495,12 +3504,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            set_local_dimming_amd: unsafe {
+            set_local_dimming_amd: {
                 let value = loader(b"vkSetLocalDimmingAMD\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _swap_chain: SwapchainKHR,
                         _local_dimming_enable: Bool32,
@@ -3510,7 +3519,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_physical_device_calibrateable_time_domains_ext: unsafe {
+            get_physical_device_calibrateable_time_domains_ext: {
                 let value = loader(
                     b"vkGetPhysicalDeviceCalibrateableTimeDomainsEXT\0"
                         .as_ptr()
@@ -3519,7 +3528,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _time_domain_count: *mut u32,
                         _time_domains: *mut TimeDomainEXT,
@@ -3529,12 +3538,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_calibrated_timestamps_ext: unsafe {
+            get_calibrated_timestamps_ext: {
                 let value = loader(b"vkGetCalibratedTimestampsEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _timestamp_count: u32,
                         _timestamp_infos: *const CalibratedTimestampInfoEXT,
@@ -3546,12 +3555,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_memory_host_pointer_properties_ext: unsafe {
+            get_memory_host_pointer_properties_ext: {
                 let value = loader(b"vkGetMemoryHostPointerPropertiesEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _handle_type: ExternalMemoryHandleTypeFlags,
                         _host_pointer: *const c_void,
@@ -3562,12 +3571,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_write_buffer_marker_amd: unsafe {
+            cmd_write_buffer_marker_amd: {
                 let value = loader(b"vkCmdWriteBufferMarkerAMD\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _pipeline_stage: PipelineStageFlags,
                         _dst_buffer: Buffer,
@@ -3579,12 +3588,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_render_pass2: unsafe {
+            create_render_pass2: {
                 let value = loader(b"vkCreateRenderPass2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const RenderPassCreateInfo2,
                         _allocator: *const AllocationCallbacks,
@@ -3595,12 +3604,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_begin_render_pass2: unsafe {
+            cmd_begin_render_pass2: {
                 let value = loader(b"vkCmdBeginRenderPass2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _render_pass_begin: *const RenderPassBeginInfo,
                         _subpass_begin_info: *const SubpassBeginInfo,
@@ -3610,12 +3619,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_next_subpass2: unsafe {
+            cmd_next_subpass2: {
                 let value = loader(b"vkCmdNextSubpass2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _subpass_begin_info: *const SubpassBeginInfo,
                         _subpass_end_info: *const SubpassEndInfo,
@@ -3625,12 +3634,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_end_render_pass2: unsafe {
+            cmd_end_render_pass2: {
                 let value = loader(b"vkCmdEndRenderPass2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _subpass_end_info: *const SubpassEndInfo,
                     ) {
@@ -3639,12 +3648,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_semaphore_counter_value: unsafe {
+            get_semaphore_counter_value: {
                 let value = loader(b"vkGetSemaphoreCounterValue\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _semaphore: Semaphore,
                         _value: *mut u64,
@@ -3654,12 +3663,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            wait_semaphores: unsafe {
+            wait_semaphores: {
                 let value = loader(b"vkWaitSemaphores\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _wait_info: *const SemaphoreWaitInfo,
                         _timeout: u64,
@@ -3669,12 +3678,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            signal_semaphore: unsafe {
+            signal_semaphore: {
                 let value = loader(b"vkSignalSemaphore\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _signal_info: *const SemaphoreSignalInfo,
                     ) -> Result {
@@ -3683,7 +3692,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_android_hardware_buffer_properties_android: unsafe {
+            get_android_hardware_buffer_properties_android: {
                 let value = loader(
                     b"vkGetAndroidHardwareBufferPropertiesANDROID\0"
                         .as_ptr()
@@ -3692,7 +3701,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _buffer: *const AHardwareBuffer,
                         _properties: *mut AndroidHardwareBufferPropertiesANDROID,
@@ -3702,12 +3711,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_memory_android_hardware_buffer_android: unsafe {
+            get_memory_android_hardware_buffer_android: {
                 let value = loader(b"vkGetMemoryAndroidHardwareBufferANDROID\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const MemoryGetAndroidHardwareBufferInfoANDROID,
                         _buffer: *mut *mut AHardwareBuffer,
@@ -3717,12 +3726,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_indirect_count: unsafe {
+            cmd_draw_indirect_count: {
                 let value = loader(b"vkCmdDrawIndirectCount\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _buffer: Buffer,
                         _offset: DeviceSize,
@@ -3736,12 +3745,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_indexed_indirect_count: unsafe {
+            cmd_draw_indexed_indirect_count: {
                 let value = loader(b"vkCmdDrawIndexedIndirectCount\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _buffer: Buffer,
                         _offset: DeviceSize,
@@ -3755,12 +3764,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_checkpoint_nv: unsafe {
+            cmd_set_checkpoint_nv: {
                 let value = loader(b"vkCmdSetCheckpointNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _checkpoint_marker: *const c_void,
                     ) {
@@ -3769,12 +3778,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_queue_checkpoint_data_nv: unsafe {
+            get_queue_checkpoint_data_nv: {
                 let value = loader(b"vkGetQueueCheckpointDataNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _queue: Queue,
                         _checkpoint_data_count: *mut u32,
                         _checkpoint_data: *mut CheckpointDataNV,
@@ -3784,12 +3793,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_bind_transform_feedback_buffers_ext: unsafe {
+            cmd_bind_transform_feedback_buffers_ext: {
                 let value = loader(b"vkCmdBindTransformFeedbackBuffersEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _first_binding: u32,
                         _binding_count: u32,
@@ -3802,12 +3811,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_begin_transform_feedback_ext: unsafe {
+            cmd_begin_transform_feedback_ext: {
                 let value = loader(b"vkCmdBeginTransformFeedbackEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _first_counter_buffer: u32,
                         _counter_buffer_count: u32,
@@ -3819,12 +3828,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_end_transform_feedback_ext: unsafe {
+            cmd_end_transform_feedback_ext: {
                 let value = loader(b"vkCmdEndTransformFeedbackEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _first_counter_buffer: u32,
                         _counter_buffer_count: u32,
@@ -3836,12 +3845,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_begin_query_indexed_ext: unsafe {
+            cmd_begin_query_indexed_ext: {
                 let value = loader(b"vkCmdBeginQueryIndexedEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _query_pool: QueryPool,
                         _query: u32,
@@ -3853,12 +3862,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_end_query_indexed_ext: unsafe {
+            cmd_end_query_indexed_ext: {
                 let value = loader(b"vkCmdEndQueryIndexedEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _query_pool: QueryPool,
                         _query: u32,
@@ -3869,12 +3878,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_indirect_byte_count_ext: unsafe {
+            cmd_draw_indirect_byte_count_ext: {
                 let value = loader(b"vkCmdDrawIndirectByteCountEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _instance_count: u32,
                         _first_instance: u32,
@@ -3888,12 +3897,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_exclusive_scissor_nv: unsafe {
+            cmd_set_exclusive_scissor_nv: {
                 let value = loader(b"vkCmdSetExclusiveScissorNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _first_exclusive_scissor: u32,
                         _exclusive_scissor_count: u32,
@@ -3904,12 +3913,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_bind_shading_rate_image_nv: unsafe {
+            cmd_bind_shading_rate_image_nv: {
                 let value = loader(b"vkCmdBindShadingRateImageNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _image_view: ImageView,
                         _image_layout: ImageLayout,
@@ -3919,12 +3928,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_viewport_shading_rate_palette_nv: unsafe {
+            cmd_set_viewport_shading_rate_palette_nv: {
                 let value = loader(b"vkCmdSetViewportShadingRatePaletteNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _first_viewport: u32,
                         _viewport_count: u32,
@@ -3935,12 +3944,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_coarse_sample_order_nv: unsafe {
+            cmd_set_coarse_sample_order_nv: {
                 let value = loader(b"vkCmdSetCoarseSampleOrderNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _sample_order_type: CoarseSampleOrderTypeNV,
                         _custom_sample_order_count: u32,
@@ -3951,12 +3960,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_mesh_tasks_nv: unsafe {
+            cmd_draw_mesh_tasks_nv: {
                 let value = loader(b"vkCmdDrawMeshTasksNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _task_count: u32,
                         _first_task: u32,
@@ -3966,12 +3975,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_mesh_tasks_indirect_nv: unsafe {
+            cmd_draw_mesh_tasks_indirect_nv: {
                 let value = loader(b"vkCmdDrawMeshTasksIndirectNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _buffer: Buffer,
                         _offset: DeviceSize,
@@ -3983,12 +3992,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_mesh_tasks_indirect_count_nv: unsafe {
+            cmd_draw_mesh_tasks_indirect_count_nv: {
                 let value = loader(b"vkCmdDrawMeshTasksIndirectCountNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _buffer: Buffer,
                         _offset: DeviceSize,
@@ -4002,12 +4011,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            compile_deferred_nv: unsafe {
+            compile_deferred_nv: {
                 let value = loader(b"vkCompileDeferredNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline: Pipeline,
                         _shader: u32,
@@ -4017,12 +4026,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_acceleration_structure_nv: unsafe {
+            create_acceleration_structure_nv: {
                 let value = loader(b"vkCreateAccelerationStructureNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const AccelerationStructureCreateInfoNV,
                         _allocator: *const AllocationCallbacks,
@@ -4033,12 +4042,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_acceleration_structure_khr: unsafe {
+            destroy_acceleration_structure_khr: {
                 let value = loader(b"vkDestroyAccelerationStructureKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _acceleration_structure: AccelerationStructureKHR,
                         _allocator: *const AllocationCallbacks,
@@ -4048,12 +4057,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_acceleration_structure_nv: unsafe {
+            destroy_acceleration_structure_nv: {
                 let value = loader(b"vkDestroyAccelerationStructureNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _acceleration_structure: AccelerationStructureNV,
                         _allocator: *const AllocationCallbacks,
@@ -4063,7 +4072,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_acceleration_structure_memory_requirements_nv: unsafe {
+            get_acceleration_structure_memory_requirements_nv: {
                 let value = loader(
                     b"vkGetAccelerationStructureMemoryRequirementsNV\0"
                         .as_ptr()
@@ -4072,7 +4081,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const AccelerationStructureMemoryRequirementsInfoNV,
                         _memory_requirements: *mut MemoryRequirements2KHR,
@@ -4082,12 +4091,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            bind_acceleration_structure_memory_nv: unsafe {
+            bind_acceleration_structure_memory_nv: {
                 let value = loader(b"vkBindAccelerationStructureMemoryNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _bind_info_count: u32,
                         _bind_infos: *const BindAccelerationStructureMemoryInfoNV,
@@ -4097,12 +4106,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_acceleration_structure_nv: unsafe {
+            cmd_copy_acceleration_structure_nv: {
                 let value = loader(b"vkCmdCopyAccelerationStructureNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _dst: AccelerationStructureNV,
                         _src: AccelerationStructureNV,
@@ -4113,12 +4122,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_acceleration_structure_khr: unsafe {
+            cmd_copy_acceleration_structure_khr: {
                 let value = loader(b"vkCmdCopyAccelerationStructureKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _info: *const CopyAccelerationStructureInfoKHR,
                     ) {
@@ -4127,12 +4136,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            copy_acceleration_structure_khr: unsafe {
+            copy_acceleration_structure_khr: {
                 let value = loader(b"vkCopyAccelerationStructureKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _deferred_operation: DeferredOperationKHR,
                         _info: *const CopyAccelerationStructureInfoKHR,
@@ -4142,7 +4151,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_acceleration_structure_to_memory_khr: unsafe {
+            cmd_copy_acceleration_structure_to_memory_khr: {
                 let value = loader(
                     b"vkCmdCopyAccelerationStructureToMemoryKHR\0"
                         .as_ptr()
@@ -4151,7 +4160,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _info: *const CopyAccelerationStructureToMemoryInfoKHR,
                     ) {
@@ -4160,12 +4169,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            copy_acceleration_structure_to_memory_khr: unsafe {
+            copy_acceleration_structure_to_memory_khr: {
                 let value = loader(b"vkCopyAccelerationStructureToMemoryKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _deferred_operation: DeferredOperationKHR,
                         _info: *const CopyAccelerationStructureToMemoryInfoKHR,
@@ -4175,7 +4184,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_memory_to_acceleration_structure_khr: unsafe {
+            cmd_copy_memory_to_acceleration_structure_khr: {
                 let value = loader(
                     b"vkCmdCopyMemoryToAccelerationStructureKHR\0"
                         .as_ptr()
@@ -4184,7 +4193,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _info: *const CopyMemoryToAccelerationStructureInfoKHR,
                     ) {
@@ -4193,12 +4202,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            copy_memory_to_acceleration_structure_khr: unsafe {
+            copy_memory_to_acceleration_structure_khr: {
                 let value = loader(b"vkCopyMemoryToAccelerationStructureKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _deferred_operation: DeferredOperationKHR,
                         _info: *const CopyMemoryToAccelerationStructureInfoKHR,
@@ -4208,7 +4217,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_write_acceleration_structures_properties_khr: unsafe {
+            cmd_write_acceleration_structures_properties_khr: {
                 let value = loader(
                     b"vkCmdWriteAccelerationStructuresPropertiesKHR\0"
                         .as_ptr()
@@ -4217,7 +4226,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _acceleration_structure_count: u32,
                         _acceleration_structures: *const AccelerationStructureKHR,
@@ -4230,7 +4239,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_write_acceleration_structures_properties_nv: unsafe {
+            cmd_write_acceleration_structures_properties_nv: {
                 let value = loader(
                     b"vkCmdWriteAccelerationStructuresPropertiesNV\0"
                         .as_ptr()
@@ -4239,7 +4248,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _acceleration_structure_count: u32,
                         _acceleration_structures: *const AccelerationStructureNV,
@@ -4252,12 +4261,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_build_acceleration_structure_nv: unsafe {
+            cmd_build_acceleration_structure_nv: {
                 let value = loader(b"vkCmdBuildAccelerationStructureNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _info: *const AccelerationStructureInfoNV,
                         _instance_data: Buffer,
@@ -4273,7 +4282,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            write_acceleration_structures_properties_khr: unsafe {
+            write_acceleration_structures_properties_khr: {
                 let value = loader(
                     b"vkWriteAccelerationStructuresPropertiesKHR\0"
                         .as_ptr()
@@ -4282,7 +4291,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _acceleration_structure_count: u32,
                         _acceleration_structures: *const AccelerationStructureKHR,
@@ -4296,12 +4305,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_trace_rays_khr: unsafe {
+            cmd_trace_rays_khr: {
                 let value = loader(b"vkCmdTraceRaysKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _raygen_shader_binding_table: *const StridedDeviceAddressRegionKHR,
                         _miss_shader_binding_table: *const StridedDeviceAddressRegionKHR,
@@ -4316,12 +4325,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_trace_rays_nv: unsafe {
+            cmd_trace_rays_nv: {
                 let value = loader(b"vkCmdTraceRaysNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _raygen_shader_binding_table_buffer: Buffer,
                         _raygen_shader_binding_offset: DeviceSize,
@@ -4343,12 +4352,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_ray_tracing_shader_group_handles_khr: unsafe {
+            get_ray_tracing_shader_group_handles_khr: {
                 let value = loader(b"vkGetRayTracingShaderGroupHandlesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline: Pipeline,
                         _first_group: u32,
@@ -4361,7 +4370,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_ray_tracing_capture_replay_shader_group_handles_khr: unsafe {
+            get_ray_tracing_capture_replay_shader_group_handles_khr: {
                 let value = loader(
                     b"vkGetRayTracingCaptureReplayShaderGroupHandlesKHR\0"
                         .as_ptr()
@@ -4370,7 +4379,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline: Pipeline,
                         _first_group: u32,
@@ -4383,12 +4392,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_acceleration_structure_handle_nv: unsafe {
+            get_acceleration_structure_handle_nv: {
                 let value = loader(b"vkGetAccelerationStructureHandleNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _acceleration_structure: AccelerationStructureNV,
                         _data_size: usize,
@@ -4399,12 +4408,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_ray_tracing_pipelines_nv: unsafe {
+            create_ray_tracing_pipelines_nv: {
                 let value = loader(b"vkCreateRayTracingPipelinesNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline_cache: PipelineCache,
                         _create_info_count: u32,
@@ -4417,12 +4426,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_ray_tracing_pipelines_khr: unsafe {
+            create_ray_tracing_pipelines_khr: {
                 let value = loader(b"vkCreateRayTracingPipelinesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _deferred_operation: DeferredOperationKHR,
                         _pipeline_cache: PipelineCache,
@@ -4436,7 +4445,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_physical_device_cooperative_matrix_properties_nv: unsafe {
+            get_physical_device_cooperative_matrix_properties_nv: {
                 let value = loader(
                     b"vkGetPhysicalDeviceCooperativeMatrixPropertiesNV\0"
                         .as_ptr()
@@ -4445,7 +4454,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _property_count: *mut u32,
                         _properties: *mut CooperativeMatrixPropertiesNV,
@@ -4455,12 +4464,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_trace_rays_indirect_khr: unsafe {
+            cmd_trace_rays_indirect_khr: {
                 let value = loader(b"vkCmdTraceRaysIndirectKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _raygen_shader_binding_table: *const StridedDeviceAddressRegionKHR,
                         _miss_shader_binding_table: *const StridedDeviceAddressRegionKHR,
@@ -4473,7 +4482,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_device_acceleration_structure_compatibility_khr: unsafe {
+            get_device_acceleration_structure_compatibility_khr: {
                 let value = loader(
                     b"vkGetDeviceAccelerationStructureCompatibilityKHR\0"
                         .as_ptr()
@@ -4482,7 +4491,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _version_info: *const AccelerationStructureVersionInfoKHR,
                         _compatibility: *mut AccelerationStructureCompatibilityKHR,
@@ -4492,12 +4501,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_ray_tracing_shader_group_stack_size_khr: unsafe {
+            get_ray_tracing_shader_group_stack_size_khr: {
                 let value = loader(b"vkGetRayTracingShaderGroupStackSizeKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline: Pipeline,
                         _group: u32,
@@ -4508,12 +4517,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_ray_tracing_pipeline_stack_size_khr: unsafe {
+            cmd_set_ray_tracing_pipeline_stack_size_khr: {
                 let value = loader(b"vkCmdSetRayTracingPipelineStackSizeKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _pipeline_stack_size: u32,
                     ) {
@@ -4522,12 +4531,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_image_view_handle_nvx: unsafe {
+            get_image_view_handle_nvx: {
                 let value = loader(b"vkGetImageViewHandleNVX\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const ImageViewHandleInfoNVX,
                     ) -> u32 {
@@ -4536,12 +4545,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_image_view_address_nvx: unsafe {
+            get_image_view_address_nvx: {
                 let value = loader(b"vkGetImageViewAddressNVX\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _image_view: ImageView,
                         _properties: *mut ImageViewAddressPropertiesNVX,
@@ -4551,7 +4560,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_physical_device_surface_present_modes2_ext: unsafe {
+            get_physical_device_surface_present_modes2_ext: {
                 let value = loader(
                     b"vkGetPhysicalDeviceSurfacePresentModes2EXT\0"
                         .as_ptr()
@@ -4560,7 +4569,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _surface_info: *const PhysicalDeviceSurfaceInfo2KHR,
                         _present_mode_count: *mut u32,
@@ -4571,12 +4580,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_device_group_surface_present_modes2_ext: unsafe {
+            get_device_group_surface_present_modes2_ext: {
                 let value = loader(b"vkGetDeviceGroupSurfacePresentModes2EXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _surface_info: *const PhysicalDeviceSurfaceInfo2KHR,
                         _modes: *mut DeviceGroupPresentModeFlagsKHR,
@@ -4586,12 +4595,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            acquire_full_screen_exclusive_mode_ext: unsafe {
+            acquire_full_screen_exclusive_mode_ext: {
                 let value = loader(b"vkAcquireFullScreenExclusiveModeEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
                     ) -> Result {
@@ -4600,12 +4609,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            release_full_screen_exclusive_mode_ext: unsafe {
+            release_full_screen_exclusive_mode_ext: {
                 let value = loader(b"vkReleaseFullScreenExclusiveModeEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
                     ) -> Result {
@@ -4614,7 +4623,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            enumerate_physical_device_queue_family_performance_query_counters_khr: unsafe {
+            enumerate_physical_device_queue_family_performance_query_counters_khr: {
                 let value = loader(
                     b"vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR\0"
                         .as_ptr()
@@ -4623,7 +4632,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _queue_family_index: u32,
                         _counter_count: *mut u32,
@@ -4635,7 +4644,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_physical_device_queue_family_performance_query_passes_khr: unsafe {
+            get_physical_device_queue_family_performance_query_passes_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR\0"
                         .as_ptr()
@@ -4644,7 +4653,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _performance_query_create_info: *const QueryPoolPerformanceCreateInfoKHR,
                         _num_passes: *mut u32,
@@ -4654,12 +4663,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            acquire_profiling_lock_khr: unsafe {
+            acquire_profiling_lock_khr: {
                 let value = loader(b"vkAcquireProfilingLockKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const AcquireProfilingLockInfoKHR,
                     ) -> Result {
@@ -4668,18 +4677,18 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            release_profiling_lock_khr: unsafe {
+            release_profiling_lock_khr: {
                 let value = loader(b"vkReleaseProfilingLockKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_device: Device) {
+                    unsafe extern "system" fn fallback(_device: Device) {
                         panic!("could not load vkReleaseProfilingLockKHR")
                     }
                     fallback
                 }
             },
-            get_image_drm_format_modifier_properties_ext: unsafe {
+            get_image_drm_format_modifier_properties_ext: {
                 let value = loader(
                     b"vkGetImageDrmFormatModifierPropertiesEXT\0"
                         .as_ptr()
@@ -4688,7 +4697,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _image: Image,
                         _properties: *mut ImageDrmFormatModifierPropertiesEXT,
@@ -4698,12 +4707,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_buffer_opaque_capture_address: unsafe {
+            get_buffer_opaque_capture_address: {
                 let value = loader(b"vkGetBufferOpaqueCaptureAddress\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const BufferDeviceAddressInfo,
                     ) -> u64 {
@@ -4712,12 +4721,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_buffer_device_address: unsafe {
+            get_buffer_device_address: {
                 let value = loader(b"vkGetBufferDeviceAddress\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const BufferDeviceAddressInfo,
                     ) -> DeviceAddress {
@@ -4726,7 +4735,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_physical_device_supported_framebuffer_mixed_samples_combinations_nv: unsafe {
+            get_physical_device_supported_framebuffer_mixed_samples_combinations_nv: {
                 let value = loader(
                     b"vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV\0"
                         .as_ptr()
@@ -4735,7 +4744,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _combination_count: *mut u32,
                         _combinations: *mut FramebufferMixedSamplesCombinationNV,
@@ -4745,12 +4754,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            initialize_performance_api_intel: unsafe {
+            initialize_performance_api_intel: {
                 let value = loader(b"vkInitializePerformanceApiINTEL\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _initialize_info: *const InitializePerformanceApiInfoINTEL,
                     ) -> Result {
@@ -4759,23 +4768,23 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            uninitialize_performance_api_intel: unsafe {
+            uninitialize_performance_api_intel: {
                 let value = loader(b"vkUninitializePerformanceApiINTEL\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_device: Device) {
+                    unsafe extern "system" fn fallback(_device: Device) {
                         panic!("could not load vkUninitializePerformanceApiINTEL")
                     }
                     fallback
                 }
             },
-            cmd_set_performance_marker_intel: unsafe {
+            cmd_set_performance_marker_intel: {
                 let value = loader(b"vkCmdSetPerformanceMarkerINTEL\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _marker_info: *const PerformanceMarkerInfoINTEL,
                     ) -> Result {
@@ -4784,12 +4793,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_performance_stream_marker_intel: unsafe {
+            cmd_set_performance_stream_marker_intel: {
                 let value = loader(b"vkCmdSetPerformanceStreamMarkerINTEL\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _marker_info: *const PerformanceStreamMarkerInfoINTEL,
                     ) -> Result {
@@ -4798,12 +4807,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_performance_override_intel: unsafe {
+            cmd_set_performance_override_intel: {
                 let value = loader(b"vkCmdSetPerformanceOverrideINTEL\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _override_info: *const PerformanceOverrideInfoINTEL,
                     ) -> Result {
@@ -4812,12 +4821,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            acquire_performance_configuration_intel: unsafe {
+            acquire_performance_configuration_intel: {
                 let value = loader(b"vkAcquirePerformanceConfigurationINTEL\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _acquire_info: *const PerformanceConfigurationAcquireInfoINTEL,
                         _configuration: *mut PerformanceConfigurationINTEL,
@@ -4827,12 +4836,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            release_performance_configuration_intel: unsafe {
+            release_performance_configuration_intel: {
                 let value = loader(b"vkReleasePerformanceConfigurationINTEL\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _configuration: PerformanceConfigurationINTEL,
                     ) -> Result {
@@ -4841,12 +4850,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            queue_set_performance_configuration_intel: unsafe {
+            queue_set_performance_configuration_intel: {
                 let value = loader(b"vkQueueSetPerformanceConfigurationINTEL\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _queue: Queue,
                         _configuration: PerformanceConfigurationINTEL,
                     ) -> Result {
@@ -4855,12 +4864,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_performance_parameter_intel: unsafe {
+            get_performance_parameter_intel: {
                 let value = loader(b"vkGetPerformanceParameterINTEL\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _parameter: PerformanceParameterTypeINTEL,
                         _value: *mut PerformanceValueINTEL,
@@ -4870,12 +4879,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_device_memory_opaque_capture_address: unsafe {
+            get_device_memory_opaque_capture_address: {
                 let value = loader(b"vkGetDeviceMemoryOpaqueCaptureAddress\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const DeviceMemoryOpaqueCaptureAddressInfo,
                     ) -> u64 {
@@ -4884,12 +4893,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_pipeline_executable_properties_khr: unsafe {
+            get_pipeline_executable_properties_khr: {
                 let value = loader(b"vkGetPipelineExecutablePropertiesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline_info: *const PipelineInfoKHR,
                         _executable_count: *mut u32,
@@ -4900,12 +4909,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_pipeline_executable_statistics_khr: unsafe {
+            get_pipeline_executable_statistics_khr: {
                 let value = loader(b"vkGetPipelineExecutableStatisticsKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _executable_info: *const PipelineExecutableInfoKHR,
                         _statistic_count: *mut u32,
@@ -4916,7 +4925,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_pipeline_executable_internal_representations_khr: unsafe {
+            get_pipeline_executable_internal_representations_khr: {
                 let value = loader(
                     b"vkGetPipelineExecutableInternalRepresentationsKHR\0"
                         .as_ptr()
@@ -4925,7 +4934,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _executable_info: *const PipelineExecutableInfoKHR,
                         _internal_representation_count: *mut u32,
@@ -4936,12 +4945,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_line_stipple_ext: unsafe {
+            cmd_set_line_stipple_ext: {
                 let value = loader(b"vkCmdSetLineStippleEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _line_stipple_factor: u32,
                         _line_stipple_pattern: u16,
@@ -4951,12 +4960,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_physical_device_tool_properties_ext: unsafe {
+            get_physical_device_tool_properties_ext: {
                 let value = loader(b"vkGetPhysicalDeviceToolPropertiesEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _tool_count: *mut u32,
                         _tool_properties: *mut PhysicalDeviceToolPropertiesEXT,
@@ -4966,12 +4975,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_acceleration_structure_khr: unsafe {
+            create_acceleration_structure_khr: {
                 let value = loader(b"vkCreateAccelerationStructureKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const AccelerationStructureCreateInfoKHR,
                         _allocator: *const AllocationCallbacks,
@@ -4982,12 +4991,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_build_acceleration_structures_khr: unsafe {
+            cmd_build_acceleration_structures_khr: {
                 let value = loader(b"vkCmdBuildAccelerationStructuresKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _info_count: u32,
                         _infos: *const AccelerationStructureBuildGeometryInfoKHR,
@@ -4998,7 +5007,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_build_acceleration_structures_indirect_khr: unsafe {
+            cmd_build_acceleration_structures_indirect_khr: {
                 let value = loader(
                     b"vkCmdBuildAccelerationStructuresIndirectKHR\0"
                         .as_ptr()
@@ -5007,7 +5016,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _info_count: u32,
                         _infos: *const AccelerationStructureBuildGeometryInfoKHR,
@@ -5020,12 +5029,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            build_acceleration_structures_khr: unsafe {
+            build_acceleration_structures_khr: {
                 let value = loader(b"vkBuildAccelerationStructuresKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _deferred_operation: DeferredOperationKHR,
                         _info_count: u32,
@@ -5037,7 +5046,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_acceleration_structure_device_address_khr: unsafe {
+            get_acceleration_structure_device_address_khr: {
                 let value = loader(
                     b"vkGetAccelerationStructureDeviceAddressKHR\0"
                         .as_ptr()
@@ -5046,7 +5055,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const AccelerationStructureDeviceAddressInfoKHR,
                     ) -> DeviceAddress {
@@ -5055,12 +5064,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_deferred_operation_khr: unsafe {
+            create_deferred_operation_khr: {
                 let value = loader(b"vkCreateDeferredOperationKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _allocator: *const AllocationCallbacks,
                         _deferred_operation: *mut DeferredOperationKHR,
@@ -5070,12 +5079,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_deferred_operation_khr: unsafe {
+            destroy_deferred_operation_khr: {
                 let value = loader(b"vkDestroyDeferredOperationKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _operation: DeferredOperationKHR,
                         _allocator: *const AllocationCallbacks,
@@ -5085,12 +5094,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_deferred_operation_max_concurrency_khr: unsafe {
+            get_deferred_operation_max_concurrency_khr: {
                 let value = loader(b"vkGetDeferredOperationMaxConcurrencyKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _operation: DeferredOperationKHR,
                     ) -> u32 {
@@ -5099,12 +5108,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_deferred_operation_result_khr: unsafe {
+            get_deferred_operation_result_khr: {
                 let value = loader(b"vkGetDeferredOperationResultKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _operation: DeferredOperationKHR,
                     ) -> Result {
@@ -5113,12 +5122,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            deferred_operation_join_khr: unsafe {
+            deferred_operation_join_khr: {
                 let value = loader(b"vkDeferredOperationJoinKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _operation: DeferredOperationKHR,
                     ) -> Result {
@@ -5127,12 +5136,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_cull_mode_ext: unsafe {
+            cmd_set_cull_mode_ext: {
                 let value = loader(b"vkCmdSetCullModeEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _cull_mode: CullModeFlags,
                     ) {
@@ -5141,12 +5150,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_front_face_ext: unsafe {
+            cmd_set_front_face_ext: {
                 let value = loader(b"vkCmdSetFrontFaceEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _front_face: FrontFace,
                     ) {
@@ -5155,12 +5164,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_primitive_topology_ext: unsafe {
+            cmd_set_primitive_topology_ext: {
                 let value = loader(b"vkCmdSetPrimitiveTopologyEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _primitive_topology: PrimitiveTopology,
                     ) {
@@ -5169,12 +5178,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_viewport_with_count_ext: unsafe {
+            cmd_set_viewport_with_count_ext: {
                 let value = loader(b"vkCmdSetViewportWithCountEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _viewport_count: u32,
                         _viewports: *const Viewport,
@@ -5184,12 +5193,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_scissor_with_count_ext: unsafe {
+            cmd_set_scissor_with_count_ext: {
                 let value = loader(b"vkCmdSetScissorWithCountEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _scissor_count: u32,
                         _scissors: *const Rect2D,
@@ -5199,12 +5208,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_bind_vertex_buffers2_ext: unsafe {
+            cmd_bind_vertex_buffers2_ext: {
                 let value = loader(b"vkCmdBindVertexBuffers2EXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _first_binding: u32,
                         _binding_count: u32,
@@ -5218,12 +5227,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_depth_test_enable_ext: unsafe {
+            cmd_set_depth_test_enable_ext: {
                 let value = loader(b"vkCmdSetDepthTestEnableEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _depth_test_enable: Bool32,
                     ) {
@@ -5232,12 +5241,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_depth_write_enable_ext: unsafe {
+            cmd_set_depth_write_enable_ext: {
                 let value = loader(b"vkCmdSetDepthWriteEnableEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _depth_write_enable: Bool32,
                     ) {
@@ -5246,12 +5255,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_depth_compare_op_ext: unsafe {
+            cmd_set_depth_compare_op_ext: {
                 let value = loader(b"vkCmdSetDepthCompareOpEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _depth_compare_op: CompareOp,
                     ) {
@@ -5260,12 +5269,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_depth_bounds_test_enable_ext: unsafe {
+            cmd_set_depth_bounds_test_enable_ext: {
                 let value = loader(b"vkCmdSetDepthBoundsTestEnableEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _depth_bounds_test_enable: Bool32,
                     ) {
@@ -5274,12 +5283,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_stencil_test_enable_ext: unsafe {
+            cmd_set_stencil_test_enable_ext: {
                 let value = loader(b"vkCmdSetStencilTestEnableEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _stencil_test_enable: Bool32,
                     ) {
@@ -5288,12 +5297,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_stencil_op_ext: unsafe {
+            cmd_set_stencil_op_ext: {
                 let value = loader(b"vkCmdSetStencilOpEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _face_mask: StencilFaceFlags,
                         _fail_op: StencilOp,
@@ -5306,12 +5315,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_private_data_slot_ext: unsafe {
+            create_private_data_slot_ext: {
                 let value = loader(b"vkCreatePrivateDataSlotEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const PrivateDataSlotCreateInfoEXT,
                         _allocator: *const AllocationCallbacks,
@@ -5322,12 +5331,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_private_data_slot_ext: unsafe {
+            destroy_private_data_slot_ext: {
                 let value = loader(b"vkDestroyPrivateDataSlotEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _private_data_slot: PrivateDataSlotEXT,
                         _allocator: *const AllocationCallbacks,
@@ -5337,12 +5346,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            set_private_data_ext: unsafe {
+            set_private_data_ext: {
                 let value = loader(b"vkSetPrivateDataEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _object_type: ObjectType,
                         _object_handle: u64,
@@ -5354,12 +5363,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_private_data_ext: unsafe {
+            get_private_data_ext: {
                 let value = loader(b"vkGetPrivateDataEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _object_type: ObjectType,
                         _object_handle: u64,
@@ -5371,12 +5380,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_buffer2_khr: unsafe {
+            cmd_copy_buffer2_khr: {
                 let value = loader(b"vkCmdCopyBuffer2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _copy_buffer_info: *const CopyBufferInfo2KHR,
                     ) {
@@ -5385,12 +5394,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_image2_khr: unsafe {
+            cmd_copy_image2_khr: {
                 let value = loader(b"vkCmdCopyImage2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _copy_image_info: *const CopyImageInfo2KHR,
                     ) {
@@ -5399,12 +5408,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_blit_image2_khr: unsafe {
+            cmd_blit_image2_khr: {
                 let value = loader(b"vkCmdBlitImage2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _blit_image_info: *const BlitImageInfo2KHR,
                     ) {
@@ -5413,12 +5422,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_buffer_to_image2_khr: unsafe {
+            cmd_copy_buffer_to_image2_khr: {
                 let value = loader(b"vkCmdCopyBufferToImage2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _copy_buffer_to_image_info: *const CopyBufferToImageInfo2KHR,
                     ) {
@@ -5427,12 +5436,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_copy_image_to_buffer2_khr: unsafe {
+            cmd_copy_image_to_buffer2_khr: {
                 let value = loader(b"vkCmdCopyImageToBuffer2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _copy_image_to_buffer_info: *const CopyImageToBufferInfo2KHR,
                     ) {
@@ -5441,12 +5450,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_resolve_image2_khr: unsafe {
+            cmd_resolve_image2_khr: {
                 let value = loader(b"vkCmdResolveImage2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _resolve_image_info: *const ResolveImageInfo2KHR,
                     ) {
@@ -5455,12 +5464,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_fragment_shading_rate_khr: unsafe {
+            cmd_set_fragment_shading_rate_khr: {
                 let value = loader(b"vkCmdSetFragmentShadingRateKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _fragment_size: *const Extent2D,
                         _combiner_ops: *const FragmentShadingRateCombinerOpKHR,
@@ -5470,7 +5479,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_physical_device_fragment_shading_rates_khr: unsafe {
+            get_physical_device_fragment_shading_rates_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceFragmentShadingRatesKHR\0"
                         .as_ptr()
@@ -5479,7 +5488,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _fragment_shading_rate_count: *mut u32,
                         _fragment_shading_rates: *mut PhysicalDeviceFragmentShadingRateKHR,
@@ -5489,12 +5498,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_fragment_shading_rate_enum_nv: unsafe {
+            cmd_set_fragment_shading_rate_enum_nv: {
                 let value = loader(b"vkCmdSetFragmentShadingRateEnumNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _shading_rate: FragmentShadingRateNV,
                         _combiner_ops: *const FragmentShadingRateCombinerOpKHR,
@@ -5504,12 +5513,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_acceleration_structure_build_sizes_khr: unsafe {
+            get_acceleration_structure_build_sizes_khr: {
                 let value = loader(b"vkGetAccelerationStructureBuildSizesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _build_type: AccelerationStructureBuildTypeKHR,
                         _build_info: *const AccelerationStructureBuildGeometryInfoKHR,
@@ -5521,12 +5530,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_event2_khr: unsafe {
+            cmd_set_event2_khr: {
                 let value = loader(b"vkCmdSetEvent2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _event: Event,
                         _dependency_info: *const DependencyInfoKHR,
@@ -5536,12 +5545,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_reset_event2_khr: unsafe {
+            cmd_reset_event2_khr: {
                 let value = loader(b"vkCmdResetEvent2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _event: Event,
                         _stage_mask: PipelineStageFlags2KHR,
@@ -5551,12 +5560,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_wait_events2_khr: unsafe {
+            cmd_wait_events2_khr: {
                 let value = loader(b"vkCmdWaitEvents2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _event_count: u32,
                         _events: *const Event,
@@ -5567,12 +5576,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_pipeline_barrier2_khr: unsafe {
+            cmd_pipeline_barrier2_khr: {
                 let value = loader(b"vkCmdPipelineBarrier2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _dependency_info: *const DependencyInfoKHR,
                     ) {
@@ -5581,12 +5590,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            queue_submit2_khr: unsafe {
+            queue_submit2_khr: {
                 let value = loader(b"vkQueueSubmit2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _queue: Queue,
                         _submit_count: u32,
                         _submits: *const SubmitInfo2KHR,
@@ -5597,12 +5606,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_write_timestamp2_khr: unsafe {
+            cmd_write_timestamp2_khr: {
                 let value = loader(b"vkCmdWriteTimestamp2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _stage: PipelineStageFlags2KHR,
                         _query_pool: QueryPool,
@@ -5613,12 +5622,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_write_buffer_marker2_amd: unsafe {
+            cmd_write_buffer_marker2_amd: {
                 let value = loader(b"vkCmdWriteBufferMarker2AMD\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _stage: PipelineStageFlags2KHR,
                         _dst_buffer: Buffer,
@@ -5630,12 +5639,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_queue_checkpoint_data2_nv: unsafe {
+            get_queue_checkpoint_data2_nv: {
                 let value = loader(b"vkGetQueueCheckpointData2NV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _queue: Queue,
                         _checkpoint_data_count: *mut u32,
                         _checkpoint_data: *mut CheckpointData2NV,
@@ -5645,12 +5654,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            reset_query_pool_ext: unsafe {
+            reset_query_pool_ext: {
                 let value = loader(b"vkResetQueryPoolEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _query_pool: QueryPool,
                         _first_query: u32,
@@ -5661,12 +5670,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            trim_command_pool_khr: unsafe {
+            trim_command_pool_khr: {
                 let value = loader(b"vkTrimCommandPoolKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _command_pool: CommandPool,
                         _flags: CommandPoolTrimFlags,
@@ -5676,12 +5685,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_device_group_peer_memory_features_khr: unsafe {
+            get_device_group_peer_memory_features_khr: {
                 let value = loader(b"vkGetDeviceGroupPeerMemoryFeaturesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _heap_index: u32,
                         _local_device_index: u32,
@@ -5693,12 +5702,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            bind_buffer_memory2_khr: unsafe {
+            bind_buffer_memory2_khr: {
                 let value = loader(b"vkBindBufferMemory2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _bind_info_count: u32,
                         _bind_infos: *const BindBufferMemoryInfo,
@@ -5708,12 +5717,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            bind_image_memory2_khr: unsafe {
+            bind_image_memory2_khr: {
                 let value = loader(b"vkBindImageMemory2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _bind_info_count: u32,
                         _bind_infos: *const BindImageMemoryInfo,
@@ -5723,23 +5732,26 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_set_device_mask_khr: unsafe {
+            cmd_set_device_mask_khr: {
                 let value = loader(b"vkCmdSetDeviceMaskKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_command_buffer: CommandBuffer, _device_mask: u32) {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _device_mask: u32,
+                    ) {
                         panic!("could not load vkCmdSetDeviceMaskKHR")
                     }
                     fallback
                 }
             },
-            cmd_dispatch_base_khr: unsafe {
+            cmd_dispatch_base_khr: {
                 let value = loader(b"vkCmdDispatchBaseKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _base_group_x: u32,
                         _base_group_y: u32,
@@ -5753,12 +5765,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_descriptor_update_template_khr: unsafe {
+            create_descriptor_update_template_khr: {
                 let value = loader(b"vkCreateDescriptorUpdateTemplateKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const DescriptorUpdateTemplateCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -5769,12 +5781,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_descriptor_update_template_khr: unsafe {
+            destroy_descriptor_update_template_khr: {
                 let value = loader(b"vkDestroyDescriptorUpdateTemplateKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _descriptor_update_template: DescriptorUpdateTemplate,
                         _allocator: *const AllocationCallbacks,
@@ -5784,12 +5796,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            update_descriptor_set_with_template_khr: unsafe {
+            update_descriptor_set_with_template_khr: {
                 let value = loader(b"vkUpdateDescriptorSetWithTemplateKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _descriptor_set: DescriptorSet,
                         _descriptor_update_template: DescriptorUpdateTemplate,
@@ -5800,12 +5812,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_buffer_memory_requirements2_khr: unsafe {
+            get_buffer_memory_requirements2_khr: {
                 let value = loader(b"vkGetBufferMemoryRequirements2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const BufferMemoryRequirementsInfo2,
                         _memory_requirements: *mut MemoryRequirements2,
@@ -5815,12 +5827,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_image_memory_requirements2_khr: unsafe {
+            get_image_memory_requirements2_khr: {
                 let value = loader(b"vkGetImageMemoryRequirements2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const ImageMemoryRequirementsInfo2,
                         _memory_requirements: *mut MemoryRequirements2,
@@ -5830,12 +5842,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_image_sparse_memory_requirements2_khr: unsafe {
+            get_image_sparse_memory_requirements2_khr: {
                 let value = loader(b"vkGetImageSparseMemoryRequirements2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const ImageSparseMemoryRequirementsInfo2,
                         _sparse_memory_requirement_count: *mut u32,
@@ -5846,12 +5858,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_sampler_ycbcr_conversion_khr: unsafe {
+            create_sampler_ycbcr_conversion_khr: {
                 let value = loader(b"vkCreateSamplerYcbcrConversionKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const SamplerYcbcrConversionCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -5862,12 +5874,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            destroy_sampler_ycbcr_conversion_khr: unsafe {
+            destroy_sampler_ycbcr_conversion_khr: {
                 let value = loader(b"vkDestroySamplerYcbcrConversionKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _ycbcr_conversion: SamplerYcbcrConversion,
                         _allocator: *const AllocationCallbacks,
@@ -5877,12 +5889,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_descriptor_set_layout_support_khr: unsafe {
+            get_descriptor_set_layout_support_khr: {
                 let value = loader(b"vkGetDescriptorSetLayoutSupportKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const DescriptorSetLayoutCreateInfo,
                         _support: *mut DescriptorSetLayoutSupport,
@@ -5892,12 +5904,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            create_render_pass2_khr: unsafe {
+            create_render_pass2_khr: {
                 let value = loader(b"vkCreateRenderPass2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _create_info: *const RenderPassCreateInfo2,
                         _allocator: *const AllocationCallbacks,
@@ -5908,12 +5920,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_begin_render_pass2_khr: unsafe {
+            cmd_begin_render_pass2_khr: {
                 let value = loader(b"vkCmdBeginRenderPass2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _render_pass_begin: *const RenderPassBeginInfo,
                         _subpass_begin_info: *const SubpassBeginInfo,
@@ -5923,12 +5935,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_next_subpass2_khr: unsafe {
+            cmd_next_subpass2_khr: {
                 let value = loader(b"vkCmdNextSubpass2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _subpass_begin_info: *const SubpassBeginInfo,
                         _subpass_end_info: *const SubpassEndInfo,
@@ -5938,12 +5950,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_end_render_pass2_khr: unsafe {
+            cmd_end_render_pass2_khr: {
                 let value = loader(b"vkCmdEndRenderPass2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _subpass_end_info: *const SubpassEndInfo,
                     ) {
@@ -5952,12 +5964,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_semaphore_counter_value_khr: unsafe {
+            get_semaphore_counter_value_khr: {
                 let value = loader(b"vkGetSemaphoreCounterValueKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _semaphore: Semaphore,
                         _value: *mut u64,
@@ -5967,12 +5979,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            wait_semaphores_khr: unsafe {
+            wait_semaphores_khr: {
                 let value = loader(b"vkWaitSemaphoresKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _wait_info: *const SemaphoreWaitInfo,
                         _timeout: u64,
@@ -5982,12 +5994,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            signal_semaphore_khr: unsafe {
+            signal_semaphore_khr: {
                 let value = loader(b"vkSignalSemaphoreKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _signal_info: *const SemaphoreSignalInfo,
                     ) -> Result {
@@ -5996,12 +6008,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_indirect_count_khr: unsafe {
+            cmd_draw_indirect_count_khr: {
                 let value = loader(b"vkCmdDrawIndirectCountKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _buffer: Buffer,
                         _offset: DeviceSize,
@@ -6015,12 +6027,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_indirect_count_amd: unsafe {
+            cmd_draw_indirect_count_amd: {
                 let value = loader(b"vkCmdDrawIndirectCountAMD\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _buffer: Buffer,
                         _offset: DeviceSize,
@@ -6034,12 +6046,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_indexed_indirect_count_khr: unsafe {
+            cmd_draw_indexed_indirect_count_khr: {
                 let value = loader(b"vkCmdDrawIndexedIndirectCountKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _buffer: Buffer,
                         _offset: DeviceSize,
@@ -6053,12 +6065,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            cmd_draw_indexed_indirect_count_amd: unsafe {
+            cmd_draw_indexed_indirect_count_amd: {
                 let value = loader(b"vkCmdDrawIndexedIndirectCountAMD\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _buffer: Buffer,
                         _offset: DeviceSize,
@@ -6072,12 +6084,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_ray_tracing_shader_group_handles_nv: unsafe {
+            get_ray_tracing_shader_group_handles_nv: {
                 let value = loader(b"vkGetRayTracingShaderGroupHandlesNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _pipeline: Pipeline,
                         _first_group: u32,
@@ -6090,12 +6102,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_buffer_opaque_capture_address_khr: unsafe {
+            get_buffer_opaque_capture_address_khr: {
                 let value = loader(b"vkGetBufferOpaqueCaptureAddressKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const BufferDeviceAddressInfo,
                     ) -> u64 {
@@ -6104,12 +6116,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_buffer_device_address_khr: unsafe {
+            get_buffer_device_address_khr: {
                 let value = loader(b"vkGetBufferDeviceAddressKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const BufferDeviceAddressInfo,
                     ) -> DeviceAddress {
@@ -6118,12 +6130,12 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_buffer_device_address_ext: unsafe {
+            get_buffer_device_address_ext: {
                 let value = loader(b"vkGetBufferDeviceAddressEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const BufferDeviceAddressInfo,
                     ) -> DeviceAddress {
@@ -6132,7 +6144,7 @@ impl DeviceCommands {
                     fallback
                 }
             },
-            get_device_memory_opaque_capture_address_khr: unsafe {
+            get_device_memory_opaque_capture_address_khr: {
                 let value = loader(
                     b"vkGetDeviceMemoryOpaqueCaptureAddressKHR\0"
                         .as_ptr()
@@ -6141,7 +6153,7 @@ impl DeviceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _info: *const DeviceMemoryOpaqueCaptureAddressInfo,
                     ) -> u64 {
@@ -6165,14 +6177,16 @@ pub struct EntryCommands {
 
 impl EntryCommands {
     #[inline]
-    pub fn load(mut loader: impl FnMut(*const c_char) -> Option<extern "system" fn()>) -> Self {
+    pub unsafe fn load(
+        mut loader: impl FnMut(*const c_char) -> Option<unsafe extern "system" fn()>,
+    ) -> Self {
         Self {
-            create_instance: unsafe {
+            create_instance: {
                 let value = loader(b"vkCreateInstance\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _create_info: *const InstanceCreateInfo,
                         _allocator: *const AllocationCallbacks,
                         _instance: *mut Instance,
@@ -6182,23 +6196,23 @@ impl EntryCommands {
                     fallback
                 }
             },
-            enumerate_instance_version: unsafe {
+            enumerate_instance_version: {
                 let value = loader(b"vkEnumerateInstanceVersion\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_api_version: *mut u32) -> Result {
+                    unsafe extern "system" fn fallback(_api_version: *mut u32) -> Result {
                         panic!("could not load vkEnumerateInstanceVersion")
                     }
                     fallback
                 }
             },
-            enumerate_instance_layer_properties: unsafe {
+            enumerate_instance_layer_properties: {
                 let value = loader(b"vkEnumerateInstanceLayerProperties\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _property_count: *mut u32,
                         _properties: *mut LayerProperties,
                     ) -> Result {
@@ -6207,12 +6221,12 @@ impl EntryCommands {
                     fallback
                 }
             },
-            enumerate_instance_extension_properties: unsafe {
+            enumerate_instance_extension_properties: {
                 let value = loader(b"vkEnumerateInstanceExtensionProperties\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _layer_name: *const c_char,
                         _property_count: *mut u32,
                         _properties: *mut ExtensionProperties,
@@ -6347,14 +6361,16 @@ pub struct InstanceCommands {
 
 impl InstanceCommands {
     #[inline]
-    pub fn load(mut loader: impl FnMut(*const c_char) -> Option<extern "system" fn()>) -> Self {
+    pub unsafe fn load(
+        mut loader: impl FnMut(*const c_char) -> Option<unsafe extern "system" fn()>,
+    ) -> Self {
         Self {
-            destroy_instance: unsafe {
+            destroy_instance: {
                 let value = loader(b"vkDestroyInstance\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _allocator: *const AllocationCallbacks,
                     ) {
@@ -6363,12 +6379,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            enumerate_physical_devices: unsafe {
+            enumerate_physical_devices: {
                 let value = loader(b"vkEnumeratePhysicalDevices\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _physical_device_count: *mut u32,
                         _physical_devices: *mut PhysicalDevice,
@@ -6378,12 +6394,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_properties: unsafe {
+            get_physical_device_properties: {
                 let value = loader(b"vkGetPhysicalDeviceProperties\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _properties: *mut PhysicalDeviceProperties,
                     ) {
@@ -6392,7 +6408,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_queue_family_properties: unsafe {
+            get_physical_device_queue_family_properties: {
                 let value = loader(
                     b"vkGetPhysicalDeviceQueueFamilyProperties\0"
                         .as_ptr()
@@ -6401,7 +6417,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _queue_family_property_count: *mut u32,
                         _queue_family_properties: *mut QueueFamilyProperties,
@@ -6411,12 +6427,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_memory_properties: unsafe {
+            get_physical_device_memory_properties: {
                 let value = loader(b"vkGetPhysicalDeviceMemoryProperties\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _memory_properties: *mut PhysicalDeviceMemoryProperties,
                     ) {
@@ -6425,12 +6441,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_features: unsafe {
+            get_physical_device_features: {
                 let value = loader(b"vkGetPhysicalDeviceFeatures\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _features: *mut PhysicalDeviceFeatures,
                     ) {
@@ -6439,12 +6455,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_format_properties: unsafe {
+            get_physical_device_format_properties: {
                 let value = loader(b"vkGetPhysicalDeviceFormatProperties\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _format: Format,
                         _format_properties: *mut FormatProperties,
@@ -6454,7 +6470,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_image_format_properties: unsafe {
+            get_physical_device_image_format_properties: {
                 let value = loader(
                     b"vkGetPhysicalDeviceImageFormatProperties\0"
                         .as_ptr()
@@ -6463,7 +6479,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _format: Format,
                         _type_: ImageType,
@@ -6477,12 +6493,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_device: unsafe {
+            create_device: {
                 let value = loader(b"vkCreateDevice\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _create_info: *const DeviceCreateInfo,
                         _allocator: *const AllocationCallbacks,
@@ -6493,12 +6509,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            enumerate_device_layer_properties: unsafe {
+            enumerate_device_layer_properties: {
                 let value = loader(b"vkEnumerateDeviceLayerProperties\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _property_count: *mut u32,
                         _properties: *mut LayerProperties,
@@ -6508,12 +6524,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            enumerate_device_extension_properties: unsafe {
+            enumerate_device_extension_properties: {
                 let value = loader(b"vkEnumerateDeviceExtensionProperties\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _layer_name: *const c_char,
                         _property_count: *mut u32,
@@ -6524,7 +6540,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_sparse_image_format_properties: unsafe {
+            get_physical_device_sparse_image_format_properties: {
                 let value = loader(
                     b"vkGetPhysicalDeviceSparseImageFormatProperties\0"
                         .as_ptr()
@@ -6533,7 +6549,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _format: Format,
                         _type_: ImageType,
@@ -6548,12 +6564,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_android_surface_khr: unsafe {
+            create_android_surface_khr: {
                 let value = loader(b"vkCreateAndroidSurfaceKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const AndroidSurfaceCreateInfoKHR,
                         _allocator: *const AllocationCallbacks,
@@ -6564,12 +6580,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_display_properties_khr: unsafe {
+            get_physical_device_display_properties_khr: {
                 let value = loader(b"vkGetPhysicalDeviceDisplayPropertiesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _property_count: *mut u32,
                         _properties: *mut DisplayPropertiesKHR,
@@ -6579,7 +6595,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_display_plane_properties_khr: unsafe {
+            get_physical_device_display_plane_properties_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceDisplayPlanePropertiesKHR\0"
                         .as_ptr()
@@ -6588,7 +6604,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _property_count: *mut u32,
                         _properties: *mut DisplayPlanePropertiesKHR,
@@ -6598,12 +6614,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_display_plane_supported_displays_khr: unsafe {
+            get_display_plane_supported_displays_khr: {
                 let value = loader(b"vkGetDisplayPlaneSupportedDisplaysKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _plane_index: u32,
                         _display_count: *mut u32,
@@ -6614,12 +6630,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_display_mode_properties_khr: unsafe {
+            get_display_mode_properties_khr: {
                 let value = loader(b"vkGetDisplayModePropertiesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _display: DisplayKHR,
                         _property_count: *mut u32,
@@ -6630,12 +6646,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_display_mode_khr: unsafe {
+            create_display_mode_khr: {
                 let value = loader(b"vkCreateDisplayModeKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _display: DisplayKHR,
                         _create_info: *const DisplayModeCreateInfoKHR,
@@ -6647,12 +6663,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_display_plane_capabilities_khr: unsafe {
+            get_display_plane_capabilities_khr: {
                 let value = loader(b"vkGetDisplayPlaneCapabilitiesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _mode: DisplayModeKHR,
                         _plane_index: u32,
@@ -6663,12 +6679,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_display_plane_surface_khr: unsafe {
+            create_display_plane_surface_khr: {
                 let value = loader(b"vkCreateDisplayPlaneSurfaceKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const DisplaySurfaceCreateInfoKHR,
                         _allocator: *const AllocationCallbacks,
@@ -6679,12 +6695,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            destroy_surface_khr: unsafe {
+            destroy_surface_khr: {
                 let value = loader(b"vkDestroySurfaceKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _surface: SurfaceKHR,
                         _allocator: *const AllocationCallbacks,
@@ -6694,12 +6710,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_surface_support_khr: unsafe {
+            get_physical_device_surface_support_khr: {
                 let value = loader(b"vkGetPhysicalDeviceSurfaceSupportKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _queue_family_index: u32,
                         _surface: SurfaceKHR,
@@ -6710,7 +6726,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_surface_capabilities_khr: unsafe {
+            get_physical_device_surface_capabilities_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceSurfaceCapabilitiesKHR\0"
                         .as_ptr()
@@ -6719,7 +6735,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _surface: SurfaceKHR,
                         _surface_capabilities: *mut SurfaceCapabilitiesKHR,
@@ -6729,12 +6745,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_surface_formats_khr: unsafe {
+            get_physical_device_surface_formats_khr: {
                 let value = loader(b"vkGetPhysicalDeviceSurfaceFormatsKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _surface: SurfaceKHR,
                         _surface_format_count: *mut u32,
@@ -6745,7 +6761,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_surface_present_modes_khr: unsafe {
+            get_physical_device_surface_present_modes_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceSurfacePresentModesKHR\0"
                         .as_ptr()
@@ -6754,7 +6770,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _surface: SurfaceKHR,
                         _present_mode_count: *mut u32,
@@ -6765,12 +6781,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_vi_surface_nn: unsafe {
+            create_vi_surface_nn: {
                 let value = loader(b"vkCreateViSurfaceNN\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const ViSurfaceCreateInfoNN,
                         _allocator: *const AllocationCallbacks,
@@ -6781,12 +6797,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_wayland_surface_khr: unsafe {
+            create_wayland_surface_khr: {
                 let value = loader(b"vkCreateWaylandSurfaceKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const WaylandSurfaceCreateInfoKHR,
                         _allocator: *const AllocationCallbacks,
@@ -6797,7 +6813,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_wayland_presentation_support_khr: unsafe {
+            get_physical_device_wayland_presentation_support_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceWaylandPresentationSupportKHR\0"
                         .as_ptr()
@@ -6806,7 +6822,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _queue_family_index: u32,
                         _display: *mut wl_display,
@@ -6816,12 +6832,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_win32_surface_khr: unsafe {
+            create_win32_surface_khr: {
                 let value = loader(b"vkCreateWin32SurfaceKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const Win32SurfaceCreateInfoKHR,
                         _allocator: *const AllocationCallbacks,
@@ -6832,7 +6848,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_win32_presentation_support_khr: unsafe {
+            get_physical_device_win32_presentation_support_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceWin32PresentationSupportKHR\0"
                         .as_ptr()
@@ -6841,7 +6857,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _queue_family_index: u32,
                     ) -> Bool32 {
@@ -6850,12 +6866,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_xlib_surface_khr: unsafe {
+            create_xlib_surface_khr: {
                 let value = loader(b"vkCreateXlibSurfaceKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const XlibSurfaceCreateInfoKHR,
                         _allocator: *const AllocationCallbacks,
@@ -6866,7 +6882,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_xlib_presentation_support_khr: unsafe {
+            get_physical_device_xlib_presentation_support_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceXlibPresentationSupportKHR\0"
                         .as_ptr()
@@ -6875,7 +6891,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _queue_family_index: u32,
                         _dpy: *mut Display,
@@ -6886,12 +6902,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_xcb_surface_khr: unsafe {
+            create_xcb_surface_khr: {
                 let value = loader(b"vkCreateXcbSurfaceKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const XcbSurfaceCreateInfoKHR,
                         _allocator: *const AllocationCallbacks,
@@ -6902,7 +6918,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_xcb_presentation_support_khr: unsafe {
+            get_physical_device_xcb_presentation_support_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceXcbPresentationSupportKHR\0"
                         .as_ptr()
@@ -6911,7 +6927,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _queue_family_index: u32,
                         _connection: *mut xcb_connection_t,
@@ -6922,12 +6938,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_direct_fb_surface_ext: unsafe {
+            create_direct_fb_surface_ext: {
                 let value = loader(b"vkCreateDirectFBSurfaceEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const DirectFBSurfaceCreateInfoEXT,
                         _allocator: *const AllocationCallbacks,
@@ -6938,7 +6954,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_direct_fb_presentation_support_ext: unsafe {
+            get_physical_device_direct_fb_presentation_support_ext: {
                 let value = loader(
                     b"vkGetPhysicalDeviceDirectFBPresentationSupportEXT\0"
                         .as_ptr()
@@ -6947,7 +6963,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _queue_family_index: u32,
                         _dfb: *mut IDirectFB,
@@ -6957,12 +6973,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_image_pipe_surface_fuchsia: unsafe {
+            create_image_pipe_surface_fuchsia: {
                 let value = loader(b"vkCreateImagePipeSurfaceFUCHSIA\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const ImagePipeSurfaceCreateInfoFUCHSIA,
                         _allocator: *const AllocationCallbacks,
@@ -6973,12 +6989,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_stream_descriptor_surface_ggp: unsafe {
+            create_stream_descriptor_surface_ggp: {
                 let value = loader(b"vkCreateStreamDescriptorSurfaceGGP\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const StreamDescriptorSurfaceCreateInfoGGP,
                         _allocator: *const AllocationCallbacks,
@@ -6989,12 +7005,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_screen_surface_qnx: unsafe {
+            create_screen_surface_qnx: {
                 let value = loader(b"vkCreateScreenSurfaceQNX\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const ScreenSurfaceCreateInfoQNX,
                         _allocator: *const AllocationCallbacks,
@@ -7005,7 +7021,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_screen_presentation_support_qnx: unsafe {
+            get_physical_device_screen_presentation_support_qnx: {
                 let value = loader(
                     b"vkGetPhysicalDeviceScreenPresentationSupportQNX\0"
                         .as_ptr()
@@ -7014,7 +7030,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _queue_family_index: u32,
                         _window: *mut _screen_window,
@@ -7024,12 +7040,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_debug_report_callback_ext: unsafe {
+            create_debug_report_callback_ext: {
                 let value = loader(b"vkCreateDebugReportCallbackEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const DebugReportCallbackCreateInfoEXT,
                         _allocator: *const AllocationCallbacks,
@@ -7040,12 +7056,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            destroy_debug_report_callback_ext: unsafe {
+            destroy_debug_report_callback_ext: {
                 let value = loader(b"vkDestroyDebugReportCallbackEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _callback: DebugReportCallbackEXT,
                         _allocator: *const AllocationCallbacks,
@@ -7055,12 +7071,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            debug_report_message_ext: unsafe {
+            debug_report_message_ext: {
                 let value = loader(b"vkDebugReportMessageEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _flags: DebugReportFlagsEXT,
                         _object_type: DebugReportObjectTypeEXT,
@@ -7075,7 +7091,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_external_image_format_properties_nv: unsafe {
+            get_physical_device_external_image_format_properties_nv: {
                 let value = loader(
                     b"vkGetPhysicalDeviceExternalImageFormatPropertiesNV\0"
                         .as_ptr()
@@ -7084,7 +7100,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _format: Format,
                         _type_: ImageType,
@@ -7099,12 +7115,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_features2: unsafe {
+            get_physical_device_features2: {
                 let value = loader(b"vkGetPhysicalDeviceFeatures2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _features: *mut PhysicalDeviceFeatures2,
                     ) {
@@ -7113,12 +7129,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_properties2: unsafe {
+            get_physical_device_properties2: {
                 let value = loader(b"vkGetPhysicalDeviceProperties2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _properties: *mut PhysicalDeviceProperties2,
                     ) {
@@ -7127,12 +7143,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_format_properties2: unsafe {
+            get_physical_device_format_properties2: {
                 let value = loader(b"vkGetPhysicalDeviceFormatProperties2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _format: Format,
                         _format_properties: *mut FormatProperties2,
@@ -7142,7 +7158,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_image_format_properties2: unsafe {
+            get_physical_device_image_format_properties2: {
                 let value = loader(
                     b"vkGetPhysicalDeviceImageFormatProperties2\0"
                         .as_ptr()
@@ -7151,7 +7167,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _image_format_info: *const PhysicalDeviceImageFormatInfo2,
                         _image_format_properties: *mut ImageFormatProperties2,
@@ -7161,7 +7177,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_queue_family_properties2: unsafe {
+            get_physical_device_queue_family_properties2: {
                 let value = loader(
                     b"vkGetPhysicalDeviceQueueFamilyProperties2\0"
                         .as_ptr()
@@ -7170,7 +7186,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _queue_family_property_count: *mut u32,
                         _queue_family_properties: *mut QueueFamilyProperties2,
@@ -7180,12 +7196,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_memory_properties2: unsafe {
+            get_physical_device_memory_properties2: {
                 let value = loader(b"vkGetPhysicalDeviceMemoryProperties2\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _memory_properties: *mut PhysicalDeviceMemoryProperties2,
                     ) {
@@ -7194,7 +7210,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_sparse_image_format_properties2: unsafe {
+            get_physical_device_sparse_image_format_properties2: {
                 let value = loader(
                     b"vkGetPhysicalDeviceSparseImageFormatProperties2\0"
                         .as_ptr()
@@ -7203,7 +7219,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _format_info: *const PhysicalDeviceSparseImageFormatInfo2,
                         _property_count: *mut u32,
@@ -7214,7 +7230,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_external_buffer_properties: unsafe {
+            get_physical_device_external_buffer_properties: {
                 let value = loader(
                     b"vkGetPhysicalDeviceExternalBufferProperties\0"
                         .as_ptr()
@@ -7223,7 +7239,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _external_buffer_info: *const PhysicalDeviceExternalBufferInfo,
                         _external_buffer_properties: *mut ExternalBufferProperties,
@@ -7233,7 +7249,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_external_semaphore_properties: unsafe {
+            get_physical_device_external_semaphore_properties: {
                 let value = loader(
                     b"vkGetPhysicalDeviceExternalSemaphoreProperties\0"
                         .as_ptr()
@@ -7242,7 +7258,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _external_semaphore_info: *const PhysicalDeviceExternalSemaphoreInfo,
                         _external_semaphore_properties: *mut ExternalSemaphoreProperties,
@@ -7252,7 +7268,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_external_fence_properties: unsafe {
+            get_physical_device_external_fence_properties: {
                 let value = loader(
                     b"vkGetPhysicalDeviceExternalFenceProperties\0"
                         .as_ptr()
@@ -7261,7 +7277,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _external_fence_info: *const PhysicalDeviceExternalFenceInfo,
                         _external_fence_properties: *mut ExternalFenceProperties,
@@ -7271,12 +7287,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            release_display_ext: unsafe {
+            release_display_ext: {
                 let value = loader(b"vkReleaseDisplayEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _display: DisplayKHR,
                     ) -> Result {
@@ -7285,12 +7301,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            acquire_xlib_display_ext: unsafe {
+            acquire_xlib_display_ext: {
                 let value = loader(b"vkAcquireXlibDisplayEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _dpy: *mut Display,
                         _display: DisplayKHR,
@@ -7300,12 +7316,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_rand_r_output_display_ext: unsafe {
+            get_rand_r_output_display_ext: {
                 let value = loader(b"vkGetRandROutputDisplayEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _dpy: *mut Display,
                         _rr_output: RROutput,
@@ -7316,7 +7332,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_surface_capabilities2_ext: unsafe {
+            get_physical_device_surface_capabilities2_ext: {
                 let value = loader(
                     b"vkGetPhysicalDeviceSurfaceCapabilities2EXT\0"
                         .as_ptr()
@@ -7325,7 +7341,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _surface: SurfaceKHR,
                         _surface_capabilities: *mut SurfaceCapabilities2EXT,
@@ -7335,12 +7351,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            enumerate_physical_device_groups: unsafe {
+            enumerate_physical_device_groups: {
                 let value = loader(b"vkEnumeratePhysicalDeviceGroups\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _physical_device_group_count: *mut u32,
                         _physical_device_group_properties: *mut PhysicalDeviceGroupProperties,
@@ -7350,12 +7366,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_ios_surface_mvk: unsafe {
+            create_ios_surface_mvk: {
                 let value = loader(b"vkCreateIOSSurfaceMVK\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const IOSSurfaceCreateInfoMVK,
                         _allocator: *const AllocationCallbacks,
@@ -7366,12 +7382,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_mac_os_surface_mvk: unsafe {
+            create_mac_os_surface_mvk: {
                 let value = loader(b"vkCreateMacOSSurfaceMVK\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const MacOSSurfaceCreateInfoMVK,
                         _allocator: *const AllocationCallbacks,
@@ -7382,12 +7398,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_metal_surface_ext: unsafe {
+            create_metal_surface_ext: {
                 let value = loader(b"vkCreateMetalSurfaceEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const MetalSurfaceCreateInfoEXT,
                         _allocator: *const AllocationCallbacks,
@@ -7398,7 +7414,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_surface_capabilities2_khr: unsafe {
+            get_physical_device_surface_capabilities2_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceSurfaceCapabilities2KHR\0"
                         .as_ptr()
@@ -7407,7 +7423,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _surface_info: *const PhysicalDeviceSurfaceInfo2KHR,
                         _surface_capabilities: *mut SurfaceCapabilities2KHR,
@@ -7417,12 +7433,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_surface_formats2_khr: unsafe {
+            get_physical_device_surface_formats2_khr: {
                 let value = loader(b"vkGetPhysicalDeviceSurfaceFormats2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _surface_info: *const PhysicalDeviceSurfaceInfo2KHR,
                         _surface_format_count: *mut u32,
@@ -7433,7 +7449,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_display_properties2_khr: unsafe {
+            get_physical_device_display_properties2_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceDisplayProperties2KHR\0"
                         .as_ptr()
@@ -7442,7 +7458,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _property_count: *mut u32,
                         _properties: *mut DisplayProperties2KHR,
@@ -7452,7 +7468,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_display_plane_properties2_khr: unsafe {
+            get_physical_device_display_plane_properties2_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceDisplayPlaneProperties2KHR\0"
                         .as_ptr()
@@ -7461,7 +7477,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _property_count: *mut u32,
                         _properties: *mut DisplayPlaneProperties2KHR,
@@ -7471,12 +7487,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_display_mode_properties2_khr: unsafe {
+            get_display_mode_properties2_khr: {
                 let value = loader(b"vkGetDisplayModeProperties2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _display: DisplayKHR,
                         _property_count: *mut u32,
@@ -7487,12 +7503,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_display_plane_capabilities2_khr: unsafe {
+            get_display_plane_capabilities2_khr: {
                 let value = loader(b"vkGetDisplayPlaneCapabilities2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _display_plane_info: *const DisplayPlaneInfo2KHR,
                         _capabilities: *mut DisplayPlaneCapabilities2KHR,
@@ -7502,12 +7518,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            set_debug_utils_object_name_ext: unsafe {
+            set_debug_utils_object_name_ext: {
                 let value = loader(b"vkSetDebugUtilsObjectNameEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _name_info: *const DebugUtilsObjectNameInfoEXT,
                     ) -> Result {
@@ -7516,12 +7532,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            set_debug_utils_object_tag_ext: unsafe {
+            set_debug_utils_object_tag_ext: {
                 let value = loader(b"vkSetDebugUtilsObjectTagEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _tag_info: *const DebugUtilsObjectTagInfoEXT,
                     ) -> Result {
@@ -7530,12 +7546,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            queue_begin_debug_utils_label_ext: unsafe {
+            queue_begin_debug_utils_label_ext: {
                 let value = loader(b"vkQueueBeginDebugUtilsLabelEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _queue: Queue,
                         _label_info: *const DebugUtilsLabelEXT,
                     ) {
@@ -7544,23 +7560,23 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            queue_end_debug_utils_label_ext: unsafe {
+            queue_end_debug_utils_label_ext: {
                 let value = loader(b"vkQueueEndDebugUtilsLabelEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_queue: Queue) {
+                    unsafe extern "system" fn fallback(_queue: Queue) {
                         panic!("could not load vkQueueEndDebugUtilsLabelEXT")
                     }
                     fallback
                 }
             },
-            queue_insert_debug_utils_label_ext: unsafe {
+            queue_insert_debug_utils_label_ext: {
                 let value = loader(b"vkQueueInsertDebugUtilsLabelEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _queue: Queue,
                         _label_info: *const DebugUtilsLabelEXT,
                     ) {
@@ -7569,12 +7585,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            cmd_begin_debug_utils_label_ext: unsafe {
+            cmd_begin_debug_utils_label_ext: {
                 let value = loader(b"vkCmdBeginDebugUtilsLabelEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _label_info: *const DebugUtilsLabelEXT,
                     ) {
@@ -7583,23 +7599,23 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            cmd_end_debug_utils_label_ext: unsafe {
+            cmd_end_debug_utils_label_ext: {
                 let value = loader(b"vkCmdEndDebugUtilsLabelEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(_command_buffer: CommandBuffer) {
+                    unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) {
                         panic!("could not load vkCmdEndDebugUtilsLabelEXT")
                     }
                     fallback
                 }
             },
-            cmd_insert_debug_utils_label_ext: unsafe {
+            cmd_insert_debug_utils_label_ext: {
                 let value = loader(b"vkCmdInsertDebugUtilsLabelEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
                         _label_info: *const DebugUtilsLabelEXT,
                     ) {
@@ -7608,12 +7624,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_debug_utils_messenger_ext: unsafe {
+            create_debug_utils_messenger_ext: {
                 let value = loader(b"vkCreateDebugUtilsMessengerEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const DebugUtilsMessengerCreateInfoEXT,
                         _allocator: *const AllocationCallbacks,
@@ -7624,12 +7640,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            destroy_debug_utils_messenger_ext: unsafe {
+            destroy_debug_utils_messenger_ext: {
                 let value = loader(b"vkDestroyDebugUtilsMessengerEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _messenger: DebugUtilsMessengerEXT,
                         _allocator: *const AllocationCallbacks,
@@ -7639,12 +7655,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            submit_debug_utils_message_ext: unsafe {
+            submit_debug_utils_message_ext: {
                 let value = loader(b"vkSubmitDebugUtilsMessageEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _message_severity: DebugUtilsMessageSeverityFlagsEXT,
                         _message_types: DebugUtilsMessageTypeFlagsEXT,
@@ -7655,12 +7671,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            create_headless_surface_ext: unsafe {
+            create_headless_surface_ext: {
                 let value = loader(b"vkCreateHeadlessSurfaceEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _create_info: *const HeadlessSurfaceCreateInfoEXT,
                         _allocator: *const AllocationCallbacks,
@@ -7671,12 +7687,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_features2_khr: unsafe {
+            get_physical_device_features2_khr: {
                 let value = loader(b"vkGetPhysicalDeviceFeatures2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _features: *mut PhysicalDeviceFeatures2,
                     ) {
@@ -7685,12 +7701,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_properties2_khr: unsafe {
+            get_physical_device_properties2_khr: {
                 let value = loader(b"vkGetPhysicalDeviceProperties2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _properties: *mut PhysicalDeviceProperties2,
                     ) {
@@ -7699,12 +7715,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_format_properties2_khr: unsafe {
+            get_physical_device_format_properties2_khr: {
                 let value = loader(b"vkGetPhysicalDeviceFormatProperties2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _format: Format,
                         _format_properties: *mut FormatProperties2,
@@ -7714,7 +7730,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_image_format_properties2_khr: unsafe {
+            get_physical_device_image_format_properties2_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceImageFormatProperties2KHR\0"
                         .as_ptr()
@@ -7723,7 +7739,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _image_format_info: *const PhysicalDeviceImageFormatInfo2,
                         _image_format_properties: *mut ImageFormatProperties2,
@@ -7733,7 +7749,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_queue_family_properties2_khr: unsafe {
+            get_physical_device_queue_family_properties2_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceQueueFamilyProperties2KHR\0"
                         .as_ptr()
@@ -7742,7 +7758,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _queue_family_property_count: *mut u32,
                         _queue_family_properties: *mut QueueFamilyProperties2,
@@ -7752,12 +7768,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_memory_properties2_khr: unsafe {
+            get_physical_device_memory_properties2_khr: {
                 let value = loader(b"vkGetPhysicalDeviceMemoryProperties2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _memory_properties: *mut PhysicalDeviceMemoryProperties2,
                     ) {
@@ -7766,7 +7782,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_sparse_image_format_properties2_khr: unsafe {
+            get_physical_device_sparse_image_format_properties2_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceSparseImageFormatProperties2KHR\0"
                         .as_ptr()
@@ -7775,7 +7791,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _format_info: *const PhysicalDeviceSparseImageFormatInfo2,
                         _property_count: *mut u32,
@@ -7786,7 +7802,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_external_buffer_properties_khr: unsafe {
+            get_physical_device_external_buffer_properties_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceExternalBufferPropertiesKHR\0"
                         .as_ptr()
@@ -7795,7 +7811,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _external_buffer_info: *const PhysicalDeviceExternalBufferInfo,
                         _external_buffer_properties: *mut ExternalBufferProperties,
@@ -7805,7 +7821,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_external_semaphore_properties_khr: unsafe {
+            get_physical_device_external_semaphore_properties_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceExternalSemaphorePropertiesKHR\0"
                         .as_ptr()
@@ -7814,7 +7830,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _external_semaphore_info: *const PhysicalDeviceExternalSemaphoreInfo,
                         _external_semaphore_properties: *mut ExternalSemaphoreProperties,
@@ -7824,7 +7840,7 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            get_physical_device_external_fence_properties_khr: unsafe {
+            get_physical_device_external_fence_properties_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceExternalFencePropertiesKHR\0"
                         .as_ptr()
@@ -7833,7 +7849,7 @@ impl InstanceCommands {
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _external_fence_info: *const PhysicalDeviceExternalFenceInfo,
                         _external_fence_properties: *mut ExternalFenceProperties,
@@ -7843,12 +7859,12 @@ impl InstanceCommands {
                     fallback
                 }
             },
-            enumerate_physical_device_groups_khr: unsafe {
+            enumerate_physical_device_groups_khr: {
                 let value = loader(b"vkEnumeratePhysicalDeviceGroupsKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _physical_device_group_count: *mut u32,
                         _physical_device_group_properties: *mut PhysicalDeviceGroupProperties,
@@ -7871,14 +7887,16 @@ pub struct StaticCommands {
 
 impl StaticCommands {
     #[inline]
-    pub fn load(mut loader: impl FnMut(*const c_char) -> Option<extern "system" fn()>) -> Self {
+    pub unsafe fn load(
+        mut loader: impl FnMut(*const c_char) -> Option<unsafe extern "system" fn()>,
+    ) -> Self {
         Self {
-            get_device_proc_addr: unsafe {
+            get_device_proc_addr: {
                 let value = loader(b"vkGetDeviceProcAddr\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _device: Device,
                         _name: *const c_char,
                     ) -> PFN_vkVoidFunction {
@@ -7887,12 +7905,12 @@ impl StaticCommands {
                     fallback
                 }
             },
-            get_instance_proc_addr: unsafe {
+            get_instance_proc_addr: {
                 let value = loader(b"vkGetInstanceProcAddr\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
-                    extern "system" fn fallback(
+                    unsafe extern "system" fn fallback(
                         _instance: Instance,
                         _name: *const c_char,
                     ) -> PFN_vkVoidFunction {

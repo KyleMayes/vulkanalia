@@ -8,6 +8,7 @@
 #![allow(
     non_camel_case_types,
     non_snake_case,
+    clippy::missing_safety_docs,
     clippy::too_many_arguments,
     clippy::type_complexity,
     clippy::upper_case_acronyms
@@ -19,10 +20,10 @@ use crate::*;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireFullScreenExclusiveModeEXT.html>
 pub type PFN_vkAcquireFullScreenExclusiveModeEXT =
-    extern "system" fn(_device: Device, _swapchain: SwapchainKHR) -> Result;
+    unsafe extern "system" fn(_device: Device, _swapchain: SwapchainKHR) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireImageANDROID.html>
-pub type PFN_vkAcquireImageANDROID = extern "system" fn(
+pub type PFN_vkAcquireImageANDROID = unsafe extern "system" fn(
     _device: Device,
     _image: Image,
     _native_fence_fd: c_int,
@@ -31,14 +32,14 @@ pub type PFN_vkAcquireImageANDROID = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireNextImage2KHR.html>
-pub type PFN_vkAcquireNextImage2KHR = extern "system" fn(
+pub type PFN_vkAcquireNextImage2KHR = unsafe extern "system" fn(
     _device: Device,
     _acquire_info: *const AcquireNextImageInfoKHR,
     _image_index: *mut u32,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireNextImageKHR.html>
-pub type PFN_vkAcquireNextImageKHR = extern "system" fn(
+pub type PFN_vkAcquireNextImageKHR = unsafe extern "system" fn(
     _device: Device,
     _swapchain: SwapchainKHR,
     _timeout: u64,
@@ -48,7 +49,7 @@ pub type PFN_vkAcquireNextImageKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquirePerformanceConfigurationINTEL.html>
-pub type PFN_vkAcquirePerformanceConfigurationINTEL = extern "system" fn(
+pub type PFN_vkAcquirePerformanceConfigurationINTEL = unsafe extern "system" fn(
     _device: Device,
     _acquire_info: *const PerformanceConfigurationAcquireInfoINTEL,
     _configuration: *mut PerformanceConfigurationINTEL,
@@ -56,35 +57,35 @@ pub type PFN_vkAcquirePerformanceConfigurationINTEL = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireProfilingLockKHR.html>
 pub type PFN_vkAcquireProfilingLockKHR =
-    extern "system" fn(_device: Device, _info: *const AcquireProfilingLockInfoKHR) -> Result;
+    unsafe extern "system" fn(_device: Device, _info: *const AcquireProfilingLockInfoKHR) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireWinrtDisplayNV.html>
 pub type PFN_vkAcquireWinrtDisplayNV =
-    extern "system" fn(_physical_device: PhysicalDevice, _display: DisplayKHR) -> Result;
+    unsafe extern "system" fn(_physical_device: PhysicalDevice, _display: DisplayKHR) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireXlibDisplayEXT.html>
-pub type PFN_vkAcquireXlibDisplayEXT = extern "system" fn(
+pub type PFN_vkAcquireXlibDisplayEXT = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _dpy: *mut Display,
     _display: DisplayKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAllocateCommandBuffers.html>
-pub type PFN_vkAllocateCommandBuffers = extern "system" fn(
+pub type PFN_vkAllocateCommandBuffers = unsafe extern "system" fn(
     _device: Device,
     _allocate_info: *const CommandBufferAllocateInfo,
     _command_buffers: *mut CommandBuffer,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAllocateDescriptorSets.html>
-pub type PFN_vkAllocateDescriptorSets = extern "system" fn(
+pub type PFN_vkAllocateDescriptorSets = unsafe extern "system" fn(
     _device: Device,
     _allocate_info: *const DescriptorSetAllocateInfo,
     _descriptor_sets: *mut DescriptorSet,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAllocateMemory.html>
-pub type PFN_vkAllocateMemory = extern "system" fn(
+pub type PFN_vkAllocateMemory = unsafe extern "system" fn(
     _device: Device,
     _allocate_info: *const MemoryAllocateInfo,
     _allocator: *const AllocationCallbacks,
@@ -92,20 +93,20 @@ pub type PFN_vkAllocateMemory = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBeginCommandBuffer.html>
-pub type PFN_vkBeginCommandBuffer = extern "system" fn(
+pub type PFN_vkBeginCommandBuffer = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _begin_info: *const CommandBufferBeginInfo,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindAccelerationStructureMemoryNV.html>
-pub type PFN_vkBindAccelerationStructureMemoryNV = extern "system" fn(
+pub type PFN_vkBindAccelerationStructureMemoryNV = unsafe extern "system" fn(
     _device: Device,
     _bind_info_count: u32,
     _bind_infos: *const BindAccelerationStructureMemoryInfoNV,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindBufferMemory.html>
-pub type PFN_vkBindBufferMemory = extern "system" fn(
+pub type PFN_vkBindBufferMemory = unsafe extern "system" fn(
     _device: Device,
     _buffer: Buffer,
     _memory: DeviceMemory,
@@ -113,7 +114,7 @@ pub type PFN_vkBindBufferMemory = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindBufferMemory2.html>
-pub type PFN_vkBindBufferMemory2 = extern "system" fn(
+pub type PFN_vkBindBufferMemory2 = unsafe extern "system" fn(
     _device: Device,
     _bind_info_count: u32,
     _bind_infos: *const BindBufferMemoryInfo,
@@ -123,7 +124,7 @@ pub type PFN_vkBindBufferMemory2 = extern "system" fn(
 pub type PFN_vkBindBufferMemory2KHR = PFN_vkBindBufferMemory2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindImageMemory.html>
-pub type PFN_vkBindImageMemory = extern "system" fn(
+pub type PFN_vkBindImageMemory = unsafe extern "system" fn(
     _device: Device,
     _image: Image,
     _memory: DeviceMemory,
@@ -131,7 +132,7 @@ pub type PFN_vkBindImageMemory = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindImageMemory2.html>
-pub type PFN_vkBindImageMemory2 = extern "system" fn(
+pub type PFN_vkBindImageMemory2 = unsafe extern "system" fn(
     _device: Device,
     _bind_info_count: u32,
     _bind_infos: *const BindImageMemoryInfo,
@@ -141,7 +142,7 @@ pub type PFN_vkBindImageMemory2 = extern "system" fn(
 pub type PFN_vkBindImageMemory2KHR = PFN_vkBindImageMemory2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBuildAccelerationStructuresKHR.html>
-pub type PFN_vkBuildAccelerationStructuresKHR = extern "system" fn(
+pub type PFN_vkBuildAccelerationStructuresKHR = unsafe extern "system" fn(
     _device: Device,
     _deferred_operation: DeferredOperationKHR,
     _info_count: u32,
@@ -150,17 +151,19 @@ pub type PFN_vkBuildAccelerationStructuresKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginConditionalRenderingEXT.html>
-pub type PFN_vkCmdBeginConditionalRenderingEXT = extern "system" fn(
+pub type PFN_vkCmdBeginConditionalRenderingEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _conditional_rendering_begin: *const ConditionalRenderingBeginInfoEXT,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginDebugUtilsLabelEXT.html>
-pub type PFN_vkCmdBeginDebugUtilsLabelEXT =
-    extern "system" fn(_command_buffer: CommandBuffer, _label_info: *const DebugUtilsLabelEXT);
+pub type PFN_vkCmdBeginDebugUtilsLabelEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _label_info: *const DebugUtilsLabelEXT,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginQuery.html>
-pub type PFN_vkCmdBeginQuery = extern "system" fn(
+pub type PFN_vkCmdBeginQuery = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _query_pool: QueryPool,
     _query: u32,
@@ -168,7 +171,7 @@ pub type PFN_vkCmdBeginQuery = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginQueryIndexedEXT.html>
-pub type PFN_vkCmdBeginQueryIndexedEXT = extern "system" fn(
+pub type PFN_vkCmdBeginQueryIndexedEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _query_pool: QueryPool,
     _query: u32,
@@ -177,14 +180,14 @@ pub type PFN_vkCmdBeginQueryIndexedEXT = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass.html>
-pub type PFN_vkCmdBeginRenderPass = extern "system" fn(
+pub type PFN_vkCmdBeginRenderPass = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _render_pass_begin: *const RenderPassBeginInfo,
     _contents: SubpassContents,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass2.html>
-pub type PFN_vkCmdBeginRenderPass2 = extern "system" fn(
+pub type PFN_vkCmdBeginRenderPass2 = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _render_pass_begin: *const RenderPassBeginInfo,
     _subpass_begin_info: *const SubpassBeginInfo,
@@ -194,7 +197,7 @@ pub type PFN_vkCmdBeginRenderPass2 = extern "system" fn(
 pub type PFN_vkCmdBeginRenderPass2KHR = PFN_vkCmdBeginRenderPass2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginTransformFeedbackEXT.html>
-pub type PFN_vkCmdBeginTransformFeedbackEXT = extern "system" fn(
+pub type PFN_vkCmdBeginTransformFeedbackEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _first_counter_buffer: u32,
     _counter_buffer_count: u32,
@@ -203,7 +206,7 @@ pub type PFN_vkCmdBeginTransformFeedbackEXT = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindDescriptorSets.html>
-pub type PFN_vkCmdBindDescriptorSets = extern "system" fn(
+pub type PFN_vkCmdBindDescriptorSets = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _pipeline_bind_point: PipelineBindPoint,
     _layout: PipelineLayout,
@@ -215,7 +218,7 @@ pub type PFN_vkCmdBindDescriptorSets = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindIndexBuffer.html>
-pub type PFN_vkCmdBindIndexBuffer = extern "system" fn(
+pub type PFN_vkCmdBindIndexBuffer = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _buffer: Buffer,
     _offset: DeviceSize,
@@ -223,14 +226,14 @@ pub type PFN_vkCmdBindIndexBuffer = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindPipeline.html>
-pub type PFN_vkCmdBindPipeline = extern "system" fn(
+pub type PFN_vkCmdBindPipeline = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _pipeline_bind_point: PipelineBindPoint,
     _pipeline: Pipeline,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindPipelineShaderGroupNV.html>
-pub type PFN_vkCmdBindPipelineShaderGroupNV = extern "system" fn(
+pub type PFN_vkCmdBindPipelineShaderGroupNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _pipeline_bind_point: PipelineBindPoint,
     _pipeline: Pipeline,
@@ -238,14 +241,14 @@ pub type PFN_vkCmdBindPipelineShaderGroupNV = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindShadingRateImageNV.html>
-pub type PFN_vkCmdBindShadingRateImageNV = extern "system" fn(
+pub type PFN_vkCmdBindShadingRateImageNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _image_view: ImageView,
     _image_layout: ImageLayout,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindTransformFeedbackBuffersEXT.html>
-pub type PFN_vkCmdBindTransformFeedbackBuffersEXT = extern "system" fn(
+pub type PFN_vkCmdBindTransformFeedbackBuffersEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _first_binding: u32,
     _binding_count: u32,
@@ -255,7 +258,7 @@ pub type PFN_vkCmdBindTransformFeedbackBuffersEXT = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindVertexBuffers.html>
-pub type PFN_vkCmdBindVertexBuffers = extern "system" fn(
+pub type PFN_vkCmdBindVertexBuffers = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _first_binding: u32,
     _binding_count: u32,
@@ -264,7 +267,7 @@ pub type PFN_vkCmdBindVertexBuffers = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindVertexBuffers2EXT.html>
-pub type PFN_vkCmdBindVertexBuffers2EXT = extern "system" fn(
+pub type PFN_vkCmdBindVertexBuffers2EXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _first_binding: u32,
     _binding_count: u32,
@@ -275,7 +278,7 @@ pub type PFN_vkCmdBindVertexBuffers2EXT = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBlitImage.html>
-pub type PFN_vkCmdBlitImage = extern "system" fn(
+pub type PFN_vkCmdBlitImage = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _src_image: Image,
     _src_image_layout: ImageLayout,
@@ -287,11 +290,13 @@ pub type PFN_vkCmdBlitImage = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBlitImage2KHR.html>
-pub type PFN_vkCmdBlitImage2KHR =
-    extern "system" fn(_command_buffer: CommandBuffer, _blit_image_info: *const BlitImageInfo2KHR);
+pub type PFN_vkCmdBlitImage2KHR = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _blit_image_info: *const BlitImageInfo2KHR,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructureNV.html>
-pub type PFN_vkCmdBuildAccelerationStructureNV = extern "system" fn(
+pub type PFN_vkCmdBuildAccelerationStructureNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _info: *const AccelerationStructureInfoNV,
     _instance_data: Buffer,
@@ -304,7 +309,7 @@ pub type PFN_vkCmdBuildAccelerationStructureNV = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructuresIndirectKHR.html>
-pub type PFN_vkCmdBuildAccelerationStructuresIndirectKHR = extern "system" fn(
+pub type PFN_vkCmdBuildAccelerationStructuresIndirectKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _info_count: u32,
     _infos: *const AccelerationStructureBuildGeometryInfoKHR,
@@ -314,7 +319,7 @@ pub type PFN_vkCmdBuildAccelerationStructuresIndirectKHR = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructuresKHR.html>
-pub type PFN_vkCmdBuildAccelerationStructuresKHR = extern "system" fn(
+pub type PFN_vkCmdBuildAccelerationStructuresKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _info_count: u32,
     _infos: *const AccelerationStructureBuildGeometryInfoKHR,
@@ -322,7 +327,7 @@ pub type PFN_vkCmdBuildAccelerationStructuresKHR = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdClearAttachments.html>
-pub type PFN_vkCmdClearAttachments = extern "system" fn(
+pub type PFN_vkCmdClearAttachments = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _attachment_count: u32,
     _attachments: *const ClearAttachment,
@@ -331,7 +336,7 @@ pub type PFN_vkCmdClearAttachments = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdClearColorImage.html>
-pub type PFN_vkCmdClearColorImage = extern "system" fn(
+pub type PFN_vkCmdClearColorImage = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _image: Image,
     _image_layout: ImageLayout,
@@ -341,7 +346,7 @@ pub type PFN_vkCmdClearColorImage = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdClearDepthStencilImage.html>
-pub type PFN_vkCmdClearDepthStencilImage = extern "system" fn(
+pub type PFN_vkCmdClearDepthStencilImage = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _image: Image,
     _image_layout: ImageLayout,
@@ -351,13 +356,13 @@ pub type PFN_vkCmdClearDepthStencilImage = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyAccelerationStructureKHR.html>
-pub type PFN_vkCmdCopyAccelerationStructureKHR = extern "system" fn(
+pub type PFN_vkCmdCopyAccelerationStructureKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _info: *const CopyAccelerationStructureInfoKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyAccelerationStructureNV.html>
-pub type PFN_vkCmdCopyAccelerationStructureNV = extern "system" fn(
+pub type PFN_vkCmdCopyAccelerationStructureNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _dst: AccelerationStructureNV,
     _src: AccelerationStructureNV,
@@ -365,13 +370,13 @@ pub type PFN_vkCmdCopyAccelerationStructureNV = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyAccelerationStructureToMemoryKHR.html>
-pub type PFN_vkCmdCopyAccelerationStructureToMemoryKHR = extern "system" fn(
+pub type PFN_vkCmdCopyAccelerationStructureToMemoryKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _info: *const CopyAccelerationStructureToMemoryInfoKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBuffer.html>
-pub type PFN_vkCmdCopyBuffer = extern "system" fn(
+pub type PFN_vkCmdCopyBuffer = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _src_buffer: Buffer,
     _dst_buffer: Buffer,
@@ -380,13 +385,13 @@ pub type PFN_vkCmdCopyBuffer = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBuffer2KHR.html>
-pub type PFN_vkCmdCopyBuffer2KHR = extern "system" fn(
+pub type PFN_vkCmdCopyBuffer2KHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _copy_buffer_info: *const CopyBufferInfo2KHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBufferToImage.html>
-pub type PFN_vkCmdCopyBufferToImage = extern "system" fn(
+pub type PFN_vkCmdCopyBufferToImage = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _src_buffer: Buffer,
     _dst_image: Image,
@@ -396,13 +401,13 @@ pub type PFN_vkCmdCopyBufferToImage = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBufferToImage2KHR.html>
-pub type PFN_vkCmdCopyBufferToImage2KHR = extern "system" fn(
+pub type PFN_vkCmdCopyBufferToImage2KHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _copy_buffer_to_image_info: *const CopyBufferToImageInfo2KHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImage.html>
-pub type PFN_vkCmdCopyImage = extern "system" fn(
+pub type PFN_vkCmdCopyImage = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _src_image: Image,
     _src_image_layout: ImageLayout,
@@ -413,11 +418,13 @@ pub type PFN_vkCmdCopyImage = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImage2KHR.html>
-pub type PFN_vkCmdCopyImage2KHR =
-    extern "system" fn(_command_buffer: CommandBuffer, _copy_image_info: *const CopyImageInfo2KHR);
+pub type PFN_vkCmdCopyImage2KHR = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _copy_image_info: *const CopyImageInfo2KHR,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImageToBuffer.html>
-pub type PFN_vkCmdCopyImageToBuffer = extern "system" fn(
+pub type PFN_vkCmdCopyImageToBuffer = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _src_image: Image,
     _src_image_layout: ImageLayout,
@@ -427,19 +434,19 @@ pub type PFN_vkCmdCopyImageToBuffer = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImageToBuffer2KHR.html>
-pub type PFN_vkCmdCopyImageToBuffer2KHR = extern "system" fn(
+pub type PFN_vkCmdCopyImageToBuffer2KHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _copy_image_to_buffer_info: *const CopyImageToBufferInfo2KHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyMemoryToAccelerationStructureKHR.html>
-pub type PFN_vkCmdCopyMemoryToAccelerationStructureKHR = extern "system" fn(
+pub type PFN_vkCmdCopyMemoryToAccelerationStructureKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _info: *const CopyMemoryToAccelerationStructureInfoKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyQueryPoolResults.html>
-pub type PFN_vkCmdCopyQueryPoolResults = extern "system" fn(
+pub type PFN_vkCmdCopyQueryPoolResults = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _query_pool: QueryPool,
     _first_query: u32,
@@ -451,22 +458,22 @@ pub type PFN_vkCmdCopyQueryPoolResults = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDebugMarkerBeginEXT.html>
-pub type PFN_vkCmdDebugMarkerBeginEXT = extern "system" fn(
+pub type PFN_vkCmdDebugMarkerBeginEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _marker_info: *const DebugMarkerMarkerInfoEXT,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDebugMarkerEndEXT.html>
-pub type PFN_vkCmdDebugMarkerEndEXT = extern "system" fn(_command_buffer: CommandBuffer);
+pub type PFN_vkCmdDebugMarkerEndEXT = unsafe extern "system" fn(_command_buffer: CommandBuffer);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDebugMarkerInsertEXT.html>
-pub type PFN_vkCmdDebugMarkerInsertEXT = extern "system" fn(
+pub type PFN_vkCmdDebugMarkerInsertEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _marker_info: *const DebugMarkerMarkerInfoEXT,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDispatch.html>
-pub type PFN_vkCmdDispatch = extern "system" fn(
+pub type PFN_vkCmdDispatch = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _group_count_x: u32,
     _group_count_y: u32,
@@ -474,7 +481,7 @@ pub type PFN_vkCmdDispatch = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDispatchBase.html>
-pub type PFN_vkCmdDispatchBase = extern "system" fn(
+pub type PFN_vkCmdDispatchBase = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _base_group_x: u32,
     _base_group_y: u32,
@@ -489,10 +496,10 @@ pub type PFN_vkCmdDispatchBaseKHR = PFN_vkCmdDispatchBase;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDispatchIndirect.html>
 pub type PFN_vkCmdDispatchIndirect =
-    extern "system" fn(_command_buffer: CommandBuffer, _buffer: Buffer, _offset: DeviceSize);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _buffer: Buffer, _offset: DeviceSize);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDraw.html>
-pub type PFN_vkCmdDraw = extern "system" fn(
+pub type PFN_vkCmdDraw = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _vertex_count: u32,
     _instance_count: u32,
@@ -501,7 +508,7 @@ pub type PFN_vkCmdDraw = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndexed.html>
-pub type PFN_vkCmdDrawIndexed = extern "system" fn(
+pub type PFN_vkCmdDrawIndexed = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _index_count: u32,
     _instance_count: u32,
@@ -511,7 +518,7 @@ pub type PFN_vkCmdDrawIndexed = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndexedIndirect.html>
-pub type PFN_vkCmdDrawIndexedIndirect = extern "system" fn(
+pub type PFN_vkCmdDrawIndexedIndirect = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _buffer: Buffer,
     _offset: DeviceSize,
@@ -520,7 +527,7 @@ pub type PFN_vkCmdDrawIndexedIndirect = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndexedIndirectCount.html>
-pub type PFN_vkCmdDrawIndexedIndirectCount = extern "system" fn(
+pub type PFN_vkCmdDrawIndexedIndirectCount = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _buffer: Buffer,
     _offset: DeviceSize,
@@ -537,7 +544,7 @@ pub type PFN_vkCmdDrawIndexedIndirectCountAMD = PFN_vkCmdDrawIndexedIndirectCoun
 pub type PFN_vkCmdDrawIndexedIndirectCountKHR = PFN_vkCmdDrawIndexedIndirectCount;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndirect.html>
-pub type PFN_vkCmdDrawIndirect = extern "system" fn(
+pub type PFN_vkCmdDrawIndirect = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _buffer: Buffer,
     _offset: DeviceSize,
@@ -546,7 +553,7 @@ pub type PFN_vkCmdDrawIndirect = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndirectByteCountEXT.html>
-pub type PFN_vkCmdDrawIndirectByteCountEXT = extern "system" fn(
+pub type PFN_vkCmdDrawIndirectByteCountEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _instance_count: u32,
     _first_instance: u32,
@@ -557,7 +564,7 @@ pub type PFN_vkCmdDrawIndirectByteCountEXT = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndirectCount.html>
-pub type PFN_vkCmdDrawIndirectCount = extern "system" fn(
+pub type PFN_vkCmdDrawIndirectCount = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _buffer: Buffer,
     _offset: DeviceSize,
@@ -574,7 +581,7 @@ pub type PFN_vkCmdDrawIndirectCountAMD = PFN_vkCmdDrawIndirectCount;
 pub type PFN_vkCmdDrawIndirectCountKHR = PFN_vkCmdDrawIndirectCount;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMeshTasksIndirectCountNV.html>
-pub type PFN_vkCmdDrawMeshTasksIndirectCountNV = extern "system" fn(
+pub type PFN_vkCmdDrawMeshTasksIndirectCountNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _buffer: Buffer,
     _offset: DeviceSize,
@@ -585,7 +592,7 @@ pub type PFN_vkCmdDrawMeshTasksIndirectCountNV = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMeshTasksIndirectNV.html>
-pub type PFN_vkCmdDrawMeshTasksIndirectNV = extern "system" fn(
+pub type PFN_vkCmdDrawMeshTasksIndirectNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _buffer: Buffer,
     _offset: DeviceSize,
@@ -595,20 +602,21 @@ pub type PFN_vkCmdDrawMeshTasksIndirectNV = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMeshTasksNV.html>
 pub type PFN_vkCmdDrawMeshTasksNV =
-    extern "system" fn(_command_buffer: CommandBuffer, _task_count: u32, _first_task: u32);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _task_count: u32, _first_task: u32);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndConditionalRenderingEXT.html>
-pub type PFN_vkCmdEndConditionalRenderingEXT = extern "system" fn(_command_buffer: CommandBuffer);
+pub type PFN_vkCmdEndConditionalRenderingEXT =
+    unsafe extern "system" fn(_command_buffer: CommandBuffer);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndDebugUtilsLabelEXT.html>
-pub type PFN_vkCmdEndDebugUtilsLabelEXT = extern "system" fn(_command_buffer: CommandBuffer);
+pub type PFN_vkCmdEndDebugUtilsLabelEXT = unsafe extern "system" fn(_command_buffer: CommandBuffer);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndQuery.html>
 pub type PFN_vkCmdEndQuery =
-    extern "system" fn(_command_buffer: CommandBuffer, _query_pool: QueryPool, _query: u32);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _query_pool: QueryPool, _query: u32);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndQueryIndexedEXT.html>
-pub type PFN_vkCmdEndQueryIndexedEXT = extern "system" fn(
+pub type PFN_vkCmdEndQueryIndexedEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _query_pool: QueryPool,
     _query: u32,
@@ -616,17 +624,19 @@ pub type PFN_vkCmdEndQueryIndexedEXT = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass.html>
-pub type PFN_vkCmdEndRenderPass = extern "system" fn(_command_buffer: CommandBuffer);
+pub type PFN_vkCmdEndRenderPass = unsafe extern "system" fn(_command_buffer: CommandBuffer);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass2.html>
-pub type PFN_vkCmdEndRenderPass2 =
-    extern "system" fn(_command_buffer: CommandBuffer, _subpass_end_info: *const SubpassEndInfo);
+pub type PFN_vkCmdEndRenderPass2 = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _subpass_end_info: *const SubpassEndInfo,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass2KHR.html>
 pub type PFN_vkCmdEndRenderPass2KHR = PFN_vkCmdEndRenderPass2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndTransformFeedbackEXT.html>
-pub type PFN_vkCmdEndTransformFeedbackEXT = extern "system" fn(
+pub type PFN_vkCmdEndTransformFeedbackEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _first_counter_buffer: u32,
     _counter_buffer_count: u32,
@@ -635,21 +645,21 @@ pub type PFN_vkCmdEndTransformFeedbackEXT = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdExecuteCommands.html>
-pub type PFN_vkCmdExecuteCommands = extern "system" fn(
+pub type PFN_vkCmdExecuteCommands = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _command_buffer_count: u32,
     _command_buffers: *const CommandBuffer,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdExecuteGeneratedCommandsNV.html>
-pub type PFN_vkCmdExecuteGeneratedCommandsNV = extern "system" fn(
+pub type PFN_vkCmdExecuteGeneratedCommandsNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _is_preprocessed: Bool32,
     _generated_commands_info: *const GeneratedCommandsInfoNV,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdFillBuffer.html>
-pub type PFN_vkCmdFillBuffer = extern "system" fn(
+pub type PFN_vkCmdFillBuffer = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _dst_buffer: Buffer,
     _dst_offset: DeviceSize,
@@ -658,15 +668,17 @@ pub type PFN_vkCmdFillBuffer = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdInsertDebugUtilsLabelEXT.html>
-pub type PFN_vkCmdInsertDebugUtilsLabelEXT =
-    extern "system" fn(_command_buffer: CommandBuffer, _label_info: *const DebugUtilsLabelEXT);
+pub type PFN_vkCmdInsertDebugUtilsLabelEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _label_info: *const DebugUtilsLabelEXT,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass.html>
 pub type PFN_vkCmdNextSubpass =
-    extern "system" fn(_command_buffer: CommandBuffer, _contents: SubpassContents);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _contents: SubpassContents);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass2.html>
-pub type PFN_vkCmdNextSubpass2 = extern "system" fn(
+pub type PFN_vkCmdNextSubpass2 = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _subpass_begin_info: *const SubpassBeginInfo,
     _subpass_end_info: *const SubpassEndInfo,
@@ -676,7 +688,7 @@ pub type PFN_vkCmdNextSubpass2 = extern "system" fn(
 pub type PFN_vkCmdNextSubpass2KHR = PFN_vkCmdNextSubpass2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier.html>
-pub type PFN_vkCmdPipelineBarrier = extern "system" fn(
+pub type PFN_vkCmdPipelineBarrier = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _src_stage_mask: PipelineStageFlags,
     _dst_stage_mask: PipelineStageFlags,
@@ -690,17 +702,19 @@ pub type PFN_vkCmdPipelineBarrier = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier2KHR.html>
-pub type PFN_vkCmdPipelineBarrier2KHR =
-    extern "system" fn(_command_buffer: CommandBuffer, _dependency_info: *const DependencyInfoKHR);
+pub type PFN_vkCmdPipelineBarrier2KHR = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _dependency_info: *const DependencyInfoKHR,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPreprocessGeneratedCommandsNV.html>
-pub type PFN_vkCmdPreprocessGeneratedCommandsNV = extern "system" fn(
+pub type PFN_vkCmdPreprocessGeneratedCommandsNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _generated_commands_info: *const GeneratedCommandsInfoNV,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushConstants.html>
-pub type PFN_vkCmdPushConstants = extern "system" fn(
+pub type PFN_vkCmdPushConstants = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _layout: PipelineLayout,
     _stage_flags: ShaderStageFlags,
@@ -710,7 +724,7 @@ pub type PFN_vkCmdPushConstants = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushDescriptorSetKHR.html>
-pub type PFN_vkCmdPushDescriptorSetKHR = extern "system" fn(
+pub type PFN_vkCmdPushDescriptorSetKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _pipeline_bind_point: PipelineBindPoint,
     _layout: PipelineLayout,
@@ -720,7 +734,7 @@ pub type PFN_vkCmdPushDescriptorSetKHR = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushDescriptorSetWithTemplateKHR.html>
-pub type PFN_vkCmdPushDescriptorSetWithTemplateKHR = extern "system" fn(
+pub type PFN_vkCmdPushDescriptorSetWithTemplateKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _descriptor_update_template: DescriptorUpdateTemplate,
     _layout: PipelineLayout,
@@ -729,21 +743,21 @@ pub type PFN_vkCmdPushDescriptorSetWithTemplateKHR = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetEvent.html>
-pub type PFN_vkCmdResetEvent = extern "system" fn(
+pub type PFN_vkCmdResetEvent = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _event: Event,
     _stage_mask: PipelineStageFlags,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetEvent2KHR.html>
-pub type PFN_vkCmdResetEvent2KHR = extern "system" fn(
+pub type PFN_vkCmdResetEvent2KHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _event: Event,
     _stage_mask: PipelineStageFlags2KHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetQueryPool.html>
-pub type PFN_vkCmdResetQueryPool = extern "system" fn(
+pub type PFN_vkCmdResetQueryPool = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _query_pool: QueryPool,
     _first_query: u32,
@@ -751,7 +765,7 @@ pub type PFN_vkCmdResetQueryPool = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResolveImage.html>
-pub type PFN_vkCmdResolveImage = extern "system" fn(
+pub type PFN_vkCmdResolveImage = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _src_image: Image,
     _src_image_layout: ImageLayout,
@@ -762,21 +776,21 @@ pub type PFN_vkCmdResolveImage = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResolveImage2KHR.html>
-pub type PFN_vkCmdResolveImage2KHR = extern "system" fn(
+pub type PFN_vkCmdResolveImage2KHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _resolve_image_info: *const ResolveImageInfo2KHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetBlendConstants.html>
 pub type PFN_vkCmdSetBlendConstants =
-    extern "system" fn(_command_buffer: CommandBuffer, _blend_constants: *const f32);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _blend_constants: *const f32);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetCheckpointNV.html>
 pub type PFN_vkCmdSetCheckpointNV =
-    extern "system" fn(_command_buffer: CommandBuffer, _checkpoint_marker: *const c_void);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _checkpoint_marker: *const c_void);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetCoarseSampleOrderNV.html>
-pub type PFN_vkCmdSetCoarseSampleOrderNV = extern "system" fn(
+pub type PFN_vkCmdSetCoarseSampleOrderNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _sample_order_type: CoarseSampleOrderTypeNV,
     _custom_sample_order_count: u32,
@@ -785,10 +799,10 @@ pub type PFN_vkCmdSetCoarseSampleOrderNV = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetCullModeEXT.html>
 pub type PFN_vkCmdSetCullModeEXT =
-    extern "system" fn(_command_buffer: CommandBuffer, _cull_mode: CullModeFlags);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _cull_mode: CullModeFlags);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBias.html>
-pub type PFN_vkCmdSetDepthBias = extern "system" fn(
+pub type PFN_vkCmdSetDepthBias = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _depth_bias_constant_factor: f32,
     _depth_bias_clamp: f32,
@@ -796,7 +810,7 @@ pub type PFN_vkCmdSetDepthBias = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBounds.html>
-pub type PFN_vkCmdSetDepthBounds = extern "system" fn(
+pub type PFN_vkCmdSetDepthBounds = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _min_depth_bounds: f32,
     _max_depth_bounds: f32,
@@ -804,29 +818,29 @@ pub type PFN_vkCmdSetDepthBounds = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBoundsTestEnableEXT.html>
 pub type PFN_vkCmdSetDepthBoundsTestEnableEXT =
-    extern "system" fn(_command_buffer: CommandBuffer, _depth_bounds_test_enable: Bool32);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _depth_bounds_test_enable: Bool32);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthCompareOpEXT.html>
 pub type PFN_vkCmdSetDepthCompareOpEXT =
-    extern "system" fn(_command_buffer: CommandBuffer, _depth_compare_op: CompareOp);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _depth_compare_op: CompareOp);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthTestEnableEXT.html>
 pub type PFN_vkCmdSetDepthTestEnableEXT =
-    extern "system" fn(_command_buffer: CommandBuffer, _depth_test_enable: Bool32);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _depth_test_enable: Bool32);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthWriteEnableEXT.html>
 pub type PFN_vkCmdSetDepthWriteEnableEXT =
-    extern "system" fn(_command_buffer: CommandBuffer, _depth_write_enable: Bool32);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _depth_write_enable: Bool32);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDeviceMask.html>
 pub type PFN_vkCmdSetDeviceMask =
-    extern "system" fn(_command_buffer: CommandBuffer, _device_mask: u32);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _device_mask: u32);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDeviceMaskKHR.html>
 pub type PFN_vkCmdSetDeviceMaskKHR = PFN_vkCmdSetDeviceMask;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDiscardRectangleEXT.html>
-pub type PFN_vkCmdSetDiscardRectangleEXT = extern "system" fn(
+pub type PFN_vkCmdSetDiscardRectangleEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _first_discard_rectangle: u32,
     _discard_rectangle_count: u32,
@@ -834,21 +848,21 @@ pub type PFN_vkCmdSetDiscardRectangleEXT = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent.html>
-pub type PFN_vkCmdSetEvent = extern "system" fn(
+pub type PFN_vkCmdSetEvent = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _event: Event,
     _stage_mask: PipelineStageFlags,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent2KHR.html>
-pub type PFN_vkCmdSetEvent2KHR = extern "system" fn(
+pub type PFN_vkCmdSetEvent2KHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _event: Event,
     _dependency_info: *const DependencyInfoKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetExclusiveScissorNV.html>
-pub type PFN_vkCmdSetExclusiveScissorNV = extern "system" fn(
+pub type PFN_vkCmdSetExclusiveScissorNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _first_exclusive_scissor: u32,
     _exclusive_scissor_count: u32,
@@ -856,14 +870,14 @@ pub type PFN_vkCmdSetExclusiveScissorNV = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateEnumNV.html>
-pub type PFN_vkCmdSetFragmentShadingRateEnumNV = extern "system" fn(
+pub type PFN_vkCmdSetFragmentShadingRateEnumNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _shading_rate: FragmentShadingRateNV,
     _combiner_ops: *const FragmentShadingRateCombinerOpKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateKHR.html>
-pub type PFN_vkCmdSetFragmentShadingRateKHR = extern "system" fn(
+pub type PFN_vkCmdSetFragmentShadingRateKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _fragment_size: *const Extent2D,
     _combiner_ops: *const FragmentShadingRateCombinerOpKHR,
@@ -871,10 +885,10 @@ pub type PFN_vkCmdSetFragmentShadingRateKHR = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFrontFaceEXT.html>
 pub type PFN_vkCmdSetFrontFaceEXT =
-    extern "system" fn(_command_buffer: CommandBuffer, _front_face: FrontFace);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _front_face: FrontFace);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetLineStippleEXT.html>
-pub type PFN_vkCmdSetLineStippleEXT = extern "system" fn(
+pub type PFN_vkCmdSetLineStippleEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _line_stipple_factor: u32,
     _line_stipple_pattern: u16,
@@ -882,42 +896,44 @@ pub type PFN_vkCmdSetLineStippleEXT = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetLineWidth.html>
 pub type PFN_vkCmdSetLineWidth =
-    extern "system" fn(_command_buffer: CommandBuffer, _line_width: f32);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _line_width: f32);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPerformanceMarkerINTEL.html>
-pub type PFN_vkCmdSetPerformanceMarkerINTEL = extern "system" fn(
+pub type PFN_vkCmdSetPerformanceMarkerINTEL = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _marker_info: *const PerformanceMarkerInfoINTEL,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPerformanceOverrideINTEL.html>
-pub type PFN_vkCmdSetPerformanceOverrideINTEL = extern "system" fn(
+pub type PFN_vkCmdSetPerformanceOverrideINTEL = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _override_info: *const PerformanceOverrideInfoINTEL,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPerformanceStreamMarkerINTEL.html>
-pub type PFN_vkCmdSetPerformanceStreamMarkerINTEL = extern "system" fn(
+pub type PFN_vkCmdSetPerformanceStreamMarkerINTEL = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _marker_info: *const PerformanceStreamMarkerInfoINTEL,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPrimitiveTopologyEXT.html>
-pub type PFN_vkCmdSetPrimitiveTopologyEXT =
-    extern "system" fn(_command_buffer: CommandBuffer, _primitive_topology: PrimitiveTopology);
+pub type PFN_vkCmdSetPrimitiveTopologyEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _primitive_topology: PrimitiveTopology,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetRayTracingPipelineStackSizeKHR.html>
 pub type PFN_vkCmdSetRayTracingPipelineStackSizeKHR =
-    extern "system" fn(_command_buffer: CommandBuffer, _pipeline_stack_size: u32);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _pipeline_stack_size: u32);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetSampleLocationsEXT.html>
-pub type PFN_vkCmdSetSampleLocationsEXT = extern "system" fn(
+pub type PFN_vkCmdSetSampleLocationsEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _sample_locations_info: *const SampleLocationsInfoEXT,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetScissor.html>
-pub type PFN_vkCmdSetScissor = extern "system" fn(
+pub type PFN_vkCmdSetScissor = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _first_scissor: u32,
     _scissor_count: u32,
@@ -925,21 +941,21 @@ pub type PFN_vkCmdSetScissor = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetScissorWithCountEXT.html>
-pub type PFN_vkCmdSetScissorWithCountEXT = extern "system" fn(
+pub type PFN_vkCmdSetScissorWithCountEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _scissor_count: u32,
     _scissors: *const Rect2D,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilCompareMask.html>
-pub type PFN_vkCmdSetStencilCompareMask = extern "system" fn(
+pub type PFN_vkCmdSetStencilCompareMask = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _face_mask: StencilFaceFlags,
     _compare_mask: u32,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilOpEXT.html>
-pub type PFN_vkCmdSetStencilOpEXT = extern "system" fn(
+pub type PFN_vkCmdSetStencilOpEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _face_mask: StencilFaceFlags,
     _fail_op: StencilOp,
@@ -949,7 +965,7 @@ pub type PFN_vkCmdSetStencilOpEXT = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilReference.html>
-pub type PFN_vkCmdSetStencilReference = extern "system" fn(
+pub type PFN_vkCmdSetStencilReference = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _face_mask: StencilFaceFlags,
     _reference: u32,
@@ -957,17 +973,17 @@ pub type PFN_vkCmdSetStencilReference = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilTestEnableEXT.html>
 pub type PFN_vkCmdSetStencilTestEnableEXT =
-    extern "system" fn(_command_buffer: CommandBuffer, _stencil_test_enable: Bool32);
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _stencil_test_enable: Bool32);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilWriteMask.html>
-pub type PFN_vkCmdSetStencilWriteMask = extern "system" fn(
+pub type PFN_vkCmdSetStencilWriteMask = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _face_mask: StencilFaceFlags,
     _write_mask: u32,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewport.html>
-pub type PFN_vkCmdSetViewport = extern "system" fn(
+pub type PFN_vkCmdSetViewport = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _first_viewport: u32,
     _viewport_count: u32,
@@ -975,7 +991,7 @@ pub type PFN_vkCmdSetViewport = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewportShadingRatePaletteNV.html>
-pub type PFN_vkCmdSetViewportShadingRatePaletteNV = extern "system" fn(
+pub type PFN_vkCmdSetViewportShadingRatePaletteNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _first_viewport: u32,
     _viewport_count: u32,
@@ -983,7 +999,7 @@ pub type PFN_vkCmdSetViewportShadingRatePaletteNV = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewportWScalingNV.html>
-pub type PFN_vkCmdSetViewportWScalingNV = extern "system" fn(
+pub type PFN_vkCmdSetViewportWScalingNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _first_viewport: u32,
     _viewport_count: u32,
@@ -991,14 +1007,14 @@ pub type PFN_vkCmdSetViewportWScalingNV = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewportWithCountEXT.html>
-pub type PFN_vkCmdSetViewportWithCountEXT = extern "system" fn(
+pub type PFN_vkCmdSetViewportWithCountEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _viewport_count: u32,
     _viewports: *const Viewport,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdTraceRaysIndirectKHR.html>
-pub type PFN_vkCmdTraceRaysIndirectKHR = extern "system" fn(
+pub type PFN_vkCmdTraceRaysIndirectKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _raygen_shader_binding_table: *const StridedDeviceAddressRegionKHR,
     _miss_shader_binding_table: *const StridedDeviceAddressRegionKHR,
@@ -1008,7 +1024,7 @@ pub type PFN_vkCmdTraceRaysIndirectKHR = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdTraceRaysKHR.html>
-pub type PFN_vkCmdTraceRaysKHR = extern "system" fn(
+pub type PFN_vkCmdTraceRaysKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _raygen_shader_binding_table: *const StridedDeviceAddressRegionKHR,
     _miss_shader_binding_table: *const StridedDeviceAddressRegionKHR,
@@ -1020,7 +1036,7 @@ pub type PFN_vkCmdTraceRaysKHR = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdTraceRaysNV.html>
-pub type PFN_vkCmdTraceRaysNV = extern "system" fn(
+pub type PFN_vkCmdTraceRaysNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _raygen_shader_binding_table_buffer: Buffer,
     _raygen_shader_binding_offset: DeviceSize,
@@ -1039,7 +1055,7 @@ pub type PFN_vkCmdTraceRaysNV = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdUpdateBuffer.html>
-pub type PFN_vkCmdUpdateBuffer = extern "system" fn(
+pub type PFN_vkCmdUpdateBuffer = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _dst_buffer: Buffer,
     _dst_offset: DeviceSize,
@@ -1048,7 +1064,7 @@ pub type PFN_vkCmdUpdateBuffer = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWaitEvents.html>
-pub type PFN_vkCmdWaitEvents = extern "system" fn(
+pub type PFN_vkCmdWaitEvents = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _event_count: u32,
     _events: *const Event,
@@ -1063,7 +1079,7 @@ pub type PFN_vkCmdWaitEvents = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWaitEvents2KHR.html>
-pub type PFN_vkCmdWaitEvents2KHR = extern "system" fn(
+pub type PFN_vkCmdWaitEvents2KHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _event_count: u32,
     _events: *const Event,
@@ -1071,7 +1087,7 @@ pub type PFN_vkCmdWaitEvents2KHR = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteAccelerationStructuresPropertiesKHR.html>
-pub type PFN_vkCmdWriteAccelerationStructuresPropertiesKHR = extern "system" fn(
+pub type PFN_vkCmdWriteAccelerationStructuresPropertiesKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _acceleration_structure_count: u32,
     _acceleration_structures: *const AccelerationStructureKHR,
@@ -1081,7 +1097,7 @@ pub type PFN_vkCmdWriteAccelerationStructuresPropertiesKHR = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteAccelerationStructuresPropertiesNV.html>
-pub type PFN_vkCmdWriteAccelerationStructuresPropertiesNV = extern "system" fn(
+pub type PFN_vkCmdWriteAccelerationStructuresPropertiesNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _acceleration_structure_count: u32,
     _acceleration_structures: *const AccelerationStructureNV,
@@ -1091,7 +1107,7 @@ pub type PFN_vkCmdWriteAccelerationStructuresPropertiesNV = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteBufferMarker2AMD.html>
-pub type PFN_vkCmdWriteBufferMarker2AMD = extern "system" fn(
+pub type PFN_vkCmdWriteBufferMarker2AMD = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _stage: PipelineStageFlags2KHR,
     _dst_buffer: Buffer,
@@ -1100,7 +1116,7 @@ pub type PFN_vkCmdWriteBufferMarker2AMD = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteBufferMarkerAMD.html>
-pub type PFN_vkCmdWriteBufferMarkerAMD = extern "system" fn(
+pub type PFN_vkCmdWriteBufferMarkerAMD = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _pipeline_stage: PipelineStageFlags,
     _dst_buffer: Buffer,
@@ -1109,7 +1125,7 @@ pub type PFN_vkCmdWriteBufferMarkerAMD = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteTimestamp.html>
-pub type PFN_vkCmdWriteTimestamp = extern "system" fn(
+pub type PFN_vkCmdWriteTimestamp = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _pipeline_stage: PipelineStageFlags,
     _query_pool: QueryPool,
@@ -1117,7 +1133,7 @@ pub type PFN_vkCmdWriteTimestamp = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteTimestamp2KHR.html>
-pub type PFN_vkCmdWriteTimestamp2KHR = extern "system" fn(
+pub type PFN_vkCmdWriteTimestamp2KHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _stage: PipelineStageFlags2KHR,
     _query_pool: QueryPool,
@@ -1126,31 +1142,31 @@ pub type PFN_vkCmdWriteTimestamp2KHR = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCompileDeferredNV.html>
 pub type PFN_vkCompileDeferredNV =
-    extern "system" fn(_device: Device, _pipeline: Pipeline, _shader: u32) -> Result;
+    unsafe extern "system" fn(_device: Device, _pipeline: Pipeline, _shader: u32) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyAccelerationStructureKHR.html>
-pub type PFN_vkCopyAccelerationStructureKHR = extern "system" fn(
+pub type PFN_vkCopyAccelerationStructureKHR = unsafe extern "system" fn(
     _device: Device,
     _deferred_operation: DeferredOperationKHR,
     _info: *const CopyAccelerationStructureInfoKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyAccelerationStructureToMemoryKHR.html>
-pub type PFN_vkCopyAccelerationStructureToMemoryKHR = extern "system" fn(
+pub type PFN_vkCopyAccelerationStructureToMemoryKHR = unsafe extern "system" fn(
     _device: Device,
     _deferred_operation: DeferredOperationKHR,
     _info: *const CopyAccelerationStructureToMemoryInfoKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyMemoryToAccelerationStructureKHR.html>
-pub type PFN_vkCopyMemoryToAccelerationStructureKHR = extern "system" fn(
+pub type PFN_vkCopyMemoryToAccelerationStructureKHR = unsafe extern "system" fn(
     _device: Device,
     _deferred_operation: DeferredOperationKHR,
     _info: *const CopyMemoryToAccelerationStructureInfoKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateAccelerationStructureKHR.html>
-pub type PFN_vkCreateAccelerationStructureKHR = extern "system" fn(
+pub type PFN_vkCreateAccelerationStructureKHR = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const AccelerationStructureCreateInfoKHR,
     _allocator: *const AllocationCallbacks,
@@ -1158,7 +1174,7 @@ pub type PFN_vkCreateAccelerationStructureKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateAccelerationStructureNV.html>
-pub type PFN_vkCreateAccelerationStructureNV = extern "system" fn(
+pub type PFN_vkCreateAccelerationStructureNV = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const AccelerationStructureCreateInfoNV,
     _allocator: *const AllocationCallbacks,
@@ -1166,7 +1182,7 @@ pub type PFN_vkCreateAccelerationStructureNV = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateAndroidSurfaceKHR.html>
-pub type PFN_vkCreateAndroidSurfaceKHR = extern "system" fn(
+pub type PFN_vkCreateAndroidSurfaceKHR = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const AndroidSurfaceCreateInfoKHR,
     _allocator: *const AllocationCallbacks,
@@ -1174,7 +1190,7 @@ pub type PFN_vkCreateAndroidSurfaceKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateBuffer.html>
-pub type PFN_vkCreateBuffer = extern "system" fn(
+pub type PFN_vkCreateBuffer = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const BufferCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1182,7 +1198,7 @@ pub type PFN_vkCreateBuffer = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateBufferView.html>
-pub type PFN_vkCreateBufferView = extern "system" fn(
+pub type PFN_vkCreateBufferView = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const BufferViewCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1190,7 +1206,7 @@ pub type PFN_vkCreateBufferView = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateCommandPool.html>
-pub type PFN_vkCreateCommandPool = extern "system" fn(
+pub type PFN_vkCreateCommandPool = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const CommandPoolCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1198,7 +1214,7 @@ pub type PFN_vkCreateCommandPool = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateComputePipelines.html>
-pub type PFN_vkCreateComputePipelines = extern "system" fn(
+pub type PFN_vkCreateComputePipelines = unsafe extern "system" fn(
     _device: Device,
     _pipeline_cache: PipelineCache,
     _create_info_count: u32,
@@ -1208,7 +1224,7 @@ pub type PFN_vkCreateComputePipelines = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDebugReportCallbackEXT.html>
-pub type PFN_vkCreateDebugReportCallbackEXT = extern "system" fn(
+pub type PFN_vkCreateDebugReportCallbackEXT = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const DebugReportCallbackCreateInfoEXT,
     _allocator: *const AllocationCallbacks,
@@ -1216,7 +1232,7 @@ pub type PFN_vkCreateDebugReportCallbackEXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDebugUtilsMessengerEXT.html>
-pub type PFN_vkCreateDebugUtilsMessengerEXT = extern "system" fn(
+pub type PFN_vkCreateDebugUtilsMessengerEXT = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const DebugUtilsMessengerCreateInfoEXT,
     _allocator: *const AllocationCallbacks,
@@ -1224,14 +1240,14 @@ pub type PFN_vkCreateDebugUtilsMessengerEXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDeferredOperationKHR.html>
-pub type PFN_vkCreateDeferredOperationKHR = extern "system" fn(
+pub type PFN_vkCreateDeferredOperationKHR = unsafe extern "system" fn(
     _device: Device,
     _allocator: *const AllocationCallbacks,
     _deferred_operation: *mut DeferredOperationKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDescriptorPool.html>
-pub type PFN_vkCreateDescriptorPool = extern "system" fn(
+pub type PFN_vkCreateDescriptorPool = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const DescriptorPoolCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1239,7 +1255,7 @@ pub type PFN_vkCreateDescriptorPool = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDescriptorSetLayout.html>
-pub type PFN_vkCreateDescriptorSetLayout = extern "system" fn(
+pub type PFN_vkCreateDescriptorSetLayout = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const DescriptorSetLayoutCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1247,7 +1263,7 @@ pub type PFN_vkCreateDescriptorSetLayout = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDescriptorUpdateTemplate.html>
-pub type PFN_vkCreateDescriptorUpdateTemplate = extern "system" fn(
+pub type PFN_vkCreateDescriptorUpdateTemplate = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const DescriptorUpdateTemplateCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1258,7 +1274,7 @@ pub type PFN_vkCreateDescriptorUpdateTemplate = extern "system" fn(
 pub type PFN_vkCreateDescriptorUpdateTemplateKHR = PFN_vkCreateDescriptorUpdateTemplate;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDevice.html>
-pub type PFN_vkCreateDevice = extern "system" fn(
+pub type PFN_vkCreateDevice = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _create_info: *const DeviceCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1266,7 +1282,7 @@ pub type PFN_vkCreateDevice = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDirectFBSurfaceEXT.html>
-pub type PFN_vkCreateDirectFBSurfaceEXT = extern "system" fn(
+pub type PFN_vkCreateDirectFBSurfaceEXT = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const DirectFBSurfaceCreateInfoEXT,
     _allocator: *const AllocationCallbacks,
@@ -1274,7 +1290,7 @@ pub type PFN_vkCreateDirectFBSurfaceEXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDisplayModeKHR.html>
-pub type PFN_vkCreateDisplayModeKHR = extern "system" fn(
+pub type PFN_vkCreateDisplayModeKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _display: DisplayKHR,
     _create_info: *const DisplayModeCreateInfoKHR,
@@ -1283,7 +1299,7 @@ pub type PFN_vkCreateDisplayModeKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDisplayPlaneSurfaceKHR.html>
-pub type PFN_vkCreateDisplayPlaneSurfaceKHR = extern "system" fn(
+pub type PFN_vkCreateDisplayPlaneSurfaceKHR = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const DisplaySurfaceCreateInfoKHR,
     _allocator: *const AllocationCallbacks,
@@ -1291,7 +1307,7 @@ pub type PFN_vkCreateDisplayPlaneSurfaceKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateEvent.html>
-pub type PFN_vkCreateEvent = extern "system" fn(
+pub type PFN_vkCreateEvent = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const EventCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1299,7 +1315,7 @@ pub type PFN_vkCreateEvent = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateFence.html>
-pub type PFN_vkCreateFence = extern "system" fn(
+pub type PFN_vkCreateFence = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const FenceCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1307,7 +1323,7 @@ pub type PFN_vkCreateFence = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateFramebuffer.html>
-pub type PFN_vkCreateFramebuffer = extern "system" fn(
+pub type PFN_vkCreateFramebuffer = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const FramebufferCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1315,7 +1331,7 @@ pub type PFN_vkCreateFramebuffer = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateGraphicsPipelines.html>
-pub type PFN_vkCreateGraphicsPipelines = extern "system" fn(
+pub type PFN_vkCreateGraphicsPipelines = unsafe extern "system" fn(
     _device: Device,
     _pipeline_cache: PipelineCache,
     _create_info_count: u32,
@@ -1325,7 +1341,7 @@ pub type PFN_vkCreateGraphicsPipelines = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateHeadlessSurfaceEXT.html>
-pub type PFN_vkCreateHeadlessSurfaceEXT = extern "system" fn(
+pub type PFN_vkCreateHeadlessSurfaceEXT = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const HeadlessSurfaceCreateInfoEXT,
     _allocator: *const AllocationCallbacks,
@@ -1333,7 +1349,7 @@ pub type PFN_vkCreateHeadlessSurfaceEXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateIOSSurfaceMVK.html>
-pub type PFN_vkCreateIOSSurfaceMVK = extern "system" fn(
+pub type PFN_vkCreateIOSSurfaceMVK = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const IOSSurfaceCreateInfoMVK,
     _allocator: *const AllocationCallbacks,
@@ -1341,7 +1357,7 @@ pub type PFN_vkCreateIOSSurfaceMVK = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateImage.html>
-pub type PFN_vkCreateImage = extern "system" fn(
+pub type PFN_vkCreateImage = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const ImageCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1349,7 +1365,7 @@ pub type PFN_vkCreateImage = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateImagePipeSurfaceFUCHSIA.html>
-pub type PFN_vkCreateImagePipeSurfaceFUCHSIA = extern "system" fn(
+pub type PFN_vkCreateImagePipeSurfaceFUCHSIA = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const ImagePipeSurfaceCreateInfoFUCHSIA,
     _allocator: *const AllocationCallbacks,
@@ -1357,7 +1373,7 @@ pub type PFN_vkCreateImagePipeSurfaceFUCHSIA = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateImageView.html>
-pub type PFN_vkCreateImageView = extern "system" fn(
+pub type PFN_vkCreateImageView = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const ImageViewCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1365,7 +1381,7 @@ pub type PFN_vkCreateImageView = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateIndirectCommandsLayoutNV.html>
-pub type PFN_vkCreateIndirectCommandsLayoutNV = extern "system" fn(
+pub type PFN_vkCreateIndirectCommandsLayoutNV = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const IndirectCommandsLayoutCreateInfoNV,
     _allocator: *const AllocationCallbacks,
@@ -1373,14 +1389,14 @@ pub type PFN_vkCreateIndirectCommandsLayoutNV = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateInstance.html>
-pub type PFN_vkCreateInstance = extern "system" fn(
+pub type PFN_vkCreateInstance = unsafe extern "system" fn(
     _create_info: *const InstanceCreateInfo,
     _allocator: *const AllocationCallbacks,
     _instance: *mut Instance,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateMacOSSurfaceMVK.html>
-pub type PFN_vkCreateMacOSSurfaceMVK = extern "system" fn(
+pub type PFN_vkCreateMacOSSurfaceMVK = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const MacOSSurfaceCreateInfoMVK,
     _allocator: *const AllocationCallbacks,
@@ -1388,7 +1404,7 @@ pub type PFN_vkCreateMacOSSurfaceMVK = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateMetalSurfaceEXT.html>
-pub type PFN_vkCreateMetalSurfaceEXT = extern "system" fn(
+pub type PFN_vkCreateMetalSurfaceEXT = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const MetalSurfaceCreateInfoEXT,
     _allocator: *const AllocationCallbacks,
@@ -1396,7 +1412,7 @@ pub type PFN_vkCreateMetalSurfaceEXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreatePipelineCache.html>
-pub type PFN_vkCreatePipelineCache = extern "system" fn(
+pub type PFN_vkCreatePipelineCache = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const PipelineCacheCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1404,7 +1420,7 @@ pub type PFN_vkCreatePipelineCache = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreatePipelineLayout.html>
-pub type PFN_vkCreatePipelineLayout = extern "system" fn(
+pub type PFN_vkCreatePipelineLayout = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const PipelineLayoutCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1412,7 +1428,7 @@ pub type PFN_vkCreatePipelineLayout = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreatePrivateDataSlotEXT.html>
-pub type PFN_vkCreatePrivateDataSlotEXT = extern "system" fn(
+pub type PFN_vkCreatePrivateDataSlotEXT = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const PrivateDataSlotCreateInfoEXT,
     _allocator: *const AllocationCallbacks,
@@ -1420,7 +1436,7 @@ pub type PFN_vkCreatePrivateDataSlotEXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateQueryPool.html>
-pub type PFN_vkCreateQueryPool = extern "system" fn(
+pub type PFN_vkCreateQueryPool = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const QueryPoolCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1428,7 +1444,7 @@ pub type PFN_vkCreateQueryPool = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateRayTracingPipelinesKHR.html>
-pub type PFN_vkCreateRayTracingPipelinesKHR = extern "system" fn(
+pub type PFN_vkCreateRayTracingPipelinesKHR = unsafe extern "system" fn(
     _device: Device,
     _deferred_operation: DeferredOperationKHR,
     _pipeline_cache: PipelineCache,
@@ -1439,7 +1455,7 @@ pub type PFN_vkCreateRayTracingPipelinesKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateRayTracingPipelinesNV.html>
-pub type PFN_vkCreateRayTracingPipelinesNV = extern "system" fn(
+pub type PFN_vkCreateRayTracingPipelinesNV = unsafe extern "system" fn(
     _device: Device,
     _pipeline_cache: PipelineCache,
     _create_info_count: u32,
@@ -1449,7 +1465,7 @@ pub type PFN_vkCreateRayTracingPipelinesNV = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateRenderPass.html>
-pub type PFN_vkCreateRenderPass = extern "system" fn(
+pub type PFN_vkCreateRenderPass = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const RenderPassCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1457,7 +1473,7 @@ pub type PFN_vkCreateRenderPass = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateRenderPass2.html>
-pub type PFN_vkCreateRenderPass2 = extern "system" fn(
+pub type PFN_vkCreateRenderPass2 = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const RenderPassCreateInfo2,
     _allocator: *const AllocationCallbacks,
@@ -1468,7 +1484,7 @@ pub type PFN_vkCreateRenderPass2 = extern "system" fn(
 pub type PFN_vkCreateRenderPass2KHR = PFN_vkCreateRenderPass2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSampler.html>
-pub type PFN_vkCreateSampler = extern "system" fn(
+pub type PFN_vkCreateSampler = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const SamplerCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1476,7 +1492,7 @@ pub type PFN_vkCreateSampler = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSamplerYcbcrConversion.html>
-pub type PFN_vkCreateSamplerYcbcrConversion = extern "system" fn(
+pub type PFN_vkCreateSamplerYcbcrConversion = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const SamplerYcbcrConversionCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1487,7 +1503,7 @@ pub type PFN_vkCreateSamplerYcbcrConversion = extern "system" fn(
 pub type PFN_vkCreateSamplerYcbcrConversionKHR = PFN_vkCreateSamplerYcbcrConversion;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateScreenSurfaceQNX.html>
-pub type PFN_vkCreateScreenSurfaceQNX = extern "system" fn(
+pub type PFN_vkCreateScreenSurfaceQNX = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const ScreenSurfaceCreateInfoQNX,
     _allocator: *const AllocationCallbacks,
@@ -1495,7 +1511,7 @@ pub type PFN_vkCreateScreenSurfaceQNX = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSemaphore.html>
-pub type PFN_vkCreateSemaphore = extern "system" fn(
+pub type PFN_vkCreateSemaphore = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const SemaphoreCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1503,7 +1519,7 @@ pub type PFN_vkCreateSemaphore = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateShaderModule.html>
-pub type PFN_vkCreateShaderModule = extern "system" fn(
+pub type PFN_vkCreateShaderModule = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const ShaderModuleCreateInfo,
     _allocator: *const AllocationCallbacks,
@@ -1511,7 +1527,7 @@ pub type PFN_vkCreateShaderModule = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSharedSwapchainsKHR.html>
-pub type PFN_vkCreateSharedSwapchainsKHR = extern "system" fn(
+pub type PFN_vkCreateSharedSwapchainsKHR = unsafe extern "system" fn(
     _device: Device,
     _swapchain_count: u32,
     _create_infos: *const SwapchainCreateInfoKHR,
@@ -1520,7 +1536,7 @@ pub type PFN_vkCreateSharedSwapchainsKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateStreamDescriptorSurfaceGGP.html>
-pub type PFN_vkCreateStreamDescriptorSurfaceGGP = extern "system" fn(
+pub type PFN_vkCreateStreamDescriptorSurfaceGGP = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const StreamDescriptorSurfaceCreateInfoGGP,
     _allocator: *const AllocationCallbacks,
@@ -1528,7 +1544,7 @@ pub type PFN_vkCreateStreamDescriptorSurfaceGGP = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSwapchainKHR.html>
-pub type PFN_vkCreateSwapchainKHR = extern "system" fn(
+pub type PFN_vkCreateSwapchainKHR = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const SwapchainCreateInfoKHR,
     _allocator: *const AllocationCallbacks,
@@ -1536,7 +1552,7 @@ pub type PFN_vkCreateSwapchainKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateValidationCacheEXT.html>
-pub type PFN_vkCreateValidationCacheEXT = extern "system" fn(
+pub type PFN_vkCreateValidationCacheEXT = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const ValidationCacheCreateInfoEXT,
     _allocator: *const AllocationCallbacks,
@@ -1544,7 +1560,7 @@ pub type PFN_vkCreateValidationCacheEXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateViSurfaceNN.html>
-pub type PFN_vkCreateViSurfaceNN = extern "system" fn(
+pub type PFN_vkCreateViSurfaceNN = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const ViSurfaceCreateInfoNN,
     _allocator: *const AllocationCallbacks,
@@ -1552,7 +1568,7 @@ pub type PFN_vkCreateViSurfaceNN = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateWaylandSurfaceKHR.html>
-pub type PFN_vkCreateWaylandSurfaceKHR = extern "system" fn(
+pub type PFN_vkCreateWaylandSurfaceKHR = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const WaylandSurfaceCreateInfoKHR,
     _allocator: *const AllocationCallbacks,
@@ -1560,7 +1576,7 @@ pub type PFN_vkCreateWaylandSurfaceKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateWin32SurfaceKHR.html>
-pub type PFN_vkCreateWin32SurfaceKHR = extern "system" fn(
+pub type PFN_vkCreateWin32SurfaceKHR = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const Win32SurfaceCreateInfoKHR,
     _allocator: *const AllocationCallbacks,
@@ -1568,7 +1584,7 @@ pub type PFN_vkCreateWin32SurfaceKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateXcbSurfaceKHR.html>
-pub type PFN_vkCreateXcbSurfaceKHR = extern "system" fn(
+pub type PFN_vkCreateXcbSurfaceKHR = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const XcbSurfaceCreateInfoKHR,
     _allocator: *const AllocationCallbacks,
@@ -1576,7 +1592,7 @@ pub type PFN_vkCreateXcbSurfaceKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateXlibSurfaceKHR.html>
-pub type PFN_vkCreateXlibSurfaceKHR = extern "system" fn(
+pub type PFN_vkCreateXlibSurfaceKHR = unsafe extern "system" fn(
     _instance: Instance,
     _create_info: *const XlibSurfaceCreateInfoKHR,
     _allocator: *const AllocationCallbacks,
@@ -1584,15 +1600,19 @@ pub type PFN_vkCreateXlibSurfaceKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDebugMarkerSetObjectNameEXT.html>
-pub type PFN_vkDebugMarkerSetObjectNameEXT =
-    extern "system" fn(_device: Device, _name_info: *const DebugMarkerObjectNameInfoEXT) -> Result;
+pub type PFN_vkDebugMarkerSetObjectNameEXT = unsafe extern "system" fn(
+    _device: Device,
+    _name_info: *const DebugMarkerObjectNameInfoEXT,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDebugMarkerSetObjectTagEXT.html>
-pub type PFN_vkDebugMarkerSetObjectTagEXT =
-    extern "system" fn(_device: Device, _tag_info: *const DebugMarkerObjectTagInfoEXT) -> Result;
+pub type PFN_vkDebugMarkerSetObjectTagEXT = unsafe extern "system" fn(
+    _device: Device,
+    _tag_info: *const DebugMarkerObjectTagInfoEXT,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDebugReportMessageEXT.html>
-pub type PFN_vkDebugReportMessageEXT = extern "system" fn(
+pub type PFN_vkDebugReportMessageEXT = unsafe extern "system" fn(
     _instance: Instance,
     _flags: DebugReportFlagsEXT,
     _object_type: DebugReportObjectTypeEXT,
@@ -1605,77 +1625,80 @@ pub type PFN_vkDebugReportMessageEXT = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDeferredOperationJoinKHR.html>
 pub type PFN_vkDeferredOperationJoinKHR =
-    extern "system" fn(_device: Device, _operation: DeferredOperationKHR) -> Result;
+    unsafe extern "system" fn(_device: Device, _operation: DeferredOperationKHR) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyAccelerationStructureKHR.html>
-pub type PFN_vkDestroyAccelerationStructureKHR = extern "system" fn(
+pub type PFN_vkDestroyAccelerationStructureKHR = unsafe extern "system" fn(
     _device: Device,
     _acceleration_structure: AccelerationStructureKHR,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyAccelerationStructureNV.html>
-pub type PFN_vkDestroyAccelerationStructureNV = extern "system" fn(
+pub type PFN_vkDestroyAccelerationStructureNV = unsafe extern "system" fn(
     _device: Device,
     _acceleration_structure: AccelerationStructureNV,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyBuffer.html>
-pub type PFN_vkDestroyBuffer =
-    extern "system" fn(_device: Device, _buffer: Buffer, _allocator: *const AllocationCallbacks);
+pub type PFN_vkDestroyBuffer = unsafe extern "system" fn(
+    _device: Device,
+    _buffer: Buffer,
+    _allocator: *const AllocationCallbacks,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyBufferView.html>
-pub type PFN_vkDestroyBufferView = extern "system" fn(
+pub type PFN_vkDestroyBufferView = unsafe extern "system" fn(
     _device: Device,
     _buffer_view: BufferView,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyCommandPool.html>
-pub type PFN_vkDestroyCommandPool = extern "system" fn(
+pub type PFN_vkDestroyCommandPool = unsafe extern "system" fn(
     _device: Device,
     _command_pool: CommandPool,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDebugReportCallbackEXT.html>
-pub type PFN_vkDestroyDebugReportCallbackEXT = extern "system" fn(
+pub type PFN_vkDestroyDebugReportCallbackEXT = unsafe extern "system" fn(
     _instance: Instance,
     _callback: DebugReportCallbackEXT,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDebugUtilsMessengerEXT.html>
-pub type PFN_vkDestroyDebugUtilsMessengerEXT = extern "system" fn(
+pub type PFN_vkDestroyDebugUtilsMessengerEXT = unsafe extern "system" fn(
     _instance: Instance,
     _messenger: DebugUtilsMessengerEXT,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDeferredOperationKHR.html>
-pub type PFN_vkDestroyDeferredOperationKHR = extern "system" fn(
+pub type PFN_vkDestroyDeferredOperationKHR = unsafe extern "system" fn(
     _device: Device,
     _operation: DeferredOperationKHR,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDescriptorPool.html>
-pub type PFN_vkDestroyDescriptorPool = extern "system" fn(
+pub type PFN_vkDestroyDescriptorPool = unsafe extern "system" fn(
     _device: Device,
     _descriptor_pool: DescriptorPool,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDescriptorSetLayout.html>
-pub type PFN_vkDestroyDescriptorSetLayout = extern "system" fn(
+pub type PFN_vkDestroyDescriptorSetLayout = unsafe extern "system" fn(
     _device: Device,
     _descriptor_set_layout: DescriptorSetLayout,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDescriptorUpdateTemplate.html>
-pub type PFN_vkDestroyDescriptorUpdateTemplate = extern "system" fn(
+pub type PFN_vkDestroyDescriptorUpdateTemplate = unsafe extern "system" fn(
     _device: Device,
     _descriptor_update_template: DescriptorUpdateTemplate,
     _allocator: *const AllocationCallbacks,
@@ -1686,36 +1709,45 @@ pub type PFN_vkDestroyDescriptorUpdateTemplateKHR = PFN_vkDestroyDescriptorUpdat
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDevice.html>
 pub type PFN_vkDestroyDevice =
-    extern "system" fn(_device: Device, _allocator: *const AllocationCallbacks);
+    unsafe extern "system" fn(_device: Device, _allocator: *const AllocationCallbacks);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyEvent.html>
-pub type PFN_vkDestroyEvent =
-    extern "system" fn(_device: Device, _event: Event, _allocator: *const AllocationCallbacks);
+pub type PFN_vkDestroyEvent = unsafe extern "system" fn(
+    _device: Device,
+    _event: Event,
+    _allocator: *const AllocationCallbacks,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyFence.html>
-pub type PFN_vkDestroyFence =
-    extern "system" fn(_device: Device, _fence: Fence, _allocator: *const AllocationCallbacks);
+pub type PFN_vkDestroyFence = unsafe extern "system" fn(
+    _device: Device,
+    _fence: Fence,
+    _allocator: *const AllocationCallbacks,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyFramebuffer.html>
-pub type PFN_vkDestroyFramebuffer = extern "system" fn(
+pub type PFN_vkDestroyFramebuffer = unsafe extern "system" fn(
     _device: Device,
     _framebuffer: Framebuffer,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyImage.html>
-pub type PFN_vkDestroyImage =
-    extern "system" fn(_device: Device, _image: Image, _allocator: *const AllocationCallbacks);
+pub type PFN_vkDestroyImage = unsafe extern "system" fn(
+    _device: Device,
+    _image: Image,
+    _allocator: *const AllocationCallbacks,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyImageView.html>
-pub type PFN_vkDestroyImageView = extern "system" fn(
+pub type PFN_vkDestroyImageView = unsafe extern "system" fn(
     _device: Device,
     _image_view: ImageView,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyIndirectCommandsLayoutNV.html>
-pub type PFN_vkDestroyIndirectCommandsLayoutNV = extern "system" fn(
+pub type PFN_vkDestroyIndirectCommandsLayoutNV = unsafe extern "system" fn(
     _device: Device,
     _indirect_commands_layout: IndirectCommandsLayoutNV,
     _allocator: *const AllocationCallbacks,
@@ -1723,56 +1755,59 @@ pub type PFN_vkDestroyIndirectCommandsLayoutNV = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyInstance.html>
 pub type PFN_vkDestroyInstance =
-    extern "system" fn(_instance: Instance, _allocator: *const AllocationCallbacks);
+    unsafe extern "system" fn(_instance: Instance, _allocator: *const AllocationCallbacks);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyPipeline.html>
-pub type PFN_vkDestroyPipeline = extern "system" fn(
+pub type PFN_vkDestroyPipeline = unsafe extern "system" fn(
     _device: Device,
     _pipeline: Pipeline,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyPipelineCache.html>
-pub type PFN_vkDestroyPipelineCache = extern "system" fn(
+pub type PFN_vkDestroyPipelineCache = unsafe extern "system" fn(
     _device: Device,
     _pipeline_cache: PipelineCache,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyPipelineLayout.html>
-pub type PFN_vkDestroyPipelineLayout = extern "system" fn(
+pub type PFN_vkDestroyPipelineLayout = unsafe extern "system" fn(
     _device: Device,
     _pipeline_layout: PipelineLayout,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyPrivateDataSlotEXT.html>
-pub type PFN_vkDestroyPrivateDataSlotEXT = extern "system" fn(
+pub type PFN_vkDestroyPrivateDataSlotEXT = unsafe extern "system" fn(
     _device: Device,
     _private_data_slot: PrivateDataSlotEXT,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyQueryPool.html>
-pub type PFN_vkDestroyQueryPool = extern "system" fn(
+pub type PFN_vkDestroyQueryPool = unsafe extern "system" fn(
     _device: Device,
     _query_pool: QueryPool,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyRenderPass.html>
-pub type PFN_vkDestroyRenderPass = extern "system" fn(
+pub type PFN_vkDestroyRenderPass = unsafe extern "system" fn(
     _device: Device,
     _render_pass: RenderPass,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroySampler.html>
-pub type PFN_vkDestroySampler =
-    extern "system" fn(_device: Device, _sampler: Sampler, _allocator: *const AllocationCallbacks);
+pub type PFN_vkDestroySampler = unsafe extern "system" fn(
+    _device: Device,
+    _sampler: Sampler,
+    _allocator: *const AllocationCallbacks,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroySamplerYcbcrConversion.html>
-pub type PFN_vkDestroySamplerYcbcrConversion = extern "system" fn(
+pub type PFN_vkDestroySamplerYcbcrConversion = unsafe extern "system" fn(
     _device: Device,
     _ycbcr_conversion: SamplerYcbcrConversion,
     _allocator: *const AllocationCallbacks,
@@ -1782,55 +1817,56 @@ pub type PFN_vkDestroySamplerYcbcrConversion = extern "system" fn(
 pub type PFN_vkDestroySamplerYcbcrConversionKHR = PFN_vkDestroySamplerYcbcrConversion;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroySemaphore.html>
-pub type PFN_vkDestroySemaphore = extern "system" fn(
+pub type PFN_vkDestroySemaphore = unsafe extern "system" fn(
     _device: Device,
     _semaphore: Semaphore,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyShaderModule.html>
-pub type PFN_vkDestroyShaderModule = extern "system" fn(
+pub type PFN_vkDestroyShaderModule = unsafe extern "system" fn(
     _device: Device,
     _shader_module: ShaderModule,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroySurfaceKHR.html>
-pub type PFN_vkDestroySurfaceKHR = extern "system" fn(
+pub type PFN_vkDestroySurfaceKHR = unsafe extern "system" fn(
     _instance: Instance,
     _surface: SurfaceKHR,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroySwapchainKHR.html>
-pub type PFN_vkDestroySwapchainKHR = extern "system" fn(
+pub type PFN_vkDestroySwapchainKHR = unsafe extern "system" fn(
     _device: Device,
     _swapchain: SwapchainKHR,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyValidationCacheEXT.html>
-pub type PFN_vkDestroyValidationCacheEXT = extern "system" fn(
+pub type PFN_vkDestroyValidationCacheEXT = unsafe extern "system" fn(
     _device: Device,
     _validation_cache: ValidationCacheEXT,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDeviceWaitIdle.html>
-pub type PFN_vkDeviceWaitIdle = extern "system" fn(_device: Device) -> Result;
+pub type PFN_vkDeviceWaitIdle = unsafe extern "system" fn(_device: Device) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDisplayPowerControlEXT.html>
-pub type PFN_vkDisplayPowerControlEXT = extern "system" fn(
+pub type PFN_vkDisplayPowerControlEXT = unsafe extern "system" fn(
     _device: Device,
     _display: DisplayKHR,
     _display_power_info: *const DisplayPowerInfoEXT,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEndCommandBuffer.html>
-pub type PFN_vkEndCommandBuffer = extern "system" fn(_command_buffer: CommandBuffer) -> Result;
+pub type PFN_vkEndCommandBuffer =
+    unsafe extern "system" fn(_command_buffer: CommandBuffer) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateDeviceExtensionProperties.html>
-pub type PFN_vkEnumerateDeviceExtensionProperties = extern "system" fn(
+pub type PFN_vkEnumerateDeviceExtensionProperties = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _layer_name: *const c_char,
     _property_count: *mut u32,
@@ -1838,28 +1874,31 @@ pub type PFN_vkEnumerateDeviceExtensionProperties = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateDeviceLayerProperties.html>
-pub type PFN_vkEnumerateDeviceLayerProperties = extern "system" fn(
+pub type PFN_vkEnumerateDeviceLayerProperties = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _property_count: *mut u32,
     _properties: *mut LayerProperties,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateInstanceExtensionProperties.html>
-pub type PFN_vkEnumerateInstanceExtensionProperties = extern "system" fn(
+pub type PFN_vkEnumerateInstanceExtensionProperties = unsafe extern "system" fn(
     _layer_name: *const c_char,
     _property_count: *mut u32,
     _properties: *mut ExtensionProperties,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateInstanceLayerProperties.html>
-pub type PFN_vkEnumerateInstanceLayerProperties =
-    extern "system" fn(_property_count: *mut u32, _properties: *mut LayerProperties) -> Result;
+pub type PFN_vkEnumerateInstanceLayerProperties = unsafe extern "system" fn(
+    _property_count: *mut u32,
+    _properties: *mut LayerProperties,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateInstanceVersion.html>
-pub type PFN_vkEnumerateInstanceVersion = extern "system" fn(_api_version: *mut u32) -> Result;
+pub type PFN_vkEnumerateInstanceVersion =
+    unsafe extern "system" fn(_api_version: *mut u32) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumeratePhysicalDeviceGroups.html>
-pub type PFN_vkEnumeratePhysicalDeviceGroups = extern "system" fn(
+pub type PFN_vkEnumeratePhysicalDeviceGroups = unsafe extern "system" fn(
     _instance: Instance,
     _physical_device_group_count: *mut u32,
     _physical_device_group_properties: *mut PhysicalDeviceGroupProperties,
@@ -1870,7 +1909,7 @@ pub type PFN_vkEnumeratePhysicalDeviceGroupsKHR = PFN_vkEnumeratePhysicalDeviceG
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.html>
 pub type PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR =
-    extern "system" fn(
+    unsafe extern "system" fn(
         _physical_device: PhysicalDevice,
         _queue_family_index: u32,
         _counter_count: *mut u32,
@@ -1879,21 +1918,21 @@ pub type PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR =
     ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumeratePhysicalDevices.html>
-pub type PFN_vkEnumeratePhysicalDevices = extern "system" fn(
+pub type PFN_vkEnumeratePhysicalDevices = unsafe extern "system" fn(
     _instance: Instance,
     _physical_device_count: *mut u32,
     _physical_devices: *mut PhysicalDevice,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkFlushMappedMemoryRanges.html>
-pub type PFN_vkFlushMappedMemoryRanges = extern "system" fn(
+pub type PFN_vkFlushMappedMemoryRanges = unsafe extern "system" fn(
     _device: Device,
     _memory_range_count: u32,
     _memory_ranges: *const MappedMemoryRange,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkFreeCommandBuffers.html>
-pub type PFN_vkFreeCommandBuffers = extern "system" fn(
+pub type PFN_vkFreeCommandBuffers = unsafe extern "system" fn(
     _device: Device,
     _command_pool: CommandPool,
     _command_buffer_count: u32,
@@ -1901,7 +1940,7 @@ pub type PFN_vkFreeCommandBuffers = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkFreeDescriptorSets.html>
-pub type PFN_vkFreeDescriptorSets = extern "system" fn(
+pub type PFN_vkFreeDescriptorSets = unsafe extern "system" fn(
     _device: Device,
     _descriptor_pool: DescriptorPool,
     _descriptor_set_count: u32,
@@ -1909,14 +1948,14 @@ pub type PFN_vkFreeDescriptorSets = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkFreeMemory.html>
-pub type PFN_vkFreeMemory = extern "system" fn(
+pub type PFN_vkFreeMemory = unsafe extern "system" fn(
     _device: Device,
     _memory: DeviceMemory,
     _allocator: *const AllocationCallbacks,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureBuildSizesKHR.html>
-pub type PFN_vkGetAccelerationStructureBuildSizesKHR = extern "system" fn(
+pub type PFN_vkGetAccelerationStructureBuildSizesKHR = unsafe extern "system" fn(
     _device: Device,
     _build_type: AccelerationStructureBuildTypeKHR,
     _build_info: *const AccelerationStructureBuildGeometryInfoKHR,
@@ -1925,13 +1964,14 @@ pub type PFN_vkGetAccelerationStructureBuildSizesKHR = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureDeviceAddressKHR.html>
-pub type PFN_vkGetAccelerationStructureDeviceAddressKHR = extern "system" fn(
-    _device: Device,
-    _info: *const AccelerationStructureDeviceAddressInfoKHR,
-) -> DeviceAddress;
+pub type PFN_vkGetAccelerationStructureDeviceAddressKHR =
+    unsafe extern "system" fn(
+        _device: Device,
+        _info: *const AccelerationStructureDeviceAddressInfoKHR,
+    ) -> DeviceAddress;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureHandleNV.html>
-pub type PFN_vkGetAccelerationStructureHandleNV = extern "system" fn(
+pub type PFN_vkGetAccelerationStructureHandleNV = unsafe extern "system" fn(
     _device: Device,
     _acceleration_structure: AccelerationStructureNV,
     _data_size: usize,
@@ -1939,22 +1979,24 @@ pub type PFN_vkGetAccelerationStructureHandleNV = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureMemoryRequirementsNV.html>
-pub type PFN_vkGetAccelerationStructureMemoryRequirementsNV = extern "system" fn(
+pub type PFN_vkGetAccelerationStructureMemoryRequirementsNV = unsafe extern "system" fn(
     _device: Device,
     _info: *const AccelerationStructureMemoryRequirementsInfoNV,
     _memory_requirements: *mut MemoryRequirements2KHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAndroidHardwareBufferPropertiesANDROID.html>
-pub type PFN_vkGetAndroidHardwareBufferPropertiesANDROID = extern "system" fn(
+pub type PFN_vkGetAndroidHardwareBufferPropertiesANDROID = unsafe extern "system" fn(
     _device: Device,
     _buffer: *const AHardwareBuffer,
     _properties: *mut AndroidHardwareBufferPropertiesANDROID,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferDeviceAddress.html>
-pub type PFN_vkGetBufferDeviceAddress =
-    extern "system" fn(_device: Device, _info: *const BufferDeviceAddressInfo) -> DeviceAddress;
+pub type PFN_vkGetBufferDeviceAddress = unsafe extern "system" fn(
+    _device: Device,
+    _info: *const BufferDeviceAddressInfo,
+) -> DeviceAddress;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferDeviceAddressEXT.html>
 pub type PFN_vkGetBufferDeviceAddressEXT = PFN_vkGetBufferDeviceAddress;
@@ -1963,14 +2005,14 @@ pub type PFN_vkGetBufferDeviceAddressEXT = PFN_vkGetBufferDeviceAddress;
 pub type PFN_vkGetBufferDeviceAddressKHR = PFN_vkGetBufferDeviceAddress;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferMemoryRequirements.html>
-pub type PFN_vkGetBufferMemoryRequirements = extern "system" fn(
+pub type PFN_vkGetBufferMemoryRequirements = unsafe extern "system" fn(
     _device: Device,
     _buffer: Buffer,
     _memory_requirements: *mut MemoryRequirements,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferMemoryRequirements2.html>
-pub type PFN_vkGetBufferMemoryRequirements2 = extern "system" fn(
+pub type PFN_vkGetBufferMemoryRequirements2 = unsafe extern "system" fn(
     _device: Device,
     _info: *const BufferMemoryRequirementsInfo2,
     _memory_requirements: *mut MemoryRequirements2,
@@ -1981,13 +2023,13 @@ pub type PFN_vkGetBufferMemoryRequirements2KHR = PFN_vkGetBufferMemoryRequiremen
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferOpaqueCaptureAddress.html>
 pub type PFN_vkGetBufferOpaqueCaptureAddress =
-    extern "system" fn(_device: Device, _info: *const BufferDeviceAddressInfo) -> u64;
+    unsafe extern "system" fn(_device: Device, _info: *const BufferDeviceAddressInfo) -> u64;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferOpaqueCaptureAddressKHR.html>
 pub type PFN_vkGetBufferOpaqueCaptureAddressKHR = PFN_vkGetBufferOpaqueCaptureAddress;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetCalibratedTimestampsEXT.html>
-pub type PFN_vkGetCalibratedTimestampsEXT = extern "system" fn(
+pub type PFN_vkGetCalibratedTimestampsEXT = unsafe extern "system" fn(
     _device: Device,
     _timestamp_count: u32,
     _timestamp_infos: *const CalibratedTimestampInfoEXT,
@@ -1997,14 +2039,14 @@ pub type PFN_vkGetCalibratedTimestampsEXT = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeferredOperationMaxConcurrencyKHR.html>
 pub type PFN_vkGetDeferredOperationMaxConcurrencyKHR =
-    extern "system" fn(_device: Device, _operation: DeferredOperationKHR) -> u32;
+    unsafe extern "system" fn(_device: Device, _operation: DeferredOperationKHR) -> u32;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeferredOperationResultKHR.html>
 pub type PFN_vkGetDeferredOperationResultKHR =
-    extern "system" fn(_device: Device, _operation: DeferredOperationKHR) -> Result;
+    unsafe extern "system" fn(_device: Device, _operation: DeferredOperationKHR) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDescriptorSetLayoutSupport.html>
-pub type PFN_vkGetDescriptorSetLayoutSupport = extern "system" fn(
+pub type PFN_vkGetDescriptorSetLayoutSupport = unsafe extern "system" fn(
     _device: Device,
     _create_info: *const DescriptorSetLayoutCreateInfo,
     _support: *mut DescriptorSetLayoutSupport,
@@ -2014,14 +2056,14 @@ pub type PFN_vkGetDescriptorSetLayoutSupport = extern "system" fn(
 pub type PFN_vkGetDescriptorSetLayoutSupportKHR = PFN_vkGetDescriptorSetLayoutSupport;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceAccelerationStructureCompatibilityKHR.html>
-pub type PFN_vkGetDeviceAccelerationStructureCompatibilityKHR = extern "system" fn(
+pub type PFN_vkGetDeviceAccelerationStructureCompatibilityKHR = unsafe extern "system" fn(
     _device: Device,
     _version_info: *const AccelerationStructureVersionInfoKHR,
     _compatibility: *mut AccelerationStructureCompatibilityKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupPeerMemoryFeatures.html>
-pub type PFN_vkGetDeviceGroupPeerMemoryFeatures = extern "system" fn(
+pub type PFN_vkGetDeviceGroupPeerMemoryFeatures = unsafe extern "system" fn(
     _device: Device,
     _heap_index: u32,
     _local_device_index: u32,
@@ -2033,45 +2075,47 @@ pub type PFN_vkGetDeviceGroupPeerMemoryFeatures = extern "system" fn(
 pub type PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR = PFN_vkGetDeviceGroupPeerMemoryFeatures;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupPresentCapabilitiesKHR.html>
-pub type PFN_vkGetDeviceGroupPresentCapabilitiesKHR = extern "system" fn(
+pub type PFN_vkGetDeviceGroupPresentCapabilitiesKHR = unsafe extern "system" fn(
     _device: Device,
     _device_group_present_capabilities: *mut DeviceGroupPresentCapabilitiesKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupSurfacePresentModes2EXT.html>
-pub type PFN_vkGetDeviceGroupSurfacePresentModes2EXT = extern "system" fn(
+pub type PFN_vkGetDeviceGroupSurfacePresentModes2EXT = unsafe extern "system" fn(
     _device: Device,
     _surface_info: *const PhysicalDeviceSurfaceInfo2KHR,
     _modes: *mut DeviceGroupPresentModeFlagsKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupSurfacePresentModesKHR.html>
-pub type PFN_vkGetDeviceGroupSurfacePresentModesKHR = extern "system" fn(
+pub type PFN_vkGetDeviceGroupSurfacePresentModesKHR = unsafe extern "system" fn(
     _device: Device,
     _surface: SurfaceKHR,
     _modes: *mut DeviceGroupPresentModeFlagsKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceMemoryCommitment.html>
-pub type PFN_vkGetDeviceMemoryCommitment = extern "system" fn(
+pub type PFN_vkGetDeviceMemoryCommitment = unsafe extern "system" fn(
     _device: Device,
     _memory: DeviceMemory,
     _committed_memory_in_bytes: *mut DeviceSize,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceMemoryOpaqueCaptureAddress.html>
-pub type PFN_vkGetDeviceMemoryOpaqueCaptureAddress =
-    extern "system" fn(_device: Device, _info: *const DeviceMemoryOpaqueCaptureAddressInfo) -> u64;
+pub type PFN_vkGetDeviceMemoryOpaqueCaptureAddress = unsafe extern "system" fn(
+    _device: Device,
+    _info: *const DeviceMemoryOpaqueCaptureAddressInfo,
+) -> u64;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceMemoryOpaqueCaptureAddressKHR.html>
 pub type PFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR = PFN_vkGetDeviceMemoryOpaqueCaptureAddress;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceProcAddr.html>
 pub type PFN_vkGetDeviceProcAddr =
-    extern "system" fn(_device: Device, _name: *const c_char) -> PFN_vkVoidFunction;
+    unsafe extern "system" fn(_device: Device, _name: *const c_char) -> PFN_vkVoidFunction;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceQueue.html>
-pub type PFN_vkGetDeviceQueue = extern "system" fn(
+pub type PFN_vkGetDeviceQueue = unsafe extern "system" fn(
     _device: Device,
     _queue_family_index: u32,
     _queue_index: u32,
@@ -2079,11 +2123,14 @@ pub type PFN_vkGetDeviceQueue = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceQueue2.html>
-pub type PFN_vkGetDeviceQueue2 =
-    extern "system" fn(_device: Device, _queue_info: *const DeviceQueueInfo2, _queue: *mut Queue);
+pub type PFN_vkGetDeviceQueue2 = unsafe extern "system" fn(
+    _device: Device,
+    _queue_info: *const DeviceQueueInfo2,
+    _queue: *mut Queue,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayModeProperties2KHR.html>
-pub type PFN_vkGetDisplayModeProperties2KHR = extern "system" fn(
+pub type PFN_vkGetDisplayModeProperties2KHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _display: DisplayKHR,
     _property_count: *mut u32,
@@ -2091,7 +2138,7 @@ pub type PFN_vkGetDisplayModeProperties2KHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayModePropertiesKHR.html>
-pub type PFN_vkGetDisplayModePropertiesKHR = extern "system" fn(
+pub type PFN_vkGetDisplayModePropertiesKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _display: DisplayKHR,
     _property_count: *mut u32,
@@ -2099,14 +2146,14 @@ pub type PFN_vkGetDisplayModePropertiesKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayPlaneCapabilities2KHR.html>
-pub type PFN_vkGetDisplayPlaneCapabilities2KHR = extern "system" fn(
+pub type PFN_vkGetDisplayPlaneCapabilities2KHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _display_plane_info: *const DisplayPlaneInfo2KHR,
     _capabilities: *mut DisplayPlaneCapabilities2KHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayPlaneCapabilitiesKHR.html>
-pub type PFN_vkGetDisplayPlaneCapabilitiesKHR = extern "system" fn(
+pub type PFN_vkGetDisplayPlaneCapabilitiesKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _mode: DisplayModeKHR,
     _plane_index: u32,
@@ -2114,7 +2161,7 @@ pub type PFN_vkGetDisplayPlaneCapabilitiesKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayPlaneSupportedDisplaysKHR.html>
-pub type PFN_vkGetDisplayPlaneSupportedDisplaysKHR = extern "system" fn(
+pub type PFN_vkGetDisplayPlaneSupportedDisplaysKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _plane_index: u32,
     _display_count: *mut u32,
@@ -2122,48 +2169,48 @@ pub type PFN_vkGetDisplayPlaneSupportedDisplaysKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetEventStatus.html>
-pub type PFN_vkGetEventStatus = extern "system" fn(_device: Device, _event: Event) -> Result;
+pub type PFN_vkGetEventStatus = unsafe extern "system" fn(_device: Device, _event: Event) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetFenceFdKHR.html>
-pub type PFN_vkGetFenceFdKHR = extern "system" fn(
+pub type PFN_vkGetFenceFdKHR = unsafe extern "system" fn(
     _device: Device,
     _get_fd_info: *const FenceGetFdInfoKHR,
     _fd: *mut c_int,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetFenceStatus.html>
-pub type PFN_vkGetFenceStatus = extern "system" fn(_device: Device, _fence: Fence) -> Result;
+pub type PFN_vkGetFenceStatus = unsafe extern "system" fn(_device: Device, _fence: Fence) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetFenceWin32HandleKHR.html>
-pub type PFN_vkGetFenceWin32HandleKHR = extern "system" fn(
+pub type PFN_vkGetFenceWin32HandleKHR = unsafe extern "system" fn(
     _device: Device,
     _get_win32_handle_info: *const FenceGetWin32HandleInfoKHR,
     _handle: *mut HANDLE,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetGeneratedCommandsMemoryRequirementsNV.html>
-pub type PFN_vkGetGeneratedCommandsMemoryRequirementsNV = extern "system" fn(
+pub type PFN_vkGetGeneratedCommandsMemoryRequirementsNV = unsafe extern "system" fn(
     _device: Device,
     _info: *const GeneratedCommandsMemoryRequirementsInfoNV,
     _memory_requirements: *mut MemoryRequirements2,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageDrmFormatModifierPropertiesEXT.html>
-pub type PFN_vkGetImageDrmFormatModifierPropertiesEXT = extern "system" fn(
+pub type PFN_vkGetImageDrmFormatModifierPropertiesEXT = unsafe extern "system" fn(
     _device: Device,
     _image: Image,
     _properties: *mut ImageDrmFormatModifierPropertiesEXT,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageMemoryRequirements.html>
-pub type PFN_vkGetImageMemoryRequirements = extern "system" fn(
+pub type PFN_vkGetImageMemoryRequirements = unsafe extern "system" fn(
     _device: Device,
     _image: Image,
     _memory_requirements: *mut MemoryRequirements,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageMemoryRequirements2.html>
-pub type PFN_vkGetImageMemoryRequirements2 = extern "system" fn(
+pub type PFN_vkGetImageMemoryRequirements2 = unsafe extern "system" fn(
     _device: Device,
     _info: *const ImageMemoryRequirementsInfo2,
     _memory_requirements: *mut MemoryRequirements2,
@@ -2173,7 +2220,7 @@ pub type PFN_vkGetImageMemoryRequirements2 = extern "system" fn(
 pub type PFN_vkGetImageMemoryRequirements2KHR = PFN_vkGetImageMemoryRequirements2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageSparseMemoryRequirements.html>
-pub type PFN_vkGetImageSparseMemoryRequirements = extern "system" fn(
+pub type PFN_vkGetImageSparseMemoryRequirements = unsafe extern "system" fn(
     _device: Device,
     _image: Image,
     _sparse_memory_requirement_count: *mut u32,
@@ -2181,7 +2228,7 @@ pub type PFN_vkGetImageSparseMemoryRequirements = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageSparseMemoryRequirements2.html>
-pub type PFN_vkGetImageSparseMemoryRequirements2 = extern "system" fn(
+pub type PFN_vkGetImageSparseMemoryRequirements2 = unsafe extern "system" fn(
     _device: Device,
     _info: *const ImageSparseMemoryRequirementsInfo2,
     _sparse_memory_requirement_count: *mut u32,
@@ -2192,7 +2239,7 @@ pub type PFN_vkGetImageSparseMemoryRequirements2 = extern "system" fn(
 pub type PFN_vkGetImageSparseMemoryRequirements2KHR = PFN_vkGetImageSparseMemoryRequirements2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageSubresourceLayout.html>
-pub type PFN_vkGetImageSubresourceLayout = extern "system" fn(
+pub type PFN_vkGetImageSubresourceLayout = unsafe extern "system" fn(
     _device: Device,
     _image: Image,
     _subresource: *const ImageSubresource,
@@ -2200,7 +2247,7 @@ pub type PFN_vkGetImageSubresourceLayout = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageViewAddressNVX.html>
-pub type PFN_vkGetImageViewAddressNVX = extern "system" fn(
+pub type PFN_vkGetImageViewAddressNVX = unsafe extern "system" fn(
     _device: Device,
     _image_view: ImageView,
     _properties: *mut ImageViewAddressPropertiesNVX,
@@ -2208,28 +2255,28 @@ pub type PFN_vkGetImageViewAddressNVX = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageViewHandleNVX.html>
 pub type PFN_vkGetImageViewHandleNVX =
-    extern "system" fn(_device: Device, _info: *const ImageViewHandleInfoNVX) -> u32;
+    unsafe extern "system" fn(_device: Device, _info: *const ImageViewHandleInfoNVX) -> u32;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetInstanceProcAddr.html>
 pub type PFN_vkGetInstanceProcAddr =
-    extern "system" fn(_instance: Instance, _name: *const c_char) -> PFN_vkVoidFunction;
+    unsafe extern "system" fn(_instance: Instance, _name: *const c_char) -> PFN_vkVoidFunction;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryAndroidHardwareBufferANDROID.html>
-pub type PFN_vkGetMemoryAndroidHardwareBufferANDROID = extern "system" fn(
+pub type PFN_vkGetMemoryAndroidHardwareBufferANDROID = unsafe extern "system" fn(
     _device: Device,
     _info: *const MemoryGetAndroidHardwareBufferInfoANDROID,
     _buffer: *mut *mut AHardwareBuffer,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryFdKHR.html>
-pub type PFN_vkGetMemoryFdKHR = extern "system" fn(
+pub type PFN_vkGetMemoryFdKHR = unsafe extern "system" fn(
     _device: Device,
     _get_fd_info: *const MemoryGetFdInfoKHR,
     _fd: *mut c_int,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryFdPropertiesKHR.html>
-pub type PFN_vkGetMemoryFdPropertiesKHR = extern "system" fn(
+pub type PFN_vkGetMemoryFdPropertiesKHR = unsafe extern "system" fn(
     _device: Device,
     _handle_type: ExternalMemoryHandleTypeFlags,
     _fd: c_int,
@@ -2237,7 +2284,7 @@ pub type PFN_vkGetMemoryFdPropertiesKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryHostPointerPropertiesEXT.html>
-pub type PFN_vkGetMemoryHostPointerPropertiesEXT = extern "system" fn(
+pub type PFN_vkGetMemoryHostPointerPropertiesEXT = unsafe extern "system" fn(
     _device: Device,
     _handle_type: ExternalMemoryHandleTypeFlags,
     _host_pointer: *const c_void,
@@ -2245,14 +2292,14 @@ pub type PFN_vkGetMemoryHostPointerPropertiesEXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryWin32HandleKHR.html>
-pub type PFN_vkGetMemoryWin32HandleKHR = extern "system" fn(
+pub type PFN_vkGetMemoryWin32HandleKHR = unsafe extern "system" fn(
     _device: Device,
     _get_win32_handle_info: *const MemoryGetWin32HandleInfoKHR,
     _handle: *mut HANDLE,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryWin32HandleNV.html>
-pub type PFN_vkGetMemoryWin32HandleNV = extern "system" fn(
+pub type PFN_vkGetMemoryWin32HandleNV = unsafe extern "system" fn(
     _device: Device,
     _memory: DeviceMemory,
     _handle_type: ExternalMemoryHandleTypeFlagsNV,
@@ -2260,7 +2307,7 @@ pub type PFN_vkGetMemoryWin32HandleNV = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryWin32HandlePropertiesKHR.html>
-pub type PFN_vkGetMemoryWin32HandlePropertiesKHR = extern "system" fn(
+pub type PFN_vkGetMemoryWin32HandlePropertiesKHR = unsafe extern "system" fn(
     _device: Device,
     _handle_type: ExternalMemoryHandleTypeFlags,
     _handle: HANDLE,
@@ -2268,7 +2315,7 @@ pub type PFN_vkGetMemoryWin32HandlePropertiesKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPastPresentationTimingGOOGLE.html>
-pub type PFN_vkGetPastPresentationTimingGOOGLE = extern "system" fn(
+pub type PFN_vkGetPastPresentationTimingGOOGLE = unsafe extern "system" fn(
     _device: Device,
     _swapchain: SwapchainKHR,
     _presentation_timing_count: *mut u32,
@@ -2276,63 +2323,65 @@ pub type PFN_vkGetPastPresentationTimingGOOGLE = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPerformanceParameterINTEL.html>
-pub type PFN_vkGetPerformanceParameterINTEL = extern "system" fn(
+pub type PFN_vkGetPerformanceParameterINTEL = unsafe extern "system" fn(
     _device: Device,
     _parameter: PerformanceParameterTypeINTEL,
     _value: *mut PerformanceValueINTEL,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceCalibrateableTimeDomainsEXT.html>
-pub type PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _time_domain_count: *mut u32,
     _time_domains: *mut TimeDomainEXT,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceCooperativeMatrixPropertiesNV.html>
-pub type PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _property_count: *mut u32,
     _properties: *mut CooperativeMatrixPropertiesNV,
-) -> Result;
+)
+    -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceDirectFBPresentationSupportEXT.html>
-pub type PFN_vkGetPhysicalDeviceDirectFBPresentationSupportEXT = extern "system" fn(
-    _physical_device: PhysicalDevice,
-    _queue_family_index: u32,
-    _dfb: *mut IDirectFB,
-) -> Bool32;
+pub type PFN_vkGetPhysicalDeviceDirectFBPresentationSupportEXT =
+    unsafe extern "system" fn(
+        _physical_device: PhysicalDevice,
+        _queue_family_index: u32,
+        _dfb: *mut IDirectFB,
+    ) -> Bool32;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceDisplayPlaneProperties2KHR.html>
-pub type PFN_vkGetPhysicalDeviceDisplayPlaneProperties2KHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceDisplayPlaneProperties2KHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _property_count: *mut u32,
     _properties: *mut DisplayPlaneProperties2KHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceDisplayPlanePropertiesKHR.html>
-pub type PFN_vkGetPhysicalDeviceDisplayPlanePropertiesKHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceDisplayPlanePropertiesKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _property_count: *mut u32,
     _properties: *mut DisplayPlanePropertiesKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceDisplayProperties2KHR.html>
-pub type PFN_vkGetPhysicalDeviceDisplayProperties2KHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceDisplayProperties2KHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _property_count: *mut u32,
     _properties: *mut DisplayProperties2KHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceDisplayPropertiesKHR.html>
-pub type PFN_vkGetPhysicalDeviceDisplayPropertiesKHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceDisplayPropertiesKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _property_count: *mut u32,
     _properties: *mut DisplayPropertiesKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalBufferProperties.html>
-pub type PFN_vkGetPhysicalDeviceExternalBufferProperties = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceExternalBufferProperties = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _external_buffer_info: *const PhysicalDeviceExternalBufferInfo,
     _external_buffer_properties: *mut ExternalBufferProperties,
@@ -2343,7 +2392,7 @@ pub type PFN_vkGetPhysicalDeviceExternalBufferPropertiesKHR =
     PFN_vkGetPhysicalDeviceExternalBufferProperties;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalFenceProperties.html>
-pub type PFN_vkGetPhysicalDeviceExternalFenceProperties = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceExternalFenceProperties = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _external_fence_info: *const PhysicalDeviceExternalFenceInfo,
     _external_fence_properties: *mut ExternalFenceProperties,
@@ -2354,19 +2403,20 @@ pub type PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR =
     PFN_vkGetPhysicalDeviceExternalFenceProperties;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalImageFormatPropertiesNV.html>
-pub type PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV = extern "system" fn(
-    _physical_device: PhysicalDevice,
-    _format: Format,
-    _type_: ImageType,
-    _tiling: ImageTiling,
-    _usage: ImageUsageFlags,
-    _flags: ImageCreateFlags,
-    _external_handle_type: ExternalMemoryHandleTypeFlagsNV,
-    _external_image_format_properties: *mut ExternalImageFormatPropertiesNV,
-) -> Result;
+pub type PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV =
+    unsafe extern "system" fn(
+        _physical_device: PhysicalDevice,
+        _format: Format,
+        _type_: ImageType,
+        _tiling: ImageTiling,
+        _usage: ImageUsageFlags,
+        _flags: ImageCreateFlags,
+        _external_handle_type: ExternalMemoryHandleTypeFlagsNV,
+        _external_image_format_properties: *mut ExternalImageFormatPropertiesNV,
+    ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalSemaphoreProperties.html>
-pub type PFN_vkGetPhysicalDeviceExternalSemaphoreProperties = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceExternalSemaphoreProperties = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _external_semaphore_info: *const PhysicalDeviceExternalSemaphoreInfo,
     _external_semaphore_properties: *mut ExternalSemaphoreProperties,
@@ -2377,25 +2427,29 @@ pub type PFN_vkGetPhysicalDeviceExternalSemaphorePropertiesKHR =
     PFN_vkGetPhysicalDeviceExternalSemaphoreProperties;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFeatures.html>
-pub type PFN_vkGetPhysicalDeviceFeatures =
-    extern "system" fn(_physical_device: PhysicalDevice, _features: *mut PhysicalDeviceFeatures);
+pub type PFN_vkGetPhysicalDeviceFeatures = unsafe extern "system" fn(
+    _physical_device: PhysicalDevice,
+    _features: *mut PhysicalDeviceFeatures,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFeatures2.html>
-pub type PFN_vkGetPhysicalDeviceFeatures2 =
-    extern "system" fn(_physical_device: PhysicalDevice, _features: *mut PhysicalDeviceFeatures2);
+pub type PFN_vkGetPhysicalDeviceFeatures2 = unsafe extern "system" fn(
+    _physical_device: PhysicalDevice,
+    _features: *mut PhysicalDeviceFeatures2,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFeatures2KHR.html>
 pub type PFN_vkGetPhysicalDeviceFeatures2KHR = PFN_vkGetPhysicalDeviceFeatures2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFormatProperties.html>
-pub type PFN_vkGetPhysicalDeviceFormatProperties = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceFormatProperties = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _format: Format,
     _format_properties: *mut FormatProperties,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFormatProperties2.html>
-pub type PFN_vkGetPhysicalDeviceFormatProperties2 = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceFormatProperties2 = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _format: Format,
     _format_properties: *mut FormatProperties2,
@@ -2405,14 +2459,14 @@ pub type PFN_vkGetPhysicalDeviceFormatProperties2 = extern "system" fn(
 pub type PFN_vkGetPhysicalDeviceFormatProperties2KHR = PFN_vkGetPhysicalDeviceFormatProperties2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFragmentShadingRatesKHR.html>
-pub type PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _fragment_shading_rate_count: *mut u32,
     _fragment_shading_rates: *mut PhysicalDeviceFragmentShadingRateKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceImageFormatProperties.html>
-pub type PFN_vkGetPhysicalDeviceImageFormatProperties = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceImageFormatProperties = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _format: Format,
     _type_: ImageType,
@@ -2423,7 +2477,7 @@ pub type PFN_vkGetPhysicalDeviceImageFormatProperties = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceImageFormatProperties2.html>
-pub type PFN_vkGetPhysicalDeviceImageFormatProperties2 = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceImageFormatProperties2 = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _image_format_info: *const PhysicalDeviceImageFormatInfo2,
     _image_format_properties: *mut ImageFormatProperties2,
@@ -2434,13 +2488,13 @@ pub type PFN_vkGetPhysicalDeviceImageFormatProperties2KHR =
     PFN_vkGetPhysicalDeviceImageFormatProperties2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceMemoryProperties.html>
-pub type PFN_vkGetPhysicalDeviceMemoryProperties = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceMemoryProperties = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _memory_properties: *mut PhysicalDeviceMemoryProperties,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceMemoryProperties2.html>
-pub type PFN_vkGetPhysicalDeviceMemoryProperties2 = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceMemoryProperties2 = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _memory_properties: *mut PhysicalDeviceMemoryProperties2,
 );
@@ -2449,14 +2503,14 @@ pub type PFN_vkGetPhysicalDeviceMemoryProperties2 = extern "system" fn(
 pub type PFN_vkGetPhysicalDeviceMemoryProperties2KHR = PFN_vkGetPhysicalDeviceMemoryProperties2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceMultisamplePropertiesEXT.html>
-pub type PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _samples: SampleCountFlags,
     _multisample_properties: *mut MultisamplePropertiesEXT,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDevicePresentRectanglesKHR.html>
-pub type PFN_vkGetPhysicalDevicePresentRectanglesKHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDevicePresentRectanglesKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _surface: SurfaceKHR,
     _rect_count: *mut u32,
@@ -2464,13 +2518,13 @@ pub type PFN_vkGetPhysicalDevicePresentRectanglesKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceProperties.html>
-pub type PFN_vkGetPhysicalDeviceProperties = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceProperties = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _properties: *mut PhysicalDeviceProperties,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceProperties2.html>
-pub type PFN_vkGetPhysicalDeviceProperties2 = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceProperties2 = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _properties: *mut PhysicalDeviceProperties2,
 );
@@ -2479,21 +2533,22 @@ pub type PFN_vkGetPhysicalDeviceProperties2 = extern "system" fn(
 pub type PFN_vkGetPhysicalDeviceProperties2KHR = PFN_vkGetPhysicalDeviceProperties2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.html>
-pub type PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR = extern "system" fn(
-    _physical_device: PhysicalDevice,
-    _performance_query_create_info: *const QueryPoolPerformanceCreateInfoKHR,
-    _num_passes: *mut u32,
-);
+pub type PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR =
+    unsafe extern "system" fn(
+        _physical_device: PhysicalDevice,
+        _performance_query_create_info: *const QueryPoolPerformanceCreateInfoKHR,
+        _num_passes: *mut u32,
+    );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceQueueFamilyProperties.html>
-pub type PFN_vkGetPhysicalDeviceQueueFamilyProperties = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceQueueFamilyProperties = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _queue_family_property_count: *mut u32,
     _queue_family_properties: *mut QueueFamilyProperties,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceQueueFamilyProperties2.html>
-pub type PFN_vkGetPhysicalDeviceQueueFamilyProperties2 = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceQueueFamilyProperties2 = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _queue_family_property_count: *mut u32,
     _queue_family_properties: *mut QueueFamilyProperties2,
@@ -2504,14 +2559,14 @@ pub type PFN_vkGetPhysicalDeviceQueueFamilyProperties2KHR =
     PFN_vkGetPhysicalDeviceQueueFamilyProperties2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceScreenPresentationSupportQNX.html>
-pub type PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _queue_family_index: u32,
     _window: *mut _screen_window,
 ) -> Bool32;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSparseImageFormatProperties.html>
-pub type PFN_vkGetPhysicalDeviceSparseImageFormatProperties = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceSparseImageFormatProperties = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _format: Format,
     _type_: ImageType,
@@ -2523,7 +2578,7 @@ pub type PFN_vkGetPhysicalDeviceSparseImageFormatProperties = extern "system" fn
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSparseImageFormatProperties2.html>
-pub type PFN_vkGetPhysicalDeviceSparseImageFormatProperties2 = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceSparseImageFormatProperties2 = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _format_info: *const PhysicalDeviceSparseImageFormatInfo2,
     _property_count: *mut u32,
@@ -2536,35 +2591,35 @@ pub type PFN_vkGetPhysicalDeviceSparseImageFormatProperties2KHR =
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV.html>
 pub type PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV =
-    extern "system" fn(
+    unsafe extern "system" fn(
         _physical_device: PhysicalDevice,
         _combination_count: *mut u32,
         _combinations: *mut FramebufferMixedSamplesCombinationNV,
     ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceCapabilities2EXT.html>
-pub type PFN_vkGetPhysicalDeviceSurfaceCapabilities2EXT = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceSurfaceCapabilities2EXT = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _surface: SurfaceKHR,
     _surface_capabilities: *mut SurfaceCapabilities2EXT,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceCapabilities2KHR.html>
-pub type PFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _surface_info: *const PhysicalDeviceSurfaceInfo2KHR,
     _surface_capabilities: *mut SurfaceCapabilities2KHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceCapabilitiesKHR.html>
-pub type PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceSurfaceCapabilitiesKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _surface: SurfaceKHR,
     _surface_capabilities: *mut SurfaceCapabilitiesKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceFormats2KHR.html>
-pub type PFN_vkGetPhysicalDeviceSurfaceFormats2KHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceSurfaceFormats2KHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _surface_info: *const PhysicalDeviceSurfaceInfo2KHR,
     _surface_format_count: *mut u32,
@@ -2572,7 +2627,7 @@ pub type PFN_vkGetPhysicalDeviceSurfaceFormats2KHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceFormatsKHR.html>
-pub type PFN_vkGetPhysicalDeviceSurfaceFormatsKHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceSurfaceFormatsKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _surface: SurfaceKHR,
     _surface_format_count: *mut u32,
@@ -2580,7 +2635,7 @@ pub type PFN_vkGetPhysicalDeviceSurfaceFormatsKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfacePresentModes2EXT.html>
-pub type PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _surface_info: *const PhysicalDeviceSurfaceInfo2KHR,
     _present_mode_count: *mut u32,
@@ -2588,7 +2643,7 @@ pub type PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfacePresentModesKHR.html>
-pub type PFN_vkGetPhysicalDeviceSurfacePresentModesKHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceSurfacePresentModesKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _surface: SurfaceKHR,
     _present_mode_count: *mut u32,
@@ -2596,7 +2651,7 @@ pub type PFN_vkGetPhysicalDeviceSurfacePresentModesKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceSupportKHR.html>
-pub type PFN_vkGetPhysicalDeviceSurfaceSupportKHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceSurfaceSupportKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _queue_family_index: u32,
     _surface: SurfaceKHR,
@@ -2604,25 +2659,26 @@ pub type PFN_vkGetPhysicalDeviceSurfaceSupportKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceToolPropertiesEXT.html>
-pub type PFN_vkGetPhysicalDeviceToolPropertiesEXT = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceToolPropertiesEXT = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _tool_count: *mut u32,
     _tool_properties: *mut PhysicalDeviceToolPropertiesEXT,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceWaylandPresentationSupportKHR.html>
-pub type PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _queue_family_index: u32,
     _display: *mut wl_display,
-) -> Bool32;
+)
+    -> Bool32;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceWin32PresentationSupportKHR.html>
 pub type PFN_vkGetPhysicalDeviceWin32PresentationSupportKHR =
-    extern "system" fn(_physical_device: PhysicalDevice, _queue_family_index: u32) -> Bool32;
+    unsafe extern "system" fn(_physical_device: PhysicalDevice, _queue_family_index: u32) -> Bool32;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceXcbPresentationSupportKHR.html>
-pub type PFN_vkGetPhysicalDeviceXcbPresentationSupportKHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceXcbPresentationSupportKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _queue_family_index: u32,
     _connection: *mut xcb_connection_t,
@@ -2630,7 +2686,7 @@ pub type PFN_vkGetPhysicalDeviceXcbPresentationSupportKHR = extern "system" fn(
 ) -> Bool32;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceXlibPresentationSupportKHR.html>
-pub type PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR = extern "system" fn(
+pub type PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _queue_family_index: u32,
     _dpy: *mut Display,
@@ -2638,7 +2694,7 @@ pub type PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR = extern "system" fn(
 ) -> Bool32;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineCacheData.html>
-pub type PFN_vkGetPipelineCacheData = extern "system" fn(
+pub type PFN_vkGetPipelineCacheData = unsafe extern "system" fn(
     _device: Device,
     _pipeline_cache: PipelineCache,
     _data_size: *mut usize,
@@ -2646,15 +2702,16 @@ pub type PFN_vkGetPipelineCacheData = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutableInternalRepresentationsKHR.html>
-pub type PFN_vkGetPipelineExecutableInternalRepresentationsKHR = extern "system" fn(
-    _device: Device,
-    _executable_info: *const PipelineExecutableInfoKHR,
-    _internal_representation_count: *mut u32,
-    _internal_representations: *mut PipelineExecutableInternalRepresentationKHR,
-) -> Result;
+pub type PFN_vkGetPipelineExecutableInternalRepresentationsKHR =
+    unsafe extern "system" fn(
+        _device: Device,
+        _executable_info: *const PipelineExecutableInfoKHR,
+        _internal_representation_count: *mut u32,
+        _internal_representations: *mut PipelineExecutableInternalRepresentationKHR,
+    ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutablePropertiesKHR.html>
-pub type PFN_vkGetPipelineExecutablePropertiesKHR = extern "system" fn(
+pub type PFN_vkGetPipelineExecutablePropertiesKHR = unsafe extern "system" fn(
     _device: Device,
     _pipeline_info: *const PipelineInfoKHR,
     _executable_count: *mut u32,
@@ -2662,7 +2719,7 @@ pub type PFN_vkGetPipelineExecutablePropertiesKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutableStatisticsKHR.html>
-pub type PFN_vkGetPipelineExecutableStatisticsKHR = extern "system" fn(
+pub type PFN_vkGetPipelineExecutableStatisticsKHR = unsafe extern "system" fn(
     _device: Device,
     _executable_info: *const PipelineExecutableInfoKHR,
     _statistic_count: *mut u32,
@@ -2670,7 +2727,7 @@ pub type PFN_vkGetPipelineExecutableStatisticsKHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPrivateDataEXT.html>
-pub type PFN_vkGetPrivateDataEXT = extern "system" fn(
+pub type PFN_vkGetPrivateDataEXT = unsafe extern "system" fn(
     _device: Device,
     _object_type: ObjectType,
     _object_handle: u64,
@@ -2679,7 +2736,7 @@ pub type PFN_vkGetPrivateDataEXT = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetQueryPoolResults.html>
-pub type PFN_vkGetQueryPoolResults = extern "system" fn(
+pub type PFN_vkGetQueryPoolResults = unsafe extern "system" fn(
     _device: Device,
     _query_pool: QueryPool,
     _first_query: u32,
@@ -2691,21 +2748,21 @@ pub type PFN_vkGetQueryPoolResults = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetQueueCheckpointData2NV.html>
-pub type PFN_vkGetQueueCheckpointData2NV = extern "system" fn(
+pub type PFN_vkGetQueueCheckpointData2NV = unsafe extern "system" fn(
     _queue: Queue,
     _checkpoint_data_count: *mut u32,
     _checkpoint_data: *mut CheckpointData2NV,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetQueueCheckpointDataNV.html>
-pub type PFN_vkGetQueueCheckpointDataNV = extern "system" fn(
+pub type PFN_vkGetQueueCheckpointDataNV = unsafe extern "system" fn(
     _queue: Queue,
     _checkpoint_data_count: *mut u32,
     _checkpoint_data: *mut CheckpointDataNV,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRandROutputDisplayEXT.html>
-pub type PFN_vkGetRandROutputDisplayEXT = extern "system" fn(
+pub type PFN_vkGetRandROutputDisplayEXT = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _dpy: *mut Display,
     _rr_output: RROutput,
@@ -2713,17 +2770,18 @@ pub type PFN_vkGetRandROutputDisplayEXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRayTracingCaptureReplayShaderGroupHandlesKHR.html>
-pub type PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR = extern "system" fn(
-    _device: Device,
-    _pipeline: Pipeline,
-    _first_group: u32,
-    _group_count: u32,
-    _data_size: usize,
-    _data: *mut c_void,
-) -> Result;
+pub type PFN_vkGetRayTracingCaptureReplayShaderGroupHandlesKHR =
+    unsafe extern "system" fn(
+        _device: Device,
+        _pipeline: Pipeline,
+        _first_group: u32,
+        _group_count: u32,
+        _data_size: usize,
+        _data: *mut c_void,
+    ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRayTracingShaderGroupHandlesKHR.html>
-pub type PFN_vkGetRayTracingShaderGroupHandlesKHR = extern "system" fn(
+pub type PFN_vkGetRayTracingShaderGroupHandlesKHR = unsafe extern "system" fn(
     _device: Device,
     _pipeline: Pipeline,
     _first_group: u32,
@@ -2736,7 +2794,7 @@ pub type PFN_vkGetRayTracingShaderGroupHandlesKHR = extern "system" fn(
 pub type PFN_vkGetRayTracingShaderGroupHandlesNV = PFN_vkGetRayTracingShaderGroupHandlesKHR;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRayTracingShaderGroupStackSizeKHR.html>
-pub type PFN_vkGetRayTracingShaderGroupStackSizeKHR = extern "system" fn(
+pub type PFN_vkGetRayTracingShaderGroupStackSizeKHR = unsafe extern "system" fn(
     _device: Device,
     _pipeline: Pipeline,
     _group: u32,
@@ -2744,39 +2802,42 @@ pub type PFN_vkGetRayTracingShaderGroupStackSizeKHR = extern "system" fn(
 ) -> DeviceSize;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRefreshCycleDurationGOOGLE.html>
-pub type PFN_vkGetRefreshCycleDurationGOOGLE = extern "system" fn(
+pub type PFN_vkGetRefreshCycleDurationGOOGLE = unsafe extern "system" fn(
     _device: Device,
     _swapchain: SwapchainKHR,
     _display_timing_properties: *mut RefreshCycleDurationGOOGLE,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRenderAreaGranularity.html>
-pub type PFN_vkGetRenderAreaGranularity =
-    extern "system" fn(_device: Device, _render_pass: RenderPass, _granularity: *mut Extent2D);
+pub type PFN_vkGetRenderAreaGranularity = unsafe extern "system" fn(
+    _device: Device,
+    _render_pass: RenderPass,
+    _granularity: *mut Extent2D,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreCounterValue.html>
 pub type PFN_vkGetSemaphoreCounterValue =
-    extern "system" fn(_device: Device, _semaphore: Semaphore, _value: *mut u64) -> Result;
+    unsafe extern "system" fn(_device: Device, _semaphore: Semaphore, _value: *mut u64) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreCounterValueKHR.html>
 pub type PFN_vkGetSemaphoreCounterValueKHR = PFN_vkGetSemaphoreCounterValue;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreFdKHR.html>
-pub type PFN_vkGetSemaphoreFdKHR = extern "system" fn(
+pub type PFN_vkGetSemaphoreFdKHR = unsafe extern "system" fn(
     _device: Device,
     _get_fd_info: *const SemaphoreGetFdInfoKHR,
     _fd: *mut c_int,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreWin32HandleKHR.html>
-pub type PFN_vkGetSemaphoreWin32HandleKHR = extern "system" fn(
+pub type PFN_vkGetSemaphoreWin32HandleKHR = unsafe extern "system" fn(
     _device: Device,
     _get_win32_handle_info: *const SemaphoreGetWin32HandleInfoKHR,
     _handle: *mut HANDLE,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetShaderInfoAMD.html>
-pub type PFN_vkGetShaderInfoAMD = extern "system" fn(
+pub type PFN_vkGetShaderInfoAMD = unsafe extern "system" fn(
     _device: Device,
     _pipeline: Pipeline,
     _shader_stage: ShaderStageFlags,
@@ -2786,7 +2847,7 @@ pub type PFN_vkGetShaderInfoAMD = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainCounterEXT.html>
-pub type PFN_vkGetSwapchainCounterEXT = extern "system" fn(
+pub type PFN_vkGetSwapchainCounterEXT = unsafe extern "system" fn(
     _device: Device,
     _swapchain: SwapchainKHR,
     _counter: SurfaceCounterFlagsEXT,
@@ -2794,7 +2855,7 @@ pub type PFN_vkGetSwapchainCounterEXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainGrallocUsage2ANDROID.html>
-pub type PFN_vkGetSwapchainGrallocUsage2ANDROID = extern "system" fn(
+pub type PFN_vkGetSwapchainGrallocUsage2ANDROID = unsafe extern "system" fn(
     _device: Device,
     _format: Format,
     _image_usage: ImageUsageFlags,
@@ -2804,7 +2865,7 @@ pub type PFN_vkGetSwapchainGrallocUsage2ANDROID = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainGrallocUsageANDROID.html>
-pub type PFN_vkGetSwapchainGrallocUsageANDROID = extern "system" fn(
+pub type PFN_vkGetSwapchainGrallocUsageANDROID = unsafe extern "system" fn(
     _device: Device,
     _format: Format,
     _image_usage: ImageUsageFlags,
@@ -2812,7 +2873,7 @@ pub type PFN_vkGetSwapchainGrallocUsageANDROID = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainImagesKHR.html>
-pub type PFN_vkGetSwapchainImagesKHR = extern "system" fn(
+pub type PFN_vkGetSwapchainImagesKHR = unsafe extern "system" fn(
     _device: Device,
     _swapchain: SwapchainKHR,
     _swapchain_image_count: *mut u32,
@@ -2821,10 +2882,10 @@ pub type PFN_vkGetSwapchainImagesKHR = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainStatusKHR.html>
 pub type PFN_vkGetSwapchainStatusKHR =
-    extern "system" fn(_device: Device, _swapchain: SwapchainKHR) -> Result;
+    unsafe extern "system" fn(_device: Device, _swapchain: SwapchainKHR) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetValidationCacheDataEXT.html>
-pub type PFN_vkGetValidationCacheDataEXT = extern "system" fn(
+pub type PFN_vkGetValidationCacheDataEXT = unsafe extern "system" fn(
     _device: Device,
     _validation_cache: ValidationCacheEXT,
     _data_size: *mut usize,
@@ -2832,51 +2893,51 @@ pub type PFN_vkGetValidationCacheDataEXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetWinrtDisplayNV.html>
-pub type PFN_vkGetWinrtDisplayNV = extern "system" fn(
+pub type PFN_vkGetWinrtDisplayNV = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
     _device_relative_id: u32,
     _display: *mut DisplayKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportFenceFdKHR.html>
-pub type PFN_vkImportFenceFdKHR = extern "system" fn(
+pub type PFN_vkImportFenceFdKHR = unsafe extern "system" fn(
     _device: Device,
     _import_fence_fd_info: *const ImportFenceFdInfoKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportFenceWin32HandleKHR.html>
-pub type PFN_vkImportFenceWin32HandleKHR = extern "system" fn(
+pub type PFN_vkImportFenceWin32HandleKHR = unsafe extern "system" fn(
     _device: Device,
     _import_fence_win32_handle_info: *const ImportFenceWin32HandleInfoKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportSemaphoreFdKHR.html>
-pub type PFN_vkImportSemaphoreFdKHR = extern "system" fn(
+pub type PFN_vkImportSemaphoreFdKHR = unsafe extern "system" fn(
     _device: Device,
     _import_semaphore_fd_info: *const ImportSemaphoreFdInfoKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportSemaphoreWin32HandleKHR.html>
-pub type PFN_vkImportSemaphoreWin32HandleKHR = extern "system" fn(
+pub type PFN_vkImportSemaphoreWin32HandleKHR = unsafe extern "system" fn(
     _device: Device,
     _import_semaphore_win32_handle_info: *const ImportSemaphoreWin32HandleInfoKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkInitializePerformanceApiINTEL.html>
-pub type PFN_vkInitializePerformanceApiINTEL = extern "system" fn(
+pub type PFN_vkInitializePerformanceApiINTEL = unsafe extern "system" fn(
     _device: Device,
     _initialize_info: *const InitializePerformanceApiInfoINTEL,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkInvalidateMappedMemoryRanges.html>
-pub type PFN_vkInvalidateMappedMemoryRanges = extern "system" fn(
+pub type PFN_vkInvalidateMappedMemoryRanges = unsafe extern "system" fn(
     _device: Device,
     _memory_range_count: u32,
     _memory_ranges: *const MappedMemoryRange,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkMapMemory.html>
-pub type PFN_vkMapMemory = extern "system" fn(
+pub type PFN_vkMapMemory = unsafe extern "system" fn(
     _device: Device,
     _memory: DeviceMemory,
     _offset: DeviceSize,
@@ -2886,7 +2947,7 @@ pub type PFN_vkMapMemory = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkMergePipelineCaches.html>
-pub type PFN_vkMergePipelineCaches = extern "system" fn(
+pub type PFN_vkMergePipelineCaches = unsafe extern "system" fn(
     _device: Device,
     _dst_cache: PipelineCache,
     _src_cache_count: u32,
@@ -2894,7 +2955,7 @@ pub type PFN_vkMergePipelineCaches = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkMergeValidationCachesEXT.html>
-pub type PFN_vkMergeValidationCachesEXT = extern "system" fn(
+pub type PFN_vkMergeValidationCachesEXT = unsafe extern "system" fn(
     _device: Device,
     _dst_cache: ValidationCacheEXT,
     _src_cache_count: u32,
@@ -2903,10 +2964,10 @@ pub type PFN_vkMergeValidationCachesEXT = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueBeginDebugUtilsLabelEXT.html>
 pub type PFN_vkQueueBeginDebugUtilsLabelEXT =
-    extern "system" fn(_queue: Queue, _label_info: *const DebugUtilsLabelEXT);
+    unsafe extern "system" fn(_queue: Queue, _label_info: *const DebugUtilsLabelEXT);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueBindSparse.html>
-pub type PFN_vkQueueBindSparse = extern "system" fn(
+pub type PFN_vkQueueBindSparse = unsafe extern "system" fn(
     _queue: Queue,
     _bind_info_count: u32,
     _bind_info: *const BindSparseInfo,
@@ -2914,22 +2975,24 @@ pub type PFN_vkQueueBindSparse = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueEndDebugUtilsLabelEXT.html>
-pub type PFN_vkQueueEndDebugUtilsLabelEXT = extern "system" fn(_queue: Queue);
+pub type PFN_vkQueueEndDebugUtilsLabelEXT = unsafe extern "system" fn(_queue: Queue);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueInsertDebugUtilsLabelEXT.html>
 pub type PFN_vkQueueInsertDebugUtilsLabelEXT =
-    extern "system" fn(_queue: Queue, _label_info: *const DebugUtilsLabelEXT);
+    unsafe extern "system" fn(_queue: Queue, _label_info: *const DebugUtilsLabelEXT);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueuePresentKHR.html>
 pub type PFN_vkQueuePresentKHR =
-    extern "system" fn(_queue: Queue, _present_info: *const PresentInfoKHR) -> Result;
+    unsafe extern "system" fn(_queue: Queue, _present_info: *const PresentInfoKHR) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSetPerformanceConfigurationINTEL.html>
-pub type PFN_vkQueueSetPerformanceConfigurationINTEL =
-    extern "system" fn(_queue: Queue, _configuration: PerformanceConfigurationINTEL) -> Result;
+pub type PFN_vkQueueSetPerformanceConfigurationINTEL = unsafe extern "system" fn(
+    _queue: Queue,
+    _configuration: PerformanceConfigurationINTEL,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSignalReleaseImageANDROID.html>
-pub type PFN_vkQueueSignalReleaseImageANDROID = extern "system" fn(
+pub type PFN_vkQueueSignalReleaseImageANDROID = unsafe extern "system" fn(
     _queue: Queue,
     _wait_semaphore_count: u32,
     _wait_semaphores: *const Semaphore,
@@ -2938,7 +3001,7 @@ pub type PFN_vkQueueSignalReleaseImageANDROID = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit.html>
-pub type PFN_vkQueueSubmit = extern "system" fn(
+pub type PFN_vkQueueSubmit = unsafe extern "system" fn(
     _queue: Queue,
     _submit_count: u32,
     _submits: *const SubmitInfo,
@@ -2946,7 +3009,7 @@ pub type PFN_vkQueueSubmit = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit2KHR.html>
-pub type PFN_vkQueueSubmit2KHR = extern "system" fn(
+pub type PFN_vkQueueSubmit2KHR = unsafe extern "system" fn(
     _queue: Queue,
     _submit_count: u32,
     _submits: *const SubmitInfo2KHR,
@@ -2954,10 +3017,10 @@ pub type PFN_vkQueueSubmit2KHR = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueWaitIdle.html>
-pub type PFN_vkQueueWaitIdle = extern "system" fn(_queue: Queue) -> Result;
+pub type PFN_vkQueueWaitIdle = unsafe extern "system" fn(_queue: Queue) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkRegisterDeviceEventEXT.html>
-pub type PFN_vkRegisterDeviceEventEXT = extern "system" fn(
+pub type PFN_vkRegisterDeviceEventEXT = unsafe extern "system" fn(
     _device: Device,
     _device_event_info: *const DeviceEventInfoEXT,
     _allocator: *const AllocationCallbacks,
@@ -2965,7 +3028,7 @@ pub type PFN_vkRegisterDeviceEventEXT = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkRegisterDisplayEventEXT.html>
-pub type PFN_vkRegisterDisplayEventEXT = extern "system" fn(
+pub type PFN_vkRegisterDisplayEventEXT = unsafe extern "system" fn(
     _device: Device,
     _display: DisplayKHR,
     _display_event_info: *const DisplayEventInfoEXT,
@@ -2975,46 +3038,50 @@ pub type PFN_vkRegisterDisplayEventEXT = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleaseDisplayEXT.html>
 pub type PFN_vkReleaseDisplayEXT =
-    extern "system" fn(_physical_device: PhysicalDevice, _display: DisplayKHR) -> Result;
+    unsafe extern "system" fn(_physical_device: PhysicalDevice, _display: DisplayKHR) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleaseFullScreenExclusiveModeEXT.html>
 pub type PFN_vkReleaseFullScreenExclusiveModeEXT =
-    extern "system" fn(_device: Device, _swapchain: SwapchainKHR) -> Result;
+    unsafe extern "system" fn(_device: Device, _swapchain: SwapchainKHR) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleasePerformanceConfigurationINTEL.html>
-pub type PFN_vkReleasePerformanceConfigurationINTEL =
-    extern "system" fn(_device: Device, _configuration: PerformanceConfigurationINTEL) -> Result;
+pub type PFN_vkReleasePerformanceConfigurationINTEL = unsafe extern "system" fn(
+    _device: Device,
+    _configuration: PerformanceConfigurationINTEL,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleaseProfilingLockKHR.html>
-pub type PFN_vkReleaseProfilingLockKHR = extern "system" fn(_device: Device);
+pub type PFN_vkReleaseProfilingLockKHR = unsafe extern "system" fn(_device: Device);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkResetCommandBuffer.html>
-pub type PFN_vkResetCommandBuffer =
-    extern "system" fn(_command_buffer: CommandBuffer, _flags: CommandBufferResetFlags) -> Result;
+pub type PFN_vkResetCommandBuffer = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _flags: CommandBufferResetFlags,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkResetCommandPool.html>
-pub type PFN_vkResetCommandPool = extern "system" fn(
+pub type PFN_vkResetCommandPool = unsafe extern "system" fn(
     _device: Device,
     _command_pool: CommandPool,
     _flags: CommandPoolResetFlags,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkResetDescriptorPool.html>
-pub type PFN_vkResetDescriptorPool = extern "system" fn(
+pub type PFN_vkResetDescriptorPool = unsafe extern "system" fn(
     _device: Device,
     _descriptor_pool: DescriptorPool,
     _flags: DescriptorPoolResetFlags,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkResetEvent.html>
-pub type PFN_vkResetEvent = extern "system" fn(_device: Device, _event: Event) -> Result;
+pub type PFN_vkResetEvent = unsafe extern "system" fn(_device: Device, _event: Event) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkResetFences.html>
 pub type PFN_vkResetFences =
-    extern "system" fn(_device: Device, _fence_count: u32, _fences: *const Fence) -> Result;
+    unsafe extern "system" fn(_device: Device, _fence_count: u32, _fences: *const Fence) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkResetQueryPool.html>
-pub type PFN_vkResetQueryPool = extern "system" fn(
+pub type PFN_vkResetQueryPool = unsafe extern "system" fn(
     _device: Device,
     _query_pool: QueryPool,
     _first_query: u32,
@@ -3025,18 +3092,22 @@ pub type PFN_vkResetQueryPool = extern "system" fn(
 pub type PFN_vkResetQueryPoolEXT = PFN_vkResetQueryPool;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetDebugUtilsObjectNameEXT.html>
-pub type PFN_vkSetDebugUtilsObjectNameEXT =
-    extern "system" fn(_device: Device, _name_info: *const DebugUtilsObjectNameInfoEXT) -> Result;
+pub type PFN_vkSetDebugUtilsObjectNameEXT = unsafe extern "system" fn(
+    _device: Device,
+    _name_info: *const DebugUtilsObjectNameInfoEXT,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetDebugUtilsObjectTagEXT.html>
-pub type PFN_vkSetDebugUtilsObjectTagEXT =
-    extern "system" fn(_device: Device, _tag_info: *const DebugUtilsObjectTagInfoEXT) -> Result;
+pub type PFN_vkSetDebugUtilsObjectTagEXT = unsafe extern "system" fn(
+    _device: Device,
+    _tag_info: *const DebugUtilsObjectTagInfoEXT,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetEvent.html>
-pub type PFN_vkSetEvent = extern "system" fn(_device: Device, _event: Event) -> Result;
+pub type PFN_vkSetEvent = unsafe extern "system" fn(_device: Device, _event: Event) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetHdrMetadataEXT.html>
-pub type PFN_vkSetHdrMetadataEXT = extern "system" fn(
+pub type PFN_vkSetHdrMetadataEXT = unsafe extern "system" fn(
     _device: Device,
     _swapchain_count: u32,
     _swapchains: *const SwapchainKHR,
@@ -3044,11 +3115,14 @@ pub type PFN_vkSetHdrMetadataEXT = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetLocalDimmingAMD.html>
-pub type PFN_vkSetLocalDimmingAMD =
-    extern "system" fn(_device: Device, _swap_chain: SwapchainKHR, _local_dimming_enable: Bool32);
+pub type PFN_vkSetLocalDimmingAMD = unsafe extern "system" fn(
+    _device: Device,
+    _swap_chain: SwapchainKHR,
+    _local_dimming_enable: Bool32,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetPrivateDataEXT.html>
-pub type PFN_vkSetPrivateDataEXT = extern "system" fn(
+pub type PFN_vkSetPrivateDataEXT = unsafe extern "system" fn(
     _device: Device,
     _object_type: ObjectType,
     _object_handle: u64,
@@ -3058,13 +3132,13 @@ pub type PFN_vkSetPrivateDataEXT = extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSignalSemaphore.html>
 pub type PFN_vkSignalSemaphore =
-    extern "system" fn(_device: Device, _signal_info: *const SemaphoreSignalInfo) -> Result;
+    unsafe extern "system" fn(_device: Device, _signal_info: *const SemaphoreSignalInfo) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSignalSemaphoreKHR.html>
 pub type PFN_vkSignalSemaphoreKHR = PFN_vkSignalSemaphore;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSubmitDebugUtilsMessageEXT.html>
-pub type PFN_vkSubmitDebugUtilsMessageEXT = extern "system" fn(
+pub type PFN_vkSubmitDebugUtilsMessageEXT = unsafe extern "system" fn(
     _instance: Instance,
     _message_severity: DebugUtilsMessageSeverityFlagsEXT,
     _message_types: DebugUtilsMessageTypeFlagsEXT,
@@ -3072,20 +3146,23 @@ pub type PFN_vkSubmitDebugUtilsMessageEXT = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkTrimCommandPool.html>
-pub type PFN_vkTrimCommandPool =
-    extern "system" fn(_device: Device, _command_pool: CommandPool, _flags: CommandPoolTrimFlags);
+pub type PFN_vkTrimCommandPool = unsafe extern "system" fn(
+    _device: Device,
+    _command_pool: CommandPool,
+    _flags: CommandPoolTrimFlags,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkTrimCommandPoolKHR.html>
 pub type PFN_vkTrimCommandPoolKHR = PFN_vkTrimCommandPool;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkUninitializePerformanceApiINTEL.html>
-pub type PFN_vkUninitializePerformanceApiINTEL = extern "system" fn(_device: Device);
+pub type PFN_vkUninitializePerformanceApiINTEL = unsafe extern "system" fn(_device: Device);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkUnmapMemory.html>
-pub type PFN_vkUnmapMemory = extern "system" fn(_device: Device, _memory: DeviceMemory);
+pub type PFN_vkUnmapMemory = unsafe extern "system" fn(_device: Device, _memory: DeviceMemory);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkUpdateDescriptorSetWithTemplate.html>
-pub type PFN_vkUpdateDescriptorSetWithTemplate = extern "system" fn(
+pub type PFN_vkUpdateDescriptorSetWithTemplate = unsafe extern "system" fn(
     _device: Device,
     _descriptor_set: DescriptorSet,
     _descriptor_update_template: DescriptorUpdateTemplate,
@@ -3096,7 +3173,7 @@ pub type PFN_vkUpdateDescriptorSetWithTemplate = extern "system" fn(
 pub type PFN_vkUpdateDescriptorSetWithTemplateKHR = PFN_vkUpdateDescriptorSetWithTemplate;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkUpdateDescriptorSets.html>
-pub type PFN_vkUpdateDescriptorSets = extern "system" fn(
+pub type PFN_vkUpdateDescriptorSets = unsafe extern "system" fn(
     _device: Device,
     _descriptor_write_count: u32,
     _descriptor_writes: *const WriteDescriptorSet,
@@ -3105,7 +3182,7 @@ pub type PFN_vkUpdateDescriptorSets = extern "system" fn(
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWaitForFences.html>
-pub type PFN_vkWaitForFences = extern "system" fn(
+pub type PFN_vkWaitForFences = unsafe extern "system" fn(
     _device: Device,
     _fence_count: u32,
     _fences: *const Fence,
@@ -3114,7 +3191,7 @@ pub type PFN_vkWaitForFences = extern "system" fn(
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWaitSemaphores.html>
-pub type PFN_vkWaitSemaphores = extern "system" fn(
+pub type PFN_vkWaitSemaphores = unsafe extern "system" fn(
     _device: Device,
     _wait_info: *const SemaphoreWaitInfo,
     _timeout: u64,
@@ -3124,7 +3201,7 @@ pub type PFN_vkWaitSemaphores = extern "system" fn(
 pub type PFN_vkWaitSemaphoresKHR = PFN_vkWaitSemaphores;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWriteAccelerationStructuresPropertiesKHR.html>
-pub type PFN_vkWriteAccelerationStructuresPropertiesKHR = extern "system" fn(
+pub type PFN_vkWriteAccelerationStructuresPropertiesKHR = unsafe extern "system" fn(
     _device: Device,
     _acceleration_structure_count: u32,
     _acceleration_structures: *const AccelerationStructureKHR,

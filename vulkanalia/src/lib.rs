@@ -107,16 +107,24 @@ pub struct Entry {
 
 impl Entry {
     /// Loads a Vulkan entry point using a Vulkan function loader.
+    ///
+    /// # Safety
+    ///
+    /// The [`Loader::load`] method will be called on the supplied [`Loader`]
+    /// implementation to load the entry commands so the safety requirements of
+    /// [`Loader::load`] for the [`Loader`] implementation used must be upheld.
     #[inline]
-    pub fn new(loader: impl Loader + 'static) -> Result<Self, Box<dyn error::Error + 'static>> {
+    pub unsafe fn new(
+        loader: impl Loader + 'static,
+    ) -> Result<Self, Box<dyn error::Error + 'static>> {
         let loader = Arc::new(loader);
 
-        let raw = unsafe { loader.load(b"vkGetInstanceProcAddr")? };
-        let get_instance = unsafe { mem::transmute::<_, vk::PFN_vkGetInstanceProcAddr>(raw) };
-        let raw = unsafe { loader.load(b"vkGetDeviceProcAddr")? };
-        let get_device = unsafe { mem::transmute::<_, vk::PFN_vkGetDeviceProcAddr>(raw) };
+        let raw = loader.load(b"vkGetInstanceProcAddr")?;
+        let get_instance = mem::transmute::<_, vk::PFN_vkGetInstanceProcAddr>(raw);
+        let raw = loader.load(b"vkGetDeviceProcAddr")?;
+        let get_device = mem::transmute::<_, vk::PFN_vkGetDeviceProcAddr>(raw);
 
-        let load = |n| unsafe { mem::transmute(get_instance(vk::Instance::null(), n)) };
+        let load = |n| mem::transmute(get_instance(vk::Instance::null(), n));
         let commands = EntryCommands::load(load);
 
         Ok(Self {
@@ -131,11 +139,11 @@ impl Entry {
     #[inline]
     pub fn version(&self) -> VkResult<Version> {
         let name = b"vkEnumerateInstanceVersion\0".as_ptr() as *const c_char;
-        let raw = (self.get_instance)(vk::Instance::null(), name);
+        let raw = unsafe { (self.get_instance)(vk::Instance::null(), name) };
         let enumerate: Option<vk::PFN_vkEnumerateInstanceVersion> = unsafe { mem::transmute(raw) };
         if let Some(enumerate) = enumerate {
             let mut version = 0;
-            match enumerate(&mut version) {
+            match unsafe { enumerate(&mut version) } {
                 vk::Result::SUCCESS => Ok(Version::from(version)),
                 error => Err(error.into()),
             }
@@ -145,14 +153,21 @@ impl Entry {
     }
 
     /// Creates a Vulkan instance using this Vulkan entry point.
+    ///
+    /// # Safety
+    ///
+    /// The [`Loader::load`] method will be called on the supplied [`Loader`]
+    /// implementation to load the instance commands so the safety requirements
+    /// of [`Loader::load`] for the [`Loader`] implementation used must be
+    /// upheld.
     #[inline]
-    pub fn create_instance(
+    pub unsafe fn create_instance(
         &self,
         info: &vk::InstanceCreateInfo,
         allocator: Option<&vk::AllocationCallbacks>,
     ) -> VkResult<Instance> {
         let handle = EntryV1_0::create_instance(self, info, allocator)?;
-        let load = |n| unsafe { mem::transmute((self.get_instance)(handle, n)) };
+        let load = |n| mem::transmute((self.get_instance)(handle, n));
         let commands = InstanceCommands::load(load);
         let extensions = get_extensions(info.enabled_extension_count, info.enabled_extension_names);
         let layers = get_layers(info.enabled_layer_count, info.enabled_layer_names);
@@ -199,15 +214,21 @@ impl Instance {
     }
 
     /// Creates a Vulkan device using this Vulkan instance.
+    ///
+    /// # Safety
+    ///
+    /// The [`Loader::load`] method will be called on the supplied [`Loader`]
+    /// implementation to load the device commands so the safety requirements of
+    /// [`Loader::load`] for the [`Loader`] implementation used must be upheld.
     #[inline]
-    pub fn create_device(
+    pub unsafe fn create_device(
         &self,
         physical_device: vk::PhysicalDevice,
         info: &vk::DeviceCreateInfo,
         allocator: Option<&vk::AllocationCallbacks>,
     ) -> VkResult<Device> {
         let handle = InstanceV1_0::create_device(self, physical_device, info, allocator)?;
-        let load = |n| unsafe { mem::transmute((self.get_device)(handle, n)) };
+        let load = |n| mem::transmute((self.get_device)(handle, n));
         let commands = DeviceCommands::load(load);
         let extensions = get_extensions(info.enabled_extension_count, info.enabled_extension_names);
         let layers = get_layers(info.enabled_layer_count, info.enabled_layer_names);

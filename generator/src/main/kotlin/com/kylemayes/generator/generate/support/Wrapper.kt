@@ -99,7 +99,7 @@ fun Registry.generateCommandWrapper(command: Command): String {
                     resultExprs.add(slice.name.value)
                     preActualStmts.add("let mut ${slice.name} = Vec::with_capacity($length as usize);")
                     postActualStmts.add("debug_assert!(${slice.name}.capacity() == $length as usize);")
-                    postActualStmts.add("unsafe { ${slice.name}.set_len($length as usize) };")
+                    postActualStmts.add("${slice.name}.set_len($length as usize);")
                 } else {
                     // Input slice parameter.
 
@@ -147,7 +147,7 @@ fun Registry.generateCommandWrapper(command: Command): String {
             resultTypes.add("Vec<${pointer.pointee.generate()}>")
             resultExprs.add(current.name.value)
             preActualStmts.add("let mut ${current.name} = Vec::with_capacity($length as usize);")
-            postActualStmts.add("unsafe { ${current.name}.set_len($length as usize) };")
+            postActualStmts.add("${current.name}.set_len($length as usize);")
             addArgument("${current.name}.as_mut_ptr()")
         } else if (current.type is PointerType) {
             // Pointer parameter.
@@ -171,7 +171,7 @@ fun Registry.generateCommandWrapper(command: Command): String {
 
                 preActualStmts.add("let mut ${current.name} = MaybeUninit::<$pointeeType>::uninit();")
                 resultTypes.add(resultType)
-                resultExprs.add("unsafe { ${current.name}.assume_init() }$exprCast")
+                resultExprs.add("${current.name}.assume_init()$exprCast")
                 addArgument("${current.name}.as_mut_ptr()$argCast")
             } else if (current.optional) {
                 // Input pointer parameter (optional).
@@ -262,7 +262,7 @@ $outputExpr
     return """
 /// <${generateManualUrl(command)}>
 #[inline]
-fn ${command.name}$generics(&self, ${params.joinToString()})$outputType {
+unsafe fn ${command.name}$generics(&self, ${params.joinToString()})$outputType {
     $setup
     $actual
 }

@@ -30,13 +30,13 @@ const VALIDATION_LAYER: vk::ExtensionName = vk::to_extension_name(b"VK_LAYER_KHR
 /// An example Vulkan app implementation.
 pub trait Example {
     /// Creates the render pass for this implementation.
-    fn create_render_pass(&self, device: &Device, data: &mut AppData) -> Result<()>;
+    unsafe fn create_render_pass(&self, device: &Device, data: &mut AppData) -> Result<()>;
     /// Creates the pipeline layout and pipeline for this implementation.
-    fn create_pipeline(&self, device: &Device, data: &mut AppData) -> Result<()>;
+    unsafe fn create_pipeline(&self, device: &Device, data: &mut AppData) -> Result<()>;
     /// Records commands in the command buffers for this implementation.
-    fn record_commands(&mut self, instance: &Instance, device: &Device, data: &AppData) -> Result<()>;
+    unsafe fn record_commands(&mut self, instance: &Instance, device: &Device, data: &AppData) -> Result<()>;
     /// Destroys the Vulkan handles used by this implementation.
-    fn destroy(&self, device: &Device);
+    unsafe fn destroy(&self, device: &Device);
 }
 
 /// An example Vulkan app.
@@ -54,7 +54,7 @@ pub struct App {
 
 impl App {
     /// Creates an example Vulkan app.
-    pub fn new(title: &str, mut example: impl Example + 'static) -> Result<Self> {
+    pub unsafe fn new(title: &str, mut example: impl Example + 'static) -> Result<Self> {
         pretty_env_logger::init();
         info!("Starting app.");
 
@@ -74,7 +74,7 @@ impl App {
 
         let loader = LibloadingLoader::new(LIBRARY)?;
         let entry = Entry::new(loader).map_err(|b| anyhow!("{}", b))?;
-        let instance = create_instance(&entry, &mut data)?;
+        let instance = create_instance(&window, &entry, &mut data)?;
         data.surface = vk_window::create_surface(&instance, &window)?;
         pick_physical_device(&instance, &mut data)?;
         let device = create_logical_device(&instance, &mut data)?;
@@ -103,7 +103,7 @@ impl App {
 
     /// Starts the rendering loop for this app.
     #[rustfmt::skip]
-    pub fn run(mut self) -> ! {
+    pub unsafe fn run(mut self) -> ! {
         let mut destroying = false;
         self.event_loop.take().unwrap().run(move |event, _, flow| {
             *flow = ControlFlow::Poll;
@@ -125,7 +125,7 @@ impl App {
     }
 
     /// Renders a frame for this app.
-    fn render(&mut self) -> Result<()> {
+    unsafe fn render(&mut self) -> Result<()> {
         // Wait for any previous render of the current frame to complete.
         let fence = self.data.in_flight_fences[self.frame];
         self.device.wait_for_fences(&[fence], true, u64::max_value())?;
@@ -197,7 +197,7 @@ impl App {
 
     /// Destroys the Vulkan handles used by this app.
     #[rustfmt::skip]
-    fn destroy(&self) {
+    unsafe fn destroy(&self) {
         info!("Destroying app.");
         self.destroy_swapchain();
         self.example.borrow().destroy(&self.device);
@@ -211,7 +211,7 @@ impl App {
 
     /// Recreates the swapchain used by this app.
     #[rustfmt::skip]
-    fn recreate_swapchain(&mut self) -> Result<()> {
+    unsafe fn recreate_swapchain(&mut self) -> Result<()> {
         let mut example = self.example.borrow_mut();
         self.device.device_wait_idle()?;
         self.destroy_swapchain();
@@ -228,7 +228,7 @@ impl App {
 
     /// Destroys the swapchain-related Vulkan handles used by this app.
     #[rustfmt::skip]
-    fn destroy_swapchain(&self) {
+    unsafe fn destroy_swapchain(&self) {
         self.device.free_command_buffers(self.data.command_pool, &self.data.command_buffers);
         self.data.framebuffers.iter().for_each(|f| self.device.destroy_framebuffer(*f, None));
         self.device.destroy_command_pool(self.data.command_pool, None);
@@ -278,7 +278,7 @@ pub struct AppData {
 //================================================
 
 /// Creates an instance.
-fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
+unsafe fn create_instance(window: &Window, entry: &Entry, data: &mut AppData) -> Result<Instance> {
     // Application Info
 
     let application_info = vk::ApplicationInfo::builder()
@@ -308,7 +308,7 @@ fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
 
     // Extensions
 
-    let mut extensions = vk_window::get_required_instance_extensions(entry)?
+    let mut extensions = vk_window::get_required_instance_extensions(window)
         .iter()
         .map(|e| e.as_ptr())
         .collect::<Vec<_>>();
@@ -364,7 +364,7 @@ extern "system" fn debug_callback(
 //================================================
 
 /// Picks a suitable physical device.
-fn pick_physical_device(instance: &Instance, data: &mut AppData) -> Result<()> {
+unsafe fn pick_physical_device(instance: &Instance, data: &mut AppData) -> Result<()> {
     data.physical_device = instance
         .enumerate_physical_devices()?
         .into_iter()
@@ -380,7 +380,11 @@ fn pick_physical_device(instance: &Instance, data: &mut AppData) -> Result<()> {
 }
 
 /// Checks that a physical device is suitable.
-fn check_physical_device(instance: &Instance, data: &AppData, physical_device: vk::PhysicalDevice) -> Result<bool> {
+unsafe fn check_physical_device(
+    instance: &Instance,
+    data: &AppData,
+    physical_device: vk::PhysicalDevice,
+) -> Result<bool> {
     QueueFamilyIndices::get(instance, data, physical_device)?;
     let support = SwapchainSupport::get(instance, data, physical_device)?;
     let swapchain = !support.formats.is_empty() && !support.present_modes.is_empty();
@@ -389,7 +393,7 @@ fn check_physical_device(instance: &Instance, data: &AppData, physical_device: v
 }
 
 /// Checks that a physical device supports the required device extensions.
-fn check_physical_device_extensions(instance: &Instance, physical_device: vk::PhysicalDevice) -> Result<bool> {
+unsafe fn check_physical_device_extensions(instance: &Instance, physical_device: vk::PhysicalDevice) -> Result<bool> {
     let extensions = instance
         .enumerate_device_extension_properties(physical_device, None)?
         .iter()
@@ -403,7 +407,7 @@ fn check_physical_device_extensions(instance: &Instance, physical_device: vk::Ph
 //================================================
 
 /// Creates a logical device for the picked physical device.
-fn create_logical_device(instance: &Instance, data: &mut AppData) -> Result<Device> {
+unsafe fn create_logical_device(instance: &Instance, data: &mut AppData) -> Result<Device> {
     // Queue Create Infos
 
     let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
@@ -464,7 +468,7 @@ fn create_logical_device(instance: &Instance, data: &mut AppData) -> Result<Devi
 //================================================
 
 /// Creates a swapchain and swapchain images.
-fn create_swapchain(window: &Window, instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_swapchain(window: &Window, instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
     // Image
 
     let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
@@ -555,7 +559,7 @@ fn get_swapchain_extent(window: &Window, capabilities: vk::SurfaceCapabilitiesKH
 }
 
 /// Creates image views for the swapchain images.
-fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<()> {
     data.swapchain_image_views = data
         .swapchain_images
         .iter()
@@ -591,7 +595,7 @@ fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<(
 //================================================
 
 /// Creates a command pool.
-fn create_command_pool(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_command_pool(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
     let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
 
     let info = vk::CommandPoolCreateInfo::builder().queue_family_index(indices.graphics);
@@ -606,7 +610,7 @@ fn create_command_pool(instance: &Instance, device: &Device, data: &mut AppData)
 //================================================
 
 /// Creates setup and render command buffers.
-fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
     let info = vk::CommandBufferAllocateInfo::builder()
         .command_pool(data.command_pool)
         .level(vk::CommandBufferLevel::PRIMARY)
@@ -622,7 +626,7 @@ fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
 //================================================
 
 /// Creates framebuffers for the swapchain image views.
-fn create_framebuffers(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_framebuffers(device: &Device, data: &mut AppData) -> Result<()> {
     data.framebuffers = data
         .swapchain_image_views
         .iter()
@@ -645,7 +649,7 @@ fn create_framebuffers(device: &Device, data: &mut AppData) -> Result<()> {
 //================================================
 
 /// Creates synchronization objects to manage command buffer reuse and rendering.
-fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
     let semaphore_info = vk::SemaphoreCreateInfo::builder();
     let fence_info = vk::FenceCreateInfo::builder().flags(vk::FenceCreateFlags::SIGNALED);
 
@@ -675,7 +679,7 @@ struct QueueFamilyIndices {
 
 impl QueueFamilyIndices {
     /// Gets the indices of the required queue families for a physical device.
-    fn get(instance: &Instance, data: &AppData, physical_device: vk::PhysicalDevice) -> Result<Self> {
+    unsafe fn get(instance: &Instance, data: &AppData, physical_device: vk::PhysicalDevice) -> Result<Self> {
         let properties = instance.get_physical_device_queue_family_properties(physical_device);
 
         let graphics = properties
@@ -708,7 +712,7 @@ struct SwapchainSupport {
 
 impl SwapchainSupport {
     /// Gets the swapchain support for a physical device.
-    fn get(instance: &Instance, data: &AppData, physical_device: vk::PhysicalDevice) -> Result<Self> {
+    unsafe fn get(instance: &Instance, data: &AppData, physical_device: vk::PhysicalDevice) -> Result<Self> {
         Ok(Self {
             capabilities: instance.get_physical_device_surface_capabilities_khr(physical_device, data.surface)?,
             formats: instance.get_physical_device_surface_formats_khr(physical_device, data.surface)?,
@@ -722,7 +726,7 @@ impl SwapchainSupport {
 //================================================
 
 /// Creates a device buffer.
-pub fn create_buffer(
+pub unsafe fn create_buffer(
     instance: &Instance,
     device: &Device,
     data: &AppData,
@@ -755,11 +759,11 @@ pub fn create_buffer(
 
 /// Fills a device buffer with data.
 #[rustfmt::skip]
-pub fn fill_buffer(device: &Device, buffer: vk::Buffer, memory: vk::DeviceMemory, data: &[impl Copy]) -> Result<()> {
+pub unsafe fn fill_buffer(device: &Device, buffer: vk::Buffer, memory: vk::DeviceMemory, data: &[impl Copy]) -> Result<()> {
     device.bind_buffer_memory(buffer, memory, 0)?;
 
     let dst = device.map_memory(memory, 0, mem::size_of_val(data) as u64, vk::MemoryMapFlags::empty())?;
-    unsafe { memcpy(data.as_ptr(), dst.cast(), data.len()); }
+    memcpy(data.as_ptr(), dst.cast(), data.len());
     device.unmap_memory(memory);
 
     Ok(())
@@ -770,9 +774,9 @@ pub fn fill_buffer(device: &Device, buffer: vk::Buffer, memory: vk::DeviceMemory
 //================================================
 
 /// Creates a shader module from a compiled shader.
-pub fn create_shader_module(device: &Device, spv: &[u8]) -> Result<vk::ShaderModule> {
+pub unsafe fn create_shader_module(device: &Device, spv: &[u8]) -> Result<vk::ShaderModule> {
     let spv = Vec::<u8>::from(spv);
-    let (prefix, code, suffix) = unsafe { spv.align_to::<u32>() };
+    let (prefix, code, suffix) = spv.align_to::<u32>();
     if !prefix.is_empty() || !suffix.is_empty() {
         return Err(anyhow!("Shader bytecode is not properly aligned."));
     }
@@ -787,7 +791,7 @@ pub fn create_shader_module(device: &Device, spv: &[u8]) -> Result<vk::ShaderMod
 //================================================
 
 /// Gets a suitable memory type index for a device buffer.
-pub fn get_memory_type_index(
+pub unsafe fn get_memory_type_index(
     instance: &Instance,
     data: &AppData,
     properties: vk::MemoryPropertyFlags,

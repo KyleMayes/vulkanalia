@@ -8,6 +8,7 @@
 #![allow(
     non_camel_case_types,
     non_snake_case,
+    clippy::missing_safety_docs,
     clippy::too_many_arguments,
     clippy::type_complexity,
     clippy::upper_case_acronyms
@@ -52,7 +53,7 @@ pub trait AmdBufferMarkerExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteBufferMarkerAMD.html>
     #[inline]
-    fn cmd_write_buffer_marker_amd(
+    unsafe fn cmd_write_buffer_marker_amd(
         &self,
         command_buffer: CommandBuffer,
         pipeline_stage: PipelineStageFlags,
@@ -89,7 +90,7 @@ pub trait AmdDisplayNativeHdrExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetLocalDimmingAMD.html>
     #[inline]
-    fn set_local_dimming_amd(&self, swap_chain: SwapchainKHR, local_dimming_enable: bool) {
+    unsafe fn set_local_dimming_amd(&self, swap_chain: SwapchainKHR, local_dimming_enable: bool) {
         let __result = (self.commands().set_local_dimming_amd)(
             self.handle(),
             swap_chain,
@@ -108,7 +109,7 @@ pub trait AmdDrawIndirectCountExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndexedIndirectCountAMD.html>
     #[inline]
-    fn cmd_draw_indexed_indirect_count_amd(
+    unsafe fn cmd_draw_indexed_indirect_count_amd(
         &self,
         command_buffer: CommandBuffer,
         buffer: Buffer,
@@ -131,7 +132,7 @@ pub trait AmdDrawIndirectCountExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndirectCountAMD.html>
     #[inline]
-    fn cmd_draw_indirect_count_amd(
+    unsafe fn cmd_draw_indirect_count_amd(
         &self,
         command_buffer: CommandBuffer,
         buffer: Buffer,
@@ -293,7 +294,7 @@ pub trait AmdShaderInfoExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetShaderInfoAMD.html>
     #[inline]
-    fn get_shader_info_amd(
+    unsafe fn get_shader_info_amd(
         &self,
         pipeline: Pipeline,
         shader_stage: ShaderStageFlags,
@@ -322,7 +323,7 @@ pub trait AmdShaderInfoExtension: DeviceV1_0 {
         );
 
         debug_assert!(info.capacity() == info_size as usize);
-        unsafe { info.set_len(info_size as usize) };
+        info.set_len(info_size as usize);
 
         if __result == Result::SUCCESS {
             Ok(info)
@@ -360,7 +361,7 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAndroidHardwareBufferPropertiesANDROID.html>
     #[inline]
-    fn get_android_hardware_buffer_properties_android(
+    unsafe fn get_android_hardware_buffer_properties_android(
         &self,
         buffer: &AHardwareBuffer,
     ) -> crate::VkResult<AndroidHardwareBufferPropertiesANDROID> {
@@ -375,7 +376,7 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { properties.assume_init() })
+            Ok(properties.assume_init())
         } else {
             Err(__result.into())
         }
@@ -383,7 +384,7 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryAndroidHardwareBufferANDROID.html>
     #[inline]
-    fn get_memory_android_hardware_buffer_android(
+    unsafe fn get_memory_android_hardware_buffer_android(
         &self,
         info: &MemoryGetAndroidHardwareBufferInfoANDROID,
     ) -> crate::VkResult<*mut AHardwareBuffer> {
@@ -396,7 +397,7 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { buffer.assume_init() })
+            Ok(buffer.assume_init())
         } else {
             Err(__result.into())
         }
@@ -422,7 +423,7 @@ pub trait ExtAcquireXlibDisplayExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireXlibDisplayEXT.html>
     #[inline]
-    fn acquire_xlib_display_ext(
+    unsafe fn acquire_xlib_display_ext(
         &self,
         physical_device: PhysicalDevice,
         display: DisplayKHR,
@@ -433,7 +434,7 @@ pub trait ExtAcquireXlibDisplayExtension: InstanceV1_0 {
             (self.commands().acquire_xlib_display_ext)(physical_device, dpy.as_mut_ptr(), display);
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { dpy.assume_init() })
+            Ok(dpy.assume_init())
         } else {
             Err(__result.into())
         }
@@ -441,7 +442,7 @@ pub trait ExtAcquireXlibDisplayExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRandROutputDisplayEXT.html>
     #[inline]
-    fn get_rand_r_output_display_ext(
+    unsafe fn get_rand_r_output_display_ext(
         &self,
         physical_device: PhysicalDevice,
         rr_output: RROutput,
@@ -457,9 +458,7 @@ pub trait ExtAcquireXlibDisplayExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok((unsafe { dpy.assume_init() }, unsafe {
-                display.assume_init()
-            }))
+            Ok((dpy.assume_init(), display.assume_init()))
         } else {
             Err(__result.into())
         }
@@ -495,7 +494,7 @@ pub trait ExtBufferDeviceAddressExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferDeviceAddressEXT.html>
     #[inline]
-    fn get_buffer_device_address_ext(&self, info: &BufferDeviceAddressInfo) {
+    unsafe fn get_buffer_device_address_ext(&self, info: &BufferDeviceAddressInfo) {
         let __result = (self.commands().get_buffer_device_address_ext)(self.handle(), info);
     }
 }
@@ -511,7 +510,7 @@ pub trait ExtCalibratedTimestampsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetCalibratedTimestampsEXT.html>
     #[inline]
-    fn get_calibrated_timestamps_ext(
+    unsafe fn get_calibrated_timestamps_ext(
         &self,
         timestamp_infos: &[impl Cast<Target = CalibratedTimestampInfoEXT>],
     ) -> crate::VkResult<(Vec<u64>, u64)> {
@@ -527,10 +526,10 @@ pub trait ExtCalibratedTimestampsExtension: DeviceV1_0 {
         );
 
         debug_assert!(timestamps.capacity() == timestamp_infos.len() as usize);
-        unsafe { timestamps.set_len(timestamp_infos.len() as usize) };
+        timestamps.set_len(timestamp_infos.len() as usize);
 
         if __result == Result::SUCCESS {
-            Ok((timestamps, unsafe { max_deviation.assume_init() }))
+            Ok((timestamps, max_deviation.assume_init()))
         } else {
             Err(__result.into())
         }
@@ -538,7 +537,7 @@ pub trait ExtCalibratedTimestampsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceCalibrateableTimeDomainsEXT.html>
     #[inline]
-    fn get_physical_device_calibrateable_time_domains_ext(
+    unsafe fn get_physical_device_calibrateable_time_domains_ext(
         &self,
         physical_device: PhysicalDevice,
     ) -> crate::VkResult<Vec<TimeDomainEXT>> {
@@ -563,7 +562,7 @@ pub trait ExtCalibratedTimestampsExtension: DeviceV1_0 {
         );
 
         debug_assert!(time_domains.capacity() == time_domain_count as usize);
-        unsafe { time_domains.set_len(time_domain_count as usize) };
+        time_domains.set_len(time_domain_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(time_domains)
@@ -583,7 +582,7 @@ pub trait ExtConditionalRenderingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginConditionalRenderingEXT.html>
     #[inline]
-    fn cmd_begin_conditional_rendering_ext(
+    unsafe fn cmd_begin_conditional_rendering_ext(
         &self,
         command_buffer: CommandBuffer,
         conditional_rendering_begin: &ConditionalRenderingBeginInfoEXT,
@@ -596,7 +595,7 @@ pub trait ExtConditionalRenderingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndConditionalRenderingEXT.html>
     #[inline]
-    fn cmd_end_conditional_rendering_ext(&self, command_buffer: CommandBuffer) {
+    unsafe fn cmd_end_conditional_rendering_ext(&self, command_buffer: CommandBuffer) {
         let __result = (self.commands().cmd_end_conditional_rendering_ext)(command_buffer);
     }
 }
@@ -629,7 +628,7 @@ pub trait ExtDebugMarkerExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDebugMarkerBeginEXT.html>
     #[inline]
-    fn cmd_debug_marker_begin_ext(
+    unsafe fn cmd_debug_marker_begin_ext(
         &self,
         command_buffer: CommandBuffer,
         marker_info: &DebugMarkerMarkerInfoEXT,
@@ -639,13 +638,13 @@ pub trait ExtDebugMarkerExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDebugMarkerEndEXT.html>
     #[inline]
-    fn cmd_debug_marker_end_ext(&self, command_buffer: CommandBuffer) {
+    unsafe fn cmd_debug_marker_end_ext(&self, command_buffer: CommandBuffer) {
         let __result = (self.commands().cmd_debug_marker_end_ext)(command_buffer);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDebugMarkerInsertEXT.html>
     #[inline]
-    fn cmd_debug_marker_insert_ext(
+    unsafe fn cmd_debug_marker_insert_ext(
         &self,
         command_buffer: CommandBuffer,
         marker_info: &DebugMarkerMarkerInfoEXT,
@@ -655,7 +654,7 @@ pub trait ExtDebugMarkerExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDebugMarkerSetObjectNameEXT.html>
     #[inline]
-    fn debug_marker_set_object_name_ext(
+    unsafe fn debug_marker_set_object_name_ext(
         &self,
         name_info: &DebugMarkerObjectNameInfoEXT,
     ) -> crate::VkResult<()> {
@@ -670,7 +669,7 @@ pub trait ExtDebugMarkerExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDebugMarkerSetObjectTagEXT.html>
     #[inline]
-    fn debug_marker_set_object_tag_ext(
+    unsafe fn debug_marker_set_object_tag_ext(
         &self,
         tag_info: &DebugMarkerObjectTagInfoEXT,
     ) -> crate::VkResult<()> {
@@ -695,7 +694,7 @@ pub trait ExtDebugReportExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDebugReportCallbackEXT.html>
     #[inline]
-    fn create_debug_report_callback_ext(
+    unsafe fn create_debug_report_callback_ext(
         &self,
         create_info: &DebugReportCallbackCreateInfoEXT,
         allocator: Option<&AllocationCallbacks>,
@@ -710,7 +709,7 @@ pub trait ExtDebugReportExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { callback.assume_init() })
+            Ok(callback.assume_init())
         } else {
             Err(__result.into())
         }
@@ -718,7 +717,7 @@ pub trait ExtDebugReportExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDebugReportMessageEXT.html>
     #[inline]
-    fn debug_report_message_ext(
+    unsafe fn debug_report_message_ext(
         &self,
         flags: DebugReportFlagsEXT,
         object_type: DebugReportObjectTypeEXT,
@@ -742,7 +741,7 @@ pub trait ExtDebugReportExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDebugReportCallbackEXT.html>
     #[inline]
-    fn destroy_debug_report_callback_ext(
+    unsafe fn destroy_debug_report_callback_ext(
         &self,
         callback: DebugReportCallbackEXT,
         allocator: Option<&AllocationCallbacks>,
@@ -766,7 +765,7 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginDebugUtilsLabelEXT.html>
     #[inline]
-    fn cmd_begin_debug_utils_label_ext(
+    unsafe fn cmd_begin_debug_utils_label_ext(
         &self,
         command_buffer: CommandBuffer,
         label_info: &DebugUtilsLabelEXT,
@@ -777,13 +776,13 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndDebugUtilsLabelEXT.html>
     #[inline]
-    fn cmd_end_debug_utils_label_ext(&self, command_buffer: CommandBuffer) {
+    unsafe fn cmd_end_debug_utils_label_ext(&self, command_buffer: CommandBuffer) {
         let __result = (self.commands().cmd_end_debug_utils_label_ext)(command_buffer);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdInsertDebugUtilsLabelEXT.html>
     #[inline]
-    fn cmd_insert_debug_utils_label_ext(
+    unsafe fn cmd_insert_debug_utils_label_ext(
         &self,
         command_buffer: CommandBuffer,
         label_info: &DebugUtilsLabelEXT,
@@ -794,7 +793,7 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDebugUtilsMessengerEXT.html>
     #[inline]
-    fn create_debug_utils_messenger_ext(
+    unsafe fn create_debug_utils_messenger_ext(
         &self,
         create_info: &DebugUtilsMessengerCreateInfoEXT,
         allocator: Option<&AllocationCallbacks>,
@@ -809,7 +808,7 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { messenger.assume_init() })
+            Ok(messenger.assume_init())
         } else {
             Err(__result.into())
         }
@@ -817,7 +816,7 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDebugUtilsMessengerEXT.html>
     #[inline]
-    fn destroy_debug_utils_messenger_ext(
+    unsafe fn destroy_debug_utils_messenger_ext(
         &self,
         messenger: DebugUtilsMessengerEXT,
         allocator: Option<&AllocationCallbacks>,
@@ -831,25 +830,33 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueBeginDebugUtilsLabelEXT.html>
     #[inline]
-    fn queue_begin_debug_utils_label_ext(&self, queue: Queue, label_info: &DebugUtilsLabelEXT) {
+    unsafe fn queue_begin_debug_utils_label_ext(
+        &self,
+        queue: Queue,
+        label_info: &DebugUtilsLabelEXT,
+    ) {
         let __result = (self.commands().queue_begin_debug_utils_label_ext)(queue, label_info);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueEndDebugUtilsLabelEXT.html>
     #[inline]
-    fn queue_end_debug_utils_label_ext(&self, queue: Queue) {
+    unsafe fn queue_end_debug_utils_label_ext(&self, queue: Queue) {
         let __result = (self.commands().queue_end_debug_utils_label_ext)(queue);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueInsertDebugUtilsLabelEXT.html>
     #[inline]
-    fn queue_insert_debug_utils_label_ext(&self, queue: Queue, label_info: &DebugUtilsLabelEXT) {
+    unsafe fn queue_insert_debug_utils_label_ext(
+        &self,
+        queue: Queue,
+        label_info: &DebugUtilsLabelEXT,
+    ) {
         let __result = (self.commands().queue_insert_debug_utils_label_ext)(queue, label_info);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetDebugUtilsObjectNameEXT.html>
     #[inline]
-    fn set_debug_utils_object_name_ext(
+    unsafe fn set_debug_utils_object_name_ext(
         &self,
         device: Device,
         name_info: &DebugUtilsObjectNameInfoEXT,
@@ -865,7 +872,7 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetDebugUtilsObjectTagEXT.html>
     #[inline]
-    fn set_debug_utils_object_tag_ext(
+    unsafe fn set_debug_utils_object_tag_ext(
         &self,
         device: Device,
         tag_info: &DebugUtilsObjectTagInfoEXT,
@@ -881,7 +888,7 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSubmitDebugUtilsMessageEXT.html>
     #[inline]
-    fn submit_debug_utils_message_ext(
+    unsafe fn submit_debug_utils_message_ext(
         &self,
         message_severity: DebugUtilsMessageSeverityFlagsEXT,
         message_types: DebugUtilsMessageTypeFlagsEXT,
@@ -942,7 +949,7 @@ pub trait ExtDirectModeDisplayExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleaseDisplayEXT.html>
     #[inline]
-    fn release_display_ext(
+    unsafe fn release_display_ext(
         &self,
         physical_device: PhysicalDevice,
         display: DisplayKHR,
@@ -967,7 +974,7 @@ pub trait ExtDirectfbSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDirectFBSurfaceEXT.html>
     #[inline]
-    fn create_direct_fb_surface_ext(
+    unsafe fn create_direct_fb_surface_ext(
         &self,
         create_info: &DirectFBSurfaceCreateInfoEXT,
         allocator: Option<&AllocationCallbacks>,
@@ -982,7 +989,7 @@ pub trait ExtDirectfbSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -990,7 +997,7 @@ pub trait ExtDirectfbSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceDirectFBPresentationSupportEXT.html>
     #[inline]
-    fn get_physical_device_direct_fb_presentation_support_ext<T_IDirectFB>(
+    unsafe fn get_physical_device_direct_fb_presentation_support_ext<T_IDirectFB>(
         &self,
         physical_device: PhysicalDevice,
         queue_family_index: u32,
@@ -1005,7 +1012,7 @@ pub trait ExtDirectfbSurfaceExtension: InstanceV1_0 {
             dfb.as_mut_ptr().cast::<c_void>(),
         );
 
-        unsafe { dfb.assume_init() }
+        dfb.assume_init()
     }
 }
 
@@ -1019,7 +1026,7 @@ pub trait ExtDiscardRectanglesExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDiscardRectangleEXT.html>
     #[inline]
-    fn cmd_set_discard_rectangle_ext(
+    unsafe fn cmd_set_discard_rectangle_ext(
         &self,
         command_buffer: CommandBuffer,
         first_discard_rectangle: u32,
@@ -1044,7 +1051,7 @@ pub trait ExtDisplayControlExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDisplayPowerControlEXT.html>
     #[inline]
-    fn display_power_control_ext(
+    unsafe fn display_power_control_ext(
         &self,
         display: DisplayKHR,
         display_power_info: &DisplayPowerInfoEXT,
@@ -1061,7 +1068,7 @@ pub trait ExtDisplayControlExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainCounterEXT.html>
     #[inline]
-    fn get_swapchain_counter_ext(
+    unsafe fn get_swapchain_counter_ext(
         &self,
         swapchain: SwapchainKHR,
         counter: SurfaceCounterFlagsEXT,
@@ -1076,7 +1083,7 @@ pub trait ExtDisplayControlExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { counter_value.assume_init() })
+            Ok(counter_value.assume_init())
         } else {
             Err(__result.into())
         }
@@ -1084,7 +1091,7 @@ pub trait ExtDisplayControlExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkRegisterDeviceEventEXT.html>
     #[inline]
-    fn register_device_event_ext(
+    unsafe fn register_device_event_ext(
         &self,
         device_event_info: &DeviceEventInfoEXT,
         allocator: Option<&AllocationCallbacks>,
@@ -1099,7 +1106,7 @@ pub trait ExtDisplayControlExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { fence.assume_init() })
+            Ok(fence.assume_init())
         } else {
             Err(__result.into())
         }
@@ -1107,7 +1114,7 @@ pub trait ExtDisplayControlExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkRegisterDisplayEventEXT.html>
     #[inline]
-    fn register_display_event_ext(
+    unsafe fn register_display_event_ext(
         &self,
         display: DisplayKHR,
         display_event_info: &DisplayEventInfoEXT,
@@ -1124,7 +1131,7 @@ pub trait ExtDisplayControlExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { fence.assume_init() })
+            Ok(fence.assume_init())
         } else {
             Err(__result.into())
         }
@@ -1141,7 +1148,7 @@ pub trait ExtDisplaySurfaceCounterExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceCapabilities2EXT.html>
     #[inline]
-    fn get_physical_device_surface_capabilities2_ext(
+    unsafe fn get_physical_device_surface_capabilities2_ext(
         &self,
         physical_device: PhysicalDevice,
         surface: SurfaceKHR,
@@ -1157,7 +1164,7 @@ pub trait ExtDisplaySurfaceCounterExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface_capabilities.assume_init() })
+            Ok(surface_capabilities.assume_init())
         } else {
             Err(__result.into())
         }
@@ -1174,7 +1181,7 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindVertexBuffers2EXT.html>
     #[inline]
-    fn cmd_bind_vertex_buffers2_ext(
+    unsafe fn cmd_bind_vertex_buffers2_ext(
         &self,
         command_buffer: CommandBuffer,
         first_binding: u32,
@@ -1196,13 +1203,17 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetCullModeEXT.html>
     #[inline]
-    fn cmd_set_cull_mode_ext(&self, command_buffer: CommandBuffer, cull_mode: CullModeFlags) {
+    unsafe fn cmd_set_cull_mode_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        cull_mode: CullModeFlags,
+    ) {
         let __result = (self.commands().cmd_set_cull_mode_ext)(command_buffer, cull_mode);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBoundsTestEnableEXT.html>
     #[inline]
-    fn cmd_set_depth_bounds_test_enable_ext(
+    unsafe fn cmd_set_depth_bounds_test_enable_ext(
         &self,
         command_buffer: CommandBuffer,
         depth_bounds_test_enable: bool,
@@ -1215,7 +1226,7 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthCompareOpEXT.html>
     #[inline]
-    fn cmd_set_depth_compare_op_ext(
+    unsafe fn cmd_set_depth_compare_op_ext(
         &self,
         command_buffer: CommandBuffer,
         depth_compare_op: CompareOp,
@@ -1226,7 +1237,7 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthTestEnableEXT.html>
     #[inline]
-    fn cmd_set_depth_test_enable_ext(
+    unsafe fn cmd_set_depth_test_enable_ext(
         &self,
         command_buffer: CommandBuffer,
         depth_test_enable: bool,
@@ -1239,7 +1250,7 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthWriteEnableEXT.html>
     #[inline]
-    fn cmd_set_depth_write_enable_ext(
+    unsafe fn cmd_set_depth_write_enable_ext(
         &self,
         command_buffer: CommandBuffer,
         depth_write_enable: bool,
@@ -1252,13 +1263,13 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFrontFaceEXT.html>
     #[inline]
-    fn cmd_set_front_face_ext(&self, command_buffer: CommandBuffer, front_face: FrontFace) {
+    unsafe fn cmd_set_front_face_ext(&self, command_buffer: CommandBuffer, front_face: FrontFace) {
         let __result = (self.commands().cmd_set_front_face_ext)(command_buffer, front_face);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPrimitiveTopologyEXT.html>
     #[inline]
-    fn cmd_set_primitive_topology_ext(
+    unsafe fn cmd_set_primitive_topology_ext(
         &self,
         command_buffer: CommandBuffer,
         primitive_topology: PrimitiveTopology,
@@ -1269,7 +1280,7 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetScissorWithCountEXT.html>
     #[inline]
-    fn cmd_set_scissor_with_count_ext(
+    unsafe fn cmd_set_scissor_with_count_ext(
         &self,
         command_buffer: CommandBuffer,
         scissors: &[impl Cast<Target = Rect2D>],
@@ -1283,7 +1294,7 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilOpEXT.html>
     #[inline]
-    fn cmd_set_stencil_op_ext(
+    unsafe fn cmd_set_stencil_op_ext(
         &self,
         command_buffer: CommandBuffer,
         face_mask: StencilFaceFlags,
@@ -1304,7 +1315,7 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetStencilTestEnableEXT.html>
     #[inline]
-    fn cmd_set_stencil_test_enable_ext(
+    unsafe fn cmd_set_stencil_test_enable_ext(
         &self,
         command_buffer: CommandBuffer,
         stencil_test_enable: bool,
@@ -1317,7 +1328,7 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewportWithCountEXT.html>
     #[inline]
-    fn cmd_set_viewport_with_count_ext(
+    unsafe fn cmd_set_viewport_with_count_ext(
         &self,
         command_buffer: CommandBuffer,
         viewports: &[impl Cast<Target = Viewport>],
@@ -1349,7 +1360,7 @@ pub trait ExtExternalMemoryHostExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryHostPointerPropertiesEXT.html>
     #[inline]
-    fn get_memory_host_pointer_properties_ext(
+    unsafe fn get_memory_host_pointer_properties_ext(
         &self,
         handle_type: ExternalMemoryHandleTypeFlags,
         host_pointer: &c_void,
@@ -1365,7 +1376,7 @@ pub trait ExtExternalMemoryHostExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { memory_host_pointer_properties.assume_init() })
+            Ok(memory_host_pointer_properties.assume_init())
         } else {
             Err(__result.into())
         }
@@ -1418,7 +1429,7 @@ pub trait ExtFullScreenExclusiveExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireFullScreenExclusiveModeEXT.html>
     #[inline]
-    fn acquire_full_screen_exclusive_mode_ext(
+    unsafe fn acquire_full_screen_exclusive_mode_ext(
         &self,
         swapchain: SwapchainKHR,
     ) -> crate::VkResult<()> {
@@ -1434,7 +1445,7 @@ pub trait ExtFullScreenExclusiveExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupSurfacePresentModes2EXT.html>
     #[inline]
-    fn get_device_group_surface_present_modes2_ext(
+    unsafe fn get_device_group_surface_present_modes2_ext(
         &self,
         surface_info: &PhysicalDeviceSurfaceInfo2KHR,
     ) -> crate::VkResult<DeviceGroupPresentModeFlagsKHR> {
@@ -1447,7 +1458,7 @@ pub trait ExtFullScreenExclusiveExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { modes.assume_init() })
+            Ok(modes.assume_init())
         } else {
             Err(__result.into())
         }
@@ -1455,7 +1466,7 @@ pub trait ExtFullScreenExclusiveExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfacePresentModes2EXT.html>
     #[inline]
-    fn get_physical_device_surface_present_modes2_ext(
+    unsafe fn get_physical_device_surface_present_modes2_ext(
         &self,
         physical_device: PhysicalDevice,
         surface_info: &PhysicalDeviceSurfaceInfo2KHR,
@@ -1483,7 +1494,7 @@ pub trait ExtFullScreenExclusiveExtension: DeviceV1_0 {
         );
 
         debug_assert!(present_modes.capacity() == present_mode_count as usize);
-        unsafe { present_modes.set_len(present_mode_count as usize) };
+        present_modes.set_len(present_mode_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(present_modes)
@@ -1494,7 +1505,7 @@ pub trait ExtFullScreenExclusiveExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleaseFullScreenExclusiveModeEXT.html>
     #[inline]
-    fn release_full_screen_exclusive_mode_ext(
+    unsafe fn release_full_screen_exclusive_mode_ext(
         &self,
         swapchain: SwapchainKHR,
     ) -> crate::VkResult<()> {
@@ -1528,7 +1539,7 @@ pub trait ExtHdrMetadataExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetHdrMetadataEXT.html>
     #[inline]
-    fn set_hdr_metadata_ext(
+    unsafe fn set_hdr_metadata_ext(
         &self,
         swapchains: &[SwapchainKHR],
         metadata: &[impl Cast<Target = HdrMetadataEXT>],
@@ -1552,7 +1563,7 @@ pub trait ExtHeadlessSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateHeadlessSurfaceEXT.html>
     #[inline]
-    fn create_headless_surface_ext(
+    unsafe fn create_headless_surface_ext(
         &self,
         create_info: &HeadlessSurfaceCreateInfoEXT,
         allocator: Option<&AllocationCallbacks>,
@@ -1567,7 +1578,7 @@ pub trait ExtHeadlessSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -1584,7 +1595,12 @@ pub trait ExtHostQueryResetExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkResetQueryPoolEXT.html>
     #[inline]
-    fn reset_query_pool_ext(&self, query_pool: QueryPool, first_query: u32, query_count: u32) {
+    unsafe fn reset_query_pool_ext(
+        &self,
+        query_pool: QueryPool,
+        first_query: u32,
+        query_count: u32,
+    ) {
         let __result = (self.commands().reset_query_pool_ext)(
             self.handle(),
             query_pool,
@@ -1604,7 +1620,7 @@ pub trait ExtImageDrmFormatModifierExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageDrmFormatModifierPropertiesEXT.html>
     #[inline]
-    fn get_image_drm_format_modifier_properties_ext(
+    unsafe fn get_image_drm_format_modifier_properties_ext(
         &self,
         image: Image,
     ) -> crate::VkResult<ImageDrmFormatModifierPropertiesEXT> {
@@ -1617,7 +1633,7 @@ pub trait ExtImageDrmFormatModifierExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { properties.assume_init() })
+            Ok(properties.assume_init())
         } else {
             Err(__result.into())
         }
@@ -1661,7 +1677,7 @@ pub trait ExtLineRasterizationExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetLineStippleEXT.html>
     #[inline]
-    fn cmd_set_line_stipple_ext(
+    unsafe fn cmd_set_line_stipple_ext(
         &self,
         command_buffer: CommandBuffer,
         line_stipple_factor: u32,
@@ -1703,7 +1719,7 @@ pub trait ExtMetalSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateMetalSurfaceEXT.html>
     #[inline]
-    fn create_metal_surface_ext(
+    unsafe fn create_metal_surface_ext(
         &self,
         create_info: &MetalSurfaceCreateInfoEXT,
         allocator: Option<&AllocationCallbacks>,
@@ -1718,7 +1734,7 @@ pub trait ExtMetalSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -1771,7 +1787,7 @@ pub trait ExtPrivateDataExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreatePrivateDataSlotEXT.html>
     #[inline]
-    fn create_private_data_slot_ext(
+    unsafe fn create_private_data_slot_ext(
         &self,
         create_info: &PrivateDataSlotCreateInfoEXT,
         allocator: Option<&AllocationCallbacks>,
@@ -1786,7 +1802,7 @@ pub trait ExtPrivateDataExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { private_data_slot.assume_init() })
+            Ok(private_data_slot.assume_init())
         } else {
             Err(__result.into())
         }
@@ -1794,7 +1810,7 @@ pub trait ExtPrivateDataExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyPrivateDataSlotEXT.html>
     #[inline]
-    fn destroy_private_data_slot_ext(
+    unsafe fn destroy_private_data_slot_ext(
         &self,
         private_data_slot: PrivateDataSlotEXT,
         allocator: Option<&AllocationCallbacks>,
@@ -1808,7 +1824,7 @@ pub trait ExtPrivateDataExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPrivateDataEXT.html>
     #[inline]
-    fn get_private_data_ext(
+    unsafe fn get_private_data_ext(
         &self,
         object_type: ObjectType,
         object_handle: u64,
@@ -1824,12 +1840,12 @@ pub trait ExtPrivateDataExtension: DeviceV1_0 {
             data.as_mut_ptr(),
         );
 
-        unsafe { data.assume_init() }
+        data.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetPrivateDataEXT.html>
     #[inline]
-    fn set_private_data_ext(
+    unsafe fn set_private_data_ext(
         &self,
         object_type: ObjectType,
         object_handle: u64,
@@ -1880,7 +1896,7 @@ pub trait ExtSampleLocationsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetSampleLocationsEXT.html>
     #[inline]
-    fn cmd_set_sample_locations_ext(
+    unsafe fn cmd_set_sample_locations_ext(
         &self,
         command_buffer: CommandBuffer,
         sample_locations_info: &SampleLocationsInfoEXT,
@@ -1891,7 +1907,7 @@ pub trait ExtSampleLocationsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceMultisamplePropertiesEXT.html>
     #[inline]
-    fn get_physical_device_multisample_properties_ext(
+    unsafe fn get_physical_device_multisample_properties_ext(
         &self,
         physical_device: PhysicalDevice,
         samples: SampleCountFlags,
@@ -1906,7 +1922,7 @@ pub trait ExtSampleLocationsExtension: DeviceV1_0 {
             multisample_properties.as_mut_ptr(),
         );
 
-        unsafe { multisample_properties.assume_init() }
+        multisample_properties.assume_init()
     }
 }
 
@@ -2050,7 +2066,7 @@ pub trait ExtToolingInfoExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceToolPropertiesEXT.html>
     #[inline]
-    fn get_physical_device_tool_properties_ext(
+    unsafe fn get_physical_device_tool_properties_ext(
         &self,
         physical_device: PhysicalDevice,
     ) -> crate::VkResult<Vec<PhysicalDeviceToolPropertiesEXT>> {
@@ -2071,7 +2087,7 @@ pub trait ExtToolingInfoExtension: DeviceV1_0 {
         );
 
         debug_assert!(tool_properties.capacity() == tool_count as usize);
-        unsafe { tool_properties.set_len(tool_count as usize) };
+        tool_properties.set_len(tool_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(tool_properties)
@@ -2091,7 +2107,7 @@ pub trait ExtTransformFeedbackExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginQueryIndexedEXT.html>
     #[inline]
-    fn cmd_begin_query_indexed_ext(
+    unsafe fn cmd_begin_query_indexed_ext(
         &self,
         command_buffer: CommandBuffer,
         query_pool: QueryPool,
@@ -2110,7 +2126,7 @@ pub trait ExtTransformFeedbackExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginTransformFeedbackEXT.html>
     #[inline]
-    fn cmd_begin_transform_feedback_ext(
+    unsafe fn cmd_begin_transform_feedback_ext(
         &self,
         command_buffer: CommandBuffer,
         first_counter_buffer: u32,
@@ -2128,7 +2144,7 @@ pub trait ExtTransformFeedbackExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindTransformFeedbackBuffersEXT.html>
     #[inline]
-    fn cmd_bind_transform_feedback_buffers_ext(
+    unsafe fn cmd_bind_transform_feedback_buffers_ext(
         &self,
         command_buffer: CommandBuffer,
         first_binding: u32,
@@ -2148,7 +2164,7 @@ pub trait ExtTransformFeedbackExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndirectByteCountEXT.html>
     #[inline]
-    fn cmd_draw_indirect_byte_count_ext(
+    unsafe fn cmd_draw_indirect_byte_count_ext(
         &self,
         command_buffer: CommandBuffer,
         instance_count: u32,
@@ -2171,7 +2187,7 @@ pub trait ExtTransformFeedbackExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndQueryIndexedEXT.html>
     #[inline]
-    fn cmd_end_query_indexed_ext(
+    unsafe fn cmd_end_query_indexed_ext(
         &self,
         command_buffer: CommandBuffer,
         query_pool: QueryPool,
@@ -2184,7 +2200,7 @@ pub trait ExtTransformFeedbackExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndTransformFeedbackEXT.html>
     #[inline]
-    fn cmd_end_transform_feedback_ext(
+    unsafe fn cmd_end_transform_feedback_ext(
         &self,
         command_buffer: CommandBuffer,
         first_counter_buffer: u32,
@@ -2211,7 +2227,7 @@ pub trait ExtValidationCacheExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateValidationCacheEXT.html>
     #[inline]
-    fn create_validation_cache_ext(
+    unsafe fn create_validation_cache_ext(
         &self,
         create_info: &ValidationCacheCreateInfoEXT,
         allocator: Option<&AllocationCallbacks>,
@@ -2226,7 +2242,7 @@ pub trait ExtValidationCacheExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { validation_cache.assume_init() })
+            Ok(validation_cache.assume_init())
         } else {
             Err(__result.into())
         }
@@ -2234,7 +2250,7 @@ pub trait ExtValidationCacheExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyValidationCacheEXT.html>
     #[inline]
-    fn destroy_validation_cache_ext(
+    unsafe fn destroy_validation_cache_ext(
         &self,
         validation_cache: ValidationCacheEXT,
         allocator: Option<&AllocationCallbacks>,
@@ -2248,7 +2264,7 @@ pub trait ExtValidationCacheExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetValidationCacheDataEXT.html>
     #[inline]
-    fn get_validation_cache_data_ext(
+    unsafe fn get_validation_cache_data_ext(
         &self,
         validation_cache: ValidationCacheEXT,
     ) -> crate::VkResult<Vec<u8>> {
@@ -2271,7 +2287,7 @@ pub trait ExtValidationCacheExtension: DeviceV1_0 {
         );
 
         debug_assert!(data.capacity() == data_size as usize);
-        unsafe { data.set_len(data_size as usize) };
+        data.set_len(data_size as usize);
 
         if __result == Result::SUCCESS {
             Ok(data)
@@ -2282,7 +2298,7 @@ pub trait ExtValidationCacheExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkMergeValidationCachesEXT.html>
     #[inline]
-    fn merge_validation_caches_ext(
+    unsafe fn merge_validation_caches_ext(
         &self,
         dst_cache: ValidationCacheEXT,
         src_caches: &[ValidationCacheEXT],
@@ -2350,7 +2366,7 @@ pub trait FuchsiaImagepipeSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateImagePipeSurfaceFUCHSIA.html>
     #[inline]
-    fn create_image_pipe_surface_fuchsia(
+    unsafe fn create_image_pipe_surface_fuchsia(
         &self,
         create_info: &ImagePipeSurfaceCreateInfoFUCHSIA,
         allocator: Option<&AllocationCallbacks>,
@@ -2365,7 +2381,7 @@ pub trait FuchsiaImagepipeSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -2391,7 +2407,7 @@ pub trait GgpStreamDescriptorSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateStreamDescriptorSurfaceGGP.html>
     #[inline]
-    fn create_stream_descriptor_surface_ggp(
+    unsafe fn create_stream_descriptor_surface_ggp(
         &self,
         create_info: &StreamDescriptorSurfaceCreateInfoGGP,
         allocator: Option<&AllocationCallbacks>,
@@ -2406,7 +2422,7 @@ pub trait GgpStreamDescriptorSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -2432,7 +2448,7 @@ pub trait GoogleDisplayTimingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPastPresentationTimingGOOGLE.html>
     #[inline]
-    fn get_past_presentation_timing_google(
+    unsafe fn get_past_presentation_timing_google(
         &self,
         swapchain: SwapchainKHR,
     ) -> crate::VkResult<Vec<PastPresentationTimingGOOGLE>> {
@@ -2455,7 +2471,7 @@ pub trait GoogleDisplayTimingExtension: DeviceV1_0 {
         );
 
         debug_assert!(presentation_timings.capacity() == presentation_timing_count as usize);
-        unsafe { presentation_timings.set_len(presentation_timing_count as usize) };
+        presentation_timings.set_len(presentation_timing_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(presentation_timings)
@@ -2466,7 +2482,7 @@ pub trait GoogleDisplayTimingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRefreshCycleDurationGOOGLE.html>
     #[inline]
-    fn get_refresh_cycle_duration_google(
+    unsafe fn get_refresh_cycle_duration_google(
         &self,
         swapchain: SwapchainKHR,
     ) -> crate::VkResult<RefreshCycleDurationGOOGLE> {
@@ -2479,7 +2495,7 @@ pub trait GoogleDisplayTimingExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { display_timing_properties.assume_init() })
+            Ok(display_timing_properties.assume_init())
         } else {
             Err(__result.into())
         }
@@ -2532,7 +2548,7 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquirePerformanceConfigurationINTEL.html>
     #[inline]
-    fn acquire_performance_configuration_intel(
+    unsafe fn acquire_performance_configuration_intel(
         &self,
         acquire_info: &PerformanceConfigurationAcquireInfoINTEL,
     ) -> crate::VkResult<PerformanceConfigurationINTEL> {
@@ -2545,7 +2561,7 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { configuration.assume_init() })
+            Ok(configuration.assume_init())
         } else {
             Err(__result.into())
         }
@@ -2553,7 +2569,7 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPerformanceMarkerINTEL.html>
     #[inline]
-    fn cmd_set_performance_marker_intel(
+    unsafe fn cmd_set_performance_marker_intel(
         &self,
         command_buffer: CommandBuffer,
         marker_info: &PerformanceMarkerInfoINTEL,
@@ -2570,7 +2586,7 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPerformanceOverrideINTEL.html>
     #[inline]
-    fn cmd_set_performance_override_intel(
+    unsafe fn cmd_set_performance_override_intel(
         &self,
         command_buffer: CommandBuffer,
         override_info: &PerformanceOverrideInfoINTEL,
@@ -2587,7 +2603,7 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPerformanceStreamMarkerINTEL.html>
     #[inline]
-    fn cmd_set_performance_stream_marker_intel(
+    unsafe fn cmd_set_performance_stream_marker_intel(
         &self,
         command_buffer: CommandBuffer,
         marker_info: &PerformanceStreamMarkerInfoINTEL,
@@ -2604,7 +2620,7 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPerformanceParameterINTEL.html>
     #[inline]
-    fn get_performance_parameter_intel(
+    unsafe fn get_performance_parameter_intel(
         &self,
         parameter: PerformanceParameterTypeINTEL,
     ) -> crate::VkResult<PerformanceValueINTEL> {
@@ -2617,7 +2633,7 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { value.assume_init() })
+            Ok(value.assume_init())
         } else {
             Err(__result.into())
         }
@@ -2625,7 +2641,7 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkInitializePerformanceApiINTEL.html>
     #[inline]
-    fn initialize_performance_api_intel(
+    unsafe fn initialize_performance_api_intel(
         &self,
         initialize_info: &InitializePerformanceApiInfoINTEL,
     ) -> crate::VkResult<()> {
@@ -2641,7 +2657,7 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSetPerformanceConfigurationINTEL.html>
     #[inline]
-    fn queue_set_performance_configuration_intel(
+    unsafe fn queue_set_performance_configuration_intel(
         &self,
         queue: Queue,
         configuration: PerformanceConfigurationINTEL,
@@ -2658,7 +2674,7 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleasePerformanceConfigurationINTEL.html>
     #[inline]
-    fn release_performance_configuration_intel(
+    unsafe fn release_performance_configuration_intel(
         &self,
         configuration: PerformanceConfigurationINTEL,
     ) -> crate::VkResult<()> {
@@ -2674,7 +2690,7 @@ pub trait IntelPerformanceQueryExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkUninitializePerformanceApiINTEL.html>
     #[inline]
-    fn uninitialize_performance_api_intel(&self) {
+    unsafe fn uninitialize_performance_api_intel(&self) {
         let __result = (self.commands().uninitialize_performance_api_intel)(self.handle());
     }
 }
@@ -2716,7 +2732,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBuildAccelerationStructuresKHR.html>
     #[inline]
-    fn build_acceleration_structures_khr(
+    unsafe fn build_acceleration_structures_khr(
         &self,
         deferred_operation: DeferredOperationKHR,
         infos: &[impl Cast<Target = AccelerationStructureBuildGeometryInfoKHR>],
@@ -2739,7 +2755,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructuresIndirectKHR.html>
     #[inline]
-    fn cmd_build_acceleration_structures_indirect_khr(
+    unsafe fn cmd_build_acceleration_structures_indirect_khr(
         &self,
         command_buffer: CommandBuffer,
         infos: &[impl Cast<Target = AccelerationStructureBuildGeometryInfoKHR>],
@@ -2761,7 +2777,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructuresKHR.html>
     #[inline]
-    fn cmd_build_acceleration_structures_khr(
+    unsafe fn cmd_build_acceleration_structures_khr(
         &self,
         command_buffer: CommandBuffer,
         infos: &[impl Cast<Target = AccelerationStructureBuildGeometryInfoKHR>],
@@ -2777,7 +2793,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyAccelerationStructureKHR.html>
     #[inline]
-    fn cmd_copy_acceleration_structure_khr(
+    unsafe fn cmd_copy_acceleration_structure_khr(
         &self,
         command_buffer: CommandBuffer,
         info: &CopyAccelerationStructureInfoKHR,
@@ -2787,7 +2803,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyAccelerationStructureToMemoryKHR.html>
     #[inline]
-    fn cmd_copy_acceleration_structure_to_memory_khr(
+    unsafe fn cmd_copy_acceleration_structure_to_memory_khr(
         &self,
         command_buffer: CommandBuffer,
         info: &CopyAccelerationStructureToMemoryInfoKHR,
@@ -2800,7 +2816,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyMemoryToAccelerationStructureKHR.html>
     #[inline]
-    fn cmd_copy_memory_to_acceleration_structure_khr(
+    unsafe fn cmd_copy_memory_to_acceleration_structure_khr(
         &self,
         command_buffer: CommandBuffer,
         info: &CopyMemoryToAccelerationStructureInfoKHR,
@@ -2813,7 +2829,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteAccelerationStructuresPropertiesKHR.html>
     #[inline]
-    fn cmd_write_acceleration_structures_properties_khr(
+    unsafe fn cmd_write_acceleration_structures_properties_khr(
         &self,
         command_buffer: CommandBuffer,
         acceleration_structures: &[AccelerationStructureKHR],
@@ -2835,7 +2851,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyAccelerationStructureKHR.html>
     #[inline]
-    fn copy_acceleration_structure_khr(
+    unsafe fn copy_acceleration_structure_khr(
         &self,
         deferred_operation: DeferredOperationKHR,
         info: &CopyAccelerationStructureInfoKHR,
@@ -2855,7 +2871,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyAccelerationStructureToMemoryKHR.html>
     #[inline]
-    fn copy_acceleration_structure_to_memory_khr(
+    unsafe fn copy_acceleration_structure_to_memory_khr(
         &self,
         deferred_operation: DeferredOperationKHR,
         info: &CopyAccelerationStructureToMemoryInfoKHR,
@@ -2875,7 +2891,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCopyMemoryToAccelerationStructureKHR.html>
     #[inline]
-    fn copy_memory_to_acceleration_structure_khr(
+    unsafe fn copy_memory_to_acceleration_structure_khr(
         &self,
         deferred_operation: DeferredOperationKHR,
         info: &CopyMemoryToAccelerationStructureInfoKHR,
@@ -2895,7 +2911,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateAccelerationStructureKHR.html>
     #[inline]
-    fn create_acceleration_structure_khr(
+    unsafe fn create_acceleration_structure_khr(
         &self,
         create_info: &AccelerationStructureCreateInfoKHR,
         allocator: Option<&AllocationCallbacks>,
@@ -2910,7 +2926,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { acceleration_structure.assume_init() })
+            Ok(acceleration_structure.assume_init())
         } else {
             Err(__result.into())
         }
@@ -2918,7 +2934,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyAccelerationStructureKHR.html>
     #[inline]
-    fn destroy_acceleration_structure_khr(
+    unsafe fn destroy_acceleration_structure_khr(
         &self,
         acceleration_structure: AccelerationStructureKHR,
         allocator: Option<&AllocationCallbacks>,
@@ -2932,7 +2948,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureBuildSizesKHR.html>
     #[inline]
-    fn get_acceleration_structure_build_sizes_khr(
+    unsafe fn get_acceleration_structure_build_sizes_khr(
         &self,
         build_type: AccelerationStructureBuildTypeKHR,
         build_info: &AccelerationStructureBuildGeometryInfoKHR,
@@ -2949,14 +2965,14 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
             size_info.as_mut_ptr(),
         );
 
-        unsafe { max_primitive_counts.set_len(build_info.as_ref().geometry_count as usize) };
+        max_primitive_counts.set_len(build_info.as_ref().geometry_count as usize);
 
-        (max_primitive_counts, unsafe { size_info.assume_init() })
+        (max_primitive_counts, size_info.assume_init())
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureDeviceAddressKHR.html>
     #[inline]
-    fn get_acceleration_structure_device_address_khr(
+    unsafe fn get_acceleration_structure_device_address_khr(
         &self,
         info: &AccelerationStructureDeviceAddressInfoKHR,
     ) {
@@ -2968,7 +2984,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceAccelerationStructureCompatibilityKHR.html>
     #[inline]
-    fn get_device_acceleration_structure_compatibility_khr(
+    unsafe fn get_device_acceleration_structure_compatibility_khr(
         &self,
         version_info: &AccelerationStructureVersionInfoKHR,
     ) -> AccelerationStructureCompatibilityKHR {
@@ -2982,12 +2998,12 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
             compatibility.as_mut_ptr(),
         );
 
-        unsafe { compatibility.assume_init() }
+        compatibility.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWriteAccelerationStructuresPropertiesKHR.html>
     #[inline]
-    fn write_acceleration_structures_properties_khr(
+    unsafe fn write_acceleration_structures_properties_khr(
         &self,
         acceleration_structures: &[AccelerationStructureKHR],
         query_type: QueryType,
@@ -3022,7 +3038,7 @@ pub trait KhrAndroidSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateAndroidSurfaceKHR.html>
     #[inline]
-    fn create_android_surface_khr(
+    unsafe fn create_android_surface_khr(
         &self,
         create_info: &AndroidSurfaceCreateInfoKHR,
         allocator: Option<&AllocationCallbacks>,
@@ -3037,7 +3053,7 @@ pub trait KhrAndroidSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -3054,7 +3070,7 @@ pub trait KhrBindMemory2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindBufferMemory2KHR.html>
     #[inline]
-    fn bind_buffer_memory2_khr(
+    unsafe fn bind_buffer_memory2_khr(
         &self,
         bind_infos: &[impl Cast<Target = BindBufferMemoryInfo>],
     ) -> crate::VkResult<()> {
@@ -3073,7 +3089,7 @@ pub trait KhrBindMemory2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindImageMemory2KHR.html>
     #[inline]
-    fn bind_image_memory2_khr(
+    unsafe fn bind_image_memory2_khr(
         &self,
         bind_infos: &[impl Cast<Target = BindImageMemoryInfo>],
     ) -> crate::VkResult<()> {
@@ -3101,19 +3117,19 @@ pub trait KhrBufferDeviceAddressExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferDeviceAddressKHR.html>
     #[inline]
-    fn get_buffer_device_address_khr(&self, info: &BufferDeviceAddressInfo) {
+    unsafe fn get_buffer_device_address_khr(&self, info: &BufferDeviceAddressInfo) {
         let __result = (self.commands().get_buffer_device_address_khr)(self.handle(), info);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferOpaqueCaptureAddressKHR.html>
     #[inline]
-    fn get_buffer_opaque_capture_address_khr(&self, info: &BufferDeviceAddressInfo) {
+    unsafe fn get_buffer_opaque_capture_address_khr(&self, info: &BufferDeviceAddressInfo) {
         let __result = (self.commands().get_buffer_opaque_capture_address_khr)(self.handle(), info);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceMemoryOpaqueCaptureAddressKHR.html>
     #[inline]
-    fn get_device_memory_opaque_capture_address_khr(
+    unsafe fn get_device_memory_opaque_capture_address_khr(
         &self,
         info: &DeviceMemoryOpaqueCaptureAddressInfo,
     ) {
@@ -3132,7 +3148,7 @@ pub trait KhrCopyCommands2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBlitImage2KHR.html>
     #[inline]
-    fn cmd_blit_image2_khr(
+    unsafe fn cmd_blit_image2_khr(
         &self,
         command_buffer: CommandBuffer,
         blit_image_info: &BlitImageInfo2KHR,
@@ -3142,7 +3158,7 @@ pub trait KhrCopyCommands2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBuffer2KHR.html>
     #[inline]
-    fn cmd_copy_buffer2_khr(
+    unsafe fn cmd_copy_buffer2_khr(
         &self,
         command_buffer: CommandBuffer,
         copy_buffer_info: &CopyBufferInfo2KHR,
@@ -3152,7 +3168,7 @@ pub trait KhrCopyCommands2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyBufferToImage2KHR.html>
     #[inline]
-    fn cmd_copy_buffer_to_image2_khr(
+    unsafe fn cmd_copy_buffer_to_image2_khr(
         &self,
         command_buffer: CommandBuffer,
         copy_buffer_to_image_info: &CopyBufferToImageInfo2KHR,
@@ -3165,7 +3181,7 @@ pub trait KhrCopyCommands2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImage2KHR.html>
     #[inline]
-    fn cmd_copy_image2_khr(
+    unsafe fn cmd_copy_image2_khr(
         &self,
         command_buffer: CommandBuffer,
         copy_image_info: &CopyImageInfo2KHR,
@@ -3175,7 +3191,7 @@ pub trait KhrCopyCommands2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyImageToBuffer2KHR.html>
     #[inline]
-    fn cmd_copy_image_to_buffer2_khr(
+    unsafe fn cmd_copy_image_to_buffer2_khr(
         &self,
         command_buffer: CommandBuffer,
         copy_image_to_buffer_info: &CopyImageToBufferInfo2KHR,
@@ -3188,7 +3204,7 @@ pub trait KhrCopyCommands2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResolveImage2KHR.html>
     #[inline]
-    fn cmd_resolve_image2_khr(
+    unsafe fn cmd_resolve_image2_khr(
         &self,
         command_buffer: CommandBuffer,
         resolve_image_info: &ResolveImageInfo2KHR,
@@ -3207,7 +3223,7 @@ pub trait KhrCreateRenderpass2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass2KHR.html>
     #[inline]
-    fn cmd_begin_render_pass2_khr(
+    unsafe fn cmd_begin_render_pass2_khr(
         &self,
         command_buffer: CommandBuffer,
         render_pass_begin: &RenderPassBeginInfo,
@@ -3222,7 +3238,7 @@ pub trait KhrCreateRenderpass2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass2KHR.html>
     #[inline]
-    fn cmd_end_render_pass2_khr(
+    unsafe fn cmd_end_render_pass2_khr(
         &self,
         command_buffer: CommandBuffer,
         subpass_end_info: &SubpassEndInfo,
@@ -3232,7 +3248,7 @@ pub trait KhrCreateRenderpass2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdNextSubpass2KHR.html>
     #[inline]
-    fn cmd_next_subpass2_khr(
+    unsafe fn cmd_next_subpass2_khr(
         &self,
         command_buffer: CommandBuffer,
         subpass_begin_info: &SubpassBeginInfo,
@@ -3247,7 +3263,7 @@ pub trait KhrCreateRenderpass2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateRenderPass2KHR.html>
     #[inline]
-    fn create_render_pass2_khr(
+    unsafe fn create_render_pass2_khr(
         &self,
         create_info: &RenderPassCreateInfo2,
         allocator: Option<&AllocationCallbacks>,
@@ -3262,7 +3278,7 @@ pub trait KhrCreateRenderpass2Extension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { render_pass.assume_init() })
+            Ok(render_pass.assume_init())
         } else {
             Err(__result.into())
         }
@@ -3288,7 +3304,7 @@ pub trait KhrDeferredHostOperationsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDeferredOperationKHR.html>
     #[inline]
-    fn create_deferred_operation_khr(
+    unsafe fn create_deferred_operation_khr(
         &self,
         allocator: Option<&AllocationCallbacks>,
     ) -> crate::VkResult<DeferredOperationKHR> {
@@ -3301,7 +3317,7 @@ pub trait KhrDeferredHostOperationsExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { deferred_operation.assume_init() })
+            Ok(deferred_operation.assume_init())
         } else {
             Err(__result.into())
         }
@@ -3309,7 +3325,7 @@ pub trait KhrDeferredHostOperationsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDeferredOperationJoinKHR.html>
     #[inline]
-    fn deferred_operation_join_khr(
+    unsafe fn deferred_operation_join_khr(
         &self,
         operation: DeferredOperationKHR,
     ) -> crate::VkResult<SuccessCode> {
@@ -3324,7 +3340,7 @@ pub trait KhrDeferredHostOperationsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDeferredOperationKHR.html>
     #[inline]
-    fn destroy_deferred_operation_khr(
+    unsafe fn destroy_deferred_operation_khr(
         &self,
         operation: DeferredOperationKHR,
         allocator: Option<&AllocationCallbacks>,
@@ -3338,14 +3354,14 @@ pub trait KhrDeferredHostOperationsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeferredOperationMaxConcurrencyKHR.html>
     #[inline]
-    fn get_deferred_operation_max_concurrency_khr(&self, operation: DeferredOperationKHR) {
+    unsafe fn get_deferred_operation_max_concurrency_khr(&self, operation: DeferredOperationKHR) {
         let __result =
             (self.commands().get_deferred_operation_max_concurrency_khr)(self.handle(), operation);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeferredOperationResultKHR.html>
     #[inline]
-    fn get_deferred_operation_result_khr(
+    unsafe fn get_deferred_operation_result_khr(
         &self,
         operation: DeferredOperationKHR,
     ) -> crate::VkResult<SuccessCode> {
@@ -3379,7 +3395,7 @@ pub trait KhrDescriptorUpdateTemplateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushDescriptorSetWithTemplateKHR.html>
     #[inline]
-    fn cmd_push_descriptor_set_with_template_khr(
+    unsafe fn cmd_push_descriptor_set_with_template_khr(
         &self,
         command_buffer: CommandBuffer,
         descriptor_update_template: DescriptorUpdateTemplate,
@@ -3398,7 +3414,7 @@ pub trait KhrDescriptorUpdateTemplateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDescriptorUpdateTemplateKHR.html>
     #[inline]
-    fn create_descriptor_update_template_khr(
+    unsafe fn create_descriptor_update_template_khr(
         &self,
         create_info: &DescriptorUpdateTemplateCreateInfo,
         allocator: Option<&AllocationCallbacks>,
@@ -3413,7 +3429,7 @@ pub trait KhrDescriptorUpdateTemplateExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { descriptor_update_template.assume_init() })
+            Ok(descriptor_update_template.assume_init())
         } else {
             Err(__result.into())
         }
@@ -3421,7 +3437,7 @@ pub trait KhrDescriptorUpdateTemplateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyDescriptorUpdateTemplateKHR.html>
     #[inline]
-    fn destroy_descriptor_update_template_khr(
+    unsafe fn destroy_descriptor_update_template_khr(
         &self,
         descriptor_update_template: DescriptorUpdateTemplate,
         allocator: Option<&AllocationCallbacks>,
@@ -3435,7 +3451,7 @@ pub trait KhrDescriptorUpdateTemplateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkUpdateDescriptorSetWithTemplateKHR.html>
     #[inline]
-    fn update_descriptor_set_with_template_khr(
+    unsafe fn update_descriptor_set_with_template_khr(
         &self,
         descriptor_set: DescriptorSet,
         descriptor_update_template: DescriptorUpdateTemplate,
@@ -3460,7 +3476,7 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireNextImage2KHR.html>
     #[inline]
-    fn acquire_next_image2_khr(
+    unsafe fn acquire_next_image2_khr(
         &self,
         acquire_info: &AcquireNextImageInfoKHR,
     ) -> crate::VkSuccessResult<u32> {
@@ -3473,7 +3489,7 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
         );
 
         if __result >= Result::SUCCESS {
-            Ok((unsafe { image_index.assume_init() }, __result.into()))
+            Ok((image_index.assume_init(), __result.into()))
         } else {
             Err(__result.into())
         }
@@ -3481,7 +3497,7 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDispatchBaseKHR.html>
     #[inline]
-    fn cmd_dispatch_base_khr(
+    unsafe fn cmd_dispatch_base_khr(
         &self,
         command_buffer: CommandBuffer,
         base_group_x: u32,
@@ -3504,13 +3520,13 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDeviceMaskKHR.html>
     #[inline]
-    fn cmd_set_device_mask_khr(&self, command_buffer: CommandBuffer, device_mask: u32) {
+    unsafe fn cmd_set_device_mask_khr(&self, command_buffer: CommandBuffer, device_mask: u32) {
         let __result = (self.commands().cmd_set_device_mask_khr)(command_buffer, device_mask);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupPeerMemoryFeaturesKHR.html>
     #[inline]
-    fn get_device_group_peer_memory_features_khr(
+    unsafe fn get_device_group_peer_memory_features_khr(
         &self,
         heap_index: u32,
         local_device_index: u32,
@@ -3526,12 +3542,12 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
             peer_memory_features.as_mut_ptr(),
         );
 
-        unsafe { peer_memory_features.assume_init() }
+        peer_memory_features.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupPresentCapabilitiesKHR.html>
     #[inline]
-    fn get_device_group_present_capabilities_khr(
+    unsafe fn get_device_group_present_capabilities_khr(
         &self,
     ) -> crate::VkResult<DeviceGroupPresentCapabilitiesKHR> {
         let mut device_group_present_capabilities =
@@ -3543,7 +3559,7 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { device_group_present_capabilities.assume_init() })
+            Ok(device_group_present_capabilities.assume_init())
         } else {
             Err(__result.into())
         }
@@ -3551,7 +3567,7 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupSurfacePresentModesKHR.html>
     #[inline]
-    fn get_device_group_surface_present_modes_khr(
+    unsafe fn get_device_group_surface_present_modes_khr(
         &self,
         surface: SurfaceKHR,
     ) -> crate::VkResult<DeviceGroupPresentModeFlagsKHR> {
@@ -3564,7 +3580,7 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { modes.assume_init() })
+            Ok(modes.assume_init())
         } else {
             Err(__result.into())
         }
@@ -3572,7 +3588,7 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDevicePresentRectanglesKHR.html>
     #[inline]
-    fn get_physical_device_present_rectangles_khr(
+    unsafe fn get_physical_device_present_rectangles_khr(
         &self,
         physical_device: PhysicalDevice,
         surface: SurfaceKHR,
@@ -3596,7 +3612,7 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
         );
 
         debug_assert!(rects.capacity() == rect_count as usize);
-        unsafe { rects.set_len(rect_count as usize) };
+        rects.set_len(rect_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(rects)
@@ -3616,7 +3632,7 @@ pub trait KhrDeviceGroupCreationExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumeratePhysicalDeviceGroupsKHR.html>
     #[inline]
-    fn enumerate_physical_device_groups_khr(
+    unsafe fn enumerate_physical_device_groups_khr(
         &self,
     ) -> crate::VkResult<Vec<PhysicalDeviceGroupProperties>> {
         let mut physical_device_group_count = 0;
@@ -3639,7 +3655,7 @@ pub trait KhrDeviceGroupCreationExtension: InstanceV1_0 {
         debug_assert!(
             physical_device_group_properties.capacity() == physical_device_group_count as usize
         );
-        unsafe { physical_device_group_properties.set_len(physical_device_group_count as usize) };
+        physical_device_group_properties.set_len(physical_device_group_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(physical_device_group_properties)
@@ -3659,7 +3675,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDisplayModeKHR.html>
     #[inline]
-    fn create_display_mode_khr(
+    unsafe fn create_display_mode_khr(
         &self,
         physical_device: PhysicalDevice,
         display: DisplayKHR,
@@ -3677,7 +3693,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { mode.assume_init() })
+            Ok(mode.assume_init())
         } else {
             Err(__result.into())
         }
@@ -3685,7 +3701,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDisplayPlaneSurfaceKHR.html>
     #[inline]
-    fn create_display_plane_surface_khr(
+    unsafe fn create_display_plane_surface_khr(
         &self,
         create_info: &DisplaySurfaceCreateInfoKHR,
         allocator: Option<&AllocationCallbacks>,
@@ -3700,7 +3716,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -3708,7 +3724,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayModePropertiesKHR.html>
     #[inline]
-    fn get_display_mode_properties_khr(
+    unsafe fn get_display_mode_properties_khr(
         &self,
         physical_device: PhysicalDevice,
         display: DisplayKHR,
@@ -3732,7 +3748,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
         );
 
         debug_assert!(properties.capacity() == property_count as usize);
-        unsafe { properties.set_len(property_count as usize) };
+        properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(properties)
@@ -3743,7 +3759,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayPlaneCapabilitiesKHR.html>
     #[inline]
-    fn get_display_plane_capabilities_khr(
+    unsafe fn get_display_plane_capabilities_khr(
         &self,
         physical_device: PhysicalDevice,
         mode: DisplayModeKHR,
@@ -3759,7 +3775,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { capabilities.assume_init() })
+            Ok(capabilities.assume_init())
         } else {
             Err(__result.into())
         }
@@ -3767,7 +3783,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayPlaneSupportedDisplaysKHR.html>
     #[inline]
-    fn get_display_plane_supported_displays_khr(
+    unsafe fn get_display_plane_supported_displays_khr(
         &self,
         physical_device: PhysicalDevice,
         plane_index: u32,
@@ -3791,7 +3807,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
         );
 
         debug_assert!(displays.capacity() == display_count as usize);
-        unsafe { displays.set_len(display_count as usize) };
+        displays.set_len(display_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(displays)
@@ -3802,7 +3818,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceDisplayPlanePropertiesKHR.html>
     #[inline]
-    fn get_physical_device_display_plane_properties_khr(
+    unsafe fn get_physical_device_display_plane_properties_khr(
         &self,
         physical_device: PhysicalDevice,
     ) -> crate::VkResult<Vec<DisplayPlanePropertiesKHR>> {
@@ -3827,7 +3843,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
         );
 
         debug_assert!(properties.capacity() == property_count as usize);
-        unsafe { properties.set_len(property_count as usize) };
+        properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(properties)
@@ -3838,7 +3854,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceDisplayPropertiesKHR.html>
     #[inline]
-    fn get_physical_device_display_properties_khr(
+    unsafe fn get_physical_device_display_properties_khr(
         &self,
         physical_device: PhysicalDevice,
     ) -> crate::VkResult<Vec<DisplayPropertiesKHR>> {
@@ -3859,7 +3875,7 @@ pub trait KhrDisplayExtension: InstanceV1_0 {
         );
 
         debug_assert!(properties.capacity() == property_count as usize);
-        unsafe { properties.set_len(property_count as usize) };
+        properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(properties)
@@ -3879,7 +3895,7 @@ pub trait KhrDisplaySwapchainExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSharedSwapchainsKHR.html>
     #[inline]
-    fn create_shared_swapchains_khr(
+    unsafe fn create_shared_swapchains_khr(
         &self,
         create_infos: &[impl Cast<Target = SwapchainCreateInfoKHR>],
         allocator: Option<&AllocationCallbacks>,
@@ -3895,7 +3911,7 @@ pub trait KhrDisplaySwapchainExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { swapchains.assume_init() })
+            Ok(swapchains.assume_init())
         } else {
             Err(__result.into())
         }
@@ -3912,7 +3928,7 @@ pub trait KhrDrawIndirectCountExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndexedIndirectCountKHR.html>
     #[inline]
-    fn cmd_draw_indexed_indirect_count_khr(
+    unsafe fn cmd_draw_indexed_indirect_count_khr(
         &self,
         command_buffer: CommandBuffer,
         buffer: Buffer,
@@ -3935,7 +3951,7 @@ pub trait KhrDrawIndirectCountExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawIndirectCountKHR.html>
     #[inline]
-    fn cmd_draw_indirect_count_khr(
+    unsafe fn cmd_draw_indirect_count_khr(
         &self,
         command_buffer: CommandBuffer,
         buffer: Buffer,
@@ -3985,7 +4001,7 @@ pub trait KhrExternalFenceCapabilitiesExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalFencePropertiesKHR.html>
     #[inline]
-    fn get_physical_device_external_fence_properties_khr(
+    unsafe fn get_physical_device_external_fence_properties_khr(
         &self,
         physical_device: PhysicalDevice,
         external_fence_info: &PhysicalDeviceExternalFenceInfo,
@@ -4000,7 +4016,7 @@ pub trait KhrExternalFenceCapabilitiesExtension: InstanceV1_0 {
             external_fence_properties.as_mut_ptr(),
         );
 
-        unsafe { external_fence_properties.assume_init() }
+        external_fence_properties.assume_init()
     }
 }
 
@@ -4014,14 +4030,14 @@ pub trait KhrExternalFenceFdExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetFenceFdKHR.html>
     #[inline]
-    fn get_fence_fd_khr(&self, get_fd_info: &FenceGetFdInfoKHR) -> crate::VkResult<c_int> {
+    unsafe fn get_fence_fd_khr(&self, get_fd_info: &FenceGetFdInfoKHR) -> crate::VkResult<c_int> {
         let mut fd = MaybeUninit::<c_int>::uninit();
 
         let __result =
             (self.commands().get_fence_fd_khr)(self.handle(), get_fd_info, fd.as_mut_ptr());
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { fd.assume_init() })
+            Ok(fd.assume_init())
         } else {
             Err(__result.into())
         }
@@ -4029,7 +4045,7 @@ pub trait KhrExternalFenceFdExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportFenceFdKHR.html>
     #[inline]
-    fn import_fence_fd_khr(
+    unsafe fn import_fence_fd_khr(
         &self,
         import_fence_fd_info: &ImportFenceFdInfoKHR,
     ) -> crate::VkResult<()> {
@@ -4053,7 +4069,7 @@ pub trait KhrExternalFenceWin32Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetFenceWin32HandleKHR.html>
     #[inline]
-    fn get_fence_win32_handle_khr(
+    unsafe fn get_fence_win32_handle_khr(
         &self,
         get_win32_handle_info: &FenceGetWin32HandleInfoKHR,
     ) -> crate::VkResult<HANDLE> {
@@ -4066,7 +4082,7 @@ pub trait KhrExternalFenceWin32Extension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { handle.assume_init() })
+            Ok(handle.assume_init())
         } else {
             Err(__result.into())
         }
@@ -4074,7 +4090,7 @@ pub trait KhrExternalFenceWin32Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportFenceWin32HandleKHR.html>
     #[inline]
-    fn import_fence_win32_handle_khr(
+    unsafe fn import_fence_win32_handle_khr(
         &self,
         import_fence_win32_handle_info: &ImportFenceWin32HandleInfoKHR,
     ) -> crate::VkResult<()> {
@@ -4110,7 +4126,7 @@ pub trait KhrExternalMemoryCapabilitiesExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalBufferPropertiesKHR.html>
     #[inline]
-    fn get_physical_device_external_buffer_properties_khr(
+    unsafe fn get_physical_device_external_buffer_properties_khr(
         &self,
         physical_device: PhysicalDevice,
         external_buffer_info: &PhysicalDeviceExternalBufferInfo,
@@ -4125,7 +4141,7 @@ pub trait KhrExternalMemoryCapabilitiesExtension: InstanceV1_0 {
             external_buffer_properties.as_mut_ptr(),
         );
 
-        unsafe { external_buffer_properties.assume_init() }
+        external_buffer_properties.assume_init()
     }
 }
 
@@ -4139,14 +4155,14 @@ pub trait KhrExternalMemoryFdExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryFdKHR.html>
     #[inline]
-    fn get_memory_fd_khr(&self, get_fd_info: &MemoryGetFdInfoKHR) -> crate::VkResult<c_int> {
+    unsafe fn get_memory_fd_khr(&self, get_fd_info: &MemoryGetFdInfoKHR) -> crate::VkResult<c_int> {
         let mut fd = MaybeUninit::<c_int>::uninit();
 
         let __result =
             (self.commands().get_memory_fd_khr)(self.handle(), get_fd_info, fd.as_mut_ptr());
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { fd.assume_init() })
+            Ok(fd.assume_init())
         } else {
             Err(__result.into())
         }
@@ -4154,7 +4170,7 @@ pub trait KhrExternalMemoryFdExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryFdPropertiesKHR.html>
     #[inline]
-    fn get_memory_fd_properties_khr(
+    unsafe fn get_memory_fd_properties_khr(
         &self,
         handle_type: ExternalMemoryHandleTypeFlags,
         fd: c_int,
@@ -4169,7 +4185,7 @@ pub trait KhrExternalMemoryFdExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { memory_fd_properties.assume_init() })
+            Ok(memory_fd_properties.assume_init())
         } else {
             Err(__result.into())
         }
@@ -4186,7 +4202,7 @@ pub trait KhrExternalMemoryWin32Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryWin32HandleKHR.html>
     #[inline]
-    fn get_memory_win32_handle_khr(
+    unsafe fn get_memory_win32_handle_khr(
         &self,
         get_win32_handle_info: &MemoryGetWin32HandleInfoKHR,
     ) -> crate::VkResult<HANDLE> {
@@ -4199,7 +4215,7 @@ pub trait KhrExternalMemoryWin32Extension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { handle.assume_init() })
+            Ok(handle.assume_init())
         } else {
             Err(__result.into())
         }
@@ -4207,7 +4223,7 @@ pub trait KhrExternalMemoryWin32Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryWin32HandlePropertiesKHR.html>
     #[inline]
-    fn get_memory_win32_handle_properties_khr(
+    unsafe fn get_memory_win32_handle_properties_khr(
         &self,
         handle_type: ExternalMemoryHandleTypeFlags,
         handle: HANDLE,
@@ -4223,7 +4239,7 @@ pub trait KhrExternalMemoryWin32Extension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { memory_win32_handle_properties.assume_init() })
+            Ok(memory_win32_handle_properties.assume_init())
         } else {
             Err(__result.into())
         }
@@ -4249,7 +4265,7 @@ pub trait KhrExternalSemaphoreCapabilitiesExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalSemaphorePropertiesKHR.html>
     #[inline]
-    fn get_physical_device_external_semaphore_properties_khr(
+    unsafe fn get_physical_device_external_semaphore_properties_khr(
         &self,
         physical_device: PhysicalDevice,
         external_semaphore_info: &PhysicalDeviceExternalSemaphoreInfo,
@@ -4265,7 +4281,7 @@ pub trait KhrExternalSemaphoreCapabilitiesExtension: InstanceV1_0 {
             external_semaphore_properties.as_mut_ptr(),
         );
 
-        unsafe { external_semaphore_properties.assume_init() }
+        external_semaphore_properties.assume_init()
     }
 }
 
@@ -4279,14 +4295,17 @@ pub trait KhrExternalSemaphoreFdExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreFdKHR.html>
     #[inline]
-    fn get_semaphore_fd_khr(&self, get_fd_info: &SemaphoreGetFdInfoKHR) -> crate::VkResult<c_int> {
+    unsafe fn get_semaphore_fd_khr(
+        &self,
+        get_fd_info: &SemaphoreGetFdInfoKHR,
+    ) -> crate::VkResult<c_int> {
         let mut fd = MaybeUninit::<c_int>::uninit();
 
         let __result =
             (self.commands().get_semaphore_fd_khr)(self.handle(), get_fd_info, fd.as_mut_ptr());
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { fd.assume_init() })
+            Ok(fd.assume_init())
         } else {
             Err(__result.into())
         }
@@ -4294,7 +4313,7 @@ pub trait KhrExternalSemaphoreFdExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportSemaphoreFdKHR.html>
     #[inline]
-    fn import_semaphore_fd_khr(
+    unsafe fn import_semaphore_fd_khr(
         &self,
         import_semaphore_fd_info: &ImportSemaphoreFdInfoKHR,
     ) -> crate::VkResult<()> {
@@ -4319,7 +4338,7 @@ pub trait KhrExternalSemaphoreWin32Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreWin32HandleKHR.html>
     #[inline]
-    fn get_semaphore_win32_handle_khr(
+    unsafe fn get_semaphore_win32_handle_khr(
         &self,
         get_win32_handle_info: &SemaphoreGetWin32HandleInfoKHR,
     ) -> crate::VkResult<HANDLE> {
@@ -4332,7 +4351,7 @@ pub trait KhrExternalSemaphoreWin32Extension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { handle.assume_init() })
+            Ok(handle.assume_init())
         } else {
             Err(__result.into())
         }
@@ -4340,7 +4359,7 @@ pub trait KhrExternalSemaphoreWin32Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportSemaphoreWin32HandleKHR.html>
     #[inline]
-    fn import_semaphore_win32_handle_khr(
+    unsafe fn import_semaphore_win32_handle_khr(
         &self,
         import_semaphore_win32_handle_info: &ImportSemaphoreWin32HandleInfoKHR,
     ) -> crate::VkResult<()> {
@@ -4367,7 +4386,7 @@ pub trait KhrFragmentShadingRateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateKHR.html>
     #[inline]
-    fn cmd_set_fragment_shading_rate_khr(
+    unsafe fn cmd_set_fragment_shading_rate_khr(
         &self,
         command_buffer: CommandBuffer,
         fragment_size: &Extent2D,
@@ -4382,7 +4401,7 @@ pub trait KhrFragmentShadingRateExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFragmentShadingRatesKHR.html>
     #[inline]
-    fn get_physical_device_fragment_shading_rates_khr(
+    unsafe fn get_physical_device_fragment_shading_rates_khr(
         &self,
         physical_device: PhysicalDevice,
     ) -> crate::VkResult<Vec<PhysicalDeviceFragmentShadingRateKHR>> {
@@ -4407,7 +4426,7 @@ pub trait KhrFragmentShadingRateExtension: DeviceV1_0 {
         );
 
         debug_assert!(fragment_shading_rates.capacity() == fragment_shading_rate_count as usize);
-        unsafe { fragment_shading_rates.set_len(fragment_shading_rate_count as usize) };
+        fragment_shading_rates.set_len(fragment_shading_rate_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(fragment_shading_rates)
@@ -4427,7 +4446,7 @@ pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayModeProperties2KHR.html>
     #[inline]
-    fn get_display_mode_properties2_khr(
+    unsafe fn get_display_mode_properties2_khr(
         &self,
         physical_device: PhysicalDevice,
         display: DisplayKHR,
@@ -4451,7 +4470,7 @@ pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
         );
 
         debug_assert!(properties.capacity() == property_count as usize);
-        unsafe { properties.set_len(property_count as usize) };
+        properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(properties)
@@ -4462,7 +4481,7 @@ pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayPlaneCapabilities2KHR.html>
     #[inline]
-    fn get_display_plane_capabilities2_khr(
+    unsafe fn get_display_plane_capabilities2_khr(
         &self,
         physical_device: PhysicalDevice,
         display_plane_info: &DisplayPlaneInfo2KHR,
@@ -4476,7 +4495,7 @@ pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { capabilities.assume_init() })
+            Ok(capabilities.assume_init())
         } else {
             Err(__result.into())
         }
@@ -4484,7 +4503,7 @@ pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceDisplayPlaneProperties2KHR.html>
     #[inline]
-    fn get_physical_device_display_plane_properties2_khr(
+    unsafe fn get_physical_device_display_plane_properties2_khr(
         &self,
         physical_device: PhysicalDevice,
     ) -> crate::VkResult<Vec<DisplayPlaneProperties2KHR>> {
@@ -4509,7 +4528,7 @@ pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
         );
 
         debug_assert!(properties.capacity() == property_count as usize);
-        unsafe { properties.set_len(property_count as usize) };
+        properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(properties)
@@ -4520,7 +4539,7 @@ pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceDisplayProperties2KHR.html>
     #[inline]
-    fn get_physical_device_display_properties2_khr(
+    unsafe fn get_physical_device_display_properties2_khr(
         &self,
         physical_device: PhysicalDevice,
     ) -> crate::VkResult<Vec<DisplayProperties2KHR>> {
@@ -4541,7 +4560,7 @@ pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
         );
 
         debug_assert!(properties.capacity() == property_count as usize);
-        unsafe { properties.set_len(property_count as usize) };
+        properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(properties)
@@ -4561,7 +4580,7 @@ pub trait KhrGetMemoryRequirements2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferMemoryRequirements2KHR.html>
     #[inline]
-    fn get_buffer_memory_requirements2_khr(
+    unsafe fn get_buffer_memory_requirements2_khr(
         &self,
         info: &BufferMemoryRequirementsInfo2,
     ) -> MemoryRequirements2 {
@@ -4573,12 +4592,12 @@ pub trait KhrGetMemoryRequirements2Extension: DeviceV1_0 {
             memory_requirements.as_mut_ptr(),
         );
 
-        unsafe { memory_requirements.assume_init() }
+        memory_requirements.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageMemoryRequirements2KHR.html>
     #[inline]
-    fn get_image_memory_requirements2_khr(
+    unsafe fn get_image_memory_requirements2_khr(
         &self,
         info: &ImageMemoryRequirementsInfo2,
     ) -> MemoryRequirements2 {
@@ -4590,12 +4609,12 @@ pub trait KhrGetMemoryRequirements2Extension: DeviceV1_0 {
             memory_requirements.as_mut_ptr(),
         );
 
-        unsafe { memory_requirements.assume_init() }
+        memory_requirements.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageSparseMemoryRequirements2KHR.html>
     #[inline]
-    fn get_image_sparse_memory_requirements2_khr(
+    unsafe fn get_image_sparse_memory_requirements2_khr(
         &self,
         info: &ImageSparseMemoryRequirementsInfo2,
     ) -> Vec<SparseImageMemoryRequirements2> {
@@ -4621,7 +4640,7 @@ pub trait KhrGetMemoryRequirements2Extension: DeviceV1_0 {
         debug_assert!(
             sparse_memory_requirements.capacity() == sparse_memory_requirement_count as usize
         );
-        unsafe { sparse_memory_requirements.set_len(sparse_memory_requirement_count as usize) };
+        sparse_memory_requirements.set_len(sparse_memory_requirement_count as usize);
 
         sparse_memory_requirements
     }
@@ -4637,7 +4656,7 @@ pub trait KhrGetPhysicalDeviceProperties2Extension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFeatures2KHR.html>
     #[inline]
-    fn get_physical_device_features2_khr(
+    unsafe fn get_physical_device_features2_khr(
         &self,
         physical_device: PhysicalDevice,
     ) -> PhysicalDeviceFeatures2 {
@@ -4648,12 +4667,12 @@ pub trait KhrGetPhysicalDeviceProperties2Extension: InstanceV1_0 {
             features.as_mut_ptr(),
         );
 
-        unsafe { features.assume_init() }
+        features.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFormatProperties2KHR.html>
     #[inline]
-    fn get_physical_device_format_properties2_khr(
+    unsafe fn get_physical_device_format_properties2_khr(
         &self,
         physical_device: PhysicalDevice,
         format: Format,
@@ -4666,12 +4685,12 @@ pub trait KhrGetPhysicalDeviceProperties2Extension: InstanceV1_0 {
             format_properties.as_mut_ptr(),
         );
 
-        unsafe { format_properties.assume_init() }
+        format_properties.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceImageFormatProperties2KHR.html>
     #[inline]
-    fn get_physical_device_image_format_properties2_khr(
+    unsafe fn get_physical_device_image_format_properties2_khr(
         &self,
         physical_device: PhysicalDevice,
         image_format_info: &PhysicalDeviceImageFormatInfo2,
@@ -4687,7 +4706,7 @@ pub trait KhrGetPhysicalDeviceProperties2Extension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { image_format_properties.assume_init() })
+            Ok(image_format_properties.assume_init())
         } else {
             Err(__result.into())
         }
@@ -4695,7 +4714,7 @@ pub trait KhrGetPhysicalDeviceProperties2Extension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceMemoryProperties2KHR.html>
     #[inline]
-    fn get_physical_device_memory_properties2_khr(
+    unsafe fn get_physical_device_memory_properties2_khr(
         &self,
         physical_device: PhysicalDevice,
     ) -> PhysicalDeviceMemoryProperties2 {
@@ -4706,12 +4725,12 @@ pub trait KhrGetPhysicalDeviceProperties2Extension: InstanceV1_0 {
             memory_properties.as_mut_ptr(),
         );
 
-        unsafe { memory_properties.assume_init() }
+        memory_properties.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceProperties2KHR.html>
     #[inline]
-    fn get_physical_device_properties2_khr(
+    unsafe fn get_physical_device_properties2_khr(
         &self,
         physical_device: PhysicalDevice,
     ) -> PhysicalDeviceProperties2 {
@@ -4722,12 +4741,12 @@ pub trait KhrGetPhysicalDeviceProperties2Extension: InstanceV1_0 {
             properties.as_mut_ptr(),
         );
 
-        unsafe { properties.assume_init() }
+        properties.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceQueueFamilyProperties2KHR.html>
     #[inline]
-    fn get_physical_device_queue_family_properties2_khr(
+    unsafe fn get_physical_device_queue_family_properties2_khr(
         &self,
         physical_device: PhysicalDevice,
     ) -> Vec<QueueFamilyProperties2> {
@@ -4752,14 +4771,14 @@ pub trait KhrGetPhysicalDeviceProperties2Extension: InstanceV1_0 {
         );
 
         debug_assert!(queue_family_properties.capacity() == queue_family_property_count as usize);
-        unsafe { queue_family_properties.set_len(queue_family_property_count as usize) };
+        queue_family_properties.set_len(queue_family_property_count as usize);
 
         queue_family_properties
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSparseImageFormatProperties2KHR.html>
     #[inline]
-    fn get_physical_device_sparse_image_format_properties2_khr(
+    unsafe fn get_physical_device_sparse_image_format_properties2_khr(
         &self,
         physical_device: PhysicalDevice,
         format_info: &PhysicalDeviceSparseImageFormatInfo2,
@@ -4787,7 +4806,7 @@ pub trait KhrGetPhysicalDeviceProperties2Extension: InstanceV1_0 {
         );
 
         debug_assert!(properties.capacity() == property_count as usize);
-        unsafe { properties.set_len(property_count as usize) };
+        properties.set_len(property_count as usize);
 
         properties
     }
@@ -4803,7 +4822,7 @@ pub trait KhrGetSurfaceCapabilities2Extension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceCapabilities2KHR.html>
     #[inline]
-    fn get_physical_device_surface_capabilities2_khr(
+    unsafe fn get_physical_device_surface_capabilities2_khr(
         &self,
         physical_device: PhysicalDevice,
         surface_info: &PhysicalDeviceSurfaceInfo2KHR,
@@ -4819,7 +4838,7 @@ pub trait KhrGetSurfaceCapabilities2Extension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface_capabilities.assume_init() })
+            Ok(surface_capabilities.assume_init())
         } else {
             Err(__result.into())
         }
@@ -4827,7 +4846,7 @@ pub trait KhrGetSurfaceCapabilities2Extension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceFormats2KHR.html>
     #[inline]
-    fn get_physical_device_surface_formats2_khr(
+    unsafe fn get_physical_device_surface_formats2_khr(
         &self,
         physical_device: PhysicalDevice,
         surface_info: &PhysicalDeviceSurfaceInfo2KHR,
@@ -4851,7 +4870,7 @@ pub trait KhrGetSurfaceCapabilities2Extension: InstanceV1_0 {
         );
 
         debug_assert!(surface_formats.capacity() == surface_format_count as usize);
-        unsafe { surface_formats.set_len(surface_format_count as usize) };
+        surface_formats.set_len(surface_format_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(surface_formats)
@@ -4898,7 +4917,7 @@ pub trait KhrMaintenance1Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkTrimCommandPoolKHR.html>
     #[inline]
-    fn trim_command_pool_khr(&self, command_pool: CommandPool, flags: CommandPoolTrimFlags) {
+    unsafe fn trim_command_pool_khr(&self, command_pool: CommandPool, flags: CommandPoolTrimFlags) {
         let __result = (self.commands().trim_command_pool_khr)(self.handle(), command_pool, flags);
     }
 }
@@ -4922,7 +4941,7 @@ pub trait KhrMaintenance3Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDescriptorSetLayoutSupportKHR.html>
     #[inline]
-    fn get_descriptor_set_layout_support_khr(
+    unsafe fn get_descriptor_set_layout_support_khr(
         &self,
         create_info: &DescriptorSetLayoutCreateInfo,
     ) -> DescriptorSetLayoutSupport {
@@ -4934,7 +4953,7 @@ pub trait KhrMaintenance3Extension: DeviceV1_0 {
             support.as_mut_ptr(),
         );
 
-        unsafe { support.assume_init() }
+        support.assume_init()
     }
 }
 
@@ -4957,7 +4976,7 @@ pub trait KhrPerformanceQueryExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireProfilingLockKHR.html>
     #[inline]
-    fn acquire_profiling_lock_khr(
+    unsafe fn acquire_profiling_lock_khr(
         &self,
         info: &AcquireProfilingLockInfoKHR,
     ) -> crate::VkResult<()> {
@@ -4972,7 +4991,7 @@ pub trait KhrPerformanceQueryExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR.html>
     #[inline]
-    fn enumerate_physical_device_queue_family_performance_query_counters_khr(
+    unsafe fn enumerate_physical_device_queue_family_performance_query_counters_khr(
         &self,
         physical_device: PhysicalDevice,
         queue_family_index: u32,
@@ -5006,9 +5025,9 @@ pub trait KhrPerformanceQueryExtension: DeviceV1_0 {
         );
 
         debug_assert!(counters.capacity() == counter_count as usize);
-        unsafe { counters.set_len(counter_count as usize) };
+        counters.set_len(counter_count as usize);
         debug_assert!(counter_descriptions.capacity() == counter_count as usize);
-        unsafe { counter_descriptions.set_len(counter_count as usize) };
+        counter_descriptions.set_len(counter_count as usize);
 
         if __result == Result::SUCCESS {
             Ok((counters, counter_descriptions))
@@ -5019,7 +5038,7 @@ pub trait KhrPerformanceQueryExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR.html>
     #[inline]
-    fn get_physical_device_queue_family_performance_query_passes_khr(
+    unsafe fn get_physical_device_queue_family_performance_query_passes_khr(
         &self,
         physical_device: PhysicalDevice,
         performance_query_create_info: &QueryPoolPerformanceCreateInfoKHR,
@@ -5034,12 +5053,12 @@ pub trait KhrPerformanceQueryExtension: DeviceV1_0 {
             num_passes.as_mut_ptr(),
         );
 
-        unsafe { num_passes.assume_init() }
+        num_passes.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkReleaseProfilingLockKHR.html>
     #[inline]
-    fn release_profiling_lock_khr(&self) {
+    unsafe fn release_profiling_lock_khr(&self) {
         let __result = (self.commands().release_profiling_lock_khr)(self.handle());
     }
 }
@@ -5054,7 +5073,7 @@ pub trait KhrPipelineExecutablePropertiesExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutableInternalRepresentationsKHR.html>
     #[inline]
-    fn get_pipeline_executable_internal_representations_khr(
+    unsafe fn get_pipeline_executable_internal_representations_khr(
         &self,
         executable_info: &PipelineExecutableInfoKHR,
     ) -> crate::VkResult<Vec<PipelineExecutableInternalRepresentationKHR>> {
@@ -5084,7 +5103,7 @@ pub trait KhrPipelineExecutablePropertiesExtension: DeviceV1_0 {
         debug_assert!(
             internal_representations.capacity() == internal_representation_count as usize
         );
-        unsafe { internal_representations.set_len(internal_representation_count as usize) };
+        internal_representations.set_len(internal_representation_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(internal_representations)
@@ -5095,7 +5114,7 @@ pub trait KhrPipelineExecutablePropertiesExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutablePropertiesKHR.html>
     #[inline]
-    fn get_pipeline_executable_properties_khr(
+    unsafe fn get_pipeline_executable_properties_khr(
         &self,
         pipeline_info: &PipelineInfoKHR,
     ) -> crate::VkResult<Vec<PipelineExecutablePropertiesKHR>> {
@@ -5118,7 +5137,7 @@ pub trait KhrPipelineExecutablePropertiesExtension: DeviceV1_0 {
         );
 
         debug_assert!(properties.capacity() == executable_count as usize);
-        unsafe { properties.set_len(executable_count as usize) };
+        properties.set_len(executable_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(properties)
@@ -5129,7 +5148,7 @@ pub trait KhrPipelineExecutablePropertiesExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPipelineExecutableStatisticsKHR.html>
     #[inline]
-    fn get_pipeline_executable_statistics_khr(
+    unsafe fn get_pipeline_executable_statistics_khr(
         &self,
         executable_info: &PipelineExecutableInfoKHR,
     ) -> crate::VkResult<Vec<PipelineExecutableStatisticKHR>> {
@@ -5152,7 +5171,7 @@ pub trait KhrPipelineExecutablePropertiesExtension: DeviceV1_0 {
         );
 
         debug_assert!(statistics.capacity() == statistic_count as usize);
-        unsafe { statistics.set_len(statistic_count as usize) };
+        statistics.set_len(statistic_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(statistics)
@@ -5199,7 +5218,7 @@ pub trait KhrPushDescriptorExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushDescriptorSetKHR.html>
     #[inline]
-    fn cmd_push_descriptor_set_khr(
+    unsafe fn cmd_push_descriptor_set_khr(
         &self,
         command_buffer: CommandBuffer,
         pipeline_bind_point: PipelineBindPoint,
@@ -5219,7 +5238,7 @@ pub trait KhrPushDescriptorExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPushDescriptorSetWithTemplateKHR.html>
     #[inline]
-    fn cmd_push_descriptor_set_with_template_khr(
+    unsafe fn cmd_push_descriptor_set_with_template_khr(
         &self,
         command_buffer: CommandBuffer,
         descriptor_update_template: DescriptorUpdateTemplate,
@@ -5256,7 +5275,7 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetRayTracingPipelineStackSizeKHR.html>
     #[inline]
-    fn cmd_set_ray_tracing_pipeline_stack_size_khr(
+    unsafe fn cmd_set_ray_tracing_pipeline_stack_size_khr(
         &self,
         command_buffer: CommandBuffer,
         pipeline_stack_size: u32,
@@ -5269,7 +5288,7 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdTraceRaysIndirectKHR.html>
     #[inline]
-    fn cmd_trace_rays_indirect_khr(
+    unsafe fn cmd_trace_rays_indirect_khr(
         &self,
         command_buffer: CommandBuffer,
         raygen_shader_binding_table: &StridedDeviceAddressRegionKHR,
@@ -5290,7 +5309,7 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdTraceRaysKHR.html>
     #[inline]
-    fn cmd_trace_rays_khr(
+    unsafe fn cmd_trace_rays_khr(
         &self,
         command_buffer: CommandBuffer,
         raygen_shader_binding_table: &StridedDeviceAddressRegionKHR,
@@ -5315,7 +5334,7 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateRayTracingPipelinesKHR.html>
     #[inline]
-    fn create_ray_tracing_pipelines_khr(
+    unsafe fn create_ray_tracing_pipelines_khr(
         &self,
         deferred_operation: DeferredOperationKHR,
         pipeline_cache: PipelineCache,
@@ -5335,7 +5354,7 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
         );
 
         if __result >= Result::SUCCESS {
-            Ok((unsafe { pipelines.assume_init() }, __result.into()))
+            Ok((pipelines.assume_init(), __result.into()))
         } else {
             Err(__result.into())
         }
@@ -5343,7 +5362,7 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRayTracingCaptureReplayShaderGroupHandlesKHR.html>
     #[inline]
-    fn get_ray_tracing_capture_replay_shader_group_handles_khr(
+    unsafe fn get_ray_tracing_capture_replay_shader_group_handles_khr(
         &self,
         pipeline: Pipeline,
         first_group: u32,
@@ -5370,7 +5389,7 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRayTracingShaderGroupHandlesKHR.html>
     #[inline]
-    fn get_ray_tracing_shader_group_handles_khr(
+    unsafe fn get_ray_tracing_shader_group_handles_khr(
         &self,
         pipeline: Pipeline,
         first_group: u32,
@@ -5395,7 +5414,7 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRayTracingShaderGroupStackSizeKHR.html>
     #[inline]
-    fn get_ray_tracing_shader_group_stack_size_khr(
+    unsafe fn get_ray_tracing_shader_group_stack_size_khr(
         &self,
         pipeline: Pipeline,
         group: u32,
@@ -5438,7 +5457,7 @@ pub trait KhrSamplerYcbcrConversionExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSamplerYcbcrConversionKHR.html>
     #[inline]
-    fn create_sampler_ycbcr_conversion_khr(
+    unsafe fn create_sampler_ycbcr_conversion_khr(
         &self,
         create_info: &SamplerYcbcrConversionCreateInfo,
         allocator: Option<&AllocationCallbacks>,
@@ -5453,7 +5472,7 @@ pub trait KhrSamplerYcbcrConversionExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { ycbcr_conversion.assume_init() })
+            Ok(ycbcr_conversion.assume_init())
         } else {
             Err(__result.into())
         }
@@ -5461,7 +5480,7 @@ pub trait KhrSamplerYcbcrConversionExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroySamplerYcbcrConversionKHR.html>
     #[inline]
-    fn destroy_sampler_ycbcr_conversion_khr(
+    unsafe fn destroy_sampler_ycbcr_conversion_khr(
         &self,
         ycbcr_conversion: SamplerYcbcrConversion,
         allocator: Option<&AllocationCallbacks>,
@@ -5565,7 +5584,10 @@ pub trait KhrSharedPresentableImageExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainStatusKHR.html>
     #[inline]
-    fn get_swapchain_status_khr(&self, swapchain: SwapchainKHR) -> crate::VkResult<SuccessCode> {
+    unsafe fn get_swapchain_status_khr(
+        &self,
+        swapchain: SwapchainKHR,
+    ) -> crate::VkResult<SuccessCode> {
         let __result = (self.commands().get_swapchain_status_khr)(self.handle(), swapchain);
 
         if __result >= Result::SUCCESS {
@@ -5604,7 +5626,11 @@ pub trait KhrSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroySurfaceKHR.html>
     #[inline]
-    fn destroy_surface_khr(&self, surface: SurfaceKHR, allocator: Option<&AllocationCallbacks>) {
+    unsafe fn destroy_surface_khr(
+        &self,
+        surface: SurfaceKHR,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
         let __result = (self.commands().destroy_surface_khr)(
             self.handle(),
             surface,
@@ -5614,7 +5640,7 @@ pub trait KhrSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceCapabilitiesKHR.html>
     #[inline]
-    fn get_physical_device_surface_capabilities_khr(
+    unsafe fn get_physical_device_surface_capabilities_khr(
         &self,
         physical_device: PhysicalDevice,
         surface: SurfaceKHR,
@@ -5628,7 +5654,7 @@ pub trait KhrSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface_capabilities.assume_init() })
+            Ok(surface_capabilities.assume_init())
         } else {
             Err(__result.into())
         }
@@ -5636,7 +5662,7 @@ pub trait KhrSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceFormatsKHR.html>
     #[inline]
-    fn get_physical_device_surface_formats_khr(
+    unsafe fn get_physical_device_surface_formats_khr(
         &self,
         physical_device: PhysicalDevice,
         surface: SurfaceKHR,
@@ -5660,7 +5686,7 @@ pub trait KhrSurfaceExtension: InstanceV1_0 {
         );
 
         debug_assert!(surface_formats.capacity() == surface_format_count as usize);
-        unsafe { surface_formats.set_len(surface_format_count as usize) };
+        surface_formats.set_len(surface_format_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(surface_formats)
@@ -5671,7 +5697,7 @@ pub trait KhrSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfacePresentModesKHR.html>
     #[inline]
-    fn get_physical_device_surface_present_modes_khr(
+    unsafe fn get_physical_device_surface_present_modes_khr(
         &self,
         physical_device: PhysicalDevice,
         surface: SurfaceKHR,
@@ -5699,7 +5725,7 @@ pub trait KhrSurfaceExtension: InstanceV1_0 {
         );
 
         debug_assert!(present_modes.capacity() == present_mode_count as usize);
-        unsafe { present_modes.set_len(present_mode_count as usize) };
+        present_modes.set_len(present_mode_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(present_modes)
@@ -5710,7 +5736,7 @@ pub trait KhrSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSurfaceSupportKHR.html>
     #[inline]
-    fn get_physical_device_surface_support_khr(
+    unsafe fn get_physical_device_surface_support_khr(
         &self,
         physical_device: PhysicalDevice,
         queue_family_index: u32,
@@ -5726,7 +5752,7 @@ pub trait KhrSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { supported.assume_init() } == TRUE)
+            Ok(supported.assume_init() == TRUE)
         } else {
             Err(__result.into())
         }
@@ -5752,7 +5778,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireNextImage2KHR.html>
     #[inline]
-    fn acquire_next_image2_khr(
+    unsafe fn acquire_next_image2_khr(
         &self,
         acquire_info: &AcquireNextImageInfoKHR,
     ) -> crate::VkSuccessResult<u32> {
@@ -5765,7 +5791,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
         );
 
         if __result >= Result::SUCCESS {
-            Ok((unsafe { image_index.assume_init() }, __result.into()))
+            Ok((image_index.assume_init(), __result.into()))
         } else {
             Err(__result.into())
         }
@@ -5773,7 +5799,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireNextImageKHR.html>
     #[inline]
-    fn acquire_next_image_khr(
+    unsafe fn acquire_next_image_khr(
         &self,
         swapchain: SwapchainKHR,
         timeout: u64,
@@ -5792,7 +5818,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
         );
 
         if __result >= Result::SUCCESS {
-            Ok((unsafe { image_index.assume_init() }, __result.into()))
+            Ok((image_index.assume_init(), __result.into()))
         } else {
             Err(__result.into())
         }
@@ -5800,7 +5826,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSwapchainKHR.html>
     #[inline]
-    fn create_swapchain_khr(
+    unsafe fn create_swapchain_khr(
         &self,
         create_info: &SwapchainCreateInfoKHR,
         allocator: Option<&AllocationCallbacks>,
@@ -5815,7 +5841,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { swapchain.assume_init() })
+            Ok(swapchain.assume_init())
         } else {
             Err(__result.into())
         }
@@ -5823,7 +5849,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroySwapchainKHR.html>
     #[inline]
-    fn destroy_swapchain_khr(
+    unsafe fn destroy_swapchain_khr(
         &self,
         swapchain: SwapchainKHR,
         allocator: Option<&AllocationCallbacks>,
@@ -5837,7 +5863,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupPresentCapabilitiesKHR.html>
     #[inline]
-    fn get_device_group_present_capabilities_khr(
+    unsafe fn get_device_group_present_capabilities_khr(
         &self,
     ) -> crate::VkResult<DeviceGroupPresentCapabilitiesKHR> {
         let mut device_group_present_capabilities =
@@ -5849,7 +5875,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { device_group_present_capabilities.assume_init() })
+            Ok(device_group_present_capabilities.assume_init())
         } else {
             Err(__result.into())
         }
@@ -5857,7 +5883,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupSurfacePresentModesKHR.html>
     #[inline]
-    fn get_device_group_surface_present_modes_khr(
+    unsafe fn get_device_group_surface_present_modes_khr(
         &self,
         surface: SurfaceKHR,
     ) -> crate::VkResult<DeviceGroupPresentModeFlagsKHR> {
@@ -5870,7 +5896,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { modes.assume_init() })
+            Ok(modes.assume_init())
         } else {
             Err(__result.into())
         }
@@ -5878,7 +5904,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDevicePresentRectanglesKHR.html>
     #[inline]
-    fn get_physical_device_present_rectangles_khr(
+    unsafe fn get_physical_device_present_rectangles_khr(
         &self,
         physical_device: PhysicalDevice,
         surface: SurfaceKHR,
@@ -5902,7 +5928,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
         );
 
         debug_assert!(rects.capacity() == rect_count as usize);
-        unsafe { rects.set_len(rect_count as usize) };
+        rects.set_len(rect_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(rects)
@@ -5913,7 +5939,10 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainImagesKHR.html>
     #[inline]
-    fn get_swapchain_images_khr(&self, swapchain: SwapchainKHR) -> crate::VkResult<Vec<Image>> {
+    unsafe fn get_swapchain_images_khr(
+        &self,
+        swapchain: SwapchainKHR,
+    ) -> crate::VkResult<Vec<Image>> {
         let mut swapchain_image_count = 0;
 
         (self.commands().get_swapchain_images_khr)(
@@ -5933,7 +5962,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
         );
 
         debug_assert!(swapchain_images.capacity() == swapchain_image_count as usize);
-        unsafe { swapchain_images.set_len(swapchain_image_count as usize) };
+        swapchain_images.set_len(swapchain_image_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(swapchain_images)
@@ -5944,7 +5973,7 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueuePresentKHR.html>
     #[inline]
-    fn queue_present_khr(
+    unsafe fn queue_present_khr(
         &self,
         queue: Queue,
         present_info: &PresentInfoKHR,
@@ -5978,7 +6007,7 @@ pub trait KhrSynchronization2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPipelineBarrier2KHR.html>
     #[inline]
-    fn cmd_pipeline_barrier2_khr(
+    unsafe fn cmd_pipeline_barrier2_khr(
         &self,
         command_buffer: CommandBuffer,
         dependency_info: &DependencyInfoKHR,
@@ -5988,7 +6017,7 @@ pub trait KhrSynchronization2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdResetEvent2KHR.html>
     #[inline]
-    fn cmd_reset_event2_khr(
+    unsafe fn cmd_reset_event2_khr(
         &self,
         command_buffer: CommandBuffer,
         event: Event,
@@ -5999,7 +6028,7 @@ pub trait KhrSynchronization2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetEvent2KHR.html>
     #[inline]
-    fn cmd_set_event2_khr(
+    unsafe fn cmd_set_event2_khr(
         &self,
         command_buffer: CommandBuffer,
         event: Event,
@@ -6010,7 +6039,7 @@ pub trait KhrSynchronization2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWaitEvents2KHR.html>
     #[inline]
-    fn cmd_wait_events2_khr(
+    unsafe fn cmd_wait_events2_khr(
         &self,
         command_buffer: CommandBuffer,
         events: &[Event],
@@ -6026,7 +6055,7 @@ pub trait KhrSynchronization2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteBufferMarker2AMD.html>
     #[inline]
-    fn cmd_write_buffer_marker2_amd(
+    unsafe fn cmd_write_buffer_marker2_amd(
         &self,
         command_buffer: CommandBuffer,
         stage: PipelineStageFlags2KHR,
@@ -6045,7 +6074,7 @@ pub trait KhrSynchronization2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteTimestamp2KHR.html>
     #[inline]
-    fn cmd_write_timestamp2_khr(
+    unsafe fn cmd_write_timestamp2_khr(
         &self,
         command_buffer: CommandBuffer,
         stage: PipelineStageFlags2KHR,
@@ -6058,7 +6087,7 @@ pub trait KhrSynchronization2Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetQueueCheckpointData2NV.html>
     #[inline]
-    fn get_queue_checkpoint_data2_nv(&self, queue: Queue) -> Vec<CheckpointData2NV> {
+    unsafe fn get_queue_checkpoint_data2_nv(&self, queue: Queue) -> Vec<CheckpointData2NV> {
         let mut checkpoint_data_count = 0;
 
         (self.commands().get_queue_checkpoint_data2_nv)(
@@ -6076,14 +6105,14 @@ pub trait KhrSynchronization2Extension: DeviceV1_0 {
         );
 
         debug_assert!(checkpoint_data.capacity() == checkpoint_data_count as usize);
-        unsafe { checkpoint_data.set_len(checkpoint_data_count as usize) };
+        checkpoint_data.set_len(checkpoint_data_count as usize);
 
         checkpoint_data
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit2KHR.html>
     #[inline]
-    fn queue_submit2_khr(
+    unsafe fn queue_submit2_khr(
         &self,
         queue: Queue,
         submits: &[impl Cast<Target = SubmitInfo2KHR>],
@@ -6114,7 +6143,7 @@ pub trait KhrTimelineSemaphoreExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreCounterValueKHR.html>
     #[inline]
-    fn get_semaphore_counter_value_khr(&self, semaphore: Semaphore) -> crate::VkResult<u64> {
+    unsafe fn get_semaphore_counter_value_khr(&self, semaphore: Semaphore) -> crate::VkResult<u64> {
         let mut value = MaybeUninit::<u64>::uninit();
 
         let __result = (self.commands().get_semaphore_counter_value_khr)(
@@ -6124,7 +6153,7 @@ pub trait KhrTimelineSemaphoreExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { value.assume_init() })
+            Ok(value.assume_init())
         } else {
             Err(__result.into())
         }
@@ -6132,7 +6161,10 @@ pub trait KhrTimelineSemaphoreExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSignalSemaphoreKHR.html>
     #[inline]
-    fn signal_semaphore_khr(&self, signal_info: &SemaphoreSignalInfo) -> crate::VkResult<()> {
+    unsafe fn signal_semaphore_khr(
+        &self,
+        signal_info: &SemaphoreSignalInfo,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().signal_semaphore_khr)(self.handle(), signal_info);
 
         if __result == Result::SUCCESS {
@@ -6144,7 +6176,7 @@ pub trait KhrTimelineSemaphoreExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWaitSemaphoresKHR.html>
     #[inline]
-    fn wait_semaphores_khr(
+    unsafe fn wait_semaphores_khr(
         &self,
         wait_info: &SemaphoreWaitInfo,
         timeout: u64,
@@ -6196,7 +6228,7 @@ pub trait KhrWaylandSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateWaylandSurfaceKHR.html>
     #[inline]
-    fn create_wayland_surface_khr(
+    unsafe fn create_wayland_surface_khr(
         &self,
         create_info: &WaylandSurfaceCreateInfoKHR,
         allocator: Option<&AllocationCallbacks>,
@@ -6211,7 +6243,7 @@ pub trait KhrWaylandSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -6219,7 +6251,7 @@ pub trait KhrWaylandSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceWaylandPresentationSupportKHR.html>
     #[inline]
-    fn get_physical_device_wayland_presentation_support_khr<T_wl_display>(
+    unsafe fn get_physical_device_wayland_presentation_support_khr<T_wl_display>(
         &self,
         physical_device: PhysicalDevice,
         queue_family_index: u32,
@@ -6234,7 +6266,7 @@ pub trait KhrWaylandSurfaceExtension: InstanceV1_0 {
             display.as_mut_ptr().cast::<c_void>(),
         );
 
-        unsafe { display.assume_init() }
+        display.assume_init()
     }
 }
 
@@ -6257,7 +6289,7 @@ pub trait KhrWin32SurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateWin32SurfaceKHR.html>
     #[inline]
-    fn create_win32_surface_khr(
+    unsafe fn create_win32_surface_khr(
         &self,
         create_info: &Win32SurfaceCreateInfoKHR,
         allocator: Option<&AllocationCallbacks>,
@@ -6272,7 +6304,7 @@ pub trait KhrWin32SurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -6280,7 +6312,7 @@ pub trait KhrWin32SurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceWin32PresentationSupportKHR.html>
     #[inline]
-    fn get_physical_device_win32_presentation_support_khr(
+    unsafe fn get_physical_device_win32_presentation_support_khr(
         &self,
         physical_device: PhysicalDevice,
         queue_family_index: u32,
@@ -6313,7 +6345,7 @@ pub trait KhrXcbSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateXcbSurfaceKHR.html>
     #[inline]
-    fn create_xcb_surface_khr(
+    unsafe fn create_xcb_surface_khr(
         &self,
         create_info: &XcbSurfaceCreateInfoKHR,
         allocator: Option<&AllocationCallbacks>,
@@ -6328,7 +6360,7 @@ pub trait KhrXcbSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -6336,7 +6368,7 @@ pub trait KhrXcbSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceXcbPresentationSupportKHR.html>
     #[inline]
-    fn get_physical_device_xcb_presentation_support_khr<T_xcb_connection_t>(
+    unsafe fn get_physical_device_xcb_presentation_support_khr<T_xcb_connection_t>(
         &self,
         physical_device: PhysicalDevice,
         queue_family_index: u32,
@@ -6353,7 +6385,7 @@ pub trait KhrXcbSurfaceExtension: InstanceV1_0 {
             visual_id,
         );
 
-        unsafe { connection.assume_init() }
+        connection.assume_init()
     }
 }
 
@@ -6367,7 +6399,7 @@ pub trait KhrXlibSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateXlibSurfaceKHR.html>
     #[inline]
-    fn create_xlib_surface_khr(
+    unsafe fn create_xlib_surface_khr(
         &self,
         create_info: &XlibSurfaceCreateInfoKHR,
         allocator: Option<&AllocationCallbacks>,
@@ -6382,7 +6414,7 @@ pub trait KhrXlibSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -6390,7 +6422,7 @@ pub trait KhrXlibSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceXlibPresentationSupportKHR.html>
     #[inline]
-    fn get_physical_device_xlib_presentation_support_khr(
+    unsafe fn get_physical_device_xlib_presentation_support_khr(
         &self,
         physical_device: PhysicalDevice,
         queue_family_index: u32,
@@ -6407,7 +6439,7 @@ pub trait KhrXlibSurfaceExtension: InstanceV1_0 {
             visual_id,
         );
 
-        unsafe { dpy.assume_init() }
+        dpy.assume_init()
     }
 }
 
@@ -6431,7 +6463,7 @@ pub trait MvkIosSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateIOSSurfaceMVK.html>
     #[inline]
-    fn create_ios_surface_mvk(
+    unsafe fn create_ios_surface_mvk(
         &self,
         create_info: &IOSSurfaceCreateInfoMVK,
         allocator: Option<&AllocationCallbacks>,
@@ -6446,7 +6478,7 @@ pub trait MvkIosSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -6465,7 +6497,7 @@ pub trait MvkMacosSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateMacOSSurfaceMVK.html>
     #[inline]
-    fn create_mac_os_surface_mvk(
+    unsafe fn create_mac_os_surface_mvk(
         &self,
         create_info: &MacOSSurfaceCreateInfoMVK,
         allocator: Option<&AllocationCallbacks>,
@@ -6480,7 +6512,7 @@ pub trait MvkMacosSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -6498,7 +6530,7 @@ pub trait NnViSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateViSurfaceNN.html>
     #[inline]
-    fn create_vi_surface_nn(
+    unsafe fn create_vi_surface_nn(
         &self,
         create_info: &ViSurfaceCreateInfoNN,
         allocator: Option<&AllocationCallbacks>,
@@ -6513,7 +6545,7 @@ pub trait NnViSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -6530,7 +6562,7 @@ pub trait NvxImageViewHandleExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageViewAddressNVX.html>
     #[inline]
-    fn get_image_view_address_nvx(
+    unsafe fn get_image_view_address_nvx(
         &self,
         image_view: ImageView,
     ) -> crate::VkResult<ImageViewAddressPropertiesNVX> {
@@ -6543,7 +6575,7 @@ pub trait NvxImageViewHandleExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { properties.assume_init() })
+            Ok(properties.assume_init())
         } else {
             Err(__result.into())
         }
@@ -6551,7 +6583,7 @@ pub trait NvxImageViewHandleExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageViewHandleNVX.html>
     #[inline]
-    fn get_image_view_handle_nvx(&self, info: &ImageViewHandleInfoNVX) {
+    unsafe fn get_image_view_handle_nvx(&self, info: &ImageViewHandleInfoNVX) {
         let __result = (self.commands().get_image_view_handle_nvx)(self.handle(), info);
     }
 }
@@ -6575,7 +6607,7 @@ pub trait NvAcquireWinrtDisplayExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireWinrtDisplayNV.html>
     #[inline]
-    fn acquire_winrt_display_nv(
+    unsafe fn acquire_winrt_display_nv(
         &self,
         physical_device: PhysicalDevice,
         display: DisplayKHR,
@@ -6591,7 +6623,7 @@ pub trait NvAcquireWinrtDisplayExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetWinrtDisplayNV.html>
     #[inline]
-    fn get_winrt_display_nv(
+    unsafe fn get_winrt_display_nv(
         &self,
         physical_device: PhysicalDevice,
         device_relative_id: u32,
@@ -6605,7 +6637,7 @@ pub trait NvAcquireWinrtDisplayExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { display.assume_init() })
+            Ok(display.assume_init())
         } else {
             Err(__result.into())
         }
@@ -6622,7 +6654,7 @@ pub trait NvClipSpaceWScalingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewportWScalingNV.html>
     #[inline]
-    fn cmd_set_viewport_w_scaling_nv(
+    unsafe fn cmd_set_viewport_w_scaling_nv(
         &self,
         command_buffer: CommandBuffer,
         first_viewport: u32,
@@ -6656,7 +6688,7 @@ pub trait NvCooperativeMatrixExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceCooperativeMatrixPropertiesNV.html>
     #[inline]
-    fn get_physical_device_cooperative_matrix_properties_nv(
+    unsafe fn get_physical_device_cooperative_matrix_properties_nv(
         &self,
         physical_device: PhysicalDevice,
     ) -> crate::VkResult<Vec<CooperativeMatrixPropertiesNV>> {
@@ -6681,7 +6713,7 @@ pub trait NvCooperativeMatrixExtension: DeviceV1_0 {
         );
 
         debug_assert!(properties.capacity() == property_count as usize);
-        unsafe { properties.set_len(property_count as usize) };
+        properties.set_len(property_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(properties)
@@ -6710,7 +6742,7 @@ pub trait NvCoverageReductionModeExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV.html>
     #[inline]
-    fn get_physical_device_supported_framebuffer_mixed_samples_combinations_nv(
+    unsafe fn get_physical_device_supported_framebuffer_mixed_samples_combinations_nv(
         &self,
         physical_device: PhysicalDevice,
     ) -> crate::VkResult<Vec<FramebufferMixedSamplesCombinationNV>> {
@@ -6735,7 +6767,7 @@ pub trait NvCoverageReductionModeExtension: DeviceV1_0 {
         );
 
         debug_assert!(combinations.capacity() == combination_count as usize);
-        unsafe { combinations.set_len(combination_count as usize) };
+        combinations.set_len(combination_count as usize);
 
         if __result == Result::SUCCESS {
             Ok(combinations)
@@ -6775,13 +6807,17 @@ pub trait NvDeviceDiagnosticCheckpointsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetCheckpointNV.html>
     #[inline]
-    fn cmd_set_checkpoint_nv(&self, command_buffer: CommandBuffer, checkpoint_marker: &c_void) {
+    unsafe fn cmd_set_checkpoint_nv(
+        &self,
+        command_buffer: CommandBuffer,
+        checkpoint_marker: &c_void,
+    ) {
         let __result = (self.commands().cmd_set_checkpoint_nv)(command_buffer, checkpoint_marker);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetQueueCheckpointDataNV.html>
     #[inline]
-    fn get_queue_checkpoint_data_nv(&self, queue: Queue) -> Vec<CheckpointDataNV> {
+    unsafe fn get_queue_checkpoint_data_nv(&self, queue: Queue) -> Vec<CheckpointDataNV> {
         let mut checkpoint_data_count = 0;
 
         (self.commands().get_queue_checkpoint_data_nv)(
@@ -6799,7 +6835,7 @@ pub trait NvDeviceDiagnosticCheckpointsExtension: DeviceV1_0 {
         );
 
         debug_assert!(checkpoint_data.capacity() == checkpoint_data_count as usize);
-        unsafe { checkpoint_data.set_len(checkpoint_data_count as usize) };
+        checkpoint_data.set_len(checkpoint_data_count as usize);
 
         checkpoint_data
     }
@@ -6824,7 +6860,7 @@ pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindPipelineShaderGroupNV.html>
     #[inline]
-    fn cmd_bind_pipeline_shader_group_nv(
+    unsafe fn cmd_bind_pipeline_shader_group_nv(
         &self,
         command_buffer: CommandBuffer,
         pipeline_bind_point: PipelineBindPoint,
@@ -6841,7 +6877,7 @@ pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdExecuteGeneratedCommandsNV.html>
     #[inline]
-    fn cmd_execute_generated_commands_nv(
+    unsafe fn cmd_execute_generated_commands_nv(
         &self,
         command_buffer: CommandBuffer,
         is_preprocessed: bool,
@@ -6856,7 +6892,7 @@ pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdPreprocessGeneratedCommandsNV.html>
     #[inline]
-    fn cmd_preprocess_generated_commands_nv(
+    unsafe fn cmd_preprocess_generated_commands_nv(
         &self,
         command_buffer: CommandBuffer,
         generated_commands_info: &GeneratedCommandsInfoNV,
@@ -6869,7 +6905,7 @@ pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateIndirectCommandsLayoutNV.html>
     #[inline]
-    fn create_indirect_commands_layout_nv(
+    unsafe fn create_indirect_commands_layout_nv(
         &self,
         create_info: &IndirectCommandsLayoutCreateInfoNV,
         allocator: Option<&AllocationCallbacks>,
@@ -6884,7 +6920,7 @@ pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { indirect_commands_layout.assume_init() })
+            Ok(indirect_commands_layout.assume_init())
         } else {
             Err(__result.into())
         }
@@ -6892,7 +6928,7 @@ pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyIndirectCommandsLayoutNV.html>
     #[inline]
-    fn destroy_indirect_commands_layout_nv(
+    unsafe fn destroy_indirect_commands_layout_nv(
         &self,
         indirect_commands_layout: IndirectCommandsLayoutNV,
         allocator: Option<&AllocationCallbacks>,
@@ -6906,7 +6942,7 @@ pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetGeneratedCommandsMemoryRequirementsNV.html>
     #[inline]
-    fn get_generated_commands_memory_requirements_nv(
+    unsafe fn get_generated_commands_memory_requirements_nv(
         &self,
         info: &GeneratedCommandsMemoryRequirementsInfoNV,
     ) -> MemoryRequirements2 {
@@ -6920,7 +6956,7 @@ pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
             memory_requirements.as_mut_ptr(),
         );
 
-        unsafe { memory_requirements.assume_init() }
+        memory_requirements.assume_init()
     }
 }
 
@@ -6946,7 +6982,7 @@ pub trait NvExternalMemoryCapabilitiesExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceExternalImageFormatPropertiesNV.html>
     #[inline]
-    fn get_physical_device_external_image_format_properties_nv(
+    unsafe fn get_physical_device_external_image_format_properties_nv(
         &self,
         physical_device: PhysicalDevice,
         format: Format,
@@ -6973,7 +7009,7 @@ pub trait NvExternalMemoryCapabilitiesExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { external_image_format_properties.assume_init() })
+            Ok(external_image_format_properties.assume_init())
         } else {
             Err(__result.into())
         }
@@ -6992,7 +7028,7 @@ pub trait NvExternalMemoryWin32Extension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryWin32HandleNV.html>
     #[inline]
-    fn get_memory_win32_handle_nv(
+    unsafe fn get_memory_win32_handle_nv(
         &self,
         memory: DeviceMemory,
         handle_type: ExternalMemoryHandleTypeFlagsNV,
@@ -7007,7 +7043,7 @@ pub trait NvExternalMemoryWin32Extension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { handle.assume_init() })
+            Ok(handle.assume_init())
         } else {
             Err(__result.into())
         }
@@ -7052,7 +7088,7 @@ pub trait NvFragmentShadingRateEnumsExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetFragmentShadingRateEnumNV.html>
     #[inline]
-    fn cmd_set_fragment_shading_rate_enum_nv(
+    unsafe fn cmd_set_fragment_shading_rate_enum_nv(
         &self,
         command_buffer: CommandBuffer,
         shading_rate: FragmentShadingRateNV,
@@ -7105,7 +7141,7 @@ pub trait NvMeshShaderExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMeshTasksIndirectCountNV.html>
     #[inline]
-    fn cmd_draw_mesh_tasks_indirect_count_nv(
+    unsafe fn cmd_draw_mesh_tasks_indirect_count_nv(
         &self,
         command_buffer: CommandBuffer,
         buffer: Buffer,
@@ -7128,7 +7164,7 @@ pub trait NvMeshShaderExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMeshTasksIndirectNV.html>
     #[inline]
-    fn cmd_draw_mesh_tasks_indirect_nv(
+    unsafe fn cmd_draw_mesh_tasks_indirect_nv(
         &self,
         command_buffer: CommandBuffer,
         buffer: Buffer,
@@ -7147,7 +7183,7 @@ pub trait NvMeshShaderExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMeshTasksNV.html>
     #[inline]
-    fn cmd_draw_mesh_tasks_nv(
+    unsafe fn cmd_draw_mesh_tasks_nv(
         &self,
         command_buffer: CommandBuffer,
         task_count: u32,
@@ -7168,7 +7204,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkBindAccelerationStructureMemoryNV.html>
     #[inline]
-    fn bind_acceleration_structure_memory_nv(
+    unsafe fn bind_acceleration_structure_memory_nv(
         &self,
         bind_infos: &[impl Cast<Target = BindAccelerationStructureMemoryInfoNV>],
     ) -> crate::VkResult<()> {
@@ -7187,7 +7223,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBuildAccelerationStructureNV.html>
     #[inline]
-    fn cmd_build_acceleration_structure_nv(
+    unsafe fn cmd_build_acceleration_structure_nv(
         &self,
         command_buffer: CommandBuffer,
         info: &AccelerationStructureInfoNV,
@@ -7214,7 +7250,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCopyAccelerationStructureNV.html>
     #[inline]
-    fn cmd_copy_acceleration_structure_nv(
+    unsafe fn cmd_copy_acceleration_structure_nv(
         &self,
         command_buffer: CommandBuffer,
         dst: AccelerationStructureNV,
@@ -7227,7 +7263,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdTraceRaysNV.html>
     #[inline]
-    fn cmd_trace_rays_nv(
+    unsafe fn cmd_trace_rays_nv(
         &self,
         command_buffer: CommandBuffer,
         raygen_shader_binding_table_buffer: Buffer,
@@ -7266,7 +7302,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdWriteAccelerationStructuresPropertiesNV.html>
     #[inline]
-    fn cmd_write_acceleration_structures_properties_nv(
+    unsafe fn cmd_write_acceleration_structures_properties_nv(
         &self,
         command_buffer: CommandBuffer,
         acceleration_structures: &[AccelerationStructureNV],
@@ -7288,7 +7324,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCompileDeferredNV.html>
     #[inline]
-    fn compile_deferred_nv(&self, pipeline: Pipeline, shader: u32) -> crate::VkResult<()> {
+    unsafe fn compile_deferred_nv(&self, pipeline: Pipeline, shader: u32) -> crate::VkResult<()> {
         let __result = (self.commands().compile_deferred_nv)(self.handle(), pipeline, shader);
 
         if __result == Result::SUCCESS {
@@ -7300,7 +7336,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateAccelerationStructureNV.html>
     #[inline]
-    fn create_acceleration_structure_nv(
+    unsafe fn create_acceleration_structure_nv(
         &self,
         create_info: &AccelerationStructureCreateInfoNV,
         allocator: Option<&AllocationCallbacks>,
@@ -7315,7 +7351,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { acceleration_structure.assume_init() })
+            Ok(acceleration_structure.assume_init())
         } else {
             Err(__result.into())
         }
@@ -7323,7 +7359,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateRayTracingPipelinesNV.html>
     #[inline]
-    fn create_ray_tracing_pipelines_nv(
+    unsafe fn create_ray_tracing_pipelines_nv(
         &self,
         pipeline_cache: PipelineCache,
         create_infos: &[impl Cast<Target = RayTracingPipelineCreateInfoNV>],
@@ -7341,7 +7377,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
         );
 
         if __result >= Result::SUCCESS {
-            Ok((unsafe { pipelines.assume_init() }, __result.into()))
+            Ok((pipelines.assume_init(), __result.into()))
         } else {
             Err(__result.into())
         }
@@ -7349,7 +7385,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyAccelerationStructureNV.html>
     #[inline]
-    fn destroy_acceleration_structure_nv(
+    unsafe fn destroy_acceleration_structure_nv(
         &self,
         acceleration_structure: AccelerationStructureNV,
         allocator: Option<&AllocationCallbacks>,
@@ -7363,7 +7399,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureHandleNV.html>
     #[inline]
-    fn get_acceleration_structure_handle_nv(
+    unsafe fn get_acceleration_structure_handle_nv(
         &self,
         acceleration_structure: AccelerationStructureNV,
         data: &mut [u8],
@@ -7384,7 +7420,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetAccelerationStructureMemoryRequirementsNV.html>
     #[inline]
-    fn get_acceleration_structure_memory_requirements_nv(
+    unsafe fn get_acceleration_structure_memory_requirements_nv(
         &self,
         info: &AccelerationStructureMemoryRequirementsInfoNV,
     ) -> MemoryRequirements2KHR {
@@ -7398,12 +7434,12 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
             memory_requirements.as_mut_ptr(),
         );
 
-        unsafe { memory_requirements.assume_init() }
+        memory_requirements.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetRayTracingShaderGroupHandlesNV.html>
     #[inline]
-    fn get_ray_tracing_shader_group_handles_nv(
+    unsafe fn get_ray_tracing_shader_group_handles_nv(
         &self,
         pipeline: Pipeline,
         first_group: u32,
@@ -7455,7 +7491,7 @@ pub trait NvScissorExclusiveExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetExclusiveScissorNV.html>
     #[inline]
-    fn cmd_set_exclusive_scissor_nv(
+    unsafe fn cmd_set_exclusive_scissor_nv(
         &self,
         command_buffer: CommandBuffer,
         first_exclusive_scissor: u32,
@@ -7507,7 +7543,7 @@ pub trait NvShadingRateImageExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindShadingRateImageNV.html>
     #[inline]
-    fn cmd_bind_shading_rate_image_nv(
+    unsafe fn cmd_bind_shading_rate_image_nv(
         &self,
         command_buffer: CommandBuffer,
         image_view: ImageView,
@@ -7522,7 +7558,7 @@ pub trait NvShadingRateImageExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetCoarseSampleOrderNV.html>
     #[inline]
-    fn cmd_set_coarse_sample_order_nv(
+    unsafe fn cmd_set_coarse_sample_order_nv(
         &self,
         command_buffer: CommandBuffer,
         sample_order_type: CoarseSampleOrderTypeNV,
@@ -7538,7 +7574,7 @@ pub trait NvShadingRateImageExtension: DeviceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewportShadingRatePaletteNV.html>
     #[inline]
-    fn cmd_set_viewport_shading_rate_palette_nv(
+    unsafe fn cmd_set_viewport_shading_rate_palette_nv(
         &self,
         command_buffer: CommandBuffer,
         first_viewport: u32,
@@ -7626,7 +7662,7 @@ pub trait QnxScreenSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateScreenSurfaceQNX.html>
     #[inline]
-    fn create_screen_surface_qnx(
+    unsafe fn create_screen_surface_qnx(
         &self,
         create_info: &ScreenSurfaceCreateInfoQNX,
         allocator: Option<&AllocationCallbacks>,
@@ -7641,7 +7677,7 @@ pub trait QnxScreenSurfaceExtension: InstanceV1_0 {
         );
 
         if __result == Result::SUCCESS {
-            Ok(unsafe { surface.assume_init() })
+            Ok(surface.assume_init())
         } else {
             Err(__result.into())
         }
@@ -7649,7 +7685,7 @@ pub trait QnxScreenSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceScreenPresentationSupportQNX.html>
     #[inline]
-    fn get_physical_device_screen_presentation_support_qnx(
+    unsafe fn get_physical_device_screen_presentation_support_qnx(
         &self,
         physical_device: PhysicalDevice,
         queue_family_index: u32,
@@ -7664,7 +7700,7 @@ pub trait QnxScreenSurfaceExtension: InstanceV1_0 {
             window.as_mut_ptr(),
         );
 
-        unsafe { window.assume_init() }
+        window.assume_init()
     }
 }
 

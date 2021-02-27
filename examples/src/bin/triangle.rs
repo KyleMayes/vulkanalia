@@ -20,7 +20,7 @@ lazy_static! {
 }
 
 fn main() -> Result<()> {
-    App::new("Triangle", TriangleExample::default())?.run()
+    unsafe { App::new("Triangle", TriangleExample::default())?.run() }
 }
 
 #[derive(Copy, Clone, Debug, Default)]
@@ -30,7 +30,7 @@ struct TriangleExample {
 }
 
 impl Example for TriangleExample {
-    fn create_render_pass(&self, device: &Device, data: &mut AppData) -> Result<()> {
+    unsafe fn create_render_pass(&self, device: &Device, data: &mut AppData) -> Result<()> {
         // Attachments
 
         let color_attachment = vk::AttachmentDescription::builder()
@@ -79,7 +79,7 @@ impl Example for TriangleExample {
         Ok(())
     }
 
-    fn create_pipeline(&self, device: &Device, data: &mut AppData) -> Result<()> {
+    unsafe fn create_pipeline(&self, device: &Device, data: &mut AppData) -> Result<()> {
         // Stages
 
         let vert = include_bytes!("../../shaders/triangle/vert.spv");
@@ -195,7 +195,7 @@ impl Example for TriangleExample {
         Ok(())
     }
 
-    fn record_commands(&mut self, instance: &Instance, device: &Device, data: &AppData) -> Result<()> {
+    unsafe fn record_commands(&mut self, instance: &Instance, device: &Device, data: &AppData) -> Result<()> {
         // Vertex Buffer
 
         if self.vertex_buffer.is_null() {
@@ -248,7 +248,7 @@ impl Example for TriangleExample {
         Ok(())
     }
 
-    fn destroy(&self, device: &Device) {
+    unsafe fn destroy(&self, device: &Device) {
         device.destroy_buffer(self.vertex_buffer, None);
         device.free_memory(self.vertex_buffer_memory, None)
     }
