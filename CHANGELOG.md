@@ -1,4 +1,4 @@
-## [0.6.0] - UNRELEASED
+## [0.6.0] - 2021-02-27
 
 ### Changed
 - Marked commands as `unsafe`
