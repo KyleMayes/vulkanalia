@@ -1,3 +1,8 @@
+## [0.6.0] - UNRELEASED
+
+### Changed
+- Changed `window::get_required_instance_extensions` to take a raw window handle instead of a Vulkan entry point and to always successfully return a slice of extension name references
+
 ## [0.5.0] - 2021-02-26
 
 ### Bindings Updates

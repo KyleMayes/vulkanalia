@@ -74,7 +74,7 @@ impl App {
 
         let loader = LibloadingLoader::new(LIBRARY)?;
         let entry = Entry::new(loader).map_err(|b| anyhow!("{}", b))?;
-        let instance = create_instance(&entry, &mut data)?;
+        let instance = create_instance(&window, &entry, &mut data)?;
         data.surface = vk_window::create_surface(&instance, &window)?;
         pick_physical_device(&instance, &mut data)?;
         let device = create_logical_device(&instance, &mut data)?;
@@ -278,7 +278,7 @@ pub struct AppData {
 //================================================
 
 /// Creates an instance.
-fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
+fn create_instance(window: &Window, entry: &Entry, data: &mut AppData) -> Result<Instance> {
     // Application Info
 
     let application_info = vk::ApplicationInfo::builder()
@@ -308,7 +308,7 @@ fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
 
     // Extensions
 
-    let mut extensions = vk_window::get_required_instance_extensions(entry)?
+    let mut extensions = vk_window::get_required_instance_extensions(window)
         .iter()
         .map(|e| e.as_ptr())
         .collect::<Vec<_>>();
