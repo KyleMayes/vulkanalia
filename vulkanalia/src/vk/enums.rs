@@ -8,7 +8,7 @@
 #![allow(
     non_camel_case_types,
     non_snake_case,
-    clippy::missing_safety_docs,
+    clippy::missing_safety_doc,
     clippy::too_many_arguments,
     clippy::type_complexity,
     clippy::upper_case_acronyms
