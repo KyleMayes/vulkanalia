@@ -22,18 +22,18 @@ fn main() -> Result<()> {
 
     // App
 
-    let mut app = App::create(&window)?;
+    let mut app = unsafe { App::create(&window)? };
     let mut destroying = false;
     event_loop.run(move |event, _, control_flow| {
         *control_flow = ControlFlow::Poll;
         match event {
             // Render a frame if our Vulkan app is not being destroyed.
-            Event::MainEventsCleared if !destroying => app.render(&window).unwrap(),
+            Event::MainEventsCleared if !destroying => unsafe { app.render(&window) }.unwrap(),
             // Destroy our Vulkan app.
             Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
                 destroying = true;
                 *control_flow = ControlFlow::Exit;
-                app.destroy();
+                unsafe { app.destroy(); }
             }
             _ => {}
         }
@@ -46,17 +46,17 @@ struct App {}
 
 impl App {
     /// Creates our Vulkan app.
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         Ok(Self {})
     }
 
     /// Renders a frame for our Vulkan app.
-    fn render(&mut self, window: &Window) -> Result<()> {
+    unsafe fn render(&mut self, window: &Window) -> Result<()> {
         Ok(())
     }
 
     /// Destroys our Vulkan app.
-    fn destroy(&mut self) {}
+    unsafe fn destroy(&mut self) {}
 }
 
 /// The Vulkan handles and associated properties used by our Vulkan app.

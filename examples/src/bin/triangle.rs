@@ -91,12 +91,12 @@ impl Example for TriangleExample {
         let vert_stage = vk::PipelineShaderStageCreateInfo::builder()
             .stage(vk::ShaderStageFlags::VERTEX)
             .module(vert_shader_module)
-            .name(b"main\0"[..].into());
+            .name(b"main\0");
 
         let frag_stage = vk::PipelineShaderStageCreateInfo::builder()
             .stage(vk::ShaderStageFlags::FRAGMENT)
             .module(frag_shader_module)
-            .name(b"main\0"[..].into());
+            .name(b"main\0");
 
         // Vertex Input State
 

@@ -17,14 +17,17 @@ Next, add a `create_logical_device` function that is called from `App:create` an
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         let device = create_logical_device(&instance, &mut data)?;
         Ok(Self { entry, instance, data, device })
     }
 }
 
-fn create_logical_device(instance: &Instance, data: &mut AppData) -> Result<Device> {
+unsafe fn create_logical_device(
+    instance: &Instance,
+    data: &mut AppData,
+) -> Result<Device> {
 }
 ```
 
@@ -94,7 +97,7 @@ The parameters are the physical device to interface with, the queue and usage in
 The device should be destroyed in `App::destroy`:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.device.destroy_device(None);
     // ...
 }

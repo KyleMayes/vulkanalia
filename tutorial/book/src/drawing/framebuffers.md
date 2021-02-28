@@ -19,7 +19,7 @@ We'll create the objects for this array in a new function `create_framebuffers` 
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_pipeline(&device, &mut data)?;
         create_framebuffers(&device, &mut data)?;
@@ -27,7 +27,7 @@ impl App {
     }
 }
 
-fn create_framebuffers(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_framebuffers(device: &Device, data: &mut AppData) -> Result<()> {
     Ok(())
 }
 ```
@@ -35,7 +35,7 @@ fn create_framebuffers(device: &Device, data: &mut AppData) -> Result<()> {
 Start by mapping over the swapchain image views:
 
 ```rust,noplaypen
-fn create_framebuffers(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_framebuffers(device: &Device, data: &mut AppData) -> Result<()> {
     data.framebuffers = data
         .swapchain_image_views
         .iter()
@@ -71,7 +71,7 @@ The `width` and `height` parameters are self-explanatory and `layers` refers to 
 We should delete the framebuffers before the image views and render pass that they are based on, but only after we've finished rendering:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.data.framebuffers
         .iter()
         .for_each(|f| self.device.destroy_framebuffer(*f, None));

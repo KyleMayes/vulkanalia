@@ -8,14 +8,14 @@ We'll add a `pick_physical_device` function which will accomplish this task and 
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         pick_physical_device(&instance, &mut data)?;
         Ok(Self { entry, instance, data })
     }
 }
 
-fn pick_physical_device(instance: &Instance, data: &mut AppData) -> Result<()> {
+unsafe fn pick_physical_device(instance: &Instance, data: &mut AppData) -> Result<()> {
     Ok(())
 }
 ```
@@ -24,6 +24,7 @@ The graphics card that we'll end up selecting will be stored in a `vk::PhysicalD
 
 ```rust,noplaypen
 struct AppData {
+    // ...
     physical_device: vk::PhysicalDevice,
 }
 ```
@@ -33,7 +34,7 @@ struct AppData {
 We'll need a way to determine whether a physical device meets our needs. We'll start by creating a function that returns whether a supplied physical device supports everything we require:
 
 ```rust,noplaypen
-fn check_physical_device(
+unsafe fn check_physical_device(
     instance: &Instance,
     data: &AppData,
     physical_device: vk::PhysicalDevice,
@@ -61,7 +62,7 @@ There are more details that can be queried from devices that we'll discuss later
 As an example, let's say we consider our application only usable for dedicated graphics cards that support geometry shaders. Then the `check_physical_device` function would look like this:
 
 ```rust,noplaypen
-fn check_physical_device(
+unsafe fn check_physical_device(
     instance: &Instance,
     data: &AppData,
     physical_device: vk::PhysicalDevice,
@@ -94,7 +95,7 @@ struct QueueFamilyIndices {
 }
 
 impl QueueFamilyIndices {
-    fn get(
+    unsafe fn get(
         instance: &Instance,
         data: &AppData,
         physical_device: vk::PhysicalDevice,
@@ -121,7 +122,7 @@ The queue properties returned by `get_physical_device_queue_family_properties` c
 Now that we have this fancy queue family lookup method, we can use it as a check in the `check_physical_device` function to ensure the device can process the commands we want to use:
 
 ```rust,noplaypen
-fn check_physical_device(
+unsafe fn check_physical_device(
     instance: &Instance,
     data: &AppData,
     physical_device: vk::PhysicalDevice,

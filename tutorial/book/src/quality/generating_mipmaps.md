@@ -41,7 +41,7 @@ This calculates the number of levels in the mip chain. The `max` method selects 
 To use this value, we need to change the `^create_image`, `^create_image_view`, and `transition_image_layout` functions to allow us to specify the number of mip levels. Add a `mip_levels` parameter to the functions:
 
 ```rust,noplaypen
-fn create_image(
+unsafe fn create_image(
     instance: &Instance,
     device: &Device,
     data: &AppData,
@@ -63,7 +63,7 @@ fn create_image(
 ```
 
 ```rust,noplaypen
-fn create_image_view(
+unsafe fn create_image_view(
     device: &Device,
     image: vk::Image,
     format: vk::Format,
@@ -80,7 +80,7 @@ fn create_image_view(
 ```
 
 ```rust,noplaypen
-fn transition_image_layout(
+unsafe fn transition_image_layout(
     device: &Device,
     data: &AppData,
     image: vk::Image,
@@ -218,7 +218,7 @@ This will leave each level of the texture image in `vk::ImageLayout::TRANSFER_DS
 We're now going to write the function that generates the mipmaps:
 
 ```rust,noplaypen
-fn generate_mipmaps(
+unsafe fn generate_mipmaps(
     instance: &Instance,
     device: &Device,
     data: &AppData,
@@ -422,7 +422,7 @@ generate_mipmaps(
 
 // ...
 
-fn generate_mipmaps(
+unsafe fn generate_mipmaps(
     instance: &Instance,
     device: &Device,
     data: &AppData,
@@ -491,7 +491,7 @@ If the object is close to the camera, `mag_filter` is used as the filter. If the
 To see the results of this chapter, we need to choose values for our `texture_sampler`. We've already set the `min_filter` and `mag_filter` to use `vk::Filter::LINEAR`. We just need to choose values for `min_lod`, `max_lod`, `mip_lod_bias`, and `mipmap_mode`.
 
 ```rust,noplaypen
-fn create_texture_sampler(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_texture_sampler(device: &Device, data: &mut AppData) -> Result<()> {
     let info = vk::SamplerCreateInfo::builder()
         // ...
         .mipmap_mode(vk::SamplerMipmapMode::LINEAR)

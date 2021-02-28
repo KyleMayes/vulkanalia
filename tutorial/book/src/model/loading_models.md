@@ -73,7 +73,7 @@ We're now going to write a `load_models` function that uses this library to popu
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         load_model(&mut data)?;
         create_vertex_buffer(&instance, &device, &mut data)?;

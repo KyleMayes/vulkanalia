@@ -37,18 +37,18 @@ fn main() -> Result<()> {
 
     // App
 
-    let mut app = App::create(&window)?;
+    let mut app = unsafe { App::create(&window)? };
     let mut destroying = false;
     event_loop.run(move |event, _, control_flow| {
         *control_flow = ControlFlow::Poll;
         match event {
             // Render a frame if our Vulkan app is not being destroyed.
-            Event::MainEventsCleared if !destroying => app.render(&window).unwrap(),
+            Event::MainEventsCleared if !destroying => unsafe { app.render(&window) }.unwrap(),
             // Destroy our Vulkan app.
             Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
                 destroying = true;
                 *control_flow = ControlFlow::Exit;
-                app.destroy();
+                unsafe { app.destroy(); }
             }
             _ => {}
         }
@@ -65,22 +65,22 @@ struct App {
 
 impl App {
     /// Creates our Vulkan app.
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         let loader = LibloadingLoader::new(LIBRARY)?;
         let entry = Entry::new(loader).map_err(|b| anyhow!("{}", b))?;
         let mut data = AppData::default();
-        let instance = create_instance(&entry, &mut data)?;
+        let instance = create_instance(window, &entry, &mut data)?;
         Ok(Self { entry, instance, data })
     }
 
     /// Renders a frame for our Vulkan app.
-    fn render(&mut self, window: &Window) -> Result<()> {
+    unsafe fn render(&mut self, window: &Window) -> Result<()> {
         Ok(())
     }
 
     /// Destroys our Vulkan app.
     #[rustfmt::skip]
-    fn destroy(&mut self) {
+    unsafe fn destroy(&mut self) {
         if VALIDATION_ENABLED {
             self.instance.destroy_debug_utils_messenger_ext(self.data.messenger, None);
         }
@@ -100,7 +100,7 @@ struct AppData {
 // Instance
 //================================================
 
-fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
+unsafe fn create_instance(window: &Window, entry: &Entry, data: &mut AppData) -> Result<Instance> {
     // Application Info
 
     let application_info = vk::ApplicationInfo::builder()
@@ -130,7 +130,7 @@ fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
 
     // Extensions
 
-    let mut extensions = vk_window::get_required_instance_extensions(entry)?
+    let mut extensions = vk_window::get_required_instance_extensions(window)
         .iter()
         .map(|e| e.to_cstr().as_ptr())
         .collect::<Vec<_>>();

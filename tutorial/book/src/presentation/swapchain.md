@@ -23,7 +23,7 @@ const DEVICE_EXTENSIONS: &[vk::ExtensionName] = &[vk::KHR_SWAPCHAIN_EXTENSION.na
 Next, create a new function `check_physical_device_extensions` that is called from `check_physical_device` as an additional check:
 
 ```rust,noplaypen
-fn check_physical_device(
+unsafe fn check_physical_device(
     instance: &Instance,
     data: &AppData,
     physical_device: vk::PhysicalDevice,
@@ -33,7 +33,7 @@ fn check_physical_device(
     Ok(extensions)
 }
 
-fn check_physical_device_extensions(
+unsafe fn check_physical_device_extensions(
     instance: &Instance,
     physical_device: vk::PhysicalDevice,
 ) -> Result<bool> {
@@ -44,7 +44,7 @@ fn check_physical_device_extensions(
 Modify the body of the function to enumerate the extensions and check if all of the required extensions are amongst them.
 
 ```rust,noplaypen
-fn check_physical_device_extensions(
+unsafe fn check_physical_device_extensions(
     instance: &Instance,
     physical_device: vk::PhysicalDevice,
 ) -> Result<bool> {
@@ -105,7 +105,7 @@ We'll now create a new method `SwapchainSupport::get` that will initialize this 
 
 ```rust,noplaypen
 impl SwapchainSupport {
-    fn get(
+    unsafe fn get(
         instance: &Instance,
         data: &AppData,
         physical_device: vk::PhysicalDevice,
@@ -266,7 +266,7 @@ Create a `create_swapchain` function that starts out with the results of these c
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         let device = create_logical_device(&instance, &mut data)?;
         create_swapchain(window, &instance, &device, &mut data)?;
@@ -274,7 +274,7 @@ impl App {
     }
 }
 
-fn create_swapchain(
+unsafe fn create_swapchain(
     window: &Window,
     instance: &Instance,
     device: &Device,
@@ -403,7 +403,7 @@ data.swapchain = device.create_swapchain_khr(&info, None)?;
 The parameters are the swapchain creation info and optional custom allocators. No surprises there. It should be cleaned up in `App::destroy` before the device:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.device.destroy_swapchain_khr(self.data.swapchain, None);
     // ...
 }

@@ -34,7 +34,7 @@ Create a `create_pipeline` function that is called right after `create_swapchain
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_swapchain_image_views(&device, &mut data)?;
         create_pipeline(&device, &mut data)?;
@@ -42,7 +42,7 @@ impl App {
     }
 }
 
-fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
     Ok(())
 }
 ```

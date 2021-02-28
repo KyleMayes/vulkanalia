@@ -34,7 +34,7 @@ To create the semaphores, we'll add the last `create` function for this part of 
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_command_buffers(&device, &mut data)?;
         create_sync_objects(&device, &mut data)?;
@@ -42,7 +42,7 @@ impl App {
     }
 }
 
-fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
     Ok(())
 }
 ```
@@ -50,7 +50,7 @@ fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
 Creating semaphores requires filling in the `vk::SemaphoreCreateInfo`, but in the current version of the API it doesn't actually have any required fields.
 
 ```rust,noplaypen
-fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
     let semaphore_info = vk::SemaphoreCreateInfo::builder();
 
     Ok(())
@@ -67,7 +67,7 @@ data.render_finished_semaphore = device.create_semaphore(&semaphore_info, None)?
 The semaphores should be cleaned up at the end of the program, when all commands have finished and no more synchronization is necessary:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.device.destroy_semaphore(self.data.render_finished_semaphore, None);
     self.device.destroy_semaphore(self.data.image_available_semaphore, None);
     // ...
@@ -79,7 +79,7 @@ fn destroy(&mut self) {
 As mentioned before, the first thing we need to do in the `App::render` function is acquire an image from the swapchain. Recall that the swapchain is an extension feature, so we must use a function with the `*_khr` naming convention:
 
 ```rust,noplaypen
-fn render(&mut self, window: &Window) -> Result<()> {
+unsafe fn render(&mut self, window: &Window) -> Result<()> {
     let image_index = self
         .device
         .acquire_next_image_khr(
@@ -89,6 +89,19 @@ fn render(&mut self, window: &Window) -> Result<()> {
             vk::Fence::null(),
         )?
         .0 as usize;
+
+        let wait_semaphores = &[self.data.image_available_semaphore];
+let wait_stages = &[vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT];
+let command_buffers = &[self.data.command_buffers[image_index as usize]];
+let signal_semaphores = &[self.data.render_finished_semaphore];
+let submit_info = vk::SubmitInfo::builder()
+    .wait_semaphores(wait_semaphores)
+    .wait_dst_stage_mask(wait_stages)
+    .command_buffers(command_buffers)
+    .signal_semaphores(signal_semaphores);
+
+    self.device.queue_submit(
+    self.data.graphics_queue, &[submit_info], vk::Fence::null())?;
 
     Ok(())
 }
@@ -215,8 +228,8 @@ To fix that problem, we should wait for the logical device to finish operations 
 Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
     destroying = true;
     *control_flow = ControlFlow::Exit;
-    app.device.device_wait_idle().unwrap();
-    app.destroy();
+    unsafe { app.device.device_wait_idle().unwrap(); }
+    unsafe { app.destroy(); }
 }
 ```
 
@@ -229,7 +242,7 @@ If you run your application with validation layers enabled now you may either ge
 The easy way to solve this is to wait for work to finish right after submitting it, for example by using `queue_wait_idle` (note: don't actually make this change):
 
 ```rust,noplaypen
-fn render(&mut self, window: &Window) -> Result<()> {
+unsafe fn render(&mut self, window: &Window) -> Result<()> {
     // ...
 
     self.device.queue_present_khr(self.data.present_queue, &present_info)?;
@@ -260,7 +273,7 @@ struct AppData {
 The `create_sync_objects` function should be changed to create all of these:
 
 ```rust,noplaypen
-fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
     let semaphore_info = vk::SemaphoreCreateInfo::builder();
 
     for _ in 0..MAX_FRAMES_IN_FLIGHT {
@@ -277,7 +290,7 @@ fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
 Similarly, they should also all be cleaned up:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.data.render_finished_semaphores
         .iter()
         .for_each(|s| self.device.destroy_semaphore(*s, None));
@@ -300,7 +313,7 @@ struct App {
 The `App::render` function can now be modified to use the right objects:
 
 ```rust,noplaypen
-fn render(&mut self, window: &Window) -> Result<()> {
+unsafe fn render(&mut self, window: &Window) -> Result<()> {
     let image_index = self
         .device
         .acquire_next_image_khr(
@@ -328,7 +341,7 @@ fn render(&mut self, window: &Window) -> Result<()> {
 Of course, we shouldn't forget to advance to the next frame every time:
 
 ```rust,noplaypen
-fn render(&mut self, window: &Window) -> Result<()> {
+unsafe fn render(&mut self, window: &Window) -> Result<()> {
     // ...
 
     self.frame = (self.frame + 1) % MAX_FRAMES_IN_FLIGHT;
@@ -353,7 +366,7 @@ struct AppData {
 We'll create the fences together with the semaphores in the `create_sync_objects` function:
 
 ```rust,noplaypen
-fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
     let semaphore_info = vk::SemaphoreCreateInfo::builder();
     let fence_info = vk::FenceCreateInfo::builder();
 
@@ -373,7 +386,7 @@ fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
 The creation of fences (`vk::Fence`) is very similar to the creation of semaphores. Also make sure to clean up the fences in `App::destroy`:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.data.in_flight_fences
         .iter()
         .for_each(|f| self.device.destroy_fence(*f, None));
@@ -384,7 +397,7 @@ fn destroy(&mut self) {
 We will now change `App::render` to use the fences for synchronization. The `queue_submit` call includes an optional parameter to pass a fence that should be signaled when the command buffer finishes executing. We can use this to signal that a frame has finished.
 
 ```rust,noplaypen
-fn render(&mut self, window: &Window) -> Result<()> {
+unsafe fn render(&mut self, window: &Window) -> Result<()> {
     // ...
 
     self.device.queue_submit(
@@ -400,7 +413,7 @@ fn render(&mut self, window: &Window) -> Result<()> {
 Now the only thing remaining is to change the beginning of `App::render` to wait for the frame to be finished:
 
 ```rust,noplaypen
-fn render(&mut self, window: &Window) -> Result<()> {
+unsafe fn render(&mut self, window: &Window) -> Result<()> {
     self.device.wait_for_fences(
         &[self.data.in_flight_fences[self.frame]],
         true,
@@ -420,7 +433,7 @@ If you run the program now, you'll notice something something strange. The appli
 That means that we're waiting for a fence that has not been submitted. The problem here is that, by default, fences are created in the unsignaled state. That means that `wait_for_fences` will wait forever if we haven't used the fence before. To solve that, we can change the fence creation to initialize it in the signaled state as if we had rendered an initial frame that finished:
 
 ```rust,noplaypen
-fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
     // ...
 
     let fence_info = vk::FenceCreateInfo::builder()
@@ -445,7 +458,7 @@ struct AppData {
 Prepare it in `create_sync_objects`:
 
 ```rust,noplaypen
-fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
     // ...
 
     data.images_in_flight = data.swapchain_images
@@ -460,7 +473,7 @@ fn create_sync_objects(device: &Device, data: &mut AppData) -> Result<()> {
 Initially not a single frame is using an image so we explicitly initialize it to *no fence*. Now we'll modify `App::render` to wait on any previous frame that is using the image that we've just been assigned for the new frame:
 
 ```rust,noplaypen
-fn render(&mut self, window: &Window) -> Result<()> {
+unsafe fn render(&mut self, window: &Window) -> Result<()> {
     // ...
 
     let image_index = self
@@ -491,7 +504,7 @@ fn render(&mut self, window: &Window) -> Result<()> {
 Because we now have more calls to `wait_for_fences`, the `reset_fences` call should be **moved**. It's best to simply call it right before actually using the fence:
 
 ```rust,noplaypen
-fn render(&mut self, window: &Window) -> Result<()> {
+unsafe fn render(&mut self, window: &Window) -> Result<()> {
     // ...
 
     self.device.reset_fences(&[self.data.in_flight_fences[self.frame]])?;

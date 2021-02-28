@@ -180,7 +180,7 @@ vkEnumerateInstanceExtensionProperties(NULL, &pPropertyCount, pProperties.data()
 The Rust signature of the wrapper for `vkEnumerateInstanceExtensionProperties` looks like this:
 
 ```rust,noplaypen
-fn enumerate_instance_extension_properties(
+unsafe fn enumerate_instance_extension_properties(
     &self,
     layer_name: Option<&[u8]>,
 ) -> VkResult<Vec<ExtensionProperties>>;
@@ -191,6 +191,8 @@ This command wrapper makes the usage of `vkEnumerateInstanceExtensionProperties`
 * The optionality of the `layer_name` parameter is encoded in the function signature. That this parameter is optional is not captured in the C function signature, one would need to check the Vulkan specification for this information
 * The fallibility of the command is modelled by returning a `Result` ([`VkResult<T>`](https://docs.rs/vulkanalia/%VERSION%/vulkanalia/type.VkResult.html) is a type alias for `Result<T, vk::ErrorCode>`). This allows us to take advantage of Rust's strong error handling capabilities as well as be warned by the compiler if we neglect to check the result of a fallible command
 * The command wrapper handles the three step process described above internally and returns a `Vec` containing the extension properties
+
+Note that command wrappers are still `unsafe` because while `vulkanalia` can eliminate certain classes of errors (e.g., passing a null layer name to this command), there are still plenty of things that can go horribly wrong and cause fun things like segfaults. You can always check the `Valid Usage` section of the Vulkan documentation for a command to see the invariants that need to upheld to call that command validly.
 
 You likely noticed the `&self` parameter in the above command wrapper. These command wrappers are defined in traits which are implemented for types exposed by `vulkanalia`. These traits can be separated into two categories: version traits and extension traits. The version traits offer command wrappers for the commands which are a standard part of Vulkan whereas the extension traits offer command wrappers for the commands which are defined as part of Vulkan extensions.
 

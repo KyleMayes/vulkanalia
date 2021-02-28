@@ -5,7 +5,12 @@
 In the `Development environment` chapter we created a Cargo project and added the necessary dependencies. In this chapter we will be replacing the code in the `src/main.rs` file with the following code:
 
 ```rust
-#![allow(dead_code, unused_variables, clippy::too_many_arguments, clippy::unnecessary_wraps)]
+#![allow(
+    dead_code,
+    unused_variables,
+    clippy::too_many_arguments,
+    clippy::unnecessary_wraps
+)]
 
 use anyhow::*;
 use winit::dpi::LogicalSize;
@@ -26,18 +31,19 @@ fn main() -> Result<()> {
 
     // App
 
-    let mut app = App::create(&window)?;
+    let mut app = unsafe { App::create(&window)? };
     let mut destroying = false;
     event_loop.run(move |event, _, control_flow| {
         *control_flow = ControlFlow::Poll;
         match event {
             // Render a frame if our Vulkan app is not being destroyed.
-            Event::MainEventsCleared if !destroying => app.render(&window).unwrap(),
+            Event::MainEventsCleared if !destroying =>
+                unsafe { app.render(&window) }.unwrap(),
             // Destroy our Vulkan app.
             Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
                 destroying = true;
                 *control_flow = ControlFlow::Exit;
-                app.destroy();
+                unsafe { app.destroy(); }
             }
             _ => {}
         }
@@ -50,17 +56,17 @@ struct App {}
 
 impl App {
     /// Creates our Vulkan app.
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         Ok(Self {})
     }
 
     /// Renders a frame for our Vulkan app.
-    fn render(&mut self, window: &Window) -> Result<()> {
+    unsafe fn render(&mut self, window: &Window) -> Result<()> {
         Ok(())
     }
 
     /// Destroys our Vulkan app.
-    fn destroy(&mut self) {}
+    unsafe fn destroy(&mut self) {}
 }
 
 /// The Vulkan handles and associated properties used by our Vulkan app.
@@ -79,6 +85,12 @@ Next we create an instance of our Vulkan app (`App`) and enter into our renderin
 Lastly comes `App` and `AppData`. `App` will be used to implement the setup, rendering, and destruction logic required for the Vulkan program we will be building over the course of the following chapters. `AppData` will serve simply as a container for the large number of Vulkan resources we will need to create and initialize which will allow for them to be easily passed to functions to be read and/or modified.
 
 This will come in handy because many of the following chapters consist of adding a function which takes a `&mut AppData` and creates and initializes Vulkan resources. These functions will then be called from our `App::create` constructor method to set up our Vulkan app. Then, before our program exits, these Vulkan resources will be released by our `App::destroy` method.
+
+## A Note on Safety
+
+All Vulkan commands, both the raw commands and their command wrappers, are marked `unsafe` in `vulkanalia`. This is because most Vulkan commands have restrictions on how they can be called that cannot be enforced by Rust (unless a higher-level interface that hides the Vulkan API is provided like in [`vulkano`](https://vulkano.rs)).
+
+This tutorial will be addressing this fact by simply marking every function and method in which a Vulkan command is called as `unsafe`. This helps keep syntactical noise to a minimum, but in a more realistic program you may want to expose your own safe interface that enforces the invariants required for the Vulkan commands you are calling.
 
 ## Resource management
 

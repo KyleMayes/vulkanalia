@@ -105,7 +105,7 @@ To set up a callback in the program to handle messages and the associated detail
 We'll add some more code to our `^create_instance` function. This time we'll modify the `extensions` list to be mutable and then add the debug utilities extension to the list when the validation layer is enabled:
 
 ```rust,noplaypen
-let mut extensions = vk_window::get_required_instance_extensions(entry)?
+let mut extensions = vk_window::get_required_instance_extensions(window)
     .iter()
     .map(|e| e.to_cstr().as_ptr())
     .collect::<Vec<_>>();
@@ -181,7 +181,11 @@ struct AppData {
 Now modify the signature and end of the `^create_instance` function to look like this:
 
 ```rust,noplaypen
-fn create_instance(entry: &Entry, data: &mut AppData) -> Result<Instance> {
+unsafe fn create_instance(
+    window: &Window,
+    entry: &Entry,
+    data: &mut AppData
+) -> Result<Instance> {
     // ...
 
     let instance = entry.create_instance(&info, None)?;
@@ -221,10 +225,10 @@ struct App {
 }
 
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         let mut data = AppData::default();
-        let instance = create_instance(&entry, &mut data)?;
+        let instance = create_instance(window, &entry, &mut data)?;
         Ok(Self { entry, instance, data })
     }
 }
@@ -233,7 +237,7 @@ impl App {
 The `vk::DebugUtilsMessengerEXT` object we created needs to cleaned up before our app exits. We'll do this in `App::destroy` before we destroy the instance:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     if VALIDATION_ENABLED {
         self.instance.destroy_debug_utils_messenger_ext(self.data.messenger, None);
     }
@@ -278,7 +282,7 @@ if VALIDATION_ENABLED {
 
 `debug_info` needs to be defined outside of the conditional since it needs to live until we are done calling `create_instance`. Fortunately we can rely on the Rust compiler to protect us from pushing a struct that doesn't live long enough onto a pointer chain due to the lifetimes defined for the `vulkanalia` builders.
 
-Now we should be able to run our program and see logs from our debug callback, but first we'll need to set the `RUST_LOG` environment variable so that `pretty_env_logger` will enable the log levels we are interested in. Initially set the log level to `debug` so we can be sure it is working, here is an example on Windows (Powershell):
+Now we should be able to run our program and see logs from our debug callback, but first we'll need to set the `RUST_LOG` environment variable so that `pretty_env_logger` will enable the log levels we are interested in. Initially set the log level to `debug` so we can be sure it is working, here is an example on Windows (PowerShell):
 
 ![](../images/validation_layer_test.png)
 

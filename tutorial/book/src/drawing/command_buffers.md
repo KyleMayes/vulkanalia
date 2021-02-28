@@ -19,7 +19,7 @@ Then create a new function `^create_command_pool` and call it from `App::create`
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_framebuffers(&device, &mut data)?;
         create_command_pool(&instance, &device, &mut data)?;
@@ -27,7 +27,7 @@ impl App {
     }
 }
 
-fn create_command_pool(
+unsafe fn create_command_pool(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -63,7 +63,7 @@ data.command_pool = device.create_command_pool(&info, None)?;
 Commands will be used throughout the program to draw things on the screen, so the pool should only be destroyed at the end:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.device.destroy_command_pool(self.data.command_pool, None);
     // ...
 }
@@ -84,7 +84,7 @@ We'll now start working on a `create_command_buffers` function that allocates an
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_command_pool(&instance, &device, &mut data)?;
         create_command_buffers(&device, &mut data)?;
@@ -92,7 +92,7 @@ impl App {
     }
 }
 
-fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
     Ok(())
 }
 ```

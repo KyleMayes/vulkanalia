@@ -27,7 +27,7 @@ This might not sound like a big deal but beginning a render pass instance can be
 Let's get started by adding a new method for the `App` struct called `update_secondary_command_buffer` that will be used to allocate and record a secondary command buffer for one of the 4 model instances we will be rendering. The `model_index` parameter indicates which of the 4 model instances the secondary command buffer should render.
 
 ```rust,noplaypen
-fn update_secondary_command_buffer(
+unsafe fn update_secondary_command_buffer(
     &mut self,
     image_index: usize,
     model_index: usize,
@@ -82,7 +82,7 @@ self.device.begin_command_buffer(command_buffer, &info)?;
 With inheritance set up, move the code that calculates the push constant values out of `App::update_command_buffer` and into `App::update_secondary_command_buffer` after the secondary command buffer is allocated. While you're at it, have the opacity of the model instance depend on the model index to add some variety to our scene, ranging from 25% to 100%.
 
 ```rust,noplaypen
-fn update_secondary_command_buffer(
+unsafe fn update_secondary_command_buffer(
     &mut self,
     image_index: usize,
     model_index: usize,
@@ -99,7 +99,7 @@ fn update_secondary_command_buffer(
         &glm::vec3(0.0, 0.0, 1.0),
     );
 
-    let (_, model_bytes, _) = unsafe { model.as_slice().align_to::<u8>() };
+    let (_, model_bytes, _) = model.as_slice().align_to::<u8>();
 
     let opacity = (model_index + 1) as f32 * 0.25;
     let opacity_bytes = &opacity.to_ne_bytes()[..];
@@ -111,7 +111,7 @@ fn update_secondary_command_buffer(
 Next we are going to move the rendering commands out of the primary command buffer and into the secondary command buffer. The primary command buffer will still be used to begin and end the render pass instance since it will be inherited by our secondary command buffers, but all of the commands in `App::update_command_buffer` between (but not including) `cmd_begin_render_pass` and `cmd_end_render_pass` should be moved into `App::update_secondary_command_buffer`.
 
 ```rust,noplaypen
-fn update_secondary_command_buffer(
+unsafe fn update_secondary_command_buffer(
     &mut self,
     image_index: usize,
     model_index: usize,
@@ -156,7 +156,7 @@ fn update_secondary_command_buffer(
 Now that we can easily create secondary command buffers for rendering the model instance, call our new method in `App::update_command_buffers` and execute the returned secondary command buffer using `cmd_execute_commands`.
 
 ```rust,noplaypen
-fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
+unsafe fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
     // ...
 
     self.device.cmd_begin_render_pass(command_buffer, &info, vk::SubpassContents::INLINE);
@@ -185,7 +185,7 @@ Note that these are mutually exclusive modes, you can't mix secondary command bu
 If you run the program now, you should see the same ghostly model rotating exactly as it was before. Let's kick it up a notch by rendering 4 instances of the model by creating 4 secondary command buffers and executing them all from the primary command buffer.
 
 ```rust,noplaypen
-fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
+unsafe fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
     // ...
 
     self.device.cmd_begin_render_pass(command_buffer, &info, vk::SubpassContents::INLINE);
