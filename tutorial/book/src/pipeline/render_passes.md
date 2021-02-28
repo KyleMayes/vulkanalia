@@ -6,7 +6,7 @@ Before we can finish creating the pipeline, we need to tell Vulkan about the fra
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_render_pass(&instance, &device, &mut data)?;
         create_pipeline(&device, &mut data)?;
@@ -14,7 +14,7 @@ impl App {
     }
 }
 
-fn create_render_pass(
+unsafe fn create_render_pass(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -139,7 +139,7 @@ data.render_pass = device.create_render_pass(&info, None)?;
 Just like the pipeline layout, the render pass will be referenced throughout the program, so it should only be cleaned up at the end in `App::destroy`:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
     self.device.destroy_render_pass(self.data.render_pass, None);
     // ...

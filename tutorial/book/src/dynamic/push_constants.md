@@ -110,7 +110,7 @@ In the `create_command_buffers` function, define a model matrix and use `cmd_pus
 
 ```rust,noplaypen
 let model = glm::rotate(&glm::identity(), 0.0f32, &glm::vec3(0.0, 0.0, 1.0));
-let (_, model_bytes, _) = unsafe { model.as_slice().align_to::<u8>() };
+let (_, model_bytes, _) = model.as_slice().align_to::<u8>();
 
 for (i, command_buffer) in data.command_buffers.iter().enumerate() {
     // ...

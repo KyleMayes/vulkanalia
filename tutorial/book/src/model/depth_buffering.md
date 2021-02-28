@@ -146,7 +146,7 @@ Create a new function `create_depth_objects` to set up these resources:
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_command_pool(&instance, &device, &mut data)?;
         create_depth_objects(&instance, &device, &mut data)?;
@@ -154,7 +154,7 @@ impl App {
     }
 }
 
-fn create_depth_objects(
+unsafe fn create_depth_objects(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -176,7 +176,7 @@ The stencil component is used for [stencil tests](https://en.wikipedia.org/wiki/
 We could simply go for the `vk::Format::D32_SFLOAT` format, because support for it is extremely common (see the hardware database), but it's nice to add some extra flexibility to our application where possible. We're going to write a `get_supported_format` function that takes a list of candidate formats in order from most desirable to least desirable and returns the first that satisfies our requirements:
 
 ```rust,noplaypen
-fn get_supported_format(
+unsafe fn get_supported_format(
     instance: &Instance,
     data: &AppData,
     candidates: &[vk::Format],
@@ -221,7 +221,7 @@ match tiling {
 We'll use this function now to create a `get_depth_format` helper function to select a format with a depth component that supports usage as depth attachment:
 
 ```rust,noplaypen
-fn get_depth_format(instance: &Instance, data: &AppData) -> Result<vk::Format> {
+unsafe fn get_depth_format(instance: &Instance, data: &AppData) -> Result<vk::Format> {
     let candidates = &[
         vk::Format::D32_SFLOAT,
         vk::Format::D32_SFLOAT_S8_UINT,
@@ -270,7 +270,7 @@ data.depth_image_view = create_image_view(device, data.depth_image, format)?;
 However, the `^create_image_view` function currently assumes that the subresource always uses `vk::ImageAspectFlags::COLOR`, so we will need to turn that field into a parameter:
 
 ```rust,noplaypen
-fn create_image_view(
+unsafe fn create_image_view(
     device: &Device,
     image: vk::Image,
     format: vk::Format,
@@ -455,7 +455,7 @@ The color attachment differs for every swapchain image, but the same depth image
 You'll also need to move the call to `create_framebuffers` to make sure that it is called after the depth image view has actually been created:
 
 ```rust,noplaypen
-fn create(window: &Window) -> Result<Self> {
+unsafe fn create(window: &Window) -> Result<Self> {
     // ...
     create_depth_objects(&instance, &device, &mut data)?;
     create_framebuffers(&device, &mut data)?;
@@ -549,7 +549,7 @@ If you run your program now, then you should see that the fragments of the geome
 The resolution of the depth buffer should change when the window is resized to match the new color attachment resolution. Extend the `App::recreate_swapchain` method to recreate the depth resources in that case:
 
 ```rust,noplaypen
-fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
+unsafe fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
     self.device.device_wait_idle()?;
     self.destroy_swapchain();
     create_swapchain(window, &self.instance, &self.device, &mut self.data)?;
@@ -569,7 +569,7 @@ fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
 The cleanup operations should happen in the swapchain cleanup function:
 
 ```rust,noplaypen
-fn destroy_swapchain(&mut self) {
+unsafe fn destroy_swapchain(&mut self) {
     self.device.destroy_image_view(self.data.depth_image_view, None);
     self.device.free_memory(self.data.depth_image_memory, None);
     self.device.destroy_image(self.data.depth_image, None);

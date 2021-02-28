@@ -16,10 +16,10 @@ Next we import `vulkanalia`'s window integration as `vk_window` which in this ch
 
 Lastly we import the Vulkan 1.0 prelude from `vulkanalia` which will provide all of the other Vulkan-related imports we will need for this and future chapters.
 
-Now, to create an instance we'll next have to fill in a struct with some information about our application. This data is technically optional, but it may provide some useful information to the driver in order to optimize our specific application (e.g., because it uses a well-known graphics engine with certain special behavior). This struct is called `vk::ApplicationInfo` and we'll create it in a new function called `^create_instance` that takes a Vulkan entry point (which we will create later) and returns a Vulkan instance:
+Now, to create an instance we'll next have to fill in a struct with some information about our application. This data is technically optional, but it may provide some useful information to the driver in order to optimize our specific application (e.g., because it uses a well-known graphics engine with certain special behavior). This struct is called `vk::ApplicationInfo` and we'll create it in a new function called `^create_instance` that takes our window and a Vulkan entry point (which we will create later) and returns a Vulkan instance:
 
 ```rust,noplaypen
-fn create_instance(entry: &Entry) -> Result<Instance> {
+unsafe fn create_instance(window: &Window, entry: &Entry) -> Result<Instance> {
     let application_info = vk::ApplicationInfo::builder()
         .application_name(b"Vulkan Tutorial\0")
         .application_version(vk::make_version(1, 0, 0))
@@ -32,7 +32,7 @@ fn create_instance(entry: &Entry) -> Result<Instance> {
 A lot of information in Vulkan is passed through structs instead of function parameters and we'll have to fill in one more struct to provide sufficient information for creating an instance. This next struct is not optional and tells the Vulkan driver which global extensions and validation layers we want to use. Global here means that they apply to the entire program and not a specific device, which will become clear in the next few chapters. First we'll need to use `vulkanalia`'s window integration to enumerate the required global extensions and convert them into null-terminated C strings (`*const c_char`):
 
 ```rust,noplaypen
-let extensions = vk_window::get_required_instance_extensions(entry)?
+let extensions = vk_window::get_required_instance_extensions(window)
     .iter()
     .map(|e| e.to_cstr().as_ptr())
     .collect::<Vec<_>>();
@@ -65,10 +65,10 @@ struct App {
 To populate these fields, update the `App::create` method to the following:
 
 ```rust,noplaypen
-fn create(window: &Window) -> Result<Self> {
+unsafe fn create(window: &Window) -> Result<Self> {
     let loader = LibloadingLoader::new(LIBRARY)?;
     let entry = Entry::new(loader).map_err(|b| anyhow!("{}", b))?;
-    let instance = create_instance(&entry)?;
+    let instance = create_instance(window, &entry)?;
     Ok(Self { entry, instance })
 }
 ```
@@ -80,7 +80,7 @@ Here we first create a Vulkan function loader which will be used to load the ini
 The `Instance` should only be destroyed right before the program exits. It can be destroyed in the `App::destroy` method using `destroy_instance`:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.instance.destroy_instance(None);
 }
 ```

@@ -20,7 +20,7 @@ Create the `create_swapchain_image_views` function and call it right after swapc
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_swapchain(window, &instance, &device, &mut data)?;
         create_swapchain_image_views(&device, &mut data)?;
@@ -28,7 +28,10 @@ impl App {
     }
 }
 
-fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_swapchain_image_views(
+    device: &Device,
+    data: &mut AppData,
+) -> Result<()> {
     Ok(())
 }
 ```
@@ -36,7 +39,10 @@ fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<(
 What we next need to do is iterate over the swapchain images to create an image view for each:
 
 ```rust,noplaypen
-fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_swapchain_image_views(
+    device: &Device,
+    data: &mut AppData,
+) -> Result<()> {
     data.swapchain_image_views = data
         .swapchain_images
         .iter()
@@ -94,7 +100,7 @@ device.create_image_view(&info, None)
 Unlike images, the image views were explicitly created by us, so we need to add a similar loop to destroy them again in `App::destroy`:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.data.swapchain_image_views
         .iter()
         .for_each(|v| self.device.destroy_image_view(*v, None));

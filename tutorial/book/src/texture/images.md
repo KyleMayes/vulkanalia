@@ -39,7 +39,7 @@ Create a new function `create_texture_image` where we'll load an image and uploa
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_command_pool(&instance, &device, &mut data)?;
         create_texture_image(&instance, &device, &mut data)?;
@@ -47,7 +47,7 @@ impl App {
     }
 }
 
-fn create_texture_image(
+unsafe fn create_texture_image(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -63,7 +63,7 @@ Create a new directory `resources` next to the `shaders` directory to store text
 Loading an image with this library is really easy:
 
 ```rust,noplaypen
-fn create_texture_image(
+unsafe fn create_texture_image(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -109,7 +109,7 @@ let memory = device.map_memory(
     vk::MemoryMapFlags::empty(),
 )?;
 
-unsafe { memcpy(pixels.as_ptr(), memory.cast(), pixels.len()) };
+memcpy(pixels.as_ptr(), memory.cast(), pixels.len());
 
 device.unmap_memory(staging_buffer_memory);
 ```
@@ -213,7 +213,7 @@ Allocating memory for an image works in exactly the same way as allocating memor
 This function is already getting quite large and there'll be a need to create more images in later chapters, so we should abstract image creation into a `^create_image` function, like we did for buffers. Create the function and move the image object creation and memory allocation to it:
 
 ```rust,noplaypen
-fn create_image(
+unsafe fn create_image(
     instance: &Instance,
     device: &Device,
     data: &AppData,
@@ -266,7 +266,7 @@ I've made the width, height, format, tiling mode, usage, and memory properties p
 The `create_texture_image` function can now be simplified to:
 
 ```rust,noplaypen
-fn create_texture_image(
+unsafe fn create_texture_image(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -297,7 +297,7 @@ fn create_texture_image(
         vk::MemoryMapFlags::empty(),
     )?;
 
-    unsafe { memcpy(pixels.as_ptr(), memory.cast(), pixels.len()) };
+    memcpy(pixels.as_ptr(), memory.cast(), pixels.len());
 
     device.unmap_memory(staging_buffer_memory);
 
@@ -325,7 +325,7 @@ fn create_texture_image(
 The function we're going to write now involves recording and executing a command buffer again, so now's a good time to move that logic into a helper function or two:
 
 ```rust,noplaypen
-fn begin_single_time_commands(
+unsafe fn begin_single_time_commands(
     device: &Device,
     data: &AppData,
 ) -> Result<vk::CommandBuffer> {
@@ -344,7 +344,7 @@ fn begin_single_time_commands(
     Ok(command_buffer)
 }
 
-fn end_single_time_commands(
+unsafe fn end_single_time_commands(
     device: &Device,
     data: &AppData,
     command_buffer: vk::CommandBuffer,
@@ -367,7 +367,7 @@ fn end_single_time_commands(
 The code for these functions is based on the existing code in `copy_buffer`. You can now simplify that function to:
 
 ```rust,noplaypen
-fn copy_buffer(
+unsafe fn copy_buffer(
     device: &Device,
     data: &AppData,
     source: vk::Buffer,
@@ -388,7 +388,7 @@ fn copy_buffer(
 If we were still using buffers, then we could now write a function to record and execute `cmd_copy_buffer_to_image` to finish the job, but this command requires the image to be in the right layout first. Create a new function to handle layout transitions:
 
 ```rust,noplaypen
-fn transition_image_layout(
+unsafe fn transition_image_layout(
     device: &Device,
     data: &AppData,
     image: vk::Image,
@@ -470,7 +470,7 @@ The last three parameters reference slices of pipeline barriers of the three ava
 Before we get back to `create_texture_image`, we're going to write one more helper function: `copy_bufer_to_image`:
 
 ```rust,noplaypen
-fn copy_buffer_to_image(
+unsafe fn copy_buffer_to_image(
     device: &Device,
     data: &AppData,
     buffer: vk::Buffer,
@@ -646,7 +646,7 @@ device.free_memory(staging_buffer_memory, None);
 The main texture image is used until the end of the program:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.destroy_swapchain();
     self.device.destroy_image(self.data.texture_image, None);
     self.device.free_memory(self.data.texture_image_memory, None);

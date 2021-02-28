@@ -2,7 +2,7 @@
 
 **Code:** [main.rs](https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/05_window_surface.rs)
 
-Since Vulkan is a platform agnostic API, it can not interface directly with the window system on its own. To establish the connection between Vulkan and the window system to present results to the screen, we need to use the WSI (Window System Integration) extensions. In this chapter we'll discuss the first one, which is `VK_KHR_surface`. It exposes a `vk::SurfaceKHR` object that represents an abstract type of surface to present rendered images to. The surface in our program will be backed by the window that we've already opened with `winit`.
+Since Vulkan is a platform agnostic API, it can't interface directly with the window system on its own. To establish the connection between Vulkan and the window system to present results to the screen, we need to use the WSI (Window System Integration) extensions. In this chapter we'll discuss the first one, which is `VK_KHR_surface`. It exposes a `vk::SurfaceKHR` object that represents an abstract type of surface to present rendered images to. The surface in our program will be backed by the window that we've already opened with `winit`.
 
 The `VK_KHR_surface` extension is an instance level extension and we've actually already enabled it, because it's included in the list returned by `vk_window::get_required_instance_extensions`. The list also includes some other WSI extensions that we'll use in the next couple of chapters.
 
@@ -54,9 +54,9 @@ The process is similar for other platforms like Linux, where `create_xcb_surface
 The `vk_window::create_surface` function performs exactly this operation with a different implementation for each platform. We'll now integrate it into our program. Add a call to the function in `App::create` right before we pick a physical device.
 
 ```rust,noplaypen
-fn create(window: &Window) -> Result<Self> {
+unsafe fn create(window: &Window) -> Result<Self> {
     // ...
-    let mut data = AppData::default();
+    let instance = create_instance(window, &entry, &mut data)?;
     data.surface = vk_window::create_surface(&instance, window)?;
     pick_physical_device(&instance, &mut data)?;
     // ...
@@ -66,7 +66,7 @@ fn create(window: &Window) -> Result<Self> {
 The parameters are the Vulkan instance and the `winit` window. Once we have our surface, it can be destroyed in `App::destroy` using the Vulkan API:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     // ...
     self.instance.destroy_surface_khr(self.data.surface, None);
     self.instance.destroy_instance(None);

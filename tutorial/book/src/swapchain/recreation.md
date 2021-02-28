@@ -9,7 +9,7 @@ The application we have now successfully draws a triangle, but there are some ci
 Create a new `App::recreate_swapchain` method that calls `create_swapchain` and all of the creation functions for the objects that depend on the swapchain or the window size.
 
 ```rust,noplaypen
-fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
+unsafe fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
     self.device.device_wait_idle()?;
     create_swapchain(window, &self.instance, &self.device, &mut self.data)?;
     create_swapchain_image_views(&self.device, &mut self.data)?;
@@ -29,13 +29,13 @@ We first call `device_wait_idle`, because just like in the last chapter, we shou
 To make sure that the old versions of these objects are cleaned up before recreating them, we should move some of the cleanup code to a separate method that we can call from the `App::recreate_swapchain` method after waiting for the device to be idle. Let's call it `App::destroy_swapchain`:
 
 ```rust,noplaypen
-fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
+unsafe fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
     self.device.device_wait_idle()?;
     self.destroy_swapchain();
     // ...
 }
 
-fn destroy_swapchain(&mut self) {
+unsafe fn destroy_swapchain(&mut self) {
 
 }
 ```
@@ -43,7 +43,7 @@ fn destroy_swapchain(&mut self) {
 We'll move the cleanup code of all objects that are recreated as part of a swapchain refresh from `App::destroy` to `App::destroy_swapchain`:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.destroy_swapchain();
 
     self.data.in_flight_fences
@@ -66,7 +66,7 @@ fn destroy(&mut self) {
     self.instance.destroy_instance(None);
 }
 
-fn destroy_swapchain(&mut self) {
+unsafe fn destroy_swapchain(&mut self) {
     self.data.framebuffers
         .iter()
         .for_each(|f| self.device.destroy_framebuffer(*f, None));
@@ -169,14 +169,14 @@ Now try to run the program and resize the window to see if the framebuffer is in
 There is another case where a swapchain may become out of data and that is a special kind of window resizing: window minimization. This case is special because it will result in a framebuffer size of `0`. In this tutorial we will handle that by not rendering frames while the window is minimized:
 
 ```rust,noplaypen
-let mut app = App::create(&window)?;
+let mut app = unsafe { App::create(&window)? };
 let mut destroying = false;
 let mut minimized = false;
 event_loop.run(move |event, _, control_flow| {
     *control_flow = ControlFlow::Poll;
     match event {
         Event::MainEventsCleared if !destroying && !minimized =>
-            app.render(&window).unwrap(),
+            unsafe { app.render(&window) }.unwrap(),
         Event::WindowEvent { event: WindowEvent::Resized(size), .. } => {
             if size.width == 0 || size.height == 0 {
                 minimized = true;

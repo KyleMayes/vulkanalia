@@ -12,7 +12,7 @@ Add an `AppData` field to hold a `vk::ImageView` for the texture image and creat
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_texture_image(&instance, &device, &mut data)?;
         create_texture_image_view(&device, &mut data)?;
@@ -28,7 +28,7 @@ struct AppData {
     // ...
 }
 
-fn create_texture_image_view(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_texture_image_view(device: &Device, data: &mut AppData) -> Result<()> {
     Ok(())
 }
 ```
@@ -59,7 +59,7 @@ data.texture_image_view = device.create_image_view(&info, None)?;
 Because so much of the logic is duplicated from `create_swapchain_image_views`, you may wish to abstract it into a new `create_image_view` function:
 
 ```rust,noplaypen
-fn create_image_view(
+unsafe fn create_image_view(
     device: &Device,
     image: vk::Image,
     format: vk::Format,
@@ -84,7 +84,7 @@ fn create_image_view(
 The `create_texture_image_view` function can now be simplified to:
 
 ```rust,noplaypen
-fn create_texture_image_view(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_texture_image_view(device: &Device, data: &mut AppData) -> Result<()> {
     data.texture_image_view = create_image_view(
         device,
         data.texture_image,
@@ -98,7 +98,7 @@ fn create_texture_image_view(device: &Device, data: &mut AppData) -> Result<()> 
 And `create_swapchain_image_views` can be simplified to:
 
 ```rust,noplaypen
-fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<()> {
     data.swapchain_image_views = data
         .swapchain_images
         .iter()
@@ -111,8 +111,8 @@ fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> Result<(
 
 Make sure to destroy the image view at the end of the program, right before destroying the image itself:
 
-```c++
-fn destroy(&mut self) {
+```rust,noplaypen
+unsafe fn destroy(&mut self) {
     self.destroy_swapchain();
     self.device.destroy_image_view(self.data.texture_image_view, None);
     // ...
@@ -143,7 +143,7 @@ We will now create a function `create_texture_sampler` to set up such a sampler 
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_texture_image(&instance, &device, &mut data)?;
         create_texture_image_view(&device, &mut data)?;
@@ -152,7 +152,7 @@ impl App {
     }
 }
 
-fn create_texture_sampler(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_texture_sampler(device: &Device, data: &mut AppData) -> Result<()> {
     Ok(())
 }
 ```
@@ -241,7 +241,7 @@ Note the sampler does not reference a `vk::Image` anywhere. The sampler is a dis
 Destroy the sampler at the end of the program when we'll no longer be accessing the image:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.destroy_swapchain();
     self.device.destroy_sampler(self.data.texture_sampler, None);
     // ...
@@ -264,7 +264,7 @@ let features = vk::PhysicalDeviceFeatures::builder()
 And even though it is very unlikely that a modern graphics card will not support it, we should update `check_physical_device` to check if it is available:
 
 ```rust,noplaypen
-fn check_physical_device(
+unsafe fn check_physical_device(
     instance: &Instance,
     data: &AppData,
     physical_device: vk::PhysicalDevice,

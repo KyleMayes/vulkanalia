@@ -10,7 +10,7 @@ Descriptor sets can't be created directly, they must be allocated from a pool li
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_uniform_buffers(&instance, &device, &mut data)?;
         create_descriptor_pool(&device, &mut data)?;
@@ -18,7 +18,7 @@ impl App {
     }
 }
 
-fn create_descriptor_pool(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_descriptor_pool(device: &Device, data: &mut AppData) -> Result<()> {
     Ok(())
 }
 ```
@@ -61,7 +61,7 @@ data.descriptor_pool = device.create_descriptor_pool(&info, None)?;
 The descriptor pool should be destroyed when the swapchain is recreated because it depends on the number of images:
 
 ```rust,noplaypen
-fn destroy_swapchain(&mut self) {
+unsafe fn destroy_swapchain(&mut self) {
     self.device.destroy_descriptor_pool(self.data.descriptor_pool, None);
     // ...
 }
@@ -70,7 +70,7 @@ fn destroy_swapchain(&mut self) {
 And recreated in `App::recreate_swapchain`:
 
 ```rust,noplaypen
-fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
+unsafe fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
     // ...
     create_uniform_buffers(&self.instance, &self.device, &mut self.data)?;
     create_descriptor_pool(&self.device, &mut self.data)?;
@@ -84,14 +84,14 @@ We can now allocate the descriptor sets themselves. Add a `create_descriptor_set
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_descriptor_pool(&device, &mut data)?;
         create_descriptor_sets(&device, &mut data)?;
         // ...
     }
 
-    fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
+    unsafe fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
         // ..
         create_descriptor_pool(&self.device, &mut self.data)?;
         create_descriptor_sets(&self.device, &mut self.data)?;
@@ -99,7 +99,7 @@ impl App {
     }
 }
 
-fn create_descriptor_sets(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_descriptor_sets(device: &Device, data: &mut AppData) -> Result<()> {
     Ok(())
 }
 ```
@@ -217,7 +217,7 @@ The rectangle has changed into a square because the projection matrix now correc
 
 ## Alignment requirements
 
-One thing we've glossed over so far is how exactly the data in the C++ structure should match with the uniform definition in the shader. It seems obvious enough to simply use the same types in both:
+One thing we've glossed over so far is how exactly the data in the Rust structure should match with the uniform definition in the shader. It seems obvious enough to simply use the same types in both:
 
 ```rust,noplaypen
 #[repr(C)]

@@ -182,7 +182,7 @@ Compiling shaders on the commandline is one of the most straightforward options 
 Now that we have a way of producing SPIR-V shaders, it's time to bring them into our program to plug them into the graphics pipeline at some point. We'll start by using [`include_bytes!`](https://doc.rust-lang.org/stable/std/macro.include_bytes.html) from the Rust standard library to include the compiled SPIR-V bytecode for the shaders in our executable.
 
 ```rust,noplaypen
-fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
     let vert = include_bytes!("../shaders/vert.spv");
     let frag = include_bytes!("../shaders/frag.spv");
 
@@ -195,13 +195,12 @@ fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
 Before we can pass the code to the pipeline, we have to wrap it in a `vk::ShaderModule` object. Let's create a helper function `create_shader_module` to do that.
 
 ```rust,noplaypen
-fn create_shader_module(
+unsafe fn create_shader_module(
     device: &Device,
     bytecode: &[u8],
 ) -> Result<vk::ShaderModule> {
 }
 ```
-
 
 The function will take a slice containing the bytecode as parameter and create a `vk::ShaderModule` from it using our logical device.
 
@@ -209,7 +208,7 @@ Creating a shader module is simple, we only need to specify the length of our by
 
 ```rust,noplaypen
 let bytecode = Vec::<u8>::from(bytecode);
-let (prefix, code, suffix) = unsafe { bytecode.align_to::<u32>() };
+let (prefix, code, suffix) = bytecode.align_to::<u32>();
 if !prefix.is_empty() || !suffix.is_empty() {
     return Err(anyhow!("Shader bytecode is not properly aligned."));
 }
@@ -232,7 +231,7 @@ The parameters are the same as those in previous object creation functions: the 
 Shader modules are just a thin wrapper around the shader bytecode that we've previously loaded from a file and the functions defined in it. The compilation and linking of the SPIR-V bytecode to machine code for execution by the GPU doesn't happen until the graphics pipeline is created. That means that we're allowed to destroy the shader modules again as soon as pipeline creation is finished, which is why we'll make them local variables in the `create_pipeline` function instead of fields in `AppData`:
 
 ```rust,noplaypen
-fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
     let vert = include_bytes!("../shaders/vert.spv");
     let frag = include_bytes!("../shaders/frag.spv");
 
@@ -264,7 +263,7 @@ We'll start by filling in the structure for the vertex shader, again in the `cre
 let vert_stage = vk::PipelineShaderStageCreateInfo::builder()
     .stage(vk::ShaderStageFlags::VERTEX)
     .module(vert_shader_module)
-    .name(b"main\0"[..].into());
+    .name(b"main\0");
 ```
 
 The first step is telling Vulkan in which pipeline stage the shader is going to be used. There is a variant for each of the programmable stages described in the previous chapter.
@@ -279,7 +278,7 @@ Modifying the structure to suit the fragment shader is easy:
 let frag_stage = vk::PipelineShaderStageCreateInfo::builder()
     .stage(vk::ShaderStageFlags::FRAGMENT)
     .module(frag_shader_module)
-    .name(b"main\0"[..].into());
+    .name(b"main\0");
 ```
 
 That's all there is to describing the programmable stages of the pipeline. In the next chapter we'll look at the fixed-function stages.

@@ -35,7 +35,7 @@ struct AppData {
 By default we'll be using only one sample per pixel which is equivalent to no multisampling, in which case the final image will remain unchanged. The exact maximum number of samples can be extracted from `vk::PhysicalDeviceProperties` associated with our selected physical device. We're using a depth buffer, so we have to take into account the sample count for both color and depth. The highest sample count that is supported by both (&) will be the maximum we can support. Add a function that will fetch this information for us:
 
 ```rust,noplaypen
-fn get_max_msaa_samples(
+unsafe fn get_max_msaa_samples(
     instance: &Instance,
     data: &AppData,
 ) -> vk::SampleCountFlags {
@@ -60,7 +60,7 @@ fn get_max_msaa_samples(
 We will now use this function to set the `msaa_samples` variable during the physical device selection process. For this, we have to slightly modify the `pick_physical_device` function:
 
 ```rust,noplaypen
-fn pick_physical_device(instance: &Instance, data: &mut AppData) -> Result<()> {
+unsafe fn pick_physical_device(instance: &Instance, data: &mut AppData) -> Result<()> {
     // ...
 
     data.msaa_samples = get_max_msaa_samples(instance, data);
@@ -86,7 +86,7 @@ struct AppData {
 This new image will have to store the desired number of samples per pixel, so we need to pass this number to `vk::ImageCreateInfo` during the image creation process. Modify the `^create_image` function by adding a `samples` parameter:
 
 ```rust,noplaypen
-fn create_image(
+unsafe fn create_image(
     instance: &Instance,
     device: &Device,
     data: &AppData,
@@ -149,7 +149,7 @@ let (texture_image, texture_image_memory) = create_image(
 We will now create a multisampled color buffer. Add a `create_color_objects` function and note that we're using `msaaSamples` here as a function parameter to `createImage`. We're also using only one mip level, since this is enforced by the Vulkan specification in case of images with more than one sample per pixel. Also, this color buffer doesn't need mipmaps since it's not going to be used as a texture:
 
 ```rust,noplaypen
-fn create_color_objects(
+unsafe fn create_color_objects(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -187,7 +187,7 @@ fn create_color_objects(
 For consistency, call the function right before `create_depth_objects`:
 
 ```rust,noplaypen
-fn create(window: &Window) -> Result<Self> {
+unsafe fn create(window: &Window) -> Result<Self> {
     // ...
     create_color_objects(&instance, &device, &mut data)?;
     create_depth_objects(&instance, &device, &mut data)?;
@@ -198,7 +198,7 @@ fn create(window: &Window) -> Result<Self> {
 Now that we have a multisampled color buffer in place it's time to take care of depth. Modify `create_depth_objects` and update the number of samples used by the depth buffer:
 
 ```rust,noplaypen
-fn create_depth_objects(
+unsafe fn create_depth_objects(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -226,7 +226,7 @@ fn create_depth_objects(
 We have now created a couple of new Vulkan resources, so let's not forget to release them when necessary:
 
 ```rust,noplaypen
-fn destroy_swapchain(&mut self) {
+unsafe fn destroy_swapchain(&mut self) {
     self.device.destroy_image_view(self.data.color_image_view, None);
     self.device.free_memory(self.data.color_image_memory, None);
     self.device.destroy_image(self.data.color_image, None);
@@ -237,7 +237,7 @@ fn destroy_swapchain(&mut self) {
 And update the `App::recreate_swapchain` method so that the new color image can be recreated in the correct resolution when the window is resized:
 
 ```rust,noplaypen
-fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
+unsafe fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
     // ...
     create_color_objects(&self.instance, &self.device, &mut self.data)?;
     create_depth_objects(&self.instance, &self.device, &mut self.data)?;
@@ -252,7 +252,7 @@ We made it past the initial MSAA setup, now we need to start using this new reso
 Let's take care of the render pass first. Modify `^create_render_pass` and update color and depth attachment creation info structs:
 
 ```rust,noplaypen
-fn create_render_pass(
+unsafe fn create_render_pass(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -353,7 +353,7 @@ The difference is more noticeable when taking another close look at the axe head
 There are certain limitations of our current MSAA implementation which may impact the quality of the output image in more detailed scenes. For example, we're currently not solving potential problems caused by shader aliasing, i.e. MSAA only smoothens out the edges of geometry but not the interior filling. This may lead to a situation when you get a smooth polygon rendered on screen but the applied texture will still look aliased if it contains high contrasting colors. One way to approach this problem is to enable [Sample Shading](https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#primsrast-sampleshading) which will improve the image quality even further, though at an additional performance cost:
 
 ```rust,noplaypen
-fn create_logical_device(
+unsafe fn create_logical_device(
     instance: &Instance,
     data: &mut AppData,
 ) -> Result<Device> {
@@ -369,7 +369,7 @@ fn create_logical_device(
 
 // ...
 
-fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
     // ...
 
     let multisample_state = vk::PipelineMultisampleStateCreateInfo::builder()

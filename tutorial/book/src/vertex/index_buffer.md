@@ -49,7 +49,7 @@ The `create_index_buffer` function that we'll add now is almost identical to `cr
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_vertex_buffer(&instance, &device, &mut data)?;
         create_index_buffer(&instance, &device, &mut data)?;
@@ -57,7 +57,7 @@ impl App {
     }
 }
 
-fn create_index_buffer(
+unsafe fn create_index_buffer(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -80,7 +80,7 @@ fn create_index_buffer(
         vk::MemoryMapFlags::empty(),
     )?;
 
-    unsafe { memcpy(INDICES.as_ptr(), memory.cast(), INDICES.len()) };
+    memcpy(INDICES.as_ptr(), memory.cast(), INDICES.len());
 
     device.unmap_memory(staging_buffer_memory);
 
@@ -110,7 +110,7 @@ There are only two notable differences. The `size` is now equal to the number of
 The index buffer should be cleaned up at the end of the program, just like the vertex buffer:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.destroy_swapchain();
     self.device.destroy_buffer(self.data.index_buffer, None);
     self.device.free_memory(self.data.index_buffer_memory, None);

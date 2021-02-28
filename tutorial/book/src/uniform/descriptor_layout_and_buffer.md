@@ -89,7 +89,7 @@ We need to provide details about every descriptor binding used in the shaders fo
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_descriptor_set_layout(&device, &mut data)?;
         create_pipeline(&device, &mut data)?;
@@ -98,7 +98,10 @@ impl App {
 }
 
 
-fn create_descriptor_set_layout(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_descriptor_set_layout(
+    device: &Device,
+    data: &mut AppData,
+) -> Result<()> {
     Ok(())
 }
 ```
@@ -106,7 +109,10 @@ fn create_descriptor_set_layout(device: &Device, data: &mut AppData) -> Result<(
 Every binding needs to be described through a `vk::DescriptorSetLayoutBinding` struct.
 
 ```rust,noplaypen
-fn create_descriptor_set_layout(device: &Device, data: &mut AppData) -> Result<()> {
+unsafe fn create_descriptor_set_layout(
+    device: &Device,
+    data: &mut AppData,
+) -> Result<()> {
     let ubo_binding = vk::DescriptorSetLayoutBinding::builder()
         .binding(0)
         .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
@@ -157,7 +163,7 @@ You may be wondering why it's possible to specify multiple descriptor set layout
 The descriptor layout should stick around while we may create new graphics pipelines i.e. until the program ends:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.destroy_swapchain();
     self.device.destroy_descriptor_set_layout(self.data.descriptor_set_layout, None);
     // ...
@@ -187,7 +193,7 @@ Similarly, create a new function `create_uniform_buffers` that is called after `
 
 ```rust,noplaypen
 impl App {
-    fn create(window: &Window) -> Result<Self> {
+    unsafe fn create(window: &Window) -> Result<Self> {
         // ...
         create_vertex_buffer(&instance, &device, &mut data)?;
         create_index_buffer(&instance, &device, &mut data)?;
@@ -196,7 +202,7 @@ impl App {
     }
 }
 
-fn create_uniform_buffers(
+unsafe fn create_uniform_buffers(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -225,7 +231,7 @@ fn create_uniform_buffers(
 We're going to write a separate function that updates the uniform buffer with a new transformation every frame, so there will be no `map_memory` here. The uniform data will be used for all draw calls, so the buffer containing it should only be destroyed when we stop rendering. Since it also depends on the number of swapchain images, which could change after a recreation, we'll clean it up in `destroy_swapchain`:
 
 ```rust,noplaypen
-fn destroy_swapchain(&mut self) {
+unsafe fn destroy_swapchain(&mut self) {
     self.data.uniform_buffers
         .iter()
         .for_each(|b| self.device.destroy_buffer(*b, None));
@@ -239,7 +245,7 @@ fn destroy_swapchain(&mut self) {
 This means that we also need to recreate it in `recreate_swapchain`:
 
 ```rust,noplaypen
-fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
+unsafe fn recreate_swapchain(&mut self, window: &Window) -> Result<()> {
     // ...
     create_framebuffers(&self.device, &mut self.data)?;
     create_uniform_buffers(&self.instance, &self.device, &mut self.data)?;
@@ -254,7 +260,7 @@ Create a new method `App::update_uniform_buffer` and add a call to it from the `
 
 ```rust,noplaypen
 impl App {
-    fn render(&mut self, window: &Window) -> Result<()> {
+    unsafe fn render(&mut self, window: &Window) -> Result<()> {
         // ...
 
         if !self.data.images_in_flight[image_index as usize].is_null() {
@@ -273,7 +279,7 @@ impl App {
         // ...
     }
 
-    fn update_uniform_buffer(&self, image_index: usize) -> Result<()> {
+    unsafe fn update_uniform_buffer(&self, image_index: usize) -> Result<()> {
         Ok(())
     }
 }
@@ -303,7 +309,7 @@ struct App {
 We can now use that field to determine how many seconds it has been since the application started:
 
 ```rust,noplaypen
-fn update_uniform_buffer(&self, image_index: usize) -> Result<()> {
+unsafe fn update_uniform_buffer(&self, image_index: usize) -> Result<()> {
     let time = self.start.elapsed().as_secs_f32();
 
     Ok(())
@@ -365,7 +371,7 @@ let memory = self.device.map_memory(
     vk::MemoryMapFlags::empty(),
 )?;
 
-unsafe { memcpy(&ubo, memory.cast(), 1) };
+memcpy(&ubo, memory.cast(), 1);
 
 self.device.unmap_memory(self.data.uniform_buffers_memory[image_index]);
 ```

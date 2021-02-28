@@ -9,14 +9,16 @@ Buffers in Vulkan are regions of memory used for storing arbitrary data that can
 Create a new function `create_vertex_buffer` and call it from `App::create` right before `create_command_buffers`.
 
 ```rust,noplaypen
-fn create(window: &Window) -> Result<Self> {
-    // ...
-    create_vertex_buffer(&instance, &device, &mut data)?;
-    create_command_buffers(&device, &mut data)?;
-    // ...
+impl App {
+    unsafe fn create(window: &Window) -> Result<Self> {
+        // ...
+        create_vertex_buffer(&instance, &device, &mut data)?;
+        create_command_buffers(&device, &mut data)?;
+        // ...
+    }
 }
 
-fn create_vertex_buffer(
+unsafe fn create_vertex_buffer(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -61,7 +63,7 @@ struct AppData {
 Next add the call to `create_buffer`:
 
 ```rust,noplaypen
-fn create_vertex_buffer(
+unsafe fn create_vertex_buffer(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -80,7 +82,7 @@ fn create_vertex_buffer(
 The buffer should be available for use in rendering commands until the end of the program and it does not depend on the swapchain, so we'll clean it up in the original `App::destroy` method:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.destroy_swapchain();
     self.device.destroy_buffer(self.data.vertex_buffer, None);
     // ...
@@ -104,7 +106,7 @@ The `vk::MemoryRequirements` struct this command returns has three fields:
 Graphics cards can offer different types of memory to allocate from. Each type of memory varies in terms of allowed operations and performance characteristics. We need to combine the requirements of the buffer and our own application requirements to find the right type of memory to use. Let's create a new function `get_memory_type_index` for this purpose.
 
 ```rust,noplaypen
-fn get_memory_type_index(
+unsafe fn get_memory_type_index(
     instance: &Instance,
     data: &AppData,
     properties: vk::MemoryPropertyFlags,
@@ -189,7 +191,7 @@ The first two parameters are self-explanatory and the third parameter is the off
 Of course, just like dynamic memory allocation in C, the memory should be freed at some point. Memory that is bound to a buffer object may be freed once the buffer is no longer used, so let's free it after the buffer has been destroyed:
 
 ```rust,noplaypen
-fn destroy(&mut self) {
+unsafe fn destroy(&mut self) {
     self.destroy_swapchain();
     self.device.destroy_buffer(self.data.vertex_buffer, None);
     self.device.free_memory(self.data.vertex_buffer_memory, None);
@@ -221,7 +223,7 @@ use std::ptr::copy_nonoverlapping as memcpy;
 Now we can copy the vertex data into the buffer memory and then unmap it again using `unmap_memory`.
 
 ```rust,noplaypen
-unsafe { memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len()) };
+memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len());
 device.unmap_memory(data.vertex_buffer_memory);
 ```
 

@@ -23,7 +23,7 @@ It's a bit of work, but it'll teach you a lot about how resources are shared bet
 Because we're going to create multiple buffers in this chapter, it's a good idea to move buffer creation to a helper function. Create a new function `^create_buffer` and move the code in `create_vertex_buffer` (except mapping) to it.
 
 ```rust,noplaypen
-fn create_buffer(
+unsafe fn create_buffer(
     instance: &Instance,
     device: &Device,
     data: &AppData,
@@ -62,7 +62,7 @@ Make sure to add parameters for the buffer size, usage and memory properties so 
 You can now remove the buffer creation and memory allocation code from `create_vertex_buffer` and just call `^create_buffer` instead:
 
 ```rust,noplaypen
-fn create_vertex_buffer(
+unsafe fn create_vertex_buffer(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -88,7 +88,7 @@ fn create_vertex_buffer(
         vk::MemoryMapFlags::empty(),
     )?;
 
-    unsafe { memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len()) };
+    memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len());
 
     device.unmap_memory(vertex_buffer_memory);
 
@@ -103,7 +103,7 @@ Run your program to make sure that the vertex buffer still works properly.
 We're now going to change `create_vertex_buffer` to only use a host visible buffer as temporary buffer and use a device local one as actual vertex buffer.
 
 ```rust,noplaypen
-fn create_vertex_buffer(
+unsafe fn create_vertex_buffer(
     instance: &Instance,
     device: &Device,
     data: &mut AppData,
@@ -126,7 +126,7 @@ fn create_vertex_buffer(
         vk::MemoryMapFlags::empty(),
     )?;
 
-    unsafe { memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len()) };
+    memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len());
 
     device.unmap_memory(staging_buffer_memory);
 
@@ -156,7 +156,7 @@ The `vertex_buffer` is now allocated from a memory type that is device local, wh
 We're now going to write a function to copy the contents from one buffer to another, called `copy_buffer`.
 
 ```rust,noplaypen
-fn copy_buffer(
+unsafe fn copy_buffer(
     device: &Device,
     data: &AppData,
     source: vk::Buffer,
@@ -170,7 +170,7 @@ fn copy_buffer(
 Memory transfer operations are executed using command buffers, just like drawing commands. Therefore we must first allocate a temporary command buffer. You may wish to create a separate command pool for these kinds of short-lived buffers, because the implementation may be able to apply memory allocation optimizations. You should use the `vk::CommandPoolCreateFlags::TRANSIENT` flag during command pool generation in that case.
 
 ```rust,noplaypen
-fn copy_buffer(
+unsafe fn copy_buffer(
     device: &Device,
     data: &AppData,
     source: vk::Buffer,
