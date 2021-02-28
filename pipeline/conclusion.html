@@ -200,7 +200,7 @@ let info = vk::GraphicsPipelineCreateInfo::builder()
 <p>The <code>create_graphics_pipelines</code> function actually has more parameters than the usual object creation functions in Vulkan. It is designed to take multiple <code>vk::GraphicsPipelineCreateInfo</code> objects and create multiple <code>vk::Pipeline</code> objects in a single call.</p>
 <p>The first parameter, for which we've passed the <code>vk::PipelineCache::null()</code> argument, references an optional <code>vk::PipelineCache</code> object. A pipeline cache can be used to store and reuse data relevant to pipeline creation across multiple calls to <code>create_graphics_pipelines</code> and even across program executions if the cache is stored to a file. This makes it possible to significantly speed up pipeline creation at a later time.</p>
 <p>The graphics pipeline is required for all common drawing operations, so it should also only be destroyed at the end of the program in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.device.destroy_pipeline(self.data.pipeline, None);
     // ...
 }

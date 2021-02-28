@@ -157,14 +157,16 @@
 <p>Buffers in Vulkan are regions of memory used for storing arbitrary data that can be read by the graphics card. They can be used to store vertex data, which we'll do in this chapter, but they can also be used for many other purposes that we'll explore in future chapters. Unlike the Vulkan objects we've been dealing with so far, buffers do not automatically allocate memory for themselves. The work from the previous chapters has shown that the Vulkan API puts the programmer in control of almost everything and memory management is one of those things.</p>
 <h2><a class="header" href="#buffer-creation" id="buffer-creation">Buffer creation</a></h2>
 <p>Create a new function <code>create_vertex_buffer</code> and call it from <code>App::create</code> right before <code>create_command_buffers</code>.</p>
-<pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
-    // ...
-    create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;
-    create_command_buffers(&amp;device, &amp;mut data)?;
-    // ...
+<pre><code class="language-rust noplaypen">impl App {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;
+        create_command_buffers(&amp;device, &amp;mut data)?;
+        // ...
+    }
 }
 
-fn create_vertex_buffer(
+unsafe fn create_vertex_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -192,7 +194,7 @@ fn create_vertex_buffer(
 }
 </code></pre>
 <p>Next add the call to <code>create_buffer</code>:</p>
-<pre><code class="language-rust noplaypen">fn create_vertex_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn create_vertex_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -208,7 +210,7 @@ fn create_vertex_buffer(
 }
 </code></pre>
 <p>The buffer should be available for use in rendering commands until the end of the program and it does not depend on the swapchain, so we'll clean it up in the original <code>App::destroy</code> method:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_buffer(self.data.vertex_buffer, None);
     // ...
@@ -225,7 +227,7 @@ fn create_vertex_buffer(
 <li><code>memory_type_bits</code> – Bit field of the memory types that are suitable for the buffer.</li>
 </ul>
 <p>Graphics cards can offer different types of memory to allocate from. Each type of memory varies in terms of allowed operations and performance characteristics. We need to combine the requirements of the buffer and our own application requirements to find the right type of memory to use. Let's create a new function <code>get_memory_type_index</code> for this purpose.</p>
-<pre><code class="language-rust noplaypen">fn get_memory_type_index(
+<pre><code class="language-rust noplaypen">unsafe fn get_memory_type_index(
     instance: &amp;Instance,
     data: &amp;AppData,
     properties: vk::MemoryPropertyFlags,
@@ -280,7 +282,7 @@ fn create_vertex_buffer(
 </code></pre>
 <p>The first two parameters are self-explanatory and the third parameter is the offset within the region of memory. Since this memory is allocated specifically for this the vertex buffer, the offset is simply <code>0</code>. If the offset is non-zero, then it is required to be divisible by <code>requirements.alignment</code>.</p>
 <p>Of course, just like dynamic memory allocation in C, the memory should be freed at some point. Memory that is bound to a buffer object may be freed once the buffer is no longer used, so let's free it after the buffer has been destroyed:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_buffer(self.data.vertex_buffer, None);
     self.device.free_memory(self.data.vertex_buffer_memory, None);
@@ -301,7 +303,7 @@ fn create_vertex_buffer(
 <pre><code class="language-rust noplaypen">use std::ptr::copy_nonoverlapping as memcpy;
 </code></pre>
 <p>Now we can copy the vertex data into the buffer memory and then unmap it again using <code>unmap_memory</code>.</p>
-<pre><code class="language-rust noplaypen">unsafe { memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len()) };
+<pre><code class="language-rust noplaypen">memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len());
 device.unmap_memory(data.vertex_buffer_memory);
 </code></pre>
 <p>Unfortunately the driver may not immediately copy the data into the buffer memory, for example because of caching. It is also possible that writes to the buffer are not visible in the mapped memory yet. There are two ways to deal with that problem:</p>

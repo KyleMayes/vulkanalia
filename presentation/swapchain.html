@@ -164,7 +164,7 @@
 <pre><code class="language-rust noplaypen">const DEVICE_EXTENSIONS: &amp;[vk::ExtensionName] = &amp;[vk::KHR_SWAPCHAIN_EXTENSION.name];
 </code></pre>
 <p>Next, create a new function <code>check_physical_device_extensions</code> that is called from <code>check_physical_device</code> as an additional check:</p>
-<pre><code class="language-rust noplaypen">fn check_physical_device(
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
@@ -174,7 +174,7 @@
     Ok(extensions)
 }
 
-fn check_physical_device_extensions(
+unsafe fn check_physical_device_extensions(
     instance: &amp;Instance,
     physical_device: vk::PhysicalDevice,
 ) -&gt; Result&lt;bool&gt; {
@@ -182,7 +182,7 @@ fn check_physical_device_extensions(
 }
 </code></pre>
 <p>Modify the body of the function to enumerate the extensions and check if all of the required extensions are amongst them.</p>
-<pre><code class="language-rust noplaypen">fn check_physical_device_extensions(
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device_extensions(
     instance: &amp;Instance,
     physical_device: vk::PhysicalDevice,
 ) -&gt; Result&lt;bool&gt; {
@@ -227,7 +227,7 @@ struct SwapchainSupport {
 </code></pre>
 <p>We'll now create a new method <code>SwapchainSupport::get</code> that will initialize this struct with all of the structs we need.</p>
 <pre><code class="language-rust noplaypen">impl SwapchainSupport {
-    fn get(
+    unsafe fn get(
         instance: &amp;Instance,
         data: &amp;AppData,
         physical_device: vk::PhysicalDevice,
@@ -349,7 +349,7 @@ let swapchain = !support.formats.is_empty() &amp;&amp; !support.present_modes.is
 <p>Now that we have all of these helper functions assisting us with the choices we have to make at runtime, we finally have all the information that is needed to create a working swapchain.</p>
 <p>Create a <code>create_swapchain</code> function that starts out with the results of these calls and make sure to call it from <code>App::create</code> after logical device creation.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         let device = create_logical_device(&amp;instance, &amp;mut data)?;
         create_swapchain(window, &amp;instance, &amp;device, &amp;mut data)?;
@@ -357,7 +357,7 @@ let swapchain = !support.formats.is_empty() &amp;&amp; !support.present_modes.is
     }
 }
 
-fn create_swapchain(
+unsafe fn create_swapchain(
     window: &amp;Window,
     instance: &amp;Instance,
     device: &amp;Device,
@@ -443,7 +443,7 @@ let image_sharing_mode = if indices.graphics != indices.present {
 <pre><code class="language-rust noplaypen">data.swapchain = device.create_swapchain_khr(&amp;info, None)?;
 </code></pre>
 <p>The parameters are the swapchain creation info and optional custom allocators. No surprises there. It should be cleaned up in <code>App::destroy</code> before the device:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.device.destroy_swapchain_khr(self.data.swapchain, None);
     // ...
 }

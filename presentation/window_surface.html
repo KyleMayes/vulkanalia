@@ -154,8 +154,8 @@
                     <main>
                         <h1><a class="header" href="#window-surface" id="window-surface">Window surface</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/05_window_surface.rs">main.rs</a></p>
-<p>Since Vulkan is a platform agnostic API, it can not interface directly with the window system on its own. To establish the connection between Vulkan and the window system to present results to the screen, we need to use the WSI (Window System Integration) extensions. In this chapter we'll discuss the first one, which is <code>VK_KHR_surface</code>. It exposes a <code>vk::SurfaceKHR</code> object that represents an abstract type of surface to present rendered images to. The surface in our program will be backed by the window that we've already opened with <code>winit</code>.</p>
-<p>The <code>VK_KHR_surface</code> extension is an instance level extension and we've actually already enabled it, because it's included in the list returned by <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/window/fn.get_required_instance_extensions.html"><code class="hljs">vk_window::get_required_instance_extensions</code></a>. The list also includes some other WSI extensions that we'll use in the next couple of chapters.</p>
+<p>Since Vulkan is a platform agnostic API, it can't interface directly with the window system on its own. To establish the connection between Vulkan and the window system to present results to the screen, we need to use the WSI (Window System Integration) extensions. In this chapter we'll discuss the first one, which is <code>VK_KHR_surface</code>. It exposes a <code>vk::SurfaceKHR</code> object that represents an abstract type of surface to present rendered images to. The surface in our program will be backed by the window that we've already opened with <code>winit</code>.</p>
+<p>The <code>VK_KHR_surface</code> extension is an instance level extension and we've actually already enabled it, because it's included in the list returned by <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/window/fn.get_required_instance_extensions.html"><code class="hljs">vk_window::get_required_instance_extensions</code></a>. The list also includes some other WSI extensions that we'll use in the next couple of chapters.</p>
 <p>The window surface needs to be created right after the instance creation, because it can actually influence the physical device selection. The reason we postponed this is because window surfaces are part of the larger topic of render targets and presentation for which the explanation would have cluttered the basic setup. It should also be noted that window surfaces are an entirely optional component in Vulkan, if you just need off-screen rendering. Vulkan allows you to do that without hacks like creating an invisible window (necessary for OpenGL).</p>
 <p>While we can freely import types for extensions like the struct <code>vk::SurfaceKHR</code>, we need to import the <code>vulkanalia</code> extension trait for <code>VK_KHR_surface</code> before we can call any of the Vulkan commands added by the extension. Add the following import for <code>vk::KhrSurfaceExtension</code>:</p>
 <pre><code class="language-rust noplaypen">use vulkanalia::vk::KhrSurfaceExtension;
@@ -167,8 +167,8 @@
     // ...
 }
 </code></pre>
-<p>Although the <code>vk::SurfaceKHR</code> object and its usage is platform agnostic, its creation isn't because it depends on window system details. For example, it needs the <code>HWND</code> and <code>HMODULE</code> handles on Windows. Therefore there is a platform-specific addition to the extension, which on Windows is called <code>VK_KHR_win32_surface</code> and is also automatically included in the list from <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/window/fn.get_required_instance_extensions.html"><code class="hljs">vk_window::get_required_instance_extensions</code></a>.</p>
-<p>I will demonstrate how this platform specific extension can be used to create a surface on Windows, but we won't actually use it in this tutorial. <code>vulkanalia</code> has <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/window/fn.create_surface.html"><code class="hljs">vk_window::create_surface</code></a> that handles the platform differences for us. Still, it's good to see what it does behind the scenes before we start relying on it.</p>
+<p>Although the <code>vk::SurfaceKHR</code> object and its usage is platform agnostic, its creation isn't because it depends on window system details. For example, it needs the <code>HWND</code> and <code>HMODULE</code> handles on Windows. Therefore there is a platform-specific addition to the extension, which on Windows is called <code>VK_KHR_win32_surface</code> and is also automatically included in the list from <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/window/fn.get_required_instance_extensions.html"><code class="hljs">vk_window::get_required_instance_extensions</code></a>.</p>
+<p>I will demonstrate how this platform specific extension can be used to create a surface on Windows, but we won't actually use it in this tutorial. <code>vulkanalia</code> has <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/window/fn.create_surface.html"><code class="hljs">vk_window::create_surface</code></a> that handles the platform differences for us. Still, it's good to see what it does behind the scenes before we start relying on it.</p>
 <p>Because a window surface is a Vulkan object, it comes with a <code>vk::Win32SurfaceCreateInfoKHR</code> struct that needs to be filled in. It has two important parameters: <code>hinstance</code> and <code>hwnd</code>. These are the handles to the process and the window.</p>
 <pre><code class="language-rust noplaypen">use winit::platform::windows::WindowExtWindows;
 
@@ -183,17 +183,17 @@ let info = vk::Win32SurfaceCreateInfoKHR::builder()
 let surface = instance.create_win32_surface_khr(&amp;info, None).unwrap();
 </code></pre>
 <p>The process is similar for other platforms like Linux, where <code>create_xcb_surface_khr</code> takes an XCB connection and window as creation details with X11.</p>
-<p>The <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/window/fn.create_surface.html"><code class="hljs">vk_window::create_surface</code></a> function performs exactly this operation with a different implementation for each platform. We'll now integrate it into our program. Add a call to the function in <code>App::create</code> right before we pick a physical device.</p>
-<pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+<p>The <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/window/fn.create_surface.html"><code class="hljs">vk_window::create_surface</code></a> function performs exactly this operation with a different implementation for each platform. We'll now integrate it into our program. Add a call to the function in <code>App::create</code> right before we pick a physical device.</p>
+<pre><code class="language-rust noplaypen">unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
     // ...
-    let mut data = AppData::default();
+    let instance = create_instance(window, &amp;entry, &amp;mut data)?;
     data.surface = vk_window::create_surface(&amp;instance, window)?;
     pick_physical_device(&amp;instance, &amp;mut data)?;
     // ...
 }
 </code></pre>
 <p>The parameters are the Vulkan instance and the <code>winit</code> window. Once we have our surface, it can be destroyed in <code>App::destroy</code> using the Vulkan API:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     // ...
     self.instance.destroy_surface_khr(self.data.surface, None);
     self.instance.destroy_instance(None);

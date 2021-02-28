@@ -165,7 +165,7 @@
 </code></pre>
 <p>Create the <code>create_swapchain_image_views</code> function and call it right after swapchain creation in <code>App::create</code>.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_swapchain(window, &amp;instance, &amp;device, &amp;mut data)?;
         create_swapchain_image_views(&amp;device, &amp;mut data)?;
@@ -173,12 +173,18 @@
     }
 }
 
-fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_swapchain_image_views(
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
 <p>What we next need to do is iterate over the swapchain images to create an image view for each:</p>
-<pre><code class="language-rust noplaypen">fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_swapchain_image_views(
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
     data.swapchain_image_views = data
         .swapchain_images
         .iter()
@@ -219,7 +225,7 @@ fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&g
 <pre><code class="language-rust noplaypen">device.create_image_view(&amp;info, None)
 </code></pre>
 <p>Unlike images, the image views were explicitly created by us, so we need to add a similar loop to destroy them again in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.data.swapchain_image_views
         .iter()
         .for_each(|v| self.device.destroy_image_view(*v, None));

@@ -168,7 +168,7 @@
 <p>It's a bit of work, but it'll teach you a lot about how resources are shared between queue families.</p>
 <h2><a class="header" href="#abstracting-buffer-creation" id="abstracting-buffer-creation">Abstracting buffer creation</a></h2>
 <p>Because we're going to create multiple buffers in this chapter, it's a good idea to move buffer creation to a helper function. Create a new function <code>create_buffer</code> and move the code in <code>create_vertex_buffer</code> (except mapping) to it.</p>
-<pre><code class="language-rust noplaypen">fn create_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn create_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;AppData,
@@ -203,7 +203,7 @@
 </code></pre>
 <p>Make sure to add parameters for the buffer size, usage and memory properties so that we can use this function to create many different types of buffers.</p>
 <p>You can now remove the buffer creation and memory allocation code from <code>create_vertex_buffer</code> and just call <code>create_buffer</code> instead:</p>
-<pre><code class="language-rust noplaypen">fn create_vertex_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn create_vertex_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -229,7 +229,7 @@
         vk::MemoryMapFlags::empty(),
     )?;
 
-    unsafe { memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len()) };
+    memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len());
 
     device.unmap_memory(vertex_buffer_memory);
 
@@ -239,7 +239,7 @@
 <p>Run your program to make sure that the vertex buffer still works properly.</p>
 <h2><a class="header" href="#using-a-staging-buffer" id="using-a-staging-buffer">Using a staging buffer</a></h2>
 <p>We're now going to change <code>create_vertex_buffer</code> to only use a host visible buffer as temporary buffer and use a device local one as actual vertex buffer.</p>
-<pre><code class="language-rust noplaypen">fn create_vertex_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn create_vertex_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -262,7 +262,7 @@
         vk::MemoryMapFlags::empty(),
     )?;
 
-    unsafe { memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len()) };
+    memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len());
 
     device.unmap_memory(staging_buffer_memory);
 
@@ -288,7 +288,7 @@
 </ul>
 <p>The <code>vertex_buffer</code> is now allocated from a memory type that is device local, which generally means that we're not able to use <code>map_memory</code>. However, we can copy data from the <code>staging_buffer</code> to the <code>vertex_buffer</code>. We have to indicate that we intend to do that by specifying the transfer source flag for the <code>staging_buffer</code> and the transfer destination flag for the <code>vertex_buffer</code>, along with the vertex buffer usage flag.</p>
 <p>We're now going to write a function to copy the contents from one buffer to another, called <code>copy_buffer</code>.</p>
-<pre><code class="language-rust noplaypen">fn copy_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn copy_buffer(
     device: &amp;Device,
     data: &amp;AppData,
     source: vk::Buffer,
@@ -299,7 +299,7 @@
 }
 </code></pre>
 <p>Memory transfer operations are executed using command buffers, just like drawing commands. Therefore we must first allocate a temporary command buffer. You may wish to create a separate command pool for these kinds of short-lived buffers, because the implementation may be able to apply memory allocation optimizations. You should use the <code>vk::CommandPoolCreateFlags::TRANSIENT</code> flag during command pool generation in that case.</p>
-<pre><code class="language-rust noplaypen">fn copy_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn copy_buffer(
     device: &amp;Device,
     data: &amp;AppData,
     source: vk::Buffer,

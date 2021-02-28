@@ -179,7 +179,7 @@ data.mip_levels = (info.width.max(info.height) as f32).log2().floor() as u32 + 1
 </code></pre>
 <p>This calculates the number of levels in the mip chain. The <code>max</code> method selects the largest dimension. The <code>log2</code> method calculates how many times that dimension can be divided by 2. The <code>floor</code> method handles cases where the largest dimension is not a power of 2. <code>1</code> is added so that the original image has a mip level.</p>
 <p>To use this value, we need to change the <code>create_image</code>, <code>create_image_view</code>, and <code>transition_image_layout</code> functions to allow us to specify the number of mip levels. Add a <code>mip_levels</code> parameter to the functions:</p>
-<pre><code class="language-rust noplaypen">fn create_image(
+<pre><code class="language-rust noplaypen">unsafe fn create_image(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;AppData,
@@ -199,7 +199,7 @@ data.mip_levels = (info.width.max(info.height) as f32).log2().floor() as u32 + 1
     // ...
 }
 </code></pre>
-<pre><code class="language-rust noplaypen">fn create_image_view(
+<pre><code class="language-rust noplaypen">unsafe fn create_image_view(
     device: &amp;Device,
     image: vk::Image,
     format: vk::Format,
@@ -214,7 +214,7 @@ data.mip_levels = (info.width.max(info.height) as f32).log2().floor() as u32 + 1
     // ...
 }
 </code></pre>
-<pre><code class="language-rust noplaypen">fn transition_image_layout(
+<pre><code class="language-rust noplaypen">unsafe fn transition_image_layout(
     device: &amp;Device,
     data: &amp;AppData,
     image: vk::Image,
@@ -334,7 +334,7 @@ transition_image_layout(
 <p><code>transition_image_layout</code> only performs layout transitions on the entire image, so we'll need to write a few more pipeline barrier commands. Remove the existing transition to <code>vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL</code> in <code>create_texture_image</code>.</p>
 <p>This will leave each level of the texture image in <code>vk::ImageLayout::TRANSFER_DST_OPTIMAL</code>. Each level will be transitioned to <code>vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL</code> after the blit command reading from it is finished.</p>
 <p>We're now going to write the function that generates the mipmaps:</p>
-<pre><code class="language-rust noplaypen">fn generate_mipmaps(
+<pre><code class="language-rust noplaypen">unsafe fn generate_mipmaps(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;AppData,
@@ -505,7 +505,7 @@ end_single_time_commands(device, data, command_buffer)?;
 
 // ...
 
-fn generate_mipmaps(
+unsafe fn generate_mipmaps(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;AppData,
@@ -556,7 +556,7 @@ let color = if mipmap_mode == vk::SamplerMipmapMode::NEAREST {
 </code></pre>
 <p>If the object is close to the camera, <code>mag_filter</code> is used as the filter. If the object is further from the camera, <code>min_filter</code> is used. Normally, <code>lod</code> is non-negative, and is only 0 when close the camera. <code>mip_lod_bias</code> lets us force Vulkan to use lower <code>lod</code> and <code>level</code> than it would normally use.</p>
 <p>To see the results of this chapter, we need to choose values for our <code>texture_sampler</code>. We've already set the <code>min_filter</code> and <code>mag_filter</code> to use <code>vk::Filter::LINEAR</code>. We just need to choose values for <code>min_lod</code>, <code>max_lod</code>, <code>mip_lod_bias</code>, and <code>mipmap_mode</code>.</p>
-<pre><code class="language-rust noplaypen">fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     let info = vk::SamplerCreateInfo::builder()
         // ...
         .mipmap_mode(vk::SamplerMipmapMode::LINEAR)

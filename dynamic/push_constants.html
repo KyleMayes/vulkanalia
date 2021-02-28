@@ -234,7 +234,7 @@ data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
 <p>With all that in place, we can actually start pushing the model matrix to the vertex shader. Push constants are recorded directly into the command buffers submitted to the GPU which is both why they are so fast and why their size is so limited.</p>
 <p>In the <code>create_command_buffers</code> function, define a model matrix and use <code>cmd_push_constants</code> to add it to the the command buffers as a push constant right before we record the draw command.</p>
 <pre><code class="language-rust noplaypen">let model = glm::rotate(&amp;glm::identity(), 0.0f32, &amp;glm::vec3(0.0, 0.0, 1.0));
-let (_, model_bytes, _) = unsafe { model.as_slice().align_to::&lt;u8&gt;() };
+let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
 
 for (i, command_buffer) in data.command_buffers.iter().enumerate() {
     // ...

@@ -156,7 +156,7 @@
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/11_render_passes.rs">main.rs</a></p>
 <p>Before we can finish creating the pipeline, we need to tell Vulkan about the framebuffer attachments that will be used while rendering. We need to specify how many color and depth buffers there will be, how many samples to use for each of them and how their contents should be handled throughout the rendering operations. All of this information is wrapped in a <em>render pass</em> object, for which we'll create a new <code>create_render_pass</code> function. Call this function from <code>App::create</code> before <code>create_pipeline</code>.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_render_pass(&amp;instance, &amp;device, &amp;mut data)?;
         create_pipeline(&amp;device, &amp;mut data)?;
@@ -164,7 +164,7 @@
     }
 }
 
-fn create_render_pass(
+unsafe fn create_render_pass(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -252,7 +252,7 @@ let info = vk::RenderPassCreateInfo::builder()
 data.render_pass = device.create_render_pass(&amp;info, None)?;
 </code></pre>
 <p>Just like the pipeline layout, the render pass will be referenced throughout the program, so it should only be cleaned up at the end in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
     self.device.destroy_render_pass(self.data.render_pass, None);
     // ...

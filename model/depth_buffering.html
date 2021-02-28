@@ -270,7 +270,7 @@ const INDICES: &amp;[u16] = &amp;[
 </code></pre>
 <p>Create a new function <code>create_depth_objects</code> to set up these resources:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_command_pool(&amp;instance, &amp;device, &amp;mut data)?;
         create_depth_objects(&amp;instance, &amp;device, &amp;mut data)?;
@@ -278,7 +278,7 @@ const INDICES: &amp;[u16] = &amp;[
     }
 }
 
-fn create_depth_objects(
+unsafe fn create_depth_objects(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -295,7 +295,7 @@ fn create_depth_objects(
 </ul>
 <p>The stencil component is used for <a href="https://en.wikipedia.org/wiki/Stencil_buffer">stencil tests</a>, which is an additional test that can be combined with depth testing. We'll look at this in a future chapter.</p>
 <p>We could simply go for the <code>vk::Format::D32_SFLOAT</code> format, because support for it is extremely common (see the hardware database), but it's nice to add some extra flexibility to our application where possible. We're going to write a <code>get_supported_format</code> function that takes a list of candidate formats in order from most desirable to least desirable and returns the first that satisfies our requirements:</p>
-<pre><code class="language-rust noplaypen">fn get_supported_format(
+<pre><code class="language-rust noplaypen">unsafe fn get_supported_format(
     instance: &amp;Instance,
     data: &amp;AppData,
     candidates: &amp;[vk::Format],
@@ -331,7 +331,7 @@ fn create_depth_objects(
 }
 </code></pre>
 <p>We'll use this function now to create a <code>get_depth_format</code> helper function to select a format with a depth component that supports usage as depth attachment:</p>
-<pre><code class="language-rust noplaypen">fn get_depth_format(instance: &amp;Instance, data: &amp;AppData) -&gt; Result&lt;vk::Format&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn get_depth_format(instance: &amp;Instance, data: &amp;AppData) -&gt; Result&lt;vk::Format&gt; {
     let candidates = &amp;[
         vk::Format::D32_SFLOAT,
         vk::Format::D32_SFLOAT_S8_UINT,
@@ -371,7 +371,7 @@ data.depth_image_memory = depth_image_memory;
 data.depth_image_view = create_image_view(device, data.depth_image, format)?;
 </code></pre>
 <p>However, the <code>create_image_view</code> function currently assumes that the subresource always uses <code>vk::ImageAspectFlags::COLOR</code>, so we will need to turn that field into a parameter:</p>
-<pre><code class="language-rust noplaypen">fn create_image_view(
+<pre><code class="language-rust noplaypen">unsafe fn create_image_view(
     device: &amp;Device,
     image: vk::Image,
     format: vk::Format,
@@ -514,7 +514,7 @@ let create_info = vk::FramebufferCreateInfo::builder()
 </code></pre>
 <p>The color attachment differs for every swapchain image, but the same depth image can be used by all of them because only a single subpass is running at the same time due to our semaphores.</p>
 <p>You'll also need to move the call to <code>create_framebuffers</code> to make sure that it is called after the depth image view has actually been created:</p>
-<pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
     // ...
     create_depth_objects(&amp;instance, &amp;device, &amp;mut data)?;
     create_framebuffers(&amp;device, &amp;mut data)?;
@@ -579,7 +579,7 @@ let clear_values = &amp;[color_clear_value, depth_clear_value];
 <p><img src="../images/depth_correct.png" alt="" /></p>
 <h2><a class="header" href="#handling-window-resize" id="handling-window-resize">Handling window resize</a></h2>
 <p>The resolution of the depth buffer should change when the window is resized to match the new color attachment resolution. Extend the <code>App::recreate_swapchain</code> method to recreate the depth resources in that case:</p>
-<pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     self.device.device_wait_idle()?;
     self.destroy_swapchain();
     create_swapchain(window, &amp;self.instance, &amp;self.device, &amp;mut self.data)?;
@@ -596,7 +596,7 @@ let clear_values = &amp;[color_clear_value, depth_clear_value];
 }
 </code></pre>
 <p>The cleanup operations should happen in the swapchain cleanup function:</p>
-<pre><code class="language-rust noplaypen">fn destroy_swapchain(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy_swapchain(&amp;mut self) {
     self.device.destroy_image_view(self.data.depth_image_view, None);
     self.device.free_memory(self.data.depth_image_memory, None);
     self.device.destroy_image(self.data.depth_image, None);

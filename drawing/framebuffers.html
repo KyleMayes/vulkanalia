@@ -164,7 +164,7 @@
 </code></pre>
 <p>We'll create the objects for this array in a new function <code>create_framebuffers</code> that is called from <code>App::create</code> right after creating the graphics pipeline:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_pipeline(&amp;device, &amp;mut data)?;
         create_framebuffers(&amp;device, &amp;mut data)?;
@@ -172,12 +172,12 @@
     }
 }
 
-fn create_framebuffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_framebuffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
 <p>Start by mapping over the swapchain image views:</p>
-<pre><code class="language-rust noplaypen">fn create_framebuffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_framebuffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     data.framebuffers = data
         .swapchain_image_views
         .iter()
@@ -204,7 +204,7 @@ device.create_framebuffer(&amp;create_info, None)
 <p>The <code>attachments</code> field specifies the <code>vk::ImageView</code> objects that should be bound to the respective attachment descriptions in the render pass <code>attachment</code> array.</p>
 <p>The <code>width</code> and <code>height</code> parameters are self-explanatory and <code>layers</code> refers to the number of layers in image arrays. Our swapchain images are single images, so the number of layers is <code>1</code>.</p>
 <p>We should delete the framebuffers before the image views and render pass that they are based on, but only after we've finished rendering:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.data.framebuffers
         .iter()
         .for_each(|f| self.device.destroy_framebuffer(*f, None));

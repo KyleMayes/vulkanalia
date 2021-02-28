@@ -175,12 +175,12 @@
 data.command_pool = device.create_command_pool(&amp;info, None)?;
 </code></pre>
 <p>Next, create a new method for the <code>App</code> struct, <code>update_command_buffer</code>. This method will be called each frame to reset and rerecord the command buffer for the framebuffer that will be used for the current frame.</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
 <p>Call the new method from the <code>render</code> method right before the uniform buffers for the frame are updated (or after, the order of these two statements is not important).</p>
-<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     // ...
 
     self.update_command_buffer(image_index)?;
@@ -191,7 +191,7 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
 </code></pre>
 <p>Note that we do need to be careful about when we call <code>update_command_buffer</code>. This method will reset the command buffer which could cause serious issues if the command buffer is still being used to render a previously submitted frame. This issue was also discussed in the <a href="../uniform/descriptor_layout_and_buffer.html#updating-uniform-data"><code>Descriptor layout and buffer</code> chapter</a> which is why the call to <code>App::update_uniform_buffer</code> is where it is. As discussed in more detail in that chapter, both of these calls only happen after the call to <code>wait_for_fences</code> which waits for the GPU to be done with the acquired swapchain image and its associated resources so we are safe to do whatever we want with the command buffer.</p>
 <p>In the new method, reset the command buffer with <code>reset_command_buffer</code>.</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     let command_buffer = self.data.command_buffers[image_index];
 
     self.device.reset_command_buffer(
@@ -204,11 +204,11 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
 </code></pre>
 <p>Once <code>reset_command_buffer</code> has returned, the command buffer will be reset to its initial state, no different than a new command buffer freshly allocated from a command pool.</p>
 <p>Now we can move the command buffer recording code out of <code>create_command_buffers</code> and into <code>update_command_buffer</code>. The loop over the command buffers is no longer necessary since we are only recording one command buffer per frame. Other than that, only a few mechanical changes are needed to migrate this code to our new method (e.g., replacing references to the loop counter <code>i</code> with <code>image_index</code>).</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     // ...
 
     let model = glm::rotate(&amp;glm::identity(), 0.0f32, &amp;glm::vec3(0.0, 0.0, 1.0));
-    let (_, model_bytes, _) = unsafe { model.as_slice().align_to::&lt;u8&gt;() };
+    let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
 
     let info = vk::CommandBufferBeginInfo::builder();
 
@@ -278,7 +278,7 @@ let model = glm::rotate(
     &amp;glm::vec3(0.0, 0.0, 1.0),
 );
 
-let (_, model_bytes, _) = unsafe { model.as_slice().align_to::&lt;u8&gt;() };
+let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
 </code></pre>
 <p>Run the program to see that the model should now be back to rotating now that we are pushing an updated model matrix to the shaders every frame.</p>
 <p><img src="../images/spinning_ghost_model.png" alt="" /></p>
@@ -292,7 +292,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 <h3><a class="header" href="#2-reallocating-command-buffers" id="2-reallocating-command-buffers">2. Reallocating command buffers</a></h3>
 <p>Next we'll take a look at allocating new command buffers each frame.</p>
 <p>Replace the code used to reset the command buffer at the beginning of <code>update_command_buffer</code> with code that replaces the previous command buffer with a new command buffer.</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     let allocate_info = vk::CommandBufferAllocateInfo::builder()
         .command_pool(self.data.command_pool)
         .level(vk::CommandBufferLevel::PRIMARY)
@@ -306,7 +306,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 </code></pre>
 <p>You could now run the program and see that the program works exactly like it did before, but if you do don't leave it running for too long! You may have already noticed that we aren't freeing the previous command buffer before we allocate a new one. If you observe the memory usage of our program after this change you'll see the memory usage start rising alarmingly fast as we rapidly collect thousands of derelict command buffers that are never recycled.</p>
 <p>Return the memory used by the previous command buffer to the command pool by freeing it at the beginning of <code>update_command_buffer</code>.</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     let previous = self.data.command_buffers[image_index];
     if !previous.is_null() {
         self.device.free_command_buffers(self.data.command_pool, &amp;[previous]);
@@ -317,7 +317,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 </code></pre>
 <p>Now when you run the program you should see stable memory usage instead of the program trying to gobble up all of the RAM on your system as if it thinks it's an Electron application.</p>
 <p>The <code>!previous.is_null()</code> check in the above code isn't currently necessary, but it allows us to skip the now useless allocation of command buffers in <code>create_command_buffers</code> by instead creating a <code>Vec</code> of null command buffers.</p>
-<pre><code class="language-rust noplaypen">fn create_command_buffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_command_buffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     data.command_buffers = vec![vk::CommandBuffer::null(); data.framebuffers.len()];
 
     Ok(())
@@ -341,7 +341,7 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
 <p>To put these questions on hold for a bit (well maybe not the last one), a sneak preview of the next chapter is that it will involve multiple managing multiple command buffers per frame rather than the single command buffer per frame we've been working with so far. Then it will become simpler, and probably faster, to deallocate all of these command buffers in one go by resetting the command pool instead of deallocating them individually.</p>
 <p>We are going to leave the current command pool in place since it will be used for allocating command buffers during initialization. Add a field to <code>AppData</code> to hold one command pool per framebuffer and rename the existing <code>create_command_pool</code> function to <code>create_command_pools</code> to reflect its increased responsibilities.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_command_pools(&amp;instance, &amp;device, &amp;mut data)?;
         // ...
@@ -355,7 +355,7 @@ struct AppData {
     // ...
 }
 
-fn create_command_pools(
+unsafe fn create_command_pools(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -364,7 +364,7 @@ fn create_command_pools(
 }
 </code></pre>
 <p>Create a new <code>create_command_pool</code> function which will be used to create a command pool for short-lived command buffers that can be submitted to graphics queues.</p>
-<pre><code class="language-rust noplaypen">fn create_command_pool(
+<pre><code class="language-rust noplaypen">unsafe fn create_command_pool(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -379,7 +379,7 @@ fn create_command_pools(
 }
 </code></pre>
 <p>With this function available, we can easily update <code>create_command_pools</code> to create both our existing global command pool and the new per-framebuffer command pools.</p>
-<pre><code class="language-rust noplaypen">fn create_command_pools(
+<pre><code class="language-rust noplaypen">unsafe fn create_command_pools(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -396,7 +396,7 @@ fn create_command_pools(
 }
 </code></pre>
 <p>Update <code>App::update_command_buffer</code> to reset the per-framebuffer command pool instead of deallocating the previous command buffer and be sure to use the per-framebuffer command pool to allocate the new command buffer instead of the global command pool.</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     let command_pool = self.data.command_pools[image_index];
     self.device.reset_command_pool(command_pool, vk::CommandPoolResetFlags::empty())?;
 
@@ -409,7 +409,7 @@ fn create_command_pools(
 }
 </code></pre>
 <p>Run the program now and make sure that our new command buffer recycling strategy still produces the same result as before. If you have the validation layer enabled, you will be reminded while the program is shutting down that we are not cleaning up these new command pools. Update <code>App::destroy</code> to destroy them.</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.data.command_pools
         .iter()

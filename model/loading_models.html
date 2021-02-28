@@ -199,7 +199,7 @@ use std::io::BufReader;
 </code></pre>
 <p>We're now going to write a <code>load_models</code> function that uses this library to populate the <code>vertices</code> and <code>indices</code> fields with the vertex data from the mesh. It should be called somewhere before the vertex and index buffers are created:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         load_model(&amp;mut data)?;
         create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;

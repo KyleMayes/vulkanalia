@@ -250,9 +250,9 @@
 <h2><a class="header" href="#api-concepts" id="api-concepts">API concepts</a></h2>
 <p>The Vulkan API is defined in terms of the C programming language. The canonical version of the Vulkan API is defined in the Vulkan API Registry which is <a href="https://github.com/KhronosGroup/Vulkan-Docs/blob/main/xml/vk.xml">an XML file</a> which serves as a machine readable definition of the Vulkan API.</p>
 <p>The <a href="https://github.com/KhronosGroup/Vulkan-Headers">Vulkan headers</a> that are part of the Vulkan SDK you will be installing in the next chapter are generated from this Vulkan API Registry. However, we will not be using these headers, directly or indirectly, because <code>vulkanalia</code> includes a Rust interface to the Vulkan API generated from the Vulkan API registry that is independent of the C interface provided by the Vulkan SDK.</p>
-<p>The foundation of <code>vulkanalia</code> is the <a href="https://docs.rs/vulkanalia-sys"><code>vulkanalia-sys</code></a> crate which defines the raw types (commands, enums, bitmasks, structs, etc.) defined by the Vulkan API Registry. These raw types are re-exported from the <code>vulkanalia</code> crate in the <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/vk/index.html"><code>vk</code></a> module along with some other items generated from the Vulkan API Registry which serve as the thin wrapper around the Vulkan API previously mentioned in the introduction.</p>
+<p>The foundation of <code>vulkanalia</code> is the <a href="https://docs.rs/vulkanalia-sys"><code>vulkanalia-sys</code></a> crate which defines the raw types (commands, enums, bitmasks, structs, etc.) defined by the Vulkan API Registry. These raw types are re-exported from the <code>vulkanalia</code> crate in the <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/index.html"><code>vk</code></a> module along with some other items generated from the Vulkan API Registry which serve as the thin wrapper around the Vulkan API previously mentioned in the introduction.</p>
 <h3><a class="header" href="#type-names" id="type-names">Type Names</a></h3>
-<p>Because Rust has support for namespaces unlike C, the <code>vulkanalia</code> API omits the parts of Vulkan type names that are used for namespacing purposes in C. More specifically, Vulkan types such as structs, unions, and enums lose their <code>Vk</code> prefix. For example, the <code>VkInstanceCreateInfo</code> struct becomes the <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code>InstanceCreateInfo</code></a> struct in <code>vulkanalia</code> and can be found in the previously mentioned <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/vk/index.html"><code>vk</code></a> module.</p>
+<p>Because Rust has support for namespaces unlike C, the <code>vulkanalia</code> API omits the parts of Vulkan type names that are used for namespacing purposes in C. More specifically, Vulkan types such as structs, unions, and enums lose their <code>Vk</code> prefix. For example, the <code>VkInstanceCreateInfo</code> struct becomes the <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code>InstanceCreateInfo</code></a> struct in <code>vulkanalia</code> and can be found in the previously mentioned <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/index.html"><code>vk</code></a> module.</p>
 <p>Going forward, this tutorial will refer to the Vulkan types defined by <code>vulkanalia</code> using the <code>vk::</code> module prefix to make it clear the type represents something generated from the Vulkan API Registry.</p>
 <p>These type names will each be links to the <code>vulkanalia</code> documentation for the referenced type. The <code>vulkanalia</code> documentation for Vulkan types will also contain a link to the Vulkan specification for the type which you can use to learn more about the purpose and usage of the type.</p>
 <p>A few type name examples:</p>
@@ -310,7 +310,7 @@ std::vector&lt;VkExtensionProperties&gt; pProperties{pPropertyCount};
 vkEnumerateInstanceExtensionProperties(NULL, &amp;pPropertyCount, pProperties.data());
 </code></pre>
 <p>The Rust signature of the wrapper for <code>vkEnumerateInstanceExtensionProperties</code> looks like this:</p>
-<pre><code class="language-rust noplaypen">fn enumerate_instance_extension_properties(
+<pre><code class="language-rust noplaypen">unsafe fn enumerate_instance_extension_properties(
     &amp;self,
     layer_name: Option&lt;&amp;[u8]&gt;,
 ) -&gt; VkResult&lt;Vec&lt;ExtensionProperties&gt;&gt;;
@@ -318,13 +318,14 @@ vkEnumerateInstanceExtensionProperties(NULL, &amp;pPropertyCount, pProperties.da
 <p>This command wrapper makes the usage of <code>vkEnumerateInstanceExtensionProperties</code> from Rust easier, less error-prone, and more idiomatic in several ways:</p>
 <ul>
 <li>The optionality of the <code>layer_name</code> parameter is encoded in the function signature. That this parameter is optional is not captured in the C function signature, one would need to check the Vulkan specification for this information</li>
-<li>The fallibility of the command is modelled by returning a <code>Result</code> (<a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/type.VkResult.html"><code>VkResult&lt;T&gt;</code></a> is a type alias for <code>Result&lt;T, vk::ErrorCode&gt;</code>). This allows us to take advantage of Rust's strong error handling capabilities as well as be warned by the compiler if we neglect to check the result of a fallible command</li>
+<li>The fallibility of the command is modelled by returning a <code>Result</code> (<a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/type.VkResult.html"><code>VkResult&lt;T&gt;</code></a> is a type alias for <code>Result&lt;T, vk::ErrorCode&gt;</code>). This allows us to take advantage of Rust's strong error handling capabilities as well as be warned by the compiler if we neglect to check the result of a fallible command</li>
 <li>The command wrapper handles the three step process described above internally and returns a <code>Vec</code> containing the extension properties</li>
 </ul>
+<p>Note that command wrappers are still <code>unsafe</code> because while <code>vulkanalia</code> can eliminate certain classes of errors (e.g., passing a null layer name to this command), there are still plenty of things that can go horribly wrong and cause fun things like segfaults. You can always check the <code>Valid Usage</code> section of the Vulkan documentation for a command to see the invariants that need to upheld to call that command validly.</p>
 <p>You likely noticed the <code>&amp;self</code> parameter in the above command wrapper. These command wrappers are defined in traits which are implemented for types exposed by <code>vulkanalia</code>. These traits can be separated into two categories: version traits and extension traits. The version traits offer command wrappers for the commands which are a standard part of Vulkan whereas the extension traits offer command wrappers for the commands which are defined as part of Vulkan extensions.</p>
 <p>For example, <code>enumerate_instance_extension_properties</code> is in the <code>vk::EntryV1_0</code> trait since it is a non-extension Vulkan command that is part of Vulkan 1.0 and not dependent on a Vulkan instance or device. A Vulkan command like <code>cmd_draw_indirect_count</code> that was added in Vulkan 1.2 and is dependent on a Vulkan device would be in the <code>vk::DeviceV1_2</code> trait.</p>
 <p><code>vk::KhrSurfaceExtension</code> is an example of an extension trait that we will be using in future chapters to call Vulkan commands like <code>destroy_surface_khr</code> that are defined in the <code>VK_KHR_surface</code> extension.</p>
-<p>These version and extension traits are defined for types which contain both the loaded commands and the required Vulkan instance or device (if any). These types have been lovingly hand-crafted and are not part of the generated Vulkan bindings in the <code>vk</code> module of <code>vulkanalia</code>. They will be used in future chapters and are the <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Entry.html"><code class="hljs">Entry</code></a>, <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a>, and <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Device.html"><code class="hljs">Device</code></a> structs.</p>
+<p>These version and extension traits are defined for types which contain both the loaded commands and the required Vulkan instance or device (if any). These types have been lovingly hand-crafted and are not part of the generated Vulkan bindings in the <code>vk</code> module of <code>vulkanalia</code>. They will be used in future chapters and are the <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Entry.html"><code class="hljs">Entry</code></a>, <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a>, and <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Device.html"><code class="hljs">Device</code></a> structs.</p>
 <p>Going forward, this tutorial will continue to refer to these command wrappers directly by name as in this section (e.g., <code>create_instance</code>). You can visit the <code>vulkanalia</code> documentation for the command wrapper for more information like which trait the command wrapper is defined in.</p>
 <h3><a class="header" href="#builders" id="builders">Builders</a></h3>
 <p>The Vulkan API heavily utilizes structs as parameters for Vulkan commands. The Vulkan structs used as command parameters have a field which indicates the type of the struct. In the C API, this field (<code>sType</code>) would need to be set explicitly. For example, here we are populating an instance of <code>VkInstanceCreateInfo</code> and then using it to call <code>vkCreateInstance</code> in C++:</p>
@@ -362,7 +363,7 @@ let instance = entry.create_instance(&amp;info, None).unwrap();
 </code></pre>
 <p>Fortunately, <code>vulkanalia</code> has a solution for this. Simply don't call <code>build()</code> and instead pass the builder to the command wrapper instead! Anywhere a Vulkan struct is expected in a command wrapper you can instead provide the associated builder. If you remove the <code>build()</code> call from the above code the Rust compiler will be able to use the lifetimes on the builder to reject this bad code with <code>error[E0716]: temporary value dropped while borrowed</code>.</p>
 <h3><a class="header" href="#preludes" id="preludes">Preludes</a></h3>
-<p><code>vulkanalia</code> offers <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/prelude/index.html">prelude modules</a> that expose the basic types needed to use the crate. One prelude module is available per Vulkan version and each will expose the relevant command traits along with other very frequently used types:</p>
+<p><code>vulkanalia</code> offers <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/prelude/index.html">prelude modules</a> that expose the basic types needed to use the crate. One prelude module is available per Vulkan version and each will expose the relevant command traits along with other very frequently used types:</p>
 <pre><code class="language-rust noplaypen">// Vulkan 1.0
 use vulkanalia::prelude::v1_0::*;
 
@@ -390,7 +391,7 @@ nalgebra-glm = &quot;0.10&quot;
 png = &quot;0.16&quot;
 pretty_env_logger = &quot;0.4&quot;
 tobj = &quot;2&quot;
-vulkanalia = { version = &quot;=0.5.0&quot;, features = [&quot;libloading&quot;, &quot;window&quot;] }
+vulkanalia = { version = &quot;=0.6.0&quot;, features = [&quot;libloading&quot;, &quot;window&quot;] }
 winit = &quot;0.24&quot;
 </code></pre>
 <ul>
@@ -455,7 +456,12 @@ winit = &quot;0.24&quot;
 <h1><a class="header" href="#base-code" id="base-code">Base code</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/00_base_code.rs">main.rs</a></p>
 <p>In the <code>Development environment</code> chapter we created a Cargo project and added the necessary dependencies. In this chapter we will be replacing the code in the <code>src/main.rs</code> file with the following code:</p>
-<pre><pre class="playground"><code class="language-rust">#![allow(dead_code, unused_variables, clippy::too_many_arguments, clippy::unnecessary_wraps)]
+<pre><pre class="playground"><code class="language-rust">#![allow(
+    dead_code,
+    unused_variables,
+    clippy::too_many_arguments,
+    clippy::unnecessary_wraps
+)]
 
 use anyhow::*;
 use winit::dpi::LogicalSize;
@@ -476,18 +482,19 @@ fn main() -&gt; Result&lt;()&gt; {
 
     // App
 
-    let mut app = App::create(&amp;window)?;
+    let mut app = unsafe { App::create(&amp;window)? };
     let mut destroying = false;
     event_loop.run(move |event, _, control_flow| {
         *control_flow = ControlFlow::Poll;
         match event {
             // Render a frame if our Vulkan app is not being destroyed.
-            Event::MainEventsCleared if !destroying =&gt; app.render(&amp;window).unwrap(),
+            Event::MainEventsCleared if !destroying =&gt;
+                unsafe { app.render(&amp;window) }.unwrap(),
             // Destroy our Vulkan app.
             Event::WindowEvent { event: WindowEvent::CloseRequested, .. } =&gt; {
                 destroying = true;
                 *control_flow = ControlFlow::Exit;
-                app.destroy();
+                unsafe { app.destroy(); }
             }
             _ =&gt; {}
         }
@@ -500,17 +507,17 @@ struct App {}
 
 impl App {
     /// Creates our Vulkan app.
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         Ok(Self {})
     }
 
     /// Renders a frame for our Vulkan app.
-    fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
         Ok(())
     }
 
     /// Destroys our Vulkan app.
-    fn destroy(&amp;mut self) {}
+    unsafe fn destroy(&amp;mut self) {}
 }
 
 /// The Vulkan handles and associated properties used by our Vulkan app.
@@ -523,6 +530,9 @@ struct AppData {}
 <p>Next we create an instance of our Vulkan app (<code>App</code>) and enter into our rendering loop. This loop will continually render our scene to the window until you request the window to be closed at which point the app will be destroyed and the program will exit. The <code>destroying</code> flag is necessary to not keep attempting to render the scene while the app is being destroyed which would most likely result in the program crashing after attempting to access Vulkan resources that have been destroyed.</p>
 <p>Lastly comes <code>App</code> and <code>AppData</code>. <code>App</code> will be used to implement the setup, rendering, and destruction logic required for the Vulkan program we will be building over the course of the following chapters. <code>AppData</code> will serve simply as a container for the large number of Vulkan resources we will need to create and initialize which will allow for them to be easily passed to functions to be read and/or modified.</p>
 <p>This will come in handy because many of the following chapters consist of adding a function which takes a <code>&amp;mut AppData</code> and creates and initializes Vulkan resources. These functions will then be called from our <code>App::create</code> constructor method to set up our Vulkan app. Then, before our program exits, these Vulkan resources will be released by our <code>App::destroy</code> method.</p>
+<h2><a class="header" href="#a-note-on-safety" id="a-note-on-safety">A Note on Safety</a></h2>
+<p>All Vulkan commands, both the raw commands and their command wrappers, are marked <code>unsafe</code> in <code>vulkanalia</code>. This is because most Vulkan commands have restrictions on how they can be called that cannot be enforced by Rust (unless a higher-level interface that hides the Vulkan API is provided like in <a href="https://vulkano.rs"><code>vulkano</code></a>).</p>
+<p>This tutorial will be addressing this fact by simply marking every function and method in which a Vulkan command is called as <code>unsafe</code>. This helps keep syntactical noise to a minimum, but in a more realistic program you may want to expose your own safe interface that enforces the invariants required for the Vulkan commands you are calling.</p>
 <h2><a class="header" href="#resource-management" id="resource-management">Resource management</a></h2>
 <p>Just like each chunk of memory allocated in C with <code>malloc</code> requires a corresponding call to <code>free</code>, every Vulkan object that we create needs to be explicitly destroyed when we no longer need it. In Rust it is possible to perform automatic resource management using <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">RAII</a> possibly combined with smart pointers like <code>Rc</code> or <code>Arc</code>. However, the author of <a href="https://vulkan-tutorial.com">https://vulkan-tutorial.com</a> chose to be explicit about allocation and deallocation of Vulkan objects in this tutorial and I have decided to take the same approach. After all, Vulkan's niche is to be explicit about every operation to avoid mistakes, so it's good to be explicit about the lifetime of objects to learn how the API works.</p>
 <p>After following this tutorial, you could implement automatic resource management by writing Rust structs that wrap Vulkan objects and release them in their <code>Drop</code> implementation. RAII is the recommended model for larger Vulkan programs, but for learning purposes it's always good to know what's going on behind the scenes.</p>
@@ -537,8 +547,8 @@ use vulkanalia::prelude::v1_0::*;
 <p>Here we first import <code>LibloadingLoader</code> which serves as <code>vulkanalia</code>'s <code>libloading</code> integration which we will use to load the initial Vulkan commands from the Vulkan shared library. The standard name of the Vulkan shared library on your operating system (e.g., <code>vulkan-1.dll</code> on Windows) is then imported as <code>LIBRARY</code>.</p>
 <p>Next we import <code>vulkanalia</code>'s window integration as <code>vk_window</code> which in this chapter we will use to enumerate the global Vulkan extensions required to render to a window. In a future chapter we will also use <code>vk_window</code> to link our Vulkan instance with our <code>winit</code> window.</p>
 <p>Lastly we import the Vulkan 1.0 prelude from <code>vulkanalia</code> which will provide all of the other Vulkan-related imports we will need for this and future chapters.</p>
-<p>Now, to create an instance we'll next have to fill in a struct with some information about our application. This data is technically optional, but it may provide some useful information to the driver in order to optimize our specific application (e.g., because it uses a well-known graphics engine with certain special behavior). This struct is called <code>vk::ApplicationInfo</code> and we'll create it in a new function called <code>create_instance</code> that takes a Vulkan entry point (which we will create later) and returns a Vulkan instance:</p>
-<pre><code class="language-rust noplaypen">fn create_instance(entry: &amp;Entry) -&gt; Result&lt;Instance&gt; {
+<p>Now, to create an instance we'll next have to fill in a struct with some information about our application. This data is technically optional, but it may provide some useful information to the driver in order to optimize our specific application (e.g., because it uses a well-known graphics engine with certain special behavior). This struct is called <code>vk::ApplicationInfo</code> and we'll create it in a new function called <code>create_instance</code> that takes our window and a Vulkan entry point (which we will create later) and returns a Vulkan instance:</p>
+<pre><code class="language-rust noplaypen">unsafe fn create_instance(window: &amp;Window, entry: &amp;Entry) -&gt; Result&lt;Instance&gt; {
     let application_info = vk::ApplicationInfo::builder()
         .application_name(b&quot;Vulkan Tutorial\0&quot;)
         .application_version(vk::make_version(1, 0, 0))
@@ -548,7 +558,7 @@ use vulkanalia::prelude::v1_0::*;
 }
 </code></pre>
 <p>A lot of information in Vulkan is passed through structs instead of function parameters and we'll have to fill in one more struct to provide sufficient information for creating an instance. This next struct is not optional and tells the Vulkan driver which global extensions and validation layers we want to use. Global here means that they apply to the entire program and not a specific device, which will become clear in the next few chapters. First we'll need to use <code>vulkanalia</code>'s window integration to enumerate the required global extensions and convert them into null-terminated C strings (<code>*const c_char</code>):</p>
-<pre><code class="language-rust noplaypen">let extensions = vk_window::get_required_instance_extensions(entry)?
+<pre><code class="language-rust noplaypen">let extensions = vk_window::get_required_instance_extensions(window)
     .iter()
     .map(|e| e.to_cstr().as_ptr())
     .collect::&lt;Vec&lt;_&gt;&gt;();
@@ -572,25 +582,25 @@ Ok(entry.create_instance(&amp;info, None)?)
 }
 </code></pre>
 <p>To populate these fields, update the <code>App::create</code> method to the following:</p>
-<pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
     let loader = LibloadingLoader::new(LIBRARY)?;
     let entry = Entry::new(loader).map_err(|b| anyhow!(&quot;{}&quot;, b))?;
-    let instance = create_instance(&amp;entry)?;
+    let instance = create_instance(window, &amp;entry)?;
     Ok(Self { entry, instance })
 }
 </code></pre>
 <p>Here we first create a Vulkan function loader which will be used to load the initial Vulkan commands from the Vulkan shared library. Next we create the Vulkan entry point using the function loader which will load all of the commands we need to manage Vulkan instances. Lastly we are now able to call our <code>create_instance</code> function with the Vulkan entry point.</p>
 <h2><a class="header" href="#cleaning-up" id="cleaning-up">Cleaning up</a></h2>
-<p>The <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> should only be destroyed right before the program exits. It can be destroyed in the <code>App::destroy</code> method using <code>destroy_instance</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<p>The <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> should only be destroyed right before the program exits. It can be destroyed in the <code>App::destroy</code> method using <code>destroy_instance</code>:</p>
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.instance.destroy_instance(None);
 }
 </code></pre>
 <p>Like the Vulkan commands used to create objects, the commands used to destroy objects also take an optional reference to custom allocator callbacks. So like before, we pass <code>None</code> to indicate we are content with the default allocation behavior.</p>
-<h2><a class="header" href="#a-hrefhttpsdocsrsvulkanalia050vulkanaliastructinstancehtmlcode-classhljsinstancea-vs-vkinstance" id="a-hrefhttpsdocsrsvulkanalia050vulkanaliastructinstancehtmlcode-classhljsinstancea-vs-vkinstance"><a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> vs <code>vk::Instance</code></a></h2>
+<h2><a class="header" href="#a-hrefhttpsdocsrsvulkanalia060vulkanaliastructinstancehtmlcode-classhljsinstancea-vs-vkinstance" id="a-hrefhttpsdocsrsvulkanalia060vulkanaliastructinstancehtmlcode-classhljsinstancea-vs-vkinstance"><a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> vs <code>vk::Instance</code></a></h2>
 <p>When we call our <code>create_instance</code> function, what we get back is not a raw Vulkan instance as would be returned by the Vulkan command <code>vkCreateInstance</code> (<code>vk::Instance</code>). Instead what we got back is a custom type defined by <code>vulkanalia</code> which combines both a raw Vulkan instance and the commands loaded for that specific instance.</p>
-<p>This is the <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> type we have been using (imported from the <code>vulkanalia</code> prelude) which should not be confused with the <code>vk::Instance</code> type which represents a raw Vulkan instance. In future chapters we will also use the <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Device.html"><code class="hljs">Device</code></a> type which, like <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a>, is a pairing of a raw Vulkan device (<code>vk::Device</code>) and the commands loaded for that specific device. Fortunately we will not be using <code>vk::Instance</code> or <code>vk::Device</code> directly in this tutorial so you don't need to worry about getting them mixed up.</p>
-<p>Because an <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> contains both a Vulkan instance and the associated commands, the command wrappers implemented for an <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> are able to provide the Vulkan instance when it is required by the underlying Vulkan command.</p>
+<p>This is the <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> type we have been using (imported from the <code>vulkanalia</code> prelude) which should not be confused with the <code>vk::Instance</code> type which represents a raw Vulkan instance. In future chapters we will also use the <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Device.html"><code class="hljs">Device</code></a> type which, like <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a>, is a pairing of a raw Vulkan device (<code>vk::Device</code>) and the commands loaded for that specific device. Fortunately we will not be using <code>vk::Instance</code> or <code>vk::Device</code> directly in this tutorial so you don't need to worry about getting them mixed up.</p>
+<p>Because an <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> contains both a Vulkan instance and the associated commands, the command wrappers implemented for an <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> are able to provide the Vulkan instance when it is required by the underlying Vulkan command.</p>
 <p>If you look at the documentation for the <code>vkDestroyInstance</code> command, you will see that it takes two parameters: the instance to destroy and the optional custom allocator callbacks. However, <code>destroy_instance</code> only takes the optional custom allocator callbacks because it is able to provide the raw Vulkan handle as the first parameter itself as described above.</p>
 <p>Before continuing with the more complex steps after instance creation, it's time to evaluate our debugging options by checking out validation layers.</p>
 <h1><a class="header" href="#validation-layers-1" id="validation-layers-1">Validation layers</a></h1>
@@ -669,7 +679,7 @@ let layers = if VALIDATION_ENABLED {
 <p>The validation layers will print debug messages to the standard output by default, but we can also handle them ourselves by providing an explicit callback in our program. This will also allow you to decide which kind of messages you would like to see, because not all are necessarily (fatal) errors. If you don't want to do that right now then you may skip to the last section in this chapter.</p>
 <p>To set up a callback in the program to handle messages and the associated details, we have to set up a debug messenger with a callback using the <code>VK_EXT_debug_utils</code> extension.</p>
 <p>We'll add some more code to our <code>create_instance</code> function. This time we'll modify the <code>extensions</code> list to be mutable and then add the debug utilities extension to the list when the validation layer is enabled:</p>
-<pre><code class="language-rust noplaypen">let mut extensions = vk_window::get_required_instance_extensions(entry)?
+<pre><code class="language-rust noplaypen">let mut extensions = vk_window::get_required_instance_extensions(window)
     .iter()
     .map(|e| e.to_cstr().as_ptr())
     .collect::&lt;Vec&lt;_&gt;&gt;();
@@ -731,7 +741,11 @@ if VALIDATION_ENABLED {
 }
 </code></pre>
 <p>Now modify the signature and end of the <code>create_instance</code> function to look like this:</p>
-<pre><code class="language-rust noplaypen">fn create_instance(entry: &amp;Entry, data: &amp;mut AppData) -&gt; Result&lt;Instance&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_instance(
+    window: &amp;Window,
+    entry: &amp;Entry,
+    data: &amp;mut AppData
+) -&gt; Result&lt;Instance&gt; {
     // ...
 
     let instance = entry.create_instance(&amp;info, None)?;
@@ -762,16 +776,16 @@ if VALIDATION_ENABLED {
 }
 
 impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         let mut data = AppData::default();
-        let instance = create_instance(&amp;entry, &amp;mut data)?;
+        let instance = create_instance(window, &amp;entry, &amp;mut data)?;
         Ok(Self { entry, instance, data })
     }
 }
 </code></pre>
 <p>The <code>vk::DebugUtilsMessengerEXT</code> object we created needs to cleaned up before our app exits. We'll do this in <code>App::destroy</code> before we destroy the instance:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     if VALIDATION_ENABLED {
         self.instance.destroy_debug_utils_messenger_ext(self.data.messenger, None);
     }
@@ -803,7 +817,7 @@ if VALIDATION_ENABLED {
 }
 </code></pre>
 <p><code>debug_info</code> needs to be defined outside of the conditional since it needs to live until we are done calling <code>create_instance</code>. Fortunately we can rely on the Rust compiler to protect us from pushing a struct that doesn't live long enough onto a pointer chain due to the lifetimes defined for the <code>vulkanalia</code> builders.</p>
-<p>Now we should be able to run our program and see logs from our debug callback, but first we'll need to set the <code>RUST_LOG</code> environment variable so that <code>pretty_env_logger</code> will enable the log levels we are interested in. Initially set the log level to <code>debug</code> so we can be sure it is working, here is an example on Windows (Powershell):</p>
+<p>Now we should be able to run our program and see logs from our debug callback, but first we'll need to set the <code>RUST_LOG</code> environment variable so that <code>pretty_env_logger</code> will enable the log levels we are interested in. Initially set the log level to <code>debug</code> so we can be sure it is working, here is an example on Windows (PowerShell):</p>
 <p><img src="setup/../images/validation_layer_test.png" alt="" /></p>
 <p>If everything is working you shouldn't see any warning or error messages. Going forward you will probably want to increase the minimum log level to <code>info</code> using <code>RUST_LOG</code> to reduce the verbosity of the logs unless you are trying to debug an error.</p>
 <h2><a class="header" href="#configuration" id="configuration">Configuration</a></h2>
@@ -812,28 +826,29 @@ if VALIDATION_ENABLED {
 <p>Throughout this tutorial I'll be making a couple of intentional mistakes to show you how helpful the validation layers are with catching them and to teach you how important it is to know exactly what you're doing with Vulkan. Now it's time to look at Vulkan devices in the system.</p>
 <h1><a class="header" href="#physical-devices-and-queue-families" id="physical-devices-and-queue-families">Physical devices and queue families</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/03_physical_device_selection.rs">main.rs</a></p>
-<p>After initializing the Vulkan library through an <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> we need to look for and select a graphics card in the system that supports the features we need. In fact we can select any number of graphics cards and use them simultaneously, but in this tutorial we'll stick to the first graphics card that suits our needs.</p>
+<p>After initializing the Vulkan library through an <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> we need to look for and select a graphics card in the system that supports the features we need. In fact we can select any number of graphics cards and use them simultaneously, but in this tutorial we'll stick to the first graphics card that suits our needs.</p>
 <p>We'll add a <code>pick_physical_device</code> function which will accomplish this task and write the physical device and related information to the <code>AppData</code> instance. With this in place we can construct and populate an <code>AppData</code> instance in our <code>App::create</code> method.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         pick_physical_device(&amp;instance, &amp;mut data)?;
         Ok(Self { entry, instance, data })
     }
 }
 
-fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
-<p>The graphics card that we'll end up selecting will be stored in a <code>vk::PhysicalDevice</code> handle that is added as a new field to the <code>AppData</code> struct. This object will be implicitly destroyed when the <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> is destroyed, so we won't need to do anything new in the <code>App::destroy</code> method.</p>
+<p>The graphics card that we'll end up selecting will be stored in a <code>vk::PhysicalDevice</code> handle that is added as a new field to the <code>AppData</code> struct. This object will be implicitly destroyed when the <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> is destroyed, so we won't need to do anything new in the <code>App::destroy</code> method.</p>
 <pre><code class="language-rust noplaypen">struct AppData {
+    // ...
     physical_device: vk::PhysicalDevice,
 }
 </code></pre>
 <h2><a class="header" href="#device-suitability" id="device-suitability">Device suitability</a></h2>
 <p>We'll need a way to determine whether a physical device meets our needs. We'll start by creating a function that returns whether a supplied physical device supports everything we require:</p>
-<pre><code class="language-rust noplaypen">fn check_physical_device(
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
@@ -851,7 +866,7 @@ fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; R
 </code></pre>
 <p>There are more details that can be queried from devices that we'll discuss later concerning device memory and queue families (see the next section).</p>
 <p>As an example, let's say we consider our application only usable for dedicated graphics cards that support geometry shaders. Then the <code>check_physical_device</code> function would look like this:</p>
-<pre><code class="language-rust noplaypen">fn check_physical_device(
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
@@ -876,7 +891,7 @@ struct QueueFamilyIndices {
 }
 
 impl QueueFamilyIndices {
-    fn get(
+    unsafe fn get(
         instance: &amp;Instance,
         data: &amp;AppData,
         physical_device: vk::PhysicalDevice,
@@ -899,7 +914,7 @@ impl QueueFamilyIndices {
 </code></pre>
 <p>The queue properties returned by <code>get_physical_device_queue_family_properties</code> contains various details about the queue families supported by the physical device, including the type of operations supported and the number of queues that can be created based on that family. Here we are looking for the first queue family that supports graphics operations as indicated by <code>vk::QueueFlags::GRAPHICS</code>.</p>
 <p>Now that we have this fancy queue family lookup method, we can use it as a check in the <code>check_physical_device</code> function to ensure the device can process the commands we want to use:</p>
-<pre><code class="language-rust noplaypen">fn check_physical_device(
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
@@ -933,14 +948,17 @@ impl QueueFamilyIndices {
 </code></pre>
 <p>Next, add a <code>create_logical_device</code> function that is called from <code>App:create</code> and add the resulting logical device to the <code>App</code> initializer:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         let device = create_logical_device(&amp;instance, &amp;mut data)?;
         Ok(Self { entry, instance, data, device })
     }
 }
 
-fn create_logical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; Result&lt;Device&gt; {
+unsafe fn create_logical_device(
+    instance: &amp;Instance,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;Device&gt; {
 }
 </code></pre>
 <h2><a class="header" href="#specifying-the-queues-to-be-created" id="specifying-the-queues-to-be-created">Specifying the queues to be created</a></h2>
@@ -982,7 +1000,7 @@ let info = vk::DeviceCreateInfo::builder()
 </code></pre>
 <p>The parameters are the physical device to interface with, the queue and usage info we just specified, and the optional allocation callbacks. Similarly to the instance creation function, this call can return errors based on enabling non-existent extensions or specifying the desired usage of unsupported features.</p>
 <p>The device should be destroyed in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.device.destroy_device(None);
     // ...
 }
@@ -1005,8 +1023,8 @@ let info = vk::DeviceCreateInfo::builder()
 <p>With the logical device and queue handles we can now actually start using the graphics card to do things! In the next few chapters we'll set up the resources to present results to the window system.</p>
 <h1><a class="header" href="#window-surface" id="window-surface">Window surface</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/05_window_surface.rs">main.rs</a></p>
-<p>Since Vulkan is a platform agnostic API, it can not interface directly with the window system on its own. To establish the connection between Vulkan and the window system to present results to the screen, we need to use the WSI (Window System Integration) extensions. In this chapter we'll discuss the first one, which is <code>VK_KHR_surface</code>. It exposes a <code>vk::SurfaceKHR</code> object that represents an abstract type of surface to present rendered images to. The surface in our program will be backed by the window that we've already opened with <code>winit</code>.</p>
-<p>The <code>VK_KHR_surface</code> extension is an instance level extension and we've actually already enabled it, because it's included in the list returned by <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/window/fn.get_required_instance_extensions.html"><code class="hljs">vk_window::get_required_instance_extensions</code></a>. The list also includes some other WSI extensions that we'll use in the next couple of chapters.</p>
+<p>Since Vulkan is a platform agnostic API, it can't interface directly with the window system on its own. To establish the connection between Vulkan and the window system to present results to the screen, we need to use the WSI (Window System Integration) extensions. In this chapter we'll discuss the first one, which is <code>VK_KHR_surface</code>. It exposes a <code>vk::SurfaceKHR</code> object that represents an abstract type of surface to present rendered images to. The surface in our program will be backed by the window that we've already opened with <code>winit</code>.</p>
+<p>The <code>VK_KHR_surface</code> extension is an instance level extension and we've actually already enabled it, because it's included in the list returned by <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/window/fn.get_required_instance_extensions.html"><code class="hljs">vk_window::get_required_instance_extensions</code></a>. The list also includes some other WSI extensions that we'll use in the next couple of chapters.</p>
 <p>The window surface needs to be created right after the instance creation, because it can actually influence the physical device selection. The reason we postponed this is because window surfaces are part of the larger topic of render targets and presentation for which the explanation would have cluttered the basic setup. It should also be noted that window surfaces are an entirely optional component in Vulkan, if you just need off-screen rendering. Vulkan allows you to do that without hacks like creating an invisible window (necessary for OpenGL).</p>
 <p>While we can freely import types for extensions like the struct <code>vk::SurfaceKHR</code>, we need to import the <code>vulkanalia</code> extension trait for <code>VK_KHR_surface</code> before we can call any of the Vulkan commands added by the extension. Add the following import for <code>vk::KhrSurfaceExtension</code>:</p>
 <pre><code class="language-rust noplaypen">use vulkanalia::vk::KhrSurfaceExtension;
@@ -1018,8 +1036,8 @@ let info = vk::DeviceCreateInfo::builder()
     // ...
 }
 </code></pre>
-<p>Although the <code>vk::SurfaceKHR</code> object and its usage is platform agnostic, its creation isn't because it depends on window system details. For example, it needs the <code>HWND</code> and <code>HMODULE</code> handles on Windows. Therefore there is a platform-specific addition to the extension, which on Windows is called <code>VK_KHR_win32_surface</code> and is also automatically included in the list from <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/window/fn.get_required_instance_extensions.html"><code class="hljs">vk_window::get_required_instance_extensions</code></a>.</p>
-<p>I will demonstrate how this platform specific extension can be used to create a surface on Windows, but we won't actually use it in this tutorial. <code>vulkanalia</code> has <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/window/fn.create_surface.html"><code class="hljs">vk_window::create_surface</code></a> that handles the platform differences for us. Still, it's good to see what it does behind the scenes before we start relying on it.</p>
+<p>Although the <code>vk::SurfaceKHR</code> object and its usage is platform agnostic, its creation isn't because it depends on window system details. For example, it needs the <code>HWND</code> and <code>HMODULE</code> handles on Windows. Therefore there is a platform-specific addition to the extension, which on Windows is called <code>VK_KHR_win32_surface</code> and is also automatically included in the list from <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/window/fn.get_required_instance_extensions.html"><code class="hljs">vk_window::get_required_instance_extensions</code></a>.</p>
+<p>I will demonstrate how this platform specific extension can be used to create a surface on Windows, but we won't actually use it in this tutorial. <code>vulkanalia</code> has <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/window/fn.create_surface.html"><code class="hljs">vk_window::create_surface</code></a> that handles the platform differences for us. Still, it's good to see what it does behind the scenes before we start relying on it.</p>
 <p>Because a window surface is a Vulkan object, it comes with a <code>vk::Win32SurfaceCreateInfoKHR</code> struct that needs to be filled in. It has two important parameters: <code>hinstance</code> and <code>hwnd</code>. These are the handles to the process and the window.</p>
 <pre><code class="language-rust noplaypen">use winit::platform::windows::WindowExtWindows;
 
@@ -1034,17 +1052,17 @@ let info = vk::Win32SurfaceCreateInfoKHR::builder()
 let surface = instance.create_win32_surface_khr(&amp;info, None).unwrap();
 </code></pre>
 <p>The process is similar for other platforms like Linux, where <code>create_xcb_surface_khr</code> takes an XCB connection and window as creation details with X11.</p>
-<p>The <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/window/fn.create_surface.html"><code class="hljs">vk_window::create_surface</code></a> function performs exactly this operation with a different implementation for each platform. We'll now integrate it into our program. Add a call to the function in <code>App::create</code> right before we pick a physical device.</p>
-<pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+<p>The <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/window/fn.create_surface.html"><code class="hljs">vk_window::create_surface</code></a> function performs exactly this operation with a different implementation for each platform. We'll now integrate it into our program. Add a call to the function in <code>App::create</code> right before we pick a physical device.</p>
+<pre><code class="language-rust noplaypen">unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
     // ...
-    let mut data = AppData::default();
+    let instance = create_instance(window, &amp;entry, &amp;mut data)?;
     data.surface = vk_window::create_surface(&amp;instance, window)?;
     pick_physical_device(&amp;instance, &amp;mut data)?;
     // ...
 }
 </code></pre>
 <p>The parameters are the Vulkan instance and the <code>winit</code> window. Once we have our surface, it can be destroyed in <code>App::destroy</code> using the Vulkan API:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     // ...
     self.instance.destroy_surface_khr(self.data.surface, None);
     self.instance.destroy_instance(None);
@@ -1126,7 +1144,7 @@ let queue_infos = unique_indices
 <pre><code class="language-rust noplaypen">const DEVICE_EXTENSIONS: &amp;[vk::ExtensionName] = &amp;[vk::KHR_SWAPCHAIN_EXTENSION.name];
 </code></pre>
 <p>Next, create a new function <code>check_physical_device_extensions</code> that is called from <code>check_physical_device</code> as an additional check:</p>
-<pre><code class="language-rust noplaypen">fn check_physical_device(
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
@@ -1136,7 +1154,7 @@ let queue_infos = unique_indices
     Ok(extensions)
 }
 
-fn check_physical_device_extensions(
+unsafe fn check_physical_device_extensions(
     instance: &amp;Instance,
     physical_device: vk::PhysicalDevice,
 ) -&gt; Result&lt;bool&gt; {
@@ -1144,7 +1162,7 @@ fn check_physical_device_extensions(
 }
 </code></pre>
 <p>Modify the body of the function to enumerate the extensions and check if all of the required extensions are amongst them.</p>
-<pre><code class="language-rust noplaypen">fn check_physical_device_extensions(
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device_extensions(
     instance: &amp;Instance,
     physical_device: vk::PhysicalDevice,
 ) -&gt; Result&lt;bool&gt; {
@@ -1189,7 +1207,7 @@ struct SwapchainSupport {
 </code></pre>
 <p>We'll now create a new method <code>SwapchainSupport::get</code> that will initialize this struct with all of the structs we need.</p>
 <pre><code class="language-rust noplaypen">impl SwapchainSupport {
-    fn get(
+    unsafe fn get(
         instance: &amp;Instance,
         data: &amp;AppData,
         physical_device: vk::PhysicalDevice,
@@ -1311,7 +1329,7 @@ let swapchain = !support.formats.is_empty() &amp;&amp; !support.present_modes.is
 <p>Now that we have all of these helper functions assisting us with the choices we have to make at runtime, we finally have all the information that is needed to create a working swapchain.</p>
 <p>Create a <code>create_swapchain</code> function that starts out with the results of these calls and make sure to call it from <code>App::create</code> after logical device creation.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         let device = create_logical_device(&amp;instance, &amp;mut data)?;
         create_swapchain(window, &amp;instance, &amp;device, &amp;mut data)?;
@@ -1319,7 +1337,7 @@ let swapchain = !support.formats.is_empty() &amp;&amp; !support.present_modes.is
     }
 }
 
-fn create_swapchain(
+unsafe fn create_swapchain(
     window: &amp;Window,
     instance: &amp;Instance,
     device: &amp;Device,
@@ -1405,7 +1423,7 @@ let image_sharing_mode = if indices.graphics != indices.present {
 <pre><code class="language-rust noplaypen">data.swapchain = device.create_swapchain_khr(&amp;info, None)?;
 </code></pre>
 <p>The parameters are the swapchain creation info and optional custom allocators. No surprises there. It should be cleaned up in <code>App::destroy</code> before the device:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.device.destroy_swapchain_khr(self.data.swapchain, None);
     // ...
 }
@@ -1451,7 +1469,7 @@ data.swapchain_extent = extent;
 </code></pre>
 <p>Create the <code>create_swapchain_image_views</code> function and call it right after swapchain creation in <code>App::create</code>.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_swapchain(window, &amp;instance, &amp;device, &amp;mut data)?;
         create_swapchain_image_views(&amp;device, &amp;mut data)?;
@@ -1459,12 +1477,18 @@ data.swapchain_extent = extent;
     }
 }
 
-fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_swapchain_image_views(
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
 <p>What we next need to do is iterate over the swapchain images to create an image view for each:</p>
-<pre><code class="language-rust noplaypen">fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_swapchain_image_views(
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
     data.swapchain_image_views = data
         .swapchain_images
         .iter()
@@ -1505,7 +1529,7 @@ fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&g
 <pre><code class="language-rust noplaypen">device.create_image_view(&amp;info, None)
 </code></pre>
 <p>Unlike images, the image views were explicitly created by us, so we need to add a similar loop to destroy them again in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.data.swapchain_image_views
         .iter()
         .for_each(|v| self.device.destroy_image_view(*v, None));
@@ -1531,7 +1555,7 @@ fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&g
 <p>In the next chapter we'll first create the two programmable stages required to put a triangle onto the screen: the vertex shader and fragment shader. The fixed-function configuration like blending mode, viewport, rasterization will be set up in the chapter after that. The final part of setting up the graphics pipeline in Vulkan involves the specification of input and output framebuffers.</p>
 <p>Create a <code>create_pipeline</code> function that is called right after <code>create_swapchain_image_views</code> in <code>App::create</code>. We'll work on this function throughout the following chapters.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_swapchain_image_views(&amp;device, &amp;mut data)?;
         create_pipeline(&amp;device, &amp;mut data)?;
@@ -1539,7 +1563,7 @@ fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&g
     }
 }
 
-fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
@@ -1664,7 +1688,7 @@ pause
 <p>Compiling shaders on the commandline is one of the most straightforward options and it's the one that we'll use in this tutorial, but it's also possible to compile shaders directly from your own code. The Vulkan SDK includes <a href="https://github.com/google/shaderc">libshaderc</a>, which is a library to compile GLSL code to SPIR-V from within your program.</p>
 <h2><a class="header" href="#loading-a-shader" id="loading-a-shader">Loading a shader</a></h2>
 <p>Now that we have a way of producing SPIR-V shaders, it's time to bring them into our program to plug them into the graphics pipeline at some point. We'll start by using <a href="https://doc.rust-lang.org/stable/std/macro.include_bytes.html"><code>include_bytes!</code></a> from the Rust standard library to include the compiled SPIR-V bytecode for the shaders in our executable.</p>
-<pre><code class="language-rust noplaypen">fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     let vert = include_bytes!(&quot;../shaders/vert.spv&quot;);
     let frag = include_bytes!(&quot;../shaders/frag.spv&quot;);
 
@@ -1673,7 +1697,7 @@ pause
 </code></pre>
 <h2><a class="header" href="#creating-shader-modules" id="creating-shader-modules">Creating shader modules</a></h2>
 <p>Before we can pass the code to the pipeline, we have to wrap it in a <code>vk::ShaderModule</code> object. Let's create a helper function <code>create_shader_module</code> to do that.</p>
-<pre><code class="language-rust noplaypen">fn create_shader_module(
+<pre><code class="language-rust noplaypen">unsafe fn create_shader_module(
     device: &amp;Device,
     bytecode: &amp;[u8],
 ) -&gt; Result&lt;vk::ShaderModule&gt; {
@@ -1682,7 +1706,7 @@ pause
 <p>The function will take a slice containing the bytecode as parameter and create a <code>vk::ShaderModule</code> from it using our logical device.</p>
 <p>Creating a shader module is simple, we only need to specify the length of our bytecode slice and the bytecode slice itself. This information is specified in a <code>vk::ShaderModuleCreateInfo</code> structure. The one catch is that the size of the bytecode is specified in bytes, but the bytecode slice expected by this struct is a <code>&amp;[u32]</code> instead of a <code>&amp;[u8]</code>. Therefore we will first need to convert our <code>&amp;[u8]</code> into an <code>&amp;[u32]</code>. We will accomplish this with <a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.align_to"><code>slice::align_to</code></a> which can be used to convert a slice into a slice containing a type with a different size and/or alignment requirements. However, the <code>&amp;[u8]</code> returned by <code>include_bytes!</code> may not meet our alignment requirements, so we'll first copy it into a <code>Vec</code>.</p>
 <pre><code class="language-rust noplaypen">let bytecode = Vec::&lt;u8&gt;::from(bytecode);
-let (prefix, code, suffix) = unsafe { bytecode.align_to::&lt;u32&gt;() };
+let (prefix, code, suffix) = bytecode.align_to::&lt;u32&gt;();
 if !prefix.is_empty() || !suffix.is_empty() {
     return Err(anyhow!(&quot;Shader bytecode is not properly aligned.&quot;));
 }
@@ -1697,7 +1721,7 @@ Ok(device.create_shader_module(&amp;info, None)?)
 </code></pre>
 <p>The parameters are the same as those in previous object creation functions: the create info structure and the optional custom allocators.</p>
 <p>Shader modules are just a thin wrapper around the shader bytecode that we've previously loaded from a file and the functions defined in it. The compilation and linking of the SPIR-V bytecode to machine code for execution by the GPU doesn't happen until the graphics pipeline is created. That means that we're allowed to destroy the shader modules again as soon as pipeline creation is finished, which is why we'll make them local variables in the <code>create_pipeline</code> function instead of fields in <code>AppData</code>:</p>
-<pre><code class="language-rust noplaypen">fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     let vert = include_bytes!(&quot;../shaders/vert.spv&quot;);
     let frag = include_bytes!(&quot;../shaders/frag.spv&quot;);
 
@@ -1721,7 +1745,7 @@ Ok(device.create_shader_module(&amp;info, None)?)
 <pre><code class="language-rust noplaypen">let vert_stage = vk::PipelineShaderStageCreateInfo::builder()
     .stage(vk::ShaderStageFlags::VERTEX)
     .module(vert_shader_module)
-    .name(b&quot;main\0&quot;[..].into());
+    .name(b&quot;main\0&quot;);
 </code></pre>
 <p>The first step is telling Vulkan in which pipeline stage the shader is going to be used. There is a variant for each of the programmable stages described in the previous chapter.</p>
 <p>The next two fields specify the shader module containing the code, and the function to invoke, known as the <em>entrypoint</em>. That means that it's possible to combine multiple fragment shaders into a single shader module and use different entry points to differentiate between their behaviors. In this case we'll stick to the standard <code>main</code>, however.</p>
@@ -1730,7 +1754,7 @@ Ok(device.create_shader_module(&amp;info, None)?)
 <pre><code class="language-rust noplaypen">let frag_stage = vk::PipelineShaderStageCreateInfo::builder()
     .stage(vk::ShaderStageFlags::FRAGMENT)
     .module(frag_shader_module)
-    .name(b&quot;main\0&quot;[..].into());
+    .name(b&quot;main\0&quot;);
 </code></pre>
 <p>That's all there is to describing the programmable stages of the pipeline. In the next chapter we'll look at the fixed-function stages.</p>
 <h1><a class="header" href="#fixed-functions" id="fixed-functions">Fixed functions</a></h1>
@@ -1906,7 +1930,7 @@ let dynamic_state = vk::PipelineDynamicStateCreateInfo::builder()
 data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
 </code></pre>
 <p>The structure also specifies <em>push constants</em>, which are another way of passing dynamic values to shaders that we may get into in a future chapter. The pipeline layout will be referenced throughout the program's lifetime, so it should be destroyed in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
     // ...
 }
@@ -1918,7 +1942,7 @@ data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/11_render_passes.rs">main.rs</a></p>
 <p>Before we can finish creating the pipeline, we need to tell Vulkan about the framebuffer attachments that will be used while rendering. We need to specify how many color and depth buffers there will be, how many samples to use for each of them and how their contents should be handled throughout the rendering operations. All of this information is wrapped in a <em>render pass</em> object, for which we'll create a new <code>create_render_pass</code> function. Call this function from <code>App::create</code> before <code>create_pipeline</code>.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_render_pass(&amp;instance, &amp;device, &amp;mut data)?;
         create_pipeline(&amp;device, &amp;mut data)?;
@@ -1926,7 +1950,7 @@ data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
     }
 }
 
-fn create_render_pass(
+unsafe fn create_render_pass(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -2014,7 +2038,7 @@ let info = vk::RenderPassCreateInfo::builder()
 data.render_pass = device.create_render_pass(&amp;info, None)?;
 </code></pre>
 <p>Just like the pipeline layout, the render pass will be referenced throughout the program, so it should only be cleaned up at the end in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.device.destroy_pipeline_layout(self.data.pipeline_layout, None);
     self.device.destroy_render_pass(self.data.render_pass, None);
     // ...
@@ -2069,7 +2093,7 @@ let info = vk::GraphicsPipelineCreateInfo::builder()
 <p>The <code>create_graphics_pipelines</code> function actually has more parameters than the usual object creation functions in Vulkan. It is designed to take multiple <code>vk::GraphicsPipelineCreateInfo</code> objects and create multiple <code>vk::Pipeline</code> objects in a single call.</p>
 <p>The first parameter, for which we've passed the <code>vk::PipelineCache::null()</code> argument, references an optional <code>vk::PipelineCache</code> object. A pipeline cache can be used to store and reuse data relevant to pipeline creation across multiple calls to <code>create_graphics_pipelines</code> and even across program executions if the cache is stored to a file. This makes it possible to significantly speed up pipeline creation at a later time.</p>
 <p>The graphics pipeline is required for all common drawing operations, so it should also only be destroyed at the end of the program in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.device.destroy_pipeline(self.data.pipeline, None);
     // ...
 }
@@ -2087,7 +2111,7 @@ let info = vk::GraphicsPipelineCreateInfo::builder()
 </code></pre>
 <p>We'll create the objects for this array in a new function <code>create_framebuffers</code> that is called from <code>App::create</code> right after creating the graphics pipeline:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_pipeline(&amp;device, &amp;mut data)?;
         create_framebuffers(&amp;device, &amp;mut data)?;
@@ -2095,12 +2119,12 @@ let info = vk::GraphicsPipelineCreateInfo::builder()
     }
 }
 
-fn create_framebuffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_framebuffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
 <p>Start by mapping over the swapchain image views:</p>
-<pre><code class="language-rust noplaypen">fn create_framebuffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_framebuffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     data.framebuffers = data
         .swapchain_image_views
         .iter()
@@ -2127,7 +2151,7 @@ device.create_framebuffer(&amp;create_info, None)
 <p>The <code>attachments</code> field specifies the <code>vk::ImageView</code> objects that should be bound to the respective attachment descriptions in the render pass <code>attachment</code> array.</p>
 <p>The <code>width</code> and <code>height</code> parameters are self-explanatory and <code>layers</code> refers to the number of layers in image arrays. Our swapchain images are single images, so the number of layers is <code>1</code>.</p>
 <p>We should delete the framebuffers before the image views and render pass that they are based on, but only after we've finished rendering:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.data.framebuffers
         .iter()
         .for_each(|f| self.device.destroy_framebuffer(*f, None));
@@ -2147,7 +2171,7 @@ device.create_framebuffer(&amp;create_info, None)
 </code></pre>
 <p>Then create a new function <code>create_command_pool</code> and call it from <code>App::create</code> after the framebuffers were created.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_framebuffers(&amp;device, &amp;mut data)?;
         create_command_pool(&amp;instance, &amp;device, &amp;mut data)?;
@@ -2155,7 +2179,7 @@ device.create_framebuffer(&amp;create_info, None)
     }
 }
 
-fn create_command_pool(
+unsafe fn create_command_pool(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -2181,7 +2205,7 @@ let info = vk::CommandPoolCreateInfo::builder()
 <pre><code class="language-rust noplaypen">data.command_pool = device.create_command_pool(&amp;info, None)?;
 </code></pre>
 <p>Commands will be used throughout the program to draw things on the screen, so the pool should only be destroyed at the end:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.device.destroy_command_pool(self.data.command_pool, None);
     // ...
 }
@@ -2195,7 +2219,7 @@ let info = vk::CommandPoolCreateInfo::builder()
 </code></pre>
 <p>We'll now start working on a <code>create_command_buffers</code> function that allocates and records the commands for each swapchain image.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_command_pool(&amp;instance, &amp;device, &amp;mut data)?;
         create_command_buffers(&amp;device, &amp;mut data)?;
@@ -2203,7 +2227,7 @@ let info = vk::CommandPoolCreateInfo::builder()
     }
 }
 
-fn create_command_buffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_command_buffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
@@ -2321,7 +2345,7 @@ let info = vk::RenderPassBeginInfo::builder()
 </code></pre>
 <p>To create the semaphores, we'll add the last <code>create</code> function for this part of the tutorial, <code>create_sync_objects</code>:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_command_buffers(&amp;device, &amp;mut data)?;
         create_sync_objects(&amp;device, &amp;mut data)?;
@@ -2329,12 +2353,12 @@ let info = vk::RenderPassBeginInfo::builder()
     }
 }
 
-fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
 <p>Creating semaphores requires filling in the <code>vk::SemaphoreCreateInfo</code>, but in the current version of the API it doesn't actually have any required fields.</p>
-<pre><code class="language-rust noplaypen">fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     let semaphore_info = vk::SemaphoreCreateInfo::builder();
 
     Ok(())
@@ -2345,7 +2369,7 @@ fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result
 data.render_finished_semaphore = device.create_semaphore(&amp;semaphore_info, None)?;
 </code></pre>
 <p>The semaphores should be cleaned up at the end of the program, when all commands have finished and no more synchronization is necessary:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.device.destroy_semaphore(self.data.render_finished_semaphore, None);
     self.device.destroy_semaphore(self.data.image_available_semaphore, None);
     // ...
@@ -2353,7 +2377,7 @@ data.render_finished_semaphore = device.create_semaphore(&amp;semaphore_info, No
 </code></pre>
 <h2><a class="header" href="#acquiring-an-image-from-the-swapchain" id="acquiring-an-image-from-the-swapchain">Acquiring an image from the swapchain</a></h2>
 <p>As mentioned before, the first thing we need to do in the <code>App::render</code> function is acquire an image from the swapchain. Recall that the swapchain is an extension feature, so we must use a function with the <code>*_khr</code> naming convention:</p>
-<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     let image_index = self
         .device
         .acquire_next_image_khr(
@@ -2363,6 +2387,19 @@ data.render_finished_semaphore = device.create_semaphore(&amp;semaphore_info, No
             vk::Fence::null(),
         )?
         .0 as usize;
+
+        let wait_semaphores = &amp;[self.data.image_available_semaphore];
+let wait_stages = &amp;[vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT];
+let command_buffers = &amp;[self.data.command_buffers[image_index as usize]];
+let signal_semaphores = &amp;[self.data.render_finished_semaphore];
+let submit_info = vk::SubmitInfo::builder()
+    .wait_semaphores(wait_semaphores)
+    .wait_dst_stage_mask(wait_stages)
+    .command_buffers(command_buffers)
+    .signal_semaphores(signal_semaphores);
+
+    self.device.queue_submit(
+    self.data.graphics_queue, &amp;[submit_info], vk::Fence::null())?;
 
     Ok(())
 }
@@ -2443,15 +2480,15 @@ let present_info = vk::PresentInfoKHR::builder()
 <pre><code class="language-rust noplaypen">Event::WindowEvent { event: WindowEvent::CloseRequested, .. } =&gt; {
     destroying = true;
     *control_flow = ControlFlow::Exit;
-    app.device.device_wait_idle().unwrap();
-    app.destroy();
+    unsafe { app.device.device_wait_idle().unwrap(); }
+    unsafe { app.destroy(); }
 }
 </code></pre>
 <p>You can also wait for operations in a specific command queue to be finished with <code>queue_wait_idle</code>. These functions can be used as a very rudimentary way to perform synchronization. You'll see that the program no longer crashes when closing the window (though you will see some errors related to synchronization if you have the validation layers enabled).</p>
 <h2><a class="header" href="#frames-in-flight" id="frames-in-flight">Frames in flight</a></h2>
 <p>If you run your application with validation layers enabled now you may either get errors or notice that the memory usage slowly grows. The reason for this is that the application is rapidly submitting work in the <code>App::render</code> function, but doesn't actually check if any of it finishes. If the CPU is submitting work faster than the GPU can keep up with then the queue will slowly fill up with work. Worse, even, is that we are reusing the <code>image_available_semaphore</code> and <code>render_finished_semaphore</code> semaphores, along with the command buffers, for multiple frames at the same time!</p>
 <p>The easy way to solve this is to wait for work to finish right after submitting it, for example by using <code>queue_wait_idle</code> (note: don't actually make this change):</p>
-<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     // ...
 
     self.device.queue_present_khr(self.data.present_queue, &amp;present_info)?;
@@ -2472,7 +2509,7 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>The <code>create_sync_objects</code> function should be changed to create all of these:</p>
-<pre><code class="language-rust noplaypen">fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     let semaphore_info = vk::SemaphoreCreateInfo::builder();
 
     for _ in 0..MAX_FRAMES_IN_FLIGHT {
@@ -2486,7 +2523,7 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>Similarly, they should also all be cleaned up:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.data.render_finished_semaphores
         .iter()
         .for_each(|s| self.device.destroy_semaphore(*s, None));
@@ -2503,7 +2540,7 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>The <code>App::render</code> function can now be modified to use the right objects:</p>
-<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     let image_index = self
         .device
         .acquire_next_image_khr(
@@ -2528,7 +2565,7 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>Of course, we shouldn't forget to advance to the next frame every time:</p>
-<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     // ...
 
     self.frame = (self.frame + 1) % MAX_FRAMES_IN_FLIGHT;
@@ -2545,7 +2582,7 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>We'll create the fences together with the semaphores in the <code>create_sync_objects</code> function:</p>
-<pre><code class="language-rust noplaypen">fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     let semaphore_info = vk::SemaphoreCreateInfo::builder();
     let fence_info = vk::FenceCreateInfo::builder();
 
@@ -2562,7 +2599,7 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>The creation of fences (<code>vk::Fence</code>) is very similar to the creation of semaphores. Also make sure to clean up the fences in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.data.in_flight_fences
         .iter()
         .for_each(|f| self.device.destroy_fence(*f, None));
@@ -2570,7 +2607,7 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>We will now change <code>App::render</code> to use the fences for synchronization. The <code>queue_submit</code> call includes an optional parameter to pass a fence that should be signaled when the command buffer finishes executing. We can use this to signal that a frame has finished.</p>
-<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     // ...
 
     self.device.queue_submit(
@@ -2583,7 +2620,7 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>Now the only thing remaining is to change the beginning of <code>App::render</code> to wait for the frame to be finished:</p>
-<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     self.device.wait_for_fences(
         &amp;[self.data.in_flight_fences[self.frame]],
         true,
@@ -2598,7 +2635,7 @@ let present_info = vk::PresentInfoKHR::builder()
 <p>The <code>wait_for_fences</code> function takes an array of fences and waits for either any or all of them to be signaled before returning. The <code>true</code> we pass here indicates that we want to wait for all fences, but in the case of a single one it obviously doesn't matter. Just like <code>acquire_next_image_khr</code> this function also takes a timeout. Unlike the semaphores, we manually need to restore the fence to the unsignaled state by resetting it with the <code>reset_fences</code> call.</p>
 <p>If you run the program now, you'll notice something something strange. The application no longer seems to be rendering anything and might even be frozen.</p>
 <p>That means that we're waiting for a fence that has not been submitted. The problem here is that, by default, fences are created in the unsignaled state. That means that <code>wait_for_fences</code> will wait forever if we haven't used the fence before. To solve that, we can change the fence creation to initialize it in the signaled state as if we had rendered an initial frame that finished:</p>
-<pre><code class="language-rust noplaypen">fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     // ...
 
     let fence_info = vk::FenceCreateInfo::builder()
@@ -2616,7 +2653,7 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>Prepare it in <code>create_sync_objects</code>:</p>
-<pre><code class="language-rust noplaypen">fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_sync_objects(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     // ...
 
     data.images_in_flight = data.swapchain_images
@@ -2628,7 +2665,7 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>Initially not a single frame is using an image so we explicitly initialize it to <em>no fence</em>. Now we'll modify <code>App::render</code> to wait on any previous frame that is using the image that we've just been assigned for the new frame:</p>
-<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     // ...
 
     let image_index = self
@@ -2656,7 +2693,7 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>Because we now have more calls to <code>wait_for_fences</code>, the <code>reset_fences</code> call should be <strong>moved</strong>. It's best to simply call it right before actually using the fence:</p>
-<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     // ...
 
     self.device.reset_fences(&amp;[self.data.in_flight_fences[self.frame]])?;
@@ -2680,7 +2717,7 @@ let present_info = vk::PresentInfoKHR::builder()
 <p>The application we have now successfully draws a triangle, but there are some circumstances that it isn't handling properly yet. It is possible for the window surface to change such that the swapchain is no longer compatible with it. One of the reasons that could cause this to happen is the size of the window changing. We have to catch these events and recreate the swapchain.</p>
 <h2><a class="header" href="#recreating-the-swapchain" id="recreating-the-swapchain">Recreating the swapchain</a></h2>
 <p>Create a new <code>App::recreate_swapchain</code> method that calls <code>create_swapchain</code> and all of the creation functions for the objects that depend on the swapchain or the window size.</p>
-<pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     self.device.device_wait_idle()?;
     create_swapchain(window, &amp;self.instance, &amp;self.device, &amp;mut self.data)?;
     create_swapchain_image_views(&amp;self.device, &amp;mut self.data)?;
@@ -2696,18 +2733,18 @@ let present_info = vk::PresentInfoKHR::builder()
 </code></pre>
 <p>We first call <code>device_wait_idle</code>, because just like in the last chapter, we shouldn't touch resources that may still be in use. Obviously, the first thing we'll have to do is recreate the swapchain itself. The image views need to be recreated because they are based directly on the swapchain images. The render pass needs to be recreated because it depends on the format of the swapchain images. It is rare for the swapchain image format to change during an operation like a window resize, but it should still be handled. Viewport and scissor rectangle size is specified during graphics pipeline creation, so the pipeline also needs to be rebuilt. It is possible to avoid this by using dynamic state for the viewports and scissor rectangles. Then, the framebuffers and command buffers also directly depend on the swapchain images. Lastly we resize our list of fences for the swapchain images since there is a possibility that there might be a different number of swapchain images after recreation.</p>
 <p>To make sure that the old versions of these objects are cleaned up before recreating them, we should move some of the cleanup code to a separate method that we can call from the <code>App::recreate_swapchain</code> method after waiting for the device to be idle. Let's call it <code>App::destroy_swapchain</code>:</p>
-<pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     self.device.device_wait_idle()?;
     self.destroy_swapchain();
     // ...
 }
 
-fn destroy_swapchain(&amp;mut self) {
+unsafe fn destroy_swapchain(&amp;mut self) {
 
 }
 </code></pre>
 <p>We'll move the cleanup code of all objects that are recreated as part of a swapchain refresh from <code>App::destroy</code> to <code>App::destroy_swapchain</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
 
     self.data.in_flight_fences
@@ -2730,7 +2767,7 @@ fn destroy_swapchain(&amp;mut self) {
     self.instance.destroy_instance(None);
 }
 
-fn destroy_swapchain(&amp;mut self) {
+unsafe fn destroy_swapchain(&amp;mut self) {
     self.data.framebuffers
         .iter()
         .for_each(|f| self.device.destroy_framebuffer(*f, None));
@@ -2808,14 +2845,14 @@ if self.resized || changed {
 <p>Now try to run the program and resize the window to see if the framebuffer is indeed resized properly with the window.</p>
 <h2><a class="header" href="#handling-minimization" id="handling-minimization">Handling minimization</a></h2>
 <p>There is another case where a swapchain may become out of data and that is a special kind of window resizing: window minimization. This case is special because it will result in a framebuffer size of <code>0</code>. In this tutorial we will handle that by not rendering frames while the window is minimized:</p>
-<pre><code class="language-rust noplaypen">let mut app = App::create(&amp;window)?;
+<pre><code class="language-rust noplaypen">let mut app = unsafe { App::create(&amp;window)? };
 let mut destroying = false;
 let mut minimized = false;
 event_loop.run(move |event, _, control_flow| {
     *control_flow = ControlFlow::Poll;
     match event {
         Event::MainEventsCleared if !destroying &amp;&amp; !minimized =&gt;
-            app.render(&amp;window).unwrap(),
+            unsafe { app.render(&amp;window) }.unwrap(),
         Event::WindowEvent { event: WindowEvent::Resized(size), .. } =&gt; {
             if size.width == 0 || size.height == 0 {
                 minimized = true;
@@ -2960,14 +2997,16 @@ let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder()
 <p>Buffers in Vulkan are regions of memory used for storing arbitrary data that can be read by the graphics card. They can be used to store vertex data, which we'll do in this chapter, but they can also be used for many other purposes that we'll explore in future chapters. Unlike the Vulkan objects we've been dealing with so far, buffers do not automatically allocate memory for themselves. The work from the previous chapters has shown that the Vulkan API puts the programmer in control of almost everything and memory management is one of those things.</p>
 <h2><a class="header" href="#buffer-creation" id="buffer-creation">Buffer creation</a></h2>
 <p>Create a new function <code>create_vertex_buffer</code> and call it from <code>App::create</code> right before <code>create_command_buffers</code>.</p>
-<pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
-    // ...
-    create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;
-    create_command_buffers(&amp;device, &amp;mut data)?;
-    // ...
+<pre><code class="language-rust noplaypen">impl App {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+        // ...
+        create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;
+        create_command_buffers(&amp;device, &amp;mut data)?;
+        // ...
+    }
 }
 
-fn create_vertex_buffer(
+unsafe fn create_vertex_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -2995,7 +3034,7 @@ fn create_vertex_buffer(
 }
 </code></pre>
 <p>Next add the call to <code>create_buffer</code>:</p>
-<pre><code class="language-rust noplaypen">fn create_vertex_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn create_vertex_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -3011,7 +3050,7 @@ fn create_vertex_buffer(
 }
 </code></pre>
 <p>The buffer should be available for use in rendering commands until the end of the program and it does not depend on the swapchain, so we'll clean it up in the original <code>App::destroy</code> method:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_buffer(self.data.vertex_buffer, None);
     // ...
@@ -3028,7 +3067,7 @@ fn create_vertex_buffer(
 <li><code>memory_type_bits</code> – Bit field of the memory types that are suitable for the buffer.</li>
 </ul>
 <p>Graphics cards can offer different types of memory to allocate from. Each type of memory varies in terms of allowed operations and performance characteristics. We need to combine the requirements of the buffer and our own application requirements to find the right type of memory to use. Let's create a new function <code>get_memory_type_index</code> for this purpose.</p>
-<pre><code class="language-rust noplaypen">fn get_memory_type_index(
+<pre><code class="language-rust noplaypen">unsafe fn get_memory_type_index(
     instance: &amp;Instance,
     data: &amp;AppData,
     properties: vk::MemoryPropertyFlags,
@@ -3083,7 +3122,7 @@ fn create_vertex_buffer(
 </code></pre>
 <p>The first two parameters are self-explanatory and the third parameter is the offset within the region of memory. Since this memory is allocated specifically for this the vertex buffer, the offset is simply <code>0</code>. If the offset is non-zero, then it is required to be divisible by <code>requirements.alignment</code>.</p>
 <p>Of course, just like dynamic memory allocation in C, the memory should be freed at some point. Memory that is bound to a buffer object may be freed once the buffer is no longer used, so let's free it after the buffer has been destroyed:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_buffer(self.data.vertex_buffer, None);
     self.device.free_memory(self.data.vertex_buffer_memory, None);
@@ -3104,7 +3143,7 @@ fn create_vertex_buffer(
 <pre><code class="language-rust noplaypen">use std::ptr::copy_nonoverlapping as memcpy;
 </code></pre>
 <p>Now we can copy the vertex data into the buffer memory and then unmap it again using <code>unmap_memory</code>.</p>
-<pre><code class="language-rust noplaypen">unsafe { memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len()) };
+<pre><code class="language-rust noplaypen">memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len());
 device.unmap_memory(data.vertex_buffer_memory);
 </code></pre>
 <p>Unfortunately the driver may not immediately copy the data into the buffer memory, for example because of caching. It is also possible that writes to the buffer are not visible in the mapped memory yet. There are two ways to deal with that problem:</p>
@@ -3152,7 +3191,7 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
 <p>It's a bit of work, but it'll teach you a lot about how resources are shared between queue families.</p>
 <h2><a class="header" href="#abstracting-buffer-creation" id="abstracting-buffer-creation">Abstracting buffer creation</a></h2>
 <p>Because we're going to create multiple buffers in this chapter, it's a good idea to move buffer creation to a helper function. Create a new function <code>create_buffer</code> and move the code in <code>create_vertex_buffer</code> (except mapping) to it.</p>
-<pre><code class="language-rust noplaypen">fn create_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn create_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;AppData,
@@ -3187,7 +3226,7 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
 </code></pre>
 <p>Make sure to add parameters for the buffer size, usage and memory properties so that we can use this function to create many different types of buffers.</p>
 <p>You can now remove the buffer creation and memory allocation code from <code>create_vertex_buffer</code> and just call <code>create_buffer</code> instead:</p>
-<pre><code class="language-rust noplaypen">fn create_vertex_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn create_vertex_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -3213,7 +3252,7 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
         vk::MemoryMapFlags::empty(),
     )?;
 
-    unsafe { memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len()) };
+    memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len());
 
     device.unmap_memory(vertex_buffer_memory);
 
@@ -3223,7 +3262,7 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
 <p>Run your program to make sure that the vertex buffer still works properly.</p>
 <h2><a class="header" href="#using-a-staging-buffer" id="using-a-staging-buffer">Using a staging buffer</a></h2>
 <p>We're now going to change <code>create_vertex_buffer</code> to only use a host visible buffer as temporary buffer and use a device local one as actual vertex buffer.</p>
-<pre><code class="language-rust noplaypen">fn create_vertex_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn create_vertex_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -3246,7 +3285,7 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
         vk::MemoryMapFlags::empty(),
     )?;
 
-    unsafe { memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len()) };
+    memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len());
 
     device.unmap_memory(staging_buffer_memory);
 
@@ -3272,7 +3311,7 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
 </ul>
 <p>The <code>vertex_buffer</code> is now allocated from a memory type that is device local, which generally means that we're not able to use <code>map_memory</code>. However, we can copy data from the <code>staging_buffer</code> to the <code>vertex_buffer</code>. We have to indicate that we intend to do that by specifying the transfer source flag for the <code>staging_buffer</code> and the transfer destination flag for the <code>vertex_buffer</code>, along with the vertex buffer usage flag.</p>
 <p>We're now going to write a function to copy the contents from one buffer to another, called <code>copy_buffer</code>.</p>
-<pre><code class="language-rust noplaypen">fn copy_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn copy_buffer(
     device: &amp;Device,
     data: &amp;AppData,
     source: vk::Buffer,
@@ -3283,7 +3322,7 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
 }
 </code></pre>
 <p>Memory transfer operations are executed using command buffers, just like drawing commands. Therefore we must first allocate a temporary command buffer. You may wish to create a separate command pool for these kinds of short-lived buffers, because the implementation may be able to apply memory allocation optimizations. You should use the <code>vk::CommandPoolCreateFlags::TRANSIENT</code> flag during command pool generation in that case.</p>
-<pre><code class="language-rust noplaypen">fn copy_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn copy_buffer(
     device: &amp;Device,
     data: &amp;AppData,
     source: vk::Buffer,
@@ -3368,7 +3407,7 @@ device.free_memory(staging_buffer_memory, None);
 </code></pre>
 <p>The <code>create_index_buffer</code> function that we'll add now is almost identical to <code>create_vertex_buffer</code>:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;
         create_index_buffer(&amp;instance, &amp;device, &amp;mut data)?;
@@ -3376,7 +3415,7 @@ device.free_memory(staging_buffer_memory, None);
     }
 }
 
-fn create_index_buffer(
+unsafe fn create_index_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -3399,7 +3438,7 @@ fn create_index_buffer(
         vk::MemoryMapFlags::empty(),
     )?;
 
-    unsafe { memcpy(INDICES.as_ptr(), memory.cast(), INDICES.len()) };
+    memcpy(INDICES.as_ptr(), memory.cast(), INDICES.len());
 
     device.unmap_memory(staging_buffer_memory);
 
@@ -3425,7 +3464,7 @@ fn create_index_buffer(
 </code></pre>
 <p>There are only two notable differences. The <code>size</code> is now equal to the number of indices times the size of the index type, either <code>u16</code> or <code>u32</code>. The usage of the <code>index_buffer</code> should be <code>vk::BufferUsageFlags::INDEX_BUFFER</code> instead of <code>vk::BufferUsageFlags::VERTEX_BUFFER</code>, which makes sense. Other than that, the process is exactly the same. We create a staging buffer to copy the contents of <code>INDICES</code> to and then copy it to the final device local index buffer.</p>
 <p>The index buffer should be cleaned up at the end of the program, just like the vertex buffer:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_buffer(self.data.index_buffer, None);
     self.device.free_memory(self.data.index_buffer_memory, None);
@@ -3516,7 +3555,7 @@ struct UniformBufferObject {
 <p>We can exactly match the definition in the shader using data types in GLM. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a <code>UniformBufferObject</code> to a <code>vk::Buffer</code>.</p>
 <p>We need to provide details about every descriptor binding used in the shaders for pipeline creation, just like we had to do for every vertex attribute and its <code>location</code> index. We'll set up a new function to define all of this information called <code>create_descriptor_set_layout</code>. It should be called right before pipeline creation, because we're going to need it there.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_descriptor_set_layout(&amp;device, &amp;mut data)?;
         create_pipeline(&amp;device, &amp;mut data)?;
@@ -3525,12 +3564,18 @@ struct UniformBufferObject {
 }
 
 
-fn create_descriptor_set_layout(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_descriptor_set_layout(
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
 <p>Every binding needs to be described through a <code>vk::DescriptorSetLayoutBinding</code> struct.</p>
-<pre><code class="language-rust noplaypen">fn create_descriptor_set_layout(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_descriptor_set_layout(
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
     let ubo_binding = vk::DescriptorSetLayoutBinding::builder()
         .binding(0)
         .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
@@ -3565,7 +3610,7 @@ let layout_info = vk::PipelineLayoutCreateInfo::builder()
 </code></pre>
 <p>You may be wondering why it's possible to specify multiple descriptor set layouts here, because a single one already includes all of the bindings. We'll get back to that in the next chapter, where we'll look into descriptor pools and descriptor sets.</p>
 <p>The descriptor layout should stick around while we may create new graphics pipelines i.e. until the program ends:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_descriptor_set_layout(self.data.descriptor_set_layout, None);
     // ...
@@ -3586,7 +3631,7 @@ let layout_info = vk::PipelineLayoutCreateInfo::builder()
 </code></pre>
 <p>Similarly, create a new function <code>create_uniform_buffers</code> that is called after <code>create_index_buffer</code> and allocates the buffers:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;
         create_index_buffer(&amp;instance, &amp;device, &amp;mut data)?;
@@ -3595,7 +3640,7 @@ let layout_info = vk::PipelineLayoutCreateInfo::builder()
     }
 }
 
-fn create_uniform_buffers(
+unsafe fn create_uniform_buffers(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -3621,7 +3666,7 @@ fn create_uniform_buffers(
 }
 </code></pre>
 <p>We're going to write a separate function that updates the uniform buffer with a new transformation every frame, so there will be no <code>map_memory</code> here. The uniform data will be used for all draw calls, so the buffer containing it should only be destroyed when we stop rendering. Since it also depends on the number of swapchain images, which could change after a recreation, we'll clean it up in <code>destroy_swapchain</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy_swapchain(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy_swapchain(&amp;mut self) {
     self.data.uniform_buffers
         .iter()
         .for_each(|b| self.device.destroy_buffer(*b, None));
@@ -3632,7 +3677,7 @@ fn create_uniform_buffers(
 }
 </code></pre>
 <p>This means that we also need to recreate it in <code>recreate_swapchain</code>:</p>
-<pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     // ...
     create_framebuffers(&amp;self.device, &amp;mut self.data)?;
     create_uniform_buffers(&amp;self.instance, &amp;self.device, &amp;mut self.data)?;
@@ -3643,7 +3688,7 @@ fn create_uniform_buffers(
 <h2><a class="header" href="#updating-uniform-data" id="updating-uniform-data">Updating uniform data</a></h2>
 <p>Create a new method <code>App::update_uniform_buffer</code> and add a call to it from the <code>App::render</code> method right after we wait for the fence for the acquired swapchain image to be signalled:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
         // ...
 
         if !self.data.images_in_flight[image_index as usize].is_null() {
@@ -3662,7 +3707,7 @@ fn create_uniform_buffers(
         // ...
     }
 
-    fn update_uniform_buffer(&amp;self, image_index: usize) -&gt; Result&lt;()&gt; {
+    unsafe fn update_uniform_buffer(&amp;self, image_index: usize) -&gt; Result&lt;()&gt; {
         Ok(())
     }
 }
@@ -3680,7 +3725,7 @@ fn create_uniform_buffers(
 }
 </code></pre>
 <p>We can now use that field to determine how many seconds it has been since the application started:</p>
-<pre><code class="language-rust noplaypen">fn update_uniform_buffer(&amp;self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_uniform_buffer(&amp;self, image_index: usize) -&gt; Result&lt;()&gt; {
     let time = self.start.elapsed().as_secs_f32();
 
     Ok(())
@@ -3723,7 +3768,7 @@ fn create_uniform_buffers(
     vk::MemoryMapFlags::empty(),
 )?;
 
-unsafe { memcpy(&amp;ubo, memory.cast(), 1) };
+memcpy(&amp;ubo, memory.cast(), 1);
 
 self.device.unmap_memory(self.data.uniform_buffers_memory[image_index]);
 </code></pre>
@@ -3735,7 +3780,7 @@ self.device.unmap_memory(self.data.uniform_buffers_memory[image_index]);
 <h2><a class="header" href="#descriptor-pool" id="descriptor-pool">Descriptor pool</a></h2>
 <p>Descriptor sets can't be created directly, they must be allocated from a pool like command buffers. The equivalent for descriptor sets is unsurprisingly called a <em>descriptor pool</em>. We'll write a new function <code>create_descriptor_pool</code> to set it up.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_uniform_buffers(&amp;instance, &amp;device, &amp;mut data)?;
         create_descriptor_pool(&amp;device, &amp;mut data)?;
@@ -3743,7 +3788,7 @@ self.device.unmap_memory(self.data.uniform_buffers_memory[image_index]);
     }
 }
 
-fn create_descriptor_pool(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_descriptor_pool(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
@@ -3771,13 +3816,13 @@ let info = vk::DescriptorPoolCreateInfo::builder()
 <pre><code class="language-rust noplaypen">data.descriptor_pool = device.create_descriptor_pool(&amp;info, None)?;
 </code></pre>
 <p>The descriptor pool should be destroyed when the swapchain is recreated because it depends on the number of images:</p>
-<pre><code class="language-rust noplaypen">fn destroy_swapchain(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy_swapchain(&amp;mut self) {
     self.device.destroy_descriptor_pool(self.data.descriptor_pool, None);
     // ...
 }
 </code></pre>
 <p>And recreated in <code>App::recreate_swapchain</code>:</p>
-<pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     // ...
     create_uniform_buffers(&amp;self.instance, &amp;self.device, &amp;mut self.data)?;
     create_descriptor_pool(&amp;self.device, &amp;mut self.data)?;
@@ -3787,14 +3832,14 @@ let info = vk::DescriptorPoolCreateInfo::builder()
 <h2><a class="header" href="#descriptor-set" id="descriptor-set">Descriptor set</a></h2>
 <p>We can now allocate the descriptor sets themselves. Add a <code>create_descriptor_sets</code> function for that purpose:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_descriptor_pool(&amp;device, &amp;mut data)?;
         create_descriptor_sets(&amp;device, &amp;mut data)?;
         // ...
     }
 
-    fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
         // ..
         create_descriptor_pool(&amp;self.device, &amp;mut self.data)?;
         create_descriptor_sets(&amp;self.device, &amp;mut self.data)?;
@@ -3802,7 +3847,7 @@ let info = vk::DescriptorPoolCreateInfo::builder()
     }
 }
 
-fn create_descriptor_sets(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_descriptor_sets(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
@@ -3877,7 +3922,7 @@ device.cmd_draw_indexed(*command_buffer, INDICES.len() as u32, 1, 0, 0, 0);
 <p><img src="uniform/../images/spinning_quad.png" alt="" /></p>
 <p>The rectangle has changed into a square because the projection matrix now corrects for aspect ratio. The <code>App::update_uniform_buffer</code> method takes care of screen resizing, so we don't need to recreate the descriptor set in <code>App::recreate_swapchain</code>.</p>
 <h2><a class="header" href="#alignment-requirements" id="alignment-requirements">Alignment requirements</a></h2>
-<p>One thing we've glossed over so far is how exactly the data in the C++ structure should match with the uniform definition in the shader. It seems obvious enough to simply use the same types in both:</p>
+<p>One thing we've glossed over so far is how exactly the data in the Rust structure should match with the uniform definition in the shader. It seems obvious enough to simply use the same types in both:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
@@ -3965,7 +4010,7 @@ struct UniformBufferObject {
 </code></pre>
 <p>Create a new function <code>create_texture_image</code> where we'll load an image and upload it into a Vulkan image object. We're going to use command buffers, so it should be called after <code>create_command_pool</code>.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_command_pool(&amp;instance, &amp;device, &amp;mut data)?;
         create_texture_image(&amp;instance, &amp;device, &amp;mut data)?;
@@ -3973,7 +4018,7 @@ struct UniformBufferObject {
     }
 }
 
-fn create_texture_image(
+unsafe fn create_texture_image(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -3984,7 +4029,7 @@ fn create_texture_image(
 <p>Create a new directory <code>resources</code> next to the <code>shaders</code> directory to store texture images in. We're going to load an image called <code>texture.png</code> from that directory. I've chosen to use the following <a href="https://pixabay.com/en/statue-sculpture-fig-historically-1275469/">CC0 licensed image</a> resized to 512 x 512 pixels, but feel free to pick any PNG image (with an alpha channel) you want.</p>
 <p><img src="texture/../images/texture.png" alt="" /></p>
 <p>Loading an image with this library is really easy:</p>
-<pre><code class="language-rust noplaypen">fn create_texture_image(
+<pre><code class="language-rust noplaypen">unsafe fn create_texture_image(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -4022,7 +4067,7 @@ fn create_texture_image(
     vk::MemoryMapFlags::empty(),
 )?;
 
-unsafe { memcpy(pixels.as_ptr(), memory.cast(), pixels.len()) };
+memcpy(pixels.as_ptr(), memory.cast(), pixels.len());
 
 device.unmap_memory(staging_buffer_memory);
 </code></pre>
@@ -4091,7 +4136,7 @@ device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
 </code></pre>
 <p>Allocating memory for an image works in exactly the same way as allocating memory for a buffer. Use <code>get_image_memory_requirements</code> instead of <code>get_buffer_memory_requirements</code>, and use <code>bind_image_memory</code> instead of <code>bind_buffer_memory</code>.</p>
 <p>This function is already getting quite large and there'll be a need to create more images in later chapters, so we should abstract image creation into a <code>create_image</code> function, like we did for buffers. Create the function and move the image object creation and memory allocation to it:</p>
-<pre><code class="language-rust noplaypen">fn create_image(
+<pre><code class="language-rust noplaypen">unsafe fn create_image(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;AppData,
@@ -4140,7 +4185,7 @@ device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
 </code></pre>
 <p>I've made the width, height, format, tiling mode, usage, and memory properties parameters, because these will all vary between the images we'll be creating throughout this tutorial.</p>
 <p>The <code>create_texture_image</code> function can now be simplified to:</p>
-<pre><code class="language-rust noplaypen">fn create_texture_image(
+<pre><code class="language-rust noplaypen">unsafe fn create_texture_image(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -4171,7 +4216,7 @@ device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
         vk::MemoryMapFlags::empty(),
     )?;
 
-    unsafe { memcpy(pixels.as_ptr(), memory.cast(), pixels.len()) };
+    memcpy(pixels.as_ptr(), memory.cast(), pixels.len());
 
     device.unmap_memory(staging_buffer_memory);
 
@@ -4195,7 +4240,7 @@ device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
 </code></pre>
 <h2><a class="header" href="#layout-transitions" id="layout-transitions">Layout transitions</a></h2>
 <p>The function we're going to write now involves recording and executing a command buffer again, so now's a good time to move that logic into a helper function or two:</p>
-<pre><code class="language-rust noplaypen">fn begin_single_time_commands(
+<pre><code class="language-rust noplaypen">unsafe fn begin_single_time_commands(
     device: &amp;Device,
     data: &amp;AppData,
 ) -&gt; Result&lt;vk::CommandBuffer&gt; {
@@ -4214,7 +4259,7 @@ device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
     Ok(command_buffer)
 }
 
-fn end_single_time_commands(
+unsafe fn end_single_time_commands(
     device: &amp;Device,
     data: &amp;AppData,
     command_buffer: vk::CommandBuffer,
@@ -4234,7 +4279,7 @@ fn end_single_time_commands(
 }
 </code></pre>
 <p>The code for these functions is based on the existing code in <code>copy_buffer</code>. You can now simplify that function to:</p>
-<pre><code class="language-rust noplaypen">fn copy_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn copy_buffer(
     device: &amp;Device,
     data: &amp;AppData,
     source: vk::Buffer,
@@ -4252,7 +4297,7 @@ fn end_single_time_commands(
 }
 </code></pre>
 <p>If we were still using buffers, then we could now write a function to record and execute <code>cmd_copy_buffer_to_image</code> to finish the job, but this command requires the image to be in the right layout first. Create a new function to handle layout transitions:</p>
-<pre><code class="language-rust noplaypen">fn transition_image_layout(
+<pre><code class="language-rust noplaypen">unsafe fn transition_image_layout(
     device: &amp;Device,
     data: &amp;AppData,
     image: vk::Image,
@@ -4309,7 +4354,7 @@ fn end_single_time_commands(
 <p>The last three parameters reference slices of pipeline barriers of the three available types: memory barriers, buffer memory barriers, and image memory barriers like the one we're using here. Note that we're not using the <code>vk::Format</code> parameter yet, but we'll be using that one for special transitions in the depth buffer chapter.</p>
 <h2><a class="header" href="#copying-buffer-to-image" id="copying-buffer-to-image">Copying buffer to image</a></h2>
 <p>Before we get back to <code>create_texture_image</code>, we're going to write one more helper function: <code>copy_bufer_to_image</code>:</p>
-<pre><code class="language-rust noplaypen">fn copy_buffer_to_image(
+<pre><code class="language-rust noplaypen">unsafe fn copy_buffer_to_image(
     device: &amp;Device,
     data: &amp;AppData,
     buffer: vk::Buffer,
@@ -4448,7 +4493,7 @@ device.cmd_pipeline_barrier(
 device.free_memory(staging_buffer_memory, None);
 </code></pre>
 <p>The main texture image is used until the end of the program:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_image(self.data.texture_image, None);
     self.device.free_memory(self.data.texture_image_memory, None);
@@ -4463,7 +4508,7 @@ device.free_memory(staging_buffer_memory, None);
 <p>We've seen before, with the swapchain images and the framebuffer, that images are accessed through image views rather than directly. We will also need to create such an image view for the texture image.</p>
 <p>Add an <code>AppData</code> field to hold a <code>vk::ImageView</code> for the texture image and create a new function <code>create_texture_image_view</code> where we'll create it:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_texture_image(&amp;instance, &amp;device, &amp;mut data)?;
         create_texture_image_view(&amp;device, &amp;mut data)?;
@@ -4479,7 +4524,7 @@ struct AppData {
     // ...
 }
 
-fn create_texture_image_view(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_texture_image_view(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
@@ -4501,7 +4546,7 @@ let info = vk::ImageViewCreateInfo::builder()
 <pre><code class="language-rust noplaypen">data.texture_image_view = device.create_image_view(&amp;info, None)?;
 </code></pre>
 <p>Because so much of the logic is duplicated from <code>create_swapchain_image_views</code>, you may wish to abstract it into a new <code>create_image_view</code> function:</p>
-<pre><code class="language-rust noplaypen">fn create_image_view(
+<pre><code class="language-rust noplaypen">unsafe fn create_image_view(
     device: &amp;Device,
     image: vk::Image,
     format: vk::Format,
@@ -4523,7 +4568,7 @@ let info = vk::ImageViewCreateInfo::builder()
 }
 </code></pre>
 <p>The <code>create_texture_image_view</code> function can now be simplified to:</p>
-<pre><code class="language-rust noplaypen">fn create_texture_image_view(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_texture_image_view(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     data.texture_image_view = create_image_view(
         device,
         data.texture_image,
@@ -4534,7 +4579,7 @@ let info = vk::ImageViewCreateInfo::builder()
 }
 </code></pre>
 <p>And <code>create_swapchain_image_views</code> can be simplified to:</p>
-<pre><code class="language-rust noplaypen">fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     data.swapchain_image_views = data
         .swapchain_images
         .iter()
@@ -4545,7 +4590,7 @@ let info = vk::ImageViewCreateInfo::builder()
 }
 </code></pre>
 <p>Make sure to destroy the image view at the end of the program, right before destroying the image itself:</p>
-<pre><code class="language-c++">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_image_view(self.data.texture_image_view, None);
     // ...
@@ -4563,7 +4608,7 @@ let info = vk::ImageViewCreateInfo::builder()
 <p><img src="texture/../images/texture_addressing.png" alt="" /></p>
 <p>We will now create a function <code>create_texture_sampler</code> to set up such a sampler object. We'll be using that sampler to read colors from the texture in the shader later on.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_texture_image(&amp;instance, &amp;device, &amp;mut data)?;
         create_texture_image_view(&amp;device, &amp;mut data)?;
@@ -4572,7 +4617,7 @@ let info = vk::ImageViewCreateInfo::builder()
     }
 }
 
-fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
@@ -4629,7 +4674,7 @@ fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Res
 </code></pre>
 <p>Note the sampler does not reference a <code>vk::Image</code> anywhere. The sampler is a distinct object that provides an interface to extract colors from a texture. It can be applied to any image you want, whether it is 1D, 2D or 3D. This is different from many older APIs, which combined texture images and filtering into a single state.</p>
 <p>Destroy the sampler at the end of the program when we'll no longer be accessing the image:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_sampler(self.data.texture_sampler, None);
     // ...
@@ -4643,7 +4688,7 @@ fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Res
     .sampler_anisotropy(true);
 </code></pre>
 <p>And even though it is very unlikely that a modern graphics card will not support it, we should update <code>check_physical_device</code> to check if it is available:</p>
-<pre><code class="language-rust noplaypen">fn check_physical_device(
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
@@ -4937,7 +4982,7 @@ const INDICES: &amp;[u16] = &amp;[
 </code></pre>
 <p>Create a new function <code>create_depth_objects</code> to set up these resources:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_command_pool(&amp;instance, &amp;device, &amp;mut data)?;
         create_depth_objects(&amp;instance, &amp;device, &amp;mut data)?;
@@ -4945,7 +4990,7 @@ const INDICES: &amp;[u16] = &amp;[
     }
 }
 
-fn create_depth_objects(
+unsafe fn create_depth_objects(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -4962,7 +5007,7 @@ fn create_depth_objects(
 </ul>
 <p>The stencil component is used for <a href="https://en.wikipedia.org/wiki/Stencil_buffer">stencil tests</a>, which is an additional test that can be combined with depth testing. We'll look at this in a future chapter.</p>
 <p>We could simply go for the <code>vk::Format::D32_SFLOAT</code> format, because support for it is extremely common (see the hardware database), but it's nice to add some extra flexibility to our application where possible. We're going to write a <code>get_supported_format</code> function that takes a list of candidate formats in order from most desirable to least desirable and returns the first that satisfies our requirements:</p>
-<pre><code class="language-rust noplaypen">fn get_supported_format(
+<pre><code class="language-rust noplaypen">unsafe fn get_supported_format(
     instance: &amp;Instance,
     data: &amp;AppData,
     candidates: &amp;[vk::Format],
@@ -4998,7 +5043,7 @@ fn create_depth_objects(
 }
 </code></pre>
 <p>We'll use this function now to create a <code>get_depth_format</code> helper function to select a format with a depth component that supports usage as depth attachment:</p>
-<pre><code class="language-rust noplaypen">fn get_depth_format(instance: &amp;Instance, data: &amp;AppData) -&gt; Result&lt;vk::Format&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn get_depth_format(instance: &amp;Instance, data: &amp;AppData) -&gt; Result&lt;vk::Format&gt; {
     let candidates = &amp;[
         vk::Format::D32_SFLOAT,
         vk::Format::D32_SFLOAT_S8_UINT,
@@ -5038,7 +5083,7 @@ data.depth_image_memory = depth_image_memory;
 data.depth_image_view = create_image_view(device, data.depth_image, format)?;
 </code></pre>
 <p>However, the <code>create_image_view</code> function currently assumes that the subresource always uses <code>vk::ImageAspectFlags::COLOR</code>, so we will need to turn that field into a parameter:</p>
-<pre><code class="language-rust noplaypen">fn create_image_view(
+<pre><code class="language-rust noplaypen">unsafe fn create_image_view(
     device: &amp;Device,
     image: vk::Image,
     format: vk::Format,
@@ -5181,7 +5226,7 @@ let create_info = vk::FramebufferCreateInfo::builder()
 </code></pre>
 <p>The color attachment differs for every swapchain image, but the same depth image can be used by all of them because only a single subpass is running at the same time due to our semaphores.</p>
 <p>You'll also need to move the call to <code>create_framebuffers</code> to make sure that it is called after the depth image view has actually been created:</p>
-<pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
     // ...
     create_depth_objects(&amp;instance, &amp;device, &amp;mut data)?;
     create_framebuffers(&amp;device, &amp;mut data)?;
@@ -5246,7 +5291,7 @@ let clear_values = &amp;[color_clear_value, depth_clear_value];
 <p><img src="model/../images/depth_correct.png" alt="" /></p>
 <h2><a class="header" href="#handling-window-resize" id="handling-window-resize">Handling window resize</a></h2>
 <p>The resolution of the depth buffer should change when the window is resized to match the new color attachment resolution. Extend the <code>App::recreate_swapchain</code> method to recreate the depth resources in that case:</p>
-<pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     self.device.device_wait_idle()?;
     self.destroy_swapchain();
     create_swapchain(window, &amp;self.instance, &amp;self.device, &amp;mut self.data)?;
@@ -5263,7 +5308,7 @@ let clear_values = &amp;[color_clear_value, depth_clear_value];
 }
 </code></pre>
 <p>The cleanup operations should happen in the swapchain cleanup function:</p>
-<pre><code class="language-rust noplaypen">fn destroy_swapchain(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy_swapchain(&amp;mut self) {
     self.device.destroy_image_view(self.data.depth_image_view, None);
     self.device.free_memory(self.data.depth_image_memory, None);
     self.device.destroy_image(self.data.depth_image, None);
@@ -5318,7 +5363,7 @@ use std::io::BufReader;
 </code></pre>
 <p>We're now going to write a <code>load_models</code> function that uses this library to populate the <code>vertices</code> and <code>indices</code> fields with the vertex data from the mesh. It should be called somewhere before the vertex and index buffers are created:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         load_model(&amp;mut data)?;
         create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;
@@ -5460,7 +5505,7 @@ data.mip_levels = (info.width.max(info.height) as f32).log2().floor() as u32 + 1
 </code></pre>
 <p>This calculates the number of levels in the mip chain. The <code>max</code> method selects the largest dimension. The <code>log2</code> method calculates how many times that dimension can be divided by 2. The <code>floor</code> method handles cases where the largest dimension is not a power of 2. <code>1</code> is added so that the original image has a mip level.</p>
 <p>To use this value, we need to change the <code>create_image</code>, <code>create_image_view</code>, and <code>transition_image_layout</code> functions to allow us to specify the number of mip levels. Add a <code>mip_levels</code> parameter to the functions:</p>
-<pre><code class="language-rust noplaypen">fn create_image(
+<pre><code class="language-rust noplaypen">unsafe fn create_image(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;AppData,
@@ -5480,7 +5525,7 @@ data.mip_levels = (info.width.max(info.height) as f32).log2().floor() as u32 + 1
     // ...
 }
 </code></pre>
-<pre><code class="language-rust noplaypen">fn create_image_view(
+<pre><code class="language-rust noplaypen">unsafe fn create_image_view(
     device: &amp;Device,
     image: vk::Image,
     format: vk::Format,
@@ -5495,7 +5540,7 @@ data.mip_levels = (info.width.max(info.height) as f32).log2().floor() as u32 + 1
     // ...
 }
 </code></pre>
-<pre><code class="language-rust noplaypen">fn transition_image_layout(
+<pre><code class="language-rust noplaypen">unsafe fn transition_image_layout(
     device: &amp;Device,
     data: &amp;AppData,
     image: vk::Image,
@@ -5615,7 +5660,7 @@ transition_image_layout(
 <p><code>transition_image_layout</code> only performs layout transitions on the entire image, so we'll need to write a few more pipeline barrier commands. Remove the existing transition to <code>vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL</code> in <code>create_texture_image</code>.</p>
 <p>This will leave each level of the texture image in <code>vk::ImageLayout::TRANSFER_DST_OPTIMAL</code>. Each level will be transitioned to <code>vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL</code> after the blit command reading from it is finished.</p>
 <p>We're now going to write the function that generates the mipmaps:</p>
-<pre><code class="language-rust noplaypen">fn generate_mipmaps(
+<pre><code class="language-rust noplaypen">unsafe fn generate_mipmaps(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;AppData,
@@ -5786,7 +5831,7 @@ end_single_time_commands(device, data, command_buffer)?;
 
 // ...
 
-fn generate_mipmaps(
+unsafe fn generate_mipmaps(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;AppData,
@@ -5837,7 +5882,7 @@ let color = if mipmap_mode == vk::SamplerMipmapMode::NEAREST {
 </code></pre>
 <p>If the object is close to the camera, <code>mag_filter</code> is used as the filter. If the object is further from the camera, <code>min_filter</code> is used. Normally, <code>lod</code> is non-negative, and is only 0 when close the camera. <code>mip_lod_bias</code> lets us force Vulkan to use lower <code>lod</code> and <code>level</code> than it would normally use.</p>
 <p>To see the results of this chapter, we need to choose values for our <code>texture_sampler</code>. We've already set the <code>min_filter</code> and <code>mag_filter</code> to use <code>vk::Filter::LINEAR</code>. We just need to choose values for <code>min_lod</code>, <code>max_lod</code>, <code>mip_lod_bias</code>, and <code>mipmap_mode</code>.</p>
-<pre><code class="language-rust noplaypen">fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     let info = vk::SamplerCreateInfo::builder()
         // ...
         .mipmap_mode(vk::SamplerMipmapMode::LINEAR)
@@ -5883,7 +5928,7 @@ let color = if mipmap_mode == vk::SamplerMipmapMode::NEAREST {
 }
 </code></pre>
 <p>By default we'll be using only one sample per pixel which is equivalent to no multisampling, in which case the final image will remain unchanged. The exact maximum number of samples can be extracted from <code>vk::PhysicalDeviceProperties</code> associated with our selected physical device. We're using a depth buffer, so we have to take into account the sample count for both color and depth. The highest sample count that is supported by both (&amp;) will be the maximum we can support. Add a function that will fetch this information for us:</p>
-<pre><code class="language-rust noplaypen">fn get_max_msaa_samples(
+<pre><code class="language-rust noplaypen">unsafe fn get_max_msaa_samples(
     instance: &amp;Instance,
     data: &amp;AppData,
 ) -&gt; vk::SampleCountFlags {
@@ -5905,7 +5950,7 @@ let color = if mipmap_mode == vk::SamplerMipmapMode::NEAREST {
 }
 </code></pre>
 <p>We will now use this function to set the <code>msaa_samples</code> variable during the physical device selection process. For this, we have to slightly modify the <code>pick_physical_device</code> function:</p>
-<pre><code class="language-rust noplaypen">fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     // ...
 
     data.msaa_samples = get_max_msaa_samples(instance, data);
@@ -5924,7 +5969,7 @@ let color = if mipmap_mode == vk::SamplerMipmapMode::NEAREST {
 }
 </code></pre>
 <p>This new image will have to store the desired number of samples per pixel, so we need to pass this number to <code>vk::ImageCreateInfo</code> during the image creation process. Modify the <code>create_image</code> function by adding a <code>samples</code> parameter:</p>
-<pre><code class="language-rust noplaypen">fn create_image(
+<pre><code class="language-rust noplaypen">unsafe fn create_image(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;AppData,
@@ -5981,7 +6026,7 @@ let (texture_image, texture_image_memory) = create_image(
 )?;
 </code></pre>
 <p>We will now create a multisampled color buffer. Add a <code>create_color_objects</code> function and note that we're using <code>msaaSamples</code> here as a function parameter to <code>createImage</code>. We're also using only one mip level, since this is enforced by the Vulkan specification in case of images with more than one sample per pixel. Also, this color buffer doesn't need mipmaps since it's not going to be used as a texture:</p>
-<pre><code class="language-rust noplaypen">fn create_color_objects(
+<pre><code class="language-rust noplaypen">unsafe fn create_color_objects(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -6016,7 +6061,7 @@ let (texture_image, texture_image_memory) = create_image(
 }
 </code></pre>
 <p>For consistency, call the function right before <code>create_depth_objects</code>:</p>
-<pre><code class="language-rust noplaypen">fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
     // ...
     create_color_objects(&amp;instance, &amp;device, &amp;mut data)?;
     create_depth_objects(&amp;instance, &amp;device, &amp;mut data)?;
@@ -6024,7 +6069,7 @@ let (texture_image, texture_image_memory) = create_image(
 }
 </code></pre>
 <p>Now that we have a multisampled color buffer in place it's time to take care of depth. Modify <code>create_depth_objects</code> and update the number of samples used by the depth buffer:</p>
-<pre><code class="language-rust noplaypen">fn create_depth_objects(
+<pre><code class="language-rust noplaypen">unsafe fn create_depth_objects(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -6049,7 +6094,7 @@ let (texture_image, texture_image_memory) = create_image(
 }
 </code></pre>
 <p>We have now created a couple of new Vulkan resources, so let's not forget to release them when necessary:</p>
-<pre><code class="language-rust noplaypen">fn destroy_swapchain(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy_swapchain(&amp;mut self) {
     self.device.destroy_image_view(self.data.color_image_view, None);
     self.device.free_memory(self.data.color_image_memory, None);
     self.device.destroy_image(self.data.color_image, None);
@@ -6057,7 +6102,7 @@ let (texture_image, texture_image_memory) = create_image(
 }
 </code></pre>
 <p>And update the <code>App::recreate_swapchain</code> method so that the new color image can be recreated in the correct resolution when the window is resized:</p>
-<pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     // ...
     create_color_objects(&amp;self.instance, &amp;self.device, &amp;mut self.data)?;
     create_depth_objects(&amp;self.instance, &amp;self.device, &amp;mut self.data)?;
@@ -6067,7 +6112,7 @@ let (texture_image, texture_image_memory) = create_image(
 <p>We made it past the initial MSAA setup, now we need to start using this new resource in our graphics pipeline, framebuffer, render pass and see the results!</p>
 <h2><a class="header" href="#adding-new-attachments" id="adding-new-attachments">Adding new attachments</a></h2>
 <p>Let's take care of the render pass first. Modify <code>create_render_pass</code> and update color and depth attachment creation info structs:</p>
-<pre><code class="language-rust noplaypen">fn create_render_pass(
+<pre><code class="language-rust noplaypen">unsafe fn create_render_pass(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -6140,7 +6185,7 @@ let info = vk::RenderPassCreateInfo::builder()
 <p><img src="quality/../images/multisampling_comparison_axe.png" alt="" /></p>
 <h2><a class="header" href="#quality-improvements" id="quality-improvements">Quality improvements</a></h2>
 <p>There are certain limitations of our current MSAA implementation which may impact the quality of the output image in more detailed scenes. For example, we're currently not solving potential problems caused by shader aliasing, i.e. MSAA only smoothens out the edges of geometry but not the interior filling. This may lead to a situation when you get a smooth polygon rendered on screen but the applied texture will still look aliased if it contains high contrasting colors. One way to approach this problem is to enable <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#primsrast-sampleshading">Sample Shading</a> which will improve the image quality even further, though at an additional performance cost:</p>
-<pre><code class="language-rust noplaypen">fn create_logical_device(
+<pre><code class="language-rust noplaypen">unsafe fn create_logical_device(
     instance: &amp;Instance,
     data: &amp;mut AppData,
 ) -&gt; Result&lt;Device&gt; {
@@ -6156,7 +6201,7 @@ let info = vk::RenderPassCreateInfo::builder()
 
 // ...
 
-fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     // ...
 
     let multisample_state = vk::PipelineMultisampleStateCreateInfo::builder()
@@ -6253,7 +6298,7 @@ data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
 <p>With all that in place, we can actually start pushing the model matrix to the vertex shader. Push constants are recorded directly into the command buffers submitted to the GPU which is both why they are so fast and why their size is so limited.</p>
 <p>In the <code>create_command_buffers</code> function, define a model matrix and use <code>cmd_push_constants</code> to add it to the the command buffers as a push constant right before we record the draw command.</p>
 <pre><code class="language-rust noplaypen">let model = glm::rotate(&amp;glm::identity(), 0.0f32, &amp;glm::vec3(0.0, 0.0, 1.0));
-let (_, model_bytes, _) = unsafe { model.as_slice().align_to::&lt;u8&gt;() };
+let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
 
 for (i, command_buffer) in data.command_buffers.iter().enumerate() {
     // ...
@@ -6362,12 +6407,12 @@ device.cmd_draw_indexed(*command_buffer, data.indices.len() as u32, 1, 0, 0, 0);
 data.command_pool = device.create_command_pool(&amp;info, None)?;
 </code></pre>
 <p>Next, create a new method for the <code>App</code> struct, <code>update_command_buffer</code>. This method will be called each frame to reset and rerecord the command buffer for the framebuffer that will be used for the current frame.</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
 <p>Call the new method from the <code>render</code> method right before the uniform buffers for the frame are updated (or after, the order of these two statements is not important).</p>
-<pre><code class="language-rust noplaypen">fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     // ...
 
     self.update_command_buffer(image_index)?;
@@ -6378,7 +6423,7 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
 </code></pre>
 <p>Note that we do need to be careful about when we call <code>update_command_buffer</code>. This method will reset the command buffer which could cause serious issues if the command buffer is still being used to render a previously submitted frame. This issue was also discussed in the <a href="dynamic/../uniform/descriptor_layout_and_buffer.html#updating-uniform-data"><code>Descriptor layout and buffer</code> chapter</a> which is why the call to <code>App::update_uniform_buffer</code> is where it is. As discussed in more detail in that chapter, both of these calls only happen after the call to <code>wait_for_fences</code> which waits for the GPU to be done with the acquired swapchain image and its associated resources so we are safe to do whatever we want with the command buffer.</p>
 <p>In the new method, reset the command buffer with <code>reset_command_buffer</code>.</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     let command_buffer = self.data.command_buffers[image_index];
 
     self.device.reset_command_buffer(
@@ -6391,11 +6436,11 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
 </code></pre>
 <p>Once <code>reset_command_buffer</code> has returned, the command buffer will be reset to its initial state, no different than a new command buffer freshly allocated from a command pool.</p>
 <p>Now we can move the command buffer recording code out of <code>create_command_buffers</code> and into <code>update_command_buffer</code>. The loop over the command buffers is no longer necessary since we are only recording one command buffer per frame. Other than that, only a few mechanical changes are needed to migrate this code to our new method (e.g., replacing references to the loop counter <code>i</code> with <code>image_index</code>).</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     // ...
 
     let model = glm::rotate(&amp;glm::identity(), 0.0f32, &amp;glm::vec3(0.0, 0.0, 1.0));
-    let (_, model_bytes, _) = unsafe { model.as_slice().align_to::&lt;u8&gt;() };
+    let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
 
     let info = vk::CommandBufferBeginInfo::builder();
 
@@ -6465,7 +6510,7 @@ let model = glm::rotate(
     &amp;glm::vec3(0.0, 0.0, 1.0),
 );
 
-let (_, model_bytes, _) = unsafe { model.as_slice().align_to::&lt;u8&gt;() };
+let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
 </code></pre>
 <p>Run the program to see that the model should now be back to rotating now that we are pushing an updated model matrix to the shaders every frame.</p>
 <p><img src="dynamic/../images/spinning_ghost_model.png" alt="" /></p>
@@ -6479,7 +6524,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 <h3><a class="header" href="#2-reallocating-command-buffers" id="2-reallocating-command-buffers">2. Reallocating command buffers</a></h3>
 <p>Next we'll take a look at allocating new command buffers each frame.</p>
 <p>Replace the code used to reset the command buffer at the beginning of <code>update_command_buffer</code> with code that replaces the previous command buffer with a new command buffer.</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     let allocate_info = vk::CommandBufferAllocateInfo::builder()
         .command_pool(self.data.command_pool)
         .level(vk::CommandBufferLevel::PRIMARY)
@@ -6493,7 +6538,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 </code></pre>
 <p>You could now run the program and see that the program works exactly like it did before, but if you do don't leave it running for too long! You may have already noticed that we aren't freeing the previous command buffer before we allocate a new one. If you observe the memory usage of our program after this change you'll see the memory usage start rising alarmingly fast as we rapidly collect thousands of derelict command buffers that are never recycled.</p>
 <p>Return the memory used by the previous command buffer to the command pool by freeing it at the beginning of <code>update_command_buffer</code>.</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     let previous = self.data.command_buffers[image_index];
     if !previous.is_null() {
         self.device.free_command_buffers(self.data.command_pool, &amp;[previous]);
@@ -6504,7 +6549,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 </code></pre>
 <p>Now when you run the program you should see stable memory usage instead of the program trying to gobble up all of the RAM on your system as if it thinks it's an Electron application.</p>
 <p>The <code>!previous.is_null()</code> check in the above code isn't currently necessary, but it allows us to skip the now useless allocation of command buffers in <code>create_command_buffers</code> by instead creating a <code>Vec</code> of null command buffers.</p>
-<pre><code class="language-rust noplaypen">fn create_command_buffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_command_buffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     data.command_buffers = vec![vk::CommandBuffer::null(); data.framebuffers.len()];
 
     Ok(())
@@ -6528,7 +6573,7 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
 <p>To put these questions on hold for a bit (well maybe not the last one), a sneak preview of the next chapter is that it will involve multiple managing multiple command buffers per frame rather than the single command buffer per frame we've been working with so far. Then it will become simpler, and probably faster, to deallocate all of these command buffers in one go by resetting the command pool instead of deallocating them individually.</p>
 <p>We are going to leave the current command pool in place since it will be used for allocating command buffers during initialization. Add a field to <code>AppData</code> to hold one command pool per framebuffer and rename the existing <code>create_command_pool</code> function to <code>create_command_pools</code> to reflect its increased responsibilities.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_command_pools(&amp;instance, &amp;device, &amp;mut data)?;
         // ...
@@ -6542,7 +6587,7 @@ struct AppData {
     // ...
 }
 
-fn create_command_pools(
+unsafe fn create_command_pools(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -6551,7 +6596,7 @@ fn create_command_pools(
 }
 </code></pre>
 <p>Create a new <code>create_command_pool</code> function which will be used to create a command pool for short-lived command buffers that can be submitted to graphics queues.</p>
-<pre><code class="language-rust noplaypen">fn create_command_pool(
+<pre><code class="language-rust noplaypen">unsafe fn create_command_pool(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -6566,7 +6611,7 @@ fn create_command_pools(
 }
 </code></pre>
 <p>With this function available, we can easily update <code>create_command_pools</code> to create both our existing global command pool and the new per-framebuffer command pools.</p>
-<pre><code class="language-rust noplaypen">fn create_command_pools(
+<pre><code class="language-rust noplaypen">unsafe fn create_command_pools(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -6583,7 +6628,7 @@ fn create_command_pools(
 }
 </code></pre>
 <p>Update <code>App::update_command_buffer</code> to reset the per-framebuffer command pool instead of deallocating the previous command buffer and be sure to use the per-framebuffer command pool to allocate the new command buffer instead of the global command pool.</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     let command_pool = self.data.command_pools[image_index];
     self.device.reset_command_pool(command_pool, vk::CommandPoolResetFlags::empty())?;
 
@@ -6596,7 +6641,7 @@ fn create_command_pools(
 }
 </code></pre>
 <p>Run the program now and make sure that our new command buffer recycling strategy still produces the same result as before. If you have the validation layer enabled, you will be reminded while the program is shutting down that we are not cleaning up these new command pools. Update <code>App::destroy</code> to destroy them.</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.data.command_pools
         .iter()
@@ -6630,7 +6675,7 @@ fn create_command_pools(
 <p>This might not sound like a big deal but beginning a render pass instance can be a pretty heavyweight operation and needing to do this many times per frame can destroy performance on some hardware. Secondary command buffers avoid this problem by being able to inherit the render pass instance as well as other state from the primary command buffer it is called from.</p>
 <h2><a class="header" href="#multiple-model-instances" id="multiple-model-instances">Multiple model instances</a></h2>
 <p>Let's get started by adding a new method for the <code>App</code> struct called <code>update_secondary_command_buffer</code> that will be used to allocate and record a secondary command buffer for one of the 4 model instances we will be rendering. The <code>model_index</code> parameter indicates which of the 4 model instances the secondary command buffer should render.</p>
-<pre><code class="language-rust noplaypen">fn update_secondary_command_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn update_secondary_command_buffer(
     &amp;mut self,
     image_index: usize,
     model_index: usize,
@@ -6673,7 +6718,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 self.device.begin_command_buffer(command_buffer, &amp;info)?;
 </code></pre>
 <p>With inheritance set up, move the code that calculates the push constant values out of <code>App::update_command_buffer</code> and into <code>App::update_secondary_command_buffer</code> after the secondary command buffer is allocated. While you're at it, have the opacity of the model instance depend on the model index to add some variety to our scene, ranging from 25% to 100%.</p>
-<pre><code class="language-rust noplaypen">fn update_secondary_command_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn update_secondary_command_buffer(
     &amp;mut self,
     image_index: usize,
     model_index: usize,
@@ -6690,7 +6735,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
         &amp;glm::vec3(0.0, 0.0, 1.0),
     );
 
-    let (_, model_bytes, _) = unsafe { model.as_slice().align_to::&lt;u8&gt;() };
+    let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
 
     let opacity = (model_index + 1) as f32 * 0.25;
     let opacity_bytes = &amp;opacity.to_ne_bytes()[..];
@@ -6699,7 +6744,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 }
 </code></pre>
 <p>Next we are going to move the rendering commands out of the primary command buffer and into the secondary command buffer. The primary command buffer will still be used to begin and end the render pass instance since it will be inherited by our secondary command buffers, but all of the commands in <code>App::update_command_buffer</code> between (but not including) <code>cmd_begin_render_pass</code> and <code>cmd_end_render_pass</code> should be moved into <code>App::update_secondary_command_buffer</code>.</p>
-<pre><code class="language-rust noplaypen">fn update_secondary_command_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn update_secondary_command_buffer(
     &amp;mut self,
     image_index: usize,
     model_index: usize,
@@ -6741,7 +6786,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 }
 </code></pre>
 <p>Now that we can easily create secondary command buffers for rendering the model instance, call our new method in <code>App::update_command_buffers</code> and execute the returned secondary command buffer using <code>cmd_execute_commands</code>.</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     // ...
 
     self.device.cmd_begin_render_pass(command_buffer, &amp;info, vk::SubpassContents::INLINE);
@@ -6763,7 +6808,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 </code></pre>
 <p>Note that these are mutually exclusive modes, you can't mix secondary command buffers and inline rendering commands in a render pass instance.</p>
 <p>If you run the program now, you should see the same ghostly model rotating exactly as it was before. Let's kick it up a notch by rendering 4 instances of the model by creating 4 secondary command buffers and executing them all from the primary command buffer.</p>
-<pre><code class="language-rust noplaypen">fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     // ...
 
     self.device.cmd_begin_render_pass(command_buffer, &amp;info, vk::SubpassContents::INLINE);

@@ -158,7 +158,7 @@
 <h2><a class="header" href="#descriptor-pool" id="descriptor-pool">Descriptor pool</a></h2>
 <p>Descriptor sets can't be created directly, they must be allocated from a pool like command buffers. The equivalent for descriptor sets is unsurprisingly called a <em>descriptor pool</em>. We'll write a new function <code>create_descriptor_pool</code> to set it up.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_uniform_buffers(&amp;instance, &amp;device, &amp;mut data)?;
         create_descriptor_pool(&amp;device, &amp;mut data)?;
@@ -166,7 +166,7 @@
     }
 }
 
-fn create_descriptor_pool(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_descriptor_pool(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
@@ -194,13 +194,13 @@ let info = vk::DescriptorPoolCreateInfo::builder()
 <pre><code class="language-rust noplaypen">data.descriptor_pool = device.create_descriptor_pool(&amp;info, None)?;
 </code></pre>
 <p>The descriptor pool should be destroyed when the swapchain is recreated because it depends on the number of images:</p>
-<pre><code class="language-rust noplaypen">fn destroy_swapchain(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy_swapchain(&amp;mut self) {
     self.device.destroy_descriptor_pool(self.data.descriptor_pool, None);
     // ...
 }
 </code></pre>
 <p>And recreated in <code>App::recreate_swapchain</code>:</p>
-<pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     // ...
     create_uniform_buffers(&amp;self.instance, &amp;self.device, &amp;mut self.data)?;
     create_descriptor_pool(&amp;self.device, &amp;mut self.data)?;
@@ -210,14 +210,14 @@ let info = vk::DescriptorPoolCreateInfo::builder()
 <h2><a class="header" href="#descriptor-set" id="descriptor-set">Descriptor set</a></h2>
 <p>We can now allocate the descriptor sets themselves. Add a <code>create_descriptor_sets</code> function for that purpose:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_descriptor_pool(&amp;device, &amp;mut data)?;
         create_descriptor_sets(&amp;device, &amp;mut data)?;
         // ...
     }
 
-    fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
         // ..
         create_descriptor_pool(&amp;self.device, &amp;mut self.data)?;
         create_descriptor_sets(&amp;self.device, &amp;mut self.data)?;
@@ -225,7 +225,7 @@ let info = vk::DescriptorPoolCreateInfo::builder()
     }
 }
 
-fn create_descriptor_sets(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_descriptor_sets(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
@@ -300,7 +300,7 @@ device.cmd_draw_indexed(*command_buffer, INDICES.len() as u32, 1, 0, 0, 0);
 <p><img src="../images/spinning_quad.png" alt="" /></p>
 <p>The rectangle has changed into a square because the projection matrix now corrects for aspect ratio. The <code>App::update_uniform_buffer</code> method takes care of screen resizing, so we don't need to recreate the descriptor set in <code>App::recreate_swapchain</code>.</p>
 <h2><a class="header" href="#alignment-requirements" id="alignment-requirements">Alignment requirements</a></h2>
-<p>One thing we've glossed over so far is how exactly the data in the C++ structure should match with the uniform definition in the shader. It seems obvious enough to simply use the same types in both:</p>
+<p>One thing we've glossed over so far is how exactly the data in the Rust structure should match with the uniform definition in the shader. It seems obvious enough to simply use the same types in both:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {

@@ -180,7 +180,7 @@
 </code></pre>
 <p>Create a new function <code>create_texture_image</code> where we'll load an image and upload it into a Vulkan image object. We're going to use command buffers, so it should be called after <code>create_command_pool</code>.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_command_pool(&amp;instance, &amp;device, &amp;mut data)?;
         create_texture_image(&amp;instance, &amp;device, &amp;mut data)?;
@@ -188,7 +188,7 @@
     }
 }
 
-fn create_texture_image(
+unsafe fn create_texture_image(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -199,7 +199,7 @@ fn create_texture_image(
 <p>Create a new directory <code>resources</code> next to the <code>shaders</code> directory to store texture images in. We're going to load an image called <code>texture.png</code> from that directory. I've chosen to use the following <a href="https://pixabay.com/en/statue-sculpture-fig-historically-1275469/">CC0 licensed image</a> resized to 512 x 512 pixels, but feel free to pick any PNG image (with an alpha channel) you want.</p>
 <p><img src="../images/texture.png" alt="" /></p>
 <p>Loading an image with this library is really easy:</p>
-<pre><code class="language-rust noplaypen">fn create_texture_image(
+<pre><code class="language-rust noplaypen">unsafe fn create_texture_image(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -237,7 +237,7 @@ fn create_texture_image(
     vk::MemoryMapFlags::empty(),
 )?;
 
-unsafe { memcpy(pixels.as_ptr(), memory.cast(), pixels.len()) };
+memcpy(pixels.as_ptr(), memory.cast(), pixels.len());
 
 device.unmap_memory(staging_buffer_memory);
 </code></pre>
@@ -306,7 +306,7 @@ device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
 </code></pre>
 <p>Allocating memory for an image works in exactly the same way as allocating memory for a buffer. Use <code>get_image_memory_requirements</code> instead of <code>get_buffer_memory_requirements</code>, and use <code>bind_image_memory</code> instead of <code>bind_buffer_memory</code>.</p>
 <p>This function is already getting quite large and there'll be a need to create more images in later chapters, so we should abstract image creation into a <code>create_image</code> function, like we did for buffers. Create the function and move the image object creation and memory allocation to it:</p>
-<pre><code class="language-rust noplaypen">fn create_image(
+<pre><code class="language-rust noplaypen">unsafe fn create_image(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;AppData,
@@ -355,7 +355,7 @@ device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
 </code></pre>
 <p>I've made the width, height, format, tiling mode, usage, and memory properties parameters, because these will all vary between the images we'll be creating throughout this tutorial.</p>
 <p>The <code>create_texture_image</code> function can now be simplified to:</p>
-<pre><code class="language-rust noplaypen">fn create_texture_image(
+<pre><code class="language-rust noplaypen">unsafe fn create_texture_image(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -386,7 +386,7 @@ device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
         vk::MemoryMapFlags::empty(),
     )?;
 
-    unsafe { memcpy(pixels.as_ptr(), memory.cast(), pixels.len()) };
+    memcpy(pixels.as_ptr(), memory.cast(), pixels.len());
 
     device.unmap_memory(staging_buffer_memory);
 
@@ -410,7 +410,7 @@ device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
 </code></pre>
 <h2><a class="header" href="#layout-transitions" id="layout-transitions">Layout transitions</a></h2>
 <p>The function we're going to write now involves recording and executing a command buffer again, so now's a good time to move that logic into a helper function or two:</p>
-<pre><code class="language-rust noplaypen">fn begin_single_time_commands(
+<pre><code class="language-rust noplaypen">unsafe fn begin_single_time_commands(
     device: &amp;Device,
     data: &amp;AppData,
 ) -&gt; Result&lt;vk::CommandBuffer&gt; {
@@ -429,7 +429,7 @@ device.bind_image_memory(data.texture_image, data.texture_image_memory, 0)?;
     Ok(command_buffer)
 }
 
-fn end_single_time_commands(
+unsafe fn end_single_time_commands(
     device: &amp;Device,
     data: &amp;AppData,
     command_buffer: vk::CommandBuffer,
@@ -449,7 +449,7 @@ fn end_single_time_commands(
 }
 </code></pre>
 <p>The code for these functions is based on the existing code in <code>copy_buffer</code>. You can now simplify that function to:</p>
-<pre><code class="language-rust noplaypen">fn copy_buffer(
+<pre><code class="language-rust noplaypen">unsafe fn copy_buffer(
     device: &amp;Device,
     data: &amp;AppData,
     source: vk::Buffer,
@@ -467,7 +467,7 @@ fn end_single_time_commands(
 }
 </code></pre>
 <p>If we were still using buffers, then we could now write a function to record and execute <code>cmd_copy_buffer_to_image</code> to finish the job, but this command requires the image to be in the right layout first. Create a new function to handle layout transitions:</p>
-<pre><code class="language-rust noplaypen">fn transition_image_layout(
+<pre><code class="language-rust noplaypen">unsafe fn transition_image_layout(
     device: &amp;Device,
     data: &amp;AppData,
     image: vk::Image,
@@ -524,7 +524,7 @@ fn end_single_time_commands(
 <p>The last three parameters reference slices of pipeline barriers of the three available types: memory barriers, buffer memory barriers, and image memory barriers like the one we're using here. Note that we're not using the <code>vk::Format</code> parameter yet, but we'll be using that one for special transitions in the depth buffer chapter.</p>
 <h2><a class="header" href="#copying-buffer-to-image" id="copying-buffer-to-image">Copying buffer to image</a></h2>
 <p>Before we get back to <code>create_texture_image</code>, we're going to write one more helper function: <code>copy_bufer_to_image</code>:</p>
-<pre><code class="language-rust noplaypen">fn copy_buffer_to_image(
+<pre><code class="language-rust noplaypen">unsafe fn copy_buffer_to_image(
     device: &amp;Device,
     data: &amp;AppData,
     buffer: vk::Buffer,
@@ -663,7 +663,7 @@ device.cmd_pipeline_barrier(
 device.free_memory(staging_buffer_memory, None);
 </code></pre>
 <p>The main texture image is used until the end of the program:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_image(self.data.texture_image, None);
     self.device.free_memory(self.data.texture_image_memory, None);

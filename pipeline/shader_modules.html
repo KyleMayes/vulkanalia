@@ -273,7 +273,7 @@ pause
 <p>Compiling shaders on the commandline is one of the most straightforward options and it's the one that we'll use in this tutorial, but it's also possible to compile shaders directly from your own code. The Vulkan SDK includes <a href="https://github.com/google/shaderc">libshaderc</a>, which is a library to compile GLSL code to SPIR-V from within your program.</p>
 <h2><a class="header" href="#loading-a-shader" id="loading-a-shader">Loading a shader</a></h2>
 <p>Now that we have a way of producing SPIR-V shaders, it's time to bring them into our program to plug them into the graphics pipeline at some point. We'll start by using <a href="https://doc.rust-lang.org/stable/std/macro.include_bytes.html"><code>include_bytes!</code></a> from the Rust standard library to include the compiled SPIR-V bytecode for the shaders in our executable.</p>
-<pre><code class="language-rust noplaypen">fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     let vert = include_bytes!(&quot;../shaders/vert.spv&quot;);
     let frag = include_bytes!(&quot;../shaders/frag.spv&quot;);
 
@@ -282,7 +282,7 @@ pause
 </code></pre>
 <h2><a class="header" href="#creating-shader-modules" id="creating-shader-modules">Creating shader modules</a></h2>
 <p>Before we can pass the code to the pipeline, we have to wrap it in a <code>vk::ShaderModule</code> object. Let's create a helper function <code>create_shader_module</code> to do that.</p>
-<pre><code class="language-rust noplaypen">fn create_shader_module(
+<pre><code class="language-rust noplaypen">unsafe fn create_shader_module(
     device: &amp;Device,
     bytecode: &amp;[u8],
 ) -&gt; Result&lt;vk::ShaderModule&gt; {
@@ -291,7 +291,7 @@ pause
 <p>The function will take a slice containing the bytecode as parameter and create a <code>vk::ShaderModule</code> from it using our logical device.</p>
 <p>Creating a shader module is simple, we only need to specify the length of our bytecode slice and the bytecode slice itself. This information is specified in a <code>vk::ShaderModuleCreateInfo</code> structure. The one catch is that the size of the bytecode is specified in bytes, but the bytecode slice expected by this struct is a <code>&amp;[u32]</code> instead of a <code>&amp;[u8]</code>. Therefore we will first need to convert our <code>&amp;[u8]</code> into an <code>&amp;[u32]</code>. We will accomplish this with <a href="https://doc.rust-lang.org/stable/std/primitive.slice.html#method.align_to"><code>slice::align_to</code></a> which can be used to convert a slice into a slice containing a type with a different size and/or alignment requirements. However, the <code>&amp;[u8]</code> returned by <code>include_bytes!</code> may not meet our alignment requirements, so we'll first copy it into a <code>Vec</code>.</p>
 <pre><code class="language-rust noplaypen">let bytecode = Vec::&lt;u8&gt;::from(bytecode);
-let (prefix, code, suffix) = unsafe { bytecode.align_to::&lt;u32&gt;() };
+let (prefix, code, suffix) = bytecode.align_to::&lt;u32&gt;();
 if !prefix.is_empty() || !suffix.is_empty() {
     return Err(anyhow!(&quot;Shader bytecode is not properly aligned.&quot;));
 }
@@ -306,7 +306,7 @@ Ok(device.create_shader_module(&amp;info, None)?)
 </code></pre>
 <p>The parameters are the same as those in previous object creation functions: the create info structure and the optional custom allocators.</p>
 <p>Shader modules are just a thin wrapper around the shader bytecode that we've previously loaded from a file and the functions defined in it. The compilation and linking of the SPIR-V bytecode to machine code for execution by the GPU doesn't happen until the graphics pipeline is created. That means that we're allowed to destroy the shader modules again as soon as pipeline creation is finished, which is why we'll make them local variables in the <code>create_pipeline</code> function instead of fields in <code>AppData</code>:</p>
-<pre><code class="language-rust noplaypen">fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     let vert = include_bytes!(&quot;../shaders/vert.spv&quot;);
     let frag = include_bytes!(&quot;../shaders/frag.spv&quot;);
 
@@ -330,7 +330,7 @@ Ok(device.create_shader_module(&amp;info, None)?)
 <pre><code class="language-rust noplaypen">let vert_stage = vk::PipelineShaderStageCreateInfo::builder()
     .stage(vk::ShaderStageFlags::VERTEX)
     .module(vert_shader_module)
-    .name(b&quot;main\0&quot;[..].into());
+    .name(b&quot;main\0&quot;);
 </code></pre>
 <p>The first step is telling Vulkan in which pipeline stage the shader is going to be used. There is a variant for each of the programmable stages described in the previous chapter.</p>
 <p>The next two fields specify the shader module containing the code, and the function to invoke, known as the <em>entrypoint</em>. That means that it's possible to combine multiple fragment shaders into a single shader module and use different entry points to differentiate between their behaviors. In this case we'll stick to the standard <code>main</code>, however.</p>
@@ -339,7 +339,7 @@ Ok(device.create_shader_module(&amp;info, None)?)
 <pre><code class="language-rust noplaypen">let frag_stage = vk::PipelineShaderStageCreateInfo::builder()
     .stage(vk::ShaderStageFlags::FRAGMENT)
     .module(frag_shader_module)
-    .name(b&quot;main\0&quot;[..].into());
+    .name(b&quot;main\0&quot;);
 </code></pre>
 <p>That's all there is to describing the programmable stages of the pipeline. In the next chapter we'll look at the fixed-function stages.</p>
 

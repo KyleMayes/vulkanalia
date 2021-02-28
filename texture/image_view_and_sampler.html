@@ -159,7 +159,7 @@
 <p>We've seen before, with the swapchain images and the framebuffer, that images are accessed through image views rather than directly. We will also need to create such an image view for the texture image.</p>
 <p>Add an <code>AppData</code> field to hold a <code>vk::ImageView</code> for the texture image and create a new function <code>create_texture_image_view</code> where we'll create it:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_texture_image(&amp;instance, &amp;device, &amp;mut data)?;
         create_texture_image_view(&amp;device, &amp;mut data)?;
@@ -175,7 +175,7 @@ struct AppData {
     // ...
 }
 
-fn create_texture_image_view(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_texture_image_view(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
@@ -197,7 +197,7 @@ let info = vk::ImageViewCreateInfo::builder()
 <pre><code class="language-rust noplaypen">data.texture_image_view = device.create_image_view(&amp;info, None)?;
 </code></pre>
 <p>Because so much of the logic is duplicated from <code>create_swapchain_image_views</code>, you may wish to abstract it into a new <code>create_image_view</code> function:</p>
-<pre><code class="language-rust noplaypen">fn create_image_view(
+<pre><code class="language-rust noplaypen">unsafe fn create_image_view(
     device: &amp;Device,
     image: vk::Image,
     format: vk::Format,
@@ -219,7 +219,7 @@ let info = vk::ImageViewCreateInfo::builder()
 }
 </code></pre>
 <p>The <code>create_texture_image_view</code> function can now be simplified to:</p>
-<pre><code class="language-rust noplaypen">fn create_texture_image_view(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_texture_image_view(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     data.texture_image_view = create_image_view(
         device,
         data.texture_image,
@@ -230,7 +230,7 @@ let info = vk::ImageViewCreateInfo::builder()
 }
 </code></pre>
 <p>And <code>create_swapchain_image_views</code> can be simplified to:</p>
-<pre><code class="language-rust noplaypen">fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_swapchain_image_views(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     data.swapchain_image_views = data
         .swapchain_images
         .iter()
@@ -241,7 +241,7 @@ let info = vk::ImageViewCreateInfo::builder()
 }
 </code></pre>
 <p>Make sure to destroy the image view at the end of the program, right before destroying the image itself:</p>
-<pre><code class="language-c++">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_image_view(self.data.texture_image_view, None);
     // ...
@@ -259,7 +259,7 @@ let info = vk::ImageViewCreateInfo::builder()
 <p><img src="../images/texture_addressing.png" alt="" /></p>
 <p>We will now create a function <code>create_texture_sampler</code> to set up such a sampler object. We'll be using that sampler to read colors from the texture in the shader later on.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_texture_image(&amp;instance, &amp;device, &amp;mut data)?;
         create_texture_image_view(&amp;device, &amp;mut data)?;
@@ -268,7 +268,7 @@ let info = vk::ImageViewCreateInfo::builder()
     }
 }
 
-fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
@@ -325,7 +325,7 @@ fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Res
 </code></pre>
 <p>Note the sampler does not reference a <code>vk::Image</code> anywhere. The sampler is a distinct object that provides an interface to extract colors from a texture. It can be applied to any image you want, whether it is 1D, 2D or 3D. This is different from many older APIs, which combined texture images and filtering into a single state.</p>
 <p>Destroy the sampler at the end of the program when we'll no longer be accessing the image:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_sampler(self.data.texture_sampler, None);
     // ...
@@ -339,7 +339,7 @@ fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&gt; Res
     .sampler_anisotropy(true);
 </code></pre>
 <p>And even though it is very unlikely that a modern graphics card will not support it, we should update <code>check_physical_device</code> to check if it is available:</p>
-<pre><code class="language-rust noplaypen">fn check_physical_device(
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,

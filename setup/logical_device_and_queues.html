@@ -163,14 +163,17 @@
 </code></pre>
 <p>Next, add a <code>create_logical_device</code> function that is called from <code>App:create</code> and add the resulting logical device to the <code>App</code> initializer:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         let device = create_logical_device(&amp;instance, &amp;mut data)?;
         Ok(Self { entry, instance, data, device })
     }
 }
 
-fn create_logical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; Result&lt;Device&gt; {
+unsafe fn create_logical_device(
+    instance: &amp;Instance,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;Device&gt; {
 }
 </code></pre>
 <h2><a class="header" href="#specifying-the-queues-to-be-created" id="specifying-the-queues-to-be-created">Specifying the queues to be created</a></h2>
@@ -212,7 +215,7 @@ let info = vk::DeviceCreateInfo::builder()
 </code></pre>
 <p>The parameters are the physical device to interface with, the queue and usage info we just specified, and the optional allocation callbacks. Similarly to the instance creation function, this call can return errors based on enabling non-existent extensions or specifying the desired usage of unsupported features.</p>
 <p>The device should be destroyed in <code>App::destroy</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.device.destroy_device(None);
     // ...
 }

@@ -155,7 +155,12 @@
                         <h1><a class="header" href="#base-code" id="base-code">Base code</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/00_base_code.rs">main.rs</a></p>
 <p>In the <code>Development environment</code> chapter we created a Cargo project and added the necessary dependencies. In this chapter we will be replacing the code in the <code>src/main.rs</code> file with the following code:</p>
-<pre><pre class="playground"><code class="language-rust">#![allow(dead_code, unused_variables, clippy::too_many_arguments, clippy::unnecessary_wraps)]
+<pre><pre class="playground"><code class="language-rust">#![allow(
+    dead_code,
+    unused_variables,
+    clippy::too_many_arguments,
+    clippy::unnecessary_wraps
+)]
 
 use anyhow::*;
 use winit::dpi::LogicalSize;
@@ -176,18 +181,19 @@ fn main() -&gt; Result&lt;()&gt; {
 
     // App
 
-    let mut app = App::create(&amp;window)?;
+    let mut app = unsafe { App::create(&amp;window)? };
     let mut destroying = false;
     event_loop.run(move |event, _, control_flow| {
         *control_flow = ControlFlow::Poll;
         match event {
             // Render a frame if our Vulkan app is not being destroyed.
-            Event::MainEventsCleared if !destroying =&gt; app.render(&amp;window).unwrap(),
+            Event::MainEventsCleared if !destroying =&gt;
+                unsafe { app.render(&amp;window) }.unwrap(),
             // Destroy our Vulkan app.
             Event::WindowEvent { event: WindowEvent::CloseRequested, .. } =&gt; {
                 destroying = true;
                 *control_flow = ControlFlow::Exit;
-                app.destroy();
+                unsafe { app.destroy(); }
             }
             _ =&gt; {}
         }
@@ -200,17 +206,17 @@ struct App {}
 
 impl App {
     /// Creates our Vulkan app.
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         Ok(Self {})
     }
 
     /// Renders a frame for our Vulkan app.
-    fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
         Ok(())
     }
 
     /// Destroys our Vulkan app.
-    fn destroy(&amp;mut self) {}
+    unsafe fn destroy(&amp;mut self) {}
 }
 
 /// The Vulkan handles and associated properties used by our Vulkan app.
@@ -223,6 +229,9 @@ struct AppData {}
 <p>Next we create an instance of our Vulkan app (<code>App</code>) and enter into our rendering loop. This loop will continually render our scene to the window until you request the window to be closed at which point the app will be destroyed and the program will exit. The <code>destroying</code> flag is necessary to not keep attempting to render the scene while the app is being destroyed which would most likely result in the program crashing after attempting to access Vulkan resources that have been destroyed.</p>
 <p>Lastly comes <code>App</code> and <code>AppData</code>. <code>App</code> will be used to implement the setup, rendering, and destruction logic required for the Vulkan program we will be building over the course of the following chapters. <code>AppData</code> will serve simply as a container for the large number of Vulkan resources we will need to create and initialize which will allow for them to be easily passed to functions to be read and/or modified.</p>
 <p>This will come in handy because many of the following chapters consist of adding a function which takes a <code>&amp;mut AppData</code> and creates and initializes Vulkan resources. These functions will then be called from our <code>App::create</code> constructor method to set up our Vulkan app. Then, before our program exits, these Vulkan resources will be released by our <code>App::destroy</code> method.</p>
+<h2><a class="header" href="#a-note-on-safety" id="a-note-on-safety">A Note on Safety</a></h2>
+<p>All Vulkan commands, both the raw commands and their command wrappers, are marked <code>unsafe</code> in <code>vulkanalia</code>. This is because most Vulkan commands have restrictions on how they can be called that cannot be enforced by Rust (unless a higher-level interface that hides the Vulkan API is provided like in <a href="https://vulkano.rs"><code>vulkano</code></a>).</p>
+<p>This tutorial will be addressing this fact by simply marking every function and method in which a Vulkan command is called as <code>unsafe</code>. This helps keep syntactical noise to a minimum, but in a more realistic program you may want to expose your own safe interface that enforces the invariants required for the Vulkan commands you are calling.</p>
 <h2><a class="header" href="#resource-management" id="resource-management">Resource management</a></h2>
 <p>Just like each chunk of memory allocated in C with <code>malloc</code> requires a corresponding call to <code>free</code>, every Vulkan object that we create needs to be explicitly destroyed when we no longer need it. In Rust it is possible to perform automatic resource management using <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">RAII</a> possibly combined with smart pointers like <code>Rc</code> or <code>Arc</code>. However, the author of <a href="https://vulkan-tutorial.com">https://vulkan-tutorial.com</a> chose to be explicit about allocation and deallocation of Vulkan objects in this tutorial and I have decided to take the same approach. After all, Vulkan's niche is to be explicit about every operation to avoid mistakes, so it's good to be explicit about the lifetime of objects to learn how the API works.</p>
 <p>After following this tutorial, you could implement automatic resource management by writing Rust structs that wrap Vulkan objects and release them in their <code>Drop</code> implementation. RAII is the recommended model for larger Vulkan programs, but for learning purposes it's always good to know what's going on behind the scenes.</p>

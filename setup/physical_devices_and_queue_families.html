@@ -154,28 +154,29 @@
                     <main>
                         <h1><a class="header" href="#physical-devices-and-queue-families" id="physical-devices-and-queue-families">Physical devices and queue families</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/03_physical_device_selection.rs">main.rs</a></p>
-<p>After initializing the Vulkan library through an <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> we need to look for and select a graphics card in the system that supports the features we need. In fact we can select any number of graphics cards and use them simultaneously, but in this tutorial we'll stick to the first graphics card that suits our needs.</p>
+<p>After initializing the Vulkan library through an <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> we need to look for and select a graphics card in the system that supports the features we need. In fact we can select any number of graphics cards and use them simultaneously, but in this tutorial we'll stick to the first graphics card that suits our needs.</p>
 <p>We'll add a <code>pick_physical_device</code> function which will accomplish this task and write the physical device and related information to the <code>AppData</code> instance. With this in place we can construct and populate an <code>AppData</code> instance in our <code>App::create</code> method.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         pick_physical_device(&amp;instance, &amp;mut data)?;
         Ok(Self { entry, instance, data })
     }
 }
 
-fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
-<p>The graphics card that we'll end up selecting will be stored in a <code>vk::PhysicalDevice</code> handle that is added as a new field to the <code>AppData</code> struct. This object will be implicitly destroyed when the <a href="https://docs.rs/vulkanalia/0.5.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> is destroyed, so we won't need to do anything new in the <code>App::destroy</code> method.</p>
+<p>The graphics card that we'll end up selecting will be stored in a <code>vk::PhysicalDevice</code> handle that is added as a new field to the <code>AppData</code> struct. This object will be implicitly destroyed when the <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> is destroyed, so we won't need to do anything new in the <code>App::destroy</code> method.</p>
 <pre><code class="language-rust noplaypen">struct AppData {
+    // ...
     physical_device: vk::PhysicalDevice,
 }
 </code></pre>
 <h2><a class="header" href="#device-suitability" id="device-suitability">Device suitability</a></h2>
 <p>We'll need a way to determine whether a physical device meets our needs. We'll start by creating a function that returns whether a supplied physical device supports everything we require:</p>
-<pre><code class="language-rust noplaypen">fn check_physical_device(
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
@@ -193,7 +194,7 @@ fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; R
 </code></pre>
 <p>There are more details that can be queried from devices that we'll discuss later concerning device memory and queue families (see the next section).</p>
 <p>As an example, let's say we consider our application only usable for dedicated graphics cards that support geometry shaders. Then the <code>check_physical_device</code> function would look like this:</p>
-<pre><code class="language-rust noplaypen">fn check_physical_device(
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
@@ -218,7 +219,7 @@ struct QueueFamilyIndices {
 }
 
 impl QueueFamilyIndices {
-    fn get(
+    unsafe fn get(
         instance: &amp;Instance,
         data: &amp;AppData,
         physical_device: vk::PhysicalDevice,
@@ -241,7 +242,7 @@ impl QueueFamilyIndices {
 </code></pre>
 <p>The queue properties returned by <code>get_physical_device_queue_family_properties</code> contains various details about the queue families supported by the physical device, including the type of operations supported and the number of queues that can be created based on that family. Here we are looking for the first queue family that supports graphics operations as indicated by <code>vk::QueueFlags::GRAPHICS</code>.</p>
 <p>Now that we have this fancy queue family lookup method, we can use it as a check in the <code>check_physical_device</code> function to ensure the device can process the commands we want to use:</p>
-<pre><code class="language-rust noplaypen">fn check_physical_device(
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,

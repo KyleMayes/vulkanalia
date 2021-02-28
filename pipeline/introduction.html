@@ -170,7 +170,7 @@
 <p>In the next chapter we'll first create the two programmable stages required to put a triangle onto the screen: the vertex shader and fragment shader. The fixed-function configuration like blending mode, viewport, rasterization will be set up in the chapter after that. The final part of setting up the graphics pipeline in Vulkan involves the specification of input and output framebuffers.</p>
 <p>Create a <code>create_pipeline</code> function that is called right after <code>create_swapchain_image_views</code> in <code>App::create</code>. We'll work on this function throughout the following chapters.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_swapchain_image_views(&amp;device, &amp;mut data)?;
         create_pipeline(&amp;device, &amp;mut data)?;
@@ -178,7 +178,7 @@
     }
 }
 
-fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>

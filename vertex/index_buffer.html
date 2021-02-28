@@ -184,7 +184,7 @@
 </code></pre>
 <p>The <code>create_index_buffer</code> function that we'll add now is almost identical to <code>create_vertex_buffer</code>:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;
         create_index_buffer(&amp;instance, &amp;device, &amp;mut data)?;
@@ -192,7 +192,7 @@
     }
 }
 
-fn create_index_buffer(
+unsafe fn create_index_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -215,7 +215,7 @@ fn create_index_buffer(
         vk::MemoryMapFlags::empty(),
     )?;
 
-    unsafe { memcpy(INDICES.as_ptr(), memory.cast(), INDICES.len()) };
+    memcpy(INDICES.as_ptr(), memory.cast(), INDICES.len());
 
     device.unmap_memory(staging_buffer_memory);
 
@@ -241,7 +241,7 @@ fn create_index_buffer(
 </code></pre>
 <p>There are only two notable differences. The <code>size</code> is now equal to the number of indices times the size of the index type, either <code>u16</code> or <code>u32</code>. The usage of the <code>index_buffer</code> should be <code>vk::BufferUsageFlags::INDEX_BUFFER</code> instead of <code>vk::BufferUsageFlags::VERTEX_BUFFER</code>, which makes sense. Other than that, the process is exactly the same. We create a staging buffer to copy the contents of <code>INDICES</code> to and then copy it to the final device local index buffer.</p>
 <p>The index buffer should be cleaned up at the end of the program, just like the vertex buffer:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_buffer(self.data.index_buffer, None);
     self.device.free_memory(self.data.index_buffer_memory, None);

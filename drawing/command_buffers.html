@@ -164,7 +164,7 @@
 </code></pre>
 <p>Then create a new function <code>create_command_pool</code> and call it from <code>App::create</code> after the framebuffers were created.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_framebuffers(&amp;device, &amp;mut data)?;
         create_command_pool(&amp;instance, &amp;device, &amp;mut data)?;
@@ -172,7 +172,7 @@
     }
 }
 
-fn create_command_pool(
+unsafe fn create_command_pool(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -198,7 +198,7 @@ let info = vk::CommandPoolCreateInfo::builder()
 <pre><code class="language-rust noplaypen">data.command_pool = device.create_command_pool(&amp;info, None)?;
 </code></pre>
 <p>Commands will be used throughout the program to draw things on the screen, so the pool should only be destroyed at the end:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.device.destroy_command_pool(self.data.command_pool, None);
     // ...
 }
@@ -212,7 +212,7 @@ let info = vk::CommandPoolCreateInfo::builder()
 </code></pre>
 <p>We'll now start working on a <code>create_command_buffers</code> function that allocates and records the commands for each swapchain image.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_command_pool(&amp;instance, &amp;device, &amp;mut data)?;
         create_command_buffers(&amp;device, &amp;mut data)?;
@@ -220,7 +220,7 @@ let info = vk::CommandPoolCreateInfo::builder()
     }
 }
 
-fn create_command_buffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_command_buffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>

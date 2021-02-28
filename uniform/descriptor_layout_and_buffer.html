@@ -220,7 +220,7 @@ struct UniformBufferObject {
 <p>We can exactly match the definition in the shader using data types in GLM. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a <code>UniformBufferObject</code> to a <code>vk::Buffer</code>.</p>
 <p>We need to provide details about every descriptor binding used in the shaders for pipeline creation, just like we had to do for every vertex attribute and its <code>location</code> index. We'll set up a new function to define all of this information called <code>create_descriptor_set_layout</code>. It should be called right before pipeline creation, because we're going to need it there.</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_descriptor_set_layout(&amp;device, &amp;mut data)?;
         create_pipeline(&amp;device, &amp;mut data)?;
@@ -229,12 +229,18 @@ struct UniformBufferObject {
 }
 
 
-fn create_descriptor_set_layout(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+unsafe fn create_descriptor_set_layout(
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
     Ok(())
 }
 </code></pre>
 <p>Every binding needs to be described through a <code>vk::DescriptorSetLayoutBinding</code> struct.</p>
-<pre><code class="language-rust noplaypen">fn create_descriptor_set_layout(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_descriptor_set_layout(
+    device: &amp;Device,
+    data: &amp;mut AppData,
+) -&gt; Result&lt;()&gt; {
     let ubo_binding = vk::DescriptorSetLayoutBinding::builder()
         .binding(0)
         .descriptor_type(vk::DescriptorType::UNIFORM_BUFFER)
@@ -269,7 +275,7 @@ let layout_info = vk::PipelineLayoutCreateInfo::builder()
 </code></pre>
 <p>You may be wondering why it's possible to specify multiple descriptor set layouts here, because a single one already includes all of the bindings. We'll get back to that in the next chapter, where we'll look into descriptor pools and descriptor sets.</p>
 <p>The descriptor layout should stick around while we may create new graphics pipelines i.e. until the program ends:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
     self.device.destroy_descriptor_set_layout(self.data.descriptor_set_layout, None);
     // ...
@@ -290,7 +296,7 @@ let layout_info = vk::PipelineLayoutCreateInfo::builder()
 </code></pre>
 <p>Similarly, create a new function <code>create_uniform_buffers</code> that is called after <code>create_index_buffer</code> and allocates the buffers:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         create_vertex_buffer(&amp;instance, &amp;device, &amp;mut data)?;
         create_index_buffer(&amp;instance, &amp;device, &amp;mut data)?;
@@ -299,7 +305,7 @@ let layout_info = vk::PipelineLayoutCreateInfo::builder()
     }
 }
 
-fn create_uniform_buffers(
+unsafe fn create_uniform_buffers(
     instance: &amp;Instance,
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -325,7 +331,7 @@ fn create_uniform_buffers(
 }
 </code></pre>
 <p>We're going to write a separate function that updates the uniform buffer with a new transformation every frame, so there will be no <code>map_memory</code> here. The uniform data will be used for all draw calls, so the buffer containing it should only be destroyed when we stop rendering. Since it also depends on the number of swapchain images, which could change after a recreation, we'll clean it up in <code>destroy_swapchain</code>:</p>
-<pre><code class="language-rust noplaypen">fn destroy_swapchain(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy_swapchain(&amp;mut self) {
     self.data.uniform_buffers
         .iter()
         .for_each(|b| self.device.destroy_buffer(*b, None));
@@ -336,7 +342,7 @@ fn create_uniform_buffers(
 }
 </code></pre>
 <p>This means that we also need to recreate it in <code>recreate_swapchain</code>:</p>
-<pre><code class="language-rust noplaypen">fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     // ...
     create_framebuffers(&amp;self.device, &amp;mut self.data)?;
     create_uniform_buffers(&amp;self.instance, &amp;self.device, &amp;mut self.data)?;
@@ -347,7 +353,7 @@ fn create_uniform_buffers(
 <h2><a class="header" href="#updating-uniform-data" id="updating-uniform-data">Updating uniform data</a></h2>
 <p>Create a new method <code>App::update_uniform_buffer</code> and add a call to it from the <code>App::render</code> method right after we wait for the fence for the acquired swapchain image to be signalled:</p>
 <pre><code class="language-rust noplaypen">impl App {
-    fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
+    unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
         // ...
 
         if !self.data.images_in_flight[image_index as usize].is_null() {
@@ -366,7 +372,7 @@ fn create_uniform_buffers(
         // ...
     }
 
-    fn update_uniform_buffer(&amp;self, image_index: usize) -&gt; Result&lt;()&gt; {
+    unsafe fn update_uniform_buffer(&amp;self, image_index: usize) -&gt; Result&lt;()&gt; {
         Ok(())
     }
 }
@@ -384,7 +390,7 @@ fn create_uniform_buffers(
 }
 </code></pre>
 <p>We can now use that field to determine how many seconds it has been since the application started:</p>
-<pre><code class="language-rust noplaypen">fn update_uniform_buffer(&amp;self, image_index: usize) -&gt; Result&lt;()&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn update_uniform_buffer(&amp;self, image_index: usize) -&gt; Result&lt;()&gt; {
     let time = self.start.elapsed().as_secs_f32();
 
     Ok(())
@@ -427,7 +433,7 @@ fn create_uniform_buffers(
     vk::MemoryMapFlags::empty(),
 )?;
 
-unsafe { memcpy(&amp;ubo, memory.cast(), 1) };
+memcpy(&amp;ubo, memory.cast(), 1);
 
 self.device.unmap_memory(self.data.uniform_buffers_memory[image_index]);
 </code></pre>

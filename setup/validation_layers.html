@@ -228,7 +228,7 @@ let layers = if VALIDATION_ENABLED {
 <p>The validation layers will print debug messages to the standard output by default, but we can also handle them ourselves by providing an explicit callback in our program. This will also allow you to decide which kind of messages you would like to see, because not all are necessarily (fatal) errors. If you don't want to do that right now then you may skip to the last section in this chapter.</p>
 <p>To set up a callback in the program to handle messages and the associated details, we have to set up a debug messenger with a callback using the <code>VK_EXT_debug_utils</code> extension.</p>
 <p>We'll add some more code to our <code>create_instance</code> function. This time we'll modify the <code>extensions</code> list to be mutable and then add the debug utilities extension to the list when the validation layer is enabled:</p>
-<pre><code class="language-rust noplaypen">let mut extensions = vk_window::get_required_instance_extensions(entry)?
+<pre><code class="language-rust noplaypen">let mut extensions = vk_window::get_required_instance_extensions(window)
     .iter()
     .map(|e| e.to_cstr().as_ptr())
     .collect::&lt;Vec&lt;_&gt;&gt;();
@@ -290,7 +290,11 @@ if VALIDATION_ENABLED {
 }
 </code></pre>
 <p>Now modify the signature and end of the <code>create_instance</code> function to look like this:</p>
-<pre><code class="language-rust noplaypen">fn create_instance(entry: &amp;Entry, data: &amp;mut AppData) -&gt; Result&lt;Instance&gt; {
+<pre><code class="language-rust noplaypen">unsafe fn create_instance(
+    window: &amp;Window,
+    entry: &amp;Entry,
+    data: &amp;mut AppData
+) -&gt; Result&lt;Instance&gt; {
     // ...
 
     let instance = entry.create_instance(&amp;info, None)?;
@@ -321,16 +325,16 @@ if VALIDATION_ENABLED {
 }
 
 impl App {
-    fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
+    unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         let mut data = AppData::default();
-        let instance = create_instance(&amp;entry, &amp;mut data)?;
+        let instance = create_instance(window, &amp;entry, &amp;mut data)?;
         Ok(Self { entry, instance, data })
     }
 }
 </code></pre>
 <p>The <code>vk::DebugUtilsMessengerEXT</code> object we created needs to cleaned up before our app exits. We'll do this in <code>App::destroy</code> before we destroy the instance:</p>
-<pre><code class="language-rust noplaypen">fn destroy(&amp;mut self) {
+<pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     if VALIDATION_ENABLED {
         self.instance.destroy_debug_utils_messenger_ext(self.data.messenger, None);
     }
@@ -362,7 +366,7 @@ if VALIDATION_ENABLED {
 }
 </code></pre>
 <p><code>debug_info</code> needs to be defined outside of the conditional since it needs to live until we are done calling <code>create_instance</code>. Fortunately we can rely on the Rust compiler to protect us from pushing a struct that doesn't live long enough onto a pointer chain due to the lifetimes defined for the <code>vulkanalia</code> builders.</p>
-<p>Now we should be able to run our program and see logs from our debug callback, but first we'll need to set the <code>RUST_LOG</code> environment variable so that <code>pretty_env_logger</code> will enable the log levels we are interested in. Initially set the log level to <code>debug</code> so we can be sure it is working, here is an example on Windows (Powershell):</p>
+<p>Now we should be able to run our program and see logs from our debug callback, but first we'll need to set the <code>RUST_LOG</code> environment variable so that <code>pretty_env_logger</code> will enable the log levels we are interested in. Initially set the log level to <code>debug</code> so we can be sure it is working, here is an example on Windows (PowerShell):</p>
 <p><img src="../images/validation_layer_test.png" alt="" /></p>
 <p>If everything is working you shouldn't see any warning or error messages. Going forward you will probably want to increase the minimum log level to <code>info</code> using <code>RUST_LOG</code> to reduce the verbosity of the logs unless you are trying to debug an error.</p>
 <h2><a class="header" href="#configuration" id="configuration">Configuration</a></h2>
