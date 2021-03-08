@@ -2885,10 +2885,7 @@ pub const KHR_SYNCHRONIZATION2_EXTENSION: Extension = Extension {
     author: "KHR",
     contact: "Tobias Hector @tobski",
     platform: None,
-    required_extensions: Some(&[
-        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
-        KHR_CREATE_RENDERPASS2_EXTENSION.name,
-    ]),
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
