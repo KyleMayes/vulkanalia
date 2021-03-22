@@ -17789,6 +17789,70 @@ unsafe impl Cast for ImportMemoryWin32HandleInfoNVBuilder {
     }
 }
 
+unsafe impl Cast for ImportMemoryZirconHandleInfoFUCHSIA {
+    type Target = ImportMemoryZirconHandleInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ImportMemoryZirconHandleInfoFUCHSIA {
+    type Builder = ImportMemoryZirconHandleInfoFUCHSIABuilder;
+}
+
+/// A builder for a [ImportMemoryZirconHandleInfoFUCHSIA](struct.ImportMemoryZirconHandleInfoFUCHSIA.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImportMemoryZirconHandleInfoFUCHSIABuilder {
+    value: ImportMemoryZirconHandleInfoFUCHSIA,
+}
+
+impl ImportMemoryZirconHandleInfoFUCHSIABuilder {
+    #[inline]
+    pub fn handle_type(mut self, handle_type: ExternalMemoryHandleTypeFlags) -> Self {
+        self.value.handle_type = handle_type;
+        self
+    }
+
+    #[inline]
+    pub fn handle(mut self, handle: zx_handle_t) -> Self {
+        self.value.handle = handle;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImportMemoryZirconHandleInfoFUCHSIA {
+        self.value
+    }
+}
+
+impl ops::Deref for ImportMemoryZirconHandleInfoFUCHSIABuilder {
+    type Target = ImportMemoryZirconHandleInfoFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ImportMemoryZirconHandleInfoFUCHSIABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ImportMemoryZirconHandleInfoFUCHSIABuilder {
+    type Target = ImportMemoryZirconHandleInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ImportSemaphoreFdInfoKHR {
     type Target = ImportSemaphoreFdInfoKHR;
 
@@ -17940,6 +18004,82 @@ impl ops::DerefMut for ImportSemaphoreWin32HandleInfoKHRBuilder {
 
 unsafe impl Cast for ImportSemaphoreWin32HandleInfoKHRBuilder {
     type Target = ImportSemaphoreWin32HandleInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ImportSemaphoreZirconHandleInfoFUCHSIA {
+    type Target = ImportSemaphoreZirconHandleInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ImportSemaphoreZirconHandleInfoFUCHSIA {
+    type Builder = ImportSemaphoreZirconHandleInfoFUCHSIABuilder;
+}
+
+/// A builder for a [ImportSemaphoreZirconHandleInfoFUCHSIA](struct.ImportSemaphoreZirconHandleInfoFUCHSIA.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImportSemaphoreZirconHandleInfoFUCHSIABuilder {
+    value: ImportSemaphoreZirconHandleInfoFUCHSIA,
+}
+
+impl ImportSemaphoreZirconHandleInfoFUCHSIABuilder {
+    #[inline]
+    pub fn semaphore(mut self, semaphore: Semaphore) -> Self {
+        self.value.semaphore = semaphore;
+        self
+    }
+
+    #[inline]
+    pub fn flags(mut self, flags: SemaphoreImportFlags) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn handle_type(mut self, handle_type: ExternalSemaphoreHandleTypeFlags) -> Self {
+        self.value.handle_type = handle_type;
+        self
+    }
+
+    #[inline]
+    pub fn zircon_handle(mut self, zircon_handle: zx_handle_t) -> Self {
+        self.value.zircon_handle = zircon_handle;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImportSemaphoreZirconHandleInfoFUCHSIA {
+        self.value
+    }
+}
+
+impl ops::Deref for ImportSemaphoreZirconHandleInfoFUCHSIABuilder {
+    type Target = ImportSemaphoreZirconHandleInfoFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ImportSemaphoreZirconHandleInfoFUCHSIABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ImportSemaphoreZirconHandleInfoFUCHSIABuilder {
+    type Target = ImportSemaphoreZirconHandleInfoFUCHSIA;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -18742,6 +18882,7 @@ unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryFdInfoKHR {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryHostPointerInfoEXT {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryWin32HandleInfoKHR {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryWin32HandleInfoNV {}
+unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryZirconHandleInfoFUCHSIA {}
 unsafe impl ExtendsMemoryAllocateInfo for MemoryAllocateFlagsInfo {}
 unsafe impl ExtendsMemoryAllocateInfo for MemoryDedicatedAllocateInfo {}
 unsafe impl ExtendsMemoryAllocateInfo for MemoryOpaqueCaptureAddressAllocateInfo {}
@@ -19335,6 +19476,70 @@ unsafe impl Cast for MemoryGetWin32HandleInfoKHRBuilder {
     }
 }
 
+unsafe impl Cast for MemoryGetZirconHandleInfoFUCHSIA {
+    type Target = MemoryGetZirconHandleInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MemoryGetZirconHandleInfoFUCHSIA {
+    type Builder = MemoryGetZirconHandleInfoFUCHSIABuilder;
+}
+
+/// A builder for a [MemoryGetZirconHandleInfoFUCHSIA](struct.MemoryGetZirconHandleInfoFUCHSIA.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MemoryGetZirconHandleInfoFUCHSIABuilder {
+    value: MemoryGetZirconHandleInfoFUCHSIA,
+}
+
+impl MemoryGetZirconHandleInfoFUCHSIABuilder {
+    #[inline]
+    pub fn memory(mut self, memory: DeviceMemory) -> Self {
+        self.value.memory = memory;
+        self
+    }
+
+    #[inline]
+    pub fn handle_type(mut self, handle_type: ExternalMemoryHandleTypeFlags) -> Self {
+        self.value.handle_type = handle_type;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MemoryGetZirconHandleInfoFUCHSIA {
+        self.value
+    }
+}
+
+impl ops::Deref for MemoryGetZirconHandleInfoFUCHSIABuilder {
+    type Target = MemoryGetZirconHandleInfoFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MemoryGetZirconHandleInfoFUCHSIABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MemoryGetZirconHandleInfoFUCHSIABuilder {
+    type Target = MemoryGetZirconHandleInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for MemoryHeap {
     type Target = MemoryHeap;
 
@@ -19835,6 +20040,64 @@ impl ops::DerefMut for MemoryWin32HandlePropertiesKHRBuilder {
 
 unsafe impl Cast for MemoryWin32HandlePropertiesKHRBuilder {
     type Target = MemoryWin32HandlePropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for MemoryZirconHandlePropertiesFUCHSIA {
+    type Target = MemoryZirconHandlePropertiesFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MemoryZirconHandlePropertiesFUCHSIA {
+    type Builder = MemoryZirconHandlePropertiesFUCHSIABuilder;
+}
+
+/// A builder for a [MemoryZirconHandlePropertiesFUCHSIA](struct.MemoryZirconHandlePropertiesFUCHSIA.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MemoryZirconHandlePropertiesFUCHSIABuilder {
+    value: MemoryZirconHandlePropertiesFUCHSIA,
+}
+
+impl MemoryZirconHandlePropertiesFUCHSIABuilder {
+    #[inline]
+    pub fn memory_type_bits(mut self, memory_type_bits: u32) -> Self {
+        self.value.memory_type_bits = memory_type_bits;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MemoryZirconHandlePropertiesFUCHSIA {
+        self.value
+    }
+}
+
+impl ops::Deref for MemoryZirconHandlePropertiesFUCHSIABuilder {
+    type Target = MemoryZirconHandlePropertiesFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MemoryZirconHandlePropertiesFUCHSIABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MemoryZirconHandlePropertiesFUCHSIABuilder {
+    type Target = MemoryZirconHandlePropertiesFUCHSIA;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -41525,6 +41788,70 @@ impl ops::DerefMut for SemaphoreGetWin32HandleInfoKHRBuilder {
 
 unsafe impl Cast for SemaphoreGetWin32HandleInfoKHRBuilder {
     type Target = SemaphoreGetWin32HandleInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SemaphoreGetZirconHandleInfoFUCHSIA {
+    type Target = SemaphoreGetZirconHandleInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SemaphoreGetZirconHandleInfoFUCHSIA {
+    type Builder = SemaphoreGetZirconHandleInfoFUCHSIABuilder;
+}
+
+/// A builder for a [SemaphoreGetZirconHandleInfoFUCHSIA](struct.SemaphoreGetZirconHandleInfoFUCHSIA.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SemaphoreGetZirconHandleInfoFUCHSIABuilder {
+    value: SemaphoreGetZirconHandleInfoFUCHSIA,
+}
+
+impl SemaphoreGetZirconHandleInfoFUCHSIABuilder {
+    #[inline]
+    pub fn semaphore(mut self, semaphore: Semaphore) -> Self {
+        self.value.semaphore = semaphore;
+        self
+    }
+
+    #[inline]
+    pub fn handle_type(mut self, handle_type: ExternalSemaphoreHandleTypeFlags) -> Self {
+        self.value.handle_type = handle_type;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SemaphoreGetZirconHandleInfoFUCHSIA {
+        self.value
+    }
+}
+
+impl ops::Deref for SemaphoreGetZirconHandleInfoFUCHSIABuilder {
+    type Target = SemaphoreGetZirconHandleInfoFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SemaphoreGetZirconHandleInfoFUCHSIABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SemaphoreGetZirconHandleInfoFUCHSIABuilder {
+    type Target = SemaphoreGetZirconHandleInfoFUCHSIA;
 
     #[inline]
     fn into(self) -> Self::Target {

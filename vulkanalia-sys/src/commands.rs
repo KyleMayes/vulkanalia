@@ -2314,6 +2314,21 @@ pub type PFN_vkGetMemoryWin32HandlePropertiesKHR = unsafe extern "system" fn(
     _memory_win32_handle_properties: *mut MemoryWin32HandlePropertiesKHR,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryZirconHandleFUCHSIA.html>
+pub type PFN_vkGetMemoryZirconHandleFUCHSIA = unsafe extern "system" fn(
+    _device: Device,
+    _get_zircon_handle_info: *const MemoryGetZirconHandleInfoFUCHSIA,
+    _zircon_handle: *mut zx_handle_t,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryZirconHandlePropertiesFUCHSIA.html>
+pub type PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA = unsafe extern "system" fn(
+    _device: Device,
+    _handle_type: ExternalMemoryHandleTypeFlags,
+    _zircon_handle: zx_handle_t,
+    _memory_zircon_handle_properties: *mut MemoryZirconHandlePropertiesFUCHSIA,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPastPresentationTimingGOOGLE.html>
 pub type PFN_vkGetPastPresentationTimingGOOGLE = unsafe extern "system" fn(
     _device: Device,
@@ -2836,6 +2851,13 @@ pub type PFN_vkGetSemaphoreWin32HandleKHR = unsafe extern "system" fn(
     _handle: *mut HANDLE,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreZirconHandleFUCHSIA.html>
+pub type PFN_vkGetSemaphoreZirconHandleFUCHSIA = unsafe extern "system" fn(
+    _device: Device,
+    _get_zircon_handle_info: *const SemaphoreGetZirconHandleInfoFUCHSIA,
+    _zircon_handle: *mut zx_handle_t,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetShaderInfoAMD.html>
 pub type PFN_vkGetShaderInfoAMD = unsafe extern "system" fn(
     _device: Device,
@@ -2921,6 +2943,12 @@ pub type PFN_vkImportSemaphoreFdKHR = unsafe extern "system" fn(
 pub type PFN_vkImportSemaphoreWin32HandleKHR = unsafe extern "system" fn(
     _device: Device,
     _import_semaphore_win32_handle_info: *const ImportSemaphoreWin32HandleInfoKHR,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportSemaphoreZirconHandleFUCHSIA.html>
+pub type PFN_vkImportSemaphoreZirconHandleFUCHSIA = unsafe extern "system" fn(
+    _device: Device,
+    _import_semaphore_zircon_handle_info: *const ImportSemaphoreZirconHandleInfoFUCHSIA,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkInitializePerformanceApiINTEL.html>

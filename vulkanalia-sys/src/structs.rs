@@ -5229,6 +5229,28 @@ impl Default for ImportMemoryWin32HandleInfoNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImportMemoryZirconHandleInfoFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImportMemoryZirconHandleInfoFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub handle_type: ExternalMemoryHandleTypeFlags,
+    pub handle: zx_handle_t,
+}
+
+impl Default for ImportMemoryZirconHandleInfoFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA,
+            next: ptr::null(),
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
+            handle: zx_handle_t::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImportSemaphoreFdInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5279,6 +5301,32 @@ impl Default for ImportSemaphoreWin32HandleInfoKHR {
             handle_type: ExternalSemaphoreHandleTypeFlags::default(),
             handle: ptr::null_mut(),
             name: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImportSemaphoreZirconHandleInfoFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImportSemaphoreZirconHandleInfoFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub semaphore: Semaphore,
+    pub flags: SemaphoreImportFlags,
+    pub handle_type: ExternalSemaphoreHandleTypeFlags,
+    pub zircon_handle: zx_handle_t,
+}
+
+impl Default for ImportSemaphoreZirconHandleInfoFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA,
+            next: ptr::null(),
+            semaphore: Semaphore::default(),
+            flags: SemaphoreImportFlags::default(),
+            handle_type: ExternalSemaphoreHandleTypeFlags::default(),
+            zircon_handle: zx_handle_t::default(),
         }
     }
 }
@@ -5712,6 +5760,28 @@ impl Default for MemoryGetWin32HandleInfoKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryGetZirconHandleInfoFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryGetZirconHandleInfoFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub memory: DeviceMemory,
+    pub handle_type: ExternalMemoryHandleTypeFlags,
+}
+
+impl Default for MemoryGetZirconHandleInfoFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA,
+            next: ptr::null(),
+            memory: DeviceMemory::default(),
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryHeap.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -5831,6 +5901,26 @@ impl Default for MemoryWin32HandlePropertiesKHR {
     fn default() -> Self {
         Self {
             s_type: StructureType::MEMORY_WIN32_HANDLE_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            memory_type_bits: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryZirconHandlePropertiesFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryZirconHandlePropertiesFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub memory_type_bits: u32,
+}
+
+impl Default for MemoryZirconHandlePropertiesFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA,
             next: ptr::null_mut(),
             memory_type_bits: u32::default(),
         }
@@ -12165,6 +12255,28 @@ impl Default for SemaphoreGetWin32HandleInfoKHR {
     fn default() -> Self {
         Self {
             s_type: StructureType::SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR,
+            next: ptr::null(),
+            semaphore: Semaphore::default(),
+            handle_type: ExternalSemaphoreHandleTypeFlags::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreGetZirconHandleInfoFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SemaphoreGetZirconHandleInfoFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub semaphore: Semaphore,
+    pub handle_type: ExternalSemaphoreHandleTypeFlags,
+}
+
+impl Default for SemaphoreGetZirconHandleInfoFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA,
             next: ptr::null(),
             semaphore: Semaphore::default(),
             handle_type: ExternalSemaphoreHandleTypeFlags::default(),

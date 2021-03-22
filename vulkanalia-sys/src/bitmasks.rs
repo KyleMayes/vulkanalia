@@ -65,6 +65,10 @@ bitflags! {
         const ACCESS_2_SHADER_SAMPLED_READ = 1 << 32;
         const ACCESS_2_SHADER_STORAGE_READ = 1 << 33;
         const ACCESS_2_SHADER_STORAGE_WRITE = 1 << 34;
+        const ACCESS_2_RESERVED_READ_35 = 1 << 35;
+        const ACCESS_2_RESERVED_WRITE_36 = 1 << 36;
+        const ACCESS_2_RESERVED_READ_37 = 1 << 37;
+        const ACCESS_2_RESERVED_WRITE_38 = 1 << 38;
     }
 }
 
@@ -101,9 +105,6 @@ bitflags! {
         const TRANSFORM_FEEDBACK_WRITE_EXT = 1 << 25;
         const TRANSFORM_FEEDBACK_COUNTER_READ_EXT = 1 << 26;
         const TRANSFORM_FEEDBACK_COUNTER_WRITE_EXT = 1 << 27;
-        const RESERVED_28_KHR = 1 << 28;
-        const RESERVED_29_KHR = 1 << 29;
-        const RESERVED_30_KHR = 1 << 30;
     }
 }
 
@@ -623,6 +624,7 @@ bitflags! {
         const HOST_MAPPED_FOREIGN_MEMORY_EXT = 1 << 8;
         const DMA_BUF_EXT = 1 << 9;
         const ANDROID_HARDWARE_BUFFER_ANDROID = 1 << 10;
+        const ZIRCON_VMO_FUCHSIA = 1 << 11;
     }
 }
 
@@ -660,6 +662,7 @@ bitflags! {
         const SYNC_FD = 1 << 4;
         const RESERVED_5_NV = 1 << 5;
         const RESERVED_6_NV = 1 << 6;
+        const ZIRCON_EVENT_FUCHSIA = 1 << 7;
     }
 }
 
@@ -1268,6 +1271,8 @@ bitflags! {
         const PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_EXT = 1 << 23;
         const PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_EXT = 1 << 24;
         const PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD = 1 << 25;
+        const PIPELINE_STAGE_2_RESERVED_26 = 1 << 26;
+        const PIPELINE_STAGE_2_RESERVED_27 = 1 << 27;
         const PIPELINE_STAGE_2_COPY = 1 << 32;
         const PIPELINE_STAGE_2_RESOLVE = 1 << 33;
         const PIPELINE_STAGE_2_BLIT = 1 << 34;
@@ -1309,8 +1314,6 @@ bitflags! {
         const FRAGMENT_DENSITY_PROCESS_EXT = 1 << 23;
         const TRANSFORM_FEEDBACK_EXT = 1 << 24;
         const ACCELERATION_STRUCTURE_BUILD_KHR = 1 << 25;
-        const RESERVED_26_KHR = 1 << 26;
-        const RESERVED_27_KHR = 1 << 27;
     }
 }
 

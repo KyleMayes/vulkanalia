@@ -170,10 +170,14 @@ pub struct DeviceCommands {
     pub get_memory_win32_handle_properties_khr: PFN_vkGetMemoryWin32HandlePropertiesKHR,
     pub get_memory_fd_khr: PFN_vkGetMemoryFdKHR,
     pub get_memory_fd_properties_khr: PFN_vkGetMemoryFdPropertiesKHR,
+    pub get_memory_zircon_handle_fuchsia: PFN_vkGetMemoryZirconHandleFUCHSIA,
+    pub get_memory_zircon_handle_properties_fuchsia: PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA,
     pub get_semaphore_win32_handle_khr: PFN_vkGetSemaphoreWin32HandleKHR,
     pub import_semaphore_win32_handle_khr: PFN_vkImportSemaphoreWin32HandleKHR,
     pub get_semaphore_fd_khr: PFN_vkGetSemaphoreFdKHR,
     pub import_semaphore_fd_khr: PFN_vkImportSemaphoreFdKHR,
+    pub get_semaphore_zircon_handle_fuchsia: PFN_vkGetSemaphoreZirconHandleFUCHSIA,
+    pub import_semaphore_zircon_handle_fuchsia: PFN_vkImportSemaphoreZirconHandleFUCHSIA,
     pub get_fence_win32_handle_khr: PFN_vkGetFenceWin32HandleKHR,
     pub import_fence_win32_handle_khr: PFN_vkImportFenceWin32HandleKHR,
     pub get_fence_fd_khr: PFN_vkGetFenceFdKHR,
@@ -2709,6 +2713,41 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_memory_zircon_handle_fuchsia: {
+                let value = loader(b"vkGetMemoryZirconHandleFUCHSIA\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _get_zircon_handle_info: *const MemoryGetZirconHandleInfoFUCHSIA,
+                        _zircon_handle: *mut zx_handle_t,
+                    ) -> Result {
+                        panic!("could not load vkGetMemoryZirconHandleFUCHSIA")
+                    }
+                    fallback
+                }
+            },
+            get_memory_zircon_handle_properties_fuchsia: {
+                let value = loader(
+                    b"vkGetMemoryZirconHandlePropertiesFUCHSIA\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _handle_type: ExternalMemoryHandleTypeFlags,
+                        _zircon_handle: zx_handle_t,
+                        _memory_zircon_handle_properties: *mut MemoryZirconHandlePropertiesFUCHSIA,
+                    ) -> Result {
+                        panic!("could not load vkGetMemoryZirconHandlePropertiesFUCHSIA")
+                    }
+                    fallback
+                }
+            },
             get_semaphore_win32_handle_khr: {
                 let value = loader(b"vkGetSemaphoreWin32HandleKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2763,6 +2802,35 @@ impl DeviceCommands {
                         _import_semaphore_fd_info: *const ImportSemaphoreFdInfoKHR,
                     ) -> Result {
                         panic!("could not load vkImportSemaphoreFdKHR")
+                    }
+                    fallback
+                }
+            },
+            get_semaphore_zircon_handle_fuchsia: {
+                let value = loader(b"vkGetSemaphoreZirconHandleFUCHSIA\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _get_zircon_handle_info: *const SemaphoreGetZirconHandleInfoFUCHSIA,
+                        _zircon_handle: *mut zx_handle_t,
+                    ) -> Result {
+                        panic!("could not load vkGetSemaphoreZirconHandleFUCHSIA")
+                    }
+                    fallback
+                }
+            },
+            import_semaphore_zircon_handle_fuchsia: {
+                let value = loader(b"vkImportSemaphoreZirconHandleFUCHSIA\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _import_semaphore_zircon_handle_info: *const ImportSemaphoreZirconHandleInfoFUCHSIA,
+                    ) -> Result {
+                        panic!("could not load vkImportSemaphoreZirconHandleFUCHSIA")
                     }
                     fallback
                 }

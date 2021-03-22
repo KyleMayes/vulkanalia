@@ -2358,6 +2358,108 @@ pub trait ExtYcbcrImageArraysExtension: DeviceV1_0 {
 
 impl ExtYcbcrImageArraysExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_FUCHSIA_external_memory.html>
+pub trait FuchsiaExternalMemoryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = FUCHSIA_EXTERNAL_MEMORY_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryZirconHandleFUCHSIA.html>
+    #[inline]
+    unsafe fn get_memory_zircon_handle_fuchsia(
+        &self,
+        get_zircon_handle_info: &MemoryGetZirconHandleInfoFUCHSIA,
+    ) -> crate::VkResult<zx_handle_t> {
+        let mut zircon_handle = MaybeUninit::<zx_handle_t>::uninit();
+
+        let __result = (self.commands().get_memory_zircon_handle_fuchsia)(
+            self.handle(),
+            get_zircon_handle_info,
+            zircon_handle.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(zircon_handle.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryZirconHandlePropertiesFUCHSIA.html>
+    #[inline]
+    unsafe fn get_memory_zircon_handle_properties_fuchsia(
+        &self,
+        handle_type: ExternalMemoryHandleTypeFlags,
+        zircon_handle: zx_handle_t,
+    ) -> crate::VkResult<MemoryZirconHandlePropertiesFUCHSIA> {
+        let mut memory_zircon_handle_properties =
+            MaybeUninit::<MemoryZirconHandlePropertiesFUCHSIA>::uninit();
+
+        let __result = (self.commands().get_memory_zircon_handle_properties_fuchsia)(
+            self.handle(),
+            handle_type,
+            zircon_handle,
+            memory_zircon_handle_properties.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(memory_zircon_handle_properties.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl FuchsiaExternalMemoryExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_FUCHSIA_external_semaphore.html>
+pub trait FuchsiaExternalSemaphoreExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = FUCHSIA_EXTERNAL_SEMAPHORE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreZirconHandleFUCHSIA.html>
+    #[inline]
+    unsafe fn get_semaphore_zircon_handle_fuchsia(
+        &self,
+        get_zircon_handle_info: &SemaphoreGetZirconHandleInfoFUCHSIA,
+    ) -> crate::VkResult<zx_handle_t> {
+        let mut zircon_handle = MaybeUninit::<zx_handle_t>::uninit();
+
+        let __result = (self.commands().get_semaphore_zircon_handle_fuchsia)(
+            self.handle(),
+            get_zircon_handle_info,
+            zircon_handle.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(zircon_handle.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkImportSemaphoreZirconHandleFUCHSIA.html>
+    #[inline]
+    unsafe fn import_semaphore_zircon_handle_fuchsia(
+        &self,
+        import_semaphore_zircon_handle_info: &ImportSemaphoreZirconHandleInfoFUCHSIA,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().import_semaphore_zircon_handle_fuchsia)(
+            self.handle(),
+            import_semaphore_zircon_handle_info,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl FuchsiaExternalSemaphoreExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_FUCHSIA_imagepipe_surface.html>
 pub trait FuchsiaImagepipeSurfaceExtension: InstanceV1_0 {
     /// The metadata for this extension.
