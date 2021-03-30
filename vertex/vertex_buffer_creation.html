@@ -174,7 +174,7 @@ unsafe fn create_vertex_buffer(
     Ok(())
 }
 </code></pre>
-<p>Creating a buffer requires us to fill a <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.BufferCreateInfo.html"><code class="hljs">vk::BufferCreateInfo</code></a> structure.</p>
+<p>Creating a buffer requires us to fill a <code>vk::BufferCreateInfo</code> structure.</p>
 <pre><code class="language-rust noplaypen">let buffer_info = vk::BufferCreateInfo::builder()
     .size((size_of::&lt;Vertex&gt;() * VERTICES.len()) as u64)
     // continued...
@@ -187,13 +187,13 @@ unsafe fn create_vertex_buffer(
 </code></pre>
 <p>Just like the images in the swapchain, buffers can also be owned by a specific queue family or be shared between multiple at the same time. The buffer will only be used from the graphics queue, so we can stick to exclusive access.</p>
 <p>The <code>flags</code> parameter is used to configure sparse buffer memory, which is not relevant right now. We'll leave it at the default value of <code>0</code>.</p>
-<p>We can now create the buffer with <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_buffer"><code class="hljs">create_buffer</code></a>. First, define an <code>AppData</code> field to hold the buffer handle and call it <code>vertex_buffer</code>.</p>
+<p>We can now create the buffer with <code>create_buffer</code>. First, define an <code>AppData</code> field to hold the buffer handle and call it <code>vertex_buffer</code>.</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
     vertex_buffer: vk::Buffer,
 }
 </code></pre>
-<p>Next add the call to <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_buffer"><code class="hljs">create_buffer</code></a>:</p>
+<p>Next add the call to <code>create_buffer</code>:</p>
 <pre><code class="language-rust noplaypen">unsafe fn create_vertex_buffer(
     instance: &amp;Instance,
     device: &amp;Device,
@@ -217,10 +217,10 @@ unsafe fn create_vertex_buffer(
 }
 </code></pre>
 <h2><a class="header" href="#memory-requirements" id="memory-requirements">Memory requirements</a></h2>
-<p>The buffer has been created, but it doesn't actually have any memory assigned to it yet. The first step of allocating memory for the buffer is to query its memory requirements using the aptly named <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.get_buffer_memory_requirements"><code class="hljs">get_buffer_memory_requirements</code></a> command.</p>
+<p>The buffer has been created, but it doesn't actually have any memory assigned to it yet. The first step of allocating memory for the buffer is to query its memory requirements using the aptly named <code>get_buffer_memory_requirements</code> command.</p>
 <pre><code class="language-rust noplaypen">let requirements = device.get_buffer_memory_requirements(data.vertex_buffer);
 </code></pre>
-<p>The <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.MemoryRequirements.html"><code class="hljs">vk::MemoryRequirements</code></a> struct this command returns has three fields:</p>
+<p>The <code>vk::MemoryRequirements</code> struct this command returns has three fields:</p>
 <ul>
 <li><code>size</code> – The size of the required amount of memory in bytes, may differ from <code>bufferInfo.size</code>.</li>
 <li><code>alignment</code> – The offset in bytes where the buffer begins in the allocated region of memory, depends on <code>buffer_info.usage</code> and <code>buffer_info.flags</code>.</li>
@@ -235,17 +235,17 @@ unsafe fn create_vertex_buffer(
 ) -&gt; Result&lt;u32&gt; {
 }
 </code></pre>
-<p>First we need to query info about the available types of memory using <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_memory_properties"><code class="hljs">get_physical_device_memory_properties</code></a>.</p>
+<p>First we need to query info about the available types of memory using <code>get_physical_device_memory_properties</code>.</p>
 <pre><code class="language-rust noplaypen">let memory = instance.get_physical_device_memory_properties(data.physical_device);
 </code></pre>
-<p>The returned <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.PhysicalDeviceMemoryProperties.html"><code class="hljs">vk::PhysicalDeviceMemoryProperties</code></a> structure has two arrays <code>memory_types</code> and <code>memory_heaps</code>. Memory heaps are distinct memory resources like dedicated VRAM and swap space in RAM for when VRAM runs out. The different types of memory exist within these heaps. Right now we'll only concern ourselves with the type of memory and not the heap it comes from, but you can imagine that this can affect performance.</p>
+<p>The returned <code>vk::PhysicalDeviceMemoryProperties</code> structure has two arrays <code>memory_types</code> and <code>memory_heaps</code>. Memory heaps are distinct memory resources like dedicated VRAM and swap space in RAM for when VRAM runs out. The different types of memory exist within these heaps. Right now we'll only concern ourselves with the type of memory and not the heap it comes from, but you can imagine that this can affect performance.</p>
 <p>Let's first find a memory type that is suitable for the buffer itself:</p>
 <pre><code class="language-rust noplaypen">(0..memory.memory_type_count)
     .find(|i| (requirements.memory_type_bits &amp; (1 &lt;&lt; i)) != 0)
     .ok_or_else(|| anyhow!(&quot;Failed to find suitable memory type.&quot;))
 </code></pre>
 <p>The <code>memory_type_bits</code> field from the <code>requirements</code> parameter will be used to specify the bit field of memory types that are suitable. That means that we can find the index of a suitable memory type by simply iterating over them and checking if the corresponding bit is set to <code>1</code>.</p>
-<p>However, we're not just interested in a memory type that is suitable for the vertex buffer. We also need to be able to write our vertex data to that memory. The <code>memory_types</code> array consists of <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.MemoryType.html"><code class="hljs">vk::MemoryType</code></a> structs that specify the heap and properties of each type of memory. The properties define special features of the memory, like being able to map it so we can write to it from the CPU. This property is indicated with <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.MemoryPropertyFlags.html#associatedconstant.HOST_VISIBLE"><code class="hljs">vk::MemoryPropertyFlags::HOST_VISIBLE</code></a>, but we also need to use the <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.MemoryPropertyFlags.html#associatedconstant.HOST_COHERENT"><code class="hljs">vk::MemoryPropertyFlags::HOST_COHERENT</code></a> property. We'll see why when we map the memory.</p>
+<p>However, we're not just interested in a memory type that is suitable for the vertex buffer. We also need to be able to write our vertex data to that memory. The <code>memory_types</code> array consists of <code>vk::MemoryType</code> structs that specify the heap and properties of each type of memory. The properties define special features of the memory, like being able to map it so we can write to it from the CPU. This property is indicated with <code>vk::MemoryPropertyFlags::HOST_VISIBLE</code>, but we also need to use the <code>vk::MemoryPropertyFlags::HOST_COHERENT</code> property. We'll see why when we map the memory.</p>
 <p>We can now modify the loop to also check for the support of this property:</p>
 <pre><code class="language-rust noplaypen">(0..memory.memory_type_count)
     .find(|i| {
@@ -257,7 +257,7 @@ unsafe fn create_vertex_buffer(
 </code></pre>
 <p>If there is a memory type suitable for the buffer that also has all of the properties we need, then we return its index, otherwise we return an error.</p>
 <h2><a class="header" href="#memory-allocation" id="memory-allocation">Memory allocation</a></h2>
-<p>We now have a way to determine the right memory type, so we can actually allocate the memory by filling in the <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.MemoryAllocateInfo.html"><code class="hljs">vk::MemoryAllocateInfo</code></a> structure.</p>
+<p>We now have a way to determine the right memory type, so we can actually allocate the memory by filling in the <code>vk::MemoryAllocateInfo</code> structure.</p>
 <pre><code class="language-rust noplaypen">let memory_info = vk::MemoryAllocateInfo::builder()
     .allocation_size(requirements.size)
     .memory_type_index(get_memory_type_index(
@@ -274,10 +274,10 @@ unsafe fn create_vertex_buffer(
     vertex_buffer_memory: vk::DeviceMemory,
 }
 </code></pre>
-<p>Populate that new field by calling <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_memory"><code class="hljs">allocate_memory</code></a>:</p>
+<p>Populate that new field by calling <code>allocate_memory</code>:</p>
 <pre><code class="language-rust noplaypen">data.vertex_buffer_memory = device.allocate_memory(&amp;memory_info, None)?;
 </code></pre>
-<p>If memory allocation was successful, then we can now associate this memory with the buffer using <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.bind_buffer_memory"><code class="hljs">bind_buffer_memory</code></a>:</p>
+<p>If memory allocation was successful, then we can now associate this memory with the buffer using <code>bind_buffer_memory</code>:</p>
 <pre><code class="language-rust noplaypen">device.bind_buffer_memory(data.vertex_buffer, data.vertex_buffer_memory, 0)?;
 </code></pre>
 <p>The first two parameters are self-explanatory and the third parameter is the offset within the region of memory. Since this memory is allocated specifically for this the vertex buffer, the offset is simply <code>0</code>. If the offset is non-zero, then it is required to be divisible by <code>requirements.alignment</code>.</p>
@@ -290,7 +290,7 @@ unsafe fn create_vertex_buffer(
 }
 </code></pre>
 <h2><a class="header" href="#filling-the-vertex-buffer" id="filling-the-vertex-buffer">Filling the vertex buffer</a></h2>
-<p>It is now time to copy the vertex data to the buffer. This is done by <a href="https://en.wikipedia.org/wiki/Memory-mapped_I/O">mapping the buffer memory</a> into CPU accessible memory with <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.map_memory"><code class="hljs">map_memory</code></a>.</p>
+<p>It is now time to copy the vertex data to the buffer. This is done by <a href="https://en.wikipedia.org/wiki/Memory-mapped_I/O">mapping the buffer memory</a> into CPU accessible memory with <code>map_memory</code>.</p>
 <pre><code class="language-rust noplaypen">let memory = device.map_memory(
     data.vertex_buffer_memory,
     0,
@@ -298,25 +298,21 @@ unsafe fn create_vertex_buffer(
     vk::MemoryMapFlags::empty(),
 )?;
 </code></pre>
-<p>This command allows us to access a region of the specified memory resource defined by an offset and size. The offset and size here are <code>0</code> and <code>buffer_info.size</code>, respectively. It is also possible to specify the special value <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/constant.WHOLE_SIZE.html"><code class="hljs">vk::WHOLE_SIZE</code></a> to map all of the memory. The last parameter can be used to specify flags, but there aren't any available yet in the current API. It must be set to an empty set of flags. The returned value is the pointer to the mapped value.</p>
+<p>This command allows us to access a region of the specified memory resource defined by an offset and size. The offset and size here are <code>0</code> and <code>buffer_info.size</code>, respectively. It is also possible to specify the special value <code>vk::WHOLE_SIZE</code> to map all of the memory. The last parameter can be used to specify flags, but there aren't any available yet in the current API. It must be set to an empty set of flags. The returned value is the pointer to the mapped value.</p>
 <p>Before we continue, we'll need to be able copy memory from our vertex list to the mapped memory. Add this import to your program:</p>
 <pre><code class="language-rust noplaypen">use std::ptr::copy_nonoverlapping as memcpy;
 </code></pre>
-<p>Now we can copy the vertex data into the buffer memory and then unmap it again using <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.unmap_memory"><code class="hljs">unmap_memory</code></a>.</p>
+<p>Now we can copy the vertex data into the buffer memory and then unmap it again using <code>unmap_memory</code>.</p>
 <pre><code class="language-rust noplaypen">memcpy(VERTICES.as_ptr(), memory.cast(), VERTICES.len());
 device.unmap_memory(data.vertex_buffer_memory);
 </code></pre>
 <p>Unfortunately the driver may not immediately copy the data into the buffer memory, for example because of caching. It is also possible that writes to the buffer are not visible in the mapped memory yet. There are two ways to deal with that problem:</p>
 <ul>
-<li>
-<p>Use a memory heap that is host coherent, indicated with <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.MemoryPropertyFlags.html#associatedconstant.HOST_COHERENT"><code class="hljs">vk::MemoryPropertyFlags::HOST_COHERENT</code></a></p>
-</li>
-<li>
-<p>Call <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.flush_mapped_memory_ranges"><code class="hljs">flush_mapped_memory_ranges</code></a> after writing to the mapped memory, and call <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.invalidate_mapped_memory_ranges"><code class="hljs">invalidate_mapped_memory_ranges</code></a> before reading from the mapped memory</p>
-</li>
+<li>Use a memory heap that is host coherent, indicated with <code>vk::MemoryPropertyFlags::HOST_COHERENT</code></li>
+<li>Call <code>flush_mapped_memory_ranges</code> after writing to the mapped memory, and call <code>invalidate_mapped_memory_ranges</code> before reading from the mapped memory</li>
 </ul>
 <p>We went for the first approach, which ensures that the mapped memory always matches the contents of the allocated memory. Do keep in mind that this may lead to slightly worse performance than explicit flushing, but we'll see why that doesn't matter in the next chapter.</p>
-<p>Flushing memory ranges or using a coherent memory heap means that the driver will be aware of our writes to the buffer, but it doesn't mean that they are actually visible on the GPU yet. The transfer of data to the GPU is an operation that happens in the background and the specification simply <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-submission-host-writes">tells us</a> that it is guaranteed to be complete as of the next call to <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_submit"><code class="hljs">queue_submit</code></a>.</p>
+<p>Flushing memory ranges or using a coherent memory heap means that the driver will be aware of our writes to the buffer, but it doesn't mean that they are actually visible on the GPU yet. The transfer of data to the GPU is an operation that happens in the background and the specification simply <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-submission-host-writes">tells us</a> that it is guaranteed to be complete as of the next call to <code>queue_submit</code>.</p>
 <h2><a class="header" href="#binding-the-vertex-buffer" id="binding-the-vertex-buffer">Binding the vertex buffer</a></h2>
 <p>All that remains now is binding the vertex buffer during rendering operations. We're going to extend the <code>create_command_buffers</code> function to do that.</p>
 <pre><code class="language-rust noplaypen">// ...
@@ -324,7 +320,7 @@ device.cmd_bind_vertex_buffers(*command_buffer, 0, &amp;[data.vertex_buffer], &a
 device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
 // ...
 </code></pre>
-<p>The <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_vertex_buffers"><code class="hljs">cmd_bind_vertex_buffers</code></a> command is used to bind vertex buffers to bindings, like the one we set up in the previous chapter. The second parameter specifies the index of the vertex input binding we are using. The last two parameters specify the vertex buffers to bind and the byte offsets to start reading vertex data from. You should also change the call to <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw"><code class="hljs">cmd_draw</code></a> to pass the number of vertices in the buffer as opposed to the hardcoded number <code>3</code>.</p>
+<p>The <code>cmd_bind_vertex_buffers</code> command is used to bind vertex buffers to bindings, like the one we set up in the previous chapter. The second parameter specifies the index of the vertex input binding we are using. The last two parameters specify the vertex buffers to bind and the byte offsets to start reading vertex data from. You should also change the call to <code>cmd_draw</code> to pass the number of vertices in the buffer as opposed to the hardcoded number <code>3</code>.</p>
 <p>Now run the program and you should see the familiar triangle again:</p>
 <p><img src="../images/triangle.png" alt="" /></p>
 <p>Try changing the color of the top vertex to white by modifying the <code>VERTICES</code> list:</p>

@@ -171,7 +171,7 @@
     Ok(())
 }
 </code></pre>
-<p>We first call <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.device_wait_idle"><code class="hljs">device_wait_idle</code></a>, because just like in the last chapter, we shouldn't touch resources that may still be in use. Obviously, the first thing we'll have to do is recreate the swapchain itself. The image views need to be recreated because they are based directly on the swapchain images. The render pass needs to be recreated because it depends on the format of the swapchain images. It is rare for the swapchain image format to change during an operation like a window resize, but it should still be handled. Viewport and scissor rectangle size is specified during graphics pipeline creation, so the pipeline also needs to be rebuilt. It is possible to avoid this by using dynamic state for the viewports and scissor rectangles. Then, the framebuffers and command buffers also directly depend on the swapchain images. Lastly we resize our list of fences for the swapchain images since there is a possibility that there might be a different number of swapchain images after recreation.</p>
+<p>We first call <code>device_wait_idle</code>, because just like in the last chapter, we shouldn't touch resources that may still be in use. Obviously, the first thing we'll have to do is recreate the swapchain itself. The image views need to be recreated because they are based directly on the swapchain images. The render pass needs to be recreated because it depends on the format of the swapchain images. It is rare for the swapchain image format to change during an operation like a window resize, but it should still be handled. Viewport and scissor rectangle size is specified during graphics pipeline creation, so the pipeline also needs to be rebuilt. It is possible to avoid this by using dynamic state for the viewports and scissor rectangles. Then, the framebuffers and command buffers also directly depend on the swapchain images. Lastly we resize our list of fences for the swapchain images since there is a possibility that there might be a different number of swapchain images after recreation.</p>
 <p>To make sure that the old versions of these objects are cleaned up before recreating them, we should move some of the cleanup code to a separate method that we can call from the <code>App::recreate_swapchain</code> method after waiting for the device to be idle. Let's call it <code>App::destroy_swapchain</code>:</p>
 <pre><code class="language-rust noplaypen">unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     self.device.device_wait_idle()?;
@@ -221,13 +221,13 @@ unsafe fn destroy_swapchain(&amp;mut self) {
     self.device.destroy_swapchain_khr(self.data.swapchain, None);
 }
 </code></pre>
-<p>We could recreate the command pool from scratch, but that is rather wasteful. Instead I've opted to clean up the existing command buffers with the <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.DeviceV1_0.html#method.free_command_buffers"><code class="hljs">free_command_buffers</code></a> command. This way we can reuse the existing pool to allocate the new command buffers.</p>
-<p>That's all it takes to recreate the swapchain! However, the disadvantage of this approach is that we need to stop all rendering before creating the new swapchain. It is possible to create a new swapchain while drawing commands on an image from the old swapchain are still in-flight. You need to pass the previous swapchain to the <code>old_swapchain</code> field in the <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.SwapchainCreateInfoKHR.html"><code class="hljs">vk::SwapchainCreateInfoKHR</code></a> struct and destroy the old swapchain as soon as you've finished using it.</p>
+<p>We could recreate the command pool from scratch, but that is rather wasteful. Instead I've opted to clean up the existing command buffers with the <code>free_command_buffers</code> command. This way we can reuse the existing pool to allocate the new command buffers.</p>
+<p>That's all it takes to recreate the swapchain! However, the disadvantage of this approach is that we need to stop all rendering before creating the new swapchain. It is possible to create a new swapchain while drawing commands on an image from the old swapchain are still in-flight. You need to pass the previous swapchain to the <code>old_swapchain</code> field in the <code>vk::SwapchainCreateInfoKHR</code> struct and destroy the old swapchain as soon as you've finished using it.</p>
 <h2><a class="header" href="#suboptimal-or-out-of-date-swapchain" id="suboptimal-or-out-of-date-swapchain">Suboptimal or out-of-date swapchain</a></h2>
-<p>Now we just need to figure out when swapchain recreation is necessary and call our new <code>App::recreate_swapchain</code> method. Luckily, Vulkan will usually just tell us that the swapchain is no longer adequate during presentation. The <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.acquire_next_image_khr"><code class="hljs">acquire_next_image_khr</code></a> and <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code class="hljs">queue_present_khr</code></a> commands can return the following special values to indicate this.</p>
+<p>Now we just need to figure out when swapchain recreation is necessary and call our new <code>App::recreate_swapchain</code> method. Luckily, Vulkan will usually just tell us that the swapchain is no longer adequate during presentation. The <code>acquire_next_image_khr</code> and <code>queue_present_khr</code> commands can return the following special values to indicate this.</p>
 <ul>
-<li><a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.OUT_OF_DATE_KHR"><code class="hljs">vk::ErrorCode::OUT_OF_DATE_KHR</code></a> – The swapchain has become incompatible with the surface and can no longer be used for rendering. Usually happens after a window resize.</li>
-<li><a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.SuccessCode.html#associatedconstant.SUBOPTIMAL_KHR"><code class="hljs">vk::SuccessCode::SUBOPTIMAL_KHR</code></a> – The swapchain can still be used to successfully present to the surface, but the surface properties are no longer matched exactly.</li>
+<li><code>vk::ErrorCode::OUT_OF_DATE_KHR</code> – The swapchain has become incompatible with the surface and can no longer be used for rendering. Usually happens after a window resize.</li>
+<li><code>vk::SuccessCode::SUBOPTIMAL_KHR</code> – The swapchain can still be used to successfully present to the surface, but the surface properties are no longer matched exactly.</li>
 </ul>
 <pre><code class="language-rust noplaypen">let result = self.device.acquire_next_image_khr(
     self.data.swapchain,
@@ -243,7 +243,7 @@ let image_index = match result {
 };
 </code></pre>
 <p>If the swapchain turns out to be out of date when attempting to acquire an image, then it is no longer possible to present to it. Therefore we should immediately recreate the swapchain and try again in the next <code>App::render</code> call.</p>
-<p>You could also decide to do that if the swapchain is suboptimal, but I've chosen to proceed anyway in that case because we've already acquired an image. Since <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.SuccessCode.html#associatedconstant.SUBOPTIMAL_KHR"><code class="hljs">vk::SuccessCode::SUBOPTIMAL_KHR</code></a> is considered a success code rather than an error code, it will be handled by the <code>Ok</code> arm in the <code>match</code> block.</p>
+<p>You could also decide to do that if the swapchain is suboptimal, but I've chosen to proceed anyway in that case because we've already acquired an image. Since <code>vk::SuccessCode::SUBOPTIMAL_KHR</code> is considered a success code rather than an error code, it will be handled by the <code>Ok</code> arm in the <code>match</code> block.</p>
 <pre><code class="language-rust noplaypen">let result = self.device.queue_present_khr(self.data.present_queue, &amp;present_info);
 
 let changed = result == Ok(vk::SuccessCode::SUBOPTIMAL_KHR)
@@ -255,15 +255,15 @@ if changed {
     return Err(anyhow!(e));
 }
 </code></pre>
-<p>The <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code class="hljs">queue_present_khr</code></a> function returns the same values with the same meaning. In this case we will also recreate the swapchain if it is suboptimal, because we want the best possible result.</p>
+<p>The <code>queue_present_khr</code> function returns the same values with the same meaning. In this case we will also recreate the swapchain if it is suboptimal, because we want the best possible result.</p>
 <h2><a class="header" href="#handling-resizes-explicitly" id="handling-resizes-explicitly">Handling resizes explicitly</a></h2>
-<p>Although many drivers and platforms trigger <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.OUT_OF_DATE_KHR"><code class="hljs">vk::ErrorCode::OUT_OF_DATE_KHR</code></a> automatically after a window resize, it is not guaranteed to happen. That's why we'll add some extra code to also handle resizes explicitly. First add a new field to the <code>App</code> struct to track whether a resize has happpened:</p>
+<p>Although many drivers and platforms trigger <code>vk::ErrorCode::OUT_OF_DATE_KHR</code> automatically after a window resize, it is not guaranteed to happen. That's why we'll add some extra code to also handle resizes explicitly. First add a new field to the <code>App</code> struct to track whether a resize has happpened:</p>
 <pre><code class="language-rust noplaypen">struct App {
     // ...
     resized: bool,
 }
 </code></pre>
-<p>Don't forget to initialize this new field to <code>false</code> in <code>App::create</code>. The <code>App::render</code> method should then be modified to also check for this flag after calling <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code class="hljs">queue_present_khr</code></a>:</p>
+<p>Don't forget to initialize this new field to <code>false</code> in <code>App::create</code>. The <code>App::render</code> method should then be modified to also check for this flag after calling <code>queue_present_khr</code>:</p>
 <pre><code class="language-rust noplaypen">let result = self.device.queue_present_khr(self.data.present_queue, &amp;present_info);
 
 let changed = result == Ok(vk::SuccessCode::SUBOPTIMAL_KHR)
@@ -275,7 +275,7 @@ if self.resized || changed {
     return Err(anyhow!(e));
 }
 </code></pre>
-<p>It is important to do this after <a href="https://docs.rs/vulkanalia/0.6.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code class="hljs">queue_present_khr</code></a> to ensure that the semaphores are in a consistent state, otherwise a signalled semaphore may never be properly waited upon. Now to actually detect resizes we can add an arm to our window event <code>match</code> block in <code>main</code>:</p>
+<p>It is important to do this after <code>queue_present_khr</code> to ensure that the semaphores are in a consistent state, otherwise a signalled semaphore may never be properly waited upon. Now to actually detect resizes we can add an arm to our window event <code>match</code> block in <code>main</code>:</p>
 <pre><code class="language-rust noplaypen">match event {
     // ...
     Event::WindowEvent { event: WindowEvent::Resized(_), .. } =&gt; app.resized = true,
