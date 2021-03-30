@@ -1560,6 +1560,44 @@ pub const EXT_YCBCR_IMAGE_ARRAYS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_FUCHSIA_external_memory.html>
+#[allow(deprecated)]
+pub const FUCHSIA_EXTERNAL_MEMORY_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_FUCHSIA_external_memory"),
+    number: 365,
+    type_: "device",
+    author: "FUCHSIA",
+    contact: "John Rosasco @rosasco",
+    platform: Some("fuchsia"),
+    required_extensions: Some(&[
+        KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION.name,
+        KHR_EXTERNAL_MEMORY_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_FUCHSIA_external_semaphore.html>
+#[allow(deprecated)]
+pub const FUCHSIA_EXTERNAL_SEMAPHORE_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_FUCHSIA_external_semaphore"),
+    number: 366,
+    type_: "device",
+    author: "FUCHSIA",
+    contact: "John Rosasco @rosasco",
+    platform: Some("fuchsia"),
+    required_extensions: Some(&[
+        KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION.name,
+        KHR_EXTERNAL_SEMAPHORE_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_FUCHSIA_imagepipe_surface.html>
 #[allow(deprecated)]
 pub const FUCHSIA_IMAGEPIPE_SURFACE_EXTENSION: Extension = Extension {
