@@ -170,28 +170,20 @@ data class Constant(
 ) : Entity
 
 private fun extractConstant(e: Element): Constant {
+    val type = e.getAttribute("type")
     val name = e.getAttribute("name")
     val value = e.getAttribute("value")
 
-    val type = when {
-        name == "VK_TRUE" || name == "VK_FALSE" -> "uint32_t"
-        name != "WHOLE_SIZE" && (name.startsWith("VK_MAX") || name.endsWith("SIZE")) -> "size_t"
-        value.contains("ULL") -> "uint64_t"
-        value.contains("U") -> "uint32_t"
-        value.endsWith("f") -> "float"
-        else -> "int32_t"
-    }
-
-    val expr = when {
-        value.startsWith("(~") -> value.replace('~', '!').replace(Regex("(\\d+)U(LL)?"), "$1")
-        value.endsWith("f") -> value.replace("f", "")
-        else -> value
+    val expr = if (value.startsWith("(~")) {
+        value.replace('~', '!').replace(Regex("(\\d+)U(LL)?"), "$1")
+    } else {
+        value
     }
 
     return Constant(
         name = name.intern(),
         type = IdentifierType(type.intern()),
-        expr = expr.trim('(', ')'),
+        expr = expr.trim('(', ')').replace(Regex("[fF]$"), ""),
     )
 }
 
