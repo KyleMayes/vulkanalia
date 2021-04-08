@@ -5,7 +5,7 @@ edition = "2018"
 name = "vulkanalia"
 authors = ["Kyle Mayes <kyle@mayeses.com>"]
 
-version = "0.6.0"
+version = "0.7.0"
 
 readme = "../README.md"
 license = "Apache-2.0"
@@ -27,7 +27,7 @@ window = ["raw-window-handle", "cocoa", "metal", "objc"]
 
 libloading = { version = "0.7", optional = true }
 raw-window-handle = { version = "0.3", optional = true }
-vulkanalia-sys = { version = "0.6", path = "../vulkanalia-sys" }
+vulkanalia-sys = { version = "0.7", path = "../vulkanalia-sys" }
 
 [target.'cfg(target_os = "macos")'.dependencies]
 
