@@ -370,6 +370,8 @@ pub struct DeviceCommands {
         PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR,
     pub cmd_set_fragment_shading_rate_enum_nv: PFN_vkCmdSetFragmentShadingRateEnumNV,
     pub get_acceleration_structure_build_sizes_khr: PFN_vkGetAccelerationStructureBuildSizesKHR,
+    pub cmd_set_vertex_input_ext: PFN_vkCmdSetVertexInputEXT,
+    pub cmd_set_color_write_enable_ext: PFN_vkCmdSetColorWriteEnableEXT,
     pub cmd_set_event2_khr: PFN_vkCmdSetEvent2KHR,
     pub cmd_reset_event2_khr: PFN_vkCmdResetEvent2KHR,
     pub cmd_wait_events2_khr: PFN_vkCmdWaitEvents2KHR,
@@ -378,6 +380,21 @@ pub struct DeviceCommands {
     pub cmd_write_timestamp2_khr: PFN_vkCmdWriteTimestamp2KHR,
     pub cmd_write_buffer_marker2_amd: PFN_vkCmdWriteBufferMarker2AMD,
     pub get_queue_checkpoint_data2_nv: PFN_vkGetQueueCheckpointData2NV,
+    pub get_physical_device_video_capabilities_khr: PFN_vkGetPhysicalDeviceVideoCapabilitiesKHR,
+    pub get_physical_device_video_format_properties_khr:
+        PFN_vkGetPhysicalDeviceVideoFormatPropertiesKHR,
+    pub create_video_session_khr: PFN_vkCreateVideoSessionKHR,
+    pub destroy_video_session_khr: PFN_vkDestroyVideoSessionKHR,
+    pub create_video_session_parameters_khr: PFN_vkCreateVideoSessionParametersKHR,
+    pub update_video_session_parameters_khr: PFN_vkUpdateVideoSessionParametersKHR,
+    pub destroy_video_session_parameters_khr: PFN_vkDestroyVideoSessionParametersKHR,
+    pub get_video_session_memory_requirements_khr: PFN_vkGetVideoSessionMemoryRequirementsKHR,
+    pub bind_video_session_memory_khr: PFN_vkBindVideoSessionMemoryKHR,
+    pub cmd_decode_video_khr: PFN_vkCmdDecodeVideoKHR,
+    pub cmd_begin_video_coding_khr: PFN_vkCmdBeginVideoCodingKHR,
+    pub cmd_control_video_coding_khr: PFN_vkCmdControlVideoCodingKHR,
+    pub cmd_end_video_coding_khr: PFN_vkCmdEndVideoCodingKHR,
+    pub cmd_encode_video_khr: PFN_vkCmdEncodeVideoKHR,
     pub reset_query_pool_ext: PFN_vkResetQueryPoolEXT,
     pub trim_command_pool_khr: PFN_vkTrimCommandPoolKHR,
     pub get_device_group_peer_memory_features_khr: PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR,
@@ -5598,6 +5615,38 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_vertex_input_ext: {
+                let value = loader(b"vkCmdSetVertexInputEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _vertex_binding_description_count: u32,
+                        _vertex_binding_descriptions: *const VertexInputBindingDescription2EXT,
+                        _vertex_attribute_description_count: u32,
+                        _vertex_attribute_descriptions: *const VertexInputAttributeDescription2EXT,
+                    ) {
+                        panic!("could not load vkCmdSetVertexInputEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_color_write_enable_ext: {
+                let value = loader(b"vkCmdSetColorWriteEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _attachment_count: u32,
+                        _color_write_enables: *const Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetColorWriteEnableEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_event2_khr: {
                 let value = loader(b"vkCmdSetEvent2KHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -5718,6 +5767,220 @@ impl DeviceCommands {
                         _checkpoint_data: *mut CheckpointData2NV,
                     ) {
                         panic!("could not load vkGetQueueCheckpointData2NV")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_video_capabilities_khr: {
+                let value = loader(b"vkGetPhysicalDeviceVideoCapabilitiesKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _video_profile: *const VideoProfileKHR,
+                        _capabilities: *mut VideoCapabilitiesKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceVideoCapabilitiesKHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_video_format_properties_khr: {
+                let value = loader(
+                    b"vkGetPhysicalDeviceVideoFormatPropertiesKHR\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _video_format_info: *const PhysicalDeviceVideoFormatInfoKHR,
+                        _video_format_property_count: *mut u32,
+                        _video_format_properties: *mut VideoFormatPropertiesKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceVideoFormatPropertiesKHR")
+                    }
+                    fallback
+                }
+            },
+            create_video_session_khr: {
+                let value = loader(b"vkCreateVideoSessionKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const VideoSessionCreateInfoKHR,
+                        _allocator: *const AllocationCallbacks,
+                        _video_session: *mut VideoSessionKHR,
+                    ) -> Result {
+                        panic!("could not load vkCreateVideoSessionKHR")
+                    }
+                    fallback
+                }
+            },
+            destroy_video_session_khr: {
+                let value = loader(b"vkDestroyVideoSessionKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _video_session: VideoSessionKHR,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyVideoSessionKHR")
+                    }
+                    fallback
+                }
+            },
+            create_video_session_parameters_khr: {
+                let value = loader(b"vkCreateVideoSessionParametersKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const VideoSessionParametersCreateInfoKHR,
+                        _allocator: *const AllocationCallbacks,
+                        _video_session_parameters: *mut VideoSessionParametersKHR,
+                    ) -> Result {
+                        panic!("could not load vkCreateVideoSessionParametersKHR")
+                    }
+                    fallback
+                }
+            },
+            update_video_session_parameters_khr: {
+                let value = loader(b"vkUpdateVideoSessionParametersKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _video_session_parameters: VideoSessionParametersKHR,
+                        _update_info: *const VideoSessionParametersUpdateInfoKHR,
+                    ) -> Result {
+                        panic!("could not load vkUpdateVideoSessionParametersKHR")
+                    }
+                    fallback
+                }
+            },
+            destroy_video_session_parameters_khr: {
+                let value = loader(b"vkDestroyVideoSessionParametersKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _video_session_parameters: VideoSessionParametersKHR,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyVideoSessionParametersKHR")
+                    }
+                    fallback
+                }
+            },
+            get_video_session_memory_requirements_khr: {
+                let value = loader(b"vkGetVideoSessionMemoryRequirementsKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _video_session: VideoSessionKHR,
+                        _video_session_memory_requirements_count: *mut u32,
+                        _video_session_memory_requirements: *mut VideoGetMemoryPropertiesKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetVideoSessionMemoryRequirementsKHR")
+                    }
+                    fallback
+                }
+            },
+            bind_video_session_memory_khr: {
+                let value = loader(b"vkBindVideoSessionMemoryKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _video_session: VideoSessionKHR,
+                        _video_session_bind_memory_count: u32,
+                        _video_session_bind_memories: *const VideoBindMemoryKHR,
+                    ) -> Result {
+                        panic!("could not load vkBindVideoSessionMemoryKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_decode_video_khr: {
+                let value = loader(b"vkCmdDecodeVideoKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _frame_info: *const VideoDecodeInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdDecodeVideoKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_begin_video_coding_khr: {
+                let value = loader(b"vkCmdBeginVideoCodingKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _begin_info: *const VideoBeginCodingInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdBeginVideoCodingKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_control_video_coding_khr: {
+                let value = loader(b"vkCmdControlVideoCodingKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _coding_control_info: *const VideoCodingControlInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdControlVideoCodingKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_end_video_coding_khr: {
+                let value = loader(b"vkCmdEndVideoCodingKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _end_coding_info: *const VideoEndCodingInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdEndVideoCodingKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_encode_video_khr: {
+                let value = loader(b"vkCmdEncodeVideoKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _encode_info: *const VideoEncodeInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdEncodeVideoKHR")
                     }
                     fallback
                 }

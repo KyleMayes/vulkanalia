@@ -513,6 +513,22 @@ pub const EXT_CALIBRATED_TIMESTAMPS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_color_write_enable.html>
+#[allow(deprecated)]
+pub const EXT_COLOR_WRITE_ENABLE_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_color_write_enable"),
+    number: 382,
+    type_: "device",
+    author: "EXT",
+    contact: "Sharif Elcott @selcott",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_conditional_rendering.html>
 #[allow(deprecated)]
 pub const EXT_CONDITIONAL_RENDERING_EXTENSION: Extension = Extension {
@@ -1538,6 +1554,110 @@ pub const EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION: Extension = Extension {
     contact: "Vikram Kushwaha @vkushwaha",
     platform: None,
     required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_vertex_input_dynamic_state.html>
+#[allow(deprecated)]
+pub const EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_vertex_input_dynamic_state"),
+    number: 353,
+    type_: "device",
+    author: "EXT",
+    contact: "Piers Daniell @pdaniell-nv",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_video_decode_h264.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+#[allow(deprecated)]
+pub const EXT_VIDEO_DECODE_H264_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_video_decode_h264"),
+    number: 41,
+    type_: "device",
+    author: "KHR",
+    contact: "peter.fang@amd.com",
+    platform: Some("provisional"),
+    required_extensions: Some(&[KHR_VIDEO_DECODE_QUEUE_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_video_decode_h265.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+#[allow(deprecated)]
+pub const EXT_VIDEO_DECODE_H265_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_video_decode_h265"),
+    number: 188,
+    type_: "device",
+    author: "KHR",
+    contact: "peter.fang@amd.com",
+    platform: Some("provisional"),
+    required_extensions: Some(&[KHR_VIDEO_DECODE_QUEUE_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_video_encode_h264.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+#[allow(deprecated)]
+pub const EXT_VIDEO_ENCODE_H264_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_video_encode_h264"),
+    number: 39,
+    type_: "device",
+    author: "KHR",
+    contact: "Ahmed Abdelkhalek @aabdelkh",
+    platform: Some("provisional"),
+    required_extensions: Some(&[KHR_VIDEO_ENCODE_QUEUE_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_ycbcr_2plane_444_formats.html>
+#[allow(deprecated)]
+pub const EXT_YCBCR_2PLANE_444_FORMATS_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_ycbcr_2plane_444_formats"),
+    number: 331,
+    type_: "device",
+    author: "EXT",
+    contact: "Tony Zlatinski @tzlatinski",
+    platform: None,
+    required_extensions: Some(&[KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION.name]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
@@ -2981,6 +3101,87 @@ pub const KHR_VARIABLE_POINTERS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_video_decode_queue.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+#[allow(deprecated)]
+pub const KHR_VIDEO_DECODE_QUEUE_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_KHR_video_decode_queue"),
+    number: 25,
+    type_: "device",
+    author: "KHR",
+    contact: "jake.beju@amd.com",
+    platform: Some("provisional"),
+    required_extensions: Some(&[
+        KHR_VIDEO_QUEUE_EXTENSION.name,
+        KHR_SYNCHRONIZATION2_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_video_encode_queue.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+#[allow(deprecated)]
+pub const KHR_VIDEO_ENCODE_QUEUE_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_KHR_video_encode_queue"),
+    number: 300,
+    type_: "device",
+    author: "KHR",
+    contact: "ahmed.abdelkalek@amd.com",
+    platform: Some("provisional"),
+    required_extensions: Some(&[
+        KHR_VIDEO_QUEUE_EXTENSION.name,
+        KHR_SYNCHRONIZATION2_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_video_queue.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+#[allow(deprecated)]
+pub const KHR_VIDEO_QUEUE_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_KHR_video_queue"),
+    number: 24,
+    type_: "device",
+    author: "KHR",
+    contact: "Tony Zlatinski @tzlatinski",
+    platform: Some("provisional"),
+    required_extensions: Some(&[
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+        KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_vulkan_memory_model.html>
 #[allow(deprecated)]
 pub const KHR_VULKAN_MEMORY_MODEL_EXTENSION: Extension = Extension {
@@ -3528,6 +3729,22 @@ pub const NV_GLSL_SHADER_EXTENSION: Extension = Extension {
     required_extensions: None,
     required_version: None,
     deprecated_by: Some(""),
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_inherited_viewport_scissor.html>
+#[allow(deprecated)]
+pub const NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_NV_inherited_viewport_scissor"),
+    number: 279,
+    type_: "device",
+    author: "NV",
+    contact: "David Zhao Akeley @akeley98",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
     obsoleted_by: None,
     promoted_to: None,
 };

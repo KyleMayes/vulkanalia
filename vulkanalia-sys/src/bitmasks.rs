@@ -65,10 +65,10 @@ bitflags! {
         const ACCESS_2_SHADER_SAMPLED_READ = 1 << 32;
         const ACCESS_2_SHADER_STORAGE_READ = 1 << 33;
         const ACCESS_2_SHADER_STORAGE_WRITE = 1 << 34;
-        const ACCESS_2_RESERVED_READ_35 = 1 << 35;
-        const ACCESS_2_RESERVED_WRITE_36 = 1 << 36;
-        const ACCESS_2_RESERVED_READ_37 = 1 << 37;
-        const ACCESS_2_RESERVED_WRITE_38 = 1 << 38;
+        const ACCESS_2_VIDEO_DECODE_READ = 1 << 35;
+        const ACCESS_2_VIDEO_DECODE_WRITE = 1 << 36;
+        const ACCESS_2_VIDEO_ENCODE_READ = 1 << 37;
+        const ACCESS_2_VIDEO_ENCODE_WRITE = 1 << 38;
     }
 }
 
@@ -185,10 +185,10 @@ bitflags! {
         const SHADER_BINDING_TABLE_KHR = 1 << 10;
         const TRANSFORM_FEEDBACK_BUFFER_EXT = 1 << 11;
         const TRANSFORM_FEEDBACK_COUNTER_BUFFER_EXT = 1 << 12;
-        const RESERVED_13_KHR = 1 << 13;
-        const RESERVED_14_KHR = 1 << 14;
-        const RESERVED_15_KHR = 1 << 15;
-        const RESERVED_16_KHR = 1 << 16;
+        const VIDEO_DECODE_SRC_KHR = 1 << 13;
+        const VIDEO_DECODE_DST_KHR = 1 << 14;
+        const VIDEO_ENCODE_DST_KHR = 1 << 15;
+        const VIDEO_ENCODE_SRC_KHR = 1 << 16;
         const SHADER_DEVICE_ADDRESS = 1 << 17;
         const RESERVED_18_QCOM = 1 << 18;
         const ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_KHR = 1 << 19;
@@ -714,10 +714,10 @@ bitflags! {
         const DISJOINT = 1 << 22;
         const COSITED_CHROMA_SAMPLES = 1 << 23;
         const FRAGMENT_DENSITY_MAP_EXT = 1 << 24;
-        const RESERVED_25_KHR = 1 << 25;
-        const RESERVED_26_KHR = 1 << 26;
-        const RESERVED_27_KHR = 1 << 27;
-        const RESERVED_28_KHR = 1 << 28;
+        const VIDEO_DECODE_OUTPUT_KHR = 1 << 25;
+        const VIDEO_DECODE_DPB_KHR = 1 << 26;
+        const VIDEO_ENCODE_INPUT_KHR = 1 << 27;
+        const VIDEO_ENCODE_DPB_KHR = 1 << 28;
         const ACCELERATION_STRUCTURE_VERTEX_BUFFER_KHR = 1 << 29;
         const FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 30;
     }
@@ -848,12 +848,12 @@ bitflags! {
         const INPUT_ATTACHMENT = 1 << 7;
         const SHADING_RATE_IMAGE_NV = 1 << 8;
         const FRAGMENT_DENSITY_MAP_EXT = 1 << 9;
-        const RESERVED_10_KHR = 1 << 10;
-        const RESERVED_11_KHR = 1 << 11;
-        const RESERVED_12_KHR = 1 << 12;
-        const RESERVED_13_KHR = 1 << 13;
-        const RESERVED_14_KHR = 1 << 14;
-        const RESERVED_15_KHR = 1 << 15;
+        const VIDEO_DECODE_DST_KHR = 1 << 10;
+        const VIDEO_DECODE_SRC_KHR = 1 << 11;
+        const VIDEO_DECODE_DPB_KHR = 1 << 12;
+        const VIDEO_ENCODE_DST_KHR = 1 << 13;
+        const VIDEO_ENCODE_SRC_KHR = 1 << 14;
+        const VIDEO_ENCODE_DPB_KHR = 1 << 15;
         const RESERVED_16_QCOM = 1 << 16;
         const RESERVED_17_QCOM = 1 << 17;
     }
@@ -1271,8 +1271,8 @@ bitflags! {
         const PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_EXT = 1 << 23;
         const PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_EXT = 1 << 24;
         const PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD = 1 << 25;
-        const PIPELINE_STAGE_2_RESERVED_26 = 1 << 26;
-        const PIPELINE_STAGE_2_RESERVED_27 = 1 << 27;
+        const PIPELINE_STAGE_2_VIDEO_DECODE = 1 << 26;
+        const PIPELINE_STAGE_2_VIDEO_ENCODE = 1 << 27;
         const PIPELINE_STAGE_2_COPY = 1 << 32;
         const PIPELINE_STAGE_2_RESOLVE = 1 << 33;
         const PIPELINE_STAGE_2_BLIT = 1 << 34;
@@ -1438,6 +1438,7 @@ bitflags! {
         const WAIT = 1 << 1;
         const WITH_AVAILABILITY = 1 << 2;
         const PARTIAL = 1 << 3;
+        const WITH_STATUS_KHR = 1 << 4;
     }
 }
 
@@ -1451,8 +1452,8 @@ bitflags! {
         const TRANSFER = 1 << 2;
         const SPARSE_BINDING = 1 << 3;
         const PROTECTED = 1 << 4;
-        const RESERVED_5_KHR = 1 << 5;
-        const RESERVED_6_KHR = 1 << 6;
+        const VIDEO_DECODE_KHR = 1 << 5;
+        const VIDEO_ENCODE_KHR = 1 << 6;
     }
 }
 
@@ -1754,6 +1755,236 @@ bitflags! {
         ///
         /// <https://github.com/bitflags/bitflags/issues/179>
         const EMPTY = 0;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoBeginCodingFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoBeginCodingFlagsKHR: Flags {
+        /// Workaround for `bitflags!` not supporting empty bitflags.
+        ///
+        /// <https://github.com/bitflags/bitflags/issues/179>
+        const EMPTY = 0;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoCapabilitiesFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoCapabilitiesFlagsKHR: Flags {
+        const PROTECTED_CONTENT = 1;
+        const SEPARATE_REFERENCE_IMAGES = 1 << 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoChromaSubsamplingFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoChromaSubsamplingFlagsKHR: Flags {
+        const INVALID = 0;
+        const MONOCHROME = 1;
+        const _420 = 1 << 1;
+        const _422 = 1 << 2;
+        const _444 = 1 << 3;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoCodecOperationFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoCodecOperationFlagsKHR: Flags {
+        const INVALID = 0;
+        const DECODE_H264_EXT = 1;
+        const DECODE_H265_EXT = 1 << 1;
+        const ENCODE_H264_EXT = 1 << 16;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoCodingControlFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoCodingControlFlagsKHR: Flags {
+        const DEFAULT = 0;
+        const RESET = 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoCodingQualityPresetFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoCodingQualityPresetFlagsKHR: Flags {
+        const DEFAULT = 0;
+        const NORMAL = 1;
+        const POWER = 1 << 1;
+        const QUALITY = 1 << 2;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoComponentBitDepthFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoComponentBitDepthFlagsKHR: Flags {
+        const INVALID = 0;
+        const _8 = 1;
+        const _10 = 1 << 2;
+        const _12 = 1 << 4;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoDecodeFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoDecodeFlagsKHR: Flags {
+        const DEFAULT = 0;
+        const RESERVED_0 = 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoDecodeH264CreateFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoDecodeH264CreateFlagsEXT: Flags {
+        /// Workaround for `bitflags!` not supporting empty bitflags.
+        ///
+        /// <https://github.com/bitflags/bitflags/issues/179>
+        const EMPTY = 0;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoDecodeH264FieldLayoutFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoDecodeH264FieldLayoutFlagsEXT: Flags {
+        const VIDEO_DECODE_H264_PROGRESSIVE_PICTURES_ONLY = 0;
+        const LINE_INTERLACED_PLANE = 1;
+        const SEPARATE_INTERLACED_PLANE = 1 << 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoDecodeH265CreateFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoDecodeH265CreateFlagsEXT: Flags {
+        /// Workaround for `bitflags!` not supporting empty bitflags.
+        ///
+        /// <https://github.com/bitflags/bitflags/issues/179>
+        const EMPTY = 0;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoEncodeFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeFlagsKHR: Flags {
+        const DEFAULT = 0;
+        const RESERVED_0 = 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoEncodeH264CapabilitiesFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeH264CapabilitiesFlagsEXT: Flags {
+        const VIDEO_ENCODE_H264_CAPABILITY_CABAC = 1;
+        const VIDEO_ENCODE_H264_CAPABILITY_CAVLC = 1 << 1;
+        const VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BI_PRED_IMPLICIT = 1 << 2;
+        const VIDEO_ENCODE_H264_CAPABILITY_TRANSFORM_8X8 = 1 << 3;
+        const VIDEO_ENCODE_H264_CAPABILITY_CHROMA_QP_OFFSET = 1 << 4;
+        const VIDEO_ENCODE_H264_CAPABILITY_SECOND_CHROMA_QP_OFFSET = 1 << 5;
+        const VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_DISABLED = 1 << 6;
+        const VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_ENABLED = 1 << 7;
+        const VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_PARTIAL = 1 << 8;
+        const VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME = 1 << 9;
+        const VIDEO_ENCODE_H264_CAPABILITY_EVENLY_DISTRIBUTED_SLICE_SIZE = 1 << 10;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoEncodeH264CreateFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeH264CreateFlagsEXT: Flags {
+        const DEFAULT = 0;
+        const RESERVED_0 = 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoEncodeH264InputModeFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeH264InputModeFlagsEXT: Flags {
+        const FRAME = 1;
+        const SLICE = 1 << 1;
+        const NON_VCL = 1 << 2;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoEncodeH264OutputModeFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeH264OutputModeFlagsEXT: Flags {
+        const FRAME = 1;
+        const SLICE = 1 << 1;
+        const NON_VCL = 1 << 2;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoEncodeRateControlFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeRateControlFlagsKHR: Flags {
+        const DEFAULT = 0;
+        const RESET = 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoEncodeRateControlModeFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeRateControlModeFlagsKHR: Flags {
+        const NONE = 0;
+        const CBR = 1;
+        const VBR = 1 << 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoEndCodingFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEndCodingFlagsKHR: Flags {
+        /// Workaround for `bitflags!` not supporting empty bitflags.
+        ///
+        /// <https://github.com/bitflags/bitflags/issues/179>
+        const EMPTY = 0;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVideoSessionCreateFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoSessionCreateFlagsKHR: Flags {
+        const DEFAULT = 0;
+        const PROTECTED_CONTENT = 1;
     }
 }
 
