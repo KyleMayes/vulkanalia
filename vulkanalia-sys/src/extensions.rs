@@ -513,6 +513,22 @@ pub const EXT_CALIBRATED_TIMESTAMPS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_color_write_enable.html>
+#[allow(deprecated)]
+pub const EXT_COLOR_WRITE_ENABLE_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_color_write_enable"),
+    number: 382,
+    type_: "device",
+    author: "EXT",
+    contact: "Sharif Elcott @selcott",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_conditional_rendering.html>
 #[allow(deprecated)]
 pub const EXT_CONDITIONAL_RENDERING_EXTENSION: Extension = Extension {
@@ -1538,6 +1554,38 @@ pub const EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION: Extension = Extension {
     contact: "Vikram Kushwaha @vkushwaha",
     platform: None,
     required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_vertex_input_dynamic_state.html>
+#[allow(deprecated)]
+pub const EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_vertex_input_dynamic_state"),
+    number: 353,
+    type_: "device",
+    author: "EXT",
+    contact: "Piers Daniell @pdaniell-nv",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_ycbcr_2plane_444_formats.html>
+#[allow(deprecated)]
+pub const EXT_YCBCR_2PLANE_444_FORMATS_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_ycbcr_2plane_444_formats"),
+    number: 331,
+    type_: "device",
+    author: "EXT",
+    contact: "Tony Zlatinski @tzlatinski",
+    platform: None,
+    required_extensions: Some(&[KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION.name]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
@@ -3528,6 +3576,22 @@ pub const NV_GLSL_SHADER_EXTENSION: Extension = Extension {
     required_extensions: None,
     required_version: None,
     deprecated_by: Some(""),
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_inherited_viewport_scissor.html>
+#[allow(deprecated)]
+pub const NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_NV_inherited_viewport_scissor"),
+    number: 279,
+    type_: "device",
+    author: "NV",
+    contact: "David Zhao Akeley @akeley98",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
     obsoleted_by: None,
     promoted_to: None,
 };

@@ -788,6 +788,13 @@ pub type PFN_vkCmdSetCoarseSampleOrderNV = unsafe extern "system" fn(
     _custom_sample_orders: *const CoarseSampleOrderCustomNV,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetColorWriteEnableEXT.html>
+pub type PFN_vkCmdSetColorWriteEnableEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _attachment_count: u32,
+    _color_write_enables: *const Bool32,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetCullModeEXT.html>
 pub type PFN_vkCmdSetCullModeEXT =
     unsafe extern "system" fn(_command_buffer: CommandBuffer, _cull_mode: CullModeFlags);
@@ -971,6 +978,15 @@ pub type PFN_vkCmdSetStencilWriteMask = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _face_mask: StencilFaceFlags,
     _write_mask: u32,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetVertexInputEXT.html>
+pub type PFN_vkCmdSetVertexInputEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _vertex_binding_description_count: u32,
+    _vertex_binding_descriptions: *const VertexInputBindingDescription2EXT,
+    _vertex_attribute_description_count: u32,
+    _vertex_attribute_descriptions: *const VertexInputAttributeDescription2EXT,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetViewport.html>

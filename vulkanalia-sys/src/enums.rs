@@ -1333,6 +1333,7 @@ impl DriverId {
     pub const BROADCOM_PROPRIETARY: Self = Self(12);
     pub const MESA_LLVMPIPE: Self = Self(13);
     pub const MOLTENVK: Self = Self(14);
+    pub const COREAVI_PROPRIETARY: Self = Self(15);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1364,6 +1365,7 @@ impl fmt::Debug for DriverId {
             12 => write!(f, "BROADCOM_PROPRIETARY"),
             13 => write!(f, "MESA_LLVMPIPE"),
             14 => write!(f, "MOLTENVK"),
+            15 => write!(f, "COREAVI_PROPRIETARY"),
             _ => self.0.fmt(f),
         }
     }
@@ -1405,6 +1407,8 @@ impl DynamicState {
     pub const DEPTH_BOUNDS_TEST_ENABLE_EXT: Self = Self(1000267009);
     pub const STENCIL_TEST_ENABLE_EXT: Self = Self(1000267010);
     pub const STENCIL_OP_EXT: Self = Self(1000267011);
+    pub const VERTEX_INPUT_EXT: Self = Self(1000352000);
+    pub const COLOR_WRITE_ENABLE_EXT: Self = Self(1000381000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1452,6 +1456,8 @@ impl fmt::Debug for DynamicState {
             1000267009 => write!(f, "DEPTH_BOUNDS_TEST_ENABLE_EXT"),
             1000267010 => write!(f, "STENCIL_TEST_ENABLE_EXT"),
             1000267011 => write!(f, "STENCIL_OP_EXT"),
+            1000352000 => write!(f, "VERTEX_INPUT_EXT"),
+            1000381000 => write!(f, "COLOR_WRITE_ENABLE_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -1738,6 +1744,10 @@ impl Format {
     pub const ASTC_10X10_SFLOAT_BLOCK_EXT: Self = Self(1000066011);
     pub const ASTC_12X10_SFLOAT_BLOCK_EXT: Self = Self(1000066012);
     pub const ASTC_12X12_SFLOAT_BLOCK_EXT: Self = Self(1000066013);
+    pub const G8_B8R8_2PLANE_444_UNORM_EXT: Self = Self(1000330000);
+    pub const G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16_EXT: Self = Self(1000330001);
+    pub const G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16_EXT: Self = Self(1000330002);
+    pub const G16_B16R16_2PLANE_444_UNORM_EXT: Self = Self(1000330003);
     pub const A4R4G4B4_UNORM_PACK16_EXT: Self = Self(1000340000);
     pub const A4B4G4R4_UNORM_PACK16_EXT: Self = Self(1000340001);
 
@@ -1998,6 +2008,10 @@ impl fmt::Debug for Format {
             1000066011 => write!(f, "ASTC_10X10_SFLOAT_BLOCK_EXT"),
             1000066012 => write!(f, "ASTC_12X10_SFLOAT_BLOCK_EXT"),
             1000066013 => write!(f, "ASTC_12X12_SFLOAT_BLOCK_EXT"),
+            1000330000 => write!(f, "G8_B8R8_2PLANE_444_UNORM_EXT"),
+            1000330001 => write!(f, "G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16_EXT"),
+            1000330002 => write!(f, "G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16_EXT"),
+            1000330003 => write!(f, "G16_B16R16_2PLANE_444_UNORM_EXT"),
             1000340000 => write!(f, "A4R4G4B4_UNORM_PACK16_EXT"),
             1000340001 => write!(f, "A4B4G4R4_UNORM_PACK16_EXT"),
             _ => self.0.fmt(f),
@@ -3341,6 +3355,40 @@ impl fmt::Debug for QueryPoolSamplingModeINTEL {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryResultStatusKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct QueryResultStatusKHR(i32);
+
+impl QueryResultStatusKHR {
+    pub const ERROR: Self = Self(-1);
+    pub const NOT_READY: Self = Self(0);
+    pub const COMPLETE: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for QueryResultStatusKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            -1 => write!(f, "ERROR"),
+            0 => write!(f, "NOT_READY"),
+            1 => write!(f, "COMPLETE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -4555,6 +4603,8 @@ impl StructureType {
     pub const GENERATED_COMMANDS_INFO_NV: Self = Self(1000277005);
     pub const GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_NV: Self = Self(1000277006);
     pub const PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV: Self = Self(1000277007);
+    pub const PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV: Self = Self(1000278000);
+    pub const COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV: Self = Self(1000278001);
     pub const PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT: Self = Self(1000281000);
     pub const PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT: Self = Self(1000281001);
     pub const COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM: Self = Self(1000282000);
@@ -4589,6 +4639,7 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV: Self = Self(1000326000);
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV: Self = Self(1000326001);
     pub const PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV: Self = Self(1000326002);
+    pub const PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT: Self = Self(1000330000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT: Self = Self(1000332000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT: Self = Self(1000332001);
     pub const COPY_COMMAND_TRANSFORM_INFO_QCOM: Self = Self(1000333000);
@@ -4610,12 +4661,17 @@ impl StructureType {
     pub const DIRECTFB_SURFACE_CREATE_INFO_EXT: Self = Self(1000346000);
     pub const PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE: Self = Self(1000351000);
     pub const MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE: Self = Self(1000351002);
+    pub const PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT: Self = Self(1000352000);
+    pub const VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT: Self = Self(1000352001);
+    pub const VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT: Self = Self(1000352002);
     pub const IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000364000);
     pub const MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA: Self = Self(1000364001);
     pub const MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000364002);
     pub const IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000365000);
     pub const SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000365001);
     pub const SCREEN_SURFACE_CREATE_INFO_QNX: Self = Self(1000378000);
+    pub const PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT: Self = Self(1000381000);
+    pub const PIPELINE_COLOR_WRITE_CREATE_INFO_EXT: Self = Self(1000381001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5113,6 +5169,8 @@ impl fmt::Debug for StructureType {
             1000277005 => write!(f, "GENERATED_COMMANDS_INFO_NV"),
             1000277006 => write!(f, "GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_NV"),
             1000277007 => write!(f, "PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV"),
+            1000278000 => write!(f, "PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV"),
+            1000278001 => write!(f, "COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV"),
             1000281000 => write!(f, "PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT"),
             1000281001 => write!(f, "PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT"),
             1000282000 => write!(
@@ -5161,6 +5219,7 @@ impl fmt::Debug for StructureType {
                 f,
                 "PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV"
             ),
+            1000330000 => write!(f, "PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT"),
             1000332000 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT"),
             1000332001 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT"),
             1000333000 => write!(f, "COPY_COMMAND_TRANSFORM_INFO_QCOM"),
@@ -5184,12 +5243,17 @@ impl fmt::Debug for StructureType {
             1000346000 => write!(f, "DIRECTFB_SURFACE_CREATE_INFO_EXT"),
             1000351000 => write!(f, "PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE"),
             1000351002 => write!(f, "MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE"),
+            1000352000 => write!(f, "PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT"),
+            1000352001 => write!(f, "VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT"),
+            1000352002 => write!(f, "VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT"),
             1000364000 => write!(f, "IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA"),
             1000364001 => write!(f, "MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA"),
             1000364002 => write!(f, "MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA"),
             1000365000 => write!(f, "IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA"),
             1000365001 => write!(f, "SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA"),
             1000378000 => write!(f, "SCREEN_SURFACE_CREATE_INFO_QNX"),
+            1000381000 => write!(f, "PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT"),
+            1000381001 => write!(f, "PIPELINE_COLOR_WRITE_CREATE_INFO_EXT"),
             _ => self.0.fmt(f),
         }
     }

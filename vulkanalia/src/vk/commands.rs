@@ -127,6 +127,7 @@ pub struct DeviceCommands {
     pub cmd_set_blend_constants: PFN_vkCmdSetBlendConstants,
     pub cmd_set_checkpoint_nv: PFN_vkCmdSetCheckpointNV,
     pub cmd_set_coarse_sample_order_nv: PFN_vkCmdSetCoarseSampleOrderNV,
+    pub cmd_set_color_write_enable_ext: PFN_vkCmdSetColorWriteEnableEXT,
     pub cmd_set_cull_mode_ext: PFN_vkCmdSetCullModeEXT,
     pub cmd_set_depth_bias: PFN_vkCmdSetDepthBias,
     pub cmd_set_depth_bounds: PFN_vkCmdSetDepthBounds,
@@ -158,6 +159,7 @@ pub struct DeviceCommands {
     pub cmd_set_stencil_reference: PFN_vkCmdSetStencilReference,
     pub cmd_set_stencil_test_enable_ext: PFN_vkCmdSetStencilTestEnableEXT,
     pub cmd_set_stencil_write_mask: PFN_vkCmdSetStencilWriteMask,
+    pub cmd_set_vertex_input_ext: PFN_vkCmdSetVertexInputEXT,
     pub cmd_set_viewport: PFN_vkCmdSetViewport,
     pub cmd_set_viewport_shading_rate_palette_nv: PFN_vkCmdSetViewportShadingRatePaletteNV,
     pub cmd_set_viewport_w_scaling_nv: PFN_vkCmdSetViewportWScalingNV,
@@ -2069,6 +2071,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_color_write_enable_ext: {
+                let value = loader(b"vkCmdSetColorWriteEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _attachment_count: u32,
+                        _color_write_enables: *const Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetColorWriteEnableEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_cull_mode_ext: {
                 let value = loader(b"vkCmdSetCullModeEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2521,6 +2538,23 @@ impl DeviceCommands {
                         _write_mask: u32,
                     ) {
                         panic!("could not load vkCmdSetStencilWriteMask")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_vertex_input_ext: {
+                let value = loader(b"vkCmdSetVertexInputEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _vertex_binding_description_count: u32,
+                        _vertex_binding_descriptions: *const VertexInputBindingDescription2EXT,
+                        _vertex_attribute_description_count: u32,
+                        _vertex_attribute_descriptions: *const VertexInputAttributeDescription2EXT,
+                    ) {
+                        panic!("could not load vkCmdSetVertexInputEXT")
                     }
                     fallback
                 }
