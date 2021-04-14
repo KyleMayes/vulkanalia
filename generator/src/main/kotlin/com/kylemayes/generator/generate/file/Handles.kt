@@ -4,13 +4,17 @@ package com.kylemayes.generator.generate.file
 
 import com.kylemayes.generator.generate.support.generateAliases
 import com.kylemayes.generator.generate.support.generateManualUrl
+import com.kylemayes.generator.generate.support.getUnsupportedExtensionEntities
 import com.kylemayes.generator.registry.Handle
 import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.support.toSnakeCase
 
 /** Generates Rust structs for Vulkan handles. */
-fun Registry.generateHandles() =
-    """
+fun Registry.generateHandles(): String {
+    val supported = handles.values
+        .filter { !getUnsupportedExtensionEntities().contains(it.name) }
+        .sortedBy { it.name }
+    return """
 use std::fmt;
 use std::hash::Hash;
 
@@ -37,9 +41,10 @@ pub trait Handle: Copy + Clone + fmt::Debug + PartialEq + Eq + Hash + Default + 
     fn is_null(self) -> bool;
 }
 
-${handles.values.sortedBy { it.name }.joinToString("\n") { generateHandle(it) }}
-${generateAliases(handles.keys)}
+${supported.joinToString("\n") { generateHandle(it) }}
+${generateAliases(supported.map { it.name }.toSet())}
     """
+}
 
 /** Generates a Rust struct for a Vulkan handle. */
 private fun Registry.generateHandle(handle: Handle): String {

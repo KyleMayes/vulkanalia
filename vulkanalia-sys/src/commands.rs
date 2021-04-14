@@ -22,15 +22,6 @@ use crate::*;
 pub type PFN_vkAcquireFullScreenExclusiveModeEXT =
     unsafe extern "system" fn(_device: Device, _swapchain: SwapchainKHR) -> Result;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireImageANDROID.html>
-pub type PFN_vkAcquireImageANDROID = unsafe extern "system" fn(
-    _device: Device,
-    _image: Image,
-    _native_fence_fd: c_int,
-    _semaphore: Semaphore,
-    _fence: Fence,
-) -> Result;
-
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireNextImage2KHR.html>
 pub type PFN_vkAcquireNextImage2KHR = unsafe extern "system" fn(
     _device: Device,
@@ -2876,24 +2867,6 @@ pub type PFN_vkGetSwapchainCounterEXT = unsafe extern "system" fn(
     _counter_value: *mut u64,
 ) -> Result;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainGrallocUsage2ANDROID.html>
-pub type PFN_vkGetSwapchainGrallocUsage2ANDROID = unsafe extern "system" fn(
-    _device: Device,
-    _format: Format,
-    _image_usage: ImageUsageFlags,
-    _swapchain_image_usage: SwapchainImageUsageFlagsANDROID,
-    _gralloc_consumer_usage: *mut u64,
-    _gralloc_producer_usage: *mut u64,
-) -> Result;
-
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainGrallocUsageANDROID.html>
-pub type PFN_vkGetSwapchainGrallocUsageANDROID = unsafe extern "system" fn(
-    _device: Device,
-    _format: Format,
-    _image_usage: ImageUsageFlags,
-    _gralloc_usage: *mut c_int,
-) -> Result;
-
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainImagesKHR.html>
 pub type PFN_vkGetSwapchainImagesKHR = unsafe extern "system" fn(
     _device: Device,
@@ -3017,15 +2990,6 @@ pub type PFN_vkQueuePresentKHR =
 pub type PFN_vkQueueSetPerformanceConfigurationINTEL = unsafe extern "system" fn(
     _queue: Queue,
     _configuration: PerformanceConfigurationINTEL,
-) -> Result;
-
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSignalReleaseImageANDROID.html>
-pub type PFN_vkQueueSignalReleaseImageANDROID = unsafe extern "system" fn(
-    _queue: Queue,
-    _wait_semaphore_count: u32,
-    _wait_semaphores: *const Semaphore,
-    _image: Image,
-    _native_fence_fd: *mut c_int,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkQueueSubmit.html>

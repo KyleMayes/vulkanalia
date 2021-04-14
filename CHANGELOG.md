@@ -1,3 +1,8 @@
+## [0.8.0] - UNRELEASED
+
+### Removed
+- Removed bindings for unsupported extensions
+
 ## [0.7.0] - 2021-04-08
 
 ### Bindings Updates

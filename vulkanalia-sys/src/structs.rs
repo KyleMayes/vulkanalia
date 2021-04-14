@@ -6009,42 +6009,6 @@ impl Default for MutableDescriptorTypeListVALVE {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkNativeBufferANDROID.html>
-#[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct NativeBufferANDROID {
-    pub s_type: StructureType,
-    pub next: *const c_void,
-    pub handle: *const c_void,
-    pub stride: c_int,
-    pub format: c_int,
-    pub usage: c_int,
-    pub usage2: NativeBufferUsage2ANDROID,
-}
-
-impl Default for NativeBufferANDROID {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            s_type: StructureType::NATIVE_BUFFER_ANDROID,
-            next: ptr::null(),
-            handle: ptr::null(),
-            stride: c_int::default(),
-            format: c_int::default(),
-            usage: c_int::default(),
-            usage2: NativeBufferUsage2ANDROID::default(),
-        }
-    }
-}
-
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkNativeBufferUsage2ANDROID.html>
-#[repr(C)]
-#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
-pub struct NativeBufferUsage2ANDROID {
-    pub consumer: u64,
-    pub producer: u64,
-}
-
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkOffset2D.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -8456,26 +8420,6 @@ impl Default for PhysicalDevicePortabilitySubsetPropertiesKHR {
             s_type: StructureType::PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR,
             next: ptr::null_mut(),
             min_vertex_input_binding_stride_alignment: u32::default(),
-        }
-    }
-}
-
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevicePresentationPropertiesANDROID.html>
-#[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDevicePresentationPropertiesANDROID {
-    pub s_type: StructureType,
-    pub next: *const c_void,
-    pub shared_image: Bool32,
-}
-
-impl Default for PhysicalDevicePresentationPropertiesANDROID {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            s_type: StructureType::PHYSICAL_DEVICE_PRESENTATION_PROPERTIES_ANDROID,
-            next: ptr::null(),
-            shared_image: Bool32::default(),
         }
     }
 }
@@ -13247,26 +13191,6 @@ impl Default for SwapchainDisplayNativeHdrCreateInfoAMD {
             s_type: StructureType::SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD,
             next: ptr::null(),
             local_dimming_enable: Bool32::default(),
-        }
-    }
-}
-
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSwapchainImageCreateInfoANDROID.html>
-#[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct SwapchainImageCreateInfoANDROID {
-    pub s_type: StructureType,
-    pub next: *const c_void,
-    pub usage: SwapchainImageUsageFlagsANDROID,
-}
-
-impl Default for SwapchainImageCreateInfoANDROID {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            s_type: StructureType::SWAPCHAIN_IMAGE_CREATE_INFO_ANDROID,
-            next: ptr::null(),
-            usage: SwapchainImageUsageFlagsANDROID::default(),
         }
     }
 }

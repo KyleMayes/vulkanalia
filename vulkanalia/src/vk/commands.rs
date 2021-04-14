@@ -221,10 +221,6 @@ pub struct DeviceCommands {
     pub get_validation_cache_data_ext: PFN_vkGetValidationCacheDataEXT,
     pub merge_validation_caches_ext: PFN_vkMergeValidationCachesEXT,
     pub get_descriptor_set_layout_support: PFN_vkGetDescriptorSetLayoutSupport,
-    pub get_swapchain_gralloc_usage_android: PFN_vkGetSwapchainGrallocUsageANDROID,
-    pub get_swapchain_gralloc_usage2_android: PFN_vkGetSwapchainGrallocUsage2ANDROID,
-    pub acquire_image_android: PFN_vkAcquireImageANDROID,
-    pub queue_signal_release_image_android: PFN_vkQueueSignalReleaseImageANDROID,
     pub get_shader_info_amd: PFN_vkGetShaderInfoAMD,
     pub set_local_dimming_amd: PFN_vkSetLocalDimmingAMD,
     pub get_physical_device_calibrateable_time_domains_ext:
@@ -3482,74 +3478,6 @@ impl DeviceCommands {
                         _support: *mut DescriptorSetLayoutSupport,
                     ) {
                         panic!("could not load vkGetDescriptorSetLayoutSupport")
-                    }
-                    fallback
-                }
-            },
-            get_swapchain_gralloc_usage_android: {
-                let value = loader(b"vkGetSwapchainGrallocUsageANDROID\0".as_ptr().cast());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _device: Device,
-                        _format: Format,
-                        _image_usage: ImageUsageFlags,
-                        _gralloc_usage: *mut c_int,
-                    ) -> Result {
-                        panic!("could not load vkGetSwapchainGrallocUsageANDROID")
-                    }
-                    fallback
-                }
-            },
-            get_swapchain_gralloc_usage2_android: {
-                let value = loader(b"vkGetSwapchainGrallocUsage2ANDROID\0".as_ptr().cast());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _device: Device,
-                        _format: Format,
-                        _image_usage: ImageUsageFlags,
-                        _swapchain_image_usage: SwapchainImageUsageFlagsANDROID,
-                        _gralloc_consumer_usage: *mut u64,
-                        _gralloc_producer_usage: *mut u64,
-                    ) -> Result {
-                        panic!("could not load vkGetSwapchainGrallocUsage2ANDROID")
-                    }
-                    fallback
-                }
-            },
-            acquire_image_android: {
-                let value = loader(b"vkAcquireImageANDROID\0".as_ptr().cast());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _device: Device,
-                        _image: Image,
-                        _native_fence_fd: c_int,
-                        _semaphore: Semaphore,
-                        _fence: Fence,
-                    ) -> Result {
-                        panic!("could not load vkAcquireImageANDROID")
-                    }
-                    fallback
-                }
-            },
-            queue_signal_release_image_android: {
-                let value = loader(b"vkQueueSignalReleaseImageANDROID\0".as_ptr().cast());
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _queue: Queue,
-                        _wait_semaphore_count: u32,
-                        _wait_semaphores: *const Semaphore,
-                        _image: Image,
-                        _native_fence_fd: *mut c_int,
-                    ) -> Result {
-                        panic!("could not load vkQueueSignalReleaseImageANDROID")
                     }
                     fallback
                 }

@@ -24,7 +24,6 @@ bitflags! {
     #[derive(Default)]
     pub struct AccelerationStructureCreateFlagsKHR: Flags {
         const DEVICE_ADDRESS_CAPTURE_REPLAY = 1;
-        const RESERVED_BIT_2_NV = 1 << 2;
     }
 }
 
@@ -65,10 +64,6 @@ bitflags! {
         const ACCESS_2_SHADER_SAMPLED_READ = 1 << 32;
         const ACCESS_2_SHADER_STORAGE_READ = 1 << 33;
         const ACCESS_2_SHADER_STORAGE_WRITE = 1 << 34;
-        const ACCESS_2_RESERVED_READ_35 = 1 << 35;
-        const ACCESS_2_RESERVED_WRITE_36 = 1 << 36;
-        const ACCESS_2_RESERVED_READ_37 = 1 << 37;
-        const ACCESS_2_RESERVED_WRITE_38 = 1 << 38;
     }
 }
 
@@ -163,7 +158,6 @@ bitflags! {
         const SPARSE_ALIASED = 1 << 2;
         const PROTECTED = 1 << 3;
         const DEVICE_ADDRESS_CAPTURE_REPLAY = 1 << 4;
-        const RESERVED_5_NV = 1 << 5;
     }
 }
 
@@ -185,12 +179,7 @@ bitflags! {
         const SHADER_BINDING_TABLE_KHR = 1 << 10;
         const TRANSFORM_FEEDBACK_BUFFER_EXT = 1 << 11;
         const TRANSFORM_FEEDBACK_COUNTER_BUFFER_EXT = 1 << 12;
-        const RESERVED_13_KHR = 1 << 13;
-        const RESERVED_14_KHR = 1 << 14;
-        const RESERVED_15_KHR = 1 << 15;
-        const RESERVED_16_KHR = 1 << 16;
         const SHADER_DEVICE_ADDRESS = 1 << 17;
-        const RESERVED_18_QCOM = 1 << 18;
         const ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_KHR = 1 << 19;
         const ACCELERATION_STRUCTURE_STORAGE_KHR = 1 << 20;
     }
@@ -218,7 +207,6 @@ bitflags! {
         const PREFER_FAST_TRACE = 1 << 2;
         const PREFER_FAST_BUILD = 1 << 3;
         const LOW_MEMORY = 1 << 4;
-        const RESERVED_BIT_5_NV = 1 << 5;
     }
 }
 
@@ -399,7 +387,6 @@ bitflags! {
         const UPDATE_UNUSED_WHILE_PENDING = 1 << 1;
         const PARTIALLY_BOUND = 1 << 2;
         const VARIABLE_DESCRIPTOR_COUNT = 1 << 3;
-        const RESERVED_4_QCOM = 1 << 4;
     }
 }
 
@@ -581,8 +568,6 @@ bitflags! {
         const OPAQUE_WIN32 = 1 << 1;
         const OPAQUE_WIN32_KMT = 1 << 2;
         const SYNC_FD = 1 << 3;
-        const RESERVED_4_NV = 1 << 4;
-        const RESERVED_5_NV = 1 << 5;
     }
 }
 
@@ -660,8 +645,6 @@ bitflags! {
         const OPAQUE_WIN32_KMT = 1 << 2;
         const D3D12_FENCE = 1 << 3;
         const SYNC_FD = 1 << 4;
-        const RESERVED_5_NV = 1 << 5;
-        const RESERVED_6_NV = 1 << 6;
         const ZIRCON_EVENT_FUCHSIA = 1 << 7;
     }
 }
@@ -714,10 +697,6 @@ bitflags! {
         const DISJOINT = 1 << 22;
         const COSITED_CHROMA_SAMPLES = 1 << 23;
         const FRAGMENT_DENSITY_MAP_EXT = 1 << 24;
-        const RESERVED_25_KHR = 1 << 25;
-        const RESERVED_26_KHR = 1 << 26;
-        const RESERVED_27_KHR = 1 << 27;
-        const RESERVED_28_KHR = 1 << 28;
         const ACCELERATION_STRUCTURE_VERTEX_BUFFER_KHR = 1 << 29;
         const FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 30;
     }
@@ -817,7 +796,6 @@ bitflags! {
         const SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_EXT = 1 << 12;
         const CORNER_SAMPLED_NV = 1 << 13;
         const SUBSAMPLED_EXT = 1 << 14;
-        const RESERVED_15_NV = 1 << 15;
     }
 }
 
@@ -848,14 +826,6 @@ bitflags! {
         const INPUT_ATTACHMENT = 1 << 7;
         const SHADING_RATE_IMAGE_NV = 1 << 8;
         const FRAGMENT_DENSITY_MAP_EXT = 1 << 9;
-        const RESERVED_10_KHR = 1 << 10;
-        const RESERVED_11_KHR = 1 << 11;
-        const RESERVED_12_KHR = 1 << 12;
-        const RESERVED_13_KHR = 1 << 13;
-        const RESERVED_14_KHR = 1 << 14;
-        const RESERVED_15_KHR = 1 << 15;
-        const RESERVED_16_QCOM = 1 << 16;
-        const RESERVED_17_QCOM = 1 << 17;
     }
 }
 
@@ -931,7 +901,6 @@ bitflags! {
     pub struct MemoryHeapFlags: Flags {
         const DEVICE_LOCAL = 1;
         const MULTI_INSTANCE = 1 << 1;
-        const RESERVED_2_KHR = 1 << 2;
     }
 }
 
@@ -1003,8 +972,6 @@ bitflags! {
     #[derive(Default)]
     pub struct PipelineCacheCreateFlags: Flags {
         const EXTERNALLY_SYNCHRONIZED_EXT = 1;
-        const RESERVED_1_EXT = 1 << 1;
-        const RESERVED_2_EXT = 1 << 2;
     }
 }
 
@@ -1092,7 +1059,6 @@ bitflags! {
         const RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_KHR = 1 << 17;
         const INDIRECT_BINDABLE_NV = 1 << 18;
         const RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_KHR = 1 << 19;
-        const RESERVED_BIT_20_NV = 1 << 20;
     }
 }
 
@@ -1234,8 +1200,6 @@ bitflags! {
     pub struct PipelineShaderStageCreateFlags: Flags {
         const ALLOW_VARYING_SUBGROUP_SIZE_EXT = 1;
         const REQUIRE_FULL_SUBGROUPS_EXT = 1 << 1;
-        const RESERVED_2_NV = 1 << 2;
-        const RESERVED_3_KHR = 1 << 3;
     }
 }
 
@@ -1271,8 +1235,6 @@ bitflags! {
         const PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_EXT = 1 << 23;
         const PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_EXT = 1 << 24;
         const PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD = 1 << 25;
-        const PIPELINE_STAGE_2_RESERVED_26 = 1 << 26;
-        const PIPELINE_STAGE_2_RESERVED_27 = 1 << 27;
         const PIPELINE_STAGE_2_COPY = 1 << 32;
         const PIPELINE_STAGE_2_RESOLVE = 1 << 33;
         const PIPELINE_STAGE_2_BLIT = 1 << 34;
@@ -1451,8 +1413,6 @@ bitflags! {
         const TRANSFER = 1 << 2;
         const SPARSE_BINDING = 1 << 3;
         const PROTECTED = 1 << 4;
-        const RESERVED_5_KHR = 1 << 5;
-        const RESERVED_6_KHR = 1 << 6;
     }
 }
 
@@ -1461,7 +1421,6 @@ bitflags! {
     #[repr(transparent)]
     #[derive(Default)]
     pub struct RenderPassCreateFlags: Flags {
-        const RESERVED_0_KHR = 1;
         const TRANSFORM_QCOM = 1 << 1;
     }
 }
@@ -1563,7 +1522,10 @@ bitflags! {
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ShaderModuleCreateFlags: Flags {
-        const RESERVED_0_NV = 1;
+        /// Workaround for `bitflags!` not supporting empty bitflags.
+        ///
+        /// <https://github.com/bitflags/bitflags/issues/179>
+        const EMPTY = 0;
     }
 }
 
@@ -1706,15 +1668,6 @@ bitflags! {
         const SPLIT_INSTANCE_BIND_REGIONS = 1;
         const PROTECTED = 1 << 1;
         const MUTABLE_FORMAT = 1 << 2;
-    }
-}
-
-bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSwapchainImageUsageFlagsANDROID.html>
-    #[repr(transparent)]
-    #[derive(Default)]
-    pub struct SwapchainImageUsageFlagsANDROID: Flags {
-        const SHARED = 1;
     }
 }
 
