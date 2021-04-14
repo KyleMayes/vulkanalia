@@ -41,6 +41,7 @@ fun Registry.generateCommandStructs(): String {
         .joinToString("") {
             val supported = it.value
                 .filter { c -> !getUnsupportedExtensionEntities().contains(c.name) }
+                .sortedBy { c -> c.name }
             generateCommandStruct(it.key, supported)
         }
     return """
