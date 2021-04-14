@@ -4,7 +4,7 @@ package com.kylemayes.generator.generate.file
 
 import com.kylemayes.generator.generate.support.generateCommandWrapper
 import com.kylemayes.generator.generate.support.generateManualUrl
-import com.kylemayes.generator.generate.support.getExtensionGroups
+import com.kylemayes.generator.generate.support.getSupportedExtensionGroups
 import com.kylemayes.generator.registry.Extension
 import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.intern
@@ -65,7 +65,10 @@ pub struct Extension {
     pub promoted_to: Option<&'static str>,
 }
 
-${getExtensionGroups().values.flatten().sortedBy { it.name }.joinToString("") { generateExtension(it) }}
+${getSupportedExtensionGroups().values
+        .flatten()
+        .sortedBy { it.name }
+        .joinToString("") { generateExtension(it) }}
 
 /// Converts a byte string into a Vulkan extension name.
 #[inline]
@@ -153,8 +156,12 @@ impl ConvertCStr for ExtensionName {
     }
 }
 
-${getExtensionGroups().values.flatten().sortedBy { it.name }.joinToString("") { generateExtensionTrait(it) }}
+${getSupportedExtensionGroups().values
+        .flatten()
+        .sortedBy { it.name }
+        .joinToString("") { generateExtensionTrait(it) }}
     """
+
 /** Generates a Rust trait and implementation for a Vulkan extension. */
 private fun Registry.generateExtensionTrait(extension: Extension): String {
     val provisional = if (extension.provisional) { PROVISIONAL } else { "" }

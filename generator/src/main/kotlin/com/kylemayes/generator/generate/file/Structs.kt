@@ -5,6 +5,7 @@ package com.kylemayes.generator.generate.file
 import com.kylemayes.generator.generate.support.generateAliases
 import com.kylemayes.generator.generate.support.generateManualUrl
 import com.kylemayes.generator.generate.support.getStructDerives
+import com.kylemayes.generator.generate.support.getUnsupportedExtensionEntities
 import com.kylemayes.generator.registry.Member
 import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.Structure
@@ -12,17 +13,21 @@ import com.kylemayes.generator.registry.getIdentifier
 import com.kylemayes.generator.registry.isPlatformPointer
 
 /** Generates Rust structs for Vulkan structs. */
-fun Registry.generateStructs() =
-    """
+fun Registry.generateStructs(): String {
+    val supported = structs.values
+        .filter { !getUnsupportedExtensionEntities().contains(it.name) }
+        .sortedBy { it.name }
+    return """
 use std::fmt;
 use std::os::raw::{c_char, c_int, c_void};
 use std::ptr;
 
 use crate::*;
 
-${structs.values.sortedBy { it.name }.joinToString("\n") { generateStruct(it) }}
-${generateAliases(structs.keys)}
+${supported.joinToString("\n") { generateStruct(it) }}
+${generateAliases(supported.map { it.name }.toSet())}
     """
+}
 
 /** Generates a Rust struct for a Vulkan struct. */
 private fun Registry.generateStruct(struct: Structure): String {

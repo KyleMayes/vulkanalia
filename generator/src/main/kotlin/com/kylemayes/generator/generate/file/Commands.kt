@@ -5,6 +5,7 @@ package com.kylemayes.generator.generate.file
 import com.kylemayes.generator.generate.support.CommandType
 import com.kylemayes.generator.generate.support.generateManualUrl
 import com.kylemayes.generator.generate.support.getCommandType
+import com.kylemayes.generator.generate.support.getUnsupportedExtensionEntities
 import com.kylemayes.generator.registry.Command
 import com.kylemayes.generator.registry.Registry
 
@@ -15,7 +16,10 @@ use std::os::raw::{c_char, c_int, c_void};
 
 use crate::*;
 
-${commands.values.sortedBy { it.name }.joinToString("\n") { generateCommand(it) }}
+${commands.values
+        .filter { !getUnsupportedExtensionEntities().contains(it.name) }
+        .sortedBy { it.name }
+        .joinToString("\n") { generateCommand(it) }}
     """
 
 /** Generates a Rust type alias for a Vulkan command. */
@@ -34,7 +38,12 @@ fun Registry.generateCommandStructs(): String {
         .groupBy { getCommandType(it) }
         .entries
         .sortedBy { it.key.display }
-        .joinToString("") { generateCommandStruct(it.key, it.value) }
+        .joinToString("") {
+            val supported = it.value
+                .filter { c -> !getUnsupportedExtensionEntities().contains(c.name) }
+                .sortedBy { c -> c.name }
+            generateCommandStruct(it.key, supported)
+        }
     return """
 use std::mem;
 use std::os::raw::{c_char, c_int, c_void};

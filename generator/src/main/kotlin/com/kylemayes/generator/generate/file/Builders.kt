@@ -6,6 +6,7 @@ import com.kylemayes.generator.generate.support.generatePtr
 import com.kylemayes.generator.generate.support.generateRef
 import com.kylemayes.generator.generate.support.getStructExtensions
 import com.kylemayes.generator.generate.support.getStructLifetime
+import com.kylemayes.generator.generate.support.getUnsupportedExtensionEntities
 import com.kylemayes.generator.registry.Identifier
 import com.kylemayes.generator.registry.Member
 import com.kylemayes.generator.registry.PointerType
@@ -65,7 +66,10 @@ pub trait HasBuilder<'b> {
     }
 }
 
-${structs.values.sortedBy { it.name }.joinToString("") { generateBuilder(it) }}
+${structs.values
+        .filter { !getUnsupportedExtensionEntities().contains(it.name) }
+        .sortedBy { it.name }
+        .joinToString("") { generateBuilder(it) }}
     """
 
 /** Generates a Rust struct to build a Vulkan struct. */
@@ -135,7 +139,9 @@ unsafe impl$lifetime Cast for ${struct.name}Builder$lifetime {
 
 /** Generates a Rust trait and implementations for the Vulkan structs that can extend another Vulkan struct. */
 private fun Registry.generateExtends(struct: Structure): String {
-    val extends = getStructExtensions()[struct.name] ?: emptyList()
+    val extends = (getStructExtensions()[struct.name] ?: emptyList())
+        .filter { !getUnsupportedExtensionEntities().contains(it) }
+        .sorted()
     if (extends.isEmpty()) {
         return ""
     }
@@ -143,7 +149,7 @@ private fun Registry.generateExtends(struct: Structure): String {
     return """
 /// A Vulkan struct that can be used to extend a [${struct.name}](struct.${struct.name}.html).
 pub unsafe trait Extends${struct.name} { }
-${extends.sorted().joinToString("\n") { "unsafe impl Extends${struct.name} for $it { }" }}
+${extends.joinToString("\n") { "unsafe impl Extends${struct.name} for $it { }" }}
     """
 }
 

@@ -2,6 +2,7 @@
 
 package com.kylemayes.generator.registry
 
+import com.kylemayes.generator.support.isSupported
 import java.math.BigInteger
 
 /** Extends bitmasks and enums with bitflags and variants defined in versions and extensions. */
@@ -15,7 +16,7 @@ fun Registry.extendEntities() {
         }
     }
 
-    for (extension in extensions.values) {
+    for (extension in extensions.values.filter { isSupported(it) }) {
         for (ext in extension.require.values) {
             extendBitmask(ext, bitmasks, added)
             extendEnum(ext, enums, added, extension.number)
