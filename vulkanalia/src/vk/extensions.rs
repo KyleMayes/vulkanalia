@@ -574,6 +574,29 @@ pub trait ExtCalibratedTimestampsExtension: DeviceV1_0 {
 
 impl ExtCalibratedTimestampsExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_color_write_enable.html>
+pub trait ExtColorWriteEnableExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_COLOR_WRITE_ENABLE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetColorWriteEnableEXT.html>
+    #[inline]
+    unsafe fn cmd_set_color_write_enable_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        color_write_enables: &[Bool32],
+    ) {
+        let __result = (self.commands().cmd_set_color_write_enable_ext)(
+            command_buffer,
+            color_write_enables.len() as u32,
+            color_write_enables.as_ptr(),
+        );
+    }
+}
+
+impl ExtColorWriteEnableExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_conditional_rendering.html>
 pub trait ExtConditionalRenderingExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -2348,6 +2371,41 @@ pub trait ExtVertexAttributeDivisorExtension: DeviceV1_0 {
 }
 
 impl ExtVertexAttributeDivisorExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_vertex_input_dynamic_state.html>
+pub trait ExtVertexInputDynamicStateExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetVertexInputEXT.html>
+    #[inline]
+    unsafe fn cmd_set_vertex_input_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        vertex_binding_descriptions: &[impl Cast<Target = VertexInputBindingDescription2EXT>],
+        vertex_attribute_descriptions: &[impl Cast<Target = VertexInputAttributeDescription2EXT>],
+    ) {
+        let __result = (self.commands().cmd_set_vertex_input_ext)(
+            command_buffer,
+            vertex_binding_descriptions.len() as u32,
+            vertex_binding_descriptions.as_ptr().cast(),
+            vertex_attribute_descriptions.len() as u32,
+            vertex_attribute_descriptions.as_ptr().cast(),
+        );
+    }
+}
+
+impl ExtVertexInputDynamicStateExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_ycbcr_2plane_444_formats.html>
+pub trait ExtYcbcr2plane444FormatsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_YCBCR_2PLANE_444_FORMATS_EXTENSION;
+}
+
+impl ExtYcbcr2plane444FormatsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_ycbcr_image_arrays.html>
 pub trait ExtYcbcrImageArraysExtension: DeviceV1_0 {
@@ -7234,6 +7292,15 @@ pub trait NvGlslShaderExtension: DeviceV1_0 {
 
 #[allow(deprecated)]
 impl NvGlslShaderExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_inherited_viewport_scissor.html>
+pub trait NvInheritedViewportScissorExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION;
+}
+
+impl NvInheritedViewportScissorExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_mesh_shader.html>
 pub trait NvMeshShaderExtension: DeviceV1_0 {

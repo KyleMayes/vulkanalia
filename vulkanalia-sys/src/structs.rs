@@ -1527,6 +1527,30 @@ impl Default for CommandBufferInheritanceRenderPassTransformInfoQCOM {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferInheritanceViewportScissorInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CommandBufferInheritanceViewportScissorInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub viewport_scissor_2d: Bool32,
+    pub viewport_depth_count: u32,
+    pub viewport_depths: *const Viewport,
+}
+
+impl Default for CommandBufferInheritanceViewportScissorInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV,
+            next: ptr::null(),
+            viewport_scissor_2d: Bool32::default(),
+            viewport_depth_count: u32::default(),
+            viewport_depths: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferSubmitInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6473,6 +6497,26 @@ impl Default for PhysicalDeviceCoherentMemoryFeaturesAMD {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceColorWriteEnableFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceColorWriteEnableFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub color_write_enable: Bool32,
+}
+
+impl Default for PhysicalDeviceColorWriteEnableFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT,
+            next: ptr::null_mut(),
+            color_write_enable: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7766,6 +7810,26 @@ impl Default for PhysicalDeviceIndexTypeUint8FeaturesEXT {
             s_type: StructureType::PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT,
             next: ptr::null_mut(),
             index_type_uint8: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceInheritedViewportScissorFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceInheritedViewportScissorFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub inherited_viewport_scissor_2d: Bool32,
+}
+
+impl Default for PhysicalDeviceInheritedViewportScissorFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV,
+            next: ptr::null_mut(),
+            inherited_viewport_scissor_2d: Bool32::default(),
         }
     }
 }
@@ -9685,6 +9749,26 @@ impl Default for PhysicalDeviceVertexAttributeDivisorPropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceVertexInputDynamicStateFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub vertex_input_dynamic_state: Bool32,
+}
+
+impl Default for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT,
+            next: ptr::null_mut(),
+            vertex_input_dynamic_state: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceVulkan11Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10059,6 +10143,26 @@ impl Default for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub ycbcr2plane444_formats: Bool32,
+}
+
+impl Default for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT,
+            next: ptr::null_mut(),
+            ycbcr2plane444_formats: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10187,6 +10291,28 @@ impl Default for PipelineColorBlendStateCreateInfo {
             attachment_count: u32::default(),
             attachments: ptr::null(),
             blend_constants: [f32::default(); 4],
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineColorWriteCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineColorWriteCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub attachment_count: u32,
+    pub color_write_enables: *const Bool32,
+}
+
+impl Default for PipelineColorWriteCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_COLOR_WRITE_CREATE_INFO_EXT,
+            next: ptr::null(),
+            attachment_count: u32::default(),
+            color_write_enables: ptr::null(),
         }
     }
 }
@@ -13339,6 +13465,32 @@ pub struct VertexInputAttributeDescription {
     pub offset: u32,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVertexInputAttributeDescription2EXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VertexInputAttributeDescription2EXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub location: u32,
+    pub binding: u32,
+    pub format: Format,
+    pub offset: u32,
+}
+
+impl Default for VertexInputAttributeDescription2EXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT,
+            next: ptr::null_mut(),
+            location: u32::default(),
+            binding: u32::default(),
+            format: Format::default(),
+            offset: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVertexInputBindingDescription.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -13346,6 +13498,32 @@ pub struct VertexInputBindingDescription {
     pub binding: u32,
     pub stride: u32,
     pub input_rate: VertexInputRate,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVertexInputBindingDescription2EXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VertexInputBindingDescription2EXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub binding: u32,
+    pub stride: u32,
+    pub input_rate: VertexInputRate,
+    pub divisor: u32,
+}
+
+impl Default for VertexInputBindingDescription2EXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT,
+            next: ptr::null_mut(),
+            binding: u32::default(),
+            stride: u32::default(),
+            input_rate: VertexInputRate::default(),
+            divisor: u32::default(),
+        }
+    }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkVertexInputBindingDivisorDescriptionEXT.html>

@@ -5151,6 +5151,7 @@ unsafe impl ExtendsCommandBufferInheritanceInfo
     for CommandBufferInheritanceRenderPassTransformInfoQCOM
 {
 }
+unsafe impl ExtendsCommandBufferInheritanceInfo for CommandBufferInheritanceViewportScissorInfoNV {}
 
 unsafe impl Cast for CommandBufferInheritanceInfo {
     type Target = CommandBufferInheritanceInfo;
@@ -5309,6 +5310,77 @@ impl ops::DerefMut for CommandBufferInheritanceRenderPassTransformInfoQCOMBuilde
 
 unsafe impl Cast for CommandBufferInheritanceRenderPassTransformInfoQCOMBuilder {
     type Target = CommandBufferInheritanceRenderPassTransformInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CommandBufferInheritanceViewportScissorInfoNV {
+    type Target = CommandBufferInheritanceViewportScissorInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for CommandBufferInheritanceViewportScissorInfoNV {
+    type Builder = CommandBufferInheritanceViewportScissorInfoNVBuilder<'b>;
+}
+
+/// A builder for a [CommandBufferInheritanceViewportScissorInfoNV](struct.CommandBufferInheritanceViewportScissorInfoNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CommandBufferInheritanceViewportScissorInfoNVBuilder<'b> {
+    value: CommandBufferInheritanceViewportScissorInfoNV,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> CommandBufferInheritanceViewportScissorInfoNVBuilder<'b> {
+    #[inline]
+    pub fn viewport_scissor_2d(mut self, viewport_scissor_2d: bool) -> Self {
+        self.value.viewport_scissor_2d = viewport_scissor_2d as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn viewport_depth_count(mut self, viewport_depth_count: u32) -> Self {
+        self.value.viewport_depth_count = viewport_depth_count;
+        self
+    }
+
+    #[inline]
+    pub fn viewport_depths(mut self, viewport_depths: &'b impl Cast<Target = Viewport>) -> Self {
+        self.value.viewport_depths = viewport_depths.as_ref();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CommandBufferInheritanceViewportScissorInfoNV {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for CommandBufferInheritanceViewportScissorInfoNVBuilder<'b> {
+    type Target = CommandBufferInheritanceViewportScissorInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for CommandBufferInheritanceViewportScissorInfoNVBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for CommandBufferInheritanceViewportScissorInfoNVBuilder<'b> {
+    type Target = CommandBufferInheritanceViewportScissorInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -8637,6 +8709,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBlendOperationAdvancedFeat
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBufferDeviceAddressFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoherentMemoryFeaturesAMD {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceColorWriteEnableFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceComputeShaderDerivativesFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceConditionalRenderingFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixFeaturesNV {}
@@ -8662,6 +8735,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageRobustnessFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImagelessFramebufferFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceIndexTypeUint8FeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInlineUniformBlockFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLineRasterizationFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryPriorityFeaturesEXT {}
@@ -8703,10 +8777,12 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTransformFeedbackFeaturesE
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceUniformBufferStandardLayoutFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVariablePointersFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVertexAttributeDivisorFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkan11Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkan12Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkanMemoryModelFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR {}
 
@@ -21967,6 +22043,64 @@ unsafe impl Cast for PhysicalDeviceCoherentMemoryFeaturesAMDBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceColorWriteEnableFeaturesEXT {
+    type Target = PhysicalDeviceColorWriteEnableFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceColorWriteEnableFeaturesEXT {
+    type Builder = PhysicalDeviceColorWriteEnableFeaturesEXTBuilder;
+}
+
+/// A builder for a [PhysicalDeviceColorWriteEnableFeaturesEXT](struct.PhysicalDeviceColorWriteEnableFeaturesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceColorWriteEnableFeaturesEXTBuilder {
+    value: PhysicalDeviceColorWriteEnableFeaturesEXT,
+}
+
+impl PhysicalDeviceColorWriteEnableFeaturesEXTBuilder {
+    #[inline]
+    pub fn color_write_enable(mut self, color_write_enable: bool) -> Self {
+        self.value.color_write_enable = color_write_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceColorWriteEnableFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceColorWriteEnableFeaturesEXTBuilder {
+    type Target = PhysicalDeviceColorWriteEnableFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceColorWriteEnableFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceColorWriteEnableFeaturesEXTBuilder {
+    type Target = PhysicalDeviceColorWriteEnableFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceComputeShaderDerivativesFeaturesNV {
     type Target = PhysicalDeviceComputeShaderDerivativesFeaturesNV;
 
@@ -24671,6 +24805,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBlendOperationAdvan
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBufferDeviceAddressFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCoherentMemoryFeaturesAMD {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceColorWriteEnableFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceComputeShaderDerivativesFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceConditionalRenderingFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrixFeaturesNV {}
@@ -24698,6 +24833,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostQueryResetFeatu
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageRobustnessFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImagelessFramebufferFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceIndexTypeUint8FeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInlineUniformBlockFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLineRasterizationFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryPriorityFeaturesEXT {}
@@ -24748,6 +24884,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTransformFeedbackFe
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceUniformBufferStandardLayoutFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVariablePointersFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVertexAttributeDivisorFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkan11Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkan12Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkanMemoryModelFeatures {}
@@ -24755,6 +24892,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR
 {
 }
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR
@@ -26573,6 +26711,64 @@ impl ops::DerefMut for PhysicalDeviceIndexTypeUint8FeaturesEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceIndexTypeUint8FeaturesEXTBuilder {
     type Target = PhysicalDeviceIndexTypeUint8FeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceInheritedViewportScissorFeaturesNV {
+    type Target = PhysicalDeviceInheritedViewportScissorFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceInheritedViewportScissorFeaturesNV {
+    type Builder = PhysicalDeviceInheritedViewportScissorFeaturesNVBuilder;
+}
+
+/// A builder for a [PhysicalDeviceInheritedViewportScissorFeaturesNV](struct.PhysicalDeviceInheritedViewportScissorFeaturesNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceInheritedViewportScissorFeaturesNVBuilder {
+    value: PhysicalDeviceInheritedViewportScissorFeaturesNV,
+}
+
+impl PhysicalDeviceInheritedViewportScissorFeaturesNVBuilder {
+    #[inline]
+    pub fn inherited_viewport_scissor_2d(mut self, inherited_viewport_scissor_2d: bool) -> Self {
+        self.value.inherited_viewport_scissor_2d = inherited_viewport_scissor_2d as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceInheritedViewportScissorFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceInheritedViewportScissorFeaturesNVBuilder {
+    type Target = PhysicalDeviceInheritedViewportScissorFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceInheritedViewportScissorFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceInheritedViewportScissorFeaturesNVBuilder {
+    type Target = PhysicalDeviceInheritedViewportScissorFeaturesNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -33105,6 +33301,64 @@ unsafe impl Cast for PhysicalDeviceVertexAttributeDivisorPropertiesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {
+    type Target = PhysicalDeviceVertexInputDynamicStateFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {
+    type Builder = PhysicalDeviceVertexInputDynamicStateFeaturesEXTBuilder;
+}
+
+/// A builder for a [PhysicalDeviceVertexInputDynamicStateFeaturesEXT](struct.PhysicalDeviceVertexInputDynamicStateFeaturesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceVertexInputDynamicStateFeaturesEXTBuilder {
+    value: PhysicalDeviceVertexInputDynamicStateFeaturesEXT,
+}
+
+impl PhysicalDeviceVertexInputDynamicStateFeaturesEXTBuilder {
+    #[inline]
+    pub fn vertex_input_dynamic_state(mut self, vertex_input_dynamic_state: bool) -> Self {
+        self.value.vertex_input_dynamic_state = vertex_input_dynamic_state as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceVertexInputDynamicStateFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceVertexInputDynamicStateFeaturesEXTBuilder {
+    type Target = PhysicalDeviceVertexInputDynamicStateFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceVertexInputDynamicStateFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceVertexInputDynamicStateFeaturesEXTBuilder {
+    type Target = PhysicalDeviceVertexInputDynamicStateFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceVulkan11Features {
     type Target = PhysicalDeviceVulkan11Features;
 
@@ -34545,6 +34799,64 @@ unsafe impl Cast for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHRBuild
     }
 }
 
+unsafe impl Cast for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {
+    type Target = PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {
+    type Builder = PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXTBuilder;
+}
+
+/// A builder for a [PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT](struct.PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXTBuilder {
+    value: PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT,
+}
+
+impl PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXTBuilder {
+    #[inline]
+    pub fn ycbcr2plane444_formats(mut self, ycbcr2plane444_formats: bool) -> Self {
+        self.value.ycbcr2plane444_formats = ycbcr2plane444_formats as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXTBuilder {
+    type Target = PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXTBuilder {
+    type Target = PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceYcbcrImageArraysFeaturesEXT {
     type Target = PhysicalDeviceYcbcrImageArraysFeaturesEXT;
 
@@ -34907,6 +35219,7 @@ unsafe impl ExtendsPipelineColorBlendStateCreateInfo
     for PipelineColorBlendAdvancedStateCreateInfoEXT
 {
 }
+unsafe impl ExtendsPipelineColorBlendStateCreateInfo for PipelineColorWriteCreateInfoEXT {}
 
 unsafe impl Cast for PipelineColorBlendStateCreateInfo {
     type Target = PipelineColorBlendStateCreateInfo;
@@ -34999,6 +35312,66 @@ impl<'b> ops::DerefMut for PipelineColorBlendStateCreateInfoBuilder<'b> {
 
 unsafe impl<'b> Cast for PipelineColorBlendStateCreateInfoBuilder<'b> {
     type Target = PipelineColorBlendStateCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineColorWriteCreateInfoEXT {
+    type Target = PipelineColorWriteCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PipelineColorWriteCreateInfoEXT {
+    type Builder = PipelineColorWriteCreateInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [PipelineColorWriteCreateInfoEXT](struct.PipelineColorWriteCreateInfoEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineColorWriteCreateInfoEXTBuilder<'b> {
+    value: PipelineColorWriteCreateInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PipelineColorWriteCreateInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn color_write_enables(mut self, color_write_enables: &'b [Bool32]) -> Self {
+        self.value.attachment_count = color_write_enables.len() as u32;
+        self.value.color_write_enables = color_write_enables.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineColorWriteCreateInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PipelineColorWriteCreateInfoEXTBuilder<'b> {
+    type Target = PipelineColorWriteCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PipelineColorWriteCreateInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PipelineColorWriteCreateInfoEXTBuilder<'b> {
+    type Target = PipelineColorWriteCreateInfoEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -45960,6 +46333,82 @@ unsafe impl Cast for VertexInputAttributeDescriptionBuilder {
     }
 }
 
+unsafe impl Cast for VertexInputAttributeDescription2EXT {
+    type Target = VertexInputAttributeDescription2EXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for VertexInputAttributeDescription2EXT {
+    type Builder = VertexInputAttributeDescription2EXTBuilder;
+}
+
+/// A builder for a [VertexInputAttributeDescription2EXT](struct.VertexInputAttributeDescription2EXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct VertexInputAttributeDescription2EXTBuilder {
+    value: VertexInputAttributeDescription2EXT,
+}
+
+impl VertexInputAttributeDescription2EXTBuilder {
+    #[inline]
+    pub fn location(mut self, location: u32) -> Self {
+        self.value.location = location;
+        self
+    }
+
+    #[inline]
+    pub fn binding(mut self, binding: u32) -> Self {
+        self.value.binding = binding;
+        self
+    }
+
+    #[inline]
+    pub fn format(mut self, format: Format) -> Self {
+        self.value.format = format;
+        self
+    }
+
+    #[inline]
+    pub fn offset(mut self, offset: u32) -> Self {
+        self.value.offset = offset;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> VertexInputAttributeDescription2EXT {
+        self.value
+    }
+}
+
+impl ops::Deref for VertexInputAttributeDescription2EXTBuilder {
+    type Target = VertexInputAttributeDescription2EXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for VertexInputAttributeDescription2EXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for VertexInputAttributeDescription2EXTBuilder {
+    type Target = VertexInputAttributeDescription2EXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for VertexInputBindingDescription {
     type Target = VertexInputBindingDescription;
 
@@ -46023,6 +46472,82 @@ impl ops::DerefMut for VertexInputBindingDescriptionBuilder {
 
 unsafe impl Cast for VertexInputBindingDescriptionBuilder {
     type Target = VertexInputBindingDescription;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for VertexInputBindingDescription2EXT {
+    type Target = VertexInputBindingDescription2EXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for VertexInputBindingDescription2EXT {
+    type Builder = VertexInputBindingDescription2EXTBuilder;
+}
+
+/// A builder for a [VertexInputBindingDescription2EXT](struct.VertexInputBindingDescription2EXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct VertexInputBindingDescription2EXTBuilder {
+    value: VertexInputBindingDescription2EXT,
+}
+
+impl VertexInputBindingDescription2EXTBuilder {
+    #[inline]
+    pub fn binding(mut self, binding: u32) -> Self {
+        self.value.binding = binding;
+        self
+    }
+
+    #[inline]
+    pub fn stride(mut self, stride: u32) -> Self {
+        self.value.stride = stride;
+        self
+    }
+
+    #[inline]
+    pub fn input_rate(mut self, input_rate: VertexInputRate) -> Self {
+        self.value.input_rate = input_rate;
+        self
+    }
+
+    #[inline]
+    pub fn divisor(mut self, divisor: u32) -> Self {
+        self.value.divisor = divisor;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> VertexInputBindingDescription2EXT {
+        self.value
+    }
+}
+
+impl ops::Deref for VertexInputBindingDescription2EXTBuilder {
+    type Target = VertexInputBindingDescription2EXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for VertexInputBindingDescription2EXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for VertexInputBindingDescription2EXTBuilder {
+    type Target = VertexInputBindingDescription2EXT;
 
     #[inline]
     fn into(self) -> Self::Target {
