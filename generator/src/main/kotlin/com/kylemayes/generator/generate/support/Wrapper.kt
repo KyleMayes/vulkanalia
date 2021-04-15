@@ -152,8 +152,9 @@ fun Registry.generateCommandWrapper(command: Command): String {
         } else if (current.type is PointerType) {
             // Pointer parameter.
             val pointee = current.type.pointee
-            if (!current.type.const) {
-                // Output pointer parameter.
+            val extendable = getStructExtensions().containsKey(pointee.getIdentifier())
+            if (!current.type.const && !extendable) {
+                // Output pointer parameter (uninit-provided).
 
                 val (pointeeType, argCast) = if (current.type.isOpaquePointer()) {
                     val typeParam = "T_${pointee.generate()}"
@@ -173,6 +174,14 @@ fun Registry.generateCommandWrapper(command: Command): String {
                 resultTypes.add(resultType)
                 resultExprs.add("${current.name}.assume_init()$exprCast")
                 addArgument("${current.name}.as_mut_ptr()$argCast")
+            } else if (!current.type.const && extendable) {
+                // Output pointer parameter (user-provided).
+                //
+                // The user needs to be able to supply the output struct when it
+                // is extendable so that the user can add the extension structs
+                // for the information they want.
+                params.add("${current.name}: &mut ${pointee.generate()}")
+                addArgument(current.name.value)
             } else if (current.optional) {
                 // Input pointer parameter (optional).
                 params.add("${current.name}: Option<&${pointee.generate()}>")

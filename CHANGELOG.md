@@ -3,6 +3,9 @@
 ### Bindings Updates
 - [April 13, 2021 Vulkan 1.2.175 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/b82ae46bb82c7a522509fd7b8f3d92a311c1b5a5)
 
+### Changed
+- Changed wrapper methods that return extendable structs to take a mutable reference to the struct to allow the caller to extend the struct
+
 ### Removed
 - Removed bindings for unsupported extensions
 

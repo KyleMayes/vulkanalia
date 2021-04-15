@@ -2633,13 +2633,9 @@ pub trait InstanceV1_1: InstanceV1_0 {
     unsafe fn get_physical_device_features2(
         &self,
         physical_device: PhysicalDevice,
-    ) -> PhysicalDeviceFeatures2 {
-        let mut features = MaybeUninit::<PhysicalDeviceFeatures2>::uninit();
-
-        let __result =
-            (self.commands().get_physical_device_features2)(physical_device, features.as_mut_ptr());
-
-        features.assume_init()
+        features: &mut PhysicalDeviceFeatures2,
+    ) {
+        let __result = (self.commands().get_physical_device_features2)(physical_device, features);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceFormatProperties2.html>
@@ -2648,16 +2644,13 @@ pub trait InstanceV1_1: InstanceV1_0 {
         &self,
         physical_device: PhysicalDevice,
         format: Format,
-    ) -> FormatProperties2 {
-        let mut format_properties = MaybeUninit::<FormatProperties2>::uninit();
-
+        format_properties: &mut FormatProperties2,
+    ) {
         let __result = (self.commands().get_physical_device_format_properties2)(
             physical_device,
             format,
-            format_properties.as_mut_ptr(),
+            format_properties,
         );
-
-        format_properties.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceImageFormatProperties2.html>
@@ -2666,17 +2659,16 @@ pub trait InstanceV1_1: InstanceV1_0 {
         &self,
         physical_device: PhysicalDevice,
         image_format_info: &PhysicalDeviceImageFormatInfo2,
-    ) -> crate::VkResult<ImageFormatProperties2> {
-        let mut image_format_properties = MaybeUninit::<ImageFormatProperties2>::uninit();
-
+        image_format_properties: &mut ImageFormatProperties2,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_physical_device_image_format_properties2)(
             physical_device,
             image_format_info,
-            image_format_properties.as_mut_ptr(),
+            image_format_properties,
         );
 
         if __result == Result::SUCCESS {
-            Ok(image_format_properties.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -2687,15 +2679,12 @@ pub trait InstanceV1_1: InstanceV1_0 {
     unsafe fn get_physical_device_memory_properties2(
         &self,
         physical_device: PhysicalDevice,
-    ) -> PhysicalDeviceMemoryProperties2 {
-        let mut memory_properties = MaybeUninit::<PhysicalDeviceMemoryProperties2>::uninit();
-
+        memory_properties: &mut PhysicalDeviceMemoryProperties2,
+    ) {
         let __result = (self.commands().get_physical_device_memory_properties2)(
             physical_device,
-            memory_properties.as_mut_ptr(),
+            memory_properties,
         );
-
-        memory_properties.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceProperties2.html>
@@ -2703,15 +2692,10 @@ pub trait InstanceV1_1: InstanceV1_0 {
     unsafe fn get_physical_device_properties2(
         &self,
         physical_device: PhysicalDevice,
-    ) -> PhysicalDeviceProperties2 {
-        let mut properties = MaybeUninit::<PhysicalDeviceProperties2>::uninit();
-
-        let __result = (self.commands().get_physical_device_properties2)(
-            physical_device,
-            properties.as_mut_ptr(),
-        );
-
-        properties.assume_init()
+        properties: &mut PhysicalDeviceProperties2,
+    ) {
+        let __result =
+            (self.commands().get_physical_device_properties2)(physical_device, properties);
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceQueueFamilyProperties2.html>
@@ -2928,16 +2912,13 @@ pub trait DeviceV1_1: DeviceV1_0 {
     unsafe fn get_buffer_memory_requirements2(
         &self,
         info: &BufferMemoryRequirementsInfo2,
-    ) -> MemoryRequirements2 {
-        let mut memory_requirements = MaybeUninit::<MemoryRequirements2>::uninit();
-
+        memory_requirements: &mut MemoryRequirements2,
+    ) {
         let __result = (self.commands().get_buffer_memory_requirements2)(
             self.handle(),
             info,
-            memory_requirements.as_mut_ptr(),
+            memory_requirements,
         );
-
-        memory_requirements.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDescriptorSetLayoutSupport.html>
@@ -2945,16 +2926,13 @@ pub trait DeviceV1_1: DeviceV1_0 {
     unsafe fn get_descriptor_set_layout_support(
         &self,
         create_info: &DescriptorSetLayoutCreateInfo,
-    ) -> DescriptorSetLayoutSupport {
-        let mut support = MaybeUninit::<DescriptorSetLayoutSupport>::uninit();
-
+        support: &mut DescriptorSetLayoutSupport,
+    ) {
         let __result = (self.commands().get_descriptor_set_layout_support)(
             self.handle(),
             create_info,
-            support.as_mut_ptr(),
+            support,
         );
-
-        support.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupPeerMemoryFeatures.html>
@@ -2994,16 +2972,13 @@ pub trait DeviceV1_1: DeviceV1_0 {
     unsafe fn get_image_memory_requirements2(
         &self,
         info: &ImageMemoryRequirementsInfo2,
-    ) -> MemoryRequirements2 {
-        let mut memory_requirements = MaybeUninit::<MemoryRequirements2>::uninit();
-
+        memory_requirements: &mut MemoryRequirements2,
+    ) {
         let __result = (self.commands().get_image_memory_requirements2)(
             self.handle(),
             info,
-            memory_requirements.as_mut_ptr(),
+            memory_requirements,
         );
-
-        memory_requirements.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetImageSparseMemoryRequirements2.html>
