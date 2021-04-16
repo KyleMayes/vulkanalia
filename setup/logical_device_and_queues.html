@@ -177,7 +177,7 @@ unsafe fn create_logical_device(
 }
 </code></pre>
 <h2><a class="header" href="#specifying-the-queues-to-be-created" id="specifying-the-queues-to-be-created">Specifying the queues to be created</a></h2>
-<p>The creation of a logical device involves specifying a bunch of details in structs again, of which the first one will be <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.DeviceQueueCreateInfo.html"><code class="hljs">vk::DeviceQueueCreateInfo</code></a>. This structure describes the number of queues we want for a single queue family. Right now we're only interested in a queue with graphics capabilities.</p>
+<p>The creation of a logical device involves specifying a bunch of details in structs again, of which the first one will be <code>vk::DeviceQueueCreateInfo</code>. This structure describes the number of queues we want for a single queue family. Right now we're only interested in a queue with graphics capabilities.</p>
 <pre><code class="language-rust noplaypen">let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
 
 let queue_priorities = &amp;[1.0];
@@ -188,8 +188,8 @@ let queue_info = vk::DeviceQueueCreateInfo::builder()
 <p>The currently available drivers will only allow you to create a small number of queues for each queue family and you don't really need more than one. That's because you can create all of the command buffers on multiple threads and then submit them all at once on the main thread with a single low-overhead call.</p>
 <p>Vulkan lets you assign priorities to queues to influence the scheduling of command buffer execution using floating point numbers between <code>0.0</code> and <code>1.0</code>. This is required even when only creating a single queue.</p>
 <h2><a class="header" href="#specifying-the-layers-to-enable" id="specifying-the-layers-to-enable">Specifying the layers to enable</a></h2>
-<p>The next piece of information we need to provide bears a resemblance to the <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a> struct. Once again we need to specify any layers or extensions we want to enable, but this time any specified extensions are device specific rather than global.</p>
-<p>An example of a device specific extension is <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_swapchain.html"><code class="hljs">VK_KHR_swapchain</code></a>, which allows you to present rendered images from that device to windows. It is possible that there are Vulkan devices in the system that lack this ability, for example because they only support compute operations. We will come back to this extension in the swapchain chapter.</p>
+<p>The next piece of information we need to provide bears a resemblance to the <code>vk::InstanceCreateInfo</code> struct. Once again we need to specify any layers or extensions we want to enable, but this time any specified extensions are device specific rather than global.</p>
+<p>An example of a device specific extension is <code>VK_KHR_swapchain</code>, which allows you to present rendered images from that device to windows. It is possible that there are Vulkan devices in the system that lack this ability, for example because they only support compute operations. We will come back to this extension in the swapchain chapter.</p>
 <p>Previous implementations of Vulkan made a distinction between instance and device specific validation layers, but this is no longer the case. That means that the layer names we pass to <code>enabled_layer_names</code> later are ignored by up-to-date implementations. However, it is still a good idea to set them anyway to be compatible with older implementations.</p>
 <p>We wont be enabling any device extensions yet, so we will just construct a list of layer names containing the validation layer if validation is enabled.</p>
 <pre><code class="language-rust noplaypen">let layers = if VALIDATION_ENABLED {
@@ -199,18 +199,18 @@ let queue_info = vk::DeviceQueueCreateInfo::builder()
 };
 </code></pre>
 <h2><a class="header" href="#specifying-used-device-features" id="specifying-used-device-features">Specifying used device features</a></h2>
-<p>The next information to specify is the set of device features that we'll be using. These are the features that we queried support for with <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features"><code class="hljs">get_physical_device_features</code></a> in the previous chapter, like geometry shaders. Right now we don't need anything special, so we can simply define it and leave everything to the default values (<code>false</code>). We'll come back to this structure once we're about to start doing more interesting things with Vulkan.</p>
+<p>The next information to specify is the set of device features that we'll be using. These are the features that we queried support for with <code>get_physical_device_features</code> in the previous chapter, like geometry shaders. Right now we don't need anything special, so we can simply define it and leave everything to the default values (<code>false</code>). We'll come back to this structure once we're about to start doing more interesting things with Vulkan.</p>
 <pre><code class="language-rust noplaypen">let features = vk::PhysicalDeviceFeatures::builder();
 </code></pre>
 <h2><a class="header" href="#creating-the-logical-device" id="creating-the-logical-device">Creating the logical device</a></h2>
-<p>With the previous two structures and the validation layer (if enabled) in place, we can fill in the main <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.DeviceCreateInfo.html"><code class="hljs">vk::DeviceCreateInfo</code></a> structure.</p>
+<p>With the previous two structures and the validation layer (if enabled) in place, we can fill in the main <code>vk::DeviceCreateInfo</code> structure.</p>
 <pre><code class="language-rust noplaypen">let queue_infos = &amp;[queue_info];
 let info = vk::DeviceCreateInfo::builder()
     .queue_create_infos(queue_infos)
     .enabled_layer_names(&amp;layers)
     .enabled_features(&amp;features);
 </code></pre>
-<p>That's it, we're now ready to instantiate the logical device with a call to the appropriately named <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/trait.InstanceV1_0.html#method.create_device"><code class="hljs">create_device</code></a> method.</p>
+<p>That's it, we're now ready to instantiate the logical device with a call to the appropriately named <code>create_device</code> method.</p>
 <pre><code class="language-rust noplaypen">let device = instance.create_device(data.physical_device, &amp;info, None)?;
 </code></pre>
 <p>The parameters are the physical device to interface with, the queue and usage info we just specified, and the optional allocation callbacks. Similarly to the instance creation function, this call can return errors based on enabling non-existent extensions or specifying the desired usage of unsupported features.</p>
@@ -229,7 +229,7 @@ let info = vk::DeviceCreateInfo::builder()
 }
 </code></pre>
 <p>Device queues are implicitly cleaned up when the device is destroyed, so we don't need to do anything in <code>App::destroy</code>.</p>
-<p>We can use the <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/trait.DeviceV1_0.html#method.get_device_queue"><code class="hljs">get_device_queue</code></a> function to retrieve queue handles for each queue family. The parameters are the logical device, queue family, and queue index. Because we're only creating a single queue from this family, we'll simply use index 0.</p>
+<p>We can use the <code>get_device_queue</code> function to retrieve queue handles for each queue family. The parameters are the logical device, queue family, and queue index. Because we're only creating a single queue from this family, we'll simply use index 0.</p>
 <pre><code class="language-rust noplaypen">data.graphics_queue = device.get_device_queue(indices.graphics, 0);
 </code></pre>
 <p>Lastly, return the created logical device from <code>create_logical_device</code>:</p>

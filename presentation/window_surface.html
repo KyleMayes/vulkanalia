@@ -154,10 +154,10 @@
                     <main>
                         <h1><a class="header" href="#window-surface" id="window-surface">Window surface</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/05_window_surface.rs">main.rs</a></p>
-<p>Since Vulkan is a platform agnostic API, it can't interface directly with the window system on its own. To establish the connection between Vulkan and the window system to present results to the screen, we need to use the WSI (Window System Integration) extensions. In this chapter we'll discuss the first one, which is <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html"><code class="hljs">VK_KHR_surface</code></a>. It exposes a <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.SurfaceKHR.html"><code class="hljs">vk::SurfaceKHR</code></a> object that represents an abstract type of surface to present rendered images to. The surface in our program will be backed by the window that we've already opened with <code>winit</code>.</p>
-<p>The <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html"><code class="hljs">VK_KHR_surface</code></a> extension is an instance level extension and we've actually already enabled it, because it's included in the list returned by <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/window/fn.get_required_instance_extensions.html"><code class="hljs">vk_window::get_required_instance_extensions</code></a>. The list also includes some other WSI extensions that we'll use in the next couple of chapters.</p>
+<p>Since Vulkan is a platform agnostic API, it can't interface directly with the window system on its own. To establish the connection between Vulkan and the window system to present results to the screen, we need to use the WSI (Window System Integration) extensions. In this chapter we'll discuss the first one, which is <code>VK_KHR_surface</code>. It exposes a <code>vk::SurfaceKHR</code> object that represents an abstract type of surface to present rendered images to. The surface in our program will be backed by the window that we've already opened with <code>winit</code>.</p>
+<p>The <code>VK_KHR_surface</code> extension is an instance level extension and we've actually already enabled it, because it's included in the list returned by <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/window/fn.get_required_instance_extensions.html"><code class="hljs">vk_window::get_required_instance_extensions</code></a>. The list also includes some other WSI extensions that we'll use in the next couple of chapters.</p>
 <p>The window surface needs to be created right after the instance creation, because it can actually influence the physical device selection. The reason we postponed this is because window surfaces are part of the larger topic of render targets and presentation for which the explanation would have cluttered the basic setup. It should also be noted that window surfaces are an entirely optional component in Vulkan, if you just need off-screen rendering. Vulkan allows you to do that without hacks like creating an invisible window (necessary for OpenGL).</p>
-<p>While we can freely import types for extensions like the struct <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.SurfaceKHR.html"><code class="hljs">vk::SurfaceKHR</code></a>, we need to import the <code>vulkanalia</code> extension trait for <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_surface.html"><code class="hljs">VK_KHR_surface</code></a> before we can call any of the Vulkan commands added by the extension. Add the following import for <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/trait.KhrSurfaceExtension.html"><code class="hljs">vk::KhrSurfaceExtension</code></a>:</p>
+<p>While we can freely import types for extensions like the struct <code>vk::SurfaceKHR</code>, we need to import the <code>vulkanalia</code> extension trait for <code>VK_KHR_surface</code> before we can call any of the Vulkan commands added by the extension. Add the following import for <code>vk::KhrSurfaceExtension</code>:</p>
 <pre><code class="language-rust noplaypen">use vulkanalia::vk::KhrSurfaceExtension;
 </code></pre>
 <h2><a class="header" href="#window-surface-creation" id="window-surface-creation">Window surface creation</a></h2>
@@ -167,9 +167,9 @@
     // ...
 }
 </code></pre>
-<p>Although the <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.SurfaceKHR.html"><code class="hljs">vk::SurfaceKHR</code></a> object and its usage is platform agnostic, its creation isn't because it depends on window system details. For example, it needs the <code>HWND</code> and <code>HMODULE</code> handles on Windows. Therefore there is a platform-specific addition to the extension, which on Windows is called <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_win32_surface.html"><code class="hljs">VK_KHR_win32_surface</code></a> and is also automatically included in the list from <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/window/fn.get_required_instance_extensions.html"><code class="hljs">vk_window::get_required_instance_extensions</code></a>.</p>
+<p>Although the <code>vk::SurfaceKHR</code> object and its usage is platform agnostic, its creation isn't because it depends on window system details. For example, it needs the <code>HWND</code> and <code>HMODULE</code> handles on Windows. Therefore there is a platform-specific addition to the extension, which on Windows is called <code>VK_KHR_win32_surface</code> and is also automatically included in the list from <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/window/fn.get_required_instance_extensions.html"><code class="hljs">vk_window::get_required_instance_extensions</code></a>.</p>
 <p>I will demonstrate how this platform specific extension can be used to create a surface on Windows, but we won't actually use it in this tutorial. <code>vulkanalia</code> has <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/window/fn.create_surface.html"><code class="hljs">vk_window::create_surface</code></a> that handles the platform differences for us. Still, it's good to see what it does behind the scenes before we start relying on it.</p>
-<p>Because a window surface is a Vulkan object, it comes with a <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.Win32SurfaceCreateInfoKHR.html"><code class="hljs">vk::Win32SurfaceCreateInfoKHR</code></a> struct that needs to be filled in. It has two important parameters: <code>hinstance</code> and <code>hwnd</code>. These are the handles to the process and the window.</p>
+<p>Because a window surface is a Vulkan object, it comes with a <code>vk::Win32SurfaceCreateInfoKHR</code> struct that needs to be filled in. It has two important parameters: <code>hinstance</code> and <code>hwnd</code>. These are the handles to the process and the window.</p>
 <pre><code class="language-rust noplaypen">use winit::platform::windows::WindowExtWindows;
 
 let info = vk::Win32SurfaceCreateInfoKHR::builder()
@@ -177,12 +177,12 @@ let info = vk::Win32SurfaceCreateInfoKHR::builder()
     .hwnd(window.hwnd());
 </code></pre>
 <p>The <code>WindowExtWindows</code> trait is imported from <code>winit</code> because it allows us to access platform-specific methods on the <code>winit</code> <code>Window</code> struct. In this case, it permits us to get the process and window handles for the window created by <code>winit</code>.</p>
-<p>After that the surface can be created with <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/trait.KhrWin32SurfaceExtension.html#method.create_win32_surface_khr"><code class="hljs">create_win32_surface_khr</code></a>, which includes parameters for the surface creation details and custom allocators. Technically this is a WSI extension function, but it is so commonly used that the standard Vulkan loader includes it, so unlike other extensions you don't need to explicitly load it. However, we do need to import the <code>vulkanalia</code> extension trait for <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_win32_surface.html"><code class="hljs">VK_KHR_win32_surface</code></a> (<a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/trait.KhrWin32SurfaceExtension.html"><code class="hljs">vk::KhrWin32SurfaceExtension</code></a>).</p>
+<p>After that the surface can be created with <code>create_win32_surface_khr</code>, which includes parameters for the surface creation details and custom allocators. Technically this is a WSI extension function, but it is so commonly used that the standard Vulkan loader includes it, so unlike other extensions you don't need to explicitly load it. However, we do need to import the <code>vulkanalia</code> extension trait for <code>VK_KHR_win32_surface</code> (<code>vk::KhrWin32SurfaceExtension</code>).</p>
 <pre><code class="language-rust noplaypen">use vk::KhrWin32SurfaceExtension;
 
 let surface = instance.create_win32_surface_khr(&amp;info, None).unwrap();
 </code></pre>
-<p>The process is similar for other platforms like Linux, where <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/trait.KhrXcbSurfaceExtension.html#method.create_xcb_surface_khr"><code class="hljs">create_xcb_surface_khr</code></a> takes an XCB connection and window as creation details with X11.</p>
+<p>The process is similar for other platforms like Linux, where <code>create_xcb_surface_khr</code> takes an XCB connection and window as creation details with X11.</p>
 <p>The <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/window/fn.create_surface.html"><code class="hljs">vk_window::create_surface</code></a> function performs exactly this operation with a different implementation for each platform. We'll now integrate it into our program. Add a call to the function in <code>App::create</code> right before we pick a physical device.</p>
 <pre><code class="language-rust noplaypen">unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
     // ...
@@ -208,7 +208,7 @@ let surface = instance.create_win32_surface_khr(&amp;info, None).unwrap();
     present: u32,
 }
 </code></pre>
-<p>Next, we'll modify the <code>QueueFamilyIndices::get</code> method to look for a queue family that has the capability of presenting to our window surface. The function to check for that is <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/trait.KhrSurfaceExtension.html#method.get_physical_device_surface_support_khr"><code class="hljs">get_physical_device_surface_support_khr</code></a>, which takes the physical device, queue family index. and surface as parameters and returns whether presentation is supported for that combination of physical device, queue family, and surface.</p>
+<p>Next, we'll modify the <code>QueueFamilyIndices::get</code> method to look for a queue family that has the capability of presenting to our window surface. The function to check for that is <code>get_physical_device_surface_support_khr</code>, which takes the physical device, queue family index. and surface as parameters and returns whether presentation is supported for that combination of physical device, queue family, and surface.</p>
 <p>Modify <code>QueueFamilyIndices::get</code> to find a presentation queue family index below where a graphics queue family index is found.</p>
 <pre><code class="language-rust noplaypen">let mut present = None;
 for (index, properties) in properties.iter().enumerate() {
@@ -230,13 +230,13 @@ for (index, properties) in properties.iter().enumerate() {
 </code></pre>
 <p>Note that it's very likely that these end up being the same queue family after all, but throughout the program we will treat them as if they were separate queues for a uniform approach. Nevertheless, you could add logic to explicitly prefer a physical device that supports drawing and presentation in the same queue for improved performance.</p>
 <h2><a class="header" href="#creating-the-presentation-queue" id="creating-the-presentation-queue">Creating the presentation queue</a></h2>
-<p>The one thing that remains is modifying the logical device creation procedure to create the presentation queue and retrieve the <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.Queue.html"><code class="hljs">vk::Queue</code></a> handle. Add a field to <code>AppData</code> for the handle:</p>
+<p>The one thing that remains is modifying the logical device creation procedure to create the presentation queue and retrieve the <code>vk::Queue</code> handle. Add a field to <code>AppData</code> for the handle:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
     present_queue: vk::Queue,
 }
 </code></pre>
-<p>Next, we need to have multiple <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.DeviceQueueCreateInfo.html"><code class="hljs">vk::DeviceQueueCreateInfo</code></a> structs to create a queue from both families. An easy way to do that is to create a set of all unique queue families that are necessary for the required queues. We'll do this in the <code>create_logical_device</code> function:</p>
+<p>Next, we need to have multiple <code>vk::DeviceQueueCreateInfo</code> structs to create a queue from both families. An easy way to do that is to create a set of all unique queue families that are necessary for the required queues. We'll do this in the <code>create_logical_device</code> function:</p>
 <pre><code class="language-rust noplaypen">let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
 
 let mut unique_indices = HashSet::new();
@@ -253,7 +253,7 @@ let queue_infos = unique_indices
     })
     .collect::&lt;Vec&lt;_&gt;&gt;();
 </code></pre>
-<p>And delete the previous <code>queue_infos</code> slice and take a reference to the <code>queue_infos</code> list for <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.DeviceCreateInfo.html"><code class="hljs">vk::DeviceCreateInfo</code></a>:</p>
+<p>And delete the previous <code>queue_infos</code> slice and take a reference to the <code>queue_infos</code> list for <code>vk::DeviceCreateInfo</code>:</p>
 <pre><code class="language-rust noplaypen">let info = vk::DeviceCreateInfo::builder()
     .queue_create_infos(&amp;queue_infos)
     .enabled_layer_names(&amp;layers)
