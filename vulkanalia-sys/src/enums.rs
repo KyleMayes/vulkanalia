@@ -1408,6 +1408,11 @@ impl DynamicState {
     pub const STENCIL_TEST_ENABLE_EXT: Self = Self(1000267010);
     pub const STENCIL_OP_EXT: Self = Self(1000267011);
     pub const VERTEX_INPUT_EXT: Self = Self(1000352000);
+    pub const PATCH_CONTROL_POINTS_EXT: Self = Self(1000377000);
+    pub const RASTERIZER_DISCARD_ENABLE_EXT: Self = Self(1000377001);
+    pub const DEPTH_BIAS_ENABLE_EXT: Self = Self(1000377002);
+    pub const LOGIC_OP_EXT: Self = Self(1000377003);
+    pub const PRIMITIVE_RESTART_ENABLE_EXT: Self = Self(1000377004);
     pub const COLOR_WRITE_ENABLE_EXT: Self = Self(1000381000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
@@ -1457,6 +1462,11 @@ impl fmt::Debug for DynamicState {
             1000267010 => write!(f, "STENCIL_TEST_ENABLE_EXT"),
             1000267011 => write!(f, "STENCIL_OP_EXT"),
             1000352000 => write!(f, "VERTEX_INPUT_EXT"),
+            1000377000 => write!(f, "PATCH_CONTROL_POINTS_EXT"),
+            1000377001 => write!(f, "RASTERIZER_DISCARD_ENABLE_EXT"),
+            1000377002 => write!(f, "DEPTH_BIAS_ENABLE_EXT"),
+            1000377003 => write!(f, "LOGIC_OP_EXT"),
+            1000377004 => write!(f, "PRIMITIVE_RESTART_ENABLE_EXT"),
             1000381000 => write!(f, "COLOR_WRITE_ENABLE_EXT"),
             _ => self.0.fmt(f),
         }
@@ -4669,6 +4679,7 @@ impl StructureType {
     pub const MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000364002);
     pub const IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000365000);
     pub const SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000365001);
+    pub const PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT: Self = Self(1000377000);
     pub const SCREEN_SURFACE_CREATE_INFO_QNX: Self = Self(1000378000);
     pub const PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT: Self = Self(1000381000);
     pub const PIPELINE_COLOR_WRITE_CREATE_INFO_EXT: Self = Self(1000381001);
@@ -5251,6 +5262,7 @@ impl fmt::Debug for StructureType {
             1000364002 => write!(f, "MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA"),
             1000365000 => write!(f, "IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA"),
             1000365001 => write!(f, "SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA"),
+            1000377000 => write!(f, "PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT"),
             1000378000 => write!(f, "SCREEN_SURFACE_CREATE_INFO_QNX"),
             1000381000 => write!(f, "PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT"),
             1000381001 => write!(f, "PIPELINE_COLOR_WRITE_CREATE_INFO_EXT"),

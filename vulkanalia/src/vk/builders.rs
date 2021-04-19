@@ -8723,6 +8723,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceGeneratedCommandsFea
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExclusiveScissorFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFeatures2 {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
@@ -23994,6 +23995,83 @@ unsafe impl Cast for PhysicalDeviceExclusiveScissorFeaturesNVBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceExtendedDynamicState2FeaturesEXT {
+    type Target = PhysicalDeviceExtendedDynamicState2FeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceExtendedDynamicState2FeaturesEXT {
+    type Builder = PhysicalDeviceExtendedDynamicState2FeaturesEXTBuilder;
+}
+
+/// A builder for a [PhysicalDeviceExtendedDynamicState2FeaturesEXT](struct.PhysicalDeviceExtendedDynamicState2FeaturesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceExtendedDynamicState2FeaturesEXTBuilder {
+    value: PhysicalDeviceExtendedDynamicState2FeaturesEXT,
+}
+
+impl PhysicalDeviceExtendedDynamicState2FeaturesEXTBuilder {
+    #[inline]
+    pub fn extended_dynamic_state2(mut self, extended_dynamic_state2: bool) -> Self {
+        self.value.extended_dynamic_state2 = extended_dynamic_state2 as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state2_logic_op(
+        mut self,
+        extended_dynamic_state2_logic_op: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state2_logic_op = extended_dynamic_state2_logic_op as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state2_patch_control_points(
+        mut self,
+        extended_dynamic_state2_patch_control_points: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state2_patch_control_points =
+            extended_dynamic_state2_patch_control_points as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceExtendedDynamicState2FeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceExtendedDynamicState2FeaturesEXTBuilder {
+    type Target = PhysicalDeviceExtendedDynamicState2FeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceExtendedDynamicState2FeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExtendedDynamicState2FeaturesEXTBuilder {
+    type Target = PhysicalDeviceExtendedDynamicState2FeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceExtendedDynamicStateFeaturesEXT {
     type Target = PhysicalDeviceExtendedDynamicStateFeaturesEXT;
 
@@ -24822,6 +24900,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceGeneratedComm
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExclusiveScissorFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapFeaturesEXT {}

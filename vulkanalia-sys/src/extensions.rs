@@ -792,6 +792,22 @@ pub const EXT_EXTENDED_DYNAMIC_STATE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_extended_dynamic_state2.html>
+#[allow(deprecated)]
+pub const EXT_EXTENDED_DYNAMIC_STATE2_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_extended_dynamic_state2"),
+    number: 378,
+    type_: "device",
+    author: "EXT",
+    contact: "Vikram Kushwaha @vkushwaha-nv",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_external_memory_dma_buf.html>
 #[allow(deprecated)]
 pub const EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION: Extension = Extension {

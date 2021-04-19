@@ -7071,6 +7071,30 @@ impl Default for PhysicalDeviceExclusiveScissorFeaturesNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceExtendedDynamicState2FeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub extended_dynamic_state2: Bool32,
+    pub extended_dynamic_state2_logic_op: Bool32,
+    pub extended_dynamic_state2_patch_control_points: Bool32,
+}
+
+impl Default for PhysicalDeviceExtendedDynamicState2FeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT,
+            next: ptr::null_mut(),
+            extended_dynamic_state2: Bool32::default(),
+            extended_dynamic_state2_logic_op: Bool32::default(),
+            extended_dynamic_state2_patch_control_points: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]

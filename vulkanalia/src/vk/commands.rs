@@ -130,6 +130,7 @@ pub struct DeviceCommands {
     pub cmd_set_color_write_enable_ext: PFN_vkCmdSetColorWriteEnableEXT,
     pub cmd_set_cull_mode_ext: PFN_vkCmdSetCullModeEXT,
     pub cmd_set_depth_bias: PFN_vkCmdSetDepthBias,
+    pub cmd_set_depth_bias_enable_ext: PFN_vkCmdSetDepthBiasEnableEXT,
     pub cmd_set_depth_bounds: PFN_vkCmdSetDepthBounds,
     pub cmd_set_depth_bounds_test_enable_ext: PFN_vkCmdSetDepthBoundsTestEnableEXT,
     pub cmd_set_depth_compare_op_ext: PFN_vkCmdSetDepthCompareOpEXT,
@@ -146,10 +147,14 @@ pub struct DeviceCommands {
     pub cmd_set_front_face_ext: PFN_vkCmdSetFrontFaceEXT,
     pub cmd_set_line_stipple_ext: PFN_vkCmdSetLineStippleEXT,
     pub cmd_set_line_width: PFN_vkCmdSetLineWidth,
+    pub cmd_set_logic_op_ext: PFN_vkCmdSetLogicOpEXT,
+    pub cmd_set_patch_control_points_ext: PFN_vkCmdSetPatchControlPointsEXT,
     pub cmd_set_performance_marker_intel: PFN_vkCmdSetPerformanceMarkerINTEL,
     pub cmd_set_performance_override_intel: PFN_vkCmdSetPerformanceOverrideINTEL,
     pub cmd_set_performance_stream_marker_intel: PFN_vkCmdSetPerformanceStreamMarkerINTEL,
+    pub cmd_set_primitive_restart_enable_ext: PFN_vkCmdSetPrimitiveRestartEnableEXT,
     pub cmd_set_primitive_topology_ext: PFN_vkCmdSetPrimitiveTopologyEXT,
+    pub cmd_set_rasterizer_discard_enable_ext: PFN_vkCmdSetRasterizerDiscardEnableEXT,
     pub cmd_set_ray_tracing_pipeline_stack_size_khr: PFN_vkCmdSetRayTracingPipelineStackSizeKHR,
     pub cmd_set_sample_locations_ext: PFN_vkCmdSetSampleLocationsEXT,
     pub cmd_set_scissor: PFN_vkCmdSetScissor,
@@ -2116,6 +2121,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_depth_bias_enable_ext: {
+                let value = loader(b"vkCmdSetDepthBiasEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _depth_bias_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetDepthBiasEnableEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_depth_bounds: {
                 let value = loader(b"vkCmdSetDepthBounds\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2350,6 +2369,34 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_logic_op_ext: {
+                let value = loader(b"vkCmdSetLogicOpEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _logic_op: LogicOp,
+                    ) {
+                        panic!("could not load vkCmdSetLogicOpEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_patch_control_points_ext: {
+                let value = loader(b"vkCmdSetPatchControlPointsEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _patch_control_points: u32,
+                    ) {
+                        panic!("could not load vkCmdSetPatchControlPointsEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_performance_marker_intel: {
                 let value = loader(b"vkCmdSetPerformanceMarkerINTEL\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2392,6 +2439,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_primitive_restart_enable_ext: {
+                let value = loader(b"vkCmdSetPrimitiveRestartEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _primitive_restart_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetPrimitiveRestartEnableEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_primitive_topology_ext: {
                 let value = loader(b"vkCmdSetPrimitiveTopologyEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2402,6 +2463,20 @@ impl DeviceCommands {
                         _primitive_topology: PrimitiveTopology,
                     ) {
                         panic!("could not load vkCmdSetPrimitiveTopologyEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_rasterizer_discard_enable_ext: {
+                let value = loader(b"vkCmdSetRasterizerDiscardEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _rasterizer_discard_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetRasterizerDiscardEnableEXT")
                     }
                     fallback
                 }
