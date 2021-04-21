@@ -1363,6 +1363,73 @@ pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
 
 impl ExtExtendedDynamicStateExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_extended_dynamic_state2.html>
+pub trait ExtExtendedDynamicState2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_EXTENDED_DYNAMIC_STATE2_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBiasEnableEXT.html>
+    #[inline]
+    unsafe fn cmd_set_depth_bias_enable_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        depth_bias_enable: bool,
+    ) {
+        let __result = (self.commands().cmd_set_depth_bias_enable_ext)(
+            command_buffer,
+            depth_bias_enable as Bool32,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetLogicOpEXT.html>
+    #[inline]
+    unsafe fn cmd_set_logic_op_ext(&self, command_buffer: CommandBuffer, logic_op: LogicOp) {
+        let __result = (self.commands().cmd_set_logic_op_ext)(command_buffer, logic_op);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPatchControlPointsEXT.html>
+    #[inline]
+    unsafe fn cmd_set_patch_control_points_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        patch_control_points: u32,
+    ) {
+        let __result = (self.commands().cmd_set_patch_control_points_ext)(
+            command_buffer,
+            patch_control_points,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPrimitiveRestartEnableEXT.html>
+    #[inline]
+    unsafe fn cmd_set_primitive_restart_enable_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        primitive_restart_enable: bool,
+    ) {
+        let __result = (self.commands().cmd_set_primitive_restart_enable_ext)(
+            command_buffer,
+            primitive_restart_enable as Bool32,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetRasterizerDiscardEnableEXT.html>
+    #[inline]
+    unsafe fn cmd_set_rasterizer_discard_enable_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        rasterizer_discard_enable: bool,
+    ) {
+        let __result = (self.commands().cmd_set_rasterizer_discard_enable_ext)(
+            command_buffer,
+            rasterizer_discard_enable as Bool32,
+        );
+    }
+}
+
+impl ExtExtendedDynamicState2Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_external_memory_dma_buf.html>
 pub trait ExtExternalMemoryDmaBufExtension: DeviceV1_0 {
     /// The metadata for this extension.

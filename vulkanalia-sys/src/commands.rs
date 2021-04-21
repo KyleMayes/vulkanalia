@@ -807,6 +807,10 @@ pub type PFN_vkCmdSetDepthBias = unsafe extern "system" fn(
     _depth_bias_slope_factor: f32,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBiasEnableEXT.html>
+pub type PFN_vkCmdSetDepthBiasEnableEXT =
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _depth_bias_enable: Bool32);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetDepthBounds.html>
 pub type PFN_vkCmdSetDepthBounds = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -896,6 +900,14 @@ pub type PFN_vkCmdSetLineStippleEXT = unsafe extern "system" fn(
 pub type PFN_vkCmdSetLineWidth =
     unsafe extern "system" fn(_command_buffer: CommandBuffer, _line_width: f32);
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetLogicOpEXT.html>
+pub type PFN_vkCmdSetLogicOpEXT =
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _logic_op: LogicOp);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPatchControlPointsEXT.html>
+pub type PFN_vkCmdSetPatchControlPointsEXT =
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _patch_control_points: u32);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPerformanceMarkerINTEL.html>
 pub type PFN_vkCmdSetPerformanceMarkerINTEL = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -914,11 +926,19 @@ pub type PFN_vkCmdSetPerformanceStreamMarkerINTEL = unsafe extern "system" fn(
     _marker_info: *const PerformanceStreamMarkerInfoINTEL,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPrimitiveRestartEnableEXT.html>
+pub type PFN_vkCmdSetPrimitiveRestartEnableEXT =
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _primitive_restart_enable: Bool32);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetPrimitiveTopologyEXT.html>
 pub type PFN_vkCmdSetPrimitiveTopologyEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _primitive_topology: PrimitiveTopology,
 );
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetRasterizerDiscardEnableEXT.html>
+pub type PFN_vkCmdSetRasterizerDiscardEnableEXT =
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _rasterizer_discard_enable: Bool32);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSetRayTracingPipelineStackSizeKHR.html>
 pub type PFN_vkCmdSetRayTracingPipelineStackSizeKHR =
