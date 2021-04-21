@@ -156,10 +156,10 @@
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/06_swapchain_creation.rs">main.rs</a></p>
 <p>Vulkan does not have the concept of a &quot;default framebuffer&quot;, hence it requires an infrastructure that will own the buffers we will render to before we visualize them on the screen. This infrastructure is known as the <em>swapchain</em> and must be created explicitly in Vulkan. The swapchain is essentially a queue of images that are waiting to be presented to the screen. Our application will acquire such an image to draw to it, and then return it to the queue. How exactly the queue works and the conditions for presenting an image from the queue depend on how the swapchain is set up, but the general purpose of the swapchain is to synchronize the presentation of images with the refresh rate of the screen.</p>
 <h2><a class="header" href="#checking-for-swapchain-support" id="checking-for-swapchain-support">Checking for swapchain support</a></h2>
-<p>Not all graphics cards are capable of presenting images directly to a screen for various reasons, for example because they are designed for servers and don't have any display outputs. Secondly, since image presentation is heavily tied into the window system and the surfaces associated with windows, it is not actually part of the Vulkan core. You have to enable the <code>VK_KHR_swapchain</code> device extension after querying for its support. Also, like before, you need to import the <code>vulkanalia</code> extension trait for <code>VK_KHR_swapchain</code>:</p>
+<p>Not all graphics cards are capable of presenting images directly to a screen for various reasons, for example because they are designed for servers and don't have any display outputs. Secondly, since image presentation is heavily tied into the window system and the surfaces associated with windows, it is not actually part of the Vulkan core. You have to enable the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_swapchain.html"><code class="hljs">VK_KHR_swapchain</code></a> device extension after querying for its support. Also, like before, you need to import the <code>vulkanalia</code> extension trait for <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_swapchain.html"><code class="hljs">VK_KHR_swapchain</code></a>:</p>
 <pre><code class="language-rust noplaypen">use vulkanalia::vk::KhrSwapchainExtension;
 </code></pre>
-<p>Then we'll first extend the <code>check_physical_device</code> function to check if this extension is supported. We've previously seen how to list the extensions that are supported by a <code>vk::PhysicalDevice</code>, so doing that should be fairly straightforward.</p>
+<p>Then we'll first extend the <code>check_physical_device</code> function to check if this extension is supported. We've previously seen how to list the extensions that are supported by a <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.PhysicalDevice.html"><code class="hljs">vk::PhysicalDevice</code></a>, so doing that should be fairly straightforward.</p>
 <p>First declare a list of required device extensions, similar to the list of validation layers to enable.</p>
 <pre><code class="language-rust noplaypen">const DEVICE_EXTENSIONS: &amp;[vk::ExtensionName] = &amp;[vk::KHR_SWAPCHAIN_EXTENSION.name];
 </code></pre>
@@ -196,13 +196,13 @@ unsafe fn check_physical_device_extensions(
 </code></pre>
 <p>Now run the code and verify that your graphics card is indeed capable of creating a swapchain. It should be noted that the availability of a presentation queue, as we checked in the previous chapter, implies that the swapchain extension must be supported. However, it's still good to be explicit about things, and the extension does have to be explicitly enabled.</p>
 <h2><a class="header" href="#enabling-device-extensions" id="enabling-device-extensions">Enabling device extensions</a></h2>
-<p>Using a swapchain requires enabling the <code>VK_KHR_swapchain</code> extension first. Enabling the extension just requires a small change to the logical device creation structure in the <code>create_logical_device</code> function, first we'll convert our list of extensions to a list of null-terminated strings:</p>
+<p>Using a swapchain requires enabling the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_swapchain.html"><code class="hljs">VK_KHR_swapchain</code></a> extension first. Enabling the extension just requires a small change to the logical device creation structure in the <code>create_logical_device</code> function, first we'll convert our list of extensions to a list of null-terminated strings:</p>
 <pre><code class="language-rust noplaypen">let extensions = DEVICE_EXTENSIONS
     .iter()
     .map(|n| n.to_cstr().as_ptr())
     .collect::&lt;Vec&lt;_&gt;&gt;();
 </code></pre>
-<p>Then we just need to add the extension names to the <code>vk::DeviceCreateInfo</code> struct:</p>
+<p>Then we just need to add the extension names to the <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.DeviceCreateInfo.html"><code class="hljs">vk::DeviceCreateInfo</code></a> struct:</p>
 <pre><code class="language-rust noplaypen">let info = vk::DeviceCreateInfo::builder()
     .queue_create_infos(&amp;queue_infos)
     .enabled_layer_names(&amp;layers)
@@ -269,8 +269,8 @@ let swapchain = !support.formats.is_empty() &amp;&amp; !support.present_modes.is
 ) -&gt; vk::SurfaceFormatKHR {
 }
 </code></pre>
-<p>Each <code>vk::SurfaceFormatKHR</code> entry contains a <code>format</code> and a <code>color_space</code> member. The <code>format</code> member specifies the color channels and types. For example, <code>vk::Format::B8G8R8A8_SRGB</code> means that we store the B, G, R and alpha channels in that order with an 8 bit unsigned integer for a total of 32 bits per pixel. The <code>color_space</code> member indicates if the sRGB color space is supported or not using the <code>vk::ColorSpaceKHR::SRGB_NONLINEAR</code> flag.</p>
-<p>For the color space we'll use sRGB if it is available, because it <a href="http://stackoverflow.com/questions/12524623/">results in more accurate perceived colors</a>. It is also pretty much the standard color space for images, like the textures we'll use later on. Because of that we should also use an sRGB color format, of which one of the most common ones is <code>vk::Format::B8G8R8A8_SRGB</code>.</p>
+<p>Each <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.SurfaceFormatKHR.html"><code class="hljs">vk::SurfaceFormatKHR</code></a> entry contains a <code>format</code> and a <code>color_space</code> member. The <code>format</code> member specifies the color channels and types. For example, <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.Format.html#associatedconstant.B8G8R8A8_SRGB"><code class="hljs">vk::Format::B8G8R8A8_SRGB</code></a> means that we store the B, G, R and alpha channels in that order with an 8 bit unsigned integer for a total of 32 bits per pixel. The <code>color_space</code> member indicates if the sRGB color space is supported or not using the <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.ColorSpaceKHR.html#associatedconstant.SRGB_NONLINEAR"><code class="hljs">vk::ColorSpaceKHR::SRGB_NONLINEAR</code></a> flag.</p>
+<p>For the color space we'll use sRGB if it is available, because it <a href="http://stackoverflow.com/questions/12524623/">results in more accurate perceived colors</a>. It is also pretty much the standard color space for images, like the textures we'll use later on. Because of that we should also use an sRGB color format, of which one of the most common ones is <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.Format.html#associatedconstant.B8G8R8A8_SRGB"><code class="hljs">vk::Format::B8G8R8A8_SRGB</code></a>.</p>
 <p>Let's go through the list and see if the preferred combination is available:</p>
 <pre><code class="language-rust noplaypen">fn get_swapchain_surface_format(
     formats: &amp;[vk::SurfaceFormatKHR],
@@ -289,12 +289,12 @@ let swapchain = !support.formats.is_empty() &amp;&amp; !support.present_modes.is
 <h3><a class="header" href="#presentation-mode" id="presentation-mode">Presentation mode</a></h3>
 <p>The presentation mode is arguably the most important setting for the swapchain, because it represents the actual conditions for showing images to the screen. There are four possible modes available in Vulkan:</p>
 <ul>
-<li><code>vk::PresentModeKHR::IMMEDIATE</code> – Images submitted by your application are transferred to the screen right away, which may result in tearing.</li>
-<li><code>vk::PresentModeKHR::FIFO</code> – The swapchain is a queue where the display takes an image from the front of the queue when the display is refreshed and the program inserts rendered images at the back of the queue. If the queue is full then the program has to wait. This is most similar to vertical sync as found in modern games. The moment that the display is refreshed is known as &quot;vertical blank&quot;.</li>
-<li><code>vk::PresentModeKHR::FIFO_RELAXED</code> – This mode only differs from the previous one if the application is late and the queue was empty at the last vertical blank. Instead of waiting for the next vertical blank, the image is transferred right away when it finally arrives. This may result in visible tearing.</li>
-<li><code>vk::PresentModeKHR::MAILBOX</code> – This is another variation of the second mode. Instead of blocking the application when the queue is full, the images that are already queued are simply replaced with the newer ones. This mode can be used to implement triple buffering, which allows you to avoid tearing with significantly less latency issues than standard vertical sync that uses double buffering.</li>
+<li><a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.PresentModeKHR.html#associatedconstant.IMMEDIATE"><code class="hljs">vk::PresentModeKHR::IMMEDIATE</code></a> – Images submitted by your application are transferred to the screen right away, which may result in tearing.</li>
+<li><a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.PresentModeKHR.html#associatedconstant.FIFO"><code class="hljs">vk::PresentModeKHR::FIFO</code></a> – The swapchain is a queue where the display takes an image from the front of the queue when the display is refreshed and the program inserts rendered images at the back of the queue. If the queue is full then the program has to wait. This is most similar to vertical sync as found in modern games. The moment that the display is refreshed is known as &quot;vertical blank&quot;.</li>
+<li><a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.PresentModeKHR.html#associatedconstant.FIFO_RELAXED"><code class="hljs">vk::PresentModeKHR::FIFO_RELAXED</code></a> – This mode only differs from the previous one if the application is late and the queue was empty at the last vertical blank. Instead of waiting for the next vertical blank, the image is transferred right away when it finally arrives. This may result in visible tearing.</li>
+<li><a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.PresentModeKHR.html#associatedconstant.MAILBOX"><code class="hljs">vk::PresentModeKHR::MAILBOX</code></a> – This is another variation of the second mode. Instead of blocking the application when the queue is full, the images that are already queued are simply replaced with the newer ones. This mode can be used to implement triple buffering, which allows you to avoid tearing with significantly less latency issues than standard vertical sync that uses double buffering.</li>
 </ul>
-<p>Only the <code>vk::PresentModeKHR::FIFO</code> mode is guaranteed to be available, so we'll again have to write a function that looks for the best mode that is available:</p>
+<p>Only the <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.PresentModeKHR.html#associatedconstant.FIFO"><code class="hljs">vk::PresentModeKHR::FIFO</code></a> mode is guaranteed to be available, so we'll again have to write a function that looks for the best mode that is available:</p>
 <pre><code class="language-rust noplaypen">fn get_swapchain_present_mode(
     present_modes: &amp;[vk::PresentModeKHR],
 ) -&gt; vk::PresentModeKHR {
@@ -319,7 +319,7 @@ let swapchain = !support.formats.is_empty() &amp;&amp; !support.present_modes.is
 ) -&gt; vk::Extent2D {
 }
 </code></pre>
-<p>The swap extent is the resolution of the swapchain images and it's almost always exactly equal to the resolution of the window that we're drawing to. The range of the possible resolutions is defined in the <code>vk::SurfaceCapabilitiesKHR</code> structure. Vulkan tells us to match the resolution of the window by setting the width and height in the <code>current_extent</code> member. However, some window managers do allow us to differ here and this is indicated by setting the width and height in <code>current_extent</code> to a special value: the maximum value of <code>u32</code>. In that case we'll pick the resolution that best matches the window within the <code>min_image_extent</code> and <code>max_image_extent</code> bounds.</p>
+<p>The swap extent is the resolution of the swapchain images and it's almost always exactly equal to the resolution of the window that we're drawing to. The range of the possible resolutions is defined in the <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.SurfaceCapabilitiesKHR.html"><code class="hljs">vk::SurfaceCapabilitiesKHR</code></a> structure. Vulkan tells us to match the resolution of the window by setting the width and height in the <code>current_extent</code> member. However, some window managers do allow us to differ here and this is indicated by setting the width and height in <code>current_extent</code> to a special value: the maximum value of <code>u32</code>. In that case we'll pick the resolution that best matches the window within the <code>min_image_extent</code> and <code>max_image_extent</code> bounds.</p>
 <pre><code class="language-rust noplaypen">fn get_swapchain_extent(
     window: &amp;Window,
     capabilities: vk::SurfaceCapabilitiesKHR,
@@ -389,8 +389,8 @@ if support.capabilities.max_image_count != 0
 </code></pre>
 <p>Next, we need to specify how to handle swapchain images that will be used across multiple queue families. That will be the case in our application if the graphics queue family is different from the presentation queue. We'll be drawing on the images in the swapchain from the graphics queue and then submitting them on the presentation queue. There are two ways to handle images that are accessed from multiple queues:</p>
 <ul>
-<li><code>vk::SharingMode::EXCLUSIVE</code> – An image is owned by one queue family at a time and ownership must be explicitly transferred before using it in another queue family. This option offers the best performance.</li>
-<li><code>vk::SharingMode::CONCURRENT</code> – Images can be used across multiple queue families without explicit ownership transfers.</li>
+<li><a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.SharingMode.html#associatedconstant.EXCLUSIVE"><code class="hljs">vk::SharingMode::EXCLUSIVE</code></a> – An image is owned by one queue family at a time and ownership must be explicitly transferred before using it in another queue family. This option offers the best performance.</li>
+<li><a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.SharingMode.html#associatedconstant.CONCURRENT"><code class="hljs">vk::SharingMode::CONCURRENT</code></a> – Images can be used across multiple queue families without explicit ownership transfers.</li>
 </ul>
 <p>If the queue families differ, then we'll be using the concurrent mode in this tutorial to avoid having to do the ownership chapters, because these involve some concepts that are better explained at a later time. Concurrent mode requires you to specify in advance between which queue families ownership will be shared using the <code>queue_family_indices</code> builder method If the graphics queue family and presentation queue family are the same, which will be the case on most hardware, then we should stick to exclusive mode, because concurrent mode requires you to specify at least two distinct queue families.</p>
 <pre><code class="language-rust noplaypen">let mut queue_family_indices = vec![];
@@ -415,7 +415,7 @@ let image_sharing_mode = if indices.graphics != indices.present {
     .image_array_layers(1)
     .image_usage(vk::ImageUsageFlags::COLOR_ATTACHMENT)
 </code></pre>
-<p>The <code>image_array_layers</code> specifies the amount of layers each image consists of. This is always <code>1</code> unless you are developing a stereoscopic 3D application. The <code>image_usage</code> bitmask specifies what kind of operations we'll use the images in the swapchain for. In this tutorial we're going to render directly to them, which means that they're used as color attachment. It is also possible that you'll render images to a separate image first to perform operations like post-processing. In that case you may use a value like <code>vk::ImageUsageFlags::TRANSFER_DST</code> instead and use a memory operation to transfer the rendered image to a swapchain image.</p>
+<p>The <code>image_array_layers</code> specifies the amount of layers each image consists of. This is always <code>1</code> unless you are developing a stereoscopic 3D application. The <code>image_usage</code> bitmask specifies what kind of operations we'll use the images in the swapchain for. In this tutorial we're going to render directly to them, which means that they're used as color attachment. It is also possible that you'll render images to a separate image first to perform operations like post-processing. In that case you may use a value like <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.ImageUsageFlags.html#associatedconstant.TRANSFER_DST"><code class="hljs">vk::ImageUsageFlags::TRANSFER_DST</code></a> instead and use a memory operation to transfer the rendered image to a swapchain image.</p>
 <pre><code class="language-rust noplaypen">    .image_sharing_mode(image_sharing_mode)
     .queue_family_indices(&amp;queue_family_indices)
 </code></pre>
@@ -425,7 +425,7 @@ let image_sharing_mode = if indices.graphics != indices.present {
 <p>We can specify that a certain transform should be applied to images in the swapchain if it is supported (<code>supported_transforms</code> in <code>capabilities</code>), like a 90 degree clockwise rotation or horizontal flip. To specify that you do not want any transformation, simply specify the current transformation.</p>
 <pre><code class="language-rust noplaypen">    .composite_alpha(vk::CompositeAlphaFlagsKHR::OPAQUE)
 </code></pre>
-<p>The <code>composite_alpha</code> method specifies if the alpha channel should be used for blending with other windows in the window system. You'll almost always want to simply ignore the alpha channel, hence <code>vk::CompositeAlphaFlagsKHR::OPAQUE</code>.</p>
+<p>The <code>composite_alpha</code> method specifies if the alpha channel should be used for blending with other windows in the window system. You'll almost always want to simply ignore the alpha channel, hence <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.CompositeAlphaFlagsKHR.html#associatedconstant.OPAQUE"><code class="hljs">vk::CompositeAlphaFlagsKHR::OPAQUE</code></a>.</p>
 <pre><code class="language-rust noplaypen">    .present_mode(present_mode)
     .clipped(true)
 </code></pre>
@@ -433,13 +433,13 @@ let image_sharing_mode = if indices.graphics != indices.present {
 <pre><code class="language-rust noplaypen">    .old_swapchain(vk::SwapchainKHR::null());
 </code></pre>
 <p>That leaves one last method, <code>old_swapchain</code>. With Vulkan it's possible that your swapchain becomes invalid or unoptimized while your application is running, for example because the window was resized. In that case the swapchain actually needs to be recreated from scratch and a reference to the old one must be specified in this method. This is a complex topic that we'll learn more about in a future chapter. For now we'll assume that we'll only ever create one swapchain. We could omit this method since the underlying field will default to a null handle, but we'll leave it in for completeness.</p>
-<p>Now add an <code>AppData</code> field to store the <code>vk::SwapchainKHR</code> object:</p>
+<p>Now add an <code>AppData</code> field to store the <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.SwapchainKHR.html"><code class="hljs">vk::SwapchainKHR</code></a> object:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
     swapchain: vk::SwapchainKHR,
 }
 </code></pre>
-<p>Creating the swapchain is now as simple as calling <code>create_swapchain_khr</code>:</p>
+<p>Creating the swapchain is now as simple as calling <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.create_swapchain_khr"><code class="hljs">create_swapchain_khr</code></a>:</p>
 <pre><code class="language-rust noplaypen">data.swapchain = device.create_swapchain_khr(&amp;info, None)?;
 </code></pre>
 <p>The parameters are the swapchain creation info and optional custom allocators. No surprises there. It should be cleaned up in <code>App::destroy</code> before the device:</p>
@@ -448,18 +448,18 @@ let image_sharing_mode = if indices.graphics != indices.present {
     // ...
 }
 </code></pre>
-<p>Now run the application to ensure that the swapchain is created successfully! If at this point you get an access violation error in <code>vkCreateSwapchainKHR</code> or see a message like <code>Failed to find 'vkGetInstanceProcAddress' in layer SteamOverlayVulkanLayer.dll</code>, then see the <a href="../faq.html">FAQ entry</a> about the Steam overlay layer.</p>
-<p>Try removing the <code>.image_extent(extent)</code> line from where you are building the <code>vk::SwapchainCreateInfoKHR</code> struct with validation layers enabled. You'll see that one of the validation layers immediately catches the mistake and some helpful messages are printed which call out the illegal value provided for <code>image_extent</code>:</p>
+<p>Now run the application to ensure that the swapchain is created successfully! If at this point you get an access violation error in <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateSwapchainKHR.html"><code class="hljs">vkCreateSwapchainKHR</code></a> or see a message like <code>Failed to find 'vkGetInstanceProcAddress' in layer SteamOverlayVulkanLayer.dll</code>, then see the <a href="../faq.html">FAQ entry</a> about the Steam overlay layer.</p>
+<p>Try removing the <code>.image_extent(extent)</code> line from where you are building the <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.SwapchainCreateInfoKHR.html"><code class="hljs">vk::SwapchainCreateInfoKHR</code></a> struct with validation layers enabled. You'll see that one of the validation layers immediately catches the mistake and some helpful messages are printed which call out the illegal value provided for <code>image_extent</code>:</p>
 <p><img src="../images/swapchain_validation_layer.png" alt="" /></p>
 <h2><a class="header" href="#retrieving-the-swapchain-images" id="retrieving-the-swapchain-images">Retrieving the swapchain images</a></h2>
-<p>The swapchain has been created now, so all that remains is retrieving the handles of the <code>vk::Image</code>s in it. We'll reference these during rendering operations in later chapters. Add an <code>AppData</code> field to store the handles:</p>
+<p>The swapchain has been created now, so all that remains is retrieving the handles of the <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/struct.Image.html"><code class="hljs">vk::Image</code></a>s in it. We'll reference these during rendering operations in later chapters. Add an <code>AppData</code> field to store the handles:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
     swapchain_images: Vec&lt;vk::Image&gt;,
 }
 </code></pre>
 <p>The images were created by the implementation for the swapchain and they will be automatically cleaned up once the swapchain has been destroyed, therefore we don't need to add any cleanup code.</p>
-<p>I'm adding the code to retrieve the handles to the end of the <code>create_swapchain</code> function, right after the <code>create_swapchain_khr</code> call.</p>
+<p>I'm adding the code to retrieve the handles to the end of the <code>create_swapchain</code> function, right after the <a href="https://docs.rs/vulkanalia/0.7.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.create_swapchain_khr"><code class="hljs">create_swapchain_khr</code></a> call.</p>
 <pre><code class="language-rust noplaypen">data.swapchain_images = device.get_swapchain_images_khr(data.swapchain)?;
 </code></pre>
 <p>One last thing, store the format and extent we've chosen for the swapchain images in <code>AppData</code> fields. We'll need them in future chapters.</p>
