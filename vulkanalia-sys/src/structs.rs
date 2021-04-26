@@ -8624,6 +8624,50 @@ impl Default for PhysicalDeviceProtectedMemoryProperties {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceProvokingVertexFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceProvokingVertexFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub provoking_vertex_last: Bool32,
+    pub transform_feedback_preserves_provoking_vertex: Bool32,
+}
+
+impl Default for PhysicalDeviceProvokingVertexFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT,
+            next: ptr::null_mut(),
+            provoking_vertex_last: Bool32::default(),
+            transform_feedback_preserves_provoking_vertex: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceProvokingVertexPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceProvokingVertexPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub provoking_vertex_mode_per_pipeline: Bool32,
+    pub transform_feedback_preserves_triangle_fan_provoking_vertex: Bool32,
+}
+
+impl Default for PhysicalDeviceProvokingVertexPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            provoking_vertex_mode_per_pipeline: Bool32::default(),
+            transform_feedback_preserves_triangle_fan_provoking_vertex: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevicePushDescriptorPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10897,6 +10941,26 @@ impl Default for PipelineRasterizationLineStateCreateInfoEXT {
             stippled_line_enable: Bool32::default(),
             line_stipple_factor: u32::default(),
             line_stipple_pattern: u16::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationProvokingVertexStateCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineRasterizationProvokingVertexStateCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub provoking_vertex_mode: ProvokingVertexModeEXT,
+}
+
+impl Default for PipelineRasterizationProvokingVertexStateCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_RASTERIZATION_PROVOKING_VERTEX_STATE_CREATE_INFO_EXT,
+            next: ptr::null(),
+            provoking_vertex_mode: ProvokingVertexModeEXT::default(),
         }
     }
 }

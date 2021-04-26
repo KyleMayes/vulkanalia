@@ -1957,6 +1957,15 @@ pub trait ExtPrivateDataExtension: DeviceV1_0 {
 
 impl ExtPrivateDataExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_provoking_vertex.html>
+pub trait ExtProvokingVertexExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_PROVOKING_VERTEX_EXTENSION;
+}
+
+impl ExtProvokingVertexExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_queue_family_foreign.html>
 pub trait ExtQueueFamilyForeignExtension: DeviceV1_0 {
     /// The metadata for this extension.
