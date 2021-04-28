@@ -8749,6 +8749,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineExecutableProperti
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePortabilitySubsetFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrivateDataFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProtectedMemoryFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProvokingVertexFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayQueryFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
@@ -24931,6 +24932,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePortabilitySubsetFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePrivateDataFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProtectedMemoryFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProvokingVertexFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayQueryFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
@@ -29605,6 +29607,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePerformanceQueryP
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePointClippingProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePortabilitySubsetPropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProtectedMemoryProperties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProvokingVertexPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePushDescriptorPropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPipelinePropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPropertiesNV {}
@@ -29803,6 +29806,147 @@ impl ops::DerefMut for PhysicalDeviceProtectedMemoryPropertiesBuilder {
 
 unsafe impl Cast for PhysicalDeviceProtectedMemoryPropertiesBuilder {
     type Target = PhysicalDeviceProtectedMemoryProperties;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceProvokingVertexFeaturesEXT {
+    type Target = PhysicalDeviceProvokingVertexFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceProvokingVertexFeaturesEXT {
+    type Builder = PhysicalDeviceProvokingVertexFeaturesEXTBuilder;
+}
+
+/// A builder for a [PhysicalDeviceProvokingVertexFeaturesEXT](struct.PhysicalDeviceProvokingVertexFeaturesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceProvokingVertexFeaturesEXTBuilder {
+    value: PhysicalDeviceProvokingVertexFeaturesEXT,
+}
+
+impl PhysicalDeviceProvokingVertexFeaturesEXTBuilder {
+    #[inline]
+    pub fn provoking_vertex_last(mut self, provoking_vertex_last: bool) -> Self {
+        self.value.provoking_vertex_last = provoking_vertex_last as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn transform_feedback_preserves_provoking_vertex(
+        mut self,
+        transform_feedback_preserves_provoking_vertex: bool,
+    ) -> Self {
+        self.value.transform_feedback_preserves_provoking_vertex =
+            transform_feedback_preserves_provoking_vertex as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceProvokingVertexFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceProvokingVertexFeaturesEXTBuilder {
+    type Target = PhysicalDeviceProvokingVertexFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceProvokingVertexFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceProvokingVertexFeaturesEXTBuilder {
+    type Target = PhysicalDeviceProvokingVertexFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceProvokingVertexPropertiesEXT {
+    type Target = PhysicalDeviceProvokingVertexPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceProvokingVertexPropertiesEXT {
+    type Builder = PhysicalDeviceProvokingVertexPropertiesEXTBuilder;
+}
+
+/// A builder for a [PhysicalDeviceProvokingVertexPropertiesEXT](struct.PhysicalDeviceProvokingVertexPropertiesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceProvokingVertexPropertiesEXTBuilder {
+    value: PhysicalDeviceProvokingVertexPropertiesEXT,
+}
+
+impl PhysicalDeviceProvokingVertexPropertiesEXTBuilder {
+    #[inline]
+    pub fn provoking_vertex_mode_per_pipeline(
+        mut self,
+        provoking_vertex_mode_per_pipeline: bool,
+    ) -> Self {
+        self.value.provoking_vertex_mode_per_pipeline =
+            provoking_vertex_mode_per_pipeline as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn transform_feedback_preserves_triangle_fan_provoking_vertex(
+        mut self,
+        transform_feedback_preserves_triangle_fan_provoking_vertex: bool,
+    ) -> Self {
+        self.value
+            .transform_feedback_preserves_triangle_fan_provoking_vertex =
+            transform_feedback_preserves_triangle_fan_provoking_vertex as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceProvokingVertexPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceProvokingVertexPropertiesEXTBuilder {
+    type Target = PhysicalDeviceProvokingVertexPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceProvokingVertexPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceProvokingVertexPropertiesEXTBuilder {
+    type Target = PhysicalDeviceProvokingVertexPropertiesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -37179,6 +37323,64 @@ unsafe impl Cast for PipelineRasterizationLineStateCreateInfoEXTBuilder {
     }
 }
 
+unsafe impl Cast for PipelineRasterizationProvokingVertexStateCreateInfoEXT {
+    type Target = PipelineRasterizationProvokingVertexStateCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineRasterizationProvokingVertexStateCreateInfoEXT {
+    type Builder = PipelineRasterizationProvokingVertexStateCreateInfoEXTBuilder;
+}
+
+/// A builder for a [PipelineRasterizationProvokingVertexStateCreateInfoEXT](struct.PipelineRasterizationProvokingVertexStateCreateInfoEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineRasterizationProvokingVertexStateCreateInfoEXTBuilder {
+    value: PipelineRasterizationProvokingVertexStateCreateInfoEXT,
+}
+
+impl PipelineRasterizationProvokingVertexStateCreateInfoEXTBuilder {
+    #[inline]
+    pub fn provoking_vertex_mode(mut self, provoking_vertex_mode: ProvokingVertexModeEXT) -> Self {
+        self.value.provoking_vertex_mode = provoking_vertex_mode;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineRasterizationProvokingVertexStateCreateInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineRasterizationProvokingVertexStateCreateInfoEXTBuilder {
+    type Target = PipelineRasterizationProvokingVertexStateCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineRasterizationProvokingVertexStateCreateInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineRasterizationProvokingVertexStateCreateInfoEXTBuilder {
+    type Target = PipelineRasterizationProvokingVertexStateCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [PipelineRasterizationStateCreateInfo](struct.PipelineRasterizationStateCreateInfo.html).
 pub unsafe trait ExtendsPipelineRasterizationStateCreateInfo {}
 unsafe impl ExtendsPipelineRasterizationStateCreateInfo
@@ -37191,6 +37393,10 @@ unsafe impl ExtendsPipelineRasterizationStateCreateInfo
 }
 unsafe impl ExtendsPipelineRasterizationStateCreateInfo
     for PipelineRasterizationLineStateCreateInfoEXT
+{
+}
+unsafe impl ExtendsPipelineRasterizationStateCreateInfo
+    for PipelineRasterizationProvokingVertexStateCreateInfoEXT
 {
 }
 unsafe impl ExtendsPipelineRasterizationStateCreateInfo

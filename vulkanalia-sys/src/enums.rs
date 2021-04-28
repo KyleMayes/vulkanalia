@@ -3335,6 +3335,38 @@ impl fmt::Debug for PrimitiveTopology {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkProvokingVertexModeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct ProvokingVertexModeEXT(i32);
+
+impl ProvokingVertexModeEXT {
+    pub const FIRST_VERTEX: Self = Self(0);
+    pub const LAST_VERTEX: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for ProvokingVertexModeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "FIRST_VERTEX"),
+            1 => write!(f, "LAST_VERTEX"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryPoolSamplingModeINTEL.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -4587,6 +4619,10 @@ impl StructureType {
     pub const FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV: Self = Self(1000250002);
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT: Self = Self(1000251000);
     pub const PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT: Self = Self(1000252000);
+    pub const PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT: Self = Self(1000254000);
+    pub const PIPELINE_RASTERIZATION_PROVOKING_VERTEX_STATE_CREATE_INFO_EXT: Self =
+        Self(1000254001);
+    pub const PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT: Self = Self(1000254002);
     pub const SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT: Self = Self(1000255000);
     pub const SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT: Self = Self(1000255002);
     pub const SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT: Self = Self(1000255001);
@@ -5149,6 +5185,12 @@ impl fmt::Debug for StructureType {
             1000250002 => write!(f, "FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV"),
             1000251000 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT"),
             1000252000 => write!(f, "PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT"),
+            1000254000 => write!(f, "PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT"),
+            1000254001 => write!(
+                f,
+                "PIPELINE_RASTERIZATION_PROVOKING_VERTEX_STATE_CREATE_INFO_EXT"
+            ),
+            1000254002 => write!(f, "PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT"),
             1000255000 => write!(f, "SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT"),
             1000255002 => write!(f, "SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT"),
             1000255001 => write!(f, "SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT"),

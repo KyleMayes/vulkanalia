@@ -1205,6 +1205,22 @@ pub const EXT_PRIVATE_DATA_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_provoking_vertex.html>
+#[allow(deprecated)]
+pub const EXT_PROVOKING_VERTEX_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_provoking_vertex"),
+    number: 255,
+    type_: "device",
+    author: "EXT",
+    contact: "Jesse Hall @jessehall",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_queue_family_foreign.html>
 #[allow(deprecated)]
 pub const EXT_QUEUE_FAMILY_FOREIGN_EXTENSION: Extension = Extension {
