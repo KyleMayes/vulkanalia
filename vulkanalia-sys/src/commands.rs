@@ -448,6 +448,10 @@ pub type PFN_vkCmdCopyQueryPoolResults = unsafe extern "system" fn(
     _flags: QueryResultFlags,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCuLaunchKernelNVX.html>
+pub type PFN_vkCmdCuLaunchKernelNVX =
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _launch_info: *const CuLaunchInfoNVX);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDebugMarkerBeginEXT.html>
 pub type PFN_vkCmdDebugMarkerBeginEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -1250,6 +1254,22 @@ pub type PFN_vkCreateComputePipelines = unsafe extern "system" fn(
     _pipelines: *mut Pipeline,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateCuFunctionNVX.html>
+pub type PFN_vkCreateCuFunctionNVX = unsafe extern "system" fn(
+    _device: Device,
+    _create_info: *const CuFunctionCreateInfoNVX,
+    _allocator: *const AllocationCallbacks,
+    _function: *mut CuFunctionNVX,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateCuModuleNVX.html>
+pub type PFN_vkCreateCuModuleNVX = unsafe extern "system" fn(
+    _device: Device,
+    _create_info: *const CuModuleCreateInfoNVX,
+    _allocator: *const AllocationCallbacks,
+    _module: *mut CuModuleNVX,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateDebugReportCallbackEXT.html>
 pub type PFN_vkCreateDebugReportCallbackEXT = unsafe extern "system" fn(
     _instance: Instance,
@@ -1686,6 +1706,20 @@ pub type PFN_vkDestroyBufferView = unsafe extern "system" fn(
 pub type PFN_vkDestroyCommandPool = unsafe extern "system" fn(
     _device: Device,
     _command_pool: CommandPool,
+    _allocator: *const AllocationCallbacks,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyCuFunctionNVX.html>
+pub type PFN_vkDestroyCuFunctionNVX = unsafe extern "system" fn(
+    _device: Device,
+    _function: CuFunctionNVX,
+    _allocator: *const AllocationCallbacks,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyCuModuleNVX.html>
+pub type PFN_vkDestroyCuModuleNVX = unsafe extern "system" fn(
+    _device: Device,
+    _module: CuModuleNVX,
     _allocator: *const AllocationCallbacks,
 );
 

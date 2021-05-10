@@ -6611,6 +6611,261 @@ unsafe impl Cast for CopyMemoryToAccelerationStructureInfoKHRBuilder {
     }
 }
 
+unsafe impl Cast for CuFunctionCreateInfoNVX {
+    type Target = CuFunctionCreateInfoNVX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for CuFunctionCreateInfoNVX {
+    type Builder = CuFunctionCreateInfoNVXBuilder<'b>;
+}
+
+/// A builder for a [CuFunctionCreateInfoNVX](struct.CuFunctionCreateInfoNVX.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CuFunctionCreateInfoNVXBuilder<'b> {
+    value: CuFunctionCreateInfoNVX,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> CuFunctionCreateInfoNVXBuilder<'b> {
+    #[inline]
+    pub fn module(mut self, module: CuModuleNVX) -> Self {
+        self.value.module = module;
+        self
+    }
+
+    #[inline]
+    pub fn name(mut self, name: &'b [u8]) -> Self {
+        self.value.name = name.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CuFunctionCreateInfoNVX {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for CuFunctionCreateInfoNVXBuilder<'b> {
+    type Target = CuFunctionCreateInfoNVX;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for CuFunctionCreateInfoNVXBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for CuFunctionCreateInfoNVXBuilder<'b> {
+    type Target = CuFunctionCreateInfoNVX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CuLaunchInfoNVX {
+    type Target = CuLaunchInfoNVX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for CuLaunchInfoNVX {
+    type Builder = CuLaunchInfoNVXBuilder<'b>;
+}
+
+/// A builder for a [CuLaunchInfoNVX](struct.CuLaunchInfoNVX.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CuLaunchInfoNVXBuilder<'b> {
+    value: CuLaunchInfoNVX,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> CuLaunchInfoNVXBuilder<'b> {
+    #[inline]
+    pub fn function(mut self, function: CuFunctionNVX) -> Self {
+        self.value.function = function;
+        self
+    }
+
+    #[inline]
+    pub fn grid_dim_x(mut self, grid_dim_x: u32) -> Self {
+        self.value.grid_dim_x = grid_dim_x;
+        self
+    }
+
+    #[inline]
+    pub fn grid_dim_y(mut self, grid_dim_y: u32) -> Self {
+        self.value.grid_dim_y = grid_dim_y;
+        self
+    }
+
+    #[inline]
+    pub fn grid_dim_z(mut self, grid_dim_z: u32) -> Self {
+        self.value.grid_dim_z = grid_dim_z;
+        self
+    }
+
+    #[inline]
+    pub fn block_dim_x(mut self, block_dim_x: u32) -> Self {
+        self.value.block_dim_x = block_dim_x;
+        self
+    }
+
+    #[inline]
+    pub fn block_dim_y(mut self, block_dim_y: u32) -> Self {
+        self.value.block_dim_y = block_dim_y;
+        self
+    }
+
+    #[inline]
+    pub fn block_dim_z(mut self, block_dim_z: u32) -> Self {
+        self.value.block_dim_z = block_dim_z;
+        self
+    }
+
+    #[inline]
+    pub fn shared_mem_bytes(mut self, shared_mem_bytes: u32) -> Self {
+        self.value.shared_mem_bytes = shared_mem_bytes;
+        self
+    }
+
+    #[inline]
+    pub fn param_count(mut self, param_count: usize) -> Self {
+        self.value.param_count = param_count;
+        self
+    }
+
+    #[inline]
+    pub fn params<T>(mut self, params: &'b T) -> Self {
+        self.value.params = (params as *const T).cast();
+        self
+    }
+
+    #[inline]
+    pub fn extra_count(mut self, extra_count: usize) -> Self {
+        self.value.extra_count = extra_count;
+        self
+    }
+
+    #[inline]
+    pub fn extras<T>(mut self, extras: &'b T) -> Self {
+        self.value.extras = (extras as *const T).cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CuLaunchInfoNVX {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for CuLaunchInfoNVXBuilder<'b> {
+    type Target = CuLaunchInfoNVX;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for CuLaunchInfoNVXBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for CuLaunchInfoNVXBuilder<'b> {
+    type Target = CuLaunchInfoNVX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CuModuleCreateInfoNVX {
+    type Target = CuModuleCreateInfoNVX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for CuModuleCreateInfoNVX {
+    type Builder = CuModuleCreateInfoNVXBuilder<'b>;
+}
+
+/// A builder for a [CuModuleCreateInfoNVX](struct.CuModuleCreateInfoNVX.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CuModuleCreateInfoNVXBuilder<'b> {
+    value: CuModuleCreateInfoNVX,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> CuModuleCreateInfoNVXBuilder<'b> {
+    #[inline]
+    pub fn data_size(mut self, data_size: usize) -> Self {
+        self.value.data_size = data_size;
+        self
+    }
+
+    #[inline]
+    pub fn data<T>(mut self, data: &'b T) -> Self {
+        self.value.data = (data as *const T).cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CuModuleCreateInfoNVX {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for CuModuleCreateInfoNVXBuilder<'b> {
+    type Target = CuModuleCreateInfoNVX;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for CuModuleCreateInfoNVXBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for CuModuleCreateInfoNVXBuilder<'b> {
+    type Target = CuModuleCreateInfoNVX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for D3D12FenceSubmitInfoKHR {
     type Target = D3D12FenceSubmitInfoKHR;
 

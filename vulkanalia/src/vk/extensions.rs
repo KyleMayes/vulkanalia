@@ -6760,6 +6760,99 @@ pub trait NnViSurfaceExtension: InstanceV1_0 {
 
 impl NnViSurfaceExtension for crate::Instance {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NVX_binary_import.html>
+pub trait NvxBinaryImportExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NVX_BINARY_IMPORT_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdCuLaunchKernelNVX.html>
+    #[inline]
+    unsafe fn cmd_cu_launch_kernel_nvx(
+        &self,
+        command_buffer: CommandBuffer,
+        launch_info: &CuLaunchInfoNVX,
+    ) {
+        let __result = (self.commands().cmd_cu_launch_kernel_nvx)(command_buffer, launch_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateCuFunctionNVX.html>
+    #[inline]
+    unsafe fn create_cu_function_nvx(
+        &self,
+        create_info: &CuFunctionCreateInfoNVX,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<CuFunctionNVX> {
+        let mut function = MaybeUninit::<CuFunctionNVX>::uninit();
+
+        let __result = (self.commands().create_cu_function_nvx)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            function.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(function.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateCuModuleNVX.html>
+    #[inline]
+    unsafe fn create_cu_module_nvx(
+        &self,
+        create_info: &CuModuleCreateInfoNVX,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<CuModuleNVX> {
+        let mut module = MaybeUninit::<CuModuleNVX>::uninit();
+
+        let __result = (self.commands().create_cu_module_nvx)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            module.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(module.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyCuFunctionNVX.html>
+    #[inline]
+    unsafe fn destroy_cu_function_nvx(
+        &self,
+        function: CuFunctionNVX,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_cu_function_nvx)(
+            self.handle(),
+            function,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyCuModuleNVX.html>
+    #[inline]
+    unsafe fn destroy_cu_module_nvx(
+        &self,
+        module: CuModuleNVX,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_cu_module_nvx)(
+            self.handle(),
+            module,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+}
+
+impl NvxBinaryImportExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NVX_image_view_handle.html>
 pub trait NvxImageViewHandleExtension: DeviceV1_0 {
     /// The metadata for this extension.

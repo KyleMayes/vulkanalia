@@ -999,6 +999,8 @@ impl DebugReportObjectTypeEXT {
     pub const VALIDATION_CACHE_EXT: Self = Self(33);
     pub const SAMPLER_YCBCR_CONVERSION: Self = Self(1000156000);
     pub const DESCRIPTOR_UPDATE_TEMPLATE: Self = Self(1000085000);
+    pub const CU_MODULE_NVX: Self = Self(1000029000);
+    pub const CU_FUNCTION_NVX: Self = Self(1000029001);
     pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000150000);
     pub const ACCELERATION_STRUCTURE_NV: Self = Self(1000165000);
 
@@ -1052,6 +1054,8 @@ impl fmt::Debug for DebugReportObjectTypeEXT {
             33 => write!(f, "VALIDATION_CACHE_EXT"),
             1000156000 => write!(f, "SAMPLER_YCBCR_CONVERSION"),
             1000085000 => write!(f, "DESCRIPTOR_UPDATE_TEMPLATE"),
+            1000029000 => write!(f, "CU_MODULE_NVX"),
+            1000029001 => write!(f, "CU_FUNCTION_NVX"),
             1000150000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
             1000165000 => write!(f, "ACCELERATION_STRUCTURE_NV"),
             _ => self.0.fmt(f),
@@ -1334,6 +1338,7 @@ impl DriverId {
     pub const MESA_LLVMPIPE: Self = Self(13);
     pub const MOLTENVK: Self = Self(14);
     pub const COREAVI_PROPRIETARY: Self = Self(15);
+    pub const JUICE_PROPRIETARY: Self = Self(16);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1366,6 +1371,7 @@ impl fmt::Debug for DriverId {
             13 => write!(f, "MESA_LLVMPIPE"),
             14 => write!(f, "MOLTENVK"),
             15 => write!(f, "COREAVI_PROPRIETARY"),
+            16 => write!(f, "JUICE_PROPRIETARY"),
             _ => self.0.fmt(f),
         }
     }
@@ -2712,6 +2718,8 @@ impl ObjectType {
     pub const DISPLAY_KHR: Self = Self(1000002000);
     pub const DISPLAY_MODE_KHR: Self = Self(1000002001);
     pub const DEBUG_REPORT_CALLBACK_EXT: Self = Self(1000011000);
+    pub const CU_MODULE_NVX: Self = Self(1000029000);
+    pub const CU_FUNCTION_NVX: Self = Self(1000029001);
     pub const DEBUG_UTILS_MESSENGER_EXT: Self = Self(1000128000);
     pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000150000);
     pub const VALIDATION_CACHE_EXT: Self = Self(1000160000);
@@ -2770,6 +2778,8 @@ impl fmt::Debug for ObjectType {
             1000002000 => write!(f, "DISPLAY_KHR"),
             1000002001 => write!(f, "DISPLAY_MODE_KHR"),
             1000011000 => write!(f, "DEBUG_REPORT_CALLBACK_EXT"),
+            1000029000 => write!(f, "CU_MODULE_NVX"),
+            1000029001 => write!(f, "CU_FUNCTION_NVX"),
             1000128000 => write!(f, "DEBUG_UTILS_MESSENGER_EXT"),
             1000150000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
             1000160000 => write!(f, "VALIDATION_CACHE_EXT"),
@@ -4402,6 +4412,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT: Self = Self(1000028000);
     pub const PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT: Self = Self(1000028001);
     pub const PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT: Self = Self(1000028002);
+    pub const CU_MODULE_CREATE_INFO_NVX: Self = Self(1000029000);
+    pub const CU_FUNCTION_CREATE_INFO_NVX: Self = Self(1000029001);
+    pub const CU_LAUNCH_INFO_NVX: Self = Self(1000029002);
     pub const IMAGE_VIEW_HANDLE_INFO_NVX: Self = Self(1000030000);
     pub const IMAGE_VIEW_ADDRESS_PROPERTIES_NVX: Self = Self(1000030001);
     pub const TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD: Self = Self(1000041000);
@@ -4927,6 +4940,9 @@ impl fmt::Debug for StructureType {
             1000028000 => write!(f, "PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT"),
             1000028001 => write!(f, "PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT"),
             1000028002 => write!(f, "PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT"),
+            1000029000 => write!(f, "CU_MODULE_CREATE_INFO_NVX"),
+            1000029001 => write!(f, "CU_FUNCTION_CREATE_INFO_NVX"),
+            1000029002 => write!(f, "CU_LAUNCH_INFO_NVX"),
             1000030000 => write!(f, "IMAGE_VIEW_HANDLE_INFO_NVX"),
             1000030001 => write!(f, "IMAGE_VIEW_ADDRESS_PROPERTIES_NVX"),
             1000041000 => write!(f, "TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD"),

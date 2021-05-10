@@ -79,6 +79,7 @@ pub struct DeviceCommands {
     pub cmd_copy_memory_to_acceleration_structure_khr:
         PFN_vkCmdCopyMemoryToAccelerationStructureKHR,
     pub cmd_copy_query_pool_results: PFN_vkCmdCopyQueryPoolResults,
+    pub cmd_cu_launch_kernel_nvx: PFN_vkCmdCuLaunchKernelNVX,
     pub cmd_debug_marker_begin_ext: PFN_vkCmdDebugMarkerBeginEXT,
     pub cmd_debug_marker_end_ext: PFN_vkCmdDebugMarkerEndEXT,
     pub cmd_debug_marker_insert_ext: PFN_vkCmdDebugMarkerInsertEXT,
@@ -193,6 +194,8 @@ pub struct DeviceCommands {
     pub create_buffer_view: PFN_vkCreateBufferView,
     pub create_command_pool: PFN_vkCreateCommandPool,
     pub create_compute_pipelines: PFN_vkCreateComputePipelines,
+    pub create_cu_function_nvx: PFN_vkCreateCuFunctionNVX,
+    pub create_cu_module_nvx: PFN_vkCreateCuModuleNVX,
     pub create_deferred_operation_khr: PFN_vkCreateDeferredOperationKHR,
     pub create_descriptor_pool: PFN_vkCreateDescriptorPool,
     pub create_descriptor_set_layout: PFN_vkCreateDescriptorSetLayout,
@@ -230,6 +233,8 @@ pub struct DeviceCommands {
     pub destroy_buffer: PFN_vkDestroyBuffer,
     pub destroy_buffer_view: PFN_vkDestroyBufferView,
     pub destroy_command_pool: PFN_vkDestroyCommandPool,
+    pub destroy_cu_function_nvx: PFN_vkDestroyCuFunctionNVX,
+    pub destroy_cu_module_nvx: PFN_vkDestroyCuModuleNVX,
     pub destroy_deferred_operation_khr: PFN_vkDestroyDeferredOperationKHR,
     pub destroy_descriptor_pool: PFN_vkDestroyDescriptorPool,
     pub destroy_descriptor_set_layout: PFN_vkDestroyDescriptorSetLayout,
@@ -1296,6 +1301,20 @@ impl DeviceCommands {
                         _flags: QueryResultFlags,
                     ) {
                         panic!("could not load vkCmdCopyQueryPoolResults")
+                    }
+                    fallback
+                }
+            },
+            cmd_cu_launch_kernel_nvx: {
+                let value = loader(b"vkCmdCuLaunchKernelNVX\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _launch_info: *const CuLaunchInfoNVX,
+                    ) {
+                        panic!("could not load vkCmdCuLaunchKernelNVX")
                     }
                     fallback
                 }
@@ -3086,6 +3105,38 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            create_cu_function_nvx: {
+                let value = loader(b"vkCreateCuFunctionNVX\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const CuFunctionCreateInfoNVX,
+                        _allocator: *const AllocationCallbacks,
+                        _function: *mut CuFunctionNVX,
+                    ) -> Result {
+                        panic!("could not load vkCreateCuFunctionNVX")
+                    }
+                    fallback
+                }
+            },
+            create_cu_module_nvx: {
+                let value = loader(b"vkCreateCuModuleNVX\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const CuModuleCreateInfoNVX,
+                        _allocator: *const AllocationCallbacks,
+                        _module: *mut CuModuleNVX,
+                    ) -> Result {
+                        panic!("could not load vkCreateCuModuleNVX")
+                    }
+                    fallback
+                }
+            },
             create_deferred_operation_khr: {
                 let value = loader(b"vkCreateDeferredOperationKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -3670,6 +3721,36 @@ impl DeviceCommands {
                         _allocator: *const AllocationCallbacks,
                     ) {
                         panic!("could not load vkDestroyCommandPool")
+                    }
+                    fallback
+                }
+            },
+            destroy_cu_function_nvx: {
+                let value = loader(b"vkDestroyCuFunctionNVX\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _function: CuFunctionNVX,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyCuFunctionNVX")
+                    }
+                    fallback
+                }
+            },
+            destroy_cu_module_nvx: {
+                let value = loader(b"vkDestroyCuModuleNVX\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _module: CuModuleNVX,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyCuModuleNVX")
                     }
                     fallback
                 }

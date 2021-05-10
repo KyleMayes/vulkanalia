@@ -1937,6 +1937,92 @@ impl Default for CopyMemoryToAccelerationStructureInfoKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCuFunctionCreateInfoNVX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CuFunctionCreateInfoNVX {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub module: CuModuleNVX,
+    pub name: *const c_char,
+}
+
+impl Default for CuFunctionCreateInfoNVX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::CU_FUNCTION_CREATE_INFO_NVX,
+            next: ptr::null(),
+            module: CuModuleNVX::default(),
+            name: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCuLaunchInfoNVX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CuLaunchInfoNVX {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub function: CuFunctionNVX,
+    pub grid_dim_x: u32,
+    pub grid_dim_y: u32,
+    pub grid_dim_z: u32,
+    pub block_dim_x: u32,
+    pub block_dim_y: u32,
+    pub block_dim_z: u32,
+    pub shared_mem_bytes: u32,
+    pub param_count: usize,
+    pub params: *const c_void,
+    pub extra_count: usize,
+    pub extras: *const c_void,
+}
+
+impl Default for CuLaunchInfoNVX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::CU_LAUNCH_INFO_NVX,
+            next: ptr::null(),
+            function: CuFunctionNVX::default(),
+            grid_dim_x: u32::default(),
+            grid_dim_y: u32::default(),
+            grid_dim_z: u32::default(),
+            block_dim_x: u32::default(),
+            block_dim_y: u32::default(),
+            block_dim_z: u32::default(),
+            shared_mem_bytes: u32::default(),
+            param_count: usize::default(),
+            params: ptr::null(),
+            extra_count: usize::default(),
+            extras: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCuModuleCreateInfoNVX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CuModuleCreateInfoNVX {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub data_size: usize,
+    pub data: *const c_void,
+}
+
+impl Default for CuModuleCreateInfoNVX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::CU_MODULE_CREATE_INFO_NVX,
+            next: ptr::null(),
+            data_size: usize::default(),
+            data: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkD3D12FenceSubmitInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]

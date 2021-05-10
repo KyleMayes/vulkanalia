@@ -3239,6 +3239,22 @@ pub const NN_VI_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NVX_binary_import.html>
+#[allow(deprecated)]
+pub const NVX_BINARY_IMPORT_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_NVX_binary_import"),
+    number: 30,
+    type_: "device",
+    author: "NVX",
+    contact: "Eric Werness @ewerness,Liam Middlebrook @liam-middlebrook",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NVX_image_view_handle.html>
 #[allow(deprecated)]
 pub const NVX_IMAGE_VIEW_HANDLE_EXTENSION: Extension = Extension {
