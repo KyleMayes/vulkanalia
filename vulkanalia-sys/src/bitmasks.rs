@@ -95,7 +95,7 @@ bitflags! {
         const CONDITIONAL_RENDERING_READ_EXT = 1 << 20;
         const ACCELERATION_STRUCTURE_READ_KHR = 1 << 21;
         const ACCELERATION_STRUCTURE_WRITE_KHR = 1 << 22;
-        const SHADING_RATE_IMAGE_READ_NV = 1 << 23;
+        const FRAGMENT_SHADING_RATE_ATTACHMENT_READ_KHR = 1 << 23;
         const FRAGMENT_DENSITY_MAP_READ_EXT = 1 << 24;
         const TRANSFORM_FEEDBACK_WRITE_EXT = 1 << 25;
         const TRANSFORM_FEEDBACK_COUNTER_READ_EXT = 1 << 26;
@@ -824,7 +824,7 @@ bitflags! {
         const DEPTH_STENCIL_ATTACHMENT = 1 << 5;
         const TRANSIENT_ATTACHMENT = 1 << 6;
         const INPUT_ATTACHMENT = 1 << 7;
-        const SHADING_RATE_IMAGE_NV = 1 << 8;
+        const FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 8;
         const FRAGMENT_DENSITY_MAP_EXT = 1 << 9;
     }
 }
@@ -1272,7 +1272,7 @@ bitflags! {
         const TASK_SHADER_NV = 1 << 19;
         const MESH_SHADER_NV = 1 << 20;
         const RAY_TRACING_SHADER_KHR = 1 << 21;
-        const SHADING_RATE_IMAGE_NV = 1 << 22;
+        const FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 22;
         const FRAGMENT_DENSITY_PROCESS_EXT = 1 << 23;
         const TRANSFORM_FEEDBACK_EXT = 1 << 24;
         const ACCELERATION_STRUCTURE_BUILD_KHR = 1 << 25;

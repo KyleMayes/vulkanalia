@@ -2282,8 +2282,8 @@ impl ImageLayout {
     pub const STENCIL_READ_ONLY_OPTIMAL: Self = Self(1000241003);
     pub const PRESENT_SRC_KHR: Self = Self(1000001002);
     pub const SHARED_PRESENT_KHR: Self = Self(1000111000);
-    pub const SHADING_RATE_OPTIMAL_NV: Self = Self(1000164003);
     pub const FRAGMENT_DENSITY_MAP_OPTIMAL_EXT: Self = Self(1000218000);
+    pub const FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR: Self = Self(1000164003);
     pub const READ_ONLY_OPTIMAL_KHR: Self = Self(1000314000);
     pub const ATTACHMENT_OPTIMAL_KHR: Self = Self(1000314001);
 
@@ -2320,8 +2320,8 @@ impl fmt::Debug for ImageLayout {
             1000241003 => write!(f, "STENCIL_READ_ONLY_OPTIMAL"),
             1000001002 => write!(f, "PRESENT_SRC_KHR"),
             1000111000 => write!(f, "SHARED_PRESENT_KHR"),
-            1000164003 => write!(f, "SHADING_RATE_OPTIMAL_NV"),
             1000218000 => write!(f, "FRAGMENT_DENSITY_MAP_OPTIMAL_EXT"),
+            1000164003 => write!(f, "FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR"),
             1000314000 => write!(f, "READ_ONLY_OPTIMAL_KHR"),
             1000314001 => write!(f, "ATTACHMENT_OPTIMAL_KHR"),
             _ => self.0.fmt(f),
