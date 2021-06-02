@@ -20,7 +20,7 @@ nalgebra-glm = "0.10"
 png = "0.16"
 pretty_env_logger = "0.4"
 tobj = "2"
-vulkanalia = { version = "=0.7.0", features = ["libloading", "window"] }
+vulkanalia = { version = "=0.9.0", features = ["libloading", "window"] }
 winit = "0.24"
 ```
 

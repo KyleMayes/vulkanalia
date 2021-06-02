@@ -14,7 +14,7 @@ use pulldown_cmark_to_cmark::cmark;
 /// The Vulkan API Registry index.
 const INDEX: &str = include_str!("../../../index.txt");
 /// The version of `vulkanalia` used by the tutorial.
-const VERSION: &str = "0.7.0";
+const VERSION: &str = "0.9.0";
 
 #[rustfmt::skip]
 pub fn app() -> App<'static, 'static> {
