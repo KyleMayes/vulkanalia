@@ -191,7 +191,7 @@ The presentation mode is arguably the most important setting for the swapchain, 
 * `vk::PresentModeKHR::IMMEDIATE` &ndash; Images submitted by your application are transferred to the screen right away, which may result in tearing.
 * `vk::PresentModeKHR::FIFO` &ndash; The swapchain is a queue where the display takes an image from the front of the queue when the display is refreshed and the program inserts rendered images at the back of the queue. If the queue is full then the program has to wait. This is most similar to vertical sync as found in modern games. The moment that the display is refreshed is known as "vertical blank".
 * `vk::PresentModeKHR::FIFO_RELAXED` &ndash; This mode only differs from the previous one if the application is late and the queue was empty at the last vertical blank. Instead of waiting for the next vertical blank, the image is transferred right away when it finally arrives. This may result in visible tearing.
-* `vk::PresentModeKHR::MAILBOX` &ndash; This is another variation of the second mode. Instead of blocking the application when the queue is full, the images that are already queued are simply replaced with the newer ones. This mode can be used to implement triple buffering, which allows you to avoid tearing with significantly less latency issues than standard vertical sync that uses double buffering.
+* `vk::PresentModeKHR::MAILBOX` &ndash; This is another variation of the second mode. Instead of blocking the application when the queue is full, the images that are already queued are simply replaced with the newer ones. This mode can be used to render frames as fast as possible while still avoiding tearing, resulting in fewer latency issues than standard vertical sync. This is commonly known as "triple buffering", although the existence of three buffers alone does not necessarily mean that the framerate is unlocked.
 
 Only the `vk::PresentModeKHR::FIFO` mode is guaranteed to be available, so we'll again have to write a function that looks for the best mode that is available:
 
@@ -202,7 +202,7 @@ fn get_swapchain_present_mode(
 }
 ```
 
-I personally think that triple buffering is a very nice trade-off. It allows us to avoid tearing while still maintaining a fairly low latency by rendering new images that are as up-to-date as possible right until the vertical blank. So, let's look through the list to see if it's available and fall back to FIFO if it isn't:
+I personally think that `vk::PresentModeKHR::MAILBOX` is a very nice trade-off if energy usage is not a concern. It allows us to avoid tearing while still maintaining a fairly low latency by rendering new images that are as up-to-date as possible right until the vertical blank. On mobile devices, where energy usage is more important, you will probably want to use `vk::PresentModeKHR::FIFO` instead. Now, let's look through the list to see if `vk::PresentModeKHR::MAILBOX` is available:
 
 ```rust,noplaypen
 fn get_swapchain_present_mode(
