@@ -7718,6 +7718,26 @@ impl Default for PhysicalDeviceFragmentShadingRatePropertiesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceGlobalPriorityQueryFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub global_priority_query: Bool32,
+}
+
+impl Default for PhysicalDeviceGlobalPriorityQueryFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT,
+            next: ptr::null_mut(),
+            global_priority_query: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceGroupProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9402,6 +9422,27 @@ impl Default for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES,
             next: ptr::null_mut(),
             shader_subgroup_extended_types: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_subgroup_uniform_control_flow: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type:
+                StructureType::PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR,
+            next: ptr::null_mut(),
+            shader_subgroup_uniform_control_flow: Bool32::default(),
         }
     }
 }
@@ -11736,6 +11777,28 @@ impl Default for QueueFamilyCheckpointPropertiesNV {
             s_type: StructureType::QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV,
             next: ptr::null_mut(),
             checkpoint_execution_stage_mask: PipelineStageFlags::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueueFamilyGlobalPriorityPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct QueueFamilyGlobalPriorityPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub priority_count: u32,
+    pub priorities: [QueueGlobalPriorityEXT; MAX_GLOBAL_PRIORITY_SIZE_EXT],
+}
+
+impl Default for QueueFamilyGlobalPriorityPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            priority_count: u32::default(),
+            priorities: [QueueGlobalPriorityEXT::default(); MAX_GLOBAL_PRIORITY_SIZE_EXT],
         }
     }
 }
