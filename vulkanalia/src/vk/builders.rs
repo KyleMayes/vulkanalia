@@ -9023,6 +9023,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageFootprintFeatur
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderTerminateInvocationFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShadingRateImageFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSubgroupSizeControlFeaturesEXT {}
@@ -25164,6 +25165,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderBaryc
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceGlobalPriorityQueryFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageRobustnessFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImagelessFramebufferFeatures {}
@@ -25209,6 +25211,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageFootprin
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderTerminateInvocationFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShadingRateImageFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSubgroupSizeControlFeaturesEXT {}
@@ -26428,6 +26434,64 @@ impl ops::DerefMut for PhysicalDeviceFragmentShadingRatePropertiesKHRBuilder {
 
 unsafe impl Cast for PhysicalDeviceFragmentShadingRatePropertiesKHRBuilder {
     type Target = PhysicalDeviceFragmentShadingRatePropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceGlobalPriorityQueryFeaturesEXT {
+    type Target = PhysicalDeviceGlobalPriorityQueryFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceGlobalPriorityQueryFeaturesEXT {
+    type Builder = PhysicalDeviceGlobalPriorityQueryFeaturesEXTBuilder;
+}
+
+/// A builder for a [PhysicalDeviceGlobalPriorityQueryFeaturesEXT](struct.PhysicalDeviceGlobalPriorityQueryFeaturesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceGlobalPriorityQueryFeaturesEXTBuilder {
+    value: PhysicalDeviceGlobalPriorityQueryFeaturesEXT,
+}
+
+impl PhysicalDeviceGlobalPriorityQueryFeaturesEXTBuilder {
+    #[inline]
+    pub fn global_priority_query(mut self, global_priority_query: bool) -> Self {
+        self.value.global_priority_query = global_priority_query as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceGlobalPriorityQueryFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceGlobalPriorityQueryFeaturesEXTBuilder {
+    type Target = PhysicalDeviceGlobalPriorityQueryFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceGlobalPriorityQueryFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceGlobalPriorityQueryFeaturesEXTBuilder {
+    type Target = PhysicalDeviceGlobalPriorityQueryFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -32182,6 +32246,68 @@ impl ops::DerefMut for PhysicalDeviceShaderSubgroupExtendedTypesFeaturesBuilder 
 
 unsafe impl Cast for PhysicalDeviceShaderSubgroupExtendedTypesFeaturesBuilder {
     type Target = PhysicalDeviceShaderSubgroupExtendedTypesFeatures;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {
+    type Target = PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {
+    type Builder = PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR](struct.PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHRBuilder {
+    value: PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR,
+}
+
+impl PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHRBuilder {
+    #[inline]
+    pub fn shader_subgroup_uniform_control_flow(
+        mut self,
+        shader_subgroup_uniform_control_flow: bool,
+    ) -> Self {
+        self.value.shader_subgroup_uniform_control_flow =
+            shader_subgroup_uniform_control_flow as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -39920,6 +40046,73 @@ unsafe impl Cast for QueueFamilyCheckpointPropertiesNVBuilder {
     }
 }
 
+unsafe impl Cast for QueueFamilyGlobalPriorityPropertiesEXT {
+    type Target = QueueFamilyGlobalPriorityPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for QueueFamilyGlobalPriorityPropertiesEXT {
+    type Builder = QueueFamilyGlobalPriorityPropertiesEXTBuilder;
+}
+
+/// A builder for a [QueueFamilyGlobalPriorityPropertiesEXT](struct.QueueFamilyGlobalPriorityPropertiesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct QueueFamilyGlobalPriorityPropertiesEXTBuilder {
+    value: QueueFamilyGlobalPriorityPropertiesEXT,
+}
+
+impl QueueFamilyGlobalPriorityPropertiesEXTBuilder {
+    #[inline]
+    pub fn priority_count(mut self, priority_count: u32) -> Self {
+        self.value.priority_count = priority_count;
+        self
+    }
+
+    #[inline]
+    pub fn priorities(
+        mut self,
+        priorities: [QueueGlobalPriorityEXT; MAX_GLOBAL_PRIORITY_SIZE_EXT],
+    ) -> Self {
+        self.value.priorities = priorities;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> QueueFamilyGlobalPriorityPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for QueueFamilyGlobalPriorityPropertiesEXTBuilder {
+    type Target = QueueFamilyGlobalPriorityPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for QueueFamilyGlobalPriorityPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for QueueFamilyGlobalPriorityPropertiesEXTBuilder {
+    type Target = QueueFamilyGlobalPriorityPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for QueueFamilyProperties {
     type Target = QueueFamilyProperties;
 
@@ -40003,6 +40196,7 @@ unsafe impl Cast for QueueFamilyPropertiesBuilder {
 pub unsafe trait ExtendsQueueFamilyProperties2 {}
 unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyCheckpointProperties2NV {}
 unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyCheckpointPropertiesNV {}
+unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyGlobalPriorityPropertiesEXT {}
 
 unsafe impl Cast for QueueFamilyProperties2 {
     type Target = QueueFamilyProperties2;

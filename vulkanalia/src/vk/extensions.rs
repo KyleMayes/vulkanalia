@@ -1618,6 +1618,15 @@ pub trait ExtGlobalPriorityExtension: DeviceV1_0 {
 
 impl ExtGlobalPriorityExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_global_priority_query.html>
+pub trait ExtGlobalPriorityQueryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_GLOBAL_PRIORITY_QUERY_EXTENSION;
+}
+
+impl ExtGlobalPriorityQueryExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_hdr_metadata.html>
 pub trait ExtHdrMetadataExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -5772,6 +5781,15 @@ pub trait KhrShaderSubgroupExtendedTypesExtension: DeviceV1_0 {
 }
 
 impl KhrShaderSubgroupExtendedTypesExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_subgroup_uniform_control_flow.html>
+pub trait KhrShaderSubgroupUniformControlFlowExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_EXTENSION;
+}
+
+impl KhrShaderSubgroupUniformControlFlowExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_terminate_invocation.html>
 pub trait KhrShaderTerminateInvocationExtension: DeviceV1_0 {

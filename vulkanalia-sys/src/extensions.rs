@@ -941,6 +941,25 @@ pub const EXT_GLOBAL_PRIORITY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_global_priority_query.html>
+#[allow(deprecated)]
+pub const EXT_GLOBAL_PRIORITY_QUERY_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_global_priority_query"),
+    number: 389,
+    type_: "device",
+    author: "EXT",
+    contact: "Yiwei Zhang @zhangyiwei",
+    platform: None,
+    required_extensions: Some(&[
+        EXT_GLOBAL_PRIORITY_EXTENSION.name,
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_hdr_metadata.html>
 #[allow(deprecated)]
 pub const EXT_HDR_METADATA_EXTENSION: Extension = Extension {
@@ -2856,6 +2875,22 @@ pub const KHR_SHADER_SUBGROUP_EXTENDED_TYPES_EXTENSION: Extension = Extension {
     deprecated_by: None,
     obsoleted_by: None,
     promoted_to: Some("VK_VERSION_1_2"),
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_subgroup_uniform_control_flow.html>
+#[allow(deprecated)]
+pub const KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_KHR_shader_subgroup_uniform_control_flow"),
+    number: 324,
+    type_: "device",
+    author: "KHR",
+    contact: "Alan Baker @alan-baker",
+    platform: None,
+    required_extensions: None,
+    required_version: Some("1.1"),
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_terminate_invocation.html>

@@ -4693,6 +4693,8 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR: Self = Self(1000314007);
     pub const QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV: Self = Self(1000314008);
     pub const CHECKPOINT_DATA_2_NV: Self = Self(1000314009);
+    pub const PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR: Self =
+        Self(1000323000);
     pub const PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR: Self =
         Self(1000325000);
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV: Self = Self(1000326000);
@@ -4732,6 +4734,8 @@ impl StructureType {
     pub const SCREEN_SURFACE_CREATE_INFO_QNX: Self = Self(1000378000);
     pub const PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT: Self = Self(1000381000);
     pub const PIPELINE_COLOR_WRITE_CREATE_INFO_EXT: Self = Self(1000381001);
+    pub const PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT: Self = Self(1000388000);
+    pub const QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT: Self = Self(1000388001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5275,6 +5279,10 @@ impl fmt::Debug for StructureType {
             1000314007 => write!(f, "PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR"),
             1000314008 => write!(f, "QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV"),
             1000314009 => write!(f, "CHECKPOINT_DATA_2_NV"),
+            1000323000 => write!(
+                f,
+                "PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR"
+            ),
             1000325000 => write!(
                 f,
                 "PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR"
@@ -5324,6 +5332,8 @@ impl fmt::Debug for StructureType {
             1000378000 => write!(f, "SCREEN_SURFACE_CREATE_INFO_QNX"),
             1000381000 => write!(f, "PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT"),
             1000381001 => write!(f, "PIPELINE_COLOR_WRITE_CREATE_INFO_EXT"),
+            1000388000 => write!(f, "PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT"),
+            1000388001 => write!(f, "QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -5542,6 +5552,7 @@ impl ValidationFeatureDisableEXT {
     pub const OBJECT_LIFETIMES: Self = Self(4);
     pub const CORE_CHECKS: Self = Self(5);
     pub const UNIQUE_HANDLES: Self = Self(6);
+    pub const SHADER_VALIDATION_CACHE: Self = Self(7);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5566,6 +5577,7 @@ impl fmt::Debug for ValidationFeatureDisableEXT {
             4 => write!(f, "OBJECT_LIFETIMES"),
             5 => write!(f, "CORE_CHECKS"),
             6 => write!(f, "UNIQUE_HANDLES"),
+            7 => write!(f, "SHADER_VALIDATION_CACHE"),
             _ => self.0.fmt(f),
         }
     }
