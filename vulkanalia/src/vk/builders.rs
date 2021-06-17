@@ -24194,6 +24194,94 @@ unsafe impl Cast for PhysicalDeviceDriverPropertiesBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceDrmPropertiesEXT {
+    type Target = PhysicalDeviceDrmPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceDrmPropertiesEXT {
+    type Builder = PhysicalDeviceDrmPropertiesEXTBuilder;
+}
+
+/// A builder for a [PhysicalDeviceDrmPropertiesEXT](struct.PhysicalDeviceDrmPropertiesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceDrmPropertiesEXTBuilder {
+    value: PhysicalDeviceDrmPropertiesEXT,
+}
+
+impl PhysicalDeviceDrmPropertiesEXTBuilder {
+    #[inline]
+    pub fn has_primary(mut self, has_primary: bool) -> Self {
+        self.value.has_primary = has_primary as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn has_render(mut self, has_render: bool) -> Self {
+        self.value.has_render = has_render as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn primary_major(mut self, primary_major: i64) -> Self {
+        self.value.primary_major = primary_major;
+        self
+    }
+
+    #[inline]
+    pub fn primary_minor(mut self, primary_minor: i64) -> Self {
+        self.value.primary_minor = primary_minor;
+        self
+    }
+
+    #[inline]
+    pub fn render_major(mut self, render_major: i64) -> Self {
+        self.value.render_major = render_major;
+        self
+    }
+
+    #[inline]
+    pub fn render_minor(mut self, render_minor: i64) -> Self {
+        self.value.render_minor = render_minor;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceDrmPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceDrmPropertiesEXTBuilder {
+    type Target = PhysicalDeviceDrmPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceDrmPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDrmPropertiesEXTBuilder {
+    type Target = PhysicalDeviceDrmPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceExclusiveScissorFeaturesNV {
     type Target = PhysicalDeviceExclusiveScissorFeaturesNV;
 
@@ -29902,6 +29990,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDescriptorIndexin
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDeviceGeneratedCommandsPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDiscardRectanglePropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDriverProperties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDrmPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceExternalMemoryHostPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFloatControlsProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentDensityMap2PropertiesEXT {}

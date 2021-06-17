@@ -7137,6 +7137,36 @@ impl Default for PhysicalDeviceDriverProperties {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceDrmPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDrmPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub has_primary: Bool32,
+    pub has_render: Bool32,
+    pub primary_major: i64,
+    pub primary_minor: i64,
+    pub render_major: i64,
+    pub render_minor: i64,
+}
+
+impl Default for PhysicalDeviceDrmPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DRM_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            has_primary: Bool32::default(),
+            has_render: Bool32::default(),
+            primary_major: i64::default(),
+            primary_minor: i64::default(),
+            render_major: i64::default(),
+            render_minor: i64::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceExclusiveScissorFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]

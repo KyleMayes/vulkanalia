@@ -18,6 +18,13 @@ use std::os::raw::{c_char, c_int, c_void};
 
 use crate::*;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireDrmDisplayEXT.html>
+pub type PFN_vkAcquireDrmDisplayEXT = unsafe extern "system" fn(
+    _physical_device: PhysicalDevice,
+    _drm_fd: i32,
+    _display: DisplayKHR,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireFullScreenExclusiveModeEXT.html>
 pub type PFN_vkAcquireFullScreenExclusiveModeEXT =
     unsafe extern "system" fn(_device: Device, _swapchain: SwapchainKHR) -> Result;
@@ -2227,6 +2234,14 @@ pub type PFN_vkGetDisplayPlaneSupportedDisplaysKHR = unsafe extern "system" fn(
     _plane_index: u32,
     _display_count: *mut u32,
     _displays: *mut DisplayKHR,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDrmDisplayEXT.html>
+pub type PFN_vkGetDrmDisplayEXT = unsafe extern "system" fn(
+    _physical_device: PhysicalDevice,
+    _drm_fd: i32,
+    _connector_id: u32,
+    _display: *mut DisplayKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetEventStatus.html>
