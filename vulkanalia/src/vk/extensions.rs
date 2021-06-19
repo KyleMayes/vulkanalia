@@ -412,6 +412,56 @@ pub trait Ext4444FormatsExtension: DeviceV1_0 {
 
 impl Ext4444FormatsExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_acquire_drm_display.html>
+pub trait ExtAcquireDrmDisplayExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_ACQUIRE_DRM_DISPLAY_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkAcquireDrmDisplayEXT.html>
+    #[inline]
+    unsafe fn acquire_drm_display_ext(
+        &self,
+        physical_device: PhysicalDevice,
+        drm_fd: i32,
+        display: DisplayKHR,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().acquire_drm_display_ext)(physical_device, drm_fd, display);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDrmDisplayEXT.html>
+    #[inline]
+    unsafe fn get_drm_display_ext(
+        &self,
+        physical_device: PhysicalDevice,
+        drm_fd: i32,
+        connector_id: u32,
+    ) -> crate::VkResult<DisplayKHR> {
+        let mut display = MaybeUninit::<DisplayKHR>::uninit();
+
+        let __result = (self.commands().get_drm_display_ext)(
+            physical_device,
+            drm_fd,
+            connector_id,
+            display.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(display.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl ExtAcquireDrmDisplayExtension for crate::Instance {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_acquire_xlib_display.html>
 pub trait ExtAcquireXlibDisplayExtension: InstanceV1_0 {
     /// The metadata for this extension.
@@ -1847,6 +1897,15 @@ pub trait ExtPciBusInfoExtension: DeviceV1_0 {
 }
 
 impl ExtPciBusInfoExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_physical_device_drm.html>
+pub trait ExtPhysicalDeviceDrmExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_PHYSICAL_DEVICE_DRM_EXTENSION;
+}
+
+impl ExtPhysicalDeviceDrmExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pipeline_creation_cache_control.html>
 pub trait ExtPipelineCreationCacheControlExtension: DeviceV1_0 {

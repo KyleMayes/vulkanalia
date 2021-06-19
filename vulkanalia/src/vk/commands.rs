@@ -6429,6 +6429,7 @@ impl EntryCommands {
 /// Loaded Vulkan instance commands.
 #[derive(Copy, Clone)]
 pub struct InstanceCommands {
+    pub acquire_drm_display_ext: PFN_vkAcquireDrmDisplayEXT,
     pub acquire_xlib_display_ext: PFN_vkAcquireXlibDisplayEXT,
     pub cmd_begin_debug_utils_label_ext: PFN_vkCmdBeginDebugUtilsLabelEXT,
     pub cmd_end_debug_utils_label_ext: PFN_vkCmdEndDebugUtilsLabelEXT,
@@ -6467,6 +6468,7 @@ pub struct InstanceCommands {
     pub get_display_plane_capabilities2_khr: PFN_vkGetDisplayPlaneCapabilities2KHR,
     pub get_display_plane_capabilities_khr: PFN_vkGetDisplayPlaneCapabilitiesKHR,
     pub get_display_plane_supported_displays_khr: PFN_vkGetDisplayPlaneSupportedDisplaysKHR,
+    pub get_drm_display_ext: PFN_vkGetDrmDisplayEXT,
     pub get_physical_device_direct_fb_presentation_support_ext:
         PFN_vkGetPhysicalDeviceDirectFBPresentationSupportEXT,
     pub get_physical_device_display_plane_properties2_khr:
@@ -6551,6 +6553,21 @@ impl InstanceCommands {
         mut loader: impl FnMut(*const c_char) -> Option<unsafe extern "system" fn()>,
     ) -> Self {
         Self {
+            acquire_drm_display_ext: {
+                let value = loader(b"vkAcquireDrmDisplayEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _drm_fd: i32,
+                        _display: DisplayKHR,
+                    ) -> Result {
+                        panic!("could not load vkAcquireDrmDisplayEXT")
+                    }
+                    fallback
+                }
+            },
             acquire_xlib_display_ext: {
                 let value = loader(b"vkAcquireXlibDisplayEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -7140,6 +7157,22 @@ impl InstanceCommands {
                         _displays: *mut DisplayKHR,
                     ) -> Result {
                         panic!("could not load vkGetDisplayPlaneSupportedDisplaysKHR")
+                    }
+                    fallback
+                }
+            },
+            get_drm_display_ext: {
+                let value = loader(b"vkGetDrmDisplayEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _drm_fd: i32,
+                        _connector_id: u32,
+                        _display: *mut DisplayKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetDrmDisplayEXT")
                     }
                     fallback
                 }

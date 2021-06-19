@@ -432,6 +432,22 @@ pub const EXT_4444_FORMATS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_acquire_drm_display.html>
+#[allow(deprecated)]
+pub const EXT_ACQUIRE_DRM_DISPLAY_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_acquire_drm_display"),
+    number: 286,
+    type_: "instance",
+    author: "EXT",
+    contact: "Drew DeVault sir@cmpwn.com",
+    platform: None,
+    required_extensions: Some(&[EXT_DIRECT_MODE_DISPLAY_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_acquire_xlib_display.html>
 #[allow(deprecated)]
 pub const EXT_ACQUIRE_XLIB_DISPLAY_EXTENSION: Extension = Extension {
@@ -1152,6 +1168,22 @@ pub const EXT_PCI_BUS_INFO_EXTENSION: Extension = Extension {
     type_: "device",
     author: "EXT",
     contact: "Matthaeus G. Chajdas @anteru",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_physical_device_drm.html>
+#[allow(deprecated)]
+pub const EXT_PHYSICAL_DEVICE_DRM_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_physical_device_drm"),
+    number: 354,
+    type_: "device",
+    author: "EXT",
+    contact: "Simon Ser @emersion",
     platform: None,
     required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
     required_version: None,

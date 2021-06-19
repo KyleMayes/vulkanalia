@@ -2,6 +2,7 @@
 
 ### Bindings Updates
 - [June 7, 2021 Vulkan 1.2.180 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/b4e8cd820b2487bc892b391fb26b49501473a6a6)
+- [Add specification for VK_EXT_physical_device_drm (#1356)](https://github.com/KhronosGroup/Vulkan-Docs/commit/7e30d02e5de56191c6f964d0d8a267d84e62306e)
 
 ## [0.9.0] - 2021-06-01
 
