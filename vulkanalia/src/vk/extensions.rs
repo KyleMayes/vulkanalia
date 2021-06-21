@@ -1889,6 +1889,57 @@ pub trait ExtMetalSurfaceExtension: InstanceV1_0 {
 
 impl ExtMetalSurfaceExtension for crate::Instance {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_multi_draw.html>
+pub trait ExtMultiDrawExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_MULTI_DRAW_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMultiEXT.html>
+    #[inline]
+    unsafe fn cmd_draw_multi_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        vertex_info: &[impl Cast<Target = MultiDrawInfoEXT>],
+        instance_count: u32,
+        first_instance: u32,
+        stride: u32,
+    ) {
+        let __result = (self.commands().cmd_draw_multi_ext)(
+            command_buffer,
+            vertex_info.len() as u32,
+            vertex_info.as_ptr().cast(),
+            instance_count,
+            first_instance,
+            stride,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMultiIndexedEXT.html>
+    #[inline]
+    unsafe fn cmd_draw_multi_indexed_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        index_info: &[impl Cast<Target = MultiDrawIndexedInfoEXT>],
+        instance_count: u32,
+        first_instance: u32,
+        stride: u32,
+        vertex_offset: Option<&i32>,
+    ) {
+        let __result = (self.commands().cmd_draw_multi_indexed_ext)(
+            command_buffer,
+            index_info.len() as u32,
+            index_info.as_ptr().cast(),
+            instance_count,
+            first_instance,
+            stride,
+            vertex_offset.map_or(ptr::null(), |v| v),
+        );
+    }
+}
+
+impl ExtMultiDrawExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pci_bus_info.html>
 pub trait ExtPciBusInfoExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -2822,6 +2873,43 @@ pub trait GoogleUserTypeExtension: DeviceV1_0 {
 }
 
 impl GoogleUserTypeExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_HUAWEI_subpass_shading.html>
+pub trait HuaweiSubpassShadingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = HUAWEI_SUBPASS_SHADING_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSubpassShadingHUAWEI.html>
+    #[inline]
+    unsafe fn cmd_subpass_shading_huawei(&self, command_buffer: CommandBuffer) {
+        let __result = (self.commands().cmd_subpass_shading_huawei)(command_buffer);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSubpassShadingMaxWorkgroupSizeHUAWEI.html>
+    #[inline]
+    unsafe fn get_subpass_shading_max_workgroup_size_huawei(
+        &self,
+        renderpass: RenderPass,
+    ) -> crate::VkResult<Extent2D> {
+        let mut max_workgroup_size = MaybeUninit::<Extent2D>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_subpass_shading_max_workgroup_size_huawei)(
+            renderpass,
+            max_workgroup_size.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(max_workgroup_size.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl HuaweiSubpassShadingExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_IMG_filter_cubic.html>
 pub trait ImgFilterCubicExtension: DeviceV1_0 {
@@ -7846,6 +7934,15 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 }
 
 impl NvRayTracingExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_ray_tracing_motion_blur.html>
+pub trait NvRayTracingMotionBlurExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_RAY_TRACING_MOTION_BLUR_EXTENSION;
+}
+
+impl NvRayTracingMotionBlurExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_representative_fragment_test.html>
 pub trait NvRepresentativeFragmentTestExtension: DeviceV1_0 {

@@ -1160,6 +1160,22 @@ pub const EXT_METAL_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_multi_draw.html>
+#[allow(deprecated)]
+pub const EXT_MULTI_DRAW_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_multi_draw"),
+    number: 393,
+    type_: "device",
+    author: "EXT",
+    contact: "Mike Blumenkrantz @zmike",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pci_bus_info.html>
 #[allow(deprecated)]
 pub const EXT_PCI_BUS_INFO_EXTENSION: Extension = Extension {
@@ -1838,6 +1854,25 @@ pub const GOOGLE_USER_TYPE_EXTENSION: Extension = Extension {
     contact: "Kaye Mason @chaleur",
     platform: None,
     required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_HUAWEI_subpass_shading.html>
+#[allow(deprecated)]
+pub const HUAWEI_SUBPASS_SHADING_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_HUAWEI_subpass_shading"),
+    number: 370,
+    type_: "device",
+    author: "HUAWEI",
+    contact: "Hueilong Wang @wyvernathuawei",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_CREATE_RENDERPASS2_EXTENSION.name,
+        KHR_SYNCHRONIZATION2_EXTENSION.name,
+    ]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
@@ -3740,6 +3775,22 @@ pub const NV_RAY_TRACING_EXTENSION: Extension = Extension {
         KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
         KHR_GET_MEMORY_REQUIREMENTS2_EXTENSION.name,
     ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_ray_tracing_motion_blur.html>
+#[allow(deprecated)]
+pub const NV_RAY_TRACING_MOTION_BLUR_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_NV_ray_tracing_motion_blur"),
+    number: 328,
+    type_: "device",
+    author: "NV",
+    contact: "Eric Werness",
+    platform: None,
+    required_extensions: Some(&[KHR_RAY_TRACING_PIPELINE_EXTENSION.name]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,

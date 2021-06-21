@@ -242,6 +242,26 @@ impl Default for AccelerationStructureGeometryKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureGeometryMotionTrianglesDataNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+pub struct AccelerationStructureGeometryMotionTrianglesDataNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub vertex_data: DeviceOrHostAddressConstKHR,
+}
+
+impl Default for AccelerationStructureGeometryMotionTrianglesDataNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV,
+            next: ptr::null(),
+            vertex_data: DeviceOrHostAddressConstKHR::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureGeometryTrianglesDataKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -314,6 +334,19 @@ pub struct AccelerationStructureInstanceKHR {
     pub acceleration_structure_reference: u64,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMatrixMotionInstanceNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, PartialEq)]
+pub struct AccelerationStructureMatrixMotionInstanceNV {
+    pub transform_t0: TransformMatrixKHR,
+    pub transform_t1: TransformMatrixKHR,
+    pub instance_custom_index: u32,
+    pub mask: u32,
+    pub instance_shader_binding_table_record_offset: u32,
+    pub flags: GeometryInstanceFlagsKHR,
+    pub acceleration_structure_reference: u64,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMemoryRequirementsInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -334,6 +367,50 @@ impl Default for AccelerationStructureMemoryRequirementsInfoNV {
             acceleration_structure: AccelerationStructureNV::default(),
         }
     }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMotionInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct AccelerationStructureMotionInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub max_instances: u32,
+    pub flags: AccelerationStructureMotionInfoFlagsNV,
+}
+
+impl Default for AccelerationStructureMotionInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::ACCELERATION_STRUCTURE_MOTION_INFO_NV,
+            next: ptr::null(),
+            max_instances: u32::default(),
+            flags: AccelerationStructureMotionInfoFlagsNV::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMotionInstanceNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug)]
+pub struct AccelerationStructureMotionInstanceNV {
+    pub type_: AccelerationStructureMotionInstanceTypeNV,
+    pub flags: AccelerationStructureMotionInstanceFlagsNV,
+    pub data: AccelerationStructureMotionInstanceDataNV,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureSRTMotionInstanceNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, PartialEq)]
+pub struct AccelerationStructureSRTMotionInstanceNV {
+    pub transform_t0: SRTDataNV,
+    pub transform_t1: SRTDataNV,
+    pub instance_custom_index: u32,
+    pub mask: u32,
+    pub instance_shader_binding_table_record_offset: u32,
+    pub flags: GeometryInstanceFlagsKHR,
+    pub acceleration_structure_reference: u64,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureVersionInfoKHR.html>
@@ -6059,6 +6136,23 @@ impl Default for MetalSurfaceCreateInfoEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMultiDrawIndexedInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct MultiDrawIndexedInfoEXT {
+    pub first_index: u32,
+    pub index_count: u32,
+    pub vertex_offset: i32,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMultiDrawInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct MultiDrawInfoEXT {
+    pub first_vertex: u32,
+    pub vertex_count: u32,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMultisamplePropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8366,6 +8460,46 @@ impl Default for PhysicalDeviceMeshShaderPropertiesNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMultiDrawFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMultiDrawFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub multi_draw: Bool32,
+}
+
+impl Default for PhysicalDeviceMultiDrawFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT,
+            next: ptr::null_mut(),
+            multi_draw: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMultiDrawPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMultiDrawPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_multi_draw_count: u32,
+}
+
+impl Default for PhysicalDeviceMultiDrawPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            max_multi_draw_count: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMultiviewFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8840,6 +8974,28 @@ impl Default for PhysicalDeviceRayQueryFeaturesKHR {
             s_type: StructureType::PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR,
             next: ptr::null_mut(),
             ray_query: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceRayTracingMotionBlurFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceRayTracingMotionBlurFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub ray_tracing_motion_blur: Bool32,
+    pub ray_tracing_motion_blur_pipeline_trace_rays_indirect: Bool32,
+}
+
+impl Default for PhysicalDeviceRayTracingMotionBlurFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV,
+            next: ptr::null(),
+            ray_tracing_motion_blur: Bool32::default(),
+            ray_tracing_motion_blur_pipeline_trace_rays_indirect: Bool32::default(),
         }
     }
 }
@@ -9652,6 +9808,46 @@ impl Default for PhysicalDeviceSubgroupSizeControlPropertiesEXT {
             max_subgroup_size: u32::default(),
             max_compute_workgroup_subgroups: u32::default(),
             required_subgroup_size_stages: ShaderStageFlags::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceSubpassShadingFeaturesHUAWEI {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub subpass_shading: Bool32,
+}
+
+impl Default for PhysicalDeviceSubpassShadingFeaturesHUAWEI {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI,
+            next: ptr::null_mut(),
+            subpass_shading: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceSubpassShadingPropertiesHUAWEI {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_subpass_shading_workgroup_size_aspect_ratio: u32,
+}
+
+impl Default for PhysicalDeviceSubpassShadingPropertiesHUAWEI {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI,
+            next: ptr::null_mut(),
+            max_subpass_shading_workgroup_size_aspect_ratio: u32::default(),
         }
     }
 }
@@ -12311,6 +12507,28 @@ impl Default for ResolveImageInfo2KHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSRTDataNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, PartialEq)]
+pub struct SRTDataNV {
+    pub sx: f32,
+    pub a: f32,
+    pub b: f32,
+    pub pvx: f32,
+    pub sy: f32,
+    pub c: f32,
+    pub pvy: f32,
+    pub sz: f32,
+    pub pvz: f32,
+    pub qx: f32,
+    pub qy: f32,
+    pub qz: f32,
+    pub qw: f32,
+    pub tx: f32,
+    pub ty: f32,
+    pub tz: f32,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSampleLocationEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
@@ -13301,6 +13519,28 @@ impl Default for SubpassEndInfo {
 pub struct SubpassSampleLocationsEXT {
     pub subpass_index: u32,
     pub sample_locations_info: SampleLocationsInfoEXT,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubpassShadingPipelineCreateInfoHUAWEI.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SubpassShadingPipelineCreateInfoHUAWEI {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub render_pass: RenderPass,
+    pub subpass: u32,
+}
+
+impl Default for SubpassShadingPipelineCreateInfoHUAWEI {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SUBPASSS_SHADING_PIPELINE_CREATE_INFO_HUAWEI,
+            next: ptr::null_mut(),
+            render_pass: RenderPass::default(),
+            subpass: u32::default(),
+        }
+    }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubresourceLayout.html>

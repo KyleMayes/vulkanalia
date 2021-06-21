@@ -101,6 +101,8 @@ pub struct DeviceCommands {
     pub cmd_draw_mesh_tasks_indirect_count_nv: PFN_vkCmdDrawMeshTasksIndirectCountNV,
     pub cmd_draw_mesh_tasks_indirect_nv: PFN_vkCmdDrawMeshTasksIndirectNV,
     pub cmd_draw_mesh_tasks_nv: PFN_vkCmdDrawMeshTasksNV,
+    pub cmd_draw_multi_ext: PFN_vkCmdDrawMultiEXT,
+    pub cmd_draw_multi_indexed_ext: PFN_vkCmdDrawMultiIndexedEXT,
     pub cmd_end_conditional_rendering_ext: PFN_vkCmdEndConditionalRenderingEXT,
     pub cmd_end_query: PFN_vkCmdEndQuery,
     pub cmd_end_query_indexed_ext: PFN_vkCmdEndQueryIndexedEXT,
@@ -170,6 +172,7 @@ pub struct DeviceCommands {
     pub cmd_set_viewport_shading_rate_palette_nv: PFN_vkCmdSetViewportShadingRatePaletteNV,
     pub cmd_set_viewport_w_scaling_nv: PFN_vkCmdSetViewportWScalingNV,
     pub cmd_set_viewport_with_count_ext: PFN_vkCmdSetViewportWithCountEXT,
+    pub cmd_subpass_shading_huawei: PFN_vkCmdSubpassShadingHUAWEI,
     pub cmd_trace_rays_indirect_khr: PFN_vkCmdTraceRaysIndirectKHR,
     pub cmd_trace_rays_khr: PFN_vkCmdTraceRaysKHR,
     pub cmd_trace_rays_nv: PFN_vkCmdTraceRaysNV,
@@ -367,6 +370,8 @@ pub struct DeviceCommands {
     pub get_semaphore_win32_handle_khr: PFN_vkGetSemaphoreWin32HandleKHR,
     pub get_semaphore_zircon_handle_fuchsia: PFN_vkGetSemaphoreZirconHandleFUCHSIA,
     pub get_shader_info_amd: PFN_vkGetShaderInfoAMD,
+    pub get_subpass_shading_max_workgroup_size_huawei:
+        PFN_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI,
     pub get_swapchain_counter_ext: PFN_vkGetSwapchainCounterEXT,
     pub get_swapchain_images_khr: PFN_vkGetSwapchainImagesKHR,
     pub get_swapchain_status_khr: PFN_vkGetSwapchainStatusKHR,
@@ -1680,6 +1685,43 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_draw_multi_ext: {
+                let value = loader(b"vkCmdDrawMultiEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _draw_count: u32,
+                        _vertex_info: *const MultiDrawInfoEXT,
+                        _instance_count: u32,
+                        _first_instance: u32,
+                        _stride: u32,
+                    ) {
+                        panic!("could not load vkCmdDrawMultiEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_draw_multi_indexed_ext: {
+                let value = loader(b"vkCmdDrawMultiIndexedEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _draw_count: u32,
+                        _index_info: *const MultiDrawIndexedInfoEXT,
+                        _instance_count: u32,
+                        _first_instance: u32,
+                        _stride: u32,
+                        _vertex_offset: *const i32,
+                    ) {
+                        panic!("could not load vkCmdDrawMultiIndexedEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_end_conditional_rendering_ext: {
                 let value = loader(b"vkCmdEndConditionalRenderingEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2712,6 +2754,17 @@ impl DeviceCommands {
                         _viewports: *const Viewport,
                     ) {
                         panic!("could not load vkCmdSetViewportWithCountEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_subpass_shading_huawei: {
+                let value = loader(b"vkCmdSubpassShadingHUAWEI\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) {
+                        panic!("could not load vkCmdSubpassShadingHUAWEI")
                     }
                     fallback
                 }
@@ -5599,6 +5652,24 @@ impl DeviceCommands {
                         _info: *mut c_void,
                     ) -> Result {
                         panic!("could not load vkGetShaderInfoAMD")
+                    }
+                    fallback
+                }
+            },
+            get_subpass_shading_max_workgroup_size_huawei: {
+                let value = loader(
+                    b"vkGetSubpassShadingMaxWorkgroupSizeHUAWEI\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _renderpass: RenderPass,
+                        _max_workgroup_size: *mut Extent2D,
+                    ) -> Result {
+                        panic!("could not load vkGetSubpassShadingMaxWorkgroupSizeHUAWEI")
                     }
                     fallback
                 }

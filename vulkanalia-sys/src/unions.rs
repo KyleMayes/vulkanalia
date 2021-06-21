@@ -42,6 +42,28 @@ impl fmt::Debug for AccelerationStructureGeometryDataKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMotionInstanceDataNV.html>
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union AccelerationStructureMotionInstanceDataNV {
+    pub static_instance: AccelerationStructureInstanceKHR,
+    pub matrix_motion_instance: AccelerationStructureMatrixMotionInstanceNV,
+    pub srt_motion_instance: AccelerationStructureSRTMotionInstanceNV,
+}
+
+impl Default for AccelerationStructureMotionInstanceDataNV {
+    #[inline]
+    fn default() -> Self {
+        unsafe { MaybeUninit::zeroed().assume_init() }
+    }
+}
+
+impl fmt::Debug for AccelerationStructureMotionInstanceDataNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "AccelerationStructureMotionInstanceDataNV")
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkClearColorValue.html>
 #[repr(C)]
 #[derive(Copy, Clone)]

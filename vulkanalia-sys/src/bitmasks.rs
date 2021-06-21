@@ -24,6 +24,31 @@ bitflags! {
     #[derive(Default)]
     pub struct AccelerationStructureCreateFlagsKHR: Flags {
         const DEVICE_ADDRESS_CAPTURE_REPLAY = 1;
+        const MOTION_NV = 1 << 2;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMotionInfoFlagsNV.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct AccelerationStructureMotionInfoFlagsNV: Flags {
+        /// Workaround for `bitflags!` not supporting empty bitflags.
+        ///
+        /// <https://github.com/bitflags/bitflags/issues/179>
+        const EMPTY = 0;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMotionInstanceFlagsNV.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct AccelerationStructureMotionInstanceFlagsNV: Flags {
+        /// Workaround for `bitflags!` not supporting empty bitflags.
+        ///
+        /// <https://github.com/bitflags/bitflags/issues/179>
+        const EMPTY = 0;
     }
 }
 
@@ -207,6 +232,7 @@ bitflags! {
         const PREFER_FAST_TRACE = 1 << 2;
         const PREFER_FAST_BUILD = 1 << 3;
         const LOW_MEMORY = 1 << 4;
+        const MOTION_NV = 1 << 5;
     }
 }
 
@@ -1059,6 +1085,7 @@ bitflags! {
         const RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_KHR = 1 << 17;
         const INDIRECT_BINDABLE_NV = 1 << 18;
         const RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_KHR = 1 << 19;
+        const RAY_TRACING_ALLOW_MOTION_NV = 1 << 20;
     }
 }
 
@@ -1242,6 +1269,7 @@ bitflags! {
         const PIPELINE_STAGE_2_INDEX_INPUT = 1 << 36;
         const PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT = 1 << 37;
         const PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS = 1 << 38;
+        const PIPELINE_STAGE_2_SUBPASS_SHADING_HUAWEI = 1 << 39;
     }
 }
 
@@ -1549,6 +1577,7 @@ bitflags! {
         const MISS_KHR = 1 << 11;
         const INTERSECTION_KHR = 1 << 12;
         const CALLABLE_KHR = 1 << 13;
+        const SUBPASS_SHADING_HUAWEI = 1 << 14;
         const ALL = 1 << 30;
     }
 }
