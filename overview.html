@@ -193,36 +193,16 @@
 <p>This whirlwind tour should give you a basic understanding of the work ahead for drawing the first triangle. A real-world program contains more steps, like allocating vertex buffers, creating uniform buffers and uploading texture images that will be covered in subsequent chapters, but we'll start simple because Vulkan has enough of a steep learning curve as it is. Note that we'll cheat a bit by initially embedding the vertex coordinates in the vertex shader instead of using a vertex buffer. That's because managing vertex buffers requires some familiarity with command buffers first.</p>
 <p>So in short, to draw the first triangle we need to:</p>
 <ul>
-<li>
-<p>Create a <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkInstance.html"><code class="hljs">VkInstance</code></a></p>
-</li>
-<li>
-<p>Select a supported graphics card (<a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html"><code class="hljs">VkPhysicalDevice</code></a>)</p>
-</li>
-<li>
-<p>Create a <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html"><code class="hljs">VkDevice</code></a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueue.html"><code class="hljs">VkQueue</code></a> for drawing and presentation</p>
-</li>
-<li>
-<p>Create a window, window surface and swapchain</p>
-</li>
-<li>
-<p>Wrap the swapchain images into <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageView.html"><code class="hljs">VkImageView</code></a></p>
-</li>
-<li>
-<p>Create a render pass that specifies the render targets and usage</p>
-</li>
-<li>
-<p>Create framebuffers for the render pass</p>
-</li>
-<li>
-<p>Set up the graphics pipeline</p>
-</li>
-<li>
-<p>Allocate and record a command buffer with the draw commands for every possible swapchain image</p>
-</li>
-<li>
-<p>Draw frames by acquiring images, submitting the right draw command buffer and returning the images back to the swapchain</p>
-</li>
+<li>Create a <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkInstance.html"><code class="hljs">VkInstance</code></a></li>
+<li>Select a supported graphics card (<a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html"><code class="hljs">VkPhysicalDevice</code></a>)</li>
+<li>Create a <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html"><code class="hljs">VkDevice</code></a> and <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueue.html"><code class="hljs">VkQueue</code></a> for drawing and presentation</li>
+<li>Create a window, window surface and swapchain</li>
+<li>Wrap the swapchain images into <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageView.html"><code class="hljs">VkImageView</code></a></li>
+<li>Create a render pass that specifies the render targets and usage</li>
+<li>Create framebuffers for the render pass</li>
+<li>Set up the graphics pipeline</li>
+<li>Allocate and record a command buffer with the draw commands for every possible swapchain image</li>
+<li>Draw frames by acquiring images, submitting the right draw command buffer and returning the images back to the swapchain</li>
 </ul>
 <p>It's a lot of steps, but the purpose of each individual step will be made very simple and clear in the upcoming chapters. If you're confused about the relation of a single step compared to the whole program, you should refer back to this chapter.</p>
 <h2><a class="header" href="#api-concepts" id="api-concepts">API concepts</a></h2>

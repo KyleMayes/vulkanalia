@@ -308,12 +308,8 @@ device.unmap_memory(data.vertex_buffer_memory);
 </code></pre>
 <p>Unfortunately the driver may not immediately copy the data into the buffer memory, for example because of caching. It is also possible that writes to the buffer are not visible in the mapped memory yet. There are two ways to deal with that problem:</p>
 <ul>
-<li>
-<p>Use a memory heap that is host coherent, indicated with <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.MemoryPropertyFlags.html#associatedconstant.HOST_COHERENT"><code class="hljs">vk::MemoryPropertyFlags::HOST_COHERENT</code></a></p>
-</li>
-<li>
-<p>Call <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.flush_mapped_memory_ranges"><code class="hljs">flush_mapped_memory_ranges</code></a> after writing to the mapped memory, and call <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.invalidate_mapped_memory_ranges"><code class="hljs">invalidate_mapped_memory_ranges</code></a> before reading from the mapped memory</p>
-</li>
+<li>Use a memory heap that is host coherent, indicated with <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.MemoryPropertyFlags.html#associatedconstant.HOST_COHERENT"><code class="hljs">vk::MemoryPropertyFlags::HOST_COHERENT</code></a></li>
+<li>Call <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.flush_mapped_memory_ranges"><code class="hljs">flush_mapped_memory_ranges</code></a> after writing to the mapped memory, and call <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.invalidate_mapped_memory_ranges"><code class="hljs">invalidate_mapped_memory_ranges</code></a> before reading from the mapped memory</li>
 </ul>
 <p>We went for the first approach, which ensures that the mapped memory always matches the contents of the allocated memory. Do keep in mind that this may lead to slightly worse performance than explicit flushing, but we'll see why that doesn't matter in the next chapter.</p>
 <p>Flushing memory ranges or using a coherent memory heap means that the driver will be aware of our writes to the buffer, but it doesn't mean that they are actually visible on the GPU yet. The transfer of data to the GPU is an operation that happens in the background and the specification simply <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-submission-host-writes">tells us</a> that it is guaranteed to be complete as of the next call to <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_submit"><code class="hljs">queue_submit</code></a>.</p>
