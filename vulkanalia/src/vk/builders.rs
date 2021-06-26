@@ -409,6 +409,10 @@ unsafe impl Cast for AccelerationStructureBuildSizesInfoKHRBuilder {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [AccelerationStructureCreateInfoKHR](struct.AccelerationStructureCreateInfoKHR.html).
+pub unsafe trait ExtendsAccelerationStructureCreateInfoKHR {}
+unsafe impl ExtendsAccelerationStructureCreateInfoKHR for AccelerationStructureMotionInfoNV {}
+
 unsafe impl Cast for AccelerationStructureCreateInfoKHR {
     type Target = AccelerationStructureCreateInfoKHR;
 
@@ -418,18 +422,30 @@ unsafe impl Cast for AccelerationStructureCreateInfoKHR {
     }
 }
 
-impl HasBuilder<'static> for AccelerationStructureCreateInfoKHR {
-    type Builder = AccelerationStructureCreateInfoKHRBuilder;
+impl<'b> HasBuilder<'b> for AccelerationStructureCreateInfoKHR {
+    type Builder = AccelerationStructureCreateInfoKHRBuilder<'b>;
 }
 
 /// A builder for a [AccelerationStructureCreateInfoKHR](struct.AccelerationStructureCreateInfoKHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct AccelerationStructureCreateInfoKHRBuilder {
+pub struct AccelerationStructureCreateInfoKHRBuilder<'b> {
     value: AccelerationStructureCreateInfoKHR,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl AccelerationStructureCreateInfoKHRBuilder {
+impl<'b> AccelerationStructureCreateInfoKHRBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsAccelerationStructureCreateInfoKHR,
+    {
+        let next = (next.as_mut() as *mut T).cast::<AccelerationStructureCreateInfoKHR>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn create_flags(mut self, create_flags: AccelerationStructureCreateFlagsKHR) -> Self {
         self.value.create_flags = create_flags;
@@ -472,7 +488,7 @@ impl AccelerationStructureCreateInfoKHRBuilder {
     }
 }
 
-impl ops::Deref for AccelerationStructureCreateInfoKHRBuilder {
+impl<'b> ops::Deref for AccelerationStructureCreateInfoKHRBuilder<'b> {
     type Target = AccelerationStructureCreateInfoKHR;
 
     #[inline]
@@ -481,14 +497,14 @@ impl ops::Deref for AccelerationStructureCreateInfoKHRBuilder {
     }
 }
 
-impl ops::DerefMut for AccelerationStructureCreateInfoKHRBuilder {
+impl<'b> ops::DerefMut for AccelerationStructureCreateInfoKHRBuilder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for AccelerationStructureCreateInfoKHRBuilder {
+unsafe impl<'b> Cast for AccelerationStructureCreateInfoKHRBuilder<'b> {
     type Target = AccelerationStructureCreateInfoKHR;
 
     #[inline]
@@ -821,6 +837,71 @@ unsafe impl Cast for AccelerationStructureGeometryKHRBuilder {
     }
 }
 
+unsafe impl Cast for AccelerationStructureGeometryMotionTrianglesDataNV {
+    type Target = AccelerationStructureGeometryMotionTrianglesDataNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for AccelerationStructureGeometryMotionTrianglesDataNV {
+    type Builder = AccelerationStructureGeometryMotionTrianglesDataNVBuilder;
+}
+
+/// A builder for a [AccelerationStructureGeometryMotionTrianglesDataNV](struct.AccelerationStructureGeometryMotionTrianglesDataNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AccelerationStructureGeometryMotionTrianglesDataNVBuilder {
+    value: AccelerationStructureGeometryMotionTrianglesDataNV,
+}
+
+impl AccelerationStructureGeometryMotionTrianglesDataNVBuilder {
+    #[inline]
+    pub fn vertex_data(mut self, vertex_data: DeviceOrHostAddressConstKHR) -> Self {
+        self.value.vertex_data = vertex_data;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AccelerationStructureGeometryMotionTrianglesDataNV {
+        self.value
+    }
+}
+
+impl ops::Deref for AccelerationStructureGeometryMotionTrianglesDataNVBuilder {
+    type Target = AccelerationStructureGeometryMotionTrianglesDataNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for AccelerationStructureGeometryMotionTrianglesDataNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for AccelerationStructureGeometryMotionTrianglesDataNVBuilder {
+    type Target = AccelerationStructureGeometryMotionTrianglesDataNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+/// A Vulkan struct that can be used to extend a [AccelerationStructureGeometryTrianglesDataKHR](struct.AccelerationStructureGeometryTrianglesDataKHR.html).
+pub unsafe trait ExtendsAccelerationStructureGeometryTrianglesDataKHR {}
+unsafe impl ExtendsAccelerationStructureGeometryTrianglesDataKHR
+    for AccelerationStructureGeometryMotionTrianglesDataNV
+{
+}
+
 unsafe impl Cast for AccelerationStructureGeometryTrianglesDataKHR {
     type Target = AccelerationStructureGeometryTrianglesDataKHR;
 
@@ -830,18 +911,31 @@ unsafe impl Cast for AccelerationStructureGeometryTrianglesDataKHR {
     }
 }
 
-impl HasBuilder<'static> for AccelerationStructureGeometryTrianglesDataKHR {
-    type Builder = AccelerationStructureGeometryTrianglesDataKHRBuilder;
+impl<'b> HasBuilder<'b> for AccelerationStructureGeometryTrianglesDataKHR {
+    type Builder = AccelerationStructureGeometryTrianglesDataKHRBuilder<'b>;
 }
 
 /// A builder for a [AccelerationStructureGeometryTrianglesDataKHR](struct.AccelerationStructureGeometryTrianglesDataKHR.html).
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct AccelerationStructureGeometryTrianglesDataKHRBuilder {
+pub struct AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
     value: AccelerationStructureGeometryTrianglesDataKHR,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl AccelerationStructureGeometryTrianglesDataKHRBuilder {
+impl<'b> AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsAccelerationStructureGeometryTrianglesDataKHR,
+    {
+        let next =
+            (next.as_mut() as *mut T).cast::<AccelerationStructureGeometryTrianglesDataKHR>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn vertex_format(mut self, vertex_format: Format) -> Self {
         self.value.vertex_format = vertex_format;
@@ -890,7 +984,7 @@ impl AccelerationStructureGeometryTrianglesDataKHRBuilder {
     }
 }
 
-impl ops::Deref for AccelerationStructureGeometryTrianglesDataKHRBuilder {
+impl<'b> ops::Deref for AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
     type Target = AccelerationStructureGeometryTrianglesDataKHR;
 
     #[inline]
@@ -899,14 +993,14 @@ impl ops::Deref for AccelerationStructureGeometryTrianglesDataKHRBuilder {
     }
 }
 
-impl ops::DerefMut for AccelerationStructureGeometryTrianglesDataKHRBuilder {
+impl<'b> ops::DerefMut for AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for AccelerationStructureGeometryTrianglesDataKHRBuilder {
+unsafe impl<'b> Cast for AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
     type Target = AccelerationStructureGeometryTrianglesDataKHR;
 
     #[inline]
@@ -1088,6 +1182,107 @@ unsafe impl Cast for AccelerationStructureInstanceKHRBuilder {
     }
 }
 
+unsafe impl Cast for AccelerationStructureMatrixMotionInstanceNV {
+    type Target = AccelerationStructureMatrixMotionInstanceNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for AccelerationStructureMatrixMotionInstanceNV {
+    type Builder = AccelerationStructureMatrixMotionInstanceNVBuilder;
+}
+
+/// A builder for a [AccelerationStructureMatrixMotionInstanceNV](struct.AccelerationStructureMatrixMotionInstanceNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AccelerationStructureMatrixMotionInstanceNVBuilder {
+    value: AccelerationStructureMatrixMotionInstanceNV,
+}
+
+impl AccelerationStructureMatrixMotionInstanceNVBuilder {
+    #[inline]
+    pub fn transform_t0(mut self, transform_t0: impl Cast<Target = TransformMatrixKHR>) -> Self {
+        self.value.transform_t0 = transform_t0.into();
+        self
+    }
+
+    #[inline]
+    pub fn transform_t1(mut self, transform_t1: impl Cast<Target = TransformMatrixKHR>) -> Self {
+        self.value.transform_t1 = transform_t1.into();
+        self
+    }
+
+    #[inline]
+    pub fn instance_custom_index(mut self, instance_custom_index: u32) -> Self {
+        self.value.instance_custom_index = instance_custom_index;
+        self
+    }
+
+    #[inline]
+    pub fn mask(mut self, mask: u32) -> Self {
+        self.value.mask = mask;
+        self
+    }
+
+    #[inline]
+    pub fn instance_shader_binding_table_record_offset(
+        mut self,
+        instance_shader_binding_table_record_offset: u32,
+    ) -> Self {
+        self.value.instance_shader_binding_table_record_offset =
+            instance_shader_binding_table_record_offset;
+        self
+    }
+
+    #[inline]
+    pub fn flags(mut self, flags: GeometryInstanceFlagsKHR) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn acceleration_structure_reference(
+        mut self,
+        acceleration_structure_reference: u64,
+    ) -> Self {
+        self.value.acceleration_structure_reference = acceleration_structure_reference;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AccelerationStructureMatrixMotionInstanceNV {
+        self.value
+    }
+}
+
+impl ops::Deref for AccelerationStructureMatrixMotionInstanceNVBuilder {
+    type Target = AccelerationStructureMatrixMotionInstanceNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for AccelerationStructureMatrixMotionInstanceNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for AccelerationStructureMatrixMotionInstanceNVBuilder {
+    type Target = AccelerationStructureMatrixMotionInstanceNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for AccelerationStructureMemoryRequirementsInfoNV {
     type Target = AccelerationStructureMemoryRequirementsInfoNV;
 
@@ -1148,6 +1343,241 @@ impl ops::DerefMut for AccelerationStructureMemoryRequirementsInfoNVBuilder {
 
 unsafe impl Cast for AccelerationStructureMemoryRequirementsInfoNVBuilder {
     type Target = AccelerationStructureMemoryRequirementsInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for AccelerationStructureMotionInfoNV {
+    type Target = AccelerationStructureMotionInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for AccelerationStructureMotionInfoNV {
+    type Builder = AccelerationStructureMotionInfoNVBuilder;
+}
+
+/// A builder for a [AccelerationStructureMotionInfoNV](struct.AccelerationStructureMotionInfoNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AccelerationStructureMotionInfoNVBuilder {
+    value: AccelerationStructureMotionInfoNV,
+}
+
+impl AccelerationStructureMotionInfoNVBuilder {
+    #[inline]
+    pub fn max_instances(mut self, max_instances: u32) -> Self {
+        self.value.max_instances = max_instances;
+        self
+    }
+
+    #[inline]
+    pub fn flags(mut self, flags: AccelerationStructureMotionInfoFlagsNV) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AccelerationStructureMotionInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for AccelerationStructureMotionInfoNVBuilder {
+    type Target = AccelerationStructureMotionInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for AccelerationStructureMotionInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for AccelerationStructureMotionInfoNVBuilder {
+    type Target = AccelerationStructureMotionInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for AccelerationStructureMotionInstanceNV {
+    type Target = AccelerationStructureMotionInstanceNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for AccelerationStructureMotionInstanceNV {
+    type Builder = AccelerationStructureMotionInstanceNVBuilder;
+}
+
+/// A builder for a [AccelerationStructureMotionInstanceNV](struct.AccelerationStructureMotionInstanceNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AccelerationStructureMotionInstanceNVBuilder {
+    value: AccelerationStructureMotionInstanceNV,
+}
+
+impl AccelerationStructureMotionInstanceNVBuilder {
+    #[inline]
+    pub fn type_(mut self, type_: AccelerationStructureMotionInstanceTypeNV) -> Self {
+        self.value.type_ = type_;
+        self
+    }
+
+    #[inline]
+    pub fn flags(mut self, flags: AccelerationStructureMotionInstanceFlagsNV) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn data(mut self, data: AccelerationStructureMotionInstanceDataNV) -> Self {
+        self.value.data = data;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AccelerationStructureMotionInstanceNV {
+        self.value
+    }
+}
+
+impl ops::Deref for AccelerationStructureMotionInstanceNVBuilder {
+    type Target = AccelerationStructureMotionInstanceNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for AccelerationStructureMotionInstanceNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for AccelerationStructureMotionInstanceNVBuilder {
+    type Target = AccelerationStructureMotionInstanceNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for AccelerationStructureSRTMotionInstanceNV {
+    type Target = AccelerationStructureSRTMotionInstanceNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for AccelerationStructureSRTMotionInstanceNV {
+    type Builder = AccelerationStructureSRTMotionInstanceNVBuilder;
+}
+
+/// A builder for a [AccelerationStructureSRTMotionInstanceNV](struct.AccelerationStructureSRTMotionInstanceNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AccelerationStructureSRTMotionInstanceNVBuilder {
+    value: AccelerationStructureSRTMotionInstanceNV,
+}
+
+impl AccelerationStructureSRTMotionInstanceNVBuilder {
+    #[inline]
+    pub fn transform_t0(mut self, transform_t0: impl Cast<Target = SRTDataNV>) -> Self {
+        self.value.transform_t0 = transform_t0.into();
+        self
+    }
+
+    #[inline]
+    pub fn transform_t1(mut self, transform_t1: impl Cast<Target = SRTDataNV>) -> Self {
+        self.value.transform_t1 = transform_t1.into();
+        self
+    }
+
+    #[inline]
+    pub fn instance_custom_index(mut self, instance_custom_index: u32) -> Self {
+        self.value.instance_custom_index = instance_custom_index;
+        self
+    }
+
+    #[inline]
+    pub fn mask(mut self, mask: u32) -> Self {
+        self.value.mask = mask;
+        self
+    }
+
+    #[inline]
+    pub fn instance_shader_binding_table_record_offset(
+        mut self,
+        instance_shader_binding_table_record_offset: u32,
+    ) -> Self {
+        self.value.instance_shader_binding_table_record_offset =
+            instance_shader_binding_table_record_offset;
+        self
+    }
+
+    #[inline]
+    pub fn flags(mut self, flags: GeometryInstanceFlagsKHR) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn acceleration_structure_reference(
+        mut self,
+        acceleration_structure_reference: u64,
+    ) -> Self {
+        self.value.acceleration_structure_reference = acceleration_structure_reference;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AccelerationStructureSRTMotionInstanceNV {
+        self.value
+    }
+}
+
+impl ops::Deref for AccelerationStructureSRTMotionInstanceNVBuilder {
+    type Target = AccelerationStructureSRTMotionInstanceNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for AccelerationStructureSRTMotionInstanceNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for AccelerationStructureSRTMotionInstanceNVBuilder {
+    type Target = AccelerationStructureSRTMotionInstanceNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -5596,6 +6026,7 @@ unsafe impl Cast for ComponentMappingBuilder {
 pub unsafe trait ExtendsComputePipelineCreateInfo {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCreationFeedbackCreateInfoEXT {}
+unsafe impl ExtendsComputePipelineCreateInfo for SubpassShadingPipelineCreateInfoHUAWEI {}
 
 unsafe impl Cast for ComputePipelineCreateInfo {
     type Target = ComputePipelineCreateInfo;
@@ -8996,6 +9427,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInlineUniformBlockFeatures
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLineRasterizationFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiDrawFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerformanceQueryFeaturesKHR {}
@@ -9006,6 +9438,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrivateDataFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProvokingVertexFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayQueryFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRobustness2FeaturesEXT {}
@@ -9027,6 +9460,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupUniformContr
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderTerminateInvocationFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShadingRateImageFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSubgroupSizeControlFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSubpassShadingFeaturesHUAWEI {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSynchronization2FeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT {}
@@ -20504,6 +20938,140 @@ unsafe impl<'b> Cast for MetalSurfaceCreateInfoEXTBuilder<'b> {
     }
 }
 
+unsafe impl Cast for MultiDrawIndexedInfoEXT {
+    type Target = MultiDrawIndexedInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MultiDrawIndexedInfoEXT {
+    type Builder = MultiDrawIndexedInfoEXTBuilder;
+}
+
+/// A builder for a [MultiDrawIndexedInfoEXT](struct.MultiDrawIndexedInfoEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MultiDrawIndexedInfoEXTBuilder {
+    value: MultiDrawIndexedInfoEXT,
+}
+
+impl MultiDrawIndexedInfoEXTBuilder {
+    #[inline]
+    pub fn first_index(mut self, first_index: u32) -> Self {
+        self.value.first_index = first_index;
+        self
+    }
+
+    #[inline]
+    pub fn index_count(mut self, index_count: u32) -> Self {
+        self.value.index_count = index_count;
+        self
+    }
+
+    #[inline]
+    pub fn vertex_offset(mut self, vertex_offset: i32) -> Self {
+        self.value.vertex_offset = vertex_offset;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MultiDrawIndexedInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for MultiDrawIndexedInfoEXTBuilder {
+    type Target = MultiDrawIndexedInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MultiDrawIndexedInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MultiDrawIndexedInfoEXTBuilder {
+    type Target = MultiDrawIndexedInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for MultiDrawInfoEXT {
+    type Target = MultiDrawInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MultiDrawInfoEXT {
+    type Builder = MultiDrawInfoEXTBuilder;
+}
+
+/// A builder for a [MultiDrawInfoEXT](struct.MultiDrawInfoEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MultiDrawInfoEXTBuilder {
+    value: MultiDrawInfoEXT,
+}
+
+impl MultiDrawInfoEXTBuilder {
+    #[inline]
+    pub fn first_vertex(mut self, first_vertex: u32) -> Self {
+        self.value.first_vertex = first_vertex;
+        self
+    }
+
+    #[inline]
+    pub fn vertex_count(mut self, vertex_count: u32) -> Self {
+        self.value.vertex_count = vertex_count;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MultiDrawInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for MultiDrawInfoEXTBuilder {
+    type Target = MultiDrawInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MultiDrawInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MultiDrawInfoEXTBuilder {
+    type Target = MultiDrawInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for MultisamplePropertiesEXT {
     type Target = MultisamplePropertiesEXT;
 
@@ -25263,6 +25831,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInlineUniformBlockF
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLineRasterizationFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiDrawFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiviewFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePerformanceQueryFeaturesKHR {}
@@ -25306,6 +25875,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderTerminateInvocationFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShadingRateImageFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSubgroupSizeControlFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSubpassShadingFeaturesHUAWEI {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSynchronization2FeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT {}
@@ -28947,6 +29517,122 @@ unsafe impl Cast for PhysicalDeviceMeshShaderPropertiesNVBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceMultiDrawFeaturesEXT {
+    type Target = PhysicalDeviceMultiDrawFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMultiDrawFeaturesEXT {
+    type Builder = PhysicalDeviceMultiDrawFeaturesEXTBuilder;
+}
+
+/// A builder for a [PhysicalDeviceMultiDrawFeaturesEXT](struct.PhysicalDeviceMultiDrawFeaturesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMultiDrawFeaturesEXTBuilder {
+    value: PhysicalDeviceMultiDrawFeaturesEXT,
+}
+
+impl PhysicalDeviceMultiDrawFeaturesEXTBuilder {
+    #[inline]
+    pub fn multi_draw(mut self, multi_draw: bool) -> Self {
+        self.value.multi_draw = multi_draw as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMultiDrawFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMultiDrawFeaturesEXTBuilder {
+    type Target = PhysicalDeviceMultiDrawFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMultiDrawFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMultiDrawFeaturesEXTBuilder {
+    type Target = PhysicalDeviceMultiDrawFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMultiDrawPropertiesEXT {
+    type Target = PhysicalDeviceMultiDrawPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMultiDrawPropertiesEXT {
+    type Builder = PhysicalDeviceMultiDrawPropertiesEXTBuilder;
+}
+
+/// A builder for a [PhysicalDeviceMultiDrawPropertiesEXT](struct.PhysicalDeviceMultiDrawPropertiesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMultiDrawPropertiesEXTBuilder {
+    value: PhysicalDeviceMultiDrawPropertiesEXT,
+}
+
+impl PhysicalDeviceMultiDrawPropertiesEXTBuilder {
+    #[inline]
+    pub fn max_multi_draw_count(mut self, max_multi_draw_count: u32) -> Self {
+        self.value.max_multi_draw_count = max_multi_draw_count;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMultiDrawPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMultiDrawPropertiesEXTBuilder {
+    type Target = PhysicalDeviceMultiDrawPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMultiDrawPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMultiDrawPropertiesEXTBuilder {
+    type Target = PhysicalDeviceMultiDrawPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceMultiviewFeatures {
     type Target = PhysicalDeviceMultiviewFeatures;
 
@@ -30005,6 +30691,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBloc
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLineRasterizationPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance3Properties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMeshShaderPropertiesNV {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMultiDrawPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2
     for PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX
 {
@@ -30017,6 +30704,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePortabilitySubset
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProtectedMemoryProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProvokingVertexPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePushDescriptorPropertiesKHR {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPipelinePropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRobustness2PropertiesEXT {}
@@ -30028,6 +30716,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderSMBuiltinsP
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShadingRateImagePropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSubgroupProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSubgroupSizeControlPropertiesEXT {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSubpassShadingPropertiesHUAWEI {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceTexelBufferAlignmentPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceTimelineSemaphoreProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceTransformFeedbackPropertiesEXT {}
@@ -30471,6 +31160,75 @@ impl ops::DerefMut for PhysicalDeviceRayQueryFeaturesKHRBuilder {
 
 unsafe impl Cast for PhysicalDeviceRayQueryFeaturesKHRBuilder {
     type Target = PhysicalDeviceRayQueryFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingMotionBlurFeaturesNV {
+    type Target = PhysicalDeviceRayTracingMotionBlurFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceRayTracingMotionBlurFeaturesNV {
+    type Builder = PhysicalDeviceRayTracingMotionBlurFeaturesNVBuilder;
+}
+
+/// A builder for a [PhysicalDeviceRayTracingMotionBlurFeaturesNV](struct.PhysicalDeviceRayTracingMotionBlurFeaturesNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceRayTracingMotionBlurFeaturesNVBuilder {
+    value: PhysicalDeviceRayTracingMotionBlurFeaturesNV,
+}
+
+impl PhysicalDeviceRayTracingMotionBlurFeaturesNVBuilder {
+    #[inline]
+    pub fn ray_tracing_motion_blur(mut self, ray_tracing_motion_blur: bool) -> Self {
+        self.value.ray_tracing_motion_blur = ray_tracing_motion_blur as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn ray_tracing_motion_blur_pipeline_trace_rays_indirect(
+        mut self,
+        ray_tracing_motion_blur_pipeline_trace_rays_indirect: bool,
+    ) -> Self {
+        self.value
+            .ray_tracing_motion_blur_pipeline_trace_rays_indirect =
+            ray_tracing_motion_blur_pipeline_trace_rays_indirect as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceRayTracingMotionBlurFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceRayTracingMotionBlurFeaturesNVBuilder {
+    type Target = PhysicalDeviceRayTracingMotionBlurFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceRayTracingMotionBlurFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingMotionBlurFeaturesNVBuilder {
+    type Target = PhysicalDeviceRayTracingMotionBlurFeaturesNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -32988,6 +33746,126 @@ impl ops::DerefMut for PhysicalDeviceSubgroupSizeControlPropertiesEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceSubgroupSizeControlPropertiesEXTBuilder {
     type Target = PhysicalDeviceSubgroupSizeControlPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceSubpassShadingFeaturesHUAWEI {
+    type Target = PhysicalDeviceSubpassShadingFeaturesHUAWEI;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceSubpassShadingFeaturesHUAWEI {
+    type Builder = PhysicalDeviceSubpassShadingFeaturesHUAWEIBuilder;
+}
+
+/// A builder for a [PhysicalDeviceSubpassShadingFeaturesHUAWEI](struct.PhysicalDeviceSubpassShadingFeaturesHUAWEI.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceSubpassShadingFeaturesHUAWEIBuilder {
+    value: PhysicalDeviceSubpassShadingFeaturesHUAWEI,
+}
+
+impl PhysicalDeviceSubpassShadingFeaturesHUAWEIBuilder {
+    #[inline]
+    pub fn subpass_shading(mut self, subpass_shading: bool) -> Self {
+        self.value.subpass_shading = subpass_shading as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceSubpassShadingFeaturesHUAWEI {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceSubpassShadingFeaturesHUAWEIBuilder {
+    type Target = PhysicalDeviceSubpassShadingFeaturesHUAWEI;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceSubpassShadingFeaturesHUAWEIBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceSubpassShadingFeaturesHUAWEIBuilder {
+    type Target = PhysicalDeviceSubpassShadingFeaturesHUAWEI;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceSubpassShadingPropertiesHUAWEI {
+    type Target = PhysicalDeviceSubpassShadingPropertiesHUAWEI;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceSubpassShadingPropertiesHUAWEI {
+    type Builder = PhysicalDeviceSubpassShadingPropertiesHUAWEIBuilder;
+}
+
+/// A builder for a [PhysicalDeviceSubpassShadingPropertiesHUAWEI](struct.PhysicalDeviceSubpassShadingPropertiesHUAWEI.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceSubpassShadingPropertiesHUAWEIBuilder {
+    value: PhysicalDeviceSubpassShadingPropertiesHUAWEI,
+}
+
+impl PhysicalDeviceSubpassShadingPropertiesHUAWEIBuilder {
+    #[inline]
+    pub fn max_subpass_shading_workgroup_size_aspect_ratio(
+        mut self,
+        max_subpass_shading_workgroup_size_aspect_ratio: u32,
+    ) -> Self {
+        self.value.max_subpass_shading_workgroup_size_aspect_ratio =
+            max_subpass_shading_workgroup_size_aspect_ratio;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceSubpassShadingPropertiesHUAWEI {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceSubpassShadingPropertiesHUAWEIBuilder {
+    type Target = PhysicalDeviceSubpassShadingPropertiesHUAWEI;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceSubpassShadingPropertiesHUAWEIBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceSubpassShadingPropertiesHUAWEIBuilder {
+    type Target = PhysicalDeviceSubpassShadingPropertiesHUAWEI;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -41842,6 +42720,154 @@ unsafe impl<'b> Cast for ResolveImageInfo2KHRBuilder<'b> {
     }
 }
 
+unsafe impl Cast for SRTDataNV {
+    type Target = SRTDataNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SRTDataNV {
+    type Builder = SRTDataNVBuilder;
+}
+
+/// A builder for a [SRTDataNV](struct.SRTDataNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SRTDataNVBuilder {
+    value: SRTDataNV,
+}
+
+impl SRTDataNVBuilder {
+    #[inline]
+    pub fn sx(mut self, sx: f32) -> Self {
+        self.value.sx = sx;
+        self
+    }
+
+    #[inline]
+    pub fn a(mut self, a: f32) -> Self {
+        self.value.a = a;
+        self
+    }
+
+    #[inline]
+    pub fn b(mut self, b: f32) -> Self {
+        self.value.b = b;
+        self
+    }
+
+    #[inline]
+    pub fn pvx(mut self, pvx: f32) -> Self {
+        self.value.pvx = pvx;
+        self
+    }
+
+    #[inline]
+    pub fn sy(mut self, sy: f32) -> Self {
+        self.value.sy = sy;
+        self
+    }
+
+    #[inline]
+    pub fn c(mut self, c: f32) -> Self {
+        self.value.c = c;
+        self
+    }
+
+    #[inline]
+    pub fn pvy(mut self, pvy: f32) -> Self {
+        self.value.pvy = pvy;
+        self
+    }
+
+    #[inline]
+    pub fn sz(mut self, sz: f32) -> Self {
+        self.value.sz = sz;
+        self
+    }
+
+    #[inline]
+    pub fn pvz(mut self, pvz: f32) -> Self {
+        self.value.pvz = pvz;
+        self
+    }
+
+    #[inline]
+    pub fn qx(mut self, qx: f32) -> Self {
+        self.value.qx = qx;
+        self
+    }
+
+    #[inline]
+    pub fn qy(mut self, qy: f32) -> Self {
+        self.value.qy = qy;
+        self
+    }
+
+    #[inline]
+    pub fn qz(mut self, qz: f32) -> Self {
+        self.value.qz = qz;
+        self
+    }
+
+    #[inline]
+    pub fn qw(mut self, qw: f32) -> Self {
+        self.value.qw = qw;
+        self
+    }
+
+    #[inline]
+    pub fn tx(mut self, tx: f32) -> Self {
+        self.value.tx = tx;
+        self
+    }
+
+    #[inline]
+    pub fn ty(mut self, ty: f32) -> Self {
+        self.value.ty = ty;
+        self
+    }
+
+    #[inline]
+    pub fn tz(mut self, tz: f32) -> Self {
+        self.value.tz = tz;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SRTDataNV {
+        self.value
+    }
+}
+
+impl ops::Deref for SRTDataNVBuilder {
+    type Target = SRTDataNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SRTDataNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SRTDataNVBuilder {
+    type Target = SRTDataNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for SampleLocationEXT {
     type Target = SampleLocationEXT;
 
@@ -45564,6 +46590,70 @@ impl<'b> ops::DerefMut for SubpassSampleLocationsEXTBuilder<'b> {
 
 unsafe impl<'b> Cast for SubpassSampleLocationsEXTBuilder<'b> {
     type Target = SubpassSampleLocationsEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SubpassShadingPipelineCreateInfoHUAWEI {
+    type Target = SubpassShadingPipelineCreateInfoHUAWEI;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SubpassShadingPipelineCreateInfoHUAWEI {
+    type Builder = SubpassShadingPipelineCreateInfoHUAWEIBuilder;
+}
+
+/// A builder for a [SubpassShadingPipelineCreateInfoHUAWEI](struct.SubpassShadingPipelineCreateInfoHUAWEI.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SubpassShadingPipelineCreateInfoHUAWEIBuilder {
+    value: SubpassShadingPipelineCreateInfoHUAWEI,
+}
+
+impl SubpassShadingPipelineCreateInfoHUAWEIBuilder {
+    #[inline]
+    pub fn render_pass(mut self, render_pass: RenderPass) -> Self {
+        self.value.render_pass = render_pass;
+        self
+    }
+
+    #[inline]
+    pub fn subpass(mut self, subpass: u32) -> Self {
+        self.value.subpass = subpass;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SubpassShadingPipelineCreateInfoHUAWEI {
+        self.value
+    }
+}
+
+impl ops::Deref for SubpassShadingPipelineCreateInfoHUAWEIBuilder {
+    type Target = SubpassShadingPipelineCreateInfoHUAWEI;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SubpassShadingPipelineCreateInfoHUAWEIBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SubpassShadingPipelineCreateInfoHUAWEIBuilder {
+    type Target = SubpassShadingPipelineCreateInfoHUAWEI;
 
     #[inline]
     fn into(self) -> Self::Target {

@@ -117,6 +117,40 @@ impl fmt::Debug for AccelerationStructureMemoryRequirementsTypeNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMotionInstanceTypeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct AccelerationStructureMotionInstanceTypeNV(i32);
+
+impl AccelerationStructureMotionInstanceTypeNV {
+    pub const STATIC: Self = Self(0);
+    pub const MATRIX_MOTION: Self = Self(1);
+    pub const SRT_MOTION: Self = Self(2);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for AccelerationStructureMotionInstanceTypeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "STATIC"),
+            1 => write!(f, "MATRIX_MOTION"),
+            2 => write!(f, "SRT_MOTION"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureTypeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -3096,6 +3130,7 @@ impl PipelineBindPoint {
     pub const GRAPHICS: Self = Self(0);
     pub const COMPUTE: Self = Self(1);
     pub const RAY_TRACING_KHR: Self = Self(1000165000);
+    pub const SUBPASS_SHADING_HUAWEI: Self = Self(1000369003);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -3116,6 +3151,7 @@ impl fmt::Debug for PipelineBindPoint {
             0 => write!(f, "GRAPHICS"),
             1 => write!(f, "COMPUTE"),
             1000165000 => write!(f, "RAY_TRACING_KHR"),
+            1000369003 => write!(f, "SUBPASS_SHADING_HUAWEI"),
             _ => self.0.fmt(f),
         }
     }
@@ -4700,6 +4736,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV: Self = Self(1000326000);
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV: Self = Self(1000326001);
     pub const PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV: Self = Self(1000326002);
+    pub const ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV: Self = Self(1000327000);
+    pub const PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV: Self = Self(1000327001);
+    pub const ACCELERATION_STRUCTURE_MOTION_INFO_NV: Self = Self(1000327002);
     pub const PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT: Self = Self(1000330000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT: Self = Self(1000332000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT: Self = Self(1000332001);
@@ -4731,12 +4770,17 @@ impl StructureType {
     pub const MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000364002);
     pub const IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000365000);
     pub const SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000365001);
+    pub const SUBPASSS_SHADING_PIPELINE_CREATE_INFO_HUAWEI: Self = Self(1000369000);
+    pub const PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI: Self = Self(1000369001);
+    pub const PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI: Self = Self(1000369002);
     pub const PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT: Self = Self(1000377000);
     pub const SCREEN_SURFACE_CREATE_INFO_QNX: Self = Self(1000378000);
     pub const PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT: Self = Self(1000381000);
     pub const PIPELINE_COLOR_WRITE_CREATE_INFO_EXT: Self = Self(1000381001);
     pub const PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT: Self = Self(1000388000);
     pub const QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT: Self = Self(1000388001);
+    pub const PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT: Self = Self(1000392000);
+    pub const PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT: Self = Self(1000392001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5297,6 +5341,12 @@ impl fmt::Debug for StructureType {
                 f,
                 "PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV"
             ),
+            1000327000 => write!(
+                f,
+                "ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV"
+            ),
+            1000327001 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV"),
+            1000327002 => write!(f, "ACCELERATION_STRUCTURE_MOTION_INFO_NV"),
             1000330000 => write!(f, "PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT"),
             1000332000 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT"),
             1000332001 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT"),
@@ -5330,12 +5380,17 @@ impl fmt::Debug for StructureType {
             1000364002 => write!(f, "MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA"),
             1000365000 => write!(f, "IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA"),
             1000365001 => write!(f, "SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA"),
+            1000369000 => write!(f, "SUBPASSS_SHADING_PIPELINE_CREATE_INFO_HUAWEI"),
+            1000369001 => write!(f, "PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI"),
+            1000369002 => write!(f, "PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI"),
             1000377000 => write!(f, "PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT"),
             1000378000 => write!(f, "SCREEN_SURFACE_CREATE_INFO_QNX"),
             1000381000 => write!(f, "PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT"),
             1000381001 => write!(f, "PIPELINE_COLOR_WRITE_CREATE_INFO_EXT"),
             1000388000 => write!(f, "PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT"),
             1000388001 => write!(f, "QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT"),
+            1000392000 => write!(f, "PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT"),
+            1000392001 => write!(f, "PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT"),
             _ => self.0.fmt(f),
         }
     }

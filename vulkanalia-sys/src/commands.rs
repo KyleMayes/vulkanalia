@@ -606,6 +606,27 @@ pub type PFN_vkCmdDrawMeshTasksIndirectNV = unsafe extern "system" fn(
 pub type PFN_vkCmdDrawMeshTasksNV =
     unsafe extern "system" fn(_command_buffer: CommandBuffer, _task_count: u32, _first_task: u32);
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMultiEXT.html>
+pub type PFN_vkCmdDrawMultiEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _draw_count: u32,
+    _vertex_info: *const MultiDrawInfoEXT,
+    _instance_count: u32,
+    _first_instance: u32,
+    _stride: u32,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdDrawMultiIndexedEXT.html>
+pub type PFN_vkCmdDrawMultiIndexedEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _draw_count: u32,
+    _index_info: *const MultiDrawIndexedInfoEXT,
+    _instance_count: u32,
+    _first_instance: u32,
+    _stride: u32,
+    _vertex_offset: *const i32,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndConditionalRenderingEXT.html>
 pub type PFN_vkCmdEndConditionalRenderingEXT =
     unsafe extern "system" fn(_command_buffer: CommandBuffer);
@@ -1050,6 +1071,9 @@ pub type PFN_vkCmdSetViewportWithCountEXT = unsafe extern "system" fn(
     _viewport_count: u32,
     _viewports: *const Viewport,
 );
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdSubpassShadingHUAWEI.html>
+pub type PFN_vkCmdSubpassShadingHUAWEI = unsafe extern "system" fn(_command_buffer: CommandBuffer);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdTraceRaysIndirectKHR.html>
 pub type PFN_vkCmdTraceRaysIndirectKHR = unsafe extern "system" fn(
@@ -2942,6 +2966,12 @@ pub type PFN_vkGetShaderInfoAMD = unsafe extern "system" fn(
     _info_type: ShaderInfoTypeAMD,
     _info_size: *mut usize,
     _info: *mut c_void,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSubpassShadingMaxWorkgroupSizeHUAWEI.html>
+pub type PFN_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI = unsafe extern "system" fn(
+    _renderpass: RenderPass,
+    _max_workgroup_size: *mut Extent2D,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainCounterEXT.html>
