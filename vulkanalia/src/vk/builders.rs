@@ -7178,26 +7178,16 @@ impl<'b> CuLaunchInfoNVXBuilder<'b> {
     }
 
     #[inline]
-    pub fn param_count(mut self, param_count: usize) -> Self {
-        self.value.param_count = param_count;
+    pub fn params(mut self, params: &'b [u8]) -> Self {
+        self.value.param_count = params.len() as usize;
+        self.value.params = params.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn params<T>(mut self, params: &'b T) -> Self {
-        self.value.params = (params as *const T).cast();
-        self
-    }
-
-    #[inline]
-    pub fn extra_count(mut self, extra_count: usize) -> Self {
-        self.value.extra_count = extra_count;
-        self
-    }
-
-    #[inline]
-    pub fn extras<T>(mut self, extras: &'b T) -> Self {
-        self.value.extras = (extras as *const T).cast();
+    pub fn extras(mut self, extras: &'b [u8]) -> Self {
+        self.value.extra_count = extras.len() as usize;
+        self.value.extras = extras.as_ptr().cast();
         self
     }
 
@@ -9418,6 +9408,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderBarycentricF
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceGlobalPriorityQueryFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageRobustnessFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImagelessFramebufferFeatures {}
@@ -25848,6 +25839,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePrivateDataFeatures
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProvokingVertexFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayQueryFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRobustness2FeaturesEXT {}
@@ -30704,7 +30696,6 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePortabilitySubset
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProtectedMemoryProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProvokingVertexPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePushDescriptorPropertiesKHR {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPipelinePropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRobustness2PropertiesEXT {}
