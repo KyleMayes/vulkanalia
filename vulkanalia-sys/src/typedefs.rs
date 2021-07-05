@@ -26,6 +26,8 @@ pub type DeviceSize = u64;
 pub type Flags = u32;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFlags64.html>
 pub type Flags64 = u64;
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRemoteAddressNV.html>
+pub type RemoteAddressNV = c_void;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSampleMask.html>
 pub type SampleMask = u32;
 

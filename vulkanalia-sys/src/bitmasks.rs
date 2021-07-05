@@ -636,6 +636,7 @@ bitflags! {
         const DMA_BUF_EXT = 1 << 9;
         const ANDROID_HARDWARE_BUFFER_ANDROID = 1 << 10;
         const ZIRCON_VMO_FUCHSIA = 1 << 11;
+        const RDMA_ADDRESS_NV = 1 << 12;
     }
 }
 
@@ -955,6 +956,7 @@ bitflags! {
         const PROTECTED = 1 << 5;
         const DEVICE_COHERENT_AMD = 1 << 6;
         const DEVICE_UNCACHED_AMD = 1 << 7;
+        const RDMA_CAPABLE_NV = 1 << 8;
     }
 }
 

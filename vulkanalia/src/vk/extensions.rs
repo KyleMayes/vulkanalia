@@ -2886,9 +2886,9 @@ pub trait HuaweiSubpassShadingExtension: DeviceV1_0 {
         let __result = (self.commands().cmd_subpass_shading_huawei)(command_buffer);
     }
 
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSubpassShadingMaxWorkgroupSizeHUAWEI.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI.html>
     #[inline]
-    unsafe fn get_subpass_shading_max_workgroup_size_huawei(
+    unsafe fn get_device_subpass_shading_max_workgroup_size_huawei(
         &self,
         renderpass: RenderPass,
     ) -> crate::VkResult<Extent2D> {
@@ -2896,7 +2896,8 @@ pub trait HuaweiSubpassShadingExtension: DeviceV1_0 {
 
         let __result = (self
             .commands()
-            .get_subpass_shading_max_workgroup_size_huawei)(
+            .get_device_subpass_shading_max_workgroup_size_huawei)(
+            self.handle(),
             renderpass,
             max_workgroup_size.as_mut_ptr(),
         );
@@ -7479,6 +7480,36 @@ pub trait NvExternalMemoryCapabilitiesExtension: InstanceV1_0 {
 
 #[allow(deprecated)]
 impl NvExternalMemoryCapabilitiesExtension for crate::Instance {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_external_memory_rdma.html>
+pub trait NvExternalMemoryRdmaExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_EXTERNAL_MEMORY_RDMA_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryRemoteAddressNV.html>
+    #[inline]
+    unsafe fn get_memory_remote_address_nv(
+        &self,
+        get_memory_remote_address_info: &MemoryGetRemoteAddressInfoNV,
+    ) -> crate::VkResult<RemoteAddressNV> {
+        let mut address = MaybeUninit::<RemoteAddressNV>::uninit();
+
+        let __result = (self.commands().get_memory_remote_address_nv)(
+            self.handle(),
+            get_memory_remote_address_info,
+            address.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(address.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl NvExternalMemoryRdmaExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_external_memory_win32.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory_win32`")]

@@ -305,6 +305,8 @@ pub struct DeviceCommands {
     pub get_device_memory_opaque_capture_address_khr: PFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR,
     pub get_device_queue: PFN_vkGetDeviceQueue,
     pub get_device_queue2: PFN_vkGetDeviceQueue2,
+    pub get_device_subpass_shading_max_workgroup_size_huawei:
+        PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI,
     pub get_event_status: PFN_vkGetEventStatus,
     pub get_fence_fd_khr: PFN_vkGetFenceFdKHR,
     pub get_fence_status: PFN_vkGetFenceStatus,
@@ -325,6 +327,7 @@ pub struct DeviceCommands {
     pub get_memory_fd_khr: PFN_vkGetMemoryFdKHR,
     pub get_memory_fd_properties_khr: PFN_vkGetMemoryFdPropertiesKHR,
     pub get_memory_host_pointer_properties_ext: PFN_vkGetMemoryHostPointerPropertiesEXT,
+    pub get_memory_remote_address_nv: PFN_vkGetMemoryRemoteAddressNV,
     pub get_memory_win32_handle_khr: PFN_vkGetMemoryWin32HandleKHR,
     pub get_memory_win32_handle_nv: PFN_vkGetMemoryWin32HandleNV,
     pub get_memory_win32_handle_properties_khr: PFN_vkGetMemoryWin32HandlePropertiesKHR,
@@ -370,8 +373,6 @@ pub struct DeviceCommands {
     pub get_semaphore_win32_handle_khr: PFN_vkGetSemaphoreWin32HandleKHR,
     pub get_semaphore_zircon_handle_fuchsia: PFN_vkGetSemaphoreZirconHandleFUCHSIA,
     pub get_shader_info_amd: PFN_vkGetShaderInfoAMD,
-    pub get_subpass_shading_max_workgroup_size_huawei:
-        PFN_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI,
     pub get_swapchain_counter_ext: PFN_vkGetSwapchainCounterEXT,
     pub get_swapchain_images_khr: PFN_vkGetSwapchainImagesKHR,
     pub get_swapchain_status_khr: PFN_vkGetSwapchainStatusKHR,
@@ -4756,6 +4757,25 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_device_subpass_shading_max_workgroup_size_huawei: {
+                let value = loader(
+                    b"vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _renderpass: RenderPass,
+                        _max_workgroup_size: *mut Extent2D,
+                    ) -> Result {
+                        panic!("could not load vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI")
+                    }
+                    fallback
+                }
+            },
             get_event_status: {
                 let value = loader(b"vkGetEventStatus\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -5042,6 +5062,21 @@ impl DeviceCommands {
                         _memory_host_pointer_properties: *mut MemoryHostPointerPropertiesEXT,
                     ) -> Result {
                         panic!("could not load vkGetMemoryHostPointerPropertiesEXT")
+                    }
+                    fallback
+                }
+            },
+            get_memory_remote_address_nv: {
+                let value = loader(b"vkGetMemoryRemoteAddressNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _get_memory_remote_address_info: *const MemoryGetRemoteAddressInfoNV,
+                        _address: *mut RemoteAddressNV,
+                    ) -> Result {
+                        panic!("could not load vkGetMemoryRemoteAddressNV")
                     }
                     fallback
                 }
@@ -5652,24 +5687,6 @@ impl DeviceCommands {
                         _info: *mut c_void,
                     ) -> Result {
                         panic!("could not load vkGetShaderInfoAMD")
-                    }
-                    fallback
-                }
-            },
-            get_subpass_shading_max_workgroup_size_huawei: {
-                let value = loader(
-                    b"vkGetSubpassShadingMaxWorkgroupSizeHUAWEI\0"
-                        .as_ptr()
-                        .cast(),
-                );
-                if let Some(value) = value {
-                    mem::transmute(value)
-                } else {
-                    unsafe extern "system" fn fallback(
-                        _renderpass: RenderPass,
-                        _max_workgroup_size: *mut Extent2D,
-                    ) -> Result {
-                        panic!("could not load vkGetSubpassShadingMaxWorkgroupSizeHUAWEI")
                     }
                     fallback
                 }
