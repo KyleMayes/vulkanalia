@@ -2221,6 +2221,13 @@ pub type PFN_vkGetDeviceQueue2 = unsafe extern "system" fn(
     _queue: *mut Queue,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI.html>
+pub type PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI = unsafe extern "system" fn(
+    _device: Device,
+    _renderpass: RenderPass,
+    _max_workgroup_size: *mut Extent2D,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDisplayModeProperties2KHR.html>
 pub type PFN_vkGetDisplayModeProperties2KHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
@@ -2389,6 +2396,13 @@ pub type PFN_vkGetMemoryHostPointerPropertiesEXT = unsafe extern "system" fn(
     _handle_type: ExternalMemoryHandleTypeFlags,
     _host_pointer: *const c_void,
     _memory_host_pointer_properties: *mut MemoryHostPointerPropertiesEXT,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryRemoteAddressNV.html>
+pub type PFN_vkGetMemoryRemoteAddressNV = unsafe extern "system" fn(
+    _device: Device,
+    _get_memory_remote_address_info: *const MemoryGetRemoteAddressInfoNV,
+    _address: *mut RemoteAddressNV,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryWin32HandleKHR.html>
@@ -2966,12 +2980,6 @@ pub type PFN_vkGetShaderInfoAMD = unsafe extern "system" fn(
     _info_type: ShaderInfoTypeAMD,
     _info_size: *mut usize,
     _info: *mut c_void,
-) -> Result;
-
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSubpassShadingMaxWorkgroupSizeHUAWEI.html>
-pub type PFN_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI = unsafe extern "system" fn(
-    _renderpass: RenderPass,
-    _max_workgroup_size: *mut Extent2D,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSwapchainCounterEXT.html>

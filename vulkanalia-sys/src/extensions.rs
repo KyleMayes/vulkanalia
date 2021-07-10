@@ -3600,6 +3600,22 @@ pub const NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_external_memory_rdma.html>
+#[allow(deprecated)]
+pub const NV_EXTERNAL_MEMORY_RDMA_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_NV_external_memory_rdma"),
+    number: 372,
+    type_: "device",
+    author: "NV",
+    contact: "Carsten Rohde @crohde",
+    platform: None,
+    required_extensions: Some(&[KHR_EXTERNAL_MEMORY_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_external_memory_win32.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory_win32`")]
 #[allow(deprecated)]

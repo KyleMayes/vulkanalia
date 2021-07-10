@@ -9401,6 +9401,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDiagnosticsConfigFeaturesN
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExclusiveScissorFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFeatures2 {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
@@ -20171,6 +20172,70 @@ unsafe impl Cast for MemoryGetFdInfoKHRBuilder {
     }
 }
 
+unsafe impl Cast for MemoryGetRemoteAddressInfoNV {
+    type Target = MemoryGetRemoteAddressInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MemoryGetRemoteAddressInfoNV {
+    type Builder = MemoryGetRemoteAddressInfoNVBuilder;
+}
+
+/// A builder for a [MemoryGetRemoteAddressInfoNV](struct.MemoryGetRemoteAddressInfoNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MemoryGetRemoteAddressInfoNVBuilder {
+    value: MemoryGetRemoteAddressInfoNV,
+}
+
+impl MemoryGetRemoteAddressInfoNVBuilder {
+    #[inline]
+    pub fn memory(mut self, memory: DeviceMemory) -> Self {
+        self.value.memory = memory;
+        self
+    }
+
+    #[inline]
+    pub fn handle_type(mut self, handle_type: ExternalMemoryHandleTypeFlags) -> Self {
+        self.value.handle_type = handle_type;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MemoryGetRemoteAddressInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for MemoryGetRemoteAddressInfoNVBuilder {
+    type Target = MemoryGetRemoteAddressInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MemoryGetRemoteAddressInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MemoryGetRemoteAddressInfoNVBuilder {
+    type Target = MemoryGetRemoteAddressInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for MemoryGetWin32HandleInfoKHR {
     type Target = MemoryGetWin32HandleInfoKHR;
 
@@ -25281,6 +25346,64 @@ unsafe impl Cast for PhysicalDeviceExternalMemoryHostPropertiesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceExternalMemoryRDMAFeaturesNV {
+    type Target = PhysicalDeviceExternalMemoryRDMAFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceExternalMemoryRDMAFeaturesNV {
+    type Builder = PhysicalDeviceExternalMemoryRDMAFeaturesNVBuilder;
+}
+
+/// A builder for a [PhysicalDeviceExternalMemoryRDMAFeaturesNV](struct.PhysicalDeviceExternalMemoryRDMAFeaturesNV.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceExternalMemoryRDMAFeaturesNVBuilder {
+    value: PhysicalDeviceExternalMemoryRDMAFeaturesNV,
+}
+
+impl PhysicalDeviceExternalMemoryRDMAFeaturesNVBuilder {
+    #[inline]
+    pub fn external_memory_rdma(mut self, external_memory_rdma: bool) -> Self {
+        self.value.external_memory_rdma = external_memory_rdma as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceExternalMemoryRDMAFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceExternalMemoryRDMAFeaturesNVBuilder {
+    type Target = PhysicalDeviceExternalMemoryRDMAFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceExternalMemoryRDMAFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExternalMemoryRDMAFeaturesNVBuilder {
+    type Target = PhysicalDeviceExternalMemoryRDMAFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [PhysicalDeviceExternalSemaphoreInfo](struct.PhysicalDeviceExternalSemaphoreInfo.html).
 pub unsafe trait ExtendsPhysicalDeviceExternalSemaphoreInfo {}
 unsafe impl ExtendsPhysicalDeviceExternalSemaphoreInfo for SemaphoreTypeCreateInfo {}
@@ -25806,6 +25929,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDiagnosticsConfigFe
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExclusiveScissorFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {}
@@ -36598,6 +36722,88 @@ impl<'b> ops::DerefMut for PipelineCacheCreateInfoBuilder<'b> {
 
 unsafe impl<'b> Cast for PipelineCacheCreateInfoBuilder<'b> {
     type Target = PipelineCacheCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineCacheHeaderVersionOne {
+    type Target = PipelineCacheHeaderVersionOne;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineCacheHeaderVersionOne {
+    type Builder = PipelineCacheHeaderVersionOneBuilder;
+}
+
+/// A builder for a [PipelineCacheHeaderVersionOne](struct.PipelineCacheHeaderVersionOne.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineCacheHeaderVersionOneBuilder {
+    value: PipelineCacheHeaderVersionOne,
+}
+
+impl PipelineCacheHeaderVersionOneBuilder {
+    #[inline]
+    pub fn header_size(mut self, header_size: u32) -> Self {
+        self.value.header_size = header_size;
+        self
+    }
+
+    #[inline]
+    pub fn header_version(mut self, header_version: PipelineCacheHeaderVersion) -> Self {
+        self.value.header_version = header_version;
+        self
+    }
+
+    #[inline]
+    pub fn vendor_id(mut self, vendor_id: u32) -> Self {
+        self.value.vendor_id = vendor_id;
+        self
+    }
+
+    #[inline]
+    pub fn device_id(mut self, device_id: u32) -> Self {
+        self.value.device_id = device_id;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_cache_uuid(mut self, pipeline_cache_uuid: [u8; UUID_SIZE]) -> Self {
+        self.value.pipeline_cache_uuid = pipeline_cache_uuid;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineCacheHeaderVersionOne {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineCacheHeaderVersionOneBuilder {
+    type Target = PipelineCacheHeaderVersionOne;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineCacheHeaderVersionOneBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineCacheHeaderVersionOneBuilder {
+    type Target = PipelineCacheHeaderVersionOne;
 
     #[inline]
     fn into(self) -> Self::Target {
