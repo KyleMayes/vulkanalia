@@ -157,7 +157,7 @@
 <p>In this chapter we're going to create two more resources that are needed for the graphics pipeline to sample an image. The first resource is one that we've already seen before while working with the swapchain images, but the second one is new - it relates to how the shader will read texels from the image.</p>
 <h2><a class="header" href="#texture-image-view" id="texture-image-view">Texture image view</a></h2>
 <p>We've seen before, with the swapchain images and the framebuffer, that images are accessed through image views rather than directly. We will also need to create such an image view for the texture image.</p>
-<p>Add an <code>AppData</code> field to hold a <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.ImageView.html"><code class="hljs">vk::ImageView</code></a> for the texture image and create a new function <code>create_texture_image_view</code> where we'll create it:</p>
+<p>Add an <code>AppData</code> field to hold a <code>vk::ImageView</code> for the texture image and create a new function <code>create_texture_image_view</code> where we'll create it:</p>
 <pre><code class="language-rust noplaypen">impl App {
     unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
@@ -193,10 +193,10 @@ let info = vk::ImageViewCreateInfo::builder()
     .format(vk::Format::R8G8B8A8_SRGB)
     .subresource_range(subresource_range);
 </code></pre>
-<p>I've left out the explicit <code>components</code> initialization, because <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.ComponentSwizzle.html#associatedconstant.IDENTITY"><code class="hljs">vk::ComponentSwizzle::IDENTITY</code></a> is defined as <code>0</code> anyway. Finish creating the image view by calling <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_image_view"><code class="hljs">create_image_view</code></a>:</p>
+<p>I've left out the explicit <code>components</code> initialization, because <code>vk::ComponentSwizzle::IDENTITY</code> is defined as <code>0</code> anyway. Finish creating the image view by calling <code>create_image_view</code>:</p>
 <pre><code class="language-rust noplaypen">data.texture_image_view = device.create_image_view(&amp;info, None)?;
 </code></pre>
-<p>Because so much of the logic is duplicated from <code>create_swapchain_image_views</code>, you may wish to abstract it into a new <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_image_view"><code class="hljs">create_image_view</code></a> function:</p>
+<p>Because so much of the logic is duplicated from <code>create_swapchain_image_views</code>, you may wish to abstract it into a new <code>create_image_view</code> function:</p>
 <pre><code class="language-rust noplaypen">unsafe fn create_image_view(
     device: &amp;Device,
     image: vk::Image,
@@ -272,24 +272,24 @@ unsafe fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&
     Ok(())
 }
 </code></pre>
-<p>Samplers are configured through a <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.SamplerCreateInfo.html"><code class="hljs">vk::SamplerCreateInfo</code></a> structure, which specifies all filters and transformations that it should apply.</p>
+<p>Samplers are configured through a <code>vk::SamplerCreateInfo</code> structure, which specifies all filters and transformations that it should apply.</p>
 <pre><code class="language-rust noplaypen">let info = vk::SamplerCreateInfo::builder()
     .mag_filter(vk::Filter::LINEAR)
     .min_filter(vk::Filter::LINEAR)
     // continued...
 </code></pre>
-<p>The <code>mag_filter</code> and <code>min_filter</code> fields specify how to interpolate texels that are magnified or minified. Magnification concerns the oversampling problem describes above, and minification concerns undersampling. The choices are <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.Filter.html#associatedconstant.NEAREST"><code class="hljs">vk::Filter::NEAREST</code></a> and <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.Filter.html#associatedconstant.LINEAR"><code class="hljs">vk::Filter::LINEAR</code></a>, corresponding to the modes demonstrated in the images above.</p>
+<p>The <code>mag_filter</code> and <code>min_filter</code> fields specify how to interpolate texels that are magnified or minified. Magnification concerns the oversampling problem describes above, and minification concerns undersampling. The choices are <code>vk::Filter::NEAREST</code> and <code>vk::Filter::LINEAR</code>, corresponding to the modes demonstrated in the images above.</p>
 <pre><code class="language-rust noplaypen">    .address_mode_u(vk::SamplerAddressMode::REPEAT)
     .address_mode_v(vk::SamplerAddressMode::REPEAT)
     .address_mode_w(vk::SamplerAddressMode::REPEAT)
 </code></pre>
 <p>The addressing mode can be specified per axis using the <code>address_mode</code> fields. The available values are listed below. Most of these are demonstrated in the image above. Note that the axes are called U, V and W instead of X, Y and Z. This is a convention for texture space coordinates.</p>
 <ul>
-<li><a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.REPEAT"><code class="hljs">vk::SamplerAddressMode::REPEAT</code></a> – Repeat the texture when going beyond the image dimensions.</li>
-<li><a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.MIRRORED_REPEAT"><code class="hljs">vk::SamplerAddressMode::MIRRORED_REPEAT</code></a> – Like repeat, but inverts the coordinates to mirror the image when going beyond the dimensions.</li>
-<li><a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.CLAMP_TO_EDGE"><code class="hljs">vk::SamplerAddressMode::CLAMP_TO_EDGE</code></a> – Take the color of the edge closest to the coordinate beyond the image dimensions.</li>
-<li><a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.MIRROR_CLAMP_TO_EDGE"><code class="hljs">vk::SamplerAddressMode::MIRROR_CLAMP_TO_EDGE</code></a> – Like clamp to edge, but instead uses the edge opposite to the closest edge.</li>
-<li><a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.SamplerAddressMode.html#associatedconstant.CLAMP_TO_BORDER"><code class="hljs">vk::SamplerAddressMode::CLAMP_TO_BORDER</code></a> – Return a solid color when sampling beyond the dimensions of the image.</li>
+<li><code>vk::SamplerAddressMode::REPEAT</code> – Repeat the texture when going beyond the image dimensions.</li>
+<li><code>vk::SamplerAddressMode::MIRRORED_REPEAT</code> – Like repeat, but inverts the coordinates to mirror the image when going beyond the dimensions.</li>
+<li><code>vk::SamplerAddressMode::CLAMP_TO_EDGE</code> – Take the color of the edge closest to the coordinate beyond the image dimensions.</li>
+<li><code>vk::SamplerAddressMode::MIRROR_CLAMP_TO_EDGE</code> – Like clamp to edge, but instead uses the edge opposite to the closest edge.</li>
+<li><code>vk::SamplerAddressMode::CLAMP_TO_BORDER</code> – Return a solid color when sampling beyond the dimensions of the image.</li>
 </ul>
 <p>It doesn't really matter which addressing mode we use here, because we're not going to sample outside of the image in this tutorial. However, the repeat mode is probably the most common mode, because it can be used to tile textures like floors and walls.</p>
 <pre><code class="language-rust noplaypen">    .anisotropy_enable(true)
@@ -320,10 +320,10 @@ unsafe fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&
     // ...
 }
 </code></pre>
-<p>Then create the sampler with <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_sampler"><code class="hljs">create_sampler</code></a>:</p>
+<p>Then create the sampler with <code>create_sampler</code>:</p>
 <pre><code class="language-rust noplaypen">data.texture_sampler = device.create_sampler(&amp;info, None)?;
 </code></pre>
-<p>Note the sampler does not reference a <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.Image.html"><code class="hljs">vk::Image</code></a> anywhere. The sampler is a distinct object that provides an interface to extract colors from a texture. It can be applied to any image you want, whether it is 1D, 2D or 3D. This is different from many older APIs, which combined texture images and filtering into a single state.</p>
+<p>Note the sampler does not reference a <code>vk::Image</code> anywhere. The sampler is a distinct object that provides an interface to extract colors from a texture. It can be applied to any image you want, whether it is 1D, 2D or 3D. This is different from many older APIs, which combined texture images and filtering into a single state.</p>
 <p>Destroy the sampler at the end of the program when we'll no longer be accessing the image:</p>
 <pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.destroy_swapchain();
@@ -349,7 +349,7 @@ unsafe fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&
     Ok(extensions &amp;&amp; swapchain &amp;&amp; features.sampler_anisotropy == vk::TRUE)
 }
 </code></pre>
-<p>The <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features"><code class="hljs">get_physical_device_features</code></a> repurposes the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.PhysicalDeviceFeatures.html"><code class="hljs">vk::PhysicalDeviceFeatures</code></a> struct to indicate which features are supported rather than requested by setting the boolean values.</p>
+<p>The <code>get_physical_device_features</code> repurposes the <code>vk::PhysicalDeviceFeatures</code> struct to indicate which features are supported rather than requested by setting the boolean values.</p>
 <p>Instead of enforcing the availability of anisotropic filtering, it's also possible to simply not use it by conditionally setting:</p>
 <pre><code class="language-rust noplaypen">    .anisotropy_enable(false)
     .max_anisotropy(1.0)

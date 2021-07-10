@@ -156,7 +156,7 @@
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/26_depth_buffering.rs">main.rs</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/26/shader.vert">shader.vert</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/26/shader.frag">shader.frag</a></p>
 <p>The geometry we've worked with so far is projected into 3D, but it's still completely flat. In this chapter we're going to add a Z coordinate to the position to prepare for 3D meshes. We'll use this third coordinate to place a square over the current square to see a problem that arises when geometry is not sorted by depth.</p>
 <h2><a class="header" href="#3d-geometry" id="3d-geometry">3D geometry</a></h2>
-<p>Change the <code>Vertex</code> struct to use a 3D vector for the position, and update the <code>format</code> in the corresponding <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.VertexInputAttributeDescription.html"><code class="hljs">vk::VertexInputAttributeDescription</code></a> and update the offsets in the others:</p>
+<p>Change the <code>Vertex</code> struct to use a 3D vector for the position, and update the <code>format</code> in the corresponding <code>vk::VertexInputAttributeDescription</code> and update the offsets in the others:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
@@ -286,15 +286,15 @@ unsafe fn create_depth_objects(
     Ok(())
 }
 </code></pre>
-<p>Creating a depth image is fairly straightforward. It should have the same resolution as the color attachment, defined by the swapchain extent, an image usage appropriate for a depth attachment, optimal tiling and device local memory. The only question is: what is the right format for a depth image? The format must contain a depth component, indicated by <code>D??_</code> in the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.Format.html"><code class="hljs">vk::Format</code></a> variant.</p>
+<p>Creating a depth image is fairly straightforward. It should have the same resolution as the color attachment, defined by the swapchain extent, an image usage appropriate for a depth attachment, optimal tiling and device local memory. The only question is: what is the right format for a depth image? The format must contain a depth component, indicated by <code>D??_</code> in the <code>vk::Format</code> variant.</p>
 <p>Unlike the texture image, we don't necessarily need a specific format, because we won't be directly accessing the texels from the program. It just needs to have a reasonable accuracy, at least 24 bits is common in real-world applications. There are several formats that fit this requirement:</p>
 <ul>
-<li><a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.Format.html#associatedconstant.D32_SFLOAT"><code class="hljs">vk::Format::D32_SFLOAT</code></a> – 32-bit float for depth</li>
-<li><a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.Format.html#associatedconstant.D32_SFLOAT_S8_UINT"><code class="hljs">vk::Format::D32_SFLOAT_S8_UINT</code></a> – 32-bit signed float for depth and 8 bit stencil component</li>
-<li><a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.Format.html#associatedconstant.D24_UNORM_S8_UINT"><code class="hljs">vk::Format::D24_UNORM_S8_UINT</code></a> – 24-bit float for depth and 8 bit stencil component</li>
+<li><code>vk::Format::D32_SFLOAT</code> – 32-bit float for depth</li>
+<li><code>vk::Format::D32_SFLOAT_S8_UINT</code> – 32-bit signed float for depth and 8 bit stencil component</li>
+<li><code>vk::Format::D24_UNORM_S8_UINT</code> – 24-bit float for depth and 8 bit stencil component</li>
 </ul>
 <p>The stencil component is used for <a href="https://en.wikipedia.org/wiki/Stencil_buffer">stencil tests</a>, which is an additional test that can be combined with depth testing. We'll look at this in a future chapter.</p>
-<p>We could simply go for the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.Format.html#associatedconstant.D32_SFLOAT"><code class="hljs">vk::Format::D32_SFLOAT</code></a> format, because support for it is extremely common (see the hardware database), but it's nice to add some extra flexibility to our application where possible. We're going to write a <code>get_supported_format</code> function that takes a list of candidate formats in order from most desirable to least desirable and returns the first that satisfies our requirements:</p>
+<p>We could simply go for the <code>vk::Format::D32_SFLOAT</code> format, because support for it is extremely common (see the hardware database), but it's nice to add some extra flexibility to our application where possible. We're going to write a <code>get_supported_format</code> function that takes a list of candidate formats in order from most desirable to least desirable and returns the first that satisfies our requirements:</p>
 <pre><code class="language-rust noplaypen">unsafe fn get_supported_format(
     instance: &amp;Instance,
     data: &amp;AppData,
@@ -311,13 +311,13 @@ unsafe fn create_depth_objects(
         .ok_or_else(|| anyhow!(&quot;Failed to find supported format!&quot;))
 }
 </code></pre>
-<p>The support of a format depends on the tiling mode and usage, so we must also include these as parameters. The support of a format can be queried using the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_format_properties"><code class="hljs">get_physical_device_format_properties</code></a> function:</p>
+<p>The support of a format depends on the tiling mode and usage, so we must also include these as parameters. The support of a format can be queried using the <code>get_physical_device_format_properties</code> function:</p>
 <pre><code class="language-rust noplaypen">let properties = instance.get_physical_device_format_properties(
     data.physical_device,
     *f,
 );
 </code></pre>
-<p>The <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.FormatProperties.html"><code class="hljs">vk::FormatProperties</code></a> struct contains three fields:</p>
+<p>The <code>vk::FormatProperties</code> struct contains three fields:</p>
 <ul>
 <li><code>linear_tiling_features</code> – Use cases that are supported with linear tiling</li>
 <li><code>optimal_tiling_features</code> – Use cases that are supported with optimal tiling</li>
@@ -370,7 +370,7 @@ data.depth_image_memory = depth_image_memory;
 
 data.depth_image_view = create_image_view(device, data.depth_image, format)?;
 </code></pre>
-<p>However, the <code>create_image_view</code> function currently assumes that the subresource always uses <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.ImageAspectFlags.html#associatedconstant.COLOR"><code class="hljs">vk::ImageAspectFlags::COLOR</code></a>, so we will need to turn that field into a parameter:</p>
+<p>However, the <code>create_image_view</code> function currently assumes that the subresource always uses <code>vk::ImageAspectFlags::COLOR</code>, so we will need to turn that field into a parameter:</p>
 <pre><code class="language-rust noplaypen">unsafe fn create_image_view(
     device: &amp;Device,
     image: vk::Image,
@@ -456,9 +456,9 @@ let subresource = vk::ImageSubresourceRange::builder()
     // ...
 };
 </code></pre>
-<p>The depth buffer will be read from to perform depth tests to see if a fragment is visible, and will be written to when a new fragment is drawn. The reading happens in the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.EARLY_FRAGMENT_TESTS"><code class="hljs">vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS</code></a> stage and the writing in the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.LATE_FRAGMENT_TESTS"><code class="hljs">vk::PipelineStageFlags::LATE_FRAGMENT_TESTS</code></a>. You should pick the earliest pipeline stage that matches the specified operations, so that it is ready for usage as depth attachment when it needs to be.</p>
+<p>The depth buffer will be read from to perform depth tests to see if a fragment is visible, and will be written to when a new fragment is drawn. The reading happens in the <code>vk::PipelineStageFlags::EARLY_FRAGMENT_TESTS</code> stage and the writing in the <code>vk::PipelineStageFlags::LATE_FRAGMENT_TESTS</code>. You should pick the earliest pipeline stage that matches the specified operations, so that it is ready for usage as depth attachment when it needs to be.</p>
 <h2><a class="header" href="#render-pass" id="render-pass">Render pass</a></h2>
-<p>We're now going to modify <code>create_render_pass</code> to include a depth attachment. First specify the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.AttachmentDescription.html"><code class="hljs">vk::AttachmentDescription</code></a>:</p>
+<p>We're now going to modify <code>create_render_pass</code> to include a depth attachment. First specify the <code>vk::AttachmentDescription</code>:</p>
 <pre><code class="language-rust noplaypen">let depth_stencil_attachment = vk::AttachmentDescription::builder()
     .format(get_depth_format(instance, data)?)
     .samples(vk::SampleCountFlags::_1)
@@ -469,7 +469,7 @@ let subresource = vk::ImageSubresourceRange::builder()
     .initial_layout(vk::ImageLayout::UNDEFINED)
     .final_layout(vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
 </code></pre>
-<p>The <code>format</code> should be the same as the depth image itself. This time we don't care about storing the depth data (<code>store_op</code>), because it will not be used after drawing has finished. This may allow the hardware to perform additional optimizations. Just like the color buffer, we don't care about the previous depth contents, so we can use <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.UNDEFINED"><code class="hljs">vk::ImageLayout::UNDEFINED</code></a> as <code>initial_layout</code>.</p>
+<p>The <code>format</code> should be the same as the depth image itself. This time we don't care about storing the depth data (<code>store_op</code>), because it will not be used after drawing has finished. This may allow the hardware to perform additional optimizations. Just like the color buffer, we don't care about the previous depth contents, so we can use <code>vk::ImageLayout::UNDEFINED</code> as <code>initial_layout</code>.</p>
 <pre><code class="language-rust noplaypen">let depth_stencil_attachment_ref = vk::AttachmentReference::builder()
     .attachment(1)
     .layout(vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
@@ -489,7 +489,7 @@ let info = vk::RenderPassCreateInfo::builder()
     .subpasses(subpasses)
     .dependencies(dependencies);
 </code></pre>
-<p>Next, update the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.RenderPassCreateInfo.html"><code class="hljs">vk::RenderPassCreateInfo</code></a> struct to refer to both attachments.</p>
+<p>Next, update the <code>vk::RenderPassCreateInfo</code> struct to refer to both attachments.</p>
 <pre><code class="language-rust noplaypen">let dependency = vk::SubpassDependency::builder()
     .src_subpass(vk::SUBPASS_EXTERNAL)
     .dst_subpass(0)
@@ -522,7 +522,7 @@ let create_info = vk::FramebufferCreateInfo::builder()
 }
 </code></pre>
 <h2><a class="header" href="#clear-values" id="clear-values">Clear values</a></h2>
-<p>Because we now have multiple attachments with <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.AttachmentLoadOp.html#associatedconstant.CLEAR"><code class="hljs">vk::AttachmentLoadOp::CLEAR</code></a>, we also need to specify multiple clear values. Go to <code>create_command_buffers</code> and add an instance of <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/union.ClearValue.html"><code class="hljs">vk::ClearValue</code></a> to the <code>clear_values</code> array:</p>
+<p>Because we now have multiple attachments with <code>vk::AttachmentLoadOp::CLEAR</code>, we also need to specify multiple clear values. Go to <code>create_command_buffers</code> and add an instance of <code>vk::ClearValue</code> to the <code>clear_values</code> array:</p>
 <pre><code class="language-rust noplaypen">let color_clear_value = vk::ClearValue {
     color: vk::ClearColorValue {
         float32: [0.0, 0.0, 0.0, 1.0],
@@ -541,7 +541,7 @@ let clear_values = &amp;[color_clear_value, depth_clear_value];
 <p>The range of depths in the depth buffer is <code>0.0</code> to <code>1.0</code> in Vulkan, where <code>1.0</code> lies at the far view plane and <code>0.0</code> at the near view plane. The initial value at each point in the depth buffer should be the furthest possible depth, which is <code>1.0</code>.</p>
 <p>Note that the order of <code>clear_values</code> should be identical to the order of your attachments.</p>
 <h2><a class="header" href="#depth-and-stencil-state" id="depth-and-stencil-state">Depth and stencil state</a></h2>
-<p>The depth attachment is ready to be used now, but depth testing still needs to be enabled in the graphics pipeline. It is configured through the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.PipelineDepthStencilStateCreateInfo.html"><code class="hljs">vk::PipelineDepthStencilStateCreateInfo</code></a> struct:</p>
+<p>The depth attachment is ready to be used now, but depth testing still needs to be enabled in the graphics pipeline. It is configured through the <code>vk::PipelineDepthStencilStateCreateInfo</code> struct:</p>
 <pre><code class="language-rust noplaypen">let depth_stencil_state = vk::PipelineDepthStencilStateCreateInfo::builder()
     .depth_test_enable(true)
     .depth_write_enable(true)
@@ -574,7 +574,7 @@ let clear_values = &amp;[color_clear_value, depth_clear_value];
     .render_pass(data.render_pass)
     .subpass(0);
 </code></pre>
-<p>Update the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.GraphicsPipelineCreateInfo.html"><code class="hljs">vk::GraphicsPipelineCreateInfo</code></a> struct to reference the depth stencil state we just filled in. A depth stencil state must always be specified if the render pass contains a depth stencil attachment.</p>
+<p>Update the <code>vk::GraphicsPipelineCreateInfo</code> struct to reference the depth stencil state we just filled in. A depth stencil state must always be specified if the render pass contains a depth stencil attachment.</p>
 <p>If you run your program now, then you should see that the fragments of the geometry are now correctly ordered:</p>
 <p><img src="../images/depth_correct.png" alt="" /></p>
 <h2><a class="header" href="#handling-window-resize" id="handling-window-resize">Handling window resize</a></h2>
