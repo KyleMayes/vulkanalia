@@ -7,7 +7,7 @@ use raw_window_handle::{HasRawWindowHandle, RawWindowHandle};
 use crate::prelude::v1_0::*;
 
 /// Gets the required instance extensions for window integration.
-#[allow(deprecated)]
+#[allow(deprecated, unused_variables)]
 pub fn get_required_instance_extensions(
     window: &dyn HasRawWindowHandle,
 ) -> &'static [&'static vk::ExtensionName] {
@@ -70,6 +70,7 @@ pub fn get_required_instance_extensions(
 /// The returned `SurfaceKHR` will only be valid while the supplied window is
 /// valid so the supplied window must not be destroyed before the the returned
 /// `SurfaceKHR` is destroyed.
+#[allow(deprecated, unused_variables)]
 pub unsafe fn create_surface(
     instance: &Instance,
     window: &dyn HasRawWindowHandle,
@@ -114,7 +115,7 @@ pub unsafe fn create_surface(
         RawWindowHandle::Xlib(window) => {
             use vk::KhrXlibSurfaceExtension;
             let info = vk::XlibSurfaceCreateInfoKHR::builder()
-                .dpy(unsafe { &mut (*(window.display as *mut _)) })
+                .dpy(&mut (*(window.display as *mut _)))
                 .window(window.window);
             instance.create_xlib_surface_khr(&info, None)
         }
@@ -129,9 +130,8 @@ pub unsafe fn create_surface(
             use metal::{MetalLayer, MetalLayerRef};
             use objc::runtime::YES;
             use vk::ExtMetalSurfaceExtension;
-            use vk::MvkMacosSurfaceExtension;
 
-            let (view, layer) = unsafe {
+            let (view, layer) = {
                 let id = mem::transmute::<_, id>(window.ns_window);
 
                 let view = id.contentView();
