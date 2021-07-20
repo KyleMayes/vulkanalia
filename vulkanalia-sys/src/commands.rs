@@ -223,6 +223,13 @@ pub type PFN_vkCmdBindIndexBuffer = unsafe extern "system" fn(
     _index_type: IndexType,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindInvocationMaskHUAWEI.html>
+pub type PFN_vkCmdBindInvocationMaskHUAWEI = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _image_view: ImageView,
+    _image_layout: ImageLayout,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindPipeline.html>
 pub type PFN_vkCmdBindPipeline = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -2401,7 +2408,7 @@ pub type PFN_vkGetMemoryHostPointerPropertiesEXT = unsafe extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetMemoryRemoteAddressNV.html>
 pub type PFN_vkGetMemoryRemoteAddressNV = unsafe extern "system" fn(
     _device: Device,
-    _get_memory_remote_address_info: *const MemoryGetRemoteAddressInfoNV,
+    _memory_get_remote_address_info: *const MemoryGetRemoteAddressInfoNV,
     _address: *mut RemoteAddressNV,
 ) -> Result;
 
@@ -3302,6 +3309,14 @@ pub type PFN_vkWaitForFences = unsafe extern "system" fn(
     _fence_count: u32,
     _fences: *const Fence,
     _wait_all: Bool32,
+    _timeout: u64,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWaitForPresentKHR.html>
+pub type PFN_vkWaitForPresentKHR = unsafe extern "system" fn(
+    _device: Device,
+    _swapchain: SwapchainKHR,
+    _present_id: u64,
     _timeout: u64,
 ) -> Result;
 

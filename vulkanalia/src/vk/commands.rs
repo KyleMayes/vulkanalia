@@ -49,6 +49,7 @@ pub struct DeviceCommands {
     pub cmd_begin_transform_feedback_ext: PFN_vkCmdBeginTransformFeedbackEXT,
     pub cmd_bind_descriptor_sets: PFN_vkCmdBindDescriptorSets,
     pub cmd_bind_index_buffer: PFN_vkCmdBindIndexBuffer,
+    pub cmd_bind_invocation_mask_huawei: PFN_vkCmdBindInvocationMaskHUAWEI,
     pub cmd_bind_pipeline: PFN_vkCmdBindPipeline,
     pub cmd_bind_pipeline_shader_group_nv: PFN_vkCmdBindPipelineShaderGroupNV,
     pub cmd_bind_shading_rate_image_nv: PFN_vkCmdBindShadingRateImageNV,
@@ -420,6 +421,7 @@ pub struct DeviceCommands {
     pub update_descriptor_set_with_template_khr: PFN_vkUpdateDescriptorSetWithTemplateKHR,
     pub update_descriptor_sets: PFN_vkUpdateDescriptorSets,
     pub wait_for_fences: PFN_vkWaitForFences,
+    pub wait_for_present_khr: PFN_vkWaitForPresentKHR,
     pub wait_semaphores: PFN_vkWaitSemaphores,
     pub wait_semaphores_khr: PFN_vkWaitSemaphoresKHR,
     pub write_acceleration_structures_properties_khr:
@@ -847,6 +849,21 @@ impl DeviceCommands {
                         _index_type: IndexType,
                     ) {
                         panic!("could not load vkCmdBindIndexBuffer")
+                    }
+                    fallback
+                }
+            },
+            cmd_bind_invocation_mask_huawei: {
+                let value = loader(b"vkCmdBindInvocationMaskHUAWEI\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _image_view: ImageView,
+                        _image_layout: ImageLayout,
+                    ) {
+                        panic!("could not load vkCmdBindInvocationMaskHUAWEI")
                     }
                     fallback
                 }
@@ -5073,7 +5090,7 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(
                         _device: Device,
-                        _get_memory_remote_address_info: *const MemoryGetRemoteAddressInfoNV,
+                        _memory_get_remote_address_info: *const MemoryGetRemoteAddressInfoNV,
                         _address: *mut RemoteAddressNV,
                     ) -> Result {
                         panic!("could not load vkGetMemoryRemoteAddressNV")
@@ -6379,6 +6396,22 @@ impl DeviceCommands {
                         _timeout: u64,
                     ) -> Result {
                         panic!("could not load vkWaitForFences")
+                    }
+                    fallback
+                }
+            },
+            wait_for_present_khr: {
+                let value = loader(b"vkWaitForPresentKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _swapchain: SwapchainKHR,
+                        _present_id: u64,
+                        _timeout: u64,
+                    ) -> Result {
+                        panic!("could not load vkWaitForPresentKHR")
                     }
                     fallback
                 }

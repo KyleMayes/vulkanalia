@@ -2179,6 +2179,15 @@ pub trait ExtShaderAtomicFloatExtension: DeviceV1_0 {
 
 impl ExtShaderAtomicFloatExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_atomic_float2.html>
+pub trait ExtShaderAtomicFloat2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_SHADER_ATOMIC_FLOAT2_EXTENSION;
+}
+
+impl ExtShaderAtomicFloat2Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_demote_to_helper_invocation.html>
 pub trait ExtShaderDemoteToHelperInvocationExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -2873,6 +2882,30 @@ pub trait GoogleUserTypeExtension: DeviceV1_0 {
 }
 
 impl GoogleUserTypeExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_HUAWEI_invocation_mask.html>
+pub trait HuaweiInvocationMaskExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = HUAWEI_INVOCATION_MASK_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBindInvocationMaskHUAWEI.html>
+    #[inline]
+    unsafe fn cmd_bind_invocation_mask_huawei(
+        &self,
+        command_buffer: CommandBuffer,
+        image_view: ImageView,
+        image_layout: ImageLayout,
+    ) {
+        let __result = (self.commands().cmd_bind_invocation_mask_huawei)(
+            command_buffer,
+            image_view,
+            image_layout,
+        );
+    }
+}
+
+impl HuaweiInvocationMaskExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_HUAWEI_subpass_shading.html>
 pub trait HuaweiSubpassShadingExtension: DeviceV1_0 {
@@ -5573,6 +5606,42 @@ pub trait KhrPortabilitySubsetExtension: DeviceV1_0 {
 #[cfg(feature = "provisional")]
 impl KhrPortabilitySubsetExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_present_id.html>
+pub trait KhrPresentIdExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_PRESENT_ID_EXTENSION;
+}
+
+impl KhrPresentIdExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_present_wait.html>
+pub trait KhrPresentWaitExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_PRESENT_WAIT_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkWaitForPresentKHR.html>
+    #[inline]
+    unsafe fn wait_for_present_khr(
+        &self,
+        swapchain: SwapchainKHR,
+        present_id: u64,
+        timeout: u64,
+    ) -> crate::VkResult<SuccessCode> {
+        let __result =
+            (self.commands().wait_for_present_khr)(self.handle(), swapchain, present_id, timeout);
+
+        if __result >= Result::SUCCESS {
+            Ok(__result.into())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl KhrPresentWaitExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_push_descriptor.html>
 pub trait KhrPushDescriptorExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -7491,13 +7560,13 @@ pub trait NvExternalMemoryRdmaExtension: DeviceV1_0 {
     #[inline]
     unsafe fn get_memory_remote_address_nv(
         &self,
-        get_memory_remote_address_info: &MemoryGetRemoteAddressInfoNV,
+        memory_get_remote_address_info: &MemoryGetRemoteAddressInfoNV,
     ) -> crate::VkResult<RemoteAddressNV> {
         let mut address = MaybeUninit::<RemoteAddressNV>::uninit();
 
         let __result = (self.commands().get_memory_remote_address_nv)(
             self.handle(),
-            get_memory_remote_address_info,
+            memory_get_remote_address_info,
             address.as_mut_ptr(),
         );
 

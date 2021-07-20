@@ -8180,6 +8180,26 @@ impl Default for PhysicalDeviceInlineUniformBlockPropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceInvocationMaskFeaturesHUAWEI {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub invocation_mask: Bool32,
+}
+
+impl Default for PhysicalDeviceInvocationMaskFeaturesHUAWEI {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI,
+            next: ptr::null_mut(),
+            invocation_mask: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceLimits.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
@@ -8824,6 +8844,46 @@ impl Default for PhysicalDevicePortabilitySubsetPropertiesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevicePresentIdFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePresentIdFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub present_id: Bool32,
+}
+
+impl Default for PhysicalDevicePresentIdFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR,
+            next: ptr::null_mut(),
+            present_id: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevicePresentWaitFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePresentWaitFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub present_wait: Bool32,
+}
+
+impl Default for PhysicalDevicePresentWaitFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR,
+            next: ptr::null_mut(),
+            present_wait: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevicePrivateDataFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9310,6 +9370,48 @@ impl Default for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {
             s_type: StructureType::PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES,
             next: ptr::null_mut(),
             separate_depth_stencil_layouts: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderAtomicFloat2FeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_buffer_float16_atomics: Bool32,
+    pub shader_buffer_float16_atomic_add: Bool32,
+    pub shader_buffer_float16_atomic_min_max: Bool32,
+    pub shader_buffer_float32_atomic_min_max: Bool32,
+    pub shader_buffer_float64_atomic_min_max: Bool32,
+    pub shader_shared_float16_atomics: Bool32,
+    pub shader_shared_float16_atomic_add: Bool32,
+    pub shader_shared_float16_atomic_min_max: Bool32,
+    pub shader_shared_float32_atomic_min_max: Bool32,
+    pub shader_shared_float64_atomic_min_max: Bool32,
+    pub shader_image_float32_atomic_min_max: Bool32,
+    pub sparse_image_float32_atomic_min_max: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT,
+            next: ptr::null_mut(),
+            shader_buffer_float16_atomics: Bool32::default(),
+            shader_buffer_float16_atomic_add: Bool32::default(),
+            shader_buffer_float16_atomic_min_max: Bool32::default(),
+            shader_buffer_float32_atomic_min_max: Bool32::default(),
+            shader_buffer_float64_atomic_min_max: Bool32::default(),
+            shader_shared_float16_atomics: Bool32::default(),
+            shader_shared_float16_atomic_add: Bool32::default(),
+            shader_shared_float16_atomic_min_max: Bool32::default(),
+            shader_shared_float32_atomic_min_max: Bool32::default(),
+            shader_shared_float64_atomic_min_max: Bool32::default(),
+            shader_image_float32_atomic_min_max: Bool32::default(),
+            sparse_image_float32_atomic_min_max: Bool32::default(),
         }
     }
 }
@@ -11797,6 +11899,28 @@ impl Default for PresentFrameTokenGGP {
             s_type: StructureType::PRESENT_FRAME_TOKEN_GGP,
             next: ptr::null(),
             frame_token: GgpFrameToken::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPresentIdKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PresentIdKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub swapchain_count: u32,
+    pub present_ids: *const u64,
+}
+
+impl Default for PresentIdKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PRESENT_ID_KHR,
+            next: ptr::null(),
+            swapchain_count: u32::default(),
+            present_ids: ptr::null(),
         }
     }
 }
