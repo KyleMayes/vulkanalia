@@ -522,7 +522,7 @@ pub const EXT_CALIBRATED_TIMESTAMPS_EXTENSION: Extension = Extension {
     author: "EXT",
     contact: "Daniel Rakos @drakos-amd",
     platform: None,
-    required_extensions: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
@@ -1400,6 +1400,22 @@ pub const EXT_SHADER_ATOMIC_FLOAT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_atomic_float2.html>
+#[allow(deprecated)]
+pub const EXT_SHADER_ATOMIC_FLOAT2_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_shader_atomic_float2"),
+    number: 274,
+    type_: "device",
+    author: "EXT",
+    contact: "Jason Ekstrand @jekstrand",
+    platform: None,
+    required_extensions: Some(&[EXT_SHADER_ATOMIC_FLOAT_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_shader_demote_to_helper_invocation.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_EXTENSION: Extension = Extension {
@@ -1854,6 +1870,25 @@ pub const GOOGLE_USER_TYPE_EXTENSION: Extension = Extension {
     contact: "Kaye Mason @chaleur",
     platform: None,
     required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_HUAWEI_invocation_mask.html>
+#[allow(deprecated)]
+pub const HUAWEI_INVOCATION_MASK_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_HUAWEI_invocation_mask"),
+    number: 371,
+    type_: "device",
+    author: "Huawei",
+    contact: "Yunpeng Zhu @yunxingzhu",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_RAY_TRACING_PIPELINE_EXTENSION.name,
+        KHR_SYNCHRONIZATION2_EXTENSION.name,
+    ]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
@@ -2700,6 +2735,38 @@ pub const KHR_PORTABILITY_SUBSET_EXTENSION: Extension = Extension {
     contact: "Bill Hollings @billhollings",
     platform: Some("provisional"),
     required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_present_id.html>
+#[allow(deprecated)]
+pub const KHR_PRESENT_ID_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_KHR_present_id"),
+    number: 295,
+    type_: "device",
+    author: "KHR",
+    contact: "Keith Packard @keithp",
+    platform: None,
+    required_extensions: Some(&[KHR_SWAPCHAIN_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_present_wait.html>
+#[allow(deprecated)]
+pub const KHR_PRESENT_WAIT_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_KHR_present_wait"),
+    number: 249,
+    type_: "device",
+    author: "KHR",
+    contact: "Keith Packard @keithp",
+    platform: None,
+    required_extensions: Some(&[KHR_SWAPCHAIN_EXTENSION.name, KHR_PRESENT_ID_EXTENSION.name]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,

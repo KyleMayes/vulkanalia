@@ -9416,6 +9416,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImagelessFramebufferFeatur
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceIndexTypeUint8FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInlineUniformBlockFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLineRasterizationFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesNV {}
@@ -9426,6 +9427,8 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerformanceQueryFeaturesKH
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineCreationCacheControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePortabilitySubsetFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentIdFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentWaitFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrivateDataFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProvokingVertexFeaturesEXT {}
@@ -9437,6 +9440,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRobustness2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSamplerYcbcrConversionFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceScalarBlockLayoutFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderAtomicFloatFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderAtomicInt64Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderClockFeaturesKHR {}
@@ -25943,6 +25947,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImagelessFramebuffe
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceIndexTypeUint8FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInlineUniformBlockFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLineRasterizationFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesNV {}
@@ -25959,6 +25964,8 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 {
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePortabilitySubsetFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentIdFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentWaitFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePrivateDataFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProvokingVertexFeaturesEXT {}
@@ -25970,6 +25977,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRobustness2Features
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSamplerYcbcrConversionFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceScalarBlockLayoutFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderAtomicFloatFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderAtomicInt64Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderClockFeaturesKHR {}
@@ -28112,6 +28120,64 @@ impl ops::DerefMut for PhysicalDeviceInlineUniformBlockPropertiesEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceInlineUniformBlockPropertiesEXTBuilder {
     type Target = PhysicalDeviceInlineUniformBlockPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceInvocationMaskFeaturesHUAWEI {
+    type Target = PhysicalDeviceInvocationMaskFeaturesHUAWEI;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceInvocationMaskFeaturesHUAWEI {
+    type Builder = PhysicalDeviceInvocationMaskFeaturesHUAWEIBuilder;
+}
+
+/// A builder for a [PhysicalDeviceInvocationMaskFeaturesHUAWEI](struct.PhysicalDeviceInvocationMaskFeaturesHUAWEI.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceInvocationMaskFeaturesHUAWEIBuilder {
+    value: PhysicalDeviceInvocationMaskFeaturesHUAWEI,
+}
+
+impl PhysicalDeviceInvocationMaskFeaturesHUAWEIBuilder {
+    #[inline]
+    pub fn invocation_mask(mut self, invocation_mask: bool) -> Self {
+        self.value.invocation_mask = invocation_mask as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceInvocationMaskFeaturesHUAWEI {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceInvocationMaskFeaturesHUAWEIBuilder {
+    type Target = PhysicalDeviceInvocationMaskFeaturesHUAWEI;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceInvocationMaskFeaturesHUAWEIBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceInvocationMaskFeaturesHUAWEIBuilder {
+    type Target = PhysicalDeviceInvocationMaskFeaturesHUAWEI;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -30610,6 +30676,122 @@ unsafe impl Cast for PhysicalDevicePortabilitySubsetPropertiesKHRBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDevicePresentIdFeaturesKHR {
+    type Target = PhysicalDevicePresentIdFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePresentIdFeaturesKHR {
+    type Builder = PhysicalDevicePresentIdFeaturesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDevicePresentIdFeaturesKHR](struct.PhysicalDevicePresentIdFeaturesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePresentIdFeaturesKHRBuilder {
+    value: PhysicalDevicePresentIdFeaturesKHR,
+}
+
+impl PhysicalDevicePresentIdFeaturesKHRBuilder {
+    #[inline]
+    pub fn present_id(mut self, present_id: bool) -> Self {
+        self.value.present_id = present_id as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePresentIdFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePresentIdFeaturesKHRBuilder {
+    type Target = PhysicalDevicePresentIdFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePresentIdFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePresentIdFeaturesKHRBuilder {
+    type Target = PhysicalDevicePresentIdFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePresentWaitFeaturesKHR {
+    type Target = PhysicalDevicePresentWaitFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePresentWaitFeaturesKHR {
+    type Builder = PhysicalDevicePresentWaitFeaturesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDevicePresentWaitFeaturesKHR](struct.PhysicalDevicePresentWaitFeaturesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePresentWaitFeaturesKHRBuilder {
+    value: PhysicalDevicePresentWaitFeaturesKHR,
+}
+
+impl PhysicalDevicePresentWaitFeaturesKHRBuilder {
+    #[inline]
+    pub fn present_wait(mut self, present_wait: bool) -> Self {
+        self.value.present_wait = present_wait as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePresentWaitFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePresentWaitFeaturesKHRBuilder {
+    type Target = PhysicalDevicePresentWaitFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePresentWaitFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePresentWaitFeaturesKHRBuilder {
+    type Target = PhysicalDevicePresentWaitFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDevicePrivateDataFeaturesEXT {
     type Target = PhysicalDevicePrivateDataFeaturesEXT;
 
@@ -32191,6 +32373,168 @@ impl ops::DerefMut for PhysicalDeviceSeparateDepthStencilLayoutsFeaturesBuilder 
 
 unsafe impl Cast for PhysicalDeviceSeparateDepthStencilLayoutsFeaturesBuilder {
     type Target = PhysicalDeviceSeparateDepthStencilLayoutsFeatures;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {
+    type Target = PhysicalDeviceShaderAtomicFloat2FeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {
+    type Builder = PhysicalDeviceShaderAtomicFloat2FeaturesEXTBuilder;
+}
+
+/// A builder for a [PhysicalDeviceShaderAtomicFloat2FeaturesEXT](struct.PhysicalDeviceShaderAtomicFloat2FeaturesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderAtomicFloat2FeaturesEXTBuilder {
+    value: PhysicalDeviceShaderAtomicFloat2FeaturesEXT,
+}
+
+impl PhysicalDeviceShaderAtomicFloat2FeaturesEXTBuilder {
+    #[inline]
+    pub fn shader_buffer_float16_atomics(mut self, shader_buffer_float16_atomics: bool) -> Self {
+        self.value.shader_buffer_float16_atomics = shader_buffer_float16_atomics as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_buffer_float16_atomic_add(
+        mut self,
+        shader_buffer_float16_atomic_add: bool,
+    ) -> Self {
+        self.value.shader_buffer_float16_atomic_add = shader_buffer_float16_atomic_add as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_buffer_float16_atomic_min_max(
+        mut self,
+        shader_buffer_float16_atomic_min_max: bool,
+    ) -> Self {
+        self.value.shader_buffer_float16_atomic_min_max =
+            shader_buffer_float16_atomic_min_max as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_buffer_float32_atomic_min_max(
+        mut self,
+        shader_buffer_float32_atomic_min_max: bool,
+    ) -> Self {
+        self.value.shader_buffer_float32_atomic_min_max =
+            shader_buffer_float32_atomic_min_max as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_buffer_float64_atomic_min_max(
+        mut self,
+        shader_buffer_float64_atomic_min_max: bool,
+    ) -> Self {
+        self.value.shader_buffer_float64_atomic_min_max =
+            shader_buffer_float64_atomic_min_max as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_shared_float16_atomics(mut self, shader_shared_float16_atomics: bool) -> Self {
+        self.value.shader_shared_float16_atomics = shader_shared_float16_atomics as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_shared_float16_atomic_add(
+        mut self,
+        shader_shared_float16_atomic_add: bool,
+    ) -> Self {
+        self.value.shader_shared_float16_atomic_add = shader_shared_float16_atomic_add as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_shared_float16_atomic_min_max(
+        mut self,
+        shader_shared_float16_atomic_min_max: bool,
+    ) -> Self {
+        self.value.shader_shared_float16_atomic_min_max =
+            shader_shared_float16_atomic_min_max as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_shared_float32_atomic_min_max(
+        mut self,
+        shader_shared_float32_atomic_min_max: bool,
+    ) -> Self {
+        self.value.shader_shared_float32_atomic_min_max =
+            shader_shared_float32_atomic_min_max as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_shared_float64_atomic_min_max(
+        mut self,
+        shader_shared_float64_atomic_min_max: bool,
+    ) -> Self {
+        self.value.shader_shared_float64_atomic_min_max =
+            shader_shared_float64_atomic_min_max as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn shader_image_float32_atomic_min_max(
+        mut self,
+        shader_image_float32_atomic_min_max: bool,
+    ) -> Self {
+        self.value.shader_image_float32_atomic_min_max =
+            shader_image_float32_atomic_min_max as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn sparse_image_float32_atomic_min_max(
+        mut self,
+        sparse_image_float32_atomic_min_max: bool,
+    ) -> Self {
+        self.value.sparse_image_float32_atomic_min_max =
+            sparse_image_float32_atomic_min_max as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderAtomicFloat2FeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderAtomicFloat2FeaturesEXTBuilder {
+    type Target = PhysicalDeviceShaderAtomicFloat2FeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderAtomicFloat2FeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderAtomicFloat2FeaturesEXTBuilder {
+    type Target = PhysicalDeviceShaderAtomicFloat2FeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -40314,11 +40658,78 @@ unsafe impl Cast for PresentFrameTokenGGPBuilder {
     }
 }
 
+unsafe impl Cast for PresentIdKHR {
+    type Target = PresentIdKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PresentIdKHR {
+    type Builder = PresentIdKHRBuilder<'b>;
+}
+
+/// A builder for a [PresentIdKHR](struct.PresentIdKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PresentIdKHRBuilder<'b> {
+    value: PresentIdKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PresentIdKHRBuilder<'b> {
+    #[inline]
+    pub fn swapchain_count(mut self, swapchain_count: u32) -> Self {
+        self.value.swapchain_count = swapchain_count;
+        self
+    }
+
+    #[inline]
+    pub fn present_ids(mut self, present_ids: &'b [u64]) -> Self {
+        self.value.swapchain_count = present_ids.len() as u32;
+        self.value.present_ids = present_ids.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PresentIdKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PresentIdKHRBuilder<'b> {
+    type Target = PresentIdKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PresentIdKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PresentIdKHRBuilder<'b> {
+    type Target = PresentIdKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [PresentInfoKHR](struct.PresentInfoKHR.html).
 pub unsafe trait ExtendsPresentInfoKHR {}
 unsafe impl ExtendsPresentInfoKHR for DeviceGroupPresentInfoKHR {}
 unsafe impl ExtendsPresentInfoKHR for DisplayPresentInfoKHR {}
 unsafe impl ExtendsPresentInfoKHR for PresentFrameTokenGGP {}
+unsafe impl ExtendsPresentInfoKHR for PresentIdKHR {}
 unsafe impl ExtendsPresentInfoKHR for PresentRegionsKHR {}
 unsafe impl ExtendsPresentInfoKHR for PresentTimesInfoGOOGLE {}
 

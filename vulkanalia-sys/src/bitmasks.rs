@@ -89,6 +89,7 @@ bitflags! {
         const ACCESS_2_SHADER_SAMPLED_READ = 1 << 32;
         const ACCESS_2_SHADER_STORAGE_READ = 1 << 33;
         const ACCESS_2_SHADER_STORAGE_WRITE = 1 << 34;
+        const ACCESS_2_INVOCATION_MASK_READ_HUAWEI = 1 << 39;
     }
 }
 
@@ -853,6 +854,7 @@ bitflags! {
         const INPUT_ATTACHMENT = 1 << 7;
         const FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 8;
         const FRAGMENT_DENSITY_MAP_EXT = 1 << 9;
+        const INVOCATION_MASK_HUAWEI = 1 << 18;
     }
 }
 
@@ -1272,6 +1274,7 @@ bitflags! {
         const PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT = 1 << 37;
         const PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS = 1 << 38;
         const PIPELINE_STAGE_2_SUBPASS_SHADING_HUAWEI = 1 << 39;
+        const PIPELINE_STAGE_2_INVOCATION_MASK_HUAWEI = 1 << 40;
     }
 }
 
