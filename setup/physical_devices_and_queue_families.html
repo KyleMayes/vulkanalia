@@ -168,7 +168,7 @@ unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) 
     Ok(())
 }
 </code></pre>
-<p>The graphics card that we'll end up selecting will be stored in a <code>vk::PhysicalDevice</code> handle that is added as a new field to the <code>AppData</code> struct. This object will be implicitly destroyed when the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> is destroyed, so we won't need to do anything new in the <code>App::destroy</code> method.</p>
+<p>The graphics card that we'll end up selecting will be stored in a <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.PhysicalDevice.html"><code class="hljs">vk::PhysicalDevice</code></a> handle that is added as a new field to the <code>AppData</code> struct. This object will be implicitly destroyed when the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> is destroyed, so we won't need to do anything new in the <code>App::destroy</code> method.</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
     physical_device: vk::PhysicalDevice,
@@ -184,11 +184,11 @@ unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) 
     Ok(true)
 }
 </code></pre>
-<p>To evaluate whether a physical device meets our needs we can start by querying for some details. Basic device properties like the name, type, and supported Vulkan version can be queried using <code>get_physical_device_properties</code>:</p>
+<p>To evaluate whether a physical device meets our needs we can start by querying for some details. Basic device properties like the name, type, and supported Vulkan version can be queried using <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_properties"><code class="hljs">get_physical_device_properties</code></a>:</p>
 <pre><code class="language-rust noplaypen">let properties = instance
     .get_physical_device_properties(physical_device);
 </code></pre>
-<p>The support for optional features like texture compression, 64 bit floats, and multi-viewport rendering (useful for VR) can be queried using <code>get_physical_device_features</code>:</p>
+<p>The support for optional features like texture compression, 64 bit floats, and multi-viewport rendering (useful for VR) can be queried using <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features"><code class="hljs">get_physical_device_features</code></a>:</p>
 <pre><code class="language-rust noplaypen">let features = instance
     .get_physical_device_features(physical_device);
 </code></pre>
@@ -240,7 +240,7 @@ impl QueueFamilyIndices {
     }
 }
 </code></pre>
-<p>The queue properties returned by <code>get_physical_device_queue_family_properties</code> contains various details about the queue families supported by the physical device, including the type of operations supported and the number of queues that can be created based on that family. Here we are looking for the first queue family that supports graphics operations as indicated by <code>vk::QueueFlags::GRAPHICS</code>.</p>
+<p>The queue properties returned by <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_queue_family_properties"><code class="hljs">get_physical_device_queue_family_properties</code></a> contains various details about the queue families supported by the physical device, including the type of operations supported and the number of queues that can be created based on that family. Here we are looking for the first queue family that supports graphics operations as indicated by <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.GRAPHICS"><code class="hljs">vk::QueueFlags::GRAPHICS</code></a>.</p>
 <p>Now that we have this fancy queue family lookup method, we can use it as a check in the <code>check_physical_device</code> function to ensure the device can process the commands we want to use:</p>
 <pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
