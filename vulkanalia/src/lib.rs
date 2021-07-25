@@ -116,7 +116,7 @@ impl Entry {
     #[inline]
     pub unsafe fn new(
         loader: impl Loader + 'static,
-    ) -> Result<Self, Box<dyn error::Error + 'static>> {
+    ) -> Result<Self, Box<dyn error::Error + Send + Sync + 'static>> {
         let loader = Arc::new(loader);
 
         let raw = loader.load(b"vkGetInstanceProcAddr")?;
