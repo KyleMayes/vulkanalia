@@ -10,7 +10,7 @@ pub mod window;
 
 use std::collections::HashSet;
 use std::error;
-use std::ffi::{CStr, CString};
+use std::ffi::CStr;
 use std::fmt;
 use std::mem;
 use std::os::raw::c_char;
@@ -169,8 +169,8 @@ impl Entry {
         let handle = EntryV1_0::create_instance(self, info, allocator)?;
         let load = |n| mem::transmute((self.get_instance)(handle, n));
         let commands = InstanceCommands::load(load);
-        let extensions = get_extensions(info.enabled_extension_count, info.enabled_extension_names);
-        let layers = get_layers(info.enabled_layer_count, info.enabled_layer_names);
+        let extensions = get_names(info.enabled_extension_count, info.enabled_extension_names);
+        let layers = get_names(info.enabled_layer_count, info.enabled_layer_names);
         Ok(Instance {
             get_device: self.get_device,
             handle,
@@ -197,7 +197,7 @@ pub struct Instance {
     handle: vk::Instance,
     commands: InstanceCommands,
     extensions: HashSet<vk::ExtensionName>,
-    layers: HashSet<CString>,
+    layers: HashSet<vk::ExtensionName>,
 }
 
 impl Instance {
@@ -209,7 +209,7 @@ impl Instance {
 
     /// Gets the loaded layers for this Vulkan instance.
     #[inline]
-    pub fn layers(&self) -> &HashSet<CString> {
+    pub fn layers(&self) -> &HashSet<vk::ExtensionName> {
         &self.layers
     }
 
@@ -230,8 +230,8 @@ impl Instance {
         let handle = InstanceV1_0::create_device(self, physical_device, info, allocator)?;
         let load = |n| mem::transmute((self.get_device)(handle, n));
         let commands = DeviceCommands::load(load);
-        let extensions = get_extensions(info.enabled_extension_count, info.enabled_extension_names);
-        let layers = get_layers(info.enabled_layer_count, info.enabled_layer_names);
+        let extensions = get_names(info.enabled_extension_count, info.enabled_extension_names);
+        let layers = get_names(info.enabled_layer_count, info.enabled_layer_names);
         Ok(Device {
             handle,
             commands,
@@ -260,7 +260,7 @@ pub struct Device {
     handle: vk::Device,
     commands: DeviceCommands,
     extensions: HashSet<vk::ExtensionName>,
-    layers: HashSet<CString>,
+    layers: HashSet<vk::ExtensionName>,
 }
 
 impl Device {
@@ -272,7 +272,7 @@ impl Device {
 
     /// Gets the loaded layers for this Vulkan device.
     #[inline]
-    pub fn layers(&self) -> &HashSet<CString> {
+    pub fn layers(&self) -> &HashSet<vk::ExtensionName> {
         &self.layers
     }
 }
@@ -291,17 +291,9 @@ unsafe impl Send for Device {}
 unsafe impl Sync for Device {}
 
 #[inline]
-fn get_extensions(num_strings: u32, strings: *const *const c_char) -> HashSet<vk::ExtensionName> {
+fn get_names(num_strings: u32, strings: *const *const c_char) -> HashSet<vk::ExtensionName> {
     unsafe { slice::from_raw_parts(strings, num_strings as usize) }
         .iter()
         .map(|s| vk::ExtensionName::from_cstr(unsafe { CStr::from_ptr(*s) }))
-        .collect()
-}
-
-#[inline]
-fn get_layers(num_layers: u32, layers: *const *const c_char) -> HashSet<CString> {
-    unsafe { slice::from_raw_parts(layers, num_layers as usize) }
-        .iter()
-        .map(|l| unsafe { CStr::from_ptr(*l) }.into())
         .collect()
 }

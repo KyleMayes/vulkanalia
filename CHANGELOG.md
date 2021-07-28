@@ -6,6 +6,7 @@
 
 ### Changed
 - Added `Send` and `Sync` requirement to `Loader` error type
+- Changed type of stored layer names to `vk::ExtensionName` instead of `CString`
 
 ## [0.10.0] - 2021-07-10
 
