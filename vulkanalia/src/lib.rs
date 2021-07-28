@@ -60,39 +60,67 @@ pub struct Version {
     ///
     /// If the version of Vulkan is not at least `1.1.0`, then the patch version
     /// will not be known due to the `vkEnumerateInstanceVersion` function not
-    /// being available.
-    pub patch: Option<u32>,
+    /// being available. In this case this field is set to `0`.
+    pub patch: u32,
+}
+
+impl Version {
+    /// The version for Vulkan `1.0.x`.
+    pub const V1_0_0: Version = Version::new(1, 0, 0);
+    /// The version for Vulkan `1.1.0`.
+    pub const V1_1_0: Version = Version::new(1, 1, 0);
+    /// The version for Vulkan `1.2.0`.
+    pub const V1_2_0: Version = Version::new(1, 2, 0);
+
+    /// Constructs a new Vulkan version.
+    pub const fn new(major: u32, minor: u32, patch: u32) -> Self {
+        Self {
+            major,
+            minor,
+            patch,
+        }
+    }
 }
 
 impl Default for Version {
     #[inline]
     fn default() -> Self {
-        Self {
-            major: 1,
-            minor: 0,
-            patch: None,
-        }
+        Self::V1_0_0
     }
 }
 
 impl fmt::Display for Version {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        if let Some(patch) = self.patch {
-            write!(f, "{}.{}.{}", self.major, self.minor, patch)
-        } else {
-            write!(f, "{}.{}.?", self.major, self.minor)
-        }
+        write!(f, "{}.{}.{}", self.major, self.minor, self.patch)
     }
 }
 
 impl From<u32> for Version {
     #[inline]
     fn from(version: u32) -> Self {
-        Self {
-            major: vk::version_major(version),
-            minor: vk::version_minor(version),
-            patch: Some(vk::version_patch(version)),
-        }
+        Self::new(
+            vk::version_major(version),
+            vk::version_minor(version),
+            vk::version_patch(version),
+        )
+    }
+}
+
+impl From<Version> for u32 {
+    fn from(version: Version) -> Self {
+        vk::make_version(version.major, version.minor, version.patch)
+    }
+}
+
+impl From<(u32, u32, u32)> for Version {
+    fn from((major, minor, patch): (u32, u32, u32)) -> Self {
+        Self::new(major, minor, patch)
+    }
+}
+
+impl From<Version> for (u32, u32, u32) {
+    fn from(version: Version) -> Self {
+        (version.major, version.minor, version.patch)
     }
 }
 
@@ -148,7 +176,7 @@ impl Entry {
                 error => Err(error.into()),
             }
         } else {
-            Ok(Version::default())
+            Ok(Version::V1_0_0)
         }
     }
 

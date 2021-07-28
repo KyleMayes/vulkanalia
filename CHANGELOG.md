@@ -7,6 +7,8 @@
 ### Changed
 - Added `Send` and `Sync` requirement to `Loader` error type
 - Changed type of stored layer names to `vk::ExtensionName` instead of `CString`
+- Added constants, constructor, and additional conversions to `Version`
+- Changed `patch` field to default to `0` in `Version` instead of using `Option`
 
 ## [0.10.0] - 2021-07-10
 
