@@ -755,7 +755,7 @@ bitflags! {
     #[derive(Default)]
     pub struct GeometryInstanceFlagsKHR: Flags {
         const TRIANGLE_FACING_CULL_DISABLE = 1;
-        const TRIANGLE_FRONT_COUNTERCLOCKWISE = 1 << 1;
+        const TRIANGLE_FLIP_FACING = 1 << 1;
         const FORCE_OPAQUE = 1 << 2;
         const FORCE_NO_OPAQUE = 1 << 3;
     }
