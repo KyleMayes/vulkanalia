@@ -194,6 +194,7 @@ impl AttachmentLoadOp {
     pub const LOAD: Self = Self(0);
     pub const CLEAR: Self = Self(1);
     pub const DONT_CARE: Self = Self(2);
+    pub const NONE_EXT: Self = Self(1000400000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -214,6 +215,7 @@ impl fmt::Debug for AttachmentLoadOp {
             0 => write!(f, "LOAD"),
             1 => write!(f, "CLEAR"),
             2 => write!(f, "DONT_CARE"),
+            1000400000 => write!(f, "NONE_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -227,7 +229,7 @@ pub struct AttachmentStoreOp(i32);
 impl AttachmentStoreOp {
     pub const STORE: Self = Self(0);
     pub const DONT_CARE: Self = Self(1);
-    pub const NONE_QCOM: Self = Self(1000301000);
+    pub const NONE_EXT: Self = Self(1000301000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -247,7 +249,7 @@ impl fmt::Debug for AttachmentStoreOp {
         match self.0 {
             0 => write!(f, "STORE"),
             1 => write!(f, "DONT_CARE"),
-            1000301000 => write!(f, "NONE_QCOM"),
+            1000301000 => write!(f, "NONE_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -1373,6 +1375,7 @@ impl DriverId {
     pub const MOLTENVK: Self = Self(14);
     pub const COREAVI_PROPRIETARY: Self = Self(15);
     pub const JUICE_PROPRIETARY: Self = Self(16);
+    pub const VERISILICON_PROPRIETARY: Self = Self(17);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1406,6 +1409,7 @@ impl fmt::Debug for DriverId {
             14 => write!(f, "MOLTENVK"),
             15 => write!(f, "COREAVI_PROPRIETARY"),
             16 => write!(f, "JUICE_PROPRIETARY"),
+            17 => write!(f, "VERISILICON_PROPRIETARY"),
             _ => self.0.fmt(f),
         }
     }

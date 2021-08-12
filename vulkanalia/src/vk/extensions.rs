@@ -1839,6 +1839,15 @@ pub trait ExtLineRasterizationExtension: DeviceV1_0 {
 
 impl ExtLineRasterizationExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_load_store_op_none.html>
+pub trait ExtLoadStoreOpNoneExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_LOAD_STORE_OP_NONE_EXTENSION;
+}
+
+impl ExtLoadStoreOpNoneExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_memory_budget.html>
 pub trait ExtMemoryBudgetExtension: DeviceV1_0 {
     /// The metadata for this extension.

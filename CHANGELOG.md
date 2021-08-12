@@ -2,6 +2,7 @@
 
 ### Bindings Updates
 - [July 20, 2021 Vulkan 1.2.185 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/62e02d5234fbbbd997d7c71099373a273a27dbf8)
+- [Bump header version to match spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/5de19367652f7b74c8364e68b108cca84daffbd5)
 
 ## [0.10.0] - 2021-07-10
 
