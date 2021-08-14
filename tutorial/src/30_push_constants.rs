@@ -1191,7 +1191,7 @@ unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut 
     generate_mipmaps(
         instance,
         device,
-        &data,
+        data,
         data.texture_image,
         vk::Format::R8G8B8A8_SRGB,
         info.width,
