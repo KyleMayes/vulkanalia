@@ -2,6 +2,7 @@
 
 package com.kylemayes.generator.generate
 
+import com.kylemayes.generator.generate.file.generateArrays
 import com.kylemayes.generator.generate.file.generateBitmasks
 import com.kylemayes.generator.generate.file.generateBuilders
 import com.kylemayes.generator.generate.file.generateCommandStructs
@@ -28,6 +29,7 @@ private val log = KotlinLogging.logger { /* */ }
 
 /** Generates Rust files for a Vulkan API registry. */
 fun generateRustFiles(registry: Registry) = listOf(
+    generateRustFile("vulkanalia-sys", "arrays.rs", registry.generateArrays()),
     generateRustFile("vulkanalia-sys", "bitmasks.rs", registry.generateBitmasks()),
     generateRustFile("vulkanalia-sys", "commands.rs", registry.generateCommands()),
     generateRustFile("vulkanalia-sys", "constants.rs", registry.generateConstants()),

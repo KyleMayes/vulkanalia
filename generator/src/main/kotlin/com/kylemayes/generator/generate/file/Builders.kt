@@ -14,7 +14,9 @@ import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.Structure
 import com.kylemayes.generator.registry.getIdentifier
 import com.kylemayes.generator.registry.getPointee
+import com.kylemayes.generator.registry.isByteArray
 import com.kylemayes.generator.registry.isOpaquePointer
+import com.kylemayes.generator.registry.isStringArray
 import com.kylemayes.generator.registry.isStringPointer
 
 /** Generates Rust structs to build Vulkan structs. */
@@ -266,6 +268,10 @@ pub fn ${member.name}<T>(mut self, ${member.name}: $ref) -> Self {
     val (type, cast) = when {
         // Boolean.
         member.type.getIdentifier()?.value == "Bool32" -> Pair("bool", { m: String -> "$m as Bool32" })
+        // Array (byte).
+        member.type.isByteArray() -> Pair("impl Into<${member.type.generate()}>", { m: String -> "$m.into()" })
+        // Array (byte).
+        member.type.isStringArray() -> Pair("impl Into<${member.type.generate()}>", { m: String -> "$m.into()" })
         // Struct.
         structs.containsKey(member.type.getIdentifier()) ->
             Pair("impl Cast<Target = ${member.type.generate()}>", { m: String -> "$m.into()" })

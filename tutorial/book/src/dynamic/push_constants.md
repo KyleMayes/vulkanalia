@@ -106,7 +106,7 @@ The push constant range here specifies that the push constants accessed by the v
 
 With all that in place, we can actually start pushing the model matrix to the vertex shader. Push constants are recorded directly into the command buffers submitted to the GPU which is both why they are so fast and why their size is so limited.
 
-In the `create_command_buffers` function, define a model matrix and use `cmd_push_constants` to add it to the the command buffers as a push constant right before we record the draw command.
+In the `create_command_buffers` function, define a model matrix and use `cmd_push_constants` to add it to the command buffers as a push constant right before we record the draw command.
 
 ```rust,noplaypen
 let model = glm::rotate(&glm::identity(), 0.0f32, &glm::vec3(0.0, 0.0, 1.0));

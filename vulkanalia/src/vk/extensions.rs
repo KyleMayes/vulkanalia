@@ -14,36 +14,11 @@
     clippy::upper_case_acronyms
 )]
 
-use std::ffi::CStr;
 use std::mem::MaybeUninit;
 use std::os::raw::{c_int, c_void};
-use std::ptr::{self, copy_nonoverlapping as memcpy};
+use std::ptr;
 
 use super::*;
-
-/// A Vulkan type that can be converted to or from a borrowed C string.
-pub trait ConvertCStr {
-    /// Converts a borrowed C string into a value.
-    fn from_cstr(string: &CStr) -> Self;
-
-    /// Converts this value into a borrowed C string.
-    fn to_cstr(&self) -> &CStr;
-}
-
-impl ConvertCStr for ExtensionName {
-    #[inline]
-    fn from_cstr(string: &CStr) -> Self {
-        let mut name = [0; MAX_EXTENSION_NAME_SIZE];
-        let count = string.to_bytes().len();
-        unsafe { memcpy(string.as_ptr(), name.as_mut_ptr(), count) };
-        name
-    }
-
-    #[inline]
-    fn to_cstr(&self) -> &CStr {
-        unsafe { CStr::from_ptr(self.as_ptr()) }
-    }
-}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_AMD_buffer_marker.html>
 pub trait AmdBufferMarkerExtension: DeviceV1_0 {

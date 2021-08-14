@@ -517,25 +517,36 @@ private fun extractType(e: Element): Type {
     return identifier
 }
 
-// Array =========================================
-
-/** A C/C++ fixed-length array type. */
-data class ArrayType(val element: Type, val length: Identifier) : Type {
-    override fun generate() = "[${element.generate()}; $length]"
-    override fun generateForCommand() = "*const ${element.generateForCommand()}"
-    override fun generateDefault() = "[${element.generateDefault()}; $length]"
-}
-
-fun Type.getElement() = if (this is ArrayType) { element } else { null }
-fun Type.getLength() = if (this is ArrayType) { length } else { null }
-fun Type.isStringArray() = getElement()?.getIdentifier()?.value == "char"
-
 fun Type.getBaseIdentifier(): Identifier? = when (this) {
     is ArrayType -> element.getBaseIdentifier()
     is IdentifierType -> identifier
     is PointerType -> null
     else -> error("Unreachable.")
 }
+
+// Array =========================================
+
+/** A C/C++ fixed-length array type. */
+data class ArrayType(val element: Type, val length: Identifier) : Type {
+    override fun generate() = when (element.getIdentifier()?.original) {
+        "char" -> "StringArray<$length>"
+        "uint8_t" -> "ByteArray<$length>"
+        else -> "[${element.generate()}; $length]"
+    }
+
+    override fun generateForCommand() = "*const ${element.generateForCommand()}"
+
+    override fun generateDefault() = when (element.getIdentifier()?.original) {
+        "char" -> "StringArray::default()"
+        "uint8_t" -> "ByteArray::default()"
+        else -> "[${element.generateDefault()}; $length]"
+    }
+}
+
+fun Type.getElement() = if (this is ArrayType) { element } else { null }
+fun Type.getLength() = if (this is ArrayType) { length } else { null }
+fun Type.isByteArray() = getElement()?.getIdentifier()?.original == "uint8_t"
+fun Type.isStringArray() = getElement()?.getIdentifier()?.original == "char"
 
 // Identifier ====================================
 

@@ -392,7 +392,7 @@ Finally, add the call to `generate_mipmaps` at the end of `create_texture_image`
 generate_mipmaps(
     instance,
     device,
-    &data,
+    data,
     data.texture_image,
     info.width,
     info.height,
@@ -412,7 +412,7 @@ First add an additional parameter that specifies the image format:
 generate_mipmaps(
     instance,
     device,
-    &data,
+    data,
     data.texture_image,
     vk::Format::R8G8B8A8_SRGB,
     info.width,

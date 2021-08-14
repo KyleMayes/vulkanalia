@@ -3,6 +3,8 @@
 //! Raw Vulkan bindings for Rust.
 
 #[rustfmt::skip]
+mod arrays;
+#[rustfmt::skip]
 mod bitmasks;
 #[rustfmt::skip]
 mod commands;
@@ -25,6 +27,7 @@ mod typedefs;
 #[rustfmt::skip]
 mod unions;
 
+pub use self::arrays::*;
 pub use self::bitmasks::*;
 pub use self::commands::*;
 pub use self::constants::*;

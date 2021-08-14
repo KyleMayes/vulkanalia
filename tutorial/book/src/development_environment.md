@@ -1,6 +1,6 @@
 # Development environment
 
-In this chapter we'll set up your environment for developing Vulkan applications by installing the Vulkan SDK for your operating system. This tutorial assumes you already have a working Rust (1.47+) development environment.
+In this chapter we'll set up your environment for developing Vulkan applications by installing the Vulkan SDK for your operating system. This tutorial assumes you already have a working Rust (1.51+) development environment.
 
 ## Cargo project
 

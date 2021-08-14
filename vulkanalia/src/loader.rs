@@ -35,7 +35,7 @@ pub trait Loader {
     unsafe fn load(
         &self,
         name: &[u8],
-    ) -> Result<extern "system" fn(), Box<dyn error::Error + 'static>>;
+    ) -> Result<extern "system" fn(), Box<dyn error::Error + Send + Sync + 'static>>;
 }
 
 #[cfg(feature = "libloading")]
@@ -80,7 +80,7 @@ mod libloading_loader {
         unsafe fn load(
             &self,
             name: &[u8],
-        ) -> Result<extern "system" fn(), Box<dyn error::Error + 'static>> {
+        ) -> Result<extern "system" fn(), Box<dyn error::Error + Send + Sync + 'static>> {
             let symbol: Symbol<Option<extern "C" fn()>> = self.0.get(name)?;
             let symbol = symbol.lift_option().ok_or("missing function")?;
             Ok(mem::transmute(symbol))
