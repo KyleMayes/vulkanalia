@@ -26,12 +26,10 @@ private val PROVISIONAL: String =
 /** Generates Rust modules and constants for Vulkan extensions. */
 fun Registry.generateExtensions() =
     """
-use std::os::raw::c_char;
-
-use crate::MAX_EXTENSION_NAME_SIZE;
+use crate::{StringArray, MAX_EXTENSION_NAME_SIZE};
 
 /// A Vulkan extension name.
-pub type ExtensionName = [c_char; MAX_EXTENSION_NAME_SIZE];
+pub type ExtensionName = StringArray<MAX_EXTENSION_NAME_SIZE>;
 
 /// A collection of metadata for a Vulkan extension.
 #[derive(Copy, Clone, Debug)]
@@ -69,24 +67,6 @@ ${getSupportedExtensionGroups().values
         .flatten()
         .sortedBy { it.name }
         .joinToString("") { generateExtension(it) }}
-
-/// Converts a byte string into a Vulkan extension name.
-#[inline]
-pub const fn to_extension_name(bytes: &[u8]) -> ExtensionName {
-    let mut name = [0; MAX_EXTENSION_NAME_SIZE];
-
-    let mut index = 0;
-    while index < bytes.len() {
-        name[index] = bytes[index] as c_char;
-        index += 1;
-    }
-
-    if bytes.is_empty() || bytes[bytes.len() - 1] != 0 {
-        name[bytes.len()] = 0;
-    }
-
-    name
-}
     """
 
 /** Generates a Rust constant for a Vulkan extension. */
@@ -107,7 +87,7 @@ private fun Registry.generateExtension(extension: Extension): String {
 /// <${generateManualUrl(extension)}>$provisional$deprecation
 #[allow(deprecated)]
 pub const ${extension.name}_EXTENSION: Extension = Extension {
-    name: to_extension_name(b"${extension.name.original}"),
+    name: ExtensionName::from_bytes(b"${extension.name.original}"),
     number: ${extension.number},
     type_: "${extension.type}",
     author: "${extension.author}",
@@ -125,36 +105,11 @@ pub const ${extension.name}_EXTENSION: Extension = Extension {
 /** Generates Rust modules and traits for Vulkan extensions. */
 fun Registry.generateExtensionTraits() =
     """
-use std::ffi::CStr;
 use std::mem::MaybeUninit;
 use std::os::raw::{c_int, c_void};
-use std::ptr::{self, copy_nonoverlapping as memcpy};
+use std::ptr;
 
 use super::*;
-
-/// A Vulkan type that can be converted to or from a borrowed C string.
-pub trait ConvertCStr {
-    /// Converts a borrowed C string into a value.
-    fn from_cstr(string: &CStr) -> Self;
-
-    /// Converts this value into a borrowed C string.
-    fn to_cstr(&self) -> &CStr;
-}
-
-impl ConvertCStr for ExtensionName {
-    #[inline]
-    fn from_cstr(string: &CStr) -> Self {
-        let mut name = [0; MAX_EXTENSION_NAME_SIZE];
-        let count = string.to_bytes().len();
-        unsafe { memcpy(string.as_ptr(), name.as_mut_ptr(), count) };
-        name
-    }
-
-    #[inline]
-    fn to_cstr(&self) -> &CStr {
-        unsafe { CStr::from_ptr(self.as_ptr()) }
-    }
-}
 
 ${getSupportedExtensionGroups().values
         .flatten()

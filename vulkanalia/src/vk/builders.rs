@@ -12975,8 +12975,11 @@ pub struct ExtensionPropertiesBuilder {
 
 impl ExtensionPropertiesBuilder {
     #[inline]
-    pub fn extension_name(mut self, extension_name: [c_char; MAX_EXTENSION_NAME_SIZE]) -> Self {
-        self.value.extension_name = extension_name;
+    pub fn extension_name(
+        mut self,
+        extension_name: impl Into<StringArray<MAX_EXTENSION_NAME_SIZE>>,
+    ) -> Self {
+        self.value.extension_name = extension_name.into();
         self
     }
 
@@ -19381,8 +19384,11 @@ pub struct LayerPropertiesBuilder {
 
 impl LayerPropertiesBuilder {
     #[inline]
-    pub fn layer_name(mut self, layer_name: [c_char; MAX_EXTENSION_NAME_SIZE]) -> Self {
-        self.value.layer_name = layer_name;
+    pub fn layer_name(
+        mut self,
+        layer_name: impl Into<StringArray<MAX_EXTENSION_NAME_SIZE>>,
+    ) -> Self {
+        self.value.layer_name = layer_name.into();
         self
     }
 
@@ -19399,8 +19405,11 @@ impl LayerPropertiesBuilder {
     }
 
     #[inline]
-    pub fn description(mut self, description: [c_char; MAX_DESCRIPTION_SIZE]) -> Self {
-        self.value.description = description;
+    pub fn description(
+        mut self,
+        description: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>,
+    ) -> Self {
+        self.value.description = description.into();
         self
     }
 
@@ -21618,20 +21627,23 @@ impl PerformanceCounterDescriptionKHRBuilder {
     }
 
     #[inline]
-    pub fn name(mut self, name: [c_char; MAX_DESCRIPTION_SIZE]) -> Self {
-        self.value.name = name;
+    pub fn name(mut self, name: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>) -> Self {
+        self.value.name = name.into();
         self
     }
 
     #[inline]
-    pub fn category(mut self, category: [c_char; MAX_DESCRIPTION_SIZE]) -> Self {
-        self.value.category = category;
+    pub fn category(mut self, category: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>) -> Self {
+        self.value.category = category.into();
         self
     }
 
     #[inline]
-    pub fn description(mut self, description: [c_char; MAX_DESCRIPTION_SIZE]) -> Self {
-        self.value.description = description;
+    pub fn description(
+        mut self,
+        description: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>,
+    ) -> Self {
+        self.value.description = description.into();
         self
     }
 
@@ -21706,8 +21718,8 @@ impl PerformanceCounterKHRBuilder {
     }
 
     #[inline]
-    pub fn uuid(mut self, uuid: [u8; UUID_SIZE]) -> Self {
-        self.value.uuid = uuid;
+    pub fn uuid(mut self, uuid: impl Into<ByteArray<UUID_SIZE>>) -> Self {
+        self.value.uuid = uuid.into();
         self
     }
 
@@ -24771,14 +24783,20 @@ impl PhysicalDeviceDriverPropertiesBuilder {
     }
 
     #[inline]
-    pub fn driver_name(mut self, driver_name: [c_char; MAX_DRIVER_NAME_SIZE]) -> Self {
-        self.value.driver_name = driver_name;
+    pub fn driver_name(
+        mut self,
+        driver_name: impl Into<StringArray<MAX_DRIVER_NAME_SIZE>>,
+    ) -> Self {
+        self.value.driver_name = driver_name.into();
         self
     }
 
     #[inline]
-    pub fn driver_info(mut self, driver_info: [c_char; MAX_DRIVER_INFO_SIZE]) -> Self {
-        self.value.driver_info = driver_info;
+    pub fn driver_info(
+        mut self,
+        driver_info: impl Into<StringArray<MAX_DRIVER_INFO_SIZE>>,
+    ) -> Self {
+        self.value.driver_info = driver_info.into();
         self
     }
 
@@ -27434,20 +27452,20 @@ pub struct PhysicalDeviceIDPropertiesBuilder {
 
 impl PhysicalDeviceIDPropertiesBuilder {
     #[inline]
-    pub fn device_uuid(mut self, device_uuid: [u8; UUID_SIZE]) -> Self {
-        self.value.device_uuid = device_uuid;
+    pub fn device_uuid(mut self, device_uuid: impl Into<ByteArray<UUID_SIZE>>) -> Self {
+        self.value.device_uuid = device_uuid.into();
         self
     }
 
     #[inline]
-    pub fn driver_uuid(mut self, driver_uuid: [u8; UUID_SIZE]) -> Self {
-        self.value.driver_uuid = driver_uuid;
+    pub fn driver_uuid(mut self, driver_uuid: impl Into<ByteArray<UUID_SIZE>>) -> Self {
+        self.value.driver_uuid = driver_uuid.into();
         self
     }
 
     #[inline]
-    pub fn device_luid(mut self, device_luid: [u8; LUID_SIZE]) -> Self {
-        self.value.device_luid = device_luid;
+    pub fn device_luid(mut self, device_luid: impl Into<ByteArray<LUID_SIZE>>) -> Self {
+        self.value.device_luid = device_luid.into();
         self
     }
 
@@ -30902,14 +30920,20 @@ impl PhysicalDevicePropertiesBuilder {
     }
 
     #[inline]
-    pub fn device_name(mut self, device_name: [c_char; MAX_PHYSICAL_DEVICE_NAME_SIZE]) -> Self {
-        self.value.device_name = device_name;
+    pub fn device_name(
+        mut self,
+        device_name: impl Into<StringArray<MAX_PHYSICAL_DEVICE_NAME_SIZE>>,
+    ) -> Self {
+        self.value.device_name = device_name.into();
         self
     }
 
     #[inline]
-    pub fn pipeline_cache_uuid(mut self, pipeline_cache_uuid: [u8; UUID_SIZE]) -> Self {
-        self.value.pipeline_cache_uuid = pipeline_cache_uuid;
+    pub fn pipeline_cache_uuid(
+        mut self,
+        pipeline_cache_uuid: impl Into<ByteArray<UUID_SIZE>>,
+    ) -> Self {
+        self.value.pipeline_cache_uuid = pipeline_cache_uuid.into();
         self
     }
 
@@ -34817,14 +34841,14 @@ pub struct PhysicalDeviceToolPropertiesEXTBuilder {
 
 impl PhysicalDeviceToolPropertiesEXTBuilder {
     #[inline]
-    pub fn name(mut self, name: [c_char; MAX_EXTENSION_NAME_SIZE]) -> Self {
-        self.value.name = name;
+    pub fn name(mut self, name: impl Into<StringArray<MAX_EXTENSION_NAME_SIZE>>) -> Self {
+        self.value.name = name.into();
         self
     }
 
     #[inline]
-    pub fn version(mut self, version: [c_char; MAX_EXTENSION_NAME_SIZE]) -> Self {
-        self.value.version = version;
+    pub fn version(mut self, version: impl Into<StringArray<MAX_EXTENSION_NAME_SIZE>>) -> Self {
+        self.value.version = version.into();
         self
     }
 
@@ -34835,14 +34859,17 @@ impl PhysicalDeviceToolPropertiesEXTBuilder {
     }
 
     #[inline]
-    pub fn description(mut self, description: [c_char; MAX_DESCRIPTION_SIZE]) -> Self {
-        self.value.description = description;
+    pub fn description(
+        mut self,
+        description: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>,
+    ) -> Self {
+        self.value.description = description.into();
         self
     }
 
     #[inline]
-    pub fn layer(mut self, layer: [c_char; MAX_EXTENSION_NAME_SIZE]) -> Self {
-        self.value.layer = layer;
+    pub fn layer(mut self, layer: impl Into<StringArray<MAX_EXTENSION_NAME_SIZE>>) -> Self {
+        self.value.layer = layer.into();
         self
     }
 
@@ -35542,20 +35569,20 @@ pub struct PhysicalDeviceVulkan11PropertiesBuilder {
 
 impl PhysicalDeviceVulkan11PropertiesBuilder {
     #[inline]
-    pub fn device_uuid(mut self, device_uuid: [u8; UUID_SIZE]) -> Self {
-        self.value.device_uuid = device_uuid;
+    pub fn device_uuid(mut self, device_uuid: impl Into<ByteArray<UUID_SIZE>>) -> Self {
+        self.value.device_uuid = device_uuid.into();
         self
     }
 
     #[inline]
-    pub fn driver_uuid(mut self, driver_uuid: [u8; UUID_SIZE]) -> Self {
-        self.value.driver_uuid = driver_uuid;
+    pub fn driver_uuid(mut self, driver_uuid: impl Into<ByteArray<UUID_SIZE>>) -> Self {
+        self.value.driver_uuid = driver_uuid.into();
         self
     }
 
     #[inline]
-    pub fn device_luid(mut self, device_luid: [u8; LUID_SIZE]) -> Self {
-        self.value.device_luid = device_luid;
+    pub fn device_luid(mut self, device_luid: impl Into<ByteArray<LUID_SIZE>>) -> Self {
+        self.value.device_luid = device_luid.into();
         self
     }
 
@@ -36144,14 +36171,20 @@ impl PhysicalDeviceVulkan12PropertiesBuilder {
     }
 
     #[inline]
-    pub fn driver_name(mut self, driver_name: [c_char; MAX_DRIVER_NAME_SIZE]) -> Self {
-        self.value.driver_name = driver_name;
+    pub fn driver_name(
+        mut self,
+        driver_name: impl Into<StringArray<MAX_DRIVER_NAME_SIZE>>,
+    ) -> Self {
+        self.value.driver_name = driver_name.into();
         self
     }
 
     #[inline]
-    pub fn driver_info(mut self, driver_info: [c_char; MAX_DRIVER_INFO_SIZE]) -> Self {
-        self.value.driver_info = driver_info;
+    pub fn driver_info(
+        mut self,
+        driver_info: impl Into<StringArray<MAX_DRIVER_INFO_SIZE>>,
+    ) -> Self {
+        self.value.driver_info = driver_info.into();
         self
     }
 
@@ -37119,8 +37152,11 @@ impl PipelineCacheHeaderVersionOneBuilder {
     }
 
     #[inline]
-    pub fn pipeline_cache_uuid(mut self, pipeline_cache_uuid: [u8; UUID_SIZE]) -> Self {
-        self.value.pipeline_cache_uuid = pipeline_cache_uuid;
+    pub fn pipeline_cache_uuid(
+        mut self,
+        pipeline_cache_uuid: impl Into<ByteArray<UUID_SIZE>>,
+    ) -> Self {
+        self.value.pipeline_cache_uuid = pipeline_cache_uuid.into();
         self
     }
 
@@ -38260,14 +38296,17 @@ pub struct PipelineExecutableInternalRepresentationKHRBuilder<'b> {
 
 impl<'b> PipelineExecutableInternalRepresentationKHRBuilder<'b> {
     #[inline]
-    pub fn name(mut self, name: [c_char; MAX_DESCRIPTION_SIZE]) -> Self {
-        self.value.name = name;
+    pub fn name(mut self, name: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>) -> Self {
+        self.value.name = name.into();
         self
     }
 
     #[inline]
-    pub fn description(mut self, description: [c_char; MAX_DESCRIPTION_SIZE]) -> Self {
-        self.value.description = description;
+    pub fn description(
+        mut self,
+        description: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>,
+    ) -> Self {
+        self.value.description = description.into();
         self
     }
 
@@ -38349,14 +38388,17 @@ impl PipelineExecutablePropertiesKHRBuilder {
     }
 
     #[inline]
-    pub fn name(mut self, name: [c_char; MAX_DESCRIPTION_SIZE]) -> Self {
-        self.value.name = name;
+    pub fn name(mut self, name: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>) -> Self {
+        self.value.name = name.into();
         self
     }
 
     #[inline]
-    pub fn description(mut self, description: [c_char; MAX_DESCRIPTION_SIZE]) -> Self {
-        self.value.description = description;
+    pub fn description(
+        mut self,
+        description: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>,
+    ) -> Self {
+        self.value.description = description.into();
         self
     }
 
@@ -38419,14 +38461,17 @@ pub struct PipelineExecutableStatisticKHRBuilder {
 
 impl PipelineExecutableStatisticKHRBuilder {
     #[inline]
-    pub fn name(mut self, name: [c_char; MAX_DESCRIPTION_SIZE]) -> Self {
-        self.value.name = name;
+    pub fn name(mut self, name: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>) -> Self {
+        self.value.name = name.into();
         self
     }
 
     #[inline]
-    pub fn description(mut self, description: [c_char; MAX_DESCRIPTION_SIZE]) -> Self {
-        self.value.description = description;
+    pub fn description(
+        mut self,
+        description: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>,
+    ) -> Self {
+        self.value.description = description.into();
         self
     }
 

@@ -10,7 +10,6 @@ pub mod window;
 
 use std::collections::HashSet;
 use std::error;
-use std::ffi::CStr;
 use std::fmt;
 use std::mem;
 use std::os::raw::c_char;
@@ -26,8 +25,8 @@ pub mod prelude {
     /// Vulkan 1.0 prelude.
     pub mod v1_0 {
         pub use crate::vk;
-        pub use crate::vk::{ConvertCStr, Handle, HasBuilder};
         pub use crate::vk::{DeviceV1_0, EntryV1_0, InstanceV1_0};
+        pub use crate::vk::{Handle, HasBuilder};
         pub use crate::{Device, Entry, Instance, VkResult, VkSuccessResult};
     }
 
@@ -319,9 +318,9 @@ unsafe impl Send for Device {}
 unsafe impl Sync for Device {}
 
 #[inline]
-fn get_names(num_strings: u32, strings: *const *const c_char) -> HashSet<vk::ExtensionName> {
-    unsafe { slice::from_raw_parts(strings, num_strings as usize) }
+unsafe fn get_names(num_strings: u32, strings: *const *const c_char) -> HashSet<vk::ExtensionName> {
+    slice::from_raw_parts(strings, num_strings as usize)
         .iter()
-        .map(|s| vk::ExtensionName::from_cstr(unsafe { CStr::from_ptr(*s) }))
+        .map(|s| vk::ExtensionName::from_ptr(*s))
         .collect()
 }

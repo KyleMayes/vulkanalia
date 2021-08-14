@@ -26,8 +26,8 @@ use vk::{KhrSurfaceExtension, KhrSwapchainExtension};
 const DEVICE_EXTENSIONS: &[vk::ExtensionName] = &[vk::KHR_SWAPCHAIN_EXTENSION.name];
 /// The number of frames that will processed concurrently.
 const MAX_FRAMES_IN_FLIGHT: usize = 2;
-/// The required instance and device layers if validation is enabled.
-const VALIDATION_LAYER: vk::ExtensionName = vk::to_extension_name(b"VK_LAYER_KHRONOS_validation\0");
+/// The required instance and device layer if validation is enabled.
+const VALIDATION_LAYER: vk::ExtensionName = vk::ExtensionName::from_bytes(b"VK_LAYER_KHRONOS_validation\0");
 
 /// An example Vulkan app implementation.
 pub trait Example {
@@ -303,7 +303,7 @@ unsafe fn create_instance(window: &Window, entry: &Entry, data: &mut AppData) ->
     }
 
     let layers = if data.validation {
-        vec![VALIDATION_LAYER.to_cstr().as_ptr()]
+        vec![VALIDATION_LAYER.as_ptr()]
     } else {
         Vec::new()
     };
@@ -316,7 +316,7 @@ unsafe fn create_instance(window: &Window, entry: &Entry, data: &mut AppData) ->
         .collect::<Vec<_>>();
 
     if data.validation {
-        extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.name.to_cstr().as_ptr());
+        extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.name.as_ptr());
     }
 
     // Create
@@ -431,17 +431,14 @@ unsafe fn create_logical_device(instance: &Instance, data: &mut AppData) -> Resu
     // Layers
 
     let layers = if data.validation {
-        vec![VALIDATION_LAYER.to_cstr().as_ptr()]
+        vec![VALIDATION_LAYER.as_ptr()]
     } else {
         vec![]
     };
 
     // Extensions
 
-    let extensions = DEVICE_EXTENSIONS
-        .iter()
-        .map(|n| n.to_cstr().as_ptr())
-        .collect::<Vec<_>>();
+    let extensions = DEVICE_EXTENSIONS.iter().map(|n| n.as_ptr()).collect::<Vec<_>>();
 
     // Features
 

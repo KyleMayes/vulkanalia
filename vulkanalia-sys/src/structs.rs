@@ -3820,7 +3820,7 @@ impl Default for ExportSemaphoreWin32HandleInfoKHR {
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExtensionProperties {
-    pub extension_name: [c_char; MAX_EXTENSION_NAME_SIZE],
+    pub extension_name: StringArray<MAX_EXTENSION_NAME_SIZE>,
     pub spec_version: u32,
 }
 
@@ -3828,7 +3828,7 @@ impl Default for ExtensionProperties {
     #[inline]
     fn default() -> Self {
         Self {
-            extension_name: [c_char::default(); MAX_EXTENSION_NAME_SIZE],
+            extension_name: StringArray::default(),
             spec_version: u32::default(),
         }
     }
@@ -5663,20 +5663,20 @@ impl Default for InstanceCreateInfo {
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct LayerProperties {
-    pub layer_name: [c_char; MAX_EXTENSION_NAME_SIZE],
+    pub layer_name: StringArray<MAX_EXTENSION_NAME_SIZE>,
     pub spec_version: u32,
     pub implementation_version: u32,
-    pub description: [c_char; MAX_DESCRIPTION_SIZE],
+    pub description: StringArray<MAX_DESCRIPTION_SIZE>,
 }
 
 impl Default for LayerProperties {
     #[inline]
     fn default() -> Self {
         Self {
-            layer_name: [c_char::default(); MAX_EXTENSION_NAME_SIZE],
+            layer_name: StringArray::default(),
             spec_version: u32::default(),
             implementation_version: u32::default(),
-            description: [c_char::default(); MAX_DESCRIPTION_SIZE],
+            description: StringArray::default(),
         }
     }
 }
@@ -6290,9 +6290,9 @@ pub struct PerformanceCounterDescriptionKHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub flags: PerformanceCounterDescriptionFlagsKHR,
-    pub name: [c_char; MAX_DESCRIPTION_SIZE],
-    pub category: [c_char; MAX_DESCRIPTION_SIZE],
-    pub description: [c_char; MAX_DESCRIPTION_SIZE],
+    pub name: StringArray<MAX_DESCRIPTION_SIZE>,
+    pub category: StringArray<MAX_DESCRIPTION_SIZE>,
+    pub description: StringArray<MAX_DESCRIPTION_SIZE>,
 }
 
 impl Default for PerformanceCounterDescriptionKHR {
@@ -6302,9 +6302,9 @@ impl Default for PerformanceCounterDescriptionKHR {
             s_type: StructureType::PERFORMANCE_COUNTER_DESCRIPTION_KHR,
             next: ptr::null_mut(),
             flags: PerformanceCounterDescriptionFlagsKHR::default(),
-            name: [c_char::default(); MAX_DESCRIPTION_SIZE],
-            category: [c_char::default(); MAX_DESCRIPTION_SIZE],
-            description: [c_char::default(); MAX_DESCRIPTION_SIZE],
+            name: StringArray::default(),
+            category: StringArray::default(),
+            description: StringArray::default(),
         }
     }
 }
@@ -6318,7 +6318,7 @@ pub struct PerformanceCounterKHR {
     pub unit: PerformanceCounterUnitKHR,
     pub scope: PerformanceCounterScopeKHR,
     pub storage: PerformanceCounterStorageKHR,
-    pub uuid: [u8; UUID_SIZE],
+    pub uuid: ByteArray<UUID_SIZE>,
 }
 
 impl Default for PerformanceCounterKHR {
@@ -6330,7 +6330,7 @@ impl Default for PerformanceCounterKHR {
             unit: PerformanceCounterUnitKHR::default(),
             scope: PerformanceCounterScopeKHR::default(),
             storage: PerformanceCounterStorageKHR::default(),
-            uuid: [u8::default(); UUID_SIZE],
+            uuid: ByteArray::default(),
         }
     }
 }
@@ -7234,8 +7234,8 @@ pub struct PhysicalDeviceDriverProperties {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub driver_id: DriverId,
-    pub driver_name: [c_char; MAX_DRIVER_NAME_SIZE],
-    pub driver_info: [c_char; MAX_DRIVER_INFO_SIZE],
+    pub driver_name: StringArray<MAX_DRIVER_NAME_SIZE>,
+    pub driver_info: StringArray<MAX_DRIVER_INFO_SIZE>,
     pub conformance_version: ConformanceVersion,
 }
 
@@ -7246,8 +7246,8 @@ impl Default for PhysicalDeviceDriverProperties {
             s_type: StructureType::PHYSICAL_DEVICE_DRIVER_PROPERTIES,
             next: ptr::null_mut(),
             driver_id: DriverId::default(),
-            driver_name: [c_char::default(); MAX_DRIVER_NAME_SIZE],
-            driver_info: [c_char::default(); MAX_DRIVER_INFO_SIZE],
+            driver_name: StringArray::default(),
+            driver_info: StringArray::default(),
             conformance_version: ConformanceVersion::default(),
         }
     }
@@ -7954,9 +7954,9 @@ impl Default for PhysicalDeviceHostQueryResetFeatures {
 pub struct PhysicalDeviceIDProperties {
     pub s_type: StructureType,
     pub next: *mut c_void,
-    pub device_uuid: [u8; UUID_SIZE],
-    pub driver_uuid: [u8; UUID_SIZE],
-    pub device_luid: [u8; LUID_SIZE],
+    pub device_uuid: ByteArray<UUID_SIZE>,
+    pub driver_uuid: ByteArray<UUID_SIZE>,
+    pub device_luid: ByteArray<LUID_SIZE>,
     pub device_node_mask: u32,
     pub device_luid_valid: Bool32,
 }
@@ -7967,9 +7967,9 @@ impl Default for PhysicalDeviceIDProperties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_ID_PROPERTIES,
             next: ptr::null_mut(),
-            device_uuid: [u8::default(); UUID_SIZE],
-            driver_uuid: [u8::default(); UUID_SIZE],
-            device_luid: [u8::default(); LUID_SIZE],
+            device_uuid: ByteArray::default(),
+            driver_uuid: ByteArray::default(),
+            device_luid: ByteArray::default(),
             device_node_mask: u32::default(),
             device_luid_valid: Bool32::default(),
         }
@@ -8913,8 +8913,8 @@ pub struct PhysicalDeviceProperties {
     pub vendor_id: u32,
     pub device_id: u32,
     pub device_type: PhysicalDeviceType,
-    pub device_name: [c_char; MAX_PHYSICAL_DEVICE_NAME_SIZE],
-    pub pipeline_cache_uuid: [u8; UUID_SIZE],
+    pub device_name: StringArray<MAX_PHYSICAL_DEVICE_NAME_SIZE>,
+    pub pipeline_cache_uuid: ByteArray<UUID_SIZE>,
     pub limits: PhysicalDeviceLimits,
     pub sparse_properties: PhysicalDeviceSparseProperties,
 }
@@ -8928,8 +8928,8 @@ impl Default for PhysicalDeviceProperties {
             vendor_id: u32::default(),
             device_id: u32::default(),
             device_type: PhysicalDeviceType::default(),
-            device_name: [c_char::default(); MAX_PHYSICAL_DEVICE_NAME_SIZE],
-            pipeline_cache_uuid: [u8::default(); UUID_SIZE],
+            device_name: StringArray::default(),
+            pipeline_cache_uuid: ByteArray::default(),
             limits: PhysicalDeviceLimits::default(),
             sparse_properties: PhysicalDeviceSparseProperties::default(),
         }
@@ -10148,11 +10148,11 @@ impl Default for PhysicalDeviceTimelineSemaphoreProperties {
 pub struct PhysicalDeviceToolPropertiesEXT {
     pub s_type: StructureType,
     pub next: *mut c_void,
-    pub name: [c_char; MAX_EXTENSION_NAME_SIZE],
-    pub version: [c_char; MAX_EXTENSION_NAME_SIZE],
+    pub name: StringArray<MAX_EXTENSION_NAME_SIZE>,
+    pub version: StringArray<MAX_EXTENSION_NAME_SIZE>,
     pub purposes: ToolPurposeFlagsEXT,
-    pub description: [c_char; MAX_DESCRIPTION_SIZE],
-    pub layer: [c_char; MAX_EXTENSION_NAME_SIZE],
+    pub description: StringArray<MAX_DESCRIPTION_SIZE>,
+    pub layer: StringArray<MAX_EXTENSION_NAME_SIZE>,
 }
 
 impl Default for PhysicalDeviceToolPropertiesEXT {
@@ -10161,11 +10161,11 @@ impl Default for PhysicalDeviceToolPropertiesEXT {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT,
             next: ptr::null_mut(),
-            name: [c_char::default(); MAX_EXTENSION_NAME_SIZE],
-            version: [c_char::default(); MAX_EXTENSION_NAME_SIZE],
+            name: StringArray::default(),
+            version: StringArray::default(),
             purposes: ToolPurposeFlagsEXT::default(),
-            description: [c_char::default(); MAX_DESCRIPTION_SIZE],
-            layer: [c_char::default(); MAX_EXTENSION_NAME_SIZE],
+            description: StringArray::default(),
+            layer: StringArray::default(),
         }
     }
 }
@@ -10382,9 +10382,9 @@ impl Default for PhysicalDeviceVulkan11Features {
 pub struct PhysicalDeviceVulkan11Properties {
     pub s_type: StructureType,
     pub next: *mut c_void,
-    pub device_uuid: [u8; UUID_SIZE],
-    pub driver_uuid: [u8; UUID_SIZE],
-    pub device_luid: [u8; LUID_SIZE],
+    pub device_uuid: ByteArray<UUID_SIZE>,
+    pub driver_uuid: ByteArray<UUID_SIZE>,
+    pub device_luid: ByteArray<LUID_SIZE>,
     pub device_node_mask: u32,
     pub device_luid_valid: Bool32,
     pub subgroup_size: u32,
@@ -10405,9 +10405,9 @@ impl Default for PhysicalDeviceVulkan11Properties {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES,
             next: ptr::null_mut(),
-            device_uuid: [u8::default(); UUID_SIZE],
-            driver_uuid: [u8::default(); UUID_SIZE],
-            device_luid: [u8::default(); LUID_SIZE],
+            device_uuid: ByteArray::default(),
+            driver_uuid: ByteArray::default(),
+            device_luid: ByteArray::default(),
             device_node_mask: u32::default(),
             device_luid_valid: Bool32::default(),
             subgroup_size: u32::default(),
@@ -10543,8 +10543,8 @@ pub struct PhysicalDeviceVulkan12Properties {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub driver_id: DriverId,
-    pub driver_name: [c_char; MAX_DRIVER_NAME_SIZE],
-    pub driver_info: [c_char; MAX_DRIVER_INFO_SIZE],
+    pub driver_name: StringArray<MAX_DRIVER_NAME_SIZE>,
+    pub driver_info: StringArray<MAX_DRIVER_INFO_SIZE>,
     pub conformance_version: ConformanceVersion,
     pub denorm_behavior_independence: ShaderFloatControlsIndependence,
     pub rounding_mode_independence: ShaderFloatControlsIndependence,
@@ -10603,8 +10603,8 @@ impl Default for PhysicalDeviceVulkan12Properties {
             s_type: StructureType::PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES,
             next: ptr::null_mut(),
             driver_id: DriverId::default(),
-            driver_name: [c_char::default(); MAX_DRIVER_NAME_SIZE],
-            driver_info: [c_char::default(); MAX_DRIVER_INFO_SIZE],
+            driver_name: StringArray::default(),
+            driver_info: StringArray::default(),
             conformance_version: ConformanceVersion::default(),
             denorm_behavior_independence: ShaderFloatControlsIndependence::default(),
             rounding_mode_independence: ShaderFloatControlsIndependence::default(),
@@ -10800,7 +10800,7 @@ pub struct PipelineCacheHeaderVersionOne {
     pub header_version: PipelineCacheHeaderVersion,
     pub vendor_id: u32,
     pub device_id: u32,
-    pub pipeline_cache_uuid: [u8; UUID_SIZE],
+    pub pipeline_cache_uuid: ByteArray<UUID_SIZE>,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineColorBlendAdvancedStateCreateInfoEXT.html>
@@ -11135,8 +11135,8 @@ impl Default for PipelineExecutableInfoKHR {
 pub struct PipelineExecutableInternalRepresentationKHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
-    pub name: [c_char; MAX_DESCRIPTION_SIZE],
-    pub description: [c_char; MAX_DESCRIPTION_SIZE],
+    pub name: StringArray<MAX_DESCRIPTION_SIZE>,
+    pub description: StringArray<MAX_DESCRIPTION_SIZE>,
     pub is_text: Bool32,
     pub data_size: usize,
     pub data: *mut c_void,
@@ -11148,8 +11148,8 @@ impl Default for PipelineExecutableInternalRepresentationKHR {
         Self {
             s_type: StructureType::PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR,
             next: ptr::null_mut(),
-            name: [c_char::default(); MAX_DESCRIPTION_SIZE],
-            description: [c_char::default(); MAX_DESCRIPTION_SIZE],
+            name: StringArray::default(),
+            description: StringArray::default(),
             is_text: Bool32::default(),
             data_size: usize::default(),
             data: ptr::null_mut(),
@@ -11164,8 +11164,8 @@ pub struct PipelineExecutablePropertiesKHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub stages: ShaderStageFlags,
-    pub name: [c_char; MAX_DESCRIPTION_SIZE],
-    pub description: [c_char; MAX_DESCRIPTION_SIZE],
+    pub name: StringArray<MAX_DESCRIPTION_SIZE>,
+    pub description: StringArray<MAX_DESCRIPTION_SIZE>,
     pub subgroup_size: u32,
 }
 
@@ -11176,8 +11176,8 @@ impl Default for PipelineExecutablePropertiesKHR {
             s_type: StructureType::PIPELINE_EXECUTABLE_PROPERTIES_KHR,
             next: ptr::null_mut(),
             stages: ShaderStageFlags::default(),
-            name: [c_char::default(); MAX_DESCRIPTION_SIZE],
-            description: [c_char::default(); MAX_DESCRIPTION_SIZE],
+            name: StringArray::default(),
+            description: StringArray::default(),
             subgroup_size: u32::default(),
         }
     }
@@ -11189,8 +11189,8 @@ impl Default for PipelineExecutablePropertiesKHR {
 pub struct PipelineExecutableStatisticKHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
-    pub name: [c_char; MAX_DESCRIPTION_SIZE],
-    pub description: [c_char; MAX_DESCRIPTION_SIZE],
+    pub name: StringArray<MAX_DESCRIPTION_SIZE>,
+    pub description: StringArray<MAX_DESCRIPTION_SIZE>,
     pub format: PipelineExecutableStatisticFormatKHR,
     pub value: PipelineExecutableStatisticValueKHR,
 }
@@ -11201,8 +11201,8 @@ impl Default for PipelineExecutableStatisticKHR {
         Self {
             s_type: StructureType::PIPELINE_EXECUTABLE_STATISTIC_KHR,
             next: ptr::null_mut(),
-            name: [c_char::default(); MAX_DESCRIPTION_SIZE],
-            description: [c_char::default(); MAX_DESCRIPTION_SIZE],
+            name: StringArray::default(),
+            description: StringArray::default(),
             format: PipelineExecutableStatisticFormatKHR::default(),
             value: PipelineExecutableStatisticValueKHR::default(),
         }
