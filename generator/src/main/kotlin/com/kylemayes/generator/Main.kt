@@ -129,6 +129,7 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
     private val force by option(help = "Force update of generated Vulkan bindings").flag()
     private val repo by option(help = "GitHub repository to publish changes to")
+    private val skipUpgrade by option(help = "Skip upgrading commit").flag()
 
     override fun run() {
         val (directory, github, anonymous) = context
@@ -138,8 +139,13 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
         val currentCommit = getCurrentCommit(directory)
         log.info { "Current commit = $currentCommit" }
 
-        val latestCommit = getLatestCommit(github, "xml/vk.xml")
-        log.info { "Latest commit = $latestCommit" }
+        val latestCommit = if (!skipUpgrade) {
+            val latestCommit = getLatestCommit(github, "xml/vk.xml")
+            log.info { "Latest commit = $latestCommit" }
+            latestCommit
+        } else {
+            currentCommit
+        }
 
         if (!force && currentCommit == latestCommit) {
             log.info { "Nothing to update." }
