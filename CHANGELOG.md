@@ -7,6 +7,7 @@
 - [August 10, 2021 Vulkan 1.2.188 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/f1eda2cb1656363ccd67e07f5654a80fc13b47af)
 
 ### Changed
+- Bumped MSRV to 1.51
 - Added `Send` and `Sync` requirement to `Loader` error type
 - Changed type of stored layer names to `vk::ExtensionName` instead of `CString`
 - Added constants, constructor, and additional conversions to `Version`
