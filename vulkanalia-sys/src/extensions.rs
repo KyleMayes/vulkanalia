@@ -1112,6 +1112,22 @@ pub const EXT_LINE_RASTERIZATION_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_load_store_op_none.html>
+#[allow(deprecated)]
+pub const EXT_LOAD_STORE_OP_NONE_EXTENSION: Extension = Extension {
+    name: to_extension_name(b"VK_EXT_load_store_op_none"),
+    number: 401,
+    type_: "device",
+    author: "EXT",
+    contact: "Shahbaz Youssefi @syoussefi",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_memory_budget.html>
 #[allow(deprecated)]
 pub const EXT_MEMORY_BUDGET_EXTENSION: Extension = Extension {
