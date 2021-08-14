@@ -232,7 +232,7 @@ data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
 </code></pre>
 <p>The push constant range here specifies that the push constants accessed by the vertex shader can be found at the beginning of the push constants provided to the graphics pipeline and are the size of a <code>mat4</code>.</p>
 <p>With all that in place, we can actually start pushing the model matrix to the vertex shader. Push constants are recorded directly into the command buffers submitted to the GPU which is both why they are so fast and why their size is so limited.</p>
-<p>In the <code>create_command_buffers</code> function, define a model matrix and use <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_push_constants"><code class="hljs">cmd_push_constants</code></a> to add it to the the command buffers as a push constant right before we record the draw command.</p>
+<p>In the <code>create_command_buffers</code> function, define a model matrix and use <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_push_constants"><code class="hljs">cmd_push_constants</code></a> to add it to the command buffers as a push constant right before we record the draw command.</p>
 <pre><code class="language-rust noplaypen">let model = glm::rotate(&amp;glm::identity(), 0.0f32, &amp;glm::vec3(0.0, 0.0, 1.0));
 let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
 

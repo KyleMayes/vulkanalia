@@ -481,7 +481,7 @@ end_single_time_commands(device, data, command_buffer)?;
 <pre><code class="language-rust noplaypen">generate_mipmaps(
     instance,
     device,
-    &amp;data,
+    data,
     data.texture_image,
     info.width,
     info.height,
@@ -495,7 +495,7 @@ end_single_time_commands(device, data, command_buffer)?;
 <pre><code class="language-rust noplaypen">generate_mipmaps(
     instance,
     device,
-    &amp;data,
+    data,
     data.texture_image,
     vk::Format::R8G8B8A8_SRGB,
     info.width,
