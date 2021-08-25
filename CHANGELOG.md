@@ -14,6 +14,9 @@
 - Changed `patch` field to default to `0` in `Version` instead of using `Option`
 - Reworked byte and string array types in Vulkan structs
 
+### Added
+- Added `Debug` requirement to extension struct traits (e.g., `ExtendsDeviceCreateInfo`)
+
 ## [0.10.0] - 2021-07-10
 
 ### Bindings Updates

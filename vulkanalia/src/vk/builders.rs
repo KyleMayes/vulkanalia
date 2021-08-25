@@ -410,7 +410,7 @@ unsafe impl Cast for AccelerationStructureBuildSizesInfoKHRBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`AccelerationStructureCreateInfoKHR`].
-pub unsafe trait ExtendsAccelerationStructureCreateInfoKHR {}
+pub unsafe trait ExtendsAccelerationStructureCreateInfoKHR: fmt::Debug {}
 unsafe impl ExtendsAccelerationStructureCreateInfoKHR for AccelerationStructureMotionInfoNV {}
 
 unsafe impl Cast for AccelerationStructureCreateInfoKHR {
@@ -896,7 +896,7 @@ unsafe impl Cast for AccelerationStructureGeometryMotionTrianglesDataNVBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`AccelerationStructureGeometryTrianglesDataKHR`].
-pub unsafe trait ExtendsAccelerationStructureGeometryTrianglesDataKHR {}
+pub unsafe trait ExtendsAccelerationStructureGeometryTrianglesDataKHR: fmt::Debug {}
 unsafe impl ExtendsAccelerationStructureGeometryTrianglesDataKHR
     for AccelerationStructureGeometryMotionTrianglesDataNV
 {
@@ -1989,7 +1989,7 @@ unsafe impl Cast for AndroidHardwareBufferFormatPropertiesANDROIDBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`AndroidHardwareBufferPropertiesANDROID`].
-pub unsafe trait ExtendsAndroidHardwareBufferPropertiesANDROID {}
+pub unsafe trait ExtendsAndroidHardwareBufferPropertiesANDROID: fmt::Debug {}
 unsafe impl ExtendsAndroidHardwareBufferPropertiesANDROID
     for AndroidHardwareBufferFormatPropertiesANDROID
 {
@@ -2384,7 +2384,7 @@ unsafe impl Cast for AttachmentDescriptionBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`AttachmentDescription2`].
-pub unsafe trait ExtendsAttachmentDescription2 {}
+pub unsafe trait ExtendsAttachmentDescription2: fmt::Debug {}
 unsafe impl ExtendsAttachmentDescription2 for AttachmentDescriptionStencilLayout {}
 
 unsafe impl Cast for AttachmentDescription2 {
@@ -2634,7 +2634,7 @@ unsafe impl Cast for AttachmentReferenceBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`AttachmentReference2`].
-pub unsafe trait ExtendsAttachmentReference2 {}
+pub unsafe trait ExtendsAttachmentReference2: fmt::Debug {}
 unsafe impl ExtendsAttachmentReference2 for AttachmentReferenceStencilLayout {}
 
 unsafe impl Cast for AttachmentReference2 {
@@ -3103,7 +3103,7 @@ unsafe impl<'b> Cast for BindBufferMemoryDeviceGroupInfoBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`BindBufferMemoryInfo`].
-pub unsafe trait ExtendsBindBufferMemoryInfo {}
+pub unsafe trait ExtendsBindBufferMemoryInfo: fmt::Debug {}
 unsafe impl ExtendsBindBufferMemoryInfo for BindBufferMemoryDeviceGroupInfo {}
 
 unsafe impl Cast for BindBufferMemoryInfo {
@@ -3259,7 +3259,7 @@ unsafe impl<'b> Cast for BindImageMemoryDeviceGroupInfoBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`BindImageMemoryInfo`].
-pub unsafe trait ExtendsBindImageMemoryInfo {}
+pub unsafe trait ExtendsBindImageMemoryInfo: fmt::Debug {}
 unsafe impl ExtendsBindImageMemoryInfo for BindImageMemoryDeviceGroupInfo {}
 unsafe impl ExtendsBindImageMemoryInfo for BindImageMemorySwapchainInfoKHR {}
 unsafe impl ExtendsBindImageMemoryInfo for BindImagePlaneMemoryInfo {}
@@ -3597,7 +3597,7 @@ unsafe impl Cast for BindShaderGroupIndirectCommandNVBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`BindSparseInfo`].
-pub unsafe trait ExtendsBindSparseInfo {}
+pub unsafe trait ExtendsBindSparseInfo: fmt::Debug {}
 unsafe impl ExtendsBindSparseInfo for DeviceGroupBindSparseInfo {}
 unsafe impl ExtendsBindSparseInfo for TimelineSemaphoreSubmitInfo {}
 
@@ -4010,7 +4010,7 @@ unsafe impl Cast for BufferCopy2KHRBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`BufferCreateInfo`].
-pub unsafe trait ExtendsBufferCreateInfo {}
+pub unsafe trait ExtendsBufferCreateInfo: fmt::Debug {}
 unsafe impl ExtendsBufferCreateInfo for BufferDeviceAddressCreateInfoEXT {}
 unsafe impl ExtendsBufferCreateInfo for BufferOpaqueCaptureAddressCreateInfo {}
 unsafe impl ExtendsBufferCreateInfo for DedicatedAllocationBufferCreateInfoNV {}
@@ -4319,7 +4319,7 @@ unsafe impl Cast for BufferImageCopyBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`BufferImageCopy2KHR`].
-pub unsafe trait ExtendsBufferImageCopy2KHR {}
+pub unsafe trait ExtendsBufferImageCopy2KHR: fmt::Debug {}
 unsafe impl ExtendsBufferImageCopy2KHR for CopyCommandTransformInfoQCOM {}
 
 unsafe impl Cast for BufferImageCopy2KHR {
@@ -5431,7 +5431,7 @@ unsafe impl Cast for CommandBufferAllocateInfoBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`CommandBufferBeginInfo`].
-pub unsafe trait ExtendsCommandBufferBeginInfo {}
+pub unsafe trait ExtendsCommandBufferBeginInfo: fmt::Debug {}
 unsafe impl ExtendsCommandBufferBeginInfo for DeviceGroupCommandBufferBeginInfo {}
 
 unsafe impl Cast for CommandBufferBeginInfo {
@@ -5572,7 +5572,7 @@ unsafe impl Cast for CommandBufferInheritanceConditionalRenderingInfoEXTBuilder 
 }
 
 /// A Vulkan struct that can be used to extend a [`CommandBufferInheritanceInfo`].
-pub unsafe trait ExtendsCommandBufferInheritanceInfo {}
+pub unsafe trait ExtendsCommandBufferInheritanceInfo: fmt::Debug {}
 unsafe impl ExtendsCommandBufferInheritanceInfo
     for CommandBufferInheritanceConditionalRenderingInfoEXT
 {
@@ -6023,7 +6023,7 @@ unsafe impl Cast for ComponentMappingBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`ComputePipelineCreateInfo`].
-pub unsafe trait ExtendsComputePipelineCreateInfo {}
+pub unsafe trait ExtendsComputePipelineCreateInfo: fmt::Debug {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCreationFeedbackCreateInfoEXT {}
 unsafe impl ExtendsComputePipelineCreateInfo for SubpassShadingPipelineCreateInfoHUAWEI {}
@@ -8465,7 +8465,7 @@ unsafe impl Cast for DescriptorImageInfoBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`DescriptorPoolCreateInfo`].
-pub unsafe trait ExtendsDescriptorPoolCreateInfo {}
+pub unsafe trait ExtendsDescriptorPoolCreateInfo: fmt::Debug {}
 unsafe impl ExtendsDescriptorPoolCreateInfo for DescriptorPoolInlineUniformBlockCreateInfoEXT {}
 unsafe impl ExtendsDescriptorPoolCreateInfo for MutableDescriptorTypeCreateInfoVALVE {}
 
@@ -8678,7 +8678,7 @@ unsafe impl Cast for DescriptorPoolSizeBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`DescriptorSetAllocateInfo`].
-pub unsafe trait ExtendsDescriptorSetAllocateInfo {}
+pub unsafe trait ExtendsDescriptorSetAllocateInfo: fmt::Debug {}
 unsafe impl ExtendsDescriptorSetAllocateInfo for DescriptorSetVariableDescriptorCountAllocateInfo {}
 
 unsafe impl Cast for DescriptorSetAllocateInfo {
@@ -8903,7 +8903,7 @@ unsafe impl<'b> Cast for DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`DescriptorSetLayoutCreateInfo`].
-pub unsafe trait ExtendsDescriptorSetLayoutCreateInfo {}
+pub unsafe trait ExtendsDescriptorSetLayoutCreateInfo: fmt::Debug {}
 unsafe impl ExtendsDescriptorSetLayoutCreateInfo for DescriptorSetLayoutBindingFlagsCreateInfo {}
 unsafe impl ExtendsDescriptorSetLayoutCreateInfo for MutableDescriptorTypeCreateInfoVALVE {}
 
@@ -8988,7 +8988,7 @@ unsafe impl<'b> Cast for DescriptorSetLayoutCreateInfoBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`DescriptorSetLayoutSupport`].
-pub unsafe trait ExtendsDescriptorSetLayoutSupport {}
+pub unsafe trait ExtendsDescriptorSetLayoutSupport: fmt::Debug {}
 unsafe impl ExtendsDescriptorSetLayoutSupport
     for DescriptorSetVariableDescriptorCountLayoutSupport
 {
@@ -9370,7 +9370,7 @@ unsafe impl Cast for DescriptorUpdateTemplateEntryBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`DeviceCreateInfo`].
-pub unsafe trait ExtendsDeviceCreateInfo {}
+pub unsafe trait ExtendsDeviceCreateInfo: fmt::Debug {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceDeviceMemoryReportCreateInfoEXT {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceDiagnosticsConfigCreateInfoNV {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceGroupDeviceCreateInfo {}
@@ -10555,7 +10555,7 @@ unsafe impl Cast for DevicePrivateDataCreateInfoEXTBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`DeviceQueueCreateInfo`].
-pub unsafe trait ExtendsDeviceQueueCreateInfo {}
+pub unsafe trait ExtendsDeviceQueueCreateInfo: fmt::Debug {}
 unsafe impl ExtendsDeviceQueueCreateInfo for DeviceQueueGlobalPriorityCreateInfoEXT {}
 
 unsafe impl Cast for DeviceQueueCreateInfo {
@@ -13834,7 +13834,7 @@ unsafe impl Cast for ExternalSemaphorePropertiesBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`FenceCreateInfo`].
-pub unsafe trait ExtendsFenceCreateInfo {}
+pub unsafe trait ExtendsFenceCreateInfo: fmt::Debug {}
 unsafe impl ExtendsFenceCreateInfo for ExportFenceCreateInfo {}
 unsafe impl ExtendsFenceCreateInfo for ExportFenceWin32HandleInfoKHR {}
 
@@ -14171,7 +14171,7 @@ unsafe impl Cast for FormatPropertiesBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`FormatProperties2`].
-pub unsafe trait ExtendsFormatProperties2 {}
+pub unsafe trait ExtendsFormatProperties2: fmt::Debug {}
 unsafe impl ExtendsFormatProperties2 for DrmFormatModifierPropertiesListEXT {}
 
 unsafe impl Cast for FormatProperties2 {
@@ -14472,7 +14472,7 @@ unsafe impl<'b> Cast for FramebufferAttachmentsCreateInfoBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`FramebufferCreateInfo`].
-pub unsafe trait ExtendsFramebufferCreateInfo {}
+pub unsafe trait ExtendsFramebufferCreateInfo: fmt::Debug {}
 unsafe impl ExtendsFramebufferCreateInfo for FramebufferAttachmentsCreateInfo {}
 
 unsafe impl Cast for FramebufferCreateInfo {
@@ -15192,7 +15192,7 @@ unsafe impl Cast for GeometryTrianglesNVBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`GraphicsPipelineCreateInfo`].
-pub unsafe trait ExtendsGraphicsPipelineCreateInfo {}
+pub unsafe trait ExtendsGraphicsPipelineCreateInfo: fmt::Debug {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineShaderGroupsCreateInfoNV {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCreationFeedbackCreateInfoEXT {}
@@ -15861,7 +15861,7 @@ unsafe impl Cast for ImageBlitBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`ImageBlit2KHR`].
-pub unsafe trait ExtendsImageBlit2KHR {}
+pub unsafe trait ExtendsImageBlit2KHR: fmt::Debug {}
 unsafe impl ExtendsImageBlit2KHR for CopyCommandTransformInfoQCOM {}
 
 unsafe impl Cast for ImageBlit2KHR {
@@ -16135,7 +16135,7 @@ unsafe impl Cast for ImageCopy2KHRBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`ImageCreateInfo`].
-pub unsafe trait ExtendsImageCreateInfo {}
+pub unsafe trait ExtendsImageCreateInfo: fmt::Debug {}
 unsafe impl ExtendsImageCreateInfo for DedicatedAllocationImageCreateInfoNV {}
 unsafe impl ExtendsImageCreateInfo for ExternalFormatANDROID {}
 unsafe impl ExtendsImageCreateInfo for ExternalMemoryImageCreateInfo {}
@@ -16613,7 +16613,7 @@ unsafe impl Cast for ImageFormatPropertiesBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`ImageFormatProperties2`].
-pub unsafe trait ExtendsImageFormatProperties2 {}
+pub unsafe trait ExtendsImageFormatProperties2: fmt::Debug {}
 unsafe impl ExtendsImageFormatProperties2 for AndroidHardwareBufferUsageANDROID {}
 unsafe impl ExtendsImageFormatProperties2 for ExternalImageFormatProperties {}
 unsafe impl ExtendsImageFormatProperties2 for FilterCubicImageViewImageFormatPropertiesEXT {}
@@ -16694,7 +16694,7 @@ unsafe impl<'b> Cast for ImageFormatProperties2Builder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`ImageMemoryBarrier`].
-pub unsafe trait ExtendsImageMemoryBarrier {}
+pub unsafe trait ExtendsImageMemoryBarrier: fmt::Debug {}
 unsafe impl ExtendsImageMemoryBarrier for SampleLocationsInfoEXT {}
 
 unsafe impl Cast for ImageMemoryBarrier {
@@ -16813,7 +16813,7 @@ unsafe impl<'b> Cast for ImageMemoryBarrierBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`ImageMemoryBarrier2KHR`].
-pub unsafe trait ExtendsImageMemoryBarrier2KHR {}
+pub unsafe trait ExtendsImageMemoryBarrier2KHR: fmt::Debug {}
 unsafe impl ExtendsImageMemoryBarrier2KHR for SampleLocationsInfoEXT {}
 
 unsafe impl Cast for ImageMemoryBarrier2KHR {
@@ -16944,7 +16944,7 @@ unsafe impl<'b> Cast for ImageMemoryBarrier2KHRBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`ImageMemoryRequirementsInfo2`].
-pub unsafe trait ExtendsImageMemoryRequirementsInfo2 {}
+pub unsafe trait ExtendsImageMemoryRequirementsInfo2: fmt::Debug {}
 unsafe impl ExtendsImageMemoryRequirementsInfo2 for ImagePlaneMemoryRequirementsInfo {}
 
 unsafe impl Cast for ImageMemoryRequirementsInfo2 {
@@ -17840,7 +17840,7 @@ unsafe impl Cast for ImageViewAddressPropertiesNVXBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`ImageViewCreateInfo`].
-pub unsafe trait ExtendsImageViewCreateInfo {}
+pub unsafe trait ExtendsImageViewCreateInfo: fmt::Debug {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewASTCDecodeModeEXT {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewUsageCreateInfo {}
 unsafe impl ExtendsImageViewCreateInfo for SamplerYcbcrConversionInfo {}
@@ -19263,7 +19263,7 @@ unsafe impl Cast for InputAttachmentAspectReferenceBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`InstanceCreateInfo`].
-pub unsafe trait ExtendsInstanceCreateInfo {}
+pub unsafe trait ExtendsInstanceCreateInfo: fmt::Debug {}
 unsafe impl ExtendsInstanceCreateInfo for DebugReportCallbackCreateInfoEXT {}
 unsafe impl ExtendsInstanceCreateInfo for DebugUtilsMessengerCreateInfoEXT {}
 unsafe impl ExtendsInstanceCreateInfo for ValidationFeaturesEXT {}
@@ -19644,7 +19644,7 @@ unsafe impl Cast for MemoryAllocateFlagsInfoBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`MemoryAllocateInfo`].
-pub unsafe trait ExtendsMemoryAllocateInfo {}
+pub unsafe trait ExtendsMemoryAllocateInfo: fmt::Debug {}
 unsafe impl ExtendsMemoryAllocateInfo for DedicatedAllocationMemoryAllocateInfoNV {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryAllocateInfo {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryAllocateInfoNV {}
@@ -20686,7 +20686,7 @@ unsafe impl Cast for MemoryRequirementsBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`MemoryRequirements2`].
-pub unsafe trait ExtendsMemoryRequirements2 {}
+pub unsafe trait ExtendsMemoryRequirements2: fmt::Debug {}
 unsafe impl ExtendsMemoryRequirements2 for MemoryDedicatedRequirements {}
 
 unsafe impl Cast for MemoryRequirements2 {
@@ -25427,7 +25427,7 @@ unsafe impl Cast for PhysicalDeviceExternalMemoryRDMAFeaturesNVBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`PhysicalDeviceExternalSemaphoreInfo`].
-pub unsafe trait ExtendsPhysicalDeviceExternalSemaphoreInfo {}
+pub unsafe trait ExtendsPhysicalDeviceExternalSemaphoreInfo: fmt::Debug {}
 unsafe impl ExtendsPhysicalDeviceExternalSemaphoreInfo for SemaphoreTypeCreateInfo {}
 
 unsafe impl Cast for PhysicalDeviceExternalSemaphoreInfo {
@@ -25922,7 +25922,7 @@ unsafe impl Cast for PhysicalDeviceFeaturesBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`PhysicalDeviceFeatures2`].
-pub unsafe trait ExtendsPhysicalDeviceFeatures2 {}
+pub unsafe trait ExtendsPhysicalDeviceFeatures2: fmt::Debug {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice16BitStorageFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice4444FormatsFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice8BitStorageFeatures {}
@@ -27585,7 +27585,7 @@ unsafe impl<'b> Cast for PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'b> 
 }
 
 /// A Vulkan struct that can be used to extend a [`PhysicalDeviceImageFormatInfo2`].
-pub unsafe trait ExtendsPhysicalDeviceImageFormatInfo2 {}
+pub unsafe trait ExtendsPhysicalDeviceImageFormatInfo2: fmt::Debug {}
 unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for ImageFormatListCreateInfo {}
 unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for ImageStencilUsageCreateInfo {}
 unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for PhysicalDeviceExternalImageFormatInfo {}
@@ -29441,7 +29441,7 @@ unsafe impl Cast for PhysicalDeviceMemoryPropertiesBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`PhysicalDeviceMemoryProperties2`].
-pub unsafe trait ExtendsPhysicalDeviceMemoryProperties2 {}
+pub unsafe trait ExtendsPhysicalDeviceMemoryProperties2: fmt::Debug {}
 unsafe impl ExtendsPhysicalDeviceMemoryProperties2 for PhysicalDeviceMemoryBudgetPropertiesEXT {}
 
 unsafe impl Cast for PhysicalDeviceMemoryProperties2 {
@@ -30984,7 +30984,7 @@ unsafe impl Cast for PhysicalDevicePropertiesBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`PhysicalDeviceProperties2`].
-pub unsafe trait ExtendsPhysicalDeviceProperties2 {}
+pub unsafe trait ExtendsPhysicalDeviceProperties2: fmt::Debug {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceAccelerationStructurePropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceBlendOperationAdvancedPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2
@@ -34357,7 +34357,7 @@ unsafe impl Cast for PhysicalDeviceSubpassShadingPropertiesHUAWEIBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`PhysicalDeviceSurfaceInfo2KHR`].
-pub unsafe trait ExtendsPhysicalDeviceSurfaceInfo2KHR {}
+pub unsafe trait ExtendsPhysicalDeviceSurfaceInfo2KHR: fmt::Debug {}
 unsafe impl ExtendsPhysicalDeviceSurfaceInfo2KHR for SurfaceFullScreenExclusiveInfoEXT {}
 unsafe impl ExtendsPhysicalDeviceSurfaceInfo2KHR for SurfaceFullScreenExclusiveWin32InfoEXT {}
 
@@ -37362,7 +37362,7 @@ unsafe impl Cast for PipelineColorBlendAttachmentStateBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`PipelineColorBlendStateCreateInfo`].
-pub unsafe trait ExtendsPipelineColorBlendStateCreateInfo {}
+pub unsafe trait ExtendsPipelineColorBlendStateCreateInfo: fmt::Debug {}
 unsafe impl ExtendsPipelineColorBlendStateCreateInfo
     for PipelineColorBlendAdvancedStateCreateInfoEXT
 {
@@ -38917,7 +38917,7 @@ unsafe impl<'b> Cast for PipelineLibraryCreateInfoKHRBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`PipelineMultisampleStateCreateInfo`].
-pub unsafe trait ExtendsPipelineMultisampleStateCreateInfo {}
+pub unsafe trait ExtendsPipelineMultisampleStateCreateInfo: fmt::Debug {}
 unsafe impl ExtendsPipelineMultisampleStateCreateInfo
     for PipelineCoverageModulationStateCreateInfoNV
 {
@@ -39316,7 +39316,7 @@ unsafe impl Cast for PipelineRasterizationProvokingVertexStateCreateInfoEXTBuild
 }
 
 /// A Vulkan struct that can be used to extend a [`PipelineRasterizationStateCreateInfo`].
-pub unsafe trait ExtendsPipelineRasterizationStateCreateInfo {}
+pub unsafe trait ExtendsPipelineRasterizationStateCreateInfo: fmt::Debug {}
 unsafe impl ExtendsPipelineRasterizationStateCreateInfo
     for PipelineRasterizationConservativeStateCreateInfoEXT
 {
@@ -39725,7 +39725,7 @@ unsafe impl<'b> Cast for PipelineSampleLocationsStateCreateInfoEXTBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`PipelineShaderStageCreateInfo`].
-pub unsafe trait ExtendsPipelineShaderStageCreateInfo {}
+pub unsafe trait ExtendsPipelineShaderStageCreateInfo: fmt::Debug {}
 unsafe impl ExtendsPipelineShaderStageCreateInfo
     for PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT
 {
@@ -39945,7 +39945,7 @@ unsafe impl Cast for PipelineTessellationDomainOriginStateCreateInfoBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`PipelineTessellationStateCreateInfo`].
-pub unsafe trait ExtendsPipelineTessellationStateCreateInfo {}
+pub unsafe trait ExtendsPipelineTessellationStateCreateInfo: fmt::Debug {}
 unsafe impl ExtendsPipelineTessellationStateCreateInfo
     for PipelineTessellationDomainOriginStateCreateInfo
 {
@@ -40091,7 +40091,7 @@ unsafe impl<'b> Cast for PipelineVertexInputDivisorStateCreateInfoEXTBuilder<'b>
 }
 
 /// A Vulkan struct that can be used to extend a [`PipelineVertexInputStateCreateInfo`].
-pub unsafe trait ExtendsPipelineVertexInputStateCreateInfo {}
+pub unsafe trait ExtendsPipelineVertexInputStateCreateInfo: fmt::Debug {}
 unsafe impl ExtendsPipelineVertexInputStateCreateInfo
     for PipelineVertexInputDivisorStateCreateInfoEXT
 {
@@ -40389,7 +40389,7 @@ unsafe impl<'b> Cast for PipelineViewportShadingRateImageStateCreateInfoNVBuilde
 }
 
 /// A Vulkan struct that can be used to extend a [`PipelineViewportStateCreateInfo`].
-pub unsafe trait ExtendsPipelineViewportStateCreateInfo {}
+pub unsafe trait ExtendsPipelineViewportStateCreateInfo: fmt::Debug {}
 unsafe impl ExtendsPipelineViewportStateCreateInfo
     for PipelineViewportCoarseSampleOrderStateCreateInfoNV
 {
@@ -40770,7 +40770,7 @@ unsafe impl<'b> Cast for PresentIdKHRBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`PresentInfoKHR`].
-pub unsafe trait ExtendsPresentInfoKHR {}
+pub unsafe trait ExtendsPresentInfoKHR: fmt::Debug {}
 unsafe impl ExtendsPresentInfoKHR for DeviceGroupPresentInfoKHR {}
 unsafe impl ExtendsPresentInfoKHR for DisplayPresentInfoKHR {}
 unsafe impl ExtendsPresentInfoKHR for PresentFrameTokenGGP {}
@@ -41325,7 +41325,7 @@ unsafe impl Cast for PushConstantRangeBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`QueryPoolCreateInfo`].
-pub unsafe trait ExtendsQueryPoolCreateInfo {}
+pub unsafe trait ExtendsQueryPoolCreateInfo: fmt::Debug {}
 unsafe impl ExtendsQueryPoolCreateInfo for QueryPoolPerformanceCreateInfoKHR {}
 unsafe impl ExtendsQueryPoolCreateInfo for QueryPoolPerformanceQueryCreateInfoINTEL {}
 
@@ -41813,7 +41813,7 @@ unsafe impl Cast for QueueFamilyPropertiesBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`QueueFamilyProperties2`].
-pub unsafe trait ExtendsQueueFamilyProperties2 {}
+pub unsafe trait ExtendsQueueFamilyProperties2: fmt::Debug {}
 unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyCheckpointProperties2NV {}
 unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyCheckpointPropertiesNV {}
 unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyGlobalPriorityPropertiesEXT {}
@@ -41892,7 +41892,7 @@ unsafe impl<'b> Cast for QueueFamilyProperties2Builder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`RayTracingPipelineCreateInfoKHR`].
-pub unsafe trait ExtendsRayTracingPipelineCreateInfoKHR {}
+pub unsafe trait ExtendsRayTracingPipelineCreateInfoKHR: fmt::Debug {}
 unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineCreationFeedbackCreateInfoEXT {}
 
 unsafe impl Cast for RayTracingPipelineCreateInfoKHR {
@@ -42040,7 +42040,7 @@ unsafe impl<'b> Cast for RayTracingPipelineCreateInfoKHRBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`RayTracingPipelineCreateInfoNV`].
-pub unsafe trait ExtendsRayTracingPipelineCreateInfoNV {}
+pub unsafe trait ExtendsRayTracingPipelineCreateInfoNV: fmt::Debug {}
 unsafe impl ExtendsRayTracingPipelineCreateInfoNV for PipelineCreationFeedbackCreateInfoEXT {}
 
 unsafe impl Cast for RayTracingPipelineCreateInfoNV {
@@ -42652,7 +42652,7 @@ unsafe impl<'b> Cast for RenderPassAttachmentBeginInfoBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`RenderPassBeginInfo`].
-pub unsafe trait ExtendsRenderPassBeginInfo {}
+pub unsafe trait ExtendsRenderPassBeginInfo: fmt::Debug {}
 unsafe impl ExtendsRenderPassBeginInfo for DeviceGroupRenderPassBeginInfo {}
 unsafe impl ExtendsRenderPassBeginInfo for RenderPassAttachmentBeginInfo {}
 unsafe impl ExtendsRenderPassBeginInfo for RenderPassSampleLocationsBeginInfoEXT {}
@@ -42748,7 +42748,7 @@ unsafe impl<'b> Cast for RenderPassBeginInfoBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`RenderPassCreateInfo`].
-pub unsafe trait ExtendsRenderPassCreateInfo {}
+pub unsafe trait ExtendsRenderPassCreateInfo: fmt::Debug {}
 unsafe impl ExtendsRenderPassCreateInfo for RenderPassFragmentDensityMapCreateInfoEXT {}
 unsafe impl ExtendsRenderPassCreateInfo for RenderPassInputAttachmentAspectCreateInfo {}
 unsafe impl ExtendsRenderPassCreateInfo for RenderPassMultiviewCreateInfo {}
@@ -42851,7 +42851,7 @@ unsafe impl<'b> Cast for RenderPassCreateInfoBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`RenderPassCreateInfo2`].
-pub unsafe trait ExtendsRenderPassCreateInfo2 {}
+pub unsafe trait ExtendsRenderPassCreateInfo2: fmt::Debug {}
 unsafe impl ExtendsRenderPassCreateInfo2 for RenderPassFragmentDensityMapCreateInfoEXT {}
 
 unsafe impl Cast for RenderPassCreateInfo2 {
@@ -43667,7 +43667,7 @@ unsafe impl<'b> Cast for SampleLocationsInfoEXTBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`SamplerCreateInfo`].
-pub unsafe trait ExtendsSamplerCreateInfo {}
+pub unsafe trait ExtendsSamplerCreateInfo: fmt::Debug {}
 unsafe impl ExtendsSamplerCreateInfo for SamplerCustomBorderColorCreateInfoEXT {}
 unsafe impl ExtendsSamplerCreateInfo for SamplerReductionModeCreateInfo {}
 unsafe impl ExtendsSamplerCreateInfo for SamplerYcbcrConversionInfo {}
@@ -43955,7 +43955,7 @@ unsafe impl Cast for SamplerReductionModeCreateInfoBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`SamplerYcbcrConversionCreateInfo`].
-pub unsafe trait ExtendsSamplerYcbcrConversionCreateInfo {}
+pub unsafe trait ExtendsSamplerYcbcrConversionCreateInfo: fmt::Debug {}
 unsafe impl ExtendsSamplerYcbcrConversionCreateInfo for ExternalFormatANDROID {}
 
 unsafe impl Cast for SamplerYcbcrConversionCreateInfo {
@@ -44262,7 +44262,7 @@ unsafe impl<'b> Cast for ScreenSurfaceCreateInfoQNXBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`SemaphoreCreateInfo`].
-pub unsafe trait ExtendsSemaphoreCreateInfo {}
+pub unsafe trait ExtendsSemaphoreCreateInfo: fmt::Debug {}
 unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreCreateInfo {}
 unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreWin32HandleInfoKHR {}
 unsafe impl ExtendsSemaphoreCreateInfo for SemaphoreTypeCreateInfo {}
@@ -44865,7 +44865,7 @@ unsafe impl Cast for SetStateFlagsIndirectCommandNVBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`ShaderModuleCreateInfo`].
-pub unsafe trait ExtendsShaderModuleCreateInfo {}
+pub unsafe trait ExtendsShaderModuleCreateInfo: fmt::Debug {}
 unsafe impl ExtendsShaderModuleCreateInfo for ShaderModuleValidationCacheCreateInfoEXT {}
 
 unsafe impl Cast for ShaderModuleCreateInfo {
@@ -46325,7 +46325,7 @@ unsafe impl Cast for StridedDeviceAddressRegionKHRBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`SubmitInfo`].
-pub unsafe trait ExtendsSubmitInfo {}
+pub unsafe trait ExtendsSubmitInfo: fmt::Debug {}
 unsafe impl ExtendsSubmitInfo for D3D12FenceSubmitInfoKHR {}
 unsafe impl ExtendsSubmitInfo for DeviceGroupSubmitInfo {}
 unsafe impl ExtendsSubmitInfo for PerformanceQuerySubmitInfoKHR {}
@@ -46427,7 +46427,7 @@ unsafe impl<'b> Cast for SubmitInfoBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`SubmitInfo2KHR`].
-pub unsafe trait ExtendsSubmitInfo2KHR {}
+pub unsafe trait ExtendsSubmitInfo2KHR: fmt::Debug {}
 unsafe impl ExtendsSubmitInfo2KHR for PerformanceQuerySubmitInfoKHR {}
 unsafe impl ExtendsSubmitInfo2KHR for Win32KeyedMutexAcquireReleaseInfoKHR {}
 unsafe impl ExtendsSubmitInfo2KHR for Win32KeyedMutexAcquireReleaseInfoNV {}
@@ -46685,7 +46685,7 @@ unsafe impl Cast for SubpassDependencyBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`SubpassDependency2`].
-pub unsafe trait ExtendsSubpassDependency2 {}
+pub unsafe trait ExtendsSubpassDependency2: fmt::Debug {}
 unsafe impl ExtendsSubpassDependency2 for MemoryBarrier2KHR {}
 
 unsafe impl Cast for SubpassDependency2 {
@@ -46918,7 +46918,7 @@ unsafe impl<'b> Cast for SubpassDescriptionBuilder<'b> {
 }
 
 /// A Vulkan struct that can be used to extend a [`SubpassDescription2`].
-pub unsafe trait ExtendsSubpassDescription2 {}
+pub unsafe trait ExtendsSubpassDescription2: fmt::Debug {}
 unsafe impl ExtendsSubpassDescription2 for FragmentShadingRateAttachmentInfoKHR {}
 unsafe impl ExtendsSubpassDescription2 for SubpassDescriptionDepthStencilResolve {}
 
@@ -47521,7 +47521,7 @@ unsafe impl Cast for SurfaceCapabilities2EXTBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`SurfaceCapabilities2KHR`].
-pub unsafe trait ExtendsSurfaceCapabilities2KHR {}
+pub unsafe trait ExtendsSurfaceCapabilities2KHR: fmt::Debug {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for DisplayNativeHdrSurfaceCapabilitiesAMD {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for SharedPresentSurfaceCapabilitiesKHR {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceCapabilitiesFullScreenExclusiveEXT {}
@@ -48131,7 +48131,7 @@ unsafe impl Cast for SwapchainCounterCreateInfoEXTBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`SwapchainCreateInfoKHR`].
-pub unsafe trait ExtendsSwapchainCreateInfoKHR {}
+pub unsafe trait ExtendsSwapchainCreateInfoKHR: fmt::Debug {}
 unsafe impl ExtendsSwapchainCreateInfoKHR for DeviceGroupSwapchainCreateInfoKHR {}
 unsafe impl ExtendsSwapchainCreateInfoKHR for ImageFormatListCreateInfo {}
 unsafe impl ExtendsSwapchainCreateInfoKHR for SurfaceFullScreenExclusiveInfoEXT {}
@@ -49796,7 +49796,7 @@ unsafe impl Cast for Win32SurfaceCreateInfoKHRBuilder {
 }
 
 /// A Vulkan struct that can be used to extend a [`WriteDescriptorSet`].
-pub unsafe trait ExtendsWriteDescriptorSet {}
+pub unsafe trait ExtendsWriteDescriptorSet: fmt::Debug {}
 unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetAccelerationStructureKHR {}
 unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetAccelerationStructureNV {}
 unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetInlineUniformBlockEXT {}

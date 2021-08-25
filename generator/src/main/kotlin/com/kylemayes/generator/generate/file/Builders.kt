@@ -150,7 +150,7 @@ private fun Registry.generateExtends(struct: Structure): String {
 
     return """
 /// A Vulkan struct that can be used to extend a [`${struct.name}`].
-pub unsafe trait Extends${struct.name} { }
+pub unsafe trait Extends${struct.name}: fmt::Debug { }
 ${extends.joinToString("\n") { "unsafe impl Extends${struct.name} for $it { }" }}
     """
 }
