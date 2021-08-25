@@ -73,7 +73,7 @@ impl HasBuilder<'static> for AabbPositionsKHR {
     type Builder = AabbPositionsKHRBuilder;
 }
 
-/// A builder for a [AabbPositionsKHR](struct.AabbPositionsKHR.html).
+/// A builder for a [`AabbPositionsKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AabbPositionsKHRBuilder {
@@ -161,7 +161,7 @@ impl<'b> HasBuilder<'b> for AccelerationStructureBuildGeometryInfoKHR {
     type Builder = AccelerationStructureBuildGeometryInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [AccelerationStructureBuildGeometryInfoKHR](struct.AccelerationStructureBuildGeometryInfoKHR.html).
+/// A builder for a [`AccelerationStructureBuildGeometryInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureBuildGeometryInfoKHRBuilder<'b> {
@@ -276,7 +276,7 @@ impl HasBuilder<'static> for AccelerationStructureBuildRangeInfoKHR {
     type Builder = AccelerationStructureBuildRangeInfoKHRBuilder;
 }
 
-/// A builder for a [AccelerationStructureBuildRangeInfoKHR](struct.AccelerationStructureBuildRangeInfoKHR.html).
+/// A builder for a [`AccelerationStructureBuildRangeInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureBuildRangeInfoKHRBuilder {
@@ -352,7 +352,7 @@ impl HasBuilder<'static> for AccelerationStructureBuildSizesInfoKHR {
     type Builder = AccelerationStructureBuildSizesInfoKHRBuilder;
 }
 
-/// A builder for a [AccelerationStructureBuildSizesInfoKHR](struct.AccelerationStructureBuildSizesInfoKHR.html).
+/// A builder for a [`AccelerationStructureBuildSizesInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureBuildSizesInfoKHRBuilder {
@@ -409,7 +409,7 @@ unsafe impl Cast for AccelerationStructureBuildSizesInfoKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [AccelerationStructureCreateInfoKHR](struct.AccelerationStructureCreateInfoKHR.html).
+/// A Vulkan struct that can be used to extend a [`AccelerationStructureCreateInfoKHR`].
 pub unsafe trait ExtendsAccelerationStructureCreateInfoKHR {}
 unsafe impl ExtendsAccelerationStructureCreateInfoKHR for AccelerationStructureMotionInfoNV {}
 
@@ -426,7 +426,7 @@ impl<'b> HasBuilder<'b> for AccelerationStructureCreateInfoKHR {
     type Builder = AccelerationStructureCreateInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [AccelerationStructureCreateInfoKHR](struct.AccelerationStructureCreateInfoKHR.html).
+/// A builder for a [`AccelerationStructureCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureCreateInfoKHRBuilder<'b> {
@@ -526,7 +526,7 @@ impl<'b> HasBuilder<'b> for AccelerationStructureCreateInfoNV {
     type Builder = AccelerationStructureCreateInfoNVBuilder<'b>;
 }
 
-/// A builder for a [AccelerationStructureCreateInfoNV](struct.AccelerationStructureCreateInfoNV.html).
+/// A builder for a [`AccelerationStructureCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureCreateInfoNVBuilder<'b> {
@@ -591,7 +591,7 @@ impl HasBuilder<'static> for AccelerationStructureDeviceAddressInfoKHR {
     type Builder = AccelerationStructureDeviceAddressInfoKHRBuilder;
 }
 
-/// A builder for a [AccelerationStructureDeviceAddressInfoKHR](struct.AccelerationStructureDeviceAddressInfoKHR.html).
+/// A builder for a [`AccelerationStructureDeviceAddressInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureDeviceAddressInfoKHRBuilder {
@@ -652,7 +652,7 @@ impl HasBuilder<'static> for AccelerationStructureGeometryAabbsDataKHR {
     type Builder = AccelerationStructureGeometryAabbsDataKHRBuilder;
 }
 
-/// A builder for a [AccelerationStructureGeometryAabbsDataKHR](struct.AccelerationStructureGeometryAabbsDataKHR.html).
+/// A builder for a [`AccelerationStructureGeometryAabbsDataKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureGeometryAabbsDataKHRBuilder {
@@ -716,7 +716,7 @@ impl HasBuilder<'static> for AccelerationStructureGeometryInstancesDataKHR {
     type Builder = AccelerationStructureGeometryInstancesDataKHRBuilder;
 }
 
-/// A builder for a [AccelerationStructureGeometryInstancesDataKHR](struct.AccelerationStructureGeometryInstancesDataKHR.html).
+/// A builder for a [`AccelerationStructureGeometryInstancesDataKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureGeometryInstancesDataKHRBuilder {
@@ -780,7 +780,7 @@ impl HasBuilder<'static> for AccelerationStructureGeometryKHR {
     type Builder = AccelerationStructureGeometryKHRBuilder;
 }
 
-/// A builder for a [AccelerationStructureGeometryKHR](struct.AccelerationStructureGeometryKHR.html).
+/// A builder for a [`AccelerationStructureGeometryKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureGeometryKHRBuilder {
@@ -850,7 +850,7 @@ impl HasBuilder<'static> for AccelerationStructureGeometryMotionTrianglesDataNV 
     type Builder = AccelerationStructureGeometryMotionTrianglesDataNVBuilder;
 }
 
-/// A builder for a [AccelerationStructureGeometryMotionTrianglesDataNV](struct.AccelerationStructureGeometryMotionTrianglesDataNV.html).
+/// A builder for a [`AccelerationStructureGeometryMotionTrianglesDataNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureGeometryMotionTrianglesDataNVBuilder {
@@ -895,7 +895,7 @@ unsafe impl Cast for AccelerationStructureGeometryMotionTrianglesDataNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [AccelerationStructureGeometryTrianglesDataKHR](struct.AccelerationStructureGeometryTrianglesDataKHR.html).
+/// A Vulkan struct that can be used to extend a [`AccelerationStructureGeometryTrianglesDataKHR`].
 pub unsafe trait ExtendsAccelerationStructureGeometryTrianglesDataKHR {}
 unsafe impl ExtendsAccelerationStructureGeometryTrianglesDataKHR
     for AccelerationStructureGeometryMotionTrianglesDataNV
@@ -915,7 +915,7 @@ impl<'b> HasBuilder<'b> for AccelerationStructureGeometryTrianglesDataKHR {
     type Builder = AccelerationStructureGeometryTrianglesDataKHRBuilder<'b>;
 }
 
-/// A builder for a [AccelerationStructureGeometryTrianglesDataKHR](struct.AccelerationStructureGeometryTrianglesDataKHR.html).
+/// A builder for a [`AccelerationStructureGeometryTrianglesDataKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
@@ -1022,7 +1022,7 @@ impl<'b> HasBuilder<'b> for AccelerationStructureInfoNV {
     type Builder = AccelerationStructureInfoNVBuilder<'b>;
 }
 
-/// A builder for a [AccelerationStructureInfoNV](struct.AccelerationStructureInfoNV.html).
+/// A builder for a [`AccelerationStructureInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureInfoNVBuilder<'b> {
@@ -1100,7 +1100,7 @@ impl HasBuilder<'static> for AccelerationStructureInstanceKHR {
     type Builder = AccelerationStructureInstanceKHRBuilder;
 }
 
-/// A builder for a [AccelerationStructureInstanceKHR](struct.AccelerationStructureInstanceKHR.html).
+/// A builder for a [`AccelerationStructureInstanceKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureInstanceKHRBuilder {
@@ -1195,7 +1195,7 @@ impl HasBuilder<'static> for AccelerationStructureMatrixMotionInstanceNV {
     type Builder = AccelerationStructureMatrixMotionInstanceNVBuilder;
 }
 
-/// A builder for a [AccelerationStructureMatrixMotionInstanceNV](struct.AccelerationStructureMatrixMotionInstanceNV.html).
+/// A builder for a [`AccelerationStructureMatrixMotionInstanceNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureMatrixMotionInstanceNVBuilder {
@@ -1296,7 +1296,7 @@ impl HasBuilder<'static> for AccelerationStructureMemoryRequirementsInfoNV {
     type Builder = AccelerationStructureMemoryRequirementsInfoNVBuilder;
 }
 
-/// A builder for a [AccelerationStructureMemoryRequirementsInfoNV](struct.AccelerationStructureMemoryRequirementsInfoNV.html).
+/// A builder for a [`AccelerationStructureMemoryRequirementsInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureMemoryRequirementsInfoNVBuilder {
@@ -1363,7 +1363,7 @@ impl HasBuilder<'static> for AccelerationStructureMotionInfoNV {
     type Builder = AccelerationStructureMotionInfoNVBuilder;
 }
 
-/// A builder for a [AccelerationStructureMotionInfoNV](struct.AccelerationStructureMotionInfoNV.html).
+/// A builder for a [`AccelerationStructureMotionInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureMotionInfoNVBuilder {
@@ -1427,7 +1427,7 @@ impl HasBuilder<'static> for AccelerationStructureMotionInstanceNV {
     type Builder = AccelerationStructureMotionInstanceNVBuilder;
 }
 
-/// A builder for a [AccelerationStructureMotionInstanceNV](struct.AccelerationStructureMotionInstanceNV.html).
+/// A builder for a [`AccelerationStructureMotionInstanceNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureMotionInstanceNVBuilder {
@@ -1497,7 +1497,7 @@ impl HasBuilder<'static> for AccelerationStructureSRTMotionInstanceNV {
     type Builder = AccelerationStructureSRTMotionInstanceNVBuilder;
 }
 
-/// A builder for a [AccelerationStructureSRTMotionInstanceNV](struct.AccelerationStructureSRTMotionInstanceNV.html).
+/// A builder for a [`AccelerationStructureSRTMotionInstanceNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureSRTMotionInstanceNVBuilder {
@@ -1598,7 +1598,7 @@ impl<'b> HasBuilder<'b> for AccelerationStructureVersionInfoKHR {
     type Builder = AccelerationStructureVersionInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [AccelerationStructureVersionInfoKHR](struct.AccelerationStructureVersionInfoKHR.html).
+/// A builder for a [`AccelerationStructureVersionInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AccelerationStructureVersionInfoKHRBuilder<'b> {
@@ -1657,7 +1657,7 @@ impl HasBuilder<'static> for AcquireNextImageInfoKHR {
     type Builder = AcquireNextImageInfoKHRBuilder;
 }
 
-/// A builder for a [AcquireNextImageInfoKHR](struct.AcquireNextImageInfoKHR.html).
+/// A builder for a [`AcquireNextImageInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AcquireNextImageInfoKHRBuilder {
@@ -1739,7 +1739,7 @@ impl HasBuilder<'static> for AcquireProfilingLockInfoKHR {
     type Builder = AcquireProfilingLockInfoKHRBuilder;
 }
 
-/// A builder for a [AcquireProfilingLockInfoKHR](struct.AcquireProfilingLockInfoKHR.html).
+/// A builder for a [`AcquireProfilingLockInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AcquireProfilingLockInfoKHRBuilder {
@@ -1803,7 +1803,7 @@ impl<'b> HasBuilder<'b> for AllocationCallbacks {
     type Builder = AllocationCallbacksBuilder<'b>;
 }
 
-/// A builder for a [AllocationCallbacks](struct.AllocationCallbacks.html).
+/// A builder for a [`AllocationCallbacks`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AllocationCallbacksBuilder<'b> {
@@ -1895,7 +1895,7 @@ impl HasBuilder<'static> for AndroidHardwareBufferFormatPropertiesANDROID {
     type Builder = AndroidHardwareBufferFormatPropertiesANDROIDBuilder;
 }
 
-/// A builder for a [AndroidHardwareBufferFormatPropertiesANDROID](struct.AndroidHardwareBufferFormatPropertiesANDROID.html).
+/// A builder for a [`AndroidHardwareBufferFormatPropertiesANDROID`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AndroidHardwareBufferFormatPropertiesANDROIDBuilder {
@@ -1988,7 +1988,7 @@ unsafe impl Cast for AndroidHardwareBufferFormatPropertiesANDROIDBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [AndroidHardwareBufferPropertiesANDROID](struct.AndroidHardwareBufferPropertiesANDROID.html).
+/// A Vulkan struct that can be used to extend a [`AndroidHardwareBufferPropertiesANDROID`].
 pub unsafe trait ExtendsAndroidHardwareBufferPropertiesANDROID {}
 unsafe impl ExtendsAndroidHardwareBufferPropertiesANDROID
     for AndroidHardwareBufferFormatPropertiesANDROID
@@ -2008,7 +2008,7 @@ impl<'b> HasBuilder<'b> for AndroidHardwareBufferPropertiesANDROID {
     type Builder = AndroidHardwareBufferPropertiesANDROIDBuilder<'b>;
 }
 
-/// A builder for a [AndroidHardwareBufferPropertiesANDROID](struct.AndroidHardwareBufferPropertiesANDROID.html).
+/// A builder for a [`AndroidHardwareBufferPropertiesANDROID`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AndroidHardwareBufferPropertiesANDROIDBuilder<'b> {
@@ -2084,7 +2084,7 @@ impl HasBuilder<'static> for AndroidHardwareBufferUsageANDROID {
     type Builder = AndroidHardwareBufferUsageANDROIDBuilder;
 }
 
-/// A builder for a [AndroidHardwareBufferUsageANDROID](struct.AndroidHardwareBufferUsageANDROID.html).
+/// A builder for a [`AndroidHardwareBufferUsageANDROID`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AndroidHardwareBufferUsageANDROIDBuilder {
@@ -2142,7 +2142,7 @@ impl<'b> HasBuilder<'b> for AndroidSurfaceCreateInfoKHR {
     type Builder = AndroidSurfaceCreateInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [AndroidSurfaceCreateInfoKHR](struct.AndroidSurfaceCreateInfoKHR.html).
+/// A builder for a [`AndroidSurfaceCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AndroidSurfaceCreateInfoKHRBuilder<'b> {
@@ -2207,7 +2207,7 @@ impl<'b> HasBuilder<'b> for ApplicationInfo {
     type Builder = ApplicationInfoBuilder<'b>;
 }
 
-/// A builder for a [ApplicationInfo](struct.ApplicationInfo.html).
+/// A builder for a [`ApplicationInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ApplicationInfoBuilder<'b> {
@@ -2290,7 +2290,7 @@ impl HasBuilder<'static> for AttachmentDescription {
     type Builder = AttachmentDescriptionBuilder;
 }
 
-/// A builder for a [AttachmentDescription](struct.AttachmentDescription.html).
+/// A builder for a [`AttachmentDescription`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AttachmentDescriptionBuilder {
@@ -2383,7 +2383,7 @@ unsafe impl Cast for AttachmentDescriptionBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [AttachmentDescription2](struct.AttachmentDescription2.html).
+/// A Vulkan struct that can be used to extend a [`AttachmentDescription2`].
 pub unsafe trait ExtendsAttachmentDescription2 {}
 unsafe impl ExtendsAttachmentDescription2 for AttachmentDescriptionStencilLayout {}
 
@@ -2400,7 +2400,7 @@ impl<'b> HasBuilder<'b> for AttachmentDescription2 {
     type Builder = AttachmentDescription2Builder<'b>;
 }
 
-/// A builder for a [AttachmentDescription2](struct.AttachmentDescription2.html).
+/// A builder for a [`AttachmentDescription2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AttachmentDescription2Builder<'b> {
@@ -2518,7 +2518,7 @@ impl HasBuilder<'static> for AttachmentDescriptionStencilLayout {
     type Builder = AttachmentDescriptionStencilLayoutBuilder;
 }
 
-/// A builder for a [AttachmentDescriptionStencilLayout](struct.AttachmentDescriptionStencilLayout.html).
+/// A builder for a [`AttachmentDescriptionStencilLayout`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AttachmentDescriptionStencilLayoutBuilder {
@@ -2582,7 +2582,7 @@ impl HasBuilder<'static> for AttachmentReference {
     type Builder = AttachmentReferenceBuilder;
 }
 
-/// A builder for a [AttachmentReference](struct.AttachmentReference.html).
+/// A builder for a [`AttachmentReference`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AttachmentReferenceBuilder {
@@ -2633,7 +2633,7 @@ unsafe impl Cast for AttachmentReferenceBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [AttachmentReference2](struct.AttachmentReference2.html).
+/// A Vulkan struct that can be used to extend a [`AttachmentReference2`].
 pub unsafe trait ExtendsAttachmentReference2 {}
 unsafe impl ExtendsAttachmentReference2 for AttachmentReferenceStencilLayout {}
 
@@ -2650,7 +2650,7 @@ impl<'b> HasBuilder<'b> for AttachmentReference2 {
     type Builder = AttachmentReference2Builder<'b>;
 }
 
-/// A builder for a [AttachmentReference2](struct.AttachmentReference2.html).
+/// A builder for a [`AttachmentReference2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AttachmentReference2Builder<'b> {
@@ -2732,7 +2732,7 @@ impl HasBuilder<'static> for AttachmentReferenceStencilLayout {
     type Builder = AttachmentReferenceStencilLayoutBuilder;
 }
 
-/// A builder for a [AttachmentReferenceStencilLayout](struct.AttachmentReferenceStencilLayout.html).
+/// A builder for a [`AttachmentReferenceStencilLayout`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AttachmentReferenceStencilLayoutBuilder {
@@ -2790,7 +2790,7 @@ impl<'b> HasBuilder<'b> for AttachmentSampleLocationsEXT {
     type Builder = AttachmentSampleLocationsEXTBuilder<'b>;
 }
 
-/// A builder for a [AttachmentSampleLocationsEXT](struct.AttachmentSampleLocationsEXT.html).
+/// A builder for a [`AttachmentSampleLocationsEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct AttachmentSampleLocationsEXTBuilder<'b> {
@@ -2858,7 +2858,7 @@ impl HasBuilder<'static> for BaseInStructure {
     type Builder = BaseInStructureBuilder;
 }
 
-/// A builder for a [BaseInStructure](struct.BaseInStructure.html).
+/// A builder for a [`BaseInStructure`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BaseInStructureBuilder {
@@ -2916,7 +2916,7 @@ impl HasBuilder<'static> for BaseOutStructure {
     type Builder = BaseOutStructureBuilder;
 }
 
-/// A builder for a [BaseOutStructure](struct.BaseOutStructure.html).
+/// A builder for a [`BaseOutStructure`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BaseOutStructureBuilder {
@@ -2974,7 +2974,7 @@ impl<'b> HasBuilder<'b> for BindAccelerationStructureMemoryInfoNV {
     type Builder = BindAccelerationStructureMemoryInfoNVBuilder<'b>;
 }
 
-/// A builder for a [BindAccelerationStructureMemoryInfoNV](struct.BindAccelerationStructureMemoryInfoNV.html).
+/// A builder for a [`BindAccelerationStructureMemoryInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BindAccelerationStructureMemoryInfoNVBuilder<'b> {
@@ -3055,7 +3055,7 @@ impl<'b> HasBuilder<'b> for BindBufferMemoryDeviceGroupInfo {
     type Builder = BindBufferMemoryDeviceGroupInfoBuilder<'b>;
 }
 
-/// A builder for a [BindBufferMemoryDeviceGroupInfo](struct.BindBufferMemoryDeviceGroupInfo.html).
+/// A builder for a [`BindBufferMemoryDeviceGroupInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BindBufferMemoryDeviceGroupInfoBuilder<'b> {
@@ -3102,7 +3102,7 @@ unsafe impl<'b> Cast for BindBufferMemoryDeviceGroupInfoBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [BindBufferMemoryInfo](struct.BindBufferMemoryInfo.html).
+/// A Vulkan struct that can be used to extend a [`BindBufferMemoryInfo`].
 pub unsafe trait ExtendsBindBufferMemoryInfo {}
 unsafe impl ExtendsBindBufferMemoryInfo for BindBufferMemoryDeviceGroupInfo {}
 
@@ -3119,7 +3119,7 @@ impl<'b> HasBuilder<'b> for BindBufferMemoryInfo {
     type Builder = BindBufferMemoryInfoBuilder<'b>;
 }
 
-/// A builder for a [BindBufferMemoryInfo](struct.BindBufferMemoryInfo.html).
+/// A builder for a [`BindBufferMemoryInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BindBufferMemoryInfoBuilder<'b> {
@@ -3201,7 +3201,7 @@ impl<'b> HasBuilder<'b> for BindImageMemoryDeviceGroupInfo {
     type Builder = BindImageMemoryDeviceGroupInfoBuilder<'b>;
 }
 
-/// A builder for a [BindImageMemoryDeviceGroupInfo](struct.BindImageMemoryDeviceGroupInfo.html).
+/// A builder for a [`BindImageMemoryDeviceGroupInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BindImageMemoryDeviceGroupInfoBuilder<'b> {
@@ -3258,7 +3258,7 @@ unsafe impl<'b> Cast for BindImageMemoryDeviceGroupInfoBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [BindImageMemoryInfo](struct.BindImageMemoryInfo.html).
+/// A Vulkan struct that can be used to extend a [`BindImageMemoryInfo`].
 pub unsafe trait ExtendsBindImageMemoryInfo {}
 unsafe impl ExtendsBindImageMemoryInfo for BindImageMemoryDeviceGroupInfo {}
 unsafe impl ExtendsBindImageMemoryInfo for BindImageMemorySwapchainInfoKHR {}
@@ -3277,7 +3277,7 @@ impl<'b> HasBuilder<'b> for BindImageMemoryInfo {
     type Builder = BindImageMemoryInfoBuilder<'b>;
 }
 
-/// A builder for a [BindImageMemoryInfo](struct.BindImageMemoryInfo.html).
+/// A builder for a [`BindImageMemoryInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BindImageMemoryInfoBuilder<'b> {
@@ -3359,7 +3359,7 @@ impl HasBuilder<'static> for BindImageMemorySwapchainInfoKHR {
     type Builder = BindImageMemorySwapchainInfoKHRBuilder;
 }
 
-/// A builder for a [BindImageMemorySwapchainInfoKHR](struct.BindImageMemorySwapchainInfoKHR.html).
+/// A builder for a [`BindImageMemorySwapchainInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BindImageMemorySwapchainInfoKHRBuilder {
@@ -3423,7 +3423,7 @@ impl HasBuilder<'static> for BindImagePlaneMemoryInfo {
     type Builder = BindImagePlaneMemoryInfoBuilder;
 }
 
-/// A builder for a [BindImagePlaneMemoryInfo](struct.BindImagePlaneMemoryInfo.html).
+/// A builder for a [`BindImagePlaneMemoryInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BindImagePlaneMemoryInfoBuilder {
@@ -3481,7 +3481,7 @@ impl HasBuilder<'static> for BindIndexBufferIndirectCommandNV {
     type Builder = BindIndexBufferIndirectCommandNVBuilder;
 }
 
-/// A builder for a [BindIndexBufferIndirectCommandNV](struct.BindIndexBufferIndirectCommandNV.html).
+/// A builder for a [`BindIndexBufferIndirectCommandNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BindIndexBufferIndirectCommandNVBuilder {
@@ -3551,7 +3551,7 @@ impl HasBuilder<'static> for BindShaderGroupIndirectCommandNV {
     type Builder = BindShaderGroupIndirectCommandNVBuilder;
 }
 
-/// A builder for a [BindShaderGroupIndirectCommandNV](struct.BindShaderGroupIndirectCommandNV.html).
+/// A builder for a [`BindShaderGroupIndirectCommandNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BindShaderGroupIndirectCommandNVBuilder {
@@ -3596,7 +3596,7 @@ unsafe impl Cast for BindShaderGroupIndirectCommandNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [BindSparseInfo](struct.BindSparseInfo.html).
+/// A Vulkan struct that can be used to extend a [`BindSparseInfo`].
 pub unsafe trait ExtendsBindSparseInfo {}
 unsafe impl ExtendsBindSparseInfo for DeviceGroupBindSparseInfo {}
 unsafe impl ExtendsBindSparseInfo for TimelineSemaphoreSubmitInfo {}
@@ -3614,7 +3614,7 @@ impl<'b> HasBuilder<'b> for BindSparseInfo {
     type Builder = BindSparseInfoBuilder<'b>;
 }
 
-/// A builder for a [BindSparseInfo](struct.BindSparseInfo.html).
+/// A builder for a [`BindSparseInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BindSparseInfoBuilder<'b> {
@@ -3722,7 +3722,7 @@ impl HasBuilder<'static> for BindVertexBufferIndirectCommandNV {
     type Builder = BindVertexBufferIndirectCommandNVBuilder;
 }
 
-/// A builder for a [BindVertexBufferIndirectCommandNV](struct.BindVertexBufferIndirectCommandNV.html).
+/// A builder for a [`BindVertexBufferIndirectCommandNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BindVertexBufferIndirectCommandNVBuilder {
@@ -3792,7 +3792,7 @@ impl<'b> HasBuilder<'b> for BlitImageInfo2KHR {
     type Builder = BlitImageInfo2KHRBuilder<'b>;
 }
 
-/// A builder for a [BlitImageInfo2KHR](struct.BlitImageInfo2KHR.html).
+/// A builder for a [`BlitImageInfo2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BlitImageInfo2KHRBuilder<'b> {
@@ -3882,7 +3882,7 @@ impl HasBuilder<'static> for BufferCopy {
     type Builder = BufferCopyBuilder;
 }
 
-/// A builder for a [BufferCopy](struct.BufferCopy.html).
+/// A builder for a [`BufferCopy`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BufferCopyBuilder {
@@ -3952,7 +3952,7 @@ impl HasBuilder<'static> for BufferCopy2KHR {
     type Builder = BufferCopy2KHRBuilder;
 }
 
-/// A builder for a [BufferCopy2KHR](struct.BufferCopy2KHR.html).
+/// A builder for a [`BufferCopy2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BufferCopy2KHRBuilder {
@@ -4009,7 +4009,7 @@ unsafe impl Cast for BufferCopy2KHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [BufferCreateInfo](struct.BufferCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`BufferCreateInfo`].
 pub unsafe trait ExtendsBufferCreateInfo {}
 unsafe impl ExtendsBufferCreateInfo for BufferDeviceAddressCreateInfoEXT {}
 unsafe impl ExtendsBufferCreateInfo for BufferOpaqueCaptureAddressCreateInfo {}
@@ -4029,7 +4029,7 @@ impl<'b> HasBuilder<'b> for BufferCreateInfo {
     type Builder = BufferCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [BufferCreateInfo](struct.BufferCreateInfo.html).
+/// A builder for a [`BufferCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BufferCreateInfoBuilder<'b> {
@@ -4124,7 +4124,7 @@ impl HasBuilder<'static> for BufferDeviceAddressCreateInfoEXT {
     type Builder = BufferDeviceAddressCreateInfoEXTBuilder;
 }
 
-/// A builder for a [BufferDeviceAddressCreateInfoEXT](struct.BufferDeviceAddressCreateInfoEXT.html).
+/// A builder for a [`BufferDeviceAddressCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BufferDeviceAddressCreateInfoEXTBuilder {
@@ -4182,7 +4182,7 @@ impl HasBuilder<'static> for BufferDeviceAddressInfo {
     type Builder = BufferDeviceAddressInfoBuilder;
 }
 
-/// A builder for a [BufferDeviceAddressInfo](struct.BufferDeviceAddressInfo.html).
+/// A builder for a [`BufferDeviceAddressInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BufferDeviceAddressInfoBuilder {
@@ -4240,7 +4240,7 @@ impl HasBuilder<'static> for BufferImageCopy {
     type Builder = BufferImageCopyBuilder;
 }
 
-/// A builder for a [BufferImageCopy](struct.BufferImageCopy.html).
+/// A builder for a [`BufferImageCopy`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BufferImageCopyBuilder {
@@ -4318,7 +4318,7 @@ unsafe impl Cast for BufferImageCopyBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [BufferImageCopy2KHR](struct.BufferImageCopy2KHR.html).
+/// A Vulkan struct that can be used to extend a [`BufferImageCopy2KHR`].
 pub unsafe trait ExtendsBufferImageCopy2KHR {}
 unsafe impl ExtendsBufferImageCopy2KHR for CopyCommandTransformInfoQCOM {}
 
@@ -4335,7 +4335,7 @@ impl<'b> HasBuilder<'b> for BufferImageCopy2KHR {
     type Builder = BufferImageCopy2KHRBuilder<'b>;
 }
 
-/// A builder for a [BufferImageCopy2KHR](struct.BufferImageCopy2KHR.html).
+/// A builder for a [`BufferImageCopy2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BufferImageCopy2KHRBuilder<'b> {
@@ -4438,7 +4438,7 @@ impl HasBuilder<'static> for BufferMemoryBarrier {
     type Builder = BufferMemoryBarrierBuilder;
 }
 
-/// A builder for a [BufferMemoryBarrier](struct.BufferMemoryBarrier.html).
+/// A builder for a [`BufferMemoryBarrier`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BufferMemoryBarrierBuilder {
@@ -4532,7 +4532,7 @@ impl HasBuilder<'static> for BufferMemoryBarrier2KHR {
     type Builder = BufferMemoryBarrier2KHRBuilder;
 }
 
-/// A builder for a [BufferMemoryBarrier2KHR](struct.BufferMemoryBarrier2KHR.html).
+/// A builder for a [`BufferMemoryBarrier2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BufferMemoryBarrier2KHRBuilder {
@@ -4638,7 +4638,7 @@ impl HasBuilder<'static> for BufferMemoryRequirementsInfo2 {
     type Builder = BufferMemoryRequirementsInfo2Builder;
 }
 
-/// A builder for a [BufferMemoryRequirementsInfo2](struct.BufferMemoryRequirementsInfo2.html).
+/// A builder for a [`BufferMemoryRequirementsInfo2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BufferMemoryRequirementsInfo2Builder {
@@ -4696,7 +4696,7 @@ impl HasBuilder<'static> for BufferOpaqueCaptureAddressCreateInfo {
     type Builder = BufferOpaqueCaptureAddressCreateInfoBuilder;
 }
 
-/// A builder for a [BufferOpaqueCaptureAddressCreateInfo](struct.BufferOpaqueCaptureAddressCreateInfo.html).
+/// A builder for a [`BufferOpaqueCaptureAddressCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BufferOpaqueCaptureAddressCreateInfoBuilder {
@@ -4754,7 +4754,7 @@ impl HasBuilder<'static> for BufferViewCreateInfo {
     type Builder = BufferViewCreateInfoBuilder;
 }
 
-/// A builder for a [BufferViewCreateInfo](struct.BufferViewCreateInfo.html).
+/// A builder for a [`BufferViewCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct BufferViewCreateInfoBuilder {
@@ -4836,7 +4836,7 @@ impl HasBuilder<'static> for CalibratedTimestampInfoEXT {
     type Builder = CalibratedTimestampInfoEXTBuilder;
 }
 
-/// A builder for a [CalibratedTimestampInfoEXT](struct.CalibratedTimestampInfoEXT.html).
+/// A builder for a [`CalibratedTimestampInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CalibratedTimestampInfoEXTBuilder {
@@ -4894,7 +4894,7 @@ impl<'b> HasBuilder<'b> for CheckpointData2NV {
     type Builder = CheckpointData2NVBuilder<'b>;
 }
 
-/// A builder for a [CheckpointData2NV](struct.CheckpointData2NV.html).
+/// A builder for a [`CheckpointData2NV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CheckpointData2NVBuilder<'b> {
@@ -4959,7 +4959,7 @@ impl<'b> HasBuilder<'b> for CheckpointDataNV {
     type Builder = CheckpointDataNVBuilder<'b>;
 }
 
-/// A builder for a [CheckpointDataNV](struct.CheckpointDataNV.html).
+/// A builder for a [`CheckpointDataNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CheckpointDataNVBuilder<'b> {
@@ -5024,7 +5024,7 @@ impl HasBuilder<'static> for ClearAttachment {
     type Builder = ClearAttachmentBuilder;
 }
 
-/// A builder for a [ClearAttachment](struct.ClearAttachment.html).
+/// A builder for a [`ClearAttachment`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ClearAttachmentBuilder {
@@ -5094,7 +5094,7 @@ impl HasBuilder<'static> for ClearDepthStencilValue {
     type Builder = ClearDepthStencilValueBuilder;
 }
 
-/// A builder for a [ClearDepthStencilValue](struct.ClearDepthStencilValue.html).
+/// A builder for a [`ClearDepthStencilValue`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ClearDepthStencilValueBuilder {
@@ -5158,7 +5158,7 @@ impl HasBuilder<'static> for ClearRect {
     type Builder = ClearRectBuilder;
 }
 
-/// A builder for a [ClearRect](struct.ClearRect.html).
+/// A builder for a [`ClearRect`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ClearRectBuilder {
@@ -5228,7 +5228,7 @@ impl HasBuilder<'static> for CoarseSampleLocationNV {
     type Builder = CoarseSampleLocationNVBuilder;
 }
 
-/// A builder for a [CoarseSampleLocationNV](struct.CoarseSampleLocationNV.html).
+/// A builder for a [`CoarseSampleLocationNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CoarseSampleLocationNVBuilder {
@@ -5298,7 +5298,7 @@ impl<'b> HasBuilder<'b> for CoarseSampleOrderCustomNV {
     type Builder = CoarseSampleOrderCustomNVBuilder<'b>;
 }
 
-/// A builder for a [CoarseSampleOrderCustomNV](struct.CoarseSampleOrderCustomNV.html).
+/// A builder for a [`CoarseSampleOrderCustomNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CoarseSampleOrderCustomNVBuilder<'b> {
@@ -5373,7 +5373,7 @@ impl HasBuilder<'static> for CommandBufferAllocateInfo {
     type Builder = CommandBufferAllocateInfoBuilder;
 }
 
-/// A builder for a [CommandBufferAllocateInfo](struct.CommandBufferAllocateInfo.html).
+/// A builder for a [`CommandBufferAllocateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CommandBufferAllocateInfoBuilder {
@@ -5430,7 +5430,7 @@ unsafe impl Cast for CommandBufferAllocateInfoBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [CommandBufferBeginInfo](struct.CommandBufferBeginInfo.html).
+/// A Vulkan struct that can be used to extend a [`CommandBufferBeginInfo`].
 pub unsafe trait ExtendsCommandBufferBeginInfo {}
 unsafe impl ExtendsCommandBufferBeginInfo for DeviceGroupCommandBufferBeginInfo {}
 
@@ -5447,7 +5447,7 @@ impl<'b> HasBuilder<'b> for CommandBufferBeginInfo {
     type Builder = CommandBufferBeginInfoBuilder<'b>;
 }
 
-/// A builder for a [CommandBufferBeginInfo](struct.CommandBufferBeginInfo.html).
+/// A builder for a [`CommandBufferBeginInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CommandBufferBeginInfoBuilder<'b> {
@@ -5526,7 +5526,7 @@ impl HasBuilder<'static> for CommandBufferInheritanceConditionalRenderingInfoEXT
     type Builder = CommandBufferInheritanceConditionalRenderingInfoEXTBuilder;
 }
 
-/// A builder for a [CommandBufferInheritanceConditionalRenderingInfoEXT](struct.CommandBufferInheritanceConditionalRenderingInfoEXT.html).
+/// A builder for a [`CommandBufferInheritanceConditionalRenderingInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CommandBufferInheritanceConditionalRenderingInfoEXTBuilder {
@@ -5571,7 +5571,7 @@ unsafe impl Cast for CommandBufferInheritanceConditionalRenderingInfoEXTBuilder 
     }
 }
 
-/// A Vulkan struct that can be used to extend a [CommandBufferInheritanceInfo](struct.CommandBufferInheritanceInfo.html).
+/// A Vulkan struct that can be used to extend a [`CommandBufferInheritanceInfo`].
 pub unsafe trait ExtendsCommandBufferInheritanceInfo {}
 unsafe impl ExtendsCommandBufferInheritanceInfo
     for CommandBufferInheritanceConditionalRenderingInfoEXT
@@ -5596,7 +5596,7 @@ impl<'b> HasBuilder<'b> for CommandBufferInheritanceInfo {
     type Builder = CommandBufferInheritanceInfoBuilder<'b>;
 }
 
-/// A builder for a [CommandBufferInheritanceInfo](struct.CommandBufferInheritanceInfo.html).
+/// A builder for a [`CommandBufferInheritanceInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CommandBufferInheritanceInfoBuilder<'b> {
@@ -5696,7 +5696,7 @@ impl HasBuilder<'static> for CommandBufferInheritanceRenderPassTransformInfoQCOM
     type Builder = CommandBufferInheritanceRenderPassTransformInfoQCOMBuilder;
 }
 
-/// A builder for a [CommandBufferInheritanceRenderPassTransformInfoQCOM](struct.CommandBufferInheritanceRenderPassTransformInfoQCOM.html).
+/// A builder for a [`CommandBufferInheritanceRenderPassTransformInfoQCOM`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CommandBufferInheritanceRenderPassTransformInfoQCOMBuilder {
@@ -5760,7 +5760,7 @@ impl<'b> HasBuilder<'b> for CommandBufferInheritanceViewportScissorInfoNV {
     type Builder = CommandBufferInheritanceViewportScissorInfoNVBuilder<'b>;
 }
 
-/// A builder for a [CommandBufferInheritanceViewportScissorInfoNV](struct.CommandBufferInheritanceViewportScissorInfoNV.html).
+/// A builder for a [`CommandBufferInheritanceViewportScissorInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CommandBufferInheritanceViewportScissorInfoNVBuilder<'b> {
@@ -5831,7 +5831,7 @@ impl HasBuilder<'static> for CommandBufferSubmitInfoKHR {
     type Builder = CommandBufferSubmitInfoKHRBuilder;
 }
 
-/// A builder for a [CommandBufferSubmitInfoKHR](struct.CommandBufferSubmitInfoKHR.html).
+/// A builder for a [`CommandBufferSubmitInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CommandBufferSubmitInfoKHRBuilder {
@@ -5895,7 +5895,7 @@ impl HasBuilder<'static> for CommandPoolCreateInfo {
     type Builder = CommandPoolCreateInfoBuilder;
 }
 
-/// A builder for a [CommandPoolCreateInfo](struct.CommandPoolCreateInfo.html).
+/// A builder for a [`CommandPoolCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CommandPoolCreateInfoBuilder {
@@ -5959,7 +5959,7 @@ impl HasBuilder<'static> for ComponentMapping {
     type Builder = ComponentMappingBuilder;
 }
 
-/// A builder for a [ComponentMapping](struct.ComponentMapping.html).
+/// A builder for a [`ComponentMapping`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ComponentMappingBuilder {
@@ -6022,7 +6022,7 @@ unsafe impl Cast for ComponentMappingBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [ComputePipelineCreateInfo](struct.ComputePipelineCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`ComputePipelineCreateInfo`].
 pub unsafe trait ExtendsComputePipelineCreateInfo {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCreationFeedbackCreateInfoEXT {}
@@ -6041,7 +6041,7 @@ impl<'b> HasBuilder<'b> for ComputePipelineCreateInfo {
     type Builder = ComputePipelineCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [ComputePipelineCreateInfo](struct.ComputePipelineCreateInfo.html).
+/// A builder for a [`ComputePipelineCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ComputePipelineCreateInfoBuilder<'b> {
@@ -6135,7 +6135,7 @@ impl HasBuilder<'static> for ConditionalRenderingBeginInfoEXT {
     type Builder = ConditionalRenderingBeginInfoEXTBuilder;
 }
 
-/// A builder for a [ConditionalRenderingBeginInfoEXT](struct.ConditionalRenderingBeginInfoEXT.html).
+/// A builder for a [`ConditionalRenderingBeginInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ConditionalRenderingBeginInfoEXTBuilder {
@@ -6205,7 +6205,7 @@ impl HasBuilder<'static> for ConformanceVersion {
     type Builder = ConformanceVersionBuilder;
 }
 
-/// A builder for a [ConformanceVersion](struct.ConformanceVersion.html).
+/// A builder for a [`ConformanceVersion`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ConformanceVersionBuilder {
@@ -6281,7 +6281,7 @@ impl HasBuilder<'static> for CooperativeMatrixPropertiesNV {
     type Builder = CooperativeMatrixPropertiesNVBuilder;
 }
 
-/// A builder for a [CooperativeMatrixPropertiesNV](struct.CooperativeMatrixPropertiesNV.html).
+/// A builder for a [`CooperativeMatrixPropertiesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CooperativeMatrixPropertiesNVBuilder {
@@ -6381,7 +6381,7 @@ impl HasBuilder<'static> for CopyAccelerationStructureInfoKHR {
     type Builder = CopyAccelerationStructureInfoKHRBuilder;
 }
 
-/// A builder for a [CopyAccelerationStructureInfoKHR](struct.CopyAccelerationStructureInfoKHR.html).
+/// A builder for a [`CopyAccelerationStructureInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CopyAccelerationStructureInfoKHRBuilder {
@@ -6451,7 +6451,7 @@ impl HasBuilder<'static> for CopyAccelerationStructureToMemoryInfoKHR {
     type Builder = CopyAccelerationStructureToMemoryInfoKHRBuilder;
 }
 
-/// A builder for a [CopyAccelerationStructureToMemoryInfoKHR](struct.CopyAccelerationStructureToMemoryInfoKHR.html).
+/// A builder for a [`CopyAccelerationStructureToMemoryInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CopyAccelerationStructureToMemoryInfoKHRBuilder {
@@ -6521,7 +6521,7 @@ impl<'b> HasBuilder<'b> for CopyBufferInfo2KHR {
     type Builder = CopyBufferInfo2KHRBuilder<'b>;
 }
 
-/// A builder for a [CopyBufferInfo2KHR](struct.CopyBufferInfo2KHR.html).
+/// A builder for a [`CopyBufferInfo2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CopyBufferInfo2KHRBuilder<'b> {
@@ -6593,7 +6593,7 @@ impl<'b> HasBuilder<'b> for CopyBufferToImageInfo2KHR {
     type Builder = CopyBufferToImageInfo2KHRBuilder<'b>;
 }
 
-/// A builder for a [CopyBufferToImageInfo2KHR](struct.CopyBufferToImageInfo2KHR.html).
+/// A builder for a [`CopyBufferToImageInfo2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CopyBufferToImageInfo2KHRBuilder<'b> {
@@ -6671,7 +6671,7 @@ impl HasBuilder<'static> for CopyCommandTransformInfoQCOM {
     type Builder = CopyCommandTransformInfoQCOMBuilder;
 }
 
-/// A builder for a [CopyCommandTransformInfoQCOM](struct.CopyCommandTransformInfoQCOM.html).
+/// A builder for a [`CopyCommandTransformInfoQCOM`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CopyCommandTransformInfoQCOMBuilder {
@@ -6729,7 +6729,7 @@ impl HasBuilder<'static> for CopyDescriptorSet {
     type Builder = CopyDescriptorSetBuilder;
 }
 
-/// A builder for a [CopyDescriptorSet](struct.CopyDescriptorSet.html).
+/// A builder for a [`CopyDescriptorSet`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CopyDescriptorSetBuilder {
@@ -6823,7 +6823,7 @@ impl<'b> HasBuilder<'b> for CopyImageInfo2KHR {
     type Builder = CopyImageInfo2KHRBuilder<'b>;
 }
 
-/// A builder for a [CopyImageInfo2KHR](struct.CopyImageInfo2KHR.html).
+/// A builder for a [`CopyImageInfo2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CopyImageInfo2KHRBuilder<'b> {
@@ -6907,7 +6907,7 @@ impl<'b> HasBuilder<'b> for CopyImageToBufferInfo2KHR {
     type Builder = CopyImageToBufferInfo2KHRBuilder<'b>;
 }
 
-/// A builder for a [CopyImageToBufferInfo2KHR](struct.CopyImageToBufferInfo2KHR.html).
+/// A builder for a [`CopyImageToBufferInfo2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CopyImageToBufferInfo2KHRBuilder<'b> {
@@ -6985,7 +6985,7 @@ impl HasBuilder<'static> for CopyMemoryToAccelerationStructureInfoKHR {
     type Builder = CopyMemoryToAccelerationStructureInfoKHRBuilder;
 }
 
-/// A builder for a [CopyMemoryToAccelerationStructureInfoKHR](struct.CopyMemoryToAccelerationStructureInfoKHR.html).
+/// A builder for a [`CopyMemoryToAccelerationStructureInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CopyMemoryToAccelerationStructureInfoKHRBuilder {
@@ -7055,7 +7055,7 @@ impl<'b> HasBuilder<'b> for CuFunctionCreateInfoNVX {
     type Builder = CuFunctionCreateInfoNVXBuilder<'b>;
 }
 
-/// A builder for a [CuFunctionCreateInfoNVX](struct.CuFunctionCreateInfoNVX.html).
+/// A builder for a [`CuFunctionCreateInfoNVX`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CuFunctionCreateInfoNVXBuilder<'b> {
@@ -7120,7 +7120,7 @@ impl<'b> HasBuilder<'b> for CuLaunchInfoNVX {
     type Builder = CuLaunchInfoNVXBuilder<'b>;
 }
 
-/// A builder for a [CuLaunchInfoNVX](struct.CuLaunchInfoNVX.html).
+/// A builder for a [`CuLaunchInfoNVX`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CuLaunchInfoNVXBuilder<'b> {
@@ -7235,7 +7235,7 @@ impl<'b> HasBuilder<'b> for CuModuleCreateInfoNVX {
     type Builder = CuModuleCreateInfoNVXBuilder<'b>;
 }
 
-/// A builder for a [CuModuleCreateInfoNVX](struct.CuModuleCreateInfoNVX.html).
+/// A builder for a [`CuModuleCreateInfoNVX`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct CuModuleCreateInfoNVXBuilder<'b> {
@@ -7300,7 +7300,7 @@ impl<'b> HasBuilder<'b> for D3D12FenceSubmitInfoKHR {
     type Builder = D3D12FenceSubmitInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [D3D12FenceSubmitInfoKHR](struct.D3D12FenceSubmitInfoKHR.html).
+/// A builder for a [`D3D12FenceSubmitInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct D3D12FenceSubmitInfoKHRBuilder<'b> {
@@ -7379,7 +7379,7 @@ impl<'b> HasBuilder<'b> for DebugMarkerMarkerInfoEXT {
     type Builder = DebugMarkerMarkerInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [DebugMarkerMarkerInfoEXT](struct.DebugMarkerMarkerInfoEXT.html).
+/// A builder for a [`DebugMarkerMarkerInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DebugMarkerMarkerInfoEXTBuilder<'b> {
@@ -7444,7 +7444,7 @@ impl<'b> HasBuilder<'b> for DebugMarkerObjectNameInfoEXT {
     type Builder = DebugMarkerObjectNameInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [DebugMarkerObjectNameInfoEXT](struct.DebugMarkerObjectNameInfoEXT.html).
+/// A builder for a [`DebugMarkerObjectNameInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DebugMarkerObjectNameInfoEXTBuilder<'b> {
@@ -7515,7 +7515,7 @@ impl<'b> HasBuilder<'b> for DebugMarkerObjectTagInfoEXT {
     type Builder = DebugMarkerObjectTagInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [DebugMarkerObjectTagInfoEXT](struct.DebugMarkerObjectTagInfoEXT.html).
+/// A builder for a [`DebugMarkerObjectTagInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DebugMarkerObjectTagInfoEXTBuilder<'b> {
@@ -7593,7 +7593,7 @@ impl<'b> HasBuilder<'b> for DebugReportCallbackCreateInfoEXT {
     type Builder = DebugReportCallbackCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [DebugReportCallbackCreateInfoEXT](struct.DebugReportCallbackCreateInfoEXT.html).
+/// A builder for a [`DebugReportCallbackCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DebugReportCallbackCreateInfoEXTBuilder<'b> {
@@ -7664,7 +7664,7 @@ impl<'b> HasBuilder<'b> for DebugUtilsLabelEXT {
     type Builder = DebugUtilsLabelEXTBuilder<'b>;
 }
 
-/// A builder for a [DebugUtilsLabelEXT](struct.DebugUtilsLabelEXT.html).
+/// A builder for a [`DebugUtilsLabelEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DebugUtilsLabelEXTBuilder<'b> {
@@ -7729,7 +7729,7 @@ impl<'b> HasBuilder<'b> for DebugUtilsMessengerCallbackDataEXT {
     type Builder = DebugUtilsMessengerCallbackDataEXTBuilder<'b>;
 }
 
-/// A builder for a [DebugUtilsMessengerCallbackDataEXT](struct.DebugUtilsMessengerCallbackDataEXT.html).
+/// A builder for a [`DebugUtilsMessengerCallbackDataEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DebugUtilsMessengerCallbackDataEXTBuilder<'b> {
@@ -7836,7 +7836,7 @@ impl<'b> HasBuilder<'b> for DebugUtilsMessengerCreateInfoEXT {
     type Builder = DebugUtilsMessengerCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [DebugUtilsMessengerCreateInfoEXT](struct.DebugUtilsMessengerCreateInfoEXT.html).
+/// A builder for a [`DebugUtilsMessengerCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DebugUtilsMessengerCreateInfoEXTBuilder<'b> {
@@ -7919,7 +7919,7 @@ impl<'b> HasBuilder<'b> for DebugUtilsObjectNameInfoEXT {
     type Builder = DebugUtilsObjectNameInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [DebugUtilsObjectNameInfoEXT](struct.DebugUtilsObjectNameInfoEXT.html).
+/// A builder for a [`DebugUtilsObjectNameInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DebugUtilsObjectNameInfoEXTBuilder<'b> {
@@ -7990,7 +7990,7 @@ impl<'b> HasBuilder<'b> for DebugUtilsObjectTagInfoEXT {
     type Builder = DebugUtilsObjectTagInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [DebugUtilsObjectTagInfoEXT](struct.DebugUtilsObjectTagInfoEXT.html).
+/// A builder for a [`DebugUtilsObjectTagInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DebugUtilsObjectTagInfoEXTBuilder<'b> {
@@ -8068,7 +8068,7 @@ impl HasBuilder<'static> for DedicatedAllocationBufferCreateInfoNV {
     type Builder = DedicatedAllocationBufferCreateInfoNVBuilder;
 }
 
-/// A builder for a [DedicatedAllocationBufferCreateInfoNV](struct.DedicatedAllocationBufferCreateInfoNV.html).
+/// A builder for a [`DedicatedAllocationBufferCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DedicatedAllocationBufferCreateInfoNVBuilder {
@@ -8126,7 +8126,7 @@ impl HasBuilder<'static> for DedicatedAllocationImageCreateInfoNV {
     type Builder = DedicatedAllocationImageCreateInfoNVBuilder;
 }
 
-/// A builder for a [DedicatedAllocationImageCreateInfoNV](struct.DedicatedAllocationImageCreateInfoNV.html).
+/// A builder for a [`DedicatedAllocationImageCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DedicatedAllocationImageCreateInfoNVBuilder {
@@ -8184,7 +8184,7 @@ impl HasBuilder<'static> for DedicatedAllocationMemoryAllocateInfoNV {
     type Builder = DedicatedAllocationMemoryAllocateInfoNVBuilder;
 }
 
-/// A builder for a [DedicatedAllocationMemoryAllocateInfoNV](struct.DedicatedAllocationMemoryAllocateInfoNV.html).
+/// A builder for a [`DedicatedAllocationMemoryAllocateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DedicatedAllocationMemoryAllocateInfoNVBuilder {
@@ -8248,7 +8248,7 @@ impl<'b> HasBuilder<'b> for DependencyInfoKHR {
     type Builder = DependencyInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [DependencyInfoKHR](struct.DependencyInfoKHR.html).
+/// A builder for a [`DependencyInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DependencyInfoKHRBuilder<'b> {
@@ -8337,7 +8337,7 @@ impl HasBuilder<'static> for DescriptorBufferInfo {
     type Builder = DescriptorBufferInfoBuilder;
 }
 
-/// A builder for a [DescriptorBufferInfo](struct.DescriptorBufferInfo.html).
+/// A builder for a [`DescriptorBufferInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorBufferInfoBuilder {
@@ -8407,7 +8407,7 @@ impl HasBuilder<'static> for DescriptorImageInfo {
     type Builder = DescriptorImageInfoBuilder;
 }
 
-/// A builder for a [DescriptorImageInfo](struct.DescriptorImageInfo.html).
+/// A builder for a [`DescriptorImageInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorImageInfoBuilder {
@@ -8464,7 +8464,7 @@ unsafe impl Cast for DescriptorImageInfoBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [DescriptorPoolCreateInfo](struct.DescriptorPoolCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`DescriptorPoolCreateInfo`].
 pub unsafe trait ExtendsDescriptorPoolCreateInfo {}
 unsafe impl ExtendsDescriptorPoolCreateInfo for DescriptorPoolInlineUniformBlockCreateInfoEXT {}
 unsafe impl ExtendsDescriptorPoolCreateInfo for MutableDescriptorTypeCreateInfoVALVE {}
@@ -8482,7 +8482,7 @@ impl<'b> HasBuilder<'b> for DescriptorPoolCreateInfo {
     type Builder = DescriptorPoolCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [DescriptorPoolCreateInfo](struct.DescriptorPoolCreateInfo.html).
+/// A builder for a [`DescriptorPoolCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorPoolCreateInfoBuilder<'b> {
@@ -8565,7 +8565,7 @@ impl HasBuilder<'static> for DescriptorPoolInlineUniformBlockCreateInfoEXT {
     type Builder = DescriptorPoolInlineUniformBlockCreateInfoEXTBuilder;
 }
 
-/// A builder for a [DescriptorPoolInlineUniformBlockCreateInfoEXT](struct.DescriptorPoolInlineUniformBlockCreateInfoEXT.html).
+/// A builder for a [`DescriptorPoolInlineUniformBlockCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorPoolInlineUniformBlockCreateInfoEXTBuilder {
@@ -8626,7 +8626,7 @@ impl HasBuilder<'static> for DescriptorPoolSize {
     type Builder = DescriptorPoolSizeBuilder;
 }
 
-/// A builder for a [DescriptorPoolSize](struct.DescriptorPoolSize.html).
+/// A builder for a [`DescriptorPoolSize`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorPoolSizeBuilder {
@@ -8677,7 +8677,7 @@ unsafe impl Cast for DescriptorPoolSizeBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [DescriptorSetAllocateInfo](struct.DescriptorSetAllocateInfo.html).
+/// A Vulkan struct that can be used to extend a [`DescriptorSetAllocateInfo`].
 pub unsafe trait ExtendsDescriptorSetAllocateInfo {}
 unsafe impl ExtendsDescriptorSetAllocateInfo for DescriptorSetVariableDescriptorCountAllocateInfo {}
 
@@ -8694,7 +8694,7 @@ impl<'b> HasBuilder<'b> for DescriptorSetAllocateInfo {
     type Builder = DescriptorSetAllocateInfoBuilder<'b>;
 }
 
-/// A builder for a [DescriptorSetAllocateInfo](struct.DescriptorSetAllocateInfo.html).
+/// A builder for a [`DescriptorSetAllocateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorSetAllocateInfoBuilder<'b> {
@@ -8771,7 +8771,7 @@ impl<'b> HasBuilder<'b> for DescriptorSetLayoutBinding {
     type Builder = DescriptorSetLayoutBindingBuilder<'b>;
 }
 
-/// A builder for a [DescriptorSetLayoutBinding](struct.DescriptorSetLayoutBinding.html).
+/// A builder for a [`DescriptorSetLayoutBinding`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorSetLayoutBindingBuilder<'b> {
@@ -8855,7 +8855,7 @@ impl<'b> HasBuilder<'b> for DescriptorSetLayoutBindingFlagsCreateInfo {
     type Builder = DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [DescriptorSetLayoutBindingFlagsCreateInfo](struct.DescriptorSetLayoutBindingFlagsCreateInfo.html).
+/// A builder for a [`DescriptorSetLayoutBindingFlagsCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'b> {
@@ -8902,7 +8902,7 @@ unsafe impl<'b> Cast for DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [DescriptorSetLayoutCreateInfo](struct.DescriptorSetLayoutCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`DescriptorSetLayoutCreateInfo`].
 pub unsafe trait ExtendsDescriptorSetLayoutCreateInfo {}
 unsafe impl ExtendsDescriptorSetLayoutCreateInfo for DescriptorSetLayoutBindingFlagsCreateInfo {}
 unsafe impl ExtendsDescriptorSetLayoutCreateInfo for MutableDescriptorTypeCreateInfoVALVE {}
@@ -8920,7 +8920,7 @@ impl<'b> HasBuilder<'b> for DescriptorSetLayoutCreateInfo {
     type Builder = DescriptorSetLayoutCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [DescriptorSetLayoutCreateInfo](struct.DescriptorSetLayoutCreateInfo.html).
+/// A builder for a [`DescriptorSetLayoutCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorSetLayoutCreateInfoBuilder<'b> {
@@ -8987,7 +8987,7 @@ unsafe impl<'b> Cast for DescriptorSetLayoutCreateInfoBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [DescriptorSetLayoutSupport](struct.DescriptorSetLayoutSupport.html).
+/// A Vulkan struct that can be used to extend a [`DescriptorSetLayoutSupport`].
 pub unsafe trait ExtendsDescriptorSetLayoutSupport {}
 unsafe impl ExtendsDescriptorSetLayoutSupport
     for DescriptorSetVariableDescriptorCountLayoutSupport
@@ -9007,7 +9007,7 @@ impl<'b> HasBuilder<'b> for DescriptorSetLayoutSupport {
     type Builder = DescriptorSetLayoutSupportBuilder<'b>;
 }
 
-/// A builder for a [DescriptorSetLayoutSupport](struct.DescriptorSetLayoutSupport.html).
+/// A builder for a [`DescriptorSetLayoutSupport`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorSetLayoutSupportBuilder<'b> {
@@ -9077,7 +9077,7 @@ impl<'b> HasBuilder<'b> for DescriptorSetVariableDescriptorCountAllocateInfo {
     type Builder = DescriptorSetVariableDescriptorCountAllocateInfoBuilder<'b>;
 }
 
-/// A builder for a [DescriptorSetVariableDescriptorCountAllocateInfo](struct.DescriptorSetVariableDescriptorCountAllocateInfo.html).
+/// A builder for a [`DescriptorSetVariableDescriptorCountAllocateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorSetVariableDescriptorCountAllocateInfoBuilder<'b> {
@@ -9137,7 +9137,7 @@ impl HasBuilder<'static> for DescriptorSetVariableDescriptorCountLayoutSupport {
     type Builder = DescriptorSetVariableDescriptorCountLayoutSupportBuilder;
 }
 
-/// A builder for a [DescriptorSetVariableDescriptorCountLayoutSupport](struct.DescriptorSetVariableDescriptorCountLayoutSupport.html).
+/// A builder for a [`DescriptorSetVariableDescriptorCountLayoutSupport`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorSetVariableDescriptorCountLayoutSupportBuilder {
@@ -9195,7 +9195,7 @@ impl<'b> HasBuilder<'b> for DescriptorUpdateTemplateCreateInfo {
     type Builder = DescriptorUpdateTemplateCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [DescriptorUpdateTemplateCreateInfo](struct.DescriptorUpdateTemplateCreateInfo.html).
+/// A builder for a [`DescriptorUpdateTemplateCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorUpdateTemplateCreateInfoBuilder<'b> {
@@ -9294,7 +9294,7 @@ impl HasBuilder<'static> for DescriptorUpdateTemplateEntry {
     type Builder = DescriptorUpdateTemplateEntryBuilder;
 }
 
-/// A builder for a [DescriptorUpdateTemplateEntry](struct.DescriptorUpdateTemplateEntry.html).
+/// A builder for a [`DescriptorUpdateTemplateEntry`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DescriptorUpdateTemplateEntryBuilder {
@@ -9369,7 +9369,7 @@ unsafe impl Cast for DescriptorUpdateTemplateEntryBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [DeviceCreateInfo](struct.DeviceCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`DeviceCreateInfo`].
 pub unsafe trait ExtendsDeviceCreateInfo {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceDeviceMemoryReportCreateInfoEXT {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceDiagnosticsConfigCreateInfoNV {}
@@ -9487,7 +9487,7 @@ impl<'b> HasBuilder<'b> for DeviceCreateInfo {
     type Builder = DeviceCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [DeviceCreateInfo](struct.DeviceCreateInfo.html).
+/// A builder for a [`DeviceCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceCreateInfoBuilder<'b> {
@@ -9590,7 +9590,7 @@ impl<'b> HasBuilder<'b> for DeviceDeviceMemoryReportCreateInfoEXT {
     type Builder = DeviceDeviceMemoryReportCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [DeviceDeviceMemoryReportCreateInfoEXT](struct.DeviceDeviceMemoryReportCreateInfoEXT.html).
+/// A builder for a [`DeviceDeviceMemoryReportCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceDeviceMemoryReportCreateInfoEXTBuilder<'b> {
@@ -9661,7 +9661,7 @@ impl HasBuilder<'static> for DeviceDiagnosticsConfigCreateInfoNV {
     type Builder = DeviceDiagnosticsConfigCreateInfoNVBuilder;
 }
 
-/// A builder for a [DeviceDiagnosticsConfigCreateInfoNV](struct.DeviceDiagnosticsConfigCreateInfoNV.html).
+/// A builder for a [`DeviceDiagnosticsConfigCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceDiagnosticsConfigCreateInfoNVBuilder {
@@ -9719,7 +9719,7 @@ impl HasBuilder<'static> for DeviceEventInfoEXT {
     type Builder = DeviceEventInfoEXTBuilder;
 }
 
-/// A builder for a [DeviceEventInfoEXT](struct.DeviceEventInfoEXT.html).
+/// A builder for a [`DeviceEventInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceEventInfoEXTBuilder {
@@ -9777,7 +9777,7 @@ impl HasBuilder<'static> for DeviceGroupBindSparseInfo {
     type Builder = DeviceGroupBindSparseInfoBuilder;
 }
 
-/// A builder for a [DeviceGroupBindSparseInfo](struct.DeviceGroupBindSparseInfo.html).
+/// A builder for a [`DeviceGroupBindSparseInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceGroupBindSparseInfoBuilder {
@@ -9841,7 +9841,7 @@ impl HasBuilder<'static> for DeviceGroupCommandBufferBeginInfo {
     type Builder = DeviceGroupCommandBufferBeginInfoBuilder;
 }
 
-/// A builder for a [DeviceGroupCommandBufferBeginInfo](struct.DeviceGroupCommandBufferBeginInfo.html).
+/// A builder for a [`DeviceGroupCommandBufferBeginInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceGroupCommandBufferBeginInfoBuilder {
@@ -9899,7 +9899,7 @@ impl<'b> HasBuilder<'b> for DeviceGroupDeviceCreateInfo {
     type Builder = DeviceGroupDeviceCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [DeviceGroupDeviceCreateInfo](struct.DeviceGroupDeviceCreateInfo.html).
+/// A builder for a [`DeviceGroupDeviceCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceGroupDeviceCreateInfoBuilder<'b> {
@@ -9959,7 +9959,7 @@ impl HasBuilder<'static> for DeviceGroupPresentCapabilitiesKHR {
     type Builder = DeviceGroupPresentCapabilitiesKHRBuilder;
 }
 
-/// A builder for a [DeviceGroupPresentCapabilitiesKHR](struct.DeviceGroupPresentCapabilitiesKHR.html).
+/// A builder for a [`DeviceGroupPresentCapabilitiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceGroupPresentCapabilitiesKHRBuilder {
@@ -10023,7 +10023,7 @@ impl<'b> HasBuilder<'b> for DeviceGroupPresentInfoKHR {
     type Builder = DeviceGroupPresentInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [DeviceGroupPresentInfoKHR](struct.DeviceGroupPresentInfoKHR.html).
+/// A builder for a [`DeviceGroupPresentInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceGroupPresentInfoKHRBuilder<'b> {
@@ -10089,7 +10089,7 @@ impl<'b> HasBuilder<'b> for DeviceGroupRenderPassBeginInfo {
     type Builder = DeviceGroupRenderPassBeginInfoBuilder<'b>;
 }
 
-/// A builder for a [DeviceGroupRenderPassBeginInfo](struct.DeviceGroupRenderPassBeginInfo.html).
+/// A builder for a [`DeviceGroupRenderPassBeginInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceGroupRenderPassBeginInfoBuilder<'b> {
@@ -10158,7 +10158,7 @@ impl<'b> HasBuilder<'b> for DeviceGroupSubmitInfo {
     type Builder = DeviceGroupSubmitInfoBuilder<'b>;
 }
 
-/// A builder for a [DeviceGroupSubmitInfo](struct.DeviceGroupSubmitInfo.html).
+/// A builder for a [`DeviceGroupSubmitInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceGroupSubmitInfoBuilder<'b> {
@@ -10238,7 +10238,7 @@ impl HasBuilder<'static> for DeviceGroupSwapchainCreateInfoKHR {
     type Builder = DeviceGroupSwapchainCreateInfoKHRBuilder;
 }
 
-/// A builder for a [DeviceGroupSwapchainCreateInfoKHR](struct.DeviceGroupSwapchainCreateInfoKHR.html).
+/// A builder for a [`DeviceGroupSwapchainCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceGroupSwapchainCreateInfoKHRBuilder {
@@ -10296,7 +10296,7 @@ impl HasBuilder<'static> for DeviceMemoryOpaqueCaptureAddressInfo {
     type Builder = DeviceMemoryOpaqueCaptureAddressInfoBuilder;
 }
 
-/// A builder for a [DeviceMemoryOpaqueCaptureAddressInfo](struct.DeviceMemoryOpaqueCaptureAddressInfo.html).
+/// A builder for a [`DeviceMemoryOpaqueCaptureAddressInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceMemoryOpaqueCaptureAddressInfoBuilder {
@@ -10354,7 +10354,7 @@ impl HasBuilder<'static> for DeviceMemoryOverallocationCreateInfoAMD {
     type Builder = DeviceMemoryOverallocationCreateInfoAMDBuilder;
 }
 
-/// A builder for a [DeviceMemoryOverallocationCreateInfoAMD](struct.DeviceMemoryOverallocationCreateInfoAMD.html).
+/// A builder for a [`DeviceMemoryOverallocationCreateInfoAMD`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceMemoryOverallocationCreateInfoAMDBuilder {
@@ -10415,7 +10415,7 @@ impl HasBuilder<'static> for DeviceMemoryReportCallbackDataEXT {
     type Builder = DeviceMemoryReportCallbackDataEXTBuilder;
 }
 
-/// A builder for a [DeviceMemoryReportCallbackDataEXT](struct.DeviceMemoryReportCallbackDataEXT.html).
+/// A builder for a [`DeviceMemoryReportCallbackDataEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceMemoryReportCallbackDataEXTBuilder {
@@ -10509,7 +10509,7 @@ impl HasBuilder<'static> for DevicePrivateDataCreateInfoEXT {
     type Builder = DevicePrivateDataCreateInfoEXTBuilder;
 }
 
-/// A builder for a [DevicePrivateDataCreateInfoEXT](struct.DevicePrivateDataCreateInfoEXT.html).
+/// A builder for a [`DevicePrivateDataCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DevicePrivateDataCreateInfoEXTBuilder {
@@ -10554,7 +10554,7 @@ unsafe impl Cast for DevicePrivateDataCreateInfoEXTBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [DeviceQueueCreateInfo](struct.DeviceQueueCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`DeviceQueueCreateInfo`].
 pub unsafe trait ExtendsDeviceQueueCreateInfo {}
 unsafe impl ExtendsDeviceQueueCreateInfo for DeviceQueueGlobalPriorityCreateInfoEXT {}
 
@@ -10571,7 +10571,7 @@ impl<'b> HasBuilder<'b> for DeviceQueueCreateInfo {
     type Builder = DeviceQueueCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [DeviceQueueCreateInfo](struct.DeviceQueueCreateInfo.html).
+/// A builder for a [`DeviceQueueCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceQueueCreateInfoBuilder<'b> {
@@ -10654,7 +10654,7 @@ impl HasBuilder<'static> for DeviceQueueGlobalPriorityCreateInfoEXT {
     type Builder = DeviceQueueGlobalPriorityCreateInfoEXTBuilder;
 }
 
-/// A builder for a [DeviceQueueGlobalPriorityCreateInfoEXT](struct.DeviceQueueGlobalPriorityCreateInfoEXT.html).
+/// A builder for a [`DeviceQueueGlobalPriorityCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceQueueGlobalPriorityCreateInfoEXTBuilder {
@@ -10712,7 +10712,7 @@ impl HasBuilder<'static> for DeviceQueueInfo2 {
     type Builder = DeviceQueueInfo2Builder;
 }
 
-/// A builder for a [DeviceQueueInfo2](struct.DeviceQueueInfo2.html).
+/// A builder for a [`DeviceQueueInfo2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DeviceQueueInfo2Builder {
@@ -10782,7 +10782,7 @@ impl<'b> HasBuilder<'b> for DirectFBSurfaceCreateInfoEXT {
     type Builder = DirectFBSurfaceCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [DirectFBSurfaceCreateInfoEXT](struct.DirectFBSurfaceCreateInfoEXT.html).
+/// A builder for a [`DirectFBSurfaceCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DirectFBSurfaceCreateInfoEXTBuilder<'b> {
@@ -10853,7 +10853,7 @@ impl HasBuilder<'static> for DispatchIndirectCommand {
     type Builder = DispatchIndirectCommandBuilder;
 }
 
-/// A builder for a [DispatchIndirectCommand](struct.DispatchIndirectCommand.html).
+/// A builder for a [`DispatchIndirectCommand`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DispatchIndirectCommandBuilder {
@@ -10923,7 +10923,7 @@ impl HasBuilder<'static> for DisplayEventInfoEXT {
     type Builder = DisplayEventInfoEXTBuilder;
 }
 
-/// A builder for a [DisplayEventInfoEXT](struct.DisplayEventInfoEXT.html).
+/// A builder for a [`DisplayEventInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayEventInfoEXTBuilder {
@@ -10981,7 +10981,7 @@ impl HasBuilder<'static> for DisplayModeCreateInfoKHR {
     type Builder = DisplayModeCreateInfoKHRBuilder;
 }
 
-/// A builder for a [DisplayModeCreateInfoKHR](struct.DisplayModeCreateInfoKHR.html).
+/// A builder for a [`DisplayModeCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayModeCreateInfoKHRBuilder {
@@ -11045,7 +11045,7 @@ impl HasBuilder<'static> for DisplayModeParametersKHR {
     type Builder = DisplayModeParametersKHRBuilder;
 }
 
-/// A builder for a [DisplayModeParametersKHR](struct.DisplayModeParametersKHR.html).
+/// A builder for a [`DisplayModeParametersKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayModeParametersKHRBuilder {
@@ -11109,7 +11109,7 @@ impl HasBuilder<'static> for DisplayModeProperties2KHR {
     type Builder = DisplayModeProperties2KHRBuilder;
 }
 
-/// A builder for a [DisplayModeProperties2KHR](struct.DisplayModeProperties2KHR.html).
+/// A builder for a [`DisplayModeProperties2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayModeProperties2KHRBuilder {
@@ -11170,7 +11170,7 @@ impl HasBuilder<'static> for DisplayModePropertiesKHR {
     type Builder = DisplayModePropertiesKHRBuilder;
 }
 
-/// A builder for a [DisplayModePropertiesKHR](struct.DisplayModePropertiesKHR.html).
+/// A builder for a [`DisplayModePropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayModePropertiesKHRBuilder {
@@ -11234,7 +11234,7 @@ impl HasBuilder<'static> for DisplayNativeHdrSurfaceCapabilitiesAMD {
     type Builder = DisplayNativeHdrSurfaceCapabilitiesAMDBuilder;
 }
 
-/// A builder for a [DisplayNativeHdrSurfaceCapabilitiesAMD](struct.DisplayNativeHdrSurfaceCapabilitiesAMD.html).
+/// A builder for a [`DisplayNativeHdrSurfaceCapabilitiesAMD`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayNativeHdrSurfaceCapabilitiesAMDBuilder {
@@ -11292,7 +11292,7 @@ impl HasBuilder<'static> for DisplayPlaneCapabilities2KHR {
     type Builder = DisplayPlaneCapabilities2KHRBuilder;
 }
 
-/// A builder for a [DisplayPlaneCapabilities2KHR](struct.DisplayPlaneCapabilities2KHR.html).
+/// A builder for a [`DisplayPlaneCapabilities2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayPlaneCapabilities2KHRBuilder {
@@ -11353,7 +11353,7 @@ impl HasBuilder<'static> for DisplayPlaneCapabilitiesKHR {
     type Builder = DisplayPlaneCapabilitiesKHRBuilder;
 }
 
-/// A builder for a [DisplayPlaneCapabilitiesKHR](struct.DisplayPlaneCapabilitiesKHR.html).
+/// A builder for a [`DisplayPlaneCapabilitiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayPlaneCapabilitiesKHRBuilder {
@@ -11459,7 +11459,7 @@ impl HasBuilder<'static> for DisplayPlaneInfo2KHR {
     type Builder = DisplayPlaneInfo2KHRBuilder;
 }
 
-/// A builder for a [DisplayPlaneInfo2KHR](struct.DisplayPlaneInfo2KHR.html).
+/// A builder for a [`DisplayPlaneInfo2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayPlaneInfo2KHRBuilder {
@@ -11523,7 +11523,7 @@ impl HasBuilder<'static> for DisplayPlaneProperties2KHR {
     type Builder = DisplayPlaneProperties2KHRBuilder;
 }
 
-/// A builder for a [DisplayPlaneProperties2KHR](struct.DisplayPlaneProperties2KHR.html).
+/// A builder for a [`DisplayPlaneProperties2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayPlaneProperties2KHRBuilder {
@@ -11584,7 +11584,7 @@ impl HasBuilder<'static> for DisplayPlanePropertiesKHR {
     type Builder = DisplayPlanePropertiesKHRBuilder;
 }
 
-/// A builder for a [DisplayPlanePropertiesKHR](struct.DisplayPlanePropertiesKHR.html).
+/// A builder for a [`DisplayPlanePropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayPlanePropertiesKHRBuilder {
@@ -11648,7 +11648,7 @@ impl HasBuilder<'static> for DisplayPowerInfoEXT {
     type Builder = DisplayPowerInfoEXTBuilder;
 }
 
-/// A builder for a [DisplayPowerInfoEXT](struct.DisplayPowerInfoEXT.html).
+/// A builder for a [`DisplayPowerInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayPowerInfoEXTBuilder {
@@ -11706,7 +11706,7 @@ impl HasBuilder<'static> for DisplayPresentInfoKHR {
     type Builder = DisplayPresentInfoKHRBuilder;
 }
 
-/// A builder for a [DisplayPresentInfoKHR](struct.DisplayPresentInfoKHR.html).
+/// A builder for a [`DisplayPresentInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayPresentInfoKHRBuilder {
@@ -11776,7 +11776,7 @@ impl<'b> HasBuilder<'b> for DisplayProperties2KHR {
     type Builder = DisplayProperties2KHRBuilder<'b>;
 }
 
-/// A builder for a [DisplayProperties2KHR](struct.DisplayProperties2KHR.html).
+/// A builder for a [`DisplayProperties2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayProperties2KHRBuilder<'b> {
@@ -11838,7 +11838,7 @@ impl<'b> HasBuilder<'b> for DisplayPropertiesKHR {
     type Builder = DisplayPropertiesKHRBuilder<'b>;
 }
 
-/// A builder for a [DisplayPropertiesKHR](struct.DisplayPropertiesKHR.html).
+/// A builder for a [`DisplayPropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplayPropertiesKHRBuilder<'b> {
@@ -11939,7 +11939,7 @@ impl HasBuilder<'static> for DisplaySurfaceCreateInfoKHR {
     type Builder = DisplaySurfaceCreateInfoKHRBuilder;
 }
 
-/// A builder for a [DisplaySurfaceCreateInfoKHR](struct.DisplaySurfaceCreateInfoKHR.html).
+/// A builder for a [`DisplaySurfaceCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DisplaySurfaceCreateInfoKHRBuilder {
@@ -12039,7 +12039,7 @@ impl HasBuilder<'static> for DrawIndexedIndirectCommand {
     type Builder = DrawIndexedIndirectCommandBuilder;
 }
 
-/// A builder for a [DrawIndexedIndirectCommand](struct.DrawIndexedIndirectCommand.html).
+/// A builder for a [`DrawIndexedIndirectCommand`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DrawIndexedIndirectCommandBuilder {
@@ -12121,7 +12121,7 @@ impl HasBuilder<'static> for DrawIndirectCommand {
     type Builder = DrawIndirectCommandBuilder;
 }
 
-/// A builder for a [DrawIndirectCommand](struct.DrawIndirectCommand.html).
+/// A builder for a [`DrawIndirectCommand`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DrawIndirectCommandBuilder {
@@ -12197,7 +12197,7 @@ impl HasBuilder<'static> for DrawMeshTasksIndirectCommandNV {
     type Builder = DrawMeshTasksIndirectCommandNVBuilder;
 }
 
-/// A builder for a [DrawMeshTasksIndirectCommandNV](struct.DrawMeshTasksIndirectCommandNV.html).
+/// A builder for a [`DrawMeshTasksIndirectCommandNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DrawMeshTasksIndirectCommandNVBuilder {
@@ -12261,7 +12261,7 @@ impl HasBuilder<'static> for DrmFormatModifierPropertiesEXT {
     type Builder = DrmFormatModifierPropertiesEXTBuilder;
 }
 
-/// A builder for a [DrmFormatModifierPropertiesEXT](struct.DrmFormatModifierPropertiesEXT.html).
+/// A builder for a [`DrmFormatModifierPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DrmFormatModifierPropertiesEXTBuilder {
@@ -12334,7 +12334,7 @@ impl<'b> HasBuilder<'b> for DrmFormatModifierPropertiesListEXT {
     type Builder = DrmFormatModifierPropertiesListEXTBuilder<'b>;
 }
 
-/// A builder for a [DrmFormatModifierPropertiesListEXT](struct.DrmFormatModifierPropertiesListEXT.html).
+/// A builder for a [`DrmFormatModifierPropertiesListEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct DrmFormatModifierPropertiesListEXTBuilder<'b> {
@@ -12398,7 +12398,7 @@ impl HasBuilder<'static> for EventCreateInfo {
     type Builder = EventCreateInfoBuilder;
 }
 
-/// A builder for a [EventCreateInfo](struct.EventCreateInfo.html).
+/// A builder for a [`EventCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct EventCreateInfoBuilder {
@@ -12456,7 +12456,7 @@ impl HasBuilder<'static> for ExportFenceCreateInfo {
     type Builder = ExportFenceCreateInfoBuilder;
 }
 
-/// A builder for a [ExportFenceCreateInfo](struct.ExportFenceCreateInfo.html).
+/// A builder for a [`ExportFenceCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExportFenceCreateInfoBuilder {
@@ -12514,7 +12514,7 @@ impl<'b> HasBuilder<'b> for ExportFenceWin32HandleInfoKHR {
     type Builder = ExportFenceWin32HandleInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [ExportFenceWin32HandleInfoKHR](struct.ExportFenceWin32HandleInfoKHR.html).
+/// A builder for a [`ExportFenceWin32HandleInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExportFenceWin32HandleInfoKHRBuilder<'b> {
@@ -12585,7 +12585,7 @@ impl HasBuilder<'static> for ExportMemoryAllocateInfo {
     type Builder = ExportMemoryAllocateInfoBuilder;
 }
 
-/// A builder for a [ExportMemoryAllocateInfo](struct.ExportMemoryAllocateInfo.html).
+/// A builder for a [`ExportMemoryAllocateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExportMemoryAllocateInfoBuilder {
@@ -12643,7 +12643,7 @@ impl HasBuilder<'static> for ExportMemoryAllocateInfoNV {
     type Builder = ExportMemoryAllocateInfoNVBuilder;
 }
 
-/// A builder for a [ExportMemoryAllocateInfoNV](struct.ExportMemoryAllocateInfoNV.html).
+/// A builder for a [`ExportMemoryAllocateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExportMemoryAllocateInfoNVBuilder {
@@ -12701,7 +12701,7 @@ impl<'b> HasBuilder<'b> for ExportMemoryWin32HandleInfoKHR {
     type Builder = ExportMemoryWin32HandleInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [ExportMemoryWin32HandleInfoKHR](struct.ExportMemoryWin32HandleInfoKHR.html).
+/// A builder for a [`ExportMemoryWin32HandleInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExportMemoryWin32HandleInfoKHRBuilder<'b> {
@@ -12772,7 +12772,7 @@ impl<'b> HasBuilder<'b> for ExportMemoryWin32HandleInfoNV {
     type Builder = ExportMemoryWin32HandleInfoNVBuilder<'b>;
 }
 
-/// A builder for a [ExportMemoryWin32HandleInfoNV](struct.ExportMemoryWin32HandleInfoNV.html).
+/// A builder for a [`ExportMemoryWin32HandleInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExportMemoryWin32HandleInfoNVBuilder<'b> {
@@ -12837,7 +12837,7 @@ impl HasBuilder<'static> for ExportSemaphoreCreateInfo {
     type Builder = ExportSemaphoreCreateInfoBuilder;
 }
 
-/// A builder for a [ExportSemaphoreCreateInfo](struct.ExportSemaphoreCreateInfo.html).
+/// A builder for a [`ExportSemaphoreCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExportSemaphoreCreateInfoBuilder {
@@ -12895,7 +12895,7 @@ impl<'b> HasBuilder<'b> for ExportSemaphoreWin32HandleInfoKHR {
     type Builder = ExportSemaphoreWin32HandleInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [ExportSemaphoreWin32HandleInfoKHR](struct.ExportSemaphoreWin32HandleInfoKHR.html).
+/// A builder for a [`ExportSemaphoreWin32HandleInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExportSemaphoreWin32HandleInfoKHRBuilder<'b> {
@@ -12966,7 +12966,7 @@ impl HasBuilder<'static> for ExtensionProperties {
     type Builder = ExtensionPropertiesBuilder;
 }
 
-/// A builder for a [ExtensionProperties](struct.ExtensionProperties.html).
+/// A builder for a [`ExtensionProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExtensionPropertiesBuilder {
@@ -13033,7 +13033,7 @@ impl HasBuilder<'static> for Extent2D {
     type Builder = Extent2DBuilder;
 }
 
-/// A builder for a [Extent2D](struct.Extent2D.html).
+/// A builder for a [`Extent2D`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Extent2DBuilder {
@@ -13097,7 +13097,7 @@ impl HasBuilder<'static> for Extent3D {
     type Builder = Extent3DBuilder;
 }
 
-/// A builder for a [Extent3D](struct.Extent3D.html).
+/// A builder for a [`Extent3D`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Extent3DBuilder {
@@ -13167,7 +13167,7 @@ impl HasBuilder<'static> for ExternalBufferProperties {
     type Builder = ExternalBufferPropertiesBuilder;
 }
 
-/// A builder for a [ExternalBufferProperties](struct.ExternalBufferProperties.html).
+/// A builder for a [`ExternalBufferProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExternalBufferPropertiesBuilder {
@@ -13228,7 +13228,7 @@ impl HasBuilder<'static> for ExternalFenceProperties {
     type Builder = ExternalFencePropertiesBuilder;
 }
 
-/// A builder for a [ExternalFenceProperties](struct.ExternalFenceProperties.html).
+/// A builder for a [`ExternalFenceProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExternalFencePropertiesBuilder {
@@ -13307,7 +13307,7 @@ impl HasBuilder<'static> for ExternalFormatANDROID {
     type Builder = ExternalFormatANDROIDBuilder;
 }
 
-/// A builder for a [ExternalFormatANDROID](struct.ExternalFormatANDROID.html).
+/// A builder for a [`ExternalFormatANDROID`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExternalFormatANDROIDBuilder {
@@ -13365,7 +13365,7 @@ impl HasBuilder<'static> for ExternalImageFormatProperties {
     type Builder = ExternalImageFormatPropertiesBuilder;
 }
 
-/// A builder for a [ExternalImageFormatProperties](struct.ExternalImageFormatProperties.html).
+/// A builder for a [`ExternalImageFormatProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExternalImageFormatPropertiesBuilder {
@@ -13426,7 +13426,7 @@ impl HasBuilder<'static> for ExternalImageFormatPropertiesNV {
     type Builder = ExternalImageFormatPropertiesNVBuilder;
 }
 
-/// A builder for a [ExternalImageFormatPropertiesNV](struct.ExternalImageFormatPropertiesNV.html).
+/// A builder for a [`ExternalImageFormatPropertiesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExternalImageFormatPropertiesNVBuilder {
@@ -13514,7 +13514,7 @@ impl HasBuilder<'static> for ExternalMemoryBufferCreateInfo {
     type Builder = ExternalMemoryBufferCreateInfoBuilder;
 }
 
-/// A builder for a [ExternalMemoryBufferCreateInfo](struct.ExternalMemoryBufferCreateInfo.html).
+/// A builder for a [`ExternalMemoryBufferCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExternalMemoryBufferCreateInfoBuilder {
@@ -13572,7 +13572,7 @@ impl HasBuilder<'static> for ExternalMemoryImageCreateInfo {
     type Builder = ExternalMemoryImageCreateInfoBuilder;
 }
 
-/// A builder for a [ExternalMemoryImageCreateInfo](struct.ExternalMemoryImageCreateInfo.html).
+/// A builder for a [`ExternalMemoryImageCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExternalMemoryImageCreateInfoBuilder {
@@ -13630,7 +13630,7 @@ impl HasBuilder<'static> for ExternalMemoryImageCreateInfoNV {
     type Builder = ExternalMemoryImageCreateInfoNVBuilder;
 }
 
-/// A builder for a [ExternalMemoryImageCreateInfoNV](struct.ExternalMemoryImageCreateInfoNV.html).
+/// A builder for a [`ExternalMemoryImageCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExternalMemoryImageCreateInfoNVBuilder {
@@ -13688,7 +13688,7 @@ impl HasBuilder<'static> for ExternalMemoryProperties {
     type Builder = ExternalMemoryPropertiesBuilder;
 }
 
-/// A builder for a [ExternalMemoryProperties](struct.ExternalMemoryProperties.html).
+/// A builder for a [`ExternalMemoryProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExternalMemoryPropertiesBuilder {
@@ -13767,7 +13767,7 @@ impl HasBuilder<'static> for ExternalSemaphoreProperties {
     type Builder = ExternalSemaphorePropertiesBuilder;
 }
 
-/// A builder for a [ExternalSemaphoreProperties](struct.ExternalSemaphoreProperties.html).
+/// A builder for a [`ExternalSemaphoreProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ExternalSemaphorePropertiesBuilder {
@@ -13833,7 +13833,7 @@ unsafe impl Cast for ExternalSemaphorePropertiesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [FenceCreateInfo](struct.FenceCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`FenceCreateInfo`].
 pub unsafe trait ExtendsFenceCreateInfo {}
 unsafe impl ExtendsFenceCreateInfo for ExportFenceCreateInfo {}
 unsafe impl ExtendsFenceCreateInfo for ExportFenceWin32HandleInfoKHR {}
@@ -13851,7 +13851,7 @@ impl<'b> HasBuilder<'b> for FenceCreateInfo {
     type Builder = FenceCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [FenceCreateInfo](struct.FenceCreateInfo.html).
+/// A builder for a [`FenceCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct FenceCreateInfoBuilder<'b> {
@@ -13921,7 +13921,7 @@ impl HasBuilder<'static> for FenceGetFdInfoKHR {
     type Builder = FenceGetFdInfoKHRBuilder;
 }
 
-/// A builder for a [FenceGetFdInfoKHR](struct.FenceGetFdInfoKHR.html).
+/// A builder for a [`FenceGetFdInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct FenceGetFdInfoKHRBuilder {
@@ -13985,7 +13985,7 @@ impl HasBuilder<'static> for FenceGetWin32HandleInfoKHR {
     type Builder = FenceGetWin32HandleInfoKHRBuilder;
 }
 
-/// A builder for a [FenceGetWin32HandleInfoKHR](struct.FenceGetWin32HandleInfoKHR.html).
+/// A builder for a [`FenceGetWin32HandleInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct FenceGetWin32HandleInfoKHRBuilder {
@@ -14049,7 +14049,7 @@ impl HasBuilder<'static> for FilterCubicImageViewImageFormatPropertiesEXT {
     type Builder = FilterCubicImageViewImageFormatPropertiesEXTBuilder;
 }
 
-/// A builder for a [FilterCubicImageViewImageFormatPropertiesEXT](struct.FilterCubicImageViewImageFormatPropertiesEXT.html).
+/// A builder for a [`FilterCubicImageViewImageFormatPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct FilterCubicImageViewImageFormatPropertiesEXTBuilder {
@@ -14113,7 +14113,7 @@ impl HasBuilder<'static> for FormatProperties {
     type Builder = FormatPropertiesBuilder;
 }
 
-/// A builder for a [FormatProperties](struct.FormatProperties.html).
+/// A builder for a [`FormatProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct FormatPropertiesBuilder {
@@ -14170,7 +14170,7 @@ unsafe impl Cast for FormatPropertiesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [FormatProperties2](struct.FormatProperties2.html).
+/// A Vulkan struct that can be used to extend a [`FormatProperties2`].
 pub unsafe trait ExtendsFormatProperties2 {}
 unsafe impl ExtendsFormatProperties2 for DrmFormatModifierPropertiesListEXT {}
 
@@ -14187,7 +14187,7 @@ impl<'b> HasBuilder<'b> for FormatProperties2 {
     type Builder = FormatProperties2Builder<'b>;
 }
 
-/// A builder for a [FormatProperties2](struct.FormatProperties2.html).
+/// A builder for a [`FormatProperties2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct FormatProperties2Builder<'b> {
@@ -14260,7 +14260,7 @@ impl<'b> HasBuilder<'b> for FragmentShadingRateAttachmentInfoKHR {
     type Builder = FragmentShadingRateAttachmentInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [FragmentShadingRateAttachmentInfoKHR](struct.FragmentShadingRateAttachmentInfoKHR.html).
+/// A builder for a [`FragmentShadingRateAttachmentInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct FragmentShadingRateAttachmentInfoKHRBuilder<'b> {
@@ -14331,7 +14331,7 @@ impl<'b> HasBuilder<'b> for FramebufferAttachmentImageInfo {
     type Builder = FramebufferAttachmentImageInfoBuilder<'b>;
 }
 
-/// A builder for a [FramebufferAttachmentImageInfo](struct.FramebufferAttachmentImageInfo.html).
+/// A builder for a [`FramebufferAttachmentImageInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct FramebufferAttachmentImageInfoBuilder<'b> {
@@ -14421,7 +14421,7 @@ impl<'b> HasBuilder<'b> for FramebufferAttachmentsCreateInfo {
     type Builder = FramebufferAttachmentsCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [FramebufferAttachmentsCreateInfo](struct.FramebufferAttachmentsCreateInfo.html).
+/// A builder for a [`FramebufferAttachmentsCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct FramebufferAttachmentsCreateInfoBuilder<'b> {
@@ -14471,7 +14471,7 @@ unsafe impl<'b> Cast for FramebufferAttachmentsCreateInfoBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [FramebufferCreateInfo](struct.FramebufferCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`FramebufferCreateInfo`].
 pub unsafe trait ExtendsFramebufferCreateInfo {}
 unsafe impl ExtendsFramebufferCreateInfo for FramebufferAttachmentsCreateInfo {}
 
@@ -14488,7 +14488,7 @@ impl<'b> HasBuilder<'b> for FramebufferCreateInfo {
     type Builder = FramebufferCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [FramebufferCreateInfo](struct.FramebufferCreateInfo.html).
+/// A builder for a [`FramebufferCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct FramebufferCreateInfoBuilder<'b> {
@@ -14589,7 +14589,7 @@ impl HasBuilder<'static> for FramebufferMixedSamplesCombinationNV {
     type Builder = FramebufferMixedSamplesCombinationNVBuilder;
 }
 
-/// A builder for a [FramebufferMixedSamplesCombinationNV](struct.FramebufferMixedSamplesCombinationNV.html).
+/// A builder for a [`FramebufferMixedSamplesCombinationNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct FramebufferMixedSamplesCombinationNVBuilder {
@@ -14668,7 +14668,7 @@ impl<'b> HasBuilder<'b> for GeneratedCommandsInfoNV {
     type Builder = GeneratedCommandsInfoNVBuilder<'b>;
 }
 
-/// A builder for a [GeneratedCommandsInfoNV](struct.GeneratedCommandsInfoNV.html).
+/// A builder for a [`GeneratedCommandsInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct GeneratedCommandsInfoNVBuilder<'b> {
@@ -14797,7 +14797,7 @@ impl HasBuilder<'static> for GeneratedCommandsMemoryRequirementsInfoNV {
     type Builder = GeneratedCommandsMemoryRequirementsInfoNVBuilder;
 }
 
-/// A builder for a [GeneratedCommandsMemoryRequirementsInfoNV](struct.GeneratedCommandsMemoryRequirementsInfoNV.html).
+/// A builder for a [`GeneratedCommandsMemoryRequirementsInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct GeneratedCommandsMemoryRequirementsInfoNVBuilder {
@@ -14876,7 +14876,7 @@ impl HasBuilder<'static> for GeometryAABBNV {
     type Builder = GeometryAABBNVBuilder;
 }
 
-/// A builder for a [GeometryAABBNV](struct.GeometryAABBNV.html).
+/// A builder for a [`GeometryAABBNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct GeometryAABBNVBuilder {
@@ -14952,7 +14952,7 @@ impl HasBuilder<'static> for GeometryDataNV {
     type Builder = GeometryDataNVBuilder;
 }
 
-/// A builder for a [GeometryDataNV](struct.GeometryDataNV.html).
+/// A builder for a [`GeometryDataNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct GeometryDataNVBuilder {
@@ -15016,7 +15016,7 @@ impl HasBuilder<'static> for GeometryNV {
     type Builder = GeometryNVBuilder;
 }
 
-/// A builder for a [GeometryNV](struct.GeometryNV.html).
+/// A builder for a [`GeometryNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct GeometryNVBuilder {
@@ -15086,7 +15086,7 @@ impl HasBuilder<'static> for GeometryTrianglesNV {
     type Builder = GeometryTrianglesNVBuilder;
 }
 
-/// A builder for a [GeometryTrianglesNV](struct.GeometryTrianglesNV.html).
+/// A builder for a [`GeometryTrianglesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct GeometryTrianglesNVBuilder {
@@ -15191,7 +15191,7 @@ unsafe impl Cast for GeometryTrianglesNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [GraphicsPipelineCreateInfo](struct.GraphicsPipelineCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`GraphicsPipelineCreateInfo`].
 pub unsafe trait ExtendsGraphicsPipelineCreateInfo {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineShaderGroupsCreateInfoNV {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
@@ -15217,7 +15217,7 @@ impl<'b> HasBuilder<'b> for GraphicsPipelineCreateInfo {
     type Builder = GraphicsPipelineCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [GraphicsPipelineCreateInfo](struct.GraphicsPipelineCreateInfo.html).
+/// A builder for a [`GraphicsPipelineCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct GraphicsPipelineCreateInfoBuilder<'b> {
@@ -15408,7 +15408,7 @@ impl<'b> HasBuilder<'b> for GraphicsPipelineShaderGroupsCreateInfoNV {
     type Builder = GraphicsPipelineShaderGroupsCreateInfoNVBuilder<'b>;
 }
 
-/// A builder for a [GraphicsPipelineShaderGroupsCreateInfoNV](struct.GraphicsPipelineShaderGroupsCreateInfoNV.html).
+/// A builder for a [`GraphicsPipelineShaderGroupsCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct GraphicsPipelineShaderGroupsCreateInfoNVBuilder<'b> {
@@ -15478,7 +15478,7 @@ impl<'b> HasBuilder<'b> for GraphicsShaderGroupCreateInfoNV {
     type Builder = GraphicsShaderGroupCreateInfoNVBuilder<'b>;
 }
 
-/// A builder for a [GraphicsShaderGroupCreateInfoNV](struct.GraphicsShaderGroupCreateInfoNV.html).
+/// A builder for a [`GraphicsShaderGroupCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct GraphicsShaderGroupCreateInfoNVBuilder<'b> {
@@ -15559,7 +15559,7 @@ impl HasBuilder<'static> for HdrMetadataEXT {
     type Builder = HdrMetadataEXTBuilder;
 }
 
-/// A builder for a [HdrMetadataEXT](struct.HdrMetadataEXT.html).
+/// A builder for a [`HdrMetadataEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct HdrMetadataEXTBuilder {
@@ -15668,7 +15668,7 @@ impl HasBuilder<'static> for HeadlessSurfaceCreateInfoEXT {
     type Builder = HeadlessSurfaceCreateInfoEXTBuilder;
 }
 
-/// A builder for a [HeadlessSurfaceCreateInfoEXT](struct.HeadlessSurfaceCreateInfoEXT.html).
+/// A builder for a [`HeadlessSurfaceCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct HeadlessSurfaceCreateInfoEXTBuilder {
@@ -15726,7 +15726,7 @@ impl<'b> HasBuilder<'b> for IOSSurfaceCreateInfoMVK {
     type Builder = IOSSurfaceCreateInfoMVKBuilder<'b>;
 }
 
-/// A builder for a [IOSSurfaceCreateInfoMVK](struct.IOSSurfaceCreateInfoMVK.html).
+/// A builder for a [`IOSSurfaceCreateInfoMVK`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct IOSSurfaceCreateInfoMVKBuilder<'b> {
@@ -15791,7 +15791,7 @@ impl HasBuilder<'static> for ImageBlit {
     type Builder = ImageBlitBuilder;
 }
 
-/// A builder for a [ImageBlit](struct.ImageBlit.html).
+/// A builder for a [`ImageBlit`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageBlitBuilder {
@@ -15860,7 +15860,7 @@ unsafe impl Cast for ImageBlitBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [ImageBlit2KHR](struct.ImageBlit2KHR.html).
+/// A Vulkan struct that can be used to extend a [`ImageBlit2KHR`].
 pub unsafe trait ExtendsImageBlit2KHR {}
 unsafe impl ExtendsImageBlit2KHR for CopyCommandTransformInfoQCOM {}
 
@@ -15877,7 +15877,7 @@ impl<'b> HasBuilder<'b> for ImageBlit2KHR {
     type Builder = ImageBlit2KHRBuilder<'b>;
 }
 
-/// A builder for a [ImageBlit2KHR](struct.ImageBlit2KHR.html).
+/// A builder for a [`ImageBlit2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageBlit2KHRBuilder<'b> {
@@ -15971,7 +15971,7 @@ impl HasBuilder<'static> for ImageCopy {
     type Builder = ImageCopyBuilder;
 }
 
-/// A builder for a [ImageCopy](struct.ImageCopy.html).
+/// A builder for a [`ImageCopy`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageCopyBuilder {
@@ -16059,7 +16059,7 @@ impl HasBuilder<'static> for ImageCopy2KHR {
     type Builder = ImageCopy2KHRBuilder;
 }
 
-/// A builder for a [ImageCopy2KHR](struct.ImageCopy2KHR.html).
+/// A builder for a [`ImageCopy2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageCopy2KHRBuilder {
@@ -16134,7 +16134,7 @@ unsafe impl Cast for ImageCopy2KHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [ImageCreateInfo](struct.ImageCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`ImageCreateInfo`].
 pub unsafe trait ExtendsImageCreateInfo {}
 unsafe impl ExtendsImageCreateInfo for DedicatedAllocationImageCreateInfoNV {}
 unsafe impl ExtendsImageCreateInfo for ExternalFormatANDROID {}
@@ -16159,7 +16159,7 @@ impl<'b> HasBuilder<'b> for ImageCreateInfo {
     type Builder = ImageCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [ImageCreateInfo](struct.ImageCreateInfo.html).
+/// A builder for a [`ImageCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageCreateInfoBuilder<'b> {
@@ -16296,7 +16296,7 @@ impl<'b> HasBuilder<'b> for ImageDrmFormatModifierExplicitCreateInfoEXT {
     type Builder = ImageDrmFormatModifierExplicitCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [ImageDrmFormatModifierExplicitCreateInfoEXT](struct.ImageDrmFormatModifierExplicitCreateInfoEXT.html).
+/// A builder for a [`ImageDrmFormatModifierExplicitCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageDrmFormatModifierExplicitCreateInfoEXTBuilder<'b> {
@@ -16365,7 +16365,7 @@ impl<'b> HasBuilder<'b> for ImageDrmFormatModifierListCreateInfoEXT {
     type Builder = ImageDrmFormatModifierListCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [ImageDrmFormatModifierListCreateInfoEXT](struct.ImageDrmFormatModifierListCreateInfoEXT.html).
+/// A builder for a [`ImageDrmFormatModifierListCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageDrmFormatModifierListCreateInfoEXTBuilder<'b> {
@@ -16425,7 +16425,7 @@ impl HasBuilder<'static> for ImageDrmFormatModifierPropertiesEXT {
     type Builder = ImageDrmFormatModifierPropertiesEXTBuilder;
 }
 
-/// A builder for a [ImageDrmFormatModifierPropertiesEXT](struct.ImageDrmFormatModifierPropertiesEXT.html).
+/// A builder for a [`ImageDrmFormatModifierPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageDrmFormatModifierPropertiesEXTBuilder {
@@ -16483,7 +16483,7 @@ impl<'b> HasBuilder<'b> for ImageFormatListCreateInfo {
     type Builder = ImageFormatListCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [ImageFormatListCreateInfo](struct.ImageFormatListCreateInfo.html).
+/// A builder for a [`ImageFormatListCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageFormatListCreateInfoBuilder<'b> {
@@ -16543,7 +16543,7 @@ impl HasBuilder<'static> for ImageFormatProperties {
     type Builder = ImageFormatPropertiesBuilder;
 }
 
-/// A builder for a [ImageFormatProperties](struct.ImageFormatProperties.html).
+/// A builder for a [`ImageFormatProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageFormatPropertiesBuilder {
@@ -16612,7 +16612,7 @@ unsafe impl Cast for ImageFormatPropertiesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [ImageFormatProperties2](struct.ImageFormatProperties2.html).
+/// A Vulkan struct that can be used to extend a [`ImageFormatProperties2`].
 pub unsafe trait ExtendsImageFormatProperties2 {}
 unsafe impl ExtendsImageFormatProperties2 for AndroidHardwareBufferUsageANDROID {}
 unsafe impl ExtendsImageFormatProperties2 for ExternalImageFormatProperties {}
@@ -16633,7 +16633,7 @@ impl<'b> HasBuilder<'b> for ImageFormatProperties2 {
     type Builder = ImageFormatProperties2Builder<'b>;
 }
 
-/// A builder for a [ImageFormatProperties2](struct.ImageFormatProperties2.html).
+/// A builder for a [`ImageFormatProperties2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageFormatProperties2Builder<'b> {
@@ -16693,7 +16693,7 @@ unsafe impl<'b> Cast for ImageFormatProperties2Builder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [ImageMemoryBarrier](struct.ImageMemoryBarrier.html).
+/// A Vulkan struct that can be used to extend a [`ImageMemoryBarrier`].
 pub unsafe trait ExtendsImageMemoryBarrier {}
 unsafe impl ExtendsImageMemoryBarrier for SampleLocationsInfoEXT {}
 
@@ -16710,7 +16710,7 @@ impl<'b> HasBuilder<'b> for ImageMemoryBarrier {
     type Builder = ImageMemoryBarrierBuilder<'b>;
 }
 
-/// A builder for a [ImageMemoryBarrier](struct.ImageMemoryBarrier.html).
+/// A builder for a [`ImageMemoryBarrier`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageMemoryBarrierBuilder<'b> {
@@ -16812,7 +16812,7 @@ unsafe impl<'b> Cast for ImageMemoryBarrierBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [ImageMemoryBarrier2KHR](struct.ImageMemoryBarrier2KHR.html).
+/// A Vulkan struct that can be used to extend a [`ImageMemoryBarrier2KHR`].
 pub unsafe trait ExtendsImageMemoryBarrier2KHR {}
 unsafe impl ExtendsImageMemoryBarrier2KHR for SampleLocationsInfoEXT {}
 
@@ -16829,7 +16829,7 @@ impl<'b> HasBuilder<'b> for ImageMemoryBarrier2KHR {
     type Builder = ImageMemoryBarrier2KHRBuilder<'b>;
 }
 
-/// A builder for a [ImageMemoryBarrier2KHR](struct.ImageMemoryBarrier2KHR.html).
+/// A builder for a [`ImageMemoryBarrier2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageMemoryBarrier2KHRBuilder<'b> {
@@ -16943,7 +16943,7 @@ unsafe impl<'b> Cast for ImageMemoryBarrier2KHRBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [ImageMemoryRequirementsInfo2](struct.ImageMemoryRequirementsInfo2.html).
+/// A Vulkan struct that can be used to extend a [`ImageMemoryRequirementsInfo2`].
 pub unsafe trait ExtendsImageMemoryRequirementsInfo2 {}
 unsafe impl ExtendsImageMemoryRequirementsInfo2 for ImagePlaneMemoryRequirementsInfo {}
 
@@ -16960,7 +16960,7 @@ impl<'b> HasBuilder<'b> for ImageMemoryRequirementsInfo2 {
     type Builder = ImageMemoryRequirementsInfo2Builder<'b>;
 }
 
-/// A builder for a [ImageMemoryRequirementsInfo2](struct.ImageMemoryRequirementsInfo2.html).
+/// A builder for a [`ImageMemoryRequirementsInfo2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageMemoryRequirementsInfo2Builder<'b> {
@@ -17030,7 +17030,7 @@ impl HasBuilder<'static> for ImagePipeSurfaceCreateInfoFUCHSIA {
     type Builder = ImagePipeSurfaceCreateInfoFUCHSIABuilder;
 }
 
-/// A builder for a [ImagePipeSurfaceCreateInfoFUCHSIA](struct.ImagePipeSurfaceCreateInfoFUCHSIA.html).
+/// A builder for a [`ImagePipeSurfaceCreateInfoFUCHSIA`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImagePipeSurfaceCreateInfoFUCHSIABuilder {
@@ -17094,7 +17094,7 @@ impl HasBuilder<'static> for ImagePlaneMemoryRequirementsInfo {
     type Builder = ImagePlaneMemoryRequirementsInfoBuilder;
 }
 
-/// A builder for a [ImagePlaneMemoryRequirementsInfo](struct.ImagePlaneMemoryRequirementsInfo.html).
+/// A builder for a [`ImagePlaneMemoryRequirementsInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImagePlaneMemoryRequirementsInfoBuilder {
@@ -17152,7 +17152,7 @@ impl HasBuilder<'static> for ImageResolve {
     type Builder = ImageResolveBuilder;
 }
 
-/// A builder for a [ImageResolve](struct.ImageResolve.html).
+/// A builder for a [`ImageResolve`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageResolveBuilder {
@@ -17240,7 +17240,7 @@ impl HasBuilder<'static> for ImageResolve2KHR {
     type Builder = ImageResolve2KHRBuilder;
 }
 
-/// A builder for a [ImageResolve2KHR](struct.ImageResolve2KHR.html).
+/// A builder for a [`ImageResolve2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageResolve2KHRBuilder {
@@ -17328,7 +17328,7 @@ impl HasBuilder<'static> for ImageSparseMemoryRequirementsInfo2 {
     type Builder = ImageSparseMemoryRequirementsInfo2Builder;
 }
 
-/// A builder for a [ImageSparseMemoryRequirementsInfo2](struct.ImageSparseMemoryRequirementsInfo2.html).
+/// A builder for a [`ImageSparseMemoryRequirementsInfo2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageSparseMemoryRequirementsInfo2Builder {
@@ -17386,7 +17386,7 @@ impl HasBuilder<'static> for ImageStencilUsageCreateInfo {
     type Builder = ImageStencilUsageCreateInfoBuilder;
 }
 
-/// A builder for a [ImageStencilUsageCreateInfo](struct.ImageStencilUsageCreateInfo.html).
+/// A builder for a [`ImageStencilUsageCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageStencilUsageCreateInfoBuilder {
@@ -17444,7 +17444,7 @@ impl HasBuilder<'static> for ImageSubresource {
     type Builder = ImageSubresourceBuilder;
 }
 
-/// A builder for a [ImageSubresource](struct.ImageSubresource.html).
+/// A builder for a [`ImageSubresource`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageSubresourceBuilder {
@@ -17514,7 +17514,7 @@ impl HasBuilder<'static> for ImageSubresourceLayers {
     type Builder = ImageSubresourceLayersBuilder;
 }
 
-/// A builder for a [ImageSubresourceLayers](struct.ImageSubresourceLayers.html).
+/// A builder for a [`ImageSubresourceLayers`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageSubresourceLayersBuilder {
@@ -17590,7 +17590,7 @@ impl HasBuilder<'static> for ImageSubresourceRange {
     type Builder = ImageSubresourceRangeBuilder;
 }
 
-/// A builder for a [ImageSubresourceRange](struct.ImageSubresourceRange.html).
+/// A builder for a [`ImageSubresourceRange`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageSubresourceRangeBuilder {
@@ -17672,7 +17672,7 @@ impl HasBuilder<'static> for ImageSwapchainCreateInfoKHR {
     type Builder = ImageSwapchainCreateInfoKHRBuilder;
 }
 
-/// A builder for a [ImageSwapchainCreateInfoKHR](struct.ImageSwapchainCreateInfoKHR.html).
+/// A builder for a [`ImageSwapchainCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageSwapchainCreateInfoKHRBuilder {
@@ -17730,7 +17730,7 @@ impl HasBuilder<'static> for ImageViewASTCDecodeModeEXT {
     type Builder = ImageViewASTCDecodeModeEXTBuilder;
 }
 
-/// A builder for a [ImageViewASTCDecodeModeEXT](struct.ImageViewASTCDecodeModeEXT.html).
+/// A builder for a [`ImageViewASTCDecodeModeEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageViewASTCDecodeModeEXTBuilder {
@@ -17788,7 +17788,7 @@ impl HasBuilder<'static> for ImageViewAddressPropertiesNVX {
     type Builder = ImageViewAddressPropertiesNVXBuilder;
 }
 
-/// A builder for a [ImageViewAddressPropertiesNVX](struct.ImageViewAddressPropertiesNVX.html).
+/// A builder for a [`ImageViewAddressPropertiesNVX`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageViewAddressPropertiesNVXBuilder {
@@ -17839,7 +17839,7 @@ unsafe impl Cast for ImageViewAddressPropertiesNVXBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [ImageViewCreateInfo](struct.ImageViewCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`ImageViewCreateInfo`].
 pub unsafe trait ExtendsImageViewCreateInfo {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewASTCDecodeModeEXT {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewUsageCreateInfo {}
@@ -17858,7 +17858,7 @@ impl<'b> HasBuilder<'b> for ImageViewCreateInfo {
     type Builder = ImageViewCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [ImageViewCreateInfo](struct.ImageViewCreateInfo.html).
+/// A builder for a [`ImageViewCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageViewCreateInfoBuilder<'b> {
@@ -17961,7 +17961,7 @@ impl HasBuilder<'static> for ImageViewHandleInfoNVX {
     type Builder = ImageViewHandleInfoNVXBuilder;
 }
 
-/// A builder for a [ImageViewHandleInfoNVX](struct.ImageViewHandleInfoNVX.html).
+/// A builder for a [`ImageViewHandleInfoNVX`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageViewHandleInfoNVXBuilder {
@@ -18031,7 +18031,7 @@ impl HasBuilder<'static> for ImageViewUsageCreateInfo {
     type Builder = ImageViewUsageCreateInfoBuilder;
 }
 
-/// A builder for a [ImageViewUsageCreateInfo](struct.ImageViewUsageCreateInfo.html).
+/// A builder for a [`ImageViewUsageCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImageViewUsageCreateInfoBuilder {
@@ -18089,7 +18089,7 @@ impl<'b> HasBuilder<'b> for ImportAndroidHardwareBufferInfoANDROID {
     type Builder = ImportAndroidHardwareBufferInfoANDROIDBuilder<'b>;
 }
 
-/// A builder for a [ImportAndroidHardwareBufferInfoANDROID](struct.ImportAndroidHardwareBufferInfoANDROID.html).
+/// A builder for a [`ImportAndroidHardwareBufferInfoANDROID`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImportAndroidHardwareBufferInfoANDROIDBuilder<'b> {
@@ -18148,7 +18148,7 @@ impl HasBuilder<'static> for ImportFenceFdInfoKHR {
     type Builder = ImportFenceFdInfoKHRBuilder;
 }
 
-/// A builder for a [ImportFenceFdInfoKHR](struct.ImportFenceFdInfoKHR.html).
+/// A builder for a [`ImportFenceFdInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImportFenceFdInfoKHRBuilder {
@@ -18224,7 +18224,7 @@ impl HasBuilder<'static> for ImportFenceWin32HandleInfoKHR {
     type Builder = ImportFenceWin32HandleInfoKHRBuilder;
 }
 
-/// A builder for a [ImportFenceWin32HandleInfoKHR](struct.ImportFenceWin32HandleInfoKHR.html).
+/// A builder for a [`ImportFenceWin32HandleInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImportFenceWin32HandleInfoKHRBuilder {
@@ -18306,7 +18306,7 @@ impl HasBuilder<'static> for ImportMemoryFdInfoKHR {
     type Builder = ImportMemoryFdInfoKHRBuilder;
 }
 
-/// A builder for a [ImportMemoryFdInfoKHR](struct.ImportMemoryFdInfoKHR.html).
+/// A builder for a [`ImportMemoryFdInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImportMemoryFdInfoKHRBuilder {
@@ -18370,7 +18370,7 @@ impl<'b> HasBuilder<'b> for ImportMemoryHostPointerInfoEXT {
     type Builder = ImportMemoryHostPointerInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [ImportMemoryHostPointerInfoEXT](struct.ImportMemoryHostPointerInfoEXT.html).
+/// A builder for a [`ImportMemoryHostPointerInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImportMemoryHostPointerInfoEXTBuilder<'b> {
@@ -18435,7 +18435,7 @@ impl HasBuilder<'static> for ImportMemoryWin32HandleInfoKHR {
     type Builder = ImportMemoryWin32HandleInfoKHRBuilder;
 }
 
-/// A builder for a [ImportMemoryWin32HandleInfoKHR](struct.ImportMemoryWin32HandleInfoKHR.html).
+/// A builder for a [`ImportMemoryWin32HandleInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImportMemoryWin32HandleInfoKHRBuilder {
@@ -18505,7 +18505,7 @@ impl HasBuilder<'static> for ImportMemoryWin32HandleInfoNV {
     type Builder = ImportMemoryWin32HandleInfoNVBuilder;
 }
 
-/// A builder for a [ImportMemoryWin32HandleInfoNV](struct.ImportMemoryWin32HandleInfoNV.html).
+/// A builder for a [`ImportMemoryWin32HandleInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImportMemoryWin32HandleInfoNVBuilder {
@@ -18569,7 +18569,7 @@ impl HasBuilder<'static> for ImportMemoryZirconHandleInfoFUCHSIA {
     type Builder = ImportMemoryZirconHandleInfoFUCHSIABuilder;
 }
 
-/// A builder for a [ImportMemoryZirconHandleInfoFUCHSIA](struct.ImportMemoryZirconHandleInfoFUCHSIA.html).
+/// A builder for a [`ImportMemoryZirconHandleInfoFUCHSIA`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImportMemoryZirconHandleInfoFUCHSIABuilder {
@@ -18633,7 +18633,7 @@ impl HasBuilder<'static> for ImportSemaphoreFdInfoKHR {
     type Builder = ImportSemaphoreFdInfoKHRBuilder;
 }
 
-/// A builder for a [ImportSemaphoreFdInfoKHR](struct.ImportSemaphoreFdInfoKHR.html).
+/// A builder for a [`ImportSemaphoreFdInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImportSemaphoreFdInfoKHRBuilder {
@@ -18709,7 +18709,7 @@ impl HasBuilder<'static> for ImportSemaphoreWin32HandleInfoKHR {
     type Builder = ImportSemaphoreWin32HandleInfoKHRBuilder;
 }
 
-/// A builder for a [ImportSemaphoreWin32HandleInfoKHR](struct.ImportSemaphoreWin32HandleInfoKHR.html).
+/// A builder for a [`ImportSemaphoreWin32HandleInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImportSemaphoreWin32HandleInfoKHRBuilder {
@@ -18791,7 +18791,7 @@ impl HasBuilder<'static> for ImportSemaphoreZirconHandleInfoFUCHSIA {
     type Builder = ImportSemaphoreZirconHandleInfoFUCHSIABuilder;
 }
 
-/// A builder for a [ImportSemaphoreZirconHandleInfoFUCHSIA](struct.ImportSemaphoreZirconHandleInfoFUCHSIA.html).
+/// A builder for a [`ImportSemaphoreZirconHandleInfoFUCHSIA`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ImportSemaphoreZirconHandleInfoFUCHSIABuilder {
@@ -18867,7 +18867,7 @@ impl<'b> HasBuilder<'b> for IndirectCommandsLayoutCreateInfoNV {
     type Builder = IndirectCommandsLayoutCreateInfoNVBuilder<'b>;
 }
 
-/// A builder for a [IndirectCommandsLayoutCreateInfoNV](struct.IndirectCommandsLayoutCreateInfoNV.html).
+/// A builder for a [`IndirectCommandsLayoutCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct IndirectCommandsLayoutCreateInfoNVBuilder<'b> {
@@ -18949,7 +18949,7 @@ impl<'b> HasBuilder<'b> for IndirectCommandsLayoutTokenNV {
     type Builder = IndirectCommandsLayoutTokenNVBuilder<'b>;
 }
 
-/// A builder for a [IndirectCommandsLayoutTokenNV](struct.IndirectCommandsLayoutTokenNV.html).
+/// A builder for a [`IndirectCommandsLayoutTokenNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct IndirectCommandsLayoutTokenNVBuilder<'b> {
@@ -19082,7 +19082,7 @@ impl HasBuilder<'static> for IndirectCommandsStreamNV {
     type Builder = IndirectCommandsStreamNVBuilder;
 }
 
-/// A builder for a [IndirectCommandsStreamNV](struct.IndirectCommandsStreamNV.html).
+/// A builder for a [`IndirectCommandsStreamNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct IndirectCommandsStreamNVBuilder {
@@ -19146,7 +19146,7 @@ impl<'b> HasBuilder<'b> for InitializePerformanceApiInfoINTEL {
     type Builder = InitializePerformanceApiInfoINTELBuilder<'b>;
 }
 
-/// A builder for a [InitializePerformanceApiInfoINTEL](struct.InitializePerformanceApiInfoINTEL.html).
+/// A builder for a [`InitializePerformanceApiInfoINTEL`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct InitializePerformanceApiInfoINTELBuilder<'b> {
@@ -19205,7 +19205,7 @@ impl HasBuilder<'static> for InputAttachmentAspectReference {
     type Builder = InputAttachmentAspectReferenceBuilder;
 }
 
-/// A builder for a [InputAttachmentAspectReference](struct.InputAttachmentAspectReference.html).
+/// A builder for a [`InputAttachmentAspectReference`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct InputAttachmentAspectReferenceBuilder {
@@ -19262,7 +19262,7 @@ unsafe impl Cast for InputAttachmentAspectReferenceBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [InstanceCreateInfo](struct.InstanceCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`InstanceCreateInfo`].
 pub unsafe trait ExtendsInstanceCreateInfo {}
 unsafe impl ExtendsInstanceCreateInfo for DebugReportCallbackCreateInfoEXT {}
 unsafe impl ExtendsInstanceCreateInfo for DebugUtilsMessengerCreateInfoEXT {}
@@ -19282,7 +19282,7 @@ impl<'b> HasBuilder<'b> for InstanceCreateInfo {
     type Builder = InstanceCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [InstanceCreateInfo](struct.InstanceCreateInfo.html).
+/// A builder for a [`InstanceCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct InstanceCreateInfoBuilder<'b> {
@@ -19375,7 +19375,7 @@ impl HasBuilder<'static> for LayerProperties {
     type Builder = LayerPropertiesBuilder;
 }
 
-/// A builder for a [LayerProperties](struct.LayerProperties.html).
+/// A builder for a [`LayerProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct LayerPropertiesBuilder {
@@ -19457,7 +19457,7 @@ impl<'b> HasBuilder<'b> for MacOSSurfaceCreateInfoMVK {
     type Builder = MacOSSurfaceCreateInfoMVKBuilder<'b>;
 }
 
-/// A builder for a [MacOSSurfaceCreateInfoMVK](struct.MacOSSurfaceCreateInfoMVK.html).
+/// A builder for a [`MacOSSurfaceCreateInfoMVK`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MacOSSurfaceCreateInfoMVKBuilder<'b> {
@@ -19522,7 +19522,7 @@ impl HasBuilder<'static> for MappedMemoryRange {
     type Builder = MappedMemoryRangeBuilder;
 }
 
-/// A builder for a [MappedMemoryRange](struct.MappedMemoryRange.html).
+/// A builder for a [`MappedMemoryRange`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MappedMemoryRangeBuilder {
@@ -19592,7 +19592,7 @@ impl HasBuilder<'static> for MemoryAllocateFlagsInfo {
     type Builder = MemoryAllocateFlagsInfoBuilder;
 }
 
-/// A builder for a [MemoryAllocateFlagsInfo](struct.MemoryAllocateFlagsInfo.html).
+/// A builder for a [`MemoryAllocateFlagsInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryAllocateFlagsInfoBuilder {
@@ -19643,7 +19643,7 @@ unsafe impl Cast for MemoryAllocateFlagsInfoBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [MemoryAllocateInfo](struct.MemoryAllocateInfo.html).
+/// A Vulkan struct that can be used to extend a [`MemoryAllocateInfo`].
 pub unsafe trait ExtendsMemoryAllocateInfo {}
 unsafe impl ExtendsMemoryAllocateInfo for DedicatedAllocationMemoryAllocateInfoNV {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryAllocateInfo {}
@@ -19674,7 +19674,7 @@ impl<'b> HasBuilder<'b> for MemoryAllocateInfo {
     type Builder = MemoryAllocateInfoBuilder<'b>;
 }
 
-/// A builder for a [MemoryAllocateInfo](struct.MemoryAllocateInfo.html).
+/// A builder for a [`MemoryAllocateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryAllocateInfoBuilder<'b> {
@@ -19750,7 +19750,7 @@ impl HasBuilder<'static> for MemoryBarrier {
     type Builder = MemoryBarrierBuilder;
 }
 
-/// A builder for a [MemoryBarrier](struct.MemoryBarrier.html).
+/// A builder for a [`MemoryBarrier`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryBarrierBuilder {
@@ -19814,7 +19814,7 @@ impl HasBuilder<'static> for MemoryBarrier2KHR {
     type Builder = MemoryBarrier2KHRBuilder;
 }
 
-/// A builder for a [MemoryBarrier2KHR](struct.MemoryBarrier2KHR.html).
+/// A builder for a [`MemoryBarrier2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryBarrier2KHRBuilder {
@@ -19890,7 +19890,7 @@ impl HasBuilder<'static> for MemoryDedicatedAllocateInfo {
     type Builder = MemoryDedicatedAllocateInfoBuilder;
 }
 
-/// A builder for a [MemoryDedicatedAllocateInfo](struct.MemoryDedicatedAllocateInfo.html).
+/// A builder for a [`MemoryDedicatedAllocateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryDedicatedAllocateInfoBuilder {
@@ -19954,7 +19954,7 @@ impl HasBuilder<'static> for MemoryDedicatedRequirements {
     type Builder = MemoryDedicatedRequirementsBuilder;
 }
 
-/// A builder for a [MemoryDedicatedRequirements](struct.MemoryDedicatedRequirements.html).
+/// A builder for a [`MemoryDedicatedRequirements`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryDedicatedRequirementsBuilder {
@@ -20018,7 +20018,7 @@ impl HasBuilder<'static> for MemoryFdPropertiesKHR {
     type Builder = MemoryFdPropertiesKHRBuilder;
 }
 
-/// A builder for a [MemoryFdPropertiesKHR](struct.MemoryFdPropertiesKHR.html).
+/// A builder for a [`MemoryFdPropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryFdPropertiesKHRBuilder {
@@ -20076,7 +20076,7 @@ impl HasBuilder<'static> for MemoryGetAndroidHardwareBufferInfoANDROID {
     type Builder = MemoryGetAndroidHardwareBufferInfoANDROIDBuilder;
 }
 
-/// A builder for a [MemoryGetAndroidHardwareBufferInfoANDROID](struct.MemoryGetAndroidHardwareBufferInfoANDROID.html).
+/// A builder for a [`MemoryGetAndroidHardwareBufferInfoANDROID`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryGetAndroidHardwareBufferInfoANDROIDBuilder {
@@ -20134,7 +20134,7 @@ impl HasBuilder<'static> for MemoryGetFdInfoKHR {
     type Builder = MemoryGetFdInfoKHRBuilder;
 }
 
-/// A builder for a [MemoryGetFdInfoKHR](struct.MemoryGetFdInfoKHR.html).
+/// A builder for a [`MemoryGetFdInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryGetFdInfoKHRBuilder {
@@ -20198,7 +20198,7 @@ impl HasBuilder<'static> for MemoryGetRemoteAddressInfoNV {
     type Builder = MemoryGetRemoteAddressInfoNVBuilder;
 }
 
-/// A builder for a [MemoryGetRemoteAddressInfoNV](struct.MemoryGetRemoteAddressInfoNV.html).
+/// A builder for a [`MemoryGetRemoteAddressInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryGetRemoteAddressInfoNVBuilder {
@@ -20262,7 +20262,7 @@ impl HasBuilder<'static> for MemoryGetWin32HandleInfoKHR {
     type Builder = MemoryGetWin32HandleInfoKHRBuilder;
 }
 
-/// A builder for a [MemoryGetWin32HandleInfoKHR](struct.MemoryGetWin32HandleInfoKHR.html).
+/// A builder for a [`MemoryGetWin32HandleInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryGetWin32HandleInfoKHRBuilder {
@@ -20326,7 +20326,7 @@ impl HasBuilder<'static> for MemoryGetZirconHandleInfoFUCHSIA {
     type Builder = MemoryGetZirconHandleInfoFUCHSIABuilder;
 }
 
-/// A builder for a [MemoryGetZirconHandleInfoFUCHSIA](struct.MemoryGetZirconHandleInfoFUCHSIA.html).
+/// A builder for a [`MemoryGetZirconHandleInfoFUCHSIA`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryGetZirconHandleInfoFUCHSIABuilder {
@@ -20390,7 +20390,7 @@ impl HasBuilder<'static> for MemoryHeap {
     type Builder = MemoryHeapBuilder;
 }
 
-/// A builder for a [MemoryHeap](struct.MemoryHeap.html).
+/// A builder for a [`MemoryHeap`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryHeapBuilder {
@@ -20454,7 +20454,7 @@ impl HasBuilder<'static> for MemoryHostPointerPropertiesEXT {
     type Builder = MemoryHostPointerPropertiesEXTBuilder;
 }
 
-/// A builder for a [MemoryHostPointerPropertiesEXT](struct.MemoryHostPointerPropertiesEXT.html).
+/// A builder for a [`MemoryHostPointerPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryHostPointerPropertiesEXTBuilder {
@@ -20512,7 +20512,7 @@ impl HasBuilder<'static> for MemoryOpaqueCaptureAddressAllocateInfo {
     type Builder = MemoryOpaqueCaptureAddressAllocateInfoBuilder;
 }
 
-/// A builder for a [MemoryOpaqueCaptureAddressAllocateInfo](struct.MemoryOpaqueCaptureAddressAllocateInfo.html).
+/// A builder for a [`MemoryOpaqueCaptureAddressAllocateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryOpaqueCaptureAddressAllocateInfoBuilder {
@@ -20570,7 +20570,7 @@ impl HasBuilder<'static> for MemoryPriorityAllocateInfoEXT {
     type Builder = MemoryPriorityAllocateInfoEXTBuilder;
 }
 
-/// A builder for a [MemoryPriorityAllocateInfoEXT](struct.MemoryPriorityAllocateInfoEXT.html).
+/// A builder for a [`MemoryPriorityAllocateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryPriorityAllocateInfoEXTBuilder {
@@ -20628,7 +20628,7 @@ impl HasBuilder<'static> for MemoryRequirements {
     type Builder = MemoryRequirementsBuilder;
 }
 
-/// A builder for a [MemoryRequirements](struct.MemoryRequirements.html).
+/// A builder for a [`MemoryRequirements`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryRequirementsBuilder {
@@ -20685,7 +20685,7 @@ unsafe impl Cast for MemoryRequirementsBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [MemoryRequirements2](struct.MemoryRequirements2.html).
+/// A Vulkan struct that can be used to extend a [`MemoryRequirements2`].
 pub unsafe trait ExtendsMemoryRequirements2 {}
 unsafe impl ExtendsMemoryRequirements2 for MemoryDedicatedRequirements {}
 
@@ -20702,7 +20702,7 @@ impl<'b> HasBuilder<'b> for MemoryRequirements2 {
     type Builder = MemoryRequirements2Builder<'b>;
 }
 
-/// A builder for a [MemoryRequirements2](struct.MemoryRequirements2.html).
+/// A builder for a [`MemoryRequirements2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryRequirements2Builder<'b> {
@@ -20775,7 +20775,7 @@ impl HasBuilder<'static> for MemoryType {
     type Builder = MemoryTypeBuilder;
 }
 
-/// A builder for a [MemoryType](struct.MemoryType.html).
+/// A builder for a [`MemoryType`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryTypeBuilder {
@@ -20839,7 +20839,7 @@ impl HasBuilder<'static> for MemoryWin32HandlePropertiesKHR {
     type Builder = MemoryWin32HandlePropertiesKHRBuilder;
 }
 
-/// A builder for a [MemoryWin32HandlePropertiesKHR](struct.MemoryWin32HandlePropertiesKHR.html).
+/// A builder for a [`MemoryWin32HandlePropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryWin32HandlePropertiesKHRBuilder {
@@ -20897,7 +20897,7 @@ impl HasBuilder<'static> for MemoryZirconHandlePropertiesFUCHSIA {
     type Builder = MemoryZirconHandlePropertiesFUCHSIABuilder;
 }
 
-/// A builder for a [MemoryZirconHandlePropertiesFUCHSIA](struct.MemoryZirconHandlePropertiesFUCHSIA.html).
+/// A builder for a [`MemoryZirconHandlePropertiesFUCHSIA`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MemoryZirconHandlePropertiesFUCHSIABuilder {
@@ -20955,7 +20955,7 @@ impl<'b> HasBuilder<'b> for MetalSurfaceCreateInfoEXT {
     type Builder = MetalSurfaceCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [MetalSurfaceCreateInfoEXT](struct.MetalSurfaceCreateInfoEXT.html).
+/// A builder for a [`MetalSurfaceCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MetalSurfaceCreateInfoEXTBuilder<'b> {
@@ -21020,7 +21020,7 @@ impl HasBuilder<'static> for MultiDrawIndexedInfoEXT {
     type Builder = MultiDrawIndexedInfoEXTBuilder;
 }
 
-/// A builder for a [MultiDrawIndexedInfoEXT](struct.MultiDrawIndexedInfoEXT.html).
+/// A builder for a [`MultiDrawIndexedInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MultiDrawIndexedInfoEXTBuilder {
@@ -21090,7 +21090,7 @@ impl HasBuilder<'static> for MultiDrawInfoEXT {
     type Builder = MultiDrawInfoEXTBuilder;
 }
 
-/// A builder for a [MultiDrawInfoEXT](struct.MultiDrawInfoEXT.html).
+/// A builder for a [`MultiDrawInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MultiDrawInfoEXTBuilder {
@@ -21154,7 +21154,7 @@ impl HasBuilder<'static> for MultisamplePropertiesEXT {
     type Builder = MultisamplePropertiesEXTBuilder;
 }
 
-/// A builder for a [MultisamplePropertiesEXT](struct.MultisamplePropertiesEXT.html).
+/// A builder for a [`MultisamplePropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MultisamplePropertiesEXTBuilder {
@@ -21215,7 +21215,7 @@ impl<'b> HasBuilder<'b> for MutableDescriptorTypeCreateInfoVALVE {
     type Builder = MutableDescriptorTypeCreateInfoVALVEBuilder<'b>;
 }
 
-/// A builder for a [MutableDescriptorTypeCreateInfoVALVE](struct.MutableDescriptorTypeCreateInfoVALVE.html).
+/// A builder for a [`MutableDescriptorTypeCreateInfoVALVE`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MutableDescriptorTypeCreateInfoVALVEBuilder<'b> {
@@ -21278,7 +21278,7 @@ impl<'b> HasBuilder<'b> for MutableDescriptorTypeListVALVE {
     type Builder = MutableDescriptorTypeListVALVEBuilder<'b>;
 }
 
-/// A builder for a [MutableDescriptorTypeListVALVE](struct.MutableDescriptorTypeListVALVE.html).
+/// A builder for a [`MutableDescriptorTypeListVALVE`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct MutableDescriptorTypeListVALVEBuilder<'b> {
@@ -21338,7 +21338,7 @@ impl HasBuilder<'static> for Offset2D {
     type Builder = Offset2DBuilder;
 }
 
-/// A builder for a [Offset2D](struct.Offset2D.html).
+/// A builder for a [`Offset2D`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Offset2DBuilder {
@@ -21402,7 +21402,7 @@ impl HasBuilder<'static> for Offset3D {
     type Builder = Offset3DBuilder;
 }
 
-/// A builder for a [Offset3D](struct.Offset3D.html).
+/// A builder for a [`Offset3D`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Offset3DBuilder {
@@ -21472,7 +21472,7 @@ impl HasBuilder<'static> for PastPresentationTimingGOOGLE {
     type Builder = PastPresentationTimingGOOGLEBuilder;
 }
 
-/// A builder for a [PastPresentationTimingGOOGLE](struct.PastPresentationTimingGOOGLE.html).
+/// A builder for a [`PastPresentationTimingGOOGLE`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PastPresentationTimingGOOGLEBuilder {
@@ -21554,7 +21554,7 @@ impl HasBuilder<'static> for PerformanceConfigurationAcquireInfoINTEL {
     type Builder = PerformanceConfigurationAcquireInfoINTELBuilder;
 }
 
-/// A builder for a [PerformanceConfigurationAcquireInfoINTEL](struct.PerformanceConfigurationAcquireInfoINTEL.html).
+/// A builder for a [`PerformanceConfigurationAcquireInfoINTEL`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PerformanceConfigurationAcquireInfoINTELBuilder {
@@ -21612,7 +21612,7 @@ impl HasBuilder<'static> for PerformanceCounterDescriptionKHR {
     type Builder = PerformanceCounterDescriptionKHRBuilder;
 }
 
-/// A builder for a [PerformanceCounterDescriptionKHR](struct.PerformanceCounterDescriptionKHR.html).
+/// A builder for a [`PerformanceCounterDescriptionKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PerformanceCounterDescriptionKHRBuilder {
@@ -21691,7 +21691,7 @@ impl HasBuilder<'static> for PerformanceCounterKHR {
     type Builder = PerformanceCounterKHRBuilder;
 }
 
-/// A builder for a [PerformanceCounterKHR](struct.PerformanceCounterKHR.html).
+/// A builder for a [`PerformanceCounterKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PerformanceCounterKHRBuilder {
@@ -21767,7 +21767,7 @@ impl HasBuilder<'static> for PerformanceMarkerInfoINTEL {
     type Builder = PerformanceMarkerInfoINTELBuilder;
 }
 
-/// A builder for a [PerformanceMarkerInfoINTEL](struct.PerformanceMarkerInfoINTEL.html).
+/// A builder for a [`PerformanceMarkerInfoINTEL`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PerformanceMarkerInfoINTELBuilder {
@@ -21825,7 +21825,7 @@ impl HasBuilder<'static> for PerformanceOverrideInfoINTEL {
     type Builder = PerformanceOverrideInfoINTELBuilder;
 }
 
-/// A builder for a [PerformanceOverrideInfoINTEL](struct.PerformanceOverrideInfoINTEL.html).
+/// A builder for a [`PerformanceOverrideInfoINTEL`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PerformanceOverrideInfoINTELBuilder {
@@ -21895,7 +21895,7 @@ impl HasBuilder<'static> for PerformanceQuerySubmitInfoKHR {
     type Builder = PerformanceQuerySubmitInfoKHRBuilder;
 }
 
-/// A builder for a [PerformanceQuerySubmitInfoKHR](struct.PerformanceQuerySubmitInfoKHR.html).
+/// A builder for a [`PerformanceQuerySubmitInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PerformanceQuerySubmitInfoKHRBuilder {
@@ -21953,7 +21953,7 @@ impl HasBuilder<'static> for PerformanceStreamMarkerInfoINTEL {
     type Builder = PerformanceStreamMarkerInfoINTELBuilder;
 }
 
-/// A builder for a [PerformanceStreamMarkerInfoINTEL](struct.PerformanceStreamMarkerInfoINTEL.html).
+/// A builder for a [`PerformanceStreamMarkerInfoINTEL`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PerformanceStreamMarkerInfoINTELBuilder {
@@ -22011,7 +22011,7 @@ impl HasBuilder<'static> for PerformanceValueINTEL {
     type Builder = PerformanceValueINTELBuilder;
 }
 
-/// A builder for a [PerformanceValueINTEL](struct.PerformanceValueINTEL.html).
+/// A builder for a [`PerformanceValueINTEL`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PerformanceValueINTELBuilder {
@@ -22075,7 +22075,7 @@ impl HasBuilder<'static> for PhysicalDevice16BitStorageFeatures {
     type Builder = PhysicalDevice16BitStorageFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDevice16BitStorageFeatures](struct.PhysicalDevice16BitStorageFeatures.html).
+/// A builder for a [`PhysicalDevice16BitStorageFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevice16BitStorageFeaturesBuilder {
@@ -22155,7 +22155,7 @@ impl HasBuilder<'static> for PhysicalDevice4444FormatsFeaturesEXT {
     type Builder = PhysicalDevice4444FormatsFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDevice4444FormatsFeaturesEXT](struct.PhysicalDevice4444FormatsFeaturesEXT.html).
+/// A builder for a [`PhysicalDevice4444FormatsFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevice4444FormatsFeaturesEXTBuilder {
@@ -22219,7 +22219,7 @@ impl HasBuilder<'static> for PhysicalDevice8BitStorageFeatures {
     type Builder = PhysicalDevice8BitStorageFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDevice8BitStorageFeatures](struct.PhysicalDevice8BitStorageFeatures.html).
+/// A builder for a [`PhysicalDevice8BitStorageFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevice8BitStorageFeaturesBuilder {
@@ -22293,7 +22293,7 @@ impl HasBuilder<'static> for PhysicalDeviceASTCDecodeFeaturesEXT {
     type Builder = PhysicalDeviceASTCDecodeFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceASTCDecodeFeaturesEXT](struct.PhysicalDeviceASTCDecodeFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceASTCDecodeFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceASTCDecodeFeaturesEXTBuilder {
@@ -22351,7 +22351,7 @@ impl HasBuilder<'static> for PhysicalDeviceAccelerationStructureFeaturesKHR {
     type Builder = PhysicalDeviceAccelerationStructureFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceAccelerationStructureFeaturesKHR](struct.PhysicalDeviceAccelerationStructureFeaturesKHR.html).
+/// A builder for a [`PhysicalDeviceAccelerationStructureFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceAccelerationStructureFeaturesKHRBuilder {
@@ -22450,7 +22450,7 @@ impl HasBuilder<'static> for PhysicalDeviceAccelerationStructurePropertiesKHR {
     type Builder = PhysicalDeviceAccelerationStructurePropertiesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceAccelerationStructurePropertiesKHR](struct.PhysicalDeviceAccelerationStructurePropertiesKHR.html).
+/// A builder for a [`PhysicalDeviceAccelerationStructurePropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceAccelerationStructurePropertiesKHRBuilder {
@@ -22573,7 +22573,7 @@ impl HasBuilder<'static> for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {
     type Builder = PhysicalDeviceBlendOperationAdvancedFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceBlendOperationAdvancedFeaturesEXT](struct.PhysicalDeviceBlendOperationAdvancedFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceBlendOperationAdvancedFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceBlendOperationAdvancedFeaturesEXTBuilder {
@@ -22635,7 +22635,7 @@ impl HasBuilder<'static> for PhysicalDeviceBlendOperationAdvancedPropertiesEXT {
     type Builder = PhysicalDeviceBlendOperationAdvancedPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceBlendOperationAdvancedPropertiesEXT](struct.PhysicalDeviceBlendOperationAdvancedPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceBlendOperationAdvancedPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceBlendOperationAdvancedPropertiesEXTBuilder {
@@ -22740,7 +22740,7 @@ impl HasBuilder<'static> for PhysicalDeviceBufferDeviceAddressFeatures {
     type Builder = PhysicalDeviceBufferDeviceAddressFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceBufferDeviceAddressFeatures](struct.PhysicalDeviceBufferDeviceAddressFeatures.html).
+/// A builder for a [`PhysicalDeviceBufferDeviceAddressFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceBufferDeviceAddressFeaturesBuilder {
@@ -22818,7 +22818,7 @@ impl HasBuilder<'static> for PhysicalDeviceBufferDeviceAddressFeaturesEXT {
     type Builder = PhysicalDeviceBufferDeviceAddressFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceBufferDeviceAddressFeaturesEXT](struct.PhysicalDeviceBufferDeviceAddressFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceBufferDeviceAddressFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceBufferDeviceAddressFeaturesEXTBuilder {
@@ -22896,7 +22896,7 @@ impl HasBuilder<'static> for PhysicalDeviceCoherentMemoryFeaturesAMD {
     type Builder = PhysicalDeviceCoherentMemoryFeaturesAMDBuilder;
 }
 
-/// A builder for a [PhysicalDeviceCoherentMemoryFeaturesAMD](struct.PhysicalDeviceCoherentMemoryFeaturesAMD.html).
+/// A builder for a [`PhysicalDeviceCoherentMemoryFeaturesAMD`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceCoherentMemoryFeaturesAMDBuilder {
@@ -22954,7 +22954,7 @@ impl HasBuilder<'static> for PhysicalDeviceColorWriteEnableFeaturesEXT {
     type Builder = PhysicalDeviceColorWriteEnableFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceColorWriteEnableFeaturesEXT](struct.PhysicalDeviceColorWriteEnableFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceColorWriteEnableFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceColorWriteEnableFeaturesEXTBuilder {
@@ -23012,7 +23012,7 @@ impl HasBuilder<'static> for PhysicalDeviceComputeShaderDerivativesFeaturesNV {
     type Builder = PhysicalDeviceComputeShaderDerivativesFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceComputeShaderDerivativesFeaturesNV](struct.PhysicalDeviceComputeShaderDerivativesFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceComputeShaderDerivativesFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceComputeShaderDerivativesFeaturesNVBuilder {
@@ -23079,7 +23079,7 @@ impl HasBuilder<'static> for PhysicalDeviceConditionalRenderingFeaturesEXT {
     type Builder = PhysicalDeviceConditionalRenderingFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceConditionalRenderingFeaturesEXT](struct.PhysicalDeviceConditionalRenderingFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceConditionalRenderingFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceConditionalRenderingFeaturesEXTBuilder {
@@ -23146,7 +23146,7 @@ impl HasBuilder<'static> for PhysicalDeviceConservativeRasterizationPropertiesEX
     type Builder = PhysicalDeviceConservativeRasterizationPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceConservativeRasterizationPropertiesEXT](struct.PhysicalDeviceConservativeRasterizationPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceConservativeRasterizationPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceConservativeRasterizationPropertiesEXTBuilder {
@@ -23275,7 +23275,7 @@ impl HasBuilder<'static> for PhysicalDeviceCooperativeMatrixFeaturesNV {
     type Builder = PhysicalDeviceCooperativeMatrixFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceCooperativeMatrixFeaturesNV](struct.PhysicalDeviceCooperativeMatrixFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceCooperativeMatrixFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceCooperativeMatrixFeaturesNVBuilder {
@@ -23343,7 +23343,7 @@ impl HasBuilder<'static> for PhysicalDeviceCooperativeMatrixPropertiesNV {
     type Builder = PhysicalDeviceCooperativeMatrixPropertiesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceCooperativeMatrixPropertiesNV](struct.PhysicalDeviceCooperativeMatrixPropertiesNV.html).
+/// A builder for a [`PhysicalDeviceCooperativeMatrixPropertiesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceCooperativeMatrixPropertiesNVBuilder {
@@ -23404,7 +23404,7 @@ impl HasBuilder<'static> for PhysicalDeviceCornerSampledImageFeaturesNV {
     type Builder = PhysicalDeviceCornerSampledImageFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceCornerSampledImageFeaturesNV](struct.PhysicalDeviceCornerSampledImageFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceCornerSampledImageFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceCornerSampledImageFeaturesNVBuilder {
@@ -23462,7 +23462,7 @@ impl HasBuilder<'static> for PhysicalDeviceCoverageReductionModeFeaturesNV {
     type Builder = PhysicalDeviceCoverageReductionModeFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceCoverageReductionModeFeaturesNV](struct.PhysicalDeviceCoverageReductionModeFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceCoverageReductionModeFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceCoverageReductionModeFeaturesNVBuilder {
@@ -23520,7 +23520,7 @@ impl HasBuilder<'static> for PhysicalDeviceCustomBorderColorFeaturesEXT {
     type Builder = PhysicalDeviceCustomBorderColorFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceCustomBorderColorFeaturesEXT](struct.PhysicalDeviceCustomBorderColorFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceCustomBorderColorFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceCustomBorderColorFeaturesEXTBuilder {
@@ -23588,7 +23588,7 @@ impl HasBuilder<'static> for PhysicalDeviceCustomBorderColorPropertiesEXT {
     type Builder = PhysicalDeviceCustomBorderColorPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceCustomBorderColorPropertiesEXT](struct.PhysicalDeviceCustomBorderColorPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceCustomBorderColorPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceCustomBorderColorPropertiesEXTBuilder {
@@ -23649,7 +23649,7 @@ impl HasBuilder<'static> for PhysicalDeviceDedicatedAllocationImageAliasingFeatu
     type Builder = PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV](struct.PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNVBuilder {
@@ -23711,7 +23711,7 @@ impl HasBuilder<'static> for PhysicalDeviceDepthClipEnableFeaturesEXT {
     type Builder = PhysicalDeviceDepthClipEnableFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceDepthClipEnableFeaturesEXT](struct.PhysicalDeviceDepthClipEnableFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceDepthClipEnableFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceDepthClipEnableFeaturesEXTBuilder {
@@ -23769,7 +23769,7 @@ impl HasBuilder<'static> for PhysicalDeviceDepthStencilResolveProperties {
     type Builder = PhysicalDeviceDepthStencilResolvePropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceDepthStencilResolveProperties](struct.PhysicalDeviceDepthStencilResolveProperties.html).
+/// A builder for a [`PhysicalDeviceDepthStencilResolveProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceDepthStencilResolvePropertiesBuilder {
@@ -23851,7 +23851,7 @@ impl HasBuilder<'static> for PhysicalDeviceDescriptorIndexingFeatures {
     type Builder = PhysicalDeviceDescriptorIndexingFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceDescriptorIndexingFeatures](struct.PhysicalDeviceDescriptorIndexingFeatures.html).
+/// A builder for a [`PhysicalDeviceDescriptorIndexingFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceDescriptorIndexingFeaturesBuilder {
@@ -24110,7 +24110,7 @@ impl HasBuilder<'static> for PhysicalDeviceDescriptorIndexingProperties {
     type Builder = PhysicalDeviceDescriptorIndexingPropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceDescriptorIndexingProperties](struct.PhysicalDeviceDescriptorIndexingProperties.html).
+/// A builder for a [`PhysicalDeviceDescriptorIndexingProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceDescriptorIndexingPropertiesBuilder {
@@ -24406,7 +24406,7 @@ impl HasBuilder<'static> for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {
     type Builder = PhysicalDeviceDeviceGeneratedCommandsFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceDeviceGeneratedCommandsFeaturesNV](struct.PhysicalDeviceDeviceGeneratedCommandsFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceDeviceGeneratedCommandsFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceDeviceGeneratedCommandsFeaturesNVBuilder {
@@ -24464,7 +24464,7 @@ impl HasBuilder<'static> for PhysicalDeviceDeviceGeneratedCommandsPropertiesNV {
     type Builder = PhysicalDeviceDeviceGeneratedCommandsPropertiesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceDeviceGeneratedCommandsPropertiesNV](struct.PhysicalDeviceDeviceGeneratedCommandsPropertiesNV.html).
+/// A builder for a [`PhysicalDeviceDeviceGeneratedCommandsPropertiesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceDeviceGeneratedCommandsPropertiesNVBuilder {
@@ -24594,7 +24594,7 @@ impl HasBuilder<'static> for PhysicalDeviceDeviceMemoryReportFeaturesEXT {
     type Builder = PhysicalDeviceDeviceMemoryReportFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceDeviceMemoryReportFeaturesEXT](struct.PhysicalDeviceDeviceMemoryReportFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceDeviceMemoryReportFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceDeviceMemoryReportFeaturesEXTBuilder {
@@ -24652,7 +24652,7 @@ impl HasBuilder<'static> for PhysicalDeviceDiagnosticsConfigFeaturesNV {
     type Builder = PhysicalDeviceDiagnosticsConfigFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceDiagnosticsConfigFeaturesNV](struct.PhysicalDeviceDiagnosticsConfigFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceDiagnosticsConfigFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceDiagnosticsConfigFeaturesNVBuilder {
@@ -24710,7 +24710,7 @@ impl HasBuilder<'static> for PhysicalDeviceDiscardRectanglePropertiesEXT {
     type Builder = PhysicalDeviceDiscardRectanglePropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceDiscardRectanglePropertiesEXT](struct.PhysicalDeviceDiscardRectanglePropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceDiscardRectanglePropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceDiscardRectanglePropertiesEXTBuilder {
@@ -24768,7 +24768,7 @@ impl HasBuilder<'static> for PhysicalDeviceDriverProperties {
     type Builder = PhysicalDeviceDriverPropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceDriverProperties](struct.PhysicalDeviceDriverProperties.html).
+/// A builder for a [`PhysicalDeviceDriverProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceDriverPropertiesBuilder {
@@ -24853,7 +24853,7 @@ impl HasBuilder<'static> for PhysicalDeviceDrmPropertiesEXT {
     type Builder = PhysicalDeviceDrmPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceDrmPropertiesEXT](struct.PhysicalDeviceDrmPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceDrmPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceDrmPropertiesEXTBuilder {
@@ -24941,7 +24941,7 @@ impl HasBuilder<'static> for PhysicalDeviceExclusiveScissorFeaturesNV {
     type Builder = PhysicalDeviceExclusiveScissorFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceExclusiveScissorFeaturesNV](struct.PhysicalDeviceExclusiveScissorFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceExclusiveScissorFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceExclusiveScissorFeaturesNVBuilder {
@@ -24999,7 +24999,7 @@ impl HasBuilder<'static> for PhysicalDeviceExtendedDynamicState2FeaturesEXT {
     type Builder = PhysicalDeviceExtendedDynamicState2FeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceExtendedDynamicState2FeaturesEXT](struct.PhysicalDeviceExtendedDynamicState2FeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceExtendedDynamicState2FeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceExtendedDynamicState2FeaturesEXTBuilder {
@@ -25076,7 +25076,7 @@ impl HasBuilder<'static> for PhysicalDeviceExtendedDynamicStateFeaturesEXT {
     type Builder = PhysicalDeviceExtendedDynamicStateFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceExtendedDynamicStateFeaturesEXT](struct.PhysicalDeviceExtendedDynamicStateFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceExtendedDynamicStateFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceExtendedDynamicStateFeaturesEXTBuilder {
@@ -25134,7 +25134,7 @@ impl HasBuilder<'static> for PhysicalDeviceExternalBufferInfo {
     type Builder = PhysicalDeviceExternalBufferInfoBuilder;
 }
 
-/// A builder for a [PhysicalDeviceExternalBufferInfo](struct.PhysicalDeviceExternalBufferInfo.html).
+/// A builder for a [`PhysicalDeviceExternalBufferInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceExternalBufferInfoBuilder {
@@ -25204,7 +25204,7 @@ impl HasBuilder<'static> for PhysicalDeviceExternalFenceInfo {
     type Builder = PhysicalDeviceExternalFenceInfoBuilder;
 }
 
-/// A builder for a [PhysicalDeviceExternalFenceInfo](struct.PhysicalDeviceExternalFenceInfo.html).
+/// A builder for a [`PhysicalDeviceExternalFenceInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceExternalFenceInfoBuilder {
@@ -25262,7 +25262,7 @@ impl HasBuilder<'static> for PhysicalDeviceExternalImageFormatInfo {
     type Builder = PhysicalDeviceExternalImageFormatInfoBuilder;
 }
 
-/// A builder for a [PhysicalDeviceExternalImageFormatInfo](struct.PhysicalDeviceExternalImageFormatInfo.html).
+/// A builder for a [`PhysicalDeviceExternalImageFormatInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceExternalImageFormatInfoBuilder {
@@ -25320,7 +25320,7 @@ impl HasBuilder<'static> for PhysicalDeviceExternalMemoryHostPropertiesEXT {
     type Builder = PhysicalDeviceExternalMemoryHostPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceExternalMemoryHostPropertiesEXT](struct.PhysicalDeviceExternalMemoryHostPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceExternalMemoryHostPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceExternalMemoryHostPropertiesEXTBuilder {
@@ -25381,7 +25381,7 @@ impl HasBuilder<'static> for PhysicalDeviceExternalMemoryRDMAFeaturesNV {
     type Builder = PhysicalDeviceExternalMemoryRDMAFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceExternalMemoryRDMAFeaturesNV](struct.PhysicalDeviceExternalMemoryRDMAFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceExternalMemoryRDMAFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceExternalMemoryRDMAFeaturesNVBuilder {
@@ -25426,7 +25426,7 @@ unsafe impl Cast for PhysicalDeviceExternalMemoryRDMAFeaturesNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PhysicalDeviceExternalSemaphoreInfo](struct.PhysicalDeviceExternalSemaphoreInfo.html).
+/// A Vulkan struct that can be used to extend a [`PhysicalDeviceExternalSemaphoreInfo`].
 pub unsafe trait ExtendsPhysicalDeviceExternalSemaphoreInfo {}
 unsafe impl ExtendsPhysicalDeviceExternalSemaphoreInfo for SemaphoreTypeCreateInfo {}
 
@@ -25443,7 +25443,7 @@ impl<'b> HasBuilder<'b> for PhysicalDeviceExternalSemaphoreInfo {
     type Builder = PhysicalDeviceExternalSemaphoreInfoBuilder<'b>;
 }
 
-/// A builder for a [PhysicalDeviceExternalSemaphoreInfo](struct.PhysicalDeviceExternalSemaphoreInfo.html).
+/// A builder for a [`PhysicalDeviceExternalSemaphoreInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceExternalSemaphoreInfoBuilder<'b> {
@@ -25513,7 +25513,7 @@ impl HasBuilder<'static> for PhysicalDeviceFeatures {
     type Builder = PhysicalDeviceFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFeatures](struct.PhysicalDeviceFeatures.html).
+/// A builder for a [`PhysicalDeviceFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFeaturesBuilder {
@@ -25921,7 +25921,7 @@ unsafe impl Cast for PhysicalDeviceFeaturesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PhysicalDeviceFeatures2](struct.PhysicalDeviceFeatures2.html).
+/// A Vulkan struct that can be used to extend a [`PhysicalDeviceFeatures2`].
 pub unsafe trait ExtendsPhysicalDeviceFeatures2 {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice16BitStorageFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice4444FormatsFeaturesEXT {}
@@ -26054,7 +26054,7 @@ impl<'b> HasBuilder<'b> for PhysicalDeviceFeatures2 {
     type Builder = PhysicalDeviceFeatures2Builder<'b>;
 }
 
-/// A builder for a [PhysicalDeviceFeatures2](struct.PhysicalDeviceFeatures2.html).
+/// A builder for a [`PhysicalDeviceFeatures2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFeatures2Builder<'b> {
@@ -26124,7 +26124,7 @@ impl HasBuilder<'static> for PhysicalDeviceFloatControlsProperties {
     type Builder = PhysicalDeviceFloatControlsPropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFloatControlsProperties](struct.PhysicalDeviceFloatControlsProperties.html).
+/// A builder for a [`PhysicalDeviceFloatControlsProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFloatControlsPropertiesBuilder {
@@ -26326,7 +26326,7 @@ impl HasBuilder<'static> for PhysicalDeviceFragmentDensityMap2FeaturesEXT {
     type Builder = PhysicalDeviceFragmentDensityMap2FeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFragmentDensityMap2FeaturesEXT](struct.PhysicalDeviceFragmentDensityMap2FeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceFragmentDensityMap2FeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFragmentDensityMap2FeaturesEXTBuilder {
@@ -26384,7 +26384,7 @@ impl HasBuilder<'static> for PhysicalDeviceFragmentDensityMap2PropertiesEXT {
     type Builder = PhysicalDeviceFragmentDensityMap2PropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFragmentDensityMap2PropertiesEXT](struct.PhysicalDeviceFragmentDensityMap2PropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceFragmentDensityMap2PropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFragmentDensityMap2PropertiesEXTBuilder {
@@ -26467,7 +26467,7 @@ impl HasBuilder<'static> for PhysicalDeviceFragmentDensityMapFeaturesEXT {
     type Builder = PhysicalDeviceFragmentDensityMapFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFragmentDensityMapFeaturesEXT](struct.PhysicalDeviceFragmentDensityMapFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceFragmentDensityMapFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFragmentDensityMapFeaturesEXTBuilder {
@@ -26541,7 +26541,7 @@ impl HasBuilder<'static> for PhysicalDeviceFragmentDensityMapPropertiesEXT {
     type Builder = PhysicalDeviceFragmentDensityMapPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFragmentDensityMapPropertiesEXT](struct.PhysicalDeviceFragmentDensityMapPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceFragmentDensityMapPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFragmentDensityMapPropertiesEXTBuilder {
@@ -26617,7 +26617,7 @@ impl HasBuilder<'static> for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {
     type Builder = PhysicalDeviceFragmentShaderBarycentricFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFragmentShaderBarycentricFeaturesNV](struct.PhysicalDeviceFragmentShaderBarycentricFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceFragmentShaderBarycentricFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFragmentShaderBarycentricFeaturesNVBuilder {
@@ -26675,7 +26675,7 @@ impl HasBuilder<'static> for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {
     type Builder = PhysicalDeviceFragmentShaderInterlockFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFragmentShaderInterlockFeaturesEXT](struct.PhysicalDeviceFragmentShaderInterlockFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceFragmentShaderInterlockFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFragmentShaderInterlockFeaturesEXTBuilder {
@@ -26755,7 +26755,7 @@ impl HasBuilder<'static> for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {
     type Builder = PhysicalDeviceFragmentShadingRateEnumsFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFragmentShadingRateEnumsFeaturesNV](struct.PhysicalDeviceFragmentShadingRateEnumsFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceFragmentShadingRateEnumsFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFragmentShadingRateEnumsFeaturesNVBuilder {
@@ -26833,7 +26833,7 @@ impl HasBuilder<'static> for PhysicalDeviceFragmentShadingRateEnumsPropertiesNV 
     type Builder = PhysicalDeviceFragmentShadingRateEnumsPropertiesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFragmentShadingRateEnumsPropertiesNV](struct.PhysicalDeviceFragmentShadingRateEnumsPropertiesNV.html).
+/// A builder for a [`PhysicalDeviceFragmentShadingRateEnumsPropertiesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFragmentShadingRateEnumsPropertiesNVBuilder {
@@ -26895,7 +26895,7 @@ impl HasBuilder<'static> for PhysicalDeviceFragmentShadingRateFeaturesKHR {
     type Builder = PhysicalDeviceFragmentShadingRateFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFragmentShadingRateFeaturesKHR](struct.PhysicalDeviceFragmentShadingRateFeaturesKHR.html).
+/// A builder for a [`PhysicalDeviceFragmentShadingRateFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFragmentShadingRateFeaturesKHRBuilder {
@@ -26971,7 +26971,7 @@ impl HasBuilder<'static> for PhysicalDeviceFragmentShadingRateKHR {
     type Builder = PhysicalDeviceFragmentShadingRateKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFragmentShadingRateKHR](struct.PhysicalDeviceFragmentShadingRateKHR.html).
+/// A builder for a [`PhysicalDeviceFragmentShadingRateKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFragmentShadingRateKHRBuilder {
@@ -27035,7 +27035,7 @@ impl HasBuilder<'static> for PhysicalDeviceFragmentShadingRatePropertiesKHR {
     type Builder = PhysicalDeviceFragmentShadingRatePropertiesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceFragmentShadingRatePropertiesKHR](struct.PhysicalDeviceFragmentShadingRatePropertiesKHR.html).
+/// A builder for a [`PhysicalDeviceFragmentShadingRatePropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceFragmentShadingRatePropertiesKHRBuilder {
@@ -27254,7 +27254,7 @@ impl HasBuilder<'static> for PhysicalDeviceGlobalPriorityQueryFeaturesEXT {
     type Builder = PhysicalDeviceGlobalPriorityQueryFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceGlobalPriorityQueryFeaturesEXT](struct.PhysicalDeviceGlobalPriorityQueryFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceGlobalPriorityQueryFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceGlobalPriorityQueryFeaturesEXTBuilder {
@@ -27312,7 +27312,7 @@ impl HasBuilder<'static> for PhysicalDeviceGroupProperties {
     type Builder = PhysicalDeviceGroupPropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceGroupProperties](struct.PhysicalDeviceGroupProperties.html).
+/// A builder for a [`PhysicalDeviceGroupProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceGroupPropertiesBuilder {
@@ -27385,7 +27385,7 @@ impl HasBuilder<'static> for PhysicalDeviceHostQueryResetFeatures {
     type Builder = PhysicalDeviceHostQueryResetFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceHostQueryResetFeatures](struct.PhysicalDeviceHostQueryResetFeatures.html).
+/// A builder for a [`PhysicalDeviceHostQueryResetFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceHostQueryResetFeaturesBuilder {
@@ -27443,7 +27443,7 @@ impl HasBuilder<'static> for PhysicalDeviceIDProperties {
     type Builder = PhysicalDeviceIDPropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceIDProperties](struct.PhysicalDeviceIDProperties.html).
+/// A builder for a [`PhysicalDeviceIDProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceIDPropertiesBuilder {
@@ -27525,7 +27525,7 @@ impl<'b> HasBuilder<'b> for PhysicalDeviceImageDrmFormatModifierInfoEXT {
     type Builder = PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [PhysicalDeviceImageDrmFormatModifierInfoEXT](struct.PhysicalDeviceImageDrmFormatModifierInfoEXT.html).
+/// A builder for a [`PhysicalDeviceImageDrmFormatModifierInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'b> {
@@ -27584,7 +27584,7 @@ unsafe impl<'b> Cast for PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'b> 
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PhysicalDeviceImageFormatInfo2](struct.PhysicalDeviceImageFormatInfo2.html).
+/// A Vulkan struct that can be used to extend a [`PhysicalDeviceImageFormatInfo2`].
 pub unsafe trait ExtendsPhysicalDeviceImageFormatInfo2 {}
 unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for ImageFormatListCreateInfo {}
 unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for ImageStencilUsageCreateInfo {}
@@ -27605,7 +27605,7 @@ impl<'b> HasBuilder<'b> for PhysicalDeviceImageFormatInfo2 {
     type Builder = PhysicalDeviceImageFormatInfo2Builder<'b>;
 }
 
-/// A builder for a [PhysicalDeviceImageFormatInfo2](struct.PhysicalDeviceImageFormatInfo2.html).
+/// A builder for a [`PhysicalDeviceImageFormatInfo2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceImageFormatInfo2Builder<'b> {
@@ -27699,7 +27699,7 @@ impl HasBuilder<'static> for PhysicalDeviceImageRobustnessFeaturesEXT {
     type Builder = PhysicalDeviceImageRobustnessFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceImageRobustnessFeaturesEXT](struct.PhysicalDeviceImageRobustnessFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceImageRobustnessFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceImageRobustnessFeaturesEXTBuilder {
@@ -27757,7 +27757,7 @@ impl HasBuilder<'static> for PhysicalDeviceImageViewImageFormatInfoEXT {
     type Builder = PhysicalDeviceImageViewImageFormatInfoEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceImageViewImageFormatInfoEXT](struct.PhysicalDeviceImageViewImageFormatInfoEXT.html).
+/// A builder for a [`PhysicalDeviceImageViewImageFormatInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceImageViewImageFormatInfoEXTBuilder {
@@ -27815,7 +27815,7 @@ impl HasBuilder<'static> for PhysicalDeviceImagelessFramebufferFeatures {
     type Builder = PhysicalDeviceImagelessFramebufferFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceImagelessFramebufferFeatures](struct.PhysicalDeviceImagelessFramebufferFeatures.html).
+/// A builder for a [`PhysicalDeviceImagelessFramebufferFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceImagelessFramebufferFeaturesBuilder {
@@ -27873,7 +27873,7 @@ impl HasBuilder<'static> for PhysicalDeviceIndexTypeUint8FeaturesEXT {
     type Builder = PhysicalDeviceIndexTypeUint8FeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceIndexTypeUint8FeaturesEXT](struct.PhysicalDeviceIndexTypeUint8FeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceIndexTypeUint8FeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceIndexTypeUint8FeaturesEXTBuilder {
@@ -27931,7 +27931,7 @@ impl HasBuilder<'static> for PhysicalDeviceInheritedViewportScissorFeaturesNV {
     type Builder = PhysicalDeviceInheritedViewportScissorFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceInheritedViewportScissorFeaturesNV](struct.PhysicalDeviceInheritedViewportScissorFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceInheritedViewportScissorFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceInheritedViewportScissorFeaturesNVBuilder {
@@ -27989,7 +27989,7 @@ impl HasBuilder<'static> for PhysicalDeviceInlineUniformBlockFeaturesEXT {
     type Builder = PhysicalDeviceInlineUniformBlockFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceInlineUniformBlockFeaturesEXT](struct.PhysicalDeviceInlineUniformBlockFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceInlineUniformBlockFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceInlineUniformBlockFeaturesEXTBuilder {
@@ -28058,7 +28058,7 @@ impl HasBuilder<'static> for PhysicalDeviceInlineUniformBlockPropertiesEXT {
     type Builder = PhysicalDeviceInlineUniformBlockPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceInlineUniformBlockPropertiesEXT](struct.PhysicalDeviceInlineUniformBlockPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceInlineUniformBlockPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceInlineUniformBlockPropertiesEXTBuilder {
@@ -28158,7 +28158,7 @@ impl HasBuilder<'static> for PhysicalDeviceInvocationMaskFeaturesHUAWEI {
     type Builder = PhysicalDeviceInvocationMaskFeaturesHUAWEIBuilder;
 }
 
-/// A builder for a [PhysicalDeviceInvocationMaskFeaturesHUAWEI](struct.PhysicalDeviceInvocationMaskFeaturesHUAWEI.html).
+/// A builder for a [`PhysicalDeviceInvocationMaskFeaturesHUAWEI`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceInvocationMaskFeaturesHUAWEIBuilder {
@@ -28216,7 +28216,7 @@ impl HasBuilder<'static> for PhysicalDeviceLimits {
     type Builder = PhysicalDeviceLimitsBuilder;
 }
 
-/// A builder for a [PhysicalDeviceLimits](struct.PhysicalDeviceLimits.html).
+/// A builder for a [`PhysicalDeviceLimits`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceLimitsBuilder {
@@ -29045,7 +29045,7 @@ impl HasBuilder<'static> for PhysicalDeviceLineRasterizationFeaturesEXT {
     type Builder = PhysicalDeviceLineRasterizationFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceLineRasterizationFeaturesEXT](struct.PhysicalDeviceLineRasterizationFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceLineRasterizationFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceLineRasterizationFeaturesEXTBuilder {
@@ -29133,7 +29133,7 @@ impl HasBuilder<'static> for PhysicalDeviceLineRasterizationPropertiesEXT {
     type Builder = PhysicalDeviceLineRasterizationPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceLineRasterizationPropertiesEXT](struct.PhysicalDeviceLineRasterizationPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceLineRasterizationPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceLineRasterizationPropertiesEXTBuilder {
@@ -29191,7 +29191,7 @@ impl HasBuilder<'static> for PhysicalDeviceMaintenance3Properties {
     type Builder = PhysicalDeviceMaintenance3PropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceMaintenance3Properties](struct.PhysicalDeviceMaintenance3Properties.html).
+/// A builder for a [`PhysicalDeviceMaintenance3Properties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMaintenance3PropertiesBuilder {
@@ -29255,7 +29255,7 @@ impl HasBuilder<'static> for PhysicalDeviceMemoryBudgetPropertiesEXT {
     type Builder = PhysicalDeviceMemoryBudgetPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceMemoryBudgetPropertiesEXT](struct.PhysicalDeviceMemoryBudgetPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceMemoryBudgetPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMemoryBudgetPropertiesEXTBuilder {
@@ -29319,7 +29319,7 @@ impl HasBuilder<'static> for PhysicalDeviceMemoryPriorityFeaturesEXT {
     type Builder = PhysicalDeviceMemoryPriorityFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceMemoryPriorityFeaturesEXT](struct.PhysicalDeviceMemoryPriorityFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceMemoryPriorityFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMemoryPriorityFeaturesEXTBuilder {
@@ -29377,7 +29377,7 @@ impl HasBuilder<'static> for PhysicalDeviceMemoryProperties {
     type Builder = PhysicalDeviceMemoryPropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceMemoryProperties](struct.PhysicalDeviceMemoryProperties.html).
+/// A builder for a [`PhysicalDeviceMemoryProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMemoryPropertiesBuilder {
@@ -29440,7 +29440,7 @@ unsafe impl Cast for PhysicalDeviceMemoryPropertiesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PhysicalDeviceMemoryProperties2](struct.PhysicalDeviceMemoryProperties2.html).
+/// A Vulkan struct that can be used to extend a [`PhysicalDeviceMemoryProperties2`].
 pub unsafe trait ExtendsPhysicalDeviceMemoryProperties2 {}
 unsafe impl ExtendsPhysicalDeviceMemoryProperties2 for PhysicalDeviceMemoryBudgetPropertiesEXT {}
 
@@ -29457,7 +29457,7 @@ impl<'b> HasBuilder<'b> for PhysicalDeviceMemoryProperties2 {
     type Builder = PhysicalDeviceMemoryProperties2Builder<'b>;
 }
 
-/// A builder for a [PhysicalDeviceMemoryProperties2](struct.PhysicalDeviceMemoryProperties2.html).
+/// A builder for a [`PhysicalDeviceMemoryProperties2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMemoryProperties2Builder<'b> {
@@ -29530,7 +29530,7 @@ impl HasBuilder<'static> for PhysicalDeviceMeshShaderFeaturesNV {
     type Builder = PhysicalDeviceMeshShaderFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceMeshShaderFeaturesNV](struct.PhysicalDeviceMeshShaderFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceMeshShaderFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMeshShaderFeaturesNVBuilder {
@@ -29594,7 +29594,7 @@ impl HasBuilder<'static> for PhysicalDeviceMeshShaderPropertiesNV {
     type Builder = PhysicalDeviceMeshShaderPropertiesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceMeshShaderPropertiesNV](struct.PhysicalDeviceMeshShaderPropertiesNV.html).
+/// A builder for a [`PhysicalDeviceMeshShaderPropertiesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMeshShaderPropertiesNVBuilder {
@@ -29730,7 +29730,7 @@ impl HasBuilder<'static> for PhysicalDeviceMultiDrawFeaturesEXT {
     type Builder = PhysicalDeviceMultiDrawFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceMultiDrawFeaturesEXT](struct.PhysicalDeviceMultiDrawFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceMultiDrawFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMultiDrawFeaturesEXTBuilder {
@@ -29788,7 +29788,7 @@ impl HasBuilder<'static> for PhysicalDeviceMultiDrawPropertiesEXT {
     type Builder = PhysicalDeviceMultiDrawPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceMultiDrawPropertiesEXT](struct.PhysicalDeviceMultiDrawPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceMultiDrawPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMultiDrawPropertiesEXTBuilder {
@@ -29846,7 +29846,7 @@ impl HasBuilder<'static> for PhysicalDeviceMultiviewFeatures {
     type Builder = PhysicalDeviceMultiviewFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceMultiviewFeatures](struct.PhysicalDeviceMultiviewFeatures.html).
+/// A builder for a [`PhysicalDeviceMultiviewFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMultiviewFeaturesBuilder {
@@ -29916,7 +29916,7 @@ impl HasBuilder<'static> for PhysicalDeviceMultiviewPerViewAttributesPropertiesN
     type Builder = PhysicalDeviceMultiviewPerViewAttributesPropertiesNVXBuilder;
 }
 
-/// A builder for a [PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX](struct.PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.html).
+/// A builder for a [`PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMultiviewPerViewAttributesPropertiesNVXBuilder {
@@ -29977,7 +29977,7 @@ impl HasBuilder<'static> for PhysicalDeviceMultiviewProperties {
     type Builder = PhysicalDeviceMultiviewPropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceMultiviewProperties](struct.PhysicalDeviceMultiviewProperties.html).
+/// A builder for a [`PhysicalDeviceMultiviewProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMultiviewPropertiesBuilder {
@@ -30041,7 +30041,7 @@ impl HasBuilder<'static> for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {
     type Builder = PhysicalDeviceMutableDescriptorTypeFeaturesVALVEBuilder;
 }
 
-/// A builder for a [PhysicalDeviceMutableDescriptorTypeFeaturesVALVE](struct.PhysicalDeviceMutableDescriptorTypeFeaturesVALVE.html).
+/// A builder for a [`PhysicalDeviceMutableDescriptorTypeFeaturesVALVE`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceMutableDescriptorTypeFeaturesVALVEBuilder {
@@ -30099,7 +30099,7 @@ impl HasBuilder<'static> for PhysicalDevicePCIBusInfoPropertiesEXT {
     type Builder = PhysicalDevicePCIBusInfoPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDevicePCIBusInfoPropertiesEXT](struct.PhysicalDevicePCIBusInfoPropertiesEXT.html).
+/// A builder for a [`PhysicalDevicePCIBusInfoPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePCIBusInfoPropertiesEXTBuilder {
@@ -30175,7 +30175,7 @@ impl HasBuilder<'static> for PhysicalDevicePerformanceQueryFeaturesKHR {
     type Builder = PhysicalDevicePerformanceQueryFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDevicePerformanceQueryFeaturesKHR](struct.PhysicalDevicePerformanceQueryFeaturesKHR.html).
+/// A builder for a [`PhysicalDevicePerformanceQueryFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePerformanceQueryFeaturesKHRBuilder {
@@ -30246,7 +30246,7 @@ impl HasBuilder<'static> for PhysicalDevicePerformanceQueryPropertiesKHR {
     type Builder = PhysicalDevicePerformanceQueryPropertiesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDevicePerformanceQueryPropertiesKHR](struct.PhysicalDevicePerformanceQueryPropertiesKHR.html).
+/// A builder for a [`PhysicalDevicePerformanceQueryPropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePerformanceQueryPropertiesKHRBuilder {
@@ -30307,7 +30307,7 @@ impl HasBuilder<'static> for PhysicalDevicePipelineCreationCacheControlFeaturesE
     type Builder = PhysicalDevicePipelineCreationCacheControlFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDevicePipelineCreationCacheControlFeaturesEXT](struct.PhysicalDevicePipelineCreationCacheControlFeaturesEXT.html).
+/// A builder for a [`PhysicalDevicePipelineCreationCacheControlFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePipelineCreationCacheControlFeaturesEXTBuilder {
@@ -30368,7 +30368,7 @@ impl HasBuilder<'static> for PhysicalDevicePipelineExecutablePropertiesFeaturesK
     type Builder = PhysicalDevicePipelineExecutablePropertiesFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDevicePipelineExecutablePropertiesFeaturesKHR](struct.PhysicalDevicePipelineExecutablePropertiesFeaturesKHR.html).
+/// A builder for a [`PhysicalDevicePipelineExecutablePropertiesFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePipelineExecutablePropertiesFeaturesKHRBuilder {
@@ -30426,7 +30426,7 @@ impl HasBuilder<'static> for PhysicalDevicePointClippingProperties {
     type Builder = PhysicalDevicePointClippingPropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDevicePointClippingProperties](struct.PhysicalDevicePointClippingProperties.html).
+/// A builder for a [`PhysicalDevicePointClippingProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePointClippingPropertiesBuilder {
@@ -30487,7 +30487,7 @@ impl HasBuilder<'static> for PhysicalDevicePortabilitySubsetFeaturesKHR {
     type Builder = PhysicalDevicePortabilitySubsetFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDevicePortabilitySubsetFeaturesKHR](struct.PhysicalDevicePortabilitySubsetFeaturesKHR.html).
+/// A builder for a [`PhysicalDevicePortabilitySubsetFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePortabilitySubsetFeaturesKHRBuilder {
@@ -30645,7 +30645,7 @@ impl HasBuilder<'static> for PhysicalDevicePortabilitySubsetPropertiesKHR {
     type Builder = PhysicalDevicePortabilitySubsetPropertiesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDevicePortabilitySubsetPropertiesKHR](struct.PhysicalDevicePortabilitySubsetPropertiesKHR.html).
+/// A builder for a [`PhysicalDevicePortabilitySubsetPropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePortabilitySubsetPropertiesKHRBuilder {
@@ -30707,7 +30707,7 @@ impl HasBuilder<'static> for PhysicalDevicePresentIdFeaturesKHR {
     type Builder = PhysicalDevicePresentIdFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDevicePresentIdFeaturesKHR](struct.PhysicalDevicePresentIdFeaturesKHR.html).
+/// A builder for a [`PhysicalDevicePresentIdFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePresentIdFeaturesKHRBuilder {
@@ -30765,7 +30765,7 @@ impl HasBuilder<'static> for PhysicalDevicePresentWaitFeaturesKHR {
     type Builder = PhysicalDevicePresentWaitFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDevicePresentWaitFeaturesKHR](struct.PhysicalDevicePresentWaitFeaturesKHR.html).
+/// A builder for a [`PhysicalDevicePresentWaitFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePresentWaitFeaturesKHRBuilder {
@@ -30823,7 +30823,7 @@ impl HasBuilder<'static> for PhysicalDevicePrivateDataFeaturesEXT {
     type Builder = PhysicalDevicePrivateDataFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDevicePrivateDataFeaturesEXT](struct.PhysicalDevicePrivateDataFeaturesEXT.html).
+/// A builder for a [`PhysicalDevicePrivateDataFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePrivateDataFeaturesEXTBuilder {
@@ -30881,7 +30881,7 @@ impl HasBuilder<'static> for PhysicalDeviceProperties {
     type Builder = PhysicalDevicePropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceProperties](struct.PhysicalDeviceProperties.html).
+/// A builder for a [`PhysicalDeviceProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePropertiesBuilder {
@@ -30983,7 +30983,7 @@ unsafe impl Cast for PhysicalDevicePropertiesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PhysicalDeviceProperties2](struct.PhysicalDeviceProperties2.html).
+/// A Vulkan struct that can be used to extend a [`PhysicalDeviceProperties2`].
 pub unsafe trait ExtendsPhysicalDeviceProperties2 {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceAccelerationStructurePropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceBlendOperationAdvancedPropertiesEXT {}
@@ -31058,7 +31058,7 @@ impl<'b> HasBuilder<'b> for PhysicalDeviceProperties2 {
     type Builder = PhysicalDeviceProperties2Builder<'b>;
 }
 
-/// A builder for a [PhysicalDeviceProperties2](struct.PhysicalDeviceProperties2.html).
+/// A builder for a [`PhysicalDeviceProperties2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceProperties2Builder<'b> {
@@ -31128,7 +31128,7 @@ impl HasBuilder<'static> for PhysicalDeviceProtectedMemoryFeatures {
     type Builder = PhysicalDeviceProtectedMemoryFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceProtectedMemoryFeatures](struct.PhysicalDeviceProtectedMemoryFeatures.html).
+/// A builder for a [`PhysicalDeviceProtectedMemoryFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceProtectedMemoryFeaturesBuilder {
@@ -31186,7 +31186,7 @@ impl HasBuilder<'static> for PhysicalDeviceProtectedMemoryProperties {
     type Builder = PhysicalDeviceProtectedMemoryPropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceProtectedMemoryProperties](struct.PhysicalDeviceProtectedMemoryProperties.html).
+/// A builder for a [`PhysicalDeviceProtectedMemoryProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceProtectedMemoryPropertiesBuilder {
@@ -31244,7 +31244,7 @@ impl HasBuilder<'static> for PhysicalDeviceProvokingVertexFeaturesEXT {
     type Builder = PhysicalDeviceProvokingVertexFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceProvokingVertexFeaturesEXT](struct.PhysicalDeviceProvokingVertexFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceProvokingVertexFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceProvokingVertexFeaturesEXTBuilder {
@@ -31312,7 +31312,7 @@ impl HasBuilder<'static> for PhysicalDeviceProvokingVertexPropertiesEXT {
     type Builder = PhysicalDeviceProvokingVertexPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceProvokingVertexPropertiesEXT](struct.PhysicalDeviceProvokingVertexPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceProvokingVertexPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceProvokingVertexPropertiesEXTBuilder {
@@ -31385,7 +31385,7 @@ impl HasBuilder<'static> for PhysicalDevicePushDescriptorPropertiesKHR {
     type Builder = PhysicalDevicePushDescriptorPropertiesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDevicePushDescriptorPropertiesKHR](struct.PhysicalDevicePushDescriptorPropertiesKHR.html).
+/// A builder for a [`PhysicalDevicePushDescriptorPropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDevicePushDescriptorPropertiesKHRBuilder {
@@ -31443,7 +31443,7 @@ impl HasBuilder<'static> for PhysicalDeviceRayQueryFeaturesKHR {
     type Builder = PhysicalDeviceRayQueryFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceRayQueryFeaturesKHR](struct.PhysicalDeviceRayQueryFeaturesKHR.html).
+/// A builder for a [`PhysicalDeviceRayQueryFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceRayQueryFeaturesKHRBuilder {
@@ -31501,7 +31501,7 @@ impl HasBuilder<'static> for PhysicalDeviceRayTracingMotionBlurFeaturesNV {
     type Builder = PhysicalDeviceRayTracingMotionBlurFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceRayTracingMotionBlurFeaturesNV](struct.PhysicalDeviceRayTracingMotionBlurFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceRayTracingMotionBlurFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceRayTracingMotionBlurFeaturesNVBuilder {
@@ -31570,7 +31570,7 @@ impl HasBuilder<'static> for PhysicalDeviceRayTracingPipelineFeaturesKHR {
     type Builder = PhysicalDeviceRayTracingPipelineFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceRayTracingPipelineFeaturesKHR](struct.PhysicalDeviceRayTracingPipelineFeaturesKHR.html).
+/// A builder for a [`PhysicalDeviceRayTracingPipelineFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceRayTracingPipelineFeaturesKHRBuilder {
@@ -31669,7 +31669,7 @@ impl HasBuilder<'static> for PhysicalDeviceRayTracingPipelinePropertiesKHR {
     type Builder = PhysicalDeviceRayTracingPipelinePropertiesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceRayTracingPipelinePropertiesKHR](struct.PhysicalDeviceRayTracingPipelinePropertiesKHR.html).
+/// A builder for a [`PhysicalDeviceRayTracingPipelinePropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceRayTracingPipelinePropertiesKHRBuilder {
@@ -31776,7 +31776,7 @@ impl HasBuilder<'static> for PhysicalDeviceRayTracingPropertiesNV {
     type Builder = PhysicalDeviceRayTracingPropertiesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceRayTracingPropertiesNV](struct.PhysicalDeviceRayTracingPropertiesNV.html).
+/// A builder for a [`PhysicalDeviceRayTracingPropertiesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceRayTracingPropertiesNVBuilder {
@@ -31880,7 +31880,7 @@ impl HasBuilder<'static> for PhysicalDeviceRepresentativeFragmentTestFeaturesNV 
     type Builder = PhysicalDeviceRepresentativeFragmentTestFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceRepresentativeFragmentTestFeaturesNV](struct.PhysicalDeviceRepresentativeFragmentTestFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceRepresentativeFragmentTestFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceRepresentativeFragmentTestFeaturesNVBuilder {
@@ -31938,7 +31938,7 @@ impl HasBuilder<'static> for PhysicalDeviceRobustness2FeaturesEXT {
     type Builder = PhysicalDeviceRobustness2FeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceRobustness2FeaturesEXT](struct.PhysicalDeviceRobustness2FeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceRobustness2FeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceRobustness2FeaturesEXTBuilder {
@@ -32008,7 +32008,7 @@ impl HasBuilder<'static> for PhysicalDeviceRobustness2PropertiesEXT {
     type Builder = PhysicalDeviceRobustness2PropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceRobustness2PropertiesEXT](struct.PhysicalDeviceRobustness2PropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceRobustness2PropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceRobustness2PropertiesEXTBuilder {
@@ -32080,7 +32080,7 @@ impl HasBuilder<'static> for PhysicalDeviceSampleLocationsPropertiesEXT {
     type Builder = PhysicalDeviceSampleLocationsPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceSampleLocationsPropertiesEXT](struct.PhysicalDeviceSampleLocationsPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceSampleLocationsPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSampleLocationsPropertiesEXTBuilder {
@@ -32171,7 +32171,7 @@ impl HasBuilder<'static> for PhysicalDeviceSamplerFilterMinmaxProperties {
     type Builder = PhysicalDeviceSamplerFilterMinmaxPropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceSamplerFilterMinmaxProperties](struct.PhysicalDeviceSamplerFilterMinmaxProperties.html).
+/// A builder for a [`PhysicalDeviceSamplerFilterMinmaxProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSamplerFilterMinmaxPropertiesBuilder {
@@ -32243,7 +32243,7 @@ impl HasBuilder<'static> for PhysicalDeviceSamplerYcbcrConversionFeatures {
     type Builder = PhysicalDeviceSamplerYcbcrConversionFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceSamplerYcbcrConversionFeatures](struct.PhysicalDeviceSamplerYcbcrConversionFeatures.html).
+/// A builder for a [`PhysicalDeviceSamplerYcbcrConversionFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSamplerYcbcrConversionFeaturesBuilder {
@@ -32301,7 +32301,7 @@ impl HasBuilder<'static> for PhysicalDeviceScalarBlockLayoutFeatures {
     type Builder = PhysicalDeviceScalarBlockLayoutFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceScalarBlockLayoutFeatures](struct.PhysicalDeviceScalarBlockLayoutFeatures.html).
+/// A builder for a [`PhysicalDeviceScalarBlockLayoutFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceScalarBlockLayoutFeaturesBuilder {
@@ -32359,7 +32359,7 @@ impl HasBuilder<'static> for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {
     type Builder = PhysicalDeviceSeparateDepthStencilLayoutsFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceSeparateDepthStencilLayoutsFeatures](struct.PhysicalDeviceSeparateDepthStencilLayoutsFeatures.html).
+/// A builder for a [`PhysicalDeviceSeparateDepthStencilLayoutsFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSeparateDepthStencilLayoutsFeaturesBuilder {
@@ -32417,7 +32417,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {
     type Builder = PhysicalDeviceShaderAtomicFloat2FeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderAtomicFloat2FeaturesEXT](struct.PhysicalDeviceShaderAtomicFloat2FeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceShaderAtomicFloat2FeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderAtomicFloat2FeaturesEXTBuilder {
@@ -32579,7 +32579,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderAtomicFloatFeaturesEXT {
     type Builder = PhysicalDeviceShaderAtomicFloatFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderAtomicFloatFeaturesEXT](struct.PhysicalDeviceShaderAtomicFloatFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceShaderAtomicFloatFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderAtomicFloatFeaturesEXTBuilder {
@@ -32721,7 +32721,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderAtomicInt64Features {
     type Builder = PhysicalDeviceShaderAtomicInt64FeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderAtomicInt64Features](struct.PhysicalDeviceShaderAtomicInt64Features.html).
+/// A builder for a [`PhysicalDeviceShaderAtomicInt64Features`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderAtomicInt64FeaturesBuilder {
@@ -32785,7 +32785,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderClockFeaturesKHR {
     type Builder = PhysicalDeviceShaderClockFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderClockFeaturesKHR](struct.PhysicalDeviceShaderClockFeaturesKHR.html).
+/// A builder for a [`PhysicalDeviceShaderClockFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderClockFeaturesKHRBuilder {
@@ -32849,7 +32849,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderCoreProperties2AMD {
     type Builder = PhysicalDeviceShaderCoreProperties2AMDBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderCoreProperties2AMD](struct.PhysicalDeviceShaderCoreProperties2AMD.html).
+/// A builder for a [`PhysicalDeviceShaderCoreProperties2AMD`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderCoreProperties2AMDBuilder {
@@ -32916,7 +32916,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderCorePropertiesAMD {
     type Builder = PhysicalDeviceShaderCorePropertiesAMDBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderCorePropertiesAMD](struct.PhysicalDeviceShaderCorePropertiesAMD.html).
+/// A builder for a [`PhysicalDeviceShaderCorePropertiesAMD`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderCorePropertiesAMDBuilder {
@@ -33052,7 +33052,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderDemoteToHelperInvocationFeature
     type Builder = PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT](struct.PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXTBuilder {
@@ -33114,7 +33114,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderDrawParametersFeatures {
     type Builder = PhysicalDeviceShaderDrawParametersFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderDrawParametersFeatures](struct.PhysicalDeviceShaderDrawParametersFeatures.html).
+/// A builder for a [`PhysicalDeviceShaderDrawParametersFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderDrawParametersFeaturesBuilder {
@@ -33172,7 +33172,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderFloat16Int8Features {
     type Builder = PhysicalDeviceShaderFloat16Int8FeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderFloat16Int8Features](struct.PhysicalDeviceShaderFloat16Int8Features.html).
+/// A builder for a [`PhysicalDeviceShaderFloat16Int8Features`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderFloat16Int8FeaturesBuilder {
@@ -33236,7 +33236,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {
     type Builder = PhysicalDeviceShaderImageAtomicInt64FeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderImageAtomicInt64FeaturesEXT](struct.PhysicalDeviceShaderImageAtomicInt64FeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceShaderImageAtomicInt64FeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderImageAtomicInt64FeaturesEXTBuilder {
@@ -33300,7 +33300,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderImageFootprintFeaturesNV {
     type Builder = PhysicalDeviceShaderImageFootprintFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderImageFootprintFeaturesNV](struct.PhysicalDeviceShaderImageFootprintFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceShaderImageFootprintFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderImageFootprintFeaturesNVBuilder {
@@ -33358,7 +33358,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL 
     type Builder = PhysicalDeviceShaderIntegerFunctions2FeaturesINTELBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL](struct.PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.html).
+/// A builder for a [`PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderIntegerFunctions2FeaturesINTELBuilder {
@@ -33416,7 +33416,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderSMBuiltinsFeaturesNV {
     type Builder = PhysicalDeviceShaderSMBuiltinsFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderSMBuiltinsFeaturesNV](struct.PhysicalDeviceShaderSMBuiltinsFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceShaderSMBuiltinsFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderSMBuiltinsFeaturesNVBuilder {
@@ -33474,7 +33474,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderSMBuiltinsPropertiesNV {
     type Builder = PhysicalDeviceShaderSMBuiltinsPropertiesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderSMBuiltinsPropertiesNV](struct.PhysicalDeviceShaderSMBuiltinsPropertiesNV.html).
+/// A builder for a [`PhysicalDeviceShaderSMBuiltinsPropertiesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderSMBuiltinsPropertiesNVBuilder {
@@ -33538,7 +33538,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {
     type Builder = PhysicalDeviceShaderSubgroupExtendedTypesFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderSubgroupExtendedTypesFeatures](struct.PhysicalDeviceShaderSubgroupExtendedTypesFeatures.html).
+/// A builder for a [`PhysicalDeviceShaderSubgroupExtendedTypesFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderSubgroupExtendedTypesFeaturesBuilder {
@@ -33596,7 +33596,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderSubgroupUniformControlFlowFeatu
     type Builder = PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR](struct.PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.html).
+/// A builder for a [`PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHRBuilder {
@@ -33658,7 +33658,7 @@ impl HasBuilder<'static> for PhysicalDeviceShaderTerminateInvocationFeaturesKHR 
     type Builder = PhysicalDeviceShaderTerminateInvocationFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShaderTerminateInvocationFeaturesKHR](struct.PhysicalDeviceShaderTerminateInvocationFeaturesKHR.html).
+/// A builder for a [`PhysicalDeviceShaderTerminateInvocationFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShaderTerminateInvocationFeaturesKHRBuilder {
@@ -33716,7 +33716,7 @@ impl HasBuilder<'static> for PhysicalDeviceShadingRateImageFeaturesNV {
     type Builder = PhysicalDeviceShadingRateImageFeaturesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShadingRateImageFeaturesNV](struct.PhysicalDeviceShadingRateImageFeaturesNV.html).
+/// A builder for a [`PhysicalDeviceShadingRateImageFeaturesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShadingRateImageFeaturesNVBuilder {
@@ -33783,7 +33783,7 @@ impl HasBuilder<'static> for PhysicalDeviceShadingRateImagePropertiesNV {
     type Builder = PhysicalDeviceShadingRateImagePropertiesNVBuilder;
 }
 
-/// A builder for a [PhysicalDeviceShadingRateImagePropertiesNV](struct.PhysicalDeviceShadingRateImagePropertiesNV.html).
+/// A builder for a [`PhysicalDeviceShadingRateImagePropertiesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceShadingRateImagePropertiesNVBuilder {
@@ -33856,7 +33856,7 @@ impl HasBuilder<'static> for PhysicalDeviceSparseImageFormatInfo2 {
     type Builder = PhysicalDeviceSparseImageFormatInfo2Builder;
 }
 
-/// A builder for a [PhysicalDeviceSparseImageFormatInfo2](struct.PhysicalDeviceSparseImageFormatInfo2.html).
+/// A builder for a [`PhysicalDeviceSparseImageFormatInfo2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSparseImageFormatInfo2Builder {
@@ -33938,7 +33938,7 @@ impl HasBuilder<'static> for PhysicalDeviceSparseProperties {
     type Builder = PhysicalDeviceSparsePropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceSparseProperties](struct.PhysicalDeviceSparseProperties.html).
+/// A builder for a [`PhysicalDeviceSparseProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSparsePropertiesBuilder {
@@ -34030,7 +34030,7 @@ impl HasBuilder<'static> for PhysicalDeviceSubgroupProperties {
     type Builder = PhysicalDeviceSubgroupPropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceSubgroupProperties](struct.PhysicalDeviceSubgroupProperties.html).
+/// A builder for a [`PhysicalDeviceSubgroupProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSubgroupPropertiesBuilder {
@@ -34106,7 +34106,7 @@ impl HasBuilder<'static> for PhysicalDeviceSubgroupSizeControlFeaturesEXT {
     type Builder = PhysicalDeviceSubgroupSizeControlFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceSubgroupSizeControlFeaturesEXT](struct.PhysicalDeviceSubgroupSizeControlFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceSubgroupSizeControlFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSubgroupSizeControlFeaturesEXTBuilder {
@@ -34170,7 +34170,7 @@ impl HasBuilder<'static> for PhysicalDeviceSubgroupSizeControlPropertiesEXT {
     type Builder = PhysicalDeviceSubgroupSizeControlPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceSubgroupSizeControlPropertiesEXT](struct.PhysicalDeviceSubgroupSizeControlPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceSubgroupSizeControlPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSubgroupSizeControlPropertiesEXTBuilder {
@@ -34249,7 +34249,7 @@ impl HasBuilder<'static> for PhysicalDeviceSubpassShadingFeaturesHUAWEI {
     type Builder = PhysicalDeviceSubpassShadingFeaturesHUAWEIBuilder;
 }
 
-/// A builder for a [PhysicalDeviceSubpassShadingFeaturesHUAWEI](struct.PhysicalDeviceSubpassShadingFeaturesHUAWEI.html).
+/// A builder for a [`PhysicalDeviceSubpassShadingFeaturesHUAWEI`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSubpassShadingFeaturesHUAWEIBuilder {
@@ -34307,7 +34307,7 @@ impl HasBuilder<'static> for PhysicalDeviceSubpassShadingPropertiesHUAWEI {
     type Builder = PhysicalDeviceSubpassShadingPropertiesHUAWEIBuilder;
 }
 
-/// A builder for a [PhysicalDeviceSubpassShadingPropertiesHUAWEI](struct.PhysicalDeviceSubpassShadingPropertiesHUAWEI.html).
+/// A builder for a [`PhysicalDeviceSubpassShadingPropertiesHUAWEI`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSubpassShadingPropertiesHUAWEIBuilder {
@@ -34356,7 +34356,7 @@ unsafe impl Cast for PhysicalDeviceSubpassShadingPropertiesHUAWEIBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PhysicalDeviceSurfaceInfo2KHR](struct.PhysicalDeviceSurfaceInfo2KHR.html).
+/// A Vulkan struct that can be used to extend a [`PhysicalDeviceSurfaceInfo2KHR`].
 pub unsafe trait ExtendsPhysicalDeviceSurfaceInfo2KHR {}
 unsafe impl ExtendsPhysicalDeviceSurfaceInfo2KHR for SurfaceFullScreenExclusiveInfoEXT {}
 unsafe impl ExtendsPhysicalDeviceSurfaceInfo2KHR for SurfaceFullScreenExclusiveWin32InfoEXT {}
@@ -34374,7 +34374,7 @@ impl<'b> HasBuilder<'b> for PhysicalDeviceSurfaceInfo2KHR {
     type Builder = PhysicalDeviceSurfaceInfo2KHRBuilder<'b>;
 }
 
-/// A builder for a [PhysicalDeviceSurfaceInfo2KHR](struct.PhysicalDeviceSurfaceInfo2KHR.html).
+/// A builder for a [`PhysicalDeviceSurfaceInfo2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSurfaceInfo2KHRBuilder<'b> {
@@ -34444,7 +34444,7 @@ impl HasBuilder<'static> for PhysicalDeviceSynchronization2FeaturesKHR {
     type Builder = PhysicalDeviceSynchronization2FeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceSynchronization2FeaturesKHR](struct.PhysicalDeviceSynchronization2FeaturesKHR.html).
+/// A builder for a [`PhysicalDeviceSynchronization2FeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceSynchronization2FeaturesKHRBuilder {
@@ -34502,7 +34502,7 @@ impl HasBuilder<'static> for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {
     type Builder = PhysicalDeviceTexelBufferAlignmentFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceTexelBufferAlignmentFeaturesEXT](struct.PhysicalDeviceTexelBufferAlignmentFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceTexelBufferAlignmentFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceTexelBufferAlignmentFeaturesEXTBuilder {
@@ -34560,7 +34560,7 @@ impl HasBuilder<'static> for PhysicalDeviceTexelBufferAlignmentPropertiesEXT {
     type Builder = PhysicalDeviceTexelBufferAlignmentPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceTexelBufferAlignmentPropertiesEXT](struct.PhysicalDeviceTexelBufferAlignmentPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceTexelBufferAlignmentPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceTexelBufferAlignmentPropertiesEXTBuilder {
@@ -34654,7 +34654,7 @@ impl HasBuilder<'static> for PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT 
     type Builder = PhysicalDeviceTextureCompressionASTCHDRFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT](struct.PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceTextureCompressionASTCHDRFeaturesEXTBuilder {
@@ -34712,7 +34712,7 @@ impl HasBuilder<'static> for PhysicalDeviceTimelineSemaphoreFeatures {
     type Builder = PhysicalDeviceTimelineSemaphoreFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceTimelineSemaphoreFeatures](struct.PhysicalDeviceTimelineSemaphoreFeatures.html).
+/// A builder for a [`PhysicalDeviceTimelineSemaphoreFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceTimelineSemaphoreFeaturesBuilder {
@@ -34770,7 +34770,7 @@ impl HasBuilder<'static> for PhysicalDeviceTimelineSemaphoreProperties {
     type Builder = PhysicalDeviceTimelineSemaphorePropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceTimelineSemaphoreProperties](struct.PhysicalDeviceTimelineSemaphoreProperties.html).
+/// A builder for a [`PhysicalDeviceTimelineSemaphoreProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceTimelineSemaphorePropertiesBuilder {
@@ -34832,7 +34832,7 @@ impl HasBuilder<'static> for PhysicalDeviceToolPropertiesEXT {
     type Builder = PhysicalDeviceToolPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceToolPropertiesEXT](struct.PhysicalDeviceToolPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceToolPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceToolPropertiesEXTBuilder {
@@ -34917,7 +34917,7 @@ impl HasBuilder<'static> for PhysicalDeviceTransformFeedbackFeaturesEXT {
     type Builder = PhysicalDeviceTransformFeedbackFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceTransformFeedbackFeaturesEXT](struct.PhysicalDeviceTransformFeedbackFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceTransformFeedbackFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceTransformFeedbackFeaturesEXTBuilder {
@@ -34981,7 +34981,7 @@ impl HasBuilder<'static> for PhysicalDeviceTransformFeedbackPropertiesEXT {
     type Builder = PhysicalDeviceTransformFeedbackPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceTransformFeedbackPropertiesEXT](struct.PhysicalDeviceTransformFeedbackPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceTransformFeedbackPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceTransformFeedbackPropertiesEXTBuilder {
@@ -35116,7 +35116,7 @@ impl HasBuilder<'static> for PhysicalDeviceUniformBufferStandardLayoutFeatures {
     type Builder = PhysicalDeviceUniformBufferStandardLayoutFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceUniformBufferStandardLayoutFeatures](struct.PhysicalDeviceUniformBufferStandardLayoutFeatures.html).
+/// A builder for a [`PhysicalDeviceUniformBufferStandardLayoutFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceUniformBufferStandardLayoutFeaturesBuilder {
@@ -35174,7 +35174,7 @@ impl HasBuilder<'static> for PhysicalDeviceVariablePointersFeatures {
     type Builder = PhysicalDeviceVariablePointersFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceVariablePointersFeatures](struct.PhysicalDeviceVariablePointersFeatures.html).
+/// A builder for a [`PhysicalDeviceVariablePointersFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceVariablePointersFeaturesBuilder {
@@ -35241,7 +35241,7 @@ impl HasBuilder<'static> for PhysicalDeviceVertexAttributeDivisorFeaturesEXT {
     type Builder = PhysicalDeviceVertexAttributeDivisorFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceVertexAttributeDivisorFeaturesEXT](struct.PhysicalDeviceVertexAttributeDivisorFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceVertexAttributeDivisorFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceVertexAttributeDivisorFeaturesEXTBuilder {
@@ -35313,7 +35313,7 @@ impl HasBuilder<'static> for PhysicalDeviceVertexAttributeDivisorPropertiesEXT {
     type Builder = PhysicalDeviceVertexAttributeDivisorPropertiesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceVertexAttributeDivisorPropertiesEXT](struct.PhysicalDeviceVertexAttributeDivisorPropertiesEXT.html).
+/// A builder for a [`PhysicalDeviceVertexAttributeDivisorPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceVertexAttributeDivisorPropertiesEXTBuilder {
@@ -35371,7 +35371,7 @@ impl HasBuilder<'static> for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {
     type Builder = PhysicalDeviceVertexInputDynamicStateFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceVertexInputDynamicStateFeaturesEXT](struct.PhysicalDeviceVertexInputDynamicStateFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceVertexInputDynamicStateFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceVertexInputDynamicStateFeaturesEXTBuilder {
@@ -35429,7 +35429,7 @@ impl HasBuilder<'static> for PhysicalDeviceVulkan11Features {
     type Builder = PhysicalDeviceVulkan11FeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceVulkan11Features](struct.PhysicalDeviceVulkan11Features.html).
+/// A builder for a [`PhysicalDeviceVulkan11Features`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceVulkan11FeaturesBuilder {
@@ -35560,7 +35560,7 @@ impl HasBuilder<'static> for PhysicalDeviceVulkan11Properties {
     type Builder = PhysicalDeviceVulkan11PropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceVulkan11Properties](struct.PhysicalDeviceVulkan11Properties.html).
+/// A builder for a [`PhysicalDeviceVulkan11Properties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceVulkan11PropertiesBuilder {
@@ -35715,7 +35715,7 @@ impl HasBuilder<'static> for PhysicalDeviceVulkan12Features {
     type Builder = PhysicalDeviceVulkan12FeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceVulkan12Features](struct.PhysicalDeviceVulkan12Features.html).
+/// A builder for a [`PhysicalDeviceVulkan12Features`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceVulkan12FeaturesBuilder {
@@ -36156,7 +36156,7 @@ impl HasBuilder<'static> for PhysicalDeviceVulkan12Properties {
     type Builder = PhysicalDeviceVulkan12PropertiesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceVulkan12Properties](struct.PhysicalDeviceVulkan12Properties.html).
+/// A builder for a [`PhysicalDeviceVulkan12Properties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceVulkan12PropertiesBuilder {
@@ -36705,7 +36705,7 @@ impl HasBuilder<'static> for PhysicalDeviceVulkanMemoryModelFeatures {
     type Builder = PhysicalDeviceVulkanMemoryModelFeaturesBuilder;
 }
 
-/// A builder for a [PhysicalDeviceVulkanMemoryModelFeatures](struct.PhysicalDeviceVulkanMemoryModelFeatures.html).
+/// A builder for a [`PhysicalDeviceVulkanMemoryModelFeatures`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceVulkanMemoryModelFeaturesBuilder {
@@ -36783,7 +36783,7 @@ impl HasBuilder<'static> for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeatures
     type Builder = PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR](struct.PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.html).
+/// A builder for a [`PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHRBuilder {
@@ -36875,7 +36875,7 @@ impl HasBuilder<'static> for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {
     type Builder = PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT](struct.PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXTBuilder {
@@ -36933,7 +36933,7 @@ impl HasBuilder<'static> for PhysicalDeviceYcbcrImageArraysFeaturesEXT {
     type Builder = PhysicalDeviceYcbcrImageArraysFeaturesEXTBuilder;
 }
 
-/// A builder for a [PhysicalDeviceYcbcrImageArraysFeaturesEXT](struct.PhysicalDeviceYcbcrImageArraysFeaturesEXT.html).
+/// A builder for a [`PhysicalDeviceYcbcrImageArraysFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceYcbcrImageArraysFeaturesEXTBuilder {
@@ -36991,7 +36991,7 @@ impl HasBuilder<'static> for PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures
     type Builder = PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHRBuilder;
 }
 
-/// A builder for a [PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR](struct.PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.html).
+/// A builder for a [`PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHRBuilder {
@@ -37053,7 +37053,7 @@ impl<'b> HasBuilder<'b> for PipelineCacheCreateInfo {
     type Builder = PipelineCacheCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [PipelineCacheCreateInfo](struct.PipelineCacheCreateInfo.html).
+/// A builder for a [`PipelineCacheCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineCacheCreateInfoBuilder<'b> {
@@ -37119,7 +37119,7 @@ impl HasBuilder<'static> for PipelineCacheHeaderVersionOne {
     type Builder = PipelineCacheHeaderVersionOneBuilder;
 }
 
-/// A builder for a [PipelineCacheHeaderVersionOne](struct.PipelineCacheHeaderVersionOne.html).
+/// A builder for a [`PipelineCacheHeaderVersionOne`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineCacheHeaderVersionOneBuilder {
@@ -37204,7 +37204,7 @@ impl HasBuilder<'static> for PipelineColorBlendAdvancedStateCreateInfoEXT {
     type Builder = PipelineColorBlendAdvancedStateCreateInfoEXTBuilder;
 }
 
-/// A builder for a [PipelineColorBlendAdvancedStateCreateInfoEXT](struct.PipelineColorBlendAdvancedStateCreateInfoEXT.html).
+/// A builder for a [`PipelineColorBlendAdvancedStateCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineColorBlendAdvancedStateCreateInfoEXTBuilder {
@@ -37274,7 +37274,7 @@ impl HasBuilder<'static> for PipelineColorBlendAttachmentState {
     type Builder = PipelineColorBlendAttachmentStateBuilder;
 }
 
-/// A builder for a [PipelineColorBlendAttachmentState](struct.PipelineColorBlendAttachmentState.html).
+/// A builder for a [`PipelineColorBlendAttachmentState`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineColorBlendAttachmentStateBuilder {
@@ -37361,7 +37361,7 @@ unsafe impl Cast for PipelineColorBlendAttachmentStateBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PipelineColorBlendStateCreateInfo](struct.PipelineColorBlendStateCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`PipelineColorBlendStateCreateInfo`].
 pub unsafe trait ExtendsPipelineColorBlendStateCreateInfo {}
 unsafe impl ExtendsPipelineColorBlendStateCreateInfo
     for PipelineColorBlendAdvancedStateCreateInfoEXT
@@ -37382,7 +37382,7 @@ impl<'b> HasBuilder<'b> for PipelineColorBlendStateCreateInfo {
     type Builder = PipelineColorBlendStateCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [PipelineColorBlendStateCreateInfo](struct.PipelineColorBlendStateCreateInfo.html).
+/// A builder for a [`PipelineColorBlendStateCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineColorBlendStateCreateInfoBuilder<'b> {
@@ -37480,7 +37480,7 @@ impl<'b> HasBuilder<'b> for PipelineColorWriteCreateInfoEXT {
     type Builder = PipelineColorWriteCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [PipelineColorWriteCreateInfoEXT](struct.PipelineColorWriteCreateInfoEXT.html).
+/// A builder for a [`PipelineColorWriteCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineColorWriteCreateInfoEXTBuilder<'b> {
@@ -37540,7 +37540,7 @@ impl HasBuilder<'static> for PipelineCompilerControlCreateInfoAMD {
     type Builder = PipelineCompilerControlCreateInfoAMDBuilder;
 }
 
-/// A builder for a [PipelineCompilerControlCreateInfoAMD](struct.PipelineCompilerControlCreateInfoAMD.html).
+/// A builder for a [`PipelineCompilerControlCreateInfoAMD`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineCompilerControlCreateInfoAMDBuilder {
@@ -37601,7 +37601,7 @@ impl<'b> HasBuilder<'b> for PipelineCoverageModulationStateCreateInfoNV {
     type Builder = PipelineCoverageModulationStateCreateInfoNVBuilder<'b>;
 }
 
-/// A builder for a [PipelineCoverageModulationStateCreateInfoNV](struct.PipelineCoverageModulationStateCreateInfoNV.html).
+/// A builder for a [`PipelineCoverageModulationStateCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineCoverageModulationStateCreateInfoNVBuilder<'b> {
@@ -37691,7 +37691,7 @@ impl HasBuilder<'static> for PipelineCoverageReductionStateCreateInfoNV {
     type Builder = PipelineCoverageReductionStateCreateInfoNVBuilder;
 }
 
-/// A builder for a [PipelineCoverageReductionStateCreateInfoNV](struct.PipelineCoverageReductionStateCreateInfoNV.html).
+/// A builder for a [`PipelineCoverageReductionStateCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineCoverageReductionStateCreateInfoNVBuilder {
@@ -37758,7 +37758,7 @@ impl HasBuilder<'static> for PipelineCoverageToColorStateCreateInfoNV {
     type Builder = PipelineCoverageToColorStateCreateInfoNVBuilder;
 }
 
-/// A builder for a [PipelineCoverageToColorStateCreateInfoNV](struct.PipelineCoverageToColorStateCreateInfoNV.html).
+/// A builder for a [`PipelineCoverageToColorStateCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineCoverageToColorStateCreateInfoNVBuilder {
@@ -37828,7 +37828,7 @@ impl<'b> HasBuilder<'b> for PipelineCreationFeedbackCreateInfoEXT {
     type Builder = PipelineCreationFeedbackCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [PipelineCreationFeedbackCreateInfoEXT](struct.PipelineCreationFeedbackCreateInfoEXT.html).
+/// A builder for a [`PipelineCreationFeedbackCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineCreationFeedbackCreateInfoEXTBuilder<'b> {
@@ -37902,7 +37902,7 @@ impl HasBuilder<'static> for PipelineCreationFeedbackEXT {
     type Builder = PipelineCreationFeedbackEXTBuilder;
 }
 
-/// A builder for a [PipelineCreationFeedbackEXT](struct.PipelineCreationFeedbackEXT.html).
+/// A builder for a [`PipelineCreationFeedbackEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineCreationFeedbackEXTBuilder {
@@ -37966,7 +37966,7 @@ impl HasBuilder<'static> for PipelineDepthStencilStateCreateInfo {
     type Builder = PipelineDepthStencilStateCreateInfoBuilder;
 }
 
-/// A builder for a [PipelineDepthStencilStateCreateInfo](struct.PipelineDepthStencilStateCreateInfo.html).
+/// A builder for a [`PipelineDepthStencilStateCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineDepthStencilStateCreateInfoBuilder {
@@ -38078,7 +38078,7 @@ impl<'b> HasBuilder<'b> for PipelineDiscardRectangleStateCreateInfoEXT {
     type Builder = PipelineDiscardRectangleStateCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [PipelineDiscardRectangleStateCreateInfoEXT](struct.PipelineDiscardRectangleStateCreateInfoEXT.html).
+/// A builder for a [`PipelineDiscardRectangleStateCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineDiscardRectangleStateCreateInfoEXTBuilder<'b> {
@@ -38156,7 +38156,7 @@ impl<'b> HasBuilder<'b> for PipelineDynamicStateCreateInfo {
     type Builder = PipelineDynamicStateCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [PipelineDynamicStateCreateInfo](struct.PipelineDynamicStateCreateInfo.html).
+/// A builder for a [`PipelineDynamicStateCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineDynamicStateCreateInfoBuilder<'b> {
@@ -38222,7 +38222,7 @@ impl HasBuilder<'static> for PipelineExecutableInfoKHR {
     type Builder = PipelineExecutableInfoKHRBuilder;
 }
 
-/// A builder for a [PipelineExecutableInfoKHR](struct.PipelineExecutableInfoKHR.html).
+/// A builder for a [`PipelineExecutableInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineExecutableInfoKHRBuilder {
@@ -38286,7 +38286,7 @@ impl<'b> HasBuilder<'b> for PipelineExecutableInternalRepresentationKHR {
     type Builder = PipelineExecutableInternalRepresentationKHRBuilder<'b>;
 }
 
-/// A builder for a [PipelineExecutableInternalRepresentationKHR](struct.PipelineExecutableInternalRepresentationKHR.html).
+/// A builder for a [`PipelineExecutableInternalRepresentationKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineExecutableInternalRepresentationKHRBuilder<'b> {
@@ -38373,7 +38373,7 @@ impl HasBuilder<'static> for PipelineExecutablePropertiesKHR {
     type Builder = PipelineExecutablePropertiesKHRBuilder;
 }
 
-/// A builder for a [PipelineExecutablePropertiesKHR](struct.PipelineExecutablePropertiesKHR.html).
+/// A builder for a [`PipelineExecutablePropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineExecutablePropertiesKHRBuilder {
@@ -38452,7 +38452,7 @@ impl HasBuilder<'static> for PipelineExecutableStatisticKHR {
     type Builder = PipelineExecutableStatisticKHRBuilder;
 }
 
-/// A builder for a [PipelineExecutableStatisticKHR](struct.PipelineExecutableStatisticKHR.html).
+/// A builder for a [`PipelineExecutableStatisticKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineExecutableStatisticKHRBuilder {
@@ -38531,7 +38531,7 @@ impl HasBuilder<'static> for PipelineFragmentShadingRateEnumStateCreateInfoNV {
     type Builder = PipelineFragmentShadingRateEnumStateCreateInfoNVBuilder;
 }
 
-/// A builder for a [PipelineFragmentShadingRateEnumStateCreateInfoNV](struct.PipelineFragmentShadingRateEnumStateCreateInfoNV.html).
+/// A builder for a [`PipelineFragmentShadingRateEnumStateCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineFragmentShadingRateEnumStateCreateInfoNVBuilder {
@@ -38601,7 +38601,7 @@ impl HasBuilder<'static> for PipelineFragmentShadingRateStateCreateInfoKHR {
     type Builder = PipelineFragmentShadingRateStateCreateInfoKHRBuilder;
 }
 
-/// A builder for a [PipelineFragmentShadingRateStateCreateInfoKHR](struct.PipelineFragmentShadingRateStateCreateInfoKHR.html).
+/// A builder for a [`PipelineFragmentShadingRateStateCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineFragmentShadingRateStateCreateInfoKHRBuilder {
@@ -38665,7 +38665,7 @@ impl HasBuilder<'static> for PipelineInfoKHR {
     type Builder = PipelineInfoKHRBuilder;
 }
 
-/// A builder for a [PipelineInfoKHR](struct.PipelineInfoKHR.html).
+/// A builder for a [`PipelineInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineInfoKHRBuilder {
@@ -38723,7 +38723,7 @@ impl HasBuilder<'static> for PipelineInputAssemblyStateCreateInfo {
     type Builder = PipelineInputAssemblyStateCreateInfoBuilder;
 }
 
-/// A builder for a [PipelineInputAssemblyStateCreateInfo](struct.PipelineInputAssemblyStateCreateInfo.html).
+/// A builder for a [`PipelineInputAssemblyStateCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineInputAssemblyStateCreateInfoBuilder {
@@ -38793,7 +38793,7 @@ impl<'b> HasBuilder<'b> for PipelineLayoutCreateInfo {
     type Builder = PipelineLayoutCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [PipelineLayoutCreateInfo](struct.PipelineLayoutCreateInfo.html).
+/// A builder for a [`PipelineLayoutCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineLayoutCreateInfoBuilder<'b> {
@@ -38869,7 +38869,7 @@ impl<'b> HasBuilder<'b> for PipelineLibraryCreateInfoKHR {
     type Builder = PipelineLibraryCreateInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [PipelineLibraryCreateInfoKHR](struct.PipelineLibraryCreateInfoKHR.html).
+/// A builder for a [`PipelineLibraryCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineLibraryCreateInfoKHRBuilder<'b> {
@@ -38916,7 +38916,7 @@ unsafe impl<'b> Cast for PipelineLibraryCreateInfoKHRBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PipelineMultisampleStateCreateInfo](struct.PipelineMultisampleStateCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`PipelineMultisampleStateCreateInfo`].
 pub unsafe trait ExtendsPipelineMultisampleStateCreateInfo {}
 unsafe impl ExtendsPipelineMultisampleStateCreateInfo
     for PipelineCoverageModulationStateCreateInfoNV
@@ -38945,7 +38945,7 @@ impl<'b> HasBuilder<'b> for PipelineMultisampleStateCreateInfo {
     type Builder = PipelineMultisampleStateCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [PipelineMultisampleStateCreateInfo](struct.PipelineMultisampleStateCreateInfo.html).
+/// A builder for a [`PipelineMultisampleStateCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineMultisampleStateCreateInfoBuilder<'b> {
@@ -39051,7 +39051,7 @@ impl HasBuilder<'static> for PipelineRasterizationConservativeStateCreateInfoEXT
     type Builder = PipelineRasterizationConservativeStateCreateInfoEXTBuilder;
 }
 
-/// A builder for a [PipelineRasterizationConservativeStateCreateInfoEXT](struct.PipelineRasterizationConservativeStateCreateInfoEXT.html).
+/// A builder for a [`PipelineRasterizationConservativeStateCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineRasterizationConservativeStateCreateInfoEXTBuilder {
@@ -39127,7 +39127,7 @@ impl HasBuilder<'static> for PipelineRasterizationDepthClipStateCreateInfoEXT {
     type Builder = PipelineRasterizationDepthClipStateCreateInfoEXTBuilder;
 }
 
-/// A builder for a [PipelineRasterizationDepthClipStateCreateInfoEXT](struct.PipelineRasterizationDepthClipStateCreateInfoEXT.html).
+/// A builder for a [`PipelineRasterizationDepthClipStateCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineRasterizationDepthClipStateCreateInfoEXTBuilder {
@@ -39191,7 +39191,7 @@ impl HasBuilder<'static> for PipelineRasterizationLineStateCreateInfoEXT {
     type Builder = PipelineRasterizationLineStateCreateInfoEXTBuilder;
 }
 
-/// A builder for a [PipelineRasterizationLineStateCreateInfoEXT](struct.PipelineRasterizationLineStateCreateInfoEXT.html).
+/// A builder for a [`PipelineRasterizationLineStateCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineRasterizationLineStateCreateInfoEXTBuilder {
@@ -39270,7 +39270,7 @@ impl HasBuilder<'static> for PipelineRasterizationProvokingVertexStateCreateInfo
     type Builder = PipelineRasterizationProvokingVertexStateCreateInfoEXTBuilder;
 }
 
-/// A builder for a [PipelineRasterizationProvokingVertexStateCreateInfoEXT](struct.PipelineRasterizationProvokingVertexStateCreateInfoEXT.html).
+/// A builder for a [`PipelineRasterizationProvokingVertexStateCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineRasterizationProvokingVertexStateCreateInfoEXTBuilder {
@@ -39315,7 +39315,7 @@ unsafe impl Cast for PipelineRasterizationProvokingVertexStateCreateInfoEXTBuild
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PipelineRasterizationStateCreateInfo](struct.PipelineRasterizationStateCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`PipelineRasterizationStateCreateInfo`].
 pub unsafe trait ExtendsPipelineRasterizationStateCreateInfo {}
 unsafe impl ExtendsPipelineRasterizationStateCreateInfo
     for PipelineRasterizationConservativeStateCreateInfoEXT
@@ -39355,7 +39355,7 @@ impl<'b> HasBuilder<'b> for PipelineRasterizationStateCreateInfo {
     type Builder = PipelineRasterizationStateCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [PipelineRasterizationStateCreateInfo](struct.PipelineRasterizationStateCreateInfo.html).
+/// A builder for a [`PipelineRasterizationStateCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineRasterizationStateCreateInfoBuilder<'b> {
@@ -39485,7 +39485,7 @@ impl HasBuilder<'static> for PipelineRasterizationStateRasterizationOrderAMD {
     type Builder = PipelineRasterizationStateRasterizationOrderAMDBuilder;
 }
 
-/// A builder for a [PipelineRasterizationStateRasterizationOrderAMD](struct.PipelineRasterizationStateRasterizationOrderAMD.html).
+/// A builder for a [`PipelineRasterizationStateRasterizationOrderAMD`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineRasterizationStateRasterizationOrderAMDBuilder {
@@ -39543,7 +39543,7 @@ impl HasBuilder<'static> for PipelineRasterizationStateStreamCreateInfoEXT {
     type Builder = PipelineRasterizationStateStreamCreateInfoEXTBuilder;
 }
 
-/// A builder for a [PipelineRasterizationStateStreamCreateInfoEXT](struct.PipelineRasterizationStateStreamCreateInfoEXT.html).
+/// A builder for a [`PipelineRasterizationStateStreamCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineRasterizationStateStreamCreateInfoEXTBuilder {
@@ -39607,7 +39607,7 @@ impl HasBuilder<'static> for PipelineRepresentativeFragmentTestStateCreateInfoNV
     type Builder = PipelineRepresentativeFragmentTestStateCreateInfoNVBuilder;
 }
 
-/// A builder for a [PipelineRepresentativeFragmentTestStateCreateInfoNV](struct.PipelineRepresentativeFragmentTestStateCreateInfoNV.html).
+/// A builder for a [`PipelineRepresentativeFragmentTestStateCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineRepresentativeFragmentTestStateCreateInfoNVBuilder {
@@ -39669,7 +39669,7 @@ impl<'b> HasBuilder<'b> for PipelineSampleLocationsStateCreateInfoEXT {
     type Builder = PipelineSampleLocationsStateCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [PipelineSampleLocationsStateCreateInfoEXT](struct.PipelineSampleLocationsStateCreateInfoEXT.html).
+/// A builder for a [`PipelineSampleLocationsStateCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineSampleLocationsStateCreateInfoEXTBuilder<'b> {
@@ -39724,7 +39724,7 @@ unsafe impl<'b> Cast for PipelineSampleLocationsStateCreateInfoEXTBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PipelineShaderStageCreateInfo](struct.PipelineShaderStageCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`PipelineShaderStageCreateInfo`].
 pub unsafe trait ExtendsPipelineShaderStageCreateInfo {}
 unsafe impl ExtendsPipelineShaderStageCreateInfo
     for PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT
@@ -39744,7 +39744,7 @@ impl<'b> HasBuilder<'b> for PipelineShaderStageCreateInfo {
     type Builder = PipelineShaderStageCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [PipelineShaderStageCreateInfo](struct.PipelineShaderStageCreateInfo.html).
+/// A builder for a [`PipelineShaderStageCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineShaderStageCreateInfoBuilder<'b> {
@@ -39841,7 +39841,7 @@ impl HasBuilder<'static> for PipelineShaderStageRequiredSubgroupSizeCreateInfoEX
     type Builder = PipelineShaderStageRequiredSubgroupSizeCreateInfoEXTBuilder;
 }
 
-/// A builder for a [PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT](struct.PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.html).
+/// A builder for a [`PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineShaderStageRequiredSubgroupSizeCreateInfoEXTBuilder {
@@ -39899,7 +39899,7 @@ impl HasBuilder<'static> for PipelineTessellationDomainOriginStateCreateInfo {
     type Builder = PipelineTessellationDomainOriginStateCreateInfoBuilder;
 }
 
-/// A builder for a [PipelineTessellationDomainOriginStateCreateInfo](struct.PipelineTessellationDomainOriginStateCreateInfo.html).
+/// A builder for a [`PipelineTessellationDomainOriginStateCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineTessellationDomainOriginStateCreateInfoBuilder {
@@ -39944,7 +39944,7 @@ unsafe impl Cast for PipelineTessellationDomainOriginStateCreateInfoBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PipelineTessellationStateCreateInfo](struct.PipelineTessellationStateCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`PipelineTessellationStateCreateInfo`].
 pub unsafe trait ExtendsPipelineTessellationStateCreateInfo {}
 unsafe impl ExtendsPipelineTessellationStateCreateInfo
     for PipelineTessellationDomainOriginStateCreateInfo
@@ -39964,7 +39964,7 @@ impl<'b> HasBuilder<'b> for PipelineTessellationStateCreateInfo {
     type Builder = PipelineTessellationStateCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [PipelineTessellationStateCreateInfo](struct.PipelineTessellationStateCreateInfo.html).
+/// A builder for a [`PipelineTessellationStateCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineTessellationStateCreateInfoBuilder<'b> {
@@ -40040,7 +40040,7 @@ impl<'b> HasBuilder<'b> for PipelineVertexInputDivisorStateCreateInfoEXT {
     type Builder = PipelineVertexInputDivisorStateCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [PipelineVertexInputDivisorStateCreateInfoEXT](struct.PipelineVertexInputDivisorStateCreateInfoEXT.html).
+/// A builder for a [`PipelineVertexInputDivisorStateCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineVertexInputDivisorStateCreateInfoEXTBuilder<'b> {
@@ -40090,7 +40090,7 @@ unsafe impl<'b> Cast for PipelineVertexInputDivisorStateCreateInfoEXTBuilder<'b>
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PipelineVertexInputStateCreateInfo](struct.PipelineVertexInputStateCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`PipelineVertexInputStateCreateInfo`].
 pub unsafe trait ExtendsPipelineVertexInputStateCreateInfo {}
 unsafe impl ExtendsPipelineVertexInputStateCreateInfo
     for PipelineVertexInputDivisorStateCreateInfoEXT
@@ -40110,7 +40110,7 @@ impl<'b> HasBuilder<'b> for PipelineVertexInputStateCreateInfo {
     type Builder = PipelineVertexInputStateCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [PipelineVertexInputStateCreateInfo](struct.PipelineVertexInputStateCreateInfo.html).
+/// A builder for a [`PipelineVertexInputStateCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineVertexInputStateCreateInfoBuilder<'b> {
@@ -40200,7 +40200,7 @@ impl<'b> HasBuilder<'b> for PipelineViewportCoarseSampleOrderStateCreateInfoNV {
     type Builder = PipelineViewportCoarseSampleOrderStateCreateInfoNVBuilder<'b>;
 }
 
-/// A builder for a [PipelineViewportCoarseSampleOrderStateCreateInfoNV](struct.PipelineViewportCoarseSampleOrderStateCreateInfoNV.html).
+/// A builder for a [`PipelineViewportCoarseSampleOrderStateCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineViewportCoarseSampleOrderStateCreateInfoNVBuilder<'b> {
@@ -40269,7 +40269,7 @@ impl<'b> HasBuilder<'b> for PipelineViewportExclusiveScissorStateCreateInfoNV {
     type Builder = PipelineViewportExclusiveScissorStateCreateInfoNVBuilder<'b>;
 }
 
-/// A builder for a [PipelineViewportExclusiveScissorStateCreateInfoNV](struct.PipelineViewportExclusiveScissorStateCreateInfoNV.html).
+/// A builder for a [`PipelineViewportExclusiveScissorStateCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineViewportExclusiveScissorStateCreateInfoNVBuilder<'b> {
@@ -40332,7 +40332,7 @@ impl<'b> HasBuilder<'b> for PipelineViewportShadingRateImageStateCreateInfoNV {
     type Builder = PipelineViewportShadingRateImageStateCreateInfoNVBuilder<'b>;
 }
 
-/// A builder for a [PipelineViewportShadingRateImageStateCreateInfoNV](struct.PipelineViewportShadingRateImageStateCreateInfoNV.html).
+/// A builder for a [`PipelineViewportShadingRateImageStateCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineViewportShadingRateImageStateCreateInfoNVBuilder<'b> {
@@ -40388,7 +40388,7 @@ unsafe impl<'b> Cast for PipelineViewportShadingRateImageStateCreateInfoNVBuilde
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PipelineViewportStateCreateInfo](struct.PipelineViewportStateCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`PipelineViewportStateCreateInfo`].
 pub unsafe trait ExtendsPipelineViewportStateCreateInfo {}
 unsafe impl ExtendsPipelineViewportStateCreateInfo
     for PipelineViewportCoarseSampleOrderStateCreateInfoNV
@@ -40418,7 +40418,7 @@ impl<'b> HasBuilder<'b> for PipelineViewportStateCreateInfo {
     type Builder = PipelineViewportStateCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [PipelineViewportStateCreateInfo](struct.PipelineViewportStateCreateInfo.html).
+/// A builder for a [`PipelineViewportStateCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineViewportStateCreateInfoBuilder<'b> {
@@ -40514,7 +40514,7 @@ impl<'b> HasBuilder<'b> for PipelineViewportSwizzleStateCreateInfoNV {
     type Builder = PipelineViewportSwizzleStateCreateInfoNVBuilder<'b>;
 }
 
-/// A builder for a [PipelineViewportSwizzleStateCreateInfoNV](struct.PipelineViewportSwizzleStateCreateInfoNV.html).
+/// A builder for a [`PipelineViewportSwizzleStateCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineViewportSwizzleStateCreateInfoNVBuilder<'b> {
@@ -40583,7 +40583,7 @@ impl<'b> HasBuilder<'b> for PipelineViewportWScalingStateCreateInfoNV {
     type Builder = PipelineViewportWScalingStateCreateInfoNVBuilder<'b>;
 }
 
-/// A builder for a [PipelineViewportWScalingStateCreateInfoNV](struct.PipelineViewportWScalingStateCreateInfoNV.html).
+/// A builder for a [`PipelineViewportWScalingStateCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PipelineViewportWScalingStateCreateInfoNVBuilder<'b> {
@@ -40658,7 +40658,7 @@ impl HasBuilder<'static> for PresentFrameTokenGGP {
     type Builder = PresentFrameTokenGGPBuilder;
 }
 
-/// A builder for a [PresentFrameTokenGGP](struct.PresentFrameTokenGGP.html).
+/// A builder for a [`PresentFrameTokenGGP`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PresentFrameTokenGGPBuilder {
@@ -40716,7 +40716,7 @@ impl<'b> HasBuilder<'b> for PresentIdKHR {
     type Builder = PresentIdKHRBuilder<'b>;
 }
 
-/// A builder for a [PresentIdKHR](struct.PresentIdKHR.html).
+/// A builder for a [`PresentIdKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PresentIdKHRBuilder<'b> {
@@ -40769,7 +40769,7 @@ unsafe impl<'b> Cast for PresentIdKHRBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [PresentInfoKHR](struct.PresentInfoKHR.html).
+/// A Vulkan struct that can be used to extend a [`PresentInfoKHR`].
 pub unsafe trait ExtendsPresentInfoKHR {}
 unsafe impl ExtendsPresentInfoKHR for DeviceGroupPresentInfoKHR {}
 unsafe impl ExtendsPresentInfoKHR for DisplayPresentInfoKHR {}
@@ -40791,7 +40791,7 @@ impl<'b> HasBuilder<'b> for PresentInfoKHR {
     type Builder = PresentInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [PresentInfoKHR](struct.PresentInfoKHR.html).
+/// A builder for a [`PresentInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PresentInfoKHRBuilder<'b> {
@@ -40889,7 +40889,7 @@ impl<'b> HasBuilder<'b> for PresentRegionKHR {
     type Builder = PresentRegionKHRBuilder<'b>;
 }
 
-/// A builder for a [PresentRegionKHR](struct.PresentRegionKHR.html).
+/// A builder for a [`PresentRegionKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PresentRegionKHRBuilder<'b> {
@@ -40955,7 +40955,7 @@ impl<'b> HasBuilder<'b> for PresentRegionsKHR {
     type Builder = PresentRegionsKHRBuilder<'b>;
 }
 
-/// A builder for a [PresentRegionsKHR](struct.PresentRegionsKHR.html).
+/// A builder for a [`PresentRegionsKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PresentRegionsKHRBuilder<'b> {
@@ -41021,7 +41021,7 @@ impl HasBuilder<'static> for PresentTimeGOOGLE {
     type Builder = PresentTimeGOOGLEBuilder;
 }
 
-/// A builder for a [PresentTimeGOOGLE](struct.PresentTimeGOOGLE.html).
+/// A builder for a [`PresentTimeGOOGLE`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PresentTimeGOOGLEBuilder {
@@ -41085,7 +41085,7 @@ impl<'b> HasBuilder<'b> for PresentTimesInfoGOOGLE {
     type Builder = PresentTimesInfoGOOGLEBuilder<'b>;
 }
 
-/// A builder for a [PresentTimesInfoGOOGLE](struct.PresentTimesInfoGOOGLE.html).
+/// A builder for a [`PresentTimesInfoGOOGLE`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PresentTimesInfoGOOGLEBuilder<'b> {
@@ -41151,7 +41151,7 @@ impl HasBuilder<'static> for PrivateDataSlotCreateInfoEXT {
     type Builder = PrivateDataSlotCreateInfoEXTBuilder;
 }
 
-/// A builder for a [PrivateDataSlotCreateInfoEXT](struct.PrivateDataSlotCreateInfoEXT.html).
+/// A builder for a [`PrivateDataSlotCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PrivateDataSlotCreateInfoEXTBuilder {
@@ -41209,7 +41209,7 @@ impl HasBuilder<'static> for ProtectedSubmitInfo {
     type Builder = ProtectedSubmitInfoBuilder;
 }
 
-/// A builder for a [ProtectedSubmitInfo](struct.ProtectedSubmitInfo.html).
+/// A builder for a [`ProtectedSubmitInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ProtectedSubmitInfoBuilder {
@@ -41267,7 +41267,7 @@ impl HasBuilder<'static> for PushConstantRange {
     type Builder = PushConstantRangeBuilder;
 }
 
-/// A builder for a [PushConstantRange](struct.PushConstantRange.html).
+/// A builder for a [`PushConstantRange`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct PushConstantRangeBuilder {
@@ -41324,7 +41324,7 @@ unsafe impl Cast for PushConstantRangeBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [QueryPoolCreateInfo](struct.QueryPoolCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`QueryPoolCreateInfo`].
 pub unsafe trait ExtendsQueryPoolCreateInfo {}
 unsafe impl ExtendsQueryPoolCreateInfo for QueryPoolPerformanceCreateInfoKHR {}
 unsafe impl ExtendsQueryPoolCreateInfo for QueryPoolPerformanceQueryCreateInfoINTEL {}
@@ -41342,7 +41342,7 @@ impl<'b> HasBuilder<'b> for QueryPoolCreateInfo {
     type Builder = QueryPoolCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [QueryPoolCreateInfo](struct.QueryPoolCreateInfo.html).
+/// A builder for a [`QueryPoolCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct QueryPoolCreateInfoBuilder<'b> {
@@ -41430,7 +41430,7 @@ impl<'b> HasBuilder<'b> for QueryPoolPerformanceCreateInfoKHR {
     type Builder = QueryPoolPerformanceCreateInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [QueryPoolPerformanceCreateInfoKHR](struct.QueryPoolPerformanceCreateInfoKHR.html).
+/// A builder for a [`QueryPoolPerformanceCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct QueryPoolPerformanceCreateInfoKHRBuilder<'b> {
@@ -41496,7 +41496,7 @@ impl HasBuilder<'static> for QueryPoolPerformanceQueryCreateInfoINTEL {
     type Builder = QueryPoolPerformanceQueryCreateInfoINTELBuilder;
 }
 
-/// A builder for a [QueryPoolPerformanceQueryCreateInfoINTEL](struct.QueryPoolPerformanceQueryCreateInfoINTEL.html).
+/// A builder for a [`QueryPoolPerformanceQueryCreateInfoINTEL`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct QueryPoolPerformanceQueryCreateInfoINTELBuilder {
@@ -41557,7 +41557,7 @@ impl HasBuilder<'static> for QueueFamilyCheckpointProperties2NV {
     type Builder = QueueFamilyCheckpointProperties2NVBuilder;
 }
 
-/// A builder for a [QueueFamilyCheckpointProperties2NV](struct.QueueFamilyCheckpointProperties2NV.html).
+/// A builder for a [`QueueFamilyCheckpointProperties2NV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct QueueFamilyCheckpointProperties2NVBuilder {
@@ -41618,7 +41618,7 @@ impl HasBuilder<'static> for QueueFamilyCheckpointPropertiesNV {
     type Builder = QueueFamilyCheckpointPropertiesNVBuilder;
 }
 
-/// A builder for a [QueueFamilyCheckpointPropertiesNV](struct.QueueFamilyCheckpointPropertiesNV.html).
+/// A builder for a [`QueueFamilyCheckpointPropertiesNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct QueueFamilyCheckpointPropertiesNVBuilder {
@@ -41679,7 +41679,7 @@ impl HasBuilder<'static> for QueueFamilyGlobalPriorityPropertiesEXT {
     type Builder = QueueFamilyGlobalPriorityPropertiesEXTBuilder;
 }
 
-/// A builder for a [QueueFamilyGlobalPriorityPropertiesEXT](struct.QueueFamilyGlobalPriorityPropertiesEXT.html).
+/// A builder for a [`QueueFamilyGlobalPriorityPropertiesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct QueueFamilyGlobalPriorityPropertiesEXTBuilder {
@@ -41746,7 +41746,7 @@ impl HasBuilder<'static> for QueueFamilyProperties {
     type Builder = QueueFamilyPropertiesBuilder;
 }
 
-/// A builder for a [QueueFamilyProperties](struct.QueueFamilyProperties.html).
+/// A builder for a [`QueueFamilyProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct QueueFamilyPropertiesBuilder {
@@ -41812,7 +41812,7 @@ unsafe impl Cast for QueueFamilyPropertiesBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [QueueFamilyProperties2](struct.QueueFamilyProperties2.html).
+/// A Vulkan struct that can be used to extend a [`QueueFamilyProperties2`].
 pub unsafe trait ExtendsQueueFamilyProperties2 {}
 unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyCheckpointProperties2NV {}
 unsafe impl ExtendsQueueFamilyProperties2 for QueueFamilyCheckpointPropertiesNV {}
@@ -41831,7 +41831,7 @@ impl<'b> HasBuilder<'b> for QueueFamilyProperties2 {
     type Builder = QueueFamilyProperties2Builder<'b>;
 }
 
-/// A builder for a [QueueFamilyProperties2](struct.QueueFamilyProperties2.html).
+/// A builder for a [`QueueFamilyProperties2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct QueueFamilyProperties2Builder<'b> {
@@ -41891,7 +41891,7 @@ unsafe impl<'b> Cast for QueueFamilyProperties2Builder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [RayTracingPipelineCreateInfoKHR](struct.RayTracingPipelineCreateInfoKHR.html).
+/// A Vulkan struct that can be used to extend a [`RayTracingPipelineCreateInfoKHR`].
 pub unsafe trait ExtendsRayTracingPipelineCreateInfoKHR {}
 unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineCreationFeedbackCreateInfoEXT {}
 
@@ -41908,7 +41908,7 @@ impl<'b> HasBuilder<'b> for RayTracingPipelineCreateInfoKHR {
     type Builder = RayTracingPipelineCreateInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [RayTracingPipelineCreateInfoKHR](struct.RayTracingPipelineCreateInfoKHR.html).
+/// A builder for a [`RayTracingPipelineCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RayTracingPipelineCreateInfoKHRBuilder<'b> {
@@ -42039,7 +42039,7 @@ unsafe impl<'b> Cast for RayTracingPipelineCreateInfoKHRBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [RayTracingPipelineCreateInfoNV](struct.RayTracingPipelineCreateInfoNV.html).
+/// A Vulkan struct that can be used to extend a [`RayTracingPipelineCreateInfoNV`].
 pub unsafe trait ExtendsRayTracingPipelineCreateInfoNV {}
 unsafe impl ExtendsRayTracingPipelineCreateInfoNV for PipelineCreationFeedbackCreateInfoEXT {}
 
@@ -42056,7 +42056,7 @@ impl<'b> HasBuilder<'b> for RayTracingPipelineCreateInfoNV {
     type Builder = RayTracingPipelineCreateInfoNVBuilder<'b>;
 }
 
-/// A builder for a [RayTracingPipelineCreateInfoNV](struct.RayTracingPipelineCreateInfoNV.html).
+/// A builder for a [`RayTracingPipelineCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RayTracingPipelineCreateInfoNVBuilder<'b> {
@@ -42170,7 +42170,7 @@ impl HasBuilder<'static> for RayTracingPipelineInterfaceCreateInfoKHR {
     type Builder = RayTracingPipelineInterfaceCreateInfoKHRBuilder;
 }
 
-/// A builder for a [RayTracingPipelineInterfaceCreateInfoKHR](struct.RayTracingPipelineInterfaceCreateInfoKHR.html).
+/// A builder for a [`RayTracingPipelineInterfaceCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RayTracingPipelineInterfaceCreateInfoKHRBuilder {
@@ -42237,7 +42237,7 @@ impl<'b> HasBuilder<'b> for RayTracingShaderGroupCreateInfoKHR {
     type Builder = RayTracingShaderGroupCreateInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [RayTracingShaderGroupCreateInfoKHR](struct.RayTracingShaderGroupCreateInfoKHR.html).
+/// A builder for a [`RayTracingShaderGroupCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RayTracingShaderGroupCreateInfoKHRBuilder<'b> {
@@ -42330,7 +42330,7 @@ impl HasBuilder<'static> for RayTracingShaderGroupCreateInfoNV {
     type Builder = RayTracingShaderGroupCreateInfoNVBuilder;
 }
 
-/// A builder for a [RayTracingShaderGroupCreateInfoNV](struct.RayTracingShaderGroupCreateInfoNV.html).
+/// A builder for a [`RayTracingShaderGroupCreateInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RayTracingShaderGroupCreateInfoNVBuilder {
@@ -42412,7 +42412,7 @@ impl HasBuilder<'static> for Rect2D {
     type Builder = Rect2DBuilder;
 }
 
-/// A builder for a [Rect2D](struct.Rect2D.html).
+/// A builder for a [`Rect2D`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Rect2DBuilder {
@@ -42476,7 +42476,7 @@ impl HasBuilder<'static> for RectLayerKHR {
     type Builder = RectLayerKHRBuilder;
 }
 
-/// A builder for a [RectLayerKHR](struct.RectLayerKHR.html).
+/// A builder for a [`RectLayerKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RectLayerKHRBuilder {
@@ -42546,7 +42546,7 @@ impl HasBuilder<'static> for RefreshCycleDurationGOOGLE {
     type Builder = RefreshCycleDurationGOOGLEBuilder;
 }
 
-/// A builder for a [RefreshCycleDurationGOOGLE](struct.RefreshCycleDurationGOOGLE.html).
+/// A builder for a [`RefreshCycleDurationGOOGLE`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RefreshCycleDurationGOOGLEBuilder {
@@ -42604,7 +42604,7 @@ impl<'b> HasBuilder<'b> for RenderPassAttachmentBeginInfo {
     type Builder = RenderPassAttachmentBeginInfoBuilder<'b>;
 }
 
-/// A builder for a [RenderPassAttachmentBeginInfo](struct.RenderPassAttachmentBeginInfo.html).
+/// A builder for a [`RenderPassAttachmentBeginInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RenderPassAttachmentBeginInfoBuilder<'b> {
@@ -42651,7 +42651,7 @@ unsafe impl<'b> Cast for RenderPassAttachmentBeginInfoBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [RenderPassBeginInfo](struct.RenderPassBeginInfo.html).
+/// A Vulkan struct that can be used to extend a [`RenderPassBeginInfo`].
 pub unsafe trait ExtendsRenderPassBeginInfo {}
 unsafe impl ExtendsRenderPassBeginInfo for DeviceGroupRenderPassBeginInfo {}
 unsafe impl ExtendsRenderPassBeginInfo for RenderPassAttachmentBeginInfo {}
@@ -42671,7 +42671,7 @@ impl<'b> HasBuilder<'b> for RenderPassBeginInfo {
     type Builder = RenderPassBeginInfoBuilder<'b>;
 }
 
-/// A builder for a [RenderPassBeginInfo](struct.RenderPassBeginInfo.html).
+/// A builder for a [`RenderPassBeginInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RenderPassBeginInfoBuilder<'b> {
@@ -42747,7 +42747,7 @@ unsafe impl<'b> Cast for RenderPassBeginInfoBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [RenderPassCreateInfo](struct.RenderPassCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`RenderPassCreateInfo`].
 pub unsafe trait ExtendsRenderPassCreateInfo {}
 unsafe impl ExtendsRenderPassCreateInfo for RenderPassFragmentDensityMapCreateInfoEXT {}
 unsafe impl ExtendsRenderPassCreateInfo for RenderPassInputAttachmentAspectCreateInfo {}
@@ -42766,7 +42766,7 @@ impl<'b> HasBuilder<'b> for RenderPassCreateInfo {
     type Builder = RenderPassCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [RenderPassCreateInfo](struct.RenderPassCreateInfo.html).
+/// A builder for a [`RenderPassCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RenderPassCreateInfoBuilder<'b> {
@@ -42850,7 +42850,7 @@ unsafe impl<'b> Cast for RenderPassCreateInfoBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [RenderPassCreateInfo2](struct.RenderPassCreateInfo2.html).
+/// A Vulkan struct that can be used to extend a [`RenderPassCreateInfo2`].
 pub unsafe trait ExtendsRenderPassCreateInfo2 {}
 unsafe impl ExtendsRenderPassCreateInfo2 for RenderPassFragmentDensityMapCreateInfoEXT {}
 
@@ -42867,7 +42867,7 @@ impl<'b> HasBuilder<'b> for RenderPassCreateInfo2 {
     type Builder = RenderPassCreateInfo2Builder<'b>;
 }
 
-/// A builder for a [RenderPassCreateInfo2](struct.RenderPassCreateInfo2.html).
+/// A builder for a [`RenderPassCreateInfo2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RenderPassCreateInfo2Builder<'b> {
@@ -42971,7 +42971,7 @@ impl HasBuilder<'static> for RenderPassFragmentDensityMapCreateInfoEXT {
     type Builder = RenderPassFragmentDensityMapCreateInfoEXTBuilder;
 }
 
-/// A builder for a [RenderPassFragmentDensityMapCreateInfoEXT](struct.RenderPassFragmentDensityMapCreateInfoEXT.html).
+/// A builder for a [`RenderPassFragmentDensityMapCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RenderPassFragmentDensityMapCreateInfoEXTBuilder {
@@ -43032,7 +43032,7 @@ impl<'b> HasBuilder<'b> for RenderPassInputAttachmentAspectCreateInfo {
     type Builder = RenderPassInputAttachmentAspectCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [RenderPassInputAttachmentAspectCreateInfo](struct.RenderPassInputAttachmentAspectCreateInfo.html).
+/// A builder for a [`RenderPassInputAttachmentAspectCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RenderPassInputAttachmentAspectCreateInfoBuilder<'b> {
@@ -43095,7 +43095,7 @@ impl<'b> HasBuilder<'b> for RenderPassMultiviewCreateInfo {
     type Builder = RenderPassMultiviewCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [RenderPassMultiviewCreateInfo](struct.RenderPassMultiviewCreateInfo.html).
+/// A builder for a [`RenderPassMultiviewCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RenderPassMultiviewCreateInfoBuilder<'b> {
@@ -43169,7 +43169,7 @@ impl<'b> HasBuilder<'b> for RenderPassSampleLocationsBeginInfoEXT {
     type Builder = RenderPassSampleLocationsBeginInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [RenderPassSampleLocationsBeginInfoEXT](struct.RenderPassSampleLocationsBeginInfoEXT.html).
+/// A builder for a [`RenderPassSampleLocationsBeginInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RenderPassSampleLocationsBeginInfoEXTBuilder<'b> {
@@ -43244,7 +43244,7 @@ impl HasBuilder<'static> for RenderPassTransformBeginInfoQCOM {
     type Builder = RenderPassTransformBeginInfoQCOMBuilder;
 }
 
-/// A builder for a [RenderPassTransformBeginInfoQCOM](struct.RenderPassTransformBeginInfoQCOM.html).
+/// A builder for a [`RenderPassTransformBeginInfoQCOM`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct RenderPassTransformBeginInfoQCOMBuilder {
@@ -43302,7 +43302,7 @@ impl<'b> HasBuilder<'b> for ResolveImageInfo2KHR {
     type Builder = ResolveImageInfo2KHRBuilder<'b>;
 }
 
-/// A builder for a [ResolveImageInfo2KHR](struct.ResolveImageInfo2KHR.html).
+/// A builder for a [`ResolveImageInfo2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ResolveImageInfo2KHRBuilder<'b> {
@@ -43386,7 +43386,7 @@ impl HasBuilder<'static> for SRTDataNV {
     type Builder = SRTDataNVBuilder;
 }
 
-/// A builder for a [SRTDataNV](struct.SRTDataNV.html).
+/// A builder for a [`SRTDataNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SRTDataNVBuilder {
@@ -43534,7 +43534,7 @@ impl HasBuilder<'static> for SampleLocationEXT {
     type Builder = SampleLocationEXTBuilder;
 }
 
-/// A builder for a [SampleLocationEXT](struct.SampleLocationEXT.html).
+/// A builder for a [`SampleLocationEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SampleLocationEXTBuilder {
@@ -43598,7 +43598,7 @@ impl<'b> HasBuilder<'b> for SampleLocationsInfoEXT {
     type Builder = SampleLocationsInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [SampleLocationsInfoEXT](struct.SampleLocationsInfoEXT.html).
+/// A builder for a [`SampleLocationsInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SampleLocationsInfoEXTBuilder<'b> {
@@ -43666,7 +43666,7 @@ unsafe impl<'b> Cast for SampleLocationsInfoEXTBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [SamplerCreateInfo](struct.SamplerCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`SamplerCreateInfo`].
 pub unsafe trait ExtendsSamplerCreateInfo {}
 unsafe impl ExtendsSamplerCreateInfo for SamplerCustomBorderColorCreateInfoEXT {}
 unsafe impl ExtendsSamplerCreateInfo for SamplerReductionModeCreateInfo {}
@@ -43685,7 +43685,7 @@ impl<'b> HasBuilder<'b> for SamplerCreateInfo {
     type Builder = SamplerCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [SamplerCreateInfo](struct.SamplerCreateInfo.html).
+/// A builder for a [`SamplerCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SamplerCreateInfoBuilder<'b> {
@@ -43845,7 +43845,7 @@ impl HasBuilder<'static> for SamplerCustomBorderColorCreateInfoEXT {
     type Builder = SamplerCustomBorderColorCreateInfoEXTBuilder;
 }
 
-/// A builder for a [SamplerCustomBorderColorCreateInfoEXT](struct.SamplerCustomBorderColorCreateInfoEXT.html).
+/// A builder for a [`SamplerCustomBorderColorCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SamplerCustomBorderColorCreateInfoEXTBuilder {
@@ -43909,7 +43909,7 @@ impl HasBuilder<'static> for SamplerReductionModeCreateInfo {
     type Builder = SamplerReductionModeCreateInfoBuilder;
 }
 
-/// A builder for a [SamplerReductionModeCreateInfo](struct.SamplerReductionModeCreateInfo.html).
+/// A builder for a [`SamplerReductionModeCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SamplerReductionModeCreateInfoBuilder {
@@ -43954,7 +43954,7 @@ unsafe impl Cast for SamplerReductionModeCreateInfoBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [SamplerYcbcrConversionCreateInfo](struct.SamplerYcbcrConversionCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`SamplerYcbcrConversionCreateInfo`].
 pub unsafe trait ExtendsSamplerYcbcrConversionCreateInfo {}
 unsafe impl ExtendsSamplerYcbcrConversionCreateInfo for ExternalFormatANDROID {}
 
@@ -43971,7 +43971,7 @@ impl<'b> HasBuilder<'b> for SamplerYcbcrConversionCreateInfo {
     type Builder = SamplerYcbcrConversionCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [SamplerYcbcrConversionCreateInfo](struct.SamplerYcbcrConversionCreateInfo.html).
+/// A builder for a [`SamplerYcbcrConversionCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SamplerYcbcrConversionCreateInfoBuilder<'b> {
@@ -44083,7 +44083,7 @@ impl HasBuilder<'static> for SamplerYcbcrConversionImageFormatProperties {
     type Builder = SamplerYcbcrConversionImageFormatPropertiesBuilder;
 }
 
-/// A builder for a [SamplerYcbcrConversionImageFormatProperties](struct.SamplerYcbcrConversionImageFormatProperties.html).
+/// A builder for a [`SamplerYcbcrConversionImageFormatProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SamplerYcbcrConversionImageFormatPropertiesBuilder {
@@ -44145,7 +44145,7 @@ impl HasBuilder<'static> for SamplerYcbcrConversionInfo {
     type Builder = SamplerYcbcrConversionInfoBuilder;
 }
 
-/// A builder for a [SamplerYcbcrConversionInfo](struct.SamplerYcbcrConversionInfo.html).
+/// A builder for a [`SamplerYcbcrConversionInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SamplerYcbcrConversionInfoBuilder {
@@ -44203,7 +44203,7 @@ impl<'b> HasBuilder<'b> for ScreenSurfaceCreateInfoQNX {
     type Builder = ScreenSurfaceCreateInfoQNXBuilder<'b>;
 }
 
-/// A builder for a [ScreenSurfaceCreateInfoQNX](struct.ScreenSurfaceCreateInfoQNX.html).
+/// A builder for a [`ScreenSurfaceCreateInfoQNX`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ScreenSurfaceCreateInfoQNXBuilder<'b> {
@@ -44261,7 +44261,7 @@ unsafe impl<'b> Cast for ScreenSurfaceCreateInfoQNXBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [SemaphoreCreateInfo](struct.SemaphoreCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`SemaphoreCreateInfo`].
 pub unsafe trait ExtendsSemaphoreCreateInfo {}
 unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreCreateInfo {}
 unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreWin32HandleInfoKHR {}
@@ -44280,7 +44280,7 @@ impl<'b> HasBuilder<'b> for SemaphoreCreateInfo {
     type Builder = SemaphoreCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [SemaphoreCreateInfo](struct.SemaphoreCreateInfo.html).
+/// A builder for a [`SemaphoreCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SemaphoreCreateInfoBuilder<'b> {
@@ -44350,7 +44350,7 @@ impl HasBuilder<'static> for SemaphoreGetFdInfoKHR {
     type Builder = SemaphoreGetFdInfoKHRBuilder;
 }
 
-/// A builder for a [SemaphoreGetFdInfoKHR](struct.SemaphoreGetFdInfoKHR.html).
+/// A builder for a [`SemaphoreGetFdInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SemaphoreGetFdInfoKHRBuilder {
@@ -44414,7 +44414,7 @@ impl HasBuilder<'static> for SemaphoreGetWin32HandleInfoKHR {
     type Builder = SemaphoreGetWin32HandleInfoKHRBuilder;
 }
 
-/// A builder for a [SemaphoreGetWin32HandleInfoKHR](struct.SemaphoreGetWin32HandleInfoKHR.html).
+/// A builder for a [`SemaphoreGetWin32HandleInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SemaphoreGetWin32HandleInfoKHRBuilder {
@@ -44478,7 +44478,7 @@ impl HasBuilder<'static> for SemaphoreGetZirconHandleInfoFUCHSIA {
     type Builder = SemaphoreGetZirconHandleInfoFUCHSIABuilder;
 }
 
-/// A builder for a [SemaphoreGetZirconHandleInfoFUCHSIA](struct.SemaphoreGetZirconHandleInfoFUCHSIA.html).
+/// A builder for a [`SemaphoreGetZirconHandleInfoFUCHSIA`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SemaphoreGetZirconHandleInfoFUCHSIABuilder {
@@ -44542,7 +44542,7 @@ impl HasBuilder<'static> for SemaphoreSignalInfo {
     type Builder = SemaphoreSignalInfoBuilder;
 }
 
-/// A builder for a [SemaphoreSignalInfo](struct.SemaphoreSignalInfo.html).
+/// A builder for a [`SemaphoreSignalInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SemaphoreSignalInfoBuilder {
@@ -44606,7 +44606,7 @@ impl HasBuilder<'static> for SemaphoreSubmitInfoKHR {
     type Builder = SemaphoreSubmitInfoKHRBuilder;
 }
 
-/// A builder for a [SemaphoreSubmitInfoKHR](struct.SemaphoreSubmitInfoKHR.html).
+/// A builder for a [`SemaphoreSubmitInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SemaphoreSubmitInfoKHRBuilder {
@@ -44682,7 +44682,7 @@ impl HasBuilder<'static> for SemaphoreTypeCreateInfo {
     type Builder = SemaphoreTypeCreateInfoBuilder;
 }
 
-/// A builder for a [SemaphoreTypeCreateInfo](struct.SemaphoreTypeCreateInfo.html).
+/// A builder for a [`SemaphoreTypeCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SemaphoreTypeCreateInfoBuilder {
@@ -44746,7 +44746,7 @@ impl<'b> HasBuilder<'b> for SemaphoreWaitInfo {
     type Builder = SemaphoreWaitInfoBuilder<'b>;
 }
 
-/// A builder for a [SemaphoreWaitInfo](struct.SemaphoreWaitInfo.html).
+/// A builder for a [`SemaphoreWaitInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SemaphoreWaitInfoBuilder<'b> {
@@ -44819,7 +44819,7 @@ impl HasBuilder<'static> for SetStateFlagsIndirectCommandNV {
     type Builder = SetStateFlagsIndirectCommandNVBuilder;
 }
 
-/// A builder for a [SetStateFlagsIndirectCommandNV](struct.SetStateFlagsIndirectCommandNV.html).
+/// A builder for a [`SetStateFlagsIndirectCommandNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SetStateFlagsIndirectCommandNVBuilder {
@@ -44864,7 +44864,7 @@ unsafe impl Cast for SetStateFlagsIndirectCommandNVBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [ShaderModuleCreateInfo](struct.ShaderModuleCreateInfo.html).
+/// A Vulkan struct that can be used to extend a [`ShaderModuleCreateInfo`].
 pub unsafe trait ExtendsShaderModuleCreateInfo {}
 unsafe impl ExtendsShaderModuleCreateInfo for ShaderModuleValidationCacheCreateInfoEXT {}
 
@@ -44881,7 +44881,7 @@ impl<'b> HasBuilder<'b> for ShaderModuleCreateInfo {
     type Builder = ShaderModuleCreateInfoBuilder<'b>;
 }
 
-/// A builder for a [ShaderModuleCreateInfo](struct.ShaderModuleCreateInfo.html).
+/// A builder for a [`ShaderModuleCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ShaderModuleCreateInfoBuilder<'b> {
@@ -44963,7 +44963,7 @@ impl HasBuilder<'static> for ShaderModuleValidationCacheCreateInfoEXT {
     type Builder = ShaderModuleValidationCacheCreateInfoEXTBuilder;
 }
 
-/// A builder for a [ShaderModuleValidationCacheCreateInfoEXT](struct.ShaderModuleValidationCacheCreateInfoEXT.html).
+/// A builder for a [`ShaderModuleValidationCacheCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ShaderModuleValidationCacheCreateInfoEXTBuilder {
@@ -45021,7 +45021,7 @@ impl HasBuilder<'static> for ShaderResourceUsageAMD {
     type Builder = ShaderResourceUsageAMDBuilder;
 }
 
-/// A builder for a [ShaderResourceUsageAMD](struct.ShaderResourceUsageAMD.html).
+/// A builder for a [`ShaderResourceUsageAMD`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ShaderResourceUsageAMDBuilder {
@@ -45103,7 +45103,7 @@ impl HasBuilder<'static> for ShaderStatisticsInfoAMD {
     type Builder = ShaderStatisticsInfoAMDBuilder;
 }
 
-/// A builder for a [ShaderStatisticsInfoAMD](struct.ShaderStatisticsInfoAMD.html).
+/// A builder for a [`ShaderStatisticsInfoAMD`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ShaderStatisticsInfoAMDBuilder {
@@ -45200,7 +45200,7 @@ impl<'b> HasBuilder<'b> for ShadingRatePaletteNV {
     type Builder = ShadingRatePaletteNVBuilder<'b>;
 }
 
-/// A builder for a [ShadingRatePaletteNV](struct.ShadingRatePaletteNV.html).
+/// A builder for a [`ShadingRatePaletteNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ShadingRatePaletteNVBuilder<'b> {
@@ -45263,7 +45263,7 @@ impl HasBuilder<'static> for SharedPresentSurfaceCapabilitiesKHR {
     type Builder = SharedPresentSurfaceCapabilitiesKHRBuilder;
 }
 
-/// A builder for a [SharedPresentSurfaceCapabilitiesKHR](struct.SharedPresentSurfaceCapabilitiesKHR.html).
+/// A builder for a [`SharedPresentSurfaceCapabilitiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SharedPresentSurfaceCapabilitiesKHRBuilder {
@@ -45324,7 +45324,7 @@ impl<'b> HasBuilder<'b> for SparseBufferMemoryBindInfo {
     type Builder = SparseBufferMemoryBindInfoBuilder<'b>;
 }
 
-/// A builder for a [SparseBufferMemoryBindInfo](struct.SparseBufferMemoryBindInfo.html).
+/// A builder for a [`SparseBufferMemoryBindInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SparseBufferMemoryBindInfoBuilder<'b> {
@@ -45390,7 +45390,7 @@ impl HasBuilder<'static> for SparseImageFormatProperties {
     type Builder = SparseImageFormatPropertiesBuilder;
 }
 
-/// A builder for a [SparseImageFormatProperties](struct.SparseImageFormatProperties.html).
+/// A builder for a [`SparseImageFormatProperties`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SparseImageFormatPropertiesBuilder {
@@ -45460,7 +45460,7 @@ impl HasBuilder<'static> for SparseImageFormatProperties2 {
     type Builder = SparseImageFormatProperties2Builder;
 }
 
-/// A builder for a [SparseImageFormatProperties2](struct.SparseImageFormatProperties2.html).
+/// A builder for a [`SparseImageFormatProperties2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SparseImageFormatProperties2Builder {
@@ -45521,7 +45521,7 @@ impl HasBuilder<'static> for SparseImageMemoryBind {
     type Builder = SparseImageMemoryBindBuilder;
 }
 
-/// A builder for a [SparseImageMemoryBind](struct.SparseImageMemoryBind.html).
+/// A builder for a [`SparseImageMemoryBind`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SparseImageMemoryBindBuilder {
@@ -45609,7 +45609,7 @@ impl<'b> HasBuilder<'b> for SparseImageMemoryBindInfo {
     type Builder = SparseImageMemoryBindInfoBuilder<'b>;
 }
 
-/// A builder for a [SparseImageMemoryBindInfo](struct.SparseImageMemoryBindInfo.html).
+/// A builder for a [`SparseImageMemoryBindInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SparseImageMemoryBindInfoBuilder<'b> {
@@ -45675,7 +45675,7 @@ impl HasBuilder<'static> for SparseImageMemoryRequirements {
     type Builder = SparseImageMemoryRequirementsBuilder;
 }
 
-/// A builder for a [SparseImageMemoryRequirements](struct.SparseImageMemoryRequirements.html).
+/// A builder for a [`SparseImageMemoryRequirements`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SparseImageMemoryRequirementsBuilder {
@@ -45760,7 +45760,7 @@ impl HasBuilder<'static> for SparseImageMemoryRequirements2 {
     type Builder = SparseImageMemoryRequirements2Builder;
 }
 
-/// A builder for a [SparseImageMemoryRequirements2](struct.SparseImageMemoryRequirements2.html).
+/// A builder for a [`SparseImageMemoryRequirements2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SparseImageMemoryRequirements2Builder {
@@ -45821,7 +45821,7 @@ impl<'b> HasBuilder<'b> for SparseImageOpaqueMemoryBindInfo {
     type Builder = SparseImageOpaqueMemoryBindInfoBuilder<'b>;
 }
 
-/// A builder for a [SparseImageOpaqueMemoryBindInfo](struct.SparseImageOpaqueMemoryBindInfo.html).
+/// A builder for a [`SparseImageOpaqueMemoryBindInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SparseImageOpaqueMemoryBindInfoBuilder<'b> {
@@ -45887,7 +45887,7 @@ impl HasBuilder<'static> for SparseMemoryBind {
     type Builder = SparseMemoryBindBuilder;
 }
 
-/// A builder for a [SparseMemoryBind](struct.SparseMemoryBind.html).
+/// A builder for a [`SparseMemoryBind`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SparseMemoryBindBuilder {
@@ -45969,7 +45969,7 @@ impl<'b> HasBuilder<'b> for SpecializationInfo {
     type Builder = SpecializationInfoBuilder<'b>;
 }
 
-/// A builder for a [SpecializationInfo](struct.SpecializationInfo.html).
+/// A builder for a [`SpecializationInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SpecializationInfoBuilder<'b> {
@@ -46039,7 +46039,7 @@ impl HasBuilder<'static> for SpecializationMapEntry {
     type Builder = SpecializationMapEntryBuilder;
 }
 
-/// A builder for a [SpecializationMapEntry](struct.SpecializationMapEntry.html).
+/// A builder for a [`SpecializationMapEntry`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SpecializationMapEntryBuilder {
@@ -46109,7 +46109,7 @@ impl HasBuilder<'static> for StencilOpState {
     type Builder = StencilOpStateBuilder;
 }
 
-/// A builder for a [StencilOpState](struct.StencilOpState.html).
+/// A builder for a [`StencilOpState`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct StencilOpStateBuilder {
@@ -46203,7 +46203,7 @@ impl HasBuilder<'static> for StreamDescriptorSurfaceCreateInfoGGP {
     type Builder = StreamDescriptorSurfaceCreateInfoGGPBuilder;
 }
 
-/// A builder for a [StreamDescriptorSurfaceCreateInfoGGP](struct.StreamDescriptorSurfaceCreateInfoGGP.html).
+/// A builder for a [`StreamDescriptorSurfaceCreateInfoGGP`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct StreamDescriptorSurfaceCreateInfoGGPBuilder {
@@ -46267,7 +46267,7 @@ impl HasBuilder<'static> for StridedDeviceAddressRegionKHR {
     type Builder = StridedDeviceAddressRegionKHRBuilder;
 }
 
-/// A builder for a [StridedDeviceAddressRegionKHR](struct.StridedDeviceAddressRegionKHR.html).
+/// A builder for a [`StridedDeviceAddressRegionKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct StridedDeviceAddressRegionKHRBuilder {
@@ -46324,7 +46324,7 @@ unsafe impl Cast for StridedDeviceAddressRegionKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [SubmitInfo](struct.SubmitInfo.html).
+/// A Vulkan struct that can be used to extend a [`SubmitInfo`].
 pub unsafe trait ExtendsSubmitInfo {}
 unsafe impl ExtendsSubmitInfo for D3D12FenceSubmitInfoKHR {}
 unsafe impl ExtendsSubmitInfo for DeviceGroupSubmitInfo {}
@@ -46347,7 +46347,7 @@ impl<'b> HasBuilder<'b> for SubmitInfo {
     type Builder = SubmitInfoBuilder<'b>;
 }
 
-/// A builder for a [SubmitInfo](struct.SubmitInfo.html).
+/// A builder for a [`SubmitInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SubmitInfoBuilder<'b> {
@@ -46426,7 +46426,7 @@ unsafe impl<'b> Cast for SubmitInfoBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [SubmitInfo2KHR](struct.SubmitInfo2KHR.html).
+/// A Vulkan struct that can be used to extend a [`SubmitInfo2KHR`].
 pub unsafe trait ExtendsSubmitInfo2KHR {}
 unsafe impl ExtendsSubmitInfo2KHR for PerformanceQuerySubmitInfoKHR {}
 unsafe impl ExtendsSubmitInfo2KHR for Win32KeyedMutexAcquireReleaseInfoKHR {}
@@ -46445,7 +46445,7 @@ impl<'b> HasBuilder<'b> for SubmitInfo2KHR {
     type Builder = SubmitInfo2KHRBuilder<'b>;
 }
 
-/// A builder for a [SubmitInfo2KHR](struct.SubmitInfo2KHR.html).
+/// A builder for a [`SubmitInfo2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SubmitInfo2KHRBuilder<'b> {
@@ -46545,7 +46545,7 @@ impl HasBuilder<'static> for SubpassBeginInfo {
     type Builder = SubpassBeginInfoBuilder;
 }
 
-/// A builder for a [SubpassBeginInfo](struct.SubpassBeginInfo.html).
+/// A builder for a [`SubpassBeginInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SubpassBeginInfoBuilder {
@@ -46603,7 +46603,7 @@ impl HasBuilder<'static> for SubpassDependency {
     type Builder = SubpassDependencyBuilder;
 }
 
-/// A builder for a [SubpassDependency](struct.SubpassDependency.html).
+/// A builder for a [`SubpassDependency`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SubpassDependencyBuilder {
@@ -46684,7 +46684,7 @@ unsafe impl Cast for SubpassDependencyBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [SubpassDependency2](struct.SubpassDependency2.html).
+/// A Vulkan struct that can be used to extend a [`SubpassDependency2`].
 pub unsafe trait ExtendsSubpassDependency2 {}
 unsafe impl ExtendsSubpassDependency2 for MemoryBarrier2KHR {}
 
@@ -46701,7 +46701,7 @@ impl<'b> HasBuilder<'b> for SubpassDependency2 {
     type Builder = SubpassDependency2Builder<'b>;
 }
 
-/// A builder for a [SubpassDependency2](struct.SubpassDependency2.html).
+/// A builder for a [`SubpassDependency2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SubpassDependency2Builder<'b> {
@@ -46813,7 +46813,7 @@ impl<'b> HasBuilder<'b> for SubpassDescription {
     type Builder = SubpassDescriptionBuilder<'b>;
 }
 
-/// A builder for a [SubpassDescription](struct.SubpassDescription.html).
+/// A builder for a [`SubpassDescription`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SubpassDescriptionBuilder<'b> {
@@ -46917,7 +46917,7 @@ unsafe impl<'b> Cast for SubpassDescriptionBuilder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [SubpassDescription2](struct.SubpassDescription2.html).
+/// A Vulkan struct that can be used to extend a [`SubpassDescription2`].
 pub unsafe trait ExtendsSubpassDescription2 {}
 unsafe impl ExtendsSubpassDescription2 for FragmentShadingRateAttachmentInfoKHR {}
 unsafe impl ExtendsSubpassDescription2 for SubpassDescriptionDepthStencilResolve {}
@@ -46935,7 +46935,7 @@ impl<'b> HasBuilder<'b> for SubpassDescription2 {
     type Builder = SubpassDescription2Builder<'b>;
 }
 
-/// A builder for a [SubpassDescription2](struct.SubpassDescription2.html).
+/// A builder for a [`SubpassDescription2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SubpassDescription2Builder<'b> {
@@ -47069,7 +47069,7 @@ impl<'b> HasBuilder<'b> for SubpassDescriptionDepthStencilResolve {
     type Builder = SubpassDescriptionDepthStencilResolveBuilder<'b>;
 }
 
-/// A builder for a [SubpassDescriptionDepthStencilResolve](struct.SubpassDescriptionDepthStencilResolve.html).
+/// A builder for a [`SubpassDescriptionDepthStencilResolve`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SubpassDescriptionDepthStencilResolveBuilder<'b> {
@@ -47143,7 +47143,7 @@ impl HasBuilder<'static> for SubpassEndInfo {
     type Builder = SubpassEndInfoBuilder;
 }
 
-/// A builder for a [SubpassEndInfo](struct.SubpassEndInfo.html).
+/// A builder for a [`SubpassEndInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SubpassEndInfoBuilder {
@@ -47195,7 +47195,7 @@ impl<'b> HasBuilder<'b> for SubpassSampleLocationsEXT {
     type Builder = SubpassSampleLocationsEXTBuilder<'b>;
 }
 
-/// A builder for a [SubpassSampleLocationsEXT](struct.SubpassSampleLocationsEXT.html).
+/// A builder for a [`SubpassSampleLocationsEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SubpassSampleLocationsEXTBuilder<'b> {
@@ -47263,7 +47263,7 @@ impl HasBuilder<'static> for SubpassShadingPipelineCreateInfoHUAWEI {
     type Builder = SubpassShadingPipelineCreateInfoHUAWEIBuilder;
 }
 
-/// A builder for a [SubpassShadingPipelineCreateInfoHUAWEI](struct.SubpassShadingPipelineCreateInfoHUAWEI.html).
+/// A builder for a [`SubpassShadingPipelineCreateInfoHUAWEI`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SubpassShadingPipelineCreateInfoHUAWEIBuilder {
@@ -47327,7 +47327,7 @@ impl HasBuilder<'static> for SubresourceLayout {
     type Builder = SubresourceLayoutBuilder;
 }
 
-/// A builder for a [SubresourceLayout](struct.SubresourceLayout.html).
+/// A builder for a [`SubresourceLayout`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SubresourceLayoutBuilder {
@@ -47409,7 +47409,7 @@ impl HasBuilder<'static> for SurfaceCapabilities2EXT {
     type Builder = SurfaceCapabilities2EXTBuilder;
 }
 
-/// A builder for a [SurfaceCapabilities2EXT](struct.SurfaceCapabilities2EXT.html).
+/// A builder for a [`SurfaceCapabilities2EXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SurfaceCapabilities2EXTBuilder {
@@ -47520,7 +47520,7 @@ unsafe impl Cast for SurfaceCapabilities2EXTBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [SurfaceCapabilities2KHR](struct.SurfaceCapabilities2KHR.html).
+/// A Vulkan struct that can be used to extend a [`SurfaceCapabilities2KHR`].
 pub unsafe trait ExtendsSurfaceCapabilities2KHR {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for DisplayNativeHdrSurfaceCapabilitiesAMD {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for SharedPresentSurfaceCapabilitiesKHR {}
@@ -47540,7 +47540,7 @@ impl<'b> HasBuilder<'b> for SurfaceCapabilities2KHR {
     type Builder = SurfaceCapabilities2KHRBuilder<'b>;
 }
 
-/// A builder for a [SurfaceCapabilities2KHR](struct.SurfaceCapabilities2KHR.html).
+/// A builder for a [`SurfaceCapabilities2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SurfaceCapabilities2KHRBuilder<'b> {
@@ -47613,7 +47613,7 @@ impl HasBuilder<'static> for SurfaceCapabilitiesFullScreenExclusiveEXT {
     type Builder = SurfaceCapabilitiesFullScreenExclusiveEXTBuilder;
 }
 
-/// A builder for a [SurfaceCapabilitiesFullScreenExclusiveEXT](struct.SurfaceCapabilitiesFullScreenExclusiveEXT.html).
+/// A builder for a [`SurfaceCapabilitiesFullScreenExclusiveEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SurfaceCapabilitiesFullScreenExclusiveEXTBuilder {
@@ -47674,7 +47674,7 @@ impl HasBuilder<'static> for SurfaceCapabilitiesKHR {
     type Builder = SurfaceCapabilitiesKHRBuilder;
 }
 
-/// A builder for a [SurfaceCapabilitiesKHR](struct.SurfaceCapabilitiesKHR.html).
+/// A builder for a [`SurfaceCapabilitiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SurfaceCapabilitiesKHRBuilder {
@@ -47789,7 +47789,7 @@ impl HasBuilder<'static> for SurfaceFormat2KHR {
     type Builder = SurfaceFormat2KHRBuilder;
 }
 
-/// A builder for a [SurfaceFormat2KHR](struct.SurfaceFormat2KHR.html).
+/// A builder for a [`SurfaceFormat2KHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SurfaceFormat2KHRBuilder {
@@ -47847,7 +47847,7 @@ impl HasBuilder<'static> for SurfaceFormatKHR {
     type Builder = SurfaceFormatKHRBuilder;
 }
 
-/// A builder for a [SurfaceFormatKHR](struct.SurfaceFormatKHR.html).
+/// A builder for a [`SurfaceFormatKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SurfaceFormatKHRBuilder {
@@ -47911,7 +47911,7 @@ impl HasBuilder<'static> for SurfaceFullScreenExclusiveInfoEXT {
     type Builder = SurfaceFullScreenExclusiveInfoEXTBuilder;
 }
 
-/// A builder for a [SurfaceFullScreenExclusiveInfoEXT](struct.SurfaceFullScreenExclusiveInfoEXT.html).
+/// A builder for a [`SurfaceFullScreenExclusiveInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SurfaceFullScreenExclusiveInfoEXTBuilder {
@@ -47969,7 +47969,7 @@ impl HasBuilder<'static> for SurfaceFullScreenExclusiveWin32InfoEXT {
     type Builder = SurfaceFullScreenExclusiveWin32InfoEXTBuilder;
 }
 
-/// A builder for a [SurfaceFullScreenExclusiveWin32InfoEXT](struct.SurfaceFullScreenExclusiveWin32InfoEXT.html).
+/// A builder for a [`SurfaceFullScreenExclusiveWin32InfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SurfaceFullScreenExclusiveWin32InfoEXTBuilder {
@@ -48027,7 +48027,7 @@ impl HasBuilder<'static> for SurfaceProtectedCapabilitiesKHR {
     type Builder = SurfaceProtectedCapabilitiesKHRBuilder;
 }
 
-/// A builder for a [SurfaceProtectedCapabilitiesKHR](struct.SurfaceProtectedCapabilitiesKHR.html).
+/// A builder for a [`SurfaceProtectedCapabilitiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SurfaceProtectedCapabilitiesKHRBuilder {
@@ -48085,7 +48085,7 @@ impl HasBuilder<'static> for SwapchainCounterCreateInfoEXT {
     type Builder = SwapchainCounterCreateInfoEXTBuilder;
 }
 
-/// A builder for a [SwapchainCounterCreateInfoEXT](struct.SwapchainCounterCreateInfoEXT.html).
+/// A builder for a [`SwapchainCounterCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SwapchainCounterCreateInfoEXTBuilder {
@@ -48130,7 +48130,7 @@ unsafe impl Cast for SwapchainCounterCreateInfoEXTBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [SwapchainCreateInfoKHR](struct.SwapchainCreateInfoKHR.html).
+/// A Vulkan struct that can be used to extend a [`SwapchainCreateInfoKHR`].
 pub unsafe trait ExtendsSwapchainCreateInfoKHR {}
 unsafe impl ExtendsSwapchainCreateInfoKHR for DeviceGroupSwapchainCreateInfoKHR {}
 unsafe impl ExtendsSwapchainCreateInfoKHR for ImageFormatListCreateInfo {}
@@ -48152,7 +48152,7 @@ impl<'b> HasBuilder<'b> for SwapchainCreateInfoKHR {
     type Builder = SwapchainCreateInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [SwapchainCreateInfoKHR](struct.SwapchainCreateInfoKHR.html).
+/// A builder for a [`SwapchainCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SwapchainCreateInfoKHRBuilder<'b> {
@@ -48307,7 +48307,7 @@ impl HasBuilder<'static> for SwapchainDisplayNativeHdrCreateInfoAMD {
     type Builder = SwapchainDisplayNativeHdrCreateInfoAMDBuilder;
 }
 
-/// A builder for a [SwapchainDisplayNativeHdrCreateInfoAMD](struct.SwapchainDisplayNativeHdrCreateInfoAMD.html).
+/// A builder for a [`SwapchainDisplayNativeHdrCreateInfoAMD`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct SwapchainDisplayNativeHdrCreateInfoAMDBuilder {
@@ -48365,7 +48365,7 @@ impl HasBuilder<'static> for TextureLODGatherFormatPropertiesAMD {
     type Builder = TextureLODGatherFormatPropertiesAMDBuilder;
 }
 
-/// A builder for a [TextureLODGatherFormatPropertiesAMD](struct.TextureLODGatherFormatPropertiesAMD.html).
+/// A builder for a [`TextureLODGatherFormatPropertiesAMD`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct TextureLODGatherFormatPropertiesAMDBuilder {
@@ -48427,7 +48427,7 @@ impl<'b> HasBuilder<'b> for TimelineSemaphoreSubmitInfo {
     type Builder = TimelineSemaphoreSubmitInfoBuilder<'b>;
 }
 
-/// A builder for a [TimelineSemaphoreSubmitInfo](struct.TimelineSemaphoreSubmitInfo.html).
+/// A builder for a [`TimelineSemaphoreSubmitInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct TimelineSemaphoreSubmitInfoBuilder<'b> {
@@ -48506,7 +48506,7 @@ impl HasBuilder<'static> for TraceRaysIndirectCommandKHR {
     type Builder = TraceRaysIndirectCommandKHRBuilder;
 }
 
-/// A builder for a [TraceRaysIndirectCommandKHR](struct.TraceRaysIndirectCommandKHR.html).
+/// A builder for a [`TraceRaysIndirectCommandKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct TraceRaysIndirectCommandKHRBuilder {
@@ -48576,7 +48576,7 @@ impl HasBuilder<'static> for TransformMatrixKHR {
     type Builder = TransformMatrixKHRBuilder;
 }
 
-/// A builder for a [TransformMatrixKHR](struct.TransformMatrixKHR.html).
+/// A builder for a [`TransformMatrixKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct TransformMatrixKHRBuilder {
@@ -48634,7 +48634,7 @@ impl<'b> HasBuilder<'b> for ValidationCacheCreateInfoEXT {
     type Builder = ValidationCacheCreateInfoEXTBuilder<'b>;
 }
 
-/// A builder for a [ValidationCacheCreateInfoEXT](struct.ValidationCacheCreateInfoEXT.html).
+/// A builder for a [`ValidationCacheCreateInfoEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ValidationCacheCreateInfoEXTBuilder<'b> {
@@ -48700,7 +48700,7 @@ impl<'b> HasBuilder<'b> for ValidationFeaturesEXT {
     type Builder = ValidationFeaturesEXTBuilder<'b>;
 }
 
-/// A builder for a [ValidationFeaturesEXT](struct.ValidationFeaturesEXT.html).
+/// A builder for a [`ValidationFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ValidationFeaturesEXTBuilder<'b> {
@@ -48773,7 +48773,7 @@ impl<'b> HasBuilder<'b> for ValidationFlagsEXT {
     type Builder = ValidationFlagsEXTBuilder<'b>;
 }
 
-/// A builder for a [ValidationFlagsEXT](struct.ValidationFlagsEXT.html).
+/// A builder for a [`ValidationFlagsEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ValidationFlagsEXTBuilder<'b> {
@@ -48836,7 +48836,7 @@ impl HasBuilder<'static> for VertexInputAttributeDescription {
     type Builder = VertexInputAttributeDescriptionBuilder;
 }
 
-/// A builder for a [VertexInputAttributeDescription](struct.VertexInputAttributeDescription.html).
+/// A builder for a [`VertexInputAttributeDescription`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct VertexInputAttributeDescriptionBuilder {
@@ -48912,7 +48912,7 @@ impl HasBuilder<'static> for VertexInputAttributeDescription2EXT {
     type Builder = VertexInputAttributeDescription2EXTBuilder;
 }
 
-/// A builder for a [VertexInputAttributeDescription2EXT](struct.VertexInputAttributeDescription2EXT.html).
+/// A builder for a [`VertexInputAttributeDescription2EXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct VertexInputAttributeDescription2EXTBuilder {
@@ -48988,7 +48988,7 @@ impl HasBuilder<'static> for VertexInputBindingDescription {
     type Builder = VertexInputBindingDescriptionBuilder;
 }
 
-/// A builder for a [VertexInputBindingDescription](struct.VertexInputBindingDescription.html).
+/// A builder for a [`VertexInputBindingDescription`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct VertexInputBindingDescriptionBuilder {
@@ -49058,7 +49058,7 @@ impl HasBuilder<'static> for VertexInputBindingDescription2EXT {
     type Builder = VertexInputBindingDescription2EXTBuilder;
 }
 
-/// A builder for a [VertexInputBindingDescription2EXT](struct.VertexInputBindingDescription2EXT.html).
+/// A builder for a [`VertexInputBindingDescription2EXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct VertexInputBindingDescription2EXTBuilder {
@@ -49134,7 +49134,7 @@ impl HasBuilder<'static> for VertexInputBindingDivisorDescriptionEXT {
     type Builder = VertexInputBindingDivisorDescriptionEXTBuilder;
 }
 
-/// A builder for a [VertexInputBindingDivisorDescriptionEXT](struct.VertexInputBindingDivisorDescriptionEXT.html).
+/// A builder for a [`VertexInputBindingDivisorDescriptionEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct VertexInputBindingDivisorDescriptionEXTBuilder {
@@ -49198,7 +49198,7 @@ impl<'b> HasBuilder<'b> for ViSurfaceCreateInfoNN {
     type Builder = ViSurfaceCreateInfoNNBuilder<'b>;
 }
 
-/// A builder for a [ViSurfaceCreateInfoNN](struct.ViSurfaceCreateInfoNN.html).
+/// A builder for a [`ViSurfaceCreateInfoNN`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ViSurfaceCreateInfoNNBuilder<'b> {
@@ -49263,7 +49263,7 @@ impl HasBuilder<'static> for Viewport {
     type Builder = ViewportBuilder;
 }
 
-/// A builder for a [Viewport](struct.Viewport.html).
+/// A builder for a [`Viewport`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ViewportBuilder {
@@ -49351,7 +49351,7 @@ impl HasBuilder<'static> for ViewportSwizzleNV {
     type Builder = ViewportSwizzleNVBuilder;
 }
 
-/// A builder for a [ViewportSwizzleNV](struct.ViewportSwizzleNV.html).
+/// A builder for a [`ViewportSwizzleNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ViewportSwizzleNVBuilder {
@@ -49427,7 +49427,7 @@ impl HasBuilder<'static> for ViewportWScalingNV {
     type Builder = ViewportWScalingNVBuilder;
 }
 
-/// A builder for a [ViewportWScalingNV](struct.ViewportWScalingNV.html).
+/// A builder for a [`ViewportWScalingNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ViewportWScalingNVBuilder {
@@ -49491,7 +49491,7 @@ impl<'b> HasBuilder<'b> for WaylandSurfaceCreateInfoKHR {
     type Builder = WaylandSurfaceCreateInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [WaylandSurfaceCreateInfoKHR](struct.WaylandSurfaceCreateInfoKHR.html).
+/// A builder for a [`WaylandSurfaceCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct WaylandSurfaceCreateInfoKHRBuilder<'b> {
@@ -49562,7 +49562,7 @@ impl<'b> HasBuilder<'b> for Win32KeyedMutexAcquireReleaseInfoKHR {
     type Builder = Win32KeyedMutexAcquireReleaseInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [Win32KeyedMutexAcquireReleaseInfoKHR](struct.Win32KeyedMutexAcquireReleaseInfoKHR.html).
+/// A builder for a [`Win32KeyedMutexAcquireReleaseInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Win32KeyedMutexAcquireReleaseInfoKHRBuilder<'b> {
@@ -49650,7 +49650,7 @@ impl<'b> HasBuilder<'b> for Win32KeyedMutexAcquireReleaseInfoNV {
     type Builder = Win32KeyedMutexAcquireReleaseInfoNVBuilder<'b>;
 }
 
-/// A builder for a [Win32KeyedMutexAcquireReleaseInfoNV](struct.Win32KeyedMutexAcquireReleaseInfoNV.html).
+/// A builder for a [`Win32KeyedMutexAcquireReleaseInfoNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Win32KeyedMutexAcquireReleaseInfoNVBuilder<'b> {
@@ -49738,7 +49738,7 @@ impl HasBuilder<'static> for Win32SurfaceCreateInfoKHR {
     type Builder = Win32SurfaceCreateInfoKHRBuilder;
 }
 
-/// A builder for a [Win32SurfaceCreateInfoKHR](struct.Win32SurfaceCreateInfoKHR.html).
+/// A builder for a [`Win32SurfaceCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Win32SurfaceCreateInfoKHRBuilder {
@@ -49795,7 +49795,7 @@ unsafe impl Cast for Win32SurfaceCreateInfoKHRBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [WriteDescriptorSet](struct.WriteDescriptorSet.html).
+/// A Vulkan struct that can be used to extend a [`WriteDescriptorSet`].
 pub unsafe trait ExtendsWriteDescriptorSet {}
 unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetAccelerationStructureKHR {}
 unsafe impl ExtendsWriteDescriptorSet for WriteDescriptorSetAccelerationStructureNV {}
@@ -49814,7 +49814,7 @@ impl<'b> HasBuilder<'b> for WriteDescriptorSet {
     type Builder = WriteDescriptorSetBuilder<'b>;
 }
 
-/// A builder for a [WriteDescriptorSet](struct.WriteDescriptorSet.html).
+/// A builder for a [`WriteDescriptorSet`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct WriteDescriptorSetBuilder<'b> {
@@ -49926,7 +49926,7 @@ impl<'b> HasBuilder<'b> for WriteDescriptorSetAccelerationStructureKHR {
     type Builder = WriteDescriptorSetAccelerationStructureKHRBuilder<'b>;
 }
 
-/// A builder for a [WriteDescriptorSetAccelerationStructureKHR](struct.WriteDescriptorSetAccelerationStructureKHR.html).
+/// A builder for a [`WriteDescriptorSetAccelerationStructureKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct WriteDescriptorSetAccelerationStructureKHRBuilder<'b> {
@@ -49989,7 +49989,7 @@ impl<'b> HasBuilder<'b> for WriteDescriptorSetAccelerationStructureNV {
     type Builder = WriteDescriptorSetAccelerationStructureNVBuilder<'b>;
 }
 
-/// A builder for a [WriteDescriptorSetAccelerationStructureNV](struct.WriteDescriptorSetAccelerationStructureNV.html).
+/// A builder for a [`WriteDescriptorSetAccelerationStructureNV`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct WriteDescriptorSetAccelerationStructureNVBuilder<'b> {
@@ -50052,7 +50052,7 @@ impl<'b> HasBuilder<'b> for WriteDescriptorSetInlineUniformBlockEXT {
     type Builder = WriteDescriptorSetInlineUniformBlockEXTBuilder<'b>;
 }
 
-/// A builder for a [WriteDescriptorSetInlineUniformBlockEXT](struct.WriteDescriptorSetInlineUniformBlockEXT.html).
+/// A builder for a [`WriteDescriptorSetInlineUniformBlockEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct WriteDescriptorSetInlineUniformBlockEXTBuilder<'b> {
@@ -50112,7 +50112,7 @@ impl HasBuilder<'static> for XYColorEXT {
     type Builder = XYColorEXTBuilder;
 }
 
-/// A builder for a [XYColorEXT](struct.XYColorEXT.html).
+/// A builder for a [`XYColorEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct XYColorEXTBuilder {
@@ -50176,7 +50176,7 @@ impl<'b> HasBuilder<'b> for XcbSurfaceCreateInfoKHR {
     type Builder = XcbSurfaceCreateInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [XcbSurfaceCreateInfoKHR](struct.XcbSurfaceCreateInfoKHR.html).
+/// A builder for a [`XcbSurfaceCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct XcbSurfaceCreateInfoKHRBuilder<'b> {
@@ -50247,7 +50247,7 @@ impl<'b> HasBuilder<'b> for XlibSurfaceCreateInfoKHR {
     type Builder = XlibSurfaceCreateInfoKHRBuilder<'b>;
 }
 
-/// A builder for a [XlibSurfaceCreateInfoKHR](struct.XlibSurfaceCreateInfoKHR.html).
+/// A builder for a [`XlibSurfaceCreateInfoKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct XlibSurfaceCreateInfoKHRBuilder<'b> {
