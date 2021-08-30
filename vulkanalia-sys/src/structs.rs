@@ -8884,6 +8884,28 @@ impl Default for PhysicalDevicePresentWaitFeaturesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub primitive_topology_list_restart: Bool32,
+    pub primitive_topology_patch_list_restart: Bool32,
+}
+
+impl Default for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT,
+            next: ptr::null_mut(),
+            primitive_topology_list_restart: Bool32::default(),
+            primitive_topology_patch_list_restart: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevicePrivateDataFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9671,6 +9693,72 @@ impl Default for PhysicalDeviceShaderImageFootprintFeaturesNV {
             next: ptr::null_mut(),
             image_footprint: Bool32::default(),
         }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderIntegerDotProductFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_integer_dot_product: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderIntegerDotProductFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR,
+            next: ptr::null_mut(),
+            shader_integer_dot_product: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderIntegerDotProductPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub integer_dot_product_8bit_unsigned_accelerated: Bool32,
+    pub integer_dot_product_8bit_signed_accelerated: Bool32,
+    pub integer_dot_product_8bit_mixed_signedness_accelerated: Bool32,
+    pub integer_dot_product4x_8bit_packed_unsigned_accelerated: Bool32,
+    pub integer_dot_product4x_8bit_packed_signed_accelerated: Bool32,
+    pub integer_dot_product4x_8bit_packed_mixed_signedness_accelerated: Bool32,
+    pub integer_dot_product_16bit_unsigned_accelerated: Bool32,
+    pub integer_dot_product_16bit_signed_accelerated: Bool32,
+    pub integer_dot_product_16bit_mixed_signedness_accelerated: Bool32,
+    pub integer_dot_product_32bit_unsigned_accelerated: Bool32,
+    pub integer_dot_product_32bit_signed_accelerated: Bool32,
+    pub integer_dot_product_32bit_mixed_signedness_accelerated: Bool32,
+    pub integer_dot_product_64bit_unsigned_accelerated: Bool32,
+    pub integer_dot_product_64bit_signed_accelerated: Bool32,
+    pub integer_dot_product_64bit_mixed_signedness_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating_8bit_unsigned_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating_8bit_signed_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating_8bit_mixed_signedness_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating4x_8bit_packed_unsigned_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating4x_8bit_packed_signed_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating4x_8bit_packed_mixed_signedness_accelerated:
+        Bool32,
+    pub integer_dot_product_accumulating_saturating_16bit_unsigned_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating_16bit_signed_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating_16bit_mixed_signedness_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating_32bit_unsigned_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating_32bit_signed_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating_32bit_mixed_signedness_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating_64bit_unsigned_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating_64bit_signed_accelerated: Bool32,
+    pub integer_dot_product_accumulating_saturating_64bit_mixed_signedness_accelerated: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderIntegerDotProductPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self { s_type: StructureType::PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR, next: ptr::null_mut(), integer_dot_product_8bit_unsigned_accelerated: Bool32::default(), integer_dot_product_8bit_signed_accelerated: Bool32::default(), integer_dot_product_8bit_mixed_signedness_accelerated: Bool32::default(), integer_dot_product4x_8bit_packed_unsigned_accelerated: Bool32::default(), integer_dot_product4x_8bit_packed_signed_accelerated: Bool32::default(), integer_dot_product4x_8bit_packed_mixed_signedness_accelerated: Bool32::default(), integer_dot_product_16bit_unsigned_accelerated: Bool32::default(), integer_dot_product_16bit_signed_accelerated: Bool32::default(), integer_dot_product_16bit_mixed_signedness_accelerated: Bool32::default(), integer_dot_product_32bit_unsigned_accelerated: Bool32::default(), integer_dot_product_32bit_signed_accelerated: Bool32::default(), integer_dot_product_32bit_mixed_signedness_accelerated: Bool32::default(), integer_dot_product_64bit_unsigned_accelerated: Bool32::default(), integer_dot_product_64bit_signed_accelerated: Bool32::default(), integer_dot_product_64bit_mixed_signedness_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating_8bit_unsigned_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating_8bit_signed_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating_8bit_mixed_signedness_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating4x_8bit_packed_unsigned_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating4x_8bit_packed_signed_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating4x_8bit_packed_mixed_signedness_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating_16bit_unsigned_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating_16bit_signed_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating_16bit_mixed_signedness_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating_32bit_unsigned_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating_32bit_signed_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating_32bit_mixed_signedness_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating_64bit_unsigned_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating_64bit_signed_accelerated: Bool32::default(), integer_dot_product_accumulating_saturating_64bit_mixed_signedness_accelerated: Bool32::default() }
     }
 }
 

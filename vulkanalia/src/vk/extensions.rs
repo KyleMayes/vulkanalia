@@ -1969,6 +1969,15 @@ pub trait ExtPostDepthCoverageExtension: DeviceV1_0 {
 
 impl ExtPostDepthCoverageExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_primitive_topology_list_restart.html>
+pub trait ExtPrimitiveTopologyListRestartExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION;
+}
+
+impl ExtPrimitiveTopologyListRestartExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_private_data.html>
 pub trait ExtPrivateDataExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -5964,6 +5973,15 @@ pub trait KhrShaderFloatControlsExtension: DeviceV1_0 {
 }
 
 impl KhrShaderFloatControlsExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_integer_dot_product.html>
+pub trait KhrShaderIntegerDotProductExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION;
+}
+
+impl KhrShaderIntegerDotProductExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_non_semantic_info.html>
 pub trait KhrShaderNonSemanticInfoExtension: DeviceV1_0 {

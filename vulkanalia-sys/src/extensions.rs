@@ -1270,6 +1270,22 @@ pub const EXT_POST_DEPTH_COVERAGE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_primitive_topology_list_restart.html>
+#[allow(deprecated)]
+pub const EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_primitive_topology_list_restart"),
+    number: 357,
+    type_: "device",
+    author: "EXT",
+    contact: "Shahbaz Youssefi @syoussefi",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_private_data.html>
 #[allow(deprecated)]
 pub const EXT_PRIVATE_DATA_EXTENSION: Extension = Extension {
@@ -2991,6 +3007,22 @@ pub const KHR_SHADER_FLOAT_CONTROLS_EXTENSION: Extension = Extension {
     deprecated_by: None,
     obsoleted_by: None,
     promoted_to: Some("VK_VERSION_1_2"),
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_integer_dot_product.html>
+#[allow(deprecated)]
+pub const KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_shader_integer_dot_product"),
+    number: 281,
+    type_: "device",
+    author: "KHR",
+    contact: "Kevin Petit @kevinpetit",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_shader_non_semantic_info.html>

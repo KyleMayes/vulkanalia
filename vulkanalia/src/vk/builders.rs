@@ -9429,6 +9429,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineExecutableProperti
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePortabilitySubsetFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentIdFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentWaitFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrivateDataFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProvokingVertexFeaturesEXT {}
@@ -9449,6 +9450,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderDrawParametersFeatur
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFloat16Int8Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageFootprintFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerDotProductFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
@@ -25984,6 +25986,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePortabilitySubsetFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentIdFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentWaitFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePrivateDataFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProvokingVertexFeaturesEXT {}
@@ -26007,6 +26013,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderDrawParameter
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFloat16Int8Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageFootprintFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerDotProductFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
@@ -30810,6 +30817,77 @@ unsafe impl Cast for PhysicalDevicePresentWaitFeaturesKHRBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {
+    type Target = PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {
+    type Builder = PhysicalDevicePrimitiveTopologyListRestartFeaturesEXTBuilder;
+}
+
+/// A builder for a [PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT](struct.PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePrimitiveTopologyListRestartFeaturesEXTBuilder {
+    value: PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT,
+}
+
+impl PhysicalDevicePrimitiveTopologyListRestartFeaturesEXTBuilder {
+    #[inline]
+    pub fn primitive_topology_list_restart(
+        mut self,
+        primitive_topology_list_restart: bool,
+    ) -> Self {
+        self.value.primitive_topology_list_restart = primitive_topology_list_restart as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn primitive_topology_patch_list_restart(
+        mut self,
+        primitive_topology_patch_list_restart: bool,
+    ) -> Self {
+        self.value.primitive_topology_patch_list_restart =
+            primitive_topology_patch_list_restart as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXTBuilder {
+    type Target = PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXTBuilder {
+    type Target = PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDevicePrivateDataFeaturesEXT {
     type Target = PhysicalDevicePrivateDataFeaturesEXT;
 
@@ -31033,6 +31111,10 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSampleLocationsPr
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSamplerFilterMinmaxProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCoreProperties2AMD {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCorePropertiesAMD {}
+unsafe impl ExtendsPhysicalDeviceProperties2
+    for PhysicalDeviceShaderIntegerDotProductPropertiesKHR
+{
+}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderSMBuiltinsPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShadingRateImagePropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSubgroupProperties {}
@@ -33338,6 +33420,440 @@ impl ops::DerefMut for PhysicalDeviceShaderImageFootprintFeaturesNVBuilder {
 
 unsafe impl Cast for PhysicalDeviceShaderImageFootprintFeaturesNVBuilder {
     type Target = PhysicalDeviceShaderImageFootprintFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderIntegerDotProductFeaturesKHR {
+    type Target = PhysicalDeviceShaderIntegerDotProductFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderIntegerDotProductFeaturesKHR {
+    type Builder = PhysicalDeviceShaderIntegerDotProductFeaturesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDeviceShaderIntegerDotProductFeaturesKHR](struct.PhysicalDeviceShaderIntegerDotProductFeaturesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderIntegerDotProductFeaturesKHRBuilder {
+    value: PhysicalDeviceShaderIntegerDotProductFeaturesKHR,
+}
+
+impl PhysicalDeviceShaderIntegerDotProductFeaturesKHRBuilder {
+    #[inline]
+    pub fn shader_integer_dot_product(mut self, shader_integer_dot_product: bool) -> Self {
+        self.value.shader_integer_dot_product = shader_integer_dot_product as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderIntegerDotProductFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderIntegerDotProductFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderIntegerDotProductFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderIntegerDotProductFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderIntegerDotProductFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderIntegerDotProductFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderIntegerDotProductPropertiesKHR {
+    type Target = PhysicalDeviceShaderIntegerDotProductPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderIntegerDotProductPropertiesKHR {
+    type Builder = PhysicalDeviceShaderIntegerDotProductPropertiesKHRBuilder;
+}
+
+/// A builder for a [PhysicalDeviceShaderIntegerDotProductPropertiesKHR](struct.PhysicalDeviceShaderIntegerDotProductPropertiesKHR.html).
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderIntegerDotProductPropertiesKHRBuilder {
+    value: PhysicalDeviceShaderIntegerDotProductPropertiesKHR,
+}
+
+impl PhysicalDeviceShaderIntegerDotProductPropertiesKHRBuilder {
+    #[inline]
+    pub fn integer_dot_product_8bit_unsigned_accelerated(
+        mut self,
+        integer_dot_product_8bit_unsigned_accelerated: bool,
+    ) -> Self {
+        self.value.integer_dot_product_8bit_unsigned_accelerated =
+            integer_dot_product_8bit_unsigned_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_8bit_signed_accelerated(
+        mut self,
+        integer_dot_product_8bit_signed_accelerated: bool,
+    ) -> Self {
+        self.value.integer_dot_product_8bit_signed_accelerated =
+            integer_dot_product_8bit_signed_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_8bit_mixed_signedness_accelerated(
+        mut self,
+        integer_dot_product_8bit_mixed_signedness_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_8bit_mixed_signedness_accelerated =
+            integer_dot_product_8bit_mixed_signedness_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product4x_8bit_packed_unsigned_accelerated(
+        mut self,
+        integer_dot_product4x_8bit_packed_unsigned_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product4x_8bit_packed_unsigned_accelerated =
+            integer_dot_product4x_8bit_packed_unsigned_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product4x_8bit_packed_signed_accelerated(
+        mut self,
+        integer_dot_product4x_8bit_packed_signed_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product4x_8bit_packed_signed_accelerated =
+            integer_dot_product4x_8bit_packed_signed_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product4x_8bit_packed_mixed_signedness_accelerated(
+        mut self,
+        integer_dot_product4x_8bit_packed_mixed_signedness_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product4x_8bit_packed_mixed_signedness_accelerated =
+            integer_dot_product4x_8bit_packed_mixed_signedness_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_16bit_unsigned_accelerated(
+        mut self,
+        integer_dot_product_16bit_unsigned_accelerated: bool,
+    ) -> Self {
+        self.value.integer_dot_product_16bit_unsigned_accelerated =
+            integer_dot_product_16bit_unsigned_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_16bit_signed_accelerated(
+        mut self,
+        integer_dot_product_16bit_signed_accelerated: bool,
+    ) -> Self {
+        self.value.integer_dot_product_16bit_signed_accelerated =
+            integer_dot_product_16bit_signed_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_16bit_mixed_signedness_accelerated(
+        mut self,
+        integer_dot_product_16bit_mixed_signedness_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_16bit_mixed_signedness_accelerated =
+            integer_dot_product_16bit_mixed_signedness_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_32bit_unsigned_accelerated(
+        mut self,
+        integer_dot_product_32bit_unsigned_accelerated: bool,
+    ) -> Self {
+        self.value.integer_dot_product_32bit_unsigned_accelerated =
+            integer_dot_product_32bit_unsigned_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_32bit_signed_accelerated(
+        mut self,
+        integer_dot_product_32bit_signed_accelerated: bool,
+    ) -> Self {
+        self.value.integer_dot_product_32bit_signed_accelerated =
+            integer_dot_product_32bit_signed_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_32bit_mixed_signedness_accelerated(
+        mut self,
+        integer_dot_product_32bit_mixed_signedness_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_32bit_mixed_signedness_accelerated =
+            integer_dot_product_32bit_mixed_signedness_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_64bit_unsigned_accelerated(
+        mut self,
+        integer_dot_product_64bit_unsigned_accelerated: bool,
+    ) -> Self {
+        self.value.integer_dot_product_64bit_unsigned_accelerated =
+            integer_dot_product_64bit_unsigned_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_64bit_signed_accelerated(
+        mut self,
+        integer_dot_product_64bit_signed_accelerated: bool,
+    ) -> Self {
+        self.value.integer_dot_product_64bit_signed_accelerated =
+            integer_dot_product_64bit_signed_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_64bit_mixed_signedness_accelerated(
+        mut self,
+        integer_dot_product_64bit_mixed_signedness_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_64bit_mixed_signedness_accelerated =
+            integer_dot_product_64bit_mixed_signedness_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating_8bit_unsigned_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating_8bit_unsigned_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating_8bit_unsigned_accelerated =
+            integer_dot_product_accumulating_saturating_8bit_unsigned_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating_8bit_signed_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating_8bit_signed_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating_8bit_signed_accelerated =
+            integer_dot_product_accumulating_saturating_8bit_signed_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating_8bit_mixed_signedness_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating_8bit_mixed_signedness_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating_8bit_mixed_signedness_accelerated =
+            integer_dot_product_accumulating_saturating_8bit_mixed_signedness_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating4x_8bit_packed_unsigned_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating4x_8bit_packed_unsigned_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating4x_8bit_packed_unsigned_accelerated =
+            integer_dot_product_accumulating_saturating4x_8bit_packed_unsigned_accelerated
+                as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating4x_8bit_packed_signed_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating4x_8bit_packed_signed_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating4x_8bit_packed_signed_accelerated =
+            integer_dot_product_accumulating_saturating4x_8bit_packed_signed_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating4x_8bit_packed_mixed_signedness_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating4x_8bit_packed_mixed_signedness_accelerated: bool,
+    ) -> Self {
+        self.value.integer_dot_product_accumulating_saturating4x_8bit_packed_mixed_signedness_accelerated = integer_dot_product_accumulating_saturating4x_8bit_packed_mixed_signedness_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating_16bit_unsigned_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating_16bit_unsigned_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating_16bit_unsigned_accelerated =
+            integer_dot_product_accumulating_saturating_16bit_unsigned_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating_16bit_signed_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating_16bit_signed_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating_16bit_signed_accelerated =
+            integer_dot_product_accumulating_saturating_16bit_signed_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating_16bit_mixed_signedness_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating_16bit_mixed_signedness_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating_16bit_mixed_signedness_accelerated =
+            integer_dot_product_accumulating_saturating_16bit_mixed_signedness_accelerated
+                as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating_32bit_unsigned_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating_32bit_unsigned_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating_32bit_unsigned_accelerated =
+            integer_dot_product_accumulating_saturating_32bit_unsigned_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating_32bit_signed_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating_32bit_signed_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating_32bit_signed_accelerated =
+            integer_dot_product_accumulating_saturating_32bit_signed_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating_32bit_mixed_signedness_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating_32bit_mixed_signedness_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating_32bit_mixed_signedness_accelerated =
+            integer_dot_product_accumulating_saturating_32bit_mixed_signedness_accelerated
+                as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating_64bit_unsigned_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating_64bit_unsigned_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating_64bit_unsigned_accelerated =
+            integer_dot_product_accumulating_saturating_64bit_unsigned_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating_64bit_signed_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating_64bit_signed_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating_64bit_signed_accelerated =
+            integer_dot_product_accumulating_saturating_64bit_signed_accelerated as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn integer_dot_product_accumulating_saturating_64bit_mixed_signedness_accelerated(
+        mut self,
+        integer_dot_product_accumulating_saturating_64bit_mixed_signedness_accelerated: bool,
+    ) -> Self {
+        self.value
+            .integer_dot_product_accumulating_saturating_64bit_mixed_signedness_accelerated =
+            integer_dot_product_accumulating_saturating_64bit_mixed_signedness_accelerated
+                as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderIntegerDotProductPropertiesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderIntegerDotProductPropertiesKHRBuilder {
+    type Target = PhysicalDeviceShaderIntegerDotProductPropertiesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderIntegerDotProductPropertiesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderIntegerDotProductPropertiesKHRBuilder {
+    type Target = PhysicalDeviceShaderIntegerDotProductPropertiesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
