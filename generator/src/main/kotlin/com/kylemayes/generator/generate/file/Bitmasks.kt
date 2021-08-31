@@ -28,16 +28,22 @@ ${generateAliases(supported.map { it.name }.toSet())}
 /** Generates a Rust `bitflags!` struct for a Vulkan bitmask. */
 private fun Registry.generateBitmask(bitmask: Bitmask): String {
     val long = bitmask.bitflags.any { it.value.bitLength() > 32 }
-    val flags = "Flags" + (if (long) { "64" } else { "" })
+    val repr = "Flags" + (if (long) { "64" } else { "" })
+
     val values = bitmask.bitflags.associateBy { it.value }
+    val flags = generateBitflags(values, bitmask.bitflags).joinToString("\n        ")
+    val block = if (flags.isNotBlank()) {
+        "{\n        $flags\n    }"
+    } else {
+        "{ }"
+    }
+
     return """
 bitflags! {
     /// <${generateManualUrl(bitmask)}>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct ${bitmask.name}: $flags {
-        ${generateBitflags(values, bitmask.bitflags).joinToString("\n        ")}
-    }
+    pub struct ${bitmask.name}: $repr $block
 }
     """
 }
@@ -49,12 +55,7 @@ private fun generateBitflags(values: Map<BigInteger, Bitflag>, bitflags: List<Bi
             .sortedBy { it.value }
             .map { "const ${it.name} = ${generateExpr(values, it.value)};" }
     } else {
-        listOf(
-            "/// Workaround for `bitflags!` not supporting empty bitflags.",
-            "///",
-            "/// <https://github.com/bitflags/bitflags/issues/179>",
-            "const EMPTY = 0;",
-        )
+        emptyList()
     }
 
 /** Generates a Rust expression for a Vulkan bitflag value. */
