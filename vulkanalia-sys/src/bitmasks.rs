@@ -330,7 +330,7 @@ bitflags! {
         const NONE = 0;
         const FRONT = 1;
         const BACK = 1 << 1;
-        const FRONT_AND_BACK = 1 << 1;
+        const FRONT_AND_BACK = Self::FRONT.bits | Self::BACK.bits;
     }
 }
 
@@ -1572,7 +1572,7 @@ bitflags! {
         const TESSELLATION_EVALUATION = 1 << 2;
         const GEOMETRY = 1 << 3;
         const FRAGMENT = 1 << 4;
-        const ALL_GRAPHICS = 1 << 4;
+        const ALL_GRAPHICS = Self::VERTEX.bits | Self::TESSELLATION_CONTROL.bits | Self::TESSELLATION_EVALUATION.bits | Self::GEOMETRY.bits | Self::FRAGMENT.bits;
         const COMPUTE = 1 << 5;
         const TASK_NV = 1 << 6;
         const MESH_NV = 1 << 7;
@@ -1583,7 +1583,7 @@ bitflags! {
         const INTERSECTION_KHR = 1 << 12;
         const CALLABLE_KHR = 1 << 13;
         const SUBPASS_SHADING_HUAWEI = 1 << 14;
-        const ALL = 1 << 30;
+        const ALL = i32::MAX as u32;
     }
 }
 
@@ -1614,7 +1614,7 @@ bitflags! {
     pub struct StencilFaceFlags: Flags {
         const FRONT = 1;
         const BACK = 1 << 1;
-        const FRONT_AND_BACK = 1 << 1;
+        const FRONT_AND_BACK = Self::FRONT.bits | Self::BACK.bits;
     }
 }
 

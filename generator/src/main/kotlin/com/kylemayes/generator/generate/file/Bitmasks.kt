@@ -9,7 +9,6 @@ import com.kylemayes.generator.registry.Bitflag
 import com.kylemayes.generator.registry.Bitmask
 import com.kylemayes.generator.registry.Registry
 import java.math.BigInteger
-import kotlin.math.log2
 
 /** Generates Rust `bitflags!` structs for Vulkan bitmasks. */
 fun Registry.generateBitmasks(): String {
@@ -30,22 +29,25 @@ ${generateAliases(supported.map { it.name }.toSet())}
 private fun Registry.generateBitmask(bitmask: Bitmask): String {
     val long = bitmask.bitflags.any { it.value.bitLength() > 32 }
     val flags = "Flags" + (if (long) { "64" } else { "" })
+    val values = bitmask.bitflags.associateBy { it.value }
     return """
 bitflags! {
     /// <${generateManualUrl(bitmask)}>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ${bitmask.name}: $flags {
-        ${generateBitflags(bitmask.bitflags).joinToString("\n        ")}
+        ${generateBitflags(values, bitmask.bitflags).joinToString("\n        ")}
     }
 }
     """
 }
 
 /** Generates Rust `bitflags!` bitflags for a list of Vulkan bitflags. */
-private fun generateBitflags(bitflags: List<Bitflag>) =
+private fun generateBitflags(values: Map<BigInteger, Bitflag>, bitflags: List<Bitflag>) =
     if (bitflags.isNotEmpty()) {
-        bitflags.sortedBy { it.value }.map { "const ${it.name} = ${generateExpr(it.value)};" }
+        bitflags
+            .sortedBy { it.value }
+            .map { "const ${it.name} = ${generateExpr(values, it.value)};" }
     } else {
         listOf(
             "/// Workaround for `bitflags!` not supporting empty bitflags.",
@@ -56,8 +58,22 @@ private fun generateBitflags(bitflags: List<Bitflag>) =
     }
 
 /** Generates a Rust expression for a Vulkan bitflag value. */
-private fun generateExpr(value: BigInteger) = when (value) {
-    BigInteger.ZERO -> "0"
-    BigInteger.ONE -> "1"
-    else -> "1 << ${log2(value.toDouble()).toLong()}"
+private fun generateExpr(values: Map<BigInteger, Bitflag>, value: BigInteger): String {
+    val bits = (0..value.bitLength())
+        .map { it to value.testBit(it) }
+        .filter { it.second }
+        .map { it.first }
+
+    return if (bits.isEmpty()) {
+        "0"
+    } else if (bits.size == 1) {
+        val bit = bits[0]
+        if (bit == 0) { "1" } else { "1 << $bit" }
+    } else if (bits.size == 31) {
+        return "i32::MAX as u32"
+    } else {
+        return bits
+            .map { values[BigInteger.valueOf(1L.shl(it))]!!.name }
+            .joinToString(" | ") { "Self::$it.bits" }
+    }
 }

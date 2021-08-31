@@ -6,6 +6,9 @@
 - [August 3, 2021 Vulkan 1.2.187 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/907c556530050b0f4af073753335f23c885c02bf)
 - [August 10, 2021 Vulkan 1.2.188 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/f1eda2cb1656363ccd67e07f5654a80fc13b47af)
 
+### Fixed
+- Fixed composite bitflag values (e.g., `CullModeFlags::FRONT_AND_BACK`)
+
 ### Changed
 - Bumped MSRV to 1.51
 - Added `Send` and `Sync` requirement to `Loader` error type
