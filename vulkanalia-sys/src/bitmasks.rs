@@ -32,65 +32,14 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMotionInfoFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct AccelerationStructureMotionInfoFlagsNV: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct AccelerationStructureMotionInfoFlagsNV: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureMotionInstanceFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct AccelerationStructureMotionInstanceFlagsNV: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
-}
-
-bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccessFlagBits2KHR.html>
-    #[repr(transparent)]
-    #[derive(Default)]
-    pub struct AccessFlagBits2KHR: Flags64 {
-        const ACCESS_2_NONE = 0;
-        const ACCESS_2_INDIRECT_COMMAND_READ = 1;
-        const ACCESS_2_INDEX_READ = 1 << 1;
-        const ACCESS_2_VERTEX_ATTRIBUTE_READ = 1 << 2;
-        const ACCESS_2_UNIFORM_READ = 1 << 3;
-        const ACCESS_2_INPUT_ATTACHMENT_READ = 1 << 4;
-        const ACCESS_2_SHADER_READ = 1 << 5;
-        const ACCESS_2_SHADER_WRITE = 1 << 6;
-        const ACCESS_2_COLOR_ATTACHMENT_READ = 1 << 7;
-        const ACCESS_2_COLOR_ATTACHMENT_WRITE = 1 << 8;
-        const ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ = 1 << 9;
-        const ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE = 1 << 10;
-        const ACCESS_2_TRANSFER_READ = 1 << 11;
-        const ACCESS_2_TRANSFER_WRITE = 1 << 12;
-        const ACCESS_2_HOST_READ = 1 << 13;
-        const ACCESS_2_HOST_WRITE = 1 << 14;
-        const ACCESS_2_MEMORY_READ = 1 << 15;
-        const ACCESS_2_MEMORY_WRITE = 1 << 16;
-        const ACCESS_2_COMMAND_PREPROCESS_READ_NV = 1 << 17;
-        const ACCESS_2_COMMAND_PREPROCESS_WRITE_NV = 1 << 18;
-        const ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_EXT = 1 << 19;
-        const ACCESS_2_CONDITIONAL_RENDERING_READ_EXT = 1 << 20;
-        const ACCESS_2_ACCELERATION_STRUCTURE_READ = 1 << 21;
-        const ACCESS_2_ACCELERATION_STRUCTURE_WRITE = 1 << 22;
-        const ACCESS_2_FRAGMENT_SHADING_RATE_ATTACHMENT_READ = 1 << 23;
-        const ACCESS_2_FRAGMENT_DENSITY_MAP_READ_EXT = 1 << 24;
-        const ACCESS_2_TRANSFORM_FEEDBACK_WRITE_EXT = 1 << 25;
-        const ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_EXT = 1 << 26;
-        const ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_EXT = 1 << 27;
-        const ACCESS_2_SHADER_SAMPLED_READ = 1 << 32;
-        const ACCESS_2_SHADER_STORAGE_READ = 1 << 33;
-        const ACCESS_2_SHADER_STORAGE_WRITE = 1 << 34;
-        const ACCESS_2_INVOCATION_MASK_READ_HUAWEI = 1 << 39;
-    }
+    pub struct AccelerationStructureMotionInstanceFlagsNV: Flags { }
 }
 
 bitflags! {
@@ -133,11 +82,40 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccessFlags2KHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct AccessFlags2KHR: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
+    pub struct AccessFlags2KHR: Flags64 {
+        const NONE = 0;
+        const INDIRECT_COMMAND_READ = 1;
+        const INDEX_READ = 1 << 1;
+        const VERTEX_ATTRIBUTE_READ = 1 << 2;
+        const UNIFORM_READ = 1 << 3;
+        const INPUT_ATTACHMENT_READ = 1 << 4;
+        const SHADER_READ = 1 << 5;
+        const SHADER_WRITE = 1 << 6;
+        const COLOR_ATTACHMENT_READ = 1 << 7;
+        const COLOR_ATTACHMENT_WRITE = 1 << 8;
+        const DEPTH_STENCIL_ATTACHMENT_READ = 1 << 9;
+        const DEPTH_STENCIL_ATTACHMENT_WRITE = 1 << 10;
+        const TRANSFER_READ = 1 << 11;
+        const TRANSFER_WRITE = 1 << 12;
+        const HOST_READ = 1 << 13;
+        const HOST_WRITE = 1 << 14;
+        const MEMORY_READ = 1 << 15;
+        const MEMORY_WRITE = 1 << 16;
+        const COMMAND_PREPROCESS_READ_NV = 1 << 17;
+        const COMMAND_PREPROCESS_WRITE_NV = 1 << 18;
+        const COLOR_ATTACHMENT_READ_NONCOHERENT_EXT = 1 << 19;
+        const CONDITIONAL_RENDERING_READ_EXT = 1 << 20;
+        const ACCELERATION_STRUCTURE_READ = 1 << 21;
+        const ACCELERATION_STRUCTURE_WRITE = 1 << 22;
+        const FRAGMENT_SHADING_RATE_ATTACHMENT_READ = 1 << 23;
+        const FRAGMENT_DENSITY_MAP_READ_EXT = 1 << 24;
+        const TRANSFORM_FEEDBACK_WRITE_EXT = 1 << 25;
+        const TRANSFORM_FEEDBACK_COUNTER_READ_EXT = 1 << 26;
+        const TRANSFORM_FEEDBACK_COUNTER_WRITE_EXT = 1 << 27;
+        const SHADER_SAMPLED_READ = 1 << 32;
+        const SHADER_STORAGE_READ = 1 << 33;
+        const SHADER_STORAGE_WRITE = 1 << 34;
+        const INVOCATION_MASK_READ_HUAWEI = 1 << 39;
     }
 }
 
@@ -145,24 +123,14 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAcquireProfilingLockFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct AcquireProfilingLockFlagsKHR: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct AcquireProfilingLockFlagsKHR: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAndroidSurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct AndroidSurfaceCreateFlagsKHR: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct AndroidSurfaceCreateFlagsKHR: Flags { }
 }
 
 bitflags! {
@@ -215,12 +183,7 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferViewCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct BufferViewCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct BufferViewCreateFlags: Flags { }
 }
 
 bitflags! {
@@ -293,12 +256,7 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandPoolTrimFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct CommandPoolTrimFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct CommandPoolTrimFlags: Flags { }
 }
 
 bitflags! {
@@ -330,7 +288,7 @@ bitflags! {
         const NONE = 0;
         const FRONT = 1;
         const BACK = 1 << 1;
-        const FRONT_AND_BACK = 1 << 1;
+        const FRONT_AND_BACK = Self::FRONT.bits | Self::BACK.bits;
     }
 }
 
@@ -374,24 +332,14 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDebugUtilsMessengerCallbackDataFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct DebugUtilsMessengerCallbackDataFlagsEXT: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct DebugUtilsMessengerCallbackDataFlagsEXT: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDebugUtilsMessengerCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct DebugUtilsMessengerCreateFlagsEXT: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct DebugUtilsMessengerCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
@@ -432,12 +380,7 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDescriptorPoolResetFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct DescriptorPoolResetFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct DescriptorPoolResetFlags: Flags { }
 }
 
 bitflags! {
@@ -455,24 +398,14 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDescriptorUpdateTemplateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct DescriptorUpdateTemplateCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct DescriptorUpdateTemplateCreateFlags: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct DeviceCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct DeviceCreateFlags: Flags { }
 }
 
 bitflags! {
@@ -502,12 +435,7 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceMemoryReportFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct DeviceMemoryReportFlagsEXT: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct DeviceMemoryReportFlagsEXT: Flags { }
 }
 
 bitflags! {
@@ -523,24 +451,14 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDirectFBSurfaceCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct DirectFBSurfaceCreateFlagsEXT: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct DirectFBSurfaceCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDisplayModeCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct DisplayModeCreateFlagsKHR: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct DisplayModeCreateFlagsKHR: Flags { }
 }
 
 bitflags! {
@@ -559,12 +477,7 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDisplaySurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct DisplaySurfaceCreateFlagsKHR: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct DisplaySurfaceCreateFlagsKHR: Flags { }
 }
 
 bitflags! {
@@ -765,24 +678,14 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkHeadlessSurfaceCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct HeadlessSurfaceCreateFlagsEXT: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct HeadlessSurfaceCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkIOSSurfaceCreateFlagsMVK.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct IOSSurfaceCreateFlagsMVK: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct IOSSurfaceCreateFlagsMVK: Flags { }
 }
 
 bitflags! {
@@ -831,12 +734,7 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImagePipeSurfaceCreateFlagsFUCHSIA.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct ImagePipeSurfaceCreateFlagsFUCHSIA: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct ImagePipeSurfaceCreateFlagsFUCHSIA: Flags { }
 }
 
 bitflags! {
@@ -892,24 +790,14 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkInstanceCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct InstanceCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct InstanceCreateFlags: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMacOSSurfaceCreateFlagsMVK.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct MacOSSurfaceCreateFlagsMVK: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct MacOSSurfaceCreateFlagsMVK: Flags { }
 }
 
 bitflags! {
@@ -937,12 +825,7 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMemoryMapFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct MemoryMapFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct MemoryMapFlags: Flags { }
 }
 
 bitflags! {
@@ -966,12 +849,7 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMetalSurfaceCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct MetalSurfaceCreateFlagsEXT: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct MetalSurfaceCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
@@ -1009,60 +887,35 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineColorBlendStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineColorBlendStateCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineColorBlendStateCreateFlags: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCompilerControlFlagsAMD.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineCompilerControlFlagsAMD: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineCompilerControlFlagsAMD: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCoverageModulationStateCreateFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineCoverageModulationStateCreateFlagsNV: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineCoverageModulationStateCreateFlagsNV: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCoverageReductionStateCreateFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineCoverageReductionStateCreateFlagsNV: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineCoverageReductionStateCreateFlagsNV: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCoverageToColorStateCreateFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineCoverageToColorStateCreateFlagsNV: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineCoverageToColorStateCreateFlagsNV: Flags { }
 }
 
 bitflags! {
@@ -1108,120 +961,70 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineDepthStencilStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineDepthStencilStateCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineDepthStencilStateCreateFlags: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineDiscardRectangleStateCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineDiscardRectangleStateCreateFlagsEXT: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineDiscardRectangleStateCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineDynamicStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineDynamicStateCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineDynamicStateCreateFlags: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineInputAssemblyStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineInputAssemblyStateCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineInputAssemblyStateCreateFlags: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineLayoutCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineLayoutCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineLayoutCreateFlags: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineMultisampleStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineMultisampleStateCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineMultisampleStateCreateFlags: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationConservativeStateCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineRasterizationConservativeStateCreateFlagsEXT: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineRasterizationConservativeStateCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationDepthClipStateCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineRasterizationDepthClipStateCreateFlagsEXT: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineRasterizationDepthClipStateCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineRasterizationStateCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineRasterizationStateCreateFlags: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRasterizationStateStreamCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineRasterizationStateStreamCreateFlagsEXT: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineRasterizationStateStreamCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
@@ -1231,50 +1034,6 @@ bitflags! {
     pub struct PipelineShaderStageCreateFlags: Flags {
         const ALLOW_VARYING_SUBGROUP_SIZE_EXT = 1;
         const REQUIRE_FULL_SUBGROUPS_EXT = 1 << 1;
-    }
-}
-
-bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineStageFlagBits2KHR.html>
-    #[repr(transparent)]
-    #[derive(Default)]
-    pub struct PipelineStageFlagBits2KHR: Flags64 {
-        const PIPELINE_STAGE_2_NONE = 0;
-        const PIPELINE_STAGE_2_TOP_OF_PIPE = 1;
-        const PIPELINE_STAGE_2_DRAW_INDIRECT = 1 << 1;
-        const PIPELINE_STAGE_2_VERTEX_INPUT = 1 << 2;
-        const PIPELINE_STAGE_2_VERTEX_SHADER = 1 << 3;
-        const PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER = 1 << 4;
-        const PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER = 1 << 5;
-        const PIPELINE_STAGE_2_GEOMETRY_SHADER = 1 << 6;
-        const PIPELINE_STAGE_2_FRAGMENT_SHADER = 1 << 7;
-        const PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS = 1 << 8;
-        const PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS = 1 << 9;
-        const PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT = 1 << 10;
-        const PIPELINE_STAGE_2_COMPUTE_SHADER = 1 << 11;
-        const PIPELINE_STAGE_2_ALL_TRANSFER = 1 << 12;
-        const PIPELINE_STAGE_2_BOTTOM_OF_PIPE = 1 << 13;
-        const PIPELINE_STAGE_2_HOST = 1 << 14;
-        const PIPELINE_STAGE_2_ALL_GRAPHICS = 1 << 15;
-        const PIPELINE_STAGE_2_ALL_COMMANDS = 1 << 16;
-        const PIPELINE_STAGE_2_COMMAND_PREPROCESS_NV = 1 << 17;
-        const PIPELINE_STAGE_2_CONDITIONAL_RENDERING_EXT = 1 << 18;
-        const PIPELINE_STAGE_2_TASK_SHADER_NV = 1 << 19;
-        const PIPELINE_STAGE_2_MESH_SHADER_NV = 1 << 20;
-        const PIPELINE_STAGE_2_RAY_TRACING_SHADER = 1 << 21;
-        const PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT = 1 << 22;
-        const PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_EXT = 1 << 23;
-        const PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_EXT = 1 << 24;
-        const PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD = 1 << 25;
-        const PIPELINE_STAGE_2_COPY = 1 << 32;
-        const PIPELINE_STAGE_2_RESOLVE = 1 << 33;
-        const PIPELINE_STAGE_2_BLIT = 1 << 34;
-        const PIPELINE_STAGE_2_CLEAR = 1 << 35;
-        const PIPELINE_STAGE_2_INDEX_INPUT = 1 << 36;
-        const PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT = 1 << 37;
-        const PIPELINE_STAGE_2_PRE_RASTERIZATION_SHADERS = 1 << 38;
-        const PIPELINE_STAGE_2_SUBPASS_SHADING_HUAWEI = 1 << 39;
-        const PIPELINE_STAGE_2_INVOCATION_MASK_HUAWEI = 1 << 40;
     }
 }
 
@@ -1316,11 +1075,43 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineStageFlags2KHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineStageFlags2KHR: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
+    pub struct PipelineStageFlags2KHR: Flags64 {
+        const NONE = 0;
+        const TOP_OF_PIPE = 1;
+        const DRAW_INDIRECT = 1 << 1;
+        const VERTEX_INPUT = 1 << 2;
+        const VERTEX_SHADER = 1 << 3;
+        const TESSELLATION_CONTROL_SHADER = 1 << 4;
+        const TESSELLATION_EVALUATION_SHADER = 1 << 5;
+        const GEOMETRY_SHADER = 1 << 6;
+        const FRAGMENT_SHADER = 1 << 7;
+        const EARLY_FRAGMENT_TESTS = 1 << 8;
+        const LATE_FRAGMENT_TESTS = 1 << 9;
+        const COLOR_ATTACHMENT_OUTPUT = 1 << 10;
+        const COMPUTE_SHADER = 1 << 11;
+        const ALL_TRANSFER = 1 << 12;
+        const BOTTOM_OF_PIPE = 1 << 13;
+        const HOST = 1 << 14;
+        const ALL_GRAPHICS = 1 << 15;
+        const ALL_COMMANDS = 1 << 16;
+        const COMMAND_PREPROCESS_NV = 1 << 17;
+        const CONDITIONAL_RENDERING_EXT = 1 << 18;
+        const TASK_SHADER_NV = 1 << 19;
+        const MESH_SHADER_NV = 1 << 20;
+        const RAY_TRACING_SHADER = 1 << 21;
+        const FRAGMENT_SHADING_RATE_ATTACHMENT = 1 << 22;
+        const FRAGMENT_DENSITY_PROCESS_EXT = 1 << 23;
+        const TRANSFORM_FEEDBACK_EXT = 1 << 24;
+        const ACCELERATION_STRUCTURE_BUILD = 1 << 25;
+        const COPY = 1 << 32;
+        const RESOLVE = 1 << 33;
+        const BLIT = 1 << 34;
+        const CLEAR = 1 << 35;
+        const INDEX_INPUT = 1 << 36;
+        const VERTEX_ATTRIBUTE_INPUT = 1 << 37;
+        const PRE_RASTERIZATION_SHADERS = 1 << 38;
+        const SUBPASS_SHADING_HUAWEI = 1 << 39;
+        const INVOCATION_MASK_HUAWEI = 1 << 40;
     }
 }
 
@@ -1328,60 +1119,35 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineTessellationStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineTessellationStateCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineTessellationStateCreateFlags: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineVertexInputStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineVertexInputStateCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineVertexInputStateCreateFlags: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineViewportStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineViewportStateCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineViewportStateCreateFlags: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineViewportSwizzleStateCreateFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineViewportSwizzleStateCreateFlagsNV: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PipelineViewportSwizzleStateCreateFlagsNV: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPrivateDataSlotCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PrivateDataSlotCreateFlagsEXT: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct PrivateDataSlotCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
@@ -1416,12 +1182,7 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryPoolCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct QueryPoolCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct QueryPoolCreateFlags: Flags { }
 }
 
 bitflags! {
@@ -1500,24 +1261,14 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkScreenSurfaceCreateFlagsQNX.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct ScreenSurfaceCreateFlagsQNX: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct ScreenSurfaceCreateFlagsQNX: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphoreCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct SemaphoreCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct SemaphoreCreateFlags: Flags { }
 }
 
 bitflags! {
@@ -1542,24 +1293,14 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkShaderCorePropertiesFlagsAMD.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct ShaderCorePropertiesFlagsAMD: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct ShaderCorePropertiesFlagsAMD: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkShaderModuleCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct ShaderModuleCreateFlags: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct ShaderModuleCreateFlags: Flags { }
 }
 
 bitflags! {
@@ -1572,7 +1313,7 @@ bitflags! {
         const TESSELLATION_EVALUATION = 1 << 2;
         const GEOMETRY = 1 << 3;
         const FRAGMENT = 1 << 4;
-        const ALL_GRAPHICS = 1 << 4;
+        const ALL_GRAPHICS = Self::VERTEX.bits | Self::TESSELLATION_CONTROL.bits | Self::TESSELLATION_EVALUATION.bits | Self::GEOMETRY.bits | Self::FRAGMENT.bits;
         const COMPUTE = 1 << 5;
         const TASK_NV = 1 << 6;
         const MESH_NV = 1 << 7;
@@ -1583,7 +1324,7 @@ bitflags! {
         const INTERSECTION_KHR = 1 << 12;
         const CALLABLE_KHR = 1 << 13;
         const SUBPASS_SHADING_HUAWEI = 1 << 14;
-        const ALL = 1 << 30;
+        const ALL = i32::MAX as u32;
     }
 }
 
@@ -1614,7 +1355,7 @@ bitflags! {
     pub struct StencilFaceFlags: Flags {
         const FRONT = 1;
         const BACK = 1 << 1;
-        const FRONT_AND_BACK = 1 << 1;
+        const FRONT_AND_BACK = Self::FRONT.bits | Self::BACK.bits;
     }
 }
 
@@ -1622,12 +1363,7 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkStreamDescriptorSurfaceCreateFlagsGGP.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct StreamDescriptorSurfaceCreateFlagsGGP: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct StreamDescriptorSurfaceCreateFlagsGGP: Flags { }
 }
 
 bitflags! {
@@ -1724,72 +1460,42 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkValidationCacheCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct ValidationCacheCreateFlagsEXT: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct ValidationCacheCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkViSurfaceCreateFlagsNN.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct ViSurfaceCreateFlagsNN: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct ViSurfaceCreateFlagsNN: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkWaylandSurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct WaylandSurfaceCreateFlagsKHR: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct WaylandSurfaceCreateFlagsKHR: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkWin32SurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct Win32SurfaceCreateFlagsKHR: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct Win32SurfaceCreateFlagsKHR: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkXcbSurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct XcbSurfaceCreateFlagsKHR: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct XcbSurfaceCreateFlagsKHR: Flags { }
 }
 
 bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkXlibSurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct XlibSurfaceCreateFlagsKHR: Flags {
-        /// Workaround for `bitflags!` not supporting empty bitflags.
-        ///
-        /// <https://github.com/bitflags/bitflags/issues/179>
-        const EMPTY = 0;
-    }
+    pub struct XlibSurfaceCreateFlagsKHR: Flags { }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBuildAccelerationStructureFlagsNV.html>

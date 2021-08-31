@@ -96,7 +96,7 @@ impl$lifetime HasBuilder$traitLifetime for ${struct.name} {
     type Builder = ${struct.name}Builder$lifetime;
 }
 
-/// A builder for a [${struct.name}](struct.${struct.name}.html).
+/// A builder for a [`${struct.name}`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
 pub struct ${struct.name}Builder$lifetime {
@@ -149,8 +149,8 @@ private fun Registry.generateExtends(struct: Structure): String {
     }
 
     return """
-/// A Vulkan struct that can be used to extend a [${struct.name}](struct.${struct.name}.html).
-pub unsafe trait Extends${struct.name} { }
+/// A Vulkan struct that can be used to extend a [`${struct.name}`].
+pub unsafe trait Extends${struct.name}: fmt::Debug { }
 ${extends.joinToString("\n") { "unsafe impl Extends${struct.name} for $it { }" }}
     """
 }

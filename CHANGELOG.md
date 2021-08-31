@@ -6,6 +6,9 @@
 - [August 3, 2021 Vulkan 1.2.187 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/907c556530050b0f4af073753335f23c885c02bf)
 - [August 10, 2021 Vulkan 1.2.188 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/f1eda2cb1656363ccd67e07f5654a80fc13b47af)
 
+### Fixed
+- Fixed composite bitflag values (e.g., `CullModeFlags::FRONT_AND_BACK`)
+
 ### Changed
 - Bumped MSRV to 1.51
 - Added `Send` and `Sync` requirement to `Loader` error type
@@ -13,6 +16,11 @@
 - Added constants, constructor, and additional conversions to `Version`
 - Changed `patch` field to default to `0` in `Version` instead of using `Option`
 - Reworked byte and string array types in Vulkan structs
+- Removed dummy `EMPTY` bitflags used in empty `bitflags!` instances
+- Fixed names of bitflags with numbers in the name (`AccessFlags2KHR` and `PipelineStageFlags2KHR`)
+
+### Added
+- Added `Debug` requirement to extension struct traits (e.g., `ExtendsDeviceCreateInfo`)
 
 ## [0.10.0] - 2021-07-10
 

@@ -94,22 +94,26 @@ private fun renameType(name: String) = name
 
 /** Renames an enum variant or bitmask bitflag (e.g., `VK_CULL_MODE_FRONT_BIT` to `FRONT`). */
 private fun renameVariantOrBitflag(name: String, parent: String, bitflag: Boolean = false): String {
-    // Find the start of the extension author suffix in the parent name, if any.
-    // E.g., `EXT` in `VkDebugReportObjectTypeEXT`.
-    var index = parent.length - 1
-    while (index > 0 && parent[index].isUpperCase()) {
-        index -= 1
-    }
+    // Find the extension author suffix in the parent name, if any.
+    // E.g., `EXT` in `DebugReportObjectTypeEXT`.
+    val extension = parent
+        .reversed()
+        .takeWhile { it.isUpperCase() }
+        .reversed()
 
     // Determine the prefix to strip from the value name (parent name).
-    // E.g., `VK_DEBUG_REPORT_OBJECT_TYPE_` for `VkDebugReportObjectTypeEXT` (variant).
-    // E.g., `VK_DEBUG_REPORT_` for `VkDebugReportFlagsEXT` (bitflag).
-    var prefix = "${parent.substring(0, index + 1).toSnakeCase().toUpperCase()}_"
-    if (bitflag) prefix = prefix.replace("FLAGS_", "")
+    // E.g., `DEBUG_REPORT_OBJECT_TYPE_` for `DebugReportObjectTypeEXT` (variant).
+    // E.g., `DEBUG_REPORT_` for `DebugReportFlagsEXT` (bitflag).
+    var prefix = parent
+        .substring(0, parent.length - extension.length)
+        .toSnakeCase()
+        .toUpperCase()
+    if (bitflag) prefix = prefix.replace(Regex("FLAGS(\\d*)"), "$1")
+    if (!prefix.endsWith('_')) prefix = "${prefix}_"
 
     // Determine the suffix to strip from the value name (parent extension author).
-    // E.g., `_EXT` for `VkDebugReportObjectTypeEXT`
-    val suffix = "_${parent.substring(index + 1)}".trimEnd('_')
+    // E.g., `_EXT` for `DebugReportObjectTypeEXT`
+    val suffix = "_$extension".trimEnd('_')
 
     val renamed = name
         .removePrefix("VK_")
