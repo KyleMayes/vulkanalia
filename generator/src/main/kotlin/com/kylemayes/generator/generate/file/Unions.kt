@@ -4,26 +4,24 @@ package com.kylemayes.generator.generate.file
 
 import com.kylemayes.generator.generate.support.generateAliases
 import com.kylemayes.generator.generate.support.generateManualUrl
-import com.kylemayes.generator.generate.support.getUnsupportedExtensionEntities
 import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.Structure
 
 /** Generates Rust unions for Vulkan unions. */
-fun Registry.generateUnions(): String {
-    val supported = unions.values
-        .filter { !getUnsupportedExtensionEntities().contains(it.name) }
-        .sortedBy { it.name }
-    return """
+fun Registry.generateUnions() =
+    """
 use std::fmt;
 use std::mem::MaybeUninit;
 use std::os::raw::{c_char, c_void};
 
 use crate::*;
 
-${supported.joinToString("\n") { generateUnion(it) }}
-${generateAliases(supported.map { it.name }.toSet())}
+${unions.values
+        .sortedBy { it.name }
+        .joinToString("\n") { generateUnion(it) }}
+
+${generateAliases(unions.keys)}
     """
-}
 
 /** Generates a Rust union for a Vulkan union. */
 private fun Registry.generateUnion(union: Structure) =

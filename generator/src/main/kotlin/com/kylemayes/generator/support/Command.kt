@@ -16,7 +16,7 @@ fun git(vararg args: String) {
 fun rustfmt(rust: String) = execute("rustfmt", emptyArray(), rust)
 
 /** Executes a command in a new thread (with a time limit) and returns the output. */
-private fun execute(command: String, args: Array<String>, input: String = ""): String {
+private fun execute(command: String, args: Array<String>, input: String? = null): String {
     val process = ProcessBuilder(command, *args).start()
 
     val output = AtomicReference<String?>(null)
@@ -27,8 +27,10 @@ private fun execute(command: String, args: Array<String>, input: String = ""): S
         try {
             Thread.currentThread().name = "$command-thread"
 
-            process.outputStream.write(input.toByteArray())
-            process.outputStream.close()
+            if (input != null) {
+                process.outputStream.write(input.toByteArray())
+                process.outputStream.close()
+            }
 
             output.set(String(process.inputStream.readAllBytes()))
             process.inputStream.close()

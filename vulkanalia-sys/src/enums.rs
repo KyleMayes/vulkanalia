@@ -3447,40 +3447,6 @@ impl fmt::Debug for QueryPoolSamplingModeINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryResultStatusKHR.html>
-#[repr(transparent)]
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct QueryResultStatusKHR(i32);
-
-impl QueryResultStatusKHR {
-    pub const ERROR: Self = Self(-1);
-    pub const NOT_READY: Self = Self(0);
-    pub const COMPLETE: Self = Self(1);
-
-    /// Constructs an instance of this enum with the supplied underlying value.
-    #[inline]
-    pub const fn from_raw(value: i32) -> Self {
-        Self(value)
-    }
-
-    /// Gets the underlying value for this enum instance.
-    #[inline]
-    pub const fn as_raw(self) -> i32 {
-        self.0
-    }
-}
-
-impl fmt::Debug for QueryResultStatusKHR {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self.0 {
-            -1 => write!(f, "ERROR"),
-            0 => write!(f, "NOT_READY"),
-            1 => write!(f, "COMPLETE"),
-            _ => self.0.fmt(f),
-        }
-    }
-}
-
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]

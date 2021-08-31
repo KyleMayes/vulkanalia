@@ -4,7 +4,7 @@ package com.kylemayes.generator.generate.file
 
 import com.kylemayes.generator.generate.support.generateCommandWrapper
 import com.kylemayes.generator.generate.support.generateManualUrl
-import com.kylemayes.generator.generate.support.getSupportedExtensionGroups
+import com.kylemayes.generator.generate.support.getExtensionGroups
 import com.kylemayes.generator.registry.Extension
 import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.intern
@@ -63,7 +63,7 @@ pub struct Extension {
     pub promoted_to: Option<&'static str>,
 }
 
-${getSupportedExtensionGroups().values
+${getExtensionGroups().values
         .flatten()
         .sortedBy { it.name }
         .joinToString("") { generateExtension(it) }}
@@ -111,7 +111,7 @@ use std::ptr;
 
 use super::*;
 
-${getSupportedExtensionGroups().values
+${getExtensionGroups().values
         .flatten()
         .sortedBy { it.name }
         .joinToString("") { generateExtensionTrait(it) }}

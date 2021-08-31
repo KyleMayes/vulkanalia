@@ -5,7 +5,6 @@ package com.kylemayes.generator.generate.file
 import com.kylemayes.generator.generate.support.CommandType
 import com.kylemayes.generator.generate.support.generateManualUrl
 import com.kylemayes.generator.generate.support.getCommandType
-import com.kylemayes.generator.generate.support.getUnsupportedExtensionEntities
 import com.kylemayes.generator.registry.Command
 import com.kylemayes.generator.registry.Registry
 
@@ -17,7 +16,6 @@ use std::os::raw::{c_char, c_int, c_void};
 use crate::*;
 
 ${commands.values
-        .filter { !getUnsupportedExtensionEntities().contains(it.name) }
         .sortedBy { it.name }
         .joinToString("\n") { generateCommand(it) }}
     """
@@ -39,9 +37,7 @@ fun Registry.generateCommandStructs(): String {
         .entries
         .sortedBy { it.key.display }
         .joinToString("") {
-            val supported = it.value
-                .filter { c -> !getUnsupportedExtensionEntities().contains(c.name) }
-                .sortedBy { c -> c.name }
+            val supported = it.value.sortedBy { c -> c.name }
             generateCommandStruct(it.key, supported)
         }
     return """

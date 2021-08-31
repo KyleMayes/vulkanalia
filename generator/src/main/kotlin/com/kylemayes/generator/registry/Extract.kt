@@ -37,10 +37,11 @@ data class Registry(
 fun extractEntities(e: Element): Registry {
     // Extract the bitmasks.
     //
-    // All bitmasks have an entry in `types/type` but only those that have any
-    // bitflags have an entry in `enums`. Here we first extract the bitmasks
-    // from `enums` and then add empty bitmasks for the remaining bitmasks in
-    // `types/type`.
+    // All bitmasks have a `VkFlags` typedef in `types/type` that defines the
+    // type used to store bitflags for that bitmask but only bitmasks that
+    // actually have one or more bitflags have an entry in `enums`. Here we
+    // first extract the populated bitmasks from `enums` and then add empty
+    // bitmasks for the remaining bitmasks in `types/type`.
 
     val bitmasks = e.queryEntities("enums[@type='bitmask']", ::extractBitmask).toMutableMap()
     for (bitmask in e.queryEntities("types/type[@category='bitmask' and not(@alias)]", ::extractBitmaskType)) {
@@ -96,7 +97,7 @@ private fun extractBitmask(e: Element) = Bitmask(
 )
 
 private fun extractBitmaskType(e: Element) = Bitmask(
-    name = e.getElement("name")!!.textContent.intern(),
+    name = e.getElementText("name")!!.intern(),
     bitflags = ArrayList(),
 )
 
@@ -133,8 +134,14 @@ private fun extractCommand(e: Element): Command {
         name = proto.getElementText("name")!!.intern(),
         params = e.queryElements("param", ::extractParam),
         result = extractType(proto.getElement("type")!!),
-        successcodes = e.getAttributeText("successcodes")?.split(",")?.map { it.intern() } ?: emptyList(),
-        errorcodes = e.getAttributeText("errorcodes")?.split(",")?.map { it.intern() } ?: emptyList(),
+        successcodes = e.getAttributeText("successcodes")
+            ?.split(",")
+            ?.map { it.intern() }
+            ?: emptyList(),
+        errorcodes = e.getAttributeText("errorcodes")
+            ?.split(",")
+            ?.map { it.intern() }
+            ?: emptyList(),
     )
 }
 
@@ -406,10 +413,14 @@ data class RequireValue(
 ) : Entity
 
 private fun extractRequireValue(e: Element): RequireValue? {
-    if (e.hasAttribute("alias")) return null
+    if (e.hasAttribute("alias")) {
+        return null
+    }
 
     val value = e.getAttributeText("value")
-    if (value != null && value.startsWith('"')) return null
+    if (value != null && value.startsWith('"')) {
+        return null
+    }
 
     return RequireValue(
         name = e.getAttribute("name").intern(),

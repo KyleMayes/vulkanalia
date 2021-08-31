@@ -17,7 +17,8 @@ fun parseRegistry(xml: String): Registry {
         builder.parse(InputSource(StringReader(xml))).documentElement
     }
 
-    val registry = log.time("Extract Entities") { extractEntities(document) }
+    var registry = log.time("Extract Entities") { extractEntities(document) }
+    registry = log.time("Filter Entities") { registry.filterEntities() }
     log.time("Extend Entities") { registry.extendEntities() }
     log.time("Rename Entities") { registry.renameEntities() }
     return registry

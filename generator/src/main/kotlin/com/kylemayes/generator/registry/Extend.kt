@@ -2,7 +2,6 @@
 
 package com.kylemayes.generator.registry
 
-import com.kylemayes.generator.support.isSupported
 import java.math.BigInteger
 
 /** Extends bitmasks and enums with bitflags and variants defined in versions and extensions. */
@@ -12,11 +11,11 @@ fun Registry.extendEntities() {
     for (version in versions.values) {
         for (ext in version.require.values) {
             extendBitmask(ext, bitmasks, added)
-            extendEnum(ext, enums, added, null)
+            extendEnum(ext, enums, added)
         }
     }
 
-    for (extension in extensions.values.filter { isSupported(it) }) {
+    for (extension in extensions.values) {
         for (ext in extension.require.values) {
             extendBitmask(ext, bitmasks, added)
             extendEnum(ext, enums, added, extension.number)
@@ -33,7 +32,8 @@ private fun extendBitmask(
     val bitmask = bitmasks[ext.extends]
     val bitpos = ext.bitpos
     if (bitmask != null && bitpos != null) {
-        val bitflag = Bitflag(name = ext.name, BigInteger.ONE.shiftLeft(bitpos.toInt()))
+        val value = BigInteger.ONE.shiftLeft(bitpos.toInt())
+        val bitflag = Bitflag(name = ext.name, value = value)
         if (added.add(bitflag)) {
             bitmask.bitflags.add(bitflag)
         }
@@ -45,7 +45,7 @@ private fun extendEnum(
     ext: RequireValue,
     enums: Map<Identifier, Enum>,
     added: MutableSet<Entity>,
-    extnumber: Long?,
+    extnumber: Long? = null,
 ) {
     val enum = enums[ext.extends]
     val value = getVariantValue(ext, extnumber)

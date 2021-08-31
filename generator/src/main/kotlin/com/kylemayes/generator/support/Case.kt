@@ -2,7 +2,7 @@
 
 package com.kylemayes.generator.support
 
-/** Converts this `snake_case` string to a `PascalCase` string. */
+/** Converts this `snake_case` identifier to a `PascalCase` identifier. */
 fun String.toPascalCase(): String {
     var pascal = ""
 
@@ -22,19 +22,23 @@ private val digitPrefixPattern = Regex("^(\\d+)(Bit|D)")
 private val weirdSuffixPattern1 = Regex("[A-Z][A-Z]+\\d+$")
 private val weirdSuffixPattern2 = Regex("([A-Z]+_)+[A-Z]+$")
 
-/** Converts this `camelCase` or `PascalCase` string to a `snake_case` string. */
+/** Converts this `camelCase` or `PascalCase` identifier to a `snake_case` identifier. */
 fun String.toSnakeCase(): String {
-    var snake = this[0].toString().toLowerCase()
+    var snake = this[0].toLowerCase().toString()
 
-    // Handle weird suffixes in cases like `textureCompressionETC2` (pattern 1)
-    // or `textureCompressionASTC_LDR` (pattern 2).
-    val weird = weirdSuffixPattern1.find(this) ?: weirdSuffixPattern2.find(this)
-    if (weird != null) {
-        val prefix = substring(0 until weird.range.first).toSnakeCase()
-        val suffix = substring(weird.range).toLowerCase()
+    // Match identifiers that are suffixed by multiple acronyms separated by
+    // underscores (e.g., `textureCompressionASTC_LDR`) or are suffixed by
+    // acronyms that contain digits (e.g., `textureCompressionETC2`) because
+    // these suffixes need to be specially handled.
+    val weirdSuffix = weirdSuffixPattern1.find(this) ?: weirdSuffixPattern2.find(this)
+    if (weirdSuffix != null) {
+        val prefix = substring(0 until weirdSuffix.range.first).toSnakeCase()
+        val suffix = substring(weirdSuffix.range).toLowerCase()
         return "${prefix}_$suffix"
     }
 
+    // Iterate over windows so we can look ahead at the next character and so
+    // we can look ahead for patterns that need to be specially handled.
     var upper = this[0].isUpperCase()
     val iterator = substring(1).windowed(5, partialWindows = true).iterator()
     while (iterator.hasNext()) {
@@ -49,9 +53,8 @@ fun String.toSnakeCase(): String {
         // lowercase characters (e.g., `shaderBufferInt64Atomics` would be
         // converted to `shader_buffer_int64_atomics`). However, there are cases
         // where it is preferable to group digits with the following characters
-        // (e.g., convert `residencyStandard3DBlockShape` to
-        // `residency_standard_3d_block_shape` rather than
-        // `residency_standard3_d_block_shape`).
+        // (e.g., convert `viewportScissor2D` to `viewport_scissor_2d` rather
+        // than `viewport_scissor2_d`).
         val match = digitPrefixPattern.find(window)
         if (match != null) {
             (2..match.value.length).forEach { _ -> iterator.next() }

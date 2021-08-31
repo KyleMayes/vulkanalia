@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 package com.kylemayes.generator.support
 
 import com.vladsch.flexmark.ast.BulletList

@@ -4,26 +4,24 @@ package com.kylemayes.generator.generate.file
 
 import com.kylemayes.generator.generate.support.generateAliases
 import com.kylemayes.generator.generate.support.generateManualUrl
-import com.kylemayes.generator.generate.support.getUnsupportedExtensionEntities
 import com.kylemayes.generator.registry.Bitflag
 import com.kylemayes.generator.registry.Bitmask
 import com.kylemayes.generator.registry.Registry
 import java.math.BigInteger
 
 /** Generates Rust `bitflags!` structs for Vulkan bitmasks. */
-fun Registry.generateBitmasks(): String {
-    val supported = bitmasks.values
-        .filter { !getUnsupportedExtensionEntities().contains(it.name) }
-        .sortedBy { it.name }
-    return """
+fun Registry.generateBitmasks() =
+    """
 use bitflags::bitflags;
 
 use crate::{Flags, Flags64};
 
-${supported.joinToString("\n") { generateBitmask(it) }}
-${generateAliases(supported.map { it.name }.toSet())}
+${bitmasks.values
+        .sortedBy { it.name }
+        .joinToString("\n") { generateBitmask(it) }}
+
+${generateAliases(bitmasks.keys)}
     """
-}
 
 /** Generates a Rust `bitflags!` struct for a Vulkan bitmask. */
 private fun Registry.generateBitmask(bitmask: Bitmask): String {

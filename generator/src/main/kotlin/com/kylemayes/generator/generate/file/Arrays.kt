@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 package com.kylemayes.generator.generate.file
 
 import com.kylemayes.generator.registry.Registry
