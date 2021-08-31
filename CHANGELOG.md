@@ -17,6 +17,7 @@
 - Changed `patch` field to default to `0` in `Version` instead of using `Option`
 - Reworked byte and string array types in Vulkan structs
 - Removed dummy `EMPTY` bitflags used in empty `bitflags!` instances
+- Fixed names of bitflags with numbers in the name (`AccessFlags2KHR` and `PipelineStageFlags2KHR`)
 
 ### Added
 - Added `Debug` requirement to extension struct traits (e.g., `ExtendsDeviceCreateInfo`)

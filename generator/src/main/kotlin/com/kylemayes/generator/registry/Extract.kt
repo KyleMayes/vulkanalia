@@ -608,7 +608,7 @@ fun String.intern(): Identifier {
     // Vulkan uses `FlagBits` to indicate bitmask types in some places and
     // `Flags` in others. We normalize all bitmask identifiers to use `Flags`
     // here for the sake of my sanity.
-    val string = this.replace(Regex("FlagBits([A-Z]+)?$"), "Flags$1")
+    val string = this.replace(Regex("FlagBits(\\d*)([A-Z]+)?$"), "Flags$1$2")
     return identifiers.getOrPut(string) { Identifier(string) }
 }
 
