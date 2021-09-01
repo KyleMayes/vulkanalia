@@ -92,7 +92,7 @@ unsafe fn create_instance(window: &Window, entry: &Entry) -> Result<Instance> {
 
     let extensions = vk_window::get_required_instance_extensions(window)
         .iter()
-        .map(|e| e.to_cstr().as_ptr())
+        .map(|e| e.as_ptr())
         .collect::<Vec<_>>();
 
     // Create

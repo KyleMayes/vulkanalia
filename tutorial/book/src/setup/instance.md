@@ -34,7 +34,7 @@ A lot of information in Vulkan is passed through structs instead of function par
 ```rust,noplaypen
 let extensions = vk_window::get_required_instance_extensions(window)
     .iter()
-    .map(|e| e.to_cstr().as_ptr())
+    .map(|e| e.as_ptr())
     .collect::<Vec<_>>();
 ```
 

@@ -30,7 +30,7 @@ use vulkanalia::vk::KhrSwapchainExtension;
 /// Whether the validation layers should be enabled.
 const VALIDATION_ENABLED: bool = cfg!(debug_assertions);
 /// The name of the validation layers.
-const VALIDATION_LAYER: vk::ExtensionName = vk::to_extension_name(b"VK_LAYER_KHRONOS_validation\0");
+const VALIDATION_LAYER: vk::ExtensionName = vk::ExtensionName::from_bytes(b"VK_LAYER_KHRONOS_validation");
 
 /// The required device extensions.
 const DEVICE_EXTENSIONS: &[vk::ExtensionName] = &[vk::KHR_SWAPCHAIN_EXTENSION.name];
@@ -398,7 +398,7 @@ unsafe fn create_instance(window: &Window, entry: &Entry, data: &mut AppData) ->
     }
 
     let layers = if VALIDATION_ENABLED {
-        vec![VALIDATION_LAYER.to_cstr().as_ptr()]
+        vec![VALIDATION_LAYER.as_ptr()]
     } else {
         Vec::new()
     };
@@ -407,11 +407,11 @@ unsafe fn create_instance(window: &Window, entry: &Entry, data: &mut AppData) ->
 
     let mut extensions = vk_window::get_required_instance_extensions(window)
         .iter()
-        .map(|e| e.to_cstr().as_ptr())
+        .map(|e| e.as_ptr())
         .collect::<Vec<_>>();
 
     if VALIDATION_ENABLED {
-        extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.name.to_cstr().as_ptr());
+        extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.name.as_ptr());
     }
 
     // Create
@@ -550,17 +550,14 @@ unsafe fn create_logical_device(instance: &Instance, data: &mut AppData) -> Resu
     // Layers
 
     let layers = if VALIDATION_ENABLED {
-        vec![VALIDATION_LAYER.to_cstr().as_ptr()]
+        vec![VALIDATION_LAYER.as_ptr()]
     } else {
         vec![]
     };
 
     // Extensions
 
-    let extensions = DEVICE_EXTENSIONS
-        .iter()
-        .map(|n| n.to_cstr().as_ptr())
-        .collect::<Vec<_>>();
+    let extensions = DEVICE_EXTENSIONS.iter().map(|n| n.as_ptr()).collect::<Vec<_>>();
 
     // Features
 
