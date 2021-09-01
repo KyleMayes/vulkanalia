@@ -199,7 +199,7 @@ unsafe fn check_physical_device_extensions(
 <p>Using a swapchain requires enabling the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_swapchain.html"><code class="hljs">VK_KHR_swapchain</code></a> extension first. Enabling the extension just requires a small change to the logical device creation structure in the <code>create_logical_device</code> function, first we'll convert our list of extensions to a list of null-terminated strings:</p>
 <pre><code class="language-rust noplaypen">let extensions = DEVICE_EXTENSIONS
     .iter()
-    .map(|n| n.to_cstr().as_ptr())
+    .map(|n| n.as_ptr())
     .collect::&lt;Vec&lt;_&gt;&gt;();
 </code></pre>
 <p>Then we just need to add the extension names to the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.DeviceCreateInfo.html"><code class="hljs">vk::DeviceCreateInfo</code></a> struct:</p>

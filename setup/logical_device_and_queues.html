@@ -193,7 +193,7 @@ let queue_info = vk::DeviceQueueCreateInfo::builder()
 <p>Previous implementations of Vulkan made a distinction between instance and device specific validation layers, but this is no longer the case. That means that the layer names we pass to <code>enabled_layer_names</code> later are ignored by up-to-date implementations. However, it is still a good idea to set them anyway to be compatible with older implementations.</p>
 <p>We wont be enabling any device extensions yet, so we will just construct a list of layer names containing the validation layer if validation is enabled.</p>
 <pre><code class="language-rust noplaypen">let layers = if VALIDATION_ENABLED {
-    vec![VALIDATION_LAYER.to_cstr().as_ptr()]
+    vec![VALIDATION_LAYER.as_ptr()]
 } else {
     vec![]
 };
