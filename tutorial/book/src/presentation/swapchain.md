@@ -66,7 +66,7 @@ Using a swapchain requires enabling the `VK_KHR_swapchain` extension first. Enab
 ```rust,noplaypen
 let extensions = DEVICE_EXTENSIONS
     .iter()
-    .map(|n| n.to_cstr().as_ptr())
+    .map(|n| n.as_ptr())
     .collect::<Vec<_>>();
 ```
 

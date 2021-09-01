@@ -27,7 +27,7 @@ const DEVICE_EXTENSIONS: &[vk::ExtensionName] = &[vk::KHR_SWAPCHAIN_EXTENSION.na
 /// The number of frames that will processed concurrently.
 const MAX_FRAMES_IN_FLIGHT: usize = 2;
 /// The required instance and device layer if validation is enabled.
-const VALIDATION_LAYER: vk::ExtensionName = vk::ExtensionName::from_bytes(b"VK_LAYER_KHRONOS_validation\0");
+const VALIDATION_LAYER: vk::ExtensionName = vk::ExtensionName::from_bytes(b"VK_LAYER_KHRONOS_validation");
 
 /// An example Vulkan app implementation.
 pub trait Example {

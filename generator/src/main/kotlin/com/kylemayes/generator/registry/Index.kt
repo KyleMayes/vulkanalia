@@ -25,7 +25,6 @@ fun Registry.indexEntities(): String {
     val entities = manualUrls.toMutableList()
 
     entities.addEntity("vk::make_version", "/vk/fn.make_version.html")
-    entities.addEntity("vk::to_extension_name", "/vk/fn.to_extension_name.html")
     entities.addEntity("vk::version_major", "/vk/fn.version_major.html")
     entities.addEntity("vk::version_minor", "/vk/fn.version_minor.html")
     entities.addEntity("vk::version_patch", "/vk/fn.version_patch.html")

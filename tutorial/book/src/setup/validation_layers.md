@@ -62,7 +62,7 @@ const VALIDATION_ENABLED: bool =
     cfg!(debug_assertions);
 
 const VALIDATION_LAYER: vk::ExtensionName =
-    vk::to_extension_name(b"VK_LAYER_KHRONOS_validation\0");
+    vk::ExtensionName::from_bytes(b"VK_LAYER_KHRONOS_validation");
 ```
 
 We'll add some new code to our `^create_instance` function that collects the supported instance layers into a `HashSet`, checks that the validation layer is available, and creates a list of layer names containing the validation layer. This code should go right below where the `vk::ApplicationInfo` struct is built:
@@ -79,7 +79,7 @@ if VALIDATION_ENABLED && !available_layers.contains(&VALIDATION_LAYER) {
 }
 
 let layers = if VALIDATION_ENABLED {
-    vec![VALIDATION_LAYER.to_cstr().as_ptr()]
+    vec![VALIDATION_LAYER.as_ptr()]
 } else {
     Vec::new()
 };
@@ -107,11 +107,11 @@ We'll add some more code to our `^create_instance` function. This time we'll mod
 ```rust,noplaypen
 let mut extensions = vk_window::get_required_instance_extensions(window)
     .iter()
-    .map(|e| e.to_cstr().as_ptr())
+    .map(|e| e.as_ptr())
     .collect::<Vec<_>>();
 
 if VALIDATION_ENABLED {
-    extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.name.to_cstr().as_ptr());
+    extensions.push(vk::EXT_DEBUG_UTILS_EXTENSION.name.as_ptr());
 }
 ```
 

@@ -60,7 +60,7 @@ We wont be enabling any device extensions yet, so we will just construct a list 
 
 ```rust,noplaypen
 let layers = if VALIDATION_ENABLED {
-    vec![VALIDATION_LAYER.to_cstr().as_ptr()]
+    vec![VALIDATION_LAYER.as_ptr()]
 } else {
     vec![]
 };
