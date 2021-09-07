@@ -4761,6 +4761,7 @@ impl StructureType {
     pub const QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT: Self = Self(1000388001);
     pub const PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT: Self = Self(1000392000);
     pub const PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT: Self = Self(1000392001);
+    pub const PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT: Self = Self(1000412000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5387,6 +5388,10 @@ impl fmt::Debug for StructureType {
             1000388001 => write!(f, "QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT"),
             1000392000 => write!(f, "PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT"),
             1000392001 => write!(f, "PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT"),
+            1000412000 => write!(
+                f,
+                "PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT"
+            ),
             _ => self.0.fmt(f),
         }
     }

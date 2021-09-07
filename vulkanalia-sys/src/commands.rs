@@ -3225,6 +3225,10 @@ pub type PFN_vkSetDebugUtilsObjectTagEXT = unsafe extern "system" fn(
     _tag_info: *const DebugUtilsObjectTagInfoEXT,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetDeviceMemoryPriorityEXT.html>
+pub type PFN_vkSetDeviceMemoryPriorityEXT =
+    unsafe extern "system" fn(_device: Device, _memory: DeviceMemory, _priority: f32);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetEvent.html>
 pub type PFN_vkSetEvent = unsafe extern "system" fn(_device: Device, _event: Event) -> Result;
 
