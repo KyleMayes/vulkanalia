@@ -8674,6 +8674,26 @@ impl Default for PhysicalDevicePCIBusInfoPropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub pageable_device_local_memory: Bool32,
+}
+
+impl Default for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT,
+            next: ptr::null_mut(),
+            pageable_device_local_memory: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevicePerformanceQueryFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]

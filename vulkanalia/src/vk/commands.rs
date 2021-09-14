@@ -407,6 +407,7 @@ pub struct DeviceCommands {
     pub reset_fences: PFN_vkResetFences,
     pub reset_query_pool: PFN_vkResetQueryPool,
     pub reset_query_pool_ext: PFN_vkResetQueryPoolEXT,
+    pub set_device_memory_priority_ext: PFN_vkSetDeviceMemoryPriorityEXT,
     pub set_event: PFN_vkSetEvent,
     pub set_hdr_metadata_ext: PFN_vkSetHdrMetadataEXT,
     pub set_local_dimming_amd: PFN_vkSetLocalDimmingAMD,
@@ -6191,6 +6192,21 @@ impl DeviceCommands {
                         _query_count: u32,
                     ) {
                         panic!("could not load vkResetQueryPoolEXT")
+                    }
+                    fallback
+                }
+            },
+            set_device_memory_priority_ext: {
+                let value = loader(b"vkSetDeviceMemoryPriorityEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _memory: DeviceMemory,
+                        _priority: f32,
+                    ) {
+                        panic!("could not load vkSetDeviceMemoryPriorityEXT")
                     }
                     fallback
                 }
