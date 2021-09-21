@@ -1,3 +1,8 @@
+## [0.12.0] - UNRELEASED
+
+### Bindings Updates
+- [September 21, 2021 Vulkan 1.2.193 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/129f6f69dcbc00184d771d2da969b4ed394ac80c)
+
 ## [0.11.0] - 2021-09-01
 
 ### Bindings Updates

@@ -9423,6 +9423,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiDrawFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerformanceQueryFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineCreationCacheControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {}
@@ -25974,6 +25975,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesN
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiDrawFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiviewFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePerformanceQueryFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDevicePipelineCreationCacheControlFeaturesEXT
@@ -30162,6 +30164,64 @@ impl ops::DerefMut for PhysicalDevicePCIBusInfoPropertiesEXTBuilder {
 
 unsafe impl Cast for PhysicalDevicePCIBusInfoPropertiesEXTBuilder {
     type Target = PhysicalDevicePCIBusInfoPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {
+    type Target = PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {
+    type Builder = PhysicalDevicePageableDeviceLocalMemoryFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePageableDeviceLocalMemoryFeaturesEXTBuilder {
+    value: PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT,
+}
+
+impl PhysicalDevicePageableDeviceLocalMemoryFeaturesEXTBuilder {
+    #[inline]
+    pub fn pageable_device_local_memory(mut self, pageable_device_local_memory: bool) -> Self {
+        self.value.pageable_device_local_memory = pageable_device_local_memory as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXTBuilder {
+    type Target = PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXTBuilder {
+    type Target = PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {

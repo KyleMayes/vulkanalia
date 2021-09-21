@@ -1924,6 +1924,22 @@ pub trait ExtMultiDrawExtension: DeviceV1_0 {
 
 impl ExtMultiDrawExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pageable_device_local_memory.html>
+pub trait ExtPageableDeviceLocalMemoryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetDeviceMemoryPriorityEXT.html>
+    #[inline]
+    unsafe fn set_device_memory_priority_ext(&self, memory: DeviceMemory, priority: f32) {
+        let __result =
+            (self.commands().set_device_memory_priority_ext)(self.handle(), memory, priority);
+    }
+}
+
+impl ExtPageableDeviceLocalMemoryExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pci_bus_info.html>
 pub trait ExtPciBusInfoExtension: DeviceV1_0 {
     /// The metadata for this extension.
