@@ -205,7 +205,7 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
         }
 
         val repo = github.getRepository(repo)
-        val head = "vk-$latestCommit"
+        val head = "vk-${latestCommit.shA1}"
         val base = "master"
 
         val existing = repo.queryPullRequests()
