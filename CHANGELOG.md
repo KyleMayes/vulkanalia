@@ -1,3 +1,11 @@
+## [0.12.0] - UNRELEASED
+
+### Bindings Updates
+- [September 7, 2021 Vulkan 1.2.191 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ef0df9ab7cfd5081018b21174d10bc1d47cb734c)
+- [September 14, 2021 Vulkan 1.2.192 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/a09f9efe488cdd97c0362622fc1187f09302689e)
+- [Add new VK_DRIVER_IDs for upcoming Mesa drivers. (#1642)](https://github.com/KhronosGroup/Vulkan-Docs/commit/4eb2b9e1b8990862cc4c491f209f4fe9c3ae9210)
+- [September 21, 2021 Vulkan 1.2.193 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/129f6f69dcbc00184d771d2da969b4ed394ac80c)
+
 ## [0.11.0] - 2021-09-01
 
 ### Bindings Updates

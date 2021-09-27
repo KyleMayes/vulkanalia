@@ -1376,6 +1376,9 @@ impl DriverId {
     pub const COREAVI_PROPRIETARY: Self = Self(15);
     pub const JUICE_PROPRIETARY: Self = Self(16);
     pub const VERISILICON_PROPRIETARY: Self = Self(17);
+    pub const MESA_TURNIP: Self = Self(18);
+    pub const MESA_V3DV: Self = Self(19);
+    pub const MESA_PANVK: Self = Self(20);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1410,6 +1413,9 @@ impl fmt::Debug for DriverId {
             15 => write!(f, "COREAVI_PROPRIETARY"),
             16 => write!(f, "JUICE_PROPRIETARY"),
             17 => write!(f, "VERISILICON_PROPRIETARY"),
+            18 => write!(f, "MESA_TURNIP"),
+            19 => write!(f, "MESA_V3DV"),
+            20 => write!(f, "MESA_PANVK"),
             _ => self.0.fmt(f),
         }
     }
@@ -4761,6 +4767,7 @@ impl StructureType {
     pub const QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT: Self = Self(1000388001);
     pub const PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT: Self = Self(1000392000);
     pub const PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT: Self = Self(1000392001);
+    pub const PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT: Self = Self(1000412000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5387,6 +5394,10 @@ impl fmt::Debug for StructureType {
             1000388001 => write!(f, "QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT"),
             1000392000 => write!(f, "PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT"),
             1000392001 => write!(f, "PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT"),
+            1000412000 => write!(
+                f,
+                "PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT"
+            ),
             _ => self.0.fmt(f),
         }
     }
