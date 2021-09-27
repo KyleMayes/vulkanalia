@@ -1190,6 +1190,22 @@ pub const EXT_MULTI_DRAW_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pageable_device_local_memory.html>
+#[allow(deprecated)]
+pub const EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_pageable_device_local_memory"),
+    number: 413,
+    type_: "device",
+    author: "EXT",
+    contact: "Piers Daniell @pdaniell-nv",
+    platform: None,
+    required_extensions: Some(&[EXT_MEMORY_PRIORITY_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_pci_bus_info.html>
 #[allow(deprecated)]
 pub const EXT_PCI_BUS_INFO_EXTENSION: Extension = Extension {
