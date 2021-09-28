@@ -195,6 +195,7 @@ pub struct DeviceCommands {
     pub create_acceleration_structure_khr: PFN_vkCreateAccelerationStructureKHR,
     pub create_acceleration_structure_nv: PFN_vkCreateAccelerationStructureNV,
     pub create_buffer: PFN_vkCreateBuffer,
+    pub create_buffer_collection_fuchsia: PFN_vkCreateBufferCollectionFUCHSIA,
     pub create_buffer_view: PFN_vkCreateBufferView,
     pub create_command_pool: PFN_vkCreateCommandPool,
     pub create_compute_pipelines: PFN_vkCreateComputePipelines,
@@ -235,6 +236,7 @@ pub struct DeviceCommands {
     pub destroy_acceleration_structure_khr: PFN_vkDestroyAccelerationStructureKHR,
     pub destroy_acceleration_structure_nv: PFN_vkDestroyAccelerationStructureNV,
     pub destroy_buffer: PFN_vkDestroyBuffer,
+    pub destroy_buffer_collection_fuchsia: PFN_vkDestroyBufferCollectionFUCHSIA,
     pub destroy_buffer_view: PFN_vkDestroyBufferView,
     pub destroy_command_pool: PFN_vkDestroyCommandPool,
     pub destroy_cu_function_nvx: PFN_vkDestroyCuFunctionNVX,
@@ -281,6 +283,7 @@ pub struct DeviceCommands {
         PFN_vkGetAccelerationStructureMemoryRequirementsNV,
     pub get_android_hardware_buffer_properties_android:
         PFN_vkGetAndroidHardwareBufferPropertiesANDROID,
+    pub get_buffer_collection_properties_fuchsia: PFN_vkGetBufferCollectionPropertiesFUCHSIA,
     pub get_buffer_device_address: PFN_vkGetBufferDeviceAddress,
     pub get_buffer_device_address_ext: PFN_vkGetBufferDeviceAddressEXT,
     pub get_buffer_device_address_khr: PFN_vkGetBufferDeviceAddressKHR,
@@ -407,6 +410,10 @@ pub struct DeviceCommands {
     pub reset_fences: PFN_vkResetFences,
     pub reset_query_pool: PFN_vkResetQueryPool,
     pub reset_query_pool_ext: PFN_vkResetQueryPoolEXT,
+    pub set_buffer_collection_buffer_constraints_fuchsia:
+        PFN_vkSetBufferCollectionBufferConstraintsFUCHSIA,
+    pub set_buffer_collection_image_constraints_fuchsia:
+        PFN_vkSetBufferCollectionImageConstraintsFUCHSIA,
     pub set_device_memory_priority_ext: PFN_vkSetDeviceMemoryPriorityEXT,
     pub set_event: PFN_vkSetEvent,
     pub set_hdr_metadata_ext: PFN_vkSetHdrMetadataEXT,
@@ -3127,6 +3134,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            create_buffer_collection_fuchsia: {
+                let value = loader(b"vkCreateBufferCollectionFUCHSIA\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const BufferCollectionCreateInfoFUCHSIA,
+                        _allocator: *const AllocationCallbacks,
+                        _collection: *mut BufferCollectionFUCHSIA,
+                    ) -> Result {
+                        panic!("could not load vkCreateBufferCollectionFUCHSIA")
+                    }
+                    fallback
+                }
+            },
             create_buffer_view: {
                 let value = loader(b"vkCreateBufferView\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -3763,6 +3786,21 @@ impl DeviceCommands {
                         _allocator: *const AllocationCallbacks,
                     ) {
                         panic!("could not load vkDestroyBuffer")
+                    }
+                    fallback
+                }
+            },
+            destroy_buffer_collection_fuchsia: {
+                let value = loader(b"vkDestroyBufferCollectionFUCHSIA\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _collection: BufferCollectionFUCHSIA,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyBufferCollectionFUCHSIA")
                     }
                     fallback
                 }
@@ -4406,6 +4444,21 @@ impl DeviceCommands {
                         _properties: *mut AndroidHardwareBufferPropertiesANDROID,
                     ) -> Result {
                         panic!("could not load vkGetAndroidHardwareBufferPropertiesANDROID")
+                    }
+                    fallback
+                }
+            },
+            get_buffer_collection_properties_fuchsia: {
+                let value = loader(b"vkGetBufferCollectionPropertiesFUCHSIA\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _collection: BufferCollectionFUCHSIA,
+                        _properties: *mut BufferCollectionPropertiesFUCHSIA,
+                    ) -> Result {
+                        panic!("could not load vkGetBufferCollectionPropertiesFUCHSIA")
                     }
                     fallback
                 }
@@ -6192,6 +6245,44 @@ impl DeviceCommands {
                         _query_count: u32,
                     ) {
                         panic!("could not load vkResetQueryPoolEXT")
+                    }
+                    fallback
+                }
+            },
+            set_buffer_collection_buffer_constraints_fuchsia: {
+                let value = loader(
+                    b"vkSetBufferCollectionBufferConstraintsFUCHSIA\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _collection: BufferCollectionFUCHSIA,
+                        _buffer_constraints_info: *const BufferConstraintsInfoFUCHSIA,
+                    ) -> Result {
+                        panic!("could not load vkSetBufferCollectionBufferConstraintsFUCHSIA")
+                    }
+                    fallback
+                }
+            },
+            set_buffer_collection_image_constraints_fuchsia: {
+                let value = loader(
+                    b"vkSetBufferCollectionImageConstraintsFUCHSIA\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _collection: BufferCollectionFUCHSIA,
+                        _image_constraints_info: *const ImageConstraintsInfoFUCHSIA,
+                    ) -> Result {
+                        panic!("could not load vkSetBufferCollectionImageConstraintsFUCHSIA")
                     }
                     fallback
                 }

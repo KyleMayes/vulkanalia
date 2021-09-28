@@ -1266,6 +1266,14 @@ pub type PFN_vkCreateBuffer = unsafe extern "system" fn(
     _buffer: *mut Buffer,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateBufferCollectionFUCHSIA.html>
+pub type PFN_vkCreateBufferCollectionFUCHSIA = unsafe extern "system" fn(
+    _device: Device,
+    _create_info: *const BufferCollectionCreateInfoFUCHSIA,
+    _allocator: *const AllocationCallbacks,
+    _collection: *mut BufferCollectionFUCHSIA,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateBufferView.html>
 pub type PFN_vkCreateBufferView = unsafe extern "system" fn(
     _device: Device,
@@ -1733,6 +1741,13 @@ pub type PFN_vkDestroyBuffer = unsafe extern "system" fn(
     _allocator: *const AllocationCallbacks,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyBufferCollectionFUCHSIA.html>
+pub type PFN_vkDestroyBufferCollectionFUCHSIA = unsafe extern "system" fn(
+    _device: Device,
+    _collection: BufferCollectionFUCHSIA,
+    _allocator: *const AllocationCallbacks,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyBufferView.html>
 pub type PFN_vkDestroyBufferView = unsafe extern "system" fn(
     _device: Device,
@@ -2089,6 +2104,13 @@ pub type PFN_vkGetAndroidHardwareBufferPropertiesANDROID = unsafe extern "system
     _device: Device,
     _buffer: *const AHardwareBuffer,
     _properties: *mut AndroidHardwareBufferPropertiesANDROID,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferCollectionPropertiesFUCHSIA.html>
+pub type PFN_vkGetBufferCollectionPropertiesFUCHSIA = unsafe extern "system" fn(
+    _device: Device,
+    _collection: BufferCollectionFUCHSIA,
+    _properties: *mut BufferCollectionPropertiesFUCHSIA,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferDeviceAddress.html>
@@ -3212,6 +3234,20 @@ pub type PFN_vkResetQueryPool = unsafe extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkResetQueryPoolEXT.html>
 pub type PFN_vkResetQueryPoolEXT = PFN_vkResetQueryPool;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetBufferCollectionBufferConstraintsFUCHSIA.html>
+pub type PFN_vkSetBufferCollectionBufferConstraintsFUCHSIA = unsafe extern "system" fn(
+    _device: Device,
+    _collection: BufferCollectionFUCHSIA,
+    _buffer_constraints_info: *const BufferConstraintsInfoFUCHSIA,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetBufferCollectionImageConstraintsFUCHSIA.html>
+pub type PFN_vkSetBufferCollectionImageConstraintsFUCHSIA = unsafe extern "system" fn(
+    _device: Device,
+    _collection: BufferCollectionFUCHSIA,
+    _image_constraints_info: *const ImageConstraintsInfoFUCHSIA,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetDebugUtilsObjectNameEXT.html>
 pub type PFN_vkSetDebugUtilsObjectNameEXT = unsafe extern "system" fn(

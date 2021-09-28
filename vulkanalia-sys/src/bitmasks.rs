@@ -708,6 +708,19 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageConstraintsInfoFlagsFUCHSIA.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct ImageConstraintsInfoFlagsFUCHSIA: Flags {
+        const CPU_READ_RARELY = 1;
+        const CPU_READ_OFTEN = 1 << 1;
+        const CPU_WRITE_RARELY = 1 << 2;
+        const CPU_WRITE_OFTEN = 1 << 3;
+        const PROTECTED_OPTIONAL = 1 << 4;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -728,6 +741,13 @@ bitflags! {
         const CORNER_SAMPLED_NV = 1 << 13;
         const SUBSAMPLED_EXT = 1 << 14;
     }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageFormatConstraintsFlagsFUCHSIA.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct ImageFormatConstraintsFlagsFUCHSIA: Flags { }
 }
 
 bitflags! {

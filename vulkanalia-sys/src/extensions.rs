@@ -1769,6 +1769,25 @@ pub const EXT_YCBCR_IMAGE_ARRAYS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_FUCHSIA_buffer_collection.html>
+#[allow(deprecated)]
+pub const FUCHSIA_BUFFER_COLLECTION_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_FUCHSIA_buffer_collection"),
+    number: 367,
+    type_: "device",
+    author: "FUCHSIA",
+    contact: "John Rosasco @rosasco",
+    platform: Some("fuchsia"),
+    required_extensions: Some(&[
+        FUCHSIA_EXTERNAL_MEMORY_EXTENSION.name,
+        KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_FUCHSIA_external_memory.html>
 #[allow(deprecated)]
 pub const FUCHSIA_EXTERNAL_MEMORY_EXTENSION: Extension = Extension {
@@ -3477,7 +3496,7 @@ pub const NVX_BINARY_IMPORT_EXTENSION: Extension = Extension {
     number: 30,
     type_: "device",
     author: "NVX",
-    contact: "Eric Werness @ewerness,Liam Middlebrook @liam-middlebrook",
+    contact: "Eric Werness @ewerness-nv,Liam Middlebrook @liam-middlebrook",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -3493,7 +3512,7 @@ pub const NVX_IMAGE_VIEW_HANDLE_EXTENSION: Extension = Extension {
     number: 31,
     type_: "device",
     author: "NVX",
-    contact: "Eric Werness @ewerness",
+    contact: "Eric Werness @ewerness-nv",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -3688,7 +3707,7 @@ pub const NV_DEVICE_GENERATED_COMMANDS_EXTENSION: Extension = Extension {
     author: "NV",
     contact: "Christoph Kubisch @pixeljetstream",
     platform: None,
-    required_extensions: None,
+    required_extensions: Some(&[KHR_BUFFER_DEVICE_ADDRESS_EXTENSION.name]),
     required_version: Some("1.1"),
     deprecated_by: None,
     obsoleted_by: None,
@@ -3914,7 +3933,7 @@ pub const NV_RAY_TRACING_EXTENSION: Extension = Extension {
     number: 166,
     type_: "device",
     author: "NV",
-    contact: "Eric Werness @ewerness",
+    contact: "Eric Werness @ewerness-nv",
     platform: None,
     required_extensions: Some(&[
         KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,

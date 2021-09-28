@@ -1084,6 +1084,162 @@ impl Default for BlitImageInfo2KHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferCollectionBufferCreateInfoFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BufferCollectionBufferCreateInfoFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub collection: BufferCollectionFUCHSIA,
+    pub index: u32,
+}
+
+impl Default for BufferCollectionBufferCreateInfoFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BUFFER_COLLECTION_BUFFER_CREATE_INFO_FUCHSIA,
+            next: ptr::null(),
+            collection: BufferCollectionFUCHSIA::default(),
+            index: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferCollectionConstraintsInfoFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BufferCollectionConstraintsInfoFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub min_buffer_count: u32,
+    pub max_buffer_count: u32,
+    pub min_buffer_count_for_camping: u32,
+    pub min_buffer_count_for_dedicated_slack: u32,
+    pub min_buffer_count_for_shared_slack: u32,
+}
+
+impl Default for BufferCollectionConstraintsInfoFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BUFFER_COLLECTION_CONSTRAINTS_INFO_FUCHSIA,
+            next: ptr::null(),
+            min_buffer_count: u32::default(),
+            max_buffer_count: u32::default(),
+            min_buffer_count_for_camping: u32::default(),
+            min_buffer_count_for_dedicated_slack: u32::default(),
+            min_buffer_count_for_shared_slack: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferCollectionCreateInfoFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BufferCollectionCreateInfoFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub collection_token: zx_handle_t,
+}
+
+impl Default for BufferCollectionCreateInfoFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BUFFER_COLLECTION_CREATE_INFO_FUCHSIA,
+            next: ptr::null(),
+            collection_token: zx_handle_t::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferCollectionImageCreateInfoFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BufferCollectionImageCreateInfoFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub collection: BufferCollectionFUCHSIA,
+    pub index: u32,
+}
+
+impl Default for BufferCollectionImageCreateInfoFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BUFFER_COLLECTION_IMAGE_CREATE_INFO_FUCHSIA,
+            next: ptr::null(),
+            collection: BufferCollectionFUCHSIA::default(),
+            index: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferCollectionPropertiesFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BufferCollectionPropertiesFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub memory_type_bits: u32,
+    pub buffer_count: u32,
+    pub create_info_index: u32,
+    pub sysmem_pixel_format: u64,
+    pub format_features: FormatFeatureFlags,
+    pub sysmem_color_space_index: SysmemColorSpaceFUCHSIA,
+    pub sampler_ycbcr_conversion_components: ComponentMapping,
+    pub suggested_ycbcr_model: SamplerYcbcrModelConversion,
+    pub suggested_ycbcr_range: SamplerYcbcrRange,
+    pub suggested_x_chroma_offset: ChromaLocation,
+    pub suggested_y_chroma_offset: ChromaLocation,
+}
+
+impl Default for BufferCollectionPropertiesFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BUFFER_COLLECTION_PROPERTIES_FUCHSIA,
+            next: ptr::null_mut(),
+            memory_type_bits: u32::default(),
+            buffer_count: u32::default(),
+            create_info_index: u32::default(),
+            sysmem_pixel_format: u64::default(),
+            format_features: FormatFeatureFlags::default(),
+            sysmem_color_space_index: SysmemColorSpaceFUCHSIA::default(),
+            sampler_ycbcr_conversion_components: ComponentMapping::default(),
+            suggested_ycbcr_model: SamplerYcbcrModelConversion::default(),
+            suggested_ycbcr_range: SamplerYcbcrRange::default(),
+            suggested_x_chroma_offset: ChromaLocation::default(),
+            suggested_y_chroma_offset: ChromaLocation::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferConstraintsInfoFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BufferConstraintsInfoFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub create_info: BufferCreateInfo,
+    pub required_format_features: FormatFeatureFlags,
+    pub buffer_collection_constraints: BufferCollectionConstraintsInfoFUCHSIA,
+}
+
+impl Default for BufferConstraintsInfoFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BUFFER_CONSTRAINTS_INFO_FUCHSIA,
+            next: ptr::null(),
+            create_info: BufferCreateInfo::default(),
+            required_format_features: FormatFeatureFlags::default(),
+            buffer_collection_constraints: BufferCollectionConstraintsInfoFUCHSIA::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferCopy.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -4671,6 +4827,32 @@ impl Default for ImageBlit2KHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageConstraintsInfoFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImageConstraintsInfoFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub format_constraints_count: u32,
+    pub format_constraints: *const ImageFormatConstraintsInfoFUCHSIA,
+    pub buffer_collection_constraints: BufferCollectionConstraintsInfoFUCHSIA,
+    pub flags: ImageConstraintsInfoFlagsFUCHSIA,
+}
+
+impl Default for ImageConstraintsInfoFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_CONSTRAINTS_INFO_FUCHSIA,
+            next: ptr::null(),
+            format_constraints_count: u32::default(),
+            format_constraints: ptr::null(),
+            buffer_collection_constraints: BufferCollectionConstraintsInfoFUCHSIA::default(),
+            flags: ImageConstraintsInfoFlagsFUCHSIA::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageCopy.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -4816,6 +4998,36 @@ impl Default for ImageDrmFormatModifierPropertiesEXT {
             s_type: StructureType::IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT,
             next: ptr::null_mut(),
             drm_format_modifier: u64::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageFormatConstraintsInfoFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImageFormatConstraintsInfoFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub image_create_info: ImageCreateInfo,
+    pub required_format_features: FormatFeatureFlags,
+    pub flags: ImageFormatConstraintsFlagsFUCHSIA,
+    pub sysmem_pixel_format: u64,
+    pub color_space_count: u32,
+    pub color_spaces: *const SysmemColorSpaceFUCHSIA,
+}
+
+impl Default for ImageFormatConstraintsInfoFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_FORMAT_CONSTRAINTS_INFO_FUCHSIA,
+            next: ptr::null(),
+            image_create_info: ImageCreateInfo::default(),
+            required_format_features: FormatFeatureFlags::default(),
+            flags: ImageFormatConstraintsFlagsFUCHSIA::default(),
+            sysmem_pixel_format: u64::default(),
+            color_space_count: u32::default(),
+            color_spaces: ptr::null(),
         }
     }
 }
@@ -5322,6 +5534,28 @@ impl Default for ImportFenceWin32HandleInfoKHR {
             handle_type: ExternalFenceHandleTypeFlags::default(),
             handle: ptr::null_mut(),
             name: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImportMemoryBufferCollectionFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImportMemoryBufferCollectionFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub collection: BufferCollectionFUCHSIA,
+    pub index: u32,
+}
+
+impl Default for ImportMemoryBufferCollectionFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMPORT_MEMORY_BUFFER_COLLECTION_FUCHSIA,
+            next: ptr::null(),
+            collection: BufferCollectionFUCHSIA::default(),
+            index: u32::default(),
         }
     }
 }
@@ -14109,6 +14343,26 @@ impl Default for SwapchainDisplayNativeHdrCreateInfoAMD {
             s_type: StructureType::SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD,
             next: ptr::null(),
             local_dimming_enable: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSysmemColorSpaceFUCHSIA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SysmemColorSpaceFUCHSIA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub color_space: u32,
+}
+
+impl Default for SysmemColorSpaceFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SYSMEM_COLOR_SPACE_FUCHSIA,
+            next: ptr::null(),
+            color_space: u32::default(),
         }
     }
 }

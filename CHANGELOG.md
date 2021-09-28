@@ -5,6 +5,8 @@
 - [September 14, 2021 Vulkan 1.2.192 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/a09f9efe488cdd97c0362622fc1187f09302689e)
 - [Add new VK_DRIVER_IDs for upcoming Mesa drivers. (#1642)](https://github.com/KhronosGroup/Vulkan-Docs/commit/4eb2b9e1b8990862cc4c491f209f4fe9c3ae9210)
 - [September 21, 2021 Vulkan 1.2.193 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/129f6f69dcbc00184d771d2da969b4ed394ac80c)
+- [vk.xml: Adding len attribute to VkCuModuleCreateInfoNVX struct member pData. (#1646)](https://github.com/KhronosGroup/Vulkan-Docs/commit/b1b9113f0c605573024a8a0e61adf0a576563145)
+- [September 28, 2021 Vulkan 1.2.194 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/a0960966d565bdfc6e853a0bc471e58fdbd374ef)
 
 ## [0.11.0] - 2021-09-01
 
