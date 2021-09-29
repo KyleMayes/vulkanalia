@@ -1039,6 +1039,7 @@ impl DebugReportObjectTypeEXT {
     pub const CU_FUNCTION_NVX: Self = Self(1000029001);
     pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000150000);
     pub const ACCELERATION_STRUCTURE_NV: Self = Self(1000165000);
+    pub const BUFFER_COLLECTION_FUCHSIA: Self = Self(1000366000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1094,6 +1095,7 @@ impl fmt::Debug for DebugReportObjectTypeEXT {
             1000029001 => write!(f, "CU_FUNCTION_NVX"),
             1000150000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
             1000165000 => write!(f, "ACCELERATION_STRUCTURE_NV"),
+            1000366000 => write!(f, "BUFFER_COLLECTION_FUCHSIA"),
             _ => self.0.fmt(f),
         }
     }
@@ -2772,6 +2774,7 @@ impl ObjectType {
     pub const DEFERRED_OPERATION_KHR: Self = Self(1000268000);
     pub const INDIRECT_COMMANDS_LAYOUT_NV: Self = Self(1000277000);
     pub const PRIVATE_DATA_SLOT_EXT: Self = Self(1000295000);
+    pub const BUFFER_COLLECTION_FUCHSIA: Self = Self(1000366000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2832,6 +2835,7 @@ impl fmt::Debug for ObjectType {
             1000268000 => write!(f, "DEFERRED_OPERATION_KHR"),
             1000277000 => write!(f, "INDIRECT_COMMANDS_LAYOUT_NV"),
             1000295000 => write!(f, "PRIVATE_DATA_SLOT_EXT"),
+            1000366000 => write!(f, "BUFFER_COLLECTION_FUCHSIA"),
             _ => self.0.fmt(f),
         }
     }
@@ -4753,6 +4757,16 @@ impl StructureType {
     pub const MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000364002);
     pub const IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000365000);
     pub const SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000365001);
+    pub const BUFFER_COLLECTION_CREATE_INFO_FUCHSIA: Self = Self(1000366000);
+    pub const IMPORT_MEMORY_BUFFER_COLLECTION_FUCHSIA: Self = Self(1000366001);
+    pub const BUFFER_COLLECTION_IMAGE_CREATE_INFO_FUCHSIA: Self = Self(1000366002);
+    pub const BUFFER_COLLECTION_PROPERTIES_FUCHSIA: Self = Self(1000366003);
+    pub const BUFFER_CONSTRAINTS_INFO_FUCHSIA: Self = Self(1000366004);
+    pub const BUFFER_COLLECTION_BUFFER_CREATE_INFO_FUCHSIA: Self = Self(1000366005);
+    pub const IMAGE_CONSTRAINTS_INFO_FUCHSIA: Self = Self(1000366006);
+    pub const IMAGE_FORMAT_CONSTRAINTS_INFO_FUCHSIA: Self = Self(1000366007);
+    pub const SYSMEM_COLOR_SPACE_FUCHSIA: Self = Self(1000366008);
+    pub const BUFFER_COLLECTION_CONSTRAINTS_INFO_FUCHSIA: Self = Self(1000366009);
     pub const SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI: Self = Self(1000369000);
     pub const PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI: Self = Self(1000369001);
     pub const PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI: Self = Self(1000369002);
@@ -5380,6 +5394,16 @@ impl fmt::Debug for StructureType {
             1000364002 => write!(f, "MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA"),
             1000365000 => write!(f, "IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA"),
             1000365001 => write!(f, "SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA"),
+            1000366000 => write!(f, "BUFFER_COLLECTION_CREATE_INFO_FUCHSIA"),
+            1000366001 => write!(f, "IMPORT_MEMORY_BUFFER_COLLECTION_FUCHSIA"),
+            1000366002 => write!(f, "BUFFER_COLLECTION_IMAGE_CREATE_INFO_FUCHSIA"),
+            1000366003 => write!(f, "BUFFER_COLLECTION_PROPERTIES_FUCHSIA"),
+            1000366004 => write!(f, "BUFFER_CONSTRAINTS_INFO_FUCHSIA"),
+            1000366005 => write!(f, "BUFFER_COLLECTION_BUFFER_CREATE_INFO_FUCHSIA"),
+            1000366006 => write!(f, "IMAGE_CONSTRAINTS_INFO_FUCHSIA"),
+            1000366007 => write!(f, "IMAGE_FORMAT_CONSTRAINTS_INFO_FUCHSIA"),
+            1000366008 => write!(f, "SYSMEM_COLOR_SPACE_FUCHSIA"),
+            1000366009 => write!(f, "BUFFER_COLLECTION_CONSTRAINTS_INFO_FUCHSIA"),
             1000369000 => write!(f, "SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI"),
             1000369001 => write!(f, "PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI"),
             1000369002 => write!(f, "PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI"),

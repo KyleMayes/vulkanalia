@@ -3869,6 +3869,484 @@ unsafe impl<'b> Cast for BlitImageInfo2KHRBuilder<'b> {
     }
 }
 
+unsafe impl Cast for BufferCollectionBufferCreateInfoFUCHSIA {
+    type Target = BufferCollectionBufferCreateInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for BufferCollectionBufferCreateInfoFUCHSIA {
+    type Builder = BufferCollectionBufferCreateInfoFUCHSIABuilder;
+}
+
+/// A builder for a [`BufferCollectionBufferCreateInfoFUCHSIA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct BufferCollectionBufferCreateInfoFUCHSIABuilder {
+    value: BufferCollectionBufferCreateInfoFUCHSIA,
+}
+
+impl BufferCollectionBufferCreateInfoFUCHSIABuilder {
+    #[inline]
+    pub fn collection(mut self, collection: BufferCollectionFUCHSIA) -> Self {
+        self.value.collection = collection;
+        self
+    }
+
+    #[inline]
+    pub fn index(mut self, index: u32) -> Self {
+        self.value.index = index;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> BufferCollectionBufferCreateInfoFUCHSIA {
+        self.value
+    }
+}
+
+impl ops::Deref for BufferCollectionBufferCreateInfoFUCHSIABuilder {
+    type Target = BufferCollectionBufferCreateInfoFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for BufferCollectionBufferCreateInfoFUCHSIABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for BufferCollectionBufferCreateInfoFUCHSIABuilder {
+    type Target = BufferCollectionBufferCreateInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for BufferCollectionConstraintsInfoFUCHSIA {
+    type Target = BufferCollectionConstraintsInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for BufferCollectionConstraintsInfoFUCHSIA {
+    type Builder = BufferCollectionConstraintsInfoFUCHSIABuilder;
+}
+
+/// A builder for a [`BufferCollectionConstraintsInfoFUCHSIA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct BufferCollectionConstraintsInfoFUCHSIABuilder {
+    value: BufferCollectionConstraintsInfoFUCHSIA,
+}
+
+impl BufferCollectionConstraintsInfoFUCHSIABuilder {
+    #[inline]
+    pub fn min_buffer_count(mut self, min_buffer_count: u32) -> Self {
+        self.value.min_buffer_count = min_buffer_count;
+        self
+    }
+
+    #[inline]
+    pub fn max_buffer_count(mut self, max_buffer_count: u32) -> Self {
+        self.value.max_buffer_count = max_buffer_count;
+        self
+    }
+
+    #[inline]
+    pub fn min_buffer_count_for_camping(mut self, min_buffer_count_for_camping: u32) -> Self {
+        self.value.min_buffer_count_for_camping = min_buffer_count_for_camping;
+        self
+    }
+
+    #[inline]
+    pub fn min_buffer_count_for_dedicated_slack(
+        mut self,
+        min_buffer_count_for_dedicated_slack: u32,
+    ) -> Self {
+        self.value.min_buffer_count_for_dedicated_slack = min_buffer_count_for_dedicated_slack;
+        self
+    }
+
+    #[inline]
+    pub fn min_buffer_count_for_shared_slack(
+        mut self,
+        min_buffer_count_for_shared_slack: u32,
+    ) -> Self {
+        self.value.min_buffer_count_for_shared_slack = min_buffer_count_for_shared_slack;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> BufferCollectionConstraintsInfoFUCHSIA {
+        self.value
+    }
+}
+
+impl ops::Deref for BufferCollectionConstraintsInfoFUCHSIABuilder {
+    type Target = BufferCollectionConstraintsInfoFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for BufferCollectionConstraintsInfoFUCHSIABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for BufferCollectionConstraintsInfoFUCHSIABuilder {
+    type Target = BufferCollectionConstraintsInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for BufferCollectionCreateInfoFUCHSIA {
+    type Target = BufferCollectionCreateInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for BufferCollectionCreateInfoFUCHSIA {
+    type Builder = BufferCollectionCreateInfoFUCHSIABuilder;
+}
+
+/// A builder for a [`BufferCollectionCreateInfoFUCHSIA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct BufferCollectionCreateInfoFUCHSIABuilder {
+    value: BufferCollectionCreateInfoFUCHSIA,
+}
+
+impl BufferCollectionCreateInfoFUCHSIABuilder {
+    #[inline]
+    pub fn collection_token(mut self, collection_token: zx_handle_t) -> Self {
+        self.value.collection_token = collection_token;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> BufferCollectionCreateInfoFUCHSIA {
+        self.value
+    }
+}
+
+impl ops::Deref for BufferCollectionCreateInfoFUCHSIABuilder {
+    type Target = BufferCollectionCreateInfoFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for BufferCollectionCreateInfoFUCHSIABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for BufferCollectionCreateInfoFUCHSIABuilder {
+    type Target = BufferCollectionCreateInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for BufferCollectionImageCreateInfoFUCHSIA {
+    type Target = BufferCollectionImageCreateInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for BufferCollectionImageCreateInfoFUCHSIA {
+    type Builder = BufferCollectionImageCreateInfoFUCHSIABuilder;
+}
+
+/// A builder for a [`BufferCollectionImageCreateInfoFUCHSIA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct BufferCollectionImageCreateInfoFUCHSIABuilder {
+    value: BufferCollectionImageCreateInfoFUCHSIA,
+}
+
+impl BufferCollectionImageCreateInfoFUCHSIABuilder {
+    #[inline]
+    pub fn collection(mut self, collection: BufferCollectionFUCHSIA) -> Self {
+        self.value.collection = collection;
+        self
+    }
+
+    #[inline]
+    pub fn index(mut self, index: u32) -> Self {
+        self.value.index = index;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> BufferCollectionImageCreateInfoFUCHSIA {
+        self.value
+    }
+}
+
+impl ops::Deref for BufferCollectionImageCreateInfoFUCHSIABuilder {
+    type Target = BufferCollectionImageCreateInfoFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for BufferCollectionImageCreateInfoFUCHSIABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for BufferCollectionImageCreateInfoFUCHSIABuilder {
+    type Target = BufferCollectionImageCreateInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for BufferCollectionPropertiesFUCHSIA {
+    type Target = BufferCollectionPropertiesFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for BufferCollectionPropertiesFUCHSIA {
+    type Builder = BufferCollectionPropertiesFUCHSIABuilder;
+}
+
+/// A builder for a [`BufferCollectionPropertiesFUCHSIA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct BufferCollectionPropertiesFUCHSIABuilder {
+    value: BufferCollectionPropertiesFUCHSIA,
+}
+
+impl BufferCollectionPropertiesFUCHSIABuilder {
+    #[inline]
+    pub fn memory_type_bits(mut self, memory_type_bits: u32) -> Self {
+        self.value.memory_type_bits = memory_type_bits;
+        self
+    }
+
+    #[inline]
+    pub fn buffer_count(mut self, buffer_count: u32) -> Self {
+        self.value.buffer_count = buffer_count;
+        self
+    }
+
+    #[inline]
+    pub fn create_info_index(mut self, create_info_index: u32) -> Self {
+        self.value.create_info_index = create_info_index;
+        self
+    }
+
+    #[inline]
+    pub fn sysmem_pixel_format(mut self, sysmem_pixel_format: u64) -> Self {
+        self.value.sysmem_pixel_format = sysmem_pixel_format;
+        self
+    }
+
+    #[inline]
+    pub fn format_features(mut self, format_features: FormatFeatureFlags) -> Self {
+        self.value.format_features = format_features;
+        self
+    }
+
+    #[inline]
+    pub fn sysmem_color_space_index(
+        mut self,
+        sysmem_color_space_index: impl Cast<Target = SysmemColorSpaceFUCHSIA>,
+    ) -> Self {
+        self.value.sysmem_color_space_index = sysmem_color_space_index.into();
+        self
+    }
+
+    #[inline]
+    pub fn sampler_ycbcr_conversion_components(
+        mut self,
+        sampler_ycbcr_conversion_components: impl Cast<Target = ComponentMapping>,
+    ) -> Self {
+        self.value.sampler_ycbcr_conversion_components = sampler_ycbcr_conversion_components.into();
+        self
+    }
+
+    #[inline]
+    pub fn suggested_ycbcr_model(
+        mut self,
+        suggested_ycbcr_model: SamplerYcbcrModelConversion,
+    ) -> Self {
+        self.value.suggested_ycbcr_model = suggested_ycbcr_model;
+        self
+    }
+
+    #[inline]
+    pub fn suggested_ycbcr_range(mut self, suggested_ycbcr_range: SamplerYcbcrRange) -> Self {
+        self.value.suggested_ycbcr_range = suggested_ycbcr_range;
+        self
+    }
+
+    #[inline]
+    pub fn suggested_x_chroma_offset(mut self, suggested_x_chroma_offset: ChromaLocation) -> Self {
+        self.value.suggested_x_chroma_offset = suggested_x_chroma_offset;
+        self
+    }
+
+    #[inline]
+    pub fn suggested_y_chroma_offset(mut self, suggested_y_chroma_offset: ChromaLocation) -> Self {
+        self.value.suggested_y_chroma_offset = suggested_y_chroma_offset;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> BufferCollectionPropertiesFUCHSIA {
+        self.value
+    }
+}
+
+impl ops::Deref for BufferCollectionPropertiesFUCHSIABuilder {
+    type Target = BufferCollectionPropertiesFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for BufferCollectionPropertiesFUCHSIABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for BufferCollectionPropertiesFUCHSIABuilder {
+    type Target = BufferCollectionPropertiesFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for BufferConstraintsInfoFUCHSIA {
+    type Target = BufferConstraintsInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for BufferConstraintsInfoFUCHSIA {
+    type Builder = BufferConstraintsInfoFUCHSIABuilder<'b>;
+}
+
+/// A builder for a [`BufferConstraintsInfoFUCHSIA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct BufferConstraintsInfoFUCHSIABuilder<'b> {
+    value: BufferConstraintsInfoFUCHSIA,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> BufferConstraintsInfoFUCHSIABuilder<'b> {
+    #[inline]
+    pub fn create_info(mut self, create_info: impl Cast<Target = BufferCreateInfo>) -> Self {
+        self.value.create_info = create_info.into();
+        self
+    }
+
+    #[inline]
+    pub fn required_format_features(
+        mut self,
+        required_format_features: FormatFeatureFlags,
+    ) -> Self {
+        self.value.required_format_features = required_format_features;
+        self
+    }
+
+    #[inline]
+    pub fn buffer_collection_constraints(
+        mut self,
+        buffer_collection_constraints: impl Cast<Target = BufferCollectionConstraintsInfoFUCHSIA>,
+    ) -> Self {
+        self.value.buffer_collection_constraints = buffer_collection_constraints.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> BufferConstraintsInfoFUCHSIA {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for BufferConstraintsInfoFUCHSIABuilder<'b> {
+    type Target = BufferConstraintsInfoFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for BufferConstraintsInfoFUCHSIABuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for BufferConstraintsInfoFUCHSIABuilder<'b> {
+    type Target = BufferConstraintsInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for BufferCopy {
     type Target = BufferCopy;
 
@@ -4011,6 +4489,7 @@ unsafe impl Cast for BufferCopy2KHRBuilder {
 
 /// A Vulkan struct that can be used to extend a [`BufferCreateInfo`].
 pub unsafe trait ExtendsBufferCreateInfo: fmt::Debug {}
+unsafe impl ExtendsBufferCreateInfo for BufferCollectionBufferCreateInfoFUCHSIA {}
 unsafe impl ExtendsBufferCreateInfo for BufferDeviceAddressCreateInfoEXT {}
 unsafe impl ExtendsBufferCreateInfo for BufferOpaqueCaptureAddressCreateInfo {}
 unsafe impl ExtendsBufferCreateInfo for DedicatedAllocationBufferCreateInfoNV {}
@@ -7245,14 +7724,9 @@ pub struct CuModuleCreateInfoNVXBuilder<'b> {
 
 impl<'b> CuModuleCreateInfoNVXBuilder<'b> {
     #[inline]
-    pub fn data_size(mut self, data_size: usize) -> Self {
-        self.value.data_size = data_size;
-        self
-    }
-
-    #[inline]
-    pub fn data<T>(mut self, data: &'b T) -> Self {
-        self.value.data = (data as *const T).cast();
+    pub fn data(mut self, data: &'b [u8]) -> Self {
+        self.value.data_size = data.len() as usize;
+        self.value.data = data.as_ptr().cast();
         self
     }
 
@@ -15961,6 +16435,84 @@ unsafe impl<'b> Cast for ImageBlit2KHRBuilder<'b> {
     }
 }
 
+unsafe impl Cast for ImageConstraintsInfoFUCHSIA {
+    type Target = ImageConstraintsInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for ImageConstraintsInfoFUCHSIA {
+    type Builder = ImageConstraintsInfoFUCHSIABuilder<'b>;
+}
+
+/// A builder for a [`ImageConstraintsInfoFUCHSIA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImageConstraintsInfoFUCHSIABuilder<'b> {
+    value: ImageConstraintsInfoFUCHSIA,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> ImageConstraintsInfoFUCHSIABuilder<'b> {
+    #[inline]
+    pub fn format_constraints(
+        mut self,
+        format_constraints: &'b [impl Cast<Target = ImageFormatConstraintsInfoFUCHSIA>],
+    ) -> Self {
+        self.value.format_constraints_count = format_constraints.len() as u32;
+        self.value.format_constraints = format_constraints.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn buffer_collection_constraints(
+        mut self,
+        buffer_collection_constraints: impl Cast<Target = BufferCollectionConstraintsInfoFUCHSIA>,
+    ) -> Self {
+        self.value.buffer_collection_constraints = buffer_collection_constraints.into();
+        self
+    }
+
+    #[inline]
+    pub fn flags(mut self, flags: ImageConstraintsInfoFlagsFUCHSIA) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImageConstraintsInfoFUCHSIA {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for ImageConstraintsInfoFUCHSIABuilder<'b> {
+    type Target = ImageConstraintsInfoFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for ImageConstraintsInfoFUCHSIABuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for ImageConstraintsInfoFUCHSIABuilder<'b> {
+    type Target = ImageConstraintsInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ImageCopy {
     type Target = ImageCopy;
 
@@ -16139,6 +16691,7 @@ unsafe impl Cast for ImageCopy2KHRBuilder {
 
 /// A Vulkan struct that can be used to extend a [`ImageCreateInfo`].
 pub unsafe trait ExtendsImageCreateInfo: fmt::Debug {}
+unsafe impl ExtendsImageCreateInfo for BufferCollectionImageCreateInfoFUCHSIA {}
 unsafe impl ExtendsImageCreateInfo for DedicatedAllocationImageCreateInfoNV {}
 unsafe impl ExtendsImageCreateInfo for ExternalFormatANDROID {}
 unsafe impl ExtendsImageCreateInfo for ExternalMemoryImageCreateInfo {}
@@ -16466,6 +17019,104 @@ impl ops::DerefMut for ImageDrmFormatModifierPropertiesEXTBuilder {
 
 unsafe impl Cast for ImageDrmFormatModifierPropertiesEXTBuilder {
     type Target = ImageDrmFormatModifierPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ImageFormatConstraintsInfoFUCHSIA {
+    type Target = ImageFormatConstraintsInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for ImageFormatConstraintsInfoFUCHSIA {
+    type Builder = ImageFormatConstraintsInfoFUCHSIABuilder<'b>;
+}
+
+/// A builder for a [`ImageFormatConstraintsInfoFUCHSIA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImageFormatConstraintsInfoFUCHSIABuilder<'b> {
+    value: ImageFormatConstraintsInfoFUCHSIA,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> ImageFormatConstraintsInfoFUCHSIABuilder<'b> {
+    #[inline]
+    pub fn image_create_info(
+        mut self,
+        image_create_info: impl Cast<Target = ImageCreateInfo>,
+    ) -> Self {
+        self.value.image_create_info = image_create_info.into();
+        self
+    }
+
+    #[inline]
+    pub fn required_format_features(
+        mut self,
+        required_format_features: FormatFeatureFlags,
+    ) -> Self {
+        self.value.required_format_features = required_format_features;
+        self
+    }
+
+    #[inline]
+    pub fn flags(mut self, flags: ImageFormatConstraintsFlagsFUCHSIA) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn sysmem_pixel_format(mut self, sysmem_pixel_format: u64) -> Self {
+        self.value.sysmem_pixel_format = sysmem_pixel_format;
+        self
+    }
+
+    #[inline]
+    pub fn color_space_count(mut self, color_space_count: u32) -> Self {
+        self.value.color_space_count = color_space_count;
+        self
+    }
+
+    #[inline]
+    pub fn color_spaces(
+        mut self,
+        color_spaces: &'b impl Cast<Target = SysmemColorSpaceFUCHSIA>,
+    ) -> Self {
+        self.value.color_spaces = color_spaces.as_ref();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImageFormatConstraintsInfoFUCHSIA {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for ImageFormatConstraintsInfoFUCHSIABuilder<'b> {
+    type Target = ImageFormatConstraintsInfoFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for ImageFormatConstraintsInfoFUCHSIABuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for ImageFormatConstraintsInfoFUCHSIABuilder<'b> {
+    type Target = ImageFormatConstraintsInfoFUCHSIA;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -18296,6 +18947,70 @@ unsafe impl Cast for ImportFenceWin32HandleInfoKHRBuilder {
     }
 }
 
+unsafe impl Cast for ImportMemoryBufferCollectionFUCHSIA {
+    type Target = ImportMemoryBufferCollectionFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ImportMemoryBufferCollectionFUCHSIA {
+    type Builder = ImportMemoryBufferCollectionFUCHSIABuilder;
+}
+
+/// A builder for a [`ImportMemoryBufferCollectionFUCHSIA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImportMemoryBufferCollectionFUCHSIABuilder {
+    value: ImportMemoryBufferCollectionFUCHSIA,
+}
+
+impl ImportMemoryBufferCollectionFUCHSIABuilder {
+    #[inline]
+    pub fn collection(mut self, collection: BufferCollectionFUCHSIA) -> Self {
+        self.value.collection = collection;
+        self
+    }
+
+    #[inline]
+    pub fn index(mut self, index: u32) -> Self {
+        self.value.index = index;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImportMemoryBufferCollectionFUCHSIA {
+        self.value
+    }
+}
+
+impl ops::Deref for ImportMemoryBufferCollectionFUCHSIABuilder {
+    type Target = ImportMemoryBufferCollectionFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ImportMemoryBufferCollectionFUCHSIABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ImportMemoryBufferCollectionFUCHSIABuilder {
+    type Target = ImportMemoryBufferCollectionFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ImportMemoryFdInfoKHR {
     type Target = ImportMemoryFdInfoKHR;
 
@@ -19654,6 +20369,7 @@ unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryAllocateInfoNV {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryWin32HandleInfoKHR {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryWin32HandleInfoNV {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportAndroidHardwareBufferInfoANDROID {}
+unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryBufferCollectionFUCHSIA {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryFdInfoKHR {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryHostPointerInfoEXT {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryWin32HandleInfoKHR {}
@@ -48921,6 +49637,64 @@ impl ops::DerefMut for SwapchainDisplayNativeHdrCreateInfoAMDBuilder {
 
 unsafe impl Cast for SwapchainDisplayNativeHdrCreateInfoAMDBuilder {
     type Target = SwapchainDisplayNativeHdrCreateInfoAMD;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SysmemColorSpaceFUCHSIA {
+    type Target = SysmemColorSpaceFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SysmemColorSpaceFUCHSIA {
+    type Builder = SysmemColorSpaceFUCHSIABuilder;
+}
+
+/// A builder for a [`SysmemColorSpaceFUCHSIA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SysmemColorSpaceFUCHSIABuilder {
+    value: SysmemColorSpaceFUCHSIA,
+}
+
+impl SysmemColorSpaceFUCHSIABuilder {
+    #[inline]
+    pub fn color_space(mut self, color_space: u32) -> Self {
+        self.value.color_space = color_space;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SysmemColorSpaceFUCHSIA {
+        self.value
+    }
+}
+
+impl ops::Deref for SysmemColorSpaceFUCHSIABuilder {
+    type Target = SysmemColorSpaceFUCHSIA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SysmemColorSpaceFUCHSIABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SysmemColorSpaceFUCHSIABuilder {
+    type Target = SysmemColorSpaceFUCHSIA;
 
     #[inline]
     fn into(self) -> Self::Target {

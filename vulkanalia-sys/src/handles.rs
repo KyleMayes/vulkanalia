@@ -172,6 +172,50 @@ impl fmt::Debug for Buffer {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferCollectionFUCHSIA.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct BufferCollectionFUCHSIA(u64);
+
+impl Handle for BufferCollectionFUCHSIA {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::BUFFER_COLLECTION_FUCHSIA;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for BufferCollectionFUCHSIA {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for BufferCollectionFUCHSIA {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "BufferCollectionFUCHSIA({:p})", self.0 as *const u8)
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferView.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]

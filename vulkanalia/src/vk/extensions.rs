@@ -2626,6 +2626,117 @@ pub trait ExtYcbcrImageArraysExtension: DeviceV1_0 {
 
 impl ExtYcbcrImageArraysExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_FUCHSIA_buffer_collection.html>
+pub trait FuchsiaBufferCollectionExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = FUCHSIA_BUFFER_COLLECTION_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCreateBufferCollectionFUCHSIA.html>
+    #[inline]
+    unsafe fn create_buffer_collection_fuchsia(
+        &self,
+        create_info: &BufferCollectionCreateInfoFUCHSIA,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<BufferCollectionFUCHSIA> {
+        let mut collection = MaybeUninit::<BufferCollectionFUCHSIA>::uninit();
+
+        let __result = (self.commands().create_buffer_collection_fuchsia)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            collection.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(collection.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkDestroyBufferCollectionFUCHSIA.html>
+    #[inline]
+    unsafe fn destroy_buffer_collection_fuchsia(
+        &self,
+        collection: BufferCollectionFUCHSIA,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_buffer_collection_fuchsia)(
+            self.handle(),
+            collection,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferCollectionPropertiesFUCHSIA.html>
+    #[inline]
+    unsafe fn get_buffer_collection_properties_fuchsia(
+        &self,
+        collection: BufferCollectionFUCHSIA,
+    ) -> crate::VkResult<BufferCollectionPropertiesFUCHSIA> {
+        let mut properties = MaybeUninit::<BufferCollectionPropertiesFUCHSIA>::uninit();
+
+        let __result = (self.commands().get_buffer_collection_properties_fuchsia)(
+            self.handle(),
+            collection,
+            properties.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(properties.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetBufferCollectionBufferConstraintsFUCHSIA.html>
+    #[inline]
+    unsafe fn set_buffer_collection_buffer_constraints_fuchsia(
+        &self,
+        collection: BufferCollectionFUCHSIA,
+        buffer_constraints_info: &BufferConstraintsInfoFUCHSIA,
+    ) -> crate::VkResult<()> {
+        let __result = (self
+            .commands()
+            .set_buffer_collection_buffer_constraints_fuchsia)(
+            self.handle(),
+            collection,
+            buffer_constraints_info,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkSetBufferCollectionImageConstraintsFUCHSIA.html>
+    #[inline]
+    unsafe fn set_buffer_collection_image_constraints_fuchsia(
+        &self,
+        collection: BufferCollectionFUCHSIA,
+        image_constraints_info: &ImageConstraintsInfoFUCHSIA,
+    ) -> crate::VkResult<()> {
+        let __result = (self
+            .commands()
+            .set_buffer_collection_image_constraints_fuchsia)(
+            self.handle(),
+            collection,
+            image_constraints_info,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl FuchsiaBufferCollectionExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_FUCHSIA_external_memory.html>
 pub trait FuchsiaExternalMemoryExtension: DeviceV1_0 {
     /// The metadata for this extension.
