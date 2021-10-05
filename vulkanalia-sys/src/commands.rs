@@ -2183,6 +2183,13 @@ pub type PFN_vkGetDeviceAccelerationStructureCompatibilityKHR = unsafe extern "s
     _compatibility: *mut AccelerationStructureCompatibilityKHR,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceBufferMemoryRequirementsKHR.html>
+pub type PFN_vkGetDeviceBufferMemoryRequirementsKHR = unsafe extern "system" fn(
+    _device: Device,
+    _info: *const DeviceBufferMemoryRequirementsKHR,
+    _memory_requirements: *mut MemoryRequirements2,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceGroupPeerMemoryFeatures.html>
 pub type PFN_vkGetDeviceGroupPeerMemoryFeatures = unsafe extern "system" fn(
     _device: Device,
@@ -2214,6 +2221,21 @@ pub type PFN_vkGetDeviceGroupSurfacePresentModesKHR = unsafe extern "system" fn(
     _surface: SurfaceKHR,
     _modes: *mut DeviceGroupPresentModeFlagsKHR,
 ) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceImageMemoryRequirementsKHR.html>
+pub type PFN_vkGetDeviceImageMemoryRequirementsKHR = unsafe extern "system" fn(
+    _device: Device,
+    _info: *const DeviceImageMemoryRequirementsKHR,
+    _memory_requirements: *mut MemoryRequirements2,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceImageSparseMemoryRequirementsKHR.html>
+pub type PFN_vkGetDeviceImageSparseMemoryRequirementsKHR = unsafe extern "system" fn(
+    _device: Device,
+    _info: *const DeviceImageMemoryRequirementsKHR,
+    _sparse_memory_requirement_count: *mut u32,
+    _sparse_memory_requirements: *mut SparseImageMemoryRequirements2,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceMemoryCommitment.html>
 pub type PFN_vkGetDeviceMemoryCommitment = unsafe extern "system" fn(

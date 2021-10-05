@@ -7,6 +7,7 @@
 - [September 21, 2021 Vulkan 1.2.193 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/129f6f69dcbc00184d771d2da969b4ed394ac80c)
 - [vk.xml: Adding len attribute to VkCuModuleCreateInfoNVX struct member pData. (#1646)](https://github.com/KhronosGroup/Vulkan-Docs/commit/b1b9113f0c605573024a8a0e61adf0a576563145)
 - [September 28, 2021 Vulkan 1.2.194 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/a0960966d565bdfc6e853a0bc471e58fdbd374ef)
+- [October 5, 2021 Vulkan 1.2.195 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9dc6dfbb7aea0999f4108ad0faeee099d0adb173)
 
 ## [0.11.0] - 2021-09-01
 

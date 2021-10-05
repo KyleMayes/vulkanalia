@@ -2103,6 +2103,15 @@ pub trait ExtQueueFamilyForeignExtension: DeviceV1_0 {
 
 impl ExtQueueFamilyForeignExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_rgba10x6_formats.html>
+pub trait ExtRgba10x6FormatsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_RGBA10X6_FORMATS_EXTENSION;
+}
+
+impl ExtRgba10x6FormatsExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_robustness2.html>
 pub trait ExtRobustness2Extension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -4921,6 +4930,15 @@ pub trait KhrExternalSemaphoreWin32Extension: DeviceV1_0 {
 
 impl KhrExternalSemaphoreWin32Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_format_feature_flags2.html>
+pub trait KhrFormatFeatureFlags2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_FORMAT_FEATURE_FLAGS2_EXTENSION;
+}
+
+impl KhrFormatFeatureFlags2Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_fragment_shading_rate.html>
 pub trait KhrFragmentShadingRateExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -5474,6 +5492,80 @@ pub trait KhrMaintenance3Extension: DeviceV1_0 {
 }
 
 impl KhrMaintenance3Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_maintenance4.html>
+pub trait KhrMaintenance4Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_MAINTENANCE4_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceBufferMemoryRequirementsKHR.html>
+    #[inline]
+    unsafe fn get_device_buffer_memory_requirements_khr(
+        &self,
+        info: &DeviceBufferMemoryRequirementsKHR,
+        memory_requirements: &mut MemoryRequirements2,
+    ) {
+        let __result = (self.commands().get_device_buffer_memory_requirements_khr)(
+            self.handle(),
+            info,
+            memory_requirements,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceImageMemoryRequirementsKHR.html>
+    #[inline]
+    unsafe fn get_device_image_memory_requirements_khr(
+        &self,
+        info: &DeviceImageMemoryRequirementsKHR,
+        memory_requirements: &mut MemoryRequirements2,
+    ) {
+        let __result = (self.commands().get_device_image_memory_requirements_khr)(
+            self.handle(),
+            info,
+            memory_requirements,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceImageSparseMemoryRequirementsKHR.html>
+    #[inline]
+    unsafe fn get_device_image_sparse_memory_requirements_khr(
+        &self,
+        info: &DeviceImageMemoryRequirementsKHR,
+    ) -> Vec<SparseImageMemoryRequirements2> {
+        let mut sparse_memory_requirement_count = 0;
+
+        (self
+            .commands()
+            .get_device_image_sparse_memory_requirements_khr)(
+            self.handle(),
+            info,
+            &mut sparse_memory_requirement_count,
+            ptr::null_mut(),
+        );
+
+        let mut sparse_memory_requirements =
+            Vec::with_capacity(sparse_memory_requirement_count as usize);
+
+        let __result = (self
+            .commands()
+            .get_device_image_sparse_memory_requirements_khr)(
+            self.handle(),
+            info,
+            &mut sparse_memory_requirement_count,
+            sparse_memory_requirements.as_mut_ptr(),
+        );
+
+        debug_assert!(
+            sparse_memory_requirements.capacity() == sparse_memory_requirement_count as usize
+        );
+        sparse_memory_requirements.set_len(sparse_memory_requirement_count as usize);
+
+        sparse_memory_requirements
+    }
+}
+
+impl KhrMaintenance4Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_multiview.html>
 pub trait KhrMultiviewExtension: DeviceV1_0 {

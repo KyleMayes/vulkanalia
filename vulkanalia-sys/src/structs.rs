@@ -528,6 +528,40 @@ impl Default for AllocationCallbacks {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAndroidHardwareBufferFormatProperties2ANDROID.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct AndroidHardwareBufferFormatProperties2ANDROID {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub format: Format,
+    pub external_format: u64,
+    pub format_features: FormatFeatureFlags2KHR,
+    pub sampler_ycbcr_conversion_components: ComponentMapping,
+    pub suggested_ycbcr_model: SamplerYcbcrModelConversion,
+    pub suggested_ycbcr_range: SamplerYcbcrRange,
+    pub suggested_x_chroma_offset: ChromaLocation,
+    pub suggested_y_chroma_offset: ChromaLocation,
+}
+
+impl Default for AndroidHardwareBufferFormatProperties2ANDROID {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_2_ANDROID,
+            next: ptr::null_mut(),
+            format: Format::default(),
+            external_format: u64::default(),
+            format_features: FormatFeatureFlags2KHR::default(),
+            sampler_ycbcr_conversion_components: ComponentMapping::default(),
+            suggested_ycbcr_model: SamplerYcbcrModelConversion::default(),
+            suggested_ycbcr_range: SamplerYcbcrRange::default(),
+            suggested_x_chroma_offset: ChromaLocation::default(),
+            suggested_y_chroma_offset: ChromaLocation::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAndroidHardwareBufferFormatPropertiesANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2917,6 +2951,26 @@ pub struct DescriptorUpdateTemplateEntry {
     pub stride: usize,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceBufferMemoryRequirementsKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DeviceBufferMemoryRequirementsKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub create_info: *const BufferCreateInfo,
+}
+
+impl Default for DeviceBufferMemoryRequirementsKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR,
+            next: ptr::null(),
+            create_info: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3210,6 +3264,28 @@ impl Default for DeviceGroupSwapchainCreateInfoKHR {
             s_type: StructureType::DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR,
             next: ptr::null(),
             modes: DeviceGroupPresentModeFlagsKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceImageMemoryRequirementsKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DeviceImageMemoryRequirementsKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub create_info: *const ImageCreateInfo,
+    pub plane_aspect: ImageAspectFlags,
+}
+
+impl Default for DeviceImageMemoryRequirementsKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR,
+            next: ptr::null(),
+            create_info: ptr::null(),
+            plane_aspect: ImageAspectFlags::default(),
         }
     }
 }
@@ -3747,6 +3823,15 @@ pub struct DrawMeshTasksIndirectCommandNV {
     pub first_task: u32,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDrmFormatModifierProperties2EXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct DrmFormatModifierProperties2EXT {
+    pub drm_format_modifier: u64,
+    pub drm_format_modifier_plane_count: u32,
+    pub drm_format_modifier_tiling_features: FormatFeatureFlags2KHR,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDrmFormatModifierPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -3754,6 +3839,28 @@ pub struct DrmFormatModifierPropertiesEXT {
     pub drm_format_modifier: u64,
     pub drm_format_modifier_plane_count: u32,
     pub drm_format_modifier_tiling_features: FormatFeatureFlags,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDrmFormatModifierPropertiesList2EXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DrmFormatModifierPropertiesList2EXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub drm_format_modifier_count: u32,
+    pub drm_format_modifier_properties: *mut DrmFormatModifierProperties2EXT,
+}
+
+impl Default for DrmFormatModifierPropertiesList2EXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT,
+            next: ptr::null_mut(),
+            drm_format_modifier_count: u32::default(),
+            drm_format_modifier_properties: ptr::null_mut(),
+        }
+    }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDrmFormatModifierPropertiesListEXT.html>
@@ -4305,6 +4412,30 @@ impl Default for FormatProperties2 {
             s_type: StructureType::FORMAT_PROPERTIES_2,
             next: ptr::null_mut(),
             format_properties: FormatProperties::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFormatProperties3KHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct FormatProperties3KHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub linear_tiling_features: FormatFeatureFlags2KHR,
+    pub optimal_tiling_features: FormatFeatureFlags2KHR,
+    pub buffer_features: FormatFeatureFlags2KHR,
+}
+
+impl Default for FormatProperties3KHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::FORMAT_PROPERTIES_3_KHR,
+            next: ptr::null_mut(),
+            linear_tiling_features: FormatFeatureFlags2KHR::default(),
+            optimal_tiling_features: FormatFeatureFlags2KHR::default(),
+            buffer_features: FormatFeatureFlags2KHR::default(),
         }
     }
 }
@@ -8618,6 +8749,46 @@ impl Default for PhysicalDeviceMaintenance3Properties {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMaintenance4FeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMaintenance4FeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub maintenance4: Bool32,
+}
+
+impl Default for PhysicalDeviceMaintenance4FeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR,
+            next: ptr::null_mut(),
+            maintenance4: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMaintenance4PropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMaintenance4PropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_buffer_size: DeviceSize,
+}
+
+impl Default for PhysicalDeviceMaintenance4PropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            max_buffer_size: DeviceSize::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceMemoryBudgetPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9332,6 +9503,26 @@ impl Default for PhysicalDevicePushDescriptorPropertiesKHR {
             s_type: StructureType::PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR,
             next: ptr::null_mut(),
             max_push_descriptors: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceRGBA10X6FormatsFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub format_rgba10x6_without_y_cb_cr_sampler: Bool32,
+}
+
+impl Default for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT,
+            next: ptr::null_mut(),
+            format_rgba10x6_without_y_cb_cr_sampler: Bool32::default(),
         }
     }
 }
