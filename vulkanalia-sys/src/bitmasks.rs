@@ -644,6 +644,44 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFormatFeatureFlags2KHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct FormatFeatureFlags2KHR: Flags64 {
+        const SAMPLED_IMAGE = 1;
+        const STORAGE_IMAGE = 1 << 1;
+        const STORAGE_IMAGE_ATOMIC = 1 << 2;
+        const UNIFORM_TEXEL_BUFFER = 1 << 3;
+        const STORAGE_TEXEL_BUFFER = 1 << 4;
+        const STORAGE_TEXEL_BUFFER_ATOMIC = 1 << 5;
+        const VERTEX_BUFFER = 1 << 6;
+        const COLOR_ATTACHMENT = 1 << 7;
+        const COLOR_ATTACHMENT_BLEND = 1 << 8;
+        const DEPTH_STENCIL_ATTACHMENT = 1 << 9;
+        const BLIT_SRC = 1 << 10;
+        const BLIT_DST = 1 << 11;
+        const SAMPLED_IMAGE_FILTER_LINEAR = 1 << 12;
+        const SAMPLED_IMAGE_FILTER_CUBIC_EXT = 1 << 13;
+        const TRANSFER_SRC = 1 << 14;
+        const TRANSFER_DST = 1 << 15;
+        const SAMPLED_IMAGE_FILTER_MINMAX = 1 << 16;
+        const MIDPOINT_CHROMA_SAMPLES = 1 << 17;
+        const SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER = 1 << 18;
+        const SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER = 1 << 19;
+        const SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT = 1 << 20;
+        const SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE = 1 << 21;
+        const DISJOINT = 1 << 22;
+        const COSITED_CHROMA_SAMPLES = 1 << 23;
+        const FRAGMENT_DENSITY_MAP_EXT = 1 << 24;
+        const ACCELERATION_STRUCTURE_VERTEX_BUFFER = 1 << 29;
+        const FRAGMENT_SHADING_RATE_ATTACHMENT = 1 << 30;
+        const STORAGE_READ_WITHOUT_FORMAT = 1 << 31;
+        const STORAGE_WRITE_WITHOUT_FORMAT = 1 << 32;
+        const SAMPLED_IMAGE_DEPTH_COMPARISON = 1 << 33;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFramebufferCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]

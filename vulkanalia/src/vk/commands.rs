@@ -299,11 +299,15 @@ pub struct DeviceCommands {
     pub get_descriptor_set_layout_support_khr: PFN_vkGetDescriptorSetLayoutSupportKHR,
     pub get_device_acceleration_structure_compatibility_khr:
         PFN_vkGetDeviceAccelerationStructureCompatibilityKHR,
+    pub get_device_buffer_memory_requirements_khr: PFN_vkGetDeviceBufferMemoryRequirementsKHR,
     pub get_device_group_peer_memory_features: PFN_vkGetDeviceGroupPeerMemoryFeatures,
     pub get_device_group_peer_memory_features_khr: PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR,
     pub get_device_group_present_capabilities_khr: PFN_vkGetDeviceGroupPresentCapabilitiesKHR,
     pub get_device_group_surface_present_modes2_ext: PFN_vkGetDeviceGroupSurfacePresentModes2EXT,
     pub get_device_group_surface_present_modes_khr: PFN_vkGetDeviceGroupSurfacePresentModesKHR,
+    pub get_device_image_memory_requirements_khr: PFN_vkGetDeviceImageMemoryRequirementsKHR,
+    pub get_device_image_sparse_memory_requirements_khr:
+        PFN_vkGetDeviceImageSparseMemoryRequirementsKHR,
     pub get_device_memory_commitment: PFN_vkGetDeviceMemoryCommitment,
     pub get_device_memory_opaque_capture_address: PFN_vkGetDeviceMemoryOpaqueCaptureAddress,
     pub get_device_memory_opaque_capture_address_khr: PFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR,
@@ -4672,6 +4676,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_device_buffer_memory_requirements_khr: {
+                let value = loader(b"vkGetDeviceBufferMemoryRequirementsKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const DeviceBufferMemoryRequirementsKHR,
+                        _memory_requirements: *mut MemoryRequirements2,
+                    ) {
+                        panic!("could not load vkGetDeviceBufferMemoryRequirementsKHR")
+                    }
+                    fallback
+                }
+            },
             get_device_group_peer_memory_features: {
                 let value = loader(b"vkGetDeviceGroupPeerMemoryFeatures\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -4746,6 +4765,41 @@ impl DeviceCommands {
                         _modes: *mut DeviceGroupPresentModeFlagsKHR,
                     ) -> Result {
                         panic!("could not load vkGetDeviceGroupSurfacePresentModesKHR")
+                    }
+                    fallback
+                }
+            },
+            get_device_image_memory_requirements_khr: {
+                let value = loader(b"vkGetDeviceImageMemoryRequirementsKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const DeviceImageMemoryRequirementsKHR,
+                        _memory_requirements: *mut MemoryRequirements2,
+                    ) {
+                        panic!("could not load vkGetDeviceImageMemoryRequirementsKHR")
+                    }
+                    fallback
+                }
+            },
+            get_device_image_sparse_memory_requirements_khr: {
+                let value = loader(
+                    b"vkGetDeviceImageSparseMemoryRequirementsKHR\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const DeviceImageMemoryRequirementsKHR,
+                        _sparse_memory_requirement_count: *mut u32,
+                        _sparse_memory_requirements: *mut SparseImageMemoryRequirements2,
+                    ) {
+                        panic!("could not load vkGetDeviceImageSparseMemoryRequirementsKHR")
                     }
                     fallback
                 }

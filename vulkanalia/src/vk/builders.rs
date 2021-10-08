@@ -1882,6 +1882,112 @@ unsafe impl<'b> Cast for AllocationCallbacksBuilder<'b> {
     }
 }
 
+unsafe impl Cast for AndroidHardwareBufferFormatProperties2ANDROID {
+    type Target = AndroidHardwareBufferFormatProperties2ANDROID;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for AndroidHardwareBufferFormatProperties2ANDROID {
+    type Builder = AndroidHardwareBufferFormatProperties2ANDROIDBuilder;
+}
+
+/// A builder for a [`AndroidHardwareBufferFormatProperties2ANDROID`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AndroidHardwareBufferFormatProperties2ANDROIDBuilder {
+    value: AndroidHardwareBufferFormatProperties2ANDROID,
+}
+
+impl AndroidHardwareBufferFormatProperties2ANDROIDBuilder {
+    #[inline]
+    pub fn format(mut self, format: Format) -> Self {
+        self.value.format = format;
+        self
+    }
+
+    #[inline]
+    pub fn external_format(mut self, external_format: u64) -> Self {
+        self.value.external_format = external_format;
+        self
+    }
+
+    #[inline]
+    pub fn format_features(mut self, format_features: FormatFeatureFlags2KHR) -> Self {
+        self.value.format_features = format_features;
+        self
+    }
+
+    #[inline]
+    pub fn sampler_ycbcr_conversion_components(
+        mut self,
+        sampler_ycbcr_conversion_components: impl Cast<Target = ComponentMapping>,
+    ) -> Self {
+        self.value.sampler_ycbcr_conversion_components = sampler_ycbcr_conversion_components.into();
+        self
+    }
+
+    #[inline]
+    pub fn suggested_ycbcr_model(
+        mut self,
+        suggested_ycbcr_model: SamplerYcbcrModelConversion,
+    ) -> Self {
+        self.value.suggested_ycbcr_model = suggested_ycbcr_model;
+        self
+    }
+
+    #[inline]
+    pub fn suggested_ycbcr_range(mut self, suggested_ycbcr_range: SamplerYcbcrRange) -> Self {
+        self.value.suggested_ycbcr_range = suggested_ycbcr_range;
+        self
+    }
+
+    #[inline]
+    pub fn suggested_x_chroma_offset(mut self, suggested_x_chroma_offset: ChromaLocation) -> Self {
+        self.value.suggested_x_chroma_offset = suggested_x_chroma_offset;
+        self
+    }
+
+    #[inline]
+    pub fn suggested_y_chroma_offset(mut self, suggested_y_chroma_offset: ChromaLocation) -> Self {
+        self.value.suggested_y_chroma_offset = suggested_y_chroma_offset;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AndroidHardwareBufferFormatProperties2ANDROID {
+        self.value
+    }
+}
+
+impl ops::Deref for AndroidHardwareBufferFormatProperties2ANDROIDBuilder {
+    type Target = AndroidHardwareBufferFormatProperties2ANDROID;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for AndroidHardwareBufferFormatProperties2ANDROIDBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for AndroidHardwareBufferFormatProperties2ANDROIDBuilder {
+    type Target = AndroidHardwareBufferFormatProperties2ANDROID;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for AndroidHardwareBufferFormatPropertiesANDROID {
     type Target = AndroidHardwareBufferFormatPropertiesANDROID;
 
@@ -1990,6 +2096,10 @@ unsafe impl Cast for AndroidHardwareBufferFormatPropertiesANDROIDBuilder {
 
 /// A Vulkan struct that can be used to extend a [`AndroidHardwareBufferPropertiesANDROID`].
 pub unsafe trait ExtendsAndroidHardwareBufferPropertiesANDROID: fmt::Debug {}
+unsafe impl ExtendsAndroidHardwareBufferPropertiesANDROID
+    for AndroidHardwareBufferFormatProperties2ANDROID
+{
+}
 unsafe impl ExtendsAndroidHardwareBufferPropertiesANDROID
     for AndroidHardwareBufferFormatPropertiesANDROID
 {
@@ -9843,6 +9953,65 @@ unsafe impl Cast for DescriptorUpdateTemplateEntryBuilder {
     }
 }
 
+unsafe impl Cast for DeviceBufferMemoryRequirementsKHR {
+    type Target = DeviceBufferMemoryRequirementsKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for DeviceBufferMemoryRequirementsKHR {
+    type Builder = DeviceBufferMemoryRequirementsKHRBuilder<'b>;
+}
+
+/// A builder for a [`DeviceBufferMemoryRequirementsKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DeviceBufferMemoryRequirementsKHRBuilder<'b> {
+    value: DeviceBufferMemoryRequirementsKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> DeviceBufferMemoryRequirementsKHRBuilder<'b> {
+    #[inline]
+    pub fn create_info(mut self, create_info: &'b impl Cast<Target = BufferCreateInfo>) -> Self {
+        self.value.create_info = create_info.as_ref();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DeviceBufferMemoryRequirementsKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for DeviceBufferMemoryRequirementsKHRBuilder<'b> {
+    type Target = DeviceBufferMemoryRequirementsKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for DeviceBufferMemoryRequirementsKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for DeviceBufferMemoryRequirementsKHRBuilder<'b> {
+    type Target = DeviceBufferMemoryRequirementsKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [`DeviceCreateInfo`].
 pub unsafe trait ExtendsDeviceCreateInfo: fmt::Debug {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceDeviceMemoryReportCreateInfoEXT {}
@@ -9892,6 +10061,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInheritedViewportScissorFe
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInlineUniformBlockFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLineRasterizationFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance4FeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiDrawFeaturesEXT {}
@@ -9908,6 +10078,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrimitiveTopologyListResta
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrivateDataFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProvokingVertexFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayQueryFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
@@ -10753,6 +10924,71 @@ impl ops::DerefMut for DeviceGroupSwapchainCreateInfoKHRBuilder {
 
 unsafe impl Cast for DeviceGroupSwapchainCreateInfoKHRBuilder {
     type Target = DeviceGroupSwapchainCreateInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DeviceImageMemoryRequirementsKHR {
+    type Target = DeviceImageMemoryRequirementsKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for DeviceImageMemoryRequirementsKHR {
+    type Builder = DeviceImageMemoryRequirementsKHRBuilder<'b>;
+}
+
+/// A builder for a [`DeviceImageMemoryRequirementsKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DeviceImageMemoryRequirementsKHRBuilder<'b> {
+    value: DeviceImageMemoryRequirementsKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> DeviceImageMemoryRequirementsKHRBuilder<'b> {
+    #[inline]
+    pub fn create_info(mut self, create_info: &'b impl Cast<Target = ImageCreateInfo>) -> Self {
+        self.value.create_info = create_info.as_ref();
+        self
+    }
+
+    #[inline]
+    pub fn plane_aspect(mut self, plane_aspect: ImageAspectFlags) -> Self {
+        self.value.plane_aspect = plane_aspect;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DeviceImageMemoryRequirementsKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for DeviceImageMemoryRequirementsKHRBuilder<'b> {
+    type Target = DeviceImageMemoryRequirementsKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for DeviceImageMemoryRequirementsKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for DeviceImageMemoryRequirementsKHRBuilder<'b> {
+    type Target = DeviceImageMemoryRequirementsKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -12725,6 +12961,79 @@ unsafe impl Cast for DrawMeshTasksIndirectCommandNVBuilder {
     }
 }
 
+unsafe impl Cast for DrmFormatModifierProperties2EXT {
+    type Target = DrmFormatModifierProperties2EXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DrmFormatModifierProperties2EXT {
+    type Builder = DrmFormatModifierProperties2EXTBuilder;
+}
+
+/// A builder for a [`DrmFormatModifierProperties2EXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DrmFormatModifierProperties2EXTBuilder {
+    value: DrmFormatModifierProperties2EXT,
+}
+
+impl DrmFormatModifierProperties2EXTBuilder {
+    #[inline]
+    pub fn drm_format_modifier(mut self, drm_format_modifier: u64) -> Self {
+        self.value.drm_format_modifier = drm_format_modifier;
+        self
+    }
+
+    #[inline]
+    pub fn drm_format_modifier_plane_count(mut self, drm_format_modifier_plane_count: u32) -> Self {
+        self.value.drm_format_modifier_plane_count = drm_format_modifier_plane_count;
+        self
+    }
+
+    #[inline]
+    pub fn drm_format_modifier_tiling_features(
+        mut self,
+        drm_format_modifier_tiling_features: FormatFeatureFlags2KHR,
+    ) -> Self {
+        self.value.drm_format_modifier_tiling_features = drm_format_modifier_tiling_features;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DrmFormatModifierProperties2EXT {
+        self.value
+    }
+}
+
+impl ops::Deref for DrmFormatModifierProperties2EXTBuilder {
+    type Target = DrmFormatModifierProperties2EXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DrmFormatModifierProperties2EXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DrmFormatModifierProperties2EXTBuilder {
+    type Target = DrmFormatModifierProperties2EXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for DrmFormatModifierPropertiesEXT {
     type Target = DrmFormatModifierPropertiesEXT;
 
@@ -12791,6 +13100,70 @@ impl ops::DerefMut for DrmFormatModifierPropertiesEXTBuilder {
 
 unsafe impl Cast for DrmFormatModifierPropertiesEXTBuilder {
     type Target = DrmFormatModifierPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DrmFormatModifierPropertiesList2EXT {
+    type Target = DrmFormatModifierPropertiesList2EXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for DrmFormatModifierPropertiesList2EXT {
+    type Builder = DrmFormatModifierPropertiesList2EXTBuilder<'b>;
+}
+
+/// A builder for a [`DrmFormatModifierPropertiesList2EXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DrmFormatModifierPropertiesList2EXTBuilder<'b> {
+    value: DrmFormatModifierPropertiesList2EXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> DrmFormatModifierPropertiesList2EXTBuilder<'b> {
+    #[inline]
+    pub fn drm_format_modifier_properties(
+        mut self,
+        drm_format_modifier_properties: &'b mut [impl Cast<Target = DrmFormatModifierProperties2EXT>],
+    ) -> Self {
+        self.value.drm_format_modifier_count = drm_format_modifier_properties.len() as u32;
+        self.value.drm_format_modifier_properties =
+            drm_format_modifier_properties.as_mut_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DrmFormatModifierPropertiesList2EXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for DrmFormatModifierPropertiesList2EXTBuilder<'b> {
+    type Target = DrmFormatModifierPropertiesList2EXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for DrmFormatModifierPropertiesList2EXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for DrmFormatModifierPropertiesList2EXTBuilder<'b> {
+    type Target = DrmFormatModifierPropertiesList2EXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -14649,7 +15022,9 @@ unsafe impl Cast for FormatPropertiesBuilder {
 
 /// A Vulkan struct that can be used to extend a [`FormatProperties2`].
 pub unsafe trait ExtendsFormatProperties2: fmt::Debug {}
+unsafe impl ExtendsFormatProperties2 for DrmFormatModifierPropertiesList2EXT {}
 unsafe impl ExtendsFormatProperties2 for DrmFormatModifierPropertiesListEXT {}
+unsafe impl ExtendsFormatProperties2 for FormatProperties3KHR {}
 
 unsafe impl Cast for FormatProperties2 {
     type Target = FormatProperties2;
@@ -14717,6 +15092,82 @@ impl<'b> ops::DerefMut for FormatProperties2Builder<'b> {
 
 unsafe impl<'b> Cast for FormatProperties2Builder<'b> {
     type Target = FormatProperties2;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for FormatProperties3KHR {
+    type Target = FormatProperties3KHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for FormatProperties3KHR {
+    type Builder = FormatProperties3KHRBuilder;
+}
+
+/// A builder for a [`FormatProperties3KHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct FormatProperties3KHRBuilder {
+    value: FormatProperties3KHR,
+}
+
+impl FormatProperties3KHRBuilder {
+    #[inline]
+    pub fn linear_tiling_features(
+        mut self,
+        linear_tiling_features: FormatFeatureFlags2KHR,
+    ) -> Self {
+        self.value.linear_tiling_features = linear_tiling_features;
+        self
+    }
+
+    #[inline]
+    pub fn optimal_tiling_features(
+        mut self,
+        optimal_tiling_features: FormatFeatureFlags2KHR,
+    ) -> Self {
+        self.value.optimal_tiling_features = optimal_tiling_features;
+        self
+    }
+
+    #[inline]
+    pub fn buffer_features(mut self, buffer_features: FormatFeatureFlags2KHR) -> Self {
+        self.value.buffer_features = buffer_features;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> FormatProperties3KHR {
+        self.value
+    }
+}
+
+impl ops::Deref for FormatProperties3KHRBuilder {
+    type Target = FormatProperties3KHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for FormatProperties3KHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for FormatProperties3KHRBuilder {
+    type Target = FormatProperties3KHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -26686,6 +27137,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInheritedViewportSc
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInlineUniformBlockFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLineRasterizationFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance4FeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiDrawFeaturesEXT {}
@@ -26711,6 +27163,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePrivateDataFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProvokingVertexFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayQueryFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
@@ -29967,6 +30420,122 @@ unsafe impl Cast for PhysicalDeviceMaintenance3PropertiesBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceMaintenance4FeaturesKHR {
+    type Target = PhysicalDeviceMaintenance4FeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMaintenance4FeaturesKHR {
+    type Builder = PhysicalDeviceMaintenance4FeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceMaintenance4FeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMaintenance4FeaturesKHRBuilder {
+    value: PhysicalDeviceMaintenance4FeaturesKHR,
+}
+
+impl PhysicalDeviceMaintenance4FeaturesKHRBuilder {
+    #[inline]
+    pub fn maintenance4(mut self, maintenance4: bool) -> Self {
+        self.value.maintenance4 = maintenance4 as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMaintenance4FeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMaintenance4FeaturesKHRBuilder {
+    type Target = PhysicalDeviceMaintenance4FeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMaintenance4FeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMaintenance4FeaturesKHRBuilder {
+    type Target = PhysicalDeviceMaintenance4FeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMaintenance4PropertiesKHR {
+    type Target = PhysicalDeviceMaintenance4PropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMaintenance4PropertiesKHR {
+    type Builder = PhysicalDeviceMaintenance4PropertiesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceMaintenance4PropertiesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMaintenance4PropertiesKHRBuilder {
+    value: PhysicalDeviceMaintenance4PropertiesKHR,
+}
+
+impl PhysicalDeviceMaintenance4PropertiesKHRBuilder {
+    #[inline]
+    pub fn max_buffer_size(mut self, max_buffer_size: DeviceSize) -> Self {
+        self.value.max_buffer_size = max_buffer_size;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMaintenance4PropertiesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMaintenance4PropertiesKHRBuilder {
+    type Target = PhysicalDeviceMaintenance4PropertiesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMaintenance4PropertiesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMaintenance4PropertiesKHRBuilder {
+    type Target = PhysicalDeviceMaintenance4PropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceMemoryBudgetPropertiesEXT {
     type Target = PhysicalDeviceMemoryBudgetPropertiesEXT;
 
@@ -31866,6 +32435,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceIDProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBlockPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLineRasterizationPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance3Properties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance4PropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMeshShaderPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMultiDrawPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2
@@ -32281,6 +32851,68 @@ impl ops::DerefMut for PhysicalDevicePushDescriptorPropertiesKHRBuilder {
 
 unsafe impl Cast for PhysicalDevicePushDescriptorPropertiesKHRBuilder {
     type Target = PhysicalDevicePushDescriptorPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {
+    type Target = PhysicalDeviceRGBA10X6FormatsFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {
+    type Builder = PhysicalDeviceRGBA10X6FormatsFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceRGBA10X6FormatsFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceRGBA10X6FormatsFeaturesEXTBuilder {
+    value: PhysicalDeviceRGBA10X6FormatsFeaturesEXT,
+}
+
+impl PhysicalDeviceRGBA10X6FormatsFeaturesEXTBuilder {
+    #[inline]
+    pub fn format_rgba10x6_without_y_cb_cr_sampler(
+        mut self,
+        format_rgba10x6_without_y_cb_cr_sampler: bool,
+    ) -> Self {
+        self.value.format_rgba10x6_without_y_cb_cr_sampler =
+            format_rgba10x6_without_y_cb_cr_sampler as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceRGBA10X6FormatsFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceRGBA10X6FormatsFeaturesEXTBuilder {
+    type Target = PhysicalDeviceRGBA10X6FormatsFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceRGBA10X6FormatsFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRGBA10X6FormatsFeaturesEXTBuilder {
+    type Target = PhysicalDeviceRGBA10X6FormatsFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
