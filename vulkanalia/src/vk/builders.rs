@@ -10025,6 +10025,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice8BitStorageFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceASTCDecodeFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAccelerationStructureFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBufferDeviceAddressFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoherentMemoryFeaturesAMD {}
@@ -23897,6 +23898,73 @@ unsafe impl Cast for PhysicalDeviceBlendOperationAdvancedPropertiesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceBorderColorSwizzleFeaturesEXT {
+    type Target = PhysicalDeviceBorderColorSwizzleFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceBorderColorSwizzleFeaturesEXT {
+    type Builder = PhysicalDeviceBorderColorSwizzleFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceBorderColorSwizzleFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceBorderColorSwizzleFeaturesEXTBuilder {
+    value: PhysicalDeviceBorderColorSwizzleFeaturesEXT,
+}
+
+impl PhysicalDeviceBorderColorSwizzleFeaturesEXTBuilder {
+    #[inline]
+    pub fn border_color_swizzle(mut self, border_color_swizzle: bool) -> Self {
+        self.value.border_color_swizzle = border_color_swizzle as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn border_color_swizzle_from_image(
+        mut self,
+        border_color_swizzle_from_image: bool,
+    ) -> Self {
+        self.value.border_color_swizzle_from_image = border_color_swizzle_from_image as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceBorderColorSwizzleFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceBorderColorSwizzleFeaturesEXTBuilder {
+    type Target = PhysicalDeviceBorderColorSwizzleFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceBorderColorSwizzleFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceBorderColorSwizzleFeaturesEXTBuilder {
+    type Target = PhysicalDeviceBorderColorSwizzleFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceBufferDeviceAddressFeatures {
     type Target = PhysicalDeviceBufferDeviceAddressFeatures;
 
@@ -27099,6 +27167,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice8BitStorageFeatures
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceASTCDecodeFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAccelerationStructureFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBufferDeviceAddressFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCoherentMemoryFeaturesAMD {}
@@ -45590,8 +45659,73 @@ unsafe impl<'b> Cast for SampleLocationsInfoEXTBuilder<'b> {
     }
 }
 
+unsafe impl Cast for SamplerBorderColorComponentMappingCreateInfoEXT {
+    type Target = SamplerBorderColorComponentMappingCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SamplerBorderColorComponentMappingCreateInfoEXT {
+    type Builder = SamplerBorderColorComponentMappingCreateInfoEXTBuilder;
+}
+
+/// A builder for a [`SamplerBorderColorComponentMappingCreateInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SamplerBorderColorComponentMappingCreateInfoEXTBuilder {
+    value: SamplerBorderColorComponentMappingCreateInfoEXT,
+}
+
+impl SamplerBorderColorComponentMappingCreateInfoEXTBuilder {
+    #[inline]
+    pub fn components(mut self, components: impl Cast<Target = ComponentMapping>) -> Self {
+        self.value.components = components.into();
+        self
+    }
+
+    #[inline]
+    pub fn srgb(mut self, srgb: bool) -> Self {
+        self.value.srgb = srgb as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SamplerBorderColorComponentMappingCreateInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for SamplerBorderColorComponentMappingCreateInfoEXTBuilder {
+    type Target = SamplerBorderColorComponentMappingCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SamplerBorderColorComponentMappingCreateInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SamplerBorderColorComponentMappingCreateInfoEXTBuilder {
+    type Target = SamplerBorderColorComponentMappingCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [`SamplerCreateInfo`].
 pub unsafe trait ExtendsSamplerCreateInfo: fmt::Debug {}
+unsafe impl ExtendsSamplerCreateInfo for SamplerBorderColorComponentMappingCreateInfoEXT {}
 unsafe impl ExtendsSamplerCreateInfo for SamplerCustomBorderColorCreateInfoEXT {}
 unsafe impl ExtendsSamplerCreateInfo for SamplerReductionModeCreateInfo {}
 unsafe impl ExtendsSamplerCreateInfo for SamplerYcbcrConversionInfo {}

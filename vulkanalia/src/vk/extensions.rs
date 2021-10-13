@@ -507,6 +507,15 @@ pub trait ExtBlendOperationAdvancedExtension: DeviceV1_0 {
 
 impl ExtBlendOperationAdvancedExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_border_color_swizzle.html>
+pub trait ExtBorderColorSwizzleExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_BORDER_COLOR_SWIZZLE_EXTENSION;
+}
+
+impl ExtBorderColorSwizzleExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_buffer_device_address.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_buffer_device_address`")]
 pub trait ExtBufferDeviceAddressExtension: DeviceV1_0 {

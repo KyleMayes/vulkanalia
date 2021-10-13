@@ -6996,6 +6996,28 @@ impl Default for PhysicalDeviceBlendOperationAdvancedPropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceBorderColorSwizzleFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub border_color_swizzle: Bool32,
+    pub border_color_swizzle_from_image: Bool32,
+}
+
+impl Default for PhysicalDeviceBorderColorSwizzleFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT,
+            next: ptr::null_mut(),
+            border_color_swizzle: Bool32::default(),
+            border_color_swizzle_from_image: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceBufferDeviceAddressFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13269,6 +13291,28 @@ impl Default for SampleLocationsInfoEXT {
             sample_location_grid_size: Extent2D::default(),
             sample_locations_count: u32::default(),
             sample_locations: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerBorderColorComponentMappingCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SamplerBorderColorComponentMappingCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub components: ComponentMapping,
+    pub srgb: Bool32,
+}
+
+impl Default for SamplerBorderColorComponentMappingCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT,
+            next: ptr::null(),
+            components: ComponentMapping::default(),
+            srgb: Bool32::default(),
         }
     }
 }
