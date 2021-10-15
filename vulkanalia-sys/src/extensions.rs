@@ -494,6 +494,22 @@ pub const EXT_BLEND_OPERATION_ADVANCED_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_border_color_swizzle.html>
+#[allow(deprecated)]
+pub const EXT_BORDER_COLOR_SWIZZLE_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_border_color_swizzle"),
+    number: 412,
+    type_: "device",
+    author: "EXT",
+    contact: "Piers Daniell @pdaniell-nv",
+    platform: None,
+    required_extensions: Some(&[EXT_CUSTOM_BORDER_COLOR_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_buffer_device_address.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_buffer_device_address`")]
 #[allow(deprecated)]
