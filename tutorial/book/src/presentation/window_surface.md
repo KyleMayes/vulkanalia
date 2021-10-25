@@ -101,6 +101,7 @@ for (index, properties) in properties.iter().enumerate() {
         data.surface,
     )? {
         present = Some(index as u32);
+        break;
     }
 }
 ```

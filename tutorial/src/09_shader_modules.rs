@@ -528,6 +528,7 @@ impl QueueFamilyIndices {
         for (index, properties) in properties.iter().enumerate() {
             if instance.get_physical_device_surface_support_khr(physical_device, index as u32, data.surface)? {
                 present = Some(index as u32);
+                break;
             }
         }
 
