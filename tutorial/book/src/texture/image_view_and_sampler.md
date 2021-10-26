@@ -268,10 +268,15 @@ unsafe fn check_physical_device(
     instance: &Instance,
     data: &AppData,
     physical_device: vk::PhysicalDevice,
-) -> Result<bool> {
+) -> Result<()> {
     // ...
+
     let features = instance.get_physical_device_features(physical_device);
-    Ok(extensions && swapchain && features.sampler_anisotropy == vk::TRUE)
+    if features.sampler_anisotropy != vk::TRUE {
+        return Err(anyhow!(SuitabilityError("No sampler anisotropy.")));
+    }
+
+    Ok(())
 }
 ```
 

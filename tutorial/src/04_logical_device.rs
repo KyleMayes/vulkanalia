@@ -8,6 +8,7 @@ use std::os::raw::c_void;
 
 use anyhow::*;
 use log::*;
+use thiserror::Error;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::window as vk_window;
@@ -205,29 +206,33 @@ extern "system" fn debug_callback(
 // Physical Device
 //================================================
 
-unsafe fn pick_physical_device(instance: &Instance, data: &mut AppData) -> Result<()> {
-    data.physical_device = instance
-        .enumerate_physical_devices()?
-        .into_iter()
-        .find(|pd| match check_physical_device(instance, data, *pd) {
-            Ok(suitable) => suitable,
-            Err(e) => {
-                warn!("Failed to check physical device suitability: {}", e);
-                false
-            }
-        })
-        .ok_or_else(|| anyhow!("Failed to find suitable physical device."))?;
+#[derive(Debug, Error)]
+#[error("{0}")]
+pub struct SuitabilityError(pub &'static str);
 
-    Ok(())
+unsafe fn pick_physical_device(instance: &Instance, data: &mut AppData) -> Result<()> {
+    for physical_device in instance.enumerate_physical_devices()? {
+        let properties = instance.get_physical_device_properties(physical_device);
+
+        if let Err(error) = check_physical_device(instance, data, physical_device) {
+            warn!("Skipping physical device (`{}`): {}", properties.device_name, error);
+        } else {
+            info!("Selected physical device (`{}`).", properties.device_name);
+            data.physical_device = physical_device;
+            return Ok(());
+        }
+    }
+
+    Err(anyhow!("Failed to find suitable physical device."))
 }
 
 unsafe fn check_physical_device(
     instance: &Instance,
     data: &AppData,
     physical_device: vk::PhysicalDevice,
-) -> Result<bool> {
+) -> Result<()> {
     QueueFamilyIndices::get(instance, data, physical_device)?;
-    Ok(true)
+    Ok(())
 }
 
 //================================================
@@ -294,7 +299,7 @@ impl QueueFamilyIndices {
         if let Some(graphics) = graphics {
             Ok(Self { graphics })
         } else {
-            Err(anyhow!("Failed to get required queue family indices."))
+            Err(anyhow!(SuitabilityError("Missing required queue families.")))
         }
     }
 }
