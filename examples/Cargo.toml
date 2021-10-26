@@ -21,5 +21,6 @@ lazy_static = "1"
 log = "0.4"
 nalgebra-glm = "0.10"
 pretty_env_logger = "0.4"
+thiserror = "1"
 vulkanalia = { path = "../vulkanalia", features = ["libloading", "window"] }
 winit = "0.24"

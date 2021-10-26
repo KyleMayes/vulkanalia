@@ -19,6 +19,7 @@ log = "0.4"
 nalgebra-glm = "0.10"
 png = "0.16"
 pretty_env_logger = "0.4"
+thiserror = "1"
 tobj = "2"
 vulkanalia = { version = "=0.11.0", features = ["libloading", "window"] }
 winit = "0.24"
@@ -30,6 +31,7 @@ winit = "0.24"
 * `nalgebra-glm` &ndash; used as a Rust replacement for [GLM](https://glmg-truc.net) (graphics math library)
 * `png` &ndash; used to load PNGs to use as textures
 * `pretty_env_logger` &ndash; used to print our logs to the console
+* `thiserror` &ndash; used to define custom errors types without boilerplate
 * `tobj` &ndash; used to load 3D models in the [Wavefront .obj format](https:/en.wikipedia.org/wiki/Wavefront_.obj_file)
 * `vulkanalia` &ndash; used to call the Vulkan API
 * `winit` &ndash; used to create a window to render to

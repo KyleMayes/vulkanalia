@@ -111,7 +111,7 @@ We'll also need to add `present` to the final expression:
 if let (Some(graphics), Some(present)) = (graphics, present) {
     Ok(Self { graphics, present })
 } else {
-    Err(anyhow!("Failed to get required queue family indices."))
+    Err(anyhow!(SuitabilityError("Missing required queue families.")))
 }
 ```
 

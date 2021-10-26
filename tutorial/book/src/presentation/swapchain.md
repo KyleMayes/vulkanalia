@@ -27,17 +27,17 @@ unsafe fn check_physical_device(
     instance: &Instance,
     data: &AppData,
     physical_device: vk::PhysicalDevice,
-) -> Result<bool> {
+) -> Result<()> {
     QueueFamilyIndices::get(instance, data, physical_device)?;
-    let extensions = check_physical_device_extensions(instance, physical_device)?;
+    check_physical_device_extensions(instance, physical_device)?;
     Ok(extensions)
 }
 
 unsafe fn check_physical_device_extensions(
     instance: &Instance,
     physical_device: vk::PhysicalDevice,
-) -> Result<bool> {
-    Ok(true)
+) -> Result<()> {
+    Ok(())
 }
 ```
 
@@ -47,13 +47,17 @@ Modify the body of the function to enumerate the extensions and check if all of 
 unsafe fn check_physical_device_extensions(
     instance: &Instance,
     physical_device: vk::PhysicalDevice,
-) -> Result<bool> {
+) -> Result<()> {
     let extensions = instance
         .enumerate_device_extension_properties(physical_device, None)?
         .iter()
         .map(|e| e.extension_name)
         .collect::<HashSet<_>>();
-    Ok(DEVICE_EXTENSIONS.iter().all(|e| extensions.contains(e)))
+    if DEVICE_EXTENSIONS.iter().all(|e| extensions.contains(e)) {
+        Ok(())
+    } else {
+        Err(anyhow!(SuitabilityError("Missing required device extensions.")))
+    }
 }
 ```
 
@@ -130,15 +134,23 @@ The meaning of these structs and exactly which data they contain is discussed in
 All of the details are in the struct now, so let's extend `check_physical_device` once more to utilize this method to verify that swapchain support is adequate. swapchain support is sufficient for this tutorial if there is at least one supported image format and one supported presentation mode given the window surface we have.
 
 ```rust,noplaypen
-let support = SwapchainSupport::get(instance, data, physical_device)?;
-let swapchain = !support.formats.is_empty() && !support.present_modes.is_empty();
+unsafe fn check_physical_device(
+    instance: &Instance,
+    data: &AppData,
+    physical_device: vk::PhysicalDevice,
+) -> Result<()> {
+    // ...
+
+    let support = SwapchainSupport::get(instance, data, physical_device)?;
+    if support.formats.is_empty() || support.present_modes.is_empty() {
+        return Err(anyhow!(SuitabilityError("Insufficient swapchain support.")));
+    }
+
+    Ok(())
+}
 ```
 
-It is important that we only try to query for swapchain support after verifying that the extension is available. The last line of the function changes to:
-
-```rust,noplaypen
-Ok(extensions && swapchain)
-```
+It is important that we only try to query for swapchain support after verifying that the extension is available.
 
 ## Choosing the right settings for the swapchain
 
