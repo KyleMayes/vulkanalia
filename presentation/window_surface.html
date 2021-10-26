@@ -218,6 +218,7 @@ for (index, properties) in properties.iter().enumerate() {
         data.surface,
     )? {
         present = Some(index as u32);
+        break;
     }
 }
 </code></pre>
@@ -225,7 +226,7 @@ for (index, properties) in properties.iter().enumerate() {
 <pre><code class="language-rust noplaypen">if let (Some(graphics), Some(present)) = (graphics, present) {
     Ok(Self { graphics, present })
 } else {
-    Err(anyhow!(&quot;Failed to get required queue family indices.&quot;))
+    Err(anyhow!(SuitabilityError(&quot;Missing required queue families.&quot;)))
 }
 </code></pre>
 <p>Note that it's very likely that these end up being the same queue family after all, but throughout the program we will treat them as if they were separate queues for a uniform approach. Nevertheless, you could add logic to explicitly prefer a physical device that supports drawing and presentation in the same queue for improved performance.</p>

@@ -343,10 +343,15 @@ unsafe fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
+) -&gt; Result&lt;()&gt; {
     // ...
+
     let features = instance.get_physical_device_features(physical_device);
-    Ok(extensions &amp;&amp; swapchain &amp;&amp; features.sampler_anisotropy == vk::TRUE)
+    if features.sampler_anisotropy != vk::TRUE {
+        return Err(anyhow!(SuitabilityError(&quot;No sampler anisotropy.&quot;)));
+    }
+
+    Ok(())
 }
 </code></pre>
 <p>The <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features"><code class="hljs">get_physical_device_features</code></a> repurposes the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.PhysicalDeviceFeatures.html"><code class="hljs">vk::PhysicalDeviceFeatures</code></a> struct to indicate which features are supported rather than requested by setting the boolean values.</p>

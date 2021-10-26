@@ -155,14 +155,20 @@
                         <h1><a class="header" href="#physical-devices-and-queue-families" id="physical-devices-and-queue-families">Physical devices and queue families</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/03_physical_device_selection.rs">main.rs</a></p>
 <p>After initializing the Vulkan library through an <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> we need to look for and select a graphics card in the system that supports the features we need. In fact we can select any number of graphics cards and use them simultaneously, but in this tutorial we'll stick to the first graphics card that suits our needs.</p>
-<p>We'll add a <code>pick_physical_device</code> function which will accomplish this task and write the physical device and related information to the <code>AppData</code> instance. With this in place we can construct and populate an <code>AppData</code> instance in our <code>App::create</code> method.</p>
-<pre><code class="language-rust noplaypen">impl App {
+<p>We'll add a <code>pick_physical_device</code> function which will accomplish this task and write the physical device and related information to the <code>AppData</code> instance. This function and the functions it calls will use a custom error type (<code>SuitabilityError</code>) to signal that a physical device does not satisfy the requirements of the application. This error type will use the <code>thiserror</code> crate to automatically implement all the necessary boilerplate for an error type.</p>
+<pre><code class="language-rust noplaypen">use thiserror::Error;
+
+impl App {
     unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         pick_physical_device(&amp;instance, &amp;mut data)?;
         Ok(Self { entry, instance, data })
     }
 }
+
+#[derive(Debug, Error)]
+#[error(&quot;Missing {0}.&quot;)]
+pub struct SuitabilityError(pub &amp;'static str);
 
 unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
@@ -175,13 +181,13 @@ unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) 
 }
 </code></pre>
 <h2><a class="header" href="#device-suitability" id="device-suitability">Device suitability</a></h2>
-<p>We'll need a way to determine whether a physical device meets our needs. We'll start by creating a function that returns whether a supplied physical device supports everything we require:</p>
+<p>We'll need a way to determine whether a physical device meets our needs. We'll start by creating a function that returns a <code>SuitabilityError</code> if a supplied physical device does not support everything we require:</p>
 <pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
-    Ok(true)
+) -&gt; Result&lt;()&gt; {
+    Ok(())
 }
 </code></pre>
 <p>To evaluate whether a physical device meets our needs we can start by querying for some details. Basic device properties like the name, type, and supported Vulkan version can be queried using <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_properties"><code class="hljs">get_physical_device_properties</code></a>:</p>
@@ -193,18 +199,23 @@ unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) 
     .get_physical_device_features(physical_device);
 </code></pre>
 <p>There are more details that can be queried from devices that we'll discuss later concerning device memory and queue families (see the next section).</p>
-<p>As an example, let's say we consider our application only usable for dedicated graphics cards that support geometry shaders. Then the <code>check_physical_device</code> function would look like this:</p>
+<p>As an example, let's say we consider our application only usable for dedicated graphics cards that support geometry shaders. Then the <code>check_physical_device</code> function might look like this:</p>
 <pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
+) -&gt; Result&lt;()&gt; {
     let properties = instance.get_physical_device_properties(physical_device);
+    if properties.device_type != vk::PhysicalDeviceType::DISCRETE_GPU {
+        return Err(anyhow!(SuitabilityError(&quot;Only discrete GPUs are supported.&quot;)));
+    }
+
     let features = instance.get_physical_device_features(physical_device);
-    Ok(
-        properties.device_type == vk::PhysicalDeviceType::DISCRETE_GPU
-            &amp;&amp; features.geometry_shader == vk::TRUE,
-    )
+    if features.geometry_shader != vk::TRUE {
+        return Err(anyhow!(SuitabilityError(&quot;Missing geometry shader support.&quot;)));
+    }
+
+    Ok(())
 }
 </code></pre>
 <p>Instead of just checking if a device is suitable or not and going with the first one, you could also give each device a score and pick the highest one. That way you could favor a dedicated graphics card by giving it a higher score, but fall back to an integrated GPU if that's the only available one. You could also just display the names of the choices and allow the user to select.</p>
@@ -235,7 +246,7 @@ impl QueueFamilyIndices {
         if let Some(graphics) = graphics {
             Ok(Self { graphics })
         } else {
-            Err(anyhow!(&quot;Failed to get required queue family indices.&quot;))
+            Err(anyhow!(SuitabilityError(&quot;Missing required queue families.&quot;)))
         }
     }
 }
@@ -246,23 +257,31 @@ impl QueueFamilyIndices {
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
+) -&gt; Result&lt;()&gt; {
     QueueFamilyIndices::get(instance, data, physical_device)?;
     Ok(true)
 }
 </code></pre>
-<p>Lastly we can iterate over the physical devices and pick the first that satisfies our requirements as indicated by <code>check_physical_device</code>. To do this, add the following code to <code>pick_physical_device</code>:</p>
-<pre><code class="language-rust noplaypen">data.physical_device = instance
-    .enumerate_physical_devices()?
-    .into_iter()
-    .find(|pd| match check_physical_device(instance, data, *pd) {
-        Ok(suitable) =&gt; suitable,
-        Err(e) =&gt; {
-            warn!(&quot;Failed to check physical device suitability: {}&quot;, e);
-            false
+<p>Lastly we can iterate over the physical devices and pick the first that satisfies our requirements as indicated by <code>check_physical_device</code>. To do this, update <code>pick_physical_device</code> to look like the following:</p>
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
+    instance: &amp;Instance,
+    data: &amp;AppData,
+    physical_device: vk::PhysicalDevice,
+) -&gt; Result&lt;()&gt; {
+    for physical_device in instance.enumerate_physical_devices()? {
+        let properties = instance.get_physical_device_properties(physical_device);
+
+        if let Err(error) = check_physical_device(instance, data, physical_device) {
+            warn!(&quot;Skipping physical device (`{}`): {}&quot;, properties.device_name, error);
+        } else {
+            info!(&quot;Selected physical device (`{}`).&quot;, properties.device_name);
+            data.physical_device = physical_device;
+            return Ok(());
         }
-    })
-    .ok_or_else(|| anyhow!(&quot;Failed to find suitable physical device.&quot;))?;
+    }
+
+    Err(anyhow!(&quot;Failed to find suitable physical device.&quot;))
+}
 </code></pre>
 <p>Great, that's all we need for now to find the right physical device! The next step is to create a logical device to interface with it.</p>
 

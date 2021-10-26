@@ -168,30 +168,34 @@
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
+) -&gt; Result&lt;()&gt; {
     QueueFamilyIndices::get(instance, data, physical_device)?;
-    let extensions = check_physical_device_extensions(instance, physical_device)?;
+    check_physical_device_extensions(instance, physical_device)?;
     Ok(extensions)
 }
 
 unsafe fn check_physical_device_extensions(
     instance: &amp;Instance,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
-    Ok(true)
+) -&gt; Result&lt;()&gt; {
+    Ok(())
 }
 </code></pre>
 <p>Modify the body of the function to enumerate the extensions and check if all of the required extensions are amongst them.</p>
 <pre><code class="language-rust noplaypen">unsafe fn check_physical_device_extensions(
     instance: &amp;Instance,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
+) -&gt; Result&lt;()&gt; {
     let extensions = instance
         .enumerate_device_extension_properties(physical_device, None)?
         .iter()
         .map(|e| e.extension_name)
         .collect::&lt;HashSet&lt;_&gt;&gt;();
-    Ok(DEVICE_EXTENSIONS.iter().all(|e| extensions.contains(e)))
+    if DEVICE_EXTENSIONS.iter().all(|e| extensions.contains(e)) {
+        Ok(())
+    } else {
+        Err(anyhow!(SuitabilityError(&quot;Missing required device extensions.&quot;)))
+    }
 }
 </code></pre>
 <p>Now run the code and verify that your graphics card is indeed capable of creating a swapchain. It should be noted that the availability of a presentation queue, as we checked in the previous chapter, implies that the swapchain extension must be supported. However, it's still good to be explicit about things, and the extension does have to be explicitly enabled.</p>
@@ -248,12 +252,22 @@ struct SwapchainSupport {
 </code></pre>
 <p>The meaning of these structs and exactly which data they contain is discussed in the next section.</p>
 <p>All of the details are in the struct now, so let's extend <code>check_physical_device</code> once more to utilize this method to verify that swapchain support is adequate. swapchain support is sufficient for this tutorial if there is at least one supported image format and one supported presentation mode given the window surface we have.</p>
-<pre><code class="language-rust noplaypen">let support = SwapchainSupport::get(instance, data, physical_device)?;
-let swapchain = !support.formats.is_empty() &amp;&amp; !support.present_modes.is_empty();
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
+    instance: &amp;Instance,
+    data: &amp;AppData,
+    physical_device: vk::PhysicalDevice,
+) -&gt; Result&lt;()&gt; {
+    // ...
+
+    let support = SwapchainSupport::get(instance, data, physical_device)?;
+    if support.formats.is_empty() || support.present_modes.is_empty() {
+        return Err(anyhow!(SuitabilityError(&quot;Insufficient swapchain support.&quot;)));
+    }
+
+    Ok(())
+}
 </code></pre>
-<p>It is important that we only try to query for swapchain support after verifying that the extension is available. The last line of the function changes to:</p>
-<pre><code class="language-rust noplaypen">Ok(extensions &amp;&amp; swapchain)
-</code></pre>
+<p>It is important that we only try to query for swapchain support after verifying that the extension is available.</p>
 <h2><a class="header" href="#choosing-the-right-settings-for-the-swapchain" id="choosing-the-right-settings-for-the-swapchain">Choosing the right settings for the swapchain</a></h2>
 <p>If the conditions we just added were met then the support is definitely sufficient, but there may still be many different modes of varying optimality. We'll now write a couple of functions to find the right settings for the best possible swapchain. There are three types of settings to determine:</p>
 <ul>

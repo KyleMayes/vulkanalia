@@ -390,6 +390,7 @@ log = &quot;0.4&quot;
 nalgebra-glm = &quot;0.10&quot;
 png = &quot;0.16&quot;
 pretty_env_logger = &quot;0.4&quot;
+thiserror = &quot;1&quot;
 tobj = &quot;2&quot;
 vulkanalia = { version = &quot;=0.11.0&quot;, features = [&quot;libloading&quot;, &quot;window&quot;] }
 winit = &quot;0.24&quot;
@@ -401,6 +402,7 @@ winit = &quot;0.24&quot;
 <li><code>nalgebra-glm</code> – used as a Rust replacement for <a href="https://glmg-truc.net">GLM</a> (graphics math library)</li>
 <li><code>png</code> – used to load PNGs to use as textures</li>
 <li><code>pretty_env_logger</code> – used to print our logs to the console</li>
+<li><code>thiserror</code> – used to define custom errors types without boilerplate</li>
 <li><code>tobj</code> – used to load 3D models in the <a href="https:/en.wikipedia.org/wiki/Wavefront_.obj_file">Wavefront .obj format</a></li>
 <li><code>vulkanalia</code> – used to call the Vulkan API</li>
 <li><code>winit</code> – used to create a window to render to</li>
@@ -827,14 +829,20 @@ if VALIDATION_ENABLED {
 <h1><a class="header" href="#physical-devices-and-queue-families" id="physical-devices-and-queue-families">Physical devices and queue families</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/03_physical_device_selection.rs">main.rs</a></p>
 <p>After initializing the Vulkan library through an <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> we need to look for and select a graphics card in the system that supports the features we need. In fact we can select any number of graphics cards and use them simultaneously, but in this tutorial we'll stick to the first graphics card that suits our needs.</p>
-<p>We'll add a <code>pick_physical_device</code> function which will accomplish this task and write the physical device and related information to the <code>AppData</code> instance. With this in place we can construct and populate an <code>AppData</code> instance in our <code>App::create</code> method.</p>
-<pre><code class="language-rust noplaypen">impl App {
+<p>We'll add a <code>pick_physical_device</code> function which will accomplish this task and write the physical device and related information to the <code>AppData</code> instance. This function and the functions it calls will use a custom error type (<code>SuitabilityError</code>) to signal that a physical device does not satisfy the requirements of the application. This error type will use the <code>thiserror</code> crate to automatically implement all the necessary boilerplate for an error type.</p>
+<pre><code class="language-rust noplaypen">use thiserror::Error;
+
+impl App {
     unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
         pick_physical_device(&amp;instance, &amp;mut data)?;
         Ok(Self { entry, instance, data })
     }
 }
+
+#[derive(Debug, Error)]
+#[error(&quot;Missing {0}.&quot;)]
+pub struct SuitabilityError(pub &amp;'static str);
 
 unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     Ok(())
@@ -847,13 +855,13 @@ unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) 
 }
 </code></pre>
 <h2><a class="header" href="#device-suitability" id="device-suitability">Device suitability</a></h2>
-<p>We'll need a way to determine whether a physical device meets our needs. We'll start by creating a function that returns whether a supplied physical device supports everything we require:</p>
+<p>We'll need a way to determine whether a physical device meets our needs. We'll start by creating a function that returns a <code>SuitabilityError</code> if a supplied physical device does not support everything we require:</p>
 <pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
-    Ok(true)
+) -&gt; Result&lt;()&gt; {
+    Ok(())
 }
 </code></pre>
 <p>To evaluate whether a physical device meets our needs we can start by querying for some details. Basic device properties like the name, type, and supported Vulkan version can be queried using <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_properties"><code class="hljs">get_physical_device_properties</code></a>:</p>
@@ -865,18 +873,23 @@ unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) 
     .get_physical_device_features(physical_device);
 </code></pre>
 <p>There are more details that can be queried from devices that we'll discuss later concerning device memory and queue families (see the next section).</p>
-<p>As an example, let's say we consider our application only usable for dedicated graphics cards that support geometry shaders. Then the <code>check_physical_device</code> function would look like this:</p>
+<p>As an example, let's say we consider our application only usable for dedicated graphics cards that support geometry shaders. Then the <code>check_physical_device</code> function might look like this:</p>
 <pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
+) -&gt; Result&lt;()&gt; {
     let properties = instance.get_physical_device_properties(physical_device);
+    if properties.device_type != vk::PhysicalDeviceType::DISCRETE_GPU {
+        return Err(anyhow!(SuitabilityError(&quot;Only discrete GPUs are supported.&quot;)));
+    }
+
     let features = instance.get_physical_device_features(physical_device);
-    Ok(
-        properties.device_type == vk::PhysicalDeviceType::DISCRETE_GPU
-            &amp;&amp; features.geometry_shader == vk::TRUE,
-    )
+    if features.geometry_shader != vk::TRUE {
+        return Err(anyhow!(SuitabilityError(&quot;Missing geometry shader support.&quot;)));
+    }
+
+    Ok(())
 }
 </code></pre>
 <p>Instead of just checking if a device is suitable or not and going with the first one, you could also give each device a score and pick the highest one. That way you could favor a dedicated graphics card by giving it a higher score, but fall back to an integrated GPU if that's the only available one. You could also just display the names of the choices and allow the user to select.</p>
@@ -907,7 +920,7 @@ impl QueueFamilyIndices {
         if let Some(graphics) = graphics {
             Ok(Self { graphics })
         } else {
-            Err(anyhow!(&quot;Failed to get required queue family indices.&quot;))
+            Err(anyhow!(SuitabilityError(&quot;Missing required queue families.&quot;)))
         }
     }
 }
@@ -918,23 +931,31 @@ impl QueueFamilyIndices {
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
+) -&gt; Result&lt;()&gt; {
     QueueFamilyIndices::get(instance, data, physical_device)?;
     Ok(true)
 }
 </code></pre>
-<p>Lastly we can iterate over the physical devices and pick the first that satisfies our requirements as indicated by <code>check_physical_device</code>. To do this, add the following code to <code>pick_physical_device</code>:</p>
-<pre><code class="language-rust noplaypen">data.physical_device = instance
-    .enumerate_physical_devices()?
-    .into_iter()
-    .find(|pd| match check_physical_device(instance, data, *pd) {
-        Ok(suitable) =&gt; suitable,
-        Err(e) =&gt; {
-            warn!(&quot;Failed to check physical device suitability: {}&quot;, e);
-            false
+<p>Lastly we can iterate over the physical devices and pick the first that satisfies our requirements as indicated by <code>check_physical_device</code>. To do this, update <code>pick_physical_device</code> to look like the following:</p>
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
+    instance: &amp;Instance,
+    data: &amp;AppData,
+    physical_device: vk::PhysicalDevice,
+) -&gt; Result&lt;()&gt; {
+    for physical_device in instance.enumerate_physical_devices()? {
+        let properties = instance.get_physical_device_properties(physical_device);
+
+        if let Err(error) = check_physical_device(instance, data, physical_device) {
+            warn!(&quot;Skipping physical device (`{}`): {}&quot;, properties.device_name, error);
+        } else {
+            info!(&quot;Selected physical device (`{}`).&quot;, properties.device_name);
+            data.physical_device = physical_device;
+            return Ok(());
         }
-    })
-    .ok_or_else(|| anyhow!(&quot;Failed to find suitable physical device.&quot;))?;
+    }
+
+    Err(anyhow!(&quot;Failed to find suitable physical device.&quot;))
+}
 </code></pre>
 <p>Great, that's all we need for now to find the right physical device! The next step is to create a logical device to interface with it.</p>
 <h1><a class="header" href="#logical-device-and-queues" id="logical-device-and-queues">Logical device and queues</a></h1>
@@ -1087,6 +1108,7 @@ for (index, properties) in properties.iter().enumerate() {
         data.surface,
     )? {
         present = Some(index as u32);
+        break;
     }
 }
 </code></pre>
@@ -1094,7 +1116,7 @@ for (index, properties) in properties.iter().enumerate() {
 <pre><code class="language-rust noplaypen">if let (Some(graphics), Some(present)) = (graphics, present) {
     Ok(Self { graphics, present })
 } else {
-    Err(anyhow!(&quot;Failed to get required queue family indices.&quot;))
+    Err(anyhow!(SuitabilityError(&quot;Missing required queue families.&quot;)))
 }
 </code></pre>
 <p>Note that it's very likely that these end up being the same queue family after all, but throughout the program we will treat them as if they were separate queues for a uniform approach. Nevertheless, you could add logic to explicitly prefer a physical device that supports drawing and presentation in the same queue for improved performance.</p>
@@ -1148,30 +1170,34 @@ let queue_infos = unique_indices
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
+) -&gt; Result&lt;()&gt; {
     QueueFamilyIndices::get(instance, data, physical_device)?;
-    let extensions = check_physical_device_extensions(instance, physical_device)?;
+    check_physical_device_extensions(instance, physical_device)?;
     Ok(extensions)
 }
 
 unsafe fn check_physical_device_extensions(
     instance: &amp;Instance,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
-    Ok(true)
+) -&gt; Result&lt;()&gt; {
+    Ok(())
 }
 </code></pre>
 <p>Modify the body of the function to enumerate the extensions and check if all of the required extensions are amongst them.</p>
 <pre><code class="language-rust noplaypen">unsafe fn check_physical_device_extensions(
     instance: &amp;Instance,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
+) -&gt; Result&lt;()&gt; {
     let extensions = instance
         .enumerate_device_extension_properties(physical_device, None)?
         .iter()
         .map(|e| e.extension_name)
         .collect::&lt;HashSet&lt;_&gt;&gt;();
-    Ok(DEVICE_EXTENSIONS.iter().all(|e| extensions.contains(e)))
+    if DEVICE_EXTENSIONS.iter().all(|e| extensions.contains(e)) {
+        Ok(())
+    } else {
+        Err(anyhow!(SuitabilityError(&quot;Missing required device extensions.&quot;)))
+    }
 }
 </code></pre>
 <p>Now run the code and verify that your graphics card is indeed capable of creating a swapchain. It should be noted that the availability of a presentation queue, as we checked in the previous chapter, implies that the swapchain extension must be supported. However, it's still good to be explicit about things, and the extension does have to be explicitly enabled.</p>
@@ -1228,12 +1254,22 @@ struct SwapchainSupport {
 </code></pre>
 <p>The meaning of these structs and exactly which data they contain is discussed in the next section.</p>
 <p>All of the details are in the struct now, so let's extend <code>check_physical_device</code> once more to utilize this method to verify that swapchain support is adequate. swapchain support is sufficient for this tutorial if there is at least one supported image format and one supported presentation mode given the window surface we have.</p>
-<pre><code class="language-rust noplaypen">let support = SwapchainSupport::get(instance, data, physical_device)?;
-let swapchain = !support.formats.is_empty() &amp;&amp; !support.present_modes.is_empty();
+<pre><code class="language-rust noplaypen">unsafe fn check_physical_device(
+    instance: &amp;Instance,
+    data: &amp;AppData,
+    physical_device: vk::PhysicalDevice,
+) -&gt; Result&lt;()&gt; {
+    // ...
+
+    let support = SwapchainSupport::get(instance, data, physical_device)?;
+    if support.formats.is_empty() || support.present_modes.is_empty() {
+        return Err(anyhow!(SuitabilityError(&quot;Insufficient swapchain support.&quot;)));
+    }
+
+    Ok(())
+}
 </code></pre>
-<p>It is important that we only try to query for swapchain support after verifying that the extension is available. The last line of the function changes to:</p>
-<pre><code class="language-rust noplaypen">Ok(extensions &amp;&amp; swapchain)
-</code></pre>
+<p>It is important that we only try to query for swapchain support after verifying that the extension is available.</p>
 <h2><a class="header" href="#choosing-the-right-settings-for-the-swapchain" id="choosing-the-right-settings-for-the-swapchain">Choosing the right settings for the swapchain</a></h2>
 <p>If the conditions we just added were met then the support is definitely sufficient, but there may still be many different modes of varying optimality. We'll now write a couple of functions to find the right settings for the best possible swapchain. There are three types of settings to determine:</p>
 <ul>
@@ -4692,10 +4728,15 @@ unsafe fn create_texture_sampler(device: &amp;Device, data: &amp;mut AppData) -&
     instance: &amp;Instance,
     data: &amp;AppData,
     physical_device: vk::PhysicalDevice,
-) -&gt; Result&lt;bool&gt; {
+) -&gt; Result&lt;()&gt; {
     // ...
+
     let features = instance.get_physical_device_features(physical_device);
-    Ok(extensions &amp;&amp; swapchain &amp;&amp; features.sampler_anisotropy == vk::TRUE)
+    if features.sampler_anisotropy != vk::TRUE {
+        return Err(anyhow!(SuitabilityError(&quot;No sampler anisotropy.&quot;)));
+    }
+
+    Ok(())
 }
 </code></pre>
 <p>The <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features"><code class="hljs">get_physical_device_features</code></a> repurposes the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.PhysicalDeviceFeatures.html"><code class="hljs">vk::PhysicalDeviceFeatures</code></a> struct to indicate which features are supported rather than requested by setting the boolean values.</p>
