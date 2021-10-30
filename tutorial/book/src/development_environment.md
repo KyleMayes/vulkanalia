@@ -21,7 +21,7 @@ png = "0.16"
 pretty_env_logger = "0.4"
 thiserror = "1"
 tobj = "2"
-vulkanalia = { version = "=0.11.0", features = ["libloading", "window"] }
+vulkanalia = { version = "=0.12.0", features = ["libloading", "window"] }
 winit = "0.24"
 ```
 
