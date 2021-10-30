@@ -2,8 +2,8 @@
 
 //! Raw Vulkan bindings for Rust.
 
-#[rustfmt::skip]
 mod arrays;
+
 #[rustfmt::skip]
 mod bitmasks;
 #[rustfmt::skip]
