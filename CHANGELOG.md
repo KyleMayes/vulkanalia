@@ -11,6 +11,22 @@
 - [vk.xml: Reorder `VkFormatFeatureFlags2KHR` xml attributes for alignment (#1653)](https://github.com/KhronosGroup/Vulkan-Docs/commit/a80e21cf5efdc44cfba179d5763f3ced563338c7)
 - [October 13, 2021 Vulkan 1.2.196 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/0714884a45ffe66c2746b4f53c9035bf72c32dfd)
 
+### Fixed
+- Fixed `StringArray` equality and hashing (previously equality and hashing would compare or hash the *entire* array of characters instead of stopping at the first null terminator which resulted in string arrays that contain identical null-terminated strings not being considered equal because there were different bytes after the first null terminator)
+
+### Changed
+- Changed `StringArray::from_bytes` constructor method to truncate the byte string instead of panicking when the byte string is too long to fit in the string array
+
+### Added
+- Added `StringArray::new` constructor method
+- Added `StringArray::from_cstr` constructor method
+- Added `StringArray::as_array` method
+- Added `StringArray::as_bytes` method
+- Added `StringArray::as_cstr` method
+
+### Removed
+- Removed `StringArray` tuple struct field
+
 ## [0.11.0] - 2021-09-01
 
 ### Bindings Updates
