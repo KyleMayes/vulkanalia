@@ -4545,6 +4545,31 @@ pub trait KhrDriverPropertiesExtension: DeviceV1_0 {
 
 impl KhrDriverPropertiesExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_dynamic_rendering.html>
+pub trait KhrDynamicRenderingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_DYNAMIC_RENDERING_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderingKHR.html>
+    #[inline]
+    unsafe fn cmd_begin_rendering_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        rendering_info: &RenderingInfoKHR,
+    ) {
+        let __result = (self.commands().cmd_begin_rendering_khr)(command_buffer, rendering_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderingKHR.html>
+    #[inline]
+    unsafe fn cmd_end_rendering_khr(&self, command_buffer: CommandBuffer) {
+        let __result = (self.commands().cmd_end_rendering_khr)(command_buffer);
+    }
+}
+
+impl KhrDynamicRenderingExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_fence.html>
 pub trait KhrExternalFenceExtension: DeviceV1_0 {
     /// The metadata for this extension.

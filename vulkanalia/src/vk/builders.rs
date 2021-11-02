@@ -2887,6 +2887,78 @@ unsafe impl Cast for AttachmentReferenceStencilLayoutBuilder {
     }
 }
 
+unsafe impl Cast for AttachmentSampleCountInfoAMD {
+    type Target = AttachmentSampleCountInfoAMD;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for AttachmentSampleCountInfoAMD {
+    type Builder = AttachmentSampleCountInfoAMDBuilder<'b>;
+}
+
+/// A builder for a [`AttachmentSampleCountInfoAMD`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AttachmentSampleCountInfoAMDBuilder<'b> {
+    value: AttachmentSampleCountInfoAMD,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> AttachmentSampleCountInfoAMDBuilder<'b> {
+    #[inline]
+    pub fn color_attachment_samples(
+        mut self,
+        color_attachment_samples: &'b [SampleCountFlags],
+    ) -> Self {
+        self.value.color_attachment_count = color_attachment_samples.len() as u32;
+        self.value.color_attachment_samples = color_attachment_samples.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn depth_stencil_attachment_samples(
+        mut self,
+        depth_stencil_attachment_samples: SampleCountFlags,
+    ) -> Self {
+        self.value.depth_stencil_attachment_samples = depth_stencil_attachment_samples;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AttachmentSampleCountInfoAMD {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for AttachmentSampleCountInfoAMDBuilder<'b> {
+    type Target = AttachmentSampleCountInfoAMD;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for AttachmentSampleCountInfoAMDBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for AttachmentSampleCountInfoAMDBuilder<'b> {
+    type Target = AttachmentSampleCountInfoAMD;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for AttachmentSampleLocationsEXT {
     type Target = AttachmentSampleLocationsEXT;
 
@@ -6162,6 +6234,7 @@ unsafe impl Cast for CommandBufferInheritanceConditionalRenderingInfoEXTBuilder 
 
 /// A Vulkan struct that can be used to extend a [`CommandBufferInheritanceInfo`].
 pub unsafe trait ExtendsCommandBufferInheritanceInfo: fmt::Debug {}
+unsafe impl ExtendsCommandBufferInheritanceInfo for AttachmentSampleCountInfoAMD {}
 unsafe impl ExtendsCommandBufferInheritanceInfo
     for CommandBufferInheritanceConditionalRenderingInfoEXT
 {
@@ -6170,7 +6243,9 @@ unsafe impl ExtendsCommandBufferInheritanceInfo
     for CommandBufferInheritanceRenderPassTransformInfoQCOM
 {
 }
+unsafe impl ExtendsCommandBufferInheritanceInfo for CommandBufferInheritanceRenderingInfoKHR {}
 unsafe impl ExtendsCommandBufferInheritanceInfo for CommandBufferInheritanceViewportScissorInfoNV {}
+unsafe impl ExtendsCommandBufferInheritanceInfo for MultiviewPerViewAttributesInfoNVX {}
 
 unsafe impl Cast for CommandBufferInheritanceInfo {
     type Target = CommandBufferInheritanceInfo;
@@ -6329,6 +6404,96 @@ impl ops::DerefMut for CommandBufferInheritanceRenderPassTransformInfoQCOMBuilde
 
 unsafe impl Cast for CommandBufferInheritanceRenderPassTransformInfoQCOMBuilder {
     type Target = CommandBufferInheritanceRenderPassTransformInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CommandBufferInheritanceRenderingInfoKHR {
+    type Target = CommandBufferInheritanceRenderingInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for CommandBufferInheritanceRenderingInfoKHR {
+    type Builder = CommandBufferInheritanceRenderingInfoKHRBuilder<'b>;
+}
+
+/// A builder for a [`CommandBufferInheritanceRenderingInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CommandBufferInheritanceRenderingInfoKHRBuilder<'b> {
+    value: CommandBufferInheritanceRenderingInfoKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> CommandBufferInheritanceRenderingInfoKHRBuilder<'b> {
+    #[inline]
+    pub fn flags(mut self, flags: RenderingFlagsKHR) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn view_mask(mut self, view_mask: u32) -> Self {
+        self.value.view_mask = view_mask;
+        self
+    }
+
+    #[inline]
+    pub fn color_attachment_formats(mut self, color_attachment_formats: &'b [Format]) -> Self {
+        self.value.color_attachment_count = color_attachment_formats.len() as u32;
+        self.value.color_attachment_formats = color_attachment_formats.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn depth_attachment_format(mut self, depth_attachment_format: Format) -> Self {
+        self.value.depth_attachment_format = depth_attachment_format;
+        self
+    }
+
+    #[inline]
+    pub fn stencil_attachment_format(mut self, stencil_attachment_format: Format) -> Self {
+        self.value.stencil_attachment_format = stencil_attachment_format;
+        self
+    }
+
+    #[inline]
+    pub fn rasterization_samples(mut self, rasterization_samples: SampleCountFlags) -> Self {
+        self.value.rasterization_samples = rasterization_samples;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CommandBufferInheritanceRenderingInfoKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for CommandBufferInheritanceRenderingInfoKHRBuilder<'b> {
+    type Target = CommandBufferInheritanceRenderingInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for CommandBufferInheritanceRenderingInfoKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for CommandBufferInheritanceRenderingInfoKHRBuilder<'b> {
+    type Target = CommandBufferInheritanceRenderingInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -10042,6 +10207,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorIndexingFeatures
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDynamicRenderingFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExclusiveScissorFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
@@ -16122,12 +16288,15 @@ unsafe impl Cast for GeometryTrianglesNVBuilder {
 
 /// A Vulkan struct that can be used to extend a [`GraphicsPipelineCreateInfo`].
 pub unsafe trait ExtendsGraphicsPipelineCreateInfo: fmt::Debug {}
+unsafe impl ExtendsGraphicsPipelineCreateInfo for AttachmentSampleCountInfoAMD {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineShaderGroupsCreateInfoNV {}
+unsafe impl ExtendsGraphicsPipelineCreateInfo for MultiviewPerViewAttributesInfoNVX {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCreationFeedbackCreateInfoEXT {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineDiscardRectangleStateCreateInfoEXT {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineFragmentShadingRateEnumStateCreateInfoNV {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineFragmentShadingRateStateCreateInfoKHR {}
+unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineRenderingCreateInfoKHR {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo
     for PipelineRepresentativeFragmentTestStateCreateInfoNV
 {
@@ -22373,6 +22542,74 @@ unsafe impl Cast for MultisamplePropertiesEXTBuilder {
     }
 }
 
+unsafe impl Cast for MultiviewPerViewAttributesInfoNVX {
+    type Target = MultiviewPerViewAttributesInfoNVX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MultiviewPerViewAttributesInfoNVX {
+    type Builder = MultiviewPerViewAttributesInfoNVXBuilder;
+}
+
+/// A builder for a [`MultiviewPerViewAttributesInfoNVX`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MultiviewPerViewAttributesInfoNVXBuilder {
+    value: MultiviewPerViewAttributesInfoNVX,
+}
+
+impl MultiviewPerViewAttributesInfoNVXBuilder {
+    #[inline]
+    pub fn per_view_attributes(mut self, per_view_attributes: bool) -> Self {
+        self.value.per_view_attributes = per_view_attributes as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn per_view_attributes_position_x_only(
+        mut self,
+        per_view_attributes_position_x_only: bool,
+    ) -> Self {
+        self.value.per_view_attributes_position_x_only =
+            per_view_attributes_position_x_only as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MultiviewPerViewAttributesInfoNVX {
+        self.value
+    }
+}
+
+impl ops::Deref for MultiviewPerViewAttributesInfoNVXBuilder {
+    type Target = MultiviewPerViewAttributesInfoNVX;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MultiviewPerViewAttributesInfoNVXBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MultiviewPerViewAttributesInfoNVXBuilder {
+    type Target = MultiviewPerViewAttributesInfoNVX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for MutableDescriptorTypeCreateInfoVALVE {
     type Target = MutableDescriptorTypeCreateInfoVALVE;
 
@@ -26166,6 +26403,64 @@ unsafe impl Cast for PhysicalDeviceDrmPropertiesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceDynamicRenderingFeaturesKHR {
+    type Target = PhysicalDeviceDynamicRenderingFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceDynamicRenderingFeaturesKHR {
+    type Builder = PhysicalDeviceDynamicRenderingFeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceDynamicRenderingFeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceDynamicRenderingFeaturesKHRBuilder {
+    value: PhysicalDeviceDynamicRenderingFeaturesKHR,
+}
+
+impl PhysicalDeviceDynamicRenderingFeaturesKHRBuilder {
+    #[inline]
+    pub fn dynamic_rendering(mut self, dynamic_rendering: bool) -> Self {
+        self.value.dynamic_rendering = dynamic_rendering as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceDynamicRenderingFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceDynamicRenderingFeaturesKHRBuilder {
+    type Target = PhysicalDeviceDynamicRenderingFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceDynamicRenderingFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDynamicRenderingFeaturesKHRBuilder {
+    type Target = PhysicalDeviceDynamicRenderingFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceExclusiveScissorFeaturesNV {
     type Target = PhysicalDeviceExclusiveScissorFeaturesNV;
 
@@ -27187,6 +27482,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorIndexingF
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDynamicRenderingFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExclusiveScissorFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
@@ -41587,6 +41883,84 @@ unsafe impl Cast for PipelineRasterizationStateStreamCreateInfoEXTBuilder {
     }
 }
 
+unsafe impl Cast for PipelineRenderingCreateInfoKHR {
+    type Target = PipelineRenderingCreateInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PipelineRenderingCreateInfoKHR {
+    type Builder = PipelineRenderingCreateInfoKHRBuilder<'b>;
+}
+
+/// A builder for a [`PipelineRenderingCreateInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineRenderingCreateInfoKHRBuilder<'b> {
+    value: PipelineRenderingCreateInfoKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PipelineRenderingCreateInfoKHRBuilder<'b> {
+    #[inline]
+    pub fn view_mask(mut self, view_mask: u32) -> Self {
+        self.value.view_mask = view_mask;
+        self
+    }
+
+    #[inline]
+    pub fn color_attachment_formats(mut self, color_attachment_formats: &'b [Format]) -> Self {
+        self.value.color_attachment_count = color_attachment_formats.len() as u32;
+        self.value.color_attachment_formats = color_attachment_formats.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn depth_attachment_format(mut self, depth_attachment_format: Format) -> Self {
+        self.value.depth_attachment_format = depth_attachment_format;
+        self
+    }
+
+    #[inline]
+    pub fn stencil_attachment_format(mut self, stencil_attachment_format: Format) -> Self {
+        self.value.stencil_attachment_format = stencil_attachment_format;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineRenderingCreateInfoKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PipelineRenderingCreateInfoKHRBuilder<'b> {
+    type Target = PipelineRenderingCreateInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PipelineRenderingCreateInfoKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PipelineRenderingCreateInfoKHRBuilder<'b> {
+    type Target = PipelineRenderingCreateInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PipelineRepresentativeFragmentTestStateCreateInfoNV {
     type Target = PipelineRepresentativeFragmentTestStateCreateInfoNV;
 
@@ -45275,6 +45649,366 @@ impl ops::DerefMut for RenderPassTransformBeginInfoQCOMBuilder {
 
 unsafe impl Cast for RenderPassTransformBeginInfoQCOMBuilder {
     type Target = RenderPassTransformBeginInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for RenderingAttachmentInfoKHR {
+    type Target = RenderingAttachmentInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for RenderingAttachmentInfoKHR {
+    type Builder = RenderingAttachmentInfoKHRBuilder;
+}
+
+/// A builder for a [`RenderingAttachmentInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct RenderingAttachmentInfoKHRBuilder {
+    value: RenderingAttachmentInfoKHR,
+}
+
+impl RenderingAttachmentInfoKHRBuilder {
+    #[inline]
+    pub fn image_view(mut self, image_view: ImageView) -> Self {
+        self.value.image_view = image_view;
+        self
+    }
+
+    #[inline]
+    pub fn image_layout(mut self, image_layout: ImageLayout) -> Self {
+        self.value.image_layout = image_layout;
+        self
+    }
+
+    #[inline]
+    pub fn resolve_mode(mut self, resolve_mode: ResolveModeFlags) -> Self {
+        self.value.resolve_mode = resolve_mode;
+        self
+    }
+
+    #[inline]
+    pub fn resolve_image_view(mut self, resolve_image_view: ImageView) -> Self {
+        self.value.resolve_image_view = resolve_image_view;
+        self
+    }
+
+    #[inline]
+    pub fn resolve_image_layout(mut self, resolve_image_layout: ImageLayout) -> Self {
+        self.value.resolve_image_layout = resolve_image_layout;
+        self
+    }
+
+    #[inline]
+    pub fn load_op(mut self, load_op: AttachmentLoadOp) -> Self {
+        self.value.load_op = load_op;
+        self
+    }
+
+    #[inline]
+    pub fn store_op(mut self, store_op: AttachmentStoreOp) -> Self {
+        self.value.store_op = store_op;
+        self
+    }
+
+    #[inline]
+    pub fn clear_value(mut self, clear_value: ClearValue) -> Self {
+        self.value.clear_value = clear_value;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> RenderingAttachmentInfoKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for RenderingAttachmentInfoKHRBuilder {
+    type Target = RenderingAttachmentInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for RenderingAttachmentInfoKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for RenderingAttachmentInfoKHRBuilder {
+    type Target = RenderingAttachmentInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for RenderingFragmentDensityMapAttachmentInfoEXT {
+    type Target = RenderingFragmentDensityMapAttachmentInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for RenderingFragmentDensityMapAttachmentInfoEXT {
+    type Builder = RenderingFragmentDensityMapAttachmentInfoEXTBuilder;
+}
+
+/// A builder for a [`RenderingFragmentDensityMapAttachmentInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct RenderingFragmentDensityMapAttachmentInfoEXTBuilder {
+    value: RenderingFragmentDensityMapAttachmentInfoEXT,
+}
+
+impl RenderingFragmentDensityMapAttachmentInfoEXTBuilder {
+    #[inline]
+    pub fn image_view(mut self, image_view: ImageView) -> Self {
+        self.value.image_view = image_view;
+        self
+    }
+
+    #[inline]
+    pub fn image_layout(mut self, image_layout: ImageLayout) -> Self {
+        self.value.image_layout = image_layout;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> RenderingFragmentDensityMapAttachmentInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for RenderingFragmentDensityMapAttachmentInfoEXTBuilder {
+    type Target = RenderingFragmentDensityMapAttachmentInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for RenderingFragmentDensityMapAttachmentInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for RenderingFragmentDensityMapAttachmentInfoEXTBuilder {
+    type Target = RenderingFragmentDensityMapAttachmentInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for RenderingFragmentShadingRateAttachmentInfoKHR {
+    type Target = RenderingFragmentShadingRateAttachmentInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for RenderingFragmentShadingRateAttachmentInfoKHR {
+    type Builder = RenderingFragmentShadingRateAttachmentInfoKHRBuilder;
+}
+
+/// A builder for a [`RenderingFragmentShadingRateAttachmentInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct RenderingFragmentShadingRateAttachmentInfoKHRBuilder {
+    value: RenderingFragmentShadingRateAttachmentInfoKHR,
+}
+
+impl RenderingFragmentShadingRateAttachmentInfoKHRBuilder {
+    #[inline]
+    pub fn image_view(mut self, image_view: ImageView) -> Self {
+        self.value.image_view = image_view;
+        self
+    }
+
+    #[inline]
+    pub fn image_layout(mut self, image_layout: ImageLayout) -> Self {
+        self.value.image_layout = image_layout;
+        self
+    }
+
+    #[inline]
+    pub fn shading_rate_attachment_texel_size(
+        mut self,
+        shading_rate_attachment_texel_size: impl Cast<Target = Extent2D>,
+    ) -> Self {
+        self.value.shading_rate_attachment_texel_size = shading_rate_attachment_texel_size.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> RenderingFragmentShadingRateAttachmentInfoKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for RenderingFragmentShadingRateAttachmentInfoKHRBuilder {
+    type Target = RenderingFragmentShadingRateAttachmentInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for RenderingFragmentShadingRateAttachmentInfoKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for RenderingFragmentShadingRateAttachmentInfoKHRBuilder {
+    type Target = RenderingFragmentShadingRateAttachmentInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+/// A Vulkan struct that can be used to extend a [`RenderingInfoKHR`].
+pub unsafe trait ExtendsRenderingInfoKHR: fmt::Debug {}
+unsafe impl ExtendsRenderingInfoKHR for DeviceGroupRenderPassBeginInfo {}
+unsafe impl ExtendsRenderingInfoKHR for MultiviewPerViewAttributesInfoNVX {}
+unsafe impl ExtendsRenderingInfoKHR for RenderingFragmentDensityMapAttachmentInfoEXT {}
+unsafe impl ExtendsRenderingInfoKHR for RenderingFragmentShadingRateAttachmentInfoKHR {}
+
+unsafe impl Cast for RenderingInfoKHR {
+    type Target = RenderingInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for RenderingInfoKHR {
+    type Builder = RenderingInfoKHRBuilder<'b>;
+}
+
+/// A builder for a [`RenderingInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct RenderingInfoKHRBuilder<'b> {
+    value: RenderingInfoKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> RenderingInfoKHRBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsRenderingInfoKHR,
+    {
+        let next = (next.as_mut() as *mut T).cast::<RenderingInfoKHR>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
+    #[inline]
+    pub fn flags(mut self, flags: RenderingFlagsKHR) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn render_area(mut self, render_area: impl Cast<Target = Rect2D>) -> Self {
+        self.value.render_area = render_area.into();
+        self
+    }
+
+    #[inline]
+    pub fn layer_count(mut self, layer_count: u32) -> Self {
+        self.value.layer_count = layer_count;
+        self
+    }
+
+    #[inline]
+    pub fn view_mask(mut self, view_mask: u32) -> Self {
+        self.value.view_mask = view_mask;
+        self
+    }
+
+    #[inline]
+    pub fn color_attachments(
+        mut self,
+        color_attachments: &'b [impl Cast<Target = RenderingAttachmentInfoKHR>],
+    ) -> Self {
+        self.value.color_attachment_count = color_attachments.len() as u32;
+        self.value.color_attachments = color_attachments.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn depth_attachment(
+        mut self,
+        depth_attachment: &'b impl Cast<Target = RenderingAttachmentInfoKHR>,
+    ) -> Self {
+        self.value.depth_attachment = depth_attachment.as_ref();
+        self
+    }
+
+    #[inline]
+    pub fn stencil_attachment(
+        mut self,
+        stencil_attachment: &'b impl Cast<Target = RenderingAttachmentInfoKHR>,
+    ) -> Self {
+        self.value.stencil_attachment = stencil_attachment.as_ref();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> RenderingInfoKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for RenderingInfoKHRBuilder<'b> {
+    type Target = RenderingInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for RenderingInfoKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for RenderingInfoKHRBuilder<'b> {
+    type Target = RenderingInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {

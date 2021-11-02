@@ -46,6 +46,7 @@ pub struct DeviceCommands {
     pub cmd_begin_render_pass: PFN_vkCmdBeginRenderPass,
     pub cmd_begin_render_pass2: PFN_vkCmdBeginRenderPass2,
     pub cmd_begin_render_pass2_khr: PFN_vkCmdBeginRenderPass2KHR,
+    pub cmd_begin_rendering_khr: PFN_vkCmdBeginRenderingKHR,
     pub cmd_begin_transform_feedback_ext: PFN_vkCmdBeginTransformFeedbackEXT,
     pub cmd_bind_descriptor_sets: PFN_vkCmdBindDescriptorSets,
     pub cmd_bind_index_buffer: PFN_vkCmdBindIndexBuffer,
@@ -110,6 +111,7 @@ pub struct DeviceCommands {
     pub cmd_end_render_pass: PFN_vkCmdEndRenderPass,
     pub cmd_end_render_pass2: PFN_vkCmdEndRenderPass2,
     pub cmd_end_render_pass2_khr: PFN_vkCmdEndRenderPass2KHR,
+    pub cmd_end_rendering_khr: PFN_vkCmdEndRenderingKHR,
     pub cmd_end_transform_feedback_ext: PFN_vkCmdEndTransformFeedbackEXT,
     pub cmd_execute_commands: PFN_vkCmdExecuteCommands,
     pub cmd_execute_generated_commands_nv: PFN_vkCmdExecuteGeneratedCommandsNV,
@@ -808,6 +810,20 @@ impl DeviceCommands {
                         _subpass_begin_info: *const SubpassBeginInfo,
                     ) {
                         panic!("could not load vkCmdBeginRenderPass2KHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_begin_rendering_khr: {
+                let value = loader(b"vkCmdBeginRenderingKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _rendering_info: *const RenderingInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdBeginRenderingKHR")
                     }
                     fallback
                 }
@@ -1829,6 +1845,17 @@ impl DeviceCommands {
                         _subpass_end_info: *const SubpassEndInfo,
                     ) {
                         panic!("could not load vkCmdEndRenderPass2KHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_end_rendering_khr: {
+                let value = loader(b"vkCmdEndRenderingKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) {
+                        panic!("could not load vkCmdEndRenderingKHR")
                     }
                     fallback
                 }
