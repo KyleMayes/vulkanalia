@@ -2376,6 +2376,22 @@ pub const KHR_DRIVER_PROPERTIES_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_dynamic_rendering.html>
+#[allow(deprecated)]
+pub const KHR_DYNAMIC_RENDERING_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_dynamic_rendering"),
+    number: 45,
+    type_: "device",
+    author: "KHR",
+    contact: "Tobias Hector @tobski",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_KHR_external_fence.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_FENCE_EXTENSION: Extension = Extension {

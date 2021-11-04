@@ -229,7 +229,7 @@ pub struct AttachmentStoreOp(i32);
 impl AttachmentStoreOp {
     pub const STORE: Self = Self(0);
     pub const DONT_CARE: Self = Self(1);
-    pub const NONE_EXT: Self = Self(1000301000);
+    pub const NONE_KHR: Self = Self(1000301000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -249,7 +249,7 @@ impl fmt::Debug for AttachmentStoreOp {
         match self.0 {
             0 => write!(f, "STORE"),
             1 => write!(f, "DONT_CARE"),
-            1000301000 => write!(f, "NONE_EXT"),
+            1000301000 => write!(f, "NONE_KHR"),
             _ => self.0.fmt(f),
         }
     }
@@ -4434,6 +4434,15 @@ impl StructureType {
     pub const IMAGE_VIEW_HANDLE_INFO_NVX: Self = Self(1000030000);
     pub const IMAGE_VIEW_ADDRESS_PROPERTIES_NVX: Self = Self(1000030001);
     pub const TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD: Self = Self(1000041000);
+    pub const RENDERING_INFO_KHR: Self = Self(1000044000);
+    pub const RENDERING_ATTACHMENT_INFO_KHR: Self = Self(1000044001);
+    pub const PIPELINE_RENDERING_CREATE_INFO_KHR: Self = Self(1000044002);
+    pub const PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR: Self = Self(1000044003);
+    pub const COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR: Self = Self(1000044004);
+    pub const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR: Self = Self(1000044006);
+    pub const RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT: Self = Self(1000044007);
+    pub const ATTACHMENT_SAMPLE_COUNT_INFO_AMD: Self = Self(1000044008);
+    pub const MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX: Self = Self(1000044009);
     pub const STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP: Self = Self(1000049000);
     pub const PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV: Self = Self(1000050000);
     pub const EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV: Self = Self(1000056000);
@@ -5006,6 +5015,15 @@ impl fmt::Debug for StructureType {
             1000030000 => write!(f, "IMAGE_VIEW_HANDLE_INFO_NVX"),
             1000030001 => write!(f, "IMAGE_VIEW_ADDRESS_PROPERTIES_NVX"),
             1000041000 => write!(f, "TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD"),
+            1000044000 => write!(f, "RENDERING_INFO_KHR"),
+            1000044001 => write!(f, "RENDERING_ATTACHMENT_INFO_KHR"),
+            1000044002 => write!(f, "PIPELINE_RENDERING_CREATE_INFO_KHR"),
+            1000044003 => write!(f, "PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR"),
+            1000044004 => write!(f, "COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR"),
+            1000044006 => write!(f, "RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR"),
+            1000044007 => write!(f, "RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT"),
+            1000044008 => write!(f, "ATTACHMENT_SAMPLE_COUNT_INFO_AMD"),
+            1000044009 => write!(f, "MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX"),
             1000049000 => write!(f, "STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP"),
             1000050000 => write!(f, "PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV"),
             1000056000 => write!(f, "EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV"),

@@ -1001,6 +1001,8 @@ bitflags! {
         const INDIRECT_BINDABLE_NV = 1 << 18;
         const RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_KHR = 1 << 19;
         const RAY_TRACING_ALLOW_MOTION_NV = 1 << 20;
+        const PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 21;
+        const PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_EXT = 1 << 22;
     }
 }
 
@@ -1274,6 +1276,17 @@ bitflags! {
     #[derive(Default)]
     pub struct RenderPassCreateFlags: Flags {
         const TRANSFORM_QCOM = 1 << 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct RenderingFlagsKHR: Flags {
+        const CONTENTS_SECONDARY_COMMAND_BUFFERS = 1;
+        const SUSPENDING = 1 << 1;
+        const RESUMING = 1 << 2;
     }
 }
 

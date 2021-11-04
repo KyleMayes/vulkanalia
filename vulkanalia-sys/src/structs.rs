@@ -813,6 +813,30 @@ impl Default for AttachmentReferenceStencilLayout {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentSampleCountInfoAMD.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct AttachmentSampleCountInfoAMD {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub color_attachment_count: u32,
+    pub color_attachment_samples: *const SampleCountFlags,
+    pub depth_stencil_attachment_samples: SampleCountFlags,
+}
+
+impl Default for AttachmentSampleCountInfoAMD {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::ATTACHMENT_SAMPLE_COUNT_INFO_AMD,
+            next: ptr::null(),
+            color_attachment_count: u32::default(),
+            color_attachment_samples: ptr::null(),
+            depth_stencil_attachment_samples: SampleCountFlags::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentSampleLocationsEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -1790,6 +1814,38 @@ impl Default for CommandBufferInheritanceRenderPassTransformInfoQCOM {
             next: ptr::null_mut(),
             transform: SurfaceTransformFlagsKHR::default(),
             render_area: Rect2D::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBufferInheritanceRenderingInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CommandBufferInheritanceRenderingInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: RenderingFlagsKHR,
+    pub view_mask: u32,
+    pub color_attachment_count: u32,
+    pub color_attachment_formats: *const Format,
+    pub depth_attachment_format: Format,
+    pub stencil_attachment_format: Format,
+    pub rasterization_samples: SampleCountFlags,
+}
+
+impl Default for CommandBufferInheritanceRenderingInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR,
+            next: ptr::null(),
+            flags: RenderingFlagsKHR::default(),
+            view_mask: u32::default(),
+            color_attachment_count: u32::default(),
+            color_attachment_formats: ptr::null(),
+            depth_attachment_format: Format::default(),
+            stencil_attachment_format: Format::default(),
+            rasterization_samples: SampleCountFlags::default(),
         }
     }
 }
@@ -6560,6 +6616,28 @@ impl Default for MultisamplePropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMultiviewPerViewAttributesInfoNVX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MultiviewPerViewAttributesInfoNVX {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub per_view_attributes: Bool32,
+    pub per_view_attributes_position_x_only: Bool32,
+}
+
+impl Default for MultiviewPerViewAttributesInfoNVX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX,
+            next: ptr::null(),
+            per_view_attributes: Bool32::default(),
+            per_view_attributes_position_x_only: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMutableDescriptorTypeCreateInfoVALVE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7666,6 +7744,26 @@ impl Default for PhysicalDeviceDrmPropertiesEXT {
             primary_minor: i64::default(),
             render_major: i64::default(),
             render_minor: i64::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceDynamicRenderingFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDynamicRenderingFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub dynamic_rendering: Bool32,
+}
+
+impl Default for PhysicalDeviceDynamicRenderingFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR,
+            next: ptr::null_mut(),
+            dynamic_rendering: Bool32::default(),
         }
     }
 }
@@ -12110,6 +12208,34 @@ impl Default for PipelineRasterizationStateStreamCreateInfoEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRenderingCreateInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineRenderingCreateInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub view_mask: u32,
+    pub color_attachment_count: u32,
+    pub color_attachment_formats: *const Format,
+    pub depth_attachment_format: Format,
+    pub stencil_attachment_format: Format,
+}
+
+impl Default for PipelineRenderingCreateInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_RENDERING_CREATE_INFO_KHR,
+            next: ptr::null(),
+            view_mask: u32::default(),
+            color_attachment_count: u32::default(),
+            color_attachment_formats: ptr::null(),
+            depth_attachment_format: Format::default(),
+            stencil_attachment_format: Format::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineRepresentativeFragmentTestStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13205,6 +13331,120 @@ impl Default for RenderPassTransformBeginInfoQCOM {
             s_type: StructureType::RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM,
             next: ptr::null_mut(),
             transform: SurfaceTransformFlagsKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingAttachmentInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+pub struct RenderingAttachmentInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub image_view: ImageView,
+    pub image_layout: ImageLayout,
+    pub resolve_mode: ResolveModeFlags,
+    pub resolve_image_view: ImageView,
+    pub resolve_image_layout: ImageLayout,
+    pub load_op: AttachmentLoadOp,
+    pub store_op: AttachmentStoreOp,
+    pub clear_value: ClearValue,
+}
+
+impl Default for RenderingAttachmentInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RENDERING_ATTACHMENT_INFO_KHR,
+            next: ptr::null(),
+            image_view: ImageView::default(),
+            image_layout: ImageLayout::default(),
+            resolve_mode: ResolveModeFlags::default(),
+            resolve_image_view: ImageView::default(),
+            resolve_image_layout: ImageLayout::default(),
+            load_op: AttachmentLoadOp::default(),
+            store_op: AttachmentStoreOp::default(),
+            clear_value: ClearValue::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingFragmentDensityMapAttachmentInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RenderingFragmentDensityMapAttachmentInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub image_view: ImageView,
+    pub image_layout: ImageLayout,
+}
+
+impl Default for RenderingFragmentDensityMapAttachmentInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT,
+            next: ptr::null(),
+            image_view: ImageView::default(),
+            image_layout: ImageLayout::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingFragmentShadingRateAttachmentInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RenderingFragmentShadingRateAttachmentInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub image_view: ImageView,
+    pub image_layout: ImageLayout,
+    pub shading_rate_attachment_texel_size: Extent2D,
+}
+
+impl Default for RenderingFragmentShadingRateAttachmentInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR,
+            next: ptr::null(),
+            image_view: ImageView::default(),
+            image_layout: ImageLayout::default(),
+            shading_rate_attachment_texel_size: Extent2D::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderingInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RenderingInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: RenderingFlagsKHR,
+    pub render_area: Rect2D,
+    pub layer_count: u32,
+    pub view_mask: u32,
+    pub color_attachment_count: u32,
+    pub color_attachments: *const RenderingAttachmentInfoKHR,
+    pub depth_attachment: *const RenderingAttachmentInfoKHR,
+    pub stencil_attachment: *const RenderingAttachmentInfoKHR,
+}
+
+impl Default for RenderingInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RENDERING_INFO_KHR,
+            next: ptr::null(),
+            flags: RenderingFlagsKHR::default(),
+            render_area: Rect2D::default(),
+            layer_count: u32::default(),
+            view_mask: u32::default(),
+            color_attachment_count: u32::default(),
+            color_attachments: ptr::null(),
+            depth_attachment: ptr::null(),
+            stencil_attachment: ptr::null(),
         }
     }
 }
@@ -15147,6 +15387,8 @@ pub type AttachmentDescriptionStencilLayoutKHR = AttachmentDescriptionStencilLay
 pub type AttachmentReference2KHR = AttachmentReference2;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentReferenceStencilLayoutKHR.html>
 pub type AttachmentReferenceStencilLayoutKHR = AttachmentReferenceStencilLayout;
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAttachmentSampleCountInfoNV.html>
+pub type AttachmentSampleCountInfoNV = AttachmentSampleCountInfoAMD;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBindBufferMemoryDeviceGroupInfoKHR.html>
 pub type BindBufferMemoryDeviceGroupInfoKHR = BindBufferMemoryDeviceGroupInfo;
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBindBufferMemoryInfoKHR.html>

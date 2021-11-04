@@ -194,6 +194,12 @@ pub type PFN_vkCmdBeginRenderPass2 = unsafe extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderPass2KHR.html>
 pub type PFN_vkCmdBeginRenderPass2KHR = PFN_vkCmdBeginRenderPass2;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginRenderingKHR.html>
+pub type PFN_vkCmdBeginRenderingKHR = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _rendering_info: *const RenderingInfoKHR,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdBeginTransformFeedbackEXT.html>
 pub type PFN_vkCmdBeginTransformFeedbackEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -664,6 +670,9 @@ pub type PFN_vkCmdEndRenderPass2 = unsafe extern "system" fn(
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderPass2KHR.html>
 pub type PFN_vkCmdEndRenderPass2KHR = PFN_vkCmdEndRenderPass2;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndRenderingKHR.html>
+pub type PFN_vkCmdEndRenderingKHR = unsafe extern "system" fn(_command_buffer: CommandBuffer);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkCmdEndTransformFeedbackEXT.html>
 pub type PFN_vkCmdEndTransformFeedbackEXT = unsafe extern "system" fn(
