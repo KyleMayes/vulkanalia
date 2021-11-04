@@ -162,7 +162,7 @@
 <h2><a class="header" href="#push-constants-vs-uniform-buffers" id="push-constants-vs-uniform-buffers">Push constants vs uniform buffers</a></h2>
 <p>We are already using another Vulkan feature to provide dynamic data to our vertex shader: uniform buffers. Every frame, the <code>App::update_uniform_buffer</code> method calculates the updated MVP matrices for the model's current rotation and copies those matrices to a uniform buffer. The vertex shader then reads those matrices from the uniform buffer to figure out where the vertices of the model belong on the screen.</p>
 <p>This approach works well enough, when would we want to use push constants instead? One advantage of push constants over uniform buffers is speed, updating a push constant will usually be significantly faster than copying new data to a uniform buffer. For a large number of values that need to be updated frequently, this difference can add up quickly.</p>
-<p>Of course there is a catch: the amount of data that can be provided to a shader using push constants has a <em>very</em> limited maximum size. This maximum size varies from device to device and is specified in bytes by the <code>max_push_constants_size</code> field of <code>vk::PhysicalDeviceLimits</code>. Vulkan requires that this limit be <a href="https://www.khronos.org/registry/vulkan/specs/1.2/html/chap33.html#limits-minmax">at least 128 bytes</a> (see table 32), but you won't find values much larger than that in the wild. Even high-end hardware like the RTX 3080 only has a limit of 256 bytes.</p>
+<p>Of course there is a catch: the amount of data that can be provided to a shader using push constants has a <em>very</em> limited maximum size. This maximum size varies from device to device and is specified in bytes by the <code>max_push_constants_size</code> field of <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.PhysicalDeviceLimits.html"><code class="hljs">vk::PhysicalDeviceLimits</code></a>. Vulkan requires that this limit be <a href="https://www.khronos.org/registry/vulkan/specs/1.2/html/chap33.html#limits-minmax">at least 128 bytes</a> (see table 32), but you won't find values much larger than that in the wild. Even high-end hardware like the RTX 3080 only has a limit of 256 bytes.</p>
 <p>If we wanted to, say, use push constants to provide our MVP matrices to our shaders we would immediately run into this limitation. The MVP matrices are too large to reliably fit in push constants, each matrix is 64 bytes (16 × 4 byte floats) leading to a total of 192 bytes. Of course we could maintain two code paths, one for devices that can handle push constants &gt;= 192 bytes and another for devices that can't, but there are simpler approaches we could take.</p>
 <p>One would be to premultiply our MVP matrices into a single matrix. Another would be to provide only the model matrix as a push constant and leave the view and projection matrices in the uniform buffer. Both would give us at least 64 bytes of headroom for other push constants even on devices providing only the minimum 128 bytes for push constants. In this chapter we will take the second approach to start exploring push constants.</p>
 <p>Why only the model matrix for the second approach? In the <code>App::update_uniform_buffer</code> method, you'll notice that the <code>model</code> matrix changes every frame as <code>time</code> increases, the <code>view</code> matrix is static, and the <code>proj</code> matrix only changes when the window is resized. This would allow us to only update the uniform buffer containing the view and projection matrices when the window is resized and use push constants to provide the constantly changing model matrix.</p>
@@ -216,7 +216,7 @@ let ubo = UniformBufferObject { view, proj };
 
 // ...
 </code></pre>
-<p>We need to tell Vulkan about our new push constant by describing it in the layout of our graphics pipeline. In the <code>create_pipeline</code> function you'll see that we are already providing our descriptor set layout to <code>create_pipeline_layout</code>. This descriptor set layout describes the uniform buffer object and texture sampler used in our shaders and we need to similarly describe any push constants accessed by the shaders in our graphics pipeline using <code>vk::PushConstantRange</code>.</p>
+<p>We need to tell Vulkan about our new push constant by describing it in the layout of our graphics pipeline. In the <code>create_pipeline</code> function you'll see that we are already providing our descriptor set layout to <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_pipeline_layout"><code class="hljs">create_pipeline_layout</code></a>. This descriptor set layout describes the uniform buffer object and texture sampler used in our shaders and we need to similarly describe any push constants accessed by the shaders in our graphics pipeline using <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.PushConstantRange.html"><code class="hljs">vk::PushConstantRange</code></a>.</p>
 <pre><code class="language-rust noplaypen">let vert_push_constant_range = vk::PushConstantRange::builder()
     .stage_flags(vk::ShaderStageFlags::VERTEX)
     .offset(0)
@@ -232,7 +232,7 @@ data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
 </code></pre>
 <p>The push constant range here specifies that the push constants accessed by the vertex shader can be found at the beginning of the push constants provided to the graphics pipeline and are the size of a <code>mat4</code>.</p>
 <p>With all that in place, we can actually start pushing the model matrix to the vertex shader. Push constants are recorded directly into the command buffers submitted to the GPU which is both why they are so fast and why their size is so limited.</p>
-<p>In the <code>create_command_buffers</code> function, define a model matrix and use <code>cmd_push_constants</code> to add it to the command buffers as a push constant right before we record the draw command.</p>
+<p>In the <code>create_command_buffers</code> function, define a model matrix and use <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_push_constants"><code class="hljs">cmd_push_constants</code></a> to add it to the command buffers as a push constant right before we record the draw command.</p>
 <pre><code class="language-rust noplaypen">let model = glm::rotate(&amp;glm::identity(), 0.0f32, &amp;glm::vec3(0.0, 0.0, 1.0));
 let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
 
@@ -288,7 +288,7 @@ let layout_info = vk::PipelineLayoutCreateInfo::builder()
 
 data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
 </code></pre>
-<p>Lastly, add another call to <code>cmd_push_constants</code> in the <code>create_command_buffers</code> after the call for the model matrix.</p>
+<p>Lastly, add another call to <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_push_constants"><code class="hljs">cmd_push_constants</code></a> in the <code>create_command_buffers</code> after the call for the model matrix.</p>
 <pre><code class="language-rust noplaypen">device.cmd_push_constants(
     *command_buffer,
     data.pipeline_layout,
@@ -306,7 +306,7 @@ device.cmd_push_constants(
 device.cmd_draw_indexed(*command_buffer, data.indices.len() as u32, 1, 0, 0, 0);
 </code></pre>
 <p>Here we provide an opacity of <code>0.25</code> to the fragment shader by recording it into the command buffer after the 64 bytes of the model matrix. However, if you were to run the program now, you'd find that the model is still entirely opaque!</p>
-<p>Back in the <a href="../pipeline/fixed_functions.html#color-blending">chapter on fixed function operations</a>, we discussed what was necessary to set up alpha blending so that we could render transparent geometries to the framebuffers. However, back then we left alpha blending disabled. Update the <code>vk::PipelineColorBlendAttachmentState</code> in the <code>create_pipeline</code> function to enable alpha blending as described in that chapter.</p>
+<p>Back in the <a href="../pipeline/fixed_functions.html#color-blending">chapter on fixed function operations</a>, we discussed what was necessary to set up alpha blending so that we could render transparent geometries to the framebuffers. However, back then we left alpha blending disabled. Update the <a href="https://docs.rs/vulkanalia/0.9.0/vulkanalia/vk/struct.PipelineColorBlendAttachmentState.html"><code class="hljs">vk::PipelineColorBlendAttachmentState</code></a> in the <code>create_pipeline</code> function to enable alpha blending as described in that chapter.</p>
 <pre><code class="language-rust noplaypen">let attachment = vk::PipelineColorBlendAttachmentState::builder()
     .color_write_mask(vk::ColorComponentFlags::all())
     .blend_enable(true)
