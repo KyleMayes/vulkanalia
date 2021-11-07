@@ -239,7 +239,7 @@ Instead, we will alter our program to maintain a separate command pool for each 
 
 You might think that this is overkill, why maintain separate command pools just so we can free command buffers one at a time? Wouldn't it be simpler, and probably even faster, to continue freeing or resetting our command buffers each frame? Is this just a pedagogical exercise? Is the author of this tutorial a fraud?
 
-To put these questions on hold for a bit (well maybe not the last one), a sneak preview of the next chapter is that it will involve multiple managing multiple command buffers per frame rather than the single command buffer per frame we've been working with so far. Then it will become simpler, and probably faster, to deallocate all of these command buffers in one go by resetting the command pool instead of deallocating them individually.
+To put these questions on hold for a bit (well maybe not the last one), a sneak preview of the next chapter is that it will involve managing multiple command buffers per frame rather than the single command buffer per frame we've been working with so far. Then it will become simpler, and probably faster, to deallocate all of these command buffers in one go by resetting the command pool instead of deallocating them individually.
 
 We are going to leave the current command pool in place since it will be used for allocating command buffers during initialization. Add a field to `AppData` to hold one command pool per framebuffer and rename the existing `^create_command_pool` function to `create_command_pools` to reflect its increased responsibilities.
 
