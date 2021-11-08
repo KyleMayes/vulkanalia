@@ -117,6 +117,7 @@ class Index : CliktCommand(help = "Generates an index for generated Vulkan bindi
 
         log.info { "Generating index..." }
         val index = registry.indexEntities()
+        log.info { "Generated index has ${index.count { it == '\n' } + 1} entries." }
         Files.writeString(directory.resolve("index.txt"), index)
     }
 }
