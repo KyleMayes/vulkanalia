@@ -6,6 +6,7 @@ use std::process;
 
 use anyhow::*;
 use clap::{App, Arg, SubCommand};
+use log::*;
 use mdbook::book::BookItem;
 use mdbook::preprocess::CmdPreprocessor;
 use pulldown_cmark::{Event, Parser, Tag};
@@ -26,6 +27,8 @@ pub fn app() -> App<'static, 'static> {
 }
 
 fn main() -> Result<()> {
+    pretty_env_logger::init();
+
     // Check renderer support.
     if let Some(args) = app().get_matches().subcommand_matches("supports") {
         let renderer = args.value_of("renderer").unwrap();
@@ -61,6 +64,8 @@ fn load_index() -> HashMap<&'static str, &'static str> {
             (name, path)
         })
         .collect::<HashMap<_, _>>();
+
+    info!("Loaded index has {} entries.", index.len());
 
     // Add entries for non-generated items.
     index.insert("Device", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/struct.Device.html");
