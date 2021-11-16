@@ -3,6 +3,8 @@
 ### Bindings Updates
 - [Remaining newly introduced `vk-video` types (#1663)](https://github.com/KhronosGroup/Vulkan-Docs/commit/36cec8e02d9d73ce7c88203567d3196064db8605)
 - [November 2, 2021 Vulkan 1.2.197 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/2a43f68f2841054d7f2fb6a44c637c533a549dbb)
+- [November 9, 2021 Vulkan 1.2.198 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/3a4dc41cc86b4215e9995f20f2be744a106887d5)
+- [November 16, 2021 Vulkan 1.2.199 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/83c7507600618d8748bb911dfd8c3d9b4fabaca0)
 
 ## [0.12.0] - 2021-10-30
 

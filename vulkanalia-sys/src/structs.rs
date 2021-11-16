@@ -5631,6 +5631,26 @@ impl Default for ImageViewHandleInfoNVX {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageViewMinLodCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, PartialEq)]
+pub struct ImageViewMinLodCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub min_lod: f32,
+}
+
+impl Default for ImageViewMinLodCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT,
+            next: ptr::null(),
+            min_lod: f32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageViewUsageCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8551,6 +8571,26 @@ impl Default for PhysicalDeviceImageViewImageFormatInfoEXT {
             s_type: StructureType::PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT,
             next: ptr::null_mut(),
             image_view_type: ImageViewType::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceImageViewMinLodFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceImageViewMinLodFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub min_lod: Bool32,
+}
+
+impl Default for PhysicalDeviceImageViewMinLodFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT,
+            next: ptr::null_mut(),
+            min_lod: Bool32::default(),
         }
     }
 }
