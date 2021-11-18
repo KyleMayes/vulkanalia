@@ -1781,6 +1781,15 @@ pub trait ExtImageRobustnessExtension: DeviceV1_0 {
 
 impl ExtImageRobustnessExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_image_view_min_lod.html>
+pub trait ExtImageViewMinLodExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_IMAGE_VIEW_MIN_LOD_EXTENSION;
+}
+
+impl ExtImageViewMinLodExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_index_type_uint8.html>
 pub trait ExtIndexTypeUint8Extension: DeviceV1_0 {
     /// The metadata for this extension.

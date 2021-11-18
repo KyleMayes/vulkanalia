@@ -1075,6 +1075,22 @@ pub const EXT_IMAGE_ROBUSTNESS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_image_view_min_lod.html>
+#[allow(deprecated)]
+pub const EXT_IMAGE_VIEW_MIN_LOD_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_image_view_min_lod"),
+    number: 392,
+    type_: "device",
+    author: "EXT",
+    contact: "Joshua Ashton @Joshua-Ashton",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_index_type_uint8.html>
 #[allow(deprecated)]
 pub const EXT_INDEX_TYPE_UINT8_EXTENSION: Extension = Extension {
