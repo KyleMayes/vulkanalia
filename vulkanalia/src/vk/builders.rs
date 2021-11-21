@@ -10222,6 +10222,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateFeature
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceGlobalPriorityQueryFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageRobustnessFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageViewMinLodFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImagelessFramebufferFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceIndexTypeUint8FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
@@ -19117,6 +19118,7 @@ unsafe impl Cast for ImageViewAddressPropertiesNVXBuilder {
 /// A Vulkan struct that can be used to extend a [`ImageViewCreateInfo`].
 pub unsafe trait ExtendsImageViewCreateInfo: fmt::Debug {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewASTCDecodeModeEXT {}
+unsafe impl ExtendsImageViewCreateInfo for ImageViewMinLodCreateInfoEXT {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewUsageCreateInfo {}
 unsafe impl ExtendsImageViewCreateInfo for SamplerYcbcrConversionInfo {}
 
@@ -19286,6 +19288,64 @@ impl ops::DerefMut for ImageViewHandleInfoNVXBuilder {
 
 unsafe impl Cast for ImageViewHandleInfoNVXBuilder {
     type Target = ImageViewHandleInfoNVX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ImageViewMinLodCreateInfoEXT {
+    type Target = ImageViewMinLodCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ImageViewMinLodCreateInfoEXT {
+    type Builder = ImageViewMinLodCreateInfoEXTBuilder;
+}
+
+/// A builder for a [`ImageViewMinLodCreateInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImageViewMinLodCreateInfoEXTBuilder {
+    value: ImageViewMinLodCreateInfoEXT,
+}
+
+impl ImageViewMinLodCreateInfoEXTBuilder {
+    #[inline]
+    pub fn min_lod(mut self, min_lod: f32) -> Self {
+        self.value.min_lod = min_lod;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImageViewMinLodCreateInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ImageViewMinLodCreateInfoEXTBuilder {
+    type Target = ImageViewMinLodCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ImageViewMinLodCreateInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ImageViewMinLodCreateInfoEXTBuilder {
+    type Target = ImageViewMinLodCreateInfoEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -27496,6 +27556,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRate
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceGlobalPriorityQueryFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageRobustnessFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageViewMinLodFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImagelessFramebufferFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceIndexTypeUint8FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
@@ -29338,6 +29399,64 @@ impl ops::DerefMut for PhysicalDeviceImageViewImageFormatInfoEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceImageViewImageFormatInfoEXTBuilder {
     type Target = PhysicalDeviceImageViewImageFormatInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImageViewMinLodFeaturesEXT {
+    type Target = PhysicalDeviceImageViewMinLodFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceImageViewMinLodFeaturesEXT {
+    type Builder = PhysicalDeviceImageViewMinLodFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceImageViewMinLodFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceImageViewMinLodFeaturesEXTBuilder {
+    value: PhysicalDeviceImageViewMinLodFeaturesEXT,
+}
+
+impl PhysicalDeviceImageViewMinLodFeaturesEXTBuilder {
+    #[inline]
+    pub fn min_lod(mut self, min_lod: bool) -> Self {
+        self.value.min_lod = min_lod as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceImageViewMinLodFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceImageViewMinLodFeaturesEXTBuilder {
+    type Target = PhysicalDeviceImageViewMinLodFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceImageViewMinLodFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImageViewMinLodFeaturesEXTBuilder {
+    type Target = PhysicalDeviceImageViewMinLodFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {

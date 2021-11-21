@@ -1381,6 +1381,7 @@ impl DriverId {
     pub const MESA_TURNIP: Self = Self(18);
     pub const MESA_V3DV: Self = Self(19);
     pub const MESA_PANVK: Self = Self(20);
+    pub const SAMSUNG_PROPRIETARY: Self = Self(21);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1418,6 +1419,7 @@ impl fmt::Debug for DriverId {
             18 => write!(f, "MESA_TURNIP"),
             19 => write!(f, "MESA_V3DV"),
             20 => write!(f, "MESA_PANVK"),
+            21 => write!(f, "SAMSUNG_PROPRIETARY"),
             _ => self.0.fmt(f),
         }
     }
@@ -4792,6 +4794,8 @@ impl StructureType {
     pub const PIPELINE_COLOR_WRITE_CREATE_INFO_EXT: Self = Self(1000381001);
     pub const PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT: Self = Self(1000388000);
     pub const QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT: Self = Self(1000388001);
+    pub const PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT: Self = Self(1000391000);
+    pub const IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT: Self = Self(1000391001);
     pub const PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT: Self = Self(1000392000);
     pub const PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT: Self = Self(1000392001);
     pub const PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT: Self = Self(1000411000);
@@ -5448,6 +5452,8 @@ impl fmt::Debug for StructureType {
             1000381001 => write!(f, "PIPELINE_COLOR_WRITE_CREATE_INFO_EXT"),
             1000388000 => write!(f, "PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT"),
             1000388001 => write!(f, "QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT"),
+            1000391000 => write!(f, "PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT"),
+            1000391001 => write!(f, "IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT"),
             1000392000 => write!(f, "PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT"),
             1000392001 => write!(f, "PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT"),
             1000411000 => write!(f, "PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT"),
