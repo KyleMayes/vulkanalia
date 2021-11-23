@@ -378,6 +378,15 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
 
 impl AndroidExternalMemoryAndroidHardwareBufferExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_ARM_rasterization_order_attachment_access.html>
+pub trait ArmRasterizationOrderAttachmentAccessExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION;
+}
+
+impl ArmRasterizationOrderAttachmentAccessExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_4444_formats.html>
 pub trait Ext4444FormatsExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -958,6 +967,15 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
 }
 
 impl ExtDebugUtilsExtension for crate::Instance {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_depth_clip_control.html>
+pub trait ExtDepthClipControlExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_DEPTH_CLIP_CONTROL_EXTENSION;
+}
+
+impl ExtDepthClipControlExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_depth_clip_enable.html>
 pub trait ExtDepthClipEnableExtension: DeviceV1_0 {

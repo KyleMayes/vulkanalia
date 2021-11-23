@@ -10202,6 +10202,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCornerSampledImageFeatures
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoverageReductionModeFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCustomBorderColorFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipEnableFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorIndexingFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
@@ -25233,6 +25234,64 @@ unsafe impl Cast for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNVBui
     }
 }
 
+unsafe impl Cast for PhysicalDeviceDepthClipControlFeaturesEXT {
+    type Target = PhysicalDeviceDepthClipControlFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceDepthClipControlFeaturesEXT {
+    type Builder = PhysicalDeviceDepthClipControlFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceDepthClipControlFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceDepthClipControlFeaturesEXTBuilder {
+    value: PhysicalDeviceDepthClipControlFeaturesEXT,
+}
+
+impl PhysicalDeviceDepthClipControlFeaturesEXTBuilder {
+    #[inline]
+    pub fn depth_clip_control(mut self, depth_clip_control: bool) -> Self {
+        self.value.depth_clip_control = depth_clip_control as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceDepthClipControlFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceDepthClipControlFeaturesEXTBuilder {
+    type Target = PhysicalDeviceDepthClipControlFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceDepthClipControlFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDepthClipControlFeaturesEXTBuilder {
+    type Target = PhysicalDeviceDepthClipControlFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceDepthClipEnableFeaturesEXT {
     type Target = PhysicalDeviceDepthClipEnableFeaturesEXT;
 
@@ -27537,6 +27596,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV
 {
 }
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipControlFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipEnableFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorIndexingFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
@@ -33397,6 +33457,88 @@ impl ops::DerefMut for PhysicalDeviceRGBA10X6FormatsFeaturesEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceRGBA10X6FormatsFeaturesEXTBuilder {
     type Target = PhysicalDeviceRGBA10X6FormatsFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
+    type Target = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
+    type Builder = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder {
+    value: PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM,
+}
+
+impl PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder {
+    #[inline]
+    pub fn rasterization_order_color_attachment_access(
+        mut self,
+        rasterization_order_color_attachment_access: bool,
+    ) -> Self {
+        self.value.rasterization_order_color_attachment_access =
+            rasterization_order_color_attachment_access as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn rasterization_order_depth_attachment_access(
+        mut self,
+        rasterization_order_depth_attachment_access: bool,
+    ) -> Self {
+        self.value.rasterization_order_depth_attachment_access =
+            rasterization_order_depth_attachment_access as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn rasterization_order_stencil_attachment_access(
+        mut self,
+        rasterization_order_stencil_attachment_access: bool,
+    ) -> Self {
+        self.value.rasterization_order_stencil_attachment_access =
+            rasterization_order_stencil_attachment_access as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder {
+    type Target = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder {
+    type Target = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -42742,6 +42884,64 @@ unsafe impl<'b> Cast for PipelineViewportCoarseSampleOrderStateCreateInfoNVBuild
     }
 }
 
+unsafe impl Cast for PipelineViewportDepthClipControlCreateInfoEXT {
+    type Target = PipelineViewportDepthClipControlCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineViewportDepthClipControlCreateInfoEXT {
+    type Builder = PipelineViewportDepthClipControlCreateInfoEXTBuilder;
+}
+
+/// A builder for a [`PipelineViewportDepthClipControlCreateInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineViewportDepthClipControlCreateInfoEXTBuilder {
+    value: PipelineViewportDepthClipControlCreateInfoEXT,
+}
+
+impl PipelineViewportDepthClipControlCreateInfoEXTBuilder {
+    #[inline]
+    pub fn negative_one_to_one(mut self, negative_one_to_one: bool) -> Self {
+        self.value.negative_one_to_one = negative_one_to_one as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineViewportDepthClipControlCreateInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineViewportDepthClipControlCreateInfoEXTBuilder {
+    type Target = PipelineViewportDepthClipControlCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineViewportDepthClipControlCreateInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineViewportDepthClipControlCreateInfoEXTBuilder {
+    type Target = PipelineViewportDepthClipControlCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PipelineViewportExclusiveScissorStateCreateInfoNV {
     type Target = PipelineViewportExclusiveScissorStateCreateInfoNV;
 
@@ -42878,6 +43078,10 @@ unsafe impl<'b> Cast for PipelineViewportShadingRateImageStateCreateInfoNVBuilde
 pub unsafe trait ExtendsPipelineViewportStateCreateInfo: fmt::Debug {}
 unsafe impl ExtendsPipelineViewportStateCreateInfo
     for PipelineViewportCoarseSampleOrderStateCreateInfoNV
+{
+}
+unsafe impl ExtendsPipelineViewportStateCreateInfo
+    for PipelineViewportDepthClipControlCreateInfoEXT
 {
 }
 unsafe impl ExtendsPipelineViewportStateCreateInfo
