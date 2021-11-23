@@ -945,7 +945,9 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineColorBlendStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineColorBlendStateCreateFlags: Flags { }
+    pub struct PipelineColorBlendStateCreateFlags: Flags {
+        const RASTERIZATION_ORDER_ATTACHMENT_ACCESS_ARM = 1;
+    }
 }
 
 bitflags! {
@@ -1001,8 +1003,8 @@ bitflags! {
         const INDIRECT_BINDABLE_NV = 1 << 18;
         const RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_KHR = 1 << 19;
         const RAY_TRACING_ALLOW_MOTION_NV = 1 << 20;
-        const PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 21;
-        const PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_EXT = 1 << 22;
+        const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 21;
+        const RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_EXT = 1 << 22;
     }
 }
 
@@ -1021,7 +1023,10 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineDepthStencilStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineDepthStencilStateCreateFlags: Flags { }
+    pub struct PipelineDepthStencilStateCreateFlags: Flags {
+        const RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_ARM = 1;
+        const RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_ARM = 1 << 1;
+    }
 }
 
 bitflags! {
@@ -1472,6 +1477,9 @@ bitflags! {
         const PER_VIEW_POSITION_X_ONLY_NVX = 1 << 1;
         const FRAGMENT_REGION_QCOM = 1 << 2;
         const SHADER_RESOLVE_QCOM = 1 << 3;
+        const RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_ARM = 1 << 4;
+        const RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_ARM = 1 << 5;
+        const RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_ARM = 1 << 6;
     }
 }
 

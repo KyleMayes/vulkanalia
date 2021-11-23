@@ -7428,6 +7428,26 @@ impl Default for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceDepthClipControlFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDepthClipControlFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub depth_clip_control: Bool32,
+}
+
+impl Default for PhysicalDeviceDepthClipControlFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT,
+            next: ptr::null_mut(),
+            depth_clip_control: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceDepthClipEnableFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9683,6 +9703,31 @@ impl Default for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {
             s_type: StructureType::PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT,
             next: ptr::null_mut(),
             format_rgba10x6_without_y_cb_cr_sampler: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub rasterization_order_color_attachment_access: Bool32,
+    pub rasterization_order_depth_attachment_access: Bool32,
+    pub rasterization_order_stencil_attachment_access: Bool32,
+}
+
+impl Default for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type:
+                StructureType::PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM,
+            next: ptr::null(),
+            rasterization_order_color_attachment_access: Bool32::default(),
+            rasterization_order_depth_attachment_access: Bool32::default(),
+            rasterization_order_stencil_attachment_access: Bool32::default(),
         }
     }
 }
@@ -12478,6 +12523,26 @@ impl Default for PipelineViewportCoarseSampleOrderStateCreateInfoNV {
             sample_order_type: CoarseSampleOrderTypeNV::default(),
             custom_sample_order_count: u32::default(),
             custom_sample_orders: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineViewportDepthClipControlCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineViewportDepthClipControlCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub negative_one_to_one: Bool32,
+}
+
+impl Default for PipelineViewportDepthClipControlCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_VIEWPORT_DEPTH_CLIP_CONTROL_CREATE_INFO_EXT,
+            next: ptr::null(),
+            negative_one_to_one: Bool32::default(),
         }
     }
 }

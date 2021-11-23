@@ -414,6 +414,22 @@ pub const ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION: Extension =
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_ARM_rasterization_order_attachment_access.html>
+#[allow(deprecated)]
+pub const ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_ARM_rasterization_order_attachment_access"),
+    number: 343,
+    type_: "device",
+    author: "ARM",
+    contact: "Jan-Harald Fredriksen @janharaldfredriksen-arm",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_4444_formats.html>
 #[allow(deprecated)]
 pub const EXT_4444_FORMATS_EXTENSION: Extension = Extension {
@@ -650,6 +666,22 @@ pub const EXT_DEBUG_UTILS_EXTENSION: Extension = Extension {
     contact: "Mark Young @marky-lunarg",
     platform: None,
     required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_EXT_depth_clip_control.html>
+#[allow(deprecated)]
+pub const EXT_DEPTH_CLIP_CONTROL_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_depth_clip_control"),
+    number: 356,
+    type_: "device",
+    author: "EXT",
+    contact: "Shahbaz Youssefi @syoussefi",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
