@@ -465,7 +465,7 @@ winit = &quot;0.24&quot;
     clippy::unnecessary_wraps
 )]
 
-use anyhow::*;
+use anyhow::Result;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};
@@ -526,7 +526,7 @@ impl App {
 #[derive(Clone, Debug, Default)]
 struct AppData {}
 </code></pre></pre>
-<p>We first import <code>anyhow::*</code> so we can use <code>anyhow</code>'s <a href="https://docs.rs/anyhow/latest/anyhow/type.Result.html"><code>Result</code></a> type for all of the fallible functions in our program. Next we import all of the <code>winit</code> types we need to create a window and start an event loop for that window.</p>
+<p>We first import <code>anyhow::Result</code> so we can use <code>anyhow</code>'s <a href="https://docs.rs/anyhow/latest/anyhow/type.Result.html"><code>Result</code></a> type for all of the fallible functions in our program. Next we import all of the <code>winit</code> types we need to create a window and start an event loop for that window.</p>
 <p>Next comes our <code>main</code> function (which returns an <code>anyhow::Result</code> type). This function starts by initializing <code>pretty_env_logger</code> which will print our logs to the console (as shown later).</p>
 <p>Then we create an event loop and window to render to using <code>winit</code> using <code>LogicalSize</code> which will scale the window according to the DPI of your display. If you want to know more about UI scaling you can read the <a href="https://docs.rs/winit/latest/winit/dpi/index.html">relevant <code>winit</code> documentation</a>.</p>
 <p>Next we create an instance of our Vulkan app (<code>App</code>) and enter into our rendering loop. This loop will continually render our scene to the window until you request the window to be closed at which point the app will be destroyed and the program will exit. The <code>destroying</code> flag is necessary to not keep attempting to render the scene while the app is being destroyed which would most likely result in the program crashing after attempting to access Vulkan resources that have been destroyed.</p>
@@ -542,11 +542,12 @@ struct AppData {}
 <h1><a class="header" href="#instance" id="instance">Instance</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/01_instance_creation.rs">main.rs</a></p>
 <p>The very first thing you will want to do is initialize the Vulkan library by creating an <em>instance</em>. The instance is the connection between your application and the Vulkan library and creating it involves specifying some details about your application to the driver. To get started, add the following imports:</p>
-<pre><code class="language-rust noplaypen">use vulkanalia::loader::{LibloadingLoader, LIBRARY};
+<pre><code class="language-rust noplaypen">use anyhow::{anyhow, Result};
+use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::window as vk_window;
 use vulkanalia::prelude::v1_0::*;
 </code></pre>
-<p>Here we first import <code>LibloadingLoader</code> which serves as <code>vulkanalia</code>'s <code>libloading</code> integration which we will use to load the initial Vulkan commands from the Vulkan shared library. The standard name of the Vulkan shared library on your operating system (e.g., <code>vulkan-1.dll</code> on Windows) is then imported as <code>LIBRARY</code>.</p>
+<p>Here we first add the <a href="https://docs.rs/anyhow/latest/anyhow/macro.anyhow.html"><code>anyhow!</code></a> macro to our imports from <code>anyhow</code>. This macro will be used to easily construct instances of <code>anyhow</code> errors. Next, we import <code>LibloadingLoader</code> which serves as <code>vulkanalia</code>'s <code>libloading</code> integration which we will use to load the initial Vulkan commands from the Vulkan shared library. The standard name of the Vulkan shared library on your operating system (e.g., <code>vulkan-1.dll</code> on Windows) is then imported as <code>LIBRARY</code>.</p>
 <p>Next we import <code>vulkanalia</code>'s window integration as <code>vk_window</code> which in this chapter we will use to enumerate the global Vulkan extensions required to render to a window. In a future chapter we will also use <code>vk_window</code> to link our Vulkan instance with our <code>winit</code> window.</p>
 <p>Lastly we import the Vulkan 1.0 prelude from <code>vulkanalia</code> which will provide all of the other Vulkan-related imports we will need for this and future chapters.</p>
 <p>Now, to create an instance we'll next have to fill in a struct with some information about our application. This data is technically optional, but it may provide some useful information to the driver in order to optimize our specific application (e.g., because it uses a well-known graphics engine with certain special behavior). This struct is called <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.ApplicationInfo.html"><code class="hljs">vk::ApplicationInfo</code></a> and we'll create it in a new function called <code>create_instance</code> that takes our window and a Vulkan entry point (which we will create later) and returns a Vulkan instance:</p>

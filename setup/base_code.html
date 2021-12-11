@@ -162,7 +162,7 @@
     clippy::unnecessary_wraps
 )]
 
-use anyhow::*;
+use anyhow::Result;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};
@@ -223,7 +223,7 @@ impl App {
 #[derive(Clone, Debug, Default)]
 struct AppData {}
 </code></pre></pre>
-<p>We first import <code>anyhow::*</code> so we can use <code>anyhow</code>'s <a href="https://docs.rs/anyhow/latest/anyhow/type.Result.html"><code>Result</code></a> type for all of the fallible functions in our program. Next we import all of the <code>winit</code> types we need to create a window and start an event loop for that window.</p>
+<p>We first import <code>anyhow::Result</code> so we can use <code>anyhow</code>'s <a href="https://docs.rs/anyhow/latest/anyhow/type.Result.html"><code>Result</code></a> type for all of the fallible functions in our program. Next we import all of the <code>winit</code> types we need to create a window and start an event loop for that window.</p>
 <p>Next comes our <code>main</code> function (which returns an <code>anyhow::Result</code> type). This function starts by initializing <code>pretty_env_logger</code> which will print our logs to the console (as shown later).</p>
 <p>Then we create an event loop and window to render to using <code>winit</code> using <code>LogicalSize</code> which will scale the window according to the DPI of your display. If you want to know more about UI scaling you can read the <a href="https://docs.rs/winit/latest/winit/dpi/index.html">relevant <code>winit</code> documentation</a>.</p>
 <p>Next we create an instance of our Vulkan app (<code>App</code>) and enter into our rendering loop. This loop will continually render our scene to the window until you request the window to be closed at which point the app will be destroyed and the program will exit. The <code>destroying</code> flag is necessary to not keep attempting to render the scene while the app is being destroyed which would most likely result in the program crashing after attempting to access Vulkan resources that have been destroyed.</p>
