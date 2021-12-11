@@ -2,7 +2,7 @@
 
 #![allow(dead_code, unused_variables, clippy::too_many_arguments, clippy::unnecessary_wraps)]
 
-use anyhow::*;
+use anyhow::{anyhow, Result};
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::window as vk_window;

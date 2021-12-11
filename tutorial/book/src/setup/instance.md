@@ -5,12 +5,13 @@
 The very first thing you will want to do is initialize the Vulkan library by creating an *instance*. The instance is the connection between your application and the Vulkan library and creating it involves specifying some details about your application to the driver. To get started, add the following imports:
 
 ```rust,noplaypen
+use anyhow::{anyhow, Result};
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::window as vk_window;
 use vulkanalia::prelude::v1_0::*;
 ```
 
-Here we first import `LibloadingLoader` which serves as `vulkanalia`'s `libloading` integration which we will use to load the initial Vulkan commands from the Vulkan shared library. The standard name of the Vulkan shared library on your operating system (e.g., `vulkan-1.dll` on Windows) is then imported as `LIBRARY`.
+Here we first add the [`anyhow!`](https://docs.rs/anyhow/latest/anyhow/macro.anyhow.html) macro to our imports from `anyhow`. This macro will be used to easily construct instances of `anyhow` errors. Next, we import `LibloadingLoader` which serves as `vulkanalia`'s `libloading` integration which we will use to load the initial Vulkan commands from the Vulkan shared library. The standard name of the Vulkan shared library on your operating system (e.g., `vulkan-1.dll` on Windows) is then imported as `LIBRARY`.
 
 Next we import `vulkanalia`'s window integration as `vk_window` which in this chapter we will use to enumerate the global Vulkan extensions required to render to a window. In a future chapter we will also use `vk_window` to link our Vulkan instance with our `winit` window.
 

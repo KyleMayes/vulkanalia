@@ -7,7 +7,7 @@ use std::ffi::CStr;
 use std::mem::size_of;
 use std::os::raw::c_void;
 
-use anyhow::*;
+use anyhow::{anyhow, Result};
 use lazy_static::lazy_static;
 use log::*;
 use nalgebra_glm as glm;

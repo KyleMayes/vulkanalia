@@ -4,7 +4,7 @@ use std::collections::HashMap;
 use std::io;
 use std::process;
 
-use anyhow::*;
+use anyhow::{anyhow, Result};
 use clap::{App, Arg, SubCommand};
 use log::*;
 use mdbook::book::BookItem;

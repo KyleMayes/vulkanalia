@@ -6,7 +6,7 @@ use std::collections::HashSet;
 use std::ffi::CStr;
 use std::os::raw::c_void;
 
-use anyhow::*;
+use anyhow::{anyhow, Result};
 use log::*;
 use thiserror::Error;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};

@@ -2,7 +2,7 @@
 
 #![allow(dead_code, unused_variables, clippy::too_many_arguments, clippy::unnecessary_wraps)]
 
-use anyhow::*;
+use anyhow::Result;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};

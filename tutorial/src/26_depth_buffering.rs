@@ -10,7 +10,7 @@ use std::os::raw::c_void;
 use std::ptr::copy_nonoverlapping as memcpy;
 use std::time::Instant;
 
-use anyhow::*;
+use anyhow::{anyhow, Result};
 use lazy_static::lazy_static;
 use log::*;
 use nalgebra_glm as glm;

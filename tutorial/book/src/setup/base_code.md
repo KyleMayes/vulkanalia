@@ -12,7 +12,7 @@ In the `Development environment` chapter we created a Cargo project and added th
     clippy::unnecessary_wraps
 )]
 
-use anyhow::*;
+use anyhow::Result;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};
@@ -74,7 +74,7 @@ impl App {
 struct AppData {}
 ```
 
-We first import `anyhow::*` so we can use `anyhow`'s [`Result`](https://docs.rs/anyhow/latest/anyhow/type.Result.html) type for all of the fallible functions in our program. Next we import all of the `winit` types we need to create a window and start an event loop for that window.
+We first import `anyhow::Result` so we can use `anyhow`'s [`Result`](https://docs.rs/anyhow/latest/anyhow/type.Result.html) type for all of the fallible functions in our program. Next we import all of the `winit` types we need to create a window and start an event loop for that window.
 
 Next comes our `main` function (which returns an `anyhow::Result` type). This function starts by initializing `pretty_env_logger` which will print our logs to the console (as shown later).
 
