@@ -10248,6 +10248,10 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrivateDataFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProvokingVertexFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo
+    for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM
+{
+}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayQueryFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
@@ -27650,6 +27654,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePrivateDataFeatures
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProvokingVertexFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayQueryFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
