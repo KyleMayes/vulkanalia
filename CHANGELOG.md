@@ -8,6 +8,8 @@
 - [Push internal reservation of extension 436 so public reservation can claim 437](https://github.com/KhronosGroup/Vulkan-Docs/commit/a5598d1a2e80757ceab78fc39919c5c05db81319)
 - [reserve extension (#1693)](https://github.com/KhronosGroup/Vulkan-Docs/commit/71af58ed5123950f20252764147bac5ab7ae5a40)
 - [November 23, 2021 Vulkan 1.2.200 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9ed8caef1a0b5abe9778adb39feff435b2328f1b)
+- [November 30, 2021 Vulkan 1.2.201 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/d70e01c0be7b8a7d20b186b30b29a75b18bba75d)
+- [December 7, 2021 Vulkan 1.2.202 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/48b76697118c275337e49836259f0571b3410d84)
 
 ## [0.12.0] - 2021-10-30
 
