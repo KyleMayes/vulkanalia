@@ -17,6 +17,7 @@ import com.kylemayes.generator.registry.isByteArray
 import com.kylemayes.generator.registry.isOpaquePointer
 import com.kylemayes.generator.registry.isStringArray
 import com.kylemayes.generator.registry.isStringPointer
+import com.kylemayes.generator.support.PeekableIterator
 
 /** Generates Rust structs to build Vulkan structs. */
 fun Registry.generateBuilders() =
@@ -171,9 +172,17 @@ private fun Registry.generateMethods(struct: Structure): String {
 
     // Generate the builder methods.
     val methods = ArrayList<String>()
-    for (member in requireBuilders) {
+    val iterator = PeekableIterator(requireBuilders)
+    while (!iterator.isEmpty()) {
+        val member = iterator.advance()
         val len = member.len?.get(0)
-        if (len != null && len.value != "null-terminated") {
+        if (member.bits != null) {
+            // Create separate builder methods for adjacent bitfields that
+            // merge the provided values into the combined bitfield field
+            // (`Bitfield24_8`). It is assumed that only 24-bit and 8-bit
+            // bitfields are present (asserted when generating structs).
+            methods.add(generateBitfieldMethods(member, iterator.advance()))
+        } else if (len != null && len.value != "null-terminated") {
             if (arraysByLength.containsKey(len)) {
                 val lengthMember = members[len] ?: error("Missing length member.")
                 val length = Pair(lengthMember.name.value, lengthMember.type.generate())
@@ -224,6 +233,24 @@ pub fn ${member.name}(mut self, ${member.name}: $type) -> Self {
     """
 }
 
+/** Generates a Rust builder method for adjacent bitfield values. */
+private fun Registry.generateBitfieldMethods(bf24: Member, bf8: Member): String {
+    val combined = "${bf24.name}_and_${bf8.name}"
+    return """
+#[inline]
+pub fn ${bf24.name}<T>(mut self, ${bf24.name}: u32) -> Self {
+    self.$combined = Bitfield24_8::new(${bf24.name}, self.$combined.high());
+    self
+}
+
+#[inline]
+pub fn ${bf8.name}<T>(mut self, ${bf8.name}: u8) -> Self {
+    self.$combined = Bitfield24_8::new(self.$combined.low(), ${bf8.name});
+    self
+}
+    """
+}
+
 /** Generates a Rust builder method which allows extending the Vulkan struct. */
 private fun Registry.generateNextMethod(struct: Structure): String {
     val extensions = getStructExtensions()[struct.name] ?: emptyList()
@@ -263,33 +290,33 @@ pub fn ${member.name}<T>(mut self, ${member.name}: $ref) -> Self {
 
     val (type, cast) = when {
         // Boolean.
-        member.type.getIdentifier()?.value == "Bool32" -> Pair("bool", { m: String -> "$m as Bool32" })
+        member.type.getIdentifier()?.value == "Bool32" -> Pair("bool") { m: String -> "$m as Bool32" }
         // Array (byte).
-        member.type.isByteArray() -> Pair("impl Into<${member.type.generate()}>", { m: String -> "$m.into()" })
+        member.type.isByteArray() -> Pair("impl Into<${member.type.generate()}>") { m: String -> "$m.into()" }
         // Array (byte).
-        member.type.isStringArray() -> Pair("impl Into<${member.type.generate()}>", { m: String -> "$m.into()" })
+        member.type.isStringArray() -> Pair("impl Into<${member.type.generate()}>") { m: String -> "$m.into()" }
         // Struct.
         structs.containsKey(member.type.getIdentifier()) ->
-            Pair("impl Cast<Target = ${member.type.generate()}>", { m: String -> "$m.into()" })
+            Pair("impl Cast<Target = ${member.type.generate()}>") { m: String -> "$m.into()" }
         // Pointer to struct.
         structs.containsKey(member.type.getPointee()?.getIdentifier()) -> {
             val pointer = member.type as PointerType
             val type = "impl Cast<Target = ${pointer.pointee.generate()}>".generateRef(pointer.const, lifetime = "b")
             val cast = if (pointer.const) { ".as_ref()" } else { ".as_mut()" }
-            Pair(type, { m: String -> "$m$cast" })
+            Pair(type) { m: String -> "$m$cast" }
         }
         // Pointer to string.
-        member.type.isStringPointer() -> Pair("&'b [u8]", { m: String -> "$m.as_ptr().cast()" })
+        member.type.isStringPointer() -> Pair("&'b [u8]") { m: String -> "$m.as_ptr().cast()" }
         // Pointer to pointer.
         member.type is PointerType && member.type.pointee is PointerType -> {
             if (structs.containsKey(member.type.pointee.pointee.getIdentifier())) {
                 // Pointer to pointer to struct.
                 val item = member.type.pointee.pointee.generate()
-                Pair("&'b [&'b impl Cast<Target = $item>]", { m: String -> "$m.as_ptr().cast()" })
+                Pair("&'b [&'b impl Cast<Target = $item>]") { m: String -> "$m.as_ptr().cast()" }
             } else {
                 // Pointer to pointer to other type.
                 val item = member.type.pointee.pointee.generate()
-                Pair("&'b [&'b $item]", { m: String -> "$m.as_ptr().cast()" })
+                Pair("&'b [&'b $item]") { m: String -> "$m.as_ptr().cast()" }
             }
         }
         // Pointer to other type (non-opaque).
@@ -297,10 +324,10 @@ pub fn ${member.name}<T>(mut self, ${member.name}: $ref) -> Self {
             val item = member.type.pointee.generate()
             val type = item.generateRef(member.type.const, lifetime = "b")
             val cast = item.generatePtr(member.type.const)
-            Pair(type, { m: String -> "$m as $cast" })
+            Pair(type) { m: String -> "$m as $cast" }
         }
         // Other.
-        else -> Pair(member.type.generate(), { m: String -> m })
+        else -> Pair(member.type.generate()) { m: String -> m }
     }
 
     return """

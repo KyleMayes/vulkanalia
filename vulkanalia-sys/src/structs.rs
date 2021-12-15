@@ -327,10 +327,8 @@ impl Default for AccelerationStructureInfoNV {
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct AccelerationStructureInstanceKHR {
     pub transform: TransformMatrixKHR,
-    pub instance_custom_index: u32,
-    pub mask: u32,
-    pub instance_shader_binding_table_record_offset: u32,
-    pub flags: GeometryInstanceFlagsKHR,
+    pub instance_custom_index_and_mask: Bitfield24_8,
+    pub instance_shader_binding_table_record_offset_and_flags: Bitfield24_8,
     pub acceleration_structure_reference: u64,
 }
 
@@ -340,10 +338,8 @@ pub struct AccelerationStructureInstanceKHR {
 pub struct AccelerationStructureMatrixMotionInstanceNV {
     pub transform_t0: TransformMatrixKHR,
     pub transform_t1: TransformMatrixKHR,
-    pub instance_custom_index: u32,
-    pub mask: u32,
-    pub instance_shader_binding_table_record_offset: u32,
-    pub flags: GeometryInstanceFlagsKHR,
+    pub instance_custom_index_and_mask: Bitfield24_8,
+    pub instance_shader_binding_table_record_offset_and_flags: Bitfield24_8,
     pub acceleration_structure_reference: u64,
 }
 
@@ -406,10 +402,8 @@ pub struct AccelerationStructureMotionInstanceNV {
 pub struct AccelerationStructureSRTMotionInstanceNV {
     pub transform_t0: SRTDataNV,
     pub transform_t1: SRTDataNV,
-    pub instance_custom_index: u32,
-    pub mask: u32,
-    pub instance_shader_binding_table_record_offset: u32,
-    pub flags: GeometryInstanceFlagsKHR,
+    pub instance_custom_index_and_mask: Bitfield24_8,
+    pub instance_shader_binding_table_record_offset_and_flags: Bitfield24_8,
     pub acceleration_structure_reference: u64,
 }
 

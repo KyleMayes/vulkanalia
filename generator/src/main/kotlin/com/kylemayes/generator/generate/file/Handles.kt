@@ -40,7 +40,7 @@ pub trait Handle: Copy + Clone + fmt::Debug + PartialEq + Eq + Hash + Default + 
 ${handles.values
         .sortedBy { it.name }
         .joinToString("\n") { generateHandle(it) }}
-        
+
 ${generateAliases(handles.keys)}
     """
 
