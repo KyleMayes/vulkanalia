@@ -1,4 +1,4 @@
-## [0.13.0] - UNRELEASED
+## [0.13.0] - 2021-12-14
 
 ### Bindings Updates
 - [Remaining newly introduced `vk-video` types (#1663)](https://github.com/KhronosGroup/Vulkan-Docs/commit/36cec8e02d9d73ce7c88203567d3196064db8605)
