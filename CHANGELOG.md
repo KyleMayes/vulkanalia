@@ -11,6 +11,9 @@
 - [November 30, 2021 Vulkan 1.2.201 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/d70e01c0be7b8a7d20b186b30b29a75b18bba75d)
 - [December 7, 2021 Vulkan 1.2.202 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/48b76697118c275337e49836259f0571b3410d84)
 
+### Changed
+- Updated generator to properly generate fields for bitfields (#73)
+
 ## [0.12.0] - 2021-10-30
 
 ### Bindings Updates
