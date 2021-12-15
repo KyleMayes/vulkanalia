@@ -3,6 +3,7 @@
 //! Raw Vulkan bindings for Rust.
 
 mod arrays;
+mod bitfields;
 
 #[rustfmt::skip]
 mod bitmasks;
@@ -28,6 +29,7 @@ mod typedefs;
 mod unions;
 
 pub use self::arrays::*;
+pub use self::bitfields::*;
 pub use self::bitmasks::*;
 pub use self::commands::*;
 pub use self::constants::*;

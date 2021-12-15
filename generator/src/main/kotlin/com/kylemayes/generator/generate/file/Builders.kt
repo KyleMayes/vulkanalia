@@ -17,6 +17,7 @@ import com.kylemayes.generator.registry.isByteArray
 import com.kylemayes.generator.registry.isOpaquePointer
 import com.kylemayes.generator.registry.isStringArray
 import com.kylemayes.generator.registry.isStringPointer
+import com.kylemayes.generator.support.PeekableIterator
 
 /** Generates Rust structs to build Vulkan structs. */
 fun Registry.generateBuilders() =
@@ -171,9 +172,17 @@ private fun Registry.generateMethods(struct: Structure): String {
 
     // Generate the builder methods.
     val methods = ArrayList<String>()
-    for (member in requireBuilders) {
+    val iterator = PeekableIterator(requireBuilders)
+    while (!iterator.isEmpty()) {
+        val member = iterator.advance()
         val len = member.len?.get(0)
-        if (len != null && len.value != "null-terminated") {
+        if (member.bits != null) {
+            // Create separate builder methods for adjacent bitfields that
+            // merge the provided values into the combined bitfield field
+            // (`Bitfield24_8`). It is assumed that only 24-bit and 8-bit
+            // bitfields are present (asserted when generating structs).
+            methods.add(generateBitfieldMethods(member, iterator.advance()))
+        } else if (len != null && len.value != "null-terminated") {
             if (arraysByLength.containsKey(len)) {
                 val lengthMember = members[len] ?: error("Missing length member.")
                 val length = Pair(lengthMember.name.value, lengthMember.type.generate())
@@ -219,6 +228,24 @@ private fun Registry.generateArrayMethod(member: Member, length: Pair<String, St
 pub fn ${member.name}(mut self, ${member.name}: $type) -> Self {
     ${if (length != null) { "self.value.${length.first} = ${member.name}.len() as ${length.second};" } else { "" }}
     self.value.${member.name} = ${member.name}.$method()$cast;
+    self
+}
+    """
+}
+
+/** Generates a Rust builder method for adjacent bitfield values. */
+private fun Registry.generateBitfieldMethods(bf24: Member, bf8: Member): String {
+    val combined = "${bf24.name}_and_${bf8.name}"
+    return """
+#[inline]
+pub fn ${bf24.name}<T>(mut self, ${bf24.name}: u32) -> Self {
+    self.$combined = Bitfield24_8::new(${bf24.name}, self.$combined.high());
+    self
+}
+
+#[inline]
+pub fn ${bf8.name}<T>(mut self, ${bf8.name}: u8) -> Self {
+    self.$combined = Bitfield24_8::new(self.$combined.low(), ${bf8.name});
     self
 }
     """

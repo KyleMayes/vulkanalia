@@ -10,6 +10,7 @@ import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.Structure
 import com.kylemayes.generator.registry.getIdentifier
 import com.kylemayes.generator.registry.isPlatformPointer
+import com.kylemayes.generator.support.PeekableIterator
 
 /** Generates Rust structs for Vulkan structs. */
 fun Registry.generateStructs(): String {
@@ -31,12 +32,30 @@ ${generateAliases(structs.keys)}
 /** Generates a Rust struct for a Vulkan struct. */
 private fun Registry.generateStruct(struct: Structure): String {
     val derives = getStructDerives(struct)
+
+    val fields = mutableListOf<String>()
+    val iterator = PeekableIterator(struct.members)
+    while (!iterator.isEmpty()) {
+        val current = iterator.advance()
+        if (current.bits != null) {
+            // Combine adjacent bitfields into single fields.
+            // Currently, the only bitfields are a 24-bit bitfield followed by
+            // an 8-bit bitfield which is represented by an `u32` using the
+            // `Bitfield24_8` class.
+            val next = iterator.advance()
+            assert(current.bits == 24 && next.bits == 8)
+            fields.add("pub ${current.name}_and_${next.name}: Bitfield24_8")
+        } else {
+            fields.add("pub ${current.name}: ${current.type.generate()}")
+        }
+    }
+
     return """
 /// <${generateManualUrl(struct)}>
 #[repr(C)]
 #[derive(Copy, Clone, ${derives.joinToString()})]
 pub struct ${struct.name} {
-    ${struct.members.joinToString { "pub ${it.name}: ${it.type.generate()}" }}
+    ${fields.joinToString()}
 }
 
 ${if (!derives.contains("Debug")) { generateDebugImpl(struct) } else { "" }}

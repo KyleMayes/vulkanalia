@@ -293,6 +293,7 @@ data class Member(
     val len: List<Identifier>?,
     val altlen: String,
     val optional: Boolean,
+    val bits: Int?,
 ) : Entity
 
 private fun extractMember(e: Element) = Member(
@@ -302,6 +303,7 @@ private fun extractMember(e: Element) = Member(
     len = e.getAttributeText("len")?.split(",")?.map { it.intern() },
     altlen = e.getAttribute("altlen"),
     optional = e.getAttributeText("optional") == "true",
+    bits = Regex(":(\\d+)$").find(e.textContent)?.let { it.groupValues[1].toInt() },
 )
 
 // ===============================================
