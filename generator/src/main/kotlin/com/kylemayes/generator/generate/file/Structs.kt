@@ -24,7 +24,7 @@ use crate::*;
 ${structs.values
         .sortedBy { it.name }
         .joinToString("\n") { generateStruct(it) }}
- 
+
 ${generateAliases(structs.keys)}
     """
 }

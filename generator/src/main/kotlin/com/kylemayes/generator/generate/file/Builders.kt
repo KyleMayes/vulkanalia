@@ -290,33 +290,33 @@ pub fn ${member.name}<T>(mut self, ${member.name}: $ref) -> Self {
 
     val (type, cast) = when {
         // Boolean.
-        member.type.getIdentifier()?.value == "Bool32" -> Pair("bool", { m: String -> "$m as Bool32" })
+        member.type.getIdentifier()?.value == "Bool32" -> Pair("bool") { m: String -> "$m as Bool32" }
         // Array (byte).
-        member.type.isByteArray() -> Pair("impl Into<${member.type.generate()}>", { m: String -> "$m.into()" })
+        member.type.isByteArray() -> Pair("impl Into<${member.type.generate()}>") { m: String -> "$m.into()" }
         // Array (byte).
-        member.type.isStringArray() -> Pair("impl Into<${member.type.generate()}>", { m: String -> "$m.into()" })
+        member.type.isStringArray() -> Pair("impl Into<${member.type.generate()}>") { m: String -> "$m.into()" }
         // Struct.
         structs.containsKey(member.type.getIdentifier()) ->
-            Pair("impl Cast<Target = ${member.type.generate()}>", { m: String -> "$m.into()" })
+            Pair("impl Cast<Target = ${member.type.generate()}>") { m: String -> "$m.into()" }
         // Pointer to struct.
         structs.containsKey(member.type.getPointee()?.getIdentifier()) -> {
             val pointer = member.type as PointerType
             val type = "impl Cast<Target = ${pointer.pointee.generate()}>".generateRef(pointer.const, lifetime = "b")
             val cast = if (pointer.const) { ".as_ref()" } else { ".as_mut()" }
-            Pair(type, { m: String -> "$m$cast" })
+            Pair(type) { m: String -> "$m$cast" }
         }
         // Pointer to string.
-        member.type.isStringPointer() -> Pair("&'b [u8]", { m: String -> "$m.as_ptr().cast()" })
+        member.type.isStringPointer() -> Pair("&'b [u8]") { m: String -> "$m.as_ptr().cast()" }
         // Pointer to pointer.
         member.type is PointerType && member.type.pointee is PointerType -> {
             if (structs.containsKey(member.type.pointee.pointee.getIdentifier())) {
                 // Pointer to pointer to struct.
                 val item = member.type.pointee.pointee.generate()
-                Pair("&'b [&'b impl Cast<Target = $item>]", { m: String -> "$m.as_ptr().cast()" })
+                Pair("&'b [&'b impl Cast<Target = $item>]") { m: String -> "$m.as_ptr().cast()" }
             } else {
                 // Pointer to pointer to other type.
                 val item = member.type.pointee.pointee.generate()
-                Pair("&'b [&'b $item]", { m: String -> "$m.as_ptr().cast()" })
+                Pair("&'b [&'b $item]") { m: String -> "$m.as_ptr().cast()" }
             }
         }
         // Pointer to other type (non-opaque).
@@ -324,10 +324,10 @@ pub fn ${member.name}<T>(mut self, ${member.name}: $ref) -> Self {
             val item = member.type.pointee.generate()
             val type = item.generateRef(member.type.const, lifetime = "b")
             val cast = item.generatePtr(member.type.const)
-            Pair(type, { m: String -> "$m as $cast" })
+            Pair(type) { m: String -> "$m as $cast" }
         }
         // Other.
-        else -> Pair(member.type.generate(), { m: String -> m })
+        else -> Pair(member.type.generate()) { m: String -> m }
     }
 
     return """
