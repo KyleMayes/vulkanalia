@@ -126,7 +126,7 @@ impl From<Version> for (u32, u32, u32) {
 /// A Vulkan entry point.
 #[derive(Clone)]
 pub struct Entry {
-    loader: Arc<dyn Loader>,
+    _loader: Arc<dyn Loader>,
     get_instance: vk::PFN_vkGetInstanceProcAddr,
     get_device: vk::PFN_vkGetDeviceProcAddr,
     commands: EntryCommands,
@@ -155,7 +155,7 @@ impl Entry {
         let commands = EntryCommands::load(load);
 
         Ok(Self {
-            loader,
+            _loader: loader,
             get_instance,
             get_device,
             commands,

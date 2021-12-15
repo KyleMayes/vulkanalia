@@ -4131,20 +4131,10 @@ impl Default for ExportSemaphoreWin32HandleInfoKHR {
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkExtensionProperties.html>
 #[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ExtensionProperties {
     pub extension_name: StringArray<MAX_EXTENSION_NAME_SIZE>,
     pub spec_version: u32,
-}
-
-impl Default for ExtensionProperties {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            extension_name: StringArray::default(),
-            spec_version: u32::default(),
-        }
-    }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkExtent2D.html>
@@ -6096,24 +6086,12 @@ impl Default for InstanceCreateInfo {
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkLayerProperties.html>
 #[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct LayerProperties {
     pub layer_name: StringArray<MAX_EXTENSION_NAME_SIZE>,
     pub spec_version: u32,
     pub implementation_version: u32,
     pub description: StringArray<MAX_DESCRIPTION_SIZE>,
-}
-
-impl Default for LayerProperties {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            layer_name: StringArray::default(),
-            spec_version: u32::default(),
-            implementation_version: u32::default(),
-            description: StringArray::default(),
-        }
-    }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkMacOSSurfaceCreateInfoMVK.html>
@@ -9527,7 +9505,7 @@ impl Default for PhysicalDevicePrivateDataFeaturesEXT {
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceProperties.html>
 #[repr(C)]
-#[derive(Copy, Clone, Debug, PartialEq)]
+#[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct PhysicalDeviceProperties {
     pub api_version: u32,
     pub driver_version: u32,
@@ -9538,23 +9516,6 @@ pub struct PhysicalDeviceProperties {
     pub pipeline_cache_uuid: ByteArray<UUID_SIZE>,
     pub limits: PhysicalDeviceLimits,
     pub sparse_properties: PhysicalDeviceSparseProperties,
-}
-
-impl Default for PhysicalDeviceProperties {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            api_version: u32::default(),
-            driver_version: u32::default(),
-            vendor_id: u32::default(),
-            device_id: u32::default(),
-            device_type: PhysicalDeviceType::default(),
-            device_name: StringArray::default(),
-            pipeline_cache_uuid: ByteArray::default(),
-            limits: PhysicalDeviceLimits::default(),
-            sparse_properties: PhysicalDeviceSparseProperties::default(),
-        }
-    }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceProperties2.html>

@@ -30,7 +30,6 @@ fun Registry.getStructDerives(struct: Structure): Set<String> {
         return memoized
     }
 
-    val arrayLengthAtMost32 = (getMaxArrayLength(struct) ?: 0) <= 32
     val floats = struct.members.any { m -> m.type.getBaseIdentifier()?.value == "float" }
     val functions = struct.members.any { m -> functions.containsKey(m.type.getIdentifier()) }
     val pointers = struct.members.any { m -> m.type.isPointer() }
@@ -42,7 +41,7 @@ fun Registry.getStructDerives(struct: Structure): Set<String> {
 
     val required = HashSet<String>()
     if (!functions) required.add("Debug")
-    if (arrayLengthAtMost32 && !pointers) required.add("Default")
+    if (!pointers) required.add("Default")
 
     // These traits will not be "manually" implemented so they can only be
     // applied to structs that meet the requirements and don't (transitively)
