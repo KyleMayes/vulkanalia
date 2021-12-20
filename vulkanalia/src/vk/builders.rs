@@ -10249,6 +10249,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemoryRDMAFeatures
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFeatures2 {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
@@ -10263,6 +10264,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInheritedViewportScissorFe
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInlineUniformBlockFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLineRasterizationFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance4FeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesNV {}
@@ -27646,6 +27648,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicStat
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
@@ -27660,6 +27663,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInheritedViewportSc
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInlineUniformBlockFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLineRasterizationFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance4FeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesNV {}
@@ -28226,6 +28230,125 @@ impl ops::DerefMut for PhysicalDeviceFragmentDensityMapFeaturesEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceFragmentDensityMapFeaturesEXTBuilder {
     type Target = PhysicalDeviceFragmentDensityMapFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {
+    type Target = PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {
+    type Builder = PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOMBuilder {
+    value: PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM,
+}
+
+impl PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOMBuilder {
+    #[inline]
+    pub fn fragment_density_map_offset(mut self, fragment_density_map_offset: bool) -> Self {
+        self.value.fragment_density_map_offset = fragment_density_map_offset as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOMBuilder {
+    type Target = PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOMBuilder {
+    type Target = PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM {
+    type Target = PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM {
+    type Builder = PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOMBuilder {
+    value: PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM,
+}
+
+impl PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOMBuilder {
+    #[inline]
+    pub fn fragment_density_offset_granularity(
+        mut self,
+        fragment_density_offset_granularity: impl Cast<Target = Extent2D>,
+    ) -> Self {
+        self.value.fragment_density_offset_granularity = fragment_density_offset_granularity.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOMBuilder {
+    type Target = PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOMBuilder {
+    type Target = PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -30941,6 +31064,64 @@ unsafe impl Cast for PhysicalDeviceLineRasterizationPropertiesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceLinearColorAttachmentFeaturesNV {
+    type Target = PhysicalDeviceLinearColorAttachmentFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceLinearColorAttachmentFeaturesNV {
+    type Builder = PhysicalDeviceLinearColorAttachmentFeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceLinearColorAttachmentFeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceLinearColorAttachmentFeaturesNVBuilder {
+    value: PhysicalDeviceLinearColorAttachmentFeaturesNV,
+}
+
+impl PhysicalDeviceLinearColorAttachmentFeaturesNVBuilder {
+    #[inline]
+    pub fn linear_color_attachment(mut self, linear_color_attachment: bool) -> Self {
+        self.value.linear_color_attachment = linear_color_attachment as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceLinearColorAttachmentFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceLinearColorAttachmentFeaturesNVBuilder {
+    type Target = PhysicalDeviceLinearColorAttachmentFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceLinearColorAttachmentFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLinearColorAttachmentFeaturesNVBuilder {
+    type Target = PhysicalDeviceLinearColorAttachmentFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceMaintenance3Properties {
     type Target = PhysicalDeviceMaintenance3Properties;
 
@@ -33010,6 +33191,10 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDrmPropertiesEXT 
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceExternalMemoryHostPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFloatControlsProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentDensityMap2PropertiesEXT {}
+unsafe impl ExtendsPhysicalDeviceProperties2
+    for PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM
+{
+}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentDensityMapPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2
     for PhysicalDeviceFragmentShadingRateEnumsPropertiesNV
@@ -50286,6 +50471,10 @@ unsafe impl<'b> Cast for SubpassDescriptionDepthStencilResolveBuilder<'b> {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`SubpassEndInfo`].
+pub unsafe trait ExtendsSubpassEndInfo: fmt::Debug {}
+unsafe impl ExtendsSubpassEndInfo for SubpassFragmentDensityMapOffsetEndInfoQCOM {}
+
 unsafe impl Cast for SubpassEndInfo {
     type Target = SubpassEndInfo;
 
@@ -50295,25 +50484,37 @@ unsafe impl Cast for SubpassEndInfo {
     }
 }
 
-impl HasBuilder<'static> for SubpassEndInfo {
-    type Builder = SubpassEndInfoBuilder;
+impl<'b> HasBuilder<'b> for SubpassEndInfo {
+    type Builder = SubpassEndInfoBuilder<'b>;
 }
 
 /// A builder for a [`SubpassEndInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct SubpassEndInfoBuilder {
+pub struct SubpassEndInfoBuilder<'b> {
     value: SubpassEndInfo,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl SubpassEndInfoBuilder {
+impl<'b> SubpassEndInfoBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsSubpassEndInfo,
+    {
+        let next = (next.as_mut() as *mut T).cast::<SubpassEndInfo>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn build(self) -> SubpassEndInfo {
         self.value
     }
 }
 
-impl ops::Deref for SubpassEndInfoBuilder {
+impl<'b> ops::Deref for SubpassEndInfoBuilder<'b> {
     type Target = SubpassEndInfo;
 
     #[inline]
@@ -50322,15 +50523,78 @@ impl ops::Deref for SubpassEndInfoBuilder {
     }
 }
 
-impl ops::DerefMut for SubpassEndInfoBuilder {
+impl<'b> ops::DerefMut for SubpassEndInfoBuilder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for SubpassEndInfoBuilder {
+unsafe impl<'b> Cast for SubpassEndInfoBuilder<'b> {
     type Target = SubpassEndInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SubpassFragmentDensityMapOffsetEndInfoQCOM {
+    type Target = SubpassFragmentDensityMapOffsetEndInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for SubpassFragmentDensityMapOffsetEndInfoQCOM {
+    type Builder = SubpassFragmentDensityMapOffsetEndInfoQCOMBuilder<'b>;
+}
+
+/// A builder for a [`SubpassFragmentDensityMapOffsetEndInfoQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SubpassFragmentDensityMapOffsetEndInfoQCOMBuilder<'b> {
+    value: SubpassFragmentDensityMapOffsetEndInfoQCOM,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> SubpassFragmentDensityMapOffsetEndInfoQCOMBuilder<'b> {
+    #[inline]
+    pub fn fragment_density_offsets(
+        mut self,
+        fragment_density_offsets: &'b [impl Cast<Target = Offset2D>],
+    ) -> Self {
+        self.value.fragment_density_offset_count = fragment_density_offsets.len() as u32;
+        self.value.fragment_density_offsets = fragment_density_offsets.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SubpassFragmentDensityMapOffsetEndInfoQCOM {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for SubpassFragmentDensityMapOffsetEndInfoQCOMBuilder<'b> {
+    type Target = SubpassFragmentDensityMapOffsetEndInfoQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for SubpassFragmentDensityMapOffsetEndInfoQCOMBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for SubpassFragmentDensityMapOffsetEndInfoQCOMBuilder<'b> {
+    type Target = SubpassFragmentDensityMapOffsetEndInfoQCOM;
 
     #[inline]
     fn into(self) -> Self::Target {

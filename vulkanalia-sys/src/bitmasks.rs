@@ -678,6 +678,7 @@ bitflags! {
         const STORAGE_READ_WITHOUT_FORMAT = 1 << 31;
         const STORAGE_WRITE_WITHOUT_FORMAT = 1 << 32;
         const SAMPLED_IMAGE_DEPTH_COMPARISON = 1 << 33;
+        const LINEAR_COLOR_ATTACHMENT_NV = 1 << 38;
     }
 }
 
@@ -778,6 +779,7 @@ bitflags! {
         const SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_EXT = 1 << 12;
         const CORNER_SAMPLED_NV = 1 << 13;
         const SUBSAMPLED_EXT = 1 << 14;
+        const FRAGMENT_DENSITY_MAP_OFFSET_QCOM = 1 << 15;
     }
 }
 

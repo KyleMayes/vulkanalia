@@ -2005,6 +2005,22 @@ pub const GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GOOGLE_surfaceless_query.html>
+#[allow(deprecated)]
+pub const GOOGLE_SURFACELESS_QUERY_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_GOOGLE_surfaceless_query"),
+    number: 434,
+    type_: "instance",
+    author: "GOOGLE",
+    contact: "Shahbaz Youssefi @syoussefi",
+    platform: None,
+    required_extensions: Some(&[KHR_SURFACE_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GOOGLE_user_type.html>
 #[allow(deprecated)]
 pub const GOOGLE_USER_TYPE_EXTENSION: Extension = Extension {
@@ -4038,6 +4054,22 @@ pub const NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_linear_color_attachment.html>
+#[allow(deprecated)]
+pub const NV_LINEAR_COLOR_ATTACHMENT_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_linear_color_attachment"),
+    number: 431,
+    type_: "device",
+    author: "NVIDIA",
+    contact: "sourav parmar @souravpNV",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_mesh_shader.html>
 #[allow(deprecated)]
 pub const NV_MESH_SHADER_EXTENSION: Extension = Extension {
@@ -4247,6 +4279,25 @@ pub const NV_WIN32_KEYED_MUTEX_EXTENSION: Extension = Extension {
     deprecated_by: None,
     obsoleted_by: None,
     promoted_to: Some("VK_KHR_win32_keyed_mutex"),
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_fragment_density_map_offset.html>
+#[allow(deprecated)]
+pub const QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_QCOM_fragment_density_map_offset"),
+    number: 426,
+    type_: "device",
+    author: "QCOM",
+    contact: "Matthew Netsch @mnetsch",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+        EXT_FRAGMENT_DENSITY_MAP_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_render_pass_shader_resolve.html>

@@ -3039,6 +3039,15 @@ pub trait GoogleHlslFunctionality1Extension: DeviceV1_0 {
 
 impl GoogleHlslFunctionality1Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GOOGLE_surfaceless_query.html>
+pub trait GoogleSurfacelessQueryExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = GOOGLE_SURFACELESS_QUERY_EXTENSION;
+}
+
+impl GoogleSurfacelessQueryExtension for crate::Instance {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_GOOGLE_user_type.html>
 pub trait GoogleUserTypeExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -7985,6 +7994,15 @@ pub trait NvInheritedViewportScissorExtension: DeviceV1_0 {
 
 impl NvInheritedViewportScissorExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_linear_color_attachment.html>
+pub trait NvLinearColorAttachmentExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_LINEAR_COLOR_ATTACHMENT_EXTENSION;
+}
+
+impl NvLinearColorAttachmentExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_NV_mesh_shader.html>
 pub trait NvMeshShaderExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -8478,6 +8496,15 @@ pub trait NvWin32KeyedMutexExtension: DeviceV1_0 {
 }
 
 impl NvWin32KeyedMutexExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_fragment_density_map_offset.html>
+pub trait QcomFragmentDensityMapOffsetExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION;
+}
+
+impl QcomFragmentDensityMapOffsetExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_QCOM_render_pass_shader_resolve.html>
 pub trait QcomRenderPassShaderResolveExtension: DeviceV1_0 {

@@ -8171,6 +8171,46 @@ impl Default for PhysicalDeviceFragmentDensityMapFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub fragment_density_map_offset: Bool32,
+}
+
+impl Default for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM,
+            next: ptr::null_mut(),
+            fragment_density_map_offset: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub fragment_density_offset_granularity: Extent2D,
+}
+
+impl Default for PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM,
+            next: ptr::null_mut(),
+            fragment_density_offset_granularity: Extent2D::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceFragmentDensityMapPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8875,6 +8915,26 @@ impl Default for PhysicalDeviceLineRasterizationPropertiesEXT {
             s_type: StructureType::PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT,
             next: ptr::null_mut(),
             line_sub_pixel_precision_bits: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceLinearColorAttachmentFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceLinearColorAttachmentFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub linear_color_attachment: Bool32,
+}
+
+impl Default for PhysicalDeviceLinearColorAttachmentFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV,
+            next: ptr::null_mut(),
+            linear_color_attachment: Bool32::default(),
         }
     }
 }
@@ -14563,6 +14623,28 @@ impl Default for SubpassEndInfo {
         Self {
             s_type: StructureType::SUBPASS_END_INFO,
             next: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSubpassFragmentDensityMapOffsetEndInfoQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SubpassFragmentDensityMapOffsetEndInfoQCOM {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub fragment_density_offset_count: u32,
+    pub fragment_density_offsets: *const Offset2D,
+}
+
+impl Default for SubpassFragmentDensityMapOffsetEndInfoQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM,
+            next: ptr::null(),
+            fragment_density_offset_count: u32::default(),
+            fragment_density_offsets: ptr::null(),
         }
     }
 }
