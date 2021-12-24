@@ -4809,6 +4809,10 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR: Self = Self(1000413001);
     pub const DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR: Self = Self(1000413002);
     pub const DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR: Self = Self(1000413003);
+    pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM: Self = Self(1000425000);
+    pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM: Self = Self(1000425001);
+    pub const SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM: Self = Self(1000425002);
+    pub const PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV: Self = Self(1000430000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5476,6 +5480,16 @@ impl fmt::Debug for StructureType {
             1000413001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR"),
             1000413002 => write!(f, "DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR"),
             1000413003 => write!(f, "DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR"),
+            1000425000 => write!(
+                f,
+                "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM"
+            ),
+            1000425001 => write!(
+                f,
+                "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM"
+            ),
+            1000425002 => write!(f, "SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM"),
+            1000430000 => write!(f, "PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV"),
             _ => self.0.fmt(f),
         }
     }
