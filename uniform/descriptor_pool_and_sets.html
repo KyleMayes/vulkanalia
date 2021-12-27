@@ -154,7 +154,7 @@
                     <main>
                         <h1><a class="header" href="#descriptor-pool-and-sets" id="descriptor-pool-and-sets">Descriptor pool and sets</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/22_descriptor_sets.rs">main.rs</a></p>
-<p>The descriptor layout from the previous chapter describes the type of descriptors that can be bound. In this chapter we're going to create a descriptor set for each <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a> resource to bind it to the uniform buffer descriptor.</p>
+<p>The descriptor layout from the previous chapter describes the type of descriptors that can be bound. In this chapter we're going to create a descriptor set for each <code>vk::Buffer</code> resource to bind it to the uniform buffer descriptor.</p>
 <h2><a class="header" href="#descriptor-pool" id="descriptor-pool">Descriptor pool</a></h2>
 <p>Descriptor sets can't be created directly, they must be allocated from a pool like command buffers. The equivalent for descriptor sets is unsurprisingly called a <em>descriptor pool</em>. We'll write a new function <code>create_descriptor_pool</code> to set it up.</p>
 <pre><code class="language-rust noplaypen">impl App {
@@ -170,18 +170,18 @@ unsafe fn create_descriptor_pool(device: &amp;Device, data: &amp;mut AppData) -&
     Ok(())
 }
 </code></pre>
-<p>We first need to describe which descriptor types our descriptor sets are going to contain and how many of them, using <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DescriptorPoolSize.html"><code class="hljs">vk::DescriptorPoolSize</code></a> structures.</p>
+<p>We first need to describe which descriptor types our descriptor sets are going to contain and how many of them, using <code>vk::DescriptorPoolSize</code> structures.</p>
 <pre><code class="language-rust noplaypen">let ubo_size = vk::DescriptorPoolSize::builder()
     .type_(vk::DescriptorType::UNIFORM_BUFFER)
     .descriptor_count(data.swapchain_images.len() as u32);
 </code></pre>
-<p>We will allocate one of these descriptors for every frame. This pool size structure is referenced by the main <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DescriptorPoolCreateInfo.html"><code class="hljs">vk::DescriptorPoolCreateInfo</code></a> along with the maximum number of descriptor sets that may be allocated:</p>
+<p>We will allocate one of these descriptors for every frame. This pool size structure is referenced by the main <code>vk::DescriptorPoolCreateInfo</code> along with the maximum number of descriptor sets that may be allocated:</p>
 <pre><code class="language-rust noplaypen">let pool_sizes = &amp;[ubo_size];
 let info = vk::DescriptorPoolCreateInfo::builder()
     .pool_sizes(pool_sizes)
     .max_sets(data.swapchain_images.len() as u32);
 </code></pre>
-<p>The structure has an optional flag similar to command pools that determines if individual descriptor sets can be freed or not: <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DescriptorPoolCreateFlags.html#associatedconstant.FREE_DESCRIPTOR_SET"><code class="hljs">vk::DescriptorPoolCreateFlags::FREE_DESCRIPTOR_SET</code></a>. We're not going to touch the descriptor set after creating it, so we don't need this flag.</p>
+<p>The structure has an optional flag similar to command pools that determines if individual descriptor sets can be freed or not: <code>vk::DescriptorPoolCreateFlags::FREE_DESCRIPTOR_SET</code>. We're not going to touch the descriptor set after creating it, so we don't need this flag.</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
     uniform_buffers: Vec&lt;vk::Buffer&gt;,
@@ -190,7 +190,7 @@ let info = vk::DescriptorPoolCreateInfo::builder()
     // ...
 }
 </code></pre>
-<p>Add a new <code>AppData</code> field to store the handle of the descriptor pool so you can call <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_descriptor_pool"><code class="hljs">create_descriptor_pool</code></a> to create it.</p>
+<p>Add a new <code>AppData</code> field to store the handle of the descriptor pool so you can call <code>create_descriptor_pool</code> to create it.</p>
 <pre><code class="language-rust noplaypen">data.descriptor_pool = device.create_descriptor_pool(&amp;info, None)?;
 </code></pre>
 <p>The descriptor pool should be destroyed when the swapchain is recreated because it depends on the number of images:</p>
@@ -229,7 +229,7 @@ unsafe fn create_descriptor_sets(device: &amp;Device, data: &amp;mut AppData) -&
     Ok(())
 }
 </code></pre>
-<p>A descriptor set allocation is described with a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DescriptorSetAllocateInfo.html"><code class="hljs">vk::DescriptorSetAllocateInfo</code></a> struct. You need to specify the descriptor pool to allocate from, the number of descriptor sets to allocate, and the descriptor layout to base them on:</p>
+<p>A descriptor set allocation is described with a <code>vk::DescriptorSetAllocateInfo</code> struct. You need to specify the descriptor pool to allocate from, the number of descriptor sets to allocate, and the descriptor layout to base them on:</p>
 <pre><code class="language-rust noplaypen">let layouts = vec![data.descriptor_set_layout; data.swapchain_images.len()];
 let info = vk::DescriptorSetAllocateInfo::builder()
     .descriptor_pool(data.descriptor_pool)
@@ -244,16 +244,16 @@ let info = vk::DescriptorSetAllocateInfo::builder()
     // ...
 }
 </code></pre>
-<p>And then allocate them with <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_descriptor_sets"><code class="hljs">allocate_descriptor_sets</code></a>:</p>
+<p>And then allocate them with <code>allocate_descriptor_sets</code>:</p>
 <pre><code class="language-rust noplaypen">data.descriptor_sets = device.allocate_descriptor_sets(&amp;info)?;
 </code></pre>
-<p>You don't need to explicitly clean up descriptor sets, because they will be automatically freed when the descriptor pool is destroyed. The call to <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_descriptor_sets"><code class="hljs">allocate_descriptor_sets</code></a> will allocate descriptor sets, each with one uniform buffer descriptor.</p>
+<p>You don't need to explicitly clean up descriptor sets, because they will be automatically freed when the descriptor pool is destroyed. The call to <code>allocate_descriptor_sets</code> will allocate descriptor sets, each with one uniform buffer descriptor.</p>
 <p>The descriptor sets have been allocated now, but the descriptors within still need to be configured. We'll now add a loop to populate every descriptor:</p>
 <pre><code class="language-rust noplaypen">for i in 0..data.swapchain_images.len() {
 
 }
 </code></pre>
-<p>Descriptors that refer to buffers, like our uniform buffer descriptor, are configured with a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DescriptorBufferInfo.html"><code class="hljs">vk::DescriptorBufferInfo</code></a> struct. This structure specifies the buffer and the region within it that contains the data for the descriptor.</p>
+<p>Descriptors that refer to buffers, like our uniform buffer descriptor, are configured with a <code>vk::DescriptorBufferInfo</code> struct. This structure specifies the buffer and the region within it that contains the data for the descriptor.</p>
 <pre><code class="language-rust noplaypen">for i in 0..data.swapchain_images.len() {
     let info = vk::DescriptorBufferInfo::builder()
         .buffer(data.uniform_buffers[i])
@@ -261,7 +261,7 @@ let info = vk::DescriptorSetAllocateInfo::builder()
         .range(size_of::&lt;UniformBufferObject&gt;() as u64);
 }
 </code></pre>
-<p>If you're overwriting the whole buffer, like we are in this case, then it is is also possible to use the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/constant.WHOLE_SIZE.html"><code class="hljs">vk::WHOLE_SIZE</code></a> value for the range. The configuration of descriptors is updated using the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.update_descriptor_sets"><code class="hljs">update_descriptor_sets</code></a> function, which takes an array of <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.WriteDescriptorSet.html"><code class="hljs">vk::WriteDescriptorSet</code></a> structs as parameter.</p>
+<p>If you're overwriting the whole buffer, like we are in this case, then it is is also possible to use the <code>vk::WHOLE_SIZE</code> value for the range. The configuration of descriptors is updated using the <code>update_descriptor_sets</code> function, which takes an array of <code>vk::WriteDescriptorSet</code> structs as parameter.</p>
 <pre><code class="language-rust noplaypen">let buffer_info = &amp;[info];
 let ubo_write = vk::WriteDescriptorSet::builder()
     .dst_set(data.descriptor_sets[i])
@@ -278,9 +278,9 @@ let ubo_write = vk::WriteDescriptorSet::builder()
 <p>The last field references an array with <code>descriptor_count</code> structs that actually configure the descriptors. It depends on the type of descriptor which one of the three you actually need to use. The <code>buffer_info</code> field is used for descriptors that refer to buffer data, <code>image_info</code> is used for descriptors that refer to image data, and <code>texel_buffer_view</code> is used for descriptors that refer to buffer views. Our descriptor is based on buffers, so we're using <code>buffer_info</code>.</p>
 <pre><code class="language-rust noplaypen">device.update_descriptor_sets(&amp;[ubo_write], &amp;[] as &amp;[vk::CopyDescriptorSet]);
 </code></pre>
-<p>The updates are applied using <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.update_descriptor_sets"><code class="hljs">update_descriptor_sets</code></a>. It accepts two kinds of arrays as parameters: an array of <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.WriteDescriptorSet.html"><code class="hljs">vk::WriteDescriptorSet</code></a> and an array of <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.CopyDescriptorSet.html"><code class="hljs">vk::CopyDescriptorSet</code></a>. The latter can be used to copy descriptors to each other, as its name implies.</p>
+<p>The updates are applied using <code>update_descriptor_sets</code>. It accepts two kinds of arrays as parameters: an array of <code>vk::WriteDescriptorSet</code> and an array of <code>vk::CopyDescriptorSet</code>. The latter can be used to copy descriptors to each other, as its name implies.</p>
 <h2><a class="header" href="#using-descriptor-sets" id="using-descriptor-sets">Using descriptor sets</a></h2>
-<p>We now need to update the <code>create_command_buffers</code> function to actually bind the right descriptor set for each swapchain image to the descriptors in the shader with <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_bind_descriptor_sets"><code class="hljs">cmd_bind_descriptor_sets</code></a>. This needs to be done before the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_draw_indexed"><code class="hljs">cmd_draw_indexed</code></a> call:</p>
+<p>We now need to update the <code>create_command_buffers</code> function to actually bind the right descriptor set for each swapchain image to the descriptors in the shader with <code>cmd_bind_descriptor_sets</code>. This needs to be done before the <code>cmd_draw_indexed</code> call:</p>
 <pre><code class="language-rust noplaypen">device.cmd_bind_descriptor_sets(
     *command_buffer,
     vk::PipelineBindPoint::GRAPHICS,
@@ -292,7 +292,7 @@ let ubo_write = vk::WriteDescriptorSet::builder()
 device.cmd_draw_indexed(*command_buffer, INDICES.len() as u32, 1, 0, 0, 0);
 </code></pre>
 <p>Unlike vertex and index buffers, descriptor sets are not unique to graphics pipelines. Therefore we need to specify if we want to bind descriptor sets to the graphics or compute pipeline. The next parameter is the layout that the descriptors are based on. The next three parameters specify the index of the first descriptor set, the number of sets to bind, and the array of sets to bind. We'll get back to this in a moment. The last two parameters specify an array of offsets that are used for dynamic descriptors. We'll look at these in a future chapter.</p>
-<p>If you run your program now, then you'll notice that unfortunately nothing is visible. The problem is that because of the Y-flip we did in the projection matrix, the vertices are now being drawn in counter-clockwise order instead of clockwise order. This causes backface culling to kick in and prevents any geometry from being drawn. Go to the <code>create_pipeline</code> function and modify the <code>front_face</code> in <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.PipelineRasterizationStateCreateInfo.html"><code class="hljs">vk::PipelineRasterizationStateCreateInfo</code></a> to correct this:</p>
+<p>If you run your program now, then you'll notice that unfortunately nothing is visible. The problem is that because of the Y-flip we did in the projection matrix, the vertices are now being drawn in counter-clockwise order instead of clockwise order. This causes backface culling to kick in and prevents any geometry from being drawn. Go to the <code>create_pipeline</code> function and modify the <code>front_face</code> in <code>vk::PipelineRasterizationStateCreateInfo</code> to correct this:</p>
 <pre><code class="language-rust noplaypen">    .cull_mode(vk::CullModeFlags::BACK)
     .front_face(vk::FrontFace::COUNTER_CLOCKWISE)
 </code></pre>
