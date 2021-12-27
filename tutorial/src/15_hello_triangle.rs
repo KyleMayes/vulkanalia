@@ -435,7 +435,7 @@ unsafe fn create_swapchain(window: &Window, instance: &Instance, device: &Device
     data.swapchain_extent = extent;
 
     let mut image_count = support.capabilities.min_image_count + 1;
-    if support.capabilities.max_image_count != 0 && image_count > support.capabilities.min_image_count {
+    if support.capabilities.max_image_count != 0 && image_count > support.capabilities.max_image_count {
         image_count = support.capabilities.max_image_count;
     }
 

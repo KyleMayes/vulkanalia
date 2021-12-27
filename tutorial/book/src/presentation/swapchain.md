@@ -320,7 +320,7 @@ We should also make sure to not exceed the maximum number of images while doing 
 ```rust,noplaypen
 let mut image_count = support.capabilities.min_image_count + 1;
 if support.capabilities.max_image_count != 0
-    && image_count > support.capabilities.min_image_count
+    && image_count > support.capabilities.max_image_count
 {
     image_count = support.capabilities.max_image_count;
 }
