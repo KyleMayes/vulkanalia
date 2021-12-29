@@ -40,14 +40,7 @@ jobs:
           command: install
           args: mdbook --version ${{ env.MDBOOK_VERSION }} --no-default-features
       # Publish
-      - name: Cache Index
-        id: cache-index
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.GITHUB_WORKSPACE }}/index.txt
-          key: ${{ hashFiles('Vulkan-Docs', 'generator/**') }}
       - name: Build Index
-        if: steps.cache-index.outputs.cache-hit != 'true'
         working-directory: ./generator
         run: ./gradlew run --args="--directory=.. index"
       - name: Cache Preprocessor
