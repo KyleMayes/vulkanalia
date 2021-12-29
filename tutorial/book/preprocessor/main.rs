@@ -3,6 +3,7 @@
 use std::collections::HashMap;
 use std::io;
 use std::process;
+use std::sync::atomic::{AtomicUsize, Ordering};
 
 use anyhow::{anyhow, Result};
 use clap::{App, Arg, SubCommand};
@@ -16,6 +17,9 @@ use pulldown_cmark_to_cmark::cmark;
 const INDEX: &str = include_str!("../../../index.txt");
 /// The version of `vulkanalia` used by the tutorial.
 const VERSION: &str = "0.12.0";
+
+/// The number of documentation link replacements made.
+static REPLACEMENTS: AtomicUsize = AtomicUsize::new(0);
 
 #[rustfmt::skip]
 pub fn app() -> App<'static, 'static> {
@@ -49,6 +53,9 @@ fn main() -> Result<()> {
     let index = load_index();
     book.for_each_mut(|i| preprocess_item(i, &index).unwrap());
     serde_json::to_writer(io::stdout(), &book)?;
+
+    let replacements = REPLACEMENTS.load(Ordering::Relaxed);
+    info!("Made {} documentation link replacements.", replacements);
 
     Ok(())
 }
@@ -92,6 +99,7 @@ fn preprocess_item(item: &mut BookItem, index: &HashMap<&str, &str>) -> Result<(
 fn map_event<'e>(event: Event<'e>, index: &HashMap<&str, &str>) -> Event<'e> {
     if let Event::Code(code) = &event {
         if let Some(url) = index.get(&code[..]) {
+            REPLACEMENTS.fetch_add(1, Ordering::Relaxed);
             let url = url.replace("%VERSION%", VERSION);
             Event::Html(format!("<a href=\"{}\"><code class=\"hljs\">{}</code></a>", url, code).into())
         } else if let Some(code) = code.strip_prefix('^') {
