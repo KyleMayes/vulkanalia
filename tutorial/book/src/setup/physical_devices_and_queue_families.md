@@ -146,11 +146,7 @@ unsafe fn check_physical_device(
 Lastly we can iterate over the physical devices and pick the first that satisfies our requirements as indicated by `check_physical_device`. To do this, update `pick_physical_device` to look like the following:
 
 ```rust,noplaypen
-unsafe fn check_physical_device(
-    instance: &Instance,
-    data: &AppData,
-    physical_device: vk::PhysicalDevice,
-) -> Result<()> {
+unsafe fn pick_physical_device(instance: &Instance, data: &mut AppData) -> Result<()> {
     for physical_device in instance.enumerate_physical_devices()? {
         let properties = instance.get_physical_device_properties(physical_device);
 
