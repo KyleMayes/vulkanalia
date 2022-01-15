@@ -2,6 +2,7 @@
 
 ### Bindings Updates
 - [December 20, 2021 Vulkan 1.2.203 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ac23aa229fd9b8ea06aa99cf07b79cdc15af406f)
+- [Add a new driver id VK_DRIVER_ID_MESA_VENUS (#1733)](https://github.com/KhronosGroup/Vulkan-Docs/commit/5a1f1580c773f0db57507e6de14a34e4613f3a38)
 
 ## [0.13.0] - 2021-12-14
 
