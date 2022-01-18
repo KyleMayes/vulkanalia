@@ -593,6 +593,8 @@ private val opaque = setOf(
     "IDirectFB",
     "IDirectFBSurface",
     "CAMetalLayer",
+    "_screen_context",
+    "_screen_window",
     "wl_display",
     "wl_surface",
     "SECURITY_ATTRIBUTES",

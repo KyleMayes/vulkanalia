@@ -338,7 +338,7 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
     #[inline]
     unsafe fn get_android_hardware_buffer_properties_android(
         &self,
-        buffer: &AHardwareBuffer,
+        buffer: *const AHardwareBuffer,
         properties: &mut AndroidHardwareBufferPropertiesANDROID,
     ) -> crate::VkResult<()> {
         let __result = (self
@@ -1069,22 +1069,19 @@ pub trait ExtDirectfbSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceDirectFBPresentationSupportEXT.html>
     #[inline]
-    unsafe fn get_physical_device_direct_fb_presentation_support_ext<T_IDirectFB>(
+    unsafe fn get_physical_device_direct_fb_presentation_support_ext(
         &self,
         physical_device: PhysicalDevice,
         queue_family_index: u32,
-    ) -> T_IDirectFB {
-        let mut dfb = MaybeUninit::<T_IDirectFB>::uninit();
-
+        dfb: *mut IDirectFB,
+    ) {
         let __result = (self
             .commands()
             .get_physical_device_direct_fb_presentation_support_ext)(
             physical_device,
             queue_family_index,
-            dfb.as_mut_ptr().cast::<c_void>(),
+            dfb,
         );
-
-        dfb.assume_init()
     }
 }
 
@@ -6983,22 +6980,19 @@ pub trait KhrWaylandSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceWaylandPresentationSupportKHR.html>
     #[inline]
-    unsafe fn get_physical_device_wayland_presentation_support_khr<T_wl_display>(
+    unsafe fn get_physical_device_wayland_presentation_support_khr(
         &self,
         physical_device: PhysicalDevice,
         queue_family_index: u32,
-    ) -> T_wl_display {
-        let mut display = MaybeUninit::<T_wl_display>::uninit();
-
+        display: *mut wl_display,
+    ) {
         let __result = (self
             .commands()
             .get_physical_device_wayland_presentation_support_khr)(
             physical_device,
             queue_family_index,
-            display.as_mut_ptr().cast::<c_void>(),
+            display,
         );
-
-        display.assume_init()
     }
 }
 
@@ -7100,24 +7094,21 @@ pub trait KhrXcbSurfaceExtension: InstanceV1_0 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetPhysicalDeviceXcbPresentationSupportKHR.html>
     #[inline]
-    unsafe fn get_physical_device_xcb_presentation_support_khr<T_xcb_connection_t>(
+    unsafe fn get_physical_device_xcb_presentation_support_khr(
         &self,
         physical_device: PhysicalDevice,
         queue_family_index: u32,
+        connection: *mut xcb_connection_t,
         visual_id: xcb_visualid_t,
-    ) -> T_xcb_connection_t {
-        let mut connection = MaybeUninit::<T_xcb_connection_t>::uninit();
-
+    ) {
         let __result = (self
             .commands()
             .get_physical_device_xcb_presentation_support_khr)(
             physical_device,
             queue_family_index,
-            connection.as_mut_ptr().cast::<c_void>(),
+            connection,
             visual_id,
         );
-
-        connection.assume_init()
     }
 }
 
@@ -8577,18 +8568,15 @@ pub trait QnxScreenSurfaceExtension: InstanceV1_0 {
         &self,
         physical_device: PhysicalDevice,
         queue_family_index: u32,
-    ) -> _screen_window {
-        let mut window = MaybeUninit::<_screen_window>::uninit();
-
+        window: *mut _screen_window,
+    ) {
         let __result = (self
             .commands()
             .get_physical_device_screen_presentation_support_qnx)(
             physical_device,
             queue_family_index,
-            window.as_mut_ptr(),
+            window,
         );
-
-        window.assume_init()
     }
 }
 

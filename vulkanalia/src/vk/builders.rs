@@ -47560,14 +47560,14 @@ impl<'b> ScreenSurfaceCreateInfoQNXBuilder<'b> {
     }
 
     #[inline]
-    pub fn context(mut self, context: &'b mut _screen_context) -> Self {
-        self.value.context = context as *mut _screen_context;
+    pub fn context(mut self, context: *mut _screen_context) -> Self {
+        self.value.context = context;
         self
     }
 
     #[inline]
-    pub fn window(mut self, window: &'b mut _screen_window) -> Self {
-        self.value.window = window as *mut _screen_window;
+    pub fn window(mut self, window: *mut _screen_window) -> Self {
+        self.value.window = window;
         self
     }
 
