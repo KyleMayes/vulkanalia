@@ -36,6 +36,13 @@ fun Registry.generateCommandWrapper(command: Command): String {
     // The Rust arguments for the command after setup.
     val actualArgs = mutableListOf<String>()
 
+    // Some commands return a value directly instead of returning values using
+    // output pointer parameters.
+    if (!hasErrorCodes && command.result.getIdentifier()?.value != "void") {
+        resultTypes.add(command.result.generate())
+        resultExprs.add("__result")
+    }
+
     fun addArgument(actual: String, setup: String? = null) {
         setupArgs.add(setup ?: actual)
         actualArgs.add(actual)

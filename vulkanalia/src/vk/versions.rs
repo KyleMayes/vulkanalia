@@ -3162,14 +3162,18 @@ pub trait DeviceV1_2: DeviceV1_1 {
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferDeviceAddress.html>
     #[inline]
-    unsafe fn get_buffer_device_address(&self, info: &BufferDeviceAddressInfo) {
+    unsafe fn get_buffer_device_address(&self, info: &BufferDeviceAddressInfo) -> DeviceAddress {
         let __result = (self.commands().get_buffer_device_address)(self.handle(), info);
+
+        __result
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetBufferOpaqueCaptureAddress.html>
     #[inline]
-    unsafe fn get_buffer_opaque_capture_address(&self, info: &BufferDeviceAddressInfo) {
+    unsafe fn get_buffer_opaque_capture_address(&self, info: &BufferDeviceAddressInfo) -> u64 {
         let __result = (self.commands().get_buffer_opaque_capture_address)(self.handle(), info);
+
+        __result
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetDeviceMemoryOpaqueCaptureAddress.html>
@@ -3177,9 +3181,11 @@ pub trait DeviceV1_2: DeviceV1_1 {
     unsafe fn get_device_memory_opaque_capture_address(
         &self,
         info: &DeviceMemoryOpaqueCaptureAddressInfo,
-    ) {
+    ) -> u64 {
         let __result =
             (self.commands().get_device_memory_opaque_capture_address)(self.handle(), info);
+
+        __result
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkGetSemaphoreCounterValue.html>

@@ -6,6 +6,7 @@
 
 ### Fixed
 - Fixed signatures for commands that take opaque pointers as arguments
+- Fixed signatures for commands that always return values successfully (#81)
 
 ## [0.13.0] - 2021-12-14
 
