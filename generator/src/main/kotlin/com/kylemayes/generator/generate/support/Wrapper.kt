@@ -15,6 +15,7 @@ import com.kylemayes.generator.support.PeekableIterator
 fun Registry.generateCommandWrapper(command: Command): String {
     val type = getCommandType(command)
     val hasSuccessCodes = getCommandSuccessCodes(command).isNotEmpty()
+    val hasErrorCodes = command.result.getIdentifier()?.value == "Result"
 
     // The Rust method type parameters.
     val typeParams = mutableListOf<String>()
@@ -34,6 +35,13 @@ fun Registry.generateCommandWrapper(command: Command): String {
     val setupArgs = mutableListOf<String>()
     // The Rust arguments for the command after setup.
     val actualArgs = mutableListOf<String>()
+
+    // Some commands return a value directly instead of returning values using
+    // output pointer parameters.
+    if (!hasErrorCodes && command.result.getIdentifier()?.value != "void") {
+        resultTypes.add(command.result.generate())
+        resultExprs.add("__result")
+    }
 
     fun addArgument(actual: String, setup: String? = null) {
         setupArgs.add(setup ?: actual)
@@ -152,18 +160,23 @@ fun Registry.generateCommandWrapper(command: Command): String {
         } else if (current.type is PointerType) {
             // Pointer parameter.
             val pointee = current.type.pointee
+
+            // Non-const pointer parameters are usually used for command
+            // outputs. However, non-const pointer parameters are used for
+            // command inputs when the pointer is to an opaque platform type
+            // (e.g., a Wayland display [`wl_display*`]).
+            val output = !current.type.const && !current.type.isOpaquePointer()
+
+            // The user needs to be able to supply a command output as a command
+            // input when the output type is an extendable struct so that the
+            // user can provide the extension structs for the information they
+            // want to be populated in the output parameter.
             val extendable = getStructExtensions().containsKey(pointee.getIdentifier())
-            if (!current.type.const && !extendable) {
+
+            if (output && !extendable) {
                 // Output pointer parameter (uninit-provided).
 
-                val (pointeeType, argCast) = if (current.type.isOpaquePointer()) {
-                    val typeParam = "T_${pointee.generate()}"
-                    typeParams.add(typeParam)
-                    Pair(typeParam, ".cast::<c_void>()")
-                } else {
-                    Pair(pointee.generate(), "")
-                }
-
+                val pointeeType = pointee.generate()
                 val (resultType, exprCast) = if (pointeeType == "Bool32") {
                     Pair("bool", " == TRUE")
                 } else {
@@ -173,14 +186,14 @@ fun Registry.generateCommandWrapper(command: Command): String {
                 preActualStmts.add("let mut ${current.name} = MaybeUninit::<$pointeeType>::uninit();")
                 resultTypes.add(resultType)
                 resultExprs.add("${current.name}.assume_init()$exprCast")
-                addArgument("${current.name}.as_mut_ptr()$argCast")
-            } else if (!current.type.const && extendable) {
+                addArgument("${current.name}.as_mut_ptr()")
+            } else if (output && extendable) {
                 // Output pointer parameter (user-provided).
-                //
-                // The user needs to be able to supply the output struct when it
-                // is extendable so that the user can add the extension structs
-                // for the information they want.
                 params.add("${current.name}: &mut ${pointee.generate()}")
+                addArgument(current.name.value)
+            } else if (current.type.isOpaquePointer()) {
+                // Input pointer parameter (opaque).
+                params.add("${current.name}: ${current.type.generate()}")
                 addArgument(current.name.value)
             } else if (current.optional) {
                 // Input pointer parameter (optional).
@@ -209,12 +222,11 @@ fun Registry.generateCommandWrapper(command: Command): String {
     // Generate method signature components.
 
     val generics = typeParams.joinToString(prefix = "<", postfix = ">").replace("<>", "")
-    val fallible = command.result.getIdentifier()?.value == "Result"
     val resultType = resultTypes.joinTuple()
     val outputType = when {
         hasSuccessCodes && resultType == "()" -> "-> crate::VkResult<SuccessCode>"
         hasSuccessCodes -> "-> crate::VkSuccessResult<$resultType>"
-        fallible -> "-> crate::VkResult<$resultType>"
+        hasErrorCodes -> "-> crate::VkResult<$resultType>"
         resultType != "()" -> " -> $resultType"
         else -> ""
     }
@@ -243,7 +255,7 @@ if __result >= Result::SUCCESS {
     Err(__result.into())
 }
             """
-        fallible ->
+        hasErrorCodes ->
             """
 if __result == Result::SUCCESS {
     Ok($resultExpr)
