@@ -14,25 +14,25 @@
     clippy::upper_case_acronyms
 )]
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_MAKE_VERSION.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_MAKE_VERSION.html>
 #[inline]
 pub const fn make_version(major: u32, minor: u32, patch: u32) -> u32 {
     (major << 22) | (minor << 12) | patch
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_VERSION_MAJOR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_VERSION_MAJOR.html>
 #[inline]
 pub const fn version_major(version: u32) -> u32 {
     version >> 22
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_VERSION_MINOR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_VERSION_MINOR.html>
 #[inline]
 pub const fn version_minor(version: u32) -> u32 {
     (version >> 12) & 0x3FF
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VK_VERSION_PATCH.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_VERSION_PATCH.html>
 #[inline]
 pub const fn version_patch(version: u32) -> u32 {
     version & 0xFFF

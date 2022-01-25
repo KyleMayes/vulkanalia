@@ -31,12 +31,12 @@ impl SuccessCode {
     pub const EVENT_SET: Self = Self(3);
     pub const EVENT_RESET: Self = Self(4);
     pub const INCOMPLETE: Self = Self(5);
+    pub const PIPELINE_COMPILE_REQUIRED: Self = Self(1000297000);
     pub const SUBOPTIMAL_KHR: Self = Self(1000001003);
     pub const THREAD_IDLE_KHR: Self = Self(1000268000);
     pub const THREAD_DONE_KHR: Self = Self(1000268001);
     pub const OPERATION_DEFERRED_KHR: Self = Self(1000268002);
     pub const OPERATION_NOT_DEFERRED_KHR: Self = Self(1000268003);
-    pub const PIPELINE_COMPILE_REQUIRED_EXT: Self = Self(1000297000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -60,12 +60,12 @@ impl fmt::Debug for SuccessCode {
             3 => write!(f, "EVENT_SET"),
             4 => write!(f, "EVENT_RESET"),
             5 => write!(f, "INCOMPLETE"),
+            1000297000 => write!(f, "PIPELINE_COMPILE_REQUIRED"),
             1000001003 => write!(f, "SUBOPTIMAL_KHR"),
             1000268000 => write!(f, "THREAD_IDLE_KHR"),
             1000268001 => write!(f, "THREAD_DONE_KHR"),
             1000268002 => write!(f, "OPERATION_DEFERRED_KHR"),
             1000268003 => write!(f, "OPERATION_NOT_DEFERRED_KHR"),
-            1000297000 => write!(f, "PIPELINE_COMPILE_REQUIRED_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -115,7 +115,7 @@ impl ErrorCode {
     pub const VALIDATION_FAILED_EXT: Self = Self(-1000011001);
     pub const INVALID_SHADER_NV: Self = Self(-1000012000);
     pub const INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT: Self = Self(-1000158000);
-    pub const NOT_PERMITTED_EXT: Self = Self(-1000174001);
+    pub const NOT_PERMITTED_KHR: Self = Self(-1000174001);
     pub const FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT: Self = Self(-1000255000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
@@ -158,7 +158,7 @@ impl fmt::Debug for ErrorCode {
             -1000011001 => write!(f, "VALIDATION_FAILED_EXT"),
             -1000012000 => write!(f, "INVALID_SHADER_NV"),
             -1000158000 => write!(f, "INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
-            -1000174001 => write!(f, "NOT_PERMITTED_EXT"),
+            -1000174001 => write!(f, "NOT_PERMITTED_KHR"),
             -1000255000 => write!(f, "FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT"),
             _ => self.0.fmt(f),
         }
@@ -192,7 +192,7 @@ impl fmt::Display for ErrorCode {
             -1000011001 => write!(f, "VALIDATION_FAILED_EXT"),
             -1000012000 => write!(f, "One or more shaders failed to compile or link. More details are reported back to the application via VK_EXT_debug_report if enabled."),
             -1000158000 => write!(f, "INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
-            -1000174001 => write!(f, "NOT_PERMITTED_EXT"),
+            -1000174001 => write!(f, "NOT_PERMITTED_KHR"),
             -1000255000 => write!(f, "An operation on a swapchain created with VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT failed as it did not have exclusive full-screen access. This may occur due to implementation-dependent reasons, outside of the application's control."),
             _ => write!(f, "unknown Vulkan result (code = {})", self.0),
         }

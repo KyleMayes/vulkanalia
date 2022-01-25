@@ -40,7 +40,7 @@ pub trait Handle: Copy + Clone + fmt::Debug + PartialEq + Eq + Hash + Default + 
     fn is_null(self) -> bool;
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct AccelerationStructureKHR(u64);
@@ -84,7 +84,7 @@ impl fmt::Debug for AccelerationStructureKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkAccelerationStructureNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct AccelerationStructureNV(u64);
@@ -128,7 +128,7 @@ impl fmt::Debug for AccelerationStructureNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBuffer.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBuffer.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Buffer(u64);
@@ -172,7 +172,7 @@ impl fmt::Debug for Buffer {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferCollectionFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBufferCollectionFUCHSIA.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct BufferCollectionFUCHSIA(u64);
@@ -216,7 +216,7 @@ impl fmt::Debug for BufferCollectionFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkBufferView.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBufferView.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct BufferView(u64);
@@ -260,7 +260,7 @@ impl fmt::Debug for BufferView {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandBuffer.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCommandBuffer.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct CommandBuffer(usize);
@@ -304,7 +304,7 @@ impl fmt::Debug for CommandBuffer {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCommandPool.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCommandPool.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct CommandPool(u64);
@@ -348,7 +348,7 @@ impl fmt::Debug for CommandPool {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCuFunctionNVX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCuFunctionNVX.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct CuFunctionNVX(u64);
@@ -392,7 +392,7 @@ impl fmt::Debug for CuFunctionNVX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkCuModuleNVX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCuModuleNVX.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct CuModuleNVX(u64);
@@ -436,7 +436,7 @@ impl fmt::Debug for CuModuleNVX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDebugReportCallbackEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDebugReportCallbackEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct DebugReportCallbackEXT(u64);
@@ -480,7 +480,7 @@ impl fmt::Debug for DebugReportCallbackEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDebugUtilsMessengerEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDebugUtilsMessengerEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct DebugUtilsMessengerEXT(u64);
@@ -524,7 +524,7 @@ impl fmt::Debug for DebugUtilsMessengerEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeferredOperationKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeferredOperationKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct DeferredOperationKHR(u64);
@@ -568,7 +568,7 @@ impl fmt::Debug for DeferredOperationKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDescriptorPool.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorPool.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct DescriptorPool(u64);
@@ -612,7 +612,7 @@ impl fmt::Debug for DescriptorPool {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDescriptorSet.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorSet.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct DescriptorSet(u64);
@@ -656,7 +656,7 @@ impl fmt::Debug for DescriptorSet {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDescriptorSetLayout.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorSetLayout.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct DescriptorSetLayout(u64);
@@ -700,7 +700,7 @@ impl fmt::Debug for DescriptorSetLayout {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDescriptorUpdateTemplate.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorUpdateTemplate.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct DescriptorUpdateTemplate(u64);
@@ -744,7 +744,7 @@ impl fmt::Debug for DescriptorUpdateTemplate {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDevice.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDevice.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Device(usize);
@@ -788,7 +788,7 @@ impl fmt::Debug for Device {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDeviceMemory.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceMemory.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct DeviceMemory(u64);
@@ -832,7 +832,7 @@ impl fmt::Debug for DeviceMemory {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDisplayKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDisplayKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct DisplayKHR(u64);
@@ -876,7 +876,7 @@ impl fmt::Debug for DisplayKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDisplayModeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDisplayModeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct DisplayModeKHR(u64);
@@ -920,7 +920,7 @@ impl fmt::Debug for DisplayModeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkEvent.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkEvent.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Event(u64);
@@ -964,7 +964,7 @@ impl fmt::Debug for Event {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFence.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFence.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Fence(u64);
@@ -1008,7 +1008,7 @@ impl fmt::Debug for Fence {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkFramebuffer.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFramebuffer.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Framebuffer(u64);
@@ -1052,7 +1052,7 @@ impl fmt::Debug for Framebuffer {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImage.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImage.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Image(u64);
@@ -1096,7 +1096,7 @@ impl fmt::Debug for Image {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkImageView.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageView.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct ImageView(u64);
@@ -1140,7 +1140,7 @@ impl fmt::Debug for ImageView {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkIndirectCommandsLayoutNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsLayoutNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct IndirectCommandsLayoutNV(u64);
@@ -1184,7 +1184,7 @@ impl fmt::Debug for IndirectCommandsLayoutNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkInstance.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkInstance.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Instance(usize);
@@ -1228,7 +1228,7 @@ impl fmt::Debug for Instance {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPerformanceConfigurationINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPerformanceConfigurationINTEL.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct PerformanceConfigurationINTEL(u64);
@@ -1276,7 +1276,7 @@ impl fmt::Debug for PerformanceConfigurationINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDevice.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevice.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct PhysicalDevice(usize);
@@ -1320,7 +1320,7 @@ impl fmt::Debug for PhysicalDevice {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipeline.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipeline.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Pipeline(u64);
@@ -1364,7 +1364,7 @@ impl fmt::Debug for Pipeline {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineCache.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineCache.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct PipelineCache(u64);
@@ -1408,7 +1408,7 @@ impl fmt::Debug for PipelineCache {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPipelineLayout.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineLayout.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct PipelineLayout(u64);
@@ -1452,15 +1452,15 @@ impl fmt::Debug for PipelineLayout {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPrivateDataSlotEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPrivateDataSlot.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
-pub struct PrivateDataSlotEXT(u64);
+pub struct PrivateDataSlot(u64);
 
-impl Handle for PrivateDataSlotEXT {
+impl Handle for PrivateDataSlot {
     type Repr = u64;
 
-    const TYPE: ObjectType = ObjectType::PRIVATE_DATA_SLOT_EXT;
+    const TYPE: ObjectType = ObjectType::PRIVATE_DATA_SLOT;
 
     #[inline]
     fn null() -> Self {
@@ -1483,20 +1483,20 @@ impl Handle for PrivateDataSlotEXT {
     }
 }
 
-impl Default for PrivateDataSlotEXT {
+impl Default for PrivateDataSlot {
     #[inline]
     fn default() -> Self {
         Self::null()
     }
 }
 
-impl fmt::Debug for PrivateDataSlotEXT {
+impl fmt::Debug for PrivateDataSlot {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "PrivateDataSlotEXT({:p})", self.0 as *const u8)
+        write!(f, "PrivateDataSlot({:p})", self.0 as *const u8)
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueryPool.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueryPool.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct QueryPool(u64);
@@ -1540,7 +1540,7 @@ impl fmt::Debug for QueryPool {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkQueue.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueue.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Queue(usize);
@@ -1584,7 +1584,7 @@ impl fmt::Debug for Queue {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkRenderPass.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPass.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct RenderPass(u64);
@@ -1628,7 +1628,7 @@ impl fmt::Debug for RenderPass {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSampler.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSampler.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Sampler(u64);
@@ -1672,7 +1672,7 @@ impl fmt::Debug for Sampler {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerYcbcrConversion.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrConversion.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct SamplerYcbcrConversion(u64);
@@ -1716,7 +1716,7 @@ impl fmt::Debug for SamplerYcbcrConversion {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSemaphore.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSemaphore.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct Semaphore(u64);
@@ -1760,7 +1760,7 @@ impl fmt::Debug for Semaphore {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkShaderModule.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderModule.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct ShaderModule(u64);
@@ -1804,7 +1804,7 @@ impl fmt::Debug for ShaderModule {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSurfaceKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSurfaceKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct SurfaceKHR(u64);
@@ -1848,7 +1848,7 @@ impl fmt::Debug for SurfaceKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSwapchainKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSwapchainKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct SwapchainKHR(u64);
@@ -1892,7 +1892,7 @@ impl fmt::Debug for SwapchainKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkValidationCacheEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkValidationCacheEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub struct ValidationCacheEXT(u64);
@@ -1936,7 +1936,9 @@ impl fmt::Debug for ValidationCacheEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDescriptorUpdateTemplateKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorUpdateTemplateKHR.html>
 pub type DescriptorUpdateTemplateKHR = DescriptorUpdateTemplate;
-/// <https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkSamplerYcbcrConversionKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPrivateDataSlotEXT.html>
+pub type PrivateDataSlotEXT = PrivateDataSlot;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrConversionKHR.html>
 pub type SamplerYcbcrConversionKHR = SamplerYcbcrConversion;
