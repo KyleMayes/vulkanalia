@@ -2,6 +2,8 @@
 
 ### Bindings Updates
 - [January 25, 2022 Vulkan 1.3.204 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/15d807ce4839d8feb523ca5c133a42a2aa448ade)
+- [xml/vk: Reference underlying type instead of typedef in `structextends` (#1746)](https://github.com/KhronosGroup/Vulkan-Docs/commit/3422ccac57350871eb5a087acf09ab932db71263)
+- [February 4, 2022 Vulkan 1.3.205 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9e4c847a9e93cccd5f46e173c3ccf752b89c35df)
 
 ## [0.14.0] - 2022-01-18
 

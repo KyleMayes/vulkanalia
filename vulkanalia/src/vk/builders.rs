@@ -5012,6 +5012,10 @@ unsafe impl Cast for BufferImageCopyBuilder {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`BufferImageCopy2`].
+pub unsafe trait ExtendsBufferImageCopy2: fmt::Debug {}
+unsafe impl ExtendsBufferImageCopy2 for CopyCommandTransformInfoQCOM {}
+
 unsafe impl Cast for BufferImageCopy2 {
     type Target = BufferImageCopy2;
 
@@ -5021,18 +5025,30 @@ unsafe impl Cast for BufferImageCopy2 {
     }
 }
 
-impl HasBuilder<'static> for BufferImageCopy2 {
-    type Builder = BufferImageCopy2Builder;
+impl<'b> HasBuilder<'b> for BufferImageCopy2 {
+    type Builder = BufferImageCopy2Builder<'b>;
 }
 
 /// A builder for a [`BufferImageCopy2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct BufferImageCopy2Builder {
+pub struct BufferImageCopy2Builder<'b> {
     value: BufferImageCopy2,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl BufferImageCopy2Builder {
+impl<'b> BufferImageCopy2Builder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsBufferImageCopy2,
+    {
+        let next = (next.as_mut() as *mut T).cast::<BufferImageCopy2>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn buffer_offset(mut self, buffer_offset: DeviceSize) -> Self {
         self.value.buffer_offset = buffer_offset;
@@ -5078,7 +5094,7 @@ impl BufferImageCopy2Builder {
     }
 }
 
-impl ops::Deref for BufferImageCopy2Builder {
+impl<'b> ops::Deref for BufferImageCopy2Builder<'b> {
     type Target = BufferImageCopy2;
 
     #[inline]
@@ -5087,14 +5103,14 @@ impl ops::Deref for BufferImageCopy2Builder {
     }
 }
 
-impl ops::DerefMut for BufferImageCopy2Builder {
+impl<'b> ops::DerefMut for BufferImageCopy2Builder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for BufferImageCopy2Builder {
+unsafe impl<'b> Cast for BufferImageCopy2Builder<'b> {
     type Target = BufferImageCopy2;
 
     #[inline]
@@ -16978,6 +16994,10 @@ unsafe impl Cast for ImageBlitBuilder {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`ImageBlit2`].
+pub unsafe trait ExtendsImageBlit2: fmt::Debug {}
+unsafe impl ExtendsImageBlit2 for CopyCommandTransformInfoQCOM {}
+
 unsafe impl Cast for ImageBlit2 {
     type Target = ImageBlit2;
 
@@ -16987,18 +17007,30 @@ unsafe impl Cast for ImageBlit2 {
     }
 }
 
-impl HasBuilder<'static> for ImageBlit2 {
-    type Builder = ImageBlit2Builder;
+impl<'b> HasBuilder<'b> for ImageBlit2 {
+    type Builder = ImageBlit2Builder<'b>;
 }
 
 /// A builder for a [`ImageBlit2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct ImageBlit2Builder {
+pub struct ImageBlit2Builder<'b> {
     value: ImageBlit2,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl ImageBlit2Builder {
+impl<'b> ImageBlit2Builder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsImageBlit2,
+    {
+        let next = (next.as_mut() as *mut T).cast::<ImageBlit2>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn src_subresource(
         mut self,
@@ -17035,7 +17067,7 @@ impl ImageBlit2Builder {
     }
 }
 
-impl ops::Deref for ImageBlit2Builder {
+impl<'b> ops::Deref for ImageBlit2Builder<'b> {
     type Target = ImageBlit2;
 
     #[inline]
@@ -17044,14 +17076,14 @@ impl ops::Deref for ImageBlit2Builder {
     }
 }
 
-impl ops::DerefMut for ImageBlit2Builder {
+impl<'b> ops::DerefMut for ImageBlit2Builder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for ImageBlit2Builder {
+unsafe impl<'b> Cast for ImageBlit2Builder<'b> {
     type Target = ImageBlit2;
 
     #[inline]
@@ -17704,17 +17736,12 @@ impl<'b> ImageFormatConstraintsInfoFUCHSIABuilder<'b> {
     }
 
     #[inline]
-    pub fn color_space_count(mut self, color_space_count: u32) -> Self {
-        self.value.color_space_count = color_space_count;
-        self
-    }
-
-    #[inline]
     pub fn color_spaces(
         mut self,
-        color_spaces: &'b impl Cast<Target = SysmemColorSpaceFUCHSIA>,
+        color_spaces: &'b [impl Cast<Target = SysmemColorSpaceFUCHSIA>],
     ) -> Self {
-        self.value.color_spaces = color_spaces.as_ref();
+        self.value.color_space_count = color_spaces.len() as u32;
+        self.value.color_spaces = color_spaces.as_ptr().cast();
         self
     }
 
@@ -18091,6 +18118,10 @@ unsafe impl<'b> Cast for ImageMemoryBarrierBuilder<'b> {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`ImageMemoryBarrier2`].
+pub unsafe trait ExtendsImageMemoryBarrier2: fmt::Debug {}
+unsafe impl ExtendsImageMemoryBarrier2 for SampleLocationsInfoEXT {}
+
 unsafe impl Cast for ImageMemoryBarrier2 {
     type Target = ImageMemoryBarrier2;
 
@@ -18100,18 +18131,30 @@ unsafe impl Cast for ImageMemoryBarrier2 {
     }
 }
 
-impl HasBuilder<'static> for ImageMemoryBarrier2 {
-    type Builder = ImageMemoryBarrier2Builder;
+impl<'b> HasBuilder<'b> for ImageMemoryBarrier2 {
+    type Builder = ImageMemoryBarrier2Builder<'b>;
 }
 
 /// A builder for a [`ImageMemoryBarrier2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct ImageMemoryBarrier2Builder {
+pub struct ImageMemoryBarrier2Builder<'b> {
     value: ImageMemoryBarrier2,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl ImageMemoryBarrier2Builder {
+impl<'b> ImageMemoryBarrier2Builder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsImageMemoryBarrier2,
+    {
+        let next = (next.as_mut() as *mut T).cast::<ImageMemoryBarrier2>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn src_stage_mask(mut self, src_stage_mask: PipelineStageFlags2) -> Self {
         self.value.src_stage_mask = src_stage_mask;
@@ -18181,7 +18224,7 @@ impl ImageMemoryBarrier2Builder {
     }
 }
 
-impl ops::Deref for ImageMemoryBarrier2Builder {
+impl<'b> ops::Deref for ImageMemoryBarrier2Builder<'b> {
     type Target = ImageMemoryBarrier2;
 
     #[inline]
@@ -18190,14 +18233,14 @@ impl ops::Deref for ImageMemoryBarrier2Builder {
     }
 }
 
-impl ops::DerefMut for ImageMemoryBarrier2Builder {
+impl<'b> ops::DerefMut for ImageMemoryBarrier2Builder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for ImageMemoryBarrier2Builder {
+unsafe impl<'b> Cast for ImageMemoryBarrier2Builder<'b> {
     type Target = ImageMemoryBarrier2;
 
     #[inline]

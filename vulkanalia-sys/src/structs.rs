@@ -9727,7 +9727,7 @@ impl Default for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
     pub s_type: StructureType,
-    pub next: *const c_void,
+    pub next: *mut c_void,
     pub rasterization_order_color_attachment_access: Bool32,
     pub rasterization_order_depth_attachment_access: Bool32,
     pub rasterization_order_stencil_attachment_access: Bool32,
@@ -9739,7 +9739,7 @@ impl Default for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
         Self {
             s_type:
                 StructureType::PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM,
-            next: ptr::null(),
+            next: ptr::null_mut(),
             rasterization_order_color_attachment_access: Bool32::default(),
             rasterization_order_depth_attachment_access: Bool32::default(),
             rasterization_order_stencil_attachment_access: Bool32::default(),
