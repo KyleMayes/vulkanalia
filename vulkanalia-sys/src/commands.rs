@@ -2265,6 +2265,20 @@ pub type PFN_vkGetDeferredOperationMaxConcurrencyKHR =
 pub type PFN_vkGetDeferredOperationResultKHR =
     unsafe extern "system" fn(_device: Device, _operation: DeferredOperationKHR) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetDescriptorSetHostMappingVALVE.html>
+pub type PFN_vkGetDescriptorSetHostMappingVALVE = unsafe extern "system" fn(
+    _device: Device,
+    _descriptor_set: DescriptorSet,
+    _data: *mut *mut c_void,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetDescriptorSetLayoutHostMappingInfoVALVE.html>
+pub type PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE = unsafe extern "system" fn(
+    _device: Device,
+    _binding_reference: *const DescriptorSetBindingReferenceVALVE,
+    _host_mapping: *mut DescriptorSetLayoutHostMappingInfoVALVE,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetDescriptorSetLayoutSupport.html>
 pub type PFN_vkGetDescriptorSetLayoutSupport = unsafe extern "system" fn(
     _device: Device,

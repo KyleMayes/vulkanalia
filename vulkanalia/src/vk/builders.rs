@@ -9540,6 +9540,70 @@ unsafe impl<'b> Cast for DescriptorSetAllocateInfoBuilder<'b> {
     }
 }
 
+unsafe impl Cast for DescriptorSetBindingReferenceVALVE {
+    type Target = DescriptorSetBindingReferenceVALVE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DescriptorSetBindingReferenceVALVE {
+    type Builder = DescriptorSetBindingReferenceVALVEBuilder;
+}
+
+/// A builder for a [`DescriptorSetBindingReferenceVALVE`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DescriptorSetBindingReferenceVALVEBuilder {
+    value: DescriptorSetBindingReferenceVALVE,
+}
+
+impl DescriptorSetBindingReferenceVALVEBuilder {
+    #[inline]
+    pub fn descriptor_set_layout(mut self, descriptor_set_layout: DescriptorSetLayout) -> Self {
+        self.value.descriptor_set_layout = descriptor_set_layout;
+        self
+    }
+
+    #[inline]
+    pub fn binding(mut self, binding: u32) -> Self {
+        self.value.binding = binding;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DescriptorSetBindingReferenceVALVE {
+        self.value
+    }
+}
+
+impl ops::Deref for DescriptorSetBindingReferenceVALVEBuilder {
+    type Target = DescriptorSetBindingReferenceVALVE;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DescriptorSetBindingReferenceVALVEBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DescriptorSetBindingReferenceVALVEBuilder {
+    type Target = DescriptorSetBindingReferenceVALVE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for DescriptorSetLayoutBinding {
     type Target = DescriptorSetLayoutBinding;
 
@@ -9762,6 +9826,70 @@ impl<'b> ops::DerefMut for DescriptorSetLayoutCreateInfoBuilder<'b> {
 
 unsafe impl<'b> Cast for DescriptorSetLayoutCreateInfoBuilder<'b> {
     type Target = DescriptorSetLayoutCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DescriptorSetLayoutHostMappingInfoVALVE {
+    type Target = DescriptorSetLayoutHostMappingInfoVALVE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DescriptorSetLayoutHostMappingInfoVALVE {
+    type Builder = DescriptorSetLayoutHostMappingInfoVALVEBuilder;
+}
+
+/// A builder for a [`DescriptorSetLayoutHostMappingInfoVALVE`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DescriptorSetLayoutHostMappingInfoVALVEBuilder {
+    value: DescriptorSetLayoutHostMappingInfoVALVE,
+}
+
+impl DescriptorSetLayoutHostMappingInfoVALVEBuilder {
+    #[inline]
+    pub fn descriptor_offset(mut self, descriptor_offset: usize) -> Self {
+        self.value.descriptor_offset = descriptor_offset;
+        self
+    }
+
+    #[inline]
+    pub fn descriptor_size(mut self, descriptor_size: u32) -> Self {
+        self.value.descriptor_size = descriptor_size;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DescriptorSetLayoutHostMappingInfoVALVE {
+        self.value
+    }
+}
+
+impl ops::Deref for DescriptorSetLayoutHostMappingInfoVALVEBuilder {
+    type Target = DescriptorSetLayoutHostMappingInfoVALVE;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DescriptorSetLayoutHostMappingInfoVALVEBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DescriptorSetLayoutHostMappingInfoVALVEBuilder {
+    type Target = DescriptorSetLayoutHostMappingInfoVALVE;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -10238,6 +10366,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDedicatedAllocationImageAl
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipEnableFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorIndexingFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
@@ -13339,6 +13468,12 @@ pub struct DrmFormatModifierPropertiesList2EXTBuilder<'b> {
 
 impl<'b> DrmFormatModifierPropertiesList2EXTBuilder<'b> {
     #[inline]
+    pub fn drm_format_modifier_count(mut self, drm_format_modifier_count: u32) -> Self {
+        self.value.drm_format_modifier_count = drm_format_modifier_count;
+        self
+    }
+
+    #[inline]
     pub fn drm_format_modifier_properties(
         mut self,
         drm_format_modifier_properties: &'b mut [impl Cast<Target = DrmFormatModifierProperties2EXT>],
@@ -13402,6 +13537,12 @@ pub struct DrmFormatModifierPropertiesListEXTBuilder<'b> {
 }
 
 impl<'b> DrmFormatModifierPropertiesListEXTBuilder<'b> {
+    #[inline]
+    pub fn drm_format_modifier_count(mut self, drm_format_modifier_count: u32) -> Self {
+        self.value.drm_format_modifier_count = drm_format_modifier_count;
+        self
+    }
+
     #[inline]
     pub fn drm_format_modifier_properties(
         mut self,
@@ -26016,6 +26157,64 @@ unsafe impl Cast for PhysicalDeviceDescriptorIndexingPropertiesBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
+    type Target = PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
+    type Builder = PhysicalDeviceDescriptorSetHostMappingFeaturesVALVEBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceDescriptorSetHostMappingFeaturesVALVEBuilder {
+    value: PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE,
+}
+
+impl PhysicalDeviceDescriptorSetHostMappingFeaturesVALVEBuilder {
+    #[inline]
+    pub fn descriptor_set_host_mapping(mut self, descriptor_set_host_mapping: bool) -> Self {
+        self.value.descriptor_set_host_mapping = descriptor_set_host_mapping as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVEBuilder {
+    type Target = PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVEBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVEBuilder {
+    type Target = PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {
     type Target = PhysicalDeviceDeviceGeneratedCommandsFeaturesNV;
 
@@ -27628,6 +27827,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipControlFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipEnableFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorIndexingFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
