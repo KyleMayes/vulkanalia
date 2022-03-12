@@ -2823,6 +2823,28 @@ impl Default for DescriptorSetAllocateInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorSetBindingReferenceVALVE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DescriptorSetBindingReferenceVALVE {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub descriptor_set_layout: DescriptorSetLayout,
+    pub binding: u32,
+}
+
+impl Default for DescriptorSetBindingReferenceVALVE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DESCRIPTOR_SET_BINDING_REFERENCE_VALVE,
+            next: ptr::null(),
+            descriptor_set_layout: DescriptorSetLayout::default(),
+            binding: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorSetLayoutBinding.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2889,6 +2911,28 @@ impl Default for DescriptorSetLayoutCreateInfo {
             flags: DescriptorSetLayoutCreateFlags::default(),
             binding_count: u32::default(),
             bindings: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorSetLayoutHostMappingInfoVALVE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DescriptorSetLayoutHostMappingInfoVALVE {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub descriptor_offset: usize,
+    pub descriptor_size: u32,
+}
+
+impl Default for DescriptorSetLayoutHostMappingInfoVALVE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE,
+            next: ptr::null_mut(),
+            descriptor_offset: usize::default(),
+            descriptor_size: u32::default(),
         }
     }
 }
@@ -7584,6 +7628,26 @@ impl Default for PhysicalDeviceDescriptorIndexingProperties {
             max_descriptor_set_update_after_bind_sampled_images: u32::default(),
             max_descriptor_set_update_after_bind_storage_images: u32::default(),
             max_descriptor_set_update_after_bind_input_attachments: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub descriptor_set_host_mapping: Bool32,
+}
+
+impl Default for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE,
+            next: ptr::null_mut(),
+            descriptor_set_host_mapping: Bool32::default(),
         }
     }
 }

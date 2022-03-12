@@ -327,6 +327,9 @@ pub struct DeviceCommands {
     pub get_calibrated_timestamps_ext: PFN_vkGetCalibratedTimestampsEXT,
     pub get_deferred_operation_max_concurrency_khr: PFN_vkGetDeferredOperationMaxConcurrencyKHR,
     pub get_deferred_operation_result_khr: PFN_vkGetDeferredOperationResultKHR,
+    pub get_descriptor_set_host_mapping_valve: PFN_vkGetDescriptorSetHostMappingVALVE,
+    pub get_descriptor_set_layout_host_mapping_info_valve:
+        PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE,
     pub get_descriptor_set_layout_support: PFN_vkGetDescriptorSetLayoutSupport,
     pub get_descriptor_set_layout_support_khr: PFN_vkGetDescriptorSetLayoutSupportKHR,
     pub get_device_acceleration_structure_compatibility_khr:
@@ -5123,6 +5126,40 @@ impl DeviceCommands {
                         _operation: DeferredOperationKHR,
                     ) -> Result {
                         panic!("could not load vkGetDeferredOperationResultKHR")
+                    }
+                    fallback
+                }
+            },
+            get_descriptor_set_host_mapping_valve: {
+                let value = loader(b"vkGetDescriptorSetHostMappingVALVE\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _descriptor_set: DescriptorSet,
+                        _data: *mut *mut c_void,
+                    ) {
+                        panic!("could not load vkGetDescriptorSetHostMappingVALVE")
+                    }
+                    fallback
+                }
+            },
+            get_descriptor_set_layout_host_mapping_info_valve: {
+                let value = loader(
+                    b"vkGetDescriptorSetLayoutHostMappingInfoVALVE\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _binding_reference: *const DescriptorSetBindingReferenceVALVE,
+                        _host_mapping: *mut DescriptorSetLayoutHostMappingInfoVALVE,
+                    ) {
+                        panic!("could not load vkGetDescriptorSetLayoutHostMappingInfoVALVE")
                     }
                     fallback
                 }

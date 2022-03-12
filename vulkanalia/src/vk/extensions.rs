@@ -8626,6 +8626,51 @@ pub trait QnxScreenSurfaceExtension: InstanceV1_0 {
 
 impl QnxScreenSurfaceExtension for crate::Instance {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_VALVE_descriptor_set_host_mapping.html>
+pub trait ValveDescriptorSetHostMappingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetDescriptorSetHostMappingVALVE.html>
+    #[inline]
+    unsafe fn get_descriptor_set_host_mapping_valve(
+        &self,
+        descriptor_set: DescriptorSet,
+    ) -> *mut c_void {
+        let mut data = MaybeUninit::<*mut c_void>::uninit();
+
+        let __result = (self.commands().get_descriptor_set_host_mapping_valve)(
+            self.handle(),
+            descriptor_set,
+            data.as_mut_ptr(),
+        );
+
+        data.assume_init()
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetDescriptorSetLayoutHostMappingInfoVALVE.html>
+    #[inline]
+    unsafe fn get_descriptor_set_layout_host_mapping_info_valve(
+        &self,
+        binding_reference: &DescriptorSetBindingReferenceVALVE,
+    ) -> DescriptorSetLayoutHostMappingInfoVALVE {
+        let mut host_mapping = MaybeUninit::<DescriptorSetLayoutHostMappingInfoVALVE>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_descriptor_set_layout_host_mapping_info_valve)(
+            self.handle(),
+            binding_reference,
+            host_mapping.as_mut_ptr(),
+        );
+
+        host_mapping.assume_init()
+    }
+}
+
+impl ValveDescriptorSetHostMappingExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_VALVE_mutable_descriptor_type.html>
 pub trait ValveMutableDescriptorTypeExtension: DeviceV1_0 {
     /// The metadata for this extension.

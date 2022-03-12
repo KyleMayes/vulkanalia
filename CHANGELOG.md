@@ -4,6 +4,10 @@
 - [January 25, 2022 Vulkan 1.3.204 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/15d807ce4839d8feb523ca5c133a42a2aa448ade)
 - [xml/vk: Reference underlying type instead of typedef in `structextends` (#1746)](https://github.com/KhronosGroup/Vulkan-Docs/commit/3422ccac57350871eb5a087acf09ab932db71263)
 - [February 4, 2022 Vulkan 1.3.205 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9e4c847a9e93cccd5f46e173c3ccf752b89c35df)
+- [Remove unused VkPrivateDataSlotCreateFlagBits type (#1765)](https://github.com/KhronosGroup/Vulkan-Docs/commit/a5afab5927383ae0ff4034855bbff475386213cc)
+- [February 17, 2022 Vulkan 1.3.206 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/d80b6159f6d69398dbeae52aa1080e47ae96fe47)
+- [add author id for NZXT Inc. (#1785)](https://github.com/KhronosGroup/Vulkan-Docs/commit/5cb2ea0da12d887e8887741ac51b248db2aa3400)
+- [March 8, 2022 Vulkan 1.3.207 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/75c276d6fa83a3f1cbf8b3da50b9278c479be021)
 
 ## [0.14.0] - 2022-01-18
 
