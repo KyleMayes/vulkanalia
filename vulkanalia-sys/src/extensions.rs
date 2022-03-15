@@ -2942,6 +2942,22 @@ pub const KHR_PIPELINE_LIBRARY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_portability_enumeration.html>
+#[allow(deprecated)]
+pub const KHR_PORTABILITY_ENUMERATION_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_portability_enumeration"),
+    number: 395,
+    type_: "instance",
+    author: "KHR",
+    contact: "Charles Giessen @charles-lunarg",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_portability_subset.html>
 ///
 /// ## WARNING
