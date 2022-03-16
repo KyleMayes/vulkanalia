@@ -5899,6 +5899,15 @@ pub trait KhrPipelineLibraryExtension: DeviceV1_0 {
 
 impl KhrPipelineLibraryExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_portability_enumeration.html>
+pub trait KhrPortabilityEnumerationExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_PORTABILITY_ENUMERATION_EXTENSION;
+}
+
+impl KhrPortabilityEnumerationExtension for crate::Instance {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_portability_subset.html>
 ///
 /// ## WARNING

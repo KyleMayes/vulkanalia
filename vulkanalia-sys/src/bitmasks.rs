@@ -850,7 +850,9 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkInstanceCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct InstanceCreateFlags: Flags { }
+    pub struct InstanceCreateFlags: Flags {
+        const ENUMERATE_PORTABILITY_KHR = 1;
+    }
 }
 
 bitflags! {
