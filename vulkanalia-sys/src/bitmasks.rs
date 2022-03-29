@@ -714,6 +714,18 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkGraphicsPipelineLibraryFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct GraphicsPipelineLibraryFlagsEXT: Flags {
+        const VERTEX_INPUT_INTERFACE = 1;
+        const PRE_RASTERIZATION_SHADERS = 1 << 1;
+        const FRAGMENT_SHADER = 1 << 2;
+        const FRAGMENT_OUTPUT_INTERFACE = 1 << 3;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkHeadlessSurfaceCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -997,6 +1009,7 @@ bitflags! {
         const CAPTURE_INTERNAL_REPRESENTATIONS_KHR = 1 << 7;
         const FAIL_ON_PIPELINE_COMPILE_REQUIRED = 1 << 8;
         const EARLY_RETURN_ON_FAILURE = 1 << 9;
+        const LINK_TIME_OPTIMIZATION_EXT = 1 << 10;
         const LIBRARY_KHR = 1 << 11;
         const RAY_TRACING_SKIP_TRIANGLES_KHR = 1 << 12;
         const RAY_TRACING_SKIP_AABBS_KHR = 1 << 13;
@@ -1009,6 +1022,7 @@ bitflags! {
         const RAY_TRACING_ALLOW_MOTION_NV = 1 << 20;
         const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 21;
         const RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_EXT = 1 << 22;
+        const RETAIN_LINK_TIME_OPTIMIZATION_INFO_EXT = 1 << 23;
     }
 }
 
@@ -1058,7 +1072,9 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineLayoutCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineLayoutCreateFlags: Flags { }
+    pub struct PipelineLayoutCreateFlags: Flags {
+        const INDEPENDENT_SETS_EXT = 1 << 1;
+    }
 }
 
 bitflags! {

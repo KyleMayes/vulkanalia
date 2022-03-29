@@ -10384,6 +10384,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderInterlockFea
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceGlobalPriorityQueryFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageRobustnessFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageViewMinLodFeaturesEXT {}
@@ -10408,6 +10409,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePortabilitySubsetFeaturesK
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentIdFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentWaitFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrivateDataFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProvokingVertexFeaturesEXT {}
@@ -16466,6 +16468,7 @@ unsafe impl Cast for GeometryTrianglesNVBuilder {
 /// A Vulkan struct that can be used to extend a [`GraphicsPipelineCreateInfo`].
 pub unsafe trait ExtendsGraphicsPipelineCreateInfo: fmt::Debug {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for AttachmentSampleCountInfoAMD {}
+unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineLibraryCreateInfoEXT {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineShaderGroupsCreateInfoNV {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for MultiviewPerViewAttributesInfoNVX {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
@@ -16473,6 +16476,7 @@ unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCreationFeedbackCreate
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineDiscardRectangleStateCreateInfoEXT {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineFragmentShadingRateEnumStateCreateInfoNV {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineFragmentShadingRateStateCreateInfoKHR {}
+unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineLibraryCreateInfoKHR {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineRenderingCreateInfo {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo
     for PipelineRepresentativeFragmentTestStateCreateInfoNV
@@ -16515,6 +16519,12 @@ impl<'b> GraphicsPipelineCreateInfoBuilder<'b> {
     #[inline]
     pub fn flags(mut self, flags: PipelineCreateFlags) -> Self {
         self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn stage_count(mut self, stage_count: u32) -> Self {
+        self.value.stage_count = stage_count;
         self
     }
 
@@ -16663,6 +16673,64 @@ impl<'b> ops::DerefMut for GraphicsPipelineCreateInfoBuilder<'b> {
 
 unsafe impl<'b> Cast for GraphicsPipelineCreateInfoBuilder<'b> {
     type Target = GraphicsPipelineCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for GraphicsPipelineLibraryCreateInfoEXT {
+    type Target = GraphicsPipelineLibraryCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for GraphicsPipelineLibraryCreateInfoEXT {
+    type Builder = GraphicsPipelineLibraryCreateInfoEXTBuilder;
+}
+
+/// A builder for a [`GraphicsPipelineLibraryCreateInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct GraphicsPipelineLibraryCreateInfoEXTBuilder {
+    value: GraphicsPipelineLibraryCreateInfoEXT,
+}
+
+impl GraphicsPipelineLibraryCreateInfoEXTBuilder {
+    #[inline]
+    pub fn flags(mut self, flags: GraphicsPipelineLibraryFlagsEXT) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> GraphicsPipelineLibraryCreateInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for GraphicsPipelineLibraryCreateInfoEXTBuilder {
+    type Target = GraphicsPipelineLibraryCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for GraphicsPipelineLibraryCreateInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for GraphicsPipelineLibraryCreateInfoEXTBuilder {
+    type Target = GraphicsPipelineLibraryCreateInfoEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -27844,6 +27912,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderInter
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceGlobalPriorityQueryFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageRobustnessFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageViewMinLodFeaturesEXT {}
@@ -27874,6 +27943,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT
 {
 }
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePrivateDataFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProvokingVertexFeaturesEXT {}
@@ -29305,6 +29375,137 @@ impl ops::DerefMut for PhysicalDeviceGlobalPriorityQueryFeaturesKHRBuilder {
 
 unsafe impl Cast for PhysicalDeviceGlobalPriorityQueryFeaturesKHRBuilder {
     type Target = PhysicalDeviceGlobalPriorityQueryFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {
+    type Target = PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {
+    type Builder = PhysicalDeviceGraphicsPipelineLibraryFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceGraphicsPipelineLibraryFeaturesEXTBuilder {
+    value: PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT,
+}
+
+impl PhysicalDeviceGraphicsPipelineLibraryFeaturesEXTBuilder {
+    #[inline]
+    pub fn graphics_pipeline_library(mut self, graphics_pipeline_library: bool) -> Self {
+        self.value.graphics_pipeline_library = graphics_pipeline_library as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXTBuilder {
+    type Target = PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXTBuilder {
+    type Target = PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT {
+    type Target = PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT {
+    type Builder = PhysicalDeviceGraphicsPipelineLibraryPropertiesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceGraphicsPipelineLibraryPropertiesEXTBuilder {
+    value: PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT,
+}
+
+impl PhysicalDeviceGraphicsPipelineLibraryPropertiesEXTBuilder {
+    #[inline]
+    pub fn graphics_pipeline_library_fast_linking(
+        mut self,
+        graphics_pipeline_library_fast_linking: bool,
+    ) -> Self {
+        self.value.graphics_pipeline_library_fast_linking =
+            graphics_pipeline_library_fast_linking as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn graphics_pipeline_library_independent_interpolation_decoration(
+        mut self,
+        graphics_pipeline_library_independent_interpolation_decoration: bool,
+    ) -> Self {
+        self.value
+            .graphics_pipeline_library_independent_interpolation_decoration =
+            graphics_pipeline_library_independent_interpolation_decoration as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXTBuilder {
+    type Target = PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXTBuilder {
+    type Target = PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -33184,6 +33385,85 @@ unsafe impl Cast for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXTBuilde
     }
 }
 
+unsafe impl Cast for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {
+    type Target = PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {
+    type Builder = PhysicalDevicePrimitivesGeneratedQueryFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePrimitivesGeneratedQueryFeaturesEXTBuilder {
+    value: PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT,
+}
+
+impl PhysicalDevicePrimitivesGeneratedQueryFeaturesEXTBuilder {
+    #[inline]
+    pub fn primitives_generated_query(mut self, primitives_generated_query: bool) -> Self {
+        self.value.primitives_generated_query = primitives_generated_query as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn primitives_generated_query_with_rasterizer_discard(
+        mut self,
+        primitives_generated_query_with_rasterizer_discard: bool,
+    ) -> Self {
+        self.value
+            .primitives_generated_query_with_rasterizer_discard =
+            primitives_generated_query_with_rasterizer_discard as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn primitives_generated_query_with_non_zero_streams(
+        mut self,
+        primitives_generated_query_with_non_zero_streams: bool,
+    ) -> Self {
+        self.value.primitives_generated_query_with_non_zero_streams =
+            primitives_generated_query_with_non_zero_streams as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXTBuilder {
+    type Target = PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXTBuilder {
+    type Target = PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDevicePrivateDataFeatures {
     type Target = PhysicalDevicePrivateDataFeatures;
 
@@ -33386,6 +33666,10 @@ unsafe impl ExtendsPhysicalDeviceProperties2
 {
 }
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentShadingRatePropertiesKHR {}
+unsafe impl ExtendsPhysicalDeviceProperties2
+    for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT
+{
+}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceIDProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBlockProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLineRasterizationPropertiesEXT {}
@@ -43426,10 +43710,12 @@ unsafe impl<'b> Cast for PipelineSampleLocationsStateCreateInfoEXTBuilder<'b> {
 
 /// A Vulkan struct that can be used to extend a [`PipelineShaderStageCreateInfo`].
 pub unsafe trait ExtendsPipelineShaderStageCreateInfo: fmt::Debug {}
+unsafe impl ExtendsPipelineShaderStageCreateInfo for DebugUtilsObjectNameInfoEXT {}
 unsafe impl ExtendsPipelineShaderStageCreateInfo
     for PipelineShaderStageRequiredSubgroupSizeCreateInfo
 {
 }
+unsafe impl ExtendsPipelineShaderStageCreateInfo for ShaderModuleCreateInfo {}
 
 unsafe impl Cast for PipelineShaderStageCreateInfo {
     type Target = PipelineShaderStageCreateInfo;

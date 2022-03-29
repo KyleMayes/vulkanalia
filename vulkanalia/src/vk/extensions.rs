@@ -1683,6 +1683,15 @@ pub trait ExtGlobalPriorityQueryExtension: DeviceV1_0 {
 
 impl ExtGlobalPriorityQueryExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_graphics_pipeline_library.html>
+pub trait ExtGraphicsPipelineLibraryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION;
+}
+
+impl ExtGraphicsPipelineLibraryExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_hdr_metadata.html>
 pub trait ExtHdrMetadataExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -2033,6 +2042,15 @@ pub trait ExtPrimitiveTopologyListRestartExtension: DeviceV1_0 {
 }
 
 impl ExtPrimitiveTopologyListRestartExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_primitives_generated_query.html>
+pub trait ExtPrimitivesGeneratedQueryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_PRIMITIVES_GENERATED_QUERY_EXTENSION;
+}
+
+impl ExtPrimitivesGeneratedQueryExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_private_data.html>
 pub trait ExtPrivateDataExtension: DeviceV1_0 {
