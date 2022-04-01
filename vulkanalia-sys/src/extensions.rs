@@ -1022,6 +1022,25 @@ pub const EXT_GLOBAL_PRIORITY_QUERY_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_global_priority"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_graphics_pipeline_library.html>
+#[allow(deprecated)]
+pub const EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_graphics_pipeline_library"),
+    number: 321,
+    type_: "device",
+    author: "AMD",
+    contact: "Tobias Hector @tobski",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+        KHR_PIPELINE_LIBRARY_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_hdr_metadata.html>
 #[allow(deprecated)]
 pub const EXT_HDR_METADATA_EXTENSION: Extension = Extension {
@@ -1360,6 +1379,22 @@ pub const EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION: Extension = Extension {
     contact: "Shahbaz Youssefi @syoussefi",
     platform: None,
     required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_primitives_generated_query.html>
+#[allow(deprecated)]
+pub const EXT_PRIMITIVES_GENERATED_QUERY_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_primitives_generated_query"),
+    number: 383,
+    type_: "device",
+    author: "EXT",
+    contact: "Shahbaz Youssefi @syoussefi",
+    platform: None,
+    required_extensions: Some(&[EXT_TRANSFORM_FEEDBACK_EXTENSION.name]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,

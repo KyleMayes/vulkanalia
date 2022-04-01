@@ -4878,6 +4878,26 @@ impl Default for GraphicsPipelineCreateInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkGraphicsPipelineLibraryCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct GraphicsPipelineLibraryCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub flags: GraphicsPipelineLibraryFlagsEXT,
+}
+
+impl Default for GraphicsPipelineLibraryCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT,
+            next: ptr::null_mut(),
+            flags: GraphicsPipelineLibraryFlagsEXT::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkGraphicsPipelineShaderGroupsCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8505,6 +8525,48 @@ impl Default for PhysicalDeviceGlobalPriorityQueryFeaturesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub graphics_pipeline_library: Bool32,
+}
+
+impl Default for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT,
+            next: ptr::null_mut(),
+            graphics_pipeline_library: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub graphics_pipeline_library_fast_linking: Bool32,
+    pub graphics_pipeline_library_independent_interpolation_decoration: Bool32,
+}
+
+impl Default for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            graphics_pipeline_library_fast_linking: Bool32::default(),
+            graphics_pipeline_library_independent_interpolation_decoration: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceGroupProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9603,6 +9665,30 @@ impl Default for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {
             next: ptr::null_mut(),
             primitive_topology_list_restart: Bool32::default(),
             primitive_topology_patch_list_restart: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub primitives_generated_query: Bool32,
+    pub primitives_generated_query_with_rasterizer_discard: Bool32,
+    pub primitives_generated_query_with_non_zero_streams: Bool32,
+}
+
+impl Default for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT,
+            next: ptr::null_mut(),
+            primitives_generated_query: Bool32::default(),
+            primitives_generated_query_with_rasterizer_discard: Bool32::default(),
+            primitives_generated_query_with_non_zero_streams: Bool32::default(),
         }
     }
 }

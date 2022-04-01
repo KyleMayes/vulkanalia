@@ -9,6 +9,8 @@
 - [add author id for NZXT Inc. (#1785)](https://github.com/KhronosGroup/Vulkan-Docs/commit/5cb2ea0da12d887e8887741ac51b248db2aa3400)
 - [March 8, 2022 Vulkan 1.3.207 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/75c276d6fa83a3f1cbf8b3da50b9278c479be021)
 - [March 15, 2022 Vulkan 1.3.208 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/e88e27f2cda370444f87fc724412a384cb958824)
+- [March 23, 2022 Vulkan 1.3.209 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/fff65570f345288361958ff530e284de27b1a657)
+- [March 29, 2022 Vulkan 1.3.210 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/45af5eb1f66898c9f382edc5afd691aeb32c10c0)
 
 ## [0.14.0] - 2022-01-18
 
