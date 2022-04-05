@@ -8639,6 +8639,28 @@ impl Default for PhysicalDeviceIDProperties {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceImage2DViewOf3DFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub image_2d_view_of_3d: Bool32,
+    pub sampler_2d_view_of_3d: Bool32,
+}
+
+impl Default for PhysicalDeviceImage2DViewOf3DFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT,
+            next: ptr::null_mut(),
+            image_2d_view_of_3d: Bool32::default(),
+            sampler_2d_view_of_3d: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageDrmFormatModifierInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]

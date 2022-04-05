@@ -10386,6 +10386,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateFeature
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceGlobalPriorityQueryFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostQueryResetFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageRobustnessFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageViewMinLodFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImagelessFramebufferFeatures {}
@@ -27914,6 +27915,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRate
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceGlobalPriorityQueryFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostQueryResetFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageRobustnessFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageViewMinLodFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImagelessFramebufferFeatures {}
@@ -29719,6 +29721,70 @@ impl ops::DerefMut for PhysicalDeviceIDPropertiesBuilder {
 
 unsafe impl Cast for PhysicalDeviceIDPropertiesBuilder {
     type Target = PhysicalDeviceIDProperties;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImage2DViewOf3DFeaturesEXT {
+    type Target = PhysicalDeviceImage2DViewOf3DFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceImage2DViewOf3DFeaturesEXT {
+    type Builder = PhysicalDeviceImage2DViewOf3DFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceImage2DViewOf3DFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceImage2DViewOf3DFeaturesEXTBuilder {
+    value: PhysicalDeviceImage2DViewOf3DFeaturesEXT,
+}
+
+impl PhysicalDeviceImage2DViewOf3DFeaturesEXTBuilder {
+    #[inline]
+    pub fn image_2d_view_of_3d(mut self, image_2d_view_of_3d: bool) -> Self {
+        self.value.image_2d_view_of_3d = image_2d_view_of_3d as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn sampler_2d_view_of_3d(mut self, sampler_2d_view_of_3d: bool) -> Self {
+        self.value.sampler_2d_view_of_3d = sampler_2d_view_of_3d as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceImage2DViewOf3DFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceImage2DViewOf3DFeaturesEXTBuilder {
+    type Target = PhysicalDeviceImage2DViewOf3DFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceImage2DViewOf3DFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImage2DViewOf3DFeaturesEXTBuilder {
+    type Target = PhysicalDeviceImage2DViewOf3DFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {

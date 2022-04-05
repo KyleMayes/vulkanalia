@@ -1089,6 +1089,25 @@ pub const EXT_HOST_QUERY_RESET_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_image_2d_view_of_3d.html>
+#[allow(deprecated)]
+pub const EXT_IMAGE_2D_VIEW_OF_3D_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_image_2d_view_of_3d"),
+    number: 394,
+    type_: "device",
+    author: "EXT",
+    contact: "Mike Blumenkrantz @zmike",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_MAINTENANCE1_EXTENSION.name,
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_image_drm_format_modifier.html>
 #[allow(deprecated)]
 pub const EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION: Extension = Extension {
