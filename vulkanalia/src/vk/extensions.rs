@@ -1773,6 +1773,15 @@ pub trait ExtHostQueryResetExtension: DeviceV1_0 {
 
 impl ExtHostQueryResetExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_image_2d_view_of_3d.html>
+pub trait ExtImage2dViewOf3dExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_IMAGE_2D_VIEW_OF_3D_EXTENSION;
+}
+
+impl ExtImage2dViewOf3dExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_image_drm_format_modifier.html>
 pub trait ExtImageDrmFormatModifierExtension: DeviceV1_0 {
     /// The metadata for this extension.
