@@ -1782,6 +1782,40 @@ pub trait ExtImage2dViewOf3dExtension: DeviceV1_0 {
 
 impl ExtImage2dViewOf3dExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_image_compression_control.html>
+pub trait ExtImageCompressionControlExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetImageSubresourceLayout2EXT.html>
+    #[inline]
+    unsafe fn get_image_subresource_layout2_ext(
+        &self,
+        image: Image,
+        subresource: &ImageSubresource2EXT,
+        layout: &mut SubresourceLayout2EXT,
+    ) {
+        let __result = (self.commands().get_image_subresource_layout2_ext)(
+            self.handle(),
+            image,
+            subresource,
+            layout,
+        );
+    }
+}
+
+impl ExtImageCompressionControlExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_image_compression_control_swapchain.html>
+pub trait ExtImageCompressionControlSwapchainExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_EXTENSION;
+}
+
+impl ExtImageCompressionControlSwapchainExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_image_drm_format_modifier.html>
 pub trait ExtImageDrmFormatModifierExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -2033,6 +2067,35 @@ pub trait ExtPipelineCreationFeedbackExtension: DeviceV1_0 {
 }
 
 impl ExtPipelineCreationFeedbackExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_pipeline_properties.html>
+pub trait ExtPipelinePropertiesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_PIPELINE_PROPERTIES_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPipelinePropertiesEXT.html>
+    #[inline]
+    unsafe fn get_pipeline_properties_ext(
+        &self,
+        pipeline_info: &PipelineInfoEXT,
+        pipeline_properties: &mut BaseOutStructure,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().get_pipeline_properties_ext)(
+            self.handle(),
+            pipeline_info,
+            pipeline_properties,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl ExtPipelinePropertiesExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_post_depth_coverage.html>
 pub trait ExtPostDepthCoverageExtension: DeviceV1_0 {
@@ -2339,6 +2402,15 @@ pub trait ExtSubgroupSizeControlExtension: DeviceV1_0 {
 }
 
 impl ExtSubgroupSizeControlExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_subpass_merge_feedback.html>
+pub trait ExtSubpassMergeFeedbackExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION;
+}
+
+impl ExtSubpassMergeFeedbackExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_swapchain_colorspace.html>
 pub trait ExtSwapchainColorspaceExtension: InstanceV1_0 {
@@ -6045,6 +6117,26 @@ pub trait KhrRayQueryExtension: DeviceV1_0 {
 }
 
 impl KhrRayQueryExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_ray_tracing_maintenance1.html>
+pub trait KhrRayTracingMaintenance1Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_RAY_TRACING_MAINTENANCE1_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdTraceRaysIndirect2KHR.html>
+    #[inline]
+    unsafe fn cmd_trace_rays_indirect2_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        indirect_device_address: DeviceAddress,
+    ) {
+        let __result =
+            (self.commands().cmd_trace_rays_indirect2_khr)(command_buffer, indirect_device_address);
+    }
+}
+
+impl KhrRayTracingMaintenance1Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_ray_tracing_pipeline.html>
 pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {

@@ -5062,6 +5062,52 @@ impl Default for ImageBlit2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageCompressionControlEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImageCompressionControlEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: ImageCompressionFlagsEXT,
+    pub compression_control_plane_count: u32,
+    pub fixed_rate_flags: *mut ImageCompressionFixedRateFlagsEXT,
+}
+
+impl Default for ImageCompressionControlEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_COMPRESSION_CONTROL_EXT,
+            next: ptr::null(),
+            flags: ImageCompressionFlagsEXT::default(),
+            compression_control_plane_count: u32::default(),
+            fixed_rate_flags: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageCompressionPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImageCompressionPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub image_compression_flags: ImageCompressionFlagsEXT,
+    pub image_compression_fixed_rate_flags: ImageCompressionFixedRateFlagsEXT,
+}
+
+impl Default for ImageCompressionPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_COMPRESSION_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            image_compression_flags: ImageCompressionFlagsEXT::default(),
+            image_compression_fixed_rate_flags: ImageCompressionFixedRateFlagsEXT::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageConstraintsInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5540,6 +5586,26 @@ pub struct ImageSubresource {
     pub aspect_mask: ImageAspectFlags,
     pub mip_level: u32,
     pub array_layer: u32,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageSubresource2EXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImageSubresource2EXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub image_subresource: ImageSubresource,
+}
+
+impl Default for ImageSubresource2EXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_SUBRESOURCE_2_EXT,
+            next: ptr::null_mut(),
+            image_subresource: ImageSubresource::default(),
+        }
+    }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageSubresourceLayers.html>
@@ -8661,6 +8727,46 @@ impl Default for PhysicalDeviceImage2DViewOf3DFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageCompressionControlFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceImageCompressionControlFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub image_compression_control: Bool32,
+}
+
+impl Default for PhysicalDeviceImageCompressionControlFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT,
+            next: ptr::null_mut(),
+            image_compression_control: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub image_compression_control_swapchain: Bool32,
+}
+
+impl Default for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT,
+            next: ptr::null_mut(),
+            image_compression_control_swapchain: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageDrmFormatModifierInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9541,6 +9647,26 @@ impl Default for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevicePipelinePropertiesFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePipelinePropertiesFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub pipeline_properties_identifier: Bool32,
+}
+
+impl Default for PhysicalDevicePipelinePropertiesFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT,
+            next: ptr::null_mut(),
+            pipeline_properties_identifier: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevicePointClippingProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9935,6 +10061,28 @@ impl Default for PhysicalDeviceRayQueryFeaturesKHR {
             s_type: StructureType::PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR,
             next: ptr::null_mut(),
             ray_query: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceRayTracingMaintenance1FeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub ray_tracing_maintenance1: Bool32,
+    pub ray_tracing_pipeline_trace_rays_indirect2: Bool32,
+}
+
+impl Default for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR,
+            next: ptr::null_mut(),
+            ray_tracing_maintenance1: Bool32::default(),
+            ray_tracing_pipeline_trace_rays_indirect2: Bool32::default(),
         }
     }
 }
@@ -10877,6 +11025,26 @@ impl Default for PhysicalDeviceSubgroupSizeControlProperties {
             max_subgroup_size: u32::default(),
             max_compute_workgroup_subgroups: u32::default(),
             required_subgroup_size_stages: ShaderStageFlags::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub subpass_merge_feedback: Bool32,
+}
+
+impl Default for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT,
+            next: ptr::null_mut(),
+            subpass_merge_feedback: Bool32::default(),
         }
     }
 }
@@ -12415,6 +12583,26 @@ impl Default for PipelineMultisampleStateCreateInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelinePropertiesIdentifierEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelinePropertiesIdentifierEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub pipeline_identifier: ByteArray<UUID_SIZE>,
+}
+
+impl Default for PipelinePropertiesIdentifierEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_PROPERTIES_IDENTIFIER_EXT,
+            next: ptr::null_mut(),
+            pipeline_identifier: ByteArray::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineRasterizationConservativeStateCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
@@ -13618,6 +13806,46 @@ impl Default for RenderPassCreateInfo2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassCreationControlEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RenderPassCreationControlEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub disallow_merging: Bool32,
+}
+
+impl Default for RenderPassCreationControlEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RENDER_PASS_CREATION_CONTROL_EXT,
+            next: ptr::null(),
+            disallow_merging: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassCreationFeedbackInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RenderPassCreationFeedbackInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub post_merge_subpass_count: u32,
+}
+
+impl Default for RenderPassCreationFeedbackInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RENDER_PASS_CREATION_FEEDBACK_INFO_EXT,
+            next: ptr::null(),
+            post_merge_subpass_count: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassFragmentDensityMapCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13712,6 +13940,30 @@ impl Default for RenderPassSampleLocationsBeginInfoEXT {
             attachment_initial_sample_locations: ptr::null(),
             post_subpass_sample_locations_count: u32::default(),
             post_subpass_sample_locations: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassSubpassFeedbackInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RenderPassSubpassFeedbackInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub subpass_merge_status: SubpassMergeStatusEXT,
+    pub description: StringArray<MAX_DESCRIPTION_SIZE>,
+    pub post_merge_index: u32,
+}
+
+impl Default for RenderPassSubpassFeedbackInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT,
+            next: ptr::null(),
+            subpass_merge_status: SubpassMergeStatusEXT::default(),
+            description: StringArray::default(),
+            post_merge_index: u32::default(),
         }
     }
 }
@@ -14971,6 +15223,26 @@ pub struct SubresourceLayout {
     pub depth_pitch: DeviceSize,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSubresourceLayout2EXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SubresourceLayout2EXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub subresource_layout: SubresourceLayout,
+}
+
+impl Default for SubresourceLayout2EXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SUBRESOURCE_LAYOUT_2_EXT,
+            next: ptr::null_mut(),
+            subresource_layout: SubresourceLayout::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSurfaceCapabilities2EXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15309,6 +15581,26 @@ impl Default for TimelineSemaphoreSubmitInfo {
             signal_semaphore_values: ptr::null(),
         }
     }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTraceRaysIndirectCommand2KHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct TraceRaysIndirectCommand2KHR {
+    pub raygen_shader_record_address: DeviceAddress,
+    pub raygen_shader_record_size: DeviceSize,
+    pub miss_shader_binding_table_address: DeviceAddress,
+    pub miss_shader_binding_table_size: DeviceSize,
+    pub miss_shader_binding_table_stride: DeviceSize,
+    pub hit_shader_binding_table_address: DeviceAddress,
+    pub hit_shader_binding_table_size: DeviceSize,
+    pub hit_shader_binding_table_stride: DeviceSize,
+    pub callable_shader_binding_table_address: DeviceAddress,
+    pub callable_shader_binding_table_size: DeviceSize,
+    pub callable_shader_binding_table_stride: DeviceSize,
+    pub width: u32,
+    pub height: u32,
+    pub depth: u32,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTraceRaysIndirectCommandKHR.html>
@@ -16098,6 +16390,8 @@ pub type PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR =
 pub type PipelineCreationFeedbackCreateInfoEXT = PipelineCreationFeedbackCreateInfo;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineCreationFeedbackEXT.html>
 pub type PipelineCreationFeedbackEXT = PipelineCreationFeedback;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineInfoEXT.html>
+pub type PipelineInfoEXT = PipelineInfoKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineRenderingCreateInfoKHR.html>
 pub type PipelineRenderingCreateInfoKHR = PipelineRenderingCreateInfo;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.html>

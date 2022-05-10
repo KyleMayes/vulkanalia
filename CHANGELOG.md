@@ -12,6 +12,8 @@
 - [March 23, 2022 Vulkan 1.3.209 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/fff65570f345288361958ff530e284de27b1a657)
 - [March 29, 2022 Vulkan 1.3.210 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/45af5eb1f66898c9f382edc5afd691aeb32c10c0)
 - [April 5, 2022 Vulkan 1.3.211 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/2a31e99cbaa07dba4e2036c0bfe76aa3ebe8b2a4)
+- [April 21, 2022 Vulkan 1.3.212 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/0a80073e9078eae4266ca779d91e36e91c49a54c)
+- [May 10, 2022 Vulkan 1.3.213 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/71decb7f868d3891974eab139f03c7c6c87fea4d)
 
 ## [0.14.0] - 2022-01-18
 
