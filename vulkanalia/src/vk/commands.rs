@@ -202,6 +202,7 @@ pub struct DeviceCommands {
     pub cmd_set_viewport_with_count: PFN_vkCmdSetViewportWithCount,
     pub cmd_set_viewport_with_count_ext: PFN_vkCmdSetViewportWithCountEXT,
     pub cmd_subpass_shading_huawei: PFN_vkCmdSubpassShadingHUAWEI,
+    pub cmd_trace_rays_indirect2_khr: PFN_vkCmdTraceRaysIndirect2KHR,
     pub cmd_trace_rays_indirect_khr: PFN_vkCmdTraceRaysIndirectKHR,
     pub cmd_trace_rays_khr: PFN_vkCmdTraceRaysKHR,
     pub cmd_trace_rays_nv: PFN_vkCmdTraceRaysNV,
@@ -367,6 +368,7 @@ pub struct DeviceCommands {
     pub get_image_sparse_memory_requirements2: PFN_vkGetImageSparseMemoryRequirements2,
     pub get_image_sparse_memory_requirements2_khr: PFN_vkGetImageSparseMemoryRequirements2KHR,
     pub get_image_subresource_layout: PFN_vkGetImageSubresourceLayout,
+    pub get_image_subresource_layout2_ext: PFN_vkGetImageSubresourceLayout2EXT,
     pub get_image_view_address_nvx: PFN_vkGetImageViewAddressNVX,
     pub get_image_view_handle_nvx: PFN_vkGetImageViewHandleNVX,
     pub get_memory_android_hardware_buffer_android: PFN_vkGetMemoryAndroidHardwareBufferANDROID,
@@ -402,6 +404,7 @@ pub struct DeviceCommands {
         PFN_vkGetPipelineExecutableInternalRepresentationsKHR,
     pub get_pipeline_executable_properties_khr: PFN_vkGetPipelineExecutablePropertiesKHR,
     pub get_pipeline_executable_statistics_khr: PFN_vkGetPipelineExecutableStatisticsKHR,
+    pub get_pipeline_properties_ext: PFN_vkGetPipelinePropertiesEXT,
     pub get_private_data: PFN_vkGetPrivateData,
     pub get_private_data_ext: PFN_vkGetPrivateDataEXT,
     pub get_query_pool_results: PFN_vkGetQueryPoolResults,
@@ -3239,6 +3242,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_trace_rays_indirect2_khr: {
+                let value = loader(b"vkCmdTraceRaysIndirect2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _indirect_device_address: DeviceAddress,
+                    ) {
+                        panic!("could not load vkCmdTraceRaysIndirect2KHR")
+                    }
+                    fallback
+                }
+            },
             cmd_trace_rays_indirect_khr: {
                 let value = loader(b"vkCmdTraceRaysIndirectKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -5687,6 +5704,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_image_subresource_layout2_ext: {
+                let value = loader(b"vkGetImageSubresourceLayout2EXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _image: Image,
+                        _subresource: *const ImageSubresource2EXT,
+                        _layout: *mut SubresourceLayout2EXT,
+                    ) {
+                        panic!("could not load vkGetImageSubresourceLayout2EXT")
+                    }
+                    fallback
+                }
+            },
             get_image_view_address_nvx: {
                 let value = loader(b"vkGetImageViewAddressNVX\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -6135,6 +6168,21 @@ impl DeviceCommands {
                         _statistics: *mut PipelineExecutableStatisticKHR,
                     ) -> Result {
                         panic!("could not load vkGetPipelineExecutableStatisticsKHR")
+                    }
+                    fallback
+                }
+            },
+            get_pipeline_properties_ext: {
+                let value = loader(b"vkGetPipelinePropertiesEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _pipeline_info: *const PipelineInfoEXT,
+                        _pipeline_properties: *mut BaseOutStructure,
+                    ) -> Result {
+                        panic!("could not load vkGetPipelinePropertiesEXT")
                     }
                     fallback
                 }

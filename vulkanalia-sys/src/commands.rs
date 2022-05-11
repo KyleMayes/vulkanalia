@@ -1169,6 +1169,12 @@ pub type PFN_vkCmdSetViewportWithCountEXT = PFN_vkCmdSetViewportWithCount;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSubpassShadingHUAWEI.html>
 pub type PFN_vkCmdSubpassShadingHUAWEI = unsafe extern "system" fn(_command_buffer: CommandBuffer);
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdTraceRaysIndirect2KHR.html>
+pub type PFN_vkCmdTraceRaysIndirect2KHR = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _indirect_device_address: DeviceAddress,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdTraceRaysIndirectKHR.html>
 pub type PFN_vkCmdTraceRaysIndirectKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -2527,6 +2533,14 @@ pub type PFN_vkGetImageSubresourceLayout = unsafe extern "system" fn(
     _layout: *mut SubresourceLayout,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetImageSubresourceLayout2EXT.html>
+pub type PFN_vkGetImageSubresourceLayout2EXT = unsafe extern "system" fn(
+    _device: Device,
+    _image: Image,
+    _subresource: *const ImageSubresource2EXT,
+    _layout: *mut SubresourceLayout2EXT,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetImageViewAddressNVX.html>
 pub type PFN_vkGetImageViewAddressNVX = unsafe extern "system" fn(
     _device: Device,
@@ -3030,6 +3044,13 @@ pub type PFN_vkGetPipelineExecutableStatisticsKHR = unsafe extern "system" fn(
     _executable_info: *const PipelineExecutableInfoKHR,
     _statistic_count: *mut u32,
     _statistics: *mut PipelineExecutableStatisticKHR,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPipelinePropertiesEXT.html>
+pub type PFN_vkGetPipelinePropertiesEXT = unsafe extern "system" fn(
+    _device: Device,
+    _pipeline_info: *const PipelineInfoEXT,
+    _pipeline_properties: *mut BaseOutStructure,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPrivateData.html>

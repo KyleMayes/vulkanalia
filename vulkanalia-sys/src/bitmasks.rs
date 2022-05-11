@@ -116,6 +116,7 @@ bitflags! {
         const SHADER_STORAGE_READ = 1 << 33;
         const SHADER_STORAGE_WRITE = 1 << 34;
         const INVOCATION_MASK_READ_HUAWEI = 1 << 39;
+        const SHADER_BINDING_TABLE_READ_KHR = 1 << 40;
     }
 }
 
@@ -759,6 +760,51 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageCompressionFixedRateFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct ImageCompressionFixedRateFlagsEXT: Flags {
+        const NONE = 0;
+        const _1BPC = 1;
+        const _2BPC = 1 << 1;
+        const _3BPC = 1 << 2;
+        const _4BPC = 1 << 3;
+        const _5BPC = 1 << 4;
+        const _6BPC = 1 << 5;
+        const _7BPC = 1 << 6;
+        const _8BPC = 1 << 7;
+        const _9BPC = 1 << 8;
+        const _10BPC = 1 << 9;
+        const _11BPC = 1 << 10;
+        const _12BPC = 1 << 11;
+        const _13BPC = 1 << 12;
+        const _14BPC = 1 << 13;
+        const _15BPC = 1 << 14;
+        const _16BPC = 1 << 15;
+        const _17BPC = 1 << 16;
+        const _18BPC = 1 << 17;
+        const _19BPC = 1 << 18;
+        const _20BPC = 1 << 19;
+        const _21BPC = 1 << 20;
+        const _22BPC = 1 << 21;
+        const _23BPC = 1 << 22;
+        const _24BPC = 1 << 23;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageCompressionFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct ImageCompressionFlagsEXT: Flags {
+        const DEFAULT = 0;
+        const FIXED_RATE_DEFAULT = 1;
+        const FIXED_RATE_EXPLICIT = 1 << 1;
+        const DISABLED = 1 << 2;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageConstraintsInfoFlagsFUCHSIA.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -1189,6 +1235,7 @@ bitflags! {
         const FRAGMENT_DENSITY_PROCESS_EXT = 1 << 23;
         const TRANSFORM_FEEDBACK_EXT = 1 << 24;
         const ACCELERATION_STRUCTURE_BUILD_KHR = 1 << 25;
+        const ACCELERATION_STRUCTURE_COPY_KHR = 1 << 28;
         const COPY = 1 << 32;
         const RESOLVE = 1 << 33;
         const BLIT = 1 << 34;

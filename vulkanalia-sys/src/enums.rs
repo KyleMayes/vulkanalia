@@ -3477,6 +3477,9 @@ impl QueryType {
     pub const ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV: Self = Self(1000165000);
     pub const PERFORMANCE_QUERY_INTEL: Self = Self(1000210000);
     pub const PRIMITIVES_GENERATED_EXT: Self = Self(1000382000);
+    pub const ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR: Self =
+        Self(1000386000);
+    pub const ACCELERATION_STRUCTURE_SIZE_KHR: Self = Self(1000386001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -3504,6 +3507,11 @@ impl fmt::Debug for QueryType {
             1000165000 => write!(f, "ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV"),
             1000210000 => write!(f, "PERFORMANCE_QUERY_INTEL"),
             1000382000 => write!(f, "PRIMITIVES_GENERATED_EXT"),
+            1000386000 => write!(
+                f,
+                "ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR"
+            ),
+            1000386001 => write!(f, "ACCELERATION_STRUCTURE_SIZE_KHR"),
             _ => self.0.fmt(f),
         }
     }
@@ -3655,6 +3663,7 @@ impl Result {
     pub const THREAD_DONE_KHR: Self = Self(1000268001);
     pub const OPERATION_DEFERRED_KHR: Self = Self(1000268002);
     pub const OPERATION_NOT_DEFERRED_KHR: Self = Self(1000268003);
+    pub const ERROR_COMPRESSION_EXHAUSTED_EXT: Self = Self(-1000338000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -3710,6 +3719,7 @@ impl fmt::Debug for Result {
             1000268001 => write!(f, "THREAD_DONE_KHR"),
             1000268002 => write!(f, "OPERATION_DEFERRED_KHR"),
             1000268003 => write!(f, "OPERATION_NOT_DEFERRED_KHR"),
+            -1000338000 => write!(f, "ERROR_COMPRESSION_EXHAUSTED_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -3756,6 +3766,7 @@ impl fmt::Display for Result {
             1000268001 => write!(f, "A deferred operation is not complete but there is no work remaining to assign to additional threads."),
             1000268002 => write!(f, "A deferred operation was requested and at least some of the work was deferred."),
             1000268003 => write!(f, "A deferred operation was requested and no operations were deferred."),
+            -1000338000 => write!(f, "ERROR_COMPRESSION_EXHAUSTED_EXT"),
             _ => write!(f, "unknown Vulkan result (code = {})", self.0),
         }
     }
@@ -4770,6 +4781,11 @@ impl StructureType {
     pub const COPY_COMMAND_TRANSFORM_INFO_QCOM: Self = Self(1000333000);
     pub const PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR: Self =
         Self(1000336000);
+    pub const PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT: Self = Self(1000338000);
+    pub const IMAGE_COMPRESSION_CONTROL_EXT: Self = Self(1000338001);
+    pub const SUBRESOURCE_LAYOUT_2_EXT: Self = Self(1000338002);
+    pub const IMAGE_SUBRESOURCE_2_EXT: Self = Self(1000338003);
+    pub const IMAGE_COMPRESSION_PROPERTIES_EXT: Self = Self(1000338004);
     pub const PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT: Self = Self(1000340000);
     pub const PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM: Self =
         Self(1000342000);
@@ -4805,11 +4821,14 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI: Self = Self(1000370000);
     pub const MEMORY_GET_REMOTE_ADDRESS_INFO_NV: Self = Self(1000371000);
     pub const PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV: Self = Self(1000371001);
+    pub const PIPELINE_PROPERTIES_IDENTIFIER_EXT: Self = Self(1000372000);
+    pub const PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT: Self = Self(1000372001);
     pub const PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT: Self = Self(1000377000);
     pub const SCREEN_SURFACE_CREATE_INFO_QNX: Self = Self(1000378000);
     pub const PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT: Self = Self(1000381000);
     pub const PIPELINE_COLOR_WRITE_CREATE_INFO_EXT: Self = Self(1000381001);
     pub const PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT: Self = Self(1000382000);
+    pub const PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR: Self = Self(1000386000);
     pub const PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT: Self = Self(1000391000);
     pub const IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT: Self = Self(1000391001);
     pub const PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT: Self = Self(1000392000);
@@ -4825,6 +4844,12 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM: Self = Self(1000425001);
     pub const SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM: Self = Self(1000425002);
     pub const PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV: Self = Self(1000430000);
+    pub const PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT: Self =
+        Self(1000437000);
+    pub const PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT: Self = Self(1000458000);
+    pub const RENDER_PASS_CREATION_CONTROL_EXT: Self = Self(1000458001);
+    pub const RENDER_PASS_CREATION_FEEDBACK_INFO_EXT: Self = Self(1000458002);
+    pub const RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT: Self = Self(1000458003);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5437,6 +5462,11 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR"
             ),
+            1000338000 => write!(f, "PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT"),
+            1000338001 => write!(f, "IMAGE_COMPRESSION_CONTROL_EXT"),
+            1000338002 => write!(f, "SUBRESOURCE_LAYOUT_2_EXT"),
+            1000338003 => write!(f, "IMAGE_SUBRESOURCE_2_EXT"),
+            1000338004 => write!(f, "IMAGE_COMPRESSION_PROPERTIES_EXT"),
             1000340000 => write!(f, "PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT"),
             1000342000 => write!(
                 f,
@@ -5477,11 +5507,14 @@ impl fmt::Debug for StructureType {
             1000370000 => write!(f, "PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI"),
             1000371000 => write!(f, "MEMORY_GET_REMOTE_ADDRESS_INFO_NV"),
             1000371001 => write!(f, "PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV"),
+            1000372000 => write!(f, "PIPELINE_PROPERTIES_IDENTIFIER_EXT"),
+            1000372001 => write!(f, "PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT"),
             1000377000 => write!(f, "PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT"),
             1000378000 => write!(f, "SCREEN_SURFACE_CREATE_INFO_QNX"),
             1000381000 => write!(f, "PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT"),
             1000381001 => write!(f, "PIPELINE_COLOR_WRITE_CREATE_INFO_EXT"),
             1000382000 => write!(f, "PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT"),
+            1000386000 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR"),
             1000391000 => write!(f, "PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT"),
             1000391001 => write!(f, "IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT"),
             1000392000 => write!(f, "PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT"),
@@ -5509,6 +5542,14 @@ impl fmt::Debug for StructureType {
             ),
             1000425002 => write!(f, "SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM"),
             1000430000 => write!(f, "PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV"),
+            1000437000 => write!(
+                f,
+                "PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT"
+            ),
+            1000458000 => write!(f, "PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT"),
+            1000458001 => write!(f, "RENDER_PASS_CREATION_CONTROL_EXT"),
+            1000458002 => write!(f, "RENDER_PASS_CREATION_FEEDBACK_INFO_EXT"),
+            1000458003 => write!(f, "RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -5541,6 +5582,62 @@ impl fmt::Debug for SubpassContents {
         match self.0 {
             0 => write!(f, "INLINE"),
             1 => write!(f, "SECONDARY_COMMAND_BUFFERS"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSubpassMergeStatusEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct SubpassMergeStatusEXT(i32);
+
+impl SubpassMergeStatusEXT {
+    pub const MERGED: Self = Self(0);
+    pub const DISALLOWED: Self = Self(1);
+    pub const NOT_MERGED_SIDE_EFFECTS: Self = Self(2);
+    pub const NOT_MERGED_SAMPLES_MISMATCH: Self = Self(3);
+    pub const NOT_MERGED_VIEWS_MISMATCH: Self = Self(4);
+    pub const NOT_MERGED_ALIASING: Self = Self(5);
+    pub const NOT_MERGED_DEPENDENCIES: Self = Self(6);
+    pub const NOT_MERGED_INCOMPATIBLE_INPUT_ATTACHMENT: Self = Self(7);
+    pub const NOT_MERGED_TOO_MANY_ATTACHMENTS: Self = Self(8);
+    pub const NOT_MERGED_INSUFFICIENT_STORAGE: Self = Self(9);
+    pub const NOT_MERGED_DEPTH_STENCIL_COUNT: Self = Self(10);
+    pub const NOT_MERGED_RESOLVE_ATTACHMENT_REUSE: Self = Self(11);
+    pub const NOT_MERGED_SINGLE_SUBPASS: Self = Self(12);
+    pub const NOT_MERGED_UNSPECIFIED: Self = Self(13);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for SubpassMergeStatusEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "MERGED"),
+            1 => write!(f, "DISALLOWED"),
+            2 => write!(f, "NOT_MERGED_SIDE_EFFECTS"),
+            3 => write!(f, "NOT_MERGED_SAMPLES_MISMATCH"),
+            4 => write!(f, "NOT_MERGED_VIEWS_MISMATCH"),
+            5 => write!(f, "NOT_MERGED_ALIASING"),
+            6 => write!(f, "NOT_MERGED_DEPENDENCIES"),
+            7 => write!(f, "NOT_MERGED_INCOMPATIBLE_INPUT_ATTACHMENT"),
+            8 => write!(f, "NOT_MERGED_TOO_MANY_ATTACHMENTS"),
+            9 => write!(f, "NOT_MERGED_INSUFFICIENT_STORAGE"),
+            10 => write!(f, "NOT_MERGED_DEPTH_STENCIL_COUNT"),
+            11 => write!(f, "NOT_MERGED_RESOLVE_ATTACHMENT_REUSE"),
+            12 => write!(f, "NOT_MERGED_SINGLE_SUBPASS"),
+            13 => write!(f, "NOT_MERGED_UNSPECIFIED"),
             _ => self.0.fmt(f),
         }
     }

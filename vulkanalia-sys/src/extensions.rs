@@ -1108,6 +1108,38 @@ pub const EXT_IMAGE_2D_VIEW_OF_3D_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_image_compression_control.html>
+#[allow(deprecated)]
+pub const EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_image_compression_control"),
+    number: 339,
+    type_: "device",
+    author: "EXT",
+    contact: "Jan-Harald Fredriksen @janharaldfredriksen-arm",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_image_compression_control_swapchain.html>
+#[allow(deprecated)]
+pub const EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_image_compression_control_swapchain"),
+    number: 438,
+    type_: "device",
+    author: "EXT",
+    contact: "Jan-Harald Fredriksen @janharaldfredriksen-arm",
+    platform: None,
+    required_extensions: Some(&[EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_image_drm_format_modifier.html>
 #[allow(deprecated)]
 pub const EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION: Extension = Extension {
@@ -1370,6 +1402,22 @@ pub const EXT_PIPELINE_CREATION_FEEDBACK_EXTENSION: Extension = Extension {
     deprecated_by: None,
     obsoleted_by: None,
     promoted_to: Some("VK_VERSION_1_3"),
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_pipeline_properties.html>
+#[allow(deprecated)]
+pub const EXT_PIPELINE_PROPERTIES_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_pipeline_properties"),
+    number: 373,
+    type_: "device",
+    author: "EXT",
+    contact: "Mukund Keshava @mkeshavanv",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_post_depth_coverage.html>
@@ -1708,6 +1756,22 @@ pub const EXT_SUBGROUP_SIZE_CONTROL_EXTENSION: Extension = Extension {
     deprecated_by: None,
     obsoleted_by: None,
     promoted_to: Some("VK_VERSION_1_3"),
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_subpass_merge_feedback.html>
+#[allow(deprecated)]
+pub const EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_subpass_merge_feedback"),
+    number: 459,
+    type_: "device",
+    author: "EXT",
+    contact: "Ting Wei @catweiting",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_swapchain_colorspace.html>
@@ -3097,6 +3161,22 @@ pub const KHR_RAY_QUERY_EXTENSION: Extension = Extension {
         KHR_SPIRV_1_4_EXTENSION.name,
         KHR_ACCELERATION_STRUCTURE_EXTENSION.name,
     ]),
+    required_version: Some("1.1"),
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_ray_tracing_maintenance1.html>
+#[allow(deprecated)]
+pub const KHR_RAY_TRACING_MAINTENANCE1_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_ray_tracing_maintenance1"),
+    number: 387,
+    type_: "device",
+    author: "KHR",
+    contact: "Daniel Koch @dgkoch",
+    platform: None,
+    required_extensions: Some(&[KHR_ACCELERATION_STRUCTURE_EXTENSION.name]),
     required_version: Some("1.1"),
     deprecated_by: None,
     obsoleted_by: None,

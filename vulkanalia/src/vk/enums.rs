@@ -117,6 +117,7 @@ impl ErrorCode {
     pub const INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT: Self = Self(-1000158000);
     pub const NOT_PERMITTED_KHR: Self = Self(-1000174001);
     pub const FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT: Self = Self(-1000255000);
+    pub const COMPRESSION_EXHAUSTED_EXT: Self = Self(-1000338000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -160,6 +161,7 @@ impl fmt::Debug for ErrorCode {
             -1000158000 => write!(f, "INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
             -1000174001 => write!(f, "NOT_PERMITTED_KHR"),
             -1000255000 => write!(f, "FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT"),
+            -1000338000 => write!(f, "COMPRESSION_EXHAUSTED_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -194,6 +196,7 @@ impl fmt::Display for ErrorCode {
             -1000158000 => write!(f, "INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
             -1000174001 => write!(f, "NOT_PERMITTED_KHR"),
             -1000255000 => write!(f, "An operation on a swapchain created with VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT failed as it did not have exclusive full-screen access. This may occur due to implementation-dependent reasons, outside of the application's control."),
+            -1000338000 => write!(f, "COMPRESSION_EXHAUSTED_EXT"),
             _ => write!(f, "unknown Vulkan result (code = {})", self.0),
         }
     }
