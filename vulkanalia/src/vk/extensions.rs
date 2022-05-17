@@ -234,6 +234,15 @@ pub trait AmdShaderCoreProperties2Extension: DeviceV1_0 {
 
 impl AmdShaderCoreProperties2Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_AMD_shader_early_and_late_fragment_tests.html>
+pub trait AmdShaderEarlyAndLateFragmentTestsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_EXTENSION;
+}
+
+impl AmdShaderEarlyAndLateFragmentTestsExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_AMD_shader_explicit_vertex_parameter.html>
 pub trait AmdShaderExplicitVertexParameterExtension: DeviceV1_0 {
     /// The metadata for this extension.

@@ -10453,6 +10453,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderAtomicInt64Features 
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderClockFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderDemoteToHelperInvocationFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderDrawParametersFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFloat16Int8Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageFootprintFeaturesNV {}
@@ -28201,6 +28202,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 {
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderDrawParametersFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFloat16Int8Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageFootprintFeaturesNV {}
@@ -36505,6 +36510,68 @@ impl ops::DerefMut for PhysicalDeviceShaderDrawParametersFeaturesBuilder {
 
 unsafe impl Cast for PhysicalDeviceShaderDrawParametersFeaturesBuilder {
     type Target = PhysicalDeviceShaderDrawParametersFeatures;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT {
+    type Target = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT {
+    type Builder = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder {
+    value: PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT,
+}
+
+impl PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder {
+    #[inline]
+    pub fn shader_early_and_late_fragment_tests(
+        mut self,
+        shader_early_and_late_fragment_tests: bool,
+    ) -> Self {
+        self.value.shader_early_and_late_fragment_tests =
+            shader_early_and_late_fragment_tests as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder {
+    type Target = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder {
+    type Target = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {

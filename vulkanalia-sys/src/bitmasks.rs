@@ -417,6 +417,7 @@ bitflags! {
         const ENABLE_SHADER_DEBUG_INFO = 1;
         const ENABLE_RESOURCE_TRACKING = 1 << 1;
         const ENABLE_AUTOMATIC_CHECKPOINTS = 1 << 2;
+        const ENABLE_SHADER_ERROR_REPORTING = 1 << 3;
     }
 }
 

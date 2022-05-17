@@ -14,6 +14,9 @@
 - [April 5, 2022 Vulkan 1.3.211 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/2a31e99cbaa07dba4e2036c0bfe76aa3ebe8b2a4)
 - [April 21, 2022 Vulkan 1.3.212 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/0a80073e9078eae4266ca779d91e36e91c49a54c)
 - [May 10, 2022 Vulkan 1.3.213 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/71decb7f868d3891974eab139f03c7c6c87fea4d)
+- [Mark VkSubresourceLayout2EXT as returnedonly. (#1848)](https://github.com/KhronosGroup/Vulkan-Docs/commit/94f4dc1d6384f271875fcade4fe8223383ad1c6c)
+- [Add VK_KHR_depth_stencil_resolve dependency to VK_KHR_dynamic_rendering (#1831)](https://github.com/KhronosGroup/Vulkan-Docs/commit/c18adb4f8887f6e8845b09bb8158df85faa6f066)
+- [May 17, 2022 Vulkan 1.3.214 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/028789841d7ba54cabc678a128e7b98d30c0b4cd)
 
 ## [0.14.0] - 2022-01-18
 
