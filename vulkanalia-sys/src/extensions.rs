@@ -297,6 +297,22 @@ pub const AMD_SHADER_CORE_PROPERTIES2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_AMD_shader_early_and_late_fragment_tests.html>
+#[allow(deprecated)]
+pub const AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_AMD_shader_early_and_late_fragment_tests"),
+    number: 322,
+    type_: "device",
+    author: "EXT",
+    contact: "Tobias Hector @tobski",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_AMD_shader_explicit_vertex_parameter.html>
 #[allow(deprecated)]
 pub const AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION: Extension = Extension {
@@ -2385,7 +2401,7 @@ pub const KHR_CREATE_RENDERPASS2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_create_renderpass2"),
     number: 110,
     type_: "device",
-    author: "",
+    author: "KHR",
     contact: "Tobias Hector @tobias",
     platform: None,
     required_extensions: Some(&[
@@ -2567,7 +2583,10 @@ pub const KHR_DYNAMIC_RENDERING_EXTENSION: Extension = Extension {
     author: "KHR",
     contact: "Tobias Hector @tobski",
     platform: None,
-    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_extensions: Some(&[
+        KHR_DEPTH_STENCIL_RESOLVE_EXTENSION.name,
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+    ]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
