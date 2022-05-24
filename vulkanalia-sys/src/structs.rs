@@ -8385,22 +8385,42 @@ impl Default for PhysicalDeviceFragmentDensityMapPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceFragmentShaderBarycentricFeaturesNV {
+pub struct PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub fragment_shader_barycentric: Bool32,
 }
 
-impl Default for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {
+impl Default for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV,
+            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_KHR,
             next: ptr::null_mut(),
             fragment_shader_barycentric: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceFragmentShaderBarycentricPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub tri_strip_vertex_order_independent_of_provoking_vertex: Bool32,
+}
+
+impl Default for PhysicalDeviceFragmentShaderBarycentricPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            tri_strip_vertex_order_independent_of_provoking_vertex: Bool32::default(),
         }
     }
 }
@@ -10617,21 +10637,21 @@ impl Default for PhysicalDeviceShaderDrawParametersFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT {
+pub struct PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub shader_early_and_late_fragment_tests: Bool32,
 }
 
-impl Default for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT {
+impl Default for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {
     #[inline]
     fn default() -> Self {
         Self {
             s_type:
-                StructureType::PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_EXT,
+                StructureType::PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD,
             next: ptr::null_mut(),
             shader_early_and_late_fragment_tests: Bool32::default(),
         }
@@ -16300,6 +16320,9 @@ pub type PhysicalDeviceFeatures2KHR = PhysicalDeviceFeatures2;
 pub type PhysicalDeviceFloat16Int8FeaturesKHR = PhysicalDeviceShaderFloat16Int8Features;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceFloatControlsPropertiesKHR.html>
 pub type PhysicalDeviceFloatControlsPropertiesKHR = PhysicalDeviceFloatControlsProperties;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.html>
+pub type PhysicalDeviceFragmentShaderBarycentricFeaturesNV =
+    PhysicalDeviceFragmentShaderBarycentricFeaturesKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.html>
 pub type PhysicalDeviceGlobalPriorityQueryFeaturesEXT =
     PhysicalDeviceGlobalPriorityQueryFeaturesKHR;

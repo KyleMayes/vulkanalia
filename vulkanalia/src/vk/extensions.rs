@@ -5137,6 +5137,15 @@ pub trait KhrFormatFeatureFlags2Extension: DeviceV1_0 {
 
 impl KhrFormatFeatureFlags2Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_fragment_shader_barycentric.html>
+pub trait KhrFragmentShaderBarycentricExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION;
+}
+
+impl KhrFragmentShaderBarycentricExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_fragment_shading_rate.html>
 pub trait KhrFragmentShadingRateExtension: DeviceV1_0 {
     /// The metadata for this extension.

@@ -2801,6 +2801,22 @@ pub const KHR_FORMAT_FEATURE_FLAGS2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_fragment_shader_barycentric.html>
+#[allow(deprecated)]
+pub const KHR_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_fragment_shader_barycentric"),
+    number: 323,
+    type_: "device",
+    author: "KHR",
+    contact: "Stu Smith",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_fragment_shading_rate.html>
 #[allow(deprecated)]
 pub const KHR_FRAGMENT_SHADING_RATE_EXTENSION: Extension = Extension {
@@ -4155,7 +4171,7 @@ pub const NV_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION: Extension = Extension {
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
-    promoted_to: None,
+    promoted_to: Some("VK_KHR_fragment_shader_barycentric"),
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_fragment_shading_rate_enums.html>
