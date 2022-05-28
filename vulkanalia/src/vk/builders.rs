@@ -10395,7 +10395,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFeatures2 {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
@@ -10453,7 +10453,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderAtomicInt64Features 
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderClockFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderDemoteToHelperInvocationFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderDrawParametersFeatures {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderFloat16Int8Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageFootprintFeaturesNV {}
@@ -28132,7 +28132,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemoryRDMAF
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
@@ -28203,7 +28203,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderDrawParametersFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
-    for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT
+    for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD
 {
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderFloat16Int8Features {}
@@ -28925,8 +28925,8 @@ unsafe impl Cast for PhysicalDeviceFragmentDensityMapPropertiesEXTBuilder {
     }
 }
 
-unsafe impl Cast for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {
-    type Target = PhysicalDeviceFragmentShaderBarycentricFeaturesNV;
+unsafe impl Cast for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {
+    type Target = PhysicalDeviceFragmentShaderBarycentricFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -28934,18 +28934,18 @@ unsafe impl Cast for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {
     }
 }
 
-impl HasBuilder<'static> for PhysicalDeviceFragmentShaderBarycentricFeaturesNV {
-    type Builder = PhysicalDeviceFragmentShaderBarycentricFeaturesNVBuilder;
+impl HasBuilder<'static> for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {
+    type Builder = PhysicalDeviceFragmentShaderBarycentricFeaturesKHRBuilder;
 }
 
-/// A builder for a [`PhysicalDeviceFragmentShaderBarycentricFeaturesNV`].
+/// A builder for a [`PhysicalDeviceFragmentShaderBarycentricFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct PhysicalDeviceFragmentShaderBarycentricFeaturesNVBuilder {
-    value: PhysicalDeviceFragmentShaderBarycentricFeaturesNV,
+pub struct PhysicalDeviceFragmentShaderBarycentricFeaturesKHRBuilder {
+    value: PhysicalDeviceFragmentShaderBarycentricFeaturesKHR,
 }
 
-impl PhysicalDeviceFragmentShaderBarycentricFeaturesNVBuilder {
+impl PhysicalDeviceFragmentShaderBarycentricFeaturesKHRBuilder {
     #[inline]
     pub fn fragment_shader_barycentric(mut self, fragment_shader_barycentric: bool) -> Self {
         self.value.fragment_shader_barycentric = fragment_shader_barycentric as Bool32;
@@ -28953,13 +28953,13 @@ impl PhysicalDeviceFragmentShaderBarycentricFeaturesNVBuilder {
     }
 
     #[inline]
-    pub fn build(self) -> PhysicalDeviceFragmentShaderBarycentricFeaturesNV {
+    pub fn build(self) -> PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {
         self.value
     }
 }
 
-impl ops::Deref for PhysicalDeviceFragmentShaderBarycentricFeaturesNVBuilder {
-    type Target = PhysicalDeviceFragmentShaderBarycentricFeaturesNV;
+impl ops::Deref for PhysicalDeviceFragmentShaderBarycentricFeaturesKHRBuilder {
+    type Target = PhysicalDeviceFragmentShaderBarycentricFeaturesKHR;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -28967,15 +28967,78 @@ impl ops::Deref for PhysicalDeviceFragmentShaderBarycentricFeaturesNVBuilder {
     }
 }
 
-impl ops::DerefMut for PhysicalDeviceFragmentShaderBarycentricFeaturesNVBuilder {
+impl ops::DerefMut for PhysicalDeviceFragmentShaderBarycentricFeaturesKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for PhysicalDeviceFragmentShaderBarycentricFeaturesNVBuilder {
-    type Target = PhysicalDeviceFragmentShaderBarycentricFeaturesNV;
+unsafe impl Cast for PhysicalDeviceFragmentShaderBarycentricFeaturesKHRBuilder {
+    type Target = PhysicalDeviceFragmentShaderBarycentricFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentShaderBarycentricPropertiesKHR {
+    type Target = PhysicalDeviceFragmentShaderBarycentricPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceFragmentShaderBarycentricPropertiesKHR {
+    type Builder = PhysicalDeviceFragmentShaderBarycentricPropertiesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceFragmentShaderBarycentricPropertiesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceFragmentShaderBarycentricPropertiesKHRBuilder {
+    value: PhysicalDeviceFragmentShaderBarycentricPropertiesKHR,
+}
+
+impl PhysicalDeviceFragmentShaderBarycentricPropertiesKHRBuilder {
+    #[inline]
+    pub fn tri_strip_vertex_order_independent_of_provoking_vertex(
+        mut self,
+        tri_strip_vertex_order_independent_of_provoking_vertex: bool,
+    ) -> Self {
+        self.value
+            .tri_strip_vertex_order_independent_of_provoking_vertex =
+            tri_strip_vertex_order_independent_of_provoking_vertex as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceFragmentShaderBarycentricPropertiesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceFragmentShaderBarycentricPropertiesKHRBuilder {
+    type Target = PhysicalDeviceFragmentShaderBarycentricPropertiesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceFragmentShaderBarycentricPropertiesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFragmentShaderBarycentricPropertiesKHRBuilder {
+    type Target = PhysicalDeviceFragmentShaderBarycentricPropertiesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -34143,6 +34206,10 @@ unsafe impl ExtendsPhysicalDeviceProperties2
 }
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentDensityMapPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2
+    for PhysicalDeviceFragmentShaderBarycentricPropertiesKHR
+{
+}
+unsafe impl ExtendsPhysicalDeviceProperties2
     for PhysicalDeviceFragmentShadingRateEnumsPropertiesNV
 {
 }
@@ -36517,8 +36584,8 @@ unsafe impl Cast for PhysicalDeviceShaderDrawParametersFeaturesBuilder {
     }
 }
 
-unsafe impl Cast for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT {
-    type Target = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT;
+unsafe impl Cast for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {
+    type Target = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -36526,18 +36593,18 @@ unsafe impl Cast for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT {
     }
 }
 
-impl HasBuilder<'static> for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT {
-    type Builder = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder;
+impl HasBuilder<'static> for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {
+    type Builder = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMDBuilder;
 }
 
-/// A builder for a [`PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT`].
+/// A builder for a [`PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder {
-    value: PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT,
+pub struct PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMDBuilder {
+    value: PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD,
 }
 
-impl PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder {
+impl PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMDBuilder {
     #[inline]
     pub fn shader_early_and_late_fragment_tests(
         mut self,
@@ -36549,13 +36616,13 @@ impl PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder {
     }
 
     #[inline]
-    pub fn build(self) -> PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT {
+    pub fn build(self) -> PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {
         self.value
     }
 }
 
-impl ops::Deref for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder {
-    type Target = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT;
+impl ops::Deref for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMDBuilder {
+    type Target = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -36563,15 +36630,15 @@ impl ops::Deref for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuil
     }
 }
 
-impl ops::DerefMut for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder {
+impl ops::DerefMut for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMDBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXTBuilder {
-    type Target = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT;
+unsafe impl Cast for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMDBuilder {
+    type Target = PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD;
 
     #[inline]
     fn into(self) -> Self::Target {
