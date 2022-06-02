@@ -13867,24 +13867,31 @@ impl Default for RenderPassCreationControlEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassCreationFeedbackInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassCreationFeedbackCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct RenderPassCreationFeedbackInfoEXT {
+pub struct RenderPassCreationFeedbackCreateInfoEXT {
     pub s_type: StructureType,
     pub next: *const c_void,
-    pub post_merge_subpass_count: u32,
+    pub render_pass_feedback: *mut RenderPassCreationFeedbackInfoEXT,
 }
 
-impl Default for RenderPassCreationFeedbackInfoEXT {
+impl Default for RenderPassCreationFeedbackCreateInfoEXT {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::RENDER_PASS_CREATION_FEEDBACK_INFO_EXT,
+            s_type: StructureType::RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT,
             next: ptr::null(),
-            post_merge_subpass_count: u32::default(),
+            render_pass_feedback: ptr::null_mut(),
         }
     }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassCreationFeedbackInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct RenderPassCreationFeedbackInfoEXT {
+    pub post_merge_subpass_count: u32,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassFragmentDensityMapCreateInfoEXT.html>
@@ -13985,28 +13992,33 @@ impl Default for RenderPassSampleLocationsBeginInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassSubpassFeedbackInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassSubpassFeedbackCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct RenderPassSubpassFeedbackInfoEXT {
+pub struct RenderPassSubpassFeedbackCreateInfoEXT {
     pub s_type: StructureType,
     pub next: *const c_void,
-    pub subpass_merge_status: SubpassMergeStatusEXT,
-    pub description: StringArray<MAX_DESCRIPTION_SIZE>,
-    pub post_merge_index: u32,
+    pub subpass_feedback: *mut RenderPassSubpassFeedbackInfoEXT,
 }
 
-impl Default for RenderPassSubpassFeedbackInfoEXT {
+impl Default for RenderPassSubpassFeedbackCreateInfoEXT {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT,
+            s_type: StructureType::RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT,
             next: ptr::null(),
-            subpass_merge_status: SubpassMergeStatusEXT::default(),
-            description: StringArray::default(),
-            post_merge_index: u32::default(),
+            subpass_feedback: ptr::null_mut(),
         }
     }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassSubpassFeedbackInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct RenderPassSubpassFeedbackInfoEXT {
+    pub subpass_merge_status: SubpassMergeStatusEXT,
+    pub description: StringArray<MAX_DESCRIPTION_SIZE>,
+    pub post_merge_index: u32,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassTransformBeginInfoQCOM.html>

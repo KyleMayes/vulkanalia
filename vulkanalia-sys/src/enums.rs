@@ -4851,8 +4851,8 @@ impl StructureType {
         Self(1000437000);
     pub const PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT: Self = Self(1000458000);
     pub const RENDER_PASS_CREATION_CONTROL_EXT: Self = Self(1000458001);
-    pub const RENDER_PASS_CREATION_FEEDBACK_INFO_EXT: Self = Self(1000458002);
-    pub const RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT: Self = Self(1000458003);
+    pub const RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT: Self = Self(1000458002);
+    pub const RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT: Self = Self(1000458003);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5562,8 +5562,8 @@ impl fmt::Debug for StructureType {
             ),
             1000458000 => write!(f, "PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT"),
             1000458001 => write!(f, "RENDER_PASS_CREATION_CONTROL_EXT"),
-            1000458002 => write!(f, "RENDER_PASS_CREATION_FEEDBACK_INFO_EXT"),
-            1000458003 => write!(f, "RENDER_PASS_SUBPASS_FEEDBACK_INFO_EXT"),
+            1000458002 => write!(f, "RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT"),
+            1000458003 => write!(f, "RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT"),
             _ => self.0.fmt(f),
         }
     }
