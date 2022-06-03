@@ -47698,7 +47698,7 @@ unsafe impl<'b> Cast for RenderPassCreateInfoBuilder<'b> {
 /// A Vulkan struct that can be used to extend a [`RenderPassCreateInfo2`].
 pub unsafe trait ExtendsRenderPassCreateInfo2: fmt::Debug {}
 unsafe impl ExtendsRenderPassCreateInfo2 for RenderPassCreationControlEXT {}
-unsafe impl ExtendsRenderPassCreateInfo2 for RenderPassCreationFeedbackInfoEXT {}
+unsafe impl ExtendsRenderPassCreateInfo2 for RenderPassCreationFeedbackCreateInfoEXT {}
 unsafe impl ExtendsRenderPassCreateInfo2 for RenderPassFragmentDensityMapCreateInfoEXT {}
 
 unsafe impl Cast for RenderPassCreateInfo2 {
@@ -47805,11 +47805,6 @@ unsafe impl<'b> Cast for RenderPassCreateInfo2Builder<'b> {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`RenderPassCreationControlEXT`].
-pub unsafe trait ExtendsRenderPassCreationControlEXT: fmt::Debug {}
-unsafe impl ExtendsRenderPassCreationControlEXT for RenderPassCreationFeedbackInfoEXT {}
-unsafe impl ExtendsRenderPassCreationControlEXT for RenderPassSubpassFeedbackInfoEXT {}
-
 unsafe impl Cast for RenderPassCreationControlEXT {
     type Target = RenderPassCreationControlEXT;
 
@@ -47819,30 +47814,18 @@ unsafe impl Cast for RenderPassCreationControlEXT {
     }
 }
 
-impl<'b> HasBuilder<'b> for RenderPassCreationControlEXT {
-    type Builder = RenderPassCreationControlEXTBuilder<'b>;
+impl HasBuilder<'static> for RenderPassCreationControlEXT {
+    type Builder = RenderPassCreationControlEXTBuilder;
 }
 
 /// A builder for a [`RenderPassCreationControlEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct RenderPassCreationControlEXTBuilder<'b> {
+pub struct RenderPassCreationControlEXTBuilder {
     value: RenderPassCreationControlEXT,
-    _marker: PhantomData<&'b ()>,
 }
 
-impl<'b> RenderPassCreationControlEXTBuilder<'b> {
-    #[inline]
-    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
-    where
-        T: ExtendsRenderPassCreationControlEXT,
-    {
-        let next = (next.as_mut() as *mut T).cast::<RenderPassCreationControlEXT>();
-        unsafe { *next }.next = self.next;
-        self.next = next.cast();
-        self
-    }
-
+impl RenderPassCreationControlEXTBuilder {
     #[inline]
     pub fn disallow_merging(mut self, disallow_merging: bool) -> Self {
         self.value.disallow_merging = disallow_merging as Bool32;
@@ -47855,7 +47838,7 @@ impl<'b> RenderPassCreationControlEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassCreationControlEXTBuilder<'b> {
+impl ops::Deref for RenderPassCreationControlEXTBuilder {
     type Target = RenderPassCreationControlEXT;
 
     #[inline]
@@ -47864,15 +47847,77 @@ impl<'b> ops::Deref for RenderPassCreationControlEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassCreationControlEXTBuilder<'b> {
+impl ops::DerefMut for RenderPassCreationControlEXTBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassCreationControlEXTBuilder<'b> {
+unsafe impl Cast for RenderPassCreationControlEXTBuilder {
     type Target = RenderPassCreationControlEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for RenderPassCreationFeedbackCreateInfoEXT {
+    type Target = RenderPassCreationFeedbackCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for RenderPassCreationFeedbackCreateInfoEXT {
+    type Builder = RenderPassCreationFeedbackCreateInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`RenderPassCreationFeedbackCreateInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct RenderPassCreationFeedbackCreateInfoEXTBuilder<'b> {
+    value: RenderPassCreationFeedbackCreateInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> RenderPassCreationFeedbackCreateInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn render_pass_feedback(
+        mut self,
+        render_pass_feedback: &'b mut impl Cast<Target = RenderPassCreationFeedbackInfoEXT>,
+    ) -> Self {
+        self.value.render_pass_feedback = render_pass_feedback.as_mut();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> RenderPassCreationFeedbackCreateInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for RenderPassCreationFeedbackCreateInfoEXTBuilder<'b> {
+    type Target = RenderPassCreationFeedbackCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for RenderPassCreationFeedbackCreateInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for RenderPassCreationFeedbackCreateInfoEXTBuilder<'b> {
+    type Target = RenderPassCreationFeedbackCreateInfoEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -48204,6 +48249,68 @@ impl<'b> ops::DerefMut for RenderPassSampleLocationsBeginInfoEXTBuilder<'b> {
 
 unsafe impl<'b> Cast for RenderPassSampleLocationsBeginInfoEXTBuilder<'b> {
     type Target = RenderPassSampleLocationsBeginInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for RenderPassSubpassFeedbackCreateInfoEXT {
+    type Target = RenderPassSubpassFeedbackCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for RenderPassSubpassFeedbackCreateInfoEXT {
+    type Builder = RenderPassSubpassFeedbackCreateInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`RenderPassSubpassFeedbackCreateInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct RenderPassSubpassFeedbackCreateInfoEXTBuilder<'b> {
+    value: RenderPassSubpassFeedbackCreateInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> RenderPassSubpassFeedbackCreateInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn subpass_feedback(
+        mut self,
+        subpass_feedback: &'b mut impl Cast<Target = RenderPassSubpassFeedbackInfoEXT>,
+    ) -> Self {
+        self.value.subpass_feedback = subpass_feedback.as_mut();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> RenderPassSubpassFeedbackCreateInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for RenderPassSubpassFeedbackCreateInfoEXTBuilder<'b> {
+    type Target = RenderPassSubpassFeedbackCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for RenderPassSubpassFeedbackCreateInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for RenderPassSubpassFeedbackCreateInfoEXTBuilder<'b> {
+    type Target = RenderPassSubpassFeedbackCreateInfoEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -52399,7 +52506,7 @@ unsafe impl<'b> Cast for SubpassDescriptionBuilder<'b> {
 pub unsafe trait ExtendsSubpassDescription2: fmt::Debug {}
 unsafe impl ExtendsSubpassDescription2 for FragmentShadingRateAttachmentInfoKHR {}
 unsafe impl ExtendsSubpassDescription2 for RenderPassCreationControlEXT {}
-unsafe impl ExtendsSubpassDescription2 for RenderPassSubpassFeedbackInfoEXT {}
+unsafe impl ExtendsSubpassDescription2 for RenderPassSubpassFeedbackCreateInfoEXT {}
 unsafe impl ExtendsSubpassDescription2 for SubpassDescriptionDepthStencilResolve {}
 
 unsafe impl Cast for SubpassDescription2 {
