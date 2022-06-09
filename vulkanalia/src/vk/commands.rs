@@ -304,6 +304,7 @@ pub struct DeviceCommands {
     pub end_command_buffer: PFN_vkEndCommandBuffer,
     pub enumerate_physical_device_queue_family_performance_query_counters_khr:
         PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR,
+    pub export_metal_objects_ext: PFN_vkExportMetalObjectsEXT,
     pub flush_mapped_memory_ranges: PFN_vkFlushMappedMemoryRanges,
     pub free_command_buffers: PFN_vkFreeCommandBuffers,
     pub free_descriptor_sets: PFN_vkFreeDescriptorSets,
@@ -4817,6 +4818,20 @@ impl DeviceCommands {
                         _counter_descriptions: *mut PerformanceCounterDescriptionKHR,
                     ) -> Result {
                         panic!("could not load vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR")
+                    }
+                    fallback
+                }
+            },
+            export_metal_objects_ext: {
+                let value = loader(b"vkExportMetalObjectsEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _metal_objects_info: *mut ExportMetalObjectsInfoEXT,
+                    ) {
+                        panic!("could not load vkExportMetalObjectsEXT")
                     }
                     fallback
                 }

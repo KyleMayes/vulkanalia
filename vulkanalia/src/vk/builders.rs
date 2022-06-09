@@ -5451,6 +5451,10 @@ unsafe impl Cast for BufferOpaqueCaptureAddressCreateInfoBuilder {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`BufferViewCreateInfo`].
+pub unsafe trait ExtendsBufferViewCreateInfo: fmt::Debug {}
+unsafe impl ExtendsBufferViewCreateInfo for ExportMetalObjectCreateInfoEXT {}
+
 unsafe impl Cast for BufferViewCreateInfo {
     type Target = BufferViewCreateInfo;
 
@@ -5460,18 +5464,30 @@ unsafe impl Cast for BufferViewCreateInfo {
     }
 }
 
-impl HasBuilder<'static> for BufferViewCreateInfo {
-    type Builder = BufferViewCreateInfoBuilder;
+impl<'b> HasBuilder<'b> for BufferViewCreateInfo {
+    type Builder = BufferViewCreateInfoBuilder<'b>;
 }
 
 /// A builder for a [`BufferViewCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct BufferViewCreateInfoBuilder {
+pub struct BufferViewCreateInfoBuilder<'b> {
     value: BufferViewCreateInfo,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl BufferViewCreateInfoBuilder {
+impl<'b> BufferViewCreateInfoBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsBufferViewCreateInfo,
+    {
+        let next = (next.as_mut() as *mut T).cast::<BufferViewCreateInfo>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn flags(mut self, flags: BufferViewCreateFlags) -> Self {
         self.value.flags = flags;
@@ -5508,7 +5524,7 @@ impl BufferViewCreateInfoBuilder {
     }
 }
 
-impl ops::Deref for BufferViewCreateInfoBuilder {
+impl<'b> ops::Deref for BufferViewCreateInfoBuilder<'b> {
     type Target = BufferViewCreateInfo;
 
     #[inline]
@@ -5517,14 +5533,14 @@ impl ops::Deref for BufferViewCreateInfoBuilder {
     }
 }
 
-impl ops::DerefMut for BufferViewCreateInfoBuilder {
+impl<'b> ops::DerefMut for BufferViewCreateInfoBuilder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for BufferViewCreateInfoBuilder {
+unsafe impl<'b> Cast for BufferViewCreateInfoBuilder<'b> {
     type Target = BufferViewCreateInfo;
 
     #[inline]
@@ -10420,6 +10436,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiDrawFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerformanceQueryFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineCreationCacheControlFeatures {}
@@ -13610,6 +13627,11 @@ unsafe impl<'b> Cast for DrmFormatModifierPropertiesListEXTBuilder<'b> {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`EventCreateInfo`].
+pub unsafe trait ExtendsEventCreateInfo: fmt::Debug {}
+unsafe impl ExtendsEventCreateInfo for ExportMetalObjectCreateInfoEXT {}
+unsafe impl ExtendsEventCreateInfo for ImportMetalSharedEventInfoEXT {}
+
 unsafe impl Cast for EventCreateInfo {
     type Target = EventCreateInfo;
 
@@ -13619,18 +13641,30 @@ unsafe impl Cast for EventCreateInfo {
     }
 }
 
-impl HasBuilder<'static> for EventCreateInfo {
-    type Builder = EventCreateInfoBuilder;
+impl<'b> HasBuilder<'b> for EventCreateInfo {
+    type Builder = EventCreateInfoBuilder<'b>;
 }
 
 /// A builder for a [`EventCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct EventCreateInfoBuilder {
+pub struct EventCreateInfoBuilder<'b> {
     value: EventCreateInfo,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl EventCreateInfoBuilder {
+impl<'b> EventCreateInfoBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsEventCreateInfo,
+    {
+        let next = (next.as_mut() as *mut T).cast::<EventCreateInfo>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn flags(mut self, flags: EventCreateFlags) -> Self {
         self.value.flags = flags;
@@ -13643,7 +13677,7 @@ impl EventCreateInfoBuilder {
     }
 }
 
-impl ops::Deref for EventCreateInfoBuilder {
+impl<'b> ops::Deref for EventCreateInfoBuilder<'b> {
     type Target = EventCreateInfo;
 
     #[inline]
@@ -13652,14 +13686,14 @@ impl ops::Deref for EventCreateInfoBuilder {
     }
 }
 
-impl ops::DerefMut for EventCreateInfoBuilder {
+impl<'b> ops::DerefMut for EventCreateInfoBuilder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for EventCreateInfoBuilder {
+unsafe impl<'b> Cast for EventCreateInfoBuilder<'b> {
     type Target = EventCreateInfo;
 
     #[inline]
@@ -14042,6 +14076,539 @@ impl<'b> ops::DerefMut for ExportMemoryWin32HandleInfoNVBuilder<'b> {
 
 unsafe impl<'b> Cast for ExportMemoryWin32HandleInfoNVBuilder<'b> {
     type Target = ExportMemoryWin32HandleInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalBufferInfoEXT {
+    type Target = ExportMetalBufferInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ExportMetalBufferInfoEXT {
+    type Builder = ExportMetalBufferInfoEXTBuilder;
+}
+
+/// A builder for a [`ExportMetalBufferInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExportMetalBufferInfoEXTBuilder {
+    value: ExportMetalBufferInfoEXT,
+}
+
+impl ExportMetalBufferInfoEXTBuilder {
+    #[inline]
+    pub fn memory(mut self, memory: DeviceMemory) -> Self {
+        self.value.memory = memory;
+        self
+    }
+
+    #[inline]
+    pub fn mtl_buffer(mut self, mtl_buffer: MTLBuffer_id) -> Self {
+        self.value.mtl_buffer = mtl_buffer;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExportMetalBufferInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ExportMetalBufferInfoEXTBuilder {
+    type Target = ExportMetalBufferInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ExportMetalBufferInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalBufferInfoEXTBuilder {
+    type Target = ExportMetalBufferInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalCommandQueueInfoEXT {
+    type Target = ExportMetalCommandQueueInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ExportMetalCommandQueueInfoEXT {
+    type Builder = ExportMetalCommandQueueInfoEXTBuilder;
+}
+
+/// A builder for a [`ExportMetalCommandQueueInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExportMetalCommandQueueInfoEXTBuilder {
+    value: ExportMetalCommandQueueInfoEXT,
+}
+
+impl ExportMetalCommandQueueInfoEXTBuilder {
+    #[inline]
+    pub fn queue(mut self, queue: Queue) -> Self {
+        self.value.queue = queue;
+        self
+    }
+
+    #[inline]
+    pub fn mtl_command_queue(mut self, mtl_command_queue: MTLCommandQueue_id) -> Self {
+        self.value.mtl_command_queue = mtl_command_queue;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExportMetalCommandQueueInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ExportMetalCommandQueueInfoEXTBuilder {
+    type Target = ExportMetalCommandQueueInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ExportMetalCommandQueueInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalCommandQueueInfoEXTBuilder {
+    type Target = ExportMetalCommandQueueInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalDeviceInfoEXT {
+    type Target = ExportMetalDeviceInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ExportMetalDeviceInfoEXT {
+    type Builder = ExportMetalDeviceInfoEXTBuilder;
+}
+
+/// A builder for a [`ExportMetalDeviceInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExportMetalDeviceInfoEXTBuilder {
+    value: ExportMetalDeviceInfoEXT,
+}
+
+impl ExportMetalDeviceInfoEXTBuilder {
+    #[inline]
+    pub fn mtl_device(mut self, mtl_device: MTLDevice_id) -> Self {
+        self.value.mtl_device = mtl_device;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExportMetalDeviceInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ExportMetalDeviceInfoEXTBuilder {
+    type Target = ExportMetalDeviceInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ExportMetalDeviceInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalDeviceInfoEXTBuilder {
+    type Target = ExportMetalDeviceInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalIOSurfaceInfoEXT {
+    type Target = ExportMetalIOSurfaceInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ExportMetalIOSurfaceInfoEXT {
+    type Builder = ExportMetalIOSurfaceInfoEXTBuilder;
+}
+
+/// A builder for a [`ExportMetalIOSurfaceInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExportMetalIOSurfaceInfoEXTBuilder {
+    value: ExportMetalIOSurfaceInfoEXT,
+}
+
+impl ExportMetalIOSurfaceInfoEXTBuilder {
+    #[inline]
+    pub fn image(mut self, image: Image) -> Self {
+        self.value.image = image;
+        self
+    }
+
+    #[inline]
+    pub fn io_surface(mut self, io_surface: IOSurfaceRef) -> Self {
+        self.value.io_surface = io_surface;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExportMetalIOSurfaceInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ExportMetalIOSurfaceInfoEXTBuilder {
+    type Target = ExportMetalIOSurfaceInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ExportMetalIOSurfaceInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalIOSurfaceInfoEXTBuilder {
+    type Target = ExportMetalIOSurfaceInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalObjectCreateInfoEXT {
+    type Target = ExportMetalObjectCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ExportMetalObjectCreateInfoEXT {
+    type Builder = ExportMetalObjectCreateInfoEXTBuilder;
+}
+
+/// A builder for a [`ExportMetalObjectCreateInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExportMetalObjectCreateInfoEXTBuilder {
+    value: ExportMetalObjectCreateInfoEXT,
+}
+
+impl ExportMetalObjectCreateInfoEXTBuilder {
+    #[inline]
+    pub fn export_object_type(mut self, export_object_type: ExportMetalObjectTypeFlagsEXT) -> Self {
+        self.value.export_object_type = export_object_type;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExportMetalObjectCreateInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ExportMetalObjectCreateInfoEXTBuilder {
+    type Target = ExportMetalObjectCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ExportMetalObjectCreateInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalObjectCreateInfoEXTBuilder {
+    type Target = ExportMetalObjectCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+/// A Vulkan struct that can be used to extend a [`ExportMetalObjectsInfoEXT`].
+pub unsafe trait ExtendsExportMetalObjectsInfoEXT: fmt::Debug {}
+unsafe impl ExtendsExportMetalObjectsInfoEXT for ExportMetalBufferInfoEXT {}
+unsafe impl ExtendsExportMetalObjectsInfoEXT for ExportMetalCommandQueueInfoEXT {}
+unsafe impl ExtendsExportMetalObjectsInfoEXT for ExportMetalDeviceInfoEXT {}
+unsafe impl ExtendsExportMetalObjectsInfoEXT for ExportMetalIOSurfaceInfoEXT {}
+unsafe impl ExtendsExportMetalObjectsInfoEXT for ExportMetalSharedEventInfoEXT {}
+unsafe impl ExtendsExportMetalObjectsInfoEXT for ExportMetalTextureInfoEXT {}
+
+unsafe impl Cast for ExportMetalObjectsInfoEXT {
+    type Target = ExportMetalObjectsInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for ExportMetalObjectsInfoEXT {
+    type Builder = ExportMetalObjectsInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`ExportMetalObjectsInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExportMetalObjectsInfoEXTBuilder<'b> {
+    value: ExportMetalObjectsInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> ExportMetalObjectsInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsExportMetalObjectsInfoEXT,
+    {
+        let next = (next.as_mut() as *mut T).cast::<ExportMetalObjectsInfoEXT>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExportMetalObjectsInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for ExportMetalObjectsInfoEXTBuilder<'b> {
+    type Target = ExportMetalObjectsInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for ExportMetalObjectsInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for ExportMetalObjectsInfoEXTBuilder<'b> {
+    type Target = ExportMetalObjectsInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalSharedEventInfoEXT {
+    type Target = ExportMetalSharedEventInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ExportMetalSharedEventInfoEXT {
+    type Builder = ExportMetalSharedEventInfoEXTBuilder;
+}
+
+/// A builder for a [`ExportMetalSharedEventInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExportMetalSharedEventInfoEXTBuilder {
+    value: ExportMetalSharedEventInfoEXT,
+}
+
+impl ExportMetalSharedEventInfoEXTBuilder {
+    #[inline]
+    pub fn semaphore(mut self, semaphore: Semaphore) -> Self {
+        self.value.semaphore = semaphore;
+        self
+    }
+
+    #[inline]
+    pub fn event(mut self, event: Event) -> Self {
+        self.value.event = event;
+        self
+    }
+
+    #[inline]
+    pub fn mtl_shared_event(mut self, mtl_shared_event: MTLSharedEvent_id) -> Self {
+        self.value.mtl_shared_event = mtl_shared_event;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExportMetalSharedEventInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ExportMetalSharedEventInfoEXTBuilder {
+    type Target = ExportMetalSharedEventInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ExportMetalSharedEventInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalSharedEventInfoEXTBuilder {
+    type Target = ExportMetalSharedEventInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalTextureInfoEXT {
+    type Target = ExportMetalTextureInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ExportMetalTextureInfoEXT {
+    type Builder = ExportMetalTextureInfoEXTBuilder;
+}
+
+/// A builder for a [`ExportMetalTextureInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExportMetalTextureInfoEXTBuilder {
+    value: ExportMetalTextureInfoEXT,
+}
+
+impl ExportMetalTextureInfoEXTBuilder {
+    #[inline]
+    pub fn image(mut self, image: Image) -> Self {
+        self.value.image = image;
+        self
+    }
+
+    #[inline]
+    pub fn image_view(mut self, image_view: ImageView) -> Self {
+        self.value.image_view = image_view;
+        self
+    }
+
+    #[inline]
+    pub fn buffer_view(mut self, buffer_view: BufferView) -> Self {
+        self.value.buffer_view = buffer_view;
+        self
+    }
+
+    #[inline]
+    pub fn plane(mut self, plane: ImageAspectFlags) -> Self {
+        self.value.plane = plane;
+        self
+    }
+
+    #[inline]
+    pub fn mtl_texture(mut self, mtl_texture: MTLTexture_id) -> Self {
+        self.value.mtl_texture = mtl_texture;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExportMetalTextureInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ExportMetalTextureInfoEXTBuilder {
+    type Target = ExportMetalTextureInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ExportMetalTextureInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ExportMetalTextureInfoEXTBuilder {
+    type Target = ExportMetalTextureInfoEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -17721,6 +18288,7 @@ unsafe impl Cast for ImageCopy2Builder {
 pub unsafe trait ExtendsImageCreateInfo: fmt::Debug {}
 unsafe impl ExtendsImageCreateInfo for BufferCollectionImageCreateInfoFUCHSIA {}
 unsafe impl ExtendsImageCreateInfo for DedicatedAllocationImageCreateInfoNV {}
+unsafe impl ExtendsImageCreateInfo for ExportMetalObjectCreateInfoEXT {}
 unsafe impl ExtendsImageCreateInfo for ExternalFormatANDROID {}
 unsafe impl ExtendsImageCreateInfo for ExternalMemoryImageCreateInfo {}
 unsafe impl ExtendsImageCreateInfo for ExternalMemoryImageCreateInfoNV {}
@@ -17730,6 +18298,8 @@ unsafe impl ExtendsImageCreateInfo for ImageDrmFormatModifierListCreateInfoEXT {
 unsafe impl ExtendsImageCreateInfo for ImageFormatListCreateInfo {}
 unsafe impl ExtendsImageCreateInfo for ImageStencilUsageCreateInfo {}
 unsafe impl ExtendsImageCreateInfo for ImageSwapchainCreateInfoKHR {}
+unsafe impl ExtendsImageCreateInfo for ImportMetalIOSurfaceInfoEXT {}
+unsafe impl ExtendsImageCreateInfo for ImportMetalTextureInfoEXT {}
 
 unsafe impl Cast for ImageCreateInfo {
     type Target = ImageCreateInfo;
@@ -19581,6 +20151,7 @@ unsafe impl Cast for ImageViewAddressPropertiesNVXBuilder {
 
 /// A Vulkan struct that can be used to extend a [`ImageViewCreateInfo`].
 pub unsafe trait ExtendsImageViewCreateInfo: fmt::Debug {}
+unsafe impl ExtendsImageViewCreateInfo for ExportMetalObjectCreateInfoEXT {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewASTCDecodeModeEXT {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewMinLodCreateInfoEXT {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewUsageCreateInfo {}
@@ -20483,6 +21054,244 @@ unsafe impl Cast for ImportMemoryZirconHandleInfoFUCHSIABuilder {
     }
 }
 
+unsafe impl Cast for ImportMetalBufferInfoEXT {
+    type Target = ImportMetalBufferInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ImportMetalBufferInfoEXT {
+    type Builder = ImportMetalBufferInfoEXTBuilder;
+}
+
+/// A builder for a [`ImportMetalBufferInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImportMetalBufferInfoEXTBuilder {
+    value: ImportMetalBufferInfoEXT,
+}
+
+impl ImportMetalBufferInfoEXTBuilder {
+    #[inline]
+    pub fn mtl_buffer(mut self, mtl_buffer: MTLBuffer_id) -> Self {
+        self.value.mtl_buffer = mtl_buffer;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImportMetalBufferInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ImportMetalBufferInfoEXTBuilder {
+    type Target = ImportMetalBufferInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ImportMetalBufferInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ImportMetalBufferInfoEXTBuilder {
+    type Target = ImportMetalBufferInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ImportMetalIOSurfaceInfoEXT {
+    type Target = ImportMetalIOSurfaceInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ImportMetalIOSurfaceInfoEXT {
+    type Builder = ImportMetalIOSurfaceInfoEXTBuilder;
+}
+
+/// A builder for a [`ImportMetalIOSurfaceInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImportMetalIOSurfaceInfoEXTBuilder {
+    value: ImportMetalIOSurfaceInfoEXT,
+}
+
+impl ImportMetalIOSurfaceInfoEXTBuilder {
+    #[inline]
+    pub fn io_surface(mut self, io_surface: IOSurfaceRef) -> Self {
+        self.value.io_surface = io_surface;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImportMetalIOSurfaceInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ImportMetalIOSurfaceInfoEXTBuilder {
+    type Target = ImportMetalIOSurfaceInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ImportMetalIOSurfaceInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ImportMetalIOSurfaceInfoEXTBuilder {
+    type Target = ImportMetalIOSurfaceInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ImportMetalSharedEventInfoEXT {
+    type Target = ImportMetalSharedEventInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ImportMetalSharedEventInfoEXT {
+    type Builder = ImportMetalSharedEventInfoEXTBuilder;
+}
+
+/// A builder for a [`ImportMetalSharedEventInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImportMetalSharedEventInfoEXTBuilder {
+    value: ImportMetalSharedEventInfoEXT,
+}
+
+impl ImportMetalSharedEventInfoEXTBuilder {
+    #[inline]
+    pub fn mtl_shared_event(mut self, mtl_shared_event: MTLSharedEvent_id) -> Self {
+        self.value.mtl_shared_event = mtl_shared_event;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImportMetalSharedEventInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ImportMetalSharedEventInfoEXTBuilder {
+    type Target = ImportMetalSharedEventInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ImportMetalSharedEventInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ImportMetalSharedEventInfoEXTBuilder {
+    type Target = ImportMetalSharedEventInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ImportMetalTextureInfoEXT {
+    type Target = ImportMetalTextureInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ImportMetalTextureInfoEXT {
+    type Builder = ImportMetalTextureInfoEXTBuilder;
+}
+
+/// A builder for a [`ImportMetalTextureInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImportMetalTextureInfoEXTBuilder {
+    value: ImportMetalTextureInfoEXT,
+}
+
+impl ImportMetalTextureInfoEXTBuilder {
+    #[inline]
+    pub fn plane(mut self, plane: ImageAspectFlags) -> Self {
+        self.value.plane = plane;
+        self
+    }
+
+    #[inline]
+    pub fn mtl_texture(mut self, mtl_texture: MTLTexture_id) -> Self {
+        self.value.mtl_texture = mtl_texture;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImportMetalTextureInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ImportMetalTextureInfoEXTBuilder {
+    type Target = ImportMetalTextureInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ImportMetalTextureInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ImportMetalTextureInfoEXTBuilder {
+    type Target = ImportMetalTextureInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ImportSemaphoreFdInfoKHR {
     type Target = ImportSemaphoreFdInfoKHR;
 
@@ -21129,6 +21938,7 @@ unsafe impl Cast for InputAttachmentAspectReferenceBuilder {
 pub unsafe trait ExtendsInstanceCreateInfo: fmt::Debug {}
 unsafe impl ExtendsInstanceCreateInfo for DebugReportCallbackCreateInfoEXT {}
 unsafe impl ExtendsInstanceCreateInfo for DebugUtilsMessengerCreateInfoEXT {}
+unsafe impl ExtendsInstanceCreateInfo for ExportMetalObjectCreateInfoEXT {}
 unsafe impl ExtendsInstanceCreateInfo for ValidationFeaturesEXT {}
 unsafe impl ExtendsInstanceCreateInfo for ValidationFlagsEXT {}
 
@@ -21513,6 +22323,7 @@ unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryAllocateInfo {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryAllocateInfoNV {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryWin32HandleInfoKHR {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryWin32HandleInfoNV {}
+unsafe impl ExtendsMemoryAllocateInfo for ExportMetalObjectCreateInfoEXT {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportAndroidHardwareBufferInfoANDROID {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryBufferCollectionFUCHSIA {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryFdInfoKHR {}
@@ -21520,6 +22331,7 @@ unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryHostPointerInfoEXT {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryWin32HandleInfoKHR {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryWin32HandleInfoNV {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryZirconHandleInfoFUCHSIA {}
+unsafe impl ExtendsMemoryAllocateInfo for ImportMetalBufferInfoEXT {}
 unsafe impl ExtendsMemoryAllocateInfo for MemoryAllocateFlagsInfo {}
 unsafe impl ExtendsMemoryAllocateInfo for MemoryDedicatedAllocateInfo {}
 unsafe impl ExtendsMemoryAllocateInfo for MemoryOpaqueCaptureAddressAllocateInfo {}
@@ -28160,6 +28972,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesN
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiDrawFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiviewFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePerformanceQueryFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineCreationCacheControlFeatures {}
@@ -33011,6 +33824,64 @@ impl ops::DerefMut for PhysicalDeviceMutableDescriptorTypeFeaturesVALVEBuilder {
 
 unsafe impl Cast for PhysicalDeviceMutableDescriptorTypeFeaturesVALVEBuilder {
     type Target = PhysicalDeviceMutableDescriptorTypeFeaturesVALVE;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {
+    type Target = PhysicalDeviceNonSeamlessCubeMapFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {
+    type Builder = PhysicalDeviceNonSeamlessCubeMapFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceNonSeamlessCubeMapFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceNonSeamlessCubeMapFeaturesEXTBuilder {
+    value: PhysicalDeviceNonSeamlessCubeMapFeaturesEXT,
+}
+
+impl PhysicalDeviceNonSeamlessCubeMapFeaturesEXTBuilder {
+    #[inline]
+    pub fn non_seamless_cube_map(mut self, non_seamless_cube_map: bool) -> Self {
+        self.value.non_seamless_cube_map = non_seamless_cube_map as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceNonSeamlessCubeMapFeaturesEXTBuilder {
+    type Target = PhysicalDeviceNonSeamlessCubeMapFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceNonSeamlessCubeMapFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceNonSeamlessCubeMapFeaturesEXTBuilder {
+    type Target = PhysicalDeviceNonSeamlessCubeMapFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -49848,8 +50719,10 @@ unsafe impl<'b> Cast for ScreenSurfaceCreateInfoQNXBuilder<'b> {
 
 /// A Vulkan struct that can be used to extend a [`SemaphoreCreateInfo`].
 pub unsafe trait ExtendsSemaphoreCreateInfo: fmt::Debug {}
+unsafe impl ExtendsSemaphoreCreateInfo for ExportMetalObjectCreateInfoEXT {}
 unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreCreateInfo {}
 unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreWin32HandleInfoKHR {}
+unsafe impl ExtendsSemaphoreCreateInfo for ImportMetalSharedEventInfoEXT {}
 unsafe impl ExtendsSemaphoreCreateInfo for SemaphoreTypeCreateInfo {}
 
 unsafe impl Cast for SemaphoreCreateInfo {

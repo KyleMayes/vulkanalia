@@ -4,6 +4,8 @@
 - [May 24, 2022 Vulkan 1.3.215 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9b5562187a8ad72c171410b036ceedbc450153ba)
 - [fix typo: Initialization of **an** object has failed (#1865)](https://github.com/KhronosGroup/Vulkan-Docs/commit/84e29520c4ce42aec2412a98b53139fa45aa2af2)
 - [June 2, 2022 Vulkan 1.3.216 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/899dd1c16d5de69bd24e108f393d134fa2989512)
+- [VK_EXT_non_seamless_cube_map (#1628)](https://github.com/KhronosGroup/Vulkan-Docs/commit/9b5cef69af1e417a008325b4c8b0cdca35e26cc6)
+- [June 9, 2022 Vulkan 1.3.217 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/307906bddb5fab543dcf6d7fff737abeb15f8b10)
 
 ## [0.15.0] - 2022-05-18
 
