@@ -2143,6 +2143,10 @@ pub type PFN_vkEnumeratePhysicalDevices = unsafe extern "system" fn(
     _physical_devices: *mut PhysicalDevice,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkExportMetalObjectsEXT.html>
+pub type PFN_vkExportMetalObjectsEXT =
+    unsafe extern "system" fn(_device: Device, _metal_objects_info: *mut ExportMetalObjectsInfoEXT);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkFlushMappedMemoryRanges.html>
 pub type PFN_vkFlushMappedMemoryRanges = unsafe extern "system" fn(
     _device: Device,

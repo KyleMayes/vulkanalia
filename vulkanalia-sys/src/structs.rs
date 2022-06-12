@@ -4129,6 +4129,182 @@ impl Default for ExportMemoryWin32HandleInfoNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExportMetalBufferInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExportMetalBufferInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub memory: DeviceMemory,
+    pub mtl_buffer: MTLBuffer_id,
+}
+
+impl Default for ExportMetalBufferInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXPORT_METAL_BUFFER_INFO_EXT,
+            next: ptr::null(),
+            memory: DeviceMemory::default(),
+            mtl_buffer: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExportMetalCommandQueueInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExportMetalCommandQueueInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub queue: Queue,
+    pub mtl_command_queue: MTLCommandQueue_id,
+}
+
+impl Default for ExportMetalCommandQueueInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXPORT_METAL_COMMAND_QUEUE_INFO_EXT,
+            next: ptr::null(),
+            queue: Queue::default(),
+            mtl_command_queue: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExportMetalDeviceInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExportMetalDeviceInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub mtl_device: MTLDevice_id,
+}
+
+impl Default for ExportMetalDeviceInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXPORT_METAL_DEVICE_INFO_EXT,
+            next: ptr::null(),
+            mtl_device: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExportMetalIOSurfaceInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExportMetalIOSurfaceInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub image: Image,
+    pub io_surface: IOSurfaceRef,
+}
+
+impl Default for ExportMetalIOSurfaceInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXPORT_METAL_IO_SURFACE_INFO_EXT,
+            next: ptr::null(),
+            image: Image::default(),
+            io_surface: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExportMetalObjectCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExportMetalObjectCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub export_object_type: ExportMetalObjectTypeFlagsEXT,
+}
+
+impl Default for ExportMetalObjectCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXPORT_METAL_OBJECT_CREATE_INFO_EXT,
+            next: ptr::null(),
+            export_object_type: ExportMetalObjectTypeFlagsEXT::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExportMetalObjectsInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExportMetalObjectsInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+}
+
+impl Default for ExportMetalObjectsInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXPORT_METAL_OBJECTS_INFO_EXT,
+            next: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExportMetalSharedEventInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExportMetalSharedEventInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub semaphore: Semaphore,
+    pub event: Event,
+    pub mtl_shared_event: MTLSharedEvent_id,
+}
+
+impl Default for ExportMetalSharedEventInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXPORT_METAL_SHARED_EVENT_INFO_EXT,
+            next: ptr::null(),
+            semaphore: Semaphore::default(),
+            event: Event::default(),
+            mtl_shared_event: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExportMetalTextureInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExportMetalTextureInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub image: Image,
+    pub image_view: ImageView,
+    pub buffer_view: BufferView,
+    pub plane: ImageAspectFlags,
+    pub mtl_texture: MTLTexture_id,
+}
+
+impl Default for ExportMetalTextureInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXPORT_METAL_TEXTURE_INFO_EXT,
+            next: ptr::null(),
+            image: Image::default(),
+            image_view: ImageView::default(),
+            buffer_view: BufferView::default(),
+            plane: ImageAspectFlags::default(),
+            mtl_texture: ptr::null_mut(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExportSemaphoreCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5989,6 +6165,88 @@ impl Default for ImportMemoryZirconHandleInfoFUCHSIA {
             next: ptr::null(),
             handle_type: ExternalMemoryHandleTypeFlags::default(),
             handle: zx_handle_t::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImportMetalBufferInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImportMetalBufferInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub mtl_buffer: MTLBuffer_id,
+}
+
+impl Default for ImportMetalBufferInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMPORT_METAL_BUFFER_INFO_EXT,
+            next: ptr::null(),
+            mtl_buffer: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImportMetalIOSurfaceInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImportMetalIOSurfaceInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub io_surface: IOSurfaceRef,
+}
+
+impl Default for ImportMetalIOSurfaceInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMPORT_METAL_IO_SURFACE_INFO_EXT,
+            next: ptr::null(),
+            io_surface: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImportMetalSharedEventInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImportMetalSharedEventInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub mtl_shared_event: MTLSharedEvent_id,
+}
+
+impl Default for ImportMetalSharedEventInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMPORT_METAL_SHARED_EVENT_INFO_EXT,
+            next: ptr::null(),
+            mtl_shared_event: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImportMetalTextureInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImportMetalTextureInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub plane: ImageAspectFlags,
+    pub mtl_texture: MTLTexture_id,
+}
+
+impl Default for ImportMetalTextureInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMPORT_METAL_TEXTURE_INFO_EXT,
+            next: ptr::null(),
+            plane: ImageAspectFlags::default(),
+            mtl_texture: ptr::null_mut(),
         }
     }
 }
@@ -9535,6 +9793,26 @@ impl Default for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {
             s_type: StructureType::PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE,
             next: ptr::null_mut(),
             mutable_descriptor_type: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub non_seamless_cube_map: Bool32,
+}
+
+impl Default for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT,
+            next: ptr::null_mut(),
+            non_seamless_cube_map: Bool32::default(),
         }
     }
 }
