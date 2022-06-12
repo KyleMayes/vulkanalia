@@ -492,6 +492,20 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExportMetalObjectTypeFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct ExportMetalObjectTypeFlagsEXT: Flags {
+        const METAL_DEVICE = 1;
+        const METAL_COMMAND_QUEUE = 1 << 1;
+        const METAL_BUFFER = 1 << 2;
+        const METAL_TEXTURE = 1 << 3;
+        const METAL_IOSURFACE = 1 << 4;
+        const METAL_SHARED_EVENT = 1 << 5;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExternalFenceFeatureFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -1399,6 +1413,7 @@ bitflags! {
     pub struct SamplerCreateFlags: Flags {
         const SUBSAMPLED_EXT = 1;
         const SUBSAMPLED_COARSE_RECONSTRUCTION_EXT = 1 << 1;
+        const NON_SEAMLESS_CUBE_MAP_EXT = 1 << 2;
     }
 }
 

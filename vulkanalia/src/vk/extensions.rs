@@ -1942,6 +1942,22 @@ pub trait ExtMemoryPriorityExtension: DeviceV1_0 {
 
 impl ExtMemoryPriorityExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_metal_objects.html>
+pub trait ExtMetalObjectsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_METAL_OBJECTS_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkExportMetalObjectsEXT.html>
+    #[inline]
+    unsafe fn export_metal_objects_ext(&self, metal_objects_info: &mut ExportMetalObjectsInfoEXT) {
+        let __result =
+            (self.commands().export_metal_objects_ext)(self.handle(), metal_objects_info);
+    }
+}
+
+impl ExtMetalObjectsExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_metal_surface.html>
 pub trait ExtMetalSurfaceExtension: InstanceV1_0 {
     /// The metadata for this extension.
@@ -2024,6 +2040,15 @@ pub trait ExtMultiDrawExtension: DeviceV1_0 {
 }
 
 impl ExtMultiDrawExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_non_seamless_cube_map.html>
+pub trait ExtNonSeamlessCubeMapExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_NON_SEAMLESS_CUBE_MAP_EXTENSION;
+}
+
+impl ExtNonSeamlessCubeMapExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_pageable_device_local_memory.html>
 pub trait ExtPageableDeviceLocalMemoryExtension: DeviceV1_0 {

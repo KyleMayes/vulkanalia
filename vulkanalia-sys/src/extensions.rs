@@ -1308,6 +1308,22 @@ pub const EXT_MEMORY_PRIORITY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_metal_objects.html>
+#[allow(deprecated)]
+pub const EXT_METAL_OBJECTS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_metal_objects"),
+    number: 312,
+    type_: "device",
+    author: "EXT",
+    contact: "Bill Hollings @billhollings",
+    platform: Some("metal"),
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_metal_surface.html>
 #[allow(deprecated)]
 pub const EXT_METAL_SURFACE_EXTENSION: Extension = Extension {
@@ -1332,6 +1348,22 @@ pub const EXT_MULTI_DRAW_EXTENSION: Extension = Extension {
     type_: "device",
     author: "EXT",
     contact: "Mike Blumenkrantz @zmike",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_non_seamless_cube_map.html>
+#[allow(deprecated)]
+pub const EXT_NON_SEAMLESS_CUBE_MAP_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_non_seamless_cube_map"),
+    number: 423,
+    type_: "device",
+    author: "EXT",
+    contact: "Georg Lehmann @DadSchoorse",
     platform: None,
     required_extensions: None,
     required_version: None,
