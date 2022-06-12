@@ -603,11 +603,20 @@ private val opaque = setOf(
 
 /** The platform typedefs which are aliases of pointer types. */
 private val platformPointers = setOf(
+    // iOS / macOS
+    "IOSurfaceRef",
+    "MTLBuffer_id",
+    "MTLCommandQueue_id",
+    "MTLDevice_id",
+    "MTLSharedEvent_id",
+    "MTLTexture_id",
+    // Windows
     "HANDLE",
     "HINSTANCE",
     "HMONITOR",
     "HWND",
     "LPCWSTR",
+    // X11
     "Display",
 )
 

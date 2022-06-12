@@ -28,6 +28,12 @@ pub type IDirectFBSurface = c_void;
 pub type CAMetalLayer = c_void;
 pub type GgpFrameToken = u32;
 pub type GgpStreamDescriptor = u32;
+pub type IOSurfaceRef = *mut c_void;
+pub type MTLBuffer_id = *mut c_void;
+pub type MTLCommandQueue_id = *mut c_void;
+pub type MTLDevice_id = *mut c_void;
+pub type MTLSharedEvent_id = *mut c_void;
+pub type MTLTexture_id = *mut c_void;
 
 // QNX
 
