@@ -6,6 +6,9 @@
 - [June 2, 2022 Vulkan 1.3.216 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/899dd1c16d5de69bd24e108f393d134fa2989512)
 - [VK_EXT_non_seamless_cube_map (#1628)](https://github.com/KhronosGroup/Vulkan-Docs/commit/9b5cef69af1e417a008325b4c8b0cdca35e26cc6)
 - [June 9, 2022 Vulkan 1.3.217 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/307906bddb5fab543dcf6d7fff737abeb15f8b10)
+- [June 16, 2022 Vulkan 1.3.218 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/067a92d083e6a7ec97ef3bcc34e5b75fa71eec79)
+- [Add a new driver id VK_DRIVER_ID_MESA_DOZEN (#1877)](https://github.com/KhronosGroup/Vulkan-Docs/commit/afbecff18cdb2515af523b81521d66a86d79d16f)
+- [June 30, 2022 Vulkan 1.3.219 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/080f66a96b61419b8663872d6cab6ce68a3123e8)
 
 ## [0.15.0] - 2022-05-18
 

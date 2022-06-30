@@ -3118,10 +3118,6 @@ unsafe impl Cast for BaseInStructureBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`BaseOutStructure`].
-pub unsafe trait ExtendsBaseOutStructure: fmt::Debug {}
-unsafe impl ExtendsBaseOutStructure for PipelinePropertiesIdentifierEXT {}
-
 unsafe impl Cast for BaseOutStructure {
     type Target = BaseOutStructure;
 
@@ -3131,33 +3127,21 @@ unsafe impl Cast for BaseOutStructure {
     }
 }
 
-impl<'b> HasBuilder<'b> for BaseOutStructure {
-    type Builder = BaseOutStructureBuilder<'b>;
+impl HasBuilder<'static> for BaseOutStructure {
+    type Builder = BaseOutStructureBuilder;
 }
 
 /// A builder for a [`BaseOutStructure`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct BaseOutStructureBuilder<'b> {
+pub struct BaseOutStructureBuilder {
     value: BaseOutStructure,
-    _marker: PhantomData<&'b ()>,
 }
 
-impl<'b> BaseOutStructureBuilder<'b> {
+impl BaseOutStructureBuilder {
     #[inline]
     pub fn s_type(mut self, s_type: StructureType) -> Self {
         self.value.s_type = s_type;
-        self
-    }
-
-    #[inline]
-    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
-    where
-        T: ExtendsBaseOutStructure,
-    {
-        let next = (next.as_mut() as *mut T).cast::<BaseOutStructure>();
-        unsafe { *next }.next = self.next;
-        self.next = next.cast();
         self
     }
 
@@ -3167,7 +3151,7 @@ impl<'b> BaseOutStructureBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BaseOutStructureBuilder<'b> {
+impl ops::Deref for BaseOutStructureBuilder {
     type Target = BaseOutStructure;
 
     #[inline]
@@ -3176,14 +3160,14 @@ impl<'b> ops::Deref for BaseOutStructureBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BaseOutStructureBuilder<'b> {
+impl ops::DerefMut for BaseOutStructureBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BaseOutStructureBuilder<'b> {
+unsafe impl Cast for BaseOutStructureBuilder {
     type Target = BaseOutStructure;
 
     #[inline]
@@ -10434,6 +10418,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance4Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiDrawFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
@@ -10476,6 +10461,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageAtomicInt64Feat
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderImageFootprintFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerDotProductFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {}
@@ -15967,6 +15953,7 @@ pub unsafe trait ExtendsFormatProperties2: fmt::Debug {}
 unsafe impl ExtendsFormatProperties2 for DrmFormatModifierPropertiesList2EXT {}
 unsafe impl ExtendsFormatProperties2 for DrmFormatModifierPropertiesListEXT {}
 unsafe impl ExtendsFormatProperties2 for FormatProperties3 {}
+unsafe impl ExtendsFormatProperties2 for SubpassResolvePerformanceQueryEXT {}
 
 unsafe impl Cast for FormatProperties2 {
     type Target = FormatProperties2;
@@ -23878,6 +23865,74 @@ unsafe impl Cast for MultisamplePropertiesEXTBuilder {
     }
 }
 
+unsafe impl Cast for MultisampledRenderToSingleSampledInfoEXT {
+    type Target = MultisampledRenderToSingleSampledInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MultisampledRenderToSingleSampledInfoEXT {
+    type Builder = MultisampledRenderToSingleSampledInfoEXTBuilder;
+}
+
+/// A builder for a [`MultisampledRenderToSingleSampledInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MultisampledRenderToSingleSampledInfoEXTBuilder {
+    value: MultisampledRenderToSingleSampledInfoEXT,
+}
+
+impl MultisampledRenderToSingleSampledInfoEXTBuilder {
+    #[inline]
+    pub fn multisampled_render_to_single_sampled_enable(
+        mut self,
+        multisampled_render_to_single_sampled_enable: bool,
+    ) -> Self {
+        self.value.multisampled_render_to_single_sampled_enable =
+            multisampled_render_to_single_sampled_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn rasterization_samples(mut self, rasterization_samples: SampleCountFlags) -> Self {
+        self.value.rasterization_samples = rasterization_samples;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MultisampledRenderToSingleSampledInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for MultisampledRenderToSingleSampledInfoEXTBuilder {
+    type Target = MultisampledRenderToSingleSampledInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MultisampledRenderToSingleSampledInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MultisampledRenderToSingleSampledInfoEXTBuilder {
+    type Target = MultisampledRenderToSingleSampledInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for MultiviewPerViewAttributesInfoNVX {
     type Target = MultiviewPerViewAttributesInfoNVX;
 
@@ -28970,6 +29025,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance4Feature
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiDrawFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiviewFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
@@ -29024,6 +29083,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageAtomicIn
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderImageFootprintFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerDotProductFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
@@ -33578,6 +33638,68 @@ unsafe impl Cast for PhysicalDeviceMultiDrawPropertiesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {
+    type Target = PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {
+    type Builder = PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXTBuilder {
+    value: PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT,
+}
+
+impl PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXTBuilder {
+    #[inline]
+    pub fn multisampled_render_to_single_sampled(
+        mut self,
+        multisampled_render_to_single_sampled: bool,
+    ) -> Self {
+        self.value.multisampled_render_to_single_sampled =
+            multisampled_render_to_single_sampled as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXTBuilder {
+    type Target = PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXTBuilder {
+    type Target = PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceMultiviewFeatures {
     type Target = PhysicalDeviceMultiviewFeatures;
 
@@ -35116,6 +35238,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSamplerFilterMinm
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCoreProperties2AMD {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCorePropertiesAMD {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderIntegerDotProductProperties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderModuleIdentifierPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderSMBuiltinsPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShadingRateImagePropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSubgroupProperties {}
@@ -38188,6 +38311,126 @@ impl ops::DerefMut for PhysicalDeviceShaderIntegerFunctions2FeaturesINTELBuilder
 
 unsafe impl Cast for PhysicalDeviceShaderIntegerFunctions2FeaturesINTELBuilder {
     type Target = PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {
+    type Target = PhysicalDeviceShaderModuleIdentifierFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {
+    type Builder = PhysicalDeviceShaderModuleIdentifierFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderModuleIdentifierFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderModuleIdentifierFeaturesEXTBuilder {
+    value: PhysicalDeviceShaderModuleIdentifierFeaturesEXT,
+}
+
+impl PhysicalDeviceShaderModuleIdentifierFeaturesEXTBuilder {
+    #[inline]
+    pub fn shader_module_identifier(mut self, shader_module_identifier: bool) -> Self {
+        self.value.shader_module_identifier = shader_module_identifier as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderModuleIdentifierFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderModuleIdentifierFeaturesEXTBuilder {
+    type Target = PhysicalDeviceShaderModuleIdentifierFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderModuleIdentifierFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderModuleIdentifierFeaturesEXTBuilder {
+    type Target = PhysicalDeviceShaderModuleIdentifierFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderModuleIdentifierPropertiesEXT {
+    type Target = PhysicalDeviceShaderModuleIdentifierPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderModuleIdentifierPropertiesEXT {
+    type Builder = PhysicalDeviceShaderModuleIdentifierPropertiesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderModuleIdentifierPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderModuleIdentifierPropertiesEXTBuilder {
+    value: PhysicalDeviceShaderModuleIdentifierPropertiesEXT,
+}
+
+impl PhysicalDeviceShaderModuleIdentifierPropertiesEXTBuilder {
+    #[inline]
+    pub fn shader_module_identifier_algorithm_uuid(
+        mut self,
+        shader_module_identifier_algorithm_uuid: impl Into<ByteArray<UUID_SIZE>>,
+    ) -> Self {
+        self.value.shader_module_identifier_algorithm_uuid =
+            shader_module_identifier_algorithm_uuid.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderModuleIdentifierPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderModuleIdentifierPropertiesEXTBuilder {
+    type Target = PhysicalDeviceShaderModuleIdentifierPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderModuleIdentifierPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderModuleIdentifierPropertiesEXTBuilder {
+    type Target = PhysicalDeviceShaderModuleIdentifierPropertiesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -45380,6 +45623,10 @@ unsafe impl<'b> Cast for PipelineSampleLocationsStateCreateInfoEXTBuilder<'b> {
 pub unsafe trait ExtendsPipelineShaderStageCreateInfo: fmt::Debug {}
 unsafe impl ExtendsPipelineShaderStageCreateInfo for DebugUtilsObjectNameInfoEXT {}
 unsafe impl ExtendsPipelineShaderStageCreateInfo
+    for PipelineShaderStageModuleIdentifierCreateInfoEXT
+{
+}
+unsafe impl ExtendsPipelineShaderStageCreateInfo
     for PipelineShaderStageRequiredSubgroupSizeCreateInfo
 {
 }
@@ -45475,6 +45722,66 @@ impl<'b> ops::DerefMut for PipelineShaderStageCreateInfoBuilder<'b> {
 
 unsafe impl<'b> Cast for PipelineShaderStageCreateInfoBuilder<'b> {
     type Target = PipelineShaderStageCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineShaderStageModuleIdentifierCreateInfoEXT {
+    type Target = PipelineShaderStageModuleIdentifierCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PipelineShaderStageModuleIdentifierCreateInfoEXT {
+    type Builder = PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`PipelineShaderStageModuleIdentifierCreateInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'b> {
+    value: PipelineShaderStageModuleIdentifierCreateInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn identifier(mut self, identifier: &'b [u8]) -> Self {
+        self.value.identifier_size = identifier.len() as u32;
+        self.value.identifier = identifier.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineShaderStageModuleIdentifierCreateInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'b> {
+    type Target = PipelineShaderStageModuleIdentifierCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'b> {
+    type Target = PipelineShaderStageModuleIdentifierCreateInfoEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -49560,6 +49867,7 @@ unsafe impl Cast for RenderingFragmentShadingRateAttachmentInfoKHRBuilder {
 /// A Vulkan struct that can be used to extend a [`RenderingInfo`].
 pub unsafe trait ExtendsRenderingInfo: fmt::Debug {}
 unsafe impl ExtendsRenderingInfo for DeviceGroupRenderPassBeginInfo {}
+unsafe impl ExtendsRenderingInfo for MultisampledRenderToSingleSampledInfoEXT {}
 unsafe impl ExtendsRenderingInfo for MultiviewPerViewAttributesInfoNVX {}
 unsafe impl ExtendsRenderingInfo for RenderingFragmentDensityMapAttachmentInfoEXT {}
 unsafe impl ExtendsRenderingInfo for RenderingFragmentShadingRateAttachmentInfoKHR {}
@@ -51401,6 +51709,73 @@ impl<'b> ops::DerefMut for ShaderModuleCreateInfoBuilder<'b> {
 
 unsafe impl<'b> Cast for ShaderModuleCreateInfoBuilder<'b> {
     type Target = ShaderModuleCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ShaderModuleIdentifierEXT {
+    type Target = ShaderModuleIdentifierEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ShaderModuleIdentifierEXT {
+    type Builder = ShaderModuleIdentifierEXTBuilder;
+}
+
+/// A builder for a [`ShaderModuleIdentifierEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ShaderModuleIdentifierEXTBuilder {
+    value: ShaderModuleIdentifierEXT,
+}
+
+impl ShaderModuleIdentifierEXTBuilder {
+    #[inline]
+    pub fn identifier_size(mut self, identifier_size: u32) -> Self {
+        self.value.identifier_size = identifier_size;
+        self
+    }
+
+    #[inline]
+    pub fn identifier(
+        mut self,
+        identifier: impl Into<ByteArray<MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT>>,
+    ) -> Self {
+        self.value.identifier = identifier.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ShaderModuleIdentifierEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ShaderModuleIdentifierEXTBuilder {
+    type Target = ShaderModuleIdentifierEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ShaderModuleIdentifierEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ShaderModuleIdentifierEXTBuilder {
+    type Target = ShaderModuleIdentifierEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -53378,6 +53753,7 @@ unsafe impl<'b> Cast for SubpassDescriptionBuilder<'b> {
 /// A Vulkan struct that can be used to extend a [`SubpassDescription2`].
 pub unsafe trait ExtendsSubpassDescription2: fmt::Debug {}
 unsafe impl ExtendsSubpassDescription2 for FragmentShadingRateAttachmentInfoKHR {}
+unsafe impl ExtendsSubpassDescription2 for MultisampledRenderToSingleSampledInfoEXT {}
 unsafe impl ExtendsSubpassDescription2 for RenderPassCreationControlEXT {}
 unsafe impl ExtendsSubpassDescription2 for RenderPassSubpassFeedbackCreateInfoEXT {}
 unsafe impl ExtendsSubpassDescription2 for SubpassDescriptionDepthStencilResolve {}
@@ -53714,6 +54090,64 @@ impl<'b> ops::DerefMut for SubpassFragmentDensityMapOffsetEndInfoQCOMBuilder<'b>
 
 unsafe impl<'b> Cast for SubpassFragmentDensityMapOffsetEndInfoQCOMBuilder<'b> {
     type Target = SubpassFragmentDensityMapOffsetEndInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SubpassResolvePerformanceQueryEXT {
+    type Target = SubpassResolvePerformanceQueryEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SubpassResolvePerformanceQueryEXT {
+    type Builder = SubpassResolvePerformanceQueryEXTBuilder;
+}
+
+/// A builder for a [`SubpassResolvePerformanceQueryEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SubpassResolvePerformanceQueryEXTBuilder {
+    value: SubpassResolvePerformanceQueryEXT,
+}
+
+impl SubpassResolvePerformanceQueryEXTBuilder {
+    #[inline]
+    pub fn optimal(mut self, optimal: bool) -> Self {
+        self.value.optimal = optimal as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SubpassResolvePerformanceQueryEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for SubpassResolvePerformanceQueryEXTBuilder {
+    type Target = SubpassResolvePerformanceQueryEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SubpassResolvePerformanceQueryEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SubpassResolvePerformanceQueryEXTBuilder {
+    type Target = SubpassResolvePerformanceQueryEXT;
 
     #[inline]
     fn into(self) -> Self::Target {

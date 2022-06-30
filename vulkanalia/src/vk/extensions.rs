@@ -2041,6 +2041,15 @@ pub trait ExtMultiDrawExtension: DeviceV1_0 {
 
 impl ExtMultiDrawExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_multisampled_render_to_single_sampled.html>
+pub trait ExtMultisampledRenderToSingleSampledExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXTENSION;
+}
+
+impl ExtMultisampledRenderToSingleSampledExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_non_seamless_cube_map.html>
 pub trait ExtNonSeamlessCubeMapExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -2113,16 +2122,17 @@ pub trait ExtPipelinePropertiesExtension: DeviceV1_0 {
     unsafe fn get_pipeline_properties_ext(
         &self,
         pipeline_info: &PipelineInfoEXT,
-        pipeline_properties: &mut BaseOutStructure,
-    ) -> crate::VkResult<()> {
+    ) -> crate::VkResult<BaseOutStructure> {
+        let mut pipeline_properties = MaybeUninit::<BaseOutStructure>::uninit();
+
         let __result = (self.commands().get_pipeline_properties_ext)(
             self.handle(),
             pipeline_info,
-            pipeline_properties,
+            pipeline_properties.as_mut_ptr(),
         );
 
         if __result == Result::SUCCESS {
-            Ok(())
+            Ok(pipeline_properties.assume_init())
         } else {
             Err(__result.into())
         }
@@ -2387,6 +2397,49 @@ pub trait ExtShaderImageAtomicInt64Extension: DeviceV1_0 {
 }
 
 impl ExtShaderImageAtomicInt64Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_shader_module_identifier.html>
+pub trait ExtShaderModuleIdentifierExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_SHADER_MODULE_IDENTIFIER_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetShaderModuleCreateInfoIdentifierEXT.html>
+    #[inline]
+    unsafe fn get_shader_module_create_info_identifier_ext(
+        &self,
+        create_info: &ShaderModuleCreateInfo,
+    ) -> ShaderModuleIdentifierEXT {
+        let mut identifier = MaybeUninit::<ShaderModuleIdentifierEXT>::uninit();
+
+        let __result = (self.commands().get_shader_module_create_info_identifier_ext)(
+            self.handle(),
+            create_info,
+            identifier.as_mut_ptr(),
+        );
+
+        identifier.assume_init()
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetShaderModuleIdentifierEXT.html>
+    #[inline]
+    unsafe fn get_shader_module_identifier_ext(
+        &self,
+        shader_module: ShaderModule,
+    ) -> ShaderModuleIdentifierEXT {
+        let mut identifier = MaybeUninit::<ShaderModuleIdentifierEXT>::uninit();
+
+        let __result = (self.commands().get_shader_module_identifier_ext)(
+            self.handle(),
+            shader_module,
+            identifier.as_mut_ptr(),
+        );
+
+        identifier.assume_init()
+    }
+}
+
+impl ExtShaderModuleIdentifierExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_shader_stencil_export.html>
 pub trait ExtShaderStencilExportExtension: DeviceV1_0 {

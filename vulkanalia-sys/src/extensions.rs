@@ -1356,6 +1356,25 @@ pub const EXT_MULTI_DRAW_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_multisampled_render_to_single_sampled.html>
+#[allow(deprecated)]
+pub const EXT_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_multisampled_render_to_single_sampled"),
+    number: 377,
+    type_: "device",
+    author: "EXT",
+    contact: "Shahbaz Youssefi @syoussefi",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_CREATE_RENDERPASS2_EXTENSION.name,
+        KHR_DEPTH_STENCIL_RESOLVE_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_non_seamless_cube_map.html>
 #[allow(deprecated)]
 pub const EXT_NON_SEAMLESS_CUBE_MAP_EXTENSION: Extension = Extension {
@@ -1718,6 +1737,25 @@ pub const EXT_SHADER_IMAGE_ATOMIC_INT64_EXTENSION: Extension = Extension {
     contact: "Tobias Hector @tobski",
     platform: None,
     required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_shader_module_identifier.html>
+#[allow(deprecated)]
+pub const EXT_SHADER_MODULE_IDENTIFIER_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_shader_module_identifier"),
+    number: 463,
+    type_: "device",
+    author: "EXT",
+    contact: "Hans-Kristian Arntzen @HansKristian-Work",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+        EXT_PIPELINE_CREATION_CACHE_CONTROL_EXTENSION.name,
+    ]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,

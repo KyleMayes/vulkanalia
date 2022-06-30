@@ -1383,6 +1383,7 @@ impl DriverId {
     pub const MESA_PANVK: Self = Self(20);
     pub const SAMSUNG_PROPRIETARY: Self = Self(21);
     pub const MESA_VENUS: Self = Self(22);
+    pub const MESA_DOZEN: Self = Self(23);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1422,6 +1423,7 @@ impl fmt::Debug for DriverId {
             20 => write!(f, "MESA_PANVK"),
             21 => write!(f, "SAMSUNG_PROPRIETARY"),
             22 => write!(f, "MESA_VENUS"),
+            23 => write!(f, "MESA_DOZEN"),
             _ => self.0.fmt(f),
         }
     }
@@ -4838,6 +4840,10 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV: Self = Self(1000371001);
     pub const PIPELINE_PROPERTIES_IDENTIFIER_EXT: Self = Self(1000372000);
     pub const PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT: Self = Self(1000372001);
+    pub const PHYSICAL_DEVICE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_FEATURES_EXT: Self =
+        Self(1000376000);
+    pub const SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT: Self = Self(1000376001);
+    pub const MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_INFO_EXT: Self = Self(1000376002);
     pub const PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT: Self = Self(1000377000);
     pub const SCREEN_SURFACE_CREATE_INFO_QNX: Self = Self(1000378000);
     pub const PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT: Self = Self(1000381000);
@@ -4866,6 +4872,10 @@ impl StructureType {
     pub const RENDER_PASS_CREATION_CONTROL_EXT: Self = Self(1000458001);
     pub const RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT: Self = Self(1000458002);
     pub const RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT: Self = Self(1000458003);
+    pub const PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT: Self = Self(1000462000);
+    pub const PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_PROPERTIES_EXT: Self = Self(1000462001);
+    pub const PIPELINE_SHADER_STAGE_MODULE_IDENTIFIER_CREATE_INFO_EXT: Self = Self(1000462002);
+    pub const SHADER_MODULE_IDENTIFIER_EXT: Self = Self(1000462003);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5548,6 +5558,12 @@ impl fmt::Debug for StructureType {
             1000371001 => write!(f, "PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV"),
             1000372000 => write!(f, "PIPELINE_PROPERTIES_IDENTIFIER_EXT"),
             1000372001 => write!(f, "PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT"),
+            1000376000 => write!(
+                f,
+                "PHYSICAL_DEVICE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_FEATURES_EXT"
+            ),
+            1000376001 => write!(f, "SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT"),
+            1000376002 => write!(f, "MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_INFO_EXT"),
             1000377000 => write!(f, "PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT"),
             1000378000 => write!(f, "SCREEN_SURFACE_CREATE_INFO_QNX"),
             1000381000 => write!(f, "PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT"),
@@ -5590,6 +5606,10 @@ impl fmt::Debug for StructureType {
             1000458001 => write!(f, "RENDER_PASS_CREATION_CONTROL_EXT"),
             1000458002 => write!(f, "RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT"),
             1000458003 => write!(f, "RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT"),
+            1000462000 => write!(f, "PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT"),
+            1000462001 => write!(f, "PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_PROPERTIES_EXT"),
+            1000462002 => write!(f, "PIPELINE_SHADER_STAGE_MODULE_IDENTIFIER_CREATE_INFO_EXT"),
+            1000462003 => write!(f, "SHADER_MODULE_IDENTIFIER_EXT"),
             _ => self.0.fmt(f),
         }
     }

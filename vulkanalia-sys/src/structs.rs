@@ -6996,6 +6996,28 @@ impl Default for MultisamplePropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMultisampledRenderToSingleSampledInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MultisampledRenderToSingleSampledInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub multisampled_render_to_single_sampled_enable: Bool32,
+    pub rasterization_samples: SampleCountFlags,
+}
+
+impl Default for MultisampledRenderToSingleSampledInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_INFO_EXT,
+            next: ptr::null(),
+            multisampled_render_to_single_sampled_enable: Bool32::default(),
+            rasterization_samples: SampleCountFlags::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMultiviewPerViewAttributesInfoNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9711,6 +9733,27 @@ impl Default for PhysicalDeviceMultiDrawPropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub multisampled_render_to_single_sampled: Bool32,
+}
+
+impl Default for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type:
+                StructureType::PHYSICAL_DEVICE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_FEATURES_EXT,
+            next: ptr::null_mut(),
+            multisampled_render_to_single_sampled: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMultiviewFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11082,6 +11125,46 @@ impl Default for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL,
             next: ptr::null_mut(),
             shader_integer_functions2: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderModuleIdentifierFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_module_identifier: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT,
+            next: ptr::null_mut(),
+            shader_module_identifier: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderModuleIdentifierPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_module_identifier_algorithm_uuid: ByteArray<UUID_SIZE>,
+}
+
+impl Default for PhysicalDeviceShaderModuleIdentifierPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            shader_module_identifier_algorithm_uuid: ByteArray::default(),
         }
     }
 }
@@ -13194,6 +13277,28 @@ impl Default for PipelineShaderStageCreateInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineShaderStageModuleIdentifierCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineShaderStageModuleIdentifierCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub identifier_size: u32,
+    pub identifier: *const u8,
+}
+
+impl Default for PipelineShaderStageModuleIdentifierCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_SHADER_STAGE_MODULE_IDENTIFIER_CREATE_INFO_EXT,
+            next: ptr::null(),
+            identifier_size: u32::default(),
+            identifier: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14944,6 +15049,28 @@ impl Default for ShaderModuleCreateInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderModuleIdentifierEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ShaderModuleIdentifierEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub identifier_size: u32,
+    pub identifier: ByteArray<MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT>,
+}
+
+impl Default for ShaderModuleIdentifierEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SHADER_MODULE_IDENTIFIER_EXT,
+            next: ptr::null_mut(),
+            identifier_size: u32::default(),
+            identifier: ByteArray::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderModuleValidationCacheCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15509,6 +15636,26 @@ impl Default for SubpassFragmentDensityMapOffsetEndInfoQCOM {
             next: ptr::null(),
             fragment_density_offset_count: u32::default(),
             fragment_density_offsets: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSubpassResolvePerformanceQueryEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SubpassResolvePerformanceQueryEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub optimal: Bool32,
+}
+
+impl Default for SubpassResolvePerformanceQueryEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT,
+            next: ptr::null_mut(),
+            optimal: Bool32::default(),
         }
     }
 }

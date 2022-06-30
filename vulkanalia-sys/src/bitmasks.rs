@@ -854,6 +854,7 @@ bitflags! {
         const SUBSAMPLED_EXT = 1 << 14;
         const FRAGMENT_DENSITY_MAP_OFFSET_QCOM = 1 << 15;
         const _2D_VIEW_COMPATIBLE_EXT = 1 << 17;
+        const MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXT = 1 << 18;
     }
 }
 

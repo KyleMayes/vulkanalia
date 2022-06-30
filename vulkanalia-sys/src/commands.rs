@@ -3187,6 +3187,20 @@ pub type PFN_vkGetShaderInfoAMD = unsafe extern "system" fn(
     _info: *mut c_void,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetShaderModuleCreateInfoIdentifierEXT.html>
+pub type PFN_vkGetShaderModuleCreateInfoIdentifierEXT = unsafe extern "system" fn(
+    _device: Device,
+    _create_info: *const ShaderModuleCreateInfo,
+    _identifier: *mut ShaderModuleIdentifierEXT,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetShaderModuleIdentifierEXT.html>
+pub type PFN_vkGetShaderModuleIdentifierEXT = unsafe extern "system" fn(
+    _device: Device,
+    _shader_module: ShaderModule,
+    _identifier: *mut ShaderModuleIdentifierEXT,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetSwapchainCounterEXT.html>
 pub type PFN_vkGetSwapchainCounterEXT = unsafe extern "system" fn(
     _device: Device,
