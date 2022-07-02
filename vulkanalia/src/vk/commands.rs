@@ -424,6 +424,8 @@ pub struct DeviceCommands {
     pub get_semaphore_win32_handle_khr: PFN_vkGetSemaphoreWin32HandleKHR,
     pub get_semaphore_zircon_handle_fuchsia: PFN_vkGetSemaphoreZirconHandleFUCHSIA,
     pub get_shader_info_amd: PFN_vkGetShaderInfoAMD,
+    pub get_shader_module_create_info_identifier_ext: PFN_vkGetShaderModuleCreateInfoIdentifierEXT,
+    pub get_shader_module_identifier_ext: PFN_vkGetShaderModuleIdentifierEXT,
     pub get_swapchain_counter_ext: PFN_vkGetSwapchainCounterEXT,
     pub get_swapchain_images_khr: PFN_vkGetSwapchainImagesKHR,
     pub get_swapchain_status_khr: PFN_vkGetSwapchainStatusKHR,
@@ -6479,6 +6481,40 @@ impl DeviceCommands {
                         _info: *mut c_void,
                     ) -> Result {
                         panic!("could not load vkGetShaderInfoAMD")
+                    }
+                    fallback
+                }
+            },
+            get_shader_module_create_info_identifier_ext: {
+                let value = loader(
+                    b"vkGetShaderModuleCreateInfoIdentifierEXT\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const ShaderModuleCreateInfo,
+                        _identifier: *mut ShaderModuleIdentifierEXT,
+                    ) {
+                        panic!("could not load vkGetShaderModuleCreateInfoIdentifierEXT")
+                    }
+                    fallback
+                }
+            },
+            get_shader_module_identifier_ext: {
+                let value = loader(b"vkGetShaderModuleIdentifierEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _shader_module: ShaderModule,
+                        _identifier: *mut ShaderModuleIdentifierEXT,
+                    ) {
+                        panic!("could not load vkGetShaderModuleIdentifierEXT")
                     }
                     fallback
                 }
