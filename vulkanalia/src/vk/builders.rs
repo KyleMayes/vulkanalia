@@ -45631,6 +45631,7 @@ unsafe impl ExtendsPipelineShaderStageCreateInfo
 {
 }
 unsafe impl ExtendsPipelineShaderStageCreateInfo for ShaderModuleCreateInfo {}
+unsafe impl ExtendsPipelineShaderStageCreateInfo for ShaderModuleValidationCacheCreateInfoEXT {}
 
 unsafe impl Cast for PipelineShaderStageCreateInfo {
     type Target = PipelineShaderStageCreateInfo;
