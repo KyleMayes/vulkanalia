@@ -1539,7 +1539,7 @@ pub struct Filter(i32);
 impl Filter {
     pub const NEAREST: Self = Self(0);
     pub const LINEAR: Self = Self(1);
-    pub const CUBIC_IMG: Self = Self(1000015000);
+    pub const CUBIC_EXT: Self = Self(1000015000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1559,7 +1559,7 @@ impl fmt::Debug for Filter {
         match self.0 {
             0 => write!(f, "NEAREST"),
             1 => write!(f, "LINEAR"),
-            1000015000 => write!(f, "CUBIC_IMG"),
+            1000015000 => write!(f, "CUBIC_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -3243,6 +3243,78 @@ impl fmt::Debug for PipelineExecutableStatisticFormatKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineRobustnessBufferBehaviorEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct PipelineRobustnessBufferBehaviorEXT(i32);
+
+impl PipelineRobustnessBufferBehaviorEXT {
+    pub const DEVICE_DEFAULT: Self = Self(0);
+    pub const DISABLED: Self = Self(1);
+    pub const ROBUST_BUFFER_ACCESS: Self = Self(2);
+    pub const ROBUST_BUFFER_ACCESS_2: Self = Self(3);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for PipelineRobustnessBufferBehaviorEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "DEVICE_DEFAULT"),
+            1 => write!(f, "DISABLED"),
+            2 => write!(f, "ROBUST_BUFFER_ACCESS"),
+            3 => write!(f, "ROBUST_BUFFER_ACCESS_2"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineRobustnessImageBehaviorEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct PipelineRobustnessImageBehaviorEXT(i32);
+
+impl PipelineRobustnessImageBehaviorEXT {
+    pub const DEVICE_DEFAULT: Self = Self(0);
+    pub const DISABLED: Self = Self(1);
+    pub const ROBUST_IMAGE_ACCESS: Self = Self(2);
+    pub const ROBUST_IMAGE_ACCESS_2: Self = Self(3);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for PipelineRobustnessImageBehaviorEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "DEVICE_DEFAULT"),
+            1 => write!(f, "DISABLED"),
+            2 => write!(f, "ROBUST_IMAGE_ACCESS"),
+            3 => write!(f, "ROBUST_IMAGE_ACCESS_2"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPointClippingBehavior.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -4520,6 +4592,9 @@ impl StructureType {
     pub const VI_SURFACE_CREATE_INFO_NN: Self = Self(1000062000);
     pub const IMAGE_VIEW_ASTC_DECODE_MODE_EXT: Self = Self(1000067000);
     pub const PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT: Self = Self(1000067001);
+    pub const PIPELINE_ROBUSTNESS_CREATE_INFO_EXT: Self = Self(1000068000);
+    pub const PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT: Self = Self(1000068001);
+    pub const PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES_EXT: Self = Self(1000068002);
     pub const IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR: Self = Self(1000073000);
     pub const EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR: Self = Self(1000073001);
     pub const MEMORY_WIN32_HANDLE_PROPERTIES_KHR: Self = Self(1000073002);
@@ -5169,6 +5244,9 @@ impl fmt::Debug for StructureType {
             1000062000 => write!(f, "VI_SURFACE_CREATE_INFO_NN"),
             1000067000 => write!(f, "IMAGE_VIEW_ASTC_DECODE_MODE_EXT"),
             1000067001 => write!(f, "PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT"),
+            1000068000 => write!(f, "PIPELINE_ROBUSTNESS_CREATE_INFO_EXT"),
+            1000068001 => write!(f, "PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT"),
+            1000068002 => write!(f, "PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES_EXT"),
             1000073000 => write!(f, "IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR"),
             1000073001 => write!(f, "EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR"),
             1000073002 => write!(f, "MEMORY_WIN32_HANDLE_PROPERTIES_KHR"),

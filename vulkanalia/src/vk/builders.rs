@@ -6829,6 +6829,7 @@ unsafe impl Cast for ComponentMappingBuilder {
 pub unsafe trait ExtendsComputePipelineCreateInfo: fmt::Debug {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCreationFeedbackCreateInfo {}
+unsafe impl ExtendsComputePipelineCreateInfo for PipelineRobustnessCreateInfoEXT {}
 unsafe impl ExtendsComputePipelineCreateInfo for SubpassShadingPipelineCreateInfoHUAWEI {}
 
 unsafe impl Cast for ComputePipelineCreateInfo {
@@ -10427,6 +10428,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerformanceQueryFeaturesKH
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineCreationCacheControlFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelinePropertiesFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineRobustnessFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePortabilitySubsetFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentIdFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentWaitFeaturesKHR {}
@@ -17059,6 +17061,7 @@ unsafe impl ExtendsGraphicsPipelineCreateInfo
     for PipelineRepresentativeFragmentTestStateCreateInfoNV
 {
 }
+unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineRobustnessCreateInfoEXT {}
 
 unsafe impl Cast for GraphicsPipelineCreateInfo {
     type Target = GraphicsPipelineCreateInfo;
@@ -29040,6 +29043,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 {
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelinePropertiesFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineRobustnessFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePortabilitySubsetFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentIdFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentWaitFeaturesKHR {}
@@ -34454,6 +34458,152 @@ unsafe impl Cast for PhysicalDevicePipelinePropertiesFeaturesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDevicePipelineRobustnessFeaturesEXT {
+    type Target = PhysicalDevicePipelineRobustnessFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePipelineRobustnessFeaturesEXT {
+    type Builder = PhysicalDevicePipelineRobustnessFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDevicePipelineRobustnessFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePipelineRobustnessFeaturesEXTBuilder {
+    value: PhysicalDevicePipelineRobustnessFeaturesEXT,
+}
+
+impl PhysicalDevicePipelineRobustnessFeaturesEXTBuilder {
+    #[inline]
+    pub fn pipeline_robustness(mut self, pipeline_robustness: bool) -> Self {
+        self.value.pipeline_robustness = pipeline_robustness as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePipelineRobustnessFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePipelineRobustnessFeaturesEXTBuilder {
+    type Target = PhysicalDevicePipelineRobustnessFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePipelineRobustnessFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePipelineRobustnessFeaturesEXTBuilder {
+    type Target = PhysicalDevicePipelineRobustnessFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePipelineRobustnessPropertiesEXT {
+    type Target = PhysicalDevicePipelineRobustnessPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePipelineRobustnessPropertiesEXT {
+    type Builder = PhysicalDevicePipelineRobustnessPropertiesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDevicePipelineRobustnessPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePipelineRobustnessPropertiesEXTBuilder {
+    value: PhysicalDevicePipelineRobustnessPropertiesEXT,
+}
+
+impl PhysicalDevicePipelineRobustnessPropertiesEXTBuilder {
+    #[inline]
+    pub fn default_robustness_storage_buffers(
+        mut self,
+        default_robustness_storage_buffers: PipelineRobustnessBufferBehaviorEXT,
+    ) -> Self {
+        self.value.default_robustness_storage_buffers = default_robustness_storage_buffers;
+        self
+    }
+
+    #[inline]
+    pub fn default_robustness_uniform_buffers(
+        mut self,
+        default_robustness_uniform_buffers: PipelineRobustnessBufferBehaviorEXT,
+    ) -> Self {
+        self.value.default_robustness_uniform_buffers = default_robustness_uniform_buffers;
+        self
+    }
+
+    #[inline]
+    pub fn default_robustness_vertex_inputs(
+        mut self,
+        default_robustness_vertex_inputs: PipelineRobustnessBufferBehaviorEXT,
+    ) -> Self {
+        self.value.default_robustness_vertex_inputs = default_robustness_vertex_inputs;
+        self
+    }
+
+    #[inline]
+    pub fn default_robustness_images(
+        mut self,
+        default_robustness_images: PipelineRobustnessImageBehaviorEXT,
+    ) -> Self {
+        self.value.default_robustness_images = default_robustness_images;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePipelineRobustnessPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePipelineRobustnessPropertiesEXTBuilder {
+    type Target = PhysicalDevicePipelineRobustnessPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePipelineRobustnessPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePipelineRobustnessPropertiesEXTBuilder {
+    type Target = PhysicalDevicePipelineRobustnessPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDevicePointClippingProperties {
     type Target = PhysicalDevicePointClippingProperties;
 
@@ -35225,6 +35375,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMultiviewProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePCIBusInfoPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePerformanceQueryPropertiesKHR {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePipelineRobustnessPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePointClippingProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePortabilitySubsetPropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProtectedMemoryProperties {}
@@ -45551,6 +45702,82 @@ unsafe impl Cast for PipelineRepresentativeFragmentTestStateCreateInfoNVBuilder 
     }
 }
 
+unsafe impl Cast for PipelineRobustnessCreateInfoEXT {
+    type Target = PipelineRobustnessCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineRobustnessCreateInfoEXT {
+    type Builder = PipelineRobustnessCreateInfoEXTBuilder;
+}
+
+/// A builder for a [`PipelineRobustnessCreateInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineRobustnessCreateInfoEXTBuilder {
+    value: PipelineRobustnessCreateInfoEXT,
+}
+
+impl PipelineRobustnessCreateInfoEXTBuilder {
+    #[inline]
+    pub fn storage_buffers(mut self, storage_buffers: PipelineRobustnessBufferBehaviorEXT) -> Self {
+        self.value.storage_buffers = storage_buffers;
+        self
+    }
+
+    #[inline]
+    pub fn uniform_buffers(mut self, uniform_buffers: PipelineRobustnessBufferBehaviorEXT) -> Self {
+        self.value.uniform_buffers = uniform_buffers;
+        self
+    }
+
+    #[inline]
+    pub fn vertex_inputs(mut self, vertex_inputs: PipelineRobustnessBufferBehaviorEXT) -> Self {
+        self.value.vertex_inputs = vertex_inputs;
+        self
+    }
+
+    #[inline]
+    pub fn images(mut self, images: PipelineRobustnessImageBehaviorEXT) -> Self {
+        self.value.images = images;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineRobustnessCreateInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineRobustnessCreateInfoEXTBuilder {
+    type Target = PipelineRobustnessCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineRobustnessCreateInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineRobustnessCreateInfoEXTBuilder {
+    type Target = PipelineRobustnessCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PipelineSampleLocationsStateCreateInfoEXT {
     type Target = PipelineSampleLocationsStateCreateInfoEXT;
 
@@ -45622,6 +45849,7 @@ unsafe impl<'b> Cast for PipelineSampleLocationsStateCreateInfoEXTBuilder<'b> {
 /// A Vulkan struct that can be used to extend a [`PipelineShaderStageCreateInfo`].
 pub unsafe trait ExtendsPipelineShaderStageCreateInfo: fmt::Debug {}
 unsafe impl ExtendsPipelineShaderStageCreateInfo for DebugUtilsObjectNameInfoEXT {}
+unsafe impl ExtendsPipelineShaderStageCreateInfo for PipelineRobustnessCreateInfoEXT {}
 unsafe impl ExtendsPipelineShaderStageCreateInfo
     for PipelineShaderStageModuleIdentifierCreateInfoEXT
 {
@@ -47918,6 +48146,7 @@ unsafe impl<'b> Cast for QueueFamilyProperties2Builder<'b> {
 /// A Vulkan struct that can be used to extend a [`RayTracingPipelineCreateInfoKHR`].
 pub unsafe trait ExtendsRayTracingPipelineCreateInfoKHR: fmt::Debug {}
 unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineCreationFeedbackCreateInfo {}
+unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineRobustnessCreateInfoEXT {}
 
 unsafe impl Cast for RayTracingPipelineCreateInfoKHR {
     type Target = RayTracingPipelineCreateInfoKHR;

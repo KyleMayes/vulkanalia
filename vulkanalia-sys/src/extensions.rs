@@ -519,7 +519,7 @@ pub const EXT_BLEND_OPERATION_ADVANCED_EXTENSION: Extension = Extension {
     author: "NV",
     contact: "Jeff Bolz @jeffbolznv",
     platform: None,
-    required_extensions: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
@@ -1479,6 +1479,22 @@ pub const EXT_PIPELINE_PROPERTIES_EXTENSION: Extension = Extension {
     type_: "device",
     author: "EXT",
     contact: "Mukund Keshava @mkeshavanv",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_pipeline_robustness.html>
+#[allow(deprecated)]
+pub const EXT_PIPELINE_ROBUSTNESS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_pipeline_robustness"),
+    number: 69,
+    type_: "device",
+    author: "IMG",
+    contact: "Jarred Davies",
     platform: None,
     required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
     required_version: None,

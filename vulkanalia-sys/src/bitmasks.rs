@@ -642,7 +642,7 @@ bitflags! {
         const BLIT_SRC = 1 << 10;
         const BLIT_DST = 1 << 11;
         const SAMPLED_IMAGE_FILTER_LINEAR = 1 << 12;
-        const SAMPLED_IMAGE_FILTER_CUBIC_IMG = 1 << 13;
+        const SAMPLED_IMAGE_FILTER_CUBIC_EXT = 1 << 13;
         const TRANSFER_SRC = 1 << 14;
         const TRANSFER_DST = 1 << 15;
         const SAMPLED_IMAGE_FILTER_MINMAX = 1 << 16;

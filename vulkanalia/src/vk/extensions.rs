@@ -2141,6 +2141,15 @@ pub trait ExtPipelinePropertiesExtension: DeviceV1_0 {
 
 impl ExtPipelinePropertiesExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_pipeline_robustness.html>
+pub trait ExtPipelineRobustnessExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_PIPELINE_ROBUSTNESS_EXTENSION;
+}
+
+impl ExtPipelineRobustnessExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_post_depth_coverage.html>
 pub trait ExtPostDepthCoverageExtension: DeviceV1_0 {
     /// The metadata for this extension.

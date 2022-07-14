@@ -11,6 +11,8 @@
 - [June 30, 2022 Vulkan 1.3.219 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/080f66a96b61419b8663872d6cab6ce68a3123e8)
 - [Fix XML tagging of VkShaderModuleCreateInfo and add explicit VU (#1884)](https://github.com/KhronosGroup/Vulkan-Docs/commit/e561f993cc2d67ef101f2b4f6e185183f1c47b9f)
 - [July 7, 2022 Vulkan 1.3.220 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/29f44f378cdeb1b96b47ce00fb32f49954f2d29d)
+- [Add pd2 requirement for VK_EXT_blend_operation_advanced (#1887)](https://github.com/KhronosGroup/Vulkan-Docs/commit/f977b487253872ce3f5fd3dc1ae688f4f4b59677)
+- [July 14, 2022 Vulkan 1.3.221 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9aeaebb24b6faa1f05c7a95b0328beecbe195927)
 
 ## [0.15.0] - 2022-05-18
 
