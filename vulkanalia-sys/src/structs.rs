@@ -10008,6 +10008,52 @@ impl Default for PhysicalDevicePipelinePropertiesFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevicePipelineRobustnessFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePipelineRobustnessFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub pipeline_robustness: Bool32,
+}
+
+impl Default for PhysicalDevicePipelineRobustnessFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT,
+            next: ptr::null_mut(),
+            pipeline_robustness: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevicePipelineRobustnessPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePipelineRobustnessPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub default_robustness_storage_buffers: PipelineRobustnessBufferBehaviorEXT,
+    pub default_robustness_uniform_buffers: PipelineRobustnessBufferBehaviorEXT,
+    pub default_robustness_vertex_inputs: PipelineRobustnessBufferBehaviorEXT,
+    pub default_robustness_images: PipelineRobustnessImageBehaviorEXT,
+}
+
+impl Default for PhysicalDevicePipelineRobustnessPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            default_robustness_storage_buffers: PipelineRobustnessBufferBehaviorEXT::default(),
+            default_robustness_uniform_buffers: PipelineRobustnessBufferBehaviorEXT::default(),
+            default_robustness_vertex_inputs: PipelineRobustnessBufferBehaviorEXT::default(),
+            default_robustness_images: PipelineRobustnessImageBehaviorEXT::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevicePointClippingProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13223,6 +13269,32 @@ impl Default for PipelineRepresentativeFragmentTestStateCreateInfoNV {
             s_type: StructureType::PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV,
             next: ptr::null(),
             representative_fragment_test_enable: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineRobustnessCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineRobustnessCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub storage_buffers: PipelineRobustnessBufferBehaviorEXT,
+    pub uniform_buffers: PipelineRobustnessBufferBehaviorEXT,
+    pub vertex_inputs: PipelineRobustnessBufferBehaviorEXT,
+    pub images: PipelineRobustnessImageBehaviorEXT,
+}
+
+impl Default for PipelineRobustnessCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_ROBUSTNESS_CREATE_INFO_EXT,
+            next: ptr::null(),
+            storage_buffers: PipelineRobustnessBufferBehaviorEXT::default(),
+            uniform_buffers: PipelineRobustnessBufferBehaviorEXT::default(),
+            vertex_inputs: PipelineRobustnessBufferBehaviorEXT::default(),
+            images: PipelineRobustnessImageBehaviorEXT::default(),
         }
     }
 }
