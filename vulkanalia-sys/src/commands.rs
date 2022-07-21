@@ -2459,6 +2459,13 @@ pub type PFN_vkGetDrmDisplayEXT = unsafe extern "system" fn(
     _display: *mut DisplayKHR,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetDynamicRenderingTilePropertiesQCOM.html>
+pub type PFN_vkGetDynamicRenderingTilePropertiesQCOM = unsafe extern "system" fn(
+    _device: Device,
+    _rendering_info: *const RenderingInfo,
+    _properties: *mut TilePropertiesQCOM,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetEventStatus.html>
 pub type PFN_vkGetEventStatus = unsafe extern "system" fn(_device: Device, _event: Event) -> Result;
 
@@ -2477,6 +2484,14 @@ pub type PFN_vkGetFenceWin32HandleKHR = unsafe extern "system" fn(
     _device: Device,
     _get_win32_handle_info: *const FenceGetWin32HandleInfoKHR,
     _handle: *mut HANDLE,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetFramebufferTilePropertiesQCOM.html>
+pub type PFN_vkGetFramebufferTilePropertiesQCOM = unsafe extern "system" fn(
+    _device: Device,
+    _framebuffer: Framebuffer,
+    _properties_count: *mut u32,
+    _properties: *mut TilePropertiesQCOM,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetGeneratedCommandsMemoryRequirementsNV.html>

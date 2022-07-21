@@ -1122,6 +1122,8 @@ impl DescriptorType {
     pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000150000);
     pub const ACCELERATION_STRUCTURE_NV: Self = Self(1000165000);
     pub const MUTABLE_VALVE: Self = Self(1000351000);
+    pub const SAMPLE_WEIGHT_IMAGE_QCOM: Self = Self(1000440000);
+    pub const BLOCK_MATCH_IMAGE_QCOM: Self = Self(1000440001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1154,6 +1156,8 @@ impl fmt::Debug for DescriptorType {
             1000150000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
             1000165000 => write!(f, "ACCELERATION_STRUCTURE_NV"),
             1000351000 => write!(f, "MUTABLE_VALVE"),
+            1000440000 => write!(f, "SAMPLE_WEIGHT_IMAGE_QCOM"),
+            1000440001 => write!(f, "BLOCK_MATCH_IMAGE_QCOM"),
             _ => self.0.fmt(f),
         }
     }
@@ -4943,6 +4947,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV: Self = Self(1000430000);
     pub const PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT: Self =
         Self(1000437000);
+    pub const PHYSICAL_DEVICE_IMAGE_PROCESSING_FEATURES_QCOM: Self = Self(1000440000);
+    pub const PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM: Self = Self(1000440001);
+    pub const IMAGE_VIEW_SAMPLE_WEIGHT_CREATE_INFO_QCOM: Self = Self(1000440002);
     pub const PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT: Self = Self(1000458000);
     pub const RENDER_PASS_CREATION_CONTROL_EXT: Self = Self(1000458001);
     pub const RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT: Self = Self(1000458002);
@@ -4951,6 +4958,8 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_PROPERTIES_EXT: Self = Self(1000462001);
     pub const PIPELINE_SHADER_STAGE_MODULE_IDENTIFIER_CREATE_INFO_EXT: Self = Self(1000462002);
     pub const SHADER_MODULE_IDENTIFIER_EXT: Self = Self(1000462003);
+    pub const PHYSICAL_DEVICE_TILE_PROPERTIES_FEATURES_QCOM: Self = Self(1000484000);
+    pub const TILE_PROPERTIES_QCOM: Self = Self(1000484001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5680,6 +5689,9 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT"
             ),
+            1000440000 => write!(f, "PHYSICAL_DEVICE_IMAGE_PROCESSING_FEATURES_QCOM"),
+            1000440001 => write!(f, "PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM"),
+            1000440002 => write!(f, "IMAGE_VIEW_SAMPLE_WEIGHT_CREATE_INFO_QCOM"),
             1000458000 => write!(f, "PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT"),
             1000458001 => write!(f, "RENDER_PASS_CREATION_CONTROL_EXT"),
             1000458002 => write!(f, "RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT"),
@@ -5688,6 +5700,8 @@ impl fmt::Debug for StructureType {
             1000462001 => write!(f, "PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_PROPERTIES_EXT"),
             1000462002 => write!(f, "PIPELINE_SHADER_STAGE_MODULE_IDENTIFIER_CREATE_INFO_EXT"),
             1000462003 => write!(f, "SHADER_MODULE_IDENTIFIER_EXT"),
+            1000484000 => write!(f, "PHYSICAL_DEVICE_TILE_PROPERTIES_FEATURES_QCOM"),
+            1000484001 => write!(f, "TILE_PROPERTIES_QCOM"),
             _ => self.0.fmt(f),
         }
     }

@@ -694,6 +694,10 @@ bitflags! {
         const STORAGE_READ_WITHOUT_FORMAT = 1 << 31;
         const STORAGE_WRITE_WITHOUT_FORMAT = 1 << 32;
         const SAMPLED_IMAGE_DEPTH_COMPARISON = 1 << 33;
+        const WEIGHT_IMAGE_QCOM = 1 << 34;
+        const WEIGHT_SAMPLED_IMAGE_QCOM = 1 << 35;
+        const BLOCK_MATCHING_QCOM = 1 << 36;
+        const BOX_FILTER_SAMPLED_QCOM = 1 << 37;
         const LINEAR_COLOR_ATTACHMENT_NV = 1 << 38;
     }
 }
@@ -888,6 +892,8 @@ bitflags! {
         const FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 8;
         const FRAGMENT_DENSITY_MAP_EXT = 1 << 9;
         const INVOCATION_MASK_HUAWEI = 1 << 18;
+        const SAMPLE_WEIGHT_QCOM = 1 << 20;
+        const SAMPLE_BLOCK_MATCH_QCOM = 1 << 21;
     }
 }
 
@@ -1415,6 +1421,7 @@ bitflags! {
         const SUBSAMPLED_EXT = 1;
         const SUBSAMPLED_COARSE_RECONSTRUCTION_EXT = 1 << 1;
         const NON_SEAMLESS_CUBE_MAP_EXT = 1 << 2;
+        const IMAGE_PROCESSING_QCOM = 1 << 4;
     }
 }
 

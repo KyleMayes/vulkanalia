@@ -5941,6 +5941,30 @@ impl Default for ImageViewMinLodCreateInfoEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageViewSampleWeightCreateInfoQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImageViewSampleWeightCreateInfoQCOM {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub filter_center: Offset2D,
+    pub filter_size: Extent2D,
+    pub num_phases: u32,
+}
+
+impl Default for ImageViewSampleWeightCreateInfoQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_VIEW_SAMPLE_WEIGHT_CREATE_INFO_QCOM,
+            next: ptr::null(),
+            filter_center: Offset2D::default(),
+            filter_size: Extent2D::default(),
+            num_phases: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageViewUsageCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9121,6 +9145,56 @@ impl Default for PhysicalDeviceImageFormatInfo2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageProcessingFeaturesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceImageProcessingFeaturesQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub texture_sample_weighted: Bool32,
+    pub texture_box_filter: Bool32,
+    pub texture_block_match: Bool32,
+}
+
+impl Default for PhysicalDeviceImageProcessingFeaturesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_IMAGE_PROCESSING_FEATURES_QCOM,
+            next: ptr::null_mut(),
+            texture_sample_weighted: Bool32::default(),
+            texture_box_filter: Bool32::default(),
+            texture_block_match: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageProcessingPropertiesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceImageProcessingPropertiesQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_weight_filter_phases: u32,
+    pub max_weight_filter_dimension: Extent2D,
+    pub max_block_match_region: Extent2D,
+    pub max_box_filter_block_size: Extent2D,
+}
+
+impl Default for PhysicalDeviceImageProcessingPropertiesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM,
+            next: ptr::null_mut(),
+            max_weight_filter_phases: u32::default(),
+            max_weight_filter_dimension: Extent2D::default(),
+            max_block_match_region: Extent2D::default(),
+            max_box_filter_block_size: Extent2D::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageRobustnessFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11639,6 +11713,26 @@ impl Default for PhysicalDeviceTextureCompressionASTCHDRFeatures {
             s_type: StructureType::PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES,
             next: ptr::null_mut(),
             texture_compression_astc_hdr: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceTilePropertiesFeaturesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceTilePropertiesFeaturesQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub tile_properties: Bool32,
+}
+
+impl Default for PhysicalDeviceTilePropertiesFeaturesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_TILE_PROPERTIES_FEATURES_QCOM,
+            next: ptr::null_mut(),
+            tile_properties: Bool32::default(),
         }
     }
 }
@@ -16103,6 +16197,30 @@ impl Default for TextureLODGatherFormatPropertiesAMD {
             s_type: StructureType::TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD,
             next: ptr::null_mut(),
             supports_texture_gather_lod_bias_amd: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTilePropertiesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct TilePropertiesQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub tile_size: Extent3D,
+    pub apron_size: Extent2D,
+    pub origin: Offset2D,
+}
+
+impl Default for TilePropertiesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::TILE_PROPERTIES_QCOM,
+            next: ptr::null_mut(),
+            tile_size: Extent3D::default(),
+            apron_size: Extent2D::default(),
+            origin: Offset2D::default(),
         }
     }
 }
