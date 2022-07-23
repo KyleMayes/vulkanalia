@@ -8772,6 +8772,15 @@ pub trait QcomFragmentDensityMapOffsetExtension: DeviceV1_0 {
 
 impl QcomFragmentDensityMapOffsetExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_image_processing.html>
+pub trait QcomImageProcessingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_IMAGE_PROCESSING_EXTENSION;
+}
+
+impl QcomImageProcessingExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_render_pass_shader_resolve.html>
 pub trait QcomRenderPassShaderResolveExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -8807,6 +8816,70 @@ pub trait QcomRotatedCopyCommandsExtension: DeviceV1_0 {
 }
 
 impl QcomRotatedCopyCommandsExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_tile_properties.html>
+pub trait QcomTilePropertiesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_TILE_PROPERTIES_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetDynamicRenderingTilePropertiesQCOM.html>
+    #[inline]
+    unsafe fn get_dynamic_rendering_tile_properties_qcom(
+        &self,
+        rendering_info: &RenderingInfo,
+    ) -> crate::VkResult<TilePropertiesQCOM> {
+        let mut properties = MaybeUninit::<TilePropertiesQCOM>::uninit();
+
+        let __result = (self.commands().get_dynamic_rendering_tile_properties_qcom)(
+            self.handle(),
+            rendering_info,
+            properties.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(properties.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetFramebufferTilePropertiesQCOM.html>
+    #[inline]
+    unsafe fn get_framebuffer_tile_properties_qcom(
+        &self,
+        framebuffer: Framebuffer,
+    ) -> crate::VkResult<Vec<TilePropertiesQCOM>> {
+        let mut properties_count = 0;
+
+        (self.commands().get_framebuffer_tile_properties_qcom)(
+            self.handle(),
+            framebuffer,
+            &mut properties_count,
+            ptr::null_mut(),
+        );
+
+        let mut properties = Vec::with_capacity(properties_count as usize);
+
+        let __result = (self.commands().get_framebuffer_tile_properties_qcom)(
+            self.handle(),
+            framebuffer,
+            &mut properties_count,
+            properties.as_mut_ptr(),
+        );
+
+        debug_assert!(properties.capacity() == properties_count as usize);
+        properties.set_len(properties_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(properties)
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl QcomTilePropertiesExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QNX_screen_surface.html>
 pub trait QnxScreenSurfaceExtension: InstanceV1_0 {

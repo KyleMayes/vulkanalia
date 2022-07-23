@@ -355,10 +355,12 @@ pub struct DeviceCommands {
     pub get_device_queue2: PFN_vkGetDeviceQueue2,
     pub get_device_subpass_shading_max_workgroup_size_huawei:
         PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI,
+    pub get_dynamic_rendering_tile_properties_qcom: PFN_vkGetDynamicRenderingTilePropertiesQCOM,
     pub get_event_status: PFN_vkGetEventStatus,
     pub get_fence_fd_khr: PFN_vkGetFenceFdKHR,
     pub get_fence_status: PFN_vkGetFenceStatus,
     pub get_fence_win32_handle_khr: PFN_vkGetFenceWin32HandleKHR,
+    pub get_framebuffer_tile_properties_qcom: PFN_vkGetFramebufferTilePropertiesQCOM,
     pub get_generated_commands_memory_requirements_nv:
         PFN_vkGetGeneratedCommandsMemoryRequirementsNV,
     pub get_image_drm_format_modifier_properties_ext: PFN_vkGetImageDrmFormatModifierPropertiesEXT,
@@ -5522,6 +5524,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_dynamic_rendering_tile_properties_qcom: {
+                let value = loader(b"vkGetDynamicRenderingTilePropertiesQCOM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _rendering_info: *const RenderingInfo,
+                        _properties: *mut TilePropertiesQCOM,
+                    ) -> Result {
+                        panic!("could not load vkGetDynamicRenderingTilePropertiesQCOM")
+                    }
+                    fallback
+                }
+            },
             get_event_status: {
                 let value = loader(b"vkGetEventStatus\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -5570,6 +5587,22 @@ impl DeviceCommands {
                         _handle: *mut HANDLE,
                     ) -> Result {
                         panic!("could not load vkGetFenceWin32HandleKHR")
+                    }
+                    fallback
+                }
+            },
+            get_framebuffer_tile_properties_qcom: {
+                let value = loader(b"vkGetFramebufferTilePropertiesQCOM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _framebuffer: Framebuffer,
+                        _properties_count: *mut u32,
+                        _properties: *mut TilePropertiesQCOM,
+                    ) -> Result {
+                        panic!("could not load vkGetFramebufferTilePropertiesQCOM")
                     }
                     fallback
                 }

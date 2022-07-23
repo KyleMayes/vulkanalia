@@ -2264,7 +2264,7 @@ pub const HUAWEI_INVOCATION_MASK_EXTENSION: Extension = Extension {
     number: 371,
     type_: "device",
     author: "Huawei",
-    contact: "Yunpeng Zhu @yunxingzhu",
+    contact: "Pan Gao @PanGao-h",
     platform: None,
     required_extensions: Some(&[
         KHR_RAY_TRACING_PIPELINE_EXTENSION.name,
@@ -2283,7 +2283,7 @@ pub const HUAWEI_SUBPASS_SHADING_EXTENSION: Extension = Extension {
     number: 370,
     type_: "device",
     author: "HUAWEI",
-    contact: "Hueilong Wang @wyvernathuawei",
+    contact: "Pan Gao @PanGao-h",
     platform: None,
     required_extensions: Some(&[
         KHR_CREATE_RENDERPASS2_EXTENSION.name,
@@ -4587,6 +4587,22 @@ pub const QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_image_processing.html>
+#[allow(deprecated)]
+pub const QCOM_IMAGE_PROCESSING_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_QCOM_image_processing"),
+    number: 441,
+    type_: "device",
+    author: "QCOM",
+    contact: "Jeff Leger @jackohound",
+    platform: None,
+    required_extensions: Some(&[KHR_FORMAT_FEATURE_FLAGS2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_render_pass_shader_resolve.html>
 #[allow(deprecated)]
 pub const QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION: Extension = Extension {
@@ -4648,6 +4664,22 @@ pub const QCOM_ROTATED_COPY_COMMANDS_EXTENSION: Extension = Extension {
         KHR_SWAPCHAIN_EXTENSION.name,
         KHR_COPY_COMMANDS2_EXTENSION.name,
     ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_tile_properties.html>
+#[allow(deprecated)]
+pub const QCOM_TILE_PROPERTIES_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_QCOM_tile_properties"),
+    number: 485,
+    type_: "device",
+    author: "QCOM",
+    contact: "Jeff Leger @jackohound",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
