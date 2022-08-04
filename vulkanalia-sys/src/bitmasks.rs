@@ -351,6 +351,7 @@ bitflags! {
         const BY_REGION = 1;
         const VIEW_LOCAL = 1 << 1;
         const DEVICE_GROUP = 1 << 2;
+        const FEEDBACK_LOOP_EXT = 1 << 3;
     }
 }
 
@@ -892,6 +893,7 @@ bitflags! {
         const FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 8;
         const FRAGMENT_DENSITY_MAP_EXT = 1 << 9;
         const INVOCATION_MASK_HUAWEI = 1 << 18;
+        const ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 19;
         const SAMPLE_WEIGHT_QCOM = 1 << 20;
         const SAMPLE_BLOCK_MATCH_QCOM = 1 << 21;
     }
@@ -1092,6 +1094,8 @@ bitflags! {
         const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 21;
         const RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_EXT = 1 << 22;
         const RETAIN_LINK_TIME_OPTIMIZATION_INFO_EXT = 1 << 23;
+        const COLOR_ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 25;
+        const DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 26;
     }
 }
 

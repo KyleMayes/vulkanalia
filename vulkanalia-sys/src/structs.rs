@@ -522,6 +522,28 @@ impl Default for AllocationCallbacks {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAmigoProfilingSubmitInfoSEC.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct AmigoProfilingSubmitInfoSEC {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub first_draw_timestamp: u64,
+    pub swap_buffer_timestamp: u64,
+}
+
+impl Default for AmigoProfilingSubmitInfoSEC {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::AMIGO_PROFILING_SUBMIT_INFO_SEC,
+            next: ptr::null(),
+            first_draw_timestamp: u64::default(),
+            swap_buffer_timestamp: u64::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAndroidHardwareBufferFormatProperties2ANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7446,6 +7468,46 @@ impl Default for PhysicalDeviceAccelerationStructurePropertiesKHR {
             max_descriptor_set_acceleration_structures: u32::default(),
             max_descriptor_set_update_after_bind_acceleration_structures: u32::default(),
             min_acceleration_structure_scratch_offset_alignment: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceAmigoProfilingFeaturesSEC.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceAmigoProfilingFeaturesSEC {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub amigo_profiling: Bool32,
+}
+
+impl Default for PhysicalDeviceAmigoProfilingFeaturesSEC {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC,
+            next: ptr::null_mut(),
+            amigo_profiling: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub attachment_feedback_loop_layout: Bool32,
+}
+
+impl Default for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_FEATURES_EXT,
+            next: ptr::null_mut(),
+            attachment_feedback_loop_layout: Bool32::default(),
         }
     }
 }

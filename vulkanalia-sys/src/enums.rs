@@ -2342,6 +2342,7 @@ impl ImageLayout {
     pub const SHARED_PRESENT_KHR: Self = Self(1000111000);
     pub const FRAGMENT_DENSITY_MAP_OPTIMAL_EXT: Self = Self(1000218000);
     pub const FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR: Self = Self(1000164003);
+    pub const ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT: Self = Self(1000339000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2380,6 +2381,7 @@ impl fmt::Debug for ImageLayout {
             1000111000 => write!(f, "SHARED_PRESENT_KHR"),
             1000218000 => write!(f, "FRAGMENT_DENSITY_MAP_OPTIMAL_EXT"),
             1000164003 => write!(f, "FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR"),
+            1000339000 => write!(f, "ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -4882,6 +4884,7 @@ impl StructureType {
     pub const SUBRESOURCE_LAYOUT_2_EXT: Self = Self(1000338002);
     pub const IMAGE_SUBRESOURCE_2_EXT: Self = Self(1000338003);
     pub const IMAGE_COMPRESSION_PROPERTIES_EXT: Self = Self(1000338004);
+    pub const PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_FEATURES_EXT: Self = Self(1000339000);
     pub const PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT: Self = Self(1000340000);
     pub const PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM: Self =
         Self(1000342000);
@@ -4960,6 +4963,8 @@ impl StructureType {
     pub const SHADER_MODULE_IDENTIFIER_EXT: Self = Self(1000462003);
     pub const PHYSICAL_DEVICE_TILE_PROPERTIES_FEATURES_QCOM: Self = Self(1000484000);
     pub const TILE_PROPERTIES_QCOM: Self = Self(1000484001);
+    pub const PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC: Self = Self(1000485000);
+    pub const AMIGO_PROFILING_SUBMIT_INFO_SEC: Self = Self(1000485001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5603,6 +5608,10 @@ impl fmt::Debug for StructureType {
             1000338002 => write!(f, "SUBRESOURCE_LAYOUT_2_EXT"),
             1000338003 => write!(f, "IMAGE_SUBRESOURCE_2_EXT"),
             1000338004 => write!(f, "IMAGE_COMPRESSION_PROPERTIES_EXT"),
+            1000339000 => write!(
+                f,
+                "PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_FEATURES_EXT"
+            ),
             1000340000 => write!(f, "PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT"),
             1000342000 => write!(
                 f,
@@ -5702,6 +5711,8 @@ impl fmt::Debug for StructureType {
             1000462003 => write!(f, "SHADER_MODULE_IDENTIFIER_EXT"),
             1000484000 => write!(f, "PHYSICAL_DEVICE_TILE_PROPERTIES_FEATURES_QCOM"),
             1000484001 => write!(f, "TILE_PROPERTIES_QCOM"),
+            1000485000 => write!(f, "PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC"),
+            1000485001 => write!(f, "AMIGO_PROFILING_SUBMIT_INFO_SEC"),
             _ => self.0.fmt(f),
         }
     }
