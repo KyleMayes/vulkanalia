@@ -516,6 +516,15 @@ pub trait ExtAstcDecodeModeExtension: DeviceV1_0 {
 
 impl ExtAstcDecodeModeExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_attachment_feedback_loop_layout.html>
+pub trait ExtAttachmentFeedbackLoopLayoutExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_EXTENSION;
+}
+
+impl ExtAttachmentFeedbackLoopLayoutExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_blend_operation_advanced.html>
 pub trait ExtBlendOperationAdvancedExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -2285,6 +2294,15 @@ pub trait ExtQueueFamilyForeignExtension: DeviceV1_0 {
 }
 
 impl ExtQueueFamilyForeignExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_rasterization_order_attachment_access.html>
+pub trait ExtRasterizationOrderAttachmentAccessExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION;
+}
+
+impl ExtRasterizationOrderAttachmentAccessExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_rgba10x6_formats.html>
 pub trait ExtRgba10x6FormatsExtension: DeviceV1_0 {
@@ -8931,6 +8949,15 @@ pub trait QnxScreenSurfaceExtension: InstanceV1_0 {
 }
 
 impl QnxScreenSurfaceExtension for crate::Instance {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_SEC_amigo_profiling.html>
+pub trait SecAmigoProfilingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = SEC_AMIGO_PROFILING_EXTENSION;
+}
+
+impl SecAmigoProfilingExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_VALVE_descriptor_set_host_mapping.html>
 pub trait ValveDescriptorSetHostMappingExtension: DeviceV1_0 {

@@ -522,6 +522,28 @@ impl Default for AllocationCallbacks {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAmigoProfilingSubmitInfoSEC.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct AmigoProfilingSubmitInfoSEC {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub first_draw_timestamp: u64,
+    pub swap_buffer_timestamp: u64,
+}
+
+impl Default for AmigoProfilingSubmitInfoSEC {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::AMIGO_PROFILING_SUBMIT_INFO_SEC,
+            next: ptr::null(),
+            first_draw_timestamp: u64::default(),
+            swap_buffer_timestamp: u64::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAndroidHardwareBufferFormatProperties2ANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7450,6 +7472,46 @@ impl Default for PhysicalDeviceAccelerationStructurePropertiesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceAmigoProfilingFeaturesSEC.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceAmigoProfilingFeaturesSEC {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub amigo_profiling: Bool32,
+}
+
+impl Default for PhysicalDeviceAmigoProfilingFeaturesSEC {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC,
+            next: ptr::null_mut(),
+            amigo_profiling: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub attachment_feedback_loop_layout: Bool32,
+}
+
+impl Default for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_FEATURES_EXT,
+            next: ptr::null_mut(),
+            attachment_feedback_loop_layout: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10481,10 +10543,10 @@ impl Default for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
+pub struct PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub rasterization_order_color_attachment_access: Bool32,
@@ -10492,12 +10554,12 @@ pub struct PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
     pub rasterization_order_stencil_attachment_access: Bool32,
 }
 
-impl Default for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
+impl Default for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT {
     #[inline]
     fn default() -> Self {
         Self {
             s_type:
-                StructureType::PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM,
+                StructureType::PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_EXT,
             next: ptr::null_mut(),
             rasterization_order_color_attachment_access: Bool32::default(),
             rasterization_order_depth_attachment_access: Bool32::default(),
@@ -16990,6 +17052,9 @@ pub type PhysicalDevicePointClippingPropertiesKHR = PhysicalDevicePointClippingP
 pub type PhysicalDevicePrivateDataFeaturesEXT = PhysicalDevicePrivateDataFeatures;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceProperties2KHR.html>
 pub type PhysicalDeviceProperties2KHR = PhysicalDeviceProperties2;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM.html>
+pub type PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM =
+    PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.html>
 pub type PhysicalDeviceSamplerFilterMinmaxPropertiesEXT =
     PhysicalDeviceSamplerFilterMinmaxProperties;

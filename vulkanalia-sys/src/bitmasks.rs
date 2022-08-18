@@ -351,6 +351,7 @@ bitflags! {
         const BY_REGION = 1;
         const VIEW_LOCAL = 1 << 1;
         const DEVICE_GROUP = 1 << 2;
+        const FEEDBACK_LOOP_EXT = 1 << 3;
     }
 }
 
@@ -892,6 +893,7 @@ bitflags! {
         const FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 8;
         const FRAGMENT_DENSITY_MAP_EXT = 1 << 9;
         const INVOCATION_MASK_HUAWEI = 1 << 18;
+        const ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 19;
         const SAMPLE_WEIGHT_QCOM = 1 << 20;
         const SAMPLE_BLOCK_MATCH_QCOM = 1 << 21;
     }
@@ -1031,7 +1033,7 @@ bitflags! {
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineColorBlendStateCreateFlags: Flags {
-        const RASTERIZATION_ORDER_ATTACHMENT_ACCESS_ARM = 1;
+        const RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXT = 1;
     }
 }
 
@@ -1092,6 +1094,8 @@ bitflags! {
         const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 21;
         const RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_EXT = 1 << 22;
         const RETAIN_LINK_TIME_OPTIMIZATION_INFO_EXT = 1 << 23;
+        const COLOR_ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 25;
+        const DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 26;
     }
 }
 
@@ -1111,8 +1115,8 @@ bitflags! {
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineDepthStencilStateCreateFlags: Flags {
-        const RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_ARM = 1;
-        const RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_ARM = 1 << 1;
+        const RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_EXT = 1;
+        const RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_EXT = 1 << 1;
     }
 }
 
@@ -1569,9 +1573,9 @@ bitflags! {
         const PER_VIEW_POSITION_X_ONLY_NVX = 1 << 1;
         const FRAGMENT_REGION_QCOM = 1 << 2;
         const SHADER_RESOLVE_QCOM = 1 << 3;
-        const RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_ARM = 1 << 4;
-        const RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_ARM = 1 << 5;
-        const RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_ARM = 1 << 6;
+        const RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_EXT = 1 << 4;
+        const RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_EXT = 1 << 5;
+        const RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_EXT = 1 << 6;
     }
 }
 

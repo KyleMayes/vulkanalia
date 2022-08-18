@@ -1915,6 +1915,70 @@ unsafe impl<'b> Cast for AllocationCallbacksBuilder<'b> {
     }
 }
 
+unsafe impl Cast for AmigoProfilingSubmitInfoSEC {
+    type Target = AmigoProfilingSubmitInfoSEC;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for AmigoProfilingSubmitInfoSEC {
+    type Builder = AmigoProfilingSubmitInfoSECBuilder;
+}
+
+/// A builder for a [`AmigoProfilingSubmitInfoSEC`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AmigoProfilingSubmitInfoSECBuilder {
+    value: AmigoProfilingSubmitInfoSEC,
+}
+
+impl AmigoProfilingSubmitInfoSECBuilder {
+    #[inline]
+    pub fn first_draw_timestamp(mut self, first_draw_timestamp: u64) -> Self {
+        self.value.first_draw_timestamp = first_draw_timestamp;
+        self
+    }
+
+    #[inline]
+    pub fn swap_buffer_timestamp(mut self, swap_buffer_timestamp: u64) -> Self {
+        self.value.swap_buffer_timestamp = swap_buffer_timestamp;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AmigoProfilingSubmitInfoSEC {
+        self.value
+    }
+}
+
+impl ops::Deref for AmigoProfilingSubmitInfoSECBuilder {
+    type Target = AmigoProfilingSubmitInfoSEC;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for AmigoProfilingSubmitInfoSECBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for AmigoProfilingSubmitInfoSECBuilder {
+    type Target = AmigoProfilingSubmitInfoSEC;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for AndroidHardwareBufferFormatProperties2ANDROID {
     type Target = AndroidHardwareBufferFormatProperties2ANDROID;
 
@@ -10367,6 +10431,8 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice4444FormatsFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice8BitStorageFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceASTCDecodeFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAccelerationStructureFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAmigoProfilingFeaturesSEC {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBufferDeviceAddressFeatures {}
@@ -10440,7 +10506,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProtectedMemoryFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceProvokingVertexFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo
-    for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM
+    for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT
 {
 }
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayQueryFeaturesKHR {}
@@ -25435,6 +25501,125 @@ unsafe impl Cast for PhysicalDeviceAccelerationStructurePropertiesKHRBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceAmigoProfilingFeaturesSEC {
+    type Target = PhysicalDeviceAmigoProfilingFeaturesSEC;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceAmigoProfilingFeaturesSEC {
+    type Builder = PhysicalDeviceAmigoProfilingFeaturesSECBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceAmigoProfilingFeaturesSEC`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceAmigoProfilingFeaturesSECBuilder {
+    value: PhysicalDeviceAmigoProfilingFeaturesSEC,
+}
+
+impl PhysicalDeviceAmigoProfilingFeaturesSECBuilder {
+    #[inline]
+    pub fn amigo_profiling(mut self, amigo_profiling: bool) -> Self {
+        self.value.amigo_profiling = amigo_profiling as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceAmigoProfilingFeaturesSEC {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceAmigoProfilingFeaturesSECBuilder {
+    type Target = PhysicalDeviceAmigoProfilingFeaturesSEC;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceAmigoProfilingFeaturesSECBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceAmigoProfilingFeaturesSECBuilder {
+    type Target = PhysicalDeviceAmigoProfilingFeaturesSEC;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {
+    type Target = PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {
+    type Builder = PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXTBuilder {
+    value: PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT,
+}
+
+impl PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXTBuilder {
+    #[inline]
+    pub fn attachment_feedback_loop_layout(
+        mut self,
+        attachment_feedback_loop_layout: bool,
+    ) -> Self {
+        self.value.attachment_feedback_loop_layout = attachment_feedback_loop_layout as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXTBuilder {
+    type Target = PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXTBuilder {
+    type Target = PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {
     type Target = PhysicalDeviceBlendOperationAdvancedFeaturesEXT;
 
@@ -29044,6 +29229,11 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice4444FormatsFeatures
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice8BitStorageFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceASTCDecodeFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAccelerationStructureFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAmigoProfilingFeaturesSEC {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBufferDeviceAddressFeatures {}
@@ -29131,7 +29321,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProtectedMemoryFeat
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceProvokingVertexFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
-    for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM
+    for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT
 {
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayQueryFeaturesKHR {}
@@ -36081,8 +36271,8 @@ unsafe impl Cast for PhysicalDeviceRGBA10X6FormatsFeaturesEXTBuilder {
     }
 }
 
-unsafe impl Cast for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
-    type Target = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM;
+unsafe impl Cast for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT {
+    type Target = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -36090,18 +36280,18 @@ unsafe impl Cast for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM
     }
 }
 
-impl HasBuilder<'static> for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
-    type Builder = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder;
+impl HasBuilder<'static> for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT {
+    type Builder = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXTBuilder;
 }
 
-/// A builder for a [`PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM`].
+/// A builder for a [`PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder {
-    value: PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM,
+pub struct PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXTBuilder {
+    value: PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT,
 }
 
-impl PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder {
+impl PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXTBuilder {
     #[inline]
     pub fn rasterization_order_color_attachment_access(
         mut self,
@@ -36133,13 +36323,13 @@ impl PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder {
     }
 
     #[inline]
-    pub fn build(self) -> PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
+    pub fn build(self) -> PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT {
         self.value
     }
 }
 
-impl ops::Deref for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder {
-    type Target = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM;
+impl ops::Deref for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXTBuilder {
+    type Target = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -36147,15 +36337,15 @@ impl ops::Deref for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMB
     }
 }
 
-impl ops::DerefMut for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder {
+impl ops::DerefMut for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXTBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARMBuilder {
-    type Target = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM;
+unsafe impl Cast for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXTBuilder {
+    type Target = PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -53678,6 +53868,7 @@ unsafe impl Cast for StridedDeviceAddressRegionKHRBuilder {
 
 /// A Vulkan struct that can be used to extend a [`SubmitInfo`].
 pub unsafe trait ExtendsSubmitInfo: fmt::Debug {}
+unsafe impl ExtendsSubmitInfo for AmigoProfilingSubmitInfoSEC {}
 unsafe impl ExtendsSubmitInfo for D3D12FenceSubmitInfoKHR {}
 unsafe impl ExtendsSubmitInfo for DeviceGroupSubmitInfo {}
 unsafe impl ExtendsSubmitInfo for PerformanceQuerySubmitInfoKHR {}
