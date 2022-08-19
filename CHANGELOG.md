@@ -14,6 +14,9 @@
 - [Add pd2 requirement for VK_EXT_blend_operation_advanced (#1887)](https://github.com/KhronosGroup/Vulkan-Docs/commit/f977b487253872ce3f5fd3dc1ae688f4f4b59677)
 - [July 14, 2022 Vulkan 1.3.221 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9aeaebb24b6faa1f05c7a95b0328beecbe195927)
 - [July 21, 2022 Vulkan 1.3.222 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/8dcc7469b01529600b712596a5a48ec8c710e228)
+- [July 28, 2022 Vulkan 1.3.223 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9ecfc67442754c9e4c4fecf5e61c48483608a074)
+- [August 4, 2022 Vulkan 1.3.224 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/5ca346bf39db36ff06e24686f0a815754c5f7c16)
+- [August 18, 2022 Vulkan 1.3.225 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/1f6a09901674b320bff7cf36c364a461cf1069a6)
 
 ## [0.15.0] - 2022-05-18
 
