@@ -107,7 +107,10 @@ pub struct DeviceCommands {
     pub cmd_draw_indirect_count: PFN_vkCmdDrawIndirectCount,
     pub cmd_draw_indirect_count_amd: PFN_vkCmdDrawIndirectCountAMD,
     pub cmd_draw_indirect_count_khr: PFN_vkCmdDrawIndirectCountKHR,
+    pub cmd_draw_mesh_tasks_ext: PFN_vkCmdDrawMeshTasksEXT,
+    pub cmd_draw_mesh_tasks_indirect_count_ext: PFN_vkCmdDrawMeshTasksIndirectCountEXT,
     pub cmd_draw_mesh_tasks_indirect_count_nv: PFN_vkCmdDrawMeshTasksIndirectCountNV,
+    pub cmd_draw_mesh_tasks_indirect_ext: PFN_vkCmdDrawMeshTasksIndirectEXT,
     pub cmd_draw_mesh_tasks_indirect_nv: PFN_vkCmdDrawMeshTasksIndirectNV,
     pub cmd_draw_mesh_tasks_nv: PFN_vkCmdDrawMeshTasksNV,
     pub cmd_draw_multi_ext: PFN_vkCmdDrawMultiEXT,
@@ -1830,6 +1833,41 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_draw_mesh_tasks_ext: {
+                let value = loader(b"vkCmdDrawMeshTasksEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _group_count_x: u32,
+                        _group_count_y: u32,
+                        _group_count_z: u32,
+                    ) {
+                        panic!("could not load vkCmdDrawMeshTasksEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_draw_mesh_tasks_indirect_count_ext: {
+                let value = loader(b"vkCmdDrawMeshTasksIndirectCountEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _buffer: Buffer,
+                        _offset: DeviceSize,
+                        _count_buffer: Buffer,
+                        _count_buffer_offset: DeviceSize,
+                        _max_draw_count: u32,
+                        _stride: u32,
+                    ) {
+                        panic!("could not load vkCmdDrawMeshTasksIndirectCountEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_draw_mesh_tasks_indirect_count_nv: {
                 let value = loader(b"vkCmdDrawMeshTasksIndirectCountNV\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -1845,6 +1883,23 @@ impl DeviceCommands {
                         _stride: u32,
                     ) {
                         panic!("could not load vkCmdDrawMeshTasksIndirectCountNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_draw_mesh_tasks_indirect_ext: {
+                let value = loader(b"vkCmdDrawMeshTasksIndirectEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _buffer: Buffer,
+                        _offset: DeviceSize,
+                        _draw_count: u32,
+                        _stride: u32,
+                    ) {
+                        panic!("could not load vkCmdDrawMeshTasksIndirectEXT")
                     }
                     fallback
                 }

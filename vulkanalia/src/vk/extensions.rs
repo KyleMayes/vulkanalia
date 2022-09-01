@@ -991,6 +991,15 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
 
 impl ExtDebugUtilsExtension for crate::Instance {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_zero_one.html>
+pub trait ExtDepthClampZeroOneExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_DEPTH_CLAMP_ZERO_ONE_EXTENSION;
+}
+
+impl ExtDepthClampZeroOneExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clip_control.html>
 pub trait ExtDepthClipControlExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -1950,6 +1959,74 @@ pub trait ExtMemoryPriorityExtension: DeviceV1_0 {
 }
 
 impl ExtMemoryPriorityExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_mesh_shader.html>
+pub trait ExtMeshShaderExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_MESH_SHADER_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawMeshTasksEXT.html>
+    #[inline]
+    unsafe fn cmd_draw_mesh_tasks_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        group_count_x: u32,
+        group_count_y: u32,
+        group_count_z: u32,
+    ) {
+        let __result = (self.commands().cmd_draw_mesh_tasks_ext)(
+            command_buffer,
+            group_count_x,
+            group_count_y,
+            group_count_z,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawMeshTasksIndirectCountEXT.html>
+    #[inline]
+    unsafe fn cmd_draw_mesh_tasks_indirect_count_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        buffer: Buffer,
+        offset: DeviceSize,
+        count_buffer: Buffer,
+        count_buffer_offset: DeviceSize,
+        max_draw_count: u32,
+        stride: u32,
+    ) {
+        let __result = (self.commands().cmd_draw_mesh_tasks_indirect_count_ext)(
+            command_buffer,
+            buffer,
+            offset,
+            count_buffer,
+            count_buffer_offset,
+            max_draw_count,
+            stride,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawMeshTasksIndirectEXT.html>
+    #[inline]
+    unsafe fn cmd_draw_mesh_tasks_indirect_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        buffer: Buffer,
+        offset: DeviceSize,
+        draw_count: u32,
+        stride: u32,
+    ) {
+        let __result = (self.commands().cmd_draw_mesh_tasks_indirect_ext)(
+            command_buffer,
+            buffer,
+            offset,
+            draw_count,
+            stride,
+        );
+    }
+}
+
+impl ExtMeshShaderExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_metal_objects.html>
 pub trait ExtMetalObjectsExtension: DeviceV1_0 {
