@@ -10481,6 +10481,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceIndexTypeUint8FeaturesEXT 
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInlineUniformBlockFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLegacyDitheringFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLineRasterizationFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance4Features {}
@@ -29417,6 +29418,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceIndexTypeUint8Featu
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInheritedViewportScissorFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInlineUniformBlockFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLegacyDitheringFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLineRasterizationFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance4Features {}
@@ -32383,6 +32385,64 @@ impl ops::DerefMut for PhysicalDeviceInvocationMaskFeaturesHUAWEIBuilder {
 
 unsafe impl Cast for PhysicalDeviceInvocationMaskFeaturesHUAWEIBuilder {
     type Target = PhysicalDeviceInvocationMaskFeaturesHUAWEI;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLegacyDitheringFeaturesEXT {
+    type Target = PhysicalDeviceLegacyDitheringFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceLegacyDitheringFeaturesEXT {
+    type Builder = PhysicalDeviceLegacyDitheringFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceLegacyDitheringFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceLegacyDitheringFeaturesEXTBuilder {
+    value: PhysicalDeviceLegacyDitheringFeaturesEXT,
+}
+
+impl PhysicalDeviceLegacyDitheringFeaturesEXTBuilder {
+    #[inline]
+    pub fn legacy_dithering(mut self, legacy_dithering: bool) -> Self {
+        self.value.legacy_dithering = legacy_dithering as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceLegacyDitheringFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceLegacyDitheringFeaturesEXTBuilder {
+    type Target = PhysicalDeviceLegacyDitheringFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceLegacyDitheringFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLegacyDitheringFeaturesEXTBuilder {
+    type Target = PhysicalDeviceLegacyDitheringFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {

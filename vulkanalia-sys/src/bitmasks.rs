@@ -1388,6 +1388,7 @@ bitflags! {
         const CONTENTS_SECONDARY_COMMAND_BUFFERS = 1;
         const SUSPENDING = 1 << 1;
         const RESUMING = 1 << 2;
+        const ENABLE_LEGACY_DITHERING_EXT = 1 << 3;
     }
 }
 
@@ -1578,6 +1579,7 @@ bitflags! {
         const RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_EXT = 1 << 4;
         const RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_EXT = 1 << 5;
         const RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_EXT = 1 << 6;
+        const ENABLE_LEGACY_DITHERING_EXT = 1 << 7;
     }
 }
 

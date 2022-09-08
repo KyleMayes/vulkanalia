@@ -1276,6 +1276,22 @@ pub const EXT_INLINE_UNIFORM_BLOCK_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_legacy_dithering.html>
+#[allow(deprecated)]
+pub const EXT_LEGACY_DITHERING_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_legacy_dithering"),
+    number: 466,
+    type_: "device",
+    author: "EXT",
+    contact: "Shahbaz Youssefi @syoussefi",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_line_rasterization.html>
 #[allow(deprecated)]
 pub const EXT_LINE_RASTERIZATION_EXTENSION: Extension = Extension {
@@ -1349,7 +1365,10 @@ pub const EXT_MESH_SHADER_EXTENSION: Extension = Extension {
     author: "EXT",
     contact: "Christoph Kubisch @pixeljetstream",
     platform: None,
-    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_extensions: Some(&[
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+        KHR_SPIRV_1_4_EXTENSION.name,
+    ]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
