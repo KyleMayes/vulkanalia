@@ -2547,6 +2547,7 @@ impl IndirectCommandsTokenTypeNV {
     pub const DRAW_INDEXED: Self = Self(5);
     pub const DRAW: Self = Self(6);
     pub const DRAW_TASKS: Self = Self(7);
+    pub const DRAW_MESH_TASKS: Self = Self(1000328000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2572,6 +2573,7 @@ impl fmt::Debug for IndirectCommandsTokenTypeNV {
             5 => write!(f, "DRAW_INDEXED"),
             6 => write!(f, "DRAW"),
             7 => write!(f, "DRAW_TASKS"),
+            1000328000 => write!(f, "DRAW_MESH_TASKS"),
             _ => self.0.fmt(f),
         }
     }
@@ -3556,6 +3558,7 @@ impl QueryType {
     pub const ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR: Self = Self(1000150001);
     pub const ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV: Self = Self(1000165000);
     pub const PERFORMANCE_QUERY_INTEL: Self = Self(1000210000);
+    pub const MESH_PRIMITIVES_GENERATED_EXT: Self = Self(1000328000);
     pub const PRIMITIVES_GENERATED_EXT: Self = Self(1000382000);
     pub const ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR: Self =
         Self(1000386000);
@@ -3586,6 +3589,7 @@ impl fmt::Debug for QueryType {
             1000150001 => write!(f, "ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR"),
             1000165000 => write!(f, "ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV"),
             1000210000 => write!(f, "PERFORMANCE_QUERY_INTEL"),
+            1000328000 => write!(f, "MESH_PRIMITIVES_GENERATED_EXT"),
             1000382000 => write!(f, "PRIMITIVES_GENERATED_EXT"),
             1000386000 => write!(
                 f,
@@ -4873,6 +4877,8 @@ impl StructureType {
     pub const ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV: Self = Self(1000327000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV: Self = Self(1000327001);
     pub const ACCELERATION_STRUCTURE_MOTION_INFO_NV: Self = Self(1000327002);
+    pub const PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT: Self = Self(1000328000);
+    pub const PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_EXT: Self = Self(1000328001);
     pub const PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT: Self = Self(1000330000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT: Self = Self(1000332000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT: Self = Self(1000332001);
@@ -4941,6 +4947,7 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE: Self = Self(1000420000);
     pub const DESCRIPTOR_SET_BINDING_REFERENCE_VALVE: Self = Self(1000420001);
     pub const DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE: Self = Self(1000420002);
+    pub const PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT: Self = Self(1000421000);
     pub const PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT: Self = Self(1000422000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM: Self = Self(1000425000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM: Self = Self(1000425001);
@@ -5595,6 +5602,8 @@ impl fmt::Debug for StructureType {
             ),
             1000327001 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV"),
             1000327002 => write!(f, "ACCELERATION_STRUCTURE_MOTION_INFO_NV"),
+            1000328000 => write!(f, "PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT"),
+            1000328001 => write!(f, "PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_EXT"),
             1000330000 => write!(f, "PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT"),
             1000332000 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT"),
             1000332001 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT"),
@@ -5679,6 +5688,7 @@ impl fmt::Debug for StructureType {
             ),
             1000420001 => write!(f, "DESCRIPTOR_SET_BINDING_REFERENCE_VALVE"),
             1000420002 => write!(f, "DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE"),
+            1000421000 => write!(f, "PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT"),
             1000422000 => write!(f, "PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT"),
             1000425000 => write!(
                 f,

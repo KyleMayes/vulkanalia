@@ -1219,8 +1219,8 @@ bitflags! {
         const ALL_COMMANDS = 1 << 16;
         const COMMAND_PREPROCESS_NV = 1 << 17;
         const CONDITIONAL_RENDERING_EXT = 1 << 18;
-        const TASK_SHADER_NV = 1 << 19;
-        const MESH_SHADER_NV = 1 << 20;
+        const TASK_SHADER_EXT = 1 << 19;
+        const MESH_SHADER_EXT = 1 << 20;
         const RAY_TRACING_SHADER_KHR = 1 << 21;
         const FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 22;
         const FRAGMENT_DENSITY_PROCESS_EXT = 1 << 23;
@@ -1254,8 +1254,8 @@ bitflags! {
         const ALL_COMMANDS = 1 << 16;
         const COMMAND_PREPROCESS_NV = 1 << 17;
         const CONDITIONAL_RENDERING_EXT = 1 << 18;
-        const TASK_SHADER_NV = 1 << 19;
-        const MESH_SHADER_NV = 1 << 20;
+        const TASK_SHADER_EXT = 1 << 19;
+        const MESH_SHADER_EXT = 1 << 20;
         const RAY_TRACING_SHADER_KHR = 1 << 21;
         const FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 22;
         const FRAGMENT_DENSITY_PROCESS_EXT = 1 << 23;
@@ -1334,6 +1334,8 @@ bitflags! {
         const TESSELLATION_CONTROL_SHADER_PATCHES = 1 << 8;
         const TESSELLATION_EVALUATION_SHADER_INVOCATIONS = 1 << 9;
         const COMPUTE_SHADER_INVOCATIONS = 1 << 10;
+        const TASK_SHADER_INVOCATIONS_EXT = 1 << 11;
+        const MESH_SHADER_INVOCATIONS_EXT = 1 << 12;
     }
 }
 
@@ -1487,8 +1489,8 @@ bitflags! {
         const FRAGMENT = 1 << 4;
         const ALL_GRAPHICS = Self::VERTEX.bits | Self::TESSELLATION_CONTROL.bits | Self::TESSELLATION_EVALUATION.bits | Self::GEOMETRY.bits | Self::FRAGMENT.bits;
         const COMPUTE = 1 << 5;
-        const TASK_NV = 1 << 6;
-        const MESH_NV = 1 << 7;
+        const TASK_EXT = 1 << 6;
+        const MESH_EXT = 1 << 7;
         const RAYGEN_KHR = 1 << 8;
         const ANY_HIT_KHR = 1 << 9;
         const CLOSEST_HIT_KHR = 1 << 10;

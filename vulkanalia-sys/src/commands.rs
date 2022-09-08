@@ -616,6 +616,25 @@ pub type PFN_vkCmdDrawIndirectCountAMD = PFN_vkCmdDrawIndirectCount;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawIndirectCountKHR.html>
 pub type PFN_vkCmdDrawIndirectCountKHR = PFN_vkCmdDrawIndirectCount;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawMeshTasksEXT.html>
+pub type PFN_vkCmdDrawMeshTasksEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _group_count_x: u32,
+    _group_count_y: u32,
+    _group_count_z: u32,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawMeshTasksIndirectCountEXT.html>
+pub type PFN_vkCmdDrawMeshTasksIndirectCountEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _buffer: Buffer,
+    _offset: DeviceSize,
+    _count_buffer: Buffer,
+    _count_buffer_offset: DeviceSize,
+    _max_draw_count: u32,
+    _stride: u32,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawMeshTasksIndirectCountNV.html>
 pub type PFN_vkCmdDrawMeshTasksIndirectCountNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -624,6 +643,15 @@ pub type PFN_vkCmdDrawMeshTasksIndirectCountNV = unsafe extern "system" fn(
     _count_buffer: Buffer,
     _count_buffer_offset: DeviceSize,
     _max_draw_count: u32,
+    _stride: u32,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawMeshTasksIndirectEXT.html>
+pub type PFN_vkCmdDrawMeshTasksIndirectEXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _buffer: Buffer,
+    _offset: DeviceSize,
+    _draw_count: u32,
     _stride: u32,
 );
 

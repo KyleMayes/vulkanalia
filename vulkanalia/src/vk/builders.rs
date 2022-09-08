@@ -10446,6 +10446,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCornerSampledImageFeatures
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoverageReductionModeFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCustomBorderColorFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClampZeroOneFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipEnableFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorIndexingFeatures {}
@@ -10484,6 +10485,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLineRasterizationFeaturesE
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance4Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryPriorityFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiDrawFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {}
@@ -13326,6 +13328,76 @@ impl ops::DerefMut for DrawIndirectCommandBuilder {
 
 unsafe impl Cast for DrawIndirectCommandBuilder {
     type Target = DrawIndirectCommand;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DrawMeshTasksIndirectCommandEXT {
+    type Target = DrawMeshTasksIndirectCommandEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DrawMeshTasksIndirectCommandEXT {
+    type Builder = DrawMeshTasksIndirectCommandEXTBuilder;
+}
+
+/// A builder for a [`DrawMeshTasksIndirectCommandEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DrawMeshTasksIndirectCommandEXTBuilder {
+    value: DrawMeshTasksIndirectCommandEXT,
+}
+
+impl DrawMeshTasksIndirectCommandEXTBuilder {
+    #[inline]
+    pub fn group_count_x(mut self, group_count_x: u32) -> Self {
+        self.value.group_count_x = group_count_x;
+        self
+    }
+
+    #[inline]
+    pub fn group_count_y(mut self, group_count_y: u32) -> Self {
+        self.value.group_count_y = group_count_y;
+        self
+    }
+
+    #[inline]
+    pub fn group_count_z(mut self, group_count_z: u32) -> Self {
+        self.value.group_count_z = group_count_z;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DrawMeshTasksIndirectCommandEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for DrawMeshTasksIndirectCommandEXTBuilder {
+    type Target = DrawMeshTasksIndirectCommandEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DrawMeshTasksIndirectCommandEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DrawMeshTasksIndirectCommandEXTBuilder {
+    type Target = DrawMeshTasksIndirectCommandEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -26825,6 +26897,64 @@ unsafe impl Cast for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNVBui
     }
 }
 
+unsafe impl Cast for PhysicalDeviceDepthClampZeroOneFeaturesEXT {
+    type Target = PhysicalDeviceDepthClampZeroOneFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceDepthClampZeroOneFeaturesEXT {
+    type Builder = PhysicalDeviceDepthClampZeroOneFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceDepthClampZeroOneFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceDepthClampZeroOneFeaturesEXTBuilder {
+    value: PhysicalDeviceDepthClampZeroOneFeaturesEXT,
+}
+
+impl PhysicalDeviceDepthClampZeroOneFeaturesEXTBuilder {
+    #[inline]
+    pub fn depth_clamp_zero_one(mut self, depth_clamp_zero_one: bool) -> Self {
+        self.value.depth_clamp_zero_one = depth_clamp_zero_one as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceDepthClampZeroOneFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceDepthClampZeroOneFeaturesEXTBuilder {
+    type Target = PhysicalDeviceDepthClampZeroOneFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceDepthClampZeroOneFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDepthClampZeroOneFeaturesEXTBuilder {
+    type Target = PhysicalDeviceDepthClampZeroOneFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceDepthClipControlFeaturesEXT {
     type Target = PhysicalDeviceDepthClipControlFeaturesEXT;
 
@@ -29250,6 +29380,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV
 {
 }
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClampZeroOneFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipControlFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipEnableFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorIndexingFeatures {}
@@ -29290,6 +29421,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLineRasterizationFe
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance4Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryPriorityFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiDrawFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
@@ -33746,6 +33878,92 @@ unsafe impl<'b> Cast for PhysicalDeviceMemoryProperties2Builder<'b> {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceMeshShaderFeaturesEXT {
+    type Target = PhysicalDeviceMeshShaderFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMeshShaderFeaturesEXT {
+    type Builder = PhysicalDeviceMeshShaderFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceMeshShaderFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMeshShaderFeaturesEXTBuilder {
+    value: PhysicalDeviceMeshShaderFeaturesEXT,
+}
+
+impl PhysicalDeviceMeshShaderFeaturesEXTBuilder {
+    #[inline]
+    pub fn task_shader(mut self, task_shader: bool) -> Self {
+        self.value.task_shader = task_shader as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn mesh_shader(mut self, mesh_shader: bool) -> Self {
+        self.value.mesh_shader = mesh_shader as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn multiview_mesh_shader(mut self, multiview_mesh_shader: bool) -> Self {
+        self.value.multiview_mesh_shader = multiview_mesh_shader as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn primitive_fragment_shading_rate_mesh_shader(
+        mut self,
+        primitive_fragment_shading_rate_mesh_shader: bool,
+    ) -> Self {
+        self.value.primitive_fragment_shading_rate_mesh_shader =
+            primitive_fragment_shading_rate_mesh_shader as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn mesh_shader_queries(mut self, mesh_shader_queries: bool) -> Self {
+        self.value.mesh_shader_queries = mesh_shader_queries as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMeshShaderFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMeshShaderFeaturesEXTBuilder {
+    type Target = PhysicalDeviceMeshShaderFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMeshShaderFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMeshShaderFeaturesEXTBuilder {
+    type Target = PhysicalDeviceMeshShaderFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceMeshShaderFeaturesNV {
     type Target = PhysicalDeviceMeshShaderFeaturesNV;
 
@@ -33803,6 +34021,263 @@ impl ops::DerefMut for PhysicalDeviceMeshShaderFeaturesNVBuilder {
 
 unsafe impl Cast for PhysicalDeviceMeshShaderFeaturesNVBuilder {
     type Target = PhysicalDeviceMeshShaderFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMeshShaderPropertiesEXT {
+    type Target = PhysicalDeviceMeshShaderPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMeshShaderPropertiesEXT {
+    type Builder = PhysicalDeviceMeshShaderPropertiesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceMeshShaderPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMeshShaderPropertiesEXTBuilder {
+    value: PhysicalDeviceMeshShaderPropertiesEXT,
+}
+
+impl PhysicalDeviceMeshShaderPropertiesEXTBuilder {
+    #[inline]
+    pub fn max_task_work_group_total_count(mut self, max_task_work_group_total_count: u32) -> Self {
+        self.value.max_task_work_group_total_count = max_task_work_group_total_count;
+        self
+    }
+
+    #[inline]
+    pub fn max_task_work_group_count(mut self, max_task_work_group_count: [u32; 3]) -> Self {
+        self.value.max_task_work_group_count = max_task_work_group_count;
+        self
+    }
+
+    #[inline]
+    pub fn max_task_work_group_invocations(mut self, max_task_work_group_invocations: u32) -> Self {
+        self.value.max_task_work_group_invocations = max_task_work_group_invocations;
+        self
+    }
+
+    #[inline]
+    pub fn max_task_work_group_size(mut self, max_task_work_group_size: [u32; 3]) -> Self {
+        self.value.max_task_work_group_size = max_task_work_group_size;
+        self
+    }
+
+    #[inline]
+    pub fn max_task_payload_size(mut self, max_task_payload_size: u32) -> Self {
+        self.value.max_task_payload_size = max_task_payload_size;
+        self
+    }
+
+    #[inline]
+    pub fn max_task_shared_memory_size(mut self, max_task_shared_memory_size: u32) -> Self {
+        self.value.max_task_shared_memory_size = max_task_shared_memory_size;
+        self
+    }
+
+    #[inline]
+    pub fn max_task_payload_and_shared_memory_size(
+        mut self,
+        max_task_payload_and_shared_memory_size: u32,
+    ) -> Self {
+        self.value.max_task_payload_and_shared_memory_size =
+            max_task_payload_and_shared_memory_size;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_work_group_total_count(mut self, max_mesh_work_group_total_count: u32) -> Self {
+        self.value.max_mesh_work_group_total_count = max_mesh_work_group_total_count;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_work_group_count(mut self, max_mesh_work_group_count: [u32; 3]) -> Self {
+        self.value.max_mesh_work_group_count = max_mesh_work_group_count;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_work_group_invocations(mut self, max_mesh_work_group_invocations: u32) -> Self {
+        self.value.max_mesh_work_group_invocations = max_mesh_work_group_invocations;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_work_group_size(mut self, max_mesh_work_group_size: [u32; 3]) -> Self {
+        self.value.max_mesh_work_group_size = max_mesh_work_group_size;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_shared_memory_size(mut self, max_mesh_shared_memory_size: u32) -> Self {
+        self.value.max_mesh_shared_memory_size = max_mesh_shared_memory_size;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_payload_and_shared_memory_size(
+        mut self,
+        max_mesh_payload_and_shared_memory_size: u32,
+    ) -> Self {
+        self.value.max_mesh_payload_and_shared_memory_size =
+            max_mesh_payload_and_shared_memory_size;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_output_memory_size(mut self, max_mesh_output_memory_size: u32) -> Self {
+        self.value.max_mesh_output_memory_size = max_mesh_output_memory_size;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_payload_and_output_memory_size(
+        mut self,
+        max_mesh_payload_and_output_memory_size: u32,
+    ) -> Self {
+        self.value.max_mesh_payload_and_output_memory_size =
+            max_mesh_payload_and_output_memory_size;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_output_components(mut self, max_mesh_output_components: u32) -> Self {
+        self.value.max_mesh_output_components = max_mesh_output_components;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_output_vertices(mut self, max_mesh_output_vertices: u32) -> Self {
+        self.value.max_mesh_output_vertices = max_mesh_output_vertices;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_output_primitives(mut self, max_mesh_output_primitives: u32) -> Self {
+        self.value.max_mesh_output_primitives = max_mesh_output_primitives;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_output_layers(mut self, max_mesh_output_layers: u32) -> Self {
+        self.value.max_mesh_output_layers = max_mesh_output_layers;
+        self
+    }
+
+    #[inline]
+    pub fn max_mesh_multiview_view_count(mut self, max_mesh_multiview_view_count: u32) -> Self {
+        self.value.max_mesh_multiview_view_count = max_mesh_multiview_view_count;
+        self
+    }
+
+    #[inline]
+    pub fn mesh_output_per_vertex_granularity(
+        mut self,
+        mesh_output_per_vertex_granularity: u32,
+    ) -> Self {
+        self.value.mesh_output_per_vertex_granularity = mesh_output_per_vertex_granularity;
+        self
+    }
+
+    #[inline]
+    pub fn mesh_output_per_primitive_granularity(
+        mut self,
+        mesh_output_per_primitive_granularity: u32,
+    ) -> Self {
+        self.value.mesh_output_per_primitive_granularity = mesh_output_per_primitive_granularity;
+        self
+    }
+
+    #[inline]
+    pub fn max_preferred_task_work_group_invocations(
+        mut self,
+        max_preferred_task_work_group_invocations: u32,
+    ) -> Self {
+        self.value.max_preferred_task_work_group_invocations =
+            max_preferred_task_work_group_invocations;
+        self
+    }
+
+    #[inline]
+    pub fn max_preferred_mesh_work_group_invocations(
+        mut self,
+        max_preferred_mesh_work_group_invocations: u32,
+    ) -> Self {
+        self.value.max_preferred_mesh_work_group_invocations =
+            max_preferred_mesh_work_group_invocations;
+        self
+    }
+
+    #[inline]
+    pub fn prefers_local_invocation_vertex_output(
+        mut self,
+        prefers_local_invocation_vertex_output: bool,
+    ) -> Self {
+        self.value.prefers_local_invocation_vertex_output =
+            prefers_local_invocation_vertex_output as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn prefers_local_invocation_primitive_output(
+        mut self,
+        prefers_local_invocation_primitive_output: bool,
+    ) -> Self {
+        self.value.prefers_local_invocation_primitive_output =
+            prefers_local_invocation_primitive_output as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn prefers_compact_vertex_output(mut self, prefers_compact_vertex_output: bool) -> Self {
+        self.value.prefers_compact_vertex_output = prefers_compact_vertex_output as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn prefers_compact_primitive_output(
+        mut self,
+        prefers_compact_primitive_output: bool,
+    ) -> Self {
+        self.value.prefers_compact_primitive_output = prefers_compact_primitive_output as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMeshShaderPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMeshShaderPropertiesEXTBuilder {
+    type Target = PhysicalDeviceMeshShaderPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMeshShaderPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMeshShaderPropertiesEXTBuilder {
+    type Target = PhysicalDeviceMeshShaderPropertiesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -35787,6 +36262,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBloc
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLineRasterizationPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance3Properties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance4Properties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMeshShaderPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMeshShaderPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMultiDrawPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2

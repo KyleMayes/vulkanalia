@@ -3931,6 +3931,15 @@ pub struct DrawIndirectCommand {
     pub first_instance: u32,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDrawMeshTasksIndirectCommandEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct DrawMeshTasksIndirectCommandEXT {
+    pub group_count_x: u32,
+    pub group_count_y: u32,
+    pub group_count_z: u32,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDrawMeshTasksIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -7896,6 +7905,26 @@ impl Default for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDepthClampZeroOneFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub depth_clamp_zero_one: Bool32,
+}
+
+impl Default for PhysicalDeviceDepthClampZeroOneFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT,
+            next: ptr::null_mut(),
+            depth_clamp_zero_one: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDepthClipControlFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9763,6 +9792,34 @@ impl Default for PhysicalDeviceMemoryProperties2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMeshShaderFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMeshShaderFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub task_shader: Bool32,
+    pub mesh_shader: Bool32,
+    pub multiview_mesh_shader: Bool32,
+    pub primitive_fragment_shading_rate_mesh_shader: Bool32,
+    pub mesh_shader_queries: Bool32,
+}
+
+impl Default for PhysicalDeviceMeshShaderFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT,
+            next: ptr::null_mut(),
+            task_shader: Bool32::default(),
+            mesh_shader: Bool32::default(),
+            multiview_mesh_shader: Bool32::default(),
+            primitive_fragment_shading_rate_mesh_shader: Bool32::default(),
+            mesh_shader_queries: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMeshShaderFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9781,6 +9838,80 @@ impl Default for PhysicalDeviceMeshShaderFeaturesNV {
             next: ptr::null_mut(),
             task_shader: Bool32::default(),
             mesh_shader: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMeshShaderPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMeshShaderPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_task_work_group_total_count: u32,
+    pub max_task_work_group_count: [u32; 3],
+    pub max_task_work_group_invocations: u32,
+    pub max_task_work_group_size: [u32; 3],
+    pub max_task_payload_size: u32,
+    pub max_task_shared_memory_size: u32,
+    pub max_task_payload_and_shared_memory_size: u32,
+    pub max_mesh_work_group_total_count: u32,
+    pub max_mesh_work_group_count: [u32; 3],
+    pub max_mesh_work_group_invocations: u32,
+    pub max_mesh_work_group_size: [u32; 3],
+    pub max_mesh_shared_memory_size: u32,
+    pub max_mesh_payload_and_shared_memory_size: u32,
+    pub max_mesh_output_memory_size: u32,
+    pub max_mesh_payload_and_output_memory_size: u32,
+    pub max_mesh_output_components: u32,
+    pub max_mesh_output_vertices: u32,
+    pub max_mesh_output_primitives: u32,
+    pub max_mesh_output_layers: u32,
+    pub max_mesh_multiview_view_count: u32,
+    pub mesh_output_per_vertex_granularity: u32,
+    pub mesh_output_per_primitive_granularity: u32,
+    pub max_preferred_task_work_group_invocations: u32,
+    pub max_preferred_mesh_work_group_invocations: u32,
+    pub prefers_local_invocation_vertex_output: Bool32,
+    pub prefers_local_invocation_primitive_output: Bool32,
+    pub prefers_compact_vertex_output: Bool32,
+    pub prefers_compact_primitive_output: Bool32,
+}
+
+impl Default for PhysicalDeviceMeshShaderPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            max_task_work_group_total_count: u32::default(),
+            max_task_work_group_count: [u32::default(); 3],
+            max_task_work_group_invocations: u32::default(),
+            max_task_work_group_size: [u32::default(); 3],
+            max_task_payload_size: u32::default(),
+            max_task_shared_memory_size: u32::default(),
+            max_task_payload_and_shared_memory_size: u32::default(),
+            max_mesh_work_group_total_count: u32::default(),
+            max_mesh_work_group_count: [u32::default(); 3],
+            max_mesh_work_group_invocations: u32::default(),
+            max_mesh_work_group_size: [u32::default(); 3],
+            max_mesh_shared_memory_size: u32::default(),
+            max_mesh_payload_and_shared_memory_size: u32::default(),
+            max_mesh_output_memory_size: u32::default(),
+            max_mesh_payload_and_output_memory_size: u32::default(),
+            max_mesh_output_components: u32::default(),
+            max_mesh_output_vertices: u32::default(),
+            max_mesh_output_primitives: u32::default(),
+            max_mesh_output_layers: u32::default(),
+            max_mesh_multiview_view_count: u32::default(),
+            mesh_output_per_vertex_granularity: u32::default(),
+            mesh_output_per_primitive_granularity: u32::default(),
+            max_preferred_task_work_group_invocations: u32::default(),
+            max_preferred_mesh_work_group_invocations: u32::default(),
+            prefers_local_invocation_vertex_output: Bool32::default(),
+            prefers_local_invocation_primitive_output: Bool32::default(),
+            prefers_compact_vertex_output: Bool32::default(),
+            prefers_compact_primitive_output: Bool32::default(),
         }
     }
 }

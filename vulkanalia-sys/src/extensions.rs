@@ -443,7 +443,7 @@ pub const ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION: Extension = Exten
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
-    promoted_to: None,
+    promoted_to: Some("VK_EXT_rasterization_order_attachment_access"),
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_4444_formats.html>
@@ -696,6 +696,22 @@ pub const EXT_DEBUG_UTILS_EXTENSION: Extension = Extension {
     type_: "instance",
     author: "EXT",
     contact: "Mark Young @marky-lunarg",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_zero_one.html>
+#[allow(deprecated)]
+pub const EXT_DEPTH_CLAMP_ZERO_ONE_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_depth_clamp_zero_one"),
+    number: 422,
+    type_: "device",
+    author: "EXT",
+    contact: "Graeme Leese @gnl21",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -1316,6 +1332,22 @@ pub const EXT_MEMORY_PRIORITY_EXTENSION: Extension = Extension {
     type_: "device",
     author: "EXT",
     contact: "Jeff Bolz @jeffbolznv",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_mesh_shader.html>
+#[allow(deprecated)]
+pub const EXT_MESH_SHADER_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_mesh_shader"),
+    number: 329,
+    type_: "device",
+    author: "EXT",
+    contact: "Christoph Kubisch @pixeljetstream",
     platform: None,
     required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
     required_version: None,
