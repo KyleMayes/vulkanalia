@@ -9476,6 +9476,26 @@ impl Default for PhysicalDeviceInvocationMaskFeaturesHUAWEI {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLegacyDitheringFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceLegacyDitheringFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub legacy_dithering: Bool32,
+}
+
+impl Default for PhysicalDeviceLegacyDitheringFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT,
+            next: ptr::null_mut(),
+            legacy_dithering: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLimits.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
