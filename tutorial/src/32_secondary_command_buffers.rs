@@ -221,19 +221,11 @@ impl App {
         let command_pool = self.data.command_pools[image_index];
         self.device.reset_command_pool(command_pool, vk::CommandPoolResetFlags::empty())?;
 
-        // Allocate
-
-        let allocate_info = vk::CommandBufferAllocateInfo::builder()
-            .command_pool(command_pool)
-            .level(vk::CommandBufferLevel::PRIMARY)
-            .command_buffer_count(1);
-
-        let command_buffer = self.device.allocate_command_buffers(&allocate_info)?[0];
-        self.data.command_buffers[image_index] = command_buffer;
+        let command_buffer = self.data.command_buffers[image_index];
 
         // Commands
 
-        let info = vk::CommandBufferBeginInfo::builder();
+        let info = vk::CommandBufferBeginInfo::builder().flags(vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT);
 
         self.device.begin_command_buffer(command_buffer, &info)?;
 
@@ -281,14 +273,20 @@ impl App {
     ) -> Result<vk::CommandBuffer> {
         // Allocate
 
-        let allocate_info = vk::CommandBufferAllocateInfo::builder()
-            .command_pool(self.data.command_pools[image_index])
-            .level(vk::CommandBufferLevel::SECONDARY)
-            .command_buffer_count(1);
+        let command_buffers = &mut self.data.secondary_command_buffers[image_index];
+        while model_index >= command_buffers.len() {
+            let allocate_info = vk::CommandBufferAllocateInfo::builder()
+                .command_pool(self.data.command_pools[image_index])
+                .level(vk::CommandBufferLevel::SECONDARY)
+                .command_buffer_count(1);
 
-        let command_buffer = self.device.allocate_command_buffers(&allocate_info)?[0];
+            let command_buffer = self.device.allocate_command_buffers(&allocate_info)?[0];
+            command_buffers.push(command_buffer);
+        }
 
-        // Push Constants
+        let command_buffer = command_buffers[model_index];
+
+        // Model
 
         let y = (((model_index % 2) as f32) * 2.5) - 1.25;
         let z = (((model_index / 2) as f32) * -2.0) + 1.0;
@@ -522,6 +520,7 @@ struct AppData {
     // Command Buffers
     command_pools: Vec<vk::CommandPool>,
     command_buffers: Vec<vk::CommandBuffer>,
+    secondary_command_buffers: Vec<Vec<vk::CommandBuffer>>,
     // Sync Objects
     image_available_semaphores: Vec<vk::Semaphore>,
     render_finished_semaphores: Vec<vk::Semaphore>,
@@ -1811,7 +1810,18 @@ unsafe fn create_descriptor_sets(device: &Device, data: &mut AppData) -> Result<
 //================================================
 
 unsafe fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
-    data.command_buffers = vec![vk::CommandBuffer::null(); data.framebuffers.len()];
+    let num_images = data.swapchain_images.len();
+    for image_index in 0..num_images {
+        let allocate_info = vk::CommandBufferAllocateInfo::builder()
+            .command_pool(data.command_pools[image_index])
+            .level(vk::CommandBufferLevel::PRIMARY)
+            .command_buffer_count(1);
+
+        let command_buffer = device.allocate_command_buffers(&allocate_info)?[0];
+        data.command_buffers.push(command_buffer);
+    }
+
+    data.secondary_command_buffers = vec![vec![]; data.swapchain_images.len()];
 
     Ok(())
 }
