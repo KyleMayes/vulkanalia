@@ -163,7 +163,7 @@
 <ol>
 <li>Reset the command buffer (which clears the commands recorded to it) and record new commands to the command buffer</li>
 <li>Free the command buffer (which returns its memory to the command pool it was allocated from) and allocate a new command buffer</li>
-<li>Reset the command pool the command buffer was allocated from (which frees <em>all</em> of the command buffers allocated from the command pool) and allocate a new command buffer</li>
+<li>Reset the command pool the command buffer was allocated from (which resets <em>all</em> of the command buffers allocated from the command pool) and record new commands to the command buffer</li>
 </ol>
 <p>Let's look at what would be required to implement each of these approaches.</p>
 <h3><a class="header" href="#1-resetting-command-buffers" id="1-resetting-command-buffers">1. Resetting command buffers</a></h3>
@@ -308,22 +308,13 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 <p>Return the memory used by the previous command buffer to the command pool by freeing it at the beginning of <code>update_command_buffer</code>.</p>
 <pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     let previous = self.data.command_buffers[image_index];
-    if !previous.is_null() {
-        self.device.free_command_buffers(self.data.command_pool, &amp;[previous]);
-    }
+    self.device.free_command_buffers(self.data.command_pool, &amp;[previous]);
 
     // ...
 }
 </code></pre>
 <p>Now when you run the program you should see stable memory usage instead of the program trying to gobble up all of the RAM on your system as if it thinks it's an Electron application.</p>
-<p>The <code>!previous.is_null()</code> check in the above code isn't currently necessary, but it allows us to skip the now useless allocation of command buffers in <code>create_command_buffers</code> by instead creating a <code>Vec</code> of null command buffers.</p>
-<pre><code class="language-rust noplaypen">unsafe fn create_command_buffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
-    data.command_buffers = vec![vk::CommandBuffer::null(); data.framebuffers.len()];
-
-    Ok(())
-}
-</code></pre>
-<p>We also no longer need the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.CommandPoolCreateFlags.html#associatedconstant.RESET_COMMAND_BUFFER"><code class="hljs">vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER</code></a> flag for our command pool since we aren't resetting command pools any more. Leaving this flag wouldn't affect the correctness of our program, but it could have a negative performance impact since it forces the command pool to allocate command buffers in such a way that they are resettable.</p>
+<p>We no longer need the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.CommandPoolCreateFlags.html#associatedconstant.RESET_COMMAND_BUFFER"><code class="hljs">vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER</code></a> flag for our command pool since we aren't resetting command pools any more. Leaving this flag wouldn't affect the correctness of our program, but it could have a negative performance impact since it forces the command pool to allocate command buffers in such a way that they are resettable.</p>
 <p>We'll replace this flag with <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.CommandPoolCreateFlags.html#associatedconstant.TRANSIENT"><code class="hljs">vk::CommandPoolCreateFlags::TRANSIENT</code></a> which tells Vulkan that the command buffers we'll be allocating with this command pool will be &quot;transient&quot;, i.e. short-lived.</p>
 <pre><code class="language-rust noplaypen">let info = vk::CommandPoolCreateInfo::builder()
     .flags(vk::CommandPoolCreateFlags::TRANSIENT)
@@ -333,11 +324,11 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
 </code></pre>
 <p>Like <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.CommandBufferUsageFlags.html#associatedconstant.ONE_TIME_SUBMIT"><code class="hljs">vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT</code></a>, this flag does not affect the correctness of our program but it may allow the Vulkan driver to better optimize the handling of our short-lived command buffers.</p>
 <h3><a class="header" href="#3-resetting-command-pools" id="3-resetting-command-pools">3. Resetting command pools</a></h3>
-<p>Next we'll look at resetting our entire command pool which will free all of our active command buffers in one fell swoop.</p>
-<p>However, we immediately run into a problem with this approach. We can't free <em>all</em> of our command buffers each frame because some of them might still be in use! The <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.wait_for_fences"><code class="hljs">wait_for_fences</code></a> call in <code>App::render</code> ensures that we are safe to free the command buffer associated with the current framebuffer, but there might be other command buffers still in use.</p>
+<p>Next we'll look at resetting our entire command pool which will reset all of our active command buffers in one fell swoop.</p>
+<p>However, we immediately run into a problem with this approach. We can't reset <em>all</em> of our command buffers each frame because some of them might still be in use! The <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.wait_for_fences"><code class="hljs">wait_for_fences</code></a> call in <code>App::render</code> ensures that we are safe to reset the command buffer associated with the current framebuffer, but there might be other command buffers still in use.</p>
 <p>We could continue down this path, but it would prevent our program from having multiple frames in-flight concurrently. This ability is important to maintain because, as discussed back in the <a href="../drawing/rendering_and_presentation.html#frames-in-flight"><code>Rendering and presentation</code> chapter</a>, it allows us to better leverage our hardware since the CPU will spend less time waiting on the GPU and vice-versa.</p>
 <p>Instead, we will alter our program to maintain a separate command pool for each framebuffer. This way we can freely reset the command pool associated with the current framebuffer without worrying about breaking any previously submitted frames that are still in-flight.</p>
-<p>You might think that this is overkill, why maintain separate command pools just so we can free command buffers one at a time? Wouldn't it be simpler, and probably even faster, to continue freeing or resetting our command buffers each frame? Is this just a pedagogical exercise? Is the author of this tutorial a fraud?</p>
+<p>You might think that this is overkill, why maintain separate command pools just so we can reset command buffers one at a time? Wouldn't it be simpler, and probably even faster, to continue freeing or resetting our command buffers each frame? Is this just a pedagogical exercise? Is the author of this tutorial a fraud?</p>
 <p>To put these questions on hold for a bit (well maybe not the last one), a sneak preview of the next chapter is that it will involve managing multiple command buffers per frame rather than the single command buffer per frame we've been working with so far. Then it will become simpler, and probably faster, to deallocate all of these command buffers in one go by resetting the command pool instead of deallocating them individually.</p>
 <p>We are going to leave the current command pool in place since it will be used for allocating command buffers during initialization. Add a field to <code>AppData</code> to hold one command pool per framebuffer and rename the existing <code>create_command_pool</code> function to <code>create_command_pools</code> to reflect its increased responsibilities.</p>
 <pre><code class="language-rust noplaypen">impl App {
@@ -395,15 +386,28 @@ unsafe fn create_command_pools(
     Ok(())
 }
 </code></pre>
-<p>Update <code>App::update_command_buffer</code> to reset the per-framebuffer command pool instead of deallocating the previous command buffer and be sure to use the per-framebuffer command pool to allocate the new command buffer instead of the global command pool.</p>
+<p>Now we need to create the command buffers using these new per-framebuffer command pools. Update <code>create_command_buffers</code> to use a separate call to <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_command_buffers"><code class="hljs">allocate_command_buffers</code></a> for each command buffer so that each can be associated with one of the per-framebuffer command pools.</p>
+<pre><code class="language-rust noplaypen">unsafe fn create_command_buffers(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    let num_images = data.swapchain_images.len();
+    for image_index in 0..num_images {
+        let allocate_info = vk::CommandBufferAllocateInfo::builder()
+            .command_pool(data.command_pools[image_index])
+            .level(vk::CommandBufferLevel::PRIMARY)
+            .command_buffer_count(1);
+
+        let command_buffer = device.allocate_command_buffers(&amp;allocate_info)?[0];
+        data.command_buffers.push(command_buffer);
+    }
+
+    Ok(())
+}
+</code></pre>
+<p>Update <code>App::update_command_buffer</code> to reset the per-framebuffer command pool instead of freeing and reallocating the command buffer. This will also reset any command buffers created with this command pool so we don't need to do anything else to be able to reuse the command buffer.</p>
 <pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     let command_pool = self.data.command_pools[image_index];
     self.device.reset_command_pool(command_pool, vk::CommandPoolResetFlags::empty())?;
 
-    let allocate_info = vk::CommandBufferAllocateInfo::builder()
-        .command_pool(command_pool)
-        .level(vk::CommandBufferLevel::PRIMARY)
-        .command_buffer_count(1);
+    let command_buffer = self.data.command_buffers[image_index];
 
     // ...
 }
