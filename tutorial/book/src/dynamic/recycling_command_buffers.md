@@ -12,7 +12,7 @@ Vulkan offers [three basic approaches](https://github.com/KhronosGroup/Vulkan-Sa
 
 1. Reset the command buffer (which clears the commands recorded to it) and record new commands to the command buffer
 2. Free the command buffer (which returns its memory to the command pool it was allocated from) and allocate a new command buffer
-3. Reset the command pool the command buffer was allocated from (which frees *all* of the command buffers allocated from the command pool) and allocate a new command buffer
+3. Reset the command pool the command buffer was allocated from (which resets *all* of the command buffers allocated from the command pool) and record new commands to the command buffer
 
 Let's look at what would be required to implement each of these approaches.
 
@@ -193,9 +193,7 @@ Return the memory used by the previous command buffer to the command pool by fre
 ```rust,noplaypen
 unsafe fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
     let previous = self.data.command_buffers[image_index];
-    if !previous.is_null() {
-        self.device.free_command_buffers(self.data.command_pool, &[previous]);
-    }
+    self.device.free_command_buffers(self.data.command_pool, &[previous]);
 
     // ...
 }
@@ -203,17 +201,7 @@ unsafe fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
 
 Now when you run the program you should see stable memory usage instead of the program trying to gobble up all of the RAM on your system as if it thinks it's an Electron application.
 
-The `!previous.is_null()` check in the above code isn't currently necessary, but it allows us to skip the now useless allocation of command buffers in `create_command_buffers` by instead creating a `Vec` of null command buffers.
-
-```rust,noplaypen
-unsafe fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
-    data.command_buffers = vec![vk::CommandBuffer::null(); data.framebuffers.len()];
-
-    Ok(())
-}
-```
-
-We also no longer need the `vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER` flag for our command pool since we aren't resetting command pools any more. Leaving this flag wouldn't affect the correctness of our program, but it could have a negative performance impact since it forces the command pool to allocate command buffers in such a way that they are resettable.
+We no longer need the `vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER` flag for our command pool since we aren't resetting command pools any more. Leaving this flag wouldn't affect the correctness of our program, but it could have a negative performance impact since it forces the command pool to allocate command buffers in such a way that they are resettable.
 
 We'll replace this flag with `vk::CommandPoolCreateFlags::TRANSIENT` which tells Vulkan that the command buffers we'll be allocating with this command pool will be "transient", i.e. short-lived.
 
@@ -229,15 +217,15 @@ Like `vk::CommandBufferUsageFlags::ONE_TIME_SUBMIT`, this flag does not affect t
 
 ### 3. Resetting command pools
 
-Next we'll look at resetting our entire command pool which will free all of our active command buffers in one fell swoop.
+Next we'll look at resetting our entire command pool which will reset all of our active command buffers in one fell swoop.
 
-However, we immediately run into a problem with this approach. We can't free *all* of our command buffers each frame because some of them might still be in use! The `wait_for_fences` call in `App::render` ensures that we are safe to free the command buffer associated with the current framebuffer, but there might be other command buffers still in use.
+However, we immediately run into a problem with this approach. We can't reset *all* of our command buffers each frame because some of them might still be in use! The `wait_for_fences` call in `App::render` ensures that we are safe to reset the command buffer associated with the current framebuffer, but there might be other command buffers still in use.
 
 We could continue down this path, but it would prevent our program from having multiple frames in-flight concurrently. This ability is important to maintain because, as discussed back in the [`Rendering and presentation` chapter](../drawing/rendering_and_presentation.html#frames-in-flight), it allows us to better leverage our hardware since the CPU will spend less time waiting on the GPU and vice-versa.
 
 Instead, we will alter our program to maintain a separate command pool for each framebuffer. This way we can freely reset the command pool associated with the current framebuffer without worrying about breaking any previously submitted frames that are still in-flight.
 
-You might think that this is overkill, why maintain separate command pools just so we can free command buffers one at a time? Wouldn't it be simpler, and probably even faster, to continue freeing or resetting our command buffers each frame? Is this just a pedagogical exercise? Is the author of this tutorial a fraud?
+You might think that this is overkill, why maintain separate command pools just so we can reset command buffers one at a time? Wouldn't it be simpler, and probably even faster, to continue freeing or resetting our command buffers each frame? Is this just a pedagogical exercise? Is the author of this tutorial a fraud?
 
 To put these questions on hold for a bit (well maybe not the last one), a sneak preview of the next chapter is that it will involve managing multiple command buffers per frame rather than the single command buffer per frame we've been working with so far. Then it will become simpler, and probably faster, to deallocate all of these command buffers in one go by resetting the command pool instead of deallocating them individually.
 
@@ -306,17 +294,33 @@ unsafe fn create_command_pools(
 }
 ```
 
-Update `App::update_command_buffer` to reset the per-framebuffer command pool instead of deallocating the previous command buffer and be sure to use the per-framebuffer command pool to allocate the new command buffer instead of the global command pool.
+Now we need to create the command buffers using these new per-framebuffer command pools. Update `create_command_buffers` to use a separate call to `allocate_command_buffers` for each command buffer so that each can be associated with one of the per-framebuffer command pools.
+
+```rust,noplaypen
+unsafe fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
+    let num_images = data.swapchain_images.len();
+    for image_index in 0..num_images {
+        let allocate_info = vk::CommandBufferAllocateInfo::builder()
+            .command_pool(data.command_pools[image_index])
+            .level(vk::CommandBufferLevel::PRIMARY)
+            .command_buffer_count(1);
+
+        let command_buffer = device.allocate_command_buffers(&allocate_info)?[0];
+        data.command_buffers.push(command_buffer);
+    }
+
+    Ok(())
+}
+```
+
+Update `App::update_command_buffer` to reset the per-framebuffer command pool instead of freeing and reallocating the command buffer. This will also reset any command buffers created with this command pool so we don't need to do anything else to be able to reuse the command buffer.
 
 ```rust,noplaypen
 unsafe fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
     let command_pool = self.data.command_pools[image_index];
     self.device.reset_command_pool(command_pool, vk::CommandPoolResetFlags::empty())?;
 
-    let allocate_info = vk::CommandBufferAllocateInfo::builder()
-        .command_pool(command_pool)
-        .level(vk::CommandBufferLevel::PRIMARY)
-        .command_buffer_count(1);
+    let command_buffer = self.data.command_buffers[image_index];
 
     // ...
 }

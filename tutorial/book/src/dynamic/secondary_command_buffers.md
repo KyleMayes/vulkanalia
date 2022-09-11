@@ -24,7 +24,32 @@ This might not sound like a big deal but beginning a render pass instance can be
 
 ## Multiple model instances
 
-Let's get started by adding a new method for the `App` struct called `update_secondary_command_buffer` that will be used to allocate and record a secondary command buffer for one of the 4 model instances we will be rendering. The `model_index` parameter indicates which of the 4 model instances the secondary command buffer should render.
+Let's get started by adding a field to `AppData` that will contain our new secondary command buffers. We will have multiple secondary command buffers per frame, one for each model instance we are rendering, so this will be a list of lists.
+
+```rust,noplaypen
+struct AppData {
+    // ...
+    command_buffers: Vec<vk::CommandBuffer>,
+    secondary_command_buffers: Vec<Vec<vk::CommandBuffer>>,
+    // ...
+}
+```
+
+In an application more realistic than the one we are building, the number of secondary command buffers we need to render a frame might vary significantly over time. In addition, we likely wouldn't know the maximum number of secondary command buffers the application needs ahead of time.
+
+We do know the maximum in this case, but we will pretend we don't and adopt an approach closer to what a real-world application would. Instead of allocating secondary command buffers during initialization like we allocate primary command buffers, we will allocate secondary command buffers on-demand. We'll still need to populate the outer `Vec` with empty lists of secondary command buffers so update `create_command_buffers` to accomplish this.
+
+```rust,noplaypen
+unsafe fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
+    // ...
+
+    data.secondary_command_buffers = vec![vec![]; data.swapchain_images.len()];
+
+    Ok(())
+}
+```
+
+Add a new method for the `App` struct called `update_secondary_command_buffer` that we'll use to allocate (if necessary) and record a secondary command buffer for one of the 4 model instances we will be rendering. The `model_index` parameter indicates which of the 4 model instances the secondary command buffer should render.
 
 ```rust,noplaypen
 unsafe fn update_secondary_command_buffer(
@@ -32,12 +57,19 @@ unsafe fn update_secondary_command_buffer(
     image_index: usize,
     model_index: usize,
 ) -> Result<vk::CommandBuffer> {
-    let allocate_info = vk::CommandBufferAllocateInfo::builder()
-        .command_pool(self.data.command_pools[image_index])
-        .level(vk::CommandBufferLevel::SECONDARY)
-        .command_buffer_count(1);
+    self.data.secondary_command_buffers.resize_with(image_index + 1, Vec::new);
+    let command_buffers = &mut self.data.secondary_command_buffers[image_index];
+    while model_index >= command_buffers.len() {
+        let allocate_info = vk::CommandBufferAllocateInfo::builder()
+            .command_pool(self.data.command_pools[image_index])
+            .level(vk::CommandBufferLevel::SECONDARY)
+            .command_buffer_count(1);
 
-    let command_buffer = self.device.allocate_command_buffers(&allocate_info)?[0];
+        let command_buffer = self.device.allocate_command_buffers(&allocate_info)?[0];
+        command_buffers.push(command_buffer);
+    }
+
+    let command_buffer = command_buffers[model_index];
 
     let info = vk::CommandBufferBeginInfo::builder();
 
@@ -49,7 +81,7 @@ unsafe fn update_secondary_command_buffer(
 }
 ```
 
-Note we are still using the per-framebuffer command pool rather than the global command pool but now we are allocating a `vk::CommandBufferLevel::SECONDARY` command buffer.
+This code will allocate secondary command buffers for the model instances as they are needed but will reuse them after their initial allocation. Like with the primary command buffers, we can freely use any previously allocated secondary command buffers because we are resetting the command pool they were allocated with.
 
 Before we continue, we need to provide some additional information to Vulkan that is unique to secondary command buffers before recording this command buffer. Create an instance of `vk::CommandBufferInheritanceInfo` that specifies the render pass, subpass index, and framebuffer the secondary command buffer will be used in conjunction with and then provide that inheritance info to `begin_command_buffer`.
 
@@ -237,7 +269,7 @@ With a better vantage point secured, run the program and bask in its glory.
 
 ![](../images/4_models.png)
 
-Let's kick it up another notch with a hit from the spice weasel by allowing the user to determine how many of these models they want to render. Add a `models` field to the `App` struct and initialize it to 1 in the constructor.
+Let's knock it up a notch with a blast from our spice weasel by allowing the user to determine how many of these models they want to render. Add a `models` field to the `App` struct and initialize it to 1 in the constructor.
 
 ```rust,noplaypen
 struct App {
@@ -281,3 +313,5 @@ match event {
 Run the program and observe how the number of secondary command buffers we are allocating and executing each frame changes as you press the left and right arrow keys.
 
 ![](../images/3_models.png)
+
+You should now be familiar with the basic tools you can use to efficiently render dynamic frames using Vulkan. There are many ways you can utilize these tools that each have different performance tradeoffs. Future tutorial chapters may explore this more in depth, but parallelizing the work of recording secondary command buffers using multiple threads is a common technique that usually results in sigificant performance wins on modern hardware.
