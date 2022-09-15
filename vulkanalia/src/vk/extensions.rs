@@ -2145,6 +2145,15 @@ pub trait ExtMultisampledRenderToSingleSampledExtension: DeviceV1_0 {
 
 impl ExtMultisampledRenderToSingleSampledExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_mutable_descriptor_type.html>
+pub trait ExtMutableDescriptorTypeExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_MUTABLE_DESCRIPTOR_TYPE_EXTENSION;
+}
+
+impl ExtMutableDescriptorTypeExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_non_seamless_cube_map.html>
 pub trait ExtNonSeamlessCubeMapExtension: DeviceV1_0 {
     /// The metadata for this extension.

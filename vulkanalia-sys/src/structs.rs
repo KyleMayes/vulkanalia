@@ -7095,21 +7095,21 @@ impl Default for MultiviewPerViewAttributesInfoNVX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMutableDescriptorTypeCreateInfoVALVE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMutableDescriptorTypeCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct MutableDescriptorTypeCreateInfoVALVE {
+pub struct MutableDescriptorTypeCreateInfoEXT {
     pub s_type: StructureType,
     pub next: *const c_void,
     pub mutable_descriptor_type_list_count: u32,
-    pub mutable_descriptor_type_lists: *const MutableDescriptorTypeListVALVE,
+    pub mutable_descriptor_type_lists: *const MutableDescriptorTypeListEXT,
 }
 
-impl Default for MutableDescriptorTypeCreateInfoVALVE {
+impl Default for MutableDescriptorTypeCreateInfoEXT {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE,
+            s_type: StructureType::MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT,
             next: ptr::null(),
             mutable_descriptor_type_list_count: u32::default(),
             mutable_descriptor_type_lists: ptr::null(),
@@ -7117,15 +7117,15 @@ impl Default for MutableDescriptorTypeCreateInfoVALVE {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMutableDescriptorTypeListVALVE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMutableDescriptorTypeListEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct MutableDescriptorTypeListVALVE {
+pub struct MutableDescriptorTypeListEXT {
     pub descriptor_type_count: u32,
     pub descriptor_types: *const DescriptorType,
 }
 
-impl Default for MutableDescriptorTypeListVALVE {
+impl Default for MutableDescriptorTypeListEXT {
     #[inline]
     fn default() -> Self {
         Self {
@@ -10107,20 +10107,20 @@ impl Default for PhysicalDeviceMultiviewProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {
+pub struct PhysicalDeviceMutableDescriptorTypeFeaturesEXT {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub mutable_descriptor_type: Bool32,
 }
 
-impl Default for PhysicalDeviceMutableDescriptorTypeFeaturesVALVE {
+impl Default for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE,
+            s_type: StructureType::PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT,
             next: ptr::null_mut(),
             mutable_descriptor_type: Bool32::default(),
         }
@@ -17127,6 +17127,10 @@ pub type MemoryDedicatedRequirementsKHR = MemoryDedicatedRequirements;
 pub type MemoryOpaqueCaptureAddressAllocateInfoKHR = MemoryOpaqueCaptureAddressAllocateInfo;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMemoryRequirements2KHR.html>
 pub type MemoryRequirements2KHR = MemoryRequirements2;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMutableDescriptorTypeCreateInfoVALVE.html>
+pub type MutableDescriptorTypeCreateInfoVALVE = MutableDescriptorTypeCreateInfoEXT;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMutableDescriptorTypeListVALVE.html>
+pub type MutableDescriptorTypeListVALVE = MutableDescriptorTypeListEXT;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevice16BitStorageFeaturesKHR.html>
 pub type PhysicalDevice16BitStorageFeaturesKHR = PhysicalDevice16BitStorageFeatures;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevice8BitStorageFeaturesKHR.html>
@@ -17194,6 +17198,9 @@ pub type PhysicalDeviceMemoryProperties2KHR = PhysicalDeviceMemoryProperties2;
 pub type PhysicalDeviceMultiviewFeaturesKHR = PhysicalDeviceMultiviewFeatures;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMultiviewPropertiesKHR.html>
 pub type PhysicalDeviceMultiviewPropertiesKHR = PhysicalDeviceMultiviewProperties;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.html>
+pub type PhysicalDeviceMutableDescriptorTypeFeaturesVALVE =
+    PhysicalDeviceMutableDescriptorTypeFeaturesEXT;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.html>
 pub type PhysicalDevicePipelineCreationCacheControlFeaturesEXT =
     PhysicalDevicePipelineCreationCacheControlFeatures;
