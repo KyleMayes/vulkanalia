@@ -1442,6 +1442,22 @@ pub const EXT_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXTENSION: Extension = Exten
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_mutable_descriptor_type.html>
+#[allow(deprecated)]
+pub const EXT_MUTABLE_DESCRIPTOR_TYPE_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_mutable_descriptor_type"),
+    number: 495,
+    type_: "device",
+    author: "EXT",
+    contact: "Joshua Ashton @Joshua-Ashton,Hans-Kristian Arntzen @HansKristian-Work",
+    platform: None,
+    required_extensions: Some(&[KHR_MAINTENANCE3_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_non_seamless_cube_map.html>
 #[allow(deprecated)]
 pub const EXT_NON_SEAMLESS_CUBE_MAP_EXTENSION: Extension = Extension {
@@ -4830,5 +4846,5 @@ pub const VALVE_MUTABLE_DESCRIPTOR_TYPE_EXTENSION: Extension = Extension {
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
-    promoted_to: None,
+    promoted_to: Some("VK_EXT_mutable_descriptor_type"),
 };

@@ -1121,9 +1121,9 @@ impl DescriptorType {
     pub const INLINE_UNIFORM_BLOCK: Self = Self(1000138000);
     pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000150000);
     pub const ACCELERATION_STRUCTURE_NV: Self = Self(1000165000);
-    pub const MUTABLE_VALVE: Self = Self(1000351000);
     pub const SAMPLE_WEIGHT_IMAGE_QCOM: Self = Self(1000440000);
     pub const BLOCK_MATCH_IMAGE_QCOM: Self = Self(1000440001);
+    pub const MUTABLE_EXT: Self = Self(1000351000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1155,9 +1155,9 @@ impl fmt::Debug for DescriptorType {
             1000138000 => write!(f, "INLINE_UNIFORM_BLOCK"),
             1000150000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
             1000165000 => write!(f, "ACCELERATION_STRUCTURE_NV"),
-            1000351000 => write!(f, "MUTABLE_VALVE"),
             1000440000 => write!(f, "SAMPLE_WEIGHT_IMAGE_QCOM"),
             1000440001 => write!(f, "BLOCK_MATCH_IMAGE_QCOM"),
+            1000351000 => write!(f, "MUTABLE_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -4894,8 +4894,6 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT: Self = Self(1000340000);
     pub const PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT: Self = Self(1000344000);
     pub const DIRECTFB_SURFACE_CREATE_INFO_EXT: Self = Self(1000346000);
-    pub const PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE: Self = Self(1000351000);
-    pub const MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE: Self = Self(1000351002);
     pub const PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT: Self = Self(1000352000);
     pub const VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT: Self = Self(1000352001);
     pub const VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT: Self = Self(1000352002);
@@ -4973,6 +4971,8 @@ impl StructureType {
     pub const TILE_PROPERTIES_QCOM: Self = Self(1000484001);
     pub const PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC: Self = Self(1000485000);
     pub const AMIGO_PROFILING_SUBMIT_INFO_SEC: Self = Self(1000485001);
+    pub const PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT: Self = Self(1000351000);
+    pub const MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT: Self = Self(1000351002);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5625,8 +5625,6 @@ impl fmt::Debug for StructureType {
             1000340000 => write!(f, "PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT"),
             1000344000 => write!(f, "PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT"),
             1000346000 => write!(f, "DIRECTFB_SURFACE_CREATE_INFO_EXT"),
-            1000351000 => write!(f, "PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE"),
-            1000351002 => write!(f, "MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE"),
             1000352000 => write!(f, "PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT"),
             1000352001 => write!(f, "VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT"),
             1000352002 => write!(f, "VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT"),
@@ -5725,6 +5723,8 @@ impl fmt::Debug for StructureType {
             1000484001 => write!(f, "TILE_PROPERTIES_QCOM"),
             1000485000 => write!(f, "PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC"),
             1000485001 => write!(f, "AMIGO_PROFILING_SUBMIT_INFO_SEC"),
+            1000351000 => write!(f, "PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT"),
+            1000351002 => write!(f, "MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT"),
             _ => self.0.fmt(f),
         }
     }

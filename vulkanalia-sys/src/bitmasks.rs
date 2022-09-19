@@ -374,7 +374,7 @@ bitflags! {
     pub struct DescriptorPoolCreateFlags: Flags {
         const FREE_DESCRIPTOR_SET = 1;
         const UPDATE_AFTER_BIND = 1 << 1;
-        const HOST_ONLY_VALVE = 1 << 2;
+        const HOST_ONLY_EXT = 1 << 2;
     }
 }
 
@@ -392,7 +392,7 @@ bitflags! {
     pub struct DescriptorSetLayoutCreateFlags: Flags {
         const PUSH_DESCRIPTOR_KHR = 1;
         const UPDATE_AFTER_BIND_POOL = 1 << 1;
-        const HOST_ONLY_POOL_VALVE = 1 << 2;
+        const HOST_ONLY_POOL_EXT = 1 << 2;
     }
 }
 
