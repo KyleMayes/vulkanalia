@@ -3806,7 +3806,7 @@ memcpy(&amp;ubo, memory.cast(), 1);
 self.device.unmap_memory(self.data.uniform_buffers_memory[image_index]);
 </code></pre>
 <p>Using a UBO this way is not the most efficient way to pass frequently changing values to the shader. A more efficient way to pass a small buffer of data to shaders are <em>push constants</em>. We may look at these in a future chapter.</p>
-<p>In the next chapter we'll look at descriptor sets, which will actually bind the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>s to the uniform buffer descriptors so that the shader can access this transformation data.</p>
+<p>If you run the program now, you'll get errors about unbound descriptor sets from the validation layer and nothing will be rendered. In the next chapter we'll look at these descriptor sets, which will actually bind the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>s to the uniform buffer descriptors so that the shader can access this transformation data and get our program in running order again.</p>
 <h1><a class="header" href="#descriptor-pool-and-sets" id="descriptor-pool-and-sets">Descriptor pool and sets</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/22_descriptor_sets.rs">main.rs</a></p>
 <p>The descriptor layout from the previous chapter describes the type of descriptors that can be bound. In this chapter we're going to create a descriptor set for each <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a> resource to bind it to the uniform buffer descriptor.</p>
