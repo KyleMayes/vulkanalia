@@ -378,4 +378,4 @@ self.device.unmap_memory(self.data.uniform_buffers_memory[image_index]);
 
 Using a UBO this way is not the most efficient way to pass frequently changing values to the shader. A more efficient way to pass a small buffer of data to shaders are *push constants*. We may look at these in a future chapter.
 
-In the next chapter we'll look at descriptor sets, which will actually bind the `vk::Buffer`s to the uniform buffer descriptors so that the shader can access this transformation data.
+If you run the program now, you'll get errors about unbound descriptor sets from the validation layer and nothing will be rendered. In the next chapter we'll look at these descriptor sets, which will actually bind the `vk::Buffer`s to the uniform buffer descriptors so that the shader can access this transformation data and get our program in running order again.
