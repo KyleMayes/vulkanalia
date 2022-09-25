@@ -8,6 +8,7 @@
 #![allow(
     non_camel_case_types,
     non_snake_case,
+    clippy::let_unit_value,
     clippy::missing_safety_doc,
     clippy::too_many_arguments,
     clippy::type_complexity,
