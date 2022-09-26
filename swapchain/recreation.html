@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Recreation - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,10 +132,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#recreation" id="recreation">Recreation</a></h1>
+                        <h1 id="recreation"><a class="header" href="#recreation">Recreation</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/16_swapchain_recreation.rs">main.rs</a></p>
 <p>The application we have now successfully draws a triangle, but there are some circumstances that it isn't handling properly yet. It is possible for the window surface to change such that the swapchain is no longer compatible with it. One of the reasons that could cause this to happen is the size of the window changing. We have to catch these events and recreate the swapchain.</p>
-<h2><a class="header" href="#recreating-the-swapchain" id="recreating-the-swapchain">Recreating the swapchain</a></h2>
+<h2 id="recreating-the-swapchain"><a class="header" href="#recreating-the-swapchain">Recreating the swapchain</a></h2>
 <p>Create a new <code>App::recreate_swapchain</code> method that calls <code>create_swapchain</code> and all of the creation functions for the objects that depend on the swapchain or the window size.</p>
 <pre><code class="language-rust noplaypen">unsafe fn recreate_swapchain(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     self.device.device_wait_idle()?;
@@ -223,7 +203,7 @@ unsafe fn destroy_swapchain(&amp;mut self) {
 </code></pre>
 <p>We could recreate the command pool from scratch, but that is rather wasteful. Instead I've opted to clean up the existing command buffers with the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.free_command_buffers"><code class="hljs">free_command_buffers</code></a> command. This way we can reuse the existing pool to allocate the new command buffers.</p>
 <p>That's all it takes to recreate the swapchain! However, the disadvantage of this approach is that we need to stop all rendering before creating the new swapchain. It is possible to create a new swapchain while drawing commands on an image from the old swapchain are still in-flight. You need to pass the previous swapchain to the <code>old_swapchain</code> field in the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.SwapchainCreateInfoKHR.html"><code class="hljs">vk::SwapchainCreateInfoKHR</code></a> struct and destroy the old swapchain as soon as you've finished using it.</p>
-<h2><a class="header" href="#suboptimal-or-out-of-date-swapchain" id="suboptimal-or-out-of-date-swapchain">Suboptimal or out-of-date swapchain</a></h2>
+<h2 id="suboptimal-or-out-of-date-swapchain"><a class="header" href="#suboptimal-or-out-of-date-swapchain">Suboptimal or out-of-date swapchain</a></h2>
 <p>Now we just need to figure out when swapchain recreation is necessary and call our new <code>App::recreate_swapchain</code> method. Luckily, Vulkan will usually just tell us that the swapchain is no longer adequate during presentation. The <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.acquire_next_image_khr"><code class="hljs">acquire_next_image_khr</code></a> and <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code class="hljs">queue_present_khr</code></a> commands can return the following special values to indicate this.</p>
 <ul>
 <li><a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.OUT_OF_DATE_KHR"><code class="hljs">vk::ErrorCode::OUT_OF_DATE_KHR</code></a> – The swapchain has become incompatible with the surface and can no longer be used for rendering. Usually happens after a window resize.</li>
@@ -256,7 +236,7 @@ if changed {
 }
 </code></pre>
 <p>The <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.queue_present_khr"><code class="hljs">queue_present_khr</code></a> function returns the same values with the same meaning. In this case we will also recreate the swapchain if it is suboptimal, because we want the best possible result.</p>
-<h2><a class="header" href="#handling-resizes-explicitly" id="handling-resizes-explicitly">Handling resizes explicitly</a></h2>
+<h2 id="handling-resizes-explicitly"><a class="header" href="#handling-resizes-explicitly">Handling resizes explicitly</a></h2>
 <p>Although many drivers and platforms trigger <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.OUT_OF_DATE_KHR"><code class="hljs">vk::ErrorCode::OUT_OF_DATE_KHR</code></a> automatically after a window resize, it is not guaranteed to happen. That's why we'll add some extra code to also handle resizes explicitly. First add a new field to the <code>App</code> struct to track whether a resize has happpened:</p>
 <pre><code class="language-rust noplaypen">struct App {
     // ...
@@ -283,7 +263,7 @@ if self.resized || changed {
 }
 </code></pre>
 <p>Now try to run the program and resize the window to see if the framebuffer is indeed resized properly with the window.</p>
-<h2><a class="header" href="#handling-minimization" id="handling-minimization">Handling minimization</a></h2>
+<h2 id="handling-minimization"><a class="header" href="#handling-minimization">Handling minimization</a></h2>
 <p>There is another case where a swapchain may become out of data and that is a special kind of window resizing: window minimization. This case is special because it will result in a framebuffer size of <code>0</code>. In this tutorial we will handle that by not rendering frames while the window is minimized:</p>
 <pre><code class="language-rust noplaypen">let mut app = unsafe { App::create(&amp;window)? };
 let mut destroying = false;
@@ -311,17 +291,13 @@ event_loop.run(move |event, _, control_flow| {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../drawing/rendering_and_presentation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../vertex/vertex_input_description.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -329,45 +305,32 @@ event_loop.run(move |event, _, control_flow| {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../drawing/rendering_and_presentation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../vertex/vertex_input_description.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Rendering and presentation - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,10 +132,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#rendering-and-presentation" id="rendering-and-presentation">Rendering and presentation</a></h1>
+                        <h1 id="rendering-and-presentation"><a class="header" href="#rendering-and-presentation">Rendering and presentation</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/15_hello_triangle.rs">main.rs</a></p>
 <p>This is the chapter where everything is going to come together. We're going to implement the <code>App::render</code> function that will be called from the main loop to put the triangle on the screen.</p>
-<h2><a class="header" href="#synchronization" id="synchronization">Synchronization</a></h2>
+<h2 id="synchronization"><a class="header" href="#synchronization">Synchronization</a></h2>
 <p>The <code>App::render</code> function will perform the following operations:</p>
 <ul>
 <li>Acquire an image from the swapchain</li>
@@ -165,7 +145,7 @@
 <p>Each of these events is set in motion using a single function call, but they are executed asynchronously. The function calls will return before the operations are actually finished and the order of execution is also undefined. That is unfortunate, because each of the operations depends on the previous one finishing.</p>
 <p>There are two ways of synchronizing swapchain events: fences and semaphores. They're both objects that can be used for coordinating operations by having one operation signal and another operation wait for a fence or semaphore to go from the unsignaled to signaled state.</p>
 <p>The difference is that the state of fences can be accessed from your program using calls like <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.wait_for_fences"><code class="hljs">wait_for_fences</code></a> and semaphores cannot be. Fences are mainly designed to synchronize your application itself with rendering operation, whereas semaphores are used to synchronize operations within or across command queues. We want to synchronize the queue operations of draw commands and presentation, which makes semaphores the best fit.</p>
-<h2><a class="header" href="#semaphores" id="semaphores">Semaphores</a></h2>
+<h2 id="semaphores"><a class="header" href="#semaphores">Semaphores</a></h2>
 <p>We'll need one semaphore to signal that an image has been acquired and is ready for rendering, and another one to signal that rendering has finished and presentation can happen. Create two <code>AppData</code> fields to store these semaphore objects:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
@@ -205,7 +185,7 @@ data.render_finished_semaphore = device.create_semaphore(&amp;semaphore_info, No
     // ...
 }
 </code></pre>
-<h2><a class="header" href="#acquiring-an-image-from-the-swapchain" id="acquiring-an-image-from-the-swapchain">Acquiring an image from the swapchain</a></h2>
+<h2 id="acquiring-an-image-from-the-swapchain"><a class="header" href="#acquiring-an-image-from-the-swapchain">Acquiring an image from the swapchain</a></h2>
 <p>As mentioned before, the first thing we need to do in the <code>App::render</code> function is acquire an image from the swapchain. Recall that the swapchain is an extension feature, so we must use a function with the <code>*_khr</code> naming convention:</p>
 <pre><code class="language-rust noplaypen">unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
     let image_index = self
@@ -237,7 +217,7 @@ let submit_info = vk::SubmitInfo::builder()
 <p>The first parameter of <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.KhrSwapchainExtension.html#method.acquire_next_image_khr"><code class="hljs">acquire_next_image_khr</code></a> is the swapchain from which we wish to acquire an image. The second parameter specifies a timeout in nanoseconds for an image to become available. Using the maximum value of a 64 bit unsigned integer disables the timeout.</p>
 <p>The next two parameters specify synchronization objects that are to be signaled when the presentation engine is finished using the image. That's the point in time where we can start drawing to it. It is possible to specify a semaphore, fence or both. We're going to use our <code>image_available_semaphore</code> for that purpose here.</p>
 <p>This function returns the index of the swapchain image that has become available. The index refers to the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Image.html"><code class="hljs">vk::Image</code></a> in our <code>swapchain_images</code> array. We're going to use that index to pick the right command buffer.</p>
-<h2><a class="header" href="#submitting-the-command-buffer" id="submitting-the-command-buffer">Submitting the command buffer</a></h2>
+<h2 id="submitting-the-command-buffer"><a class="header" href="#submitting-the-command-buffer">Submitting the command buffer</a></h2>
 <p>Queue submission and synchronization is configured through parameters in the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.SubmitInfo.html"><code class="hljs">vk::SubmitInfo</code></a> structure.</p>
 <pre><code class="language-rust noplaypen">let wait_semaphores = &amp;[self.data.image_available_semaphore];
 let wait_stages = &amp;[vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT];
@@ -256,7 +236,7 @@ let submit_info = vk::SubmitInfo::builder()
     self.data.graphics_queue, &amp;[submit_info], vk::Fence::null())?;
 </code></pre>
 <p>We can now submit the command buffer to the graphics queue using <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_submit"><code class="hljs">queue_submit</code></a>. The function takes an array of <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.SubmitInfo.html"><code class="hljs">vk::SubmitInfo</code></a> structures as argument for efficiency when the workload is much larger. The last parameter references an optional fence that will be signaled when the command buffers finish execution. We're using semaphores for synchronization, so we'll just pass a <code>vk::Fence::null()</code>.</p>
-<h2><a class="header" href="#subpass-dependencies" id="subpass-dependencies">Subpass dependencies</a></h2>
+<h2 id="subpass-dependencies"><a class="header" href="#subpass-dependencies">Subpass dependencies</a></h2>
 <p>Remember that the subpasses in a render pass automatically take care of image layout transitions. These transitions are controlled by <em>subpass dependencies</em>, which specify memory and execution dependencies between subpasses. We have only a single subpass right now, but the operations right before and right after this subpass also count as implicit &quot;subpasses&quot;.</p>
 <p>There are two built-in dependencies that take care of the transition at the start of the render pass and at the end of the render pass, but the former does not occur at the right time. It assumes that the transition occurs at the start of the pipeline, but we haven't acquired the image yet at that point! There are two ways to deal with this problem. We could change the <code>wait_stages</code> for the <code>image_available_semaphore</code> to <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.TOP_OF_PIPE"><code class="hljs">vk::PipelineStageFlags::TOP_OF_PIPE</code></a> to ensure that the render passes don't begin until the image is available, or we can make the render pass wait for the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.PipelineStageFlags.html#associatedconstant.COLOR_ATTACHMENT_OUTPUT"><code class="hljs">vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT</code></a> stage. I've decided to go with the second option here, because it's a good excuse to have a look at subpass dependencies and how they work.</p>
 <p>Subpass dependencies are specified in <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.SubpassDependency.html"><code class="hljs">vk::SubpassDependency</code></a> structs. Go to our <code>create_render_pass</code> function and add one:</p>
@@ -283,7 +263,7 @@ let info = vk::RenderPassCreateInfo::builder()
     .dependencies(dependencies);
 </code></pre>
 <p>The <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.RenderPassCreateInfo.html"><code class="hljs">vk::RenderPassCreateInfo</code></a> struct has a field to specify an array of dependencies.</p>
-<h2><a class="header" href="#presentation" id="presentation">Presentation</a></h2>
+<h2 id="presentation"><a class="header" href="#presentation">Presentation</a></h2>
 <p>The last step of drawing a frame is submitting the result back to the swapchain to have it eventually show up on the screen. Presentation is configured through a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.PresentInfoKHR.html"><code class="hljs">vk::PresentInfoKHR</code></a> structure at the end of the <code>App::render</code> function.</p>
 <pre><code class="language-rust noplaypen">let swapchains = &amp;[self.data.swapchain];
 let image_indices = &amp;[image_index as u32];
@@ -315,7 +295,7 @@ let present_info = vk::PresentInfoKHR::builder()
 }
 </code></pre>
 <p>You can also wait for operations in a specific command queue to be finished with <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_wait_idle"><code class="hljs">queue_wait_idle</code></a>. These functions can be used as a very rudimentary way to perform synchronization. You'll see that the program no longer crashes when closing the window (though you will see some errors related to synchronization if you have the validation layers enabled).</p>
-<h2><a class="header" href="#frames-in-flight" id="frames-in-flight">Frames in flight</a></h2>
+<h2 id="frames-in-flight"><a class="header" href="#frames-in-flight">Frames in flight</a></h2>
 <p>If you run your application with validation layers enabled now you may either get errors or notice that the memory usage slowly grows. The reason for this is that the application is rapidly submitting work in the <code>App::render</code> function, but doesn't actually check if any of it finishes. If the CPU is submitting work faster than the GPU can keep up with then the queue will slowly fill up with work. Worse, even, is that we are reusing the <code>image_available_semaphore</code> and <code>render_finished_semaphore</code> semaphores, along with the command buffers, for multiple frames at the same time!</p>
 <p>The easy way to solve this is to wait for work to finish right after submitting it, for example by using <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_wait_idle"><code class="hljs">queue_wait_idle</code></a> (note: don't actually make this change):</p>
 <pre><code class="language-rust noplaypen">unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
@@ -539,7 +519,7 @@ let present_info = vk::PresentInfoKHR::builder()
 </code></pre>
 <p>We've now implemented all the needed synchronization to ensure that there are no more than two frames of work enqueued and that these frames are not accidentally using the same image. Note that it is fine for other parts of the code, like the final cleanup, to rely on more rough synchronization like <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.device_wait_idle"><code class="hljs">device_wait_idle</code></a>. You should decide on which approach to use based on performance requirements.</p>
 <p>To learn more about synchronization through examples, have a look at <a href="https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples#swapchain-image-acquire-and-present">this extensive overview</a> by Khronos.</p>
-<h2><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h2>
+<h2 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h2>
 <p>A little over 600 (non-empty) lines of code later, we've finally gotten to the stage of seeing something pop up on the screen! Bootstrapping a Vulkan program is definitely a lot of work, but the take-away message is that Vulkan gives you an immense amount of control through its explicitness. I recommend you to take some time now to reread the code and build a mental model of the purpose of all of the Vulkan objects in the program and how they relate to each other. We'll be building on top of that knowledge to extend the functionality of the program from this point on.</p>
 <p>In the next chapter we'll deal with one more small thing that is required for a well-behaved Vulkan program.</p>
 
@@ -547,17 +527,13 @@ let present_info = vk::PresentInfoKHR::builder()
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../drawing/command_buffers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../swapchain/recreation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -565,45 +541,32 @@ let present_info = vk::PresentInfoKHR::builder()
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../drawing/command_buffers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../swapchain/recreation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

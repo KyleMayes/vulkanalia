@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Generating mipmaps - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,12 +132,12 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#generating-mipmaps" id="generating-mipmaps">Generating mipmaps</a></h1>
+                        <h1 id="generating-mipmaps"><a class="header" href="#generating-mipmaps">Generating mipmaps</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/28_mipmapping.rs">main.rs</a></p>
 <p>Our program can now load and render 3D models. In this chapter, we will add one more feature, mipmap generation. Mipmaps are widely used in games and rendering software, and Vulkan gives us complete control over how they are created.</p>
 <p>Mipmaps are precalculated, downscaled versions of an image. Each new image is half the width and height of the previous one.  Mipmaps are used as a form of <em>Level of Detail</em> or <em>LOD.</em> Objects that are far away from the camera will sample their textures from the smaller mip images. Using smaller images increases the rendering speed and avoids artifacts such as <a href="https://en.wikipedia.org/wiki/Moir%C3%A9_pattern">Moiré patterns</a>. An example of what mipmaps look like:</p>
 <p><img src="../images/mipmaps_example.jpg" alt="" /></p>
-<h2><a class="header" href="#image-creation" id="image-creation">Image creation</a></h2>
+<h2 id="image-creation"><a class="header" href="#image-creation">Image creation</a></h2>
 <p>In Vulkan, each of the mip images is stored in different <em>mip levels</em> of a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Image.html"><code class="hljs">vk::Image</code></a>. Mip level 0 is the original image, and the mip levels after level 0 are commonly referred to as the <em>mip chain.</em></p>
 <p>The number of mip levels is specified when the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Image.html"><code class="hljs">vk::Image</code></a> is created. Up until now, we have always set this value to one. We need to calculate the number of mip levels from the dimensions of the image. First, add an <code>AppData</code> field to store this number:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
@@ -312,7 +292,7 @@ transition_image_layout(
     data.mip_levels,
 )?;
 </code></pre>
-<h2><a class="header" href="#generating-mipmaps-1" id="generating-mipmaps-1">Generating Mipmaps</a></h2>
+<h2 id="generating-mipmaps-1"><a class="header" href="#generating-mipmaps-1">Generating Mipmaps</a></h2>
 <p>Our texture image now has multiple mip levels, but the staging buffer can only be used to fill mip level 0. The other levels are still undefined. To fill these levels we need to generate the data from the single level that we have. We will use the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_blit_image"><code class="hljs">cmd_blit_image</code></a> command. This command performs copying, scaling, and filtering operations. We will call this multiple times to <em>blit</em> data to each level of our texture image.</p>
 <p><a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_blit_image"><code class="hljs">cmd_blit_image</code></a> is considered a transfer operation, so we must inform Vulkan that we intend to use the texture image as both the source and destination of a transfer. Add <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.ImageUsageFlags.html#associatedconstant.TRANSFER_SRC"><code class="hljs">vk::ImageUsageFlags::TRANSFER_SRC</code></a> to the texture image's usage flags in <code>create_texture_image</code>:</p>
 <pre><code class="language-rust noplaypen">let (texture_image, texture_image_memory) = create_image(
@@ -489,7 +469,7 @@ end_single_time_commands(device, data, command_buffer)?;
 )?;
 </code></pre>
 <p>Our texture image's mipmaps are now completely filled.</p>
-<h2><a class="header" href="#linear-filtering-support" id="linear-filtering-support">Linear filtering support</a></h2>
+<h2 id="linear-filtering-support"><a class="header" href="#linear-filtering-support">Linear filtering support</a></h2>
 <p>It is very convenient to use a built-in command like <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_blit_image"><code class="hljs">cmd_blit_image</code></a> to generate all the mip levels, but unfortunately it is not guaranteed to be supported on all platforms. It requires the texture image format we use to support linear filtering, which can be checked with the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_format_properties"><code class="hljs">get_physical_device_format_properties</code></a> command. We will add a check to the <code>generate_mipmaps</code> function for this.</p>
 <p>First add an additional parameter that specifies the image format:</p>
 <pre><code class="language-rust noplaypen">generate_mipmaps(
@@ -530,7 +510,7 @@ unsafe fn generate_mipmaps(
 <p>The <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.FormatProperties.html"><code class="hljs">vk::FormatProperties</code></a> struct has three fields named <code>linear_tiling_features</code>, <code>optimal_tiling_features</code>, and <code>buffer_features</code> that each describe how the format can be used depending on the way it is used. We create a texture image with the optimal tiling format, so we need to check <code>optimal_tiling_features</code>. Support for the linear filtering feature can be checked with <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.FormatFeatureFlags.html#associatedconstant.SAMPLED_IMAGE_FILTER_LINEAR"><code class="hljs">vk::FormatFeatureFlags::SAMPLED_IMAGE_FILTER_LINEAR</code></a>.</p>
 <p>There are two alternatives in the case where this is not supported. You could implement a function that searches common texture image formats for one that <em>does</em> support linear blitting, or you could implement the mipmap generation in your software. Each mip level can then be loaded into the image in the same way that you loaded the original image.</p>
 <p>It should be noted that it is uncommon in practice to generate the mipmap levels at runtime anyway. Usually they are pregenerated and stored in the texture file alongside the base level to improve loading speed. Implementing resizing in software and loading multiple levels from a file is left as an exercise to the reader.</p>
-<h2><a class="header" href="#sampler" id="sampler">Sampler</a></h2>
+<h2 id="sampler"><a class="header" href="#sampler">Sampler</a></h2>
 <p>While the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Image.html"><code class="hljs">vk::Image</code></a> holds the mipmap data, <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Sampler.html"><code class="hljs">vk::Sampler</code></a> controls how that data is read while rendering. Vulkan allows us to specify <code>min_lod</code>, <code>max_lod</code>, <code>mip_lod_bias</code>, and <code>mipmap_mode</code> (&quot;LOD&quot; means &quot;Level of Detail&quot;). When a texture is sampled, the sampler selects a mip level according to the following pseudocode:</p>
 <pre><code class="language-rust noplaypen">// Smaller when the object is close, may be negative.
 let mut lod = get_lod_level_from_screen_size();
@@ -587,17 +567,13 @@ let color = if mipmap_mode == vk::SamplerMipmapMode::NEAREST {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../model/loading_models.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../quality/multisampling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -605,45 +581,32 @@ let color = if mipmap_mode == vk::SamplerMipmapMode::NEAREST {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../model/loading_models.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../quality/multisampling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

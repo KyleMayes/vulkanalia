@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Loading models - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,13 +132,13 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#loading-models" id="loading-models">Loading models</a></h1>
+                        <h1 id="loading-models"><a class="header" href="#loading-models">Loading models</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/27_model_loading.rs">main.rs</a></p>
 <p>Your program is now ready to render textured 3D meshes, but the current geometry in the <code>vertices</code> and <code>indices</code> arrays is not very interesting yet. In this chapter we're going to extend the program to load the vertices and indices from an actual model file to make the graphics card actually do some work.</p>
 <p>Many graphics API tutorials have the reader write their own OBJ loader in a chapter like this. The problem with this is that any remotely interesting 3D application will soon require features that are not supported by this file format, like skeletal animation. We <em>will</em> load mesh data from an OBJ model in this chapter, but we'll focus more on integrating the mesh data with the program itself rather than the details of loading it from a file.</p>
-<h2><a class="header" href="#library" id="library">Library</a></h2>
+<h2 id="library"><a class="header" href="#library">Library</a></h2>
 <p>We will use the <a href="https://crates.io/crates/tobj"><code>tobj</code></a> crate to load vertices and faces from an OBJ file. If you followed the instructions in the <code>Development environment</code> chapter you already have this dependency installed and ready to go.</p>
-<h2><a class="header" href="#sample-mesh" id="sample-mesh">Sample mesh</a></h2>
+<h2 id="sample-mesh"><a class="header" href="#sample-mesh">Sample mesh</a></h2>
 <p>In this chapter we won't be enabling lighting yet, so it helps to use a sample model that has lighting baked into the texture. An easy way to find such models is to look for 3D scans on <a href="https://sketchfab.com/">Sketchfab</a>. Many of the models on that site are available in OBJ format with a permissive license.</p>
 <p>For this tutorial I've decided to go with the <a href="https://sketchfab.com/3d-models/viking-room-a49f1b8e4f5c4ecf9e1fe7d81915ad38">Viking room</a> model by <a href="https://sketchfab.com/nigelgoh">nigelgoh</a> (<a href="https://web.archive.org/web/20200428202538/https://sketchfab.com/3d-models/viking-room-a49f1b8e4f5c4ecf9e1fe7d81915ad38">CC BY 4.0</a>). I tweaked the size and orientation of the model to use it as a drop in replacement for the current geometry:</p>
 <ul>
@@ -169,7 +149,7 @@
 <p>Update <code>create_texture_image</code> to use this path variable:</p>
 <pre><code class="language-rust noplaypen">let image = File::open(&quot;resources/viking_room.png&quot;)?;
 </code></pre>
-<h2><a class="header" href="#loading-vertices-and-indices" id="loading-vertices-and-indices">Loading vertices and indices</a></h2>
+<h2 id="loading-vertices-and-indices"><a class="header" href="#loading-vertices-and-indices">Loading vertices and indices</a></h2>
 <p>We're going to load the vertices and indices from the model file now, so you should remove the global <code>VERTICES</code> and <code>INDICES</code> arrays now. Replace them with <code>AppData</code> fields:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
@@ -270,7 +250,7 @@ let vertex = Vertex {
 <p>When you run your program again, you should now see the correct result:</p>
 <p><img src="../images/drawing_model.png" alt="" /></p>
 <p>All that hard work is finally beginning to pay off with a demo like this!</p>
-<h2><a class="header" href="#vertex-deduplication" id="vertex-deduplication">Vertex deduplication</a></h2>
+<h2 id="vertex-deduplication"><a class="header" href="#vertex-deduplication">Vertex deduplication</a></h2>
 <p>Unfortunately we're not really taking advantage of the index buffer yet. The <code>vertices</code> vector contains a lot of duplicated vertex data, because many vertices are included in multiple triangles. We should keep only the unique vertices and use the index buffer to reuse them whenever they come up. A straightforward way to implement this is to use a <code>HashMap</code> to keep track of the unique vertices and respective indices:</p>
 <pre><code class="language-rust noplaypen">let mut unique_vertices = HashMap::new();
 
@@ -319,17 +299,13 @@ impl Hash for Vertex {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../model/depth_buffering.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../quality/generating_mipmaps.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -337,45 +313,32 @@ impl Hash for Vertex {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../model/depth_buffering.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../quality/generating_mipmaps.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

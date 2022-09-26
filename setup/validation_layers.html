@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Validation layers - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,7 +132,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#validation-layers" id="validation-layers">Validation layers</a></h1>
+                        <h1 id="validation-layers"><a class="header" href="#validation-layers">Validation layers</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/02_validation_layers.rs">main.rs</a></p>
 <p>The Vulkan API is designed around the idea of minimal driver overhead and one of the manifestations of that goal is that there is very limited error checking in the API by default. Even mistakes as simple as setting enumerations to incorrect values are generally not explicitly handled and will simply result in crashes or undefined behavior. Because Vulkan requires you to be very explicit about everything you're doing, it's easy to make many small mistakes like using a new GPU feature and forgetting to request it at logical device creation time.</p>
 <p>However, that doesn't mean that these checks can't be added to the API. Vulkan introduces an elegant system for this known as validation layers. Validation layers are optional components that hook into Vulkan function calls to apply additional operations. Common operations in validation layers are:</p>
@@ -191,7 +171,7 @@ use log::*;
 use vulkanalia::vk::ExtDebugUtilsExtension;
 </code></pre>
 <p><code>HashSet</code> will be used for storing and querying supported layers and the other imports will be used in the function we will be writing to log messages from the validation layer with the exception of <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.ExtDebugUtilsExtension.html"><code class="hljs">vk::ExtDebugUtilsExtension</code></a> which provides the command wrappers for managing debugging functionality.</p>
-<h2><a class="header" href="#using-validation-layers" id="using-validation-layers">Using validation layers</a></h2>
+<h2 id="using-validation-layers"><a class="header" href="#using-validation-layers">Using validation layers</a></h2>
 <p>In this section we'll see how to enable the standard diagnostics layers provided by the Vulkan SDK. Just like extensions, validation layers need to be enabled by specifying their name. All of the useful standard validation is bundled into a layer included in the SDK that is known as <code>VK_LAYER_KHRONOS_validation</code>.</p>
 <p>Let's first add two configuration variables to the program to specify the layers to enable and whether to enable them or not. I've chosen to base that value on whether the program is being compiled in debug mode or not.</p>
 <pre><code class="language-rust noplaypen">const VALIDATION_ENABLED: bool =
@@ -224,7 +204,7 @@ let layers = if VALIDATION_ENABLED {
     .enabled_extension_names(&amp;extensions);
 </code></pre>
 <p>Now run the program in debug mode and ensure that the <code>Validation layer requested but not supported.</code> error does not occur. If it does, then have a look at the FAQ. If you get past that check, then <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.EntryV1_0.html#method.create_instance"><code class="hljs">create_instance</code></a> should never return a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.LAYER_NOT_PRESENT"><code class="hljs">vk::ErrorCode::LAYER_NOT_PRESENT</code></a> error code but you should still run the program to be sure.</p>
-<h2><a class="header" href="#message-callback" id="message-callback">Message callback</a></h2>
+<h2 id="message-callback"><a class="header" href="#message-callback">Message callback</a></h2>
 <p>The validation layers will print debug messages to the standard output by default, but we can also handle them ourselves by providing an explicit callback in our program. This will also allow you to decide which kind of messages you would like to see, because not all are necessarily (fatal) errors. If you don't want to do that right now then you may skip to the last section in this chapter.</p>
 <p>To set up a callback in the program to handle messages and the associated details, we have to set up a debug messenger with a callback using the <a href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_debug_utils.html"><code class="hljs">VK_EXT_debug_utils</code></a> extension.</p>
 <p>We'll add some more code to our <code>create_instance</code> function. This time we'll modify the <code>extensions</code> list to be mutable and then add the debug utilities extension to the list when the validation layer is enabled:</p>
@@ -342,7 +322,7 @@ impl App {
     self.instance.destroy_instance(None);
 }
 </code></pre>
-<h2><a class="header" href="#debugging-instance-creation-and-destruction" id="debugging-instance-creation-and-destruction">Debugging instance creation and destruction</a></h2>
+<h2 id="debugging-instance-creation-and-destruction"><a class="header" href="#debugging-instance-creation-and-destruction">Debugging instance creation and destruction</a></h2>
 <p>Although we've now added debugging with validation layers to the program we're not covering everything quite yet. The <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.ExtDebugUtilsExtension.html#method.create_debug_utils_messenger_ext"><code class="hljs">create_debug_utils_messenger_ext</code></a> call requires a valid instance to have been created and <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.ExtDebugUtilsExtension.html#method.destroy_debug_utils_messenger_ext"><code class="hljs">destroy_debug_utils_messenger_ext</code></a> must be called before the instance is destroyed. This currently leaves us unable to debug any issues in the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.EntryV1_0.html#method.create_instance"><code class="hljs">create_instance</code></a> and <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.InstanceV1_0.html#method.destroy_instance"><code class="hljs">destroy_instance</code></a> calls.</p>
 <p>However, if you closely read the <a href="https://github.com/KhronosGroup/Vulkan-Docs/blob/77d9f42e075e6a483a37351c14c5e9e3122f9113/appendices/VK_EXT_debug_utils.txt#L84-L91">extension documentation</a>, you'll see that there is a way to create a separate debug utils messenger specifically for those two function calls. It requires you to simply pass a pointer to a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DebugUtilsMessengerCreateInfoEXT.html"><code class="hljs">vk::DebugUtilsMessengerCreateInfoEXT</code></a> struct in the <code>next</code> extension field of <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a>. Before we do this, let's first discuss how extending structs works in Vulkan.</p>
 <p>The <code>s_type</code> field that is present on many Vulkan structs was briefly mentioned in the <a href="../overview.html#builders">Builders section</a> of the Overview chapter. It was said that this field must be set to the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.StructureType.html"><code class="hljs">vk::StructureType</code></a> variant indicating the type of the struct (e.g., <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.StructureType.html#associatedconstant.APPLICATION_INFO"><code class="hljs">vk::StructureType::APPLICATION_INFO</code></a> for a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.ApplicationInfo.html"><code class="hljs">vk::ApplicationInfo</code></a> struct).</p>
@@ -369,7 +349,7 @@ if VALIDATION_ENABLED {
 <p>Now we should be able to run our program and see logs from our debug callback, but first we'll need to set the <code>RUST_LOG</code> environment variable so that <code>pretty_env_logger</code> will enable the log levels we are interested in. Initially set the log level to <code>debug</code> so we can be sure it is working, here is an example on Windows (PowerShell):</p>
 <p><img src="../images/validation_layer_test.png" alt="" /></p>
 <p>If everything is working you shouldn't see any warning or error messages. Going forward you will probably want to increase the minimum log level to <code>info</code> using <code>RUST_LOG</code> to reduce the verbosity of the logs unless you are trying to debug an error.</p>
-<h2><a class="header" href="#configuration" id="configuration">Configuration</a></h2>
+<h2 id="configuration"><a class="header" href="#configuration">Configuration</a></h2>
 <p>There are a lot more settings for the behavior of validation layers than just the flags specified in the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DebugUtilsMessengerCreateInfoEXT.html"><code class="hljs">vk::DebugUtilsMessengerCreateInfoEXT</code></a> struct. Browse to the Vulkan SDK and go to the <code>Config</code> directory. There you will find a <code>vk_layer_settings.txt</code> file that explains how to configure the layers.</p>
 <p>To configure the layer settings for your own application, copy the file to the working directory of your project's executable and follow the instructions to set the desired behavior. However, for the remainder of this tutorial I'll assume that you're using the default settings.</p>
 <p>Throughout this tutorial I'll be making a couple of intentional mistakes to show you how helpful the validation layers are with catching them and to teach you how important it is to know exactly what you're doing with Vulkan. Now it's time to look at Vulkan devices in the system.</p>
@@ -378,17 +358,13 @@ if VALIDATION_ENABLED {
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../setup/instance.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../setup/physical_devices_and_queue_families.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -396,45 +372,32 @@ if VALIDATION_ENABLED {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../setup/instance.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../setup/physical_devices_and_queue_families.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

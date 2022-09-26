@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Command buffers - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,10 +132,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#command-buffers" id="command-buffers">Command buffers</a></h1>
+                        <h1 id="command-buffers"><a class="header" href="#command-buffers">Command buffers</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/14_command_buffers.rs">main.rs</a></p>
 <p>Commands in Vulkan, like drawing operations and memory transfers, are not executed directly using function calls. You have to record all of the operations you want to perform in command buffer objects. The advantage of this is that all of the hard work of setting up the drawing commands can be done in advance and in multiple threads. After that, you just have to tell Vulkan to execute the commands in the main loop.</p>
-<h2><a class="header" href="#command-pools" id="command-pools">Command pools</a></h2>
+<h2 id="command-pools"><a class="header" href="#command-pools">Command pools</a></h2>
 <p>We have to create a command pool before we can create command buffers. Command pools manage the memory that is used to store the buffers and command buffers are allocated from them. Add a new <code>AppData</code> field to store a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.CommandPool.html"><code class="hljs">vk::CommandPool</code></a>:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
@@ -203,7 +183,7 @@ let info = vk::CommandPoolCreateInfo::builder()
     // ...
 }
 </code></pre>
-<h2><a class="header" href="#command-buffer-allocation" id="command-buffer-allocation">Command buffer allocation</a></h2>
+<h2 id="command-buffer-allocation"><a class="header" href="#command-buffer-allocation">Command buffer allocation</a></h2>
 <p>We can now start allocating command buffers and recording drawing commands in them. Because one of the drawing commands involves binding the right <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Framebuffer.html"><code class="hljs">vk::Framebuffer</code></a>, we'll actually have to record a command buffer for every image in the swapchain once again. To that end, create a list of <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.CommandBuffer.html"><code class="hljs">vk::CommandBuffer</code></a> objects as an <code>AppData</code> field. Command buffers will be automatically freed when their command pool is destroyed, so we don't need any explicit cleanup.</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
@@ -238,7 +218,7 @@ data.command_buffers = device.allocate_command_buffers(&amp;allocate_info)?;
 <li><a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.CommandBufferLevel.html#associatedconstant.SECONDARY"><code class="hljs">vk::CommandBufferLevel::SECONDARY</code></a> – Cannot be submitted directly, but can be called from primary command buffers.</li>
 </ul>
 <p>We won't make use of the secondary command buffer functionality here, but you can imagine that it's helpful to reuse common operations from primary command buffers.</p>
-<h2><a class="header" href="#starting-command-buffer-recording" id="starting-command-buffer-recording">Starting command buffer recording</a></h2>
+<h2 id="starting-command-buffer-recording"><a class="header" href="#starting-command-buffer-recording">Starting command buffer recording</a></h2>
 <p>We begin recording a command buffer by calling <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.begin_command_buffer"><code class="hljs">begin_command_buffer</code></a> with a small <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.CommandBufferBeginInfo.html"><code class="hljs">vk::CommandBufferBeginInfo</code></a> structure as argument that specifies some details about the usage of this specific command buffer.</p>
 <pre><code class="language-rust noplaypen">for (i, command_buffer) in data.command_buffers.iter().enumerate() {
     let inheritance = vk::CommandBufferInheritanceInfo::builder();
@@ -259,7 +239,7 @@ data.command_buffers = device.allocate_command_buffers(&amp;allocate_info)?;
 <p>None of these flags are applicable for us right now.</p>
 <p>The <code>inheritance_info</code> parameter is only relevant for secondary command buffers. It specifies which state to inherit from the calling primary command buffers.</p>
 <p>If the command buffer was already recorded once, then a call to <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.begin_command_buffer"><code class="hljs">begin_command_buffer</code></a> will implicitly reset it. It's not possible to append commands to a buffer at a later time.</p>
-<h2><a class="header" href="#starting-a-render-pass" id="starting-a-render-pass">Starting a render pass</a></h2>
+<h2 id="starting-a-render-pass"><a class="header" href="#starting-a-render-pass">Starting a render pass</a></h2>
 <p>Before we can start a render pass we'll need to build some parameters.</p>
 <pre><code class="language-rust noplaypen">let render_area = vk::Rect2D::builder()
     .offset(vk::Offset2D::default())
@@ -292,7 +272,7 @@ let info = vk::RenderPassBeginInfo::builder()
 <li><a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.SubpassContents.html#associatedconstant.SECONDARY_COMMAND_BUFFERS"><code class="hljs">vk::SubpassContents::SECONDARY_COMMAND_BUFFERS</code></a> – The render pass commands will be executed from secondary command buffers.</li>
 </ul>
 <p>We will not be using secondary command buffers, so we'll go with the first option.</p>
-<h2><a class="header" href="#basic-drawing-commands" id="basic-drawing-commands">Basic drawing commands</a></h2>
+<h2 id="basic-drawing-commands"><a class="header" href="#basic-drawing-commands">Basic drawing commands</a></h2>
 <p>We can now bind the graphics pipeline:</p>
 <pre><code class="language-rust noplaypen">device.cmd_bind_pipeline(
     *command_buffer, vk::PipelineBindPoint::GRAPHICS, data.pipeline);
@@ -307,7 +287,7 @@ let info = vk::RenderPassBeginInfo::builder()
 <li><code>first_vertex</code> – Used as an offset into the vertex buffer, defines the lowest value of <code>gl_VertexIndex</code>.</li>
 <li><code>first_instance</code> – Used as an offset for instanced rendering, defines the lowest value of <code>gl_InstanceIndex</code>.</li>
 </ul>
-<h2><a class="header" href="#finishing-up" id="finishing-up">Finishing up</a></h2>
+<h2 id="finishing-up"><a class="header" href="#finishing-up">Finishing up</a></h2>
 <p>The render pass can now be ended:</p>
 <pre><code class="language-rust noplaypen">device.cmd_end_render_pass(*command_buffer);
 </code></pre>
@@ -320,17 +300,13 @@ let info = vk::RenderPassBeginInfo::builder()
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../drawing/framebuffers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../drawing/rendering_and_presentation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -338,45 +314,32 @@ let info = vk::RenderPassBeginInfo::builder()
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../drawing/framebuffers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../drawing/rendering_and_presentation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

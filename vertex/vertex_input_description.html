@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Vertex input description - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,10 +132,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#vertex-input-description" id="vertex-input-description">Vertex input description</a></h1>
+                        <h1 id="vertex-input-description"><a class="header" href="#vertex-input-description">Vertex input description</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/17_vertex_input.rs">main.rs</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/17/shader.vert">shader.vert</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/17/shader.frag">shader.frag</a></p>
 <p>In the next few chapters, we're going to replace the hardcoded vertex data in the vertex shader with a vertex buffer in memory. We'll start with the easiest approach of creating a CPU visible buffer copying the vertex data into it directly, and after that we'll see how to use a staging buffer to copy the vertex data to high performance memory.</p>
-<h2><a class="header" href="#vertex-shader" id="vertex-shader">Vertex shader</a></h2>
+<h2 id="vertex-shader"><a class="header" href="#vertex-shader">Vertex shader</a></h2>
 <p>First change the vertex shader to no longer include the vertex data in the shader code itself. The vertex shader takes input from a vertex buffer using the <code>in</code> keyword.</p>
 <pre><code class="language-glsl">#version 450
 
@@ -175,7 +155,7 @@ void main() {
 layout(location = 2) in vec3 inColor;
 </code></pre>
 <p>You can find more info about the layout qualifier in the <a href="https://www.khronos.org/opengl/wiki/Layout_Qualifier_(GLSL)">OpenGL wiki</a>.</p>
-<h2><a class="header" href="#vertex-data" id="vertex-data">Vertex data</a></h2>
+<h2 id="vertex-data"><a class="header" href="#vertex-data">Vertex data</a></h2>
 <p>We're moving the vertex data from the shader code to an array in the code of our program. We'll start by adding a few more imports to our program.</p>
 <pre><code class="language-rust noplaypen">use std::mem::size_of;
 
@@ -207,7 +187,7 @@ impl Vertex {
 }
 </code></pre>
 <p>Now use the <code>Vertex</code> structure to specify a list of vertex data. We're using exactly the same position and color values as before, but now they're combined into one array of vertices. This is known as <em>interleaving</em> vertex attributes.</p>
-<h2><a class="header" href="#binding-descriptions" id="binding-descriptions">Binding descriptions</a></h2>
+<h2 id="binding-descriptions"><a class="header" href="#binding-descriptions">Binding descriptions</a></h2>
 <p>The next step is to tell Vulkan how to pass this data format to the vertex shader once it's been uploaded into GPU memory. There are two types of structures needed to convey this information.</p>
 <p>The first structure is <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.VertexInputBindingDescription.html"><code class="hljs">vk::VertexInputBindingDescription</code></a> and we'll add a method to the <code>Vertex</code> struct to populate it with the right data.</p>
 <pre><code class="language-rust noplaypen">impl Vertex {
@@ -228,7 +208,7 @@ impl Vertex {
 <li><a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.VertexInputRate.html#associatedconstant.INSTANCE"><code class="hljs">vk::VertexInputRate::INSTANCE</code></a> – Move to the next data entry after each instance</li>
 </ul>
 <p>We're not going to use instanced rendering, so we'll stick to per-vertex data.</p>
-<h2><a class="header" href="#attribute-descriptions" id="attribute-descriptions">Attribute descriptions</a></h2>
+<h2 id="attribute-descriptions"><a class="header" href="#attribute-descriptions">Attribute descriptions</a></h2>
 <p>The second structure that describes how to handle vertex input is <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.VertexInputAttributeDescription.html"><code class="hljs">vk::VertexInputAttributeDescription</code></a>. We're going to add another helper method to <code>Vertex</code> to fill in these structs.</p>
 <pre><code class="language-rust noplaypen">impl Vertex {
     fn attribute_descriptions() -&gt; [vk::VertexInputAttributeDescription; 2] {
@@ -269,7 +249,7 @@ impl Vertex {
 <p>Lastly, construct the array to return from the helper method:</p>
 <pre><code class="language-rust noplaypen">[pos, color]
 </code></pre>
-<h2><a class="header" href="#pipeline-vertex-input" id="pipeline-vertex-input">Pipeline vertex input</a></h2>
+<h2 id="pipeline-vertex-input"><a class="header" href="#pipeline-vertex-input">Pipeline vertex input</a></h2>
 <p>We now need to set up the graphics pipeline to accept vertex data in this format by referencing the structures in <code>create_pipeline</code>. Find the <code>vertex_input_state</code> struct and modify it to reference the two descriptions:</p>
 <pre><code class="language-rust noplaypen">let binding_descriptions = &amp;[Vertex::binding_description()];
 let attribute_descriptions = Vertex::attribute_descriptions();
@@ -283,17 +263,13 @@ let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder()
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../swapchain/recreation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../vertex/vertex_buffer_creation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -301,45 +277,32 @@ let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder()
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../swapchain/recreation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../vertex/vertex_buffer_creation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

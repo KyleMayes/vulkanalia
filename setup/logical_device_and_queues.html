@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Logical device and queues - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,7 +132,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#logical-device-and-queues" id="logical-device-and-queues">Logical device and queues</a></h1>
+                        <h1 id="logical-device-and-queues"><a class="header" href="#logical-device-and-queues">Logical device and queues</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/04_logical_device.rs">main.rs</a></p>
 <p>After selecting a physical device to use we need to set up a logical device to interface with it. The logical device creation process is similar to the instance creation process and describes the features we want to use. We also need to specify which queues to create now that we've queried which queue families are available. You can even create multiple logical devices from the same physical device if you have varying requirements.</p>
 <p>Start by adding a new <code>App</code> field to store the logical device in:</p>
@@ -176,7 +156,7 @@ unsafe fn create_logical_device(
 ) -&gt; Result&lt;Device&gt; {
 }
 </code></pre>
-<h2><a class="header" href="#specifying-the-queues-to-be-created" id="specifying-the-queues-to-be-created">Specifying the queues to be created</a></h2>
+<h2 id="specifying-the-queues-to-be-created"><a class="header" href="#specifying-the-queues-to-be-created">Specifying the queues to be created</a></h2>
 <p>The creation of a logical device involves specifying a bunch of details in structs again, of which the first one will be <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DeviceQueueCreateInfo.html"><code class="hljs">vk::DeviceQueueCreateInfo</code></a>. This structure describes the number of queues we want for a single queue family. Right now we're only interested in a queue with graphics capabilities.</p>
 <pre><code class="language-rust noplaypen">let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
 
@@ -187,7 +167,7 @@ let queue_info = vk::DeviceQueueCreateInfo::builder()
 </code></pre>
 <p>The currently available drivers will only allow you to create a small number of queues for each queue family and you don't really need more than one. That's because you can create all of the command buffers on multiple threads and then submit them all at once on the main thread with a single low-overhead call.</p>
 <p>Vulkan lets you assign priorities to queues to influence the scheduling of command buffer execution using floating point numbers between <code>0.0</code> and <code>1.0</code>. This is required even when only creating a single queue.</p>
-<h2><a class="header" href="#specifying-the-layers-to-enable" id="specifying-the-layers-to-enable">Specifying the layers to enable</a></h2>
+<h2 id="specifying-the-layers-to-enable"><a class="header" href="#specifying-the-layers-to-enable">Specifying the layers to enable</a></h2>
 <p>The next piece of information we need to provide bears a resemblance to the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a> struct. Once again we need to specify any layers or extensions we want to enable, but this time any specified extensions are device specific rather than global.</p>
 <p>An example of a device specific extension is <a href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_swapchain.html"><code class="hljs">VK_KHR_swapchain</code></a>, which allows you to present rendered images from that device to windows. It is possible that there are Vulkan devices in the system that lack this ability, for example because they only support compute operations. We will come back to this extension in the swapchain chapter.</p>
 <p>Previous implementations of Vulkan made a distinction between instance and device specific validation layers, but this is no longer the case. That means that the layer names we pass to <code>enabled_layer_names</code> later are ignored by up-to-date implementations. However, it is still a good idea to set them anyway to be compatible with older implementations.</p>
@@ -198,11 +178,11 @@ let queue_info = vk::DeviceQueueCreateInfo::builder()
     vec![]
 };
 </code></pre>
-<h2><a class="header" href="#specifying-used-device-features" id="specifying-used-device-features">Specifying used device features</a></h2>
+<h2 id="specifying-used-device-features"><a class="header" href="#specifying-used-device-features">Specifying used device features</a></h2>
 <p>The next information to specify is the set of device features that we'll be using. These are the features that we queried support for with <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features"><code class="hljs">get_physical_device_features</code></a> in the previous chapter, like geometry shaders. Right now we don't need anything special, so we can simply define it and leave everything to the default values (<code>false</code>). We'll come back to this structure once we're about to start doing more interesting things with Vulkan.</p>
 <pre><code class="language-rust noplaypen">let features = vk::PhysicalDeviceFeatures::builder();
 </code></pre>
-<h2><a class="header" href="#creating-the-logical-device" id="creating-the-logical-device">Creating the logical device</a></h2>
+<h2 id="creating-the-logical-device"><a class="header" href="#creating-the-logical-device">Creating the logical device</a></h2>
 <p>With the previous two structures and the validation layer (if enabled) in place, we can fill in the main <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DeviceCreateInfo.html"><code class="hljs">vk::DeviceCreateInfo</code></a> structure.</p>
 <pre><code class="language-rust noplaypen">let queue_infos = &amp;[queue_info];
 let info = vk::DeviceCreateInfo::builder()
@@ -221,7 +201,7 @@ let info = vk::DeviceCreateInfo::builder()
 }
 </code></pre>
 <p>Logical devices don't interact directly with instances, which is why it's not included as a parameter.</p>
-<h2><a class="header" href="#retrieving-queue-handles" id="retrieving-queue-handles">Retrieving queue handles</a></h2>
+<h2 id="retrieving-queue-handles"><a class="header" href="#retrieving-queue-handles">Retrieving queue handles</a></h2>
 <p>The queues are automatically created along with the logical device, but we don't have a handle to interface with them yet. First add a new <code>AppData</code> field to store a handle to the graphics queue:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
@@ -241,17 +221,13 @@ let info = vk::DeviceCreateInfo::builder()
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../setup/physical_devices_and_queue_families.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../presentation/window_surface.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -259,45 +235,32 @@ let info = vk::DeviceCreateInfo::builder()
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../setup/physical_devices_and_queue_families.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../presentation/window_surface.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

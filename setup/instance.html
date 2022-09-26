@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Instance - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,7 +132,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#instance" id="instance">Instance</a></h1>
+                        <h1 id="instance"><a class="header" href="#instance">Instance</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/01_instance_creation.rs">main.rs</a></p>
 <p>The very first thing you will want to do is initialize the Vulkan library by creating an <em>instance</em>. The instance is the connection between your application and the Vulkan library and creating it involves specifying some details about your application to the driver. To get started, add the following imports:</p>
 <pre><code class="language-rust noplaypen">use anyhow::{anyhow, Result};
@@ -206,14 +186,14 @@ Ok(entry.create_instance(&amp;info, None)?)
 }
 </code></pre>
 <p>Here we first create a Vulkan function loader which will be used to load the initial Vulkan commands from the Vulkan shared library. Next we create the Vulkan entry point using the function loader which will load all of the commands we need to manage Vulkan instances. Lastly we are now able to call our <code>create_instance</code> function with the Vulkan entry point.</p>
-<h2><a class="header" href="#cleaning-up" id="cleaning-up">Cleaning up</a></h2>
+<h2 id="cleaning-up"><a class="header" href="#cleaning-up">Cleaning up</a></h2>
 <p>The <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> should only be destroyed right before the program exits. It can be destroyed in the <code>App::destroy</code> method using <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.InstanceV1_0.html#method.destroy_instance"><code class="hljs">destroy_instance</code></a>:</p>
 <pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
     self.instance.destroy_instance(None);
 }
 </code></pre>
 <p>Like the Vulkan commands used to create objects, the commands used to destroy objects also take an optional reference to custom allocator callbacks. So like before, we pass <code>None</code> to indicate we are content with the default allocation behavior.</p>
-<h2><a class="header" href="#a-hrefhttpsdocsrsvulkanalia0120vulkanaliastructinstancehtmlcode-classhljsinstancea-vs-a-hrefhttpsdocsrsvulkanalia0120vulkanaliavkstructinstancehtmlcode-classhljsvkinstancea" id="a-hrefhttpsdocsrsvulkanalia0120vulkanaliastructinstancehtmlcode-classhljsinstancea-vs-a-hrefhttpsdocsrsvulkanalia0120vulkanaliavkstructinstancehtmlcode-classhljsvkinstancea"><a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> vs <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a></a></h2>
+<h2 id="instance-vs-vkinstance"><a class="header" href="#instance-vs-vkinstance"><a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> vs <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a></a></h2>
 <p>When we call our <code>create_instance</code> function, what we get back is not a raw Vulkan instance as would be returned by the Vulkan command <a href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateInstance.html"><code class="hljs">vkCreateInstance</code></a> (<a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a>). Instead what we got back is a custom type defined by <code>vulkanalia</code> which combines both a raw Vulkan instance and the commands loaded for that specific instance.</p>
 <p>This is the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> type we have been using (imported from the <code>vulkanalia</code> prelude) which should not be confused with the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a> type which represents a raw Vulkan instance. In future chapters we will also use the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Device.html"><code class="hljs">Device</code></a> type which, like <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a>, is a pairing of a raw Vulkan device (<a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Device.html"><code class="hljs">vk::Device</code></a>) and the commands loaded for that specific device. Fortunately we will not be using <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a> or <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Device.html"><code class="hljs">vk::Device</code></a> directly in this tutorial so you don't need to worry about getting them mixed up.</p>
 <p>Because an <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> contains both a Vulkan instance and the associated commands, the command wrappers implemented for an <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> are able to provide the Vulkan instance when it is required by the underlying Vulkan command.</p>
@@ -224,17 +204,13 @@ Ok(entry.create_instance(&amp;info, None)?)
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../setup/base_code.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../setup/validation_layers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -242,45 +218,32 @@ Ok(entry.create_instance(&amp;info, None)?)
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../setup/base_code.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../setup/validation_layers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

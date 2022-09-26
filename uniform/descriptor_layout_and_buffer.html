@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Descriptor layout and buffer - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,7 +132,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#descriptor-layout-and-buffer" id="descriptor-layout-and-buffer">Descriptor layout and buffer</a></h1>
+                        <h1 id="descriptor-layout-and-buffer"><a class="header" href="#descriptor-layout-and-buffer">Descriptor layout and buffer</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/21_descriptor_layout.rs">main.rs</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/21/shader.vert">shader.vert</a> | <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/shaders/21/shader.frag">shader.frag</a></p>
 <p>We're now able to pass arbitrary attributes to the vertex shader for each vertex, but what about global variables? We're going to move on to 3D graphics from this chapter on and that requires a model-view-projection matrix. We could include it as vertex data, but that's a waste of memory and it would require us to update the vertex buffer whenever the transformation changes. The transformation could easily change every single frame.</p>
 <p>The right way to tackle this in Vulkan is to use <em>resource descriptors</em>. A descriptor is a way for shaders to freely access resources like buffers and images. We're going to set up a buffer that contains the transformation matrices and have the vertex shader access them through a descriptor. Usage of descriptors consists of three parts:</p>
@@ -186,7 +166,7 @@ void main() {
 }
 </code></pre>
 <p>We're going to update the model, view and projection matrices every frame to make the rectangle from the previous chapter spin around in 3D.</p>
-<h2><a class="header" href="#vertex-shader" id="vertex-shader">Vertex shader</a></h2>
+<h2 id="vertex-shader"><a class="header" href="#vertex-shader">Vertex shader</a></h2>
 <p>Modify the vertex shader to include the uniform buffer object like it was specified above. I will assume that you are familiar with MVP transformations. If you're not, see <a href="https://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/">the resource</a> mentioned in the first chapter.</p>
 <pre><code class="language-glsl">#version 450
 
@@ -207,7 +187,7 @@ void main() {
 }
 </code></pre>
 <p>Note that the order of the <code>uniform</code>, <code>in</code> and <code>out</code> declarations doesn't matter. The <code>binding</code> directive is similar to the <code>location</code> directive for attributes. We're going to reference this binding in the descriptor layout. The line with <code>gl_Position</code> is changed to use the transformations to compute the final position in clip coordinates. Unlike the 2D triangles, the last component of the clip coordinates may not be <code>1</code>, which will result in a division when converted to the final normalized device coordinates on the screen. This is used in perspective projection as the <em>perspective division</em> and is essential for making closer objects look larger than objects that are further away.</p>
-<h2><a class="header" href="#descriptor-set-layout" id="descriptor-set-layout">Descriptor set layout</a></h2>
+<h2 id="descriptor-set-layout"><a class="header" href="#descriptor-set-layout">Descriptor set layout</a></h2>
 <p>The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader.</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -281,7 +261,7 @@ let layout_info = vk::PipelineLayoutCreateInfo::builder()
     // ...
 }
 </code></pre>
-<h2><a class="header" href="#uniform-buffer" id="uniform-buffer">Uniform buffer</a></h2>
+<h2 id="uniform-buffer"><a class="header" href="#uniform-buffer">Uniform buffer</a></h2>
 <p>In the next chapter we'll specify the buffer that contains the UBO data for the shader, but we need to create this buffer first. We're going to copy new data to the uniform buffer every frame, so it doesn't really make any sense to have a staging buffer. It would just add extra overhead in this case and likely degrade performance instead of improving it.</p>
 <p>We should have multiple buffers, because multiple frames may be in flight at the same time and we don't want to update the buffer in preparation of the next frame while a previous one is still reading from it! We could either have a uniform buffer per frame or per swapchain image. However, since we need to refer to the uniform buffer from the command buffer that we have per swapchain image, it makes the most sense to also have a uniform buffer per swapchain image.</p>
 <p>To that end, add new <code>AppData</code> fields for <code>uniform_buffers</code>, and <code>uniform_buffers_memory</code>:</p>
@@ -350,7 +330,7 @@ unsafe fn create_uniform_buffers(
     Ok(())
 }
 </code></pre>
-<h2><a class="header" href="#updating-uniform-data" id="updating-uniform-data">Updating uniform data</a></h2>
+<h2 id="updating-uniform-data"><a class="header" href="#updating-uniform-data">Updating uniform data</a></h2>
 <p>Create a new method <code>App::update_uniform_buffer</code> and add a call to it from the <code>App::render</code> method right after we wait for the fence for the acquired swapchain image to be signalled:</p>
 <pre><code class="language-rust noplaypen">impl App {
     unsafe fn render(&amp;mut self, window: &amp;Window) -&gt; Result&lt;()&gt; {
@@ -444,17 +424,13 @@ self.device.unmap_memory(self.data.uniform_buffers_memory[image_index]);
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../vertex/index_buffer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../uniform/descriptor_pool_and_sets.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -462,45 +438,32 @@ self.device.unmap_memory(self.data.uniform_buffers_memory[image_index]);
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../vertex/index_buffer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../uniform/descriptor_pool_and_sets.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

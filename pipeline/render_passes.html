@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Render passes - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,7 +132,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#render-passes" id="render-passes">Render passes</a></h1>
+                        <h1 id="render-passes"><a class="header" href="#render-passes">Render passes</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/11_render_passes.rs">main.rs</a></p>
 <p>Before we can finish creating the pipeline, we need to tell Vulkan about the framebuffer attachments that will be used while rendering. We need to specify how many color and depth buffers there will be, how many samples to use for each of them and how their contents should be handled throughout the rendering operations. All of this information is wrapped in a <em>render pass</em> object, for which we'll create a new <code>create_render_pass</code> function. Call this function from <code>App::create</code> before <code>create_pipeline</code>.</p>
 <pre><code class="language-rust noplaypen">impl App {
@@ -172,7 +152,7 @@ unsafe fn create_render_pass(
     Ok(())
 }
 </code></pre>
-<h2><a class="header" href="#attachment-description" id="attachment-description">Attachment description</a></h2>
+<h2 id="attachment-description"><a class="header" href="#attachment-description">Attachment description</a></h2>
 <p>In our case we'll have just a single color buffer attachment represented by one of the images from the swapchain. This will be represented by a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.AttachmentDescription.html"><code class="hljs">vk::AttachmentDescription</code></a> which we will build in <code>create_render_pass</code>.</p>
 <pre><code class="language-rust noplaypen">let color_attachment = vk::AttachmentDescription::builder()
     .format(data.swapchain_format)
@@ -211,7 +191,7 @@ unsafe fn create_render_pass(
 </ul>
 <p>We'll discuss this topic in more depth in the texturing chapter, but what's important to know right now is that images need to be transitioned to specific layouts that are suitable for the operation that they're going to be involved in next.</p>
 <p>The <code>initial_layout</code> specifies which layout the image will have before the render pass begins. The <code>final_layout</code> specifies the layout to automatically transition to when the render pass finishes. Using <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.UNDEFINED"><code class="hljs">vk::ImageLayout::UNDEFINED</code></a> for <code>initial_layout</code> means that we don't care what previous layout the image was in. The caveat of this special value is that the contents of the image are not guaranteed to be preserved, but that doesn't matter since we're going to clear it anyway. We want the image to be ready for presentation using the swapchain after rendering, which is why we use <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.ImageLayout.html#associatedconstant.PRESENT_SRC_KHR"><code class="hljs">vk::ImageLayout::PRESENT_SRC_KHR</code></a> as <code>final_layout</code>.</p>
-<h2><a class="header" href="#subpasses-and-attachment-references" id="subpasses-and-attachment-references">Subpasses and attachment references</a></h2>
+<h2 id="subpasses-and-attachment-references"><a class="header" href="#subpasses-and-attachment-references">Subpasses and attachment references</a></h2>
 <p>A single render pass can consist of multiple subpasses. Subpasses are subsequent rendering operations that depend on the contents of framebuffers in previous passes, for example a sequence of post-processing effects that are applied one after another. If you group these rendering operations into one render pass, then Vulkan is able to reorder the operations and conserve memory bandwidth for possibly better performance. For our very first triangle, however, we'll stick to a single subpass.</p>
 <p>Every subpass references one or more of the attachments that we've described using the structure in the previous sections. These references are themselves <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.AttachmentReference.html"><code class="hljs">vk::AttachmentReference</code></a> structs that look like this:</p>
 <pre><code class="language-rust noplaypen">let color_attachment_ref = vk::AttachmentReference::builder()
@@ -234,7 +214,7 @@ let subpass = vk::SubpassDescription::builder()
 <li><code>depth_stencil_attachment</code> – Attachment for depth and stencil data</li>
 <li><code>preserve_attachments</code> – Attachments that are not used by this subpass, but for which the data must be preserved</li>
 </ul>
-<h2><a class="header" href="#render-pass" id="render-pass">Render pass</a></h2>
+<h2 id="render-pass"><a class="header" href="#render-pass">Render pass</a></h2>
 <p>Now that the attachment and a basic subpass referencing it have been described, we can create the render pass itself. Create a new class member variable to hold the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.RenderPass.html"><code class="hljs">vk::RenderPass</code></a> object right above the <code>pipeline_layout</code> field in <code>AppData</code>:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
@@ -264,17 +244,13 @@ data.render_pass = device.create_render_pass(&amp;info, None)?;
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../pipeline/fixed_functions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../pipeline/conclusion.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -282,45 +258,32 @@ data.render_pass = device.create_render_pass(&amp;info, None)?;
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../pipeline/fixed_functions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../pipeline/conclusion.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

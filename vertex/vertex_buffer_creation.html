@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Vertex buffer creation - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,10 +132,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#vertex-buffer-creation" id="vertex-buffer-creation">Vertex buffer creation</a></h1>
+                        <h1 id="vertex-buffer-creation"><a class="header" href="#vertex-buffer-creation">Vertex buffer creation</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/18_vertex_buffer.rs">main.rs</a></p>
 <p>Buffers in Vulkan are regions of memory used for storing arbitrary data that can be read by the graphics card. They can be used to store vertex data, which we'll do in this chapter, but they can also be used for many other purposes that we'll explore in future chapters. Unlike the Vulkan objects we've been dealing with so far, buffers do not automatically allocate memory for themselves. The work from the previous chapters has shown that the Vulkan API puts the programmer in control of almost everything and memory management is one of those things.</p>
-<h2><a class="header" href="#buffer-creation" id="buffer-creation">Buffer creation</a></h2>
+<h2 id="buffer-creation"><a class="header" href="#buffer-creation">Buffer creation</a></h2>
 <p>Create a new function <code>create_vertex_buffer</code> and call it from <code>App::create</code> right before <code>create_command_buffers</code>.</p>
 <pre><code class="language-rust noplaypen">impl App {
     unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
@@ -216,7 +196,7 @@ unsafe fn create_vertex_buffer(
     // ...
 }
 </code></pre>
-<h2><a class="header" href="#memory-requirements" id="memory-requirements">Memory requirements</a></h2>
+<h2 id="memory-requirements"><a class="header" href="#memory-requirements">Memory requirements</a></h2>
 <p>The buffer has been created, but it doesn't actually have any memory assigned to it yet. The first step of allocating memory for the buffer is to query its memory requirements using the aptly named <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.get_buffer_memory_requirements"><code class="hljs">get_buffer_memory_requirements</code></a> command.</p>
 <pre><code class="language-rust noplaypen">let requirements = device.get_buffer_memory_requirements(data.vertex_buffer);
 </code></pre>
@@ -256,7 +236,7 @@ unsafe fn create_vertex_buffer(
     .ok_or_else(|| anyhow!(&quot;Failed to find suitable memory type.&quot;))
 </code></pre>
 <p>If there is a memory type suitable for the buffer that also has all of the properties we need, then we return its index, otherwise we return an error.</p>
-<h2><a class="header" href="#memory-allocation" id="memory-allocation">Memory allocation</a></h2>
+<h2 id="memory-allocation"><a class="header" href="#memory-allocation">Memory allocation</a></h2>
 <p>We now have a way to determine the right memory type, so we can actually allocate the memory by filling in the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.MemoryAllocateInfo.html"><code class="hljs">vk::MemoryAllocateInfo</code></a> structure.</p>
 <pre><code class="language-rust noplaypen">let memory_info = vk::MemoryAllocateInfo::builder()
     .allocation_size(requirements.size)
@@ -289,7 +269,7 @@ unsafe fn create_vertex_buffer(
     // ...
 }
 </code></pre>
-<h2><a class="header" href="#filling-the-vertex-buffer" id="filling-the-vertex-buffer">Filling the vertex buffer</a></h2>
+<h2 id="filling-the-vertex-buffer"><a class="header" href="#filling-the-vertex-buffer">Filling the vertex buffer</a></h2>
 <p>It is now time to copy the vertex data to the buffer. This is done by <a href="https://en.wikipedia.org/wiki/Memory-mapped_I/O">mapping the buffer memory</a> into CPU accessible memory with <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.map_memory"><code class="hljs">map_memory</code></a>.</p>
 <pre><code class="language-rust noplaypen">let memory = device.map_memory(
     data.vertex_buffer_memory,
@@ -313,7 +293,7 @@ device.unmap_memory(data.vertex_buffer_memory);
 </ul>
 <p>We went for the first approach, which ensures that the mapped memory always matches the contents of the allocated memory. Do keep in mind that this may lead to slightly worse performance than explicit flushing, but we'll see why that doesn't matter in the next chapter.</p>
 <p>Flushing memory ranges or using a coherent memory heap means that the driver will be aware of our writes to the buffer, but it doesn't mean that they are actually visible on the GPU yet. The transfer of data to the GPU is an operation that happens in the background and the specification simply <a href="https://www.khronos.org/registry/vulkan/specs/1.0/html/vkspec.html#synchronization-submission-host-writes">tells us</a> that it is guaranteed to be complete as of the next call to <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.queue_submit"><code class="hljs">queue_submit</code></a>.</p>
-<h2><a class="header" href="#binding-the-vertex-buffer" id="binding-the-vertex-buffer">Binding the vertex buffer</a></h2>
+<h2 id="binding-the-vertex-buffer"><a class="header" href="#binding-the-vertex-buffer">Binding the vertex buffer</a></h2>
 <p>All that remains now is binding the vertex buffer during rendering operations. We're going to extend the <code>create_command_buffers</code> function to do that.</p>
 <pre><code class="language-rust noplaypen">// ...
 device.cmd_bind_vertex_buffers(*command_buffer, 0, &amp;[data.vertex_buffer], &amp;[0]);
@@ -340,17 +320,13 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../vertex/vertex_input_description.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../vertex/staging_buffer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -358,45 +334,32 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../vertex/vertex_input_description.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../vertex/staging_buffer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>

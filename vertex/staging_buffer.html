@@ -4,37 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Staging buffer - Vulkan Tutorial (Rust)</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A Vulkan tutorial for Rust.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,9 +30,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -120,26 +105,21 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                     </div>
 
                     <h1 class="menu-title">Vulkan Tutorial (Rust)</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/KyleMayes/vulkanalia" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script type="text/javascript">
@@ -152,10 +132,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#staging-buffer" id="staging-buffer">Staging buffer</a></h1>
+                        <h1 id="staging-buffer"><a class="header" href="#staging-buffer">Staging buffer</a></h1>
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/19_staging_buffer.rs">main.rs</a></p>
 <p>The vertex buffer we have right now works correctly, but the memory type that allows us to access it from the CPU may not be the most optimal memory type for the graphics card itself to read from. The most optimal memory has the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.MemoryPropertyFlags.html#associatedconstant.DEVICE_LOCAL"><code class="hljs">vk::MemoryPropertyFlags::DEVICE_LOCAL</code></a> flag and is usually not accessible by the CPU on dedicated graphics cards. In this chapter we're going to create two vertex buffers. One <em>staging buffer</em> in CPU accessible memory to upload the data from the vertex array to, and the final vertex buffer in device local memory. We'll then use a buffer copy command to move the data from the staging buffer to the actual vertex buffer.</p>
-<h2><a class="header" href="#transfer-queue" id="transfer-queue">Transfer queue</a></h2>
+<h2 id="transfer-queue"><a class="header" href="#transfer-queue">Transfer queue</a></h2>
 <p>The buffer copy command requires a queue family that supports transfer operations, which is indicated using <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.TRANSFER"><code class="hljs">vk::QueueFlags::TRANSFER</code></a>. The good news is that any queue family with <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.GRAPHICS"><code class="hljs">vk::QueueFlags::GRAPHICS</code></a> or <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.COMPUTE"><code class="hljs">vk::QueueFlags::COMPUTE</code></a> capabilities already implicitly support <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.QueueFlags.html#associatedconstant.TRANSFER"><code class="hljs">vk::QueueFlags::TRANSFER</code></a> operations. The implementation is not required to explicitly list it in <code>queue_flags</code> in those cases.</p>
 <p>If you like a challenge, then you can still try to use a different queue family specifically for transfer operations. It will require you to make the following modifications to your program:</p>
 <ul>
@@ -166,7 +146,7 @@
 <li>Submit any transfer commands like <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_copy_buffer"><code class="hljs">cmd_copy_buffer</code></a> (which we'll be using in this chapter) to the transfer queue instead of the graphics queue</li>
 </ul>
 <p>It's a bit of work, but it'll teach you a lot about how resources are shared between queue families.</p>
-<h2><a class="header" href="#abstracting-buffer-creation" id="abstracting-buffer-creation">Abstracting buffer creation</a></h2>
+<h2 id="abstracting-buffer-creation"><a class="header" href="#abstracting-buffer-creation">Abstracting buffer creation</a></h2>
 <p>Because we're going to create multiple buffers in this chapter, it's a good idea to move buffer creation to a helper function. Create a new function <code>create_buffer</code> and move the code in <code>create_vertex_buffer</code> (except mapping) to it.</p>
 <pre><code class="language-rust noplaypen">unsafe fn create_buffer(
     instance: &amp;Instance,
@@ -237,7 +217,7 @@
 }
 </code></pre>
 <p>Run your program to make sure that the vertex buffer still works properly.</p>
-<h2><a class="header" href="#using-a-staging-buffer" id="using-a-staging-buffer">Using a staging buffer</a></h2>
+<h2 id="using-a-staging-buffer"><a class="header" href="#using-a-staging-buffer">Using a staging buffer</a></h2>
 <p>We're now going to change <code>create_vertex_buffer</code> to only use a host visible buffer as temporary buffer and use a device local one as actual vertex buffer.</p>
 <pre><code class="language-rust noplaypen">unsafe fn create_vertex_buffer(
     instance: &amp;Instance,
@@ -349,7 +329,7 @@ device.queue_wait_idle(data.graphics_queue)?;
 device.free_memory(staging_buffer_memory, None);
 </code></pre>
 <p>Run your program to verify that you're seeing the familiar triangle again. The improvement may not be visible right now, but its vertex data is now being loaded from high performance memory. This will matter when we're going to start rendering more complex geometry.</p>
-<h2><a class="header" href="#conclusion" id="conclusion">Conclusion</a></h2>
+<h2 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h2>
 <p>It should be noted that in a real world application, you're not supposed to actually call <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.allocate_memory"><code class="hljs">allocate_memory</code></a> for every individual buffer. The maximum number of simultaneous memory allocations is limited by the <code>max_memory_allocation_count</code> physical device limit, which may be as low as <code>4096</code> even on high end hardware like an NVIDIA GTX 1080. The right way to allocate memory for a large number of objects at the same time is to create a custom allocator that splits up a single allocation among many different objects by using the <code>offset</code> parameters that we've seen in many functions.</p>
 <p>However, for this tutorial it's okay to use a separate allocation for every resource, because we won't come close to hitting any of these limits for now.</p>
 
@@ -357,17 +337,13 @@ device.free_memory(staging_buffer_memory, None);
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../vertex/vertex_buffer_creation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../vertex/index_buffer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -375,45 +351,32 @@ device.free_memory(staging_buffer_memory, None);
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../vertex/vertex_buffer_creation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../vertex/index_buffer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
         <script type="text/javascript">
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
 
         <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
     </body>
 </html>
