@@ -21,7 +21,7 @@ build = "build.rs"
 anyhow = "1"
 clap = "2"
 log = "0.4"
-mdbook = { version = "=0.4.4", default-features = false }
+mdbook = { version = "=0.4.21", default-features = false }
 pretty_env_logger = "0.4"
 pulldown-cmark = "0.8"
 pulldown-cmark-to-cmark = "6"
