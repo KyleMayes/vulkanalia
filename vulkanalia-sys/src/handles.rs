@@ -1229,6 +1229,94 @@ impl fmt::Debug for Instance {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMicromapEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct MicromapEXT(u64);
+
+impl Handle for MicromapEXT {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::MICROMAP_EXT;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for MicromapEXT {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for MicromapEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "MicromapEXT({:p})", self.0 as *const u8)
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpticalFlowSessionNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct OpticalFlowSessionNV(u64);
+
+impl Handle for OpticalFlowSessionNV {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::OPTICAL_FLOW_SESSION_NV;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for OpticalFlowSessionNV {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for OpticalFlowSessionNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "OpticalFlowSessionNV({:p})", self.0 as *const u8)
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPerformanceConfigurationINTEL.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
