@@ -40,7 +40,9 @@ pub struct DeviceCommands {
     pub bind_image_memory: PFN_vkBindImageMemory,
     pub bind_image_memory2: PFN_vkBindImageMemory2,
     pub bind_image_memory2_khr: PFN_vkBindImageMemory2KHR,
+    pub bind_optical_flow_session_image_nv: PFN_vkBindOpticalFlowSessionImageNV,
     pub build_acceleration_structures_khr: PFN_vkBuildAccelerationStructuresKHR,
+    pub build_micromaps_ext: PFN_vkBuildMicromapsEXT,
     pub cmd_begin_conditional_rendering_ext: PFN_vkCmdBeginConditionalRenderingEXT,
     pub cmd_begin_query: PFN_vkCmdBeginQuery,
     pub cmd_begin_query_indexed_ext: PFN_vkCmdBeginQueryIndexedEXT,
@@ -67,6 +69,7 @@ pub struct DeviceCommands {
     pub cmd_build_acceleration_structures_indirect_khr:
         PFN_vkCmdBuildAccelerationStructuresIndirectKHR,
     pub cmd_build_acceleration_structures_khr: PFN_vkCmdBuildAccelerationStructuresKHR,
+    pub cmd_build_micromaps_ext: PFN_vkCmdBuildMicromapsEXT,
     pub cmd_clear_attachments: PFN_vkCmdClearAttachments,
     pub cmd_clear_color_image: PFN_vkCmdClearColorImage,
     pub cmd_clear_depth_stencil_image: PFN_vkCmdClearDepthStencilImage,
@@ -88,6 +91,9 @@ pub struct DeviceCommands {
     pub cmd_copy_image_to_buffer2_khr: PFN_vkCmdCopyImageToBuffer2KHR,
     pub cmd_copy_memory_to_acceleration_structure_khr:
         PFN_vkCmdCopyMemoryToAccelerationStructureKHR,
+    pub cmd_copy_memory_to_micromap_ext: PFN_vkCmdCopyMemoryToMicromapEXT,
+    pub cmd_copy_micromap_ext: PFN_vkCmdCopyMicromapEXT,
+    pub cmd_copy_micromap_to_memory_ext: PFN_vkCmdCopyMicromapToMemoryEXT,
     pub cmd_copy_query_pool_results: PFN_vkCmdCopyQueryPoolResults,
     pub cmd_cu_launch_kernel_nvx: PFN_vkCmdCuLaunchKernelNVX,
     pub cmd_debug_marker_begin_ext: PFN_vkCmdDebugMarkerBeginEXT,
@@ -131,6 +137,7 @@ pub struct DeviceCommands {
     pub cmd_next_subpass: PFN_vkCmdNextSubpass,
     pub cmd_next_subpass2: PFN_vkCmdNextSubpass2,
     pub cmd_next_subpass2_khr: PFN_vkCmdNextSubpass2KHR,
+    pub cmd_optical_flow_execute_nv: PFN_vkCmdOpticalFlowExecuteNV,
     pub cmd_pipeline_barrier: PFN_vkCmdPipelineBarrier,
     pub cmd_pipeline_barrier2: PFN_vkCmdPipelineBarrier2,
     pub cmd_pipeline_barrier2_khr: PFN_vkCmdPipelineBarrier2KHR,
@@ -145,10 +152,23 @@ pub struct DeviceCommands {
     pub cmd_resolve_image: PFN_vkCmdResolveImage,
     pub cmd_resolve_image2: PFN_vkCmdResolveImage2,
     pub cmd_resolve_image2_khr: PFN_vkCmdResolveImage2KHR,
+    pub cmd_set_alpha_to_coverage_enable_ext: PFN_vkCmdSetAlphaToCoverageEnableEXT,
+    pub cmd_set_alpha_to_one_enable_ext: PFN_vkCmdSetAlphaToOneEnableEXT,
     pub cmd_set_blend_constants: PFN_vkCmdSetBlendConstants,
     pub cmd_set_checkpoint_nv: PFN_vkCmdSetCheckpointNV,
     pub cmd_set_coarse_sample_order_nv: PFN_vkCmdSetCoarseSampleOrderNV,
+    pub cmd_set_color_blend_advanced_ext: PFN_vkCmdSetColorBlendAdvancedEXT,
+    pub cmd_set_color_blend_enable_ext: PFN_vkCmdSetColorBlendEnableEXT,
+    pub cmd_set_color_blend_equation_ext: PFN_vkCmdSetColorBlendEquationEXT,
     pub cmd_set_color_write_enable_ext: PFN_vkCmdSetColorWriteEnableEXT,
+    pub cmd_set_color_write_mask_ext: PFN_vkCmdSetColorWriteMaskEXT,
+    pub cmd_set_conservative_rasterization_mode_ext: PFN_vkCmdSetConservativeRasterizationModeEXT,
+    pub cmd_set_coverage_modulation_mode_nv: PFN_vkCmdSetCoverageModulationModeNV,
+    pub cmd_set_coverage_modulation_table_enable_nv: PFN_vkCmdSetCoverageModulationTableEnableNV,
+    pub cmd_set_coverage_modulation_table_nv: PFN_vkCmdSetCoverageModulationTableNV,
+    pub cmd_set_coverage_reduction_mode_nv: PFN_vkCmdSetCoverageReductionModeNV,
+    pub cmd_set_coverage_to_color_enable_nv: PFN_vkCmdSetCoverageToColorEnableNV,
+    pub cmd_set_coverage_to_color_location_nv: PFN_vkCmdSetCoverageToColorLocationNV,
     pub cmd_set_cull_mode: PFN_vkCmdSetCullMode,
     pub cmd_set_cull_mode_ext: PFN_vkCmdSetCullModeEXT,
     pub cmd_set_depth_bias: PFN_vkCmdSetDepthBias,
@@ -157,6 +177,9 @@ pub struct DeviceCommands {
     pub cmd_set_depth_bounds: PFN_vkCmdSetDepthBounds,
     pub cmd_set_depth_bounds_test_enable: PFN_vkCmdSetDepthBoundsTestEnable,
     pub cmd_set_depth_bounds_test_enable_ext: PFN_vkCmdSetDepthBoundsTestEnableEXT,
+    pub cmd_set_depth_clamp_enable_ext: PFN_vkCmdSetDepthClampEnableEXT,
+    pub cmd_set_depth_clip_enable_ext: PFN_vkCmdSetDepthClipEnableEXT,
+    pub cmd_set_depth_clip_negative_one_to_one_ext: PFN_vkCmdSetDepthClipNegativeOneToOneEXT,
     pub cmd_set_depth_compare_op: PFN_vkCmdSetDepthCompareOp,
     pub cmd_set_depth_compare_op_ext: PFN_vkCmdSetDepthCompareOpEXT,
     pub cmd_set_depth_test_enable: PFN_vkCmdSetDepthTestEnable,
@@ -170,28 +193,42 @@ pub struct DeviceCommands {
     pub cmd_set_event2: PFN_vkCmdSetEvent2,
     pub cmd_set_event2_khr: PFN_vkCmdSetEvent2KHR,
     pub cmd_set_exclusive_scissor_nv: PFN_vkCmdSetExclusiveScissorNV,
+    pub cmd_set_extra_primitive_overestimation_size_ext:
+        PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT,
     pub cmd_set_fragment_shading_rate_enum_nv: PFN_vkCmdSetFragmentShadingRateEnumNV,
     pub cmd_set_fragment_shading_rate_khr: PFN_vkCmdSetFragmentShadingRateKHR,
     pub cmd_set_front_face: PFN_vkCmdSetFrontFace,
     pub cmd_set_front_face_ext: PFN_vkCmdSetFrontFaceEXT,
+    pub cmd_set_line_rasterization_mode_ext: PFN_vkCmdSetLineRasterizationModeEXT,
     pub cmd_set_line_stipple_ext: PFN_vkCmdSetLineStippleEXT,
+    pub cmd_set_line_stipple_enable_ext: PFN_vkCmdSetLineStippleEnableEXT,
     pub cmd_set_line_width: PFN_vkCmdSetLineWidth,
     pub cmd_set_logic_op_ext: PFN_vkCmdSetLogicOpEXT,
+    pub cmd_set_logic_op_enable_ext: PFN_vkCmdSetLogicOpEnableEXT,
     pub cmd_set_patch_control_points_ext: PFN_vkCmdSetPatchControlPointsEXT,
     pub cmd_set_performance_marker_intel: PFN_vkCmdSetPerformanceMarkerINTEL,
     pub cmd_set_performance_override_intel: PFN_vkCmdSetPerformanceOverrideINTEL,
     pub cmd_set_performance_stream_marker_intel: PFN_vkCmdSetPerformanceStreamMarkerINTEL,
+    pub cmd_set_polygon_mode_ext: PFN_vkCmdSetPolygonModeEXT,
     pub cmd_set_primitive_restart_enable: PFN_vkCmdSetPrimitiveRestartEnable,
     pub cmd_set_primitive_restart_enable_ext: PFN_vkCmdSetPrimitiveRestartEnableEXT,
     pub cmd_set_primitive_topology: PFN_vkCmdSetPrimitiveTopology,
     pub cmd_set_primitive_topology_ext: PFN_vkCmdSetPrimitiveTopologyEXT,
+    pub cmd_set_provoking_vertex_mode_ext: PFN_vkCmdSetProvokingVertexModeEXT,
+    pub cmd_set_rasterization_samples_ext: PFN_vkCmdSetRasterizationSamplesEXT,
+    pub cmd_set_rasterization_stream_ext: PFN_vkCmdSetRasterizationStreamEXT,
     pub cmd_set_rasterizer_discard_enable: PFN_vkCmdSetRasterizerDiscardEnable,
     pub cmd_set_rasterizer_discard_enable_ext: PFN_vkCmdSetRasterizerDiscardEnableEXT,
     pub cmd_set_ray_tracing_pipeline_stack_size_khr: PFN_vkCmdSetRayTracingPipelineStackSizeKHR,
+    pub cmd_set_representative_fragment_test_enable_nv:
+        PFN_vkCmdSetRepresentativeFragmentTestEnableNV,
     pub cmd_set_sample_locations_ext: PFN_vkCmdSetSampleLocationsEXT,
+    pub cmd_set_sample_locations_enable_ext: PFN_vkCmdSetSampleLocationsEnableEXT,
+    pub cmd_set_sample_mask_ext: PFN_vkCmdSetSampleMaskEXT,
     pub cmd_set_scissor: PFN_vkCmdSetScissor,
     pub cmd_set_scissor_with_count: PFN_vkCmdSetScissorWithCount,
     pub cmd_set_scissor_with_count_ext: PFN_vkCmdSetScissorWithCountEXT,
+    pub cmd_set_shading_rate_image_enable_nv: PFN_vkCmdSetShadingRateImageEnableNV,
     pub cmd_set_stencil_compare_mask: PFN_vkCmdSetStencilCompareMask,
     pub cmd_set_stencil_op: PFN_vkCmdSetStencilOp,
     pub cmd_set_stencil_op_ext: PFN_vkCmdSetStencilOpEXT,
@@ -199,9 +236,12 @@ pub struct DeviceCommands {
     pub cmd_set_stencil_test_enable: PFN_vkCmdSetStencilTestEnable,
     pub cmd_set_stencil_test_enable_ext: PFN_vkCmdSetStencilTestEnableEXT,
     pub cmd_set_stencil_write_mask: PFN_vkCmdSetStencilWriteMask,
+    pub cmd_set_tessellation_domain_origin_ext: PFN_vkCmdSetTessellationDomainOriginEXT,
     pub cmd_set_vertex_input_ext: PFN_vkCmdSetVertexInputEXT,
     pub cmd_set_viewport: PFN_vkCmdSetViewport,
     pub cmd_set_viewport_shading_rate_palette_nv: PFN_vkCmdSetViewportShadingRatePaletteNV,
+    pub cmd_set_viewport_swizzle_nv: PFN_vkCmdSetViewportSwizzleNV,
+    pub cmd_set_viewport_w_scaling_enable_nv: PFN_vkCmdSetViewportWScalingEnableNV,
     pub cmd_set_viewport_w_scaling_nv: PFN_vkCmdSetViewportWScalingNV,
     pub cmd_set_viewport_with_count: PFN_vkCmdSetViewportWithCount,
     pub cmd_set_viewport_with_count_ext: PFN_vkCmdSetViewportWithCountEXT,
@@ -220,6 +260,7 @@ pub struct DeviceCommands {
         PFN_vkCmdWriteAccelerationStructuresPropertiesNV,
     pub cmd_write_buffer_marker2_amd: PFN_vkCmdWriteBufferMarker2AMD,
     pub cmd_write_buffer_marker_amd: PFN_vkCmdWriteBufferMarkerAMD,
+    pub cmd_write_micromaps_properties_ext: PFN_vkCmdWriteMicromapsPropertiesEXT,
     pub cmd_write_timestamp: PFN_vkCmdWriteTimestamp,
     pub cmd_write_timestamp2: PFN_vkCmdWriteTimestamp2,
     pub cmd_write_timestamp2_khr: PFN_vkCmdWriteTimestamp2KHR,
@@ -227,6 +268,9 @@ pub struct DeviceCommands {
     pub copy_acceleration_structure_khr: PFN_vkCopyAccelerationStructureKHR,
     pub copy_acceleration_structure_to_memory_khr: PFN_vkCopyAccelerationStructureToMemoryKHR,
     pub copy_memory_to_acceleration_structure_khr: PFN_vkCopyMemoryToAccelerationStructureKHR,
+    pub copy_memory_to_micromap_ext: PFN_vkCopyMemoryToMicromapEXT,
+    pub copy_micromap_ext: PFN_vkCopyMicromapEXT,
+    pub copy_micromap_to_memory_ext: PFN_vkCopyMicromapToMemoryEXT,
     pub create_acceleration_structure_khr: PFN_vkCreateAccelerationStructureKHR,
     pub create_acceleration_structure_nv: PFN_vkCreateAccelerationStructureNV,
     pub create_buffer: PFN_vkCreateBuffer,
@@ -248,6 +292,8 @@ pub struct DeviceCommands {
     pub create_image: PFN_vkCreateImage,
     pub create_image_view: PFN_vkCreateImageView,
     pub create_indirect_commands_layout_nv: PFN_vkCreateIndirectCommandsLayoutNV,
+    pub create_micromap_ext: PFN_vkCreateMicromapEXT,
+    pub create_optical_flow_session_nv: PFN_vkCreateOpticalFlowSessionNV,
     pub create_pipeline_cache: PFN_vkCreatePipelineCache,
     pub create_pipeline_layout: PFN_vkCreatePipelineLayout,
     pub create_private_data_slot: PFN_vkCreatePrivateDataSlot,
@@ -289,6 +335,8 @@ pub struct DeviceCommands {
     pub destroy_image: PFN_vkDestroyImage,
     pub destroy_image_view: PFN_vkDestroyImageView,
     pub destroy_indirect_commands_layout_nv: PFN_vkDestroyIndirectCommandsLayoutNV,
+    pub destroy_micromap_ext: PFN_vkDestroyMicromapEXT,
+    pub destroy_optical_flow_session_nv: PFN_vkDestroyOpticalFlowSessionNV,
     pub destroy_pipeline: PFN_vkDestroyPipeline,
     pub destroy_pipeline_cache: PFN_vkDestroyPipelineCache,
     pub destroy_pipeline_layout: PFN_vkDestroyPipelineLayout,
@@ -342,6 +390,7 @@ pub struct DeviceCommands {
         PFN_vkGetDeviceAccelerationStructureCompatibilityKHR,
     pub get_device_buffer_memory_requirements: PFN_vkGetDeviceBufferMemoryRequirements,
     pub get_device_buffer_memory_requirements_khr: PFN_vkGetDeviceBufferMemoryRequirementsKHR,
+    pub get_device_fault_info_ext: PFN_vkGetDeviceFaultInfoEXT,
     pub get_device_group_peer_memory_features: PFN_vkGetDeviceGroupPeerMemoryFeatures,
     pub get_device_group_peer_memory_features_khr: PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR,
     pub get_device_group_present_capabilities_khr: PFN_vkGetDeviceGroupPresentCapabilitiesKHR,
@@ -355,6 +404,7 @@ pub struct DeviceCommands {
     pub get_device_memory_commitment: PFN_vkGetDeviceMemoryCommitment,
     pub get_device_memory_opaque_capture_address: PFN_vkGetDeviceMemoryOpaqueCaptureAddress,
     pub get_device_memory_opaque_capture_address_khr: PFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR,
+    pub get_device_micromap_compatibility_ext: PFN_vkGetDeviceMicromapCompatibilityEXT,
     pub get_device_queue: PFN_vkGetDeviceQueue,
     pub get_device_queue2: PFN_vkGetDeviceQueue2,
     pub get_device_subpass_shading_max_workgroup_size_huawei:
@@ -388,6 +438,7 @@ pub struct DeviceCommands {
     pub get_memory_win32_handle_properties_khr: PFN_vkGetMemoryWin32HandlePropertiesKHR,
     pub get_memory_zircon_handle_fuchsia: PFN_vkGetMemoryZirconHandleFUCHSIA,
     pub get_memory_zircon_handle_properties_fuchsia: PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA,
+    pub get_micromap_build_sizes_ext: PFN_vkGetMicromapBuildSizesEXT,
     pub get_past_presentation_timing_google: PFN_vkGetPastPresentationTimingGOOGLE,
     pub get_performance_parameter_intel: PFN_vkGetPerformanceParameterINTEL,
     pub get_physical_device_calibrateable_time_domains_ext:
@@ -398,6 +449,8 @@ pub struct DeviceCommands {
         PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR,
     pub get_physical_device_multisample_properties_ext:
         PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT,
+    pub get_physical_device_optical_flow_image_formats_nv:
+        PFN_vkGetPhysicalDeviceOpticalFlowImageFormatsNV,
     pub get_physical_device_present_rectangles_khr: PFN_vkGetPhysicalDevicePresentRectanglesKHR,
     pub get_physical_device_queue_family_performance_query_passes_khr:
         PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR,
@@ -491,6 +544,7 @@ pub struct DeviceCommands {
     pub wait_semaphores_khr: PFN_vkWaitSemaphoresKHR,
     pub write_acceleration_structures_properties_khr:
         PFN_vkWriteAccelerationStructuresPropertiesKHR,
+    pub write_micromaps_properties_ext: PFN_vkWriteMicromapsPropertiesEXT,
 }
 
 impl DeviceCommands {
@@ -756,6 +810,23 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            bind_optical_flow_session_image_nv: {
+                let value = loader(b"vkBindOpticalFlowSessionImageNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _session: OpticalFlowSessionNV,
+                        _binding_point: OpticalFlowSessionBindingPointNV,
+                        _view: ImageView,
+                        _layout: ImageLayout,
+                    ) -> Result {
+                        panic!("could not load vkBindOpticalFlowSessionImageNV")
+                    }
+                    fallback
+                }
+            },
             build_acceleration_structures_khr: {
                 let value = loader(b"vkBuildAccelerationStructuresKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -769,6 +840,22 @@ impl DeviceCommands {
                         _build_range_infos: *const *const AccelerationStructureBuildRangeInfoKHR,
                     ) -> Result {
                         panic!("could not load vkBuildAccelerationStructuresKHR")
+                    }
+                    fallback
+                }
+            },
+            build_micromaps_ext: {
+                let value = loader(b"vkBuildMicromapsEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _deferred_operation: DeferredOperationKHR,
+                        _info_count: u32,
+                        _infos: *const MicromapBuildInfoEXT,
+                    ) -> Result {
+                        panic!("could not load vkBuildMicromapsEXT")
                     }
                     fallback
                 }
@@ -1187,6 +1274,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_build_micromaps_ext: {
+                let value = loader(b"vkCmdBuildMicromapsEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _info_count: u32,
+                        _infos: *const MicromapBuildInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdBuildMicromapsEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_clear_attachments: {
                 let value = loader(b"vkCmdClearAttachments\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -1486,6 +1588,48 @@ impl DeviceCommands {
                         _info: *const CopyMemoryToAccelerationStructureInfoKHR,
                     ) {
                         panic!("could not load vkCmdCopyMemoryToAccelerationStructureKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_copy_memory_to_micromap_ext: {
+                let value = loader(b"vkCmdCopyMemoryToMicromapEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _info: *const CopyMemoryToMicromapInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdCopyMemoryToMicromapEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_copy_micromap_ext: {
+                let value = loader(b"vkCmdCopyMicromapEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _info: *const CopyMicromapInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdCopyMicromapEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_copy_micromap_to_memory_ext: {
+                let value = loader(b"vkCmdCopyMicromapToMemoryEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _info: *const CopyMicromapToMemoryInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdCopyMicromapToMemoryEXT")
                     }
                     fallback
                 }
@@ -2185,6 +2329,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_optical_flow_execute_nv: {
+                let value = loader(b"vkCmdOpticalFlowExecuteNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _session: OpticalFlowSessionNV,
+                        _execute_info: *const OpticalFlowExecuteInfoNV,
+                    ) {
+                        panic!("could not load vkCmdOpticalFlowExecuteNV")
+                    }
+                    fallback
+                }
+            },
             cmd_pipeline_barrier: {
                 let value = loader(b"vkCmdPipelineBarrier\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2410,6 +2569,34 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_alpha_to_coverage_enable_ext: {
+                let value = loader(b"vkCmdSetAlphaToCoverageEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _alpha_to_coverage_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetAlphaToCoverageEnableEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_alpha_to_one_enable_ext: {
+                let value = loader(b"vkCmdSetAlphaToOneEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _alpha_to_one_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetAlphaToOneEnableEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_blend_constants: {
                 let value = loader(b"vkCmdSetBlendConstants\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2454,6 +2641,54 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_color_blend_advanced_ext: {
+                let value = loader(b"vkCmdSetColorBlendAdvancedEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _first_attachment: u32,
+                        _attachment_count: u32,
+                        _color_blend_advanced: *const ColorBlendAdvancedEXT,
+                    ) {
+                        panic!("could not load vkCmdSetColorBlendAdvancedEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_color_blend_enable_ext: {
+                let value = loader(b"vkCmdSetColorBlendEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _first_attachment: u32,
+                        _attachment_count: u32,
+                        _color_blend_enables: *const Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetColorBlendEnableEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_color_blend_equation_ext: {
+                let value = loader(b"vkCmdSetColorBlendEquationEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _first_attachment: u32,
+                        _attachment_count: u32,
+                        _color_blend_equations: *const ColorBlendEquationEXT,
+                    ) {
+                        panic!("could not load vkCmdSetColorBlendEquationEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_color_write_enable_ext: {
                 let value = loader(b"vkCmdSetColorWriteEnableEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2465,6 +2700,125 @@ impl DeviceCommands {
                         _color_write_enables: *const Bool32,
                     ) {
                         panic!("could not load vkCmdSetColorWriteEnableEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_color_write_mask_ext: {
+                let value = loader(b"vkCmdSetColorWriteMaskEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _first_attachment: u32,
+                        _attachment_count: u32,
+                        _color_write_masks: *const ColorComponentFlags,
+                    ) {
+                        panic!("could not load vkCmdSetColorWriteMaskEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_conservative_rasterization_mode_ext: {
+                let value = loader(
+                    b"vkCmdSetConservativeRasterizationModeEXT\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _conservative_rasterization_mode: ConservativeRasterizationModeEXT,
+                    ) {
+                        panic!("could not load vkCmdSetConservativeRasterizationModeEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_coverage_modulation_mode_nv: {
+                let value = loader(b"vkCmdSetCoverageModulationModeNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _coverage_modulation_mode: CoverageModulationModeNV,
+                    ) {
+                        panic!("could not load vkCmdSetCoverageModulationModeNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_coverage_modulation_table_enable_nv: {
+                let value = loader(b"vkCmdSetCoverageModulationTableEnableNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _coverage_modulation_table_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetCoverageModulationTableEnableNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_coverage_modulation_table_nv: {
+                let value = loader(b"vkCmdSetCoverageModulationTableNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _coverage_modulation_table_count: u32,
+                        _coverage_modulation_table: *const f32,
+                    ) {
+                        panic!("could not load vkCmdSetCoverageModulationTableNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_coverage_reduction_mode_nv: {
+                let value = loader(b"vkCmdSetCoverageReductionModeNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _coverage_reduction_mode: CoverageReductionModeNV,
+                    ) {
+                        panic!("could not load vkCmdSetCoverageReductionModeNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_coverage_to_color_enable_nv: {
+                let value = loader(b"vkCmdSetCoverageToColorEnableNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _coverage_to_color_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetCoverageToColorEnableNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_coverage_to_color_location_nv: {
+                let value = loader(b"vkCmdSetCoverageToColorLocationNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _coverage_to_color_location: u32,
+                    ) {
+                        panic!("could not load vkCmdSetCoverageToColorLocationNV")
                     }
                     fallback
                 }
@@ -2580,6 +2934,48 @@ impl DeviceCommands {
                         _depth_bounds_test_enable: Bool32,
                     ) {
                         panic!("could not load vkCmdSetDepthBoundsTestEnableEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_depth_clamp_enable_ext: {
+                let value = loader(b"vkCmdSetDepthClampEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _depth_clamp_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetDepthClampEnableEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_depth_clip_enable_ext: {
+                let value = loader(b"vkCmdSetDepthClipEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _depth_clip_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetDepthClipEnableEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_depth_clip_negative_one_to_one_ext: {
+                let value = loader(b"vkCmdSetDepthClipNegativeOneToOneEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _negative_one_to_one: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetDepthClipNegativeOneToOneEXT")
                     }
                     fallback
                 }
@@ -2773,6 +3169,24 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_extra_primitive_overestimation_size_ext: {
+                let value = loader(
+                    b"vkCmdSetExtraPrimitiveOverestimationSizeEXT\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _extra_primitive_overestimation_size: f32,
+                    ) {
+                        panic!("could not load vkCmdSetExtraPrimitiveOverestimationSizeEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_fragment_shading_rate_enum_nv: {
                 let value = loader(b"vkCmdSetFragmentShadingRateEnumNV\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2831,6 +3245,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_line_rasterization_mode_ext: {
+                let value = loader(b"vkCmdSetLineRasterizationModeEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _line_rasterization_mode: LineRasterizationModeEXT,
+                    ) {
+                        panic!("could not load vkCmdSetLineRasterizationModeEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_line_stipple_ext: {
                 let value = loader(b"vkCmdSetLineStippleEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2842,6 +3270,20 @@ impl DeviceCommands {
                         _line_stipple_pattern: u16,
                     ) {
                         panic!("could not load vkCmdSetLineStippleEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_line_stipple_enable_ext: {
+                let value = loader(b"vkCmdSetLineStippleEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _stippled_line_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetLineStippleEnableEXT")
                     }
                     fallback
                 }
@@ -2870,6 +3312,20 @@ impl DeviceCommands {
                         _logic_op: LogicOp,
                     ) {
                         panic!("could not load vkCmdSetLogicOpEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_logic_op_enable_ext: {
+                let value = loader(b"vkCmdSetLogicOpEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _logic_op_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetLogicOpEnableEXT")
                     }
                     fallback
                 }
@@ -2930,6 +3386,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_polygon_mode_ext: {
+                let value = loader(b"vkCmdSetPolygonModeEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _polygon_mode: PolygonMode,
+                    ) {
+                        panic!("could not load vkCmdSetPolygonModeEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_primitive_restart_enable: {
                 let value = loader(b"vkCmdSetPrimitiveRestartEnable\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2986,6 +3456,48 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_provoking_vertex_mode_ext: {
+                let value = loader(b"vkCmdSetProvokingVertexModeEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _provoking_vertex_mode: ProvokingVertexModeEXT,
+                    ) {
+                        panic!("could not load vkCmdSetProvokingVertexModeEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_rasterization_samples_ext: {
+                let value = loader(b"vkCmdSetRasterizationSamplesEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _rasterization_samples: SampleCountFlags,
+                    ) {
+                        panic!("could not load vkCmdSetRasterizationSamplesEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_rasterization_stream_ext: {
+                let value = loader(b"vkCmdSetRasterizationStreamEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _rasterization_stream: u32,
+                    ) {
+                        panic!("could not load vkCmdSetRasterizationStreamEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_rasterizer_discard_enable: {
                 let value = loader(b"vkCmdSetRasterizerDiscardEnable\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -3028,6 +3540,24 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_representative_fragment_test_enable_nv: {
+                let value = loader(
+                    b"vkCmdSetRepresentativeFragmentTestEnableNV\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _representative_fragment_test_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetRepresentativeFragmentTestEnableNV")
+                    }
+                    fallback
+                }
+            },
             cmd_set_sample_locations_ext: {
                 let value = loader(b"vkCmdSetSampleLocationsEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -3038,6 +3568,35 @@ impl DeviceCommands {
                         _sample_locations_info: *const SampleLocationsInfoEXT,
                     ) {
                         panic!("could not load vkCmdSetSampleLocationsEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_sample_locations_enable_ext: {
+                let value = loader(b"vkCmdSetSampleLocationsEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _sample_locations_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetSampleLocationsEnableEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_sample_mask_ext: {
+                let value = loader(b"vkCmdSetSampleMaskEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _samples: SampleCountFlags,
+                        _sample_mask: *const SampleMask,
+                    ) {
+                        panic!("could not load vkCmdSetSampleMaskEXT")
                     }
                     fallback
                 }
@@ -3084,6 +3643,20 @@ impl DeviceCommands {
                         _scissors: *const Rect2D,
                     ) {
                         panic!("could not load vkCmdSetScissorWithCountEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_shading_rate_image_enable_nv: {
+                let value = loader(b"vkCmdSetShadingRateImageEnableNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _shading_rate_image_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetShadingRateImageEnableNV")
                     }
                     fallback
                 }
@@ -3197,6 +3770,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_tessellation_domain_origin_ext: {
+                let value = loader(b"vkCmdSetTessellationDomainOriginEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _domain_origin: TessellationDomainOrigin,
+                    ) {
+                        panic!("could not load vkCmdSetTessellationDomainOriginEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_vertex_input_ext: {
                 let value = loader(b"vkCmdSetVertexInputEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -3242,6 +3829,36 @@ impl DeviceCommands {
                         _shading_rate_palettes: *const ShadingRatePaletteNV,
                     ) {
                         panic!("could not load vkCmdSetViewportShadingRatePaletteNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_viewport_swizzle_nv: {
+                let value = loader(b"vkCmdSetViewportSwizzleNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _first_viewport: u32,
+                        _viewport_count: u32,
+                        _viewport_swizzles: *const ViewportSwizzleNV,
+                    ) {
+                        panic!("could not load vkCmdSetViewportSwizzleNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_viewport_w_scaling_enable_nv: {
+                let value = loader(b"vkCmdSetViewportWScalingEnableNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _viewport_w_scaling_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetViewportWScalingEnableNV")
                     }
                     fallback
                 }
@@ -3532,6 +4149,24 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_write_micromaps_properties_ext: {
+                let value = loader(b"vkCmdWriteMicromapsPropertiesEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _micromap_count: u32,
+                        _micromaps: *const MicromapEXT,
+                        _query_type: QueryType,
+                        _query_pool: QueryPool,
+                        _first_query: u32,
+                    ) {
+                        panic!("could not load vkCmdWriteMicromapsPropertiesEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_write_timestamp: {
                 let value = loader(b"vkCmdWriteTimestamp\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -3636,6 +4271,51 @@ impl DeviceCommands {
                         _info: *const CopyMemoryToAccelerationStructureInfoKHR,
                     ) -> Result {
                         panic!("could not load vkCopyMemoryToAccelerationStructureKHR")
+                    }
+                    fallback
+                }
+            },
+            copy_memory_to_micromap_ext: {
+                let value = loader(b"vkCopyMemoryToMicromapEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _deferred_operation: DeferredOperationKHR,
+                        _info: *const CopyMemoryToMicromapInfoEXT,
+                    ) -> Result {
+                        panic!("could not load vkCopyMemoryToMicromapEXT")
+                    }
+                    fallback
+                }
+            },
+            copy_micromap_ext: {
+                let value = loader(b"vkCopyMicromapEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _deferred_operation: DeferredOperationKHR,
+                        _info: *const CopyMicromapInfoEXT,
+                    ) -> Result {
+                        panic!("could not load vkCopyMicromapEXT")
+                    }
+                    fallback
+                }
+            },
+            copy_micromap_to_memory_ext: {
+                let value = loader(b"vkCopyMicromapToMemoryEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _deferred_operation: DeferredOperationKHR,
+                        _info: *const CopyMicromapToMemoryInfoEXT,
+                    ) -> Result {
+                        panic!("could not load vkCopyMicromapToMemoryEXT")
                     }
                     fallback
                 }
@@ -3975,6 +4655,38 @@ impl DeviceCommands {
                         _indirect_commands_layout: *mut IndirectCommandsLayoutNV,
                     ) -> Result {
                         panic!("could not load vkCreateIndirectCommandsLayoutNV")
+                    }
+                    fallback
+                }
+            },
+            create_micromap_ext: {
+                let value = loader(b"vkCreateMicromapEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const MicromapCreateInfoEXT,
+                        _allocator: *const AllocationCallbacks,
+                        _micromap: *mut MicromapEXT,
+                    ) -> Result {
+                        panic!("could not load vkCreateMicromapEXT")
+                    }
+                    fallback
+                }
+            },
+            create_optical_flow_session_nv: {
+                let value = loader(b"vkCreateOpticalFlowSessionNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const OpticalFlowSessionCreateInfoNV,
+                        _allocator: *const AllocationCallbacks,
+                        _session: *mut OpticalFlowSessionNV,
+                    ) -> Result {
+                        panic!("could not load vkCreateOpticalFlowSessionNV")
                     }
                     fallback
                 }
@@ -4610,6 +5322,36 @@ impl DeviceCommands {
                         _allocator: *const AllocationCallbacks,
                     ) {
                         panic!("could not load vkDestroyIndirectCommandsLayoutNV")
+                    }
+                    fallback
+                }
+            },
+            destroy_micromap_ext: {
+                let value = loader(b"vkDestroyMicromapEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _micromap: MicromapEXT,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyMicromapEXT")
+                    }
+                    fallback
+                }
+            },
+            destroy_optical_flow_session_nv: {
+                let value = loader(b"vkDestroyOpticalFlowSessionNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _session: OpticalFlowSessionNV,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyOpticalFlowSessionNV")
                     }
                     fallback
                 }
@@ -5335,6 +6077,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_device_fault_info_ext: {
+                let value = loader(b"vkGetDeviceFaultInfoEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _fault_counts: *mut DeviceFaultCountsEXT,
+                        _fault_info: *mut DeviceFaultInfoEXT,
+                    ) -> Result {
+                        panic!("could not load vkGetDeviceFaultInfoEXT")
+                    }
+                    fallback
+                }
+            },
             get_device_group_peer_memory_features: {
                 let value = loader(b"vkGetDeviceGroupPeerMemoryFeatures\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -5526,6 +6283,21 @@ impl DeviceCommands {
                         _info: *const DeviceMemoryOpaqueCaptureAddressInfo,
                     ) -> u64 {
                         panic!("could not load vkGetDeviceMemoryOpaqueCaptureAddressKHR")
+                    }
+                    fallback
+                }
+            },
+            get_device_micromap_compatibility_ext: {
+                let value = loader(b"vkGetDeviceMicromapCompatibilityEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _version_info: *const MicromapVersionInfoEXT,
+                        _compatibility: *mut AccelerationStructureCompatibilityKHR,
+                    ) {
+                        panic!("could not load vkGetDeviceMicromapCompatibilityEXT")
                     }
                     fallback
                 }
@@ -6014,6 +6786,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_micromap_build_sizes_ext: {
+                let value = loader(b"vkGetMicromapBuildSizesEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _build_type: AccelerationStructureBuildTypeKHR,
+                        _build_info: *const MicromapBuildInfoEXT,
+                        _size_info: *mut MicromapBuildSizesInfoEXT,
+                    ) {
+                        panic!("could not load vkGetMicromapBuildSizesEXT")
+                    }
+                    fallback
+                }
+            },
             get_past_presentation_timing_google: {
                 let value = loader(b"vkGetPastPresentationTimingGOOGLE\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -6117,6 +6905,26 @@ impl DeviceCommands {
                         _multisample_properties: *mut MultisamplePropertiesEXT,
                     ) {
                         panic!("could not load vkGetPhysicalDeviceMultisamplePropertiesEXT")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_optical_flow_image_formats_nv: {
+                let value = loader(
+                    b"vkGetPhysicalDeviceOpticalFlowImageFormatsNV\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _optical_flow_image_format_info: *const OpticalFlowImageFormatInfoNV,
+                        _format_count: *mut u32,
+                        _image_format_properties: *mut OpticalFlowImageFormatPropertiesNV,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceOpticalFlowImageFormatsNV")
                     }
                     fallback
                 }
@@ -7451,6 +8259,25 @@ impl DeviceCommands {
                         _stride: usize,
                     ) -> Result {
                         panic!("could not load vkWriteAccelerationStructuresPropertiesKHR")
+                    }
+                    fallback
+                }
+            },
+            write_micromaps_properties_ext: {
+                let value = loader(b"vkWriteMicromapsPropertiesEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _micromap_count: u32,
+                        _micromaps: *const MicromapEXT,
+                        _query_type: QueryType,
+                        _data_size: usize,
+                        _data: *mut c_void,
+                        _stride: usize,
+                    ) -> Result {
+                        panic!("could not load vkWriteMicromapsPropertiesEXT")
                     }
                     fallback
                 }

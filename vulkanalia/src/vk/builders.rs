@@ -902,6 +902,10 @@ unsafe impl ExtendsAccelerationStructureGeometryTrianglesDataKHR
     for AccelerationStructureGeometryMotionTrianglesDataNV
 {
 }
+unsafe impl ExtendsAccelerationStructureGeometryTrianglesDataKHR
+    for AccelerationStructureTrianglesOpacityMicromapEXT
+{
+}
 
 unsafe impl Cast for AccelerationStructureGeometryTrianglesDataKHR {
     type Target = AccelerationStructureGeometryTrianglesDataKHR;
@@ -1612,6 +1616,109 @@ impl ops::DerefMut for AccelerationStructureSRTMotionInstanceNVBuilder {
 
 unsafe impl Cast for AccelerationStructureSRTMotionInstanceNVBuilder {
     type Target = AccelerationStructureSRTMotionInstanceNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for AccelerationStructureTrianglesOpacityMicromapEXT {
+    type Target = AccelerationStructureTrianglesOpacityMicromapEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for AccelerationStructureTrianglesOpacityMicromapEXT {
+    type Builder = AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'b>;
+}
+
+/// A builder for a [`AccelerationStructureTrianglesOpacityMicromapEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'b> {
+    value: AccelerationStructureTrianglesOpacityMicromapEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'b> {
+    #[inline]
+    pub fn index_type(mut self, index_type: IndexType) -> Self {
+        self.value.index_type = index_type;
+        self
+    }
+
+    #[inline]
+    pub fn index_buffer(mut self, index_buffer: DeviceOrHostAddressConstKHR) -> Self {
+        self.value.index_buffer = index_buffer;
+        self
+    }
+
+    #[inline]
+    pub fn index_stride(mut self, index_stride: DeviceSize) -> Self {
+        self.value.index_stride = index_stride;
+        self
+    }
+
+    #[inline]
+    pub fn base_triangle(mut self, base_triangle: u32) -> Self {
+        self.value.base_triangle = base_triangle;
+        self
+    }
+
+    #[inline]
+    pub fn usage_counts(
+        mut self,
+        usage_counts: &'b [impl Cast<Target = MicromapUsageEXT>],
+    ) -> Self {
+        self.value.usage_counts_count = usage_counts.len() as u32;
+        self.value.usage_counts = usage_counts.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn pointer_usage_counts(
+        mut self,
+        pointer_usage_counts: &'b [*const MicromapUsageEXT],
+    ) -> Self {
+        self.value.usage_counts_count = pointer_usage_counts.len() as u32;
+        self.value.pointer_usage_counts = pointer_usage_counts.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn micromap(mut self, micromap: MicromapEXT) -> Self {
+        self.value.micromap = micromap;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AccelerationStructureTrianglesOpacityMicromapEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'b> {
+    type Target = AccelerationStructureTrianglesOpacityMicromapEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'b> {
+    type Target = AccelerationStructureTrianglesOpacityMicromapEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -6135,6 +6242,176 @@ unsafe impl<'b> Cast for CoarseSampleOrderCustomNVBuilder<'b> {
     }
 }
 
+unsafe impl Cast for ColorBlendAdvancedEXT {
+    type Target = ColorBlendAdvancedEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ColorBlendAdvancedEXT {
+    type Builder = ColorBlendAdvancedEXTBuilder;
+}
+
+/// A builder for a [`ColorBlendAdvancedEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ColorBlendAdvancedEXTBuilder {
+    value: ColorBlendAdvancedEXT,
+}
+
+impl ColorBlendAdvancedEXTBuilder {
+    #[inline]
+    pub fn advanced_blend_op(mut self, advanced_blend_op: BlendOp) -> Self {
+        self.value.advanced_blend_op = advanced_blend_op;
+        self
+    }
+
+    #[inline]
+    pub fn src_premultiplied(mut self, src_premultiplied: bool) -> Self {
+        self.value.src_premultiplied = src_premultiplied as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn dst_premultiplied(mut self, dst_premultiplied: bool) -> Self {
+        self.value.dst_premultiplied = dst_premultiplied as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn blend_overlap(mut self, blend_overlap: BlendOverlapEXT) -> Self {
+        self.value.blend_overlap = blend_overlap;
+        self
+    }
+
+    #[inline]
+    pub fn clamp_results(mut self, clamp_results: bool) -> Self {
+        self.value.clamp_results = clamp_results as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ColorBlendAdvancedEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ColorBlendAdvancedEXTBuilder {
+    type Target = ColorBlendAdvancedEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ColorBlendAdvancedEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ColorBlendAdvancedEXTBuilder {
+    type Target = ColorBlendAdvancedEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ColorBlendEquationEXT {
+    type Target = ColorBlendEquationEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ColorBlendEquationEXT {
+    type Builder = ColorBlendEquationEXTBuilder;
+}
+
+/// A builder for a [`ColorBlendEquationEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ColorBlendEquationEXTBuilder {
+    value: ColorBlendEquationEXT,
+}
+
+impl ColorBlendEquationEXTBuilder {
+    #[inline]
+    pub fn src_color_blend_factor(mut self, src_color_blend_factor: BlendFactor) -> Self {
+        self.value.src_color_blend_factor = src_color_blend_factor;
+        self
+    }
+
+    #[inline]
+    pub fn dst_color_blend_factor(mut self, dst_color_blend_factor: BlendFactor) -> Self {
+        self.value.dst_color_blend_factor = dst_color_blend_factor;
+        self
+    }
+
+    #[inline]
+    pub fn color_blend_op(mut self, color_blend_op: BlendOp) -> Self {
+        self.value.color_blend_op = color_blend_op;
+        self
+    }
+
+    #[inline]
+    pub fn src_alpha_blend_factor(mut self, src_alpha_blend_factor: BlendFactor) -> Self {
+        self.value.src_alpha_blend_factor = src_alpha_blend_factor;
+        self
+    }
+
+    #[inline]
+    pub fn dst_alpha_blend_factor(mut self, dst_alpha_blend_factor: BlendFactor) -> Self {
+        self.value.dst_alpha_blend_factor = dst_alpha_blend_factor;
+        self
+    }
+
+    #[inline]
+    pub fn alpha_blend_op(mut self, alpha_blend_op: BlendOp) -> Self {
+        self.value.alpha_blend_op = alpha_blend_op;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ColorBlendEquationEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ColorBlendEquationEXTBuilder {
+    type Target = ColorBlendEquationEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ColorBlendEquationEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ColorBlendEquationEXTBuilder {
+    type Target = ColorBlendEquationEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for CommandBufferAllocateInfo {
     type Target = CommandBufferAllocateInfo;
 
@@ -7911,6 +8188,216 @@ unsafe impl Cast for CopyMemoryToAccelerationStructureInfoKHRBuilder {
     }
 }
 
+unsafe impl Cast for CopyMemoryToMicromapInfoEXT {
+    type Target = CopyMemoryToMicromapInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for CopyMemoryToMicromapInfoEXT {
+    type Builder = CopyMemoryToMicromapInfoEXTBuilder;
+}
+
+/// A builder for a [`CopyMemoryToMicromapInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CopyMemoryToMicromapInfoEXTBuilder {
+    value: CopyMemoryToMicromapInfoEXT,
+}
+
+impl CopyMemoryToMicromapInfoEXTBuilder {
+    #[inline]
+    pub fn src(mut self, src: DeviceOrHostAddressConstKHR) -> Self {
+        self.value.src = src;
+        self
+    }
+
+    #[inline]
+    pub fn dst(mut self, dst: MicromapEXT) -> Self {
+        self.value.dst = dst;
+        self
+    }
+
+    #[inline]
+    pub fn mode(mut self, mode: CopyMicromapModeEXT) -> Self {
+        self.value.mode = mode;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CopyMemoryToMicromapInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for CopyMemoryToMicromapInfoEXTBuilder {
+    type Target = CopyMemoryToMicromapInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for CopyMemoryToMicromapInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for CopyMemoryToMicromapInfoEXTBuilder {
+    type Target = CopyMemoryToMicromapInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CopyMicromapInfoEXT {
+    type Target = CopyMicromapInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for CopyMicromapInfoEXT {
+    type Builder = CopyMicromapInfoEXTBuilder;
+}
+
+/// A builder for a [`CopyMicromapInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CopyMicromapInfoEXTBuilder {
+    value: CopyMicromapInfoEXT,
+}
+
+impl CopyMicromapInfoEXTBuilder {
+    #[inline]
+    pub fn src(mut self, src: MicromapEXT) -> Self {
+        self.value.src = src;
+        self
+    }
+
+    #[inline]
+    pub fn dst(mut self, dst: MicromapEXT) -> Self {
+        self.value.dst = dst;
+        self
+    }
+
+    #[inline]
+    pub fn mode(mut self, mode: CopyMicromapModeEXT) -> Self {
+        self.value.mode = mode;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CopyMicromapInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for CopyMicromapInfoEXTBuilder {
+    type Target = CopyMicromapInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for CopyMicromapInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for CopyMicromapInfoEXTBuilder {
+    type Target = CopyMicromapInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CopyMicromapToMemoryInfoEXT {
+    type Target = CopyMicromapToMemoryInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for CopyMicromapToMemoryInfoEXT {
+    type Builder = CopyMicromapToMemoryInfoEXTBuilder;
+}
+
+/// A builder for a [`CopyMicromapToMemoryInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CopyMicromapToMemoryInfoEXTBuilder {
+    value: CopyMicromapToMemoryInfoEXT,
+}
+
+impl CopyMicromapToMemoryInfoEXTBuilder {
+    #[inline]
+    pub fn src(mut self, src: MicromapEXT) -> Self {
+        self.value.src = src;
+        self
+    }
+
+    #[inline]
+    pub fn dst(mut self, dst: DeviceOrHostAddressKHR) -> Self {
+        self.value.dst = dst;
+        self
+    }
+
+    #[inline]
+    pub fn mode(mut self, mode: CopyMicromapModeEXT) -> Self {
+        self.value.mode = mode;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CopyMicromapToMemoryInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for CopyMicromapToMemoryInfoEXTBuilder {
+    type Target = CopyMicromapToMemoryInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for CopyMicromapToMemoryInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for CopyMicromapToMemoryInfoEXTBuilder {
+    type Target = CopyMicromapToMemoryInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for CuFunctionCreateInfoNVX {
     type Target = CuFunctionCreateInfoNVX;
 
@@ -8580,6 +9067,10 @@ unsafe impl<'b> Cast for DebugUtilsLabelEXTBuilder<'b> {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`DebugUtilsMessengerCallbackDataEXT`].
+pub unsafe trait ExtendsDebugUtilsMessengerCallbackDataEXT: fmt::Debug {}
+unsafe impl ExtendsDebugUtilsMessengerCallbackDataEXT for DeviceAddressBindingCallbackDataEXT {}
+
 unsafe impl Cast for DebugUtilsMessengerCallbackDataEXT {
     type Target = DebugUtilsMessengerCallbackDataEXT;
 
@@ -8602,6 +9093,17 @@ pub struct DebugUtilsMessengerCallbackDataEXTBuilder<'b> {
 }
 
 impl<'b> DebugUtilsMessengerCallbackDataEXTBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsDebugUtilsMessengerCallbackDataEXT,
+    {
+        let next = (next.as_mut() as *mut T).cast::<DebugUtilsMessengerCallbackDataEXT>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn flags(mut self, flags: DebugUtilsMessengerCallbackDataFlagsEXT) -> Self {
         self.value.flags = flags;
@@ -10361,6 +10863,82 @@ unsafe impl Cast for DescriptorUpdateTemplateEntryBuilder {
     }
 }
 
+unsafe impl Cast for DeviceAddressBindingCallbackDataEXT {
+    type Target = DeviceAddressBindingCallbackDataEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DeviceAddressBindingCallbackDataEXT {
+    type Builder = DeviceAddressBindingCallbackDataEXTBuilder;
+}
+
+/// A builder for a [`DeviceAddressBindingCallbackDataEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DeviceAddressBindingCallbackDataEXTBuilder {
+    value: DeviceAddressBindingCallbackDataEXT,
+}
+
+impl DeviceAddressBindingCallbackDataEXTBuilder {
+    #[inline]
+    pub fn flags(mut self, flags: DeviceAddressBindingFlagsEXT) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn base_address(mut self, base_address: DeviceAddress) -> Self {
+        self.value.base_address = base_address;
+        self
+    }
+
+    #[inline]
+    pub fn size(mut self, size: DeviceSize) -> Self {
+        self.value.size = size;
+        self
+    }
+
+    #[inline]
+    pub fn binding_type(mut self, binding_type: DeviceAddressBindingTypeEXT) -> Self {
+        self.value.binding_type = binding_type;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DeviceAddressBindingCallbackDataEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for DeviceAddressBindingCallbackDataEXTBuilder {
+    type Target = DeviceAddressBindingCallbackDataEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DeviceAddressBindingCallbackDataEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DeviceAddressBindingCallbackDataEXTBuilder {
+    type Target = DeviceAddressBindingCallbackDataEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for DeviceBufferMemoryRequirements {
     type Target = DeviceBufferMemoryRequirements;
 
@@ -10432,6 +11010,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice4444FormatsFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice8BitStorageFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceASTCDecodeFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAccelerationStructureFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAddressBindingReportFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAmigoProfilingFeaturesSEC {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
@@ -10458,8 +11037,10 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDiagnosticsConfigFeaturesN
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDynamicRenderingFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExclusiveScissorFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFaultFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFeatures2 {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
@@ -10494,13 +11075,17 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultisampledRenderToSingle
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceOpacityMicromapFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceOpticalFlowFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerformanceQueryFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineCreationCacheControlFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelinePropertiesFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineProtectedAccessFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineRobustnessFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePortabilitySubsetFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentBarrierFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentIdFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePresentWaitFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {}
@@ -10845,6 +11430,417 @@ impl ops::DerefMut for DeviceEventInfoEXTBuilder {
 
 unsafe impl Cast for DeviceEventInfoEXTBuilder {
     type Target = DeviceEventInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DeviceFaultAddressInfoEXT {
+    type Target = DeviceFaultAddressInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DeviceFaultAddressInfoEXT {
+    type Builder = DeviceFaultAddressInfoEXTBuilder;
+}
+
+/// A builder for a [`DeviceFaultAddressInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DeviceFaultAddressInfoEXTBuilder {
+    value: DeviceFaultAddressInfoEXT,
+}
+
+impl DeviceFaultAddressInfoEXTBuilder {
+    #[inline]
+    pub fn address_type(mut self, address_type: DeviceFaultAddressTypeEXT) -> Self {
+        self.value.address_type = address_type;
+        self
+    }
+
+    #[inline]
+    pub fn reported_address(mut self, reported_address: DeviceAddress) -> Self {
+        self.value.reported_address = reported_address;
+        self
+    }
+
+    #[inline]
+    pub fn address_precision(mut self, address_precision: DeviceSize) -> Self {
+        self.value.address_precision = address_precision;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DeviceFaultAddressInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for DeviceFaultAddressInfoEXTBuilder {
+    type Target = DeviceFaultAddressInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DeviceFaultAddressInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DeviceFaultAddressInfoEXTBuilder {
+    type Target = DeviceFaultAddressInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DeviceFaultCountsEXT {
+    type Target = DeviceFaultCountsEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DeviceFaultCountsEXT {
+    type Builder = DeviceFaultCountsEXTBuilder;
+}
+
+/// A builder for a [`DeviceFaultCountsEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DeviceFaultCountsEXTBuilder {
+    value: DeviceFaultCountsEXT,
+}
+
+impl DeviceFaultCountsEXTBuilder {
+    #[inline]
+    pub fn address_info_count(mut self, address_info_count: u32) -> Self {
+        self.value.address_info_count = address_info_count;
+        self
+    }
+
+    #[inline]
+    pub fn vendor_info_count(mut self, vendor_info_count: u32) -> Self {
+        self.value.vendor_info_count = vendor_info_count;
+        self
+    }
+
+    #[inline]
+    pub fn vendor_binary_size(mut self, vendor_binary_size: DeviceSize) -> Self {
+        self.value.vendor_binary_size = vendor_binary_size;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DeviceFaultCountsEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for DeviceFaultCountsEXTBuilder {
+    type Target = DeviceFaultCountsEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DeviceFaultCountsEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DeviceFaultCountsEXTBuilder {
+    type Target = DeviceFaultCountsEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DeviceFaultInfoEXT {
+    type Target = DeviceFaultInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for DeviceFaultInfoEXT {
+    type Builder = DeviceFaultInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`DeviceFaultInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DeviceFaultInfoEXTBuilder<'b> {
+    value: DeviceFaultInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> DeviceFaultInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn description(
+        mut self,
+        description: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>,
+    ) -> Self {
+        self.value.description = description.into();
+        self
+    }
+
+    #[inline]
+    pub fn address_infos(
+        mut self,
+        address_infos: &'b mut impl Cast<Target = DeviceFaultAddressInfoEXT>,
+    ) -> Self {
+        self.value.address_infos = address_infos.as_mut();
+        self
+    }
+
+    #[inline]
+    pub fn vendor_infos(
+        mut self,
+        vendor_infos: &'b mut impl Cast<Target = DeviceFaultVendorInfoEXT>,
+    ) -> Self {
+        self.value.vendor_infos = vendor_infos.as_mut();
+        self
+    }
+
+    #[inline]
+    pub fn vendor_binary_data<T>(mut self, vendor_binary_data: &'b mut T) -> Self {
+        self.value.vendor_binary_data = (vendor_binary_data as *mut T).cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DeviceFaultInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for DeviceFaultInfoEXTBuilder<'b> {
+    type Target = DeviceFaultInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for DeviceFaultInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for DeviceFaultInfoEXTBuilder<'b> {
+    type Target = DeviceFaultInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DeviceFaultVendorBinaryHeaderVersionOneEXT {
+    type Target = DeviceFaultVendorBinaryHeaderVersionOneEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DeviceFaultVendorBinaryHeaderVersionOneEXT {
+    type Builder = DeviceFaultVendorBinaryHeaderVersionOneEXTBuilder;
+}
+
+/// A builder for a [`DeviceFaultVendorBinaryHeaderVersionOneEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DeviceFaultVendorBinaryHeaderVersionOneEXTBuilder {
+    value: DeviceFaultVendorBinaryHeaderVersionOneEXT,
+}
+
+impl DeviceFaultVendorBinaryHeaderVersionOneEXTBuilder {
+    #[inline]
+    pub fn header_size(mut self, header_size: u32) -> Self {
+        self.value.header_size = header_size;
+        self
+    }
+
+    #[inline]
+    pub fn header_version(
+        mut self,
+        header_version: DeviceFaultVendorBinaryHeaderVersionEXT,
+    ) -> Self {
+        self.value.header_version = header_version;
+        self
+    }
+
+    #[inline]
+    pub fn vendor_id(mut self, vendor_id: u32) -> Self {
+        self.value.vendor_id = vendor_id;
+        self
+    }
+
+    #[inline]
+    pub fn device_id(mut self, device_id: u32) -> Self {
+        self.value.device_id = device_id;
+        self
+    }
+
+    #[inline]
+    pub fn driver_version(mut self, driver_version: u32) -> Self {
+        self.value.driver_version = driver_version;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_cache_uuid(
+        mut self,
+        pipeline_cache_uuid: impl Into<ByteArray<UUID_SIZE>>,
+    ) -> Self {
+        self.value.pipeline_cache_uuid = pipeline_cache_uuid.into();
+        self
+    }
+
+    #[inline]
+    pub fn application_name_offset(mut self, application_name_offset: u32) -> Self {
+        self.value.application_name_offset = application_name_offset;
+        self
+    }
+
+    #[inline]
+    pub fn application_version(mut self, application_version: u32) -> Self {
+        self.value.application_version = application_version;
+        self
+    }
+
+    #[inline]
+    pub fn engine_name_offset(mut self, engine_name_offset: u32) -> Self {
+        self.value.engine_name_offset = engine_name_offset;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DeviceFaultVendorBinaryHeaderVersionOneEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for DeviceFaultVendorBinaryHeaderVersionOneEXTBuilder {
+    type Target = DeviceFaultVendorBinaryHeaderVersionOneEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DeviceFaultVendorBinaryHeaderVersionOneEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DeviceFaultVendorBinaryHeaderVersionOneEXTBuilder {
+    type Target = DeviceFaultVendorBinaryHeaderVersionOneEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DeviceFaultVendorInfoEXT {
+    type Target = DeviceFaultVendorInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DeviceFaultVendorInfoEXT {
+    type Builder = DeviceFaultVendorInfoEXTBuilder;
+}
+
+/// A builder for a [`DeviceFaultVendorInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DeviceFaultVendorInfoEXTBuilder {
+    value: DeviceFaultVendorInfoEXT,
+}
+
+impl DeviceFaultVendorInfoEXTBuilder {
+    #[inline]
+    pub fn description(
+        mut self,
+        description: impl Into<StringArray<MAX_DESCRIPTION_SIZE>>,
+    ) -> Self {
+        self.value.description = description.into();
+        self
+    }
+
+    #[inline]
+    pub fn vendor_fault_code(mut self, vendor_fault_code: u64) -> Self {
+        self.value.vendor_fault_code = vendor_fault_code;
+        self
+    }
+
+    #[inline]
+    pub fn vendor_fault_data(mut self, vendor_fault_data: u64) -> Self {
+        self.value.vendor_fault_data = vendor_fault_data;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DeviceFaultVendorInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for DeviceFaultVendorInfoEXTBuilder {
+    type Target = DeviceFaultVendorInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DeviceFaultVendorInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DeviceFaultVendorInfoEXTBuilder {
+    type Target = DeviceFaultVendorInfoEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -18432,6 +19428,7 @@ unsafe impl ExtendsImageCreateInfo for ImageStencilUsageCreateInfo {}
 unsafe impl ExtendsImageCreateInfo for ImageSwapchainCreateInfoKHR {}
 unsafe impl ExtendsImageCreateInfo for ImportMetalIOSurfaceInfoEXT {}
 unsafe impl ExtendsImageCreateInfo for ImportMetalTextureInfoEXT {}
+unsafe impl ExtendsImageCreateInfo for OpticalFlowImageFormatInfoNV {}
 
 unsafe impl Cast for ImageCreateInfo {
     type Target = ImageCreateInfo;
@@ -23886,6 +24883,484 @@ unsafe impl<'b> Cast for MetalSurfaceCreateInfoEXTBuilder<'b> {
     }
 }
 
+unsafe impl Cast for MicromapBuildInfoEXT {
+    type Target = MicromapBuildInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for MicromapBuildInfoEXT {
+    type Builder = MicromapBuildInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`MicromapBuildInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MicromapBuildInfoEXTBuilder<'b> {
+    value: MicromapBuildInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> MicromapBuildInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn type_(mut self, type_: MicromapTypeEXT) -> Self {
+        self.value.type_ = type_;
+        self
+    }
+
+    #[inline]
+    pub fn flags(mut self, flags: BuildMicromapFlagsEXT) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn mode(mut self, mode: BuildMicromapModeEXT) -> Self {
+        self.value.mode = mode;
+        self
+    }
+
+    #[inline]
+    pub fn dst_micromap(mut self, dst_micromap: MicromapEXT) -> Self {
+        self.value.dst_micromap = dst_micromap;
+        self
+    }
+
+    #[inline]
+    pub fn usage_counts(
+        mut self,
+        usage_counts: &'b [impl Cast<Target = MicromapUsageEXT>],
+    ) -> Self {
+        self.value.usage_counts_count = usage_counts.len() as u32;
+        self.value.usage_counts = usage_counts.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn pointer_usage_counts(
+        mut self,
+        pointer_usage_counts: &'b [*const MicromapUsageEXT],
+    ) -> Self {
+        self.value.usage_counts_count = pointer_usage_counts.len() as u32;
+        self.value.pointer_usage_counts = pointer_usage_counts.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn data(mut self, data: DeviceOrHostAddressConstKHR) -> Self {
+        self.value.data = data;
+        self
+    }
+
+    #[inline]
+    pub fn scratch_data(mut self, scratch_data: DeviceOrHostAddressKHR) -> Self {
+        self.value.scratch_data = scratch_data;
+        self
+    }
+
+    #[inline]
+    pub fn triangle_array(mut self, triangle_array: DeviceOrHostAddressConstKHR) -> Self {
+        self.value.triangle_array = triangle_array;
+        self
+    }
+
+    #[inline]
+    pub fn triangle_array_stride(mut self, triangle_array_stride: DeviceSize) -> Self {
+        self.value.triangle_array_stride = triangle_array_stride;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MicromapBuildInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for MicromapBuildInfoEXTBuilder<'b> {
+    type Target = MicromapBuildInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for MicromapBuildInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for MicromapBuildInfoEXTBuilder<'b> {
+    type Target = MicromapBuildInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for MicromapBuildSizesInfoEXT {
+    type Target = MicromapBuildSizesInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MicromapBuildSizesInfoEXT {
+    type Builder = MicromapBuildSizesInfoEXTBuilder;
+}
+
+/// A builder for a [`MicromapBuildSizesInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MicromapBuildSizesInfoEXTBuilder {
+    value: MicromapBuildSizesInfoEXT,
+}
+
+impl MicromapBuildSizesInfoEXTBuilder {
+    #[inline]
+    pub fn micromap_size(mut self, micromap_size: DeviceSize) -> Self {
+        self.value.micromap_size = micromap_size;
+        self
+    }
+
+    #[inline]
+    pub fn build_scratch_size(mut self, build_scratch_size: DeviceSize) -> Self {
+        self.value.build_scratch_size = build_scratch_size;
+        self
+    }
+
+    #[inline]
+    pub fn discardable(mut self, discardable: bool) -> Self {
+        self.value.discardable = discardable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MicromapBuildSizesInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for MicromapBuildSizesInfoEXTBuilder {
+    type Target = MicromapBuildSizesInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MicromapBuildSizesInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MicromapBuildSizesInfoEXTBuilder {
+    type Target = MicromapBuildSizesInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for MicromapCreateInfoEXT {
+    type Target = MicromapCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MicromapCreateInfoEXT {
+    type Builder = MicromapCreateInfoEXTBuilder;
+}
+
+/// A builder for a [`MicromapCreateInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MicromapCreateInfoEXTBuilder {
+    value: MicromapCreateInfoEXT,
+}
+
+impl MicromapCreateInfoEXTBuilder {
+    #[inline]
+    pub fn create_flags(mut self, create_flags: MicromapCreateFlagsEXT) -> Self {
+        self.value.create_flags = create_flags;
+        self
+    }
+
+    #[inline]
+    pub fn buffer(mut self, buffer: Buffer) -> Self {
+        self.value.buffer = buffer;
+        self
+    }
+
+    #[inline]
+    pub fn offset(mut self, offset: DeviceSize) -> Self {
+        self.value.offset = offset;
+        self
+    }
+
+    #[inline]
+    pub fn size(mut self, size: DeviceSize) -> Self {
+        self.value.size = size;
+        self
+    }
+
+    #[inline]
+    pub fn type_(mut self, type_: MicromapTypeEXT) -> Self {
+        self.value.type_ = type_;
+        self
+    }
+
+    #[inline]
+    pub fn device_address(mut self, device_address: DeviceAddress) -> Self {
+        self.value.device_address = device_address;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MicromapCreateInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for MicromapCreateInfoEXTBuilder {
+    type Target = MicromapCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MicromapCreateInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MicromapCreateInfoEXTBuilder {
+    type Target = MicromapCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for MicromapTriangleEXT {
+    type Target = MicromapTriangleEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MicromapTriangleEXT {
+    type Builder = MicromapTriangleEXTBuilder;
+}
+
+/// A builder for a [`MicromapTriangleEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MicromapTriangleEXTBuilder {
+    value: MicromapTriangleEXT,
+}
+
+impl MicromapTriangleEXTBuilder {
+    #[inline]
+    pub fn data_offset(mut self, data_offset: u32) -> Self {
+        self.value.data_offset = data_offset;
+        self
+    }
+
+    #[inline]
+    pub fn subdivision_level(mut self, subdivision_level: u16) -> Self {
+        self.value.subdivision_level = subdivision_level;
+        self
+    }
+
+    #[inline]
+    pub fn format(mut self, format: u16) -> Self {
+        self.value.format = format;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MicromapTriangleEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for MicromapTriangleEXTBuilder {
+    type Target = MicromapTriangleEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MicromapTriangleEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MicromapTriangleEXTBuilder {
+    type Target = MicromapTriangleEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for MicromapUsageEXT {
+    type Target = MicromapUsageEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MicromapUsageEXT {
+    type Builder = MicromapUsageEXTBuilder;
+}
+
+/// A builder for a [`MicromapUsageEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MicromapUsageEXTBuilder {
+    value: MicromapUsageEXT,
+}
+
+impl MicromapUsageEXTBuilder {
+    #[inline]
+    pub fn count(mut self, count: u32) -> Self {
+        self.value.count = count;
+        self
+    }
+
+    #[inline]
+    pub fn subdivision_level(mut self, subdivision_level: u32) -> Self {
+        self.value.subdivision_level = subdivision_level;
+        self
+    }
+
+    #[inline]
+    pub fn format(mut self, format: u32) -> Self {
+        self.value.format = format;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MicromapUsageEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for MicromapUsageEXTBuilder {
+    type Target = MicromapUsageEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MicromapUsageEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MicromapUsageEXTBuilder {
+    type Target = MicromapUsageEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for MicromapVersionInfoEXT {
+    type Target = MicromapVersionInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for MicromapVersionInfoEXT {
+    type Builder = MicromapVersionInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`MicromapVersionInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MicromapVersionInfoEXTBuilder<'b> {
+    value: MicromapVersionInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> MicromapVersionInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn version_data(mut self, version_data: &'b [u8]) -> Self {
+        self.value.version_data = version_data.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MicromapVersionInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for MicromapVersionInfoEXTBuilder<'b> {
+    type Target = MicromapVersionInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for MicromapVersionInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for MicromapVersionInfoEXTBuilder<'b> {
+    type Target = MicromapVersionInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for MultiDrawIndexedInfoEXT {
     type Target = MultiDrawIndexedInfoEXT;
 
@@ -24467,6 +25942,381 @@ impl ops::DerefMut for Offset3DBuilder {
 
 unsafe impl Cast for Offset3DBuilder {
     type Target = Offset3D;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for OpticalFlowExecuteInfoNV {
+    type Target = OpticalFlowExecuteInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for OpticalFlowExecuteInfoNV {
+    type Builder = OpticalFlowExecuteInfoNVBuilder<'b>;
+}
+
+/// A builder for a [`OpticalFlowExecuteInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct OpticalFlowExecuteInfoNVBuilder<'b> {
+    value: OpticalFlowExecuteInfoNV,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> OpticalFlowExecuteInfoNVBuilder<'b> {
+    #[inline]
+    pub fn flags(mut self, flags: OpticalFlowExecuteFlagsNV) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn regions(mut self, regions: &'b [impl Cast<Target = Rect2D>]) -> Self {
+        self.value.region_count = regions.len() as u32;
+        self.value.regions = regions.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> OpticalFlowExecuteInfoNV {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for OpticalFlowExecuteInfoNVBuilder<'b> {
+    type Target = OpticalFlowExecuteInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for OpticalFlowExecuteInfoNVBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for OpticalFlowExecuteInfoNVBuilder<'b> {
+    type Target = OpticalFlowExecuteInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for OpticalFlowImageFormatInfoNV {
+    type Target = OpticalFlowImageFormatInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for OpticalFlowImageFormatInfoNV {
+    type Builder = OpticalFlowImageFormatInfoNVBuilder;
+}
+
+/// A builder for a [`OpticalFlowImageFormatInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct OpticalFlowImageFormatInfoNVBuilder {
+    value: OpticalFlowImageFormatInfoNV,
+}
+
+impl OpticalFlowImageFormatInfoNVBuilder {
+    #[inline]
+    pub fn usage(mut self, usage: OpticalFlowUsageFlagsNV) -> Self {
+        self.value.usage = usage;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> OpticalFlowImageFormatInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for OpticalFlowImageFormatInfoNVBuilder {
+    type Target = OpticalFlowImageFormatInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for OpticalFlowImageFormatInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for OpticalFlowImageFormatInfoNVBuilder {
+    type Target = OpticalFlowImageFormatInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for OpticalFlowImageFormatPropertiesNV {
+    type Target = OpticalFlowImageFormatPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for OpticalFlowImageFormatPropertiesNV {
+    type Builder = OpticalFlowImageFormatPropertiesNVBuilder;
+}
+
+/// A builder for a [`OpticalFlowImageFormatPropertiesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct OpticalFlowImageFormatPropertiesNVBuilder {
+    value: OpticalFlowImageFormatPropertiesNV,
+}
+
+impl OpticalFlowImageFormatPropertiesNVBuilder {
+    #[inline]
+    pub fn format(mut self, format: Format) -> Self {
+        self.value.format = format;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> OpticalFlowImageFormatPropertiesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for OpticalFlowImageFormatPropertiesNVBuilder {
+    type Target = OpticalFlowImageFormatPropertiesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for OpticalFlowImageFormatPropertiesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for OpticalFlowImageFormatPropertiesNVBuilder {
+    type Target = OpticalFlowImageFormatPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+/// A Vulkan struct that can be used to extend a [`OpticalFlowSessionCreateInfoNV`].
+pub unsafe trait ExtendsOpticalFlowSessionCreateInfoNV: fmt::Debug {}
+unsafe impl ExtendsOpticalFlowSessionCreateInfoNV for OpticalFlowSessionCreatePrivateDataInfoNV {}
+
+unsafe impl Cast for OpticalFlowSessionCreateInfoNV {
+    type Target = OpticalFlowSessionCreateInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for OpticalFlowSessionCreateInfoNV {
+    type Builder = OpticalFlowSessionCreateInfoNVBuilder<'b>;
+}
+
+/// A builder for a [`OpticalFlowSessionCreateInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct OpticalFlowSessionCreateInfoNVBuilder<'b> {
+    value: OpticalFlowSessionCreateInfoNV,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> OpticalFlowSessionCreateInfoNVBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsOpticalFlowSessionCreateInfoNV,
+    {
+        let next = (next.as_mut() as *mut T).cast::<OpticalFlowSessionCreateInfoNV>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
+    #[inline]
+    pub fn width(mut self, width: u32) -> Self {
+        self.value.width = width;
+        self
+    }
+
+    #[inline]
+    pub fn height(mut self, height: u32) -> Self {
+        self.value.height = height;
+        self
+    }
+
+    #[inline]
+    pub fn image_format(mut self, image_format: Format) -> Self {
+        self.value.image_format = image_format;
+        self
+    }
+
+    #[inline]
+    pub fn flow_vector_format(mut self, flow_vector_format: Format) -> Self {
+        self.value.flow_vector_format = flow_vector_format;
+        self
+    }
+
+    #[inline]
+    pub fn cost_format(mut self, cost_format: Format) -> Self {
+        self.value.cost_format = cost_format;
+        self
+    }
+
+    #[inline]
+    pub fn output_grid_size(mut self, output_grid_size: OpticalFlowGridSizeFlagsNV) -> Self {
+        self.value.output_grid_size = output_grid_size;
+        self
+    }
+
+    #[inline]
+    pub fn hint_grid_size(mut self, hint_grid_size: OpticalFlowGridSizeFlagsNV) -> Self {
+        self.value.hint_grid_size = hint_grid_size;
+        self
+    }
+
+    #[inline]
+    pub fn performance_level(mut self, performance_level: OpticalFlowPerformanceLevelNV) -> Self {
+        self.value.performance_level = performance_level;
+        self
+    }
+
+    #[inline]
+    pub fn flags(mut self, flags: OpticalFlowSessionCreateFlagsNV) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> OpticalFlowSessionCreateInfoNV {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for OpticalFlowSessionCreateInfoNVBuilder<'b> {
+    type Target = OpticalFlowSessionCreateInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for OpticalFlowSessionCreateInfoNVBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for OpticalFlowSessionCreateInfoNVBuilder<'b> {
+    type Target = OpticalFlowSessionCreateInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for OpticalFlowSessionCreatePrivateDataInfoNV {
+    type Target = OpticalFlowSessionCreatePrivateDataInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for OpticalFlowSessionCreatePrivateDataInfoNV {
+    type Builder = OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b>;
+}
+
+/// A builder for a [`OpticalFlowSessionCreatePrivateDataInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b> {
+    value: OpticalFlowSessionCreatePrivateDataInfoNV,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b> {
+    #[inline]
+    pub fn id(mut self, id: u32) -> Self {
+        self.value.id = id;
+        self
+    }
+
+    #[inline]
+    pub fn size(mut self, size: u32) -> Self {
+        self.value.size = size;
+        self
+    }
+
+    #[inline]
+    pub fn private_data<T>(mut self, private_data: &'b T) -> Self {
+        self.value.private_data = (private_data as *const T).cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> OpticalFlowSessionCreatePrivateDataInfoNV {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b> {
+    type Target = OpticalFlowSessionCreatePrivateDataInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b> {
+    type Target = OpticalFlowSessionCreatePrivateDataInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -25568,6 +27418,64 @@ impl ops::DerefMut for PhysicalDeviceAccelerationStructurePropertiesKHRBuilder {
 
 unsafe impl Cast for PhysicalDeviceAccelerationStructurePropertiesKHRBuilder {
     type Target = PhysicalDeviceAccelerationStructurePropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceAddressBindingReportFeaturesEXT {
+    type Target = PhysicalDeviceAddressBindingReportFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceAddressBindingReportFeaturesEXT {
+    type Builder = PhysicalDeviceAddressBindingReportFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceAddressBindingReportFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceAddressBindingReportFeaturesEXTBuilder {
+    value: PhysicalDeviceAddressBindingReportFeaturesEXT,
+}
+
+impl PhysicalDeviceAddressBindingReportFeaturesEXTBuilder {
+    #[inline]
+    pub fn report_address_binding(mut self, report_address_binding: bool) -> Self {
+        self.value.report_address_binding = report_address_binding as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceAddressBindingReportFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceAddressBindingReportFeaturesEXTBuilder {
+    type Target = PhysicalDeviceAddressBindingReportFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceAddressBindingReportFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceAddressBindingReportFeaturesEXTBuilder {
+    type Target = PhysicalDeviceAddressBindingReportFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -28496,6 +30404,437 @@ unsafe impl Cast for PhysicalDeviceExtendedDynamicState2FeaturesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceExtendedDynamicState3FeaturesEXT {
+    type Target = PhysicalDeviceExtendedDynamicState3FeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceExtendedDynamicState3FeaturesEXT {
+    type Builder = PhysicalDeviceExtendedDynamicState3FeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceExtendedDynamicState3FeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceExtendedDynamicState3FeaturesEXTBuilder {
+    value: PhysicalDeviceExtendedDynamicState3FeaturesEXT,
+}
+
+impl PhysicalDeviceExtendedDynamicState3FeaturesEXTBuilder {
+    #[inline]
+    pub fn extended_dynamic_state3_tessellation_domain_origin(
+        mut self,
+        extended_dynamic_state3_tessellation_domain_origin: bool,
+    ) -> Self {
+        self.value
+            .extended_dynamic_state3_tessellation_domain_origin =
+            extended_dynamic_state3_tessellation_domain_origin as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state_3depth_clamp_enable(
+        mut self,
+        extended_dynamic_state_3depth_clamp_enable: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state_3depth_clamp_enable =
+            extended_dynamic_state_3depth_clamp_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_polygon_mode(
+        mut self,
+        extended_dynamic_state3_polygon_mode: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_polygon_mode =
+            extended_dynamic_state3_polygon_mode as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_rasterization_samples(
+        mut self,
+        extended_dynamic_state3_rasterization_samples: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_rasterization_samples =
+            extended_dynamic_state3_rasterization_samples as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_sample_mask(
+        mut self,
+        extended_dynamic_state3_sample_mask: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_sample_mask =
+            extended_dynamic_state3_sample_mask as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_alpha_to_coverage_enable(
+        mut self,
+        extended_dynamic_state3_alpha_to_coverage_enable: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_alpha_to_coverage_enable =
+            extended_dynamic_state3_alpha_to_coverage_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_alpha_to_one_enable(
+        mut self,
+        extended_dynamic_state3_alpha_to_one_enable: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_alpha_to_one_enable =
+            extended_dynamic_state3_alpha_to_one_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_logic_op_enable(
+        mut self,
+        extended_dynamic_state3_logic_op_enable: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_logic_op_enable =
+            extended_dynamic_state3_logic_op_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_color_blend_enable(
+        mut self,
+        extended_dynamic_state3_color_blend_enable: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_color_blend_enable =
+            extended_dynamic_state3_color_blend_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_color_blend_equation(
+        mut self,
+        extended_dynamic_state3_color_blend_equation: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_color_blend_equation =
+            extended_dynamic_state3_color_blend_equation as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_color_write_mask(
+        mut self,
+        extended_dynamic_state3_color_write_mask: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_color_write_mask =
+            extended_dynamic_state3_color_write_mask as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_rasterization_stream(
+        mut self,
+        extended_dynamic_state3_rasterization_stream: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_rasterization_stream =
+            extended_dynamic_state3_rasterization_stream as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_conservative_rasterization_mode(
+        mut self,
+        extended_dynamic_state3_conservative_rasterization_mode: bool,
+    ) -> Self {
+        self.value
+            .extended_dynamic_state3_conservative_rasterization_mode =
+            extended_dynamic_state3_conservative_rasterization_mode as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_extra_primitive_overestimation_size(
+        mut self,
+        extended_dynamic_state3_extra_primitive_overestimation_size: bool,
+    ) -> Self {
+        self.value
+            .extended_dynamic_state3_extra_primitive_overestimation_size =
+            extended_dynamic_state3_extra_primitive_overestimation_size as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state_3depth_clip_enable(
+        mut self,
+        extended_dynamic_state_3depth_clip_enable: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state_3depth_clip_enable =
+            extended_dynamic_state_3depth_clip_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_sample_locations_enable(
+        mut self,
+        extended_dynamic_state3_sample_locations_enable: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_sample_locations_enable =
+            extended_dynamic_state3_sample_locations_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_color_blend_advanced(
+        mut self,
+        extended_dynamic_state3_color_blend_advanced: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_color_blend_advanced =
+            extended_dynamic_state3_color_blend_advanced as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_provoking_vertex_mode(
+        mut self,
+        extended_dynamic_state3_provoking_vertex_mode: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_provoking_vertex_mode =
+            extended_dynamic_state3_provoking_vertex_mode as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_line_rasterization_mode(
+        mut self,
+        extended_dynamic_state3_line_rasterization_mode: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_line_rasterization_mode =
+            extended_dynamic_state3_line_rasterization_mode as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_line_stipple_enable(
+        mut self,
+        extended_dynamic_state3_line_stipple_enable: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_line_stipple_enable =
+            extended_dynamic_state3_line_stipple_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state_3depth_clip_negative_one_to_one(
+        mut self,
+        extended_dynamic_state_3depth_clip_negative_one_to_one: bool,
+    ) -> Self {
+        self.value
+            .extended_dynamic_state_3depth_clip_negative_one_to_one =
+            extended_dynamic_state_3depth_clip_negative_one_to_one as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_viewport_w_scaling_enable(
+        mut self,
+        extended_dynamic_state3_viewport_w_scaling_enable: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_viewport_w_scaling_enable =
+            extended_dynamic_state3_viewport_w_scaling_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_viewport_swizzle(
+        mut self,
+        extended_dynamic_state3_viewport_swizzle: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_viewport_swizzle =
+            extended_dynamic_state3_viewport_swizzle as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_coverage_to_color_enable(
+        mut self,
+        extended_dynamic_state3_coverage_to_color_enable: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_coverage_to_color_enable =
+            extended_dynamic_state3_coverage_to_color_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_coverage_to_color_location(
+        mut self,
+        extended_dynamic_state3_coverage_to_color_location: bool,
+    ) -> Self {
+        self.value
+            .extended_dynamic_state3_coverage_to_color_location =
+            extended_dynamic_state3_coverage_to_color_location as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_coverage_modulation_mode(
+        mut self,
+        extended_dynamic_state3_coverage_modulation_mode: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_coverage_modulation_mode =
+            extended_dynamic_state3_coverage_modulation_mode as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_coverage_modulation_table_enable(
+        mut self,
+        extended_dynamic_state3_coverage_modulation_table_enable: bool,
+    ) -> Self {
+        self.value
+            .extended_dynamic_state3_coverage_modulation_table_enable =
+            extended_dynamic_state3_coverage_modulation_table_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_coverage_modulation_table(
+        mut self,
+        extended_dynamic_state3_coverage_modulation_table: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_coverage_modulation_table =
+            extended_dynamic_state3_coverage_modulation_table as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_coverage_reduction_mode(
+        mut self,
+        extended_dynamic_state3_coverage_reduction_mode: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_coverage_reduction_mode =
+            extended_dynamic_state3_coverage_reduction_mode as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_representative_fragment_test_enable(
+        mut self,
+        extended_dynamic_state3_representative_fragment_test_enable: bool,
+    ) -> Self {
+        self.value
+            .extended_dynamic_state3_representative_fragment_test_enable =
+            extended_dynamic_state3_representative_fragment_test_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn extended_dynamic_state3_shading_rate_image_enable(
+        mut self,
+        extended_dynamic_state3_shading_rate_image_enable: bool,
+    ) -> Self {
+        self.value.extended_dynamic_state3_shading_rate_image_enable =
+            extended_dynamic_state3_shading_rate_image_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceExtendedDynamicState3FeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceExtendedDynamicState3FeaturesEXTBuilder {
+    type Target = PhysicalDeviceExtendedDynamicState3FeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceExtendedDynamicState3FeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExtendedDynamicState3FeaturesEXTBuilder {
+    type Target = PhysicalDeviceExtendedDynamicState3FeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExtendedDynamicState3PropertiesEXT {
+    type Target = PhysicalDeviceExtendedDynamicState3PropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceExtendedDynamicState3PropertiesEXT {
+    type Builder = PhysicalDeviceExtendedDynamicState3PropertiesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceExtendedDynamicState3PropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceExtendedDynamicState3PropertiesEXTBuilder {
+    value: PhysicalDeviceExtendedDynamicState3PropertiesEXT,
+}
+
+impl PhysicalDeviceExtendedDynamicState3PropertiesEXTBuilder {
+    #[inline]
+    pub fn dynamic_primitive_topology_unrestricted(
+        mut self,
+        dynamic_primitive_topology_unrestricted: bool,
+    ) -> Self {
+        self.value.dynamic_primitive_topology_unrestricted =
+            dynamic_primitive_topology_unrestricted as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceExtendedDynamicState3PropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceExtendedDynamicState3PropertiesEXTBuilder {
+    type Target = PhysicalDeviceExtendedDynamicState3PropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceExtendedDynamicState3PropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExtendedDynamicState3PropertiesEXTBuilder {
+    type Target = PhysicalDeviceExtendedDynamicState3PropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceExtendedDynamicStateFeaturesEXT {
     type Target = PhysicalDeviceExtendedDynamicStateFeaturesEXT;
 
@@ -28933,6 +31272,70 @@ unsafe impl<'b> Cast for PhysicalDeviceExternalSemaphoreInfoBuilder<'b> {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceFaultFeaturesEXT {
+    type Target = PhysicalDeviceFaultFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceFaultFeaturesEXT {
+    type Builder = PhysicalDeviceFaultFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceFaultFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceFaultFeaturesEXTBuilder {
+    value: PhysicalDeviceFaultFeaturesEXT,
+}
+
+impl PhysicalDeviceFaultFeaturesEXTBuilder {
+    #[inline]
+    pub fn device_fault(mut self, device_fault: bool) -> Self {
+        self.value.device_fault = device_fault as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn device_fault_vendor_binary(mut self, device_fault_vendor_binary: bool) -> Self {
+        self.value.device_fault_vendor_binary = device_fault_vendor_binary as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceFaultFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceFaultFeaturesEXTBuilder {
+    type Target = PhysicalDeviceFaultFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceFaultFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceFaultFeaturesEXTBuilder {
+    type Target = PhysicalDeviceFaultFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceFeatures {
     type Target = PhysicalDeviceFeatures;
 
@@ -29361,6 +31764,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice4444FormatsFeatures
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevice8BitStorageFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceASTCDecodeFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAccelerationStructureFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAddressBindingReportFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAmigoProfilingFeaturesSEC {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT
@@ -29393,8 +31797,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDiagnosticsConfigFe
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDynamicRenderingFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExclusiveScissorFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFaultFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {}
@@ -29434,6 +31840,8 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiviewFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceOpacityMicromapFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceOpticalFlowFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePerformanceQueryFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineCreationCacheControlFeatures {}
@@ -29442,8 +31850,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 {
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelinePropertiesFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineProtectedAccessFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineRobustnessFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePortabilitySubsetFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentBarrierFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentIdFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePresentWaitFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
@@ -31565,6 +33975,7 @@ pub unsafe trait ExtendsPhysicalDeviceImageFormatInfo2: fmt::Debug {}
 unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for ImageCompressionControlEXT {}
 unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for ImageFormatListCreateInfo {}
 unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for ImageStencilUsageCreateInfo {}
+unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for OpticalFlowImageFormatInfoNV {}
 unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for PhysicalDeviceExternalImageFormatInfo {}
 unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for PhysicalDeviceImageDrmFormatModifierInfoEXT {}
 unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for PhysicalDeviceImageViewImageFormatInfoEXT {}
@@ -34971,6 +37382,328 @@ unsafe impl Cast for PhysicalDeviceNonSeamlessCubeMapFeaturesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceOpacityMicromapFeaturesEXT {
+    type Target = PhysicalDeviceOpacityMicromapFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceOpacityMicromapFeaturesEXT {
+    type Builder = PhysicalDeviceOpacityMicromapFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceOpacityMicromapFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceOpacityMicromapFeaturesEXTBuilder {
+    value: PhysicalDeviceOpacityMicromapFeaturesEXT,
+}
+
+impl PhysicalDeviceOpacityMicromapFeaturesEXTBuilder {
+    #[inline]
+    pub fn micromap(mut self, micromap: bool) -> Self {
+        self.value.micromap = micromap as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn micromap_capture_replay(mut self, micromap_capture_replay: bool) -> Self {
+        self.value.micromap_capture_replay = micromap_capture_replay as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn micromap_host_commands(mut self, micromap_host_commands: bool) -> Self {
+        self.value.micromap_host_commands = micromap_host_commands as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceOpacityMicromapFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceOpacityMicromapFeaturesEXTBuilder {
+    type Target = PhysicalDeviceOpacityMicromapFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceOpacityMicromapFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceOpacityMicromapFeaturesEXTBuilder {
+    type Target = PhysicalDeviceOpacityMicromapFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceOpacityMicromapPropertiesEXT {
+    type Target = PhysicalDeviceOpacityMicromapPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceOpacityMicromapPropertiesEXT {
+    type Builder = PhysicalDeviceOpacityMicromapPropertiesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceOpacityMicromapPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceOpacityMicromapPropertiesEXTBuilder {
+    value: PhysicalDeviceOpacityMicromapPropertiesEXT,
+}
+
+impl PhysicalDeviceOpacityMicromapPropertiesEXTBuilder {
+    #[inline]
+    pub fn max_opacity2_state_subdivision_level(
+        mut self,
+        max_opacity2_state_subdivision_level: u32,
+    ) -> Self {
+        self.value.max_opacity2_state_subdivision_level = max_opacity2_state_subdivision_level;
+        self
+    }
+
+    #[inline]
+    pub fn max_opacity4_state_subdivision_level(
+        mut self,
+        max_opacity4_state_subdivision_level: u32,
+    ) -> Self {
+        self.value.max_opacity4_state_subdivision_level = max_opacity4_state_subdivision_level;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceOpacityMicromapPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceOpacityMicromapPropertiesEXTBuilder {
+    type Target = PhysicalDeviceOpacityMicromapPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceOpacityMicromapPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceOpacityMicromapPropertiesEXTBuilder {
+    type Target = PhysicalDeviceOpacityMicromapPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceOpticalFlowFeaturesNV {
+    type Target = PhysicalDeviceOpticalFlowFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceOpticalFlowFeaturesNV {
+    type Builder = PhysicalDeviceOpticalFlowFeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceOpticalFlowFeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceOpticalFlowFeaturesNVBuilder {
+    value: PhysicalDeviceOpticalFlowFeaturesNV,
+}
+
+impl PhysicalDeviceOpticalFlowFeaturesNVBuilder {
+    #[inline]
+    pub fn optical_flow(mut self, optical_flow: bool) -> Self {
+        self.value.optical_flow = optical_flow as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceOpticalFlowFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceOpticalFlowFeaturesNVBuilder {
+    type Target = PhysicalDeviceOpticalFlowFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceOpticalFlowFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceOpticalFlowFeaturesNVBuilder {
+    type Target = PhysicalDeviceOpticalFlowFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceOpticalFlowPropertiesNV {
+    type Target = PhysicalDeviceOpticalFlowPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceOpticalFlowPropertiesNV {
+    type Builder = PhysicalDeviceOpticalFlowPropertiesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceOpticalFlowPropertiesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceOpticalFlowPropertiesNVBuilder {
+    value: PhysicalDeviceOpticalFlowPropertiesNV,
+}
+
+impl PhysicalDeviceOpticalFlowPropertiesNVBuilder {
+    #[inline]
+    pub fn supported_output_grid_sizes(
+        mut self,
+        supported_output_grid_sizes: OpticalFlowGridSizeFlagsNV,
+    ) -> Self {
+        self.value.supported_output_grid_sizes = supported_output_grid_sizes;
+        self
+    }
+
+    #[inline]
+    pub fn supported_hint_grid_sizes(
+        mut self,
+        supported_hint_grid_sizes: OpticalFlowGridSizeFlagsNV,
+    ) -> Self {
+        self.value.supported_hint_grid_sizes = supported_hint_grid_sizes;
+        self
+    }
+
+    #[inline]
+    pub fn hint_supported(mut self, hint_supported: bool) -> Self {
+        self.value.hint_supported = hint_supported as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn cost_supported(mut self, cost_supported: bool) -> Self {
+        self.value.cost_supported = cost_supported as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn bidirectional_flow_supported(mut self, bidirectional_flow_supported: bool) -> Self {
+        self.value.bidirectional_flow_supported = bidirectional_flow_supported as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn global_flow_supported(mut self, global_flow_supported: bool) -> Self {
+        self.value.global_flow_supported = global_flow_supported as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn min_width(mut self, min_width: u32) -> Self {
+        self.value.min_width = min_width;
+        self
+    }
+
+    #[inline]
+    pub fn min_height(mut self, min_height: u32) -> Self {
+        self.value.min_height = min_height;
+        self
+    }
+
+    #[inline]
+    pub fn max_width(mut self, max_width: u32) -> Self {
+        self.value.max_width = max_width;
+        self
+    }
+
+    #[inline]
+    pub fn max_height(mut self, max_height: u32) -> Self {
+        self.value.max_height = max_height;
+        self
+    }
+
+    #[inline]
+    pub fn max_num_regions_of_interest(mut self, max_num_regions_of_interest: u32) -> Self {
+        self.value.max_num_regions_of_interest = max_num_regions_of_interest;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceOpticalFlowPropertiesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceOpticalFlowPropertiesNVBuilder {
+    type Target = PhysicalDeviceOpticalFlowPropertiesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceOpticalFlowPropertiesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceOpticalFlowPropertiesNVBuilder {
+    type Target = PhysicalDeviceOpticalFlowPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDevicePCIBusInfoPropertiesEXT {
     type Target = PhysicalDevicePCIBusInfoPropertiesEXT;
 
@@ -35414,6 +38147,64 @@ unsafe impl Cast for PhysicalDevicePipelinePropertiesFeaturesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDevicePipelineProtectedAccessFeaturesEXT {
+    type Target = PhysicalDevicePipelineProtectedAccessFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePipelineProtectedAccessFeaturesEXT {
+    type Builder = PhysicalDevicePipelineProtectedAccessFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDevicePipelineProtectedAccessFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePipelineProtectedAccessFeaturesEXTBuilder {
+    value: PhysicalDevicePipelineProtectedAccessFeaturesEXT,
+}
+
+impl PhysicalDevicePipelineProtectedAccessFeaturesEXTBuilder {
+    #[inline]
+    pub fn pipeline_protected_access(mut self, pipeline_protected_access: bool) -> Self {
+        self.value.pipeline_protected_access = pipeline_protected_access as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePipelineProtectedAccessFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePipelineProtectedAccessFeaturesEXTBuilder {
+    type Target = PhysicalDevicePipelineProtectedAccessFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePipelineProtectedAccessFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePipelineProtectedAccessFeaturesEXTBuilder {
+    type Target = PhysicalDevicePipelineProtectedAccessFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDevicePipelineRobustnessFeaturesEXT {
     type Target = PhysicalDevicePipelineRobustnessFeaturesEXT;
 
@@ -35834,6 +38625,64 @@ impl ops::DerefMut for PhysicalDevicePortabilitySubsetPropertiesKHRBuilder {
 
 unsafe impl Cast for PhysicalDevicePortabilitySubsetPropertiesKHRBuilder {
     type Target = PhysicalDevicePortabilitySubsetPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePresentBarrierFeaturesNV {
+    type Target = PhysicalDevicePresentBarrierFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePresentBarrierFeaturesNV {
+    type Builder = PhysicalDevicePresentBarrierFeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDevicePresentBarrierFeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePresentBarrierFeaturesNVBuilder {
+    value: PhysicalDevicePresentBarrierFeaturesNV,
+}
+
+impl PhysicalDevicePresentBarrierFeaturesNVBuilder {
+    #[inline]
+    pub fn present_barrier(mut self, present_barrier: bool) -> Self {
+        self.value.present_barrier = present_barrier as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePresentBarrierFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePresentBarrierFeaturesNVBuilder {
+    type Target = PhysicalDevicePresentBarrierFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePresentBarrierFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePresentBarrierFeaturesNVBuilder {
+    type Target = PhysicalDevicePresentBarrierFeaturesNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -36296,6 +39145,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDeviceGeneratedCo
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDiscardRectanglePropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDriverProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDrmPropertiesEXT {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceExtendedDynamicState3PropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceExternalMemoryHostPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFloatControlsProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentDensityMap2PropertiesEXT {}
@@ -36331,6 +39181,8 @@ unsafe impl ExtendsPhysicalDeviceProperties2
 {
 }
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMultiviewProperties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceOpacityMicromapPropertiesEXT {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceOpticalFlowPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePCIBusInfoPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePerformanceQueryPropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePipelineRobustnessPropertiesEXT {}
@@ -44340,6 +47192,12 @@ impl<'b> PipelineColorBlendStateCreateInfoBuilder<'b> {
     #[inline]
     pub fn logic_op(mut self, logic_op: LogicOp) -> Self {
         self.value.logic_op = logic_op;
+        self
+    }
+
+    #[inline]
+    pub fn attachment_count(mut self, attachment_count: u32) -> Self {
+        self.value.attachment_count = attachment_count;
         self
     }
 
@@ -55822,6 +58680,7 @@ pub unsafe trait ExtendsSurfaceCapabilities2KHR: fmt::Debug {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for DisplayNativeHdrSurfaceCapabilitiesAMD {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for SharedPresentSurfaceCapabilitiesKHR {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceCapabilitiesFullScreenExclusiveEXT {}
+unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceCapabilitiesPresentBarrierNV {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceProtectedCapabilitiesKHR {}
 
 unsafe impl Cast for SurfaceCapabilities2KHR {
@@ -56066,6 +58925,64 @@ impl ops::DerefMut for SurfaceCapabilitiesKHRBuilder {
 
 unsafe impl Cast for SurfaceCapabilitiesKHRBuilder {
     type Target = SurfaceCapabilitiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SurfaceCapabilitiesPresentBarrierNV {
+    type Target = SurfaceCapabilitiesPresentBarrierNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SurfaceCapabilitiesPresentBarrierNV {
+    type Builder = SurfaceCapabilitiesPresentBarrierNVBuilder;
+}
+
+/// A builder for a [`SurfaceCapabilitiesPresentBarrierNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SurfaceCapabilitiesPresentBarrierNVBuilder {
+    value: SurfaceCapabilitiesPresentBarrierNV,
+}
+
+impl SurfaceCapabilitiesPresentBarrierNVBuilder {
+    #[inline]
+    pub fn present_barrier_supported(mut self, present_barrier_supported: bool) -> Self {
+        self.value.present_barrier_supported = present_barrier_supported as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SurfaceCapabilitiesPresentBarrierNV {
+        self.value
+    }
+}
+
+impl ops::Deref for SurfaceCapabilitiesPresentBarrierNVBuilder {
+    type Target = SurfaceCapabilitiesPresentBarrierNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SurfaceCapabilitiesPresentBarrierNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SurfaceCapabilitiesPresentBarrierNVBuilder {
+    type Target = SurfaceCapabilitiesPresentBarrierNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -56452,6 +59369,7 @@ unsafe impl ExtendsSwapchainCreateInfoKHR for SurfaceFullScreenExclusiveInfoEXT 
 unsafe impl ExtendsSwapchainCreateInfoKHR for SurfaceFullScreenExclusiveWin32InfoEXT {}
 unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainCounterCreateInfoEXT {}
 unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainDisplayNativeHdrCreateInfoAMD {}
+unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainPresentBarrierCreateInfoNV {}
 
 unsafe impl Cast for SwapchainCreateInfoKHR {
     type Target = SwapchainCreateInfoKHR;
@@ -56659,6 +59577,64 @@ impl ops::DerefMut for SwapchainDisplayNativeHdrCreateInfoAMDBuilder {
 
 unsafe impl Cast for SwapchainDisplayNativeHdrCreateInfoAMDBuilder {
     type Target = SwapchainDisplayNativeHdrCreateInfoAMD;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SwapchainPresentBarrierCreateInfoNV {
+    type Target = SwapchainPresentBarrierCreateInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SwapchainPresentBarrierCreateInfoNV {
+    type Builder = SwapchainPresentBarrierCreateInfoNVBuilder;
+}
+
+/// A builder for a [`SwapchainPresentBarrierCreateInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SwapchainPresentBarrierCreateInfoNVBuilder {
+    value: SwapchainPresentBarrierCreateInfoNV,
+}
+
+impl SwapchainPresentBarrierCreateInfoNVBuilder {
+    #[inline]
+    pub fn present_barrier_enable(mut self, present_barrier_enable: bool) -> Self {
+        self.value.present_barrier_enable = present_barrier_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SwapchainPresentBarrierCreateInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for SwapchainPresentBarrierCreateInfoNVBuilder {
+    type Target = SwapchainPresentBarrierCreateInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SwapchainPresentBarrierCreateInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SwapchainPresentBarrierCreateInfoNVBuilder {
+    type Target = SwapchainPresentBarrierCreateInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {

@@ -118,6 +118,10 @@ bitflags! {
         const SHADER_STORAGE_WRITE = 1 << 34;
         const INVOCATION_MASK_READ_HUAWEI = 1 << 39;
         const SHADER_BINDING_TABLE_READ_KHR = 1 << 40;
+        const OPTICAL_FLOW_READ_NV = 1 << 42;
+        const OPTICAL_FLOW_WRITE_NV = 1 << 43;
+        const MICROMAP_READ_EXT = 1 << 44;
+        const MICROMAP_WRITE_EXT = 1 << 45;
     }
 }
 
@@ -178,6 +182,8 @@ bitflags! {
         const SHADER_DEVICE_ADDRESS = 1 << 17;
         const ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_KHR = 1 << 19;
         const ACCELERATION_STRUCTURE_STORAGE_KHR = 1 << 20;
+        const MICROMAP_BUILD_INPUT_READ_ONLY_EXT = 1 << 23;
+        const MICROMAP_STORAGE_EXT = 1 << 24;
     }
 }
 
@@ -199,6 +205,20 @@ bitflags! {
         const PREFER_FAST_BUILD = 1 << 3;
         const LOW_MEMORY = 1 << 4;
         const MOTION_NV = 1 << 5;
+        const ALLOW_OPACITY_MICROMAP_UPDATE_EXT = 1 << 6;
+        const ALLOW_DISABLE_OPACITY_MICROMAPS_EXT = 1 << 7;
+        const ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT = 1 << 8;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBuildMicromapFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct BuildMicromapFlagsEXT: Flags {
+        const PREFER_FAST_TRACE = 1;
+        const PREFER_FAST_BUILD = 1 << 1;
+        const ALLOW_COMPACTION = 1 << 2;
     }
 }
 
@@ -327,6 +347,7 @@ bitflags! {
         const GENERAL = 1;
         const VALIDATION = 1 << 1;
         const PERFORMANCE = 1 << 2;
+        const DEVICE_ADDRESS_BINDING = 1 << 3;
     }
 }
 
@@ -402,6 +423,15 @@ bitflags! {
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DescriptorUpdateTemplateCreateFlags: Flags { }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceAddressBindingFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct DeviceAddressBindingFlagsEXT: Flags {
+        const INTERNAL_OBJECT = 1;
+    }
 }
 
 bitflags! {
@@ -701,6 +731,9 @@ bitflags! {
         const BLOCK_MATCHING_QCOM = 1 << 36;
         const BOX_FILTER_SAMPLED_QCOM = 1 << 37;
         const LINEAR_COLOR_ATTACHMENT_NV = 1 << 38;
+        const OPTICAL_FLOW_IMAGE_NV = 1 << 40;
+        const OPTICAL_FLOW_VECTOR_NV = 1 << 41;
+        const OPTICAL_FLOW_COST_NV = 1 << 42;
     }
 }
 
@@ -732,6 +765,8 @@ bitflags! {
         const TRIANGLE_FLIP_FACING = 1 << 1;
         const FORCE_OPAQUE = 1 << 2;
         const FORCE_NO_OPAQUE = 1 << 3;
+        const FORCE_OPACITY_MICROMAP_2_STATE_EXT = 1 << 4;
+        const DISABLE_OPACITY_MICROMAPS_EXT = 1 << 5;
     }
 }
 
@@ -999,6 +1034,64 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMicromapCreateFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct MicromapCreateFlagsEXT: Flags {
+        const DEVICE_ADDRESS_CAPTURE_REPLAY = 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpticalFlowExecuteFlagsNV.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct OpticalFlowExecuteFlagsNV: Flags {
+        const DISABLE_TEMPORAL_HINTS = 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpticalFlowGridSizeFlagsNV.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct OpticalFlowGridSizeFlagsNV: Flags {
+        const UNKNOWN = 0;
+        const _1X1 = 1;
+        const _2X2 = 1 << 1;
+        const _4X4 = 1 << 2;
+        const _8X8 = 1 << 3;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpticalFlowSessionCreateFlagsNV.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct OpticalFlowSessionCreateFlagsNV: Flags {
+        const ENABLE_HINT = 1;
+        const ENABLE_COST = 1 << 1;
+        const ENABLE_GLOBAL_FLOW = 1 << 2;
+        const ALLOW_REGIONS = 1 << 3;
+        const BOTH_DIRECTIONS = 1 << 4;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpticalFlowUsageFlagsNV.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct OpticalFlowUsageFlagsNV: Flags {
+        const UNKNOWN = 0;
+        const INPUT = 1;
+        const OUTPUT = 1 << 1;
+        const HINT = 1 << 2;
+        const COST = 1 << 3;
+        const GLOBAL_FLOW = 1 << 4;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPeerMemoryFeatureFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -1095,8 +1188,11 @@ bitflags! {
         const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_KHR = 1 << 21;
         const RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_EXT = 1 << 22;
         const RETAIN_LINK_TIME_OPTIMIZATION_INFO_EXT = 1 << 23;
+        const RAY_TRACING_OPACITY_MICROMAP_EXT = 1 << 24;
         const COLOR_ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 25;
         const DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 26;
+        const NO_PROTECTED_ACCESS_EXT = 1 << 27;
+        const PROTECTED_ACCESS_ONLY_EXT = 1 << 30;
     }
 }
 
@@ -1263,6 +1359,8 @@ bitflags! {
         const TRANSFORM_FEEDBACK_EXT = 1 << 24;
         const ACCELERATION_STRUCTURE_BUILD_KHR = 1 << 25;
         const ACCELERATION_STRUCTURE_COPY_KHR = 1 << 28;
+        const OPTICAL_FLOW_NV = 1 << 29;
+        const MICROMAP_BUILD_EXT = 1 << 30;
         const COPY = 1 << 32;
         const RESOLVE = 1 << 33;
         const BLIT = 1 << 34;
@@ -1369,6 +1467,7 @@ bitflags! {
         const TRANSFER = 1 << 2;
         const SPARSE_BINDING = 1 << 3;
         const PROTECTED = 1 << 4;
+        const OPTICAL_FLOW_NV = 1 << 8;
     }
 }
 

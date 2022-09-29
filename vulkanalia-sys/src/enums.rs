@@ -562,6 +562,36 @@ impl fmt::Debug for BuildAccelerationStructureModeKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBuildMicromapModeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct BuildMicromapModeEXT(i32);
+
+impl BuildMicromapModeEXT {
+    pub const BUILD: Self = Self(0);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for BuildMicromapModeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "BUILD"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkChromaLocation.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -928,6 +958,42 @@ impl fmt::Debug for CopyAccelerationStructureModeKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMicromapModeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct CopyMicromapModeEXT(i32);
+
+impl CopyMicromapModeEXT {
+    pub const CLONE: Self = Self(0);
+    pub const SERIALIZE: Self = Self(1);
+    pub const DESERIALIZE: Self = Self(2);
+    pub const COMPACT: Self = Self(3);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for CopyMicromapModeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "CLONE"),
+            1 => write!(f, "SERIALIZE"),
+            2 => write!(f, "DESERIALIZE"),
+            3 => write!(f, "COMPACT"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCoverageModulationModeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -1196,6 +1262,38 @@ impl fmt::Debug for DescriptorUpdateTemplateType {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceAddressBindingTypeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct DeviceAddressBindingTypeEXT(i32);
+
+impl DeviceAddressBindingTypeEXT {
+    pub const BIND: Self = Self(0);
+    pub const UNBIND: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for DeviceAddressBindingTypeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "BIND"),
+            1 => write!(f, "UNBIND"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceEventTypeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -1221,6 +1319,78 @@ impl fmt::Debug for DeviceEventTypeEXT {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             0 => write!(f, "DISPLAY_HOTPLUG"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceFaultAddressTypeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct DeviceFaultAddressTypeEXT(i32);
+
+impl DeviceFaultAddressTypeEXT {
+    pub const NONE: Self = Self(0);
+    pub const READ_INVALID: Self = Self(1);
+    pub const WRITE_INVALID: Self = Self(2);
+    pub const EXECUTE_INVALID: Self = Self(3);
+    pub const INSTRUCTION_POINTER_UNKNOWN: Self = Self(4);
+    pub const INSTRUCTION_POINTER_INVALID: Self = Self(5);
+    pub const INSTRUCTION_POINTER_FAULT: Self = Self(6);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for DeviceFaultAddressTypeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "NONE"),
+            1 => write!(f, "READ_INVALID"),
+            2 => write!(f, "WRITE_INVALID"),
+            3 => write!(f, "EXECUTE_INVALID"),
+            4 => write!(f, "INSTRUCTION_POINTER_UNKNOWN"),
+            5 => write!(f, "INSTRUCTION_POINTER_INVALID"),
+            6 => write!(f, "INSTRUCTION_POINTER_FAULT"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceFaultVendorBinaryHeaderVersionEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct DeviceFaultVendorBinaryHeaderVersionEXT(i32);
+
+impl DeviceFaultVendorBinaryHeaderVersionEXT {
+    pub const ONE: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for DeviceFaultVendorBinaryHeaderVersionEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            1 => write!(f, "ONE"),
             _ => self.0.fmt(f),
         }
     }
@@ -1477,6 +1647,37 @@ impl DynamicState {
     pub const PATCH_CONTROL_POINTS_EXT: Self = Self(1000377000);
     pub const LOGIC_OP_EXT: Self = Self(1000377003);
     pub const COLOR_WRITE_ENABLE_EXT: Self = Self(1000381000);
+    pub const TESSELLATION_DOMAIN_ORIGIN_EXT: Self = Self(1000455002);
+    pub const DEPTH_CLAMP_ENABLE_EXT: Self = Self(1000455003);
+    pub const POLYGON_MODE_EXT: Self = Self(1000455004);
+    pub const RASTERIZATION_SAMPLES_EXT: Self = Self(1000455005);
+    pub const SAMPLE_MASK_EXT: Self = Self(1000455006);
+    pub const ALPHA_TO_COVERAGE_ENABLE_EXT: Self = Self(1000455007);
+    pub const ALPHA_TO_ONE_ENABLE_EXT: Self = Self(1000455008);
+    pub const LOGIC_OP_ENABLE_EXT: Self = Self(1000455009);
+    pub const COLOR_BLEND_ENABLE_EXT: Self = Self(1000455010);
+    pub const COLOR_BLEND_EQUATION_EXT: Self = Self(1000455011);
+    pub const COLOR_WRITE_MASK_EXT: Self = Self(1000455012);
+    pub const RASTERIZATION_STREAM_EXT: Self = Self(1000455013);
+    pub const CONSERVATIVE_RASTERIZATION_MODE_EXT: Self = Self(1000455014);
+    pub const EXTRA_PRIMITIVE_OVERESTIMATION_SIZE_EXT: Self = Self(1000455015);
+    pub const DEPTH_CLIP_ENABLE_EXT: Self = Self(1000455016);
+    pub const SAMPLE_LOCATIONS_ENABLE_EXT: Self = Self(1000455017);
+    pub const COLOR_BLEND_ADVANCED_EXT: Self = Self(1000455018);
+    pub const PROVOKING_VERTEX_MODE_EXT: Self = Self(1000455019);
+    pub const LINE_RASTERIZATION_MODE_EXT: Self = Self(1000455020);
+    pub const LINE_STIPPLE_ENABLE_EXT: Self = Self(1000455021);
+    pub const DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT: Self = Self(1000455022);
+    pub const VIEWPORT_W_SCALING_ENABLE_NV: Self = Self(1000455023);
+    pub const VIEWPORT_SWIZZLE_NV: Self = Self(1000455024);
+    pub const COVERAGE_TO_COLOR_ENABLE_NV: Self = Self(1000455025);
+    pub const COVERAGE_TO_COLOR_LOCATION_NV: Self = Self(1000455026);
+    pub const COVERAGE_MODULATION_MODE_NV: Self = Self(1000455027);
+    pub const COVERAGE_MODULATION_TABLE_ENABLE_NV: Self = Self(1000455028);
+    pub const COVERAGE_MODULATION_TABLE_NV: Self = Self(1000455029);
+    pub const SHADING_RATE_IMAGE_ENABLE_NV: Self = Self(1000455030);
+    pub const REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV: Self = Self(1000455031);
+    pub const COVERAGE_REDUCTION_MODE_NV: Self = Self(1000455032);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1531,6 +1732,37 @@ impl fmt::Debug for DynamicState {
             1000377000 => write!(f, "PATCH_CONTROL_POINTS_EXT"),
             1000377003 => write!(f, "LOGIC_OP_EXT"),
             1000381000 => write!(f, "COLOR_WRITE_ENABLE_EXT"),
+            1000455002 => write!(f, "TESSELLATION_DOMAIN_ORIGIN_EXT"),
+            1000455003 => write!(f, "DEPTH_CLAMP_ENABLE_EXT"),
+            1000455004 => write!(f, "POLYGON_MODE_EXT"),
+            1000455005 => write!(f, "RASTERIZATION_SAMPLES_EXT"),
+            1000455006 => write!(f, "SAMPLE_MASK_EXT"),
+            1000455007 => write!(f, "ALPHA_TO_COVERAGE_ENABLE_EXT"),
+            1000455008 => write!(f, "ALPHA_TO_ONE_ENABLE_EXT"),
+            1000455009 => write!(f, "LOGIC_OP_ENABLE_EXT"),
+            1000455010 => write!(f, "COLOR_BLEND_ENABLE_EXT"),
+            1000455011 => write!(f, "COLOR_BLEND_EQUATION_EXT"),
+            1000455012 => write!(f, "COLOR_WRITE_MASK_EXT"),
+            1000455013 => write!(f, "RASTERIZATION_STREAM_EXT"),
+            1000455014 => write!(f, "CONSERVATIVE_RASTERIZATION_MODE_EXT"),
+            1000455015 => write!(f, "EXTRA_PRIMITIVE_OVERESTIMATION_SIZE_EXT"),
+            1000455016 => write!(f, "DEPTH_CLIP_ENABLE_EXT"),
+            1000455017 => write!(f, "SAMPLE_LOCATIONS_ENABLE_EXT"),
+            1000455018 => write!(f, "COLOR_BLEND_ADVANCED_EXT"),
+            1000455019 => write!(f, "PROVOKING_VERTEX_MODE_EXT"),
+            1000455020 => write!(f, "LINE_RASTERIZATION_MODE_EXT"),
+            1000455021 => write!(f, "LINE_STIPPLE_ENABLE_EXT"),
+            1000455022 => write!(f, "DEPTH_CLIP_NEGATIVE_ONE_TO_ONE_EXT"),
+            1000455023 => write!(f, "VIEWPORT_W_SCALING_ENABLE_NV"),
+            1000455024 => write!(f, "VIEWPORT_SWIZZLE_NV"),
+            1000455025 => write!(f, "COVERAGE_TO_COLOR_ENABLE_NV"),
+            1000455026 => write!(f, "COVERAGE_TO_COLOR_LOCATION_NV"),
+            1000455027 => write!(f, "COVERAGE_MODULATION_MODE_NV"),
+            1000455028 => write!(f, "COVERAGE_MODULATION_TABLE_ENABLE_NV"),
+            1000455029 => write!(f, "COVERAGE_MODULATION_TABLE_NV"),
+            1000455030 => write!(f, "SHADING_RATE_IMAGE_ENABLE_NV"),
+            1000455031 => write!(f, "REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV"),
+            1000455032 => write!(f, "COVERAGE_REDUCTION_MODE_NV"),
             _ => self.0.fmt(f),
         }
     }
@@ -1823,6 +2055,7 @@ impl Format {
     pub const PVRTC1_4BPP_SRGB_BLOCK_IMG: Self = Self(1000054005);
     pub const PVRTC2_2BPP_SRGB_BLOCK_IMG: Self = Self(1000054006);
     pub const PVRTC2_4BPP_SRGB_BLOCK_IMG: Self = Self(1000054007);
+    pub const R16G16_S10_5_NV: Self = Self(1000464000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2087,6 +2320,7 @@ impl fmt::Debug for Format {
             1000054005 => write!(f, "PVRTC1_4BPP_SRGB_BLOCK_IMG"),
             1000054006 => write!(f, "PVRTC2_2BPP_SRGB_BLOCK_IMG"),
             1000054007 => write!(f, "PVRTC2_4BPP_SRGB_BLOCK_IMG"),
+            1000464000 => write!(f, "R16G16_S10_5_NV"),
             _ => self.0.fmt(f),
         }
     }
@@ -2740,6 +2974,36 @@ impl fmt::Debug for MemoryOverallocationBehaviorAMD {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMicromapTypeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct MicromapTypeEXT(i32);
+
+impl MicromapTypeEXT {
+    pub const OPACITY_MICROMAP: Self = Self(0);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for MicromapTypeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "OPACITY_MICROMAP"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkObjectType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -2790,6 +3054,8 @@ impl ObjectType {
     pub const DEFERRED_OPERATION_KHR: Self = Self(1000268000);
     pub const INDIRECT_COMMANDS_LAYOUT_NV: Self = Self(1000277000);
     pub const BUFFER_COLLECTION_FUCHSIA: Self = Self(1000366000);
+    pub const MICROMAP_EXT: Self = Self(1000396000);
+    pub const OPTICAL_FLOW_SESSION_NV: Self = Self(1000464000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2851,6 +3117,158 @@ impl fmt::Debug for ObjectType {
             1000268000 => write!(f, "DEFERRED_OPERATION_KHR"),
             1000277000 => write!(f, "INDIRECT_COMMANDS_LAYOUT_NV"),
             1000366000 => write!(f, "BUFFER_COLLECTION_FUCHSIA"),
+            1000396000 => write!(f, "MICROMAP_EXT"),
+            1000464000 => write!(f, "OPTICAL_FLOW_SESSION_NV"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpacityMicromapFormatEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct OpacityMicromapFormatEXT(i32);
+
+impl OpacityMicromapFormatEXT {
+    pub const _2_STATE: Self = Self(1);
+    pub const _4_STATE: Self = Self(2);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for OpacityMicromapFormatEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            1 => write!(f, "_2_STATE"),
+            2 => write!(f, "_4_STATE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpacityMicromapSpecialIndexEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct OpacityMicromapSpecialIndexEXT(i32);
+
+impl OpacityMicromapSpecialIndexEXT {
+    pub const FULLY_TRANSPARENT: Self = Self(-1);
+    pub const FULLY_OPAQUE: Self = Self(-2);
+    pub const FULLY_UNKNOWN_TRANSPARENT: Self = Self(-3);
+    pub const FULLY_UNKNOWN_OPAQUE: Self = Self(-4);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for OpacityMicromapSpecialIndexEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            -1 => write!(f, "FULLY_TRANSPARENT"),
+            -2 => write!(f, "FULLY_OPAQUE"),
+            -3 => write!(f, "FULLY_UNKNOWN_TRANSPARENT"),
+            -4 => write!(f, "FULLY_UNKNOWN_OPAQUE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpticalFlowPerformanceLevelNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct OpticalFlowPerformanceLevelNV(i32);
+
+impl OpticalFlowPerformanceLevelNV {
+    pub const UNKNOWN: Self = Self(0);
+    pub const SLOW: Self = Self(1);
+    pub const MEDIUM: Self = Self(2);
+    pub const FAST: Self = Self(3);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for OpticalFlowPerformanceLevelNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "UNKNOWN"),
+            1 => write!(f, "SLOW"),
+            2 => write!(f, "MEDIUM"),
+            3 => write!(f, "FAST"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpticalFlowSessionBindingPointNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct OpticalFlowSessionBindingPointNV(i32);
+
+impl OpticalFlowSessionBindingPointNV {
+    pub const UNKNOWN: Self = Self(0);
+    pub const INPUT: Self = Self(1);
+    pub const REFERENCE: Self = Self(2);
+    pub const HINT: Self = Self(3);
+    pub const FLOW_VECTOR: Self = Self(4);
+    pub const BACKWARD_FLOW_VECTOR: Self = Self(5);
+    pub const COST: Self = Self(6);
+    pub const BACKWARD_COST: Self = Self(7);
+    pub const GLOBAL_FLOW: Self = Self(8);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for OpticalFlowSessionBindingPointNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "UNKNOWN"),
+            1 => write!(f, "INPUT"),
+            2 => write!(f, "REFERENCE"),
+            3 => write!(f, "HINT"),
+            4 => write!(f, "FLOW_VECTOR"),
+            5 => write!(f, "BACKWARD_FLOW_VECTOR"),
+            6 => write!(f, "COST"),
+            7 => write!(f, "BACKWARD_COST"),
+            8 => write!(f, "GLOBAL_FLOW"),
             _ => self.0.fmt(f),
         }
     }
@@ -3564,6 +3982,8 @@ impl QueryType {
     pub const ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR: Self =
         Self(1000386000);
     pub const ACCELERATION_STRUCTURE_SIZE_KHR: Self = Self(1000386001);
+    pub const MICROMAP_SERIALIZATION_SIZE_EXT: Self = Self(1000396000);
+    pub const MICROMAP_COMPACTED_SIZE_EXT: Self = Self(1000396001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -3597,6 +4017,8 @@ impl fmt::Debug for QueryType {
                 "ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR"
             ),
             1000386001 => write!(f, "ACCELERATION_STRUCTURE_SIZE_KHR"),
+            1000396000 => write!(f, "MICROMAP_SERIALIZATION_SIZE_EXT"),
+            1000396001 => write!(f, "MICROMAP_COMPACTED_SIZE_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -4845,6 +5267,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT: Self = Self(1000287001);
     pub const PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT: Self = Self(1000287002);
     pub const PIPELINE_LIBRARY_CREATE_INFO_KHR: Self = Self(1000290000);
+    pub const PHYSICAL_DEVICE_PRESENT_BARRIER_FEATURES_NV: Self = Self(1000292000);
+    pub const SURFACE_CAPABILITIES_PRESENT_BARRIER_NV: Self = Self(1000292001);
+    pub const SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV: Self = Self(1000292002);
     pub const PRESENT_ID_KHR: Self = Self(1000294000);
     pub const PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR: Self = Self(1000294001);
     pub const PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV: Self = Self(1000300000);
@@ -4893,12 +5318,17 @@ impl StructureType {
     pub const IMAGE_COMPRESSION_PROPERTIES_EXT: Self = Self(1000338004);
     pub const PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_FEATURES_EXT: Self = Self(1000339000);
     pub const PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT: Self = Self(1000340000);
+    pub const PHYSICAL_DEVICE_FAULT_FEATURES_EXT: Self = Self(1000341000);
+    pub const DEVICE_FAULT_COUNTS_EXT: Self = Self(1000341001);
+    pub const DEVICE_FAULT_INFO_EXT: Self = Self(1000341002);
     pub const PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT: Self = Self(1000344000);
     pub const DIRECTFB_SURFACE_CREATE_INFO_EXT: Self = Self(1000346000);
     pub const PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT: Self = Self(1000352000);
     pub const VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT: Self = Self(1000352001);
     pub const VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT: Self = Self(1000352002);
     pub const PHYSICAL_DEVICE_DRM_PROPERTIES_EXT: Self = Self(1000353000);
+    pub const PHYSICAL_DEVICE_ADDRESS_BINDING_REPORT_FEATURES_EXT: Self = Self(1000354000);
+    pub const DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT: Self = Self(1000354001);
     pub const PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT: Self = Self(1000355000);
     pub const PIPELINE_VIEWPORT_DEPTH_CLIP_CONTROL_CREATE_INFO_EXT: Self = Self(1000355001);
     pub const PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT: Self = Self(1000356000);
@@ -4940,6 +5370,16 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT: Self = Self(1000392000);
     pub const PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT: Self = Self(1000392001);
     pub const PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT: Self = Self(1000393000);
+    pub const MICROMAP_BUILD_INFO_EXT: Self = Self(1000396000);
+    pub const MICROMAP_VERSION_INFO_EXT: Self = Self(1000396001);
+    pub const COPY_MICROMAP_INFO_EXT: Self = Self(1000396002);
+    pub const COPY_MICROMAP_TO_MEMORY_INFO_EXT: Self = Self(1000396003);
+    pub const COPY_MEMORY_TO_MICROMAP_INFO_EXT: Self = Self(1000396004);
+    pub const PHYSICAL_DEVICE_OPACITY_MICROMAP_FEATURES_EXT: Self = Self(1000396005);
+    pub const PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT: Self = Self(1000396006);
+    pub const MICROMAP_CREATE_INFO_EXT: Self = Self(1000396007);
+    pub const MICROMAP_BUILD_SIZES_INFO_EXT: Self = Self(1000396008);
+    pub const ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT: Self = Self(1000396009);
     pub const PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT: Self = Self(1000411000);
     pub const SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT: Self = Self(1000411001);
     pub const PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT: Self = Self(1000412000);
@@ -4957,6 +5397,8 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_IMAGE_PROCESSING_FEATURES_QCOM: Self = Self(1000440000);
     pub const PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM: Self = Self(1000440001);
     pub const IMAGE_VIEW_SAMPLE_WEIGHT_CREATE_INFO_QCOM: Self = Self(1000440002);
+    pub const PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_FEATURES_EXT: Self = Self(1000455000);
+    pub const PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_PROPERTIES_EXT: Self = Self(1000455001);
     pub const PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT: Self = Self(1000458000);
     pub const RENDER_PASS_CREATION_CONTROL_EXT: Self = Self(1000458001);
     pub const RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT: Self = Self(1000458002);
@@ -4967,7 +5409,15 @@ impl StructureType {
     pub const SHADER_MODULE_IDENTIFIER_EXT: Self = Self(1000462003);
     pub const PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_EXT: Self =
         Self(1000342000);
+    pub const PHYSICAL_DEVICE_OPTICAL_FLOW_FEATURES_NV: Self = Self(1000464000);
+    pub const PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV: Self = Self(1000464001);
+    pub const OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV: Self = Self(1000464002);
+    pub const OPTICAL_FLOW_IMAGE_FORMAT_PROPERTIES_NV: Self = Self(1000464003);
+    pub const OPTICAL_FLOW_SESSION_CREATE_INFO_NV: Self = Self(1000464004);
+    pub const OPTICAL_FLOW_EXECUTE_INFO_NV: Self = Self(1000464005);
+    pub const OPTICAL_FLOW_SESSION_CREATE_PRIVATE_DATA_INFO_NV: Self = Self(1000464010);
     pub const PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT: Self = Self(1000465000);
+    pub const PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT: Self = Self(1000466000);
     pub const PHYSICAL_DEVICE_TILE_PROPERTIES_FEATURES_QCOM: Self = Self(1000484000);
     pub const TILE_PROPERTIES_QCOM: Self = Self(1000484001);
     pub const PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC: Self = Self(1000485000);
@@ -5549,6 +5999,9 @@ impl fmt::Debug for StructureType {
             1000287001 => write!(f, "PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT"),
             1000287002 => write!(f, "PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT"),
             1000290000 => write!(f, "PIPELINE_LIBRARY_CREATE_INFO_KHR"),
+            1000292000 => write!(f, "PHYSICAL_DEVICE_PRESENT_BARRIER_FEATURES_NV"),
+            1000292001 => write!(f, "SURFACE_CAPABILITIES_PRESENT_BARRIER_NV"),
+            1000292002 => write!(f, "SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV"),
             1000294000 => write!(f, "PRESENT_ID_KHR"),
             1000294001 => write!(f, "PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR"),
             1000300000 => write!(f, "PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV"),
@@ -5624,12 +6077,17 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_FEATURES_EXT"
             ),
             1000340000 => write!(f, "PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT"),
+            1000341000 => write!(f, "PHYSICAL_DEVICE_FAULT_FEATURES_EXT"),
+            1000341001 => write!(f, "DEVICE_FAULT_COUNTS_EXT"),
+            1000341002 => write!(f, "DEVICE_FAULT_INFO_EXT"),
             1000344000 => write!(f, "PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT"),
             1000346000 => write!(f, "DIRECTFB_SURFACE_CREATE_INFO_EXT"),
             1000352000 => write!(f, "PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT"),
             1000352001 => write!(f, "VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT"),
             1000352002 => write!(f, "VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT"),
             1000353000 => write!(f, "PHYSICAL_DEVICE_DRM_PROPERTIES_EXT"),
+            1000354000 => write!(f, "PHYSICAL_DEVICE_ADDRESS_BINDING_REPORT_FEATURES_EXT"),
+            1000354001 => write!(f, "DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT"),
             1000355000 => write!(f, "PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT"),
             1000355001 => write!(f, "PIPELINE_VIEWPORT_DEPTH_CLIP_CONTROL_CREATE_INFO_EXT"),
             1000356000 => write!(
@@ -5676,6 +6134,16 @@ impl fmt::Debug for StructureType {
             1000392000 => write!(f, "PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT"),
             1000392001 => write!(f, "PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT"),
             1000393000 => write!(f, "PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT"),
+            1000396000 => write!(f, "MICROMAP_BUILD_INFO_EXT"),
+            1000396001 => write!(f, "MICROMAP_VERSION_INFO_EXT"),
+            1000396002 => write!(f, "COPY_MICROMAP_INFO_EXT"),
+            1000396003 => write!(f, "COPY_MICROMAP_TO_MEMORY_INFO_EXT"),
+            1000396004 => write!(f, "COPY_MEMORY_TO_MICROMAP_INFO_EXT"),
+            1000396005 => write!(f, "PHYSICAL_DEVICE_OPACITY_MICROMAP_FEATURES_EXT"),
+            1000396006 => write!(f, "PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT"),
+            1000396007 => write!(f, "MICROMAP_CREATE_INFO_EXT"),
+            1000396008 => write!(f, "MICROMAP_BUILD_SIZES_INFO_EXT"),
+            1000396009 => write!(f, "ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT"),
             1000411000 => write!(f, "PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT"),
             1000411001 => write!(f, "SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT"),
             1000412000 => write!(
@@ -5707,6 +6175,8 @@ impl fmt::Debug for StructureType {
             1000440000 => write!(f, "PHYSICAL_DEVICE_IMAGE_PROCESSING_FEATURES_QCOM"),
             1000440001 => write!(f, "PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM"),
             1000440002 => write!(f, "IMAGE_VIEW_SAMPLE_WEIGHT_CREATE_INFO_QCOM"),
+            1000455000 => write!(f, "PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_FEATURES_EXT"),
+            1000455001 => write!(f, "PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_PROPERTIES_EXT"),
             1000458000 => write!(f, "PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT"),
             1000458001 => write!(f, "RENDER_PASS_CREATION_CONTROL_EXT"),
             1000458002 => write!(f, "RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT"),
@@ -5719,7 +6189,15 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_EXT"
             ),
+            1000464000 => write!(f, "PHYSICAL_DEVICE_OPTICAL_FLOW_FEATURES_NV"),
+            1000464001 => write!(f, "PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV"),
+            1000464002 => write!(f, "OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV"),
+            1000464003 => write!(f, "OPTICAL_FLOW_IMAGE_FORMAT_PROPERTIES_NV"),
+            1000464004 => write!(f, "OPTICAL_FLOW_SESSION_CREATE_INFO_NV"),
+            1000464005 => write!(f, "OPTICAL_FLOW_EXECUTE_INFO_NV"),
+            1000464010 => write!(f, "OPTICAL_FLOW_SESSION_CREATE_PRIVATE_DATA_INFO_NV"),
             1000465000 => write!(f, "PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT"),
+            1000466000 => write!(f, "PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT"),
             1000484000 => write!(f, "PHYSICAL_DEVICE_TILE_PROPERTIES_FEATURES_QCOM"),
             1000484001 => write!(f, "TILE_PROPERTIES_QCOM"),
             1000485000 => write!(f, "PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC"),

@@ -788,6 +788,41 @@ pub const EXT_DESCRIPTOR_INDEXING_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_device_address_binding_report.html>
+#[allow(deprecated)]
+pub const EXT_DEVICE_ADDRESS_BINDING_REPORT_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_device_address_binding_report"),
+    number: 355,
+    type_: "device",
+    author: "EXT",
+    contact: "Ralph Potter gitlab:@r_potter",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+        EXT_DEBUG_UTILS_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_device_fault.html>
+#[allow(deprecated)]
+pub const EXT_DEVICE_FAULT_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_device_fault"),
+    number: 342,
+    type_: "device",
+    author: "EXT",
+    contact: "Ralph Potter gitlab:@r_potter",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_device_memory_report.html>
 #[allow(deprecated)]
 pub const EXT_DEVICE_MEMORY_REPORT_EXTENSION: Extension = Extension {
@@ -917,6 +952,22 @@ pub const EXT_EXTENDED_DYNAMIC_STATE2_EXTENSION: Extension = Extension {
     deprecated_by: None,
     obsoleted_by: None,
     promoted_to: Some("VK_VERSION_1_3"),
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_extended_dynamic_state3.html>
+#[allow(deprecated)]
+pub const EXT_EXTENDED_DYNAMIC_STATE3_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_extended_dynamic_state3"),
+    number: 456,
+    type_: "device",
+    author: "NV",
+    contact: "Piers Daniell @pdaniell-nv",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_external_memory_dma_buf.html>
@@ -1475,6 +1526,25 @@ pub const EXT_NON_SEAMLESS_CUBE_MAP_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_opacity_micromap.html>
+#[allow(deprecated)]
+pub const EXT_OPACITY_MICROMAP_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_opacity_micromap"),
+    number: 397,
+    type_: "device",
+    author: "EXT",
+    contact: "Christoph Kubisch @pixeljetstream, Eric Werness",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_ACCELERATION_STRUCTURE_EXTENSION.name,
+        KHR_SYNCHRONIZATION2_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_pageable_device_local_memory.html>
 #[allow(deprecated)]
 pub const EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_EXTENSION: Extension = Extension {
@@ -1563,6 +1633,22 @@ pub const EXT_PIPELINE_PROPERTIES_EXTENSION: Extension = Extension {
     type_: "device",
     author: "EXT",
     contact: "Mukund Keshava @mkeshavanv",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_pipeline_protected_access.html>
+#[allow(deprecated)]
+pub const EXT_PIPELINE_PROTECTED_ACCESS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_pipeline_protected_access"),
+    number: 467,
+    type_: "device",
+    author: "EXT",
+    contact: "Shahbaz Youssefi @syoussefi",
     platform: None,
     required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
     required_version: None,
@@ -4467,6 +4553,47 @@ pub const NV_MESH_SHADER_EXTENSION: Extension = Extension {
     contact: "Christoph Kubisch @pixeljetstream",
     platform: None,
     required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_optical_flow.html>
+#[allow(deprecated)]
+pub const NV_OPTICAL_FLOW_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_optical_flow"),
+    number: 465,
+    type_: "device",
+    author: "NV",
+    contact: "Carsten Rohde @crohde",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+        KHR_FORMAT_FEATURE_FLAGS2_EXTENSION.name,
+        KHR_SYNCHRONIZATION2_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_present_barrier.html>
+#[allow(deprecated)]
+pub const NV_PRESENT_BARRIER_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_present_barrier"),
+    number: 293,
+    type_: "device",
+    author: "NV",
+    contact: "Liya Li @liyli",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+        KHR_SURFACE_EXTENSION.name,
+        KHR_GET_SURFACE_CAPABILITIES2_EXTENSION.name,
+        KHR_SWAPCHAIN_EXTENSION.name,
+    ]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
