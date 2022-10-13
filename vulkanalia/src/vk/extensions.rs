@@ -397,6 +397,15 @@ pub trait ArmRasterizationOrderAttachmentAccessExtension: DeviceV1_0 {
 
 impl ArmRasterizationOrderAttachmentAccessExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_ARM_shader_core_builtins.html>
+pub trait ArmShaderCoreBuiltinsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = ARM_SHADER_CORE_BUILTINS_EXTENSION;
+}
+
+impl ArmShaderCoreBuiltinsExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_4444_formats.html>
 pub trait Ext4444FormatsExtension: DeviceV1_0 {
     /// The metadata for this extension.

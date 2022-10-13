@@ -11111,6 +11111,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderAtomicFloat2Features
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderAtomicFloatFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderAtomicInt64Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderClockFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderDemoteToHelperInvocationFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderDrawParametersFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {}
@@ -31882,6 +31883,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderAtomicFloat2F
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderAtomicFloatFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderAtomicInt64Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderClockFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceShaderDemoteToHelperInvocationFeatures
 {
@@ -39196,6 +39198,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPropert
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRobustness2PropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSampleLocationsPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSamplerFilterMinmaxProperties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCoreBuiltinsPropertiesARM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCoreProperties2AMD {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCorePropertiesAMD {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderIntegerDotProductProperties {}
@@ -41209,6 +41212,128 @@ impl ops::DerefMut for PhysicalDeviceShaderClockFeaturesKHRBuilder {
 
 unsafe impl Cast for PhysicalDeviceShaderClockFeaturesKHRBuilder {
     type Target = PhysicalDeviceShaderClockFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {
+    type Target = PhysicalDeviceShaderCoreBuiltinsFeaturesARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {
+    type Builder = PhysicalDeviceShaderCoreBuiltinsFeaturesARMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderCoreBuiltinsFeaturesARM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderCoreBuiltinsFeaturesARMBuilder {
+    value: PhysicalDeviceShaderCoreBuiltinsFeaturesARM,
+}
+
+impl PhysicalDeviceShaderCoreBuiltinsFeaturesARMBuilder {
+    #[inline]
+    pub fn shader_core_builtins(mut self, shader_core_builtins: bool) -> Self {
+        self.value.shader_core_builtins = shader_core_builtins as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderCoreBuiltinsFeaturesARM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderCoreBuiltinsFeaturesARMBuilder {
+    type Target = PhysicalDeviceShaderCoreBuiltinsFeaturesARM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderCoreBuiltinsFeaturesARMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderCoreBuiltinsFeaturesARMBuilder {
+    type Target = PhysicalDeviceShaderCoreBuiltinsFeaturesARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderCoreBuiltinsPropertiesARM {
+    type Target = PhysicalDeviceShaderCoreBuiltinsPropertiesARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderCoreBuiltinsPropertiesARM {
+    type Builder = PhysicalDeviceShaderCoreBuiltinsPropertiesARMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderCoreBuiltinsPropertiesARM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderCoreBuiltinsPropertiesARMBuilder {
+    value: PhysicalDeviceShaderCoreBuiltinsPropertiesARM,
+}
+
+impl PhysicalDeviceShaderCoreBuiltinsPropertiesARMBuilder {
+    #[inline]
+    pub fn shader_core_count(mut self, shader_core_count: u32) -> Self {
+        self.value.shader_core_count = shader_core_count;
+        self
+    }
+
+    #[inline]
+    pub fn shader_warps_per_core(mut self, shader_warps_per_core: u32) -> Self {
+        self.value.shader_warps_per_core = shader_warps_per_core;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderCoreBuiltinsPropertiesARM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderCoreBuiltinsPropertiesARMBuilder {
+    type Target = PhysicalDeviceShaderCoreBuiltinsPropertiesARM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderCoreBuiltinsPropertiesARMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderCoreBuiltinsPropertiesARMBuilder {
+    type Target = PhysicalDeviceShaderCoreBuiltinsPropertiesARM;
 
     #[inline]
     fn into(self) -> Self::Target {
