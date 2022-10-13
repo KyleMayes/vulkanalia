@@ -447,6 +447,22 @@ pub const ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION: Extension = Exten
     promoted_to: Some("VK_EXT_rasterization_order_attachment_access"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_ARM_shader_core_builtins.html>
+#[allow(deprecated)]
+pub const ARM_SHADER_CORE_BUILTINS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_ARM_shader_core_builtins"),
+    number: 498,
+    type_: "device",
+    author: "ARM",
+    contact: "Kevin Petit @kevinpetit",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_4444_formats.html>
 #[allow(deprecated)]
 pub const EXT_4444_FORMATS_EXTENSION: Extension = Extension {

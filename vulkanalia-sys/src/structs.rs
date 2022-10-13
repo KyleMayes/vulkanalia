@@ -11966,6 +11966,48 @@ impl Default for PhysicalDeviceShaderClockFeaturesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderCoreBuiltinsFeaturesARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_core_builtins: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM,
+            next: ptr::null_mut(),
+            shader_core_builtins: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderCoreBuiltinsPropertiesARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_core_count: u32,
+    pub shader_warps_per_core: u32,
+}
+
+impl Default for PhysicalDeviceShaderCoreBuiltinsPropertiesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM,
+            next: ptr::null_mut(),
+            shader_core_count: u32::default(),
+            shader_warps_per_core: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderCoreProperties2AMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
