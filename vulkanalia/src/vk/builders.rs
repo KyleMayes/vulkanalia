@@ -41299,6 +41299,12 @@ pub struct PhysicalDeviceShaderCoreBuiltinsPropertiesARMBuilder {
 
 impl PhysicalDeviceShaderCoreBuiltinsPropertiesARMBuilder {
     #[inline]
+    pub fn shader_core_mask(mut self, shader_core_mask: u64) -> Self {
+        self.value.shader_core_mask = shader_core_mask;
+        self
+    }
+
+    #[inline]
     pub fn shader_core_count(mut self, shader_core_count: u32) -> Self {
         self.value.shader_core_count = shader_core_count;
         self

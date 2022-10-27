@@ -11992,6 +11992,7 @@ impl Default for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {
 pub struct PhysicalDeviceShaderCoreBuiltinsPropertiesARM {
     pub s_type: StructureType,
     pub next: *mut c_void,
+    pub shader_core_mask: u64,
     pub shader_core_count: u32,
     pub shader_warps_per_core: u32,
 }
@@ -12002,6 +12003,7 @@ impl Default for PhysicalDeviceShaderCoreBuiltinsPropertiesARM {
         Self {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM,
             next: ptr::null_mut(),
+            shader_core_mask: u64::default(),
             shader_core_count: u32::default(),
             shader_warps_per_core: u32::default(),
         }
