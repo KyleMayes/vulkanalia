@@ -2514,6 +2514,7 @@ pub const IMG_FILTER_CUBIC_EXTENSION: Extension = Extension {
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_IMG_format_pvrtc.html>
+#[deprecated]
 #[allow(deprecated)]
 pub const IMG_FORMAT_PVRTC_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_IMG_format_pvrtc"),
@@ -2524,7 +2525,7 @@ pub const IMG_FORMAT_PVRTC_EXTENSION: Extension = Extension {
     platform: None,
     required_extensions: None,
     required_version: None,
-    deprecated_by: None,
+    deprecated_by: Some(""),
     obsoleted_by: None,
     promoted_to: None,
 };
@@ -4234,6 +4235,25 @@ pub const NV_COOPERATIVE_MATRIX_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_copy_memory_indirect.html>
+#[allow(deprecated)]
+pub const NV_COPY_MEMORY_INDIRECT_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_copy_memory_indirect"),
+    number: 427,
+    type_: "device",
+    author: "NV",
+    contact: "Vikram Kushwaha @vkushwaha-nv",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+        KHR_BUFFER_DEVICE_ADDRESS_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_corner_sampled_image.html>
 #[allow(deprecated)]
 pub const NV_CORNER_SAMPLED_IMAGE_EXTENSION: Extension = Extension {
@@ -4559,6 +4579,25 @@ pub const NV_LINEAR_COLOR_ATTACHMENT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_memory_decompression.html>
+#[allow(deprecated)]
+pub const NV_MEMORY_DECOMPRESSION_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_memory_decompression"),
+    number: 428,
+    type_: "device",
+    author: "NV",
+    contact: "Vikram Kushwaha @vkushwaha-nv",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+        KHR_BUFFER_DEVICE_ADDRESS_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_mesh_shader.html>
 #[allow(deprecated)]
 pub const NV_MESH_SHADER_EXTENSION: Extension = Extension {
@@ -4629,6 +4668,22 @@ pub const NV_RAY_TRACING_EXTENSION: Extension = Extension {
         KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
         KHR_GET_MEMORY_REQUIREMENTS2_EXTENSION.name,
     ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_ray_tracing_invocation_reorder.html>
+#[allow(deprecated)]
+pub const NV_RAY_TRACING_INVOCATION_REORDER_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_ray_tracing_invocation_reorder"),
+    number: 491,
+    type_: "device",
+    author: "NV",
+    contact: "Eric Werness @ewerness-nv",
+    platform: None,
+    required_extensions: Some(&[KHR_RAY_TRACING_PIPELINE_EXTENSION.name]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,

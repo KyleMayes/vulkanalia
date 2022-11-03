@@ -2310,6 +2310,15 @@ impl Default for CopyImageToBufferInfo2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryIndirectCommandNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct CopyMemoryIndirectCommandNV {
+    pub src_address: DeviceAddress,
+    pub dst_address: DeviceAddress,
+    pub size: DeviceSize,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryToAccelerationStructureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -2332,6 +2341,18 @@ impl Default for CopyMemoryToAccelerationStructureInfoKHR {
             mode: CopyAccelerationStructureModeKHR::default(),
         }
     }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryToImageIndirectCommandNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct CopyMemoryToImageIndirectCommandNV {
+    pub src_address: DeviceAddress,
+    pub buffer_row_length: u32,
+    pub buffer_image_height: u32,
+    pub image_subresource: ImageSubresourceLayers,
+    pub image_offset: Offset3D,
+    pub image_extent: Extent3D,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryToMicromapInfoEXT.html>
@@ -2783,6 +2804,17 @@ impl Default for DebugUtilsObjectTagInfoEXT {
             tag: ptr::null(),
         }
     }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDecompressMemoryRegionNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct DecompressMemoryRegionNV {
+    pub src_address: DeviceAddress,
+    pub dst_address: DeviceAddress,
+    pub compressed_size: DeviceSize,
+    pub decompressed_size: DeviceSize,
+    pub decompression_method: MemoryDecompressionMethodFlagsNV,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDedicatedAllocationBufferCreateInfoNV.html>
@@ -8318,6 +8350,46 @@ impl Default for PhysicalDeviceCooperativeMatrixPropertiesNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceCopyMemoryIndirectFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub indirect_copy: Bool32,
+}
+
+impl Default for PhysicalDeviceCopyMemoryIndirectFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV,
+            next: ptr::null_mut(),
+            indirect_copy: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceCopyMemoryIndirectPropertiesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub supported_queues: QueueFlags,
+}
+
+impl Default for PhysicalDeviceCopyMemoryIndirectPropertiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV,
+            next: ptr::null_mut(),
+            supported_queues: QueueFlags::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCornerSampledImageFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10399,6 +10471,48 @@ impl Default for PhysicalDeviceMemoryBudgetPropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMemoryDecompressionFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMemoryDecompressionFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub memory_decompression: Bool32,
+}
+
+impl Default for PhysicalDeviceMemoryDecompressionFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV,
+            next: ptr::null_mut(),
+            memory_decompression: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMemoryDecompressionPropertiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMemoryDecompressionPropertiesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub decompression_methods: MemoryDecompressionMethodFlagsNV,
+    pub max_decompression_indirect_count: u64,
+}
+
+impl Default for PhysicalDeviceMemoryDecompressionPropertiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV,
+            next: ptr::null_mut(),
+            decompression_methods: MemoryDecompressionMethodFlagsNV::default(),
+            max_decompression_indirect_count: u64::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMemoryPriorityFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11518,6 +11632,47 @@ impl Default for PhysicalDeviceRayQueryFeaturesKHR {
             s_type: StructureType::PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR,
             next: ptr::null_mut(),
             ray_query: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub ray_tracing_invocation_reorder: Bool32,
+}
+
+impl Default for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV,
+            next: ptr::null_mut(),
+            ray_tracing_invocation_reorder: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceRayTracingInvocationReorderPropertiesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub ray_tracing_invocation_reorder_reordering_hint: RayTracingInvocationReorderModeNV,
+}
+
+impl Default for PhysicalDeviceRayTracingInvocationReorderPropertiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV,
+            next: ptr::null_mut(),
+            ray_tracing_invocation_reorder_reordering_hint:
+                RayTracingInvocationReorderModeNV::default(),
         }
     }
 }
