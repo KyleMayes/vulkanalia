@@ -8118,6 +8118,76 @@ unsafe impl<'b> Cast for CopyImageToBufferInfo2Builder<'b> {
     }
 }
 
+unsafe impl Cast for CopyMemoryIndirectCommandNV {
+    type Target = CopyMemoryIndirectCommandNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for CopyMemoryIndirectCommandNV {
+    type Builder = CopyMemoryIndirectCommandNVBuilder;
+}
+
+/// A builder for a [`CopyMemoryIndirectCommandNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CopyMemoryIndirectCommandNVBuilder {
+    value: CopyMemoryIndirectCommandNV,
+}
+
+impl CopyMemoryIndirectCommandNVBuilder {
+    #[inline]
+    pub fn src_address(mut self, src_address: DeviceAddress) -> Self {
+        self.value.src_address = src_address;
+        self
+    }
+
+    #[inline]
+    pub fn dst_address(mut self, dst_address: DeviceAddress) -> Self {
+        self.value.dst_address = dst_address;
+        self
+    }
+
+    #[inline]
+    pub fn size(mut self, size: DeviceSize) -> Self {
+        self.value.size = size;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CopyMemoryIndirectCommandNV {
+        self.value
+    }
+}
+
+impl ops::Deref for CopyMemoryIndirectCommandNVBuilder {
+    type Target = CopyMemoryIndirectCommandNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for CopyMemoryIndirectCommandNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for CopyMemoryIndirectCommandNVBuilder {
+    type Target = CopyMemoryIndirectCommandNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for CopyMemoryToAccelerationStructureInfoKHR {
     type Target = CopyMemoryToAccelerationStructureInfoKHR;
 
@@ -8181,6 +8251,97 @@ impl ops::DerefMut for CopyMemoryToAccelerationStructureInfoKHRBuilder {
 
 unsafe impl Cast for CopyMemoryToAccelerationStructureInfoKHRBuilder {
     type Target = CopyMemoryToAccelerationStructureInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CopyMemoryToImageIndirectCommandNV {
+    type Target = CopyMemoryToImageIndirectCommandNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for CopyMemoryToImageIndirectCommandNV {
+    type Builder = CopyMemoryToImageIndirectCommandNVBuilder;
+}
+
+/// A builder for a [`CopyMemoryToImageIndirectCommandNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CopyMemoryToImageIndirectCommandNVBuilder {
+    value: CopyMemoryToImageIndirectCommandNV,
+}
+
+impl CopyMemoryToImageIndirectCommandNVBuilder {
+    #[inline]
+    pub fn src_address(mut self, src_address: DeviceAddress) -> Self {
+        self.value.src_address = src_address;
+        self
+    }
+
+    #[inline]
+    pub fn buffer_row_length(mut self, buffer_row_length: u32) -> Self {
+        self.value.buffer_row_length = buffer_row_length;
+        self
+    }
+
+    #[inline]
+    pub fn buffer_image_height(mut self, buffer_image_height: u32) -> Self {
+        self.value.buffer_image_height = buffer_image_height;
+        self
+    }
+
+    #[inline]
+    pub fn image_subresource(
+        mut self,
+        image_subresource: impl Cast<Target = ImageSubresourceLayers>,
+    ) -> Self {
+        self.value.image_subresource = image_subresource.into();
+        self
+    }
+
+    #[inline]
+    pub fn image_offset(mut self, image_offset: impl Cast<Target = Offset3D>) -> Self {
+        self.value.image_offset = image_offset.into();
+        self
+    }
+
+    #[inline]
+    pub fn image_extent(mut self, image_extent: impl Cast<Target = Extent3D>) -> Self {
+        self.value.image_extent = image_extent.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CopyMemoryToImageIndirectCommandNV {
+        self.value
+    }
+}
+
+impl ops::Deref for CopyMemoryToImageIndirectCommandNVBuilder {
+    type Target = CopyMemoryToImageIndirectCommandNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for CopyMemoryToImageIndirectCommandNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for CopyMemoryToImageIndirectCommandNVBuilder {
+    type Target = CopyMemoryToImageIndirectCommandNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -9414,6 +9575,91 @@ impl<'b> ops::DerefMut for DebugUtilsObjectTagInfoEXTBuilder<'b> {
 
 unsafe impl<'b> Cast for DebugUtilsObjectTagInfoEXTBuilder<'b> {
     type Target = DebugUtilsObjectTagInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DecompressMemoryRegionNV {
+    type Target = DecompressMemoryRegionNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DecompressMemoryRegionNV {
+    type Builder = DecompressMemoryRegionNVBuilder;
+}
+
+/// A builder for a [`DecompressMemoryRegionNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DecompressMemoryRegionNVBuilder {
+    value: DecompressMemoryRegionNV,
+}
+
+impl DecompressMemoryRegionNVBuilder {
+    #[inline]
+    pub fn src_address(mut self, src_address: DeviceAddress) -> Self {
+        self.value.src_address = src_address;
+        self
+    }
+
+    #[inline]
+    pub fn dst_address(mut self, dst_address: DeviceAddress) -> Self {
+        self.value.dst_address = dst_address;
+        self
+    }
+
+    #[inline]
+    pub fn compressed_size(mut self, compressed_size: DeviceSize) -> Self {
+        self.value.compressed_size = compressed_size;
+        self
+    }
+
+    #[inline]
+    pub fn decompressed_size(mut self, decompressed_size: DeviceSize) -> Self {
+        self.value.decompressed_size = decompressed_size;
+        self
+    }
+
+    #[inline]
+    pub fn decompression_method(
+        mut self,
+        decompression_method: MemoryDecompressionMethodFlagsNV,
+    ) -> Self {
+        self.value.decompression_method = decompression_method;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DecompressMemoryRegionNV {
+        self.value
+    }
+}
+
+impl ops::Deref for DecompressMemoryRegionNVBuilder {
+    type Target = DecompressMemoryRegionNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DecompressMemoryRegionNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DecompressMemoryRegionNVBuilder {
+    type Target = DecompressMemoryRegionNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -11022,6 +11268,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceColorWriteEnableFeaturesEX
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceComputeShaderDerivativesFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceConditionalRenderingFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCornerSampledImageFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoverageReductionModeFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCustomBorderColorFeaturesEXT {}
@@ -11067,6 +11314,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLegacyDitheringFeaturesEXT
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLineRasterizationFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance4Features {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryDecompressionFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesNV {}
@@ -11099,6 +11347,7 @@ unsafe impl ExtendsDeviceCreateInfo
 {
 }
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayQueryFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
@@ -28501,6 +28750,122 @@ unsafe impl Cast for PhysicalDeviceCooperativeMatrixPropertiesNVBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectFeaturesNV {
+    type Target = PhysicalDeviceCopyMemoryIndirectFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceCopyMemoryIndirectFeaturesNV {
+    type Builder = PhysicalDeviceCopyMemoryIndirectFeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceCopyMemoryIndirectFeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceCopyMemoryIndirectFeaturesNVBuilder {
+    value: PhysicalDeviceCopyMemoryIndirectFeaturesNV,
+}
+
+impl PhysicalDeviceCopyMemoryIndirectFeaturesNVBuilder {
+    #[inline]
+    pub fn indirect_copy(mut self, indirect_copy: bool) -> Self {
+        self.value.indirect_copy = indirect_copy as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceCopyMemoryIndirectFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceCopyMemoryIndirectFeaturesNVBuilder {
+    type Target = PhysicalDeviceCopyMemoryIndirectFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceCopyMemoryIndirectFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectFeaturesNVBuilder {
+    type Target = PhysicalDeviceCopyMemoryIndirectFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectPropertiesNV {
+    type Target = PhysicalDeviceCopyMemoryIndirectPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceCopyMemoryIndirectPropertiesNV {
+    type Builder = PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceCopyMemoryIndirectPropertiesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder {
+    value: PhysicalDeviceCopyMemoryIndirectPropertiesNV,
+}
+
+impl PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder {
+    #[inline]
+    pub fn supported_queues(mut self, supported_queues: QueueFlags) -> Self {
+        self.value.supported_queues = supported_queues;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceCopyMemoryIndirectPropertiesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder {
+    type Target = PhysicalDeviceCopyMemoryIndirectPropertiesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder {
+    type Target = PhysicalDeviceCopyMemoryIndirectPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceCornerSampledImageFeaturesNV {
     type Target = PhysicalDeviceCornerSampledImageFeaturesNV;
 
@@ -31780,6 +32145,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceColorWriteEnableFea
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceComputeShaderDerivativesFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceConditionalRenderingFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrixFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCornerSampledImageFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCoverageReductionModeFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCustomBorderColorFeaturesEXT {}
@@ -31830,6 +32196,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLegacyDitheringFeat
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLineRasterizationFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance4Features {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryDecompressionFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryPriorityFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMeshShaderFeaturesNV {}
@@ -31871,6 +32238,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 {
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayQueryFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
@@ -36141,6 +36509,134 @@ unsafe impl Cast for PhysicalDeviceMemoryBudgetPropertiesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceMemoryDecompressionFeaturesNV {
+    type Target = PhysicalDeviceMemoryDecompressionFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMemoryDecompressionFeaturesNV {
+    type Builder = PhysicalDeviceMemoryDecompressionFeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceMemoryDecompressionFeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMemoryDecompressionFeaturesNVBuilder {
+    value: PhysicalDeviceMemoryDecompressionFeaturesNV,
+}
+
+impl PhysicalDeviceMemoryDecompressionFeaturesNVBuilder {
+    #[inline]
+    pub fn memory_decompression(mut self, memory_decompression: bool) -> Self {
+        self.value.memory_decompression = memory_decompression as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMemoryDecompressionFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMemoryDecompressionFeaturesNVBuilder {
+    type Target = PhysicalDeviceMemoryDecompressionFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMemoryDecompressionFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMemoryDecompressionFeaturesNVBuilder {
+    type Target = PhysicalDeviceMemoryDecompressionFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMemoryDecompressionPropertiesNV {
+    type Target = PhysicalDeviceMemoryDecompressionPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMemoryDecompressionPropertiesNV {
+    type Builder = PhysicalDeviceMemoryDecompressionPropertiesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceMemoryDecompressionPropertiesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMemoryDecompressionPropertiesNVBuilder {
+    value: PhysicalDeviceMemoryDecompressionPropertiesNV,
+}
+
+impl PhysicalDeviceMemoryDecompressionPropertiesNVBuilder {
+    #[inline]
+    pub fn decompression_methods(
+        mut self,
+        decompression_methods: MemoryDecompressionMethodFlagsNV,
+    ) -> Self {
+        self.value.decompression_methods = decompression_methods;
+        self
+    }
+
+    #[inline]
+    pub fn max_decompression_indirect_count(
+        mut self,
+        max_decompression_indirect_count: u64,
+    ) -> Self {
+        self.value.max_decompression_indirect_count = max_decompression_indirect_count;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMemoryDecompressionPropertiesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMemoryDecompressionPropertiesNVBuilder {
+    type Target = PhysicalDeviceMemoryDecompressionPropertiesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMemoryDecompressionPropertiesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMemoryDecompressionPropertiesNVBuilder {
+    type Target = PhysicalDeviceMemoryDecompressionPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceMemoryPriorityFeaturesEXT {
     type Target = PhysicalDeviceMemoryPriorityFeaturesEXT;
 
@@ -39140,6 +39636,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2
 {
 }
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCooperativeMatrixPropertiesNV {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCopyMemoryIndirectPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCustomBorderColorPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDepthStencilResolveProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDescriptorIndexingProperties {}
@@ -39175,6 +39672,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBloc
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLineRasterizationPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance3Properties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance4Properties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMemoryDecompressionPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMeshShaderPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMeshShaderPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMultiDrawPropertiesEXT {}
@@ -39193,6 +39691,10 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePortabilitySubset
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProtectedMemoryProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceProvokingVertexPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePushDescriptorPropertiesKHR {}
+unsafe impl ExtendsPhysicalDeviceProperties2
+    for PhysicalDeviceRayTracingInvocationReorderPropertiesNV
+{
+}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPipelinePropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRayTracingPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceRobustness2PropertiesEXT {}
@@ -39796,6 +40298,126 @@ impl ops::DerefMut for PhysicalDeviceRayQueryFeaturesKHRBuilder {
 
 unsafe impl Cast for PhysicalDeviceRayQueryFeaturesKHRBuilder {
     type Target = PhysicalDeviceRayQueryFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
+    type Target = PhysicalDeviceRayTracingInvocationReorderFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
+    type Builder = PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceRayTracingInvocationReorderFeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder {
+    value: PhysicalDeviceRayTracingInvocationReorderFeaturesNV,
+}
+
+impl PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder {
+    #[inline]
+    pub fn ray_tracing_invocation_reorder(mut self, ray_tracing_invocation_reorder: bool) -> Self {
+        self.value.ray_tracing_invocation_reorder = ray_tracing_invocation_reorder as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder {
+    type Target = PhysicalDeviceRayTracingInvocationReorderFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingInvocationReorderFeaturesNVBuilder {
+    type Target = PhysicalDeviceRayTracingInvocationReorderFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingInvocationReorderPropertiesNV {
+    type Target = PhysicalDeviceRayTracingInvocationReorderPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceRayTracingInvocationReorderPropertiesNV {
+    type Builder = PhysicalDeviceRayTracingInvocationReorderPropertiesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceRayTracingInvocationReorderPropertiesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceRayTracingInvocationReorderPropertiesNVBuilder {
+    value: PhysicalDeviceRayTracingInvocationReorderPropertiesNV,
+}
+
+impl PhysicalDeviceRayTracingInvocationReorderPropertiesNVBuilder {
+    #[inline]
+    pub fn ray_tracing_invocation_reorder_reordering_hint(
+        mut self,
+        ray_tracing_invocation_reorder_reordering_hint: RayTracingInvocationReorderModeNV,
+    ) -> Self {
+        self.value.ray_tracing_invocation_reorder_reordering_hint =
+            ray_tracing_invocation_reorder_reordering_hint;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceRayTracingInvocationReorderPropertiesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceRayTracingInvocationReorderPropertiesNVBuilder {
+    type Target = PhysicalDeviceRayTracingInvocationReorderPropertiesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceRayTracingInvocationReorderPropertiesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingInvocationReorderPropertiesNVBuilder {
+    type Target = PhysicalDeviceRayTracingInvocationReorderPropertiesNV;
 
     #[inline]
     fn into(self) -> Self::Target {

@@ -993,6 +993,15 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMemoryDecompressionMethodFlagsNV.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct MemoryDecompressionMethodFlagsNV: Flags {
+        const GDEFLATE_1_0 = 1;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMemoryHeapFlags.html>
     #[repr(transparent)]
     #[derive(Default)]

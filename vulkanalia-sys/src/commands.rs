@@ -496,10 +496,29 @@ pub type PFN_vkCmdCopyImageToBuffer2 = unsafe extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdCopyImageToBuffer2KHR.html>
 pub type PFN_vkCmdCopyImageToBuffer2KHR = PFN_vkCmdCopyImageToBuffer2;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdCopyMemoryIndirectNV.html>
+pub type PFN_vkCmdCopyMemoryIndirectNV = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _copy_buffer_address: DeviceAddress,
+    _copy_count: u32,
+    _stride: u32,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdCopyMemoryToAccelerationStructureKHR.html>
 pub type PFN_vkCmdCopyMemoryToAccelerationStructureKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _info: *const CopyMemoryToAccelerationStructureInfoKHR,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdCopyMemoryToImageIndirectNV.html>
+pub type PFN_vkCmdCopyMemoryToImageIndirectNV = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _copy_buffer_address: DeviceAddress,
+    _copy_count: u32,
+    _stride: u32,
+    _dst_image: Image,
+    _dst_image_layout: ImageLayout,
+    _image_subresources: *const ImageSubresourceLayers,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdCopyMemoryToMicromapEXT.html>
@@ -547,6 +566,21 @@ pub type PFN_vkCmdDebugMarkerEndEXT = unsafe extern "system" fn(_command_buffer:
 pub type PFN_vkCmdDebugMarkerInsertEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _marker_info: *const DebugMarkerMarkerInfoEXT,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDecompressMemoryIndirectCountNV.html>
+pub type PFN_vkCmdDecompressMemoryIndirectCountNV = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _indirect_commands_address: DeviceAddress,
+    _indirect_commands_count_address: DeviceAddress,
+    _stride: u32,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDecompressMemoryNV.html>
+pub type PFN_vkCmdDecompressMemoryNV = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _decompress_region_count: u32,
+    _decompress_memory_regions: *const DecompressMemoryRegionNV,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDispatch.html>
