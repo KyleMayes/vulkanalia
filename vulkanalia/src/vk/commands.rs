@@ -89,8 +89,10 @@ pub struct DeviceCommands {
     pub cmd_copy_image_to_buffer: PFN_vkCmdCopyImageToBuffer,
     pub cmd_copy_image_to_buffer2: PFN_vkCmdCopyImageToBuffer2,
     pub cmd_copy_image_to_buffer2_khr: PFN_vkCmdCopyImageToBuffer2KHR,
+    pub cmd_copy_memory_indirect_nv: PFN_vkCmdCopyMemoryIndirectNV,
     pub cmd_copy_memory_to_acceleration_structure_khr:
         PFN_vkCmdCopyMemoryToAccelerationStructureKHR,
+    pub cmd_copy_memory_to_image_indirect_nv: PFN_vkCmdCopyMemoryToImageIndirectNV,
     pub cmd_copy_memory_to_micromap_ext: PFN_vkCmdCopyMemoryToMicromapEXT,
     pub cmd_copy_micromap_ext: PFN_vkCmdCopyMicromapEXT,
     pub cmd_copy_micromap_to_memory_ext: PFN_vkCmdCopyMicromapToMemoryEXT,
@@ -99,6 +101,8 @@ pub struct DeviceCommands {
     pub cmd_debug_marker_begin_ext: PFN_vkCmdDebugMarkerBeginEXT,
     pub cmd_debug_marker_end_ext: PFN_vkCmdDebugMarkerEndEXT,
     pub cmd_debug_marker_insert_ext: PFN_vkCmdDebugMarkerInsertEXT,
+    pub cmd_decompress_memory_indirect_count_nv: PFN_vkCmdDecompressMemoryIndirectCountNV,
+    pub cmd_decompress_memory_nv: PFN_vkCmdDecompressMemoryNV,
     pub cmd_dispatch: PFN_vkCmdDispatch,
     pub cmd_dispatch_base: PFN_vkCmdDispatchBase,
     pub cmd_dispatch_base_khr: PFN_vkCmdDispatchBaseKHR,
@@ -1574,6 +1578,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_copy_memory_indirect_nv: {
+                let value = loader(b"vkCmdCopyMemoryIndirectNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _copy_buffer_address: DeviceAddress,
+                        _copy_count: u32,
+                        _stride: u32,
+                    ) {
+                        panic!("could not load vkCmdCopyMemoryIndirectNV")
+                    }
+                    fallback
+                }
+            },
             cmd_copy_memory_to_acceleration_structure_khr: {
                 let value = loader(
                     b"vkCmdCopyMemoryToAccelerationStructureKHR\0"
@@ -1588,6 +1608,25 @@ impl DeviceCommands {
                         _info: *const CopyMemoryToAccelerationStructureInfoKHR,
                     ) {
                         panic!("could not load vkCmdCopyMemoryToAccelerationStructureKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_copy_memory_to_image_indirect_nv: {
+                let value = loader(b"vkCmdCopyMemoryToImageIndirectNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _copy_buffer_address: DeviceAddress,
+                        _copy_count: u32,
+                        _stride: u32,
+                        _dst_image: Image,
+                        _dst_image_layout: ImageLayout,
+                        _image_subresources: *const ImageSubresourceLayers,
+                    ) {
+                        panic!("could not load vkCmdCopyMemoryToImageIndirectNV")
                     }
                     fallback
                 }
@@ -1703,6 +1742,37 @@ impl DeviceCommands {
                         _marker_info: *const DebugMarkerMarkerInfoEXT,
                     ) {
                         panic!("could not load vkCmdDebugMarkerInsertEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_decompress_memory_indirect_count_nv: {
+                let value = loader(b"vkCmdDecompressMemoryIndirectCountNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _indirect_commands_address: DeviceAddress,
+                        _indirect_commands_count_address: DeviceAddress,
+                        _stride: u32,
+                    ) {
+                        panic!("could not load vkCmdDecompressMemoryIndirectCountNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_decompress_memory_nv: {
+                let value = loader(b"vkCmdDecompressMemoryNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _decompress_region_count: u32,
+                        _decompress_memory_regions: *const DecompressMemoryRegionNV,
+                    ) {
+                        panic!("could not load vkCmdDecompressMemoryNV")
                     }
                     fallback
                 }
