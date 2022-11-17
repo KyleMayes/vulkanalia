@@ -1559,6 +1559,7 @@ impl DriverId {
     pub const SAMSUNG_PROPRIETARY: Self = Self(21);
     pub const MESA_VENUS: Self = Self(22);
     pub const MESA_DOZEN: Self = Self(23);
+    pub const MESA_NVK: Self = Self(24);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1599,6 +1600,7 @@ impl fmt::Debug for DriverId {
             21 => write!(f, "SAMSUNG_PROPRIETARY"),
             22 => write!(f, "MESA_VENUS"),
             23 => write!(f, "MESA_DOZEN"),
+            24 => write!(f, "MESA_NVK"),
             _ => self.0.fmt(f),
         }
     }
@@ -4092,6 +4094,38 @@ impl fmt::Debug for RasterizationOrderAMD {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRayTracingInvocationReorderModeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct RayTracingInvocationReorderModeNV(i32);
+
+impl RayTracingInvocationReorderModeNV {
+    pub const NONE: Self = Self(0);
+    pub const REORDER: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for RayTracingInvocationReorderModeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "NONE"),
+            1 => write!(f, "REORDER"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRayTracingShaderGroupTypeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -5288,6 +5322,19 @@ impl StructureType {
     pub const IMPORT_METAL_SHARED_EVENT_INFO_EXT: Self = Self(1000311011);
     pub const QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV: Self = Self(1000314008);
     pub const CHECKPOINT_DATA_2_NV: Self = Self(1000314009);
+    pub const PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT: Self = Self(1000316000);
+    pub const PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT: Self = Self(1000316001);
+    pub const PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT: Self = Self(1000316002);
+    pub const DESCRIPTOR_ADDRESS_INFO_EXT: Self = Self(1000316003);
+    pub const DESCRIPTOR_GET_INFO_EXT: Self = Self(1000316004);
+    pub const BUFFER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT: Self = Self(1000316005);
+    pub const IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT: Self = Self(1000316006);
+    pub const IMAGE_VIEW_CAPTURE_DESCRIPTOR_DATA_INFO_EXT: Self = Self(1000316007);
+    pub const SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT: Self = Self(1000316008);
+    pub const OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT: Self = Self(1000316010);
+    pub const DESCRIPTOR_BUFFER_BINDING_INFO_EXT: Self = Self(1000316011);
+    pub const DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT: Self = Self(1000316012);
+    pub const ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT: Self = Self(1000316009);
     pub const PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT: Self = Self(1000320000);
     pub const PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT: Self = Self(1000320001);
     pub const GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT: Self = Self(1000320002);
@@ -5391,6 +5438,10 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM: Self = Self(1000425000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM: Self = Self(1000425001);
     pub const SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM: Self = Self(1000425002);
+    pub const PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV: Self = Self(1000426000);
+    pub const PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV: Self = Self(1000426001);
+    pub const PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV: Self = Self(1000427000);
+    pub const PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV: Self = Self(1000427001);
     pub const PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV: Self = Self(1000430000);
     pub const PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT: Self =
         Self(1000437000);
@@ -5422,6 +5473,8 @@ impl StructureType {
     pub const TILE_PROPERTIES_QCOM: Self = Self(1000484001);
     pub const PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC: Self = Self(1000485000);
     pub const AMIGO_PROFILING_SUBMIT_INFO_SEC: Self = Self(1000485001);
+    pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV: Self = Self(1000490000);
+    pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV: Self = Self(1000490001);
     pub const PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT: Self = Self(1000351000);
     pub const MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT: Self = Self(1000351002);
     pub const PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM: Self = Self(1000497000);
@@ -6022,6 +6075,25 @@ impl fmt::Debug for StructureType {
             1000311011 => write!(f, "IMPORT_METAL_SHARED_EVENT_INFO_EXT"),
             1000314008 => write!(f, "QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV"),
             1000314009 => write!(f, "CHECKPOINT_DATA_2_NV"),
+            1000316000 => write!(f, "PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT"),
+            1000316001 => write!(
+                f,
+                "PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT"
+            ),
+            1000316002 => write!(f, "PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT"),
+            1000316003 => write!(f, "DESCRIPTOR_ADDRESS_INFO_EXT"),
+            1000316004 => write!(f, "DESCRIPTOR_GET_INFO_EXT"),
+            1000316005 => write!(f, "BUFFER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT"),
+            1000316006 => write!(f, "IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT"),
+            1000316007 => write!(f, "IMAGE_VIEW_CAPTURE_DESCRIPTOR_DATA_INFO_EXT"),
+            1000316008 => write!(f, "SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT"),
+            1000316010 => write!(f, "OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT"),
+            1000316011 => write!(f, "DESCRIPTOR_BUFFER_BINDING_INFO_EXT"),
+            1000316012 => write!(
+                f,
+                "DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT"
+            ),
+            1000316009 => write!(f, "ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT"),
             1000320000 => write!(f, "PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT"),
             1000320001 => write!(
                 f,
@@ -6169,6 +6241,10 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM"
             ),
             1000425002 => write!(f, "SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM"),
+            1000426000 => write!(f, "PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV"),
+            1000426001 => write!(f, "PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV"),
+            1000427000 => write!(f, "PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV"),
+            1000427001 => write!(f, "PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV"),
             1000430000 => write!(f, "PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV"),
             1000437000 => write!(
                 f,
@@ -6204,6 +6280,14 @@ impl fmt::Debug for StructureType {
             1000484001 => write!(f, "TILE_PROPERTIES_QCOM"),
             1000485000 => write!(f, "PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC"),
             1000485001 => write!(f, "AMIGO_PROFILING_SUBMIT_INFO_SEC"),
+            1000490000 => write!(
+                f,
+                "PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV"
+            ),
+            1000490001 => write!(
+                f,
+                "PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV"
+            ),
             1000351000 => write!(f, "PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT"),
             1000351002 => write!(f, "MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT"),
             1000497000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM"),

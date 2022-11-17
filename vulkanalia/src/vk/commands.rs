@@ -52,6 +52,9 @@ pub struct DeviceCommands {
     pub cmd_begin_rendering: PFN_vkCmdBeginRendering,
     pub cmd_begin_rendering_khr: PFN_vkCmdBeginRenderingKHR,
     pub cmd_begin_transform_feedback_ext: PFN_vkCmdBeginTransformFeedbackEXT,
+    pub cmd_bind_descriptor_buffer_embedded_samplers_ext:
+        PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT,
+    pub cmd_bind_descriptor_buffers_ext: PFN_vkCmdBindDescriptorBuffersEXT,
     pub cmd_bind_descriptor_sets: PFN_vkCmdBindDescriptorSets,
     pub cmd_bind_index_buffer: PFN_vkCmdBindIndexBuffer,
     pub cmd_bind_invocation_mask_huawei: PFN_vkCmdBindInvocationMaskHUAWEI,
@@ -89,8 +92,10 @@ pub struct DeviceCommands {
     pub cmd_copy_image_to_buffer: PFN_vkCmdCopyImageToBuffer,
     pub cmd_copy_image_to_buffer2: PFN_vkCmdCopyImageToBuffer2,
     pub cmd_copy_image_to_buffer2_khr: PFN_vkCmdCopyImageToBuffer2KHR,
+    pub cmd_copy_memory_indirect_nv: PFN_vkCmdCopyMemoryIndirectNV,
     pub cmd_copy_memory_to_acceleration_structure_khr:
         PFN_vkCmdCopyMemoryToAccelerationStructureKHR,
+    pub cmd_copy_memory_to_image_indirect_nv: PFN_vkCmdCopyMemoryToImageIndirectNV,
     pub cmd_copy_memory_to_micromap_ext: PFN_vkCmdCopyMemoryToMicromapEXT,
     pub cmd_copy_micromap_ext: PFN_vkCmdCopyMicromapEXT,
     pub cmd_copy_micromap_to_memory_ext: PFN_vkCmdCopyMicromapToMemoryEXT,
@@ -99,6 +104,8 @@ pub struct DeviceCommands {
     pub cmd_debug_marker_begin_ext: PFN_vkCmdDebugMarkerBeginEXT,
     pub cmd_debug_marker_end_ext: PFN_vkCmdDebugMarkerEndEXT,
     pub cmd_debug_marker_insert_ext: PFN_vkCmdDebugMarkerInsertEXT,
+    pub cmd_decompress_memory_indirect_count_nv: PFN_vkCmdDecompressMemoryIndirectCountNV,
+    pub cmd_decompress_memory_nv: PFN_vkCmdDecompressMemoryNV,
     pub cmd_dispatch: PFN_vkCmdDispatch,
     pub cmd_dispatch_base: PFN_vkCmdDispatchBase,
     pub cmd_dispatch_base_khr: PFN_vkCmdDispatchBaseKHR,
@@ -186,6 +193,7 @@ pub struct DeviceCommands {
     pub cmd_set_depth_test_enable_ext: PFN_vkCmdSetDepthTestEnableEXT,
     pub cmd_set_depth_write_enable: PFN_vkCmdSetDepthWriteEnable,
     pub cmd_set_depth_write_enable_ext: PFN_vkCmdSetDepthWriteEnableEXT,
+    pub cmd_set_descriptor_buffer_offsets_ext: PFN_vkCmdSetDescriptorBufferOffsetsEXT,
     pub cmd_set_device_mask: PFN_vkCmdSetDeviceMask,
     pub cmd_set_device_mask_khr: PFN_vkCmdSetDeviceMaskKHR,
     pub cmd_set_discard_rectangle_ext: PFN_vkCmdSetDiscardRectangleEXT,
@@ -367,6 +375,8 @@ pub struct DeviceCommands {
     pub get_acceleration_structure_handle_nv: PFN_vkGetAccelerationStructureHandleNV,
     pub get_acceleration_structure_memory_requirements_nv:
         PFN_vkGetAccelerationStructureMemoryRequirementsNV,
+    pub get_acceleration_structure_opaque_capture_descriptor_data_ext:
+        PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT,
     pub get_android_hardware_buffer_properties_android:
         PFN_vkGetAndroidHardwareBufferPropertiesANDROID,
     pub get_buffer_collection_properties_fuchsia: PFN_vkGetBufferCollectionPropertiesFUCHSIA,
@@ -378,12 +388,17 @@ pub struct DeviceCommands {
     pub get_buffer_memory_requirements2_khr: PFN_vkGetBufferMemoryRequirements2KHR,
     pub get_buffer_opaque_capture_address: PFN_vkGetBufferOpaqueCaptureAddress,
     pub get_buffer_opaque_capture_address_khr: PFN_vkGetBufferOpaqueCaptureAddressKHR,
+    pub get_buffer_opaque_capture_descriptor_data_ext:
+        PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT,
     pub get_calibrated_timestamps_ext: PFN_vkGetCalibratedTimestampsEXT,
     pub get_deferred_operation_max_concurrency_khr: PFN_vkGetDeferredOperationMaxConcurrencyKHR,
     pub get_deferred_operation_result_khr: PFN_vkGetDeferredOperationResultKHR,
+    pub get_descriptor_ext: PFN_vkGetDescriptorEXT,
     pub get_descriptor_set_host_mapping_valve: PFN_vkGetDescriptorSetHostMappingVALVE,
+    pub get_descriptor_set_layout_binding_offset_ext: PFN_vkGetDescriptorSetLayoutBindingOffsetEXT,
     pub get_descriptor_set_layout_host_mapping_info_valve:
         PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE,
+    pub get_descriptor_set_layout_size_ext: PFN_vkGetDescriptorSetLayoutSizeEXT,
     pub get_descriptor_set_layout_support: PFN_vkGetDescriptorSetLayoutSupport,
     pub get_descriptor_set_layout_support_khr: PFN_vkGetDescriptorSetLayoutSupportKHR,
     pub get_device_acceleration_structure_compatibility_khr:
@@ -421,6 +436,7 @@ pub struct DeviceCommands {
     pub get_image_memory_requirements: PFN_vkGetImageMemoryRequirements,
     pub get_image_memory_requirements2: PFN_vkGetImageMemoryRequirements2,
     pub get_image_memory_requirements2_khr: PFN_vkGetImageMemoryRequirements2KHR,
+    pub get_image_opaque_capture_descriptor_data_ext: PFN_vkGetImageOpaqueCaptureDescriptorDataEXT,
     pub get_image_sparse_memory_requirements: PFN_vkGetImageSparseMemoryRequirements,
     pub get_image_sparse_memory_requirements2: PFN_vkGetImageSparseMemoryRequirements2,
     pub get_image_sparse_memory_requirements2_khr: PFN_vkGetImageSparseMemoryRequirements2KHR,
@@ -428,6 +444,8 @@ pub struct DeviceCommands {
     pub get_image_subresource_layout2_ext: PFN_vkGetImageSubresourceLayout2EXT,
     pub get_image_view_address_nvx: PFN_vkGetImageViewAddressNVX,
     pub get_image_view_handle_nvx: PFN_vkGetImageViewHandleNVX,
+    pub get_image_view_opaque_capture_descriptor_data_ext:
+        PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT,
     pub get_memory_android_hardware_buffer_android: PFN_vkGetMemoryAndroidHardwareBufferANDROID,
     pub get_memory_fd_khr: PFN_vkGetMemoryFdKHR,
     pub get_memory_fd_properties_khr: PFN_vkGetMemoryFdPropertiesKHR,
@@ -477,6 +495,8 @@ pub struct DeviceCommands {
     pub get_ray_tracing_shader_group_stack_size_khr: PFN_vkGetRayTracingShaderGroupStackSizeKHR,
     pub get_refresh_cycle_duration_google: PFN_vkGetRefreshCycleDurationGOOGLE,
     pub get_render_area_granularity: PFN_vkGetRenderAreaGranularity,
+    pub get_sampler_opaque_capture_descriptor_data_ext:
+        PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT,
     pub get_semaphore_counter_value: PFN_vkGetSemaphoreCounterValue,
     pub get_semaphore_counter_value_khr: PFN_vkGetSemaphoreCounterValueKHR,
     pub get_semaphore_fd_khr: PFN_vkGetSemaphoreFdKHR,
@@ -993,6 +1013,41 @@ impl DeviceCommands {
                         _counter_buffer_offsets: *const DeviceSize,
                     ) {
                         panic!("could not load vkCmdBeginTransformFeedbackEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_bind_descriptor_buffer_embedded_samplers_ext: {
+                let value = loader(
+                    b"vkCmdBindDescriptorBufferEmbeddedSamplersEXT\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _pipeline_bind_point: PipelineBindPoint,
+                        _layout: PipelineLayout,
+                        _set: u32,
+                    ) {
+                        panic!("could not load vkCmdBindDescriptorBufferEmbeddedSamplersEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_bind_descriptor_buffers_ext: {
+                let value = loader(b"vkCmdBindDescriptorBuffersEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _buffer_count: u32,
+                        _binding_infos: *const DescriptorBufferBindingInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdBindDescriptorBuffersEXT")
                     }
                     fallback
                 }
@@ -1574,6 +1629,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_copy_memory_indirect_nv: {
+                let value = loader(b"vkCmdCopyMemoryIndirectNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _copy_buffer_address: DeviceAddress,
+                        _copy_count: u32,
+                        _stride: u32,
+                    ) {
+                        panic!("could not load vkCmdCopyMemoryIndirectNV")
+                    }
+                    fallback
+                }
+            },
             cmd_copy_memory_to_acceleration_structure_khr: {
                 let value = loader(
                     b"vkCmdCopyMemoryToAccelerationStructureKHR\0"
@@ -1588,6 +1659,25 @@ impl DeviceCommands {
                         _info: *const CopyMemoryToAccelerationStructureInfoKHR,
                     ) {
                         panic!("could not load vkCmdCopyMemoryToAccelerationStructureKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_copy_memory_to_image_indirect_nv: {
+                let value = loader(b"vkCmdCopyMemoryToImageIndirectNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _copy_buffer_address: DeviceAddress,
+                        _copy_count: u32,
+                        _stride: u32,
+                        _dst_image: Image,
+                        _dst_image_layout: ImageLayout,
+                        _image_subresources: *const ImageSubresourceLayers,
+                    ) {
+                        panic!("could not load vkCmdCopyMemoryToImageIndirectNV")
                     }
                     fallback
                 }
@@ -1703,6 +1793,37 @@ impl DeviceCommands {
                         _marker_info: *const DebugMarkerMarkerInfoEXT,
                     ) {
                         panic!("could not load vkCmdDebugMarkerInsertEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_decompress_memory_indirect_count_nv: {
+                let value = loader(b"vkCmdDecompressMemoryIndirectCountNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _indirect_commands_address: DeviceAddress,
+                        _indirect_commands_count_address: DeviceAddress,
+                        _stride: u32,
+                    ) {
+                        panic!("could not load vkCmdDecompressMemoryIndirectCountNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_decompress_memory_nv: {
+                let value = loader(b"vkCmdDecompressMemoryNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _decompress_region_count: u32,
+                        _decompress_memory_regions: *const DecompressMemoryRegionNV,
+                    ) {
+                        panic!("could not load vkCmdDecompressMemoryNV")
                     }
                     fallback
                 }
@@ -3060,6 +3181,25 @@ impl DeviceCommands {
                         _depth_write_enable: Bool32,
                     ) {
                         panic!("could not load vkCmdSetDepthWriteEnableEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_descriptor_buffer_offsets_ext: {
+                let value = loader(b"vkCmdSetDescriptorBufferOffsetsEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _pipeline_bind_point: PipelineBindPoint,
+                        _layout: PipelineLayout,
+                        _first_set: u32,
+                        _set_count: u32,
+                        _buffer_indices: *const u32,
+                        _offsets: *const DeviceSize,
+                    ) {
+                        panic!("could not load vkCmdSetDescriptorBufferOffsetsEXT")
                     }
                     fallback
                 }
@@ -5770,6 +5910,25 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_acceleration_structure_opaque_capture_descriptor_data_ext: {
+                let value = loader(
+                    b"vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const AccelerationStructureCaptureDescriptorDataInfoEXT,
+                        _data: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT")
+                    }
+                    fallback
+                }
+            },
             get_android_hardware_buffer_properties_android: {
                 let value = loader(
                     b"vkGetAndroidHardwareBufferPropertiesANDROID\0"
@@ -5919,6 +6078,25 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_buffer_opaque_capture_descriptor_data_ext: {
+                let value = loader(
+                    b"vkGetBufferOpaqueCaptureDescriptorDataEXT\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const BufferCaptureDescriptorDataInfoEXT,
+                        _data: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetBufferOpaqueCaptureDescriptorDataEXT")
+                    }
+                    fallback
+                }
+            },
             get_calibrated_timestamps_ext: {
                 let value = loader(b"vkGetCalibratedTimestampsEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -5964,6 +6142,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_descriptor_ext: {
+                let value = loader(b"vkGetDescriptorEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _descriptor_info: *const DescriptorGetInfoEXT,
+                        _data_size: usize,
+                        _descriptor: *mut c_void,
+                    ) {
+                        panic!("could not load vkGetDescriptorEXT")
+                    }
+                    fallback
+                }
+            },
             get_descriptor_set_host_mapping_valve: {
                 let value = loader(b"vkGetDescriptorSetHostMappingVALVE\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -5975,6 +6169,26 @@ impl DeviceCommands {
                         _data: *mut *mut c_void,
                     ) {
                         panic!("could not load vkGetDescriptorSetHostMappingVALVE")
+                    }
+                    fallback
+                }
+            },
+            get_descriptor_set_layout_binding_offset_ext: {
+                let value = loader(
+                    b"vkGetDescriptorSetLayoutBindingOffsetEXT\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _layout: DescriptorSetLayout,
+                        _binding: u32,
+                        _offset: *mut DeviceSize,
+                    ) {
+                        panic!("could not load vkGetDescriptorSetLayoutBindingOffsetEXT")
                     }
                     fallback
                 }
@@ -5994,6 +6208,21 @@ impl DeviceCommands {
                         _host_mapping: *mut DescriptorSetLayoutHostMappingInfoVALVE,
                     ) {
                         panic!("could not load vkGetDescriptorSetLayoutHostMappingInfoVALVE")
+                    }
+                    fallback
+                }
+            },
+            get_descriptor_set_layout_size_ext: {
+                let value = loader(b"vkGetDescriptorSetLayoutSizeEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _layout: DescriptorSetLayout,
+                        _layout_size_in_bytes: *mut DeviceSize,
+                    ) {
+                        panic!("could not load vkGetDescriptorSetLayoutSizeEXT")
                     }
                     fallback
                 }
@@ -6518,6 +6747,25 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_image_opaque_capture_descriptor_data_ext: {
+                let value = loader(
+                    b"vkGetImageOpaqueCaptureDescriptorDataEXT\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const ImageCaptureDescriptorDataInfoEXT,
+                        _data: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetImageOpaqueCaptureDescriptorDataEXT")
+                    }
+                    fallback
+                }
+            },
             get_image_sparse_memory_requirements: {
                 let value = loader(b"vkGetImageSparseMemoryRequirements\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -6623,6 +6871,25 @@ impl DeviceCommands {
                         _info: *const ImageViewHandleInfoNVX,
                     ) -> u32 {
                         panic!("could not load vkGetImageViewHandleNVX")
+                    }
+                    fallback
+                }
+            },
+            get_image_view_opaque_capture_descriptor_data_ext: {
+                let value = loader(
+                    b"vkGetImageViewOpaqueCaptureDescriptorDataEXT\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const ImageViewCaptureDescriptorDataInfoEXT,
+                        _data: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetImageViewOpaqueCaptureDescriptorDataEXT")
                     }
                     fallback
                 }
@@ -7285,6 +7552,25 @@ impl DeviceCommands {
                         _granularity: *mut Extent2D,
                     ) {
                         panic!("could not load vkGetRenderAreaGranularity")
+                    }
+                    fallback
+                }
+            },
+            get_sampler_opaque_capture_descriptor_data_ext: {
+                let value = loader(
+                    b"vkGetSamplerOpaqueCaptureDescriptorDataEXT\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const SamplerCaptureDescriptorDataInfoEXT,
+                        _data: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetSamplerOpaqueCaptureDescriptorDataEXT")
                     }
                     fallback
                 }
