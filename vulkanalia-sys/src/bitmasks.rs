@@ -26,6 +26,7 @@ bitflags! {
     pub struct AccelerationStructureCreateFlagsKHR: Flags {
         const DEVICE_ADDRESS_CAPTURE_REPLAY = 1;
         const MOTION_NV = 1 << 2;
+        const DESCRIPTOR_BUFFER_CAPTURE_REPLAY_EXT = 1 << 3;
     }
 }
 
@@ -118,6 +119,7 @@ bitflags! {
         const SHADER_STORAGE_WRITE = 1 << 34;
         const INVOCATION_MASK_READ_HUAWEI = 1 << 39;
         const SHADER_BINDING_TABLE_READ_KHR = 1 << 40;
+        const DESCRIPTOR_BUFFER_READ_EXT = 1 << 41;
         const OPTICAL_FLOW_READ_NV = 1 << 42;
         const OPTICAL_FLOW_WRITE_NV = 1 << 43;
         const MICROMAP_READ_EXT = 1 << 44;
@@ -158,6 +160,7 @@ bitflags! {
         const SPARSE_ALIASED = 1 << 2;
         const PROTECTED = 1 << 3;
         const DEVICE_ADDRESS_CAPTURE_REPLAY = 1 << 4;
+        const DESCRIPTOR_BUFFER_CAPTURE_REPLAY_EXT = 1 << 5;
     }
 }
 
@@ -182,8 +185,11 @@ bitflags! {
         const SHADER_DEVICE_ADDRESS = 1 << 17;
         const ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_KHR = 1 << 19;
         const ACCELERATION_STRUCTURE_STORAGE_KHR = 1 << 20;
+        const SAMPLER_DESCRIPTOR_BUFFER_EXT = 1 << 21;
+        const RESOURCE_DESCRIPTOR_BUFFER_EXT = 1 << 22;
         const MICROMAP_BUILD_INPUT_READ_ONLY_EXT = 1 << 23;
         const MICROMAP_STORAGE_EXT = 1 << 24;
+        const PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_EXT = 1 << 26;
     }
 }
 
@@ -415,6 +421,8 @@ bitflags! {
         const PUSH_DESCRIPTOR_KHR = 1;
         const UPDATE_AFTER_BIND_POOL = 1 << 1;
         const HOST_ONLY_POOL_EXT = 1 << 2;
+        const DESCRIPTOR_BUFFER_EXT = 1 << 4;
+        const EMBEDDED_IMMUTABLE_SAMPLERS_EXT = 1 << 5;
     }
 }
 
@@ -894,6 +902,7 @@ bitflags! {
         const CORNER_SAMPLED_NV = 1 << 13;
         const SUBSAMPLED_EXT = 1 << 14;
         const FRAGMENT_DENSITY_MAP_OFFSET_QCOM = 1 << 15;
+        const DESCRIPTOR_BUFFER_CAPTURE_REPLAY_EXT = 1 << 16;
         const _2D_VIEW_COMPATIBLE_EXT = 1 << 17;
         const MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXT = 1 << 18;
     }
@@ -942,6 +951,7 @@ bitflags! {
     pub struct ImageViewCreateFlags: Flags {
         const FRAGMENT_DENSITY_MAP_DYNAMIC_EXT = 1;
         const FRAGMENT_DENSITY_MAP_DEFERRED_EXT = 1 << 1;
+        const DESCRIPTOR_BUFFER_CAPTURE_REPLAY_EXT = 1 << 2;
     }
 }
 
@@ -989,6 +999,15 @@ bitflags! {
         const DEVICE_MASK = 1;
         const DEVICE_ADDRESS = 1 << 1;
         const DEVICE_ADDRESS_CAPTURE_REPLAY = 1 << 2;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMemoryDecompressionMethodFlagsNV.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct MemoryDecompressionMethodFlagsNV: Flags {
+        const GDEFLATE_1_0 = 1;
     }
 }
 
@@ -1192,6 +1211,7 @@ bitflags! {
         const COLOR_ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 25;
         const DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 26;
         const NO_PROTECTED_ACCESS_EXT = 1 << 27;
+        const DESCRIPTOR_BUFFER_EXT = 1 << 29;
         const PROTECTED_ACCESS_ONLY_EXT = 1 << 30;
     }
 }
@@ -1528,6 +1548,7 @@ bitflags! {
         const SUBSAMPLED_EXT = 1;
         const SUBSAMPLED_COARSE_RECONSTRUCTION_EXT = 1 << 1;
         const NON_SEAMLESS_CUBE_MAP_EXT = 1 << 2;
+        const DESCRIPTOR_BUFFER_CAPTURE_REPLAY_EXT = 1 << 3;
         const IMAGE_PROCESSING_QCOM = 1 << 4;
     }
 }

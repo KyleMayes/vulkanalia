@@ -103,6 +103,28 @@ impl Default for AccelerationStructureBuildSizesInfoKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureCaptureDescriptorDataInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct AccelerationStructureCaptureDescriptorDataInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub acceleration_structure: AccelerationStructureKHR,
+    pub acceleration_structure_nv: AccelerationStructureNV,
+}
+
+impl Default for AccelerationStructureCaptureDescriptorDataInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT,
+            next: ptr::null(),
+            acceleration_structure: AccelerationStructureKHR::default(),
+            acceleration_structure_nv: AccelerationStructureNV::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -1189,6 +1211,26 @@ impl Default for BlitImageInfo2 {
             region_count: u32::default(),
             regions: ptr::null(),
             filter: Filter::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBufferCaptureDescriptorDataInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BufferCaptureDescriptorDataInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub buffer: Buffer,
+}
+
+impl Default for BufferCaptureDescriptorDataInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BUFFER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT,
+            next: ptr::null(),
+            buffer: Buffer::default(),
         }
     }
 }
@@ -2310,6 +2352,15 @@ impl Default for CopyImageToBufferInfo2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryIndirectCommandNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct CopyMemoryIndirectCommandNV {
+    pub src_address: DeviceAddress,
+    pub dst_address: DeviceAddress,
+    pub size: DeviceSize,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryToAccelerationStructureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -2332,6 +2383,18 @@ impl Default for CopyMemoryToAccelerationStructureInfoKHR {
             mode: CopyAccelerationStructureModeKHR::default(),
         }
     }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryToImageIndirectCommandNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct CopyMemoryToImageIndirectCommandNV {
+    pub src_address: DeviceAddress,
+    pub buffer_row_length: u32,
+    pub buffer_image_height: u32,
+    pub image_subresource: ImageSubresourceLayers,
+    pub image_offset: Offset3D,
+    pub image_extent: Extent3D,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryToMicromapInfoEXT.html>
@@ -2785,6 +2848,17 @@ impl Default for DebugUtilsObjectTagInfoEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDecompressMemoryRegionNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct DecompressMemoryRegionNV {
+    pub src_address: DeviceAddress,
+    pub dst_address: DeviceAddress,
+    pub compressed_size: DeviceSize,
+    pub decompressed_size: DeviceSize,
+    pub decompression_method: MemoryDecompressionMethodFlagsNV,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDedicatedAllocationBufferCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2879,6 +2953,72 @@ impl Default for DependencyInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorAddressInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DescriptorAddressInfoEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub address: DeviceAddress,
+    pub range: DeviceSize,
+    pub format: Format,
+}
+
+impl Default for DescriptorAddressInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DESCRIPTOR_ADDRESS_INFO_EXT,
+            next: ptr::null_mut(),
+            address: DeviceAddress::default(),
+            range: DeviceSize::default(),
+            format: Format::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorBufferBindingInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DescriptorBufferBindingInfoEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub address: DeviceAddress,
+    pub usage: BufferUsageFlags,
+}
+
+impl Default for DescriptorBufferBindingInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DESCRIPTOR_BUFFER_BINDING_INFO_EXT,
+            next: ptr::null_mut(),
+            address: DeviceAddress::default(),
+            usage: BufferUsageFlags::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DescriptorBufferBindingPushDescriptorBufferHandleEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub buffer: Buffer,
+}
+
+impl Default for DescriptorBufferBindingPushDescriptorBufferHandleEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT,
+            next: ptr::null_mut(),
+            buffer: Buffer::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorBufferInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -2886,6 +3026,28 @@ pub struct DescriptorBufferInfo {
     pub buffer: Buffer,
     pub offset: DeviceSize,
     pub range: DeviceSize,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorGetInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+pub struct DescriptorGetInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub type_: DescriptorType,
+    pub data: DescriptorDataEXT,
+}
+
+impl Default for DescriptorGetInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DESCRIPTOR_GET_INFO_EXT,
+            next: ptr::null(),
+            type_: DescriptorType::default(),
+            data: DescriptorDataEXT::default(),
+        }
+    }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorImageInfo.html>
@@ -5508,6 +5670,26 @@ impl Default for ImageBlit2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageCaptureDescriptorDataInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImageCaptureDescriptorDataInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub image: Image,
+}
+
+impl Default for ImageCaptureDescriptorDataInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT,
+            next: ptr::null(),
+            image: Image::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageCompressionControlEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6133,6 +6315,26 @@ impl Default for ImageViewAddressPropertiesNVX {
             next: ptr::null_mut(),
             device_address: DeviceAddress::default(),
             size: DeviceSize::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageViewCaptureDescriptorDataInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImageViewCaptureDescriptorDataInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub image_view: ImageView,
+}
+
+impl Default for ImageViewCaptureDescriptorDataInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_VIEW_CAPTURE_DESCRIPTOR_DATA_INFO_EXT,
+            next: ptr::null(),
+            image_view: ImageView::default(),
         }
     }
 }
@@ -7523,6 +7725,26 @@ pub struct Offset3D {
     pub z: i32,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpaqueCaptureDescriptorDataCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct OpaqueCaptureDescriptorDataCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub opaque_capture_descriptor_data: *const c_void,
+}
+
+impl Default for OpaqueCaptureDescriptorDataCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT,
+            next: ptr::null(),
+            opaque_capture_descriptor_data: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpticalFlowExecuteInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8318,6 +8540,46 @@ impl Default for PhysicalDeviceCooperativeMatrixPropertiesNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceCopyMemoryIndirectFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub indirect_copy: Bool32,
+}
+
+impl Default for PhysicalDeviceCopyMemoryIndirectFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV,
+            next: ptr::null_mut(),
+            indirect_copy: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceCopyMemoryIndirectPropertiesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub supported_queues: QueueFlags,
+}
+
+impl Default for PhysicalDeviceCopyMemoryIndirectPropertiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV,
+            next: ptr::null_mut(),
+            supported_queues: QueueFlags::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCornerSampledImageFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8502,6 +8764,136 @@ impl Default for PhysicalDeviceDepthStencilResolveProperties {
             supported_stencil_resolve_modes: ResolveModeFlags::default(),
             independent_resolve_none: Bool32::default(),
             independent_resolve: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub combined_image_sampler_density_map_descriptor_size: usize,
+}
+
+impl Default for PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            combined_image_sampler_density_map_descriptor_size: usize::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDescriptorBufferFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDescriptorBufferFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub descriptor_buffer: Bool32,
+    pub descriptor_buffer_capture_replay: Bool32,
+    pub descriptor_buffer_image_layout_ignored: Bool32,
+    pub descriptor_buffer_push_descriptors: Bool32,
+}
+
+impl Default for PhysicalDeviceDescriptorBufferFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT,
+            next: ptr::null_mut(),
+            descriptor_buffer: Bool32::default(),
+            descriptor_buffer_capture_replay: Bool32::default(),
+            descriptor_buffer_image_layout_ignored: Bool32::default(),
+            descriptor_buffer_push_descriptors: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDescriptorBufferPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDescriptorBufferPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub combined_image_sampler_descriptor_single_array: Bool32,
+    pub bufferless_push_descriptors: Bool32,
+    pub allow_sampler_image_view_post_submit_creation: Bool32,
+    pub descriptor_buffer_offset_alignment: DeviceSize,
+    pub max_descriptor_buffer_bindings: u32,
+    pub max_resource_descriptor_buffer_bindings: u32,
+    pub max_sampler_descriptor_buffer_bindings: u32,
+    pub max_embedded_immutable_sampler_bindings: u32,
+    pub max_embedded_immutable_samplers: u32,
+    pub buffer_capture_replay_descriptor_data_size: usize,
+    pub image_capture_replay_descriptor_data_size: usize,
+    pub image_view_capture_replay_descriptor_data_size: usize,
+    pub sampler_capture_replay_descriptor_data_size: usize,
+    pub acceleration_structure_capture_replay_descriptor_data_size: usize,
+    pub sampler_descriptor_size: usize,
+    pub combined_image_sampler_descriptor_size: usize,
+    pub sampled_image_descriptor_size: usize,
+    pub storage_image_descriptor_size: usize,
+    pub uniform_texel_buffer_descriptor_size: usize,
+    pub robust_uniform_texel_buffer_descriptor_size: usize,
+    pub storage_texel_buffer_descriptor_size: usize,
+    pub robust_storage_texel_buffer_descriptor_size: usize,
+    pub uniform_buffer_descriptor_size: usize,
+    pub robust_uniform_buffer_descriptor_size: usize,
+    pub storage_buffer_descriptor_size: usize,
+    pub robust_storage_buffer_descriptor_size: usize,
+    pub input_attachment_descriptor_size: usize,
+    pub acceleration_structure_descriptor_size: usize,
+    pub max_sampler_descriptor_buffer_range: DeviceSize,
+    pub max_resource_descriptor_buffer_range: DeviceSize,
+    pub sampler_descriptor_buffer_address_space_size: DeviceSize,
+    pub resource_descriptor_buffer_address_space_size: DeviceSize,
+    pub descriptor_buffer_address_space_size: DeviceSize,
+}
+
+impl Default for PhysicalDeviceDescriptorBufferPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            combined_image_sampler_descriptor_single_array: Bool32::default(),
+            bufferless_push_descriptors: Bool32::default(),
+            allow_sampler_image_view_post_submit_creation: Bool32::default(),
+            descriptor_buffer_offset_alignment: DeviceSize::default(),
+            max_descriptor_buffer_bindings: u32::default(),
+            max_resource_descriptor_buffer_bindings: u32::default(),
+            max_sampler_descriptor_buffer_bindings: u32::default(),
+            max_embedded_immutable_sampler_bindings: u32::default(),
+            max_embedded_immutable_samplers: u32::default(),
+            buffer_capture_replay_descriptor_data_size: usize::default(),
+            image_capture_replay_descriptor_data_size: usize::default(),
+            image_view_capture_replay_descriptor_data_size: usize::default(),
+            sampler_capture_replay_descriptor_data_size: usize::default(),
+            acceleration_structure_capture_replay_descriptor_data_size: usize::default(),
+            sampler_descriptor_size: usize::default(),
+            combined_image_sampler_descriptor_size: usize::default(),
+            sampled_image_descriptor_size: usize::default(),
+            storage_image_descriptor_size: usize::default(),
+            uniform_texel_buffer_descriptor_size: usize::default(),
+            robust_uniform_texel_buffer_descriptor_size: usize::default(),
+            storage_texel_buffer_descriptor_size: usize::default(),
+            robust_storage_texel_buffer_descriptor_size: usize::default(),
+            uniform_buffer_descriptor_size: usize::default(),
+            robust_uniform_buffer_descriptor_size: usize::default(),
+            storage_buffer_descriptor_size: usize::default(),
+            robust_storage_buffer_descriptor_size: usize::default(),
+            input_attachment_descriptor_size: usize::default(),
+            acceleration_structure_descriptor_size: usize::default(),
+            max_sampler_descriptor_buffer_range: DeviceSize::default(),
+            max_resource_descriptor_buffer_range: DeviceSize::default(),
+            sampler_descriptor_buffer_address_space_size: DeviceSize::default(),
+            resource_descriptor_buffer_address_space_size: DeviceSize::default(),
+            descriptor_buffer_address_space_size: DeviceSize::default(),
         }
     }
 }
@@ -10399,6 +10791,48 @@ impl Default for PhysicalDeviceMemoryBudgetPropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMemoryDecompressionFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMemoryDecompressionFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub memory_decompression: Bool32,
+}
+
+impl Default for PhysicalDeviceMemoryDecompressionFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV,
+            next: ptr::null_mut(),
+            memory_decompression: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMemoryDecompressionPropertiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMemoryDecompressionPropertiesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub decompression_methods: MemoryDecompressionMethodFlagsNV,
+    pub max_decompression_indirect_count: u64,
+}
+
+impl Default for PhysicalDeviceMemoryDecompressionPropertiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV,
+            next: ptr::null_mut(),
+            decompression_methods: MemoryDecompressionMethodFlagsNV::default(),
+            max_decompression_indirect_count: u64::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMemoryPriorityFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11518,6 +11952,47 @@ impl Default for PhysicalDeviceRayQueryFeaturesKHR {
             s_type: StructureType::PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR,
             next: ptr::null_mut(),
             ray_query: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub ray_tracing_invocation_reorder: Bool32,
+}
+
+impl Default for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV,
+            next: ptr::null_mut(),
+            ray_tracing_invocation_reorder: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceRayTracingInvocationReorderPropertiesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub ray_tracing_invocation_reorder_reordering_hint: RayTracingInvocationReorderModeNV,
+}
+
+impl Default for PhysicalDeviceRayTracingInvocationReorderPropertiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV,
+            next: ptr::null_mut(),
+            ray_tracing_invocation_reorder_reordering_hint:
+                RayTracingInvocationReorderModeNV::default(),
         }
     }
 }
@@ -15848,6 +16323,26 @@ impl Default for SamplerBorderColorComponentMappingCreateInfoEXT {
             next: ptr::null(),
             components: ComponentMapping::default(),
             srgb: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerCaptureDescriptorDataInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SamplerCaptureDescriptorDataInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub sampler: Sampler,
+}
+
+impl Default for SamplerCaptureDescriptorDataInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT,
+            next: ptr::null(),
+            sampler: Sampler::default(),
         }
     }
 }

@@ -108,6 +108,35 @@ impl fmt::Debug for ClearValue {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorDataEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union DescriptorDataEXT {
+    pub sampler: *const Sampler,
+    pub combined_image_sampler: *const DescriptorImageInfo,
+    pub input_attachment_image: *const DescriptorImageInfo,
+    pub sampled_image: *const DescriptorImageInfo,
+    pub storage_image: *const DescriptorImageInfo,
+    pub uniform_texel_buffer: *const DescriptorAddressInfoEXT,
+    pub storage_texel_buffer: *const DescriptorAddressInfoEXT,
+    pub uniform_buffer: *const DescriptorAddressInfoEXT,
+    pub storage_buffer: *const DescriptorAddressInfoEXT,
+    pub acceleration_structure: DeviceAddress,
+}
+
+impl Default for DescriptorDataEXT {
+    #[inline]
+    fn default() -> Self {
+        unsafe { MaybeUninit::zeroed().assume_init() }
+    }
+}
+
+impl fmt::Debug for DescriptorDataEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DescriptorDataEXT")
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceOrHostAddressConstKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
