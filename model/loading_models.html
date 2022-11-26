@@ -195,13 +195,15 @@ fn load_model(data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
 <p>A model is loaded into the crate's data structures by calling the <code>tobj::load_obj_buf</code> function:</p>
 <pre><code class="language-rust noplaypen">let mut reader = BufReader::new(File::open(&quot;resources/viking_room.obj&quot;)?);
 
-let (models, _) = tobj::load_obj_buf(&amp;mut reader, true, |_| {
-    Ok((vec![tobj::Material::empty()], HashMap::new()))
-})?;
+let (models, _) = tobj::load_obj_buf(
+    &amp;mut reader,
+    &amp;tobj::LoadOptions { triangulate: true, ..Default::default() },
+    |_| Ok(Default::default()),
+)?;
 </code></pre>
 <p>An OBJ file consists of positions, normals, texture coordinates and faces. Faces consist of an arbitrary amount of vertices, where each vertex refers to a position, normal and/or texture coordinate by index. This makes it possible to not just reuse entire vertices, but also individual attributes.</p>
 <p><code>tobj::load_obj_buf</code> returns a <code>Vec</code> of models and a <code>Vec</code> of materials. We are not interested in the materials, only the models, so the returned materials are ignored with <code>_</code>.</p>
-<p>The second <code>tobj::load_obj_buf</code> parameter specifies whether any model faces that are not already triangles should be converted to triangles. Our model rendering code can only handle triangles so we have provided <code>true</code>. We don't need this for our Viking room model since its faces are already triangles but it might be necessary if you try using a different OBJ file.</p>
+<p>The second <code>tobj::load_obj_buf</code> parameter specifies options for processing the loaded models. The <code>triangulate</code> field we are setting to <code>true</code> ensures that the components of the loaded models are converted to triangles. This is important because our rendering code can only handle triangles. We don't need this for our Viking room model since its faces are already triangles but it might be necessary if you try using a different OBJ file.</p>
 <p>The third <code>tobj::load_obj_buf</code> parameter is a callback used to load any materials referenced in the OBJ file. As we are not interested in the materials, we just return an empty material.</p>
 <p>We're going to combine all of the faces in the file into a single model, so just iterate over all of the shapes:</p>
 <pre><code class="language-rust noplaypen">for model in &amp;models {
