@@ -1037,6 +1037,229 @@ pub trait ExtDepthRangeUnrestrictedExtension: DeviceV1_0 {
 
 impl ExtDepthRangeUnrestrictedExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_descriptor_buffer.html>
+pub trait ExtDescriptorBufferExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_DESCRIPTOR_BUFFER_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdBindDescriptorBufferEmbeddedSamplersEXT.html>
+    #[inline]
+    unsafe fn cmd_bind_descriptor_buffer_embedded_samplers_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        pipeline_bind_point: PipelineBindPoint,
+        layout: PipelineLayout,
+        set: u32,
+    ) {
+        let __result = (self
+            .commands()
+            .cmd_bind_descriptor_buffer_embedded_samplers_ext)(
+            command_buffer,
+            pipeline_bind_point,
+            layout,
+            set,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdBindDescriptorBuffersEXT.html>
+    #[inline]
+    unsafe fn cmd_bind_descriptor_buffers_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        binding_infos: &[impl Cast<Target = DescriptorBufferBindingInfoEXT>],
+    ) {
+        let __result = (self.commands().cmd_bind_descriptor_buffers_ext)(
+            command_buffer,
+            binding_infos.len() as u32,
+            binding_infos.as_ptr().cast(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetDescriptorBufferOffsetsEXT.html>
+    #[inline]
+    unsafe fn cmd_set_descriptor_buffer_offsets_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        pipeline_bind_point: PipelineBindPoint,
+        layout: PipelineLayout,
+        first_set: u32,
+        buffer_indices: &[u32],
+        offsets: &[DeviceSize],
+    ) {
+        let __result = (self.commands().cmd_set_descriptor_buffer_offsets_ext)(
+            command_buffer,
+            pipeline_bind_point,
+            layout,
+            first_set,
+            buffer_indices.len() as u32,
+            buffer_indices.as_ptr(),
+            offsets.as_ptr(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT.html>
+    #[inline]
+    unsafe fn get_acceleration_structure_opaque_capture_descriptor_data_ext(
+        &self,
+        info: &AccelerationStructureCaptureDescriptorDataInfoEXT,
+    ) -> crate::VkResult<c_void> {
+        let mut data = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_acceleration_structure_opaque_capture_descriptor_data_ext)(
+            self.handle(),
+            info,
+            data.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(data.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetBufferOpaqueCaptureDescriptorDataEXT.html>
+    #[inline]
+    unsafe fn get_buffer_opaque_capture_descriptor_data_ext(
+        &self,
+        info: &BufferCaptureDescriptorDataInfoEXT,
+    ) -> crate::VkResult<c_void> {
+        let mut data = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_buffer_opaque_capture_descriptor_data_ext)(
+            self.handle(), info, data.as_mut_ptr()
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(data.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetDescriptorEXT.html>
+    #[inline]
+    unsafe fn get_descriptor_ext(
+        &self,
+        descriptor_info: &DescriptorGetInfoEXT,
+        descriptor: &mut [u8],
+    ) {
+        let __result = (self.commands().get_descriptor_ext)(
+            self.handle(),
+            descriptor_info,
+            descriptor.len() as usize,
+            descriptor.as_ptr() as *mut c_void,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetDescriptorSetLayoutBindingOffsetEXT.html>
+    #[inline]
+    unsafe fn get_descriptor_set_layout_binding_offset_ext(
+        &self,
+        layout: DescriptorSetLayout,
+        binding: u32,
+    ) -> DeviceSize {
+        let mut offset = MaybeUninit::<DeviceSize>::uninit();
+
+        let __result = (self.commands().get_descriptor_set_layout_binding_offset_ext)(
+            self.handle(),
+            layout,
+            binding,
+            offset.as_mut_ptr(),
+        );
+
+        offset.assume_init()
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetDescriptorSetLayoutSizeEXT.html>
+    #[inline]
+    unsafe fn get_descriptor_set_layout_size_ext(&self, layout: DescriptorSetLayout) -> DeviceSize {
+        let mut layout_size_in_bytes = MaybeUninit::<DeviceSize>::uninit();
+
+        let __result = (self.commands().get_descriptor_set_layout_size_ext)(
+            self.handle(),
+            layout,
+            layout_size_in_bytes.as_mut_ptr(),
+        );
+
+        layout_size_in_bytes.assume_init()
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetImageOpaqueCaptureDescriptorDataEXT.html>
+    #[inline]
+    unsafe fn get_image_opaque_capture_descriptor_data_ext(
+        &self,
+        info: &ImageCaptureDescriptorDataInfoEXT,
+    ) -> crate::VkResult<c_void> {
+        let mut data = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self.commands().get_image_opaque_capture_descriptor_data_ext)(
+            self.handle(),
+            info,
+            data.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(data.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetImageViewOpaqueCaptureDescriptorDataEXT.html>
+    #[inline]
+    unsafe fn get_image_view_opaque_capture_descriptor_data_ext(
+        &self,
+        info: &ImageViewCaptureDescriptorDataInfoEXT,
+    ) -> crate::VkResult<c_void> {
+        let mut data = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_image_view_opaque_capture_descriptor_data_ext)(
+            self.handle(),
+            info,
+            data.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(data.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetSamplerOpaqueCaptureDescriptorDataEXT.html>
+    #[inline]
+    unsafe fn get_sampler_opaque_capture_descriptor_data_ext(
+        &self,
+        info: &SamplerCaptureDescriptorDataInfoEXT,
+    ) -> crate::VkResult<c_void> {
+        let mut data = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_sampler_opaque_capture_descriptor_data_ext)(
+            self.handle(),
+            info,
+            data.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(data.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl ExtDescriptorBufferExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_descriptor_indexing.html>
 pub trait ExtDescriptorIndexingExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -4168,12 +4391,14 @@ pub trait ImgFilterCubicExtension: DeviceV1_0 {
 impl ImgFilterCubicExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_IMG_format_pvrtc.html>
+#[deprecated]
 pub trait ImgFormatPvrtcExtension: DeviceV1_0 {
     /// The metadata for this extension.
     #[allow(deprecated)]
     const METADATA: Extension = IMG_FORMAT_PVRTC_EXTENSION;
 }
 
+#[allow(deprecated)]
 impl ImgFormatPvrtcExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_INTEL_performance_query.html>
@@ -8656,6 +8881,55 @@ pub trait NvCooperativeMatrixExtension: DeviceV1_0 {
 
 impl NvCooperativeMatrixExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_copy_memory_indirect.html>
+pub trait NvCopyMemoryIndirectExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_COPY_MEMORY_INDIRECT_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdCopyMemoryIndirectNV.html>
+    #[inline]
+    unsafe fn cmd_copy_memory_indirect_nv(
+        &self,
+        command_buffer: CommandBuffer,
+        copy_buffer_address: DeviceAddress,
+        copy_count: u32,
+        stride: u32,
+    ) {
+        let __result = (self.commands().cmd_copy_memory_indirect_nv)(
+            command_buffer,
+            copy_buffer_address,
+            copy_count,
+            stride,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdCopyMemoryToImageIndirectNV.html>
+    #[inline]
+    unsafe fn cmd_copy_memory_to_image_indirect_nv(
+        &self,
+        command_buffer: CommandBuffer,
+        copy_buffer_address: DeviceAddress,
+        copy_count: u32,
+        stride: u32,
+        dst_image: Image,
+        dst_image_layout: ImageLayout,
+        image_subresources: &ImageSubresourceLayers,
+    ) {
+        let __result = (self.commands().cmd_copy_memory_to_image_indirect_nv)(
+            command_buffer,
+            copy_buffer_address,
+            copy_count,
+            stride,
+            dst_image,
+            dst_image_layout,
+            image_subresources,
+        );
+    }
+}
+
+impl NvCopyMemoryIndirectExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_corner_sampled_image.html>
 pub trait NvCornerSampledImageExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -9108,6 +9382,46 @@ pub trait NvLinearColorAttachmentExtension: DeviceV1_0 {
 }
 
 impl NvLinearColorAttachmentExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_memory_decompression.html>
+pub trait NvMemoryDecompressionExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_MEMORY_DECOMPRESSION_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDecompressMemoryIndirectCountNV.html>
+    #[inline]
+    unsafe fn cmd_decompress_memory_indirect_count_nv(
+        &self,
+        command_buffer: CommandBuffer,
+        indirect_commands_address: DeviceAddress,
+        indirect_commands_count_address: DeviceAddress,
+        stride: u32,
+    ) {
+        let __result = (self.commands().cmd_decompress_memory_indirect_count_nv)(
+            command_buffer,
+            indirect_commands_address,
+            indirect_commands_count_address,
+            stride,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDecompressMemoryNV.html>
+    #[inline]
+    unsafe fn cmd_decompress_memory_nv(
+        &self,
+        command_buffer: CommandBuffer,
+        decompress_memory_regions: &[impl Cast<Target = DecompressMemoryRegionNV>],
+    ) {
+        let __result = (self.commands().cmd_decompress_memory_nv)(
+            command_buffer,
+            decompress_memory_regions.len() as u32,
+            decompress_memory_regions.as_ptr().cast(),
+        );
+    }
+}
+
+impl NvMemoryDecompressionExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_mesh_shader.html>
 pub trait NvMeshShaderExtension: DeviceV1_0 {
@@ -9570,6 +9884,15 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
 }
 
 impl NvRayTracingExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_ray_tracing_invocation_reorder.html>
+pub trait NvRayTracingInvocationReorderExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_RAY_TRACING_INVOCATION_REORDER_EXTENSION;
+}
+
+impl NvRayTracingInvocationReorderExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_ray_tracing_motion_blur.html>
 pub trait NvRayTracingMotionBlurExtension: DeviceV1_0 {
