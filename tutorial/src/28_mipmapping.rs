@@ -1034,7 +1034,7 @@ unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut 
     let mut pixels = vec![0; reader.info().raw_bytes()];
     reader.next_frame(&mut pixels)?;
 
-    let size =  reader.info().raw_bytes() as u64;
+    let size = reader.info().raw_bytes() as u64;
     let (width, height) = reader.info().size();
     data.mip_levels = (width.max(height) as f32).log2().floor() as u32 + 1;
 
@@ -1087,14 +1087,7 @@ unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut 
         data.mip_levels,
     )?;
 
-    copy_buffer_to_image(
-        device,
-        data,
-        staging_buffer,
-        data.texture_image,
-        width,
-        height,
-    )?;
+    copy_buffer_to_image(device, data, staging_buffer, data.texture_image, width, height)?;
 
     // Cleanup
 
@@ -1306,7 +1299,10 @@ fn load_model(data: &mut AppData) -> Result<()> {
 
     let (models, _) = tobj::load_obj_buf(
         &mut reader,
-        &tobj::LoadOptions { triangulate: true, ..Default::default() },
+        &tobj::LoadOptions {
+            triangulate: true,
+            ..Default::default()
+        },
         |_| Ok(Default::default()),
     )?;
 
