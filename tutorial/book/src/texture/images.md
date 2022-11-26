@@ -71,12 +71,13 @@ unsafe fn create_texture_image(
     let image = File::open("resources/texture.png")?;
 
     let decoder = png::Decoder::new(image);
-    let (info, mut reader) = decoder.read_info()?;
+    let mut reader = decoder.read_info()?;
 
-    let mut pixels = vec![0; info.buffer_size()];
+    let mut pixels = vec![0;  reader.info().raw_bytes()];
     reader.next_frame(&mut pixels)?;
 
-    let size = info.buffer_size() as u64;
+    let size = reader.info().raw_bytes() as u64;
+    let (width, height) = reader.info().size();
 
     Ok(())
 }
@@ -131,7 +132,7 @@ The parameters for an image are specified in a `vk::ImageCreateInfo` struct:
 ```rust,noplaypen
 let info = vk::ImageCreateInfo::builder()
     .image_type(vk::ImageType::_2D)
-    .extent(vk::Extent3D { width: info.width, height: info.height, depth: 1 })
+    .extent(vk::Extent3D { width, height, depth: 1 })
     .mip_levels(1)
     .array_layers(1)
     // continued...
@@ -274,12 +275,13 @@ unsafe fn create_texture_image(
     let image = File::open("resources/texture.png")?;
 
     let decoder = png::Decoder::new(image);
-    let (info, mut reader) = decoder.read_info()?;
+    let mut reader = decoder.read_info()?;
 
-    let mut pixels = vec![0; info.buffer_size()];
+    let mut pixels = vec![0;  reader.info().raw_bytes()];
     reader.next_frame(&mut pixels)?;
 
-    let size = info.buffer_size() as u64;
+    let size = reader.info().raw_bytes() as u64;
+    let (width, height) = reader.info().size();
 
     let (staging_buffer, staging_buffer_memory) = create_buffer(
         instance,
@@ -305,8 +307,8 @@ unsafe fn create_texture_image(
         instance,
         device,
         data,
-        info.width,
-        info.height,
+        width,
+        height,
         vk::Format::R8G8B8A8_SRGB,
         vk::ImageTiling::OPTIMAL,
         vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST,
@@ -544,8 +546,8 @@ copy_buffer_to_image(
     data,
     staging_buffer,
     data.texture_image,
-    info.width,
-    info.height,
+    width,
+    height,
 )?;
 ```
 

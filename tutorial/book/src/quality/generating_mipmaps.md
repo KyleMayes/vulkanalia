@@ -29,11 +29,11 @@ The value for `mip_levels` can be found once we've loaded the texture in `create
 let image = File::open("resources/viking_room.png")?;
 
 let decoder = png::Decoder::new(image);
-let (info, mut reader) = decoder.read_info()?;
+let mut reader = decoder.read_info()?;
 
 // ...
 
-data.mip_levels = (info.width.max(info.height) as f32).log2().floor() as u32 + 1;
+data.mip_levels = (width.max(height) as f32).log2().floor() as u32 + 1;
 ```
 
 This calculates the number of levels in the mip chain. The `max` method selects the largest dimension. The `log2` method calculates how many times that dimension can be divided by 2. The `floor` method handles cases where the largest dimension is not a power of 2. `1` is added so that the original image has a mip level.
@@ -122,8 +122,8 @@ let (texture_image, texture_image_memory) = create_image(
     instance,
     device,
     data,
-    info.width,
-    info.height,
+    width,
+    height,
     data.mip_levels,
     vk::Format::R8G8B8A8_SRGB,
     vk::ImageTiling::OPTIMAL,
@@ -197,8 +197,8 @@ let (texture_image, texture_image_memory) = create_image(
     instance,
     device,
     data,
-    info.width,
-    info.height,
+    width,
+    height,
     data.mip_levels,
     vk::Format::R8G8B8A8_SRGB,
     vk::ImageTiling::OPTIMAL,
@@ -394,8 +394,8 @@ generate_mipmaps(
     device,
     data,
     data.texture_image,
-    info.width,
-    info.height,
+    width,
+    height,
     data.mip_levels,
 )?;
 ```
@@ -415,8 +415,8 @@ generate_mipmaps(
     data,
     data.texture_image,
     vk::Format::R8G8B8A8_SRGB,
-    info.width,
-    info.height,
+    width,
+    height,
     data.mip_levels,
 )?;
 

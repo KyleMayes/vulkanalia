@@ -931,12 +931,13 @@ unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut 
     let image = File::open("tutorial/resources/texture.png")?;
 
     let decoder = png::Decoder::new(image);
-    let (info, mut reader) = decoder.read_info()?;
+    let mut reader = decoder.read_info()?;
 
-    let mut pixels = vec![0; info.buffer_size()];
+    let mut pixels = vec![0;  reader.info().raw_bytes()];
     reader.next_frame(&mut pixels)?;
 
-    let size = info.buffer_size() as u64;
+    let size = reader.info().raw_bytes() as u64;
+    let (width, height) = reader.info().size();
 
     // Create (staging)
 
@@ -963,8 +964,8 @@ unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut 
         instance,
         device,
         data,
-        info.width,
-        info.height,
+        width,
+        height,
         vk::Format::R8G8B8A8_SRGB,
         vk::ImageTiling::OPTIMAL,
         vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST,
@@ -990,8 +991,8 @@ unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut 
         data,
         staging_buffer,
         data.texture_image,
-        info.width,
-        info.height,
+        width,
+        height,
     )?;
 
     transition_image_layout(

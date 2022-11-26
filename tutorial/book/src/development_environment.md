@@ -16,13 +16,13 @@ Open the `Cargo.toml` file in the folder and add these dependencies in the pre-e
 anyhow = "1"
 lazy_static = "1"
 log = "0.4"
-nalgebra-glm = "0.10"
-png = "0.16"
+nalgebra-glm = "0.17"
+png = "0.17"
 pretty_env_logger = "0.4"
 thiserror = "1"
-tobj = "2"
-vulkanalia = { version = "=0.12.0", features = ["libloading", "window"] }
-winit = "0.24"
+tobj = { version = "3", features = ["log"] }
+vulkanalia = { version = "=0.16.0", features = ["libloading", "window"] }
+winit = "0.27"
 ```
 
 * `anyhow` &ndash; used for simple error handling

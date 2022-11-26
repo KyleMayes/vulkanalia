@@ -1114,13 +1114,14 @@ unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut 
     let image = File::open("tutorial/resources/viking_room.png")?;
 
     let decoder = png::Decoder::new(image);
-    let (info, mut reader) = decoder.read_info()?;
+    let mut reader = decoder.read_info()?;
 
-    let mut pixels = vec![0; info.buffer_size()];
+    let mut pixels = vec![0; reader.info().raw_bytes()];
     reader.next_frame(&mut pixels)?;
 
-    let size = info.buffer_size() as u64;
-    data.mip_levels = (info.width.max(info.height) as f32).log2().floor() as u32 + 1;
+    let size =  reader.info().raw_bytes() as u64;
+    let (width, height) = reader.info().size();
+    data.mip_levels = (width.max(height) as f32).log2().floor() as u32 + 1;
 
     // Create (staging)
 
@@ -1147,8 +1148,8 @@ unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut 
         instance,
         device,
         data,
-        info.width,
-        info.height,
+        width,
+        height,
         data.mip_levels,
         vk::SampleCountFlags::_1,
         vk::Format::R8G8B8A8_SRGB,
@@ -1177,8 +1178,8 @@ unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut 
         data,
         staging_buffer,
         data.texture_image,
-        info.width,
-        info.height,
+        width,
+        height,
     )?;
 
     // Cleanup
@@ -1194,8 +1195,8 @@ unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut 
         data,
         data.texture_image,
         vk::Format::R8G8B8A8_SRGB,
-        info.width,
-        info.height,
+        width,
+        height,
         data.mip_levels,
     )?;
 
@@ -1389,11 +1390,11 @@ fn load_model(data: &mut AppData) -> Result<()> {
 
     let mut reader = BufReader::new(File::open("tutorial/resources/viking_room.obj")?);
 
-    let (models, _) = tobj::load_obj_buf(&mut reader, true, |_| {
-        let mut map = HashMap::new();
-        map.insert("Texture1".to_string(), 0);
-        Ok((vec![tobj::Material::empty()], map))
-    })?;
+    let (models, _) = tobj::load_obj_buf(
+        &mut reader,
+        &tobj::LoadOptions { triangulate: true, ..Default::default() },
+        |_| Ok(Default::default()),
+    )?;
 
     // Vertices / Indices
 

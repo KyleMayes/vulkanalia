@@ -92,16 +92,18 @@ A model is loaded into the crate's data structures by calling the `tobj::load_ob
 ```rust,noplaypen
 let mut reader = BufReader::new(File::open("resources/viking_room.obj")?);
 
-let (models, _) = tobj::load_obj_buf(&mut reader, true, |_| {
-    Ok((vec![tobj::Material::empty()], HashMap::new()))
-})?;
+let (models, _) = tobj::load_obj_buf(
+    &mut reader,
+    &tobj::LoadOptions { triangulate: true, ..Default::default() },
+    |_| Ok(Default::default()),
+)?;
 ```
 
 An OBJ file consists of positions, normals, texture coordinates and faces. Faces consist of an arbitrary amount of vertices, where each vertex refers to a position, normal and/or texture coordinate by index. This makes it possible to not just reuse entire vertices, but also individual attributes.
 
 `tobj::load_obj_buf` returns a `Vec` of models and a `Vec` of materials. We are not interested in the materials, only the models, so the returned materials are ignored with `_`.
 
-The second `tobj::load_obj_buf` parameter specifies whether any model faces that are not already triangles should be converted to triangles. Our model rendering code can only handle triangles so we have provided `true`. We don't need this for our Viking room model since its faces are already triangles but it might be necessary if you try using a different OBJ file.
+The second `tobj::load_obj_buf` parameter specifies options for processing the loaded models. The `triangulate` field we are setting to `true` ensures that the components of the loaded models are converted to triangles. This is important because our rendering code can only handle triangles. We don't need this for our Viking room model since its faces are already triangles but it might be necessary if you try using a different OBJ file.
 
 The third `tobj::load_obj_buf` parameter is a callback used to load any materials referenced in the OBJ file. As we are not interested in the materials, we just return an empty material.
 
