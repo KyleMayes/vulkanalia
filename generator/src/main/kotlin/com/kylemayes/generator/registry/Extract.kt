@@ -245,11 +245,12 @@ data class Function(
 private fun extractFunction(e: Element) = Function(
     name = e.getElementText("name")!!.intern(),
     params = e.getElements("type", ::extractType),
-    result = when (e.textContent.substring(8, e.textContent.indexOf("(VKAPI_PTR")).trim()) {
+    result = when (val type = e.textContent.substring(8, e.textContent.indexOf("(VKAPI_PTR")).trim()) {
         "void" -> null
         "void*" -> PointerType(IdentifierType("void".intern()), false)
         "VkBool32" -> IdentifierType("VkBool32".intern())
-        else -> error("Unsupported function pointer result type.")
+        "PFN_vkVoidFunction" -> IdentifierType("PFN_vkVoidFunction".intern())
+        else -> error("Unsupported function pointer result type ($type).")
     },
 )
 

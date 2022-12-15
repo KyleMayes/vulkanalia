@@ -3969,6 +3969,66 @@ impl Default for DeviceQueueInfo2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDirectDriverLoadingInfoLUNARG.html>
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct DirectDriverLoadingInfoLUNARG {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub flags: DirectDriverLoadingFlagsLUNARG,
+    pub get_instance_proc_addr: PFN_vkGetInstanceProcAddrLUNARG,
+}
+
+impl fmt::Debug for DirectDriverLoadingInfoLUNARG {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        f.debug_struct("DirectDriverLoadingInfoLUNARG")
+            .field("s_type", &self.s_type)
+            .field("next", &self.next)
+            .field("flags", &self.flags)
+            .field(
+                "get_instance_proc_addr",
+                &(self.get_instance_proc_addr.map(|f| f as *const u8)),
+            )
+            .finish()
+    }
+}
+
+impl Default for DirectDriverLoadingInfoLUNARG {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DIRECT_DRIVER_LOADING_INFO_LUNARG,
+            next: ptr::null_mut(),
+            flags: DirectDriverLoadingFlagsLUNARG::default(),
+            get_instance_proc_addr: PFN_vkGetInstanceProcAddrLUNARG::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDirectDriverLoadingListLUNARG.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DirectDriverLoadingListLUNARG {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub mode: DirectDriverLoadingModeLUNARG,
+    pub driver_count: u32,
+    pub drivers: *const DirectDriverLoadingInfoLUNARG,
+}
+
+impl Default for DirectDriverLoadingListLUNARG {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DIRECT_DRIVER_LOADING_LIST_LUNARG,
+            next: ptr::null_mut(),
+            mode: DirectDriverLoadingModeLUNARG::default(),
+            driver_count: u32::default(),
+            drivers: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDirectFBSurfaceCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11156,6 +11216,26 @@ impl Default for PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub multiview_per_view_viewports: Bool32,
+}
+
+impl Default for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_VIEWPORTS_FEATURES_QCOM,
+            next: ptr::null_mut(),
+            multiview_per_view_viewports: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMultiviewProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13142,6 +13222,26 @@ impl Default for PhysicalDeviceSurfaceInfo2KHR {
             s_type: StructureType::PHYSICAL_DEVICE_SURFACE_INFO_2_KHR,
             next: ptr::null(),
             surface: SurfaceKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceSwapchainMaintenance1FeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub swapchain_maintenance1: Bool32,
+}
+
+impl Default for PhysicalDeviceSwapchainMaintenance1FeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SWAPCHAIN_MAINTENANCE_1_FEATURES_EXT,
+            next: ptr::null_mut(),
+            swapchain_maintenance1: Bool32::default(),
         }
     }
 }
@@ -15793,6 +15893,30 @@ pub struct RefreshCycleDurationGOOGLE {
     pub refresh_duration: u64,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkReleaseSwapchainImagesInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ReleaseSwapchainImagesInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub swapchain: SwapchainKHR,
+    pub image_index_count: u32,
+    pub image_indices: *const u32,
+}
+
+impl Default for ReleaseSwapchainImagesInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RELEASE_SWAPCHAIN_IMAGES_INFO_EXT,
+            next: ptr::null(),
+            swapchain: SwapchainKHR::default(),
+            image_index_count: u32::default(),
+            image_indices: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassAttachmentBeginInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17606,6 +17730,76 @@ impl Default for SurfaceFullScreenExclusiveWin32InfoEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSurfacePresentModeCompatibilityEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SurfacePresentModeCompatibilityEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub present_mode_count: u32,
+    pub present_modes: *mut PresentModeKHR,
+}
+
+impl Default for SurfacePresentModeCompatibilityEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SURFACE_PRESENT_MODE_COMPATIBILITY_EXT,
+            next: ptr::null_mut(),
+            present_mode_count: u32::default(),
+            present_modes: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSurfacePresentModeEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SurfacePresentModeEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub present_mode: PresentModeKHR,
+}
+
+impl Default for SurfacePresentModeEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SURFACE_PRESENT_MODE_EXT,
+            next: ptr::null_mut(),
+            present_mode: PresentModeKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSurfacePresentScalingCapabilitiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SurfacePresentScalingCapabilitiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub supported_present_scaling: PresentScalingFlagsEXT,
+    pub supported_present_gravity_x: PresentGravityFlagsEXT,
+    pub supported_present_gravity_y: PresentGravityFlagsEXT,
+    pub min_scaled_image_extent: Extent2D,
+    pub max_scaled_image_extent: Extent2D,
+}
+
+impl Default for SurfacePresentScalingCapabilitiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SURFACE_PRESENT_SCALING_CAPABILITIES_EXT,
+            next: ptr::null_mut(),
+            supported_present_scaling: PresentScalingFlagsEXT::default(),
+            supported_present_gravity_x: PresentGravityFlagsEXT::default(),
+            supported_present_gravity_y: PresentGravityFlagsEXT::default(),
+            min_scaled_image_extent: Extent2D::default(),
+            max_scaled_image_extent: Extent2D::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSurfaceProtectedCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17732,6 +17926,96 @@ impl Default for SwapchainPresentBarrierCreateInfoNV {
             s_type: StructureType::SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV,
             next: ptr::null_mut(),
             present_barrier_enable: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSwapchainPresentFenceInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SwapchainPresentFenceInfoEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub swapchain_count: u32,
+    pub fences: *const Fence,
+}
+
+impl Default for SwapchainPresentFenceInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SWAPCHAIN_PRESENT_FENCE_INFO_EXT,
+            next: ptr::null_mut(),
+            swapchain_count: u32::default(),
+            fences: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSwapchainPresentModeInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SwapchainPresentModeInfoEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub swapchain_count: u32,
+    pub present_modes: *const PresentModeKHR,
+}
+
+impl Default for SwapchainPresentModeInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SWAPCHAIN_PRESENT_MODE_INFO_EXT,
+            next: ptr::null_mut(),
+            swapchain_count: u32::default(),
+            present_modes: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSwapchainPresentModesCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SwapchainPresentModesCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub present_mode_count: u32,
+    pub present_modes: *const PresentModeKHR,
+}
+
+impl Default for SwapchainPresentModesCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT,
+            next: ptr::null_mut(),
+            present_mode_count: u32::default(),
+            present_modes: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSwapchainPresentScalingCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SwapchainPresentScalingCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub scaling_behavior: PresentScalingFlagsEXT,
+    pub present_gravity_x: PresentGravityFlagsEXT,
+    pub present_gravity_y: PresentGravityFlagsEXT,
+}
+
+impl Default for SwapchainPresentScalingCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_EXT,
+            next: ptr::null(),
+            scaling_behavior: PresentScalingFlagsEXT::default(),
+            present_gravity_x: PresentGravityFlagsEXT::default(),
+            present_gravity_y: PresentGravityFlagsEXT::default(),
         }
     }
 }

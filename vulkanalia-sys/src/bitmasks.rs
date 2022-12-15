@@ -490,6 +490,13 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDirectDriverLoadingFlagsLUNARG.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct DirectDriverLoadingFlagsLUNARG: Flags { }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDirectFBSurfaceCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -1422,6 +1429,28 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPresentGravityFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct PresentGravityFlagsEXT: Flags {
+        const MIN = 1;
+        const MAX = 1 << 1;
+        const CENTERED = 1 << 2;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPresentScalingFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct PresentScalingFlagsEXT: Flags {
+        const ONE_TO_ONE = 1;
+        const ASPECT_RATIO_STRETCH = 1 << 1;
+        const STRETCH = 1 << 2;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPrivateDataSlotCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -1738,6 +1767,7 @@ bitflags! {
         const SPLIT_INSTANCE_BIND_REGIONS = 1;
         const PROTECTED = 1 << 1;
         const MUTABLE_FORMAT = 1 << 2;
+        const DEFERRED_MEMORY_ALLOCATION_EXT = 1 << 3;
     }
 }
 

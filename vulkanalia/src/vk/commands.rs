@@ -532,6 +532,7 @@ pub struct DeviceCommands {
     pub release_full_screen_exclusive_mode_ext: PFN_vkReleaseFullScreenExclusiveModeEXT,
     pub release_performance_configuration_intel: PFN_vkReleasePerformanceConfigurationINTEL,
     pub release_profiling_lock_khr: PFN_vkReleaseProfilingLockKHR,
+    pub release_swapchain_images_ext: PFN_vkReleaseSwapchainImagesEXT,
     pub reset_command_buffer: PFN_vkResetCommandBuffer,
     pub reset_command_pool: PFN_vkResetCommandPool,
     pub reset_descriptor_pool: PFN_vkResetDescriptorPool,
@@ -8099,6 +8100,20 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(_device: Device) {
                         panic!("could not load vkReleaseProfilingLockKHR")
+                    }
+                    fallback
+                }
+            },
+            release_swapchain_images_ext: {
+                let value = loader(b"vkReleaseSwapchainImagesEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _release_info: *const ReleaseSwapchainImagesInfoEXT,
+                    ) -> Result {
+                        panic!("could not load vkReleaseSwapchainImagesEXT")
                     }
                     fallback
                 }
