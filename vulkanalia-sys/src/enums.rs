@@ -1434,6 +1434,38 @@ impl fmt::Debug for DeviceMemoryReportEventTypeEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDirectDriverLoadingModeLUNARG.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct DirectDriverLoadingModeLUNARG(i32);
+
+impl DirectDriverLoadingModeLUNARG {
+    pub const EXCLUSIVE: Self = Self(0);
+    pub const INCLUSIVE: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for DirectDriverLoadingModeLUNARG {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "EXCLUSIVE"),
+            1 => write!(f, "INCLUSIVE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDiscardRectangleModeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -5279,6 +5311,15 @@ impl StructureType {
     pub const PIPELINE_EXECUTABLE_STATISTIC_KHR: Self = Self(1000269004);
     pub const PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR: Self = Self(1000269005);
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT: Self = Self(1000273000);
+    pub const SURFACE_PRESENT_MODE_EXT: Self = Self(1000274000);
+    pub const SURFACE_PRESENT_SCALING_CAPABILITIES_EXT: Self = Self(1000274001);
+    pub const SURFACE_PRESENT_MODE_COMPATIBILITY_EXT: Self = Self(1000274002);
+    pub const PHYSICAL_DEVICE_SWAPCHAIN_MAINTENANCE_1_FEATURES_EXT: Self = Self(1000275000);
+    pub const SWAPCHAIN_PRESENT_FENCE_INFO_EXT: Self = Self(1000275001);
+    pub const SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT: Self = Self(1000275002);
+    pub const SWAPCHAIN_PRESENT_MODE_INFO_EXT: Self = Self(1000275003);
+    pub const SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_EXT: Self = Self(1000275004);
+    pub const RELEASE_SWAPCHAIN_IMAGES_INFO_EXT: Self = Self(1000275005);
     pub const PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV: Self = Self(1000277000);
     pub const GRAPHICS_SHADER_GROUP_CREATE_INFO_NV: Self = Self(1000277001);
     pub const GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV: Self = Self(1000277002);
@@ -5454,6 +5495,8 @@ impl StructureType {
     pub const RENDER_PASS_CREATION_CONTROL_EXT: Self = Self(1000458001);
     pub const RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT: Self = Self(1000458002);
     pub const RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT: Self = Self(1000458003);
+    pub const DIRECT_DRIVER_LOADING_INFO_LUNARG: Self = Self(1000459000);
+    pub const DIRECT_DRIVER_LOADING_LIST_LUNARG: Self = Self(1000459001);
     pub const PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT: Self = Self(1000462000);
     pub const PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_PROPERTIES_EXT: Self = Self(1000462001);
     pub const PIPELINE_SHADER_STAGE_MODULE_IDENTIFIER_CREATE_INFO_EXT: Self = Self(1000462002);
@@ -5473,6 +5516,7 @@ impl StructureType {
     pub const TILE_PROPERTIES_QCOM: Self = Self(1000484001);
     pub const PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC: Self = Self(1000485000);
     pub const AMIGO_PROFILING_SUBMIT_INFO_SEC: Self = Self(1000485001);
+    pub const PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_VIEWPORTS_FEATURES_QCOM: Self = Self(1000488000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV: Self = Self(1000490000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV: Self = Self(1000490001);
     pub const PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT: Self = Self(1000351000);
@@ -6029,6 +6073,15 @@ impl fmt::Debug for StructureType {
             1000269004 => write!(f, "PIPELINE_EXECUTABLE_STATISTIC_KHR"),
             1000269005 => write!(f, "PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR"),
             1000273000 => write!(f, "PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT"),
+            1000274000 => write!(f, "SURFACE_PRESENT_MODE_EXT"),
+            1000274001 => write!(f, "SURFACE_PRESENT_SCALING_CAPABILITIES_EXT"),
+            1000274002 => write!(f, "SURFACE_PRESENT_MODE_COMPATIBILITY_EXT"),
+            1000275000 => write!(f, "PHYSICAL_DEVICE_SWAPCHAIN_MAINTENANCE_1_FEATURES_EXT"),
+            1000275001 => write!(f, "SWAPCHAIN_PRESENT_FENCE_INFO_EXT"),
+            1000275002 => write!(f, "SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT"),
+            1000275003 => write!(f, "SWAPCHAIN_PRESENT_MODE_INFO_EXT"),
+            1000275004 => write!(f, "SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_EXT"),
+            1000275005 => write!(f, "RELEASE_SWAPCHAIN_IMAGES_INFO_EXT"),
             1000277000 => write!(f, "PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV"),
             1000277001 => write!(f, "GRAPHICS_SHADER_GROUP_CREATE_INFO_NV"),
             1000277002 => write!(f, "GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV"),
@@ -6259,6 +6312,8 @@ impl fmt::Debug for StructureType {
             1000458001 => write!(f, "RENDER_PASS_CREATION_CONTROL_EXT"),
             1000458002 => write!(f, "RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT"),
             1000458003 => write!(f, "RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT"),
+            1000459000 => write!(f, "DIRECT_DRIVER_LOADING_INFO_LUNARG"),
+            1000459001 => write!(f, "DIRECT_DRIVER_LOADING_LIST_LUNARG"),
             1000462000 => write!(f, "PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT"),
             1000462001 => write!(f, "PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_PROPERTIES_EXT"),
             1000462002 => write!(f, "PIPELINE_SHADER_STAGE_MODULE_IDENTIFIER_CREATE_INFO_EXT"),
@@ -6280,6 +6335,10 @@ impl fmt::Debug for StructureType {
             1000484001 => write!(f, "TILE_PROPERTIES_QCOM"),
             1000485000 => write!(f, "PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC"),
             1000485001 => write!(f, "AMIGO_PROFILING_SUBMIT_INFO_SEC"),
+            1000488000 => write!(
+                f,
+                "PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_VIEWPORTS_FEATURES_QCOM"
+            ),
             1000490000 => write!(
                 f,
                 "PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV"

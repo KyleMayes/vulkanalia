@@ -3861,6 +3861,12 @@ pub type PFN_vkReleasePerformanceConfigurationINTEL = unsafe extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkReleaseProfilingLockKHR.html>
 pub type PFN_vkReleaseProfilingLockKHR = unsafe extern "system" fn(_device: Device);
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkReleaseSwapchainImagesEXT.html>
+pub type PFN_vkReleaseSwapchainImagesEXT = unsafe extern "system" fn(
+    _device: Device,
+    _release_info: *const ReleaseSwapchainImagesInfoEXT,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkResetCommandBuffer.html>
 pub type PFN_vkResetCommandBuffer = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,

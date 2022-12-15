@@ -3571,6 +3571,15 @@ pub trait ExtSubpassMergeFeedbackExtension: DeviceV1_0 {
 
 impl ExtSubpassMergeFeedbackExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_surface_maintenance1.html>
+pub trait ExtSurfaceMaintenance1Extension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_SURFACE_MAINTENANCE1_EXTENSION;
+}
+
+impl ExtSurfaceMaintenance1Extension for crate::Instance {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_swapchain_colorspace.html>
 pub trait ExtSwapchainColorspaceExtension: InstanceV1_0 {
     /// The metadata for this extension.
@@ -3579,6 +3588,30 @@ pub trait ExtSwapchainColorspaceExtension: InstanceV1_0 {
 }
 
 impl ExtSwapchainColorspaceExtension for crate::Instance {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_swapchain_maintenance1.html>
+pub trait ExtSwapchainMaintenance1Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_SWAPCHAIN_MAINTENANCE1_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkReleaseSwapchainImagesEXT.html>
+    #[inline]
+    unsafe fn release_swapchain_images_ext(
+        &self,
+        release_info: &ReleaseSwapchainImagesInfoEXT,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().release_swapchain_images_ext)(self.handle(), release_info);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl ExtSwapchainMaintenance1Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_texel_buffer_alignment.html>
 pub trait ExtTexelBufferAlignmentExtension: DeviceV1_0 {
@@ -8515,6 +8548,15 @@ pub trait KhrZeroInitializeWorkgroupMemoryExtension: DeviceV1_0 {
 
 impl KhrZeroInitializeWorkgroupMemoryExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_LUNARG_direct_driver_loading.html>
+pub trait LunargDirectDriverLoadingExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = LUNARG_DIRECT_DRIVER_LOADING_EXTENSION;
+}
+
+impl LunargDirectDriverLoadingExtension for crate::Instance {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_MVK_ios_surface.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_metal_surface`")]
 pub trait MvkIosSurfaceExtension: InstanceV1_0 {
@@ -10073,6 +10115,15 @@ pub trait QcomImageProcessingExtension: DeviceV1_0 {
 }
 
 impl QcomImageProcessingExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_multiview_per_view_viewports.html>
+pub trait QcomMultiviewPerViewViewportsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_MULTIVIEW_PER_VIEW_VIEWPORTS_EXTENSION;
+}
+
+impl QcomMultiviewPerViewViewportsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_render_pass_shader_resolve.html>
 pub trait QcomRenderPassShaderResolveExtension: DeviceV1_0 {

@@ -10,6 +10,9 @@
 - [Reserve a driver ID for NVK (#1983)](https://github.com/KhronosGroup/Vulkan-Docs/commit/34a7173fee63c2c15e2414044710a0a69bbd8984)
 - [November 17, 2022 Vulkan 1.3.235 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/f4eb3e9a7acdef9ab62ac9af954a50409895ac6d)
 - [Merge branch 'main' of github.com:KhronosGroup/Vulkan-Docs into github-main](https://github.com/KhronosGroup/Vulkan-Docs/commit/d4987d251a1f63f184ea6ed9b20f5125cfd6a2d5)
+- [December 1, 2022 Vulkan 1.3.236 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/db2b908b59b7774da9aa8b07baed4f5d018ae4d9)
+- [Re-add commit from PR #1983, which was somehow lost in the internal /](https://github.com/KhronosGroup/Vulkan-Docs/commit/d1442602716ef83e6e8deedfab63c2022c0fba13)
+- [December 8, 2022 Vulkan 1.3.237 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/0e28607b55dc1eee4ff80967f1e0a7e99356d075)
 
 ## [0.16.0] - 2022-09-25
 

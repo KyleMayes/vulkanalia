@@ -2099,6 +2099,25 @@ pub const EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_surface_maintenance1.html>
+#[allow(deprecated)]
+pub const EXT_SURFACE_MAINTENANCE1_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_surface_maintenance1"),
+    number: 275,
+    type_: "instance",
+    author: "EXT",
+    contact: "Shahbaz Youssefi @syoussefi",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_SURFACE_EXTENSION.name,
+        KHR_GET_SURFACE_CAPABILITIES2_EXTENSION.name,
+    ]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_swapchain_colorspace.html>
 #[allow(deprecated)]
 pub const EXT_SWAPCHAIN_COLORSPACE_EXTENSION: Extension = Extension {
@@ -2109,6 +2128,26 @@ pub const EXT_SWAPCHAIN_COLORSPACE_EXTENSION: Extension = Extension {
     contact: "Courtney Goeltzenleuchter @courtney-g",
     platform: None,
     required_extensions: Some(&[KHR_SURFACE_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_swapchain_maintenance1.html>
+#[allow(deprecated)]
+pub const EXT_SWAPCHAIN_MAINTENANCE1_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_swapchain_maintenance1"),
+    number: 276,
+    type_: "device",
+    author: "EXT",
+    contact: "Shahbaz Youssefi @syoussefi",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_SWAPCHAIN_EXTENSION.name,
+        EXT_SURFACE_MAINTENANCE1_EXTENSION.name,
+        KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name,
+    ]),
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
@@ -4094,6 +4133,22 @@ pub const KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_EXTENSION: Extension = Extension 
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_LUNARG_direct_driver_loading.html>
+#[allow(deprecated)]
+pub const LUNARG_DIRECT_DRIVER_LOADING_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_LUNARG_direct_driver_loading"),
+    number: 460,
+    type_: "instance",
+    author: "LUNARG",
+    contact: "Charles Giessen @charles-lunarg",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_MVK_ios_surface.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_metal_surface`")]
 #[allow(deprecated)]
@@ -4916,6 +4971,22 @@ pub const QCOM_IMAGE_PROCESSING_EXTENSION: Extension = Extension {
     contact: "Jeff Leger @jackohound",
     platform: None,
     required_extensions: Some(&[KHR_FORMAT_FEATURE_FLAGS2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_multiview_per_view_viewports.html>
+#[allow(deprecated)]
+pub const QCOM_MULTIVIEW_PER_VIEW_VIEWPORTS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_QCOM_multiview_per_view_viewports"),
+    number: 489,
+    type_: "device",
+    author: "QCOM",
+    contact: "Jeff Leger @jackohound",
+    platform: None,
+    required_extensions: None,
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,

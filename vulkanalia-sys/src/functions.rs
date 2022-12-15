@@ -55,6 +55,10 @@ pub type PFN_vkDeviceMemoryReportCallbackEXT =
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/PFN_vkFreeFunction.html>
 pub type PFN_vkFreeFunction = Option<unsafe extern "system" fn(*mut c_void, *mut c_void)>;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/PFN_vkGetInstanceProcAddrLUNARG.html>
+pub type PFN_vkGetInstanceProcAddrLUNARG =
+    Option<unsafe extern "system" fn(Instance, *const c_char) -> PFN_vkVoidFunction>;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/PFN_vkInternalAllocationNotification.html>
 pub type PFN_vkInternalAllocationNotification = Option<
     unsafe extern "system" fn(*mut c_void, usize, InternalAllocationType, SystemAllocationScope),
