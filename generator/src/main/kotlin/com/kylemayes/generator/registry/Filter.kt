@@ -39,6 +39,8 @@ private val unsupportedExtensions = setOf(
     "VK_EXT_video_decode_h265",
     "VK_EXT_video_encode_h264",
     "VK_EXT_video_encode_h265",
+    "VK_KHR_video_decode_h264",
+    "VK_KHR_video_decode_h265",
     "VK_KHR_video_decode_queue",
     "VK_KHR_video_encode_queue",
     "VK_KHR_video_queue",
