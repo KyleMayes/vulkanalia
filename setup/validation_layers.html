@@ -201,7 +201,8 @@ let layers = if VALIDATION_ENABLED {
 <pre><code class="language-rust noplaypen">let info = vk::InstanceCreateInfo::builder()
     .application_info(&amp;application_info)
     .enabled_layer_names(&amp;layers)
-    .enabled_extension_names(&amp;extensions);
+    .enabled_extension_names(&amp;extensions)
+    .flags(flags);
 </code></pre>
 <p>Now run the program in debug mode and ensure that the <code>Validation layer requested but not supported.</code> error does not occur. If it does, then have a look at the FAQ. If you get past that check, then <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.EntryV1_0.html#method.create_instance"><code class="hljs">create_instance</code></a> should never return a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.ErrorCode.html#associatedconstant.LAYER_NOT_PRESENT"><code class="hljs">vk::ErrorCode::LAYER_NOT_PRESENT</code></a> error code but you should still run the program to be sure.</p>
 <h2 id="message-callback"><a class="header" href="#message-callback">Message callback</a></h2>
