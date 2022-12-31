@@ -90,16 +90,29 @@ unsafe fn create_instance(window: &Window, entry: &Entry) -> Result<Instance> {
 
     // Extensions
 
-    let extensions = vk_window::get_required_instance_extensions(window)
+    let mut extensions = vk_window::get_required_instance_extensions(window)
         .iter()
         .map(|e| e.as_ptr())
         .collect::<Vec<_>>();
+
+    // Required by Vulkan SDK on macOS since 1.3.216.
+    let flags = if entry
+        .enumerate_instance_extension_properties(None)?
+        .iter()
+        .any(|e| e.extension_name == vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name)
+    {
+        extensions.push(vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name.as_ptr());
+        vk::InstanceCreateFlags::ENUMERATE_PORTABILITY_KHR
+    } else {
+        vk::InstanceCreateFlags::empty()
+    };
 
     // Create
 
     let info = vk::InstanceCreateInfo::builder()
         .application_info(&application_info)
-        .enabled_extension_names(&extensions);
+        .enabled_extension_names(&extensions)
+        .flags(flags);
 
     Ok(entry.create_instance(&info, None)?)
 }

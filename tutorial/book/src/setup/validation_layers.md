@@ -91,7 +91,8 @@ Then you'll need to specify the requested layers in `vk::InstanceCreateInfo` by 
 let info = vk::InstanceCreateInfo::builder()
     .application_info(&application_info)
     .enabled_layer_names(&layers)
-    .enabled_extension_names(&extensions);
+    .enabled_extension_names(&extensions)
+    .flags(flags);
 ```
 
 Now run the program in debug mode and ensure that the `Validation layer requested but not supported.` error does not occur. If it does, then have a look at the FAQ. If you get past that check, then `create_instance` should never return a `vk::ErrorCode::LAYER_NOT_PRESENT` error code but you should still run the program to be sure.
