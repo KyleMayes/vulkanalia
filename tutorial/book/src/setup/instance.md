@@ -88,6 +88,41 @@ unsafe fn destroy(&mut self) {
 
 Like the Vulkan commands used to create objects, the commands used to destroy objects also take an optional reference to custom allocator callbacks. So like before, we pass `None` to indicate we are content with the default allocation behavior.
 
+## Driver compability (macOS)
+
+If you are using macOS, you may be using a version of the Vulkan SDK that requires additional setup for your Vulkan application to run properly (1.3.216 or later). Attempt to run your application. If it runs successfully, you can ignore this section.
+
+If you instead get an error about driver incompability (e.g., `The required version of Vulkan is not supported by the driver or is otherwise incompatible for implementation-specific reasons.`) you will need to enable an additional portability extension.
+
+Replace the extension enumeration and instance creation code with the following:
+
+```rust,noplaypen
+let mut extensions = vk_window::get_required_instance_extensions(window)
+    .iter()
+    .map(|e| e.as_ptr())
+    .collect::<Vec<_>>();
+
+let flags = if entry
+    .enumerate_instance_extension_properties(None)?
+    .iter()
+    .any(|e| e.extension_name == vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name)
+{
+    extensions.push(vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name.as_ptr());
+    vk::InstanceCreateFlags::ENUMERATE_PORTABILITY_KHR
+} else {
+    vk::InstanceCreateFlags::empty()
+};
+
+let info = vk::InstanceCreateInfo::builder()
+    .application_info(&application_info)
+    .enabled_extension_names(&extensions)
+    .flags(flags);
+```
+
+This code automatically enables `KHR_PORTABILITY_ENUMERATION_EXTENSION` if it is supported and sets a related instance creation flag. As mentioned in the [Getting Started](https://vulkan.lunarg.com/doc/sdk/1.3.216.0/mac/getting_started.html) guide for the macOS Vulkan SDK, this extension is required to permit selection of Vulkan implementations that are not fully conformant to the Vulkan specification.
+
+The Vulkan implementation used on macOS, [MoltenVK](https://github.com/KhronosGroup/MoltenVK), is [not fully conformant](https://www.lunarg.com/wp-content/uploads/2022/05/The-State-of-Vulkan-on-Apple-15APR2022.pdf) and therefore requires this extension to be usable.
+
 ## `Instance` vs `vk::Instance`
 
 When we call our `^create_instance` function, what we get back is not a raw Vulkan instance as would be returned by the Vulkan command `vkCreateInstance` (`vk::Instance`). Instead what we got back is a custom type defined by `vulkanalia` which combines both a raw Vulkan instance and the commands loaded for that specific instance.
