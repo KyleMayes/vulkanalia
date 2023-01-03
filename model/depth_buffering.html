@@ -406,7 +406,7 @@ data.texture_image_view = create_image_view(
     match format {
         vk::Format::D32_SFLOAT_S8_UINT | vk::Format::D24_UNORM_S8_UINT =&gt;
             vk::ImageAspectFlags::DEPTH | vk::ImageAspectFlags::STENCIL,
-        _ =&gt; vk::ImageAspectFlags::COLOR
+        _ =&gt; vk::ImageAspectFlags::DEPTH
     }
 } else {
     vk::ImageAspectFlags::COLOR
