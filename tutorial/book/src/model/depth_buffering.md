@@ -337,7 +337,7 @@ let aspect_mask = if new_layout == vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPT
     match format {
         vk::Format::D32_SFLOAT_S8_UINT | vk::Format::D24_UNORM_S8_UINT =>
             vk::ImageAspectFlags::DEPTH | vk::ImageAspectFlags::STENCIL,
-        _ => vk::ImageAspectFlags::COLOR
+        _ => vk::ImageAspectFlags::DEPTH
     }
 } else {
     vk::ImageAspectFlags::COLOR
