@@ -139,7 +139,7 @@ unsafe fn check_physical_device(
     physical_device: vk::PhysicalDevice,
 ) -> Result<()> {
     QueueFamilyIndices::get(instance, data, physical_device)?;
-    Ok(true)
+    Ok(())
 }
 ```
 
