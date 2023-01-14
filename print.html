@@ -942,7 +942,7 @@ impl QueueFamilyIndices {
     physical_device: vk::PhysicalDevice,
 ) -&gt; Result&lt;()&gt; {
     QueueFamilyIndices::get(instance, data, physical_device)?;
-    Ok(true)
+    Ok(())
 }
 </code></pre>
 <p>Lastly we can iterate over the physical devices and pick the first that satisfies our requirements as indicated by <code>check_physical_device</code>. To do this, update <code>pick_physical_device</code> to look like the following:</p>
