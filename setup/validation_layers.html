@@ -335,7 +335,8 @@ impl App {
 <pre><code class="language-rust noplaypen">let mut info = vk::InstanceCreateInfo::builder()
     .application_info(&amp;application_info)
     .enabled_layer_names(&amp;layers)
-    .enabled_extension_names(&amp;extensions);
+    .enabled_extension_names(&amp;extensions)
+    .flags(flags);
 
 let mut debug_info = vk::DebugUtilsMessengerCreateInfoEXT::builder()
     .message_severity(vk::DebugUtilsMessageSeverityFlagsEXT::all())

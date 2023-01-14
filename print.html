@@ -815,7 +815,8 @@ impl App {
 <pre><code class="language-rust noplaypen">let mut info = vk::InstanceCreateInfo::builder()
     .application_info(&amp;application_info)
     .enabled_layer_names(&amp;layers)
-    .enabled_extension_names(&amp;extensions);
+    .enabled_extension_names(&amp;extensions)
+    .flags(flags);
 
 let mut debug_info = vk::DebugUtilsMessengerCreateInfoEXT::builder()
     .message_severity(vk::DebugUtilsMessageSeverityFlagsEXT::all())
@@ -5185,7 +5186,7 @@ data.texture_image_view = create_image_view(
     match format {
         vk::Format::D32_SFLOAT_S8_UINT | vk::Format::D24_UNORM_S8_UINT =&gt;
             vk::ImageAspectFlags::DEPTH | vk::ImageAspectFlags::STENCIL,
-        _ =&gt; vk::ImageAspectFlags::COLOR
+        _ =&gt; vk::ImageAspectFlags::DEPTH
     }
 } else {
     vk::ImageAspectFlags::COLOR
