@@ -269,7 +269,8 @@ One such struct is `vk::DebugUtilsMessengerCreateInfoEXT`, which we will now use
 let mut info = vk::InstanceCreateInfo::builder()
     .application_info(&application_info)
     .enabled_layer_names(&layers)
-    .enabled_extension_names(&extensions);
+    .enabled_extension_names(&extensions)
+    .flags(flags);
 
 let mut debug_info = vk::DebugUtilsMessengerCreateInfoEXT::builder()
     .message_severity(vk::DebugUtilsMessageSeverityFlagsEXT::all())
