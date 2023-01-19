@@ -8438,6 +8438,52 @@ impl Default for PhysicalDeviceBufferDeviceAddressFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub clusterculling_shader: Bool32,
+    pub multiview_cluster_culling_shader: Bool32,
+}
+
+impl Default for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_FEATURES_HUAWEI,
+            next: ptr::null_mut(),
+            clusterculling_shader: Bool32::default(),
+            multiview_cluster_culling_shader: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceClusterCullingShaderPropertiesHUAWEI {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_work_group_count: [u32; 3],
+    pub max_work_group_size: [u32; 3],
+    pub max_output_cluster_count: u32,
+}
+
+impl Default for PhysicalDeviceClusterCullingShaderPropertiesHUAWEI {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_PROPERTIES_HUAWEI,
+            next: ptr::null_mut(),
+            max_work_group_count: [u32::default(); 3],
+            max_work_group_size: [u32::default(); 3],
+            max_output_cluster_count: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCoherentMemoryFeaturesAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]

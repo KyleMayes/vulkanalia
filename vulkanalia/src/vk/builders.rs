@@ -11683,6 +11683,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBlendOperationAdvancedFeat
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBufferDeviceAddressFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoherentMemoryFeaturesAMD {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceColorWriteEnableFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceComputeShaderDerivativesFeaturesNV {}
@@ -28983,6 +28984,143 @@ unsafe impl Cast for PhysicalDeviceBufferDeviceAddressFeaturesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {
+    type Target = PhysicalDeviceClusterCullingShaderFeaturesHUAWEI;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {
+    type Builder = PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceClusterCullingShaderFeaturesHUAWEI`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder {
+    value: PhysicalDeviceClusterCullingShaderFeaturesHUAWEI,
+}
+
+impl PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder {
+    #[inline]
+    pub fn clusterculling_shader(mut self, clusterculling_shader: bool) -> Self {
+        self.value.clusterculling_shader = clusterculling_shader as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn multiview_cluster_culling_shader(
+        mut self,
+        multiview_cluster_culling_shader: bool,
+    ) -> Self {
+        self.value.multiview_cluster_culling_shader = multiview_cluster_culling_shader as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder {
+    type Target = PhysicalDeviceClusterCullingShaderFeaturesHUAWEI;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder {
+    type Target = PhysicalDeviceClusterCullingShaderFeaturesHUAWEI;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceClusterCullingShaderPropertiesHUAWEI {
+    type Target = PhysicalDeviceClusterCullingShaderPropertiesHUAWEI;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceClusterCullingShaderPropertiesHUAWEI {
+    type Builder = PhysicalDeviceClusterCullingShaderPropertiesHUAWEIBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceClusterCullingShaderPropertiesHUAWEI`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceClusterCullingShaderPropertiesHUAWEIBuilder {
+    value: PhysicalDeviceClusterCullingShaderPropertiesHUAWEI,
+}
+
+impl PhysicalDeviceClusterCullingShaderPropertiesHUAWEIBuilder {
+    #[inline]
+    pub fn max_work_group_count(mut self, max_work_group_count: [u32; 3]) -> Self {
+        self.value.max_work_group_count = max_work_group_count;
+        self
+    }
+
+    #[inline]
+    pub fn max_work_group_size(mut self, max_work_group_size: [u32; 3]) -> Self {
+        self.value.max_work_group_size = max_work_group_size;
+        self
+    }
+
+    #[inline]
+    pub fn max_output_cluster_count(mut self, max_output_cluster_count: u32) -> Self {
+        self.value.max_output_cluster_count = max_output_cluster_count;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceClusterCullingShaderPropertiesHUAWEI {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceClusterCullingShaderPropertiesHUAWEIBuilder {
+    type Target = PhysicalDeviceClusterCullingShaderPropertiesHUAWEI;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceClusterCullingShaderPropertiesHUAWEIBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceClusterCullingShaderPropertiesHUAWEIBuilder {
+    type Target = PhysicalDeviceClusterCullingShaderPropertiesHUAWEI;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceCoherentMemoryFeaturesAMD {
     type Target = PhysicalDeviceCoherentMemoryFeaturesAMD;
 
@@ -33370,6 +33508,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBlendOperationAdvan
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBufferDeviceAddressFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBufferDeviceAddressFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCoherentMemoryFeaturesAMD {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceColorWriteEnableFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceComputeShaderDerivativesFeaturesNV {}
@@ -40922,6 +41061,10 @@ unsafe impl Cast for PhysicalDevicePropertiesBuilder {
 pub unsafe trait ExtendsPhysicalDeviceProperties2: fmt::Debug {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceAccelerationStructurePropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceBlendOperationAdvancedPropertiesEXT {}
+unsafe impl ExtendsPhysicalDeviceProperties2
+    for PhysicalDeviceClusterCullingShaderPropertiesHUAWEI
+{
+}
 unsafe impl ExtendsPhysicalDeviceProperties2
     for PhysicalDeviceConservativeRasterizationPropertiesEXT
 {

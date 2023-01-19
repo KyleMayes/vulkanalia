@@ -4352,6 +4352,44 @@ pub trait GoogleUserTypeExtension: DeviceV1_0 {
 
 impl GoogleUserTypeExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_HUAWEI_cluster_culling_shader.html>
+pub trait HuaweiClusterCullingShaderExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = HUAWEI_CLUSTER_CULLING_SHADER_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawClusterHUAWEI.html>
+    #[inline]
+    unsafe fn cmd_draw_cluster_huawei(
+        &self,
+        command_buffer: CommandBuffer,
+        group_count_x: u32,
+        group_count_y: u32,
+        group_count_z: u32,
+    ) {
+        let __result = (self.commands().cmd_draw_cluster_huawei)(
+            command_buffer,
+            group_count_x,
+            group_count_y,
+            group_count_z,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawClusterIndirectHUAWEI.html>
+    #[inline]
+    unsafe fn cmd_draw_cluster_indirect_huawei(
+        &self,
+        command_buffer: CommandBuffer,
+        buffer: Buffer,
+        offset: DeviceSize,
+    ) {
+        let __result =
+            (self.commands().cmd_draw_cluster_indirect_huawei)(command_buffer, buffer, offset);
+    }
+}
+
+impl HuaweiClusterCullingShaderExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_HUAWEI_invocation_mask.html>
 pub trait HuaweiInvocationMaskExtension: DeviceV1_0 {
     /// The metadata for this extension.
