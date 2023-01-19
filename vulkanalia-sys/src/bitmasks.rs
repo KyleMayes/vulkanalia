@@ -1397,6 +1397,7 @@ bitflags! {
         const PRE_RASTERIZATION_SHADERS = 1 << 38;
         const SUBPASS_SHADING_HUAWEI = 1 << 39;
         const INVOCATION_MASK_HUAWEI = 1 << 40;
+        const CLUSTER_CULLING_SHADER_HUAWEI = 1 << 41;
     }
 }
 
@@ -1484,6 +1485,7 @@ bitflags! {
         const COMPUTE_SHADER_INVOCATIONS = 1 << 10;
         const TASK_SHADER_INVOCATIONS_EXT = 1 << 11;
         const MESH_SHADER_INVOCATIONS_EXT = 1 << 12;
+        const CLUSTER_CULLING_SHADER_INVOCATIONS_HUAWEI = 1 << 13;
     }
 }
 
@@ -1649,6 +1651,7 @@ bitflags! {
         const INTERSECTION_KHR = 1 << 12;
         const CALLABLE_KHR = 1 << 13;
         const SUBPASS_SHADING_HUAWEI = 1 << 14;
+        const CLUSTER_CULLING_HUAWEI = 1 << 19;
         const ALL = i32::MAX as u32;
     }
 }

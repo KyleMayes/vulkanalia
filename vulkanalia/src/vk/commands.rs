@@ -111,6 +111,8 @@ pub struct DeviceCommands {
     pub cmd_dispatch_base_khr: PFN_vkCmdDispatchBaseKHR,
     pub cmd_dispatch_indirect: PFN_vkCmdDispatchIndirect,
     pub cmd_draw: PFN_vkCmdDraw,
+    pub cmd_draw_cluster_huawei: PFN_vkCmdDrawClusterHUAWEI,
+    pub cmd_draw_cluster_indirect_huawei: PFN_vkCmdDrawClusterIndirectHUAWEI,
     pub cmd_draw_indexed: PFN_vkCmdDrawIndexed,
     pub cmd_draw_indexed_indirect: PFN_vkCmdDrawIndexedIndirect,
     pub cmd_draw_indexed_indirect_count: PFN_vkCmdDrawIndexedIndirectCount,
@@ -1911,6 +1913,37 @@ impl DeviceCommands {
                         _first_instance: u32,
                     ) {
                         panic!("could not load vkCmdDraw")
+                    }
+                    fallback
+                }
+            },
+            cmd_draw_cluster_huawei: {
+                let value = loader(b"vkCmdDrawClusterHUAWEI\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _group_count_x: u32,
+                        _group_count_y: u32,
+                        _group_count_z: u32,
+                    ) {
+                        panic!("could not load vkCmdDrawClusterHUAWEI")
+                    }
+                    fallback
+                }
+            },
+            cmd_draw_cluster_indirect_huawei: {
+                let value = loader(b"vkCmdDrawClusterIndirectHUAWEI\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _buffer: Buffer,
+                        _offset: DeviceSize,
+                    ) {
+                        panic!("could not load vkCmdDrawClusterIndirectHUAWEI")
                     }
                     fallback
                 }

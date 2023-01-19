@@ -633,6 +633,18 @@ pub type PFN_vkCmdDraw = unsafe extern "system" fn(
     _first_instance: u32,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawClusterHUAWEI.html>
+pub type PFN_vkCmdDrawClusterHUAWEI = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _group_count_x: u32,
+    _group_count_y: u32,
+    _group_count_z: u32,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawClusterIndirectHUAWEI.html>
+pub type PFN_vkCmdDrawClusterIndirectHUAWEI =
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _buffer: Buffer, _offset: DeviceSize);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDrawIndexed.html>
 pub type PFN_vkCmdDrawIndexed = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,

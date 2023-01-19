@@ -2519,6 +2519,22 @@ pub const GOOGLE_USER_TYPE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_HUAWEI_cluster_culling_shader.html>
+#[allow(deprecated)]
+pub const HUAWEI_CLUSTER_CULLING_SHADER_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_HUAWEI_cluster_culling_shader"),
+    number: 405,
+    type_: "device",
+    author: "HUAWEI",
+    contact: "Yuchang Wang @richard_Wang2",
+    platform: None,
+    required_extensions: Some(&[KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name]),
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_HUAWEI_invocation_mask.html>
 #[allow(deprecated)]
 pub const HUAWEI_INVOCATION_MASK_EXTENSION: Extension = Extension {

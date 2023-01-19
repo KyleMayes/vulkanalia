@@ -1592,6 +1592,7 @@ impl DriverId {
     pub const MESA_VENUS: Self = Self(22);
     pub const MESA_DOZEN: Self = Self(23);
     pub const MESA_NVK: Self = Self(24);
+    pub const IMAGINATION_OPEN_SOURCE_MESA: Self = Self(25);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1633,6 +1634,7 @@ impl fmt::Debug for DriverId {
             22 => write!(f, "MESA_VENUS"),
             23 => write!(f, "MESA_DOZEN"),
             24 => write!(f, "MESA_NVK"),
+            25 => write!(f, "IMAGINATION_OPEN_SOURCE_MESA"),
             _ => self.0.fmt(f),
         }
     }
@@ -5468,6 +5470,8 @@ impl StructureType {
     pub const MICROMAP_CREATE_INFO_EXT: Self = Self(1000396007);
     pub const MICROMAP_BUILD_SIZES_INFO_EXT: Self = Self(1000396008);
     pub const ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT: Self = Self(1000396009);
+    pub const PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_FEATURES_HUAWEI: Self = Self(1000404000);
+    pub const PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_PROPERTIES_HUAWEI: Self = Self(1000404001);
     pub const PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT: Self = Self(1000411000);
     pub const SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT: Self = Self(1000411001);
     pub const PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT: Self = Self(1000412000);
@@ -6271,6 +6275,11 @@ impl fmt::Debug for StructureType {
             1000396007 => write!(f, "MICROMAP_CREATE_INFO_EXT"),
             1000396008 => write!(f, "MICROMAP_BUILD_SIZES_INFO_EXT"),
             1000396009 => write!(f, "ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT"),
+            1000404000 => write!(f, "PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_FEATURES_HUAWEI"),
+            1000404001 => write!(
+                f,
+                "PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_PROPERTIES_HUAWEI"
+            ),
             1000411000 => write!(f, "PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT"),
             1000411001 => write!(f, "SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT"),
             1000412000 => write!(
