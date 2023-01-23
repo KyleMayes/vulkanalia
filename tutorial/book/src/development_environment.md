@@ -28,7 +28,7 @@ winit = "0.27"
 * `anyhow` &ndash; used for simple error handling
 * `lazy_static` &ndash; used to store static data like vertices
 * `log` &ndash; used for logging statements
-* `nalgebra-glm` &ndash; used as a Rust replacement for [GLM](https://glmg-truc.net) (graphics math library)
+* `nalgebra-glm` &ndash; used as a Rust replacement for [GLM](https://glm.g-truc.net/0.9.9/index.html) (graphics math library)
 * `png` &ndash; used to load PNGs to use as textures
 * `pretty_env_logger` &ndash; used to print our logs to the console
 * `thiserror` &ndash; used to define custom errors types without boilerplate
