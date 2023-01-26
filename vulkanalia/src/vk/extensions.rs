@@ -3156,6 +3156,15 @@ pub trait ExtPipelineCreationFeedbackExtension: DeviceV1_0 {
 
 impl ExtPipelineCreationFeedbackExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_pipeline_library_group_handles.html>
+pub trait ExtPipelineLibraryGroupHandlesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_PIPELINE_LIBRARY_GROUP_HANDLES_EXTENSION;
+}
+
+impl ExtPipelineLibraryGroupHandlesExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_pipeline_properties.html>
 pub trait ExtPipelinePropertiesExtension: DeviceV1_0 {
     /// The metadata for this extension.
