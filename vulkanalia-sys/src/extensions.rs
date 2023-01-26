@@ -1662,6 +1662,25 @@ pub const EXT_PIPELINE_CREATION_FEEDBACK_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_pipeline_library_group_handles.html>
+#[allow(deprecated)]
+pub const EXT_PIPELINE_LIBRARY_GROUP_HANDLES_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_pipeline_library_group_handles"),
+    number: 499,
+    type_: "device",
+    author: "EXT",
+    contact: "Hans-Kristian Arntzen @HansKristian-Work",
+    platform: None,
+    required_extensions: Some(&[
+        KHR_RAY_TRACING_PIPELINE_EXTENSION.name,
+        KHR_PIPELINE_LIBRARY_EXTENSION.name,
+    ]),
+    required_version: Some("1.1"),
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_pipeline_properties.html>
 #[allow(deprecated)]
 pub const EXT_PIPELINE_PROPERTIES_EXTENSION: Extension = Extension {

@@ -5527,6 +5527,7 @@ impl StructureType {
     pub const MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT: Self = Self(1000351002);
     pub const PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM: Self = Self(1000497000);
     pub const PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM: Self = Self(1000497001);
+    pub const PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT: Self = Self(1000498000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -6360,6 +6361,10 @@ impl fmt::Debug for StructureType {
             1000351002 => write!(f, "MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT"),
             1000497000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM"),
             1000497001 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM"),
+            1000498000 => write!(
+                f,
+                "PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT"
+            ),
             _ => self.0.fmt(f),
         }
     }

@@ -11752,6 +11752,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePageableDeviceLocalMemoryF
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerformanceQueryFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineCreationCacheControlFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelinePropertiesFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineProtectedAccessFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineRobustnessFeaturesEXT {}
@@ -33588,6 +33589,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR
 {
 }
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelinePropertiesFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineProtectedAccessFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineRobustnessFeaturesEXT {}
@@ -40010,6 +40015,64 @@ impl ops::DerefMut for PhysicalDevicePipelineExecutablePropertiesFeaturesKHRBuil
 
 unsafe impl Cast for PhysicalDevicePipelineExecutablePropertiesFeaturesKHRBuilder {
     type Target = PhysicalDevicePipelineExecutablePropertiesFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {
+    type Target = PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {
+    type Builder = PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXTBuilder {
+    value: PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT,
+}
+
+impl PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXTBuilder {
+    #[inline]
+    pub fn pipeline_library_group_handles(mut self, pipeline_library_group_handles: bool) -> Self {
+        self.value.pipeline_library_group_handles = pipeline_library_group_handles as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXTBuilder {
+    type Target = PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXTBuilder {
+    type Target = PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
