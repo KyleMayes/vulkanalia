@@ -78,7 +78,7 @@ impl App {
         let loader = LibloadingLoader::new(LIBRARY)?;
         let entry = Entry::new(loader).map_err(|b| anyhow!("{}", b))?;
         let instance = create_instance(&window, &entry, &mut data)?;
-        data.surface = vk_window::create_surface(&instance, &window)?;
+        data.surface = vk_window::create_surface(&instance, &window, &window)?;
         pick_physical_device(&instance, &mut data)?;
         let device = create_logical_device(&instance, &mut data)?;
         create_swapchain(&window, &instance, &device, &mut data)?;
