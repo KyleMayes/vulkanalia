@@ -50,13 +50,13 @@ pub fn get_required_instance_extensions(
         ],
         // macOS
         #[cfg(target_os = "macos")]
-        RawWindowHandle::MacOS(window) => &[
+        RawWindowHandle::AppKit(window) => &[
             &vk::KHR_SURFACE_EXTENSION.name,
             &vk::EXT_METAL_SURFACE_EXTENSION.name,
         ],
         // Windows
         #[cfg(target_os = "windows")]
-        RawWindowHandle::Windows(_) => &[
+        RawWindowHandle::Win32(_) => &[
             &vk::KHR_SURFACE_EXTENSION.name,
             &vk::KHR_WIN32_SURFACE_EXTENSION.name,
         ],
