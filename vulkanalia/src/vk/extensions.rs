@@ -406,6 +406,15 @@ pub trait ArmShaderCoreBuiltinsExtension: DeviceV1_0 {
 
 impl ArmShaderCoreBuiltinsExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_ARM_shader_core_properties.html>
+pub trait ArmShaderCorePropertiesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = ARM_SHADER_CORE_PROPERTIES_EXTENSION;
+}
+
+impl ArmShaderCorePropertiesExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_4444_formats.html>
 pub trait Ext4444FormatsExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -516,6 +525,15 @@ pub trait ExtAcquireXlibDisplayExtension: InstanceV1_0 {
 }
 
 impl ExtAcquireXlibDisplayExtension for crate::Instance {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_application_parameters.html>
+pub trait ExtApplicationParametersExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_APPLICATION_PARAMETERS_EXTENSION;
+}
+
+impl ExtApplicationParametersExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_astc_decode_mode.html>
 pub trait ExtAstcDecodeModeExtension: DeviceV1_0 {
@@ -1412,6 +1430,32 @@ pub trait ExtDiscardRectanglesExtension: DeviceV1_0 {
             first_discard_rectangle,
             discard_rectangles.len() as u32,
             discard_rectangles.as_ptr().cast(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetDiscardRectangleEnableEXT.html>
+    #[inline]
+    unsafe fn cmd_set_discard_rectangle_enable_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        discard_rectangle_enable: bool,
+    ) {
+        let __result = (self.commands().cmd_set_discard_rectangle_enable_ext)(
+            command_buffer,
+            discard_rectangle_enable as Bool32,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetDiscardRectangleModeEXT.html>
+    #[inline]
+    unsafe fn cmd_set_discard_rectangle_mode_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        discard_rectangle_mode: DiscardRectangleModeEXT,
+    ) {
+        let __result = (self.commands().cmd_set_discard_rectangle_mode_ext)(
+            command_buffer,
+            discard_rectangle_mode,
         );
     }
 }
@@ -2579,6 +2623,15 @@ pub trait ExtImageRobustnessExtension: DeviceV1_0 {
 }
 
 impl ExtImageRobustnessExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_image_sliced_view_of_3d.html>
+pub trait ExtImageSlicedViewOf3dExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_IMAGE_SLICED_VIEW_OF_3D_EXTENSION;
+}
+
+impl ExtImageSlicedViewOf3dExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_image_view_min_lod.html>
 pub trait ExtImageViewMinLodExtension: DeviceV1_0 {
@@ -5855,6 +5908,7 @@ pub trait KhrDisplaySwapchainExtension: DeviceV1_0 {
     unsafe fn create_shared_swapchains_khr(
         &self,
         create_infos: &[impl Cast<Target = SwapchainCreateInfoKHR>],
+        create_infos: &[impl Cast<Target = SwapchainCreateInfoKHR>],
         allocator: Option<&AllocationCallbacks>,
     ) -> crate::VkResult<SwapchainKHR> {
         let mut swapchains = MaybeUninit::<SwapchainKHR>::uninit();
@@ -5862,6 +5916,7 @@ pub trait KhrDisplaySwapchainExtension: DeviceV1_0 {
         let __result = (self.commands().create_shared_swapchains_khr)(
             self.handle(),
             create_infos.len() as u32,
+            create_infos.as_ptr().cast(),
             create_infos.as_ptr().cast(),
             allocator.map_or(ptr::null(), |v| v),
             swapchains.as_mut_ptr(),
@@ -7024,6 +7079,64 @@ pub trait KhrMultiviewExtension: DeviceV1_0 {
 
 impl KhrMultiviewExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_object_refresh.html>
+pub trait KhrObjectRefreshExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_OBJECT_REFRESH_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdRefreshObjectsKHR.html>
+    #[inline]
+    unsafe fn cmd_refresh_objects_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        refresh_objects: &RefreshObjectListKHR,
+    ) {
+        let __result = (self.commands().cmd_refresh_objects_khr)(command_buffer, refresh_objects);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceRefreshableObjectTypesKHR.html>
+    #[inline]
+    unsafe fn get_physical_device_refreshable_object_types_khr(
+        &self,
+        physical_device: PhysicalDevice,
+    ) -> crate::VkResult<Vec<ObjectType>> {
+        let mut refreshable_object_type_count = 0;
+
+        (self
+            .commands()
+            .get_physical_device_refreshable_object_types_khr)(
+            physical_device,
+            &mut refreshable_object_type_count,
+            ptr::null_mut(),
+        );
+
+        let mut refreshable_object_types =
+            Vec::with_capacity(refreshable_object_type_count as usize);
+
+        let __result = (self
+            .commands()
+            .get_physical_device_refreshable_object_types_khr)(
+            physical_device,
+            &mut refreshable_object_type_count,
+            refreshable_object_types.as_mut_ptr(),
+        );
+
+        debug_assert!(
+            refreshable_object_types.capacity() == refreshable_object_type_count as usize
+        );
+        refreshable_object_types.set_len(refreshable_object_type_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(refreshable_object_types)
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl KhrObjectRefreshExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_performance_query.html>
 pub trait KhrPerformanceQueryExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -7970,12 +8083,14 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
     unsafe fn create_swapchain_khr(
         &self,
         create_info: &SwapchainCreateInfoKHR,
+        create_info: &SwapchainCreateInfoKHR,
         allocator: Option<&AllocationCallbacks>,
     ) -> crate::VkResult<SwapchainKHR> {
         let mut swapchain = MaybeUninit::<SwapchainKHR>::uninit();
 
         let __result = (self.commands().create_swapchain_khr)(
             self.handle(),
+            create_info,
             create_info,
             allocator.map_or(ptr::null(), |v| v),
             swapchain.as_mut_ptr(),
@@ -9340,6 +9455,81 @@ pub trait NvExternalMemoryRdmaExtension: DeviceV1_0 {
 
 impl NvExternalMemoryRdmaExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_external_memory_sci_buf.html>
+pub trait NvExternalMemorySciBufExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_EXTERNAL_MEMORY_SCI_BUF_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetMemorySciBufNV.html>
+    #[inline]
+    unsafe fn get_memory_sci_buf_nv(
+        &self,
+        get_sci_buf_info: &MemoryGetSciBufInfoNV,
+    ) -> crate::VkResult<NvSciBufObj> {
+        let mut handle = MaybeUninit::<NvSciBufObj>::uninit();
+
+        let __result = (self.commands().get_memory_sci_buf_nv)(
+            self.handle(),
+            get_sci_buf_info,
+            handle.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(handle.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV.html>
+    #[inline]
+    unsafe fn get_physical_device_external_memory_sci_buf_properties_nv(
+        &self,
+        physical_device: PhysicalDevice,
+        handle_type: ExternalMemoryHandleTypeFlags,
+        handle: NvSciBufObj,
+    ) -> crate::VkResult<MemorySciBufPropertiesNV> {
+        let mut memory_sci_buf_properties = MaybeUninit::<MemorySciBufPropertiesNV>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_physical_device_external_memory_sci_buf_properties_nv)(
+            physical_device,
+            handle_type,
+            handle,
+            memory_sci_buf_properties.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(memory_sci_buf_properties.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceSciBufAttributesNV.html>
+    #[inline]
+    unsafe fn get_physical_device_sci_buf_attributes_nv(
+        &self,
+        physical_device: PhysicalDevice,
+        attributes: NvSciBufAttrList,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().get_physical_device_sci_buf_attributes_nv)(
+            physical_device,
+            attributes,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl NvExternalMemorySciBufExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_external_memory_win32.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory_win32`")]
 pub trait NvExternalMemoryWin32Extension: DeviceV1_0 {
@@ -9373,6 +9563,300 @@ pub trait NvExternalMemoryWin32Extension: DeviceV1_0 {
 
 #[allow(deprecated)]
 impl NvExternalMemoryWin32Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_external_sci_sync.html>
+#[deprecated(note = "deprecated in favor of `VK_NV_external_sci_sync2`")]
+pub trait NvExternalSciSyncExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_EXTERNAL_SCI_SYNC_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetFenceSciSyncFenceNV.html>
+    #[inline]
+    unsafe fn get_fence_sci_sync_fence_nv(
+        &self,
+        get_sci_sync_handle_info: &FenceGetSciSyncInfoNV,
+    ) -> crate::VkResult<c_void> {
+        let mut handle = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self.commands().get_fence_sci_sync_fence_nv)(
+            self.handle(),
+            get_sci_sync_handle_info,
+            handle.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(handle.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetFenceSciSyncObjNV.html>
+    #[inline]
+    unsafe fn get_fence_sci_sync_obj_nv(
+        &self,
+        get_sci_sync_handle_info: &FenceGetSciSyncInfoNV,
+    ) -> crate::VkResult<c_void> {
+        let mut handle = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self.commands().get_fence_sci_sync_obj_nv)(
+            self.handle(),
+            get_sci_sync_handle_info,
+            handle.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(handle.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceSciSyncAttributesNV.html>
+    #[inline]
+    unsafe fn get_physical_device_sci_sync_attributes_nv(
+        &self,
+        physical_device: PhysicalDevice,
+        sci_sync_attributes_info: &SciSyncAttributesInfoNV,
+        attributes: NvSciSyncAttrList,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().get_physical_device_sci_sync_attributes_nv)(
+            physical_device,
+            sci_sync_attributes_info,
+            attributes,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetSemaphoreSciSyncObjNV.html>
+    #[inline]
+    unsafe fn get_semaphore_sci_sync_obj_nv(
+        &self,
+        get_sci_sync_info: &SemaphoreGetSciSyncInfoNV,
+    ) -> crate::VkResult<c_void> {
+        let mut handle = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self.commands().get_semaphore_sci_sync_obj_nv)(
+            self.handle(),
+            get_sci_sync_info,
+            handle.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(handle.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkImportFenceSciSyncFenceNV.html>
+    #[inline]
+    unsafe fn import_fence_sci_sync_fence_nv(
+        &self,
+        import_fence_sci_sync_info: &ImportFenceSciSyncInfoNV,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().import_fence_sci_sync_fence_nv)(
+            self.handle(),
+            import_fence_sci_sync_info,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkImportFenceSciSyncObjNV.html>
+    #[inline]
+    unsafe fn import_fence_sci_sync_obj_nv(
+        &self,
+        import_fence_sci_sync_info: &ImportFenceSciSyncInfoNV,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().import_fence_sci_sync_obj_nv)(
+            self.handle(),
+            import_fence_sci_sync_info,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkImportSemaphoreSciSyncObjNV.html>
+    #[inline]
+    unsafe fn import_semaphore_sci_sync_obj_nv(
+        &self,
+        import_semaphore_sci_sync_info: &ImportSemaphoreSciSyncInfoNV,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().import_semaphore_sci_sync_obj_nv)(
+            self.handle(),
+            import_semaphore_sci_sync_info,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+#[allow(deprecated)]
+impl NvExternalSciSyncExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_external_sci_sync2.html>
+pub trait NvExternalSciSync2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_EXTERNAL_SCI_SYNC2_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateSemaphoreSciSyncPoolNV.html>
+    #[inline]
+    unsafe fn create_semaphore_sci_sync_pool_nv(
+        &self,
+        create_info: &SemaphoreSciSyncPoolCreateInfoNV,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<SemaphoreSciSyncPoolNV> {
+        let mut semaphore_pool = MaybeUninit::<SemaphoreSciSyncPoolNV>::uninit();
+
+        let __result = (self.commands().create_semaphore_sci_sync_pool_nv)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            semaphore_pool.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(semaphore_pool.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkDestroySemaphoreSciSyncPoolNV.html>
+    #[inline]
+    unsafe fn destroy_semaphore_sci_sync_pool_nv(
+        &self,
+        semaphore_pool: SemaphoreSciSyncPoolNV,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_semaphore_sci_sync_pool_nv)(
+            self.handle(),
+            semaphore_pool,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetFenceSciSyncFenceNV.html>
+    #[inline]
+    unsafe fn get_fence_sci_sync_fence_nv(
+        &self,
+        get_sci_sync_handle_info: &FenceGetSciSyncInfoNV,
+    ) -> crate::VkResult<c_void> {
+        let mut handle = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self.commands().get_fence_sci_sync_fence_nv)(
+            self.handle(),
+            get_sci_sync_handle_info,
+            handle.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(handle.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetFenceSciSyncObjNV.html>
+    #[inline]
+    unsafe fn get_fence_sci_sync_obj_nv(
+        &self,
+        get_sci_sync_handle_info: &FenceGetSciSyncInfoNV,
+    ) -> crate::VkResult<c_void> {
+        let mut handle = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self.commands().get_fence_sci_sync_obj_nv)(
+            self.handle(),
+            get_sci_sync_handle_info,
+            handle.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(handle.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceSciSyncAttributesNV.html>
+    #[inline]
+    unsafe fn get_physical_device_sci_sync_attributes_nv(
+        &self,
+        physical_device: PhysicalDevice,
+        sci_sync_attributes_info: &SciSyncAttributesInfoNV,
+        attributes: NvSciSyncAttrList,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().get_physical_device_sci_sync_attributes_nv)(
+            physical_device,
+            sci_sync_attributes_info,
+            attributes,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkImportFenceSciSyncFenceNV.html>
+    #[inline]
+    unsafe fn import_fence_sci_sync_fence_nv(
+        &self,
+        import_fence_sci_sync_info: &ImportFenceSciSyncInfoNV,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().import_fence_sci_sync_fence_nv)(
+            self.handle(),
+            import_fence_sci_sync_info,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkImportFenceSciSyncObjNV.html>
+    #[inline]
+    unsafe fn import_fence_sci_sync_obj_nv(
+        &self,
+        import_fence_sci_sync_info: &ImportFenceSciSyncInfoNV,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().import_fence_sci_sync_obj_nv)(
+            self.handle(),
+            import_fence_sci_sync_info,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl NvExternalSciSync2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_fill_rectangle.html>
 pub trait NvFillRectangleExtension: DeviceV1_0 {
@@ -9705,6 +10189,15 @@ pub trait NvPresentBarrierExtension: DeviceV1_0 {
 
 impl NvPresentBarrierExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_private_vendor_info.html>
+pub trait NvPrivateVendorInfoExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_PRIVATE_VENDOR_INFO_EXTENSION;
+}
+
+impl NvPrivateVendorInfoExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_ray_tracing.html>
 pub trait NvRayTracingExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -10016,6 +10509,22 @@ pub trait NvScissorExclusiveExtension: DeviceV1_0 {
     #[allow(deprecated)]
     const METADATA: Extension = NV_SCISSOR_EXCLUSIVE_EXTENSION;
 
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetExclusiveScissorEnableNV.html>
+    #[inline]
+    unsafe fn cmd_set_exclusive_scissor_enable_nv(
+        &self,
+        command_buffer: CommandBuffer,
+        first_exclusive_scissor: u32,
+        exclusive_scissor_enables: &[Bool32],
+    ) {
+        let __result = (self.commands().cmd_set_exclusive_scissor_enable_nv)(
+            command_buffer,
+            first_exclusive_scissor,
+            exclusive_scissor_enables.len() as u32,
+            exclusive_scissor_enables.as_ptr(),
+        );
+    }
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetExclusiveScissorNV.html>
     #[inline]
     unsafe fn cmd_set_exclusive_scissor_nv(
@@ -10162,6 +10671,15 @@ pub trait QcomImageProcessingExtension: DeviceV1_0 {
 }
 
 impl QcomImageProcessingExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_multiview_per_view_render_areas.html>
+pub trait QcomMultiviewPerViewRenderAreasExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_MULTIVIEW_PER_VIEW_RENDER_AREAS_EXTENSION;
+}
+
+impl QcomMultiviewPerViewRenderAreasExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_multiview_per_view_viewports.html>
 pub trait QcomMultiviewPerViewViewportsExtension: DeviceV1_0 {
