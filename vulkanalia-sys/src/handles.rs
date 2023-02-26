@@ -1849,6 +1849,50 @@ impl fmt::Debug for Semaphore {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSemaphoreSciSyncPoolNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct SemaphoreSciSyncPoolNV(u64);
+
+impl Handle for SemaphoreSciSyncPoolNV {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::SEMAPHORE_SCI_SYNC_POOL_NV;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for SemaphoreSciSyncPoolNV {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for SemaphoreSciSyncPoolNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "SemaphoreSciSyncPoolNV({:p})", self.0 as *const u8)
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderModule.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
