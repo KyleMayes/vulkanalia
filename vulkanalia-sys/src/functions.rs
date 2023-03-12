@@ -52,6 +52,10 @@ pub type PFN_vkDebugUtilsMessengerCallbackEXT = Option<
 pub type PFN_vkDeviceMemoryReportCallbackEXT =
     Option<unsafe extern "system" fn(*const DeviceMemoryReportCallbackDataEXT, *mut c_void)>;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/PFN_vkFaultCallbackFunction.html>
+pub type PFN_vkFaultCallbackFunction =
+    Option<unsafe extern "system" fn(Bool32, u32, *const FaultData)>;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/PFN_vkFreeFunction.html>
 pub type PFN_vkFreeFunction = Option<unsafe extern "system" fn(*mut c_void, *mut c_void)>;
 

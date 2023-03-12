@@ -109,6 +109,9 @@ impl ErrorCode {
     pub const INVALID_EXTERNAL_HANDLE: Self = Self(-1000072003);
     pub const FRAGMENTATION: Self = Self(-1000161000);
     pub const INVALID_OPAQUE_CAPTURE_ADDRESS: Self = Self(-1000257000);
+    pub const VALIDATION_FAILED: Self = Self(-1000011001);
+    pub const INVALID_PIPELINE_CACHE_DATA: Self = Self(-1000298000);
+    pub const NO_PIPELINE_MATCH: Self = Self(-1000298001);
     pub const SURFACE_LOST_KHR: Self = Self(-1000000000);
     pub const NATIVE_WINDOW_IN_USE_KHR: Self = Self(-1000000001);
     pub const OUT_OF_DATE_KHR: Self = Self(-1000001004);
@@ -153,6 +156,9 @@ impl fmt::Debug for ErrorCode {
             -1000072003 => write!(f, "INVALID_EXTERNAL_HANDLE"),
             -1000161000 => write!(f, "FRAGMENTATION"),
             -1000257000 => write!(f, "INVALID_OPAQUE_CAPTURE_ADDRESS"),
+            -1000011001 => write!(f, "VALIDATION_FAILED"),
+            -1000298000 => write!(f, "INVALID_PIPELINE_CACHE_DATA"),
+            -1000298001 => write!(f, "NO_PIPELINE_MATCH"),
             -1000000000 => write!(f, "SURFACE_LOST_KHR"),
             -1000000001 => write!(f, "NATIVE_WINDOW_IN_USE_KHR"),
             -1000001004 => write!(f, "OUT_OF_DATE_KHR"),
@@ -188,6 +194,9 @@ impl fmt::Display for ErrorCode {
             -1000072003 => write!(f, "An external handle is not a valid handle of the specified type."),
             -1000161000 => write!(f, "A descriptor pool creation has failed due to fragmentation."),
             -1000257000 => write!(f, "A buffer creation or memory allocation failed because the requested address is not available. A shader group handle assignment failed because the requested shader group handle information is no longer valid."),
+            -1000011001 => write!(f, "VALIDATION_FAILED"),
+            -1000298000 => write!(f, "INVALID_PIPELINE_CACHE_DATA"),
+            -1000298001 => write!(f, "NO_PIPELINE_MATCH"),
             -1000000000 => write!(f, "A surface is no longer available."),
             -1000000001 => write!(f, "The requested window is already in use by Vulkan or another API in a manner which prevents it from being used again."),
             -1000001004 => write!(f, "A surface has changed in such a way that it is no longer compatible with the swapchain, and further presentation requests using the swapchain will fail. Applications must query the new surface properties and recreate their swapchain if they wish to continue presenting to the surface."),
