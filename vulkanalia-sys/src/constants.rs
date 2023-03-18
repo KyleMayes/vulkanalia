@@ -32,6 +32,7 @@ pub const MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT: usize = 32;
 pub const QUEUE_FAMILY_EXTERNAL: u32 = !1;
 pub const QUEUE_FAMILY_FOREIGN_EXT: u32 = !2;
 pub const QUEUE_FAMILY_IGNORED: u32 = !0;
+pub const REMAINING_3D_SLICES_EXT: u32 = !0;
 pub const REMAINING_ARRAY_LAYERS: u32 = !0;
 pub const REMAINING_MIP_LEVELS: u32 = !0;
 pub const SHADER_UNUSED_KHR: u32 = !0;

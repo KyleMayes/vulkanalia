@@ -1672,10 +1672,13 @@ impl DynamicState {
     pub const PRIMITIVE_RESTART_ENABLE: Self = Self(1000377004);
     pub const VIEWPORT_W_SCALING_NV: Self = Self(1000087000);
     pub const DISCARD_RECTANGLE_EXT: Self = Self(1000099000);
+    pub const DISCARD_RECTANGLE_ENABLE_EXT: Self = Self(1000099001);
+    pub const DISCARD_RECTANGLE_MODE_EXT: Self = Self(1000099002);
     pub const SAMPLE_LOCATIONS_EXT: Self = Self(1000143000);
     pub const RAY_TRACING_PIPELINE_STACK_SIZE_KHR: Self = Self(1000347000);
     pub const VIEWPORT_SHADING_RATE_PALETTE_NV: Self = Self(1000164004);
     pub const VIEWPORT_COARSE_SAMPLE_ORDER_NV: Self = Self(1000164006);
+    pub const EXCLUSIVE_SCISSOR_ENABLE_NV: Self = Self(1000205000);
     pub const EXCLUSIVE_SCISSOR_NV: Self = Self(1000205001);
     pub const FRAGMENT_SHADING_RATE_KHR: Self = Self(1000226000);
     pub const LINE_STIPPLE_EXT: Self = Self(1000259000);
@@ -1757,10 +1760,13 @@ impl fmt::Debug for DynamicState {
             1000377004 => write!(f, "PRIMITIVE_RESTART_ENABLE"),
             1000087000 => write!(f, "VIEWPORT_W_SCALING_NV"),
             1000099000 => write!(f, "DISCARD_RECTANGLE_EXT"),
+            1000099001 => write!(f, "DISCARD_RECTANGLE_ENABLE_EXT"),
+            1000099002 => write!(f, "DISCARD_RECTANGLE_MODE_EXT"),
             1000143000 => write!(f, "SAMPLE_LOCATIONS_EXT"),
             1000347000 => write!(f, "RAY_TRACING_PIPELINE_STACK_SIZE_KHR"),
             1000164004 => write!(f, "VIEWPORT_SHADING_RATE_PALETTE_NV"),
             1000164006 => write!(f, "VIEWPORT_COARSE_SAMPLE_ORDER_NV"),
+            1000205000 => write!(f, "EXCLUSIVE_SCISSOR_ENABLE_NV"),
             1000205001 => write!(f, "EXCLUSIVE_SCISSOR_NV"),
             1000226000 => write!(f, "FRAGMENT_SHADING_RATE_KHR"),
             1000259000 => write!(f, "LINE_STIPPLE_EXT"),
@@ -1799,6 +1805,114 @@ impl fmt::Debug for DynamicState {
             1000455030 => write!(f, "SHADING_RATE_IMAGE_ENABLE_NV"),
             1000455031 => write!(f, "REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV"),
             1000455032 => write!(f, "COVERAGE_REDUCTION_MODE_NV"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFaultLevel.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct FaultLevel(i32);
+
+impl FaultLevel {
+    pub const UNASSIGNED: Self = Self(0);
+    pub const CRITICAL: Self = Self(1);
+    pub const RECOVERABLE: Self = Self(2);
+    pub const WARNING: Self = Self(3);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for FaultLevel {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "UNASSIGNED"),
+            1 => write!(f, "CRITICAL"),
+            2 => write!(f, "RECOVERABLE"),
+            3 => write!(f, "WARNING"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFaultQueryBehavior.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct FaultQueryBehavior(i32);
+
+impl FaultQueryBehavior {
+    pub const GET_AND_CLEAR_ALL_FAULTS: Self = Self(0);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for FaultQueryBehavior {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "GET_AND_CLEAR_ALL_FAULTS"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFaultType.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct FaultType(i32);
+
+impl FaultType {
+    pub const INVALID: Self = Self(0);
+    pub const UNASSIGNED: Self = Self(1);
+    pub const IMPLEMENTATION: Self = Self(2);
+    pub const SYSTEM: Self = Self(3);
+    pub const PHYSICAL_DEVICE: Self = Self(4);
+    pub const COMMAND_BUFFER_FULL: Self = Self(5);
+    pub const INVALID_API_USAGE: Self = Self(6);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for FaultType {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "INVALID"),
+            1 => write!(f, "UNASSIGNED"),
+            2 => write!(f, "IMPLEMENTATION"),
+            3 => write!(f, "SYSTEM"),
+            4 => write!(f, "PHYSICAL_DEVICE"),
+            5 => write!(f, "COMMAND_BUFFER_FULL"),
+            6 => write!(f, "INVALID_API_USAGE"),
             _ => self.0.fmt(f),
         }
     }
@@ -3092,6 +3206,7 @@ impl ObjectType {
     pub const BUFFER_COLLECTION_FUCHSIA: Self = Self(1000366000);
     pub const MICROMAP_EXT: Self = Self(1000396000);
     pub const OPTICAL_FLOW_SESSION_NV: Self = Self(1000464000);
+    pub const SEMAPHORE_SCI_SYNC_POOL_NV: Self = Self(1000489000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -3155,6 +3270,7 @@ impl fmt::Debug for ObjectType {
             1000366000 => write!(f, "BUFFER_COLLECTION_FUCHSIA"),
             1000396000 => write!(f, "MICROMAP_EXT"),
             1000464000 => write!(f, "OPTICAL_FLOW_SESSION_NV"),
+            1000489000 => write!(f, "SEMAPHORE_SCI_SYNC_POOL_NV"),
             _ => self.0.fmt(f),
         }
     }
@@ -3647,6 +3763,7 @@ pub struct PipelineCacheHeaderVersion(i32);
 
 impl PipelineCacheHeaderVersion {
     pub const ONE: Self = Self(1);
+    pub const SAFETY_CRITICAL_ONE: Self = Self(1000298001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -3665,6 +3782,37 @@ impl fmt::Debug for PipelineCacheHeaderVersion {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             1 => write!(f, "ONE"),
+            1000298001 => write!(f, "SAFETY_CRITICAL_ONE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineCacheValidationVersion.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct PipelineCacheValidationVersion(i32);
+
+impl PipelineCacheValidationVersion {
+    pub const SAFETY_CRITICAL_ONE: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for PipelineCacheValidationVersion {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            1 => write!(f, "SAFETY_CRITICAL_ONE"),
             _ => self.0.fmt(f),
         }
     }
@@ -3701,6 +3849,36 @@ impl fmt::Debug for PipelineExecutableStatisticFormatKHR {
             1 => write!(f, "INT64"),
             2 => write!(f, "UINT64"),
             3 => write!(f, "FLOAT64"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineMatchControl.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct PipelineMatchControl(i32);
+
+impl PipelineMatchControl {
+    pub const APPLICATION_UUID_EXACT_MATCH: Self = Self(0);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for PipelineMatchControl {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "APPLICATION_UUID_EXACT_MATCH"),
             _ => self.0.fmt(f),
         }
     }
@@ -4224,6 +4402,9 @@ impl Result {
     pub const ERROR_FRAGMENTATION: Self = Self(-1000161000);
     pub const ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS: Self = Self(-1000257000);
     pub const PIPELINE_COMPILE_REQUIRED: Self = Self(1000297000);
+    pub const ERROR_VALIDATION_FAILED: Self = Self(-1000011001);
+    pub const ERROR_INVALID_PIPELINE_CACHE_DATA: Self = Self(-1000298000);
+    pub const ERROR_NO_PIPELINE_MATCH: Self = Self(-1000298001);
     pub const ERROR_SURFACE_LOST_KHR: Self = Self(-1000000000);
     pub const ERROR_NATIVE_WINDOW_IN_USE_KHR: Self = Self(-1000000001);
     pub const SUBOPTIMAL_KHR: Self = Self(1000001003);
@@ -4280,6 +4461,9 @@ impl fmt::Debug for Result {
             -1000161000 => write!(f, "ERROR_FRAGMENTATION"),
             -1000257000 => write!(f, "ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS"),
             1000297000 => write!(f, "PIPELINE_COMPILE_REQUIRED"),
+            -1000011001 => write!(f, "ERROR_VALIDATION_FAILED"),
+            -1000298000 => write!(f, "ERROR_INVALID_PIPELINE_CACHE_DATA"),
+            -1000298001 => write!(f, "ERROR_NO_PIPELINE_MATCH"),
             -1000000000 => write!(f, "ERROR_SURFACE_LOST_KHR"),
             -1000000001 => write!(f, "ERROR_NATIVE_WINDOW_IN_USE_KHR"),
             1000001003 => write!(f, "SUBOPTIMAL_KHR"),
@@ -4327,6 +4511,9 @@ impl fmt::Display for Result {
             -1000161000 => write!(f, "A descriptor pool creation has failed due to fragmentation."),
             -1000257000 => write!(f, "A buffer creation or memory allocation failed because the requested address is not available. A shader group handle assignment failed because the requested shader group handle information is no longer valid."),
             1000297000 => write!(f, "A requested pipeline creation would have required compilation, but the application requested compilation to not be performed."),
+            -1000011001 => write!(f, "ERROR_VALIDATION_FAILED"),
+            -1000298000 => write!(f, "ERROR_INVALID_PIPELINE_CACHE_DATA"),
+            -1000298001 => write!(f, "ERROR_NO_PIPELINE_MATCH"),
             -1000000000 => write!(f, "A surface is no longer available."),
             -1000000001 => write!(f, "The requested window is already in use by Vulkan or another API in a manner which prevents it from being used again."),
             1000001003 => write!(f, "A swapchain no longer matches the surface properties exactly, but can still be used to present to the surface successfully."),
@@ -4518,6 +4705,72 @@ impl fmt::Debug for SamplerYcbcrRange {
         match self.0 {
             0 => write!(f, "ITU_FULL"),
             1 => write!(f, "ITU_NARROW"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSciSyncClientTypeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct SciSyncClientTypeNV(i32);
+
+impl SciSyncClientTypeNV {
+    pub const SIGNALER: Self = Self(0);
+    pub const WAITER: Self = Self(1);
+    pub const SIGNALER_WAITER: Self = Self(2);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for SciSyncClientTypeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "SIGNALER"),
+            1 => write!(f, "WAITER"),
+            2 => write!(f, "SIGNALER_WAITER"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSciSyncPrimitiveTypeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct SciSyncPrimitiveTypeNV(i32);
+
+impl SciSyncPrimitiveTypeNV {
+    pub const FENCE: Self = Self(0);
+    pub const SEMAPHORE: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for SciSyncPrimitiveTypeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "FENCE"),
+            1 => write!(f, "SEMAPHORE"),
             _ => self.0.fmt(f),
         }
     }
@@ -5045,6 +5298,15 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES: Self = Self(1000413001);
     pub const DEVICE_BUFFER_MEMORY_REQUIREMENTS: Self = Self(1000413002);
     pub const DEVICE_IMAGE_MEMORY_REQUIREMENTS: Self = Self(1000413003);
+    pub const PHYSICAL_DEVICE_VULKAN_SC_1_0_FEATURES: Self = Self(1000298000);
+    pub const PHYSICAL_DEVICE_VULKAN_SC_1_0_PROPERTIES: Self = Self(1000298001);
+    pub const DEVICE_OBJECT_RESERVATION_CREATE_INFO: Self = Self(1000298002);
+    pub const COMMAND_POOL_MEMORY_RESERVATION_CREATE_INFO: Self = Self(1000298003);
+    pub const COMMAND_POOL_MEMORY_CONSUMPTION: Self = Self(1000298004);
+    pub const PIPELINE_POOL_SIZE: Self = Self(1000298005);
+    pub const FAULT_DATA: Self = Self(1000298007);
+    pub const FAULT_CALLBACK_INFO: Self = Self(1000298008);
+    pub const PIPELINE_OFFLINE_CREATE_INFO: Self = Self(1000298010);
     pub const SWAPCHAIN_CREATE_INFO_KHR: Self = Self(1000001000);
     pub const PRESENT_INFO_KHR: Self = Self(1000001001);
     pub const DEVICE_GROUP_PRESENT_CAPABILITIES_KHR: Self = Self(1000060007);
@@ -5084,6 +5346,7 @@ impl StructureType {
     pub const MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX: Self = Self(1000044009);
     pub const STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP: Self = Self(1000049000);
     pub const PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV: Self = Self(1000050000);
+    pub const PRIVATE_VENDOR_INFO_RESERVED_OFFSET_0_NV: Self = Self(1000051000);
     pub const EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV: Self = Self(1000056000);
     pub const EXPORT_MEMORY_ALLOCATE_INFO_NV: Self = Self(1000056001);
     pub const IMPORT_MEMORY_WIN32_HANDLE_INFO_NV: Self = Self(1000057000);
@@ -5144,6 +5407,7 @@ impl StructureType {
     pub const ACQUIRE_PROFILING_LOCK_INFO_KHR: Self = Self(1000116004);
     pub const PERFORMANCE_COUNTER_KHR: Self = Self(1000116005);
     pub const PERFORMANCE_COUNTER_DESCRIPTION_KHR: Self = Self(1000116006);
+    pub const PERFORMANCE_QUERY_RESERVATION_INFO_KHR: Self = Self(1000116007);
     pub const PHYSICAL_DEVICE_SURFACE_INFO_2_KHR: Self = Self(1000119000);
     pub const SURFACE_CAPABILITIES_2_KHR: Self = Self(1000119001);
     pub const SURFACE_FORMAT_2_KHR: Self = Self(1000119002);
@@ -5312,6 +5576,8 @@ impl StructureType {
     pub const PIPELINE_EXECUTABLE_INFO_KHR: Self = Self(1000269003);
     pub const PIPELINE_EXECUTABLE_STATISTIC_KHR: Self = Self(1000269004);
     pub const PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR: Self = Self(1000269005);
+    pub const MEMORY_MAP_INFO_KHR: Self = Self(1000271000);
+    pub const MEMORY_UNMAP_INFO_KHR: Self = Self(1000271001);
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT: Self = Self(1000273000);
     pub const SURFACE_PRESENT_MODE_EXT: Self = Self(1000274000);
     pub const SURFACE_PRESENT_SCALING_CAPABILITIES_EXT: Self = Self(1000274001);
@@ -5351,6 +5617,8 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR: Self = Self(1000294001);
     pub const PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV: Self = Self(1000300000);
     pub const DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV: Self = Self(1000300001);
+    pub const REFRESH_OBJECT_LIST_KHR: Self = Self(1000308000);
+    pub const QUERY_LOW_LATENCY_SUPPORT_NV: Self = Self(1000310000);
     pub const EXPORT_METAL_OBJECT_CREATE_INFO_EXT: Self = Self(1000311000);
     pub const EXPORT_METAL_OBJECTS_INFO_EXT: Self = Self(1000311001);
     pub const EXPORT_METAL_DEVICE_INFO_EXT: Self = Self(1000311002);
@@ -5445,6 +5713,19 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV: Self = Self(1000371001);
     pub const PIPELINE_PROPERTIES_IDENTIFIER_EXT: Self = Self(1000372000);
     pub const PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT: Self = Self(1000372001);
+    pub const IMPORT_FENCE_SCI_SYNC_INFO_NV: Self = Self(1000373000);
+    pub const EXPORT_FENCE_SCI_SYNC_INFO_NV: Self = Self(1000373001);
+    pub const FENCE_GET_SCI_SYNC_INFO_NV: Self = Self(1000373002);
+    pub const SCI_SYNC_ATTRIBUTES_INFO_NV: Self = Self(1000373003);
+    pub const IMPORT_SEMAPHORE_SCI_SYNC_INFO_NV: Self = Self(1000373004);
+    pub const EXPORT_SEMAPHORE_SCI_SYNC_INFO_NV: Self = Self(1000373005);
+    pub const SEMAPHORE_GET_SCI_SYNC_INFO_NV: Self = Self(1000373006);
+    pub const PHYSICAL_DEVICE_EXTERNAL_SCI_SYNC_FEATURES_NV: Self = Self(1000373007);
+    pub const IMPORT_MEMORY_SCI_BUF_INFO_NV: Self = Self(1000374000);
+    pub const EXPORT_MEMORY_SCI_BUF_INFO_NV: Self = Self(1000374001);
+    pub const MEMORY_GET_SCI_BUF_INFO_NV: Self = Self(1000374002);
+    pub const MEMORY_SCI_BUF_PROPERTIES_NV: Self = Self(1000374003);
+    pub const PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCI_BUF_FEATURES_NV: Self = Self(1000374004);
     pub const PHYSICAL_DEVICE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_FEATURES_EXT: Self =
         Self(1000376000);
     pub const SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT: Self = Self(1000376001);
@@ -5475,6 +5756,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT: Self = Self(1000411000);
     pub const SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT: Self = Self(1000411001);
     pub const PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT: Self = Self(1000412000);
+    pub const PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_ARM: Self = Self(1000415000);
+    pub const PHYSICAL_DEVICE_IMAGE_SLICED_VIEW_OF_3D_FEATURES_EXT: Self = Self(1000418000);
+    pub const IMAGE_VIEW_SLICED_CREATE_INFO_EXT: Self = Self(1000418001);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE: Self = Self(1000420000);
     pub const DESCRIPTOR_SET_BINDING_REFERENCE_VALVE: Self = Self(1000420001);
     pub const DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE: Self = Self(1000420002);
@@ -5488,6 +5772,7 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV: Self = Self(1000427000);
     pub const PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV: Self = Self(1000427001);
     pub const PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV: Self = Self(1000430000);
+    pub const APPLICATION_PARAMETERS_EXT: Self = Self(1000435000);
     pub const PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT: Self =
         Self(1000437000);
     pub const PHYSICAL_DEVICE_IMAGE_PROCESSING_FEATURES_QCOM: Self = Self(1000440000);
@@ -5521,6 +5806,10 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC: Self = Self(1000485000);
     pub const AMIGO_PROFILING_SUBMIT_INFO_SEC: Self = Self(1000485001);
     pub const PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_VIEWPORTS_FEATURES_QCOM: Self = Self(1000488000);
+    pub const SEMAPHORE_SCI_SYNC_POOL_CREATE_INFO_NV: Self = Self(1000489000);
+    pub const SEMAPHORE_SCI_SYNC_CREATE_INFO_NV: Self = Self(1000489001);
+    pub const PHYSICAL_DEVICE_EXTERNAL_SCI_SYNC_2_FEATURES_NV: Self = Self(1000489002);
+    pub const DEVICE_SEMAPHORE_SCI_SYNC_POOL_RESERVATION_CREATE_INFO_NV: Self = Self(1000489003);
     pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV: Self = Self(1000490000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV: Self = Self(1000490001);
     pub const PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT: Self = Self(1000351000);
@@ -5528,6 +5817,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM: Self = Self(1000497000);
     pub const PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM: Self = Self(1000497001);
     pub const PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT: Self = Self(1000498000);
+    pub const PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM: Self =
+        Self(1000510000);
+    pub const MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM: Self = Self(1000510001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -5773,6 +6065,15 @@ impl fmt::Debug for StructureType {
             1000413001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES"),
             1000413002 => write!(f, "DEVICE_BUFFER_MEMORY_REQUIREMENTS"),
             1000413003 => write!(f, "DEVICE_IMAGE_MEMORY_REQUIREMENTS"),
+            1000298000 => write!(f, "PHYSICAL_DEVICE_VULKAN_SC_1_0_FEATURES"),
+            1000298001 => write!(f, "PHYSICAL_DEVICE_VULKAN_SC_1_0_PROPERTIES"),
+            1000298002 => write!(f, "DEVICE_OBJECT_RESERVATION_CREATE_INFO"),
+            1000298003 => write!(f, "COMMAND_POOL_MEMORY_RESERVATION_CREATE_INFO"),
+            1000298004 => write!(f, "COMMAND_POOL_MEMORY_CONSUMPTION"),
+            1000298005 => write!(f, "PIPELINE_POOL_SIZE"),
+            1000298007 => write!(f, "FAULT_DATA"),
+            1000298008 => write!(f, "FAULT_CALLBACK_INFO"),
+            1000298010 => write!(f, "PIPELINE_OFFLINE_CREATE_INFO"),
             1000001000 => write!(f, "SWAPCHAIN_CREATE_INFO_KHR"),
             1000001001 => write!(f, "PRESENT_INFO_KHR"),
             1000060007 => write!(f, "DEVICE_GROUP_PRESENT_CAPABILITIES_KHR"),
@@ -5812,6 +6113,7 @@ impl fmt::Debug for StructureType {
             1000044009 => write!(f, "MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX"),
             1000049000 => write!(f, "STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP"),
             1000050000 => write!(f, "PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV"),
+            1000051000 => write!(f, "PRIVATE_VENDOR_INFO_RESERVED_OFFSET_0_NV"),
             1000056000 => write!(f, "EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV"),
             1000056001 => write!(f, "EXPORT_MEMORY_ALLOCATE_INFO_NV"),
             1000057000 => write!(f, "IMPORT_MEMORY_WIN32_HANDLE_INFO_NV"),
@@ -5884,6 +6186,7 @@ impl fmt::Debug for StructureType {
             1000116004 => write!(f, "ACQUIRE_PROFILING_LOCK_INFO_KHR"),
             1000116005 => write!(f, "PERFORMANCE_COUNTER_KHR"),
             1000116006 => write!(f, "PERFORMANCE_COUNTER_DESCRIPTION_KHR"),
+            1000116007 => write!(f, "PERFORMANCE_QUERY_RESERVATION_INFO_KHR"),
             1000119000 => write!(f, "PHYSICAL_DEVICE_SURFACE_INFO_2_KHR"),
             1000119001 => write!(f, "SURFACE_CAPABILITIES_2_KHR"),
             1000119002 => write!(f, "SURFACE_FORMAT_2_KHR"),
@@ -6077,6 +6380,8 @@ impl fmt::Debug for StructureType {
             1000269003 => write!(f, "PIPELINE_EXECUTABLE_INFO_KHR"),
             1000269004 => write!(f, "PIPELINE_EXECUTABLE_STATISTIC_KHR"),
             1000269005 => write!(f, "PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR"),
+            1000271000 => write!(f, "MEMORY_MAP_INFO_KHR"),
+            1000271001 => write!(f, "MEMORY_UNMAP_INFO_KHR"),
             1000273000 => write!(f, "PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT"),
             1000274000 => write!(f, "SURFACE_PRESENT_MODE_EXT"),
             1000274001 => write!(f, "SURFACE_PRESENT_SCALING_CAPABILITIES_EXT"),
@@ -6119,6 +6424,8 @@ impl fmt::Debug for StructureType {
             1000294001 => write!(f, "PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR"),
             1000300000 => write!(f, "PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV"),
             1000300001 => write!(f, "DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV"),
+            1000308000 => write!(f, "REFRESH_OBJECT_LIST_KHR"),
+            1000310000 => write!(f, "QUERY_LOW_LATENCY_SUPPORT_NV"),
             1000311000 => write!(f, "EXPORT_METAL_OBJECT_CREATE_INFO_EXT"),
             1000311001 => write!(f, "EXPORT_METAL_OBJECTS_INFO_EXT"),
             1000311002 => write!(f, "EXPORT_METAL_DEVICE_INFO_EXT"),
@@ -6249,6 +6556,19 @@ impl fmt::Debug for StructureType {
             1000371001 => write!(f, "PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV"),
             1000372000 => write!(f, "PIPELINE_PROPERTIES_IDENTIFIER_EXT"),
             1000372001 => write!(f, "PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT"),
+            1000373000 => write!(f, "IMPORT_FENCE_SCI_SYNC_INFO_NV"),
+            1000373001 => write!(f, "EXPORT_FENCE_SCI_SYNC_INFO_NV"),
+            1000373002 => write!(f, "FENCE_GET_SCI_SYNC_INFO_NV"),
+            1000373003 => write!(f, "SCI_SYNC_ATTRIBUTES_INFO_NV"),
+            1000373004 => write!(f, "IMPORT_SEMAPHORE_SCI_SYNC_INFO_NV"),
+            1000373005 => write!(f, "EXPORT_SEMAPHORE_SCI_SYNC_INFO_NV"),
+            1000373006 => write!(f, "SEMAPHORE_GET_SCI_SYNC_INFO_NV"),
+            1000373007 => write!(f, "PHYSICAL_DEVICE_EXTERNAL_SCI_SYNC_FEATURES_NV"),
+            1000374000 => write!(f, "IMPORT_MEMORY_SCI_BUF_INFO_NV"),
+            1000374001 => write!(f, "EXPORT_MEMORY_SCI_BUF_INFO_NV"),
+            1000374002 => write!(f, "MEMORY_GET_SCI_BUF_INFO_NV"),
+            1000374003 => write!(f, "MEMORY_SCI_BUF_PROPERTIES_NV"),
+            1000374004 => write!(f, "PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCI_BUF_FEATURES_NV"),
             1000376000 => write!(
                 f,
                 "PHYSICAL_DEVICE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_FEATURES_EXT"
@@ -6287,6 +6607,9 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT"
             ),
+            1000415000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_ARM"),
+            1000418000 => write!(f, "PHYSICAL_DEVICE_IMAGE_SLICED_VIEW_OF_3D_FEATURES_EXT"),
+            1000418001 => write!(f, "IMAGE_VIEW_SLICED_CREATE_INFO_EXT"),
             1000420000 => write!(
                 f,
                 "PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE"
@@ -6309,6 +6632,7 @@ impl fmt::Debug for StructureType {
             1000427000 => write!(f, "PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV"),
             1000427001 => write!(f, "PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV"),
             1000430000 => write!(f, "PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV"),
+            1000435000 => write!(f, "APPLICATION_PARAMETERS_EXT"),
             1000437000 => write!(
                 f,
                 "PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT"
@@ -6349,6 +6673,13 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_VIEWPORTS_FEATURES_QCOM"
             ),
+            1000489000 => write!(f, "SEMAPHORE_SCI_SYNC_POOL_CREATE_INFO_NV"),
+            1000489001 => write!(f, "SEMAPHORE_SCI_SYNC_CREATE_INFO_NV"),
+            1000489002 => write!(f, "PHYSICAL_DEVICE_EXTERNAL_SCI_SYNC_2_FEATURES_NV"),
+            1000489003 => write!(
+                f,
+                "DEVICE_SEMAPHORE_SCI_SYNC_POOL_RESERVATION_CREATE_INFO_NV"
+            ),
             1000490000 => write!(
                 f,
                 "PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV"
@@ -6364,6 +6695,14 @@ impl fmt::Debug for StructureType {
             1000498000 => write!(
                 f,
                 "PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT"
+            ),
+            1000510000 => write!(
+                f,
+                "PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM"
+            ),
+            1000510001 => write!(
+                f,
+                "MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM"
             ),
             _ => self.0.fmt(f),
         }
@@ -6720,6 +7059,7 @@ impl VendorId {
     pub const CODEPLAY: Self = Self(65540);
     pub const MESA: Self = Self(65541);
     pub const POCL: Self = Self(65542);
+    pub const MOBILEYE: Self = Self(65543);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -6743,6 +7083,7 @@ impl fmt::Debug for VendorId {
             65540 => write!(f, "CODEPLAY"),
             65541 => write!(f, "MESA"),
             65542 => write!(f, "POCL"),
+            65543 => write!(f, "MOBILEYE"),
             _ => self.0.fmt(f),
         }
     }

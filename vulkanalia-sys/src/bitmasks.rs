@@ -571,6 +571,8 @@ bitflags! {
         const OPAQUE_WIN32 = 1 << 1;
         const OPAQUE_WIN32_KMT = 1 << 2;
         const SYNC_FD = 1 << 3;
+        const SCI_SYNC_OBJ_NV = 1 << 4;
+        const SCI_SYNC_FENCE_NV = 1 << 5;
     }
 }
 
@@ -614,6 +616,7 @@ bitflags! {
         const ANDROID_HARDWARE_BUFFER_ANDROID = 1 << 10;
         const ZIRCON_VMO_FUCHSIA = 1 << 11;
         const RDMA_ADDRESS_NV = 1 << 12;
+        const SCI_BUF_NV = 1 << 13;
     }
 }
 
@@ -649,6 +652,7 @@ bitflags! {
         const OPAQUE_WIN32_KMT = 1 << 2;
         const D3D12_FENCE = 1 << 3;
         const SYNC_FD = 1 << 4;
+        const SCI_SYNC_OBJ_NV = 1 << 5;
         const ZIRCON_EVENT_FUCHSIA = 1 << 7;
     }
 }
@@ -1025,6 +1029,7 @@ bitflags! {
     pub struct MemoryHeapFlags: Flags {
         const DEVICE_LOCAL = 1;
         const MULTI_INSTANCE = 1 << 1;
+        const SEU_SAFE = 1 << 2;
     }
 }
 
@@ -1050,6 +1055,13 @@ bitflags! {
         const DEVICE_UNCACHED_AMD = 1 << 7;
         const RDMA_CAPABLE_NV = 1 << 8;
     }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMemoryUnmapFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct MemoryUnmapFlagsKHR: Flags { }
 }
 
 bitflags! {
@@ -1145,6 +1157,8 @@ bitflags! {
     #[derive(Default)]
     pub struct PipelineCacheCreateFlags: Flags {
         const EXTERNALLY_SYNCHRONIZED = 1;
+        const READ_ONLY = 1 << 1;
+        const USE_APPLICATION_STORAGE = 1 << 2;
     }
 }
 
@@ -1520,6 +1534,13 @@ bitflags! {
         const PROTECTED = 1 << 4;
         const OPTICAL_FLOW_NV = 1 << 8;
     }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRefreshObjectFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct RefreshObjectFlagsKHR: Flags { }
 }
 
 bitflags! {

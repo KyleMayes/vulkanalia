@@ -2595,6 +2595,10 @@ unsafe impl<'b> Cast for AndroidSurfaceCreateInfoKHRBuilder<'b> {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`ApplicationInfo`].
+pub unsafe trait ExtendsApplicationInfo: fmt::Debug {}
+unsafe impl ExtendsApplicationInfo for ApplicationParametersEXT {}
+
 unsafe impl Cast for ApplicationInfo {
     type Target = ApplicationInfo;
 
@@ -2617,6 +2621,17 @@ pub struct ApplicationInfoBuilder<'b> {
 }
 
 impl<'b> ApplicationInfoBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsApplicationInfo,
+    {
+        let next = (next.as_mut() as *mut T).cast::<ApplicationInfo>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn application_name(mut self, application_name: &'b [u8]) -> Self {
         self.value.application_name = application_name.as_ptr().cast();
@@ -2671,6 +2686,82 @@ impl<'b> ops::DerefMut for ApplicationInfoBuilder<'b> {
 
 unsafe impl<'b> Cast for ApplicationInfoBuilder<'b> {
     type Target = ApplicationInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ApplicationParametersEXT {
+    type Target = ApplicationParametersEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ApplicationParametersEXT {
+    type Builder = ApplicationParametersEXTBuilder;
+}
+
+/// A builder for a [`ApplicationParametersEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ApplicationParametersEXTBuilder {
+    value: ApplicationParametersEXT,
+}
+
+impl ApplicationParametersEXTBuilder {
+    #[inline]
+    pub fn vendor_id(mut self, vendor_id: u32) -> Self {
+        self.value.vendor_id = vendor_id;
+        self
+    }
+
+    #[inline]
+    pub fn device_id(mut self, device_id: u32) -> Self {
+        self.value.device_id = device_id;
+        self
+    }
+
+    #[inline]
+    pub fn key(mut self, key: u32) -> Self {
+        self.value.key = key;
+        self
+    }
+
+    #[inline]
+    pub fn value(mut self, value: u64) -> Self {
+        self.value.value = value;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ApplicationParametersEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ApplicationParametersEXTBuilder {
+    type Target = ApplicationParametersEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ApplicationParametersEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ApplicationParametersEXTBuilder {
+    type Target = ApplicationParametersEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -3205,7 +3296,7 @@ impl<'b> AttachmentSampleCountInfoAMDBuilder<'b> {
         mut self,
         color_attachment_samples: &'b [SampleCountFlags],
     ) -> Self {
-        self.value.color_attachment_count = color_attachment_samples.len() as u32;
+        self.value.pointer_color_attachment_count = color_attachment_samples.len() as u32;
         self.value.color_attachment_samples = color_attachment_samples.as_ptr();
         self
     }
@@ -6983,7 +7074,7 @@ impl<'b> CommandBufferInheritanceRenderingInfoBuilder<'b> {
 
     #[inline]
     pub fn color_attachment_formats(mut self, color_attachment_formats: &'b [Format]) -> Self {
-        self.value.color_attachment_count = color_attachment_formats.len() as u32;
+        self.value.pointer_color_attachment_count = color_attachment_formats.len() as u32;
         self.value.color_attachment_formats = color_attachment_formats.as_ptr();
         self
     }
@@ -7172,6 +7263,10 @@ unsafe impl Cast for CommandBufferSubmitInfoBuilder {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`CommandPoolCreateInfo`].
+pub unsafe trait ExtendsCommandPoolCreateInfo: fmt::Debug {}
+unsafe impl ExtendsCommandPoolCreateInfo for CommandPoolMemoryReservationCreateInfo {}
+
 unsafe impl Cast for CommandPoolCreateInfo {
     type Target = CommandPoolCreateInfo;
 
@@ -7181,18 +7276,30 @@ unsafe impl Cast for CommandPoolCreateInfo {
     }
 }
 
-impl HasBuilder<'static> for CommandPoolCreateInfo {
-    type Builder = CommandPoolCreateInfoBuilder;
+impl<'b> HasBuilder<'b> for CommandPoolCreateInfo {
+    type Builder = CommandPoolCreateInfoBuilder<'b>;
 }
 
 /// A builder for a [`CommandPoolCreateInfo`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct CommandPoolCreateInfoBuilder {
+pub struct CommandPoolCreateInfoBuilder<'b> {
     value: CommandPoolCreateInfo,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl CommandPoolCreateInfoBuilder {
+impl<'b> CommandPoolCreateInfoBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsCommandPoolCreateInfo,
+    {
+        let next = (next.as_mut() as *mut T).cast::<CommandPoolCreateInfo>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn flags(mut self, flags: CommandPoolCreateFlags) -> Self {
         self.value.flags = flags;
@@ -7211,7 +7318,7 @@ impl CommandPoolCreateInfoBuilder {
     }
 }
 
-impl ops::Deref for CommandPoolCreateInfoBuilder {
+impl<'b> ops::Deref for CommandPoolCreateInfoBuilder<'b> {
     type Target = CommandPoolCreateInfo;
 
     #[inline]
@@ -7220,15 +7327,152 @@ impl ops::Deref for CommandPoolCreateInfoBuilder {
     }
 }
 
-impl ops::DerefMut for CommandPoolCreateInfoBuilder {
+impl<'b> ops::DerefMut for CommandPoolCreateInfoBuilder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for CommandPoolCreateInfoBuilder {
+unsafe impl<'b> Cast for CommandPoolCreateInfoBuilder<'b> {
     type Target = CommandPoolCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CommandPoolMemoryConsumption {
+    type Target = CommandPoolMemoryConsumption;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for CommandPoolMemoryConsumption {
+    type Builder = CommandPoolMemoryConsumptionBuilder;
+}
+
+/// A builder for a [`CommandPoolMemoryConsumption`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CommandPoolMemoryConsumptionBuilder {
+    value: CommandPoolMemoryConsumption,
+}
+
+impl CommandPoolMemoryConsumptionBuilder {
+    #[inline]
+    pub fn command_pool_allocated(mut self, command_pool_allocated: DeviceSize) -> Self {
+        self.value.command_pool_allocated = command_pool_allocated;
+        self
+    }
+
+    #[inline]
+    pub fn command_pool_reserved_size(mut self, command_pool_reserved_size: DeviceSize) -> Self {
+        self.value.command_pool_reserved_size = command_pool_reserved_size;
+        self
+    }
+
+    #[inline]
+    pub fn command_buffer_allocated(mut self, command_buffer_allocated: DeviceSize) -> Self {
+        self.value.command_buffer_allocated = command_buffer_allocated;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CommandPoolMemoryConsumption {
+        self.value
+    }
+}
+
+impl ops::Deref for CommandPoolMemoryConsumptionBuilder {
+    type Target = CommandPoolMemoryConsumption;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for CommandPoolMemoryConsumptionBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for CommandPoolMemoryConsumptionBuilder {
+    type Target = CommandPoolMemoryConsumption;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CommandPoolMemoryReservationCreateInfo {
+    type Target = CommandPoolMemoryReservationCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for CommandPoolMemoryReservationCreateInfo {
+    type Builder = CommandPoolMemoryReservationCreateInfoBuilder;
+}
+
+/// A builder for a [`CommandPoolMemoryReservationCreateInfo`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CommandPoolMemoryReservationCreateInfoBuilder {
+    value: CommandPoolMemoryReservationCreateInfo,
+}
+
+impl CommandPoolMemoryReservationCreateInfoBuilder {
+    #[inline]
+    pub fn command_pool_reserved_size(mut self, command_pool_reserved_size: DeviceSize) -> Self {
+        self.value.command_pool_reserved_size = command_pool_reserved_size;
+        self
+    }
+
+    #[inline]
+    pub fn command_pool_max_command_buffers(
+        mut self,
+        command_pool_max_command_buffers: u32,
+    ) -> Self {
+        self.value.command_pool_max_command_buffers = command_pool_max_command_buffers;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CommandPoolMemoryReservationCreateInfo {
+        self.value
+    }
+}
+
+impl ops::Deref for CommandPoolMemoryReservationCreateInfoBuilder {
+    type Target = CommandPoolMemoryReservationCreateInfo;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for CommandPoolMemoryReservationCreateInfoBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for CommandPoolMemoryReservationCreateInfoBuilder {
+    type Target = CommandPoolMemoryReservationCreateInfo;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -7316,6 +7560,7 @@ unsafe impl Cast for ComponentMappingBuilder {
 pub unsafe trait ExtendsComputePipelineCreateInfo: fmt::Debug {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCreationFeedbackCreateInfo {}
+unsafe impl ExtendsComputePipelineCreateInfo for PipelineOfflineCreateInfo {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineRobustnessCreateInfoEXT {}
 unsafe impl ExtendsComputePipelineCreateInfo for SubpassShadingPipelineCreateInfoHUAWEI {}
 
@@ -8733,8 +8978,8 @@ impl<'b> CuFunctionCreateInfoNVXBuilder<'b> {
     }
 
     #[inline]
-    pub fn name(mut self, name: &'b [u8]) -> Self {
-        self.value.name = name.as_ptr().cast();
+    pub fn pointer_name(mut self, pointer_name: &'b [u8]) -> Self {
+        self.value.pointer_name = pointer_name.as_ptr().cast();
         self
     }
 
@@ -11666,11 +11911,14 @@ unsafe impl<'b> Cast for DeviceBufferMemoryRequirementsBuilder<'b> {
 
 /// A Vulkan struct that can be used to extend a [`DeviceCreateInfo`].
 pub unsafe trait ExtendsDeviceCreateInfo: fmt::Debug {}
+unsafe impl ExtendsDeviceCreateInfo for ApplicationParametersEXT {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceDeviceMemoryReportCreateInfoEXT {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceDiagnosticsConfigCreateInfoNV {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceGroupDeviceCreateInfo {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceMemoryOverallocationCreateInfoAMD {}
+unsafe impl ExtendsDeviceCreateInfo for DeviceObjectReservationCreateInfo {}
 unsafe impl ExtendsDeviceCreateInfo for DevicePrivateDataCreateInfo {}
+unsafe impl ExtendsDeviceCreateInfo for FaultCallbackInfo {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice16BitStorageFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice4444FormatsFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice8BitStorageFeatures {}
@@ -11709,6 +11957,9 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState2Featu
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalSciSync2FeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalSciSyncFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFaultFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFeatures2 {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
@@ -11726,6 +11977,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageCompressionControlFea
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageProcessingFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageRobustnessFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageViewMinLodFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImagelessFramebufferFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceIndexTypeUint8FeaturesEXT {}
@@ -11743,6 +11995,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMeshShaderFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiDrawFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
@@ -11817,6 +12070,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkan11Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkan12Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkan13Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkanMemoryModelFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkanSC10Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
@@ -13320,6 +13574,353 @@ unsafe impl Cast for DeviceMemoryReportCallbackDataEXTBuilder {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`DeviceObjectReservationCreateInfo`].
+pub unsafe trait ExtendsDeviceObjectReservationCreateInfo: fmt::Debug {}
+unsafe impl ExtendsDeviceObjectReservationCreateInfo
+    for DeviceSemaphoreSciSyncPoolReservationCreateInfoNV
+{
+}
+unsafe impl ExtendsDeviceObjectReservationCreateInfo for PerformanceQueryReservationInfoKHR {}
+
+unsafe impl Cast for DeviceObjectReservationCreateInfo {
+    type Target = DeviceObjectReservationCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for DeviceObjectReservationCreateInfo {
+    type Builder = DeviceObjectReservationCreateInfoBuilder<'b>;
+}
+
+/// A builder for a [`DeviceObjectReservationCreateInfo`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DeviceObjectReservationCreateInfoBuilder<'b> {
+    value: DeviceObjectReservationCreateInfo,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> DeviceObjectReservationCreateInfoBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsDeviceObjectReservationCreateInfo,
+    {
+        let next = (next.as_mut() as *mut T).cast::<DeviceObjectReservationCreateInfo>();
+        unsafe { *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_cache_create_infos(
+        mut self,
+        pipeline_cache_create_infos: &'b [impl Cast<Target = PipelineCacheCreateInfo>],
+    ) -> Self {
+        self.value.pipeline_cache_create_info_count = pipeline_cache_create_infos.len() as u32;
+        self.value.pipeline_cache_create_infos = pipeline_cache_create_infos.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_pool_sizes(
+        mut self,
+        pipeline_pool_sizes: &'b [impl Cast<Target = PipelinePoolSize>],
+    ) -> Self {
+        self.value.pipeline_pool_size_count = pipeline_pool_sizes.len() as u32;
+        self.value.pipeline_pool_sizes = pipeline_pool_sizes.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn semaphore_request_count(mut self, semaphore_request_count: u32) -> Self {
+        self.value.semaphore_request_count = semaphore_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn command_buffer_request_count(mut self, command_buffer_request_count: u32) -> Self {
+        self.value.command_buffer_request_count = command_buffer_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn fence_request_count(mut self, fence_request_count: u32) -> Self {
+        self.value.fence_request_count = fence_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn device_memory_request_count(mut self, device_memory_request_count: u32) -> Self {
+        self.value.device_memory_request_count = device_memory_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn buffer_request_count(mut self, buffer_request_count: u32) -> Self {
+        self.value.buffer_request_count = buffer_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn image_request_count(mut self, image_request_count: u32) -> Self {
+        self.value.image_request_count = image_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn event_request_count(mut self, event_request_count: u32) -> Self {
+        self.value.event_request_count = event_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn query_pool_request_count(mut self, query_pool_request_count: u32) -> Self {
+        self.value.query_pool_request_count = query_pool_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn buffer_view_request_count(mut self, buffer_view_request_count: u32) -> Self {
+        self.value.buffer_view_request_count = buffer_view_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn image_view_request_count(mut self, image_view_request_count: u32) -> Self {
+        self.value.image_view_request_count = image_view_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn layered_image_view_request_count(
+        mut self,
+        layered_image_view_request_count: u32,
+    ) -> Self {
+        self.value.layered_image_view_request_count = layered_image_view_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_cache_request_count(mut self, pipeline_cache_request_count: u32) -> Self {
+        self.value.pipeline_cache_request_count = pipeline_cache_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_layout_request_count(mut self, pipeline_layout_request_count: u32) -> Self {
+        self.value.pipeline_layout_request_count = pipeline_layout_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn render_pass_request_count(mut self, render_pass_request_count: u32) -> Self {
+        self.value.render_pass_request_count = render_pass_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn graphics_pipeline_request_count(mut self, graphics_pipeline_request_count: u32) -> Self {
+        self.value.graphics_pipeline_request_count = graphics_pipeline_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn compute_pipeline_request_count(mut self, compute_pipeline_request_count: u32) -> Self {
+        self.value.compute_pipeline_request_count = compute_pipeline_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn descriptor_set_layout_request_count(
+        mut self,
+        descriptor_set_layout_request_count: u32,
+    ) -> Self {
+        self.value.descriptor_set_layout_request_count = descriptor_set_layout_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn sampler_request_count(mut self, sampler_request_count: u32) -> Self {
+        self.value.sampler_request_count = sampler_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn descriptor_pool_request_count(mut self, descriptor_pool_request_count: u32) -> Self {
+        self.value.descriptor_pool_request_count = descriptor_pool_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn descriptor_set_request_count(mut self, descriptor_set_request_count: u32) -> Self {
+        self.value.descriptor_set_request_count = descriptor_set_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn framebuffer_request_count(mut self, framebuffer_request_count: u32) -> Self {
+        self.value.framebuffer_request_count = framebuffer_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn command_pool_request_count(mut self, command_pool_request_count: u32) -> Self {
+        self.value.command_pool_request_count = command_pool_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn sampler_ycbcr_conversion_request_count(
+        mut self,
+        sampler_ycbcr_conversion_request_count: u32,
+    ) -> Self {
+        self.value.sampler_ycbcr_conversion_request_count = sampler_ycbcr_conversion_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn surface_request_count(mut self, surface_request_count: u32) -> Self {
+        self.value.surface_request_count = surface_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn swapchain_request_count(mut self, swapchain_request_count: u32) -> Self {
+        self.value.swapchain_request_count = swapchain_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn display_mode_request_count(mut self, display_mode_request_count: u32) -> Self {
+        self.value.display_mode_request_count = display_mode_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn subpass_description_request_count(
+        mut self,
+        subpass_description_request_count: u32,
+    ) -> Self {
+        self.value.subpass_description_request_count = subpass_description_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn attachment_description_request_count(
+        mut self,
+        attachment_description_request_count: u32,
+    ) -> Self {
+        self.value.attachment_description_request_count = attachment_description_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn descriptor_set_layout_binding_request_count(
+        mut self,
+        descriptor_set_layout_binding_request_count: u32,
+    ) -> Self {
+        self.value.descriptor_set_layout_binding_request_count =
+            descriptor_set_layout_binding_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn descriptor_set_layout_binding_limit(
+        mut self,
+        descriptor_set_layout_binding_limit: u32,
+    ) -> Self {
+        self.value.descriptor_set_layout_binding_limit = descriptor_set_layout_binding_limit;
+        self
+    }
+
+    #[inline]
+    pub fn max_image_view_mip_levels(mut self, max_image_view_mip_levels: u32) -> Self {
+        self.value.max_image_view_mip_levels = max_image_view_mip_levels;
+        self
+    }
+
+    #[inline]
+    pub fn max_image_view_array_layers(mut self, max_image_view_array_layers: u32) -> Self {
+        self.value.max_image_view_array_layers = max_image_view_array_layers;
+        self
+    }
+
+    #[inline]
+    pub fn max_layered_image_view_mip_levels(
+        mut self,
+        max_layered_image_view_mip_levels: u32,
+    ) -> Self {
+        self.value.max_layered_image_view_mip_levels = max_layered_image_view_mip_levels;
+        self
+    }
+
+    #[inline]
+    pub fn max_occlusion_queries_per_pool(mut self, max_occlusion_queries_per_pool: u32) -> Self {
+        self.value.max_occlusion_queries_per_pool = max_occlusion_queries_per_pool;
+        self
+    }
+
+    #[inline]
+    pub fn max_pipeline_statistics_queries_per_pool(
+        mut self,
+        max_pipeline_statistics_queries_per_pool: u32,
+    ) -> Self {
+        self.value.max_pipeline_statistics_queries_per_pool =
+            max_pipeline_statistics_queries_per_pool;
+        self
+    }
+
+    #[inline]
+    pub fn max_timestamp_queries_per_pool(mut self, max_timestamp_queries_per_pool: u32) -> Self {
+        self.value.max_timestamp_queries_per_pool = max_timestamp_queries_per_pool;
+        self
+    }
+
+    #[inline]
+    pub fn max_immutable_samplers_per_descriptor_set_layout(
+        mut self,
+        max_immutable_samplers_per_descriptor_set_layout: u32,
+    ) -> Self {
+        self.value.max_immutable_samplers_per_descriptor_set_layout =
+            max_immutable_samplers_per_descriptor_set_layout;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DeviceObjectReservationCreateInfo {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for DeviceObjectReservationCreateInfoBuilder<'b> {
+    type Target = DeviceObjectReservationCreateInfo;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for DeviceObjectReservationCreateInfoBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for DeviceObjectReservationCreateInfoBuilder<'b> {
+    type Target = DeviceObjectReservationCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for DevicePrivateDataCreateInfo {
     type Target = DevicePrivateDataCreateInfo;
 
@@ -13586,6 +14187,67 @@ impl ops::DerefMut for DeviceQueueInfo2Builder {
 
 unsafe impl Cast for DeviceQueueInfo2Builder {
     type Target = DeviceQueueInfo2;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DeviceSemaphoreSciSyncPoolReservationCreateInfoNV {
+    type Target = DeviceSemaphoreSciSyncPoolReservationCreateInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DeviceSemaphoreSciSyncPoolReservationCreateInfoNV {
+    type Builder = DeviceSemaphoreSciSyncPoolReservationCreateInfoNVBuilder;
+}
+
+/// A builder for a [`DeviceSemaphoreSciSyncPoolReservationCreateInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DeviceSemaphoreSciSyncPoolReservationCreateInfoNVBuilder {
+    value: DeviceSemaphoreSciSyncPoolReservationCreateInfoNV,
+}
+
+impl DeviceSemaphoreSciSyncPoolReservationCreateInfoNVBuilder {
+    #[inline]
+    pub fn semaphore_sci_sync_pool_request_count(
+        mut self,
+        semaphore_sci_sync_pool_request_count: u32,
+    ) -> Self {
+        self.value.semaphore_sci_sync_pool_request_count = semaphore_sci_sync_pool_request_count;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DeviceSemaphoreSciSyncPoolReservationCreateInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for DeviceSemaphoreSciSyncPoolReservationCreateInfoNVBuilder {
+    type Target = DeviceSemaphoreSciSyncPoolReservationCreateInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DeviceSemaphoreSciSyncPoolReservationCreateInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DeviceSemaphoreSciSyncPoolReservationCreateInfoNVBuilder {
+    type Target = DeviceSemaphoreSciSyncPoolReservationCreateInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -15697,6 +16359,64 @@ unsafe impl Cast for ExportFenceCreateInfoBuilder {
     }
 }
 
+unsafe impl Cast for ExportFenceSciSyncInfoNV {
+    type Target = ExportFenceSciSyncInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ExportFenceSciSyncInfoNV {
+    type Builder = ExportFenceSciSyncInfoNVBuilder;
+}
+
+/// A builder for a [`ExportFenceSciSyncInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExportFenceSciSyncInfoNVBuilder {
+    value: ExportFenceSciSyncInfoNV,
+}
+
+impl ExportFenceSciSyncInfoNVBuilder {
+    #[inline]
+    pub fn attributes(mut self, attributes: NvSciSyncAttrList) -> Self {
+        self.value.attributes = attributes;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExportFenceSciSyncInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for ExportFenceSciSyncInfoNVBuilder {
+    type Target = ExportFenceSciSyncInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ExportFenceSciSyncInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ExportFenceSciSyncInfoNVBuilder {
+    type Target = ExportFenceSciSyncInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ExportFenceWin32HandleInfoKHR {
     type Target = ExportFenceWin32HandleInfoKHR;
 
@@ -15877,6 +16597,64 @@ impl ops::DerefMut for ExportMemoryAllocateInfoNVBuilder {
 
 unsafe impl Cast for ExportMemoryAllocateInfoNVBuilder {
     type Target = ExportMemoryAllocateInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ExportMemorySciBufInfoNV {
+    type Target = ExportMemorySciBufInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ExportMemorySciBufInfoNV {
+    type Builder = ExportMemorySciBufInfoNVBuilder;
+}
+
+/// A builder for a [`ExportMemorySciBufInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExportMemorySciBufInfoNVBuilder {
+    value: ExportMemorySciBufInfoNV,
+}
+
+impl ExportMemorySciBufInfoNVBuilder {
+    #[inline]
+    pub fn attributes(mut self, attributes: NvSciBufAttrList) -> Self {
+        self.value.attributes = attributes;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExportMemorySciBufInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for ExportMemorySciBufInfoNVBuilder {
+    type Target = ExportMemorySciBufInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ExportMemorySciBufInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ExportMemorySciBufInfoNVBuilder {
+    type Target = ExportMemorySciBufInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -16604,6 +17382,64 @@ impl ops::DerefMut for ExportSemaphoreCreateInfoBuilder {
 
 unsafe impl Cast for ExportSemaphoreCreateInfoBuilder {
     type Target = ExportSemaphoreCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ExportSemaphoreSciSyncInfoNV {
+    type Target = ExportSemaphoreSciSyncInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ExportSemaphoreSciSyncInfoNV {
+    type Builder = ExportSemaphoreSciSyncInfoNVBuilder;
+}
+
+/// A builder for a [`ExportSemaphoreSciSyncInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExportSemaphoreSciSyncInfoNVBuilder {
+    value: ExportSemaphoreSciSyncInfoNV,
+}
+
+impl ExportSemaphoreSciSyncInfoNVBuilder {
+    #[inline]
+    pub fn attributes(mut self, attributes: NvSciSyncAttrList) -> Self {
+        self.value.attributes = attributes;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExportSemaphoreSciSyncInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for ExportSemaphoreSciSyncInfoNVBuilder {
+    type Target = ExportSemaphoreSciSyncInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ExportSemaphoreSciSyncInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ExportSemaphoreSciSyncInfoNVBuilder {
+    type Target = ExportSemaphoreSciSyncInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -17562,9 +18398,146 @@ unsafe impl Cast for ExternalSemaphorePropertiesBuilder {
     }
 }
 
+unsafe impl Cast for FaultCallbackInfo {
+    type Target = FaultCallbackInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for FaultCallbackInfo {
+    type Builder = FaultCallbackInfoBuilder<'b>;
+}
+
+/// A builder for a [`FaultCallbackInfo`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct FaultCallbackInfoBuilder<'b> {
+    value: FaultCallbackInfo,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> FaultCallbackInfoBuilder<'b> {
+    #[inline]
+    pub fn fault_count(mut self, fault_count: u32) -> Self {
+        self.value.fault_count = fault_count;
+        self
+    }
+
+    #[inline]
+    pub fn faults(mut self, faults: &'b mut [impl Cast<Target = FaultData>]) -> Self {
+        self.value.fault_count = faults.len() as u32;
+        self.value.faults = faults.as_mut_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn fault_callback(mut self, fault_callback: PFN_vkFaultCallbackFunction) -> Self {
+        self.value.fault_callback = fault_callback;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> FaultCallbackInfo {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for FaultCallbackInfoBuilder<'b> {
+    type Target = FaultCallbackInfo;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for FaultCallbackInfoBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for FaultCallbackInfoBuilder<'b> {
+    type Target = FaultCallbackInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for FaultData {
+    type Target = FaultData;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for FaultData {
+    type Builder = FaultDataBuilder;
+}
+
+/// A builder for a [`FaultData`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct FaultDataBuilder {
+    value: FaultData,
+}
+
+impl FaultDataBuilder {
+    #[inline]
+    pub fn fault_level(mut self, fault_level: FaultLevel) -> Self {
+        self.value.fault_level = fault_level;
+        self
+    }
+
+    #[inline]
+    pub fn fault_type(mut self, fault_type: FaultType) -> Self {
+        self.value.fault_type = fault_type;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> FaultData {
+        self.value
+    }
+}
+
+impl ops::Deref for FaultDataBuilder {
+    type Target = FaultData;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for FaultDataBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for FaultDataBuilder {
+    type Target = FaultData;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [`FenceCreateInfo`].
 pub unsafe trait ExtendsFenceCreateInfo: fmt::Debug {}
 unsafe impl ExtendsFenceCreateInfo for ExportFenceCreateInfo {}
+unsafe impl ExtendsFenceCreateInfo for ExportFenceSciSyncInfoNV {}
 unsafe impl ExtendsFenceCreateInfo for ExportFenceWin32HandleInfoKHR {}
 
 unsafe impl Cast for FenceCreateInfo {
@@ -17694,6 +18667,70 @@ impl ops::DerefMut for FenceGetFdInfoKHRBuilder {
 
 unsafe impl Cast for FenceGetFdInfoKHRBuilder {
     type Target = FenceGetFdInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for FenceGetSciSyncInfoNV {
+    type Target = FenceGetSciSyncInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for FenceGetSciSyncInfoNV {
+    type Builder = FenceGetSciSyncInfoNVBuilder;
+}
+
+/// A builder for a [`FenceGetSciSyncInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct FenceGetSciSyncInfoNVBuilder {
+    value: FenceGetSciSyncInfoNV,
+}
+
+impl FenceGetSciSyncInfoNVBuilder {
+    #[inline]
+    pub fn fence(mut self, fence: Fence) -> Self {
+        self.value.fence = fence;
+        self
+    }
+
+    #[inline]
+    pub fn handle_type(mut self, handle_type: ExternalFenceHandleTypeFlags) -> Self {
+        self.value.handle_type = handle_type;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> FenceGetSciSyncInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for FenceGetSciSyncInfoNVBuilder {
+    type Target = FenceGetSciSyncInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for FenceGetSciSyncInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for FenceGetSciSyncInfoNVBuilder {
+    type Target = FenceGetSciSyncInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -19005,6 +20042,7 @@ unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineDiscardRectangleStateC
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineFragmentShadingRateEnumStateCreateInfoNV {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineFragmentShadingRateStateCreateInfoKHR {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineLibraryCreateInfoKHR {}
+unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineOfflineCreateInfo {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineRenderingCreateInfo {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo
     for PipelineRepresentativeFragmentTestStateCreateInfoNV
@@ -19052,18 +20090,12 @@ impl<'b> GraphicsPipelineCreateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn stage_count(mut self, stage_count: u32) -> Self {
-        self.value.stage_count = stage_count;
-        self
-    }
-
-    #[inline]
-    pub fn stages(
+    pub fn pointer_stages(
         mut self,
-        stages: &'b [impl Cast<Target = PipelineShaderStageCreateInfo>],
+        pointer_stages: &'b [impl Cast<Target = PipelineShaderStageCreateInfo>],
     ) -> Self {
-        self.value.stage_count = stages.len() as u32;
-        self.value.stages = stages.as_ptr().cast();
+        self.value.stage_count = pointer_stages.len() as u32;
+        self.value.pointer_stages = pointer_stages.as_ptr().cast();
         self
     }
 
@@ -19360,12 +20392,12 @@ pub struct GraphicsShaderGroupCreateInfoNVBuilder<'b> {
 
 impl<'b> GraphicsShaderGroupCreateInfoNVBuilder<'b> {
     #[inline]
-    pub fn stages(
+    pub fn pointer_stages(
         mut self,
-        stages: &'b [impl Cast<Target = PipelineShaderStageCreateInfo>],
+        pointer_stages: &'b [impl Cast<Target = PipelineShaderStageCreateInfo>],
     ) -> Self {
-        self.value.stage_count = stages.len() as u32;
-        self.value.stages = stages.as_ptr().cast();
+        self.value.stage_count = pointer_stages.len() as u32;
+        self.value.pointer_stages = pointer_stages.as_ptr().cast();
         self
     }
 
@@ -22212,6 +23244,7 @@ unsafe impl ExtendsImageViewCreateInfo for ExportMetalObjectCreateInfoEXT {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewASTCDecodeModeEXT {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewMinLodCreateInfoEXT {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewSampleWeightCreateInfoQCOM {}
+unsafe impl ExtendsImageViewCreateInfo for ImageViewSlicedCreateInfoEXT {}
 unsafe impl ExtendsImageViewCreateInfo for ImageViewUsageCreateInfo {}
 unsafe impl ExtendsImageViewCreateInfo for OpaqueCaptureDescriptorDataCreateInfoEXT {}
 unsafe impl ExtendsImageViewCreateInfo for SamplerYcbcrConversionInfo {}
@@ -22517,6 +23550,70 @@ unsafe impl Cast for ImageViewSampleWeightCreateInfoQCOMBuilder {
     }
 }
 
+unsafe impl Cast for ImageViewSlicedCreateInfoEXT {
+    type Target = ImageViewSlicedCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ImageViewSlicedCreateInfoEXT {
+    type Builder = ImageViewSlicedCreateInfoEXTBuilder;
+}
+
+/// A builder for a [`ImageViewSlicedCreateInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImageViewSlicedCreateInfoEXTBuilder {
+    value: ImageViewSlicedCreateInfoEXT,
+}
+
+impl ImageViewSlicedCreateInfoEXTBuilder {
+    #[inline]
+    pub fn slice_offset(mut self, slice_offset: u32) -> Self {
+        self.value.slice_offset = slice_offset;
+        self
+    }
+
+    #[inline]
+    pub fn slice_count(mut self, slice_count: u32) -> Self {
+        self.value.slice_count = slice_count;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImageViewSlicedCreateInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ImageViewSlicedCreateInfoEXTBuilder {
+    type Target = ImageViewSlicedCreateInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ImageViewSlicedCreateInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ImageViewSlicedCreateInfoEXTBuilder {
+    type Target = ImageViewSlicedCreateInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ImageViewUsageCreateInfo {
     type Target = ImageViewUsageCreateInfo;
 
@@ -22703,6 +23800,77 @@ impl ops::DerefMut for ImportFenceFdInfoKHRBuilder {
 
 unsafe impl Cast for ImportFenceFdInfoKHRBuilder {
     type Target = ImportFenceFdInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ImportFenceSciSyncInfoNV {
+    type Target = ImportFenceSciSyncInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for ImportFenceSciSyncInfoNV {
+    type Builder = ImportFenceSciSyncInfoNVBuilder<'b>;
+}
+
+/// A builder for a [`ImportFenceSciSyncInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImportFenceSciSyncInfoNVBuilder<'b> {
+    value: ImportFenceSciSyncInfoNV,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> ImportFenceSciSyncInfoNVBuilder<'b> {
+    #[inline]
+    pub fn fence(mut self, fence: Fence) -> Self {
+        self.value.fence = fence;
+        self
+    }
+
+    #[inline]
+    pub fn handle_type(mut self, handle_type: ExternalFenceHandleTypeFlags) -> Self {
+        self.value.handle_type = handle_type;
+        self
+    }
+
+    #[inline]
+    pub fn handle<T>(mut self, handle: &'b mut T) -> Self {
+        self.value.handle = (handle as *mut T).cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImportFenceSciSyncInfoNV {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for ImportFenceSciSyncInfoNVBuilder<'b> {
+    type Target = ImportFenceSciSyncInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for ImportFenceSciSyncInfoNVBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for ImportFenceSciSyncInfoNVBuilder<'b> {
+    type Target = ImportFenceSciSyncInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -22978,6 +24146,70 @@ impl<'b> ops::DerefMut for ImportMemoryHostPointerInfoEXTBuilder<'b> {
 
 unsafe impl<'b> Cast for ImportMemoryHostPointerInfoEXTBuilder<'b> {
     type Target = ImportMemoryHostPointerInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ImportMemorySciBufInfoNV {
+    type Target = ImportMemorySciBufInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ImportMemorySciBufInfoNV {
+    type Builder = ImportMemorySciBufInfoNVBuilder;
+}
+
+/// A builder for a [`ImportMemorySciBufInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImportMemorySciBufInfoNVBuilder {
+    value: ImportMemorySciBufInfoNV,
+}
+
+impl ImportMemorySciBufInfoNVBuilder {
+    #[inline]
+    pub fn handle_type(mut self, handle_type: ExternalMemoryHandleTypeFlags) -> Self {
+        self.value.handle_type = handle_type;
+        self
+    }
+
+    #[inline]
+    pub fn handle(mut self, handle: NvSciBufObj) -> Self {
+        self.value.handle = handle;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImportMemorySciBufInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for ImportMemorySciBufInfoNVBuilder {
+    type Target = ImportMemorySciBufInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ImportMemorySciBufInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ImportMemorySciBufInfoNVBuilder {
+    type Target = ImportMemorySciBufInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -23490,6 +24722,77 @@ impl ops::DerefMut for ImportSemaphoreFdInfoKHRBuilder {
 
 unsafe impl Cast for ImportSemaphoreFdInfoKHRBuilder {
     type Target = ImportSemaphoreFdInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ImportSemaphoreSciSyncInfoNV {
+    type Target = ImportSemaphoreSciSyncInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for ImportSemaphoreSciSyncInfoNV {
+    type Builder = ImportSemaphoreSciSyncInfoNVBuilder<'b>;
+}
+
+/// A builder for a [`ImportSemaphoreSciSyncInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImportSemaphoreSciSyncInfoNVBuilder<'b> {
+    value: ImportSemaphoreSciSyncInfoNV,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> ImportSemaphoreSciSyncInfoNVBuilder<'b> {
+    #[inline]
+    pub fn semaphore(mut self, semaphore: Semaphore) -> Self {
+        self.value.semaphore = semaphore;
+        self
+    }
+
+    #[inline]
+    pub fn handle_type(mut self, handle_type: ExternalSemaphoreHandleTypeFlags) -> Self {
+        self.value.handle_type = handle_type;
+        self
+    }
+
+    #[inline]
+    pub fn handle<T>(mut self, handle: &'b mut T) -> Self {
+        self.value.handle = (handle as *mut T).cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImportSemaphoreSciSyncInfoNV {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for ImportSemaphoreSciSyncInfoNVBuilder<'b> {
+    type Target = ImportSemaphoreSciSyncInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for ImportSemaphoreSciSyncInfoNVBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for ImportSemaphoreSciSyncInfoNVBuilder<'b> {
+    type Target = ImportSemaphoreSciSyncInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -24451,6 +25754,7 @@ pub unsafe trait ExtendsMemoryAllocateInfo: fmt::Debug {}
 unsafe impl ExtendsMemoryAllocateInfo for DedicatedAllocationMemoryAllocateInfoNV {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryAllocateInfo {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryAllocateInfoNV {}
+unsafe impl ExtendsMemoryAllocateInfo for ExportMemorySciBufInfoNV {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryWin32HandleInfoKHR {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMemoryWin32HandleInfoNV {}
 unsafe impl ExtendsMemoryAllocateInfo for ExportMetalObjectCreateInfoEXT {}
@@ -24458,6 +25762,7 @@ unsafe impl ExtendsMemoryAllocateInfo for ImportAndroidHardwareBufferInfoANDROID
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryBufferCollectionFUCHSIA {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryFdInfoKHR {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryHostPointerInfoEXT {}
+unsafe impl ExtendsMemoryAllocateInfo for ImportMemorySciBufInfoNV {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryWin32HandleInfoKHR {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryWin32HandleInfoNV {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryZirconHandleInfoFUCHSIA {}
@@ -25055,6 +26360,70 @@ unsafe impl Cast for MemoryGetRemoteAddressInfoNVBuilder {
     }
 }
 
+unsafe impl Cast for MemoryGetSciBufInfoNV {
+    type Target = MemoryGetSciBufInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MemoryGetSciBufInfoNV {
+    type Builder = MemoryGetSciBufInfoNVBuilder;
+}
+
+/// A builder for a [`MemoryGetSciBufInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MemoryGetSciBufInfoNVBuilder {
+    value: MemoryGetSciBufInfoNV,
+}
+
+impl MemoryGetSciBufInfoNVBuilder {
+    #[inline]
+    pub fn memory(mut self, memory: DeviceMemory) -> Self {
+        self.value.memory = memory;
+        self
+    }
+
+    #[inline]
+    pub fn handle_type(mut self, handle_type: ExternalMemoryHandleTypeFlags) -> Self {
+        self.value.handle_type = handle_type;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MemoryGetSciBufInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for MemoryGetSciBufInfoNVBuilder {
+    type Target = MemoryGetSciBufInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MemoryGetSciBufInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MemoryGetSciBufInfoNVBuilder {
+    type Target = MemoryGetSciBufInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for MemoryGetWin32HandleInfoKHR {
     type Target = MemoryGetWin32HandleInfoKHR;
 
@@ -25298,6 +26667,82 @@ impl ops::DerefMut for MemoryHostPointerPropertiesEXTBuilder {
 
 unsafe impl Cast for MemoryHostPointerPropertiesEXTBuilder {
     type Target = MemoryHostPointerPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for MemoryMapInfoKHR {
+    type Target = MemoryMapInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MemoryMapInfoKHR {
+    type Builder = MemoryMapInfoKHRBuilder;
+}
+
+/// A builder for a [`MemoryMapInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MemoryMapInfoKHRBuilder {
+    value: MemoryMapInfoKHR,
+}
+
+impl MemoryMapInfoKHRBuilder {
+    #[inline]
+    pub fn flags(mut self, flags: MemoryMapFlags) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn memory(mut self, memory: DeviceMemory) -> Self {
+        self.value.memory = memory;
+        self
+    }
+
+    #[inline]
+    pub fn offset(mut self, offset: DeviceSize) -> Self {
+        self.value.offset = offset;
+        self
+    }
+
+    #[inline]
+    pub fn size(mut self, size: DeviceSize) -> Self {
+        self.value.size = size;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MemoryMapInfoKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for MemoryMapInfoKHRBuilder {
+    type Target = MemoryMapInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MemoryMapInfoKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MemoryMapInfoKHRBuilder {
+    type Target = MemoryMapInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -25568,6 +27013,64 @@ unsafe impl<'b> Cast for MemoryRequirements2Builder<'b> {
     }
 }
 
+unsafe impl Cast for MemorySciBufPropertiesNV {
+    type Target = MemorySciBufPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MemorySciBufPropertiesNV {
+    type Builder = MemorySciBufPropertiesNVBuilder;
+}
+
+/// A builder for a [`MemorySciBufPropertiesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MemorySciBufPropertiesNVBuilder {
+    value: MemorySciBufPropertiesNV,
+}
+
+impl MemorySciBufPropertiesNVBuilder {
+    #[inline]
+    pub fn memory_type_bits(mut self, memory_type_bits: u32) -> Self {
+        self.value.memory_type_bits = memory_type_bits;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MemorySciBufPropertiesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for MemorySciBufPropertiesNVBuilder {
+    type Target = MemorySciBufPropertiesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MemorySciBufPropertiesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MemorySciBufPropertiesNVBuilder {
+    type Target = MemorySciBufPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for MemoryType {
     type Target = MemoryType;
 
@@ -25625,6 +27128,70 @@ impl ops::DerefMut for MemoryTypeBuilder {
 
 unsafe impl Cast for MemoryTypeBuilder {
     type Target = MemoryType;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for MemoryUnmapInfoKHR {
+    type Target = MemoryUnmapInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for MemoryUnmapInfoKHR {
+    type Builder = MemoryUnmapInfoKHRBuilder;
+}
+
+/// A builder for a [`MemoryUnmapInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MemoryUnmapInfoKHRBuilder {
+    value: MemoryUnmapInfoKHR,
+}
+
+impl MemoryUnmapInfoKHRBuilder {
+    #[inline]
+    pub fn flags(mut self, flags: MemoryUnmapFlagsKHR) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn memory(mut self, memory: DeviceMemory) -> Self {
+        self.value.memory = memory;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MemoryUnmapInfoKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for MemoryUnmapInfoKHRBuilder {
+    type Target = MemoryUnmapInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for MemoryUnmapInfoKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for MemoryUnmapInfoKHRBuilder {
+    type Target = MemoryUnmapInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -26615,6 +28182,69 @@ impl ops::DerefMut for MultiviewPerViewAttributesInfoNVXBuilder {
 
 unsafe impl Cast for MultiviewPerViewAttributesInfoNVXBuilder {
     type Target = MultiviewPerViewAttributesInfoNVX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {
+    type Target = MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {
+    type Builder = MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'b>;
+}
+
+/// A builder for a [`MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'b> {
+    value: MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'b> {
+    #[inline]
+    pub fn per_view_render_areas(
+        mut self,
+        per_view_render_areas: &'b [impl Cast<Target = Rect2D>],
+    ) -> Self {
+        self.value.per_view_render_area_count = per_view_render_areas.len() as u32;
+        self.value.per_view_render_areas = per_view_render_areas.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'b> {
+    type Target = MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'b> {
+    type Target = MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -27733,6 +29363,67 @@ impl ops::DerefMut for PerformanceOverrideInfoINTELBuilder {
 
 unsafe impl Cast for PerformanceOverrideInfoINTELBuilder {
     type Target = PerformanceOverrideInfoINTEL;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PerformanceQueryReservationInfoKHR {
+    type Target = PerformanceQueryReservationInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PerformanceQueryReservationInfoKHR {
+    type Builder = PerformanceQueryReservationInfoKHRBuilder;
+}
+
+/// A builder for a [`PerformanceQueryReservationInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PerformanceQueryReservationInfoKHRBuilder {
+    value: PerformanceQueryReservationInfoKHR,
+}
+
+impl PerformanceQueryReservationInfoKHRBuilder {
+    #[inline]
+    pub fn max_performance_queries_per_pool(
+        mut self,
+        max_performance_queries_per_pool: u32,
+    ) -> Self {
+        self.value.max_performance_queries_per_pool = max_performance_queries_per_pool;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PerformanceQueryReservationInfoKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PerformanceQueryReservationInfoKHRBuilder {
+    type Target = PerformanceQueryReservationInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PerformanceQueryReservationInfoKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PerformanceQueryReservationInfoKHRBuilder {
+    type Target = PerformanceQueryReservationInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -29088,6 +30779,15 @@ impl PhysicalDeviceClusterCullingShaderPropertiesHUAWEIBuilder {
     #[inline]
     pub fn max_output_cluster_count(mut self, max_output_cluster_count: u32) -> Self {
         self.value.max_output_cluster_count = max_output_cluster_count;
+        self
+    }
+
+    #[inline]
+    pub fn indirect_buffer_offset_alignment(
+        mut self,
+        indirect_buffer_offset_alignment: DeviceSize,
+    ) -> Self {
+        self.value.indirect_buffer_offset_alignment = indirect_buffer_offset_alignment;
         self
     }
 
@@ -32933,6 +34633,222 @@ unsafe impl Cast for PhysicalDeviceExternalMemoryRDMAFeaturesNVBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceExternalMemorySciBufFeaturesNV {
+    type Target = PhysicalDeviceExternalMemorySciBufFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceExternalMemorySciBufFeaturesNV {
+    type Builder = PhysicalDeviceExternalMemorySciBufFeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceExternalMemorySciBufFeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceExternalMemorySciBufFeaturesNVBuilder {
+    value: PhysicalDeviceExternalMemorySciBufFeaturesNV,
+}
+
+impl PhysicalDeviceExternalMemorySciBufFeaturesNVBuilder {
+    #[inline]
+    pub fn sci_buf_import(mut self, sci_buf_import: bool) -> Self {
+        self.value.sci_buf_import = sci_buf_import as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn sci_buf_export(mut self, sci_buf_export: bool) -> Self {
+        self.value.sci_buf_export = sci_buf_export as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceExternalMemorySciBufFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceExternalMemorySciBufFeaturesNVBuilder {
+    type Target = PhysicalDeviceExternalMemorySciBufFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceExternalMemorySciBufFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExternalMemorySciBufFeaturesNVBuilder {
+    type Target = PhysicalDeviceExternalMemorySciBufFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExternalSciSync2FeaturesNV {
+    type Target = PhysicalDeviceExternalSciSync2FeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceExternalSciSync2FeaturesNV {
+    type Builder = PhysicalDeviceExternalSciSync2FeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceExternalSciSync2FeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceExternalSciSync2FeaturesNVBuilder {
+    value: PhysicalDeviceExternalSciSync2FeaturesNV,
+}
+
+impl PhysicalDeviceExternalSciSync2FeaturesNVBuilder {
+    #[inline]
+    pub fn sci_sync_fence(mut self, sci_sync_fence: bool) -> Self {
+        self.value.sci_sync_fence = sci_sync_fence as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn sci_sync_semaphore2(mut self, sci_sync_semaphore2: bool) -> Self {
+        self.value.sci_sync_semaphore2 = sci_sync_semaphore2 as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn sci_sync_import(mut self, sci_sync_import: bool) -> Self {
+        self.value.sci_sync_import = sci_sync_import as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn sci_sync_export(mut self, sci_sync_export: bool) -> Self {
+        self.value.sci_sync_export = sci_sync_export as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceExternalSciSync2FeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceExternalSciSync2FeaturesNVBuilder {
+    type Target = PhysicalDeviceExternalSciSync2FeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceExternalSciSync2FeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExternalSciSync2FeaturesNVBuilder {
+    type Target = PhysicalDeviceExternalSciSync2FeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExternalSciSyncFeaturesNV {
+    type Target = PhysicalDeviceExternalSciSyncFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceExternalSciSyncFeaturesNV {
+    type Builder = PhysicalDeviceExternalSciSyncFeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceExternalSciSyncFeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceExternalSciSyncFeaturesNVBuilder {
+    value: PhysicalDeviceExternalSciSyncFeaturesNV,
+}
+
+impl PhysicalDeviceExternalSciSyncFeaturesNVBuilder {
+    #[inline]
+    pub fn sci_sync_fence(mut self, sci_sync_fence: bool) -> Self {
+        self.value.sci_sync_fence = sci_sync_fence as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn sci_sync_semaphore(mut self, sci_sync_semaphore: bool) -> Self {
+        self.value.sci_sync_semaphore = sci_sync_semaphore as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn sci_sync_import(mut self, sci_sync_import: bool) -> Self {
+        self.value.sci_sync_import = sci_sync_import as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn sci_sync_export(mut self, sci_sync_export: bool) -> Self {
+        self.value.sci_sync_export = sci_sync_export as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceExternalSciSyncFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceExternalSciSyncFeaturesNVBuilder {
+    type Target = PhysicalDeviceExternalSciSyncFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceExternalSciSyncFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExternalSciSyncFeaturesNVBuilder {
+    type Target = PhysicalDeviceExternalSciSyncFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [`PhysicalDeviceExternalSemaphoreInfo`].
 pub unsafe trait ExtendsPhysicalDeviceExternalSemaphoreInfo: fmt::Debug {}
 unsafe impl ExtendsPhysicalDeviceExternalSemaphoreInfo for SemaphoreTypeCreateInfo {}
@@ -33538,6 +35454,9 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicStat
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalSciSync2FeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalSciSyncFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFaultFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMap2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentDensityMapFeaturesEXT {}
@@ -33557,6 +35476,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageProcessingFeaturesQCOM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageRobustnessFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageViewMinLodFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImagelessFramebufferFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceIndexTypeUint8FeaturesEXT {}
@@ -33577,6 +35497,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 {
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiviewFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
@@ -33669,6 +35593,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkan11Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkan12Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkan13Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkanMemoryModelFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceVulkanSC10Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR
 {
@@ -36027,6 +37952,64 @@ impl ops::DerefMut for PhysicalDeviceImageRobustnessFeaturesBuilder {
 
 unsafe impl Cast for PhysicalDeviceImageRobustnessFeaturesBuilder {
     type Target = PhysicalDeviceImageRobustnessFeatures;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {
+    type Target = PhysicalDeviceImageSlicedViewOf3DFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {
+    type Builder = PhysicalDeviceImageSlicedViewOf3DFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceImageSlicedViewOf3DFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceImageSlicedViewOf3DFeaturesEXTBuilder {
+    value: PhysicalDeviceImageSlicedViewOf3DFeaturesEXT,
+}
+
+impl PhysicalDeviceImageSlicedViewOf3DFeaturesEXTBuilder {
+    #[inline]
+    pub fn image_sliced_view_of_3d(mut self, image_sliced_view_of_3d: bool) -> Self {
+        self.value.image_sliced_view_of_3d = image_sliced_view_of_3d as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceImageSlicedViewOf3DFeaturesEXTBuilder {
+    type Target = PhysicalDeviceImageSlicedViewOf3DFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceImageSlicedViewOf3DFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImageSlicedViewOf3DFeaturesEXTBuilder {
+    type Target = PhysicalDeviceImageSlicedViewOf3DFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -39077,6 +41060,67 @@ unsafe impl Cast for PhysicalDeviceMultiviewPerViewAttributesPropertiesNVXBuilde
     }
 }
 
+unsafe impl Cast for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {
+    type Target = PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {
+    type Builder = PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOMBuilder {
+    value: PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM,
+}
+
+impl PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOMBuilder {
+    #[inline]
+    pub fn multiview_per_view_render_areas(
+        mut self,
+        multiview_per_view_render_areas: bool,
+    ) -> Self {
+        self.value.multiview_per_view_render_areas = multiview_per_view_render_areas as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOMBuilder {
+    type Target = PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOMBuilder {
+    type Target = PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {
     type Target = PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM;
 
@@ -41205,6 +43249,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceSamplerFilterMinm
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCoreBuiltinsPropertiesARM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCoreProperties2AMD {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCorePropertiesAMD {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderCorePropertiesARM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderIntegerDotProductProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderModuleIdentifierPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceShaderSMBuiltinsPropertiesNV {}
@@ -41219,6 +43264,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceVertexAttributeDi
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceVulkan11Properties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceVulkan12Properties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceVulkan13Properties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceVulkanSC10Properties {}
 
 unsafe impl Cast for PhysicalDeviceProperties2 {
     type Target = PhysicalDeviceProperties2;
@@ -43667,6 +45713,76 @@ impl ops::DerefMut for PhysicalDeviceShaderCorePropertiesAMDBuilder {
 
 unsafe impl Cast for PhysicalDeviceShaderCorePropertiesAMDBuilder {
     type Target = PhysicalDeviceShaderCorePropertiesAMD;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderCorePropertiesARM {
+    type Target = PhysicalDeviceShaderCorePropertiesARM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderCorePropertiesARM {
+    type Builder = PhysicalDeviceShaderCorePropertiesARMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderCorePropertiesARM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderCorePropertiesARMBuilder {
+    value: PhysicalDeviceShaderCorePropertiesARM,
+}
+
+impl PhysicalDeviceShaderCorePropertiesARMBuilder {
+    #[inline]
+    pub fn pixel_rate(mut self, pixel_rate: u32) -> Self {
+        self.value.pixel_rate = pixel_rate;
+        self
+    }
+
+    #[inline]
+    pub fn texel_rate(mut self, texel_rate: u32) -> Self {
+        self.value.texel_rate = texel_rate;
+        self
+    }
+
+    #[inline]
+    pub fn fma_rate(mut self, fma_rate: u32) -> Self {
+        self.value.fma_rate = fma_rate;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderCorePropertiesARM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderCorePropertiesARMBuilder {
+    type Target = PhysicalDeviceShaderCorePropertiesARM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderCorePropertiesARMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderCorePropertiesARMBuilder {
+    type Target = PhysicalDeviceShaderCorePropertiesARM;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -48859,6 +50975,252 @@ unsafe impl Cast for PhysicalDeviceVulkanMemoryModelFeaturesBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceVulkanSC10Features {
+    type Target = PhysicalDeviceVulkanSC10Features;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceVulkanSC10Features {
+    type Builder = PhysicalDeviceVulkanSC10FeaturesBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceVulkanSC10Features`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceVulkanSC10FeaturesBuilder {
+    value: PhysicalDeviceVulkanSC10Features,
+}
+
+impl PhysicalDeviceVulkanSC10FeaturesBuilder {
+    #[inline]
+    pub fn shader_atomic_instructions(mut self, shader_atomic_instructions: bool) -> Self {
+        self.value.shader_atomic_instructions = shader_atomic_instructions as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceVulkanSC10Features {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceVulkanSC10FeaturesBuilder {
+    type Target = PhysicalDeviceVulkanSC10Features;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceVulkanSC10FeaturesBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceVulkanSC10FeaturesBuilder {
+    type Target = PhysicalDeviceVulkanSC10Features;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceVulkanSC10Properties {
+    type Target = PhysicalDeviceVulkanSC10Properties;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceVulkanSC10Properties {
+    type Builder = PhysicalDeviceVulkanSC10PropertiesBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceVulkanSC10Properties`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceVulkanSC10PropertiesBuilder {
+    value: PhysicalDeviceVulkanSC10Properties,
+}
+
+impl PhysicalDeviceVulkanSC10PropertiesBuilder {
+    #[inline]
+    pub fn device_no_dynamic_host_allocations(
+        mut self,
+        device_no_dynamic_host_allocations: bool,
+    ) -> Self {
+        self.value.device_no_dynamic_host_allocations =
+            device_no_dynamic_host_allocations as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn device_destroy_frees_memory(mut self, device_destroy_frees_memory: bool) -> Self {
+        self.value.device_destroy_frees_memory = device_destroy_frees_memory as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn command_pool_multiple_command_buffers_recording(
+        mut self,
+        command_pool_multiple_command_buffers_recording: bool,
+    ) -> Self {
+        self.value.command_pool_multiple_command_buffers_recording =
+            command_pool_multiple_command_buffers_recording as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn command_pool_reset_command_buffer(
+        mut self,
+        command_pool_reset_command_buffer: bool,
+    ) -> Self {
+        self.value.command_pool_reset_command_buffer = command_pool_reset_command_buffer as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn command_buffer_simultaneous_use(
+        mut self,
+        command_buffer_simultaneous_use: bool,
+    ) -> Self {
+        self.value.command_buffer_simultaneous_use = command_buffer_simultaneous_use as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn secondary_command_buffer_null_or_imageless_framebuffer(
+        mut self,
+        secondary_command_buffer_null_or_imageless_framebuffer: bool,
+    ) -> Self {
+        self.value
+            .secondary_command_buffer_null_or_imageless_framebuffer =
+            secondary_command_buffer_null_or_imageless_framebuffer as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn recycle_descriptor_set_memory(mut self, recycle_descriptor_set_memory: bool) -> Self {
+        self.value.recycle_descriptor_set_memory = recycle_descriptor_set_memory as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn recycle_pipeline_memory(mut self, recycle_pipeline_memory: bool) -> Self {
+        self.value.recycle_pipeline_memory = recycle_pipeline_memory as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn max_render_pass_subpasses(mut self, max_render_pass_subpasses: u32) -> Self {
+        self.value.max_render_pass_subpasses = max_render_pass_subpasses;
+        self
+    }
+
+    #[inline]
+    pub fn max_render_pass_dependencies(mut self, max_render_pass_dependencies: u32) -> Self {
+        self.value.max_render_pass_dependencies = max_render_pass_dependencies;
+        self
+    }
+
+    #[inline]
+    pub fn max_subpass_input_attachments(mut self, max_subpass_input_attachments: u32) -> Self {
+        self.value.max_subpass_input_attachments = max_subpass_input_attachments;
+        self
+    }
+
+    #[inline]
+    pub fn max_subpass_preserve_attachments(
+        mut self,
+        max_subpass_preserve_attachments: u32,
+    ) -> Self {
+        self.value.max_subpass_preserve_attachments = max_subpass_preserve_attachments;
+        self
+    }
+
+    #[inline]
+    pub fn max_framebuffer_attachments(mut self, max_framebuffer_attachments: u32) -> Self {
+        self.value.max_framebuffer_attachments = max_framebuffer_attachments;
+        self
+    }
+
+    #[inline]
+    pub fn max_descriptor_set_layout_bindings(
+        mut self,
+        max_descriptor_set_layout_bindings: u32,
+    ) -> Self {
+        self.value.max_descriptor_set_layout_bindings = max_descriptor_set_layout_bindings;
+        self
+    }
+
+    #[inline]
+    pub fn max_query_fault_count(mut self, max_query_fault_count: u32) -> Self {
+        self.value.max_query_fault_count = max_query_fault_count;
+        self
+    }
+
+    #[inline]
+    pub fn max_callback_fault_count(mut self, max_callback_fault_count: u32) -> Self {
+        self.value.max_callback_fault_count = max_callback_fault_count;
+        self
+    }
+
+    #[inline]
+    pub fn max_command_pool_command_buffers(
+        mut self,
+        max_command_pool_command_buffers: u32,
+    ) -> Self {
+        self.value.max_command_pool_command_buffers = max_command_pool_command_buffers;
+        self
+    }
+
+    #[inline]
+    pub fn max_command_buffer_size(mut self, max_command_buffer_size: DeviceSize) -> Self {
+        self.value.max_command_buffer_size = max_command_buffer_size;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceVulkanSC10Properties {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceVulkanSC10PropertiesBuilder {
+    type Target = PhysicalDeviceVulkanSC10Properties;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceVulkanSC10PropertiesBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceVulkanSC10PropertiesBuilder {
+    type Target = PhysicalDeviceVulkanSC10Properties;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {
     type Target = PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR;
 
@@ -49159,7 +51521,7 @@ impl<'b> PipelineCacheCreateInfoBuilder<'b> {
 
     #[inline]
     pub fn initial_data(mut self, initial_data: &'b [u8]) -> Self {
-        self.value.initial_data_size = initial_data.len() as usize;
+        self.value.pointer_initial_data_size = initial_data.len() as usize;
         self.value.initial_data = initial_data.as_ptr().cast();
         self
     }
@@ -49273,6 +51635,261 @@ impl ops::DerefMut for PipelineCacheHeaderVersionOneBuilder {
 
 unsafe impl Cast for PipelineCacheHeaderVersionOneBuilder {
     type Target = PipelineCacheHeaderVersionOne;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineCacheHeaderVersionSafetyCriticalOne {
+    type Target = PipelineCacheHeaderVersionSafetyCriticalOne;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineCacheHeaderVersionSafetyCriticalOne {
+    type Builder = PipelineCacheHeaderVersionSafetyCriticalOneBuilder;
+}
+
+/// A builder for a [`PipelineCacheHeaderVersionSafetyCriticalOne`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineCacheHeaderVersionSafetyCriticalOneBuilder {
+    value: PipelineCacheHeaderVersionSafetyCriticalOne,
+}
+
+impl PipelineCacheHeaderVersionSafetyCriticalOneBuilder {
+    #[inline]
+    pub fn header_version_one(
+        mut self,
+        header_version_one: impl Cast<Target = PipelineCacheHeaderVersionOne>,
+    ) -> Self {
+        self.value.header_version_one = header_version_one.into();
+        self
+    }
+
+    #[inline]
+    pub fn validation_version(
+        mut self,
+        validation_version: PipelineCacheValidationVersion,
+    ) -> Self {
+        self.value.validation_version = validation_version;
+        self
+    }
+
+    #[inline]
+    pub fn implementation_data(mut self, implementation_data: u32) -> Self {
+        self.value.implementation_data = implementation_data;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_index_count(mut self, pipeline_index_count: u32) -> Self {
+        self.value.pipeline_index_count = pipeline_index_count;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_index_stride(mut self, pipeline_index_stride: u32) -> Self {
+        self.value.pipeline_index_stride = pipeline_index_stride;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_index_offset(mut self, pipeline_index_offset: u64) -> Self {
+        self.value.pipeline_index_offset = pipeline_index_offset;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineCacheHeaderVersionSafetyCriticalOne {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineCacheHeaderVersionSafetyCriticalOneBuilder {
+    type Target = PipelineCacheHeaderVersionSafetyCriticalOne;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineCacheHeaderVersionSafetyCriticalOneBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineCacheHeaderVersionSafetyCriticalOneBuilder {
+    type Target = PipelineCacheHeaderVersionSafetyCriticalOne;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineCacheSafetyCriticalIndexEntry {
+    type Target = PipelineCacheSafetyCriticalIndexEntry;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineCacheSafetyCriticalIndexEntry {
+    type Builder = PipelineCacheSafetyCriticalIndexEntryBuilder;
+}
+
+/// A builder for a [`PipelineCacheSafetyCriticalIndexEntry`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineCacheSafetyCriticalIndexEntryBuilder {
+    value: PipelineCacheSafetyCriticalIndexEntry,
+}
+
+impl PipelineCacheSafetyCriticalIndexEntryBuilder {
+    #[inline]
+    pub fn pipeline_identifier(
+        mut self,
+        pipeline_identifier: impl Into<ByteArray<UUID_SIZE>>,
+    ) -> Self {
+        self.value.pipeline_identifier = pipeline_identifier.into();
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_memory_size(mut self, pipeline_memory_size: u64) -> Self {
+        self.value.pipeline_memory_size = pipeline_memory_size;
+        self
+    }
+
+    #[inline]
+    pub fn json_size(mut self, json_size: u64) -> Self {
+        self.value.json_size = json_size;
+        self
+    }
+
+    #[inline]
+    pub fn json_offset(mut self, json_offset: u64) -> Self {
+        self.value.json_offset = json_offset;
+        self
+    }
+
+    #[inline]
+    pub fn stage_index_count(mut self, stage_index_count: u32) -> Self {
+        self.value.stage_index_count = stage_index_count;
+        self
+    }
+
+    #[inline]
+    pub fn stage_index_stride(mut self, stage_index_stride: u32) -> Self {
+        self.value.stage_index_stride = stage_index_stride;
+        self
+    }
+
+    #[inline]
+    pub fn stage_index_offset(mut self, stage_index_offset: u64) -> Self {
+        self.value.stage_index_offset = stage_index_offset;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineCacheSafetyCriticalIndexEntry {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineCacheSafetyCriticalIndexEntryBuilder {
+    type Target = PipelineCacheSafetyCriticalIndexEntry;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineCacheSafetyCriticalIndexEntryBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineCacheSafetyCriticalIndexEntryBuilder {
+    type Target = PipelineCacheSafetyCriticalIndexEntry;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineCacheStageValidationIndexEntry {
+    type Target = PipelineCacheStageValidationIndexEntry;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineCacheStageValidationIndexEntry {
+    type Builder = PipelineCacheStageValidationIndexEntryBuilder;
+}
+
+/// A builder for a [`PipelineCacheStageValidationIndexEntry`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineCacheStageValidationIndexEntryBuilder {
+    value: PipelineCacheStageValidationIndexEntry,
+}
+
+impl PipelineCacheStageValidationIndexEntryBuilder {
+    #[inline]
+    pub fn code_size(mut self, code_size: u64) -> Self {
+        self.value.code_size = code_size;
+        self
+    }
+
+    #[inline]
+    pub fn code_offset(mut self, code_offset: u64) -> Self {
+        self.value.code_offset = code_offset;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineCacheStageValidationIndexEntry {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineCacheStageValidationIndexEntryBuilder {
+    type Target = PipelineCacheStageValidationIndexEntry;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineCacheStageValidationIndexEntryBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineCacheStageValidationIndexEntryBuilder {
+    type Target = PipelineCacheStageValidationIndexEntry;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -51133,6 +53750,143 @@ unsafe impl<'b> Cast for PipelineMultisampleStateCreateInfoBuilder<'b> {
     }
 }
 
+unsafe impl Cast for PipelineOfflineCreateInfo {
+    type Target = PipelineOfflineCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineOfflineCreateInfo {
+    type Builder = PipelineOfflineCreateInfoBuilder;
+}
+
+/// A builder for a [`PipelineOfflineCreateInfo`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineOfflineCreateInfoBuilder {
+    value: PipelineOfflineCreateInfo,
+}
+
+impl PipelineOfflineCreateInfoBuilder {
+    #[inline]
+    pub fn pipeline_identifier(
+        mut self,
+        pipeline_identifier: impl Into<ByteArray<UUID_SIZE>>,
+    ) -> Self {
+        self.value.pipeline_identifier = pipeline_identifier.into();
+        self
+    }
+
+    #[inline]
+    pub fn match_control(mut self, match_control: PipelineMatchControl) -> Self {
+        self.value.match_control = match_control;
+        self
+    }
+
+    #[inline]
+    pub fn pool_entry_size(mut self, pool_entry_size: DeviceSize) -> Self {
+        self.value.pool_entry_size = pool_entry_size;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineOfflineCreateInfo {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineOfflineCreateInfoBuilder {
+    type Target = PipelineOfflineCreateInfo;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineOfflineCreateInfoBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineOfflineCreateInfoBuilder {
+    type Target = PipelineOfflineCreateInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelinePoolSize {
+    type Target = PipelinePoolSize;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelinePoolSize {
+    type Builder = PipelinePoolSizeBuilder;
+}
+
+/// A builder for a [`PipelinePoolSize`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelinePoolSizeBuilder {
+    value: PipelinePoolSize,
+}
+
+impl PipelinePoolSizeBuilder {
+    #[inline]
+    pub fn pool_entry_size(mut self, pool_entry_size: DeviceSize) -> Self {
+        self.value.pool_entry_size = pool_entry_size;
+        self
+    }
+
+    #[inline]
+    pub fn pool_entry_count(mut self, pool_entry_count: u32) -> Self {
+        self.value.pool_entry_count = pool_entry_count;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelinePoolSize {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelinePoolSizeBuilder {
+    type Target = PipelinePoolSize;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelinePoolSizeBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelinePoolSizeBuilder {
+    type Target = PipelinePoolSize;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PipelinePropertiesIdentifierEXT {
     type Target = PipelinePropertiesIdentifierEXT;
 
@@ -51780,7 +54534,7 @@ impl<'b> PipelineRenderingCreateInfoBuilder<'b> {
 
     #[inline]
     pub fn color_attachment_formats(mut self, color_attachment_formats: &'b [Format]) -> Self {
-        self.value.color_attachment_count = color_attachment_formats.len() as u32;
+        self.value.pointer_color_attachment_count = color_attachment_formats.len() as u32;
         self.value.color_attachment_formats = color_attachment_formats.as_ptr();
         self
     }
@@ -52101,8 +54855,8 @@ impl<'b> PipelineShaderStageCreateInfoBuilder<'b> {
     }
 
     #[inline]
-    pub fn name(mut self, name: &'b [u8]) -> Self {
-        self.value.name = name.as_ptr().cast();
+    pub fn pointer_name(mut self, pointer_name: &'b [u8]) -> Self {
+        self.value.pointer_name = pointer_name.as_ptr().cast();
         self
     }
 
@@ -53766,6 +56520,65 @@ unsafe impl Cast for PushConstantRangeBuilder {
     }
 }
 
+unsafe impl Cast for QueryLowLatencySupportNV {
+    type Target = QueryLowLatencySupportNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for QueryLowLatencySupportNV {
+    type Builder = QueryLowLatencySupportNVBuilder<'b>;
+}
+
+/// A builder for a [`QueryLowLatencySupportNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct QueryLowLatencySupportNVBuilder<'b> {
+    value: QueryLowLatencySupportNV,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> QueryLowLatencySupportNVBuilder<'b> {
+    #[inline]
+    pub fn queried_low_latency_data<T>(mut self, queried_low_latency_data: &'b mut T) -> Self {
+        self.value.queried_low_latency_data = (queried_low_latency_data as *mut T).cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> QueryLowLatencySupportNV {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for QueryLowLatencySupportNVBuilder<'b> {
+    type Target = QueryLowLatencySupportNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for QueryLowLatencySupportNVBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for QueryLowLatencySupportNVBuilder<'b> {
+    type Target = QueryLowLatencySupportNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [`QueryPoolCreateInfo`].
 pub unsafe trait ExtendsQueryPoolCreateInfo: fmt::Debug {}
 unsafe impl ExtendsQueryPoolCreateInfo for QueryPoolPerformanceCreateInfoKHR {}
@@ -54336,6 +57149,7 @@ unsafe impl<'b> Cast for QueueFamilyProperties2Builder<'b> {
 /// A Vulkan struct that can be used to extend a [`RayTracingPipelineCreateInfoKHR`].
 pub unsafe trait ExtendsRayTracingPipelineCreateInfoKHR: fmt::Debug {}
 unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineCreationFeedbackCreateInfo {}
+unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineOfflineCreateInfo {}
 unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineRobustnessCreateInfoEXT {}
 
 unsafe impl Cast for RayTracingPipelineCreateInfoKHR {
@@ -54378,12 +57192,12 @@ impl<'b> RayTracingPipelineCreateInfoKHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn stages(
+    pub fn pointer_stages(
         mut self,
-        stages: &'b [impl Cast<Target = PipelineShaderStageCreateInfo>],
+        pointer_stages: &'b [impl Cast<Target = PipelineShaderStageCreateInfo>],
     ) -> Self {
-        self.value.stage_count = stages.len() as u32;
-        self.value.stages = stages.as_ptr().cast();
+        self.value.stage_count = pointer_stages.len() as u32;
+        self.value.pointer_stages = pointer_stages.as_ptr().cast();
         self
     }
 
@@ -54485,6 +57299,7 @@ unsafe impl<'b> Cast for RayTracingPipelineCreateInfoKHRBuilder<'b> {
 /// A Vulkan struct that can be used to extend a [`RayTracingPipelineCreateInfoNV`].
 pub unsafe trait ExtendsRayTracingPipelineCreateInfoNV: fmt::Debug {}
 unsafe impl ExtendsRayTracingPipelineCreateInfoNV for PipelineCreationFeedbackCreateInfo {}
+unsafe impl ExtendsRayTracingPipelineCreateInfoNV for PipelineOfflineCreateInfo {}
 
 unsafe impl Cast for RayTracingPipelineCreateInfoNV {
     type Target = RayTracingPipelineCreateInfoNV;
@@ -54526,12 +57341,12 @@ impl<'b> RayTracingPipelineCreateInfoNVBuilder<'b> {
     }
 
     #[inline]
-    pub fn stages(
+    pub fn pointer_stages(
         mut self,
-        stages: &'b [impl Cast<Target = PipelineShaderStageCreateInfo>],
+        pointer_stages: &'b [impl Cast<Target = PipelineShaderStageCreateInfo>],
     ) -> Self {
-        self.value.stage_count = stages.len() as u32;
-        self.value.stages = stages.as_ptr().cast();
+        self.value.stage_count = pointer_stages.len() as u32;
+        self.value.pointer_stages = pointer_stages.as_ptr().cast();
         self
     }
 
@@ -55034,6 +57849,136 @@ unsafe impl Cast for RefreshCycleDurationGOOGLEBuilder {
     }
 }
 
+unsafe impl Cast for RefreshObjectKHR {
+    type Target = RefreshObjectKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for RefreshObjectKHR {
+    type Builder = RefreshObjectKHRBuilder;
+}
+
+/// A builder for a [`RefreshObjectKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct RefreshObjectKHRBuilder {
+    value: RefreshObjectKHR,
+}
+
+impl RefreshObjectKHRBuilder {
+    #[inline]
+    pub fn object_type(mut self, object_type: ObjectType) -> Self {
+        self.value.object_type = object_type;
+        self
+    }
+
+    #[inline]
+    pub fn object_handle(mut self, object_handle: u64) -> Self {
+        self.value.object_handle = object_handle;
+        self
+    }
+
+    #[inline]
+    pub fn flags(mut self, flags: RefreshObjectFlagsKHR) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> RefreshObjectKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for RefreshObjectKHRBuilder {
+    type Target = RefreshObjectKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for RefreshObjectKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for RefreshObjectKHRBuilder {
+    type Target = RefreshObjectKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for RefreshObjectListKHR {
+    type Target = RefreshObjectListKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for RefreshObjectListKHR {
+    type Builder = RefreshObjectListKHRBuilder<'b>;
+}
+
+/// A builder for a [`RefreshObjectListKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct RefreshObjectListKHRBuilder<'b> {
+    value: RefreshObjectListKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> RefreshObjectListKHRBuilder<'b> {
+    #[inline]
+    pub fn objects(mut self, objects: &'b [impl Cast<Target = RefreshObjectKHR>]) -> Self {
+        self.value.object_count = objects.len() as u32;
+        self.value.objects = objects.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> RefreshObjectListKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for RefreshObjectListKHRBuilder<'b> {
+    type Target = RefreshObjectListKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for RefreshObjectListKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for RefreshObjectListKHRBuilder<'b> {
+    type Target = RefreshObjectListKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ReleaseSwapchainImagesInfoEXT {
     type Target = ReleaseSwapchainImagesInfoEXT;
 
@@ -55163,6 +58108,7 @@ unsafe impl<'b> Cast for RenderPassAttachmentBeginInfoBuilder<'b> {
 /// A Vulkan struct that can be used to extend a [`RenderPassBeginInfo`].
 pub unsafe trait ExtendsRenderPassBeginInfo: fmt::Debug {}
 unsafe impl ExtendsRenderPassBeginInfo for DeviceGroupRenderPassBeginInfo {}
+unsafe impl ExtendsRenderPassBeginInfo for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {}
 unsafe impl ExtendsRenderPassBeginInfo for RenderPassAttachmentBeginInfo {}
 unsafe impl ExtendsRenderPassBeginInfo for RenderPassSampleLocationsBeginInfoEXT {}
 unsafe impl ExtendsRenderPassBeginInfo for RenderPassTransformBeginInfoQCOM {}
@@ -56355,6 +59301,7 @@ pub unsafe trait ExtendsRenderingInfo: fmt::Debug {}
 unsafe impl ExtendsRenderingInfo for DeviceGroupRenderPassBeginInfo {}
 unsafe impl ExtendsRenderingInfo for MultisampledRenderToSingleSampledInfoEXT {}
 unsafe impl ExtendsRenderingInfo for MultiviewPerViewAttributesInfoNVX {}
+unsafe impl ExtendsRenderingInfo for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {}
 unsafe impl ExtendsRenderingInfo for RenderingFragmentDensityMapAttachmentInfoEXT {}
 unsafe impl ExtendsRenderingInfo for RenderingFragmentShadingRateAttachmentInfoKHR {}
 
@@ -56420,7 +59367,7 @@ impl<'b> RenderingInfoBuilder<'b> {
         mut self,
         color_attachments: &'b [impl Cast<Target = RenderingAttachmentInfo>],
     ) -> Self {
-        self.value.color_attachment_count = color_attachments.len() as u32;
+        self.value.pointer_color_attachment_count = color_attachments.len() as u32;
         self.value.color_attachments = color_attachments.as_ptr().cast();
         self
     }
@@ -57499,6 +60446,70 @@ unsafe impl Cast for SamplerYcbcrConversionInfoBuilder {
     }
 }
 
+unsafe impl Cast for SciSyncAttributesInfoNV {
+    type Target = SciSyncAttributesInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SciSyncAttributesInfoNV {
+    type Builder = SciSyncAttributesInfoNVBuilder;
+}
+
+/// A builder for a [`SciSyncAttributesInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SciSyncAttributesInfoNVBuilder {
+    value: SciSyncAttributesInfoNV,
+}
+
+impl SciSyncAttributesInfoNVBuilder {
+    #[inline]
+    pub fn client_type(mut self, client_type: SciSyncClientTypeNV) -> Self {
+        self.value.client_type = client_type;
+        self
+    }
+
+    #[inline]
+    pub fn primitive_type(mut self, primitive_type: SciSyncPrimitiveTypeNV) -> Self {
+        self.value.primitive_type = primitive_type;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SciSyncAttributesInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for SciSyncAttributesInfoNVBuilder {
+    type Target = SciSyncAttributesInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SciSyncAttributesInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SciSyncAttributesInfoNVBuilder {
+    type Target = SciSyncAttributesInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ScreenSurfaceCreateInfoQNX {
     type Target = ScreenSurfaceCreateInfoQNX;
 
@@ -57574,8 +60585,11 @@ unsafe impl<'b> Cast for ScreenSurfaceCreateInfoQNXBuilder<'b> {
 pub unsafe trait ExtendsSemaphoreCreateInfo: fmt::Debug {}
 unsafe impl ExtendsSemaphoreCreateInfo for ExportMetalObjectCreateInfoEXT {}
 unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreCreateInfo {}
+unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreSciSyncInfoNV {}
 unsafe impl ExtendsSemaphoreCreateInfo for ExportSemaphoreWin32HandleInfoKHR {}
 unsafe impl ExtendsSemaphoreCreateInfo for ImportMetalSharedEventInfoEXT {}
+unsafe impl ExtendsSemaphoreCreateInfo for QueryLowLatencySupportNV {}
+unsafe impl ExtendsSemaphoreCreateInfo for SemaphoreSciSyncCreateInfoNV {}
 unsafe impl ExtendsSemaphoreCreateInfo for SemaphoreTypeCreateInfo {}
 
 unsafe impl Cast for SemaphoreCreateInfo {
@@ -57712,6 +60726,70 @@ unsafe impl Cast for SemaphoreGetFdInfoKHRBuilder {
     }
 }
 
+unsafe impl Cast for SemaphoreGetSciSyncInfoNV {
+    type Target = SemaphoreGetSciSyncInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SemaphoreGetSciSyncInfoNV {
+    type Builder = SemaphoreGetSciSyncInfoNVBuilder;
+}
+
+/// A builder for a [`SemaphoreGetSciSyncInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SemaphoreGetSciSyncInfoNVBuilder {
+    value: SemaphoreGetSciSyncInfoNV,
+}
+
+impl SemaphoreGetSciSyncInfoNVBuilder {
+    #[inline]
+    pub fn semaphore(mut self, semaphore: Semaphore) -> Self {
+        self.value.semaphore = semaphore;
+        self
+    }
+
+    #[inline]
+    pub fn handle_type(mut self, handle_type: ExternalSemaphoreHandleTypeFlags) -> Self {
+        self.value.handle_type = handle_type;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SemaphoreGetSciSyncInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for SemaphoreGetSciSyncInfoNVBuilder {
+    type Target = SemaphoreGetSciSyncInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SemaphoreGetSciSyncInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SemaphoreGetSciSyncInfoNVBuilder {
+    type Target = SemaphoreGetSciSyncInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for SemaphoreGetWin32HandleInfoKHR {
     type Target = SemaphoreGetWin32HandleInfoKHR;
 
@@ -57833,6 +60911,129 @@ impl ops::DerefMut for SemaphoreGetZirconHandleInfoFUCHSIABuilder {
 
 unsafe impl Cast for SemaphoreGetZirconHandleInfoFUCHSIABuilder {
     type Target = SemaphoreGetZirconHandleInfoFUCHSIA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SemaphoreSciSyncCreateInfoNV {
+    type Target = SemaphoreSciSyncCreateInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for SemaphoreSciSyncCreateInfoNV {
+    type Builder = SemaphoreSciSyncCreateInfoNVBuilder<'b>;
+}
+
+/// A builder for a [`SemaphoreSciSyncCreateInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SemaphoreSciSyncCreateInfoNVBuilder<'b> {
+    value: SemaphoreSciSyncCreateInfoNV,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> SemaphoreSciSyncCreateInfoNVBuilder<'b> {
+    #[inline]
+    pub fn semaphore_pool(mut self, semaphore_pool: SemaphoreSciSyncPoolNV) -> Self {
+        self.value.semaphore_pool = semaphore_pool;
+        self
+    }
+
+    #[inline]
+    pub fn fence(mut self, fence: &'b NvSciSyncFence) -> Self {
+        self.value.fence = fence as *const NvSciSyncFence;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SemaphoreSciSyncCreateInfoNV {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for SemaphoreSciSyncCreateInfoNVBuilder<'b> {
+    type Target = SemaphoreSciSyncCreateInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for SemaphoreSciSyncCreateInfoNVBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for SemaphoreSciSyncCreateInfoNVBuilder<'b> {
+    type Target = SemaphoreSciSyncCreateInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SemaphoreSciSyncPoolCreateInfoNV {
+    type Target = SemaphoreSciSyncPoolCreateInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SemaphoreSciSyncPoolCreateInfoNV {
+    type Builder = SemaphoreSciSyncPoolCreateInfoNVBuilder;
+}
+
+/// A builder for a [`SemaphoreSciSyncPoolCreateInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SemaphoreSciSyncPoolCreateInfoNVBuilder {
+    value: SemaphoreSciSyncPoolCreateInfoNV,
+}
+
+impl SemaphoreSciSyncPoolCreateInfoNVBuilder {
+    #[inline]
+    pub fn handle(mut self, handle: NvSciSyncObj) -> Self {
+        self.value.handle = handle;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SemaphoreSciSyncPoolCreateInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for SemaphoreSciSyncPoolCreateInfoNVBuilder {
+    type Target = SemaphoreSciSyncPoolCreateInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SemaphoreSciSyncPoolCreateInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SemaphoreSciSyncPoolCreateInfoNVBuilder {
+    type Target = SemaphoreSciSyncPoolCreateInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -60224,8 +63425,8 @@ impl<'b> SubpassDescriptionBuilder<'b> {
     }
 
     #[inline]
-    pub fn color_attachment_count(mut self, color_attachment_count: u32) -> Self {
-        self.value.color_attachment_count = color_attachment_count;
+    pub fn pointer_color_attachment_count(mut self, pointer_color_attachment_count: u32) -> Self {
+        self.value.pointer_color_attachment_count = pointer_color_attachment_count;
         self
     }
 
@@ -60234,7 +63435,7 @@ impl<'b> SubpassDescriptionBuilder<'b> {
         mut self,
         color_attachments: &'b [impl Cast<Target = AttachmentReference>],
     ) -> Self {
-        self.value.color_attachment_count = color_attachments.len() as u32;
+        self.value.pointer_color_attachment_count = color_attachments.len() as u32;
         self.value.color_attachments = color_attachments.as_ptr().cast();
         self
     }
@@ -60244,7 +63445,7 @@ impl<'b> SubpassDescriptionBuilder<'b> {
         mut self,
         resolve_attachments: &'b [impl Cast<Target = AttachmentReference>],
     ) -> Self {
-        self.value.color_attachment_count = resolve_attachments.len() as u32;
+        self.value.pointer_color_attachment_count = resolve_attachments.len() as u32;
         self.value.resolve_attachments = resolve_attachments.as_ptr().cast();
         self
     }
@@ -60366,8 +63567,8 @@ impl<'b> SubpassDescription2Builder<'b> {
     }
 
     #[inline]
-    pub fn color_attachment_count(mut self, color_attachment_count: u32) -> Self {
-        self.value.color_attachment_count = color_attachment_count;
+    pub fn pointer_color_attachment_count(mut self, pointer_color_attachment_count: u32) -> Self {
+        self.value.pointer_color_attachment_count = pointer_color_attachment_count;
         self
     }
 
@@ -60376,7 +63577,7 @@ impl<'b> SubpassDescription2Builder<'b> {
         mut self,
         color_attachments: &'b [impl Cast<Target = AttachmentReference2>],
     ) -> Self {
-        self.value.color_attachment_count = color_attachments.len() as u32;
+        self.value.pointer_color_attachment_count = color_attachments.len() as u32;
         self.value.color_attachments = color_attachments.as_ptr().cast();
         self
     }
@@ -60386,7 +63587,7 @@ impl<'b> SubpassDescription2Builder<'b> {
         mut self,
         resolve_attachments: &'b [impl Cast<Target = AttachmentReference2>],
     ) -> Self {
-        self.value.color_attachment_count = resolve_attachments.len() as u32;
+        self.value.pointer_color_attachment_count = resolve_attachments.len() as u32;
         self.value.resolve_attachments = resolve_attachments.as_ptr().cast();
         self
     }
@@ -62156,8 +65357,8 @@ impl<'b> SwapchainCreateInfoKHRBuilder<'b> {
     }
 
     #[inline]
-    pub fn old_swapchain(mut self, old_swapchain: SwapchainKHR) -> Self {
-        self.value.old_swapchain = old_swapchain;
+    pub fn pointer_old_swapchain(mut self, pointer_old_swapchain: SwapchainKHR) -> Self {
+        self.value.pointer_old_swapchain = pointer_old_swapchain;
         self
     }
 
@@ -63151,7 +66352,7 @@ impl<'b> ValidationCacheCreateInfoEXTBuilder<'b> {
 
     #[inline]
     pub fn initial_data(mut self, initial_data: &'b [u8]) -> Self {
-        self.value.initial_data_size = initial_data.len() as usize;
+        self.value.pointer_initial_data_size = initial_data.len() as usize;
         self.value.initial_data = initial_data.as_ptr().cast();
         self
     }
