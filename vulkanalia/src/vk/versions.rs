@@ -3790,3 +3790,74 @@ pub trait DeviceV1_3: DeviceV1_2 {
 }
 
 impl DeviceV1_3 for crate::Device {}
+
+/// Vulkan 1.0 entry command wrappers.
+pub trait EntryV1_0: EntryV1_3 {}
+
+impl EntryV1_0 for crate::Entry {}
+
+/// Vulkan 1.0 instance command wrappers.
+pub trait InstanceV1_0: InstanceV1_3 {}
+
+impl InstanceV1_0 for crate::Instance {}
+
+/// Vulkan 1.0 device command wrappers.
+pub trait DeviceV1_0: DeviceV1_3 {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetCommandPoolMemoryConsumption.html>
+    #[inline]
+    unsafe fn get_command_pool_memory_consumption(
+        &self,
+        command_pool: CommandPool,
+        command_buffer: CommandBuffer,
+    ) -> CommandPoolMemoryConsumption {
+        let mut consumption = MaybeUninit::<CommandPoolMemoryConsumption>::uninit();
+
+        let __result = (self.commands().get_command_pool_memory_consumption)(
+            self.handle(),
+            command_pool,
+            command_buffer,
+            consumption.as_mut_ptr(),
+        );
+
+        consumption.assume_init()
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetFaultData.html>
+    #[inline]
+    unsafe fn get_fault_data(
+        &self,
+        fault_query_behavior: FaultQueryBehavior,
+    ) -> crate::VkResult<(bool, Vec<FaultData>)> {
+        let mut fault_count = 0;
+
+        (self.commands().get_fault_data)(
+            self.handle(),
+            fault_query_behavior,
+            unrecorded_faults.as_mut_ptr(),
+            &mut fault_count,
+            ptr::null_mut(),
+        );
+
+        let mut unrecorded_faults = MaybeUninit::<Bool32>::uninit();
+        let mut faults = Vec::with_capacity(fault_count as usize);
+
+        let __result = (self.commands().get_fault_data)(
+            self.handle(),
+            fault_query_behavior,
+            unrecorded_faults.as_mut_ptr(),
+            &mut fault_count,
+            faults.as_mut_ptr(),
+        );
+
+        debug_assert!(faults.capacity() == fault_count as usize);
+        faults.set_len(fault_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok((unrecorded_faults.assume_init() == TRUE, faults))
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl DeviceV1_0 for crate::Device {}

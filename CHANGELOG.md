@@ -4,6 +4,13 @@
 - [December 19, 2022 Vulkan 1.3.238 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9a2e576a052a1e65a5d41b593e693ff02745604b)
 - [January 19, 2023 Vulkan 1.3.239 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/4941f94e8e36e99e6e1fe430c9e2569dfb6c1937)
 - [January 26, 2023 Vulkan 1.3.240 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/b33bd816a24012b0ac51e8b05567cc221171ccf1)
+- [February 16, 2023 Vulkan 1.3.241 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/1b1c4dd43a35341c8c8e82ad985ed66d8beff5ba)
+- [Only parenthesize formal arguments of VK_DEFINE*HANDLE macros in vulkansc api (#2068)](https://github.com/KhronosGroup/Vulkan-Docs/commit/bc4666ebd41f591c92f6e67d6b4ff8a346fc6b1c)
+- [February 26, 2023 Vulkan 1.3.242 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/f3e686fc22251102713a2a1a1cd071f60ab6efd8)
+- [Update vk.xml (#2076)](https://github.com/KhronosGroup/Vulkan-Docs/commit/992febb8e01a0c602c425b2139bc9449fd7f9ba9)
+- [March 12, 2023 Vulkan 1.3.243 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/84ccde6b1b92820feee54c8b7577387b2cf1ce17)
+- [March 17, 2023 Vulkan 1.3.244 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/7beccb60daac498d700a09763945719c31510ab6)
+- [March 24, 2023 Vulkan 1.3.245 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/729dda35a16d57611636d6684a1fcb27f7e0a722)
 
 ## [0.17.0] - 2022-12-14
 
