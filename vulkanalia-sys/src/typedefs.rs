@@ -84,3 +84,16 @@ pub type xcb_connection_t = c_void;
 pub type xcb_visualid_t = u32;
 pub type xcb_window_t = u32;
 pub type zx_handle_t = u32;
+
+// NvSciBuf / NvSciSync
+
+pub type NvSciBufAttrList = *mut c_void;
+pub type NvSciBufObj = *mut c_void;
+pub type NvSciSyncAttrList = *mut c_void;
+pub type NvSciSyncObj = *mut c_void;
+
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, PartialEq)]
+pub struct NvSciSyncFence {
+    pub payload: [u64; 6],
+}

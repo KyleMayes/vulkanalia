@@ -619,6 +619,11 @@ private val platformPointers = setOf(
     "LPCWSTR",
     // X11
     "Display",
+    // NvSciBuf / NvSciSync
+    "NvSciBufAttrList",
+    "NvSciBufObj",
+    "NvSciSyncAttrList",
+    "NvSciSyncObj",
 )
 
 // ===============================================
