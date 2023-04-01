@@ -85,11 +85,13 @@ fun extractEntities(e: Element): Registry {
 /** A collection of bitflags. */
 data class Bitmask(
     override val name: Identifier,
+    override val api: String? = null,
     val bitflags: MutableList<Bitflag>,
 ) : Entity
 
 private fun extractBitmask(e: Element) = Bitmask(
     name = e.getAttribute("name").intern(),
+    api = null,
     bitflags = e.getElements("enum")
         .filter { !it.hasAttribute("alias") }
         .map(::extractBitflag)
@@ -98,17 +100,20 @@ private fun extractBitmask(e: Element) = Bitmask(
 
 private fun extractBitmaskType(e: Element) = Bitmask(
     name = e.getElementText("name")!!.intern(),
+    api = e.getAttributeText("api"),
     bitflags = ArrayList(),
 )
 
 /** A bitflag. */
 data class Bitflag(
     override val name: Identifier,
+    override val api: String? = null,
     val value: BigInteger,
 ) : Entity
 
 private fun extractBitflag(e: Element) = Bitflag(
     name = e.getAttribute("name").intern(),
+    api = e.getAttributeText("api"),
     value = e.getAttributeText("bitpos")
         ?.toNumber()
         ?.let { BigInteger.ONE.shiftLeft(it.toInt()) }
@@ -122,6 +127,7 @@ private fun extractBitflag(e: Element) = Bitflag(
 /** A command. */
 data class Command(
     override val name: Identifier,
+    override val api: String? = null,
     val params: List<Param>,
     val result: Type,
     val successcodes: List<Identifier>,
@@ -132,6 +138,7 @@ private fun extractCommand(e: Element): Command {
     val proto = e.getElement("proto")!!
     return Command(
         name = proto.getElementText("name")!!.intern(),
+        api = e.getAttributeText("api"),
         params = e.queryElements("param", ::extractParam),
         result = extractType(proto.getElement("type")!!),
         successcodes = e.getAttributeText("successcodes")
@@ -148,6 +155,7 @@ private fun extractCommand(e: Element): Command {
 /** A command parameter. */
 data class Param(
     override val name: Identifier,
+    override val api: String? = null,
     val type: Type,
     val len: Identifier?,
     val arglen: List<Identifier>?,
@@ -158,6 +166,7 @@ private fun extractParam(e: Element): Param {
     val len = e.getAttributeText("len")
     return Param(
         name = e.getElementText("name")!!.intern(),
+        api = e.getAttributeText("api"),
         type = extractType(e.getElement("type")!!),
         len = len?.intern(),
         arglen = len?.split("->")?.map { it.intern() },
@@ -172,6 +181,7 @@ private fun extractParam(e: Element): Param {
 /** A constant. */
 data class Constant(
     override val name: Identifier,
+    override val api: String? = null,
     val type: IdentifierType,
     val expr: String,
 ) : Entity
@@ -197,6 +207,7 @@ private fun extractConstant(e: Element): Constant {
 
     return Constant(
         name = name.intern(),
+        api = e.getAttributeText("api"),
         type = IdentifierType(type.intern()),
         expr = expr.trim('(', ')').replace(Regex("[fF]$"), ""),
     )
@@ -209,11 +220,13 @@ private fun extractConstant(e: Element): Constant {
 /** An enum. */
 data class Enum(
     override val name: Identifier,
+    override val api: String? = null,
     val variants: MutableList<Variant>,
 ) : Entity
 
 private fun extractEnum(e: Element) = Enum(
     name = e.getAttribute("name").intern(),
+    api = e.getAttributeText("api"),
     variants = e.getElements("enum")
         .filter { !it.hasAttribute("alias") }
         .map(::extractVariant)
@@ -223,11 +236,13 @@ private fun extractEnum(e: Element) = Enum(
 /** An enum variant. */
 data class Variant(
     override val name: Identifier,
+    override val api: String? = null,
     val value: Long,
 ) : Entity
 
 private fun extractVariant(e: Element) = Variant(
     name = e.getAttribute("name").intern(),
+    api = e.getAttributeText("api"),
     value = e.getAttribute("value").toNumber(),
 )
 
@@ -238,12 +253,14 @@ private fun extractVariant(e: Element) = Variant(
 /** A function pointer. */
 data class Function(
     override val name: Identifier,
+    override val api: String? = null,
     val params: List<Type>,
     val result: Type?,
 ) : Entity
 
 private fun extractFunction(e: Element) = Function(
     name = e.getElementText("name")!!.intern(),
+    api = e.getAttributeText("api"),
     params = e.getElements("type", ::extractType),
     result = when (val type = e.textContent.substring(8, e.textContent.indexOf("(VKAPI_PTR")).trim()) {
         "void" -> null
@@ -261,11 +278,13 @@ private fun extractFunction(e: Element) = Function(
 /** A Vulkan handle. */
 data class Handle(
     override val name: Identifier,
+    override val api: String? = null,
     val dispatchable: Boolean,
 ) : Entity
 
 private fun extractHandle(e: Element) = Handle(
     name = e.getElementText("name")!!.intern(),
+    api = e.getAttributeText("api"),
     dispatchable = !e.getElementText("type")!!.contains("NON_DISPATCHABLE"),
 )
 
@@ -276,12 +295,14 @@ private fun extractHandle(e: Element) = Handle(
 /** A struct or union. */
 data class Structure(
     override val name: Identifier,
+    override val api: String? = null,
     val members: List<Member>,
     val structextends: List<Identifier>?,
 ) : Entity
 
 private fun extractStructure(e: Element) = Structure(
     name = e.getAttribute("name").intern(),
+    api = e.getAttributeText("api"),
     members = e.getElements("member", ::extractMember),
     structextends = e.getAttributeText("structextends")?.split(",")?.map { it.intern() },
 )
@@ -289,6 +310,7 @@ private fun extractStructure(e: Element) = Structure(
 /** A struct or union member. */
 data class Member(
     override val name: Identifier,
+    override val api: String? = null,
     val type: Type,
     val values: Identifier?,
     val len: List<Identifier>?,
@@ -299,6 +321,7 @@ data class Member(
 
 private fun extractMember(e: Element) = Member(
     name = e.getElementText("name")!!.intern(),
+    api = e.getAttributeText("api"),
     type = extractType(e.getElement("type")!!),
     values = e.getAttributeText("values")?.intern(),
     len = e.getAttributeText("len")?.split(",")?.map { it.intern() },
@@ -314,11 +337,13 @@ private fun extractMember(e: Element) = Member(
 /** A type alias. */
 data class Typedef(
     override val name: Identifier,
+    override val api: String? = null,
     val type: IdentifierType,
 ) : Entity
 
 private fun extractAlias(e: Element) = Typedef(
     name = e.getAttribute("name").intern(),
+    api = e.getAttributeText("api"),
     type = IdentifierType(e.getAttribute("alias").intern()),
 )
 
@@ -327,6 +352,7 @@ private fun extractBasetype(e: Element): Typedef? {
     val type = e.getElementText("type") ?: return null
     return Typedef(
         name = name.intern(),
+        api = e.getAttributeText("api"),
         type = IdentifierType(type.intern()),
     )
 }
@@ -338,12 +364,14 @@ private fun extractBasetype(e: Element): Typedef? {
 /** A Vulkan version. */
 data class Version(
     override val name: Identifier,
+    override val api: String? = null,
     val number: Float,
     val require: Require,
 ) : Entity
 
 private fun extractVersion(e: Element) = Version(
     name = e.getAttribute("name").intern(),
+    api = e.getAttributeText("api"),
     number = e.getAttribute("number").toFloat(),
     require = extractRequire(e.getElements("require")),
 )
@@ -351,6 +379,7 @@ private fun extractVersion(e: Element) = Version(
 /** A Vulkan extension. */
 data class Extension(
     override val name: Identifier,
+    override val api: String? = null,
     val number: Long,
     val type: String?,
     val author: String,
@@ -368,6 +397,7 @@ data class Extension(
 
 private fun extractExtension(e: Element) = Extension(
     name = e.getAttribute("name").intern(),
+    api = e.getAttributeText("api"),
     number = e.getAttribute("number").toNumber(),
     type = e.getAttributeText("type"),
     author = e.getAttribute("author"),
@@ -407,6 +437,7 @@ private fun extractRequire(es: List<Element>): Require {
 /** An additional bitmask bitflag or enum variant defined by a version or extension. */
 data class RequireValue(
     override val name: Identifier,
+    override val api: String? = null,
     val extends: Identifier,
     val value: Long?,
     val bitpos: Long?,
@@ -427,6 +458,7 @@ private fun extractRequireValue(e: Element): RequireValue? {
 
     return RequireValue(
         name = e.getAttribute("name").intern(),
+        api = e.getAttributeText("api"),
         extends = e.getAttribute("extends").intern(),
         value = value?.toNumber(),
         bitpos = e.getAttributeText("bitpos")?.toNumber(),
@@ -444,6 +476,8 @@ private fun extractRequireValue(e: Element): RequireValue? {
 interface Entity {
     /** The name of this entity. */
     val name: Identifier
+    /** The Vulkan API this entity is for. */
+    val api: String?
 
     /** Renames this entity. */
     fun rename(transform: (name: String) -> String) {
@@ -451,6 +485,9 @@ interface Entity {
             name.rename(transform(name.value))
         }
     }
+
+    /** Gets whether this entity is for the core Vulkan API (and not something like Vulkan SC). */
+    fun isVulkanApi(): Boolean = api == null || api?.split(",")?.contains("vulkan") ?: false
 }
 
 /** Gets and maps all of the entities in this element with the supplied tag. */

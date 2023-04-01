@@ -40,7 +40,7 @@ private fun Registry.generateResultEnum(name: String, documentation: String, pre
         .map { it.copy(name = it.name.value.replace(Regex("^ERROR_"), "").intern()) }
         .toMutableList()
 
-    val enum = Enum(name.intern(), variants)
+    val enum = Enum(name = name.intern(), variants = variants)
 
     return """
 ${generateEnum(enum, documentation = documentation)}
