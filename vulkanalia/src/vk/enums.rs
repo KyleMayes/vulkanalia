@@ -38,6 +38,7 @@ impl SuccessCode {
     pub const THREAD_DONE_KHR: Self = Self(1000268001);
     pub const OPERATION_DEFERRED_KHR: Self = Self(1000268002);
     pub const OPERATION_NOT_DEFERRED_KHR: Self = Self(1000268003);
+    pub const INCOMPATIBLE_SHADER_BINARY_EXT: Self = Self(1000482000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -67,6 +68,7 @@ impl fmt::Debug for SuccessCode {
             1000268001 => write!(f, "THREAD_DONE_KHR"),
             1000268002 => write!(f, "OPERATION_DEFERRED_KHR"),
             1000268003 => write!(f, "OPERATION_NOT_DEFERRED_KHR"),
+            1000482000 => write!(f, "INCOMPATIBLE_SHADER_BINARY_EXT"),
             _ => self.0.fmt(f),
         }
     }

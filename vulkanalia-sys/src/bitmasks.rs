@@ -214,6 +214,7 @@ bitflags! {
         const ALLOW_OPACITY_MICROMAP_UPDATE_EXT = 1 << 6;
         const ALLOW_DISABLE_OPACITY_MICROMAPS_EXT = 1 << 7;
         const ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT = 1 << 8;
+        const ALLOW_DISPLACEMENT_MICROMAP_UPDATE_NV = 1 << 9;
     }
 }
 
@@ -571,6 +572,8 @@ bitflags! {
         const OPAQUE_WIN32 = 1 << 1;
         const OPAQUE_WIN32_KMT = 1 << 2;
         const SYNC_FD = 1 << 3;
+        const SCI_SYNC_OBJ_NV = 1 << 4;
+        const SCI_SYNC_FENCE_NV = 1 << 5;
     }
 }
 
@@ -614,6 +617,7 @@ bitflags! {
         const ANDROID_HARDWARE_BUFFER_ANDROID = 1 << 10;
         const ZIRCON_VMO_FUCHSIA = 1 << 11;
         const RDMA_ADDRESS_NV = 1 << 12;
+        const SCI_BUF_NV = 1 << 13;
     }
 }
 
@@ -649,6 +653,7 @@ bitflags! {
         const OPAQUE_WIN32_KMT = 1 << 2;
         const D3D12_FENCE = 1 << 3;
         const SYNC_FD = 1 << 4;
+        const SCI_SYNC_OBJ_NV = 1 << 5;
         const ZIRCON_EVENT_FUCHSIA = 1 << 7;
     }
 }
@@ -1053,6 +1058,13 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMemoryUnmapFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct MemoryUnmapFlagsKHR: Flags { }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMetalSurfaceCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -1218,6 +1230,7 @@ bitflags! {
         const COLOR_ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 25;
         const DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 26;
         const NO_PROTECTED_ACCESS_EXT = 1 << 27;
+        const RAY_TRACING_DISPLACEMENT_MICROMAP_NV = 1 << 28;
         const DESCRIPTOR_BUFFER_EXT = 1 << 29;
         const PROTECTED_ACCESS_ONLY_EXT = 1 << 30;
     }
@@ -1523,6 +1536,13 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRefreshObjectFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct RefreshObjectFlagsKHR: Flags { }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderPassCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -1621,6 +1641,21 @@ bitflags! {
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ShaderCorePropertiesFlagsAMD: Flags { }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderCreateFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct ShaderCreateFlagsEXT: Flags {
+        const LINK_STAGE = 1;
+        const ALLOW_VARYING_SUBGROUP_SIZE = 1 << 1;
+        const REQUIRE_FULL_SUBGROUPS = 1 << 2;
+        const NO_TASK_SHADER = 1 << 3;
+        const DISPATCH_BASE = 1 << 4;
+        const FRAGMENT_SHADING_RATE_ATTACHMENT = 1 << 5;
+        const FRAGMENT_DENSITY_MAP_ATTACHMENT = 1 << 6;
+    }
 }
 
 bitflags! {

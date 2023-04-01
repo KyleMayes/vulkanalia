@@ -117,30 +117,6 @@ pub trait InstanceV1_0 {
 
     fn handle(&self) -> Instance;
 
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateDevice.html>
-    #[inline]
-    unsafe fn create_device(
-        &self,
-        physical_device: PhysicalDevice,
-        create_info: &DeviceCreateInfo,
-        allocator: Option<&AllocationCallbacks>,
-    ) -> crate::VkResult<Device> {
-        let mut device = MaybeUninit::<Device>::uninit();
-
-        let __result = (self.commands().create_device)(
-            physical_device,
-            create_info,
-            allocator.map_or(ptr::null(), |v| v),
-            device.as_mut_ptr(),
-        );
-
-        if __result == Result::SUCCESS {
-            Ok(device.assume_init())
-        } else {
-            Err(__result.into())
-        }
-    }
-
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkDestroyInstance.html>
     #[inline]
     unsafe fn destroy_instance(&self, allocator: Option<&AllocationCallbacks>) {
@@ -169,38 +145,6 @@ pub trait InstanceV1_0 {
         let __result = (self.commands().enumerate_device_extension_properties)(
             physical_device,
             layer_name.map_or(ptr::null(), |v| v.as_ptr().cast()),
-            &mut property_count,
-            properties.as_mut_ptr(),
-        );
-
-        debug_assert!(properties.capacity() == property_count as usize);
-        properties.set_len(property_count as usize);
-
-        if __result == Result::SUCCESS {
-            Ok(properties)
-        } else {
-            Err(__result.into())
-        }
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkEnumerateDeviceLayerProperties.html>
-    #[inline]
-    unsafe fn enumerate_device_layer_properties(
-        &self,
-        physical_device: PhysicalDevice,
-    ) -> crate::VkResult<Vec<LayerProperties>> {
-        let mut property_count = 0;
-
-        (self.commands().enumerate_device_layer_properties)(
-            physical_device,
-            &mut property_count,
-            ptr::null_mut(),
-        );
-
-        let mut properties = Vec::with_capacity(property_count as usize);
-
-        let __result = (self.commands().enumerate_device_layer_properties)(
-            physical_device,
             &mut property_count,
             properties.as_mut_ptr(),
         );
@@ -1338,32 +1282,6 @@ pub trait DeviceV1_0 {
         }
     }
 
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateComputePipelines.html>
-    #[inline]
-    unsafe fn create_compute_pipelines(
-        &self,
-        pipeline_cache: PipelineCache,
-        create_infos: &[impl Cast<Target = ComputePipelineCreateInfo>],
-        allocator: Option<&AllocationCallbacks>,
-    ) -> crate::VkSuccessResult<Pipeline> {
-        let mut pipelines = MaybeUninit::<Pipeline>::uninit();
-
-        let __result = (self.commands().create_compute_pipelines)(
-            self.handle(),
-            pipeline_cache,
-            create_infos.len() as u32,
-            create_infos.as_ptr().cast(),
-            allocator.map_or(ptr::null(), |v| v),
-            pipelines.as_mut_ptr(),
-        );
-
-        if __result >= Result::SUCCESS {
-            Ok((pipelines.assume_init(), __result.into()))
-        } else {
-            Err(__result.into())
-        }
-    }
-
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateDescriptorPool.html>
     #[inline]
     unsafe fn create_descriptor_pool(
@@ -1479,32 +1397,6 @@ pub trait DeviceV1_0 {
         }
     }
 
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateGraphicsPipelines.html>
-    #[inline]
-    unsafe fn create_graphics_pipelines(
-        &self,
-        pipeline_cache: PipelineCache,
-        create_infos: &[impl Cast<Target = GraphicsPipelineCreateInfo>],
-        allocator: Option<&AllocationCallbacks>,
-    ) -> crate::VkSuccessResult<Pipeline> {
-        let mut pipelines = MaybeUninit::<Pipeline>::uninit();
-
-        let __result = (self.commands().create_graphics_pipelines)(
-            self.handle(),
-            pipeline_cache,
-            create_infos.len() as u32,
-            create_infos.as_ptr().cast(),
-            allocator.map_or(ptr::null(), |v| v),
-            pipelines.as_mut_ptr(),
-        );
-
-        if __result >= Result::SUCCESS {
-            Ok((pipelines.assume_init(), __result.into()))
-        } else {
-            Err(__result.into())
-        }
-    }
-
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateImage.html>
     #[inline]
     unsafe fn create_image(
@@ -1546,29 +1438,6 @@ pub trait DeviceV1_0 {
 
         if __result == Result::SUCCESS {
             Ok(view.assume_init())
-        } else {
-            Err(__result.into())
-        }
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreatePipelineCache.html>
-    #[inline]
-    unsafe fn create_pipeline_cache(
-        &self,
-        create_info: &PipelineCacheCreateInfo,
-        allocator: Option<&AllocationCallbacks>,
-    ) -> crate::VkResult<PipelineCache> {
-        let mut pipeline_cache = MaybeUninit::<PipelineCache>::uninit();
-
-        let __result = (self.commands().create_pipeline_cache)(
-            self.handle(),
-            create_info,
-            allocator.map_or(ptr::null(), |v| v),
-            pipeline_cache.as_mut_ptr(),
-        );
-
-        if __result == Result::SUCCESS {
-            Ok(pipeline_cache.assume_init())
         } else {
             Err(__result.into())
         }
