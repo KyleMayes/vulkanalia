@@ -50,7 +50,7 @@ fun extractEntities(e: Element): Registry {
 
     // Extract the commands and command aliases.
 
-    val commands = e.queryEntities("commands/command[not(@alias)]", ::extractCommand).toMutableMap()
+    val commands = e.queryEntities("commands/command[not(@alias) and (not(@api) or @api='vulkan')]", ::extractCommand).toMutableMap()
     val commandAliases = e.queryElements("commands/command[@alias]").associate {
         val name = it.getAttribute("name").intern()
         val alias = it.getAttribute("alias").intern()
