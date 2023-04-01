@@ -60,6 +60,7 @@ pub struct DeviceCommands {
     pub cmd_bind_invocation_mask_huawei: PFN_vkCmdBindInvocationMaskHUAWEI,
     pub cmd_bind_pipeline: PFN_vkCmdBindPipeline,
     pub cmd_bind_pipeline_shader_group_nv: PFN_vkCmdBindPipelineShaderGroupNV,
+    pub cmd_bind_shaders_ext: PFN_vkCmdBindShadersEXT,
     pub cmd_bind_shading_rate_image_nv: PFN_vkCmdBindShadingRateImageNV,
     pub cmd_bind_transform_feedback_buffers_ext: PFN_vkCmdBindTransformFeedbackBuffersEXT,
     pub cmd_bind_vertex_buffers: PFN_vkCmdBindVertexBuffers,
@@ -154,6 +155,7 @@ pub struct DeviceCommands {
     pub cmd_push_constants: PFN_vkCmdPushConstants,
     pub cmd_push_descriptor_set_khr: PFN_vkCmdPushDescriptorSetKHR,
     pub cmd_push_descriptor_set_with_template_khr: PFN_vkCmdPushDescriptorSetWithTemplateKHR,
+    pub cmd_refresh_objects_khr: PFN_vkCmdRefreshObjectsKHR,
     pub cmd_reset_event: PFN_vkCmdResetEvent,
     pub cmd_reset_event2: PFN_vkCmdResetEvent2,
     pub cmd_reset_event2_khr: PFN_vkCmdResetEvent2KHR,
@@ -199,9 +201,12 @@ pub struct DeviceCommands {
     pub cmd_set_device_mask: PFN_vkCmdSetDeviceMask,
     pub cmd_set_device_mask_khr: PFN_vkCmdSetDeviceMaskKHR,
     pub cmd_set_discard_rectangle_ext: PFN_vkCmdSetDiscardRectangleEXT,
+    pub cmd_set_discard_rectangle_enable_ext: PFN_vkCmdSetDiscardRectangleEnableEXT,
+    pub cmd_set_discard_rectangle_mode_ext: PFN_vkCmdSetDiscardRectangleModeEXT,
     pub cmd_set_event: PFN_vkCmdSetEvent,
     pub cmd_set_event2: PFN_vkCmdSetEvent2,
     pub cmd_set_event2_khr: PFN_vkCmdSetEvent2KHR,
+    pub cmd_set_exclusive_scissor_enable_nv: PFN_vkCmdSetExclusiveScissorEnableNV,
     pub cmd_set_exclusive_scissor_nv: PFN_vkCmdSetExclusiveScissorNV,
     pub cmd_set_extra_primitive_overestimation_size_ext:
         PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT,
@@ -318,7 +323,9 @@ pub struct DeviceCommands {
     pub create_sampler_ycbcr_conversion: PFN_vkCreateSamplerYcbcrConversion,
     pub create_sampler_ycbcr_conversion_khr: PFN_vkCreateSamplerYcbcrConversionKHR,
     pub create_semaphore: PFN_vkCreateSemaphore,
+    pub create_semaphore_sci_sync_pool_nv: PFN_vkCreateSemaphoreSciSyncPoolNV,
     pub create_shader_module: PFN_vkCreateShaderModule,
+    pub create_shaders_ext: PFN_vkCreateShadersEXT,
     pub create_shared_swapchains_khr: PFN_vkCreateSharedSwapchainsKHR,
     pub create_swapchain_khr: PFN_vkCreateSwapchainKHR,
     pub create_validation_cache_ext: PFN_vkCreateValidationCacheEXT,
@@ -358,6 +365,8 @@ pub struct DeviceCommands {
     pub destroy_sampler_ycbcr_conversion: PFN_vkDestroySamplerYcbcrConversion,
     pub destroy_sampler_ycbcr_conversion_khr: PFN_vkDestroySamplerYcbcrConversionKHR,
     pub destroy_semaphore: PFN_vkDestroySemaphore,
+    pub destroy_semaphore_sci_sync_pool_nv: PFN_vkDestroySemaphoreSciSyncPoolNV,
+    pub destroy_shader_ext: PFN_vkDestroyShaderEXT,
     pub destroy_shader_module: PFN_vkDestroyShaderModule,
     pub destroy_swapchain_khr: PFN_vkDestroySwapchainKHR,
     pub destroy_validation_cache_ext: PFN_vkDestroyValidationCacheEXT,
@@ -429,6 +438,8 @@ pub struct DeviceCommands {
     pub get_dynamic_rendering_tile_properties_qcom: PFN_vkGetDynamicRenderingTilePropertiesQCOM,
     pub get_event_status: PFN_vkGetEventStatus,
     pub get_fence_fd_khr: PFN_vkGetFenceFdKHR,
+    pub get_fence_sci_sync_fence_nv: PFN_vkGetFenceSciSyncFenceNV,
+    pub get_fence_sci_sync_obj_nv: PFN_vkGetFenceSciSyncObjNV,
     pub get_fence_status: PFN_vkGetFenceStatus,
     pub get_fence_win32_handle_khr: PFN_vkGetFenceWin32HandleKHR,
     pub get_framebuffer_tile_properties_qcom: PFN_vkGetFramebufferTilePropertiesQCOM,
@@ -453,6 +464,7 @@ pub struct DeviceCommands {
     pub get_memory_fd_properties_khr: PFN_vkGetMemoryFdPropertiesKHR,
     pub get_memory_host_pointer_properties_ext: PFN_vkGetMemoryHostPointerPropertiesEXT,
     pub get_memory_remote_address_nv: PFN_vkGetMemoryRemoteAddressNV,
+    pub get_memory_sci_buf_nv: PFN_vkGetMemorySciBufNV,
     pub get_memory_win32_handle_khr: PFN_vkGetMemoryWin32HandleKHR,
     pub get_memory_win32_handle_nv: PFN_vkGetMemoryWin32HandleNV,
     pub get_memory_win32_handle_properties_khr: PFN_vkGetMemoryWin32HandlePropertiesKHR,
@@ -465,6 +477,8 @@ pub struct DeviceCommands {
         PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT,
     pub get_physical_device_cooperative_matrix_properties_nv:
         PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV,
+    pub get_physical_device_external_memory_sci_buf_properties_nv:
+        PFN_vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV,
     pub get_physical_device_fragment_shading_rates_khr:
         PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR,
     pub get_physical_device_multisample_properties_ext:
@@ -474,6 +488,10 @@ pub struct DeviceCommands {
     pub get_physical_device_present_rectangles_khr: PFN_vkGetPhysicalDevicePresentRectanglesKHR,
     pub get_physical_device_queue_family_performance_query_passes_khr:
         PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR,
+    pub get_physical_device_refreshable_object_types_khr:
+        PFN_vkGetPhysicalDeviceRefreshableObjectTypesKHR,
+    pub get_physical_device_sci_buf_attributes_nv: PFN_vkGetPhysicalDeviceSciBufAttributesNV,
+    pub get_physical_device_sci_sync_attributes_nv: PFN_vkGetPhysicalDeviceSciSyncAttributesNV,
     pub get_physical_device_supported_framebuffer_mixed_samples_combinations_nv:
         PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV,
     pub get_physical_device_surface_present_modes2_ext:
@@ -502,8 +520,10 @@ pub struct DeviceCommands {
     pub get_semaphore_counter_value: PFN_vkGetSemaphoreCounterValue,
     pub get_semaphore_counter_value_khr: PFN_vkGetSemaphoreCounterValueKHR,
     pub get_semaphore_fd_khr: PFN_vkGetSemaphoreFdKHR,
+    pub get_semaphore_sci_sync_obj_nv: PFN_vkGetSemaphoreSciSyncObjNV,
     pub get_semaphore_win32_handle_khr: PFN_vkGetSemaphoreWin32HandleKHR,
     pub get_semaphore_zircon_handle_fuchsia: PFN_vkGetSemaphoreZirconHandleFUCHSIA,
+    pub get_shader_binary_data_ext: PFN_vkGetShaderBinaryDataEXT,
     pub get_shader_info_amd: PFN_vkGetShaderInfoAMD,
     pub get_shader_module_create_info_identifier_ext: PFN_vkGetShaderModuleCreateInfoIdentifierEXT,
     pub get_shader_module_identifier_ext: PFN_vkGetShaderModuleIdentifierEXT,
@@ -513,13 +533,17 @@ pub struct DeviceCommands {
     pub get_validation_cache_data_ext: PFN_vkGetValidationCacheDataEXT,
     pub get_winrt_display_nv: PFN_vkGetWinrtDisplayNV,
     pub import_fence_fd_khr: PFN_vkImportFenceFdKHR,
+    pub import_fence_sci_sync_fence_nv: PFN_vkImportFenceSciSyncFenceNV,
+    pub import_fence_sci_sync_obj_nv: PFN_vkImportFenceSciSyncObjNV,
     pub import_fence_win32_handle_khr: PFN_vkImportFenceWin32HandleKHR,
     pub import_semaphore_fd_khr: PFN_vkImportSemaphoreFdKHR,
+    pub import_semaphore_sci_sync_obj_nv: PFN_vkImportSemaphoreSciSyncObjNV,
     pub import_semaphore_win32_handle_khr: PFN_vkImportSemaphoreWin32HandleKHR,
     pub import_semaphore_zircon_handle_fuchsia: PFN_vkImportSemaphoreZirconHandleFUCHSIA,
     pub initialize_performance_api_intel: PFN_vkInitializePerformanceApiINTEL,
     pub invalidate_mapped_memory_ranges: PFN_vkInvalidateMappedMemoryRanges,
     pub map_memory: PFN_vkMapMemory,
+    pub map_memory2_khr: PFN_vkMapMemory2KHR,
     pub merge_pipeline_caches: PFN_vkMergePipelineCaches,
     pub merge_validation_caches_ext: PFN_vkMergeValidationCachesEXT,
     pub queue_bind_sparse: PFN_vkQueueBindSparse,
@@ -558,6 +582,7 @@ pub struct DeviceCommands {
     pub trim_command_pool_khr: PFN_vkTrimCommandPoolKHR,
     pub uninitialize_performance_api_intel: PFN_vkUninitializePerformanceApiINTEL,
     pub unmap_memory: PFN_vkUnmapMemory,
+    pub unmap_memory2_khr: PFN_vkUnmapMemory2KHR,
     pub update_descriptor_set_with_template: PFN_vkUpdateDescriptorSetWithTemplate,
     pub update_descriptor_set_with_template_khr: PFN_vkUpdateDescriptorSetWithTemplateKHR,
     pub update_descriptor_sets: PFN_vkUpdateDescriptorSets,
@@ -1133,6 +1158,22 @@ impl DeviceCommands {
                         _group_index: u32,
                     ) {
                         panic!("could not load vkCmdBindPipelineShaderGroupNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_bind_shaders_ext: {
+                let value = loader(b"vkCmdBindShadersEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _stage_count: u32,
+                        _stages: *const ShaderStageFlags,
+                        _shaders: *const ShaderEXT,
+                    ) {
+                        panic!("could not load vkCmdBindShadersEXT")
                     }
                     fallback
                 }
@@ -2616,6 +2657,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_refresh_objects_khr: {
+                let value = loader(b"vkCmdRefreshObjectsKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _refresh_objects: *const RefreshObjectListKHR,
+                    ) {
+                        panic!("could not load vkCmdRefreshObjectsKHR")
+                    }
+                    fallback
+                }
+            },
             cmd_reset_event: {
                 let value = loader(b"vkCmdResetEvent\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -3282,6 +3337,34 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_discard_rectangle_enable_ext: {
+                let value = loader(b"vkCmdSetDiscardRectangleEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _discard_rectangle_enable: Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetDiscardRectangleEnableEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_discard_rectangle_mode_ext: {
+                let value = loader(b"vkCmdSetDiscardRectangleModeEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _discard_rectangle_mode: DiscardRectangleModeEXT,
+                    ) {
+                        panic!("could not load vkCmdSetDiscardRectangleModeEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_event: {
                 let value = loader(b"vkCmdSetEvent\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -3323,6 +3406,22 @@ impl DeviceCommands {
                         _dependency_info: *const DependencyInfo,
                     ) {
                         panic!("could not load vkCmdSetEvent2KHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_exclusive_scissor_enable_nv: {
+                let value = loader(b"vkCmdSetExclusiveScissorEnableNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _first_exclusive_scissor: u32,
+                        _exclusive_scissor_count: u32,
+                        _exclusive_scissor_enables: *const Bool32,
+                    ) {
+                        panic!("could not load vkCmdSetExclusiveScissorEnableNV")
                     }
                     fallback
                 }
@@ -5094,6 +5193,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            create_semaphore_sci_sync_pool_nv: {
+                let value = loader(b"vkCreateSemaphoreSciSyncPoolNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const SemaphoreSciSyncPoolCreateInfoNV,
+                        _allocator: *const AllocationCallbacks,
+                        _semaphore_pool: *mut SemaphoreSciSyncPoolNV,
+                    ) -> Result {
+                        panic!("could not load vkCreateSemaphoreSciSyncPoolNV")
+                    }
+                    fallback
+                }
+            },
             create_shader_module: {
                 let value = loader(b"vkCreateShaderModule\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -5106,6 +5221,23 @@ impl DeviceCommands {
                         _shader_module: *mut ShaderModule,
                     ) -> Result {
                         panic!("could not load vkCreateShaderModule")
+                    }
+                    fallback
+                }
+            },
+            create_shaders_ext: {
+                let value = loader(b"vkCreateShadersEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info_count: u32,
+                        _create_infos: *const ShaderCreateInfoEXT,
+                        _allocator: *const AllocationCallbacks,
+                        _shaders: *mut ShaderEXT,
+                    ) -> Result {
+                        panic!("could not load vkCreateShadersEXT")
                     }
                     fallback
                 }
@@ -5691,6 +5823,36 @@ impl DeviceCommands {
                         _allocator: *const AllocationCallbacks,
                     ) {
                         panic!("could not load vkDestroySemaphore")
+                    }
+                    fallback
+                }
+            },
+            destroy_semaphore_sci_sync_pool_nv: {
+                let value = loader(b"vkDestroySemaphoreSciSyncPoolNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _semaphore_pool: SemaphoreSciSyncPoolNV,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroySemaphoreSciSyncPoolNV")
+                    }
+                    fallback
+                }
+            },
+            destroy_shader_ext: {
+                let value = loader(b"vkDestroyShaderEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _shader: ShaderEXT,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyShaderEXT")
                     }
                     fallback
                 }
@@ -6656,6 +6818,36 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_fence_sci_sync_fence_nv: {
+                let value = loader(b"vkGetFenceSciSyncFenceNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _get_sci_sync_handle_info: *const FenceGetSciSyncInfoNV,
+                        _handle: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetFenceSciSyncFenceNV")
+                    }
+                    fallback
+                }
+            },
+            get_fence_sci_sync_obj_nv: {
+                let value = loader(b"vkGetFenceSciSyncObjNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _get_sci_sync_handle_info: *const FenceGetSciSyncInfoNV,
+                        _handle: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetFenceSciSyncObjNV")
+                    }
+                    fallback
+                }
+            },
             get_fence_status: {
                 let value = loader(b"vkGetFenceStatus\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -7005,6 +7197,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_memory_sci_buf_nv: {
+                let value = loader(b"vkGetMemorySciBufNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _get_sci_buf_info: *const MemoryGetSciBufInfoNV,
+                        _handle: *mut NvSciBufObj,
+                    ) -> Result {
+                        panic!("could not load vkGetMemorySciBufNV")
+                    }
+                    fallback
+                }
+            },
             get_memory_win32_handle_khr: {
                 let value = loader(b"vkGetMemoryWin32HandleKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -7172,6 +7379,26 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_physical_device_external_memory_sci_buf_properties_nv: {
+                let value = loader(
+                    b"vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _handle_type: ExternalMemoryHandleTypeFlags,
+                        _handle: NvSciBufObj,
+                        _memory_sci_buf_properties: *mut MemorySciBufPropertiesNV,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV")
+                    }
+                    fallback
+                }
+            },
             get_physical_device_fragment_shading_rates_khr: {
                 let value = loader(
                     b"vkGetPhysicalDeviceFragmentShadingRatesKHR\0"
@@ -7261,6 +7488,54 @@ impl DeviceCommands {
                         _num_passes: *mut u32,
                     ) {
                         panic!("could not load vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_refreshable_object_types_khr: {
+                let value = loader(
+                    b"vkGetPhysicalDeviceRefreshableObjectTypesKHR\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _refreshable_object_type_count: *mut u32,
+                        _refreshable_object_types: *mut ObjectType,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceRefreshableObjectTypesKHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_sci_buf_attributes_nv: {
+                let value = loader(b"vkGetPhysicalDeviceSciBufAttributesNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _attributes: NvSciBufAttrList,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceSciBufAttributesNV")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_sci_sync_attributes_nv: {
+                let value = loader(b"vkGetPhysicalDeviceSciSyncAttributesNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _sci_sync_attributes_info: *const SciSyncAttributesInfoNV,
+                        _attributes: NvSciSyncAttrList,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceSciSyncAttributesNV")
                     }
                     fallback
                 }
@@ -7654,6 +7929,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_semaphore_sci_sync_obj_nv: {
+                let value = loader(b"vkGetSemaphoreSciSyncObjNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _get_sci_sync_info: *const SemaphoreGetSciSyncInfoNV,
+                        _handle: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetSemaphoreSciSyncObjNV")
+                    }
+                    fallback
+                }
+            },
             get_semaphore_win32_handle_khr: {
                 let value = loader(b"vkGetSemaphoreWin32HandleKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -7680,6 +7970,22 @@ impl DeviceCommands {
                         _zircon_handle: *mut zx_handle_t,
                     ) -> Result {
                         panic!("could not load vkGetSemaphoreZirconHandleFUCHSIA")
+                    }
+                    fallback
+                }
+            },
+            get_shader_binary_data_ext: {
+                let value = loader(b"vkGetShaderBinaryDataEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _shader: ShaderEXT,
+                        _data_size: *mut usize,
+                        _data: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetShaderBinaryDataEXT")
                     }
                     fallback
                 }
@@ -7827,6 +8133,34 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            import_fence_sci_sync_fence_nv: {
+                let value = loader(b"vkImportFenceSciSyncFenceNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _import_fence_sci_sync_info: *const ImportFenceSciSyncInfoNV,
+                    ) -> Result {
+                        panic!("could not load vkImportFenceSciSyncFenceNV")
+                    }
+                    fallback
+                }
+            },
+            import_fence_sci_sync_obj_nv: {
+                let value = loader(b"vkImportFenceSciSyncObjNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _import_fence_sci_sync_info: *const ImportFenceSciSyncInfoNV,
+                    ) -> Result {
+                        panic!("could not load vkImportFenceSciSyncObjNV")
+                    }
+                    fallback
+                }
+            },
             import_fence_win32_handle_khr: {
                 let value = loader(b"vkImportFenceWin32HandleKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -7851,6 +8185,20 @@ impl DeviceCommands {
                         _import_semaphore_fd_info: *const ImportSemaphoreFdInfoKHR,
                     ) -> Result {
                         panic!("could not load vkImportSemaphoreFdKHR")
+                    }
+                    fallback
+                }
+            },
+            import_semaphore_sci_sync_obj_nv: {
+                let value = loader(b"vkImportSemaphoreSciSyncObjNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _import_semaphore_sci_sync_info: *const ImportSemaphoreSciSyncInfoNV,
+                    ) -> Result {
+                        panic!("could not load vkImportSemaphoreSciSyncObjNV")
                     }
                     fallback
                 }
@@ -7926,6 +8274,21 @@ impl DeviceCommands {
                         _data: *mut *mut c_void,
                     ) -> Result {
                         panic!("could not load vkMapMemory")
+                    }
+                    fallback
+                }
+            },
+            map_memory2_khr: {
+                let value = loader(b"vkMapMemory2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _memory_map_info: *const MemoryMapInfoKHR,
+                        _data: *mut *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkMapMemory2KHR")
                     }
                     fallback
                 }
@@ -8458,6 +8821,20 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(_device: Device, _memory: DeviceMemory) {
                         panic!("could not load vkUnmapMemory")
+                    }
+                    fallback
+                }
+            },
+            unmap_memory2_khr: {
+                let value = loader(b"vkUnmapMemory2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _memory_unmap_info: *const MemoryUnmapInfoKHR,
+                    ) -> Result {
+                        panic!("could not load vkUnmapMemory2KHR")
                     }
                     fallback
                 }
