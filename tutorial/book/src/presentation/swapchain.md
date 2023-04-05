@@ -30,7 +30,7 @@ unsafe fn check_physical_device(
 ) -> Result<()> {
     QueueFamilyIndices::get(instance, data, physical_device)?;
     check_physical_device_extensions(instance, physical_device)?;
-    Ok(extensions)
+    Ok(())
 }
 
 unsafe fn check_physical_device_extensions(
