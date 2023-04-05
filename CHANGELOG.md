@@ -1,4 +1,4 @@
-## [0.18.0] - UNRELEASED
+## [0.18.0] - 2023-04-04
 
 ### Changed
 - Changed `vk_window::create_surface` to take [separated `raw-window-handle` traits](https://github.com/KyleMayes/vulkanalia/pull/130)
