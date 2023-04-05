@@ -57,7 +57,7 @@ The `vk_window::create_surface` function performs exactly this operation with a 
 unsafe fn create(window: &Window) -> Result<Self> {
     // ...
     let instance = create_instance(window, &entry, &mut data)?;
-    data.surface = vk_window::create_surface(&instance, window)?;
+    data.surface = vk_window::create_surface(&instance, &window, &window)?;
     pick_physical_device(&instance, &mut data)?;
     // ...
 }
