@@ -22,5 +22,5 @@ log = "0.4"
 nalgebra-glm = "0.10"
 pretty_env_logger = "0.4"
 thiserror = "1"
-vulkanalia = { path = "../vulkanalia", features = ["libloading", "window"] }
+vulkanalia = { path = "../vulkanalia", features = ["libloading", "provisional", "window"] }
 winit = "0.28.1"

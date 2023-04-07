@@ -6,16 +6,28 @@ The very first thing you will want to do is initialize the Vulkan library by cre
 
 ```rust,noplaypen
 use anyhow::{anyhow, Result};
+use log::*;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::window as vk_window;
 use vulkanalia::prelude::v1_0::*;
+use vulkanalia::Version;
 ```
 
-Here we first add the [`anyhow!`](https://docs.rs/anyhow/latest/anyhow/macro.anyhow.html) macro to our imports from `anyhow`. This macro will be used to easily construct instances of `anyhow` errors. Next, we import `LibloadingLoader` which serves as `vulkanalia`'s `libloading` integration which we will use to load the initial Vulkan commands from the Vulkan shared library. The standard name of the Vulkan shared library on your operating system (e.g., `vulkan-1.dll` on Windows) is then imported as `LIBRARY`.
+Here we first add the [`anyhow!`](https://docs.rs/anyhow/latest/anyhow/macro.anyhow.html) macro to our imports from `anyhow`. This macro will be used to easily construct instances of `anyhow` errors. Then, we import `log::*` so we can use the logging macros from the `log` crate. Next, we import `LibloadingLoader` which serves as `vulkanalia`'s `libloading` integration which we will use to load the initial Vulkan commands from the Vulkan shared library. The standard name of the Vulkan shared library on your operating system (e.g., `vulkan-1.dll` on Windows) is then imported as `LIBRARY`.
 
 Next we import `vulkanalia`'s window integration as `vk_window` which in this chapter we will use to enumerate the global Vulkan extensions required to render to a window. In a future chapter we will also use `vk_window` to link our Vulkan instance with our `winit` window.
 
-Lastly we import the Vulkan 1.0 prelude from `vulkanalia` which will provide all of the other Vulkan-related imports we will need for this and future chapters.
+Then we import the Vulkan 1.0 prelude from `vulkanalia` which will provide all of the other Vulkan-related imports we will need for this and future chapters.
+
+Lastly we import the Vulkan SDK version structure from `vulkanalia`, `Version`. This will be used to define a constant which will be used to enable some extensions depending on the target platform and the Vulkan SDK version.
+
+With these imports in place, first we'll define a constant that will come in handy later before moving on to some real code:
+
+```rust,noplaypen
+const PORTABILITY_MACOS_VERSION: Version = Version::new(1, 3, 216);
+```
+
+> The Vulkan SDK started requiring a portability extension ([`VK_KHR_PORTABILITY_subset`](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_KHR_portability_subset.html)) on macOS since this Vulkan version. There is not a true Vulkan driver on macOS, Vulkan is instead implemented on macOS as a layer over Apple's low-level graphics API, [Metal](https://en.wikipedia.org/wiki/Metal_(API)). This implementation is [not fully conformant with the Vulkan standard](https://www.lunarg.com/wp-content/uploads/2022/05/The-State-of-Vulkan-on-Apple-15APR2022.pdf) so this extension is essentially just an acknowledgement from the developer that things will behave somewhat differently from what the Vulkan standard says.
 
 Now, to create an instance we'll next have to fill in a struct with some information about our application. This data is technically optional, but it may provide some useful information to the driver in order to optimize our specific application (e.g., because it uses a well-known graphics engine with certain special behavior). This struct is called `vk::ApplicationInfo` and we'll create it in a new function called `^create_instance` that takes our window and a Vulkan entry point (which we will create later) and returns a Vulkan instance:
 
@@ -102,11 +114,12 @@ let mut extensions = vk_window::get_required_instance_extensions(window)
     .map(|e| e.as_ptr())
     .collect::<Vec<_>>();
 
-let flags = if entry
-    .enumerate_instance_extension_properties(None)?
-    .iter()
-    .any(|e| e.extension_name == vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name)
+let flags = if 
+    cfg!(target_os = "macos") && 
+    entry.version()? >= PORTABILITY_MACOS_VERSION
 {
+    info!("Enabling extensions for macOS portability.");
+    extensions.push(vk::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name.as_ptr());
     extensions.push(vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name.as_ptr());
     vk::InstanceCreateFlags::ENUMERATE_PORTABILITY_KHR
 } else {
@@ -119,9 +132,11 @@ let info = vk::InstanceCreateInfo::builder()
     .flags(flags);
 ```
 
-This code automatically enables `KHR_PORTABILITY_ENUMERATION_EXTENSION` if it is supported and sets a related instance creation flag. As mentioned in the [Getting Started](https://vulkan.lunarg.com/doc/sdk/1.3.216.0/mac/getting_started.html) guide for the macOS Vulkan SDK, this extension is required to permit selection of Vulkan implementations that are not fully conformant to the Vulkan specification.
+This code enables `KHR_PORTABILITY_ENUMERATION_EXTENSION` if it is required by the target platform and the Vulkan SDK version. As mentioned in the [Getting Started](https://vulkan.lunarg.com/doc/sdk/1.3.216.0/mac/getting_started.html) guide for the macOS Vulkan SDK, this extension is required to permit selection of Vulkan implementations that are not fully conformant to the Vulkan specification.
 
-The Vulkan implementation used on macOS, [MoltenVK](https://github.com/KhronosGroup/MoltenVK), is [not fully conformant](https://www.lunarg.com/wp-content/uploads/2022/05/The-State-of-Vulkan-on-Apple-15APR2022.pdf) and therefore requires this extension to be usable.
+As mentioned previously, the Vulkan implementation used on macOS, [MoltenVK](https://github.com/KhronosGroup/MoltenVK), is [not fully conformant](https://www.lunarg.com/wp-content/uploads/2022/05/The-State-of-Vulkan-on-Apple-15APR2022.pdf) and therefore requires this extension.
+
+This code also enables `KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION` under the same conditions. This extension is needed to enable the `KHR_PORTABILITY_SUBSET_EXTENSION` device extension later in the tutorial.
 
 ## `Instance` vs `vk::Instance`
 
