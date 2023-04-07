@@ -166,8 +166,6 @@
 use std::ffi::CStr;
 use std::os::raw::c_void;
 
-use log::*;
-
 use vulkanalia::vk::ExtDebugUtilsExtension;
 </code></pre>
 <p><code>HashSet</code> will be used for storing and querying supported layers and the other imports will be used in the function we will be writing to log messages from the validation layer with the exception of <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.ExtDebugUtilsExtension.html"><code class="hljs">vk::ExtDebugUtilsExtension</code></a> which provides the command wrappers for managing debugging functionality.</p>

@@ -366,13 +366,13 @@ use vulkanalia::prelude::v1_2::*;
 <pre><code class="language-toml">anyhow = &quot;1&quot;
 lazy_static = &quot;1&quot;
 log = &quot;0.4&quot;
-nalgebra-glm = &quot;0.17&quot;
+nalgebra-glm = &quot;0.18&quot;
 png = &quot;0.17&quot;
 pretty_env_logger = &quot;0.4&quot;
 thiserror = &quot;1&quot;
 tobj = { version = &quot;3&quot;, features = [&quot;log&quot;] }
-vulkanalia = { version = &quot;=0.16.0&quot;, features = [&quot;libloading&quot;, &quot;window&quot;] }
-winit = &quot;0.27&quot;
+vulkanalia = { version = &quot;=0.18.0&quot;, features = [&quot;libloading&quot;, &quot;provisional&quot;, &quot;window&quot;] }
+winit = &quot;0.28&quot;
 </code></pre>
 <ul>
 <li><code>anyhow</code> – used for simple error handling</li>
@@ -522,13 +522,22 @@ struct AppData {}
 <p><strong>Code:</strong> <a href="https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/01_instance_creation.rs">main.rs</a></p>
 <p>The very first thing you will want to do is initialize the Vulkan library by creating an <em>instance</em>. The instance is the connection between your application and the Vulkan library and creating it involves specifying some details about your application to the driver. To get started, add the following imports:</p>
 <pre><code class="language-rust noplaypen">use anyhow::{anyhow, Result};
+use log::*;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::window as vk_window;
 use vulkanalia::prelude::v1_0::*;
+use vulkanalia::Version;
 </code></pre>
-<p>Here we first add the <a href="https://docs.rs/anyhow/latest/anyhow/macro.anyhow.html"><code>anyhow!</code></a> macro to our imports from <code>anyhow</code>. This macro will be used to easily construct instances of <code>anyhow</code> errors. Next, we import <code>LibloadingLoader</code> which serves as <code>vulkanalia</code>'s <code>libloading</code> integration which we will use to load the initial Vulkan commands from the Vulkan shared library. The standard name of the Vulkan shared library on your operating system (e.g., <code>vulkan-1.dll</code> on Windows) is then imported as <code>LIBRARY</code>.</p>
+<p>Here we first add the <a href="https://docs.rs/anyhow/latest/anyhow/macro.anyhow.html"><code>anyhow!</code></a> macro to our imports from <code>anyhow</code>. This macro will be used to easily construct instances of <code>anyhow</code> errors. Then, we import <code>log::*</code> so we can use the logging macros from the <code>log</code> crate. Next, we import <code>LibloadingLoader</code> which serves as <code>vulkanalia</code>'s <code>libloading</code> integration which we will use to load the initial Vulkan commands from the Vulkan shared library. The standard name of the Vulkan shared library on your operating system (e.g., <code>vulkan-1.dll</code> on Windows) is then imported as <code>LIBRARY</code>.</p>
 <p>Next we import <code>vulkanalia</code>'s window integration as <code>vk_window</code> which in this chapter we will use to enumerate the global Vulkan extensions required to render to a window. In a future chapter we will also use <code>vk_window</code> to link our Vulkan instance with our <code>winit</code> window.</p>
-<p>Lastly we import the Vulkan 1.0 prelude from <code>vulkanalia</code> which will provide all of the other Vulkan-related imports we will need for this and future chapters.</p>
+<p>Then we import the Vulkan 1.0 prelude from <code>vulkanalia</code> which will provide all of the other Vulkan-related imports we will need for this and future chapters.</p>
+<p>Lastly we import the Vulkan SDK version structure from <code>vulkanalia</code>, <code>Version</code>. This will be used to define a constant which will be used to enable some extensions depending on the target platform and the Vulkan SDK version.</p>
+<p>With these imports in place, first we'll define a constant that will come in handy later before moving on to some real code:</p>
+<pre><code class="language-rust noplaypen">const PORTABILITY_MACOS_VERSION: Version = Version::new(1, 3, 216);
+</code></pre>
+<blockquote>
+<p>The Vulkan SDK started requiring a portability extension (<a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_KHR_portability_subset.html"><code>VK_KHR_PORTABILITY_subset</code></a>) on macOS since this Vulkan version. There is not a true Vulkan driver on macOS, Vulkan is instead implemented on macOS as a layer over Apple's low-level graphics API, <a href="https://en.wikipedia.org/wiki/Metal_(API)">Metal</a>. This implementation is <a href="https://www.lunarg.com/wp-content/uploads/2022/05/The-State-of-Vulkan-on-Apple-15APR2022.pdf">not fully conformant with the Vulkan standard</a> so this extension is essentially just an acknowledgement from the developer that things will behave somewhat differently from what the Vulkan standard says.</p>
+</blockquote>
 <p>Now, to create an instance we'll next have to fill in a struct with some information about our application. This data is technically optional, but it may provide some useful information to the driver in order to optimize our specific application (e.g., because it uses a well-known graphics engine with certain special behavior). This struct is called <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.ApplicationInfo.html"><code class="hljs">vk::ApplicationInfo</code></a> and we'll create it in a new function called <code>create_instance</code> that takes our window and a Vulkan entry point (which we will create later) and returns a Vulkan instance:</p>
 <pre><code class="language-rust noplaypen">unsafe fn create_instance(window: &amp;Window, entry: &amp;Entry) -&gt; Result&lt;Instance&gt; {
     let application_info = vk::ApplicationInfo::builder()
@@ -588,11 +597,12 @@ Ok(entry.create_instance(&amp;info, None)?)
     .map(|e| e.as_ptr())
     .collect::&lt;Vec&lt;_&gt;&gt;();
 
-let flags = if entry
-    .enumerate_instance_extension_properties(None)?
-    .iter()
-    .any(|e| e.extension_name == vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name)
+let flags = if 
+    cfg!(target_os = &quot;macos&quot;) &amp;&amp; 
+    entry.version()? &gt;= PORTABILITY_MACOS_VERSION
 {
+    info!(&quot;Enabling extensions for macOS portability.&quot;);
+    extensions.push(vk::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name.as_ptr());
     extensions.push(vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name.as_ptr());
     vk::InstanceCreateFlags::ENUMERATE_PORTABILITY_KHR
 } else {
@@ -604,8 +614,9 @@ let info = vk::InstanceCreateInfo::builder()
     .enabled_extension_names(&amp;extensions)
     .flags(flags);
 </code></pre>
-<p>This code automatically enables <code>KHR_PORTABILITY_ENUMERATION_EXTENSION</code> if it is supported and sets a related instance creation flag. As mentioned in the <a href="https://vulkan.lunarg.com/doc/sdk/1.3.216.0/mac/getting_started.html">Getting Started</a> guide for the macOS Vulkan SDK, this extension is required to permit selection of Vulkan implementations that are not fully conformant to the Vulkan specification.</p>
-<p>The Vulkan implementation used on macOS, <a href="https://github.com/KhronosGroup/MoltenVK">MoltenVK</a>, is <a href="https://www.lunarg.com/wp-content/uploads/2022/05/The-State-of-Vulkan-on-Apple-15APR2022.pdf">not fully conformant</a> and therefore requires this extension to be usable.</p>
+<p>This code enables <code>KHR_PORTABILITY_ENUMERATION_EXTENSION</code> if it is required by the target platform and the Vulkan SDK version. As mentioned in the <a href="https://vulkan.lunarg.com/doc/sdk/1.3.216.0/mac/getting_started.html">Getting Started</a> guide for the macOS Vulkan SDK, this extension is required to permit selection of Vulkan implementations that are not fully conformant to the Vulkan specification.</p>
+<p>As mentioned previously, the Vulkan implementation used on macOS, <a href="https://github.com/KhronosGroup/MoltenVK">MoltenVK</a>, is <a href="https://www.lunarg.com/wp-content/uploads/2022/05/The-State-of-Vulkan-on-Apple-15APR2022.pdf">not fully conformant</a> and therefore requires this extension.</p>
+<p>This code also enables <code>KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION</code> under the same conditions. This extension is needed to enable the <code>KHR_PORTABILITY_SUBSET_EXTENSION</code> device extension later in the tutorial.</p>
 <h2 id="instance-vs-vkinstance"><a class="header" href="#instance-vs-vkinstance"><a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> vs <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a></a></h2>
 <p>When we call our <code>create_instance</code> function, what we get back is not a raw Vulkan instance as would be returned by the Vulkan command <a href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateInstance.html"><code class="hljs">vkCreateInstance</code></a> (<a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a>). Instead what we got back is a custom type defined by <code>vulkanalia</code> which combines both a raw Vulkan instance and the commands loaded for that specific instance.</p>
 <p>This is the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> type we have been using (imported from the <code>vulkanalia</code> prelude) which should not be confused with the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a> type which represents a raw Vulkan instance. In future chapters we will also use the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Device.html"><code class="hljs">Device</code></a> type which, like <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a>, is a pairing of a raw Vulkan device (<a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Device.html"><code class="hljs">vk::Device</code></a>) and the commands loaded for that specific device. Fortunately we will not be using <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Instance.html"><code class="hljs">vk::Instance</code></a> or <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Device.html"><code class="hljs">vk::Device</code></a> directly in this tutorial so you don't need to worry about getting them mixed up.</p>
@@ -645,8 +656,6 @@ let info = vk::InstanceCreateInfo::builder()
 <pre><code class="language-rust noplaypen">use std::collections::HashSet;
 use std::ffi::CStr;
 use std::os::raw::c_void;
-
-use log::*;
 
 use vulkanalia::vk::ExtDebugUtilsExtension;
 </code></pre>
@@ -976,12 +985,13 @@ impl QueueFamilyIndices {
 <pre><code class="language-rust noplaypen">impl App {
     unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
-        let device = create_logical_device(&amp;instance, &amp;mut data)?;
+        let device = create_logical_device(&amp;entry, &amp;instance, &amp;mut data)?;
         Ok(Self { entry, instance, data, device })
     }
 }
 
 unsafe fn create_logical_device(
+    entry: &amp;Entry,
     instance: &amp;Instance,
     data: &amp;mut AppData,
 ) -&gt; Result&lt;Device&gt; {
@@ -1009,16 +1019,26 @@ let queue_info = vk::DeviceQueueCreateInfo::builder()
     vec![]
 };
 </code></pre>
+<h2 id="specifying-the-extensions-to-enable"><a class="header" href="#specifying-the-extensions-to-enable">Specifying the extensions to enable</a></h2>
+<p>When we were creating the Vulkan instance we enabled some extensions which are required on macOS when using recent versions of the Vulkan SDK. We'll finish that process here by enabling the <code>VK_KHR_PORTABILITY_SUBSET</code> device extension when targeting macOS and a Vulkan SDK version more recent than 1.3.216.</p>
+<pre><code class="language-rust noplaypen">let mut extensions = vec![];
+
+// Required by Vulkan SDK on macOS since 1.3.216.
+if cfg!(target_os = &quot;macos&quot;) &amp;&amp; entry.version()? &gt;= PORTABILITY_MACOS_VERSION {
+    extensions.push(vk::KHR_PORTABILITY_SUBSET_EXTENSION.name.as_ptr());
+}
+</code></pre>
 <h2 id="specifying-used-device-features"><a class="header" href="#specifying-used-device-features">Specifying used device features</a></h2>
 <p>The next information to specify is the set of device features that we'll be using. These are the features that we queried support for with <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features"><code class="hljs">get_physical_device_features</code></a> in the previous chapter, like geometry shaders. Right now we don't need anything special, so we can simply define it and leave everything to the default values (<code>false</code>). We'll come back to this structure once we're about to start doing more interesting things with Vulkan.</p>
 <pre><code class="language-rust noplaypen">let features = vk::PhysicalDeviceFeatures::builder();
 </code></pre>
 <h2 id="creating-the-logical-device"><a class="header" href="#creating-the-logical-device">Creating the logical device</a></h2>
-<p>With the previous two structures and the validation layer (if enabled) in place, we can fill in the main <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DeviceCreateInfo.html"><code class="hljs">vk::DeviceCreateInfo</code></a> structure.</p>
+<p>With the previous two structures, the validation layer (if enabled), and the device extensions in place, we can fill in the main <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DeviceCreateInfo.html"><code class="hljs">vk::DeviceCreateInfo</code></a> structure.</p>
 <pre><code class="language-rust noplaypen">let queue_infos = &amp;[queue_info];
 let info = vk::DeviceCreateInfo::builder()
     .queue_create_infos(queue_infos)
     .enabled_layer_names(&amp;layers)
+    .enabled_extension_names(&amp;extensions)
     .enabled_features(&amp;features);
 </code></pre>
 <p>That's it, we're now ready to instantiate the logical device with a call to the appropriately named <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.InstanceV1_0.html#method.create_device"><code class="hljs">create_device</code></a> method.</p>
@@ -1082,7 +1102,7 @@ let surface = instance.create_win32_surface_khr(&amp;info, None).unwrap();
 <pre><code class="language-rust noplaypen">unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
     // ...
     let instance = create_instance(window, &amp;entry, &amp;mut data)?;
-    data.surface = vk_window::create_surface(&amp;instance, window)?;
+    data.surface = vk_window::create_surface(&amp;instance, &amp;window, &amp;window)?;
     pick_physical_device(&amp;instance, &amp;mut data)?;
     // ...
 }
@@ -1178,7 +1198,7 @@ let queue_infos = unique_indices
 ) -&gt; Result&lt;()&gt; {
     QueueFamilyIndices::get(instance, data, physical_device)?;
     check_physical_device_extensions(instance, physical_device)?;
-    Ok(extensions)
+    Ok(())
 }
 
 unsafe fn check_physical_device_extensions(
@@ -1207,18 +1227,11 @@ unsafe fn check_physical_device_extensions(
 </code></pre>
 <p>Now run the code and verify that your graphics card is indeed capable of creating a swapchain. It should be noted that the availability of a presentation queue, as we checked in the previous chapter, implies that the swapchain extension must be supported. However, it's still good to be explicit about things, and the extension does have to be explicitly enabled.</p>
 <h2 id="enabling-device-extensions"><a class="header" href="#enabling-device-extensions">Enabling device extensions</a></h2>
-<p>Using a swapchain requires enabling the <a href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_swapchain.html"><code class="hljs">VK_KHR_swapchain</code></a> extension first. Enabling the extension just requires a small change to the logical device creation structure in the <code>create_logical_device</code> function, first we'll convert our list of extensions to a list of null-terminated strings:</p>
-<pre><code class="language-rust noplaypen">let extensions = DEVICE_EXTENSIONS
+<p>Using a swapchain requires enabling the <a href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_swapchain.html"><code class="hljs">VK_KHR_swapchain</code></a> extension first. Enabling the extension just requires a small change to our list of device extensions in the <code>create_logical_device</code> function. Initialize our list of device extensions with a list of null-terminated strings constructed from <code>DEVICE_EXTENSIONS</code>:</p>
+<pre><code class="language-rust noplaypen">let mut extensions = DEVICE_EXTENSIONS
     .iter()
     .map(|n| n.as_ptr())
     .collect::&lt;Vec&lt;_&gt;&gt;();
-</code></pre>
-<p>Then we just need to add the extension names to the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DeviceCreateInfo.html"><code class="hljs">vk::DeviceCreateInfo</code></a> struct:</p>
-<pre><code class="language-rust noplaypen">let info = vk::DeviceCreateInfo::builder()
-    .queue_create_infos(&amp;queue_infos)
-    .enabled_layer_names(&amp;layers)
-    .enabled_extension_names(&amp;extensions)
-    .enabled_features(&amp;features);
 </code></pre>
 <h2 id="querying-details-of-swapchain-support"><a class="header" href="#querying-details-of-swapchain-support">Querying details of swapchain support</a></h2>
 <p>Just checking if a swapchain is available is not sufficient, because it may not actually be compatible with our window surface. Creating a swapchain also involves a lot more settings than instance and device creation, so we need to query for some more details before we're able to proceed.</p>

@@ -151,7 +151,7 @@
 ) -&gt; Result&lt;()&gt; {
     QueueFamilyIndices::get(instance, data, physical_device)?;
     check_physical_device_extensions(instance, physical_device)?;
-    Ok(extensions)
+    Ok(())
 }
 
 unsafe fn check_physical_device_extensions(
@@ -180,18 +180,11 @@ unsafe fn check_physical_device_extensions(
 </code></pre>
 <p>Now run the code and verify that your graphics card is indeed capable of creating a swapchain. It should be noted that the availability of a presentation queue, as we checked in the previous chapter, implies that the swapchain extension must be supported. However, it's still good to be explicit about things, and the extension does have to be explicitly enabled.</p>
 <h2 id="enabling-device-extensions"><a class="header" href="#enabling-device-extensions">Enabling device extensions</a></h2>
-<p>Using a swapchain requires enabling the <a href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_swapchain.html"><code class="hljs">VK_KHR_swapchain</code></a> extension first. Enabling the extension just requires a small change to the logical device creation structure in the <code>create_logical_device</code> function, first we'll convert our list of extensions to a list of null-terminated strings:</p>
-<pre><code class="language-rust noplaypen">let extensions = DEVICE_EXTENSIONS
+<p>Using a swapchain requires enabling the <a href="https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_swapchain.html"><code class="hljs">VK_KHR_swapchain</code></a> extension first. Enabling the extension just requires a small change to our list of device extensions in the <code>create_logical_device</code> function. Initialize our list of device extensions with a list of null-terminated strings constructed from <code>DEVICE_EXTENSIONS</code>:</p>
+<pre><code class="language-rust noplaypen">let mut extensions = DEVICE_EXTENSIONS
     .iter()
     .map(|n| n.as_ptr())
     .collect::&lt;Vec&lt;_&gt;&gt;();
-</code></pre>
-<p>Then we just need to add the extension names to the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DeviceCreateInfo.html"><code class="hljs">vk::DeviceCreateInfo</code></a> struct:</p>
-<pre><code class="language-rust noplaypen">let info = vk::DeviceCreateInfo::builder()
-    .queue_create_infos(&amp;queue_infos)
-    .enabled_layer_names(&amp;layers)
-    .enabled_extension_names(&amp;extensions)
-    .enabled_features(&amp;features);
 </code></pre>
 <h2 id="querying-details-of-swapchain-support"><a class="header" href="#querying-details-of-swapchain-support">Querying details of swapchain support</a></h2>
 <p>Just checking if a swapchain is available is not sufficient, because it may not actually be compatible with our window surface. Creating a swapchain also involves a lot more settings than instance and device creation, so we need to query for some more details before we're able to proceed.</p>

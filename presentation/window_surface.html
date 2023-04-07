@@ -167,7 +167,7 @@ let surface = instance.create_win32_surface_khr(&amp;info, None).unwrap();
 <pre><code class="language-rust noplaypen">unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
     // ...
     let instance = create_instance(window, &amp;entry, &amp;mut data)?;
-    data.surface = vk_window::create_surface(&amp;instance, window)?;
+    data.surface = vk_window::create_surface(&amp;instance, &amp;window, &amp;window)?;
     pick_physical_device(&amp;instance, &amp;mut data)?;
     // ...
 }

@@ -145,12 +145,13 @@
 <pre><code class="language-rust noplaypen">impl App {
     unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
-        let device = create_logical_device(&amp;instance, &amp;mut data)?;
+        let device = create_logical_device(&amp;entry, &amp;instance, &amp;mut data)?;
         Ok(Self { entry, instance, data, device })
     }
 }
 
 unsafe fn create_logical_device(
+    entry: &amp;Entry,
     instance: &amp;Instance,
     data: &amp;mut AppData,
 ) -&gt; Result&lt;Device&gt; {
@@ -178,16 +179,26 @@ let queue_info = vk::DeviceQueueCreateInfo::builder()
     vec![]
 };
 </code></pre>
+<h2 id="specifying-the-extensions-to-enable"><a class="header" href="#specifying-the-extensions-to-enable">Specifying the extensions to enable</a></h2>
+<p>When we were creating the Vulkan instance we enabled some extensions which are required on macOS when using recent versions of the Vulkan SDK. We'll finish that process here by enabling the <code>VK_KHR_PORTABILITY_SUBSET</code> device extension when targeting macOS and a Vulkan SDK version more recent than 1.3.216.</p>
+<pre><code class="language-rust noplaypen">let mut extensions = vec![];
+
+// Required by Vulkan SDK on macOS since 1.3.216.
+if cfg!(target_os = &quot;macos&quot;) &amp;&amp; entry.version()? &gt;= PORTABILITY_MACOS_VERSION {
+    extensions.push(vk::KHR_PORTABILITY_SUBSET_EXTENSION.name.as_ptr());
+}
+</code></pre>
 <h2 id="specifying-used-device-features"><a class="header" href="#specifying-used-device-features">Specifying used device features</a></h2>
 <p>The next information to specify is the set of device features that we'll be using. These are the features that we queried support for with <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.InstanceV1_0.html#method.get_physical_device_features"><code class="hljs">get_physical_device_features</code></a> in the previous chapter, like geometry shaders. Right now we don't need anything special, so we can simply define it and leave everything to the default values (<code>false</code>). We'll come back to this structure once we're about to start doing more interesting things with Vulkan.</p>
 <pre><code class="language-rust noplaypen">let features = vk::PhysicalDeviceFeatures::builder();
 </code></pre>
 <h2 id="creating-the-logical-device"><a class="header" href="#creating-the-logical-device">Creating the logical device</a></h2>
-<p>With the previous two structures and the validation layer (if enabled) in place, we can fill in the main <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DeviceCreateInfo.html"><code class="hljs">vk::DeviceCreateInfo</code></a> structure.</p>
+<p>With the previous two structures, the validation layer (if enabled), and the device extensions in place, we can fill in the main <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DeviceCreateInfo.html"><code class="hljs">vk::DeviceCreateInfo</code></a> structure.</p>
 <pre><code class="language-rust noplaypen">let queue_infos = &amp;[queue_info];
 let info = vk::DeviceCreateInfo::builder()
     .queue_create_infos(queue_infos)
     .enabled_layer_names(&amp;layers)
+    .enabled_extension_names(&amp;extensions)
     .enabled_features(&amp;features);
 </code></pre>
 <p>That's it, we're now ready to instantiate the logical device with a call to the appropriately named <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.InstanceV1_0.html#method.create_device"><code class="hljs">create_device</code></a> method.</p>
