@@ -146,7 +146,8 @@ pub unsafe fn create_surface(
                 layer.set_presents_with_transaction(false);
                 layer.remove_all_animations();
 
-                view.setLayer(mem::transmute(layer.as_ref()));
+                let layer_ref = layer.as_ref() as *const metal::MetalLayerRef;
+                view.setLayer(layer_ref as *mut objc::runtime::Object);
                 view.setWantsLayer(YES);
 
                 (&mut *window.ns_view, layer)

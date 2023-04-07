@@ -151,7 +151,7 @@ impl Entry {
         let raw = loader.load(b"vkGetDeviceProcAddr")?;
         let get_device = mem::transmute::<_, vk::PFN_vkGetDeviceProcAddr>(raw);
 
-        let load = |n| mem::transmute(get_instance(vk::Instance::null(), n));
+        let load = |n| get_instance(vk::Instance::null(), n);
         let commands = EntryCommands::load(load);
 
         Ok(Self {
@@ -194,7 +194,7 @@ impl Entry {
         allocator: Option<&vk::AllocationCallbacks>,
     ) -> VkResult<Instance> {
         let handle = EntryV1_0::create_instance(self, info, allocator)?;
-        let load = |n| mem::transmute((self.get_instance)(handle, n));
+        let load = |n| (self.get_instance)(handle, n);
         let commands = InstanceCommands::load(load);
         let extensions = get_names(info.enabled_extension_count, info.enabled_extension_names);
         let layers = get_names(info.enabled_layer_count, info.enabled_layer_names);
@@ -255,7 +255,7 @@ impl Instance {
         allocator: Option<&vk::AllocationCallbacks>,
     ) -> VkResult<Device> {
         let handle = InstanceV1_0::create_device(self, physical_device, info, allocator)?;
-        let load = |n| mem::transmute((self.get_device)(handle, n));
+        let load = |n| (self.get_device)(handle, n);
         let commands = DeviceCommands::load(load);
         let extensions = get_names(info.enabled_extension_count, info.enabled_extension_names);
         let layers = get_names(info.enabled_layer_count, info.enabled_layer_names);
