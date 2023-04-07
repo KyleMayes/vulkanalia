@@ -12,7 +12,9 @@
     clippy::missing_safety_doc,
     clippy::too_many_arguments,
     clippy::type_complexity,
-    clippy::upper_case_acronyms
+    clippy::unnecessary_cast,
+    clippy::upper_case_acronyms,
+    clippy::useless_transmute
 )]
 
 use std::fmt;
