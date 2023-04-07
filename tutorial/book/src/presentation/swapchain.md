@@ -65,23 +65,13 @@ Now run the code and verify that your graphics card is indeed capable of creatin
 
 ## Enabling device extensions
 
-Using a swapchain requires enabling the `VK_KHR_swapchain` extension first. Enabling the extension just requires a small change to the logical device creation structure in the `create_logical_device` function, first we'll convert our list of extensions to a list of null-terminated strings:
+Using a swapchain requires enabling the `VK_KHR_swapchain` extension first. Enabling the extension just requires a small change to our list of device extensions in the `create_logical_device` function. Initialize our list of device extensions with a list of null-terminated strings constructed from `DEVICE_EXTENSIONS`:
 
 ```rust,noplaypen
-let extensions = DEVICE_EXTENSIONS
+let mut extensions = DEVICE_EXTENSIONS
     .iter()
     .map(|n| n.as_ptr())
     .collect::<Vec<_>>();
-```
-
-Then we just need to add the extension names to the `vk::DeviceCreateInfo` struct:
-
-```rust,noplaypen
-let info = vk::DeviceCreateInfo::builder()
-    .queue_create_infos(&queue_infos)
-    .enabled_layer_names(&layers)
-    .enabled_extension_names(&extensions)
-    .enabled_features(&features);
 ```
 
 ## Querying details of swapchain support

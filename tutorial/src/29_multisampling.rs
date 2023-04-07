@@ -19,6 +19,7 @@ use thiserror::Error;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::window as vk_window;
+use vulkanalia::Version;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};
@@ -35,6 +36,8 @@ const VALIDATION_LAYER: vk::ExtensionName = vk::ExtensionName::from_bytes(b"VK_L
 
 /// The required device extensions.
 const DEVICE_EXTENSIONS: &[vk::ExtensionName] = &[vk::KHR_SWAPCHAIN_EXTENSION.name];
+/// The Vulkan SDK version that started requiring the portability subset extension for macOS.
+const PORTABILITY_MACOS_VERSION: Version = Version::new(1, 3, 216);
 
 /// The maximum number of frames that can be processed concurrently.
 const MAX_FRAMES_IN_FLIGHT: usize = 2;
@@ -102,7 +105,7 @@ impl App {
         let instance = create_instance(window, &entry, &mut data)?;
         data.surface = vk_window::create_surface(&instance, &window, &window)?;
         pick_physical_device(&instance, &mut data)?;
-        let device = create_logical_device(&instance, &mut data)?;
+        let device = create_logical_device(&entry, &instance, &mut data)?;
         create_swapchain(window, &instance, &device, &mut data)?;
         create_swapchain_image_views(&device, &mut data)?;
         create_render_pass(&instance, &device, &mut data)?;
@@ -420,11 +423,9 @@ unsafe fn create_instance(window: &Window, entry: &Entry, data: &mut AppData) ->
         .collect::<Vec<_>>();
 
     // Required by Vulkan SDK on macOS since 1.3.216.
-    let flags = if entry
-        .enumerate_instance_extension_properties(None)?
-        .iter()
-        .any(|e| e.extension_name == vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name)
-    {
+    let flags = if cfg!(target_os = "macos") && entry.version()? >= PORTABILITY_MACOS_VERSION {
+        info!("Enabling extensions for macOS portability.");
+        extensions.push(vk::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name.as_ptr());
         extensions.push(vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name.as_ptr());
         vk::InstanceCreateFlags::ENUMERATE_PORTABILITY_KHR
     } else {
@@ -565,7 +566,7 @@ unsafe fn get_max_msaa_samples(instance: &Instance, data: &AppData) -> vk::Sampl
 // Logical Device
 //================================================
 
-unsafe fn create_logical_device(instance: &Instance, data: &mut AppData) -> Result<Device> {
+unsafe fn create_logical_device(entry: &Entry, instance: &Instance, data: &mut AppData) -> Result<Device> {
     // Queue Create Infos
 
     let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
@@ -594,7 +595,12 @@ unsafe fn create_logical_device(instance: &Instance, data: &mut AppData) -> Resu
 
     // Extensions
 
-    let extensions = DEVICE_EXTENSIONS.iter().map(|n| n.as_ptr()).collect::<Vec<_>>();
+    let mut extensions = DEVICE_EXTENSIONS.iter().map(|n| n.as_ptr()).collect::<Vec<_>>();
+
+    // Required by Vulkan SDK on macOS since 1.3.216.
+    if cfg!(target_os = "macos") && entry.version()? >= PORTABILITY_MACOS_VERSION {
+        extensions.push(vk::KHR_PORTABILITY_SUBSET_EXTENSION.name.as_ptr());
+    }
 
     // Features
 

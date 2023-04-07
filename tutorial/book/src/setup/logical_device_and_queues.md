@@ -19,12 +19,13 @@ Next, add a `create_logical_device` function that is called from `App:create` an
 impl App {
     unsafe fn create(window: &Window) -> Result<Self> {
         // ...
-        let device = create_logical_device(&instance, &mut data)?;
+        let device = create_logical_device(&entry, &instance, &mut data)?;
         Ok(Self { entry, instance, data, device })
     }
 }
 
 unsafe fn create_logical_device(
+    entry: &Entry,
     instance: &Instance,
     data: &mut AppData,
 ) -> Result<Device> {
@@ -66,6 +67,19 @@ let layers = if VALIDATION_ENABLED {
 };
 ```
 
+## Specifying the extensions to enable
+
+When we were creating the Vulkan instance we enabled some extensions which are required on macOS when using recent versions of the Vulkan SDK. We'll finish that process here by enabling the `VK_KHR_PORTABILITY_SUBSET` device extension when targeting macOS and a Vulkan SDK version more recent than 1.3.216.
+
+```rust,noplaypen
+let mut extensions = vec![];
+
+// Required by Vulkan SDK on macOS since 1.3.216.
+if cfg!(target_os = "macos") && entry.version()? >= PORTABILITY_MACOS_VERSION {
+    extensions.push(vk::KHR_PORTABILITY_SUBSET_EXTENSION.name.as_ptr());
+}
+```
+
 ## Specifying used device features
 
 The next information to specify is the set of device features that we'll be using. These are the features that we queried support for with `get_physical_device_features` in the previous chapter, like geometry shaders. Right now we don't need anything special, so we can simply define it and leave everything to the default values (`false`). We'll come back to this structure once we're about to start doing more interesting things with Vulkan.
@@ -76,13 +90,14 @@ let features = vk::PhysicalDeviceFeatures::builder();
 
 ## Creating the logical device
 
-With the previous two structures and the validation layer (if enabled) in place, we can fill in the main `vk::DeviceCreateInfo` structure.
+With the previous two structures, the validation layer (if enabled), and the device extensions in place, we can fill in the main `vk::DeviceCreateInfo` structure.
 
 ```rust,noplaypen
 let queue_infos = &[queue_info];
 let info = vk::DeviceCreateInfo::builder()
     .queue_create_infos(queue_infos)
     .enabled_layer_names(&layers)
+    .enabled_extension_names(&extensions)
     .enabled_features(&features);
 ```
 

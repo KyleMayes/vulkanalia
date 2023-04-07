@@ -3,13 +3,18 @@
 #![allow(dead_code, unused_variables, clippy::too_many_arguments, clippy::unnecessary_wraps)]
 
 use anyhow::{anyhow, Result};
+use log::*;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::window as vk_window;
+use vulkanalia::Version;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::{ControlFlow, EventLoop};
 use winit::window::{Window, WindowBuilder};
+
+/// The Vulkan SDK version that started requiring the portability subset extension for macOS.
+const PORTABILITY_MACOS_VERSION: Version = Version::new(1, 3, 216);
 
 #[rustfmt::skip]
 fn main() -> Result<()> {
@@ -96,11 +101,9 @@ unsafe fn create_instance(window: &Window, entry: &Entry) -> Result<Instance> {
         .collect::<Vec<_>>();
 
     // Required by Vulkan SDK on macOS since 1.3.216.
-    let flags = if entry
-        .enumerate_instance_extension_properties(None)?
-        .iter()
-        .any(|e| e.extension_name == vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name)
-    {
+    let flags = if cfg!(target_os = "macos") && entry.version()? >= PORTABILITY_MACOS_VERSION {
+        info!("Enabling extensions for macOS portability.");
+        extensions.push(vk::KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION.name.as_ptr());
         extensions.push(vk::KHR_PORTABILITY_ENUMERATION_EXTENSION.name.as_ptr());
         vk::InstanceCreateFlags::ENUMERATE_PORTABILITY_KHR
     } else {
