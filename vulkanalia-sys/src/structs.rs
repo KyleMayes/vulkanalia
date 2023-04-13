@@ -3668,6 +3668,8 @@ pub struct DeviceFaultVendorBinaryHeaderVersionOneEXT {
     pub application_name_offset: u32,
     pub application_version: u32,
     pub engine_name_offset: u32,
+    pub engine_version: u32,
+    pub api_version: u32,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceFaultVendorInfoEXT.html>
