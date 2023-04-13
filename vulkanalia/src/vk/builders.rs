@@ -12696,6 +12696,18 @@ impl DeviceFaultVendorBinaryHeaderVersionOneEXTBuilder {
     }
 
     #[inline]
+    pub fn engine_version(mut self, engine_version: u32) -> Self {
+        self.value.engine_version = engine_version;
+        self
+    }
+
+    #[inline]
+    pub fn api_version(mut self, api_version: u32) -> Self {
+        self.value.api_version = api_version;
+        self
+    }
+
+    #[inline]
     pub fn build(self) -> DeviceFaultVendorBinaryHeaderVersionOneEXT {
         self.value
     }
