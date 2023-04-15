@@ -49,7 +49,11 @@ The second field is `usage`, which indicates for which purposes the data in the 
 
 Just like the images in the swapchain, buffers can also be owned by a specific queue family or be shared between multiple at the same time. The buffer will only be used from the graphics queue, so we can stick to exclusive access.
 
-The `flags` parameter is used to configure sparse buffer memory, which is not relevant right now. We'll leave it at the default value of `0`.
+```rust,noplaypen
+    .flags(vk::BufferCreateFlags::empty()); // Optional.
+```
+
+The `flags` parameter is used to configure sparse buffer memory, which is not relevant right now. You can omit the builder method for this field which will set it to the default value (an empty set of flags).
 
 We can now create the buffer with `create_buffer`. First, define an `AppData` field to hold the buffer handle and call it `vertex_buffer`.
 
