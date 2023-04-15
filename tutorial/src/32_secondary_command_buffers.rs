@@ -2073,8 +2073,8 @@ unsafe fn create_image(
         .tiling(tiling)
         .initial_layout(vk::ImageLayout::UNDEFINED)
         .usage(usage)
-        .samples(samples)
-        .sharing_mode(vk::SharingMode::EXCLUSIVE);
+        .sharing_mode(vk::SharingMode::EXCLUSIVE)
+        .samples(samples);
 
     let image = device.create_image(&info, None)?;
 
