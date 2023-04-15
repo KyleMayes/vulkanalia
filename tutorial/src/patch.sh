@@ -11,7 +11,7 @@ diff -Naur $ORIGINAL $PATCHED > patch.patch
 
 for FILE in *.rs; do
     PREFIX=$((10#"${FILE%%_*}"))
-    if (( $PREFIX >= $START )); then
+    if (( $PREFIX >= $START )) && [[ $FILE != $PATCHED ]]; then
         patch -f $FILE < patch.patch
 
         if [[ $? -ne 0 ]]; then
