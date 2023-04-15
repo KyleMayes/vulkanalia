@@ -146,6 +146,7 @@ let changed = result == Ok(vk::SuccessCode::SUBOPTIMAL_KHR)
     || result == Err(vk::ErrorCode::OUT_OF_DATE_KHR);
 
 if self.resized || changed {
+    self.resized = false;
     self.recreate_swapchain(window)?;
 } else if let Err(e) = result {
     return Err(anyhow!(e));
