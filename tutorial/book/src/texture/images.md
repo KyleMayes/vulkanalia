@@ -469,7 +469,7 @@ The last three parameters reference slices of pipeline barriers of the three ava
 
 ## Copying buffer to image
 
-Before we get back to `create_texture_image`, we're going to write one more helper function: `copy_bufer_to_image`:
+Before we get back to `create_texture_image`, we're going to write one more helper function: `copy_buffer_to_image`:
 
 ```rust,noplaypen
 unsafe fn copy_buffer_to_image(
