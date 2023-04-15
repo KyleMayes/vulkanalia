@@ -11,7 +11,7 @@ $start = [int]$args[2]
 
 Get-ChildItem . -Filter *.rs | Sort-Object | Foreach-Object {
     $prefix = [int]$_.Name.Split("_")[0]
-    if ($prefix -ge $start) {
+    if ($prefix -ge $start -and $_.Name -ne $patched) {
         Get-Content patch.patch | & "C:\Program Files\Git\usr\bin\patch.exe" -f $_.Name
         Remove-Item -ErrorAction Ignore ($_.Name + ".orig")
         Remove-Item -ErrorAction Ignore ($_.Name + ".rej")
