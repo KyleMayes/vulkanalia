@@ -175,16 +175,22 @@ There are few situations where it is necessary for the texels to be preserved du
 The `usage` field has the same semantics as the one during buffer creation. The image is going to be used as destination for the buffer copy, so it should be set up as a transfer destination. We also want to be able to access the image from the shader to color our mesh, so the usage should include `vk::ImageUsageFlags::SAMPLED`.
 
 ```rust,noplaypen
-    .samples(vk::SampleCountFlags::_1)
-```
-
-The `samples` flag is related to multisampling. This is only relevant for images that will be used as attachments, so stick to one sample. There are some optional flags for images that are related to sparse images. Sparse images are images where only certain regions are actually backed by memory. If you were using a 3D texture for a voxel terrain, for example, then you could use this to avoid allocating memory to store large volumes of "air" values. We won't be using it in this tutorial, so leave it to its default value of `0`.
-
-```rust,noplaypen
-    .sharing_mode(vk::SharingMode::EXCLUSIVE);
+    .sharing_mode(vk::SharingMode::EXCLUSIVE)
 ```
 
 The image will only be used by one queue family: the one that supports graphics (and therefore also) transfer operations.
+
+```rust,noplaypen
+    .samples(vk::SampleCountFlags::_1)
+```
+
+The `samples` flag is related to multisampling. This is only relevant for images that will be used as attachments, so stick to one sample. 
+
+```rust,noplaypen
+    .flags(vk::ImageCreateFlags::empty()); // Optional.
+```
+
+There are also some optional flags for images that allow controlling more advanced properties for things like sparse images. Sparse images are images where only certain regions are actually backed by memory. If you were using a 3D texture for a voxel terrain, for example, then you could use this to avoid allocating memory to store large volumes of "air" values. We won't be using it in this tutorial, so you can omit the builder method for this field which will set it to the default (an empty set of flags).
 
 ```c++
 data.texture_image = device.create_image(&info, None)?;
