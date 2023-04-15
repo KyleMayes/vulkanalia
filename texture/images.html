@@ -261,12 +261,15 @@ device.unmap_memory(staging_buffer_memory);
 <pre><code class="language-rust noplaypen">    .usage(vk::ImageUsageFlags::SAMPLED | vk::ImageUsageFlags::TRANSFER_DST)
 </code></pre>
 <p>The <code>usage</code> field has the same semantics as the one during buffer creation. The image is going to be used as destination for the buffer copy, so it should be set up as a transfer destination. We also want to be able to access the image from the shader to color our mesh, so the usage should include <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.ImageUsageFlags.html#associatedconstant.SAMPLED"><code class="hljs">vk::ImageUsageFlags::SAMPLED</code></a>.</p>
-<pre><code class="language-rust noplaypen">    .samples(vk::SampleCountFlags::_1)
-</code></pre>
-<p>The <code>samples</code> flag is related to multisampling. This is only relevant for images that will be used as attachments, so stick to one sample. There are some optional flags for images that are related to sparse images. Sparse images are images where only certain regions are actually backed by memory. If you were using a 3D texture for a voxel terrain, for example, then you could use this to avoid allocating memory to store large volumes of &quot;air&quot; values. We won't be using it in this tutorial, so leave it to its default value of <code>0</code>.</p>
-<pre><code class="language-rust noplaypen">    .sharing_mode(vk::SharingMode::EXCLUSIVE);
+<pre><code class="language-rust noplaypen">    .sharing_mode(vk::SharingMode::EXCLUSIVE)
 </code></pre>
 <p>The image will only be used by one queue family: the one that supports graphics (and therefore also) transfer operations.</p>
+<pre><code class="language-rust noplaypen">    .samples(vk::SampleCountFlags::_1)
+</code></pre>
+<p>The <code>samples</code> flag is related to multisampling. This is only relevant for images that will be used as attachments, so stick to one sample. </p>
+<pre><code class="language-rust noplaypen">    .flags(vk::ImageCreateFlags::empty()); // Optional.
+</code></pre>
+<p>There are also some optional flags for images that allow controlling more advanced properties for things like sparse images. Sparse images are images where only certain regions are actually backed by memory. If you were using a 3D texture for a voxel terrain, for example, then you could use this to avoid allocating memory to store large volumes of &quot;air&quot; values. We won't be using it in this tutorial, so you can omit the builder method for this field which will set it to the default (an empty set of flags).</p>
 <pre><code class="language-c++">data.texture_image = device.create_image(&amp;info, None)?;
 </code></pre>
 <p>The image is created using <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_image"><code class="hljs">create_image</code></a>, which doesn't have any particularly noteworthy parameters. It is possible that the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R8G8B8A8_SRGB"><code class="hljs">vk::Format::R8G8B8A8_SRGB</code></a> format is not supported by the graphics hardware. You should have a list of acceptable alternatives and go with the best one that is supported. However, support for this particular format is so widespread that we'll skip this step. Using different formats would also require annoying conversions. We will get back to this in the depth buffer chapter, where we'll implement such a system.</p>
@@ -505,7 +508,7 @@ unsafe fn end_single_time_commands(
 <p>The fourth parameter is either an empty set of <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DependencyFlags.html"><code class="hljs">vk::DependencyFlags</code></a> or <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.DependencyFlags.html#associatedconstant.BY_REGION"><code class="hljs">vk::DependencyFlags::BY_REGION</code></a>. The latter turns the barrier into a per-region condition. That means that the implementation is allowed to already begin reading from the parts of a resource that were written so far, for example.</p>
 <p>The last three parameters reference slices of pipeline barriers of the three available types: memory barriers, buffer memory barriers, and image memory barriers like the one we're using here. Note that we're not using the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html"><code class="hljs">vk::Format</code></a> parameter yet, but we'll be using that one for special transitions in the depth buffer chapter.</p>
 <h2 id="copying-buffer-to-image"><a class="header" href="#copying-buffer-to-image">Copying buffer to image</a></h2>
-<p>Before we get back to <code>create_texture_image</code>, we're going to write one more helper function: <code>copy_bufer_to_image</code>:</p>
+<p>Before we get back to <code>create_texture_image</code>, we're going to write one more helper function: <code>copy_buffer_to_image</code>:</p>
 <pre><code class="language-rust noplaypen">unsafe fn copy_buffer_to_image(
     device: &amp;Device,
     data: &amp;AppData,

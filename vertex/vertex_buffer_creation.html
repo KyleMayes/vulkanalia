@@ -166,7 +166,9 @@ unsafe fn create_vertex_buffer(
 <pre><code class="language-rust noplaypen">    .sharing_mode(vk::SharingMode::EXCLUSIVE);
 </code></pre>
 <p>Just like the images in the swapchain, buffers can also be owned by a specific queue family or be shared between multiple at the same time. The buffer will only be used from the graphics queue, so we can stick to exclusive access.</p>
-<p>The <code>flags</code> parameter is used to configure sparse buffer memory, which is not relevant right now. We'll leave it at the default value of <code>0</code>.</p>
+<pre><code class="language-rust noplaypen">    .flags(vk::BufferCreateFlags::empty()); // Optional.
+</code></pre>
+<p>The <code>flags</code> parameter is used to configure sparse buffer memory, which is not relevant right now. You can omit the builder method for this field which will set it to the default value (an empty set of flags).</p>
 <p>We can now create the buffer with <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_buffer"><code class="hljs">create_buffer</code></a>. First, define an <code>AppData</code> field to hold the buffer handle and call it <code>vertex_buffer</code>.</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
