@@ -69,7 +69,7 @@ let layers = if VALIDATION_ENABLED {
 
 ## Specifying the extensions to enable
 
-When we were creating the Vulkan instance we enabled some extensions which are required on macOS when using recent versions of the Vulkan SDK. We'll finish that process here by enabling the `VK_KHR_PORTABILITY_SUBSET` device extension when targeting macOS and a Vulkan SDK version more recent than 1.3.216.
+As discussed in the `Instance` chapter, certain Vulkan extensions must be enabled for applications that use Vulkan implementations that aren't fully conformant with the Vulkan specification. In that chapter, we enabled the instance extensions needed for compatibility with these non-conformant implementations. Here, we'll enable the device extension needed for the same purpose.
 
 ```rust,noplaypen
 let mut extensions = vec![];
