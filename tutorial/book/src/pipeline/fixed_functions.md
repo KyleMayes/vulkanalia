@@ -249,7 +249,7 @@ struct AppData {
 }
 ```
 
-And then create the object in the `create_pipeline` function:
+And then create the object in the `create_pipeline` function just above the calls to `destroy_shader_module`:
 
 ```rust,noplaypen
 let layout_info = vk::PipelineLayoutCreateInfo::builder();
