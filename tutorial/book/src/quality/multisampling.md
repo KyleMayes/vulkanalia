@@ -57,13 +57,23 @@ unsafe fn get_max_msaa_samples(
 }
 ```
 
-We will now use this function to set the `msaa_samples` variable during the physical device selection process. For this, we have to slightly modify the `pick_physical_device` function:
+We will now use this function to set the `msaa_samples` variable during the physical device selection process. For this, we have to slightly modify the `pick_physical_device` function to set the maximum MSAA samples after selecting a physical device:
 
 ```rust,noplaypen
 unsafe fn pick_physical_device(instance: &Instance, data: &mut AppData) -> Result<()> {
     // ...
 
-    data.msaa_samples = get_max_msaa_samples(instance, data);
+    for physical_device in instance.enumerate_physical_devices()? {
+        // ...
+
+        if let Err(error) = check_physical_device(instance, data, physical_device) {
+            // ...
+        } else {
+            // ...
+            data.msaa_samples = get_max_msaa_samples(instance, data);
+            return Ok(());
+        }
+    }
 
     Ok(())
 }
