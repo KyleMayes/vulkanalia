@@ -102,6 +102,8 @@ unsafe fn transition_image_layout(
 
 Update all calls to these functions to use the right values:
 
+> Note: Be sure to use a value of `1` for all of the images and image views except the image and image view that is for the texture.
+
 ```rust,noplaypen
 let (depth_image, depth_image_memory) = create_image(
     instance,
