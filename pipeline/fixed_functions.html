@@ -299,7 +299,7 @@ let dynamic_state = vk::PipelineDynamicStateCreateInfo::builder()
     pipeline_layout: vk::PipelineLayout,
 }
 </code></pre>
-<p>And then create the object in the <code>create_pipeline</code> function:</p>
+<p>And then create the object in the <code>create_pipeline</code> function just above the calls to <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.destroy_shader_module"><code class="hljs">destroy_shader_module</code></a>:</p>
 <pre><code class="language-rust noplaypen">let layout_info = vk::PipelineLayoutCreateInfo::builder();
 
 data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;

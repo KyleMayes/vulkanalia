@@ -173,11 +173,21 @@
     .unwrap_or(vk::SampleCountFlags::_1)
 }
 </code></pre>
-<p>We will now use this function to set the <code>msaa_samples</code> variable during the physical device selection process. For this, we have to slightly modify the <code>pick_physical_device</code> function:</p>
+<p>We will now use this function to set the <code>msaa_samples</code> variable during the physical device selection process. For this, we have to slightly modify the <code>pick_physical_device</code> function to set the maximum MSAA samples after selecting a physical device:</p>
 <pre><code class="language-rust noplaypen">unsafe fn pick_physical_device(instance: &amp;Instance, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
     // ...
 
-    data.msaa_samples = get_max_msaa_samples(instance, data);
+    for physical_device in instance.enumerate_physical_devices()? {
+        // ...
+
+        if let Err(error) = check_physical_device(instance, data, physical_device) {
+            // ...
+        } else {
+            // ...
+            data.msaa_samples = get_max_msaa_samples(instance, data);
+            return Ok(());
+        }
+    }
 
     Ok(())
 }

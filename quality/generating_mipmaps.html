@@ -214,6 +214,9 @@ data.mip_levels = (width.max(height) as f32).log2().floor() as u32 + 1;
 }
 </code></pre>
 <p>Update all calls to these functions to use the right values:</p>
+<blockquote>
+<p>Note: Be sure to use a value of <code>1</code> for all of the images and image views except the image and image view that is for the texture.</p>
+</blockquote>
 <pre><code class="language-rust noplaypen">let (depth_image, depth_image_memory) = create_image(
     instance,
     device,

@@ -180,7 +180,7 @@ let queue_info = vk::DeviceQueueCreateInfo::builder()
 };
 </code></pre>
 <h2 id="specifying-the-extensions-to-enable"><a class="header" href="#specifying-the-extensions-to-enable">Specifying the extensions to enable</a></h2>
-<p>When we were creating the Vulkan instance we enabled some extensions which are required on macOS when using recent versions of the Vulkan SDK. We'll finish that process here by enabling the <code>VK_KHR_PORTABILITY_SUBSET</code> device extension when targeting macOS and a Vulkan SDK version more recent than 1.3.216.</p>
+<p>As discussed in the <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/struct.Instance.html"><code class="hljs">Instance</code></a> chapter, certain Vulkan extensions must be enabled for applications that use Vulkan implementations that aren't fully conformant with the Vulkan specification. In that chapter, we enabled the instance extensions needed for compatibility with these non-conformant implementations. Here, we'll enable the device extension needed for the same purpose.</p>
 <pre><code class="language-rust noplaypen">let mut extensions = vec![];
 
 // Required by Vulkan SDK on macOS since 1.3.216.
