@@ -10,24 +10,13 @@ use log::*;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::window as vk_window;
 use vulkanalia::prelude::v1_0::*;
-use vulkanalia::Version;
 ```
 
 Here we first add the [`anyhow!`](https://docs.rs/anyhow/latest/anyhow/macro.anyhow.html) macro to our imports from `anyhow`. This macro will be used to easily construct instances of `anyhow` errors. Then, we import `log::*` so we can use the logging macros from the `log` crate. Next, we import `LibloadingLoader` which serves as `vulkanalia`'s `libloading` integration which we will use to load the initial Vulkan commands from the Vulkan shared library. The standard name of the Vulkan shared library on your operating system (e.g., `vulkan-1.dll` on Windows) is then imported as `LIBRARY`.
 
 Next we import `vulkanalia`'s window integration as `vk_window` which in this chapter we will use to enumerate the global Vulkan extensions required to render to a window. In a future chapter we will also use `vk_window` to link our Vulkan instance with our `winit` window.
 
-Then we import the Vulkan 1.0 prelude from `vulkanalia` which will provide all of the other Vulkan-related imports we will need for this and future chapters.
-
-Lastly we import the Vulkan SDK version structure from `vulkanalia`, `Version`. This will be used to define a constant which will be used to enable some extensions depending on the target platform and the Vulkan SDK version.
-
-With these imports in place, first we'll define a constant that will come in handy later before moving on to some real code:
-
-```rust,noplaypen
-const PORTABILITY_MACOS_VERSION: Version = Version::new(1, 3, 216);
-```
-
-> The Vulkan SDK started requiring a portability extension ([`VK_KHR_PORTABILITY_subset`](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_KHR_portability_subset.html)) on macOS since this Vulkan version. There is not a true Vulkan driver on macOS, Vulkan is instead implemented on macOS as a layer over Apple's low-level graphics API, [Metal](https://en.wikipedia.org/wiki/Metal_(API)). This implementation is [not fully conformant with the Vulkan standard](https://www.lunarg.com/wp-content/uploads/2022/05/The-State-of-Vulkan-on-Apple-15APR2022.pdf) so this extension is essentially just an acknowledgement from the developer that things will behave somewhat differently from what the Vulkan standard says.
+Lastly we import the Vulkan 1.0 prelude from `vulkanalia` which will provide all of the other Vulkan-related imports we will need for this and future chapters.
 
 Now, to create an instance we'll next have to fill in a struct with some information about our application. This data is technically optional, but it may provide some useful information to the driver in order to optimize our specific application (e.g., because it uses a well-known graphics engine with certain special behavior). This struct is called `vk::ApplicationInfo` and we'll create it in a new function called `^create_instance` that takes our window and a Vulkan entry point (which we will create later) and returns a Vulkan instance:
 
@@ -100,11 +89,35 @@ unsafe fn destroy(&mut self) {
 
 Like the Vulkan commands used to create objects, the commands used to destroy objects also take an optional reference to custom allocator callbacks. So like before, we pass `None` to indicate we are content with the default allocation behavior.
 
-## Driver compability (macOS)
+## Non-conformant Vulkan implementations
 
-If you are using macOS, you may be using a version of the Vulkan SDK that requires additional setup for your Vulkan application to run properly (1.3.216 or later). Attempt to run your application. If it runs successfully, you can ignore this section.
+Not every platform is so fortunate to have an implementation of the Vulkan API that fully conforms to the Vulkan specification. On such a platform, there may be standard Vulkan features that are not available and/or there may be significant differences between the actual behavior of a Vulkan application using that non-conformant implementation and what the Vulkan specification says that application should behave.
 
-If you instead get an error about driver incompability (e.g., `The required version of Vulkan is not supported by the driver or is otherwise incompatible for implementation-specific reasons.`) you will need to enable an additional portability extension.
+Since version 1.3.216 of the Vulkan SDK, applications that use a non-conformant Vulkan implementation must enable some additional Vulkan extensions. These compatibility extensions have the primary purpose of forcing the developer to acknowledge that their application is using a non-conformant implementation of Vulkan and that they should not expect everything to be as the Vulkan specification says it should be.
+
+This tutorial will be utilizing these compatibility Vulkan extensions so that your application can run even on platforms that lack a fully conforming Vulkan implementation.
+
+However, you might ask "Why are we doing this? Do we really need to worry about supporting niche platforms in an introductory Vulkan tutorial?" As it turns out, the not-so-niche macOS is among those platforms that lack a fully-conformant Vulkan implementation.
+
+As was mentioned in the introduction, Apple has their own low-level graphics API, [Metal](https://en.wikipedia.org/wiki/Metal_(API)). The Vulkan implementation that is provided as part of the Vulkan SDK for macOS ([MoltenVK](https://moltengl.com/)) is a layer that sits in-between your application and Metal and translates the Vulkan API calls your application makes into Metal API calls. Because MoltenVK is [not fully conformant with the Vulkan specification](https://www.lunarg.com/wp-content/uploads/2022/05/The-State-of-Vulkan-on-Apple-15APR2022.pdf), you will need to enable the compatibility Vulkan extensions we've been talking about to support macOS. 
+
+As an aside, while MoltenVK is not fully-conformant, you shouldn't encounter any issues caused by deviations from the Vulkan specification while following this tutorial on macOS.
+
+## Enabling compatibility extensions
+
+> **Note:** Even if you are not following this tutorial on a macOS, some of the code added in this section is referenced in the remainder of this tutorial so you can't just skip it!
+
+We'll want to check if the version of Vulkan we are using is equal to or greather than the version of Vulkan that introduced the compatibility extension requirement. With this goal in mind, we'll first add an additional import:
+
+```rust,noplaypen
+use vulkanalia::Version;
+```
+
+With this new import in place, we'll define a constant for the minimum version:
+
+```rust,noplaypen
+const PORTABILITY_MACOS_VERSION: Version = Version::new(1, 3, 216);
+```
 
 Replace the extension enumeration and instance creation code with the following:
 
@@ -114,6 +127,7 @@ let mut extensions = vk_window::get_required_instance_extensions(window)
     .map(|e| e.as_ptr())
     .collect::<Vec<_>>();
 
+// Required by Vulkan SDK on macOS since 1.3.216.
 let flags = if 
     cfg!(target_os = "macos") && 
     entry.version()? >= PORTABILITY_MACOS_VERSION
@@ -132,11 +146,9 @@ let info = vk::InstanceCreateInfo::builder()
     .flags(flags);
 ```
 
-This code enables `KHR_PORTABILITY_ENUMERATION_EXTENSION` if it is required by the target platform and the Vulkan SDK version. As mentioned in the [Getting Started](https://vulkan.lunarg.com/doc/sdk/1.3.216.0/mac/getting_started.html) guide for the macOS Vulkan SDK, this extension is required to permit selection of Vulkan implementations that are not fully conformant to the Vulkan specification.
+This code enables `KHR_PORTABILITY_ENUMERATION_EXTENSION` if your application is being compiled for a platform that lacks a non-conformant Vulkan implementation (just checking for macOS here) and the Vulkan version meets or exceeds the minimum version we just defined.
 
-As mentioned previously, the Vulkan implementation used on macOS, [MoltenVK](https://github.com/KhronosGroup/MoltenVK), is [not fully conformant](https://www.lunarg.com/wp-content/uploads/2022/05/The-State-of-Vulkan-on-Apple-15APR2022.pdf) and therefore requires this extension.
-
-This code also enables `KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION` under the same conditions. This extension is needed to enable the `KHR_PORTABILITY_SUBSET_EXTENSION` device extension later in the tutorial.
+This code also enables `KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION` under the same conditions. This extension is needed to enable the `KHR_PORTABILITY_SUBSET_EXTENSION` device extension which will be added later in the tutorial when we set up a logical device.
 
 ## `Instance` vs `vk::Instance`
 
