@@ -8462,6 +8462,15 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
 
 impl KhrRayTracingPipelineExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_ray_tracing_position_fetch.html>
+pub trait KhrRayTracingPositionFetchExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_RAY_TRACING_POSITION_FETCH_EXTENSION;
+}
+
+impl KhrRayTracingPositionFetchExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_relaxed_block_layout.html>
 pub trait KhrRelaxedBlockLayoutExtension: DeviceV1_0 {
     /// The metadata for this extension.

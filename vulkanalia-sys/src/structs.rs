@@ -12811,6 +12811,26 @@ impl Default for PhysicalDeviceRayTracingPipelinePropertiesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub ray_tracing_position_fetch: Bool32,
+}
+
+impl Default for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_POSITION_FETCH_FEATURES_KHR,
+            next: ptr::null_mut(),
+            ray_tracing_position_fetch: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRayTracingPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]

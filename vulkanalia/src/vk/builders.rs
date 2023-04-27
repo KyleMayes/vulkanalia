@@ -12049,6 +12049,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingInvocationReorde
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRobustness2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSamplerYcbcrConversionFeatures {}
@@ -35219,6 +35220,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingInvocatio
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRobustness2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSamplerYcbcrConversionFeatures {}
@@ -43989,6 +43991,64 @@ impl ops::DerefMut for PhysicalDeviceRayTracingPipelinePropertiesKHRBuilder {
 
 unsafe impl Cast for PhysicalDeviceRayTracingPipelinePropertiesKHRBuilder {
     type Target = PhysicalDeviceRayTracingPipelinePropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
+    type Target = PhysicalDeviceRayTracingPositionFetchFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
+    type Builder = PhysicalDeviceRayTracingPositionFetchFeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceRayTracingPositionFetchFeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceRayTracingPositionFetchFeaturesKHRBuilder {
+    value: PhysicalDeviceRayTracingPositionFetchFeaturesKHR,
+}
+
+impl PhysicalDeviceRayTracingPositionFetchFeaturesKHRBuilder {
+    #[inline]
+    pub fn ray_tracing_position_fetch(mut self, ray_tracing_position_fetch: bool) -> Self {
+        self.value.ray_tracing_position_fetch = ray_tracing_position_fetch as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceRayTracingPositionFetchFeaturesKHRBuilder {
+    type Target = PhysicalDeviceRayTracingPositionFetchFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceRayTracingPositionFetchFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingPositionFetchFeaturesKHRBuilder {
+    type Target = PhysicalDeviceRayTracingPositionFetchFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
