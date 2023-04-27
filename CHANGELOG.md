@@ -1,4 +1,4 @@
-## [0.19.0] - UNRELEASED
+## [0.19.0] - 2023-04-26
 
 ### Changed
 - Fixed parameters and return type for `KhrAccelerationStructureExtension::get_acceleration_structure_build_sizes_khr` method ([#150](https://github.com/KyleMayes/vulkanalia/issues/150))
