@@ -5704,22 +5704,19 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
         &self,
         build_type: AccelerationStructureBuildTypeKHR,
         build_info: &AccelerationStructureBuildGeometryInfoKHR,
-    ) -> (Vec<u32>, AccelerationStructureBuildSizesInfoKHR) {
-        let mut max_primitive_counts =
-            Vec::with_capacity(build_info.as_ref().geometry_count as usize);
+        max_primitive_counts: &[u32],
+    ) -> AccelerationStructureBuildSizesInfoKHR {
         let mut size_info = MaybeUninit::<AccelerationStructureBuildSizesInfoKHR>::uninit();
 
         let __result = (self.commands().get_acceleration_structure_build_sizes_khr)(
             self.handle(),
             build_type,
             build_info,
-            max_primitive_counts.as_mut_ptr(),
+            max_primitive_counts.as_ptr(),
             size_info.as_mut_ptr(),
         );
 
-        max_primitive_counts.set_len(build_info.as_ref().geometry_count as usize);
-
-        (max_primitive_counts, size_info.assume_init())
+        size_info.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetAccelerationStructureDeviceAddressKHR.html>

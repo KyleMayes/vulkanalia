@@ -68,7 +68,7 @@ fun Registry.generateCommandWrapper(command: Command): String {
         fun Param?.isSlice() = this?.len?.value == current.name.value
 
         if (iterator.peek().isSlice()) {
-            // Slice parameter(s).
+            // Slice parameter(s) (length determined by current parameter).
 
             val outputWithLength = current.type is PointerType
             if (outputWithLength) {
@@ -110,23 +110,7 @@ fun Registry.generateCommandWrapper(command: Command): String {
                     postActualStmts.add("${slice.name}.set_len($length as usize);")
                 } else {
                     // Input slice parameter.
-
-                    val (item, cast) = when {
-                        structs.containsKey(pointee.getIdentifier()) -> Pair(
-                            "impl Cast<Target=${pointee.generate()}>",
-                            ".cast()"
-                        )
-                        pointee.getIdentifier()?.value == "void" -> Pair(
-                            "u8",
-                            "as ${"c_void".generatePtr(pointer.const)}"
-                        )
-                        pointee is PointerType -> Pair(
-                            "&${pointee.pointee.generate()}",
-                            ".cast()"
-                        )
-                        else -> Pair(pointee.generate(), "")
-                    }
-
+                    val (item, cast) = generateInputSliceTypeAndCast(pointer)
                     params.add("${slice.name}: ${"[$item]".generateRef(pointer.const)}")
                     if (index == 0) addArgument("${slice.name}.len() as ${current.type.generate()}")
                     addArgument("${slice.name}.as_ptr()$cast")
@@ -144,19 +128,28 @@ fun Registry.generateCommandWrapper(command: Command): String {
                 addArgument("${current.name}.as_ptr().cast()")
             }
         } else if (current.arglen != null && current.arglen.size == 2) {
-            // Output slice parameter (length determined from argument field).
+            // Slice parameter (length determined from argument field).
             //
             // For example, `len="pAllocateInfo-&gt;descriptorSetCount"`
-            // indicates that the length of the output slice is equivalent to
+            // indicates that the length of the slice parameter is equivalent to
             // the value of the `descriptorSetCount` field in the
             // `pAllocateInfo` argument.
             val pointer = current.type as PointerType
-            val length = "${current.arglen[0]}.as_ref().${current.arglen[1]}"
-            resultTypes.add("Vec<${pointer.pointee.generate()}>")
-            resultExprs.add(current.name.value)
-            preActualStmts.add("let mut ${current.name} = Vec::with_capacity($length as usize);")
-            postActualStmts.add("${current.name}.set_len($length as usize);")
-            addArgument("${current.name}.as_mut_ptr()")
+            val pointee = pointer.pointee
+            if (pointer.const) {
+                // Input slice parameter.
+                val (item, cast) = generateInputSliceTypeAndCast(pointer)
+                params.add("${current.name}: ${"[$item]".generateRef(true)}")
+                addArgument("${current.name}.as_ptr()$cast")
+            } else {
+                // Output slice parameter.
+                val length = "${current.arglen[0]}.as_ref().${current.arglen[1]}"
+                resultTypes.add("Vec<${pointee.generate()}>")
+                resultExprs.add(current.name.value)
+                preActualStmts.add("let mut ${current.name} = Vec::with_capacity($length as usize);")
+                postActualStmts.add("${current.name}.set_len($length as usize);")
+                addArgument("${current.name}.as_mut_ptr()")
+            }
         } else if (current.type is PointerType) {
             // Pointer parameter.
             val pointee = current.type.pointee
@@ -288,6 +281,23 @@ unsafe fn ${command.name}$generics(&self, ${params.joinToString()})$outputType {
     $actual
 }
     """
+}
+
+/** Generates the Rust type and cast expression suffix for an input slice parameter. */
+private fun Registry.generateInputSliceTypeAndCast(pointer: PointerType): Pair<String, String> = when {
+    structs.containsKey(pointer.pointee.getIdentifier()) -> Pair(
+        "impl Cast<Target=${pointer.pointee.generate()}>",
+        ".cast()"
+    )
+    pointer.pointee.getIdentifier()?.value == "void" -> Pair(
+        "u8",
+        "as ${"c_void".generatePtr(pointer.const)}"
+    )
+    pointer.pointee is PointerType -> Pair(
+        "&${pointer.pointee.pointee.generate()}",
+        ".cast()"
+    )
+    else -> Pair(pointer.pointee.generate(), "")
 }
 
 /** Generates a Rust expression which invokes a command in a version or extension trait method. */
