@@ -19,12 +19,22 @@ For this tutorial I've decided to go with the [Viking room](https://sketchfab.co
 * [viking_room.obj](../images/viking_room.obj)
 * [viking_room.png](../images/viking_room.png)
 
+> **Note:** The `.obj` and `.png` files that are included in this tutorial may not be identical to the original files. Make sure you use the files from this tutorial (and beyond that, the `.obj` and `.png` files may also differ from the files used in the [original C++ tutorial](https://vulkan-tutorial.com)).
+
 Feel free to use your own model, but make sure that it only consists of one material and that is has dimensions of about 1.5 x 1.5 x 1.5 units. If it is larger than that, then you'll have to change the view matrix. Put the model file and texture image in the `resources` directory.
 
 Update `create_texture_image` to use this path variable:
 
 ```rust,noplaypen
 let image = File::open("resources/viking_room.png")?;
+```
+
+To double-check your image file is correct, you can also add this code in `create_texture_image` right after decoding the file as a PNG image:
+
+```rust,noplaypen
+if width != 1024 || height != 1024 || reader.info().color_type != png::ColorType::Rgba {
+    panic!("Invalid texture image.");
+}
 ```
 
 ## Loading vertices and indices

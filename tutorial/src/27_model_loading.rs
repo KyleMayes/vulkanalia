@@ -1054,6 +1054,10 @@ unsafe fn create_texture_image(instance: &Instance, device: &Device, data: &mut 
     let size = reader.info().raw_bytes() as u64;
     let (width, height) = reader.info().size();
 
+    if width != 1024 || height != 1024 || reader.info().color_type != png::ColorType::Rgba {
+        panic!("Invalid texture image (use https://kylemayes.github.io/vulkanalia/images/viking_room.png).");
+    }
+
     // Create (staging)
 
     let (staging_buffer, staging_buffer_memory) = create_buffer(
