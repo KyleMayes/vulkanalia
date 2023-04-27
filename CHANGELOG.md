@@ -2,6 +2,7 @@
 
 ### Changed
 - Fixed parameters and return type for `KhrAccelerationStructureExtension::get_acceleration_structure_build_sizes_khr` method ([#150](https://github.com/KyleMayes/vulkanalia/issues/150))
+- Fixed `push_next` methods in builder structs ([#149](https://github.com/KyleMayes/vulkanalia/issues/149))
 
 ### Bindings Updates
 - [April 12, 2023 Vulkan 1.3.247 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/32be5bd5594e3973db0b7e5e7a950becce070a82)

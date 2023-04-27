@@ -515,7 +515,7 @@ impl<'b> AccelerationStructureCreateInfoKHRBuilder<'b> {
         T: ExtendsAccelerationStructureCreateInfoKHR,
     {
         let next = (next.as_mut() as *mut T).cast::<AccelerationStructureCreateInfoKHR>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -619,7 +619,7 @@ impl<'b> AccelerationStructureCreateInfoNVBuilder<'b> {
         T: ExtendsAccelerationStructureCreateInfoNV,
     {
         let next = (next.as_mut() as *mut T).cast::<AccelerationStructureCreateInfoNV>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -1028,7 +1028,7 @@ impl<'b> AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
     {
         let next =
             (next.as_mut() as *mut T).cast::<AccelerationStructureGeometryTrianglesDataKHR>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -2600,7 +2600,7 @@ impl<'b> AndroidHardwareBufferPropertiesANDROIDBuilder<'b> {
         T: ExtendsAndroidHardwareBufferPropertiesANDROID,
     {
         let next = (next.as_mut() as *mut T).cast::<AndroidHardwareBufferPropertiesANDROID>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -2803,7 +2803,7 @@ impl<'b> ApplicationInfoBuilder<'b> {
         T: ExtendsApplicationInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<ApplicationInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -3083,7 +3083,7 @@ impl<'b> AttachmentDescription2Builder<'b> {
         T: ExtendsAttachmentDescription2,
     {
         let next = (next.as_mut() as *mut T).cast::<AttachmentDescription2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -3333,7 +3333,7 @@ impl<'b> AttachmentReference2Builder<'b> {
         T: ExtendsAttachmentReference2,
     {
         let next = (next.as_mut() as *mut T).cast::<AttachmentReference2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -3874,7 +3874,7 @@ impl<'b> BindBufferMemoryInfoBuilder<'b> {
         T: ExtendsBindBufferMemoryInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<BindBufferMemoryInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -4032,7 +4032,7 @@ impl<'b> BindImageMemoryInfoBuilder<'b> {
         T: ExtendsBindImageMemoryInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<BindImageMemoryInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -4369,7 +4369,7 @@ impl<'b> BindSparseInfoBuilder<'b> {
         T: ExtendsBindSparseInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<BindSparseInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -5322,7 +5322,7 @@ impl<'b> BufferCreateInfoBuilder<'b> {
         T: ExtendsBufferCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<BufferCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -5628,7 +5628,7 @@ impl<'b> BufferImageCopy2Builder<'b> {
         T: ExtendsBufferImageCopy2,
     {
         let next = (next.as_mut() as *mut T).cast::<BufferImageCopy2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -6051,7 +6051,7 @@ impl<'b> BufferViewCreateInfoBuilder<'b> {
         T: ExtendsBufferViewCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<BufferViewCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -6926,7 +6926,7 @@ impl<'b> CommandBufferBeginInfoBuilder<'b> {
         T: ExtendsCommandBufferBeginInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<CommandBufferBeginInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -7078,7 +7078,7 @@ impl<'b> CommandBufferInheritanceInfoBuilder<'b> {
         T: ExtendsCommandBufferInheritanceInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<CommandBufferInheritanceInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -7614,7 +7614,7 @@ impl<'b> ComputePipelineCreateInfoBuilder<'b> {
         T: ExtendsComputePipelineCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<ComputePipelineCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -9672,7 +9672,7 @@ impl<'b> DebugUtilsMessengerCallbackDataEXTBuilder<'b> {
         T: ExtendsDebugUtilsMessengerCallbackDataEXT,
     {
         let next = (next.as_mut() as *mut T).cast::<DebugUtilsMessengerCallbackDataEXT>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -10453,7 +10453,7 @@ impl<'b> DescriptorBufferBindingInfoEXTBuilder<'b> {
         T: ExtendsDescriptorBufferBindingInfoEXT,
     {
         let next = (next.as_mut() as *mut T).cast::<DescriptorBufferBindingInfoEXT>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -10796,7 +10796,7 @@ impl<'b> DescriptorPoolCreateInfoBuilder<'b> {
         T: ExtendsDescriptorPoolCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<DescriptorPoolCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -11008,7 +11008,7 @@ impl<'b> DescriptorSetAllocateInfoBuilder<'b> {
         T: ExtendsDescriptorSetAllocateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<DescriptorSetAllocateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -11298,7 +11298,7 @@ impl<'b> DescriptorSetLayoutCreateInfoBuilder<'b> {
         T: ExtendsDescriptorSetLayoutCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<DescriptorSetLayoutCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -11449,7 +11449,7 @@ impl<'b> DescriptorSetLayoutSupportBuilder<'b> {
         T: ExtendsDescriptorSetLayoutSupport,
     {
         let next = (next.as_mut() as *mut T).cast::<DescriptorSetLayoutSupport>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -12126,7 +12126,7 @@ impl<'b> DeviceCreateInfoBuilder<'b> {
         T: ExtendsDeviceCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<DeviceCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -13698,7 +13698,7 @@ impl<'b> DeviceQueueCreateInfoBuilder<'b> {
         T: ExtendsDeviceQueueCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<DeviceQueueCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -15946,7 +15946,7 @@ impl<'b> EventCreateInfoBuilder<'b> {
         T: ExtendsEventCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<EventCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -16830,7 +16830,7 @@ impl<'b> ExportMetalObjectsInfoEXTBuilder<'b> {
         T: ExtendsExportMetalObjectsInfoEXT,
     {
         let next = (next.as_mut() as *mut T).cast::<ExportMetalObjectsInfoEXT>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -18119,7 +18119,7 @@ impl<'b> FenceCreateInfoBuilder<'b> {
         T: ExtendsFenceCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<FenceCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -18522,7 +18522,7 @@ impl<'b> FormatProperties2Builder<'b> {
         T: ExtendsFormatProperties2,
     {
         let next = (next.as_mut() as *mut T).cast::<FormatProperties2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -18893,7 +18893,7 @@ impl<'b> FramebufferCreateInfoBuilder<'b> {
         T: ExtendsFramebufferCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<FramebufferCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -19628,7 +19628,7 @@ impl<'b> GraphicsPipelineCreateInfoBuilder<'b> {
         T: ExtendsGraphicsPipelineCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<GraphicsPipelineCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -20352,7 +20352,7 @@ impl<'b> ImageBlit2Builder<'b> {
         T: ExtendsImageBlit2,
     {
         let next = (next.as_mut() as *mut T).cast::<ImageBlit2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -20916,7 +20916,7 @@ impl<'b> ImageCreateInfoBuilder<'b> {
         T: ExtendsImageCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<ImageCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -21484,7 +21484,7 @@ impl<'b> ImageFormatProperties2Builder<'b> {
         T: ExtendsImageFormatProperties2,
     {
         let next = (next.as_mut() as *mut T).cast::<ImageFormatProperties2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -21561,7 +21561,7 @@ impl<'b> ImageMemoryBarrierBuilder<'b> {
         T: ExtendsImageMemoryBarrier,
     {
         let next = (next.as_mut() as *mut T).cast::<ImageMemoryBarrier>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -21680,7 +21680,7 @@ impl<'b> ImageMemoryBarrier2Builder<'b> {
         T: ExtendsImageMemoryBarrier2,
     {
         let next = (next.as_mut() as *mut T).cast::<ImageMemoryBarrier2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -21811,7 +21811,7 @@ impl<'b> ImageMemoryRequirementsInfo2Builder<'b> {
         T: ExtendsImageMemoryRequirementsInfo2,
     {
         let next = (next.as_mut() as *mut T).cast::<ImageMemoryRequirementsInfo2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -22833,7 +22833,7 @@ impl<'b> ImageViewCreateInfoBuilder<'b> {
         T: ExtendsImageViewCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<ImageViewCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -24959,7 +24959,7 @@ impl<'b> InstanceCreateInfoBuilder<'b> {
         T: ExtendsInstanceCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<InstanceCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -25356,7 +25356,7 @@ impl<'b> MemoryAllocateInfoBuilder<'b> {
         T: ExtendsMemoryAllocateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<MemoryAllocateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -26524,7 +26524,7 @@ impl<'b> MemoryRequirements2Builder<'b> {
         T: ExtendsMemoryRequirements2,
     {
         let next = (next.as_mut() as *mut T).cast::<MemoryRequirements2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -28342,7 +28342,7 @@ impl<'b> OpticalFlowSessionCreateInfoNVBuilder<'b> {
         T: ExtendsOpticalFlowSessionCreateInfoNV,
     {
         let next = (next.as_mut() as *mut T).cast::<OpticalFlowSessionCreateInfoNV>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -34557,7 +34557,7 @@ impl<'b> PhysicalDeviceExternalSemaphoreInfoBuilder<'b> {
         T: ExtendsPhysicalDeviceExternalSemaphoreInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceExternalSemaphoreInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -35308,7 +35308,7 @@ impl<'b> PhysicalDeviceFeatures2Builder<'b> {
         T: ExtendsPhysicalDeviceFeatures2,
     {
         let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceFeatures2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -37358,7 +37358,7 @@ impl<'b> PhysicalDeviceImageFormatInfo2Builder<'b> {
         T: ExtendsPhysicalDeviceImageFormatInfo2,
     {
         let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceImageFormatInfo2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -39841,7 +39841,7 @@ impl<'b> PhysicalDeviceMemoryProperties2Builder<'b> {
         T: ExtendsPhysicalDeviceMemoryProperties2,
     {
         let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceMemoryProperties2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -42974,7 +42974,7 @@ impl<'b> PhysicalDeviceProperties2Builder<'b> {
         T: ExtendsPhysicalDeviceProperties2,
     {
         let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceProperties2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -47785,7 +47785,7 @@ impl<'b> PhysicalDeviceSurfaceInfo2KHRBuilder<'b> {
         T: ExtendsPhysicalDeviceSurfaceInfo2KHR,
     {
         let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceSurfaceInfo2KHR>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -51572,7 +51572,7 @@ impl<'b> PipelineColorBlendStateCreateInfoBuilder<'b> {
         T: ExtendsPipelineColorBlendStateCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<PipelineColorBlendStateCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -53141,7 +53141,7 @@ impl<'b> PipelineMultisampleStateCreateInfoBuilder<'b> {
         T: ExtendsPipelineMultisampleStateCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<PipelineMultisampleStateCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -53612,7 +53612,7 @@ impl<'b> PipelineRasterizationStateCreateInfoBuilder<'b> {
         T: ExtendsPipelineRasterizationStateCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<PipelineRasterizationStateCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -54163,7 +54163,7 @@ impl<'b> PipelineShaderStageCreateInfoBuilder<'b> {
         T: ExtendsPipelineShaderStageCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<PipelineShaderStageCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -54443,7 +54443,7 @@ impl<'b> PipelineTessellationStateCreateInfoBuilder<'b> {
         T: ExtendsPipelineTessellationStateCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<PipelineTessellationStateCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -54589,7 +54589,7 @@ impl<'b> PipelineVertexInputStateCreateInfoBuilder<'b> {
         T: ExtendsPipelineVertexInputStateCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<PipelineVertexInputStateCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -54959,7 +54959,7 @@ impl<'b> PipelineViewportStateCreateInfoBuilder<'b> {
         T: ExtendsPipelineViewportStateCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<PipelineViewportStateCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -55334,7 +55334,7 @@ impl<'b> PresentInfoKHRBuilder<'b> {
         T: ExtendsPresentInfoKHR,
     {
         let next = (next.as_mut() as *mut T).cast::<PresentInfoKHR>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -55944,7 +55944,7 @@ impl<'b> QueryPoolCreateInfoBuilder<'b> {
         T: ExtendsQueryPoolCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<QueryPoolCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -56433,7 +56433,7 @@ impl<'b> QueueFamilyProperties2Builder<'b> {
         T: ExtendsQueueFamilyProperties2,
     {
         let next = (next.as_mut() as *mut T).cast::<QueueFamilyProperties2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -56511,7 +56511,7 @@ impl<'b> RayTracingPipelineCreateInfoKHRBuilder<'b> {
         T: ExtendsRayTracingPipelineCreateInfoKHR,
     {
         let next = (next.as_mut() as *mut T).cast::<RayTracingPipelineCreateInfoKHR>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -56659,7 +56659,7 @@ impl<'b> RayTracingPipelineCreateInfoNVBuilder<'b> {
         T: ExtendsRayTracingPipelineCreateInfoNV,
     {
         let next = (next.as_mut() as *mut T).cast::<RayTracingPipelineCreateInfoNV>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -57471,7 +57471,7 @@ impl<'b> RenderPassBeginInfoBuilder<'b> {
         T: ExtendsRenderPassBeginInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<RenderPassBeginInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -57566,7 +57566,7 @@ impl<'b> RenderPassCreateInfoBuilder<'b> {
         T: ExtendsRenderPassCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<RenderPassCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -57669,7 +57669,7 @@ impl<'b> RenderPassCreateInfo2Builder<'b> {
         T: ExtendsRenderPassCreateInfo2,
     {
         let next = (next.as_mut() as *mut T).cast::<RenderPassCreateInfo2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -58663,7 +58663,7 @@ impl<'b> RenderingInfoBuilder<'b> {
         T: ExtendsRenderingInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<RenderingInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -59286,7 +59286,7 @@ impl<'b> SamplerCreateInfoBuilder<'b> {
         T: ExtendsSamplerCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<SamplerCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -59572,7 +59572,7 @@ impl<'b> SamplerYcbcrConversionCreateInfoBuilder<'b> {
         T: ExtendsSamplerYcbcrConversionCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<SamplerYcbcrConversionCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -59950,7 +59950,7 @@ impl<'b> SemaphoreCreateInfoBuilder<'b> {
         T: ExtendsSemaphoreCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<SemaphoreCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -60738,7 +60738,7 @@ impl<'b> ShaderCreateInfoEXTBuilder<'b> {
         T: ExtendsShaderCreateInfoEXT,
     {
         let next = (next.as_mut() as *mut T).cast::<ShaderCreateInfoEXT>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -60881,7 +60881,7 @@ impl<'b> ShaderModuleCreateInfoBuilder<'b> {
         T: ExtendsShaderModuleCreateInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<ShaderModuleCreateInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -62415,7 +62415,7 @@ impl<'b> SubmitInfoBuilder<'b> {
         T: ExtendsSubmitInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<SubmitInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -62513,7 +62513,7 @@ impl<'b> SubmitInfo2Builder<'b> {
         T: ExtendsSubmitInfo2,
     {
         let next = (next.as_mut() as *mut T).cast::<SubmitInfo2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -62769,7 +62769,7 @@ impl<'b> SubpassDependency2Builder<'b> {
         T: ExtendsSubpassDependency2,
     {
         let next = (next.as_mut() as *mut T).cast::<SubpassDependency2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -63006,7 +63006,7 @@ impl<'b> SubpassDescription2Builder<'b> {
         T: ExtendsSubpassDescription2,
     {
         let next = (next.as_mut() as *mut T).cast::<SubpassDescription2>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -63218,7 +63218,7 @@ impl<'b> SubpassEndInfoBuilder<'b> {
         T: ExtendsSubpassEndInfo,
     {
         let next = (next.as_mut() as *mut T).cast::<SubpassEndInfo>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -63621,7 +63621,7 @@ impl<'b> SubresourceLayout2EXTBuilder<'b> {
         T: ExtendsSubresourceLayout2EXT,
     {
         let next = (next.as_mut() as *mut T).cast::<SubresourceLayout2EXT>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -63828,7 +63828,7 @@ impl<'b> SurfaceCapabilities2KHRBuilder<'b> {
         T: ExtendsSurfaceCapabilities2KHR,
     {
         let next = (next.as_mut() as *mut T).cast::<SurfaceCapabilities2KHR>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -64139,7 +64139,7 @@ impl<'b> SurfaceFormat2KHRBuilder<'b> {
         T: ExtendsSurfaceFormat2KHR,
     {
         let next = (next.as_mut() as *mut T).cast::<SurfaceFormat2KHR>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -64739,7 +64739,7 @@ impl<'b> SwapchainCreateInfoKHRBuilder<'b> {
         T: ExtendsSwapchainCreateInfoKHR,
     {
         let next = (next.as_mut() as *mut T).cast::<SwapchainCreateInfoKHR>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }
@@ -67003,7 +67003,7 @@ impl<'b> WriteDescriptorSetBuilder<'b> {
         T: ExtendsWriteDescriptorSet,
     {
         let next = (next.as_mut() as *mut T).cast::<WriteDescriptorSet>();
-        unsafe { *next }.next = self.next;
+        unsafe { &mut *next }.next = self.next;
         self.next = next.cast();
         self
     }

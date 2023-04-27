@@ -265,7 +265,7 @@ where
     T: Extends${struct.name}
 {
     let next = (next.as_mut() as *mut T).cast::<${struct.name}>();
-    unsafe { *next }.next = self.next;
+    unsafe { &mut *next }.next = self.next;
     self.next = next.cast();
     self
 }
