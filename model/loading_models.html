@@ -145,9 +145,17 @@
 <li><a href="../images/viking_room.obj">viking_room.obj</a></li>
 <li><a href="../images/viking_room.png">viking_room.png</a></li>
 </ul>
+<blockquote>
+<p><strong>Note:</strong> The <code>.obj</code> and <code>.png</code> files that are included in this tutorial may not be identical to the original files. Make sure you use the files from this tutorial (and beyond that, the <code>.obj</code> and <code>.png</code> files may also differ from the files used in the <a href="https://vulkan-tutorial.com">original C++ tutorial</a>).</p>
+</blockquote>
 <p>Feel free to use your own model, but make sure that it only consists of one material and that is has dimensions of about 1.5 x 1.5 x 1.5 units. If it is larger than that, then you'll have to change the view matrix. Put the model file and texture image in the <code>resources</code> directory.</p>
 <p>Update <code>create_texture_image</code> to use this path variable:</p>
 <pre><code class="language-rust noplaypen">let image = File::open(&quot;resources/viking_room.png&quot;)?;
+</code></pre>
+<p>To double-check your image file is correct, you can also add this code in <code>create_texture_image</code> right after decoding the file as a PNG image:</p>
+<pre><code class="language-rust noplaypen">if width != 1024 || height != 1024 || reader.info().color_type != png::ColorType::Rgba {
+    panic!(&quot;Invalid texture image.&quot;);
+}
 </code></pre>
 <h2 id="loading-vertices-and-indices"><a class="header" href="#loading-vertices-and-indices">Loading vertices and indices</a></h2>
 <p>We're going to load the vertices and indices from the model file now, so you should remove the global <code>VERTICES</code> and <code>INDICES</code> arrays now. Replace them with <code>AppData</code> fields:</p>
