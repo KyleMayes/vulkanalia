@@ -167,6 +167,7 @@ pub struct DeviceCommands {
     pub cmd_resolve_image2_khr: PFN_vkCmdResolveImage2KHR,
     pub cmd_set_alpha_to_coverage_enable_ext: PFN_vkCmdSetAlphaToCoverageEnableEXT,
     pub cmd_set_alpha_to_one_enable_ext: PFN_vkCmdSetAlphaToOneEnableEXT,
+    pub cmd_set_attachment_feedback_loop_enable_ext: PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT,
     pub cmd_set_blend_constants: PFN_vkCmdSetBlendConstants,
     pub cmd_set_checkpoint_nv: PFN_vkCmdSetCheckpointNV,
     pub cmd_set_coarse_sample_order_nv: PFN_vkCmdSetCoarseSampleOrderNV,
@@ -2805,6 +2806,20 @@ impl DeviceCommands {
                         _alpha_to_one_enable: Bool32,
                     ) {
                         panic!("could not load vkCmdSetAlphaToOneEnableEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_attachment_feedback_loop_enable_ext: {
+                let value = loader(b"vkCmdSetAttachmentFeedbackLoopEnableEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _aspect_mask: ImageAspectFlags,
+                    ) {
+                        panic!("could not load vkCmdSetAttachmentFeedbackLoopEnableEXT")
                     }
                     fallback
                 }

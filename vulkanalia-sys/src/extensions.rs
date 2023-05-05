@@ -552,6 +552,22 @@ pub const EXT_ASTC_DECODE_MODE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_attachment_feedback_loop_dynamic_state.html>
+#[allow(deprecated)]
+pub const EXT_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_attachment_feedback_loop_dynamic_state"),
+    number: 525,
+    type_: "device",
+    author: "EXT",
+    contact: "Mike Blumenkrantz @zmike",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_attachment_feedback_loop_layout.html>
 #[allow(deprecated)]
 pub const EXT_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_EXTENSION: Extension = Extension {
@@ -3614,6 +3630,22 @@ pub const KHR_RAY_TRACING_PIPELINE_EXTENSION: Extension = Extension {
     type_: "device",
     author: "KHR",
     contact: "Daniel Koch @dgkoch",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_ray_tracing_position_fetch.html>
+#[allow(deprecated)]
+pub const KHR_RAY_TRACING_POSITION_FETCH_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_ray_tracing_position_fetch"),
+    number: 482,
+    type_: "device",
+    author: "KHR",
+    contact: "Eric Werness",
     platform: None,
     required_extensions: None,
     required_version: None,
