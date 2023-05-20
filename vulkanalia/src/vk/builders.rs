@@ -11946,6 +11946,10 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceASTCDecodeFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAccelerationStructureFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAddressBindingReportFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAmigoProfilingFeaturesSEC {}
+unsafe impl ExtendsDeviceCreateInfo
+    for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT
+{
+}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBorderColorSwizzleFeaturesEXT {}
@@ -12049,6 +12053,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingInvocationReorde
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceRobustness2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSamplerYcbcrConversionFeatures {}
@@ -29781,6 +29786,68 @@ unsafe impl Cast for PhysicalDeviceAmigoProfilingFeaturesSECBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT {
+    type Target = PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT {
+    type Builder = PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXTBuilder {
+    value: PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT,
+}
+
+impl PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXTBuilder {
+    #[inline]
+    pub fn attachment_feedback_loop_dynamic_state(
+        mut self,
+        attachment_feedback_loop_dynamic_state: bool,
+    ) -> Self {
+        self.value.attachment_feedback_loop_dynamic_state =
+            attachment_feedback_loop_dynamic_state as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXTBuilder {
+    type Target = PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXTBuilder {
+    type Target = PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {
     type Target = PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT;
 
@@ -35094,6 +35161,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAccelerationStructu
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAddressBindingReportFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAmigoProfilingFeaturesSEC {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT
+{
+}
+unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT
 {
 }
@@ -35219,6 +35290,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingInvocatio
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingMotionBlurFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingPipelineFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceRobustness2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSamplerYcbcrConversionFeatures {}
@@ -43989,6 +44061,64 @@ impl ops::DerefMut for PhysicalDeviceRayTracingPipelinePropertiesKHRBuilder {
 
 unsafe impl Cast for PhysicalDeviceRayTracingPipelinePropertiesKHRBuilder {
     type Target = PhysicalDeviceRayTracingPipelinePropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
+    type Target = PhysicalDeviceRayTracingPositionFetchFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
+    type Builder = PhysicalDeviceRayTracingPositionFetchFeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceRayTracingPositionFetchFeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceRayTracingPositionFetchFeaturesKHRBuilder {
+    value: PhysicalDeviceRayTracingPositionFetchFeaturesKHR,
+}
+
+impl PhysicalDeviceRayTracingPositionFetchFeaturesKHRBuilder {
+    #[inline]
+    pub fn ray_tracing_position_fetch(mut self, ray_tracing_position_fetch: bool) -> Self {
+        self.value.ray_tracing_position_fetch = ray_tracing_position_fetch as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceRayTracingPositionFetchFeaturesKHRBuilder {
+    type Target = PhysicalDeviceRayTracingPositionFetchFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceRayTracingPositionFetchFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceRayTracingPositionFetchFeaturesKHRBuilder {
+    type Target = PhysicalDeviceRayTracingPositionFetchFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
