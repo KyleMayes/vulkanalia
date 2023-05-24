@@ -1753,6 +1753,7 @@ impl DynamicState {
     pub const SHADING_RATE_IMAGE_ENABLE_NV: Self = Self(1000455030);
     pub const REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV: Self = Self(1000455031);
     pub const COVERAGE_REDUCTION_MODE_NV: Self = Self(1000455032);
+    pub const ATTACHMENT_FEEDBACK_LOOP_ENABLE_EXT: Self = Self(1000524000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1841,6 +1842,7 @@ impl fmt::Debug for DynamicState {
             1000455030 => write!(f, "SHADING_RATE_IMAGE_ENABLE_NV"),
             1000455031 => write!(f, "REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV"),
             1000455032 => write!(f, "COVERAGE_REDUCTION_MODE_NV"),
+            1000524000 => write!(f, "ATTACHMENT_FEEDBACK_LOOP_ENABLE_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -5693,6 +5695,7 @@ impl StructureType {
     pub const OPTICAL_FLOW_SESSION_CREATE_PRIVATE_DATA_INFO_NV: Self = Self(1000464010);
     pub const PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT: Self = Self(1000465000);
     pub const PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT: Self = Self(1000466000);
+    pub const PHYSICAL_DEVICE_RAY_TRACING_POSITION_FETCH_FEATURES_KHR: Self = Self(1000481000);
     pub const PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT: Self = Self(1000482000);
     pub const PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT: Self = Self(1000482001);
     pub const SHADER_CREATE_INFO_EXT: Self = Self(1000482002);
@@ -5715,6 +5718,8 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM: Self =
         Self(1000510000);
     pub const MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM: Self = Self(1000510001);
+    pub const PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT: Self =
+        Self(1000524000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -6559,6 +6564,7 @@ impl fmt::Debug for StructureType {
             1000464010 => write!(f, "OPTICAL_FLOW_SESSION_CREATE_PRIVATE_DATA_INFO_NV"),
             1000465000 => write!(f, "PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT"),
             1000466000 => write!(f, "PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT"),
+            1000481000 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_POSITION_FETCH_FEATURES_KHR"),
             1000482000 => write!(f, "PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT"),
             1000482001 => write!(f, "PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT"),
             1000482002 => write!(f, "SHADER_CREATE_INFO_EXT"),
@@ -6600,6 +6606,10 @@ impl fmt::Debug for StructureType {
             1000510001 => write!(
                 f,
                 "MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM"
+            ),
+            1000524000 => write!(
+                f,
+                "PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT"
             ),
             _ => self.0.fmt(f),
         }

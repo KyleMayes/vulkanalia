@@ -8704,6 +8704,27 @@ impl Default for PhysicalDeviceAmigoProfilingFeaturesSEC {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub attachment_feedback_loop_dynamic_state: Bool32,
+}
+
+impl Default for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type:
+                StructureType::PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT,
+            next: ptr::null_mut(),
+            attachment_feedback_loop_dynamic_state: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12807,6 +12828,26 @@ impl Default for PhysicalDeviceRayTracingPipelinePropertiesKHR {
             max_ray_dispatch_invocation_count: u32::default(),
             shader_group_handle_alignment: u32::default(),
             max_ray_hit_attribute_size: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub ray_tracing_position_fetch: Bool32,
+}
+
+impl Default for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_POSITION_FETCH_FEATURES_KHR,
+            next: ptr::null_mut(),
+            ray_tracing_position_fetch: Bool32::default(),
         }
     }
 }

@@ -1014,6 +1014,10 @@ pub type PFN_vkCmdSetAlphaToCoverageEnableEXT =
 pub type PFN_vkCmdSetAlphaToOneEnableEXT =
     unsafe extern "system" fn(_command_buffer: CommandBuffer, _alpha_to_one_enable: Bool32);
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetAttachmentFeedbackLoopEnableEXT.html>
+pub type PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT =
+    unsafe extern "system" fn(_command_buffer: CommandBuffer, _aspect_mask: ImageAspectFlags);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetBlendConstants.html>
 pub type PFN_vkCmdSetBlendConstants =
     unsafe extern "system" fn(_command_buffer: CommandBuffer, _blend_constants: *const f32);

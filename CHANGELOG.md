@@ -1,3 +1,14 @@
+## [0.20.0] - UNRELEASED
+
+### Bindings Updates
+- [April 20, 2023 Vulkan 1.3.248 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9fff8b252a3688c0231fa78709084bbe677d3bf7)
+- [April 27, 2023 Vulkan 1.3.249 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/58e747b4b453a787c1043f30fbf6669b3ba29e0e)
+- [May 4, 2023 Vulkan 1.3.250 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/8f2ca84561db97d13717827dc26d600e1c2ac719)
+- [Sync internal extension reservation with github per #2124.](https://github.com/KhronosGroup/Vulkan-Docs/commit/ce88c3111f2c79b72b10143aee324851ba71545f)
+- [Add new empty extension number 530. (#2128)](https://github.com/KhronosGroup/Vulkan-Docs/commit/c5bb6f9a65da0ddf26addb44ab4894af50f81b14)
+- [Add MSFT tag and reserve an extension number (#2129)](https://github.com/KhronosGroup/Vulkan-Docs/commit/15e7eac8d34dd8b101b5a422632263f07163244a)
+- [Fix typo in SPV_INTEL_shader_integer_functions2 (#2132)](https://github.com/KhronosGroup/Vulkan-Docs/commit/abefa12bc383e6c340e0f744a6a26ecf67cbb15d)
+
 ## [0.19.0] - 2023-04-26
 
 ### Changed
