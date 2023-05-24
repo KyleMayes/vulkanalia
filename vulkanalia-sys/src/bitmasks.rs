@@ -217,6 +217,7 @@ bitflags! {
         const ALLOW_DISABLE_OPACITY_MICROMAPS_EXT = 1 << 7;
         const ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT = 1 << 8;
         const ALLOW_DISPLACEMENT_MICROMAP_UPDATE_NV = 1 << 9;
+        const ALLOW_DATA_ACCESS = 1 << 11;
     }
 }
 

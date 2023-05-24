@@ -546,6 +546,28 @@ pub trait ExtAstcDecodeModeExtension: DeviceV1_0 {
 
 impl ExtAstcDecodeModeExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_attachment_feedback_loop_dynamic_state.html>
+pub trait ExtAttachmentFeedbackLoopDynamicStateExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetAttachmentFeedbackLoopEnableEXT.html>
+    #[inline]
+    unsafe fn cmd_set_attachment_feedback_loop_enable_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        aspect_mask: ImageAspectFlags,
+    ) {
+        let __result = (self.commands().cmd_set_attachment_feedback_loop_enable_ext)(
+            command_buffer,
+            aspect_mask,
+        );
+    }
+}
+
+impl ExtAttachmentFeedbackLoopDynamicStateExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_attachment_feedback_loop_layout.html>
 pub trait ExtAttachmentFeedbackLoopLayoutExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -8461,6 +8483,15 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
 }
 
 impl KhrRayTracingPipelineExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_ray_tracing_position_fetch.html>
+pub trait KhrRayTracingPositionFetchExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_RAY_TRACING_POSITION_FETCH_EXTENSION;
+}
+
+impl KhrRayTracingPositionFetchExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_relaxed_block_layout.html>
 pub trait KhrRelaxedBlockLayoutExtension: DeviceV1_0 {
