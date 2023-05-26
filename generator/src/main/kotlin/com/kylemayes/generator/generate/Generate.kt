@@ -59,6 +59,7 @@ data class File(
             true
         } catch (e: Throwable) {
             log.error { "$path could not be formatted." }
+            e.printStackTrace(System.err)
             false
         }
     }
