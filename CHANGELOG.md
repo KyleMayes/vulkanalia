@@ -1,4 +1,4 @@
-## [0.20.0] - UNRELEASED
+## [0.20.0] - 2023-05-26
 
 ### Changed
 - Fixed functions that take a `create_infos` slice to return a `Vec` of objects instead of a single object (e.g., `vkCreateGraphicsPipelines`)
