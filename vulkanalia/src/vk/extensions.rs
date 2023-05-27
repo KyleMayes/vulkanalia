@@ -4280,8 +4280,8 @@ pub trait ExtShaderObjectExtension: DeviceV1_0 {
         &self,
         create_infos: &[impl Cast<Target = ShaderCreateInfoEXT>],
         allocator: Option<&AllocationCallbacks>,
-    ) -> crate::VkResult<ShaderEXT> {
-        let mut shaders = MaybeUninit::<ShaderEXT>::uninit();
+    ) -> crate::VkResult<Vec<ShaderEXT>> {
+        let mut shaders = Vec::with_capacity(create_infos.len() as usize);
 
         let __result = (self.commands().create_shaders_ext)(
             self.handle(),
@@ -4291,8 +4291,10 @@ pub trait ExtShaderObjectExtension: DeviceV1_0 {
             shaders.as_mut_ptr(),
         );
 
+        shaders.set_len(create_infos.len() as usize);
+
         if __result == Result::SUCCESS {
-            Ok(shaders.assume_init())
+            Ok(shaders)
         } else {
             Err(__result.into())
         }
@@ -6686,8 +6688,8 @@ pub trait KhrDisplaySwapchainExtension: DeviceV1_0 {
         &self,
         create_infos: &[impl Cast<Target = SwapchainCreateInfoKHR>],
         allocator: Option<&AllocationCallbacks>,
-    ) -> crate::VkResult<SwapchainKHR> {
-        let mut swapchains = MaybeUninit::<SwapchainKHR>::uninit();
+    ) -> crate::VkResult<Vec<SwapchainKHR>> {
+        let mut swapchains = Vec::with_capacity(create_infos.len() as usize);
 
         let __result = (self.commands().create_shared_swapchains_khr)(
             self.handle(),
@@ -6697,8 +6699,10 @@ pub trait KhrDisplaySwapchainExtension: DeviceV1_0 {
             swapchains.as_mut_ptr(),
         );
 
+        swapchains.set_len(create_infos.len() as usize);
+
         if __result == Result::SUCCESS {
-            Ok(swapchains.assume_init())
+            Ok(swapchains)
         } else {
             Err(__result.into())
         }
@@ -8391,8 +8395,8 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
         pipeline_cache: PipelineCache,
         create_infos: &[impl Cast<Target = RayTracingPipelineCreateInfoKHR>],
         allocator: Option<&AllocationCallbacks>,
-    ) -> crate::VkSuccessResult<Pipeline> {
-        let mut pipelines = MaybeUninit::<Pipeline>::uninit();
+    ) -> crate::VkSuccessResult<Vec<Pipeline>> {
+        let mut pipelines = Vec::with_capacity(create_infos.len() as usize);
 
         let __result = (self.commands().create_ray_tracing_pipelines_khr)(
             self.handle(),
@@ -8404,8 +8408,10 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
             pipelines.as_mut_ptr(),
         );
 
+        pipelines.set_len(create_infos.len() as usize);
+
         if __result >= Result::SUCCESS {
-            Ok((pipelines.assume_init(), __result.into()))
+            Ok((pipelines, __result.into()))
         } else {
             Err(__result.into())
         }
@@ -9942,7 +9948,7 @@ pub trait NvCopyMemoryIndirectExtension: DeviceV1_0 {
         stride: u32,
         dst_image: Image,
         dst_image_layout: ImageLayout,
-        image_subresources: &ImageSubresourceLayers,
+        image_subresources: &[impl Cast<Target = ImageSubresourceLayers>],
     ) {
         let __result = (self.commands().cmd_copy_memory_to_image_indirect_nv)(
             command_buffer,
@@ -9951,7 +9957,7 @@ pub trait NvCopyMemoryIndirectExtension: DeviceV1_0 {
             stride,
             dst_image,
             dst_image_layout,
-            image_subresources,
+            image_subresources.as_ptr().cast(),
         );
     }
 }
@@ -11217,8 +11223,8 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
         pipeline_cache: PipelineCache,
         create_infos: &[impl Cast<Target = RayTracingPipelineCreateInfoNV>],
         allocator: Option<&AllocationCallbacks>,
-    ) -> crate::VkSuccessResult<Pipeline> {
-        let mut pipelines = MaybeUninit::<Pipeline>::uninit();
+    ) -> crate::VkSuccessResult<Vec<Pipeline>> {
+        let mut pipelines = Vec::with_capacity(create_infos.len() as usize);
 
         let __result = (self.commands().create_ray_tracing_pipelines_nv)(
             self.handle(),
@@ -11229,8 +11235,10 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
             pipelines.as_mut_ptr(),
         );
 
+        pipelines.set_len(create_infos.len() as usize);
+
         if __result >= Result::SUCCESS {
-            Ok((pipelines.assume_init(), __result.into()))
+            Ok((pipelines, __result.into()))
         } else {
             Err(__result.into())
         }

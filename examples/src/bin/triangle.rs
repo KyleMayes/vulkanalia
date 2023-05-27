@@ -185,7 +185,7 @@ impl Example for TriangleExample {
 
         data.pipeline = device
             .create_graphics_pipelines(vk::PipelineCache::null(), &[info], None)?
-            .0;
+            .0[0];
 
         // Cleanup
 

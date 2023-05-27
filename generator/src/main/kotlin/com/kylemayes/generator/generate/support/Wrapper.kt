@@ -9,6 +9,7 @@ import com.kylemayes.generator.registry.PointerType
 import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.getIdentifier
 import com.kylemayes.generator.registry.isOpaquePointer
+import com.kylemayes.generator.registry.isPointer
 import com.kylemayes.generator.support.PeekableIterator
 
 /** Generates a more Rust-friendly wrapper method around a command for a version or extension trait. */
@@ -60,6 +61,26 @@ fun Registry.generateCommandWrapper(command: Command): String {
 
     while (!iterator.isEmpty()) {
         val current = iterator.advance()
+
+        // Adds an input or output slice parameter with a length expression
+        // that uses the values of other parameters.
+        fun addLengthSliceParam(length: String) {
+            val pointer = current.type as PointerType
+            val pointee = pointer.pointee
+            if (pointer.const) {
+                // Input slice parameter.
+                val (item, cast) = generateInputSliceTypeAndCast(pointer)
+                params.add("${current.name}: ${"[$item]".generateRef(true)}")
+                addArgument("${current.name}.as_ptr()$cast")
+            } else {
+                // Output slice parameter.
+                resultTypes.add("Vec<${pointee.generate()}>")
+                resultExprs.add(current.name.value)
+                preActualStmts.add("let mut ${current.name} = Vec::with_capacity($length as usize);")
+                postActualStmts.add("${current.name}.set_len($length as usize);")
+                addArgument("${current.name}.as_mut_ptr()")
+            }
+        }
 
         // Each command parameter that follows the current command parameter
         // that has a `len` attribute that equals the name of the current
@@ -134,22 +155,11 @@ fun Registry.generateCommandWrapper(command: Command): String {
             // indicates that the length of the slice parameter is equivalent to
             // the value of the `descriptorSetCount` field in the
             // `pAllocateInfo` argument.
-            val pointer = current.type as PointerType
-            val pointee = pointer.pointee
-            if (pointer.const) {
-                // Input slice parameter.
-                val (item, cast) = generateInputSliceTypeAndCast(pointer)
-                params.add("${current.name}: ${"[$item]".generateRef(true)}")
-                addArgument("${current.name}.as_ptr()$cast")
-            } else {
-                // Output slice parameter.
-                val length = "${current.arglen[0]}.as_ref().${current.arglen[1]}"
-                resultTypes.add("Vec<${pointee.generate()}>")
-                resultExprs.add(current.name.value)
-                preActualStmts.add("let mut ${current.name} = Vec::with_capacity($length as usize);")
-                postActualStmts.add("${current.name}.set_len($length as usize);")
-                addArgument("${current.name}.as_mut_ptr()")
-            }
+            addLengthSliceParam("${current.arglen[0]}.as_ref().${current.arglen[1]}")
+        } else if (current.len != null && command.params.any { it.name == current.len }) {
+            // Slice parameter (length determined from argument slice length).
+            val slice = command.params.find { it.len == current.len && it.type.isPointer() }
+            addLengthSliceParam("${slice!!.name.value}.len()")
         } else if (current.type is PointerType) {
             // Pointer parameter.
             val pointee = current.type.pointee

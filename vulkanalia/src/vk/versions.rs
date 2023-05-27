@@ -1347,8 +1347,8 @@ pub trait DeviceV1_0 {
         pipeline_cache: PipelineCache,
         create_infos: &[impl Cast<Target = ComputePipelineCreateInfo>],
         allocator: Option<&AllocationCallbacks>,
-    ) -> crate::VkSuccessResult<Pipeline> {
-        let mut pipelines = MaybeUninit::<Pipeline>::uninit();
+    ) -> crate::VkSuccessResult<Vec<Pipeline>> {
+        let mut pipelines = Vec::with_capacity(create_infos.len() as usize);
 
         let __result = (self.commands().create_compute_pipelines)(
             self.handle(),
@@ -1359,8 +1359,10 @@ pub trait DeviceV1_0 {
             pipelines.as_mut_ptr(),
         );
 
+        pipelines.set_len(create_infos.len() as usize);
+
         if __result >= Result::SUCCESS {
-            Ok((pipelines.assume_init(), __result.into()))
+            Ok((pipelines, __result.into()))
         } else {
             Err(__result.into())
         }
@@ -1488,8 +1490,8 @@ pub trait DeviceV1_0 {
         pipeline_cache: PipelineCache,
         create_infos: &[impl Cast<Target = GraphicsPipelineCreateInfo>],
         allocator: Option<&AllocationCallbacks>,
-    ) -> crate::VkSuccessResult<Pipeline> {
-        let mut pipelines = MaybeUninit::<Pipeline>::uninit();
+    ) -> crate::VkSuccessResult<Vec<Pipeline>> {
+        let mut pipelines = Vec::with_capacity(create_infos.len() as usize);
 
         let __result = (self.commands().create_graphics_pipelines)(
             self.handle(),
@@ -1500,8 +1502,10 @@ pub trait DeviceV1_0 {
             pipelines.as_mut_ptr(),
         );
 
+        pipelines.set_len(create_infos.len() as usize);
+
         if __result >= Result::SUCCESS {
-            Ok((pipelines.assume_init(), __result.into()))
+            Ok((pipelines, __result.into()))
         } else {
             Err(__result.into())
         }
