@@ -65956,7 +65956,7 @@ pub struct TransformMatrixKHRBuilder {
 
 impl TransformMatrixKHRBuilder {
     #[inline]
-    pub fn matrix(mut self, matrix: [[f32; 3]; 4]) -> Self {
+    pub fn matrix(mut self, matrix: [[f32; 4]; 3]) -> Self {
         self.value.matrix = matrix;
         self
     }

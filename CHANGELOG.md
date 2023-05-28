@@ -1,5 +1,8 @@
 ## [0.21.0] - UNRELEASED
 
+### Changed
+- Fixed multi-dimensional array code generation (only affected the `TransformMatrixKHR::matrix` field)
+
 ### Bindings Updates
 - [May 28, 2023 Vulkan 1.3.251 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/45b5ba66f8128be493745da2d45f0bb407d9296a)
 

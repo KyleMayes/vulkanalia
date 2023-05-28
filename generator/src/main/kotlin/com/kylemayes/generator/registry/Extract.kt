@@ -543,6 +543,7 @@ private fun extractType(e: Element): Type {
             .findAll(contents)
             .map { it.groups[1]!!.value.intern() }
             .toList()
+            .reversed()
         if (lengths.isNotEmpty()) {
             var array = ArrayType(identifier, lengths[0])
             lengths.subList(1, lengths.size).forEach { array = ArrayType(array, it) }
