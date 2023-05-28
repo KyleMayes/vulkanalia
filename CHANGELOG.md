@@ -1,4 +1,4 @@
-## [0.21.0] - UNRELEASED
+## [0.21.0] - 2023-05-28
 
 ### Changed
 - Fixed multi-dimensional array code generation (only affected the `TransformMatrixKHR::matrix` field)
