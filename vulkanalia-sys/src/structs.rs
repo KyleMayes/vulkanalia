@@ -19126,7 +19126,7 @@ pub struct TraceRaysIndirectCommandKHR {
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct TransformMatrixKHR {
-    pub matrix: [[f32; 3]; 4],
+    pub matrix: [[f32; 4]; 3],
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkValidationCacheCreateInfoEXT.html>
