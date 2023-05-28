@@ -1616,6 +1616,15 @@ pub trait ExtDisplaySurfaceCounterExtension: InstanceV1_0 {
 
 impl ExtDisplaySurfaceCounterExtension for crate::Instance {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_dynamic_rendering_unused_attachments.html>
+pub trait ExtDynamicRenderingUnusedAttachmentsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_EXTENSION;
+}
+
+impl ExtDynamicRenderingUnusedAttachmentsExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_extended_dynamic_state.html>
 pub trait ExtExtendedDynamicStateExtension: DeviceV1_0 {
     /// The metadata for this extension.

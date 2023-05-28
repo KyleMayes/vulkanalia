@@ -9807,6 +9807,27 @@ impl Default for PhysicalDeviceDynamicRenderingFeatures {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub dynamic_rendering_unused_attachments: Bool32,
+}
+
+impl Default for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type:
+                StructureType::PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT,
+            next: ptr::null_mut(),
+            dynamic_rendering_unused_attachments: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceExclusiveScissorFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]

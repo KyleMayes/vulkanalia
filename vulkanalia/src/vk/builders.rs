@@ -11977,6 +11977,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceMemoryReportFeatures
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDisplacementMicromapFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDynamicRenderingFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExclusiveScissorFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
@@ -33447,6 +33448,68 @@ unsafe impl Cast for PhysicalDeviceDynamicRenderingFeaturesBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {
+    type Target = PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {
+    type Builder = PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXTBuilder {
+    value: PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT,
+}
+
+impl PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXTBuilder {
+    #[inline]
+    pub fn dynamic_rendering_unused_attachments(
+        mut self,
+        dynamic_rendering_unused_attachments: bool,
+    ) -> Self {
+        self.value.dynamic_rendering_unused_attachments =
+            dynamic_rendering_unused_attachments as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXTBuilder {
+    type Target = PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXTBuilder {
+    type Target = PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceExclusiveScissorFeaturesNV {
     type Target = PhysicalDeviceExclusiveScissorFeaturesNV;
 
@@ -35197,6 +35260,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceMemoryReportF
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDisplacementMicromapFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDynamicRenderingFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExclusiveScissorFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
