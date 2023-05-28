@@ -986,6 +986,22 @@ pub const EXT_DISPLAY_SURFACE_COUNTER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_dynamic_rendering_unused_attachments.html>
+#[allow(deprecated)]
+pub const EXT_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_dynamic_rendering_unused_attachments"),
+    number: 500,
+    type_: "device",
+    author: "EXT",
+    contact: "Piers Daniell @pdaniell-nv",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_extended_dynamic_state.html>
 #[allow(deprecated)]
 pub const EXT_EXTENDED_DYNAMIC_STATE_EXTENSION: Extension = Extension {
