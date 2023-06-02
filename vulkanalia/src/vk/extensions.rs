@@ -2288,6 +2288,15 @@ pub trait ExtExtendedDynamicState3Extension: DeviceV1_0 {
 
 impl ExtExtendedDynamicState3Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_external_memory_acquire_unmodified.html>
+pub trait ExtExternalMemoryAcquireUnmodifiedExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_EXTERNAL_MEMORY_ACQUIRE_UNMODIFIED_EXTENSION;
+}
+
+impl ExtExternalMemoryAcquireUnmodifiedExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_external_memory_dma_buf.html>
 pub trait ExtExternalMemoryDmaBufExtension: DeviceV1_0 {
     /// The metadata for this extension.

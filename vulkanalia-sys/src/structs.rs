@@ -5120,6 +5120,26 @@ pub struct ExternalImageFormatPropertiesNV {
     pub compatible_handle_types: ExternalMemoryHandleTypeFlagsNV,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExternalMemoryAcquireUnmodifiedEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExternalMemoryAcquireUnmodifiedEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub acquire_unmodified_memory: Bool32,
+}
+
+impl Default for ExternalMemoryAcquireUnmodifiedEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXTERNAL_MEMORY_ACQUIRE_UNMODIFIED_EXT,
+            next: ptr::null(),
+            acquire_unmodified_memory: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExternalMemoryBufferCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]

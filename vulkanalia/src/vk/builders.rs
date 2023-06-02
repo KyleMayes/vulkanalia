@@ -5703,6 +5703,10 @@ unsafe impl<'b> Cast for BufferImageCopy2Builder<'b> {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`BufferMemoryBarrier`].
+pub unsafe trait ExtendsBufferMemoryBarrier: fmt::Debug {}
+unsafe impl ExtendsBufferMemoryBarrier for ExternalMemoryAcquireUnmodifiedEXT {}
+
 unsafe impl Cast for BufferMemoryBarrier {
     type Target = BufferMemoryBarrier;
 
@@ -5712,18 +5716,30 @@ unsafe impl Cast for BufferMemoryBarrier {
     }
 }
 
-impl HasBuilder<'static> for BufferMemoryBarrier {
-    type Builder = BufferMemoryBarrierBuilder;
+impl<'b> HasBuilder<'b> for BufferMemoryBarrier {
+    type Builder = BufferMemoryBarrierBuilder<'b>;
 }
 
 /// A builder for a [`BufferMemoryBarrier`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct BufferMemoryBarrierBuilder {
+pub struct BufferMemoryBarrierBuilder<'b> {
     value: BufferMemoryBarrier,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl BufferMemoryBarrierBuilder {
+impl<'b> BufferMemoryBarrierBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsBufferMemoryBarrier,
+    {
+        let next = (next.as_mut() as *mut T).cast::<BufferMemoryBarrier>();
+        unsafe { &mut *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn src_access_mask(mut self, src_access_mask: AccessFlags) -> Self {
         self.value.src_access_mask = src_access_mask;
@@ -5772,7 +5788,7 @@ impl BufferMemoryBarrierBuilder {
     }
 }
 
-impl ops::Deref for BufferMemoryBarrierBuilder {
+impl<'b> ops::Deref for BufferMemoryBarrierBuilder<'b> {
     type Target = BufferMemoryBarrier;
 
     #[inline]
@@ -5781,14 +5797,14 @@ impl ops::Deref for BufferMemoryBarrierBuilder {
     }
 }
 
-impl ops::DerefMut for BufferMemoryBarrierBuilder {
+impl<'b> ops::DerefMut for BufferMemoryBarrierBuilder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for BufferMemoryBarrierBuilder {
+unsafe impl<'b> Cast for BufferMemoryBarrierBuilder<'b> {
     type Target = BufferMemoryBarrier;
 
     #[inline]
@@ -5796,6 +5812,10 @@ unsafe impl Cast for BufferMemoryBarrierBuilder {
         self.value
     }
 }
+
+/// A Vulkan struct that can be used to extend a [`BufferMemoryBarrier2`].
+pub unsafe trait ExtendsBufferMemoryBarrier2: fmt::Debug {}
+unsafe impl ExtendsBufferMemoryBarrier2 for ExternalMemoryAcquireUnmodifiedEXT {}
 
 unsafe impl Cast for BufferMemoryBarrier2 {
     type Target = BufferMemoryBarrier2;
@@ -5806,18 +5826,30 @@ unsafe impl Cast for BufferMemoryBarrier2 {
     }
 }
 
-impl HasBuilder<'static> for BufferMemoryBarrier2 {
-    type Builder = BufferMemoryBarrier2Builder;
+impl<'b> HasBuilder<'b> for BufferMemoryBarrier2 {
+    type Builder = BufferMemoryBarrier2Builder<'b>;
 }
 
 /// A builder for a [`BufferMemoryBarrier2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct BufferMemoryBarrier2Builder {
+pub struct BufferMemoryBarrier2Builder<'b> {
     value: BufferMemoryBarrier2,
+    _marker: PhantomData<&'b ()>,
 }
 
-impl BufferMemoryBarrier2Builder {
+impl<'b> BufferMemoryBarrier2Builder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsBufferMemoryBarrier2,
+    {
+        let next = (next.as_mut() as *mut T).cast::<BufferMemoryBarrier2>();
+        unsafe { &mut *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
     #[inline]
     pub fn src_stage_mask(mut self, src_stage_mask: PipelineStageFlags2) -> Self {
         self.value.src_stage_mask = src_stage_mask;
@@ -5878,7 +5910,7 @@ impl BufferMemoryBarrier2Builder {
     }
 }
 
-impl ops::Deref for BufferMemoryBarrier2Builder {
+impl<'b> ops::Deref for BufferMemoryBarrier2Builder<'b> {
     type Target = BufferMemoryBarrier2;
 
     #[inline]
@@ -5887,14 +5919,14 @@ impl ops::Deref for BufferMemoryBarrier2Builder {
     }
 }
 
-impl ops::DerefMut for BufferMemoryBarrier2Builder {
+impl<'b> ops::DerefMut for BufferMemoryBarrier2Builder<'b> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for BufferMemoryBarrier2Builder {
+unsafe impl<'b> Cast for BufferMemoryBarrier2Builder<'b> {
     type Target = BufferMemoryBarrier2;
 
     #[inline]
@@ -11939,6 +11971,8 @@ unsafe impl ExtendsDeviceCreateInfo for DeviceDiagnosticsConfigCreateInfoNV {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceGroupDeviceCreateInfo {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceMemoryOverallocationCreateInfoAMD {}
 unsafe impl ExtendsDeviceCreateInfo for DevicePrivateDataCreateInfo {}
+unsafe impl ExtendsDeviceCreateInfo for DeviceSemaphoreSciSyncPoolReservationCreateInfoNV {}
+unsafe impl ExtendsDeviceCreateInfo for PerformanceQueryReservationInfoKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice16BitStorageFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice4444FormatsFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevice8BitStorageFeatures {}
@@ -17759,6 +17793,64 @@ unsafe impl Cast for ExternalImageFormatPropertiesNVBuilder {
     }
 }
 
+unsafe impl Cast for ExternalMemoryAcquireUnmodifiedEXT {
+    type Target = ExternalMemoryAcquireUnmodifiedEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ExternalMemoryAcquireUnmodifiedEXT {
+    type Builder = ExternalMemoryAcquireUnmodifiedEXTBuilder;
+}
+
+/// A builder for a [`ExternalMemoryAcquireUnmodifiedEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExternalMemoryAcquireUnmodifiedEXTBuilder {
+    value: ExternalMemoryAcquireUnmodifiedEXT,
+}
+
+impl ExternalMemoryAcquireUnmodifiedEXTBuilder {
+    #[inline]
+    pub fn acquire_unmodified_memory(mut self, acquire_unmodified_memory: bool) -> Self {
+        self.value.acquire_unmodified_memory = acquire_unmodified_memory as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExternalMemoryAcquireUnmodifiedEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for ExternalMemoryAcquireUnmodifiedEXTBuilder {
+    type Target = ExternalMemoryAcquireUnmodifiedEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ExternalMemoryAcquireUnmodifiedEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ExternalMemoryAcquireUnmodifiedEXTBuilder {
+    type Target = ExternalMemoryAcquireUnmodifiedEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ExternalMemoryBufferCreateInfo {
     type Target = ExternalMemoryBufferCreateInfo;
 
@@ -21537,6 +21629,7 @@ unsafe impl<'b> Cast for ImageFormatProperties2Builder<'b> {
 
 /// A Vulkan struct that can be used to extend a [`ImageMemoryBarrier`].
 pub unsafe trait ExtendsImageMemoryBarrier: fmt::Debug {}
+unsafe impl ExtendsImageMemoryBarrier for ExternalMemoryAcquireUnmodifiedEXT {}
 unsafe impl ExtendsImageMemoryBarrier for SampleLocationsInfoEXT {}
 
 unsafe impl Cast for ImageMemoryBarrier {
@@ -21656,6 +21749,7 @@ unsafe impl<'b> Cast for ImageMemoryBarrierBuilder<'b> {
 
 /// A Vulkan struct that can be used to extend a [`ImageMemoryBarrier2`].
 pub unsafe trait ExtendsImageMemoryBarrier2: fmt::Debug {}
+unsafe impl ExtendsImageMemoryBarrier2 for ExternalMemoryAcquireUnmodifiedEXT {}
 unsafe impl ExtendsImageMemoryBarrier2 for SampleLocationsInfoEXT {}
 
 unsafe impl Cast for ImageMemoryBarrier2 {
