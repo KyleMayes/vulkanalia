@@ -1050,6 +1050,22 @@ pub const EXT_EXTENDED_DYNAMIC_STATE3_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_external_memory_acquire_unmodified.html>
+#[allow(deprecated)]
+pub const EXT_EXTERNAL_MEMORY_ACQUIRE_UNMODIFIED_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_external_memory_acquire_unmodified"),
+    number: 454,
+    type_: "device",
+    author: "EXT",
+    contact: "Lina Versace @versalinyaa",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_external_memory_dma_buf.html>
 #[allow(deprecated)]
 pub const EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION: Extension = Extension {
