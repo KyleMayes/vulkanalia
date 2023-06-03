@@ -883,7 +883,7 @@ unsafe fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
 
     data.pipeline = device
         .create_graphics_pipelines(vk::PipelineCache::null(), &[info], None)?
-        .0;
+        .0[0];
 
     // Cleanup
 
