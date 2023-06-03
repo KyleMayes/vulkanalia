@@ -371,7 +371,7 @@ png = &quot;0.17&quot;
 pretty_env_logger = &quot;0.4&quot;
 thiserror = &quot;1&quot;
 tobj = { version = &quot;3&quot;, features = [&quot;log&quot;] }
-vulkanalia = { version = &quot;=0.19.0&quot;, features = [&quot;libloading&quot;, &quot;provisional&quot;, &quot;window&quot;] }
+vulkanalia = { version = &quot;=0.21.0&quot;, features = [&quot;libloading&quot;, &quot;provisional&quot;, &quot;window&quot;] }
 winit = &quot;0.28&quot;
 </code></pre>
 <ul>
@@ -2148,7 +2148,7 @@ let info = vk::GraphicsPipelineCreateInfo::builder()
 </code></pre>
 <p>And finally create the graphics pipeline:</p>
 <pre><code class="language-rust noplaypen">data.pipeline = device.create_graphics_pipelines(
-    vk::PipelineCache::null(), &amp;[info], None)?.0;
+    vk::PipelineCache::null(), &amp;[info], None)?.0[0];
 </code></pre>
 <p>The <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_graphics_pipelines"><code class="hljs">create_graphics_pipelines</code></a> function actually has more parameters than the usual object creation functions in Vulkan. It is designed to take multiple <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.GraphicsPipelineCreateInfo.html"><code class="hljs">vk::GraphicsPipelineCreateInfo</code></a> objects and create multiple <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Pipeline.html"><code class="hljs">vk::Pipeline</code></a> objects in a single call.</p>
 <p>The first parameter, for which we've passed the <code>vk::PipelineCache::null()</code> argument, references an optional <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.PipelineCache.html"><code class="hljs">vk::PipelineCache</code></a> object. A pipeline cache can be used to store and reuse data relevant to pipeline creation across multiple calls to <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_graphics_pipelines"><code class="hljs">create_graphics_pipelines</code></a> and even across program executions if the cache is stored to a file. This makes it possible to significantly speed up pipeline creation at a later time.</p>
