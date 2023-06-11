@@ -271,7 +271,7 @@
 );
 </code></pre>
 <p>Someone who is familiar with the conventions of the Vulkan API could quickly see how this command is supposed to be used from this signature alone despite it not including some key information.</p>
-<p>For those new to the Vulkan API, a look at the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateDeviceExtensionProperties.html">documentation</a> for this command will likely be more illuminating. The description of the behavior of this command in the documentation suggests that using this command to list the available extensions for the Vulkan instance will be a multi-step process:</p>
+<p>For those new to the Vulkan API, a look at the <a href="https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/vkEnumerateInstanceExtensionProperties.html">documentation</a> for this command will likely be more illuminating. The description of the behavior of this command in the documentation suggests that using this command to list the available extensions for the Vulkan instance will be a multi-step process:</p>
 <ol>
 <li>Call the command to get the number of extensions</li>
 <li>Allocate a buffer that can contain the outputted number of extensions</li>
