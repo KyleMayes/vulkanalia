@@ -5090,6 +5090,26 @@ impl Default for ExternalFormatANDROID {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExternalFormatQNX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExternalFormatQNX {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub external_format: u64,
+}
+
+impl Default for ExternalFormatQNX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXTERNAL_FORMAT_QNX,
+            next: ptr::null_mut(),
+            external_format: u64::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExternalImageFormatProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7073,6 +7093,26 @@ impl Default for ImportMetalTextureInfoEXT {
             next: ptr::null(),
             plane: ImageAspectFlags::default(),
             mtl_texture: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImportScreenBufferInfoQNX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImportScreenBufferInfoQNX {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub buffer: *mut _screen_buffer,
+}
+
+impl Default for ImportScreenBufferInfoQNX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMPORT_SCREEN_BUFFER_INFO_QNX,
+            next: ptr::null(),
+            buffer: ptr::null_mut(),
         }
     }
 }
@@ -10134,6 +10174,26 @@ impl Default for PhysicalDeviceExternalMemorySciBufFeaturesNV {
             next: ptr::null_mut(),
             sci_buf_import: Bool32::default(),
             sci_buf_export: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub screen_buffer_import: Bool32,
+}
+
+impl Default for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX,
+            next: ptr::null_mut(),
+            screen_buffer_import: Bool32::default(),
         }
     }
 }
@@ -17530,6 +17590,64 @@ impl Default for SciSyncAttributesInfoNV {
             next: ptr::null(),
             client_type: SciSyncClientTypeNV::default(),
             primitive_type: SciSyncPrimitiveTypeNV::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkScreenBufferFormatPropertiesQNX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ScreenBufferFormatPropertiesQNX {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub format: Format,
+    pub external_format: u64,
+    pub screen_usage: u64,
+    pub format_features: FormatFeatureFlags,
+    pub sampler_ycbcr_conversion_components: ComponentMapping,
+    pub suggested_ycbcr_model: SamplerYcbcrModelConversion,
+    pub suggested_ycbcr_range: SamplerYcbcrRange,
+    pub suggested_x_chroma_offset: ChromaLocation,
+    pub suggested_y_chroma_offset: ChromaLocation,
+}
+
+impl Default for ScreenBufferFormatPropertiesQNX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SCREEN_BUFFER_FORMAT_PROPERTIES_QNX,
+            next: ptr::null_mut(),
+            format: Format::default(),
+            external_format: u64::default(),
+            screen_usage: u64::default(),
+            format_features: FormatFeatureFlags::default(),
+            sampler_ycbcr_conversion_components: ComponentMapping::default(),
+            suggested_ycbcr_model: SamplerYcbcrModelConversion::default(),
+            suggested_ycbcr_range: SamplerYcbcrRange::default(),
+            suggested_x_chroma_offset: ChromaLocation::default(),
+            suggested_y_chroma_offset: ChromaLocation::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkScreenBufferPropertiesQNX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ScreenBufferPropertiesQNX {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub allocation_size: DeviceSize,
+    pub memory_type_bits: u32,
+}
+
+impl Default for ScreenBufferPropertiesQNX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SCREEN_BUFFER_PROPERTIES_QNX,
+            next: ptr::null_mut(),
+            allocation_size: DeviceSize::default(),
+            memory_type_bits: u32::default(),
         }
     }
 }

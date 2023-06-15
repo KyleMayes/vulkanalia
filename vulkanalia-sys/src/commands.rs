@@ -3751,6 +3751,13 @@ pub type PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT = unsafe extern "system"
     _data: *mut c_void,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetScreenBufferPropertiesQNX.html>
+pub type PFN_vkGetScreenBufferPropertiesQNX = unsafe extern "system" fn(
+    _device: Device,
+    _buffer: *const _screen_buffer,
+    _properties: *mut ScreenBufferPropertiesQNX,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetSemaphoreCounterValue.html>
 pub type PFN_vkGetSemaphoreCounterValue =
     unsafe extern "system" fn(_device: Device, _semaphore: Semaphore, _value: *mut u64) -> Result;

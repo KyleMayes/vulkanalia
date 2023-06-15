@@ -621,6 +621,7 @@ bitflags! {
         const ZIRCON_VMO_FUCHSIA = 1 << 11;
         const RDMA_ADDRESS_NV = 1 << 12;
         const SCI_BUF_NV = 1 << 13;
+        const SCREEN_BUFFER_QNX = 1 << 14;
     }
 }
 

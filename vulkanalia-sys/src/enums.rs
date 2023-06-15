@@ -5723,6 +5723,11 @@ impl StructureType {
     pub const MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM: Self = Self(1000510001);
     pub const PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT: Self =
         Self(1000524000);
+    pub const SCREEN_BUFFER_PROPERTIES_QNX: Self = Self(1000529000);
+    pub const SCREEN_BUFFER_FORMAT_PROPERTIES_QNX: Self = Self(1000529001);
+    pub const IMPORT_SCREEN_BUFFER_INFO_QNX: Self = Self(1000529002);
+    pub const EXTERNAL_FORMAT_QNX: Self = Self(1000529003);
+    pub const PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX: Self = Self(1000529004);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -6618,6 +6623,14 @@ impl fmt::Debug for StructureType {
             1000524000 => write!(
                 f,
                 "PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT"
+            ),
+            1000529000 => write!(f, "SCREEN_BUFFER_PROPERTIES_QNX"),
+            1000529001 => write!(f, "SCREEN_BUFFER_FORMAT_PROPERTIES_QNX"),
+            1000529002 => write!(f, "IMPORT_SCREEN_BUFFER_INFO_QNX"),
+            1000529003 => write!(f, "EXTERNAL_FORMAT_QNX"),
+            1000529004 => write!(
+                f,
+                "PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX"
             ),
             _ => self.0.fmt(f),
         }

@@ -520,6 +520,7 @@ pub struct DeviceCommands {
     pub get_render_area_granularity: PFN_vkGetRenderAreaGranularity,
     pub get_sampler_opaque_capture_descriptor_data_ext:
         PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT,
+    pub get_screen_buffer_properties_qnx: PFN_vkGetScreenBufferPropertiesQNX,
     pub get_semaphore_counter_value: PFN_vkGetSemaphoreCounterValue,
     pub get_semaphore_counter_value_khr: PFN_vkGetSemaphoreCounterValueKHR,
     pub get_semaphore_fd_khr: PFN_vkGetSemaphoreFdKHR,
@@ -7897,6 +7898,21 @@ impl DeviceCommands {
                         _data: *mut c_void,
                     ) -> Result {
                         panic!("could not load vkGetSamplerOpaqueCaptureDescriptorDataEXT")
+                    }
+                    fallback
+                }
+            },
+            get_screen_buffer_properties_qnx: {
+                let value = loader(b"vkGetScreenBufferPropertiesQNX\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _buffer: *const _screen_buffer,
+                        _properties: *mut ScreenBufferPropertiesQNX,
+                    ) -> Result {
+                        panic!("could not load vkGetScreenBufferPropertiesQNX")
                     }
                     fallback
                 }
