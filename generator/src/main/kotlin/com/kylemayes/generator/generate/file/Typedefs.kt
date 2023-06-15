@@ -37,6 +37,7 @@ pub type MTLTexture_id = *mut c_void;
 
 // QNX
 
+pub type _screen_buffer = c_void;
 pub type _screen_context = c_void;
 pub type _screen_window = c_void;
 
