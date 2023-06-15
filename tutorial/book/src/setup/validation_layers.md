@@ -202,6 +202,8 @@ unsafe fn create_instance(
 }
 ```
 
+> **Note:** Calling the `all` static method on a set of Vulkan flags (e.g., `vk::DebugUtilsMessageTypeFlagsEXT::all()` as in the above example) will return a set of flags with all of the bits set for the flags known by `vulkanalia`. This introduces the possibility that if the application uses an implementation of Vulkan older than the latest version of Vulkan that `vulkanalia` supports, this set of flags could include flags that aren't known by the Vulkan implementation in use by the application. This shouldn't cause any issues with the functionality of the application, but you might see some validation errors. If you encounter warnings about unknown flags because of these debug flags, you can avoid them by upgrading your Vulkan SDK to the latest version (or directly specifying the supported flags).
+
 We have first extracted our Vulkan instance out of the return expression so we can use it to add our debug callback.
 
 Then we construct a `vk::DebugUtilsMessengerCreateInfoEXT` struct which provides information about our debug callback and how it will be called.
