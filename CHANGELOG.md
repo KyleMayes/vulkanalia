@@ -2,6 +2,8 @@
 
 ### Bindings Updates
 - [June 1, 2023 Vulkan 1.3.252 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/5718db0a370b5bd91e6cf2268a3dc2af9cfc15d1)
+- [June 9, 2023 Vulkan 1.3.253 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/2f4ef8371aa309f91954536996582066900ef2a0)
+- [Add spec for VK_QNX_external_memory_screen_buffer (#2138)](https://github.com/KhronosGroup/Vulkan-Docs/commit/b5543e9029775140325b0d9593c83eb9f3afe831)
 
 ## [0.21.0] - 2023-05-28
 

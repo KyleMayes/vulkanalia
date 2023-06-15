@@ -11667,6 +11667,32 @@ pub trait QcomTilePropertiesExtension: DeviceV1_0 {
 
 impl QcomTilePropertiesExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QNX_external_memory_screen_buffer.html>
+pub trait QnxExternalMemoryScreenBufferExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QNX_EXTERNAL_MEMORY_SCREEN_BUFFER_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetScreenBufferPropertiesQNX.html>
+    #[inline]
+    unsafe fn get_screen_buffer_properties_qnx(
+        &self,
+        buffer: &_screen_buffer,
+        properties: &mut ScreenBufferPropertiesQNX,
+    ) -> crate::VkResult<()> {
+        let __result =
+            (self.commands().get_screen_buffer_properties_qnx)(self.handle(), buffer, properties);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl QnxExternalMemoryScreenBufferExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QNX_screen_surface.html>
 pub trait QnxScreenSurfaceExtension: InstanceV1_0 {
     /// The metadata for this extension.

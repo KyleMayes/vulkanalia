@@ -12018,6 +12018,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState3Featu
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalSciSync2FeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalSciSyncFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFaultFeaturesEXT {}
@@ -17644,6 +17645,64 @@ unsafe impl Cast for ExternalFormatANDROIDBuilder {
     }
 }
 
+unsafe impl Cast for ExternalFormatQNX {
+    type Target = ExternalFormatQNX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ExternalFormatQNX {
+    type Builder = ExternalFormatQNXBuilder;
+}
+
+/// A builder for a [`ExternalFormatQNX`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ExternalFormatQNXBuilder {
+    value: ExternalFormatQNX,
+}
+
+impl ExternalFormatQNXBuilder {
+    #[inline]
+    pub fn external_format(mut self, external_format: u64) -> Self {
+        self.value.external_format = external_format;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ExternalFormatQNX {
+        self.value
+    }
+}
+
+impl ops::Deref for ExternalFormatQNXBuilder {
+    type Target = ExternalFormatQNX;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ExternalFormatQNXBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ExternalFormatQNXBuilder {
+    type Target = ExternalFormatQNX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ExternalImageFormatProperties {
     type Target = ExternalImageFormatProperties;
 
@@ -20973,6 +21032,7 @@ unsafe impl ExtendsImageCreateInfo for BufferCollectionImageCreateInfoFUCHSIA {}
 unsafe impl ExtendsImageCreateInfo for DedicatedAllocationImageCreateInfoNV {}
 unsafe impl ExtendsImageCreateInfo for ExportMetalObjectCreateInfoEXT {}
 unsafe impl ExtendsImageCreateInfo for ExternalFormatANDROID {}
+unsafe impl ExtendsImageCreateInfo for ExternalFormatQNX {}
 unsafe impl ExtendsImageCreateInfo for ExternalMemoryImageCreateInfo {}
 unsafe impl ExtendsImageCreateInfo for ExternalMemoryImageCreateInfoNV {}
 unsafe impl ExtendsImageCreateInfo for ImageCompressionControlEXT {}
@@ -24309,6 +24369,65 @@ unsafe impl Cast for ImportMetalTextureInfoEXTBuilder {
     }
 }
 
+unsafe impl Cast for ImportScreenBufferInfoQNX {
+    type Target = ImportScreenBufferInfoQNX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for ImportScreenBufferInfoQNX {
+    type Builder = ImportScreenBufferInfoQNXBuilder<'b>;
+}
+
+/// A builder for a [`ImportScreenBufferInfoQNX`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImportScreenBufferInfoQNXBuilder<'b> {
+    value: ImportScreenBufferInfoQNX,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> ImportScreenBufferInfoQNXBuilder<'b> {
+    #[inline]
+    pub fn buffer(mut self, buffer: &'b mut _screen_buffer) -> Self {
+        self.value.buffer = buffer as *mut _screen_buffer;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImportScreenBufferInfoQNX {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for ImportScreenBufferInfoQNXBuilder<'b> {
+    type Target = ImportScreenBufferInfoQNX;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for ImportScreenBufferInfoQNXBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for ImportScreenBufferInfoQNXBuilder<'b> {
+    type Target = ImportScreenBufferInfoQNX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ImportSemaphoreFdInfoKHR {
     type Target = ImportSemaphoreFdInfoKHR;
 
@@ -25423,6 +25542,7 @@ unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryWin32HandleInfoKHR {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryWin32HandleInfoNV {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMemoryZirconHandleInfoFUCHSIA {}
 unsafe impl ExtendsMemoryAllocateInfo for ImportMetalBufferInfoEXT {}
+unsafe impl ExtendsMemoryAllocateInfo for ImportScreenBufferInfoQNX {}
 unsafe impl ExtendsMemoryAllocateInfo for MemoryAllocateFlagsInfo {}
 unsafe impl ExtendsMemoryAllocateInfo for MemoryDedicatedAllocateInfo {}
 unsafe impl ExtendsMemoryAllocateInfo for MemoryOpaqueCaptureAddressAllocateInfo {}
@@ -34597,6 +34717,64 @@ unsafe impl Cast for PhysicalDeviceExternalMemorySciBufFeaturesNVBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {
+    type Target = PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {
+    type Builder = PhysicalDeviceExternalMemoryScreenBufferFeaturesQNXBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceExternalMemoryScreenBufferFeaturesQNXBuilder {
+    value: PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX,
+}
+
+impl PhysicalDeviceExternalMemoryScreenBufferFeaturesQNXBuilder {
+    #[inline]
+    pub fn screen_buffer_import(mut self, screen_buffer_import: bool) -> Self {
+        self.value.screen_buffer_import = screen_buffer_import as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNXBuilder {
+    type Target = PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNXBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNXBuilder {
+    type Target = PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceExternalSciSync2FeaturesNV {
     type Target = PhysicalDeviceExternalSciSync2FeaturesNV;
 
@@ -35364,6 +35542,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicStat
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalSciSync2FeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalSciSyncFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFaultFeaturesEXT {}
@@ -59834,6 +60013,7 @@ unsafe impl Cast for SamplerReductionModeCreateInfoBuilder {
 /// A Vulkan struct that can be used to extend a [`SamplerYcbcrConversionCreateInfo`].
 pub unsafe trait ExtendsSamplerYcbcrConversionCreateInfo: fmt::Debug {}
 unsafe impl ExtendsSamplerYcbcrConversionCreateInfo for ExternalFormatANDROID {}
+unsafe impl ExtendsSamplerYcbcrConversionCreateInfo for ExternalFormatQNX {}
 
 unsafe impl Cast for SamplerYcbcrConversionCreateInfo {
     type Target = SamplerYcbcrConversionCreateInfo;
@@ -60124,6 +60304,198 @@ impl ops::DerefMut for SciSyncAttributesInfoNVBuilder {
 
 unsafe impl Cast for SciSyncAttributesInfoNVBuilder {
     type Target = SciSyncAttributesInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ScreenBufferFormatPropertiesQNX {
+    type Target = ScreenBufferFormatPropertiesQNX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ScreenBufferFormatPropertiesQNX {
+    type Builder = ScreenBufferFormatPropertiesQNXBuilder;
+}
+
+/// A builder for a [`ScreenBufferFormatPropertiesQNX`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ScreenBufferFormatPropertiesQNXBuilder {
+    value: ScreenBufferFormatPropertiesQNX,
+}
+
+impl ScreenBufferFormatPropertiesQNXBuilder {
+    #[inline]
+    pub fn format(mut self, format: Format) -> Self {
+        self.value.format = format;
+        self
+    }
+
+    #[inline]
+    pub fn external_format(mut self, external_format: u64) -> Self {
+        self.value.external_format = external_format;
+        self
+    }
+
+    #[inline]
+    pub fn screen_usage(mut self, screen_usage: u64) -> Self {
+        self.value.screen_usage = screen_usage;
+        self
+    }
+
+    #[inline]
+    pub fn format_features(mut self, format_features: FormatFeatureFlags) -> Self {
+        self.value.format_features = format_features;
+        self
+    }
+
+    #[inline]
+    pub fn sampler_ycbcr_conversion_components(
+        mut self,
+        sampler_ycbcr_conversion_components: impl Cast<Target = ComponentMapping>,
+    ) -> Self {
+        self.value.sampler_ycbcr_conversion_components = sampler_ycbcr_conversion_components.into();
+        self
+    }
+
+    #[inline]
+    pub fn suggested_ycbcr_model(
+        mut self,
+        suggested_ycbcr_model: SamplerYcbcrModelConversion,
+    ) -> Self {
+        self.value.suggested_ycbcr_model = suggested_ycbcr_model;
+        self
+    }
+
+    #[inline]
+    pub fn suggested_ycbcr_range(mut self, suggested_ycbcr_range: SamplerYcbcrRange) -> Self {
+        self.value.suggested_ycbcr_range = suggested_ycbcr_range;
+        self
+    }
+
+    #[inline]
+    pub fn suggested_x_chroma_offset(mut self, suggested_x_chroma_offset: ChromaLocation) -> Self {
+        self.value.suggested_x_chroma_offset = suggested_x_chroma_offset;
+        self
+    }
+
+    #[inline]
+    pub fn suggested_y_chroma_offset(mut self, suggested_y_chroma_offset: ChromaLocation) -> Self {
+        self.value.suggested_y_chroma_offset = suggested_y_chroma_offset;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ScreenBufferFormatPropertiesQNX {
+        self.value
+    }
+}
+
+impl ops::Deref for ScreenBufferFormatPropertiesQNXBuilder {
+    type Target = ScreenBufferFormatPropertiesQNX;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ScreenBufferFormatPropertiesQNXBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ScreenBufferFormatPropertiesQNXBuilder {
+    type Target = ScreenBufferFormatPropertiesQNX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+/// A Vulkan struct that can be used to extend a [`ScreenBufferPropertiesQNX`].
+pub unsafe trait ExtendsScreenBufferPropertiesQNX: fmt::Debug {}
+unsafe impl ExtendsScreenBufferPropertiesQNX for ScreenBufferFormatPropertiesQNX {}
+
+unsafe impl Cast for ScreenBufferPropertiesQNX {
+    type Target = ScreenBufferPropertiesQNX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for ScreenBufferPropertiesQNX {
+    type Builder = ScreenBufferPropertiesQNXBuilder<'b>;
+}
+
+/// A builder for a [`ScreenBufferPropertiesQNX`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ScreenBufferPropertiesQNXBuilder<'b> {
+    value: ScreenBufferPropertiesQNX,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> ScreenBufferPropertiesQNXBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsScreenBufferPropertiesQNX,
+    {
+        let next = (next.as_mut() as *mut T).cast::<ScreenBufferPropertiesQNX>();
+        unsafe { &mut *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
+    #[inline]
+    pub fn allocation_size(mut self, allocation_size: DeviceSize) -> Self {
+        self.value.allocation_size = allocation_size;
+        self
+    }
+
+    #[inline]
+    pub fn memory_type_bits(mut self, memory_type_bits: u32) -> Self {
+        self.value.memory_type_bits = memory_type_bits;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ScreenBufferPropertiesQNX {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for ScreenBufferPropertiesQNXBuilder<'b> {
+    type Target = ScreenBufferPropertiesQNX;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for ScreenBufferPropertiesQNXBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for ScreenBufferPropertiesQNXBuilder<'b> {
+    type Target = ScreenBufferPropertiesQNX;
 
     #[inline]
     fn into(self) -> Self::Target {

@@ -5254,6 +5254,22 @@ pub const QCOM_TILE_PROPERTIES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QNX_external_memory_screen_buffer.html>
+#[allow(deprecated)]
+pub const QNX_EXTERNAL_MEMORY_SCREEN_BUFFER_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_QNX_external_memory_screen_buffer"),
+    number: 530,
+    type_: "device",
+    author: "QNX",
+    contact: "Mike Gorchak @mgorchak-blackberry, Aaron Ruby @aruby-blackberry",
+    platform: Some("screen"),
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QNX_screen_surface.html>
 #[allow(deprecated)]
 pub const QNX_SCREEN_SURFACE_EXTENSION: Extension = Extension {
