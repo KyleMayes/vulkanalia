@@ -762,6 +762,22 @@ pub const EXT_DEBUG_UTILS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_bias_control.html>
+#[allow(deprecated)]
+pub const EXT_DEPTH_BIAS_CONTROL_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_depth_bias_control"),
+    number: 284,
+    type_: "device",
+    author: "EXT",
+    contact: "Joshua Ashton @Joshua-Ashton",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_zero_one.html>
 #[allow(deprecated)]
 pub const EXT_DEPTH_CLAMP_ZERO_ONE_EXTENSION: Extension = Extension {

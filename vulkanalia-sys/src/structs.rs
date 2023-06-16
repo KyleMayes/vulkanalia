@@ -3031,6 +3031,52 @@ impl Default for DependencyInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDepthBiasInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, PartialEq)]
+pub struct DepthBiasInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub depth_bias_constant_factor: f32,
+    pub depth_bias_clamp: f32,
+    pub depth_bias_slope_factor: f32,
+}
+
+impl Default for DepthBiasInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEPTH_BIAS_INFO_EXT,
+            next: ptr::null(),
+            depth_bias_constant_factor: f32::default(),
+            depth_bias_clamp: f32::default(),
+            depth_bias_slope_factor: f32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDepthBiasRepresentationInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DepthBiasRepresentationInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub depth_bias_representation: DepthBiasRepresentationEXT,
+    pub depth_bias_exact: Bool32,
+}
+
+impl Default for DepthBiasRepresentationInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEPTH_BIAS_REPRESENTATION_INFO_EXT,
+            next: ptr::null(),
+            depth_bias_representation: DepthBiasRepresentationEXT::default(),
+            depth_bias_exact: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorAddressInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9273,6 +9319,32 @@ impl Default for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {
             s_type: StructureType::PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV,
             next: ptr::null_mut(),
             dedicated_allocation_image_aliasing: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDepthBiasControlFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDepthBiasControlFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub depth_bias_control: Bool32,
+    pub least_representable_value_force_unorm_representation: Bool32,
+    pub float_representation: Bool32,
+    pub depth_bias_exact: Bool32,
+}
+
+impl Default for PhysicalDeviceDepthBiasControlFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT,
+            next: ptr::null_mut(),
+            depth_bias_control: Bool32::default(),
+            least_representable_value_force_unorm_representation: Bool32::default(),
+            float_representation: Bool32::default(),
+            depth_bias_exact: Bool32::default(),
         }
     }
 }

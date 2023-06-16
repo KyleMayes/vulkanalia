@@ -1170,6 +1170,40 @@ impl fmt::Debug for DebugReportObjectTypeEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDepthBiasRepresentationEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct DepthBiasRepresentationEXT(i32);
+
+impl DepthBiasRepresentationEXT {
+    pub const LEAST_REPRESENTABLE_VALUE_FORMAT: Self = Self(0);
+    pub const LEAST_REPRESENTABLE_VALUE_FORCE_UNORM: Self = Self(1);
+    pub const FLOAT: Self = Self(2);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for DepthBiasRepresentationEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "LEAST_REPRESENTABLE_VALUE_FORMAT"),
+            1 => write!(f, "LEAST_REPRESENTABLE_VALUE_FORCE_UNORM"),
+            2 => write!(f, "FLOAT"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -5490,6 +5524,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT: Self = Self(1000281000);
     pub const COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM: Self = Self(1000282000);
     pub const RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM: Self = Self(1000282001);
+    pub const PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT: Self = Self(1000283000);
+    pub const DEPTH_BIAS_INFO_EXT: Self = Self(1000283001);
+    pub const DEPTH_BIAS_REPRESENTATION_INFO_EXT: Self = Self(1000283002);
     pub const PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT: Self = Self(1000284000);
     pub const DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT: Self = Self(1000284001);
     pub const DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT: Self = Self(1000284002);
@@ -6307,6 +6344,9 @@ impl fmt::Debug for StructureType {
                 "COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM"
             ),
             1000282001 => write!(f, "RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM"),
+            1000283000 => write!(f, "PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT"),
+            1000283001 => write!(f, "DEPTH_BIAS_INFO_EXT"),
+            1000283002 => write!(f, "DEPTH_BIAS_REPRESENTATION_INFO_EXT"),
             1000284000 => write!(f, "PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT"),
             1000284001 => write!(f, "DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT"),
             1000284002 => write!(f, "DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT"),
