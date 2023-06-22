@@ -186,6 +186,7 @@ pub struct DeviceCommands {
     pub cmd_set_cull_mode: PFN_vkCmdSetCullMode,
     pub cmd_set_cull_mode_ext: PFN_vkCmdSetCullModeEXT,
     pub cmd_set_depth_bias: PFN_vkCmdSetDepthBias,
+    pub cmd_set_depth_bias2_ext: PFN_vkCmdSetDepthBias2EXT,
     pub cmd_set_depth_bias_enable: PFN_vkCmdSetDepthBiasEnable,
     pub cmd_set_depth_bias_enable_ext: PFN_vkCmdSetDepthBiasEnableEXT,
     pub cmd_set_depth_bounds: PFN_vkCmdSetDepthBounds,
@@ -3091,6 +3092,20 @@ impl DeviceCommands {
                         _depth_bias_slope_factor: f32,
                     ) {
                         panic!("could not load vkCmdSetDepthBias")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_depth_bias2_ext: {
+                let value = loader(b"vkCmdSetDepthBias2EXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _depth_bias_info: *const DepthBiasInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdSetDepthBias2EXT")
                     }
                     fallback
                 }

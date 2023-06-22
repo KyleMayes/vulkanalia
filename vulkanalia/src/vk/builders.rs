@@ -10380,6 +10380,159 @@ unsafe impl<'b> Cast for DependencyInfoBuilder<'b> {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`DepthBiasInfoEXT`].
+pub unsafe trait ExtendsDepthBiasInfoEXT: fmt::Debug {}
+unsafe impl ExtendsDepthBiasInfoEXT for DepthBiasRepresentationInfoEXT {}
+
+unsafe impl Cast for DepthBiasInfoEXT {
+    type Target = DepthBiasInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for DepthBiasInfoEXT {
+    type Builder = DepthBiasInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`DepthBiasInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DepthBiasInfoEXTBuilder<'b> {
+    value: DepthBiasInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> DepthBiasInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsDepthBiasInfoEXT,
+    {
+        let next = (next.as_mut() as *mut T).cast::<DepthBiasInfoEXT>();
+        unsafe { &mut *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
+    #[inline]
+    pub fn depth_bias_constant_factor(mut self, depth_bias_constant_factor: f32) -> Self {
+        self.value.depth_bias_constant_factor = depth_bias_constant_factor;
+        self
+    }
+
+    #[inline]
+    pub fn depth_bias_clamp(mut self, depth_bias_clamp: f32) -> Self {
+        self.value.depth_bias_clamp = depth_bias_clamp;
+        self
+    }
+
+    #[inline]
+    pub fn depth_bias_slope_factor(mut self, depth_bias_slope_factor: f32) -> Self {
+        self.value.depth_bias_slope_factor = depth_bias_slope_factor;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DepthBiasInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for DepthBiasInfoEXTBuilder<'b> {
+    type Target = DepthBiasInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for DepthBiasInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for DepthBiasInfoEXTBuilder<'b> {
+    type Target = DepthBiasInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DepthBiasRepresentationInfoEXT {
+    type Target = DepthBiasRepresentationInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DepthBiasRepresentationInfoEXT {
+    type Builder = DepthBiasRepresentationInfoEXTBuilder;
+}
+
+/// A builder for a [`DepthBiasRepresentationInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DepthBiasRepresentationInfoEXTBuilder {
+    value: DepthBiasRepresentationInfoEXT,
+}
+
+impl DepthBiasRepresentationInfoEXTBuilder {
+    #[inline]
+    pub fn depth_bias_representation(
+        mut self,
+        depth_bias_representation: DepthBiasRepresentationEXT,
+    ) -> Self {
+        self.value.depth_bias_representation = depth_bias_representation;
+        self
+    }
+
+    #[inline]
+    pub fn depth_bias_exact(mut self, depth_bias_exact: bool) -> Self {
+        self.value.depth_bias_exact = depth_bias_exact as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DepthBiasRepresentationInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for DepthBiasRepresentationInfoEXTBuilder {
+    type Target = DepthBiasRepresentationInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DepthBiasRepresentationInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DepthBiasRepresentationInfoEXTBuilder {
+    type Target = DepthBiasRepresentationInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for DescriptorAddressInfoEXT {
     type Target = DescriptorAddressInfoEXT;
 
@@ -12000,6 +12153,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCornerSampledImageFeatures
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoverageReductionModeFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCustomBorderColorFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthBiasControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClampZeroOneFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipEnableFeaturesEXT {}
@@ -31591,6 +31745,87 @@ unsafe impl Cast for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNVBui
     }
 }
 
+unsafe impl Cast for PhysicalDeviceDepthBiasControlFeaturesEXT {
+    type Target = PhysicalDeviceDepthBiasControlFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceDepthBiasControlFeaturesEXT {
+    type Builder = PhysicalDeviceDepthBiasControlFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceDepthBiasControlFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceDepthBiasControlFeaturesEXTBuilder {
+    value: PhysicalDeviceDepthBiasControlFeaturesEXT,
+}
+
+impl PhysicalDeviceDepthBiasControlFeaturesEXTBuilder {
+    #[inline]
+    pub fn depth_bias_control(mut self, depth_bias_control: bool) -> Self {
+        self.value.depth_bias_control = depth_bias_control as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn least_representable_value_force_unorm_representation(
+        mut self,
+        least_representable_value_force_unorm_representation: bool,
+    ) -> Self {
+        self.value
+            .least_representable_value_force_unorm_representation =
+            least_representable_value_force_unorm_representation as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn float_representation(mut self, float_representation: bool) -> Self {
+        self.value.float_representation = float_representation as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn depth_bias_exact(mut self, depth_bias_exact: bool) -> Self {
+        self.value.depth_bias_exact = depth_bias_exact as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceDepthBiasControlFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceDepthBiasControlFeaturesEXTBuilder {
+    type Target = PhysicalDeviceDepthBiasControlFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceDepthBiasControlFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDepthBiasControlFeaturesEXTBuilder {
+    type Target = PhysicalDeviceDepthBiasControlFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceDepthClampZeroOneFeaturesEXT {
     type Target = PhysicalDeviceDepthClampZeroOneFeaturesEXT;
 
@@ -35521,6 +35756,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV
 {
 }
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthBiasControlFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClampZeroOneFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipControlFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipEnableFeaturesEXT {}
@@ -54029,6 +54265,7 @@ unsafe impl Cast for PipelineRasterizationProvokingVertexStateCreateInfoEXTBuild
 
 /// A Vulkan struct that can be used to extend a [`PipelineRasterizationStateCreateInfo`].
 pub unsafe trait ExtendsPipelineRasterizationStateCreateInfo: fmt::Debug {}
+unsafe impl ExtendsPipelineRasterizationStateCreateInfo for DepthBiasRepresentationInfoEXT {}
 unsafe impl ExtendsPipelineRasterizationStateCreateInfo
     for PipelineRasterizationConservativeStateCreateInfoEXT
 {

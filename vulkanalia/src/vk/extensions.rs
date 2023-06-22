@@ -1043,6 +1043,25 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
 
 impl ExtDebugUtilsExtension for crate::Instance {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_bias_control.html>
+pub trait ExtDepthBiasControlExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_DEPTH_BIAS_CONTROL_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetDepthBias2EXT.html>
+    #[inline]
+    unsafe fn cmd_set_depth_bias2_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        depth_bias_info: &DepthBiasInfoEXT,
+    ) {
+        let __result = (self.commands().cmd_set_depth_bias2_ext)(command_buffer, depth_bias_info);
+    }
+}
+
+impl ExtDepthBiasControlExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_zero_one.html>
 pub trait ExtDepthClampZeroOneExtension: DeviceV1_0 {
     /// The metadata for this extension.
