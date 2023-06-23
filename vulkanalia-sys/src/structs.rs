@@ -2184,6 +2184,42 @@ pub struct ConformanceVersion {
     pub patch: u8,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCooperativeMatrixPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CooperativeMatrixPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub m_size: u32,
+    pub n_size: u32,
+    pub k_size: u32,
+    pub a_type: ComponentTypeKHR,
+    pub b_type: ComponentTypeKHR,
+    pub c_type: ComponentTypeKHR,
+    pub result_type: ComponentTypeKHR,
+    pub saturating_accumulation: Bool32,
+    pub scope: ScopeKHR,
+}
+
+impl Default for CooperativeMatrixPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COOPERATIVE_MATRIX_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            m_size: u32::default(),
+            n_size: u32::default(),
+            k_size: u32::default(),
+            a_type: ComponentTypeKHR::default(),
+            b_type: ComponentTypeKHR::default(),
+            c_type: ComponentTypeKHR::default(),
+            result_type: ComponentTypeKHR::default(),
+            saturating_accumulation: Bool32::default(),
+            scope: ScopeKHR::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCooperativeMatrixPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -3027,6 +3063,52 @@ impl Default for DependencyInfo {
             buffer_memory_barriers: ptr::null(),
             image_memory_barrier_count: u32::default(),
             image_memory_barriers: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDepthBiasInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, PartialEq)]
+pub struct DepthBiasInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub depth_bias_constant_factor: f32,
+    pub depth_bias_clamp: f32,
+    pub depth_bias_slope_factor: f32,
+}
+
+impl Default for DepthBiasInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEPTH_BIAS_INFO_EXT,
+            next: ptr::null(),
+            depth_bias_constant_factor: f32::default(),
+            depth_bias_clamp: f32::default(),
+            depth_bias_slope_factor: f32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDepthBiasRepresentationInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DepthBiasRepresentationInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub depth_bias_representation: DepthBiasRepresentationEXT,
+    pub depth_bias_exact: Bool32,
+}
+
+impl Default for DepthBiasRepresentationInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEPTH_BIAS_REPRESENTATION_INFO_EXT,
+            next: ptr::null(),
+            depth_bias_representation: DepthBiasRepresentationEXT::default(),
+            depth_bias_exact: Bool32::default(),
         }
     }
 }
@@ -9093,6 +9175,28 @@ impl Default for PhysicalDeviceConservativeRasterizationPropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCooperativeMatrixFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceCooperativeMatrixFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub cooperative_matrix: Bool32,
+    pub cooperative_matrix_robust_buffer_access: Bool32,
+}
+
+impl Default for PhysicalDeviceCooperativeMatrixFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_KHR,
+            next: ptr::null_mut(),
+            cooperative_matrix: Bool32::default(),
+            cooperative_matrix_robust_buffer_access: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCooperativeMatrixFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9111,6 +9215,26 @@ impl Default for PhysicalDeviceCooperativeMatrixFeaturesNV {
             next: ptr::null_mut(),
             cooperative_matrix: Bool32::default(),
             cooperative_matrix_robust_buffer_access: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCooperativeMatrixPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceCooperativeMatrixPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub cooperative_matrix_supported_stages: ShaderStageFlags,
+}
+
+impl Default for PhysicalDeviceCooperativeMatrixPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            cooperative_matrix_supported_stages: ShaderStageFlags::default(),
         }
     }
 }
@@ -9273,6 +9397,32 @@ impl Default for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {
             s_type: StructureType::PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV,
             next: ptr::null_mut(),
             dedicated_allocation_image_aliasing: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDepthBiasControlFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDepthBiasControlFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub depth_bias_control: Bool32,
+    pub least_representable_value_force_unorm_representation: Bool32,
+    pub float_representation: Bool32,
+    pub depth_bias_exact: Bool32,
+}
+
+impl Default for PhysicalDeviceDepthBiasControlFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT,
+            next: ptr::null_mut(),
+            depth_bias_control: Bool32::default(),
+            least_representable_value_force_unorm_representation: Bool32::default(),
+            float_representation: Bool32::default(),
+            depth_bias_exact: Bool32::default(),
         }
     }
 }
