@@ -7858,6 +7858,112 @@ unsafe impl Cast for ConformanceVersionBuilder {
     }
 }
 
+unsafe impl Cast for CooperativeMatrixPropertiesKHR {
+    type Target = CooperativeMatrixPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for CooperativeMatrixPropertiesKHR {
+    type Builder = CooperativeMatrixPropertiesKHRBuilder;
+}
+
+/// A builder for a [`CooperativeMatrixPropertiesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CooperativeMatrixPropertiesKHRBuilder {
+    value: CooperativeMatrixPropertiesKHR,
+}
+
+impl CooperativeMatrixPropertiesKHRBuilder {
+    #[inline]
+    pub fn m_size(mut self, m_size: u32) -> Self {
+        self.value.m_size = m_size;
+        self
+    }
+
+    #[inline]
+    pub fn n_size(mut self, n_size: u32) -> Self {
+        self.value.n_size = n_size;
+        self
+    }
+
+    #[inline]
+    pub fn k_size(mut self, k_size: u32) -> Self {
+        self.value.k_size = k_size;
+        self
+    }
+
+    #[inline]
+    pub fn a_type(mut self, a_type: ComponentTypeKHR) -> Self {
+        self.value.a_type = a_type;
+        self
+    }
+
+    #[inline]
+    pub fn b_type(mut self, b_type: ComponentTypeKHR) -> Self {
+        self.value.b_type = b_type;
+        self
+    }
+
+    #[inline]
+    pub fn c_type(mut self, c_type: ComponentTypeKHR) -> Self {
+        self.value.c_type = c_type;
+        self
+    }
+
+    #[inline]
+    pub fn result_type(mut self, result_type: ComponentTypeKHR) -> Self {
+        self.value.result_type = result_type;
+        self
+    }
+
+    #[inline]
+    pub fn saturating_accumulation(mut self, saturating_accumulation: bool) -> Self {
+        self.value.saturating_accumulation = saturating_accumulation as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn scope(mut self, scope: ScopeKHR) -> Self {
+        self.value.scope = scope;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CooperativeMatrixPropertiesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for CooperativeMatrixPropertiesKHRBuilder {
+    type Target = CooperativeMatrixPropertiesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for CooperativeMatrixPropertiesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for CooperativeMatrixPropertiesKHRBuilder {
+    type Target = CooperativeMatrixPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for CooperativeMatrixPropertiesNV {
     type Target = CooperativeMatrixPropertiesNV;
 
@@ -10380,6 +10486,159 @@ unsafe impl<'b> Cast for DependencyInfoBuilder<'b> {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`DepthBiasInfoEXT`].
+pub unsafe trait ExtendsDepthBiasInfoEXT: fmt::Debug {}
+unsafe impl ExtendsDepthBiasInfoEXT for DepthBiasRepresentationInfoEXT {}
+
+unsafe impl Cast for DepthBiasInfoEXT {
+    type Target = DepthBiasInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for DepthBiasInfoEXT {
+    type Builder = DepthBiasInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`DepthBiasInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DepthBiasInfoEXTBuilder<'b> {
+    value: DepthBiasInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> DepthBiasInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsDepthBiasInfoEXT,
+    {
+        let next = (next.as_mut() as *mut T).cast::<DepthBiasInfoEXT>();
+        unsafe { &mut *next }.next = self.next;
+        self.next = next.cast();
+        self
+    }
+
+    #[inline]
+    pub fn depth_bias_constant_factor(mut self, depth_bias_constant_factor: f32) -> Self {
+        self.value.depth_bias_constant_factor = depth_bias_constant_factor;
+        self
+    }
+
+    #[inline]
+    pub fn depth_bias_clamp(mut self, depth_bias_clamp: f32) -> Self {
+        self.value.depth_bias_clamp = depth_bias_clamp;
+        self
+    }
+
+    #[inline]
+    pub fn depth_bias_slope_factor(mut self, depth_bias_slope_factor: f32) -> Self {
+        self.value.depth_bias_slope_factor = depth_bias_slope_factor;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DepthBiasInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for DepthBiasInfoEXTBuilder<'b> {
+    type Target = DepthBiasInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for DepthBiasInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for DepthBiasInfoEXTBuilder<'b> {
+    type Target = DepthBiasInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DepthBiasRepresentationInfoEXT {
+    type Target = DepthBiasRepresentationInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DepthBiasRepresentationInfoEXT {
+    type Builder = DepthBiasRepresentationInfoEXTBuilder;
+}
+
+/// A builder for a [`DepthBiasRepresentationInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DepthBiasRepresentationInfoEXTBuilder {
+    value: DepthBiasRepresentationInfoEXT,
+}
+
+impl DepthBiasRepresentationInfoEXTBuilder {
+    #[inline]
+    pub fn depth_bias_representation(
+        mut self,
+        depth_bias_representation: DepthBiasRepresentationEXT,
+    ) -> Self {
+        self.value.depth_bias_representation = depth_bias_representation;
+        self
+    }
+
+    #[inline]
+    pub fn depth_bias_exact(mut self, depth_bias_exact: bool) -> Self {
+        self.value.depth_bias_exact = depth_bias_exact as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DepthBiasRepresentationInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for DepthBiasRepresentationInfoEXTBuilder {
+    type Target = DepthBiasRepresentationInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DepthBiasRepresentationInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DepthBiasRepresentationInfoEXTBuilder {
+    type Target = DepthBiasRepresentationInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for DescriptorAddressInfoEXT {
     type Target = DescriptorAddressInfoEXT;
 
@@ -11994,12 +12253,14 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoherentMemoryFeaturesAMD 
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceColorWriteEnableFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceComputeShaderDerivativesFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceConditionalRenderingFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCornerSampledImageFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoverageReductionModeFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCustomBorderColorFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthBiasControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClampZeroOneFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipEnableFeaturesEXT {}
@@ -31039,6 +31300,74 @@ unsafe impl Cast for PhysicalDeviceConservativeRasterizationPropertiesEXTBuilder
     }
 }
 
+unsafe impl Cast for PhysicalDeviceCooperativeMatrixFeaturesKHR {
+    type Target = PhysicalDeviceCooperativeMatrixFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceCooperativeMatrixFeaturesKHR {
+    type Builder = PhysicalDeviceCooperativeMatrixFeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceCooperativeMatrixFeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceCooperativeMatrixFeaturesKHRBuilder {
+    value: PhysicalDeviceCooperativeMatrixFeaturesKHR,
+}
+
+impl PhysicalDeviceCooperativeMatrixFeaturesKHRBuilder {
+    #[inline]
+    pub fn cooperative_matrix(mut self, cooperative_matrix: bool) -> Self {
+        self.value.cooperative_matrix = cooperative_matrix as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn cooperative_matrix_robust_buffer_access(
+        mut self,
+        cooperative_matrix_robust_buffer_access: bool,
+    ) -> Self {
+        self.value.cooperative_matrix_robust_buffer_access =
+            cooperative_matrix_robust_buffer_access as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceCooperativeMatrixFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceCooperativeMatrixFeaturesKHRBuilder {
+    type Target = PhysicalDeviceCooperativeMatrixFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceCooperativeMatrixFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceCooperativeMatrixFeaturesKHRBuilder {
+    type Target = PhysicalDeviceCooperativeMatrixFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceCooperativeMatrixFeaturesNV {
     type Target = PhysicalDeviceCooperativeMatrixFeaturesNV;
 
@@ -31100,6 +31429,67 @@ impl ops::DerefMut for PhysicalDeviceCooperativeMatrixFeaturesNVBuilder {
 
 unsafe impl Cast for PhysicalDeviceCooperativeMatrixFeaturesNVBuilder {
     type Target = PhysicalDeviceCooperativeMatrixFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceCooperativeMatrixPropertiesKHR {
+    type Target = PhysicalDeviceCooperativeMatrixPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceCooperativeMatrixPropertiesKHR {
+    type Builder = PhysicalDeviceCooperativeMatrixPropertiesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceCooperativeMatrixPropertiesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceCooperativeMatrixPropertiesKHRBuilder {
+    value: PhysicalDeviceCooperativeMatrixPropertiesKHR,
+}
+
+impl PhysicalDeviceCooperativeMatrixPropertiesKHRBuilder {
+    #[inline]
+    pub fn cooperative_matrix_supported_stages(
+        mut self,
+        cooperative_matrix_supported_stages: ShaderStageFlags,
+    ) -> Self {
+        self.value.cooperative_matrix_supported_stages = cooperative_matrix_supported_stages;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceCooperativeMatrixPropertiesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceCooperativeMatrixPropertiesKHRBuilder {
+    type Target = PhysicalDeviceCooperativeMatrixPropertiesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceCooperativeMatrixPropertiesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceCooperativeMatrixPropertiesKHRBuilder {
+    type Target = PhysicalDeviceCooperativeMatrixPropertiesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -31584,6 +31974,87 @@ impl ops::DerefMut for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNVB
 
 unsafe impl Cast for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNVBuilder {
     type Target = PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDepthBiasControlFeaturesEXT {
+    type Target = PhysicalDeviceDepthBiasControlFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceDepthBiasControlFeaturesEXT {
+    type Builder = PhysicalDeviceDepthBiasControlFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceDepthBiasControlFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceDepthBiasControlFeaturesEXTBuilder {
+    value: PhysicalDeviceDepthBiasControlFeaturesEXT,
+}
+
+impl PhysicalDeviceDepthBiasControlFeaturesEXTBuilder {
+    #[inline]
+    pub fn depth_bias_control(mut self, depth_bias_control: bool) -> Self {
+        self.value.depth_bias_control = depth_bias_control as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn least_representable_value_force_unorm_representation(
+        mut self,
+        least_representable_value_force_unorm_representation: bool,
+    ) -> Self {
+        self.value
+            .least_representable_value_force_unorm_representation =
+            least_representable_value_force_unorm_representation as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn float_representation(mut self, float_representation: bool) -> Self {
+        self.value.float_representation = float_representation as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn depth_bias_exact(mut self, depth_bias_exact: bool) -> Self {
+        self.value.depth_bias_exact = depth_bias_exact as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceDepthBiasControlFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceDepthBiasControlFeaturesEXTBuilder {
+    type Target = PhysicalDeviceDepthBiasControlFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceDepthBiasControlFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDepthBiasControlFeaturesEXTBuilder {
+    type Target = PhysicalDeviceDepthBiasControlFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -35512,6 +35983,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCoherentMemoryFeatu
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceColorWriteEnableFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceComputeShaderDerivativesFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceConditionalRenderingFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrixFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCornerSampledImageFeaturesNV {}
@@ -35521,6 +35993,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV
 {
 }
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthBiasControlFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClampZeroOneFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipControlFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipEnableFeaturesEXT {}
@@ -43266,6 +43739,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2
     for PhysicalDeviceConservativeRasterizationPropertiesEXT
 {
 }
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCooperativeMatrixPropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCooperativeMatrixPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCopyMemoryIndirectPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCustomBorderColorPropertiesEXT {}
@@ -54029,6 +54503,7 @@ unsafe impl Cast for PipelineRasterizationProvokingVertexStateCreateInfoEXTBuild
 
 /// A Vulkan struct that can be used to extend a [`PipelineRasterizationStateCreateInfo`].
 pub unsafe trait ExtendsPipelineRasterizationStateCreateInfo: fmt::Debug {}
+unsafe impl ExtendsPipelineRasterizationStateCreateInfo for DepthBiasRepresentationInfoEXT {}
 unsafe impl ExtendsPipelineRasterizationStateCreateInfo
     for PipelineRasterizationConservativeStateCreateInfoEXT
 {

@@ -1127,6 +1127,12 @@ pub type PFN_vkCmdSetDepthBias = unsafe extern "system" fn(
     _depth_bias_slope_factor: f32,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetDepthBias2EXT.html>
+pub type PFN_vkCmdSetDepthBias2EXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _depth_bias_info: *const DepthBiasInfoEXT,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetDepthBiasEnable.html>
 pub type PFN_vkCmdSetDepthBiasEnable =
     unsafe extern "system" fn(_command_buffer: CommandBuffer, _depth_bias_enable: Bool32);
@@ -3214,6 +3220,14 @@ pub type PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT = unsafe extern "sys
     _time_domain_count: *mut u32,
     _time_domains: *mut TimeDomainEXT,
 ) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR.html>
+pub type PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR =
+    unsafe extern "system" fn(
+        _physical_device: PhysicalDevice,
+        _property_count: *mut u32,
+        _properties: *mut CooperativeMatrixPropertiesKHR,
+    ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceCooperativeMatrixPropertiesNV.html>
 pub type PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = unsafe extern "system" fn(
