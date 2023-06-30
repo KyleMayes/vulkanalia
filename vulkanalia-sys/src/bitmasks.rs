@@ -1412,7 +1412,7 @@ bitflags! {
         const INDEX_INPUT = 1 << 36;
         const VERTEX_ATTRIBUTE_INPUT = 1 << 37;
         const PRE_RASTERIZATION_SHADERS = 1 << 38;
-        const SUBPASS_SHADING_HUAWEI = 1 << 39;
+        const SUBPASS_SHADER_HUAWEI = 1 << 39;
         const INVOCATION_MASK_HUAWEI = 1 << 40;
         const CLUSTER_CULLING_SHADER_HUAWEI = 1 << 41;
     }

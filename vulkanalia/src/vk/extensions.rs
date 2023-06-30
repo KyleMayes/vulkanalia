@@ -1043,6 +1043,25 @@ pub trait ExtDebugUtilsExtension: InstanceV1_0 {
 
 impl ExtDebugUtilsExtension for crate::Instance {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_bias_control.html>
+pub trait ExtDepthBiasControlExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_DEPTH_BIAS_CONTROL_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetDepthBias2EXT.html>
+    #[inline]
+    unsafe fn cmd_set_depth_bias2_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        depth_bias_info: &DepthBiasInfoEXT,
+    ) {
+        let __result = (self.commands().cmd_set_depth_bias2_ext)(command_buffer, depth_bias_info);
+    }
+}
+
+impl ExtDepthBiasControlExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_zero_one.html>
 pub trait ExtDepthClampZeroOneExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -5941,6 +5960,51 @@ pub trait KhrBufferDeviceAddressExtension: DeviceV1_0 {
 }
 
 impl KhrBufferDeviceAddressExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_cooperative_matrix.html>
+pub trait KhrCooperativeMatrixExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_COOPERATIVE_MATRIX_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR.html>
+    #[inline]
+    unsafe fn get_physical_device_cooperative_matrix_properties_khr(
+        &self,
+        physical_device: PhysicalDevice,
+    ) -> crate::VkResult<Vec<CooperativeMatrixPropertiesKHR>> {
+        let mut property_count = 0;
+
+        (self
+            .commands()
+            .get_physical_device_cooperative_matrix_properties_khr)(
+            physical_device,
+            &mut property_count,
+            ptr::null_mut(),
+        );
+
+        let mut properties = Vec::with_capacity(property_count as usize);
+
+        let __result = (self
+            .commands()
+            .get_physical_device_cooperative_matrix_properties_khr)(
+            physical_device,
+            &mut property_count,
+            properties.as_mut_ptr(),
+        );
+
+        debug_assert!(properties.capacity() == property_count as usize);
+        properties.set_len(property_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(properties)
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl KhrCooperativeMatrixExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_copy_commands2.html>
 pub trait KhrCopyCommands2Extension: DeviceV1_0 {
