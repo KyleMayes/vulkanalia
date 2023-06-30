@@ -840,6 +840,56 @@ impl fmt::Debug for ComponentSwizzle {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComponentTypeKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct ComponentTypeKHR(i32);
+
+impl ComponentTypeKHR {
+    pub const FLOAT16: Self = Self(0);
+    pub const FLOAT32: Self = Self(1);
+    pub const FLOAT64: Self = Self(2);
+    pub const SINT8: Self = Self(3);
+    pub const SINT16: Self = Self(4);
+    pub const SINT32: Self = Self(5);
+    pub const SINT64: Self = Self(6);
+    pub const UINT8: Self = Self(7);
+    pub const UINT16: Self = Self(8);
+    pub const UINT32: Self = Self(9);
+    pub const UINT64: Self = Self(10);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for ComponentTypeKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "FLOAT16"),
+            1 => write!(f, "FLOAT32"),
+            2 => write!(f, "FLOAT64"),
+            3 => write!(f, "SINT8"),
+            4 => write!(f, "SINT16"),
+            5 => write!(f, "SINT32"),
+            6 => write!(f, "SINT64"),
+            7 => write!(f, "UINT8"),
+            8 => write!(f, "UINT16"),
+            9 => write!(f, "UINT32"),
+            10 => write!(f, "UINT64"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComponentTypeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -1165,6 +1215,40 @@ impl fmt::Debug for DebugReportObjectTypeEXT {
             1000150000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
             1000165000 => write!(f, "ACCELERATION_STRUCTURE_NV"),
             1000366000 => write!(f, "BUFFER_COLLECTION_FUCHSIA"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDepthBiasRepresentationEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct DepthBiasRepresentationEXT(i32);
+
+impl DepthBiasRepresentationEXT {
+    pub const LEAST_REPRESENTABLE_VALUE_FORMAT: Self = Self(0);
+    pub const LEAST_REPRESENTABLE_VALUE_FORCE_UNORM: Self = Self(1);
+    pub const FLOAT: Self = Self(2);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for DepthBiasRepresentationEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "LEAST_REPRESENTABLE_VALUE_FORMAT"),
+            1 => write!(f, "LEAST_REPRESENTABLE_VALUE_FORCE_UNORM"),
+            2 => write!(f, "FLOAT"),
             _ => self.0.fmt(f),
         }
     }
@@ -4642,6 +4726,42 @@ impl fmt::Debug for SciSyncPrimitiveTypeNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkScopeKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct ScopeKHR(i32);
+
+impl ScopeKHR {
+    pub const DEVICE: Self = Self(1);
+    pub const WORKGROUP: Self = Self(2);
+    pub const SUBGROUP: Self = Self(3);
+    pub const QUEUE_FAMILY: Self = Self(5);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for ScopeKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            1 => write!(f, "DEVICE"),
+            2 => write!(f, "WORKGROUP"),
+            3 => write!(f, "SUBGROUP"),
+            5 => write!(f, "QUEUE_FAMILY"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkScopeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -5490,6 +5610,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT: Self = Self(1000281000);
     pub const COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM: Self = Self(1000282000);
     pub const RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM: Self = Self(1000282001);
+    pub const PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT: Self = Self(1000283000);
+    pub const DEPTH_BIAS_INFO_EXT: Self = Self(1000283001);
+    pub const DEPTH_BIAS_REPRESENTATION_INFO_EXT: Self = Self(1000283002);
     pub const PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT: Self = Self(1000284000);
     pub const DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT: Self = Self(1000284001);
     pub const DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT: Self = Self(1000284002);
@@ -5718,6 +5841,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT: Self = Self(1000498000);
     pub const PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT: Self =
         Self(1000499000);
+    pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_KHR: Self = Self(1000506000);
+    pub const COOPERATIVE_MATRIX_PROPERTIES_KHR: Self = Self(1000506001);
+    pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR: Self = Self(1000506002);
     pub const PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM: Self =
         Self(1000510000);
     pub const MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM: Self = Self(1000510001);
@@ -6307,6 +6433,9 @@ impl fmt::Debug for StructureType {
                 "COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM"
             ),
             1000282001 => write!(f, "RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM"),
+            1000283000 => write!(f, "PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT"),
+            1000283001 => write!(f, "DEPTH_BIAS_INFO_EXT"),
+            1000283002 => write!(f, "DEPTH_BIAS_REPRESENTATION_INFO_EXT"),
             1000284000 => write!(f, "PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT"),
             1000284001 => write!(f, "DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT"),
             1000284002 => write!(f, "DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT"),
@@ -6612,6 +6741,9 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT"
             ),
+            1000506000 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_KHR"),
+            1000506001 => write!(f, "COOPERATIVE_MATRIX_PROPERTIES_KHR"),
+            1000506002 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR"),
             1000510000 => write!(
                 f,
                 "PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM"
