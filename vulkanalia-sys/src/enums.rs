@@ -890,56 +890,6 @@ impl fmt::Debug for ComponentTypeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComponentTypeNV.html>
-#[repr(transparent)]
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct ComponentTypeNV(i32);
-
-impl ComponentTypeNV {
-    pub const FLOAT16: Self = Self(0);
-    pub const FLOAT32: Self = Self(1);
-    pub const FLOAT64: Self = Self(2);
-    pub const SINT8: Self = Self(3);
-    pub const SINT16: Self = Self(4);
-    pub const SINT32: Self = Self(5);
-    pub const SINT64: Self = Self(6);
-    pub const UINT8: Self = Self(7);
-    pub const UINT16: Self = Self(8);
-    pub const UINT32: Self = Self(9);
-    pub const UINT64: Self = Self(10);
-
-    /// Constructs an instance of this enum with the supplied underlying value.
-    #[inline]
-    pub const fn from_raw(value: i32) -> Self {
-        Self(value)
-    }
-
-    /// Gets the underlying value for this enum instance.
-    #[inline]
-    pub const fn as_raw(self) -> i32 {
-        self.0
-    }
-}
-
-impl fmt::Debug for ComponentTypeNV {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self.0 {
-            0 => write!(f, "FLOAT16"),
-            1 => write!(f, "FLOAT32"),
-            2 => write!(f, "FLOAT64"),
-            3 => write!(f, "SINT8"),
-            4 => write!(f, "SINT16"),
-            5 => write!(f, "SINT32"),
-            6 => write!(f, "SINT64"),
-            7 => write!(f, "UINT8"),
-            8 => write!(f, "UINT16"),
-            9 => write!(f, "UINT32"),
-            10 => write!(f, "UINT64"),
-            _ => self.0.fmt(f),
-        }
-    }
-}
-
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkConservativeRasterizationModeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -4762,42 +4712,6 @@ impl fmt::Debug for ScopeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkScopeNV.html>
-#[repr(transparent)]
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct ScopeNV(i32);
-
-impl ScopeNV {
-    pub const DEVICE: Self = Self(1);
-    pub const WORKGROUP: Self = Self(2);
-    pub const SUBGROUP: Self = Self(3);
-    pub const QUEUE_FAMILY: Self = Self(5);
-
-    /// Constructs an instance of this enum with the supplied underlying value.
-    #[inline]
-    pub const fn from_raw(value: i32) -> Self {
-        Self(value)
-    }
-
-    /// Gets the underlying value for this enum instance.
-    #[inline]
-    pub const fn as_raw(self) -> i32 {
-        self.0
-    }
-}
-
-impl fmt::Debug for ScopeNV {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self.0 {
-            1 => write!(f, "DEVICE"),
-            2 => write!(f, "WORKGROUP"),
-            3 => write!(f, "SUBGROUP"),
-            5 => write!(f, "QUEUE_FAMILY"),
-            _ => self.0.fmt(f),
-        }
-    }
-}
-
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSemaphoreType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -7229,6 +7143,8 @@ impl fmt::Debug for ViewportCoordinateSwizzleNV {
 pub type AccelerationStructureTypeNV = AccelerationStructureTypeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkChromaLocationKHR.html>
 pub type ChromaLocationKHR = ChromaLocation;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComponentTypeNV.html>
+pub type ComponentTypeNV = ComponentTypeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyAccelerationStructureModeNV.html>
 pub type CopyAccelerationStructureModeNV = CopyAccelerationStructureModeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorUpdateTemplateTypeKHR.html>
@@ -7249,6 +7165,8 @@ pub type SamplerReductionModeEXT = SamplerReductionMode;
 pub type SamplerYcbcrModelConversionKHR = SamplerYcbcrModelConversion;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrRangeKHR.html>
 pub type SamplerYcbcrRangeKHR = SamplerYcbcrRange;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkScopeNV.html>
+pub type ScopeNV = ScopeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSemaphoreTypeKHR.html>
 pub type SemaphoreTypeKHR = SemaphoreType;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderFloatControlsIndependenceKHR.html>
