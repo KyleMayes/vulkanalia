@@ -47,7 +47,7 @@ As mentioned before, the Vulkan API has a rather verbose API with many parameter
 
 Every chapter will also start with a link to the final code for that chapter. You can refer to it if you have any doubts about the structure of the code, or if you're dealing with a bug and want to compare.
 
-This tutorial is intended to be a community effort. Vulkan is still a fairly new API and best practices have been fully established. If you have any type of feedback on the tutorial and site itself, then please don't hesitate to submit an issue or pull request to the [GitHub repository](https://github.com/KyleMayes/vulkanalia).
+This tutorial is intended to be a community effort. Vulkan is still a fairly new API and best practices have not been fully established. If you have any type of feedback on the tutorial and site itself, then please don't hesitate to submit an issue or pull request to the [GitHub repository](https://github.com/KyleMayes/vulkanalia).
 
 After you've gone through the ritual of drawing your very first Vulkan powered triangle onscreen, we'll start expanding the program to include linear transformations, textures and 3D models.
 
