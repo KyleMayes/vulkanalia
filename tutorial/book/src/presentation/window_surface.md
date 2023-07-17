@@ -77,7 +77,7 @@ Make sure that the surface is destroyed before the instance.
 
 ## Querying for presentation support
 
-Although the Vulkan implementation may support window system integration, that does not mean that every device in the system supports it. Therefore we need to extend the `QueueFamilyIndices` struct to ensure that a device can present images to the surface we created. Since the presentation is a queue-specific feature, the problem is actually about finding a queue family that supports presenting to the surface we created.
+Although the Vulkan implementation may support window system integration, that does not mean that every device in the system supports it. Therefore we need to extend our physical device selection code to ensure that our chosen device can present images to the surface we created. Since the presentation is a queue-specific feature, the problem is actually about finding a queue family that supports presenting to the surface we created.
 
 It's actually possible that the queue families supporting drawing commands and the ones supporting presentation do not overlap. Therefore we have to take into account that there could be a distinct presentation queue by modifying the `QueueFamilyIndices` struct:
 
