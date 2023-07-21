@@ -10,6 +10,8 @@
 - [June 23, 2023 Vulkan 1.3.255 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/012db30fd16929f9fd30dfbc2a7c86e048d64015)
 - [fix VK_FORMAT_R64G64 and VK_FORMAT_BC snorm formats (#2156)](https://github.com/KhronosGroup/Vulkan-Docs/commit/b258d9b1e5f347b04092d5b8df4eaff73cdfa9e6)
 - [June 30, 2023 Vulkan 1.3.256 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/3dae5d7fbf332970ae0a97d5ab05ae5db93e62f0)
+- [July 7, 2023 Vulkan 1.3.257 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/2b7d9c9f65cde43580573a677490c3c7d099c09f)
+- [July 21, 2023 Vulkan 1.3.258 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/2c1e07a72b43f53cc7866c55ae32afe97d933621)
 
 ## [0.21.0] - 2023-05-28
 

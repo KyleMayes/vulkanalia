@@ -1207,6 +1207,13 @@ pub struct BindIndexBufferIndirectCommandNV {
     pub index_type: IndexType,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBindPipelineIndirectCommandNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct BindPipelineIndirectCommandNV {
+    pub pipeline_address: DeviceAddress,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBindShaderGroupIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -2150,6 +2157,30 @@ impl Default for ComputePipelineCreateInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComputePipelineIndirectBufferInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ComputePipelineIndirectBufferInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub device_address: DeviceAddress,
+    pub size: DeviceSize,
+    pub pipeline_device_address_capture_replay: DeviceAddress,
+}
+
+impl Default for ComputePipelineIndirectBufferInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV,
+            next: ptr::null(),
+            device_address: DeviceAddress::default(),
+            size: DeviceSize::default(),
+            pipeline_device_address_capture_replay: DeviceAddress::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkConditionalRenderingBeginInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2466,6 +2497,66 @@ impl Default for CopyImageToBufferInfo2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyImageToImageInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CopyImageToImageInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: HostImageCopyFlagsEXT,
+    pub src_image: Image,
+    pub src_image_layout: ImageLayout,
+    pub dst_image: Image,
+    pub dst_image_layout: ImageLayout,
+    pub region_count: u32,
+    pub regions: *const ImageCopy2,
+}
+
+impl Default for CopyImageToImageInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COPY_IMAGE_TO_IMAGE_INFO_EXT,
+            next: ptr::null(),
+            flags: HostImageCopyFlagsEXT::default(),
+            src_image: Image::default(),
+            src_image_layout: ImageLayout::default(),
+            dst_image: Image::default(),
+            dst_image_layout: ImageLayout::default(),
+            region_count: u32::default(),
+            regions: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyImageToMemoryInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CopyImageToMemoryInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: HostImageCopyFlagsEXT,
+    pub src_image: Image,
+    pub src_image_layout: ImageLayout,
+    pub region_count: u32,
+    pub regions: *const ImageToMemoryCopyEXT,
+}
+
+impl Default for CopyImageToMemoryInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COPY_IMAGE_TO_MEMORY_INFO_EXT,
+            next: ptr::null(),
+            flags: HostImageCopyFlagsEXT::default(),
+            src_image: Image::default(),
+            src_image_layout: ImageLayout::default(),
+            region_count: u32::default(),
+            regions: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -2509,6 +2600,34 @@ pub struct CopyMemoryToImageIndirectCommandNV {
     pub image_subresource: ImageSubresourceLayers,
     pub image_offset: Offset3D,
     pub image_extent: Extent3D,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryToImageInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CopyMemoryToImageInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: HostImageCopyFlagsEXT,
+    pub dst_image: Image,
+    pub dst_image_layout: ImageLayout,
+    pub region_count: u32,
+    pub regions: *const MemoryToImageCopyEXT,
+}
+
+impl Default for CopyMemoryToImageInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COPY_MEMORY_TO_IMAGE_INFO_EXT,
+            next: ptr::null(),
+            flags: HostImageCopyFlagsEXT::default(),
+            dst_image: Image::default(),
+            dst_image_layout: ImageLayout::default(),
+            region_count: u32::default(),
+            regions: ptr::null(),
+        }
+    }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryToMicromapInfoEXT.html>
@@ -5976,6 +6095,54 @@ impl Default for HeadlessSurfaceCreateInfoEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkHostImageCopyDevicePerformanceQueryEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct HostImageCopyDevicePerformanceQueryEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub optimal_device_access: Bool32,
+    pub identical_memory_layout: Bool32,
+}
+
+impl Default for HostImageCopyDevicePerformanceQueryEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT,
+            next: ptr::null_mut(),
+            optimal_device_access: Bool32::default(),
+            identical_memory_layout: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkHostImageLayoutTransitionInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct HostImageLayoutTransitionInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub image: Image,
+    pub old_layout: ImageLayout,
+    pub new_layout: ImageLayout,
+    pub subresource_range: ImageSubresourceRange,
+}
+
+impl Default for HostImageLayoutTransitionInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT,
+            next: ptr::null(),
+            image: Image::default(),
+            old_layout: ImageLayout::default(),
+            new_layout: ImageLayout::default(),
+            subresource_range: ImageSubresourceRange::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIOSSurfaceCreateInfoMVK.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6637,6 +6804,36 @@ impl Default for ImageSwapchainCreateInfoKHR {
             s_type: StructureType::IMAGE_SWAPCHAIN_CREATE_INFO_KHR,
             next: ptr::null(),
             swapchain: SwapchainKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageToMemoryCopyEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImageToMemoryCopyEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub host_pointer: *mut c_void,
+    pub memory_row_length: u32,
+    pub memory_image_height: u32,
+    pub image_subresource: ImageSubresourceLayers,
+    pub image_offset: Offset3D,
+    pub image_extent: Extent3D,
+}
+
+impl Default for ImageToMemoryCopyEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_TO_MEMORY_COPY_EXT,
+            next: ptr::null(),
+            host_pointer: ptr::null_mut(),
+            memory_row_length: u32::default(),
+            memory_image_height: u32::default(),
+            image_subresource: ImageSubresourceLayers::default(),
+            image_offset: Offset3D::default(),
+            image_extent: Extent3D::default(),
         }
     }
 }
@@ -7925,6 +8122,36 @@ impl Default for MemorySciBufPropertiesNV {
             s_type: StructureType::MEMORY_SCI_BUF_PROPERTIES_NV,
             next: ptr::null(),
             memory_type_bits: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMemoryToImageCopyEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryToImageCopyEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub host_pointer: *const c_void,
+    pub memory_row_length: u32,
+    pub memory_image_height: u32,
+    pub image_subresource: ImageSubresourceLayers,
+    pub image_offset: Offset3D,
+    pub image_extent: Extent3D,
+}
+
+impl Default for MemoryToImageCopyEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_TO_IMAGE_COPY_EXT,
+            next: ptr::null(),
+            host_pointer: ptr::null(),
+            memory_row_length: u32::default(),
+            memory_image_height: u32::default(),
+            image_subresource: ImageSubresourceLayers::default(),
+            image_offset: Offset3D::default(),
+            image_extent: Extent3D::default(),
         }
     }
 }
@@ -9785,6 +10012,30 @@ impl Default for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub device_generated_compute: Bool32,
+    pub device_generated_compute_pipelines: Bool32,
+    pub device_generated_compute_capture_replay: Bool32,
+}
+
+impl Default for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_COMPUTE_FEATURES_NV,
+            next: ptr::null_mut(),
+            device_generated_compute: Bool32::default(),
+            device_generated_compute_pipelines: Bool32::default(),
+            device_generated_compute_capture_replay: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10997,6 +11248,56 @@ impl Default for PhysicalDeviceGroupProperties {
             physical_device_count: u32::default(),
             physical_devices: [PhysicalDevice::default(); MAX_DEVICE_GROUP_SIZE],
             subset_allocation: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceHostImageCopyFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceHostImageCopyFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub host_image_copy: Bool32,
+}
+
+impl Default for PhysicalDeviceHostImageCopyFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT,
+            next: ptr::null_mut(),
+            host_image_copy: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceHostImageCopyPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceHostImageCopyPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub copy_src_layout_count: u32,
+    pub copy_src_layouts: *mut ImageLayout,
+    pub copy_dst_layout_count: u32,
+    pub copy_dst_layouts: *mut ImageLayout,
+    pub optimal_tiling_layout_uuid: ByteArray<UUID_SIZE>,
+    pub identical_memory_type_requirements: Bool32,
+}
+
+impl Default for PhysicalDeviceHostImageCopyPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            copy_src_layout_count: u32::default(),
+            copy_src_layouts: ptr::null_mut(),
+            copy_dst_layout_count: u32::default(),
+            copy_dst_layouts: ptr::null_mut(),
+            optimal_tiling_layout_uuid: ByteArray::default(),
+            identical_memory_type_requirements: Bool32::default(),
         }
     }
 }
@@ -15648,6 +15949,28 @@ impl Default for PipelineFragmentShadingRateStateCreateInfoKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineIndirectDeviceAddressInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineIndirectDeviceAddressInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub pipeline_bind_point: PipelineBindPoint,
+    pub pipeline: Pipeline,
+}
+
+impl Default for PipelineIndirectDeviceAddressInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV,
+            next: ptr::null(),
+            pipeline_bind_point: PipelineBindPoint::default(),
+            pipeline: Pipeline::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18782,6 +19105,26 @@ impl Default for SubpassShadingPipelineCreateInfoHUAWEI {
             next: ptr::null_mut(),
             render_pass: RenderPass::default(),
             subpass: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSubresourceHostMemcpySizeEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SubresourceHostMemcpySizeEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub size: DeviceSize,
+}
+
+impl Default for SubresourceHostMemcpySizeEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SUBRESOURCE_HOST_MEMCPY_SIZE_EXT,
+            next: ptr::null_mut(),
+            size: DeviceSize::default(),
         }
     }
 }
