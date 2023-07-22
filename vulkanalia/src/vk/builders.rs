@@ -4278,6 +4278,64 @@ unsafe impl Cast for BindIndexBufferIndirectCommandNVBuilder {
     }
 }
 
+unsafe impl Cast for BindPipelineIndirectCommandNV {
+    type Target = BindPipelineIndirectCommandNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for BindPipelineIndirectCommandNV {
+    type Builder = BindPipelineIndirectCommandNVBuilder;
+}
+
+/// A builder for a [`BindPipelineIndirectCommandNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct BindPipelineIndirectCommandNVBuilder {
+    value: BindPipelineIndirectCommandNV,
+}
+
+impl BindPipelineIndirectCommandNVBuilder {
+    #[inline]
+    pub fn pipeline_address(mut self, pipeline_address: DeviceAddress) -> Self {
+        self.value.pipeline_address = pipeline_address;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> BindPipelineIndirectCommandNV {
+        self.value
+    }
+}
+
+impl ops::Deref for BindPipelineIndirectCommandNVBuilder {
+    type Target = BindPipelineIndirectCommandNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for BindPipelineIndirectCommandNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for BindPipelineIndirectCommandNVBuilder {
+    type Target = BindPipelineIndirectCommandNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for BindShaderGroupIndirectCommandNV {
     type Target = BindShaderGroupIndirectCommandNV;
 
@@ -7712,6 +7770,79 @@ unsafe impl<'b> Cast for ComputePipelineCreateInfoBuilder<'b> {
     }
 }
 
+unsafe impl Cast for ComputePipelineIndirectBufferInfoNV {
+    type Target = ComputePipelineIndirectBufferInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ComputePipelineIndirectBufferInfoNV {
+    type Builder = ComputePipelineIndirectBufferInfoNVBuilder;
+}
+
+/// A builder for a [`ComputePipelineIndirectBufferInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ComputePipelineIndirectBufferInfoNVBuilder {
+    value: ComputePipelineIndirectBufferInfoNV,
+}
+
+impl ComputePipelineIndirectBufferInfoNVBuilder {
+    #[inline]
+    pub fn device_address(mut self, device_address: DeviceAddress) -> Self {
+        self.value.device_address = device_address;
+        self
+    }
+
+    #[inline]
+    pub fn size(mut self, size: DeviceSize) -> Self {
+        self.value.size = size;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_device_address_capture_replay(
+        mut self,
+        pipeline_device_address_capture_replay: DeviceAddress,
+    ) -> Self {
+        self.value.pipeline_device_address_capture_replay = pipeline_device_address_capture_replay;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ComputePipelineIndirectBufferInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for ComputePipelineIndirectBufferInfoNVBuilder {
+    type Target = ComputePipelineIndirectBufferInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ComputePipelineIndirectBufferInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ComputePipelineIndirectBufferInfoNVBuilder {
+    type Target = ComputePipelineIndirectBufferInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ConditionalRenderingBeginInfoEXT {
     type Target = ConditionalRenderingBeginInfoEXT;
 
@@ -8668,6 +8799,174 @@ unsafe impl<'b> Cast for CopyImageToBufferInfo2Builder<'b> {
     }
 }
 
+unsafe impl Cast for CopyImageToImageInfoEXT {
+    type Target = CopyImageToImageInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for CopyImageToImageInfoEXT {
+    type Builder = CopyImageToImageInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`CopyImageToImageInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CopyImageToImageInfoEXTBuilder<'b> {
+    value: CopyImageToImageInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> CopyImageToImageInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn flags(mut self, flags: HostImageCopyFlagsEXT) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn src_image(mut self, src_image: Image) -> Self {
+        self.value.src_image = src_image;
+        self
+    }
+
+    #[inline]
+    pub fn src_image_layout(mut self, src_image_layout: ImageLayout) -> Self {
+        self.value.src_image_layout = src_image_layout;
+        self
+    }
+
+    #[inline]
+    pub fn dst_image(mut self, dst_image: Image) -> Self {
+        self.value.dst_image = dst_image;
+        self
+    }
+
+    #[inline]
+    pub fn dst_image_layout(mut self, dst_image_layout: ImageLayout) -> Self {
+        self.value.dst_image_layout = dst_image_layout;
+        self
+    }
+
+    #[inline]
+    pub fn regions(mut self, regions: &'b [impl Cast<Target = ImageCopy2>]) -> Self {
+        self.value.region_count = regions.len() as u32;
+        self.value.regions = regions.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CopyImageToImageInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for CopyImageToImageInfoEXTBuilder<'b> {
+    type Target = CopyImageToImageInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for CopyImageToImageInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for CopyImageToImageInfoEXTBuilder<'b> {
+    type Target = CopyImageToImageInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CopyImageToMemoryInfoEXT {
+    type Target = CopyImageToMemoryInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for CopyImageToMemoryInfoEXT {
+    type Builder = CopyImageToMemoryInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`CopyImageToMemoryInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CopyImageToMemoryInfoEXTBuilder<'b> {
+    value: CopyImageToMemoryInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> CopyImageToMemoryInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn flags(mut self, flags: HostImageCopyFlagsEXT) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn src_image(mut self, src_image: Image) -> Self {
+        self.value.src_image = src_image;
+        self
+    }
+
+    #[inline]
+    pub fn src_image_layout(mut self, src_image_layout: ImageLayout) -> Self {
+        self.value.src_image_layout = src_image_layout;
+        self
+    }
+
+    #[inline]
+    pub fn regions(mut self, regions: &'b [impl Cast<Target = ImageToMemoryCopyEXT>]) -> Self {
+        self.value.region_count = regions.len() as u32;
+        self.value.regions = regions.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CopyImageToMemoryInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for CopyImageToMemoryInfoEXTBuilder<'b> {
+    type Target = CopyImageToMemoryInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for CopyImageToMemoryInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for CopyImageToMemoryInfoEXTBuilder<'b> {
+    type Target = CopyImageToMemoryInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for CopyMemoryIndirectCommandNV {
     type Target = CopyMemoryIndirectCommandNV;
 
@@ -8892,6 +9191,84 @@ impl ops::DerefMut for CopyMemoryToImageIndirectCommandNVBuilder {
 
 unsafe impl Cast for CopyMemoryToImageIndirectCommandNVBuilder {
     type Target = CopyMemoryToImageIndirectCommandNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CopyMemoryToImageInfoEXT {
+    type Target = CopyMemoryToImageInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for CopyMemoryToImageInfoEXT {
+    type Builder = CopyMemoryToImageInfoEXTBuilder<'b>;
+}
+
+/// A builder for a [`CopyMemoryToImageInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CopyMemoryToImageInfoEXTBuilder<'b> {
+    value: CopyMemoryToImageInfoEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> CopyMemoryToImageInfoEXTBuilder<'b> {
+    #[inline]
+    pub fn flags(mut self, flags: HostImageCopyFlagsEXT) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn dst_image(mut self, dst_image: Image) -> Self {
+        self.value.dst_image = dst_image;
+        self
+    }
+
+    #[inline]
+    pub fn dst_image_layout(mut self, dst_image_layout: ImageLayout) -> Self {
+        self.value.dst_image_layout = dst_image_layout;
+        self
+    }
+
+    #[inline]
+    pub fn regions(mut self, regions: &'b [impl Cast<Target = MemoryToImageCopyEXT>]) -> Self {
+        self.value.region_count = regions.len() as u32;
+        self.value.regions = regions.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CopyMemoryToImageInfoEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for CopyMemoryToImageInfoEXTBuilder<'b> {
+    type Target = CopyMemoryToImageInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for CopyMemoryToImageInfoEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for CopyMemoryToImageInfoEXTBuilder<'b> {
+    type Target = CopyMemoryToImageInfoEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -12267,6 +12644,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipEnableFeaturesEXT
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorBufferFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorIndexingFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
@@ -12293,6 +12671,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateEnumsFe
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceGlobalPriorityQueryFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostImageCopyFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageCompressionControlFeaturesEXT {}
@@ -20591,6 +20970,149 @@ unsafe impl Cast for HeadlessSurfaceCreateInfoEXTBuilder {
     }
 }
 
+unsafe impl Cast for HostImageCopyDevicePerformanceQueryEXT {
+    type Target = HostImageCopyDevicePerformanceQueryEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for HostImageCopyDevicePerformanceQueryEXT {
+    type Builder = HostImageCopyDevicePerformanceQueryEXTBuilder;
+}
+
+/// A builder for a [`HostImageCopyDevicePerformanceQueryEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct HostImageCopyDevicePerformanceQueryEXTBuilder {
+    value: HostImageCopyDevicePerformanceQueryEXT,
+}
+
+impl HostImageCopyDevicePerformanceQueryEXTBuilder {
+    #[inline]
+    pub fn optimal_device_access(mut self, optimal_device_access: bool) -> Self {
+        self.value.optimal_device_access = optimal_device_access as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn identical_memory_layout(mut self, identical_memory_layout: bool) -> Self {
+        self.value.identical_memory_layout = identical_memory_layout as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> HostImageCopyDevicePerformanceQueryEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for HostImageCopyDevicePerformanceQueryEXTBuilder {
+    type Target = HostImageCopyDevicePerformanceQueryEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for HostImageCopyDevicePerformanceQueryEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for HostImageCopyDevicePerformanceQueryEXTBuilder {
+    type Target = HostImageCopyDevicePerformanceQueryEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for HostImageLayoutTransitionInfoEXT {
+    type Target = HostImageLayoutTransitionInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for HostImageLayoutTransitionInfoEXT {
+    type Builder = HostImageLayoutTransitionInfoEXTBuilder;
+}
+
+/// A builder for a [`HostImageLayoutTransitionInfoEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct HostImageLayoutTransitionInfoEXTBuilder {
+    value: HostImageLayoutTransitionInfoEXT,
+}
+
+impl HostImageLayoutTransitionInfoEXTBuilder {
+    #[inline]
+    pub fn image(mut self, image: Image) -> Self {
+        self.value.image = image;
+        self
+    }
+
+    #[inline]
+    pub fn old_layout(mut self, old_layout: ImageLayout) -> Self {
+        self.value.old_layout = old_layout;
+        self
+    }
+
+    #[inline]
+    pub fn new_layout(mut self, new_layout: ImageLayout) -> Self {
+        self.value.new_layout = new_layout;
+        self
+    }
+
+    #[inline]
+    pub fn subresource_range(
+        mut self,
+        subresource_range: impl Cast<Target = ImageSubresourceRange>,
+    ) -> Self {
+        self.value.subresource_range = subresource_range.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> HostImageLayoutTransitionInfoEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for HostImageLayoutTransitionInfoEXTBuilder {
+    type Target = HostImageLayoutTransitionInfoEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for HostImageLayoutTransitionInfoEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for HostImageLayoutTransitionInfoEXTBuilder {
+    type Target = HostImageLayoutTransitionInfoEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for IOSSurfaceCreateInfoMVK {
     type Target = IOSSurfaceCreateInfoMVK;
 
@@ -21871,6 +22393,7 @@ pub unsafe trait ExtendsImageFormatProperties2: fmt::Debug {}
 unsafe impl ExtendsImageFormatProperties2 for AndroidHardwareBufferUsageANDROID {}
 unsafe impl ExtendsImageFormatProperties2 for ExternalImageFormatProperties {}
 unsafe impl ExtendsImageFormatProperties2 for FilterCubicImageViewImageFormatPropertiesEXT {}
+unsafe impl ExtendsImageFormatProperties2 for HostImageCopyDevicePerformanceQueryEXT {}
 unsafe impl ExtendsImageFormatProperties2 for ImageCompressionPropertiesEXT {}
 unsafe impl ExtendsImageFormatProperties2 for SamplerYcbcrConversionImageFormatProperties {}
 unsafe impl ExtendsImageFormatProperties2 for TextureLODGatherFormatPropertiesAMD {}
@@ -23028,6 +23551,98 @@ impl ops::DerefMut for ImageSwapchainCreateInfoKHRBuilder {
 
 unsafe impl Cast for ImageSwapchainCreateInfoKHRBuilder {
     type Target = ImageSwapchainCreateInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ImageToMemoryCopyEXT {
+    type Target = ImageToMemoryCopyEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for ImageToMemoryCopyEXT {
+    type Builder = ImageToMemoryCopyEXTBuilder<'b>;
+}
+
+/// A builder for a [`ImageToMemoryCopyEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImageToMemoryCopyEXTBuilder<'b> {
+    value: ImageToMemoryCopyEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> ImageToMemoryCopyEXTBuilder<'b> {
+    #[inline]
+    pub fn host_pointer<T>(mut self, host_pointer: &'b mut T) -> Self {
+        self.value.host_pointer = (host_pointer as *mut T).cast();
+        self
+    }
+
+    #[inline]
+    pub fn memory_row_length(mut self, memory_row_length: u32) -> Self {
+        self.value.memory_row_length = memory_row_length;
+        self
+    }
+
+    #[inline]
+    pub fn memory_image_height(mut self, memory_image_height: u32) -> Self {
+        self.value.memory_image_height = memory_image_height;
+        self
+    }
+
+    #[inline]
+    pub fn image_subresource(
+        mut self,
+        image_subresource: impl Cast<Target = ImageSubresourceLayers>,
+    ) -> Self {
+        self.value.image_subresource = image_subresource.into();
+        self
+    }
+
+    #[inline]
+    pub fn image_offset(mut self, image_offset: impl Cast<Target = Offset3D>) -> Self {
+        self.value.image_offset = image_offset.into();
+        self
+    }
+
+    #[inline]
+    pub fn image_extent(mut self, image_extent: impl Cast<Target = Extent3D>) -> Self {
+        self.value.image_extent = image_extent.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImageToMemoryCopyEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for ImageToMemoryCopyEXTBuilder<'b> {
+    type Target = ImageToMemoryCopyEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for ImageToMemoryCopyEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for ImageToMemoryCopyEXTBuilder<'b> {
+    type Target = ImageToMemoryCopyEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -27101,6 +27716,98 @@ impl ops::DerefMut for MemorySciBufPropertiesNVBuilder {
 
 unsafe impl Cast for MemorySciBufPropertiesNVBuilder {
     type Target = MemorySciBufPropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for MemoryToImageCopyEXT {
+    type Target = MemoryToImageCopyEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for MemoryToImageCopyEXT {
+    type Builder = MemoryToImageCopyEXTBuilder<'b>;
+}
+
+/// A builder for a [`MemoryToImageCopyEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct MemoryToImageCopyEXTBuilder<'b> {
+    value: MemoryToImageCopyEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> MemoryToImageCopyEXTBuilder<'b> {
+    #[inline]
+    pub fn host_pointer<T>(mut self, host_pointer: &'b T) -> Self {
+        self.value.host_pointer = (host_pointer as *const T).cast();
+        self
+    }
+
+    #[inline]
+    pub fn memory_row_length(mut self, memory_row_length: u32) -> Self {
+        self.value.memory_row_length = memory_row_length;
+        self
+    }
+
+    #[inline]
+    pub fn memory_image_height(mut self, memory_image_height: u32) -> Self {
+        self.value.memory_image_height = memory_image_height;
+        self
+    }
+
+    #[inline]
+    pub fn image_subresource(
+        mut self,
+        image_subresource: impl Cast<Target = ImageSubresourceLayers>,
+    ) -> Self {
+        self.value.image_subresource = image_subresource.into();
+        self
+    }
+
+    #[inline]
+    pub fn image_offset(mut self, image_offset: impl Cast<Target = Offset3D>) -> Self {
+        self.value.image_offset = image_offset.into();
+        self
+    }
+
+    #[inline]
+    pub fn image_extent(mut self, image_extent: impl Cast<Target = Extent3D>) -> Self {
+        self.value.image_extent = image_extent.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> MemoryToImageCopyEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for MemoryToImageCopyEXTBuilder<'b> {
+    type Target = MemoryToImageCopyEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for MemoryToImageCopyEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for MemoryToImageCopyEXTBuilder<'b> {
+    type Target = MemoryToImageCopyEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -33420,6 +34127,84 @@ unsafe impl Cast for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVEBuilder 
     }
 }
 
+unsafe impl Cast for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {
+    type Target = PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {
+    type Builder = PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNVBuilder {
+    value: PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV,
+}
+
+impl PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNVBuilder {
+    #[inline]
+    pub fn device_generated_compute(mut self, device_generated_compute: bool) -> Self {
+        self.value.device_generated_compute = device_generated_compute as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn device_generated_compute_pipelines(
+        mut self,
+        device_generated_compute_pipelines: bool,
+    ) -> Self {
+        self.value.device_generated_compute_pipelines =
+            device_generated_compute_pipelines as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn device_generated_compute_capture_replay(
+        mut self,
+        device_generated_compute_capture_replay: bool,
+    ) -> Self {
+        self.value.device_generated_compute_capture_replay =
+            device_generated_compute_capture_replay as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNVBuilder {
+    type Target = PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNVBuilder {
+    type Target = PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {
     type Target = PhysicalDeviceDeviceGeneratedCommandsFeaturesNV;
 
@@ -36000,6 +36785,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipEnableFeat
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorBufferFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorIndexingFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDeviceMemoryReportFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDiagnosticsConfigFeaturesNV {}
@@ -36028,6 +36817,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRate
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceFragmentShadingRateFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceGlobalPriorityQueryFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostImageCopyFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageCompressionControlFeaturesEXT {}
@@ -37802,6 +38592,162 @@ impl ops::DerefMut for PhysicalDeviceGroupPropertiesBuilder {
 
 unsafe impl Cast for PhysicalDeviceGroupPropertiesBuilder {
     type Target = PhysicalDeviceGroupProperties;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceHostImageCopyFeaturesEXT {
+    type Target = PhysicalDeviceHostImageCopyFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceHostImageCopyFeaturesEXT {
+    type Builder = PhysicalDeviceHostImageCopyFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceHostImageCopyFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceHostImageCopyFeaturesEXTBuilder {
+    value: PhysicalDeviceHostImageCopyFeaturesEXT,
+}
+
+impl PhysicalDeviceHostImageCopyFeaturesEXTBuilder {
+    #[inline]
+    pub fn host_image_copy(mut self, host_image_copy: bool) -> Self {
+        self.value.host_image_copy = host_image_copy as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceHostImageCopyFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceHostImageCopyFeaturesEXTBuilder {
+    type Target = PhysicalDeviceHostImageCopyFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceHostImageCopyFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceHostImageCopyFeaturesEXTBuilder {
+    type Target = PhysicalDeviceHostImageCopyFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceHostImageCopyPropertiesEXT {
+    type Target = PhysicalDeviceHostImageCopyPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PhysicalDeviceHostImageCopyPropertiesEXT {
+    type Builder = PhysicalDeviceHostImageCopyPropertiesEXTBuilder<'b>;
+}
+
+/// A builder for a [`PhysicalDeviceHostImageCopyPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceHostImageCopyPropertiesEXTBuilder<'b> {
+    value: PhysicalDeviceHostImageCopyPropertiesEXT,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PhysicalDeviceHostImageCopyPropertiesEXTBuilder<'b> {
+    #[inline]
+    pub fn copy_src_layout_count(mut self, copy_src_layout_count: u32) -> Self {
+        self.value.copy_src_layout_count = copy_src_layout_count;
+        self
+    }
+
+    #[inline]
+    pub fn copy_src_layouts(mut self, copy_src_layouts: &'b mut [ImageLayout]) -> Self {
+        self.value.copy_src_layout_count = copy_src_layouts.len() as u32;
+        self.value.copy_src_layouts = copy_src_layouts.as_mut_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn copy_dst_layout_count(mut self, copy_dst_layout_count: u32) -> Self {
+        self.value.copy_dst_layout_count = copy_dst_layout_count;
+        self
+    }
+
+    #[inline]
+    pub fn copy_dst_layouts(mut self, copy_dst_layouts: &'b mut [ImageLayout]) -> Self {
+        self.value.copy_dst_layout_count = copy_dst_layouts.len() as u32;
+        self.value.copy_dst_layouts = copy_dst_layouts.as_mut_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn optimal_tiling_layout_uuid(
+        mut self,
+        optimal_tiling_layout_uuid: impl Into<ByteArray<UUID_SIZE>>,
+    ) -> Self {
+        self.value.optimal_tiling_layout_uuid = optimal_tiling_layout_uuid.into();
+        self
+    }
+
+    #[inline]
+    pub fn identical_memory_type_requirements(
+        mut self,
+        identical_memory_type_requirements: bool,
+    ) -> Self {
+        self.value.identical_memory_type_requirements =
+            identical_memory_type_requirements as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceHostImageCopyPropertiesEXT {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PhysicalDeviceHostImageCopyPropertiesEXTBuilder<'b> {
+    type Target = PhysicalDeviceHostImageCopyPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PhysicalDeviceHostImageCopyPropertiesEXTBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PhysicalDeviceHostImageCopyPropertiesEXTBuilder<'b> {
+    type Target = PhysicalDeviceHostImageCopyPropertiesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -43777,6 +44723,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2
     for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT
 {
 }
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceHostImageCopyPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceIDProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessingPropertiesQCOM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBlockProperties {}
@@ -53770,6 +54717,70 @@ impl ops::DerefMut for PipelineFragmentShadingRateStateCreateInfoKHRBuilder {
 
 unsafe impl Cast for PipelineFragmentShadingRateStateCreateInfoKHRBuilder {
     type Target = PipelineFragmentShadingRateStateCreateInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineIndirectDeviceAddressInfoNV {
+    type Target = PipelineIndirectDeviceAddressInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineIndirectDeviceAddressInfoNV {
+    type Builder = PipelineIndirectDeviceAddressInfoNVBuilder;
+}
+
+/// A builder for a [`PipelineIndirectDeviceAddressInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineIndirectDeviceAddressInfoNVBuilder {
+    value: PipelineIndirectDeviceAddressInfoNV,
+}
+
+impl PipelineIndirectDeviceAddressInfoNVBuilder {
+    #[inline]
+    pub fn pipeline_bind_point(mut self, pipeline_bind_point: PipelineBindPoint) -> Self {
+        self.value.pipeline_bind_point = pipeline_bind_point;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline(mut self, pipeline: Pipeline) -> Self {
+        self.value.pipeline = pipeline;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineIndirectDeviceAddressInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineIndirectDeviceAddressInfoNVBuilder {
+    type Target = PipelineIndirectDeviceAddressInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineIndirectDeviceAddressInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineIndirectDeviceAddressInfoNVBuilder {
+    type Target = PipelineIndirectDeviceAddressInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -64645,6 +65656,64 @@ unsafe impl Cast for SubpassShadingPipelineCreateInfoHUAWEIBuilder {
     }
 }
 
+unsafe impl Cast for SubresourceHostMemcpySizeEXT {
+    type Target = SubresourceHostMemcpySizeEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SubresourceHostMemcpySizeEXT {
+    type Builder = SubresourceHostMemcpySizeEXTBuilder;
+}
+
+/// A builder for a [`SubresourceHostMemcpySizeEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SubresourceHostMemcpySizeEXTBuilder {
+    value: SubresourceHostMemcpySizeEXT,
+}
+
+impl SubresourceHostMemcpySizeEXTBuilder {
+    #[inline]
+    pub fn size(mut self, size: DeviceSize) -> Self {
+        self.value.size = size;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SubresourceHostMemcpySizeEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for SubresourceHostMemcpySizeEXTBuilder {
+    type Target = SubresourceHostMemcpySizeEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SubresourceHostMemcpySizeEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SubresourceHostMemcpySizeEXTBuilder {
+    type Target = SubresourceHostMemcpySizeEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for SubresourceLayout {
     type Target = SubresourceLayout;
 
@@ -64730,6 +65799,7 @@ unsafe impl Cast for SubresourceLayoutBuilder {
 /// A Vulkan struct that can be used to extend a [`SubresourceLayout2EXT`].
 pub unsafe trait ExtendsSubresourceLayout2EXT: fmt::Debug {}
 unsafe impl ExtendsSubresourceLayout2EXT for ImageCompressionPropertiesEXT {}
+unsafe impl ExtendsSubresourceLayout2EXT for SubresourceHostMemcpySizeEXT {}
 
 unsafe impl Cast for SubresourceLayout2EXT {
     type Target = SubresourceLayout2EXT;

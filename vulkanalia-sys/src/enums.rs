@@ -890,56 +890,6 @@ impl fmt::Debug for ComponentTypeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComponentTypeNV.html>
-#[repr(transparent)]
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct ComponentTypeNV(i32);
-
-impl ComponentTypeNV {
-    pub const FLOAT16: Self = Self(0);
-    pub const FLOAT32: Self = Self(1);
-    pub const FLOAT64: Self = Self(2);
-    pub const SINT8: Self = Self(3);
-    pub const SINT16: Self = Self(4);
-    pub const SINT32: Self = Self(5);
-    pub const SINT64: Self = Self(6);
-    pub const UINT8: Self = Self(7);
-    pub const UINT16: Self = Self(8);
-    pub const UINT32: Self = Self(9);
-    pub const UINT64: Self = Self(10);
-
-    /// Constructs an instance of this enum with the supplied underlying value.
-    #[inline]
-    pub const fn from_raw(value: i32) -> Self {
-        Self(value)
-    }
-
-    /// Gets the underlying value for this enum instance.
-    #[inline]
-    pub const fn as_raw(self) -> i32 {
-        self.0
-    }
-}
-
-impl fmt::Debug for ComponentTypeNV {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self.0 {
-            0 => write!(f, "FLOAT16"),
-            1 => write!(f, "FLOAT32"),
-            2 => write!(f, "FLOAT64"),
-            3 => write!(f, "SINT8"),
-            4 => write!(f, "SINT16"),
-            5 => write!(f, "SINT32"),
-            6 => write!(f, "SINT64"),
-            7 => write!(f, "UINT8"),
-            8 => write!(f, "UINT16"),
-            9 => write!(f, "UINT32"),
-            10 => write!(f, "UINT64"),
-            _ => self.0.fmt(f),
-        }
-    }
-}
-
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkConservativeRasterizationModeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -2947,6 +2897,8 @@ impl IndirectCommandsTokenTypeNV {
     pub const DRAW: Self = Self(6);
     pub const DRAW_TASKS: Self = Self(7);
     pub const DRAW_MESH_TASKS: Self = Self(1000328000);
+    pub const PIPELINE: Self = Self(1000428003);
+    pub const DISPATCH: Self = Self(1000428004);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2973,6 +2925,8 @@ impl fmt::Debug for IndirectCommandsTokenTypeNV {
             6 => write!(f, "DRAW"),
             7 => write!(f, "DRAW_TASKS"),
             1000328000 => write!(f, "DRAW_MESH_TASKS"),
+            1000428003 => write!(f, "PIPELINE"),
+            1000428004 => write!(f, "DISPATCH"),
             _ => self.0.fmt(f),
         }
     }
@@ -4762,42 +4716,6 @@ impl fmt::Debug for ScopeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkScopeNV.html>
-#[repr(transparent)]
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct ScopeNV(i32);
-
-impl ScopeNV {
-    pub const DEVICE: Self = Self(1);
-    pub const WORKGROUP: Self = Self(2);
-    pub const SUBGROUP: Self = Self(3);
-    pub const QUEUE_FAMILY: Self = Self(5);
-
-    /// Constructs an instance of this enum with the supplied underlying value.
-    #[inline]
-    pub const fn from_raw(value: i32) -> Self {
-        Self(value)
-    }
-
-    /// Gets the underlying value for this enum instance.
-    #[inline]
-    pub const fn as_raw(self) -> i32 {
-        self.0
-    }
-}
-
-impl fmt::Debug for ScopeNV {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self.0 {
-            1 => write!(f, "DEVICE"),
-            2 => write!(f, "WORKGROUP"),
-            3 => write!(f, "SUBGROUP"),
-            5 => write!(f, "QUEUE_FAMILY"),
-            _ => self.0.fmt(f),
-        }
-    }
-}
-
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSemaphoreType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -5585,6 +5503,16 @@ impl StructureType {
     pub const PIPELINE_EXECUTABLE_INFO_KHR: Self = Self(1000269003);
     pub const PIPELINE_EXECUTABLE_STATISTIC_KHR: Self = Self(1000269004);
     pub const PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR: Self = Self(1000269005);
+    pub const PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT: Self = Self(1000270000);
+    pub const PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES_EXT: Self = Self(1000270001);
+    pub const MEMORY_TO_IMAGE_COPY_EXT: Self = Self(1000270002);
+    pub const IMAGE_TO_MEMORY_COPY_EXT: Self = Self(1000270003);
+    pub const COPY_IMAGE_TO_MEMORY_INFO_EXT: Self = Self(1000270004);
+    pub const COPY_MEMORY_TO_IMAGE_INFO_EXT: Self = Self(1000270005);
+    pub const HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT: Self = Self(1000270006);
+    pub const COPY_IMAGE_TO_IMAGE_INFO_EXT: Self = Self(1000270007);
+    pub const SUBRESOURCE_HOST_MEMCPY_SIZE_EXT: Self = Self(1000270008);
+    pub const HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT: Self = Self(1000270009);
     pub const MEMORY_MAP_INFO_KHR: Self = Self(1000271000);
     pub const MEMORY_UNMAP_INFO_KHR: Self = Self(1000271001);
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT: Self = Self(1000273000);
@@ -5788,6 +5716,10 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV: Self = Self(1000426001);
     pub const PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV: Self = Self(1000427000);
     pub const PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV: Self = Self(1000427001);
+    pub const PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_COMPUTE_FEATURES_NV: Self =
+        Self(1000428000);
+    pub const COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV: Self = Self(1000428001);
+    pub const PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV: Self = Self(1000428002);
     pub const PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV: Self = Self(1000430000);
     pub const APPLICATION_PARAMETERS_EXT: Self = Self(1000435000);
     pub const PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT: Self =
@@ -6405,6 +6337,16 @@ impl fmt::Debug for StructureType {
             1000269003 => write!(f, "PIPELINE_EXECUTABLE_INFO_KHR"),
             1000269004 => write!(f, "PIPELINE_EXECUTABLE_STATISTIC_KHR"),
             1000269005 => write!(f, "PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR"),
+            1000270000 => write!(f, "PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT"),
+            1000270001 => write!(f, "PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES_EXT"),
+            1000270002 => write!(f, "MEMORY_TO_IMAGE_COPY_EXT"),
+            1000270003 => write!(f, "IMAGE_TO_MEMORY_COPY_EXT"),
+            1000270004 => write!(f, "COPY_IMAGE_TO_MEMORY_INFO_EXT"),
+            1000270005 => write!(f, "COPY_MEMORY_TO_IMAGE_INFO_EXT"),
+            1000270006 => write!(f, "HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT"),
+            1000270007 => write!(f, "COPY_IMAGE_TO_IMAGE_INFO_EXT"),
+            1000270008 => write!(f, "SUBRESOURCE_HOST_MEMCPY_SIZE_EXT"),
+            1000270009 => write!(f, "HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT"),
             1000271000 => write!(f, "MEMORY_MAP_INFO_KHR"),
             1000271001 => write!(f, "MEMORY_UNMAP_INFO_KHR"),
             1000273000 => write!(f, "PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT"),
@@ -6667,6 +6609,12 @@ impl fmt::Debug for StructureType {
             1000426001 => write!(f, "PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV"),
             1000427000 => write!(f, "PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV"),
             1000427001 => write!(f, "PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV"),
+            1000428000 => write!(
+                f,
+                "PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_COMPUTE_FEATURES_NV"
+            ),
+            1000428001 => write!(f, "COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV"),
+            1000428002 => write!(f, "PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV"),
             1000430000 => write!(f, "PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV"),
             1000435000 => write!(f, "APPLICATION_PARAMETERS_EXT"),
             1000437000 => write!(
@@ -7229,6 +7177,8 @@ impl fmt::Debug for ViewportCoordinateSwizzleNV {
 pub type AccelerationStructureTypeNV = AccelerationStructureTypeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkChromaLocationKHR.html>
 pub type ChromaLocationKHR = ChromaLocation;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComponentTypeNV.html>
+pub type ComponentTypeNV = ComponentTypeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyAccelerationStructureModeNV.html>
 pub type CopyAccelerationStructureModeNV = CopyAccelerationStructureModeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorUpdateTemplateTypeKHR.html>
@@ -7249,6 +7199,8 @@ pub type SamplerReductionModeEXT = SamplerReductionMode;
 pub type SamplerYcbcrModelConversionKHR = SamplerYcbcrModelConversion;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrRangeKHR.html>
 pub type SamplerYcbcrRangeKHR = SamplerYcbcrRange;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkScopeNV.html>
+pub type ScopeNV = ScopeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSemaphoreTypeKHR.html>
 pub type SemaphoreTypeKHR = SemaphoreType;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderFloatControlsIndependenceKHR.html>

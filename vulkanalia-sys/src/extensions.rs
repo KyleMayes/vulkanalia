@@ -1274,6 +1274,22 @@ pub const EXT_HEADLESS_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_host_image_copy.html>
+#[allow(deprecated)]
+pub const EXT_HOST_IMAGE_COPY_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_host_image_copy"),
+    number: 271,
+    type_: "device",
+    author: "EXT",
+    contact: "Shahbaz Youssefi @syoussefi",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_host_query_reset.html>
 #[allow(deprecated)]
 pub const EXT_HOST_QUERY_RESET_EXTENSION: Extension = Extension {
@@ -4553,6 +4569,22 @@ pub const NV_DEVICE_GENERATED_COMMANDS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_device_generated_commands_compute.html>
+#[allow(deprecated)]
+pub const NV_DEVICE_GENERATED_COMMANDS_COMPUTE_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_device_generated_commands_compute"),
+    number: 429,
+    type_: "device",
+    author: "NV",
+    contact: "Vikram Kushwaha @vkushwaha-nv",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_displacement_micromap.html>
 ///
 /// ## WARNING
@@ -4568,7 +4600,7 @@ pub const NV_DISPLACEMENT_MICROMAP_EXTENSION: Extension = Extension {
     number: 398,
     type_: "device",
     author: "NV",
-    contact: "Christoph Kubisch @pixeljetstream, Eric Werness",
+    contact: "Christoph Kubisch @pixeljetstream, Eric Werness @ewerness-nv",
     platform: Some("provisional"),
     required_extensions: None,
     required_version: None,

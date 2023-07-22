@@ -427,6 +427,7 @@ bitflags! {
         const HOST_ONLY_POOL_EXT = 1 << 2;
         const DESCRIPTOR_BUFFER_EXT = 1 << 4;
         const EMBEDDED_IMMUTABLE_SAMPLERS_EXT = 1 << 5;
+        const INDIRECT_BINDABLE_NV = 1 << 7;
     }
 }
 
@@ -758,6 +759,7 @@ bitflags! {
         const OPTICAL_FLOW_IMAGE_NV = 1 << 40;
         const OPTICAL_FLOW_VECTOR_NV = 1 << 41;
         const OPTICAL_FLOW_COST_NV = 1 << 42;
+        const HOST_IMAGE_TRANSFER_EXT = 1 << 46;
     }
 }
 
@@ -811,6 +813,15 @@ bitflags! {
     #[repr(transparent)]
     #[derive(Default)]
     pub struct HeadlessSurfaceCreateFlagsEXT: Flags { }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkHostImageCopyFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct HostImageCopyFlagsEXT: Flags {
+        const MEMCPY = 1;
+    }
 }
 
 bitflags! {
@@ -957,6 +968,7 @@ bitflags! {
         const ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 19;
         const SAMPLE_WEIGHT_QCOM = 1 << 20;
         const SAMPLE_BLOCK_MATCH_QCOM = 1 << 21;
+        const HOST_TRANSFER_EXT = 1 << 22;
     }
 }
 
