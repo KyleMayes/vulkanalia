@@ -191,7 +191,42 @@ bitflags! {
         const RESOURCE_DESCRIPTOR_BUFFER_EXT = 1 << 22;
         const MICROMAP_BUILD_INPUT_READ_ONLY_EXT = 1 << 23;
         const MICROMAP_STORAGE_EXT = 1 << 24;
+        const EXECUTION_GRAPH_SCRATCH_AMDX = 1 << 25;
         const PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_EXT = 1 << 26;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBufferUsageFlags2KHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct BufferUsageFlags2KHR: Flags {
+        const TRANSFER_SRC = 1;
+        const TRANSFER_DST = 1 << 1;
+        const UNIFORM_TEXEL_BUFFER = 1 << 2;
+        const STORAGE_TEXEL_BUFFER = 1 << 3;
+        const UNIFORM_BUFFER = 1 << 4;
+        const STORAGE_BUFFER = 1 << 5;
+        const INDEX_BUFFER = 1 << 6;
+        const VERTEX_BUFFER = 1 << 7;
+        const INDIRECT_BUFFER = 1 << 8;
+        const CONDITIONAL_RENDERING = 1 << 9;
+        const SHADER_BINDING_TABLE = 1 << 10;
+        const TRANSFORM_FEEDBACK_BUFFER = 1 << 11;
+        const TRANSFORM_FEEDBACK_COUNTER_BUFFER = 1 << 12;
+        const VIDEO_DECODE_SRC = 1 << 13;
+        const VIDEO_DECODE_DST = 1 << 14;
+        const VIDEO_ENCODE_DST = 1 << 15;
+        const VIDEO_ENCODE_SRC = 1 << 16;
+        const SHADER_DEVICE_ADDRESS = 1 << 17;
+        const ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY = 1 << 19;
+        const ACCELERATION_STRUCTURE_STORAGE = 1 << 20;
+        const SAMPLER_DESCRIPTOR_BUFFER = 1 << 21;
+        const RESOURCE_DESCRIPTOR_BUFFER = 1 << 22;
+        const MICROMAP_BUILD_INPUT_READ_ONLY = 1 << 23;
+        const MICROMAP_STORAGE = 1 << 24;
+        const EXECUTION_GRAPH_SCRATCH_AMDX = 1 << 25;
+        const PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER = 1 << 26;
     }
 }
 
@@ -427,6 +462,7 @@ bitflags! {
         const HOST_ONLY_POOL_EXT = 1 << 2;
         const DESCRIPTOR_BUFFER_EXT = 1 << 4;
         const EMBEDDED_IMMUTABLE_SAMPLERS_EXT = 1 << 5;
+        const INDIRECT_BINDABLE_NV = 1 << 7;
     }
 }
 
@@ -758,6 +794,7 @@ bitflags! {
         const OPTICAL_FLOW_IMAGE_NV = 1 << 40;
         const OPTICAL_FLOW_VECTOR_NV = 1 << 41;
         const OPTICAL_FLOW_COST_NV = 1 << 42;
+        const HOST_IMAGE_TRANSFER_EXT = 1 << 46;
     }
 }
 
@@ -811,6 +848,15 @@ bitflags! {
     #[repr(transparent)]
     #[derive(Default)]
     pub struct HeadlessSurfaceCreateFlagsEXT: Flags { }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkHostImageCopyFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct HostImageCopyFlagsEXT: Flags {
+        const MEMCPY = 1;
+    }
 }
 
 bitflags! {
@@ -957,6 +1003,7 @@ bitflags! {
         const ATTACHMENT_FEEDBACK_LOOP_EXT = 1 << 19;
         const SAMPLE_WEIGHT_QCOM = 1 << 20;
         const SAMPLE_BLOCK_MATCH_QCOM = 1 << 21;
+        const HOST_TRANSFER_EXT = 1 << 22;
     }
 }
 
@@ -1237,6 +1284,45 @@ bitflags! {
         const RAY_TRACING_DISPLACEMENT_MICROMAP_NV = 1 << 28;
         const DESCRIPTOR_BUFFER_EXT = 1 << 29;
         const PROTECTED_ACCESS_ONLY_EXT = 1 << 30;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineCreateFlags2KHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct PipelineCreateFlags2KHR: Flags {
+        const DISABLE_OPTIMIZATION = 1;
+        const ALLOW_DERIVATIVES = 1 << 1;
+        const DERIVATIVE = 1 << 2;
+        const VIEW_INDEX_FROM_DEVICE_INDEX = 1 << 3;
+        const DISPATCH_BASE = 1 << 4;
+        const DEFER_COMPILE = 1 << 5;
+        const CAPTURE_STATISTICS = 1 << 6;
+        const CAPTURE_INTERNAL_REPRESENTATIONS = 1 << 7;
+        const FAIL_ON_PIPELINE_COMPILE_REQUIRED = 1 << 8;
+        const EARLY_RETURN_ON_FAILURE = 1 << 9;
+        const LINK_TIME_OPTIMIZATION = 1 << 10;
+        const LIBRARY = 1 << 11;
+        const RAY_TRACING_SKIP_TRIANGLES = 1 << 12;
+        const RAY_TRACING_SKIP_AABBS = 1 << 13;
+        const RAY_TRACING_NO_NULL_ANY_HIT_SHADERS = 1 << 14;
+        const RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS = 1 << 15;
+        const RAY_TRACING_NO_NULL_MISS_SHADERS = 1 << 16;
+        const RAY_TRACING_NO_NULL_INTERSECTION_SHADERS = 1 << 17;
+        const INDIRECT_BINDABLE = 1 << 18;
+        const RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY = 1 << 19;
+        const RAY_TRACING_ALLOW_MOTION = 1 << 20;
+        const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT = 1 << 21;
+        const RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT = 1 << 22;
+        const RETAIN_LINK_TIME_OPTIMIZATION_INFO = 1 << 23;
+        const RAY_TRACING_OPACITY_MICROMAP = 1 << 24;
+        const COLOR_ATTACHMENT_FEEDBACK_LOOP = 1 << 25;
+        const DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP = 1 << 26;
+        const NO_PROTECTED_ACCESS = 1 << 27;
+        const RESERVED_BIT_28_NV = 1 << 28;
+        const DESCRIPTOR_BUFFER = 1 << 29;
+        const PROTECTED_ACCESS_ONLY = 1 << 30;
     }
 }
 

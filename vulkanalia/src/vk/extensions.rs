@@ -23,6 +23,148 @@ use std::ptr;
 
 use super::*;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_AMDX_shader_enqueue.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+pub trait AmdxShaderEnqueueExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = AMDX_SHADER_ENQUEUE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDispatchGraphAMDX.html>
+    #[inline]
+    unsafe fn cmd_dispatch_graph_amdx(
+        &self,
+        command_buffer: CommandBuffer,
+        scratch: DeviceAddress,
+        count_info: &DispatchGraphCountInfoAMDX,
+    ) {
+        let __result =
+            (self.commands().cmd_dispatch_graph_amdx)(command_buffer, scratch, count_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDispatchGraphIndirectAMDX.html>
+    #[inline]
+    unsafe fn cmd_dispatch_graph_indirect_amdx(
+        &self,
+        command_buffer: CommandBuffer,
+        scratch: DeviceAddress,
+        count_info: &DispatchGraphCountInfoAMDX,
+    ) {
+        let __result =
+            (self.commands().cmd_dispatch_graph_indirect_amdx)(command_buffer, scratch, count_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDispatchGraphIndirectCountAMDX.html>
+    #[inline]
+    unsafe fn cmd_dispatch_graph_indirect_count_amdx(
+        &self,
+        command_buffer: CommandBuffer,
+        scratch: DeviceAddress,
+        count_info: DeviceAddress,
+    ) {
+        let __result = (self.commands().cmd_dispatch_graph_indirect_count_amdx)(
+            command_buffer,
+            scratch,
+            count_info,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdInitializeGraphScratchMemoryAMDX.html>
+    #[inline]
+    unsafe fn cmd_initialize_graph_scratch_memory_amdx(
+        &self,
+        command_buffer: CommandBuffer,
+        scratch: DeviceAddress,
+    ) {
+        let __result =
+            (self.commands().cmd_initialize_graph_scratch_memory_amdx)(command_buffer, scratch);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateExecutionGraphPipelinesAMDX.html>
+    #[inline]
+    unsafe fn create_execution_graph_pipelines_amdx(
+        &self,
+        pipeline_cache: PipelineCache,
+        create_infos: &[impl Cast<Target = ExecutionGraphPipelineCreateInfoAMDX>],
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkSuccessResult<Vec<Pipeline>> {
+        let mut pipelines = Vec::with_capacity(create_infos.len() as usize);
+
+        let __result = (self.commands().create_execution_graph_pipelines_amdx)(
+            self.handle(),
+            pipeline_cache,
+            create_infos.len() as u32,
+            create_infos.as_ptr().cast(),
+            allocator.map_or(ptr::null(), |v| v),
+            pipelines.as_mut_ptr(),
+        );
+
+        pipelines.set_len(create_infos.len() as usize);
+
+        if __result >= Result::SUCCESS {
+            Ok((pipelines, __result.into()))
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetExecutionGraphPipelineNodeIndexAMDX.html>
+    #[inline]
+    unsafe fn get_execution_graph_pipeline_node_index_amdx(
+        &self,
+        execution_graph: Pipeline,
+        node_info: &PipelineShaderStageNodeCreateInfoAMDX,
+    ) -> crate::VkResult<u32> {
+        let mut node_index = MaybeUninit::<u32>::uninit();
+
+        let __result = (self.commands().get_execution_graph_pipeline_node_index_amdx)(
+            self.handle(),
+            execution_graph,
+            node_info,
+            node_index.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(node_index.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetExecutionGraphPipelineScratchSizeAMDX.html>
+    #[inline]
+    unsafe fn get_execution_graph_pipeline_scratch_size_amdx(
+        &self,
+        execution_graph: Pipeline,
+    ) -> crate::VkResult<ExecutionGraphPipelineScratchSizeAMDX> {
+        let mut size_info = MaybeUninit::<ExecutionGraphPipelineScratchSizeAMDX>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_execution_graph_pipeline_scratch_size_amdx)(
+            self.handle(),
+            execution_graph,
+            size_info.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(size_info.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+#[cfg(feature = "provisional")]
+impl AmdxShaderEnqueueExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_AMD_buffer_marker.html>
 pub trait AmdBufferMarkerExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -2578,6 +2720,98 @@ pub trait ExtHeadlessSurfaceExtension: InstanceV1_0 {
 
 impl ExtHeadlessSurfaceExtension for crate::Instance {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_host_image_copy.html>
+pub trait ExtHostImageCopyExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_HOST_IMAGE_COPY_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCopyImageToImageEXT.html>
+    #[inline]
+    unsafe fn copy_image_to_image_ext(
+        &self,
+        copy_image_to_image_info: &CopyImageToImageInfoEXT,
+    ) -> crate::VkResult<()> {
+        let __result =
+            (self.commands().copy_image_to_image_ext)(self.handle(), copy_image_to_image_info);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCopyImageToMemoryEXT.html>
+    #[inline]
+    unsafe fn copy_image_to_memory_ext(
+        &self,
+        copy_image_to_memory_info: &CopyImageToMemoryInfoEXT,
+    ) -> crate::VkResult<()> {
+        let __result =
+            (self.commands().copy_image_to_memory_ext)(self.handle(), copy_image_to_memory_info);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCopyMemoryToImageEXT.html>
+    #[inline]
+    unsafe fn copy_memory_to_image_ext(
+        &self,
+        copy_memory_to_image_info: &CopyMemoryToImageInfoEXT,
+    ) -> crate::VkResult<()> {
+        let __result =
+            (self.commands().copy_memory_to_image_ext)(self.handle(), copy_memory_to_image_info);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetImageSubresourceLayout2EXT.html>
+    #[inline]
+    unsafe fn get_image_subresource_layout2_ext(
+        &self,
+        image: Image,
+        subresource: &ImageSubresource2KHR,
+        layout: &mut SubresourceLayout2KHR,
+    ) {
+        let __result = (self.commands().get_image_subresource_layout2_ext)(
+            self.handle(),
+            image,
+            subresource,
+            layout,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkTransitionImageLayoutEXT.html>
+    #[inline]
+    unsafe fn transition_image_layout_ext(
+        &self,
+        transitions: &[impl Cast<Target = HostImageLayoutTransitionInfoEXT>],
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().transition_image_layout_ext)(
+            self.handle(),
+            transitions.len() as u32,
+            transitions.as_ptr().cast(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl ExtHostImageCopyExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_host_query_reset.html>
 pub trait ExtHostQueryResetExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -2623,8 +2857,8 @@ pub trait ExtImageCompressionControlExtension: DeviceV1_0 {
     unsafe fn get_image_subresource_layout2_ext(
         &self,
         image: Image,
-        subresource: &ImageSubresource2EXT,
-        layout: &mut SubresourceLayout2EXT,
+        subresource: &ImageSubresource2KHR,
+        layout: &mut SubresourceLayout2KHR,
     ) {
         let __result = (self.commands().get_image_subresource_layout2_ext)(
             self.handle(),
@@ -7931,6 +8165,78 @@ pub trait KhrMaintenance4Extension: DeviceV1_0 {
 
 impl KhrMaintenance4Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_maintenance5.html>
+pub trait KhrMaintenance5Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_MAINTENANCE5_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdBindIndexBuffer2KHR.html>
+    #[inline]
+    unsafe fn cmd_bind_index_buffer2_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        buffer: Buffer,
+        offset: DeviceSize,
+        size: DeviceSize,
+        index_type: IndexType,
+    ) {
+        let __result = (self.commands().cmd_bind_index_buffer2_khr)(
+            command_buffer,
+            buffer,
+            offset,
+            size,
+            index_type,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetDeviceImageSubresourceLayoutKHR.html>
+    #[inline]
+    unsafe fn get_device_image_subresource_layout_khr(
+        &self,
+        info: &DeviceImageSubresourceInfoKHR,
+        layout: &mut SubresourceLayout2KHR,
+    ) {
+        let __result =
+            (self.commands().get_device_image_subresource_layout_khr)(self.handle(), info, layout);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetImageSubresourceLayout2KHR.html>
+    #[inline]
+    unsafe fn get_image_subresource_layout2_khr(
+        &self,
+        image: Image,
+        subresource: &ImageSubresource2KHR,
+        layout: &mut SubresourceLayout2KHR,
+    ) {
+        let __result = (self.commands().get_image_subresource_layout2_khr)(
+            self.handle(),
+            image,
+            subresource,
+            layout,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetRenderingAreaGranularityKHR.html>
+    #[inline]
+    unsafe fn get_rendering_area_granularity_khr(
+        &self,
+        rendering_area_info: &RenderingAreaInfoKHR,
+    ) -> Extent2D {
+        let mut granularity = MaybeUninit::<Extent2D>::uninit();
+
+        let __result = (self.commands().get_rendering_area_granularity_khr)(
+            self.handle(),
+            rendering_area_info,
+            granularity.as_mut_ptr(),
+        );
+
+        granularity.assume_init()
+    }
+}
+
+impl KhrMaintenance5Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_map_memory2.html>
 pub trait KhrMapMemory2Extension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -10279,6 +10585,56 @@ pub trait NvDeviceGeneratedCommandsExtension: DeviceV1_0 {
 }
 
 impl NvDeviceGeneratedCommandsExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_device_generated_commands_compute.html>
+pub trait NvDeviceGeneratedCommandsComputeExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_DEVICE_GENERATED_COMMANDS_COMPUTE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdUpdatePipelineIndirectBufferNV.html>
+    #[inline]
+    unsafe fn cmd_update_pipeline_indirect_buffer_nv(
+        &self,
+        command_buffer: CommandBuffer,
+        pipeline_bind_point: PipelineBindPoint,
+        pipeline: Pipeline,
+    ) {
+        let __result = (self.commands().cmd_update_pipeline_indirect_buffer_nv)(
+            command_buffer,
+            pipeline_bind_point,
+            pipeline,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPipelineIndirectDeviceAddressNV.html>
+    #[inline]
+    unsafe fn get_pipeline_indirect_device_address_nv(
+        &self,
+        info: &PipelineIndirectDeviceAddressInfoNV,
+    ) -> DeviceAddress {
+        let __result =
+            (self.commands().get_pipeline_indirect_device_address_nv)(self.handle(), info);
+
+        __result
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPipelineIndirectMemoryRequirementsNV.html>
+    #[inline]
+    unsafe fn get_pipeline_indirect_memory_requirements_nv(
+        &self,
+        create_info: &ComputePipelineCreateInfo,
+        memory_requirements: &mut MemoryRequirements2,
+    ) {
+        let __result = (self.commands().get_pipeline_indirect_memory_requirements_nv)(
+            self.handle(),
+            create_info,
+            memory_requirements,
+        );
+    }
+}
+
+impl NvDeviceGeneratedCommandsComputeExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_displacement_micromap.html>
 ///
