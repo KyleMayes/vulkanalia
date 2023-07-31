@@ -128,7 +128,7 @@ unsafe fn update_secondary_command_buffer(
     let model = glm::rotate(
         &glm::identity(),
         time * glm::radians(&glm::vec1(90.0))[0],
-        &glm::vec3(0.0, 0.0, 1.0),
+        &vec3::<f32>(0.0, 0.0, 1.0),
     );
 
     let (_, model_bytes, _) = model.as_slice().align_to::<u8>();
@@ -243,7 +243,7 @@ let z = (((model_index / 2) as f32) * -2.0) + 1.0;
 
 let model = glm::translate(
     &glm::identity(),
-    &glm::vec3(0.0, y, z),
+    &vec3::<f32>(0.0, y, z),
 );
 
 let time = self.start.elapsed().as_secs_f32();
@@ -251,7 +251,7 @@ let time = self.start.elapsed().as_secs_f32();
 let model = glm::rotate(
     &model,
     time * glm::radians(&glm::vec1(90.0))[0],
-    &glm::vec3(0.0, 0.0, 1.0),
+    &vec3::<f32>(0.0, 0.0, 1.0),
 );
 ```
 
@@ -259,9 +259,9 @@ This code places the model instances in a grid on the Y and Z axes. However, due
 
 ```rust,noplaypen
 let view = glm::look_at(
-    &glm::vec3(6.0, 0.0, 2.0),
-    &glm::vec3(0.0, 0.0, 0.0),
-    &glm::vec3(0.0, 0.0, 1.0),
+    &vec3::<f32>(6.0, 0.0, 2.0),
+    &vec3::<f32>(0.0, 0.0, 0.0),
+    &vec3::<f32>(0.0, 0.0, 1.0),
 );
 ```
 

@@ -18,9 +18,9 @@ There are many types of descriptors, but in this chapter we'll work with uniform
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 ```
 
@@ -77,9 +77,9 @@ The next step is to define the UBO on the Rust side and to tell Vulkan about thi
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 ```
 
@@ -322,7 +322,7 @@ We will now define the model, view and projection transformations in the uniform
 let model = glm::rotate(
     &glm::identity(),
     time * glm::radians(&glm::vec1(90.0))[0],
-    &glm::vec3(0.0, 0.0, 1.0),
+    &vec3::<f32>(0.0, 0.0, 1.0),
 );
 ```
 
@@ -330,9 +330,9 @@ The `glm::rotate` function takes an existing transformation, rotation angle and 
 
 ```rust,noplaypen
 let view = glm::look_at(
-    &glm::vec3(2.0, 2.0, 2.0),
-    &glm::vec3(0.0, 0.0, 0.0),
-    &glm::vec3(0.0, 0.0, 1.0),
+    &vec3::<f32>(2.0, 2.0, 2.0),
+    &vec3::<f32>(0.0, 0.0, 0.0),
+    &vec3::<f32>(0.0, 0.0, 1.0),
 );
 ```
 

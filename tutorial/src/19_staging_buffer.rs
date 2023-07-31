@@ -11,7 +11,7 @@ use std::ptr::copy_nonoverlapping as memcpy;
 use anyhow::{anyhow, Result};
 use lazy_static::lazy_static;
 use log::*;
-use nalgebra_glm as glm;
+use cgmath::{vec2, vec3};
 use thiserror::Error;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
@@ -39,11 +39,14 @@ const PORTABILITY_MACOS_VERSION: Version = Version::new(1, 3, 216);
 /// The maximum number of frames that can be processed concurrently.
 const MAX_FRAMES_IN_FLIGHT: usize = 2;
 
+type Vec2 = cgmath::Vector2<f32>;
+type Vec3 = cgmath::Vector3<f32>;
+
 lazy_static! {
     static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(glm::vec2(0.0, -0.5), glm::vec3(1.0, 0.0, 0.0)),
-        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 1.0, 0.0)),
-        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(0.0, 0.0, 1.0)),
+        Vertex::new(vec2::<f32>(0.0, -0.5), vec3::<f32>(1.0, 0.0, 0.0)),
+        Vertex::new(vec2::<f32>(0.5, 0.5), vec3::<f32>(0.0, 1.0, 0.0)),
+        Vertex::new(vec2::<f32>(-0.5, 0.5), vec3::<f32>(0.0, 0.0, 1.0)),
     ];
 }
 
@@ -1026,12 +1029,12 @@ impl SwapchainSupport {
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec2,
-    color: glm::Vec3,
+    pos: Vec2,
+    color: Vec3,
 }
 
 impl Vertex {
-    fn new(pos: glm::Vec2, color: glm::Vec3) -> Self {
+    fn new(pos: Vec2, color: Vec3) -> Self {
         Self { pos, color }
     }
 
@@ -1054,7 +1057,7 @@ impl Vertex {
             .binding(0)
             .location(1)
             .format(vk::Format::R32G32B32_SFLOAT)
-            .offset(size_of::<glm::Vec2>() as u32)
+            .offset(size_of::<Vec2>() as u32)
             .build();
         [pos, color]
     }

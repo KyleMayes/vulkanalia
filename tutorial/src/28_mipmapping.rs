@@ -14,7 +14,7 @@ use std::time::Instant;
 
 use anyhow::{anyhow, Result};
 use log::*;
-use nalgebra_glm as glm;
+use cgmath::{vec2, vec3};
 use thiserror::Error;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
@@ -211,13 +211,13 @@ impl App {
         let model = glm::rotate(
             &glm::identity(),
             time * glm::radians(&glm::vec1(90.0))[0],
-            &glm::vec3(0.0, 0.0, 1.0),
+            &vec3::<f32>(0.0, 0.0, 1.0),
         );
 
         let view = glm::look_at(
-            &glm::vec3(2.0, 2.0, 2.0),
-            &glm::vec3(0.0, 0.0, 0.0),
-            &glm::vec3(0.0, 0.0, 1.0),
+            &vec3::<f32>(2.0, 2.0, 2.0),
+            &vec3::<f32>(0.0, 0.0, 0.0),
+            &vec3::<f32>(0.0, 0.0, 1.0),
         );
 
         let mut proj = glm::perspective_rh_zo(
@@ -1339,13 +1339,13 @@ fn load_model(data: &mut AppData) -> Result<()> {
             let tex_coord_offset = (2 * index) as usize;
 
             let vertex = Vertex {
-                pos: glm::vec3(
+                pos: vec3::<f32>(
                     model.mesh.positions[pos_offset],
                     model.mesh.positions[pos_offset + 1],
                     model.mesh.positions[pos_offset + 2],
                 ),
-                color: glm::vec3(1.0, 1.0, 1.0),
-                tex_coord: glm::vec2(
+                color: vec3::<f32>(1.0, 1.0, 1.0),
+                tex_coord: vec2::<f32>(
                     model.mesh.texcoords[tex_coord_offset],
                     1.0 - model.mesh.texcoords[tex_coord_offset + 1],
                 ),
@@ -1694,21 +1694,21 @@ impl SwapchainSupport {
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec3,
-    color: glm::Vec3,
-    tex_coord: glm::Vec2,
+    pos: Vec3,
+    color: Vec3,
+    tex_coord: Vec2,
 }
 
 impl Vertex {
-    fn new(pos: glm::Vec3, color: glm::Vec3, tex_coord: glm::Vec2) -> Self {
+    fn new(pos: Vec3, color: Vec3, tex_coord: Vec2) -> Self {
         Self { pos, color, tex_coord }
     }
 
@@ -1731,13 +1731,13 @@ impl Vertex {
             .binding(0)
             .location(1)
             .format(vk::Format::R32G32B32_SFLOAT)
-            .offset(size_of::<glm::Vec3>() as u32)
+            .offset(size_of::<Vec3>() as u32)
             .build();
         let tex_coord = vk::VertexInputAttributeDescription::builder()
             .binding(0)
             .location(2)
             .format(vk::Format::R32G32_SFLOAT)
-            .offset((size_of::<glm::Vec3>() + size_of::<glm::Vec3>()) as u32)
+            .offset((size_of::<Vec3>() + size_of::<Vec3>()) as u32)
             .build();
         [pos, color, tex_coord]
     }

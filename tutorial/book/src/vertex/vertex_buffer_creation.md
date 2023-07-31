@@ -262,9 +262,9 @@ Try changing the color of the top vertex to white by modifying the `VERTICES` li
 ```rust,noplaypen
 lazy_static! {
     static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(glm::vec2(0.0, -0.5), glm::vec3(1.0, 1.0, 1.0)),
-        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 1.0, 0.0)),
-        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(0.0, 0.0, 1.0)),
+        Vertex::new(vec2::<f32>(0.0, -0.5), vec3::<f32>(1.0, 1.0, 1.0)),
+        Vertex::new(vec2::<f32>(0.5, 0.5), vec3::<f32>(0.0, 1.0, 0.0)),
+        Vertex::new(vec2::<f32>(-0.5, 0.5), vec3::<f32>(0.0, 0.0, 1.0)),
     ];
 }
 ```

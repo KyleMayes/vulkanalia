@@ -57,8 +57,8 @@ Remove `model` from the `UniformBufferObject` struct since we will be specifying
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 ```
 
@@ -66,9 +66,9 @@ Also remove `model` from the `App::update_command_buffers` method.
 
 ```rust,noplaypen
 let view = glm::look_at(
-    &glm::vec3(2.0, 2.0, 2.0),
-    &glm::vec3(0.0, 0.0, 0.0),
-    &glm::vec3(0.0, 0.0, 1.0),
+    &vec3::<f32>(2.0, 2.0, 2.0),
+    &vec3::<f32>(0.0, 0.0, 0.0),
+    &vec3::<f32>(0.0, 0.0, 1.0),
 );
 
 let mut proj = glm::perspective_rh_zo(
@@ -109,7 +109,7 @@ With all that in place, we can actually start pushing the model matrix to the ve
 In the `create_command_buffers` function, define a model matrix and use `cmd_push_constants` to add it to the command buffers as a push constant right before we record the draw command.
 
 ```rust,noplaypen
-let model = glm::rotate(&glm::identity(), 0.0f32, &glm::vec3(0.0, 0.0, 1.0));
+let model = glm::rotate(&glm::identity(), 0.0f32, &vec3::<f32>(0.0, 0.0, 1.0));
 let (_, model_bytes, _) = model.as_slice().align_to::<u8>();
 
 for (i, command_buffer) in data.command_buffers.iter().enumerate() {

@@ -40,7 +40,7 @@ We're moving the vertex data from the shader code to an array in the code of our
 ```rust,noplaypen
 use std::mem::size_of;
 
-use nalgebra_glm as glm;
+use cgmath::{vec2, vec3};
 use lazy_static::lazy_static;
 ```
 
@@ -52,12 +52,12 @@ Next, create a new `#[repr(C)]` structure called `Vertex` with the two attribute
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec2,
-    color: glm::Vec3,
+    pos: Vec2,
+    color: Vec3,
 }
 
 impl Vertex {
-    fn new(pos: glm::Vec2, color: glm::Vec3) -> Self {
+    fn new(pos: Vec2, color: Vec3) -> Self {
         Self { pos, color }
     }
 }
@@ -68,9 +68,9 @@ impl Vertex {
 ```rust,noplaypen
 lazy_static! {
     static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(glm::vec2(0.0, -0.5), glm::vec3(1.0, 0.0, 0.0)),
-        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 1.0, 0.0)),
-        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(0.0, 0.0, 1.0)),
+        Vertex::new(vec2::<f32>(0.0, -0.5), vec3::<f32>(1.0, 0.0, 0.0)),
+        Vertex::new(vec2::<f32>(0.5, 0.5), vec3::<f32>(0.0, 1.0, 0.0)),
+        Vertex::new(vec2::<f32>(-0.5, 0.5), vec3::<f32>(0.0, 0.0, 1.0)),
     ];
 }
 ```
@@ -134,8 +134,8 @@ The `binding` parameter tells Vulkan from which binding the per-vertex data come
 The `format` parameter describes the type of data for the attribute. A bit confusingly, the formats are specified using the same enumeration as color formats. The following shader types and formats are commonly used together:
 
 * `f32` &ndash; `vk::Format::R32_SFLOAT`&nbsp;
-* `glm::Vec2` &ndash; `vk::Format::R32G32_SFLOAT`&nbsp;
-* `glm::Vec3` &ndash; `vk::Format::R32G32B32_SFLOAT`&nbsp;
+* `Vec2` &ndash; `vk::Format::R32G32_SFLOAT`&nbsp;
+* `Vec3` &ndash; `vk::Format::R32G32B32_SFLOAT`&nbsp;
 * `glm::Vec4` &ndash; `vk::Format::R32G32B32A32_SFLOAT`&nbsp;
 
 As you can see, you should use the format where the amount of color channels matches the number of components in the shader data type. It is allowed to use more channels than the number of components in the shader, but they will be silently discarded. If the number of channels is lower than the number of components, then the BGA components will use default values of `(0, 0, 1)`. The color type (`SFLOAT`, `UINT`, `SINT`) and bit width should also match the type of the shader input. See the following examples:
@@ -151,7 +151,7 @@ let color = vk::VertexInputAttributeDescription::builder()
     .binding(0)
     .location(1)
     .format(vk::Format::R32G32B32_SFLOAT)
-    .offset(size_of::<glm::Vec2>() as u32)
+    .offset(size_of::<Vec2>() as u32)
     .build();
 ```
 

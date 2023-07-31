@@ -12,13 +12,13 @@ Change the `Vertex` struct to use a 3D vector for the position, and update the `
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec3,
-    color: glm::Vec3,
-    tex_coord: glm::Vec2,
+    pos: Vec3,
+    color: Vec3,
+    tex_coord: Vec2,
 }
 
 impl Vertex {
-    fn new(pos: glm::Vec3, color: glm::Vec3, tex_coord: glm::Vec2) -> Self {
+    fn new(pos: Vec3, color: Vec3, tex_coord: Vec2) -> Self {
         Self { pos, color, tex_coord }
     }
 
@@ -41,13 +41,13 @@ impl Vertex {
             .binding(0)
             .location(1)
             .format(vk::Format::R32G32B32_SFLOAT)
-            .offset(size_of::<glm::Vec3>() as u32)
+            .offset(size_of::<Vec3>() as u32)
             .build();
         let tex_coord = vk::VertexInputAttributeDescription::builder()
             .binding(0)
             .location(2)
             .format(vk::Format::R32G32_SFLOAT)
-            .offset((size_of::<glm::Vec3>() + size_of::<glm::Vec3>()) as u32)
+            .offset((size_of::<Vec3>() + size_of::<Vec3>()) as u32)
             .build();
         [pos, color, tex_coord]
     }
@@ -73,10 +73,10 @@ Lastly, update the `vertices` container to include Z coordinates:
 ```rust,noplaypen
 lazy_static! {
     static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(glm::vec3(-0.5, -0.5, 0.0),glm::vec3(1.0, 0.0, 0.0),glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, -0.5, 0.0), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, 0.5, 0.0), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, 0.5, 0.0), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
+        Vertex::new(vec3::<f32>(-0.5, -0.5, 0.0),vec3::<f32>(1.0, 0.0, 0.0),vec2::<f32>(1.0, 0.0)),
+        Vertex::new(vec3::<f32>(0.5, -0.5, 0.0), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
+        Vertex::new(vec3::<f32>(0.5, 0.5, 0.0), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
+        Vertex::new(vec3::<f32>(-0.5, 0.5, 0.0), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
     ];
 }
 ```
@@ -90,14 +90,14 @@ Use Z coordinates of `-0.5` and add the appropriate indices for the extra square
 ```rust,noplaypen
 lazy_static! {
     static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(glm::vec3(-0.5, -0.5, 0.0),glm::vec3(1.0, 0.0, 0.0),glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, -0.5, 0.0), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, 0.5, 0.0), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, 0.5, 0.0), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(1.0, 0.0, 0.0), glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, -0.5, -0.5), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, 0.5, -0.5), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, 0.5, -0.5), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
+        Vertex::new(vec3::<f32>(-0.5, -0.5, 0.0),vec3::<f32>(1.0, 0.0, 0.0),vec2::<f32>(1.0, 0.0)),
+        Vertex::new(vec3::<f32>(0.5, -0.5, 0.0), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
+        Vertex::new(vec3::<f32>(0.5, 0.5, 0.0), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
+        Vertex::new(vec3::<f32>(-0.5, 0.5, 0.0), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
+        Vertex::new(vec3::<f32>(-0.5, -0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0), vec2::<f32>(1.0, 0.0)),
+        Vertex::new(vec3::<f32>(0.5, -0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
+        Vertex::new(vec3::<f32>(0.5, 0.5, -0.5), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
+        Vertex::new(vec3::<f32>(-0.5, 0.5, -0.5), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
     ];
 }
 

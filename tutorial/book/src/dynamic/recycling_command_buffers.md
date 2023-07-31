@@ -74,7 +74,7 @@ Now we can move the command buffer recording code out of `create_command_buffers
 unsafe fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
     // ...
 
-    let model = glm::rotate(&glm::identity(), 0.0f32, &glm::vec3(0.0, 0.0, 1.0));
+    let model = glm::rotate(&glm::identity(), 0.0f32, &vec3::<f32>(0.0, 0.0, 1.0));
     let (_, model_bytes, _) = model.as_slice().align_to::<u8>();
 
     let info = vk::CommandBufferBeginInfo::builder();
@@ -145,7 +145,7 @@ let time = self.start.elapsed().as_secs_f32();
 let model = glm::rotate(
     &glm::identity(),
     time * glm::radians(&glm::vec1(90.0))[0],
-    &glm::vec3(0.0, 0.0, 1.0),
+    &vec3::<f32>(0.0, 0.0, 1.0),
 );
 
 let (_, model_bytes, _) = model.as_slice().align_to::<u8>();
