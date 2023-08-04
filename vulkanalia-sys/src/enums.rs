@@ -890,56 +890,6 @@ impl fmt::Debug for ComponentTypeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComponentTypeNV.html>
-#[repr(transparent)]
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct ComponentTypeNV(i32);
-
-impl ComponentTypeNV {
-    pub const FLOAT16: Self = Self(0);
-    pub const FLOAT32: Self = Self(1);
-    pub const FLOAT64: Self = Self(2);
-    pub const SINT8: Self = Self(3);
-    pub const SINT16: Self = Self(4);
-    pub const SINT32: Self = Self(5);
-    pub const SINT64: Self = Self(6);
-    pub const UINT8: Self = Self(7);
-    pub const UINT16: Self = Self(8);
-    pub const UINT32: Self = Self(9);
-    pub const UINT64: Self = Self(10);
-
-    /// Constructs an instance of this enum with the supplied underlying value.
-    #[inline]
-    pub const fn from_raw(value: i32) -> Self {
-        Self(value)
-    }
-
-    /// Gets the underlying value for this enum instance.
-    #[inline]
-    pub const fn as_raw(self) -> i32 {
-        self.0
-    }
-}
-
-impl fmt::Debug for ComponentTypeNV {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self.0 {
-            0 => write!(f, "FLOAT16"),
-            1 => write!(f, "FLOAT32"),
-            2 => write!(f, "FLOAT64"),
-            3 => write!(f, "SINT8"),
-            4 => write!(f, "SINT16"),
-            5 => write!(f, "SINT32"),
-            6 => write!(f, "SINT64"),
-            7 => write!(f, "UINT8"),
-            8 => write!(f, "UINT16"),
-            9 => write!(f, "UINT32"),
-            10 => write!(f, "UINT64"),
-            _ => self.0.fmt(f),
-        }
-    }
-}
-
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkConservativeRasterizationModeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -2220,6 +2170,8 @@ impl Format {
     pub const PVRTC2_2BPP_SRGB_BLOCK_IMG: Self = Self(1000054006);
     pub const PVRTC2_4BPP_SRGB_BLOCK_IMG: Self = Self(1000054007);
     pub const R16G16_S10_5_NV: Self = Self(1000464000);
+    pub const A1B5G5R5_UNORM_PACK16_KHR: Self = Self(1000470000);
+    pub const A8_UNORM_KHR: Self = Self(1000470001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2485,6 +2437,8 @@ impl fmt::Debug for Format {
             1000054006 => write!(f, "PVRTC2_2BPP_SRGB_BLOCK_IMG"),
             1000054007 => write!(f, "PVRTC2_4BPP_SRGB_BLOCK_IMG"),
             1000464000 => write!(f, "R16G16_S10_5_NV"),
+            1000470000 => write!(f, "A1B5G5R5_UNORM_PACK16_KHR"),
+            1000470001 => write!(f, "A8_UNORM_KHR"),
             _ => self.0.fmt(f),
         }
     }
@@ -2947,6 +2901,8 @@ impl IndirectCommandsTokenTypeNV {
     pub const DRAW: Self = Self(6);
     pub const DRAW_TASKS: Self = Self(7);
     pub const DRAW_MESH_TASKS: Self = Self(1000328000);
+    pub const PIPELINE: Self = Self(1000428003);
+    pub const DISPATCH: Self = Self(1000428004);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2973,6 +2929,8 @@ impl fmt::Debug for IndirectCommandsTokenTypeNV {
             6 => write!(f, "DRAW"),
             7 => write!(f, "DRAW_TASKS"),
             1000328000 => write!(f, "DRAW_MESH_TASKS"),
+            1000428003 => write!(f, "PIPELINE"),
+            1000428004 => write!(f, "DISPATCH"),
             _ => self.0.fmt(f),
         }
     }
@@ -3746,6 +3704,7 @@ pub struct PipelineBindPoint(i32);
 impl PipelineBindPoint {
     pub const GRAPHICS: Self = Self(0);
     pub const COMPUTE: Self = Self(1);
+    pub const EXECUTION_GRAPH_AMDX: Self = Self(1000134000);
     pub const RAY_TRACING_KHR: Self = Self(1000165000);
     pub const SUBPASS_SHADING_HUAWEI: Self = Self(1000369003);
 
@@ -3767,6 +3726,7 @@ impl fmt::Debug for PipelineBindPoint {
         match self.0 {
             0 => write!(f, "GRAPHICS"),
             1 => write!(f, "COMPUTE"),
+            1000134000 => write!(f, "EXECUTION_GRAPH_AMDX"),
             1000165000 => write!(f, "RAY_TRACING_KHR"),
             1000369003 => write!(f, "SUBPASS_SHADING_HUAWEI"),
             _ => self.0.fmt(f),
@@ -4762,42 +4722,6 @@ impl fmt::Debug for ScopeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkScopeNV.html>
-#[repr(transparent)]
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct ScopeNV(i32);
-
-impl ScopeNV {
-    pub const DEVICE: Self = Self(1);
-    pub const WORKGROUP: Self = Self(2);
-    pub const SUBGROUP: Self = Self(3);
-    pub const QUEUE_FAMILY: Self = Self(5);
-
-    /// Constructs an instance of this enum with the supplied underlying value.
-    #[inline]
-    pub const fn from_raw(value: i32) -> Self {
-        Self(value)
-    }
-
-    /// Gets the underlying value for this enum instance.
-    #[inline]
-    pub const fn as_raw(self) -> i32 {
-        self.0
-    }
-}
-
-impl fmt::Debug for ScopeNV {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self.0 {
-            1 => write!(f, "DEVICE"),
-            2 => write!(f, "WORKGROUP"),
-            3 => write!(f, "SUBGROUP"),
-            5 => write!(f, "QUEUE_FAMILY"),
-            _ => self.0.fmt(f),
-        }
-    }
-}
-
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSemaphoreType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -5439,6 +5363,11 @@ impl StructureType {
     pub const MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID: Self = Self(1000129004);
     pub const EXTERNAL_FORMAT_ANDROID: Self = Self(1000129005);
     pub const ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_2_ANDROID: Self = Self(1000129006);
+    pub const PHYSICAL_DEVICE_SHADER_ENQUEUE_FEATURES_AMDX: Self = Self(1000134000);
+    pub const PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX: Self = Self(1000134001);
+    pub const EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX: Self = Self(1000134002);
+    pub const EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX: Self = Self(1000134003);
+    pub const PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX: Self = Self(1000134004);
     pub const SAMPLE_LOCATIONS_INFO_EXT: Self = Self(1000143000);
     pub const RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT: Self = Self(1000143001);
     pub const PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT: Self = Self(1000143002);
@@ -5585,6 +5514,16 @@ impl StructureType {
     pub const PIPELINE_EXECUTABLE_INFO_KHR: Self = Self(1000269003);
     pub const PIPELINE_EXECUTABLE_STATISTIC_KHR: Self = Self(1000269004);
     pub const PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR: Self = Self(1000269005);
+    pub const PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT: Self = Self(1000270000);
+    pub const PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES_EXT: Self = Self(1000270001);
+    pub const MEMORY_TO_IMAGE_COPY_EXT: Self = Self(1000270002);
+    pub const IMAGE_TO_MEMORY_COPY_EXT: Self = Self(1000270003);
+    pub const COPY_IMAGE_TO_MEMORY_INFO_EXT: Self = Self(1000270004);
+    pub const COPY_MEMORY_TO_IMAGE_INFO_EXT: Self = Self(1000270005);
+    pub const HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT: Self = Self(1000270006);
+    pub const COPY_IMAGE_TO_IMAGE_INFO_EXT: Self = Self(1000270007);
+    pub const SUBRESOURCE_HOST_MEMCPY_SIZE_EXT: Self = Self(1000270008);
+    pub const HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT: Self = Self(1000270009);
     pub const MEMORY_MAP_INFO_KHR: Self = Self(1000271000);
     pub const MEMORY_UNMAP_INFO_KHR: Self = Self(1000271001);
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT: Self = Self(1000273000);
@@ -5683,8 +5622,6 @@ impl StructureType {
         Self(1000336000);
     pub const PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT: Self = Self(1000338000);
     pub const IMAGE_COMPRESSION_CONTROL_EXT: Self = Self(1000338001);
-    pub const SUBRESOURCE_LAYOUT_2_EXT: Self = Self(1000338002);
-    pub const IMAGE_SUBRESOURCE_2_EXT: Self = Self(1000338003);
     pub const IMAGE_COMPRESSION_PROPERTIES_EXT: Self = Self(1000338004);
     pub const PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_FEATURES_EXT: Self = Self(1000339000);
     pub const PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT: Self = Self(1000340000);
@@ -5788,6 +5725,10 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV: Self = Self(1000426001);
     pub const PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV: Self = Self(1000427000);
     pub const PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV: Self = Self(1000427001);
+    pub const PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_COMPUTE_FEATURES_NV: Self =
+        Self(1000428000);
+    pub const COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV: Self = Self(1000428001);
+    pub const PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV: Self = Self(1000428002);
     pub const PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV: Self = Self(1000430000);
     pub const APPLICATION_PARAMETERS_EXT: Self = Self(1000435000);
     pub const PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT: Self =
@@ -5819,6 +5760,14 @@ impl StructureType {
     pub const OPTICAL_FLOW_SESSION_CREATE_PRIVATE_DATA_INFO_NV: Self = Self(1000464010);
     pub const PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT: Self = Self(1000465000);
     pub const PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT: Self = Self(1000466000);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES_KHR: Self = Self(1000470000);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES_KHR: Self = Self(1000470001);
+    pub const RENDERING_AREA_INFO_KHR: Self = Self(1000470003);
+    pub const DEVICE_IMAGE_SUBRESOURCE_INFO_KHR: Self = Self(1000470004);
+    pub const SUBRESOURCE_LAYOUT_2_KHR: Self = Self(1000338002);
+    pub const IMAGE_SUBRESOURCE_2_KHR: Self = Self(1000338003);
+    pub const PIPELINE_CREATE_FLAGS_2_CREATE_INFO_KHR: Self = Self(1000470005);
+    pub const BUFFER_USAGE_FLAGS_2_CREATE_INFO_KHR: Self = Self(1000470006);
     pub const PHYSICAL_DEVICE_RAY_TRACING_POSITION_FETCH_FEATURES_KHR: Self = Self(1000481000);
     pub const PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT: Self = Self(1000482000);
     pub const PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT: Self = Self(1000482001);
@@ -6234,6 +6183,11 @@ impl fmt::Debug for StructureType {
             1000129004 => write!(f, "MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID"),
             1000129005 => write!(f, "EXTERNAL_FORMAT_ANDROID"),
             1000129006 => write!(f, "ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_2_ANDROID"),
+            1000134000 => write!(f, "PHYSICAL_DEVICE_SHADER_ENQUEUE_FEATURES_AMDX"),
+            1000134001 => write!(f, "PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX"),
+            1000134002 => write!(f, "EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX"),
+            1000134003 => write!(f, "EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX"),
+            1000134004 => write!(f, "PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX"),
             1000143000 => write!(f, "SAMPLE_LOCATIONS_INFO_EXT"),
             1000143001 => write!(f, "RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT"),
             1000143002 => write!(f, "PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT"),
@@ -6405,6 +6359,16 @@ impl fmt::Debug for StructureType {
             1000269003 => write!(f, "PIPELINE_EXECUTABLE_INFO_KHR"),
             1000269004 => write!(f, "PIPELINE_EXECUTABLE_STATISTIC_KHR"),
             1000269005 => write!(f, "PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR"),
+            1000270000 => write!(f, "PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT"),
+            1000270001 => write!(f, "PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES_EXT"),
+            1000270002 => write!(f, "MEMORY_TO_IMAGE_COPY_EXT"),
+            1000270003 => write!(f, "IMAGE_TO_MEMORY_COPY_EXT"),
+            1000270004 => write!(f, "COPY_IMAGE_TO_MEMORY_INFO_EXT"),
+            1000270005 => write!(f, "COPY_MEMORY_TO_IMAGE_INFO_EXT"),
+            1000270006 => write!(f, "HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT"),
+            1000270007 => write!(f, "COPY_IMAGE_TO_IMAGE_INFO_EXT"),
+            1000270008 => write!(f, "SUBRESOURCE_HOST_MEMCPY_SIZE_EXT"),
+            1000270009 => write!(f, "HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT"),
             1000271000 => write!(f, "MEMORY_MAP_INFO_KHR"),
             1000271001 => write!(f, "MEMORY_UNMAP_INFO_KHR"),
             1000273000 => write!(f, "PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT"),
@@ -6536,8 +6500,6 @@ impl fmt::Debug for StructureType {
             ),
             1000338000 => write!(f, "PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT"),
             1000338001 => write!(f, "IMAGE_COMPRESSION_CONTROL_EXT"),
-            1000338002 => write!(f, "SUBRESOURCE_LAYOUT_2_EXT"),
-            1000338003 => write!(f, "IMAGE_SUBRESOURCE_2_EXT"),
             1000338004 => write!(f, "IMAGE_COMPRESSION_PROPERTIES_EXT"),
             1000339000 => write!(
                 f,
@@ -6667,6 +6629,12 @@ impl fmt::Debug for StructureType {
             1000426001 => write!(f, "PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV"),
             1000427000 => write!(f, "PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV"),
             1000427001 => write!(f, "PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV"),
+            1000428000 => write!(
+                f,
+                "PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_COMPUTE_FEATURES_NV"
+            ),
+            1000428001 => write!(f, "COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV"),
+            1000428002 => write!(f, "PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV"),
             1000430000 => write!(f, "PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV"),
             1000435000 => write!(f, "APPLICATION_PARAMETERS_EXT"),
             1000437000 => write!(
@@ -6702,6 +6670,14 @@ impl fmt::Debug for StructureType {
             1000464010 => write!(f, "OPTICAL_FLOW_SESSION_CREATE_PRIVATE_DATA_INFO_NV"),
             1000465000 => write!(f, "PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT"),
             1000466000 => write!(f, "PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT"),
+            1000470000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES_KHR"),
+            1000470001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES_KHR"),
+            1000470003 => write!(f, "RENDERING_AREA_INFO_KHR"),
+            1000470004 => write!(f, "DEVICE_IMAGE_SUBRESOURCE_INFO_KHR"),
+            1000338002 => write!(f, "SUBRESOURCE_LAYOUT_2_KHR"),
+            1000338003 => write!(f, "IMAGE_SUBRESOURCE_2_KHR"),
+            1000470005 => write!(f, "PIPELINE_CREATE_FLAGS_2_CREATE_INFO_KHR"),
+            1000470006 => write!(f, "BUFFER_USAGE_FLAGS_2_CREATE_INFO_KHR"),
             1000481000 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_POSITION_FETCH_FEATURES_KHR"),
             1000482000 => write!(f, "PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT"),
             1000482001 => write!(f, "PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT"),
@@ -7229,6 +7205,8 @@ impl fmt::Debug for ViewportCoordinateSwizzleNV {
 pub type AccelerationStructureTypeNV = AccelerationStructureTypeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkChromaLocationKHR.html>
 pub type ChromaLocationKHR = ChromaLocation;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComponentTypeNV.html>
+pub type ComponentTypeNV = ComponentTypeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyAccelerationStructureModeNV.html>
 pub type CopyAccelerationStructureModeNV = CopyAccelerationStructureModeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorUpdateTemplateTypeKHR.html>
@@ -7249,6 +7227,8 @@ pub type SamplerReductionModeEXT = SamplerReductionMode;
 pub type SamplerYcbcrModelConversionKHR = SamplerYcbcrModelConversion;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrRangeKHR.html>
 pub type SamplerYcbcrRangeKHR = SamplerYcbcrRange;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkScopeNV.html>
+pub type ScopeNV = ScopeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSemaphoreTypeKHR.html>
 pub type SemaphoreTypeKHR = SemaphoreType;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderFloatControlsIndependenceKHR.html>

@@ -37,6 +37,7 @@ pub const QUEUE_FAMILY_IGNORED: u32 = !0;
 pub const REMAINING_3D_SLICES_EXT: u32 = !0;
 pub const REMAINING_ARRAY_LAYERS: u32 = !0;
 pub const REMAINING_MIP_LEVELS: u32 = !0;
+pub const SHADER_INDEX_UNUSED_AMDX: u32 = !0;
 pub const SHADER_UNUSED_KHR: u32 = !0;
 pub const SUBPASS_EXTERNAL: u32 = !0;
 pub const TRUE: u32 = 1;

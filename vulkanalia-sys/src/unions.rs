@@ -139,6 +139,27 @@ impl fmt::Debug for DescriptorDataEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceOrHostAddressConstAMDX.html>
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union DeviceOrHostAddressConstAMDX {
+    pub device_address: DeviceAddress,
+    pub host_address: *const c_void,
+}
+
+impl Default for DeviceOrHostAddressConstAMDX {
+    #[inline]
+    fn default() -> Self {
+        unsafe { MaybeUninit::zeroed().assume_init() }
+    }
+}
+
+impl fmt::Debug for DeviceOrHostAddressConstAMDX {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DeviceOrHostAddressConstAMDX")
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceOrHostAddressConstKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
