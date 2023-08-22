@@ -71,7 +71,7 @@ You'll also need to update the size of the index buffer in `create_index_buffer`
 let size = (size_of::<u32>() * data.indices.len()) as u64;
 ```
 
-Next we are going to need some more imports (and we can remove the `lazy_static` import now that the global arrays have been deleted):
+Next we are going to need some more imports:
 
 ```rust,noplaypen
 use std::collections::HashMap;

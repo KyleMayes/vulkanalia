@@ -14,7 +14,6 @@ Open the `Cargo.toml` file in the folder and add these dependencies in the pre-e
 
 ```toml
 anyhow = "1"
-lazy_static = "1"
 log = "0.4"
 cgmath = "0.18"
 png = "0.17"
@@ -26,7 +25,6 @@ winit = "0.28"
 ```
 
 * `anyhow` &ndash; used for simple error handling
-* `lazy_static` &ndash; used to store static data like vertices
 * `log` &ndash; used for logging statements
 * `cgmath` &ndash; used as a Rust replacement for [GLM](https://glm.g-truc.net/0.9.9/index.html) (graphics math library)
 * `png` &ndash; used to load PNGs to use as textures

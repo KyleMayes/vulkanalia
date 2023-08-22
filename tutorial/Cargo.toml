@@ -17,7 +17,6 @@ description = "Tutorial."
 [dependencies]
 
 anyhow = "1"
-lazy_static = "1"
 log = "0.4"
 cgmath = "0.18"
 png = "0.17"

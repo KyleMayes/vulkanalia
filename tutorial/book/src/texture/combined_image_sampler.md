@@ -118,14 +118,12 @@ impl Vertex {
 Modify the `Vertex` struct to include a `Vec2` for texture coordinates. Make sure to also add a `vk::VertexInputAttributeDescription` so that we can use access texture coordinates as input in the vertex shader. That is necessary to be able to pass them to the fragment shader for interpolation across the surface of the square.
 
 ```rust,noplaypen
-lazy_static! {
-    static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(vec2::<f32>(-0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0), vec2::<f32>(1.0, 0.0)),
-        Vertex::new(vec2::<f32>(0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
-        Vertex::new(vec2::<f32>(0.5, 0.5), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
-        Vertex::new(vec2::<f32>(-0.5, 0.5), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
-    ];
-}
+static VERTICES: [Vertex; 4] = [
+    Vertex::new(vec2::<f32>(-0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0), vec2::<f32>(1.0, 0.0)),
+    Vertex::new(vec2::<f32>(0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
+    Vertex::new(vec2::<f32>(0.5, 0.5), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
+    Vertex::new(vec2::<f32>(-0.5, 0.5), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
+];
 ```
 
 In this tutorial, I will simply fill the square with the texture by using coordinates from `0, 0` in the top-left corner to `1, 1` in the bottom-right corner. Feel free to experiment with different coordinates. Try using coordinates below `0` or above `1` to see the addressing modes in action!

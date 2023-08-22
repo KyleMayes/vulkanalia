@@ -10,7 +10,6 @@ use std::ptr::copy_nonoverlapping as memcpy;
 use std::time::Instant;
 
 use anyhow::{anyhow, Result};
-use lazy_static::lazy_static;
 use log::*;
 use cgmath::{Deg, vec2, vec3, point3};
 use thiserror::Error;
@@ -44,14 +43,12 @@ type Vec2 = cgmath::Vector2<f32>;
 type Vec3 = cgmath::Vector3<f32>;
 type Mat4 = cgmath::Matrix4<f32>;
 
-lazy_static! {
-    static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(vec2::<f32>(-0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0)),
-        Vertex::new(vec2::<f32>(0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0)),
-        Vertex::new(vec2::<f32>(0.5, 0.5), vec3::<f32>(0.0, 0.0, 1.0)),
-        Vertex::new(vec2::<f32>(-0.5, 0.5), vec3::<f32>(1.0, 1.0, 1.0)),
-    ];
-}
+static VERTICES: [Vertex; 4] = [
+    Vertex::new(vec2::<f32>(-0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0)),
+    Vertex::new(vec2::<f32>(0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0)),
+    Vertex::new(vec2::<f32>(0.5, 0.5), vec3::<f32>(0.0, 0.0, 1.0)),
+    Vertex::new(vec2::<f32>(-0.5, 0.5), vec3::<f32>(1.0, 1.0, 1.0)),
+];
 
 const INDICES: &[u16] = &[0, 1, 2, 2, 3, 0];
 
@@ -1195,7 +1192,7 @@ struct Vertex {
 }
 
 impl Vertex {
-    fn new(pos: Vec2, color: Vec3) -> Self {
+    const fn new(pos: Vec2, color: Vec3) -> Self {
         Self { pos, color }
     }
 

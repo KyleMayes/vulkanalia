@@ -11,7 +11,6 @@ use std::ptr::copy_nonoverlapping as memcpy;
 use std::time::Instant;
 
 use anyhow::{anyhow, Result};
-use lazy_static::lazy_static;
 use log::*;
 use cgmath::{Deg, vec2, vec3, point3};
 use thiserror::Error;
@@ -45,20 +44,18 @@ type Vec2 = cgmath::Vector2<f32>;
 type Vec3 = cgmath::Vector3<f32>;
 type Mat4 = cgmath::Matrix4<f32>;
 
-lazy_static! {
-    #[rustfmt::skip]
-    static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(vec3::<f32>(-0.5, -0.5, 0.0),vec3::<f32>(1.0, 0.0, 0.0),vec2::<f32>(1.0, 0.0)),
-        Vertex::new(vec3::<f32>(0.5, -0.5, 0.0), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
-        Vertex::new(vec3::<f32>(0.5, 0.5, 0.0), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
-        Vertex::new(vec3::<f32>(-0.5, 0.5, 0.0), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
-        //
-        Vertex::new(vec3::<f32>(-0.5, -0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0), vec2::<f32>(1.0, 0.0)),
-        Vertex::new(vec3::<f32>(0.5, -0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
-        Vertex::new(vec3::<f32>(0.5, 0.5, -0.5), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
-        Vertex::new(vec3::<f32>(-0.5, 0.5, -0.5), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
-    ];
-}
+#[rustfmt::skip]
+static VERTICES: [Vertex; 8] = [
+    Vertex::new(vec3::<f32>(-0.5, -0.5, 0.0),vec3::<f32>(1.0, 0.0, 0.0),vec2::<f32>(1.0, 0.0)),
+    Vertex::new(vec3::<f32>(0.5, -0.5, 0.0), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
+    Vertex::new(vec3::<f32>(0.5, 0.5, 0.0), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
+    Vertex::new(vec3::<f32>(-0.5, 0.5, 0.0), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
+    //
+    Vertex::new(vec3::<f32>(-0.5, -0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0), vec2::<f32>(1.0, 0.0)),
+    Vertex::new(vec3::<f32>(0.5, -0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
+    Vertex::new(vec3::<f32>(0.5, 0.5, -0.5), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
+    Vertex::new(vec3::<f32>(-0.5, 0.5, -0.5), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
+];
 
 #[rustfmt::skip]
 const INDICES: &[u16] = &[
@@ -1514,7 +1511,7 @@ struct Vertex {
 }
 
 impl Vertex {
-    fn new(pos: Vec3, color: Vec3, tex_coord: Vec2) -> Self {
+    const fn new(pos: Vec3, color: Vec3, tex_coord: Vec2) -> Self {
         Self { pos, color, tex_coord }
     }
 

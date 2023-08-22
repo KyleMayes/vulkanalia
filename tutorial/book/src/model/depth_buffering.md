@@ -71,14 +71,12 @@ void main() {
 Lastly, update the `vertices` container to include Z coordinates:
 
 ```rust,noplaypen
-lazy_static! {
-    static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(vec3::<f32>(-0.5, -0.5, 0.0),vec3::<f32>(1.0, 0.0, 0.0),vec2::<f32>(1.0, 0.0)),
-        Vertex::new(vec3::<f32>(0.5, -0.5, 0.0), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
-        Vertex::new(vec3::<f32>(0.5, 0.5, 0.0), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
-        Vertex::new(vec3::<f32>(-0.5, 0.5, 0.0), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
-    ];
-}
+static ref VERTICES: [Vertex; 4] = [
+    Vertex::new(vec3::<f32>(-0.5, -0.5, 0.0),vec3::<f32>(1.0, 0.0, 0.0),vec2::<f32>(1.0, 0.0)),
+    Vertex::new(vec3::<f32>(0.5, -0.5, 0.0), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
+    Vertex::new(vec3::<f32>(0.5, 0.5, 0.0), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
+    Vertex::new(vec3::<f32>(-0.5, 0.5, 0.0), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
+];
 ```
 
 If you run your application now, then you should see exactly the same result as before. It's time to add some extra geometry to make the scene more interesting, and to demonstrate the problem that we're going to tackle in this chapter. Duplicate the vertices to define positions for a square right under the current one like this:
@@ -88,18 +86,16 @@ If you run your application now, then you should see exactly the same result as 
 Use Z coordinates of `-0.5` and add the appropriate indices for the extra square:
 
 ```rust,noplaypen
-lazy_static! {
-    static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(vec3::<f32>(-0.5, -0.5, 0.0),vec3::<f32>(1.0, 0.0, 0.0),vec2::<f32>(1.0, 0.0)),
-        Vertex::new(vec3::<f32>(0.5, -0.5, 0.0), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
-        Vertex::new(vec3::<f32>(0.5, 0.5, 0.0), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
-        Vertex::new(vec3::<f32>(-0.5, 0.5, 0.0), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
-        Vertex::new(vec3::<f32>(-0.5, -0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0), vec2::<f32>(1.0, 0.0)),
-        Vertex::new(vec3::<f32>(0.5, -0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
-        Vertex::new(vec3::<f32>(0.5, 0.5, -0.5), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
-        Vertex::new(vec3::<f32>(-0.5, 0.5, -0.5), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
-    ];
-}
+static VERTICES: [Vertex; 8] = [
+    Vertex::new(vec3::<f32>(-0.5, -0.5, 0.0),vec3::<f32>(1.0, 0.0, 0.0),vec2::<f32>(1.0, 0.0)),
+    Vertex::new(vec3::<f32>(0.5, -0.5, 0.0), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
+    Vertex::new(vec3::<f32>(0.5, 0.5, 0.0), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
+    Vertex::new(vec3::<f32>(-0.5, 0.5, 0.0), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
+    Vertex::new(vec3::<f32>(-0.5, -0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0), vec2::<f32>(1.0, 0.0)),
+    Vertex::new(vec3::<f32>(0.5, -0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
+    Vertex::new(vec3::<f32>(0.5, 0.5, -0.5), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
+    Vertex::new(vec3::<f32>(-0.5, 0.5, -0.5), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
+];
 
 const INDICES: &[u16] = &[
     0, 1, 2, 2, 3, 0,

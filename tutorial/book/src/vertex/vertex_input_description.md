@@ -35,16 +35,18 @@ You can find more info about the layout qualifier in the [OpenGL wiki](https://w
 
 ## Vertex data
 
-We're moving the vertex data from the shader code to an array in the code of our program. We'll start by adding a few more imports to our program.
+We're moving the vertex data from the shader code to an array in the code of our program. We'll start by adding a few more imports and several type aliases to our program.
 
 ```rust,noplaypen
 use std::mem::size_of;
 
 use cgmath::{vec2, vec3};
-use lazy_static::lazy_static;
+
+type Vec2 = cgmath::Vector2<f32>;
+type Vec3 = cgmath::Vector3<f32>;
 ```
 
-`size_of` will be used to calculate the size of the vertex data we'll be defining while `nalgebra-glm` defines the vector types we need. The `lazy_static!` macro will be used to define the vertex data since the vector constructors in `nalgebra-glm` are not yet `const fn`s.
+`size_of` will be used to calculate the size of the vertex data we'll be defining while `cgmath` defines the vector types we need.
 
 Next, create a new `#[repr(C)]` structure called `Vertex` with the two attributes that we're going to use in the vertex shader inside it and add a simple constructor:
 
@@ -57,22 +59,20 @@ struct Vertex {
 }
 
 impl Vertex {
-    fn new(pos: Vec2, color: Vec3) -> Self {
+    const fn new(pos: Vec2, color: Vec3) -> Self {
         Self { pos, color }
     }
 }
 ```
 
-`nalgebra-glm` conveniently provides us with Rust types that exactly match the vector types used in the shader language.
+`cgmath` conveniently provides us with Rust types that exactly match the vector types used in the shader language.
 
 ```rust,noplaypen
-lazy_static! {
-    static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(vec2::<f32>(0.0, -0.5), vec3::<f32>(1.0, 0.0, 0.0)),
-        Vertex::new(vec2::<f32>(0.5, 0.5), vec3::<f32>(0.0, 1.0, 0.0)),
-        Vertex::new(vec2::<f32>(-0.5, 0.5), vec3::<f32>(0.0, 0.0, 1.0)),
-    ];
-}
+static VERTICES: [Vertex; 3] = [
+    Vertex::new(vec2::<f32>(0.0, -0.5), vec3::<f32>(1.0, 0.0, 0.0)),
+    Vertex::new(vec2::<f32>(0.5, 0.5), vec3::<f32>(0.0, 1.0, 0.0)),
+    Vertex::new(vec2::<f32>(-0.5, 0.5), vec3::<f32>(0.0, 0.0, 1.0)),
+];
 ```
 
 Now use the `Vertex` structure to specify a list of vertex data. We're using exactly the same position and color values as before, but now they're combined into one array of vertices. This is known as *interleaving* vertex attributes.
@@ -134,14 +134,14 @@ The `binding` parameter tells Vulkan from which binding the per-vertex data come
 The `format` parameter describes the type of data for the attribute. A bit confusingly, the formats are specified using the same enumeration as color formats. The following shader types and formats are commonly used together:
 
 * `f32` &ndash; `vk::Format::R32_SFLOAT`&nbsp;
-* `Vec2` &ndash; `vk::Format::R32G32_SFLOAT`&nbsp;
-* `Vec3` &ndash; `vk::Format::R32G32B32_SFLOAT`&nbsp;
-* `glm::Vec4` &ndash; `vk::Format::R32G32B32A32_SFLOAT`&nbsp;
+* `cgmath::Vector2<f32>` (our `Vec2`) &ndash; `vk::Format::R32G32_SFLOAT`&nbsp;
+* `cgmath::Vector3<f32>` (our `Vec3`) &ndash; `vk::Format::R32G32B32_SFLOAT`&nbsp;
+* `cgmath::Vector4<f32>` &ndash; `vk::Format::R32G32B32A32_SFLOAT`&nbsp;
 
 As you can see, you should use the format where the amount of color channels matches the number of components in the shader data type. It is allowed to use more channels than the number of components in the shader, but they will be silently discarded. If the number of channels is lower than the number of components, then the BGA components will use default values of `(0, 0, 1)`. The color type (`SFLOAT`, `UINT`, `SINT`) and bit width should also match the type of the shader input. See the following examples:
 
-* `glm::IVec2` &ndash; `vk::Format::R32G32_SINT`, a 2-component vector of `i32`s
-* `glm::UVec4` &ndash; `vk::Format::R32G32B32A32_UINT`, a 4-component vector of `u32`s
+* `cgmath::Vector2<i32>` &ndash; `vk::Format::R32G32_SINT`, a 2-component vector of `i32`s
+* `cgmath::Vector4<u32>` &ndash; `vk::Format::R32G32B32A32_UINT`, a 4-component vector of `u32`s
 * `f64` &ndash; `vk::Format::R64_SFLOAT`, a double-precision (64-bit) float
 
 The `format` parameter implicitly defines the byte size of attribute data and the `offset` parameter specifies the number of bytes since the start of the per-vertex data to read from. The binding is loading one `Vertex` at a time and the position attribute (`pos`) is at an offset of `0` bytes from the beginning of this struct.
