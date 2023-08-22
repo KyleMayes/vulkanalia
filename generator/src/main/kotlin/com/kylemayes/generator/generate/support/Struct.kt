@@ -109,3 +109,19 @@ fun Registry.getStructLifetime(struct: Structure): Boolean {
     getStructLifetimeResults[struct.name] = result
     return result
 }
+
+/** Gets the Vulkan structs that can be part of a pointer chain. */
+val getChainStructs = thunk { ->
+    structs.filter {
+        val name = it.key.original
+        if (name == "VkBaseInStructure" || name == "VkBaseOutStructure") {
+            // These are helper structs used for iterating through pointer
+            // chains, not pointer chain structs themselves.
+            false
+        } else {
+            val type = it.value.members.getOrNull(0)?.name?.original == "sType"
+            val next = it.value.members.getOrNull(1)?.name?.original == "pNext"
+            type && next
+        }
+    }
+}
