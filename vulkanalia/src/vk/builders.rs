@@ -26,7 +26,7 @@ use super::*;
 
 /// A type that can be used interchangeably with another in FFI.
 pub unsafe trait Cast {
-    /// The other type this type type can be used interchangeably with in FFI.
+    /// The other type this type can be used interchangeably with in FFI.
     type Target;
 
     /// Converts this value into a value of the other type.
