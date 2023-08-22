@@ -20,7 +20,8 @@
 use std::fmt;
 use std::marker::PhantomData;
 use std::ops;
-use std::os::raw::{c_char, c_int};
+use std::os::raw::{c_char, c_int, c_void};
+use std::ptr::NonNull;
 
 use super::*;
 
@@ -61,6 +62,27 @@ pub trait HasBuilder<'b> {
     fn builder() -> Self::Builder {
         Default::default()
     }
+}
+
+/// Adds a base pointer chain with a new non-empty pointer chain.
+fn merge(base: *mut c_void, next: NonNull<BaseOutStructure>) -> *mut c_void {
+    if base.is_null() {
+        return next.as_ptr().cast();
+    }
+
+    // We're expecting the new pointer chain to usually be a single element (or
+    // at least shorter in most cases than the base pointer chain). Therefore,
+    // we will prefer iterating over the new pointer chain to append the base
+    // pointer chain to the new pointer chain rather than the other way around.
+
+    let mut tail = next;
+    while let Some(node) = NonNull::new(unsafe { tail.as_ref() }.next) {
+        tail = node;
+    }
+
+    unsafe { tail.as_mut() }.next = base.cast();
+
+    next.as_ptr().cast()
 }
 
 unsafe impl Cast for AabbPositionsKHR {
@@ -514,9 +536,7 @@ impl<'b> AccelerationStructureCreateInfoKHRBuilder<'b> {
     where
         T: ExtendsAccelerationStructureCreateInfoKHR,
     {
-        let next = (next.as_mut() as *mut T).cast::<AccelerationStructureCreateInfoKHR>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -618,9 +638,7 @@ impl<'b> AccelerationStructureCreateInfoNVBuilder<'b> {
     where
         T: ExtendsAccelerationStructureCreateInfoNV,
     {
-        let next = (next.as_mut() as *mut T).cast::<AccelerationStructureCreateInfoNV>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -1026,10 +1044,7 @@ impl<'b> AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
     where
         T: ExtendsAccelerationStructureGeometryTrianglesDataKHR,
     {
-        let next =
-            (next.as_mut() as *mut T).cast::<AccelerationStructureGeometryTrianglesDataKHR>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -2599,9 +2614,7 @@ impl<'b> AndroidHardwareBufferPropertiesANDROIDBuilder<'b> {
     where
         T: ExtendsAndroidHardwareBufferPropertiesANDROID,
     {
-        let next = (next.as_mut() as *mut T).cast::<AndroidHardwareBufferPropertiesANDROID>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -2802,9 +2815,7 @@ impl<'b> ApplicationInfoBuilder<'b> {
     where
         T: ExtendsApplicationInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<ApplicationInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -3082,9 +3093,7 @@ impl<'b> AttachmentDescription2Builder<'b> {
     where
         T: ExtendsAttachmentDescription2,
     {
-        let next = (next.as_mut() as *mut T).cast::<AttachmentDescription2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -3332,9 +3341,7 @@ impl<'b> AttachmentReference2Builder<'b> {
     where
         T: ExtendsAttachmentReference2,
     {
-        let next = (next.as_mut() as *mut T).cast::<AttachmentReference2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -3873,9 +3880,7 @@ impl<'b> BindBufferMemoryInfoBuilder<'b> {
     where
         T: ExtendsBindBufferMemoryInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<BindBufferMemoryInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -4031,9 +4036,7 @@ impl<'b> BindImageMemoryInfoBuilder<'b> {
     where
         T: ExtendsBindImageMemoryInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<BindImageMemoryInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -4426,9 +4429,7 @@ impl<'b> BindSparseInfoBuilder<'b> {
     where
         T: ExtendsBindSparseInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<BindSparseInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -5380,9 +5381,7 @@ impl<'b> BufferCreateInfoBuilder<'b> {
     where
         T: ExtendsBufferCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<BufferCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -5686,9 +5685,7 @@ impl<'b> BufferImageCopy2Builder<'b> {
     where
         T: ExtendsBufferImageCopy2,
     {
-        let next = (next.as_mut() as *mut T).cast::<BufferImageCopy2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -5793,9 +5790,7 @@ impl<'b> BufferMemoryBarrierBuilder<'b> {
     where
         T: ExtendsBufferMemoryBarrier,
     {
-        let next = (next.as_mut() as *mut T).cast::<BufferMemoryBarrier>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -5903,9 +5898,7 @@ impl<'b> BufferMemoryBarrier2Builder<'b> {
     where
         T: ExtendsBufferMemoryBarrier2,
     {
-        let next = (next.as_mut() as *mut T).cast::<BufferMemoryBarrier2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -6200,9 +6193,7 @@ impl<'b> BufferViewCreateInfoBuilder<'b> {
     where
         T: ExtendsBufferViewCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<BufferViewCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -7075,9 +7066,7 @@ impl<'b> CommandBufferBeginInfoBuilder<'b> {
     where
         T: ExtendsCommandBufferBeginInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<CommandBufferBeginInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -7227,9 +7216,7 @@ impl<'b> CommandBufferInheritanceInfoBuilder<'b> {
     where
         T: ExtendsCommandBufferInheritanceInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<CommandBufferInheritanceInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -7764,9 +7751,7 @@ impl<'b> ComputePipelineCreateInfoBuilder<'b> {
     where
         T: ExtendsComputePipelineCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<ComputePipelineCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -10247,9 +10232,7 @@ impl<'b> DebugUtilsMessengerCallbackDataEXTBuilder<'b> {
     where
         T: ExtendsDebugUtilsMessengerCallbackDataEXT,
     {
-        let next = (next.as_mut() as *mut T).cast::<DebugUtilsMessengerCallbackDataEXT>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -10955,9 +10938,7 @@ impl<'b> DepthBiasInfoEXTBuilder<'b> {
     where
         T: ExtendsDepthBiasInfoEXT,
     {
-        let next = (next.as_mut() as *mut T).cast::<DepthBiasInfoEXT>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -11182,9 +11163,7 @@ impl<'b> DescriptorBufferBindingInfoEXTBuilder<'b> {
     where
         T: ExtendsDescriptorBufferBindingInfoEXT,
     {
-        let next = (next.as_mut() as *mut T).cast::<DescriptorBufferBindingInfoEXT>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -11525,9 +11504,7 @@ impl<'b> DescriptorPoolCreateInfoBuilder<'b> {
     where
         T: ExtendsDescriptorPoolCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<DescriptorPoolCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -11737,9 +11714,7 @@ impl<'b> DescriptorSetAllocateInfoBuilder<'b> {
     where
         T: ExtendsDescriptorSetAllocateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<DescriptorSetAllocateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -12027,9 +12002,7 @@ impl<'b> DescriptorSetLayoutCreateInfoBuilder<'b> {
     where
         T: ExtendsDescriptorSetLayoutCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<DescriptorSetLayoutCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -12178,9 +12151,7 @@ impl<'b> DescriptorSetLayoutSupportBuilder<'b> {
     where
         T: ExtendsDescriptorSetLayoutSupport,
     {
-        let next = (next.as_mut() as *mut T).cast::<DescriptorSetLayoutSupport>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -12870,9 +12841,7 @@ impl<'b> DeviceCreateInfoBuilder<'b> {
     where
         T: ExtendsDeviceCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<DeviceCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -14510,9 +14479,7 @@ impl<'b> DeviceQueueCreateInfoBuilder<'b> {
     where
         T: ExtendsDeviceQueueCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<DeviceQueueCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -16904,9 +16871,7 @@ impl<'b> EventCreateInfoBuilder<'b> {
     where
         T: ExtendsEventCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<EventCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -16979,9 +16944,7 @@ impl<'b> ExecutionGraphPipelineCreateInfoAMDXBuilder<'b> {
     where
         T: ExtendsExecutionGraphPipelineCreateInfoAMDX,
     {
-        let next = (next.as_mut() as *mut T).cast::<ExecutionGraphPipelineCreateInfoAMDX>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -17964,9 +17927,7 @@ impl<'b> ExportMetalObjectsInfoEXTBuilder<'b> {
     where
         T: ExtendsExportMetalObjectsInfoEXT,
     {
-        let next = (next.as_mut() as *mut T).cast::<ExportMetalObjectsInfoEXT>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -19369,9 +19330,7 @@ impl<'b> FenceCreateInfoBuilder<'b> {
     where
         T: ExtendsFenceCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<FenceCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -19772,9 +19731,7 @@ impl<'b> FormatProperties2Builder<'b> {
     where
         T: ExtendsFormatProperties2,
     {
-        let next = (next.as_mut() as *mut T).cast::<FormatProperties2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -20143,9 +20100,7 @@ impl<'b> FramebufferCreateInfoBuilder<'b> {
     where
         T: ExtendsFramebufferCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<FramebufferCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -20879,9 +20834,7 @@ impl<'b> GraphicsPipelineCreateInfoBuilder<'b> {
     where
         T: ExtendsGraphicsPipelineCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<GraphicsPipelineCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -21746,9 +21699,7 @@ impl<'b> ImageBlit2Builder<'b> {
     where
         T: ExtendsImageBlit2,
     {
-        let next = (next.as_mut() as *mut T).cast::<ImageBlit2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -22311,9 +22262,7 @@ impl<'b> ImageCreateInfoBuilder<'b> {
     where
         T: ExtendsImageCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<ImageCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -22880,9 +22829,7 @@ impl<'b> ImageFormatProperties2Builder<'b> {
     where
         T: ExtendsImageFormatProperties2,
     {
-        let next = (next.as_mut() as *mut T).cast::<ImageFormatProperties2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -22958,9 +22905,7 @@ impl<'b> ImageMemoryBarrierBuilder<'b> {
     where
         T: ExtendsImageMemoryBarrier,
     {
-        let next = (next.as_mut() as *mut T).cast::<ImageMemoryBarrier>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -23078,9 +23023,7 @@ impl<'b> ImageMemoryBarrier2Builder<'b> {
     where
         T: ExtendsImageMemoryBarrier2,
     {
-        let next = (next.as_mut() as *mut T).cast::<ImageMemoryBarrier2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -23209,9 +23152,7 @@ impl<'b> ImageMemoryRequirementsInfo2Builder<'b> {
     where
         T: ExtendsImageMemoryRequirementsInfo2,
     {
-        let next = (next.as_mut() as *mut T).cast::<ImageMemoryRequirementsInfo2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -24323,9 +24264,7 @@ impl<'b> ImageViewCreateInfoBuilder<'b> {
     where
         T: ExtendsImageViewCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<ImageViewCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -26508,9 +26447,7 @@ impl<'b> InstanceCreateInfoBuilder<'b> {
     where
         T: ExtendsInstanceCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<InstanceCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -26906,9 +26843,7 @@ impl<'b> MemoryAllocateInfoBuilder<'b> {
     where
         T: ExtendsMemoryAllocateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<MemoryAllocateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -28074,9 +28009,7 @@ impl<'b> MemoryRequirements2Builder<'b> {
     where
         T: ExtendsMemoryRequirements2,
     {
-        let next = (next.as_mut() as *mut T).cast::<MemoryRequirements2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -29984,9 +29917,7 @@ impl<'b> OpticalFlowSessionCreateInfoNVBuilder<'b> {
     where
         T: ExtendsOpticalFlowSessionCreateInfoNV,
     {
-        let next = (next.as_mut() as *mut T).cast::<OpticalFlowSessionCreateInfoNV>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -36090,9 +36021,7 @@ impl<'b> PhysicalDeviceExternalBufferInfoBuilder<'b> {
     where
         T: ExtendsPhysicalDeviceExternalBufferInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceExternalBufferInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -36685,9 +36614,7 @@ impl<'b> PhysicalDeviceExternalSemaphoreInfoBuilder<'b> {
     where
         T: ExtendsPhysicalDeviceExternalSemaphoreInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceExternalSemaphoreInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -37455,9 +37382,7 @@ impl<'b> PhysicalDeviceFeatures2Builder<'b> {
     where
         T: ExtendsPhysicalDeviceFeatures2,
     {
-        let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceFeatures2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -39661,9 +39586,7 @@ impl<'b> PhysicalDeviceImageFormatInfo2Builder<'b> {
     where
         T: ExtendsPhysicalDeviceImageFormatInfo2,
     {
-        let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceImageFormatInfo2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -42312,9 +42235,7 @@ impl<'b> PhysicalDeviceMemoryProperties2Builder<'b> {
     where
         T: ExtendsPhysicalDeviceMemoryProperties2,
     {
-        let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceMemoryProperties2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -45449,9 +45370,7 @@ impl<'b> PhysicalDeviceProperties2Builder<'b> {
     where
         T: ExtendsPhysicalDeviceProperties2,
     {
-        let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceProperties2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -50474,9 +50393,7 @@ impl<'b> PhysicalDeviceSurfaceInfo2KHRBuilder<'b> {
     where
         T: ExtendsPhysicalDeviceSurfaceInfo2KHR,
     {
-        let next = (next.as_mut() as *mut T).cast::<PhysicalDeviceSurfaceInfo2KHR>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -54261,9 +54178,7 @@ impl<'b> PipelineColorBlendStateCreateInfoBuilder<'b> {
     where
         T: ExtendsPipelineColorBlendStateCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<PipelineColorBlendStateCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -55952,9 +55867,7 @@ impl<'b> PipelineMultisampleStateCreateInfoBuilder<'b> {
     where
         T: ExtendsPipelineMultisampleStateCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<PipelineMultisampleStateCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -56424,9 +56337,7 @@ impl<'b> PipelineRasterizationStateCreateInfoBuilder<'b> {
     where
         T: ExtendsPipelineRasterizationStateCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<PipelineRasterizationStateCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -56976,9 +56887,7 @@ impl<'b> PipelineShaderStageCreateInfoBuilder<'b> {
     where
         T: ExtendsPipelineShaderStageCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<PipelineShaderStageCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -57321,9 +57230,7 @@ impl<'b> PipelineTessellationStateCreateInfoBuilder<'b> {
     where
         T: ExtendsPipelineTessellationStateCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<PipelineTessellationStateCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -57467,9 +57374,7 @@ impl<'b> PipelineVertexInputStateCreateInfoBuilder<'b> {
     where
         T: ExtendsPipelineVertexInputStateCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<PipelineVertexInputStateCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -57837,9 +57742,7 @@ impl<'b> PipelineViewportStateCreateInfoBuilder<'b> {
     where
         T: ExtendsPipelineViewportStateCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<PipelineViewportStateCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -58212,9 +58115,7 @@ impl<'b> PresentInfoKHRBuilder<'b> {
     where
         T: ExtendsPresentInfoKHR,
     {
-        let next = (next.as_mut() as *mut T).cast::<PresentInfoKHR>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -58822,9 +58723,7 @@ impl<'b> QueryPoolCreateInfoBuilder<'b> {
     where
         T: ExtendsQueryPoolCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<QueryPoolCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -59311,9 +59210,7 @@ impl<'b> QueueFamilyProperties2Builder<'b> {
     where
         T: ExtendsQueueFamilyProperties2,
     {
-        let next = (next.as_mut() as *mut T).cast::<QueueFamilyProperties2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -59390,9 +59287,7 @@ impl<'b> RayTracingPipelineCreateInfoKHRBuilder<'b> {
     where
         T: ExtendsRayTracingPipelineCreateInfoKHR,
     {
-        let next = (next.as_mut() as *mut T).cast::<RayTracingPipelineCreateInfoKHR>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -59539,9 +59434,7 @@ impl<'b> RayTracingPipelineCreateInfoNVBuilder<'b> {
     where
         T: ExtendsRayTracingPipelineCreateInfoNV,
     {
-        let next = (next.as_mut() as *mut T).cast::<RayTracingPipelineCreateInfoNV>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -60351,9 +60244,7 @@ impl<'b> RenderPassBeginInfoBuilder<'b> {
     where
         T: ExtendsRenderPassBeginInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<RenderPassBeginInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -60446,9 +60337,7 @@ impl<'b> RenderPassCreateInfoBuilder<'b> {
     where
         T: ExtendsRenderPassCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<RenderPassCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -60549,9 +60438,7 @@ impl<'b> RenderPassCreateInfo2Builder<'b> {
     where
         T: ExtendsRenderPassCreateInfo2,
     {
-        let next = (next.as_mut() as *mut T).cast::<RenderPassCreateInfo2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -61621,9 +61508,7 @@ impl<'b> RenderingInfoBuilder<'b> {
     where
         T: ExtendsRenderingInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<RenderingInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -62244,9 +62129,7 @@ impl<'b> SamplerCreateInfoBuilder<'b> {
     where
         T: ExtendsSamplerCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<SamplerCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -62531,9 +62414,7 @@ impl<'b> SamplerYcbcrConversionCreateInfoBuilder<'b> {
     where
         T: ExtendsSamplerYcbcrConversionCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<SamplerYcbcrConversionCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -62943,9 +62824,7 @@ impl<'b> ScreenBufferPropertiesQNXBuilder<'b> {
     where
         T: ExtendsScreenBufferPropertiesQNX,
     {
-        let next = (next.as_mut() as *mut T).cast::<ScreenBufferPropertiesQNX>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -63101,9 +62980,7 @@ impl<'b> SemaphoreCreateInfoBuilder<'b> {
     where
         T: ExtendsSemaphoreCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<SemaphoreCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -63889,9 +63766,7 @@ impl<'b> ShaderCreateInfoEXTBuilder<'b> {
     where
         T: ExtendsShaderCreateInfoEXT,
     {
-        let next = (next.as_mut() as *mut T).cast::<ShaderCreateInfoEXT>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -64032,9 +63907,7 @@ impl<'b> ShaderModuleCreateInfoBuilder<'b> {
     where
         T: ExtendsShaderModuleCreateInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<ShaderModuleCreateInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -65566,9 +65439,7 @@ impl<'b> SubmitInfoBuilder<'b> {
     where
         T: ExtendsSubmitInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<SubmitInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -65664,9 +65535,7 @@ impl<'b> SubmitInfo2Builder<'b> {
     where
         T: ExtendsSubmitInfo2,
     {
-        let next = (next.as_mut() as *mut T).cast::<SubmitInfo2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -65920,9 +65789,7 @@ impl<'b> SubpassDependency2Builder<'b> {
     where
         T: ExtendsSubpassDependency2,
     {
-        let next = (next.as_mut() as *mut T).cast::<SubpassDependency2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -66157,9 +66024,7 @@ impl<'b> SubpassDescription2Builder<'b> {
     where
         T: ExtendsSubpassDescription2,
     {
-        let next = (next.as_mut() as *mut T).cast::<SubpassDescription2>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -66369,9 +66234,7 @@ impl<'b> SubpassEndInfoBuilder<'b> {
     where
         T: ExtendsSubpassEndInfo,
     {
-        let next = (next.as_mut() as *mut T).cast::<SubpassEndInfo>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -66831,9 +66694,7 @@ impl<'b> SubresourceLayout2KHRBuilder<'b> {
     where
         T: ExtendsSubresourceLayout2KHR,
     {
-        let next = (next.as_mut() as *mut T).cast::<SubresourceLayout2KHR>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -67038,9 +66899,7 @@ impl<'b> SurfaceCapabilities2KHRBuilder<'b> {
     where
         T: ExtendsSurfaceCapabilities2KHR,
     {
-        let next = (next.as_mut() as *mut T).cast::<SurfaceCapabilities2KHR>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -67349,9 +67208,7 @@ impl<'b> SurfaceFormat2KHRBuilder<'b> {
     where
         T: ExtendsSurfaceFormat2KHR,
     {
-        let next = (next.as_mut() as *mut T).cast::<SurfaceFormat2KHR>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -67949,9 +67806,7 @@ impl<'b> SwapchainCreateInfoKHRBuilder<'b> {
     where
         T: ExtendsSwapchainCreateInfoKHR,
     {
-        let next = (next.as_mut() as *mut T).cast::<SwapchainCreateInfoKHR>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 
@@ -70213,9 +70068,7 @@ impl<'b> WriteDescriptorSetBuilder<'b> {
     where
         T: ExtendsWriteDescriptorSet,
     {
-        let next = (next.as_mut() as *mut T).cast::<WriteDescriptorSet>();
-        unsafe { &mut *next }.next = self.next;
-        self.next = next.cast();
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
         self
     }
 

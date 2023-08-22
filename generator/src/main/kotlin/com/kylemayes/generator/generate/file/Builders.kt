@@ -25,7 +25,8 @@ fun Registry.generateBuilders() =
 use std::fmt;
 use std::marker::PhantomData;
 use std::ops;
-use std::os::raw::{c_char, c_int};
+use std::os::raw::{c_char, c_int, c_void};
+use std::ptr::NonNull;
 
 use super::*;
 
@@ -66,6 +67,27 @@ pub trait HasBuilder<'b> {
     fn builder() -> Self::Builder {
         Default::default()
     }
+}
+
+/// Adds a base pointer chain with a new non-empty pointer chain.
+fn merge(base: *mut c_void, next: NonNull<BaseOutStructure>) -> *mut c_void {
+    if base.is_null() {
+        return next.as_ptr().cast();
+    }
+
+    // We're expecting the new pointer chain to usually be a single element (or
+    // at least shorter in most cases than the base pointer chain). Therefore,
+    // we will prefer iterating over the new pointer chain to append the base
+    // pointer chain to the new pointer chain rather than the other way around.
+
+    let mut tail = next;
+    while let Some(node) = NonNull::new(unsafe { tail.as_ref() }.next) {
+        tail = node;
+    }
+
+    unsafe { tail.as_mut() }.next = base.cast();
+
+    next.as_ptr().cast()
 }
 
 ${structs.values
@@ -264,9 +286,7 @@ pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
 where
     T: Extends${struct.name}
 {
-    let next = (next.as_mut() as *mut T).cast::<${struct.name}>();
-    unsafe { &mut *next }.next = self.next;
-    self.next = next.cast();
+    self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
     self
 }
     """
