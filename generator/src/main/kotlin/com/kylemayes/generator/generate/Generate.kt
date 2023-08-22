@@ -4,6 +4,7 @@ package com.kylemayes.generator.generate
 
 import com.kylemayes.generator.generate.file.generateBitmasks
 import com.kylemayes.generator.generate.file.generateBuilders
+import com.kylemayes.generator.generate.file.generateChains
 import com.kylemayes.generator.generate.file.generateCommandStructs
 import com.kylemayes.generator.generate.file.generateCommands
 import com.kylemayes.generator.generate.file.generateConstants
@@ -40,6 +41,7 @@ fun generateRustFiles(registry: Registry) = listOf(
     generateRustFile("vulkanalia-sys", "typedefs.rs", registry.generateTypedefs()),
     generateRustFile("vulkanalia-sys", "unions.rs", registry.generateUnions()),
     generateRustFile("vulkanalia", "vk/builders.rs", registry.generateBuilders()),
+    generateRustFile("vulkanalia", "vk/chains.rs", registry.generateChains()),
     generateRustFile("vulkanalia", "vk/commands.rs", registry.generateCommandStructs()),
     generateRustFile("vulkanalia", "vk/enums.rs", registry.generateResultEnums()),
     generateRustFile("vulkanalia", "vk/extensions.rs", registry.generateExtensionTraits()),

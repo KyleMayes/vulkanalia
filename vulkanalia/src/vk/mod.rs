@@ -5,6 +5,8 @@
 #[rustfmt::skip]
 mod builders;
 #[rustfmt::skip]
+mod chains;
+#[rustfmt::skip]
 mod commands;
 #[rustfmt::skip]
 mod enums;
@@ -16,6 +18,7 @@ mod versions;
 pub use vulkanalia_sys::*;
 
 pub use self::builders::*;
+pub use self::chains::*;
 pub use self::commands::*;
 pub use self::enums::*;
 pub use self::extensions::*;
