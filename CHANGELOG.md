@@ -1,5 +1,8 @@
 ## [0.22.0] - UNRELEASED
 
+### Fixed
+- Fixed `push_next` not adding a chain of structs properly
+
 ### Added
 - Added `InputChainStruct` and `OutputChainStruct` traits which are implemented for structs that can be part of pointer chains
 - Added `chain` module to `vulkanalia` with pointer chain helpers (e.g. iteration)
