@@ -245,10 +245,10 @@ let z = (((model_index / 2) as f32) * -2.0) + 1.0;
 
 let time = self.start.elapsed().as_secs_f32();
 
-let model = Mat4::from_axis_angle(
+let model = Mat4::from_translation(vec3(0.0, y, z)) * Mat4::from_axis_angle(
     vec3::<f32>(0.0, 0.0, 1.0),
     Deg(90.0) * time
-) * Mat4::from_translation(vec3(0.0, y, z));
+);
 ```
 
 This code places the model instances in a grid on the Y and Z axes. However, due to the view matrix we're using, the camera is looking at this plane at 45 degree angles so let's update the view matrix in `App::update_uniform_buffer` to look directly at the YZ plane to better view our model instances.
