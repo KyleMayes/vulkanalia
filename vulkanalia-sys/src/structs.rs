@@ -1207,6 +1207,13 @@ pub struct BindIndexBufferIndirectCommandNV {
     pub index_type: IndexType,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBindPipelineIndirectCommandNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct BindPipelineIndirectCommandNV {
+    pub pipeline_address: DeviceAddress,
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBindShaderGroupIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -1722,6 +1729,26 @@ impl Default for BufferOpaqueCaptureAddressCreateInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBufferUsageFlags2CreateInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BufferUsageFlags2CreateInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub usage: BufferUsageFlags2KHR,
+}
+
+impl Default for BufferUsageFlags2CreateInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BUFFER_USAGE_FLAGS_2_CREATE_INFO_KHR,
+            next: ptr::null(),
+            usage: BufferUsageFlags2KHR::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBufferViewCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2150,6 +2177,30 @@ impl Default for ComputePipelineCreateInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComputePipelineIndirectBufferInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ComputePipelineIndirectBufferInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub device_address: DeviceAddress,
+    pub size: DeviceSize,
+    pub pipeline_device_address_capture_replay: DeviceAddress,
+}
+
+impl Default for ComputePipelineIndirectBufferInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV,
+            next: ptr::null(),
+            device_address: DeviceAddress::default(),
+            size: DeviceSize::default(),
+            pipeline_device_address_capture_replay: DeviceAddress::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkConditionalRenderingBeginInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2466,6 +2517,66 @@ impl Default for CopyImageToBufferInfo2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyImageToImageInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CopyImageToImageInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: HostImageCopyFlagsEXT,
+    pub src_image: Image,
+    pub src_image_layout: ImageLayout,
+    pub dst_image: Image,
+    pub dst_image_layout: ImageLayout,
+    pub region_count: u32,
+    pub regions: *const ImageCopy2,
+}
+
+impl Default for CopyImageToImageInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COPY_IMAGE_TO_IMAGE_INFO_EXT,
+            next: ptr::null(),
+            flags: HostImageCopyFlagsEXT::default(),
+            src_image: Image::default(),
+            src_image_layout: ImageLayout::default(),
+            dst_image: Image::default(),
+            dst_image_layout: ImageLayout::default(),
+            region_count: u32::default(),
+            regions: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyImageToMemoryInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CopyImageToMemoryInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: HostImageCopyFlagsEXT,
+    pub src_image: Image,
+    pub src_image_layout: ImageLayout,
+    pub region_count: u32,
+    pub regions: *const ImageToMemoryCopyEXT,
+}
+
+impl Default for CopyImageToMemoryInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COPY_IMAGE_TO_MEMORY_INFO_EXT,
+            next: ptr::null(),
+            flags: HostImageCopyFlagsEXT::default(),
+            src_image: Image::default(),
+            src_image_layout: ImageLayout::default(),
+            region_count: u32::default(),
+            regions: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -2509,6 +2620,34 @@ pub struct CopyMemoryToImageIndirectCommandNV {
     pub image_subresource: ImageSubresourceLayers,
     pub image_offset: Offset3D,
     pub image_extent: Extent3D,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryToImageInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CopyMemoryToImageInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: HostImageCopyFlagsEXT,
+    pub dst_image: Image,
+    pub dst_image_layout: ImageLayout,
+    pub region_count: u32,
+    pub regions: *const MemoryToImageCopyEXT,
+}
+
+impl Default for CopyMemoryToImageInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COPY_MEMORY_TO_IMAGE_INFO_EXT,
+            next: ptr::null(),
+            flags: HostImageCopyFlagsEXT::default(),
+            dst_image: Image::default(),
+            dst_image_layout: ImageLayout::default(),
+            region_count: u32::default(),
+            regions: ptr::null(),
+        }
+    }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMemoryToMicromapInfoEXT.html>
@@ -3969,6 +4108,28 @@ impl Default for DeviceImageMemoryRequirements {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceImageSubresourceInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DeviceImageSubresourceInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub create_info: *const ImageCreateInfo,
+    pub subresource: *const ImageSubresource2KHR,
+}
+
+impl Default for DeviceImageSubresourceInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEVICE_IMAGE_SUBRESOURCE_INFO_KHR,
+            next: ptr::null(),
+            create_info: ptr::null(),
+            subresource: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceMemoryOpaqueCaptureAddressInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -4233,6 +4394,25 @@ impl Default for DirectFBSurfaceCreateInfoEXT {
             surface: ptr::null_mut(),
         }
     }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDispatchGraphCountInfoAMDX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug)]
+pub struct DispatchGraphCountInfoAMDX {
+    pub count: u32,
+    pub infos: DeviceOrHostAddressConstAMDX,
+    pub stride: u64,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDispatchGraphInfoAMDX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug)]
+pub struct DispatchGraphInfoAMDX {
+    pub node_index: u32,
+    pub payload_count: u32,
+    pub payloads: DeviceOrHostAddressConstAMDX,
+    pub payload_stride: u64,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDispatchIndirectCommand.html>
@@ -4669,6 +4849,58 @@ impl Default for EventCreateInfo {
             s_type: StructureType::EVENT_CREATE_INFO,
             next: ptr::null(),
             flags: EventCreateFlags::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExecutionGraphPipelineCreateInfoAMDX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExecutionGraphPipelineCreateInfoAMDX {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: PipelineCreateFlags,
+    pub stage_count: u32,
+    pub stages: *const PipelineShaderStageCreateInfo,
+    pub library_info: *const PipelineLibraryCreateInfoKHR,
+    pub layout: PipelineLayout,
+    pub base_pipeline_handle: Pipeline,
+    pub base_pipeline_index: i32,
+}
+
+impl Default for ExecutionGraphPipelineCreateInfoAMDX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX,
+            next: ptr::null(),
+            flags: PipelineCreateFlags::default(),
+            stage_count: u32::default(),
+            stages: ptr::null(),
+            library_info: ptr::null(),
+            layout: PipelineLayout::default(),
+            base_pipeline_handle: Pipeline::default(),
+            base_pipeline_index: i32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkExecutionGraphPipelineScratchSizeAMDX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ExecutionGraphPipelineScratchSizeAMDX {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub size: DeviceSize,
+}
+
+impl Default for ExecutionGraphPipelineScratchSizeAMDX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX,
+            next: ptr::null_mut(),
+            size: DeviceSize::default(),
         }
     }
 }
@@ -5855,7 +6087,7 @@ impl Default for GraphicsPipelineCreateInfo {
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GraphicsPipelineLibraryCreateInfoEXT {
     pub s_type: StructureType,
-    pub next: *mut c_void,
+    pub next: *const c_void,
     pub flags: GraphicsPipelineLibraryFlagsEXT,
 }
 
@@ -5864,7 +6096,7 @@ impl Default for GraphicsPipelineLibraryCreateInfoEXT {
     fn default() -> Self {
         Self {
             s_type: StructureType::GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT,
-            next: ptr::null_mut(),
+            next: ptr::null(),
             flags: GraphicsPipelineLibraryFlagsEXT::default(),
         }
     }
@@ -5972,6 +6204,54 @@ impl Default for HeadlessSurfaceCreateInfoEXT {
             s_type: StructureType::HEADLESS_SURFACE_CREATE_INFO_EXT,
             next: ptr::null(),
             flags: HeadlessSurfaceCreateFlagsEXT::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkHostImageCopyDevicePerformanceQueryEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct HostImageCopyDevicePerformanceQueryEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub optimal_device_access: Bool32,
+    pub identical_memory_layout: Bool32,
+}
+
+impl Default for HostImageCopyDevicePerformanceQueryEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT,
+            next: ptr::null_mut(),
+            optimal_device_access: Bool32::default(),
+            identical_memory_layout: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkHostImageLayoutTransitionInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct HostImageLayoutTransitionInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub image: Image,
+    pub old_layout: ImageLayout,
+    pub new_layout: ImageLayout,
+    pub subresource_range: ImageSubresourceRange,
+}
+
+impl Default for HostImageLayoutTransitionInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT,
+            next: ptr::null(),
+            image: Image::default(),
+            old_layout: ImageLayout::default(),
+            new_layout: ImageLayout::default(),
+            subresource_range: ImageSubresourceRange::default(),
         }
     }
 }
@@ -6580,20 +6860,20 @@ pub struct ImageSubresource {
     pub array_layer: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageSubresource2EXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageSubresource2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct ImageSubresource2EXT {
+pub struct ImageSubresource2KHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub image_subresource: ImageSubresource,
 }
 
-impl Default for ImageSubresource2EXT {
+impl Default for ImageSubresource2KHR {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::IMAGE_SUBRESOURCE_2_EXT,
+            s_type: StructureType::IMAGE_SUBRESOURCE_2_KHR,
             next: ptr::null_mut(),
             image_subresource: ImageSubresource::default(),
         }
@@ -6637,6 +6917,36 @@ impl Default for ImageSwapchainCreateInfoKHR {
             s_type: StructureType::IMAGE_SWAPCHAIN_CREATE_INFO_KHR,
             next: ptr::null(),
             swapchain: SwapchainKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageToMemoryCopyEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImageToMemoryCopyEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub host_pointer: *mut c_void,
+    pub memory_row_length: u32,
+    pub memory_image_height: u32,
+    pub image_subresource: ImageSubresourceLayers,
+    pub image_offset: Offset3D,
+    pub image_extent: Extent3D,
+}
+
+impl Default for ImageToMemoryCopyEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_TO_MEMORY_COPY_EXT,
+            next: ptr::null(),
+            host_pointer: ptr::null_mut(),
+            memory_row_length: u32::default(),
+            memory_image_height: u32::default(),
+            image_subresource: ImageSubresourceLayers::default(),
+            image_offset: Offset3D::default(),
+            image_extent: Extent3D::default(),
         }
     }
 }
@@ -7925,6 +8235,36 @@ impl Default for MemorySciBufPropertiesNV {
             s_type: StructureType::MEMORY_SCI_BUF_PROPERTIES_NV,
             next: ptr::null(),
             memory_type_bits: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMemoryToImageCopyEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryToImageCopyEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub host_pointer: *const c_void,
+    pub memory_row_length: u32,
+    pub memory_image_height: u32,
+    pub image_subresource: ImageSubresourceLayers,
+    pub image_offset: Offset3D,
+    pub image_extent: Extent3D,
+}
+
+impl Default for MemoryToImageCopyEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_TO_IMAGE_COPY_EXT,
+            next: ptr::null(),
+            host_pointer: ptr::null(),
+            memory_row_length: u32::default(),
+            memory_image_height: u32::default(),
+            image_subresource: ImageSubresourceLayers::default(),
+            image_offset: Offset3D::default(),
+            image_extent: Extent3D::default(),
         }
     }
 }
@@ -9785,6 +10125,30 @@ impl Default for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub device_generated_compute: Bool32,
+    pub device_generated_compute_pipelines: Bool32,
+    pub device_generated_compute_capture_replay: Bool32,
+}
+
+impl Default for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_COMPUTE_FEATURES_NV,
+            next: ptr::null_mut(),
+            device_generated_compute: Bool32::default(),
+            device_generated_compute_pipelines: Bool32::default(),
+            device_generated_compute_capture_replay: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11001,6 +11365,56 @@ impl Default for PhysicalDeviceGroupProperties {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceHostImageCopyFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceHostImageCopyFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub host_image_copy: Bool32,
+}
+
+impl Default for PhysicalDeviceHostImageCopyFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT,
+            next: ptr::null_mut(),
+            host_image_copy: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceHostImageCopyPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceHostImageCopyPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub copy_src_layout_count: u32,
+    pub copy_src_layouts: *mut ImageLayout,
+    pub copy_dst_layout_count: u32,
+    pub copy_dst_layouts: *mut ImageLayout,
+    pub optimal_tiling_layout_uuid: ByteArray<UUID_SIZE>,
+    pub identical_memory_type_requirements: Bool32,
+}
+
+impl Default for PhysicalDeviceHostImageCopyPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            copy_src_layout_count: u32::default(),
+            copy_src_layouts: ptr::null_mut(),
+            copy_dst_layout_count: u32::default(),
+            copy_dst_layouts: ptr::null_mut(),
+            optimal_tiling_layout_uuid: ByteArray::default(),
+            identical_memory_type_requirements: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceHostQueryResetFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11685,6 +12099,56 @@ impl Default for PhysicalDeviceMaintenance4Properties {
             s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES,
             next: ptr::null_mut(),
             max_buffer_size: DeviceSize::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMaintenance5FeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMaintenance5FeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub maintenance5: Bool32,
+}
+
+impl Default for PhysicalDeviceMaintenance5FeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES_KHR,
+            next: ptr::null_mut(),
+            maintenance5: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMaintenance5PropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMaintenance5PropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub early_fragment_multisample_coverage_after_sample_counting: Bool32,
+    pub early_fragment_sample_mask_test_before_sample_counting: Bool32,
+    pub depth_stencil_swizzle_one_support: Bool32,
+    pub polygon_mode_point_size: Bool32,
+    pub non_strict_single_pixel_wide_lines_use_parallelogram: Bool32,
+    pub non_strict_wide_lines_use_parallelogram: Bool32,
+}
+
+impl Default for PhysicalDeviceMaintenance5PropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            early_fragment_multisample_coverage_after_sample_counting: Bool32::default(),
+            early_fragment_sample_mask_test_before_sample_counting: Bool32::default(),
+            depth_stencil_swizzle_one_support: Bool32::default(),
+            polygon_mode_point_size: Bool32::default(),
+            non_strict_single_pixel_wide_lines_use_parallelogram: Bool32::default(),
+            non_strict_wide_lines_use_parallelogram: Bool32::default(),
         }
     }
 }
@@ -13638,6 +14102,54 @@ impl Default for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderEnqueueFeaturesAMDX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderEnqueueFeaturesAMDX {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_enqueue: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderEnqueueFeaturesAMDX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_ENQUEUE_FEATURES_AMDX,
+            next: ptr::null_mut(),
+            shader_enqueue: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderEnqueuePropertiesAMDX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderEnqueuePropertiesAMDX {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_execution_graph_depth: u32,
+    pub max_execution_graph_shader_output_nodes: u32,
+    pub max_execution_graph_shader_payload_size: u32,
+    pub max_execution_graph_shader_payload_count: u32,
+    pub execution_graph_dispatch_address_alignment: u32,
+}
+
+impl Default for PhysicalDeviceShaderEnqueuePropertiesAMDX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX,
+            next: ptr::null_mut(),
+            max_execution_graph_depth: u32::default(),
+            max_execution_graph_shader_output_nodes: u32::default(),
+            max_execution_graph_shader_payload_size: u32::default(),
+            max_execution_graph_shader_payload_count: u32::default(),
+            execution_graph_dispatch_address_alignment: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderFloat16Int8Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15380,6 +15892,26 @@ impl Default for PipelineCoverageToColorStateCreateInfoNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineCreateFlags2CreateInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineCreateFlags2CreateInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: PipelineCreateFlags2KHR,
+}
+
+impl Default for PipelineCreateFlags2CreateInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_CREATE_FLAGS_2_CREATE_INFO_KHR,
+            next: ptr::null(),
+            flags: PipelineCreateFlags2KHR::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineCreationFeedback.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -15644,6 +16176,28 @@ impl Default for PipelineFragmentShadingRateStateCreateInfoKHR {
             next: ptr::null(),
             fragment_size: Extent2D::default(),
             combiner_ops: [FragmentShadingRateCombinerOpKHR::default(); 2],
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineIndirectDeviceAddressInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineIndirectDeviceAddressInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub pipeline_bind_point: PipelineBindPoint,
+    pub pipeline: Pipeline,
+}
+
+impl Default for PipelineIndirectDeviceAddressInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV,
+            next: ptr::null(),
+            pipeline_bind_point: PipelineBindPoint::default(),
+            pipeline: Pipeline::default(),
         }
     }
 }
@@ -16110,6 +16664,28 @@ impl Default for PipelineShaderStageModuleIdentifierCreateInfoEXT {
             next: ptr::null(),
             identifier_size: u32::default(),
             identifier: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineShaderStageNodeCreateInfoAMDX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineShaderStageNodeCreateInfoAMDX {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub name: *const c_char,
+    pub index: u32,
+}
+
+impl Default for PipelineShaderStageNodeCreateInfoAMDX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX,
+            next: ptr::null(),
+            name: ptr::null(),
+            index: u32::default(),
         }
     }
 }
@@ -17310,6 +17886,34 @@ impl Default for RenderPassTransformBeginInfoQCOM {
             s_type: StructureType::RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM,
             next: ptr::null_mut(),
             transform: SurfaceTransformFlagsKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRenderingAreaInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RenderingAreaInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub view_mask: u32,
+    pub color_attachment_count: u32,
+    pub color_attachment_formats: *const Format,
+    pub depth_attachment_format: Format,
+    pub stencil_attachment_format: Format,
+}
+
+impl Default for RenderingAreaInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RENDERING_AREA_INFO_KHR,
+            next: ptr::null(),
+            view_mask: u32::default(),
+            color_attachment_count: u32::default(),
+            color_attachment_formats: ptr::null(),
+            depth_attachment_format: Format::default(),
+            stencil_attachment_format: Format::default(),
         }
     }
 }
@@ -18786,6 +19390,26 @@ impl Default for SubpassShadingPipelineCreateInfoHUAWEI {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSubresourceHostMemcpySizeEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SubresourceHostMemcpySizeEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub size: DeviceSize,
+}
+
+impl Default for SubresourceHostMemcpySizeEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SUBRESOURCE_HOST_MEMCPY_SIZE_EXT,
+            next: ptr::null_mut(),
+            size: DeviceSize::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSubresourceLayout.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -18797,20 +19421,20 @@ pub struct SubresourceLayout {
     pub depth_pitch: DeviceSize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSubresourceLayout2EXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSubresourceLayout2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct SubresourceLayout2EXT {
+pub struct SubresourceLayout2KHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub subresource_layout: SubresourceLayout,
 }
 
-impl Default for SubresourceLayout2EXT {
+impl Default for SubresourceLayout2KHR {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::SUBRESOURCE_LAYOUT_2_EXT,
+            s_type: StructureType::SUBRESOURCE_LAYOUT_2_KHR,
             next: ptr::null_mut(),
             subresource_layout: SubresourceLayout::default(),
         }
@@ -20028,6 +20652,8 @@ pub type ImageResolve2KHR = ImageResolve2;
 pub type ImageSparseMemoryRequirementsInfo2KHR = ImageSparseMemoryRequirementsInfo2;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageStencilUsageCreateInfoEXT.html>
 pub type ImageStencilUsageCreateInfoEXT = ImageStencilUsageCreateInfo;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageSubresource2EXT.html>
+pub type ImageSubresource2EXT = ImageSubresource2KHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageViewUsageCreateInfoKHR.html>
 pub type ImageViewUsageCreateInfoKHR = ImageViewUsageCreateInfo;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkInputAttachmentAspectReferenceKHR.html>
@@ -20271,6 +20897,8 @@ pub type SubpassDescription2KHR = SubpassDescription2;
 pub type SubpassDescriptionDepthStencilResolveKHR = SubpassDescriptionDepthStencilResolve;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSubpassEndInfoKHR.html>
 pub type SubpassEndInfoKHR = SubpassEndInfo;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSubresourceLayout2EXT.html>
+pub type SubresourceLayout2EXT = SubresourceLayout2KHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTimelineSemaphoreSubmitInfoKHR.html>
 pub type TimelineSemaphoreSubmitInfoKHR = TimelineSemaphoreSubmitInfo;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTransformMatrixNV.html>
