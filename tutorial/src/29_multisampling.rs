@@ -14,7 +14,7 @@ use std::time::Instant;
 
 use anyhow::{anyhow, Result};
 use log::*;
-use cgmath::{vec2, vec3};
+use cgmath::{Deg, vec2, vec3, point3};
 use thiserror::Error;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
@@ -41,6 +41,10 @@ const PORTABILITY_MACOS_VERSION: Version = Version::new(1, 3, 216);
 
 /// The maximum number of frames that can be processed concurrently.
 const MAX_FRAMES_IN_FLIGHT: usize = 2;
+
+type Vec2 = cgmath::Vector2<f32>;
+type Vec3 = cgmath::Vector3<f32>;
+type Mat4 = cgmath::Matrix4<f32>;
 
 #[rustfmt::skip]
 fn main() -> Result<()> {
@@ -209,26 +213,25 @@ impl App {
 
         let time = self.start.elapsed().as_secs_f32();
 
-        let model = glm::rotate(
-            &glm::identity(),
-            time * glm::radians(&glm::vec1(90.0))[0],
-            &vec3::<f32>(0.0, 0.0, 1.0),
+        let model = Mat4::from_axis_angle(
+            vec3::<f32>(0.0, 0.0, 1.0),
+            Deg(90.0) * time
         );
 
-        let view = glm::look_at(
-            &vec3::<f32>(2.0, 2.0, 2.0),
-            &vec3::<f32>(0.0, 0.0, 0.0),
-            &vec3::<f32>(0.0, 0.0, 1.0),
+        let view = Mat4::look_at_rh(
+            point3::<f32>(2.0, 2.0, 2.0),
+            point3::<f32>(0.0, 0.0, 0.0),
+            vec3::<f32>(0.0, 0.0, 1.0),
         );
 
-        let mut proj = glm::perspective_rh_zo(
+        let mut proj = cgmath::perspective(
+            Deg(45.0),
             self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
-            glm::radians(&glm::vec1(45.0))[0],
             0.1,
             10.0,
         );
 
-        proj[(1, 1)] *= -1.0;
+        proj[1][1] *= -1.0;
 
         let ubo = UniformBufferObject { model, view, proj };
 

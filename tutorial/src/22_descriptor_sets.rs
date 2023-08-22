@@ -218,7 +218,7 @@ impl App {
 
         let model = Mat4::from_axis_angle(
             vec3::<f32>(0.0, 0.0, 1.0),
-            Deg(90.0)
+            Deg(90.0) * time
         );
 
         let view = Mat4::look_at_rh(
@@ -234,7 +234,7 @@ impl App {
             10.0,
         );
 
-        proj[(1, 1)] *= -1.0;
+        proj[1][1] *= -1.0;
 
         let ubo = UniformBufferObject { model, view, proj };
 
