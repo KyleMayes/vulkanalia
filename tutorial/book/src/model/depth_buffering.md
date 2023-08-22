@@ -71,7 +71,7 @@ void main() {
 Lastly, update the `vertices` container to include Z coordinates:
 
 ```rust,noplaypen
-static ref VERTICES: [Vertex; 4] = [
+static VERTICES: [Vertex; 4] = [
     Vertex::new(vec3::<f32>(-0.5, -0.5, 0.0),vec3::<f32>(1.0, 0.0, 0.0),vec2::<f32>(1.0, 0.0)),
     Vertex::new(vec3::<f32>(0.5, -0.5, 0.0), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
     Vertex::new(vec3::<f32>(0.5, 0.5, 0.0), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),

@@ -4,18 +4,15 @@ use std::mem;
 
 use anyhow::Result;
 use examples::{App, AppData, Example};
-use lazy_static::lazy_static;
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::vk;
 
-lazy_static! {
-    /// The triangle vertices.
-    static ref VERTICES: Vec<Vertex> = vec![
-        Vertex { pos: cgmath::vec2(0.0, -0.5), color: cgmath::vec3(1.0, 0.0, 0.0) },
-        Vertex { pos: cgmath::vec2(0.5, 0.5), color: cgmath::vec3(0.0, 1.0, 0.0) },
-        Vertex { pos: cgmath::vec2(-0.5, 0.5), color: cgmath::vec3(0.0, 0.0, 1.0) },
-    ];
-}
+/// The triangle vertices.
+static VERTICES: [Vertex; 3] = [
+    Vertex { pos: cgmath::vec2(0.0, -0.5), color: cgmath::vec3(1.0, 0.0, 0.0) },
+    Vertex { pos: cgmath::vec2(0.5, 0.5), color: cgmath::vec3(0.0, 1.0, 0.0) },
+    Vertex { pos: cgmath::vec2(-0.5, 0.5), color: cgmath::vec3(0.0, 0.0, 1.0) },
+];
 
 fn main() -> Result<()> {
     unsafe { App::new("Triangle", TriangleExample::default())?.run() }
