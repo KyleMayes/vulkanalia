@@ -224,7 +224,7 @@ impl App {
 
         let model = Mat4::from_axis_angle(
             vec3::<f32>(0.0, 0.0, 1.0),
-            Deg(0.0)
+            Deg(90.0) * time
         );
 
         let model_bytes = &*slice_from_raw_parts(
@@ -306,14 +306,19 @@ impl App {
             vec3::<f32>(0.0, 0.0, 1.0),
         );
 
-        let mut proj = cgmath::perspective(
+        let correction = Mat4::new(
+            1.0,  0.0,       0.0,       0.0,
+            0.0, -1.0,       0.0,       0.0,
+            0.0,  0.0, 1.0 / 2.0, 1.0 / 2.0,
+            0.0,  0.0,       0.0,       1.0,
+        );
+
+        let proj = correction * cgmath::perspective(
             Deg(45.0),
             self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
             0.1,
             10.0,
         );
-
-        proj[1][1] *= -1.0;
 
         let ubo = UniformBufferObject { view, proj };
 
