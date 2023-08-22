@@ -59,6 +59,7 @@ pub struct DeviceCommands {
     pub cmd_bind_descriptor_buffers_ext: PFN_vkCmdBindDescriptorBuffersEXT,
     pub cmd_bind_descriptor_sets: PFN_vkCmdBindDescriptorSets,
     pub cmd_bind_index_buffer: PFN_vkCmdBindIndexBuffer,
+    pub cmd_bind_index_buffer2_khr: PFN_vkCmdBindIndexBuffer2KHR,
     pub cmd_bind_invocation_mask_huawei: PFN_vkCmdBindInvocationMaskHUAWEI,
     pub cmd_bind_pipeline: PFN_vkCmdBindPipeline,
     pub cmd_bind_pipeline_shader_group_nv: PFN_vkCmdBindPipelineShaderGroupNV,
@@ -112,6 +113,9 @@ pub struct DeviceCommands {
     pub cmd_dispatch: PFN_vkCmdDispatch,
     pub cmd_dispatch_base: PFN_vkCmdDispatchBase,
     pub cmd_dispatch_base_khr: PFN_vkCmdDispatchBaseKHR,
+    pub cmd_dispatch_graph_amdx: PFN_vkCmdDispatchGraphAMDX,
+    pub cmd_dispatch_graph_indirect_amdx: PFN_vkCmdDispatchGraphIndirectAMDX,
+    pub cmd_dispatch_graph_indirect_count_amdx: PFN_vkCmdDispatchGraphIndirectCountAMDX,
     pub cmd_dispatch_indirect: PFN_vkCmdDispatchIndirect,
     pub cmd_draw: PFN_vkCmdDraw,
     pub cmd_draw_cluster_huawei: PFN_vkCmdDrawClusterHUAWEI,
@@ -146,6 +150,7 @@ pub struct DeviceCommands {
     pub cmd_execute_commands: PFN_vkCmdExecuteCommands,
     pub cmd_execute_generated_commands_nv: PFN_vkCmdExecuteGeneratedCommandsNV,
     pub cmd_fill_buffer: PFN_vkCmdFillBuffer,
+    pub cmd_initialize_graph_scratch_memory_amdx: PFN_vkCmdInitializeGraphScratchMemoryAMDX,
     pub cmd_next_subpass: PFN_vkCmdNextSubpass,
     pub cmd_next_subpass2: PFN_vkCmdNextSubpass2,
     pub cmd_next_subpass2_khr: PFN_vkCmdNextSubpass2KHR,
@@ -270,6 +275,7 @@ pub struct DeviceCommands {
     pub cmd_trace_rays_khr: PFN_vkCmdTraceRaysKHR,
     pub cmd_trace_rays_nv: PFN_vkCmdTraceRaysNV,
     pub cmd_update_buffer: PFN_vkCmdUpdateBuffer,
+    pub cmd_update_pipeline_indirect_buffer_nv: PFN_vkCmdUpdatePipelineIndirectBufferNV,
     pub cmd_wait_events: PFN_vkCmdWaitEvents,
     pub cmd_wait_events2: PFN_vkCmdWaitEvents2,
     pub cmd_wait_events2_khr: PFN_vkCmdWaitEvents2KHR,
@@ -286,7 +292,10 @@ pub struct DeviceCommands {
     pub compile_deferred_nv: PFN_vkCompileDeferredNV,
     pub copy_acceleration_structure_khr: PFN_vkCopyAccelerationStructureKHR,
     pub copy_acceleration_structure_to_memory_khr: PFN_vkCopyAccelerationStructureToMemoryKHR,
+    pub copy_image_to_image_ext: PFN_vkCopyImageToImageEXT,
+    pub copy_image_to_memory_ext: PFN_vkCopyImageToMemoryEXT,
     pub copy_memory_to_acceleration_structure_khr: PFN_vkCopyMemoryToAccelerationStructureKHR,
+    pub copy_memory_to_image_ext: PFN_vkCopyMemoryToImageEXT,
     pub copy_memory_to_micromap_ext: PFN_vkCopyMemoryToMicromapEXT,
     pub copy_micromap_ext: PFN_vkCopyMicromapEXT,
     pub copy_micromap_to_memory_ext: PFN_vkCopyMicromapToMemoryEXT,
@@ -305,6 +314,7 @@ pub struct DeviceCommands {
     pub create_descriptor_update_template: PFN_vkCreateDescriptorUpdateTemplate,
     pub create_descriptor_update_template_khr: PFN_vkCreateDescriptorUpdateTemplateKHR,
     pub create_event: PFN_vkCreateEvent,
+    pub create_execution_graph_pipelines_amdx: PFN_vkCreateExecutionGraphPipelinesAMDX,
     pub create_fence: PFN_vkCreateFence,
     pub create_framebuffer: PFN_vkCreateFramebuffer,
     pub create_graphics_pipelines: PFN_vkCreateGraphicsPipelines,
@@ -431,6 +441,7 @@ pub struct DeviceCommands {
     pub get_device_image_sparse_memory_requirements: PFN_vkGetDeviceImageSparseMemoryRequirements,
     pub get_device_image_sparse_memory_requirements_khr:
         PFN_vkGetDeviceImageSparseMemoryRequirementsKHR,
+    pub get_device_image_subresource_layout_khr: PFN_vkGetDeviceImageSubresourceLayoutKHR,
     pub get_device_memory_commitment: PFN_vkGetDeviceMemoryCommitment,
     pub get_device_memory_opaque_capture_address: PFN_vkGetDeviceMemoryOpaqueCaptureAddress,
     pub get_device_memory_opaque_capture_address_khr: PFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR,
@@ -441,6 +452,9 @@ pub struct DeviceCommands {
         PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI,
     pub get_dynamic_rendering_tile_properties_qcom: PFN_vkGetDynamicRenderingTilePropertiesQCOM,
     pub get_event_status: PFN_vkGetEventStatus,
+    pub get_execution_graph_pipeline_node_index_amdx: PFN_vkGetExecutionGraphPipelineNodeIndexAMDX,
+    pub get_execution_graph_pipeline_scratch_size_amdx:
+        PFN_vkGetExecutionGraphPipelineScratchSizeAMDX,
     pub get_fence_fd_khr: PFN_vkGetFenceFdKHR,
     pub get_fence_sci_sync_fence_nv: PFN_vkGetFenceSciSyncFenceNV,
     pub get_fence_sci_sync_obj_nv: PFN_vkGetFenceSciSyncObjNV,
@@ -459,6 +473,7 @@ pub struct DeviceCommands {
     pub get_image_sparse_memory_requirements2_khr: PFN_vkGetImageSparseMemoryRequirements2KHR,
     pub get_image_subresource_layout: PFN_vkGetImageSubresourceLayout,
     pub get_image_subresource_layout2_ext: PFN_vkGetImageSubresourceLayout2EXT,
+    pub get_image_subresource_layout2_khr: PFN_vkGetImageSubresourceLayout2KHR,
     pub get_image_view_address_nvx: PFN_vkGetImageViewAddressNVX,
     pub get_image_view_handle_nvx: PFN_vkGetImageViewHandleNVX,
     pub get_image_view_opaque_capture_descriptor_data_ext:
@@ -508,6 +523,8 @@ pub struct DeviceCommands {
         PFN_vkGetPipelineExecutableInternalRepresentationsKHR,
     pub get_pipeline_executable_properties_khr: PFN_vkGetPipelineExecutablePropertiesKHR,
     pub get_pipeline_executable_statistics_khr: PFN_vkGetPipelineExecutableStatisticsKHR,
+    pub get_pipeline_indirect_device_address_nv: PFN_vkGetPipelineIndirectDeviceAddressNV,
+    pub get_pipeline_indirect_memory_requirements_nv: PFN_vkGetPipelineIndirectMemoryRequirementsNV,
     pub get_pipeline_properties_ext: PFN_vkGetPipelinePropertiesEXT,
     pub get_private_data: PFN_vkGetPrivateData,
     pub get_private_data_ext: PFN_vkGetPrivateDataEXT,
@@ -521,6 +538,7 @@ pub struct DeviceCommands {
     pub get_ray_tracing_shader_group_stack_size_khr: PFN_vkGetRayTracingShaderGroupStackSizeKHR,
     pub get_refresh_cycle_duration_google: PFN_vkGetRefreshCycleDurationGOOGLE,
     pub get_render_area_granularity: PFN_vkGetRenderAreaGranularity,
+    pub get_rendering_area_granularity_khr: PFN_vkGetRenderingAreaGranularityKHR,
     pub get_sampler_opaque_capture_descriptor_data_ext:
         PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT,
     pub get_screen_buffer_properties_qnx: PFN_vkGetScreenBufferPropertiesQNX,
@@ -585,6 +603,7 @@ pub struct DeviceCommands {
     pub set_private_data_ext: PFN_vkSetPrivateDataEXT,
     pub signal_semaphore: PFN_vkSignalSemaphore,
     pub signal_semaphore_khr: PFN_vkSignalSemaphoreKHR,
+    pub transition_image_layout_ext: PFN_vkTransitionImageLayoutEXT,
     pub trim_command_pool: PFN_vkTrimCommandPool,
     pub trim_command_pool_khr: PFN_vkTrimCommandPoolKHR,
     pub uninitialize_performance_api_intel: PFN_vkUninitializePerformanceApiINTEL,
@@ -1119,6 +1138,23 @@ impl DeviceCommands {
                         _index_type: IndexType,
                     ) {
                         panic!("could not load vkCmdBindIndexBuffer")
+                    }
+                    fallback
+                }
+            },
+            cmd_bind_index_buffer2_khr: {
+                let value = loader(b"vkCmdBindIndexBuffer2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _buffer: Buffer,
+                        _offset: DeviceSize,
+                        _size: DeviceSize,
+                        _index_type: IndexType,
+                    ) {
+                        panic!("could not load vkCmdBindIndexBuffer2KHR")
                     }
                     fallback
                 }
@@ -1933,6 +1969,51 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_dispatch_graph_amdx: {
+                let value = loader(b"vkCmdDispatchGraphAMDX\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _scratch: DeviceAddress,
+                        _count_info: *const DispatchGraphCountInfoAMDX,
+                    ) {
+                        panic!("could not load vkCmdDispatchGraphAMDX")
+                    }
+                    fallback
+                }
+            },
+            cmd_dispatch_graph_indirect_amdx: {
+                let value = loader(b"vkCmdDispatchGraphIndirectAMDX\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _scratch: DeviceAddress,
+                        _count_info: *const DispatchGraphCountInfoAMDX,
+                    ) {
+                        panic!("could not load vkCmdDispatchGraphIndirectAMDX")
+                    }
+                    fallback
+                }
+            },
+            cmd_dispatch_graph_indirect_count_amdx: {
+                let value = loader(b"vkCmdDispatchGraphIndirectCountAMDX\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _scratch: DeviceAddress,
+                        _count_info: DeviceAddress,
+                    ) {
+                        panic!("could not load vkCmdDispatchGraphIndirectCountAMDX")
+                    }
+                    fallback
+                }
+            },
             cmd_dispatch_indirect: {
                 let value = loader(b"vkCmdDispatchIndirect\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2484,6 +2565,20 @@ impl DeviceCommands {
                         _data: u32,
                     ) {
                         panic!("could not load vkCmdFillBuffer")
+                    }
+                    fallback
+                }
+            },
+            cmd_initialize_graph_scratch_memory_amdx: {
+                let value = loader(b"vkCmdInitializeGraphScratchMemoryAMDX\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _scratch: DeviceAddress,
+                    ) {
+                        panic!("could not load vkCmdInitializeGraphScratchMemoryAMDX")
                     }
                     fallback
                 }
@@ -4324,6 +4419,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_update_pipeline_indirect_buffer_nv: {
+                let value = loader(b"vkCmdUpdatePipelineIndirectBufferNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _pipeline_bind_point: PipelineBindPoint,
+                        _pipeline: Pipeline,
+                    ) {
+                        panic!("could not load vkCmdUpdatePipelineIndirectBufferNV")
+                    }
+                    fallback
+                }
+            },
             cmd_wait_events: {
                 let value = loader(b"vkCmdWaitEvents\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -4568,6 +4678,34 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            copy_image_to_image_ext: {
+                let value = loader(b"vkCopyImageToImageEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _copy_image_to_image_info: *const CopyImageToImageInfoEXT,
+                    ) -> Result {
+                        panic!("could not load vkCopyImageToImageEXT")
+                    }
+                    fallback
+                }
+            },
+            copy_image_to_memory_ext: {
+                let value = loader(b"vkCopyImageToMemoryEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _copy_image_to_memory_info: *const CopyImageToMemoryInfoEXT,
+                    ) -> Result {
+                        panic!("could not load vkCopyImageToMemoryEXT")
+                    }
+                    fallback
+                }
+            },
             copy_memory_to_acceleration_structure_khr: {
                 let value = loader(b"vkCopyMemoryToAccelerationStructureKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -4579,6 +4717,20 @@ impl DeviceCommands {
                         _info: *const CopyMemoryToAccelerationStructureInfoKHR,
                     ) -> Result {
                         panic!("could not load vkCopyMemoryToAccelerationStructureKHR")
+                    }
+                    fallback
+                }
+            },
+            copy_memory_to_image_ext: {
+                let value = loader(b"vkCopyMemoryToImageEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _copy_memory_to_image_info: *const CopyMemoryToImageInfoEXT,
+                    ) -> Result {
+                        panic!("could not load vkCopyMemoryToImageEXT")
                     }
                     fallback
                 }
@@ -4865,6 +5017,24 @@ impl DeviceCommands {
                         _event: *mut Event,
                     ) -> Result {
                         panic!("could not load vkCreateEvent")
+                    }
+                    fallback
+                }
+            },
+            create_execution_graph_pipelines_amdx: {
+                let value = loader(b"vkCreateExecutionGraphPipelinesAMDX\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _pipeline_cache: PipelineCache,
+                        _create_info_count: u32,
+                        _create_infos: *const ExecutionGraphPipelineCreateInfoAMDX,
+                        _allocator: *const AllocationCallbacks,
+                        _pipelines: *mut Pipeline,
+                    ) -> Result {
+                        panic!("could not load vkCreateExecutionGraphPipelinesAMDX")
                     }
                     fallback
                 }
@@ -6700,6 +6870,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_device_image_subresource_layout_khr: {
+                let value = loader(b"vkGetDeviceImageSubresourceLayoutKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const DeviceImageSubresourceInfoKHR,
+                        _layout: *mut SubresourceLayout2KHR,
+                    ) {
+                        panic!("could not load vkGetDeviceImageSubresourceLayoutKHR")
+                    }
+                    fallback
+                }
+            },
             get_device_memory_commitment: {
                 let value = loader(b"vkGetDeviceMemoryCommitment\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -6834,6 +7019,45 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(_device: Device, _event: Event) -> Result {
                         panic!("could not load vkGetEventStatus")
+                    }
+                    fallback
+                }
+            },
+            get_execution_graph_pipeline_node_index_amdx: {
+                let value = loader(
+                    b"vkGetExecutionGraphPipelineNodeIndexAMDX\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _execution_graph: Pipeline,
+                        _node_info: *const PipelineShaderStageNodeCreateInfoAMDX,
+                        _node_index: *mut u32,
+                    ) -> Result {
+                        panic!("could not load vkGetExecutionGraphPipelineNodeIndexAMDX")
+                    }
+                    fallback
+                }
+            },
+            get_execution_graph_pipeline_scratch_size_amdx: {
+                let value = loader(
+                    b"vkGetExecutionGraphPipelineScratchSizeAMDX\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _execution_graph: Pipeline,
+                        _size_info: *mut ExecutionGraphPipelineScratchSizeAMDX,
+                    ) -> Result {
+                        panic!("could not load vkGetExecutionGraphPipelineScratchSizeAMDX")
                     }
                     fallback
                 }
@@ -7099,10 +7323,26 @@ impl DeviceCommands {
                     unsafe extern "system" fn fallback(
                         _device: Device,
                         _image: Image,
-                        _subresource: *const ImageSubresource2EXT,
-                        _layout: *mut SubresourceLayout2EXT,
+                        _subresource: *const ImageSubresource2KHR,
+                        _layout: *mut SubresourceLayout2KHR,
                     ) {
                         panic!("could not load vkGetImageSubresourceLayout2EXT")
+                    }
+                    fallback
+                }
+            },
+            get_image_subresource_layout2_khr: {
+                let value = loader(b"vkGetImageSubresourceLayout2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _image: Image,
+                        _subresource: *const ImageSubresource2KHR,
+                        _layout: *mut SubresourceLayout2KHR,
+                    ) {
+                        panic!("could not load vkGetImageSubresourceLayout2KHR")
                     }
                     fallback
                 }
@@ -7716,6 +7956,39 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_pipeline_indirect_device_address_nv: {
+                let value = loader(b"vkGetPipelineIndirectDeviceAddressNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const PipelineIndirectDeviceAddressInfoNV,
+                    ) -> DeviceAddress {
+                        panic!("could not load vkGetPipelineIndirectDeviceAddressNV")
+                    }
+                    fallback
+                }
+            },
+            get_pipeline_indirect_memory_requirements_nv: {
+                let value = loader(
+                    b"vkGetPipelineIndirectMemoryRequirementsNV\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const ComputePipelineCreateInfo,
+                        _memory_requirements: *mut MemoryRequirements2,
+                    ) {
+                        panic!("could not load vkGetPipelineIndirectMemoryRequirementsNV")
+                    }
+                    fallback
+                }
+            },
             get_pipeline_properties_ext: {
                 let value = loader(b"vkGetPipelinePropertiesEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -7915,6 +8188,21 @@ impl DeviceCommands {
                         _granularity: *mut Extent2D,
                     ) {
                         panic!("could not load vkGetRenderAreaGranularity")
+                    }
+                    fallback
+                }
+            },
+            get_rendering_area_granularity_khr: {
+                let value = loader(b"vkGetRenderingAreaGranularityKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _rendering_area_info: *const RenderingAreaInfoKHR,
+                        _granularity: *mut Extent2D,
+                    ) {
+                        panic!("could not load vkGetRenderingAreaGranularityKHR")
                     }
                     fallback
                 }
@@ -8838,6 +9126,21 @@ impl DeviceCommands {
                         _signal_info: *const SemaphoreSignalInfo,
                     ) -> Result {
                         panic!("could not load vkSignalSemaphoreKHR")
+                    }
+                    fallback
+                }
+            },
+            transition_image_layout_ext: {
+                let value = loader(b"vkTransitionImageLayoutEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _transition_count: u32,
+                        _transitions: *const HostImageLayoutTransitionInfoEXT,
+                    ) -> Result {
+                        panic!("could not load vkTransitionImageLayoutEXT")
                     }
                     fallback
                 }
