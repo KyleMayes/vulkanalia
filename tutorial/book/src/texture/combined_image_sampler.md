@@ -79,7 +79,7 @@ struct Vertex {
 }
 
 impl Vertex {
-    fn new(pos: Vec2, color: Vec3, tex_coord: Vec2) -> Self {
+    const fn new(pos: Vec2, color: Vec3, tex_coord: Vec2) -> Self {
         Self { pos, color, tex_coord }
     }
 
