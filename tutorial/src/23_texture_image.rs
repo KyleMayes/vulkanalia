@@ -46,10 +46,10 @@ type Mat4 = cgmath::Matrix4<f32>;
 
 #[rustfmt::skip]
 static VERTICES: [Vertex; 4] = [
-    Vertex::new(vec2::<f32>(-0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0)),
-    Vertex::new(vec2::<f32>(0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0)),
-    Vertex::new(vec2::<f32>(0.5, 0.5), vec3::<f32>(0.0, 0.0, 1.0)),
-    Vertex::new(vec2::<f32>(-0.5, 0.5), vec3::<f32>(1.0, 1.0, 1.0)),
+    Vertex::new(vec2(-0.5, -0.5), vec3(1.0, 0.0, 0.0)),
+    Vertex::new(vec2(0.5, -0.5), vec3(0.0, 1.0, 0.0)),
+    Vertex::new(vec2(0.5, 0.5), vec3(0.0, 0.0, 1.0)),
+    Vertex::new(vec2(-0.5, 0.5), vec3(1.0, 1.0, 1.0)),
 ];
 
 const INDICES: &[u16] = &[0, 1, 2, 2, 3, 0];
@@ -216,12 +216,12 @@ impl App {
 
         let time = self.start.elapsed().as_secs_f32();
 
-        let model = Mat4::from_axis_angle(vec3::<f32>(0.0, 0.0, 1.0), Deg(90.0) * time);
+        let model = Mat4::from_axis_angle(vec3(0.0, 0.0, 1.0), Deg(90.0) * time);
 
         let view = Mat4::look_at_rh(
             point3::<f32>(2.0, 2.0, 2.0),
             point3::<f32>(0.0, 0.0, 0.0),
-            vec3::<f32>(0.0, 0.0, 1.0),
+            vec3(0.0, 0.0, 1.0),
         );
 
         let mut proj = cgmath::perspective(

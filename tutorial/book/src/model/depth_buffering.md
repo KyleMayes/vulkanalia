@@ -72,10 +72,10 @@ Lastly, update the `vertices` container to include Z coordinates:
 
 ```rust,noplaypen
 static VERTICES: [Vertex; 4] = [
-    Vertex::new(vec3::<f32>(-0.5, -0.5, 0.0),vec3::<f32>(1.0, 0.0, 0.0),vec2::<f32>(1.0, 0.0)),
-    Vertex::new(vec3::<f32>(0.5, -0.5, 0.0), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
-    Vertex::new(vec3::<f32>(0.5, 0.5, 0.0), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
-    Vertex::new(vec3::<f32>(-0.5, 0.5, 0.0), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
+    Vertex::new(vec3(-0.5, -0.5, 0.0), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec3(0.5, -0.5, 0.0), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec3(0.5, 0.5, 0.0), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec3(-0.5, 0.5, 0.0), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
 ];
 ```
 
@@ -87,14 +87,14 @@ Use Z coordinates of `-0.5` and add the appropriate indices for the extra square
 
 ```rust,noplaypen
 static VERTICES: [Vertex; 8] = [
-    Vertex::new(vec3::<f32>(-0.5, -0.5, 0.0),vec3::<f32>(1.0, 0.0, 0.0),vec2::<f32>(1.0, 0.0)),
-    Vertex::new(vec3::<f32>(0.5, -0.5, 0.0), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
-    Vertex::new(vec3::<f32>(0.5, 0.5, 0.0), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
-    Vertex::new(vec3::<f32>(-0.5, 0.5, 0.0), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
-    Vertex::new(vec3::<f32>(-0.5, -0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0), vec2::<f32>(1.0, 0.0)),
-    Vertex::new(vec3::<f32>(0.5, -0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
-    Vertex::new(vec3::<f32>(0.5, 0.5, -0.5), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
-    Vertex::new(vec3::<f32>(-0.5, 0.5, -0.5), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
+    Vertex::new(vec3(-0.5, -0.5, 0.0), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec3(0.5, -0.5, 0.0), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec3(0.5, 0.5, 0.0), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec3(-0.5, 0.5, 0.0), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
+    Vertex::new(vec3(-0.5, -0.5, -0.5), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec3(0.5, -0.5, -0.5), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec3(0.5, 0.5, -0.5), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec3(-0.5, 0.5, -0.5), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
 ];
 
 const INDICES: &[u16] = &[

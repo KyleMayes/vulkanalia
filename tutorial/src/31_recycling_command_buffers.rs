@@ -222,7 +222,7 @@ impl App {
 
         let time = self.start.elapsed().as_secs_f32();
 
-        let model = Mat4::from_axis_angle(vec3::<f32>(0.0, 0.0, 1.0), Deg(90.0) * time);
+        let model = Mat4::from_axis_angle(vec3(0.0, 0.0, 1.0), Deg(90.0) * time);
 
         let model_bytes = &*slice_from_raw_parts(
             &model as *const Mat4 as *const u8,
@@ -300,7 +300,7 @@ impl App {
         let view = Mat4::look_at_rh(
             point3::<f32>(2.0, 2.0, 2.0),
             point3::<f32>(0.0, 0.0, 0.0),
-            vec3::<f32>(0.0, 0.0, 1.0),
+            vec3(0.0, 0.0, 1.0),
         );
 
         #[rustfmt::skip]
@@ -1552,13 +1552,13 @@ fn load_model(data: &mut AppData) -> Result<()> {
             let tex_coord_offset = (2 * index) as usize;
 
             let vertex = Vertex {
-                pos: vec3::<f32>(
+                pos: vec3(
                     model.mesh.positions[pos_offset],
                     model.mesh.positions[pos_offset + 1],
                     model.mesh.positions[pos_offset + 2],
                 ),
-                color: vec3::<f32>(1.0, 1.0, 1.0),
-                tex_coord: vec2::<f32>(
+                color: vec3(1.0, 1.0, 1.0),
+                tex_coord: vec2(
                     model.mesh.texcoords[tex_coord_offset],
                     1.0 - model.mesh.texcoords[tex_coord_offset + 1],
                 ),

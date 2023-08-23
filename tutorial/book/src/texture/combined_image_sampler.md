@@ -119,10 +119,10 @@ Modify the `Vertex` struct to include a `Vec2` for texture coordinates. Make sur
 
 ```rust,noplaypen
 static VERTICES: [Vertex; 4] = [
-    Vertex::new(vec2::<f32>(-0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0), vec2::<f32>(1.0, 0.0)),
-    Vertex::new(vec2::<f32>(0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0), vec2::<f32>(0.0, 0.0)),
-    Vertex::new(vec2::<f32>(0.5, 0.5), vec3::<f32>(0.0, 0.0, 1.0), vec2::<f32>(0.0, 1.0)),
-    Vertex::new(vec2::<f32>(-0.5, 0.5), vec3::<f32>(1.0, 1.0, 1.0), vec2::<f32>(1.0, 1.0)),
+    Vertex::new(vec2(-0.5, -0.5), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec2(0.5, -0.5), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec2(0.5, 0.5), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec2(-0.5, 0.5), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
 ];
 ```
 

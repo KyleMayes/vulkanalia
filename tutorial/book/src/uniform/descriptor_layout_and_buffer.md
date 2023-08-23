@@ -328,7 +328,7 @@ We will now define the model, view and projection transformations in the uniform
 
 ```rust,noplaypen
 let model = Mat4::from_axis_angle(
-    vec3::<f32>(0.0, 0.0, 1.0),
+    vec3(0.0, 0.0, 1.0),
     Deg(90.0) * time
 );
 ```
@@ -337,9 +337,9 @@ The `Mat4::from_axis_angle` function creates a transformation matrix from given 
 
 ```rust,noplaypen
 let view = Mat4::look_at_rh(
-    point3::<f32>(2.0, 2.0, 2.0),
-    point3::<f32>(0.0, 0.0, 0.0),
-    vec3::<f32>(0.0, 0.0, 1.0),
+    point3(2.0, 2.0, 2.0),
+    point3(0.0, 0.0, 0.0),
+    vec3(0.0, 0.0, 1.0),
 );
 ```
 

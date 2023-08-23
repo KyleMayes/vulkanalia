@@ -126,7 +126,7 @@ unsafe fn update_secondary_command_buffer(
     let time = self.start.elapsed().as_secs_f32();
 
     let model = Mat4::from_axis_angle(
-        vec3::<f32>(0.0, 0.0, 1.0),
+        vec3(0.0, 0.0, 1.0),
         Deg(0.0) * time
     );
 
@@ -246,7 +246,7 @@ let z = (((model_index / 2) as f32) * -2.0) + 1.0;
 let time = self.start.elapsed().as_secs_f32();
 
 let model = Mat4::from_translation(vec3(0.0, y, z)) * Mat4::from_axis_angle(
-    vec3::<f32>(0.0, 0.0, 1.0),
+    vec3(0.0, 0.0, 1.0),
     Deg(90.0) * time
 );
 ```
@@ -255,9 +255,9 @@ This code places the model instances in a grid on the Y and Z axes. However, due
 
 ```rust,noplaypen
 let view = Mat4::look_at_rh(
-    point3::<f32>(6.0, 0.0, 2.0),
-    point3::<f32>(0.0, 0.0, 0.0),
-    vec3::<f32>(0.0, 0.0, 1.0),
+    point3(6.0, 0.0, 2.0),
+    point3(0.0, 0.0, 0.0),
+    vec3(0.0, 0.0, 1.0),
 );
 ```
 

@@ -66,9 +66,9 @@ Also remove `model` from the `App::update_command_buffers` method.
 
 ```rust,noplaypen
 let view = Mat4::look_at_rh(
-    point3::<f32>(2.0, 2.0, 2.0),
-    point3::<f32>(0.0, 0.0, 0.0),
-    vec3::<f32>(0.0, 0.0, 1.0),
+    point3(2.0, 2.0, 2.0),
+    point3(0.0, 0.0, 0.0),
+    vec3(0.0, 0.0, 1.0),
 );
 
 let correction = Mat4::new(
@@ -115,7 +115,7 @@ In the `create_command_buffers` function, define a model matrix and use `cmd_pus
 
 ```rust,noplaypen
 let model = Mat4::from_axis_angle(
-    vec3::<f32>(0.0, 0.0, 1.0),
+    vec3(0.0, 0.0, 1.0),
     Deg(0.0)
 );
 

@@ -75,7 +75,7 @@ unsafe fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
     // ...
 
     let model = Mat4::from_axis_angle(
-        vec3::<f32>(0.0, 0.0, 1.0),
+        vec3(0.0, 0.0, 1.0),
         Deg(0.0)
     );
 
@@ -150,7 +150,7 @@ With these changes in place, our program can now execute different rendering com
 let time = self.start.elapsed().as_secs_f32();
 
 let model = Mat4::from_axis_angle(
-    vec3::<f32>(0.0, 0.0, 1.0),
+    vec3(0.0, 0.0, 1.0),
     Deg(0.0) * time
 );
 
