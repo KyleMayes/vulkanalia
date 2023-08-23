@@ -11,8 +11,8 @@ use std::ptr::copy_nonoverlapping as memcpy;
 use std::time::Instant;
 
 use anyhow::{anyhow, Result};
+use cgmath::{point3, vec2, vec3, Deg};
 use log::*;
-use cgmath::{Deg, vec2, vec3, point3};
 use thiserror::Error;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
@@ -229,10 +229,7 @@ impl App {
 
         let time = self.start.elapsed().as_secs_f32();
 
-        let model = Mat4::from_axis_angle(
-            vec3::<f32>(0.0, 0.0, 1.0),
-            Deg(90.0) * time
-        );
+        let model = Mat4::from_axis_angle(vec3::<f32>(0.0, 0.0, 1.0), Deg(90.0) * time);
 
         let view = Mat4::look_at_rh(
             point3::<f32>(2.0, 2.0, 2.0),
@@ -240,6 +237,7 @@ impl App {
             vec3::<f32>(0.0, 0.0, 1.0),
         );
 
+        #[rustfmt::skip]
         let correction = Mat4::new(
             1.0,  0.0,       0.0,       0.0,
             0.0, -1.0,       0.0,       0.0,
@@ -247,12 +245,13 @@ impl App {
             0.0,  0.0,       0.0,       1.0,
         );
 
-        let proj = correction * cgmath::perspective(
-            Deg(45.0),
-            self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
-            0.1,
-            10.0,
-        );
+        let proj = correction
+            * cgmath::perspective(
+                Deg(45.0),
+                self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+                0.1,
+                10.0,
+            );
 
         let ubo = UniformBufferObject { model, view, proj };
 

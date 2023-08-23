@@ -13,8 +13,8 @@ use std::ptr::{copy_nonoverlapping as memcpy, slice_from_raw_parts};
 use std::time::Instant;
 
 use anyhow::{anyhow, Result};
+use cgmath::{point3, vec2, vec3, Deg};
 use log::*;
-use cgmath::{Deg, vec2, vec3, point3};
 use thiserror::Error;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
@@ -217,6 +217,7 @@ impl App {
             vec3::<f32>(0.0, 0.0, 1.0),
         );
 
+        #[rustfmt::skip]
         let correction = Mat4::new(
             1.0,  0.0,       0.0,       0.0,
             0.0, -1.0,       0.0,       0.0,
@@ -224,12 +225,13 @@ impl App {
             0.0,  0.0,       0.0,       1.0,
         );
 
-        let proj = correction * cgmath::perspective(
-            Deg(45.0),
-            self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
-            0.1,
-            10.0,
-        );
+        let proj = correction
+            * cgmath::perspective(
+                Deg(45.0),
+                self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+                0.1,
+                10.0,
+            );
 
         let ubo = UniformBufferObject { view, proj };
 
@@ -1678,15 +1680,9 @@ unsafe fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<
 
     // Push Constants
 
-    let model = Mat4::from_axis_angle(
-        vec3::<f32>(0.0, 0.0, 1.0),
-        Deg(0.0)
-    );
+    let model = Mat4::from_axis_angle(vec3::<f32>(0.0, 0.0, 1.0), Deg(0.0));
 
-    let model_bytes = &*slice_from_raw_parts(
-        &model as *const Mat4 as *const u8,
-        size_of::<Mat4>()
-    );
+    let model_bytes = &*slice_from_raw_parts(&model as *const Mat4 as *const u8, size_of::<Mat4>());
 
     let opacity = 0.25f32;
     let opacity_bytes = &opacity.to_ne_bytes()[..];

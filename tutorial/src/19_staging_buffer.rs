@@ -9,8 +9,8 @@ use std::os::raw::c_void;
 use std::ptr::copy_nonoverlapping as memcpy;
 
 use anyhow::{anyhow, Result};
-use log::*;
 use cgmath::{vec2, vec3};
+use log::*;
 use thiserror::Error;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
@@ -41,6 +41,7 @@ const MAX_FRAMES_IN_FLIGHT: usize = 2;
 type Vec2 = cgmath::Vector2<f32>;
 type Vec3 = cgmath::Vector3<f32>;
 
+#[rustfmt::skip]
 static VERTICES: [Vertex; 3] = [
     Vertex::new(vec2::<f32>(0.0, -0.5), vec3::<f32>(1.0, 0.0, 0.0)),
     Vertex::new(vec2::<f32>(0.5, 0.5), vec3::<f32>(0.0, 1.0, 0.0)),

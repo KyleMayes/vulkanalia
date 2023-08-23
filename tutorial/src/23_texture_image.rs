@@ -11,8 +11,8 @@ use std::ptr::copy_nonoverlapping as memcpy;
 use std::time::Instant;
 
 use anyhow::{anyhow, Result};
+use cgmath::{point3, vec2, vec3, Deg};
 use log::*;
-use cgmath::{Deg, vec2, vec3, point3};
 use thiserror::Error;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
@@ -44,6 +44,7 @@ type Vec2 = cgmath::Vector2<f32>;
 type Vec3 = cgmath::Vector3<f32>;
 type Mat4 = cgmath::Matrix4<f32>;
 
+#[rustfmt::skip]
 static VERTICES: [Vertex; 4] = [
     Vertex::new(vec2::<f32>(-0.5, -0.5), vec3::<f32>(1.0, 0.0, 0.0)),
     Vertex::new(vec2::<f32>(0.5, -0.5), vec3::<f32>(0.0, 1.0, 0.0)),
@@ -215,10 +216,7 @@ impl App {
 
         let time = self.start.elapsed().as_secs_f32();
 
-        let model = Mat4::from_axis_angle(
-            vec3::<f32>(0.0, 0.0, 1.0),
-            Deg(90.0) * time
-        );
+        let model = Mat4::from_axis_angle(vec3::<f32>(0.0, 0.0, 1.0), Deg(90.0) * time);
 
         let view = Mat4::look_at_rh(
             point3::<f32>(2.0, 2.0, 2.0),

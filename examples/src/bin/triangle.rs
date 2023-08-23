@@ -8,6 +8,7 @@ use vulkanalia::prelude::v1_0::*;
 use vulkanalia::vk;
 
 /// The triangle vertices.
+#[rustfmt::skip]
 static VERTICES: [Vertex; 3] = [
     Vertex { pos: cgmath::vec2(0.0, -0.5), color: cgmath::vec3(1.0, 0.0, 0.0) },
     Vertex { pos: cgmath::vec2(0.5, 0.5), color: cgmath::vec3(0.0, 1.0, 0.0) },

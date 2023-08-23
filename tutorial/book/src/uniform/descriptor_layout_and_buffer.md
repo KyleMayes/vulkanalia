@@ -74,7 +74,7 @@ Note that the order of the `uniform`, `in` and `out` declarations doesn't matter
 The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader. First we add a few more imports and several type aliases:
 
 ```rust,noplaypen
-use cgmath::{Deg, vec2, vec3, point3};
+use cgmath::{point3, Deg};
 
 type Mat4 = cgmath::Matrix4<f32>;
 ```

@@ -130,12 +130,13 @@ let correction = Mat4::new(
     0.0,  0.0,       0.0,       1.0,
 );
 
-let proj = correction * cgmath::perspective(
-    Deg(45.0),
-    self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
-    0.1,
-    10.0,
-);
+let proj = correction
+    * cgmath::perspective(
+        Deg(45.0),
+        self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+        0.1,
+        10.0,
+    );
 
 // this line can be deleted now, because we're already handling the Y-axis flip
 // with the correction matrix
