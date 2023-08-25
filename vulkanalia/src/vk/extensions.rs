@@ -11951,6 +11951,24 @@ pub trait NvWin32KeyedMutexExtension: DeviceV1_0 {
 
 impl NvWin32KeyedMutexExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_filter_cubic_clamp.html>
+pub trait QcomFilterCubicClampExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_FILTER_CUBIC_CLAMP_EXTENSION;
+}
+
+impl QcomFilterCubicClampExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_filter_cubic_weights.html>
+pub trait QcomFilterCubicWeightsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_FILTER_CUBIC_WEIGHTS_EXTENSION;
+}
+
+impl QcomFilterCubicWeightsExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_fragment_density_map_offset.html>
 pub trait QcomFragmentDensityMapOffsetExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -11968,6 +11986,15 @@ pub trait QcomImageProcessingExtension: DeviceV1_0 {
 }
 
 impl QcomImageProcessingExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_image_processing2.html>
+pub trait QcomImageProcessing2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_IMAGE_PROCESSING2_EXTENSION;
+}
+
+impl QcomImageProcessing2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_multiview_per_view_render_areas.html>
 pub trait QcomMultiviewPerViewRenderAreasExtension: DeviceV1_0 {
@@ -12086,6 +12113,15 @@ pub trait QcomTilePropertiesExtension: DeviceV1_0 {
 }
 
 impl QcomTilePropertiesExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_ycbcr_degamma.html>
+pub trait QcomYcbcrDegammaExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_YCBCR_DEGAMMA_EXTENSION;
+}
+
+impl QcomYcbcrDegammaExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QNX_external_memory_screen_buffer.html>
 pub trait QnxExternalMemoryScreenBufferExtension: DeviceV1_0 {

@@ -471,7 +471,7 @@ pub const ARM_SHADER_CORE_BUILTINS_EXTENSION: Extension = Extension {
     number: 498,
     type_: "device",
     author: "ARM",
-    contact: "Kevin Petit @kevinpetit",
+    contact: "Kevin Petit @kpet",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -2861,7 +2861,7 @@ pub const KHR_COOPERATIVE_MATRIX_EXTENSION: Extension = Extension {
     number: 507,
     type_: "device",
     author: "KHR",
-    contact: "Kevin Petit @kevinpetit",
+    contact: "Kevin Petit @kpet",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -3925,7 +3925,7 @@ pub const KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION: Extension = Extension {
     number: 281,
     type_: "device",
     author: "KHR",
-    contact: "Kevin Petit @kevinpetit",
+    contact: "Kevin Petit @kpet",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -5214,6 +5214,38 @@ pub const NV_WIN32_KEYED_MUTEX_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_win32_keyed_mutex"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_filter_cubic_clamp.html>
+#[allow(deprecated)]
+pub const QCOM_FILTER_CUBIC_CLAMP_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_QCOM_filter_cubic_clamp"),
+    number: 522,
+    type_: "device",
+    author: "QCOM",
+    contact: "Jeff Leger @jackohound",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_filter_cubic_weights.html>
+#[allow(deprecated)]
+pub const QCOM_FILTER_CUBIC_WEIGHTS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_QCOM_filter_cubic_weights"),
+    number: 520,
+    type_: "device",
+    author: "QCOM",
+    contact: "Jeff Leger @jackohound",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_fragment_density_map_offset.html>
 #[allow(deprecated)]
 pub const QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION: Extension = Extension {
@@ -5235,6 +5267,22 @@ pub const QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION: Extension = Extension {
 pub const QCOM_IMAGE_PROCESSING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_image_processing"),
     number: 441,
+    type_: "device",
+    author: "QCOM",
+    contact: "Jeff Leger @jackohound",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_image_processing2.html>
+#[allow(deprecated)]
+pub const QCOM_IMAGE_PROCESSING2_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_QCOM_image_processing2"),
+    number: 519,
     type_: "device",
     author: "QCOM",
     contact: "Jeff Leger @jackohound",
@@ -5347,6 +5395,22 @@ pub const QCOM_ROTATED_COPY_COMMANDS_EXTENSION: Extension = Extension {
 pub const QCOM_TILE_PROPERTIES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_tile_properties"),
     number: 485,
+    type_: "device",
+    author: "QCOM",
+    contact: "Jeff Leger @jackohound",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_QCOM_ycbcr_degamma.html>
+#[allow(deprecated)]
+pub const QCOM_YCBCR_DEGAMMA_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_QCOM_ycbcr_degamma"),
+    number: 521,
     type_: "device",
     author: "QCOM",
     contact: "Jeff Leger @jackohound",

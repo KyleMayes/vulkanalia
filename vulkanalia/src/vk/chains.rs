@@ -659,6 +659,20 @@ unsafe impl InputChainStruct for BindSparseInfo {
     }
 }
 
+unsafe impl InputChainStruct for BlitImageCubicWeightsInfoQCOM {
+    const TYPE: StructureType = StructureType::BLIT_IMAGE_CUBIC_WEIGHTS_INFO_QCOM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for BlitImageInfo2 {
     const TYPE: StructureType = StructureType::BLIT_IMAGE_INFO_2;
 
@@ -5764,6 +5778,48 @@ unsafe impl OutputChainStruct for PhysicalDeviceCoverageReductionModeFeaturesNV 
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceCubicClampFeaturesQCOM {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_CUBIC_CLAMP_FEATURES_QCOM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceCubicClampFeaturesQCOM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceCubicWeightsFeaturesQCOM {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_CUBIC_WEIGHTS_FEATURES_QCOM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceCubicWeightsFeaturesQCOM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceCustomBorderColorFeaturesEXT {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT;
 
@@ -7232,6 +7288,48 @@ unsafe impl InputChainStruct for PhysicalDeviceImageFormatInfo2 {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceImageProcessing2FeaturesQCOM {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_IMAGE_PROCESSING_2_FEATURES_QCOM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceImageProcessing2FeaturesQCOM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceImageProcessing2PropertiesQCOM {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_IMAGE_PROCESSING_2_PROPERTIES_QCOM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceImageProcessing2PropertiesQCOM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
@@ -10512,6 +10610,27 @@ unsafe impl OutputChainStruct for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceYcbcrDegammaFeaturesQCOM {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_YCBCR_DEGAMMA_FEATURES_QCOM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceYcbcrDegammaFeaturesQCOM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceYcbcrImageArraysFeaturesEXT {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT;
 
@@ -11938,6 +12057,20 @@ unsafe impl InputChainStruct for SampleLocationsInfoEXT {
     }
 }
 
+unsafe impl InputChainStruct for SamplerBlockMatchWindowCreateInfoQCOM {
+    const TYPE: StructureType = StructureType::SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for SamplerBorderColorComponentMappingCreateInfoEXT {
     const TYPE: StructureType =
         StructureType::SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT;
@@ -11969,6 +12102,20 @@ unsafe impl InputChainStruct for SamplerCaptureDescriptorDataInfoEXT {
 
 unsafe impl InputChainStruct for SamplerCreateInfo {
     const TYPE: StructureType = StructureType::SAMPLER_CREATE_INFO;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for SamplerCubicWeightsCreateInfoQCOM {
+    const TYPE: StructureType = StructureType::SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -12054,6 +12201,28 @@ unsafe impl InputChainStruct for SamplerYcbcrConversionInfo {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
+    const TYPE: StructureType =
+        StructureType::SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }

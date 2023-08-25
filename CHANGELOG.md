@@ -1,5 +1,8 @@
 ## [0.22.0] - UNRELEASED
 
+### Bindings Updates
+- [August 25, 2023 Vulkan 1.3.262 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/6952ad062f031e3fc99b53ef28e009cbeca64583)
+
 ### Fixed
 - Fixed `push_next` not adding a chain of structs properly
 
