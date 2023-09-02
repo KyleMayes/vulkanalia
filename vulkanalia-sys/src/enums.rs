@@ -488,6 +488,38 @@ impl fmt::Debug for BlendOverlapEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBlockMatchWindowCompareModeQCOM.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct BlockMatchWindowCompareModeQCOM(i32);
+
+impl BlockMatchWindowCompareModeQCOM {
+    pub const MIN: Self = Self(0);
+    pub const MAX: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for BlockMatchWindowCompareModeQCOM {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "MIN"),
+            1 => write!(f, "MAX"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBorderColor.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -1059,6 +1091,42 @@ impl fmt::Debug for CoverageReductionModeNV {
         match self.0 {
             0 => write!(f, "MERGE"),
             1 => write!(f, "TRUNCATE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCubicFilterWeightsQCOM.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct CubicFilterWeightsQCOM(i32);
+
+impl CubicFilterWeightsQCOM {
+    pub const CATMULL_ROM: Self = Self(0);
+    pub const ZERO_TANGENT_CARDINAL: Self = Self(1);
+    pub const B_SPLINE: Self = Self(2);
+    pub const MITCHELL_NETRAVALI: Self = Self(3);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for CubicFilterWeightsQCOM {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "CATMULL_ROM"),
+            1 => write!(f, "ZERO_TANGENT_CARDINAL"),
+            2 => write!(f, "B_SPLINE"),
+            3 => write!(f, "MITCHELL_NETRAVALI"),
             _ => self.0.fmt(f),
         }
     }
@@ -4525,6 +4593,7 @@ impl SamplerReductionMode {
     pub const WEIGHTED_AVERAGE: Self = Self(0);
     pub const MIN: Self = Self(1);
     pub const MAX: Self = Self(2);
+    pub const WEIGHTED_AVERAGE_RANGECLAMP_QCOM: Self = Self(1000521000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -4545,6 +4614,7 @@ impl fmt::Debug for SamplerReductionMode {
             0 => write!(f, "WEIGHTED_AVERAGE"),
             1 => write!(f, "MIN"),
             2 => write!(f, "MAX"),
+            1000521000 => write!(f, "WEIGHTED_AVERAGE_RANGECLAMP_QCOM"),
             _ => self.0.fmt(f),
         }
     }
@@ -5279,7 +5349,7 @@ impl StructureType {
     pub const MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX: Self = Self(1000044009);
     pub const STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP: Self = Self(1000049000);
     pub const PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV: Self = Self(1000050000);
-    pub const PRIVATE_VENDOR_INFO_RESERVED_OFFSET_0_NV: Self = Self(1000051000);
+    pub const PRIVATE_VENDOR_INFO_PLACEHOLDER_OFFSET_0_NV: Self = Self(1000051000);
     pub const EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV: Self = Self(1000056000);
     pub const EXPORT_MEMORY_ALLOCATE_INFO_NV: Self = Self(1000056001);
     pub const IMPORT_MEMORY_WIN32_HANDLE_INFO_NV: Self = Self(1000057000);
@@ -5796,6 +5866,15 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM: Self =
         Self(1000510000);
     pub const MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM: Self = Self(1000510001);
+    pub const PHYSICAL_DEVICE_IMAGE_PROCESSING_2_FEATURES_QCOM: Self = Self(1000518000);
+    pub const PHYSICAL_DEVICE_IMAGE_PROCESSING_2_PROPERTIES_QCOM: Self = Self(1000518001);
+    pub const SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM: Self = Self(1000518002);
+    pub const SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM: Self = Self(1000519000);
+    pub const PHYSICAL_DEVICE_CUBIC_WEIGHTS_FEATURES_QCOM: Self = Self(1000519001);
+    pub const BLIT_IMAGE_CUBIC_WEIGHTS_INFO_QCOM: Self = Self(1000519002);
+    pub const PHYSICAL_DEVICE_YCBCR_DEGAMMA_FEATURES_QCOM: Self = Self(1000520000);
+    pub const SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM: Self = Self(1000520001);
+    pub const PHYSICAL_DEVICE_CUBIC_CLAMP_FEATURES_QCOM: Self = Self(1000521000);
     pub const PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT: Self =
         Self(1000524000);
     pub const SCREEN_BUFFER_PROPERTIES_QNX: Self = Self(1000529000);
@@ -5803,6 +5882,7 @@ impl StructureType {
     pub const IMPORT_SCREEN_BUFFER_INFO_QNX: Self = Self(1000529002);
     pub const EXTERNAL_FORMAT_QNX: Self = Self(1000529003);
     pub const PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX: Self = Self(1000529004);
+    pub const PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV: Self = Self(1000546000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -6087,7 +6167,7 @@ impl fmt::Debug for StructureType {
             1000044009 => write!(f, "MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX"),
             1000049000 => write!(f, "STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP"),
             1000050000 => write!(f, "PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV"),
-            1000051000 => write!(f, "PRIVATE_VENDOR_INFO_RESERVED_OFFSET_0_NV"),
+            1000051000 => write!(f, "PRIVATE_VENDOR_INFO_PLACEHOLDER_OFFSET_0_NV"),
             1000056000 => write!(f, "EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV"),
             1000056001 => write!(f, "EXPORT_MEMORY_ALLOCATE_INFO_NV"),
             1000057000 => write!(f, "IMPORT_MEMORY_WIN32_HANDLE_INFO_NV"),
@@ -6728,6 +6808,15 @@ impl fmt::Debug for StructureType {
                 f,
                 "MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM"
             ),
+            1000518000 => write!(f, "PHYSICAL_DEVICE_IMAGE_PROCESSING_2_FEATURES_QCOM"),
+            1000518001 => write!(f, "PHYSICAL_DEVICE_IMAGE_PROCESSING_2_PROPERTIES_QCOM"),
+            1000518002 => write!(f, "SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM"),
+            1000519000 => write!(f, "SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM"),
+            1000519001 => write!(f, "PHYSICAL_DEVICE_CUBIC_WEIGHTS_FEATURES_QCOM"),
+            1000519002 => write!(f, "BLIT_IMAGE_CUBIC_WEIGHTS_INFO_QCOM"),
+            1000520000 => write!(f, "PHYSICAL_DEVICE_YCBCR_DEGAMMA_FEATURES_QCOM"),
+            1000520001 => write!(f, "SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM"),
+            1000521000 => write!(f, "PHYSICAL_DEVICE_CUBIC_CLAMP_FEATURES_QCOM"),
             1000524000 => write!(
                 f,
                 "PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT"
@@ -6739,6 +6828,10 @@ impl fmt::Debug for StructureType {
             1000529004 => write!(
                 f,
                 "PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX"
+            ),
+            1000546000 => write!(
+                f,
+                "PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV"
             ),
             _ => self.0.fmt(f),
         }

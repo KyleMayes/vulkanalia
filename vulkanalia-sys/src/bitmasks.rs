@@ -442,6 +442,8 @@ bitflags! {
         const FREE_DESCRIPTOR_SET = 1;
         const UPDATE_AFTER_BIND = 1 << 1;
         const HOST_ONLY_EXT = 1 << 2;
+        const ALLOW_OVERALLOCATION_SETS_NV = 1 << 3;
+        const ALLOW_OVERALLOCATION_POOLS_NV = 1 << 4;
     }
 }
 

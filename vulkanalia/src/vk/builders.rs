@@ -4578,6 +4578,68 @@ unsafe impl Cast for BindVertexBufferIndirectCommandNVBuilder {
     }
 }
 
+unsafe impl Cast for BlitImageCubicWeightsInfoQCOM {
+    type Target = BlitImageCubicWeightsInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for BlitImageCubicWeightsInfoQCOM {
+    type Builder = BlitImageCubicWeightsInfoQCOMBuilder;
+}
+
+/// A builder for a [`BlitImageCubicWeightsInfoQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct BlitImageCubicWeightsInfoQCOMBuilder {
+    value: BlitImageCubicWeightsInfoQCOM,
+}
+
+impl BlitImageCubicWeightsInfoQCOMBuilder {
+    #[inline]
+    pub fn cubic_weights(mut self, cubic_weights: CubicFilterWeightsQCOM) -> Self {
+        self.value.cubic_weights = cubic_weights;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> BlitImageCubicWeightsInfoQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for BlitImageCubicWeightsInfoQCOMBuilder {
+    type Target = BlitImageCubicWeightsInfoQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for BlitImageCubicWeightsInfoQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for BlitImageCubicWeightsInfoQCOMBuilder {
+    type Target = BlitImageCubicWeightsInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+/// A Vulkan struct that can be used to extend a [`BlitImageInfo2`].
+pub unsafe trait ExtendsBlitImageInfo2: fmt::Debug {}
+unsafe impl ExtendsBlitImageInfo2 for BlitImageCubicWeightsInfoQCOM {}
+
 unsafe impl Cast for BlitImageInfo2 {
     type Target = BlitImageInfo2;
 
@@ -4600,6 +4662,15 @@ pub struct BlitImageInfo2Builder<'b> {
 }
 
 impl<'b> BlitImageInfo2Builder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsBlitImageInfo2,
+    {
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
+        self
+    }
+
     #[inline]
     pub fn src_image(mut self, src_image: Image) -> Self {
         self.value.src_image = src_image;
@@ -12668,6 +12739,8 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixFeaturesN
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCornerSampledImageFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoverageReductionModeFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCubicClampFeaturesQCOM {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCubicWeightsFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCustomBorderColorFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthBiasControlFeaturesEXT {}
@@ -12676,6 +12749,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipControlFeaturesEX
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClipEnableFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorBufferFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorIndexingFeatures {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {}
@@ -12709,6 +12783,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageCompressionControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageProcessing2FeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageProcessingFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageRobustnessFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {}
@@ -12811,6 +12886,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkan13Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceVulkanMemoryModelFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceYcbcrDegammaFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {}
 
@@ -32883,6 +32959,122 @@ unsafe impl Cast for PhysicalDeviceCoverageReductionModeFeaturesNVBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceCubicClampFeaturesQCOM {
+    type Target = PhysicalDeviceCubicClampFeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceCubicClampFeaturesQCOM {
+    type Builder = PhysicalDeviceCubicClampFeaturesQCOMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceCubicClampFeaturesQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceCubicClampFeaturesQCOMBuilder {
+    value: PhysicalDeviceCubicClampFeaturesQCOM,
+}
+
+impl PhysicalDeviceCubicClampFeaturesQCOMBuilder {
+    #[inline]
+    pub fn cubic_range_clamp(mut self, cubic_range_clamp: bool) -> Self {
+        self.value.cubic_range_clamp = cubic_range_clamp as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceCubicClampFeaturesQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceCubicClampFeaturesQCOMBuilder {
+    type Target = PhysicalDeviceCubicClampFeaturesQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceCubicClampFeaturesQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceCubicClampFeaturesQCOMBuilder {
+    type Target = PhysicalDeviceCubicClampFeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceCubicWeightsFeaturesQCOM {
+    type Target = PhysicalDeviceCubicWeightsFeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceCubicWeightsFeaturesQCOM {
+    type Builder = PhysicalDeviceCubicWeightsFeaturesQCOMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceCubicWeightsFeaturesQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceCubicWeightsFeaturesQCOMBuilder {
+    value: PhysicalDeviceCubicWeightsFeaturesQCOM,
+}
+
+impl PhysicalDeviceCubicWeightsFeaturesQCOMBuilder {
+    #[inline]
+    pub fn selectable_cubic_weights(mut self, selectable_cubic_weights: bool) -> Self {
+        self.value.selectable_cubic_weights = selectable_cubic_weights as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceCubicWeightsFeaturesQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceCubicWeightsFeaturesQCOMBuilder {
+    type Target = PhysicalDeviceCubicWeightsFeaturesQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceCubicWeightsFeaturesQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceCubicWeightsFeaturesQCOMBuilder {
+    type Target = PhysicalDeviceCubicWeightsFeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceCustomBorderColorFeaturesEXT {
     type Target = PhysicalDeviceCustomBorderColorFeaturesEXT;
 
@@ -34448,6 +34640,64 @@ impl ops::DerefMut for PhysicalDeviceDescriptorIndexingPropertiesBuilder {
 
 unsafe impl Cast for PhysicalDeviceDescriptorIndexingPropertiesBuilder {
     type Target = PhysicalDeviceDescriptorIndexingProperties;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {
+    type Target = PhysicalDeviceDescriptorPoolOverallocationFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {
+    type Builder = PhysicalDeviceDescriptorPoolOverallocationFeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceDescriptorPoolOverallocationFeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceDescriptorPoolOverallocationFeaturesNVBuilder {
+    value: PhysicalDeviceDescriptorPoolOverallocationFeaturesNV,
+}
+
+impl PhysicalDeviceDescriptorPoolOverallocationFeaturesNVBuilder {
+    #[inline]
+    pub fn descriptor_pool_overallocation(mut self, descriptor_pool_overallocation: bool) -> Self {
+        self.value.descriptor_pool_overallocation = descriptor_pool_overallocation as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceDescriptorPoolOverallocationFeaturesNVBuilder {
+    type Target = PhysicalDeviceDescriptorPoolOverallocationFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceDescriptorPoolOverallocationFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDescriptorPoolOverallocationFeaturesNVBuilder {
+    type Target = PhysicalDeviceDescriptorPoolOverallocationFeaturesNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -37171,6 +37421,8 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrixFe
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCornerSampledImageFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCoverageReductionModeFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCubicClampFeaturesQCOM {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCubicWeightsFeaturesQCOM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCustomBorderColorFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV
@@ -37182,6 +37434,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipControlFea
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClipEnableFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorBufferFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorIndexingFeatures {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceDescriptorPoolOverallocationFeaturesNV
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV
@@ -37223,6 +37479,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT
 {
 }
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageProcessing2FeaturesQCOM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageProcessingFeaturesQCOM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageRobustnessFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {}
@@ -37352,6 +37609,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 {
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceYcbcrDegammaFeaturesQCOM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceYcbcrImageArraysFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {}
 
@@ -39644,6 +39902,125 @@ impl<'b> ops::DerefMut for PhysicalDeviceImageFormatInfo2Builder<'b> {
 
 unsafe impl<'b> Cast for PhysicalDeviceImageFormatInfo2Builder<'b> {
     type Target = PhysicalDeviceImageFormatInfo2;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImageProcessing2FeaturesQCOM {
+    type Target = PhysicalDeviceImageProcessing2FeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceImageProcessing2FeaturesQCOM {
+    type Builder = PhysicalDeviceImageProcessing2FeaturesQCOMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceImageProcessing2FeaturesQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceImageProcessing2FeaturesQCOMBuilder {
+    value: PhysicalDeviceImageProcessing2FeaturesQCOM,
+}
+
+impl PhysicalDeviceImageProcessing2FeaturesQCOMBuilder {
+    #[inline]
+    pub fn texture_block_match2(mut self, texture_block_match2: bool) -> Self {
+        self.value.texture_block_match2 = texture_block_match2 as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceImageProcessing2FeaturesQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceImageProcessing2FeaturesQCOMBuilder {
+    type Target = PhysicalDeviceImageProcessing2FeaturesQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceImageProcessing2FeaturesQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImageProcessing2FeaturesQCOMBuilder {
+    type Target = PhysicalDeviceImageProcessing2FeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImageProcessing2PropertiesQCOM {
+    type Target = PhysicalDeviceImageProcessing2PropertiesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceImageProcessing2PropertiesQCOM {
+    type Builder = PhysicalDeviceImageProcessing2PropertiesQCOMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceImageProcessing2PropertiesQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceImageProcessing2PropertiesQCOMBuilder {
+    value: PhysicalDeviceImageProcessing2PropertiesQCOM,
+}
+
+impl PhysicalDeviceImageProcessing2PropertiesQCOMBuilder {
+    #[inline]
+    pub fn max_block_match_window(
+        mut self,
+        max_block_match_window: impl Cast<Target = Extent2D>,
+    ) -> Self {
+        self.value.max_block_match_window = max_block_match_window.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceImageProcessing2PropertiesQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceImageProcessing2PropertiesQCOMBuilder {
+    type Target = PhysicalDeviceImageProcessing2PropertiesQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceImageProcessing2PropertiesQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImageProcessing2PropertiesQCOMBuilder {
+    type Target = PhysicalDeviceImageProcessing2PropertiesQCOM;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -45287,6 +45664,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2
 }
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceHostImageCopyPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceIDProperties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessing2PropertiesQCOM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessingPropertiesQCOM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBlockProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLineRasterizationPropertiesEXT {}
@@ -53702,6 +54080,64 @@ unsafe impl Cast for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceYcbcrDegammaFeaturesQCOM {
+    type Target = PhysicalDeviceYcbcrDegammaFeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceYcbcrDegammaFeaturesQCOM {
+    type Builder = PhysicalDeviceYcbcrDegammaFeaturesQCOMBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceYcbcrDegammaFeaturesQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceYcbcrDegammaFeaturesQCOMBuilder {
+    value: PhysicalDeviceYcbcrDegammaFeaturesQCOM,
+}
+
+impl PhysicalDeviceYcbcrDegammaFeaturesQCOMBuilder {
+    #[inline]
+    pub fn ycbcr_degamma(mut self, ycbcr_degamma: bool) -> Self {
+        self.value.ycbcr_degamma = ycbcr_degamma as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceYcbcrDegammaFeaturesQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceYcbcrDegammaFeaturesQCOMBuilder {
+    type Target = PhysicalDeviceYcbcrDegammaFeaturesQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceYcbcrDegammaFeaturesQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceYcbcrDegammaFeaturesQCOMBuilder {
+    type Target = PhysicalDeviceYcbcrDegammaFeaturesQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceYcbcrImageArraysFeaturesEXT {
     type Target = PhysicalDeviceYcbcrImageArraysFeaturesEXT;
 
@@ -61972,6 +62408,73 @@ unsafe impl<'b> Cast for SampleLocationsInfoEXTBuilder<'b> {
     }
 }
 
+unsafe impl Cast for SamplerBlockMatchWindowCreateInfoQCOM {
+    type Target = SamplerBlockMatchWindowCreateInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SamplerBlockMatchWindowCreateInfoQCOM {
+    type Builder = SamplerBlockMatchWindowCreateInfoQCOMBuilder;
+}
+
+/// A builder for a [`SamplerBlockMatchWindowCreateInfoQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SamplerBlockMatchWindowCreateInfoQCOMBuilder {
+    value: SamplerBlockMatchWindowCreateInfoQCOM,
+}
+
+impl SamplerBlockMatchWindowCreateInfoQCOMBuilder {
+    #[inline]
+    pub fn window_extent(mut self, window_extent: impl Cast<Target = Extent2D>) -> Self {
+        self.value.window_extent = window_extent.into();
+        self
+    }
+
+    #[inline]
+    pub fn window_compare_mode(
+        mut self,
+        window_compare_mode: BlockMatchWindowCompareModeQCOM,
+    ) -> Self {
+        self.value.window_compare_mode = window_compare_mode;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SamplerBlockMatchWindowCreateInfoQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for SamplerBlockMatchWindowCreateInfoQCOMBuilder {
+    type Target = SamplerBlockMatchWindowCreateInfoQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SamplerBlockMatchWindowCreateInfoQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SamplerBlockMatchWindowCreateInfoQCOMBuilder {
+    type Target = SamplerBlockMatchWindowCreateInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for SamplerBorderColorComponentMappingCreateInfoEXT {
     type Target = SamplerBorderColorComponentMappingCreateInfoEXT;
 
@@ -62097,7 +62600,9 @@ unsafe impl Cast for SamplerCaptureDescriptorDataInfoEXTBuilder {
 /// A Vulkan struct that can be used to extend a [`SamplerCreateInfo`].
 pub unsafe trait ExtendsSamplerCreateInfo: fmt::Debug {}
 unsafe impl ExtendsSamplerCreateInfo for OpaqueCaptureDescriptorDataCreateInfoEXT {}
+unsafe impl ExtendsSamplerCreateInfo for SamplerBlockMatchWindowCreateInfoQCOM {}
 unsafe impl ExtendsSamplerCreateInfo for SamplerBorderColorComponentMappingCreateInfoEXT {}
+unsafe impl ExtendsSamplerCreateInfo for SamplerCubicWeightsCreateInfoQCOM {}
 unsafe impl ExtendsSamplerCreateInfo for SamplerCustomBorderColorCreateInfoEXT {}
 unsafe impl ExtendsSamplerCreateInfo for SamplerReductionModeCreateInfo {}
 unsafe impl ExtendsSamplerCreateInfo for SamplerYcbcrConversionInfo {}
@@ -62260,6 +62765,64 @@ unsafe impl<'b> Cast for SamplerCreateInfoBuilder<'b> {
     }
 }
 
+unsafe impl Cast for SamplerCubicWeightsCreateInfoQCOM {
+    type Target = SamplerCubicWeightsCreateInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SamplerCubicWeightsCreateInfoQCOM {
+    type Builder = SamplerCubicWeightsCreateInfoQCOMBuilder;
+}
+
+/// A builder for a [`SamplerCubicWeightsCreateInfoQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SamplerCubicWeightsCreateInfoQCOMBuilder {
+    value: SamplerCubicWeightsCreateInfoQCOM,
+}
+
+impl SamplerCubicWeightsCreateInfoQCOMBuilder {
+    #[inline]
+    pub fn cubic_weights(mut self, cubic_weights: CubicFilterWeightsQCOM) -> Self {
+        self.value.cubic_weights = cubic_weights;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SamplerCubicWeightsCreateInfoQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for SamplerCubicWeightsCreateInfoQCOMBuilder {
+    type Target = SamplerCubicWeightsCreateInfoQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SamplerCubicWeightsCreateInfoQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SamplerCubicWeightsCreateInfoQCOMBuilder {
+    type Target = SamplerCubicWeightsCreateInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for SamplerCustomBorderColorCreateInfoEXT {
     type Target = SamplerCustomBorderColorCreateInfoEXT;
 
@@ -62386,6 +62949,10 @@ unsafe impl Cast for SamplerReductionModeCreateInfoBuilder {
 pub unsafe trait ExtendsSamplerYcbcrConversionCreateInfo: fmt::Debug {}
 unsafe impl ExtendsSamplerYcbcrConversionCreateInfo for ExternalFormatANDROID {}
 unsafe impl ExtendsSamplerYcbcrConversionCreateInfo for ExternalFormatQNX {}
+unsafe impl ExtendsSamplerYcbcrConversionCreateInfo
+    for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM
+{
+}
 
 unsafe impl Cast for SamplerYcbcrConversionCreateInfo {
     type Target = SamplerYcbcrConversionCreateInfo;
@@ -62610,6 +63177,70 @@ impl ops::DerefMut for SamplerYcbcrConversionInfoBuilder {
 
 unsafe impl Cast for SamplerYcbcrConversionInfoBuilder {
     type Target = SamplerYcbcrConversionInfo;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
+    type Target = SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
+    type Builder = SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOMBuilder;
+}
+
+/// A builder for a [`SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOMBuilder {
+    value: SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM,
+}
+
+impl SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOMBuilder {
+    #[inline]
+    pub fn enable_y_degamma(mut self, enable_y_degamma: bool) -> Self {
+        self.value.enable_y_degamma = enable_y_degamma as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn enable_cb_cr_degamma(mut self, enable_cb_cr_degamma: bool) -> Self {
+        self.value.enable_cb_cr_degamma = enable_cb_cr_degamma as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
+        self.value
+    }
+}
+
+impl ops::Deref for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOMBuilder {
+    type Target = SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOMBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOMBuilder {
+    type Target = SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM;
 
     #[inline]
     fn into(self) -> Self::Target {
