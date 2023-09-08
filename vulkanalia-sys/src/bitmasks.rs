@@ -442,6 +442,8 @@ bitflags! {
         const FREE_DESCRIPTOR_SET = 1;
         const UPDATE_AFTER_BIND = 1 << 1;
         const HOST_ONLY_EXT = 1 << 2;
+        const ALLOW_OVERALLOCATION_SETS_NV = 1 << 3;
+        const ALLOW_OVERALLOCATION_POOLS_NV = 1 << 4;
     }
 }
 
@@ -795,6 +797,15 @@ bitflags! {
         const OPTICAL_FLOW_VECTOR_NV = 1 << 41;
         const OPTICAL_FLOW_COST_NV = 1 << 42;
         const HOST_IMAGE_TRANSFER_EXT = 1 << 46;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFrameBoundaryFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct FrameBoundaryFlagsEXT: Flags {
+        const FRAME_END = 1;
     }
 }
 

@@ -1,5 +1,11 @@
 ## [0.22.0] - UNRELEASED
 
+### Bindings Updates
+- [August 25, 2023 Vulkan 1.3.262 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/6952ad062f031e3fc99b53ef28e009cbeca64583)
+- [September 2, 2023 Vulkan 1.3.263 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/4e32929f96e5af77fe5202b959f18c4ad7a06bbc)
+- [Merge branch 'layered-driver-proposal' of github.com:jenatali/Vulkan-Docs into jenatali-layered-driver-proposal](https://github.com/KhronosGroup/Vulkan-Docs/commit/11c3bfcc46b856e66a32215ebc475516225cf01b)
+- [September 8, 2023 Vulkan 1.3.264 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/3d25cd996b16ae0781e15735df5762efa9f71010)
+
 ### Fixed
 - Fixed `push_next` not adding a chain of structs properly
 
