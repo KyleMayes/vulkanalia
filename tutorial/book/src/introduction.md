@@ -27,7 +27,7 @@ This tutorial will not assume knowledge of OpenGL or Direct3D concepts, but it d
 
 If you want a C++ tutorial instead, see the original tutorial:<br/><https://vulkan-tutorial.com>
 
-This tutorial uses the [`vulkanalia`](https://github.com/KyleMayes/vulkanalia) crate to provide access to the Vulkan API from Rust. `vulkanalia` provides raw bindings to the Vulkan API as well as a thin wrapper over said bindings to make them easier and more idiomatic to use from Rust (more on this in the next chapter). This means that while you should have never have any difficulty in determining exactly how your Rust programs are interacting with the Vulkan API, you will be shielded from little of the danger and verbosity of the Vulkan API.
+This tutorial uses the [`vulkanalia`](https://github.com/KyleMayes/vulkanalia) crate to provide access to the Vulkan API from Rust. `vulkanalia` provides raw bindings to the Vulkan API as well as a thin wrapper over said bindings to make them easier and more idiomatic to use from Rust (more on this in the next chapter). This means that while you should never have any difficulty in determining exactly how your Rust programs are interacting with the Vulkan API, you will be shielded from little of the danger and verbosity of the Vulkan API.
 
 If you want a Rust Vulkan tutorial that uses a crate which provides a safe and relatively concise wrapper around the Vulkan API ([`vulkano`](https://vulkano.rs)), see this tutorial:<br/><https://github.com/bwasty/vulkan-tutorial-rs>
 
