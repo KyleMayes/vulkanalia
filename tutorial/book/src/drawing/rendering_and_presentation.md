@@ -116,7 +116,7 @@ let submit_info = vk::SubmitInfo::builder()
     .signal_semaphores(signal_semaphores);
 ```
 
-The first two parameters, `^wait_semaphores` and `wait_dst_stage_mask`, specifies which semaphores to wait on before execution begins and in which stage(s) of the pipeline to wait. We want to wait with writing colors to the image until it's available, so we're specifying the stage of the graphics pipeline that writes to the color attachment. That means that theoretically the implementation can already start executing our vertex shader and such while the image is not yet available. Each entry in the `wait_stages` array corresponds to the semaphore with the same index in `^wait_semaphores`.
+The first two parameters, `^wait_semaphores` and `wait_dst_stage_mask`, specify which semaphores to wait on before execution begins and in which stage(s) of the pipeline to wait. We want to wait with writing colors to the image until it's available, so we're specifying the stage of the graphics pipeline that writes to the color attachment. That means that theoretically the implementation can already start executing our vertex shader and such while the image is not yet available. Each entry in the `wait_stages` array corresponds to the semaphore with the same index in `^wait_semaphores`.
 
 The next parameter, `command_buffers`, specifies which command buffers to actually submit for execution. As mentioned earlier, we should submit the command buffer that binds the swapchain image we just acquired as color attachment.
 
