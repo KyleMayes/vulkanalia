@@ -7,6 +7,8 @@ use core::error;
 #[cfg(feature = "std")]
 use std::error;
 
+use alloc::boxed::Box;
+
 /// The default Vulkan shared library filename on the current platform (Windows).
 #[cfg(windows)]
 pub const LIBRARY: &str = "vulkan-1.dll";
