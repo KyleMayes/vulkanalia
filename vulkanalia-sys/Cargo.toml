@@ -20,7 +20,7 @@ categories = ["graphics"]
 
 [features]
 
-default = []
+default = ["std"]
 
 provisional = []
 
