@@ -2,21 +2,35 @@
 
 //! Vulkan bindings for Rust.
 
+#![cfg_attr(feature = "core_error", feature(error_in_core))]
+#![cfg_attr(not(feature = "std"), no_std)]
+
+extern crate alloc;
+
 pub mod chain;
+
+#[cfg(any(feature = "core_error", feature = "std"))]
 pub mod loader;
 pub mod vk;
 
 #[cfg(feature = "window")]
 pub mod window;
 
-use std::collections::HashSet;
+#[cfg(any(feature = "core_error", feature = "std"))]
+use alloc::boxed::Box;
+use alloc::collections::BTreeSet;
+#[cfg(any(feature = "core_error", feature = "std"))]
+use alloc::sync::Arc;
+#[cfg(feature = "core_error")]
+use core::error;
+use core::ffi::c_char;
+use core::fmt;
+use core::mem;
+use core::slice;
+#[cfg(feature = "std")]
 use std::error;
-use std::fmt;
-use std::mem;
-use std::os::raw::c_char;
-use std::slice;
-use std::sync::Arc;
 
+#[cfg(any(feature = "core_error", feature = "std"))]
 use self::loader::Loader;
 use self::prelude::v1_0::*;
 use self::vk::{DeviceCommands, EntryCommands, InstanceCommands};
@@ -127,6 +141,7 @@ impl From<Version> for (u32, u32, u32) {
 /// A Vulkan entry point.
 #[derive(Clone)]
 pub struct Entry {
+    #[cfg(any(feature = "core_error", feature = "std"))]
     _loader: Arc<dyn Loader>,
     get_instance: vk::PFN_vkGetInstanceProcAddr,
     get_device: vk::PFN_vkGetDeviceProcAddr,
@@ -141,6 +156,8 @@ impl Entry {
     /// The [`Loader::load`] method will be called on the supplied [`Loader`]
     /// implementation to load the entry commands so the safety requirements of
     /// [`Loader::load`] for the [`Loader`] implementation used must be upheld.
+
+    #[cfg(any(feature = "core_error", feature = "std"))]
     #[inline]
     pub unsafe fn new(
         loader: impl Loader + 'static,
@@ -224,20 +241,20 @@ pub struct Instance {
     get_device: vk::PFN_vkGetDeviceProcAddr,
     handle: vk::Instance,
     commands: InstanceCommands,
-    extensions: HashSet<vk::ExtensionName>,
-    layers: HashSet<vk::ExtensionName>,
+    extensions: BTreeSet<vk::ExtensionName>,
+    layers: BTreeSet<vk::ExtensionName>,
 }
 
 impl Instance {
     /// Gets the loaded extensions for this Vulkan instance.
     #[inline]
-    pub fn extensions(&self) -> &HashSet<vk::ExtensionName> {
+    pub fn extensions(&self) -> &BTreeSet<vk::ExtensionName> {
         &self.extensions
     }
 
     /// Gets the loaded layers for this Vulkan instance.
     #[inline]
-    pub fn layers(&self) -> &HashSet<vk::ExtensionName> {
+    pub fn layers(&self) -> &BTreeSet<vk::ExtensionName> {
         &self.layers
     }
 
@@ -287,20 +304,20 @@ unsafe impl Sync for Instance {}
 pub struct Device {
     handle: vk::Device,
     commands: DeviceCommands,
-    extensions: HashSet<vk::ExtensionName>,
-    layers: HashSet<vk::ExtensionName>,
+    extensions: BTreeSet<vk::ExtensionName>,
+    layers: BTreeSet<vk::ExtensionName>,
 }
 
 impl Device {
     /// Gets the loaded extensions for this Vulkan device.
     #[inline]
-    pub fn extensions(&self) -> &HashSet<vk::ExtensionName> {
+    pub fn extensions(&self) -> &BTreeSet<vk::ExtensionName> {
         &self.extensions
     }
 
     /// Gets the loaded layers for this Vulkan device.
     #[inline]
-    pub fn layers(&self) -> &HashSet<vk::ExtensionName> {
+    pub fn layers(&self) -> &BTreeSet<vk::ExtensionName> {
         &self.layers
     }
 }
@@ -319,7 +336,10 @@ unsafe impl Send for Device {}
 unsafe impl Sync for Device {}
 
 #[inline]
-unsafe fn get_names(num_strings: u32, strings: *const *const c_char) -> HashSet<vk::ExtensionName> {
+unsafe fn get_names(
+    num_strings: u32,
+    strings: *const *const c_char,
+) -> BTreeSet<vk::ExtensionName> {
     slice::from_raw_parts(strings, num_strings as usize)
         .iter()
         .map(|s| vk::ExtensionName::from_ptr(*s))

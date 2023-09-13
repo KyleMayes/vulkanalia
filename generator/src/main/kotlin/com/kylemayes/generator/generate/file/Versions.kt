@@ -13,9 +13,9 @@ import com.kylemayes.generator.registry.Version
 fun Registry.generateVersionTraits(): String {
     var versions =
         """
-use std::mem::MaybeUninit;
-use std::os::raw::c_void;
-use std::ptr;
+use core::mem::MaybeUninit;
+use core::ffi::c_void;
+use core::ptr;
 
 use super::*;
         """

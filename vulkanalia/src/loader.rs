@@ -2,6 +2,9 @@
 
 //! Vulkan function loaders.
 
+#[cfg(feature = "core_error")]
+use core::error;
+#[cfg(feature = "std")]
 use std::error;
 
 /// The default Vulkan shared library filename on the current platform (Windows).

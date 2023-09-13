@@ -9,12 +9,13 @@
     clippy::upper_case_acronyms
 )]
 
-use std::borrow::Cow;
-use std::ffi::CStr;
-use std::fmt;
-use std::hash;
-use std::ops;
-use std::os::raw::c_char;
+use alloc::borrow::Cow;
+use alloc::string::String;
+use core::ffi::c_char;
+use core::ffi::CStr;
+use core::fmt;
+use core::hash;
+use core::ops;
 
 /// An array containing a sequence of bytes.
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -88,7 +89,7 @@ impl<const N: usize> From<ByteArray<N>> for [u8; N] {
 ///
 /// assert_eq!(hasher1.finish(), hasher2.finish());
 /// ```
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Ord, PartialOrd)]
 #[repr(transparent)]
 pub struct StringArray<const N: usize>([c_char; N]);
 
@@ -244,8 +245,8 @@ impl<const N: usize> From<StringArray<N>> for [c_char; N] {
 mod test {
     use super::*;
 
+    use core::hash::{Hash, Hasher};
     use std::collections::hash_map::DefaultHasher;
-    use std::hash::{Hash, Hasher};
 
     fn hash(hash: impl Hash) -> u64 {
         let mut hasher = DefaultHasher::new();

@@ -20,7 +20,13 @@ categories = ["graphics"]
 
 [features]
 
+default = []
+
 provisional = []
+
+core_error = []
+
+std = []
 
 [dependencies]
 

@@ -126,8 +126,8 @@ pub unsafe fn create_surface(
         // macOS
         #[cfg(target_os = "macos")]
         (RawDisplayHandle::AppKit(_), RawWindowHandle::AppKit(window)) => {
-            use std::mem;
-            use std::os::raw::c_void;
+            use core::ffi::c_void;
+            use core::mem;
 
             use cocoa::appkit::{NSView, NSWindow};
             use cocoa::base::id;

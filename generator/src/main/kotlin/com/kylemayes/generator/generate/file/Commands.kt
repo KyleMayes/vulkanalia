@@ -11,7 +11,7 @@ import com.kylemayes.generator.registry.Registry
 /** Generates Rust type aliases for Vulkan commands. */
 fun Registry.generateCommands() =
     """
-use std::os::raw::{c_char, c_int, c_void};
+use core::ffi::{c_char, c_int, c_void};
 
 use crate::*;
 
@@ -41,8 +41,8 @@ fun Registry.generateCommandStructs(): String {
             generateCommandStruct(it.key, supported)
         }
     return """
-use std::mem;
-use std::os::raw::{c_char, c_int, c_void};
+use core::mem;
+use core::ffi::{c_char, c_int, c_void};
 
 use super::*;
 

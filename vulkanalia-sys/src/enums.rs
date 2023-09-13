@@ -17,8 +17,9 @@
     clippy::useless_transmute
 )]
 
-use std::error;
-use std::fmt;
+#[cfg(feature = "core_error")] use core::error;
+#[cfg(feature = "std")] use std::error;
+use core::fmt;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureBuildTypeKHR.html>
 #[repr(transparent)]
@@ -4444,6 +4445,7 @@ impl fmt::Display for Result {
     }
 }
 
+#[cfg(any(feature = "core_error", feature = "std"))]
 impl error::Error for Result {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerAddressMode.html>

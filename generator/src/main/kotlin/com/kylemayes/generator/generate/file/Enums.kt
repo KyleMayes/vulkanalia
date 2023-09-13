@@ -12,8 +12,9 @@ import com.kylemayes.generator.registry.intern
 /** Generates Rust structs for Vulkan enums. */
 fun Registry.generateEnums() =
     """
-use std::error;
-use std::fmt;
+#[cfg(feature = "std")] use std::error;
+#[cfg(feature = "core_error")] use core::error;
+use core::fmt;
 
 ${enums.values.sortedBy { it.name }.joinToString("\n") { generateEnum(it) }}
 ${generateAliases(enums.keys)}
@@ -22,8 +23,9 @@ ${generateAliases(enums.keys)}
 /** Generates Rust structs for success result and error result enums. */
 fun Registry.generateResultEnums() =
     """
-use std::error;
-use std::fmt;
+#[cfg(feature = "std")] use std::error;
+#[cfg(feature = "core_error")] use core::error;
+use core::fmt;
 
 use super::Result;
 
@@ -68,7 +70,7 @@ private fun Registry.generateEnum(enum: Enum, documentation: String? = null): St
     val (display, error) = if (enum.name.value == "Result" || enum.name.value == "ErrorCode") {
         val default = "write!(f, \"unknown Vulkan result (code = {})\", self.0)"
         val display = generateFmtImpl(enum, "Display", default) { "\"${results[it.value] ?: it.name.value}\"" }
-        display to "impl error::Error for ${enum.name} { }"
+        display to "#[cfg(any(feature = \"core_error\", feature = \"std\"))] impl error::Error for ${enum.name} { }"
     } else {
         "" to ""
     }

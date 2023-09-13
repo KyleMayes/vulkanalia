@@ -15,9 +15,9 @@ import com.kylemayes.generator.support.PeekableIterator
 /** Generates Rust structs for Vulkan structs. */
 fun Registry.generateStructs(): String {
     return """
-use std::fmt;
-use std::os::raw::{c_char, c_int, c_void};
-use std::ptr;
+use core::fmt;
+use core::ffi::{c_char, c_int, c_void};
+use core::ptr;
 
 use crate::*;
 

@@ -23,3 +23,6 @@ pub use self::commands::*;
 pub use self::enums::*;
 pub use self::extensions::*;
 pub use self::versions::*;
+
+pub use alloc::boxed::Box;
+pub use alloc::vec::Vec;

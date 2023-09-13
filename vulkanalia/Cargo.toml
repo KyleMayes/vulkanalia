@@ -20,8 +20,11 @@ categories = ["graphics"]
 
 [features]
 
+default = ["std"]
 provisional = ["vulkanalia-sys/provisional"]
 window = ["raw-window-handle", "cocoa", "metal", "objc"]
+std = []
+core_error = []
 
 [dependencies]
 

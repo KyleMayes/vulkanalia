@@ -17,8 +17,8 @@
     clippy::useless_transmute
 )]
 
-use std::mem;
-use std::os::raw::{c_char, c_int, c_void};
+use core::mem;
+use core::ffi::{c_char, c_int, c_void};
 
 use super::*;
 
