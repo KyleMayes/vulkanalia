@@ -1,18 +1,12 @@
 ## [0.22.0] - UNRELEASED
 
-### Bindings Updates
-- [August 25, 2023 Vulkan 1.3.262 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/6952ad062f031e3fc99b53ef28e009cbeca64583)
-- [September 2, 2023 Vulkan 1.3.263 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/4e32929f96e5af77fe5202b959f18c4ad7a06bbc)
-- [Merge branch 'layered-driver-proposal' of github.com:jenatali/Vulkan-Docs into jenatali-layered-driver-proposal](https://github.com/KhronosGroup/Vulkan-Docs/commit/11c3bfcc46b856e66a32215ebc475516225cf01b)
-- [September 8, 2023 Vulkan 1.3.264 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/3d25cd996b16ae0781e15735df5762efa9f71010)
-
 ### Fixed
-- Fixed `push_next` not adding a chain of structs properly
+- Fixed `push_next` not adding a chain of structs properly ([#188](https://github.com/KyleMayes/vulkanalia/issues/188))
 
 ### Added
 - Added `InputChainStruct` and `OutputChainStruct` traits which are implemented for structs that can be part of pointer chains
-- Added `bytecode` module to `vulkanalia` with SPIR-V bytecode buffer helper
 - Added `chain` module to `vulkanalia` with pointer chain helpers (e.g. iteration)
+- Added `bytecode` module to `vulkanalia` with SPIR-V bytecode buffer helper
 
 ### Bindings Updates
 - [June 1, 2023 Vulkan 1.3.252 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/5718db0a370b5bd91e6cf2268a3dc2af9cfc15d1)
@@ -29,6 +23,10 @@
 - [July 21, 2023 Vulkan 1.3.259 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/3da7531f2f9d48993ab627c02a866479d5163ba4)
 - [July 28, 2023 Vulkan 1.3.260 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/12ab5855b1608e4b05b270e0dedecd1b1a5458f8)
 - [August 4, 2023 Vulkan 1.3.261 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/b9aad705f0d9e5e6734ac2ad671d5d1de57b05e0)
+- [August 25, 2023 Vulkan 1.3.262 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/6952ad062f031e3fc99b53ef28e009cbeca64583)
+- [September 2, 2023 Vulkan 1.3.263 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/4e32929f96e5af77fe5202b959f18c4ad7a06bbc)
+- [Merge branch 'layered-driver-proposal' of github.com:jenatali/Vulkan-Docs into jenatali-layered-driver-proposal](https://github.com/KhronosGroup/Vulkan-Docs/commit/11c3bfcc46b856e66a32215ebc475516225cf01b)
+- [September 8, 2023 Vulkan 1.3.264 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/3d25cd996b16ae0781e15735df5762efa9f71010)
 
 ## [0.21.0] - 2023-05-28
 
