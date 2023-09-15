@@ -1,4 +1,4 @@
-## [0.22.0] - UNRELEASED
+## [0.22.0] - 2023-09-15
 
 ### Fixed
 - Fixed `push_next` not adding a chain of structs properly ([#188](https://github.com/KyleMayes/vulkanalia/issues/188))
