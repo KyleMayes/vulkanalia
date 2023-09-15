@@ -140,13 +140,13 @@
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec3,
-    color: glm::Vec3,
-    tex_coord: glm::Vec2,
+    pos: Vec3,
+    color: Vec3,
+    tex_coord: Vec2,
 }
 
 impl Vertex {
-    fn new(pos: glm::Vec3, color: glm::Vec3, tex_coord: glm::Vec2) -&gt; Self {
+    const fn new(pos: Vec3, color: Vec3, tex_coord: Vec2) -&gt; Self {
         Self { pos, color, tex_coord }
     }
 
@@ -169,13 +169,13 @@ impl Vertex {
             .binding(0)
             .location(1)
             .format(vk::Format::R32G32B32_SFLOAT)
-            .offset(size_of::&lt;glm::Vec3&gt;() as u32)
+            .offset(size_of::&lt;Vec3&gt;() as u32)
             .build();
         let tex_coord = vk::VertexInputAttributeDescription::builder()
             .binding(0)
             .location(2)
             .format(vk::Format::R32G32_SFLOAT)
-            .offset((size_of::&lt;glm::Vec3&gt;() + size_of::&lt;glm::Vec3&gt;()) as u32)
+            .offset((size_of::&lt;Vec3&gt;() + size_of::&lt;Vec3&gt;()) as u32)
             .build();
         [pos, color, tex_coord]
     }
@@ -193,30 +193,26 @@ void main() {
 }
 </code></pre>
 <p>Lastly, update the <code>vertices</code> container to include Z coordinates:</p>
-<pre><code class="language-rust noplaypen">lazy_static! {
-    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
-        Vertex::new(glm::vec3(-0.5, -0.5, 0.0),glm::vec3(1.0, 0.0, 0.0),glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, -0.5, 0.0), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, 0.5, 0.0), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, 0.5, 0.0), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
-    ];
-}
+<pre><code class="language-rust noplaypen">static VERTICES: [Vertex; 4] = [
+    Vertex::new(vec3(-0.5, -0.5, 0.0), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec3(0.5, -0.5, 0.0), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec3(0.5, 0.5, 0.0), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec3(-0.5, 0.5, 0.0), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
+];
 </code></pre>
 <p>If you run your application now, then you should see exactly the same result as before. It's time to add some extra geometry to make the scene more interesting, and to demonstrate the problem that we're going to tackle in this chapter. Duplicate the vertices to define positions for a square right under the current one like this:</p>
 <p><img src="../images/extra_square.svg" alt="" /></p>
 <p>Use Z coordinates of <code>-0.5</code> and add the appropriate indices for the extra square:</p>
-<pre><code class="language-rust noplaypen">lazy_static! {
-    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
-        Vertex::new(glm::vec3(-0.5, -0.5, 0.0),glm::vec3(1.0, 0.0, 0.0),glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, -0.5, 0.0), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, 0.5, 0.0), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, 0.5, 0.0), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(1.0, 0.0, 0.0), glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, -0.5, -0.5), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, 0.5, -0.5), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, 0.5, -0.5), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
-    ];
-}
+<pre><code class="language-rust noplaypen">static VERTICES: [Vertex; 8] = [
+    Vertex::new(vec3(-0.5, -0.5, 0.0), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec3(0.5, -0.5, 0.0), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec3(0.5, 0.5, 0.0), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec3(-0.5, 0.5, 0.0), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
+    Vertex::new(vec3(-0.5, -0.5, -0.5), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec3(0.5, -0.5, -0.5), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec3(0.5, 0.5, -0.5), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec3(-0.5, 0.5, -0.5), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
+];
 
 const INDICES: &amp;[u16] = &amp;[
     0, 1, 2, 2, 3, 0,
@@ -231,13 +227,31 @@ const INDICES: &amp;[u16] = &amp;[
 <li>Use depth testing with a depth buffer</li>
 </ul>
 <p>The first approach is commonly used for drawing transparent objects, because order-independent transparency is a difficult challenge to solve. However, the problem of ordering fragments by depth is much more commonly solved using a <em>depth buffer</em>. A depth buffer is an additional attachment that stores the depth for every position, just like the color attachment stores the color of every position. Every time the rasterizer produces a fragment, the depth test will check if the new fragment is closer than the previous one. If it isn't, then the new fragment is discarded. A fragment that passes the depth test writes its own depth to the depth buffer. It is possible to manipulate this value from the fragment shader, just like you can manipulate the color output.</p>
-<p>Before we continue, there is one issue we need to fix. The perspective projection matrix generated by <code>glm::perspective</code> in <code>App::update_uniform_buffer</code> uses OpenGL depth range of <code>-1.0</code> to <code>1.0</code>. We want to use the Vulkan range of <code>0.0</code> to <code>1.0</code> instead so we'll use the <code>glm::perspective_rh_zo</code> (<code>zo</code> = zero-to-one) function instead.</p>
-<pre><code class="language-rust noplaypen">let mut proj = glm::perspective_rh_zo(
-    self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
-    glm::radians(&amp;glm::vec1(45.0))[0],
-    0.1,
-    10.0,
+<p>Before we continue, there is one issue we need to fix. The perspective projection matrix generated by <code>cgmath::perspective</code> in <code>App::update_uniform_buffer</code> uses OpenGL depth range of <code>-1.0</code> to <code>1.0</code>. We want to use the Vulkan range of <code>0.0</code> to <code>1.0</code> instead so we'll pre-multiply the generated perspective matrix with a <a href="https://matthewwellings.com/blog/the-new-vulkan-coordinate-system">correction matrix</a> that maps the OpenGL range to the Vulkan range:</p>
+<pre><code class="language-rust noplaypen">let correction = Mat4::new(
+    1.0,  0.0,       0.0, 0.0,
+    0.0, -1.0,       0.0, 0.0, // we're also handling Y-flipping here
+    0.0,  0.0, 1.0 / 2.0, 0.0,
+    0.0,  0.0, 1.0 / 2.0, .0,
 );
+
+let proj = correction
+    * cgmath::perspective(
+        Deg(45.0),
+        self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+        0.1,
+        10.0,
+    );
+
+// this line can be deleted now, because we're already handling the Y-axis flip
+// with the correction matrix
+// proj[1][1] *= -1.0;
+</code></pre>
+<p>Note that <code>cgmath::Matrix4::new</code> constructs a matrix in column-major order, so the parameters we passed to it seem to be transposed. So the actual matrix would look like this in row-major order:</p>
+<pre><code class="language-text">1   0   0   0
+0  -1   0   0
+0   0   ½   ½
+0   0   0   1
 </code></pre>
 <h2 id="depth-image-and-view"><a class="header" href="#depth-image-and-view">Depth image and view</a></h2>
 <p>A depth attachment is based on an image, just like the color attachment. The difference is that the swapchain will not automatically create depth images for us. We only need a single depth image, because only one draw operation is running at once. The depth image will again require the trifecta of resources: image, memory and image view.</p>

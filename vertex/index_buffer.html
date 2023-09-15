@@ -140,14 +140,12 @@
 <p>An index buffer is essentially an array of pointers into the vertex buffer. It allows you to reorder the vertex data, and reuse existing data for multiple vertices. The illustration above demonstrates what the index buffer would look like for the rectangle if we have a vertex buffer containing each of the four unique vertices. The first three indices define the upper-right triangle and the last three indices define the vertices for the bottom-left triangle.</p>
 <h2 id="index-buffer-creation"><a class="header" href="#index-buffer-creation">Index buffer creation</a></h2>
 <p>In this chapter we're going to modify the vertex data and add index data to draw a rectangle like the one in the illustration. Modify the vertex data to represent the four corners:</p>
-<pre><code class="language-rust noplaypen">lazy_static! {
-    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
-        Vertex::new(glm::vec2(-0.5, -0.5), glm::vec3(1.0, 0.0, 0.0)),
-        Vertex::new(glm::vec2(0.5, -0.5), glm::vec3(0.0, 1.0, 0.0)),
-        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 0.0, 1.0)),
-        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(1.0, 1.0, 1.0)),
-    ];
-}
+<pre><code class="language-rust noplaypen">static VERTICES: [Vertex; 4] = [
+    Vertex::new(vec2(-0.5, -0.5), vec3(1.0, 0.0, 0.0)),
+    Vertex::new(vec2(0.5, -0.5), vec3(0.0, 1.0, 0.0)),
+    Vertex::new(vec2(0.5, 0.5), vec3(0.0, 0.0, 1.0)),
+    Vertex::new(vec2(-0.5, 0.5), vec3(1.0, 1.0, 1.0)),
+];
 </code></pre>
 <p>The top-left corner is red, top-right is green, bottom-right is blue and the bottom-left is white. We'll add a new array <code>INDICES</code> to represent the contents of the index buffer. It should match the indices in the illustration to draw the upper-right triangle and bottom-left triangle.</p>
 <pre><code class="language-rust noplaypen">const INDICES: &amp;[u16] = &amp;[0, 1, 2, 2, 3, 0];

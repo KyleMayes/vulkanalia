@@ -284,9 +284,9 @@ device.cmd_draw_indexed(*command_buffer, INDICES.len() as u32, 1, 0, 0, 0);
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 </code></pre>
 <pre><code class="language-glsl">layout(binding = 0) uniform UniformBufferObject {
@@ -299,10 +299,10 @@ struct UniformBufferObject {
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    foo: glm::Vec2,
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    foo: Vec2,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 </code></pre>
 <pre><code class="language-glsl">layout(binding = 0) uniform UniformBufferObject {
@@ -327,11 +327,11 @@ struct UniformBufferObject {
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    foo: glm::Vec2,
+    foo: Vec2,
     _padding: [u8; 8],
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 </code></pre>
 <p>If you now compile and run your program again you should see that the shader correctly receives its matrix values once again.</p>

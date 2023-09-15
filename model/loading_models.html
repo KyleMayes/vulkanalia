@@ -180,7 +180,7 @@
 <p>You'll also need to update the size of the index buffer in <code>create_index_buffer</code>:</p>
 <pre><code class="language-rust noplaypen">let size = (size_of::&lt;u32&gt;() * data.indices.len()) as u64;
 </code></pre>
-<p>Next we are going to need some more imports (and we can remove the <code>lazy_static</code> import now that the global arrays have been deleted):</p>
+<p>Next we are going to need some more imports:</p>
 <pre><code class="language-rust noplaypen">use std::collections::HashMap;
 use std::hash::{Hash, Hasher};
 use std::io::BufReader;
@@ -221,9 +221,9 @@ let (models, _) = tobj::load_obj_buf(
 <pre><code class="language-rust noplaypen">for model in &amp;models {
     for index in &amp;model.mesh.indices {
         let vertex = Vertex {
-            pos: glm::vec3(0.0, 0.0, 0.0),
-            color: glm::vec3(1.0, 1.0, 1.0),
-            tex_coord: glm::vec2(0.0, 0.0),
+            pos: vec3(0.0, 0.0, 0.0),
+            color: vec3(1.0, 1.0, 1.0),
+            tex_coord: vec2(0.0, 0.0),
         };
 
         data.vertices.push(vertex);
@@ -236,23 +236,23 @@ let (models, _) = tobj::load_obj_buf(
 let tex_coord_offset = (2 * index) as usize;
 
 let vertex = Vertex {
-    pos: glm::vec3(
+    pos: vec3(
         model.mesh.positions[pos_offset],
         model.mesh.positions[pos_offset + 1],
         model.mesh.positions[pos_offset + 2],
     ),
-    color: glm::vec3(1.0, 1.0, 1.0),
-    tex_coord: glm::vec2(
+    color: vec3(1.0, 1.0, 1.0),
+    tex_coord: vec2(
         model.mesh.texcoords[tex_coord_offset],
         model.mesh.texcoords[tex_coord_offset + 1],
     ),
 };
 </code></pre>
-<p>Unfortunately the <code>attrib.vertices</code> array is an array of <code>float</code> values instead of something like <code>glm::vec3</code>, so you need to multiply the index by <code>3</code>. Similarly, there are two texture coordinate components per entry. The offsets of <code>0</code>, <code>1</code> and <code>2</code> are used to access the X, Y and Z components, or the U and V components in the case of texture coordinates.</p>
+<p>Unfortunately the <code>attrib.vertices</code> array is an array of <code>float</code> values instead of something like <code>cgmath::Vector3&lt;f32&gt;</code>, so you need to multiply the index by <code>3</code>. Similarly, there are two texture coordinate components per entry. The offsets of <code>0</code>, <code>1</code> and <code>2</code> are used to access the X, Y and Z components, or the U and V components in the case of texture coordinates.</p>
 <p>You may want to start compiling your program in release mode from now on because loading the texture and model can be quite slow without optimizations. If you run your program now you should see something like the following:</p>
 <p><img src="../images/inverted_texture_coordinates.png" alt="" /></p>
 <p>Great, the geometry looks correct, but what's going on with the texture? The OBJ format assumes a coordinate system where a vertical coordinate of <code>0</code> means the bottom of the image, however we've uploaded our image into Vulkan in a top to bottom orientation where <code>0</code> means the top of the image. Solve this by flipping the vertical component of the texture coordinates:</p>
-<pre><code class="language-rust noplaypen">tex_coord: glm::vec2(
+<pre><code class="language-rust noplaypen">tex_coord: vec2(
     model.mesh.texcoords[tex_coord_offset],
     1.0 - model.mesh.texcoords[tex_coord_offset + 1],
 ),

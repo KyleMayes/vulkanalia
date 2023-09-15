@@ -187,8 +187,15 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
 <pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     // ...
 
-    let model = glm::rotate(&amp;glm::identity(), 0.0f32, &amp;glm::vec3(0.0, 0.0, 1.0));
-    let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
+    let model = Mat4::from_axis_angle(
+        vec3(0.0, 0.0, 1.0),
+        Deg(0.0)
+    );
+
+    let model_bytes = &amp;*slice_from_raw_parts(
+        &amp;model as *const Mat4 as *const u8,
+        size_of::&lt;Mat4&gt;()
+    );
 
     let info = vk::CommandBufferBeginInfo::builder();
 
@@ -252,13 +259,15 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
 <p>With these changes in place, our program can now execute different rendering commands every frame which permits dynamic scenes! Let's exercise this new capability by restoring the rotation of the model to its former glory. Replace the model matrix calculation in <code>App::update_command_buffer</code> with the old calculation that rotates the model over time.</p>
 <pre><code class="language-rust noplaypen">let time = self.start.elapsed().as_secs_f32();
 
-let model = glm::rotate(
-    &amp;glm::identity(),
-    time * glm::radians(&amp;glm::vec1(90.0))[0],
-    &amp;glm::vec3(0.0, 0.0, 1.0),
+let model = Mat4::from_axis_angle(
+    vec3(0.0, 0.0, 1.0),
+    Deg(0.0) * time
 );
 
-let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
+let model_bytes = &amp;*slice_from_raw_parts(
+    &amp;model as *const Mat4 as *const u8,
+    size_of::&lt;Mat4&gt;()
+);
 </code></pre>
 <p>Run the program to see that the model should now be back to rotating now that we are pushing an updated model matrix to the shaders every frame.</p>
 <p><img src="../images/spinning_ghost_model.png" alt="" /></p>

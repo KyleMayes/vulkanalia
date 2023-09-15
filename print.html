@@ -364,9 +364,8 @@ use vulkanalia::prelude::v1_2::*;
 <p>After this command has executed, you'll have a folder called <code>vulkan-tutorial</code> containing a minimal Cargo project which produces a Rust executable.</p>
 <p>Open the <code>Cargo.toml</code> file in the folder and add these dependencies in the pre-existing <code>[dependencies]</code> section:</p>
 <pre><code class="language-toml">anyhow = &quot;1&quot;
-lazy_static = &quot;1&quot;
 log = &quot;0.4&quot;
-nalgebra-glm = &quot;0.18&quot;
+cgmath = &quot;0.18&quot;
 png = &quot;0.17&quot;
 pretty_env_logger = &quot;0.4&quot;
 thiserror = &quot;1&quot;
@@ -376,9 +375,8 @@ winit = &quot;0.28&quot;
 </code></pre>
 <ul>
 <li><code>anyhow</code> – used for simple error handling</li>
-<li><code>lazy_static</code> – used to store static data like vertices</li>
 <li><code>log</code> – used for logging statements</li>
-<li><code>nalgebra-glm</code> – used as a Rust replacement for <a href="https://glm.g-truc.net/0.9.9/index.html">GLM</a> (graphics math library)</li>
+<li><code>cgmath</code> – used as a Rust replacement for <a href="https://glm.g-truc.net/0.9.9/index.html">GLM</a> (graphics math library)</li>
 <li><code>png</code> – used to load PNGs to use as textures</li>
 <li><code>pretty_env_logger</code> – used to print our logs to the console</li>
 <li><code>thiserror</code> – used to define custom errors types without boilerplate</li>
@@ -2954,35 +2952,35 @@ layout(location = 2) in vec3 inColor;
 </code></pre>
 <p>You can find more info about the layout qualifier in the <a href="https://www.khronos.org/opengl/wiki/Layout_Qualifier_(GLSL)">OpenGL wiki</a>.</p>
 <h2 id="vertex-data"><a class="header" href="#vertex-data">Vertex data</a></h2>
-<p>We're moving the vertex data from the shader code to an array in the code of our program. We'll start by adding a few more imports to our program.</p>
+<p>We're moving the vertex data from the shader code to an array in the code of our program. We'll start by adding a few more imports and several type aliases to our program.</p>
 <pre><code class="language-rust noplaypen">use std::mem::size_of;
 
-use nalgebra_glm as glm;
-use lazy_static::lazy_static;
+use cgmath::{vec2, vec3};
+
+type Vec2 = cgmath::Vector2&lt;f32&gt;;
+type Vec3 = cgmath::Vector3&lt;f32&gt;;
 </code></pre>
-<p><code>size_of</code> will be used to calculate the size of the vertex data we'll be defining while <code>nalgebra-glm</code> defines the vector types we need. The <code>lazy_static!</code> macro will be used to define the vertex data since the vector constructors in <code>nalgebra-glm</code> are not yet <code>const fn</code>s.</p>
+<p><code>size_of</code> will be used to calculate the size of the vertex data we'll be defining while <code>cgmath</code> defines the vector types we need.</p>
 <p>Next, create a new <code>#[repr(C)]</code> structure called <code>Vertex</code> with the two attributes that we're going to use in the vertex shader inside it and add a simple constructor:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec2,
-    color: glm::Vec3,
+    pos: Vec2,
+    color: Vec3,
 }
 
 impl Vertex {
-    fn new(pos: glm::Vec2, color: glm::Vec3) -&gt; Self {
+    const fn new(pos: Vec2, color: Vec3) -&gt; Self {
         Self { pos, color }
     }
 }
 </code></pre>
-<p><code>nalgebra-glm</code> conveniently provides us with Rust types that exactly match the vector types used in the shader language.</p>
-<pre><code class="language-rust noplaypen">lazy_static! {
-    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
-        Vertex::new(glm::vec2(0.0, -0.5), glm::vec3(1.0, 0.0, 0.0)),
-        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 1.0, 0.0)),
-        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(0.0, 0.0, 1.0)),
-    ];
-}
+<p><code>cgmath</code> conveniently provides us with Rust types that exactly match the vector types used in the shader language.</p>
+<pre><code class="language-rust noplaypen">static VERTICES: [Vertex; 3] = [
+    Vertex::new(vec2(0.0, -0.5), vec3(1.0, 0.0, 0.0)),
+    Vertex::new(vec2(0.5, 0.5), vec3(0.0, 1.0, 0.0)),
+    Vertex::new(vec2(-0.5, 0.5), vec3(0.0, 0.0, 1.0)),
+];
 </code></pre>
 <p>Now use the <code>Vertex</code> structure to specify a list of vertex data. We're using exactly the same position and color values as before, but now they're combined into one array of vertices. This is known as <em>interleaving</em> vertex attributes.</p>
 <h2 id="binding-descriptions"><a class="header" href="#binding-descriptions">Binding descriptions</a></h2>
@@ -3025,14 +3023,14 @@ impl Vertex {
 <p>The <code>format</code> parameter describes the type of data for the attribute. A bit confusingly, the formats are specified using the same enumeration as color formats. The following shader types and formats are commonly used together:</p>
 <ul>
 <li><code>f32</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32_SFLOAT"><code class="hljs">vk::Format::R32_SFLOAT</code></a> </li>
-<li><code>glm::Vec2</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SFLOAT"><code class="hljs">vk::Format::R32G32_SFLOAT</code></a> </li>
-<li><code>glm::Vec3</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32_SFLOAT"><code class="hljs">vk::Format::R32G32B32_SFLOAT</code></a> </li>
-<li><code>glm::Vec4</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_SFLOAT"><code class="hljs">vk::Format::R32G32B32A32_SFLOAT</code></a> </li>
+<li><code>cgmath::Vector2&lt;f32&gt;</code> (our <code>Vec2</code>) – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SFLOAT"><code class="hljs">vk::Format::R32G32_SFLOAT</code></a> </li>
+<li><code>cgmath::Vector3&lt;f32&gt;</code> (our <code>Vec3</code>) – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32_SFLOAT"><code class="hljs">vk::Format::R32G32B32_SFLOAT</code></a> </li>
+<li><code>cgmath::Vector4&lt;f32&gt;</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_SFLOAT"><code class="hljs">vk::Format::R32G32B32A32_SFLOAT</code></a> </li>
 </ul>
 <p>As you can see, you should use the format where the amount of color channels matches the number of components in the shader data type. It is allowed to use more channels than the number of components in the shader, but they will be silently discarded. If the number of channels is lower than the number of components, then the BGA components will use default values of <code>(0, 0, 1)</code>. The color type (<code>SFLOAT</code>, <code>UINT</code>, <code>SINT</code>) and bit width should also match the type of the shader input. See the following examples:</p>
 <ul>
-<li><code>glm::IVec2</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SINT"><code class="hljs">vk::Format::R32G32_SINT</code></a>, a 2-component vector of <code>i32</code>s</li>
-<li><code>glm::UVec4</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_UINT"><code class="hljs">vk::Format::R32G32B32A32_UINT</code></a>, a 4-component vector of <code>u32</code>s</li>
+<li><code>cgmath::Vector2&lt;i32&gt;</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SINT"><code class="hljs">vk::Format::R32G32_SINT</code></a>, a 2-component vector of <code>i32</code>s</li>
+<li><code>cgmath::Vector4&lt;u32&gt;</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_UINT"><code class="hljs">vk::Format::R32G32B32A32_UINT</code></a>, a 4-component vector of <code>u32</code>s</li>
 <li><code>f64</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R64_SFLOAT"><code class="hljs">vk::Format::R64_SFLOAT</code></a>, a double-precision (64-bit) float</li>
 </ul>
 <p>The <code>format</code> parameter implicitly defines the byte size of attribute data and the <code>offset</code> parameter specifies the number of bytes since the start of the per-vertex data to read from. The binding is loading one <code>Vertex</code> at a time and the position attribute (<code>pos</code>) is at an offset of <code>0</code> bytes from the beginning of this struct.</p>
@@ -3040,7 +3038,7 @@ impl Vertex {
     .binding(0)
     .location(1)
     .format(vk::Format::R32G32B32_SFLOAT)
-    .offset(size_of::&lt;glm::Vec2&gt;() as u32)
+    .offset(size_of::&lt;Vec2&gt;() as u32)
     .build();
 </code></pre>
 <p>The color attribute is described in much the same way.</p>
@@ -3230,13 +3228,11 @@ device.cmd_draw(*command_buffer, VERTICES.len() as u32, 1, 0, 0);
 <p>Now run the program and you should see the familiar triangle again:</p>
 <p><img src="vertex/../images/triangle.png" alt="" /></p>
 <p>Try changing the color of the top vertex to white by modifying the <code>VERTICES</code> list:</p>
-<pre><code class="language-rust noplaypen">lazy_static! {
-    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
-        Vertex::new(glm::vec2(0.0, -0.5), glm::vec3(1.0, 1.0, 1.0)),
-        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 1.0, 0.0)),
-        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(0.0, 0.0, 1.0)),
-    ];
-}
+<pre><code class="language-rust noplaypen">static VERTICES: [Vertex; 3] = [
+    Vertex::new(vec2(0.0, -0.5), vec3(1.0, 1.0, 1.0)),
+    Vertex::new(vec2(0.5, 0.5), vec3(0.0, 1.0, 0.0)),
+    Vertex::new(vec2(-0.5, 0.5), vec3(0.0, 0.0, 1.0)),
+];
 </code></pre>
 <p>Run the program again and you should see the following:</p>
 <p><img src="vertex/../images/triangle_white.png" alt="" /></p>
@@ -3449,14 +3445,12 @@ device.free_memory(staging_buffer_memory, None);
 <p>An index buffer is essentially an array of pointers into the vertex buffer. It allows you to reorder the vertex data, and reuse existing data for multiple vertices. The illustration above demonstrates what the index buffer would look like for the rectangle if we have a vertex buffer containing each of the four unique vertices. The first three indices define the upper-right triangle and the last three indices define the vertices for the bottom-left triangle.</p>
 <h2 id="index-buffer-creation"><a class="header" href="#index-buffer-creation">Index buffer creation</a></h2>
 <p>In this chapter we're going to modify the vertex data and add index data to draw a rectangle like the one in the illustration. Modify the vertex data to represent the four corners:</p>
-<pre><code class="language-rust noplaypen">lazy_static! {
-    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
-        Vertex::new(glm::vec2(-0.5, -0.5), glm::vec3(1.0, 0.0, 0.0)),
-        Vertex::new(glm::vec2(0.5, -0.5), glm::vec3(0.0, 1.0, 0.0)),
-        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 0.0, 1.0)),
-        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(1.0, 1.0, 1.0)),
-    ];
-}
+<pre><code class="language-rust noplaypen">static VERTICES: [Vertex; 4] = [
+    Vertex::new(vec2(-0.5, -0.5), vec3(1.0, 0.0, 0.0)),
+    Vertex::new(vec2(0.5, -0.5), vec3(0.0, 1.0, 0.0)),
+    Vertex::new(vec2(0.5, 0.5), vec3(0.0, 0.0, 1.0)),
+    Vertex::new(vec2(-0.5, 0.5), vec3(1.0, 1.0, 1.0)),
+];
 </code></pre>
 <p>The top-left corner is red, top-right is green, bottom-right is blue and the bottom-left is white. We'll add a new array <code>INDICES</code> to represent the contents of the index buffer. It should match the indices in the illustration to draw the upper-right triangle and bottom-left triangle.</p>
 <pre><code class="language-rust noplaypen">const INDICES: &amp;[u16] = &amp;[0, 1, 2, 2, 3, 0];
@@ -3567,9 +3561,9 @@ device.cmd_bind_index_buffer(*command_buffer, data.index_buffer, 0, vk::IndexTyp
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 </code></pre>
 <p>Then we can copy the data to a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a> and access it through a uniform buffer object descriptor from the vertex shader like this:</p>
@@ -3609,16 +3603,21 @@ void main() {
 </code></pre>
 <p>Note that the order of the <code>uniform</code>, <code>in</code> and <code>out</code> declarations doesn't matter. The <code>binding</code> directive is similar to the <code>location</code> directive for attributes. We're going to reference this binding in the descriptor layout. The line with <code>gl_Position</code> is changed to use the transformations to compute the final position in clip coordinates. Unlike the 2D triangles, the last component of the clip coordinates may not be <code>1</code>, which will result in a division when converted to the final normalized device coordinates on the screen. This is used in perspective projection as the <em>perspective division</em> and is essential for making closer objects look larger than objects that are further away.</p>
 <h2 id="descriptor-set-layout"><a class="header" href="#descriptor-set-layout">Descriptor set layout</a></h2>
-<p>The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader.</p>
+<p>The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader. First we add a few more imports and several type aliases:</p>
+<pre><code class="language-rust noplaypen">use cgmath::{point3, Deg};
+
+type Mat4 = cgmath::Matrix4&lt;f32&gt;;
+</code></pre>
+<p>Then create the <code>UniformBufferObject</code> struct:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 </code></pre>
-<p>We can exactly match the definition in the shader using data types in GLM. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a <code>UniformBufferObject</code> to a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>.</p>
+<p>We can exactly match the definition in the shader using data types in <code>cgmath</code> crate. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a <code>UniformBufferObject</code> to a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>.</p>
 <p>We need to provide details about every descriptor binding used in the shaders for pipeline creation, just like we had to do for every vertex attribute and its <code>location</code> index. We'll set up a new function to define all of this information called <code>create_descriptor_set_layout</code>. It should be called right before pipeline creation, because we're going to need it there.</p>
 <pre><code class="language-rust noplaypen">impl App {
     unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
@@ -3798,31 +3797,30 @@ unsafe fn create_uniform_buffers(
 }
 </code></pre>
 <p>We will now define the model, view and projection transformations in the uniform buffer object. The model rotation will be a simple rotation around the Z-axis using the <code>time</code> variable:</p>
-<pre><code class="language-rust noplaypen">let model = glm::rotate(
-    &amp;glm::identity(),
-    time * glm::radians(&amp;glm::vec1(90.0))[0],
-    &amp;glm::vec3(0.0, 0.0, 1.0),
+<pre><code class="language-rust noplaypen">let model = Mat4::from_axis_angle(
+    vec3(0.0, 0.0, 1.0),
+    Deg(90.0) * time
 );
 </code></pre>
-<p>The <code>glm::rotate</code> function takes an existing transformation, rotation angle and rotation axis as parameters. The <code>glm::identity()</code> constructor returns an identity matrix. Using a rotation angle of <code>time * glm::radians(&amp;glm::vec1(90.0))[0]</code> accomplishes the purpose of rotating 90 degrees per second.</p>
-<pre><code class="language-rust noplaypen">let view = glm::look_at(
-    &amp;glm::vec3(2.0, 2.0, 2.0),
-    &amp;glm::vec3(0.0, 0.0, 0.0),
-    &amp;glm::vec3(0.0, 0.0, 1.0),
+<p>The <code>Mat4::from_axis_angle</code> function creates a transformation matrix from given rotation angle and rotation axis. Using a rotation angle of <code>Deg(90.0) * time</code> accomplishes the purpose of rotating 90 degrees per second.</p>
+<pre><code class="language-rust noplaypen">let view = Mat4::look_at_rh(
+    point3(2.0, 2.0, 2.0),
+    point3(0.0, 0.0, 0.0),
+    vec3(0.0, 0.0, 1.0),
 );
 </code></pre>
-<p>For the view transformation I've decided to look at the geometry from above at a 45 degree angle. The <code>glm::look_at</code> function takes the eye position, center position and up axis as parameters.</p>
-<pre><code class="language-rust noplaypen">let mut proj = glm::perspective(
+<p>For the view transformation I've decided to look at the geometry from above at a 45 degree angle. The <code>Mat4::look_at_rh</code> function takes the eye position, center position and up axis as parameters. <code>rh</code> stands for &quot;right-handed&quot; coordinate system, which is the coordinate system that Vulkan uses.</p>
+<pre><code class="language-rust noplaypen">let mut proj = cgmath::perspective(
+    Deg(45.0),
     self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
-    glm::radians(&amp;glm::vec1(45.0))[0],
     0.1,
     10.0,
 );
 </code></pre>
 <p>I've chosen to use a perspective projection with a 45 degree vertical field-of-view. The other parameters are the aspect ratio, near and far view planes. It is important to use the current swapchain extent to calculate the aspect ratio to take into account the new width and height of the window after a resize.</p>
-<pre><code class="language-rust noplaypen">proj[(1, 1)] *= -1.0;
+<pre><code class="language-rust noplaypen">proj[1][1] *= -1.0;
 </code></pre>
-<p>GLM was originally designed for OpenGL, where the Y coordinate of the clip coordinates is inverted. The easiest way to compensate for that is to flip the sign on the scaling factor of the Y axis in the projection matrix. If you don't do this, then the image will be rendered upside down.</p>
+<p><code>cgmath</code> was originally designed for OpenGL, where the Y coordinate of the clip coordinates is inverted. The easiest way to compensate for that is to flip the sign on the scaling factor of the Y axis in the projection matrix. If you don't do this, then the image will be rendered upside down.</p>
 <pre><code class="language-rust noplaypen">let ubo = UniformBufferObject { model, view, proj };
 </code></pre>
 <p>Lastly we combine our matrices into a uniform buffer object.</p>
@@ -3992,9 +3990,9 @@ device.cmd_draw_indexed(*command_buffer, INDICES.len() as u32, 1, 0, 0, 0);
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 </code></pre>
 <pre><code class="language-glsl">layout(binding = 0) uniform UniformBufferObject {
@@ -4007,10 +4005,10 @@ struct UniformBufferObject {
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    foo: glm::Vec2,
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    foo: Vec2,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 </code></pre>
 <pre><code class="language-glsl">layout(binding = 0) uniform UniformBufferObject {
@@ -4035,11 +4033,11 @@ struct UniformBufferObject {
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    foo: glm::Vec2,
+    foo: Vec2,
     _padding: [u8; 8],
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 </code></pre>
 <p>If you now compile and run your program again you should see that the shader correctly receives its matrix values once again.</p>
@@ -4834,13 +4832,13 @@ device.update_descriptor_sets(
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec2,
-    color: glm::Vec3,
-    tex_coord: glm::Vec2,
+    pos: Vec2,
+    color: Vec3,
+    tex_coord: Vec2,
 }
 
 impl Vertex {
-    fn new(pos: glm::Vec2, color: glm::Vec3, tex_coord: glm::Vec2) -&gt; Self {
+    const fn new(pos: Vec2, color: Vec3, tex_coord: Vec2) -&gt; Self {
         Self { pos, color, tex_coord }
     }
 
@@ -4863,27 +4861,25 @@ impl Vertex {
             .binding(0)
             .location(1)
             .format(vk::Format::R32G32B32_SFLOAT)
-            .offset(size_of::&lt;glm::Vec2&gt;() as u32)
+            .offset(size_of::&lt;Vec2&gt;() as u32)
             .build();
         let tex_coord = vk::VertexInputAttributeDescription::builder()
             .binding(0)
             .location(2)
             .format(vk::Format::R32G32_SFLOAT)
-            .offset((size_of::&lt;glm::Vec2&gt;() + size_of::&lt;glm::Vec3&gt;()) as u32)
+            .offset((size_of::&lt;Vec2&gt;() + size_of::&lt;Vec3&gt;()) as u32)
             .build();
         [pos, color, tex_coord]
     }
 }
 </code></pre>
-<p>Modify the <code>Vertex</code> struct to include a <code>glm::Vec2</code> for texture coordinates. Make sure to also add a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.VertexInputAttributeDescription.html"><code class="hljs">vk::VertexInputAttributeDescription</code></a> so that we can use access texture coordinates as input in the vertex shader. That is necessary to be able to pass them to the fragment shader for interpolation across the surface of the square.</p>
-<pre><code class="language-rust noplaypen">lazy_static! {
-    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
-        Vertex::new(glm::vec2(-0.5, -0.5), glm::vec3(1.0, 0.0, 0.0), glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec2(0.5, -0.5), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
-    ];
-}
+<p>Modify the <code>Vertex</code> struct to include a <code>Vec2</code> for texture coordinates. Make sure to also add a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.VertexInputAttributeDescription.html"><code class="hljs">vk::VertexInputAttributeDescription</code></a> so that we can use access texture coordinates as input in the vertex shader. That is necessary to be able to pass them to the fragment shader for interpolation across the surface of the square.</p>
+<pre><code class="language-rust noplaypen">static VERTICES: [Vertex; 4] = [
+    Vertex::new(vec2(-0.5, -0.5), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec2(0.5, -0.5), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec2(0.5, 0.5), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec2(-0.5, 0.5), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
+];
 </code></pre>
 <p>In this tutorial, I will simply fill the square with the texture by using coordinates from <code>0, 0</code> in the top-left corner to <code>1, 1</code> in the bottom-right corner. Feel free to experiment with different coordinates. Try using coordinates below <code>0</code> or above <code>1</code> to see the addressing modes in action!</p>
 <h2 id="shaders"><a class="header" href="#shaders">Shaders</a></h2>
@@ -4948,13 +4944,13 @@ void main() {
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec3,
-    color: glm::Vec3,
-    tex_coord: glm::Vec2,
+    pos: Vec3,
+    color: Vec3,
+    tex_coord: Vec2,
 }
 
 impl Vertex {
-    fn new(pos: glm::Vec3, color: glm::Vec3, tex_coord: glm::Vec2) -&gt; Self {
+    const fn new(pos: Vec3, color: Vec3, tex_coord: Vec2) -&gt; Self {
         Self { pos, color, tex_coord }
     }
 
@@ -4977,13 +4973,13 @@ impl Vertex {
             .binding(0)
             .location(1)
             .format(vk::Format::R32G32B32_SFLOAT)
-            .offset(size_of::&lt;glm::Vec3&gt;() as u32)
+            .offset(size_of::&lt;Vec3&gt;() as u32)
             .build();
         let tex_coord = vk::VertexInputAttributeDescription::builder()
             .binding(0)
             .location(2)
             .format(vk::Format::R32G32_SFLOAT)
-            .offset((size_of::&lt;glm::Vec3&gt;() + size_of::&lt;glm::Vec3&gt;()) as u32)
+            .offset((size_of::&lt;Vec3&gt;() + size_of::&lt;Vec3&gt;()) as u32)
             .build();
         [pos, color, tex_coord]
     }
@@ -5001,30 +4997,26 @@ void main() {
 }
 </code></pre>
 <p>Lastly, update the <code>vertices</code> container to include Z coordinates:</p>
-<pre><code class="language-rust noplaypen">lazy_static! {
-    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
-        Vertex::new(glm::vec3(-0.5, -0.5, 0.0),glm::vec3(1.0, 0.0, 0.0),glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, -0.5, 0.0), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, 0.5, 0.0), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, 0.5, 0.0), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
-    ];
-}
+<pre><code class="language-rust noplaypen">static VERTICES: [Vertex; 4] = [
+    Vertex::new(vec3(-0.5, -0.5, 0.0), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec3(0.5, -0.5, 0.0), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec3(0.5, 0.5, 0.0), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec3(-0.5, 0.5, 0.0), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
+];
 </code></pre>
 <p>If you run your application now, then you should see exactly the same result as before. It's time to add some extra geometry to make the scene more interesting, and to demonstrate the problem that we're going to tackle in this chapter. Duplicate the vertices to define positions for a square right under the current one like this:</p>
 <p><img src="model/../images/extra_square.svg" alt="" /></p>
 <p>Use Z coordinates of <code>-0.5</code> and add the appropriate indices for the extra square:</p>
-<pre><code class="language-rust noplaypen">lazy_static! {
-    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
-        Vertex::new(glm::vec3(-0.5, -0.5, 0.0),glm::vec3(1.0, 0.0, 0.0),glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, -0.5, 0.0), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, 0.5, 0.0), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, 0.5, 0.0), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(1.0, 0.0, 0.0), glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, -0.5, -0.5), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, 0.5, -0.5), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, 0.5, -0.5), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
-    ];
-}
+<pre><code class="language-rust noplaypen">static VERTICES: [Vertex; 8] = [
+    Vertex::new(vec3(-0.5, -0.5, 0.0), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec3(0.5, -0.5, 0.0), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec3(0.5, 0.5, 0.0), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec3(-0.5, 0.5, 0.0), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
+    Vertex::new(vec3(-0.5, -0.5, -0.5), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec3(0.5, -0.5, -0.5), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec3(0.5, 0.5, -0.5), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec3(-0.5, 0.5, -0.5), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
+];
 
 const INDICES: &amp;[u16] = &amp;[
     0, 1, 2, 2, 3, 0,
@@ -5039,13 +5031,31 @@ const INDICES: &amp;[u16] = &amp;[
 <li>Use depth testing with a depth buffer</li>
 </ul>
 <p>The first approach is commonly used for drawing transparent objects, because order-independent transparency is a difficult challenge to solve. However, the problem of ordering fragments by depth is much more commonly solved using a <em>depth buffer</em>. A depth buffer is an additional attachment that stores the depth for every position, just like the color attachment stores the color of every position. Every time the rasterizer produces a fragment, the depth test will check if the new fragment is closer than the previous one. If it isn't, then the new fragment is discarded. A fragment that passes the depth test writes its own depth to the depth buffer. It is possible to manipulate this value from the fragment shader, just like you can manipulate the color output.</p>
-<p>Before we continue, there is one issue we need to fix. The perspective projection matrix generated by <code>glm::perspective</code> in <code>App::update_uniform_buffer</code> uses OpenGL depth range of <code>-1.0</code> to <code>1.0</code>. We want to use the Vulkan range of <code>0.0</code> to <code>1.0</code> instead so we'll use the <code>glm::perspective_rh_zo</code> (<code>zo</code> = zero-to-one) function instead.</p>
-<pre><code class="language-rust noplaypen">let mut proj = glm::perspective_rh_zo(
-    self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
-    glm::radians(&amp;glm::vec1(45.0))[0],
-    0.1,
-    10.0,
+<p>Before we continue, there is one issue we need to fix. The perspective projection matrix generated by <code>cgmath::perspective</code> in <code>App::update_uniform_buffer</code> uses OpenGL depth range of <code>-1.0</code> to <code>1.0</code>. We want to use the Vulkan range of <code>0.0</code> to <code>1.0</code> instead so we'll pre-multiply the generated perspective matrix with a <a href="https://matthewwellings.com/blog/the-new-vulkan-coordinate-system">correction matrix</a> that maps the OpenGL range to the Vulkan range:</p>
+<pre><code class="language-rust noplaypen">let correction = Mat4::new(
+    1.0,  0.0,       0.0, 0.0,
+    0.0, -1.0,       0.0, 0.0, // we're also handling Y-flipping here
+    0.0,  0.0, 1.0 / 2.0, 0.0,
+    0.0,  0.0, 1.0 / 2.0, .0,
 );
+
+let proj = correction
+    * cgmath::perspective(
+        Deg(45.0),
+        self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+        0.1,
+        10.0,
+    );
+
+// this line can be deleted now, because we're already handling the Y-axis flip
+// with the correction matrix
+// proj[1][1] *= -1.0;
+</code></pre>
+<p>Note that <code>cgmath::Matrix4::new</code> constructs a matrix in column-major order, so the parameters we passed to it seem to be transposed. So the actual matrix would look like this in row-major order:</p>
+<pre><code class="language-text">1   0   0   0
+0  -1   0   0
+0   0   ½   ½
+0   0   0   1
 </code></pre>
 <h2 id="depth-image-and-view"><a class="header" href="#depth-image-and-view">Depth image and view</a></h2>
 <p>A depth attachment is based on an image, just like the color attachment. The difference is that the swapchain will not automatically create depth images for us. We only need a single depth image, because only one draw operation is running at once. The depth image will again require the trifecta of resources: image, memory and image view.</p>
@@ -5440,7 +5450,7 @@ let clear_values = &amp;[color_clear_value, depth_clear_value];
 <p>You'll also need to update the size of the index buffer in <code>create_index_buffer</code>:</p>
 <pre><code class="language-rust noplaypen">let size = (size_of::&lt;u32&gt;() * data.indices.len()) as u64;
 </code></pre>
-<p>Next we are going to need some more imports (and we can remove the <code>lazy_static</code> import now that the global arrays have been deleted):</p>
+<p>Next we are going to need some more imports:</p>
 <pre><code class="language-rust noplaypen">use std::collections::HashMap;
 use std::hash::{Hash, Hasher};
 use std::io::BufReader;
@@ -5481,9 +5491,9 @@ let (models, _) = tobj::load_obj_buf(
 <pre><code class="language-rust noplaypen">for model in &amp;models {
     for index in &amp;model.mesh.indices {
         let vertex = Vertex {
-            pos: glm::vec3(0.0, 0.0, 0.0),
-            color: glm::vec3(1.0, 1.0, 1.0),
-            tex_coord: glm::vec2(0.0, 0.0),
+            pos: vec3(0.0, 0.0, 0.0),
+            color: vec3(1.0, 1.0, 1.0),
+            tex_coord: vec2(0.0, 0.0),
         };
 
         data.vertices.push(vertex);
@@ -5496,23 +5506,23 @@ let (models, _) = tobj::load_obj_buf(
 let tex_coord_offset = (2 * index) as usize;
 
 let vertex = Vertex {
-    pos: glm::vec3(
+    pos: vec3(
         model.mesh.positions[pos_offset],
         model.mesh.positions[pos_offset + 1],
         model.mesh.positions[pos_offset + 2],
     ),
-    color: glm::vec3(1.0, 1.0, 1.0),
-    tex_coord: glm::vec2(
+    color: vec3(1.0, 1.0, 1.0),
+    tex_coord: vec2(
         model.mesh.texcoords[tex_coord_offset],
         model.mesh.texcoords[tex_coord_offset + 1],
     ),
 };
 </code></pre>
-<p>Unfortunately the <code>attrib.vertices</code> array is an array of <code>float</code> values instead of something like <code>glm::vec3</code>, so you need to multiply the index by <code>3</code>. Similarly, there are two texture coordinate components per entry. The offsets of <code>0</code>, <code>1</code> and <code>2</code> are used to access the X, Y and Z components, or the U and V components in the case of texture coordinates.</p>
+<p>Unfortunately the <code>attrib.vertices</code> array is an array of <code>float</code> values instead of something like <code>cgmath::Vector3&lt;f32&gt;</code>, so you need to multiply the index by <code>3</code>. Similarly, there are two texture coordinate components per entry. The offsets of <code>0</code>, <code>1</code> and <code>2</code> are used to access the X, Y and Z components, or the U and V components in the case of texture coordinates.</p>
 <p>You may want to start compiling your program in release mode from now on because loading the texture and model can be quite slow without optimizations. If you run your program now you should see something like the following:</p>
 <p><img src="model/../images/inverted_texture_coordinates.png" alt="" /></p>
 <p>Great, the geometry looks correct, but what's going on with the texture? The OBJ format assumes a coordinate system where a vertical coordinate of <code>0</code> means the bottom of the image, however we've uploaded our image into Vulkan in a top to bottom orientation where <code>0</code> means the top of the image. Solve this by flipping the vertical component of the texture coordinates:</p>
-<pre><code class="language-rust noplaypen">tex_coord: glm::vec2(
+<pre><code class="language-rust noplaypen">tex_coord: vec2(
     model.mesh.texcoords[tex_coord_offset],
     1.0 - model.mesh.texcoords[tex_coord_offset + 1],
 ),
@@ -6355,25 +6365,30 @@ void main() {
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 </code></pre>
 <p>Also remove <code>model</code> from the <code>App::update_command_buffers</code> method.</p>
-<pre><code class="language-rust noplaypen">let view = glm::look_at(
-    &amp;glm::vec3(2.0, 2.0, 2.0),
-    &amp;glm::vec3(0.0, 0.0, 0.0),
-    &amp;glm::vec3(0.0, 0.0, 1.0),
+<pre><code class="language-rust noplaypen">let view = Mat4::look_at_rh(
+    point3(2.0, 2.0, 2.0),
+    point3(0.0, 0.0, 0.0),
+    vec3(0.0, 0.0, 1.0),
 );
 
-let mut proj = glm::perspective_rh_zo(
+let correction = Mat4::new(
+    1.0,  0.0,       0.0, 0.0,
+    0.0, -1.0,       0.0, 0.0,
+    0.0,  0.0, 1.0 / 2.0, 0.0,
+    0.0,  0.0, 1.0 / 2.0, .0,
+);
+
+let proj = correction * cgmath::perspective(
+    Deg(45.0),
     self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
-    glm::radians(&amp;glm::vec1(45.0))[0],
     0.1,
     10.0,
 );
-
-proj[(1, 1)] *= -1.0;
 
 let ubo = UniformBufferObject { view, proj };
 
@@ -6396,8 +6411,15 @@ data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
 <p>The push constant range here specifies that the push constants accessed by the vertex shader can be found at the beginning of the push constants provided to the graphics pipeline and are the size of a <code>mat4</code>.</p>
 <p>With all that in place, we can actually start pushing the model matrix to the vertex shader. Push constants are recorded directly into the command buffers submitted to the GPU which is both why they are so fast and why their size is so limited.</p>
 <p>In the <code>create_command_buffers</code> function, define a model matrix and use <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/trait.DeviceV1_0.html#method.cmd_push_constants"><code class="hljs">cmd_push_constants</code></a> to add it to the command buffers as a push constant right before we record the draw command.</p>
-<pre><code class="language-rust noplaypen">let model = glm::rotate(&amp;glm::identity(), 0.0f32, &amp;glm::vec3(0.0, 0.0, 1.0));
-let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
+<pre><code class="language-rust noplaypen">let model = Mat4::from_axis_angle(
+    vec3(0.0, 0.0, 1.0),
+    Deg(0.0)
+);
+
+let model_bytes = &amp;*slice_from_raw_parts(
+    &amp;model as *const Mat4 as *const u8,
+    size_of::&lt;Mat4&gt;()
+);
 
 for (i, command_buffer) in data.command_buffers.iter().enumerate() {
     // ...
@@ -6538,8 +6560,15 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
 <pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     // ...
 
-    let model = glm::rotate(&amp;glm::identity(), 0.0f32, &amp;glm::vec3(0.0, 0.0, 1.0));
-    let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
+    let model = Mat4::from_axis_angle(
+        vec3(0.0, 0.0, 1.0),
+        Deg(0.0)
+    );
+
+    let model_bytes = &amp;*slice_from_raw_parts(
+        &amp;model as *const Mat4 as *const u8,
+        size_of::&lt;Mat4&gt;()
+    );
 
     let info = vk::CommandBufferBeginInfo::builder();
 
@@ -6603,13 +6632,15 @@ data.command_pool = device.create_command_pool(&amp;info, None)?;
 <p>With these changes in place, our program can now execute different rendering commands every frame which permits dynamic scenes! Let's exercise this new capability by restoring the rotation of the model to its former glory. Replace the model matrix calculation in <code>App::update_command_buffer</code> with the old calculation that rotates the model over time.</p>
 <pre><code class="language-rust noplaypen">let time = self.start.elapsed().as_secs_f32();
 
-let model = glm::rotate(
-    &amp;glm::identity(),
-    time * glm::radians(&amp;glm::vec1(90.0))[0],
-    &amp;glm::vec3(0.0, 0.0, 1.0),
+let model = Mat4::from_axis_angle(
+    vec3(0.0, 0.0, 1.0),
+    Deg(0.0) * time
 );
 
-let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
+let model_bytes = &amp;*slice_from_raw_parts(
+    &amp;model as *const Mat4 as *const u8,
+    size_of::&lt;Mat4&gt;()
+);
 </code></pre>
 <p>Run the program to see that the model should now be back to rotating now that we are pushing an updated model matrix to the shaders every frame.</p>
 <p><img src="dynamic/../images/spinning_ghost_model.png" alt="" /></p>
@@ -6857,13 +6888,15 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 
     let time = self.start.elapsed().as_secs_f32();
 
-    let model = glm::rotate(
-        &amp;glm::identity(),
-        time * glm::radians(&amp;glm::vec1(90.0))[0],
-        &amp;glm::vec3(0.0, 0.0, 1.0),
+    let model = Mat4::from_axis_angle(
+        vec3(0.0, 0.0, 1.0),
+        Deg(0.0) * time
     );
 
-    let (_, model_bytes, _) = model.as_slice().align_to::&lt;u8&gt;();
+    let model_bytes = &amp;*slice_from_raw_parts(
+        &amp;model as *const Mat4 as *const u8,
+        size_of::&lt;Mat4&gt;()
+    );
 
     let opacity = (model_index + 1) as f32 * 0.25;
     let opacity_bytes = &amp;opacity.to_ne_bytes()[..];
@@ -6956,24 +6989,18 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 <pre><code class="language-rust noplaypen">let y = (((model_index % 2) as f32) * 2.5) - 1.25;
 let z = (((model_index / 2) as f32) * -2.0) + 1.0;
 
-let model = glm::translate(
-    &amp;glm::identity(),
-    &amp;glm::vec3(0.0, y, z),
-);
-
 let time = self.start.elapsed().as_secs_f32();
 
-let model = glm::rotate(
-    &amp;model,
-    time * glm::radians(&amp;glm::vec1(90.0))[0],
-    &amp;glm::vec3(0.0, 0.0, 1.0),
+let model = Mat4::from_translation(vec3(0.0, y, z)) * Mat4::from_axis_angle(
+    vec3(0.0, 0.0, 1.0),
+    Deg(90.0) * time
 );
 </code></pre>
 <p>This code places the model instances in a grid on the Y and Z axes. However, due to the view matrix we're using, the camera is looking at this plane at 45 degree angles so let's update the view matrix in <code>App::update_uniform_buffer</code> to look directly at the YZ plane to better view our model instances.</p>
-<pre><code class="language-rust noplaypen">let view = glm::look_at(
-    &amp;glm::vec3(6.0, 0.0, 2.0),
-    &amp;glm::vec3(0.0, 0.0, 0.0),
-    &amp;glm::vec3(0.0, 0.0, 1.0),
+<pre><code class="language-rust noplaypen">let view = Mat4::look_at_rh(
+    point3(6.0, 0.0, 2.0),
+    point3(0.0, 0.0, 0.0),
+    vec3(0.0, 0.0, 1.0),
 );
 </code></pre>
 <p>With a better vantage point secured, run the program and bask in its glory.</p>

@@ -146,9 +146,9 @@
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 </code></pre>
 <p>Then we can copy the data to a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a> and access it through a uniform buffer object descriptor from the vertex shader like this:</p>
@@ -188,16 +188,21 @@ void main() {
 </code></pre>
 <p>Note that the order of the <code>uniform</code>, <code>in</code> and <code>out</code> declarations doesn't matter. The <code>binding</code> directive is similar to the <code>location</code> directive for attributes. We're going to reference this binding in the descriptor layout. The line with <code>gl_Position</code> is changed to use the transformations to compute the final position in clip coordinates. Unlike the 2D triangles, the last component of the clip coordinates may not be <code>1</code>, which will result in a division when converted to the final normalized device coordinates on the screen. This is used in perspective projection as the <em>perspective division</em> and is essential for making closer objects look larger than objects that are further away.</p>
 <h2 id="descriptor-set-layout"><a class="header" href="#descriptor-set-layout">Descriptor set layout</a></h2>
-<p>The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader.</p>
+<p>The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader. First we add a few more imports and several type aliases:</p>
+<pre><code class="language-rust noplaypen">use cgmath::{point3, Deg};
+
+type Mat4 = cgmath::Matrix4&lt;f32&gt;;
+</code></pre>
+<p>Then create the <code>UniformBufferObject</code> struct:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 </code></pre>
-<p>We can exactly match the definition in the shader using data types in GLM. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a <code>UniformBufferObject</code> to a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>.</p>
+<p>We can exactly match the definition in the shader using data types in <code>cgmath</code> crate. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a <code>UniformBufferObject</code> to a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>.</p>
 <p>We need to provide details about every descriptor binding used in the shaders for pipeline creation, just like we had to do for every vertex attribute and its <code>location</code> index. We'll set up a new function to define all of this information called <code>create_descriptor_set_layout</code>. It should be called right before pipeline creation, because we're going to need it there.</p>
 <pre><code class="language-rust noplaypen">impl App {
     unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
@@ -377,31 +382,30 @@ unsafe fn create_uniform_buffers(
 }
 </code></pre>
 <p>We will now define the model, view and projection transformations in the uniform buffer object. The model rotation will be a simple rotation around the Z-axis using the <code>time</code> variable:</p>
-<pre><code class="language-rust noplaypen">let model = glm::rotate(
-    &amp;glm::identity(),
-    time * glm::radians(&amp;glm::vec1(90.0))[0],
-    &amp;glm::vec3(0.0, 0.0, 1.0),
+<pre><code class="language-rust noplaypen">let model = Mat4::from_axis_angle(
+    vec3(0.0, 0.0, 1.0),
+    Deg(90.0) * time
 );
 </code></pre>
-<p>The <code>glm::rotate</code> function takes an existing transformation, rotation angle and rotation axis as parameters. The <code>glm::identity()</code> constructor returns an identity matrix. Using a rotation angle of <code>time * glm::radians(&amp;glm::vec1(90.0))[0]</code> accomplishes the purpose of rotating 90 degrees per second.</p>
-<pre><code class="language-rust noplaypen">let view = glm::look_at(
-    &amp;glm::vec3(2.0, 2.0, 2.0),
-    &amp;glm::vec3(0.0, 0.0, 0.0),
-    &amp;glm::vec3(0.0, 0.0, 1.0),
+<p>The <code>Mat4::from_axis_angle</code> function creates a transformation matrix from given rotation angle and rotation axis. Using a rotation angle of <code>Deg(90.0) * time</code> accomplishes the purpose of rotating 90 degrees per second.</p>
+<pre><code class="language-rust noplaypen">let view = Mat4::look_at_rh(
+    point3(2.0, 2.0, 2.0),
+    point3(0.0, 0.0, 0.0),
+    vec3(0.0, 0.0, 1.0),
 );
 </code></pre>
-<p>For the view transformation I've decided to look at the geometry from above at a 45 degree angle. The <code>glm::look_at</code> function takes the eye position, center position and up axis as parameters.</p>
-<pre><code class="language-rust noplaypen">let mut proj = glm::perspective(
+<p>For the view transformation I've decided to look at the geometry from above at a 45 degree angle. The <code>Mat4::look_at_rh</code> function takes the eye position, center position and up axis as parameters. <code>rh</code> stands for &quot;right-handed&quot; coordinate system, which is the coordinate system that Vulkan uses.</p>
+<pre><code class="language-rust noplaypen">let mut proj = cgmath::perspective(
+    Deg(45.0),
     self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
-    glm::radians(&amp;glm::vec1(45.0))[0],
     0.1,
     10.0,
 );
 </code></pre>
 <p>I've chosen to use a perspective projection with a 45 degree vertical field-of-view. The other parameters are the aspect ratio, near and far view planes. It is important to use the current swapchain extent to calculate the aspect ratio to take into account the new width and height of the window after a resize.</p>
-<pre><code class="language-rust noplaypen">proj[(1, 1)] *= -1.0;
+<pre><code class="language-rust noplaypen">proj[1][1] *= -1.0;
 </code></pre>
-<p>GLM was originally designed for OpenGL, where the Y coordinate of the clip coordinates is inverted. The easiest way to compensate for that is to flip the sign on the scaling factor of the Y axis in the projection matrix. If you don't do this, then the image will be rendered upside down.</p>
+<p><code>cgmath</code> was originally designed for OpenGL, where the Y coordinate of the clip coordinates is inverted. The easiest way to compensate for that is to flip the sign on the scaling factor of the Y axis in the projection matrix. If you don't do this, then the image will be rendered upside down.</p>
 <pre><code class="language-rust noplaypen">let ubo = UniformBufferObject { model, view, proj };
 </code></pre>
 <p>Lastly we combine our matrices into a uniform buffer object.</p>

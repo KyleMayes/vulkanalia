@@ -156,35 +156,35 @@ layout(location = 2) in vec3 inColor;
 </code></pre>
 <p>You can find more info about the layout qualifier in the <a href="https://www.khronos.org/opengl/wiki/Layout_Qualifier_(GLSL)">OpenGL wiki</a>.</p>
 <h2 id="vertex-data"><a class="header" href="#vertex-data">Vertex data</a></h2>
-<p>We're moving the vertex data from the shader code to an array in the code of our program. We'll start by adding a few more imports to our program.</p>
+<p>We're moving the vertex data from the shader code to an array in the code of our program. We'll start by adding a few more imports and several type aliases to our program.</p>
 <pre><code class="language-rust noplaypen">use std::mem::size_of;
 
-use nalgebra_glm as glm;
-use lazy_static::lazy_static;
+use cgmath::{vec2, vec3};
+
+type Vec2 = cgmath::Vector2&lt;f32&gt;;
+type Vec3 = cgmath::Vector3&lt;f32&gt;;
 </code></pre>
-<p><code>size_of</code> will be used to calculate the size of the vertex data we'll be defining while <code>nalgebra-glm</code> defines the vector types we need. The <code>lazy_static!</code> macro will be used to define the vertex data since the vector constructors in <code>nalgebra-glm</code> are not yet <code>const fn</code>s.</p>
+<p><code>size_of</code> will be used to calculate the size of the vertex data we'll be defining while <code>cgmath</code> defines the vector types we need.</p>
 <p>Next, create a new <code>#[repr(C)]</code> structure called <code>Vertex</code> with the two attributes that we're going to use in the vertex shader inside it and add a simple constructor:</p>
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec2,
-    color: glm::Vec3,
+    pos: Vec2,
+    color: Vec3,
 }
 
 impl Vertex {
-    fn new(pos: glm::Vec2, color: glm::Vec3) -&gt; Self {
+    const fn new(pos: Vec2, color: Vec3) -&gt; Self {
         Self { pos, color }
     }
 }
 </code></pre>
-<p><code>nalgebra-glm</code> conveniently provides us with Rust types that exactly match the vector types used in the shader language.</p>
-<pre><code class="language-rust noplaypen">lazy_static! {
-    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
-        Vertex::new(glm::vec2(0.0, -0.5), glm::vec3(1.0, 0.0, 0.0)),
-        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 1.0, 0.0)),
-        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(0.0, 0.0, 1.0)),
-    ];
-}
+<p><code>cgmath</code> conveniently provides us with Rust types that exactly match the vector types used in the shader language.</p>
+<pre><code class="language-rust noplaypen">static VERTICES: [Vertex; 3] = [
+    Vertex::new(vec2(0.0, -0.5), vec3(1.0, 0.0, 0.0)),
+    Vertex::new(vec2(0.5, 0.5), vec3(0.0, 1.0, 0.0)),
+    Vertex::new(vec2(-0.5, 0.5), vec3(0.0, 0.0, 1.0)),
+];
 </code></pre>
 <p>Now use the <code>Vertex</code> structure to specify a list of vertex data. We're using exactly the same position and color values as before, but now they're combined into one array of vertices. This is known as <em>interleaving</em> vertex attributes.</p>
 <h2 id="binding-descriptions"><a class="header" href="#binding-descriptions">Binding descriptions</a></h2>
@@ -227,14 +227,14 @@ impl Vertex {
 <p>The <code>format</code> parameter describes the type of data for the attribute. A bit confusingly, the formats are specified using the same enumeration as color formats. The following shader types and formats are commonly used together:</p>
 <ul>
 <li><code>f32</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32_SFLOAT"><code class="hljs">vk::Format::R32_SFLOAT</code></a> </li>
-<li><code>glm::Vec2</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SFLOAT"><code class="hljs">vk::Format::R32G32_SFLOAT</code></a> </li>
-<li><code>glm::Vec3</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32_SFLOAT"><code class="hljs">vk::Format::R32G32B32_SFLOAT</code></a> </li>
-<li><code>glm::Vec4</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_SFLOAT"><code class="hljs">vk::Format::R32G32B32A32_SFLOAT</code></a> </li>
+<li><code>cgmath::Vector2&lt;f32&gt;</code> (our <code>Vec2</code>) – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SFLOAT"><code class="hljs">vk::Format::R32G32_SFLOAT</code></a> </li>
+<li><code>cgmath::Vector3&lt;f32&gt;</code> (our <code>Vec3</code>) – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32_SFLOAT"><code class="hljs">vk::Format::R32G32B32_SFLOAT</code></a> </li>
+<li><code>cgmath::Vector4&lt;f32&gt;</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_SFLOAT"><code class="hljs">vk::Format::R32G32B32A32_SFLOAT</code></a> </li>
 </ul>
 <p>As you can see, you should use the format where the amount of color channels matches the number of components in the shader data type. It is allowed to use more channels than the number of components in the shader, but they will be silently discarded. If the number of channels is lower than the number of components, then the BGA components will use default values of <code>(0, 0, 1)</code>. The color type (<code>SFLOAT</code>, <code>UINT</code>, <code>SINT</code>) and bit width should also match the type of the shader input. See the following examples:</p>
 <ul>
-<li><code>glm::IVec2</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SINT"><code class="hljs">vk::Format::R32G32_SINT</code></a>, a 2-component vector of <code>i32</code>s</li>
-<li><code>glm::UVec4</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_UINT"><code class="hljs">vk::Format::R32G32B32A32_UINT</code></a>, a 4-component vector of <code>u32</code>s</li>
+<li><code>cgmath::Vector2&lt;i32&gt;</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SINT"><code class="hljs">vk::Format::R32G32_SINT</code></a>, a 2-component vector of <code>i32</code>s</li>
+<li><code>cgmath::Vector4&lt;u32&gt;</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_UINT"><code class="hljs">vk::Format::R32G32B32A32_UINT</code></a>, a 4-component vector of <code>u32</code>s</li>
 <li><code>f64</code> – <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Format.html#associatedconstant.R64_SFLOAT"><code class="hljs">vk::Format::R64_SFLOAT</code></a>, a double-precision (64-bit) float</li>
 </ul>
 <p>The <code>format</code> parameter implicitly defines the byte size of attribute data and the <code>offset</code> parameter specifies the number of bytes since the start of the per-vertex data to read from. The binding is loading one <code>Vertex</code> at a time and the position attribute (<code>pos</code>) is at an offset of <code>0</code> bytes from the beginning of this struct.</p>
@@ -242,7 +242,7 @@ impl Vertex {
     .binding(0)
     .location(1)
     .format(vk::Format::R32G32B32_SFLOAT)
-    .offset(size_of::&lt;glm::Vec2&gt;() as u32)
+    .offset(size_of::&lt;Vec2&gt;() as u32)
     .build();
 </code></pre>
 <p>The color attribute is described in much the same way.</p>

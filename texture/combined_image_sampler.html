@@ -186,13 +186,13 @@ device.update_descriptor_sets(
 <pre><code class="language-rust noplaypen">#[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec2,
-    color: glm::Vec3,
-    tex_coord: glm::Vec2,
+    pos: Vec2,
+    color: Vec3,
+    tex_coord: Vec2,
 }
 
 impl Vertex {
-    fn new(pos: glm::Vec2, color: glm::Vec3, tex_coord: glm::Vec2) -&gt; Self {
+    const fn new(pos: Vec2, color: Vec3, tex_coord: Vec2) -&gt; Self {
         Self { pos, color, tex_coord }
     }
 
@@ -215,27 +215,25 @@ impl Vertex {
             .binding(0)
             .location(1)
             .format(vk::Format::R32G32B32_SFLOAT)
-            .offset(size_of::&lt;glm::Vec2&gt;() as u32)
+            .offset(size_of::&lt;Vec2&gt;() as u32)
             .build();
         let tex_coord = vk::VertexInputAttributeDescription::builder()
             .binding(0)
             .location(2)
             .format(vk::Format::R32G32_SFLOAT)
-            .offset((size_of::&lt;glm::Vec2&gt;() + size_of::&lt;glm::Vec3&gt;()) as u32)
+            .offset((size_of::&lt;Vec2&gt;() + size_of::&lt;Vec3&gt;()) as u32)
             .build();
         [pos, color, tex_coord]
     }
 }
 </code></pre>
-<p>Modify the <code>Vertex</code> struct to include a <code>glm::Vec2</code> for texture coordinates. Make sure to also add a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.VertexInputAttributeDescription.html"><code class="hljs">vk::VertexInputAttributeDescription</code></a> so that we can use access texture coordinates as input in the vertex shader. That is necessary to be able to pass them to the fragment shader for interpolation across the surface of the square.</p>
-<pre><code class="language-rust noplaypen">lazy_static! {
-    static ref VERTICES: Vec&lt;Vertex&gt; = vec![
-        Vertex::new(glm::vec2(-0.5, -0.5), glm::vec3(1.0, 0.0, 0.0), glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec2(0.5, -0.5), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
-    ];
-}
+<p>Modify the <code>Vertex</code> struct to include a <code>Vec2</code> for texture coordinates. Make sure to also add a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.VertexInputAttributeDescription.html"><code class="hljs">vk::VertexInputAttributeDescription</code></a> so that we can use access texture coordinates as input in the vertex shader. That is necessary to be able to pass them to the fragment shader for interpolation across the surface of the square.</p>
+<pre><code class="language-rust noplaypen">static VERTICES: [Vertex; 4] = [
+    Vertex::new(vec2(-0.5, -0.5), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec2(0.5, -0.5), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec2(0.5, 0.5), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec2(-0.5, 0.5), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
+];
 </code></pre>
 <p>In this tutorial, I will simply fill the square with the texture by using coordinates from <code>0, 0</code> in the top-left corner to <code>1, 1</code> in the bottom-right corner. Feel free to experiment with different coordinates. Try using coordinates below <code>0</code> or above <code>1</code> to see the addressing modes in action!</p>
 <h2 id="shaders"><a class="header" href="#shaders">Shaders</a></h2>
