@@ -1,6 +1,8 @@
 Cargo.lock
 index.txt
 
+*.diff
+
 .gradle/
 .idea/
 build/
