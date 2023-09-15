@@ -2449,19 +2449,6 @@ data.render_finished_semaphore = device.create_semaphore(&amp;semaphore_info, No
         )?
         .0 as usize;
 
-        let wait_semaphores = &amp;[self.data.image_available_semaphore];
-let wait_stages = &amp;[vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT];
-let command_buffers = &amp;[self.data.command_buffers[image_index as usize]];
-let signal_semaphores = &amp;[self.data.render_finished_semaphore];
-let submit_info = vk::SubmitInfo::builder()
-    .wait_semaphores(wait_semaphores)
-    .wait_dst_stage_mask(wait_stages)
-    .command_buffers(command_buffers)
-    .signal_semaphores(signal_semaphores);
-
-    self.device.queue_submit(
-    self.data.graphics_queue, &amp;[submit_info], vk::Fence::null())?;
-
     Ok(())
 }
 </code></pre>
@@ -2480,7 +2467,7 @@ let submit_info = vk::SubmitInfo::builder()
     .command_buffers(command_buffers)
     .signal_semaphores(signal_semaphores);
 </code></pre>
-<p>The first two parameters, <code>wait_semaphores</code> and <code>wait_dst_stage_mask</code>, specifies which semaphores to wait on before execution begins and in which stage(s) of the pipeline to wait. We want to wait with writing colors to the image until it's available, so we're specifying the stage of the graphics pipeline that writes to the color attachment. That means that theoretically the implementation can already start executing our vertex shader and such while the image is not yet available. Each entry in the <code>wait_stages</code> array corresponds to the semaphore with the same index in <code>wait_semaphores</code>.</p>
+<p>The first two parameters, <code>wait_semaphores</code> and <code>wait_dst_stage_mask</code>, specify which semaphores to wait on before execution begins and in which stage(s) of the pipeline to wait. We want to wait with writing colors to the image until it's available, so we're specifying the stage of the graphics pipeline that writes to the color attachment. That means that theoretically the implementation can already start executing our vertex shader and such while the image is not yet available. Each entry in the <code>wait_stages</code> array corresponds to the semaphore with the same index in <code>wait_semaphores</code>.</p>
 <p>The next parameter, <code>command_buffers</code>, specifies which command buffers to actually submit for execution. As mentioned earlier, we should submit the command buffer that binds the swapchain image we just acquired as color attachment.</p>
 <p>Lastly <code>signal_semaphores</code> specifies which semaphores to signal once the command buffer(s) have finished execution. In our case we're using the <code>render_finished_semaphore</code> for that purpose.</p>
 <pre><code class="language-rust noplaypen">self.device.queue_submit(
