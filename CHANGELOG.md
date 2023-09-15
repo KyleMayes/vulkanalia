@@ -5,6 +5,7 @@
 
 ### Added
 - Added `InputChainStruct` and `OutputChainStruct` traits which are implemented for structs that can be part of pointer chains
+- Added `bytecode` module to `vulkanalia` with SPIR-V bytecode buffer helper
 - Added `chain` module to `vulkanalia` with pointer chain helpers (e.g. iteration)
 
 ### Bindings Updates

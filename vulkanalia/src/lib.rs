@@ -2,6 +2,7 @@
 
 //! Vulkan bindings for Rust.
 
+pub mod bytecode;
 pub mod chain;
 pub mod loader;
 pub mod vk;

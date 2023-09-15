@@ -13,6 +13,7 @@ use std::ptr::copy_nonoverlapping as memcpy;
 use anyhow::{anyhow, Result};
 use log::*;
 use thiserror::Error;
+use vulkanalia::bytecode::Bytecode;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::window as vk_window;
@@ -811,14 +812,12 @@ pub unsafe fn fill_buffer(device: &Device, buffer: vk::Buffer, memory: vk::Devic
 //================================================
 
 /// Creates a shader module from a compiled shader.
-pub unsafe fn create_shader_module(device: &Device, spv: &[u8]) -> Result<vk::ShaderModule> {
-    let spv = Vec::<u8>::from(spv);
-    let (prefix, code, suffix) = spv.align_to::<u32>();
-    if !prefix.is_empty() || !suffix.is_empty() {
-        return Err(anyhow!("Shader bytecode is not properly aligned."));
-    }
+pub unsafe fn create_shader_module(device: &Device, bytecode: &[u8]) -> Result<vk::ShaderModule> {
+    let bytecode = Bytecode::new(bytecode).unwrap();
 
-    let info = vk::ShaderModuleCreateInfo::builder().code_size(spv.len()).code(code);
+    let info = vk::ShaderModuleCreateInfo::builder()
+        .code_size(bytecode.code_size())
+        .code(bytecode.code());
 
     Ok(device.create_shader_module(&info, None)?)
 }
