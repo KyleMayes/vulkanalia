@@ -204,24 +204,26 @@ unsafe fn create_shader_module(
 
 The function will take a slice containing the bytecode as parameter and create a `vk::ShaderModule` from it using our logical device.
 
-Creating a shader module is simple, we only need to specify the length of our bytecode slice and the bytecode slice itself. This information is specified in a `vk::ShaderModuleCreateInfo` structure. The one catch is that the size of the bytecode is specified in bytes, but the bytecode slice expected by this struct is a `&[u32]` instead of a `&[u8]`. Therefore we will first need to convert our `&[u8]` into an `&[u32]`. We will accomplish this with [`slice::align_to`](https://doc.rust-lang.org/stable/std/primitive.slice.html#method.align_to) which can be used to convert a slice into a slice containing a type with a different size and/or alignment requirements. However, the `&[u8]` returned by `include_bytes!` may not meet our alignment requirements, so we'll first copy it into a `Vec`.
+Creating a shader module is simple, we only need to specify the length of our bytecode slice and the bytecode slice itself. This information is specified in a `vk::ShaderModuleCreateInfo` structure. The one catch is that the size of the bytecode is specified in bytes, but the bytecode slice expected by this struct is a `&[u32]` instead of a `&[u8]`. Therefore we will first need to convert our `&[u8]` into an `&[u32]`.
+
+`vulkanalia` has a helper struct called `Bytecode` that we will use to copy the shader bytecode into a new buffer that is guaranteed to have the correct alignment for an array of `u32`s. Add an import for this helper struct:
 
 ```rust,noplaypen
-let bytecode = Vec::<u8>::from(bytecode);
-let (prefix, code, suffix) = bytecode.align_to::<u32>();
-if !prefix.is_empty() || !suffix.is_empty() {
-    return Err(anyhow!("Shader bytecode is not properly aligned."));
-}
+use vulkanalia::bytecode::Bytecode;
 ```
 
-The middle slice returned by this method (`code`) is a `&[u32]` and is guaranteed to be correctly aligned. Any `u8`s in our `bytecode` slice that fell outside this alignment guarantee will appear in the first or third slices returned (`prefix` and `suffix`). We'll require that both of these slices are empty to ensure that our entire `bytecode` slice has been converted to a `&[u32]` though you shouldn't have to worry about this failure case in practice.
+Getting back to our `create_shader_module` function, `Bytecode::new` will return an error if the supplied byte slice has a length that is not a multiple of 4 or if the allocation of the aligned buffer fails. As long as you are providing valid shader bytecode this should never be a problem, so we'll just `unwrap` the result.
+
+```rust,noplaypen
+let bytecode = Bytecode::new(bytecode).unwrap();
+```
 
 We can then construct a `vk::ShaderModuleCreateInfo` and use it to call `create_shader_module` to create the shader module:
 
 ```rust,noplaypen
 let info = vk::ShaderModuleCreateInfo::builder()
-    .code_size(bytecode.len())
-    .code(code);
+    .code_size(bytecode.code_size())
+    .code(bytecode.code());
 
 Ok(device.create_shader_module(&info, None)?)
 ```

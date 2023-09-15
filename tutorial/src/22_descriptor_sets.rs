@@ -19,6 +19,7 @@ use anyhow::{anyhow, Result};
 use cgmath::{point3, vec2, vec3, Deg};
 use log::*;
 use thiserror::Error;
+use vulkanalia::bytecode::Bytecode;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::window as vk_window;
@@ -891,15 +892,11 @@ unsafe fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
 }
 
 unsafe fn create_shader_module(device: &Device, bytecode: &[u8]) -> Result<vk::ShaderModule> {
-    let bytecode = Vec::<u8>::from(bytecode);
-    let (prefix, code, suffix) = bytecode.align_to::<u32>();
-    if !prefix.is_empty() || !suffix.is_empty() {
-        return Err(anyhow!("Shader bytecode is not properly aligned."));
-    }
+    let bytecode = Bytecode::new(bytecode).unwrap();
 
     let info = vk::ShaderModuleCreateInfo::builder()
-        .code_size(bytecode.len())
-        .code(code);
+        .code_size(bytecode.code_size())
+        .code(bytecode.code());
 
     Ok(device.create_shader_module(&info, None)?)
 }

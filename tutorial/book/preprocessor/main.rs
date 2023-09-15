@@ -75,6 +75,7 @@ fn load_index() -> HashMap<&'static str, &'static str> {
     info!("Loaded index has {} entries.", index.len());
 
     // Add entries for non-generated items.
+    index.insert("Bytecode", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/bytecode/struct.Bytecode.html");
     index.insert("Device", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/struct.Device.html");
     index.insert("Entry", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/struct.Entry.html");
     index.insert("Instance", "https://docs.rs/vulkanalia/%VERSION%/vulkanalia/struct.Instance.html");
