@@ -1269,6 +1269,26 @@ pub struct BindVertexBufferIndirectCommandNV {
     pub stride: u32,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBlitImageCubicWeightsInfoQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BlitImageCubicWeightsInfoQCOM {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub cubic_weights: CubicFilterWeightsQCOM,
+}
+
+impl Default for BlitImageCubicWeightsInfoQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BLIT_IMAGE_CUBIC_WEIGHTS_INFO_QCOM,
+            next: ptr::null(),
+            cubic_weights: CubicFilterWeightsQCOM::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBlitImageInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -5751,6 +5771,42 @@ impl Default for FragmentShadingRateAttachmentInfoKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFrameBoundaryEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct FrameBoundaryEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: FrameBoundaryFlagsEXT,
+    pub frame_id: u64,
+    pub image_count: u32,
+    pub images: *const Image,
+    pub buffer_count: u32,
+    pub buffers: *const Buffer,
+    pub tag_name: u64,
+    pub tag_size: usize,
+    pub tag: *const c_void,
+}
+
+impl Default for FrameBoundaryEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::FRAME_BOUNDARY_EXT,
+            next: ptr::null(),
+            flags: FrameBoundaryFlagsEXT::default(),
+            frame_id: u64::default(),
+            image_count: u32::default(),
+            images: ptr::null(),
+            buffer_count: u32::default(),
+            buffers: ptr::null(),
+            tag_name: u64::default(),
+            tag_size: usize::default(),
+            tag: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFramebufferAttachmentImageInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9680,6 +9736,46 @@ impl Default for PhysicalDeviceCoverageReductionModeFeaturesNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCubicClampFeaturesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceCubicClampFeaturesQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub cubic_range_clamp: Bool32,
+}
+
+impl Default for PhysicalDeviceCubicClampFeaturesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_CUBIC_CLAMP_FEATURES_QCOM,
+            next: ptr::null_mut(),
+            cubic_range_clamp: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCubicWeightsFeaturesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceCubicWeightsFeaturesQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub selectable_cubic_weights: Bool32,
+}
+
+impl Default for PhysicalDeviceCubicWeightsFeaturesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_CUBIC_WEIGHTS_FEATURES_QCOM,
+            next: ptr::null_mut(),
+            selectable_cubic_weights: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCustomBorderColorFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10102,6 +10198,26 @@ impl Default for PhysicalDeviceDescriptorIndexingProperties {
             max_descriptor_set_update_after_bind_sampled_images: u32::default(),
             max_descriptor_set_update_after_bind_storage_images: u32::default(),
             max_descriptor_set_update_after_bind_input_attachments: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub descriptor_pool_overallocation: Bool32,
+}
+
+impl Default for PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV,
+            next: ptr::null_mut(),
+            descriptor_pool_overallocation: Bool32::default(),
         }
     }
 }
@@ -11280,6 +11396,26 @@ impl Default for PhysicalDeviceFragmentShadingRatePropertiesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceFrameBoundaryFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceFrameBoundaryFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub frame_boundary: Bool32,
+}
+
+impl Default for PhysicalDeviceFrameBoundaryFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_FRAME_BOUNDARY_FEATURES_EXT,
+            next: ptr::null_mut(),
+            frame_boundary: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11580,6 +11716,46 @@ impl Default for PhysicalDeviceImageFormatInfo2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageProcessing2FeaturesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceImageProcessing2FeaturesQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub texture_block_match2: Bool32,
+}
+
+impl Default for PhysicalDeviceImageProcessing2FeaturesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_IMAGE_PROCESSING_2_FEATURES_QCOM,
+            next: ptr::null_mut(),
+            texture_block_match2: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageProcessing2PropertiesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceImageProcessing2PropertiesQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_block_match_window: Extent2D,
+}
+
+impl Default for PhysicalDeviceImageProcessing2PropertiesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_IMAGE_PROCESSING_2_PROPERTIES_QCOM,
+            next: ptr::null_mut(),
+            max_block_match_window: Extent2D::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageProcessingFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11836,6 +12012,26 @@ impl Default for PhysicalDeviceInvocationMaskFeaturesHUAWEI {
             s_type: StructureType::PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI,
             next: ptr::null_mut(),
             invocation_mask: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLayeredDriverPropertiesMSFT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceLayeredDriverPropertiesMSFT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub underlying_api: LayeredDriverUnderlyingApiMSFT,
+}
+
+impl Default for PhysicalDeviceLayeredDriverPropertiesMSFT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_LAYERED_DRIVER_PROPERTIES_MSFT,
+            next: ptr::null_mut(),
+            underlying_api: LayeredDriverUnderlyingApiMSFT::default(),
         }
     }
 }
@@ -15634,6 +15830,26 @@ impl Default for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceYcbcrDegammaFeaturesQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceYcbcrDegammaFeaturesQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub ycbcr_degamma: Bool32,
+}
+
+impl Default for PhysicalDeviceYcbcrDegammaFeaturesQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_YCBCR_DEGAMMA_FEATURES_QCOM,
+            next: ptr::null_mut(),
+            ycbcr_degamma: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18119,6 +18335,28 @@ impl Default for SampleLocationsInfoEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerBlockMatchWindowCreateInfoQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SamplerBlockMatchWindowCreateInfoQCOM {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub window_extent: Extent2D,
+    pub window_compare_mode: BlockMatchWindowCompareModeQCOM,
+}
+
+impl Default for SamplerBlockMatchWindowCreateInfoQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM,
+            next: ptr::null(),
+            window_extent: Extent2D::default(),
+            window_compare_mode: BlockMatchWindowCompareModeQCOM::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerBorderColorComponentMappingCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -18207,6 +18445,26 @@ impl Default for SamplerCreateInfo {
             max_lod: f32::default(),
             border_color: BorderColor::default(),
             unnormalized_coordinates: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerCubicWeightsCreateInfoQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SamplerCubicWeightsCreateInfoQCOM {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub cubic_weights: CubicFilterWeightsQCOM,
+}
+
+impl Default for SamplerCubicWeightsCreateInfoQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM,
+            next: ptr::null(),
+            cubic_weights: CubicFilterWeightsQCOM::default(),
         }
     }
 }
@@ -18323,6 +18581,28 @@ impl Default for SamplerYcbcrConversionInfo {
             s_type: StructureType::SAMPLER_YCBCR_CONVERSION_INFO,
             next: ptr::null(),
             conversion: SamplerYcbcrConversion::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub enable_y_degamma: Bool32,
+    pub enable_cb_cr_degamma: Bool32,
+}
+
+impl Default for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM,
+            next: ptr::null_mut(),
+            enable_y_degamma: Bool32::default(),
+            enable_cb_cr_degamma: Bool32::default(),
         }
     }
 }
