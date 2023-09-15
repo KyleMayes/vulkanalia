@@ -12,13 +12,13 @@ Change the `Vertex` struct to use a 3D vector for the position, and update the `
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec3,
-    color: glm::Vec3,
-    tex_coord: glm::Vec2,
+    pos: Vec3,
+    color: Vec3,
+    tex_coord: Vec2,
 }
 
 impl Vertex {
-    fn new(pos: glm::Vec3, color: glm::Vec3, tex_coord: glm::Vec2) -> Self {
+    const fn new(pos: Vec3, color: Vec3, tex_coord: Vec2) -> Self {
         Self { pos, color, tex_coord }
     }
 
@@ -41,13 +41,13 @@ impl Vertex {
             .binding(0)
             .location(1)
             .format(vk::Format::R32G32B32_SFLOAT)
-            .offset(size_of::<glm::Vec3>() as u32)
+            .offset(size_of::<Vec3>() as u32)
             .build();
         let tex_coord = vk::VertexInputAttributeDescription::builder()
             .binding(0)
             .location(2)
             .format(vk::Format::R32G32_SFLOAT)
-            .offset((size_of::<glm::Vec3>() + size_of::<glm::Vec3>()) as u32)
+            .offset((size_of::<Vec3>() + size_of::<Vec3>()) as u32)
             .build();
         [pos, color, tex_coord]
     }
@@ -71,14 +71,12 @@ void main() {
 Lastly, update the `vertices` container to include Z coordinates:
 
 ```rust,noplaypen
-lazy_static! {
-    static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(glm::vec3(-0.5, -0.5, 0.0),glm::vec3(1.0, 0.0, 0.0),glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, -0.5, 0.0), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, 0.5, 0.0), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, 0.5, 0.0), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
-    ];
-}
+static VERTICES: [Vertex; 4] = [
+    Vertex::new(vec3(-0.5, -0.5, 0.0), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec3(0.5, -0.5, 0.0), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec3(0.5, 0.5, 0.0), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec3(-0.5, 0.5, 0.0), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
+];
 ```
 
 If you run your application now, then you should see exactly the same result as before. It's time to add some extra geometry to make the scene more interesting, and to demonstrate the problem that we're going to tackle in this chapter. Duplicate the vertices to define positions for a square right under the current one like this:
@@ -88,18 +86,16 @@ If you run your application now, then you should see exactly the same result as 
 Use Z coordinates of `-0.5` and add the appropriate indices for the extra square:
 
 ```rust,noplaypen
-lazy_static! {
-    static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(glm::vec3(-0.5, -0.5, 0.0),glm::vec3(1.0, 0.0, 0.0),glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, -0.5, 0.0), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, 0.5, 0.0), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, 0.5, 0.0), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(1.0, 0.0, 0.0), glm::vec2(1.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, -0.5, -0.5), glm::vec3(0.0, 1.0, 0.0), glm::vec2(0.0, 0.0)),
-        Vertex::new(glm::vec3(0.5, 0.5, -0.5), glm::vec3(0.0, 0.0, 1.0), glm::vec2(0.0, 1.0)),
-        Vertex::new(glm::vec3(-0.5, 0.5, -0.5), glm::vec3(1.0, 1.0, 1.0), glm::vec2(1.0, 1.0)),
-    ];
-}
+static VERTICES: [Vertex; 8] = [
+    Vertex::new(vec3(-0.5, -0.5, 0.0), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec3(0.5, -0.5, 0.0), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec3(0.5, 0.5, 0.0), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec3(-0.5, 0.5, 0.0), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
+    Vertex::new(vec3(-0.5, -0.5, -0.5), vec3(1.0, 0.0, 0.0), vec2(1.0, 0.0)),
+    Vertex::new(vec3(0.5, -0.5, -0.5), vec3(0.0, 1.0, 0.0), vec2(0.0, 0.0)),
+    Vertex::new(vec3(0.5, 0.5, -0.5), vec3(0.0, 0.0, 1.0), vec2(0.0, 1.0)),
+    Vertex::new(vec3(-0.5, 0.5, -0.5), vec3(1.0, 1.0, 1.0), vec2(1.0, 1.0)),
+];
 
 const INDICES: &[u16] = &[
     0, 1, 2, 2, 3, 0,
@@ -118,15 +114,36 @@ The problem is that the fragments of the lower square are drawn over the fragmen
 
 The first approach is commonly used for drawing transparent objects, because order-independent transparency is a difficult challenge to solve. However, the problem of ordering fragments by depth is much more commonly solved using a *depth buffer*. A depth buffer is an additional attachment that stores the depth for every position, just like the color attachment stores the color of every position. Every time the rasterizer produces a fragment, the depth test will check if the new fragment is closer than the previous one. If it isn't, then the new fragment is discarded. A fragment that passes the depth test writes its own depth to the depth buffer. It is possible to manipulate this value from the fragment shader, just like you can manipulate the color output.
 
-Before we continue, there is one issue we need to fix. The perspective projection matrix generated by `glm::perspective` in `App::update_uniform_buffer` uses OpenGL depth range of `-1.0` to `1.0`. We want to use the Vulkan range of `0.0` to `1.0` instead so we'll use the `glm::perspective_rh_zo` (`zo` = zero-to-one) function instead.
+Before we continue, there is one issue we need to fix. The perspective projection matrix generated by `cgmath::perspective` in `App::update_uniform_buffer` uses OpenGL depth range of `-1.0` to `1.0`. We want to use the Vulkan range of `0.0` to `1.0` instead so we'll pre-multiply the generated perspective matrix with a [correction matrix](https://matthewwellings.com/blog/the-new-vulkan-coordinate-system) that maps the OpenGL range to the Vulkan range:
 
 ```rust,noplaypen
-let mut proj = glm::perspective_rh_zo(
-    self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
-    glm::radians(&glm::vec1(45.0))[0],
-    0.1,
-    10.0,
+let correction = Mat4::new(
+    1.0,  0.0,       0.0, 0.0,
+    0.0, -1.0,       0.0, 0.0, // we're also handling Y-flipping here
+    0.0,  0.0, 1.0 / 2.0, 0.0,
+    0.0,  0.0, 1.0 / 2.0, .0,
 );
+
+let proj = correction
+    * cgmath::perspective(
+        Deg(45.0),
+        self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+        0.1,
+        10.0,
+    );
+
+// this line can be deleted now, because we're already handling the Y-axis flip
+// with the correction matrix
+// proj[1][1] *= -1.0;
+```
+
+Note that `cgmath::Matrix4::new` constructs a matrix in column-major order, so the parameters we passed to it seem to be transposed. So the actual matrix would look like this in row-major order:
+
+```text
+1   0   0   0
+0  -1   0   0
+0   0   ½   ½
+0   0   0   1
 ```
 
 ## Depth image and view

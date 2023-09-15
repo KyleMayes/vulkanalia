@@ -18,9 +18,9 @@ There are many types of descriptors, but in this chapter we'll work with uniform
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 ```
 
@@ -71,19 +71,27 @@ Note that the order of the `uniform`, `in` and `out` declarations doesn't matter
 
 ## Descriptor set layout
 
-The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader.
+The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader. First we add a few more imports and several type aliases:
+
+```rust,noplaypen
+use cgmath::{point3, Deg};
+
+type Mat4 = cgmath::Matrix4<f32>;
+```
+
+Then create the `UniformBufferObject` struct:
 
 ```rust,noplaypen
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 ```
 
-We can exactly match the definition in the shader using data types in GLM. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a `UniformBufferObject` to a `vk::Buffer`.
+We can exactly match the definition in the shader using data types in `cgmath` crate. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a `UniformBufferObject` to a `vk::Buffer`.
 
 We need to provide details about every descriptor binding used in the shaders for pipeline creation, just like we had to do for every vertex attribute and its `location` index. We'll set up a new function to define all of this information called `^create_descriptor_set_layout`. It should be called right before pipeline creation, because we're going to need it there.
 
@@ -319,29 +327,28 @@ unsafe fn update_uniform_buffer(&self, image_index: usize) -> Result<()> {
 We will now define the model, view and projection transformations in the uniform buffer object. The model rotation will be a simple rotation around the Z-axis using the `time` variable:
 
 ```rust,noplaypen
-let model = glm::rotate(
-    &glm::identity(),
-    time * glm::radians(&glm::vec1(90.0))[0],
-    &glm::vec3(0.0, 0.0, 1.0),
+let model = Mat4::from_axis_angle(
+    vec3(0.0, 0.0, 1.0),
+    Deg(90.0) * time
 );
 ```
 
-The `glm::rotate` function takes an existing transformation, rotation angle and rotation axis as parameters. The `glm::identity()` constructor returns an identity matrix. Using a rotation angle of `time * glm::radians(&glm::vec1(90.0))[0]` accomplishes the purpose of rotating 90 degrees per second.
+The `Mat4::from_axis_angle` function creates a transformation matrix from given rotation angle and rotation axis. Using a rotation angle of `Deg(90.0) * time` accomplishes the purpose of rotating 90 degrees per second.
 
 ```rust,noplaypen
-let view = glm::look_at(
-    &glm::vec3(2.0, 2.0, 2.0),
-    &glm::vec3(0.0, 0.0, 0.0),
-    &glm::vec3(0.0, 0.0, 1.0),
+let view = Mat4::look_at_rh(
+    point3(2.0, 2.0, 2.0),
+    point3(0.0, 0.0, 0.0),
+    vec3(0.0, 0.0, 1.0),
 );
 ```
 
-For the view transformation I've decided to look at the geometry from above at a 45 degree angle. The `glm::look_at` function takes the eye position, center position and up axis as parameters.
+For the view transformation I've decided to look at the geometry from above at a 45 degree angle. The `Mat4::look_at_rh` function takes the eye position, center position and up axis as parameters. `rh` stands for "right-handed" coordinate system, which is the coordinate system that Vulkan uses.
 
 ```rust,noplaypen
-let mut proj = glm::perspective(
+let mut proj = cgmath::perspective(
+    Deg(45.0),
     self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
-    glm::radians(&glm::vec1(45.0))[0],
     0.1,
     10.0,
 );
@@ -350,10 +357,10 @@ let mut proj = glm::perspective(
 I've chosen to use a perspective projection with a 45 degree vertical field-of-view. The other parameters are the aspect ratio, near and far view planes. It is important to use the current swapchain extent to calculate the aspect ratio to take into account the new width and height of the window after a resize.
 
 ```rust,noplaypen
-proj[(1, 1)] *= -1.0;
+proj[1][1] *= -1.0;
 ```
 
-GLM was originally designed for OpenGL, where the Y coordinate of the clip coordinates is inverted. The easiest way to compensate for that is to flip the sign on the scaling factor of the Y axis in the projection matrix. If you don't do this, then the image will be rendered upside down.
+`cgmath` was originally designed for OpenGL, where the Y coordinate of the clip coordinates is inverted. The easiest way to compensate for that is to flip the sign on the scaling factor of the Y axis in the projection matrix. If you don't do this, then the image will be rendered upside down.
 
 ```rust,noplaypen
 let ubo = UniformBufferObject { model, view, proj };

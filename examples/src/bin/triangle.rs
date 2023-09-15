@@ -1,23 +1,19 @@
 // SPDX-License-Identifier: Apache-2.0
 
-extern crate nalgebra_glm as glm;
-
 use std::mem;
 
 use anyhow::Result;
 use examples::{App, AppData, Example};
-use lazy_static::lazy_static;
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::vk;
 
-lazy_static! {
-    /// The triangle vertices.
-    static ref VERTICES: Vec<Vertex> = vec![
-        Vertex { pos: glm::vec2(0.0, -0.5), color: glm::vec3(1.0, 0.0, 0.0) },
-        Vertex { pos: glm::vec2(0.5, 0.5), color: glm::vec3(0.0, 1.0, 0.0) },
-        Vertex { pos: glm::vec2(-0.5, 0.5), color: glm::vec3(0.0, 0.0, 1.0) },
-    ];
-}
+/// The triangle vertices.
+#[rustfmt::skip]
+static VERTICES: [Vertex; 3] = [
+    Vertex { pos: cgmath::vec2(0.0, -0.5), color: cgmath::vec3(1.0, 0.0, 0.0) },
+    Vertex { pos: cgmath::vec2(0.5, 0.5), color: cgmath::vec3(0.0, 1.0, 0.0) },
+    Vertex { pos: cgmath::vec2(-0.5, 0.5), color: cgmath::vec3(0.0, 0.0, 1.0) },
+];
 
 fn main() -> Result<()> {
     unsafe { App::new("Triangle", TriangleExample::default())?.run() }
@@ -258,8 +254,8 @@ impl Example for TriangleExample {
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec2,
-    color: glm::Vec3,
+    pos: cgmath::Vector2<f32>,
+    color: cgmath::Vector3<f32>,
 }
 
 impl Vertex {
@@ -284,7 +280,7 @@ impl Vertex {
             .binding(0)
             .location(1)
             .format(vk::Format::R32G32B32_SFLOAT)
-            .offset(mem::size_of::<glm::Vec2>() as u32)
+            .offset(mem::size_of::<cgmath::Vector2<f32>>() as u32)
             .build();
         [pos, color]
     }

@@ -74,8 +74,15 @@ Now we can move the command buffer recording code out of `create_command_buffers
 unsafe fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
     // ...
 
-    let model = glm::rotate(&glm::identity(), 0.0f32, &glm::vec3(0.0, 0.0, 1.0));
-    let (_, model_bytes, _) = model.as_slice().align_to::<u8>();
+    let model = Mat4::from_axis_angle(
+        vec3(0.0, 0.0, 1.0),
+        Deg(0.0)
+    );
+
+    let model_bytes = &*slice_from_raw_parts(
+        &model as *const Mat4 as *const u8,
+        size_of::<Mat4>()
+    );
 
     let info = vk::CommandBufferBeginInfo::builder();
 
@@ -142,13 +149,15 @@ With these changes in place, our program can now execute different rendering com
 ```rust,noplaypen
 let time = self.start.elapsed().as_secs_f32();
 
-let model = glm::rotate(
-    &glm::identity(),
-    time * glm::radians(&glm::vec1(90.0))[0],
-    &glm::vec3(0.0, 0.0, 1.0),
+let model = Mat4::from_axis_angle(
+    vec3(0.0, 0.0, 1.0),
+    Deg(0.0) * time
 );
 
-let (_, model_bytes, _) = model.as_slice().align_to::<u8>();
+let model_bytes = &*slice_from_raw_parts(
+    &model as *const Mat4 as *const u8,
+    size_of::<Mat4>()
+);
 ```
 
 Run the program to see that the model should now be back to rotating now that we are pushing an updated model matrix to the shaders every frame.

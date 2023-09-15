@@ -125,13 +125,15 @@ unsafe fn update_secondary_command_buffer(
 
     let time = self.start.elapsed().as_secs_f32();
 
-    let model = glm::rotate(
-        &glm::identity(),
-        time * glm::radians(&glm::vec1(90.0))[0],
-        &glm::vec3(0.0, 0.0, 1.0),
+    let model = Mat4::from_axis_angle(
+        vec3(0.0, 0.0, 1.0),
+        Deg(0.0) * time
     );
 
-    let (_, model_bytes, _) = model.as_slice().align_to::<u8>();
+    let model_bytes = &*slice_from_raw_parts(
+        &model as *const Mat4 as *const u8,
+        size_of::<Mat4>()
+    );
 
     let opacity = (model_index + 1) as f32 * 0.25;
     let opacity_bytes = &opacity.to_ne_bytes()[..];
@@ -241,27 +243,21 @@ Update the model matrix calculation in `App::update_secondary_command_buffers` t
 let y = (((model_index % 2) as f32) * 2.5) - 1.25;
 let z = (((model_index / 2) as f32) * -2.0) + 1.0;
 
-let model = glm::translate(
-    &glm::identity(),
-    &glm::vec3(0.0, y, z),
-);
-
 let time = self.start.elapsed().as_secs_f32();
 
-let model = glm::rotate(
-    &model,
-    time * glm::radians(&glm::vec1(90.0))[0],
-    &glm::vec3(0.0, 0.0, 1.0),
+let model = Mat4::from_translation(vec3(0.0, y, z)) * Mat4::from_axis_angle(
+    vec3(0.0, 0.0, 1.0),
+    Deg(90.0) * time
 );
 ```
 
 This code places the model instances in a grid on the Y and Z axes. However, due to the view matrix we're using, the camera is looking at this plane at 45 degree angles so let's update the view matrix in `App::update_uniform_buffer` to look directly at the YZ plane to better view our model instances.
 
 ```rust,noplaypen
-let view = glm::look_at(
-    &glm::vec3(6.0, 0.0, 2.0),
-    &glm::vec3(0.0, 0.0, 0.0),
-    &glm::vec3(0.0, 0.0, 1.0),
+let view = Mat4::look_at_rh(
+    point3(6.0, 0.0, 2.0),
+    point3(0.0, 0.0, 0.0),
+    vec3(0.0, 0.0, 1.0),
 );
 ```
 

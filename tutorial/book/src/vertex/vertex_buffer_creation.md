@@ -260,13 +260,11 @@ Now run the program and you should see the familiar triangle again:
 Try changing the color of the top vertex to white by modifying the `VERTICES` list:
 
 ```rust,noplaypen
-lazy_static! {
-    static ref VERTICES: Vec<Vertex> = vec![
-        Vertex::new(glm::vec2(0.0, -0.5), glm::vec3(1.0, 1.0, 1.0)),
-        Vertex::new(glm::vec2(0.5, 0.5), glm::vec3(0.0, 1.0, 0.0)),
-        Vertex::new(glm::vec2(-0.5, 0.5), glm::vec3(0.0, 0.0, 1.0)),
-    ];
-}
+static VERTICES: [Vertex; 3] = [
+    Vertex::new(vec2(0.0, -0.5), vec3(1.0, 1.0, 1.0)),
+    Vertex::new(vec2(0.5, 0.5), vec3(0.0, 1.0, 0.0)),
+    Vertex::new(vec2(-0.5, 0.5), vec3(0.0, 0.0, 1.0)),
+];
 ```
 
 Run the program again and you should see the following:

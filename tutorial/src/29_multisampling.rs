@@ -13,8 +13,8 @@ use std::ptr::copy_nonoverlapping as memcpy;
 use std::time::Instant;
 
 use anyhow::{anyhow, Result};
+use cgmath::{point3, vec2, vec3, Deg};
 use log::*;
-use nalgebra_glm as glm;
 use thiserror::Error;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
@@ -41,6 +41,10 @@ const PORTABILITY_MACOS_VERSION: Version = Version::new(1, 3, 216);
 
 /// The maximum number of frames that can be processed concurrently.
 const MAX_FRAMES_IN_FLIGHT: usize = 2;
+
+type Vec2 = cgmath::Vector2<f32>;
+type Vec3 = cgmath::Vector3<f32>;
+type Mat4 = cgmath::Matrix4<f32>;
 
 #[rustfmt::skip]
 fn main() -> Result<()> {
@@ -209,26 +213,29 @@ impl App {
 
         let time = self.start.elapsed().as_secs_f32();
 
-        let model = glm::rotate(
-            &glm::identity(),
-            time * glm::radians(&glm::vec1(90.0))[0],
-            &glm::vec3(0.0, 0.0, 1.0),
+        let model = Mat4::from_axis_angle(vec3(0.0, 0.0, 1.0), Deg(90.0) * time);
+
+        let view = Mat4::look_at_rh(
+            point3::<f32>(2.0, 2.0, 2.0),
+            point3::<f32>(0.0, 0.0, 0.0),
+            vec3(0.0, 0.0, 1.0),
         );
 
-        let view = glm::look_at(
-            &glm::vec3(2.0, 2.0, 2.0),
-            &glm::vec3(0.0, 0.0, 0.0),
-            &glm::vec3(0.0, 0.0, 1.0),
+        #[rustfmt::skip]
+        let correction = Mat4::new(
+            1.0,  0.0,       0.0, 0.0,
+            0.0, -1.0,       0.0, 0.0,
+            0.0,  0.0, 1.0 / 2.0, 0.0,
+            0.0,  0.0, 1.0 / 2.0, 1.0,
         );
 
-        let mut proj = glm::perspective_rh_zo(
-            self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
-            glm::radians(&glm::vec1(45.0))[0],
-            0.1,
-            10.0,
-        );
-
-        proj[(1, 1)] *= -1.0;
+        let proj = correction
+            * cgmath::perspective(
+                Deg(45.0),
+                self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
+                0.1,
+                10.0,
+            );
 
         let ubo = UniformBufferObject { model, view, proj };
 
@@ -1425,13 +1432,13 @@ fn load_model(data: &mut AppData) -> Result<()> {
             let tex_coord_offset = (2 * index) as usize;
 
             let vertex = Vertex {
-                pos: glm::vec3(
+                pos: vec3(
                     model.mesh.positions[pos_offset],
                     model.mesh.positions[pos_offset + 1],
                     model.mesh.positions[pos_offset + 2],
                 ),
-                color: glm::vec3(1.0, 1.0, 1.0),
-                tex_coord: glm::vec2(
+                color: vec3(1.0, 1.0, 1.0),
+                tex_coord: vec2(
                     model.mesh.texcoords[tex_coord_offset],
                     1.0 - model.mesh.texcoords[tex_coord_offset + 1],
                 ),
@@ -1780,21 +1787,21 @@ impl SwapchainSupport {
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct Vertex {
-    pos: glm::Vec3,
-    color: glm::Vec3,
-    tex_coord: glm::Vec2,
+    pos: Vec3,
+    color: Vec3,
+    tex_coord: Vec2,
 }
 
 impl Vertex {
-    fn new(pos: glm::Vec3, color: glm::Vec3, tex_coord: glm::Vec2) -> Self {
+    fn new(pos: Vec3, color: Vec3, tex_coord: Vec2) -> Self {
         Self { pos, color, tex_coord }
     }
 
@@ -1817,13 +1824,13 @@ impl Vertex {
             .binding(0)
             .location(1)
             .format(vk::Format::R32G32B32_SFLOAT)
-            .offset(size_of::<glm::Vec3>() as u32)
+            .offset(size_of::<Vec3>() as u32)
             .build();
         let tex_coord = vk::VertexInputAttributeDescription::builder()
             .binding(0)
             .location(2)
             .format(vk::Format::R32G32_SFLOAT)
-            .offset((size_of::<glm::Vec3>() + size_of::<glm::Vec3>()) as u32)
+            .offset((size_of::<Vec3>() + size_of::<Vec3>()) as u32)
             .build();
         [pos, color, tex_coord]
     }

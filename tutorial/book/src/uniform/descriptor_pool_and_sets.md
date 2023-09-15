@@ -223,9 +223,9 @@ One thing we've glossed over so far is how exactly the data in the Rust structur
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 ```
 
@@ -243,10 +243,10 @@ However, that's not all there is to it. For example, try modifying the struct an
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    foo: glm::Vec2,
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    foo: Vec2,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 ```
 
@@ -279,11 +279,11 @@ The new structure starts with a `vec2` which is only 8 bytes in size and therefo
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 struct UniformBufferObject {
-    foo: glm::Vec2,
+    foo: Vec2,
     _padding: [u8; 8],
-    model: glm::Mat4,
-    view: glm::Mat4,
-    proj: glm::Mat4,
+    model: Mat4,
+    view: Mat4,
+    proj: Mat4,
 }
 ```
 

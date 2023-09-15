@@ -71,7 +71,7 @@ You'll also need to update the size of the index buffer in `create_index_buffer`
 let size = (size_of::<u32>() * data.indices.len()) as u64;
 ```
 
-Next we are going to need some more imports (and we can remove the `lazy_static` import now that the global arrays have been deleted):
+Next we are going to need some more imports:
 
 ```rust,noplaypen
 use std::collections::HashMap;
@@ -130,9 +130,9 @@ The triangulation feature has already made sure that there are three vertices pe
 for model in &models {
     for index in &model.mesh.indices {
         let vertex = Vertex {
-            pos: glm::vec3(0.0, 0.0, 0.0),
-            color: glm::vec3(1.0, 1.0, 1.0),
-            tex_coord: glm::vec2(0.0, 0.0),
+            pos: vec3(0.0, 0.0, 0.0),
+            color: vec3(1.0, 1.0, 1.0),
+            tex_coord: vec2(0.0, 0.0),
         };
 
         data.vertices.push(vertex);
@@ -148,20 +148,20 @@ let pos_offset = (3 * index) as usize;
 let tex_coord_offset = (2 * index) as usize;
 
 let vertex = Vertex {
-    pos: glm::vec3(
+    pos: vec3(
         model.mesh.positions[pos_offset],
         model.mesh.positions[pos_offset + 1],
         model.mesh.positions[pos_offset + 2],
     ),
-    color: glm::vec3(1.0, 1.0, 1.0),
-    tex_coord: glm::vec2(
+    color: vec3(1.0, 1.0, 1.0),
+    tex_coord: vec2(
         model.mesh.texcoords[tex_coord_offset],
         model.mesh.texcoords[tex_coord_offset + 1],
     ),
 };
 ```
 
-Unfortunately the `attrib.vertices` array is an array of `float` values instead of something like `glm::vec3`, so you need to multiply the index by `3`. Similarly, there are two texture coordinate components per entry. The offsets of `0`, `1` and `2` are used to access the X, Y and Z components, or the U and V components in the case of texture coordinates.
+Unfortunately the `attrib.vertices` array is an array of `float` values instead of something like `cgmath::Vector3<f32>`, so you need to multiply the index by `3`. Similarly, there are two texture coordinate components per entry. The offsets of `0`, `1` and `2` are used to access the X, Y and Z components, or the U and V components in the case of texture coordinates.
 
 You may want to start compiling your program in release mode from now on because loading the texture and model can be quite slow without optimizations. If you run your program now you should see something like the following:
 
@@ -170,7 +170,7 @@ You may want to start compiling your program in release mode from now on because
 Great, the geometry looks correct, but what's going on with the texture? The OBJ format assumes a coordinate system where a vertical coordinate of `0` means the bottom of the image, however we've uploaded our image into Vulkan in a top to bottom orientation where `0` means the top of the image. Solve this by flipping the vertical component of the texture coordinates:
 
 ```rust,noplaypen
-tex_coord: glm::vec2(
+tex_coord: vec2(
     model.mesh.texcoords[tex_coord_offset],
     1.0 - model.mesh.texcoords[tex_coord_offset + 1],
 ),
