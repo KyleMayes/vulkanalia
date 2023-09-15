@@ -10,6 +10,19 @@ sources = [p for p in os.listdir(sources_dir) if p.endswith(".rs")]
 sources_by_prefix = dict([(int(s.split("_")[0]), s) for s in sources])
 
 #=================================================
+# Compare
+#=================================================
+
+def compare(args):
+    for prefix in range(0, max(sources_by_prefix.keys())):
+        this = sources_by_prefix[prefix]
+        that = sources_by_prefix[prefix + 1]
+        output = f"diff_{prefix}_{prefix + 1}.diff"
+        command = ["git", "diff", "--no-index", f"--output={output}", this, that]
+        try: subprocess.check_output(command, cwd=sources_dir)
+        except: pass
+
+#=================================================
 # Patch
 #=================================================
 
@@ -27,7 +40,6 @@ def apply_patch(patch, target):
 
     try: os.remove(f"{target}.orig")
     except: pass
-
     try: os.remove(f"{target}.rej")
     except: pass
     
@@ -46,6 +58,15 @@ parser = argparse.ArgumentParser(
 subparsers = parser.add_subparsers(
     help="command",
 )
+
+#- Compare -----------------------------------------
+
+compare_parser = subparsers.add_parser(
+    "compare",
+    help="Generates consecutive diffs for tutorial sources.",
+)
+
+compare_parser.set_defaults(command=compare)
 
 #- Patch -----------------------------------------
 
