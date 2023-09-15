@@ -71,7 +71,7 @@ Note that the order of the `uniform`, `in` and `out` declarations doesn't matter
 
 ## Descriptor set layout
 
-The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader. First we add a few more imports and several type aliases:
+The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader. First we add a few more imports and a type alias:
 
 ```rust,noplaypen
 use cgmath::{point3, Deg};
@@ -91,7 +91,7 @@ struct UniformBufferObject {
 }
 ```
 
-We can exactly match the definition in the shader using data types in `cgmath` crate. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a `UniformBufferObject` to a `vk::Buffer`.
+We can exactly match the definition in the shader using data types in the `cgmath` crate. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a `UniformBufferObject` to a `vk::Buffer`.
 
 We need to provide details about every descriptor binding used in the shaders for pipeline creation, just like we had to do for every vertex attribute and its `location` index. We'll set up a new function to define all of this information called `^create_descriptor_set_layout`. It should be called right before pipeline creation, because we're going to need it there.
 
@@ -333,7 +333,7 @@ let model = Mat4::from_axis_angle(
 );
 ```
 
-The `Mat4::from_axis_angle` function creates a transformation matrix from given rotation angle and rotation axis. Using a rotation angle of `Deg(90.0) * time` accomplishes the purpose of rotating 90 degrees per second.
+The `Mat4::from_axis_angle` function creates a transformation matrix from the given rotation angle and rotation axis. Using a rotation angle of `Deg(90.0) * time` accomplishes the purpose of rotating 90 degrees per second.
 
 ```rust,noplaypen
 let view = Mat4::look_at_rh(
@@ -343,7 +343,7 @@ let view = Mat4::look_at_rh(
 );
 ```
 
-For the view transformation I've decided to look at the geometry from above at a 45 degree angle. The `Mat4::look_at_rh` function takes the eye position, center position and up axis as parameters. `rh` stands for "right-handed" coordinate system, which is the coordinate system that Vulkan uses.
+For the view transformation I've decided to look at the geometry from above at a 45 degree angle. The `Mat4::look_at_rh` function takes the eye position, center position and up axis as parameters. The `rh` at the end of this function indicates that it uses the "right-handed" coordinate system which is the coordinate system that Vulkan uses.
 
 ```rust,noplaypen
 let mut proj = cgmath::perspective(
