@@ -121,11 +121,13 @@ fun Changelog.addBindingsUpdates(commit: String, commitMessage: String) {
 
     // Add a `Bindings Update` section if it does not exist.
 
-    if (versions[0].sections.getOrNull(0)?.name != "Bindings Updates") {
-        versions[0].sections.add(0, Section("Bindings Updates", mutableListOf()))
+    var section = versions[0].sections.find { it.name == "Bindings Updates" }
+    if (section == null) {
+        section = Section("Bindings Updates", mutableListOf())
+        versions[0].sections.add(section)
     }
 
     // Add the change to the `Bindings Updates` section.
 
-    versions[0].sections[0].changes.add(change)
+    section.changes.add(change)
 }
