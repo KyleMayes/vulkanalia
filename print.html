@@ -3590,7 +3590,7 @@ void main() {
 </code></pre>
 <p>Note that the order of the <code>uniform</code>, <code>in</code> and <code>out</code> declarations doesn't matter. The <code>binding</code> directive is similar to the <code>location</code> directive for attributes. We're going to reference this binding in the descriptor layout. The line with <code>gl_Position</code> is changed to use the transformations to compute the final position in clip coordinates. Unlike the 2D triangles, the last component of the clip coordinates may not be <code>1</code>, which will result in a division when converted to the final normalized device coordinates on the screen. This is used in perspective projection as the <em>perspective division</em> and is essential for making closer objects look larger than objects that are further away.</p>
 <h2 id="descriptor-set-layout"><a class="header" href="#descriptor-set-layout">Descriptor set layout</a></h2>
-<p>The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader. First we add a few more imports and several type aliases:</p>
+<p>The next step is to define the UBO on the Rust side and to tell Vulkan about this descriptor in the vertex shader. First we add a few more imports and a type alias:</p>
 <pre><code class="language-rust noplaypen">use cgmath::{point3, Deg};
 
 type Mat4 = cgmath::Matrix4&lt;f32&gt;;
@@ -3604,7 +3604,7 @@ struct UniformBufferObject {
     proj: Mat4,
 }
 </code></pre>
-<p>We can exactly match the definition in the shader using data types in <code>cgmath</code> crate. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a <code>UniformBufferObject</code> to a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>.</p>
+<p>We can exactly match the definition in the shader using data types in the <code>cgmath</code> crate. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a <code>UniformBufferObject</code> to a <a href="https://docs.rs/vulkanalia/0.12.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>.</p>
 <p>We need to provide details about every descriptor binding used in the shaders for pipeline creation, just like we had to do for every vertex attribute and its <code>location</code> index. We'll set up a new function to define all of this information called <code>create_descriptor_set_layout</code>. It should be called right before pipeline creation, because we're going to need it there.</p>
 <pre><code class="language-rust noplaypen">impl App {
     unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
@@ -3789,14 +3789,14 @@ unsafe fn create_uniform_buffers(
     Deg(90.0) * time
 );
 </code></pre>
-<p>The <code>Mat4::from_axis_angle</code> function creates a transformation matrix from given rotation angle and rotation axis. Using a rotation angle of <code>Deg(90.0) * time</code> accomplishes the purpose of rotating 90 degrees per second.</p>
+<p>The <code>Mat4::from_axis_angle</code> function creates a transformation matrix from the given rotation angle and rotation axis. Using a rotation angle of <code>Deg(90.0) * time</code> accomplishes the purpose of rotating 90 degrees per second.</p>
 <pre><code class="language-rust noplaypen">let view = Mat4::look_at_rh(
     point3(2.0, 2.0, 2.0),
     point3(0.0, 0.0, 0.0),
     vec3(0.0, 0.0, 1.0),
 );
 </code></pre>
-<p>For the view transformation I've decided to look at the geometry from above at a 45 degree angle. The <code>Mat4::look_at_rh</code> function takes the eye position, center position and up axis as parameters. <code>rh</code> stands for &quot;right-handed&quot; coordinate system, which is the coordinate system that Vulkan uses.</p>
+<p>For the view transformation I've decided to look at the geometry from above at a 45 degree angle. The <code>Mat4::look_at_rh</code> function takes the eye position, center position and up axis as parameters. The <code>rh</code> at the end of this function indicates that it uses the &quot;right-handed&quot; coordinate system which is the coordinate system that Vulkan uses.</p>
 <pre><code class="language-rust noplaypen">let mut proj = cgmath::perspective(
     Deg(45.0),
     self.data.swapchain_extent.width as f32 / self.data.swapchain_extent.height as f32,
@@ -5018,12 +5018,13 @@ const INDICES: &amp;[u16] = &amp;[
 <li>Use depth testing with a depth buffer</li>
 </ul>
 <p>The first approach is commonly used for drawing transparent objects, because order-independent transparency is a difficult challenge to solve. However, the problem of ordering fragments by depth is much more commonly solved using a <em>depth buffer</em>. A depth buffer is an additional attachment that stores the depth for every position, just like the color attachment stores the color of every position. Every time the rasterizer produces a fragment, the depth test will check if the new fragment is closer than the previous one. If it isn't, then the new fragment is discarded. A fragment that passes the depth test writes its own depth to the depth buffer. It is possible to manipulate this value from the fragment shader, just like you can manipulate the color output.</p>
-<p>Before we continue, there is one issue we need to fix. The perspective projection matrix generated by <code>cgmath::perspective</code> in <code>App::update_uniform_buffer</code> uses OpenGL depth range of <code>-1.0</code> to <code>1.0</code>. We want to use the Vulkan range of <code>0.0</code> to <code>1.0</code> instead so we'll pre-multiply the generated perspective matrix with a <a href="https://matthewwellings.com/blog/the-new-vulkan-coordinate-system">correction matrix</a> that maps the OpenGL range to the Vulkan range:</p>
+<p>Before we continue, there is one issue we need to fix. The perspective projection matrix generated by <code>cgmath::perspective</code> in <code>App::update_uniform_buffer</code> uses the OpenGL depth range of <code>-1.0</code> to <code>1.0</code>. We want to use the Vulkan range of <code>0.0</code> to <code>1.0</code> instead so we'll pre-multiply the generated perspective matrix with a <a href="https://matthewwellings.com/blog/the-new-vulkan-coordinate-system">correction matrix</a> that maps the OpenGL range to the Vulkan range:</p>
 <pre><code class="language-rust noplaypen">let correction = Mat4::new(
     1.0,  0.0,       0.0, 0.0,
-    0.0, -1.0,       0.0, 0.0, // we're also handling Y-flipping here
+    // We're also flipping the Y-axis with this line's `-1.0`.
+    0.0, -1.0,       0.0, 0.0,
     0.0,  0.0, 1.0 / 2.0, 0.0,
-    0.0,  0.0, 1.0 / 2.0, .0,
+    0.0,  0.0, 1.0 / 2.0, 0.0,
 );
 
 let proj = correction
@@ -5034,8 +5035,8 @@ let proj = correction
         10.0,
     );
 
-// this line can be deleted now, because we're already handling the Y-axis flip
-// with the correction matrix
+// This line should be deleted because we're now accomplishing the Y-axis flip
+// using the new correction matrix.
 // proj[1][1] *= -1.0;
 </code></pre>
 <p>Note that <code>cgmath::Matrix4::new</code> constructs a matrix in column-major order, so the parameters we passed to it seem to be transposed. So the actual matrix would look like this in row-major order:</p>
