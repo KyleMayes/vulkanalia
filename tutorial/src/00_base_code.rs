@@ -1,6 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
-#![allow(dead_code, unused_variables, clippy::too_many_arguments, clippy::unnecessary_wraps)]
+#![allow(
+    dead_code,
+    unused_variables,
+    clippy::manual_slice_size_calculation,
+    clippy::too_many_arguments,
+    clippy::unnecessary_wraps
+)]
 
 use anyhow::Result;
 use winit::dpi::LogicalSize;
