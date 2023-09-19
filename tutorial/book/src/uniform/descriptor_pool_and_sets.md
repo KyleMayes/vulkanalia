@@ -104,7 +104,7 @@ unsafe fn create_descriptor_sets(device: &Device, data: &mut AppData) -> Result<
 }
 ```
 
-A descriptor set allocation is described with a `vk::DescriptorSetAllocateInfo` struct. You need to specify the descriptor pool to allocate from, the number of descriptor sets to allocate, and the descriptor layout to base them on:
+A descriptor set allocation is described with a `vk::DescriptorSetAllocateInfo` struct. You need to specify the descriptor pool to allocate from and an array of descriptor layouts that describes each of the descriptor sets you are allocating:
 
 ```rust,noplaypen
 let layouts = vec![data.descriptor_set_layout; data.swapchain_images.len()];
