@@ -167,7 +167,7 @@ Now try to run the program and resize the window to see if the framebuffer is in
 
 ## Handling minimization
 
-There is another case where a swapchain may become out of data and that is a special kind of window resizing: window minimization. This case is special because it will result in a framebuffer size of `0`. In this tutorial we will handle that by not rendering frames while the window is minimized:
+There is another case where a swapchain may become out of date and that is a special kind of window resizing: window minimization. This case is special because it will result in a framebuffer size of `0`. In this tutorial we will handle that by not rendering frames while the window is minimized:
 
 ```rust,noplaypen
 let mut app = unsafe { App::create(&window)? };
