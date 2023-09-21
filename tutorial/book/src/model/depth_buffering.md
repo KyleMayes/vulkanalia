@@ -353,7 +353,7 @@ The undefined layout can be used as initial layout, because there are no existin
 ```rust,noplaypen
 let aspect_mask = if new_layout == vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL {
     match format {
-        vk::Format::D32_SFLOAT_S8_UINT | vk::Format::D24_UNORM_S8_UINT =>
+        vk::Format::D32_SFLOAT_S8_UINT || vk::Format::D24_UNORM_S8_UINT =>
             vk::ImageAspectFlags::DEPTH | vk::ImageAspectFlags::STENCIL,
         _ => vk::ImageAspectFlags::DEPTH
     }
