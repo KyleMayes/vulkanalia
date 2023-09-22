@@ -122,7 +122,7 @@ let correction = Mat4::new(
     // We're also flipping the Y-axis with this line's `-1.0`.
     0.0, -1.0,       0.0, 0.0,
     0.0,  0.0, 1.0 / 2.0, 0.0,
-    0.0,  0.0, 1.0 / 2.0, 0.0,
+    0.0,  0.0, 1.0 / 2.0, 1.0,
 );
 
 let proj = correction
