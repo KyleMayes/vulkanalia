@@ -117,9 +117,12 @@ The second `tobj::load_obj_buf` parameter specifies options for processing the l
 
 The third `tobj::load_obj_buf` parameter is a callback used to load any materials referenced in the OBJ file. As we are not interested in the materials, we just return an empty material.
 
-We're going to combine all of the faces in the file into a single model, so just iterate over all of the shapes:
+We're going to combine all of the faces in the file into a single model. Create `Vec`s to hold the vertices and indices, then iterate over all of the shapes:
 
 ```rust,noplaypen
+data.vertices = Vec::new();
+data.indices = Vec::new();
+
 for model in &models {
 }
 ```
