@@ -124,13 +124,13 @@ private fun Registry.generateExtensionTrait(extension: Extension): String {
     val deprecation = generateDeprecation(extension)?.let { "\n$it" } ?: ""
 
     val name = "${extension.name.value.toPascalCase()}Extension"
-    val type = extension.type!!.capitalize()
+    val type = extension.type!!.replaceFirstChar { it.uppercase() }
 
     val commands = extension.require.commands.mapNotNull { commands[it] }.sortedBy { it.name }
 
     val implAttributes = listOf(
         if (extension.provisional) { "#[cfg(feature = \"provisional\")]" } else { "" },
-        if (deprecation.isNotEmpty()) { "#[allow(deprecated)]" } else { "" }
+        if (deprecation.isNotEmpty()) { "#[allow(deprecated)]" } else { "" },
     ).filter { it.isNotBlank() }.joinToString("\n")
 
     return """

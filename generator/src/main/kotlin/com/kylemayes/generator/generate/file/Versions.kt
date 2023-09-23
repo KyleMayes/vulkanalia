@@ -34,7 +34,7 @@ use super::*;
             CommandType.ENTRY,
             "EntryV$suffix",
             previousSuffix?.let { "EntryV$previousSuffix" },
-            false
+            false,
         )
 
         versions += generateVersionTrait(
@@ -43,7 +43,7 @@ use super::*;
             CommandType.INSTANCE,
             "InstanceV$suffix",
             previousSuffix?.let { "InstanceV$previousSuffix" },
-            true
+            true,
         )
 
         versions += generateVersionTrait(
@@ -52,7 +52,7 @@ use super::*;
             CommandType.DEVICE,
             "DeviceV$suffix",
             previousSuffix?.let { "DeviceV$previousSuffix" },
-            true
+            true,
         )
 
         previousSuffix = suffix
@@ -71,7 +71,7 @@ private fun Registry.generateVersionTrait(
     handle: Boolean,
 ) =
     """
-/// Vulkan ${version.number} ${type.display.toLowerCase()} command wrappers.
+/// Vulkan ${version.number} ${type.display.lowercase()} command wrappers.
 pub trait $name${extends?.let { ": $it" } ?: ""} {
     ${if (extends == null) { "fn commands(&self) -> &${type.display}Commands;\n" } else { "" }}
     ${if (handle && extends == null) { "fn handle(&self) -> ${type.display};\n" } else { "" }}

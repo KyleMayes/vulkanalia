@@ -47,7 +47,7 @@ ${generateAliases(handles.keys)}
 /** Generates a Rust struct for a Vulkan handle. */
 private fun Registry.generateHandle(handle: Handle): String {
     val repr = if (handle.dispatchable) { "usize" } else { "u64" }
-    val type = handle.name.value.toSnakeCase().toUpperCase()
+    val type = handle.name.value.toSnakeCase().uppercase()
     return """
 /// <${generateManualUrl(handle)}>
 #[repr(transparent)]

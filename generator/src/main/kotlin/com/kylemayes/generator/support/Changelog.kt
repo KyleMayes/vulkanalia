@@ -16,7 +16,7 @@ data class Changelog(
 data class Version(
     val version: String,
     val release: String?,
-    val sections: MutableList<Section>
+    val sections: MutableList<Section>,
 )
 
 /** A changelog version section (e.g., `### Added` or `### Fixed`). */

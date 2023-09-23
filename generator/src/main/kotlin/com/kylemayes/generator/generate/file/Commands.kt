@@ -53,7 +53,7 @@ $structs
 /** Generates a Rust struct for a group of Vulkan commands of the same type. */
 private fun Registry.generateCommandStruct(type: CommandType, commands: List<Command>) =
     """
-/// Loaded Vulkan ${type.display.toLowerCase()} commands.
+/// Loaded Vulkan ${type.display.lowercase()} commands.
 #[derive(Copy, Clone)]
 pub struct ${type.display}Commands {
     ${commands.joinToString { "pub ${it.name}: PFN_${it.name.original}" }}

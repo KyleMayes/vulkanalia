@@ -60,7 +60,7 @@ private fun Registry.getUnsupportedEntities(): Set<Identifier> {
     unsupportedEntities.addAll(
         extensions.values
             .filter { !it.isSupported() || !it.isVulkanApi() }
-            .flatMap { it.require.commands + it.require.types.map { n -> n.intern() } }
+            .flatMap { it.require.commands + it.require.types.map { n -> n.intern() } },
     )
 
     // Add entities only present in unsupported versions.
@@ -74,7 +74,7 @@ private fun Registry.getUnsupportedEntities(): Set<Identifier> {
     unsupportedEntities.addAll(
         nonvulkan
             .flatMap { it.require.commands + it.require.types.map { n -> n.intern() } }
-            .filter { !vulkanEntities.contains(it) }
+            .filter { !vulkanEntities.contains(it) },
     )
 
     return unsupportedEntities

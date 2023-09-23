@@ -302,15 +302,15 @@ unsafe fn ${command.name}$generics(&self, ${params.joinToString()})$outputType {
 private fun Registry.generateInputSliceTypeAndCast(pointer: PointerType): Pair<String, String> = when {
     structs.containsKey(pointer.pointee.getIdentifier()) -> Pair(
         "impl Cast<Target=${pointer.pointee.generate()}>",
-        ".cast()"
+        ".cast()",
     )
     pointer.pointee.getIdentifier()?.value == "void" -> Pair(
         "u8",
-        "as ${"c_void".generatePtr(pointer.const)}"
+        "as ${"c_void".generatePtr(pointer.const)}",
     )
     pointer.pointee is PointerType -> Pair(
         "&${pointer.pointee.pointee.generate()}",
-        ".cast()"
+        ".cast()",
     )
     else -> Pair(pointer.pointee.generate(), "")
 }

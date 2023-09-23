@@ -80,7 +80,7 @@ private fun renameCommand(name: String) = name
 /** Renames a constant (e.g., `VK_UUID_SIZE` to `UUID_SIZE`). */
 private fun renameConstant(name: String) = name
     .removePrefix("VK_")
-    .toUpperCase()
+    .uppercase()
 
 /** Renames a member or parameter (e.g, `deviceLUIDValid` to `device_luid_valid`). */
 private fun renameMemberOrParameter(name: String) = name
@@ -107,7 +107,7 @@ private fun renameVariantOrBitflag(name: String, parent: String, bitflag: Boolea
     var prefix = parent
         .substring(0, parent.length - extension.length)
         .toSnakeCase()
-        .toUpperCase()
+        .uppercase()
     if (bitflag) prefix = prefix.replace(Regex("FLAGS(\\d*)"), "$1")
     if (!prefix.endsWith('_')) prefix = "${prefix}_"
 
@@ -124,7 +124,7 @@ private fun renameVariantOrBitflag(name: String, parent: String, bitflag: Boolea
         .replace(Regex("^([0-9])"), "_$1")
         // Some value names include lowercase characters that need to be
         // capitalized (e.g., `VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK_EXT`).
-        .toUpperCase()
+        .uppercase()
 
     // Remove `BIT` component from bitflag name even when followed by extension author.
     return if (bitflag) {

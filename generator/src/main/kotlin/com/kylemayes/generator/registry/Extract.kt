@@ -476,6 +476,7 @@ private fun extractRequireValue(e: Element): RequireValue? {
 interface Entity {
     /** The name of this entity. */
     val name: Identifier
+
     /** The Vulkan API this entity is for. */
     val api: String?
 
@@ -522,8 +523,10 @@ private val primitives = mapOf(
 interface Type {
     /** Generates the Rust type for this type. */
     fun generate(): String
+
     /** Generates the Rust type for this type as it would appear in a command. */
     fun generateForCommand(): String = generate()
+
     /** Generates the Rust default expression for this type. */
     fun generateDefault(): String
 }
