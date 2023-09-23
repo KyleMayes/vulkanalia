@@ -2,6 +2,7 @@
 
 ### Changed
 - Added `no_std` compability for `vulkanalia` and `vulkanalia-sys` crates
+- Make all extendable output structs parameters in command wrappers (see [#213](https://github.com/KyleMayes/vulkanalia/issues/213) for details)
 
 ## [0.22.0] - 2023-09-15
 

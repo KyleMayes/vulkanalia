@@ -2582,18 +2582,15 @@ pub trait InstanceV1_1: InstanceV1_0 {
         &self,
         physical_device: PhysicalDevice,
         external_buffer_info: &PhysicalDeviceExternalBufferInfo,
-    ) -> ExternalBufferProperties {
-        let mut external_buffer_properties = MaybeUninit::<ExternalBufferProperties>::uninit();
-
+        external_buffer_properties: &mut ExternalBufferProperties,
+    ) {
         let __result = (self
             .commands()
             .get_physical_device_external_buffer_properties)(
             physical_device,
             external_buffer_info,
-            external_buffer_properties.as_mut_ptr(),
+            external_buffer_properties,
         );
-
-        external_buffer_properties.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceExternalFenceProperties.html>
@@ -2602,18 +2599,15 @@ pub trait InstanceV1_1: InstanceV1_0 {
         &self,
         physical_device: PhysicalDevice,
         external_fence_info: &PhysicalDeviceExternalFenceInfo,
-    ) -> ExternalFenceProperties {
-        let mut external_fence_properties = MaybeUninit::<ExternalFenceProperties>::uninit();
-
+        external_fence_properties: &mut ExternalFenceProperties,
+    ) {
         let __result = (self
             .commands()
             .get_physical_device_external_fence_properties)(
             physical_device,
             external_fence_info,
-            external_fence_properties.as_mut_ptr(),
+            external_fence_properties,
         );
-
-        external_fence_properties.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceExternalSemaphoreProperties.html>
@@ -2622,19 +2616,15 @@ pub trait InstanceV1_1: InstanceV1_0 {
         &self,
         physical_device: PhysicalDevice,
         external_semaphore_info: &PhysicalDeviceExternalSemaphoreInfo,
-    ) -> ExternalSemaphoreProperties {
-        let mut external_semaphore_properties =
-            MaybeUninit::<ExternalSemaphoreProperties>::uninit();
-
+        external_semaphore_properties: &mut ExternalSemaphoreProperties,
+    ) {
         let __result = (self
             .commands()
             .get_physical_device_external_semaphore_properties)(
             physical_device,
             external_semaphore_info,
-            external_semaphore_properties.as_mut_ptr(),
+            external_semaphore_properties,
         );
-
-        external_semaphore_properties.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceFeatures2.html>
