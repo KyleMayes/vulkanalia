@@ -248,7 +248,7 @@ let vertex = Vertex {
     ),
 };
 </code></pre>
-<p>Unfortunately the <code>attrib.vertices</code> array is an array of <code>float</code> values instead of something like <code>cgmath::Vector3&lt;f32&gt;</code>, so you need to multiply the index by <code>3</code>. Similarly, there are two texture coordinate components per entry. The offsets of <code>0</code>, <code>1</code> and <code>2</code> are used to access the X, Y and Z components, or the U and V components in the case of texture coordinates.</p>
+<p>Unfortunately, the <code>positions</code> returned from <code>tobj::load_obj_buf</code> are a flat array of <code>f32</code> values instead of something like <code>cgmath::Vector3&lt;f32&gt;</code>, so you need to multiply the index by <code>3</code> to account for each position having three components. Similarly, there are two texture coordinate components per entry. The offsets of <code>0</code>, <code>1</code> and <code>2</code> are used to access the X, Y and Z components, or the U and V components in the case of texture coordinates.</p>
 <p>You may want to start compiling your program in release mode from now on because loading the texture and model can be quite slow without optimizations. If you run your program now you should see something like the following:</p>
 <p><img src="../images/inverted_texture_coordinates.png" alt="" /></p>
 <p>Great, the geometry looks correct, but what's going on with the texture? The OBJ format assumes a coordinate system where a vertical coordinate of <code>0</code> means the bottom of the image, however we've uploaded our image into Vulkan in a top to bottom orientation where <code>0</code> means the top of the image. Solve this by flipping the vertical component of the texture coordinates:</p>
