@@ -15,10 +15,13 @@ private val INSTANCE = setOf("vkCreateDevice")
 enum class CommandType(val display: String) {
     /** A command which is loaded from the Vulkan dynamic library. */
     STATIC("Static"),
+
     /** A command which is loaded with `vkGetInstanceProcAddr` and a null instance. */
     ENTRY("Entry"),
+
     /** A command which is loaded with `vkGetInstanceProcAddr` and a valid instance. */
     INSTANCE("Instance"),
+
     /** A command which is loaded with `vkGetDeviceProcAddr` and a valid device. */
     DEVICE("Device"),
 }
@@ -48,7 +51,7 @@ private val getExtensionCommandTypes = thunk { ->
     extensions.values
         .filter { e -> e.type != null }
         .flatMap { e -> e.require.commands.map { c -> Pair(e, c) } }
-        .associate { (e, c) -> c to CommandType.valueOf(e.type!!.toUpperCase()) }
+        .associate { (e, c) -> c to CommandType.valueOf(e.type!!.uppercase()) }
 }
 
 /** Gets the non-`SUCCESS` and non-`INCOMPLETE` success codes for a Vulkan command. */

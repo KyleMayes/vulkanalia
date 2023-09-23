@@ -9,9 +9,9 @@ fun String.toPascalCase(): String {
     var upper = true
     for (c in this) {
         when {
-            upper -> { pascal += c.toUpperCase(); upper = false }
+            upper -> { pascal += c.uppercase(); upper = false }
             c == '_' -> upper = true
-            else -> pascal += c.toLowerCase()
+            else -> pascal += c.lowercase()
         }
     }
 
@@ -24,7 +24,7 @@ private val weirdSuffixPattern2 = Regex("([A-Z]+_)+[A-Z]+$")
 
 /** Converts this `camelCase` or `PascalCase` identifier to a `snake_case` identifier. */
 fun String.toSnakeCase(): String {
-    var snake = this[0].toLowerCase().toString()
+    var snake = this[0].lowercase()
 
     // Match identifiers that are suffixed by multiple acronyms separated by
     // underscores (e.g., `textureCompressionASTC_LDR`) or are suffixed by
@@ -33,7 +33,7 @@ fun String.toSnakeCase(): String {
     val weirdSuffix = weirdSuffixPattern1.find(this) ?: weirdSuffixPattern2.find(this)
     if (weirdSuffix != null) {
         val prefix = substring(0 until weirdSuffix.range.first).toSnakeCase()
-        val suffix = substring(weirdSuffix.range).toLowerCase()
+        val suffix = substring(weirdSuffix.range).lowercase()
         return "${prefix}_$suffix"
     }
 
@@ -60,7 +60,7 @@ fun String.toSnakeCase(): String {
             (2..match.value.length).forEach { _ -> iterator.next() }
             snake += "_"
             snake += match.groupValues[1]
-            snake += match.groupValues[2].toLowerCase()
+            snake += match.groupValues[2].lowercase()
             continue
         }
 
@@ -68,10 +68,10 @@ fun String.toSnakeCase(): String {
             snake += window[0]
             upper = false
         } else if (upper && (window.length < 2 || window[1].isUpperCase())) {
-            snake += window[0].toLowerCase()
+            snake += window[0].lowercase()
         } else {
             snake += "_"
-            snake += window[0].toLowerCase()
+            snake += window[0].lowercase()
             upper = true
         }
     }

@@ -242,8 +242,10 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
 /** The repository Vulkan files are pulled from. */
 private const val repository = "KhronosGroup/Vulkan-Docs"
+
 /** The branch Vulkan files are pulled from. */
 private const val branch = "main"
+
 /** The name of the file the current commit hash is stored in. */
 private const val file = "Vulkan-Docs"
 
