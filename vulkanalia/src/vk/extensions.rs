@@ -145,19 +145,18 @@ pub trait AmdxShaderEnqueueExtension: DeviceV1_0 {
     unsafe fn get_execution_graph_pipeline_scratch_size_amdx(
         &self,
         execution_graph: Pipeline,
-    ) -> crate::VkResult<ExecutionGraphPipelineScratchSizeAMDX> {
-        let mut size_info = MaybeUninit::<ExecutionGraphPipelineScratchSizeAMDX>::uninit();
-
+        size_info: &mut ExecutionGraphPipelineScratchSizeAMDX,
+    ) -> crate::VkResult<()> {
         let __result = (self
             .commands()
             .get_execution_graph_pipeline_scratch_size_amdx)(
             self.handle(),
             execution_graph,
-            size_info.as_mut_ptr(),
+            size_info,
         );
 
         if __result == Result::SUCCESS {
-            Ok(size_info.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -1493,18 +1492,17 @@ pub trait ExtDeviceFaultExtension: DeviceV1_0 {
     #[inline]
     unsafe fn get_device_fault_info_ext(
         &self,
-    ) -> crate::VkResult<(DeviceFaultCountsEXT, DeviceFaultInfoEXT)> {
-        let mut fault_counts = MaybeUninit::<DeviceFaultCountsEXT>::uninit();
-        let mut fault_info = MaybeUninit::<DeviceFaultInfoEXT>::uninit();
-
+        fault_counts: &mut DeviceFaultCountsEXT,
+        fault_info: Option<&mut DeviceFaultInfoEXT>,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_device_fault_info_ext)(
             self.handle(),
-            fault_counts.as_mut_ptr(),
-            fault_info.as_mut_ptr(),
+            fault_counts,
+            fault_info.map_or(ptr::null_mut(), |v| v),
         );
 
         if __result == Result::SUCCESS {
-            Ok((fault_counts.assume_init(), fault_info.assume_init()))
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -1758,19 +1756,18 @@ pub trait ExtDisplaySurfaceCounterExtension: InstanceV1_0 {
         &self,
         physical_device: PhysicalDevice,
         surface: SurfaceKHR,
-    ) -> crate::VkResult<SurfaceCapabilities2EXT> {
-        let mut surface_capabilities = MaybeUninit::<SurfaceCapabilities2EXT>::uninit();
-
+        surface_capabilities: &mut SurfaceCapabilities2EXT,
+    ) -> crate::VkResult<()> {
         let __result = (self
             .commands()
             .get_physical_device_surface_capabilities2_ext)(
             physical_device,
             surface,
-            surface_capabilities.as_mut_ptr(),
+            surface_capabilities,
         );
 
         if __result == Result::SUCCESS {
-            Ok(surface_capabilities.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -2481,19 +2478,17 @@ pub trait ExtExternalMemoryHostExtension: DeviceV1_0 {
         &self,
         handle_type: ExternalMemoryHandleTypeFlags,
         host_pointer: &c_void,
-    ) -> crate::VkResult<MemoryHostPointerPropertiesEXT> {
-        let mut memory_host_pointer_properties =
-            MaybeUninit::<MemoryHostPointerPropertiesEXT>::uninit();
-
+        memory_host_pointer_properties: &mut MemoryHostPointerPropertiesEXT,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_memory_host_pointer_properties_ext)(
             self.handle(),
             handle_type,
             host_pointer,
-            memory_host_pointer_properties.as_mut_ptr(),
+            memory_host_pointer_properties,
         );
 
         if __result == Result::SUCCESS {
-            Ok(memory_host_pointer_properties.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -2902,17 +2897,16 @@ pub trait ExtImageDrmFormatModifierExtension: DeviceV1_0 {
     unsafe fn get_image_drm_format_modifier_properties_ext(
         &self,
         image: Image,
-    ) -> crate::VkResult<ImageDrmFormatModifierPropertiesEXT> {
-        let mut properties = MaybeUninit::<ImageDrmFormatModifierPropertiesEXT>::uninit();
-
+        properties: &mut ImageDrmFormatModifierPropertiesEXT,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_image_drm_format_modifier_properties_ext)(
             self.handle(),
             image,
-            properties.as_mut_ptr(),
+            properties,
         );
 
         if __result == Result::SUCCESS {
-            Ok(properties.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -3421,17 +3415,14 @@ pub trait ExtOpacityMicromapExtension: DeviceV1_0 {
         &self,
         build_type: AccelerationStructureBuildTypeKHR,
         build_info: &MicromapBuildInfoEXT,
-    ) -> MicromapBuildSizesInfoEXT {
-        let mut size_info = MaybeUninit::<MicromapBuildSizesInfoEXT>::uninit();
-
+        size_info: &mut MicromapBuildSizesInfoEXT,
+    ) {
         let __result = (self.commands().get_micromap_build_sizes_ext)(
             self.handle(),
             build_type,
             build_info,
-            size_info.as_mut_ptr(),
+            size_info,
         );
-
-        size_info.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkWriteMicromapsPropertiesEXT.html>
@@ -3758,18 +3749,15 @@ pub trait ExtSampleLocationsExtension: DeviceV1_0 {
         &self,
         physical_device: PhysicalDevice,
         samples: SampleCountFlags,
-    ) -> MultisamplePropertiesEXT {
-        let mut multisample_properties = MaybeUninit::<MultisamplePropertiesEXT>::uninit();
-
+        multisample_properties: &mut MultisamplePropertiesEXT,
+    ) {
         let __result = (self
             .commands()
             .get_physical_device_multisample_properties_ext)(
             physical_device,
             samples,
-            multisample_properties.as_mut_ptr(),
+            multisample_properties,
         );
-
-        multisample_properties.assume_init()
     }
 }
 
@@ -3849,16 +3837,13 @@ pub trait ExtShaderModuleIdentifierExtension: DeviceV1_0 {
     unsafe fn get_shader_module_create_info_identifier_ext(
         &self,
         create_info: &ShaderModuleCreateInfo,
-    ) -> ShaderModuleIdentifierEXT {
-        let mut identifier = MaybeUninit::<ShaderModuleIdentifierEXT>::uninit();
-
+        identifier: &mut ShaderModuleIdentifierEXT,
+    ) {
         let __result = (self.commands().get_shader_module_create_info_identifier_ext)(
             self.handle(),
             create_info,
-            identifier.as_mut_ptr(),
+            identifier,
         );
-
-        identifier.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetShaderModuleIdentifierEXT.html>
@@ -3866,16 +3851,13 @@ pub trait ExtShaderModuleIdentifierExtension: DeviceV1_0 {
     unsafe fn get_shader_module_identifier_ext(
         &self,
         shader_module: ShaderModule,
-    ) -> ShaderModuleIdentifierEXT {
-        let mut identifier = MaybeUninit::<ShaderModuleIdentifierEXT>::uninit();
-
+        identifier: &mut ShaderModuleIdentifierEXT,
+    ) {
         let __result = (self.commands().get_shader_module_identifier_ext)(
             self.handle(),
             shader_module,
-            identifier.as_mut_ptr(),
+            identifier,
         );
-
-        identifier.assume_init()
     }
 }
 
@@ -5140,17 +5122,16 @@ pub trait FuchsiaBufferCollectionExtension: DeviceV1_0 {
     unsafe fn get_buffer_collection_properties_fuchsia(
         &self,
         collection: BufferCollectionFUCHSIA,
-    ) -> crate::VkResult<BufferCollectionPropertiesFUCHSIA> {
-        let mut properties = MaybeUninit::<BufferCollectionPropertiesFUCHSIA>::uninit();
-
+        properties: &mut BufferCollectionPropertiesFUCHSIA,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_buffer_collection_properties_fuchsia)(
             self.handle(),
             collection,
-            properties.as_mut_ptr(),
+            properties,
         );
 
         if __result == Result::SUCCESS {
-            Ok(properties.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -5236,19 +5217,17 @@ pub trait FuchsiaExternalMemoryExtension: DeviceV1_0 {
         &self,
         handle_type: ExternalMemoryHandleTypeFlags,
         zircon_handle: zx_handle_t,
-    ) -> crate::VkResult<MemoryZirconHandlePropertiesFUCHSIA> {
-        let mut memory_zircon_handle_properties =
-            MaybeUninit::<MemoryZirconHandlePropertiesFUCHSIA>::uninit();
-
+        memory_zircon_handle_properties: &mut MemoryZirconHandlePropertiesFUCHSIA,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_memory_zircon_handle_properties_fuchsia)(
             self.handle(),
             handle_type,
             zircon_handle,
-            memory_zircon_handle_properties.as_mut_ptr(),
+            memory_zircon_handle_properties,
         );
 
         if __result == Result::SUCCESS {
-            Ok(memory_zircon_handle_properties.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -6011,18 +5990,15 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
         build_type: AccelerationStructureBuildTypeKHR,
         build_info: &AccelerationStructureBuildGeometryInfoKHR,
         max_primitive_counts: &[u32],
-    ) -> AccelerationStructureBuildSizesInfoKHR {
-        let mut size_info = MaybeUninit::<AccelerationStructureBuildSizesInfoKHR>::uninit();
-
+        size_info: &mut AccelerationStructureBuildSizesInfoKHR,
+    ) {
         let __result = (self.commands().get_acceleration_structure_build_sizes_khr)(
             self.handle(),
             build_type,
             build_info,
             max_primitive_counts.as_ptr(),
-            size_info.as_mut_ptr(),
+            size_info,
         );
-
-        size_info.assume_init()
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetAccelerationStructureDeviceAddressKHR.html>
@@ -6665,17 +6641,15 @@ pub trait KhrDeviceGroupExtension: DeviceV1_0 {
     #[inline]
     unsafe fn get_device_group_present_capabilities_khr(
         &self,
-    ) -> crate::VkResult<DeviceGroupPresentCapabilitiesKHR> {
-        let mut device_group_present_capabilities =
-            MaybeUninit::<DeviceGroupPresentCapabilitiesKHR>::uninit();
-
+        device_group_present_capabilities: &mut DeviceGroupPresentCapabilitiesKHR,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_device_group_present_capabilities_khr)(
             self.handle(),
-            device_group_present_capabilities.as_mut_ptr(),
+            device_group_present_capabilities,
         );
 
         if __result == Result::SUCCESS {
-            Ok(device_group_present_capabilities.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -7148,18 +7122,15 @@ pub trait KhrExternalFenceCapabilitiesExtension: InstanceV1_0 {
         &self,
         physical_device: PhysicalDevice,
         external_fence_info: &PhysicalDeviceExternalFenceInfo,
-    ) -> ExternalFenceProperties {
-        let mut external_fence_properties = MaybeUninit::<ExternalFenceProperties>::uninit();
-
+        external_fence_properties: &mut ExternalFenceProperties,
+    ) {
         let __result = (self
             .commands()
             .get_physical_device_external_fence_properties_khr)(
             physical_device,
             external_fence_info,
-            external_fence_properties.as_mut_ptr(),
+            external_fence_properties,
         );
-
-        external_fence_properties.assume_init()
     }
 }
 
@@ -7273,18 +7244,15 @@ pub trait KhrExternalMemoryCapabilitiesExtension: InstanceV1_0 {
         &self,
         physical_device: PhysicalDevice,
         external_buffer_info: &PhysicalDeviceExternalBufferInfo,
-    ) -> ExternalBufferProperties {
-        let mut external_buffer_properties = MaybeUninit::<ExternalBufferProperties>::uninit();
-
+        external_buffer_properties: &mut ExternalBufferProperties,
+    ) {
         let __result = (self
             .commands()
             .get_physical_device_external_buffer_properties_khr)(
             physical_device,
             external_buffer_info,
-            external_buffer_properties.as_mut_ptr(),
+            external_buffer_properties,
         );
-
-        external_buffer_properties.assume_init()
     }
 }
 
@@ -7317,18 +7285,17 @@ pub trait KhrExternalMemoryFdExtension: DeviceV1_0 {
         &self,
         handle_type: ExternalMemoryHandleTypeFlags,
         fd: c_int,
-    ) -> crate::VkResult<MemoryFdPropertiesKHR> {
-        let mut memory_fd_properties = MaybeUninit::<MemoryFdPropertiesKHR>::uninit();
-
+        memory_fd_properties: &mut MemoryFdPropertiesKHR,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_memory_fd_properties_khr)(
             self.handle(),
             handle_type,
             fd,
-            memory_fd_properties.as_mut_ptr(),
+            memory_fd_properties,
         );
 
         if __result == Result::SUCCESS {
-            Ok(memory_fd_properties.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -7370,19 +7337,17 @@ pub trait KhrExternalMemoryWin32Extension: DeviceV1_0 {
         &self,
         handle_type: ExternalMemoryHandleTypeFlags,
         handle: HANDLE,
-    ) -> crate::VkResult<MemoryWin32HandlePropertiesKHR> {
-        let mut memory_win32_handle_properties =
-            MaybeUninit::<MemoryWin32HandlePropertiesKHR>::uninit();
-
+        memory_win32_handle_properties: &mut MemoryWin32HandlePropertiesKHR,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_memory_win32_handle_properties_khr)(
             self.handle(),
             handle_type,
             handle,
-            memory_win32_handle_properties.as_mut_ptr(),
+            memory_win32_handle_properties,
         );
 
         if __result == Result::SUCCESS {
-            Ok(memory_win32_handle_properties.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -7412,19 +7377,15 @@ pub trait KhrExternalSemaphoreCapabilitiesExtension: InstanceV1_0 {
         &self,
         physical_device: PhysicalDevice,
         external_semaphore_info: &PhysicalDeviceExternalSemaphoreInfo,
-    ) -> ExternalSemaphoreProperties {
-        let mut external_semaphore_properties =
-            MaybeUninit::<ExternalSemaphoreProperties>::uninit();
-
+        external_semaphore_properties: &mut ExternalSemaphoreProperties,
+    ) {
         let __result = (self
             .commands()
             .get_physical_device_external_semaphore_properties_khr)(
             physical_device,
             external_semaphore_info,
-            external_semaphore_properties.as_mut_ptr(),
+            external_semaphore_properties,
         );
-
-        external_semaphore_properties.assume_init()
     }
 }
 
@@ -7646,17 +7607,16 @@ pub trait KhrGetDisplayProperties2Extension: InstanceV1_0 {
         &self,
         physical_device: PhysicalDevice,
         display_plane_info: &DisplayPlaneInfo2KHR,
-    ) -> crate::VkResult<DisplayPlaneCapabilities2KHR> {
-        let mut capabilities = MaybeUninit::<DisplayPlaneCapabilities2KHR>::uninit();
-
+        capabilities: &mut DisplayPlaneCapabilities2KHR,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_display_plane_capabilities2_khr)(
             physical_device,
             display_plane_info,
-            capabilities.as_mut_ptr(),
+            capabilities,
         );
 
         if __result == Result::SUCCESS {
-            Ok(capabilities.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -9350,17 +9310,15 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
     #[inline]
     unsafe fn get_device_group_present_capabilities_khr(
         &self,
-    ) -> crate::VkResult<DeviceGroupPresentCapabilitiesKHR> {
-        let mut device_group_present_capabilities =
-            MaybeUninit::<DeviceGroupPresentCapabilitiesKHR>::uninit();
-
+        device_group_present_capabilities: &mut DeviceGroupPresentCapabilitiesKHR,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_device_group_present_capabilities_khr)(
             self.handle(),
-            device_group_present_capabilities.as_mut_ptr(),
+            device_group_present_capabilities,
         );
 
         if __result == Result::SUCCESS {
-            Ok(device_group_present_capabilities.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -10161,17 +10119,13 @@ pub trait NvxImageViewHandleExtension: DeviceV1_0 {
     unsafe fn get_image_view_address_nvx(
         &self,
         image_view: ImageView,
-    ) -> crate::VkResult<ImageViewAddressPropertiesNVX> {
-        let mut properties = MaybeUninit::<ImageViewAddressPropertiesNVX>::uninit();
-
-        let __result = (self.commands().get_image_view_address_nvx)(
-            self.handle(),
-            image_view,
-            properties.as_mut_ptr(),
-        );
+        properties: &mut ImageViewAddressPropertiesNVX,
+    ) -> crate::VkResult<()> {
+        let __result =
+            (self.commands().get_image_view_address_nvx)(self.handle(), image_view, properties);
 
         if __result == Result::SUCCESS {
-            Ok(properties.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -10804,20 +10758,19 @@ pub trait NvExternalMemorySciBufExtension: DeviceV1_0 {
         physical_device: PhysicalDevice,
         handle_type: ExternalMemoryHandleTypeFlags,
         handle: NvSciBufObj,
-    ) -> crate::VkResult<MemorySciBufPropertiesNV> {
-        let mut memory_sci_buf_properties = MaybeUninit::<MemorySciBufPropertiesNV>::uninit();
-
+        memory_sci_buf_properties: &mut MemorySciBufPropertiesNV,
+    ) -> crate::VkResult<()> {
         let __result = (self
             .commands()
             .get_physical_device_external_memory_sci_buf_properties_nv)(
             physical_device,
             handle_type,
             handle,
-            memory_sci_buf_properties.as_mut_ptr(),
+            memory_sci_buf_properties,
         );
 
         if __result == Result::SUCCESS {
-            Ok(memory_sci_buf_properties.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -12090,17 +12043,16 @@ pub trait QcomTilePropertiesExtension: DeviceV1_0 {
     unsafe fn get_dynamic_rendering_tile_properties_qcom(
         &self,
         rendering_info: &RenderingInfo,
-    ) -> crate::VkResult<TilePropertiesQCOM> {
-        let mut properties = MaybeUninit::<TilePropertiesQCOM>::uninit();
-
+        properties: &mut TilePropertiesQCOM,
+    ) -> crate::VkResult<()> {
         let __result = (self.commands().get_dynamic_rendering_tile_properties_qcom)(
             self.handle(),
             rendering_info,
-            properties.as_mut_ptr(),
+            properties,
         );
 
         if __result == Result::SUCCESS {
-            Ok(properties.assume_init())
+            Ok(())
         } else {
             Err(__result.into())
         }
@@ -12266,18 +12218,15 @@ pub trait ValveDescriptorSetHostMappingExtension: DeviceV1_0 {
     unsafe fn get_descriptor_set_layout_host_mapping_info_valve(
         &self,
         binding_reference: &DescriptorSetBindingReferenceVALVE,
-    ) -> DescriptorSetLayoutHostMappingInfoVALVE {
-        let mut host_mapping = MaybeUninit::<DescriptorSetLayoutHostMappingInfoVALVE>::uninit();
-
+        host_mapping: &mut DescriptorSetLayoutHostMappingInfoVALVE,
+    ) {
         let __result = (self
             .commands()
             .get_descriptor_set_layout_host_mapping_info_valve)(
             self.handle(),
             binding_reference,
-            host_mapping.as_mut_ptr(),
+            host_mapping,
         );
-
-        host_mapping.assume_init()
     }
 }
 
