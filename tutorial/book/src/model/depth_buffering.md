@@ -350,6 +350,8 @@ transition_image_layout(
 
 The undefined layout can be used as initial layout, because there are no existing depth image contents that matter. We need to update some of the logic in `transition_image_layout` to use the right subresource aspect:
 
+> **Note:** The first usage of the `|` operator below describes a [*pattern*](https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html) that matches either of the specified `vk::Format`s in the `match` arm. Meanwhile, the second usage of the `|` operator is the [*bitwise OR operator*](https://doc.rust-lang.org/std/ops/trait.BitOr.html) which combines the bits of the `vk::ImageAspectFlags` we want to enable in this code path.
+
 ```rust,noplaypen
 let aspect_mask = if new_layout == vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL {
     match format {
