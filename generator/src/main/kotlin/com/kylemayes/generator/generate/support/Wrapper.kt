@@ -18,8 +18,6 @@ fun Registry.generateCommandWrapper(command: Command): String {
     val hasSuccessCodes = getCommandSuccessCodes(command).isNotEmpty()
     val hasErrorCodes = command.result.getIdentifier()?.value == "Result"
 
-    // The Rust method type parameters.
-    val typeParams = mutableListOf<String>()
     // The Rust method parameters.
     val params = mutableListOf<String>()
     // The Rust method result types (which will combined into a single type).
@@ -229,7 +227,6 @@ fun Registry.generateCommandWrapper(command: Command): String {
 
     // Generate method signature components.
 
-    val generics = typeParams.joinToString(prefix = "<", postfix = ">").replace("<>", "")
     val resultType = resultTypes.joinTuple()
     val outputType = when {
         hasSuccessCodes && resultType == "()" -> "-> crate::VkResult<SuccessCode>"
@@ -291,7 +288,7 @@ $outputExpr
     return """
 /// <${generateManualUrl(command)}>
 #[inline]
-unsafe fn ${command.name}$generics(&self, ${params.joinToString()})$outputType {
+unsafe fn ${command.name}(&self, ${params.joinToString()})$outputType {
     $setup
     $actual
 }
