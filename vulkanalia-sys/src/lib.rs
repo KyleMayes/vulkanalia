@@ -2,6 +2,11 @@
 
 //! Raw Vulkan bindings for Rust.
 
+#![cfg_attr(not(feature = "std"), no_std)]
+#![cfg_attr(feature = "core_error", feature(no_std_error))]
+
+extern crate alloc;
+
 mod arrays;
 mod bitfields;
 

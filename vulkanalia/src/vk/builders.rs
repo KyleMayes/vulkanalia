@@ -18,11 +18,11 @@
     clippy::useless_transmute
 )]
 
-use std::fmt;
-use std::marker::PhantomData;
-use std::ops;
-use std::os::raw::{c_char, c_int, c_void};
-use std::ptr::NonNull;
+use core::ffi::{c_char, c_int, c_void};
+use core::fmt;
+use core::marker::PhantomData;
+use core::ops;
+use core::ptr::NonNull;
 
 use super::*;
 

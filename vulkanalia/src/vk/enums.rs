@@ -18,8 +18,12 @@
     clippy::useless_transmute
 )]
 
+use core::fmt;
+
+#[cfg(all(feature = "no_std_error", not(feature = "std")))]
+use core::error;
+#[cfg(feature = "std")]
 use std::error;
-use std::fmt;
 
 use super::Result;
 
@@ -208,6 +212,7 @@ impl fmt::Display for ErrorCode {
     }
 }
 
+#[cfg(any(feature = "std", feature = "no_std_error"))]
 impl error::Error for ErrorCode {}
 
 impl From<Result> for ErrorCode {

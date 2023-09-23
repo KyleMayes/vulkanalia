@@ -18,8 +18,12 @@
     clippy::useless_transmute
 )]
 
+use core::fmt;
+
+#[cfg(all(feature = "no_std_error", not(feature = "std")))]
+use core::error;
+#[cfg(feature = "std")]
 use std::error;
-use std::fmt;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureBuildTypeKHR.html>
 #[repr(transparent)]
@@ -4545,6 +4549,7 @@ impl fmt::Display for Result {
     }
 }
 
+#[cfg(any(feature = "std", feature = "no_std_error"))]
 impl error::Error for Result {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerAddressMode.html>

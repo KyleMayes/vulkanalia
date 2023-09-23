@@ -81,9 +81,9 @@
 //! assert_eq!(full.descriptor_indexing, 1);
 //! ```
 
-use std::iter;
-use std::os::raw::c_void;
-use std::ptr::NonNull;
+use core::ffi::c_void;
+use core::iter;
+use core::ptr::NonNull;
 
 use crate::prelude::v1_0::*;
 

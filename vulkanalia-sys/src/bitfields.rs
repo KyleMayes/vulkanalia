@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
-use std::fmt;
+use core::fmt;
 
 /// A pair of bitfields stored in an `u32`.
 ///
