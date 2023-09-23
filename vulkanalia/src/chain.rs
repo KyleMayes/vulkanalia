@@ -58,9 +58,14 @@
 //! # use vk::KhrGetPhysicalDeviceProperties2Extension;
 //! # let instance: Instance = panic!();
 //! # let physical_device: vk::PhysicalDevice = panic!();
-//! // Call a command that returns an output pointer chain.
+//! // Call a command that populates an output pointer chain.
 //!
-//! let mut features = vk::PhysicalDeviceFeatures2::default();
+//! let mut features_11 = vk::PhysicalDeviceVulkan11Features::default();
+//! let mut features_12 = vk::PhysicalDeviceVulkan12Features::default();
+//! let mut features = vk::PhysicalDeviceFeatures2::builder()
+//!     .push_next(&mut features_11)
+//!     .push_next(&mut features_12);
+//!
 //! unsafe { instance.get_physical_device_features2_khr(physical_device, &mut features) };
 //!
 //! // Iterate over the pointers in the output pointer chain.
@@ -71,14 +76,14 @@
 //! // Inspect the pointers in the output pointer chain.
 //!
 //! let base = unsafe { structs[0].as_base_ref() };
-//! assert_eq!(base.s_type, vk::StructureType::PHYSICAL_DEVICE_VULKAN_1_1_FEATURES);
-//! let full = unsafe { structs[0].as_ref::<vk::PhysicalDeviceVulkan11Features>() };
-//! assert_eq!(full.protected_memory, 1);
-//!
-//! let base = unsafe { structs[0].as_base_ref() };
 //! assert_eq!(base.s_type, vk::StructureType::PHYSICAL_DEVICE_VULKAN_1_2_FEATURES);
 //! let full = unsafe { structs[0].as_ref::<vk::PhysicalDeviceVulkan12Features>() };
-//! assert_eq!(full.descriptor_indexing, 1);
+//! assert_eq!(full.descriptor_indexing, 1);       
+//!
+//! let base = unsafe { structs[1].as_base_ref() };
+//! assert_eq!(base.s_type, vk::StructureType::PHYSICAL_DEVICE_VULKAN_1_1_FEATURES);
+//! let full = unsafe { structs[1].as_ref::<vk::PhysicalDeviceVulkan11Features>() };
+//! assert_eq!(full.protected_memory, 1);
 //! ```
 
 use core::ffi::c_void;
