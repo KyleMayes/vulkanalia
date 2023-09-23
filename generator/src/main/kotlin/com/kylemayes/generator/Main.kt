@@ -12,23 +12,21 @@ import com.github.ajalt.clikt.parameters.options.required
 import com.kylemayes.generator.generate.generateRustFiles
 import com.kylemayes.generator.registry.indexEntities
 import com.kylemayes.generator.registry.parseRegistry
+import com.kylemayes.generator.support.Repository
 import com.kylemayes.generator.support.addBindingsUpdates
 import com.kylemayes.generator.support.generateMarkdown
 import com.kylemayes.generator.support.git
 import com.kylemayes.generator.support.parseMarkdown
 import com.kylemayes.generator.support.time
 import mu.KotlinLogging
-import org.kohsuke.github.GHCommit
 import org.kohsuke.github.GitHub
-import java.net.URI
-import java.net.http.HttpClient
-import java.net.http.HttpRequest
-import java.net.http.HttpResponse.BodyHandlers
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.system.exitProcess
 
 private val log = KotlinLogging.logger { /* */ }
+
+private val docsRepo = Repository("KhronosGroup", "Vulkan-Docs", "main")
 
 fun main(args: Array<String>) = Generator()
     .subcommands(Check(), Index(), Update())
@@ -71,10 +69,10 @@ class Check : CliktCommand(help = "Checks generated Vulkan bindings") {
 
         // Parse
 
-        val currentCommitHash = getCurrentCommitHash(directory)
+        val currentCommitHash = docsRepo.getCurrentCommitHash(directory)
         log.info { "Current commit hash = $currentCommitHash" }
 
-        val xml = getFileContents(currentCommitHash, "xml/vk.xml")
+        val xml = docsRepo.getFileContents(currentCommitHash, "xml/vk.xml")
         val registry = log.time("Parse Registry") { parseRegistry(xml) }
 
         // Generate
@@ -107,10 +105,10 @@ class Index : CliktCommand(help = "Generates an index for generated Vulkan bindi
 
         // Parse
 
-        val currentCommitHash = getCurrentCommitHash(directory)
+        val currentCommitHash = docsRepo.getCurrentCommitHash(directory)
         log.info { "Current commit hash = $currentCommitHash" }
 
-        val xml = getFileContents(currentCommitHash, "xml/vk.xml")
+        val xml = docsRepo.getFileContents(currentCommitHash, "xml/vk.xml")
         val registry = log.time("Parse Registry") { parseRegistry(xml) }
 
         // Index
@@ -138,11 +136,11 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
         // Parse
 
-        val currentCommit = getCommit(github, getCurrentCommitHash(directory))
+        val currentCommit = docsRepo.getCommit(github, docsRepo.getCurrentCommitHash(directory))
         log.info { "Current commit hash = ${currentCommit.shA1}" }
 
         val latestCommit = if (!skipUpgrade) {
-            val latestCommit = getLatestCommit(github, "xml/vk.xml")
+            val latestCommit = docsRepo.getLatestCommit(github, "xml/vk.xml")
             log.info { "Latest commit hash = ${latestCommit.shA1}" }
             latestCommit
         } else {
@@ -154,7 +152,7 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
             return
         }
 
-        val xml = getFileContents(latestCommit.shA1, "xml/vk.xml")
+        val xml = docsRepo.getFileContents(latestCommit.shA1, "xml/vk.xml")
         val registry = log.time("Parse Registry") { parseRegistry(xml) }
 
         // Generate
@@ -173,7 +171,7 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
         // Write (files)
 
         log.time("Write Files") { files.forEach { it.write(directory) } }
-        setCurrentCommitHash(directory, latestCommit.shA1)
+        docsRepo.setCurrentCommitHash(directory, latestCommit.shA1)
 
         if (!format) {
             log.error { "One or more files could not be formatted." }
@@ -185,7 +183,7 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
         val markdown = directory.resolve("CHANGELOG.md")
         val changelog = parseMarkdown(Files.readString(markdown))
 
-        for (commit in getTrailingCommits(github, "xml/vk.xml", currentCommit).reversed()) {
+        for (commit in docsRepo.getTrailingCommits(github, "xml/vk.xml", currentCommit).reversed()) {
             log.info { "Intermediate commit hash = ${commit.shA1}" }
             changelog.addBindingsUpdates(commit.shA1, commit.commitShortInfo.message)
         }
@@ -233,68 +231,5 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
         val body = "Update generated bindings (automatically created by update action)."
         val pr = repo.createPullRequest("Update generated bindings", head, base, body)
         log.info { "Created pull request (#${pr.number})!" }
-    }
-}
-
-// ===============================================
-// Shared
-// ===============================================
-
-/** The repository Vulkan files are pulled from. */
-private const val repository = "KhronosGroup/Vulkan-Docs"
-
-/** The branch Vulkan files are pulled from. */
-private const val branch = "main"
-
-/** The name of the file the current commit hash is stored in. */
-private const val file = "Vulkan-Docs"
-
-/** Gets the current `Vulkan-Docs` commit hash from the `Vulkan-Docs` file. */
-fun getCurrentCommitHash(directory: Path): String =
-    Files.readAllLines(directory.resolve(file))
-        .map { it.trim() }
-        .first { !it.startsWith('#') }
-
-/** Sets the current `Vulkan-Docs` commit hash to the `Vulkan-Docs` file. */
-fun setCurrentCommitHash(directory: Path, hash: String): Path =
-    Files.writeString(directory.resolve(file), "# https://github.com/$repository\n$hash\n")
-
-/** Gets a commit for a `Vulkan-Docs` file from GitHub. */
-fun getCommit(github: GitHub, hash: String): GHCommit =
-    github.getRepository(repository)
-        .getCommit(hash)
-
-/** Gets the latest commit for a `Vulkan-Docs` file from GitHub. */
-fun getLatestCommit(github: GitHub, path: String): GHCommit =
-    github.getRepository(repository)
-        .queryCommits()
-        .from(branch)
-        .path(path)
-        .pageSize(1)
-        .list()
-        .first()
-
-/** Gets the commits after a commit for a `Vulkan-Docs` file from GitHub. */
-fun getTrailingCommits(github: GitHub, path: String, commit: GHCommit): List<GHCommit> =
-    github.getRepository(repository)
-        .queryCommits()
-        .from(branch)
-        .path(path)
-        .since(commit.commitDate)
-        .list()
-        .toList()
-
-/** Gets the contents of a `Vulkan-Docs` file from GitHub. */
-fun getFileContents(hash: String, path: String): String {
-    val uri = "https://raw.githubusercontent.com/$repository/$hash/$path"
-    val request = HttpRequest.newBuilder(URI.create(uri)).GET().build()
-
-    val client = HttpClient.newHttpClient()
-    val response = client.send(request, BodyHandlers.ofString())
-
-    if (response.statusCode() == 200) {
-        return response.body()
-    } else {
-        error("Failed to get `$repository/$path` from GitHub (${response.statusCode()}).")
     }
 }
