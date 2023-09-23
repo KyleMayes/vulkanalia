@@ -18,8 +18,8 @@
     clippy::useless_transmute
 )]
 
-use std::fmt;
-use std::hash::Hash;
+use core::fmt;
+use core::hash::Hash;
 
 use crate::ObjectType;
 

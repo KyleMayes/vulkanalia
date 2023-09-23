@@ -18,7 +18,7 @@
     clippy::useless_transmute
 )]
 
-use std::os::raw::{c_ulong, c_void};
+use core::ffi::{c_ulong, c_void};
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBool32.html>
 pub type Bool32 = u32;

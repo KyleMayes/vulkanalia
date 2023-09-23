@@ -29,6 +29,17 @@ jobs:
         with:
           command: test
           args: --verbose --all-features
+      # Test (no_std)
+      - name: Cargo Build (vulkanalia-sys/no_std)
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --manifest-path vulkanalia-sys/Cargo.toml --no-default-features
+      - name: Cargo Build (vulkanalia/no_std)
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --manifest-path vulkanalia/Cargo.toml --no-default-features
 
   format-vulkanalia:
     name: Format - Vulkanalia

@@ -1,3 +1,8 @@
+## [0.23.0] - UNRELEASED
+
+### Changed
+- Added `no_std` compability for `vulkanalia` and `vulkanalia-sys` crates
+
 ## [0.22.0] - 2023-09-15
 
 ### Fixed

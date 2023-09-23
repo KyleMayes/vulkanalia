@@ -10,7 +10,7 @@ import java.lang.Error
 
 fun Registry.generateChains(): String {
     return """
-use std::os::raw::c_void;
+use core::ffi::c_void;
 
 use super::*;
 

@@ -1,9 +1,13 @@
 //! SPIR-V bytecode.
 
-use std::alloc::{self, Layout};
+use alloc::alloc::{alloc as malloc, dealloc as free, Layout};
+use core::fmt;
+use core::slice;
+
+#[cfg(all(feature = "no_std_error", not(feature = "std")))]
+use core::error;
+#[cfg(feature = "std")]
 use std::error;
-use std::fmt;
-use std::slice;
 
 /// An error raised by a failure to construct a [`Bytecode`].
 #[derive(Clone, Debug, PartialEq)]
@@ -14,7 +18,7 @@ pub enum BytecodeError {
     Length(usize),
 }
 
-impl std::fmt::Display for BytecodeError {
+impl fmt::Display for BytecodeError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         use BytecodeError::*;
         match self {
@@ -24,6 +28,7 @@ impl std::fmt::Display for BytecodeError {
     }
 }
 
+#[cfg(any(feature = "std", feature = "no_std_error"))]
 impl error::Error for BytecodeError {}
 
 /// A 4-byte aligned SPIR-V bytecode buffer.
@@ -55,7 +60,7 @@ impl Bytecode {
 
         // SAFETY: Safe because `layout` is guaranteed to have non-zero size
         // because `size` is always non-zero and `align` is always 4.
-        let pointer = unsafe { alloc::alloc(layout) };
+        let pointer = unsafe { malloc(layout) };
         if pointer.is_null() {
             return Err(BytecodeError::Alloc);
         }
@@ -84,6 +89,6 @@ impl Bytecode {
 impl Drop for Bytecode {
     fn drop(&mut self) {
         let layout = Layout::from_size_align(self.1, 4).unwrap();
-        unsafe { alloc::dealloc(self.0, layout) };
+        unsafe { free(self.0, layout) };
     }
 }

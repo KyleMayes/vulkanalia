@@ -18,9 +18,9 @@
     clippy::useless_transmute
 )]
 
-use std::fmt;
-use std::mem::MaybeUninit;
-use std::os::raw::{c_char, c_void};
+use core::ffi::{c_char, c_void};
+use core::fmt;
+use core::mem::MaybeUninit;
 
 use crate::*;
 

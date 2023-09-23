@@ -11,8 +11,8 @@ import com.kylemayes.generator.support.toSnakeCase
 /** Generates Rust structs for Vulkan handles. */
 fun Registry.generateHandles() =
     """
-use std::fmt;
-use std::hash::Hash;
+use core::fmt;
+use core::hash::Hash;
 
 use crate::ObjectType;
 

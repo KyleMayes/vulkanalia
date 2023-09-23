@@ -20,6 +20,11 @@ categories = ["graphics"]
 
 [features]
 
+default = ["std"]
+
+std = []
+no_std_error = []
+
 provisional = []
 
 [dependencies]

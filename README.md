@@ -23,11 +23,15 @@ For users new to Vulkan, there is a complete adaptation of https://vulkan-tutori
 
 ## Cargo Features
 
-The `vulkanalia` crate has the following notable Cargo features:
+The `vulkanalia` crate has the following notable non-default Cargo features:
 
 * `libloading` (**non-default**) &ndash; enables integration with [`libloading`](https://crates.io/crates/libloading) (adds the [`LibloadingLoader`](https://docs.rs/vulkanalia/latest/vulkanalia/loader/struct.LibloadingLoader.html) struct which can be used to load the initial Vulkan commands from a Vulkan shared library)
 * `window` (**non-default**) &ndash; enables integration with [`raw-window-handle`](https://crates.io/crates/raw-window-handle) (adds the [`window`](https://docs.rs/vulkanalia/latest/vulkanalia/window/index.html) module which can be used to create surfaces for windows from libraries that support `raw-window-handle` (e.g., [`winit`](https://crates.io/crates/winit))
 * `provisional` (**non-default**) &ndash; enables access to [provisional Vulkan extensions](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html) (**WARNING:** these extensions are not guaranteed to be backwards compatible and are not intended to be used in production applications)
+
+By default, the `vulkanalia-sys` and `vulkanalia` crates depend on the Rust standard library. However, by disabling the default features for these crates, you can use either of these crates in a `no_std` environment. If you do this, the following features are of note:
+
+* `no_std_error` (**non-default**): enables implementations of the [`Error` trait](https://doc.rust-lang.org/beta/core/error/trait.Error.html) for various error types in `vulkanalia` and `vulkanalia-sys` when the default `std` feature is not enabled (the usage of the `Error` trait in `core` is [not yet stable](https://github.com/rust-lang/rust/issues/103765) and requires the `core-error` feature to be enabled)
 
 ## Example
 

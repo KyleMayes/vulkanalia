@@ -105,9 +105,10 @@ pub const ${extension.name}_EXTENSION: Extension = Extension {
 /** Generates Rust modules and traits for Vulkan extensions. */
 fun Registry.generateExtensionTraits() =
     """
-use std::mem::MaybeUninit;
-use std::os::raw::{c_int, c_void};
-use std::ptr;
+use alloc::vec::Vec;
+use core::ffi::{c_int, c_void};
+use core::mem::MaybeUninit;
+use core::ptr;
 
 use super::*;
 
