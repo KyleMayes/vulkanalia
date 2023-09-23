@@ -417,6 +417,9 @@ data.texture_image_view = create_image_view(
 )?;
 </code></pre>
 <p>The undefined layout can be used as initial layout, because there are no existing depth image contents that matter. We need to update some of the logic in <code>transition_image_layout</code> to use the right subresource aspect:</p>
+<blockquote>
+<p><strong>Note:</strong> The first usage of the <code>|</code> operator below describes a <a href="https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html"><em>pattern</em></a> that matches either of the specified <a href="https://docs.rs/vulkanalia/0.22.0/vulkanalia/vk/struct.Format.html"><code class="hljs">vk::Format</code></a>s in the <code>match</code> arm. Meanwhile, the second usage of the <code>|</code> operator is the <a href="https://doc.rust-lang.org/std/ops/trait.BitOr.html"><em>bitwise OR operator</em></a> which combines the bits of the <a href="https://docs.rs/vulkanalia/0.22.0/vulkanalia/vk/struct.ImageAspectFlags.html"><code class="hljs">vk::ImageAspectFlags</code></a> we want to enable in this code path.</p>
+</blockquote>
 <pre><code class="language-rust noplaypen">let aspect_mask = if new_layout == vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL {
     match format {
         vk::Format::D32_SFLOAT_S8_UINT | vk::Format::D24_UNORM_S8_UINT =&gt;
