@@ -192,10 +192,10 @@ fun Registry.generateCommandWrapper(command: Command): String {
                 // Output pointer parameter (user-provided).
                 if (current.optional) {
                     params.add("${current.name}: Option<&mut ${pointee.generate()}>")
-                    addArgument("${current.name}.map_or(ptr::null_mut(), |v| v)")
+                    addArgument("${current.name}.map_or(ptr::null_mut(), |v| v)", "ptr::null_mut()")
                 } else {
                     params.add("${current.name}: &mut ${pointee.generate()}")
-                    addArgument(current.name.value)
+                    addArgument(current.name.value, "ptr::null_mut()")
                 }
             } else if (current.type.isOpaquePointer()) {
                 // Input pointer parameter (opaque).
