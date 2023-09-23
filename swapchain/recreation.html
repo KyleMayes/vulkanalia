@@ -265,7 +265,7 @@ if self.resized || changed {
 </code></pre>
 <p>Now try to run the program and resize the window to see if the framebuffer is indeed resized properly with the window.</p>
 <h2 id="handling-minimization"><a class="header" href="#handling-minimization">Handling minimization</a></h2>
-<p>There is another case where a swapchain may become out of data and that is a special kind of window resizing: window minimization. This case is special because it will result in a framebuffer size of <code>0</code>. In this tutorial we will handle that by not rendering frames while the window is minimized:</p>
+<p>There is another case where a swapchain may become out of date and that is a special kind of window resizing: window minimization. This case is special because it will result in a framebuffer size of <code>0</code>. In this tutorial we will handle that by not rendering frames while the window is minimized:</p>
 <pre><code class="language-rust noplaypen">let mut app = unsafe { App::create(&amp;window)? };
 let mut destroying = false;
 let mut minimized = false;
