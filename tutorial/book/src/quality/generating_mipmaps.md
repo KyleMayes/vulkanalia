@@ -464,7 +464,7 @@ While the `vk::Image` holds the mipmap data, `vk::Sampler` controls how that dat
 // Smaller when the object is close, may be negative.
 let mut lod = get_lod_level_from_screen_size();
 
-lod = clamp(lod + mip_lod_bias, min_lop, max_lod);
+lod = clamp(lod + mip_lod_bias, min_lod, max_lod);
 
 // Clamped to the number of mip levels in the texture.
 let level = clamp(floor(lod), 0, texture.mip_levels - 1);
