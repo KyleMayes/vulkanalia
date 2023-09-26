@@ -2,7 +2,7 @@
 
 **Code:** [main.rs](https://github.com/KyleMayes/vulkanalia/tree/master/tutorial/src/22_descriptor_sets.rs)
 
-The descriptor layout from the previous chapter describes the type of descriptors that can be bound. In this chapter we're going to create a descriptor set for each `vk::Buffer` resource to bind it to the uniform buffer descriptor.
+The descriptor set layout from the previous chapter describes the type of descriptors that can be bound. In this chapter we're going to create a descriptor set for each `vk::Buffer` resource to bind it to the uniform buffer descriptor.
 
 ## Descriptor pool
 
@@ -104,7 +104,7 @@ unsafe fn create_descriptor_sets(device: &Device, data: &mut AppData) -> Result<
 }
 ```
 
-A descriptor set allocation is described with a `vk::DescriptorSetAllocateInfo` struct. You need to specify the descriptor pool to allocate from and an array of descriptor layouts that describes each of the descriptor sets you are allocating:
+A descriptor set allocation is described with a `vk::DescriptorSetAllocateInfo` struct. You need to specify the descriptor pool to allocate from and an array of descriptor set layouts that describes each of the descriptor sets you are allocating:
 
 ```rust,noplaypen
 let layouts = vec![data.descriptor_set_layout; data.swapchain_images.len()];
@@ -291,7 +291,7 @@ If you now compile and run your program again you should see that the shader cor
 
 ## Multiple descriptor sets
 
-As some of the structures and function calls hinted at, it is actually possible to bind multiple descriptor sets simultaneously. You need to specify a descriptor layout for each descriptor set when creating the pipeline layout. Shaders can then reference specific descriptor sets like this:
+As some of the structures and function calls hinted at, it is actually possible to bind multiple descriptor sets simultaneously. You need to specify a descriptor set layout for each descriptor set when creating the pipeline layout. Shaders can then reference specific descriptor sets like this:
 
 ```glsl
 layout(set = 0, binding = 0) uniform UniformBufferObject { ... }

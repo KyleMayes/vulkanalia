@@ -133,8 +133,8 @@ path = "src/20_index_buffer.rs"
 
 [[bin]]
 
-name = "21_descriptor_layout"
-path = "src/21_descriptor_layout.rs"
+name = "21_descriptor_set_layout"
+path = "src/21_descriptor_set_layout.rs"
 
 [[bin]]
 

@@ -46,7 +46,7 @@
 
 # Uniform buffers
 
-- [Descriptor layout and buffer](./uniform/descriptor_layout_and_buffer.md)
+- [Descriptor set layout and buffer](./uniform/descriptor_set_layout_and_buffer.md)
 - [Descriptor pool and sets](./uniform/descriptor_pool_and_sets.md)
 
 # Texture mapping
