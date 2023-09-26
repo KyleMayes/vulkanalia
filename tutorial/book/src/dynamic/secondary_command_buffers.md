@@ -222,7 +222,7 @@ If you run the program now, you should see the same ghostly model rotating exact
 unsafe fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
     // ...
 
-    self.device.cmd_begin_render_pass(command_buffer, &info, vk::SubpassContents::INLINE);
+    self.device.cmd_begin_render_pass(command_buffer, &info, vk::SubpassContents::SECONDARY_COMMAND_BUFFERS);
 
     let secondary_command_buffers = (0..4)
         .map(|i| self.update_secondary_command_buffer(image_index, i))
