@@ -49,7 +49,7 @@ unsafe fn render(&mut self, window: &Window) -> Result<()> {
 }
 ```
 
-Note that we do need to be careful about when we call `update_command_buffer`. This method will reset the command buffer which could cause serious issues if the command buffer is still being used to render a previously submitted frame. This issue was also discussed in the [`Descriptor layout and buffer` chapter](../uniform/descriptor_layout_and_buffer.html#updating-uniform-data) which is why the call to `App::update_uniform_buffer` is where it is. As discussed in more detail in that chapter, both of these calls only happen after the call to `wait_for_fences` which waits for the GPU to be done with the acquired swapchain image and its associated resources so we are safe to do whatever we want with the command buffer.
+Note that we do need to be careful about when we call `update_command_buffer`. This method will reset the command buffer which could cause serious issues if the command buffer is still being used to render a previously submitted frame. This issue was also discussed in the [`Descriptor set layout and buffer` chapter](../uniform/descriptor_set_layout_and_buffer.html#updating-uniform-data) which is why the call to `App::update_uniform_buffer` is where it is. As discussed in more detail in that chapter, both of these calls only happen after the call to `wait_for_fences` which waits for the GPU to be done with the acquired swapchain image and its associated resources so we are safe to do whatever we want with the command buffer.
 
 In the new method, reset the command buffer with `reset_command_buffer`.
 
