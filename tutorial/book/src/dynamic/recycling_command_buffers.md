@@ -151,7 +151,7 @@ let time = self.start.elapsed().as_secs_f32();
 
 let model = Mat4::from_axis_angle(
     vec3(0.0, 0.0, 1.0),
-    Deg(0.0) * time
+    Deg(90.0) * time
 );
 
 let model_bytes = &*slice_from_raw_parts(
