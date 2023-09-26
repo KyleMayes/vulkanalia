@@ -237,7 +237,7 @@ unsafe fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
 
 If you run the program again, you'll see a strange shimmering as the 4 model instances, being rendered at the same coordinates, experience a bad bout of [z-fighting](https://en.wikipedia.org/wiki/Z-fighting).
 
-Update the model matrix calculation in `App::update_secondary_command_buffers` to translate the models before rotating them according to their model index.
+Update the model matrix calculation in `App::update_secondary_command_buffer` to translate the models before rotating them according to their model index.
 
 ```rust,noplaypen
 let y = (((model_index % 2) as f32) * 2.5) - 1.25;
