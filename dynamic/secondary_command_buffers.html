@@ -235,7 +235,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 
     let model = Mat4::from_axis_angle(
         vec3(0.0, 0.0, 1.0),
-        Deg(0.0) * time
+        Deg(90.0) * time
     );
 
     let model_bytes = &amp;*slice_from_raw_parts(
@@ -317,7 +317,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 <pre><code class="language-rust noplaypen">unsafe fn update_command_buffer(&amp;mut self, image_index: usize) -&gt; Result&lt;()&gt; {
     // ...
 
-    self.device.cmd_begin_render_pass(command_buffer, &amp;info, vk::SubpassContents::INLINE);
+    self.device.cmd_begin_render_pass(command_buffer, &amp;info, vk::SubpassContents::SECONDARY_COMMAND_BUFFERS);
 
     let secondary_command_buffers = (0..4)
         .map(|i| self.update_secondary_command_buffer(image_index, i))
@@ -330,7 +330,7 @@ self.device.begin_command_buffer(command_buffer, &amp;info)?;
 }
 </code></pre>
 <p>If you run the program again, you'll see a strange shimmering as the 4 model instances, being rendered at the same coordinates, experience a bad bout of <a href="https://en.wikipedia.org/wiki/Z-fighting">z-fighting</a>.</p>
-<p>Update the model matrix calculation in <code>App::update_secondary_command_buffers</code> to translate the models before rotating them according to their model index.</p>
+<p>Update the model matrix calculation in <code>App::update_secondary_command_buffer</code> to translate the models before rotating them according to their model index.</p>
 <pre><code class="language-rust noplaypen">let y = (((model_index % 2) as f32) * 2.5) - 1.25;
 let z = (((model_index / 2) as f32) * -2.0) + 1.0;
 
