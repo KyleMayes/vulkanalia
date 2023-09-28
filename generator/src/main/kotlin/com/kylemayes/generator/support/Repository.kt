@@ -19,7 +19,7 @@ data class Repository(val user: String, val name: String, val branch: String) {
 
     /** Sets the current commit hash for this repository. */
     fun setCurrentCommitHash(directory: Path, hash: String): Path =
-        Files.writeString(directory.resolve(name), "# https://github.com/$user/$name\n$hash\b")
+        Files.writeString(directory.resolve(name), "# https://github.com/$user/$name\n$hash")
 
     /** Gets a commit for this repository from GitHub. */
     fun getCommit(github: GitHub, hash: String): GHCommit =
