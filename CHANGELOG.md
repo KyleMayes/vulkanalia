@@ -4,6 +4,10 @@
 - Added `no_std` compability for `vulkanalia` and `vulkanalia-sys` crates
 - Make all extendable output structs parameters in command wrappers (see [#213](https://github.com/KyleMayes/vulkanalia/issues/213) for details)
 
+### Bindings Updates
+- [September 22, 2023 Vulkan 1.3.265 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/4871ab9e57fb07f98bf016cb10a3088924976e29)
+- [Add a driver ID for AGXV (Asahi) (#2238)](https://github.com/KhronosGroup/Vulkan-Docs/commit/2b587d9c4adc65429a0063704d1ed6abe79ddb78)
+
 ## [0.22.0] - 2023-09-15
 
 ### Fixed
