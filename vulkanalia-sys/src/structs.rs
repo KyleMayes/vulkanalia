@@ -722,6 +722,26 @@ impl Default for AndroidHardwareBufferFormatPropertiesANDROID {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAndroidHardwareBufferFormatResolvePropertiesANDROID.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct AndroidHardwareBufferFormatResolvePropertiesANDROID {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub color_attachment_format: Format,
+}
+
+impl Default for AndroidHardwareBufferFormatResolvePropertiesANDROID {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID,
+            next: ptr::null_mut(),
+            color_attachment_format: Format::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAndroidHardwareBufferPropertiesANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -6087,6 +6107,26 @@ impl Default for GeometryTrianglesNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkGetLatencyMarkerInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct GetLatencyMarkerInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub timings: *mut LatencyTimingsFrameReportNV,
+}
+
+impl Default for GetLatencyMarkerInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::GET_LATENCY_MARKER_INFO_NV,
+            next: ptr::null(),
+            timings: ptr::null_mut(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkGraphicsPipelineCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -7811,6 +7851,140 @@ impl Default for InstanceCreateInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLatencySleepInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct LatencySleepInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub signal_semaphore: Semaphore,
+    pub value: u64,
+}
+
+impl Default for LatencySleepInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::LATENCY_SLEEP_INFO_NV,
+            next: ptr::null(),
+            signal_semaphore: Semaphore::default(),
+            value: u64::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLatencySleepModeInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct LatencySleepModeInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub low_latency_mode: Bool32,
+    pub low_latency_boost: Bool32,
+    pub minimum_interval_us: u32,
+}
+
+impl Default for LatencySleepModeInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::LATENCY_SLEEP_MODE_INFO_NV,
+            next: ptr::null(),
+            low_latency_mode: Bool32::default(),
+            low_latency_boost: Bool32::default(),
+            minimum_interval_us: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLatencySubmissionPresentIdNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct LatencySubmissionPresentIdNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub present_id: u64,
+}
+
+impl Default for LatencySubmissionPresentIdNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::LATENCY_SUBMISSION_PRESENT_ID_NV,
+            next: ptr::null(),
+            present_id: u64::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLatencySurfaceCapabilitiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct LatencySurfaceCapabilitiesNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub present_mode_count: u32,
+    pub present_modes: *mut PresentModeKHR,
+}
+
+impl Default for LatencySurfaceCapabilitiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::LATENCY_SURFACE_CAPABILITIES_NV,
+            next: ptr::null(),
+            present_mode_count: u32::default(),
+            present_modes: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLatencyTimingsFrameReportNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct LatencyTimingsFrameReportNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub present_id: u64,
+    pub input_sample_time_us: u64,
+    pub sim_start_time_us: u64,
+    pub sim_end_time_us: u64,
+    pub render_submit_start_time_us: u64,
+    pub render_submit_end_time_us: u64,
+    pub present_start_time_us: u64,
+    pub present_end_time_us: u64,
+    pub driver_start_time_us: u64,
+    pub driver_end_time_us: u64,
+    pub os_render_queue_start_time_us: u64,
+    pub os_render_queue_end_time_us: u64,
+    pub gpu_render_start_time_us: u64,
+    pub gpu_render_end_time_us: u64,
+}
+
+impl Default for LatencyTimingsFrameReportNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::LATENCY_TIMINGS_FRAME_REPORT_NV,
+            next: ptr::null(),
+            present_id: u64::default(),
+            input_sample_time_us: u64::default(),
+            sim_start_time_us: u64::default(),
+            sim_end_time_us: u64::default(),
+            render_submit_start_time_us: u64::default(),
+            render_submit_end_time_us: u64::default(),
+            present_start_time_us: u64::default(),
+            present_end_time_us: u64::default(),
+            driver_start_time_us: u64::default(),
+            driver_end_time_us: u64::default(),
+            os_render_queue_start_time_us: u64::default(),
+            os_render_queue_end_time_us: u64::default(),
+            gpu_render_start_time_us: u64::default(),
+            gpu_render_end_time_us: u64::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLayerProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -8850,6 +9024,26 @@ impl Default for OpticalFlowSessionCreatePrivateDataInfoNV {
             id: u32::default(),
             size: u32::default(),
             private_data: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOutOfBandQueueTypeInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct OutOfBandQueueTypeInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub queue_type: OutOfBandQueueTypeNV,
+}
+
+impl Default for OutOfBandQueueTypeInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::OUT_OF_BAND_QUEUE_TYPE_INFO_NV,
+            next: ptr::null(),
+            queue_type: OutOfBandQueueTypeNV::default(),
         }
     }
 }
@@ -10723,6 +10917,50 @@ impl Default for PhysicalDeviceExternalFenceInfo {
             s_type: StructureType::PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO,
             next: ptr::null(),
             handle_type: ExternalFenceHandleTypeFlags::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceExternalFormatResolveFeaturesANDROID {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub external_format_resolve: Bool32,
+}
+
+impl Default for PhysicalDeviceExternalFormatResolveFeaturesANDROID {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID,
+            next: ptr::null_mut(),
+            external_format_resolve: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceExternalFormatResolvePropertiesANDROID {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub null_color_attachment_with_external_format_resolve: Bool32,
+    pub external_format_resolve_chroma_offset_x: ChromaLocation,
+    pub external_format_resolve_chroma_offset_y: ChromaLocation,
+}
+
+impl Default for PhysicalDeviceExternalFormatResolvePropertiesANDROID {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID,
+            next: ptr::null_mut(),
+            null_color_attachment_with_external_format_resolve: Bool32::default(),
+            external_format_resolve_chroma_offset_x: ChromaLocation::default(),
+            external_format_resolve_chroma_offset_y: ChromaLocation::default(),
         }
     }
 }
@@ -18957,6 +19195,28 @@ impl Default for SemaphoreWaitInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSetLatencyMarkerInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SetLatencyMarkerInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub present_id: u64,
+    pub marker: LatencyMarkerNV,
+}
+
+impl Default for SetLatencyMarkerInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SET_LATENCY_MARKER_INFO_NV,
+            next: ptr::null(),
+            present_id: u64::default(),
+            marker: LatencyMarkerNV::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSetStateFlagsIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -20082,6 +20342,26 @@ impl Default for SwapchainDisplayNativeHdrCreateInfoAMD {
             s_type: StructureType::SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD,
             next: ptr::null(),
             local_dimming_enable: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSwapchainLatencyCreateInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SwapchainLatencyCreateInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub latency_mode_enable: Bool32,
+}
+
+impl Default for SwapchainLatencyCreateInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SWAPCHAIN_LATENCY_CREATE_INFO_NV,
+            next: ptr::null(),
+            latency_mode_enable: Bool32::default(),
         }
     }
 }

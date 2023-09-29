@@ -479,6 +479,7 @@ pub struct DeviceCommands {
     pub get_image_view_handle_nvx: PFN_vkGetImageViewHandleNVX,
     pub get_image_view_opaque_capture_descriptor_data_ext:
         PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT,
+    pub get_latency_timings_nv: PFN_vkGetLatencyTimingsNV,
     pub get_memory_android_hardware_buffer_android: PFN_vkGetMemoryAndroidHardwareBufferANDROID,
     pub get_memory_fd_khr: PFN_vkGetMemoryFdKHR,
     pub get_memory_fd_properties_khr: PFN_vkGetMemoryFdPropertiesKHR,
@@ -568,11 +569,13 @@ pub struct DeviceCommands {
     pub import_semaphore_zircon_handle_fuchsia: PFN_vkImportSemaphoreZirconHandleFUCHSIA,
     pub initialize_performance_api_intel: PFN_vkInitializePerformanceApiINTEL,
     pub invalidate_mapped_memory_ranges: PFN_vkInvalidateMappedMemoryRanges,
+    pub latency_sleep_nv: PFN_vkLatencySleepNV,
     pub map_memory: PFN_vkMapMemory,
     pub map_memory2_khr: PFN_vkMapMemory2KHR,
     pub merge_pipeline_caches: PFN_vkMergePipelineCaches,
     pub merge_validation_caches_ext: PFN_vkMergeValidationCachesEXT,
     pub queue_bind_sparse: PFN_vkQueueBindSparse,
+    pub queue_notify_out_of_band_nv: PFN_vkQueueNotifyOutOfBandNV,
     pub queue_present_khr: PFN_vkQueuePresentKHR,
     pub queue_set_performance_configuration_intel: PFN_vkQueueSetPerformanceConfigurationINTEL,
     pub queue_submit: PFN_vkQueueSubmit,
@@ -599,6 +602,8 @@ pub struct DeviceCommands {
     pub set_device_memory_priority_ext: PFN_vkSetDeviceMemoryPriorityEXT,
     pub set_event: PFN_vkSetEvent,
     pub set_hdr_metadata_ext: PFN_vkSetHdrMetadataEXT,
+    pub set_latency_marker_nv: PFN_vkSetLatencyMarkerNV,
+    pub set_latency_sleep_mode_nv: PFN_vkSetLatencySleepModeNV,
     pub set_local_dimming_amd: PFN_vkSetLocalDimmingAMD,
     pub set_private_data: PFN_vkSetPrivateData,
     pub set_private_data_ext: PFN_vkSetPrivateDataEXT,
@@ -7396,6 +7401,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_latency_timings_nv: {
+                let value = loader(b"vkGetLatencyTimingsNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _swapchain: SwapchainKHR,
+                        _timing_count: *mut u32,
+                        _latency_marker_info: *mut GetLatencyMarkerInfoNV,
+                    ) {
+                        panic!("could not load vkGetLatencyTimingsNV")
+                    }
+                    fallback
+                }
+            },
             get_memory_android_hardware_buffer_android: {
                 let value = loader(b"vkGetMemoryAndroidHardwareBufferANDROID\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -8618,6 +8639,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            latency_sleep_nv: {
+                let value = loader(b"vkLatencySleepNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _swapchain: SwapchainKHR,
+                        _sleep_info: *mut LatencySleepInfoNV,
+                    ) -> Result {
+                        panic!("could not load vkLatencySleepNV")
+                    }
+                    fallback
+                }
+            },
             map_memory: {
                 let value = loader(b"vkMapMemory\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -8695,6 +8731,20 @@ impl DeviceCommands {
                         _fence: Fence,
                     ) -> Result {
                         panic!("could not load vkQueueBindSparse")
+                    }
+                    fallback
+                }
+            },
+            queue_notify_out_of_band_nv: {
+                let value = loader(b"vkQueueNotifyOutOfBandNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _queue: Queue,
+                        _queue_type_info: OutOfBandQueueTypeInfoNV,
+                    ) {
+                        panic!("could not load vkQueueNotifyOutOfBandNV")
                     }
                     fallback
                 }
@@ -9050,6 +9100,36 @@ impl DeviceCommands {
                         _metadata: *const HdrMetadataEXT,
                     ) {
                         panic!("could not load vkSetHdrMetadataEXT")
+                    }
+                    fallback
+                }
+            },
+            set_latency_marker_nv: {
+                let value = loader(b"vkSetLatencyMarkerNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _swapchain: SwapchainKHR,
+                        _latency_marker_info: *mut SetLatencyMarkerInfoNV,
+                    ) {
+                        panic!("could not load vkSetLatencyMarkerNV")
+                    }
+                    fallback
+                }
+            },
+            set_latency_sleep_mode_nv: {
+                let value = loader(b"vkSetLatencySleepModeNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _swapchain: SwapchainKHR,
+                        _sleep_mode_info: *mut LatencySleepModeInfoNV,
+                    ) -> Result {
+                        panic!("could not load vkSetLatencySleepModeNV")
                     }
                     fallback
                 }

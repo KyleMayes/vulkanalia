@@ -7,6 +7,8 @@
 ### Bindings Updates
 - [September 22, 2023 Vulkan 1.3.265 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/4871ab9e57fb07f98bf016cb10a3088924976e29)
 - [Add a driver ID for AGXV (Asahi) (#2238)](https://github.com/KhronosGroup/Vulkan-Docs/commit/2b587d9c4adc65429a0063704d1ed6abe79ddb78)
+- [Add riscv64 to 64-bit platforms (#2236)](https://github.com/KhronosGroup/Vulkan-Docs/commit/0df82fed1670db44e15e6f281715d71eae0b6299)
+- [September 29, 2023 Vulkan 1.3.266 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/e5dbdd580cf0696db8ed0aeb0736e0f512d9bbe1)
 
 ## [0.22.0] - 2023-09-15
 
