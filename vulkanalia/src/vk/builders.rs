@@ -2577,6 +2577,64 @@ unsafe impl Cast for AndroidHardwareBufferFormatPropertiesANDROIDBuilder {
     }
 }
 
+unsafe impl Cast for AndroidHardwareBufferFormatResolvePropertiesANDROID {
+    type Target = AndroidHardwareBufferFormatResolvePropertiesANDROID;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for AndroidHardwareBufferFormatResolvePropertiesANDROID {
+    type Builder = AndroidHardwareBufferFormatResolvePropertiesANDROIDBuilder;
+}
+
+/// A builder for a [`AndroidHardwareBufferFormatResolvePropertiesANDROID`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AndroidHardwareBufferFormatResolvePropertiesANDROIDBuilder {
+    value: AndroidHardwareBufferFormatResolvePropertiesANDROID,
+}
+
+impl AndroidHardwareBufferFormatResolvePropertiesANDROIDBuilder {
+    #[inline]
+    pub fn color_attachment_format(mut self, color_attachment_format: Format) -> Self {
+        self.value.color_attachment_format = color_attachment_format;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AndroidHardwareBufferFormatResolvePropertiesANDROID {
+        self.value
+    }
+}
+
+impl ops::Deref for AndroidHardwareBufferFormatResolvePropertiesANDROIDBuilder {
+    type Target = AndroidHardwareBufferFormatResolvePropertiesANDROID;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for AndroidHardwareBufferFormatResolvePropertiesANDROIDBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for AndroidHardwareBufferFormatResolvePropertiesANDROIDBuilder {
+    type Target = AndroidHardwareBufferFormatResolvePropertiesANDROID;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [`AndroidHardwareBufferPropertiesANDROID`].
 pub unsafe trait ExtendsAndroidHardwareBufferPropertiesANDROID: fmt::Debug {}
 unsafe impl ExtendsAndroidHardwareBufferPropertiesANDROID
@@ -2585,6 +2643,10 @@ unsafe impl ExtendsAndroidHardwareBufferPropertiesANDROID
 }
 unsafe impl ExtendsAndroidHardwareBufferPropertiesANDROID
     for AndroidHardwareBufferFormatPropertiesANDROID
+{
+}
+unsafe impl ExtendsAndroidHardwareBufferPropertiesANDROID
+    for AndroidHardwareBufferFormatResolvePropertiesANDROID
 {
 }
 
@@ -3066,6 +3128,7 @@ unsafe impl Cast for AttachmentDescriptionBuilder {
 /// A Vulkan struct that can be used to extend a [`AttachmentDescription2`].
 pub unsafe trait ExtendsAttachmentDescription2: fmt::Debug {}
 unsafe impl ExtendsAttachmentDescription2 for AttachmentDescriptionStencilLayout {}
+unsafe impl ExtendsAttachmentDescription2 for ExternalFormatANDROID {}
 
 unsafe impl Cast for AttachmentDescription2 {
     type Target = AttachmentDescription2;
@@ -7260,6 +7323,7 @@ unsafe impl ExtendsCommandBufferInheritanceInfo
 }
 unsafe impl ExtendsCommandBufferInheritanceInfo for CommandBufferInheritanceRenderingInfo {}
 unsafe impl ExtendsCommandBufferInheritanceInfo for CommandBufferInheritanceViewportScissorInfoNV {}
+unsafe impl ExtendsCommandBufferInheritanceInfo for ExternalFormatANDROID {}
 unsafe impl ExtendsCommandBufferInheritanceInfo for MultiviewPerViewAttributesInfoNVX {}
 
 unsafe impl Cast for CommandBufferInheritanceInfo {
@@ -12764,6 +12828,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExclusiveScissorFeaturesNV
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalFormatResolveFeaturesANDROID {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {}
@@ -20975,9 +21040,72 @@ unsafe impl Cast for GeometryTrianglesNVBuilder {
     }
 }
 
+unsafe impl Cast for GetLatencyMarkerInfoNV {
+    type Target = GetLatencyMarkerInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for GetLatencyMarkerInfoNV {
+    type Builder = GetLatencyMarkerInfoNVBuilder<'b>;
+}
+
+/// A builder for a [`GetLatencyMarkerInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct GetLatencyMarkerInfoNVBuilder<'b> {
+    value: GetLatencyMarkerInfoNV,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> GetLatencyMarkerInfoNVBuilder<'b> {
+    #[inline]
+    pub fn timings(
+        mut self,
+        timings: &'b mut impl Cast<Target = LatencyTimingsFrameReportNV>,
+    ) -> Self {
+        self.value.timings = timings.as_mut();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> GetLatencyMarkerInfoNV {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for GetLatencyMarkerInfoNVBuilder<'b> {
+    type Target = GetLatencyMarkerInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for GetLatencyMarkerInfoNVBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for GetLatencyMarkerInfoNVBuilder<'b> {
+    type Target = GetLatencyMarkerInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [`GraphicsPipelineCreateInfo`].
 pub unsafe trait ExtendsGraphicsPipelineCreateInfo: fmt::Debug {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for AttachmentSampleCountInfoAMD {}
+unsafe impl ExtendsGraphicsPipelineCreateInfo for ExternalFormatANDROID {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineLibraryCreateInfoEXT {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineShaderGroupsCreateInfoNV {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for MultiviewPerViewAttributesInfoNVX {}
@@ -26699,6 +26827,400 @@ unsafe impl<'b> Cast for InstanceCreateInfoBuilder<'b> {
     }
 }
 
+unsafe impl Cast for LatencySleepInfoNV {
+    type Target = LatencySleepInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for LatencySleepInfoNV {
+    type Builder = LatencySleepInfoNVBuilder;
+}
+
+/// A builder for a [`LatencySleepInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct LatencySleepInfoNVBuilder {
+    value: LatencySleepInfoNV,
+}
+
+impl LatencySleepInfoNVBuilder {
+    #[inline]
+    pub fn signal_semaphore(mut self, signal_semaphore: Semaphore) -> Self {
+        self.value.signal_semaphore = signal_semaphore;
+        self
+    }
+
+    #[inline]
+    pub fn value(mut self, value: u64) -> Self {
+        self.value.value = value;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> LatencySleepInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for LatencySleepInfoNVBuilder {
+    type Target = LatencySleepInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for LatencySleepInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for LatencySleepInfoNVBuilder {
+    type Target = LatencySleepInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for LatencySleepModeInfoNV {
+    type Target = LatencySleepModeInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for LatencySleepModeInfoNV {
+    type Builder = LatencySleepModeInfoNVBuilder;
+}
+
+/// A builder for a [`LatencySleepModeInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct LatencySleepModeInfoNVBuilder {
+    value: LatencySleepModeInfoNV,
+}
+
+impl LatencySleepModeInfoNVBuilder {
+    #[inline]
+    pub fn low_latency_mode(mut self, low_latency_mode: bool) -> Self {
+        self.value.low_latency_mode = low_latency_mode as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn low_latency_boost(mut self, low_latency_boost: bool) -> Self {
+        self.value.low_latency_boost = low_latency_boost as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn minimum_interval_us(mut self, minimum_interval_us: u32) -> Self {
+        self.value.minimum_interval_us = minimum_interval_us;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> LatencySleepModeInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for LatencySleepModeInfoNVBuilder {
+    type Target = LatencySleepModeInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for LatencySleepModeInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for LatencySleepModeInfoNVBuilder {
+    type Target = LatencySleepModeInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for LatencySubmissionPresentIdNV {
+    type Target = LatencySubmissionPresentIdNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for LatencySubmissionPresentIdNV {
+    type Builder = LatencySubmissionPresentIdNVBuilder;
+}
+
+/// A builder for a [`LatencySubmissionPresentIdNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct LatencySubmissionPresentIdNVBuilder {
+    value: LatencySubmissionPresentIdNV,
+}
+
+impl LatencySubmissionPresentIdNVBuilder {
+    #[inline]
+    pub fn present_id(mut self, present_id: u64) -> Self {
+        self.value.present_id = present_id;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> LatencySubmissionPresentIdNV {
+        self.value
+    }
+}
+
+impl ops::Deref for LatencySubmissionPresentIdNVBuilder {
+    type Target = LatencySubmissionPresentIdNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for LatencySubmissionPresentIdNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for LatencySubmissionPresentIdNVBuilder {
+    type Target = LatencySubmissionPresentIdNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for LatencySurfaceCapabilitiesNV {
+    type Target = LatencySurfaceCapabilitiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for LatencySurfaceCapabilitiesNV {
+    type Builder = LatencySurfaceCapabilitiesNVBuilder<'b>;
+}
+
+/// A builder for a [`LatencySurfaceCapabilitiesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct LatencySurfaceCapabilitiesNVBuilder<'b> {
+    value: LatencySurfaceCapabilitiesNV,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> LatencySurfaceCapabilitiesNVBuilder<'b> {
+    #[inline]
+    pub fn present_mode_count(mut self, present_mode_count: u32) -> Self {
+        self.value.present_mode_count = present_mode_count;
+        self
+    }
+
+    #[inline]
+    pub fn present_modes(mut self, present_modes: &'b mut [PresentModeKHR]) -> Self {
+        self.value.present_mode_count = present_modes.len() as u32;
+        self.value.present_modes = present_modes.as_mut_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> LatencySurfaceCapabilitiesNV {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for LatencySurfaceCapabilitiesNVBuilder<'b> {
+    type Target = LatencySurfaceCapabilitiesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for LatencySurfaceCapabilitiesNVBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for LatencySurfaceCapabilitiesNVBuilder<'b> {
+    type Target = LatencySurfaceCapabilitiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for LatencyTimingsFrameReportNV {
+    type Target = LatencyTimingsFrameReportNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for LatencyTimingsFrameReportNV {
+    type Builder = LatencyTimingsFrameReportNVBuilder;
+}
+
+/// A builder for a [`LatencyTimingsFrameReportNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct LatencyTimingsFrameReportNVBuilder {
+    value: LatencyTimingsFrameReportNV,
+}
+
+impl LatencyTimingsFrameReportNVBuilder {
+    #[inline]
+    pub fn present_id(mut self, present_id: u64) -> Self {
+        self.value.present_id = present_id;
+        self
+    }
+
+    #[inline]
+    pub fn input_sample_time_us(mut self, input_sample_time_us: u64) -> Self {
+        self.value.input_sample_time_us = input_sample_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn sim_start_time_us(mut self, sim_start_time_us: u64) -> Self {
+        self.value.sim_start_time_us = sim_start_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn sim_end_time_us(mut self, sim_end_time_us: u64) -> Self {
+        self.value.sim_end_time_us = sim_end_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn render_submit_start_time_us(mut self, render_submit_start_time_us: u64) -> Self {
+        self.value.render_submit_start_time_us = render_submit_start_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn render_submit_end_time_us(mut self, render_submit_end_time_us: u64) -> Self {
+        self.value.render_submit_end_time_us = render_submit_end_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn present_start_time_us(mut self, present_start_time_us: u64) -> Self {
+        self.value.present_start_time_us = present_start_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn present_end_time_us(mut self, present_end_time_us: u64) -> Self {
+        self.value.present_end_time_us = present_end_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn driver_start_time_us(mut self, driver_start_time_us: u64) -> Self {
+        self.value.driver_start_time_us = driver_start_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn driver_end_time_us(mut self, driver_end_time_us: u64) -> Self {
+        self.value.driver_end_time_us = driver_end_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn os_render_queue_start_time_us(mut self, os_render_queue_start_time_us: u64) -> Self {
+        self.value.os_render_queue_start_time_us = os_render_queue_start_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn os_render_queue_end_time_us(mut self, os_render_queue_end_time_us: u64) -> Self {
+        self.value.os_render_queue_end_time_us = os_render_queue_end_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn gpu_render_start_time_us(mut self, gpu_render_start_time_us: u64) -> Self {
+        self.value.gpu_render_start_time_us = gpu_render_start_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn gpu_render_end_time_us(mut self, gpu_render_end_time_us: u64) -> Self {
+        self.value.gpu_render_end_time_us = gpu_render_end_time_us;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> LatencyTimingsFrameReportNV {
+        self.value
+    }
+}
+
+impl ops::Deref for LatencyTimingsFrameReportNVBuilder {
+    type Target = LatencyTimingsFrameReportNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for LatencyTimingsFrameReportNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for LatencyTimingsFrameReportNVBuilder {
+    type Target = LatencyTimingsFrameReportNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for LayerProperties {
     type Target = LayerProperties;
 
@@ -30258,6 +30780,64 @@ impl<'b> ops::DerefMut for OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b> 
 
 unsafe impl<'b> Cast for OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b> {
     type Target = OpticalFlowSessionCreatePrivateDataInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for OutOfBandQueueTypeInfoNV {
+    type Target = OutOfBandQueueTypeInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for OutOfBandQueueTypeInfoNV {
+    type Builder = OutOfBandQueueTypeInfoNVBuilder;
+}
+
+/// A builder for a [`OutOfBandQueueTypeInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct OutOfBandQueueTypeInfoNVBuilder {
+    value: OutOfBandQueueTypeInfoNV,
+}
+
+impl OutOfBandQueueTypeInfoNVBuilder {
+    #[inline]
+    pub fn queue_type(mut self, queue_type: OutOfBandQueueTypeNV) -> Self {
+        self.value.queue_type = queue_type;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> OutOfBandQueueTypeInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for OutOfBandQueueTypeInfoNVBuilder {
+    type Target = OutOfBandQueueTypeInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for OutOfBandQueueTypeInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for OutOfBandQueueTypeInfoNVBuilder {
+    type Target = OutOfBandQueueTypeInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -36494,6 +37074,147 @@ unsafe impl Cast for PhysicalDeviceExternalFenceInfoBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceExternalFormatResolveFeaturesANDROID {
+    type Target = PhysicalDeviceExternalFormatResolveFeaturesANDROID;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceExternalFormatResolveFeaturesANDROID {
+    type Builder = PhysicalDeviceExternalFormatResolveFeaturesANDROIDBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceExternalFormatResolveFeaturesANDROID`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceExternalFormatResolveFeaturesANDROIDBuilder {
+    value: PhysicalDeviceExternalFormatResolveFeaturesANDROID,
+}
+
+impl PhysicalDeviceExternalFormatResolveFeaturesANDROIDBuilder {
+    #[inline]
+    pub fn external_format_resolve(mut self, external_format_resolve: bool) -> Self {
+        self.value.external_format_resolve = external_format_resolve as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceExternalFormatResolveFeaturesANDROID {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceExternalFormatResolveFeaturesANDROIDBuilder {
+    type Target = PhysicalDeviceExternalFormatResolveFeaturesANDROID;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceExternalFormatResolveFeaturesANDROIDBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExternalFormatResolveFeaturesANDROIDBuilder {
+    type Target = PhysicalDeviceExternalFormatResolveFeaturesANDROID;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExternalFormatResolvePropertiesANDROID {
+    type Target = PhysicalDeviceExternalFormatResolvePropertiesANDROID;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceExternalFormatResolvePropertiesANDROID {
+    type Builder = PhysicalDeviceExternalFormatResolvePropertiesANDROIDBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceExternalFormatResolvePropertiesANDROID`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceExternalFormatResolvePropertiesANDROIDBuilder {
+    value: PhysicalDeviceExternalFormatResolvePropertiesANDROID,
+}
+
+impl PhysicalDeviceExternalFormatResolvePropertiesANDROIDBuilder {
+    #[inline]
+    pub fn null_color_attachment_with_external_format_resolve(
+        mut self,
+        null_color_attachment_with_external_format_resolve: bool,
+    ) -> Self {
+        self.value
+            .null_color_attachment_with_external_format_resolve =
+            null_color_attachment_with_external_format_resolve as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn external_format_resolve_chroma_offset_x(
+        mut self,
+        external_format_resolve_chroma_offset_x: ChromaLocation,
+    ) -> Self {
+        self.value.external_format_resolve_chroma_offset_x =
+            external_format_resolve_chroma_offset_x;
+        self
+    }
+
+    #[inline]
+    pub fn external_format_resolve_chroma_offset_y(
+        mut self,
+        external_format_resolve_chroma_offset_y: ChromaLocation,
+    ) -> Self {
+        self.value.external_format_resolve_chroma_offset_y =
+            external_format_resolve_chroma_offset_y;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceExternalFormatResolvePropertiesANDROID {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceExternalFormatResolvePropertiesANDROIDBuilder {
+    type Target = PhysicalDeviceExternalFormatResolvePropertiesANDROID;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceExternalFormatResolvePropertiesANDROIDBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExternalFormatResolvePropertiesANDROIDBuilder {
+    type Target = PhysicalDeviceExternalFormatResolvePropertiesANDROID;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceExternalImageFormatInfo {
     type Target = PhysicalDeviceExternalImageFormatInfo;
 
@@ -37568,6 +38289,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExclusiveScissorFea
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalFormatResolveFeaturesANDROID {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {}
@@ -45870,6 +46592,10 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDisplacementMicro
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDriverProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDrmPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceExtendedDynamicState3PropertiesEXT {}
+unsafe impl ExtendsPhysicalDeviceProperties2
+    for PhysicalDeviceExternalFormatResolvePropertiesANDROID
+{
+}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceExternalMemoryHostPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFloatControlsProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceFragmentDensityMap2PropertiesEXT {}
@@ -64539,6 +65265,70 @@ unsafe impl<'b> Cast for SemaphoreWaitInfoBuilder<'b> {
     }
 }
 
+unsafe impl Cast for SetLatencyMarkerInfoNV {
+    type Target = SetLatencyMarkerInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SetLatencyMarkerInfoNV {
+    type Builder = SetLatencyMarkerInfoNVBuilder;
+}
+
+/// A builder for a [`SetLatencyMarkerInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SetLatencyMarkerInfoNVBuilder {
+    value: SetLatencyMarkerInfoNV,
+}
+
+impl SetLatencyMarkerInfoNVBuilder {
+    #[inline]
+    pub fn present_id(mut self, present_id: u64) -> Self {
+        self.value.present_id = present_id;
+        self
+    }
+
+    #[inline]
+    pub fn marker(mut self, marker: LatencyMarkerNV) -> Self {
+        self.value.marker = marker;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SetLatencyMarkerInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for SetLatencyMarkerInfoNVBuilder {
+    type Target = SetLatencyMarkerInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SetLatencyMarkerInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SetLatencyMarkerInfoNVBuilder {
+    type Target = SetLatencyMarkerInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for SetStateFlagsIndirectCommandNV {
     type Target = SetStateFlagsIndirectCommandNV;
 
@@ -66269,6 +67059,7 @@ unsafe impl ExtendsSubmitInfo for AmigoProfilingSubmitInfoSEC {}
 unsafe impl ExtendsSubmitInfo for D3D12FenceSubmitInfoKHR {}
 unsafe impl ExtendsSubmitInfo for DeviceGroupSubmitInfo {}
 unsafe impl ExtendsSubmitInfo for FrameBoundaryEXT {}
+unsafe impl ExtendsSubmitInfo for LatencySubmissionPresentIdNV {}
 unsafe impl ExtendsSubmitInfo for PerformanceQuerySubmitInfoKHR {}
 unsafe impl ExtendsSubmitInfo for ProtectedSubmitInfo {}
 unsafe impl ExtendsSubmitInfo for TimelineSemaphoreSubmitInfo {}
@@ -66368,6 +67159,7 @@ unsafe impl<'b> Cast for SubmitInfoBuilder<'b> {
 /// A Vulkan struct that can be used to extend a [`SubmitInfo2`].
 pub unsafe trait ExtendsSubmitInfo2: fmt::Debug {}
 unsafe impl ExtendsSubmitInfo2 for FrameBoundaryEXT {}
+unsafe impl ExtendsSubmitInfo2 for LatencySubmissionPresentIdNV {}
 unsafe impl ExtendsSubmitInfo2 for PerformanceQuerySubmitInfoKHR {}
 unsafe impl ExtendsSubmitInfo2 for Win32KeyedMutexAcquireReleaseInfoKHR {}
 unsafe impl ExtendsSubmitInfo2 for Win32KeyedMutexAcquireReleaseInfoNV {}
@@ -67729,6 +68521,7 @@ unsafe impl Cast for SurfaceCapabilities2EXTBuilder {
 /// A Vulkan struct that can be used to extend a [`SurfaceCapabilities2KHR`].
 pub unsafe trait ExtendsSurfaceCapabilities2KHR: fmt::Debug {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for DisplayNativeHdrSurfaceCapabilitiesAMD {}
+unsafe impl ExtendsSurfaceCapabilities2KHR for LatencySurfaceCapabilitiesNV {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for SharedPresentSurfaceCapabilitiesKHR {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceCapabilitiesFullScreenExclusiveEXT {}
 unsafe impl ExtendsSurfaceCapabilities2KHR for SurfaceCapabilitiesPresentBarrierNV {}
@@ -68639,6 +69432,7 @@ unsafe impl ExtendsSwapchainCreateInfoKHR for SurfaceFullScreenExclusiveInfoEXT 
 unsafe impl ExtendsSwapchainCreateInfoKHR for SurfaceFullScreenExclusiveWin32InfoEXT {}
 unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainCounterCreateInfoEXT {}
 unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainDisplayNativeHdrCreateInfoAMD {}
+unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainLatencyCreateInfoNV {}
 unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainPresentBarrierCreateInfoNV {}
 unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainPresentModesCreateInfoEXT {}
 unsafe impl ExtendsSwapchainCreateInfoKHR for SwapchainPresentScalingCreateInfoEXT {}
@@ -68847,6 +69641,64 @@ impl ops::DerefMut for SwapchainDisplayNativeHdrCreateInfoAMDBuilder {
 
 unsafe impl Cast for SwapchainDisplayNativeHdrCreateInfoAMDBuilder {
     type Target = SwapchainDisplayNativeHdrCreateInfoAMD;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SwapchainLatencyCreateInfoNV {
+    type Target = SwapchainLatencyCreateInfoNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for SwapchainLatencyCreateInfoNV {
+    type Builder = SwapchainLatencyCreateInfoNVBuilder;
+}
+
+/// A builder for a [`SwapchainLatencyCreateInfoNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SwapchainLatencyCreateInfoNVBuilder {
+    value: SwapchainLatencyCreateInfoNV,
+}
+
+impl SwapchainLatencyCreateInfoNVBuilder {
+    #[inline]
+    pub fn latency_mode_enable(mut self, latency_mode_enable: bool) -> Self {
+        self.value.latency_mode_enable = latency_mode_enable as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SwapchainLatencyCreateInfoNV {
+        self.value
+    }
+}
+
+impl ops::Deref for SwapchainLatencyCreateInfoNVBuilder {
+    type Target = SwapchainLatencyCreateInfoNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SwapchainLatencyCreateInfoNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SwapchainLatencyCreateInfoNVBuilder {
+    type Target = SwapchainLatencyCreateInfoNV;
 
     #[inline]
     fn into(self) -> Self::Target {

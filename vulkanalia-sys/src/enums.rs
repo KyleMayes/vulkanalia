@@ -3041,6 +3041,58 @@ impl fmt::Debug for InternalAllocationType {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLatencyMarkerNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct LatencyMarkerNV(i32);
+
+impl LatencyMarkerNV {
+    pub const SIMULATION_START: Self = Self(0);
+    pub const SIMULATION_END: Self = Self(1);
+    pub const RENDERSUBMIT_START: Self = Self(2);
+    pub const RENDERSUBMIT_END: Self = Self(3);
+    pub const PRESENT_START: Self = Self(4);
+    pub const PRESENT_END: Self = Self(5);
+    pub const INPUT_SAMPLE: Self = Self(6);
+    pub const TRIGGER_FLASH: Self = Self(7);
+    pub const OUT_OF_BAND_RENDERSUBMIT_START: Self = Self(8);
+    pub const OUT_OF_BAND_RENDERSUBMIT_END: Self = Self(9);
+    pub const OUT_OF_BAND_PRESENT_START: Self = Self(10);
+    pub const OUT_OF_BAND_PRESENT_END: Self = Self(11);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for LatencyMarkerNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "SIMULATION_START"),
+            1 => write!(f, "SIMULATION_END"),
+            2 => write!(f, "RENDERSUBMIT_START"),
+            3 => write!(f, "RENDERSUBMIT_END"),
+            4 => write!(f, "PRESENT_START"),
+            5 => write!(f, "PRESENT_END"),
+            6 => write!(f, "INPUT_SAMPLE"),
+            7 => write!(f, "TRIGGER_FLASH"),
+            8 => write!(f, "OUT_OF_BAND_RENDERSUBMIT_START"),
+            9 => write!(f, "OUT_OF_BAND_RENDERSUBMIT_END"),
+            10 => write!(f, "OUT_OF_BAND_PRESENT_START"),
+            11 => write!(f, "OUT_OF_BAND_PRESENT_END"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLayeredDriverUnderlyingApiMSFT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -3504,6 +3556,38 @@ impl fmt::Debug for OpticalFlowSessionBindingPointNV {
             6 => write!(f, "COST"),
             7 => write!(f, "BACKWARD_COST"),
             8 => write!(f, "GLOBAL_FLOW"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOutOfBandQueueTypeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct OutOfBandQueueTypeNV(i32);
+
+impl OutOfBandQueueTypeNV {
+    pub const RENDER: Self = Self(0);
+    pub const PRESENT: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for OutOfBandQueueTypeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "RENDER"),
+            1 => write!(f, "PRESENT"),
             _ => self.0.fmt(f),
         }
     }
@@ -5872,6 +5956,9 @@ impl StructureType {
     pub const OPTICAL_FLOW_SESSION_CREATE_PRIVATE_DATA_INFO_NV: Self = Self(1000464010);
     pub const PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT: Self = Self(1000465000);
     pub const PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT: Self = Self(1000466000);
+    pub const PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID: Self = Self(1000468000);
+    pub const PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID: Self = Self(1000468001);
+    pub const ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID: Self = Self(1000468002);
     pub const PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES_KHR: Self = Self(1000470000);
     pub const PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES_KHR: Self = Self(1000470001);
     pub const RENDERING_AREA_INFO_KHR: Self = Self(1000470003);
@@ -5902,6 +5989,15 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT: Self = Self(1000498000);
     pub const PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT: Self =
         Self(1000499000);
+    pub const LATENCY_SLEEP_MODE_INFO_NV: Self = Self(1000505000);
+    pub const LATENCY_SLEEP_INFO_NV: Self = Self(1000505001);
+    pub const SET_LATENCY_MARKER_INFO_NV: Self = Self(1000505002);
+    pub const GET_LATENCY_MARKER_INFO_NV: Self = Self(1000505003);
+    pub const LATENCY_TIMINGS_FRAME_REPORT_NV: Self = Self(1000505004);
+    pub const LATENCY_SUBMISSION_PRESENT_ID_NV: Self = Self(1000505005);
+    pub const OUT_OF_BAND_QUEUE_TYPE_INFO_NV: Self = Self(1000505006);
+    pub const SWAPCHAIN_LATENCY_CREATE_INFO_NV: Self = Self(1000505007);
+    pub const LATENCY_SURFACE_CAPABILITIES_NV: Self = Self(1000505008);
     pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_KHR: Self = Self(1000506000);
     pub const COOPERATIVE_MATRIX_PROPERTIES_KHR: Self = Self(1000506001);
     pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR: Self = Self(1000506002);
@@ -6795,6 +6891,18 @@ impl fmt::Debug for StructureType {
             1000464010 => write!(f, "OPTICAL_FLOW_SESSION_CREATE_PRIVATE_DATA_INFO_NV"),
             1000465000 => write!(f, "PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT"),
             1000466000 => write!(f, "PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT"),
+            1000468000 => write!(
+                f,
+                "PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID"
+            ),
+            1000468001 => write!(
+                f,
+                "PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID"
+            ),
+            1000468002 => write!(
+                f,
+                "ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID"
+            ),
             1000470000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES_KHR"),
             1000470001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES_KHR"),
             1000470003 => write!(f, "RENDERING_AREA_INFO_KHR"),
@@ -6842,6 +6950,15 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT"
             ),
+            1000505000 => write!(f, "LATENCY_SLEEP_MODE_INFO_NV"),
+            1000505001 => write!(f, "LATENCY_SLEEP_INFO_NV"),
+            1000505002 => write!(f, "SET_LATENCY_MARKER_INFO_NV"),
+            1000505003 => write!(f, "GET_LATENCY_MARKER_INFO_NV"),
+            1000505004 => write!(f, "LATENCY_TIMINGS_FRAME_REPORT_NV"),
+            1000505005 => write!(f, "LATENCY_SUBMISSION_PRESENT_ID_NV"),
+            1000505006 => write!(f, "OUT_OF_BAND_QUEUE_TYPE_INFO_NV"),
+            1000505007 => write!(f, "SWAPCHAIN_LATENCY_CREATE_INFO_NV"),
+            1000505008 => write!(f, "LATENCY_SURFACE_CAPABILITIES_NV"),
             1000506000 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_KHR"),
             1000506001 => write!(f, "COOPERATIVE_MATRIX_PROPERTIES_KHR"),
             1000506002 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR"),

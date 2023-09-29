@@ -483,6 +483,15 @@ pub trait AmdTextureGatherBiasLodExtension: DeviceV1_0 {
 
 impl AmdTextureGatherBiasLodExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_ANDROID_external_format_resolve.html>
+pub trait AndroidExternalFormatResolveExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = ANDROID_EXTERNAL_FORMAT_RESOLVE_EXTENSION;
+}
+
+impl AndroidExternalFormatResolveExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_ANDROID_external_memory_android_hardware_buffer.html>
 pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -11232,6 +11241,88 @@ pub trait NvLowLatencyExtension: DeviceV1_0 {
 }
 
 impl NvLowLatencyExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_low_latency2.html>
+pub trait NvLowLatency2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_LOW_LATENCY2_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetLatencyTimingsNV.html>
+    #[inline]
+    unsafe fn get_latency_timings_nv(
+        &self,
+        swapchain: SwapchainKHR,
+        latency_marker_info: &mut GetLatencyMarkerInfoNV,
+    ) -> u32 {
+        let mut timing_count = MaybeUninit::<u32>::uninit();
+
+        let __result = (self.commands().get_latency_timings_nv)(
+            self.handle(),
+            swapchain,
+            timing_count.as_mut_ptr(),
+            latency_marker_info,
+        );
+
+        timing_count.assume_init()
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkLatencySleepNV.html>
+    #[inline]
+    unsafe fn latency_sleep_nv(
+        &self,
+        swapchain: SwapchainKHR,
+        sleep_info: &mut LatencySleepInfoNV,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().latency_sleep_nv)(self.handle(), swapchain, sleep_info);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkQueueNotifyOutOfBandNV.html>
+    #[inline]
+    unsafe fn queue_notify_out_of_band_nv(
+        &self,
+        queue: Queue,
+        queue_type_info: OutOfBandQueueTypeInfoNV,
+    ) {
+        let __result = (self.commands().queue_notify_out_of_band_nv)(queue, queue_type_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkSetLatencyMarkerNV.html>
+    #[inline]
+    unsafe fn set_latency_marker_nv(
+        &self,
+        swapchain: SwapchainKHR,
+        latency_marker_info: &mut SetLatencyMarkerInfoNV,
+    ) {
+        let __result =
+            (self.commands().set_latency_marker_nv)(self.handle(), swapchain, latency_marker_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkSetLatencySleepModeNV.html>
+    #[inline]
+    unsafe fn set_latency_sleep_mode_nv(
+        &self,
+        swapchain: SwapchainKHR,
+        sleep_mode_info: &mut LatencySleepModeInfoNV,
+    ) -> crate::VkResult<()> {
+        let __result =
+            (self.commands().set_latency_sleep_mode_nv)(self.handle(), swapchain, sleep_mode_info);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl NvLowLatency2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_memory_decompression.html>
 pub trait NvMemoryDecompressionExtension: DeviceV1_0 {

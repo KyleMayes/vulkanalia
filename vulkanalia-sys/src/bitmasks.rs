@@ -1675,6 +1675,7 @@ bitflags! {
         const AVERAGE = 1 << 1;
         const MIN = 1 << 2;
         const MAX = 1 << 3;
+        const EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID = 1 << 4;
     }
 }
 

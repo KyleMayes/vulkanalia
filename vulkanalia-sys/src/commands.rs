@@ -3204,6 +3204,14 @@ pub type PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT = unsafe extern "syste
 pub type PFN_vkGetInstanceProcAddr =
     unsafe extern "system" fn(_instance: Instance, _name: *const c_char) -> PFN_vkVoidFunction;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetLatencyTimingsNV.html>
+pub type PFN_vkGetLatencyTimingsNV = unsafe extern "system" fn(
+    _device: Device,
+    _swapchain: SwapchainKHR,
+    _timing_count: *mut u32,
+    _latency_marker_info: *mut GetLatencyMarkerInfoNV,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetMemoryAndroidHardwareBufferANDROID.html>
 pub type PFN_vkGetMemoryAndroidHardwareBufferANDROID = unsafe extern "system" fn(
     _device: Device,
@@ -4050,6 +4058,13 @@ pub type PFN_vkInvalidateMappedMemoryRanges = unsafe extern "system" fn(
     _memory_ranges: *const MappedMemoryRange,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkLatencySleepNV.html>
+pub type PFN_vkLatencySleepNV = unsafe extern "system" fn(
+    _device: Device,
+    _swapchain: SwapchainKHR,
+    _sleep_info: *mut LatencySleepInfoNV,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkMapMemory.html>
 pub type PFN_vkMapMemory = unsafe extern "system" fn(
     _device: Device,
@@ -4101,6 +4116,10 @@ pub type PFN_vkQueueEndDebugUtilsLabelEXT = unsafe extern "system" fn(_queue: Qu
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkQueueInsertDebugUtilsLabelEXT.html>
 pub type PFN_vkQueueInsertDebugUtilsLabelEXT =
     unsafe extern "system" fn(_queue: Queue, _label_info: *const DebugUtilsLabelEXT);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkQueueNotifyOutOfBandNV.html>
+pub type PFN_vkQueueNotifyOutOfBandNV =
+    unsafe extern "system" fn(_queue: Queue, _queue_type_info: OutOfBandQueueTypeInfoNV);
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkQueuePresentKHR.html>
 pub type PFN_vkQueuePresentKHR =
@@ -4252,6 +4271,20 @@ pub type PFN_vkSetHdrMetadataEXT = unsafe extern "system" fn(
     _swapchains: *const SwapchainKHR,
     _metadata: *const HdrMetadataEXT,
 );
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkSetLatencyMarkerNV.html>
+pub type PFN_vkSetLatencyMarkerNV = unsafe extern "system" fn(
+    _device: Device,
+    _swapchain: SwapchainKHR,
+    _latency_marker_info: *mut SetLatencyMarkerInfoNV,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkSetLatencySleepModeNV.html>
+pub type PFN_vkSetLatencySleepModeNV = unsafe extern "system" fn(
+    _device: Device,
+    _swapchain: SwapchainKHR,
+    _sleep_mode_info: *mut LatencySleepModeInfoNV,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkSetLocalDimmingAMD.html>
 pub type PFN_vkSetLocalDimmingAMD = unsafe extern "system" fn(

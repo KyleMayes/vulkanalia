@@ -433,6 +433,22 @@ pub const AMD_TEXTURE_GATHER_BIAS_LOD_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_ANDROID_external_format_resolve.html>
+#[allow(deprecated)]
+pub const ANDROID_EXTERNAL_FORMAT_RESOLVE_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_ANDROID_external_format_resolve"),
+    number: 469,
+    type_: "device",
+    author: "ANDROID",
+    contact: "Chris Forbes @chrisforbes",
+    platform: Some("android"),
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_ANDROID_external_memory_android_hardware_buffer.html>
 #[allow(deprecated)]
 pub const ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION: Extension = Extension {
@@ -4964,6 +4980,22 @@ pub const NV_LINEAR_COLOR_ATTACHMENT_EXTENSION: Extension = Extension {
 pub const NV_LOW_LATENCY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_low_latency"),
     number: 311,
+    type_: "device",
+    author: "NV",
+    contact: "Charles Hansen @cshansen",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_low_latency2.html>
+#[allow(deprecated)]
+pub const NV_LOW_LATENCY2_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_low_latency2"),
+    number: 506,
     type_: "device",
     author: "NV",
     contact: "Charles Hansen @cshansen",

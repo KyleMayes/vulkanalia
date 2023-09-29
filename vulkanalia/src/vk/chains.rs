@@ -380,6 +380,28 @@ unsafe impl OutputChainStruct for AndroidHardwareBufferFormatPropertiesANDROID {
     }
 }
 
+unsafe impl InputChainStruct for AndroidHardwareBufferFormatResolvePropertiesANDROID {
+    const TYPE: StructureType =
+        StructureType::ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for AndroidHardwareBufferFormatResolvePropertiesANDROID {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for AndroidHardwareBufferPropertiesANDROID {
     const TYPE: StructureType = StructureType::ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID;
 
@@ -3417,6 +3439,20 @@ unsafe impl InputChainStruct for GeometryTrianglesNV {
     }
 }
 
+unsafe impl InputChainStruct for GetLatencyMarkerInfoNV {
+    const TYPE: StructureType = StructureType::GET_LATENCY_MARKER_INFO_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for GraphicsPipelineCreateInfo {
     const TYPE: StructureType = StructureType::GRAPHICS_PIPELINE_CREATE_INFO;
 
@@ -4383,6 +4419,76 @@ unsafe impl InputChainStruct for InstanceCreateInfo {
     }
 }
 
+unsafe impl InputChainStruct for LatencySleepInfoNV {
+    const TYPE: StructureType = StructureType::LATENCY_SLEEP_INFO_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for LatencySleepModeInfoNV {
+    const TYPE: StructureType = StructureType::LATENCY_SLEEP_MODE_INFO_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for LatencySubmissionPresentIdNV {
+    const TYPE: StructureType = StructureType::LATENCY_SUBMISSION_PRESENT_ID_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for LatencySurfaceCapabilitiesNV {
+    const TYPE: StructureType = StructureType::LATENCY_SURFACE_CAPABILITIES_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for LatencyTimingsFrameReportNV {
+    const TYPE: StructureType = StructureType::LATENCY_TIMINGS_FRAME_REPORT_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for MacOSSurfaceCreateInfoMVK {
     const TYPE: StructureType = StructureType::MACOS_SURFACE_CREATE_INFO_MVK;
 
@@ -5024,6 +5130,20 @@ unsafe impl InputChainStruct for OpticalFlowSessionCreatePrivateDataInfoNV {
 unsafe impl OutputChainStruct for OpticalFlowSessionCreatePrivateDataInfoNV {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for OutOfBandQueueTypeInfoNV {
+    const TYPE: StructureType = StructureType::OUT_OF_BAND_QUEUE_TYPE_INFO_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
         self.next
     }
 }
@@ -6542,6 +6662,50 @@ unsafe impl InputChainStruct for PhysicalDeviceExternalFenceInfo {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceExternalFormatResolveFeaturesANDROID {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceExternalFormatResolveFeaturesANDROID {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceExternalFormatResolvePropertiesANDROID {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceExternalFormatResolvePropertiesANDROID {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
@@ -12530,6 +12694,20 @@ unsafe impl InputChainStruct for SemaphoreWaitInfo {
     }
 }
 
+unsafe impl InputChainStruct for SetLatencyMarkerInfoNV {
+    const TYPE: StructureType = StructureType::SET_LATENCY_MARKER_INFO_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for ShaderCreateInfoEXT {
     const TYPE: StructureType = StructureType::SHADER_CREATE_INFO_EXT;
 
@@ -13113,6 +13291,20 @@ unsafe impl InputChainStruct for SwapchainCreateInfoKHR {
 
 unsafe impl InputChainStruct for SwapchainDisplayNativeHdrCreateInfoAMD {
     const TYPE: StructureType = StructureType::SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for SwapchainLatencyCreateInfoNV {
+    const TYPE: StructureType = StructureType::SWAPCHAIN_LATENCY_CREATE_INFO_NV;
 
     #[inline]
     fn s_type(&self) -> StructureType {
