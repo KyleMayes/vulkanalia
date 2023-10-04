@@ -311,7 +311,7 @@ struct SwapchainSupport {
     window: &amp;Window,
     capabilities: vk::SurfaceCapabilitiesKHR,
 ) -&gt; vk::Extent2D {
-    if capabilities.current_extent.width != u32::max_value() {
+    if capabilities.current_extent.width != u32::MAX {
         capabilities.current_extent
     } else {
         let size = window.inner_size();

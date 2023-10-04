@@ -345,7 +345,7 @@ unsafe fn create_uniform_buffers(
             self.device.wait_for_fences(
                 &amp;[self.data.images_in_flight[image_index as usize]],
                 true,
-                u64::max_value(),
+                u64::MAX,
             )?;
         }
 

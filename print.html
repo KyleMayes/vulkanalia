@@ -1368,7 +1368,7 @@ struct SwapchainSupport {
     window: &amp;Window,
     capabilities: vk::SurfaceCapabilitiesKHR,
 ) -&gt; vk::Extent2D {
-    if capabilities.current_extent.width != u32::max_value() {
+    if capabilities.current_extent.width != u32::MAX {
         capabilities.current_extent
     } else {
         let size = window.inner_size();
@@ -2445,7 +2445,7 @@ data.render_finished_semaphore = device.create_semaphore(&amp;semaphore_info, No
         .device
         .acquire_next_image_khr(
             self.data.swapchain,
-            u64::max_value(),
+            u64::MAX,
             self.data.image_available_semaphore,
             vk::Fence::null(),
         )?
@@ -2595,7 +2595,7 @@ let present_info = vk::PresentInfoKHR::builder()
         .device
         .acquire_next_image_khr(
             self.data.swapchain,
-            u64::max_value(),
+            u64::MAX,
             self.data.image_available_semaphores[self.frame],
             vk::Fence::null(),
         )?
@@ -2674,7 +2674,7 @@ let present_info = vk::PresentInfoKHR::builder()
     self.device.wait_for_fences(
         &amp;[self.data.in_flight_fences[self.frame]],
         true,
-        u64::max_value(),
+        u64::MAX,
     )?;
 
     self.device.reset_fences(&amp;[self.data.in_flight_fences[self.frame]])?;
@@ -2722,7 +2722,7 @@ let present_info = vk::PresentInfoKHR::builder()
         .device
         .acquire_next_image_khr(
             self.data.swapchain,
-            u64::max_value(),
+            u64::MAX,
             self.data.image_available_semaphores[self.frame],
             vk::Fence::null(),
         )?
@@ -2732,7 +2732,7 @@ let present_info = vk::PresentInfoKHR::builder()
         self.device.wait_for_fences(
             &amp;[self.data.images_in_flight[image_index as usize]],
             true,
-            u64::max_value(),
+            u64::MAX,
         )?;
     }
 
@@ -2841,7 +2841,7 @@ unsafe fn destroy_swapchain(&amp;mut self) {
 </ul>
 <pre><code class="language-rust noplaypen">let result = self.device.acquire_next_image_khr(
     self.data.swapchain,
-    u64::max_value(),
+    u64::MAX,
     self.data.image_available_semaphores[self.frame],
     vk::Fence::null(),
 );
@@ -3749,7 +3749,7 @@ unsafe fn create_uniform_buffers(
             self.device.wait_for_fences(
                 &amp;[self.data.images_in_flight[image_index as usize]],
                 true,
-                u64::max_value(),
+                u64::MAX,
             )?;
         }
 
@@ -6409,7 +6409,7 @@ data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
     Deg(0.0)
 );
 
-let model_bytes = &amp;*slice_from_raw_parts(
+let model_bytes = &amp;*std::slice::from_raw_parts(
     &amp;model as *const Mat4 as *const u8,
     size_of::&lt;Mat4&gt;()
 );
