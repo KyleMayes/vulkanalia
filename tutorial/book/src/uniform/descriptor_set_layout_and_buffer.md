@@ -275,7 +275,7 @@ impl App {
             self.device.wait_for_fences(
                 &[self.data.images_in_flight[image_index as usize]],
                 true,
-                u64::max_value(),
+                u64::MAX,
             )?;
         }
 
