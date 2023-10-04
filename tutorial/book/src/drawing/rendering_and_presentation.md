@@ -84,7 +84,7 @@ unsafe fn render(&mut self, window: &Window) -> Result<()> {
         .device
         .acquire_next_image_khr(
             self.data.swapchain,
-            u64::max_value(),
+            u64::MAX,
             self.data.image_available_semaphore,
             vk::Fence::null(),
         )?
@@ -305,7 +305,7 @@ unsafe fn render(&mut self, window: &Window) -> Result<()> {
         .device
         .acquire_next_image_khr(
             self.data.swapchain,
-            u64::max_value(),
+            u64::MAX,
             self.data.image_available_semaphores[self.frame],
             vk::Fence::null(),
         )?
@@ -404,7 +404,7 @@ unsafe fn render(&mut self, window: &Window) -> Result<()> {
     self.device.wait_for_fences(
         &[self.data.in_flight_fences[self.frame]],
         true,
-        u64::max_value(),
+        u64::MAX,
     )?;
 
     self.device.reset_fences(&[self.data.in_flight_fences[self.frame]])?;
@@ -467,7 +467,7 @@ unsafe fn render(&mut self, window: &Window) -> Result<()> {
         .device
         .acquire_next_image_khr(
             self.data.swapchain,
-            u64::max_value(),
+            u64::MAX,
             self.data.image_available_semaphores[self.frame],
             vk::Fence::null(),
         )?
@@ -477,7 +477,7 @@ unsafe fn render(&mut self, window: &Window) -> Result<()> {
         self.device.wait_for_fences(
             &[self.data.images_in_flight[image_index as usize]],
             true,
-            u64::max_value(),
+            u64::MAX,
         )?;
     }
 

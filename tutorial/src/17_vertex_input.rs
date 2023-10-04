@@ -139,12 +139,11 @@ impl App {
     unsafe fn render(&mut self, window: &Window) -> Result<()> {
         let in_flight_fence = self.data.in_flight_fences[self.frame];
 
-        self.device
-            .wait_for_fences(&[in_flight_fence], true, u64::max_value())?;
+        self.device.wait_for_fences(&[in_flight_fence], true, u64::MAX)?;
 
         let result = self.device.acquire_next_image_khr(
             self.data.swapchain,
-            u64::max_value(),
+            u64::MAX,
             self.data.image_available_semaphores[self.frame],
             vk::Fence::null(),
         );
@@ -157,8 +156,7 @@ impl App {
 
         let image_in_flight = self.data.images_in_flight[image_index];
         if !image_in_flight.is_null() {
-            self.device
-                .wait_for_fences(&[image_in_flight], true, u64::max_value())?;
+            self.device.wait_for_fences(&[image_in_flight], true, u64::MAX)?;
         }
 
         self.data.images_in_flight[image_index] = in_flight_fence;
@@ -575,7 +573,7 @@ fn get_swapchain_present_mode(present_modes: &[vk::PresentModeKHR]) -> vk::Prese
 }
 
 fn get_swapchain_extent(window: &Window, capabilities: vk::SurfaceCapabilitiesKHR) -> vk::Extent2D {
-    if capabilities.current_extent.width != u32::max_value() {
+    if capabilities.current_extent.width != u32::MAX {
         capabilities.current_extent
     } else {
         let size = window.inner_size();

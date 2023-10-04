@@ -95,7 +95,7 @@ Now we just need to figure out when swapchain recreation is necessary and call o
 ```rust,noplaypen
 let result = self.device.acquire_next_image_khr(
     self.data.swapchain,
-    u64::max_value(),
+    u64::MAX,
     self.data.image_available_semaphores[self.frame],
     vk::Fence::null(),
 );

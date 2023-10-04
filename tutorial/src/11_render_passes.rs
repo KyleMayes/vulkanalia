@@ -440,7 +440,7 @@ fn get_swapchain_present_mode(present_modes: &[vk::PresentModeKHR]) -> vk::Prese
 }
 
 fn get_swapchain_extent(window: &Window, capabilities: vk::SurfaceCapabilitiesKHR) -> vk::Extent2D {
-    if capabilities.current_extent.width != u32::max_value() {
+    if capabilities.current_extent.width != u32::MAX {
         capabilities.current_extent
     } else {
         let size = window.inner_size();

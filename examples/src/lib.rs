@@ -137,12 +137,12 @@ impl App {
     unsafe fn render(&mut self) -> Result<()> {
         // Wait for any previous render of the current frame to complete.
         let fence = self.data.in_flight_fences[self.frame];
-        self.device.wait_for_fences(&[fence], true, u64::max_value())?;
+        self.device.wait_for_fences(&[fence], true, u64::MAX)?;
 
         // Get the swapchain image for the current frame.
         let result = self.device.acquire_next_image_khr(
             self.data.swapchain,
-            u64::max_value(),
+            u64::MAX,
             self.data.image_available_semaphores[self.frame],
             vk::Fence::null(),
         );
@@ -158,7 +158,7 @@ impl App {
         // Wait for any previous render using the current swapchain image to complete.
         let previous = self.data.images_in_flight[image_index as usize];
         if previous != vk::Fence::null() {
-            self.device.wait_for_fences(&[previous], true, u64::max_value())?;
+            self.device.wait_for_fences(&[previous], true, u64::MAX)?;
         }
 
         // Mark this render as using the current swapchain image.
@@ -575,7 +575,7 @@ fn get_swapchain_present_mode(present_modes: &[vk::PresentModeKHR]) -> vk::Prese
 
 /// Gets a suitable swapchain extent.
 fn get_swapchain_extent(window: &Window, capabilities: vk::SurfaceCapabilitiesKHR) -> vk::Extent2D {
-    if capabilities.current_extent.width != u32::max_value() {
+    if capabilities.current_extent.width != u32::MAX {
         capabilities.current_extent
     } else {
         let size = window.inner_size();
