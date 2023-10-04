@@ -15,7 +15,7 @@ use std::hash::{Hash, Hasher};
 use std::io::BufReader;
 use std::mem::size_of;
 use std::os::raw::c_void;
-use std::ptr::{copy_nonoverlapping as memcpy, slice_from_raw_parts};
+use std::ptr::copy_nonoverlapping as memcpy;
 use std::time::Instant;
 
 use anyhow::{anyhow, Result};
@@ -1683,7 +1683,7 @@ unsafe fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<
 
     let model = Mat4::from_axis_angle(vec3(0.0, 0.0, 1.0), Deg(0.0));
 
-    let model_bytes = &*slice_from_raw_parts(&model as *const Mat4 as *const u8, size_of::<Mat4>());
+    let model_bytes = &*std::slice::from_raw_parts(&model as *const Mat4 as *const u8, size_of::<Mat4>());
 
     let opacity = 0.25f32;
     let opacity_bytes = &opacity.to_ne_bytes()[..];
