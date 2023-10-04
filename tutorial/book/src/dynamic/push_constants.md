@@ -119,7 +119,7 @@ let model = Mat4::from_axis_angle(
     Deg(0.0)
 );
 
-let model_bytes = &*slice_from_raw_parts(
+let model_bytes = &*std::slice::from_raw_parts(
     &model as *const Mat4 as *const u8,
     size_of::<Mat4>()
 );
