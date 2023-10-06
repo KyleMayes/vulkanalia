@@ -1662,6 +1662,7 @@ bitflags! {
         const SUSPENDING = 1 << 1;
         const RESUMING = 1 << 2;
         const ENABLE_LEGACY_DITHERING_EXT = 1 << 3;
+        const CONTENTS_INLINE_EXT = 1 << 4;
     }
 }
 

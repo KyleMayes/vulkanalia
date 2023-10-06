@@ -12828,6 +12828,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExclusiveScissorFeaturesNV
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalFormatResolveFeaturesANDROID {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
@@ -12876,6 +12877,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceNestedCommandBufferFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceOpacityMicromapFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceOpticalFlowFeaturesNV {}
@@ -20133,8 +20135,9 @@ impl<'b> FrameBoundaryEXTBuilder<'b> {
     }
 
     #[inline]
-    pub fn tag<T>(mut self, tag: &'b T) -> Self {
-        self.value.tag = (tag as *const T).cast();
+    pub fn tag(mut self, tag: &'b [u8]) -> Self {
+        self.value.tag_size = tag.len() as usize;
+        self.value.tag = tag.as_ptr().cast();
         self
     }
 
@@ -36932,6 +36935,143 @@ unsafe impl Cast for PhysicalDeviceExtendedDynamicStateFeaturesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {
+    type Target = PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {
+    type Builder = PhysicalDeviceExtendedSparseAddressSpaceFeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceExtendedSparseAddressSpaceFeaturesNVBuilder {
+    value: PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV,
+}
+
+impl PhysicalDeviceExtendedSparseAddressSpaceFeaturesNVBuilder {
+    #[inline]
+    pub fn extended_sparse_address_space(mut self, extended_sparse_address_space: bool) -> Self {
+        self.value.extended_sparse_address_space = extended_sparse_address_space as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNVBuilder {
+    type Target = PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNVBuilder {
+    type Target = PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
+    type Target = PhysicalDeviceExtendedSparseAddressSpacePropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
+    type Builder = PhysicalDeviceExtendedSparseAddressSpacePropertiesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceExtendedSparseAddressSpacePropertiesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceExtendedSparseAddressSpacePropertiesNVBuilder {
+    value: PhysicalDeviceExtendedSparseAddressSpacePropertiesNV,
+}
+
+impl PhysicalDeviceExtendedSparseAddressSpacePropertiesNVBuilder {
+    #[inline]
+    pub fn extended_sparse_address_space_size(
+        mut self,
+        extended_sparse_address_space_size: DeviceSize,
+    ) -> Self {
+        self.value.extended_sparse_address_space_size = extended_sparse_address_space_size;
+        self
+    }
+
+    #[inline]
+    pub fn extended_sparse_image_usage_flags(
+        mut self,
+        extended_sparse_image_usage_flags: ImageUsageFlags,
+    ) -> Self {
+        self.value.extended_sparse_image_usage_flags = extended_sparse_image_usage_flags;
+        self
+    }
+
+    #[inline]
+    pub fn extended_sparse_buffer_usage_flags(
+        mut self,
+        extended_sparse_buffer_usage_flags: BufferUsageFlags,
+    ) -> Self {
+        self.value.extended_sparse_buffer_usage_flags = extended_sparse_buffer_usage_flags;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceExtendedSparseAddressSpacePropertiesNVBuilder {
+    type Target = PhysicalDeviceExtendedSparseAddressSpacePropertiesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceExtendedSparseAddressSpacePropertiesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceExtendedSparseAddressSpacePropertiesNVBuilder {
+    type Target = PhysicalDeviceExtendedSparseAddressSpacePropertiesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [`PhysicalDeviceExternalBufferInfo`].
 pub unsafe trait ExtendsPhysicalDeviceExternalBufferInfo: fmt::Debug {}
 unsafe impl ExtendsPhysicalDeviceExternalBufferInfo for BufferUsageFlags2CreateInfoKHR {}
@@ -38289,6 +38429,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExclusiveScissorFea
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState2FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicState3FeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedDynamicStateFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalFormatResolveFeaturesANDROID {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemoryRDMAFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceExternalMemorySciBufFeaturesNV {}
@@ -38345,6 +38486,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceNestedCommandBufferFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceOpacityMicromapFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceOpticalFlowFeaturesNV {}
@@ -44700,6 +44842,144 @@ unsafe impl Cast for PhysicalDeviceMutableDescriptorTypeFeaturesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceNestedCommandBufferFeaturesEXT {
+    type Target = PhysicalDeviceNestedCommandBufferFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceNestedCommandBufferFeaturesEXT {
+    type Builder = PhysicalDeviceNestedCommandBufferFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceNestedCommandBufferFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceNestedCommandBufferFeaturesEXTBuilder {
+    value: PhysicalDeviceNestedCommandBufferFeaturesEXT,
+}
+
+impl PhysicalDeviceNestedCommandBufferFeaturesEXTBuilder {
+    #[inline]
+    pub fn nested_command_buffer(mut self, nested_command_buffer: bool) -> Self {
+        self.value.nested_command_buffer = nested_command_buffer as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn nested_command_buffer_rendering(
+        mut self,
+        nested_command_buffer_rendering: bool,
+    ) -> Self {
+        self.value.nested_command_buffer_rendering = nested_command_buffer_rendering as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn nested_command_buffer_simultaneous_use(
+        mut self,
+        nested_command_buffer_simultaneous_use: bool,
+    ) -> Self {
+        self.value.nested_command_buffer_simultaneous_use =
+            nested_command_buffer_simultaneous_use as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceNestedCommandBufferFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceNestedCommandBufferFeaturesEXTBuilder {
+    type Target = PhysicalDeviceNestedCommandBufferFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceNestedCommandBufferFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceNestedCommandBufferFeaturesEXTBuilder {
+    type Target = PhysicalDeviceNestedCommandBufferFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceNestedCommandBufferPropertiesEXT {
+    type Target = PhysicalDeviceNestedCommandBufferPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceNestedCommandBufferPropertiesEXT {
+    type Builder = PhysicalDeviceNestedCommandBufferPropertiesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceNestedCommandBufferPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceNestedCommandBufferPropertiesEXTBuilder {
+    value: PhysicalDeviceNestedCommandBufferPropertiesEXT,
+}
+
+impl PhysicalDeviceNestedCommandBufferPropertiesEXTBuilder {
+    #[inline]
+    pub fn max_command_buffer_nesting_level(
+        mut self,
+        max_command_buffer_nesting_level: u32,
+    ) -> Self {
+        self.value.max_command_buffer_nesting_level = max_command_buffer_nesting_level;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceNestedCommandBufferPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceNestedCommandBufferPropertiesEXTBuilder {
+    type Target = PhysicalDeviceNestedCommandBufferPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceNestedCommandBufferPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceNestedCommandBufferPropertiesEXTBuilder {
+    type Target = PhysicalDeviceNestedCommandBufferPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {
     type Target = PhysicalDeviceNonSeamlessCubeMapFeaturesEXT;
 
@@ -46593,6 +46873,10 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDriverProperties 
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDrmPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceExtendedDynamicState3PropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2
+    for PhysicalDeviceExtendedSparseAddressSpacePropertiesNV
+{
+}
+unsafe impl ExtendsPhysicalDeviceProperties2
     for PhysicalDeviceExternalFormatResolvePropertiesANDROID
 {
 }
@@ -46636,6 +46920,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2
 {
 }
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMultiviewProperties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceNestedCommandBufferPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceOpacityMicromapPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceOpticalFlowPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePCIBusInfoPropertiesEXT {}

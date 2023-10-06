@@ -1683,6 +1683,22 @@ pub const EXT_MUTABLE_DESCRIPTOR_TYPE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_nested_command_buffer.html>
+#[allow(deprecated)]
+pub const EXT_NESTED_COMMAND_BUFFER_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_nested_command_buffer"),
+    number: 452,
+    type_: "device",
+    author: "EXT",
+    contact: "Piers Daniell @pdaniell-nv",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_non_seamless_cube_map.html>
 #[allow(deprecated)]
 pub const EXT_NON_SEAMLESS_CUBE_MAP_EXTENSION: Extension = Extension {
@@ -4707,6 +4723,22 @@ pub const NV_DISPLACEMENT_MICROMAP_EXTENSION: Extension = Extension {
     author: "NV",
     contact: "Christoph Kubisch @pixeljetstream, Eric Werness @ewerness-nv",
     platform: Some("provisional"),
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_extended_sparse_address_space.html>
+#[allow(deprecated)]
+pub const NV_EXTENDED_SPARSE_ADDRESS_SPACE_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_extended_sparse_address_space"),
+    number: 493,
+    type_: "device",
+    author: "NV",
+    contact: "Russell Chou @russellcnv",
+    platform: None,
     required_extensions: None,
     required_version: None,
     deprecated_by: None,

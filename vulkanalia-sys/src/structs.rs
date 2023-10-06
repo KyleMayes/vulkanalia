@@ -10877,6 +10877,50 @@ impl Default for PhysicalDeviceExtendedDynamicStateFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub extended_sparse_address_space: Bool32,
+}
+
+impl Default for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_FEATURES_NV,
+            next: ptr::null_mut(),
+            extended_sparse_address_space: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub extended_sparse_address_space_size: DeviceSize,
+    pub extended_sparse_image_usage_flags: ImageUsageFlags,
+    pub extended_sparse_buffer_usage_flags: BufferUsageFlags,
+}
+
+impl Default for PhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV,
+            next: ptr::null_mut(),
+            extended_sparse_address_space_size: DeviceSize::default(),
+            extended_sparse_image_usage_flags: ImageUsageFlags::default(),
+            extended_sparse_buffer_usage_flags: BufferUsageFlags::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceExternalBufferInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13053,6 +13097,50 @@ impl Default for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {
             s_type: StructureType::PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT,
             next: ptr::null_mut(),
             mutable_descriptor_type: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceNestedCommandBufferFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceNestedCommandBufferFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub nested_command_buffer: Bool32,
+    pub nested_command_buffer_rendering: Bool32,
+    pub nested_command_buffer_simultaneous_use: Bool32,
+}
+
+impl Default for PhysicalDeviceNestedCommandBufferFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_FEATURES_EXT,
+            next: ptr::null_mut(),
+            nested_command_buffer: Bool32::default(),
+            nested_command_buffer_rendering: Bool32::default(),
+            nested_command_buffer_simultaneous_use: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceNestedCommandBufferPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceNestedCommandBufferPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_command_buffer_nesting_level: u32,
+}
+
+impl Default for PhysicalDeviceNestedCommandBufferPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            max_command_buffer_nesting_level: u32::default(),
         }
     }
 }

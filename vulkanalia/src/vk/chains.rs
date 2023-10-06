@@ -6638,6 +6638,50 @@ unsafe impl OutputChainStruct for PhysicalDeviceExtendedDynamicStateFeaturesEXT 
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_FEATURES_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceExternalBufferInfo {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO;
 
@@ -8395,6 +8439,48 @@ unsafe impl InputChainStruct for PhysicalDeviceMutableDescriptorTypeFeaturesEXT 
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceNestedCommandBufferFeaturesEXT {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_FEATURES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceNestedCommandBufferFeaturesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceNestedCommandBufferPropertiesEXT {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_PROPERTIES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceNestedCommandBufferPropertiesEXT {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next

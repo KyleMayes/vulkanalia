@@ -3214,6 +3214,15 @@ pub trait ExtMutableDescriptorTypeExtension: DeviceV1_0 {
 
 impl ExtMutableDescriptorTypeExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_nested_command_buffer.html>
+pub trait ExtNestedCommandBufferExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_NESTED_COMMAND_BUFFER_EXTENSION;
+}
+
+impl ExtNestedCommandBufferExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_non_seamless_cube_map.html>
 pub trait ExtNonSeamlessCubeMapExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -10646,6 +10655,15 @@ pub trait NvDisplacementMicromapExtension: DeviceV1_0 {
 #[cfg(feature = "provisional")]
 impl NvDisplacementMicromapExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_extended_sparse_address_space.html>
+pub trait NvExtendedSparseAddressSpaceExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_EXTENDED_SPARSE_ADDRESS_SPACE_EXTENSION;
+}
+
+impl NvExtendedSparseAddressSpaceExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_external_memory.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory`")]
 pub trait NvExternalMemoryExtension: DeviceV1_0 {
@@ -11272,7 +11290,7 @@ pub trait NvLowLatency2Extension: DeviceV1_0 {
     unsafe fn latency_sleep_nv(
         &self,
         swapchain: SwapchainKHR,
-        sleep_info: &mut LatencySleepInfoNV,
+        sleep_info: &LatencySleepInfoNV,
     ) -> crate::VkResult<()> {
         let __result = (self.commands().latency_sleep_nv)(self.handle(), swapchain, sleep_info);
 
@@ -11288,7 +11306,7 @@ pub trait NvLowLatency2Extension: DeviceV1_0 {
     unsafe fn queue_notify_out_of_band_nv(
         &self,
         queue: Queue,
-        queue_type_info: OutOfBandQueueTypeInfoNV,
+        queue_type_info: &OutOfBandQueueTypeInfoNV,
     ) {
         let __result = (self.commands().queue_notify_out_of_band_nv)(queue, queue_type_info);
     }
@@ -11298,7 +11316,7 @@ pub trait NvLowLatency2Extension: DeviceV1_0 {
     unsafe fn set_latency_marker_nv(
         &self,
         swapchain: SwapchainKHR,
-        latency_marker_info: &mut SetLatencyMarkerInfoNV,
+        latency_marker_info: &SetLatencyMarkerInfoNV,
     ) {
         let __result =
             (self.commands().set_latency_marker_nv)(self.handle(), swapchain, latency_marker_info);
@@ -11309,7 +11327,7 @@ pub trait NvLowLatency2Extension: DeviceV1_0 {
     unsafe fn set_latency_sleep_mode_nv(
         &self,
         swapchain: SwapchainKHR,
-        sleep_mode_info: &mut LatencySleepModeInfoNV,
+        sleep_mode_info: &LatencySleepModeInfoNV,
     ) -> crate::VkResult<()> {
         let __result =
             (self.commands().set_latency_sleep_mode_nv)(self.handle(), swapchain, sleep_mode_info);

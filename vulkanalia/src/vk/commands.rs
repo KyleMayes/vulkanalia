@@ -8647,7 +8647,7 @@ impl DeviceCommands {
                     unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
-                        _sleep_info: *mut LatencySleepInfoNV,
+                        _sleep_info: *const LatencySleepInfoNV,
                     ) -> Result {
                         panic!("could not load vkLatencySleepNV")
                     }
@@ -8742,7 +8742,7 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(
                         _queue: Queue,
-                        _queue_type_info: OutOfBandQueueTypeInfoNV,
+                        _queue_type_info: *const OutOfBandQueueTypeInfoNV,
                     ) {
                         panic!("could not load vkQueueNotifyOutOfBandNV")
                     }
@@ -9112,7 +9112,7 @@ impl DeviceCommands {
                     unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
-                        _latency_marker_info: *mut SetLatencyMarkerInfoNV,
+                        _latency_marker_info: *const SetLatencyMarkerInfoNV,
                     ) {
                         panic!("could not load vkSetLatencyMarkerNV")
                     }
@@ -9127,7 +9127,7 @@ impl DeviceCommands {
                     unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
-                        _sleep_mode_info: *mut LatencySleepModeInfoNV,
+                        _sleep_mode_info: *const LatencySleepModeInfoNV,
                     ) -> Result {
                         panic!("could not load vkSetLatencySleepModeNV")
                     }
