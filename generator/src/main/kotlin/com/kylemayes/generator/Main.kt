@@ -32,6 +32,11 @@ fun main(args: Array<String>) = Generator()
     .subcommands(Check(), Index(), Update())
     .main(args)
 
+data class GeneratorContext(
+    val directory: Path,
+    val github: GitHub,
+)
+
 class Generator : CliktCommand(help = "Manages generated Vulkan bindings") {
     private val directory by option(help = "Vulkanalia directory").required()
     private val username by option(help = "GitHub username")
@@ -40,19 +45,18 @@ class Generator : CliktCommand(help = "Manages generated Vulkan bindings") {
     private val context by findOrSetObject {
         val directory = Path.of(directory).toAbsolutePath().normalize()
         if (username != null && token != null) {
-            Triple(directory, GitHub.connect(username, token), false)
+            GeneratorContext(directory, GitHub.connect(username, token))
         } else {
-            Triple(directory, GitHub.connectAnonymously(), true)
+            GeneratorContext(directory, GitHub.connectAnonymously())
         }
     }
 
     override fun run() {
-        val (directory, github, anonymous) = context
         log.info { "Working in $directory" }
-        if (anonymous) {
+        if (context.github.isAnonymous) {
             log.info { "Acting as an anonymous GitHub user" }
         } else {
-            log.info { "Acting as ${github.myself.login} (${github.myself.email})" }
+            log.info { "Acting as ${context.github.myself.login} (${context.github.myself.email})" }
         }
     }
 }
@@ -62,14 +66,12 @@ class Generator : CliktCommand(help = "Manages generated Vulkan bindings") {
 // ===============================================
 
 class Check : CliktCommand(help = "Checks generated Vulkan bindings") {
-    private val context by requireObject<Triple<Path, GitHub, Boolean>>()
+    private val context by requireObject<GeneratorContext>()
 
     override fun run() {
-        val (directory, _, _) = context
-
         // Parse
 
-        val currentCommitHash = docsRepo.getCurrentCommitHash(directory)
+        val currentCommitHash = docsRepo.getCurrentCommitHash(context.directory)
         log.info { "Current commit hash = $currentCommitHash" }
 
         val xml = docsRepo.getFileContents(currentCommitHash, "xml/vk.xml")
@@ -86,7 +88,7 @@ class Check : CliktCommand(help = "Checks generated Vulkan bindings") {
             exitProcess(1)
         }
 
-        if (!log.time("Match Files") { files.all { it.matches(directory) } }) {
+        if (!log.time("Match Files") { files.all { it.matches(context.directory) } }) {
             log.error { "One or more files did not match what is on disk." }
             exitProcess(1)
         }
@@ -98,14 +100,12 @@ class Check : CliktCommand(help = "Checks generated Vulkan bindings") {
 // ===============================================
 
 class Index : CliktCommand(help = "Generates an index for generated Vulkan bindings") {
-    private val context by requireObject<Triple<Path, GitHub, Boolean>>()
+    private val context by requireObject<GeneratorContext>()
 
     override fun run() {
-        val (directory, _, _) = context
-
         // Parse
 
-        val currentCommitHash = docsRepo.getCurrentCommitHash(directory)
+        val currentCommitHash = docsRepo.getCurrentCommitHash(context.directory)
         log.info { "Current commit hash = $currentCommitHash" }
 
         val xml = docsRepo.getFileContents(currentCommitHash, "xml/vk.xml")
@@ -116,7 +116,7 @@ class Index : CliktCommand(help = "Generates an index for generated Vulkan bindi
         log.info { "Generating index..." }
         val index = registry.indexEntities()
         log.info { "Generated index has ${index.count { it == '\n' } + 1} entries." }
-        Files.writeString(directory.resolve("index.txt"), index)
+        Files.writeString(context.directory.resolve("index.txt"), index)
     }
 }
 
@@ -125,22 +125,20 @@ class Index : CliktCommand(help = "Generates an index for generated Vulkan bindi
 // ===============================================
 
 class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
-    private val context by requireObject<Triple<Path, GitHub, Boolean>>()
+    private val context by requireObject<GeneratorContext>()
 
     private val force by option(help = "Force update of generated Vulkan bindings").flag()
     private val repo by option(help = "GitHub repository to publish changes to")
     private val skipUpgrade by option(help = "Skip upgrading commit").flag()
 
     override fun run() {
-        val (directory, github, anonymous) = context
-
         // Parse
 
-        val currentCommit = docsRepo.getCommit(github, docsRepo.getCurrentCommitHash(directory))
+        val currentCommit = docsRepo.getCommit(context.github, docsRepo.getCurrentCommitHash(context.directory))
         log.info { "Current commit hash = ${currentCommit.shA1}" }
 
         val latestCommit = if (!skipUpgrade) {
-            val latestCommit = docsRepo.getLatestCommit(github, "xml/vk.xml")
+            val latestCommit = docsRepo.getLatestCommit(context.github, "xml/vk.xml")
             log.info { "Latest commit hash = ${latestCommit.shA1}" }
             latestCommit
         } else {
@@ -163,15 +161,15 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
         val format = log.time("Format Files") { files.all { it.format() } }
 
-        if (log.time("Match Files") { files.all { it.matches(directory) } }) {
+        if (log.time("Match Files") { files.all { it.matches(context.directory) } }) {
             log.info { "All files match what is on disk." }
             return
         }
 
         // Write (files)
 
-        log.time("Write Files") { files.forEach { it.write(directory) } }
-        docsRepo.setCurrentCommitHash(directory, latestCommit.shA1)
+        log.time("Write Files") { files.forEach { it.write(context.directory) } }
+        docsRepo.setCurrentCommitHash(context.directory, latestCommit.shA1)
 
         if (!format) {
             log.error { "One or more files could not be formatted." }
@@ -180,10 +178,10 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
         // Write (changelog)
 
-        val markdown = directory.resolve("CHANGELOG.md")
+        val markdown = context.directory.resolve("CHANGELOG.md")
         val changelog = parseMarkdown(Files.readString(markdown))
 
-        for (commit in docsRepo.getTrailingCommits(github, "xml/vk.xml", currentCommit).reversed()) {
+        for (commit in docsRepo.getTrailingCommits(context.github, "xml/vk.xml", currentCommit).reversed()) {
             log.info { "Intermediate commit hash = ${commit.shA1}" }
             changelog.addBindingsUpdates(commit.shA1, commit.commitShortInfo.message)
         }
@@ -198,12 +196,12 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
         log.info { "Publishing changes ($repo)..." }
 
-        if (anonymous) {
+        if (context.github.isAnonymous) {
             log.error { "Cannot publish changes while acting as an anonymous GitHub user." }
             exitProcess(1)
         }
 
-        val repo = github.getRepository(repo)
+        val repo = context.github.getRepository(repo)
         val head = "vk-${latestCommit.shA1}"
         val base = "master"
 
@@ -218,8 +216,8 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
         }
 
         log.info { "Creating branch, committing changes, and pushing branch..." }
-        git("config", "--local", "user.name", github.myself.login)
-        git("config", "--local", "user.email", github.myself.email)
+        git("config", "--local", "user.name", context.github.myself.login)
+        git("config", "--local", "user.email", context.github.myself.email)
         git("checkout", "-B", head)
         git("add", "-A")
         git("status")
