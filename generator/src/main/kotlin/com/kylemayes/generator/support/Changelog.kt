@@ -5,6 +5,7 @@ package com.kylemayes.generator.support
 import com.vladsch.flexmark.ast.BulletList
 import com.vladsch.flexmark.ast.Heading
 import com.vladsch.flexmark.parser.Parser
+import org.kohsuke.github.GHCommit
 import java.lang.StringBuilder
 
 /** A changelog. */
@@ -99,11 +100,12 @@ fun Changelog.generateMarkdown(): String {
 }
 
 /** Adds or extends a `Bindings Updates` section to this changelog. */
-fun Changelog.addBindingsUpdates(commit: String, commitMessage: String) {
+fun Changelog.addBindingsUpdates(commit: GHCommit) {
     // Generate the change to add to the changelog.
 
-    val text = commitMessage.lines().first().removePrefix("Change log for ").removeSuffix(":")
-    val change = "[$text](https://github.com/KhronosGroup/Vulkan-Docs/commit/$commit)"
+    val message = commit.commitShortInfo.message
+    val text = message.lines().first().removePrefix("Change log for ").removeSuffix(":")
+    val change = "[$text](https://github.com/${commit.owner.fullName}/commit/${commit.shA1})"
 
     // Skip adding the change if it has already been applied to the changelog.
 
