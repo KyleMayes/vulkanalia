@@ -27,6 +27,7 @@ dependencies {
     implementation("org.kohsuke:github-api:1.316")
     implementation("org.slf4j:slf4j-simple:2.0.9")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+    testImplementation("org.mockito:mockito-core:5.6.0")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
