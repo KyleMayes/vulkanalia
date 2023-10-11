@@ -607,7 +607,14 @@ fun Type.isStringArray() = getElement()?.getIdentifier()?.original == "char"
 
 /** A C/C++ identifier type. */
 data class IdentifierType(val identifier: Identifier) : Type {
-    override fun generate() = primitives.getOrDefault(identifier.value, identifier.value)
+    override fun generate() = if (identifier.value.startsWith("StdVideo")) {
+        // Types from the Vulkan video headers are prefixed with `StdVideo`
+        // and are in a separate `video` module from the registry types.
+        "video::${identifier.value}"
+    } else {
+        primitives.getOrDefault(identifier.value, identifier.value)
+    }
+
     override fun generateDefault() = "${generate()}::default()"
 }
 

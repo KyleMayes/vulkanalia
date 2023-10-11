@@ -152,6 +152,14 @@ pub type PFN_vkBindOpticalFlowSessionImageNV = unsafe extern "system" fn(
     _layout: ImageLayout,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkBindVideoSessionMemoryKHR.html>
+pub type PFN_vkBindVideoSessionMemoryKHR = unsafe extern "system" fn(
+    _device: Device,
+    _video_session: VideoSessionKHR,
+    _bind_session_memory_info_count: u32,
+    _bind_session_memory_infos: *const BindVideoSessionMemoryInfoKHR,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkBuildAccelerationStructuresKHR.html>
 pub type PFN_vkBuildAccelerationStructuresKHR = unsafe extern "system" fn(
     _device: Device,
@@ -231,6 +239,12 @@ pub type PFN_vkCmdBeginTransformFeedbackEXT = unsafe extern "system" fn(
     _counter_buffer_count: u32,
     _counter_buffers: *const Buffer,
     _counter_buffer_offsets: *const DeviceSize,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdBeginVideoCodingKHR.html>
+pub type PFN_vkCmdBeginVideoCodingKHR = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _begin_info: *const VideoBeginCodingInfoKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdBindDescriptorBufferEmbeddedSamplersEXT.html>
@@ -435,6 +449,12 @@ pub type PFN_vkCmdClearDepthStencilImage = unsafe extern "system" fn(
     _ranges: *const ImageSubresourceRange,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdControlVideoCodingKHR.html>
+pub type PFN_vkCmdControlVideoCodingKHR = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _coding_control_info: *const VideoCodingControlInfoKHR,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdCopyAccelerationStructureKHR.html>
 pub type PFN_vkCmdCopyAccelerationStructureKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -601,6 +621,12 @@ pub type PFN_vkCmdDebugMarkerEndEXT = unsafe extern "system" fn(_command_buffer:
 pub type PFN_vkCmdDebugMarkerInsertEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _marker_info: *const DebugMarkerMarkerInfoEXT,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDecodeVideoKHR.html>
+pub type PFN_vkCmdDecodeVideoKHR = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _decode_info: *const VideoDecodeInfoKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDecompressMemoryIndirectCountNV.html>
@@ -832,6 +858,12 @@ pub type PFN_vkCmdDrawMultiIndexedEXT = unsafe extern "system" fn(
     _vertex_offset: *const i32,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdEncodeVideoKHR.html>
+pub type PFN_vkCmdEncodeVideoKHR = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _encode_info: *const VideoEncodeInfoKHR,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdEndConditionalRenderingEXT.html>
 pub type PFN_vkCmdEndConditionalRenderingEXT =
     unsafe extern "system" fn(_command_buffer: CommandBuffer);
@@ -876,6 +908,12 @@ pub type PFN_vkCmdEndTransformFeedbackEXT = unsafe extern "system" fn(
     _counter_buffer_count: u32,
     _counter_buffers: *const Buffer,
     _counter_buffer_offsets: *const DeviceSize,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdEndVideoCodingKHR.html>
+pub type PFN_vkCmdEndVideoCodingKHR = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _end_coding_info: *const VideoEndCodingInfoKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdExecuteCommands.html>
@@ -2258,6 +2296,22 @@ pub type PFN_vkCreateViSurfaceNN = unsafe extern "system" fn(
     _surface: *mut SurfaceKHR,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateVideoSessionKHR.html>
+pub type PFN_vkCreateVideoSessionKHR = unsafe extern "system" fn(
+    _device: Device,
+    _create_info: *const VideoSessionCreateInfoKHR,
+    _allocator: *const AllocationCallbacks,
+    _video_session: *mut VideoSessionKHR,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateVideoSessionParametersKHR.html>
+pub type PFN_vkCreateVideoSessionParametersKHR = unsafe extern "system" fn(
+    _device: Device,
+    _create_info: *const VideoSessionParametersCreateInfoKHR,
+    _allocator: *const AllocationCallbacks,
+    _video_session_parameters: *mut VideoSessionParametersKHR,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateWaylandSurfaceKHR.html>
 pub type PFN_vkCreateWaylandSurfaceKHR = unsafe extern "system" fn(
     _instance: Instance,
@@ -2591,6 +2645,20 @@ pub type PFN_vkDestroySwapchainKHR = unsafe extern "system" fn(
 pub type PFN_vkDestroyValidationCacheEXT = unsafe extern "system" fn(
     _device: Device,
     _validation_cache: ValidationCacheEXT,
+    _allocator: *const AllocationCallbacks,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkDestroyVideoSessionKHR.html>
+pub type PFN_vkDestroyVideoSessionKHR = unsafe extern "system" fn(
+    _device: Device,
+    _video_session: VideoSessionKHR,
+    _allocator: *const AllocationCallbacks,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkDestroyVideoSessionParametersKHR.html>
+pub type PFN_vkDestroyVideoSessionParametersKHR = unsafe extern "system" fn(
+    _device: Device,
+    _video_session_parameters: VideoSessionParametersKHR,
     _allocator: *const AllocationCallbacks,
 );
 
@@ -3047,6 +3115,15 @@ pub type PFN_vkGetDynamicRenderingTilePropertiesQCOM = unsafe extern "system" fn
     _device: Device,
     _rendering_info: *const RenderingInfo,
     _properties: *mut TilePropertiesQCOM,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetEncodedVideoSessionParametersKHR.html>
+pub type PFN_vkGetEncodedVideoSessionParametersKHR = unsafe extern "system" fn(
+    _device: Device,
+    _video_session_parameters_info: *const VideoEncodeSessionParametersGetInfoKHR,
+    _feedback_info: *mut VideoEncodeSessionParametersFeedbackInfoKHR,
+    _data_size: *mut usize,
+    _data: *mut c_void,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetEventStatus.html>
@@ -3701,6 +3778,29 @@ pub type PFN_vkGetPhysicalDeviceToolProperties = unsafe extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceToolPropertiesEXT.html>
 pub type PFN_vkGetPhysicalDeviceToolPropertiesEXT = PFN_vkGetPhysicalDeviceToolProperties;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceVideoCapabilitiesKHR.html>
+pub type PFN_vkGetPhysicalDeviceVideoCapabilitiesKHR = unsafe extern "system" fn(
+    _physical_device: PhysicalDevice,
+    _video_profile: *const VideoProfileInfoKHR,
+    _capabilities: *mut VideoCapabilitiesKHR,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR.html>
+pub type PFN_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR =
+    unsafe extern "system" fn(
+        _physical_device: PhysicalDevice,
+        _quality_level_info: *const PhysicalDeviceVideoEncodeQualityLevelInfoKHR,
+        _quality_level_properties: *mut VideoEncodeQualityLevelPropertiesKHR,
+    ) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceVideoFormatPropertiesKHR.html>
+pub type PFN_vkGetPhysicalDeviceVideoFormatPropertiesKHR = unsafe extern "system" fn(
+    _physical_device: PhysicalDevice,
+    _video_format_info: *const PhysicalDeviceVideoFormatInfoKHR,
+    _video_format_property_count: *mut u32,
+    _video_format_properties: *mut VideoFormatPropertiesKHR,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceWaylandPresentationSupportKHR.html>
 pub type PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR = unsafe extern "system" fn(
     _physical_device: PhysicalDevice,
@@ -3988,6 +4088,14 @@ pub type PFN_vkGetValidationCacheDataEXT = unsafe extern "system" fn(
     _validation_cache: ValidationCacheEXT,
     _data_size: *mut usize,
     _data: *mut c_void,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetVideoSessionMemoryRequirementsKHR.html>
+pub type PFN_vkGetVideoSessionMemoryRequirementsKHR = unsafe extern "system" fn(
+    _device: Device,
+    _video_session: VideoSessionKHR,
+    _memory_requirements_count: *mut u32,
+    _memory_requirements: *mut VideoSessionMemoryRequirementsKHR,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetWinrtDisplayNV.html>
@@ -4368,6 +4476,13 @@ pub type PFN_vkUpdateDescriptorSets = unsafe extern "system" fn(
     _descriptor_copy_count: u32,
     _descriptor_copies: *const CopyDescriptorSet,
 );
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkUpdateVideoSessionParametersKHR.html>
+pub type PFN_vkUpdateVideoSessionParametersKHR = unsafe extern "system" fn(
+    _device: Device,
+    _video_session_parameters: VideoSessionParametersKHR,
+    _update_info: *const VideoSessionParametersUpdateInfoKHR,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkWaitForFences.html>
 pub type PFN_vkWaitForFences = unsafe extern "system" fn(

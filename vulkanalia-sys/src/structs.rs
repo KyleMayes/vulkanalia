@@ -1289,6 +1289,32 @@ pub struct BindVertexBufferIndirectCommandNV {
     pub stride: u32,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBindVideoSessionMemoryInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BindVideoSessionMemoryInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub memory_bind_index: u32,
+    pub memory: DeviceMemory,
+    pub memory_offset: DeviceSize,
+    pub memory_size: DeviceSize,
+}
+
+impl Default for BindVideoSessionMemoryInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BIND_VIDEO_SESSION_MEMORY_INFO_KHR,
+            next: ptr::null(),
+            memory_bind_index: u32::default(),
+            memory: DeviceMemory::default(),
+            memory_offset: DeviceSize::default(),
+            memory_size: DeviceSize::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBlitImageCubicWeightsInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -15653,6 +15679,48 @@ impl Default for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceVideoEncodeQualityLevelInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub video_profile: *const VideoProfileInfoKHR,
+    pub quality_level: u32,
+}
+
+impl Default for PhysicalDeviceVideoEncodeQualityLevelInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR,
+            next: ptr::null(),
+            video_profile: ptr::null(),
+            quality_level: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceVideoFormatInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceVideoFormatInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub image_usage: ImageUsageFlags,
+}
+
+impl Default for PhysicalDeviceVideoFormatInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR,
+            next: ptr::null(),
+            image_usage: ImageUsageFlags::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceVulkan11Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17792,6 +17860,26 @@ impl Default for QueryPoolPerformanceQueryCreateInfoINTEL {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct QueryPoolVideoEncodeFeedbackCreateInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub encode_feedback_flags: VideoEncodeFeedbackFlagsKHR,
+}
+
+impl Default for QueryPoolVideoEncodeFeedbackCreateInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::QUERY_POOL_VIDEO_ENCODE_FEEDBACK_CREATE_INFO_KHR,
+            next: ptr::null(),
+            encode_feedback_flags: VideoEncodeFeedbackFlagsKHR::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueueFamilyCheckpointProperties2NV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17880,6 +17968,46 @@ impl Default for QueueFamilyProperties2 {
             s_type: StructureType::QUEUE_FAMILY_PROPERTIES_2,
             next: ptr::null_mut(),
             queue_family_properties: QueueFamilyProperties::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueueFamilyQueryResultStatusPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct QueueFamilyQueryResultStatusPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub query_result_status_support: Bool32,
+}
+
+impl Default for QueueFamilyQueryResultStatusPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            query_result_status_support: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueueFamilyVideoPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct QueueFamilyVideoPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub video_codec_operations: VideoCodecOperationFlagsKHR,
+}
+
+impl Default for QueueFamilyVideoPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::QUEUE_FAMILY_VIDEO_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            video_codec_operations: VideoCodecOperationFlagsKHR::default(),
         }
     }
 }
@@ -20859,6 +20987,1714 @@ impl Default for ViSurfaceCreateInfoNN {
             next: ptr::null(),
             flags: ViSurfaceCreateFlagsNN::default(),
             window: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoBeginCodingInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoBeginCodingInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: VideoBeginCodingFlagsKHR,
+    pub video_session: VideoSessionKHR,
+    pub video_session_parameters: VideoSessionParametersKHR,
+    pub reference_slot_count: u32,
+    pub reference_slots: *const VideoReferenceSlotInfoKHR,
+}
+
+impl Default for VideoBeginCodingInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_BEGIN_CODING_INFO_KHR,
+            next: ptr::null(),
+            flags: VideoBeginCodingFlagsKHR::default(),
+            video_session: VideoSessionKHR::default(),
+            video_session_parameters: VideoSessionParametersKHR::default(),
+            reference_slot_count: u32::default(),
+            reference_slots: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoCapabilitiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoCapabilitiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub flags: VideoCapabilityFlagsKHR,
+    pub min_bitstream_buffer_offset_alignment: DeviceSize,
+    pub min_bitstream_buffer_size_alignment: DeviceSize,
+    pub picture_access_granularity: Extent2D,
+    pub min_coded_extent: Extent2D,
+    pub max_coded_extent: Extent2D,
+    pub max_dpb_slots: u32,
+    pub max_active_reference_pictures: u32,
+    pub std_header_version: ExtensionProperties,
+}
+
+impl Default for VideoCapabilitiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_CAPABILITIES_KHR,
+            next: ptr::null_mut(),
+            flags: VideoCapabilityFlagsKHR::default(),
+            min_bitstream_buffer_offset_alignment: DeviceSize::default(),
+            min_bitstream_buffer_size_alignment: DeviceSize::default(),
+            picture_access_granularity: Extent2D::default(),
+            min_coded_extent: Extent2D::default(),
+            max_coded_extent: Extent2D::default(),
+            max_dpb_slots: u32::default(),
+            max_active_reference_pictures: u32::default(),
+            std_header_version: ExtensionProperties::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoCodingControlInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoCodingControlInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: VideoCodingControlFlagsKHR,
+}
+
+impl Default for VideoCodingControlInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_CODING_CONTROL_INFO_KHR,
+            next: ptr::null(),
+            flags: VideoCodingControlFlagsKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeCapabilitiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeCapabilitiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub flags: VideoDecodeCapabilityFlagsKHR,
+}
+
+impl Default for VideoDecodeCapabilitiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_CAPABILITIES_KHR,
+            next: ptr::null_mut(),
+            flags: VideoDecodeCapabilityFlagsKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeH264CapabilitiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH264CapabilitiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_level_idc: video::StdVideoH264LevelIdc,
+    pub field_offset_granularity: Offset2D,
+}
+
+impl Default for VideoDecodeH264CapabilitiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H264_CAPABILITIES_KHR,
+            next: ptr::null_mut(),
+            max_level_idc: video::StdVideoH264LevelIdc::default(),
+            field_offset_granularity: Offset2D::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeH264DpbSlotInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH264DpbSlotInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_reference_info: *const video::StdVideoDecodeH264ReferenceInfo,
+}
+
+impl Default for VideoDecodeH264DpbSlotInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR,
+            next: ptr::null(),
+            std_reference_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeH264PictureInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH264PictureInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_picture_info: *const video::StdVideoDecodeH264PictureInfo,
+    pub slice_count: u32,
+    pub slice_offsets: *const u32,
+}
+
+impl Default for VideoDecodeH264PictureInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H264_PICTURE_INFO_KHR,
+            next: ptr::null(),
+            std_picture_info: ptr::null(),
+            slice_count: u32::default(),
+            slice_offsets: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeH264ProfileInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH264ProfileInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_profile_idc: video::StdVideoH264ProfileIdc,
+    pub picture_layout: VideoDecodeH264PictureLayoutFlagsKHR,
+}
+
+impl Default for VideoDecodeH264ProfileInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H264_PROFILE_INFO_KHR,
+            next: ptr::null(),
+            std_profile_idc: video::StdVideoH264ProfileIdc::default(),
+            picture_layout: VideoDecodeH264PictureLayoutFlagsKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeH264SessionParametersAddInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH264SessionParametersAddInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_sps_count: u32,
+    pub std_sp_ss: *const video::StdVideoH264SequenceParameterSet,
+    pub std_pps_count: u32,
+    pub std_pp_ss: *const video::StdVideoH264PictureParameterSet,
+}
+
+impl Default for VideoDecodeH264SessionParametersAddInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_KHR,
+            next: ptr::null(),
+            std_sps_count: u32::default(),
+            std_sp_ss: ptr::null(),
+            std_pps_count: u32::default(),
+            std_pp_ss: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeH264SessionParametersCreateInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH264SessionParametersCreateInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub max_std_sps_count: u32,
+    pub max_std_pps_count: u32,
+    pub parameters_add_info: *const VideoDecodeH264SessionParametersAddInfoKHR,
+}
+
+impl Default for VideoDecodeH264SessionParametersCreateInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_KHR,
+            next: ptr::null(),
+            max_std_sps_count: u32::default(),
+            max_std_pps_count: u32::default(),
+            parameters_add_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeH265CapabilitiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH265CapabilitiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_level_idc: video::StdVideoH265LevelIdc,
+}
+
+impl Default for VideoDecodeH265CapabilitiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H265_CAPABILITIES_KHR,
+            next: ptr::null_mut(),
+            max_level_idc: video::StdVideoH265LevelIdc::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeH265DpbSlotInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH265DpbSlotInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_reference_info: *const video::StdVideoDecodeH265ReferenceInfo,
+}
+
+impl Default for VideoDecodeH265DpbSlotInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H265_DPB_SLOT_INFO_KHR,
+            next: ptr::null(),
+            std_reference_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeH265PictureInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH265PictureInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_picture_info: *const video::StdVideoDecodeH265PictureInfo,
+    pub slice_segment_count: u32,
+    pub slice_segment_offsets: *const u32,
+}
+
+impl Default for VideoDecodeH265PictureInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H265_PICTURE_INFO_KHR,
+            next: ptr::null(),
+            std_picture_info: ptr::null(),
+            slice_segment_count: u32::default(),
+            slice_segment_offsets: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeH265ProfileInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH265ProfileInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_profile_idc: video::StdVideoH265ProfileIdc,
+}
+
+impl Default for VideoDecodeH265ProfileInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H265_PROFILE_INFO_KHR,
+            next: ptr::null(),
+            std_profile_idc: video::StdVideoH265ProfileIdc::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeH265SessionParametersAddInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH265SessionParametersAddInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_vps_count: u32,
+    pub std_vp_ss: *const video::StdVideoH265VideoParameterSet,
+    pub std_sps_count: u32,
+    pub std_sp_ss: *const video::StdVideoH265SequenceParameterSet,
+    pub std_pps_count: u32,
+    pub std_pp_ss: *const video::StdVideoH265PictureParameterSet,
+}
+
+impl Default for VideoDecodeH265SessionParametersAddInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_KHR,
+            next: ptr::null(),
+            std_vps_count: u32::default(),
+            std_vp_ss: ptr::null(),
+            std_sps_count: u32::default(),
+            std_sp_ss: ptr::null(),
+            std_pps_count: u32::default(),
+            std_pp_ss: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeH265SessionParametersCreateInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH265SessionParametersCreateInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub max_std_vps_count: u32,
+    pub max_std_sps_count: u32,
+    pub max_std_pps_count: u32,
+    pub parameters_add_info: *const VideoDecodeH265SessionParametersAddInfoKHR,
+}
+
+impl Default for VideoDecodeH265SessionParametersCreateInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR,
+            next: ptr::null(),
+            max_std_vps_count: u32::default(),
+            max_std_sps_count: u32::default(),
+            max_std_pps_count: u32::default(),
+            parameters_add_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: VideoDecodeFlagsKHR,
+    pub src_buffer: Buffer,
+    pub src_buffer_offset: DeviceSize,
+    pub src_buffer_range: DeviceSize,
+    pub dst_picture_resource: VideoPictureResourceInfoKHR,
+    pub setup_reference_slot: *const VideoReferenceSlotInfoKHR,
+    pub reference_slot_count: u32,
+    pub reference_slots: *const VideoReferenceSlotInfoKHR,
+}
+
+impl Default for VideoDecodeInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_INFO_KHR,
+            next: ptr::null(),
+            flags: VideoDecodeFlagsKHR::default(),
+            src_buffer: Buffer::default(),
+            src_buffer_offset: DeviceSize::default(),
+            src_buffer_range: DeviceSize::default(),
+            dst_picture_resource: VideoPictureResourceInfoKHR::default(),
+            setup_reference_slot: ptr::null(),
+            reference_slot_count: u32::default(),
+            reference_slots: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoDecodeUsageInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeUsageInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub video_usage_hints: VideoDecodeUsageFlagsKHR,
+}
+
+impl Default for VideoDecodeUsageInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_USAGE_INFO_KHR,
+            next: ptr::null(),
+            video_usage_hints: VideoDecodeUsageFlagsKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeCapabilitiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeCapabilitiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub flags: VideoEncodeCapabilityFlagsKHR,
+    pub rate_control_modes: VideoEncodeRateControlModeFlagsKHR,
+    pub max_rate_control_layers: u32,
+    pub max_bitrate: u64,
+    pub max_quality_levels: u32,
+    pub encode_input_picture_granularity: Extent2D,
+    pub supported_encode_feedback_flags: VideoEncodeFeedbackFlagsKHR,
+}
+
+impl Default for VideoEncodeCapabilitiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_CAPABILITIES_KHR,
+            next: ptr::null_mut(),
+            flags: VideoEncodeCapabilityFlagsKHR::default(),
+            rate_control_modes: VideoEncodeRateControlModeFlagsKHR::default(),
+            max_rate_control_layers: u32::default(),
+            max_bitrate: u64::default(),
+            max_quality_levels: u32::default(),
+            encode_input_picture_granularity: Extent2D::default(),
+            supported_encode_feedback_flags: VideoEncodeFeedbackFlagsKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264CapabilitiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264CapabilitiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub flags: VideoEncodeH264CapabilityFlagsEXT,
+    pub max_level_idc: video::StdVideoH264LevelIdc,
+    pub max_slice_count: u32,
+    pub max_p_picture_l0_reference_count: u32,
+    pub max_b_picture_l0_reference_count: u32,
+    pub max_l1_reference_count: u32,
+    pub max_temporal_layer_count: u32,
+    pub expect_dyadic_temporal_layer_pattern: Bool32,
+    pub min_qp: i32,
+    pub max_qp: i32,
+    pub prefers_gop_remaining_frames: Bool32,
+    pub requires_gop_remaining_frames: Bool32,
+    pub std_syntax_flags: VideoEncodeH264StdFlagsEXT,
+}
+
+impl Default for VideoEncodeH264CapabilitiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_CAPABILITIES_EXT,
+            next: ptr::null_mut(),
+            flags: VideoEncodeH264CapabilityFlagsEXT::default(),
+            max_level_idc: video::StdVideoH264LevelIdc::default(),
+            max_slice_count: u32::default(),
+            max_p_picture_l0_reference_count: u32::default(),
+            max_b_picture_l0_reference_count: u32::default(),
+            max_l1_reference_count: u32::default(),
+            max_temporal_layer_count: u32::default(),
+            expect_dyadic_temporal_layer_pattern: Bool32::default(),
+            min_qp: i32::default(),
+            max_qp: i32::default(),
+            prefers_gop_remaining_frames: Bool32::default(),
+            requires_gop_remaining_frames: Bool32::default(),
+            std_syntax_flags: VideoEncodeH264StdFlagsEXT::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264DpbSlotInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264DpbSlotInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_reference_info: *const video::StdVideoEncodeH264ReferenceInfo,
+}
+
+impl Default for VideoEncodeH264DpbSlotInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT,
+            next: ptr::null(),
+            std_reference_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264FrameSizeEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264FrameSizeEXT {
+    pub frame_i_size: u32,
+    pub frame_p_size: u32,
+    pub frame_b_size: u32,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264GopRemainingFrameInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264GopRemainingFrameInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub use_gop_remaining_frames: Bool32,
+    pub gop_remaining_i: u32,
+    pub gop_remaining_p: u32,
+    pub gop_remaining_b: u32,
+}
+
+impl Default for VideoEncodeH264GopRemainingFrameInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_EXT,
+            next: ptr::null(),
+            use_gop_remaining_frames: Bool32::default(),
+            gop_remaining_i: u32::default(),
+            gop_remaining_p: u32::default(),
+            gop_remaining_b: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264NaluSliceInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264NaluSliceInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub constant_qp: i32,
+    pub std_slice_header: *const video::StdVideoEncodeH264SliceHeader,
+}
+
+impl Default for VideoEncodeH264NaluSliceInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_NALU_SLICE_INFO_EXT,
+            next: ptr::null(),
+            constant_qp: i32::default(),
+            std_slice_header: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264PictureInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264PictureInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub nalu_slice_entry_count: u32,
+    pub nalu_slice_entries: *const VideoEncodeH264NaluSliceInfoEXT,
+    pub std_picture_info: *const video::StdVideoEncodeH264PictureInfo,
+    pub generate_prefix_nalu: Bool32,
+}
+
+impl Default for VideoEncodeH264PictureInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_PICTURE_INFO_EXT,
+            next: ptr::null(),
+            nalu_slice_entry_count: u32::default(),
+            nalu_slice_entries: ptr::null(),
+            std_picture_info: ptr::null(),
+            generate_prefix_nalu: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264ProfileInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264ProfileInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_profile_idc: video::StdVideoH264ProfileIdc,
+}
+
+impl Default for VideoEncodeH264ProfileInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_PROFILE_INFO_EXT,
+            next: ptr::null(),
+            std_profile_idc: video::StdVideoH264ProfileIdc::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264QpEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264QpEXT {
+    pub qp_i: i32,
+    pub qp_p: i32,
+    pub qp_b: i32,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264QualityLevelPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264QualityLevelPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub preferred_rate_control_flags: VideoEncodeH264RateControlFlagsEXT,
+    pub preferred_gop_frame_count: u32,
+    pub preferred_idr_period: u32,
+    pub preferred_consecutive_b_frame_count: u32,
+    pub preferred_temporal_layer_count: u32,
+    pub preferred_constant_qp: VideoEncodeH264QpEXT,
+    pub preferred_max_l0_reference_count: u32,
+    pub preferred_max_l1_reference_count: u32,
+    pub preferred_std_entropy_coding_mode_flag: Bool32,
+}
+
+impl Default for VideoEncodeH264QualityLevelPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_QUALITY_LEVEL_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            preferred_rate_control_flags: VideoEncodeH264RateControlFlagsEXT::default(),
+            preferred_gop_frame_count: u32::default(),
+            preferred_idr_period: u32::default(),
+            preferred_consecutive_b_frame_count: u32::default(),
+            preferred_temporal_layer_count: u32::default(),
+            preferred_constant_qp: VideoEncodeH264QpEXT::default(),
+            preferred_max_l0_reference_count: u32::default(),
+            preferred_max_l1_reference_count: u32::default(),
+            preferred_std_entropy_coding_mode_flag: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264RateControlInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264RateControlInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: VideoEncodeH264RateControlFlagsEXT,
+    pub gop_frame_count: u32,
+    pub idr_period: u32,
+    pub consecutive_b_frame_count: u32,
+    pub temporal_layer_count: u32,
+}
+
+impl Default for VideoEncodeH264RateControlInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT,
+            next: ptr::null(),
+            flags: VideoEncodeH264RateControlFlagsEXT::default(),
+            gop_frame_count: u32::default(),
+            idr_period: u32::default(),
+            consecutive_b_frame_count: u32::default(),
+            temporal_layer_count: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264RateControlLayerInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264RateControlLayerInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub use_min_qp: Bool32,
+    pub min_qp: VideoEncodeH264QpEXT,
+    pub use_max_qp: Bool32,
+    pub max_qp: VideoEncodeH264QpEXT,
+    pub use_max_frame_size: Bool32,
+    pub max_frame_size: VideoEncodeH264FrameSizeEXT,
+}
+
+impl Default for VideoEncodeH264RateControlLayerInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT,
+            next: ptr::null(),
+            use_min_qp: Bool32::default(),
+            min_qp: VideoEncodeH264QpEXT::default(),
+            use_max_qp: Bool32::default(),
+            max_qp: VideoEncodeH264QpEXT::default(),
+            use_max_frame_size: Bool32::default(),
+            max_frame_size: VideoEncodeH264FrameSizeEXT::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264SessionCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264SessionCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub use_max_level_idc: Bool32,
+    pub max_level_idc: video::StdVideoH264LevelIdc,
+}
+
+impl Default for VideoEncodeH264SessionCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_SESSION_CREATE_INFO_EXT,
+            next: ptr::null(),
+            use_max_level_idc: Bool32::default(),
+            max_level_idc: video::StdVideoH264LevelIdc::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264SessionParametersAddInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264SessionParametersAddInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_sps_count: u32,
+    pub std_sp_ss: *const video::StdVideoH264SequenceParameterSet,
+    pub std_pps_count: u32,
+    pub std_pp_ss: *const video::StdVideoH264PictureParameterSet,
+}
+
+impl Default for VideoEncodeH264SessionParametersAddInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT,
+            next: ptr::null(),
+            std_sps_count: u32::default(),
+            std_sp_ss: ptr::null(),
+            std_pps_count: u32::default(),
+            std_pp_ss: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264SessionParametersCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264SessionParametersCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub max_std_sps_count: u32,
+    pub max_std_pps_count: u32,
+    pub parameters_add_info: *const VideoEncodeH264SessionParametersAddInfoEXT,
+}
+
+impl Default for VideoEncodeH264SessionParametersCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT,
+            next: ptr::null(),
+            max_std_sps_count: u32::default(),
+            max_std_pps_count: u32::default(),
+            parameters_add_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264SessionParametersFeedbackInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264SessionParametersFeedbackInfoEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub has_std_sps_overrides: Bool32,
+    pub has_std_pps_overrides: Bool32,
+}
+
+impl Default for VideoEncodeH264SessionParametersFeedbackInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_EXT,
+            next: ptr::null_mut(),
+            has_std_sps_overrides: Bool32::default(),
+            has_std_pps_overrides: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264SessionParametersGetInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH264SessionParametersGetInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub write_std_sps: Bool32,
+    pub write_std_pps: Bool32,
+    pub std_sps_id: u32,
+    pub std_pps_id: u32,
+}
+
+impl Default for VideoEncodeH264SessionParametersGetInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H264_SESSION_PARAMETERS_GET_INFO_EXT,
+            next: ptr::null(),
+            write_std_sps: Bool32::default(),
+            write_std_pps: Bool32::default(),
+            std_sps_id: u32::default(),
+            std_pps_id: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265CapabilitiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265CapabilitiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub flags: VideoEncodeH265CapabilityFlagsEXT,
+    pub max_level_idc: video::StdVideoH265LevelIdc,
+    pub max_slice_segment_count: u32,
+    pub max_tiles: Extent2D,
+    pub ctb_sizes: VideoEncodeH265CtbSizeFlagsEXT,
+    pub transform_block_sizes: VideoEncodeH265TransformBlockSizeFlagsEXT,
+    pub max_p_picture_l0_reference_count: u32,
+    pub max_b_picture_l0_reference_count: u32,
+    pub max_l1_reference_count: u32,
+    pub max_sub_layer_count: u32,
+    pub expect_dyadic_temporal_sub_layer_pattern: Bool32,
+    pub min_qp: i32,
+    pub max_qp: i32,
+    pub prefers_gop_remaining_frames: Bool32,
+    pub requires_gop_remaining_frames: Bool32,
+    pub std_syntax_flags: VideoEncodeH265StdFlagsEXT,
+}
+
+impl Default for VideoEncodeH265CapabilitiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_CAPABILITIES_EXT,
+            next: ptr::null_mut(),
+            flags: VideoEncodeH265CapabilityFlagsEXT::default(),
+            max_level_idc: video::StdVideoH265LevelIdc::default(),
+            max_slice_segment_count: u32::default(),
+            max_tiles: Extent2D::default(),
+            ctb_sizes: VideoEncodeH265CtbSizeFlagsEXT::default(),
+            transform_block_sizes: VideoEncodeH265TransformBlockSizeFlagsEXT::default(),
+            max_p_picture_l0_reference_count: u32::default(),
+            max_b_picture_l0_reference_count: u32::default(),
+            max_l1_reference_count: u32::default(),
+            max_sub_layer_count: u32::default(),
+            expect_dyadic_temporal_sub_layer_pattern: Bool32::default(),
+            min_qp: i32::default(),
+            max_qp: i32::default(),
+            prefers_gop_remaining_frames: Bool32::default(),
+            requires_gop_remaining_frames: Bool32::default(),
+            std_syntax_flags: VideoEncodeH265StdFlagsEXT::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265DpbSlotInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265DpbSlotInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_reference_info: *const video::StdVideoEncodeH265ReferenceInfo,
+}
+
+impl Default for VideoEncodeH265DpbSlotInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT,
+            next: ptr::null(),
+            std_reference_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265FrameSizeEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265FrameSizeEXT {
+    pub frame_i_size: u32,
+    pub frame_p_size: u32,
+    pub frame_b_size: u32,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265GopRemainingFrameInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265GopRemainingFrameInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub use_gop_remaining_frames: Bool32,
+    pub gop_remaining_i: u32,
+    pub gop_remaining_p: u32,
+    pub gop_remaining_b: u32,
+}
+
+impl Default for VideoEncodeH265GopRemainingFrameInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_GOP_REMAINING_FRAME_INFO_EXT,
+            next: ptr::null(),
+            use_gop_remaining_frames: Bool32::default(),
+            gop_remaining_i: u32::default(),
+            gop_remaining_p: u32::default(),
+            gop_remaining_b: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265NaluSliceSegmentInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265NaluSliceSegmentInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub constant_qp: i32,
+    pub std_slice_segment_header: *const video::StdVideoEncodeH265SliceSegmentHeader,
+}
+
+impl Default for VideoEncodeH265NaluSliceSegmentInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_EXT,
+            next: ptr::null(),
+            constant_qp: i32::default(),
+            std_slice_segment_header: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265PictureInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265PictureInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub nalu_slice_segment_entry_count: u32,
+    pub nalu_slice_segment_entries: *const VideoEncodeH265NaluSliceSegmentInfoEXT,
+    pub std_picture_info: *const video::StdVideoEncodeH265PictureInfo,
+}
+
+impl Default for VideoEncodeH265PictureInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_PICTURE_INFO_EXT,
+            next: ptr::null(),
+            nalu_slice_segment_entry_count: u32::default(),
+            nalu_slice_segment_entries: ptr::null(),
+            std_picture_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265ProfileInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265ProfileInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_profile_idc: video::StdVideoH265ProfileIdc,
+}
+
+impl Default for VideoEncodeH265ProfileInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_PROFILE_INFO_EXT,
+            next: ptr::null(),
+            std_profile_idc: video::StdVideoH265ProfileIdc::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265QpEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265QpEXT {
+    pub qp_i: i32,
+    pub qp_p: i32,
+    pub qp_b: i32,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265QualityLevelPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265QualityLevelPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub preferred_rate_control_flags: VideoEncodeH265RateControlFlagsEXT,
+    pub preferred_gop_frame_count: u32,
+    pub preferred_idr_period: u32,
+    pub preferred_consecutive_b_frame_count: u32,
+    pub preferred_sub_layer_count: u32,
+    pub preferred_constant_qp: VideoEncodeH265QpEXT,
+    pub preferred_max_l0_reference_count: u32,
+    pub preferred_max_l1_reference_count: u32,
+}
+
+impl Default for VideoEncodeH265QualityLevelPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            preferred_rate_control_flags: VideoEncodeH265RateControlFlagsEXT::default(),
+            preferred_gop_frame_count: u32::default(),
+            preferred_idr_period: u32::default(),
+            preferred_consecutive_b_frame_count: u32::default(),
+            preferred_sub_layer_count: u32::default(),
+            preferred_constant_qp: VideoEncodeH265QpEXT::default(),
+            preferred_max_l0_reference_count: u32::default(),
+            preferred_max_l1_reference_count: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265RateControlInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265RateControlInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: VideoEncodeH265RateControlFlagsEXT,
+    pub gop_frame_count: u32,
+    pub idr_period: u32,
+    pub consecutive_b_frame_count: u32,
+    pub sub_layer_count: u32,
+}
+
+impl Default for VideoEncodeH265RateControlInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT,
+            next: ptr::null(),
+            flags: VideoEncodeH265RateControlFlagsEXT::default(),
+            gop_frame_count: u32::default(),
+            idr_period: u32::default(),
+            consecutive_b_frame_count: u32::default(),
+            sub_layer_count: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265RateControlLayerInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265RateControlLayerInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub use_min_qp: Bool32,
+    pub min_qp: VideoEncodeH265QpEXT,
+    pub use_max_qp: Bool32,
+    pub max_qp: VideoEncodeH265QpEXT,
+    pub use_max_frame_size: Bool32,
+    pub max_frame_size: VideoEncodeH265FrameSizeEXT,
+}
+
+impl Default for VideoEncodeH265RateControlLayerInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT,
+            next: ptr::null(),
+            use_min_qp: Bool32::default(),
+            min_qp: VideoEncodeH265QpEXT::default(),
+            use_max_qp: Bool32::default(),
+            max_qp: VideoEncodeH265QpEXT::default(),
+            use_max_frame_size: Bool32::default(),
+            max_frame_size: VideoEncodeH265FrameSizeEXT::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265SessionCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265SessionCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub use_max_level_idc: Bool32,
+    pub max_level_idc: video::StdVideoH265LevelIdc,
+}
+
+impl Default for VideoEncodeH265SessionCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_SESSION_CREATE_INFO_EXT,
+            next: ptr::null(),
+            use_max_level_idc: Bool32::default(),
+            max_level_idc: video::StdVideoH265LevelIdc::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265SessionParametersAddInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265SessionParametersAddInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_vps_count: u32,
+    pub std_vp_ss: *const video::StdVideoH265VideoParameterSet,
+    pub std_sps_count: u32,
+    pub std_sp_ss: *const video::StdVideoH265SequenceParameterSet,
+    pub std_pps_count: u32,
+    pub std_pp_ss: *const video::StdVideoH265PictureParameterSet,
+}
+
+impl Default for VideoEncodeH265SessionParametersAddInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT,
+            next: ptr::null(),
+            std_vps_count: u32::default(),
+            std_vp_ss: ptr::null(),
+            std_sps_count: u32::default(),
+            std_sp_ss: ptr::null(),
+            std_pps_count: u32::default(),
+            std_pp_ss: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265SessionParametersCreateInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265SessionParametersCreateInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub max_std_vps_count: u32,
+    pub max_std_sps_count: u32,
+    pub max_std_pps_count: u32,
+    pub parameters_add_info: *const VideoEncodeH265SessionParametersAddInfoEXT,
+}
+
+impl Default for VideoEncodeH265SessionParametersCreateInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT,
+            next: ptr::null(),
+            max_std_vps_count: u32::default(),
+            max_std_sps_count: u32::default(),
+            max_std_pps_count: u32::default(),
+            parameters_add_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265SessionParametersFeedbackInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265SessionParametersFeedbackInfoEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub has_std_vps_overrides: Bool32,
+    pub has_std_sps_overrides: Bool32,
+    pub has_std_pps_overrides: Bool32,
+}
+
+impl Default for VideoEncodeH265SessionParametersFeedbackInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_SESSION_PARAMETERS_FEEDBACK_INFO_EXT,
+            next: ptr::null_mut(),
+            has_std_vps_overrides: Bool32::default(),
+            has_std_sps_overrides: Bool32::default(),
+            has_std_pps_overrides: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265SessionParametersGetInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeH265SessionParametersGetInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub write_std_vps: Bool32,
+    pub write_std_sps: Bool32,
+    pub write_std_pps: Bool32,
+    pub std_vps_id: u32,
+    pub std_sps_id: u32,
+    pub std_pps_id: u32,
+}
+
+impl Default for VideoEncodeH265SessionParametersGetInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_EXT,
+            next: ptr::null(),
+            write_std_vps: Bool32::default(),
+            write_std_sps: Bool32::default(),
+            write_std_pps: Bool32::default(),
+            std_vps_id: u32::default(),
+            std_sps_id: u32::default(),
+            std_pps_id: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: VideoEncodeFlagsKHR,
+    pub dst_buffer: Buffer,
+    pub dst_buffer_offset: DeviceSize,
+    pub dst_buffer_range: DeviceSize,
+    pub src_picture_resource: VideoPictureResourceInfoKHR,
+    pub setup_reference_slot: *const VideoReferenceSlotInfoKHR,
+    pub reference_slot_count: u32,
+    pub reference_slots: *const VideoReferenceSlotInfoKHR,
+    pub preceding_externally_encoded_bytes: u32,
+}
+
+impl Default for VideoEncodeInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_INFO_KHR,
+            next: ptr::null(),
+            flags: VideoEncodeFlagsKHR::default(),
+            dst_buffer: Buffer::default(),
+            dst_buffer_offset: DeviceSize::default(),
+            dst_buffer_range: DeviceSize::default(),
+            src_picture_resource: VideoPictureResourceInfoKHR::default(),
+            setup_reference_slot: ptr::null(),
+            reference_slot_count: u32::default(),
+            reference_slots: ptr::null(),
+            preceding_externally_encoded_bytes: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeQualityLevelInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeQualityLevelInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub quality_level: u32,
+}
+
+impl Default for VideoEncodeQualityLevelInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR,
+            next: ptr::null(),
+            quality_level: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeQualityLevelPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeQualityLevelPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub preferred_rate_control_mode: VideoEncodeRateControlModeFlagsKHR,
+    pub preferred_rate_control_layer_count: u32,
+}
+
+impl Default for VideoEncodeQualityLevelPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_QUALITY_LEVEL_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            preferred_rate_control_mode: VideoEncodeRateControlModeFlagsKHR::default(),
+            preferred_rate_control_layer_count: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeRateControlInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeRateControlInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: VideoEncodeRateControlFlagsKHR,
+    pub rate_control_mode: VideoEncodeRateControlModeFlagsKHR,
+    pub layer_count: u32,
+    pub layers: *const VideoEncodeRateControlLayerInfoKHR,
+    pub virtual_buffer_size_in_ms: u32,
+    pub initial_virtual_buffer_size_in_ms: u32,
+}
+
+impl Default for VideoEncodeRateControlInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_RATE_CONTROL_INFO_KHR,
+            next: ptr::null(),
+            flags: VideoEncodeRateControlFlagsKHR::default(),
+            rate_control_mode: VideoEncodeRateControlModeFlagsKHR::default(),
+            layer_count: u32::default(),
+            layers: ptr::null(),
+            virtual_buffer_size_in_ms: u32::default(),
+            initial_virtual_buffer_size_in_ms: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeRateControlLayerInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeRateControlLayerInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub average_bitrate: u64,
+    pub max_bitrate: u64,
+    pub frame_rate_numerator: u32,
+    pub frame_rate_denominator: u32,
+}
+
+impl Default for VideoEncodeRateControlLayerInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR,
+            next: ptr::null(),
+            average_bitrate: u64::default(),
+            max_bitrate: u64::default(),
+            frame_rate_numerator: u32::default(),
+            frame_rate_denominator: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeSessionParametersFeedbackInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeSessionParametersFeedbackInfoKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub has_overrides: Bool32,
+}
+
+impl Default for VideoEncodeSessionParametersFeedbackInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR,
+            next: ptr::null_mut(),
+            has_overrides: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeSessionParametersGetInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeSessionParametersGetInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub video_session_parameters: VideoSessionParametersKHR,
+}
+
+impl Default for VideoEncodeSessionParametersGetInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_SESSION_PARAMETERS_GET_INFO_KHR,
+            next: ptr::null(),
+            video_session_parameters: VideoSessionParametersKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeUsageInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeUsageInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub video_usage_hints: VideoEncodeUsageFlagsKHR,
+    pub video_content_hints: VideoEncodeContentFlagsKHR,
+    pub tuning_mode: VideoEncodeTuningModeKHR,
+}
+
+impl Default for VideoEncodeUsageInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_USAGE_INFO_KHR,
+            next: ptr::null(),
+            video_usage_hints: VideoEncodeUsageFlagsKHR::default(),
+            video_content_hints: VideoEncodeContentFlagsKHR::default(),
+            tuning_mode: VideoEncodeTuningModeKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEndCodingInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEndCodingInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: VideoEndCodingFlagsKHR,
+}
+
+impl Default for VideoEndCodingInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_END_CODING_INFO_KHR,
+            next: ptr::null(),
+            flags: VideoEndCodingFlagsKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoFormatPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoFormatPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub format: Format,
+    pub component_mapping: ComponentMapping,
+    pub image_create_flags: ImageCreateFlags,
+    pub image_type: ImageType,
+    pub image_tiling: ImageTiling,
+    pub image_usage_flags: ImageUsageFlags,
+}
+
+impl Default for VideoFormatPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_FORMAT_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            format: Format::default(),
+            component_mapping: ComponentMapping::default(),
+            image_create_flags: ImageCreateFlags::default(),
+            image_type: ImageType::default(),
+            image_tiling: ImageTiling::default(),
+            image_usage_flags: ImageUsageFlags::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoPictureResourceInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoPictureResourceInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub coded_offset: Offset2D,
+    pub coded_extent: Extent2D,
+    pub base_array_layer: u32,
+    pub image_view_binding: ImageView,
+}
+
+impl Default for VideoPictureResourceInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_PICTURE_RESOURCE_INFO_KHR,
+            next: ptr::null(),
+            coded_offset: Offset2D::default(),
+            coded_extent: Extent2D::default(),
+            base_array_layer: u32::default(),
+            image_view_binding: ImageView::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoProfileInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoProfileInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub video_codec_operation: VideoCodecOperationFlagsKHR,
+    pub chroma_subsampling: VideoChromaSubsamplingFlagsKHR,
+    pub luma_bit_depth: VideoComponentBitDepthFlagsKHR,
+    pub chroma_bit_depth: VideoComponentBitDepthFlagsKHR,
+}
+
+impl Default for VideoProfileInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_PROFILE_INFO_KHR,
+            next: ptr::null(),
+            video_codec_operation: VideoCodecOperationFlagsKHR::default(),
+            chroma_subsampling: VideoChromaSubsamplingFlagsKHR::default(),
+            luma_bit_depth: VideoComponentBitDepthFlagsKHR::default(),
+            chroma_bit_depth: VideoComponentBitDepthFlagsKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoProfileListInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoProfileListInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub profile_count: u32,
+    pub profiles: *const VideoProfileInfoKHR,
+}
+
+impl Default for VideoProfileListInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_PROFILE_LIST_INFO_KHR,
+            next: ptr::null(),
+            profile_count: u32::default(),
+            profiles: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoReferenceSlotInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoReferenceSlotInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub slot_index: i32,
+    pub picture_resource: *const VideoPictureResourceInfoKHR,
+}
+
+impl Default for VideoReferenceSlotInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_REFERENCE_SLOT_INFO_KHR,
+            next: ptr::null(),
+            slot_index: i32::default(),
+            picture_resource: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoSessionCreateInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoSessionCreateInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub queue_family_index: u32,
+    pub flags: VideoSessionCreateFlagsKHR,
+    pub video_profile: *const VideoProfileInfoKHR,
+    pub picture_format: Format,
+    pub max_coded_extent: Extent2D,
+    pub reference_picture_format: Format,
+    pub max_dpb_slots: u32,
+    pub max_active_reference_pictures: u32,
+    pub std_header_version: *const ExtensionProperties,
+}
+
+impl Default for VideoSessionCreateInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_SESSION_CREATE_INFO_KHR,
+            next: ptr::null(),
+            queue_family_index: u32::default(),
+            flags: VideoSessionCreateFlagsKHR::default(),
+            video_profile: ptr::null(),
+            picture_format: Format::default(),
+            max_coded_extent: Extent2D::default(),
+            reference_picture_format: Format::default(),
+            max_dpb_slots: u32::default(),
+            max_active_reference_pictures: u32::default(),
+            std_header_version: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoSessionMemoryRequirementsKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoSessionMemoryRequirementsKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub memory_bind_index: u32,
+    pub memory_requirements: MemoryRequirements,
+}
+
+impl Default for VideoSessionMemoryRequirementsKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_SESSION_MEMORY_REQUIREMENTS_KHR,
+            next: ptr::null_mut(),
+            memory_bind_index: u32::default(),
+            memory_requirements: MemoryRequirements::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoSessionParametersCreateInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoSessionParametersCreateInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: VideoSessionParametersCreateFlagsKHR,
+    pub video_session_parameters_template: VideoSessionParametersKHR,
+    pub video_session: VideoSessionKHR,
+}
+
+impl Default for VideoSessionParametersCreateInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR,
+            next: ptr::null(),
+            flags: VideoSessionParametersCreateFlagsKHR::default(),
+            video_session_parameters_template: VideoSessionParametersKHR::default(),
+            video_session: VideoSessionKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoSessionParametersUpdateInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoSessionParametersUpdateInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub update_sequence_count: u32,
+}
+
+impl Default for VideoSessionParametersUpdateInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR,
+            next: ptr::null(),
+            update_sequence_count: u32::default(),
         }
     }
 }

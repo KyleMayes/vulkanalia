@@ -6,6 +6,11 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReference
 
+/** Executes the `bindgen` command. */
+fun bindgen(vararg args: String) {
+    execute("bindgen", arrayOf(*args))
+}
+
 /** Executes the `git` command and prints the output. */
 fun git(vararg args: String) {
     println("> git ${args.joinToString(" ")}")

@@ -6,13 +6,16 @@ import org.kohsuke.github.GHCommit
 import java.nio.file.Files
 
 private val registryPath = RepositoryPath("KhronosGroup/Vulkan-Docs", "main", "xml/vk.xml")
+private val videoPath = RepositoryPath("KhronosGroup/Vulkan-Headers", "main", "include/vk_video")
 
 /** The generator inputs pulled from GitHub repositories. */
 data class RepositoryInputs(
     /** The Vulkan API registry. */
     val registry: RepositoryInput<String>,
+    /** The Vulkan video headers. */
+    val video: RepositoryInput<Map<String, String>>,
 ) {
-    val list = listOf(registry)
+    val list = listOf(registry, video)
 
     /** Updates the locally tracked commits to match the latest commits. */
     fun updateLocal(context: GeneratorContext) {
@@ -25,6 +28,7 @@ fun getRepositoryInputs(context: GeneratorContext): RepositoryInputs {
     val locals = getLocalCommitHashes(context)
     return RepositoryInputs(
         registry = getRepositoryInput(context, locals, registryPath, ::getFile),
+        video = getRepositoryInput(context, locals, videoPath, ::getDirectory),
     )
 }
 
