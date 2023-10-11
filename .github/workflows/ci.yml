@@ -100,15 +100,39 @@ jobs:
   check-bindings:
     name: Check - Bindings
     runs-on: ubuntu-latest
+    env:
+      RUST_LOG: info
+      RUST_VERSION: 1.72.0
+      BINDGEN_VERSION: 0.68.1
     steps:
       # Checkout
       - name: Checkout Repository
         uses: actions/checkout@v2
       # Dependencies
+      - name: Install LLVM and Clang
+        uses: KyleMayes/install-llvm-action@v1
+        with:
+          version: 16
       - name: Install Java
         uses: actions/setup-java@v1
         with:
           java-version: 14
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+      - name: Cache bindgen
+        id: cache-bindgen
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo/bin/bindgen
+          key: ${{ runner.os }}-${{ env.RUST_VERSION }}-${{ env.BINDGEN_VERSION }}
+      - name: Install bindgen
+        uses: actions-rs/cargo@v1
+        if: steps.cache-bindgen.outputs.cache-hit != 'true'
+        with:
+          command: install
+          args: bindgen-cli --version ${{ env.BINDGEN_VERSION }}
       # Check
       - name: Check Bindings
         working-directory: ./generator

@@ -5,6 +5,7 @@
 - Make all extendable output structs parameters in command wrappers (see [#213](https://github.com/KyleMayes/vulkanalia/issues/213) for details)
 
 ### Added
+- Added support for Vulkan video extensions
 - Added `vulkanalia::prelude::v1_3` module (a prelude module for Vulkan 1.3+)
 
 ### Bindings Updates

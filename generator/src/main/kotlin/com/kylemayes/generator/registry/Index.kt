@@ -21,7 +21,7 @@ import com.kylemayes.generator.support.toPascalCase
  * `%VERSION%` which should be replaced with the crate version in use.
  */
 fun Registry.indexEntities(): String {
-    generateRustFiles(this)
+    generateRustFiles(this, emptyMap())
     val entities = manualUrls.toMutableList()
 
     entities.addEntity("vk::make_version", "/vk/fn.make_version.html")

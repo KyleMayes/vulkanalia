@@ -72,12 +72,16 @@ class Check : CliktCommand(help = "Checks generated Vulkan bindings") {
 
         // Parse
 
-        val xml = inputs.registry.local.lazy.value
+        val xml = log.time("Fetch Registry") { inputs.registry.local.lazy.value }
         val registry = log.time("Parse Registry") { parseRegistry(xml) }
+
+        // Headers (video)
+
+        val video = log.time("Fetch Video Headers") { inputs.video.local.lazy.value }
 
         // Generate
 
-        val files = log.time("Generate Files") { generateRustFiles(registry) }
+        val files = log.time("Generate Files") { generateRustFiles(registry, video) }
 
         // Check
 
@@ -105,7 +109,7 @@ class Index : CliktCommand(help = "Generates an index for generated Vulkan bindi
 
         // Parse
 
-        val xml = inputs.registry.local.lazy.value
+        val xml = log.time("Fetch Registry") { inputs.registry.local.lazy.value }
         val registry = log.time("Parse Registry") { parseRegistry(xml) }
 
         // Index
@@ -130,7 +134,6 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
     override fun run() {
         val inputs = getRepositoryInputs(context)
-        inputs.updateLocal(context)
 
         if (!force && !inputs.list.any { it.stale }) {
             log.info { "Nothing to update." }
@@ -140,12 +143,17 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
         // Parse
 
         val xmlVersion = if (skipUpgrade) { inputs.registry.local } else { inputs.registry.latest }
-        val xml = xmlVersion.lazy.value
+        val xml = log.time("Fetch Registry") { xmlVersion.lazy.value }
         val registry = log.time("Parse Registry") { parseRegistry(xml) }
+
+        // Headers (video)
+
+        val videoVersion = if (skipUpgrade) { inputs.video.local } else { inputs.video.latest }
+        val video = log.time("Fetch Video Headers") { videoVersion.lazy.value }
 
         // Generate
 
-        val files = log.time("Generate Files") { generateRustFiles(registry) }
+        val files = log.time("Generate Files") { generateRustFiles(registry, video) }
 
         // Check
 
