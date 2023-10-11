@@ -21,7 +21,7 @@ jobs:
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.51.0
+          toolchain: 1.64.0
           components: clippy, rustfmt
       # Test
       - name: Cargo Test
@@ -52,7 +52,7 @@ jobs:
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.51.0
+          toolchain: 1.64.0
           components: clippy, rustfmt
       # Format
       - name: Cargo Format
@@ -72,7 +72,7 @@ jobs:
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.51.0
+          toolchain: 1.64.0
           components: clippy, rustfmt
       # Clippy
       - name: Cargo Clippy

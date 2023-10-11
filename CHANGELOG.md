@@ -1,6 +1,7 @@
 ## [0.23.0] - UNRELEASED
 
 ### Changed
+- Bumped MSRV to 1.64
 - Added `no_std` compability for `vulkanalia` and `vulkanalia-sys` crates
 - Make all extendable output structs parameters in command wrappers (see [#213](https://github.com/KyleMayes/vulkanalia/issues/213) for details)
 
@@ -222,7 +223,7 @@
 - Fixed composite bitflag values (e.g., `CullModeFlags::FRONT_AND_BACK`)
 
 ### Changed
-- Bumped MSRV to 1.51
+- Bumped MSRV to 1.64
 - Added `Send` and `Sync` requirement to `Loader` error type
 - Changed type of stored layer names to `vk::ExtensionName` instead of `CString`
 - Added constants, constructor, and additional conversions to `Version`
