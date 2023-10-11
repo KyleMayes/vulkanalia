@@ -48,6 +48,12 @@ pub mod prelude {
         pub use crate::prelude::v1_1::*;
         pub use crate::vk::{DeviceV1_2, EntryV1_2, InstanceV1_2};
     }
+
+    /// Vulkan 1.3 prelude.
+    pub mod v1_3 {
+        pub use crate::prelude::v1_2::*;
+        pub use crate::vk::{DeviceV1_3, EntryV1_3, InstanceV1_3};
+    }
 }
 
 /// The result of a executing a fallible Vulkan command.
