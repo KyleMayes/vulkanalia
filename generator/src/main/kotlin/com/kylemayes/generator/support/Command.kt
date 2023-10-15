@@ -62,7 +62,7 @@ private fun execute(command: String, args: Array<String>, input: String? = null)
         process.waitFor(1, TimeUnit.SECONDS)
         process.destroyForcibly()
         val executed = "$command ${args.joinToString(" ")}".trim()
-        val message = "Failed to execute command ('$executed')."
+        val message = "Failed to execute command ('$executed'):\n$outputValue"
         throw RuntimeException(message, errorValue ?: RuntimeException("Timed out."))
     }
 
