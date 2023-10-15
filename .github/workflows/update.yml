@@ -4,7 +4,15 @@ on:
   schedule:
     - cron: "0 21 * * *"
   workflow_dispatch:
-    inputs: {}
+    inputs:
+      error_debug:
+        type: boolean
+        required: false
+        default: false
+      force_debug:
+        type: boolean
+        required: false
+        default: false
 
 jobs:
 
@@ -54,3 +62,7 @@ jobs:
             --token=${{ secrets.PERSONAL_ACCESS_TOKEN }} \
             update \
             --repo=${{ github.repository }}"
+      # Debug
+      - name: Debug
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ (failure() && inputs.error_debug) || inputs.force_debug }}

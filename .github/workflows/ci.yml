@@ -7,6 +7,16 @@ on:
   pull_request:
     branches:
       - master
+  workflow_dispatch:
+    inputs:
+      error_debug:
+        type: boolean
+        required: false
+        default: false
+      force_debug:
+        type: boolean
+        required: false
+        default: false
 
 jobs:
 
@@ -40,6 +50,10 @@ jobs:
         with:
           command: build
           args: --manifest-path vulkanalia/Cargo.toml --no-default-features
+      # Debug
+      - name: Debug
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ (failure() && inputs.error_debug) || inputs.force_debug }}
 
   format-vulkanalia:
     name: Format - Vulkanalia
@@ -137,3 +151,7 @@ jobs:
       - name: Check Bindings
         working-directory: ./generator
         run: ./gradlew run --args="--directory=.. check"
+      # Debug
+      - name: Debug
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ (failure() && inputs.error_debug) || inputs.force_debug }}
