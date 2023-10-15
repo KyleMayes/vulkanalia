@@ -50,7 +50,7 @@ fun generateRustFiles(registry: Registry, video: Map<String, String>) = listOf(
     generateRustFile("vulkanalia-sys", "structs.rs", registry.generateStructs()),
     generateRustFile("vulkanalia-sys", "typedefs.rs", registry.generateTypedefs()),
     generateRustFile("vulkanalia-sys", "unions.rs", registry.generateUnions()),
-    generateRustFile("vulkanalia-sys", "video.rs", generateHeaders(video, videoOptions)),
+    generateRustFile("vulkanalia-sys", "video.rs", generateHeaders("video", video, videoOptions)),
     generateRustFile("vulkanalia", "vk/builders.rs", registry.generateBuilders()),
     generateRustFile("vulkanalia", "vk/chains.rs", registry.generateChains()),
     generateRustFile("vulkanalia", "vk/commands.rs", registry.generateCommandStructs()),
