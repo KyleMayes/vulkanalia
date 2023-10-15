@@ -2,9 +2,12 @@
 
 package com.kylemayes.generator.support
 
+import mu.KotlinLogging
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReference
+
+private val log = KotlinLogging.logger { /* */ }
 
 /** Executes the `bindgen` command. */
 fun bindgen(vararg args: String) {
@@ -24,7 +27,8 @@ fun rustfmt(rust: String) = execute("rustfmt", emptyArray(), rust)
 private fun execute(command: String, args: Array<String>, input: String? = null): String {
     val process = ProcessBuilder(command, *args).start()
 
-    val output = AtomicReference<String?>(null)
+    val stdout = AtomicReference<String?>(null)
+    val stderr = AtomicReference<String?>(null)
     val error = AtomicReference<Throwable?>(null)
     val latch = CountDownLatch(1)
 
@@ -33,14 +37,19 @@ private fun execute(command: String, args: Array<String>, input: String? = null)
             Thread.currentThread().name = "$command-thread"
 
             if (input != null) {
-                process.outputStream.write(input.toByteArray())
+                log.slow("Writing '$command' stdin", 1000) { process.outputStream.write(input.toByteArray()) }
                 process.outputStream.close()
             }
 
-            output.set(String(process.inputStream.readAllBytes()))
+            log.slow("Waiting for '$command'", 5000) { process.waitFor() }
+
+            val stdoutBytes = log.slow("Reading '$command' stdout", 1000) { process.inputStream.readBytes() }
+            stdout.set(String(stdoutBytes))
             process.inputStream.close()
 
-            process.waitFor()
+            val stderrBytes = log.slow("Reading '$command' stderr", 1000) { process.errorStream.readBytes() }
+            stderr.set(String(stderrBytes))
+            process.errorStream.close()
 
             if (process.exitValue() != 0) {
                 error("Non-zero exit code (${process.exitValue()}).")
@@ -53,18 +62,19 @@ private fun execute(command: String, args: Array<String>, input: String? = null)
     }
 
     thread.start()
-    latch.await(5, TimeUnit.SECONDS)
+    latch.await(10, TimeUnit.SECONDS)
 
-    val outputValue = output.get()
+    val stdoutValue = stdout.get()
+    val stderrValue = stderr.get()
     val errorValue = error.get()
-    if (outputValue == null || errorValue != null) {
+    if (stdoutValue == null || errorValue != null) {
         process.destroy()
         process.waitFor(1, TimeUnit.SECONDS)
         process.destroyForcibly()
         val executed = "$command ${args.joinToString(" ")}".trim()
-        val message = "Failed to execute command ('$executed'):\n$outputValue"
+        val message = "Failed to execute command ('$executed'):\n\n[stdout]=\n$stdoutValue\n\n[stderr]=\n$stderrValue"
         throw RuntimeException(message, errorValue ?: RuntimeException("Timed out."))
     }
 
-    return outputValue
+    return stdoutValue
 }
