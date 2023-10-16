@@ -3,6 +3,7 @@
 package com.kylemayes.generator.support
 
 import mu.KotlinLogging
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReference
@@ -19,52 +20,72 @@ fun git(vararg args: String) {
 /** Executes the `rustfmt` command and returns the output. */
 fun rustfmt(rust: String): String = execute("rustfmt", emptyArray(), rust)
 
-/** Executes a command in a new thread (with a time limit) and returns the output. */
+/** Executes a command (with a time limit) and returns the output. */
 private fun execute(command: String, args: Array<String>, input: String? = null): String {
     val process = ProcessBuilder(command, *args).start()
 
-    val output = AtomicReference<String?>(null)
-    val error = AtomicReference<Throwable?>(null)
-    val latch = CountDownLatch(1)
+    val errors = ConcurrentHashMap<String, Throwable>()
+    val latch = CountDownLatch(4)
+    val stdout = AtomicReference<String?>(null)
+    val stderr = AtomicReference<String?>(null)
 
-    val thread = Thread {
+    fun operation(name: String, operation: () -> Unit) = Thread {
         try {
-            Thread.currentThread().name = "$command-thread"
-
-            if (input != null) {
-                log.slow("`$command` process stdin", 1.seconds) { process.outputStream.write(input.toByteArray()) }
-                process.outputStream.close()
-            }
-
-            val outputBytes = log.slow("`$command` process stdin", 1.seconds) { process.inputStream.readAllBytes() }
-            output.set(String(outputBytes))
-            process.inputStream.close()
-
-            log.slow("`$command` process", 2.5.seconds) { process.waitFor() }
-
-            if (process.exitValue() != 0) {
-                error("Non-zero exit code (${process.exitValue()}).")
-            }
+            Thread.currentThread().name = "$command-$name"
+            log.slow("`$command`: $name", 2.5.seconds) { operation() }
         } catch (e: Throwable) {
-            error.set(e)
+            errors[name] = e
         } finally {
             latch.countDown()
         }
     }
 
-    thread.start()
-    latch.await(5, TimeUnit.SECONDS)
+    val threads = listOf(
+        operation("write stdin") {
+            if (input != null) process.outputStream.write(input.toByteArray())
+            process.outputStream.flush()
+            process.outputStream.close()
+        },
+        operation("read stdout") {
+            stdout.set(String(process.inputStream.readAllBytes()))
+            process.inputStream.close()
+        },
+        operation("read stderr") {
+            stderr.set(String(process.errorStream.readAllBytes()))
+            process.errorStream.close()
+        },
+        operation("wait") {
+            process.waitFor()
+        },
+    )
 
-    val outputValue = output.get()
-    val errorValue = error.get()
-    if (outputValue == null || errorValue != null) {
-        process.destroy()
-        process.waitFor(1, TimeUnit.SECONDS)
-        process.destroyForcibly()
-        val executed = "$command ${args.joinToString(" ")}".trim()
-        val message = "Failed to execute command ('$executed')."
-        throw RuntimeException(message, errorValue ?: RuntimeException("Timed out."))
+    threads.forEach { it.start() }
+    val countdown = latch.await(5, TimeUnit.SECONDS)
+
+    val stdoutValue = stdout.get()
+    val stderrValue = stderr.get()
+    val errorsValue = errors.toMap()
+
+    if (process.isAlive) {
+        log.slow("`$command`: kill", 0.5.seconds) {
+            try {
+                process.destroy()
+                process.waitFor(1, TimeUnit.SECONDS)
+                process.destroyForcibly()
+            } catch (e: Error) {
+                e.printStackTrace()
+            }
+        }
     }
 
-    return outputValue
+    if (stdoutValue == null || errorsValue.isNotEmpty()) {
+        val executed = "$command ${args.joinToString(" ")}".trim()
+        val message = "Failed to execute command ('$executed'):\n\n[stdout]=\n$stdoutValue\n\n[stderr]=\n$stderrValue"
+        val error = RuntimeException(message)
+        if (!countdown) error.addSuppressed(RuntimeException("Timed out."))
+        errorsValue.forEach { error.addSuppressed(RuntimeException(it.key, it.value)) }
+        throw error
+    }
+
+    return stdoutValue
 }
