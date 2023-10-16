@@ -1,6 +1,7 @@
 ## [0.23.0] - UNRELEASED
 
 ### Changed
+- Bumped MSRV to 1.64
 - Added `no_std` compability for `vulkanalia` and `vulkanalia-sys` crates
 - Make all extendable output structs parameters in command wrappers (see [#213](https://github.com/KyleMayes/vulkanalia/issues/213) for details)
 
