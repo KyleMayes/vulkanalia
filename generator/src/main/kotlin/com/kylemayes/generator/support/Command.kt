@@ -2,9 +2,13 @@
 
 package com.kylemayes.generator.support
 
+import mu.KotlinLogging
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReference
+import kotlin.time.Duration.Companion.seconds
+
+private val log = KotlinLogging.logger { /* */ }
 
 /** Executes the `git` command and prints the output. */
 fun git(vararg args: String) {
@@ -13,7 +17,7 @@ fun git(vararg args: String) {
 }
 
 /** Executes the `rustfmt` command and returns the output. */
-fun rustfmt(rust: String) = execute("rustfmt", emptyArray(), rust)
+fun rustfmt(rust: String): String = execute("rustfmt", emptyArray(), rust)
 
 /** Executes a command in a new thread (with a time limit) and returns the output. */
 private fun execute(command: String, args: Array<String>, input: String? = null): String {
@@ -28,14 +32,15 @@ private fun execute(command: String, args: Array<String>, input: String? = null)
             Thread.currentThread().name = "$command-thread"
 
             if (input != null) {
-                process.outputStream.write(input.toByteArray())
+                log.slow("`$command` process stdin", 1.seconds) { process.outputStream.write(input.toByteArray()) }
                 process.outputStream.close()
             }
 
-            output.set(String(process.inputStream.readAllBytes()))
+            val outputBytes = log.slow("`$command` process stdin", 1.seconds) { process.inputStream.readAllBytes() }
+            output.set(String(outputBytes))
             process.inputStream.close()
 
-            process.waitFor()
+            log.slow("`$command` process", 2.5.seconds) { process.waitFor() }
 
             if (process.exitValue() != 0) {
                 error("Non-zero exit code (${process.exitValue()}).")
