@@ -23,6 +23,9 @@ jobs:
   test-vulkanalia:
     name: Test - Vulkanalia
     runs-on: ubuntu-latest
+    env:
+      RUST_LOG: info
+      RUST_VERSION: 1.64.0
     steps:
       # Checkout
       - name: Checkout Repository
@@ -31,7 +34,7 @@ jobs:
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.51.0
+          toolchain: ${{ env.RUST_VERSION }}
           components: clippy, rustfmt
       # Test
       - name: Cargo Test
@@ -58,6 +61,9 @@ jobs:
   format-vulkanalia:
     name: Format - Vulkanalia
     runs-on: ubuntu-latest
+    env:
+      RUST_LOG: info
+      RUST_VERSION: 1.64.0
     steps:
       # Checkout
       - name: Checkout Repository
@@ -66,7 +72,7 @@ jobs:
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.51.0
+          toolchain: ${{ env.RUST_VERSION }}
           components: clippy, rustfmt
       # Format
       - name: Cargo Format
@@ -78,6 +84,9 @@ jobs:
   clippy-vulkanalia:
     name: Clippy - Vulkanalia
     runs-on: ubuntu-latest
+    env:
+      RUST_LOG: info
+      RUST_VERSION: 1.64.0
     steps:
       # Checkout
       - name: Checkout Repository
@@ -86,7 +95,7 @@ jobs:
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.51.0
+          toolchain: ${{ env.RUST_VERSION }}
           components: clippy, rustfmt
       # Clippy
       - name: Cargo Clippy
