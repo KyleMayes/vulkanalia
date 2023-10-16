@@ -130,7 +130,6 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
     override fun run() {
         val inputs = getRepositoryInputs(context)
-        inputs.updateLocal(context)
 
         if (!force && !inputs.list.any { it.stale }) {
             log.info { "Nothing to update." }
