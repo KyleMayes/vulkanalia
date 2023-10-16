@@ -56,6 +56,9 @@ private fun execute(command: String, args: Array<String>, input: String? = null)
         },
         operation("wait") {
             process.waitFor()
+            if (process.exitValue() != 0) {
+                error("Non-zero exit code (${process.exitValue()}).")
+            }
         },
     )
 
