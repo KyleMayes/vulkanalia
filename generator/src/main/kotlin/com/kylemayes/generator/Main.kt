@@ -72,7 +72,7 @@ class Check : CliktCommand(help = "Checks generated Vulkan bindings") {
 
         // Parse
 
-        val xml = inputs.registry.local.lazy.value
+        val xml = log.time("Fetch Registry") { inputs.registry.local.lazy.value }
         val registry = log.time("Parse Registry") { parseRegistry(xml) }
 
         // Generate
@@ -105,7 +105,7 @@ class Index : CliktCommand(help = "Generates an index for generated Vulkan bindi
 
         // Parse
 
-        val xml = inputs.registry.local.lazy.value
+        val xml = log.time("Fetch Registry") { inputs.registry.local.lazy.value }
         val registry = log.time("Parse Registry") { parseRegistry(xml) }
 
         // Index
@@ -139,7 +139,7 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
         // Parse
 
         val xmlVersion = if (skipUpgrade) { inputs.registry.local } else { inputs.registry.latest }
-        val xml = xmlVersion.lazy.value
+        val xml = log.time("Fetch Registry") { xmlVersion.lazy.value }
         val registry = log.time("Parse Registry") { parseRegistry(xml) }
 
         // Generate
