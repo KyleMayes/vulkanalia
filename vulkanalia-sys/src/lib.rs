@@ -33,6 +33,9 @@ mod typedefs;
 #[rustfmt::skip]
 mod unions;
 
+#[rustfmt::skip]
+pub mod video;
+
 pub use self::arrays::*;
 pub use self::bitfields::*;
 pub use self::bitmasks::*;

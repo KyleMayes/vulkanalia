@@ -13,6 +13,7 @@ import com.kylemayes.generator.generate.file.generateExtensionTraits
 import com.kylemayes.generator.generate.file.generateExtensions
 import com.kylemayes.generator.generate.file.generateFunctions
 import com.kylemayes.generator.generate.file.generateHandles
+import com.kylemayes.generator.generate.file.generateHeaders
 import com.kylemayes.generator.generate.file.generateMacros
 import com.kylemayes.generator.generate.file.generateResultEnums
 import com.kylemayes.generator.generate.file.generateStructs
@@ -27,8 +28,17 @@ import java.nio.file.Path
 
 private val log = KotlinLogging.logger { /* */ }
 
-/** Generates Rust files for a Vulkan API registry. */
-fun generateRustFiles(registry: Registry) = listOf(
+/** The additional `bindgen` options for the Vulkan video headers. */
+private val videoOptions = listOf(
+    "--allowlist-item", "StdVideo.*",
+    "--allowlist-item", "STD_VIDEO_.*",
+    "--no-prepend-enum-name",
+    "--default-enum-style", "newtype_global",
+    "--with-derive-custom-enum", ".*=Default",
+)
+
+/** Generates Rust files for a Vulkan API registry and Vulkan video headers. */
+fun generateRustFiles(registry: Registry, video: Map<String, String>) = listOf(
     generateRustFile("vulkanalia-sys", "bitmasks.rs", registry.generateBitmasks()),
     generateRustFile("vulkanalia-sys", "commands.rs", registry.generateCommands()),
     generateRustFile("vulkanalia-sys", "constants.rs", registry.generateConstants()),
@@ -40,6 +50,7 @@ fun generateRustFiles(registry: Registry) = listOf(
     generateRustFile("vulkanalia-sys", "structs.rs", registry.generateStructs()),
     generateRustFile("vulkanalia-sys", "typedefs.rs", registry.generateTypedefs()),
     generateRustFile("vulkanalia-sys", "unions.rs", registry.generateUnions()),
+    generateRustFile("vulkanalia-sys", "video.rs", generateHeaders("video", video, videoOptions)),
     generateRustFile("vulkanalia", "vk/builders.rs", registry.generateBuilders()),
     generateRustFile("vulkanalia", "vk/chains.rs", registry.generateChains()),
     generateRustFile("vulkanalia", "vk/commands.rs", registry.generateCommandStructs()),

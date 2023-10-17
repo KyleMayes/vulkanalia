@@ -6,6 +6,7 @@
 - Make all extendable output structs parameters in command wrappers (see [#213](https://github.com/KyleMayes/vulkanalia/issues/213) for details)
 
 ### Added
+- Added support for Vulkan video extensions
 - Added `vulkanalia::prelude::v1_3` module (a prelude module for Vulkan 1.3+)
 
 ### Bindings Updates
@@ -222,7 +223,7 @@
 - Fixed composite bitflag values (e.g., `CullModeFlags::FRONT_AND_BACK`)
 
 ### Changed
-- Bumped MSRV to 1.51
+- Bumped MSRV to 1.64
 - Added `Send` and `Sync` requirement to `Loader` error type
 - Changed type of stored layer names to `vk::ExtensionName` instead of `CString`
 - Added constants, constructor, and additional conversions to `Version`

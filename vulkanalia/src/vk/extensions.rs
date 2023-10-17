@@ -5074,6 +5074,42 @@ pub trait ExtVertexInputDynamicStateExtension: DeviceV1_0 {
 
 impl ExtVertexInputDynamicStateExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_video_encode_h264.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+pub trait ExtVideoEncodeH264Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_VIDEO_ENCODE_H264_EXTENSION;
+}
+
+#[cfg(feature = "provisional")]
+impl ExtVideoEncodeH264Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_video_encode_h265.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+pub trait ExtVideoEncodeH265Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_VIDEO_ENCODE_H265_EXTENSION;
+}
+
+#[cfg(feature = "provisional")]
+impl ExtVideoEncodeH265Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_ycbcr_2plane_444_formats.html>
 pub trait ExtYcbcr2plane444FormatsExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -9671,6 +9707,380 @@ pub trait KhrVariablePointersExtension: DeviceV1_0 {
 }
 
 impl KhrVariablePointersExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_video_decode_h264.html>
+pub trait KhrVideoDecodeH264Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_VIDEO_DECODE_H264_EXTENSION;
+}
+
+impl KhrVideoDecodeH264Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_video_decode_h265.html>
+pub trait KhrVideoDecodeH265Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_VIDEO_DECODE_H265_EXTENSION;
+}
+
+impl KhrVideoDecodeH265Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_video_decode_queue.html>
+pub trait KhrVideoDecodeQueueExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_VIDEO_DECODE_QUEUE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDecodeVideoKHR.html>
+    #[inline]
+    unsafe fn cmd_decode_video_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        decode_info: &VideoDecodeInfoKHR,
+    ) {
+        let __result = (self.commands().cmd_decode_video_khr)(command_buffer, decode_info);
+    }
+}
+
+impl KhrVideoDecodeQueueExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_video_encode_queue.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+pub trait KhrVideoEncodeQueueExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_VIDEO_ENCODE_QUEUE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdEncodeVideoKHR.html>
+    #[inline]
+    unsafe fn cmd_encode_video_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        encode_info: &VideoEncodeInfoKHR,
+    ) {
+        let __result = (self.commands().cmd_encode_video_khr)(command_buffer, encode_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetEncodedVideoSessionParametersKHR.html>
+    #[inline]
+    unsafe fn get_encoded_video_session_parameters_khr(
+        &self,
+        video_session_parameters_info: &VideoEncodeSessionParametersGetInfoKHR,
+        feedback_info: Option<&mut VideoEncodeSessionParametersFeedbackInfoKHR>,
+    ) -> crate::VkResult<Vec<u8>> {
+        let mut data_size = 0;
+
+        (self.commands().get_encoded_video_session_parameters_khr)(
+            self.handle(),
+            video_session_parameters_info,
+            ptr::null_mut(),
+            &mut data_size,
+            ptr::null_mut(),
+        );
+
+        let mut data = Vec::with_capacity(data_size as usize);
+
+        let __result = (self.commands().get_encoded_video_session_parameters_khr)(
+            self.handle(),
+            video_session_parameters_info,
+            feedback_info.map_or(ptr::null_mut(), |v| v),
+            &mut data_size,
+            data.as_mut_ptr() as *mut c_void,
+        );
+
+        debug_assert!(data.capacity() == data_size as usize);
+        data.set_len(data_size as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(data)
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR.html>
+    #[inline]
+    unsafe fn get_physical_device_video_encode_quality_level_properties_khr(
+        &self,
+        physical_device: PhysicalDevice,
+        quality_level_info: &PhysicalDeviceVideoEncodeQualityLevelInfoKHR,
+        quality_level_properties: &mut VideoEncodeQualityLevelPropertiesKHR,
+    ) -> crate::VkResult<()> {
+        let __result = (self
+            .commands()
+            .get_physical_device_video_encode_quality_level_properties_khr)(
+            physical_device,
+            quality_level_info,
+            quality_level_properties,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+#[cfg(feature = "provisional")]
+impl KhrVideoEncodeQueueExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_video_queue.html>
+pub trait KhrVideoQueueExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_VIDEO_QUEUE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkBindVideoSessionMemoryKHR.html>
+    #[inline]
+    unsafe fn bind_video_session_memory_khr(
+        &self,
+        video_session: VideoSessionKHR,
+        bind_session_memory_infos: &[impl Cast<Target = BindVideoSessionMemoryInfoKHR>],
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().bind_video_session_memory_khr)(
+            self.handle(),
+            video_session,
+            bind_session_memory_infos.len() as u32,
+            bind_session_memory_infos.as_ptr().cast(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdBeginVideoCodingKHR.html>
+    #[inline]
+    unsafe fn cmd_begin_video_coding_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        begin_info: &VideoBeginCodingInfoKHR,
+    ) {
+        let __result = (self.commands().cmd_begin_video_coding_khr)(command_buffer, begin_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdControlVideoCodingKHR.html>
+    #[inline]
+    unsafe fn cmd_control_video_coding_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        coding_control_info: &VideoCodingControlInfoKHR,
+    ) {
+        let __result =
+            (self.commands().cmd_control_video_coding_khr)(command_buffer, coding_control_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdEndVideoCodingKHR.html>
+    #[inline]
+    unsafe fn cmd_end_video_coding_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        end_coding_info: &VideoEndCodingInfoKHR,
+    ) {
+        let __result = (self.commands().cmd_end_video_coding_khr)(command_buffer, end_coding_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateVideoSessionKHR.html>
+    #[inline]
+    unsafe fn create_video_session_khr(
+        &self,
+        create_info: &VideoSessionCreateInfoKHR,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<VideoSessionKHR> {
+        let mut video_session = MaybeUninit::<VideoSessionKHR>::uninit();
+
+        let __result = (self.commands().create_video_session_khr)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            video_session.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(video_session.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateVideoSessionParametersKHR.html>
+    #[inline]
+    unsafe fn create_video_session_parameters_khr(
+        &self,
+        create_info: &VideoSessionParametersCreateInfoKHR,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<VideoSessionParametersKHR> {
+        let mut video_session_parameters = MaybeUninit::<VideoSessionParametersKHR>::uninit();
+
+        let __result = (self.commands().create_video_session_parameters_khr)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            video_session_parameters.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(video_session_parameters.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkDestroyVideoSessionKHR.html>
+    #[inline]
+    unsafe fn destroy_video_session_khr(
+        &self,
+        video_session: VideoSessionKHR,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_video_session_khr)(
+            self.handle(),
+            video_session,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkDestroyVideoSessionParametersKHR.html>
+    #[inline]
+    unsafe fn destroy_video_session_parameters_khr(
+        &self,
+        video_session_parameters: VideoSessionParametersKHR,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_video_session_parameters_khr)(
+            self.handle(),
+            video_session_parameters,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceVideoCapabilitiesKHR.html>
+    #[inline]
+    unsafe fn get_physical_device_video_capabilities_khr(
+        &self,
+        physical_device: PhysicalDevice,
+        video_profile: &VideoProfileInfoKHR,
+        capabilities: &mut VideoCapabilitiesKHR,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().get_physical_device_video_capabilities_khr)(
+            physical_device,
+            video_profile,
+            capabilities,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceVideoFormatPropertiesKHR.html>
+    #[inline]
+    unsafe fn get_physical_device_video_format_properties_khr(
+        &self,
+        physical_device: PhysicalDevice,
+        video_format_info: &PhysicalDeviceVideoFormatInfoKHR,
+    ) -> crate::VkResult<Vec<VideoFormatPropertiesKHR>> {
+        let mut video_format_property_count = 0;
+
+        (self
+            .commands()
+            .get_physical_device_video_format_properties_khr)(
+            physical_device,
+            video_format_info,
+            &mut video_format_property_count,
+            ptr::null_mut(),
+        );
+
+        let mut video_format_properties = Vec::with_capacity(video_format_property_count as usize);
+
+        let __result = (self
+            .commands()
+            .get_physical_device_video_format_properties_khr)(
+            physical_device,
+            video_format_info,
+            &mut video_format_property_count,
+            video_format_properties.as_mut_ptr(),
+        );
+
+        debug_assert!(video_format_properties.capacity() == video_format_property_count as usize);
+        video_format_properties.set_len(video_format_property_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(video_format_properties)
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetVideoSessionMemoryRequirementsKHR.html>
+    #[inline]
+    unsafe fn get_video_session_memory_requirements_khr(
+        &self,
+        video_session: VideoSessionKHR,
+    ) -> crate::VkResult<Vec<VideoSessionMemoryRequirementsKHR>> {
+        let mut memory_requirements_count = 0;
+
+        (self.commands().get_video_session_memory_requirements_khr)(
+            self.handle(),
+            video_session,
+            &mut memory_requirements_count,
+            ptr::null_mut(),
+        );
+
+        let mut memory_requirements = Vec::with_capacity(memory_requirements_count as usize);
+
+        let __result = (self.commands().get_video_session_memory_requirements_khr)(
+            self.handle(),
+            video_session,
+            &mut memory_requirements_count,
+            memory_requirements.as_mut_ptr(),
+        );
+
+        debug_assert!(memory_requirements.capacity() == memory_requirements_count as usize);
+        memory_requirements.set_len(memory_requirements_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(memory_requirements)
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkUpdateVideoSessionParametersKHR.html>
+    #[inline]
+    unsafe fn update_video_session_parameters_khr(
+        &self,
+        video_session_parameters: VideoSessionParametersKHR,
+        update_info: &VideoSessionParametersUpdateInfoKHR,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().update_video_session_parameters_khr)(
+            self.handle(),
+            video_session_parameters,
+            update_info,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl KhrVideoQueueExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_vulkan_memory_model.html>
 pub trait KhrVulkanMemoryModelExtension: DeviceV1_0 {

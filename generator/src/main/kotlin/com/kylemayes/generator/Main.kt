@@ -75,9 +75,13 @@ class Check : CliktCommand(help = "Checks generated Vulkan bindings") {
         val xml = log.time("Fetch Registry") { inputs.registry.local.lazy.value }
         val registry = log.time("Parse Registry") { parseRegistry(xml) }
 
+        // Headers (video)
+
+        val video = log.time("Fetch Video Headers") { inputs.video.local.lazy.value }
+
         // Generate
 
-        val files = log.time("Generate Files") { generateRustFiles(registry) }
+        val files = log.time("Generate Files") { generateRustFiles(registry, video) }
 
         // Check
 
@@ -142,9 +146,14 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
         val xml = log.time("Fetch Registry") { xmlVersion.lazy.value }
         val registry = log.time("Parse Registry") { parseRegistry(xml) }
 
+        // Headers (video)
+
+        val videoVersion = if (skipUpgrade) { inputs.video.local } else { inputs.video.latest }
+        val video = log.time("Fetch Video Headers") { videoVersion.lazy.value }
+
         // Generate
 
-        val files = log.time("Generate Files") { generateRustFiles(registry) }
+        val files = log.time("Generate Files") { generateRustFiles(registry, video) }
 
         // Check
 
