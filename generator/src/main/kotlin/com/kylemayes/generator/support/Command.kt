@@ -11,6 +11,9 @@ import kotlin.time.Duration.Companion.seconds
 
 private val log = KotlinLogging.logger { /* */ }
 
+/** Executes the `bindgen` command and returns the output. */
+fun bindgen(vararg args: String): String = execute("bindgen", arrayOf(*args))
+
 /** Executes the `git` command and prints the output. */
 fun git(vararg args: String) {
     println("> git ${args.joinToString(" ")}")

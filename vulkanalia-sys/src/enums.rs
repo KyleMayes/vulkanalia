@@ -2767,9 +2767,15 @@ impl ImageLayout {
     pub const READ_ONLY_OPTIMAL: Self = Self(1000314000);
     pub const ATTACHMENT_OPTIMAL: Self = Self(1000314001);
     pub const PRESENT_SRC_KHR: Self = Self(1000001002);
+    pub const VIDEO_DECODE_DST_KHR: Self = Self(1000024000);
+    pub const VIDEO_DECODE_SRC_KHR: Self = Self(1000024001);
+    pub const VIDEO_DECODE_DPB_KHR: Self = Self(1000024002);
     pub const SHARED_PRESENT_KHR: Self = Self(1000111000);
     pub const FRAGMENT_DENSITY_MAP_OPTIMAL_EXT: Self = Self(1000218000);
     pub const FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR: Self = Self(1000164003);
+    pub const VIDEO_ENCODE_DST_KHR: Self = Self(1000299000);
+    pub const VIDEO_ENCODE_SRC_KHR: Self = Self(1000299001);
+    pub const VIDEO_ENCODE_DPB_KHR: Self = Self(1000299002);
     pub const ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT: Self = Self(1000339000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
@@ -2806,9 +2812,15 @@ impl fmt::Debug for ImageLayout {
             1000314000 => write!(f, "READ_ONLY_OPTIMAL"),
             1000314001 => write!(f, "ATTACHMENT_OPTIMAL"),
             1000001002 => write!(f, "PRESENT_SRC_KHR"),
+            1000024000 => write!(f, "VIDEO_DECODE_DST_KHR"),
+            1000024001 => write!(f, "VIDEO_DECODE_SRC_KHR"),
+            1000024002 => write!(f, "VIDEO_DECODE_DPB_KHR"),
             1000111000 => write!(f, "SHARED_PRESENT_KHR"),
             1000218000 => write!(f, "FRAGMENT_DENSITY_MAP_OPTIMAL_EXT"),
             1000164003 => write!(f, "FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR"),
+            1000299000 => write!(f, "VIDEO_ENCODE_DST_KHR"),
+            1000299001 => write!(f, "VIDEO_ENCODE_SRC_KHR"),
+            1000299002 => write!(f, "VIDEO_ENCODE_DPB_KHR"),
             1000339000 => write!(f, "ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT"),
             _ => self.0.fmt(f),
         }
@@ -3327,6 +3339,8 @@ impl ObjectType {
     pub const DISPLAY_KHR: Self = Self(1000002000);
     pub const DISPLAY_MODE_KHR: Self = Self(1000002001);
     pub const DEBUG_REPORT_CALLBACK_EXT: Self = Self(1000011000);
+    pub const VIDEO_SESSION_KHR: Self = Self(1000023000);
+    pub const VIDEO_SESSION_PARAMETERS_KHR: Self = Self(1000023001);
     pub const CU_MODULE_NVX: Self = Self(1000029000);
     pub const CU_FUNCTION_NVX: Self = Self(1000029001);
     pub const DEBUG_UTILS_MESSENGER_EXT: Self = Self(1000128000);
@@ -3392,6 +3406,8 @@ impl fmt::Debug for ObjectType {
             1000002000 => write!(f, "DISPLAY_KHR"),
             1000002001 => write!(f, "DISPLAY_MODE_KHR"),
             1000011000 => write!(f, "DEBUG_REPORT_CALLBACK_EXT"),
+            1000023000 => write!(f, "VIDEO_SESSION_KHR"),
+            1000023001 => write!(f, "VIDEO_SESSION_PARAMETERS_KHR"),
             1000029000 => write!(f, "CU_MODULE_NVX"),
             1000029001 => write!(f, "CU_FUNCTION_NVX"),
             1000128000 => write!(f, "DEBUG_UTILS_MESSENGER_EXT"),
@@ -4283,6 +4299,42 @@ impl fmt::Debug for QueryPoolSamplingModeINTEL {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueryResultStatusKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct QueryResultStatusKHR(i32);
+
+impl QueryResultStatusKHR {
+    pub const ERROR: Self = Self(-1);
+    pub const NOT_READY: Self = Self(0);
+    pub const COMPLETE: Self = Self(1);
+    pub const INSUFFICIENT_BITSTREAM_BUFFER_RANGE: Self = Self(-1000299000);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for QueryResultStatusKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            -1 => write!(f, "ERROR"),
+            0 => write!(f, "NOT_READY"),
+            1 => write!(f, "COMPLETE"),
+            -1000299000 => write!(f, "INSUFFICIENT_BITSTREAM_BUFFER_RANGE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueryType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -4292,12 +4344,14 @@ impl QueryType {
     pub const OCCLUSION: Self = Self(0);
     pub const PIPELINE_STATISTICS: Self = Self(1);
     pub const TIMESTAMP: Self = Self(2);
+    pub const RESULT_STATUS_ONLY_KHR: Self = Self(1000023000);
     pub const TRANSFORM_FEEDBACK_STREAM_EXT: Self = Self(1000028004);
     pub const PERFORMANCE_QUERY_KHR: Self = Self(1000116000);
     pub const ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR: Self = Self(1000150000);
     pub const ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR: Self = Self(1000150001);
     pub const ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV: Self = Self(1000165000);
     pub const PERFORMANCE_QUERY_INTEL: Self = Self(1000210000);
+    pub const VIDEO_ENCODE_FEEDBACK_KHR: Self = Self(1000299000);
     pub const MESH_PRIMITIVES_GENERATED_EXT: Self = Self(1000328000);
     pub const PRIMITIVES_GENERATED_EXT: Self = Self(1000382000);
     pub const ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR: Self =
@@ -4325,12 +4379,14 @@ impl fmt::Debug for QueryType {
             0 => write!(f, "OCCLUSION"),
             1 => write!(f, "PIPELINE_STATISTICS"),
             2 => write!(f, "TIMESTAMP"),
+            1000023000 => write!(f, "RESULT_STATUS_ONLY_KHR"),
             1000028004 => write!(f, "TRANSFORM_FEEDBACK_STREAM_EXT"),
             1000116000 => write!(f, "PERFORMANCE_QUERY_KHR"),
             1000150000 => write!(f, "ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR"),
             1000150001 => write!(f, "ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR"),
             1000165000 => write!(f, "ACCELERATION_STRUCTURE_COMPACTED_SIZE_NV"),
             1000210000 => write!(f, "PERFORMANCE_QUERY_INTEL"),
+            1000299000 => write!(f, "VIDEO_ENCODE_FEEDBACK_KHR"),
             1000328000 => write!(f, "MESH_PRIMITIVES_GENERATED_EXT"),
             1000382000 => write!(f, "PRIMITIVES_GENERATED_EXT"),
             1000386000 => write!(
@@ -4516,6 +4572,12 @@ impl Result {
     pub const ERROR_INCOMPATIBLE_DISPLAY_KHR: Self = Self(-1000003001);
     pub const ERROR_VALIDATION_FAILED_EXT: Self = Self(-1000011001);
     pub const ERROR_INVALID_SHADER_NV: Self = Self(-1000012000);
+    pub const ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR: Self = Self(-1000023000);
+    pub const ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR: Self = Self(-1000023001);
+    pub const ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR: Self = Self(-1000023002);
+    pub const ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR: Self = Self(-1000023003);
+    pub const ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR: Self = Self(-1000023004);
+    pub const ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR: Self = Self(-1000023005);
     pub const ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT: Self = Self(-1000158000);
     pub const ERROR_NOT_PERMITTED_KHR: Self = Self(-1000174001);
     pub const ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT: Self = Self(-1000255000);
@@ -4523,6 +4585,7 @@ impl Result {
     pub const THREAD_DONE_KHR: Self = Self(1000268001);
     pub const OPERATION_DEFERRED_KHR: Self = Self(1000268002);
     pub const OPERATION_NOT_DEFERRED_KHR: Self = Self(1000268003);
+    pub const ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR: Self = Self(-1000299000);
     pub const ERROR_COMPRESSION_EXHAUSTED_EXT: Self = Self(-1000338000);
     pub const ERROR_INCOMPATIBLE_SHADER_BINARY_EXT: Self = Self(1000482000);
 
@@ -4573,6 +4636,12 @@ impl fmt::Debug for Result {
             -1000003001 => write!(f, "ERROR_INCOMPATIBLE_DISPLAY_KHR"),
             -1000011001 => write!(f, "ERROR_VALIDATION_FAILED_EXT"),
             -1000012000 => write!(f, "ERROR_INVALID_SHADER_NV"),
+            -1000023000 => write!(f, "ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR"),
+            -1000023001 => write!(f, "ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR"),
+            -1000023002 => write!(f, "ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR"),
+            -1000023003 => write!(f, "ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR"),
+            -1000023004 => write!(f, "ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR"),
+            -1000023005 => write!(f, "ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR"),
             -1000158000 => write!(f, "ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
             -1000174001 => write!(f, "ERROR_NOT_PERMITTED_KHR"),
             -1000255000 => write!(f, "ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT"),
@@ -4580,6 +4649,7 @@ impl fmt::Debug for Result {
             1000268001 => write!(f, "THREAD_DONE_KHR"),
             1000268002 => write!(f, "OPERATION_DEFERRED_KHR"),
             1000268003 => write!(f, "OPERATION_NOT_DEFERRED_KHR"),
+            -1000299000 => write!(f, "ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR"),
             -1000338000 => write!(f, "ERROR_COMPRESSION_EXHAUSTED_EXT"),
             1000482000 => write!(f, "ERROR_INCOMPATIBLE_SHADER_BINARY_EXT"),
             _ => self.0.fmt(f),
@@ -4621,6 +4691,12 @@ impl fmt::Display for Result {
             -1000003001 => write!(f, "The display used by a swapchain does not use the same presentable image layout, or is incompatible in a way that prevents sharing an image."),
             -1000011001 => write!(f, "ERROR_VALIDATION_FAILED_EXT"),
             -1000012000 => write!(f, "One or more shaders failed to compile or link. More details are reported back to the application via VK_EXT_debug_report if enabled."),
+            -1000023000 => write!(f, "ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR"),
+            -1000023001 => write!(f, "ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR"),
+            -1000023002 => write!(f, "ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR"),
+            -1000023003 => write!(f, "ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR"),
+            -1000023004 => write!(f, "ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR"),
+            -1000023005 => write!(f, "ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR"),
             -1000158000 => write!(f, "ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
             -1000174001 => write!(f, "ERROR_NOT_PERMITTED_KHR"),
             -1000255000 => write!(f, "An operation on a swapchain created with VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT failed as it did not have exclusive full-screen access. This may occur due to implementation-dependent reasons, outside of the application's control."),
@@ -4628,6 +4704,7 @@ impl fmt::Display for Result {
             1000268001 => write!(f, "A deferred operation is not complete but there is no work remaining to assign to additional threads."),
             1000268002 => write!(f, "A deferred operation was requested and at least some of the work was deferred."),
             1000268003 => write!(f, "A deferred operation was requested and no operations were deferred."),
+            -1000299000 => write!(f, "ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR"),
             -1000338000 => write!(f, "ERROR_COMPRESSION_EXHAUSTED_EXT"),
             1000482000 => write!(f, "ERROR_INCOMPATIBLE_SHADER_BINARY_EXT"),
             _ => write!(f, "unknown Vulkan result (code = {})", self.0),
@@ -5455,6 +5532,26 @@ impl StructureType {
     pub const DEBUG_MARKER_OBJECT_NAME_INFO_EXT: Self = Self(1000022000);
     pub const DEBUG_MARKER_OBJECT_TAG_INFO_EXT: Self = Self(1000022001);
     pub const DEBUG_MARKER_MARKER_INFO_EXT: Self = Self(1000022002);
+    pub const VIDEO_PROFILE_INFO_KHR: Self = Self(1000023000);
+    pub const VIDEO_CAPABILITIES_KHR: Self = Self(1000023001);
+    pub const VIDEO_PICTURE_RESOURCE_INFO_KHR: Self = Self(1000023002);
+    pub const VIDEO_SESSION_MEMORY_REQUIREMENTS_KHR: Self = Self(1000023003);
+    pub const BIND_VIDEO_SESSION_MEMORY_INFO_KHR: Self = Self(1000023004);
+    pub const VIDEO_SESSION_CREATE_INFO_KHR: Self = Self(1000023005);
+    pub const VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR: Self = Self(1000023006);
+    pub const VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR: Self = Self(1000023007);
+    pub const VIDEO_BEGIN_CODING_INFO_KHR: Self = Self(1000023008);
+    pub const VIDEO_END_CODING_INFO_KHR: Self = Self(1000023009);
+    pub const VIDEO_CODING_CONTROL_INFO_KHR: Self = Self(1000023010);
+    pub const VIDEO_REFERENCE_SLOT_INFO_KHR: Self = Self(1000023011);
+    pub const QUEUE_FAMILY_VIDEO_PROPERTIES_KHR: Self = Self(1000023012);
+    pub const VIDEO_PROFILE_LIST_INFO_KHR: Self = Self(1000023013);
+    pub const PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR: Self = Self(1000023014);
+    pub const VIDEO_FORMAT_PROPERTIES_KHR: Self = Self(1000023015);
+    pub const QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR: Self = Self(1000023016);
+    pub const VIDEO_DECODE_INFO_KHR: Self = Self(1000024000);
+    pub const VIDEO_DECODE_CAPABILITIES_KHR: Self = Self(1000024001);
+    pub const VIDEO_DECODE_USAGE_INFO_KHR: Self = Self(1000024002);
     pub const DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV: Self = Self(1000026000);
     pub const DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV: Self = Self(1000026001);
     pub const DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV: Self = Self(1000026002);
@@ -5466,6 +5563,40 @@ impl StructureType {
     pub const CU_LAUNCH_INFO_NVX: Self = Self(1000029002);
     pub const IMAGE_VIEW_HANDLE_INFO_NVX: Self = Self(1000030000);
     pub const IMAGE_VIEW_ADDRESS_PROPERTIES_NVX: Self = Self(1000030001);
+    pub const VIDEO_ENCODE_H264_CAPABILITIES_EXT: Self = Self(1000038000);
+    pub const VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT: Self = Self(1000038001);
+    pub const VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT: Self = Self(1000038002);
+    pub const VIDEO_ENCODE_H264_PICTURE_INFO_EXT: Self = Self(1000038003);
+    pub const VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT: Self = Self(1000038004);
+    pub const VIDEO_ENCODE_H264_NALU_SLICE_INFO_EXT: Self = Self(1000038005);
+    pub const VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_EXT: Self = Self(1000038006);
+    pub const VIDEO_ENCODE_H264_PROFILE_INFO_EXT: Self = Self(1000038007);
+    pub const VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT: Self = Self(1000038008);
+    pub const VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT: Self = Self(1000038009);
+    pub const VIDEO_ENCODE_H264_SESSION_CREATE_INFO_EXT: Self = Self(1000038010);
+    pub const VIDEO_ENCODE_H264_QUALITY_LEVEL_PROPERTIES_EXT: Self = Self(1000038011);
+    pub const VIDEO_ENCODE_H264_SESSION_PARAMETERS_GET_INFO_EXT: Self = Self(1000038012);
+    pub const VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_EXT: Self = Self(1000038013);
+    pub const VIDEO_ENCODE_H265_CAPABILITIES_EXT: Self = Self(1000039000);
+    pub const VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT: Self = Self(1000039001);
+    pub const VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT: Self = Self(1000039002);
+    pub const VIDEO_ENCODE_H265_PICTURE_INFO_EXT: Self = Self(1000039003);
+    pub const VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT: Self = Self(1000039004);
+    pub const VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_EXT: Self = Self(1000039005);
+    pub const VIDEO_ENCODE_H265_GOP_REMAINING_FRAME_INFO_EXT: Self = Self(1000039006);
+    pub const VIDEO_ENCODE_H265_PROFILE_INFO_EXT: Self = Self(1000039007);
+    pub const VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT: Self = Self(1000039009);
+    pub const VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT: Self = Self(1000039010);
+    pub const VIDEO_ENCODE_H265_SESSION_CREATE_INFO_EXT: Self = Self(1000039011);
+    pub const VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_EXT: Self = Self(1000039012);
+    pub const VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_EXT: Self = Self(1000039013);
+    pub const VIDEO_ENCODE_H265_SESSION_PARAMETERS_FEEDBACK_INFO_EXT: Self = Self(1000039014);
+    pub const VIDEO_DECODE_H264_CAPABILITIES_KHR: Self = Self(1000040000);
+    pub const VIDEO_DECODE_H264_PICTURE_INFO_KHR: Self = Self(1000040001);
+    pub const VIDEO_DECODE_H264_PROFILE_INFO_KHR: Self = Self(1000040003);
+    pub const VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_KHR: Self = Self(1000040004);
+    pub const VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_KHR: Self = Self(1000040005);
+    pub const VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR: Self = Self(1000040006);
     pub const TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD: Self = Self(1000041000);
     pub const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR: Self = Self(1000044006);
     pub const RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT: Self = Self(1000044007);
@@ -5631,6 +5762,12 @@ impl StructureType {
     pub const PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD: Self = Self(1000183000);
     pub const CALIBRATED_TIMESTAMP_INFO_EXT: Self = Self(1000184000);
     pub const PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD: Self = Self(1000185000);
+    pub const VIDEO_DECODE_H265_CAPABILITIES_KHR: Self = Self(1000187000);
+    pub const VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR: Self = Self(1000187001);
+    pub const VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_KHR: Self = Self(1000187002);
+    pub const VIDEO_DECODE_H265_PROFILE_INFO_KHR: Self = Self(1000187003);
+    pub const VIDEO_DECODE_H265_PICTURE_INFO_KHR: Self = Self(1000187004);
+    pub const VIDEO_DECODE_H265_DPB_SLOT_INFO_KHR: Self = Self(1000187005);
     pub const DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR: Self = Self(1000174000);
     pub const PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR: Self = Self(1000388000);
     pub const QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR: Self = Self(1000388001);
@@ -5760,6 +5897,17 @@ impl StructureType {
     pub const SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV: Self = Self(1000292002);
     pub const PRESENT_ID_KHR: Self = Self(1000294000);
     pub const PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR: Self = Self(1000294001);
+    pub const VIDEO_ENCODE_INFO_KHR: Self = Self(1000299000);
+    pub const VIDEO_ENCODE_RATE_CONTROL_INFO_KHR: Self = Self(1000299001);
+    pub const VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR: Self = Self(1000299002);
+    pub const VIDEO_ENCODE_CAPABILITIES_KHR: Self = Self(1000299003);
+    pub const VIDEO_ENCODE_USAGE_INFO_KHR: Self = Self(1000299004);
+    pub const QUERY_POOL_VIDEO_ENCODE_FEEDBACK_CREATE_INFO_KHR: Self = Self(1000299005);
+    pub const PHYSICAL_DEVICE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR: Self = Self(1000299006);
+    pub const VIDEO_ENCODE_QUALITY_LEVEL_PROPERTIES_KHR: Self = Self(1000299007);
+    pub const VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR: Self = Self(1000299008);
+    pub const VIDEO_ENCODE_SESSION_PARAMETERS_GET_INFO_KHR: Self = Self(1000299009);
+    pub const VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR: Self = Self(1000299010);
     pub const PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV: Self = Self(1000300000);
     pub const DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV: Self = Self(1000300001);
     pub const REFRESH_OBJECT_LIST_KHR: Self = Self(1000308000);
@@ -6292,6 +6440,26 @@ impl fmt::Debug for StructureType {
             1000022000 => write!(f, "DEBUG_MARKER_OBJECT_NAME_INFO_EXT"),
             1000022001 => write!(f, "DEBUG_MARKER_OBJECT_TAG_INFO_EXT"),
             1000022002 => write!(f, "DEBUG_MARKER_MARKER_INFO_EXT"),
+            1000023000 => write!(f, "VIDEO_PROFILE_INFO_KHR"),
+            1000023001 => write!(f, "VIDEO_CAPABILITIES_KHR"),
+            1000023002 => write!(f, "VIDEO_PICTURE_RESOURCE_INFO_KHR"),
+            1000023003 => write!(f, "VIDEO_SESSION_MEMORY_REQUIREMENTS_KHR"),
+            1000023004 => write!(f, "BIND_VIDEO_SESSION_MEMORY_INFO_KHR"),
+            1000023005 => write!(f, "VIDEO_SESSION_CREATE_INFO_KHR"),
+            1000023006 => write!(f, "VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR"),
+            1000023007 => write!(f, "VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR"),
+            1000023008 => write!(f, "VIDEO_BEGIN_CODING_INFO_KHR"),
+            1000023009 => write!(f, "VIDEO_END_CODING_INFO_KHR"),
+            1000023010 => write!(f, "VIDEO_CODING_CONTROL_INFO_KHR"),
+            1000023011 => write!(f, "VIDEO_REFERENCE_SLOT_INFO_KHR"),
+            1000023012 => write!(f, "QUEUE_FAMILY_VIDEO_PROPERTIES_KHR"),
+            1000023013 => write!(f, "VIDEO_PROFILE_LIST_INFO_KHR"),
+            1000023014 => write!(f, "PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR"),
+            1000023015 => write!(f, "VIDEO_FORMAT_PROPERTIES_KHR"),
+            1000023016 => write!(f, "QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR"),
+            1000024000 => write!(f, "VIDEO_DECODE_INFO_KHR"),
+            1000024001 => write!(f, "VIDEO_DECODE_CAPABILITIES_KHR"),
+            1000024002 => write!(f, "VIDEO_DECODE_USAGE_INFO_KHR"),
             1000026000 => write!(f, "DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV"),
             1000026001 => write!(f, "DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV"),
             1000026002 => write!(f, "DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV"),
@@ -6303,6 +6471,40 @@ impl fmt::Debug for StructureType {
             1000029002 => write!(f, "CU_LAUNCH_INFO_NVX"),
             1000030000 => write!(f, "IMAGE_VIEW_HANDLE_INFO_NVX"),
             1000030001 => write!(f, "IMAGE_VIEW_ADDRESS_PROPERTIES_NVX"),
+            1000038000 => write!(f, "VIDEO_ENCODE_H264_CAPABILITIES_EXT"),
+            1000038001 => write!(f, "VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT"),
+            1000038002 => write!(f, "VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT"),
+            1000038003 => write!(f, "VIDEO_ENCODE_H264_PICTURE_INFO_EXT"),
+            1000038004 => write!(f, "VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT"),
+            1000038005 => write!(f, "VIDEO_ENCODE_H264_NALU_SLICE_INFO_EXT"),
+            1000038006 => write!(f, "VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_EXT"),
+            1000038007 => write!(f, "VIDEO_ENCODE_H264_PROFILE_INFO_EXT"),
+            1000038008 => write!(f, "VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT"),
+            1000038009 => write!(f, "VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT"),
+            1000038010 => write!(f, "VIDEO_ENCODE_H264_SESSION_CREATE_INFO_EXT"),
+            1000038011 => write!(f, "VIDEO_ENCODE_H264_QUALITY_LEVEL_PROPERTIES_EXT"),
+            1000038012 => write!(f, "VIDEO_ENCODE_H264_SESSION_PARAMETERS_GET_INFO_EXT"),
+            1000038013 => write!(f, "VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_EXT"),
+            1000039000 => write!(f, "VIDEO_ENCODE_H265_CAPABILITIES_EXT"),
+            1000039001 => write!(f, "VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT"),
+            1000039002 => write!(f, "VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT"),
+            1000039003 => write!(f, "VIDEO_ENCODE_H265_PICTURE_INFO_EXT"),
+            1000039004 => write!(f, "VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT"),
+            1000039005 => write!(f, "VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_EXT"),
+            1000039006 => write!(f, "VIDEO_ENCODE_H265_GOP_REMAINING_FRAME_INFO_EXT"),
+            1000039007 => write!(f, "VIDEO_ENCODE_H265_PROFILE_INFO_EXT"),
+            1000039009 => write!(f, "VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT"),
+            1000039010 => write!(f, "VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT"),
+            1000039011 => write!(f, "VIDEO_ENCODE_H265_SESSION_CREATE_INFO_EXT"),
+            1000039012 => write!(f, "VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_EXT"),
+            1000039013 => write!(f, "VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_EXT"),
+            1000039014 => write!(f, "VIDEO_ENCODE_H265_SESSION_PARAMETERS_FEEDBACK_INFO_EXT"),
+            1000040000 => write!(f, "VIDEO_DECODE_H264_CAPABILITIES_KHR"),
+            1000040001 => write!(f, "VIDEO_DECODE_H264_PICTURE_INFO_KHR"),
+            1000040003 => write!(f, "VIDEO_DECODE_H264_PROFILE_INFO_KHR"),
+            1000040004 => write!(f, "VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_KHR"),
+            1000040005 => write!(f, "VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_KHR"),
+            1000040006 => write!(f, "VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR"),
             1000041000 => write!(f, "TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD"),
             1000044006 => write!(f, "RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR"),
             1000044007 => write!(f, "RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT"),
@@ -6492,6 +6694,12 @@ impl fmt::Debug for StructureType {
             1000183000 => write!(f, "PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD"),
             1000184000 => write!(f, "CALIBRATED_TIMESTAMP_INFO_EXT"),
             1000185000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD"),
+            1000187000 => write!(f, "VIDEO_DECODE_H265_CAPABILITIES_KHR"),
+            1000187001 => write!(f, "VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR"),
+            1000187002 => write!(f, "VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_KHR"),
+            1000187003 => write!(f, "VIDEO_DECODE_H265_PROFILE_INFO_KHR"),
+            1000187004 => write!(f, "VIDEO_DECODE_H265_PICTURE_INFO_KHR"),
+            1000187005 => write!(f, "VIDEO_DECODE_H265_DPB_SLOT_INFO_KHR"),
             1000174000 => write!(f, "DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR"),
             1000388000 => write!(f, "PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR"),
             1000388001 => write!(f, "QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR"),
@@ -6637,6 +6845,17 @@ impl fmt::Debug for StructureType {
             1000292002 => write!(f, "SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV"),
             1000294000 => write!(f, "PRESENT_ID_KHR"),
             1000294001 => write!(f, "PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR"),
+            1000299000 => write!(f, "VIDEO_ENCODE_INFO_KHR"),
+            1000299001 => write!(f, "VIDEO_ENCODE_RATE_CONTROL_INFO_KHR"),
+            1000299002 => write!(f, "VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR"),
+            1000299003 => write!(f, "VIDEO_ENCODE_CAPABILITIES_KHR"),
+            1000299004 => write!(f, "VIDEO_ENCODE_USAGE_INFO_KHR"),
+            1000299005 => write!(f, "QUERY_POOL_VIDEO_ENCODE_FEEDBACK_CREATE_INFO_KHR"),
+            1000299006 => write!(f, "PHYSICAL_DEVICE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR"),
+            1000299007 => write!(f, "VIDEO_ENCODE_QUALITY_LEVEL_PROPERTIES_KHR"),
+            1000299008 => write!(f, "VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR"),
+            1000299009 => write!(f, "VIDEO_ENCODE_SESSION_PARAMETERS_GET_INFO_KHR"),
+            1000299010 => write!(f, "VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR"),
             1000300000 => write!(f, "PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV"),
             1000300001 => write!(f, "DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV"),
             1000308000 => write!(f, "REFRESH_OBJECT_LIST_KHR"),
@@ -7424,6 +7643,44 @@ impl fmt::Debug for VertexInputRate {
         match self.0 {
             0 => write!(f, "VERTEX"),
             1 => write!(f, "INSTANCE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeTuningModeKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct VideoEncodeTuningModeKHR(i32);
+
+impl VideoEncodeTuningModeKHR {
+    pub const DEFAULT: Self = Self(0);
+    pub const HIGH_QUALITY: Self = Self(1);
+    pub const LOW_LATENCY: Self = Self(2);
+    pub const ULTRA_LOW_LATENCY: Self = Self(3);
+    pub const LOSSLESS: Self = Self(4);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for VideoEncodeTuningModeKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "DEFAULT"),
+            1 => write!(f, "HIGH_QUALITY"),
+            2 => write!(f, "LOW_LATENCY"),
+            3 => write!(f, "ULTRA_LOW_LATENCY"),
+            4 => write!(f, "LOSSLESS"),
             _ => self.0.fmt(f),
         }
     }
