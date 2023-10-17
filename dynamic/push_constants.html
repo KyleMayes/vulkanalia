@@ -223,7 +223,7 @@ data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
     Deg(0.0)
 );
 
-let model_bytes = &amp;*std::slice::from_raw_parts(
+let model_bytes = std::slice::from_raw_parts(
     &amp;model as *const Mat4 as *const u8,
     size_of::&lt;Mat4&gt;()
 );
