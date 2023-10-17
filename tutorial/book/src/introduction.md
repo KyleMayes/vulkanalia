@@ -16,7 +16,7 @@ With that out of the way, let's cover some prerequisites for following this tuto
 
 * A graphics card and driver compatible with Vulkan ([NVIDIA](https://developer.nvidia.com/vulkan-driver), [AMD](http://www.amd.com/en-us/innovations/software-technologies/technologies-gaming/vulkan), [Intel](https://software.intel.com/en-us/blogs/2016/03/14/new-intel-vulkan-beta-1540204404-graphics-driver-for-windows-78110-1540))
 * Experience with Rust
-* Rust 1.64 or later
+* Rust 1.65 or later
 * Some existing experience with 3D computer graphics
 
 This tutorial will not assume knowledge of OpenGL or Direct3D concepts, but it does require you to know the basics of 3D computer graphics. It will not explain the math behind perspective projection, for example. See [this online book](https://paroj.github.io/gltut/) for a great introduction of computer graphics concepts. Some other great computer graphics resources are:
