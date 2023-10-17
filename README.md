@@ -3,7 +3,7 @@
 [![Crate](https://img.shields.io/crates/v/vulkanalia)](https://crates.io/crates/vulkanalia)
 [![Documentation](https://docs.rs/vulkanalia/badge.svg)](https://docs.rs/vulkanalia)
 [![CI](https://img.shields.io/github/actions/workflow/status/KyleMayes/vulkanalia/ci.yml?branch=master)](https://github.com/KyleMayes/vulkanalia/actions?query=workflow%3ACI)
-![MSRV](https://img.shields.io/badge/MSRV-1.64.0-blue)
+![MSRV](https://img.shields.io/badge/MSRV-1.65.0-blue)
 
 Vulkan bindings for Rust.
 
