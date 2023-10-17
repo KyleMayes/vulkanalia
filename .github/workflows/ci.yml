@@ -32,27 +32,17 @@ jobs:
         uses: actions/checkout@v2
       # Dependencies
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: ${{ env.RUST_VERSION }}
-          components: clippy, rustfmt
       # Test
       - name: Cargo Test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --verbose --all-features
+        run: cargo test --verbose --all-features
       # Test (no_std)
       - name: Cargo Build (vulkanalia-sys/no_std)
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --manifest-path vulkanalia-sys/Cargo.toml --no-default-features
+        run: cargo build --manifest-path vulkanalia-sys/Cargo.toml --no-default-features
       - name: Cargo Build (vulkanalia/no_std)
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --manifest-path vulkanalia/Cargo.toml --no-default-features
+        run: cargo build --manifest-path vulkanalia/Cargo.toml --no-default-features
       # Debug
       - name: Debug
         uses: mxschmitt/action-tmate@v3
@@ -70,16 +60,13 @@ jobs:
         uses: actions/checkout@v2
       # Dependencies
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: ${{ env.RUST_VERSION }}
-          components: clippy, rustfmt
+          components: rustfmt
       # Format
       - name: Cargo Format
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --verbose -- --check
+        run: cargo fmt --verbose -- --check
 
   clippy-vulkanalia:
     name: Clippy - Vulkanalia
@@ -93,15 +80,13 @@ jobs:
         uses: actions/checkout@v2
       # Dependencies
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: ${{ env.RUST_VERSION }}
-          components: clippy, rustfmt
+          components: clippy
       # Clippy
       - name: Cargo Clippy
-        uses: actions-rs/clippy-check@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        run: cargo clippy
 
   check-generator:
     name: Check - Generator
@@ -141,21 +126,19 @@ jobs:
         with:
           java-version: 14
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: ${{ env.RUST_VERSION }}
-      - name: Cache bindgen
+          components: rustfmt
+      - name: Cache Bindgen
         id: cache-bindgen
         uses: actions/cache@v2
         with:
           path: ~/.cargo/bin/bindgen
           key: ${{ runner.os }}-${{ env.RUST_VERSION }}-${{ env.BINDGEN_VERSION }}
-      - name: Install bindgen
-        uses: actions-rs/cargo@v1
+      - name: Install Bindgen
         if: steps.cache-bindgen.outputs.cache-hit != 'true'
-        with:
-          command: install
-          args: bindgen-cli --version ${{ env.BINDGEN_VERSION }}
+        run: cargo install bindgen-cli --version ${{ env.BINDGEN_VERSION }}
       # Check
       - name: Check Bindings
         working-directory: ./generator
@@ -163,4 +146,4 @@ jobs:
       # Debug
       - name: Debug
         uses: mxschmitt/action-tmate@v3
-        if: ${{ failure() }}
+        if: ${{ (failure() && inputs.error_debug) || inputs.force_debug }}

@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUST_LOG: info
-      RUST_VERSION: 1.64.0
+      RUST_VERSION: 1.65.0
       MDBOOK_VERSION: 0.4.21
     steps:
       # Checkout
@@ -34,9 +34,10 @@ jobs:
         with:
           java-version: 14
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: ${{ env.RUST_VERSION }}
+          components: rustfmt
       - name: Cache mdbook
         id: cache-mdbook
         uses: actions/cache@v2
@@ -44,11 +45,8 @@ jobs:
           path: ~/.cargo/bin/mdbook
           key: ${{ runner.os }}-${{ env.RUST_VERSION }}-${{ env.MDBOOK_VERSION }}
       - name: Install mdbook
-        uses: actions-rs/cargo@v1
         if: steps.cache-mdbook.outputs.cache-hit != 'true'
-        with:
-          command: install
-          args: mdbook --version ${{ env.MDBOOK_VERSION }} --no-default-features
+        run: cargo install mdbook --version ${{ env.MDBOOK_VERSION }} --no-default-features
       # Publish
       - name: Build Index
         working-directory: ./generator
@@ -60,11 +58,8 @@ jobs:
           path: ~/.cargo/bin/vk-preprocessor
           key: ${{ hashFiles('index.txt', 'tutorial/book/preprocessor/**') }}
       - name: Build Preprocessor
-        uses: actions-rs/cargo@v1
         if: steps.cache-preprocessor.outputs.cache-hit != 'true'
-        with:
-          command: install
-          args: --path ./tutorial/book/preprocessor
+        run: cargo install --path ./tutorial/book/preprocessor
       - name: Build Tutorial
         working-directory: ./tutorial/book
         run: mdbook build
