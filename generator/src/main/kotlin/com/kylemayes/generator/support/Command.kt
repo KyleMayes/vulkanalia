@@ -3,6 +3,7 @@
 package com.kylemayes.generator.support
 
 import mu.KotlinLogging
+import java.nio.file.Path
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -15,17 +16,19 @@ private val log = KotlinLogging.logger { /* */ }
 fun bindgen(vararg args: String): String = execute("bindgen", arrayOf(*args))
 
 /** Executes the `git` command and prints the output. */
-fun git(vararg args: String) {
+fun git(vararg args: String, directory: Path? = null) {
     println("> git ${args.joinToString(" ")}")
-    println(execute("git", arrayOf(*args)))
+    println(execute("git", arrayOf(*args), directory = directory))
 }
 
 /** Executes the `rustfmt` command and returns the output. */
-fun rustfmt(rust: String): String = execute("rustfmt", emptyArray(), rust)
+fun rustfmt(rust: String): String = execute("rustfmt", emptyArray(), input = rust)
 
 /** Executes a command (with a time limit) and returns the output. */
-private fun execute(command: String, args: Array<String>, input: String? = null): String {
-    val process = ProcessBuilder(command, *args).start()
+private fun execute(command: String, args: Array<String>, input: String? = null, directory: Path? = null): String {
+    var builder = ProcessBuilder(command, *args)
+    if (directory != null) builder = builder.directory(directory.toFile())
+    val process = builder.start()
 
     val errors = ConcurrentHashMap<String, Throwable>()
     val latch = CountDownLatch(4)
