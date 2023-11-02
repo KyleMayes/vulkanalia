@@ -12,6 +12,9 @@ import kotlin.time.Duration.Companion.seconds
 
 private val log = KotlinLogging.logger { /* */ }
 
+private val waitTimeout = 30.seconds
+private val killTimeout = 5.seconds
+
 /** Executes the `bindgen` command and returns the output. */
 fun bindgen(vararg args: String): String = execute("bindgen", arrayOf(*args))
 
@@ -38,7 +41,7 @@ private fun execute(command: String, args: Array<String>, input: String? = null,
     fun operation(name: String, operation: () -> Unit) = Thread {
         try {
             Thread.currentThread().name = "$command-$name"
-            log.slow("`$command`: $name", 2.5.seconds) { operation() }
+            log.slow("`$command`: $name", waitTimeout / 2) { operation() }
         } catch (e: Throwable) {
             errors[name] = e
         } finally {
@@ -69,17 +72,17 @@ private fun execute(command: String, args: Array<String>, input: String? = null,
     )
 
     threads.forEach { it.start() }
-    val countdown = latch.await(5, TimeUnit.SECONDS)
+    val countdown = latch.await(waitTimeout.inWholeMilliseconds, TimeUnit.MILLISECONDS)
 
     val stdoutValue = stdout.get()
     val stderrValue = stderr.get()
     val errorsValue = errors.toMap()
 
     if (process.isAlive) {
-        log.slow("`$command`: kill", 0.5.seconds) {
+        log.slow("`$command`: kill", killTimeout / 2) {
             try {
                 process.destroy()
-                process.waitFor(1, TimeUnit.SECONDS)
+                process.waitFor(killTimeout.inWholeMilliseconds, TimeUnit.MILLISECONDS)
                 process.destroyForcibly()
             } catch (e: Error) {
                 e.printStackTrace()
