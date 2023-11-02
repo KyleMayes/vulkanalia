@@ -101,7 +101,7 @@ jobs:
         with:
           java-version: 14
       # Check
-      - name: ktlint Check
+      - name: Check Generator
         working-directory: ./generator
         run: ./gradlew check
 
