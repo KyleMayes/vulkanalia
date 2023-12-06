@@ -19,8 +19,9 @@ use vulkanalia::prelude::v1_0::*;
 use vulkanalia::window as vk_window;
 use vulkanalia::Version;
 use winit::dpi::LogicalSize;
+use winit::error::EventLoopError;
 use winit::event::{Event, WindowEvent};
-use winit::event_loop::{ControlFlow, EventLoop};
+use winit::event_loop::EventLoop;
 use winit::window::{Window, WindowBuilder};
 
 use vk::{KhrSurfaceExtension, KhrSwapchainExtension};
@@ -67,7 +68,7 @@ impl App {
         pretty_env_logger::init();
         info!("Starting app.");
 
-        let event_loop = EventLoop::new();
+        let event_loop = EventLoop::new()?;
         let window = WindowBuilder::new()
             .with_title(title)
             .with_inner_size(LogicalSize::new(800, 600))
@@ -112,25 +113,27 @@ impl App {
 
     /// Starts the rendering loop for this app.
     #[rustfmt::skip]
-    pub unsafe fn run(mut self) -> ! {
-        let mut destroying = false;
-        self.event_loop.take().unwrap().run(move |event, _, flow| {
-            *flow = ControlFlow::Poll;
+    pub unsafe fn run(mut self) -> Result<(), EventLoopError> {
+        self.event_loop.take().unwrap().run(move |event, elwt| {
             match event {
-                // Render a frame for this app.
-                Event::MainEventsCleared if !destroying => self.render().unwrap(),
-                // Recreate the swapchain on next render.
-                Event::WindowEvent { event: WindowEvent::Resized(_), .. } => self.resized = true,
-                // Destroy this app.
-                Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
-                    *flow = ControlFlow::Exit;
-                    destroying = true;
-                    self.device.device_wait_idle().unwrap();
-                    self.destroy();
+                // Request a redraw when all events were processed.
+                Event::AboutToWait => self.window.request_redraw(),
+                Event::WindowEvent { event, .. } => match event {
+                    // Render a frame for this app.
+                    WindowEvent::RedrawRequested if !elwt.exiting() => self.render().unwrap(),
+                    // Recreate the swapchain on next render.
+                    WindowEvent::Resized(_) => self.resized = true,
+                    // Destroy this app.
+                    WindowEvent::CloseRequested => {
+                        elwt.exit();
+                        self.device.device_wait_idle().unwrap();
+                        self.destroy();
+                    }
+                    _ => {}
                 }
                 _ => {}
             }
-        });
+        })
     }
 
     /// Renders a frame for this app.

@@ -171,24 +171,27 @@ There is another case where a swapchain may become out of date and that is a spe
 
 ```rust,noplaypen
 let mut app = unsafe { App::create(&window)? };
-let mut destroying = false;
 let mut minimized = false;
-event_loop.run(move |event, _, control_flow| {
-    *control_flow = ControlFlow::Poll;
+event_loop.run(move |event,elwt| {
     match event {
-        Event::MainEventsCleared if !destroying && !minimized =>
-            unsafe { app.render(&window) }.unwrap(),
-        Event::WindowEvent { event: WindowEvent::Resized(size), .. } => {
-            if size.width == 0 || size.height == 0 {
-                minimized = true;
-            } else {
-                minimized = false;
-                app.resized = true;
+        // ...
+        Event::WindowEvent { event, .. } => match event {
+            WindowEvent::RedrawRequested if !elwt.exiting() && !minimized => {
+                unsafe { app.render(&window) }.unwrap();
+            },
+            WindowEvent::Resized(size) => {
+                if size.width == 0 || size.height == 0 {
+                    minimized = true;
+                } else {
+                    minimized = false;
+                    app.resized = true;
+                }
             }
+            // ...
         }
         // ...
     }
-});
+})?;
 ```
 
 Congratulations, you've now finished your very first well-behaved Vulkan program! In the next chapter we're going to get rid of the hardcoded vertices in the vertex shader and actually use a vertex buffer.

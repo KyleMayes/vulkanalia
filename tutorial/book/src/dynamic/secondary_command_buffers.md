@@ -293,14 +293,18 @@ Finally, add a case to the event match block in the `main` function that handles
 ```rust,noplaypen
 match event {
     // ...
-    Event::WindowEvent { event: WindowEvent::KeyboardInput { input, .. }, .. } => {
-        if input.state == ElementState::Pressed {
-            match input.virtual_keycode {
-                Some(VirtualKeyCode::Left) if app.models > 1 => app.models -= 1,
-                Some(VirtualKeyCode::Right) if app.models < 4 => app.models += 1,
-                _ => { }
+    Event::WindowEvent { event, .. } => match event {
+        // ...
+        WindowEvent::KeyboardInput { event, .. } => {
+            if event.state == ElementState::Pressed {
+                match event.physical_key {
+                    PhysicalKey::Code(KeyCode::ArrowLeft) if app.models > 1 => app.models -= 1,
+                    PhysicalKey::Code(KeyCode::ArrowRight) if app.models < 4 => app.models += 1,
+                    _ => { }
+                }
             }
         }
+        // ...
     }
     // ...
 }
