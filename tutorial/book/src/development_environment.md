@@ -30,7 +30,7 @@ winit = "0.28"
 * `png` &ndash; used to load PNGs to use as textures
 * `pretty_env_logger` &ndash; used to print our logs to the console
 * `thiserror` &ndash; used to define custom errors types without boilerplate
-* `tobj` &ndash; used to load 3D models in the [Wavefront .obj format](https:/en.wikipedia.org/wiki/Wavefront_.obj_file)
+* `tobj` &ndash; used to load 3D models in the [Wavefront .obj format](https://en.wikipedia.org/wiki/Wavefront_.obj_file)
 * `vulkanalia` &ndash; used to call the Vulkan API
 * `winit` &ndash; used to create a window to render to
 
