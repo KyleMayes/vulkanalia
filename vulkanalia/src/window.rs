@@ -173,9 +173,17 @@ pub unsafe fn create_surface(
         #[cfg(target_os = "windows")]
         (Ok(RawDisplayHandle::Windows(_)), Ok(RawWindowHandle::Win32(window))) => {
             use vk::KhrWin32SurfaceExtension;
+
+            let hinstance_ptr = window
+                .hinstance
+                .map(|hinstance| hinstance.get() as vk::HINSTANCE)
+                .unwrap_or(std::ptr::null_mut());
+            let hwnd_ptr = window.hwnd.get() as vk::HWND;
+
             let info = vk::Win32SurfaceCreateInfoKHR::builder()
-                .hinstance(window.hinstance)
-                .hwnd(window.hwnd);
+                .hinstance(hinstance_ptr)
+                .hwnd(hwnd_ptr);
+
             instance.create_win32_surface_khr(&info, None)
         }
         // Unsupported (currently)
