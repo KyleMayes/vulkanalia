@@ -47,13 +47,13 @@ pub fn get_required_instance_extensions(
         ],
         // macOS
         #[cfg(target_os = "macos")]
-        Ok(RawWindowHandle::AppKit(window)) => &[
+        Ok(RawWindowHandle::AppKit(_window)) => &[
             &vk::KHR_SURFACE_EXTENSION.name,
             &vk::EXT_METAL_SURFACE_EXTENSION.name,
         ],
         // Windows
         #[cfg(target_os = "windows")]
-        Ok(RawWindowHandle::Win32(_)) => &[
+        Ok(RawWindowHandle::Win32(_window)) => &[
             &vk::KHR_SURFACE_EXTENSION.name,
             &vk::KHR_WIN32_SURFACE_EXTENSION.name,
         ],
@@ -138,7 +138,6 @@ pub unsafe fn create_surface(
         // macOS
         #[cfg(target_os = "macos")]
         (Ok(RawDisplayHandle::AppKit(_)), Ok(RawWindowHandle::AppKit(window))) => {
-            use std::mem;
             use std::os::raw::c_void;
 
             use cocoa::appkit::{NSView, NSWindow};
@@ -147,10 +146,8 @@ pub unsafe fn create_surface(
             use objc::runtime::YES;
             use vk::ExtMetalSurfaceExtension;
 
-            let (view, layer) = {
-                let id = mem::transmute::<_, id>(window.ns_window);
-
-                let view = id.contentView();
+            let layer = {
+                let view = window.ns_view.as_ptr() as id;
 
                 let layer = MetalLayer::new();
                 layer.set_contents_scale(view.backingScaleFactor());
@@ -162,7 +159,7 @@ pub unsafe fn create_surface(
                 view.setLayer(layer_ref as *mut objc::runtime::Object);
                 view.setWantsLayer(YES);
 
-                (&mut *window.ns_view, layer)
+                layer
             };
 
             let layer = (layer.as_ref() as *const MetalLayerRef).cast::<c_void>();
