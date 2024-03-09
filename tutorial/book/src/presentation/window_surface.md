@@ -145,6 +145,7 @@ let queue_infos = unique_indices
         vk::DeviceQueueCreateInfo::builder()
             .queue_family_index(*i)
             .queue_priorities(queue_priorities)
+            .build()
     })
     .collect::<Vec<_>>();
 ```
