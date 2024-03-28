@@ -99,7 +99,7 @@ jobs:
       - name: Install Java
         uses: actions/setup-java@v1
         with:
-          java-version: 14
+          java-version: 21
       # Check
       - name: Check Generator
         working-directory: ./generator
@@ -124,7 +124,7 @@ jobs:
       - name: Install Java
         uses: actions/setup-java@v1
         with:
-          java-version: 14
+          java-version: 21
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
