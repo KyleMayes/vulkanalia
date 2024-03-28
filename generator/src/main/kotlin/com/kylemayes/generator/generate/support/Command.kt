@@ -8,7 +8,8 @@ import com.kylemayes.generator.registry.getIdentifier
 
 // The commands whose types cannot be determined by their extension membership or first parameter.
 private val STATIC = setOf("vkGetInstanceProcAddr", "vkGetDeviceProcAddr")
-private val ENTRY = setOf("vkCreateInstance", "vkEnumerateInstanceExtensionProperties", "vkEnumerateInstanceLayerProperties", "vkEnumerateInstanceVersion")
+private val ENTRY =
+    setOf("vkCreateInstance", "vkEnumerateInstanceExtensionProperties", "vkEnumerateInstanceLayerProperties", "vkEnumerateInstanceVersion")
 private val INSTANCE = setOf("vkCreateDevice")
 
 /** A type of command which indicates how it is loaded. */
@@ -47,16 +48,18 @@ fun Registry.getCommandType(command: Command): CommandType {
 }
 
 /** Gets the command types for the Vulkan extension commands. */
-private val getExtensionCommandTypes = thunk { ->
-    extensions.values
-        .filter { e -> e.type != null }
-        .flatMap { e -> e.require.commands.map { c -> Pair(e, c) } }
-        .associate { (e, c) -> c to CommandType.valueOf(e.type!!.uppercase()) }
-}
+private val getExtensionCommandTypes =
+    thunk { ->
+        extensions.values
+            .filter { e -> e.type != null }
+            .flatMap { e -> e.require.commands.map { c -> Pair(e, c) } }
+            .associate { (e, c) -> c to CommandType.valueOf(e.type!!.uppercase()) }
+    }
 
 /** Gets the non-`SUCCESS` and non-`INCOMPLETE` success codes for a Vulkan command. */
-val getCommandSuccessCodes = thunk { command: Command ->
-    command.successcodes
-        .filter { it.value != "SUCCESS" && it.value != "INCOMPLETE" }
-        .toSet()
-}
+val getCommandSuccessCodes =
+    thunk { command: Command ->
+        command.successcodes
+            .filter { it.value != "SUCCESS" && it.value != "INCOMPLETE" }
+            .toSet()
+    }

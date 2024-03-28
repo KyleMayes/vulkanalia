@@ -24,36 +24,40 @@ use super::*;
     var previousSuffix: String? = null
     for (version in this.versions.values) {
         val suffix = version.number.toString().replace('.', '_')
-        val commands = commands.values
-            .filter { version.require.commands.contains(it.name) }
-            .groupBy { getCommandType(it) }
+        val commands =
+            commands.values
+                .filter { version.require.commands.contains(it.name) }
+                .groupBy { getCommandType(it) }
 
-        versions += generateVersionTrait(
-            version,
-            commands[CommandType.ENTRY]?.sortedBy { it.name } ?: emptyList(),
-            CommandType.ENTRY,
-            "EntryV$suffix",
-            previousSuffix?.let { "EntryV$previousSuffix" },
-            false,
-        )
+        versions +=
+            generateVersionTrait(
+                version,
+                commands[CommandType.ENTRY]?.sortedBy { it.name } ?: emptyList(),
+                CommandType.ENTRY,
+                "EntryV$suffix",
+                previousSuffix?.let { "EntryV$previousSuffix" },
+                false,
+            )
 
-        versions += generateVersionTrait(
-            version,
-            commands[CommandType.INSTANCE]?.sortedBy { it.name } ?: emptyList(),
-            CommandType.INSTANCE,
-            "InstanceV$suffix",
-            previousSuffix?.let { "InstanceV$previousSuffix" },
-            true,
-        )
+        versions +=
+            generateVersionTrait(
+                version,
+                commands[CommandType.INSTANCE]?.sortedBy { it.name } ?: emptyList(),
+                CommandType.INSTANCE,
+                "InstanceV$suffix",
+                previousSuffix?.let { "InstanceV$previousSuffix" },
+                true,
+            )
 
-        versions += generateVersionTrait(
-            version,
-            commands[CommandType.DEVICE]?.sortedBy { it.name } ?: emptyList(),
-            CommandType.DEVICE,
-            "DeviceV$suffix",
-            previousSuffix?.let { "DeviceV$previousSuffix" },
-            true,
-        )
+        versions +=
+            generateVersionTrait(
+                version,
+                commands[CommandType.DEVICE]?.sortedBy { it.name } ?: emptyList(),
+                CommandType.DEVICE,
+                "DeviceV$suffix",
+                previousSuffix?.let { "DeviceV$previousSuffix" },
+                true,
+            )
 
         previousSuffix = suffix
     }
@@ -69,17 +73,16 @@ private fun Registry.generateVersionTrait(
     name: String,
     extends: String?,
     handle: Boolean,
-) =
-    """
+) = """
 /// Vulkan ${version.number} ${type.display.lowercase()} command wrappers.
 pub trait $name${extends?.let { ": $it" } ?: ""} {
-    ${if (extends == null) { "fn commands(&self) -> &${type.display}Commands;\n" } else { "" }}
-    ${if (handle && extends == null) { "fn handle(&self) -> ${type.display};\n" } else { "" }}
+    ${if (extends == null) "fn commands(&self) -> &${type.display}Commands;\n" else ""}
+    ${if (handle && extends == null) "fn handle(&self) -> ${type.display};\n" else ""}
     ${commands.joinToString("") { generateCommandWrapper(it) }}
 }
 
 impl $name for crate::${type.display} {
-    ${if (extends == null) { "#[inline] fn commands(&self) -> &${type.display}Commands { &self.commands }\n" } else { "" }}
-    ${if (handle && extends == null) { "#[inline] fn handle(&self) -> ${type.display} { self.handle }\n" } else { "" }}
+    ${if (extends == null) "#[inline] fn commands(&self) -> &${type.display}Commands { &self.commands }\n" else ""}
+    ${if (handle && extends == null) "#[inline] fn handle(&self) -> ${type.display} { self.handle }\n" else ""}
 }
     """

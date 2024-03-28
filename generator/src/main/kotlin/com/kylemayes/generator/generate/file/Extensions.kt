@@ -71,17 +71,19 @@ ${getExtensionGroups().values
 
 /** Generates a Rust constant for a Vulkan extension. */
 private fun Registry.generateExtension(extension: Extension): String {
-    val provisional = if (extension.provisional) { PROVISIONAL } else { "" }
+    val provisional = if (extension.provisional) PROVISIONAL else ""
     val deprecation = generateDeprecation(extension)?.let { "\n$it" } ?: ""
 
-    val extensions = if (extension.requires != null) {
-        val names = extension.requires.split(",")
-            .map { extensions[it.intern()]!!.name }
-            .joinToString { "${it}_EXTENSION.name" }
-        "Some(&[$names])"
-    } else {
-        "None"
-    }
+    val extensions =
+        if (extension.requires != null) {
+            val names =
+                extension.requires.split(",")
+                    .map { extensions[it.intern()]!!.name }
+                    .joinToString { "${it}_EXTENSION.name" }
+            "Some(&[$names])"
+        } else {
+            "None"
+        }
 
     return """
 /// <${generateManualUrl(extension)}>$provisional$deprecation
@@ -120,7 +122,7 @@ ${getExtensionGroups().values
 
 /** Generates a Rust trait and implementation for a Vulkan extension. */
 private fun Registry.generateExtensionTrait(extension: Extension): String {
-    val provisional = if (extension.provisional) { PROVISIONAL } else { "" }
+    val provisional = if (extension.provisional) PROVISIONAL else ""
     val deprecation = generateDeprecation(extension)?.let { "\n$it" } ?: ""
 
     val name = "${extension.name.value.toPascalCase()}Extension"
@@ -128,10 +130,11 @@ private fun Registry.generateExtensionTrait(extension: Extension): String {
 
     val commands = extension.require.commands.mapNotNull { commands[it] }.sortedBy { it.name }
 
-    val implAttributes = listOf(
-        if (extension.provisional) { "#[cfg(feature = \"provisional\")]" } else { "" },
-        if (deprecation.isNotEmpty()) { "#[allow(deprecated)]" } else { "" },
-    ).filter { it.isNotBlank() }.joinToString("\n")
+    val implAttributes =
+        listOf(
+            if (extension.provisional) "#[cfg(feature = \"provisional\")]" else "",
+            if (deprecation.isNotEmpty()) "#[allow(deprecated)]" else "",
+        ).filter { it.isNotBlank() }.joinToString("\n")
 
     return """
 /// <${generateManualUrl(extension)}>$provisional$deprecation
@@ -149,10 +152,11 @@ impl $name for crate::$type { }
 }
 
 /** Generates a Rust deprecation annotation for a Vulkan extension. */
-private fun generateDeprecation(extension: Extension) = extension.deprecatedby?.let {
-    if (it.isNotBlank()) {
-        """#[deprecated(note = "deprecated in favor of `$it`")]"""
-    } else {
-        "#[deprecated]"
+private fun generateDeprecation(extension: Extension) =
+    extension.deprecatedby?.let {
+        if (it.isNotBlank()) {
+            """#[deprecated(note = "deprecated in favor of `$it`")]"""
+        } else {
+            "#[deprecated]"
+        }
     }
-}

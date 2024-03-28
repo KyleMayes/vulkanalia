@@ -51,13 +51,14 @@ fun extractEntities(e: Element): Registry {
     // Extract the commands and command aliases.
 
     val commands = e.queryEntities("commands/command[not(@alias) and (not(@api) or @api='vulkan')]", ::extractCommand).toMutableMap()
-    val commandAliases = e.queryElements("commands/command[@alias]").associate {
-        val name = it.getAttribute("name").intern()
-        val alias = it.getAttribute("alias").intern()
-        val command = commands[alias] ?: error("Missing aliased command.")
-        commands[name] = command.copy(name = name)
-        name to alias
-    }
+    val commandAliases =
+        e.queryElements("commands/command[@alias]").associate {
+            val name = it.getAttribute("name").intern()
+            val alias = it.getAttribute("alias").intern()
+            val command = commands[alias] ?: error("Missing aliased command.")
+            commands[name] = command.copy(name = name)
+            name to alias
+        }
 
     // Extract the other entities.
 
@@ -89,20 +90,23 @@ data class Bitmask(
     val bitflags: MutableList<Bitflag>,
 ) : Entity
 
-private fun extractBitmask(e: Element) = Bitmask(
-    name = e.getAttribute("name").intern(),
-    api = null,
-    bitflags = e.getElements("enum")
-        .filter { !it.hasAttribute("alias") }
-        .map(::extractBitflag)
-        .toMutableList(),
-)
+private fun extractBitmask(e: Element) =
+    Bitmask(
+        name = e.getAttribute("name").intern(),
+        api = null,
+        bitflags =
+            e.getElements("enum")
+                .filter { !it.hasAttribute("alias") }
+                .map(::extractBitflag)
+                .toMutableList(),
+    )
 
-private fun extractBitmaskType(e: Element) = Bitmask(
-    name = e.getElementText("name")!!.intern(),
-    api = e.getAttributeText("api"),
-    bitflags = ArrayList(),
-)
+private fun extractBitmaskType(e: Element) =
+    Bitmask(
+        name = e.getElementText("name")!!.intern(),
+        api = e.getAttributeText("api"),
+        bitflags = ArrayList(),
+    )
 
 /** A bitflag. */
 data class Bitflag(
@@ -111,14 +115,16 @@ data class Bitflag(
     val value: BigInteger,
 ) : Entity
 
-private fun extractBitflag(e: Element) = Bitflag(
-    name = e.getAttribute("name").intern(),
-    api = e.getAttributeText("api"),
-    value = e.getAttributeText("bitpos")
-        ?.toNumber()
-        ?.let { BigInteger.ONE.shiftLeft(it.toInt()) }
-        ?: e.getAttribute("value").toNumber().toBigInteger(),
-)
+private fun extractBitflag(e: Element) =
+    Bitflag(
+        name = e.getAttribute("name").intern(),
+        api = e.getAttributeText("api"),
+        value =
+            e.getAttributeText("bitpos")
+                ?.toNumber()
+                ?.let { BigInteger.ONE.shiftLeft(it.toInt()) }
+                ?: e.getAttribute("value").toNumber().toBigInteger(),
+    )
 
 // ===============================================
 // Command
@@ -141,14 +147,16 @@ private fun extractCommand(e: Element): Command {
         api = e.getAttributeText("api"),
         params = e.queryElements("param", ::extractParam),
         result = extractType(proto.getElement("type")!!),
-        successcodes = e.getAttributeText("successcodes")
-            ?.split(",")
-            ?.map { it.intern() }
-            ?: emptyList(),
-        errorcodes = e.getAttributeText("errorcodes")
-            ?.split(",")
-            ?.map { it.intern() }
-            ?: emptyList(),
+        successcodes =
+            e.getAttributeText("successcodes")
+                ?.split(",")
+                ?.map { it.intern() }
+                ?: emptyList(),
+        errorcodes =
+            e.getAttributeText("errorcodes")
+                ?.split(",")
+                ?.map { it.intern() }
+                ?: emptyList(),
     )
 }
 
@@ -190,20 +198,22 @@ private fun extractConstant(e: Element): Constant {
     val name = e.getAttribute("name")
     val value = e.getAttribute("value")
 
-    val type = when {
-        name == "VK_TRUE" || name == "VK_FALSE" -> "uint32_t"
-        name != "WHOLE_SIZE" && (name.startsWith("VK_MAX") || name.endsWith("SIZE")) -> "size_t"
-        value.contains("ULL") -> "uint64_t"
-        value.contains("U") -> "uint32_t"
-        value.contains(Regex("[fF]$")) -> "float"
-        else -> "int32_t"
-    }
+    val type =
+        when {
+            name == "VK_TRUE" || name == "VK_FALSE" -> "uint32_t"
+            name != "WHOLE_SIZE" && (name.startsWith("VK_MAX") || name.endsWith("SIZE")) -> "size_t"
+            value.contains("ULL") -> "uint64_t"
+            value.contains("U") -> "uint32_t"
+            value.contains(Regex("[fF]$")) -> "float"
+            else -> "int32_t"
+        }
 
-    val expr = if (value.startsWith("(~")) {
-        value.replace('~', '!').replace(Regex("(\\d+)U(LL)?"), "$1")
-    } else {
-        value
-    }
+    val expr =
+        if (value.startsWith("(~")) {
+            value.replace('~', '!').replace(Regex("(\\d+)U(LL)?"), "$1")
+        } else {
+            value
+        }
 
     return Constant(
         name = name.intern(),
@@ -224,14 +234,16 @@ data class Enum(
     val variants: MutableList<Variant>,
 ) : Entity
 
-private fun extractEnum(e: Element) = Enum(
-    name = e.getAttribute("name").intern(),
-    api = e.getAttributeText("api"),
-    variants = e.getElements("enum")
-        .filter { !it.hasAttribute("alias") }
-        .map(::extractVariant)
-        .toMutableList(),
-)
+private fun extractEnum(e: Element) =
+    Enum(
+        name = e.getAttribute("name").intern(),
+        api = e.getAttributeText("api"),
+        variants =
+            e.getElements("enum")
+                .filter { !it.hasAttribute("alias") }
+                .map(::extractVariant)
+                .toMutableList(),
+    )
 
 /** An enum variant. */
 data class Variant(
@@ -240,11 +252,12 @@ data class Variant(
     val value: Long,
 ) : Entity
 
-private fun extractVariant(e: Element) = Variant(
-    name = e.getAttribute("name").intern(),
-    api = e.getAttributeText("api"),
-    value = e.getAttribute("value").toNumber(),
-)
+private fun extractVariant(e: Element) =
+    Variant(
+        name = e.getAttribute("name").intern(),
+        api = e.getAttributeText("api"),
+        value = e.getAttribute("value").toNumber(),
+    )
 
 // ================================================
 // Function
@@ -258,18 +271,20 @@ data class Function(
     val result: Type?,
 ) : Entity
 
-private fun extractFunction(e: Element) = Function(
-    name = e.getElementText("name")!!.intern(),
-    api = e.getAttributeText("api"),
-    params = e.getElements("type", ::extractType),
-    result = when (val type = e.textContent.substring(8, e.textContent.indexOf("(VKAPI_PTR")).trim()) {
-        "void" -> null
-        "void*" -> PointerType(IdentifierType("void".intern()), false)
-        "VkBool32" -> IdentifierType("VkBool32".intern())
-        "PFN_vkVoidFunction" -> IdentifierType("PFN_vkVoidFunction".intern())
-        else -> error("Unsupported function pointer result type ($type).")
-    },
-)
+private fun extractFunction(e: Element) =
+    Function(
+        name = e.getElementText("name")!!.intern(),
+        api = e.getAttributeText("api"),
+        params = e.getElements("type", ::extractType),
+        result =
+            when (val type = e.textContent.substring(8, e.textContent.indexOf("(VKAPI_PTR")).trim()) {
+                "void" -> null
+                "void*" -> PointerType(IdentifierType("void".intern()), false)
+                "VkBool32" -> IdentifierType("VkBool32".intern())
+                "PFN_vkVoidFunction" -> IdentifierType("PFN_vkVoidFunction".intern())
+                else -> error("Unsupported function pointer result type ($type).")
+            },
+    )
 
 // ===============================================
 // Handle
@@ -282,11 +297,12 @@ data class Handle(
     val dispatchable: Boolean,
 ) : Entity
 
-private fun extractHandle(e: Element) = Handle(
-    name = e.getElementText("name")!!.intern(),
-    api = e.getAttributeText("api"),
-    dispatchable = !e.getElementText("type")!!.contains("NON_DISPATCHABLE"),
-)
+private fun extractHandle(e: Element) =
+    Handle(
+        name = e.getElementText("name")!!.intern(),
+        api = e.getAttributeText("api"),
+        dispatchable = !e.getElementText("type")!!.contains("NON_DISPATCHABLE"),
+    )
 
 // ===============================================
 // Structure
@@ -300,12 +316,13 @@ data class Structure(
     val structextends: List<Identifier>?,
 ) : Entity
 
-private fun extractStructure(e: Element) = Structure(
-    name = e.getAttribute("name").intern(),
-    api = e.getAttributeText("api"),
-    members = e.getElements("member", ::extractMember),
-    structextends = e.getAttributeText("structextends")?.split(",")?.map { it.intern() },
-)
+private fun extractStructure(e: Element) =
+    Structure(
+        name = e.getAttribute("name").intern(),
+        api = e.getAttributeText("api"),
+        members = e.getElements("member", ::extractMember),
+        structextends = e.getAttributeText("structextends")?.split(",")?.map { it.intern() },
+    )
 
 /** A struct or union member. */
 data class Member(
@@ -319,16 +336,17 @@ data class Member(
     val bits: Int?,
 ) : Entity
 
-private fun extractMember(e: Element) = Member(
-    name = e.getElementText("name")!!.intern(),
-    api = e.getAttributeText("api"),
-    type = extractType(e.getElement("type")!!),
-    values = e.getAttributeText("values")?.intern(),
-    len = e.getAttributeText("len")?.split(",")?.map { it.intern() },
-    altlen = e.getAttribute("altlen"),
-    optional = e.getAttributeText("optional") == "true",
-    bits = Regex(":(\\d+)$").find(e.textContent)?.let { it.groupValues[1].toInt() },
-)
+private fun extractMember(e: Element) =
+    Member(
+        name = e.getElementText("name")!!.intern(),
+        api = e.getAttributeText("api"),
+        type = extractType(e.getElement("type")!!),
+        values = e.getAttributeText("values")?.intern(),
+        len = e.getAttributeText("len")?.split(",")?.map { it.intern() },
+        altlen = e.getAttribute("altlen"),
+        optional = e.getAttributeText("optional") == "true",
+        bits = Regex(":(\\d+)$").find(e.textContent)?.let { it.groupValues[1].toInt() },
+    )
 
 // ===============================================
 // Typedef
@@ -341,11 +359,12 @@ data class Typedef(
     val type: IdentifierType,
 ) : Entity
 
-private fun extractAlias(e: Element) = Typedef(
-    name = e.getAttribute("name").intern(),
-    api = e.getAttributeText("api"),
-    type = IdentifierType(e.getAttribute("alias").intern()),
-)
+private fun extractAlias(e: Element) =
+    Typedef(
+        name = e.getAttribute("name").intern(),
+        api = e.getAttributeText("api"),
+        type = IdentifierType(e.getAttribute("alias").intern()),
+    )
 
 private fun extractBasetype(e: Element): Typedef? {
     val name = e.getElementText("name") ?: return null
@@ -369,12 +388,13 @@ data class Version(
     val require: Require,
 ) : Entity
 
-private fun extractVersion(e: Element) = Version(
-    name = e.getAttribute("name").intern(),
-    api = e.getAttributeText("api"),
-    number = e.getAttribute("number").toFloat(),
-    require = extractRequire(e.getElements("require")),
-)
+private fun extractVersion(e: Element) =
+    Version(
+        name = e.getAttribute("name").intern(),
+        api = e.getAttributeText("api"),
+        number = e.getAttribute("number").toFloat(),
+        require = extractRequire(e.getElements("require")),
+    )
 
 /** A Vulkan extension. */
 data class Extension(
@@ -395,23 +415,24 @@ data class Extension(
     val require: Require,
 ) : Entity
 
-private fun extractExtension(e: Element) = Extension(
-    name = e.getAttribute("name").intern(),
-    api = e.getAttributeText("api"),
-    number = e.getAttribute("number").toNumber(),
-    type = e.getAttributeText("type"),
-    author = e.getAttribute("author"),
-    contact = e.getAttribute("contact"),
-    platform = e.getAttributeText("platform"),
-    requires = e.getAttributeText("requires"),
-    requiresCore = e.getAttributeText("requiresCore"),
-    deprecatedby = e.getAttributeText("deprecatedby"),
-    obsoletedby = e.getAttributeText("obsoletedby"),
-    promotedto = e.getAttributeText("promotedto"),
-    supported = e.getAttribute("supported"),
-    provisional = e.getAttributeText("provisional") == "true",
-    require = extractRequire(e.getElements("require")),
-)
+private fun extractExtension(e: Element) =
+    Extension(
+        name = e.getAttribute("name").intern(),
+        api = e.getAttributeText("api"),
+        number = e.getAttribute("number").toNumber(),
+        type = e.getAttributeText("type"),
+        author = e.getAttribute("author"),
+        contact = e.getAttribute("contact"),
+        platform = e.getAttributeText("platform"),
+        requires = e.getAttributeText("requires"),
+        requiresCore = e.getAttributeText("requiresCore"),
+        deprecatedby = e.getAttributeText("deprecatedby"),
+        obsoletedby = e.getAttributeText("obsoletedby"),
+        promotedto = e.getAttributeText("promotedto"),
+        supported = e.getAttribute("supported"),
+        provisional = e.getAttributeText("provisional") == "true",
+        require = extractRequire(e.getElements("require")),
+    )
 
 /** The commands, types, and enum extensions provided by a version or extension. */
 data class Require(
@@ -492,32 +513,37 @@ interface Entity {
 }
 
 /** Gets and maps all of the entities in this element with the supplied tag. */
-fun <T : Entity> Element.getEntities(@Language("XPath") expr: String, transform: (Element) -> T?) =
-    getElements(expr, transform).associateBy { it.name }
+fun <T : Entity> Element.getEntities(
+    @Language("XPath") expr: String,
+    transform: (Element) -> T?,
+) = getElements(expr, transform).associateBy { it.name }
 
 /** Finds the entities in this node that match the supplied XPath expression. */
-fun <T : Entity> Node.queryEntities(@Language("XPath") expr: String, transform: (Element) -> T?) =
-    queryElements(expr, transform).associateBy { it.name }
+fun <T : Entity> Node.queryEntities(
+    @Language("XPath") expr: String,
+    transform: (Element) -> T?,
+) = queryElements(expr, transform).associateBy { it.name }
 
 // ===============================================
 // Type
 // ===============================================
 
 /** The mapping from C/C++ primitive types to Rust primitive types. */
-private val primitives = mapOf(
-    "void" to "c_void",
-    "char" to "c_char",
-    "int" to "c_int",
-    "size_t" to "usize",
-    "int32_t" to "i32",
-    "int64_t" to "i64",
-    "uint8_t" to "u8",
-    "uint16_t" to "u16",
-    "uint32_t" to "u32",
-    "uint64_t" to "u64",
-    "float" to "f32",
-    "double" to "f64",
-)
+private val primitives =
+    mapOf(
+        "void" to "c_void",
+        "char" to "c_char",
+        "int" to "c_int",
+        "size_t" to "usize",
+        "int32_t" to "i32",
+        "int64_t" to "i64",
+        "uint8_t" to "u8",
+        "uint16_t" to "u16",
+        "uint32_t" to "u32",
+        "uint64_t" to "u64",
+        "float" to "f32",
+        "double" to "f64",
+    )
 
 /** A C/C++ type. */
 interface Type {
@@ -538,15 +564,17 @@ private fun extractType(e: Element): Type {
     // `<type>float</type> <name>matrix</name>[3][4]`
     // `<type>uint8_t</type> <name>deviceUUID</name>[<enum>VK_UUID_SIZE</enum>]`
     if (e.parentNode is Element) {
-        val contents = e.parentNode.childNodes
-            .mapNodes { it }
-            .filter { it.nodeType == Node.TEXT_NODE || (it is Element && it.tagName == "enum") }
-            .joinToString("") { it.textContent }
-        val lengths = Regex("\\[([^]]+)]")
-            .findAll(contents)
-            .map { it.groups[1]!!.value.intern() }
-            .toList()
-            .reversed()
+        val contents =
+            e.parentNode.childNodes
+                .mapNodes { it }
+                .filter { it.nodeType == Node.TEXT_NODE || (it is Element && it.tagName == "enum") }
+                .joinToString("") { it.textContent }
+        val lengths =
+            Regex("\\[([^]]+)]")
+                .findAll(contents)
+                .map { it.groups[1]!!.value.intern() }
+                .toList()
+                .reversed()
         if (lengths.isNotEmpty()) {
             var array = ArrayType(identifier, lengths[0])
             lengths.subList(1, lengths.size).forEach { array = ArrayType(array, it) }
@@ -572,107 +600,121 @@ private fun extractType(e: Element): Type {
     return identifier
 }
 
-fun Type.getBaseIdentifier(): Identifier? = when (this) {
-    is ArrayType -> element.getBaseIdentifier()
-    is IdentifierType -> identifier
-    is PointerType -> null
-    else -> error("Unreachable.")
-}
+fun Type.getBaseIdentifier(): Identifier? =
+    when (this) {
+        is ArrayType -> element.getBaseIdentifier()
+        is IdentifierType -> identifier
+        is PointerType -> null
+        else -> error("Unreachable.")
+    }
 
 // Array =========================================
 
 /** A C/C++ fixed-length array type. */
 data class ArrayType(val element: Type, val length: Identifier) : Type {
-    override fun generate() = when (element.getIdentifier()?.original) {
-        "char" -> "StringArray<$length>"
-        "uint8_t" -> "ByteArray<$length>"
-        else -> "[${element.generate()}; $length]"
-    }
+    override fun generate() =
+        when (element.getIdentifier()?.original) {
+            "char" -> "StringArray<$length>"
+            "uint8_t" -> "ByteArray<$length>"
+            else -> "[${element.generate()}; $length]"
+        }
 
     override fun generateForCommand() = "*const ${element.generateForCommand()}"
 
-    override fun generateDefault() = when (element.getIdentifier()?.original) {
-        "char" -> "StringArray::default()"
-        "uint8_t" -> "ByteArray::default()"
-        else -> "[${element.generateDefault()}; $length]"
-    }
+    override fun generateDefault() =
+        when (element.getIdentifier()?.original) {
+            "char" -> "StringArray::default()"
+            "uint8_t" -> "ByteArray::default()"
+            else -> "[${element.generateDefault()}; $length]"
+        }
 }
 
-fun Type.getElement() = if (this is ArrayType) { element } else { null }
-fun Type.getLength() = if (this is ArrayType) { length } else { null }
+fun Type.getElement() = if (this is ArrayType) element else null
+
+fun Type.getLength() = if (this is ArrayType) length else null
+
 fun Type.isByteArray() = getElement()?.getIdentifier()?.original == "uint8_t"
+
 fun Type.isStringArray() = getElement()?.getIdentifier()?.original == "char"
 
 // Identifier ====================================
 
 /** A C/C++ identifier type. */
 data class IdentifierType(val identifier: Identifier) : Type {
-    override fun generate() = if (identifier.value.startsWith("StdVideo")) {
-        // Types from the Vulkan video headers are prefixed with `StdVideo`
-        // and are in a separate `video` module from the registry types.
-        "video::${identifier.value}"
-    } else {
-        primitives.getOrDefault(identifier.value, identifier.value)
-    }
+    override fun generate() =
+        if (identifier.value.startsWith("StdVideo")) {
+            // Types from the Vulkan video headers are prefixed with `StdVideo`
+            // and are in a separate `video` module from the registry types.
+            "video::${identifier.value}"
+        } else {
+            primitives.getOrDefault(identifier.value, identifier.value)
+        }
 
     override fun generateDefault() = "${generate()}::default()"
 }
 
-fun Type.getIdentifier() = if (this is IdentifierType) { identifier } else { null }
+fun Type.getIdentifier() = if (this is IdentifierType) identifier else null
 
 // Pointer =======================================
 
 /** A C/C++ pointer type. */
 data class PointerType(val pointee: Type, val const: Boolean) : Type {
-    override fun generate() = "*${if (const) { "const" } else { "mut" }} ${pointee.generate()}"
-    override fun generateDefault() = if (const) { "ptr::null()" } else { "ptr::null_mut()" }
+    override fun generate() = "*${if (const) "const" else "mut"} ${pointee.generate()}"
+
+    override fun generateDefault() = if (const) "ptr::null()" else "ptr::null_mut()"
 }
 
-fun Type.getPointee() = if (this is PointerType) { pointee } else { null }
+fun Type.getPointee() = if (this is PointerType) pointee else null
+
 fun Type.isPointer() = this is PointerType || isPlatformPointer()
+
 fun Type.isOpaquePointer() = getPointee()?.getIdentifier()?.let { opaque.contains(it.value) } ?: false
+
 fun Type.isPlatformPointer() = platformPointers.contains(getIdentifier()?.value)
+
 fun Type.isStringPointer() = getPointee()?.getIdentifier()?.value == "char"
 
 /** The types which are used in opaque pointers (i.e., `void` and `void` typedefs). */
-private val opaque = setOf(
-    "c_void",
-    "ANativeWindow",
-    "AHardwareBuffer",
-    "IDirectFB",
-    "IDirectFBSurface",
-    "CAMetalLayer",
-    "_screen_context",
-    "_screen_window",
-    "wl_display",
-    "wl_surface",
-    "SECURITY_ATTRIBUTES",
-    "xcb_connection_t",
-)
+private val opaque =
+    setOf(
+        "c_void",
+        "ANativeWindow",
+        "AHardwareBuffer",
+        "IDirectFB",
+        "IDirectFBSurface",
+        "CAMetalLayer",
+        "_screen_context",
+        "_screen_window",
+        "wl_display",
+        "wl_surface",
+        "SECURITY_ATTRIBUTES",
+        "xcb_connection_t",
+    )
 
 /** The platform typedefs which are aliases of pointer types. */
-private val platformPointers = setOf(
-    // iOS / macOS
-    "IOSurfaceRef",
-    "MTLBuffer_id",
-    "MTLCommandQueue_id",
-    "MTLDevice_id",
-    "MTLSharedEvent_id",
-    "MTLTexture_id",
-    // Windows
-    "HANDLE",
-    "HINSTANCE",
-    "HMONITOR",
-    "HWND",
-    "LPCWSTR",
-    // X11
-    "Display",
-    // NvSciBuf / NvSciSync
-    "NvSciBufAttrList",
-    "NvSciBufObj",
-    "NvSciSyncAttrList",
-    "NvSciSyncObj",
-)
+private val platformPointers =
+    setOf(
+        // iOS / macOS
+        "IOSurfaceRef",
+        "MTLBuffer_id",
+        "MTLCommandQueue_id",
+        "MTLDevice_id",
+        "MTLSharedEvent_id",
+        "MTLTexture_id",
+        // Windows
+        "HANDLE",
+        "HINSTANCE",
+        "HMONITOR",
+        "HWND",
+        "LPCWSTR",
+        // X11
+        "Display",
+        // NvSciBuf / NvSciSync
+        "NvSciBufAttrList",
+        "NvSciBufObj",
+        "NvSciSyncAttrList",
+        "NvSciSyncObj",
+    )
 
 // ===============================================
 // Identifier
@@ -704,10 +746,18 @@ class Identifier constructor(val original: String) : Comparable<Identifier> {
     private var _renamed = false
     val value get() = _value
     val renamed get() = _renamed
-    fun rename(value: String) { _value = value; _renamed = true }
+
+    fun rename(value: String) {
+        _value = value
+        _renamed = true
+    }
+
     override fun toString() = value
+
     override fun equals(other: Any?) = other is Identifier && original == other.original
+
     override fun hashCode() = original.hashCode()
+
     override fun compareTo(other: Identifier) = original.compareTo(other.original)
 }
 

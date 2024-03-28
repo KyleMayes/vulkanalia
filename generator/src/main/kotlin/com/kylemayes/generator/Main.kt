@@ -31,9 +31,10 @@ import kotlin.system.exitProcess
 
 private val log = KotlinLogging.logger { /* */ }
 
-fun main(args: Array<String>) = Generator()
-    .subcommands(Check(), Index(), Update())
-    .main(args)
+fun main(args: Array<String>) =
+    Generator()
+        .subcommands(Check(), Index(), Update())
+        .main(args)
 
 data class GeneratorContext(
     val directory: Path,
@@ -147,13 +148,13 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
         // Parse
 
-        val xmlVersion = if (skipUpgrade) { inputs.registry.local } else { inputs.registry.latest }
+        val xmlVersion = if (skipUpgrade) inputs.registry.local else inputs.registry.latest
         val xml = log.time("Fetch Registry") { xmlVersion.lazy.value }
         val registry = log.time("Parse Registry") { parseRegistry(xml) }
 
         // Headers (video)
 
-        val videoVersion = if (skipUpgrade) { inputs.video.local } else { inputs.video.latest }
+        val videoVersion = if (skipUpgrade) inputs.video.local else inputs.video.latest
         val video = log.time("Fetch Video Headers") { videoVersion.lazy.value }
 
         // Generate
@@ -187,10 +188,11 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
         val markdown = context.directory.resolve("CHANGELOG.md")
         val changelog = parseMarkdown(Files.readString(markdown))
 
-        val commits = inputs.list
-            .flatMap { it.getIntermediateCommits() }
-            .toSet()
-            .sortedBy { it.commitDate }
+        val commits =
+            inputs.list
+                .flatMap { it.getIntermediateCommits() }
+                .toSet()
+                .sortedBy { it.commitDate }
 
         for (commit in commits) {
             log.info { "Intermediate commit hash = ${commit.shA1}" }
@@ -224,16 +226,16 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
         val head = "vk-$hash"
         val base = "master"
 
-        val existing = repo.queryPullRequests()
-            .head(head)
-            .base(base)
-            .list()
-            .firstOrNull()
+        val existing =
+            repo.queryPullRequests()
+                .head(head)
+                .base(base)
+                .list()
+                .firstOrNull()
         if (existing != null) {
             log.info { "Pull request already exists (#${existing.number})!" }
             return
         }
-
 
         log.info { "Creating branch, committing changes, and pushing branch..." }
         val git = Git(FileRepositoryBuilder.create(context.directory.resolve(".git").toFile()))

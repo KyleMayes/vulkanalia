@@ -32,14 +32,15 @@ pub type PFN_${command.name.original} = $type;
 
 /** Generates Rust structs for Vulkan commands. */
 fun Registry.generateCommandStructs(): String {
-    val structs = commands.values
-        .groupBy { getCommandType(it) }
-        .entries
-        .sortedBy { it.key.display }
-        .joinToString("") {
-            val supported = it.value.sortedBy { c -> c.name }
-            generateCommandStruct(it.key, supported)
-        }
+    val structs =
+        commands.values
+            .groupBy { getCommandType(it) }
+            .entries
+            .sortedBy { it.key.display }
+            .joinToString("") {
+                val supported = it.value.sortedBy { c -> c.name }
+                generateCommandStruct(it.key, supported)
+            }
     return """
 use core::mem;
 use core::ffi::{c_char, c_int, c_void};
@@ -51,8 +52,10 @@ $structs
 }
 
 /** Generates a Rust struct for a group of Vulkan commands of the same type. */
-private fun Registry.generateCommandStruct(type: CommandType, commands: List<Command>) =
-    """
+private fun Registry.generateCommandStruct(
+    type: CommandType,
+    commands: List<Command>,
+) = """
 /// Loaded Vulkan ${type.display.lowercase()} commands.
 #[derive(Copy, Clone)]
 pub struct ${type.display}Commands {
@@ -84,9 +87,12 @@ ${command.name}: {
     """
 
 /** Generates a Rust function signature for a Vulkan command. */
-private fun generateSignature(command: Command, name: String = ""): String {
+private fun generateSignature(
+    command: Command,
+    name: String = "",
+): String {
     val params = command.params.joinToString { "_${it.name.value.removePrefix("_")}: ${it.type.generateForCommand()}" }
     val actual = command.result.generateForCommand()
-    val result = if (actual != "c_void") { " -> $actual" } else { "" }
+    val result = if (actual != "c_void") " -> $actual" else ""
     return "unsafe extern \"system\" fn $name($params)$result"
 }

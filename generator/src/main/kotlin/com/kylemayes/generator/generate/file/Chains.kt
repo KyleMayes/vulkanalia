@@ -57,7 +57,7 @@ unsafe impl InputChainStruct for ${struct.name} {
     }
 }
 
-${if (output) { generateOutputChainStruct(struct) } else { "" }}
+${if (output) generateOutputChainStruct(struct) else ""}
     """
 }
 

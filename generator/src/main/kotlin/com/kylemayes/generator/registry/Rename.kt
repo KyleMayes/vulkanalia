@@ -73,41 +73,51 @@ fun Registry.renameEntities() {
 }
 
 /** Renames a command (e.g., `vkCreateInstance` to `create_instance`). */
-private fun renameCommand(name: String) = name
-    .removePrefix("vk")
-    .toSnakeCase()
+private fun renameCommand(name: String) =
+    name
+        .removePrefix("vk")
+        .toSnakeCase()
 
 /** Renames a constant (e.g., `VK_UUID_SIZE` to `UUID_SIZE`). */
-private fun renameConstant(name: String) = name
-    .removePrefix("VK_")
-    .uppercase()
+private fun renameConstant(name: String) =
+    name
+        .removePrefix("VK_")
+        .uppercase()
 
 /** Renames a member or parameter (e.g, `deviceLUIDValid` to `device_luid_valid`). */
-private fun renameMemberOrParameter(name: String) = name
-    .toSnakeCase()
-    .replace(Regex("^(p+|pfn)_"), "")
-    .replace(Regex("^(type)$"), "$1_")
+private fun renameMemberOrParameter(name: String) =
+    name
+        .toSnakeCase()
+        .replace(Regex("^(p+|pfn)_"), "")
+        .replace(Regex("^(type)$"), "$1_")
 
 /** Renames a type (e.g., `VkCullModeFlags` to `CullModeFlags`). */
-private fun renameType(name: String) = name
-    .removePrefix("Vk")
+private fun renameType(name: String) =
+    name
+        .removePrefix("Vk")
 
 /** Renames an enum variant or bitmask bitflag (e.g., `VK_CULL_MODE_FRONT_BIT` to `FRONT`). */
-private fun renameVariantOrBitflag(name: String, parent: String, bitflag: Boolean = false): String {
+private fun renameVariantOrBitflag(
+    name: String,
+    parent: String,
+    bitflag: Boolean = false,
+): String {
     // Find the extension author suffix in the parent name, if any.
     // E.g., `EXT` in `DebugReportObjectTypeEXT`.
-    val extension = parent
-        .reversed()
-        .takeWhile { it.isUpperCase() }
-        .reversed()
+    val extension =
+        parent
+            .reversed()
+            .takeWhile { it.isUpperCase() }
+            .reversed()
 
     // Determine the prefix to strip from the value name (parent name).
     // E.g., `DEBUG_REPORT_OBJECT_TYPE_` for `DebugReportObjectTypeEXT` (variant).
     // E.g., `DEBUG_REPORT_` for `DebugReportFlagsEXT` (bitflag).
-    var prefix = parent
-        .substring(0, parent.length - extension.length)
-        .toSnakeCase()
-        .uppercase()
+    var prefix =
+        parent
+            .substring(0, parent.length - extension.length)
+            .toSnakeCase()
+            .uppercase()
     if (bitflag) prefix = prefix.replace(Regex("FLAGS(\\d*)"), "$1")
     if (!prefix.endsWith('_')) prefix = "${prefix}_"
 
@@ -115,16 +125,17 @@ private fun renameVariantOrBitflag(name: String, parent: String, bitflag: Boolea
     // E.g., `_EXT` for `DebugReportObjectTypeEXT`
     val suffix = "_$extension".trimEnd('_')
 
-    val renamed = name
-        .removePrefix("VK_")
-        .removePrefix(prefix)
-        .removeSuffix(suffix)
-        // Some value names start with digits after the prefixes have been
-        // stripped which would make them invalid identifiers.
-        .replace(Regex("^([0-9])"), "_$1")
-        // Some value names include lowercase characters that need to be
-        // capitalized (e.g., `VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK_EXT`).
-        .uppercase()
+    val renamed =
+        name
+            .removePrefix("VK_")
+            .removePrefix(prefix)
+            .removeSuffix(suffix)
+            // Some value names start with digits after the prefixes have been
+            // stripped which would make them invalid identifiers.
+            .replace(Regex("^([0-9])"), "_$1")
+            // Some value names include lowercase characters that need to be
+            // capitalized (e.g., `VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK_EXT`).
+            .uppercase()
 
     // Remove `BIT` component from bitflag name even when followed by extension author.
     return if (bitflag) {

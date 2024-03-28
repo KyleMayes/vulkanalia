@@ -98,9 +98,9 @@ ${structs.values
 
 /** Generates a Rust struct to build a Vulkan struct. */
 fun Registry.generateBuilder(struct: Structure): String {
-    val lifetime = if (getStructLifetime(struct)) { "<'b>" } else { "" }
-    val traitLifetime = if (lifetime.isNotEmpty()) { "<'b>" } else { "<'static>" }
-    val marker = if (lifetime.isNotEmpty()) { "_marker: PhantomData<&'b ()>," } else { "" }
+    val lifetime = if (getStructLifetime(struct)) "<'b>" else ""
+    val traitLifetime = if (lifetime.isNotEmpty()) "<'b>" else "<'static>"
+    val marker = if (lifetime.isNotEmpty()) "_marker: PhantomData<&'b ()>," else ""
     val methods = generateMethods(struct)
     return """
 ${generateExtends(struct)}
@@ -193,9 +193,10 @@ private fun Registry.generateMethods(struct: Structure): String {
     // Filter out the fields that do not require builder methods since they will
     // be set by other builder methods (i.e., array length fields for
     // non-optional array fields).
-    val requireBuilders = members.values.filter {
-        arraysByLength[it.name].let { a -> a?.optional ?: true }
-    }
+    val requireBuilders =
+        members.values.filter {
+            arraysByLength[it.name].let { a -> a?.optional ?: true }
+        }
 
     // Generate the builder methods.
     val methods = ArrayList<String>()
@@ -237,23 +238,27 @@ private fun Registry.generateMethods(struct: Structure): String {
 }
 
 /** Generates a Rust builder method for an array value. */
-private fun Registry.generateArrayMethod(member: Member, length: Pair<String, String>? = null): String {
+private fun Registry.generateArrayMethod(
+    member: Member,
+    length: Pair<String, String>? = null,
+): String {
     val pointer = member.type as PointerType
     val identifier = pointer.pointee.getIdentifier()
 
-    val (item, cast) = when {
-        structs.containsKey(identifier) -> "impl Cast<Target = ${pointer.pointee.generate()}>" to ".cast()"
-        identifier?.value == "void" -> "u8" to ".cast()"
-        else -> pointer.pointee.generate() to ""
-    }
+    val (item, cast) =
+        when {
+            structs.containsKey(identifier) -> "impl Cast<Target = ${pointer.pointee.generate()}>" to ".cast()"
+            identifier?.value == "void" -> "u8" to ".cast()"
+            else -> pointer.pointee.generate() to ""
+        }
 
     val type = "[$item]".generateRef(pointer.const, lifetime = "b")
-    val method = if (pointer.const) { "as_ptr" } else { "as_mut_ptr" }
+    val method = if (pointer.const) "as_ptr" else "as_mut_ptr"
 
     return """
 #[inline]
 pub fn ${member.name}(mut self, ${member.name}: $type) -> Self {
-    ${if (length != null) { "self.value.${length.first} = ${member.name}.len() as ${length.second};" } else { "" }}
+    ${if (length != null) "self.value.${length.first} = ${member.name}.len() as ${length.second};" else ""}
     self.value.${member.name} = ${member.name}.$method()$cast;
     self
 }
@@ -261,7 +266,10 @@ pub fn ${member.name}(mut self, ${member.name}: $type) -> Self {
 }
 
 /** Generates a Rust builder method for adjacent bitfield values. */
-private fun Registry.generateBitfieldMethods(bf24: Member, bf8: Member): String {
+private fun Registry.generateBitfieldMethods(
+    bf24: Member,
+    bf8: Member,
+): String {
     val combined = "${bf24.name}_and_${bf8.name}"
     return """
 #[inline]
@@ -313,47 +321,48 @@ pub fn ${member.name}<T>(mut self, ${member.name}: $ref) -> Self {
         """
     }
 
-    val (type, cast) = when {
-        // Boolean.
-        member.type.getIdentifier()?.value == "Bool32" -> Pair("bool") { m: String -> "$m as Bool32" }
-        // Array (byte).
-        member.type.isByteArray() -> Pair("impl Into<${member.type.generate()}>") { m: String -> "$m.into()" }
-        // Array (byte).
-        member.type.isStringArray() -> Pair("impl Into<${member.type.generate()}>") { m: String -> "$m.into()" }
-        // Struct.
-        structs.containsKey(member.type.getIdentifier()) ->
-            Pair("impl Cast<Target = ${member.type.generate()}>") { m: String -> "$m.into()" }
-        // Pointer to struct.
-        structs.containsKey(member.type.getPointee()?.getIdentifier()) -> {
-            val pointer = member.type as PointerType
-            val type = "impl Cast<Target = ${pointer.pointee.generate()}>".generateRef(pointer.const, lifetime = "b")
-            val cast = if (pointer.const) { ".as_ref()" } else { ".as_mut()" }
-            Pair(type) { m: String -> "$m$cast" }
-        }
-        // Pointer to string.
-        member.type.isStringPointer() -> Pair("&'b [u8]") { m: String -> "$m.as_ptr().cast()" }
-        // Pointer to pointer.
-        member.type is PointerType && member.type.pointee is PointerType -> {
-            if (structs.containsKey(member.type.pointee.pointee.getIdentifier())) {
-                // Pointer to pointer to struct.
-                val item = member.type.pointee.pointee.generate()
-                Pair("&'b [&'b impl Cast<Target = $item>]") { m: String -> "$m.as_ptr().cast()" }
-            } else {
-                // Pointer to pointer to other type.
-                val item = member.type.pointee.pointee.generate()
-                Pair("&'b [&'b $item]") { m: String -> "$m.as_ptr().cast()" }
+    val (type, cast) =
+        when {
+            // Boolean.
+            member.type.getIdentifier()?.value == "Bool32" -> Pair("bool") { m: String -> "$m as Bool32" }
+            // Array (byte).
+            member.type.isByteArray() -> Pair("impl Into<${member.type.generate()}>") { m: String -> "$m.into()" }
+            // Array (byte).
+            member.type.isStringArray() -> Pair("impl Into<${member.type.generate()}>") { m: String -> "$m.into()" }
+            // Struct.
+            structs.containsKey(member.type.getIdentifier()) ->
+                Pair("impl Cast<Target = ${member.type.generate()}>") { m: String -> "$m.into()" }
+            // Pointer to struct.
+            structs.containsKey(member.type.getPointee()?.getIdentifier()) -> {
+                val pointer = member.type as PointerType
+                val type = "impl Cast<Target = ${pointer.pointee.generate()}>".generateRef(pointer.const, lifetime = "b")
+                val cast = if (pointer.const) ".as_ref()" else ".as_mut()"
+                Pair(type) { m: String -> "$m$cast" }
             }
+            // Pointer to string.
+            member.type.isStringPointer() -> Pair("&'b [u8]") { m: String -> "$m.as_ptr().cast()" }
+            // Pointer to pointer.
+            member.type is PointerType && member.type.pointee is PointerType -> {
+                if (structs.containsKey(member.type.pointee.pointee.getIdentifier())) {
+                    // Pointer to pointer to struct.
+                    val item = member.type.pointee.pointee.generate()
+                    Pair("&'b [&'b impl Cast<Target = $item>]") { m: String -> "$m.as_ptr().cast()" }
+                } else {
+                    // Pointer to pointer to other type.
+                    val item = member.type.pointee.pointee.generate()
+                    Pair("&'b [&'b $item]") { m: String -> "$m.as_ptr().cast()" }
+                }
+            }
+            // Pointer to other type (non-opaque).
+            member.type is PointerType && !member.type.isOpaquePointer() -> {
+                val item = member.type.pointee.generate()
+                val type = item.generateRef(member.type.const, lifetime = "b")
+                val cast = item.generatePtr(member.type.const)
+                Pair(type) { m: String -> "$m as $cast" }
+            }
+            // Other.
+            else -> Pair(member.type.generate()) { m: String -> m }
         }
-        // Pointer to other type (non-opaque).
-        member.type is PointerType && !member.type.isOpaquePointer() -> {
-            val item = member.type.pointee.generate()
-            val type = item.generateRef(member.type.const, lifetime = "b")
-            val cast = item.generatePtr(member.type.const)
-            Pair(type) { m: String -> "$m as $cast" }
-        }
-        // Other.
-        else -> Pair(member.type.generate()) { m: String -> m }
-    }
 
     return """
 #[inline]

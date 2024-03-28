@@ -50,7 +50,7 @@ fun parseMarkdown(markdown: String): Changelog {
         assert(versionPieces.size == 2)
 
         val version = versionPieces[0].removePrefix("[").removeSuffix("]")
-        val release = if (versionPieces[1] == "UNRELEASED") { null } else { versionPieces[1] }
+        val release = if (versionPieces[1] == "UNRELEASED") null else versionPieces[1]
 
         // Parse Sections
 
@@ -63,9 +63,10 @@ fun parseMarkdown(markdown: String): Changelog {
             // Parse Section
 
             val name = sectionHeading.text.toString().trim()
-            val changes = sectionList.children
-                .map { it.childChars.toString().trim() }
-                .toMutableList()
+            val changes =
+                sectionList.children
+                    .map { it.childChars.toString().trim() }
+                    .toMutableList()
 
             sections.add(Section(name, changes))
         }

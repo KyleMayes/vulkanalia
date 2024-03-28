@@ -12,8 +12,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 class ChangelogTest {
-    private fun load(path: String) =
-        this::class.java.classLoader.getResource("changelog/$path")!!.readText()
+    private fun load(path: String) = this::class.java.classLoader.getResource("changelog/$path")!!.readText()
 
     @Test
     fun `Round Trip`() {

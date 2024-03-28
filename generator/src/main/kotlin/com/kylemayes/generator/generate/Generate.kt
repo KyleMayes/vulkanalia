@@ -29,16 +29,20 @@ import java.nio.file.Path
 private val log = KotlinLogging.logger { /* */ }
 
 /** The additional `bindgen` options for the Vulkan video headers. */
-private val videoOptions = listOf(
-    "--allowlist-item", "StdVideo.*",
-    "--allowlist-item", "STD_VIDEO_.*",
-    "--no-prepend-enum-name",
-    "--default-enum-style", "newtype_global",
-    "--with-derive-custom-enum", ".*=Default",
-)
+private val videoOptions =
+    listOf(
+        "--allowlist-item", "StdVideo.*",
+        "--allowlist-item", "STD_VIDEO_.*",
+        "--no-prepend-enum-name",
+        "--default-enum-style", "newtype_global",
+        "--with-derive-custom-enum", ".*=Default",
+    )
 
 /** Generates Rust files for a Vulkan API registry and Vulkan video headers. */
-fun generateRustFiles(registry: Registry, video: Map<String, String>) = listOf(
+fun generateRustFiles(
+    registry: Registry,
+    video: Map<String, String>,
+) = listOf(
     generateRustFile("vulkanalia-sys", "bitmasks.rs", registry.generateBitmasks()),
     generateRustFile("vulkanalia-sys", "commands.rs", registry.generateCommands()),
     generateRustFile("vulkanalia-sys", "constants.rs", registry.generateConstants()),
@@ -81,15 +85,16 @@ data class File(
     fun matches(directory: Path): Boolean {
         val full = directory.resolve(path)
 
-        matches = if (Files.exists(full)) {
-            val contents = Files.readString(full)
-            val matches = contents == this.contents
-            if (!matches) log.info { "$path does not match file on disk." }
-            matches
-        } else {
-            log.info { "$path does not exist on disk." }
-            false
-        }
+        matches =
+            if (Files.exists(full)) {
+                val contents = Files.readString(full)
+                val matches = contents == this.contents
+                if (!matches) log.info { "$path does not match file on disk." }
+                matches
+            } else {
+                log.info { "$path does not exist on disk." }
+                false
+            }
 
         return matches!!
     }
@@ -111,11 +116,11 @@ private fun generateRustFile(
 ): File {
     val path = Path.of(crate).resolve("src").resolve(name)
     log.info { "Generating $path..." }
-    return File(path, "$prefix\n$contents".replace(Regex("\\r\\n?"), "\n"))
+    return File(path, "$PREFIX\n$contents".replace(Regex("\\r\\n?"), "\n"))
 }
 
 /** The Rust file prefix. */
-private const val prefix =
+private const val PREFIX =
     """
 // SPDX-License-Identifier: Apache-2.0
 

@@ -3,6 +3,7 @@ package com.kylemayes.generator.registry
 /** Filters out entities that are not supported by `vulkanalia`. */
 fun Registry.filterEntities(): Registry {
     val unsupportedEntities = getUnsupportedEntities()
+
     fun <T : Entity> Map<Identifier, T>.filterSupportedEntities() =
         filter { !unsupportedEntities.contains(it.key) && it.value.isVulkanApi() }
 
@@ -31,8 +32,7 @@ fun Registry.filterEntities(): Registry {
 private val unsupportedExtensions = emptySet<String>()
 
 /** Gets whether a Vulkan extension is supported by `vulkanalia`. */
-private fun Extension.isSupported() =
-    supported != "disabled" && !unsupportedExtensions.contains(name.original)
+private fun Extension.isSupported() = supported != "disabled" && !unsupportedExtensions.contains(name.original)
 
 // ===============================================
 // Filter Entities
@@ -53,9 +53,10 @@ private fun Registry.getUnsupportedEntities(): Set<Identifier> {
 
     val (vulkan, nonvulkan) = versions.values.partition { it.isVulkanApi() }
 
-    val vulkanEntities = vulkan
-        .flatMap { it.require.commands + it.require.types.map { n -> n.intern() } }
-        .toSet()
+    val vulkanEntities =
+        vulkan
+            .flatMap { it.require.commands + it.require.types.map { n -> n.intern() } }
+            .toSet()
 
     unsupportedEntities.addAll(
         nonvulkan
@@ -70,14 +71,13 @@ private fun Registry.getUnsupportedEntities(): Set<Identifier> {
 // Filter Children
 // ===============================================
 
-private fun Map<Identifier, Bitmask>.filterBitmasks() =
-    filterChildren({ it.bitflags }, { e, c -> e.copy(bitflags = c.toMutableList()) })
-private fun Map<Identifier, Command>.filterCommands() =
-    filterChildren({ it.params }, { e, c -> e.copy(params = c) })
-private fun Map<Identifier, Enum>.filterEnums() =
-    filterChildren({ it.variants }, { e, c -> e.copy(variants = c.toMutableList()) })
-private fun Map<Identifier, Structure>.filterStructures() =
-    filterChildren({ it.members }, { e, c -> e.copy(members = c) })
+private fun Map<Identifier, Bitmask>.filterBitmasks() = filterChildren({ it.bitflags }, { e, c -> e.copy(bitflags = c.toMutableList()) })
+
+private fun Map<Identifier, Command>.filterCommands() = filterChildren({ it.params }, { e, c -> e.copy(params = c) })
+
+private fun Map<Identifier, Enum>.filterEnums() = filterChildren({ it.variants }, { e, c -> e.copy(variants = c.toMutableList()) })
+
+private fun Map<Identifier, Structure>.filterStructures() = filterChildren({ it.members }, { e, c -> e.copy(members = c) })
 
 private fun <T : Entity, C : Entity> Map<Identifier, T>.filterChildren(
     get: (T) -> List<C>,

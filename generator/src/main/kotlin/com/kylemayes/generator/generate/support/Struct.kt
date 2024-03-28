@@ -14,12 +14,13 @@ import com.kylemayes.generator.registry.isPointer
 import kotlin.math.max
 
 /** Gets the non-pointer dependencies of a Vulkan struct on other Vulkan structs. */
-val getStructDependencies = thunk { struct: Structure ->
-    struct.members
-        .mapNotNull { m -> m.type.getBaseIdentifier() }
-        .filter { d -> structs.containsKey(d) }
-        .toSet()
-}
+val getStructDependencies =
+    thunk { struct: Structure ->
+        struct.members
+            .mapNotNull { m -> m.type.getBaseIdentifier() }
+            .filter { d -> structs.containsKey(d) }
+            .toSet()
+    }
 
 private val getStructDerivesResults = HashMap<Identifier, Set<String>>()
 
@@ -50,7 +51,10 @@ fun Registry.getStructDerives(struct: Structure): Set<String> {
     val optional = HashSet<String>()
     val partialEq = !functions && !unions
     if (partialEq) optional.add("PartialEq")
-    if (partialEq && !floats) { optional.add("Eq"); optional.add("Hash") }
+    if (partialEq && !floats) {
+        optional.add("Eq")
+        optional.add("Hash")
+    }
 
     for (dependency in getStructDependencies(struct)) {
         val derives = getStructDerives(structs[dependency] ?: error("Missing struct."))
@@ -63,9 +67,10 @@ fun Registry.getStructDerives(struct: Structure): Set<String> {
 }
 
 /** Gets the length of the longest array in a Vulkan struct. */
-private fun Registry.getMaxArrayLength(struct: Structure) = struct.members
-    .mapNotNull { getMaxArrayLength(it.type) }
-    .maxOrNull()
+private fun Registry.getMaxArrayLength(struct: Structure) =
+    struct.members
+        .mapNotNull { getMaxArrayLength(it.type) }
+        .maxOrNull()
 
 /** Gets the length of the longest array in a Vulkan type. */
 private fun Registry.getMaxArrayLength(type: Type): Long? {
@@ -75,12 +80,13 @@ private fun Registry.getMaxArrayLength(type: Type): Long? {
 }
 
 /** Gets the Vulkan structs that can be used to extend other Vulkan structs. */
-val getStructExtensions = thunk { ->
-    structs.values
-        .filter { it.structextends != null }
-        .flatMap { it.structextends!!.map { e -> e to it.name } }
-        .groupBy({ it.first }, { it.second })
-}
+val getStructExtensions =
+    thunk { ->
+        structs.values
+            .filter { it.structextends != null }
+            .flatMap { it.structextends!!.map { e -> e to it.name } }
+            .groupBy({ it.first }, { it.second })
+    }
 
 private val getStructLifetimeResults = HashMap<Identifier, Boolean>()
 
@@ -95,15 +101,17 @@ fun Registry.getStructLifetime(struct: Structure): Boolean {
     // so any struct that contains a pointer will need a lifetime. An exception
     // is made for the `next` member if there are no extending structs since
     // the corresponding builder method will be omitted in this case.
-    val members = struct.members.any {
-        it.type is PointerType &&
-            (it.name.value != "next" || getStructExtensions()[struct.name]?.isNotEmpty() ?: false)
-    }
+    val members =
+        struct.members.any {
+            it.type is PointerType &&
+                (it.name.value != "next" || getStructExtensions()[struct.name]?.isNotEmpty() ?: false)
+        }
 
     // Builder method for struct members will use
-    val dependencies = getStructDependencies(struct).any {
-        getStructLifetime(structs[it] ?: error("Missing struct."))
-    }
+    val dependencies =
+        getStructDependencies(struct).any {
+            getStructLifetime(structs[it] ?: error("Missing struct."))
+        }
 
     val result = members || dependencies
     getStructLifetimeResults[struct.name] = result
@@ -111,17 +119,18 @@ fun Registry.getStructLifetime(struct: Structure): Boolean {
 }
 
 /** Gets the Vulkan structs that can be part of a pointer chain. */
-val getChainStructs = thunk { ->
-    structs.filter {
-        val name = it.key.original
-        if (name == "VkBaseInStructure" || name == "VkBaseOutStructure") {
-            // These are helper structs used for iterating through pointer
-            // chains, not pointer chain structs themselves.
-            false
-        } else {
-            val type = it.value.members.getOrNull(0)?.name?.original == "sType"
-            val next = it.value.members.getOrNull(1)?.name?.original == "pNext"
-            type && next
+val getChainStructs =
+    thunk { ->
+        structs.filter {
+            val name = it.key.original
+            if (name == "VkBaseInStructure" || name == "VkBaseOutStructure") {
+                // These are helper structs used for iterating through pointer
+                // chains, not pointer chain structs themselves.
+                false
+            } else {
+                val type = it.value.members.getOrNull(0)?.name?.original == "sType"
+                val next = it.value.members.getOrNull(1)?.name?.original == "pNext"
+                type && next
+            }
         }
     }
-}

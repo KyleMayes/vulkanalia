@@ -42,7 +42,10 @@ fun Registry.generateCommandWrapper(command: Command): String {
         resultExprs.add("__result")
     }
 
-    fun addArgument(actual: String, setup: String? = null) {
+    fun addArgument(
+        actual: String,
+        setup: String? = null,
+    ) {
         setupArgs.add(setup ?: actual)
         actualArgs.add(actual)
     }
@@ -109,11 +112,12 @@ fun Registry.generateCommandWrapper(command: Command): String {
                 if (outputWithLength || outputWithoutLength) {
                     // Output slice parameter.
 
-                    val length = if (outputWithLength) {
-                        current.name.value
-                    } else {
-                        "${slices[0].name}.len()"
-                    }
+                    val length =
+                        if (outputWithLength) {
+                            current.name.value
+                        } else {
+                            "${slices[0].name}.len()"
+                        }
 
                     if (pointee.getIdentifier()?.value == "void") {
                         resultTypes.add("Vec<u8>")
@@ -178,11 +182,12 @@ fun Registry.generateCommandWrapper(command: Command): String {
                 // Output pointer parameter (uninit-provided).
 
                 val pointeeType = pointee.generate()
-                val (resultType, exprCast) = if (pointeeType == "Bool32") {
-                    Pair("bool", " == TRUE")
-                } else {
-                    Pair(pointeeType, "")
-                }
+                val (resultType, exprCast) =
+                    if (pointeeType == "Bool32") {
+                        Pair("bool", " == TRUE")
+                    } else {
+                        Pair(pointeeType, "")
+                    }
 
                 preActualStmts.add("let mut ${current.name} = MaybeUninit::<$pointeeType>::uninit();")
                 resultTypes.add(resultType)
@@ -228,49 +233,52 @@ fun Registry.generateCommandWrapper(command: Command): String {
     // Generate method signature components.
 
     val resultType = resultTypes.joinTuple()
-    val outputType = when {
-        hasSuccessCodes && resultType == "()" -> "-> crate::VkResult<SuccessCode>"
-        hasSuccessCodes -> "-> crate::VkSuccessResult<$resultType>"
-        hasErrorCodes -> "-> crate::VkResult<$resultType>"
-        resultType != "()" -> " -> $resultType"
-        else -> ""
-    }
+    val outputType =
+        when {
+            hasSuccessCodes && resultType == "()" -> "-> crate::VkResult<SuccessCode>"
+            hasSuccessCodes -> "-> crate::VkSuccessResult<$resultType>"
+            hasErrorCodes -> "-> crate::VkResult<$resultType>"
+            resultType != "()" -> " -> $resultType"
+            else -> ""
+        }
 
     // Generate setup command invocation, if required.
 
-    val setup = if (preSetupStmts.isNotEmpty()) {
-        """
+    val setup =
+        if (preSetupStmts.isNotEmpty()) {
+            """
 ${preSetupStmts.joinToString("")}
 
 ${generateInvocation(command, setupArgs)};
         """
-    } else {
-        ""
-    }
+        } else {
+            ""
+        }
 
     // Generate actual command invocation.
 
     val resultExpr = resultExprs.joinTuple()
-    val outputExpr = when {
-        hasSuccessCodes ->
-            """
+    val outputExpr =
+        when {
+            hasSuccessCodes ->
+                """
 if __result >= Result::SUCCESS {
-    Ok(${if (resultExpr != "()") { "($resultExpr, __result.into())" } else { "__result.into()" }})
+    Ok(${if (resultExpr != "()") "($resultExpr, __result.into())" else "__result.into()"})
 } else {
     Err(__result.into())
 }
             """
-        hasErrorCodes ->
-            """
+            hasErrorCodes ->
+                """
 if __result == Result::SUCCESS {
     Ok($resultExpr)
 } else {
     Err(__result.into())
 }
             """
-        resultExpr != "()" -> resultExpr
-        else -> ""
-    }
+            resultExpr != "()" -> resultExpr
+            else -> ""
+        }
 
     val actual =
         """
@@ -296,30 +304,38 @@ unsafe fn ${command.name}(&self, ${params.joinToString()})$outputType {
 }
 
 /** Generates the Rust type and cast expression suffix for an input slice parameter. */
-private fun Registry.generateInputSliceTypeAndCast(pointer: PointerType): Pair<String, String> = when {
-    structs.containsKey(pointer.pointee.getIdentifier()) -> Pair(
-        "impl Cast<Target=${pointer.pointee.generate()}>",
-        ".cast()",
-    )
-    pointer.pointee.getIdentifier()?.value == "void" -> Pair(
-        "u8",
-        "as ${"c_void".generatePtr(pointer.const)}",
-    )
-    pointer.pointee is PointerType -> Pair(
-        "&${pointer.pointee.pointee.generate()}",
-        ".cast()",
-    )
-    else -> Pair(pointer.pointee.generate(), "")
-}
+private fun Registry.generateInputSliceTypeAndCast(pointer: PointerType): Pair<String, String> =
+    when {
+        structs.containsKey(pointer.pointee.getIdentifier()) ->
+            Pair(
+                "impl Cast<Target=${pointer.pointee.generate()}>",
+                ".cast()",
+            )
+        pointer.pointee.getIdentifier()?.value == "void" ->
+            Pair(
+                "u8",
+                "as ${"c_void".generatePtr(pointer.const)}",
+            )
+        pointer.pointee is PointerType ->
+            Pair(
+                "&${pointer.pointee.pointee.generate()}",
+                ".cast()",
+            )
+        else -> Pair(pointer.pointee.generate(), "")
+    }
 
 /** Generates a Rust expression which invokes a command in a version or extension trait method. */
-private fun generateInvocation(command: Command, arguments: List<String>): String {
+private fun generateInvocation(
+    command: Command,
+    arguments: List<String>,
+): String {
     return "(self.commands().${command.name})(${arguments.joinToString()})"
 }
 
 /** Joins a list of strings as a Rust tuple expression or type. */
-private fun List<String>.joinTuple() = when (size) {
-    0 -> "()"
-    1 -> this[0]
-    else -> joinToString(prefix = "(", postfix = ")")
-}
+private fun List<String>.joinTuple() =
+    when (size) {
+        0 -> "()"
+        1 -> this[0]
+        else -> joinToString(prefix = "(", postfix = ")")
+    }
