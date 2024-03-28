@@ -12,10 +12,11 @@ private val log = KotlinLogging.logger { /* */ }
 
 /** Parses a Vulkan API registry from an XML string. */
 fun parseRegistry(xml: String): Registry {
-    val document = log.time("Parse XML") {
-        val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-        builder.parse(InputSource(StringReader(xml))).documentElement
-    }
+    val document =
+        log.time("Parse XML") {
+            val builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+            builder.parse(InputSource(StringReader(xml))).documentElement
+        }
 
     var registry = log.time("Extract Entities") { extractEntities(document) }
     registry = log.time("Filter Entities") { registry.filterEntities() }

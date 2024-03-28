@@ -116,10 +116,15 @@ fun Registry.indexEntities(): String {
 
 private typealias Index = MutableList<Pair<String, String>>
 
-private fun Index.addEntity(name: String, path: String) =
-    add(name to "https://docs.rs/vulkanalia/%VERSION%/vulkanalia$path")
+private fun Index.addEntity(
+    name: String,
+    path: String,
+) = add(name to "https://docs.rs/vulkanalia/%VERSION%/vulkanalia$path")
 
-private fun Index.addEntities(type: String, entities: Map<Identifier, Entity>) {
+private fun Index.addEntities(
+    type: String,
+    entities: Map<Identifier, Entity>,
+) {
     for (name in entities.keys) {
         addEntity("vk::$name", "/vk/$type.$name.html")
     }

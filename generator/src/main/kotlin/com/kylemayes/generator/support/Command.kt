@@ -19,7 +19,10 @@ private val killTimeout = 5.seconds
 fun bindgen(vararg args: String): String = execute("bindgen", arrayOf(*args))
 
 /** Executes the `git` command and prints the output. */
-fun git(vararg args: String, directory: Path? = null) {
+fun git(
+    vararg args: String,
+    directory: Path? = null,
+) {
     println("> git ${args.joinToString(" ")}")
     println(execute("git", arrayOf(*args), directory = directory))
 }
@@ -28,7 +31,12 @@ fun git(vararg args: String, directory: Path? = null) {
 fun rustfmt(rust: String): String = execute("rustfmt", emptyArray(), input = rust)
 
 /** Executes a command (with a time limit) and returns the output. */
-private fun execute(command: String, args: Array<String>, input: String? = null, directory: Path? = null): String {
+private fun execute(
+    command: String,
+    args: Array<String>,
+    input: String? = null,
+    directory: Path? = null,
+): String {
     var builder = ProcessBuilder(command, *args)
     if (directory != null) builder = builder.directory(directory.toFile())
     val process = builder.start()
@@ -38,7 +46,10 @@ private fun execute(command: String, args: Array<String>, input: String? = null,
     val stdout = AtomicReference<String?>(null)
     val stderr = AtomicReference<String?>(null)
 
-    fun operation(name: String, operation: () -> Unit) = Thread {
+    fun operation(
+        name: String,
+        operation: () -> Unit,
+    ) = Thread {
         try {
             Thread.currentThread().name = "$command-$name"
             log.slow("`$command`: $name", waitTimeout / 2) { operation() }
@@ -49,27 +60,28 @@ private fun execute(command: String, args: Array<String>, input: String? = null,
         }
     }
 
-    val threads = listOf(
-        operation("write stdin") {
-            if (input != null) process.outputStream.write(input.toByteArray())
-            process.outputStream.flush()
-            process.outputStream.close()
-        },
-        operation("read stdout") {
-            stdout.set(String(process.inputStream.readAllBytes()))
-            process.inputStream.close()
-        },
-        operation("read stderr") {
-            stderr.set(String(process.errorStream.readAllBytes()))
-            process.errorStream.close()
-        },
-        operation("wait") {
-            process.waitFor()
-            if (process.exitValue() != 0) {
-                error("Non-zero exit code (${process.exitValue()}).")
-            }
-        },
-    )
+    val threads =
+        listOf(
+            operation("write stdin") {
+                if (input != null) process.outputStream.write(input.toByteArray())
+                process.outputStream.flush()
+                process.outputStream.close()
+            },
+            operation("read stdout") {
+                stdout.set(String(process.inputStream.readAllBytes()))
+                process.inputStream.close()
+            },
+            operation("read stderr") {
+                stderr.set(String(process.errorStream.readAllBytes()))
+                process.errorStream.close()
+            },
+            operation("wait") {
+                process.waitFor()
+                if (process.exitValue() != 0) {
+                    error("Non-zero exit code (${process.exitValue()}).")
+                }
+            },
+        )
 
     threads.forEach { it.start() }
     val countdown = latch.await(waitTimeout.inWholeMilliseconds, TimeUnit.MILLISECONDS)

@@ -26,15 +26,16 @@ ${generateAliases(bitmasks.keys)}
 /** Generates a Rust `bitflags!` struct for a Vulkan bitmask. */
 private fun Registry.generateBitmask(bitmask: Bitmask): String {
     val long = bitmask.bitflags.any { it.value.bitLength() > 32 }
-    val repr = "Flags" + (if (long) { "64" } else { "" })
+    val repr = "Flags" + (if (long) "64" else "")
 
     val values = bitmask.bitflags.associateBy { it.value }
     val flags = generateBitflags(values, bitmask.bitflags).joinToString("\n        ")
-    val block = if (flags.isNotBlank()) {
-        "{\n        $flags\n    }"
-    } else {
-        "{ }"
-    }
+    val block =
+        if (flags.isNotBlank()) {
+            "{\n        $flags\n    }"
+        } else {
+            "{ }"
+        }
 
     return """
 bitflags! {
@@ -47,27 +48,33 @@ bitflags! {
 }
 
 /** Generates Rust `bitflags!` bitflags for a list of Vulkan bitflags. */
-private fun generateBitflags(values: Map<BigInteger, Bitflag>, bitflags: List<Bitflag>) =
-    if (bitflags.isNotEmpty()) {
-        bitflags
-            .sortedBy { it.value }
-            .map { "const ${it.name} = ${generateExpr(values, it.value)};" }
-    } else {
-        emptyList()
-    }
+private fun generateBitflags(
+    values: Map<BigInteger, Bitflag>,
+    bitflags: List<Bitflag>,
+) = if (bitflags.isNotEmpty()) {
+    bitflags
+        .sortedBy { it.value }
+        .map { "const ${it.name} = ${generateExpr(values, it.value)};" }
+} else {
+    emptyList()
+}
 
 /** Generates a Rust expression for a Vulkan bitflag value. */
-private fun generateExpr(values: Map<BigInteger, Bitflag>, value: BigInteger): String {
-    val bits = (0..value.bitLength())
-        .map { it to value.testBit(it) }
-        .filter { it.second }
-        .map { it.first }
+private fun generateExpr(
+    values: Map<BigInteger, Bitflag>,
+    value: BigInteger,
+): String {
+    val bits =
+        (0..value.bitLength())
+            .map { it to value.testBit(it) }
+            .filter { it.second }
+            .map { it.first }
 
     return if (bits.isEmpty()) {
         "0"
     } else if (bits.size == 1) {
         val bit = bits[0]
-        if (bit == 0) { "1" } else { "1 << $bit" }
+        if (bit == 0) "1" else "1 << $bit"
     } else if (bits.size == 31) {
         return "i32::MAX as u32"
     } else {

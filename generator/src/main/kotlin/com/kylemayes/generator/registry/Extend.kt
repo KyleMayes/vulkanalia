@@ -58,7 +58,10 @@ private fun extendEnum(
 }
 
 /** Gets the value for a version/extension variant. */
-private fun getVariantValue(ext: RequireValue, extnumber: Long?): Long? {
+private fun getVariantValue(
+    ext: RequireValue,
+    extnumber: Long?,
+): Long? {
     if (ext.value != null) {
         return ext.value
     }
@@ -67,5 +70,5 @@ private fun getVariantValue(ext: RequireValue, extnumber: Long?): Long? {
     val number = ext.extnumber ?: extnumber ?: return null
     val offset = ext.offset ?: return null
     val value = 1_000_000_000L + (1_000 * (number - 1)) + offset
-    return if (ext.negative) { -value } else { value }
+    return if (ext.negative) -value else value
 }

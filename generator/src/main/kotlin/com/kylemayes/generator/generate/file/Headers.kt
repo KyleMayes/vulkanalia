@@ -14,7 +14,11 @@ private val log = KotlinLogging.logger { /* */ }
 
 /** Generates a Rust module using `bindgen` for a collection of C/C++ headers. */
 @OptIn(ExperimentalPathApi::class)
-fun generateHeaders(name: String, headers: Map<String, String>, options: List<String> = emptyList()): String {
+fun generateHeaders(
+    name: String,
+    headers: Map<String, String>,
+    options: List<String> = emptyList(),
+): String {
     if (headers.isEmpty()) {
         return ""
     }
@@ -25,16 +29,17 @@ fun generateHeaders(name: String, headers: Map<String, String>, options: List<St
     val input = tmp.resolve("__input.h")
     input.writeText(headers.keys.joinToString("\n") { "#include \"$it\"" })
 
-    val bindings = log.time("Generate Headers ($name)") {
-        bindgen(
-            "--verbose",
-            "--rust-target=1.64",
-            "--use-core",
-            "--no-layout-tests",
-            *options.toTypedArray(),
-            input.toString(),
-        )
-    }
+    val bindings =
+        log.time("Generate Headers ($name)") {
+            bindgen(
+                "--verbose",
+                "--rust-target=1.64",
+                "--use-core",
+                "--no-layout-tests",
+                *options.toTypedArray(),
+                input.toString(),
+            )
+        }
 
     tmp.deleteRecursively()
 

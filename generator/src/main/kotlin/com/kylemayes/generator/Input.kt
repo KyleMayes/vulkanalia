@@ -86,9 +86,12 @@ private fun <T> getRepositoryInput(
 }
 
 /** Fetches the contents of a file for a generator input pulled from a GitHub repository. */
-private fun getFile(commit: GHCommit, path: RepositoryPath): String {
+private fun getFile(
+    commit: GHCommit,
+    path: RepositoryPath,
+): String {
     val content = commit.owner.getFileContent(path.path, commit.shA1)
-    return if (content.size <= 1024 * 1024 /* 1 MiB */) {
+    return if (content.size <= 1024 * 1024) {
         content.read().readAllBytes().decodeToString()
     } else {
         commit.owner.getBlob(content.sha).read().readAllBytes().decodeToString()
@@ -96,7 +99,10 @@ private fun getFile(commit: GHCommit, path: RepositoryPath): String {
 }
 
 /** Fetches the contents of the files in a directory for a generator input pulled from a GitHub repository. */
-private fun getDirectory(commit: GHCommit, path: RepositoryPath): Map<String, String> {
+private fun getDirectory(
+    commit: GHCommit,
+    path: RepositoryPath,
+): Map<String, String> {
     return commit
         .owner
         .getDirectoryContent(path.path, commit.shA1)
@@ -119,11 +125,13 @@ private fun getLocalCommitHashes(context: GeneratorContext): Map<RepositoryPath,
         }
 
 /** Writes the locally tracked commit hashes for repository inputs. */
-private fun setLocalCommitHashes(context: GeneratorContext, inputs: List<RepositoryInput<Any>>) =
-    Files.writeString(
-        context.directory.resolve(".commits"),
-        inputs.joinToString("\n") {
-            val (name, branch, path) = it.path
-            "$name/$branch/$path => ${it.latest.commit.shA1}"
-        },
-    )
+private fun setLocalCommitHashes(
+    context: GeneratorContext,
+    inputs: List<RepositoryInput<Any>>,
+) = Files.writeString(
+    context.directory.resolve(".commits"),
+    inputs.joinToString("\n") {
+        val (name, branch, path) = it.path
+        "$name/$branch/$path => ${it.latest.commit.shA1}"
+    },
+)

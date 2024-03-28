@@ -9,7 +9,10 @@ fun String.toPascalCase(): String {
     var upper = true
     for (c in this) {
         when {
-            upper -> { pascal += c.uppercase(); upper = false }
+            upper -> {
+                pascal += c.uppercase()
+                upper = false
+            }
             c == '_' -> upper = true
             else -> pascal += c.lowercase()
         }

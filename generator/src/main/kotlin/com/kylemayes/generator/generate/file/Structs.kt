@@ -58,8 +58,8 @@ pub struct ${struct.name} {
     ${fields.joinToString()}
 }
 
-${if (!derives.contains("Debug")) { generateDebugImpl(struct) } else { "" }}
-${if (!derives.contains("Default")) { generateDefaultImpl(struct) } else { "" }}
+${if (!derives.contains("Debug")) generateDebugImpl(struct) else ""}
+${if (!derives.contains("Default")) generateDefaultImpl(struct) else ""}
     """
 }
 
@@ -95,8 +95,9 @@ impl Default for ${struct.name} {
     """
 
 /** Generates a Rust expression for defaulting a Vulkan struct field. */
-private fun Registry.generateDefaultField(member: Member) = when {
-    member.name.value == "s_type" && member.values != null -> "StructureType::${member.values}"
-    member.type.isPlatformPointer() -> "ptr::null_mut()"
-    else -> member.type.generateDefault()
-}
+private fun Registry.generateDefaultField(member: Member) =
+    when {
+        member.name.value == "s_type" && member.values != null -> "StructureType::${member.values}"
+        member.type.isPlatformPointer() -> "ptr::null_mut()"
+        else -> member.type.generateDefault()
+    }
