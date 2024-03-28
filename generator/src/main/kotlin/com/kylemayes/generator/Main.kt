@@ -14,10 +14,14 @@ import com.kylemayes.generator.registry.indexEntities
 import com.kylemayes.generator.registry.parseRegistry
 import com.kylemayes.generator.support.addBindingsUpdates
 import com.kylemayes.generator.support.generateMarkdown
-import com.kylemayes.generator.support.git
 import com.kylemayes.generator.support.parseMarkdown
 import com.kylemayes.generator.support.time
 import mu.KotlinLogging
+import org.eclipse.jgit.api.Git
+import org.eclipse.jgit.lib.PersonIdent
+import org.eclipse.jgit.storage.file.FileRepositoryBuilder
+import org.eclipse.jgit.transport.RefSpec
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider
 import org.kohsuke.github.GitHub
 import java.nio.file.Files
 import java.nio.file.Path
@@ -34,6 +38,7 @@ fun main(args: Array<String>) = Generator()
 data class GeneratorContext(
     val directory: Path,
     val github: GitHub,
+    val token: String?,
 )
 
 class Generator : CliktCommand(help = "Manages generated Vulkan bindings") {
@@ -44,9 +49,9 @@ class Generator : CliktCommand(help = "Manages generated Vulkan bindings") {
     private val context by findOrSetObject {
         val directory = Path.of(directory).toAbsolutePath().normalize()
         if (username != null && token != null) {
-            GeneratorContext(directory, GitHub.connect(username, token))
+            GeneratorContext(directory, GitHub.connect(username, token), token)
         } else {
-            GeneratorContext(directory, GitHub.connectAnonymously())
+            GeneratorContext(directory, GitHub.connectAnonymously(), null)
         }
     }
 
@@ -229,15 +234,25 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
             return
         }
 
+
         log.info { "Creating branch, committing changes, and pushing branch..." }
-        git("config", "--local", "user.name", context.github.myself.login)
-        git("config", "--local", "user.email", context.github.myself.email)
-        git("checkout", "-B", head)
-        git("add", "-A")
-        git("status")
-        git("commit", "-m", "Update generated bindings")
-        git("log", "-2")
-        git("push", "origin", head, "--force")
+        val git = Git(FileRepositoryBuilder.create(context.directory.resolve(".git").toFile()))
+        git.checkout()
+            .setCreateBranch(true)
+            .setName("test-branch").call()
+        git.add()
+            .addFilepattern(".")
+            .call()
+        git.commit()
+            .setAuthor(PersonIdent(context.github.myself.login, context.github.myself.email))
+            .setMessage("Update generated bindings")
+            .call()
+        git.push()
+            .setCredentialsProvider(UsernamePasswordCredentialsProvider(context.token, ""))
+            .setForce(true)
+            .setRemote("origin")
+            .setRefSpecs(RefSpec("test-branch:test-branch"))
+            .call()
 
         log.info { "Creating pull request..." }
         val body = "Update generated bindings (automatically created by update action)."

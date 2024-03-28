@@ -22,6 +22,8 @@ dependencies {
     implementation("com.github.ajalt.clikt:clikt:4.3.0")
     implementation("com.vladsch.flexmark:flexmark-all:0.64.8")
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
+    implementation("org.eclipse.jgit:org.eclipse.jgit:6.9.0.202403050737-r")
+    implementation("org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:6.9.0.202403050737-r")
     implementation("org.jetbrains:annotations:24.1.0")
     implementation("org.kohsuke:github-api:1.321")
     implementation("org.slf4j:slf4j-simple:2.0.12")
