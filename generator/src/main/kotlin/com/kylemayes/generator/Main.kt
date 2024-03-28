@@ -253,8 +253,10 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
             .setCredentialsProvider(UsernamePasswordCredentialsProvider(context.token, ""))
             .setForce(true)
             .setRemote("origin")
-            .setRefSpecs(RefSpec("test-branch:test-branch"))
+            .setRefSpecs(RefSpec("${git.repository.fullBranch}:$head"))
             .call()
+            .flatMap { it.remoteUpdates }
+            .forEach { println(it) }
 
         log.info { "Creating pull request..." }
         val body = "Update generated bindings (automatically created by update action)."
