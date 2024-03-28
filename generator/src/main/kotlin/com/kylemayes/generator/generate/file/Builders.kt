@@ -6,6 +6,7 @@ import com.kylemayes.generator.generate.support.generatePtr
 import com.kylemayes.generator.generate.support.generateRef
 import com.kylemayes.generator.generate.support.getStructExtensions
 import com.kylemayes.generator.generate.support.getStructLifetime
+import com.kylemayes.generator.registry.ArrayType
 import com.kylemayes.generator.registry.Identifier
 import com.kylemayes.generator.registry.Member
 import com.kylemayes.generator.registry.PointerType
@@ -179,9 +180,13 @@ private fun Registry.generateMethods(struct: Structure): String {
     val members = struct.members.associateBy { it.name }
     val arraysByLength = mutableMapOf<Identifier, Member>()
     for (member in members.values) {
-        val length = members[member.len?.get(0)]
-        if (length != null) {
-            arraysByLength[length.name] = member
+        // Fixed-length array types still need an explicit length to indicate how
+        // many elements of the array are populated.
+        if (member.type !is ArrayType) {
+            val length = members[member.len?.get(0)]
+            if (length != null) {
+                arraysByLength[length.name] = member
+            }
         }
     }
 
@@ -204,7 +209,7 @@ private fun Registry.generateMethods(struct: Structure): String {
             // (`Bitfield24_8`). It is assumed that only 24-bit and 8-bit
             // bitfields are present (asserted when generating structs).
             methods.add(generateBitfieldMethods(member, iterator.advance()))
-        } else if (len != null && len.value != "null-terminated") {
+        } else if (len != null && len.value != "null-terminated" && member.type !is ArrayType) {
             if (arraysByLength.containsKey(len)) {
                 val lengthMember = members[len] ?: error("Missing length member.")
                 val length = Pair(lengthMember.name.value, lengthMember.type.generate())
