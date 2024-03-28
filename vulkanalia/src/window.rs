@@ -2,18 +2,15 @@
 
 //! Window integration.
 
-use raw_window_handle::{
-    HasRawDisplayHandle, HasRawWindowHandle, RawDisplayHandle, RawWindowHandle,
-};
+use raw_window_handle::{HasDisplayHandle, HasWindowHandle, RawDisplayHandle, RawWindowHandle};
 
 use crate::prelude::v1_0::*;
 
 /// Gets the required instance extensions for window integration.
-#[allow(deprecated, unused_variables)]
 pub fn get_required_instance_extensions(
-    window: &dyn HasRawWindowHandle,
+    window: &dyn HasWindowHandle,
 ) -> &'static [&'static vk::ExtensionName] {
-    match window.raw_window_handle() {
+    match window.window_handle().map(|handle| handle.as_raw()) {
         // BSD / Linux
         #[cfg(any(
             target_os = "dragonfly",
@@ -22,7 +19,7 @@ pub fn get_required_instance_extensions(
             target_os = "netbsd",
             target_os = "openbsd"
         ))]
-        RawWindowHandle::Wayland(window) => &[
+        Ok(RawWindowHandle::Wayland(_window)) => &[
             &vk::KHR_SURFACE_EXTENSION.name,
             &vk::KHR_WAYLAND_SURFACE_EXTENSION.name,
         ],
@@ -33,7 +30,7 @@ pub fn get_required_instance_extensions(
             target_os = "netbsd",
             target_os = "openbsd"
         ))]
-        RawWindowHandle::Xcb(window) => &[
+        Ok(RawWindowHandle::Xcb(_window)) => &[
             &vk::KHR_SURFACE_EXTENSION.name,
             &vk::KHR_XCB_SURFACE_EXTENSION.name,
         ],
@@ -44,19 +41,19 @@ pub fn get_required_instance_extensions(
             target_os = "netbsd",
             target_os = "openbsd"
         ))]
-        RawWindowHandle::Xlib(window) => &[
+        Ok(RawWindowHandle::Xlib(_window)) => &[
             &vk::KHR_SURFACE_EXTENSION.name,
             &vk::KHR_XLIB_SURFACE_EXTENSION.name,
         ],
         // macOS
         #[cfg(target_os = "macos")]
-        RawWindowHandle::AppKit(window) => &[
+        Ok(RawWindowHandle::AppKit(_window)) => &[
             &vk::KHR_SURFACE_EXTENSION.name,
             &vk::EXT_METAL_SURFACE_EXTENSION.name,
         ],
         // Windows
         #[cfg(target_os = "windows")]
-        RawWindowHandle::Win32(_) => &[
+        Ok(RawWindowHandle::Win32(_window)) => &[
             &vk::KHR_SURFACE_EXTENSION.name,
             &vk::KHR_WIN32_SURFACE_EXTENSION.name,
         ],
@@ -75,10 +72,13 @@ pub fn get_required_instance_extensions(
 #[allow(deprecated, unused_variables)]
 pub unsafe fn create_surface(
     instance: &Instance,
-    display: &dyn HasRawDisplayHandle,
-    window: &dyn HasRawWindowHandle,
+    display: &dyn HasDisplayHandle,
+    window: &dyn HasWindowHandle,
 ) -> VkResult<vk::SurfaceKHR> {
-    match (display.raw_display_handle(), window.raw_window_handle()) {
+    match (
+        display.display_handle().map(|handle| handle.as_raw()),
+        window.window_handle().map(|handle| handle.as_raw()),
+    ) {
         // BSD / Linux
         #[cfg(any(
             target_os = "dragonfly",
@@ -87,11 +87,11 @@ pub unsafe fn create_surface(
             target_os = "netbsd",
             target_os = "openbsd"
         ))]
-        (RawDisplayHandle::Wayland(display), RawWindowHandle::Wayland(window)) => {
+        (Ok(RawDisplayHandle::Wayland(display)), Ok(RawWindowHandle::Wayland(window))) => {
             use vk::KhrWaylandSurfaceExtension;
             let info = vk::WaylandSurfaceCreateInfoKHR::builder()
-                .display(display.display)
-                .surface(window.surface);
+                .display(display.display.as_ptr())
+                .surface(window.surface.as_ptr());
             instance.create_wayland_surface_khr(&info, None)
         }
         #[cfg(any(
@@ -101,11 +101,17 @@ pub unsafe fn create_surface(
             target_os = "netbsd",
             target_os = "openbsd"
         ))]
-        (RawDisplayHandle::Xcb(display), RawWindowHandle::Xcb(window)) => {
+        (Ok(RawDisplayHandle::Xcb(display)), Ok(RawWindowHandle::Xcb(window))) => {
             use vk::KhrXcbSurfaceExtension;
+
+            let connection_ptr = display
+                .connection
+                .map(|connection| connection.as_ptr())
+                .unwrap_or(std::ptr::null_mut());
+
             let info = vk::XcbSurfaceCreateInfoKHR::builder()
-                .connection(display.connection)
-                .window(window.window as _);
+                .connection(connection_ptr)
+                .window(window.window.get() as _);
             instance.create_xcb_surface_khr(&info, None)
         }
         #[cfg(any(
@@ -115,18 +121,23 @@ pub unsafe fn create_surface(
             target_os = "netbsd",
             target_os = "openbsd"
         ))]
-        (RawDisplayHandle::Xlib(display), RawWindowHandle::Xlib(window)) => {
+        (Ok(RawDisplayHandle::Xlib(display)), Ok(RawWindowHandle::Xlib(window))) => {
             use vk::KhrXlibSurfaceExtension;
+
+            let display_ptr = display
+                .display
+                .map(|display| display.as_ptr())
+                .unwrap_or(std::ptr::null_mut());
+
             let info = vk::XlibSurfaceCreateInfoKHR::builder()
-                .dpy(&mut (*(display.display as *mut _)))
+                .dpy(&mut *(display_ptr as *mut _))
                 .window(window.window);
 
             instance.create_xlib_surface_khr(&info, None)
         }
         // macOS
         #[cfg(target_os = "macos")]
-        (RawDisplayHandle::AppKit(_), RawWindowHandle::AppKit(window)) => {
-            use std::mem;
+        (Ok(RawDisplayHandle::AppKit(_)), Ok(RawWindowHandle::AppKit(window))) => {
             use std::os::raw::c_void;
 
             use cocoa::appkit::{NSView, NSWindow};
@@ -135,10 +146,8 @@ pub unsafe fn create_surface(
             use objc::runtime::YES;
             use vk::ExtMetalSurfaceExtension;
 
-            let (view, layer) = {
-                let id = mem::transmute::<_, id>(window.ns_window);
-
-                let view = id.contentView();
+            let layer = {
+                let view = window.ns_view.as_ptr() as id;
 
                 let layer = MetalLayer::new();
                 layer.set_contents_scale(view.backingScaleFactor());
@@ -150,7 +159,7 @@ pub unsafe fn create_surface(
                 view.setLayer(layer_ref as *mut objc::runtime::Object);
                 view.setWantsLayer(YES);
 
-                (&mut *window.ns_view, layer)
+                layer
             };
 
             let layer = (layer.as_ref() as *const MetalLayerRef).cast::<c_void>();
@@ -159,11 +168,19 @@ pub unsafe fn create_surface(
         }
         // Windows
         #[cfg(target_os = "windows")]
-        (RawDisplayHandle::Windows(_), RawWindowHandle::Win32(window)) => {
+        (Ok(RawDisplayHandle::Windows(_)), Ok(RawWindowHandle::Win32(window))) => {
             use vk::KhrWin32SurfaceExtension;
+
+            let hinstance_ptr = window
+                .hinstance
+                .map(|hinstance| hinstance.get() as vk::HINSTANCE)
+                .unwrap_or(std::ptr::null_mut());
+            let hwnd_ptr = window.hwnd.get() as vk::HWND;
+
             let info = vk::Win32SurfaceCreateInfoKHR::builder()
-                .hinstance(window.hinstance)
-                .hwnd(window.hwnd);
+                .hinstance(hinstance_ptr)
+                .hwnd(hwnd_ptr);
+
             instance.create_win32_surface_khr(&info, None)
         }
         // Unsupported (currently)

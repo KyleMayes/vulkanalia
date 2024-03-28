@@ -16,7 +16,8 @@ static VERTICES: [Vertex; 3] = [
 ];
 
 fn main() -> Result<()> {
-    unsafe { App::new("Triangle", TriangleExample::default())?.run() }
+    unsafe { App::new("Triangle", TriangleExample::default())?.run()? };
+    Ok(())
 }
 
 #[derive(Copy, Clone, Debug, Default)]
