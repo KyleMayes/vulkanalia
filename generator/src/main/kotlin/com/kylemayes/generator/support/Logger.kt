@@ -36,8 +36,8 @@ fun <T> KLogger.slow(
                     slow.set(true)
                     warn { "[UPDATE(SLOW)] $name is taking a while (>${limit}ms)..." }
                 }
-            } catch (e: InterruptedException) {
-                println(e)
+            } catch (_: InterruptedException) {
+                // ignore
             }
         }
 
