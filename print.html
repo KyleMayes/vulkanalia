@@ -367,11 +367,11 @@ use vulkanalia::prelude::v1_2::*;
 log = &quot;0.4&quot;
 cgmath = &quot;0.18&quot;
 png = &quot;0.17&quot;
-pretty_env_logger = &quot;0.4&quot;
+pretty_env_logger = &quot;0.5&quot;
 thiserror = &quot;1&quot;
 tobj = { version = &quot;3&quot;, features = [&quot;log&quot;] }
-vulkanalia = { version = &quot;=0.21.0&quot;, features = [&quot;libloading&quot;, &quot;provisional&quot;, &quot;window&quot;] }
-winit = &quot;0.28&quot;
+vulkanalia = { version = &quot;=0.22.0&quot;, features = [&quot;libloading&quot;, &quot;provisional&quot;, &quot;window&quot;] }
+winit = &quot;0.29&quot;
 </code></pre>
 <ul>
 <li><code>anyhow</code> – used for simple error handling</li>
@@ -445,7 +445,7 @@ winit = &quot;0.28&quot;
 use anyhow::Result;
 use winit::dpi::LogicalSize;
 use winit::event::{Event, WindowEvent};
-use winit::event_loop::{ControlFlow, EventLoop};
+use winit::event_loop::EventLoop;
 use winit::window::{Window, WindowBuilder};
 
 fn main() -&gt; Result&lt;()&gt; {
@@ -453,7 +453,7 @@ fn main() -&gt; Result&lt;()&gt; {
 
     // Window
 
-    let event_loop = EventLoop::new();
+    let event_loop = EventLoop::new()?;
     let window = WindowBuilder::new()
         .with_title(&quot;Vulkan Tutorial (Rust)&quot;)
         .with_inner_size(LogicalSize::new(1024, 768))
@@ -462,22 +462,25 @@ fn main() -&gt; Result&lt;()&gt; {
     // App
 
     let mut app = unsafe { App::create(&amp;window)? };
-    let mut destroying = false;
-    event_loop.run(move |event, _, control_flow| {
-        *control_flow = ControlFlow::Poll;
+    event_loop.run(move |event, elwt| {
         match event {
-            // Render a frame if our Vulkan app is not being destroyed.
-            Event::MainEventsCleared if !destroying =&gt;
-                unsafe { app.render(&amp;window) }.unwrap(),
-            // Destroy our Vulkan app.
-            Event::WindowEvent { event: WindowEvent::CloseRequested, .. } =&gt; {
-                destroying = true;
-                *control_flow = ControlFlow::Exit;
-                unsafe { app.destroy(); }
+            // Request a redraw when all events were processed.
+            Event::AboutToWait =&gt; window.request_redraw(),
+            Event::WindowEvent { event, .. } =&gt; match event {
+                // Render a frame if our Vulkan app is not being destroyed.
+                WindowEvent::RedrawRequested if !elwt.exiting() =&gt; unsafe { app.render(&amp;window) }.unwrap(),
+                // Destroy our Vulkan app.
+                WindowEvent::CloseRequested =&gt; {
+                    elwt.exit();
+                    unsafe { app.destroy(); }
+                }
+                _ =&gt; {}
             }
             _ =&gt; {}
         }
-    });
+    })?;
+
+    Ok(())
 }
 
 /// Our Vulkan app.
@@ -2897,24 +2900,27 @@ if self.resized || changed {
 <h2 id="handling-minimization"><a class="header" href="#handling-minimization">Handling minimization</a></h2>
 <p>There is another case where a swapchain may become out of date and that is a special kind of window resizing: window minimization. This case is special because it will result in a framebuffer size of <code>0</code>. In this tutorial we will handle that by not rendering frames while the window is minimized:</p>
 <pre><code class="language-rust noplaypen">let mut app = unsafe { App::create(&amp;window)? };
-let mut destroying = false;
 let mut minimized = false;
-event_loop.run(move |event, _, control_flow| {
-    *control_flow = ControlFlow::Poll;
+event_loop.run(move |event,elwt| {
     match event {
-        Event::MainEventsCleared if !destroying &amp;&amp; !minimized =&gt;
-            unsafe { app.render(&amp;window) }.unwrap(),
-        Event::WindowEvent { event: WindowEvent::Resized(size), .. } =&gt; {
-            if size.width == 0 || size.height == 0 {
-                minimized = true;
-            } else {
-                minimized = false;
-                app.resized = true;
+        // ...
+        Event::WindowEvent { event, .. } =&gt; match event {
+            WindowEvent::RedrawRequested if !elwt.exiting() &amp;&amp; !minimized =&gt; {
+                unsafe { app.render(&amp;window) }.unwrap();
+            },
+            WindowEvent::Resized(size) =&gt; {
+                if size.width == 0 || size.height == 0 {
+                    minimized = true;
+                } else {
+                    minimized = false;
+                    app.resized = true;
+                }
             }
+            // ...
         }
         // ...
     }
-});
+})?;
 </code></pre>
 <p>Congratulations, you've now finished your very first well-behaved Vulkan program! In the next chapter we're going to get rid of the hardcoded vertices in the vertex shader and actually use a vertex buffer.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="vertex-input-description"><a class="header" href="#vertex-input-description">Vertex input description</a></h1>
@@ -7015,14 +7021,18 @@ let model = Mat4::from_translation(vec3(0.0, y, z)) * Mat4::from_axis_angle(
 <p>Finally, add a case to the event match block in the <code>main</code> function that handles key presses and decrements <code>models</code> when the left arrow key is pressed (to a minimum of 1) and increments <code>models</code> when the right arrow key is pressed (to a maximum of 4).</p>
 <pre><code class="language-rust noplaypen">match event {
     // ...
-    Event::WindowEvent { event: WindowEvent::KeyboardInput { input, .. }, .. } =&gt; {
-        if input.state == ElementState::Pressed {
-            match input.virtual_keycode {
-                Some(VirtualKeyCode::Left) if app.models &gt; 1 =&gt; app.models -= 1,
-                Some(VirtualKeyCode::Right) if app.models &lt; 4 =&gt; app.models += 1,
-                _ =&gt; { }
+    Event::WindowEvent { event, .. } =&gt; match event {
+        // ...
+        WindowEvent::KeyboardInput { event, .. } =&gt; {
+            if event.state == ElementState::Pressed {
+                match event.physical_key {
+                    PhysicalKey::Code(KeyCode::ArrowLeft) if app.models &gt; 1 =&gt; app.models -= 1,
+                    PhysicalKey::Code(KeyCode::ArrowRight) if app.models &lt; 4 =&gt; app.models += 1,
+                    _ =&gt; { }
+                }
             }
         }
+        // ...
     }
     // ...
 }

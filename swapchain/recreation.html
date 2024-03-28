@@ -267,24 +267,27 @@ if self.resized || changed {
 <h2 id="handling-minimization"><a class="header" href="#handling-minimization">Handling minimization</a></h2>
 <p>There is another case where a swapchain may become out of date and that is a special kind of window resizing: window minimization. This case is special because it will result in a framebuffer size of <code>0</code>. In this tutorial we will handle that by not rendering frames while the window is minimized:</p>
 <pre><code class="language-rust noplaypen">let mut app = unsafe { App::create(&amp;window)? };
-let mut destroying = false;
 let mut minimized = false;
-event_loop.run(move |event, _, control_flow| {
-    *control_flow = ControlFlow::Poll;
+event_loop.run(move |event,elwt| {
     match event {
-        Event::MainEventsCleared if !destroying &amp;&amp; !minimized =&gt;
-            unsafe { app.render(&amp;window) }.unwrap(),
-        Event::WindowEvent { event: WindowEvent::Resized(size), .. } =&gt; {
-            if size.width == 0 || size.height == 0 {
-                minimized = true;
-            } else {
-                minimized = false;
-                app.resized = true;
+        // ...
+        Event::WindowEvent { event, .. } =&gt; match event {
+            WindowEvent::RedrawRequested if !elwt.exiting() &amp;&amp; !minimized =&gt; {
+                unsafe { app.render(&amp;window) }.unwrap();
+            },
+            WindowEvent::Resized(size) =&gt; {
+                if size.width == 0 || size.height == 0 {
+                    minimized = true;
+                } else {
+                    minimized = false;
+                    app.resized = true;
+                }
             }
+            // ...
         }
         // ...
     }
-});
+})?;
 </code></pre>
 <p>Congratulations, you've now finished your very first well-behaved Vulkan program! In the next chapter we're going to get rid of the hardcoded vertices in the vertex shader and actually use a vertex buffer.</p>
 

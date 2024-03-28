@@ -367,14 +367,18 @@ let model = Mat4::from_translation(vec3(0.0, y, z)) * Mat4::from_axis_angle(
 <p>Finally, add a case to the event match block in the <code>main</code> function that handles key presses and decrements <code>models</code> when the left arrow key is pressed (to a minimum of 1) and increments <code>models</code> when the right arrow key is pressed (to a maximum of 4).</p>
 <pre><code class="language-rust noplaypen">match event {
     // ...
-    Event::WindowEvent { event: WindowEvent::KeyboardInput { input, .. }, .. } =&gt; {
-        if input.state == ElementState::Pressed {
-            match input.virtual_keycode {
-                Some(VirtualKeyCode::Left) if app.models &gt; 1 =&gt; app.models -= 1,
-                Some(VirtualKeyCode::Right) if app.models &lt; 4 =&gt; app.models += 1,
-                _ =&gt; { }
+    Event::WindowEvent { event, .. } =&gt; match event {
+        // ...
+        WindowEvent::KeyboardInput { event, .. } =&gt; {
+            if event.state == ElementState::Pressed {
+                match event.physical_key {
+                    PhysicalKey::Code(KeyCode::ArrowLeft) if app.models &gt; 1 =&gt; app.models -= 1,
+                    PhysicalKey::Code(KeyCode::ArrowRight) if app.models &lt; 4 =&gt; app.models += 1,
+                    _ =&gt; { }
+                }
             }
         }
+        // ...
     }
     // ...
 }
