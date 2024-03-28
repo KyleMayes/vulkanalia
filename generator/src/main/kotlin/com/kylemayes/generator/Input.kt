@@ -122,7 +122,7 @@ private fun getLocalCommitHashes(context: GeneratorContext): Map<RepositoryPath,
 private fun setLocalCommitHashes(context: GeneratorContext, inputs: List<RepositoryInput<Any>>) =
     Files.writeString(
         context.directory.resolve(".commits"),
-        inputs.joinToString {
+        inputs.joinToString("\n") {
             val (name, branch, path) = it.path
             "$name/$branch/$path => ${it.latest.commit.shA1}"
         },
