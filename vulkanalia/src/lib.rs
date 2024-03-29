@@ -333,6 +333,10 @@ unsafe fn get_names(
     num_strings: u32,
     strings: *const *const c_char,
 ) -> BTreeSet<vk::ExtensionName> {
+    if strings.is_null() || num_strings == 0 {
+        return BTreeSet::new();
+    }
+
     slice::from_raw_parts(strings, num_strings as usize)
         .iter()
         .map(|s| vk::ExtensionName::from_ptr(*s))

@@ -6,6 +6,9 @@
 - Added `no_std` compability for `vulkanalia` and `vulkanalia-sys` crates
 - Make all extendable output structs parameters in command wrappers (see [#213](https://github.com/KyleMayes/vulkanalia/issues/213) for details)
 
+### Fixed
+- [Fixed crash when zero extension or layers enabled](https://github.com/KyleMayes/vulkanalia/issues/254)
+
 ### Added
 - Added support for Vulkan video extensions
 - Added `vulkanalia::prelude::v1_3` module (a prelude module for Vulkan 1.3+)
