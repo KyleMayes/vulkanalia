@@ -57,7 +57,7 @@ jobs:
           ./gradlew run --args="\
             --directory=.. \
             --username=KyleMayes \
-            --token=${{ secrets.PERSONAL_ACCESS_TOKEN }} \
+            --token=${{ secrets.GITHUB_TOKEN  }} \
             update \
             --repo=${{ github.repository }}"
       # Debug
