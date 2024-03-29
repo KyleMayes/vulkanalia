@@ -250,13 +250,14 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
             .setAuthor(PersonIdent(context.github.myself.login, context.github.myself.email))
             .setMessage("Update generated bindings")
             .call()
-        val updates = git.push()
-            .setCredentialsProvider(UsernamePasswordCredentialsProvider(context.token, ""))
-            .setForce(true)
-            .setRemote("origin")
-            .setRefSpecs(RefSpec("$head:$head"))
-            .call()
-            .flatMap { it.remoteUpdates }
+        val updates =
+            git.push()
+                .setCredentialsProvider(UsernamePasswordCredentialsProvider(context.token, ""))
+                .setForce(true)
+                .setRemote("origin")
+                .setRefSpecs(RefSpec("$head:$head"))
+                .call()
+                .flatMap { it.remoteUpdates }
         if (updates.any { it.status != RemoteRefUpdate.Status.OK }) {
             error("Failed to push branch: $updates")
         }
