@@ -202,7 +202,7 @@ impl AttachmentLoadOp {
     pub const LOAD: Self = Self(0);
     pub const CLEAR: Self = Self(1);
     pub const DONT_CARE: Self = Self(2);
-    pub const NONE_EXT: Self = Self(1000400000);
+    pub const NONE_KHR: Self = Self(1000400000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -223,7 +223,7 @@ impl fmt::Debug for AttachmentLoadOp {
             0 => write!(f, "LOAD"),
             1 => write!(f, "CLEAR"),
             2 => write!(f, "DONT_CARE"),
-            1000400000 => write!(f, "NONE_EXT"),
+            1000400000 => write!(f, "NONE_KHR"),
             _ => self.0.fmt(f),
         }
     }
@@ -1181,6 +1181,8 @@ impl DebugReportObjectTypeEXT {
     pub const CU_FUNCTION_NVX: Self = Self(1000029001);
     pub const ACCELERATION_STRUCTURE_KHR: Self = Self(1000150000);
     pub const ACCELERATION_STRUCTURE_NV: Self = Self(1000165000);
+    pub const CUDA_MODULE_NV: Self = Self(1000307000);
+    pub const CUDA_FUNCTION_NV: Self = Self(1000307001);
     pub const BUFFER_COLLECTION_FUCHSIA: Self = Self(1000366000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
@@ -1237,6 +1239,8 @@ impl fmt::Debug for DebugReportObjectTypeEXT {
             1000029001 => write!(f, "CU_FUNCTION_NVX"),
             1000150000 => write!(f, "ACCELERATION_STRUCTURE_KHR"),
             1000165000 => write!(f, "ACCELERATION_STRUCTURE_NV"),
+            1000307000 => write!(f, "CUDA_MODULE_NV"),
+            1000307001 => write!(f, "CUDA_FUNCTION_NV"),
             1000366000 => write!(f, "BUFFER_COLLECTION_FUCHSIA"),
             _ => self.0.fmt(f),
         }
@@ -1826,12 +1830,10 @@ impl DynamicState {
     pub const EXCLUSIVE_SCISSOR_ENABLE_NV: Self = Self(1000205000);
     pub const EXCLUSIVE_SCISSOR_NV: Self = Self(1000205001);
     pub const FRAGMENT_SHADING_RATE_KHR: Self = Self(1000226000);
-    pub const LINE_STIPPLE_EXT: Self = Self(1000259000);
     pub const VERTEX_INPUT_EXT: Self = Self(1000352000);
     pub const PATCH_CONTROL_POINTS_EXT: Self = Self(1000377000);
     pub const LOGIC_OP_EXT: Self = Self(1000377003);
     pub const COLOR_WRITE_ENABLE_EXT: Self = Self(1000381000);
-    pub const TESSELLATION_DOMAIN_ORIGIN_EXT: Self = Self(1000455002);
     pub const DEPTH_CLAMP_ENABLE_EXT: Self = Self(1000455003);
     pub const POLYGON_MODE_EXT: Self = Self(1000455004);
     pub const RASTERIZATION_SAMPLES_EXT: Self = Self(1000455005);
@@ -1842,6 +1844,7 @@ impl DynamicState {
     pub const COLOR_BLEND_ENABLE_EXT: Self = Self(1000455010);
     pub const COLOR_BLEND_EQUATION_EXT: Self = Self(1000455011);
     pub const COLOR_WRITE_MASK_EXT: Self = Self(1000455012);
+    pub const TESSELLATION_DOMAIN_ORIGIN_EXT: Self = Self(1000455002);
     pub const RASTERIZATION_STREAM_EXT: Self = Self(1000455013);
     pub const CONSERVATIVE_RASTERIZATION_MODE_EXT: Self = Self(1000455014);
     pub const EXTRA_PRIMITIVE_OVERESTIMATION_SIZE_EXT: Self = Self(1000455015);
@@ -1863,6 +1866,7 @@ impl DynamicState {
     pub const REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV: Self = Self(1000455031);
     pub const COVERAGE_REDUCTION_MODE_NV: Self = Self(1000455032);
     pub const ATTACHMENT_FEEDBACK_LOOP_ENABLE_EXT: Self = Self(1000524000);
+    pub const LINE_STIPPLE_KHR: Self = Self(1000259000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1915,12 +1919,10 @@ impl fmt::Debug for DynamicState {
             1000205000 => write!(f, "EXCLUSIVE_SCISSOR_ENABLE_NV"),
             1000205001 => write!(f, "EXCLUSIVE_SCISSOR_NV"),
             1000226000 => write!(f, "FRAGMENT_SHADING_RATE_KHR"),
-            1000259000 => write!(f, "LINE_STIPPLE_EXT"),
             1000352000 => write!(f, "VERTEX_INPUT_EXT"),
             1000377000 => write!(f, "PATCH_CONTROL_POINTS_EXT"),
             1000377003 => write!(f, "LOGIC_OP_EXT"),
             1000381000 => write!(f, "COLOR_WRITE_ENABLE_EXT"),
-            1000455002 => write!(f, "TESSELLATION_DOMAIN_ORIGIN_EXT"),
             1000455003 => write!(f, "DEPTH_CLAMP_ENABLE_EXT"),
             1000455004 => write!(f, "POLYGON_MODE_EXT"),
             1000455005 => write!(f, "RASTERIZATION_SAMPLES_EXT"),
@@ -1931,6 +1933,7 @@ impl fmt::Debug for DynamicState {
             1000455010 => write!(f, "COLOR_BLEND_ENABLE_EXT"),
             1000455011 => write!(f, "COLOR_BLEND_EQUATION_EXT"),
             1000455012 => write!(f, "COLOR_WRITE_MASK_EXT"),
+            1000455002 => write!(f, "TESSELLATION_DOMAIN_ORIGIN_EXT"),
             1000455013 => write!(f, "RASTERIZATION_STREAM_EXT"),
             1000455014 => write!(f, "CONSERVATIVE_RASTERIZATION_MODE_EXT"),
             1000455015 => write!(f, "EXTRA_PRIMITIVE_OVERESTIMATION_SIZE_EXT"),
@@ -1952,6 +1955,7 @@ impl fmt::Debug for DynamicState {
             1000455031 => write!(f, "REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV"),
             1000455032 => write!(f, "COVERAGE_REDUCTION_MODE_NV"),
             1000524000 => write!(f, "ATTACHMENT_FEEDBACK_LOOP_ENABLE_EXT"),
+            1000259000 => write!(f, "LINE_STIPPLE_KHR"),
             _ => self.0.fmt(f),
         }
     }
@@ -2773,6 +2777,7 @@ impl ImageLayout {
     pub const SHARED_PRESENT_KHR: Self = Self(1000111000);
     pub const FRAGMENT_DENSITY_MAP_OPTIMAL_EXT: Self = Self(1000218000);
     pub const FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR: Self = Self(1000164003);
+    pub const RENDERING_LOCAL_READ_KHR: Self = Self(1000232000);
     pub const VIDEO_ENCODE_DST_KHR: Self = Self(1000299000);
     pub const VIDEO_ENCODE_SRC_KHR: Self = Self(1000299001);
     pub const VIDEO_ENCODE_DPB_KHR: Self = Self(1000299002);
@@ -2818,6 +2823,7 @@ impl fmt::Debug for ImageLayout {
             1000111000 => write!(f, "SHARED_PRESENT_KHR"),
             1000218000 => write!(f, "FRAGMENT_DENSITY_MAP_OPTIMAL_EXT"),
             1000164003 => write!(f, "FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR"),
+            1000232000 => write!(f, "RENDERING_LOCAL_READ_KHR"),
             1000299000 => write!(f, "VIDEO_ENCODE_DST_KHR"),
             1000299001 => write!(f, "VIDEO_ENCODE_SRC_KHR"),
             1000299002 => write!(f, "VIDEO_ENCODE_DPB_KHR"),
@@ -2946,7 +2952,7 @@ impl IndexType {
     pub const UINT16: Self = Self(0);
     pub const UINT32: Self = Self(1);
     pub const NONE_KHR: Self = Self(1000165000);
-    pub const UINT8_EXT: Self = Self(1000265000);
+    pub const UINT8_KHR: Self = Self(1000265000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2967,7 +2973,7 @@ impl fmt::Debug for IndexType {
             0 => write!(f, "UINT16"),
             1 => write!(f, "UINT32"),
             1000165000 => write!(f, "NONE_KHR"),
-            1000265000 => write!(f, "UINT8_EXT"),
+            1000265000 => write!(f, "UINT8_KHR"),
             _ => self.0.fmt(f),
         }
     }
@@ -3105,6 +3111,50 @@ impl fmt::Debug for LatencyMarkerNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLayerSettingTypeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct LayerSettingTypeEXT(i32);
+
+impl LayerSettingTypeEXT {
+    pub const BOOL32: Self = Self(0);
+    pub const INT32: Self = Self(1);
+    pub const INT64: Self = Self(2);
+    pub const UINT32: Self = Self(3);
+    pub const UINT64: Self = Self(4);
+    pub const FLOAT32: Self = Self(5);
+    pub const FLOAT64: Self = Self(6);
+    pub const STRING: Self = Self(7);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for LayerSettingTypeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "BOOL32"),
+            1 => write!(f, "INT32"),
+            2 => write!(f, "INT64"),
+            3 => write!(f, "UINT32"),
+            4 => write!(f, "UINT64"),
+            5 => write!(f, "FLOAT32"),
+            6 => write!(f, "FLOAT64"),
+            7 => write!(f, "STRING"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLayeredDriverUnderlyingApiMSFT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -3137,12 +3187,12 @@ impl fmt::Debug for LayeredDriverUnderlyingApiMSFT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLineRasterizationModeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLineRasterizationModeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct LineRasterizationModeEXT(i32);
+pub struct LineRasterizationModeKHR(i32);
 
-impl LineRasterizationModeEXT {
+impl LineRasterizationModeKHR {
     pub const DEFAULT: Self = Self(0);
     pub const RECTANGULAR: Self = Self(1);
     pub const BRESENHAM: Self = Self(2);
@@ -3161,7 +3211,7 @@ impl LineRasterizationModeEXT {
     }
 }
 
-impl fmt::Debug for LineRasterizationModeEXT {
+impl fmt::Debug for LineRasterizationModeKHR {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             0 => write!(f, "DEFAULT"),
@@ -3350,6 +3400,8 @@ impl ObjectType {
     pub const PERFORMANCE_CONFIGURATION_INTEL: Self = Self(1000210000);
     pub const DEFERRED_OPERATION_KHR: Self = Self(1000268000);
     pub const INDIRECT_COMMANDS_LAYOUT_NV: Self = Self(1000277000);
+    pub const CUDA_MODULE_NV: Self = Self(1000307000);
+    pub const CUDA_FUNCTION_NV: Self = Self(1000307001);
     pub const BUFFER_COLLECTION_FUCHSIA: Self = Self(1000366000);
     pub const MICROMAP_EXT: Self = Self(1000396000);
     pub const OPTICAL_FLOW_SESSION_NV: Self = Self(1000464000);
@@ -3417,6 +3469,8 @@ impl fmt::Debug for ObjectType {
             1000210000 => write!(f, "PERFORMANCE_CONFIGURATION_INTEL"),
             1000268000 => write!(f, "DEFERRED_OPERATION_KHR"),
             1000277000 => write!(f, "INDIRECT_COMMANDS_LAYOUT_NV"),
+            1000307000 => write!(f, "CUDA_MODULE_NV"),
+            1000307001 => write!(f, "CUDA_FUNCTION_NV"),
             1000366000 => write!(f, "BUFFER_COLLECTION_FUCHSIA"),
             1000396000 => write!(f, "MICROMAP_EXT"),
             1000464000 => write!(f, "OPTICAL_FLOW_SESSION_NV"),
@@ -4587,7 +4641,7 @@ impl Result {
     pub const OPERATION_NOT_DEFERRED_KHR: Self = Self(1000268003);
     pub const ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR: Self = Self(-1000299000);
     pub const ERROR_COMPRESSION_EXHAUSTED_EXT: Self = Self(-1000338000);
-    pub const ERROR_INCOMPATIBLE_SHADER_BINARY_EXT: Self = Self(1000482000);
+    pub const INCOMPATIBLE_SHADER_BINARY_EXT: Self = Self(1000482000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -4651,7 +4705,7 @@ impl fmt::Debug for Result {
             1000268003 => write!(f, "OPERATION_NOT_DEFERRED_KHR"),
             -1000299000 => write!(f, "ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR"),
             -1000338000 => write!(f, "ERROR_COMPRESSION_EXHAUSTED_EXT"),
-            1000482000 => write!(f, "ERROR_INCOMPATIBLE_SHADER_BINARY_EXT"),
+            1000482000 => write!(f, "INCOMPATIBLE_SHADER_BINARY_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -4706,7 +4760,7 @@ impl fmt::Display for Result {
             1000268003 => write!(f, "A deferred operation was requested and no operations were deferred."),
             -1000299000 => write!(f, "ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR"),
             -1000338000 => write!(f, "ERROR_COMPRESSION_EXHAUSTED_EXT"),
-            1000482000 => write!(f, "ERROR_INCOMPATIBLE_SHADER_BINARY_EXT"),
+            1000482000 => write!(f, "INCOMPATIBLE_SHADER_BINARY_EXT"),
             _ => write!(f, "unknown Vulkan result (code = {})", self.0),
         }
     }
@@ -5563,34 +5617,34 @@ impl StructureType {
     pub const CU_LAUNCH_INFO_NVX: Self = Self(1000029002);
     pub const IMAGE_VIEW_HANDLE_INFO_NVX: Self = Self(1000030000);
     pub const IMAGE_VIEW_ADDRESS_PROPERTIES_NVX: Self = Self(1000030001);
-    pub const VIDEO_ENCODE_H264_CAPABILITIES_EXT: Self = Self(1000038000);
-    pub const VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT: Self = Self(1000038001);
-    pub const VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT: Self = Self(1000038002);
-    pub const VIDEO_ENCODE_H264_PICTURE_INFO_EXT: Self = Self(1000038003);
-    pub const VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT: Self = Self(1000038004);
-    pub const VIDEO_ENCODE_H264_NALU_SLICE_INFO_EXT: Self = Self(1000038005);
-    pub const VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_EXT: Self = Self(1000038006);
-    pub const VIDEO_ENCODE_H264_PROFILE_INFO_EXT: Self = Self(1000038007);
-    pub const VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT: Self = Self(1000038008);
-    pub const VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT: Self = Self(1000038009);
-    pub const VIDEO_ENCODE_H264_SESSION_CREATE_INFO_EXT: Self = Self(1000038010);
-    pub const VIDEO_ENCODE_H264_QUALITY_LEVEL_PROPERTIES_EXT: Self = Self(1000038011);
-    pub const VIDEO_ENCODE_H264_SESSION_PARAMETERS_GET_INFO_EXT: Self = Self(1000038012);
-    pub const VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_EXT: Self = Self(1000038013);
-    pub const VIDEO_ENCODE_H265_CAPABILITIES_EXT: Self = Self(1000039000);
-    pub const VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT: Self = Self(1000039001);
-    pub const VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT: Self = Self(1000039002);
-    pub const VIDEO_ENCODE_H265_PICTURE_INFO_EXT: Self = Self(1000039003);
-    pub const VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT: Self = Self(1000039004);
-    pub const VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_EXT: Self = Self(1000039005);
-    pub const VIDEO_ENCODE_H265_GOP_REMAINING_FRAME_INFO_EXT: Self = Self(1000039006);
-    pub const VIDEO_ENCODE_H265_PROFILE_INFO_EXT: Self = Self(1000039007);
-    pub const VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT: Self = Self(1000039009);
-    pub const VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT: Self = Self(1000039010);
-    pub const VIDEO_ENCODE_H265_SESSION_CREATE_INFO_EXT: Self = Self(1000039011);
-    pub const VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_EXT: Self = Self(1000039012);
-    pub const VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_EXT: Self = Self(1000039013);
-    pub const VIDEO_ENCODE_H265_SESSION_PARAMETERS_FEEDBACK_INFO_EXT: Self = Self(1000039014);
+    pub const VIDEO_ENCODE_H264_CAPABILITIES_KHR: Self = Self(1000038000);
+    pub const VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_KHR: Self = Self(1000038001);
+    pub const VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_KHR: Self = Self(1000038002);
+    pub const VIDEO_ENCODE_H264_PICTURE_INFO_KHR: Self = Self(1000038003);
+    pub const VIDEO_ENCODE_H264_DPB_SLOT_INFO_KHR: Self = Self(1000038004);
+    pub const VIDEO_ENCODE_H264_NALU_SLICE_INFO_KHR: Self = Self(1000038005);
+    pub const VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR: Self = Self(1000038006);
+    pub const VIDEO_ENCODE_H264_PROFILE_INFO_KHR: Self = Self(1000038007);
+    pub const VIDEO_ENCODE_H264_RATE_CONTROL_INFO_KHR: Self = Self(1000038008);
+    pub const VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR: Self = Self(1000038009);
+    pub const VIDEO_ENCODE_H264_SESSION_CREATE_INFO_KHR: Self = Self(1000038010);
+    pub const VIDEO_ENCODE_H264_QUALITY_LEVEL_PROPERTIES_KHR: Self = Self(1000038011);
+    pub const VIDEO_ENCODE_H264_SESSION_PARAMETERS_GET_INFO_KHR: Self = Self(1000038012);
+    pub const VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR: Self = Self(1000038013);
+    pub const VIDEO_ENCODE_H265_CAPABILITIES_KHR: Self = Self(1000039000);
+    pub const VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR: Self = Self(1000039001);
+    pub const VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_KHR: Self = Self(1000039002);
+    pub const VIDEO_ENCODE_H265_PICTURE_INFO_KHR: Self = Self(1000039003);
+    pub const VIDEO_ENCODE_H265_DPB_SLOT_INFO_KHR: Self = Self(1000039004);
+    pub const VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR: Self = Self(1000039005);
+    pub const VIDEO_ENCODE_H265_GOP_REMAINING_FRAME_INFO_KHR: Self = Self(1000039006);
+    pub const VIDEO_ENCODE_H265_PROFILE_INFO_KHR: Self = Self(1000039007);
+    pub const VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR: Self = Self(1000039009);
+    pub const VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_KHR: Self = Self(1000039010);
+    pub const VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR: Self = Self(1000039011);
+    pub const VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR: Self = Self(1000039012);
+    pub const VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR: Self = Self(1000039013);
+    pub const VIDEO_ENCODE_H265_SESSION_PARAMETERS_FEEDBACK_INFO_KHR: Self = Self(1000039014);
     pub const VIDEO_DECODE_H264_CAPABILITIES_KHR: Self = Self(1000040000);
     pub const VIDEO_DECODE_H264_PICTURE_INFO_KHR: Self = Self(1000040001);
     pub const VIDEO_DECODE_H264_PROFILE_INFO_KHR: Self = Self(1000040003);
@@ -5652,6 +5706,7 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT: Self = Self(1000102000);
     pub const PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT: Self = Self(1000102001);
     pub const HDR_METADATA_EXT: Self = Self(1000105000);
+    pub const PHYSICAL_DEVICE_RELAXED_LINE_RASTERIZATION_FEATURES_IMG: Self = Self(1000110000);
     pub const SHARED_PRESENT_SURFACE_CAPABILITIES_KHR: Self = Self(1000111000);
     pub const IMPORT_FENCE_WIN32_HANDLE_INFO_KHR: Self = Self(1000114000);
     pub const EXPORT_FENCE_WIN32_HANDLE_INFO_KHR: Self = Self(1000114001);
@@ -5760,7 +5815,6 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT: Self = Self(1000178002);
     pub const PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR: Self = Self(1000181000);
     pub const PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD: Self = Self(1000183000);
-    pub const CALIBRATED_TIMESTAMP_INFO_EXT: Self = Self(1000184000);
     pub const PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD: Self = Self(1000185000);
     pub const VIDEO_DECODE_H265_CAPABILITIES_KHR: Self = Self(1000187000);
     pub const VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR: Self = Self(1000187001);
@@ -5773,8 +5827,6 @@ impl StructureType {
     pub const QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR: Self = Self(1000388001);
     pub const DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD: Self = Self(1000189000);
     pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT: Self = Self(1000190000);
-    pub const PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT: Self = Self(1000190001);
-    pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT: Self = Self(1000190002);
     pub const PRESENT_FRAME_TOKEN_GGP: Self = Self(1000191000);
     pub const PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV: Self = Self(1000201000);
     pub const PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV: Self = Self(1000202000);
@@ -5806,7 +5858,11 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR: Self = Self(1000226004);
     pub const PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD: Self = Self(1000227000);
     pub const PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD: Self = Self(1000229000);
+    pub const PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR: Self = Self(1000232000);
+    pub const RENDERING_ATTACHMENT_LOCATION_INFO_KHR: Self = Self(1000232001);
+    pub const RENDERING_INPUT_ATTACHMENT_INDEX_INFO_KHR: Self = Self(1000232002);
     pub const PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT: Self = Self(1000234000);
+    pub const PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR: Self = Self(1000235000);
     pub const PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT: Self = Self(1000237000);
     pub const PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT: Self = Self(1000238000);
     pub const MEMORY_PRIORITY_ALLOCATE_INFO_EXT: Self = Self(1000238001);
@@ -5833,11 +5889,7 @@ impl StructureType {
     pub const SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT: Self = Self(1000255002);
     pub const SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT: Self = Self(1000255001);
     pub const HEADLESS_SURFACE_CREATE_INFO_EXT: Self = Self(1000256000);
-    pub const PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT: Self = Self(1000259000);
-    pub const PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT: Self = Self(1000259001);
-    pub const PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT: Self = Self(1000259002);
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT: Self = Self(1000260000);
-    pub const PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT: Self = Self(1000265000);
     pub const PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT: Self = Self(1000267000);
     pub const PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR: Self = Self(1000269000);
     pub const PIPELINE_INFO_KHR: Self = Self(1000269001);
@@ -5857,6 +5909,9 @@ impl StructureType {
     pub const HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT: Self = Self(1000270009);
     pub const MEMORY_MAP_INFO_KHR: Self = Self(1000271000);
     pub const MEMORY_UNMAP_INFO_KHR: Self = Self(1000271001);
+    pub const PHYSICAL_DEVICE_MAP_MEMORY_PLACED_FEATURES_EXT: Self = Self(1000272000);
+    pub const PHYSICAL_DEVICE_MAP_MEMORY_PLACED_PROPERTIES_EXT: Self = Self(1000272001);
+    pub const MEMORY_MAP_PLACED_INFO_EXT: Self = Self(1000272002);
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT: Self = Self(1000273000);
     pub const SURFACE_PRESENT_MODE_EXT: Self = Self(1000274000);
     pub const SURFACE_PRESENT_SCALING_CAPABILITIES_EXT: Self = Self(1000274001);
@@ -5910,6 +5965,11 @@ impl StructureType {
     pub const VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR: Self = Self(1000299010);
     pub const PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV: Self = Self(1000300000);
     pub const DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV: Self = Self(1000300001);
+    pub const CUDA_MODULE_CREATE_INFO_NV: Self = Self(1000307000);
+    pub const CUDA_FUNCTION_CREATE_INFO_NV: Self = Self(1000307001);
+    pub const CUDA_LAUNCH_INFO_NV: Self = Self(1000307002);
+    pub const PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_FEATURES_NV: Self = Self(1000307003);
+    pub const PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_PROPERTIES_NV: Self = Self(1000307004);
     pub const REFRESH_OBJECT_LIST_KHR: Self = Self(1000308000);
     pub const QUERY_LOW_LATENCY_SUPPORT_NV: Self = Self(1000310000);
     pub const EXPORT_METAL_OBJECT_CREATE_INFO_EXT: Self = Self(1000311000);
@@ -6051,10 +6111,15 @@ impl StructureType {
     pub const ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV: Self = Self(1000397002);
     pub const PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_FEATURES_HUAWEI: Self = Self(1000404000);
     pub const PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_PROPERTIES_HUAWEI: Self = Self(1000404001);
+    pub const PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI: Self = Self(1000404002);
     pub const PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT: Self = Self(1000411000);
     pub const SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT: Self = Self(1000411001);
     pub const PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT: Self = Self(1000412000);
     pub const PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_ARM: Self = Self(1000415000);
+    pub const PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES_KHR: Self = Self(1000416000);
+    pub const DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM: Self = Self(1000417000);
+    pub const PHYSICAL_DEVICE_SCHEDULING_CONTROLS_FEATURES_ARM: Self = Self(1000417001);
+    pub const PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM: Self = Self(1000417002);
     pub const PHYSICAL_DEVICE_IMAGE_SLICED_VIEW_OF_3D_FEATURES_EXT: Self = Self(1000418000);
     pub const IMAGE_VIEW_SLICED_CREATE_INFO_EXT: Self = Self(1000418001);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE: Self = Self(1000420000);
@@ -6062,6 +6127,11 @@ impl StructureType {
     pub const DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE: Self = Self(1000420002);
     pub const PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT: Self = Self(1000421000);
     pub const PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT: Self = Self(1000422000);
+    pub const PHYSICAL_DEVICE_RENDER_PASS_STRIPED_FEATURES_ARM: Self = Self(1000424000);
+    pub const PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM: Self = Self(1000424001);
+    pub const RENDER_PASS_STRIPE_BEGIN_INFO_ARM: Self = Self(1000424002);
+    pub const RENDER_PASS_STRIPE_INFO_ARM: Self = Self(1000424003);
+    pub const RENDER_PASS_STRIPE_SUBMIT_INFO_ARM: Self = Self(1000424004);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM: Self = Self(1000425000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM: Self = Self(1000425001);
     pub const SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM: Self = Self(1000425002);
@@ -6074,6 +6144,7 @@ impl StructureType {
     pub const COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV: Self = Self(1000428001);
     pub const PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV: Self = Self(1000428002);
     pub const PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV: Self = Self(1000430000);
+    pub const PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR: Self = Self(1000434000);
     pub const APPLICATION_PARAMETERS_EXT: Self = Self(1000435000);
     pub const PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT: Self =
         Self(1000437000);
@@ -6136,6 +6207,7 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV: Self = Self(1000492001);
     pub const PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT: Self = Self(1000351000);
     pub const MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT: Self = Self(1000351002);
+    pub const LAYER_SETTINGS_CREATE_INFO_EXT: Self = Self(1000496000);
     pub const PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM: Self = Self(1000497000);
     pub const PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM: Self = Self(1000497001);
     pub const PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT: Self = Self(1000498000);
@@ -6156,6 +6228,14 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM: Self =
         Self(1000510000);
     pub const MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM: Self = Self(1000510001);
+    pub const VIDEO_DECODE_AV1_CAPABILITIES_KHR: Self = Self(1000512000);
+    pub const VIDEO_DECODE_AV1_PICTURE_INFO_KHR: Self = Self(1000512001);
+    pub const VIDEO_DECODE_AV1_PROFILE_INFO_KHR: Self = Self(1000512003);
+    pub const VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR: Self = Self(1000512004);
+    pub const VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR: Self = Self(1000512005);
+    pub const PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR: Self = Self(1000515000);
+    pub const VIDEO_INLINE_QUERY_INFO_KHR: Self = Self(1000515001);
+    pub const PHYSICAL_DEVICE_PER_STAGE_DESCRIPTOR_SET_FEATURES_NV: Self = Self(1000516000);
     pub const PHYSICAL_DEVICE_IMAGE_PROCESSING_2_FEATURES_QCOM: Self = Self(1000518000);
     pub const PHYSICAL_DEVICE_IMAGE_PROCESSING_2_PROPERTIES_QCOM: Self = Self(1000518001);
     pub const SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM: Self = Self(1000518002);
@@ -6167,13 +6247,35 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_CUBIC_CLAMP_FEATURES_QCOM: Self = Self(1000521000);
     pub const PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT: Self =
         Self(1000524000);
+    pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR: Self = Self(1000525000);
+    pub const PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR: Self = Self(1000190001);
+    pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR: Self = Self(1000190002);
+    pub const PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES_KHR: Self = Self(1000528000);
     pub const SCREEN_BUFFER_PROPERTIES_QNX: Self = Self(1000529000);
     pub const SCREEN_BUFFER_FORMAT_PROPERTIES_QNX: Self = Self(1000529001);
     pub const IMPORT_SCREEN_BUFFER_INFO_QNX: Self = Self(1000529002);
     pub const EXTERNAL_FORMAT_QNX: Self = Self(1000529003);
     pub const PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX: Self = Self(1000529004);
     pub const PHYSICAL_DEVICE_LAYERED_DRIVER_PROPERTIES_MSFT: Self = Self(1000530000);
+    pub const PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR: Self = Self(1000265000);
+    pub const PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR: Self = Self(1000259000);
+    pub const PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR: Self = Self(1000259001);
+    pub const PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR: Self = Self(1000259002);
+    pub const CALIBRATED_TIMESTAMP_INFO_KHR: Self = Self(1000184000);
+    pub const PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR: Self = Self(1000544000);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR: Self = Self(1000545000);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR: Self = Self(1000545001);
+    pub const BIND_MEMORY_STATUS_KHR: Self = Self(1000545002);
+    pub const BIND_DESCRIPTOR_SETS_INFO_KHR: Self = Self(1000545003);
+    pub const PUSH_CONSTANTS_INFO_KHR: Self = Self(1000545004);
+    pub const PUSH_DESCRIPTOR_SET_INFO_KHR: Self = Self(1000545005);
+    pub const PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO_KHR: Self = Self(1000545006);
+    pub const SET_DESCRIPTOR_BUFFER_OFFSETS_INFO_EXT: Self = Self(1000545007);
+    pub const BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT: Self = Self(1000545008);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV: Self = Self(1000546000);
+    pub const PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV: Self = Self(1000555000);
+    pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV: Self = Self(1000563000);
+    pub const PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV: Self = Self(1000568000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -6471,34 +6573,34 @@ impl fmt::Debug for StructureType {
             1000029002 => write!(f, "CU_LAUNCH_INFO_NVX"),
             1000030000 => write!(f, "IMAGE_VIEW_HANDLE_INFO_NVX"),
             1000030001 => write!(f, "IMAGE_VIEW_ADDRESS_PROPERTIES_NVX"),
-            1000038000 => write!(f, "VIDEO_ENCODE_H264_CAPABILITIES_EXT"),
-            1000038001 => write!(f, "VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT"),
-            1000038002 => write!(f, "VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT"),
-            1000038003 => write!(f, "VIDEO_ENCODE_H264_PICTURE_INFO_EXT"),
-            1000038004 => write!(f, "VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT"),
-            1000038005 => write!(f, "VIDEO_ENCODE_H264_NALU_SLICE_INFO_EXT"),
-            1000038006 => write!(f, "VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_EXT"),
-            1000038007 => write!(f, "VIDEO_ENCODE_H264_PROFILE_INFO_EXT"),
-            1000038008 => write!(f, "VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT"),
-            1000038009 => write!(f, "VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT"),
-            1000038010 => write!(f, "VIDEO_ENCODE_H264_SESSION_CREATE_INFO_EXT"),
-            1000038011 => write!(f, "VIDEO_ENCODE_H264_QUALITY_LEVEL_PROPERTIES_EXT"),
-            1000038012 => write!(f, "VIDEO_ENCODE_H264_SESSION_PARAMETERS_GET_INFO_EXT"),
-            1000038013 => write!(f, "VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_EXT"),
-            1000039000 => write!(f, "VIDEO_ENCODE_H265_CAPABILITIES_EXT"),
-            1000039001 => write!(f, "VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT"),
-            1000039002 => write!(f, "VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT"),
-            1000039003 => write!(f, "VIDEO_ENCODE_H265_PICTURE_INFO_EXT"),
-            1000039004 => write!(f, "VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT"),
-            1000039005 => write!(f, "VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_EXT"),
-            1000039006 => write!(f, "VIDEO_ENCODE_H265_GOP_REMAINING_FRAME_INFO_EXT"),
-            1000039007 => write!(f, "VIDEO_ENCODE_H265_PROFILE_INFO_EXT"),
-            1000039009 => write!(f, "VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT"),
-            1000039010 => write!(f, "VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT"),
-            1000039011 => write!(f, "VIDEO_ENCODE_H265_SESSION_CREATE_INFO_EXT"),
-            1000039012 => write!(f, "VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_EXT"),
-            1000039013 => write!(f, "VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_EXT"),
-            1000039014 => write!(f, "VIDEO_ENCODE_H265_SESSION_PARAMETERS_FEEDBACK_INFO_EXT"),
+            1000038000 => write!(f, "VIDEO_ENCODE_H264_CAPABILITIES_KHR"),
+            1000038001 => write!(f, "VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_KHR"),
+            1000038002 => write!(f, "VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_KHR"),
+            1000038003 => write!(f, "VIDEO_ENCODE_H264_PICTURE_INFO_KHR"),
+            1000038004 => write!(f, "VIDEO_ENCODE_H264_DPB_SLOT_INFO_KHR"),
+            1000038005 => write!(f, "VIDEO_ENCODE_H264_NALU_SLICE_INFO_KHR"),
+            1000038006 => write!(f, "VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR"),
+            1000038007 => write!(f, "VIDEO_ENCODE_H264_PROFILE_INFO_KHR"),
+            1000038008 => write!(f, "VIDEO_ENCODE_H264_RATE_CONTROL_INFO_KHR"),
+            1000038009 => write!(f, "VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR"),
+            1000038010 => write!(f, "VIDEO_ENCODE_H264_SESSION_CREATE_INFO_KHR"),
+            1000038011 => write!(f, "VIDEO_ENCODE_H264_QUALITY_LEVEL_PROPERTIES_KHR"),
+            1000038012 => write!(f, "VIDEO_ENCODE_H264_SESSION_PARAMETERS_GET_INFO_KHR"),
+            1000038013 => write!(f, "VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR"),
+            1000039000 => write!(f, "VIDEO_ENCODE_H265_CAPABILITIES_KHR"),
+            1000039001 => write!(f, "VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR"),
+            1000039002 => write!(f, "VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_KHR"),
+            1000039003 => write!(f, "VIDEO_ENCODE_H265_PICTURE_INFO_KHR"),
+            1000039004 => write!(f, "VIDEO_ENCODE_H265_DPB_SLOT_INFO_KHR"),
+            1000039005 => write!(f, "VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR"),
+            1000039006 => write!(f, "VIDEO_ENCODE_H265_GOP_REMAINING_FRAME_INFO_KHR"),
+            1000039007 => write!(f, "VIDEO_ENCODE_H265_PROFILE_INFO_KHR"),
+            1000039009 => write!(f, "VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR"),
+            1000039010 => write!(f, "VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_KHR"),
+            1000039011 => write!(f, "VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR"),
+            1000039012 => write!(f, "VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR"),
+            1000039013 => write!(f, "VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR"),
+            1000039014 => write!(f, "VIDEO_ENCODE_H265_SESSION_PARAMETERS_FEEDBACK_INFO_KHR"),
             1000040000 => write!(f, "VIDEO_DECODE_H264_CAPABILITIES_KHR"),
             1000040001 => write!(f, "VIDEO_DECODE_H264_PICTURE_INFO_KHR"),
             1000040003 => write!(f, "VIDEO_DECODE_H264_PROFILE_INFO_KHR"),
@@ -6572,6 +6674,7 @@ impl fmt::Debug for StructureType {
             1000102000 => write!(f, "PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT"),
             1000102001 => write!(f, "PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT"),
             1000105000 => write!(f, "HDR_METADATA_EXT"),
+            1000110000 => write!(f, "PHYSICAL_DEVICE_RELAXED_LINE_RASTERIZATION_FEATURES_IMG"),
             1000111000 => write!(f, "SHARED_PRESENT_SURFACE_CAPABILITIES_KHR"),
             1000114000 => write!(f, "IMPORT_FENCE_WIN32_HANDLE_INFO_KHR"),
             1000114001 => write!(f, "EXPORT_FENCE_WIN32_HANDLE_INFO_KHR"),
@@ -6692,7 +6795,6 @@ impl fmt::Debug for StructureType {
             1000178002 => write!(f, "PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT"),
             1000181000 => write!(f, "PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR"),
             1000183000 => write!(f, "PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD"),
-            1000184000 => write!(f, "CALIBRATED_TIMESTAMP_INFO_EXT"),
             1000185000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD"),
             1000187000 => write!(f, "VIDEO_DECODE_H265_CAPABILITIES_KHR"),
             1000187001 => write!(f, "VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR"),
@@ -6705,8 +6807,6 @@ impl fmt::Debug for StructureType {
             1000388001 => write!(f, "QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR"),
             1000189000 => write!(f, "DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD"),
             1000190000 => write!(f, "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT"),
-            1000190001 => write!(f, "PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT"),
-            1000190002 => write!(f, "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT"),
             1000191000 => write!(f, "PRESENT_FRAME_TOKEN_GGP"),
             1000201000 => write!(f, "PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV"),
             1000202000 => write!(f, "PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV"),
@@ -6744,7 +6844,14 @@ impl fmt::Debug for StructureType {
             1000226004 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR"),
             1000227000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD"),
             1000229000 => write!(f, "PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD"),
+            1000232000 => write!(
+                f,
+                "PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR"
+            ),
+            1000232001 => write!(f, "RENDERING_ATTACHMENT_LOCATION_INFO_KHR"),
+            1000232002 => write!(f, "RENDERING_INPUT_ATTACHMENT_INDEX_INFO_KHR"),
             1000234000 => write!(f, "PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT"),
+            1000235000 => write!(f, "PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR"),
             1000237000 => write!(f, "PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT"),
             1000238000 => write!(f, "PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT"),
             1000238001 => write!(f, "MEMORY_PRIORITY_ALLOCATE_INFO_EXT"),
@@ -6775,11 +6882,7 @@ impl fmt::Debug for StructureType {
             1000255002 => write!(f, "SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT"),
             1000255001 => write!(f, "SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT"),
             1000256000 => write!(f, "HEADLESS_SURFACE_CREATE_INFO_EXT"),
-            1000259000 => write!(f, "PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT"),
-            1000259001 => write!(f, "PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT"),
-            1000259002 => write!(f, "PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT"),
             1000260000 => write!(f, "PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT"),
-            1000265000 => write!(f, "PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT"),
             1000267000 => write!(f, "PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT"),
             1000269000 => write!(
                 f,
@@ -6802,6 +6905,9 @@ impl fmt::Debug for StructureType {
             1000270009 => write!(f, "HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT"),
             1000271000 => write!(f, "MEMORY_MAP_INFO_KHR"),
             1000271001 => write!(f, "MEMORY_UNMAP_INFO_KHR"),
+            1000272000 => write!(f, "PHYSICAL_DEVICE_MAP_MEMORY_PLACED_FEATURES_EXT"),
+            1000272001 => write!(f, "PHYSICAL_DEVICE_MAP_MEMORY_PLACED_PROPERTIES_EXT"),
+            1000272002 => write!(f, "MEMORY_MAP_PLACED_INFO_EXT"),
             1000273000 => write!(f, "PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT"),
             1000274000 => write!(f, "SURFACE_PRESENT_MODE_EXT"),
             1000274001 => write!(f, "SURFACE_PRESENT_SCALING_CAPABILITIES_EXT"),
@@ -6858,6 +6964,11 @@ impl fmt::Debug for StructureType {
             1000299010 => write!(f, "VIDEO_ENCODE_SESSION_PARAMETERS_FEEDBACK_INFO_KHR"),
             1000300000 => write!(f, "PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV"),
             1000300001 => write!(f, "DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV"),
+            1000307000 => write!(f, "CUDA_MODULE_CREATE_INFO_NV"),
+            1000307001 => write!(f, "CUDA_FUNCTION_CREATE_INFO_NV"),
+            1000307002 => write!(f, "CUDA_LAUNCH_INFO_NV"),
+            1000307003 => write!(f, "PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_FEATURES_NV"),
+            1000307004 => write!(f, "PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_PROPERTIES_NV"),
             1000308000 => write!(f, "REFRESH_OBJECT_LIST_KHR"),
             1000310000 => write!(f, "QUERY_LOW_LATENCY_SUPPORT_NV"),
             1000311000 => write!(f, "EXPORT_METAL_OBJECT_CREATE_INFO_EXT"),
@@ -7043,6 +7154,10 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_PROPERTIES_HUAWEI"
             ),
+            1000404002 => write!(
+                f,
+                "PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI"
+            ),
             1000411000 => write!(f, "PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT"),
             1000411001 => write!(f, "SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT"),
             1000412000 => write!(
@@ -7050,6 +7165,10 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT"
             ),
             1000415000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_ARM"),
+            1000416000 => write!(f, "PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES_KHR"),
+            1000417000 => write!(f, "DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM"),
+            1000417001 => write!(f, "PHYSICAL_DEVICE_SCHEDULING_CONTROLS_FEATURES_ARM"),
+            1000417002 => write!(f, "PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM"),
             1000418000 => write!(f, "PHYSICAL_DEVICE_IMAGE_SLICED_VIEW_OF_3D_FEATURES_EXT"),
             1000418001 => write!(f, "IMAGE_VIEW_SLICED_CREATE_INFO_EXT"),
             1000420000 => write!(
@@ -7060,6 +7179,11 @@ impl fmt::Debug for StructureType {
             1000420002 => write!(f, "DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE"),
             1000421000 => write!(f, "PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT"),
             1000422000 => write!(f, "PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT"),
+            1000424000 => write!(f, "PHYSICAL_DEVICE_RENDER_PASS_STRIPED_FEATURES_ARM"),
+            1000424001 => write!(f, "PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM"),
+            1000424002 => write!(f, "RENDER_PASS_STRIPE_BEGIN_INFO_ARM"),
+            1000424003 => write!(f, "RENDER_PASS_STRIPE_INFO_ARM"),
+            1000424004 => write!(f, "RENDER_PASS_STRIPE_SUBMIT_INFO_ARM"),
             1000425000 => write!(
                 f,
                 "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM"
@@ -7080,6 +7204,10 @@ impl fmt::Debug for StructureType {
             1000428001 => write!(f, "COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV"),
             1000428002 => write!(f, "PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV"),
             1000430000 => write!(f, "PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV"),
+            1000434000 => write!(
+                f,
+                "PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR"
+            ),
             1000435000 => write!(f, "APPLICATION_PARAMETERS_EXT"),
             1000437000 => write!(
                 f,
@@ -7173,6 +7301,7 @@ impl fmt::Debug for StructureType {
             ),
             1000351000 => write!(f, "PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT"),
             1000351002 => write!(f, "MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT"),
+            1000496000 => write!(f, "LAYER_SETTINGS_CREATE_INFO_EXT"),
             1000497000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM"),
             1000497001 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM"),
             1000498000 => write!(
@@ -7203,6 +7332,14 @@ impl fmt::Debug for StructureType {
                 f,
                 "MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM"
             ),
+            1000512000 => write!(f, "VIDEO_DECODE_AV1_CAPABILITIES_KHR"),
+            1000512001 => write!(f, "VIDEO_DECODE_AV1_PICTURE_INFO_KHR"),
+            1000512003 => write!(f, "VIDEO_DECODE_AV1_PROFILE_INFO_KHR"),
+            1000512004 => write!(f, "VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR"),
+            1000512005 => write!(f, "VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR"),
+            1000515000 => write!(f, "PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR"),
+            1000515001 => write!(f, "VIDEO_INLINE_QUERY_INFO_KHR"),
+            1000516000 => write!(f, "PHYSICAL_DEVICE_PER_STAGE_DESCRIPTOR_SET_FEATURES_NV"),
             1000518000 => write!(f, "PHYSICAL_DEVICE_IMAGE_PROCESSING_2_FEATURES_QCOM"),
             1000518001 => write!(f, "PHYSICAL_DEVICE_IMAGE_PROCESSING_2_PROPERTIES_QCOM"),
             1000518002 => write!(f, "SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM"),
@@ -7216,6 +7353,10 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT"
             ),
+            1000525000 => write!(f, "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR"),
+            1000190001 => write!(f, "PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR"),
+            1000190002 => write!(f, "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR"),
+            1000528000 => write!(f, "PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES_KHR"),
             1000529000 => write!(f, "SCREEN_BUFFER_PROPERTIES_QNX"),
             1000529001 => write!(f, "SCREEN_BUFFER_FORMAT_PROPERTIES_QNX"),
             1000529002 => write!(f, "IMPORT_SCREEN_BUFFER_INFO_QNX"),
@@ -7225,10 +7366,31 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX"
             ),
             1000530000 => write!(f, "PHYSICAL_DEVICE_LAYERED_DRIVER_PROPERTIES_MSFT"),
+            1000265000 => write!(f, "PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR"),
+            1000259000 => write!(f, "PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR"),
+            1000259001 => write!(f, "PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR"),
+            1000259002 => write!(f, "PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR"),
+            1000184000 => write!(f, "CALIBRATED_TIMESTAMP_INFO_KHR"),
+            1000544000 => write!(f, "PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR"),
+            1000545000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR"),
+            1000545001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR"),
+            1000545002 => write!(f, "BIND_MEMORY_STATUS_KHR"),
+            1000545003 => write!(f, "BIND_DESCRIPTOR_SETS_INFO_KHR"),
+            1000545004 => write!(f, "PUSH_CONSTANTS_INFO_KHR"),
+            1000545005 => write!(f, "PUSH_DESCRIPTOR_SET_INFO_KHR"),
+            1000545006 => write!(f, "PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO_KHR"),
+            1000545007 => write!(f, "SET_DESCRIPTOR_BUFFER_OFFSETS_INFO_EXT"),
+            1000545008 => write!(f, "BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT"),
             1000546000 => write!(
                 f,
                 "PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV"
             ),
+            1000555000 => write!(f, "PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV"),
+            1000563000 => write!(
+                f,
+                "PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV"
+            ),
+            1000568000 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV"),
             _ => self.0.fmt(f),
         }
     }
@@ -7394,12 +7556,12 @@ impl fmt::Debug for TessellationDomainOrigin {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTimeDomainEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTimeDomainKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct TimeDomainEXT(i32);
+pub struct TimeDomainKHR(i32);
 
-impl TimeDomainEXT {
+impl TimeDomainKHR {
     pub const DEVICE: Self = Self(0);
     pub const CLOCK_MONOTONIC: Self = Self(1);
     pub const CLOCK_MONOTONIC_RAW: Self = Self(2);
@@ -7418,7 +7580,7 @@ impl TimeDomainEXT {
     }
 }
 
-impl fmt::Debug for TimeDomainEXT {
+impl fmt::Debug for TimeDomainKHR {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             0 => write!(f, "DEVICE"),
@@ -7744,6 +7906,8 @@ pub type DescriptorUpdateTemplateTypeKHR = DescriptorUpdateTemplateType;
 pub type DriverIdKHR = DriverId;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkGeometryTypeNV.html>
 pub type GeometryTypeNV = GeometryTypeKHR;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLineRasterizationModeEXT.html>
+pub type LineRasterizationModeEXT = LineRasterizationModeKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPointClippingBehaviorKHR.html>
 pub type PointClippingBehaviorKHR = PointClippingBehavior;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueueGlobalPriorityEXT.html>
@@ -7764,3 +7928,5 @@ pub type SemaphoreTypeKHR = SemaphoreType;
 pub type ShaderFloatControlsIndependenceKHR = ShaderFloatControlsIndependence;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTessellationDomainOriginKHR.html>
 pub type TessellationDomainOriginKHR = TessellationDomainOrigin;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTimeDomainEXT.html>
+pub type TimeDomainEXT = TimeDomainKHR;
