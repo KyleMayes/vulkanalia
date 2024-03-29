@@ -240,24 +240,37 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
         log.info { "Creating branch, committing changes, and pushing branch..." }
         val git = Git(FileRepositoryBuilder.create(context.directory.resolve(".git").toFile()))
-        git.checkout()
-            .setCreateBranch(true)
-            .setName(head).call()
-        git.add()
-            .addFilepattern(".")
-            .call()
-        git.commit()
-            .setAuthor(PersonIdent(context.github.myself.login, context.github.myself.email))
-            .setMessage("Update generated bindings")
-            .call()
-        val updates =
-            git.push()
-                .setCredentialsProvider(UsernamePasswordCredentialsProvider(context.token, ""))
-                .setForce(true)
-                .setRemote("origin")
-                .setRefSpecs(RefSpec("$head:$head"))
+
+        log.time("Git Checkout") {
+            git.checkout()
+                .setCreateBranch(true)
+                .setName(head).call()
+        }
+
+        log.time("Git Add") {
+            git.add()
+                .addFilepattern(".")
                 .call()
-                .flatMap { it.remoteUpdates }
+        }
+
+        log.time("Git Commit") {
+            git.commit()
+                .setAuthor(PersonIdent(context.github.myself.login, context.github.myself.email))
+                .setMessage("Update generated bindings")
+                .call()
+        }
+
+        val updates =
+            log.time("Git Push") {
+                git.push()
+                    .setCredentialsProvider(UsernamePasswordCredentialsProvider(context.token, ""))
+                    .setForce(true)
+                    .setRemote("origin")
+                    .setRefSpecs(RefSpec("$head:$head"))
+                    .call()
+                    .flatMap { it.remoteUpdates }
+            }
+
         if (updates.any { it.status != RemoteRefUpdate.Status.OK }) {
             error("Failed to push branch: $updates")
         }
