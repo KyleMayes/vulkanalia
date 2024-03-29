@@ -145,7 +145,7 @@ impl App {
         // Get the swapchain image for the current frame.
         let result = self.device.acquire_next_image_khr(
             self.data.swapchain,
-            u64::MAX,
+            10_000,
             self.data.image_available_semaphores[self.frame],
             vk::Fence::null(),
         );
