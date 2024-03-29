@@ -45,13 +45,12 @@ data class GeneratorContext(
 
 class Generator : CliktCommand(help = "Manages generated Vulkan bindings") {
     private val directory by option(help = "Vulkanalia directory").required()
-    private val username by option(help = "GitHub username")
     private val token by option(help = "GitHub personal access token")
 
     private val context by findOrSetObject {
         val directory = Path.of(directory).toAbsolutePath().normalize()
-        if (username != null && token != null) {
-            GeneratorContext(directory, GitHub.connect(username, token), token)
+        if (token != null) {
+            GeneratorContext(directory, GitHub.connectUsingOAuth(token), token)
         } else {
             GeneratorContext(directory, GitHub.connectAnonymously(), null)
         }
@@ -62,7 +61,7 @@ class Generator : CliktCommand(help = "Manages generated Vulkan bindings") {
         if (context.github.isAnonymous) {
             log.info { "Acting as an anonymous GitHub user" }
         } else {
-            log.info { "Acting as ${context.github.myself.login} (${context.github.myself.email})" }
+            log.info { "Acting with GitHub OAuth token" }
         }
     }
 }
