@@ -168,6 +168,7 @@ bitflags! {
         const PROTECTED = 1 << 3;
         const DEVICE_ADDRESS_CAPTURE_REPLAY = 1 << 4;
         const DESCRIPTOR_BUFFER_CAPTURE_REPLAY_EXT = 1 << 5;
+        const VIDEO_PROFILE_INDEPENDENT_KHR = 1 << 6;
     }
 }
 
@@ -473,6 +474,7 @@ bitflags! {
         const HOST_ONLY_POOL_EXT = 1 << 2;
         const DESCRIPTOR_BUFFER_EXT = 1 << 4;
         const EMBEDDED_IMMUTABLE_SAMPLERS_EXT = 1 << 5;
+        const PER_STAGE_NV = 1 << 6;
         const INDIRECT_BINDABLE_NV = 1 << 7;
     }
 }
@@ -995,6 +997,7 @@ bitflags! {
         const DESCRIPTOR_BUFFER_CAPTURE_REPLAY_EXT = 1 << 16;
         const _2D_VIEW_COMPATIBLE_EXT = 1 << 17;
         const MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXT = 1 << 18;
+        const VIDEO_PROFILE_INDEPENDENT_KHR = 1 << 20;
     }
 }
 
@@ -1122,7 +1125,9 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMemoryMapFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct MemoryMapFlags: Flags { }
+    pub struct MemoryMapFlags: Flags {
+        const PLACED_EXT = 1;
+    }
 }
 
 bitflags! {
@@ -1146,7 +1151,9 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMemoryUnmapFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct MemoryUnmapFlagsKHR: Flags { }
+    pub struct MemoryUnmapFlagsKHR: Flags {
+        const RESERVE_EXT = 1;
+    }
 }
 
 bitflags! {
@@ -1233,6 +1240,15 @@ bitflags! {
     pub struct PerformanceCounterDescriptionFlagsKHR: Flags {
         const PERFORMANCE_IMPACTING = 1;
         const CONCURRENTLY_IMPACTED = 1 << 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceSchedulingControlsFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct PhysicalDeviceSchedulingControlsFlagsARM: Flags {
+        const SHADER_CORE_COUNT = 1;
     }
 }
 
@@ -1874,6 +1890,8 @@ bitflags! {
         const CLUSTERED = 1 << 6;
         const QUAD = 1 << 7;
         const PARTITIONED_NV = 1 << 8;
+        const ROTATE_KHR = 1 << 9;
+        const ROTATE_CLUSTERED_KHR = 1 << 10;
     }
 }
 
@@ -2007,8 +2025,9 @@ bitflags! {
         const NONE = 0;
         const DECODE_H264 = 1;
         const DECODE_H265 = 1 << 1;
-        const ENCODE_H264_EXT = 1 << 16;
-        const ENCODE_H265_EXT = 1 << 17;
+        const DECODE_AV1 = 1 << 2;
+        const ENCODE_H264 = 1 << 16;
+        const ENCODE_H265 = 1 << 17;
     }
 }
 
@@ -2116,10 +2135,10 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264CapabilityFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264CapabilityFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct VideoEncodeH264CapabilityFlagsEXT: Flags {
+    pub struct VideoEncodeH264CapabilityFlagsKHR: Flags {
         const HRD_COMPLIANCE = 1;
         const PREDICTION_WEIGHT_TABLE_GENERATED = 1 << 1;
         const ROW_UNALIGNED_SLICE = 1 << 2;
@@ -2133,10 +2152,10 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264RateControlFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264RateControlFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct VideoEncodeH264RateControlFlagsEXT: Flags {
+    pub struct VideoEncodeH264RateControlFlagsKHR: Flags {
         const ATTEMPT_HRD_COMPLIANCE = 1;
         const REGULAR_GOP = 1 << 1;
         const REFERENCE_PATTERN_FLAT = 1 << 2;
@@ -2146,10 +2165,10 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264StdFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH264StdFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct VideoEncodeH264StdFlagsEXT: Flags {
+    pub struct VideoEncodeH264StdFlagsKHR: Flags {
         const SEPARATE_COLOR_PLANE_FLAG_SET = 1;
         const QPPRIME_Y_ZERO_TRANSFORM_BYPASS_FLAG_SET = 1 << 1;
         const SCALING_MATRIX_PRESENT_FLAG_SET = 1 << 2;
@@ -2174,10 +2193,10 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265CapabilityFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265CapabilityFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct VideoEncodeH265CapabilityFlagsEXT: Flags {
+    pub struct VideoEncodeH265CapabilityFlagsKHR: Flags {
         const HRD_COMPLIANCE = 1;
         const PREDICTION_WEIGHT_TABLE_GENERATED = 1 << 1;
         const ROW_UNALIGNED_SLICE_SEGMENT = 1 << 2;
@@ -2192,10 +2211,10 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265CtbSizeFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265CtbSizeFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct VideoEncodeH265CtbSizeFlagsEXT: Flags {
+    pub struct VideoEncodeH265CtbSizeFlagsKHR: Flags {
         const _16 = 1;
         const _32 = 1 << 1;
         const _64 = 1 << 2;
@@ -2203,10 +2222,10 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265RateControlFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265RateControlFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct VideoEncodeH265RateControlFlagsEXT: Flags {
+    pub struct VideoEncodeH265RateControlFlagsKHR: Flags {
         const ATTEMPT_HRD_COMPLIANCE = 1;
         const REGULAR_GOP = 1 << 1;
         const REFERENCE_PATTERN_FLAT = 1 << 2;
@@ -2216,10 +2235,10 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265StdFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265StdFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct VideoEncodeH265StdFlagsEXT: Flags {
+    pub struct VideoEncodeH265StdFlagsKHR: Flags {
         const SEPARATE_COLOR_PLANE_FLAG_SET = 1;
         const SAMPLE_ADAPTIVE_OFFSET_ENABLED_FLAG_SET = 1 << 1;
         const SCALING_LIST_DATA_PRESENT_FLAG_SET = 1 << 2;
@@ -2245,10 +2264,10 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265TransformBlockSizeFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeH265TransformBlockSizeFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct VideoEncodeH265TransformBlockSizeFlagsEXT: Flags {
+    pub struct VideoEncodeH265TransformBlockSizeFlagsKHR: Flags {
         const _4 = 1;
         const _8 = 1 << 1;
         const _16 = 1 << 2;
@@ -2302,6 +2321,7 @@ bitflags! {
     pub struct VideoSessionCreateFlagsKHR: Flags {
         const PROTECTED_CONTENT = 1;
         const ALLOW_ENCODE_PARAMETER_OPTIMIZATIONS = 1 << 1;
+        const INLINE_QUERIES = 1 << 2;
     }
 }
 

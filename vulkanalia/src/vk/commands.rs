@@ -57,10 +57,13 @@ pub struct DeviceCommands {
     pub cmd_begin_rendering_khr: PFN_vkCmdBeginRenderingKHR,
     pub cmd_begin_transform_feedback_ext: PFN_vkCmdBeginTransformFeedbackEXT,
     pub cmd_begin_video_coding_khr: PFN_vkCmdBeginVideoCodingKHR,
+    pub cmd_bind_descriptor_buffer_embedded_samplers2_ext:
+        PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT,
     pub cmd_bind_descriptor_buffer_embedded_samplers_ext:
         PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT,
     pub cmd_bind_descriptor_buffers_ext: PFN_vkCmdBindDescriptorBuffersEXT,
     pub cmd_bind_descriptor_sets: PFN_vkCmdBindDescriptorSets,
+    pub cmd_bind_descriptor_sets2_khr: PFN_vkCmdBindDescriptorSets2KHR,
     pub cmd_bind_index_buffer: PFN_vkCmdBindIndexBuffer,
     pub cmd_bind_index_buffer2_khr: PFN_vkCmdBindIndexBuffer2KHR,
     pub cmd_bind_invocation_mask_huawei: PFN_vkCmdBindInvocationMaskHUAWEI,
@@ -109,6 +112,7 @@ pub struct DeviceCommands {
     pub cmd_copy_micromap_to_memory_ext: PFN_vkCmdCopyMicromapToMemoryEXT,
     pub cmd_copy_query_pool_results: PFN_vkCmdCopyQueryPoolResults,
     pub cmd_cu_launch_kernel_nvx: PFN_vkCmdCuLaunchKernelNVX,
+    pub cmd_cuda_launch_kernel_nv: PFN_vkCmdCudaLaunchKernelNV,
     pub cmd_debug_marker_begin_ext: PFN_vkCmdDebugMarkerBeginEXT,
     pub cmd_debug_marker_end_ext: PFN_vkCmdDebugMarkerEndEXT,
     pub cmd_debug_marker_insert_ext: PFN_vkCmdDebugMarkerInsertEXT,
@@ -167,7 +171,10 @@ pub struct DeviceCommands {
     pub cmd_pipeline_barrier2_khr: PFN_vkCmdPipelineBarrier2KHR,
     pub cmd_preprocess_generated_commands_nv: PFN_vkCmdPreprocessGeneratedCommandsNV,
     pub cmd_push_constants: PFN_vkCmdPushConstants,
+    pub cmd_push_constants2_khr: PFN_vkCmdPushConstants2KHR,
+    pub cmd_push_descriptor_set2_khr: PFN_vkCmdPushDescriptorSet2KHR,
     pub cmd_push_descriptor_set_khr: PFN_vkCmdPushDescriptorSetKHR,
+    pub cmd_push_descriptor_set_with_template2_khr: PFN_vkCmdPushDescriptorSetWithTemplate2KHR,
     pub cmd_push_descriptor_set_with_template_khr: PFN_vkCmdPushDescriptorSetWithTemplateKHR,
     pub cmd_refresh_objects_khr: PFN_vkCmdRefreshObjectsKHR,
     pub cmd_reset_event: PFN_vkCmdResetEvent,
@@ -213,6 +220,7 @@ pub struct DeviceCommands {
     pub cmd_set_depth_test_enable_ext: PFN_vkCmdSetDepthTestEnableEXT,
     pub cmd_set_depth_write_enable: PFN_vkCmdSetDepthWriteEnable,
     pub cmd_set_depth_write_enable_ext: PFN_vkCmdSetDepthWriteEnableEXT,
+    pub cmd_set_descriptor_buffer_offsets2_ext: PFN_vkCmdSetDescriptorBufferOffsets2EXT,
     pub cmd_set_descriptor_buffer_offsets_ext: PFN_vkCmdSetDescriptorBufferOffsetsEXT,
     pub cmd_set_device_mask: PFN_vkCmdSetDeviceMask,
     pub cmd_set_device_mask_khr: PFN_vkCmdSetDeviceMaskKHR,
@@ -233,6 +241,7 @@ pub struct DeviceCommands {
     pub cmd_set_line_rasterization_mode_ext: PFN_vkCmdSetLineRasterizationModeEXT,
     pub cmd_set_line_stipple_ext: PFN_vkCmdSetLineStippleEXT,
     pub cmd_set_line_stipple_enable_ext: PFN_vkCmdSetLineStippleEnableEXT,
+    pub cmd_set_line_stipple_khr: PFN_vkCmdSetLineStippleKHR,
     pub cmd_set_line_width: PFN_vkCmdSetLineWidth,
     pub cmd_set_logic_op_ext: PFN_vkCmdSetLogicOpEXT,
     pub cmd_set_logic_op_enable_ext: PFN_vkCmdSetLogicOpEnableEXT,
@@ -251,6 +260,9 @@ pub struct DeviceCommands {
     pub cmd_set_rasterizer_discard_enable: PFN_vkCmdSetRasterizerDiscardEnable,
     pub cmd_set_rasterizer_discard_enable_ext: PFN_vkCmdSetRasterizerDiscardEnableEXT,
     pub cmd_set_ray_tracing_pipeline_stack_size_khr: PFN_vkCmdSetRayTracingPipelineStackSizeKHR,
+    pub cmd_set_rendering_attachment_locations_khr: PFN_vkCmdSetRenderingAttachmentLocationsKHR,
+    pub cmd_set_rendering_input_attachment_indices_khr:
+        PFN_vkCmdSetRenderingInputAttachmentIndicesKHR,
     pub cmd_set_representative_fragment_test_enable_nv:
         PFN_vkCmdSetRepresentativeFragmentTestEnableNV,
     pub cmd_set_sample_locations_ext: PFN_vkCmdSetSampleLocationsEXT,
@@ -315,6 +327,8 @@ pub struct DeviceCommands {
     pub create_compute_pipelines: PFN_vkCreateComputePipelines,
     pub create_cu_function_nvx: PFN_vkCreateCuFunctionNVX,
     pub create_cu_module_nvx: PFN_vkCreateCuModuleNVX,
+    pub create_cuda_function_nv: PFN_vkCreateCudaFunctionNV,
+    pub create_cuda_module_nv: PFN_vkCreateCudaModuleNV,
     pub create_deferred_operation_khr: PFN_vkCreateDeferredOperationKHR,
     pub create_descriptor_pool: PFN_vkCreateDescriptorPool,
     pub create_descriptor_set_layout: PFN_vkCreateDescriptorSetLayout,
@@ -363,6 +377,8 @@ pub struct DeviceCommands {
     pub destroy_command_pool: PFN_vkDestroyCommandPool,
     pub destroy_cu_function_nvx: PFN_vkDestroyCuFunctionNVX,
     pub destroy_cu_module_nvx: PFN_vkDestroyCuModuleNVX,
+    pub destroy_cuda_function_nv: PFN_vkDestroyCudaFunctionNV,
+    pub destroy_cuda_module_nv: PFN_vkDestroyCudaModuleNV,
     pub destroy_deferred_operation_khr: PFN_vkDestroyDeferredOperationKHR,
     pub destroy_descriptor_pool: PFN_vkDestroyDescriptorPool,
     pub destroy_descriptor_set_layout: PFN_vkDestroyDescriptorSetLayout,
@@ -427,6 +443,8 @@ pub struct DeviceCommands {
     pub get_buffer_opaque_capture_descriptor_data_ext:
         PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT,
     pub get_calibrated_timestamps_ext: PFN_vkGetCalibratedTimestampsEXT,
+    pub get_calibrated_timestamps_khr: PFN_vkGetCalibratedTimestampsKHR,
+    pub get_cuda_module_cache_nv: PFN_vkGetCudaModuleCacheNV,
     pub get_deferred_operation_max_concurrency_khr: PFN_vkGetDeferredOperationMaxConcurrencyKHR,
     pub get_deferred_operation_result_khr: PFN_vkGetDeferredOperationResultKHR,
     pub get_descriptor_ext: PFN_vkGetDescriptorEXT,
@@ -507,6 +525,8 @@ pub struct DeviceCommands {
     pub get_performance_parameter_intel: PFN_vkGetPerformanceParameterINTEL,
     pub get_physical_device_calibrateable_time_domains_ext:
         PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT,
+    pub get_physical_device_calibrateable_time_domains_khr:
+        PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsKHR,
     pub get_physical_device_cooperative_matrix_properties_khr:
         PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR,
     pub get_physical_device_cooperative_matrix_properties_nv:
@@ -1125,6 +1145,24 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_bind_descriptor_buffer_embedded_samplers2_ext: {
+                let value = loader(
+                    b"vkCmdBindDescriptorBufferEmbeddedSamplers2EXT\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _bind_descriptor_buffer_embedded_samplers_info: *const BindDescriptorBufferEmbeddedSamplersInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdBindDescriptorBufferEmbeddedSamplers2EXT")
+                    }
+                    fallback
+                }
+            },
             cmd_bind_descriptor_buffer_embedded_samplers_ext: {
                 let value = loader(
                     b"vkCmdBindDescriptorBufferEmbeddedSamplersEXT\0"
@@ -1176,6 +1214,20 @@ impl DeviceCommands {
                         _dynamic_offsets: *const u32,
                     ) {
                         panic!("could not load vkCmdBindDescriptorSets")
+                    }
+                    fallback
+                }
+            },
+            cmd_bind_descriptor_sets2_khr: {
+                let value = loader(b"vkCmdBindDescriptorSets2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _bind_descriptor_sets_info: *const BindDescriptorSetsInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdBindDescriptorSets2KHR")
                     }
                     fallback
                 }
@@ -1909,6 +1961,20 @@ impl DeviceCommands {
                         _launch_info: *const CuLaunchInfoNVX,
                     ) {
                         panic!("could not load vkCmdCuLaunchKernelNVX")
+                    }
+                    fallback
+                }
+            },
+            cmd_cuda_launch_kernel_nv: {
+                let value = loader(b"vkCmdCudaLaunchKernelNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _launch_info: *const CudaLaunchInfoNV,
+                    ) {
+                        panic!("could not load vkCmdCudaLaunchKernelNV")
                     }
                     fallback
                 }
@@ -2834,6 +2900,34 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_push_constants2_khr: {
+                let value = loader(b"vkCmdPushConstants2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _push_constants_info: *const PushConstantsInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdPushConstants2KHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_push_descriptor_set2_khr: {
+                let value = loader(b"vkCmdPushDescriptorSet2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _push_descriptor_set_info: *const PushDescriptorSetInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdPushDescriptorSet2KHR")
+                    }
+                    fallback
+                }
+            },
             cmd_push_descriptor_set_khr: {
                 let value = loader(b"vkCmdPushDescriptorSetKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2848,6 +2942,20 @@ impl DeviceCommands {
                         _descriptor_writes: *const WriteDescriptorSet,
                     ) {
                         panic!("could not load vkCmdPushDescriptorSetKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_push_descriptor_set_with_template2_khr: {
+                let value = loader(b"vkCmdPushDescriptorSetWithTemplate2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _push_descriptor_set_with_template_info: *const PushDescriptorSetWithTemplateInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdPushDescriptorSetWithTemplate2KHR")
                     }
                     fallback
                 }
@@ -3514,6 +3622,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_descriptor_buffer_offsets2_ext: {
+                let value = loader(b"vkCmdSetDescriptorBufferOffsets2EXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _set_descriptor_buffer_offsets_info: *const SetDescriptorBufferOffsetsInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdSetDescriptorBufferOffsets2EXT")
+                    }
+                    fallback
+                }
+            },
             cmd_set_descriptor_buffer_offsets_ext: {
                 let value = loader(b"vkCmdSetDescriptorBufferOffsetsEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -3801,6 +3923,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_set_line_stipple_khr: {
+                let value = loader(b"vkCmdSetLineStippleKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _line_stipple_factor: u32,
+                        _line_stipple_pattern: u16,
+                    ) {
+                        panic!("could not load vkCmdSetLineStippleKHR")
+                    }
+                    fallback
+                }
+            },
             cmd_set_line_width: {
                 let value = loader(b"vkCmdSetLineWidth\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -4049,6 +4186,38 @@ impl DeviceCommands {
                         _pipeline_stack_size: u32,
                     ) {
                         panic!("could not load vkCmdSetRayTracingPipelineStackSizeKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_rendering_attachment_locations_khr: {
+                let value = loader(b"vkCmdSetRenderingAttachmentLocationsKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _location_info: *const RenderingAttachmentLocationInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdSetRenderingAttachmentLocationsKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_rendering_input_attachment_indices_khr: {
+                let value = loader(
+                    b"vkCmdSetRenderingInputAttachmentIndicesKHR\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _location_info: *const RenderingInputAttachmentIndexInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdSetRenderingInputAttachmentIndicesKHR")
                     }
                     fallback
                 }
@@ -5036,6 +5205,38 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            create_cuda_function_nv: {
+                let value = loader(b"vkCreateCudaFunctionNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const CudaFunctionCreateInfoNV,
+                        _allocator: *const AllocationCallbacks,
+                        _function: *mut CudaFunctionNV,
+                    ) -> Result {
+                        panic!("could not load vkCreateCudaFunctionNV")
+                    }
+                    fallback
+                }
+            },
+            create_cuda_module_nv: {
+                let value = loader(b"vkCreateCudaModuleNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const CudaModuleCreateInfoNV,
+                        _allocator: *const AllocationCallbacks,
+                        _module: *mut CudaModuleNV,
+                    ) -> Result {
+                        panic!("could not load vkCreateCudaModuleNV")
+                    }
+                    fallback
+                }
+            },
             create_deferred_operation_khr: {
                 let value = loader(b"vkCreateDeferredOperationKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -5796,6 +5997,36 @@ impl DeviceCommands {
                         _allocator: *const AllocationCallbacks,
                     ) {
                         panic!("could not load vkDestroyCuModuleNVX")
+                    }
+                    fallback
+                }
+            },
+            destroy_cuda_function_nv: {
+                let value = loader(b"vkDestroyCudaFunctionNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _function: CudaFunctionNV,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyCudaFunctionNV")
+                    }
+                    fallback
+                }
+            },
+            destroy_cuda_module_nv: {
+                let value = loader(b"vkDestroyCudaModuleNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _module: CudaModuleNV,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyCudaModuleNV")
                     }
                     fallback
                 }
@@ -6678,11 +6909,44 @@ impl DeviceCommands {
                     unsafe extern "system" fn fallback(
                         _device: Device,
                         _timestamp_count: u32,
-                        _timestamp_infos: *const CalibratedTimestampInfoEXT,
+                        _timestamp_infos: *const CalibratedTimestampInfoKHR,
                         _timestamps: *mut u64,
                         _max_deviation: *mut u64,
                     ) -> Result {
                         panic!("could not load vkGetCalibratedTimestampsEXT")
+                    }
+                    fallback
+                }
+            },
+            get_calibrated_timestamps_khr: {
+                let value = loader(b"vkGetCalibratedTimestampsKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _timestamp_count: u32,
+                        _timestamp_infos: *const CalibratedTimestampInfoKHR,
+                        _timestamps: *mut u64,
+                        _max_deviation: *mut u64,
+                    ) -> Result {
+                        panic!("could not load vkGetCalibratedTimestampsKHR")
+                    }
+                    fallback
+                }
+            },
+            get_cuda_module_cache_nv: {
+                let value = loader(b"vkGetCudaModuleCacheNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _module: CudaModuleNV,
+                        _cache_size: *mut usize,
+                        _cache_data: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetCudaModuleCacheNV")
                     }
                     fallback
                 }
@@ -7592,7 +7856,6 @@ impl DeviceCommands {
                     unsafe extern "system" fn fallback(
                         _device: Device,
                         _swapchain: SwapchainKHR,
-                        _timing_count: *mut u32,
                         _latency_marker_info: *mut GetLatencyMarkerInfoNV,
                     ) {
                         panic!("could not load vkGetLatencyTimingsNV")
@@ -7833,9 +8096,28 @@ impl DeviceCommands {
                     unsafe extern "system" fn fallback(
                         _physical_device: PhysicalDevice,
                         _time_domain_count: *mut u32,
-                        _time_domains: *mut TimeDomainEXT,
+                        _time_domains: *mut TimeDomainKHR,
                     ) -> Result {
                         panic!("could not load vkGetPhysicalDeviceCalibrateableTimeDomainsEXT")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_calibrateable_time_domains_khr: {
+                let value = loader(
+                    b"vkGetPhysicalDeviceCalibrateableTimeDomainsKHR\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _time_domain_count: *mut u32,
+                        _time_domains: *mut TimeDomainKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceCalibrateableTimeDomainsKHR")
                     }
                     fallback
                 }
