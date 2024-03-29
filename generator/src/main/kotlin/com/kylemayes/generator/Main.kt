@@ -21,6 +21,7 @@ import org.eclipse.jgit.api.Git
 import org.eclipse.jgit.lib.PersonIdent
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder
 import org.eclipse.jgit.transport.RefSpec
+import org.eclipse.jgit.transport.RemoteRefUpdate
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider
 import org.kohsuke.github.GitHub
 import java.nio.file.Files
@@ -241,7 +242,7 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
         val git = Git(FileRepositoryBuilder.create(context.directory.resolve(".git").toFile()))
         git.checkout()
             .setCreateBranch(true)
-            .setName("test-branch").call()
+            .setName(head).call()
         git.add()
             .addFilepattern(".")
             .call()
@@ -249,14 +250,16 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
             .setAuthor(PersonIdent(context.github.myself.login, context.github.myself.email))
             .setMessage("Update generated bindings")
             .call()
-        git.push()
+        val updates = git.push()
             .setCredentialsProvider(UsernamePasswordCredentialsProvider(context.token, ""))
             .setForce(true)
             .setRemote("origin")
-            .setRefSpecs(RefSpec("${git.repository.fullBranch}:$head"))
+            .setRefSpecs(RefSpec("$head:$head"))
             .call()
             .flatMap { it.remoteUpdates }
-            .forEach { println(it) }
+        if (updates.any { it.status != RemoteRefUpdate.Status.OK }) {
+            error("Failed to push branch: $updates")
+        }
 
         log.info { "Creating pull request..." }
         val body = "Update generated bindings (automatically created by update action)."
