@@ -257,7 +257,7 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
         log.time("Git Commit") {
             git.commit()
-                .setAuthor(PersonIdent(context.github.myself.login, context.github.myself.email))
+                .setAuthor(PersonIdent("KyleMayes", "kyle@mayeses.com"))
                 .setMessage("Update generated bindings")
                 .call()
         }
