@@ -249,7 +249,10 @@ class Update : CliktCommand(help = "Updates generated Vulkan bindings") {
 
         log.time("Git Add") {
             git.add()
-                .addFilepattern(".")
+                .addFilepattern(".commit")
+                .addFilepattern("CHANGELOG.md")
+                .addFilepattern("vulkanalia")
+                .addFilepattern("vulkanalia-sys")
                 .call()
         }
 
