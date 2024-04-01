@@ -240,25 +240,21 @@ fn get_swapchain_extent(
     if capabilities.current_extent.width != u32::MAX {
         capabilities.current_extent
     } else {
-        let size = window.inner_size();
-        let clamp = |min: u32, max: u32, v: u32| min.max(max.min(v));
         vk::Extent2D::builder()
-            .width(clamp(
+            .width(window.inner_size().width.clamp(
                 capabilities.min_image_extent.width,
                 capabilities.max_image_extent.width,
-                size.width,
             ))
-            .height(clamp(
+            .height(window.inner_size().height.clamp(
                 capabilities.min_image_extent.height,
                 capabilities.max_image_extent.height,
-                size.height,
             ))
             .build()
     }
 }
 ```
 
-We define the `clamp` function to restrict the actual size of the window within the supported range supported by the Vulkan device.
+We use the [`clamp` function](https://doc.rust-lang.org/std/cmp/trait.Ord.html#method.clamp) to restrict the actual size of the window within the supported range supported by the Vulkan device.
 
 ## Creating the swapchain
 
