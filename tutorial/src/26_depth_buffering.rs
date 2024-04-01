@@ -701,22 +701,19 @@ fn get_swapchain_present_mode(present_modes: &[vk::PresentModeKHR]) -> vk::Prese
         .unwrap_or(vk::PresentModeKHR::FIFO)
 }
 
+#[rustfmt::skip]
 fn get_swapchain_extent(window: &Window, capabilities: vk::SurfaceCapabilitiesKHR) -> vk::Extent2D {
     if capabilities.current_extent.width != u32::MAX {
         capabilities.current_extent
     } else {
-        let size = window.inner_size();
-        let clamp = |min: u32, max: u32, v: u32| min.max(max.min(v));
         vk::Extent2D::builder()
-            .width(clamp(
+            .width(window.inner_size().width.clamp(
                 capabilities.min_image_extent.width,
                 capabilities.max_image_extent.width,
-                size.width,
             ))
-            .height(clamp(
+            .height(window.inner_size().height.clamp(
                 capabilities.min_image_extent.height,
                 capabilities.max_image_extent.height,
-                size.height,
             ))
             .build()
     }
