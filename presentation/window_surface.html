@@ -235,9 +235,10 @@ let queue_infos = unique_indices
     .collect::&lt;Vec&lt;_&gt;&gt;();
 </code></pre>
 <p>And delete the previous <code>queue_infos</code> slice and take a reference to the <code>queue_infos</code> list for <a href="https://docs.rs/vulkanalia/0.23.0/vulkanalia/vk/struct.DeviceCreateInfo.html"><code class="hljs">vk::DeviceCreateInfo</code></a>:</p>
-<pre><code class="language-rust noplaypen">let info = vk::DeviceCreateInfo::builder()
+<pre><code class="language-rust noplaypen">let info = vk::DeviceCreateInfo::builder()        
     .queue_create_infos(&amp;queue_infos)
     .enabled_layer_names(&amp;layers)
+    .enabled_extension_names(&amp;extensions)
     .enabled_features(&amp;features);
 </code></pre>
 <p>If the queue families are the same, then we only need to pass its index once. Finally, add a call to retrieve the queue handle:</p>

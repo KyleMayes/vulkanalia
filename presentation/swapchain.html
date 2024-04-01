@@ -314,24 +314,20 @@ struct SwapchainSupport {
     if capabilities.current_extent.width != u32::MAX {
         capabilities.current_extent
     } else {
-        let size = window.inner_size();
-        let clamp = |min: u32, max: u32, v: u32| min.max(max.min(v));
         vk::Extent2D::builder()
-            .width(clamp(
+            .width(window.inner_size().width.clamp(
                 capabilities.min_image_extent.width,
                 capabilities.max_image_extent.width,
-                size.width,
             ))
-            .height(clamp(
+            .height(window.inner_size().height.clamp(
                 capabilities.min_image_extent.height,
                 capabilities.max_image_extent.height,
-                size.height,
             ))
             .build()
     }
 }
 </code></pre>
-<p>We define the <code>clamp</code> function to restrict the actual size of the window within the supported range supported by the Vulkan device.</p>
+<p>We use the <a href="https://doc.rust-lang.org/std/cmp/trait.Ord.html#method.clamp"><code>clamp</code> function</a> to restrict the actual size of the window within the supported range supported by the Vulkan device.</p>
 <h2 id="creating-the-swapchain"><a class="header" href="#creating-the-swapchain">Creating the swapchain</a></h2>
 <p>Now that we have all of these helper functions assisting us with the choices we have to make at runtime, we finally have all the information that is needed to create a working swapchain.</p>
 <p>Create a <code>create_swapchain</code> function that starts out with the results of these calls and make sure to call it from <code>App::create</code> after logical device creation.</p>
@@ -450,7 +446,7 @@ let image_sharing_mode = if indices.graphics != indices.present {
 <pre><code class="language-rust noplaypen">data.swapchain_images = device.get_swapchain_images_khr(data.swapchain)?;
 </code></pre>
 <p>One last thing, store the format and extent we've chosen for the swapchain images in <code>AppData</code> fields. We'll need them in future chapters.</p>
-<pre><code class="language-rust noplaypen">impl AppData {
+<pre><code class="language-rust noplaypen">struct AppData {
     // ...
     swapchain_format: vk::Format,
     swapchain_extent: vk::Extent2D,
