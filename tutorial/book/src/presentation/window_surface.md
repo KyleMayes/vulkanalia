@@ -152,9 +152,10 @@ let queue_infos = unique_indices
 And delete the previous `queue_infos` slice and take a reference to the `queue_infos` list for `vk::DeviceCreateInfo`:
 
 ```rust,noplaypen
-let info = vk::DeviceCreateInfo::builder()
+let info = vk::DeviceCreateInfo::builder()        
     .queue_create_infos(&queue_infos)
     .enabled_layer_names(&layers)
+    .enabled_extension_names(&extensions)
     .enabled_features(&features);
 ```
 
