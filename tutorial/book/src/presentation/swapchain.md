@@ -435,7 +435,7 @@ data.swapchain_images = device.get_swapchain_images_khr(data.swapchain)?;
 One last thing, store the format and extent we've chosen for the swapchain images in `AppData` fields. We'll need them in future chapters.
 
 ```rust,noplaypen
-impl AppData {
+struct AppData {
     // ...
     swapchain_format: vk::Format,
     swapchain_extent: vk::Extent2D,
