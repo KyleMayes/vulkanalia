@@ -145,7 +145,7 @@ impl App {
         // Get the swapchain image for the current frame.
         let result = self.device.acquire_next_image_khr(
             self.data.swapchain,
-            10_000,
+            u64::MAX,
             self.data.image_available_semaphores[self.frame],
             vk::Fence::null(),
         );
@@ -521,7 +521,14 @@ unsafe fn create_swapchain(window: &Window, instance: &Instance, device: &Device
     data.swapchain_format = surface_format.format;
     data.swapchain_extent = extent;
 
-    let image_count = (support.capabilities.min_image_count + 1).min(support.capabilities.max_image_count);
+    // A max image count of 0 indicates that the surface has no upper limit on number of images.
+    let max_image_count = if support.capabilities.max_image_count != 0 {
+        support.capabilities.max_image_count
+    } else {
+        u32::MAX
+    };
+
+    let image_count = (support.capabilities.min_image_count + 1).min(max_image_count);
 
     let mut queue_family_indices = vec![];
     let image_sharing_mode = if indices.graphics != indices.present {
