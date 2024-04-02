@@ -72,14 +72,22 @@ If you receive an error message then ensure that your drivers are up-to-date, in
 
 ### macOS
 
-These instructions will assume you are using the [Homebrew package manager](https://brew.sh/). Also, keep in mind that you will need at least MacOS version 10.11, and your device needs to support the [Metal API](https://en.wikipedia.org/wiki/Metal_(API)#Supported_GPUs).
-
 The SDK can be downloaded from the [LunarG website](https://vulkan.lunarg.com/) using the buttons at the bottom of the page. You don't have to create an account, but it will give you access to some additional documentation that may be useful to you.
 
 ![](./images/vulkan_sdk_download_buttons.png)
 
-The SDK version for MacOS internally uses [MoltenVK](https://moltengl.com/). There is no native support for Vulkan on MacOS, so what MoltenVK does is actually act as a layer that translates Vulkan API calls to Apple's Metal graphics framework. With this you can take advantage of debugging and performance benefits of Apple's Metal framework.
+The SDK version for MacOS internally uses [MoltenVK](https://moltengl.com/). There is no native support for Vulkan on MacOS, so what MoltenVK does is act as a layer that translates Vulkan API calls to Apple's Metal graphics framework. With this you can take advantage of debugging and performance benefits of Apple's Metal framework.
 
 After downloading it, simply extract the contents to a folder of your choice. Inside the extracted folder, in the `Applications` folder you should have some executable files that will run a few demos using the SDK. Run the `vkcube` executable and you will see the following:
 
 ![](./images/cube_demo_mac.png)
+
+#### Setup Environment
+
+When running a Vulkan application outside of the Vulkan SDK directory, you will likely also need to run the `setup-env.sh` script from the Vulkan SDK to avoid errors about the inability to find Vulkan libraries (e.g., `libvulkan.dylib`). If you installed the Vulkan SDK in the default location, this script should be located in a path like this: `~/VulkanSDK/1.3.280.1/setup-env.sh` (replace the version number to match your Vulkan SDK installation).
+
+You can also add this script to be executed by default by adding it to your shell's setup script. For example you could add a statement like this to `~/.zshrc`:
+
+```
+source ~/VulkanSDK/1.3.280.1/setup-env.sh
+```
