@@ -1,6 +1,58 @@
 // SPDX-License-Identifier: Apache-2.0
 
 //! Vulkan bindings for Rust.
+//!
+//! For a detailed guide on how this crate (thinly) wraps the Vulkan API, see
+//! the `API Concepts` section of the `Overview` chapter of the `vulkanalia`
+//! Vulkan tutorial which can be found
+//! [here](https://kylemayes.github.io/vulkanalia/overview.html#api-concepts).
+//!
+//! For the classic triangle example, see
+//! [here](https://github.com/KyleMayes/vulkanalia/tree/master/examples/src).
+//!
+//! #### Quick Tips
+//!
+//! ##### 1. Use builder structs, but don't `build` them unless you need to!
+//!
+//! `vulkanalia`'s implementation of Vulkan structs like
+//! [`vk::InstanceCreateInfo`] each have associated builder structs that make
+//! constructing instances of these structs simple (
+//! [`vk::InstanceCreateInfoBuilder`] in this case).
+//!
+//! You can call the `build` method on a builder struct to extract the Vulkan
+//! struct, but this discards valuable information! Builder structs are often
+//! parameterized with lifetimes that ensure that the values passed to the
+//! builder struct live at least as long as the builder struct itself.
+//!
+//! Any Vulkan command in `vulkanalia` that takes a Vulkan struct like
+//! [`vk::InstanceCreateInfo`] as an argument can also accept the associated
+//! builder struct as an argument. This means you can skip those `build` calls
+//! and directly invoke Vulkan commands with your builder structs so that the
+//! lifetimes can protect you from an entire class of bugs.
+//!
+//! __Don't__
+//!
+//! ```ignore
+//! let info = vk::InstanceCreateInfo::builder()
+//!     .enabled_extension_names(&vec![/* 3 extension names */])
+//!     .build();
+//!
+//! let instance = entry.create_instance(&info, None).unwrap();
+//! // 💥: this will (hopefully) crash when the Vulkan implementation attempts
+//! // to read a now deallocated list of extension names
+//! ```
+//!
+//! __Do__
+//!
+//! ```ignore
+//! let info = vk::InstanceCreateInfo::builder()
+//!     .enabled_extension_names(&vec![/* 3 extension names */]);
+//!     // Look ma, no `build`!
+//!
+//! let instance = entry.create_instance(&info, None).unwrap();
+//! // 🦀: this will raise an error at compiletime about how the reference to
+//! // the temporary list of extension names doesn't live long enough
+//! ```
 
 #![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(feature = "core_error", feature(no_std_error))]
