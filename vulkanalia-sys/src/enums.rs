@@ -2248,7 +2248,7 @@ impl Format {
     pub const PVRTC1_4BPP_SRGB_BLOCK_IMG: Self = Self(1000054005);
     pub const PVRTC2_2BPP_SRGB_BLOCK_IMG: Self = Self(1000054006);
     pub const PVRTC2_4BPP_SRGB_BLOCK_IMG: Self = Self(1000054007);
-    pub const R16G16_S10_5_NV: Self = Self(1000464000);
+    pub const R16G16_SFIXED5_NV: Self = Self(1000464000);
     pub const A1B5G5R5_UNORM_PACK16_KHR: Self = Self(1000470000);
     pub const A8_UNORM_KHR: Self = Self(1000470001);
 
@@ -2515,7 +2515,7 @@ impl fmt::Debug for Format {
             1000054005 => write!(f, "PVRTC1_4BPP_SRGB_BLOCK_IMG"),
             1000054006 => write!(f, "PVRTC2_2BPP_SRGB_BLOCK_IMG"),
             1000054007 => write!(f, "PVRTC2_4BPP_SRGB_BLOCK_IMG"),
-            1000464000 => write!(f, "R16G16_S10_5_NV"),
+            1000464000 => write!(f, "R16G16_SFIXED5_NV"),
             1000470000 => write!(f, "A1B5G5R5_UNORM_PACK16_KHR"),
             1000470001 => write!(f, "A8_UNORM_KHR"),
             _ => self.0.fmt(f),
