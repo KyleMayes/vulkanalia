@@ -1,3 +1,12 @@
+## [0.24.0] - UNRELEASED
+
+### Bindings Updates
+- [Fixes to proposal document markup and for Antora](https://github.com/KhronosGroup/Vulkan-Docs/commit/08d90ab2b71c21e8507fc0fb80461eaafa844d1c)
+- [Update proposals links to current spec / refpages](https://github.com/KhronosGroup/Vulkan-Docs/commit/7ccda9da169c801c91e690b178c6b00f79cd02f3)
+- [Adjust proposal links to point to the docs site from the Antora build](https://github.com/KhronosGroup/Vulkan-Docs/commit/fad27392b1818a7356e8a65a77ce9e723d4a7f3f)
+- [Resolve some typos (#2333)](https://github.com/KhronosGroup/Vulkan-Docs/commit/cce62b5fe90a31a3b33786cfe29d60f5d4a27bda)
+- [April 13, 2024 Vulkan 1.3.282 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/315493e7b2ed31e3d33f124f95a4b1c0cdbfaf84)
+
 ## [0.23.0] - 2024-03-29
 
 ### Changed
