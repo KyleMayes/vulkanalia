@@ -1341,7 +1341,7 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineCreateFlags2KHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PipelineCreateFlags2KHR: Flags {
+    pub struct PipelineCreateFlags2KHR: Flags64 {
         const DISABLE_OPTIMIZATION = 1;
         const ALLOW_DERIVATIVES = 1 << 1;
         const DERIVATIVE = 1 << 2;
@@ -1373,6 +1373,7 @@ bitflags! {
         const RAY_TRACING_DISPLACEMENT_MICROMAP_NV = 1 << 28;
         const DESCRIPTOR_BUFFER_EXT = 1 << 29;
         const PROTECTED_ACCESS_ONLY_EXT = 1 << 30;
+        const ENABLE_LEGACY_DITHERING_EXT = 1 << 34;
     }
 }
 

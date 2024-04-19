@@ -6,6 +6,8 @@
 - [Adjust proposal links to point to the docs site from the Antora build](https://github.com/KhronosGroup/Vulkan-Docs/commit/fad27392b1818a7356e8a65a77ce9e723d4a7f3f)
 - [Resolve some typos (#2333)](https://github.com/KhronosGroup/Vulkan-Docs/commit/cce62b5fe90a31a3b33786cfe29d60f5d4a27bda)
 - [April 13, 2024 Vulkan 1.3.282 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/315493e7b2ed31e3d33f124f95a4b1c0cdbfaf84)
+- [Try to resolve warnings in Actions UI by upgrading all actions from @v3 to @v4 (#2352)](https://github.com/KhronosGroup/Vulkan-Docs/commit/d5803f193bf0c3b819a401993a309de127497f7d)
+- [April 19, 2024 Vulkan 1.3.283 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/dedb71a7edc6d5af3f9bfd5e2ef53814de999ef7)
 
 ## [0.23.0] - 2024-03-29
 
