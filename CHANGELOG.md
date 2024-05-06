@@ -8,6 +8,10 @@
 - [April 13, 2024 Vulkan 1.3.282 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/315493e7b2ed31e3d33f124f95a4b1c0cdbfaf84)
 - [Try to resolve warnings in Actions UI by upgrading all actions from @v3 to @v4 (#2352)](https://github.com/KhronosGroup/Vulkan-Docs/commit/d5803f193bf0c3b819a401993a309de127497f7d)
 - [April 19, 2024 Vulkan 1.3.283 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/dedb71a7edc6d5af3f9bfd5e2ef53814de999ef7)
+- [Refactor proposals into a separate Antora component (#2358)](https://github.com/KhronosGroup/Vulkan-Docs/commit/046a1f32cba893f38fc743c44461093726e0eac5)
+- [Revert "Refactor proposals into a separate Antora component (#2358)" (#2360)](https://github.com/KhronosGroup/Vulkan-Docs/commit/beec3ada55b028cd1103378dda0492de11bca987)
+- [Refactor 'proposals' into a separate Antora component 'features' (#2361)](https://github.com/KhronosGroup/Vulkan-Docs/commit/8a8a32f67d08e0df011a4406135b0ec7047d90e6)
+- [May 5, 2024 Vulkan 1.3.284 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ff188a8ffa950a010422c4c4b277f06db10d0dce)
 
 ## [0.23.0] - 2024-03-29
 

@@ -13443,6 +13443,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInheritedViewportScissorFe
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInlineUniformBlockFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLegacyDitheringFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLineRasterizationFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance4Features {}
@@ -39602,6 +39603,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInheritedViewportSc
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInlineUniformBlockFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLegacyDitheringFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLineRasterizationFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance4Features {}
@@ -43112,6 +43114,122 @@ impl ops::DerefMut for PhysicalDeviceLegacyDitheringFeaturesEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceLegacyDitheringFeaturesEXTBuilder {
     type Target = PhysicalDeviceLegacyDitheringFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+    type Target = PhysicalDeviceLegacyVertexAttributesFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+    type Builder = PhysicalDeviceLegacyVertexAttributesFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceLegacyVertexAttributesFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceLegacyVertexAttributesFeaturesEXTBuilder {
+    value: PhysicalDeviceLegacyVertexAttributesFeaturesEXT,
+}
+
+impl PhysicalDeviceLegacyVertexAttributesFeaturesEXTBuilder {
+    #[inline]
+    pub fn legacy_vertex_attributes(mut self, legacy_vertex_attributes: bool) -> Self {
+        self.value.legacy_vertex_attributes = legacy_vertex_attributes as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceLegacyVertexAttributesFeaturesEXTBuilder {
+    type Target = PhysicalDeviceLegacyVertexAttributesFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceLegacyVertexAttributesFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLegacyVertexAttributesFeaturesEXTBuilder {
+    type Target = PhysicalDeviceLegacyVertexAttributesFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
+    type Target = PhysicalDeviceLegacyVertexAttributesPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
+    type Builder = PhysicalDeviceLegacyVertexAttributesPropertiesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceLegacyVertexAttributesPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceLegacyVertexAttributesPropertiesEXTBuilder {
+    value: PhysicalDeviceLegacyVertexAttributesPropertiesEXT,
+}
+
+impl PhysicalDeviceLegacyVertexAttributesPropertiesEXTBuilder {
+    #[inline]
+    pub fn native_unaligned_performance(mut self, native_unaligned_performance: bool) -> Self {
+        self.value.native_unaligned_performance = native_unaligned_performance as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceLegacyVertexAttributesPropertiesEXTBuilder {
+    type Target = PhysicalDeviceLegacyVertexAttributesPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceLegacyVertexAttributesPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLegacyVertexAttributesPropertiesEXTBuilder {
+    type Target = PhysicalDeviceLegacyVertexAttributesPropertiesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -48395,6 +48513,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessing2P
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessingPropertiesQCOM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBlockProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLayeredDriverPropertiesMSFT {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLineRasterizationPropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance3Properties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance4Properties {}

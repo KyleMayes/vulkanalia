@@ -1571,6 +1571,22 @@ pub const EXT_LEGACY_DITHERING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_legacy_vertex_attributes.html>
+#[allow(deprecated)]
+pub const EXT_LEGACY_VERTEX_ATTRIBUTES_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_legacy_vertex_attributes"),
+    number: 496,
+    type_: "device",
+    author: "EXT",
+    contact: "Mike Blumenkrantz @zmike",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_line_rasterization.html>
 #[allow(deprecated)]
 pub const EXT_LINE_RASTERIZATION_EXTENSION: Extension = Extension {

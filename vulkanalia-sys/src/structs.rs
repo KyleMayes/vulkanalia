@@ -12696,6 +12696,46 @@ impl Default for PhysicalDeviceLegacyDitheringFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub legacy_vertex_attributes: Bool32,
+}
+
+impl Default for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT,
+            next: ptr::null_mut(),
+            legacy_vertex_attributes: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub native_unaligned_performance: Bool32,
+}
+
+impl Default for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            native_unaligned_performance: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLimits.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
