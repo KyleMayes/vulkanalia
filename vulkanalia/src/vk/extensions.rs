@@ -3005,6 +3005,15 @@ pub trait ExtLegacyDitheringExtension: DeviceV1_0 {
 
 impl ExtLegacyDitheringExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_legacy_vertex_attributes.html>
+pub trait ExtLegacyVertexAttributesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_LEGACY_VERTEX_ATTRIBUTES_EXTENSION;
+}
+
+impl ExtLegacyVertexAttributesExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_line_rasterization.html>
 pub trait ExtLineRasterizationExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -10662,6 +10671,15 @@ pub trait LunargDirectDriverLoadingExtension: InstanceV1_0 {
 }
 
 impl LunargDirectDriverLoadingExtension for crate::Instance {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_MESA_image_alignment_control.html>
+pub trait MesaImageAlignmentControlExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = MESA_IMAGE_ALIGNMENT_CONTROL_EXTENSION;
+}
+
+impl MesaImageAlignmentControlExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_MSFT_layered_driver.html>
 pub trait MsftLayeredDriverExtension: DeviceV1_0 {

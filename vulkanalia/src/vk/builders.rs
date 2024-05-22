@@ -13430,6 +13430,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceGraphicsPipelineLibraryFea
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostImageCopyFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageAlignmentControlFeaturesMESA {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageCompressionControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageProcessing2FeaturesQCOM {}
@@ -13443,6 +13444,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInheritedViewportScissorFe
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInlineUniformBlockFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLegacyDitheringFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLineRasterizationFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance4Features {}
@@ -22568,6 +22570,64 @@ unsafe impl<'b> Cast for IOSSurfaceCreateInfoMVKBuilder<'b> {
     }
 }
 
+unsafe impl Cast for ImageAlignmentControlCreateInfoMESA {
+    type Target = ImageAlignmentControlCreateInfoMESA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ImageAlignmentControlCreateInfoMESA {
+    type Builder = ImageAlignmentControlCreateInfoMESABuilder;
+}
+
+/// A builder for a [`ImageAlignmentControlCreateInfoMESA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ImageAlignmentControlCreateInfoMESABuilder {
+    value: ImageAlignmentControlCreateInfoMESA,
+}
+
+impl ImageAlignmentControlCreateInfoMESABuilder {
+    #[inline]
+    pub fn maximum_requested_alignment(mut self, maximum_requested_alignment: u32) -> Self {
+        self.value.maximum_requested_alignment = maximum_requested_alignment;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ImageAlignmentControlCreateInfoMESA {
+        self.value
+    }
+}
+
+impl ops::Deref for ImageAlignmentControlCreateInfoMESABuilder {
+    type Target = ImageAlignmentControlCreateInfoMESA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ImageAlignmentControlCreateInfoMESABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ImageAlignmentControlCreateInfoMESABuilder {
+    type Target = ImageAlignmentControlCreateInfoMESA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for ImageBlit {
     type Target = ImageBlit;
 
@@ -23206,6 +23266,7 @@ unsafe impl ExtendsImageCreateInfo for ExternalFormatANDROID {}
 unsafe impl ExtendsImageCreateInfo for ExternalFormatQNX {}
 unsafe impl ExtendsImageCreateInfo for ExternalMemoryImageCreateInfo {}
 unsafe impl ExtendsImageCreateInfo for ExternalMemoryImageCreateInfoNV {}
+unsafe impl ExtendsImageCreateInfo for ImageAlignmentControlCreateInfoMESA {}
 unsafe impl ExtendsImageCreateInfo for ImageCompressionControlEXT {}
 unsafe impl ExtendsImageCreateInfo for ImageDrmFormatModifierExplicitCreateInfoEXT {}
 unsafe impl ExtendsImageCreateInfo for ImageDrmFormatModifierListCreateInfoEXT {}
@@ -39586,6 +39647,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceGraphicsPipelineLib
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostImageCopyFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceHostQueryResetFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImage2DViewOf3DFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageAlignmentControlFeaturesMESA {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageCompressionControlFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT
@@ -39602,6 +39664,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInheritedViewportSc
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInlineUniformBlockFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceInvocationMaskFeaturesHUAWEI {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLegacyDitheringFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLineRasterizationFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLinearColorAttachmentFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance4Features {}
@@ -41801,6 +41864,122 @@ unsafe impl Cast for PhysicalDeviceImage2DViewOf3DFeaturesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceImageAlignmentControlFeaturesMESA {
+    type Target = PhysicalDeviceImageAlignmentControlFeaturesMESA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceImageAlignmentControlFeaturesMESA {
+    type Builder = PhysicalDeviceImageAlignmentControlFeaturesMESABuilder;
+}
+
+/// A builder for a [`PhysicalDeviceImageAlignmentControlFeaturesMESA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceImageAlignmentControlFeaturesMESABuilder {
+    value: PhysicalDeviceImageAlignmentControlFeaturesMESA,
+}
+
+impl PhysicalDeviceImageAlignmentControlFeaturesMESABuilder {
+    #[inline]
+    pub fn image_alignment_control(mut self, image_alignment_control: bool) -> Self {
+        self.value.image_alignment_control = image_alignment_control as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceImageAlignmentControlFeaturesMESA {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceImageAlignmentControlFeaturesMESABuilder {
+    type Target = PhysicalDeviceImageAlignmentControlFeaturesMESA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceImageAlignmentControlFeaturesMESABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImageAlignmentControlFeaturesMESABuilder {
+    type Target = PhysicalDeviceImageAlignmentControlFeaturesMESA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImageAlignmentControlPropertiesMESA {
+    type Target = PhysicalDeviceImageAlignmentControlPropertiesMESA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceImageAlignmentControlPropertiesMESA {
+    type Builder = PhysicalDeviceImageAlignmentControlPropertiesMESABuilder;
+}
+
+/// A builder for a [`PhysicalDeviceImageAlignmentControlPropertiesMESA`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceImageAlignmentControlPropertiesMESABuilder {
+    value: PhysicalDeviceImageAlignmentControlPropertiesMESA,
+}
+
+impl PhysicalDeviceImageAlignmentControlPropertiesMESABuilder {
+    #[inline]
+    pub fn supported_image_alignment_mask(mut self, supported_image_alignment_mask: u32) -> Self {
+        self.value.supported_image_alignment_mask = supported_image_alignment_mask;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceImageAlignmentControlPropertiesMESA {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceImageAlignmentControlPropertiesMESABuilder {
+    type Target = PhysicalDeviceImageAlignmentControlPropertiesMESA;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceImageAlignmentControlPropertiesMESABuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceImageAlignmentControlPropertiesMESABuilder {
+    type Target = PhysicalDeviceImageAlignmentControlPropertiesMESA;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceImageCompressionControlFeaturesEXT {
     type Target = PhysicalDeviceImageCompressionControlFeaturesEXT;
 
@@ -43112,6 +43291,122 @@ impl ops::DerefMut for PhysicalDeviceLegacyDitheringFeaturesEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceLegacyDitheringFeaturesEXTBuilder {
     type Target = PhysicalDeviceLegacyDitheringFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+    type Target = PhysicalDeviceLegacyVertexAttributesFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+    type Builder = PhysicalDeviceLegacyVertexAttributesFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceLegacyVertexAttributesFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceLegacyVertexAttributesFeaturesEXTBuilder {
+    value: PhysicalDeviceLegacyVertexAttributesFeaturesEXT,
+}
+
+impl PhysicalDeviceLegacyVertexAttributesFeaturesEXTBuilder {
+    #[inline]
+    pub fn legacy_vertex_attributes(mut self, legacy_vertex_attributes: bool) -> Self {
+        self.value.legacy_vertex_attributes = legacy_vertex_attributes as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceLegacyVertexAttributesFeaturesEXTBuilder {
+    type Target = PhysicalDeviceLegacyVertexAttributesFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceLegacyVertexAttributesFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLegacyVertexAttributesFeaturesEXTBuilder {
+    type Target = PhysicalDeviceLegacyVertexAttributesFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
+    type Target = PhysicalDeviceLegacyVertexAttributesPropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
+    type Builder = PhysicalDeviceLegacyVertexAttributesPropertiesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceLegacyVertexAttributesPropertiesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceLegacyVertexAttributesPropertiesEXTBuilder {
+    value: PhysicalDeviceLegacyVertexAttributesPropertiesEXT,
+}
+
+impl PhysicalDeviceLegacyVertexAttributesPropertiesEXTBuilder {
+    #[inline]
+    pub fn native_unaligned_performance(mut self, native_unaligned_performance: bool) -> Self {
+        self.value.native_unaligned_performance = native_unaligned_performance as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceLegacyVertexAttributesPropertiesEXTBuilder {
+    type Target = PhysicalDeviceLegacyVertexAttributesPropertiesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceLegacyVertexAttributesPropertiesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLegacyVertexAttributesPropertiesEXTBuilder {
+    type Target = PhysicalDeviceLegacyVertexAttributesPropertiesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -48391,10 +48686,12 @@ unsafe impl ExtendsPhysicalDeviceProperties2
 }
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceHostImageCopyPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceIDProperties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageAlignmentControlPropertiesMESA {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessing2PropertiesQCOM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessingPropertiesQCOM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBlockProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLayeredDriverPropertiesMSFT {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLineRasterizationPropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance3Properties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance4Properties {}
