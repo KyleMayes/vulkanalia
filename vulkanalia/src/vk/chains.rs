@@ -3698,6 +3698,20 @@ unsafe impl InputChainStruct for IOSSurfaceCreateInfoMVK {
     }
 }
 
+unsafe impl InputChainStruct for ImageAlignmentControlCreateInfoMESA {
+    const TYPE: StructureType = StructureType::IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for ImageBlit2 {
     const TYPE: StructureType = StructureType::IMAGE_BLIT_2;
 
@@ -7712,6 +7726,50 @@ unsafe impl OutputChainStruct for PhysicalDeviceImage2DViewOf3DFeaturesEXT {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceImageAlignmentControlFeaturesMESA {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceImageAlignmentControlFeaturesMESA {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceImageAlignmentControlPropertiesMESA {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceImageAlignmentControlPropertiesMESA {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceImageCompressionControlFeaturesEXT {
     const TYPE: StructureType =
         StructureType::PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT;
@@ -8115,6 +8173,50 @@ unsafe impl InputChainStruct for PhysicalDeviceLegacyDitheringFeaturesEXT {
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceLegacyDitheringFeaturesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_PROPERTIES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next

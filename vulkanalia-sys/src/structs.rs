@@ -6585,6 +6585,26 @@ impl Default for IOSSurfaceCreateInfoMVK {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageAlignmentControlCreateInfoMESA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImageAlignmentControlCreateInfoMESA {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub maximum_requested_alignment: u32,
+}
+
+impl Default for ImageAlignmentControlCreateInfoMESA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA,
+            next: ptr::null(),
+            maximum_requested_alignment: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageBlit.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -12262,6 +12282,46 @@ impl Default for PhysicalDeviceImage2DViewOf3DFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageAlignmentControlFeaturesMESA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceImageAlignmentControlFeaturesMESA {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub image_alignment_control: Bool32,
+}
+
+impl Default for PhysicalDeviceImageAlignmentControlFeaturesMESA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA,
+            next: ptr::null_mut(),
+            image_alignment_control: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageAlignmentControlPropertiesMESA.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceImageAlignmentControlPropertiesMESA {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub supported_image_alignment_mask: u32,
+}
+
+impl Default for PhysicalDeviceImageAlignmentControlPropertiesMESA {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA,
+            next: ptr::null_mut(),
+            supported_image_alignment_mask: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageCompressionControlFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12692,6 +12752,46 @@ impl Default for PhysicalDeviceLegacyDitheringFeaturesEXT {
             s_type: StructureType::PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT,
             next: ptr::null_mut(),
             legacy_dithering: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub legacy_vertex_attributes: Bool32,
+}
+
+impl Default for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT,
+            next: ptr::null_mut(),
+            legacy_vertex_attributes: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub native_unaligned_performance: Bool32,
+}
+
+impl Default for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            native_unaligned_performance: Bool32::default(),
         }
     }
 }
