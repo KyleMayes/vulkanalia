@@ -2259,6 +2259,22 @@ pub const EXT_SHADER_OBJECT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_shader_replicated_composites.html>
+#[allow(deprecated)]
+pub const EXT_SHADER_REPLICATED_COMPOSITES_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_shader_replicated_composites"),
+    number: 565,
+    type_: "device",
+    author: "EXT",
+    contact: "Kevin Petit @kpet",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_shader_stencil_export.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_STENCIL_EXPORT_EXTENSION: Extension = Extension {

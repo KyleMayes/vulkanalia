@@ -4675,6 +4675,15 @@ pub trait ExtShaderObjectExtension: DeviceV1_0 {
 
 impl ExtShaderObjectExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_shader_replicated_composites.html>
+pub trait ExtShaderReplicatedCompositesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_SHADER_REPLICATED_COMPOSITES_EXTENSION;
+}
+
+impl ExtShaderReplicatedCompositesExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_shader_stencil_export.html>
 pub trait ExtShaderStencilExportExtension: DeviceV1_0 {
     /// The metadata for this extension.
