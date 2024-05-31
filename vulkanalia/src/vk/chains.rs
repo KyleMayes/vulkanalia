@@ -10750,6 +10750,28 @@ unsafe impl OutputChainStruct for PhysicalDeviceShaderQuadControlFeaturesKHR {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceShaderSMBuiltinsFeaturesNV {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV;
 

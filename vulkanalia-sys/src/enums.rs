@@ -1741,6 +1741,7 @@ impl DriverId {
     pub const MESA_NVK: Self = Self(24);
     pub const IMAGINATION_OPEN_SOURCE_MESA: Self = Self(25);
     pub const MESA_AGXV: Self = Self(26);
+    pub const RESERVED_27: Self = Self(27);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1784,6 +1785,7 @@ impl fmt::Debug for DriverId {
             24 => write!(f, "MESA_NVK"),
             25 => write!(f, "IMAGINATION_OPEN_SOURCE_MESA"),
             26 => write!(f, "MESA_AGXV"),
+            27 => write!(f, "RESERVED_27"),
             _ => self.0.fmt(f),
         }
     }
@@ -6277,6 +6279,7 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV: Self = Self(1000546000);
     pub const PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV: Self = Self(1000555000);
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV: Self = Self(1000563000);
+    pub const PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT: Self = Self(1000564000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV: Self = Self(1000568000);
     pub const PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA: Self = Self(1000575000);
     pub const PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA: Self = Self(1000575001);
@@ -7397,6 +7400,10 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV"
             ),
+            1000564000 => write!(
+                f,
+                "PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT"
+            ),
             1000568000 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV"),
             1000575000 => write!(f, "PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA"),
             1000575001 => write!(f, "PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA"),
@@ -7752,6 +7759,7 @@ impl fmt::Debug for ValidationFeatureEnableEXT {
 pub struct VendorId(i32);
 
 impl VendorId {
+    pub const KHRONOS: Self = Self(65536);
     pub const VIV: Self = Self(65537);
     pub const VSI: Self = Self(65538);
     pub const KAZAN: Self = Self(65539);
@@ -7776,6 +7784,7 @@ impl VendorId {
 impl fmt::Debug for VendorId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
+            65536 => write!(f, "KHRONOS"),
             65537 => write!(f, "VIV"),
             65538 => write!(f, "VSI"),
             65539 => write!(f, "KAZAN"),

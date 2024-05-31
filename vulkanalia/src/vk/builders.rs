@@ -13525,6 +13525,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderMaximalReconvergence
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderObjectFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderQuadControlFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupRotateFeaturesKHR {}
@@ -39766,6 +39767,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderMaximalReconv
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderObjectFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderQuadControlFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSubgroupRotateFeaturesKHR {}
@@ -53294,6 +53296,64 @@ impl ops::DerefMut for PhysicalDeviceShaderQuadControlFeaturesKHRBuilder {
 
 unsafe impl Cast for PhysicalDeviceShaderQuadControlFeaturesKHRBuilder {
     type Target = PhysicalDeviceShaderQuadControlFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {
+    type Target = PhysicalDeviceShaderReplicatedCompositesFeaturesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {
+    type Builder = PhysicalDeviceShaderReplicatedCompositesFeaturesEXTBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderReplicatedCompositesFeaturesEXT`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderReplicatedCompositesFeaturesEXTBuilder {
+    value: PhysicalDeviceShaderReplicatedCompositesFeaturesEXT,
+}
+
+impl PhysicalDeviceShaderReplicatedCompositesFeaturesEXTBuilder {
+    #[inline]
+    pub fn shader_replicated_composites(mut self, shader_replicated_composites: bool) -> Self {
+        self.value.shader_replicated_composites = shader_replicated_composites as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderReplicatedCompositesFeaturesEXTBuilder {
+    type Target = PhysicalDeviceShaderReplicatedCompositesFeaturesEXT;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderReplicatedCompositesFeaturesEXTBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderReplicatedCompositesFeaturesEXTBuilder {
+    type Target = PhysicalDeviceShaderReplicatedCompositesFeaturesEXT;
 
     #[inline]
     fn into(self) -> Self::Target {

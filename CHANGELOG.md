@@ -17,6 +17,9 @@
 - [Clarify that the KHR and EXT load_store_op_none extensions were not promoted to Vulkan 1.3 (#2367)](https://github.com/KhronosGroup/Vulkan-Docs/commit/2a114fbd375b355f3f164048429ebbda022ed73e)
 - [May 10, 2024 Vulkan 1.3.285 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/8fc686b6321f035dc4a589e5ec1dc67208a71ac2)
 - [Add a "constants" type= attribute to <enums> tags (#2366)](https://github.com/KhronosGroup/Vulkan-Docs/commit/ce03761fd6cc1ab8f54c9f785fffb13f492d7d04)
+- [Replace <feature number> attribute with <feature depends> (#2331)](https://github.com/KhronosGroup/Vulkan-Docs/commit/8651835d4c709897a590cfc3073ad5121127cdff)
+- [Display Timing Queries: Clarify behaviour of VK_PRESENT_MODE_FIFO_RELAXED_KHR (#2363)](https://github.com/KhronosGroup/Vulkan-Docs/commit/5fb5568cece7a13cca68adab38e742c4f3769df7)
+- [May 31, 2024 Vulkan 1.3.286 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ed4ba0242beb89a1795d6084709fa9e713559c94)
 
 ## [0.23.0] - 2024-03-29
 
