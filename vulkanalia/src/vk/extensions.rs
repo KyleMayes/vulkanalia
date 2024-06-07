@@ -7280,12 +7280,13 @@ pub trait KhrDynamicRenderingLocalReadExtension: DeviceV1_0 {
     unsafe fn cmd_set_rendering_input_attachment_indices_khr(
         &self,
         command_buffer: CommandBuffer,
-        location_info: &RenderingInputAttachmentIndexInfoKHR,
+        input_attachment_index_info: &RenderingInputAttachmentIndexInfoKHR,
     ) {
         let __result = (self
             .commands()
             .cmd_set_rendering_input_attachment_indices_khr)(
-            command_buffer, location_info
+            command_buffer,
+            input_attachment_index_info,
         );
     }
 }

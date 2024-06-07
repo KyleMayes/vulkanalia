@@ -69462,6 +69462,7 @@ unsafe impl Cast for SetStateFlagsIndirectCommandNVBuilder {
 /// A Vulkan struct that can be used to extend a [`ShaderCreateInfoEXT`].
 pub unsafe trait ExtendsShaderCreateInfoEXT: fmt::Debug {}
 unsafe impl ExtendsShaderCreateInfoEXT for PipelineShaderStageRequiredSubgroupSizeCreateInfo {}
+unsafe impl ExtendsShaderCreateInfoEXT for ValidationFeaturesEXT {}
 
 unsafe impl Cast for ShaderCreateInfoEXT {
     type Target = ShaderCreateInfoEXT;
@@ -69603,6 +69604,7 @@ unsafe impl<'b> Cast for ShaderCreateInfoEXTBuilder<'b> {
 /// A Vulkan struct that can be used to extend a [`ShaderModuleCreateInfo`].
 pub unsafe trait ExtendsShaderModuleCreateInfo: fmt::Debug {}
 unsafe impl ExtendsShaderModuleCreateInfo for ShaderModuleValidationCacheCreateInfoEXT {}
+unsafe impl ExtendsShaderModuleCreateInfo for ValidationFeaturesEXT {}
 
 unsafe impl Cast for ShaderModuleCreateInfo {
     type Target = ShaderModuleCreateInfo;

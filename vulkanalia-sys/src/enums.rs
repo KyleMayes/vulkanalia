@@ -1740,7 +1740,7 @@ impl DriverId {
     pub const MESA_DOZEN: Self = Self(23);
     pub const MESA_NVK: Self = Self(24);
     pub const IMAGINATION_OPEN_SOURCE_MESA: Self = Self(25);
-    pub const MESA_AGXV: Self = Self(26);
+    pub const MESA_HONEYKRISP: Self = Self(26);
     pub const RESERVED_27: Self = Self(27);
 
     /// Constructs an instance of this enum with the supplied underlying value.
@@ -1784,7 +1784,7 @@ impl fmt::Debug for DriverId {
             23 => write!(f, "MESA_DOZEN"),
             24 => write!(f, "MESA_NVK"),
             25 => write!(f, "IMAGINATION_OPEN_SOURCE_MESA"),
-            26 => write!(f, "MESA_AGXV"),
+            26 => write!(f, "MESA_HONEYKRISP"),
             27 => write!(f, "RESERVED_27"),
             _ => self.0.fmt(f),
         }
