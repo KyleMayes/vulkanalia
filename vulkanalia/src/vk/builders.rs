@@ -13525,6 +13525,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderMaximalReconvergence
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderObjectFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderQuadControlFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
@@ -39767,6 +39768,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderMaximalReconv
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderObjectFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderQuadControlFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
@@ -53296,6 +53301,68 @@ impl ops::DerefMut for PhysicalDeviceShaderQuadControlFeaturesKHRBuilder {
 
 unsafe impl Cast for PhysicalDeviceShaderQuadControlFeaturesKHRBuilder {
     type Target = PhysicalDeviceShaderQuadControlFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
+    type Target = PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
+    type Builder = PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHRBuilder {
+    value: PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR,
+}
+
+impl PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHRBuilder {
+    #[inline]
+    pub fn shader_relaxed_extended_instruction(
+        mut self,
+        shader_relaxed_extended_instruction: bool,
+    ) -> Self {
+        self.value.shader_relaxed_extended_instruction =
+            shader_relaxed_extended_instruction as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -69462,6 +69529,7 @@ unsafe impl Cast for SetStateFlagsIndirectCommandNVBuilder {
 /// A Vulkan struct that can be used to extend a [`ShaderCreateInfoEXT`].
 pub unsafe trait ExtendsShaderCreateInfoEXT: fmt::Debug {}
 unsafe impl ExtendsShaderCreateInfoEXT for PipelineShaderStageRequiredSubgroupSizeCreateInfo {}
+unsafe impl ExtendsShaderCreateInfoEXT for ValidationFeaturesEXT {}
 
 unsafe impl Cast for ShaderCreateInfoEXT {
     type Target = ShaderCreateInfoEXT;
@@ -69603,6 +69671,7 @@ unsafe impl<'b> Cast for ShaderCreateInfoEXTBuilder<'b> {
 /// A Vulkan struct that can be used to extend a [`ShaderModuleCreateInfo`].
 pub unsafe trait ExtendsShaderModuleCreateInfo: fmt::Debug {}
 unsafe impl ExtendsShaderModuleCreateInfo for ShaderModuleValidationCacheCreateInfoEXT {}
+unsafe impl ExtendsShaderModuleCreateInfo for ValidationFeaturesEXT {}
 
 unsafe impl Cast for ShaderModuleCreateInfo {
     type Target = ShaderModuleCreateInfo;

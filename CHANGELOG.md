@@ -20,6 +20,8 @@
 - [Replace <feature number> attribute with <feature depends> (#2331)](https://github.com/KhronosGroup/Vulkan-Docs/commit/8651835d4c709897a590cfc3073ad5121127cdff)
 - [Display Timing Queries: Clarify behaviour of VK_PRESENT_MODE_FIFO_RELAXED_KHR (#2363)](https://github.com/KhronosGroup/Vulkan-Docs/commit/5fb5568cece7a13cca68adab38e742c4f3769df7)
 - [May 31, 2024 Vulkan 1.3.286 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ed4ba0242beb89a1795d6084709fa9e713559c94)
+- [June 7, 2024 Vulkan 1.3.287 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ae3e824136b336fe99025eaf0cd55d073c6e6a0a)
+- [June 14, 2024 Vulkan 1.3.288 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/bf457079af2a599bbcb018cf5d032429a7121d97)
 
 ## [0.23.0] - 2024-03-29
 

@@ -1740,7 +1740,7 @@ impl DriverId {
     pub const MESA_DOZEN: Self = Self(23);
     pub const MESA_NVK: Self = Self(24);
     pub const IMAGINATION_OPEN_SOURCE_MESA: Self = Self(25);
-    pub const MESA_AGXV: Self = Self(26);
+    pub const MESA_HONEYKRISP: Self = Self(26);
     pub const RESERVED_27: Self = Self(27);
 
     /// Constructs an instance of this enum with the supplied underlying value.
@@ -1784,7 +1784,7 @@ impl fmt::Debug for DriverId {
             23 => write!(f, "MESA_DOZEN"),
             24 => write!(f, "MESA_NVK"),
             25 => write!(f, "IMAGINATION_OPEN_SOURCE_MESA"),
-            26 => write!(f, "MESA_AGXV"),
+            26 => write!(f, "MESA_HONEYKRISP"),
             27 => write!(f, "RESERVED_27"),
             _ => self.0.fmt(f),
         }
@@ -6278,6 +6278,8 @@ impl StructureType {
     pub const BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT: Self = Self(1000545008);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV: Self = Self(1000546000);
     pub const PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV: Self = Self(1000555000);
+    pub const PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR: Self =
+        Self(1000558000);
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV: Self = Self(1000563000);
     pub const PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT: Self = Self(1000564000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV: Self = Self(1000568000);
@@ -7396,6 +7398,10 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV"
             ),
             1000555000 => write!(f, "PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV"),
+            1000558000 => write!(
+                f,
+                "PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR"
+            ),
             1000563000 => write!(
                 f,
                 "PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV"
