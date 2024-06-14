@@ -7280,12 +7280,13 @@ pub trait KhrDynamicRenderingLocalReadExtension: DeviceV1_0 {
     unsafe fn cmd_set_rendering_input_attachment_indices_khr(
         &self,
         command_buffer: CommandBuffer,
-        location_info: &RenderingInputAttachmentIndexInfoKHR,
+        input_attachment_index_info: &RenderingInputAttachmentIndexInfoKHR,
     ) {
         let __result = (self
             .commands()
             .cmd_set_rendering_input_attachment_indices_khr)(
-            command_buffer, location_info
+            command_buffer,
+            input_attachment_index_info,
         );
     }
 }
@@ -9349,6 +9350,15 @@ pub trait KhrShaderQuadControlExtension: DeviceV1_0 {
 }
 
 impl KhrShaderQuadControlExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_shader_relaxed_extended_instruction.html>
+pub trait KhrShaderRelaxedExtendedInstructionExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_SHADER_RELAXED_EXTENDED_INSTRUCTION_EXTENSION;
+}
+
+impl KhrShaderRelaxedExtendedInstructionExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_shader_subgroup_extended_types.html>
 pub trait KhrShaderSubgroupExtendedTypesExtension: DeviceV1_0 {
