@@ -3784,6 +3784,22 @@ pub const KHR_MAINTENANCE6_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_maintenance7.html>
+#[allow(deprecated)]
+pub const KHR_MAINTENANCE7_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_maintenance7"),
+    number: 563,
+    type_: "device",
+    author: "KHR",
+    contact: "Mike Blumenkrantz @zmike",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_map_memory2.html>
 #[allow(deprecated)]
 pub const KHR_MAP_MEMORY2_EXTENSION: Extension = Extension {
@@ -4264,6 +4280,22 @@ pub const KHR_SHADER_QUAD_CONTROL_EXTENSION: Extension = Extension {
     type_: "device",
     author: "KHR",
     contact: "Tobias Hector @tobski",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_shader_relaxed_extended_instruction.html>
+#[allow(deprecated)]
+pub const KHR_SHADER_RELAXED_EXTENDED_INSTRUCTION_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_shader_relaxed_extended_instruction"),
+    number: 559,
+    type_: "device",
+    author: "KHR",
+    contact: "Nathan Gauër @Keenuts",
     platform: None,
     required_extensions: None,
     required_version: None,

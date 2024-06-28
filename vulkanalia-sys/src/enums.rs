@@ -1740,7 +1740,7 @@ impl DriverId {
     pub const MESA_DOZEN: Self = Self(23);
     pub const MESA_NVK: Self = Self(24);
     pub const IMAGINATION_OPEN_SOURCE_MESA: Self = Self(25);
-    pub const MESA_AGXV: Self = Self(26);
+    pub const MESA_HONEYKRISP: Self = Self(26);
     pub const RESERVED_27: Self = Self(27);
 
     /// Constructs an instance of this enum with the supplied underlying value.
@@ -1784,7 +1784,7 @@ impl fmt::Debug for DriverId {
             23 => write!(f, "MESA_DOZEN"),
             24 => write!(f, "MESA_NVK"),
             25 => write!(f, "IMAGINATION_OPEN_SOURCE_MESA"),
-            26 => write!(f, "MESA_AGXV"),
+            26 => write!(f, "MESA_HONEYKRISP"),
             27 => write!(f, "RESERVED_27"),
             _ => self.0.fmt(f),
         }
@@ -3916,6 +3916,44 @@ impl fmt::Debug for PerformanceValueTypeINTEL {
             2 => write!(f, "FLOAT"),
             3 => write!(f, "BOOL"),
             4 => write!(f, "STRING"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLayeredApiKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct PhysicalDeviceLayeredApiKHR(i32);
+
+impl PhysicalDeviceLayeredApiKHR {
+    pub const VULKAN: Self = Self(0);
+    pub const D3D12: Self = Self(1);
+    pub const METAL: Self = Self(2);
+    pub const OPENGL: Self = Self(3);
+    pub const OPENGLES: Self = Self(4);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for PhysicalDeviceLayeredApiKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "VULKAN"),
+            1 => write!(f, "D3D12"),
+            2 => write!(f, "METAL"),
+            3 => write!(f, "OPENGL"),
+            4 => write!(f, "OPENGLES"),
             _ => self.0.fmt(f),
         }
     }
@@ -6278,6 +6316,13 @@ impl StructureType {
     pub const BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT: Self = Self(1000545008);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV: Self = Self(1000546000);
     pub const PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV: Self = Self(1000555000);
+    pub const PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR: Self =
+        Self(1000558000);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_7_FEATURES_KHR: Self = Self(1000562000);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR: Self = Self(1000562001);
+    pub const PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR: Self = Self(1000562002);
+    pub const PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR: Self = Self(1000562003);
+    pub const PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR: Self = Self(1000562004);
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV: Self = Self(1000563000);
     pub const PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT: Self = Self(1000564000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV: Self = Self(1000568000);
@@ -7396,6 +7441,15 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV"
             ),
             1000555000 => write!(f, "PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV"),
+            1000558000 => write!(
+                f,
+                "PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR"
+            ),
+            1000562000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_7_FEATURES_KHR"),
+            1000562001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR"),
+            1000562002 => write!(f, "PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR"),
+            1000562003 => write!(f, "PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR"),
+            1000562004 => write!(f, "PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR"),
             1000563000 => write!(
                 f,
                 "PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV"
@@ -7421,7 +7475,7 @@ pub struct SubpassContents(i32);
 impl SubpassContents {
     pub const INLINE: Self = Self(0);
     pub const SECONDARY_COMMAND_BUFFERS: Self = Self(1);
-    pub const INLINE_AND_SECONDARY_COMMAND_BUFFERS_EXT: Self = Self(1000451000);
+    pub const INLINE_AND_SECONDARY_COMMAND_BUFFERS_KHR: Self = Self(1000451000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -7441,7 +7495,7 @@ impl fmt::Debug for SubpassContents {
         match self.0 {
             0 => write!(f, "INLINE"),
             1 => write!(f, "SECONDARY_COMMAND_BUFFERS"),
-            1000451000 => write!(f, "INLINE_AND_SECONDARY_COMMAND_BUFFERS_EXT"),
+            1000451000 => write!(f, "INLINE_AND_SECONDARY_COMMAND_BUFFERS_KHR"),
             _ => self.0.fmt(f),
         }
     }
