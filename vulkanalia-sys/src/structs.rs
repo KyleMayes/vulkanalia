@@ -12716,6 +12716,74 @@ impl Default for PhysicalDeviceInvocationMaskFeaturesHUAWEI {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLayeredApiPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceLayeredApiPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub vendor_id: u32,
+    pub device_id: u32,
+    pub layered_api: PhysicalDeviceLayeredApiKHR,
+    pub device_name: StringArray<MAX_PHYSICAL_DEVICE_NAME_SIZE>,
+}
+
+impl Default for PhysicalDeviceLayeredApiPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            vendor_id: u32::default(),
+            device_id: u32::default(),
+            layered_api: PhysicalDeviceLayeredApiKHR::default(),
+            device_name: StringArray::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLayeredApiPropertiesListKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceLayeredApiPropertiesListKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub layered_api_count: u32,
+    pub layered_apis: *mut PhysicalDeviceLayeredApiPropertiesKHR,
+}
+
+impl Default for PhysicalDeviceLayeredApiPropertiesListKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR,
+            next: ptr::null_mut(),
+            layered_api_count: u32::default(),
+            layered_apis: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, PartialEq)]
+pub struct PhysicalDeviceLayeredApiVulkanPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub properties: PhysicalDeviceProperties2,
+}
+
+impl Default for PhysicalDeviceLayeredApiVulkanPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            properties: PhysicalDeviceProperties2::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLayeredDriverPropertiesMSFT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -13130,6 +13198,60 @@ impl Default for PhysicalDeviceMaintenance6PropertiesKHR {
             block_texel_view_compatible_multiple_layers: Bool32::default(),
             max_combined_image_sampler_descriptor_count: u32::default(),
             fragment_shading_rate_clamp_combiner_inputs: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMaintenance7FeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMaintenance7FeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub maintenance7: Bool32,
+}
+
+impl Default for PhysicalDeviceMaintenance7FeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_7_FEATURES_KHR,
+            next: ptr::null_mut(),
+            maintenance7: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMaintenance7PropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMaintenance7PropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub robust_fragment_shading_rate_attachment_access: Bool32,
+    pub separate_depth_stencil_attachment_access: Bool32,
+    pub max_descriptor_set_total_uniform_buffers_dynamic: u32,
+    pub max_descriptor_set_total_storage_buffers_dynamic: u32,
+    pub max_descriptor_set_total_buffers_dynamic: u32,
+    pub max_descriptor_set_update_after_bind_total_uniform_buffers_dynamic: u32,
+    pub max_descriptor_set_update_after_bind_total_storage_buffers_dynamic: u32,
+    pub max_descriptor_set_update_after_bind_total_buffers_dynamic: u32,
+}
+
+impl Default for PhysicalDeviceMaintenance7PropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            robust_fragment_shading_rate_attachment_access: Bool32::default(),
+            separate_depth_stencil_attachment_access: Bool32::default(),
+            max_descriptor_set_total_uniform_buffers_dynamic: u32::default(),
+            max_descriptor_set_total_storage_buffers_dynamic: u32::default(),
+            max_descriptor_set_total_buffers_dynamic: u32::default(),
+            max_descriptor_set_update_after_bind_total_uniform_buffers_dynamic: u32::default(),
+            max_descriptor_set_update_after_bind_total_storage_buffers_dynamic: u32::default(),
+            max_descriptor_set_update_after_bind_total_buffers_dynamic: u32::default(),
         }
     }
 }
@@ -15711,6 +15833,26 @@ impl Default for PhysicalDeviceShaderQuadControlFeaturesKHR {
             s_type: StructureType::PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR,
             next: ptr::null_mut(),
             shader_quad_control: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_relaxed_extended_instruction: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR,
+            next: ptr::null_mut(),
+            shader_relaxed_extended_instruction: Bool32::default(),
         }
     }
 }

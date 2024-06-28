@@ -13450,6 +13450,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceLinearColorAttachmentFeatu
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance4Features {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance5FeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance6FeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance7FeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMapMemoryPlacedFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryDecompressionFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMemoryPriorityFeaturesEXT {}
@@ -13525,6 +13526,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderMaximalReconvergence
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderObjectFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderQuadControlFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
@@ -39671,6 +39673,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceLinearColorAttachme
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance4Features {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance5FeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance6FeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance7FeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMapMemoryPlacedFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryDecompressionFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMemoryPriorityFeaturesEXT {}
@@ -39767,6 +39770,10 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderMaximalReconv
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderObjectFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderQuadControlFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR
+{
+}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSMBuiltinsFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {}
@@ -43184,6 +43191,230 @@ unsafe impl Cast for PhysicalDeviceInvocationMaskFeaturesHUAWEIBuilder {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`PhysicalDeviceLayeredApiPropertiesKHR`].
+pub unsafe trait ExtendsPhysicalDeviceLayeredApiPropertiesKHR: fmt::Debug {}
+unsafe impl ExtendsPhysicalDeviceLayeredApiPropertiesKHR
+    for PhysicalDeviceLayeredApiVulkanPropertiesKHR
+{
+}
+
+unsafe impl Cast for PhysicalDeviceLayeredApiPropertiesKHR {
+    type Target = PhysicalDeviceLayeredApiPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PhysicalDeviceLayeredApiPropertiesKHR {
+    type Builder = PhysicalDeviceLayeredApiPropertiesKHRBuilder<'b>;
+}
+
+/// A builder for a [`PhysicalDeviceLayeredApiPropertiesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceLayeredApiPropertiesKHRBuilder<'b> {
+    value: PhysicalDeviceLayeredApiPropertiesKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PhysicalDeviceLayeredApiPropertiesKHRBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsPhysicalDeviceLayeredApiPropertiesKHR,
+    {
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
+        self
+    }
+
+    #[inline]
+    pub fn vendor_id(mut self, vendor_id: u32) -> Self {
+        self.value.vendor_id = vendor_id;
+        self
+    }
+
+    #[inline]
+    pub fn device_id(mut self, device_id: u32) -> Self {
+        self.value.device_id = device_id;
+        self
+    }
+
+    #[inline]
+    pub fn layered_api(mut self, layered_api: PhysicalDeviceLayeredApiKHR) -> Self {
+        self.value.layered_api = layered_api;
+        self
+    }
+
+    #[inline]
+    pub fn device_name(
+        mut self,
+        device_name: impl Into<StringArray<MAX_PHYSICAL_DEVICE_NAME_SIZE>>,
+    ) -> Self {
+        self.value.device_name = device_name.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceLayeredApiPropertiesKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PhysicalDeviceLayeredApiPropertiesKHRBuilder<'b> {
+    type Target = PhysicalDeviceLayeredApiPropertiesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PhysicalDeviceLayeredApiPropertiesKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PhysicalDeviceLayeredApiPropertiesKHRBuilder<'b> {
+    type Target = PhysicalDeviceLayeredApiPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLayeredApiPropertiesListKHR {
+    type Target = PhysicalDeviceLayeredApiPropertiesListKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PhysicalDeviceLayeredApiPropertiesListKHR {
+    type Builder = PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'b>;
+}
+
+/// A builder for a [`PhysicalDeviceLayeredApiPropertiesListKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'b> {
+    value: PhysicalDeviceLayeredApiPropertiesListKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'b> {
+    #[inline]
+    pub fn layered_api_count(mut self, layered_api_count: u32) -> Self {
+        self.value.layered_api_count = layered_api_count;
+        self
+    }
+
+    #[inline]
+    pub fn layered_apis(
+        mut self,
+        layered_apis: &'b mut [impl Cast<Target = PhysicalDeviceLayeredApiPropertiesKHR>],
+    ) -> Self {
+        self.value.layered_api_count = layered_apis.len() as u32;
+        self.value.layered_apis = layered_apis.as_mut_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceLayeredApiPropertiesListKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'b> {
+    type Target = PhysicalDeviceLayeredApiPropertiesListKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'b> {
+    type Target = PhysicalDeviceLayeredApiPropertiesListKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceLayeredApiVulkanPropertiesKHR {
+    type Target = PhysicalDeviceLayeredApiVulkanPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PhysicalDeviceLayeredApiVulkanPropertiesKHR {
+    type Builder = PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'b>;
+}
+
+/// A builder for a [`PhysicalDeviceLayeredApiVulkanPropertiesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'b> {
+    value: PhysicalDeviceLayeredApiVulkanPropertiesKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'b> {
+    #[inline]
+    pub fn properties(mut self, properties: impl Cast<Target = PhysicalDeviceProperties2>) -> Self {
+        self.value.properties = properties.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceLayeredApiVulkanPropertiesKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'b> {
+    type Target = PhysicalDeviceLayeredApiVulkanPropertiesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'b> {
+    type Target = PhysicalDeviceLayeredApiVulkanPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceLayeredDriverPropertiesMSFT {
     type Target = PhysicalDeviceLayeredDriverPropertiesMSFT;
 
@@ -44930,6 +45161,199 @@ impl ops::DerefMut for PhysicalDeviceMaintenance6PropertiesKHRBuilder {
 
 unsafe impl Cast for PhysicalDeviceMaintenance6PropertiesKHRBuilder {
     type Target = PhysicalDeviceMaintenance6PropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMaintenance7FeaturesKHR {
+    type Target = PhysicalDeviceMaintenance7FeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMaintenance7FeaturesKHR {
+    type Builder = PhysicalDeviceMaintenance7FeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceMaintenance7FeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMaintenance7FeaturesKHRBuilder {
+    value: PhysicalDeviceMaintenance7FeaturesKHR,
+}
+
+impl PhysicalDeviceMaintenance7FeaturesKHRBuilder {
+    #[inline]
+    pub fn maintenance7(mut self, maintenance7: bool) -> Self {
+        self.value.maintenance7 = maintenance7 as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMaintenance7FeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMaintenance7FeaturesKHRBuilder {
+    type Target = PhysicalDeviceMaintenance7FeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMaintenance7FeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMaintenance7FeaturesKHRBuilder {
+    type Target = PhysicalDeviceMaintenance7FeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMaintenance7PropertiesKHR {
+    type Target = PhysicalDeviceMaintenance7PropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceMaintenance7PropertiesKHR {
+    type Builder = PhysicalDeviceMaintenance7PropertiesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceMaintenance7PropertiesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceMaintenance7PropertiesKHRBuilder {
+    value: PhysicalDeviceMaintenance7PropertiesKHR,
+}
+
+impl PhysicalDeviceMaintenance7PropertiesKHRBuilder {
+    #[inline]
+    pub fn robust_fragment_shading_rate_attachment_access(
+        mut self,
+        robust_fragment_shading_rate_attachment_access: bool,
+    ) -> Self {
+        self.value.robust_fragment_shading_rate_attachment_access =
+            robust_fragment_shading_rate_attachment_access as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn separate_depth_stencil_attachment_access(
+        mut self,
+        separate_depth_stencil_attachment_access: bool,
+    ) -> Self {
+        self.value.separate_depth_stencil_attachment_access =
+            separate_depth_stencil_attachment_access as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn max_descriptor_set_total_uniform_buffers_dynamic(
+        mut self,
+        max_descriptor_set_total_uniform_buffers_dynamic: u32,
+    ) -> Self {
+        self.value.max_descriptor_set_total_uniform_buffers_dynamic =
+            max_descriptor_set_total_uniform_buffers_dynamic;
+        self
+    }
+
+    #[inline]
+    pub fn max_descriptor_set_total_storage_buffers_dynamic(
+        mut self,
+        max_descriptor_set_total_storage_buffers_dynamic: u32,
+    ) -> Self {
+        self.value.max_descriptor_set_total_storage_buffers_dynamic =
+            max_descriptor_set_total_storage_buffers_dynamic;
+        self
+    }
+
+    #[inline]
+    pub fn max_descriptor_set_total_buffers_dynamic(
+        mut self,
+        max_descriptor_set_total_buffers_dynamic: u32,
+    ) -> Self {
+        self.value.max_descriptor_set_total_buffers_dynamic =
+            max_descriptor_set_total_buffers_dynamic;
+        self
+    }
+
+    #[inline]
+    pub fn max_descriptor_set_update_after_bind_total_uniform_buffers_dynamic(
+        mut self,
+        max_descriptor_set_update_after_bind_total_uniform_buffers_dynamic: u32,
+    ) -> Self {
+        self.value
+            .max_descriptor_set_update_after_bind_total_uniform_buffers_dynamic =
+            max_descriptor_set_update_after_bind_total_uniform_buffers_dynamic;
+        self
+    }
+
+    #[inline]
+    pub fn max_descriptor_set_update_after_bind_total_storage_buffers_dynamic(
+        mut self,
+        max_descriptor_set_update_after_bind_total_storage_buffers_dynamic: u32,
+    ) -> Self {
+        self.value
+            .max_descriptor_set_update_after_bind_total_storage_buffers_dynamic =
+            max_descriptor_set_update_after_bind_total_storage_buffers_dynamic;
+        self
+    }
+
+    #[inline]
+    pub fn max_descriptor_set_update_after_bind_total_buffers_dynamic(
+        mut self,
+        max_descriptor_set_update_after_bind_total_buffers_dynamic: u32,
+    ) -> Self {
+        self.value
+            .max_descriptor_set_update_after_bind_total_buffers_dynamic =
+            max_descriptor_set_update_after_bind_total_buffers_dynamic;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceMaintenance7PropertiesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceMaintenance7PropertiesKHRBuilder {
+    type Target = PhysicalDeviceMaintenance7PropertiesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceMaintenance7PropertiesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceMaintenance7PropertiesKHRBuilder {
+    type Target = PhysicalDeviceMaintenance7PropertiesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -48692,6 +49116,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageAlignmentCon
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessing2PropertiesQCOM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceImageProcessingPropertiesQCOM {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceInlineUniformBlockProperties {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLayeredApiPropertiesListKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLayeredDriverPropertiesMSFT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceLineRasterizationPropertiesKHR {}
@@ -48699,6 +49124,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance3Prope
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance4Properties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance5PropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance6PropertiesKHR {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMaintenance7PropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMapMemoryPlacedPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMemoryDecompressionPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceMeshShaderPropertiesEXT {}
@@ -53296,6 +53722,68 @@ impl ops::DerefMut for PhysicalDeviceShaderQuadControlFeaturesKHRBuilder {
 
 unsafe impl Cast for PhysicalDeviceShaderQuadControlFeaturesKHRBuilder {
     type Target = PhysicalDeviceShaderQuadControlFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
+    type Target = PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
+    type Builder = PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHRBuilder {
+    value: PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR,
+}
+
+impl PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHRBuilder {
+    #[inline]
+    pub fn shader_relaxed_extended_instruction(
+        mut self,
+        shader_relaxed_extended_instruction: bool,
+    ) -> Self {
+        self.value.shader_relaxed_extended_instruction =
+            shader_relaxed_extended_instruction as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -69462,6 +69950,7 @@ unsafe impl Cast for SetStateFlagsIndirectCommandNVBuilder {
 /// A Vulkan struct that can be used to extend a [`ShaderCreateInfoEXT`].
 pub unsafe trait ExtendsShaderCreateInfoEXT: fmt::Debug {}
 unsafe impl ExtendsShaderCreateInfoEXT for PipelineShaderStageRequiredSubgroupSizeCreateInfo {}
+unsafe impl ExtendsShaderCreateInfoEXT for ValidationFeaturesEXT {}
 
 unsafe impl Cast for ShaderCreateInfoEXT {
     type Target = ShaderCreateInfoEXT;
@@ -69603,6 +70092,7 @@ unsafe impl<'b> Cast for ShaderCreateInfoEXTBuilder<'b> {
 /// A Vulkan struct that can be used to extend a [`ShaderModuleCreateInfo`].
 pub unsafe trait ExtendsShaderModuleCreateInfo: fmt::Debug {}
 unsafe impl ExtendsShaderModuleCreateInfo for ShaderModuleValidationCacheCreateInfoEXT {}
+unsafe impl ExtendsShaderModuleCreateInfo for ValidationFeaturesEXT {}
 
 unsafe impl Cast for ShaderModuleCreateInfo {
     type Target = ShaderModuleCreateInfo;

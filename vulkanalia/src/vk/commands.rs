@@ -4215,7 +4215,7 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(
                         _command_buffer: CommandBuffer,
-                        _location_info: *const RenderingInputAttachmentIndexInfoKHR,
+                        _input_attachment_index_info: *const RenderingInputAttachmentIndexInfoKHR,
                     ) {
                         panic!("could not load vkCmdSetRenderingInputAttachmentIndicesKHR")
                     }
