@@ -8137,6 +8137,69 @@ unsafe impl OutputChainStruct for PhysicalDeviceInvocationMaskFeaturesHUAWEI {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceLayeredApiPropertiesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceLayeredApiPropertiesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceLayeredApiPropertiesListKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceLayeredApiPropertiesListKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceLayeredApiVulkanPropertiesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceLayeredApiVulkanPropertiesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceLayeredDriverPropertiesMSFT {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_LAYERED_DRIVER_PROPERTIES_MSFT;
 
@@ -8427,6 +8490,48 @@ unsafe impl InputChainStruct for PhysicalDeviceMaintenance6PropertiesKHR {
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceMaintenance6PropertiesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceMaintenance7FeaturesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_MAINTENANCE_7_FEATURES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceMaintenance7FeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceMaintenance7PropertiesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceMaintenance7PropertiesKHR {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -10744,6 +10849,28 @@ unsafe impl InputChainStruct for PhysicalDeviceShaderQuadControlFeaturesKHR {
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceShaderQuadControlFeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next

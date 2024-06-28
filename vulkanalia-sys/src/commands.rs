@@ -1505,7 +1505,7 @@ pub type PFN_vkCmdSetRenderingAttachmentLocationsKHR = unsafe extern "system" fn
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetRenderingInputAttachmentIndicesKHR.html>
 pub type PFN_vkCmdSetRenderingInputAttachmentIndicesKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
-    _location_info: *const RenderingInputAttachmentIndexInfoKHR,
+    _input_attachment_index_info: *const RenderingInputAttachmentIndexInfoKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetRepresentativeFragmentTestEnableNV.html>
