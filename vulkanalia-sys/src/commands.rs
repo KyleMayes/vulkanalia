@@ -94,6 +94,10 @@ pub type PFN_vkAllocateMemory = unsafe extern "system" fn(
     _memory: *mut DeviceMemory,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkAntiLagUpdateAMD.html>
+pub type PFN_vkAntiLagUpdateAMD =
+    unsafe extern "system" fn(_device: Device, _data: *const AntiLagDataAMD);
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkBeginCommandBuffer.html>
 pub type PFN_vkBeginCommandBuffer = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,

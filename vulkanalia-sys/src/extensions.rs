@@ -79,6 +79,22 @@ pub const AMDX_SHADER_ENQUEUE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_AMD_anti_lag.html>
+#[allow(deprecated)]
+pub const AMD_ANTI_LAG_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_AMD_anti_lag"),
+    number: 477,
+    type_: "device",
+    author: "AMD",
+    contact: "Stu Smith",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_AMD_buffer_marker.html>
 #[allow(deprecated)]
 pub const AMD_BUFFER_MARKER_EXTENSION: Extension = Extension {
@@ -3055,7 +3071,7 @@ pub const KHR_COPY_COMMANDS2_EXTENSION: Extension = Extension {
     number: 338,
     type_: "device",
     author: "KHR",
-    contact: "Jeff Leger @jackohound",
+    contact: "Matthew Netsch @mnetsch",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -5673,6 +5689,7 @@ pub const NV_RAW_ACCESS_CHAINS_EXTENSION: Extension = Extension {
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_ray_tracing.html>
+#[deprecated(note = "deprecated in favor of `VK_KHR_ray_tracing_pipeline`")]
 #[allow(deprecated)]
 pub const NV_RAY_TRACING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_ray_tracing"),
@@ -5683,7 +5700,7 @@ pub const NV_RAY_TRACING_EXTENSION: Extension = Extension {
     platform: None,
     required_extensions: None,
     required_version: None,
-    deprecated_by: None,
+    deprecated_by: Some("VK_KHR_ray_tracing_pipeline"),
     obsoleted_by: None,
     promoted_to: None,
 };

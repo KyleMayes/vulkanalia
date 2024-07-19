@@ -458,6 +458,41 @@ unsafe impl InputChainStruct for AndroidSurfaceCreateInfoKHR {
     }
 }
 
+unsafe impl InputChainStruct for AntiLagDataAMD {
+    const TYPE: StructureType = StructureType::ANTI_LAG_DATA_AMD;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for AntiLagPresentationInfoAMD {
+    const TYPE: StructureType = StructureType::ANTI_LAG_PRESENTATION_INFO_AMD;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for AntiLagPresentationInfoAMD {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for ApplicationInfo {
     const TYPE: StructureType = StructureType::APPLICATION_INFO;
 
@@ -5591,6 +5626,27 @@ unsafe impl InputChainStruct for PhysicalDeviceAmigoProfilingFeaturesSEC {
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceAmigoProfilingFeaturesSEC {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceAntiLagFeaturesAMD {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceAntiLagFeaturesAMD {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next

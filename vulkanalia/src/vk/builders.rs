@@ -2847,6 +2847,144 @@ unsafe impl<'b> Cast for AndroidSurfaceCreateInfoKHRBuilder<'b> {
     }
 }
 
+unsafe impl Cast for AntiLagDataAMD {
+    type Target = AntiLagDataAMD;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for AntiLagDataAMD {
+    type Builder = AntiLagDataAMDBuilder<'b>;
+}
+
+/// A builder for a [`AntiLagDataAMD`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AntiLagDataAMDBuilder<'b> {
+    value: AntiLagDataAMD,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> AntiLagDataAMDBuilder<'b> {
+    #[inline]
+    pub fn mode(mut self, mode: AntiLagModeAMD) -> Self {
+        self.value.mode = mode;
+        self
+    }
+
+    #[inline]
+    pub fn max_fps(mut self, max_fps: u32) -> Self {
+        self.value.max_fps = max_fps;
+        self
+    }
+
+    #[inline]
+    pub fn presentation_info(
+        mut self,
+        presentation_info: &'b impl Cast<Target = AntiLagPresentationInfoAMD>,
+    ) -> Self {
+        self.value.presentation_info = presentation_info.as_ref();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AntiLagDataAMD {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for AntiLagDataAMDBuilder<'b> {
+    type Target = AntiLagDataAMD;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for AntiLagDataAMDBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for AntiLagDataAMDBuilder<'b> {
+    type Target = AntiLagDataAMD;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for AntiLagPresentationInfoAMD {
+    type Target = AntiLagPresentationInfoAMD;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for AntiLagPresentationInfoAMD {
+    type Builder = AntiLagPresentationInfoAMDBuilder;
+}
+
+/// A builder for a [`AntiLagPresentationInfoAMD`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AntiLagPresentationInfoAMDBuilder {
+    value: AntiLagPresentationInfoAMD,
+}
+
+impl AntiLagPresentationInfoAMDBuilder {
+    #[inline]
+    pub fn stage(mut self, stage: AntiLagStageAMD) -> Self {
+        self.value.stage = stage;
+        self
+    }
+
+    #[inline]
+    pub fn frame_index(mut self, frame_index: u64) -> Self {
+        self.value.frame_index = frame_index;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AntiLagPresentationInfoAMD {
+        self.value
+    }
+}
+
+impl ops::Deref for AntiLagPresentationInfoAMDBuilder {
+    type Target = AntiLagPresentationInfoAMD;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for AntiLagPresentationInfoAMDBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for AntiLagPresentationInfoAMDBuilder {
+    type Target = AntiLagPresentationInfoAMD;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 /// A Vulkan struct that can be used to extend a [`ApplicationInfo`].
 pub unsafe trait ExtendsApplicationInfo: fmt::Debug {}
 unsafe impl ExtendsApplicationInfo for ApplicationParametersEXT {}
@@ -13364,6 +13502,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceASTCDecodeFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAccelerationStructureFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAddressBindingReportFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAmigoProfilingFeaturesSEC {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceAntiLagFeaturesAMD {}
 unsafe impl ExtendsDeviceCreateInfo
     for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT
 {
@@ -33066,6 +33205,64 @@ unsafe impl Cast for PhysicalDeviceAmigoProfilingFeaturesSECBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceAntiLagFeaturesAMD {
+    type Target = PhysicalDeviceAntiLagFeaturesAMD;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceAntiLagFeaturesAMD {
+    type Builder = PhysicalDeviceAntiLagFeaturesAMDBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceAntiLagFeaturesAMD`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceAntiLagFeaturesAMDBuilder {
+    value: PhysicalDeviceAntiLagFeaturesAMD,
+}
+
+impl PhysicalDeviceAntiLagFeaturesAMDBuilder {
+    #[inline]
+    pub fn anti_lag(mut self, anti_lag: bool) -> Self {
+        self.value.anti_lag = anti_lag as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceAntiLagFeaturesAMD {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceAntiLagFeaturesAMDBuilder {
+    type Target = PhysicalDeviceAntiLagFeaturesAMD;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceAntiLagFeaturesAMDBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceAntiLagFeaturesAMDBuilder {
+    type Target = PhysicalDeviceAntiLagFeaturesAMD;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT {
     type Target = PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT;
 
@@ -39570,6 +39767,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceASTCDecodeFeaturesE
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAccelerationStructureFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAddressBindingReportFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAmigoProfilingFeaturesSEC {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceAntiLagFeaturesAMD {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT
 {

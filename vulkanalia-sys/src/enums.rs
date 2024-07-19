@@ -193,6 +193,72 @@ impl fmt::Debug for AccelerationStructureTypeKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAntiLagModeAMD.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct AntiLagModeAMD(i32);
+
+impl AntiLagModeAMD {
+    pub const DRIVER_CONTROL: Self = Self(0);
+    pub const ON: Self = Self(1);
+    pub const OFF: Self = Self(2);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for AntiLagModeAMD {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "DRIVER_CONTROL"),
+            1 => write!(f, "ON"),
+            2 => write!(f, "OFF"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAntiLagStageAMD.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct AntiLagStageAMD(i32);
+
+impl AntiLagStageAMD {
+    pub const INPUT: Self = Self(0);
+    pub const PRESENT: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for AntiLagStageAMD {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "INPUT"),
+            1 => write!(f, "PRESENT"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAttachmentLoadOp.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -6228,6 +6294,9 @@ impl StructureType {
     pub const IMAGE_SUBRESOURCE_2_KHR: Self = Self(1000338003);
     pub const PIPELINE_CREATE_FLAGS_2_CREATE_INFO_KHR: Self = Self(1000470005);
     pub const BUFFER_USAGE_FLAGS_2_CREATE_INFO_KHR: Self = Self(1000470006);
+    pub const PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD: Self = Self(1000476000);
+    pub const ANTI_LAG_DATA_AMD: Self = Self(1000476001);
+    pub const ANTI_LAG_PRESENTATION_INFO_AMD: Self = Self(1000476002);
     pub const PHYSICAL_DEVICE_RAY_TRACING_POSITION_FETCH_FEATURES_KHR: Self = Self(1000481000);
     pub const PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT: Self = Self(1000482000);
     pub const PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT: Self = Self(1000482001);
@@ -7317,6 +7386,9 @@ impl fmt::Debug for StructureType {
             1000338003 => write!(f, "IMAGE_SUBRESOURCE_2_KHR"),
             1000470005 => write!(f, "PIPELINE_CREATE_FLAGS_2_CREATE_INFO_KHR"),
             1000470006 => write!(f, "BUFFER_USAGE_FLAGS_2_CREATE_INFO_KHR"),
+            1000476000 => write!(f, "PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD"),
+            1000476001 => write!(f, "ANTI_LAG_DATA_AMD"),
+            1000476002 => write!(f, "ANTI_LAG_PRESENTATION_INFO_AMD"),
             1000481000 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_POSITION_FETCH_FEATURES_KHR"),
             1000482000 => write!(f, "PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT"),
             1000482001 => write!(f, "PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT"),
