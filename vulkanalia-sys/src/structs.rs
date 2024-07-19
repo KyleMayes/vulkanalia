@@ -806,6 +806,52 @@ impl Default for AndroidSurfaceCreateInfoKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAntiLagDataAMD.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct AntiLagDataAMD {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub mode: AntiLagModeAMD,
+    pub max_fps: u32,
+    pub presentation_info: *const AntiLagPresentationInfoAMD,
+}
+
+impl Default for AntiLagDataAMD {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::ANTI_LAG_DATA_AMD,
+            next: ptr::null(),
+            mode: AntiLagModeAMD::default(),
+            max_fps: u32::default(),
+            presentation_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAntiLagPresentationInfoAMD.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct AntiLagPresentationInfoAMD {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub stage: AntiLagStageAMD,
+    pub frame_index: u64,
+}
+
+impl Default for AntiLagPresentationInfoAMD {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::ANTI_LAG_PRESENTATION_INFO_AMD,
+            next: ptr::null_mut(),
+            stage: AntiLagStageAMD::default(),
+            frame_index: u64::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkApplicationInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9729,6 +9775,26 @@ impl Default for PhysicalDeviceAmigoProfilingFeaturesSEC {
             s_type: StructureType::PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC,
             next: ptr::null_mut(),
             amigo_profiling: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceAntiLagFeaturesAMD.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceAntiLagFeaturesAMD {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub anti_lag: Bool32,
+}
+
+impl Default for PhysicalDeviceAntiLagFeaturesAMD {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD,
+            next: ptr::null_mut(),
+            anti_lag: Bool32::default(),
         }
     }
 }

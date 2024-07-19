@@ -35,6 +35,7 @@ pub struct DeviceCommands {
     pub allocate_command_buffers: PFN_vkAllocateCommandBuffers,
     pub allocate_descriptor_sets: PFN_vkAllocateDescriptorSets,
     pub allocate_memory: PFN_vkAllocateMemory,
+    pub anti_lag_update_amd: PFN_vkAntiLagUpdateAMD,
     pub begin_command_buffer: PFN_vkBeginCommandBuffer,
     pub bind_acceleration_structure_memory_nv: PFN_vkBindAccelerationStructureMemoryNV,
     pub bind_buffer_memory: PFN_vkBindBufferMemory,
@@ -803,6 +804,20 @@ impl DeviceCommands {
                         _memory: *mut DeviceMemory,
                     ) -> Result {
                         panic!("could not load vkAllocateMemory")
+                    }
+                    fallback
+                }
+            },
+            anti_lag_update_amd: {
+                let value = loader(b"vkAntiLagUpdateAMD\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _data: *const AntiLagDataAMD,
+                    ) {
+                        panic!("could not load vkAntiLagUpdateAMD")
                     }
                     fallback
                 }

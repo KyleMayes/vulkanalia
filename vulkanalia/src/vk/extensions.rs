@@ -166,6 +166,21 @@ pub trait AmdxShaderEnqueueExtension: DeviceV1_0 {
 #[cfg(feature = "provisional")]
 impl AmdxShaderEnqueueExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_AMD_anti_lag.html>
+pub trait AmdAntiLagExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = AMD_ANTI_LAG_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkAntiLagUpdateAMD.html>
+    #[inline]
+    unsafe fn anti_lag_update_amd(&self, data: &AntiLagDataAMD) {
+        let __result = (self.commands().anti_lag_update_amd)(self.handle(), data);
+    }
+}
+
+impl AmdAntiLagExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_AMD_buffer_marker.html>
 pub trait AmdBufferMarkerExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -12513,6 +12528,7 @@ pub trait NvRawAccessChainsExtension: DeviceV1_0 {
 impl NvRawAccessChainsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_ray_tracing.html>
+#[deprecated(note = "deprecated in favor of `VK_KHR_ray_tracing_pipeline`")]
 pub trait NvRayTracingExtension: DeviceV1_0 {
     /// The metadata for this extension.
     #[allow(deprecated)]
@@ -12781,6 +12797,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
     }
 }
 
+#[allow(deprecated)]
 impl NvRayTracingExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_ray_tracing_invocation_reorder.html>
