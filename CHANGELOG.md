@@ -2,6 +2,7 @@
 
 ### Added
 - Added `ResultExt` trait
+- Added `Instance::version` method
 
 ## [0.24.0] - 2024-07-20
 

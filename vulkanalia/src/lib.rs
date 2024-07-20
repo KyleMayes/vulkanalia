@@ -276,12 +276,14 @@ impl Entry {
         let handle = EntryV1_0::create_instance(self, info, allocator)?;
         let load = |n| (self.get_instance)(handle, n);
         let commands = InstanceCommands::load(load);
+        let version = self.version()?;
         let extensions = get_names(info.enabled_extension_count, info.enabled_extension_names);
         let layers = get_names(info.enabled_layer_count, info.enabled_layer_names);
         Ok(Instance {
             get_device: self.get_device,
             handle,
             commands,
+            version,
             extensions,
             layers,
         })
@@ -303,11 +305,18 @@ pub struct Instance {
     get_device: vk::PFN_vkGetDeviceProcAddr,
     handle: vk::Instance,
     commands: InstanceCommands,
+    version: Version,
     extensions: BTreeSet<vk::ExtensionName>,
     layers: BTreeSet<vk::ExtensionName>,
 }
 
 impl Instance {
+    /// Gets the version for this Vulkan instance.
+    #[inline]
+    pub fn version(&self) -> Version {
+        self.version
+    }
+
     /// Gets the loaded extensions for this Vulkan instance.
     #[inline]
     pub fn extensions(&self) -> &BTreeSet<vk::ExtensionName> {
