@@ -2,6 +2,7 @@
 
 members = [
     "examples",
+    "ext/vma",
     "tutorial",
     "tutorial/book/preprocessor",
     "vulkanalia",
