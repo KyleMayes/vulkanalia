@@ -113,6 +113,22 @@ pub type VkResult<T> = Result<T, vk::ErrorCode>;
 /// The result of a executing a fallible Vulkan command with multiple success codes.
 pub type VkSuccessResult<T> = Result<(T, vk::SuccessCode), vk::ErrorCode>;
 
+/// An extension trait for [`vk::Result`].
+pub trait ResultExt {
+    /// Converts a [`vk::Result`] into a [`VkResult`].
+    fn result(self) -> VkResult<()>;
+}
+
+impl ResultExt for vk::Result {
+    #[inline]
+    fn result(self) -> VkResult<()> {
+        match self {
+            vk::Result::SUCCESS => Ok(()),
+            error => Err(error.into()),
+        }
+    }
+}
+
 /// A Vulkan version.
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Version {
