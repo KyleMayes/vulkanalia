@@ -1,4 +1,4 @@
-## [0.24.0] - UNRELEASED
+## [0.24.0] - 2024-07-20
 
 ### Changed
 - Removed `LoaderError` implementation for `String` and added `StringLoaderError` struct
