@@ -209,10 +209,11 @@ impl Entry {
     pub unsafe fn new(loader: impl Loader + 'static) -> Result<Self, Box<dyn LoaderError>> {
         let loader = Arc::new(loader);
 
+        type F = extern "system" fn();
         let raw = loader.load(b"vkGetInstanceProcAddr")?;
-        let get_instance = mem::transmute::<_, vk::PFN_vkGetInstanceProcAddr>(raw);
+        let get_instance = mem::transmute::<F, vk::PFN_vkGetInstanceProcAddr>(raw);
         let raw = loader.load(b"vkGetDeviceProcAddr")?;
-        let get_device = mem::transmute::<_, vk::PFN_vkGetDeviceProcAddr>(raw);
+        let get_device = mem::transmute::<F, vk::PFN_vkGetDeviceProcAddr>(raw);
 
         let load = |n| get_instance(vk::Instance::null(), n);
         let commands = EntryCommands::load(load);
