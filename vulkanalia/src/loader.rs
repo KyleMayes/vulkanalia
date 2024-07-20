@@ -125,8 +125,8 @@ mod libloading_loader {
         #[inline]
         unsafe fn load(&self, name: &[u8]) -> Result<extern "system" fn(), Box<dyn LoaderError>> {
             let symbol: Symbol<Option<extern "C" fn()>> = self.0.get(name)?;
-            let symbol = symbol.lift_option().ok_or("missing function")?;
-            Ok(mem::transmute(symbol))
+            let pointer = symbol.try_as_raw_ptr().ok_or("missing function pointer")?;
+            Ok(mem::transmute::<*mut core::ffi::c_void, extern "system" fn()>(pointer))
         }
     }
 }

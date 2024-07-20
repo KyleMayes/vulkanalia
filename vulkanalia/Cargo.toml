@@ -30,7 +30,7 @@ window = ["raw-window-handle", "cocoa", "metal", "objc"]
 
 [dependencies]
 
-libloading = { version = "0.8", optional = true }
+libloading = { version = "0.8.5", optional = true }
 raw-window-handle = { version = "0.6", optional = true }
 vulkanalia-sys = { version = "0.23", path = "../vulkanalia-sys", default-features = false }
 

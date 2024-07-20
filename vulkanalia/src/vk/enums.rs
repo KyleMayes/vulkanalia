@@ -11,6 +11,7 @@
     clippy::bad_bit_mask,
     clippy::let_unit_value,
     clippy::missing_safety_doc,
+    clippy::missing_transmute_annotations,
     clippy::too_many_arguments,
     clippy::type_complexity,
     clippy::unnecessary_cast,
