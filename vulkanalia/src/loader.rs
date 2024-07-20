@@ -3,6 +3,7 @@
 //! Vulkan function loaders.
 
 use alloc::boxed::Box;
+use alloc::string::String;
 
 #[cfg(all(feature = "no_std_error", not(feature = "std")))]
 use core::error;
@@ -37,19 +38,31 @@ pub trait LoaderError: error::Error + Send + Sync + 'static {}
 #[cfg(not(any(feature = "std", feature = "no_std_error")))]
 pub trait LoaderError: core::fmt::Debug + core::fmt::Display + Send + Sync + 'static {}
 
-#[cfg(not(any(feature = "std", feature = "no_std_error")))]
-impl LoaderError for alloc::string::String {}
+/// A string [`LoaderError`].
+#[derive(Clone, Debug)]
+pub struct StringLoaderError(String);
+
+impl core::fmt::Display for StringLoaderError {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.write_str(&self.0)
+    }
+}
+
+#[cfg(any(feature = "std", feature = "no_std_error"))]
+impl error::Error for StringLoaderError {}
+
+impl LoaderError for StringLoaderError {}
 
 impl<'a> From<&'a str> for Box<dyn LoaderError> {
-    #[cfg(any(feature = "std", feature = "no_std_error"))]
-    fn from(value: &'a str) -> Self {
-        value.into()
-    }
-
-    #[cfg(not(any(feature = "std", feature = "no_std_error")))]
     fn from(value: &'a str) -> Self {
         use alloc::string::ToString;
-        Box::new(value.to_string()) as Box<dyn LoaderError>
+        Box::new(StringLoaderError(value.to_string())) as Box<dyn LoaderError>
+    }
+}
+
+impl From<String> for Box<dyn LoaderError> {
+    fn from(value: String) -> Self {
+        Box::new(StringLoaderError(value)) as Box<dyn LoaderError>
     }
 }
 
