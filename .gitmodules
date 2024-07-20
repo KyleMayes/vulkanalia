@@ -1,0 +1,6 @@
+[submodule "ext/vma/vendor/Vulkan-Headers"]
+	path = ext/vma/vendor/Vulkan-Headers
+	url = https://github.com/KhronosGroup/Vulkan-Headers
+[submodule "ext/vma/vendor/VulkanMemoryAllocator"]
+	path = ext/vma/vendor/VulkanMemoryAllocator
+	url = https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator

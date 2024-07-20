@@ -1,0 +1,38 @@
+[package]
+
+edition = "2021"
+
+name = "vulkanalia-vma"
+authors = ["Kyle Mayes <kyle@mayeses.com>"]
+
+version = "0.1.0"
+
+readme = "README.md"
+license = "Apache-2.0"
+
+description = "An integration of Vulkan Memory Allocator with vulkanalia."
+
+documentation = "https://docs.rs/vulkanalia-vma"
+repository = "https://github.com/KyleMayes/vulkanalia"
+
+keywords = ["graphics", "vulkan"]
+categories = ["graphics"]
+
+build = "build.rs"
+
+[features]
+
+default = []
+
+bind = ["bindgen", "doxygen-rs"]
+
+[dependencies]
+
+bitflags = "2"
+vulkanalia = { path = "../../vulkanalia", version = "0.24", default-features = false }
+
+[build-dependencies]
+
+bindgen = { version = "0.69", optional = true }
+cc = "1"
+doxygen-rs = { version = "0.4", optional = true }
