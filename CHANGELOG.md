@@ -1,3 +1,8 @@
+## [0.25.0] - UNRELEASED
+
+### Added
+- Added `ResultExt` trait
+
 ## [0.24.0] - 2024-07-20
 
 ### Changed
