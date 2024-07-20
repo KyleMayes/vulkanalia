@@ -1,6 +1,6 @@
 [package]
 
-edition = "2018"
+edition = "2021"
 
 name = "vulkanalia"
 authors = ["Kyle Mayes <kyle@mayeses.com>"]
