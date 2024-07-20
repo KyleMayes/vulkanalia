@@ -1,5 +1,8 @@
 ## [0.24.0] - UNRELEASED
 
+### Changed
+- Removed `LoaderError` implementation for `String` and added `StringLoaderError` struct
+
 ### Bindings Updates
 - [Fixes to proposal document markup and for Antora](https://github.com/KhronosGroup/Vulkan-Docs/commit/08d90ab2b71c21e8507fc0fb80461eaafa844d1c)
 - [Update proposals links to current spec / refpages](https://github.com/KhronosGroup/Vulkan-Docs/commit/7ccda9da169c801c91e690b178c6b00f79cd02f3)
