@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUST_LOG: info
-      RUST_VERSION: 1.65.0
+      RUST_VERSION: 1.70.0
     steps:
       # Checkout
       - name: Checkout Repository
@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUST_LOG: info
-      RUST_VERSION: 1.65.0
+      RUST_VERSION: 1.70.0
     steps:
       # Checkout
       - name: Checkout Repository
@@ -75,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUST_LOG: info
-      RUST_VERSION: 1.65.0
+      RUST_VERSION: 1.70.0
     steps:
       # Checkout
       - name: Checkout Repository

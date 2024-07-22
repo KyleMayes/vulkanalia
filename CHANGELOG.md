@@ -1,5 +1,8 @@
 ## [0.25.0] - UNRELEASED
 
+### Changed
+- Bumped MSRV to 1.70
+
 ### Added
 - Added `ResultExt` trait
 - Added `Instance::version` method
