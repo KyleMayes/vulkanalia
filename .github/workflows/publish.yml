@@ -27,7 +27,9 @@ jobs:
     steps:
       # Checkout
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          submodules: true
       # Dependencies
       - name: Install Java
         uses: actions/setup-java@v1
