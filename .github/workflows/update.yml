@@ -26,7 +26,9 @@ jobs:
     steps:
       # Checkout
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          submodules: true
       # Dependencies
       - name: Install LLVM and Clang
         uses: KyleMayes/install-llvm-action@v1
