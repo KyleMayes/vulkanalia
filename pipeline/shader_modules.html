@@ -247,6 +247,11 @@ pause
 /home/user/VulkanSDK/x.x.x.x/x86_64/bin/glslc shader.frag -o frag.spv
 </code></pre>
 <p>Replace the path to <code>glslc</code> with the path to where you installed the Vulkan SDK. Make the script executable with <code>chmod +x compile.sh</code> and run it.</p>
+<p><strong>macOS</strong></p>
+<p>Create a <code>compile.sh</code> file with the following contents:</p>
+<pre><code class="language-bash">/Users/user/VulkanSDK/x.x.x.x/macOS/bin/glslc shaders/shader.vert -o vert.spv
+/Users/user/VulkanSDK/x.x.x.x/macOS/bin/glslc shaders/shader.frag -o frag.spv
+</code></pre>
 <p><strong>End of platform-specific instructions</strong></p>
 <p>These two commands tell the compiler to read the GLSL source file and output a SPIR-V bytecode file using the <code>-o</code> (output) flag.</p>
 <p>If your shader contains a syntax error then the compiler will tell you the line number and problem, as you would expect. Try leaving out a semicolon for example and run the compile script again. Also try running the compiler without any arguments to see what kinds of flags it supports. It can, for example, also output the bytecode into a human-readable format so you can see exactly what your shader is doing and any optimizations that have been applied at this stage.</p>
