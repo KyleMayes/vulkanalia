@@ -169,6 +169,15 @@ Create a `compile.sh` file with the following contents:
 
 Replace the path to `glslc` with the path to where you installed the Vulkan SDK. Make the script executable with `chmod +x compile.sh` and run it.
 
+**macOS**
+
+Create a `compile.sh` file with the following contents:
+
+```bash
+/Users/user/VulkanSDK/x.x.x.x/macOS/bin/glslc shaders/shader.vert -o vert.spv
+/Users/user/VulkanSDK/x.x.x.x/macOS/bin/glslc shaders/shader.frag -o frag.spv
+```
+
 **End of platform-specific instructions**
 
 These two commands tell the compiler to read the GLSL source file and output a SPIR-V bytecode file using the `-o` (output) flag.
