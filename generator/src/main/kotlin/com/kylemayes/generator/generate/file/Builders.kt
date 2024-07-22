@@ -71,7 +71,8 @@ pub trait HasBuilder<'b> {
 }
 
 /// Adds a base pointer chain with a new non-empty pointer chain.
-fn merge(base: *mut c_void, next: NonNull<BaseOutStructure>) -> *mut c_void {
+#[doc(hidden)]
+pub fn merge(base: *mut c_void, next: NonNull<BaseOutStructure>) -> *mut c_void {
     if base.is_null() {
         return next.as_ptr().cast();
     }
