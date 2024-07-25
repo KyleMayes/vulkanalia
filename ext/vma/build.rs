@@ -30,6 +30,7 @@ fn build() {
             .flag("-Wno-nullability-completeness")
             .flag("-Wno-reorder")
             .flag("-Wno-type-limits")
+            .flag("-Wno-unused-function")
             .flag("-Wno-unused-parameter")
             .flag("-Wno-unused-private-field")
             .flag("-Wno-unused-variable");
