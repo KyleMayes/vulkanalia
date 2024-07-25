@@ -544,7 +544,11 @@ unsafe fn create_instance(window: &Window, entry: &Entry, data: &mut AppData) ->
 
     let mut debug_info = vk::DebugUtilsMessengerCreateInfoEXT::builder()
         .message_severity(vk::DebugUtilsMessageSeverityFlagsEXT::all())
-        .message_type(vk::DebugUtilsMessageTypeFlagsEXT::all())
+        .message_type(
+            vk::DebugUtilsMessageTypeFlagsEXT::GENERAL
+                | vk::DebugUtilsMessageTypeFlagsEXT::VALIDATION
+                | vk::DebugUtilsMessageTypeFlagsEXT::PERFORMANCE,
+        )
         .user_callback(Some(debug_callback));
 
     if VALIDATION_ENABLED {
