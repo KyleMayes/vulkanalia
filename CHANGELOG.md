@@ -7,6 +7,9 @@
 - Added `ResultExt` trait
 - Added `Instance::version` method
 
+### Fixed
+- Fixed `no_std_error` feature not compiling
+
 ## [0.24.0] - 2024-07-20
 
 ### Changed

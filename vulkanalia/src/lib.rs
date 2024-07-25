@@ -55,7 +55,7 @@
 //! ```
 
 #![cfg_attr(not(feature = "std"), no_std)]
-#![cfg_attr(feature = "core_error", feature(no_std_error))]
+#![cfg_attr(feature = "no_std_error", feature(error_in_core))]
 
 extern crate alloc;
 
