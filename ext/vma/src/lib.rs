@@ -12,6 +12,7 @@ mod allocator;
 mod enums;
 mod flags;
 mod pool;
+mod r#virtual;
 
 /// Raw bindings to VMA.
 pub mod vma;
@@ -21,3 +22,4 @@ pub use self::allocator::*;
 pub use self::enums::*;
 pub use self::flags::*;
 pub use self::pool::*;
+pub use self::r#virtual::*;
