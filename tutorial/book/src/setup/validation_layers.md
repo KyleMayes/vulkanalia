@@ -192,7 +192,11 @@ unsafe fn create_instance(
     if VALIDATION_ENABLED {
         let debug_info = vk::DebugUtilsMessengerCreateInfoEXT::builder()
             .message_severity(vk::DebugUtilsMessageSeverityFlagsEXT::all())
-            .message_type(vk::DebugUtilsMessageTypeFlagsEXT::all())
+            .message_type(
+                vk::DebugUtilsMessageTypeFlagsEXT::GENERAL
+                    | vk::DebugUtilsMessageTypeFlagsEXT::VALIDATION
+                    | vk::DebugUtilsMessageTypeFlagsEXT::PERFORMANCE,
+            )
             .user_callback(Some(debug_callback));
 
         data.messenger = instance.create_debug_utils_messenger_ext(&debug_info, None)?;
@@ -202,7 +206,11 @@ unsafe fn create_instance(
 }
 ```
 
-> **Note:** Calling the `all` static method on a set of Vulkan flags (e.g., `vk::DebugUtilsMessageTypeFlagsEXT::all()` as in the above example) will return a set of flags with all of the bits set for the flags known by `vulkanalia`. This introduces the possibility that if the application uses an implementation of Vulkan older than the latest version of Vulkan that `vulkanalia` supports, this set of flags could include flags that aren't known by the Vulkan implementation in use by the application. This shouldn't cause any issues with the functionality of the application, but you might see some validation errors. If you encounter warnings about unknown flags because of these debug flags, you can avoid them by upgrading your Vulkan SDK to the latest version (or directly specifying the supported flags).
+> **Note:** Calling the `all` static method on a set of Vulkan flags (e.g., `vk::DebugUtilsMessageSeverityFlagsEXT::all()` as in the above code) will, as the name implies, return a set of flags containing all of the flags of that type known by `vulkanalia`. A complete set of flags may contain flags that are only valid when certain extensions are enabled or flags added by a newer version of Vulkan than the one you are using/targeting.
+>
+> In the above code we've explicitly listed the `vk::DebugUtilsMessageTypeFlagsEXT` flags we want because that set of flags contains a flag (`vk::DebugUtilsMessageTypeFlagsEXT::DEVICE_ADDRESS_BINDING`) that is only valid when [a certain extension is enabled](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_EXT_device_address_binding_report.html).
+>
+> In most cases using unsupported flags shouldn't cause any errors or changes in the behavior of your application, but it definitely will result in validation errors if you have the validation layers enabled (as we are aiming to do in this chapter).
 
 We have first extracted our Vulkan instance out of the return expression so we can use it to add our debug callback.
 
@@ -276,7 +284,11 @@ let mut info = vk::InstanceCreateInfo::builder()
 
 let mut debug_info = vk::DebugUtilsMessengerCreateInfoEXT::builder()
     .message_severity(vk::DebugUtilsMessageSeverityFlagsEXT::all())
-    .message_type(vk::DebugUtilsMessageTypeFlagsEXT::all())
+    .message_type(
+        vk::DebugUtilsMessageTypeFlagsEXT::GENERAL
+            | vk::DebugUtilsMessageTypeFlagsEXT::VALIDATION
+            | vk::DebugUtilsMessageTypeFlagsEXT::PERFORMANCE,
+    )
     .user_callback(Some(debug_callback));
 
 if VALIDATION_ENABLED {
