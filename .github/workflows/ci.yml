@@ -39,7 +39,7 @@ jobs:
           toolchain: ${{ env.RUST_VERSION }}
       # Test
       - name: Cargo Test
-        run: cargo test --verbose --all-features
+        run: cargo test
       # Build (features)
       - name: Cargo Build (vulkanalia-sys/no_std)
         run: cargo build --manifest-path vulkanalia-sys/Cargo.toml --no-default-features
