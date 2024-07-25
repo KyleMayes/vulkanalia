@@ -55,8 +55,7 @@ impl LoaderError for StringLoaderError {}
 
 impl<'a> From<&'a str> for Box<dyn LoaderError> {
     fn from(value: &'a str) -> Self {
-        use alloc::string::ToString;
-        Box::new(StringLoaderError(value.to_string())) as Box<dyn LoaderError>
+        Box::new(StringLoaderError(value.into())) as Box<dyn LoaderError>
     }
 }
 
