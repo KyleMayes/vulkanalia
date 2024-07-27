@@ -1889,13 +1889,6 @@ unsafe impl InputChainStruct for DescriptorBufferBindingInfoEXT {
     }
 }
 
-unsafe impl OutputChainStruct for DescriptorBufferBindingInfoEXT {
-    #[inline]
-    fn next_mut(&self) -> *mut c_void {
-        self.next
-    }
-}
-
 unsafe impl InputChainStruct for DescriptorBufferBindingPushDescriptorBufferHandleEXT {
     const TYPE: StructureType =
         StructureType::DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT;
@@ -1907,13 +1900,6 @@ unsafe impl InputChainStruct for DescriptorBufferBindingPushDescriptorBufferHand
 
     #[inline]
     fn next(&self) -> *const c_void {
-        self.next
-    }
-}
-
-unsafe impl OutputChainStruct for DescriptorBufferBindingPushDescriptorBufferHandleEXT {
-    #[inline]
-    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }

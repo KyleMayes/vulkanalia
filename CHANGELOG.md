@@ -10,6 +10,9 @@
 ### Fixed
 - Fixed `no_std_error` feature not compiling
 
+### Bindings Updates
+- [July 26, 2024 Vulkan 1.3.292 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/e090b1020fb9636b752e73adfc82a3c595fb6615)
+
 ## [0.24.0] - 2024-07-20
 
 ### Changed
