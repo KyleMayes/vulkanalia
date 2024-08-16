@@ -13517,6 +13517,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceBufferDeviceAddressFeature
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoherentMemoryFeaturesAMD {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceColorWriteEnableFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCommandBufferInheritanceFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceComputeShaderDerivativesFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceConditionalRenderingFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
@@ -34118,6 +34119,64 @@ unsafe impl Cast for PhysicalDeviceColorWriteEnableFeaturesEXTBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceCommandBufferInheritanceFeaturesNV {
+    type Target = PhysicalDeviceCommandBufferInheritanceFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceCommandBufferInheritanceFeaturesNV {
+    type Builder = PhysicalDeviceCommandBufferInheritanceFeaturesNVBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceCommandBufferInheritanceFeaturesNV`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceCommandBufferInheritanceFeaturesNVBuilder {
+    value: PhysicalDeviceCommandBufferInheritanceFeaturesNV,
+}
+
+impl PhysicalDeviceCommandBufferInheritanceFeaturesNVBuilder {
+    #[inline]
+    pub fn command_buffer_inheritance(mut self, command_buffer_inheritance: bool) -> Self {
+        self.value.command_buffer_inheritance = command_buffer_inheritance as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceCommandBufferInheritanceFeaturesNV {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceCommandBufferInheritanceFeaturesNVBuilder {
+    type Target = PhysicalDeviceCommandBufferInheritanceFeaturesNV;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceCommandBufferInheritanceFeaturesNVBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceCommandBufferInheritanceFeaturesNVBuilder {
+    type Target = PhysicalDeviceCommandBufferInheritanceFeaturesNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceComputeShaderDerivativesFeaturesNV {
     type Target = PhysicalDeviceComputeShaderDerivativesFeaturesNV;
 
@@ -39785,6 +39844,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceBufferDeviceAddress
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCoherentMemoryFeaturesAMD {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceColorWriteEnableFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCommandBufferInheritanceFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceComputeShaderDerivativesFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceConditionalRenderingFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrixFeaturesKHR {}

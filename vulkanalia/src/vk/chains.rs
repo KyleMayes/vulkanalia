@@ -5899,6 +5899,28 @@ unsafe impl OutputChainStruct for PhysicalDeviceColorWriteEnableFeaturesEXT {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceCommandBufferInheritanceFeaturesNV {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceCommandBufferInheritanceFeaturesNV {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceComputeShaderDerivativesFeaturesNV {
     const TYPE: StructureType =
         StructureType::PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV;
