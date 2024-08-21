@@ -10069,6 +10069,26 @@ impl Default for PhysicalDeviceColorWriteEnableFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceCommandBufferInheritanceFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub command_buffer_inheritance: Bool32,
+}
+
+impl Default for PhysicalDeviceCommandBufferInheritanceFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV,
+            next: ptr::null_mut(),
+            command_buffer_inheritance: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
