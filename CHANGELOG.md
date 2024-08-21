@@ -12,6 +12,9 @@
 
 ### Bindings Updates
 - [July 26, 2024 Vulkan 1.3.292 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/e090b1020fb9636b752e73adfc82a3c595fb6615)
+- [Merge equivalent require blocks (#2406)](https://github.com/KhronosGroup/Vulkan-Docs/commit/8f60e57622707a0555cf79a83275c3c5e6dfa146)
+- [August 16, 2024 Vulkan 1.3.293 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/59dc3a34d2c3a6704cc569a82a2798fae337367c)
+- [Reserve extension 603 (#2416)](https://github.com/KhronosGroup/Vulkan-Docs/commit/306edf6a920ae372d5134424fcc9c009c31e0760)
 
 ## [0.24.0] - 2024-07-20
 

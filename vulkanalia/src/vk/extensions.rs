@@ -11042,6 +11042,15 @@ pub trait NvClipSpaceWScalingExtension: DeviceV1_0 {
 
 impl NvClipSpaceWScalingExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_command_buffer_inheritance.html>
+pub trait NvCommandBufferInheritanceExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_COMMAND_BUFFER_INHERITANCE_EXTENSION;
+}
+
+impl NvCommandBufferInheritanceExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_compute_shader_derivatives.html>
 pub trait NvComputeShaderDerivativesExtension: DeviceV1_0 {
     /// The metadata for this extension.

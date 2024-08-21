@@ -5027,6 +5027,22 @@ pub const NV_CLIP_SPACE_W_SCALING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_command_buffer_inheritance.html>
+#[allow(deprecated)]
+pub const NV_COMMAND_BUFFER_INHERITANCE_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_command_buffer_inheritance"),
+    number: 560,
+    type_: "device",
+    author: "NV",
+    contact: "Lujin Wang @lujinwangnv",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_compute_shader_derivatives.html>
 #[allow(deprecated)]
 pub const NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION: Extension = Extension {
