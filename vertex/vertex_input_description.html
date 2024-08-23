@@ -189,7 +189,7 @@ impl Vertex {
 <p>Now use the <code>Vertex</code> structure to specify a list of vertex data. We're using exactly the same position and color values as before, but now they're combined into one array of vertices. This is known as <em>interleaving</em> vertex attributes.</p>
 <h2 id="binding-descriptions"><a class="header" href="#binding-descriptions">Binding descriptions</a></h2>
 <p>The next step is to tell Vulkan how to pass this data format to the vertex shader once it's been uploaded into GPU memory. There are two types of structures needed to convey this information.</p>
-<p>The first structure is <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.VertexInputBindingDescription.html"><code class="hljs">vk::VertexInputBindingDescription</code></a> and we'll add a method to the <code>Vertex</code> struct to populate it with the right data.</p>
+<p>The first structure is <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.VertexInputBindingDescription.html"><code class="hljs">vk::VertexInputBindingDescription</code></a> and we'll add a method to the <code>Vertex</code> struct to populate it with the right data.</p>
 <pre><code class="language-rust noplaypen">impl Vertex {
     fn binding_description() -&gt; vk::VertexInputBindingDescription {
     }
@@ -204,12 +204,12 @@ impl Vertex {
 </code></pre>
 <p>All of our per-vertex data is packed together in one array, so we're only going to have one binding. The <code>binding</code> parameter specifies the index of the binding in the array of bindings. The <code>stride</code> parameter specifies the number of bytes from one entry to the next, and the <code>input_rate</code> parameter can have one of the following values:</p>
 <ul>
-<li><a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.VertexInputRate.html#associatedconstant.VERTEX"><code class="hljs">vk::VertexInputRate::VERTEX</code></a> – Move to the next data entry after each vertex</li>
-<li><a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.VertexInputRate.html#associatedconstant.INSTANCE"><code class="hljs">vk::VertexInputRate::INSTANCE</code></a> – Move to the next data entry after each instance</li>
+<li><a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.VertexInputRate.html#associatedconstant.VERTEX"><code class="hljs">vk::VertexInputRate::VERTEX</code></a> – Move to the next data entry after each vertex</li>
+<li><a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.VertexInputRate.html#associatedconstant.INSTANCE"><code class="hljs">vk::VertexInputRate::INSTANCE</code></a> – Move to the next data entry after each instance</li>
 </ul>
 <p>We're not going to use instanced rendering, so we'll stick to per-vertex data.</p>
 <h2 id="attribute-descriptions"><a class="header" href="#attribute-descriptions">Attribute descriptions</a></h2>
-<p>The second structure that describes how to handle vertex input is <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.VertexInputAttributeDescription.html"><code class="hljs">vk::VertexInputAttributeDescription</code></a>. We're going to add another helper method to <code>Vertex</code> to fill in these structs.</p>
+<p>The second structure that describes how to handle vertex input is <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.VertexInputAttributeDescription.html"><code class="hljs">vk::VertexInputAttributeDescription</code></a>. We're going to add another helper method to <code>Vertex</code> to fill in these structs.</p>
 <pre><code class="language-rust noplaypen">impl Vertex {
     fn attribute_descriptions() -&gt; [vk::VertexInputAttributeDescription; 2] {
     }
@@ -226,16 +226,16 @@ impl Vertex {
 <p>The <code>binding</code> parameter tells Vulkan from which binding the per-vertex data comes. The <code>location</code> parameter references the <code>location</code> directive of the input in the vertex shader. The input in the vertex shader with location <code>0</code> is the position, which has two 32-bit float components.</p>
 <p>The <code>format</code> parameter describes the type of data for the attribute. A bit confusingly, the formats are specified using the same enumeration as color formats. The following shader types and formats are commonly used together:</p>
 <ul>
-<li><code>f32</code> – <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32_SFLOAT"><code class="hljs">vk::Format::R32_SFLOAT</code></a> </li>
-<li><code>cgmath::Vector2&lt;f32&gt;</code> (our <code>Vec2</code>) – <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SFLOAT"><code class="hljs">vk::Format::R32G32_SFLOAT</code></a> </li>
-<li><code>cgmath::Vector3&lt;f32&gt;</code> (our <code>Vec3</code>) – <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32_SFLOAT"><code class="hljs">vk::Format::R32G32B32_SFLOAT</code></a> </li>
-<li><code>cgmath::Vector4&lt;f32&gt;</code> – <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_SFLOAT"><code class="hljs">vk::Format::R32G32B32A32_SFLOAT</code></a> </li>
+<li><code>f32</code> – <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32_SFLOAT"><code class="hljs">vk::Format::R32_SFLOAT</code></a> </li>
+<li><code>cgmath::Vector2&lt;f32&gt;</code> (our <code>Vec2</code>) – <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SFLOAT"><code class="hljs">vk::Format::R32G32_SFLOAT</code></a> </li>
+<li><code>cgmath::Vector3&lt;f32&gt;</code> (our <code>Vec3</code>) – <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32_SFLOAT"><code class="hljs">vk::Format::R32G32B32_SFLOAT</code></a> </li>
+<li><code>cgmath::Vector4&lt;f32&gt;</code> – <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_SFLOAT"><code class="hljs">vk::Format::R32G32B32A32_SFLOAT</code></a> </li>
 </ul>
 <p>As you can see, you should use the format where the amount of color channels matches the number of components in the shader data type. It is allowed to use more channels than the number of components in the shader, but they will be silently discarded. If the number of channels is lower than the number of components, then the BGA components will use default values of <code>(0, 0, 1)</code>. The color type (<code>SFLOAT</code>, <code>UINT</code>, <code>SINT</code>) and bit width should also match the type of the shader input. See the following examples:</p>
 <ul>
-<li><code>cgmath::Vector2&lt;i32&gt;</code> – <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SINT"><code class="hljs">vk::Format::R32G32_SINT</code></a>, a 2-component vector of <code>i32</code>s</li>
-<li><code>cgmath::Vector4&lt;u32&gt;</code> – <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_UINT"><code class="hljs">vk::Format::R32G32B32A32_UINT</code></a>, a 4-component vector of <code>u32</code>s</li>
-<li><code>f64</code> – <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.Format.html#associatedconstant.R64_SFLOAT"><code class="hljs">vk::Format::R64_SFLOAT</code></a>, a double-precision (64-bit) float</li>
+<li><code>cgmath::Vector2&lt;i32&gt;</code> – <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32_SINT"><code class="hljs">vk::Format::R32G32_SINT</code></a>, a 2-component vector of <code>i32</code>s</li>
+<li><code>cgmath::Vector4&lt;u32&gt;</code> – <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.Format.html#associatedconstant.R32G32B32A32_UINT"><code class="hljs">vk::Format::R32G32B32A32_UINT</code></a>, a 4-component vector of <code>u32</code>s</li>
+<li><code>f64</code> – <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.Format.html#associatedconstant.R64_SFLOAT"><code class="hljs">vk::Format::R64_SFLOAT</code></a>, a double-precision (64-bit) float</li>
 </ul>
 <p>The <code>format</code> parameter implicitly defines the byte size of attribute data and the <code>offset</code> parameter specifies the number of bytes since the start of the per-vertex data to read from. The binding is loading one <code>Vertex</code> at a time and the position attribute (<code>pos</code>) is at an offset of <code>0</code> bytes from the beginning of this struct.</p>
 <pre><code class="language-rust noplaypen">let color = vk::VertexInputAttributeDescription::builder()
