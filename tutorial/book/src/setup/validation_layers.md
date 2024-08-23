@@ -296,6 +296,8 @@ if VALIDATION_ENABLED {
 }
 ```
 
+> **Note:** It might seem redundant to use the same debug info with the same severity, type, and callback to both call `create_debug_utils_messenger_ext` *and* add as an extension to the `vk::InstanceCreateInfo` instance. However, these two usages serve different purposes. The usage here (adding the debug info to `vk::InstanceCreateInfo`) sets up debugging _during the creation and destruction of the instance_. Calling `create_debug_utils_messenger_ext` sets up persistent debugging for _everything else_. See the paragraph starting "To capture events that occur while creating or destroying an instance" in the [relevant chapter of the Vulkan specification](https://registry.khronos.org/vulkan/specs/1.3-extensions/html/chap4.html#VkInstanceCreateInfo).
+
 `debug_info` needs to be defined outside of the conditional since it needs to live until we are done calling `create_instance`. Fortunately we can rely on the Rust compiler to protect us from pushing a struct that doesn't live long enough onto a pointer chain due to the lifetimes defined for the `vulkanalia` builders.
 
 Now we should be able to run our program and see logs from our debug callback, but first we'll need to set the `RUST_LOG` environment variable so that `pretty_env_logger` will enable the log levels we are interested in. Initially set the log level to `debug` so we can be sure it is working, here is an example on Windows (PowerShell):
