@@ -11,13 +11,16 @@ The `vk::PipelineVertexInputStateCreateInfo` structure describes the format of t
 * Bindings &ndash; spacing between data and whether the data is per-vertex or per-instance (see [instancing](https://en.wikipedia.org/wiki/Geometry_instancing))
 * Attribute descriptions &ndash; type of the attributes passed to the vertex shader, which binding to load them from and at which offset
 
-Because we're hard coding the vertex data directly in the vertex shader, we'll leave this structure with the defaults to specify that there is no vertex data to load for now. We'll get back to it in the vertex buffer chapter.
+Because we're hard coding the vertex data directly in the vertex shader, we'll leave this structure with the defaults to specify that there is no vertex data to load for now. We'll get back to it in the vertex buffer chapter. Add this to the `create_pipeline` function right after the `vk::PipelineShaderStageCreateInfo` structs:
 
 ```rust,noplaypen
-let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder();
+unsafe fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
+    // ...
+
+    let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder();
 ```
 
-The `vertex_binding_descriptions` and `vertex_attribute_descriptions` fields for this struct that could have been set here would be slices of structs that describe the aforementioned details for loading vertex data. Add this structure to the `create_pipeline` function right after the `vk::PipelineShaderStageCreateInfo` structs.
+The `vertex_binding_descriptions` and `vertex_attribute_descriptions` fields for this struct that could have been set here would be slices of structs that describe the aforementioned details for loading vertex data.
 
 ## Input assembly
 
@@ -218,7 +221,7 @@ let color_blend_state = vk::PipelineColorBlendStateCreateInfo::builder()
 
 If you want to use the second method of blending (bitwise combination), then you should set `logic_op_enable` to `true`. The bitwise operation can then be specified in the `logic_op` field. Note that this will automatically disable the first method, as if you had set `blend_enable` to `false` for every attached framebuffer! The `color_write_mask` will also be used in this mode to determine which channels in the framebuffer will actually be affected. It is also possible to disable both modes, as we've done here, in which case the fragment colors will be written to the framebuffer unmodified.
 
-## Dynamic state
+## Dynamic state (example, don't add)
 
 A limited amount of the state that we've specified in the previous structs *can* actually be changed without recreating the pipeline. Examples are the size of the viewport, line width and blend constants. If you want to do that, then you'll have to fill in a `vk::PipelineDynamicStateCreateInfo` structure like this:
 
@@ -252,9 +255,18 @@ struct AppData {
 And then create the object in the `create_pipeline` function just above the calls to `destroy_shader_module`:
 
 ```rust,noplaypen
-let layout_info = vk::PipelineLayoutCreateInfo::builder();
+unsafe fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
+    // ...
 
-data.pipeline_layout = device.create_pipeline_layout(&layout_info, None)?;
+    let layout_info = vk::PipelineLayoutCreateInfo::builder();
+
+    data.pipeline_layout = device.create_pipeline_layout(&layout_info, None)?;
+
+    device.destroy_shader_module(vert_shader_module, None);
+    device.destroy_shader_module(frag_shader_module, None);
+
+    Ok(())
+}
 ```
 
 The structure also specifies *push constants*, which are another way of passing dynamic values to shaders that we may get into in a future chapter. The pipeline layout will be referenced throughout the program's lifetime, so it should be destroyed in `App::destroy`:
