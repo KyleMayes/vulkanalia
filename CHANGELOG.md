@@ -9,6 +9,7 @@
 
 ### Fixed
 - Fixed `no_std_error` feature not compiling
+- Instance-level functions that are part of device extensions are loaded with `vkGetInstanceProcAddr` ([#281](https://github.com/KyleMayes/vulkanalia/issues/281))
 
 ### Bindings Updates
 - [July 26, 2024 Vulkan 1.3.292 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/e090b1020fb9636b752e73adfc82a3c595fb6615)

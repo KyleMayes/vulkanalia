@@ -670,6 +670,7 @@ pub struct DeviceCommands {
 impl DeviceCommands {
     #[inline]
     pub unsafe fn load(
+        mut instance_loader: impl FnMut(*const c_char) -> Option<unsafe extern "system" fn()>,
         mut loader: impl FnMut(*const c_char) -> Option<unsafe extern "system" fn()>,
     ) -> Self {
         Self {
@@ -750,7 +751,7 @@ impl DeviceCommands {
                 }
             },
             acquire_winrt_display_nv: {
-                let value = loader(b"vkAcquireWinrtDisplayNV\0".as_ptr().cast());
+                let value = instance_loader(b"vkAcquireWinrtDisplayNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6564,7 +6565,7 @@ impl DeviceCommands {
                 }
             },
             enumerate_physical_device_queue_family_performance_query_counters_khr: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR\0"
                         .as_ptr()
                         .cast(),
@@ -8101,7 +8102,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_calibrateable_time_domains_ext: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceCalibrateableTimeDomainsEXT\0"
                         .as_ptr()
                         .cast(),
@@ -8120,7 +8121,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_calibrateable_time_domains_khr: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceCalibrateableTimeDomainsKHR\0"
                         .as_ptr()
                         .cast(),
@@ -8139,7 +8140,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_cooperative_matrix_properties_khr: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR\0"
                         .as_ptr()
                         .cast(),
@@ -8158,7 +8159,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_cooperative_matrix_properties_nv: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceCooperativeMatrixPropertiesNV\0"
                         .as_ptr()
                         .cast(),
@@ -8177,7 +8178,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_external_memory_sci_buf_properties_nv: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV\0"
                         .as_ptr()
                         .cast(),
@@ -8197,7 +8198,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_fragment_shading_rates_khr: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceFragmentShadingRatesKHR\0"
                         .as_ptr()
                         .cast(),
@@ -8216,7 +8217,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_multisample_properties_ext: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceMultisamplePropertiesEXT\0"
                         .as_ptr()
                         .cast(),
@@ -8235,7 +8236,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_optical_flow_image_formats_nv: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceOpticalFlowImageFormatsNV\0"
                         .as_ptr()
                         .cast(),
@@ -8255,7 +8256,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_present_rectangles_khr: {
-                let value = loader(b"vkGetPhysicalDevicePresentRectanglesKHR\0".as_ptr().cast());
+                let value =
+                    instance_loader(b"vkGetPhysicalDevicePresentRectanglesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8271,7 +8273,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_queue_family_performance_query_passes_khr: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR\0"
                         .as_ptr()
                         .cast(),
@@ -8290,7 +8292,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_refreshable_object_types_khr: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceRefreshableObjectTypesKHR\0"
                         .as_ptr()
                         .cast(),
@@ -8309,7 +8311,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_sci_buf_attributes_nv: {
-                let value = loader(b"vkGetPhysicalDeviceSciBufAttributesNV\0".as_ptr().cast());
+                let value =
+                    instance_loader(b"vkGetPhysicalDeviceSciBufAttributesNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8323,7 +8326,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_sci_sync_attributes_nv: {
-                let value = loader(b"vkGetPhysicalDeviceSciSyncAttributesNV\0".as_ptr().cast());
+                let value =
+                    instance_loader(b"vkGetPhysicalDeviceSciSyncAttributesNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8338,7 +8342,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_supported_framebuffer_mixed_samples_combinations_nv: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV\0"
                         .as_ptr()
                         .cast(),
@@ -8357,7 +8361,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_surface_present_modes2_ext: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceSurfacePresentModes2EXT\0"
                         .as_ptr()
                         .cast(),
@@ -8377,7 +8381,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_tool_properties_ext: {
-                let value = loader(b"vkGetPhysicalDeviceToolPropertiesEXT\0".as_ptr().cast());
+                let value =
+                    instance_loader(b"vkGetPhysicalDeviceToolPropertiesEXT\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8392,7 +8397,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_video_capabilities_khr: {
-                let value = loader(b"vkGetPhysicalDeviceVideoCapabilitiesKHR\0".as_ptr().cast());
+                let value =
+                    instance_loader(b"vkGetPhysicalDeviceVideoCapabilitiesKHR\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8407,7 +8413,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_video_encode_quality_level_properties_khr: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR\0"
                         .as_ptr()
                         .cast(),
@@ -8426,7 +8432,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_video_format_properties_khr: {
-                let value = loader(
+                let value = instance_loader(
                     b"vkGetPhysicalDeviceVideoFormatPropertiesKHR\0"
                         .as_ptr()
                         .cast(),
@@ -9035,7 +9041,7 @@ impl DeviceCommands {
                 }
             },
             get_winrt_display_nv: {
-                let value = loader(b"vkGetWinrtDisplayNV\0".as_ptr().cast());
+                let value = instance_loader(b"vkGetWinrtDisplayNV\0".as_ptr().cast());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {

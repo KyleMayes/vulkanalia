@@ -7,6 +7,7 @@ import com.kylemayes.generator.generate.support.generateManualUrl
 import com.kylemayes.generator.generate.support.getCommandType
 import com.kylemayes.generator.registry.Command
 import com.kylemayes.generator.registry.Registry
+import com.kylemayes.generator.registry.getIdentifier
 
 /** Generates Rust type aliases for Vulkan commands. */
 fun Registry.generateCommands() =
@@ -51,6 +52,8 @@ $structs
     """
 }
 
+private val loader = "impl FnMut(*const c_char) -> Option<unsafe extern \"system\" fn()>"
+
 /** Generates a Rust struct for a group of Vulkan commands of the same type. */
 private fun Registry.generateCommandStruct(
     type: CommandType,
@@ -64,17 +67,33 @@ pub struct ${type.display}Commands {
 
 impl ${type.display}Commands {
     #[inline]
-    pub unsafe fn load(mut loader: impl FnMut(*const c_char) -> Option<unsafe extern "system" fn()>) -> Self {
-        Self { ${commands.joinToString { generateLoad(it) }} }
+    pub unsafe fn load(
+        ${if (type == CommandType.DEVICE) "mut instance_loader: $loader," else ""}
+        mut loader: $loader,
+    ) -> Self {
+        Self { ${commands.joinToString { generateLoad(it, type) }} }
     }
 }
     """
 
 /** Generates a Rust struct field-value pair to load a command. */
-private fun Registry.generateLoad(command: Command) =
-    """
+private fun Registry.generateLoad(
+    command: Command,
+    type: CommandType,
+): String {
+    // It seems that device extension commands are instance-level commands if
+    // they take a `VkPhysicalDevice` as their first parameter.
+    val first = command.params.getOrNull(0)?.type?.getIdentifier()?.value
+    val loader =
+        if (type == CommandType.DEVICE && first == "PhysicalDevice") {
+            "instance_loader"
+        } else {
+            "loader"
+        }
+
+    return """
 ${command.name}: {
-    let value = loader(b"${command.name.original}\0".as_ptr().cast());
+    let value = $loader(b"${command.name.original}\0".as_ptr().cast());
     if let Some(value) = value {
         mem::transmute(value)
     } else {
@@ -85,6 +104,7 @@ ${command.name}: {
     }
 }
     """
+}
 
 /** Generates a Rust function signature for a Vulkan command. */
 private fun generateSignature(
