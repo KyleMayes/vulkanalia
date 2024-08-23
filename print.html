@@ -866,6 +866,9 @@ if VALIDATION_ENABLED {
     info = info.push_next(&amp;mut debug_info);
 }
 </code></pre>
+<blockquote>
+<p><strong>Note:</strong> It might seem redundant to use the same debug info with the same severity, type, and callback to both call <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/trait.ExtDebugUtilsExtension.html#method.create_debug_utils_messenger_ext"><code class="hljs">create_debug_utils_messenger_ext</code></a> <em>and</em> add as an extension to the <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a> instance. However, these two usages serve different purposes. The usage here (adding the debug info to <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.InstanceCreateInfo.html"><code class="hljs">vk::InstanceCreateInfo</code></a>) sets up debugging <em>during the creation and destruction of the instance</em>. Calling <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/trait.ExtDebugUtilsExtension.html#method.create_debug_utils_messenger_ext"><code class="hljs">create_debug_utils_messenger_ext</code></a> sets up persistent debugging for <em>everything else</em>. See the paragraph starting &quot;To capture events that occur while creating or destroying an instance&quot; in the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/chap4.html#VkInstanceCreateInfo">relevant chapter of the Vulkan specification</a>.</p>
+</blockquote>
 <p><code>debug_info</code> needs to be defined outside of the conditional since it needs to live until we are done calling <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/trait.EntryV1_0.html#method.create_instance"><code class="hljs">create_instance</code></a>. Fortunately we can rely on the Rust compiler to protect us from pushing a struct that doesn't live long enough onto a pointer chain due to the lifetimes defined for the <code>vulkanalia</code> builders.</p>
 <p>Now we should be able to run our program and see logs from our debug callback, but first we'll need to set the <code>RUST_LOG</code> environment variable so that <code>pretty_env_logger</code> will enable the log levels we are interested in. Initially set the log level to <code>debug</code> so we can be sure it is working, here is an example on Windows (PowerShell):</p>
 <p><img src="setup/../images/validation_layer_test.png" alt="" /></p>
@@ -1851,10 +1854,13 @@ Ok(device.create_shader_module(&amp;info, None)?)
 <li>Bindings – spacing between data and whether the data is per-vertex or per-instance (see <a href="https://en.wikipedia.org/wiki/Geometry_instancing">instancing</a>)</li>
 <li>Attribute descriptions – type of the attributes passed to the vertex shader, which binding to load them from and at which offset</li>
 </ul>
-<p>Because we're hard coding the vertex data directly in the vertex shader, we'll leave this structure with the defaults to specify that there is no vertex data to load for now. We'll get back to it in the vertex buffer chapter.</p>
-<pre><code class="language-rust noplaypen">let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder();
+<p>Because we're hard coding the vertex data directly in the vertex shader, we'll leave this structure with the defaults to specify that there is no vertex data to load for now. We'll get back to it in the vertex buffer chapter. Add this to the <code>create_pipeline</code> function right after the <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.PipelineShaderStageCreateInfo.html"><code class="hljs">vk::PipelineShaderStageCreateInfo</code></a> structs:</p>
+<pre><code class="language-rust noplaypen">unsafe fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    // ...
+
+    let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder();
 </code></pre>
-<p>The <code>vertex_binding_descriptions</code> and <code>vertex_attribute_descriptions</code> fields for this struct that could have been set here would be slices of structs that describe the aforementioned details for loading vertex data. Add this structure to the <code>create_pipeline</code> function right after the <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.PipelineShaderStageCreateInfo.html"><code class="hljs">vk::PipelineShaderStageCreateInfo</code></a> structs.</p>
+<p>The <code>vertex_binding_descriptions</code> and <code>vertex_attribute_descriptions</code> fields for this struct that could have been set here would be slices of structs that describe the aforementioned details for loading vertex data.</p>
 <h2 id="input-assembly"><a class="header" href="#input-assembly">Input assembly</a></h2>
 <p>The <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.PipelineInputAssemblyStateCreateInfo.html"><code class="hljs">vk::PipelineInputAssemblyStateCreateInfo</code></a> struct describes two things: what kind of geometry will be drawn from the vertices and if primitive restart should be enabled. The former is specified in the <code>topology</code> member and can have values like:</p>
 <ul>
@@ -1989,7 +1995,7 @@ let color_blend_state = vk::PipelineColorBlendStateCreateInfo::builder()
     .blend_constants([0.0, 0.0, 0.0, 0.0]);
 </code></pre>
 <p>If you want to use the second method of blending (bitwise combination), then you should set <code>logic_op_enable</code> to <code>true</code>. The bitwise operation can then be specified in the <code>logic_op</code> field. Note that this will automatically disable the first method, as if you had set <code>blend_enable</code> to <code>false</code> for every attached framebuffer! The <code>color_write_mask</code> will also be used in this mode to determine which channels in the framebuffer will actually be affected. It is also possible to disable both modes, as we've done here, in which case the fragment colors will be written to the framebuffer unmodified.</p>
-<h2 id="dynamic-state"><a class="header" href="#dynamic-state">Dynamic state</a></h2>
+<h2 id="dynamic-state-example-dont-add"><a class="header" href="#dynamic-state-example-dont-add">Dynamic state (example, don't add)</a></h2>
 <p>A limited amount of the state that we've specified in the previous structs <em>can</em> actually be changed without recreating the pipeline. Examples are the size of the viewport, line width and blend constants. If you want to do that, then you'll have to fill in a <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/struct.PipelineDynamicStateCreateInfo.html"><code class="hljs">vk::PipelineDynamicStateCreateInfo</code></a> structure like this:</p>
 <pre><code class="language-rust noplaypen">let dynamic_states = &amp;[
     vk::DynamicState::VIEWPORT,
@@ -2010,9 +2016,18 @@ let dynamic_state = vk::PipelineDynamicStateCreateInfo::builder()
 }
 </code></pre>
 <p>And then create the object in the <code>create_pipeline</code> function just above the calls to <a href="https://docs.rs/vulkanalia/0.24.0/vulkanalia/vk/trait.DeviceV1_0.html#method.destroy_shader_module"><code class="hljs">destroy_shader_module</code></a>:</p>
-<pre><code class="language-rust noplaypen">let layout_info = vk::PipelineLayoutCreateInfo::builder();
+<pre><code class="language-rust noplaypen">unsafe fn create_pipeline(device: &amp;Device, data: &amp;mut AppData) -&gt; Result&lt;()&gt; {
+    // ...
 
-data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
+    let layout_info = vk::PipelineLayoutCreateInfo::builder();
+
+    data.pipeline_layout = device.create_pipeline_layout(&amp;layout_info, None)?;
+
+    device.destroy_shader_module(vert_shader_module, None);
+    device.destroy_shader_module(frag_shader_module, None);
+
+    Ok(())
+}
 </code></pre>
 <p>The structure also specifies <em>push constants</em>, which are another way of passing dynamic values to shaders that we may get into in a future chapter. The pipeline layout will be referenced throughout the program's lifetime, so it should be destroyed in <code>App::destroy</code>:</p>
 <pre><code class="language-rust noplaypen">unsafe fn destroy(&amp;mut self) {
