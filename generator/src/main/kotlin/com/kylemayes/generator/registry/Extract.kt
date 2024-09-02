@@ -75,7 +75,7 @@ fun extractEntities(e: Element): Registry {
         handles = e.queryEntities("types/type[@category='handle' and not(@alias)]", ::extractHandle),
         structs = e.queryEntities("types/type[@category='struct' and not(@alias)]", ::extractStructure),
         unions = e.queryEntities("types/type[@category='union' and not(@alias)]", ::extractStructure),
-        versions = e.getEntities("feature", ::extractVersion),
+        versions = e.queryEntities("feature[@api]", ::extractVersion),
     )
 }
 
