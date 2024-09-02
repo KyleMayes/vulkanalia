@@ -47,6 +47,7 @@ impl SuccessCode {
     pub const OPERATION_DEFERRED_KHR: Self = Self(1000268002);
     pub const OPERATION_NOT_DEFERRED_KHR: Self = Self(1000268003);
     pub const INCOMPATIBLE_SHADER_BINARY_EXT: Self = Self(1000482000);
+    pub const PIPELINE_BINARY_MISSING_KHR: Self = Self(1000483000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -77,6 +78,7 @@ impl fmt::Debug for SuccessCode {
             1000268002 => write!(f, "OPERATION_DEFERRED_KHR"),
             1000268003 => write!(f, "OPERATION_NOT_DEFERRED_KHR"),
             1000482000 => write!(f, "INCOMPATIBLE_SHADER_BINARY_EXT"),
+            1000483000 => write!(f, "PIPELINE_BINARY_MISSING_KHR"),
             _ => self.0.fmt(f),
         }
     }
@@ -136,6 +138,7 @@ impl ErrorCode {
     pub const FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT: Self = Self(-1000255000);
     pub const INVALID_VIDEO_STD_PARAMETERS_KHR: Self = Self(-1000299000);
     pub const COMPRESSION_EXHAUSTED_EXT: Self = Self(-1000338000);
+    pub const NOT_ENOUGH_SPACE_KHR: Self = Self(-1000483000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -187,6 +190,7 @@ impl fmt::Debug for ErrorCode {
             -1000255000 => write!(f, "FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT"),
             -1000299000 => write!(f, "INVALID_VIDEO_STD_PARAMETERS_KHR"),
             -1000338000 => write!(f, "COMPRESSION_EXHAUSTED_EXT"),
+            -1000483000 => write!(f, "NOT_ENOUGH_SPACE_KHR"),
             _ => self.0.fmt(f),
         }
     }
@@ -229,6 +233,7 @@ impl fmt::Display for ErrorCode {
             -1000255000 => write!(f, "An operation on a swapchain created with VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT failed as it did not have exclusive full-screen access. This may occur due to implementation-dependent reasons, outside of the application's control."),
             -1000299000 => write!(f, "INVALID_VIDEO_STD_PARAMETERS_KHR"),
             -1000338000 => write!(f, "COMPRESSION_EXHAUSTED_EXT"),
+            -1000483000 => write!(f, "NOT_ENOUGH_SPACE_KHR"),
             _ => write!(f, "unknown Vulkan result (code = {})", self.0),
         }
     }

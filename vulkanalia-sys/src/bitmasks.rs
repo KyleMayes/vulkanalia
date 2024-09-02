@@ -1374,6 +1374,7 @@ bitflags! {
         const RAY_TRACING_DISPLACEMENT_MICROMAP_NV = 1 << 28;
         const DESCRIPTOR_BUFFER_EXT = 1 << 29;
         const PROTECTED_ACCESS_ONLY_EXT = 1 << 30;
+        const CAPTURE_DATA = 1 << 31;
         const ENABLE_LEGACY_DITHERING_EXT = 1 << 34;
     }
 }

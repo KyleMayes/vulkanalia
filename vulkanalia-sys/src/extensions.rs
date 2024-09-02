@@ -3049,6 +3049,22 @@ pub const KHR_CALIBRATED_TIMESTAMPS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_compute_shader_derivatives.html>
+#[allow(deprecated)]
+pub const KHR_COMPUTE_SHADER_DERIVATIVES_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_compute_shader_derivatives"),
+    number: 512,
+    type_: "device",
+    author: "KHR",
+    contact: "Jean-Noe Morissette @MagicPoncho",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_cooperative_matrix.html>
 #[allow(deprecated)]
 pub const KHR_COOPERATIVE_MATRIX_EXTENSION: Extension = Extension {
@@ -3873,6 +3889,22 @@ pub const KHR_PERFORMANCE_QUERY_EXTENSION: Extension = Extension {
     type_: "device",
     author: "KHR",
     contact: "Alon Or-bach @alonorbach",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_pipeline_binary.html>
+#[allow(deprecated)]
+pub const KHR_PIPELINE_BINARY_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_pipeline_binary"),
+    number: 484,
+    type_: "device",
+    author: "KHR",
+    contact: "Stu Smith @stu-s",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -5056,7 +5088,7 @@ pub const NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION: Extension = Extension {
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
-    promoted_to: None,
+    promoted_to: Some("VK_KHR_compute_shader_derivatives"),
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_cooperative_matrix.html>

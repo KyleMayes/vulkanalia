@@ -2424,6 +2424,20 @@ unsafe impl OutputChainStruct for DeviceMemoryReportCallbackDataEXT {
     }
 }
 
+unsafe impl InputChainStruct for DevicePipelineBinaryInternalCacheControlKHR {
+    const TYPE: StructureType = StructureType::DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for DevicePrivateDataCreateInfo {
     const TYPE: StructureType = StructureType::DEVICE_PRIVATE_DATA_CREATE_INFO;
 
@@ -5921,9 +5935,9 @@ unsafe impl OutputChainStruct for PhysicalDeviceCommandBufferInheritanceFeatures
     }
 }
 
-unsafe impl InputChainStruct for PhysicalDeviceComputeShaderDerivativesFeaturesNV {
+unsafe impl InputChainStruct for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {
     const TYPE: StructureType =
-        StructureType::PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV;
+        StructureType::PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -5936,7 +5950,29 @@ unsafe impl InputChainStruct for PhysicalDeviceComputeShaderDerivativesFeaturesN
     }
 }
 
-unsafe impl OutputChainStruct for PhysicalDeviceComputeShaderDerivativesFeaturesNV {
+unsafe impl OutputChainStruct for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceComputeShaderDerivativesPropertiesKHR {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_PROPERTIES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceComputeShaderDerivativesPropertiesKHR {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -9280,6 +9316,48 @@ unsafe impl OutputChainStruct for PhysicalDevicePerformanceQueryPropertiesKHR {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDevicePipelineBinaryFeaturesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_PIPELINE_BINARY_FEATURES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDevicePipelineBinaryFeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDevicePipelineBinaryPropertiesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_PIPELINE_BINARY_PROPERTIES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDevicePipelineBinaryPropertiesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDevicePipelineCreationCacheControlFeatures {
     const TYPE: StructureType =
         StructureType::PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES;
@@ -11997,6 +12075,90 @@ unsafe impl OutputChainStruct for PhysicalDeviceZeroInitializeWorkgroupMemoryFea
     }
 }
 
+unsafe impl InputChainStruct for PipelineBinaryCreateInfoKHR {
+    const TYPE: StructureType = StructureType::PIPELINE_BINARY_CREATE_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PipelineBinaryDataInfoKHR {
+    const TYPE: StructureType = StructureType::PIPELINE_BINARY_DATA_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PipelineBinaryDataInfoKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PipelineBinaryHandlesInfoKHR {
+    const TYPE: StructureType = StructureType::PIPELINE_BINARY_HANDLES_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PipelineBinaryInfoKHR {
+    const TYPE: StructureType = StructureType::PIPELINE_BINARY_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PipelineBinaryKeyKHR {
+    const TYPE: StructureType = StructureType::PIPELINE_BINARY_KEY_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PipelineBinaryKeyKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PipelineCacheCreateInfo {
     const TYPE: StructureType = StructureType::PIPELINE_CACHE_CREATE_INFO;
 
@@ -12119,6 +12281,27 @@ unsafe impl InputChainStruct for PipelineCreateFlags2CreateInfoKHR {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PipelineCreateInfoKHR {
+    const TYPE: StructureType = StructureType::PIPELINE_CREATE_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PipelineCreateInfoKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
@@ -13187,6 +13370,27 @@ unsafe impl InputChainStruct for RefreshObjectListKHR {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for ReleaseCapturedPipelineDataInfoKHR {
+    const TYPE: StructureType = StructureType::RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for ReleaseCapturedPipelineDataInfoKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }

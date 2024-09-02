@@ -346,6 +346,7 @@ pub struct DeviceCommands {
     pub create_indirect_commands_layout_nv: PFN_vkCreateIndirectCommandsLayoutNV,
     pub create_micromap_ext: PFN_vkCreateMicromapEXT,
     pub create_optical_flow_session_nv: PFN_vkCreateOpticalFlowSessionNV,
+    pub create_pipeline_binaries_khr: PFN_vkCreatePipelineBinariesKHR,
     pub create_pipeline_cache: PFN_vkCreatePipelineCache,
     pub create_pipeline_layout: PFN_vkCreatePipelineLayout,
     pub create_private_data_slot: PFN_vkCreatePrivateDataSlot,
@@ -396,6 +397,7 @@ pub struct DeviceCommands {
     pub destroy_micromap_ext: PFN_vkDestroyMicromapEXT,
     pub destroy_optical_flow_session_nv: PFN_vkDestroyOpticalFlowSessionNV,
     pub destroy_pipeline: PFN_vkDestroyPipeline,
+    pub destroy_pipeline_binary_khr: PFN_vkDestroyPipelineBinaryKHR,
     pub destroy_pipeline_cache: PFN_vkDestroyPipelineCache,
     pub destroy_pipeline_layout: PFN_vkDestroyPipelineLayout,
     pub destroy_private_data_slot: PFN_vkDestroyPrivateDataSlot,
@@ -558,6 +560,7 @@ pub struct DeviceCommands {
         PFN_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR,
     pub get_physical_device_video_format_properties_khr:
         PFN_vkGetPhysicalDeviceVideoFormatPropertiesKHR,
+    pub get_pipeline_binary_data_khr: PFN_vkGetPipelineBinaryDataKHR,
     pub get_pipeline_cache_data: PFN_vkGetPipelineCacheData,
     pub get_pipeline_executable_internal_representations_khr:
         PFN_vkGetPipelineExecutableInternalRepresentationsKHR,
@@ -565,6 +568,7 @@ pub struct DeviceCommands {
     pub get_pipeline_executable_statistics_khr: PFN_vkGetPipelineExecutableStatisticsKHR,
     pub get_pipeline_indirect_device_address_nv: PFN_vkGetPipelineIndirectDeviceAddressNV,
     pub get_pipeline_indirect_memory_requirements_nv: PFN_vkGetPipelineIndirectMemoryRequirementsNV,
+    pub get_pipeline_key_khr: PFN_vkGetPipelineKeyKHR,
     pub get_pipeline_properties_ext: PFN_vkGetPipelinePropertiesEXT,
     pub get_private_data: PFN_vkGetPrivateData,
     pub get_private_data_ext: PFN_vkGetPrivateDataEXT,
@@ -623,6 +627,7 @@ pub struct DeviceCommands {
     pub queue_wait_idle: PFN_vkQueueWaitIdle,
     pub register_device_event_ext: PFN_vkRegisterDeviceEventEXT,
     pub register_display_event_ext: PFN_vkRegisterDisplayEventEXT,
+    pub release_captured_pipeline_data_khr: PFN_vkReleaseCapturedPipelineDataKHR,
     pub release_full_screen_exclusive_mode_ext: PFN_vkReleaseFullScreenExclusiveModeEXT,
     pub release_performance_configuration_intel: PFN_vkReleasePerformanceConfigurationINTEL,
     pub release_profiling_lock_khr: PFN_vkReleaseProfilingLockKHR,
@@ -5497,6 +5502,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            create_pipeline_binaries_khr: {
+                let value = loader(b"vkCreatePipelineBinariesKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const PipelineBinaryCreateInfoKHR,
+                        _allocator: *const AllocationCallbacks,
+                        _binaries: *mut PipelineBinaryHandlesInfoKHR,
+                    ) -> Result {
+                        panic!("could not load vkCreatePipelineBinariesKHR")
+                    }
+                    fallback
+                }
+            },
             create_pipeline_cache: {
                 let value = loader(b"vkCreatePipelineCache\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -6268,6 +6289,21 @@ impl DeviceCommands {
                         _allocator: *const AllocationCallbacks,
                     ) {
                         panic!("could not load vkDestroyPipeline")
+                    }
+                    fallback
+                }
+            },
+            destroy_pipeline_binary_khr: {
+                let value = loader(b"vkDestroyPipelineBinaryKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _pipeline_binary: PipelineBinaryKHR,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyPipelineBinaryKHR")
                     }
                     fallback
                 }
@@ -8451,6 +8487,23 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_pipeline_binary_data_khr: {
+                let value = loader(b"vkGetPipelineBinaryDataKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const PipelineBinaryDataInfoKHR,
+                        _pipeline_binary_key: *mut PipelineBinaryKeyKHR,
+                        _pipeline_binary_data_size: *mut usize,
+                        _pipeline_binary_data: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetPipelineBinaryDataKHR")
+                    }
+                    fallback
+                }
+            },
             get_pipeline_cache_data: {
                 let value = loader(b"vkGetPipelineCacheData\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -8548,6 +8601,21 @@ impl DeviceCommands {
                         _memory_requirements: *mut MemoryRequirements2,
                     ) {
                         panic!("could not load vkGetPipelineIndirectMemoryRequirementsNV")
+                    }
+                    fallback
+                }
+            },
+            get_pipeline_key_khr: {
+                let value = loader(b"vkGetPipelineKeyKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _pipeline_create_info: *const PipelineCreateInfoKHR,
+                        _pipeline_key: *mut PipelineBinaryKeyKHR,
+                    ) -> Result {
+                        panic!("could not load vkGetPipelineKeyKHR")
                     }
                     fallback
                 }
@@ -9422,6 +9490,21 @@ impl DeviceCommands {
                         _fence: *mut Fence,
                     ) -> Result {
                         panic!("could not load vkRegisterDisplayEventEXT")
+                    }
+                    fallback
+                }
+            },
+            release_captured_pipeline_data_khr: {
+                let value = loader(b"vkReleaseCapturedPipelineDataKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const ReleaseCapturedPipelineDataInfoKHR,
+                        _allocator: *const AllocationCallbacks,
+                    ) -> Result {
+                        panic!("could not load vkReleaseCapturedPipelineDataKHR")
                     }
                     fallback
                 }

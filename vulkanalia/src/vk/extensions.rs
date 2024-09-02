@@ -6353,6 +6353,15 @@ pub trait KhrCalibratedTimestampsExtension: DeviceV1_0 {
 
 impl KhrCalibratedTimestampsExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_compute_shader_derivatives.html>
+pub trait KhrComputeShaderDerivativesExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_COMPUTE_SHADER_DERIVATIVES_EXTENSION;
+}
+
+impl KhrComputeShaderDerivativesExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_cooperative_matrix.html>
 pub trait KhrCooperativeMatrixExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -8759,6 +8768,128 @@ pub trait KhrPerformanceQueryExtension: DeviceV1_0 {
 }
 
 impl KhrPerformanceQueryExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_pipeline_binary.html>
+pub trait KhrPipelineBinaryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_PIPELINE_BINARY_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreatePipelineBinariesKHR.html>
+    #[inline]
+    unsafe fn create_pipeline_binaries_khr(
+        &self,
+        create_info: &PipelineBinaryCreateInfoKHR,
+        allocator: Option<&AllocationCallbacks>,
+        binaries: &mut PipelineBinaryHandlesInfoKHR,
+    ) -> crate::VkResult<SuccessCode> {
+        let __result = (self.commands().create_pipeline_binaries_khr)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            binaries,
+        );
+
+        if __result >= Result::SUCCESS {
+            Ok(__result.into())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkDestroyPipelineBinaryKHR.html>
+    #[inline]
+    unsafe fn destroy_pipeline_binary_khr(
+        &self,
+        pipeline_binary: PipelineBinaryKHR,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_pipeline_binary_khr)(
+            self.handle(),
+            pipeline_binary,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPipelineBinaryDataKHR.html>
+    #[inline]
+    unsafe fn get_pipeline_binary_data_khr(
+        &self,
+        info: &PipelineBinaryDataInfoKHR,
+        pipeline_binary_key: &mut PipelineBinaryKeyKHR,
+    ) -> crate::VkResult<Vec<u8>> {
+        let mut pipeline_binary_data_size = 0;
+
+        (self.commands().get_pipeline_binary_data_khr)(
+            self.handle(),
+            info,
+            ptr::null_mut(),
+            &mut pipeline_binary_data_size,
+            ptr::null_mut(),
+        );
+
+        let mut pipeline_binary_data = Vec::with_capacity(pipeline_binary_data_size as usize);
+
+        let __result = (self.commands().get_pipeline_binary_data_khr)(
+            self.handle(),
+            info,
+            pipeline_binary_key,
+            &mut pipeline_binary_data_size,
+            pipeline_binary_data.as_mut_ptr() as *mut c_void,
+        );
+
+        debug_assert!(pipeline_binary_data.capacity() == pipeline_binary_data_size as usize);
+        pipeline_binary_data.set_len(pipeline_binary_data_size as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(pipeline_binary_data)
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPipelineKeyKHR.html>
+    #[inline]
+    unsafe fn get_pipeline_key_khr(
+        &self,
+        pipeline_create_info: Option<&PipelineCreateInfoKHR>,
+        pipeline_key: &mut PipelineBinaryKeyKHR,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().get_pipeline_key_khr)(
+            self.handle(),
+            pipeline_create_info.map_or(ptr::null(), |v| v),
+            pipeline_key,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkReleaseCapturedPipelineDataKHR.html>
+    #[inline]
+    unsafe fn release_captured_pipeline_data_khr(
+        &self,
+        info: &ReleaseCapturedPipelineDataInfoKHR,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().release_captured_pipeline_data_khr)(
+            self.handle(),
+            info,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl KhrPipelineBinaryExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_pipeline_executable_properties.html>
 pub trait KhrPipelineExecutablePropertiesExtension: DeviceV1_0 {

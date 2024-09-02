@@ -2195,6 +2195,14 @@ pub type PFN_vkCreateOpticalFlowSessionNV = unsafe extern "system" fn(
     _session: *mut OpticalFlowSessionNV,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreatePipelineBinariesKHR.html>
+pub type PFN_vkCreatePipelineBinariesKHR = unsafe extern "system" fn(
+    _device: Device,
+    _create_info: *const PipelineBinaryCreateInfoKHR,
+    _allocator: *const AllocationCallbacks,
+    _binaries: *mut PipelineBinaryHandlesInfoKHR,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreatePipelineCache.html>
 pub type PFN_vkCreatePipelineCache = unsafe extern "system" fn(
     _device: Device,
@@ -2630,6 +2638,13 @@ pub type PFN_vkDestroyOpticalFlowSessionNV = unsafe extern "system" fn(
 pub type PFN_vkDestroyPipeline = unsafe extern "system" fn(
     _device: Device,
     _pipeline: Pipeline,
+    _allocator: *const AllocationCallbacks,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkDestroyPipelineBinaryKHR.html>
+pub type PFN_vkDestroyPipelineBinaryKHR = unsafe extern "system" fn(
+    _device: Device,
+    _pipeline_binary: PipelineBinaryKHR,
     _allocator: *const AllocationCallbacks,
 );
 
@@ -3932,6 +3947,15 @@ pub type PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR = unsafe extern "syst
     _visual_id: VisualID,
 ) -> Bool32;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPipelineBinaryDataKHR.html>
+pub type PFN_vkGetPipelineBinaryDataKHR = unsafe extern "system" fn(
+    _device: Device,
+    _info: *const PipelineBinaryDataInfoKHR,
+    _pipeline_binary_key: *mut PipelineBinaryKeyKHR,
+    _pipeline_binary_data_size: *mut usize,
+    _pipeline_binary_data: *mut c_void,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPipelineCacheData.html>
 pub type PFN_vkGetPipelineCacheData = unsafe extern "system" fn(
     _device: Device,
@@ -3977,6 +4001,13 @@ pub type PFN_vkGetPipelineIndirectMemoryRequirementsNV = unsafe extern "system" 
     _create_info: *const ComputePipelineCreateInfo,
     _memory_requirements: *mut MemoryRequirements2,
 );
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPipelineKeyKHR.html>
+pub type PFN_vkGetPipelineKeyKHR = unsafe extern "system" fn(
+    _device: Device,
+    _pipeline_create_info: *const PipelineCreateInfoKHR,
+    _pipeline_key: *mut PipelineBinaryKeyKHR,
+) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPipelinePropertiesEXT.html>
 pub type PFN_vkGetPipelinePropertiesEXT = unsafe extern "system" fn(
@@ -4379,6 +4410,13 @@ pub type PFN_vkRegisterDisplayEventEXT = unsafe extern "system" fn(
     _display_event_info: *const DisplayEventInfoEXT,
     _allocator: *const AllocationCallbacks,
     _fence: *mut Fence,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkReleaseCapturedPipelineDataKHR.html>
+pub type PFN_vkReleaseCapturedPipelineDataKHR = unsafe extern "system" fn(
+    _device: Device,
+    _info: *const ReleaseCapturedPipelineDataInfoKHR,
+    _allocator: *const AllocationCallbacks,
 ) -> Result;
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkReleaseDisplayEXT.html>
