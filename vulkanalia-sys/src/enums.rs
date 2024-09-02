@@ -3475,6 +3475,7 @@ impl ObjectType {
     pub const MICROMAP_EXT: Self = Self(1000396000);
     pub const OPTICAL_FLOW_SESSION_NV: Self = Self(1000464000);
     pub const SHADER_EXT: Self = Self(1000482000);
+    pub const PIPELINE_BINARY_KHR: Self = Self(1000483000);
     pub const SEMAPHORE_SCI_SYNC_POOL_NV: Self = Self(1000489000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
@@ -3544,6 +3545,7 @@ impl fmt::Debug for ObjectType {
             1000396000 => write!(f, "MICROMAP_EXT"),
             1000464000 => write!(f, "OPTICAL_FLOW_SESSION_NV"),
             1000482000 => write!(f, "SHADER_EXT"),
+            1000483000 => write!(f, "PIPELINE_BINARY_KHR"),
             1000489000 => write!(f, "SEMAPHORE_SCI_SYNC_POOL_NV"),
             _ => self.0.fmt(f),
         }
@@ -4749,6 +4751,8 @@ impl Result {
     pub const ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR: Self = Self(-1000299000);
     pub const ERROR_COMPRESSION_EXHAUSTED_EXT: Self = Self(-1000338000);
     pub const INCOMPATIBLE_SHADER_BINARY_EXT: Self = Self(1000482000);
+    pub const PIPELINE_BINARY_MISSING_KHR: Self = Self(1000483000);
+    pub const ERROR_NOT_ENOUGH_SPACE_KHR: Self = Self(-1000483000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -4813,6 +4817,8 @@ impl fmt::Debug for Result {
             -1000299000 => write!(f, "ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR"),
             -1000338000 => write!(f, "ERROR_COMPRESSION_EXHAUSTED_EXT"),
             1000482000 => write!(f, "INCOMPATIBLE_SHADER_BINARY_EXT"),
+            1000483000 => write!(f, "PIPELINE_BINARY_MISSING_KHR"),
+            -1000483000 => write!(f, "ERROR_NOT_ENOUGH_SPACE_KHR"),
             _ => self.0.fmt(f),
         }
     }
@@ -4868,6 +4874,8 @@ impl fmt::Display for Result {
             -1000299000 => write!(f, "ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR"),
             -1000338000 => write!(f, "ERROR_COMPRESSION_EXHAUSTED_EXT"),
             1000482000 => write!(f, "INCOMPATIBLE_SHADER_BINARY_EXT"),
+            1000483000 => write!(f, "PIPELINE_BINARY_MISSING_KHR"),
+            -1000483000 => write!(f, "ERROR_NOT_ENOUGH_SPACE_KHR"),
             _ => write!(f, "unknown Vulkan result (code = {})", self.0),
         }
     }
@@ -5935,7 +5943,6 @@ impl StructureType {
     pub const DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD: Self = Self(1000189000);
     pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT: Self = Self(1000190000);
     pub const PRESENT_FRAME_TOKEN_GGP: Self = Self(1000191000);
-    pub const PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV: Self = Self(1000201000);
     pub const PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV: Self = Self(1000202000);
     pub const PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV: Self = Self(1000202001);
     pub const PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV: Self = Self(1000204000);
@@ -6302,6 +6309,16 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT: Self = Self(1000482000);
     pub const PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT: Self = Self(1000482001);
     pub const SHADER_CREATE_INFO_EXT: Self = Self(1000482002);
+    pub const PHYSICAL_DEVICE_PIPELINE_BINARY_FEATURES_KHR: Self = Self(1000483000);
+    pub const PIPELINE_BINARY_CREATE_INFO_KHR: Self = Self(1000483001);
+    pub const PIPELINE_BINARY_INFO_KHR: Self = Self(1000483002);
+    pub const PIPELINE_BINARY_KEY_KHR: Self = Self(1000483003);
+    pub const PHYSICAL_DEVICE_PIPELINE_BINARY_PROPERTIES_KHR: Self = Self(1000483004);
+    pub const RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR: Self = Self(1000483005);
+    pub const PIPELINE_BINARY_DATA_INFO_KHR: Self = Self(1000483006);
+    pub const PIPELINE_CREATE_INFO_KHR: Self = Self(1000483007);
+    pub const DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR: Self = Self(1000483008);
+    pub const PIPELINE_BINARY_HANDLES_INFO_KHR: Self = Self(1000483009);
     pub const PHYSICAL_DEVICE_TILE_PROPERTIES_FEATURES_QCOM: Self = Self(1000484000);
     pub const TILE_PROPERTIES_QCOM: Self = Self(1000484001);
     pub const PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC: Self = Self(1000485000);
@@ -6340,6 +6357,8 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM: Self =
         Self(1000510000);
     pub const MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM: Self = Self(1000510001);
+    pub const PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR: Self = Self(1000201000);
+    pub const PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_PROPERTIES_KHR: Self = Self(1000511000);
     pub const VIDEO_DECODE_AV1_CAPABILITIES_KHR: Self = Self(1000512000);
     pub const VIDEO_DECODE_AV1_PICTURE_INFO_KHR: Self = Self(1000512001);
     pub const VIDEO_DECODE_AV1_PROFILE_INFO_KHR: Self = Self(1000512003);
@@ -6932,7 +6951,6 @@ impl fmt::Debug for StructureType {
             1000189000 => write!(f, "DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD"),
             1000190000 => write!(f, "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT"),
             1000191000 => write!(f, "PRESENT_FRAME_TOKEN_GGP"),
-            1000201000 => write!(f, "PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV"),
             1000202000 => write!(f, "PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV"),
             1000202001 => write!(f, "PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV"),
             1000204000 => write!(f, "PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV"),
@@ -7395,6 +7413,16 @@ impl fmt::Debug for StructureType {
             1000482000 => write!(f, "PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT"),
             1000482001 => write!(f, "PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT"),
             1000482002 => write!(f, "SHADER_CREATE_INFO_EXT"),
+            1000483000 => write!(f, "PHYSICAL_DEVICE_PIPELINE_BINARY_FEATURES_KHR"),
+            1000483001 => write!(f, "PIPELINE_BINARY_CREATE_INFO_KHR"),
+            1000483002 => write!(f, "PIPELINE_BINARY_INFO_KHR"),
+            1000483003 => write!(f, "PIPELINE_BINARY_KEY_KHR"),
+            1000483004 => write!(f, "PHYSICAL_DEVICE_PIPELINE_BINARY_PROPERTIES_KHR"),
+            1000483005 => write!(f, "RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR"),
+            1000483006 => write!(f, "PIPELINE_BINARY_DATA_INFO_KHR"),
+            1000483007 => write!(f, "PIPELINE_CREATE_INFO_KHR"),
+            1000483008 => write!(f, "DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR"),
+            1000483009 => write!(f, "PIPELINE_BINARY_HANDLES_INFO_KHR"),
             1000484000 => write!(f, "PHYSICAL_DEVICE_TILE_PROPERTIES_FEATURES_QCOM"),
             1000484001 => write!(f, "TILE_PROPERTIES_QCOM"),
             1000485000 => write!(f, "PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC"),
@@ -7460,6 +7488,11 @@ impl fmt::Debug for StructureType {
             1000510001 => write!(
                 f,
                 "MULTIVIEW_PER_VIEW_RENDER_AREAS_RENDER_PASS_BEGIN_INFO_QCOM"
+            ),
+            1000201000 => write!(f, "PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR"),
+            1000511000 => write!(
+                f,
+                "PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_PROPERTIES_KHR"
             ),
             1000512000 => write!(f, "VIDEO_DECODE_AV1_CAPABILITIES_KHR"),
             1000512001 => write!(f, "VIDEO_DECODE_AV1_PICTURE_INFO_KHR"),

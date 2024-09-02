@@ -8332,6 +8332,7 @@ unsafe impl Cast for ComponentMappingBuilder {
 /// A Vulkan struct that can be used to extend a [`ComputePipelineCreateInfo`].
 pub unsafe trait ExtendsComputePipelineCreateInfo: fmt::Debug {}
 unsafe impl ExtendsComputePipelineCreateInfo for ComputePipelineIndirectBufferInfoNV {}
+unsafe impl ExtendsComputePipelineCreateInfo for PipelineBinaryInfoKHR {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCreateFlags2CreateInfoKHR {}
 unsafe impl ExtendsComputePipelineCreateInfo for PipelineCreationFeedbackCreateInfo {}
@@ -13493,6 +13494,7 @@ unsafe impl ExtendsDeviceCreateInfo for DeviceDeviceMemoryReportCreateInfoEXT {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceDiagnosticsConfigCreateInfoNV {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceGroupDeviceCreateInfo {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceMemoryOverallocationCreateInfoAMD {}
+unsafe impl ExtendsDeviceCreateInfo for DevicePipelineBinaryInternalCacheControlKHR {}
 unsafe impl ExtendsDeviceCreateInfo for DevicePrivateDataCreateInfo {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceQueueShaderCoreControlCreateInfoARM {}
 unsafe impl ExtendsDeviceCreateInfo for DeviceSemaphoreSciSyncPoolReservationCreateInfoNV {}
@@ -13518,7 +13520,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceClusterCullingShaderFeatur
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoherentMemoryFeaturesAMD {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceColorWriteEnableFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCommandBufferInheritanceFeaturesNV {}
-unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceComputeShaderDerivativesFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceConditionalRenderingFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixFeaturesNV {}
@@ -13611,6 +13613,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceOpticalFlowFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerStageDescriptorSetFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePerformanceQueryFeaturesKHR {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineBinaryFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineCreationCacheControlFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {}
@@ -15271,6 +15274,64 @@ impl ops::DerefMut for DeviceMemoryReportCallbackDataEXTBuilder {
 
 unsafe impl Cast for DeviceMemoryReportCallbackDataEXTBuilder {
     type Target = DeviceMemoryReportCallbackDataEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for DevicePipelineBinaryInternalCacheControlKHR {
+    type Target = DevicePipelineBinaryInternalCacheControlKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for DevicePipelineBinaryInternalCacheControlKHR {
+    type Builder = DevicePipelineBinaryInternalCacheControlKHRBuilder;
+}
+
+/// A builder for a [`DevicePipelineBinaryInternalCacheControlKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct DevicePipelineBinaryInternalCacheControlKHRBuilder {
+    value: DevicePipelineBinaryInternalCacheControlKHR,
+}
+
+impl DevicePipelineBinaryInternalCacheControlKHRBuilder {
+    #[inline]
+    pub fn disable_internal_cache(mut self, disable_internal_cache: bool) -> Self {
+        self.value.disable_internal_cache = disable_internal_cache as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> DevicePipelineBinaryInternalCacheControlKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for DevicePipelineBinaryInternalCacheControlKHRBuilder {
+    type Target = DevicePipelineBinaryInternalCacheControlKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for DevicePipelineBinaryInternalCacheControlKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for DevicePipelineBinaryInternalCacheControlKHRBuilder {
+    type Target = DevicePipelineBinaryInternalCacheControlKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -21920,6 +21981,7 @@ unsafe impl ExtendsGraphicsPipelineCreateInfo for ExternalFormatANDROID {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineLibraryCreateInfoEXT {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for GraphicsPipelineShaderGroupsCreateInfoNV {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for MultiviewPerViewAttributesInfoNVX {}
+unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineBinaryInfoKHR {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCompilerControlCreateInfoAMD {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCreateFlags2CreateInfoKHR {}
 unsafe impl ExtendsGraphicsPipelineCreateInfo for PipelineCreationFeedbackCreateInfo {}
@@ -34177,8 +34239,8 @@ unsafe impl Cast for PhysicalDeviceCommandBufferInheritanceFeaturesNVBuilder {
     }
 }
 
-unsafe impl Cast for PhysicalDeviceComputeShaderDerivativesFeaturesNV {
-    type Target = PhysicalDeviceComputeShaderDerivativesFeaturesNV;
+unsafe impl Cast for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {
+    type Target = PhysicalDeviceComputeShaderDerivativesFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -34186,18 +34248,18 @@ unsafe impl Cast for PhysicalDeviceComputeShaderDerivativesFeaturesNV {
     }
 }
 
-impl HasBuilder<'static> for PhysicalDeviceComputeShaderDerivativesFeaturesNV {
-    type Builder = PhysicalDeviceComputeShaderDerivativesFeaturesNVBuilder;
+impl HasBuilder<'static> for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {
+    type Builder = PhysicalDeviceComputeShaderDerivativesFeaturesKHRBuilder;
 }
 
-/// A builder for a [`PhysicalDeviceComputeShaderDerivativesFeaturesNV`].
+/// A builder for a [`PhysicalDeviceComputeShaderDerivativesFeaturesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct PhysicalDeviceComputeShaderDerivativesFeaturesNVBuilder {
-    value: PhysicalDeviceComputeShaderDerivativesFeaturesNV,
+pub struct PhysicalDeviceComputeShaderDerivativesFeaturesKHRBuilder {
+    value: PhysicalDeviceComputeShaderDerivativesFeaturesKHR,
 }
 
-impl PhysicalDeviceComputeShaderDerivativesFeaturesNVBuilder {
+impl PhysicalDeviceComputeShaderDerivativesFeaturesKHRBuilder {
     #[inline]
     pub fn compute_derivative_group_quads(mut self, compute_derivative_group_quads: bool) -> Self {
         self.value.compute_derivative_group_quads = compute_derivative_group_quads as Bool32;
@@ -34214,13 +34276,13 @@ impl PhysicalDeviceComputeShaderDerivativesFeaturesNVBuilder {
     }
 
     #[inline]
-    pub fn build(self) -> PhysicalDeviceComputeShaderDerivativesFeaturesNV {
+    pub fn build(self) -> PhysicalDeviceComputeShaderDerivativesFeaturesKHR {
         self.value
     }
 }
 
-impl ops::Deref for PhysicalDeviceComputeShaderDerivativesFeaturesNVBuilder {
-    type Target = PhysicalDeviceComputeShaderDerivativesFeaturesNV;
+impl ops::Deref for PhysicalDeviceComputeShaderDerivativesFeaturesKHRBuilder {
+    type Target = PhysicalDeviceComputeShaderDerivativesFeaturesKHR;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -34228,15 +34290,76 @@ impl ops::Deref for PhysicalDeviceComputeShaderDerivativesFeaturesNVBuilder {
     }
 }
 
-impl ops::DerefMut for PhysicalDeviceComputeShaderDerivativesFeaturesNVBuilder {
+impl ops::DerefMut for PhysicalDeviceComputeShaderDerivativesFeaturesKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for PhysicalDeviceComputeShaderDerivativesFeaturesNVBuilder {
-    type Target = PhysicalDeviceComputeShaderDerivativesFeaturesNV;
+unsafe impl Cast for PhysicalDeviceComputeShaderDerivativesFeaturesKHRBuilder {
+    type Target = PhysicalDeviceComputeShaderDerivativesFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceComputeShaderDerivativesPropertiesKHR {
+    type Target = PhysicalDeviceComputeShaderDerivativesPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceComputeShaderDerivativesPropertiesKHR {
+    type Builder = PhysicalDeviceComputeShaderDerivativesPropertiesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceComputeShaderDerivativesPropertiesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceComputeShaderDerivativesPropertiesKHRBuilder {
+    value: PhysicalDeviceComputeShaderDerivativesPropertiesKHR,
+}
+
+impl PhysicalDeviceComputeShaderDerivativesPropertiesKHRBuilder {
+    #[inline]
+    pub fn mesh_and_task_shader_derivatives(
+        mut self,
+        mesh_and_task_shader_derivatives: bool,
+    ) -> Self {
+        self.value.mesh_and_task_shader_derivatives = mesh_and_task_shader_derivatives as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceComputeShaderDerivativesPropertiesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceComputeShaderDerivativesPropertiesKHRBuilder {
+    type Target = PhysicalDeviceComputeShaderDerivativesPropertiesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceComputeShaderDerivativesPropertiesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceComputeShaderDerivativesPropertiesKHRBuilder {
+    type Target = PhysicalDeviceComputeShaderDerivativesPropertiesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -39845,7 +39968,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceClusterCullingShade
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCoherentMemoryFeaturesAMD {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceColorWriteEnableFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCommandBufferInheritanceFeaturesNV {}
-unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceComputeShaderDerivativesFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceConditionalRenderingFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrixFeaturesNV {}
@@ -39958,6 +40081,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceOpticalFlowFeatures
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePerStageDescriptorSetFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePerformanceQueryFeaturesKHR {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineBinaryFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDevicePipelineCreationCacheControlFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR
@@ -48094,6 +48218,161 @@ unsafe impl Cast for PhysicalDevicePerformanceQueryPropertiesKHRBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDevicePipelineBinaryFeaturesKHR {
+    type Target = PhysicalDevicePipelineBinaryFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePipelineBinaryFeaturesKHR {
+    type Builder = PhysicalDevicePipelineBinaryFeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDevicePipelineBinaryFeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePipelineBinaryFeaturesKHRBuilder {
+    value: PhysicalDevicePipelineBinaryFeaturesKHR,
+}
+
+impl PhysicalDevicePipelineBinaryFeaturesKHRBuilder {
+    #[inline]
+    pub fn pipeline_binaries(mut self, pipeline_binaries: bool) -> Self {
+        self.value.pipeline_binaries = pipeline_binaries as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePipelineBinaryFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePipelineBinaryFeaturesKHRBuilder {
+    type Target = PhysicalDevicePipelineBinaryFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePipelineBinaryFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePipelineBinaryFeaturesKHRBuilder {
+    type Target = PhysicalDevicePipelineBinaryFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePipelineBinaryPropertiesKHR {
+    type Target = PhysicalDevicePipelineBinaryPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDevicePipelineBinaryPropertiesKHR {
+    type Builder = PhysicalDevicePipelineBinaryPropertiesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDevicePipelineBinaryPropertiesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDevicePipelineBinaryPropertiesKHRBuilder {
+    value: PhysicalDevicePipelineBinaryPropertiesKHR,
+}
+
+impl PhysicalDevicePipelineBinaryPropertiesKHRBuilder {
+    #[inline]
+    pub fn pipeline_binary_internal_cache(mut self, pipeline_binary_internal_cache: bool) -> Self {
+        self.value.pipeline_binary_internal_cache = pipeline_binary_internal_cache as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_binary_internal_cache_control(
+        mut self,
+        pipeline_binary_internal_cache_control: bool,
+    ) -> Self {
+        self.value.pipeline_binary_internal_cache_control =
+            pipeline_binary_internal_cache_control as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_binary_prefers_internal_cache(
+        mut self,
+        pipeline_binary_prefers_internal_cache: bool,
+    ) -> Self {
+        self.value.pipeline_binary_prefers_internal_cache =
+            pipeline_binary_prefers_internal_cache as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_binary_precompiled_internal_cache(
+        mut self,
+        pipeline_binary_precompiled_internal_cache: bool,
+    ) -> Self {
+        self.value.pipeline_binary_precompiled_internal_cache =
+            pipeline_binary_precompiled_internal_cache as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_binary_compressed_data(
+        mut self,
+        pipeline_binary_compressed_data: bool,
+    ) -> Self {
+        self.value.pipeline_binary_compressed_data = pipeline_binary_compressed_data as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDevicePipelineBinaryPropertiesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDevicePipelineBinaryPropertiesKHRBuilder {
+    type Target = PhysicalDevicePipelineBinaryPropertiesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDevicePipelineBinaryPropertiesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDevicePipelineBinaryPropertiesKHRBuilder {
+    type Target = PhysicalDevicePipelineBinaryPropertiesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDevicePipelineCreationCacheControlFeatures {
     type Target = PhysicalDevicePipelineCreationCacheControlFeatures;
 
@@ -49320,6 +49599,10 @@ unsafe impl ExtendsPhysicalDeviceProperties2
 {
 }
 unsafe impl ExtendsPhysicalDeviceProperties2
+    for PhysicalDeviceComputeShaderDerivativesPropertiesKHR
+{
+}
+unsafe impl ExtendsPhysicalDeviceProperties2
     for PhysicalDeviceConservativeRasterizationPropertiesEXT
 {
 }
@@ -49400,6 +49683,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceOpacityMicromapPr
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceOpticalFlowPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePCIBusInfoPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePerformanceQueryPropertiesKHR {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePipelineBinaryPropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePipelineRobustnessPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePointClippingProperties {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDevicePortabilitySubsetPropertiesKHR {}
@@ -59137,6 +59421,464 @@ unsafe impl Cast for PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesBuilder 
     }
 }
 
+unsafe impl Cast for PipelineBinaryCreateInfoKHR {
+    type Target = PipelineBinaryCreateInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PipelineBinaryCreateInfoKHR {
+    type Builder = PipelineBinaryCreateInfoKHRBuilder<'b>;
+}
+
+/// A builder for a [`PipelineBinaryCreateInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineBinaryCreateInfoKHRBuilder<'b> {
+    value: PipelineBinaryCreateInfoKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PipelineBinaryCreateInfoKHRBuilder<'b> {
+    #[inline]
+    pub fn keys_and_data_info(
+        mut self,
+        keys_and_data_info: &'b impl Cast<Target = PipelineBinaryKeysAndDataKHR>,
+    ) -> Self {
+        self.value.keys_and_data_info = keys_and_data_info.as_ref();
+        self
+    }
+
+    #[inline]
+    pub fn pipeline(mut self, pipeline: Pipeline) -> Self {
+        self.value.pipeline = pipeline;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_create_info(
+        mut self,
+        pipeline_create_info: &'b impl Cast<Target = PipelineCreateInfoKHR>,
+    ) -> Self {
+        self.value.pipeline_create_info = pipeline_create_info.as_ref();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineBinaryCreateInfoKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PipelineBinaryCreateInfoKHRBuilder<'b> {
+    type Target = PipelineBinaryCreateInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PipelineBinaryCreateInfoKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PipelineBinaryCreateInfoKHRBuilder<'b> {
+    type Target = PipelineBinaryCreateInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineBinaryDataInfoKHR {
+    type Target = PipelineBinaryDataInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineBinaryDataInfoKHR {
+    type Builder = PipelineBinaryDataInfoKHRBuilder;
+}
+
+/// A builder for a [`PipelineBinaryDataInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineBinaryDataInfoKHRBuilder {
+    value: PipelineBinaryDataInfoKHR,
+}
+
+impl PipelineBinaryDataInfoKHRBuilder {
+    #[inline]
+    pub fn pipeline_binary(mut self, pipeline_binary: PipelineBinaryKHR) -> Self {
+        self.value.pipeline_binary = pipeline_binary;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineBinaryDataInfoKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineBinaryDataInfoKHRBuilder {
+    type Target = PipelineBinaryDataInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineBinaryDataInfoKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineBinaryDataInfoKHRBuilder {
+    type Target = PipelineBinaryDataInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineBinaryDataKHR {
+    type Target = PipelineBinaryDataKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PipelineBinaryDataKHR {
+    type Builder = PipelineBinaryDataKHRBuilder<'b>;
+}
+
+/// A builder for a [`PipelineBinaryDataKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineBinaryDataKHRBuilder<'b> {
+    value: PipelineBinaryDataKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PipelineBinaryDataKHRBuilder<'b> {
+    #[inline]
+    pub fn data(mut self, data: &'b mut [u8]) -> Self {
+        self.value.data_size = data.len() as usize;
+        self.value.data = data.as_mut_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineBinaryDataKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PipelineBinaryDataKHRBuilder<'b> {
+    type Target = PipelineBinaryDataKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PipelineBinaryDataKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PipelineBinaryDataKHRBuilder<'b> {
+    type Target = PipelineBinaryDataKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineBinaryHandlesInfoKHR {
+    type Target = PipelineBinaryHandlesInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PipelineBinaryHandlesInfoKHR {
+    type Builder = PipelineBinaryHandlesInfoKHRBuilder<'b>;
+}
+
+/// A builder for a [`PipelineBinaryHandlesInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineBinaryHandlesInfoKHRBuilder<'b> {
+    value: PipelineBinaryHandlesInfoKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PipelineBinaryHandlesInfoKHRBuilder<'b> {
+    #[inline]
+    pub fn pipeline_binary_count(mut self, pipeline_binary_count: u32) -> Self {
+        self.value.pipeline_binary_count = pipeline_binary_count;
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_binaries(mut self, pipeline_binaries: &'b mut [PipelineBinaryKHR]) -> Self {
+        self.value.pipeline_binary_count = pipeline_binaries.len() as u32;
+        self.value.pipeline_binaries = pipeline_binaries.as_mut_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineBinaryHandlesInfoKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PipelineBinaryHandlesInfoKHRBuilder<'b> {
+    type Target = PipelineBinaryHandlesInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PipelineBinaryHandlesInfoKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PipelineBinaryHandlesInfoKHRBuilder<'b> {
+    type Target = PipelineBinaryHandlesInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineBinaryInfoKHR {
+    type Target = PipelineBinaryInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PipelineBinaryInfoKHR {
+    type Builder = PipelineBinaryInfoKHRBuilder<'b>;
+}
+
+/// A builder for a [`PipelineBinaryInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineBinaryInfoKHRBuilder<'b> {
+    value: PipelineBinaryInfoKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PipelineBinaryInfoKHRBuilder<'b> {
+    #[inline]
+    pub fn pipeline_binaries(mut self, pipeline_binaries: &'b [PipelineBinaryKHR]) -> Self {
+        self.value.binary_count = pipeline_binaries.len() as u32;
+        self.value.pipeline_binaries = pipeline_binaries.as_ptr();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineBinaryInfoKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PipelineBinaryInfoKHRBuilder<'b> {
+    type Target = PipelineBinaryInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PipelineBinaryInfoKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PipelineBinaryInfoKHRBuilder<'b> {
+    type Target = PipelineBinaryInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineBinaryKeyKHR {
+    type Target = PipelineBinaryKeyKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineBinaryKeyKHR {
+    type Builder = PipelineBinaryKeyKHRBuilder;
+}
+
+/// A builder for a [`PipelineBinaryKeyKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineBinaryKeyKHRBuilder {
+    value: PipelineBinaryKeyKHR,
+}
+
+impl PipelineBinaryKeyKHRBuilder {
+    #[inline]
+    pub fn key_size(mut self, key_size: u32) -> Self {
+        self.value.key_size = key_size;
+        self
+    }
+
+    #[inline]
+    pub fn key(mut self, key: impl Into<ByteArray<MAX_PIPELINE_BINARY_KEY_SIZE_KHR>>) -> Self {
+        self.value.key = key.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineBinaryKeyKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineBinaryKeyKHRBuilder {
+    type Target = PipelineBinaryKeyKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineBinaryKeyKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineBinaryKeyKHRBuilder {
+    type Target = PipelineBinaryKeyKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineBinaryKeysAndDataKHR {
+    type Target = PipelineBinaryKeysAndDataKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for PipelineBinaryKeysAndDataKHR {
+    type Builder = PipelineBinaryKeysAndDataKHRBuilder<'b>;
+}
+
+/// A builder for a [`PipelineBinaryKeysAndDataKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineBinaryKeysAndDataKHRBuilder<'b> {
+    value: PipelineBinaryKeysAndDataKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> PipelineBinaryKeysAndDataKHRBuilder<'b> {
+    #[inline]
+    pub fn pipeline_binary_keys(
+        mut self,
+        pipeline_binary_keys: &'b [impl Cast<Target = PipelineBinaryKeyKHR>],
+    ) -> Self {
+        self.value.binary_count = pipeline_binary_keys.len() as u32;
+        self.value.pipeline_binary_keys = pipeline_binary_keys.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn pipeline_binary_data(
+        mut self,
+        pipeline_binary_data: &'b [impl Cast<Target = PipelineBinaryDataKHR>],
+    ) -> Self {
+        self.value.binary_count = pipeline_binary_data.len() as u32;
+        self.value.pipeline_binary_data = pipeline_binary_data.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PipelineBinaryKeysAndDataKHR {
+        self.value
+    }
+}
+
+impl<'b> ops::Deref for PipelineBinaryKeysAndDataKHRBuilder<'b> {
+    type Target = PipelineBinaryKeysAndDataKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl<'b> ops::DerefMut for PipelineBinaryKeysAndDataKHRBuilder<'b> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl<'b> Cast for PipelineBinaryKeysAndDataKHRBuilder<'b> {
+    type Target = PipelineBinaryKeysAndDataKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PipelineCacheCreateInfo {
     type Target = PipelineCacheCreateInfo;
 
@@ -59967,6 +60709,58 @@ impl ops::DerefMut for PipelineCreateFlags2CreateInfoKHRBuilder {
 
 unsafe impl Cast for PipelineCreateFlags2CreateInfoKHRBuilder {
     type Target = PipelineCreateFlags2CreateInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PipelineCreateInfoKHR {
+    type Target = PipelineCreateInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PipelineCreateInfoKHR {
+    type Builder = PipelineCreateInfoKHRBuilder;
+}
+
+/// A builder for a [`PipelineCreateInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PipelineCreateInfoKHRBuilder {
+    value: PipelineCreateInfoKHR,
+}
+
+impl PipelineCreateInfoKHRBuilder {
+    #[inline]
+    pub fn build(self) -> PipelineCreateInfoKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PipelineCreateInfoKHRBuilder {
+    type Target = PipelineCreateInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PipelineCreateInfoKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PipelineCreateInfoKHRBuilder {
+    type Target = PipelineCreateInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -65041,6 +65835,7 @@ unsafe impl Cast for QueueFamilyVideoPropertiesKHRBuilder {
 
 /// A Vulkan struct that can be used to extend a [`RayTracingPipelineCreateInfoKHR`].
 pub unsafe trait ExtendsRayTracingPipelineCreateInfoKHR: fmt::Debug {}
+unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineBinaryInfoKHR {}
 unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineCreateFlags2CreateInfoKHR {}
 unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineCreationFeedbackCreateInfo {}
 unsafe impl ExtendsRayTracingPipelineCreateInfoKHR for PipelineRobustnessCreateInfoEXT {}
@@ -65861,6 +66656,64 @@ impl<'b> ops::DerefMut for RefreshObjectListKHRBuilder<'b> {
 
 unsafe impl<'b> Cast for RefreshObjectListKHRBuilder<'b> {
     type Target = RefreshObjectListKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for ReleaseCapturedPipelineDataInfoKHR {
+    type Target = ReleaseCapturedPipelineDataInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for ReleaseCapturedPipelineDataInfoKHR {
+    type Builder = ReleaseCapturedPipelineDataInfoKHRBuilder;
+}
+
+/// A builder for a [`ReleaseCapturedPipelineDataInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct ReleaseCapturedPipelineDataInfoKHRBuilder {
+    value: ReleaseCapturedPipelineDataInfoKHR,
+}
+
+impl ReleaseCapturedPipelineDataInfoKHRBuilder {
+    #[inline]
+    pub fn pipeline(mut self, pipeline: Pipeline) -> Self {
+        self.value.pipeline = pipeline;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> ReleaseCapturedPipelineDataInfoKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for ReleaseCapturedPipelineDataInfoKHRBuilder {
+    type Target = ReleaseCapturedPipelineDataInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for ReleaseCapturedPipelineDataInfoKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for ReleaseCapturedPipelineDataInfoKHRBuilder {
+    type Target = ReleaseCapturedPipelineDataInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {

@@ -1545,6 +1545,50 @@ impl fmt::Debug for Pipeline {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineBinaryKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct PipelineBinaryKHR(u64);
+
+impl Handle for PipelineBinaryKHR {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::PIPELINE_BINARY_KHR;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for PipelineBinaryKHR {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for PipelineBinaryKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "PipelineBinaryKHR({:p})", self.0 as *const u8)
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineCache.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]

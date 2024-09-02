@@ -1,3 +1,13 @@
+## [0.26.0] - UNRELEASED
+
+### Bindings Updates
+- [Add discussion of processing frameworks being responsible for all defined attributes and tags (#2417)](https://github.com/KhronosGroup/Vulkan-Docs/commit/58d38a51ca9d1b4132af54c88b89481e7fe27dc9)
+- [Reserve extension #604 (#2419)](https://github.com/KhronosGroup/Vulkan-Docs/commit/55255e28e68016d9861cb134dcc9db9255670a5d)
+- [August 23, 2024 Vulkan 1.3.294 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/fb9f45c5ee8f4e8cd6f2b19eeb751fd305773a67)
+- [Missing require for pipeline binary key size - #2422 (#2423)](https://github.com/KhronosGroup/Vulkan-Docs/commit/2eaf6b23921b1a597371d0646e3202a684fb973e)
+- [minor wording change to avoid ambiguity in 'the act of waiting'. (#2418)](https://github.com/KhronosGroup/Vulkan-Docs/commit/ccd06598b7745aca51ea45c27055f5fe9573114d)
+- [August 30, 2024 Vulkan 1.3.295 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/8e435deb15124bbf9a7e3340e6cc7975999ed5c5)
+
 ## [0.25.0] - 2024-08-22
 
 ### Changed

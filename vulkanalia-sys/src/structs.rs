@@ -4478,6 +4478,26 @@ impl Default for DeviceMemoryReportCallbackDataEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDevicePipelineBinaryInternalCacheControlKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct DevicePipelineBinaryInternalCacheControlKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub disable_internal_cache: Bool32,
+}
+
+impl Default for DevicePipelineBinaryInternalCacheControlKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR,
+            next: ptr::null(),
+            disable_internal_cache: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDevicePrivateDataCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10089,24 +10109,44 @@ impl Default for PhysicalDeviceCommandBufferInheritanceFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceComputeShaderDerivativesFeaturesNV {
+pub struct PhysicalDeviceComputeShaderDerivativesFeaturesKHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub compute_derivative_group_quads: Bool32,
     pub compute_derivative_group_linear: Bool32,
 }
 
-impl Default for PhysicalDeviceComputeShaderDerivativesFeaturesNV {
+impl Default for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV,
+            s_type: StructureType::PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR,
             next: ptr::null_mut(),
             compute_derivative_group_quads: Bool32::default(),
             compute_derivative_group_linear: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceComputeShaderDerivativesPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub mesh_and_task_shader_derivatives: Bool32,
+}
+
+impl Default for PhysicalDeviceComputeShaderDerivativesPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            mesh_and_task_shader_derivatives: Bool32::default(),
         }
     }
 }
@@ -14136,6 +14176,54 @@ impl Default for PhysicalDevicePerformanceQueryPropertiesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevicePipelineBinaryFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePipelineBinaryFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub pipeline_binaries: Bool32,
+}
+
+impl Default for PhysicalDevicePipelineBinaryFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_BINARY_FEATURES_KHR,
+            next: ptr::null_mut(),
+            pipeline_binaries: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevicePipelineBinaryPropertiesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePipelineBinaryPropertiesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub pipeline_binary_internal_cache: Bool32,
+    pub pipeline_binary_internal_cache_control: Bool32,
+    pub pipeline_binary_prefers_internal_cache: Bool32,
+    pub pipeline_binary_precompiled_internal_cache: Bool32,
+    pub pipeline_binary_compressed_data: Bool32,
+}
+
+impl Default for PhysicalDevicePipelineBinaryPropertiesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_BINARY_PROPERTIES_KHR,
+            next: ptr::null_mut(),
+            pipeline_binary_internal_cache: Bool32::default(),
+            pipeline_binary_internal_cache_control: Bool32::default(),
+            pipeline_binary_prefers_internal_cache: Bool32::default(),
+            pipeline_binary_precompiled_internal_cache: Bool32::default(),
+            pipeline_binary_compressed_data: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDevicePipelineCreationCacheControlFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17381,6 +17469,154 @@ impl Default for PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineBinaryCreateInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineBinaryCreateInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub keys_and_data_info: *const PipelineBinaryKeysAndDataKHR,
+    pub pipeline: Pipeline,
+    pub pipeline_create_info: *const PipelineCreateInfoKHR,
+}
+
+impl Default for PipelineBinaryCreateInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_BINARY_CREATE_INFO_KHR,
+            next: ptr::null(),
+            keys_and_data_info: ptr::null(),
+            pipeline: Pipeline::default(),
+            pipeline_create_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineBinaryDataInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineBinaryDataInfoKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub pipeline_binary: PipelineBinaryKHR,
+}
+
+impl Default for PipelineBinaryDataInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_BINARY_DATA_INFO_KHR,
+            next: ptr::null_mut(),
+            pipeline_binary: PipelineBinaryKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineBinaryDataKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineBinaryDataKHR {
+    pub data_size: usize,
+    pub data: *mut c_void,
+}
+
+impl Default for PipelineBinaryDataKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            data_size: usize::default(),
+            data: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineBinaryHandlesInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineBinaryHandlesInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub pipeline_binary_count: u32,
+    pub pipeline_binaries: *mut PipelineBinaryKHR,
+}
+
+impl Default for PipelineBinaryHandlesInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_BINARY_HANDLES_INFO_KHR,
+            next: ptr::null(),
+            pipeline_binary_count: u32::default(),
+            pipeline_binaries: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineBinaryInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineBinaryInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub binary_count: u32,
+    pub pipeline_binaries: *const PipelineBinaryKHR,
+}
+
+impl Default for PipelineBinaryInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_BINARY_INFO_KHR,
+            next: ptr::null(),
+            binary_count: u32::default(),
+            pipeline_binaries: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineBinaryKeyKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineBinaryKeyKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub key_size: u32,
+    pub key: ByteArray<MAX_PIPELINE_BINARY_KEY_SIZE_KHR>,
+}
+
+impl Default for PipelineBinaryKeyKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_BINARY_KEY_KHR,
+            next: ptr::null_mut(),
+            key_size: u32::default(),
+            key: ByteArray::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineBinaryKeysAndDataKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineBinaryKeysAndDataKHR {
+    pub binary_count: u32,
+    pub pipeline_binary_keys: *const PipelineBinaryKeyKHR,
+    pub pipeline_binary_data: *const PipelineBinaryDataKHR,
+}
+
+impl Default for PipelineBinaryKeysAndDataKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            binary_count: u32::default(),
+            pipeline_binary_keys: ptr::null(),
+            pipeline_binary_data: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineCacheCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -17616,6 +17852,24 @@ impl Default for PipelineCreateFlags2CreateInfoKHR {
             s_type: StructureType::PIPELINE_CREATE_FLAGS_2_CREATE_INFO_KHR,
             next: ptr::null(),
             flags: PipelineCreateFlags2KHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineCreateInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PipelineCreateInfoKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+}
+
+impl Default for PipelineCreateInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PIPELINE_CREATE_INFO_KHR,
+            next: ptr::null_mut(),
         }
     }
 }
@@ -19400,6 +19654,26 @@ impl Default for RefreshObjectListKHR {
             next: ptr::null(),
             object_count: u32::default(),
             objects: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkReleaseCapturedPipelineDataInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ReleaseCapturedPipelineDataInfoKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub pipeline: Pipeline,
+}
+
+impl Default for ReleaseCapturedPipelineDataInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR,
+            next: ptr::null_mut(),
+            pipeline: Pipeline::default(),
         }
     }
 }
@@ -24626,6 +24900,9 @@ pub type PhysicalDevice8BitStorageFeaturesKHR = PhysicalDevice8BitStorageFeature
 pub type PhysicalDeviceBufferAddressFeaturesEXT = PhysicalDeviceBufferDeviceAddressFeaturesEXT;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceBufferDeviceAddressFeaturesKHR.html>
 pub type PhysicalDeviceBufferDeviceAddressFeaturesKHR = PhysicalDeviceBufferDeviceAddressFeatures;
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.html>
+pub type PhysicalDeviceComputeShaderDerivativesFeaturesNV =
+    PhysicalDeviceComputeShaderDerivativesFeaturesKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDepthStencilResolvePropertiesKHR.html>
 pub type PhysicalDeviceDepthStencilResolvePropertiesKHR =
     PhysicalDeviceDepthStencilResolveProperties;
