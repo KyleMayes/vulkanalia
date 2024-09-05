@@ -136,6 +136,7 @@ fn bind() {
         .raw_line("#![allow(dead_code)]")
         .raw_line("#![allow(non_camel_case_types)]")
         .raw_line("#![allow(non_snake_case)]")
+        .raw_line("#![allow(rustdoc::broken_intra_doc_links)]")
         .raw_line("use vulkanalia::vk::*;")
         .formatter(bindgen::Formatter::Rustfmt)
         .generate()
