@@ -21,6 +21,10 @@ For users new to Vulkan, there is a complete adaptation of https://vulkan-tutori
 
 [`vulkanalia`](https://docs.rs/vulkanalia/latest/vulkanalia) offers a fairly thin wrapper around `vulkanalia-sys` that handles function loading for you and makes the Vulkan API somewhat less error prone and more idiomatic to use from Rust. For a detailed overview of how `vulkanalia` wraps the Vulkan API, see the `API Concepts` section of the `Overview` chapter of the Vulkan tutorial which can be found [here](https://kylemayes.github.io/vulkanalia/overview.html#api-concepts).
 
+#### But wait, there's more!
+
+- [`vulkanalia-vma`](https://docs.rs/vulkanalia-vma/latest/vulkanalia_vma) &ndash; an integration of [Vulkan Memory Allocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator) with [`vulkanalia`](https://github.com/KyleMayes/vulkanalia)
+
 ## Cargo Features
 
 The `vulkanalia` crate has the following notable non-default Cargo features:
