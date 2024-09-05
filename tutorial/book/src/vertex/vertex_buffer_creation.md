@@ -4,6 +4,8 @@
 
 Buffers in Vulkan are regions of memory used for storing arbitrary data that can be read by the graphics card. They can be used to store vertex data, which we'll do in this chapter, but they can also be used for many other purposes that we'll explore in future chapters. Unlike the Vulkan objects we've been dealing with so far, buffers do not automatically allocate memory for themselves. The work from the previous chapters has shown that the Vulkan API puts the programmer in control of almost everything and memory management is one of those things.
 
+> While this tutorial will stick to using the Vulkan API to manage memory, many Vulkan applications in the real world use a higher-level abstraction such as [Vulkan Memory Allocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator) (VMA). VMA is a library that wraps the Vulkan API and makes managing memory much less laborious and difficult. The [`vulkanalia-vma` crate](https://docs.rs/vulkanalia-vma) (part of the `vulkanalia` project) provides an integration of VMA with `vulkanalia`.
+
 ## Buffer creation
 
 Create a new function `create_vertex_buffer` and call it from `App::create` right before `create_command_buffers`.
