@@ -4,6 +4,7 @@ resolver = "2"
 
 members = [
     "examples",
+    "ext/egui",
     "ext/vma",
     "tutorial",
     "tutorial/book/preprocessor",

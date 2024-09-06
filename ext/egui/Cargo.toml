@@ -1,0 +1,19 @@
+[package]
+
+edition = "2021"
+
+name = "vulkanalia-egui"
+authors = ["Kyle Mayes <kyle@mayeses.com>"]
+
+version = "0.1.0"
+
+readme = "README.md"
+license = "Apache-2.0"
+
+description = "An integration of egui with vulkanalia."
+
+documentation = "https://docs.rs/vulkanalia-egui"
+repository = "https://github.com/KyleMayes/vulkanalia"
+
+keywords = ["graphics", "vulkan"]
+categories = ["graphics"]
