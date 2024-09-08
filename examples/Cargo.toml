@@ -22,4 +22,5 @@ cgmath = "0.18"
 pretty_env_logger = "0.5"
 thiserror = "1"
 vulkanalia = { path = "../vulkanalia", features = ["libloading", "provisional", "window"] }
+vulkanalia-vma = { path = "../ext/vma" }
 winit = "0.29.1"
