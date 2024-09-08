@@ -5,22 +5,22 @@ use crate::vma::*;
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub enum MemoryUsage {
     #[default]
-    Unknown,
     Auto,
     AutoPreferDevice,
     AutoPreferHost,
     GpuLazilyAllocated,
+    Unknown,
 }
 
 impl From<MemoryUsage> for VmaMemoryUsage {
     fn from(value: MemoryUsage) -> Self {
         use MemoryUsage::*;
         match value {
-            Unknown => VmaMemoryUsage::UNKNOWN,
             Auto => VmaMemoryUsage::AUTO,
             AutoPreferDevice => VmaMemoryUsage::AUTO_PREFER_DEVICE,
             AutoPreferHost => VmaMemoryUsage::AUTO_PREFER_HOST,
             GpuLazilyAllocated => VmaMemoryUsage::GPU_LAZILY_ALLOCATED,
+            Unknown => VmaMemoryUsage::UNKNOWN,
         }
     }
 }
