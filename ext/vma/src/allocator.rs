@@ -5,7 +5,7 @@ use core::mem;
 
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::vk::{DeviceCommands, InstanceCommands};
-use vulkanalia::ResultExt;
+use vulkanalia::{ResultExt, Version};
 
 use crate::flags::AllocatorCreateFlags;
 use crate::vma::*;
@@ -16,6 +16,7 @@ pub struct AllocatorOptions<'a> {
     pub instance: &'a Instance,
     pub device: &'a Device,
     pub physical_device: vk::PhysicalDevice,
+    pub version: Version,
     pub flags: AllocatorCreateFlags,
     pub preferred_large_heap_block_size: vk::DeviceSize,
     pub heap_size_limits: &'a [vk::DeviceSize],
@@ -32,6 +33,7 @@ impl<'a> AllocatorOptions<'a> {
             instance,
             device,
             physical_device,
+            version: Version::V1_0_0,
             flags: AllocatorCreateFlags::empty(),
             preferred_large_heap_block_size: 0,
             heap_size_limits: &[],
@@ -70,7 +72,7 @@ impl Allocator {
             pDeviceMemoryCallbacks: core::ptr::null(),
             pHeapSizeLimit: heap_size_limits,
             pVulkanFunctions: &functions,
-            vulkanApiVersion: options.instance.version().into(),
+            vulkanApiVersion: options.version.into(),
             pTypeExternalMemoryHandleTypes: external_memory_handle_types,
         };
 
