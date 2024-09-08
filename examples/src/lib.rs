@@ -6,7 +6,7 @@ use std::cell::RefCell;
 use std::collections::HashSet;
 use std::env;
 use std::ffi::CStr;
-use std::mem;
+use std::mem::{self, size_of, size_of_val};
 use std::os::raw::c_void;
 use std::ptr::copy_nonoverlapping as memcpy;
 
@@ -38,20 +38,203 @@ const PORTABILITY_MACOS_VERSION: Version = Version::new(1, 3, 216);
 const MAX_FRAMES_IN_FLIGHT: usize = 2;
 
 /// An example Vulkan app implementation.
-pub trait Example {
-    /// Creates the render pass for this implementation.
-    unsafe fn create_render_pass(&self, device: &Device, data: &mut AppData) -> Result<()>;
-    /// Creates the pipeline layout and pipeline for this implementation.
-    unsafe fn create_pipeline(&self, device: &Device, data: &mut AppData) -> Result<()>;
-    /// Records commands in the command buffers for this implementation.
-    unsafe fn record_commands(&mut self, instance: &Instance, device: &Device, data: &AppData) -> Result<()>;
-    /// Destroys the Vulkan handles used by this implementation.
-    unsafe fn destroy(&self, device: &Device);
+pub trait Example<T> {
+    /// Gets the vertex shader bytes for this example.
+    fn vert(&self) -> &[u8] {
+        include_bytes!("../shaders/default/vert.spv")
+    }
+
+    /// Gets the fragment shader bytes for this example.
+    fn frag(&self) -> &[u8] {
+        include_bytes!("../shaders/default/frag.spv")
+    }
+
+    /// Creates the render pass for this example.
+    unsafe fn create_render_pass(&self, device: &Device, data: &mut AppData) -> Result<()> {
+        // Attachments
+
+        let color_attachment = vk::AttachmentDescription::builder()
+            .format(data.swapchain_format)
+            .samples(vk::SampleCountFlags::_1)
+            .load_op(vk::AttachmentLoadOp::CLEAR)
+            .store_op(vk::AttachmentStoreOp::STORE)
+            .stencil_load_op(vk::AttachmentLoadOp::DONT_CARE)
+            .stencil_store_op(vk::AttachmentStoreOp::DONT_CARE)
+            .initial_layout(vk::ImageLayout::UNDEFINED)
+            .final_layout(vk::ImageLayout::PRESENT_SRC_KHR);
+
+        // Subpasses
+
+        let color_attachment_ref = vk::AttachmentReference::builder()
+            .attachment(0)
+            .layout(vk::ImageLayout::COLOR_ATTACHMENT_OPTIMAL);
+
+        let color_attachments = &[color_attachment_ref];
+        let subpass = vk::SubpassDescription::builder()
+            .pipeline_bind_point(vk::PipelineBindPoint::GRAPHICS)
+            .color_attachments(color_attachments);
+
+        // Dependencies
+
+        let dependency = vk::SubpassDependency::builder()
+            .src_subpass(vk::SUBPASS_EXTERNAL)
+            .dst_subpass(0)
+            .src_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT)
+            .src_access_mask(vk::AccessFlags::empty())
+            .dst_stage_mask(vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT)
+            .dst_access_mask(vk::AccessFlags::COLOR_ATTACHMENT_WRITE);
+
+        // Create
+
+        let attachments = &[color_attachment];
+        let subpasses = &[subpass];
+        let dependencies = &[dependency];
+        let info = vk::RenderPassCreateInfo::builder()
+            .attachments(attachments)
+            .subpasses(subpasses)
+            .dependencies(dependencies);
+
+        data.render_pass = device.create_render_pass(&info, None)?;
+
+        Ok(())
+    }
+
+    /// Creates the pipeline layout and pipeline for this example.
+    unsafe fn create_pipeline(&self, device: &Device, data: &mut AppData) -> Result<()> {
+        // Stages
+
+        let vert_shader_module = create_shader_module(device, self.vert())?;
+        let frag_shader_module = create_shader_module(device, self.frag())?;
+
+        let vert_stage = vk::PipelineShaderStageCreateInfo::builder()
+            .stage(vk::ShaderStageFlags::VERTEX)
+            .module(vert_shader_module)
+            .name(b"main\0");
+
+        let frag_stage = vk::PipelineShaderStageCreateInfo::builder()
+            .stage(vk::ShaderStageFlags::FRAGMENT)
+            .module(frag_shader_module)
+            .name(b"main\0");
+
+        // Vertex Input State
+
+        let binding_descriptions = &[Vertex::binding_description()];
+        let attribute_descriptions = &Vertex::attribute_descriptions();
+        let vertex_input_state = vk::PipelineVertexInputStateCreateInfo::builder()
+            .vertex_binding_descriptions(binding_descriptions)
+            .vertex_attribute_descriptions(attribute_descriptions);
+
+        // Input Assembly State
+
+        let input_assembly_state = vk::PipelineInputAssemblyStateCreateInfo::builder()
+            .topology(vk::PrimitiveTopology::TRIANGLE_LIST)
+            .primitive_restart_enable(false);
+
+        // Viewport State
+
+        let viewport = vk::Viewport::builder()
+            .x(0.0)
+            .y(0.0)
+            .width(data.swapchain_extent.width as f32)
+            .height(data.swapchain_extent.height as f32)
+            .min_depth(0.0)
+            .max_depth(1.0);
+
+        let scissor = vk::Rect2D::builder()
+            .offset(vk::Offset2D::default())
+            .extent(data.swapchain_extent);
+
+        let viewports = &[viewport];
+        let scissors = &[scissor];
+        let viewport_state = vk::PipelineViewportStateCreateInfo::builder()
+            .viewports(viewports)
+            .scissors(scissors);
+
+        // Rasterization State
+
+        let rasterization_state = vk::PipelineRasterizationStateCreateInfo::builder()
+            .depth_clamp_enable(false)
+            .rasterizer_discard_enable(false)
+            .polygon_mode(vk::PolygonMode::FILL)
+            .line_width(1.0)
+            .cull_mode(vk::CullModeFlags::NONE)
+            .front_face(vk::FrontFace::CLOCKWISE)
+            .depth_bias_enable(true);
+
+        // Multisample State
+
+        let multisample_state = vk::PipelineMultisampleStateCreateInfo::builder()
+            .sample_shading_enable(false)
+            .rasterization_samples(vk::SampleCountFlags::_1);
+
+        // Color Blend State
+
+        let attachment = vk::PipelineColorBlendAttachmentState::builder()
+            .color_write_mask(vk::ColorComponentFlags::all())
+            .blend_enable(false);
+
+        let attachments = &[attachment];
+        let color_blend_state = vk::PipelineColorBlendStateCreateInfo::builder()
+            .logic_op_enable(false)
+            .logic_op(vk::LogicOp::COPY)
+            .attachments(attachments)
+            .blend_constants([0.0, 0.0, 0.0, 0.0]);
+
+        // Layout
+
+        let info = vk::PipelineLayoutCreateInfo::builder();
+        data.pipeline_layout = device.create_pipeline_layout(&info, None)?;
+
+        // Create
+
+        let stages = &[vert_stage, frag_stage];
+        let info = vk::GraphicsPipelineCreateInfo::builder()
+            .stages(stages)
+            .vertex_input_state(&vertex_input_state)
+            .input_assembly_state(&input_assembly_state)
+            .viewport_state(&viewport_state)
+            .rasterization_state(&rasterization_state)
+            .multisample_state(&multisample_state)
+            .color_blend_state(&color_blend_state)
+            .layout(data.pipeline_layout)
+            .render_pass(data.render_pass)
+            .subpass(0)
+            .base_pipeline_handle(vk::Pipeline::null());
+
+        data.pipeline = device
+            .create_graphics_pipelines(vk::PipelineCache::null(), &[info], None)?
+            .0[0];
+
+        // Cleanup
+
+        device.destroy_shader_module(vert_shader_module, None);
+        device.destroy_shader_module(frag_shader_module, None);
+
+        Ok(())
+    }
+
+    /// Sets up the custom data used by this example.
+    unsafe fn setup(&mut self, instance: &Instance, device: &Device, data: &AppData) -> Result<T>;
+
+    /// Cleans up the custom data used by this example.
+    unsafe fn cleanup(&self, instance: &Instance, device: &Device, data: &AppData, custom_data: &T);
+
+    /// Records a command buffer for a frame for this example.
+    unsafe fn record(
+        &mut self,
+        instance: &Instance,
+        device: &Device,
+        data: &AppData,
+        custom_data: &T,
+        framebuffer: vk::Framebuffer,
+        command_buffer: vk::CommandBuffer,
+    ) -> Result<()>;
 }
 
 /// An example Vulkan app.
-pub struct App {
-    pub example: RefCell<Box<dyn Example>>,
+pub struct App<T = ()> {
+    pub example: RefCell<Box<dyn Example<T>>>,
+    pub custom_data: Option<T>,
     pub event_loop: Option<EventLoop<()>>,
     pub window: Window,
     pub entry: Entry,
@@ -62,9 +245,9 @@ pub struct App {
     pub resized: bool,
 }
 
-impl App {
+impl<T> App<T> {
     /// Creates an example Vulkan app.
-    pub unsafe fn new(title: &str, mut example: impl Example + 'static) -> Result<Self> {
+    pub unsafe fn new(title: &str, mut example: impl Example<T> + 'static) -> Result<Self> {
         pretty_env_logger::init();
         info!("Starting app.");
 
@@ -95,11 +278,12 @@ impl App {
         create_command_pool(&instance, &device, &mut data)?;
         create_framebuffers(&device, &mut data)?;
         create_command_buffers(&device, &mut data)?;
-        example.record_commands(&instance, &device, &data)?;
         create_sync_objects(&device, &mut data)?;
+        let custom_data = example.setup(&instance, &device, &data)?;
 
         Ok(Self {
             example: RefCell::new(Box::new(example)),
+            custom_data: Some(custom_data),
             event_loop: Some(event_loop),
             window,
             entry,
@@ -167,11 +351,24 @@ impl App {
         // Mark this render as using the current swapchain image.
         self.data.images_in_flight[image_index as usize] = fence;
 
+        // Reset and record the current command buffer.
+        let command_buffer = self.data.command_buffers[image_index as usize];
+        self.device
+            .reset_command_buffer(command_buffer, vk::CommandBufferResetFlags::RELEASE_RESOURCES)?;
+        self.example.borrow_mut().record(
+            &self.instance,
+            &self.device,
+            &self.data,
+            self.custom_data.as_ref().unwrap(),
+            self.data.framebuffers[image_index as usize],
+            command_buffer,
+        )?;
+
         // Construct the command buffer submission information.
         let wait_semaphores = &[self.data.image_available_semaphores[self.frame]];
         let signal_semaphores = &[self.data.render_finished_semaphores[self.frame]];
         let wait_stages = &[vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT];
-        let command_buffers = &[self.data.command_buffers[image_index as usize]];
+        let command_buffers = &[command_buffer];
         let submit = vk::SubmitInfo::builder()
             .wait_semaphores(wait_semaphores)
             .wait_dst_stage_mask(wait_stages)
@@ -209,10 +406,14 @@ impl App {
 
     /// Destroys the Vulkan handles used by this app.
     #[rustfmt::skip]
-    unsafe fn destroy(&self) {
+    unsafe fn destroy(&mut self) {
         info!("Destroying app.");
+
+        let custom_data = self.custom_data.take().unwrap();
+        self.example.borrow().cleanup(&self.instance, &self.device, &self.data, &custom_data);
+        mem::drop(custom_data);
+
         self.destroy_swapchain();
-        self.example.borrow().destroy(&self.device);
         self.data.in_flight_fences.iter().for_each(|f| self.device.destroy_fence(*f, None));
         self.data.render_finished_semaphores.iter().for_each(|s| self.device.destroy_semaphore(*s, None));
         self.data.image_available_semaphores.iter().for_each(|s| self.device.destroy_semaphore(*s, None));
@@ -224,7 +425,7 @@ impl App {
     /// Recreates the swapchain used by this app.
     #[rustfmt::skip]
     unsafe fn recreate_swapchain(&mut self) -> Result<()> {
-        let mut example = self.example.borrow_mut();
+        let example = self.example.borrow();
         self.device.device_wait_idle()?;
         self.destroy_swapchain();
         create_swapchain(&self.window, &self.instance, &self.device, &mut self.data)?;
@@ -234,7 +435,6 @@ impl App {
         create_framebuffers(&self.device, &mut self.data)?;
         create_command_pool(&self.instance, &self.device, &mut self.data)?;
         create_command_buffers(&self.device, &mut self.data)?;
-        example.record_commands(&self.instance, &self.device, &self.data)?;
         Ok(())
     }
 
@@ -646,7 +846,9 @@ unsafe fn create_swapchain_image_views(device: &Device, data: &mut AppData) -> R
 unsafe fn create_command_pool(instance: &Instance, device: &Device, data: &mut AppData) -> Result<()> {
     let indices = QueueFamilyIndices::get(instance, data, data.physical_device)?;
 
-    let info = vk::CommandPoolCreateInfo::builder().queue_family_index(indices.graphics);
+    let info = vk::CommandPoolCreateInfo::builder()
+        .flags(vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER)
+        .queue_family_index(indices.graphics);
 
     data.command_pool = device.create_command_pool(&info, None)?;
 
@@ -657,7 +859,7 @@ unsafe fn create_command_pool(instance: &Instance, device: &Device, data: &mut A
 // Command Buffers
 //================================================
 
-/// Creates setup and render command buffers.
+/// Creates the primary command buffers for recording frame commands.
 unsafe fn create_command_buffers(device: &Device, data: &mut AppData) -> Result<()> {
     let info = vk::CommandBufferAllocateInfo::builder()
         .command_pool(data.command_pool)
@@ -811,7 +1013,7 @@ pub unsafe fn create_buffer(
 pub unsafe fn fill_buffer(device: &Device, buffer: vk::Buffer, memory: vk::DeviceMemory, data: &[impl Copy]) -> Result<()> {
     device.bind_buffer_memory(buffer, memory, 0)?;
 
-    let dst = device.map_memory(memory, 0, mem::size_of_val(data) as u64, vk::MemoryMapFlags::empty())?;
+    let dst = device.map_memory(memory, 0, size_of_val(data) as u64, vk::MemoryMapFlags::empty())?;
     memcpy(data.as_ptr(), dst.cast(), data.len());
     device.unmap_memory(memory);
 
@@ -852,4 +1054,46 @@ pub unsafe fn get_memory_type_index(
             suitable && memory_type.property_flags.contains(properties)
         })
         .ok_or_else(|| anyhow!("Failed to find suitable memory type."))
+}
+
+//================================================
+// Vertex
+//================================================
+
+pub type Vec2 = cgmath::Vector2<f32>;
+pub type Vec4 = cgmath::Vector4<f32>;
+
+#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+pub struct Vertex {
+    pub pos: Vec2,
+    pub color: Vec4,
+}
+
+impl Vertex {
+    /// Gets the binding description for a vertex of this type.
+    pub fn binding_description() -> vk::VertexInputBindingDescription {
+        vk::VertexInputBindingDescription::builder()
+            .binding(0)
+            .stride(size_of::<Vertex>() as u32)
+            .input_rate(vk::VertexInputRate::VERTEX)
+            .build()
+    }
+
+    /// Gets the attribute descriptions for a vertex of this type.
+    pub fn attribute_descriptions() -> [vk::VertexInputAttributeDescription; 2] {
+        let pos = vk::VertexInputAttributeDescription::builder()
+            .binding(0)
+            .location(0)
+            .format(vk::Format::R32G32_SFLOAT)
+            .offset(0)
+            .build();
+        let color = vk::VertexInputAttributeDescription::builder()
+            .binding(0)
+            .location(1)
+            .format(vk::Format::R32G32B32A32_SFLOAT)
+            .offset(size_of::<Vec2>() as u32)
+            .build();
+        [pos, color]
+    }
 }
