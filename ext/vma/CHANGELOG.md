@@ -1,4 +1,4 @@
-## [0.2.0] - UNRELEASED
+## [0.2.0] - 2024-09-07
 
 ### Changed
 - Allow specifying Vulkan API version in `AllocatorOptions`
