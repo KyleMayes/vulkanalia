@@ -19,8 +19,11 @@ description = "Examples."
 anyhow = "1"
 log = "0.4"
 cgmath = "0.18"
+egui = "0.28"
+egui-winit = "0.28"
 pretty_env_logger = "0.5"
 thiserror = "1"
 vulkanalia = { path = "../vulkanalia", features = ["libloading", "provisional", "window"] }
+vulkanalia-egui = { path = "../ext/egui" }
 vulkanalia-vma = { path = "../ext/vma" }
 winit = "0.29.1"

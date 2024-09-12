@@ -17,3 +17,9 @@ repository = "https://github.com/KyleMayes/vulkanalia"
 
 keywords = ["graphics", "vulkan"]
 categories = ["graphics"]
+
+[dependencies]
+
+egui = "0.28"
+vulkanalia = { path = "../../vulkanalia", version = "0.25", default-features = false }
+vulkanalia-vma = { path = "../vma", version = "0.2" }

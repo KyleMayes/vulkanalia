@@ -9,6 +9,7 @@ use examples::{App, AppData, Example, Vertex};
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::vk;
 use vulkanalia_vma::{self as vma, Alloc};
+use winit::window::Window;
 
 /// The triangle vertices.
 #[rustfmt::skip]
@@ -57,7 +58,7 @@ impl Example<VmaExampleData> for VmaExample {
         })
     }
 
-    unsafe fn cleanup(&self, _: &Instance, _: &Device, _: &AppData, custom_data: &VmaExampleData) {
+    unsafe fn cleanup(&self, _: &Instance, _: &Device, _: &AppData, custom_data: VmaExampleData) {
         custom_data
             .allocator
             .destroy_buffer(custom_data.vertex_buffer.0, custom_data.vertex_buffer.1);
@@ -65,10 +66,12 @@ impl Example<VmaExampleData> for VmaExample {
 
     unsafe fn record(
         &mut self,
+        _: &Window,
         _: &Instance,
         device: &Device,
         data: &AppData,
-        custom_data: &VmaExampleData,
+        custom_data: &mut VmaExampleData,
+        _: u32,
         framebuffer: vk::Framebuffer,
         command_buffer: vk::CommandBuffer,
     ) -> Result<()> {

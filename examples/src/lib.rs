@@ -6,7 +6,7 @@ use std::cell::RefCell;
 use std::collections::HashSet;
 use std::env;
 use std::ffi::CStr;
-use std::mem::{self, size_of, size_of_val};
+use std::mem::{size_of, size_of_val};
 use std::os::raw::c_void;
 use std::ptr::copy_nonoverlapping as memcpy;
 
@@ -47,6 +47,19 @@ pub trait Example<T> {
     /// Gets the fragment shader bytes for this example.
     fn frag(&self) -> &[u8] {
         include_bytes!("../shaders/default/frag.spv")
+    }
+
+    /// Creates the window for this example.
+    fn create_window(&mut self, title: &str, event_loop: &EventLoop<()>) -> Result<Window> {
+        Ok(WindowBuilder::new()
+            .with_title(title)
+            .with_inner_size(LogicalSize::new(800, 600))
+            .build(&event_loop)?)
+    }
+
+    /// Consumes an event (optionally) from the window for this example.
+    fn consume_event(&mut self, _: &Window, _: &Event<()>) -> bool {
+        false
     }
 
     /// Creates the render pass for this example.
@@ -217,15 +230,17 @@ pub trait Example<T> {
     unsafe fn setup(&mut self, instance: &Instance, device: &Device, data: &AppData) -> Result<T>;
 
     /// Cleans up the custom data used by this example.
-    unsafe fn cleanup(&self, instance: &Instance, device: &Device, data: &AppData, custom_data: &T);
+    unsafe fn cleanup(&self, instance: &Instance, device: &Device, data: &AppData, custom_data: T);
 
     /// Records a command buffer for a frame for this example.
     unsafe fn record(
         &mut self,
+        window: &Window,
         instance: &Instance,
         device: &Device,
         data: &AppData,
-        custom_data: &T,
+        custom_data: &mut T,
+        frame_index: u32,
         framebuffer: vk::Framebuffer,
         command_buffer: vk::CommandBuffer,
     ) -> Result<()>;
@@ -252,10 +267,7 @@ impl<T> App<T> {
         info!("Starting app.");
 
         let event_loop = EventLoop::new()?;
-        let window = WindowBuilder::new()
-            .with_title(title)
-            .with_inner_size(LogicalSize::new(800, 600))
-            .build(&event_loop)?;
+        let window = example.create_window(title, &event_loop)?;
 
         let mut data = AppData::default();
 
@@ -299,23 +311,26 @@ impl<T> App<T> {
     #[rustfmt::skip]
     pub unsafe fn run(mut self) -> Result<(), EventLoopError> {
         self.event_loop.take().unwrap().run(move |event, elwt| {
-            match event {
-                // Request a redraw when all events were processed.
-                Event::AboutToWait => self.window.request_redraw(),
-                Event::WindowEvent { event, .. } => match event {
-                    // Render a frame for this app.
-                    WindowEvent::RedrawRequested if !elwt.exiting() => self.render().unwrap(),
-                    // Recreate the swapchain on next render.
-                    WindowEvent::Resized(_) => self.resized = true,
-                    // Destroy this app.
-                    WindowEvent::CloseRequested => {
-                        elwt.exit();
-                        self.device.device_wait_idle().unwrap();
-                        self.destroy();
+            // Let the example consume the event if it wants to.
+            if !self.example.borrow_mut().consume_event(&self.window, &event) {
+                match event {
+                    // Request a redraw when all events were processed.
+                    Event::AboutToWait => self.window.request_redraw(),
+                    Event::WindowEvent { event, .. } => match event {
+                        // Render a frame for this app.
+                        WindowEvent::RedrawRequested if !elwt.exiting() => self.render().unwrap(),
+                        // Recreate the swapchain on next render.
+                        WindowEvent::Resized(_) => self.resized = true,
+                        // Destroy this app.
+                        WindowEvent::CloseRequested => {
+                            elwt.exit();
+                            self.device.device_wait_idle().unwrap();
+                            self.destroy();
+                        }
+                        _ => {}
                     }
                     _ => {}
                 }
-                _ => {}
             }
         })
     }
@@ -356,10 +371,12 @@ impl<T> App<T> {
         self.device
             .reset_command_buffer(command_buffer, vk::CommandBufferResetFlags::RELEASE_RESOURCES)?;
         self.example.borrow_mut().record(
+            &self.window,
             &self.instance,
             &self.device,
             &self.data,
-            self.custom_data.as_ref().unwrap(),
+            self.custom_data.as_mut().unwrap(),
+            image_index,
             self.data.framebuffers[image_index as usize],
             command_buffer,
         )?;
@@ -410,8 +427,7 @@ impl<T> App<T> {
         info!("Destroying app.");
 
         let custom_data = self.custom_data.take().unwrap();
-        self.example.borrow().cleanup(&self.instance, &self.device, &self.data, &custom_data);
-        mem::drop(custom_data);
+        self.example.borrow().cleanup(&self.instance, &self.device, &self.data, custom_data);
 
         self.destroy_swapchain();
         self.data.in_flight_fences.iter().for_each(|f| self.device.destroy_fence(*f, None));

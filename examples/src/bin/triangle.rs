@@ -7,6 +7,7 @@ use cgmath::{vec2, vec4};
 use examples::{App, AppData, Example, Vertex};
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::vk;
+use winit::window::Window;
 
 /// The triangle vertices.
 #[rustfmt::skip]
@@ -48,17 +49,19 @@ impl Example<TriangleExampleData> for TriangleExample {
         })
     }
 
-    unsafe fn cleanup(&self, _: &Instance, device: &Device, _: &AppData, custom_data: &TriangleExampleData) {
+    unsafe fn cleanup(&self, _: &Instance, device: &Device, _: &AppData, custom_data: TriangleExampleData) {
         device.destroy_buffer(custom_data.vertex_buffer, None);
         device.free_memory(custom_data.vertex_buffer_memory, None);
     }
 
     unsafe fn record(
         &mut self,
+        _: &Window,
         _: &Instance,
         device: &Device,
         data: &AppData,
-        custom_data: &TriangleExampleData,
+        custom_data: &mut TriangleExampleData,
+        _: u32,
         framebuffer: vk::Framebuffer,
         command_buffer: vk::CommandBuffer,
     ) -> Result<()> {
