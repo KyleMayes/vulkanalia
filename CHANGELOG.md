@@ -7,6 +7,7 @@
 - [Missing require for pipeline binary key size - #2422 (#2423)](https://github.com/KhronosGroup/Vulkan-Docs/commit/2eaf6b23921b1a597371d0646e3202a684fb973e)
 - [minor wording change to avoid ambiguity in 'the act of waiting'. (#2418)](https://github.com/KhronosGroup/Vulkan-Docs/commit/ccd06598b7745aca51ea45c27055f5fe9573114d)
 - [August 30, 2024 Vulkan 1.3.295 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/8e435deb15124bbf9a7e3340e6cc7975999ed5c5)
+- [Rename Lina's GitHub username to @linyaa-kiwi (#2432)](https://github.com/KhronosGroup/Vulkan-Docs/commit/45c1f5dba1f3cbd56f3361147cd559ff804589b9)
 
 ## [0.25.0] - 2024-08-22
 
