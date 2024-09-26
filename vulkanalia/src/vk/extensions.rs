@@ -1248,6 +1248,30 @@ pub trait ExtDepthBiasControlExtension: DeviceV1_0 {
 
 impl ExtDepthBiasControlExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_control.html>
+pub trait ExtDepthClampControlExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_DEPTH_CLAMP_CONTROL_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetDepthClampRangeEXT.html>
+    #[inline]
+    unsafe fn cmd_set_depth_clamp_range_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        depth_clamp_mode: DepthClampModeEXT,
+        depth_clamp_range: Option<&DepthClampRangeEXT>,
+    ) {
+        let __result = (self.commands().cmd_set_depth_clamp_range_ext)(
+            command_buffer,
+            depth_clamp_mode,
+            depth_clamp_range.map_or(ptr::null(), |v| v),
+        );
+    }
+}
+
+impl ExtDepthClampControlExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_zero_one.html>
 pub trait ExtDepthClampZeroOneExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -1553,6 +1577,165 @@ pub trait ExtDeviceFaultExtension: DeviceV1_0 {
 }
 
 impl ExtDeviceFaultExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_device_generated_commands.html>
+pub trait ExtDeviceGeneratedCommandsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_DEVICE_GENERATED_COMMANDS_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdExecuteGeneratedCommandsEXT.html>
+    #[inline]
+    unsafe fn cmd_execute_generated_commands_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        is_preprocessed: bool,
+        generated_commands_info: &GeneratedCommandsInfoEXT,
+    ) {
+        let __result = (self.commands().cmd_execute_generated_commands_ext)(
+            command_buffer,
+            is_preprocessed as Bool32,
+            generated_commands_info,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdPreprocessGeneratedCommandsEXT.html>
+    #[inline]
+    unsafe fn cmd_preprocess_generated_commands_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        generated_commands_info: &GeneratedCommandsInfoEXT,
+        state_command_buffer: CommandBuffer,
+    ) {
+        let __result = (self.commands().cmd_preprocess_generated_commands_ext)(
+            command_buffer,
+            generated_commands_info,
+            state_command_buffer,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateIndirectCommandsLayoutEXT.html>
+    #[inline]
+    unsafe fn create_indirect_commands_layout_ext(
+        &self,
+        create_info: &IndirectCommandsLayoutCreateInfoEXT,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<IndirectCommandsLayoutEXT> {
+        let mut indirect_commands_layout = MaybeUninit::<IndirectCommandsLayoutEXT>::uninit();
+
+        let __result = (self.commands().create_indirect_commands_layout_ext)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            indirect_commands_layout.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(indirect_commands_layout.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateIndirectExecutionSetEXT.html>
+    #[inline]
+    unsafe fn create_indirect_execution_set_ext(
+        &self,
+        create_info: &IndirectExecutionSetCreateInfoEXT,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<IndirectExecutionSetEXT> {
+        let mut indirect_execution_set = MaybeUninit::<IndirectExecutionSetEXT>::uninit();
+
+        let __result = (self.commands().create_indirect_execution_set_ext)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            indirect_execution_set.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(indirect_execution_set.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkDestroyIndirectCommandsLayoutEXT.html>
+    #[inline]
+    unsafe fn destroy_indirect_commands_layout_ext(
+        &self,
+        indirect_commands_layout: IndirectCommandsLayoutEXT,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_indirect_commands_layout_ext)(
+            self.handle(),
+            indirect_commands_layout,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkDestroyIndirectExecutionSetEXT.html>
+    #[inline]
+    unsafe fn destroy_indirect_execution_set_ext(
+        &self,
+        indirect_execution_set: IndirectExecutionSetEXT,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_indirect_execution_set_ext)(
+            self.handle(),
+            indirect_execution_set,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetGeneratedCommandsMemoryRequirementsEXT.html>
+    #[inline]
+    unsafe fn get_generated_commands_memory_requirements_ext(
+        &self,
+        info: &GeneratedCommandsMemoryRequirementsInfoEXT,
+        memory_requirements: &mut MemoryRequirements2,
+    ) {
+        let __result = (self
+            .commands()
+            .get_generated_commands_memory_requirements_ext)(
+            self.handle(),
+            info,
+            memory_requirements,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkUpdateIndirectExecutionSetPipelineEXT.html>
+    #[inline]
+    unsafe fn update_indirect_execution_set_pipeline_ext(
+        &self,
+        indirect_execution_set: IndirectExecutionSetEXT,
+        execution_set_writes: &[impl Cast<Target = WriteIndirectExecutionSetPipelineEXT>],
+    ) {
+        let __result = (self.commands().update_indirect_execution_set_pipeline_ext)(
+            self.handle(),
+            indirect_execution_set,
+            execution_set_writes.len() as u32,
+            execution_set_writes.as_ptr().cast(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkUpdateIndirectExecutionSetShaderEXT.html>
+    #[inline]
+    unsafe fn update_indirect_execution_set_shader_ext(
+        &self,
+        indirect_execution_set: IndirectExecutionSetEXT,
+        execution_set_writes: &[impl Cast<Target = WriteIndirectExecutionSetShaderEXT>],
+    ) {
+        let __result = (self.commands().update_indirect_execution_set_shader_ext)(
+            self.handle(),
+            indirect_execution_set,
+            execution_set_writes.len() as u32,
+            execution_set_writes.as_ptr().cast(),
+        );
+    }
+}
+
+impl ExtDeviceGeneratedCommandsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_device_memory_report.html>
 pub trait ExtDeviceMemoryReportExtension: DeviceV1_0 {
@@ -4214,6 +4397,21 @@ pub trait ExtShaderObjectExtension: DeviceV1_0 {
         let __result = (self.commands().cmd_set_depth_clamp_enable_ext)(
             command_buffer,
             depth_clamp_enable as Bool32,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetDepthClampRangeEXT.html>
+    #[inline]
+    unsafe fn cmd_set_depth_clamp_range_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        depth_clamp_mode: DepthClampModeEXT,
+        depth_clamp_range: Option<&DepthClampRangeEXT>,
+    ) {
+        let __result = (self.commands().cmd_set_depth_clamp_range_ext)(
+            command_buffer,
+            depth_clamp_mode,
+            depth_clamp_range.map_or(ptr::null(), |v| v),
         );
     }
 
