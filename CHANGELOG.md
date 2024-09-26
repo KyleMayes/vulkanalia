@@ -8,6 +8,8 @@
 - [minor wording change to avoid ambiguity in 'the act of waiting'. (#2418)](https://github.com/KhronosGroup/Vulkan-Docs/commit/ccd06598b7745aca51ea45c27055f5fe9573114d)
 - [August 30, 2024 Vulkan 1.3.295 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/8e435deb15124bbf9a7e3340e6cc7975999ed5c5)
 - [Rename Lina's GitHub username to @linyaa-kiwi (#2432)](https://github.com/KhronosGroup/Vulkan-Docs/commit/45c1f5dba1f3cbd56f3361147cd559ff804589b9)
+- [Support the `stride` attribute for array pointers in both command (#2437)](https://github.com/KhronosGroup/Vulkan-Docs/commit/eab3ac3bc5a2f9e0cf7096dcee742fea791df88a)
+- [September 26, 2024 Vulkan 1.3.296 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/486e4b289053a7d64784e7ce791711843c60c235)
 
 ## [0.25.0] - 2024-08-22
 
