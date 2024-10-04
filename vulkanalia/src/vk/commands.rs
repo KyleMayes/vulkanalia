@@ -161,6 +161,7 @@ pub struct DeviceCommands {
     pub cmd_end_transform_feedback_ext: PFN_vkCmdEndTransformFeedbackEXT,
     pub cmd_end_video_coding_khr: PFN_vkCmdEndVideoCodingKHR,
     pub cmd_execute_commands: PFN_vkCmdExecuteCommands,
+    pub cmd_execute_generated_commands_ext: PFN_vkCmdExecuteGeneratedCommandsEXT,
     pub cmd_execute_generated_commands_nv: PFN_vkCmdExecuteGeneratedCommandsNV,
     pub cmd_fill_buffer: PFN_vkCmdFillBuffer,
     pub cmd_initialize_graph_scratch_memory_amdx: PFN_vkCmdInitializeGraphScratchMemoryAMDX,
@@ -171,6 +172,7 @@ pub struct DeviceCommands {
     pub cmd_pipeline_barrier: PFN_vkCmdPipelineBarrier,
     pub cmd_pipeline_barrier2: PFN_vkCmdPipelineBarrier2,
     pub cmd_pipeline_barrier2_khr: PFN_vkCmdPipelineBarrier2KHR,
+    pub cmd_preprocess_generated_commands_ext: PFN_vkCmdPreprocessGeneratedCommandsEXT,
     pub cmd_preprocess_generated_commands_nv: PFN_vkCmdPreprocessGeneratedCommandsNV,
     pub cmd_push_constants: PFN_vkCmdPushConstants,
     pub cmd_push_constants2_khr: PFN_vkCmdPushConstants2KHR,
@@ -214,6 +216,7 @@ pub struct DeviceCommands {
     pub cmd_set_depth_bounds_test_enable: PFN_vkCmdSetDepthBoundsTestEnable,
     pub cmd_set_depth_bounds_test_enable_ext: PFN_vkCmdSetDepthBoundsTestEnableEXT,
     pub cmd_set_depth_clamp_enable_ext: PFN_vkCmdSetDepthClampEnableEXT,
+    pub cmd_set_depth_clamp_range_ext: PFN_vkCmdSetDepthClampRangeEXT,
     pub cmd_set_depth_clip_enable_ext: PFN_vkCmdSetDepthClipEnableEXT,
     pub cmd_set_depth_clip_negative_one_to_one_ext: PFN_vkCmdSetDepthClipNegativeOneToOneEXT,
     pub cmd_set_depth_compare_op: PFN_vkCmdSetDepthCompareOp,
@@ -343,7 +346,9 @@ pub struct DeviceCommands {
     pub create_graphics_pipelines: PFN_vkCreateGraphicsPipelines,
     pub create_image: PFN_vkCreateImage,
     pub create_image_view: PFN_vkCreateImageView,
+    pub create_indirect_commands_layout_ext: PFN_vkCreateIndirectCommandsLayoutEXT,
     pub create_indirect_commands_layout_nv: PFN_vkCreateIndirectCommandsLayoutNV,
+    pub create_indirect_execution_set_ext: PFN_vkCreateIndirectExecutionSetEXT,
     pub create_micromap_ext: PFN_vkCreateMicromapEXT,
     pub create_optical_flow_session_nv: PFN_vkCreateOpticalFlowSessionNV,
     pub create_pipeline_binaries_khr: PFN_vkCreatePipelineBinariesKHR,
@@ -393,7 +398,9 @@ pub struct DeviceCommands {
     pub destroy_framebuffer: PFN_vkDestroyFramebuffer,
     pub destroy_image: PFN_vkDestroyImage,
     pub destroy_image_view: PFN_vkDestroyImageView,
+    pub destroy_indirect_commands_layout_ext: PFN_vkDestroyIndirectCommandsLayoutEXT,
     pub destroy_indirect_commands_layout_nv: PFN_vkDestroyIndirectCommandsLayoutNV,
+    pub destroy_indirect_execution_set_ext: PFN_vkDestroyIndirectExecutionSetEXT,
     pub destroy_micromap_ext: PFN_vkDestroyMicromapEXT,
     pub destroy_optical_flow_session_nv: PFN_vkDestroyOpticalFlowSessionNV,
     pub destroy_pipeline: PFN_vkDestroyPipeline,
@@ -495,6 +502,8 @@ pub struct DeviceCommands {
     pub get_fence_status: PFN_vkGetFenceStatus,
     pub get_fence_win32_handle_khr: PFN_vkGetFenceWin32HandleKHR,
     pub get_framebuffer_tile_properties_qcom: PFN_vkGetFramebufferTilePropertiesQCOM,
+    pub get_generated_commands_memory_requirements_ext:
+        PFN_vkGetGeneratedCommandsMemoryRequirementsEXT,
     pub get_generated_commands_memory_requirements_nv:
         PFN_vkGetGeneratedCommandsMemoryRequirementsNV,
     pub get_image_drm_format_modifier_properties_ext: PFN_vkGetImageDrmFormatModifierPropertiesEXT,
@@ -662,6 +671,8 @@ pub struct DeviceCommands {
     pub update_descriptor_set_with_template: PFN_vkUpdateDescriptorSetWithTemplate,
     pub update_descriptor_set_with_template_khr: PFN_vkUpdateDescriptorSetWithTemplateKHR,
     pub update_descriptor_sets: PFN_vkUpdateDescriptorSets,
+    pub update_indirect_execution_set_pipeline_ext: PFN_vkUpdateIndirectExecutionSetPipelineEXT,
+    pub update_indirect_execution_set_shader_ext: PFN_vkUpdateIndirectExecutionSetShaderEXT,
     pub update_video_session_parameters_khr: PFN_vkUpdateVideoSessionParametersKHR,
     pub wait_for_fences: PFN_vkWaitForFences,
     pub wait_for_present_khr: PFN_vkWaitForPresentKHR,
@@ -2735,6 +2746,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_execute_generated_commands_ext: {
+                let value = loader(b"vkCmdExecuteGeneratedCommandsEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _is_preprocessed: Bool32,
+                        _generated_commands_info: *const GeneratedCommandsInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdExecuteGeneratedCommandsEXT")
+                    }
+                    fallback
+                }
+            },
             cmd_execute_generated_commands_nv: {
                 let value = loader(b"vkCmdExecuteGeneratedCommandsNV\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2886,6 +2912,21 @@ impl DeviceCommands {
                         _dependency_info: *const DependencyInfo,
                     ) {
                         panic!("could not load vkCmdPipelineBarrier2KHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_preprocess_generated_commands_ext: {
+                let value = loader(b"vkCmdPreprocessGeneratedCommandsEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _generated_commands_info: *const GeneratedCommandsInfoEXT,
+                        _state_command_buffer: CommandBuffer,
+                    ) {
+                        panic!("could not load vkCmdPreprocessGeneratedCommandsEXT")
                     }
                     fallback
                 }
@@ -3528,6 +3569,21 @@ impl DeviceCommands {
                         _depth_clamp_enable: Bool32,
                     ) {
                         panic!("could not load vkCmdSetDepthClampEnableEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_set_depth_clamp_range_ext: {
+                let value = loader(b"vkCmdSetDepthClampRangeEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _depth_clamp_mode: DepthClampModeEXT,
+                        _depth_clamp_range: *const DepthClampRangeEXT,
+                    ) {
+                        panic!("could not load vkCmdSetDepthClampRangeEXT")
                     }
                     fallback
                 }
@@ -5454,6 +5510,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            create_indirect_commands_layout_ext: {
+                let value = loader(b"vkCreateIndirectCommandsLayoutEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const IndirectCommandsLayoutCreateInfoEXT,
+                        _allocator: *const AllocationCallbacks,
+                        _indirect_commands_layout: *mut IndirectCommandsLayoutEXT,
+                    ) -> Result {
+                        panic!("could not load vkCreateIndirectCommandsLayoutEXT")
+                    }
+                    fallback
+                }
+            },
             create_indirect_commands_layout_nv: {
                 let value = loader(b"vkCreateIndirectCommandsLayoutNV\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -5466,6 +5538,22 @@ impl DeviceCommands {
                         _indirect_commands_layout: *mut IndirectCommandsLayoutNV,
                     ) -> Result {
                         panic!("could not load vkCreateIndirectCommandsLayoutNV")
+                    }
+                    fallback
+                }
+            },
+            create_indirect_execution_set_ext: {
+                let value = loader(b"vkCreateIndirectExecutionSetEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const IndirectExecutionSetCreateInfoEXT,
+                        _allocator: *const AllocationCallbacks,
+                        _indirect_execution_set: *mut IndirectExecutionSetEXT,
+                    ) -> Result {
+                        panic!("could not load vkCreateIndirectExecutionSetEXT")
                     }
                     fallback
                 }
@@ -6233,6 +6321,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            destroy_indirect_commands_layout_ext: {
+                let value = loader(b"vkDestroyIndirectCommandsLayoutEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _indirect_commands_layout: IndirectCommandsLayoutEXT,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyIndirectCommandsLayoutEXT")
+                    }
+                    fallback
+                }
+            },
             destroy_indirect_commands_layout_nv: {
                 let value = loader(b"vkDestroyIndirectCommandsLayoutNV\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -6244,6 +6347,21 @@ impl DeviceCommands {
                         _allocator: *const AllocationCallbacks,
                     ) {
                         panic!("could not load vkDestroyIndirectCommandsLayoutNV")
+                    }
+                    fallback
+                }
+            },
+            destroy_indirect_execution_set_ext: {
+                let value = loader(b"vkDestroyIndirectExecutionSetEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _indirect_execution_set: IndirectExecutionSetEXT,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyIndirectExecutionSetEXT")
                     }
                     fallback
                 }
@@ -7651,6 +7769,25 @@ impl DeviceCommands {
                         _properties: *mut TilePropertiesQCOM,
                     ) -> Result {
                         panic!("could not load vkGetFramebufferTilePropertiesQCOM")
+                    }
+                    fallback
+                }
+            },
+            get_generated_commands_memory_requirements_ext: {
+                let value = loader(
+                    b"vkGetGeneratedCommandsMemoryRequirementsEXT\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const GeneratedCommandsMemoryRequirementsInfoEXT,
+                        _memory_requirements: *mut MemoryRequirements2,
+                    ) {
+                        panic!("could not load vkGetGeneratedCommandsMemoryRequirementsEXT")
                     }
                     fallback
                 }
@@ -9977,6 +10114,38 @@ impl DeviceCommands {
                         _descriptor_copies: *const CopyDescriptorSet,
                     ) {
                         panic!("could not load vkUpdateDescriptorSets")
+                    }
+                    fallback
+                }
+            },
+            update_indirect_execution_set_pipeline_ext: {
+                let value = loader(b"vkUpdateIndirectExecutionSetPipelineEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _indirect_execution_set: IndirectExecutionSetEXT,
+                        _execution_set_write_count: u32,
+                        _execution_set_writes: *const WriteIndirectExecutionSetPipelineEXT,
+                    ) {
+                        panic!("could not load vkUpdateIndirectExecutionSetPipelineEXT")
+                    }
+                    fallback
+                }
+            },
+            update_indirect_execution_set_shader_ext: {
+                let value = loader(b"vkUpdateIndirectExecutionSetShaderEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _indirect_execution_set: IndirectExecutionSetEXT,
+                        _execution_set_write_count: u32,
+                        _execution_set_writes: *const WriteIndirectExecutionSetShaderEXT,
+                    ) {
+                        panic!("could not load vkUpdateIndirectExecutionSetShaderEXT")
                     }
                     fallback
                 }
