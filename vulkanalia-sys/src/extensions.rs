@@ -868,6 +868,22 @@ pub const EXT_DEPTH_BIAS_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_control.html>
+#[allow(deprecated)]
+pub const EXT_DEPTH_CLAMP_CONTROL_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_depth_clamp_control"),
+    number: 583,
+    type_: "device",
+    author: "EXT",
+    contact: "Jules Blok @jules",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_zero_one.html>
 #[allow(deprecated)]
 pub const EXT_DEPTH_CLAMP_ZERO_ONE_EXTENSION: Extension = Extension {
@@ -988,6 +1004,22 @@ pub const EXT_DEVICE_FAULT_EXTENSION: Extension = Extension {
     type_: "device",
     author: "EXT",
     contact: "Ralph Potter gitlab:@r_potter",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_device_generated_commands.html>
+#[allow(deprecated)]
+pub const EXT_DEVICE_GENERATED_COMMANDS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_device_generated_commands"),
+    number: 573,
+    type_: "device",
+    author: "EXT",
+    contact: "Mike Blumenkrantz @zmike",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -1980,6 +2012,22 @@ pub const EXT_POST_DEPTH_COVERAGE_EXTENSION: Extension = Extension {
     type_: "device",
     author: "NV",
     contact: "Daniel Koch @dgkoch",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_present_mode_fifo_latest_ready.html>
+#[allow(deprecated)]
+pub const EXT_PRESENT_MODE_FIFO_LATEST_READY_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_present_mode_fifo_latest_ready"),
+    number: 362,
+    type_: "device",
+    author: "EXT",
+    contact: "Lionel Duc @nvlduc",
     platform: None,
     required_extensions: None,
     required_version: None,
