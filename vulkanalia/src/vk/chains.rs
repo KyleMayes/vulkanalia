@@ -3517,6 +3517,20 @@ unsafe impl OutputChainStruct for FramebufferMixedSamplesCombinationNV {
     }
 }
 
+unsafe impl InputChainStruct for GeneratedCommandsInfoEXT {
+    const TYPE: StructureType = StructureType::GENERATED_COMMANDS_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for GeneratedCommandsInfoNV {
     const TYPE: StructureType = StructureType::GENERATED_COMMANDS_INFO_NV;
 
@@ -3531,6 +3545,27 @@ unsafe impl InputChainStruct for GeneratedCommandsInfoNV {
     }
 }
 
+unsafe impl InputChainStruct for GeneratedCommandsMemoryRequirementsInfoEXT {
+    const TYPE: StructureType = StructureType::GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for GeneratedCommandsMemoryRequirementsInfoEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for GeneratedCommandsMemoryRequirementsInfoNV {
     const TYPE: StructureType = StructureType::GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_NV;
 
@@ -3541,6 +3576,48 @@ unsafe impl InputChainStruct for GeneratedCommandsMemoryRequirementsInfoNV {
 
     #[inline]
     fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for GeneratedCommandsPipelineInfoEXT {
+    const TYPE: StructureType = StructureType::GENERATED_COMMANDS_PIPELINE_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for GeneratedCommandsPipelineInfoEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for GeneratedCommandsShaderInfoEXT {
+    const TYPE: StructureType = StructureType::GENERATED_COMMANDS_SHADER_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for GeneratedCommandsShaderInfoEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
@@ -4525,6 +4602,20 @@ unsafe impl InputChainStruct for ImportSemaphoreZirconHandleInfoFUCHSIA {
     }
 }
 
+unsafe impl InputChainStruct for IndirectCommandsLayoutCreateInfoEXT {
+    const TYPE: StructureType = StructureType::INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for IndirectCommandsLayoutCreateInfoNV {
     const TYPE: StructureType = StructureType::INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV;
 
@@ -4539,8 +4630,78 @@ unsafe impl InputChainStruct for IndirectCommandsLayoutCreateInfoNV {
     }
 }
 
+unsafe impl InputChainStruct for IndirectCommandsLayoutTokenEXT {
+    const TYPE: StructureType = StructureType::INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for IndirectCommandsLayoutTokenNV {
     const TYPE: StructureType = StructureType::INDIRECT_COMMANDS_LAYOUT_TOKEN_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for IndirectExecutionSetCreateInfoEXT {
+    const TYPE: StructureType = StructureType::INDIRECT_EXECUTION_SET_CREATE_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for IndirectExecutionSetPipelineInfoEXT {
+    const TYPE: StructureType = StructureType::INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for IndirectExecutionSetShaderInfoEXT {
+    const TYPE: StructureType = StructureType::INDIRECT_EXECUTION_SET_SHADER_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for IndirectExecutionSetShaderLayoutInfoEXT {
+    const TYPE: StructureType = StructureType::INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -6359,6 +6520,27 @@ unsafe impl OutputChainStruct for PhysicalDeviceDepthBiasControlFeaturesEXT {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceDepthClampControlFeaturesEXT {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceDepthClampControlFeaturesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceDepthClampZeroOneFeaturesEXT {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT;
 
@@ -6615,6 +6797,28 @@ unsafe impl OutputChainStruct for PhysicalDeviceDeviceGeneratedCommandsComputeFe
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {
     const TYPE: StructureType =
         StructureType::PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV;
@@ -6631,6 +6835,28 @@ unsafe impl InputChainStruct for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceDeviceGeneratedCommandsPropertiesEXT {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceDeviceGeneratedCommandsPropertiesEXT {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -9608,6 +9834,28 @@ unsafe impl InputChainStruct for PhysicalDevicePresentIdFeaturesKHR {
 }
 
 unsafe impl OutputChainStruct for PhysicalDevicePresentIdFeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -12856,6 +13104,21 @@ unsafe impl InputChainStruct for PipelineVertexInputStateCreateInfo {
 unsafe impl InputChainStruct for PipelineViewportCoarseSampleOrderStateCreateInfoNV {
     const TYPE: StructureType =
         StructureType::PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PipelineViewportDepthClampControlCreateInfoEXT {
+    const TYPE: StructureType =
+        StructureType::PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -16236,6 +16499,34 @@ unsafe impl InputChainStruct for WriteDescriptorSetAccelerationStructureNV {
 
 unsafe impl InputChainStruct for WriteDescriptorSetInlineUniformBlock {
     const TYPE: StructureType = StructureType::WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for WriteIndirectExecutionSetPipelineEXT {
+    const TYPE: StructureType = StructureType::WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for WriteIndirectExecutionSetShaderEXT {
+    const TYPE: StructureType = StructureType::WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT;
 
     #[inline]
     fn s_type(&self) -> StructureType {

@@ -8,6 +8,13 @@
 - [minor wording change to avoid ambiguity in 'the act of waiting'. (#2418)](https://github.com/KhronosGroup/Vulkan-Docs/commit/ccd06598b7745aca51ea45c27055f5fe9573114d)
 - [August 30, 2024 Vulkan 1.3.295 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/8e435deb15124bbf9a7e3340e6cc7975999ed5c5)
 - [Rename Lina's GitHub username to @linyaa-kiwi (#2432)](https://github.com/KhronosGroup/Vulkan-Docs/commit/45c1f5dba1f3cbd56f3361147cd559ff804589b9)
+- [Support the `stride` attribute for array pointers in both command (#2437)](https://github.com/KhronosGroup/Vulkan-Docs/commit/eab3ac3bc5a2f9e0cf7096dcee742fea791df88a)
+- [September 26, 2024 Vulkan 1.3.296 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/486e4b289053a7d64784e7ce791711843c60c235)
+- [Fix references to images in proposal documents  (#2441)](https://github.com/KhronosGroup/Vulkan-Docs/commit/817d35d46b04324b196b02b64359724d04b6b880)
+- [Fix misuse of spec macro in a proposal document](https://github.com/KhronosGroup/Vulkan-Docs/commit/d78959ab68122f270b95447317ebe22ae1f19a78)
+- [Fix missing attribute in another proposal document](https://github.com/KhronosGroup/Vulkan-Docs/commit/bfd68417298c69ca3608ae4756206c9e6a9edd11)
+- [October 4, 2024 Vulkan 1.3.297 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/74d7efc182c8e91002221c68f321c05fd596cc70)
+- [Update VK_AMDX_shader_enqueue to v2 (#2442)](https://github.com/KhronosGroup/Vulkan-Docs/commit/03f2654057e1d97a5fa824f4bdd5e235a5829b9c)
 
 ## [0.25.0] - 2024-08-22
 
