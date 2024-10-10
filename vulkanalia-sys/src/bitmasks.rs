@@ -238,6 +238,7 @@ bitflags! {
         const MICROMAP_STORAGE_EXT = 1 << 24;
         const EXECUTION_GRAPH_SCRATCH_AMDX = 1 << 25;
         const PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_EXT = 1 << 26;
+        const PREPROCESS_BUFFER_EXT = 1 << 31;
     }
 }
 
@@ -1057,6 +1058,26 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsInputModeFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct IndirectCommandsInputModeFlagsEXT: Flags {
+        const VULKAN_INDEX_BUFFER = 1;
+        const DXGI_INDEX_BUFFER = 1 << 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsLayoutUsageFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct IndirectCommandsLayoutUsageFlagsEXT: Flags {
+        const EXPLICIT_PREPROCESS = 1;
+        const UNORDERED_SEQUENCES = 1 << 1;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsLayoutUsageFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -1375,7 +1396,9 @@ bitflags! {
         const DESCRIPTOR_BUFFER_EXT = 1 << 29;
         const PROTECTED_ACCESS_ONLY_EXT = 1 << 30;
         const CAPTURE_DATA = 1 << 31;
+        const EXECUTION_GRAPH_AMDX = 1 << 32;
         const ENABLE_LEGACY_DITHERING_EXT = 1 << 34;
+        const INDIRECT_BINDABLE_EXT = 1 << 38;
     }
 }
 
@@ -1805,6 +1828,7 @@ bitflags! {
         const DISPATCH_BASE = 1 << 4;
         const FRAGMENT_SHADING_RATE_ATTACHMENT = 1 << 5;
         const FRAGMENT_DENSITY_MAP_ATTACHMENT = 1 << 6;
+        const INDIRECT_BINDABLE = 1 << 7;
     }
 }
 
