@@ -8,6 +8,22 @@
 - [minor wording change to avoid ambiguity in 'the act of waiting'. (#2418)](https://github.com/KhronosGroup/Vulkan-Docs/commit/ccd06598b7745aca51ea45c27055f5fe9573114d)
 - [August 30, 2024 Vulkan 1.3.295 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/8e435deb15124bbf9a7e3340e6cc7975999ed5c5)
 - [Rename Lina's GitHub username to @linyaa-kiwi (#2432)](https://github.com/KhronosGroup/Vulkan-Docs/commit/45c1f5dba1f3cbd56f3361147cd559ff804589b9)
+- [Support the `stride` attribute for array pointers in both command (#2437)](https://github.com/KhronosGroup/Vulkan-Docs/commit/eab3ac3bc5a2f9e0cf7096dcee742fea791df88a)
+- [September 26, 2024 Vulkan 1.3.296 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/486e4b289053a7d64784e7ce791711843c60c235)
+- [Fix references to images in proposal documents  (#2441)](https://github.com/KhronosGroup/Vulkan-Docs/commit/817d35d46b04324b196b02b64359724d04b6b880)
+- [Fix misuse of spec macro in a proposal document](https://github.com/KhronosGroup/Vulkan-Docs/commit/d78959ab68122f270b95447317ebe22ae1f19a78)
+- [Fix missing attribute in another proposal document](https://github.com/KhronosGroup/Vulkan-Docs/commit/bfd68417298c69ca3608ae4756206c9e6a9edd11)
+- [October 4, 2024 Vulkan 1.3.297 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/74d7efc182c8e91002221c68f321c05fd596cc70)
+- [Update VK_AMDX_shader_enqueue to v2 (#2442)](https://github.com/KhronosGroup/Vulkan-Docs/commit/03f2654057e1d97a5fa824f4bdd5e235a5829b9c)
+- [Add location order to the definition of from-reads (#2402)](https://github.com/KhronosGroup/Vulkan-Docs/commit/2ff3b679e9ec24498218c11d01b769bc8bb97496)
+- [October 11, 2024 Vulkan 1.3.298 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/05d5444cce55e340e07ead87d552407da5ea8771)
+- [October 18, 2024 Vulkan 1.3.299 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/46e04bb59e0f85b9124899e694a477dd9025d17c)
+- [added SHADY author id (#2448)](https://github.com/KhronosGroup/Vulkan-Docs/commit/e3a413637f200c872461c14ff397af01043a3958)
+- [Migrate Antora makefile targets into top-level Makefile (#2450)](https://github.com/KhronosGroup/Vulkan-Docs/commit/f3a114c4841d065e64fbc1d10fbe7f768867b96d)
+- [October 25, 2024 Vulkan 1.3.300 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/c9304f8dd1aa20183942c6a3638b28c81b4e681d)
+- [Do not remove nav.adoc target in clean rules](https://github.com/KhronosGroup/Vulkan-Docs/commit/30b651ee3ba1d19d23056be8e00549cd29ed42b0)
+- [Add docs.vulkan.org page information to validusage.json (#2453)](https://github.com/KhronosGroup/Vulkan-Docs/commit/69bbb65bc0ab16ee87d631ea6f25f6687facf3df)
+- [November 1, 2024 Vulkan 1.3.301 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/d095b206f80dc85140898a7979b2c3bb81aeb7f9)
 
 ## [0.25.0] - 2024-08-22
 

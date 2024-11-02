@@ -868,6 +868,22 @@ pub const EXT_DEPTH_BIAS_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_control.html>
+#[allow(deprecated)]
+pub const EXT_DEPTH_CLAMP_CONTROL_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_depth_clamp_control"),
+    number: 583,
+    type_: "device",
+    author: "EXT",
+    contact: "Jules Blok @jules",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_zero_one.html>
 #[allow(deprecated)]
 pub const EXT_DEPTH_CLAMP_ZERO_ONE_EXTENSION: Extension = Extension {
@@ -988,6 +1004,22 @@ pub const EXT_DEVICE_FAULT_EXTENSION: Extension = Extension {
     type_: "device",
     author: "EXT",
     contact: "Ralph Potter gitlab:@r_potter",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_device_generated_commands.html>
+#[allow(deprecated)]
+pub const EXT_DEVICE_GENERATED_COMMANDS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_device_generated_commands"),
+    number: 573,
+    type_: "device",
+    author: "EXT",
+    contact: "Mike Blumenkrantz @zmike",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -1988,6 +2020,22 @@ pub const EXT_POST_DEPTH_COVERAGE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_present_mode_fifo_latest_ready.html>
+#[allow(deprecated)]
+pub const EXT_PRESENT_MODE_FIFO_LATEST_READY_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_present_mode_fifo_latest_ready"),
+    number: 362,
+    type_: "device",
+    author: "EXT",
+    contact: "Lionel Duc @nvlduc",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_primitive_topology_list_restart.html>
 #[allow(deprecated)]
 pub const EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION: Extension = Extension {
@@ -2816,6 +2864,22 @@ pub const HUAWEI_CLUSTER_CULLING_SHADER_EXTENSION: Extension = Extension {
     type_: "device",
     author: "HUAWEI",
     contact: "Yuchang Wang @richard_Wang2",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_HUAWEI_hdr_vivid.html>
+#[allow(deprecated)]
+pub const HUAWEI_HDR_VIVID_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_HUAWEI_hdr_vivid"),
+    number: 591,
+    type_: "device",
+    author: "HUAWEI",
+    contact: "Zehui Lin @bactlink",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -5096,6 +5160,22 @@ pub const NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION: Extension = Extension {
 pub const NV_COOPERATIVE_MATRIX_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_cooperative_matrix"),
     number: 250,
+    type_: "device",
+    author: "NV",
+    contact: "Jeff Bolz @jeffbolznv",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_cooperative_matrix2.html>
+#[allow(deprecated)]
+pub const NV_COOPERATIVE_MATRIX2_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_cooperative_matrix2"),
+    number: 594,
     type_: "device",
     author: "NV",
     contact: "Jeff Bolz @jeffbolznv",
