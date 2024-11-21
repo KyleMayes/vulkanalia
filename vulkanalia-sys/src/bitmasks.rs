@@ -238,6 +238,7 @@ bitflags! {
         const MICROMAP_STORAGE_EXT = 1 << 24;
         const EXECUTION_GRAPH_SCRATCH_AMDX = 1 << 25;
         const PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_EXT = 1 << 26;
+        const PREPROCESS_BUFFER_EXT = 1 << 31;
     }
 }
 
@@ -817,6 +818,8 @@ bitflags! {
         const OPTICAL_FLOW_VECTOR_NV = 1 << 41;
         const OPTICAL_FLOW_COST_NV = 1 << 42;
         const HOST_IMAGE_TRANSFER_EXT = 1 << 46;
+        const VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_KHR = 1 << 49;
+        const VIDEO_ENCODE_EMPHASIS_MAP_KHR = 1 << 50;
     }
 }
 
@@ -1042,6 +1045,8 @@ bitflags! {
         const SAMPLE_WEIGHT_QCOM = 1 << 20;
         const SAMPLE_BLOCK_MATCH_QCOM = 1 << 21;
         const HOST_TRANSFER_EXT = 1 << 22;
+        const VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_KHR = 1 << 25;
+        const VIDEO_ENCODE_EMPHASIS_MAP_KHR = 1 << 26;
     }
 }
 
@@ -1053,6 +1058,26 @@ bitflags! {
         const FRAGMENT_DENSITY_MAP_DYNAMIC_EXT = 1;
         const FRAGMENT_DENSITY_MAP_DEFERRED_EXT = 1 << 1;
         const DESCRIPTOR_BUFFER_CAPTURE_REPLAY_EXT = 1 << 2;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsInputModeFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct IndirectCommandsInputModeFlagsEXT: Flags {
+        const VULKAN_INDEX_BUFFER = 1;
+        const DXGI_INDEX_BUFFER = 1 << 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsLayoutUsageFlagsEXT.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct IndirectCommandsLayoutUsageFlagsEXT: Flags {
+        const EXPLICIT_PREPROCESS = 1;
+        const UNORDERED_SEQUENCES = 1 << 1;
     }
 }
 
@@ -1375,7 +1400,9 @@ bitflags! {
         const DESCRIPTOR_BUFFER_EXT = 1 << 29;
         const PROTECTED_ACCESS_ONLY_EXT = 1 << 30;
         const CAPTURE_DATA = 1 << 31;
+        const EXECUTION_GRAPH_AMDX = 1 << 32;
         const ENABLE_LEGACY_DITHERING_EXT = 1 << 34;
+        const INDIRECT_BINDABLE_EXT = 1 << 38;
     }
 }
 
@@ -1805,6 +1832,7 @@ bitflags! {
         const DISPATCH_BASE = 1 << 4;
         const FRAGMENT_SHADING_RATE_ATTACHMENT = 1 << 5;
         const FRAGMENT_DENSITY_MAP_ATTACHMENT = 1 << 6;
+        const INDIRECT_BINDABLE = 1 << 7;
     }
 }
 
@@ -2031,6 +2059,7 @@ bitflags! {
         const DECODE_AV1 = 1 << 2;
         const ENCODE_H264 = 1 << 16;
         const ENCODE_H265 = 1 << 17;
+        const ENCODE_AV1 = 1 << 18;
     }
 }
 
@@ -2098,12 +2127,61 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeAV1CapabilityFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeAV1CapabilityFlagsKHR: Flags {
+        const VIDEO_ENCODE_AV1_CAPABILITY_PER_RATE_CONTROL_GROUP_MIN_MAX_Q_INDEX = 1;
+        const VIDEO_ENCODE_AV1_CAPABILITY_GENERATE_OBU_EXTENSION_HEADER = 1 << 1;
+        const VIDEO_ENCODE_AV1_CAPABILITY_PRIMARY_REFERENCE_CDF_ONLY = 1 << 2;
+        const VIDEO_ENCODE_AV1_CAPABILITY_FRAME_SIZE_OVERRIDE = 1 << 3;
+        const VIDEO_ENCODE_AV1_CAPABILITY_MOTION_VECTOR_SCALING = 1 << 4;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeAV1RateControlFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeAV1RateControlFlagsKHR: Flags {
+        const VIDEO_ENCODE_AV1_RATE_CONTROL_REGULAR_GOP = 1;
+        const VIDEO_ENCODE_AV1_RATE_CONTROL_TEMPORAL_LAYER_PATTERN_DYADIC = 1 << 1;
+        const VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_FLAT = 1 << 2;
+        const VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_DYADIC = 1 << 3;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeAV1StdFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeAV1StdFlagsKHR: Flags {
+        const VIDEO_ENCODE_AV1_STD_UNIFORM_TILE_SPACING_FLAG_SET = 1;
+        const VIDEO_ENCODE_AV1_STD_SKIP_MODE_PRESENT_UNSET = 1 << 1;
+        const VIDEO_ENCODE_AV1_STD_PRIMARY_REF_FRAME = 1 << 2;
+        const VIDEO_ENCODE_AV1_STD_DELTA_Q = 1 << 3;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeAV1SuperblockSizeFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeAV1SuperblockSizeFlagsKHR: Flags {
+        const VIDEO_ENCODE_AV1_SUPERBLOCK_SIZE_64 = 1;
+        const VIDEO_ENCODE_AV1_SUPERBLOCK_SIZE_128 = 1 << 1;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeCapabilityFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeCapabilityFlagsKHR: Flags {
         const PRECEDING_EXTERNALLY_ENCODED_BYTES = 1;
         const INSUFFICIENT_BITSTREAM_BUFFER_RANGE_DETECTION = 1 << 1;
+        const QUANTIZATION_DELTA_MAP = 1 << 2;
+        const EMPHASIS_MAP = 1 << 3;
     }
 }
 
@@ -2134,7 +2212,10 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct VideoEncodeFlagsKHR: Flags { }
+    pub struct VideoEncodeFlagsKHR: Flags {
+        const WITH_QUANTIZATION_DELTA_MAP = 1;
+        const WITH_EMPHASIS_MAP = 1 << 1;
+    }
 }
 
 bitflags! {
@@ -2151,6 +2232,7 @@ bitflags! {
         const PER_PICTURE_TYPE_MIN_MAX_QP = 1 << 6;
         const PER_SLICE_CONSTANT_QP = 1 << 7;
         const GENERATE_PREFIX_NALU = 1 << 8;
+        const MB_QP_DIFF_WRAPAROUND = 1 << 9;
     }
 }
 
@@ -2210,6 +2292,7 @@ bitflags! {
         const PER_SLICE_SEGMENT_CONSTANT_QP = 1 << 7;
         const MULTIPLE_TILES_PER_SLICE_SEGMENT = 1 << 8;
         const MULTIPLE_SLICE_SEGMENTS_PER_TILE = 1 << 9;
+        const CU_QP_DIFF_WRAPAROUND = 1 << 10;
     }
 }
 
@@ -2325,6 +2408,8 @@ bitflags! {
         const PROTECTED_CONTENT = 1;
         const ALLOW_ENCODE_PARAMETER_OPTIMIZATIONS = 1 << 1;
         const INLINE_QUERIES = 1 << 2;
+        const ALLOW_ENCODE_QUANTIZATION_DELTA_MAP = 1 << 3;
+        const ALLOW_ENCODE_EMPHASIS_MAP = 1 << 4;
     }
 }
 
@@ -2332,7 +2417,9 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoSessionParametersCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct VideoSessionParametersCreateFlagsKHR: Flags { }
+    pub struct VideoSessionParametersCreateFlagsKHR: Flags {
+        const QUANTIZATION_MAP_COMPATIBLE = 1;
+    }
 }
 
 bitflags! {

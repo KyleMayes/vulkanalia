@@ -1233,6 +1233,50 @@ impl fmt::Debug for ImageView {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsLayoutEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct IndirectCommandsLayoutEXT(u64);
+
+impl Handle for IndirectCommandsLayoutEXT {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::INDIRECT_COMMANDS_LAYOUT_EXT;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for IndirectCommandsLayoutEXT {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for IndirectCommandsLayoutEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "IndirectCommandsLayoutEXT({:p})", self.0 as *const u8)
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsLayoutNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
@@ -1274,6 +1318,50 @@ impl Default for IndirectCommandsLayoutNV {
 impl fmt::Debug for IndirectCommandsLayoutNV {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "IndirectCommandsLayoutNV({:p})", self.0 as *const u8)
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectExecutionSetEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct IndirectExecutionSetEXT(u64);
+
+impl Handle for IndirectExecutionSetEXT {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::INDIRECT_EXECUTION_SET_EXT;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for IndirectExecutionSetEXT {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for IndirectExecutionSetEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "IndirectExecutionSetEXT({:p})", self.0 as *const u8)
     }
 }
 
