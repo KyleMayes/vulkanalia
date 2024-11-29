@@ -868,6 +868,22 @@ pub const EXT_DEPTH_BIAS_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_control.html>
+#[allow(deprecated)]
+pub const EXT_DEPTH_CLAMP_CONTROL_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_depth_clamp_control"),
+    number: 583,
+    type_: "device",
+    author: "EXT",
+    contact: "Jules Blok @jules",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_zero_one.html>
 #[allow(deprecated)]
 pub const EXT_DEPTH_CLAMP_ZERO_ONE_EXTENSION: Extension = Extension {
@@ -988,6 +1004,22 @@ pub const EXT_DEVICE_FAULT_EXTENSION: Extension = Extension {
     type_: "device",
     author: "EXT",
     contact: "Ralph Potter gitlab:@r_potter",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_device_generated_commands.html>
+#[allow(deprecated)]
+pub const EXT_DEVICE_GENERATED_COMMANDS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_device_generated_commands"),
+    number: 573,
+    type_: "device",
+    author: "EXT",
+    contact: "Mike Blumenkrantz @zmike",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -1988,6 +2020,22 @@ pub const EXT_POST_DEPTH_COVERAGE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_present_mode_fifo_latest_ready.html>
+#[allow(deprecated)]
+pub const EXT_PRESENT_MODE_FIFO_LATEST_READY_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_present_mode_fifo_latest_ready"),
+    number: 362,
+    type_: "device",
+    author: "EXT",
+    contact: "Lionel Duc @nvlduc",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_primitive_topology_list_restart.html>
 #[allow(deprecated)]
 pub const EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION: Extension = Extension {
@@ -2584,6 +2632,22 @@ pub const EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_vertex_attribute_divisor"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_vertex_attribute_robustness.html>
+#[allow(deprecated)]
+pub const EXT_VERTEX_ATTRIBUTE_ROBUSTNESS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_vertex_attribute_robustness"),
+    number: 609,
+    type_: "device",
+    author: "EXT",
+    contact: "Piers Daniell @pdaniell-nv",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_vertex_input_dynamic_state.html>
 #[allow(deprecated)]
 pub const EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION: Extension = Extension {
@@ -2816,6 +2880,22 @@ pub const HUAWEI_CLUSTER_CULLING_SHADER_EXTENSION: Extension = Extension {
     type_: "device",
     author: "HUAWEI",
     contact: "Yuchang Wang @richard_Wang2",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_HUAWEI_hdr_vivid.html>
+#[allow(deprecated)]
+pub const HUAWEI_HDR_VIVID_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_HUAWEI_hdr_vivid"),
+    number: 591,
+    type_: "device",
+    author: "HUAWEI",
+    contact: "Zehui Lin @bactlink",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -4673,6 +4753,22 @@ pub const KHR_VIDEO_DECODE_QUEUE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_video_encode_av1.html>
+#[allow(deprecated)]
+pub const KHR_VIDEO_ENCODE_AV1_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_video_encode_av1"),
+    number: 514,
+    type_: "device",
+    author: "KHR",
+    contact: "Daniel Rakos @aqnuep",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_video_encode_h264.html>
 #[allow(deprecated)]
 pub const KHR_VIDEO_ENCODE_H264_EXTENSION: Extension = Extension {
@@ -4694,6 +4790,22 @@ pub const KHR_VIDEO_ENCODE_H264_EXTENSION: Extension = Extension {
 pub const KHR_VIDEO_ENCODE_H265_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_video_encode_h265"),
     number: 40,
+    type_: "device",
+    author: "KHR",
+    contact: "Ahmed Abdelkhalek @aabdelkh",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_video_encode_quantization_map.html>
+#[allow(deprecated)]
+pub const KHR_VIDEO_ENCODE_QUANTIZATION_MAP_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_video_encode_quantization_map"),
+    number: 554,
     type_: "device",
     author: "KHR",
     contact: "Ahmed Abdelkhalek @aabdelkh",
@@ -5107,6 +5219,22 @@ pub const NV_COOPERATIVE_MATRIX_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_cooperative_matrix2.html>
+#[allow(deprecated)]
+pub const NV_COOPERATIVE_MATRIX2_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_cooperative_matrix2"),
+    number: 594,
+    type_: "device",
+    author: "NV",
+    contact: "Jeff Bolz @jeffbolznv",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_copy_memory_indirect.html>
 #[allow(deprecated)]
 pub const NV_COPY_MEMORY_INDIRECT_EXTENSION: Extension = Extension {
@@ -5309,6 +5437,22 @@ pub const NV_DISPLACEMENT_MICROMAP_EXTENSION: Extension = Extension {
     author: "NV",
     contact: "Christoph Kubisch @pixeljetstream, Eric Werness @ewerness-nv",
     platform: Some("provisional"),
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_display_stereo.html>
+#[allow(deprecated)]
+pub const NV_DISPLAY_STEREO_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_display_stereo"),
+    number: 552,
+    type_: "instance",
+    author: "NV",
+    contact: "Russell Chou @russellcnv",
+    platform: None,
     required_extensions: None,
     required_version: None,
     deprecated_by: None,

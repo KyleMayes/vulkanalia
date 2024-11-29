@@ -267,7 +267,7 @@ pub const STD_VIDEO_AV1_FRAME_RESTORATION_TYPE_MAX_ENUM: StdVideoAV1FrameRestora
 pub struct StdVideoAV1FrameRestorationType(pub ::core::ffi::c_int);
 pub const STD_VIDEO_AV1_COLOR_PRIMARIES_BT_709: StdVideoAV1ColorPrimaries =
     StdVideoAV1ColorPrimaries(1);
-pub const STD_VIDEO_AV1_COLOR_PRIMARIES_BT_UNSPECIFIED: StdVideoAV1ColorPrimaries =
+pub const STD_VIDEO_AV1_COLOR_PRIMARIES_UNSPECIFIED: StdVideoAV1ColorPrimaries =
     StdVideoAV1ColorPrimaries(2);
 pub const STD_VIDEO_AV1_COLOR_PRIMARIES_BT_470_M: StdVideoAV1ColorPrimaries =
     StdVideoAV1ColorPrimaries(4);
@@ -291,6 +291,8 @@ pub const STD_VIDEO_AV1_COLOR_PRIMARIES_EBU_3213: StdVideoAV1ColorPrimaries =
     StdVideoAV1ColorPrimaries(22);
 pub const STD_VIDEO_AV1_COLOR_PRIMARIES_INVALID: StdVideoAV1ColorPrimaries =
     StdVideoAV1ColorPrimaries(2147483647);
+pub const STD_VIDEO_AV1_COLOR_PRIMARIES_BT_UNSPECIFIED: StdVideoAV1ColorPrimaries =
+    StdVideoAV1ColorPrimaries(2);
 pub const STD_VIDEO_AV1_COLOR_PRIMARIES_MAX_ENUM: StdVideoAV1ColorPrimaries =
     StdVideoAV1ColorPrimaries(2147483647);
 #[repr(transparent)]
@@ -1895,6 +1897,724 @@ pub struct StdVideoDecodeAV1ReferenceInfo {
     pub RefFrameSignBias: u8,
     pub OrderHint: u8,
     pub SavedOrderHints: [u8; 8usize],
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoEncodeAV1DecoderModelInfo {
+    pub buffer_delay_length_minus_1: u8,
+    pub buffer_removal_time_length_minus_1: u8,
+    pub frame_presentation_time_length_minus_1: u8,
+    pub reserved1: u8,
+    pub num_units_in_decoding_tick: u32,
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoEncodeAV1ExtensionHeader {
+    pub temporal_id: u8,
+    pub spatial_id: u8,
+}
+#[repr(C)]
+#[repr(align(4))]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoEncodeAV1OperatingPointInfoFlags {
+    pub _bitfield_align_1: [u32; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 4usize]>,
+}
+impl StdVideoEncodeAV1OperatingPointInfoFlags {
+    #[inline]
+    pub fn decoder_model_present_for_this_op(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_decoder_model_present_for_this_op(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn low_delay_mode_flag(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_low_delay_mode_flag(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn initial_display_delay_present_for_this_op(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_initial_display_delay_present_for_this_op(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(2usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn reserved(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 29u8) as u32) }
+    }
+    #[inline]
+    pub fn set_reserved(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(3usize, 29u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        decoder_model_present_for_this_op: u32,
+        low_delay_mode_flag: u32,
+        initial_display_delay_present_for_this_op: u32,
+        reserved: u32,
+    ) -> __BindgenBitfieldUnit<[u8; 4usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 4usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let decoder_model_present_for_this_op: u32 =
+                unsafe { ::core::mem::transmute(decoder_model_present_for_this_op) };
+            decoder_model_present_for_this_op as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 1u8, {
+            let low_delay_mode_flag: u32 = unsafe { ::core::mem::transmute(low_delay_mode_flag) };
+            low_delay_mode_flag as u64
+        });
+        __bindgen_bitfield_unit.set(2usize, 1u8, {
+            let initial_display_delay_present_for_this_op: u32 =
+                unsafe { ::core::mem::transmute(initial_display_delay_present_for_this_op) };
+            initial_display_delay_present_for_this_op as u64
+        });
+        __bindgen_bitfield_unit.set(3usize, 29u8, {
+            let reserved: u32 = unsafe { ::core::mem::transmute(reserved) };
+            reserved as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoEncodeAV1OperatingPointInfo {
+    pub flags: StdVideoEncodeAV1OperatingPointInfoFlags,
+    pub operating_point_idc: u16,
+    pub seq_level_idx: u8,
+    pub seq_tier: u8,
+    pub decoder_buffer_delay: u32,
+    pub encoder_buffer_delay: u32,
+    pub initial_display_delay_minus_1: u8,
+}
+#[repr(C)]
+#[repr(align(4))]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoEncodeAV1PictureInfoFlags {
+    pub _bitfield_align_1: [u8; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 4usize]>,
+}
+impl StdVideoEncodeAV1PictureInfoFlags {
+    #[inline]
+    pub fn error_resilient_mode(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_error_resilient_mode(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn disable_cdf_update(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_disable_cdf_update(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn use_superres(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_use_superres(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(2usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn render_and_frame_size_different(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_render_and_frame_size_different(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(3usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn allow_screen_content_tools(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_allow_screen_content_tools(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(4usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn is_filter_switchable(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(5usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_is_filter_switchable(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(5usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn force_integer_mv(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(6usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_force_integer_mv(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(6usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn frame_size_override_flag(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(7usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_frame_size_override_flag(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(7usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn buffer_removal_time_present_flag(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(8usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_buffer_removal_time_present_flag(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(8usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn allow_intrabc(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(9usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_allow_intrabc(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(9usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn frame_refs_short_signaling(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(10usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_frame_refs_short_signaling(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(10usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn allow_high_precision_mv(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(11usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_allow_high_precision_mv(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(11usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn is_motion_mode_switchable(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(12usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_is_motion_mode_switchable(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(12usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn use_ref_frame_mvs(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(13usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_use_ref_frame_mvs(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(13usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn disable_frame_end_update_cdf(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(14usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_disable_frame_end_update_cdf(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(14usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn allow_warped_motion(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(15usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_allow_warped_motion(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(15usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn reduced_tx_set(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(16usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_reduced_tx_set(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(16usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn skip_mode_present(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(17usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_skip_mode_present(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(17usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn delta_q_present(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(18usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_delta_q_present(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(18usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn delta_lf_present(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(19usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_delta_lf_present(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(19usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn delta_lf_multi(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(20usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_delta_lf_multi(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(20usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn segmentation_enabled(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(21usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_segmentation_enabled(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(21usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn segmentation_update_map(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(22usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_segmentation_update_map(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(22usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn segmentation_temporal_update(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(23usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_segmentation_temporal_update(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(23usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn segmentation_update_data(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(24usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_segmentation_update_data(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(24usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn UsesLr(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(25usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_UsesLr(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(25usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn usesChromaLr(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(26usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_usesChromaLr(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(26usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn show_frame(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(27usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_show_frame(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(27usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn showable_frame(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(28usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_showable_frame(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(28usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn reserved(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(29usize, 3u8) as u32) }
+    }
+    #[inline]
+    pub fn set_reserved(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(29usize, 3u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        error_resilient_mode: u32,
+        disable_cdf_update: u32,
+        use_superres: u32,
+        render_and_frame_size_different: u32,
+        allow_screen_content_tools: u32,
+        is_filter_switchable: u32,
+        force_integer_mv: u32,
+        frame_size_override_flag: u32,
+        buffer_removal_time_present_flag: u32,
+        allow_intrabc: u32,
+        frame_refs_short_signaling: u32,
+        allow_high_precision_mv: u32,
+        is_motion_mode_switchable: u32,
+        use_ref_frame_mvs: u32,
+        disable_frame_end_update_cdf: u32,
+        allow_warped_motion: u32,
+        reduced_tx_set: u32,
+        skip_mode_present: u32,
+        delta_q_present: u32,
+        delta_lf_present: u32,
+        delta_lf_multi: u32,
+        segmentation_enabled: u32,
+        segmentation_update_map: u32,
+        segmentation_temporal_update: u32,
+        segmentation_update_data: u32,
+        UsesLr: u32,
+        usesChromaLr: u32,
+        show_frame: u32,
+        showable_frame: u32,
+        reserved: u32,
+    ) -> __BindgenBitfieldUnit<[u8; 4usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 4usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let error_resilient_mode: u32 = unsafe { ::core::mem::transmute(error_resilient_mode) };
+            error_resilient_mode as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 1u8, {
+            let disable_cdf_update: u32 = unsafe { ::core::mem::transmute(disable_cdf_update) };
+            disable_cdf_update as u64
+        });
+        __bindgen_bitfield_unit.set(2usize, 1u8, {
+            let use_superres: u32 = unsafe { ::core::mem::transmute(use_superres) };
+            use_superres as u64
+        });
+        __bindgen_bitfield_unit.set(3usize, 1u8, {
+            let render_and_frame_size_different: u32 =
+                unsafe { ::core::mem::transmute(render_and_frame_size_different) };
+            render_and_frame_size_different as u64
+        });
+        __bindgen_bitfield_unit.set(4usize, 1u8, {
+            let allow_screen_content_tools: u32 =
+                unsafe { ::core::mem::transmute(allow_screen_content_tools) };
+            allow_screen_content_tools as u64
+        });
+        __bindgen_bitfield_unit.set(5usize, 1u8, {
+            let is_filter_switchable: u32 = unsafe { ::core::mem::transmute(is_filter_switchable) };
+            is_filter_switchable as u64
+        });
+        __bindgen_bitfield_unit.set(6usize, 1u8, {
+            let force_integer_mv: u32 = unsafe { ::core::mem::transmute(force_integer_mv) };
+            force_integer_mv as u64
+        });
+        __bindgen_bitfield_unit.set(7usize, 1u8, {
+            let frame_size_override_flag: u32 =
+                unsafe { ::core::mem::transmute(frame_size_override_flag) };
+            frame_size_override_flag as u64
+        });
+        __bindgen_bitfield_unit.set(8usize, 1u8, {
+            let buffer_removal_time_present_flag: u32 =
+                unsafe { ::core::mem::transmute(buffer_removal_time_present_flag) };
+            buffer_removal_time_present_flag as u64
+        });
+        __bindgen_bitfield_unit.set(9usize, 1u8, {
+            let allow_intrabc: u32 = unsafe { ::core::mem::transmute(allow_intrabc) };
+            allow_intrabc as u64
+        });
+        __bindgen_bitfield_unit.set(10usize, 1u8, {
+            let frame_refs_short_signaling: u32 =
+                unsafe { ::core::mem::transmute(frame_refs_short_signaling) };
+            frame_refs_short_signaling as u64
+        });
+        __bindgen_bitfield_unit.set(11usize, 1u8, {
+            let allow_high_precision_mv: u32 =
+                unsafe { ::core::mem::transmute(allow_high_precision_mv) };
+            allow_high_precision_mv as u64
+        });
+        __bindgen_bitfield_unit.set(12usize, 1u8, {
+            let is_motion_mode_switchable: u32 =
+                unsafe { ::core::mem::transmute(is_motion_mode_switchable) };
+            is_motion_mode_switchable as u64
+        });
+        __bindgen_bitfield_unit.set(13usize, 1u8, {
+            let use_ref_frame_mvs: u32 = unsafe { ::core::mem::transmute(use_ref_frame_mvs) };
+            use_ref_frame_mvs as u64
+        });
+        __bindgen_bitfield_unit.set(14usize, 1u8, {
+            let disable_frame_end_update_cdf: u32 =
+                unsafe { ::core::mem::transmute(disable_frame_end_update_cdf) };
+            disable_frame_end_update_cdf as u64
+        });
+        __bindgen_bitfield_unit.set(15usize, 1u8, {
+            let allow_warped_motion: u32 = unsafe { ::core::mem::transmute(allow_warped_motion) };
+            allow_warped_motion as u64
+        });
+        __bindgen_bitfield_unit.set(16usize, 1u8, {
+            let reduced_tx_set: u32 = unsafe { ::core::mem::transmute(reduced_tx_set) };
+            reduced_tx_set as u64
+        });
+        __bindgen_bitfield_unit.set(17usize, 1u8, {
+            let skip_mode_present: u32 = unsafe { ::core::mem::transmute(skip_mode_present) };
+            skip_mode_present as u64
+        });
+        __bindgen_bitfield_unit.set(18usize, 1u8, {
+            let delta_q_present: u32 = unsafe { ::core::mem::transmute(delta_q_present) };
+            delta_q_present as u64
+        });
+        __bindgen_bitfield_unit.set(19usize, 1u8, {
+            let delta_lf_present: u32 = unsafe { ::core::mem::transmute(delta_lf_present) };
+            delta_lf_present as u64
+        });
+        __bindgen_bitfield_unit.set(20usize, 1u8, {
+            let delta_lf_multi: u32 = unsafe { ::core::mem::transmute(delta_lf_multi) };
+            delta_lf_multi as u64
+        });
+        __bindgen_bitfield_unit.set(21usize, 1u8, {
+            let segmentation_enabled: u32 = unsafe { ::core::mem::transmute(segmentation_enabled) };
+            segmentation_enabled as u64
+        });
+        __bindgen_bitfield_unit.set(22usize, 1u8, {
+            let segmentation_update_map: u32 =
+                unsafe { ::core::mem::transmute(segmentation_update_map) };
+            segmentation_update_map as u64
+        });
+        __bindgen_bitfield_unit.set(23usize, 1u8, {
+            let segmentation_temporal_update: u32 =
+                unsafe { ::core::mem::transmute(segmentation_temporal_update) };
+            segmentation_temporal_update as u64
+        });
+        __bindgen_bitfield_unit.set(24usize, 1u8, {
+            let segmentation_update_data: u32 =
+                unsafe { ::core::mem::transmute(segmentation_update_data) };
+            segmentation_update_data as u64
+        });
+        __bindgen_bitfield_unit.set(25usize, 1u8, {
+            let UsesLr: u32 = unsafe { ::core::mem::transmute(UsesLr) };
+            UsesLr as u64
+        });
+        __bindgen_bitfield_unit.set(26usize, 1u8, {
+            let usesChromaLr: u32 = unsafe { ::core::mem::transmute(usesChromaLr) };
+            usesChromaLr as u64
+        });
+        __bindgen_bitfield_unit.set(27usize, 1u8, {
+            let show_frame: u32 = unsafe { ::core::mem::transmute(show_frame) };
+            show_frame as u64
+        });
+        __bindgen_bitfield_unit.set(28usize, 1u8, {
+            let showable_frame: u32 = unsafe { ::core::mem::transmute(showable_frame) };
+            showable_frame as u64
+        });
+        __bindgen_bitfield_unit.set(29usize, 3u8, {
+            let reserved: u32 = unsafe { ::core::mem::transmute(reserved) };
+            reserved as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoEncodeAV1PictureInfo {
+    pub flags: StdVideoEncodeAV1PictureInfoFlags,
+    pub frame_type: StdVideoAV1FrameType,
+    pub frame_presentation_time: u32,
+    pub current_frame_id: u32,
+    pub order_hint: u8,
+    pub primary_ref_frame: u8,
+    pub refresh_frame_flags: u8,
+    pub coded_denom: u8,
+    pub render_width_minus_1: u16,
+    pub render_height_minus_1: u16,
+    pub interpolation_filter: StdVideoAV1InterpolationFilter,
+    pub TxMode: StdVideoAV1TxMode,
+    pub delta_q_res: u8,
+    pub delta_lf_res: u8,
+    pub ref_order_hint: [u8; 8usize],
+    pub ref_frame_idx: [i8; 7usize],
+    pub reserved1: [u8; 3usize],
+    pub delta_frame_id_minus_1: [u32; 7usize],
+    pub pTileInfo: *const StdVideoAV1TileInfo,
+    pub pQuantization: *const StdVideoAV1Quantization,
+    pub pSegmentation: *const StdVideoAV1Segmentation,
+    pub pLoopFilter: *const StdVideoAV1LoopFilter,
+    pub pCDEF: *const StdVideoAV1CDEF,
+    pub pLoopRestoration: *const StdVideoAV1LoopRestoration,
+    pub pGlobalMotion: *const StdVideoAV1GlobalMotion,
+    pub pExtensionHeader: *const StdVideoEncodeAV1ExtensionHeader,
+    pub pBufferRemovalTimes: *const u32,
+}
+#[repr(C)]
+#[repr(align(4))]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoEncodeAV1ReferenceInfoFlags {
+    pub _bitfield_align_1: [u32; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 4usize]>,
+}
+impl StdVideoEncodeAV1ReferenceInfoFlags {
+    #[inline]
+    pub fn disable_frame_end_update_cdf(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_disable_frame_end_update_cdf(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn segmentation_enabled(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_segmentation_enabled(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn reserved(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 30u8) as u32) }
+    }
+    #[inline]
+    pub fn set_reserved(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(2usize, 30u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        disable_frame_end_update_cdf: u32,
+        segmentation_enabled: u32,
+        reserved: u32,
+    ) -> __BindgenBitfieldUnit<[u8; 4usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 4usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let disable_frame_end_update_cdf: u32 =
+                unsafe { ::core::mem::transmute(disable_frame_end_update_cdf) };
+            disable_frame_end_update_cdf as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 1u8, {
+            let segmentation_enabled: u32 = unsafe { ::core::mem::transmute(segmentation_enabled) };
+            segmentation_enabled as u64
+        });
+        __bindgen_bitfield_unit.set(2usize, 30u8, {
+            let reserved: u32 = unsafe { ::core::mem::transmute(reserved) };
+            reserved as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoEncodeAV1ReferenceInfo {
+    pub flags: StdVideoEncodeAV1ReferenceInfoFlags,
+    pub RefFrameId: u32,
+    pub frame_type: StdVideoAV1FrameType,
+    pub OrderHint: u8,
+    pub reserved1: [u8; 3usize],
+    pub pExtensionHeader: *const StdVideoEncodeAV1ExtensionHeader,
 }
 pub const STD_VIDEO_H264_CHROMA_FORMAT_IDC_MONOCHROME: StdVideoH264ChromaFormatIdc =
     StdVideoH264ChromaFormatIdc(0);

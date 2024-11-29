@@ -1348,6 +1348,38 @@ impl fmt::Debug for DepthBiasRepresentationEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDepthClampModeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct DepthClampModeEXT(i32);
+
+impl DepthClampModeEXT {
+    pub const VIEWPORT_RANGE: Self = Self(0);
+    pub const USER_DEFINED_RANGE: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for DepthClampModeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "VIEWPORT_RANGE"),
+            1 => write!(f, "USER_DEFINED_RANGE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -1776,6 +1808,42 @@ impl fmt::Debug for DisplayPowerStateEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDisplaySurfaceStereoTypeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct DisplaySurfaceStereoTypeNV(i32);
+
+impl DisplaySurfaceStereoTypeNV {
+    pub const NONE: Self = Self(0);
+    pub const ONBOARD_DIN: Self = Self(1);
+    pub const HDMI_3D: Self = Self(2);
+    pub const INBAND_DISPLAYPORT: Self = Self(3);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for DisplaySurfaceStereoTypeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "NONE"),
+            1 => write!(f, "ONBOARD_DIN"),
+            2 => write!(f, "HDMI_3D"),
+            3 => write!(f, "INBAND_DISPLAYPORT"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDriverId.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -1936,6 +2004,7 @@ impl DynamicState {
     pub const COVERAGE_REDUCTION_MODE_NV: Self = Self(1000455032);
     pub const ATTACHMENT_FEEDBACK_LOOP_ENABLE_EXT: Self = Self(1000524000);
     pub const LINE_STIPPLE_KHR: Self = Self(1000259000);
+    pub const DEPTH_CLAMP_RANGE_EXT: Self = Self(1000582000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2025,6 +2094,7 @@ impl fmt::Debug for DynamicState {
             1000455032 => write!(f, "COVERAGE_REDUCTION_MODE_NV"),
             1000524000 => write!(f, "ATTACHMENT_FEEDBACK_LOOP_ENABLE_EXT"),
             1000259000 => write!(f, "LINE_STIPPLE_KHR"),
+            1000582000 => write!(f, "DEPTH_CLAMP_RANGE_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -2851,6 +2921,7 @@ impl ImageLayout {
     pub const VIDEO_ENCODE_SRC_KHR: Self = Self(1000299001);
     pub const VIDEO_ENCODE_DPB_KHR: Self = Self(1000299002);
     pub const ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT: Self = Self(1000339000);
+    pub const VIDEO_ENCODE_QUANTIZATION_MAP_KHR: Self = Self(1000553000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2897,6 +2968,7 @@ impl fmt::Debug for ImageLayout {
             1000299001 => write!(f, "VIDEO_ENCODE_SRC_KHR"),
             1000299002 => write!(f, "VIDEO_ENCODE_DPB_KHR"),
             1000339000 => write!(f, "ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT"),
+            1000553000 => write!(f, "VIDEO_ENCODE_QUANTIZATION_MAP_KHR"),
             _ => self.0.fmt(f),
         }
     }
@@ -3048,6 +3120,64 @@ impl fmt::Debug for IndexType {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsTokenTypeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct IndirectCommandsTokenTypeEXT(i32);
+
+impl IndirectCommandsTokenTypeEXT {
+    pub const EXECUTION_SET: Self = Self(0);
+    pub const PUSH_CONSTANT: Self = Self(1);
+    pub const SEQUENCE_INDEX: Self = Self(2);
+    pub const INDEX_BUFFER: Self = Self(3);
+    pub const VERTEX_BUFFER: Self = Self(4);
+    pub const DRAW_INDEXED: Self = Self(5);
+    pub const DRAW: Self = Self(6);
+    pub const DRAW_INDEXED_COUNT: Self = Self(7);
+    pub const DRAW_COUNT: Self = Self(8);
+    pub const DISPATCH: Self = Self(9);
+    pub const DRAW_MESH_TASKS_NV: Self = Self(1000202002);
+    pub const DRAW_MESH_TASKS_COUNT_NV: Self = Self(1000202003);
+    pub const DRAW_MESH_TASKS: Self = Self(1000328000);
+    pub const DRAW_MESH_TASKS_COUNT: Self = Self(1000328001);
+    pub const TRACE_RAYS2: Self = Self(1000386004);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for IndirectCommandsTokenTypeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "EXECUTION_SET"),
+            1 => write!(f, "PUSH_CONSTANT"),
+            2 => write!(f, "SEQUENCE_INDEX"),
+            3 => write!(f, "INDEX_BUFFER"),
+            4 => write!(f, "VERTEX_BUFFER"),
+            5 => write!(f, "DRAW_INDEXED"),
+            6 => write!(f, "DRAW"),
+            7 => write!(f, "DRAW_INDEXED_COUNT"),
+            8 => write!(f, "DRAW_COUNT"),
+            9 => write!(f, "DISPATCH"),
+            1000202002 => write!(f, "DRAW_MESH_TASKS_NV"),
+            1000202003 => write!(f, "DRAW_MESH_TASKS_COUNT_NV"),
+            1000328000 => write!(f, "DRAW_MESH_TASKS"),
+            1000328001 => write!(f, "DRAW_MESH_TASKS_COUNT"),
+            1000386004 => write!(f, "TRACE_RAYS2"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsTokenTypeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -3093,6 +3223,38 @@ impl fmt::Debug for IndirectCommandsTokenTypeNV {
             1000328000 => write!(f, "DRAW_MESH_TASKS"),
             1000428003 => write!(f, "PIPELINE"),
             1000428004 => write!(f, "DISPATCH"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectExecutionSetInfoTypeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct IndirectExecutionSetInfoTypeEXT(i32);
+
+impl IndirectExecutionSetInfoTypeEXT {
+    pub const PIPELINES: Self = Self(0);
+    pub const SHADER_OBJECTS: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for IndirectExecutionSetInfoTypeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "PIPELINES"),
+            1 => write!(f, "SHADER_OBJECTS"),
             _ => self.0.fmt(f),
         }
     }
@@ -3477,6 +3639,8 @@ impl ObjectType {
     pub const SHADER_EXT: Self = Self(1000482000);
     pub const PIPELINE_BINARY_KHR: Self = Self(1000483000);
     pub const SEMAPHORE_SCI_SYNC_POOL_NV: Self = Self(1000489000);
+    pub const INDIRECT_COMMANDS_LAYOUT_EXT: Self = Self(1000572000);
+    pub const INDIRECT_EXECUTION_SET_EXT: Self = Self(1000572001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -3547,6 +3711,8 @@ impl fmt::Debug for ObjectType {
             1000482000 => write!(f, "SHADER_EXT"),
             1000483000 => write!(f, "PIPELINE_BINARY_KHR"),
             1000489000 => write!(f, "SEMAPHORE_SCI_SYNC_POOL_NV"),
+            1000572000 => write!(f, "INDIRECT_COMMANDS_LAYOUT_EXT"),
+            1000572001 => write!(f, "INDIRECT_EXECUTION_SET_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -4322,6 +4488,7 @@ impl PresentModeKHR {
     pub const FIFO_RELAXED: Self = Self(3);
     pub const SHARED_DEMAND_REFRESH: Self = Self(1000111000);
     pub const SHARED_CONTINUOUS_REFRESH: Self = Self(1000111001);
+    pub const FIFO_LATEST_READY_EXT: Self = Self(1000361000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -4345,6 +4512,7 @@ impl fmt::Debug for PresentModeKHR {
             3 => write!(f, "FIFO_RELAXED"),
             1000111000 => write!(f, "SHARED_DEMAND_REFRESH"),
             1000111001 => write!(f, "SHARED_CONTINUOUS_REFRESH"),
+            1000361000 => write!(f, "FIFO_LATEST_READY_EXT"),
             _ => self.0.fmt(f),
         }
     }
@@ -5730,6 +5898,7 @@ impl StructureType {
     pub const CU_MODULE_CREATE_INFO_NVX: Self = Self(1000029000);
     pub const CU_FUNCTION_CREATE_INFO_NVX: Self = Self(1000029001);
     pub const CU_LAUNCH_INFO_NVX: Self = Self(1000029002);
+    pub const CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX: Self = Self(1000029004);
     pub const IMAGE_VIEW_HANDLE_INFO_NVX: Self = Self(1000030000);
     pub const IMAGE_VIEW_ADDRESS_PROPERTIES_NVX: Self = Self(1000030001);
     pub const VIDEO_ENCODE_H264_CAPABILITIES_KHR: Self = Self(1000038000);
@@ -5767,10 +5936,6 @@ impl StructureType {
     pub const VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_KHR: Self = Self(1000040005);
     pub const VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR: Self = Self(1000040006);
     pub const TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD: Self = Self(1000041000);
-    pub const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR: Self = Self(1000044006);
-    pub const RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT: Self = Self(1000044007);
-    pub const ATTACHMENT_SAMPLE_COUNT_INFO_AMD: Self = Self(1000044008);
-    pub const MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX: Self = Self(1000044009);
     pub const STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP: Self = Self(1000049000);
     pub const PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV: Self = Self(1000050000);
     pub const PRIVATE_VENDOR_INFO_PLACEHOLDER_OFFSET_0_NV: Self = Self(1000051000);
@@ -5813,6 +5978,7 @@ impl StructureType {
     pub const SWAPCHAIN_COUNTER_CREATE_INFO_EXT: Self = Self(1000091003);
     pub const PRESENT_TIMES_INFO_GOOGLE: Self = Self(1000092000);
     pub const PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX: Self = Self(1000097000);
+    pub const MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX: Self = Self(1000044009);
     pub const PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV: Self = Self(1000098000);
     pub const PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT: Self = Self(1000099000);
     pub const PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT: Self = Self(1000099001);
@@ -5863,6 +6029,7 @@ impl StructureType {
     pub const EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX: Self = Self(1000134002);
     pub const EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX: Self = Self(1000134003);
     pub const PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX: Self = Self(1000134004);
+    pub const ATTACHMENT_SAMPLE_COUNT_INFO_AMD: Self = Self(1000044008);
     pub const SAMPLE_LOCATIONS_INFO_EXT: Self = Self(1000143000);
     pub const RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT: Self = Self(1000143001);
     pub const PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT: Self = Self(1000143002);
@@ -5950,6 +6117,8 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV: Self = Self(1000205002);
     pub const CHECKPOINT_DATA_NV: Self = Self(1000206000);
     pub const QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV: Self = Self(1000206001);
+    pub const QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV: Self = Self(1000314008);
+    pub const CHECKPOINT_DATA_2_NV: Self = Self(1000314009);
     pub const PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL: Self = Self(1000209000);
     pub const QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL: Self = Self(1000210000);
     pub const INITIALIZE_PERFORMANCE_API_INFO_INTEL: Self = Self(1000210001);
@@ -5965,11 +6134,13 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT: Self = Self(1000218000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT: Self = Self(1000218001);
     pub const RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT: Self = Self(1000218002);
+    pub const RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT: Self = Self(1000044007);
     pub const FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR: Self = Self(1000226000);
     pub const PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR: Self = Self(1000226001);
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR: Self = Self(1000226002);
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR: Self = Self(1000226003);
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR: Self = Self(1000226004);
+    pub const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR: Self = Self(1000044006);
     pub const PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD: Self = Self(1000227000);
     pub const PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD: Self = Self(1000229000);
     pub const PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR: Self = Self(1000232000);
@@ -6098,8 +6269,6 @@ impl StructureType {
     pub const IMPORT_METAL_IO_SURFACE_INFO_EXT: Self = Self(1000311009);
     pub const EXPORT_METAL_SHARED_EVENT_INFO_EXT: Self = Self(1000311010);
     pub const IMPORT_METAL_SHARED_EVENT_INFO_EXT: Self = Self(1000311011);
-    pub const QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV: Self = Self(1000314008);
-    pub const CHECKPOINT_DATA_2_NV: Self = Self(1000314009);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT: Self = Self(1000316000);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT: Self = Self(1000316001);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT: Self = Self(1000316002);
@@ -6155,6 +6324,7 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT: Self = Self(1000355000);
     pub const PIPELINE_VIEWPORT_DEPTH_CLIP_CONTROL_CREATE_INFO_EXT: Self = Self(1000355001);
     pub const PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT: Self = Self(1000356000);
+    pub const PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT: Self = Self(1000361000);
     pub const IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000364000);
     pub const MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA: Self = Self(1000364001);
     pub const MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000364002);
@@ -6364,6 +6534,17 @@ impl StructureType {
     pub const VIDEO_DECODE_AV1_PROFILE_INFO_KHR: Self = Self(1000512003);
     pub const VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR: Self = Self(1000512004);
     pub const VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR: Self = Self(1000512005);
+    pub const VIDEO_ENCODE_AV1_CAPABILITIES_KHR: Self = Self(1000513000);
+    pub const VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR: Self = Self(1000513001);
+    pub const VIDEO_ENCODE_AV1_PICTURE_INFO_KHR: Self = Self(1000513002);
+    pub const VIDEO_ENCODE_AV1_DPB_SLOT_INFO_KHR: Self = Self(1000513003);
+    pub const PHYSICAL_DEVICE_VIDEO_ENCODE_AV1_FEATURES_KHR: Self = Self(1000513004);
+    pub const VIDEO_ENCODE_AV1_PROFILE_INFO_KHR: Self = Self(1000513005);
+    pub const VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR: Self = Self(1000513006);
+    pub const VIDEO_ENCODE_AV1_RATE_CONTROL_LAYER_INFO_KHR: Self = Self(1000513007);
+    pub const VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR: Self = Self(1000513008);
+    pub const VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR: Self = Self(1000513009);
+    pub const VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR: Self = Self(1000513010);
     pub const PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR: Self = Self(1000515000);
     pub const VIDEO_INLINE_QUERY_INFO_KHR: Self = Self(1000515001);
     pub const PHYSICAL_DEVICE_PER_STAGE_DESCRIPTOR_SET_FEATURES_NV: Self = Self(1000516000);
@@ -6404,6 +6585,19 @@ impl StructureType {
     pub const SET_DESCRIPTOR_BUFFER_OFFSETS_INFO_EXT: Self = Self(1000545007);
     pub const BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT: Self = Self(1000545008);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV: Self = Self(1000546000);
+    pub const DISPLAY_SURFACE_STEREO_CREATE_INFO_NV: Self = Self(1000551000);
+    pub const DISPLAY_MODE_STEREO_PROPERTIES_NV: Self = Self(1000551001);
+    pub const VIDEO_ENCODE_QUANTIZATION_MAP_CAPABILITIES_KHR: Self = Self(1000553000);
+    pub const VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR: Self = Self(1000553001);
+    pub const VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR: Self = Self(1000553002);
+    pub const VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR: Self =
+        Self(1000553005);
+    pub const PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR: Self = Self(1000553009);
+    pub const VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR: Self = Self(1000553003);
+    pub const VIDEO_ENCODE_H265_QUANTIZATION_MAP_CAPABILITIES_KHR: Self = Self(1000553004);
+    pub const VIDEO_FORMAT_H265_QUANTIZATION_MAP_PROPERTIES_KHR: Self = Self(1000553006);
+    pub const VIDEO_ENCODE_AV1_QUANTIZATION_MAP_CAPABILITIES_KHR: Self = Self(1000553007);
+    pub const VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR: Self = Self(1000553008);
     pub const PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV: Self = Self(1000555000);
     pub const PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR: Self =
         Self(1000558000);
@@ -6416,9 +6610,31 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV: Self = Self(1000563000);
     pub const PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT: Self = Self(1000564000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV: Self = Self(1000568000);
+    pub const PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT: Self = Self(1000572000);
+    pub const PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT: Self = Self(1000572001);
+    pub const GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT: Self = Self(1000572002);
+    pub const INDIRECT_EXECUTION_SET_CREATE_INFO_EXT: Self = Self(1000572003);
+    pub const GENERATED_COMMANDS_INFO_EXT: Self = Self(1000572004);
+    pub const INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT: Self = Self(1000572006);
+    pub const INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT: Self = Self(1000572007);
+    pub const WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT: Self = Self(1000572008);
+    pub const WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT: Self = Self(1000572009);
+    pub const INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT: Self = Self(1000572010);
+    pub const INDIRECT_EXECUTION_SET_SHADER_INFO_EXT: Self = Self(1000572011);
+    pub const INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT: Self = Self(1000572012);
+    pub const GENERATED_COMMANDS_PIPELINE_INFO_EXT: Self = Self(1000572013);
+    pub const GENERATED_COMMANDS_SHADER_INFO_EXT: Self = Self(1000572014);
     pub const PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA: Self = Self(1000575000);
     pub const PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA: Self = Self(1000575001);
     pub const IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA: Self = Self(1000575002);
+    pub const PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT: Self = Self(1000582000);
+    pub const PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT: Self = Self(1000582001);
+    pub const PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI: Self = Self(1000590000);
+    pub const HDR_VIVID_DYNAMIC_METADATA_HUAWEI: Self = Self(1000590001);
+    pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV: Self = Self(1000593000);
+    pub const COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV: Self = Self(1000593001);
+    pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV: Self = Self(1000593002);
+    pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT: Self = Self(1000608000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -6714,6 +6930,7 @@ impl fmt::Debug for StructureType {
             1000029000 => write!(f, "CU_MODULE_CREATE_INFO_NVX"),
             1000029001 => write!(f, "CU_FUNCTION_CREATE_INFO_NVX"),
             1000029002 => write!(f, "CU_LAUNCH_INFO_NVX"),
+            1000029004 => write!(f, "CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX"),
             1000030000 => write!(f, "IMAGE_VIEW_HANDLE_INFO_NVX"),
             1000030001 => write!(f, "IMAGE_VIEW_ADDRESS_PROPERTIES_NVX"),
             1000038000 => write!(f, "VIDEO_ENCODE_H264_CAPABILITIES_KHR"),
@@ -6751,10 +6968,6 @@ impl fmt::Debug for StructureType {
             1000040005 => write!(f, "VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_KHR"),
             1000040006 => write!(f, "VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR"),
             1000041000 => write!(f, "TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD"),
-            1000044006 => write!(f, "RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR"),
-            1000044007 => write!(f, "RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT"),
-            1000044008 => write!(f, "ATTACHMENT_SAMPLE_COUNT_INFO_AMD"),
-            1000044009 => write!(f, "MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX"),
             1000049000 => write!(f, "STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP"),
             1000050000 => write!(f, "PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV"),
             1000051000 => write!(f, "PRIVATE_VENDOR_INFO_PLACEHOLDER_OFFSET_0_NV"),
@@ -6803,6 +7016,7 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX"
             ),
+            1000044009 => write!(f, "MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX"),
             1000098000 => write!(f, "PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV"),
             1000099000 => write!(f, "PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT"),
             1000099001 => write!(f, "PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT"),
@@ -6859,6 +7073,7 @@ impl fmt::Debug for StructureType {
             1000134002 => write!(f, "EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX"),
             1000134003 => write!(f, "EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX"),
             1000134004 => write!(f, "PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX"),
+            1000044008 => write!(f, "ATTACHMENT_SAMPLE_COUNT_INFO_AMD"),
             1000143000 => write!(f, "SAMPLE_LOCATIONS_INFO_EXT"),
             1000143001 => write!(f, "RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT"),
             1000143002 => write!(f, "PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT"),
@@ -6961,6 +7176,8 @@ impl fmt::Debug for StructureType {
             1000205002 => write!(f, "PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV"),
             1000206000 => write!(f, "CHECKPOINT_DATA_NV"),
             1000206001 => write!(f, "QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV"),
+            1000314008 => write!(f, "QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV"),
+            1000314009 => write!(f, "CHECKPOINT_DATA_2_NV"),
             1000209000 => write!(
                 f,
                 "PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL"
@@ -6979,11 +7196,13 @@ impl fmt::Debug for StructureType {
             1000218000 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT"),
             1000218001 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT"),
             1000218002 => write!(f, "RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT"),
+            1000044007 => write!(f, "RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT"),
             1000226000 => write!(f, "FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR"),
             1000226001 => write!(f, "PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR"),
             1000226002 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR"),
             1000226003 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR"),
             1000226004 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR"),
+            1000044006 => write!(f, "RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR"),
             1000227000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD"),
             1000229000 => write!(f, "PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD"),
             1000232000 => write!(
@@ -7125,8 +7344,6 @@ impl fmt::Debug for StructureType {
             1000311009 => write!(f, "IMPORT_METAL_IO_SURFACE_INFO_EXT"),
             1000311010 => write!(f, "EXPORT_METAL_SHARED_EVENT_INFO_EXT"),
             1000311011 => write!(f, "IMPORT_METAL_SHARED_EVENT_INFO_EXT"),
-            1000314008 => write!(f, "QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV"),
-            1000314009 => write!(f, "CHECKPOINT_DATA_2_NV"),
             1000316000 => write!(f, "PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT"),
             1000316001 => write!(
                 f,
@@ -7217,6 +7434,10 @@ impl fmt::Debug for StructureType {
             1000356000 => write!(
                 f,
                 "PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT"
+            ),
+            1000361000 => write!(
+                f,
+                "PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT"
             ),
             1000364000 => write!(f, "IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA"),
             1000364001 => write!(f, "MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA"),
@@ -7499,6 +7720,17 @@ impl fmt::Debug for StructureType {
             1000512003 => write!(f, "VIDEO_DECODE_AV1_PROFILE_INFO_KHR"),
             1000512004 => write!(f, "VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR"),
             1000512005 => write!(f, "VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR"),
+            1000513000 => write!(f, "VIDEO_ENCODE_AV1_CAPABILITIES_KHR"),
+            1000513001 => write!(f, "VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR"),
+            1000513002 => write!(f, "VIDEO_ENCODE_AV1_PICTURE_INFO_KHR"),
+            1000513003 => write!(f, "VIDEO_ENCODE_AV1_DPB_SLOT_INFO_KHR"),
+            1000513004 => write!(f, "PHYSICAL_DEVICE_VIDEO_ENCODE_AV1_FEATURES_KHR"),
+            1000513005 => write!(f, "VIDEO_ENCODE_AV1_PROFILE_INFO_KHR"),
+            1000513006 => write!(f, "VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR"),
+            1000513007 => write!(f, "VIDEO_ENCODE_AV1_RATE_CONTROL_LAYER_INFO_KHR"),
+            1000513008 => write!(f, "VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR"),
+            1000513009 => write!(f, "VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR"),
+            1000513010 => write!(f, "VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR"),
             1000515000 => write!(f, "PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR"),
             1000515001 => write!(f, "VIDEO_INLINE_QUERY_INFO_KHR"),
             1000516000 => write!(f, "PHYSICAL_DEVICE_PER_STAGE_DESCRIPTOR_SET_FEATURES_NV"),
@@ -7547,6 +7779,24 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV"
             ),
+            1000551000 => write!(f, "DISPLAY_SURFACE_STEREO_CREATE_INFO_NV"),
+            1000551001 => write!(f, "DISPLAY_MODE_STEREO_PROPERTIES_NV"),
+            1000553000 => write!(f, "VIDEO_ENCODE_QUANTIZATION_MAP_CAPABILITIES_KHR"),
+            1000553001 => write!(f, "VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR"),
+            1000553002 => write!(f, "VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR"),
+            1000553005 => write!(
+                f,
+                "VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR"
+            ),
+            1000553009 => write!(
+                f,
+                "PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR"
+            ),
+            1000553003 => write!(f, "VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR"),
+            1000553004 => write!(f, "VIDEO_ENCODE_H265_QUANTIZATION_MAP_CAPABILITIES_KHR"),
+            1000553006 => write!(f, "VIDEO_FORMAT_H265_QUANTIZATION_MAP_PROPERTIES_KHR"),
+            1000553007 => write!(f, "VIDEO_ENCODE_AV1_QUANTIZATION_MAP_CAPABILITIES_KHR"),
+            1000553008 => write!(f, "VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR"),
             1000555000 => write!(f, "PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV"),
             1000558000 => write!(
                 f,
@@ -7567,9 +7817,37 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT"
             ),
             1000568000 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV"),
+            1000572000 => write!(f, "PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT"),
+            1000572001 => write!(
+                f,
+                "PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT"
+            ),
+            1000572002 => write!(f, "GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT"),
+            1000572003 => write!(f, "INDIRECT_EXECUTION_SET_CREATE_INFO_EXT"),
+            1000572004 => write!(f, "GENERATED_COMMANDS_INFO_EXT"),
+            1000572006 => write!(f, "INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT"),
+            1000572007 => write!(f, "INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT"),
+            1000572008 => write!(f, "WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT"),
+            1000572009 => write!(f, "WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT"),
+            1000572010 => write!(f, "INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT"),
+            1000572011 => write!(f, "INDIRECT_EXECUTION_SET_SHADER_INFO_EXT"),
+            1000572012 => write!(f, "INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT"),
+            1000572013 => write!(f, "GENERATED_COMMANDS_PIPELINE_INFO_EXT"),
+            1000572014 => write!(f, "GENERATED_COMMANDS_SHADER_INFO_EXT"),
             1000575000 => write!(f, "PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA"),
             1000575001 => write!(f, "PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA"),
             1000575002 => write!(f, "IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA"),
+            1000582000 => write!(f, "PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT"),
+            1000582001 => write!(f, "PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT"),
+            1000590000 => write!(f, "PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI"),
+            1000590001 => write!(f, "HDR_VIVID_DYNAMIC_METADATA_HUAWEI"),
+            1000593000 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV"),
+            1000593001 => write!(f, "COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV"),
+            1000593002 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV"),
+            1000608000 => write!(
+                f,
+                "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT"
+            ),
             _ => self.0.fmt(f),
         }
     }
@@ -7986,6 +8264,79 @@ impl fmt::Debug for VertexInputRate {
         match self.0 {
             0 => write!(f, "VERTEX"),
             1 => write!(f, "INSTANCE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeAV1PredictionModeKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct VideoEncodeAV1PredictionModeKHR(i32);
+
+impl VideoEncodeAV1PredictionModeKHR {
+    pub const VIDEO_ENCODE_AV1_PREDICTION_MODE_INTRA_ONLY: Self = Self(0);
+    pub const VIDEO_ENCODE_AV1_PREDICTION_MODE_SINGLE_REFERENCE: Self = Self(1);
+    pub const VIDEO_ENCODE_AV1_PREDICTION_MODE_UNIDIRECTIONAL_COMPOUND: Self = Self(2);
+    pub const VIDEO_ENCODE_AV1_PREDICTION_MODE_BIDIRECTIONAL_COMPOUND: Self = Self(3);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for VideoEncodeAV1PredictionModeKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "VIDEO_ENCODE_AV1_PREDICTION_MODE_INTRA_ONLY"),
+            1 => write!(f, "VIDEO_ENCODE_AV1_PREDICTION_MODE_SINGLE_REFERENCE"),
+            2 => write!(
+                f,
+                "VIDEO_ENCODE_AV1_PREDICTION_MODE_UNIDIRECTIONAL_COMPOUND"
+            ),
+            3 => write!(f, "VIDEO_ENCODE_AV1_PREDICTION_MODE_BIDIRECTIONAL_COMPOUND"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeAV1RateControlGroupKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct VideoEncodeAV1RateControlGroupKHR(i32);
+
+impl VideoEncodeAV1RateControlGroupKHR {
+    pub const VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA: Self = Self(0);
+    pub const VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE: Self = Self(1);
+    pub const VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE: Self = Self(2);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for VideoEncodeAV1RateControlGroupKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA"),
+            1 => write!(f, "VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE"),
+            2 => write!(f, "VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE"),
             _ => self.0.fmt(f),
         }
     }

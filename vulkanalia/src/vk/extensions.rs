@@ -46,10 +46,15 @@ pub trait AmdxShaderEnqueueExtension: DeviceV1_0 {
         &self,
         command_buffer: CommandBuffer,
         scratch: DeviceAddress,
+        scratch_size: DeviceSize,
         count_info: &DispatchGraphCountInfoAMDX,
     ) {
-        let __result =
-            (self.commands().cmd_dispatch_graph_amdx)(command_buffer, scratch, count_info);
+        let __result = (self.commands().cmd_dispatch_graph_amdx)(
+            command_buffer,
+            scratch,
+            scratch_size,
+            count_info,
+        );
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDispatchGraphIndirectAMDX.html>
@@ -58,10 +63,15 @@ pub trait AmdxShaderEnqueueExtension: DeviceV1_0 {
         &self,
         command_buffer: CommandBuffer,
         scratch: DeviceAddress,
+        scratch_size: DeviceSize,
         count_info: &DispatchGraphCountInfoAMDX,
     ) {
-        let __result =
-            (self.commands().cmd_dispatch_graph_indirect_amdx)(command_buffer, scratch, count_info);
+        let __result = (self.commands().cmd_dispatch_graph_indirect_amdx)(
+            command_buffer,
+            scratch,
+            scratch_size,
+            count_info,
+        );
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdDispatchGraphIndirectCountAMDX.html>
@@ -70,11 +80,13 @@ pub trait AmdxShaderEnqueueExtension: DeviceV1_0 {
         &self,
         command_buffer: CommandBuffer,
         scratch: DeviceAddress,
+        scratch_size: DeviceSize,
         count_info: DeviceAddress,
     ) {
         let __result = (self.commands().cmd_dispatch_graph_indirect_count_amdx)(
             command_buffer,
             scratch,
+            scratch_size,
             count_info,
         );
     }
@@ -84,10 +96,16 @@ pub trait AmdxShaderEnqueueExtension: DeviceV1_0 {
     unsafe fn cmd_initialize_graph_scratch_memory_amdx(
         &self,
         command_buffer: CommandBuffer,
+        execution_graph: Pipeline,
         scratch: DeviceAddress,
+        scratch_size: DeviceSize,
     ) {
-        let __result =
-            (self.commands().cmd_initialize_graph_scratch_memory_amdx)(command_buffer, scratch);
+        let __result = (self.commands().cmd_initialize_graph_scratch_memory_amdx)(
+            command_buffer,
+            execution_graph,
+            scratch,
+            scratch_size,
+        );
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateExecutionGraphPipelinesAMDX.html>
@@ -187,6 +205,25 @@ pub trait AmdBufferMarkerExtension: DeviceV1_0 {
     /// The metadata for this extension.
     #[allow(deprecated)]
     const METADATA: Extension = AMD_BUFFER_MARKER_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdWriteBufferMarker2AMD.html>
+    #[inline]
+    unsafe fn cmd_write_buffer_marker2_amd(
+        &self,
+        command_buffer: CommandBuffer,
+        stage: PipelineStageFlags2,
+        dst_buffer: Buffer,
+        dst_offset: DeviceSize,
+        marker: u32,
+    ) {
+        let __result = (self.commands().cmd_write_buffer_marker2_amd)(
+            command_buffer,
+            stage,
+            dst_buffer,
+            dst_offset,
+            marker,
+        );
+    }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdWriteBufferMarkerAMD.html>
     #[inline]
@@ -1248,6 +1285,30 @@ pub trait ExtDepthBiasControlExtension: DeviceV1_0 {
 
 impl ExtDepthBiasControlExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_control.html>
+pub trait ExtDepthClampControlExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_DEPTH_CLAMP_CONTROL_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetDepthClampRangeEXT.html>
+    #[inline]
+    unsafe fn cmd_set_depth_clamp_range_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        depth_clamp_mode: DepthClampModeEXT,
+        depth_clamp_range: Option<&DepthClampRangeEXT>,
+    ) {
+        let __result = (self.commands().cmd_set_depth_clamp_range_ext)(
+            command_buffer,
+            depth_clamp_mode,
+            depth_clamp_range.map_or(ptr::null(), |v| v),
+        );
+    }
+}
+
+impl ExtDepthClampControlExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_depth_clamp_zero_one.html>
 pub trait ExtDepthClampZeroOneExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -1553,6 +1614,165 @@ pub trait ExtDeviceFaultExtension: DeviceV1_0 {
 }
 
 impl ExtDeviceFaultExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_device_generated_commands.html>
+pub trait ExtDeviceGeneratedCommandsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_DEVICE_GENERATED_COMMANDS_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdExecuteGeneratedCommandsEXT.html>
+    #[inline]
+    unsafe fn cmd_execute_generated_commands_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        is_preprocessed: bool,
+        generated_commands_info: &GeneratedCommandsInfoEXT,
+    ) {
+        let __result = (self.commands().cmd_execute_generated_commands_ext)(
+            command_buffer,
+            is_preprocessed as Bool32,
+            generated_commands_info,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdPreprocessGeneratedCommandsEXT.html>
+    #[inline]
+    unsafe fn cmd_preprocess_generated_commands_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        generated_commands_info: &GeneratedCommandsInfoEXT,
+        state_command_buffer: CommandBuffer,
+    ) {
+        let __result = (self.commands().cmd_preprocess_generated_commands_ext)(
+            command_buffer,
+            generated_commands_info,
+            state_command_buffer,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateIndirectCommandsLayoutEXT.html>
+    #[inline]
+    unsafe fn create_indirect_commands_layout_ext(
+        &self,
+        create_info: &IndirectCommandsLayoutCreateInfoEXT,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<IndirectCommandsLayoutEXT> {
+        let mut indirect_commands_layout = MaybeUninit::<IndirectCommandsLayoutEXT>::uninit();
+
+        let __result = (self.commands().create_indirect_commands_layout_ext)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            indirect_commands_layout.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(indirect_commands_layout.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCreateIndirectExecutionSetEXT.html>
+    #[inline]
+    unsafe fn create_indirect_execution_set_ext(
+        &self,
+        create_info: &IndirectExecutionSetCreateInfoEXT,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<IndirectExecutionSetEXT> {
+        let mut indirect_execution_set = MaybeUninit::<IndirectExecutionSetEXT>::uninit();
+
+        let __result = (self.commands().create_indirect_execution_set_ext)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            indirect_execution_set.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(indirect_execution_set.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkDestroyIndirectCommandsLayoutEXT.html>
+    #[inline]
+    unsafe fn destroy_indirect_commands_layout_ext(
+        &self,
+        indirect_commands_layout: IndirectCommandsLayoutEXT,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_indirect_commands_layout_ext)(
+            self.handle(),
+            indirect_commands_layout,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkDestroyIndirectExecutionSetEXT.html>
+    #[inline]
+    unsafe fn destroy_indirect_execution_set_ext(
+        &self,
+        indirect_execution_set: IndirectExecutionSetEXT,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_indirect_execution_set_ext)(
+            self.handle(),
+            indirect_execution_set,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetGeneratedCommandsMemoryRequirementsEXT.html>
+    #[inline]
+    unsafe fn get_generated_commands_memory_requirements_ext(
+        &self,
+        info: &GeneratedCommandsMemoryRequirementsInfoEXT,
+        memory_requirements: &mut MemoryRequirements2,
+    ) {
+        let __result = (self
+            .commands()
+            .get_generated_commands_memory_requirements_ext)(
+            self.handle(),
+            info,
+            memory_requirements,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkUpdateIndirectExecutionSetPipelineEXT.html>
+    #[inline]
+    unsafe fn update_indirect_execution_set_pipeline_ext(
+        &self,
+        indirect_execution_set: IndirectExecutionSetEXT,
+        execution_set_writes: &[impl Cast<Target = WriteIndirectExecutionSetPipelineEXT>],
+    ) {
+        let __result = (self.commands().update_indirect_execution_set_pipeline_ext)(
+            self.handle(),
+            indirect_execution_set,
+            execution_set_writes.len() as u32,
+            execution_set_writes.as_ptr().cast(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkUpdateIndirectExecutionSetShaderEXT.html>
+    #[inline]
+    unsafe fn update_indirect_execution_set_shader_ext(
+        &self,
+        indirect_execution_set: IndirectExecutionSetEXT,
+        execution_set_writes: &[impl Cast<Target = WriteIndirectExecutionSetShaderEXT>],
+    ) {
+        let __result = (self.commands().update_indirect_execution_set_shader_ext)(
+            self.handle(),
+            indirect_execution_set,
+            execution_set_writes.len() as u32,
+            execution_set_writes.as_ptr().cast(),
+        );
+    }
+}
+
+impl ExtDeviceGeneratedCommandsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_device_memory_report.html>
 pub trait ExtDeviceMemoryReportExtension: DeviceV1_0 {
@@ -3651,6 +3871,15 @@ pub trait ExtPostDepthCoverageExtension: DeviceV1_0 {
 
 impl ExtPostDepthCoverageExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_present_mode_fifo_latest_ready.html>
+pub trait ExtPresentModeFifoLatestReadyExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_PRESENT_MODE_FIFO_LATEST_READY_EXTENSION;
+}
+
+impl ExtPresentModeFifoLatestReadyExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_primitive_topology_list_restart.html>
 pub trait ExtPrimitiveTopologyListRestartExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -4214,6 +4443,21 @@ pub trait ExtShaderObjectExtension: DeviceV1_0 {
         let __result = (self.commands().cmd_set_depth_clamp_enable_ext)(
             command_buffer,
             depth_clamp_enable as Bool32,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdSetDepthClampRangeEXT.html>
+    #[inline]
+    unsafe fn cmd_set_depth_clamp_range_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        depth_clamp_mode: DepthClampModeEXT,
+        depth_clamp_range: Option<&DepthClampRangeEXT>,
+    ) {
+        let __result = (self.commands().cmd_set_depth_clamp_range_ext)(
+            command_buffer,
+            depth_clamp_mode,
+            depth_clamp_range.map_or(ptr::null(), |v| v),
         );
     }
 
@@ -5120,6 +5364,15 @@ pub trait ExtVertexAttributeDivisorExtension: DeviceV1_0 {
 
 impl ExtVertexAttributeDivisorExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_vertex_attribute_robustness.html>
+pub trait ExtVertexAttributeRobustnessExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_VERTEX_ATTRIBUTE_ROBUSTNESS_EXTENSION;
+}
+
+impl ExtVertexAttributeRobustnessExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_EXT_vertex_input_dynamic_state.html>
 pub trait ExtVertexInputDynamicStateExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -5584,6 +5837,15 @@ pub trait HuaweiClusterCullingShaderExtension: DeviceV1_0 {
 }
 
 impl HuaweiClusterCullingShaderExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_HUAWEI_hdr_vivid.html>
+pub trait HuaweiHdrVividExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = HUAWEI_HDR_VIVID_EXTENSION;
+}
+
+impl HuaweiHdrVividExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_HUAWEI_invocation_mask.html>
 pub trait HuaweiInvocationMaskExtension: DeviceV1_0 {
@@ -10027,25 +10289,6 @@ pub trait KhrSynchronization2Extension: DeviceV1_0 {
         );
     }
 
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdWriteBufferMarker2AMD.html>
-    #[inline]
-    unsafe fn cmd_write_buffer_marker2_amd(
-        &self,
-        command_buffer: CommandBuffer,
-        stage: PipelineStageFlags2,
-        dst_buffer: Buffer,
-        dst_offset: DeviceSize,
-        marker: u32,
-    ) {
-        let __result = (self.commands().cmd_write_buffer_marker2_amd)(
-            command_buffer,
-            stage,
-            dst_buffer,
-            dst_offset,
-            marker,
-        );
-    }
-
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkCmdWriteTimestamp2KHR.html>
     #[inline]
     unsafe fn cmd_write_timestamp2_khr(
@@ -10057,31 +10300,6 @@ pub trait KhrSynchronization2Extension: DeviceV1_0 {
     ) {
         let __result =
             (self.commands().cmd_write_timestamp2_khr)(command_buffer, stage, query_pool, query);
-    }
-
-    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetQueueCheckpointData2NV.html>
-    #[inline]
-    unsafe fn get_queue_checkpoint_data2_nv(&self, queue: Queue) -> Vec<CheckpointData2NV> {
-        let mut checkpoint_data_count = 0;
-
-        (self.commands().get_queue_checkpoint_data2_nv)(
-            queue,
-            &mut checkpoint_data_count,
-            ptr::null_mut(),
-        );
-
-        let mut checkpoint_data = Vec::with_capacity(checkpoint_data_count as usize);
-
-        let __result = (self.commands().get_queue_checkpoint_data2_nv)(
-            queue,
-            &mut checkpoint_data_count,
-            checkpoint_data.as_mut_ptr(),
-        );
-
-        debug_assert!(checkpoint_data.capacity() == checkpoint_data_count as usize);
-        checkpoint_data.set_len(checkpoint_data_count as usize);
-
-        checkpoint_data
     }
 
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkQueueSubmit2KHR.html>
@@ -10240,6 +10458,15 @@ pub trait KhrVideoDecodeQueueExtension: DeviceV1_0 {
 
 impl KhrVideoDecodeQueueExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_video_encode_av1.html>
+pub trait KhrVideoEncodeAv1Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_VIDEO_ENCODE_AV1_EXTENSION;
+}
+
+impl KhrVideoEncodeAv1Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_video_encode_h264.html>
 pub trait KhrVideoEncodeH264Extension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -10257,6 +10484,15 @@ pub trait KhrVideoEncodeH265Extension: DeviceV1_0 {
 }
 
 impl KhrVideoEncodeH265Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_video_encode_quantization_map.html>
+pub trait KhrVideoEncodeQuantizationMapExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_VIDEO_ENCODE_QUANTIZATION_MAP_EXTENSION;
+}
+
+impl KhrVideoEncodeQuantizationMapExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_KHR_video_encode_queue.html>
 pub trait KhrVideoEncodeQueueExtension: DeviceV1_0 {
@@ -11081,6 +11317,14 @@ pub trait NvxImageViewHandleExtension: DeviceV1_0 {
         }
     }
 
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetImageViewHandle64NVX.html>
+    #[inline]
+    unsafe fn get_image_view_handle64_nvx(&self, info: &ImageViewHandleInfoNVX) -> u64 {
+        let __result = (self.commands().get_image_view_handle64_nvx)(self.handle(), info);
+
+        __result
+    }
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetImageViewHandleNVX.html>
     #[inline]
     unsafe fn get_image_view_handle_nvx(&self, info: &ImageViewHandleInfoNVX) -> u32 {
@@ -11235,6 +11479,51 @@ pub trait NvCooperativeMatrixExtension: DeviceV1_0 {
 }
 
 impl NvCooperativeMatrixExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_cooperative_matrix2.html>
+pub trait NvCooperativeMatrix2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_COOPERATIVE_MATRIX2_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV.html>
+    #[inline]
+    unsafe fn get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv(
+        &self,
+        physical_device: PhysicalDevice,
+    ) -> crate::VkResult<Vec<CooperativeMatrixFlexibleDimensionsPropertiesNV>> {
+        let mut property_count = 0;
+
+        (self
+            .commands()
+            .get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv)(
+            physical_device,
+            &mut property_count,
+            ptr::null_mut(),
+        );
+
+        let mut properties = Vec::with_capacity(property_count as usize);
+
+        let __result = (self
+            .commands()
+            .get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv)(
+            physical_device,
+            &mut property_count,
+            properties.as_mut_ptr(),
+        );
+
+        debug_assert!(properties.capacity() == property_count as usize);
+        properties.set_len(property_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(properties)
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl NvCooperativeMatrix2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_copy_memory_indirect.html>
 pub trait NvCopyMemoryIndirectExtension: DeviceV1_0 {
@@ -11517,6 +11806,31 @@ pub trait NvDeviceDiagnosticCheckpointsExtension: DeviceV1_0 {
         let __result = (self.commands().cmd_set_checkpoint_nv)(command_buffer, checkpoint_marker);
     }
 
+    /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetQueueCheckpointData2NV.html>
+    #[inline]
+    unsafe fn get_queue_checkpoint_data2_nv(&self, queue: Queue) -> Vec<CheckpointData2NV> {
+        let mut checkpoint_data_count = 0;
+
+        (self.commands().get_queue_checkpoint_data2_nv)(
+            queue,
+            &mut checkpoint_data_count,
+            ptr::null_mut(),
+        );
+
+        let mut checkpoint_data = Vec::with_capacity(checkpoint_data_count as usize);
+
+        let __result = (self.commands().get_queue_checkpoint_data2_nv)(
+            queue,
+            &mut checkpoint_data_count,
+            checkpoint_data.as_mut_ptr(),
+        );
+
+        debug_assert!(checkpoint_data.capacity() == checkpoint_data_count as usize);
+        checkpoint_data.set_len(checkpoint_data_count as usize);
+
+        checkpoint_data
+    }
+
     /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/vkGetQueueCheckpointDataNV.html>
     #[inline]
     unsafe fn get_queue_checkpoint_data_nv(&self, queue: Queue) -> Vec<CheckpointDataNV> {
@@ -11728,6 +12042,15 @@ pub trait NvDisplacementMicromapExtension: DeviceV1_0 {
 
 #[cfg(feature = "provisional")]
 impl NvDisplacementMicromapExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_display_stereo.html>
+pub trait NvDisplayStereoExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_DISPLAY_STEREO_EXTENSION;
+}
+
+impl NvDisplayStereoExtension for crate::Instance {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VK_NV_extended_sparse_address_space.html>
 pub trait NvExtendedSparseAddressSpaceExtension: DeviceV1_0 {

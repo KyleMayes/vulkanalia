@@ -204,6 +204,50 @@ impl fmt::Debug for DeviceOrHostAddressKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsTokenDataEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union IndirectCommandsTokenDataEXT {
+    pub push_constant: *const IndirectCommandsPushConstantTokenEXT,
+    pub vertex_buffer: *const IndirectCommandsVertexBufferTokenEXT,
+    pub index_buffer: *const IndirectCommandsIndexBufferTokenEXT,
+    pub execution_set: *const IndirectCommandsExecutionSetTokenEXT,
+}
+
+impl Default for IndirectCommandsTokenDataEXT {
+    #[inline]
+    fn default() -> Self {
+        unsafe { MaybeUninit::zeroed().assume_init() }
+    }
+}
+
+impl fmt::Debug for IndirectCommandsTokenDataEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "IndirectCommandsTokenDataEXT")
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectExecutionSetInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union IndirectExecutionSetInfoEXT {
+    pub pipeline_info: *const IndirectExecutionSetPipelineInfoEXT,
+    pub shader_info: *const IndirectExecutionSetShaderInfoEXT,
+}
+
+impl Default for IndirectExecutionSetInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        unsafe { MaybeUninit::zeroed().assume_init() }
+    }
+}
+
+impl fmt::Debug for IndirectExecutionSetInfoEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "IndirectExecutionSetInfoEXT")
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPerformanceCounterResultKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
