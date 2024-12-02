@@ -26,7 +26,7 @@ use core::error;
 #[cfg(feature = "std")]
 use std::error;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureBuildTypeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureBuildTypeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct AccelerationStructureBuildTypeKHR(i32);
@@ -60,7 +60,7 @@ impl fmt::Debug for AccelerationStructureBuildTypeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureCompatibilityKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureCompatibilityKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct AccelerationStructureCompatibilityKHR(i32);
@@ -92,7 +92,7 @@ impl fmt::Debug for AccelerationStructureCompatibilityKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureMemoryRequirementsTypeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureMemoryRequirementsTypeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct AccelerationStructureMemoryRequirementsTypeNV(i32);
@@ -126,7 +126,7 @@ impl fmt::Debug for AccelerationStructureMemoryRequirementsTypeNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureMotionInstanceTypeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureMotionInstanceTypeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct AccelerationStructureMotionInstanceTypeNV(i32);
@@ -160,7 +160,7 @@ impl fmt::Debug for AccelerationStructureMotionInstanceTypeNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureTypeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureTypeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct AccelerationStructureTypeKHR(i32);
@@ -194,7 +194,7 @@ impl fmt::Debug for AccelerationStructureTypeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAntiLagModeAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAntiLagModeAMD.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct AntiLagModeAMD(i32);
@@ -228,7 +228,7 @@ impl fmt::Debug for AntiLagModeAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAntiLagStageAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAntiLagStageAMD.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct AntiLagStageAMD(i32);
@@ -260,7 +260,7 @@ impl fmt::Debug for AntiLagStageAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAttachmentLoadOp.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentLoadOp.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct AttachmentLoadOp(i32);
@@ -269,7 +269,7 @@ impl AttachmentLoadOp {
     pub const LOAD: Self = Self(0);
     pub const CLEAR: Self = Self(1);
     pub const DONT_CARE: Self = Self(2);
-    pub const NONE_KHR: Self = Self(1000400000);
+    pub const NONE: Self = Self(1000400000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -290,13 +290,13 @@ impl fmt::Debug for AttachmentLoadOp {
             0 => write!(f, "LOAD"),
             1 => write!(f, "CLEAR"),
             2 => write!(f, "DONT_CARE"),
-            1000400000 => write!(f, "NONE_KHR"),
+            1000400000 => write!(f, "NONE"),
             _ => self.0.fmt(f),
         }
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAttachmentStoreOp.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentStoreOp.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct AttachmentStoreOp(i32);
@@ -330,7 +330,7 @@ impl fmt::Debug for AttachmentStoreOp {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBlendFactor.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBlendFactor.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct BlendFactor(i32);
@@ -396,7 +396,7 @@ impl fmt::Debug for BlendFactor {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBlendOp.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBlendOp.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct BlendOp(i32);
@@ -526,7 +526,7 @@ impl fmt::Debug for BlendOp {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBlendOverlapEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBlendOverlapEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct BlendOverlapEXT(i32);
@@ -560,7 +560,7 @@ impl fmt::Debug for BlendOverlapEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBlockMatchWindowCompareModeQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBlockMatchWindowCompareModeQCOM.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct BlockMatchWindowCompareModeQCOM(i32);
@@ -592,7 +592,7 @@ impl fmt::Debug for BlockMatchWindowCompareModeQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBorderColor.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBorderColor.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct BorderColor(i32);
@@ -636,7 +636,7 @@ impl fmt::Debug for BorderColor {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBuildAccelerationStructureModeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBuildAccelerationStructureModeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct BuildAccelerationStructureModeKHR(i32);
@@ -668,7 +668,7 @@ impl fmt::Debug for BuildAccelerationStructureModeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkBuildMicromapModeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBuildMicromapModeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct BuildMicromapModeEXT(i32);
@@ -698,7 +698,7 @@ impl fmt::Debug for BuildMicromapModeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkChromaLocation.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkChromaLocation.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ChromaLocation(i32);
@@ -730,7 +730,7 @@ impl fmt::Debug for ChromaLocation {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCoarseSampleOrderTypeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCoarseSampleOrderTypeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct CoarseSampleOrderTypeNV(i32);
@@ -766,7 +766,7 @@ impl fmt::Debug for CoarseSampleOrderTypeNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkColorSpaceKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkColorSpaceKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ColorSpaceKHR(i32);
@@ -826,7 +826,7 @@ impl fmt::Debug for ColorSpaceKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCommandBufferLevel.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferLevel.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct CommandBufferLevel(i32);
@@ -858,7 +858,7 @@ impl fmt::Debug for CommandBufferLevel {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCompareOp.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCompareOp.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct CompareOp(i32);
@@ -902,7 +902,7 @@ impl fmt::Debug for CompareOp {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComponentSwizzle.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkComponentSwizzle.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ComponentSwizzle(i32);
@@ -944,7 +944,7 @@ impl fmt::Debug for ComponentSwizzle {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComponentTypeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkComponentTypeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ComponentTypeKHR(i32);
@@ -994,7 +994,7 @@ impl fmt::Debug for ComponentTypeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkConservativeRasterizationModeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkConservativeRasterizationModeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ConservativeRasterizationModeEXT(i32);
@@ -1028,7 +1028,7 @@ impl fmt::Debug for ConservativeRasterizationModeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyAccelerationStructureModeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyAccelerationStructureModeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct CopyAccelerationStructureModeKHR(i32);
@@ -1064,7 +1064,7 @@ impl fmt::Debug for CopyAccelerationStructureModeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyMicromapModeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyMicromapModeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct CopyMicromapModeEXT(i32);
@@ -1100,7 +1100,7 @@ impl fmt::Debug for CopyMicromapModeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCoverageModulationModeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCoverageModulationModeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct CoverageModulationModeNV(i32);
@@ -1136,7 +1136,7 @@ impl fmt::Debug for CoverageModulationModeNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCoverageReductionModeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCoverageReductionModeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct CoverageReductionModeNV(i32);
@@ -1168,7 +1168,7 @@ impl fmt::Debug for CoverageReductionModeNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCubicFilterWeightsQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCubicFilterWeightsQCOM.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct CubicFilterWeightsQCOM(i32);
@@ -1204,7 +1204,7 @@ impl fmt::Debug for CubicFilterWeightsQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDebugReportObjectTypeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugReportObjectTypeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DebugReportObjectTypeEXT(i32);
@@ -1314,7 +1314,7 @@ impl fmt::Debug for DebugReportObjectTypeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDepthBiasRepresentationEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDepthBiasRepresentationEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DepthBiasRepresentationEXT(i32);
@@ -1348,7 +1348,39 @@ impl fmt::Debug for DepthBiasRepresentationEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorType.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDepthClampModeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct DepthClampModeEXT(i32);
+
+impl DepthClampModeEXT {
+    pub const VIEWPORT_RANGE: Self = Self(0);
+    pub const USER_DEFINED_RANGE: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for DepthClampModeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "VIEWPORT_RANGE"),
+            1 => write!(f, "USER_DEFINED_RANGE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DescriptorType(i32);
@@ -1410,14 +1442,14 @@ impl fmt::Debug for DescriptorType {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorUpdateTemplateType.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorUpdateTemplateType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DescriptorUpdateTemplateType(i32);
 
 impl DescriptorUpdateTemplateType {
     pub const DESCRIPTOR_SET: Self = Self(0);
-    pub const PUSH_DESCRIPTORS_KHR: Self = Self(1);
+    pub const PUSH_DESCRIPTORS: Self = Self(1);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1436,13 +1468,13 @@ impl fmt::Debug for DescriptorUpdateTemplateType {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             0 => write!(f, "DESCRIPTOR_SET"),
-            1 => write!(f, "PUSH_DESCRIPTORS_KHR"),
+            1 => write!(f, "PUSH_DESCRIPTORS"),
             _ => self.0.fmt(f),
         }
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceAddressBindingTypeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceAddressBindingTypeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DeviceAddressBindingTypeEXT(i32);
@@ -1474,7 +1506,7 @@ impl fmt::Debug for DeviceAddressBindingTypeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceEventTypeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceEventTypeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DeviceEventTypeEXT(i32);
@@ -1504,7 +1536,7 @@ impl fmt::Debug for DeviceEventTypeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceFaultAddressTypeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceFaultAddressTypeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DeviceFaultAddressTypeEXT(i32);
@@ -1546,7 +1578,7 @@ impl fmt::Debug for DeviceFaultAddressTypeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceFaultVendorBinaryHeaderVersionEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceFaultVendorBinaryHeaderVersionEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DeviceFaultVendorBinaryHeaderVersionEXT(i32);
@@ -1576,7 +1608,7 @@ impl fmt::Debug for DeviceFaultVendorBinaryHeaderVersionEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDeviceMemoryReportEventTypeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceMemoryReportEventTypeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DeviceMemoryReportEventTypeEXT(i32);
@@ -1614,7 +1646,7 @@ impl fmt::Debug for DeviceMemoryReportEventTypeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDirectDriverLoadingModeLUNARG.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDirectDriverLoadingModeLUNARG.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DirectDriverLoadingModeLUNARG(i32);
@@ -1646,7 +1678,7 @@ impl fmt::Debug for DirectDriverLoadingModeLUNARG {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDiscardRectangleModeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDiscardRectangleModeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DiscardRectangleModeEXT(i32);
@@ -1678,7 +1710,7 @@ impl fmt::Debug for DiscardRectangleModeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDisplacementMicromapFormatNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplacementMicromapFormatNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DisplacementMicromapFormatNV(i32);
@@ -1712,7 +1744,7 @@ impl fmt::Debug for DisplacementMicromapFormatNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDisplayEventTypeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayEventTypeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DisplayEventTypeEXT(i32);
@@ -1742,7 +1774,7 @@ impl fmt::Debug for DisplayEventTypeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDisplayPowerStateEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayPowerStateEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DisplayPowerStateEXT(i32);
@@ -1776,7 +1808,43 @@ impl fmt::Debug for DisplayPowerStateEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDriverId.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplaySurfaceStereoTypeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct DisplaySurfaceStereoTypeNV(i32);
+
+impl DisplaySurfaceStereoTypeNV {
+    pub const NONE: Self = Self(0);
+    pub const ONBOARD_DIN: Self = Self(1);
+    pub const HDMI_3D: Self = Self(2);
+    pub const INBAND_DISPLAYPORT: Self = Self(3);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for DisplaySurfaceStereoTypeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "NONE"),
+            1 => write!(f, "ONBOARD_DIN"),
+            2 => write!(f, "HDMI_3D"),
+            3 => write!(f, "INBAND_DISPLAYPORT"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDriverId.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DriverId(i32);
@@ -1858,7 +1926,7 @@ impl fmt::Debug for DriverId {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDynamicState.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDynamicState.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct DynamicState(i32);
@@ -1888,6 +1956,7 @@ impl DynamicState {
     pub const RASTERIZER_DISCARD_ENABLE: Self = Self(1000377001);
     pub const DEPTH_BIAS_ENABLE: Self = Self(1000377002);
     pub const PRIMITIVE_RESTART_ENABLE: Self = Self(1000377004);
+    pub const LINE_STIPPLE: Self = Self(1000259000);
     pub const VIEWPORT_W_SCALING_NV: Self = Self(1000087000);
     pub const DISCARD_RECTANGLE_EXT: Self = Self(1000099000);
     pub const DISCARD_RECTANGLE_ENABLE_EXT: Self = Self(1000099001);
@@ -1935,7 +2004,7 @@ impl DynamicState {
     pub const REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV: Self = Self(1000455031);
     pub const COVERAGE_REDUCTION_MODE_NV: Self = Self(1000455032);
     pub const ATTACHMENT_FEEDBACK_LOOP_ENABLE_EXT: Self = Self(1000524000);
-    pub const LINE_STIPPLE_KHR: Self = Self(1000259000);
+    pub const DEPTH_CLAMP_RANGE_EXT: Self = Self(1000582000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1977,6 +2046,7 @@ impl fmt::Debug for DynamicState {
             1000377001 => write!(f, "RASTERIZER_DISCARD_ENABLE"),
             1000377002 => write!(f, "DEPTH_BIAS_ENABLE"),
             1000377004 => write!(f, "PRIMITIVE_RESTART_ENABLE"),
+            1000259000 => write!(f, "LINE_STIPPLE"),
             1000087000 => write!(f, "VIEWPORT_W_SCALING_NV"),
             1000099000 => write!(f, "DISCARD_RECTANGLE_EXT"),
             1000099001 => write!(f, "DISCARD_RECTANGLE_ENABLE_EXT"),
@@ -2024,13 +2094,13 @@ impl fmt::Debug for DynamicState {
             1000455031 => write!(f, "REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV"),
             1000455032 => write!(f, "COVERAGE_REDUCTION_MODE_NV"),
             1000524000 => write!(f, "ATTACHMENT_FEEDBACK_LOOP_ENABLE_EXT"),
-            1000259000 => write!(f, "LINE_STIPPLE_KHR"),
+            1000582000 => write!(f, "DEPTH_CLAMP_RANGE_EXT"),
             _ => self.0.fmt(f),
         }
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFilter.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFilter.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct Filter(i32);
@@ -2064,7 +2134,7 @@ impl fmt::Debug for Filter {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFormat.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFormat.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct Format(i32);
@@ -2309,6 +2379,8 @@ impl Format {
     pub const ASTC_10X10_SFLOAT_BLOCK: Self = Self(1000066011);
     pub const ASTC_12X10_SFLOAT_BLOCK: Self = Self(1000066012);
     pub const ASTC_12X12_SFLOAT_BLOCK: Self = Self(1000066013);
+    pub const A1B5G5R5_UNORM_PACK16: Self = Self(1000470000);
+    pub const A8_UNORM: Self = Self(1000470001);
     pub const PVRTC1_2BPP_UNORM_BLOCK_IMG: Self = Self(1000054000);
     pub const PVRTC1_4BPP_UNORM_BLOCK_IMG: Self = Self(1000054001);
     pub const PVRTC2_2BPP_UNORM_BLOCK_IMG: Self = Self(1000054002);
@@ -2318,8 +2390,6 @@ impl Format {
     pub const PVRTC2_2BPP_SRGB_BLOCK_IMG: Self = Self(1000054006);
     pub const PVRTC2_4BPP_SRGB_BLOCK_IMG: Self = Self(1000054007);
     pub const R16G16_SFIXED5_NV: Self = Self(1000464000);
-    pub const A1B5G5R5_UNORM_PACK16_KHR: Self = Self(1000470000);
-    pub const A8_UNORM_KHR: Self = Self(1000470001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2576,6 +2646,8 @@ impl fmt::Debug for Format {
             1000066011 => write!(f, "ASTC_10X10_SFLOAT_BLOCK"),
             1000066012 => write!(f, "ASTC_12X10_SFLOAT_BLOCK"),
             1000066013 => write!(f, "ASTC_12X12_SFLOAT_BLOCK"),
+            1000470000 => write!(f, "A1B5G5R5_UNORM_PACK16"),
+            1000470001 => write!(f, "A8_UNORM"),
             1000054000 => write!(f, "PVRTC1_2BPP_UNORM_BLOCK_IMG"),
             1000054001 => write!(f, "PVRTC1_4BPP_UNORM_BLOCK_IMG"),
             1000054002 => write!(f, "PVRTC2_2BPP_UNORM_BLOCK_IMG"),
@@ -2585,14 +2657,12 @@ impl fmt::Debug for Format {
             1000054006 => write!(f, "PVRTC2_2BPP_SRGB_BLOCK_IMG"),
             1000054007 => write!(f, "PVRTC2_4BPP_SRGB_BLOCK_IMG"),
             1000464000 => write!(f, "R16G16_SFIXED5_NV"),
-            1000470000 => write!(f, "A1B5G5R5_UNORM_PACK16_KHR"),
-            1000470001 => write!(f, "A8_UNORM_KHR"),
             _ => self.0.fmt(f),
         }
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFragmentShadingRateCombinerOpKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFragmentShadingRateCombinerOpKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct FragmentShadingRateCombinerOpKHR(i32);
@@ -2630,7 +2700,7 @@ impl fmt::Debug for FragmentShadingRateCombinerOpKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFragmentShadingRateNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFragmentShadingRateNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct FragmentShadingRateNV(i32);
@@ -2682,7 +2752,7 @@ impl fmt::Debug for FragmentShadingRateNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFragmentShadingRateTypeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFragmentShadingRateTypeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct FragmentShadingRateTypeNV(i32);
@@ -2714,7 +2784,7 @@ impl fmt::Debug for FragmentShadingRateTypeNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFrontFace.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFrontFace.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct FrontFace(i32);
@@ -2746,7 +2816,7 @@ impl fmt::Debug for FrontFace {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkFullScreenExclusiveEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFullScreenExclusiveEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct FullScreenExclusiveEXT(i32);
@@ -2782,7 +2852,7 @@ impl fmt::Debug for FullScreenExclusiveEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkGeometryTypeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeometryTypeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct GeometryTypeKHR(i32);
@@ -2816,7 +2886,7 @@ impl fmt::Debug for GeometryTypeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageLayout.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageLayout.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ImageLayout(i32);
@@ -2839,6 +2909,7 @@ impl ImageLayout {
     pub const STENCIL_READ_ONLY_OPTIMAL: Self = Self(1000241003);
     pub const READ_ONLY_OPTIMAL: Self = Self(1000314000);
     pub const ATTACHMENT_OPTIMAL: Self = Self(1000314001);
+    pub const RENDERING_LOCAL_READ: Self = Self(1000232000);
     pub const PRESENT_SRC_KHR: Self = Self(1000001002);
     pub const VIDEO_DECODE_DST_KHR: Self = Self(1000024000);
     pub const VIDEO_DECODE_SRC_KHR: Self = Self(1000024001);
@@ -2846,11 +2917,11 @@ impl ImageLayout {
     pub const SHARED_PRESENT_KHR: Self = Self(1000111000);
     pub const FRAGMENT_DENSITY_MAP_OPTIMAL_EXT: Self = Self(1000218000);
     pub const FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR: Self = Self(1000164003);
-    pub const RENDERING_LOCAL_READ_KHR: Self = Self(1000232000);
     pub const VIDEO_ENCODE_DST_KHR: Self = Self(1000299000);
     pub const VIDEO_ENCODE_SRC_KHR: Self = Self(1000299001);
     pub const VIDEO_ENCODE_DPB_KHR: Self = Self(1000299002);
     pub const ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT: Self = Self(1000339000);
+    pub const VIDEO_ENCODE_QUANTIZATION_MAP_KHR: Self = Self(1000553000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2885,6 +2956,7 @@ impl fmt::Debug for ImageLayout {
             1000241003 => write!(f, "STENCIL_READ_ONLY_OPTIMAL"),
             1000314000 => write!(f, "READ_ONLY_OPTIMAL"),
             1000314001 => write!(f, "ATTACHMENT_OPTIMAL"),
+            1000232000 => write!(f, "RENDERING_LOCAL_READ"),
             1000001002 => write!(f, "PRESENT_SRC_KHR"),
             1000024000 => write!(f, "VIDEO_DECODE_DST_KHR"),
             1000024001 => write!(f, "VIDEO_DECODE_SRC_KHR"),
@@ -2892,17 +2964,17 @@ impl fmt::Debug for ImageLayout {
             1000111000 => write!(f, "SHARED_PRESENT_KHR"),
             1000218000 => write!(f, "FRAGMENT_DENSITY_MAP_OPTIMAL_EXT"),
             1000164003 => write!(f, "FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR"),
-            1000232000 => write!(f, "RENDERING_LOCAL_READ_KHR"),
             1000299000 => write!(f, "VIDEO_ENCODE_DST_KHR"),
             1000299001 => write!(f, "VIDEO_ENCODE_SRC_KHR"),
             1000299002 => write!(f, "VIDEO_ENCODE_DPB_KHR"),
             1000339000 => write!(f, "ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT"),
+            1000553000 => write!(f, "VIDEO_ENCODE_QUANTIZATION_MAP_KHR"),
             _ => self.0.fmt(f),
         }
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageTiling.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageTiling.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ImageTiling(i32);
@@ -2936,7 +3008,7 @@ impl fmt::Debug for ImageTiling {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageType.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ImageType(i32);
@@ -2970,7 +3042,7 @@ impl fmt::Debug for ImageType {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkImageViewType.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageViewType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ImageViewType(i32);
@@ -3012,7 +3084,7 @@ impl fmt::Debug for ImageViewType {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndexType.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndexType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct IndexType(i32);
@@ -3020,8 +3092,8 @@ pub struct IndexType(i32);
 impl IndexType {
     pub const UINT16: Self = Self(0);
     pub const UINT32: Self = Self(1);
+    pub const UINT8: Self = Self(1000265000);
     pub const NONE_KHR: Self = Self(1000165000);
-    pub const UINT8_KHR: Self = Self(1000265000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -3041,14 +3113,72 @@ impl fmt::Debug for IndexType {
         match self.0 {
             0 => write!(f, "UINT16"),
             1 => write!(f, "UINT32"),
+            1000265000 => write!(f, "UINT8"),
             1000165000 => write!(f, "NONE_KHR"),
-            1000265000 => write!(f, "UINT8_KHR"),
             _ => self.0.fmt(f),
         }
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsTokenTypeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsTokenTypeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct IndirectCommandsTokenTypeEXT(i32);
+
+impl IndirectCommandsTokenTypeEXT {
+    pub const EXECUTION_SET: Self = Self(0);
+    pub const PUSH_CONSTANT: Self = Self(1);
+    pub const SEQUENCE_INDEX: Self = Self(2);
+    pub const INDEX_BUFFER: Self = Self(3);
+    pub const VERTEX_BUFFER: Self = Self(4);
+    pub const DRAW_INDEXED: Self = Self(5);
+    pub const DRAW: Self = Self(6);
+    pub const DRAW_INDEXED_COUNT: Self = Self(7);
+    pub const DRAW_COUNT: Self = Self(8);
+    pub const DISPATCH: Self = Self(9);
+    pub const DRAW_MESH_TASKS_NV: Self = Self(1000202002);
+    pub const DRAW_MESH_TASKS_COUNT_NV: Self = Self(1000202003);
+    pub const DRAW_MESH_TASKS: Self = Self(1000328000);
+    pub const DRAW_MESH_TASKS_COUNT: Self = Self(1000328001);
+    pub const TRACE_RAYS2: Self = Self(1000386004);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for IndirectCommandsTokenTypeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "EXECUTION_SET"),
+            1 => write!(f, "PUSH_CONSTANT"),
+            2 => write!(f, "SEQUENCE_INDEX"),
+            3 => write!(f, "INDEX_BUFFER"),
+            4 => write!(f, "VERTEX_BUFFER"),
+            5 => write!(f, "DRAW_INDEXED"),
+            6 => write!(f, "DRAW"),
+            7 => write!(f, "DRAW_INDEXED_COUNT"),
+            8 => write!(f, "DRAW_COUNT"),
+            9 => write!(f, "DISPATCH"),
+            1000202002 => write!(f, "DRAW_MESH_TASKS_NV"),
+            1000202003 => write!(f, "DRAW_MESH_TASKS_COUNT_NV"),
+            1000328000 => write!(f, "DRAW_MESH_TASKS"),
+            1000328001 => write!(f, "DRAW_MESH_TASKS_COUNT"),
+            1000386004 => write!(f, "TRACE_RAYS2"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsTokenTypeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct IndirectCommandsTokenTypeNV(i32);
@@ -3098,7 +3228,39 @@ impl fmt::Debug for IndirectCommandsTokenTypeNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkInternalAllocationType.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectExecutionSetInfoTypeEXT.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct IndirectExecutionSetInfoTypeEXT(i32);
+
+impl IndirectExecutionSetInfoTypeEXT {
+    pub const PIPELINES: Self = Self(0);
+    pub const SHADER_OBJECTS: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for IndirectExecutionSetInfoTypeEXT {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "PIPELINES"),
+            1 => write!(f, "SHADER_OBJECTS"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkInternalAllocationType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct InternalAllocationType(i32);
@@ -3128,7 +3290,7 @@ impl fmt::Debug for InternalAllocationType {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLatencyMarkerNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLatencyMarkerNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct LatencyMarkerNV(i32);
@@ -3180,7 +3342,7 @@ impl fmt::Debug for LatencyMarkerNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLayerSettingTypeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLayerSettingTypeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct LayerSettingTypeEXT(i32);
@@ -3224,7 +3386,7 @@ impl fmt::Debug for LayerSettingTypeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLayeredDriverUnderlyingApiMSFT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLayeredDriverUnderlyingApiMSFT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct LayeredDriverUnderlyingApiMSFT(i32);
@@ -3256,12 +3418,12 @@ impl fmt::Debug for LayeredDriverUnderlyingApiMSFT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLineRasterizationModeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLineRasterizationMode.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct LineRasterizationModeKHR(i32);
+pub struct LineRasterizationMode(i32);
 
-impl LineRasterizationModeKHR {
+impl LineRasterizationMode {
     pub const DEFAULT: Self = Self(0);
     pub const RECTANGULAR: Self = Self(1);
     pub const BRESENHAM: Self = Self(2);
@@ -3280,7 +3442,7 @@ impl LineRasterizationModeKHR {
     }
 }
 
-impl fmt::Debug for LineRasterizationModeKHR {
+impl fmt::Debug for LineRasterizationMode {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             0 => write!(f, "DEFAULT"),
@@ -3292,7 +3454,7 @@ impl fmt::Debug for LineRasterizationModeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLogicOp.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLogicOp.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct LogicOp(i32);
@@ -3352,7 +3514,7 @@ impl fmt::Debug for LogicOp {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMemoryOverallocationBehaviorAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryOverallocationBehaviorAMD.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct MemoryOverallocationBehaviorAMD(i32);
@@ -3386,7 +3548,7 @@ impl fmt::Debug for MemoryOverallocationBehaviorAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkMicromapTypeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMicromapTypeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct MicromapTypeEXT(i32);
@@ -3418,7 +3580,7 @@ impl fmt::Debug for MicromapTypeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkObjectType.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkObjectType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ObjectType(i32);
@@ -3477,6 +3639,8 @@ impl ObjectType {
     pub const SHADER_EXT: Self = Self(1000482000);
     pub const PIPELINE_BINARY_KHR: Self = Self(1000483000);
     pub const SEMAPHORE_SCI_SYNC_POOL_NV: Self = Self(1000489000);
+    pub const INDIRECT_COMMANDS_LAYOUT_EXT: Self = Self(1000572000);
+    pub const INDIRECT_EXECUTION_SET_EXT: Self = Self(1000572001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -3547,12 +3711,14 @@ impl fmt::Debug for ObjectType {
             1000482000 => write!(f, "SHADER_EXT"),
             1000483000 => write!(f, "PIPELINE_BINARY_KHR"),
             1000489000 => write!(f, "SEMAPHORE_SCI_SYNC_POOL_NV"),
+            1000572000 => write!(f, "INDIRECT_COMMANDS_LAYOUT_EXT"),
+            1000572001 => write!(f, "INDIRECT_EXECUTION_SET_EXT"),
             _ => self.0.fmt(f),
         }
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpacityMicromapFormatEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpacityMicromapFormatEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct OpacityMicromapFormatEXT(i32);
@@ -3584,7 +3750,7 @@ impl fmt::Debug for OpacityMicromapFormatEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpacityMicromapSpecialIndexEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpacityMicromapSpecialIndexEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct OpacityMicromapSpecialIndexEXT(i32);
@@ -3620,7 +3786,7 @@ impl fmt::Debug for OpacityMicromapSpecialIndexEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpticalFlowPerformanceLevelNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpticalFlowPerformanceLevelNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct OpticalFlowPerformanceLevelNV(i32);
@@ -3656,7 +3822,7 @@ impl fmt::Debug for OpticalFlowPerformanceLevelNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOpticalFlowSessionBindingPointNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpticalFlowSessionBindingPointNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct OpticalFlowSessionBindingPointNV(i32);
@@ -3702,7 +3868,7 @@ impl fmt::Debug for OpticalFlowSessionBindingPointNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkOutOfBandQueueTypeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOutOfBandQueueTypeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct OutOfBandQueueTypeNV(i32);
@@ -3734,7 +3900,7 @@ impl fmt::Debug for OutOfBandQueueTypeNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPerformanceConfigurationTypeINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceConfigurationTypeINTEL.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PerformanceConfigurationTypeINTEL(i32);
@@ -3764,7 +3930,7 @@ impl fmt::Debug for PerformanceConfigurationTypeINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPerformanceCounterScopeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceCounterScopeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PerformanceCounterScopeKHR(i32);
@@ -3798,7 +3964,7 @@ impl fmt::Debug for PerformanceCounterScopeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPerformanceCounterStorageKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceCounterStorageKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PerformanceCounterStorageKHR(i32);
@@ -3838,7 +4004,7 @@ impl fmt::Debug for PerformanceCounterStorageKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPerformanceCounterUnitKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceCounterUnitKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PerformanceCounterUnitKHR(i32);
@@ -3888,7 +4054,7 @@ impl fmt::Debug for PerformanceCounterUnitKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPerformanceOverrideTypeINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceOverrideTypeINTEL.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PerformanceOverrideTypeINTEL(i32);
@@ -3920,7 +4086,7 @@ impl fmt::Debug for PerformanceOverrideTypeINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPerformanceParameterTypeINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceParameterTypeINTEL.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PerformanceParameterTypeINTEL(i32);
@@ -3952,7 +4118,7 @@ impl fmt::Debug for PerformanceParameterTypeINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPerformanceValueTypeINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceValueTypeINTEL.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PerformanceValueTypeINTEL(i32);
@@ -3990,7 +4156,7 @@ impl fmt::Debug for PerformanceValueTypeINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceLayeredApiKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLayeredApiKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PhysicalDeviceLayeredApiKHR(i32);
@@ -4028,7 +4194,7 @@ impl fmt::Debug for PhysicalDeviceLayeredApiKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceType.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PhysicalDeviceType(i32);
@@ -4066,7 +4232,7 @@ impl fmt::Debug for PhysicalDeviceType {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineBindPoint.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineBindPoint.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PipelineBindPoint(i32);
@@ -4104,7 +4270,7 @@ impl fmt::Debug for PipelineBindPoint {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineCacheHeaderVersion.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCacheHeaderVersion.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PipelineCacheHeaderVersion(i32);
@@ -4134,7 +4300,7 @@ impl fmt::Debug for PipelineCacheHeaderVersion {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineExecutableStatisticFormatKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineExecutableStatisticFormatKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PipelineExecutableStatisticFormatKHR(i32);
@@ -4170,12 +4336,12 @@ impl fmt::Debug for PipelineExecutableStatisticFormatKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineRobustnessBufferBehaviorEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRobustnessBufferBehavior.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct PipelineRobustnessBufferBehaviorEXT(i32);
+pub struct PipelineRobustnessBufferBehavior(i32);
 
-impl PipelineRobustnessBufferBehaviorEXT {
+impl PipelineRobustnessBufferBehavior {
     pub const DEVICE_DEFAULT: Self = Self(0);
     pub const DISABLED: Self = Self(1);
     pub const ROBUST_BUFFER_ACCESS: Self = Self(2);
@@ -4194,7 +4360,7 @@ impl PipelineRobustnessBufferBehaviorEXT {
     }
 }
 
-impl fmt::Debug for PipelineRobustnessBufferBehaviorEXT {
+impl fmt::Debug for PipelineRobustnessBufferBehavior {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             0 => write!(f, "DEVICE_DEFAULT"),
@@ -4206,12 +4372,12 @@ impl fmt::Debug for PipelineRobustnessBufferBehaviorEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPipelineRobustnessImageBehaviorEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRobustnessImageBehavior.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct PipelineRobustnessImageBehaviorEXT(i32);
+pub struct PipelineRobustnessImageBehavior(i32);
 
-impl PipelineRobustnessImageBehaviorEXT {
+impl PipelineRobustnessImageBehavior {
     pub const DEVICE_DEFAULT: Self = Self(0);
     pub const DISABLED: Self = Self(1);
     pub const ROBUST_IMAGE_ACCESS: Self = Self(2);
@@ -4230,7 +4396,7 @@ impl PipelineRobustnessImageBehaviorEXT {
     }
 }
 
-impl fmt::Debug for PipelineRobustnessImageBehaviorEXT {
+impl fmt::Debug for PipelineRobustnessImageBehavior {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             0 => write!(f, "DEVICE_DEFAULT"),
@@ -4242,7 +4408,7 @@ impl fmt::Debug for PipelineRobustnessImageBehaviorEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPointClippingBehavior.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPointClippingBehavior.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PointClippingBehavior(i32);
@@ -4274,7 +4440,7 @@ impl fmt::Debug for PointClippingBehavior {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPolygonMode.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPolygonMode.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PolygonMode(i32);
@@ -4310,7 +4476,7 @@ impl fmt::Debug for PolygonMode {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPresentModeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPresentModeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PresentModeKHR(i32);
@@ -4322,6 +4488,7 @@ impl PresentModeKHR {
     pub const FIFO_RELAXED: Self = Self(3);
     pub const SHARED_DEMAND_REFRESH: Self = Self(1000111000);
     pub const SHARED_CONTINUOUS_REFRESH: Self = Self(1000111001);
+    pub const FIFO_LATEST_READY_EXT: Self = Self(1000361000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -4345,12 +4512,13 @@ impl fmt::Debug for PresentModeKHR {
             3 => write!(f, "FIFO_RELAXED"),
             1000111000 => write!(f, "SHARED_DEMAND_REFRESH"),
             1000111001 => write!(f, "SHARED_CONTINUOUS_REFRESH"),
+            1000361000 => write!(f, "FIFO_LATEST_READY_EXT"),
             _ => self.0.fmt(f),
         }
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPrimitiveTopology.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPrimitiveTopology.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct PrimitiveTopology(i32);
@@ -4400,7 +4568,7 @@ impl fmt::Debug for PrimitiveTopology {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkProvokingVertexModeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkProvokingVertexModeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ProvokingVertexModeEXT(i32);
@@ -4432,7 +4600,7 @@ impl fmt::Debug for ProvokingVertexModeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueryPoolSamplingModeINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryPoolSamplingModeINTEL.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct QueryPoolSamplingModeINTEL(i32);
@@ -4462,7 +4630,7 @@ impl fmt::Debug for QueryPoolSamplingModeINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueryResultStatusKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryResultStatusKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct QueryResultStatusKHR(i32);
@@ -4498,7 +4666,7 @@ impl fmt::Debug for QueryResultStatusKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueryType.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct QueryType(i32);
@@ -4564,12 +4732,12 @@ impl fmt::Debug for QueryType {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueueGlobalPriorityKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueGlobalPriority.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct QueueGlobalPriorityKHR(i32);
+pub struct QueueGlobalPriority(i32);
 
-impl QueueGlobalPriorityKHR {
+impl QueueGlobalPriority {
     pub const LOW: Self = Self(128);
     pub const MEDIUM: Self = Self(256);
     pub const HIGH: Self = Self(512);
@@ -4588,7 +4756,7 @@ impl QueueGlobalPriorityKHR {
     }
 }
 
-impl fmt::Debug for QueueGlobalPriorityKHR {
+impl fmt::Debug for QueueGlobalPriority {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self.0 {
             128 => write!(f, "LOW"),
@@ -4600,7 +4768,7 @@ impl fmt::Debug for QueueGlobalPriorityKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRasterizationOrderAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRasterizationOrderAMD.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct RasterizationOrderAMD(i32);
@@ -4632,7 +4800,7 @@ impl fmt::Debug for RasterizationOrderAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRayTracingInvocationReorderModeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRayTracingInvocationReorderModeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct RayTracingInvocationReorderModeNV(i32);
@@ -4664,7 +4832,7 @@ impl fmt::Debug for RayTracingInvocationReorderModeNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRayTracingShaderGroupTypeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRayTracingShaderGroupTypeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct RayTracingShaderGroupTypeKHR(i32);
@@ -4698,7 +4866,7 @@ impl fmt::Debug for RayTracingShaderGroupTypeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkResult.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkResult.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct Result(i32);
@@ -4728,6 +4896,7 @@ impl Result {
     pub const ERROR_FRAGMENTATION: Self = Self(-1000161000);
     pub const ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS: Self = Self(-1000257000);
     pub const PIPELINE_COMPILE_REQUIRED: Self = Self(1000297000);
+    pub const ERROR_NOT_PERMITTED: Self = Self(-1000174001);
     pub const ERROR_SURFACE_LOST_KHR: Self = Self(-1000000000);
     pub const ERROR_NATIVE_WINDOW_IN_USE_KHR: Self = Self(-1000000001);
     pub const SUBOPTIMAL_KHR: Self = Self(1000001003);
@@ -4742,7 +4911,6 @@ impl Result {
     pub const ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR: Self = Self(-1000023004);
     pub const ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR: Self = Self(-1000023005);
     pub const ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT: Self = Self(-1000158000);
-    pub const ERROR_NOT_PERMITTED_KHR: Self = Self(-1000174001);
     pub const ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT: Self = Self(-1000255000);
     pub const THREAD_IDLE_KHR: Self = Self(1000268000);
     pub const THREAD_DONE_KHR: Self = Self(1000268001);
@@ -4794,6 +4962,7 @@ impl fmt::Debug for Result {
             -1000161000 => write!(f, "ERROR_FRAGMENTATION"),
             -1000257000 => write!(f, "ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS"),
             1000297000 => write!(f, "PIPELINE_COMPILE_REQUIRED"),
+            -1000174001 => write!(f, "ERROR_NOT_PERMITTED"),
             -1000000000 => write!(f, "ERROR_SURFACE_LOST_KHR"),
             -1000000001 => write!(f, "ERROR_NATIVE_WINDOW_IN_USE_KHR"),
             1000001003 => write!(f, "SUBOPTIMAL_KHR"),
@@ -4808,7 +4977,6 @@ impl fmt::Debug for Result {
             -1000023004 => write!(f, "ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR"),
             -1000023005 => write!(f, "ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR"),
             -1000158000 => write!(f, "ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
-            -1000174001 => write!(f, "ERROR_NOT_PERMITTED_KHR"),
             -1000255000 => write!(f, "ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT"),
             1000268000 => write!(f, "THREAD_IDLE_KHR"),
             1000268001 => write!(f, "THREAD_DONE_KHR"),
@@ -4851,6 +5019,7 @@ impl fmt::Display for Result {
             -1000161000 => write!(f, "A descriptor pool creation has failed due to fragmentation."),
             -1000257000 => write!(f, "A buffer creation or memory allocation failed because the requested address is not available. A shader group handle assignment failed because the requested shader group handle information is no longer valid."),
             1000297000 => write!(f, "A requested pipeline creation would have required compilation, but the application requested compilation to not be performed."),
+            -1000174001 => write!(f, "ERROR_NOT_PERMITTED"),
             -1000000000 => write!(f, "A surface is no longer available."),
             -1000000001 => write!(f, "The requested window is already in use by Vulkan or another API in a manner which prevents it from being used again."),
             1000001003 => write!(f, "A swapchain no longer matches the surface properties exactly, but can still be used to present to the surface successfully."),
@@ -4865,7 +5034,6 @@ impl fmt::Display for Result {
             -1000023004 => write!(f, "ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR"),
             -1000023005 => write!(f, "ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR"),
             -1000158000 => write!(f, "ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
-            -1000174001 => write!(f, "ERROR_NOT_PERMITTED_KHR"),
             -1000255000 => write!(f, "An operation on a swapchain created with VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT failed as it did not have exclusive full-screen access. This may occur due to implementation-dependent reasons, outside of the application's control."),
             1000268000 => write!(f, "A deferred operation is not complete but there is currently no work for this thread to do at the time of this call."),
             1000268001 => write!(f, "A deferred operation is not complete but there is no work remaining to assign to additional threads."),
@@ -4884,7 +5052,7 @@ impl fmt::Display for Result {
 #[cfg(any(feature = "std", feature = "no_std_error"))]
 impl error::Error for Result {}
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerAddressMode.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerAddressMode.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct SamplerAddressMode(i32);
@@ -4922,7 +5090,7 @@ impl fmt::Debug for SamplerAddressMode {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerMipmapMode.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerMipmapMode.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct SamplerMipmapMode(i32);
@@ -4954,7 +5122,7 @@ impl fmt::Debug for SamplerMipmapMode {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerReductionMode.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerReductionMode.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct SamplerReductionMode(i32);
@@ -4990,7 +5158,7 @@ impl fmt::Debug for SamplerReductionMode {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrModelConversion.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerYcbcrModelConversion.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct SamplerYcbcrModelConversion(i32);
@@ -5028,7 +5196,7 @@ impl fmt::Debug for SamplerYcbcrModelConversion {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrRange.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerYcbcrRange.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct SamplerYcbcrRange(i32);
@@ -5060,7 +5228,7 @@ impl fmt::Debug for SamplerYcbcrRange {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSciSyncClientTypeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSciSyncClientTypeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct SciSyncClientTypeNV(i32);
@@ -5094,7 +5262,7 @@ impl fmt::Debug for SciSyncClientTypeNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSciSyncPrimitiveTypeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSciSyncPrimitiveTypeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct SciSyncPrimitiveTypeNV(i32);
@@ -5126,7 +5294,7 @@ impl fmt::Debug for SciSyncPrimitiveTypeNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkScopeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkScopeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ScopeKHR(i32);
@@ -5162,7 +5330,7 @@ impl fmt::Debug for ScopeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSemaphoreType.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct SemaphoreType(i32);
@@ -5194,7 +5362,7 @@ impl fmt::Debug for SemaphoreType {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderCodeTypeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderCodeTypeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ShaderCodeTypeEXT(i32);
@@ -5226,7 +5394,7 @@ impl fmt::Debug for ShaderCodeTypeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderFloatControlsIndependence.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderFloatControlsIndependence.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ShaderFloatControlsIndependence(i32);
@@ -5260,7 +5428,7 @@ impl fmt::Debug for ShaderFloatControlsIndependence {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderGroupShaderKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderGroupShaderKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ShaderGroupShaderKHR(i32);
@@ -5296,7 +5464,7 @@ impl fmt::Debug for ShaderGroupShaderKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderInfoTypeAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderInfoTypeAMD.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ShaderInfoTypeAMD(i32);
@@ -5330,7 +5498,7 @@ impl fmt::Debug for ShaderInfoTypeAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShadingRatePaletteEntryNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShadingRatePaletteEntryNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ShadingRatePaletteEntryNV(i32);
@@ -5382,7 +5550,7 @@ impl fmt::Debug for ShadingRatePaletteEntryNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSharingMode.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSharingMode.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct SharingMode(i32);
@@ -5414,7 +5582,7 @@ impl fmt::Debug for SharingMode {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkStencilOp.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkStencilOp.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct StencilOp(i32);
@@ -5458,7 +5626,7 @@ impl fmt::Debug for StencilOp {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkStructureType.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkStructureType.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct StructureType(i32);
@@ -5680,6 +5848,56 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES: Self = Self(1000413001);
     pub const DEVICE_BUFFER_MEMORY_REQUIREMENTS: Self = Self(1000413002);
     pub const DEVICE_IMAGE_MEMORY_REQUIREMENTS: Self = Self(1000413003);
+    pub const PHYSICAL_DEVICE_VULKAN_1_4_FEATURES: Self = Self(55);
+    pub const PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES: Self = Self(56);
+    pub const DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO: Self = Self(1000174000);
+    pub const PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES: Self = Self(1000388000);
+    pub const QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES: Self = Self(1000388001);
+    pub const PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES: Self = Self(1000416000);
+    pub const PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES: Self = Self(1000528000);
+    pub const PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES: Self = Self(1000544000);
+    pub const PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES: Self = Self(1000259000);
+    pub const PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO: Self = Self(1000259001);
+    pub const PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES: Self = Self(1000259002);
+    pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES: Self = Self(1000525000);
+    pub const PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO: Self = Self(1000190001);
+    pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES: Self = Self(1000190002);
+    pub const PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES: Self = Self(1000265000);
+    pub const MEMORY_MAP_INFO: Self = Self(1000271000);
+    pub const MEMORY_UNMAP_INFO: Self = Self(1000271001);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES: Self = Self(1000470000);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES: Self = Self(1000470001);
+    pub const RENDERING_AREA_INFO: Self = Self(1000470003);
+    pub const DEVICE_IMAGE_SUBRESOURCE_INFO: Self = Self(1000470004);
+    pub const SUBRESOURCE_LAYOUT_2: Self = Self(1000338002);
+    pub const IMAGE_SUBRESOURCE_2: Self = Self(1000338003);
+    pub const PIPELINE_CREATE_FLAGS_2_CREATE_INFO: Self = Self(1000470005);
+    pub const BUFFER_USAGE_FLAGS_2_CREATE_INFO: Self = Self(1000470006);
+    pub const PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES: Self = Self(1000080000);
+    pub const PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES: Self = Self(1000232000);
+    pub const RENDERING_ATTACHMENT_LOCATION_INFO: Self = Self(1000232001);
+    pub const RENDERING_INPUT_ATTACHMENT_INDEX_INFO: Self = Self(1000232002);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES: Self = Self(1000545000);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES: Self = Self(1000545001);
+    pub const BIND_MEMORY_STATUS: Self = Self(1000545002);
+    pub const BIND_DESCRIPTOR_SETS_INFO: Self = Self(1000545003);
+    pub const PUSH_CONSTANTS_INFO: Self = Self(1000545004);
+    pub const PUSH_DESCRIPTOR_SET_INFO: Self = Self(1000545005);
+    pub const PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO: Self = Self(1000545006);
+    pub const PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES: Self = Self(1000466000);
+    pub const PIPELINE_ROBUSTNESS_CREATE_INFO: Self = Self(1000068000);
+    pub const PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES: Self = Self(1000068001);
+    pub const PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES: Self = Self(1000068002);
+    pub const PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES: Self = Self(1000270000);
+    pub const PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES: Self = Self(1000270001);
+    pub const MEMORY_TO_IMAGE_COPY: Self = Self(1000270002);
+    pub const IMAGE_TO_MEMORY_COPY: Self = Self(1000270003);
+    pub const COPY_IMAGE_TO_MEMORY_INFO: Self = Self(1000270004);
+    pub const COPY_MEMORY_TO_IMAGE_INFO: Self = Self(1000270005);
+    pub const HOST_IMAGE_LAYOUT_TRANSITION_INFO: Self = Self(1000270006);
+    pub const COPY_IMAGE_TO_IMAGE_INFO: Self = Self(1000270007);
+    pub const SUBRESOURCE_HOST_MEMCPY_SIZE: Self = Self(1000270008);
+    pub const HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY: Self = Self(1000270009);
     pub const SWAPCHAIN_CREATE_INFO_KHR: Self = Self(1000001000);
     pub const PRESENT_INFO_KHR: Self = Self(1000001001);
     pub const DEVICE_GROUP_PRESENT_CAPABILITIES_KHR: Self = Self(1000060007);
@@ -5730,6 +5948,7 @@ impl StructureType {
     pub const CU_MODULE_CREATE_INFO_NVX: Self = Self(1000029000);
     pub const CU_FUNCTION_CREATE_INFO_NVX: Self = Self(1000029001);
     pub const CU_LAUNCH_INFO_NVX: Self = Self(1000029002);
+    pub const CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX: Self = Self(1000029004);
     pub const IMAGE_VIEW_HANDLE_INFO_NVX: Self = Self(1000030000);
     pub const IMAGE_VIEW_ADDRESS_PROPERTIES_NVX: Self = Self(1000030001);
     pub const VIDEO_ENCODE_H264_CAPABILITIES_KHR: Self = Self(1000038000);
@@ -5767,10 +5986,6 @@ impl StructureType {
     pub const VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_KHR: Self = Self(1000040005);
     pub const VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR: Self = Self(1000040006);
     pub const TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD: Self = Self(1000041000);
-    pub const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR: Self = Self(1000044006);
-    pub const RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT: Self = Self(1000044007);
-    pub const ATTACHMENT_SAMPLE_COUNT_INFO_AMD: Self = Self(1000044008);
-    pub const MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX: Self = Self(1000044009);
     pub const STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP: Self = Self(1000049000);
     pub const PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV: Self = Self(1000050000);
     pub const PRIVATE_VENDOR_INFO_PLACEHOLDER_OFFSET_0_NV: Self = Self(1000051000);
@@ -5783,9 +5998,6 @@ impl StructureType {
     pub const VI_SURFACE_CREATE_INFO_NN: Self = Self(1000062000);
     pub const IMAGE_VIEW_ASTC_DECODE_MODE_EXT: Self = Self(1000067000);
     pub const PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT: Self = Self(1000067001);
-    pub const PIPELINE_ROBUSTNESS_CREATE_INFO_EXT: Self = Self(1000068000);
-    pub const PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT: Self = Self(1000068001);
-    pub const PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES_EXT: Self = Self(1000068002);
     pub const IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR: Self = Self(1000073000);
     pub const EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR: Self = Self(1000073001);
     pub const MEMORY_WIN32_HANDLE_PROPERTIES_KHR: Self = Self(1000073002);
@@ -5800,7 +6012,6 @@ impl StructureType {
     pub const SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR: Self = Self(1000078003);
     pub const IMPORT_SEMAPHORE_FD_INFO_KHR: Self = Self(1000079000);
     pub const SEMAPHORE_GET_FD_INFO_KHR: Self = Self(1000079001);
-    pub const PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR: Self = Self(1000080000);
     pub const COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT: Self = Self(1000081000);
     pub const PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT: Self = Self(1000081001);
     pub const CONDITIONAL_RENDERING_BEGIN_INFO_EXT: Self = Self(1000081002);
@@ -5813,6 +6024,7 @@ impl StructureType {
     pub const SWAPCHAIN_COUNTER_CREATE_INFO_EXT: Self = Self(1000091003);
     pub const PRESENT_TIMES_INFO_GOOGLE: Self = Self(1000092000);
     pub const PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX: Self = Self(1000097000);
+    pub const MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX: Self = Self(1000044009);
     pub const PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV: Self = Self(1000098000);
     pub const PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT: Self = Self(1000099000);
     pub const PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT: Self = Self(1000099001);
@@ -5863,6 +6075,7 @@ impl StructureType {
     pub const EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX: Self = Self(1000134002);
     pub const EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX: Self = Self(1000134003);
     pub const PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX: Self = Self(1000134004);
+    pub const ATTACHMENT_SAMPLE_COUNT_INFO_AMD: Self = Self(1000044008);
     pub const SAMPLE_LOCATIONS_INFO_EXT: Self = Self(1000143000);
     pub const RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT: Self = Self(1000143001);
     pub const PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT: Self = Self(1000143002);
@@ -5937,9 +6150,6 @@ impl StructureType {
     pub const VIDEO_DECODE_H265_PROFILE_INFO_KHR: Self = Self(1000187003);
     pub const VIDEO_DECODE_H265_PICTURE_INFO_KHR: Self = Self(1000187004);
     pub const VIDEO_DECODE_H265_DPB_SLOT_INFO_KHR: Self = Self(1000187005);
-    pub const DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR: Self = Self(1000174000);
-    pub const PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR: Self = Self(1000388000);
-    pub const QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR: Self = Self(1000388001);
     pub const DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD: Self = Self(1000189000);
     pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT: Self = Self(1000190000);
     pub const PRESENT_FRAME_TOKEN_GGP: Self = Self(1000191000);
@@ -5950,6 +6160,8 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV: Self = Self(1000205002);
     pub const CHECKPOINT_DATA_NV: Self = Self(1000206000);
     pub const QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV: Self = Self(1000206001);
+    pub const QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV: Self = Self(1000314008);
+    pub const CHECKPOINT_DATA_2_NV: Self = Self(1000314009);
     pub const PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL: Self = Self(1000209000);
     pub const QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL: Self = Self(1000210000);
     pub const INITIALIZE_PERFORMANCE_API_INFO_INTEL: Self = Self(1000210001);
@@ -5965,16 +6177,15 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT: Self = Self(1000218000);
     pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT: Self = Self(1000218001);
     pub const RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT: Self = Self(1000218002);
+    pub const RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT: Self = Self(1000044007);
     pub const FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR: Self = Self(1000226000);
     pub const PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR: Self = Self(1000226001);
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR: Self = Self(1000226002);
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR: Self = Self(1000226003);
     pub const PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR: Self = Self(1000226004);
+    pub const RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR: Self = Self(1000044006);
     pub const PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD: Self = Self(1000227000);
     pub const PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD: Self = Self(1000229000);
-    pub const PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR: Self = Self(1000232000);
-    pub const RENDERING_ATTACHMENT_LOCATION_INFO_KHR: Self = Self(1000232001);
-    pub const RENDERING_INPUT_ATTACHMENT_INDEX_INFO_KHR: Self = Self(1000232002);
     pub const PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT: Self = Self(1000234000);
     pub const PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR: Self = Self(1000235000);
     pub const PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT: Self = Self(1000237000);
@@ -6011,18 +6222,6 @@ impl StructureType {
     pub const PIPELINE_EXECUTABLE_INFO_KHR: Self = Self(1000269003);
     pub const PIPELINE_EXECUTABLE_STATISTIC_KHR: Self = Self(1000269004);
     pub const PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR: Self = Self(1000269005);
-    pub const PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT: Self = Self(1000270000);
-    pub const PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES_EXT: Self = Self(1000270001);
-    pub const MEMORY_TO_IMAGE_COPY_EXT: Self = Self(1000270002);
-    pub const IMAGE_TO_MEMORY_COPY_EXT: Self = Self(1000270003);
-    pub const COPY_IMAGE_TO_MEMORY_INFO_EXT: Self = Self(1000270004);
-    pub const COPY_MEMORY_TO_IMAGE_INFO_EXT: Self = Self(1000270005);
-    pub const HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT: Self = Self(1000270006);
-    pub const COPY_IMAGE_TO_IMAGE_INFO_EXT: Self = Self(1000270007);
-    pub const SUBRESOURCE_HOST_MEMCPY_SIZE_EXT: Self = Self(1000270008);
-    pub const HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT: Self = Self(1000270009);
-    pub const MEMORY_MAP_INFO_KHR: Self = Self(1000271000);
-    pub const MEMORY_UNMAP_INFO_KHR: Self = Self(1000271001);
     pub const PHYSICAL_DEVICE_MAP_MEMORY_PLACED_FEATURES_EXT: Self = Self(1000272000);
     pub const PHYSICAL_DEVICE_MAP_MEMORY_PLACED_PROPERTIES_EXT: Self = Self(1000272001);
     pub const MEMORY_MAP_PLACED_INFO_EXT: Self = Self(1000272002);
@@ -6098,8 +6297,6 @@ impl StructureType {
     pub const IMPORT_METAL_IO_SURFACE_INFO_EXT: Self = Self(1000311009);
     pub const EXPORT_METAL_SHARED_EVENT_INFO_EXT: Self = Self(1000311010);
     pub const IMPORT_METAL_SHARED_EVENT_INFO_EXT: Self = Self(1000311011);
-    pub const QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV: Self = Self(1000314008);
-    pub const CHECKPOINT_DATA_2_NV: Self = Self(1000314009);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT: Self = Self(1000316000);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT: Self = Self(1000316001);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT: Self = Self(1000316002);
@@ -6155,6 +6352,7 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT: Self = Self(1000355000);
     pub const PIPELINE_VIEWPORT_DEPTH_CLIP_CONTROL_CREATE_INFO_EXT: Self = Self(1000355001);
     pub const PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT: Self = Self(1000356000);
+    pub const PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT: Self = Self(1000361000);
     pub const IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000364000);
     pub const MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA: Self = Self(1000364001);
     pub const MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA: Self = Self(1000364002);
@@ -6230,7 +6428,6 @@ impl StructureType {
     pub const SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT: Self = Self(1000411001);
     pub const PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT: Self = Self(1000412000);
     pub const PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_ARM: Self = Self(1000415000);
-    pub const PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES_KHR: Self = Self(1000416000);
     pub const DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM: Self = Self(1000417000);
     pub const PHYSICAL_DEVICE_SCHEDULING_CONTROLS_FEATURES_ARM: Self = Self(1000417001);
     pub const PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM: Self = Self(1000417002);
@@ -6290,18 +6487,9 @@ impl StructureType {
     pub const OPTICAL_FLOW_EXECUTE_INFO_NV: Self = Self(1000464005);
     pub const OPTICAL_FLOW_SESSION_CREATE_PRIVATE_DATA_INFO_NV: Self = Self(1000464010);
     pub const PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT: Self = Self(1000465000);
-    pub const PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT: Self = Self(1000466000);
     pub const PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID: Self = Self(1000468000);
     pub const PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID: Self = Self(1000468001);
     pub const ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID: Self = Self(1000468002);
-    pub const PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES_KHR: Self = Self(1000470000);
-    pub const PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES_KHR: Self = Self(1000470001);
-    pub const RENDERING_AREA_INFO_KHR: Self = Self(1000470003);
-    pub const DEVICE_IMAGE_SUBRESOURCE_INFO_KHR: Self = Self(1000470004);
-    pub const SUBRESOURCE_LAYOUT_2_KHR: Self = Self(1000338002);
-    pub const IMAGE_SUBRESOURCE_2_KHR: Self = Self(1000338003);
-    pub const PIPELINE_CREATE_FLAGS_2_CREATE_INFO_KHR: Self = Self(1000470005);
-    pub const BUFFER_USAGE_FLAGS_2_CREATE_INFO_KHR: Self = Self(1000470006);
     pub const PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD: Self = Self(1000476000);
     pub const ANTI_LAG_DATA_AMD: Self = Self(1000476001);
     pub const ANTI_LAG_PRESENTATION_INFO_AMD: Self = Self(1000476002);
@@ -6364,6 +6552,17 @@ impl StructureType {
     pub const VIDEO_DECODE_AV1_PROFILE_INFO_KHR: Self = Self(1000512003);
     pub const VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR: Self = Self(1000512004);
     pub const VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR: Self = Self(1000512005);
+    pub const VIDEO_ENCODE_AV1_CAPABILITIES_KHR: Self = Self(1000513000);
+    pub const VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR: Self = Self(1000513001);
+    pub const VIDEO_ENCODE_AV1_PICTURE_INFO_KHR: Self = Self(1000513002);
+    pub const VIDEO_ENCODE_AV1_DPB_SLOT_INFO_KHR: Self = Self(1000513003);
+    pub const PHYSICAL_DEVICE_VIDEO_ENCODE_AV1_FEATURES_KHR: Self = Self(1000513004);
+    pub const VIDEO_ENCODE_AV1_PROFILE_INFO_KHR: Self = Self(1000513005);
+    pub const VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR: Self = Self(1000513006);
+    pub const VIDEO_ENCODE_AV1_RATE_CONTROL_LAYER_INFO_KHR: Self = Self(1000513007);
+    pub const VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR: Self = Self(1000513008);
+    pub const VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR: Self = Self(1000513009);
+    pub const VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR: Self = Self(1000513010);
     pub const PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR: Self = Self(1000515000);
     pub const VIDEO_INLINE_QUERY_INFO_KHR: Self = Self(1000515001);
     pub const PHYSICAL_DEVICE_PER_STAGE_DESCRIPTOR_SET_FEATURES_NV: Self = Self(1000516000);
@@ -6378,32 +6577,29 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_CUBIC_CLAMP_FEATURES_QCOM: Self = Self(1000521000);
     pub const PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT: Self =
         Self(1000524000);
-    pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR: Self = Self(1000525000);
-    pub const PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR: Self = Self(1000190001);
-    pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR: Self = Self(1000190002);
-    pub const PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES_KHR: Self = Self(1000528000);
     pub const SCREEN_BUFFER_PROPERTIES_QNX: Self = Self(1000529000);
     pub const SCREEN_BUFFER_FORMAT_PROPERTIES_QNX: Self = Self(1000529001);
     pub const IMPORT_SCREEN_BUFFER_INFO_QNX: Self = Self(1000529002);
     pub const EXTERNAL_FORMAT_QNX: Self = Self(1000529003);
     pub const PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX: Self = Self(1000529004);
     pub const PHYSICAL_DEVICE_LAYERED_DRIVER_PROPERTIES_MSFT: Self = Self(1000530000);
-    pub const PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR: Self = Self(1000265000);
-    pub const PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR: Self = Self(1000259000);
-    pub const PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR: Self = Self(1000259001);
-    pub const PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR: Self = Self(1000259002);
     pub const CALIBRATED_TIMESTAMP_INFO_KHR: Self = Self(1000184000);
-    pub const PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR: Self = Self(1000544000);
-    pub const PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR: Self = Self(1000545000);
-    pub const PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR: Self = Self(1000545001);
-    pub const BIND_MEMORY_STATUS_KHR: Self = Self(1000545002);
-    pub const BIND_DESCRIPTOR_SETS_INFO_KHR: Self = Self(1000545003);
-    pub const PUSH_CONSTANTS_INFO_KHR: Self = Self(1000545004);
-    pub const PUSH_DESCRIPTOR_SET_INFO_KHR: Self = Self(1000545005);
-    pub const PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO_KHR: Self = Self(1000545006);
     pub const SET_DESCRIPTOR_BUFFER_OFFSETS_INFO_EXT: Self = Self(1000545007);
     pub const BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT: Self = Self(1000545008);
     pub const PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV: Self = Self(1000546000);
+    pub const DISPLAY_SURFACE_STEREO_CREATE_INFO_NV: Self = Self(1000551000);
+    pub const DISPLAY_MODE_STEREO_PROPERTIES_NV: Self = Self(1000551001);
+    pub const VIDEO_ENCODE_QUANTIZATION_MAP_CAPABILITIES_KHR: Self = Self(1000553000);
+    pub const VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR: Self = Self(1000553001);
+    pub const VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR: Self = Self(1000553002);
+    pub const VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR: Self =
+        Self(1000553005);
+    pub const PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR: Self = Self(1000553009);
+    pub const VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR: Self = Self(1000553003);
+    pub const VIDEO_ENCODE_H265_QUANTIZATION_MAP_CAPABILITIES_KHR: Self = Self(1000553004);
+    pub const VIDEO_FORMAT_H265_QUANTIZATION_MAP_PROPERTIES_KHR: Self = Self(1000553006);
+    pub const VIDEO_ENCODE_AV1_QUANTIZATION_MAP_CAPABILITIES_KHR: Self = Self(1000553007);
+    pub const VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR: Self = Self(1000553008);
     pub const PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV: Self = Self(1000555000);
     pub const PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR: Self =
         Self(1000558000);
@@ -6416,9 +6612,31 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV: Self = Self(1000563000);
     pub const PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT: Self = Self(1000564000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV: Self = Self(1000568000);
+    pub const PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT: Self = Self(1000572000);
+    pub const PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT: Self = Self(1000572001);
+    pub const GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT: Self = Self(1000572002);
+    pub const INDIRECT_EXECUTION_SET_CREATE_INFO_EXT: Self = Self(1000572003);
+    pub const GENERATED_COMMANDS_INFO_EXT: Self = Self(1000572004);
+    pub const INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT: Self = Self(1000572006);
+    pub const INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT: Self = Self(1000572007);
+    pub const WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT: Self = Self(1000572008);
+    pub const WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT: Self = Self(1000572009);
+    pub const INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT: Self = Self(1000572010);
+    pub const INDIRECT_EXECUTION_SET_SHADER_INFO_EXT: Self = Self(1000572011);
+    pub const INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT: Self = Self(1000572012);
+    pub const GENERATED_COMMANDS_PIPELINE_INFO_EXT: Self = Self(1000572013);
+    pub const GENERATED_COMMANDS_SHADER_INFO_EXT: Self = Self(1000572014);
     pub const PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA: Self = Self(1000575000);
     pub const PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA: Self = Self(1000575001);
     pub const IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA: Self = Self(1000575002);
+    pub const PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT: Self = Self(1000582000);
+    pub const PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT: Self = Self(1000582001);
+    pub const PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI: Self = Self(1000590000);
+    pub const HDR_VIVID_DYNAMIC_METADATA_HUAWEI: Self = Self(1000590001);
+    pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV: Self = Self(1000593000);
+    pub const COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV: Self = Self(1000593001);
+    pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV: Self = Self(1000593002);
+    pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT: Self = Self(1000608000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -6664,6 +6882,56 @@ impl fmt::Debug for StructureType {
             1000413001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES"),
             1000413002 => write!(f, "DEVICE_BUFFER_MEMORY_REQUIREMENTS"),
             1000413003 => write!(f, "DEVICE_IMAGE_MEMORY_REQUIREMENTS"),
+            55 => write!(f, "PHYSICAL_DEVICE_VULKAN_1_4_FEATURES"),
+            56 => write!(f, "PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES"),
+            1000174000 => write!(f, "DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO"),
+            1000388000 => write!(f, "PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES"),
+            1000388001 => write!(f, "QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES"),
+            1000416000 => write!(f, "PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES"),
+            1000528000 => write!(f, "PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES"),
+            1000544000 => write!(f, "PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES"),
+            1000259000 => write!(f, "PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES"),
+            1000259001 => write!(f, "PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO"),
+            1000259002 => write!(f, "PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES"),
+            1000525000 => write!(f, "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES"),
+            1000190001 => write!(f, "PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO"),
+            1000190002 => write!(f, "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES"),
+            1000265000 => write!(f, "PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES"),
+            1000271000 => write!(f, "MEMORY_MAP_INFO"),
+            1000271001 => write!(f, "MEMORY_UNMAP_INFO"),
+            1000470000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES"),
+            1000470001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES"),
+            1000470003 => write!(f, "RENDERING_AREA_INFO"),
+            1000470004 => write!(f, "DEVICE_IMAGE_SUBRESOURCE_INFO"),
+            1000338002 => write!(f, "SUBRESOURCE_LAYOUT_2"),
+            1000338003 => write!(f, "IMAGE_SUBRESOURCE_2"),
+            1000470005 => write!(f, "PIPELINE_CREATE_FLAGS_2_CREATE_INFO"),
+            1000470006 => write!(f, "BUFFER_USAGE_FLAGS_2_CREATE_INFO"),
+            1000080000 => write!(f, "PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES"),
+            1000232000 => write!(f, "PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES"),
+            1000232001 => write!(f, "RENDERING_ATTACHMENT_LOCATION_INFO"),
+            1000232002 => write!(f, "RENDERING_INPUT_ATTACHMENT_INDEX_INFO"),
+            1000545000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES"),
+            1000545001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES"),
+            1000545002 => write!(f, "BIND_MEMORY_STATUS"),
+            1000545003 => write!(f, "BIND_DESCRIPTOR_SETS_INFO"),
+            1000545004 => write!(f, "PUSH_CONSTANTS_INFO"),
+            1000545005 => write!(f, "PUSH_DESCRIPTOR_SET_INFO"),
+            1000545006 => write!(f, "PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO"),
+            1000466000 => write!(f, "PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES"),
+            1000068000 => write!(f, "PIPELINE_ROBUSTNESS_CREATE_INFO"),
+            1000068001 => write!(f, "PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES"),
+            1000068002 => write!(f, "PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES"),
+            1000270000 => write!(f, "PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES"),
+            1000270001 => write!(f, "PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES"),
+            1000270002 => write!(f, "MEMORY_TO_IMAGE_COPY"),
+            1000270003 => write!(f, "IMAGE_TO_MEMORY_COPY"),
+            1000270004 => write!(f, "COPY_IMAGE_TO_MEMORY_INFO"),
+            1000270005 => write!(f, "COPY_MEMORY_TO_IMAGE_INFO"),
+            1000270006 => write!(f, "HOST_IMAGE_LAYOUT_TRANSITION_INFO"),
+            1000270007 => write!(f, "COPY_IMAGE_TO_IMAGE_INFO"),
+            1000270008 => write!(f, "SUBRESOURCE_HOST_MEMCPY_SIZE"),
+            1000270009 => write!(f, "HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY"),
             1000001000 => write!(f, "SWAPCHAIN_CREATE_INFO_KHR"),
             1000001001 => write!(f, "PRESENT_INFO_KHR"),
             1000060007 => write!(f, "DEVICE_GROUP_PRESENT_CAPABILITIES_KHR"),
@@ -6714,6 +6982,7 @@ impl fmt::Debug for StructureType {
             1000029000 => write!(f, "CU_MODULE_CREATE_INFO_NVX"),
             1000029001 => write!(f, "CU_FUNCTION_CREATE_INFO_NVX"),
             1000029002 => write!(f, "CU_LAUNCH_INFO_NVX"),
+            1000029004 => write!(f, "CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX"),
             1000030000 => write!(f, "IMAGE_VIEW_HANDLE_INFO_NVX"),
             1000030001 => write!(f, "IMAGE_VIEW_ADDRESS_PROPERTIES_NVX"),
             1000038000 => write!(f, "VIDEO_ENCODE_H264_CAPABILITIES_KHR"),
@@ -6751,10 +7020,6 @@ impl fmt::Debug for StructureType {
             1000040005 => write!(f, "VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_KHR"),
             1000040006 => write!(f, "VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR"),
             1000041000 => write!(f, "TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD"),
-            1000044006 => write!(f, "RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR"),
-            1000044007 => write!(f, "RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT"),
-            1000044008 => write!(f, "ATTACHMENT_SAMPLE_COUNT_INFO_AMD"),
-            1000044009 => write!(f, "MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX"),
             1000049000 => write!(f, "STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP"),
             1000050000 => write!(f, "PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV"),
             1000051000 => write!(f, "PRIVATE_VENDOR_INFO_PLACEHOLDER_OFFSET_0_NV"),
@@ -6767,9 +7032,6 @@ impl fmt::Debug for StructureType {
             1000062000 => write!(f, "VI_SURFACE_CREATE_INFO_NN"),
             1000067000 => write!(f, "IMAGE_VIEW_ASTC_DECODE_MODE_EXT"),
             1000067001 => write!(f, "PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT"),
-            1000068000 => write!(f, "PIPELINE_ROBUSTNESS_CREATE_INFO_EXT"),
-            1000068001 => write!(f, "PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT"),
-            1000068002 => write!(f, "PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES_EXT"),
             1000073000 => write!(f, "IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR"),
             1000073001 => write!(f, "EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR"),
             1000073002 => write!(f, "MEMORY_WIN32_HANDLE_PROPERTIES_KHR"),
@@ -6784,7 +7046,6 @@ impl fmt::Debug for StructureType {
             1000078003 => write!(f, "SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR"),
             1000079000 => write!(f, "IMPORT_SEMAPHORE_FD_INFO_KHR"),
             1000079001 => write!(f, "SEMAPHORE_GET_FD_INFO_KHR"),
-            1000080000 => write!(f, "PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR"),
             1000081000 => write!(
                 f,
                 "COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT"
@@ -6803,6 +7064,7 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX"
             ),
+            1000044009 => write!(f, "MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX"),
             1000098000 => write!(f, "PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV"),
             1000099000 => write!(f, "PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT"),
             1000099001 => write!(f, "PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT"),
@@ -6859,6 +7121,7 @@ impl fmt::Debug for StructureType {
             1000134002 => write!(f, "EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX"),
             1000134003 => write!(f, "EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX"),
             1000134004 => write!(f, "PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX"),
+            1000044008 => write!(f, "ATTACHMENT_SAMPLE_COUNT_INFO_AMD"),
             1000143000 => write!(f, "SAMPLE_LOCATIONS_INFO_EXT"),
             1000143001 => write!(f, "RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT"),
             1000143002 => write!(f, "PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT"),
@@ -6945,9 +7208,6 @@ impl fmt::Debug for StructureType {
             1000187003 => write!(f, "VIDEO_DECODE_H265_PROFILE_INFO_KHR"),
             1000187004 => write!(f, "VIDEO_DECODE_H265_PICTURE_INFO_KHR"),
             1000187005 => write!(f, "VIDEO_DECODE_H265_DPB_SLOT_INFO_KHR"),
-            1000174000 => write!(f, "DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR"),
-            1000388000 => write!(f, "PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR"),
-            1000388001 => write!(f, "QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR"),
             1000189000 => write!(f, "DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD"),
             1000190000 => write!(f, "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT"),
             1000191000 => write!(f, "PRESENT_FRAME_TOKEN_GGP"),
@@ -6961,6 +7221,8 @@ impl fmt::Debug for StructureType {
             1000205002 => write!(f, "PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV"),
             1000206000 => write!(f, "CHECKPOINT_DATA_NV"),
             1000206001 => write!(f, "QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV"),
+            1000314008 => write!(f, "QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV"),
+            1000314009 => write!(f, "CHECKPOINT_DATA_2_NV"),
             1000209000 => write!(
                 f,
                 "PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL"
@@ -6979,19 +7241,15 @@ impl fmt::Debug for StructureType {
             1000218000 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT"),
             1000218001 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT"),
             1000218002 => write!(f, "RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT"),
+            1000044007 => write!(f, "RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT"),
             1000226000 => write!(f, "FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR"),
             1000226001 => write!(f, "PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR"),
             1000226002 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR"),
             1000226003 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR"),
             1000226004 => write!(f, "PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR"),
+            1000044006 => write!(f, "RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR"),
             1000227000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD"),
             1000229000 => write!(f, "PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD"),
-            1000232000 => write!(
-                f,
-                "PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR"
-            ),
-            1000232001 => write!(f, "RENDERING_ATTACHMENT_LOCATION_INFO_KHR"),
-            1000232002 => write!(f, "RENDERING_INPUT_ATTACHMENT_INDEX_INFO_KHR"),
             1000234000 => write!(f, "PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT"),
             1000235000 => write!(f, "PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR"),
             1000237000 => write!(f, "PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT"),
@@ -7035,18 +7293,6 @@ impl fmt::Debug for StructureType {
             1000269003 => write!(f, "PIPELINE_EXECUTABLE_INFO_KHR"),
             1000269004 => write!(f, "PIPELINE_EXECUTABLE_STATISTIC_KHR"),
             1000269005 => write!(f, "PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR"),
-            1000270000 => write!(f, "PHYSICAL_DEVICE_HOST_IMAGE_COPY_FEATURES_EXT"),
-            1000270001 => write!(f, "PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES_EXT"),
-            1000270002 => write!(f, "MEMORY_TO_IMAGE_COPY_EXT"),
-            1000270003 => write!(f, "IMAGE_TO_MEMORY_COPY_EXT"),
-            1000270004 => write!(f, "COPY_IMAGE_TO_MEMORY_INFO_EXT"),
-            1000270005 => write!(f, "COPY_MEMORY_TO_IMAGE_INFO_EXT"),
-            1000270006 => write!(f, "HOST_IMAGE_LAYOUT_TRANSITION_INFO_EXT"),
-            1000270007 => write!(f, "COPY_IMAGE_TO_IMAGE_INFO_EXT"),
-            1000270008 => write!(f, "SUBRESOURCE_HOST_MEMCPY_SIZE_EXT"),
-            1000270009 => write!(f, "HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT"),
-            1000271000 => write!(f, "MEMORY_MAP_INFO_KHR"),
-            1000271001 => write!(f, "MEMORY_UNMAP_INFO_KHR"),
             1000272000 => write!(f, "PHYSICAL_DEVICE_MAP_MEMORY_PLACED_FEATURES_EXT"),
             1000272001 => write!(f, "PHYSICAL_DEVICE_MAP_MEMORY_PLACED_PROPERTIES_EXT"),
             1000272002 => write!(f, "MEMORY_MAP_PLACED_INFO_EXT"),
@@ -7125,8 +7371,6 @@ impl fmt::Debug for StructureType {
             1000311009 => write!(f, "IMPORT_METAL_IO_SURFACE_INFO_EXT"),
             1000311010 => write!(f, "EXPORT_METAL_SHARED_EVENT_INFO_EXT"),
             1000311011 => write!(f, "IMPORT_METAL_SHARED_EVENT_INFO_EXT"),
-            1000314008 => write!(f, "QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV"),
-            1000314009 => write!(f, "CHECKPOINT_DATA_2_NV"),
             1000316000 => write!(f, "PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT"),
             1000316001 => write!(
                 f,
@@ -7218,6 +7462,10 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT"
             ),
+            1000361000 => write!(
+                f,
+                "PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT"
+            ),
             1000364000 => write!(f, "IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA"),
             1000364001 => write!(f, "MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA"),
             1000364002 => write!(f, "MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA"),
@@ -7307,7 +7555,6 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT"
             ),
             1000415000 => write!(f, "PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_ARM"),
-            1000416000 => write!(f, "PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES_KHR"),
             1000417000 => write!(f, "DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM"),
             1000417001 => write!(f, "PHYSICAL_DEVICE_SCHEDULING_CONTROLS_FEATURES_ARM"),
             1000417002 => write!(f, "PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM"),
@@ -7385,7 +7632,6 @@ impl fmt::Debug for StructureType {
             1000464005 => write!(f, "OPTICAL_FLOW_EXECUTE_INFO_NV"),
             1000464010 => write!(f, "OPTICAL_FLOW_SESSION_CREATE_PRIVATE_DATA_INFO_NV"),
             1000465000 => write!(f, "PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT"),
-            1000466000 => write!(f, "PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT"),
             1000468000 => write!(
                 f,
                 "PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID"
@@ -7398,14 +7644,6 @@ impl fmt::Debug for StructureType {
                 f,
                 "ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID"
             ),
-            1000470000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES_KHR"),
-            1000470001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES_KHR"),
-            1000470003 => write!(f, "RENDERING_AREA_INFO_KHR"),
-            1000470004 => write!(f, "DEVICE_IMAGE_SUBRESOURCE_INFO_KHR"),
-            1000338002 => write!(f, "SUBRESOURCE_LAYOUT_2_KHR"),
-            1000338003 => write!(f, "IMAGE_SUBRESOURCE_2_KHR"),
-            1000470005 => write!(f, "PIPELINE_CREATE_FLAGS_2_CREATE_INFO_KHR"),
-            1000470006 => write!(f, "BUFFER_USAGE_FLAGS_2_CREATE_INFO_KHR"),
             1000476000 => write!(f, "PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD"),
             1000476001 => write!(f, "ANTI_LAG_DATA_AMD"),
             1000476002 => write!(f, "ANTI_LAG_PRESENTATION_INFO_AMD"),
@@ -7499,6 +7737,17 @@ impl fmt::Debug for StructureType {
             1000512003 => write!(f, "VIDEO_DECODE_AV1_PROFILE_INFO_KHR"),
             1000512004 => write!(f, "VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR"),
             1000512005 => write!(f, "VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR"),
+            1000513000 => write!(f, "VIDEO_ENCODE_AV1_CAPABILITIES_KHR"),
+            1000513001 => write!(f, "VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR"),
+            1000513002 => write!(f, "VIDEO_ENCODE_AV1_PICTURE_INFO_KHR"),
+            1000513003 => write!(f, "VIDEO_ENCODE_AV1_DPB_SLOT_INFO_KHR"),
+            1000513004 => write!(f, "PHYSICAL_DEVICE_VIDEO_ENCODE_AV1_FEATURES_KHR"),
+            1000513005 => write!(f, "VIDEO_ENCODE_AV1_PROFILE_INFO_KHR"),
+            1000513006 => write!(f, "VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR"),
+            1000513007 => write!(f, "VIDEO_ENCODE_AV1_RATE_CONTROL_LAYER_INFO_KHR"),
+            1000513008 => write!(f, "VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR"),
+            1000513009 => write!(f, "VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR"),
+            1000513010 => write!(f, "VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR"),
             1000515000 => write!(f, "PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR"),
             1000515001 => write!(f, "VIDEO_INLINE_QUERY_INFO_KHR"),
             1000516000 => write!(f, "PHYSICAL_DEVICE_PER_STAGE_DESCRIPTOR_SET_FEATURES_NV"),
@@ -7515,10 +7764,6 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT"
             ),
-            1000525000 => write!(f, "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR"),
-            1000190001 => write!(f, "PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR"),
-            1000190002 => write!(f, "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR"),
-            1000528000 => write!(f, "PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES_KHR"),
             1000529000 => write!(f, "SCREEN_BUFFER_PROPERTIES_QNX"),
             1000529001 => write!(f, "SCREEN_BUFFER_FORMAT_PROPERTIES_QNX"),
             1000529002 => write!(f, "IMPORT_SCREEN_BUFFER_INFO_QNX"),
@@ -7528,25 +7773,31 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX"
             ),
             1000530000 => write!(f, "PHYSICAL_DEVICE_LAYERED_DRIVER_PROPERTIES_MSFT"),
-            1000265000 => write!(f, "PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR"),
-            1000259000 => write!(f, "PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_KHR"),
-            1000259001 => write!(f, "PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_KHR"),
-            1000259002 => write!(f, "PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_KHR"),
             1000184000 => write!(f, "CALIBRATED_TIMESTAMP_INFO_KHR"),
-            1000544000 => write!(f, "PHYSICAL_DEVICE_SHADER_EXPECT_ASSUME_FEATURES_KHR"),
-            1000545000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_6_FEATURES_KHR"),
-            1000545001 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_6_PROPERTIES_KHR"),
-            1000545002 => write!(f, "BIND_MEMORY_STATUS_KHR"),
-            1000545003 => write!(f, "BIND_DESCRIPTOR_SETS_INFO_KHR"),
-            1000545004 => write!(f, "PUSH_CONSTANTS_INFO_KHR"),
-            1000545005 => write!(f, "PUSH_DESCRIPTOR_SET_INFO_KHR"),
-            1000545006 => write!(f, "PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO_KHR"),
             1000545007 => write!(f, "SET_DESCRIPTOR_BUFFER_OFFSETS_INFO_EXT"),
             1000545008 => write!(f, "BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT"),
             1000546000 => write!(
                 f,
                 "PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV"
             ),
+            1000551000 => write!(f, "DISPLAY_SURFACE_STEREO_CREATE_INFO_NV"),
+            1000551001 => write!(f, "DISPLAY_MODE_STEREO_PROPERTIES_NV"),
+            1000553000 => write!(f, "VIDEO_ENCODE_QUANTIZATION_MAP_CAPABILITIES_KHR"),
+            1000553001 => write!(f, "VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR"),
+            1000553002 => write!(f, "VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR"),
+            1000553005 => write!(
+                f,
+                "VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR"
+            ),
+            1000553009 => write!(
+                f,
+                "PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR"
+            ),
+            1000553003 => write!(f, "VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR"),
+            1000553004 => write!(f, "VIDEO_ENCODE_H265_QUANTIZATION_MAP_CAPABILITIES_KHR"),
+            1000553006 => write!(f, "VIDEO_FORMAT_H265_QUANTIZATION_MAP_PROPERTIES_KHR"),
+            1000553007 => write!(f, "VIDEO_ENCODE_AV1_QUANTIZATION_MAP_CAPABILITIES_KHR"),
+            1000553008 => write!(f, "VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR"),
             1000555000 => write!(f, "PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV"),
             1000558000 => write!(
                 f,
@@ -7567,15 +7818,43 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT"
             ),
             1000568000 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV"),
+            1000572000 => write!(f, "PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT"),
+            1000572001 => write!(
+                f,
+                "PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT"
+            ),
+            1000572002 => write!(f, "GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT"),
+            1000572003 => write!(f, "INDIRECT_EXECUTION_SET_CREATE_INFO_EXT"),
+            1000572004 => write!(f, "GENERATED_COMMANDS_INFO_EXT"),
+            1000572006 => write!(f, "INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT"),
+            1000572007 => write!(f, "INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT"),
+            1000572008 => write!(f, "WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT"),
+            1000572009 => write!(f, "WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT"),
+            1000572010 => write!(f, "INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT"),
+            1000572011 => write!(f, "INDIRECT_EXECUTION_SET_SHADER_INFO_EXT"),
+            1000572012 => write!(f, "INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT"),
+            1000572013 => write!(f, "GENERATED_COMMANDS_PIPELINE_INFO_EXT"),
+            1000572014 => write!(f, "GENERATED_COMMANDS_SHADER_INFO_EXT"),
             1000575000 => write!(f, "PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA"),
             1000575001 => write!(f, "PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA"),
             1000575002 => write!(f, "IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA"),
+            1000582000 => write!(f, "PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT"),
+            1000582001 => write!(f, "PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT"),
+            1000590000 => write!(f, "PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI"),
+            1000590001 => write!(f, "HDR_VIVID_DYNAMIC_METADATA_HUAWEI"),
+            1000593000 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV"),
+            1000593001 => write!(f, "COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV"),
+            1000593002 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV"),
+            1000608000 => write!(
+                f,
+                "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT"
+            ),
             _ => self.0.fmt(f),
         }
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSubpassContents.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassContents.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct SubpassContents(i32);
@@ -7609,7 +7888,7 @@ impl fmt::Debug for SubpassContents {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSubpassMergeStatusEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassMergeStatusEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct SubpassMergeStatusEXT(i32);
@@ -7665,7 +7944,7 @@ impl fmt::Debug for SubpassMergeStatusEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSystemAllocationScope.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSystemAllocationScope.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct SystemAllocationScope(i32);
@@ -7703,7 +7982,7 @@ impl fmt::Debug for SystemAllocationScope {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTessellationDomainOrigin.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkTessellationDomainOrigin.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct TessellationDomainOrigin(i32);
@@ -7735,7 +8014,7 @@ impl fmt::Debug for TessellationDomainOrigin {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTimeDomainKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkTimeDomainKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct TimeDomainKHR(i32);
@@ -7771,7 +8050,7 @@ impl fmt::Debug for TimeDomainKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkValidationCacheHeaderVersionEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkValidationCacheHeaderVersionEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ValidationCacheHeaderVersionEXT(i32);
@@ -7801,7 +8080,7 @@ impl fmt::Debug for ValidationCacheHeaderVersionEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkValidationCheckEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkValidationCheckEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ValidationCheckEXT(i32);
@@ -7833,7 +8112,7 @@ impl fmt::Debug for ValidationCheckEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkValidationFeatureDisableEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkValidationFeatureDisableEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ValidationFeatureDisableEXT(i32);
@@ -7877,7 +8156,7 @@ impl fmt::Debug for ValidationFeatureDisableEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkValidationFeatureEnableEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkValidationFeatureEnableEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ValidationFeatureEnableEXT(i32);
@@ -7915,7 +8194,7 @@ impl fmt::Debug for ValidationFeatureEnableEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVendorId.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVendorId.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct VendorId(i32);
@@ -7959,7 +8238,7 @@ impl fmt::Debug for VendorId {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVertexInputRate.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVertexInputRate.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct VertexInputRate(i32);
@@ -7991,7 +8270,80 @@ impl fmt::Debug for VertexInputRate {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkVideoEncodeTuningModeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1PredictionModeKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct VideoEncodeAV1PredictionModeKHR(i32);
+
+impl VideoEncodeAV1PredictionModeKHR {
+    pub const VIDEO_ENCODE_AV1_PREDICTION_MODE_INTRA_ONLY: Self = Self(0);
+    pub const VIDEO_ENCODE_AV1_PREDICTION_MODE_SINGLE_REFERENCE: Self = Self(1);
+    pub const VIDEO_ENCODE_AV1_PREDICTION_MODE_UNIDIRECTIONAL_COMPOUND: Self = Self(2);
+    pub const VIDEO_ENCODE_AV1_PREDICTION_MODE_BIDIRECTIONAL_COMPOUND: Self = Self(3);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for VideoEncodeAV1PredictionModeKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "VIDEO_ENCODE_AV1_PREDICTION_MODE_INTRA_ONLY"),
+            1 => write!(f, "VIDEO_ENCODE_AV1_PREDICTION_MODE_SINGLE_REFERENCE"),
+            2 => write!(
+                f,
+                "VIDEO_ENCODE_AV1_PREDICTION_MODE_UNIDIRECTIONAL_COMPOUND"
+            ),
+            3 => write!(f, "VIDEO_ENCODE_AV1_PREDICTION_MODE_BIDIRECTIONAL_COMPOUND"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1RateControlGroupKHR.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct VideoEncodeAV1RateControlGroupKHR(i32);
+
+impl VideoEncodeAV1RateControlGroupKHR {
+    pub const VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA: Self = Self(0);
+    pub const VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE: Self = Self(1);
+    pub const VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE: Self = Self(2);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for VideoEncodeAV1RateControlGroupKHR {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA"),
+            1 => write!(f, "VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE"),
+            2 => write!(f, "VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeTuningModeKHR.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct VideoEncodeTuningModeKHR(i32);
@@ -8029,7 +8381,7 @@ impl fmt::Debug for VideoEncodeTuningModeKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkViewportCoordinateSwizzleNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkViewportCoordinateSwizzleNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct ViewportCoordinateSwizzleNV(i32);
@@ -8073,41 +8425,49 @@ impl fmt::Debug for ViewportCoordinateSwizzleNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureTypeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureTypeNV.html>
 pub type AccelerationStructureTypeNV = AccelerationStructureTypeKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkChromaLocationKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkChromaLocationKHR.html>
 pub type ChromaLocationKHR = ChromaLocation;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkComponentTypeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkComponentTypeNV.html>
 pub type ComponentTypeNV = ComponentTypeKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkCopyAccelerationStructureModeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyAccelerationStructureModeNV.html>
 pub type CopyAccelerationStructureModeNV = CopyAccelerationStructureModeKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDescriptorUpdateTemplateTypeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorUpdateTemplateTypeKHR.html>
 pub type DescriptorUpdateTemplateTypeKHR = DescriptorUpdateTemplateType;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkDriverIdKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDriverIdKHR.html>
 pub type DriverIdKHR = DriverId;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkGeometryTypeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeometryTypeNV.html>
 pub type GeometryTypeNV = GeometryTypeKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkLineRasterizationModeEXT.html>
-pub type LineRasterizationModeEXT = LineRasterizationModeKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkPointClippingBehaviorKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLineRasterizationModeEXT.html>
+pub type LineRasterizationModeEXT = LineRasterizationMode;
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLineRasterizationModeKHR.html>
+pub type LineRasterizationModeKHR = LineRasterizationMode;
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRobustnessBufferBehaviorEXT.html>
+pub type PipelineRobustnessBufferBehaviorEXT = PipelineRobustnessBufferBehavior;
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRobustnessImageBehaviorEXT.html>
+pub type PipelineRobustnessImageBehaviorEXT = PipelineRobustnessImageBehavior;
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPointClippingBehaviorKHR.html>
 pub type PointClippingBehaviorKHR = PointClippingBehavior;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkQueueGlobalPriorityEXT.html>
-pub type QueueGlobalPriorityEXT = QueueGlobalPriorityKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkRayTracingShaderGroupTypeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueGlobalPriorityEXT.html>
+pub type QueueGlobalPriorityEXT = QueueGlobalPriority;
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueGlobalPriorityKHR.html>
+pub type QueueGlobalPriorityKHR = QueueGlobalPriority;
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRayTracingShaderGroupTypeNV.html>
 pub type RayTracingShaderGroupTypeNV = RayTracingShaderGroupTypeKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerReductionModeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerReductionModeEXT.html>
 pub type SamplerReductionModeEXT = SamplerReductionMode;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrModelConversionKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerYcbcrModelConversionKHR.html>
 pub type SamplerYcbcrModelConversionKHR = SamplerYcbcrModelConversion;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrRangeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerYcbcrRangeKHR.html>
 pub type SamplerYcbcrRangeKHR = SamplerYcbcrRange;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkScopeNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkScopeNV.html>
 pub type ScopeNV = ScopeKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkSemaphoreTypeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreTypeKHR.html>
 pub type SemaphoreTypeKHR = SemaphoreType;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkShaderFloatControlsIndependenceKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderFloatControlsIndependenceKHR.html>
 pub type ShaderFloatControlsIndependenceKHR = ShaderFloatControlsIndependence;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTessellationDomainOriginKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkTessellationDomainOriginKHR.html>
 pub type TessellationDomainOriginKHR = TessellationDomainOrigin;
-/// <https://www.khronos.org/registry/vulkan/specs/1.3-extensions/man/html/VkTimeDomainEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkTimeDomainEXT.html>
 pub type TimeDomainEXT = TimeDomainKHR;
