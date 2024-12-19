@@ -225,7 +225,7 @@ That leaves only one major property, for which we'll add one last function:
 ```rust,noplaypen
 fn get_swapchain_extent(
     window: &Window,
-    capabilities: vk::SurfaceCapabilitiesKHR.
+    capabilities: vk::SurfaceCapabilitiesKHR,
 ) -> vk::Extent2D {
 }
 ```
