@@ -1,4 +1,4 @@
-## [0.26.0] - UNRELEASED
+## [0.26.0] - 2024-12-28
 
 ### Changed
 - Bumped MSRV to 1.73

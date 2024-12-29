@@ -16,7 +16,7 @@ use pulldown_cmark_to_cmark::cmark;
 /// The Vulkan API Registry index.
 const INDEX: &str = include_str!("../../../index.txt");
 /// The version of `vulkanalia` used by the tutorial.
-const VERSION: &str = "0.25.0";
+const VERSION: &str = "0.26.0";
 
 /// The number of documentation link replacements made.
 static REPLACEMENTS: AtomicUsize = AtomicUsize::new(0);
