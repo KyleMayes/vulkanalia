@@ -406,7 +406,7 @@ data.texture_image_view = create_image_view(
 <p>That's it for creating the depth image. We don't need to map it or copy another image to it, because we're going to clear it at the start of the render pass like the color attachment.</p>
 <h3 id="explicitly-transitioning-the-depth-image"><a class="header" href="#explicitly-transitioning-the-depth-image">Explicitly transitioning the depth image</a></h3>
 <p>We don't need to explicitly transition the layout of the image to a depth attachment because we'll take care of this in the render pass. However, for completeness I'll still describe the process in this section. You may skip it if you like.</p>
-<p>Make a call to <code>transition_image_layout</code> at the end of the <code>create_depth_objects</code> function like so:</p>
+<p>Make a call to <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/trait.DeviceV1_4.html#method.transition_image_layout"><code class="hljs">transition_image_layout</code></a> at the end of the <code>create_depth_objects</code> function like so:</p>
 <pre><code class="language-rust noplaypen">transition_image_layout(
     device,
     data,
@@ -416,7 +416,7 @@ data.texture_image_view = create_image_view(
     vk::ImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL,
 )?;
 </code></pre>
-<p>The undefined layout can be used as initial layout, because there are no existing depth image contents that matter. We need to update some of the logic in <code>transition_image_layout</code> to use the right subresource aspect:</p>
+<p>The undefined layout can be used as initial layout, because there are no existing depth image contents that matter. We need to update some of the logic in <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/trait.DeviceV1_4.html#method.transition_image_layout"><code class="hljs">transition_image_layout</code></a> to use the right subresource aspect:</p>
 <blockquote>
 <p><strong>Note:</strong> The first usage of the <code>|</code> operator below describes a <a href="https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html"><em>pattern</em></a> that matches either of the specified <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.Format.html"><code class="hljs">vk::Format</code></a>s in the <code>match</code> arm. Meanwhile, the second usage of the <code>|</code> operator is the <a href="https://doc.rust-lang.org/std/ops/trait.BitOr.html"><em>bitwise OR operator</em></a> which combines the bits of the <a href="https://docs.rs/vulkanalia/0.25.0/vulkanalia/vk/struct.ImageAspectFlags.html"><code class="hljs">vk::ImageAspectFlags</code></a> we want to enable in this code path.</p>
 </blockquote>
