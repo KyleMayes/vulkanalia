@@ -116,7 +116,16 @@ fn bind() {
         }
     }
 
+    let major = 1;
+    let minor = 73;
+    let rust_target = if let Ok(rust_target) = bindgen::RustTarget::stable(major, minor) {
+        rust_target
+    } else {
+        panic!("invalid Rust version: {major}.{minor}");
+    };
+
     let bindings = bindgen::builder()
+        .rust_target(rust_target)
         // Input.
         .clang_arg("-I./vendor/Vulkan-Headers/include")
         .clang_arg("-I./wrapper")

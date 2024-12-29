@@ -33,6 +33,6 @@ vulkanalia = { path = "../../vulkanalia", version = "0.25", default-features = f
 
 [build-dependencies]
 
-bindgen = { version = "0.69", optional = true }
+bindgen = { version = "0.71", optional = true }
 cc = "1"
 doxygen-rs = { version = "0.4", optional = true }
