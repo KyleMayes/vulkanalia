@@ -26,3 +26,9 @@
 11. ???
 
 12. Profit!
+
+# MSRV Update Checklist
+
+1. Search for the version (e.g., `1.73`) and replace all references
+
+2. Update targeted Rust version for `bindgen` in `ext/vma/build.rs`
