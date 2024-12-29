@@ -121,6 +121,7 @@ impl ErrorCode {
     pub const INVALID_EXTERNAL_HANDLE: Self = Self(-1000072003);
     pub const FRAGMENTATION: Self = Self(-1000161000);
     pub const INVALID_OPAQUE_CAPTURE_ADDRESS: Self = Self(-1000257000);
+    pub const NOT_PERMITTED: Self = Self(-1000174001);
     pub const SURFACE_LOST_KHR: Self = Self(-1000000000);
     pub const NATIVE_WINDOW_IN_USE_KHR: Self = Self(-1000000001);
     pub const OUT_OF_DATE_KHR: Self = Self(-1000001004);
@@ -134,7 +135,6 @@ impl ErrorCode {
     pub const VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR: Self = Self(-1000023004);
     pub const VIDEO_STD_VERSION_NOT_SUPPORTED_KHR: Self = Self(-1000023005);
     pub const INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT: Self = Self(-1000158000);
-    pub const NOT_PERMITTED_KHR: Self = Self(-1000174001);
     pub const FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT: Self = Self(-1000255000);
     pub const INVALID_VIDEO_STD_PARAMETERS_KHR: Self = Self(-1000299000);
     pub const COMPRESSION_EXHAUSTED_EXT: Self = Self(-1000338000);
@@ -173,6 +173,7 @@ impl fmt::Debug for ErrorCode {
             -1000072003 => write!(f, "INVALID_EXTERNAL_HANDLE"),
             -1000161000 => write!(f, "FRAGMENTATION"),
             -1000257000 => write!(f, "INVALID_OPAQUE_CAPTURE_ADDRESS"),
+            -1000174001 => write!(f, "NOT_PERMITTED"),
             -1000000000 => write!(f, "SURFACE_LOST_KHR"),
             -1000000001 => write!(f, "NATIVE_WINDOW_IN_USE_KHR"),
             -1000001004 => write!(f, "OUT_OF_DATE_KHR"),
@@ -186,7 +187,6 @@ impl fmt::Debug for ErrorCode {
             -1000023004 => write!(f, "VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR"),
             -1000023005 => write!(f, "VIDEO_STD_VERSION_NOT_SUPPORTED_KHR"),
             -1000158000 => write!(f, "INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
-            -1000174001 => write!(f, "NOT_PERMITTED_KHR"),
             -1000255000 => write!(f, "FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT"),
             -1000299000 => write!(f, "INVALID_VIDEO_STD_PARAMETERS_KHR"),
             -1000338000 => write!(f, "COMPRESSION_EXHAUSTED_EXT"),
@@ -216,6 +216,7 @@ impl fmt::Display for ErrorCode {
             -1000072003 => write!(f, "An external handle is not a valid handle of the specified type."),
             -1000161000 => write!(f, "A descriptor pool creation has failed due to fragmentation."),
             -1000257000 => write!(f, "A buffer creation or memory allocation failed because the requested address is not available. A shader group handle assignment failed because the requested shader group handle information is no longer valid."),
+            -1000174001 => write!(f, "NOT_PERMITTED"),
             -1000000000 => write!(f, "A surface is no longer available."),
             -1000000001 => write!(f, "The requested window is already in use by Vulkan or another API in a manner which prevents it from being used again."),
             -1000001004 => write!(f, "A surface has changed in such a way that it is no longer compatible with the swapchain, and further presentation requests using the swapchain will fail. Applications must query the new surface properties and recreate their swapchain if they wish to continue presenting to the surface."),
@@ -229,7 +230,6 @@ impl fmt::Display for ErrorCode {
             -1000023004 => write!(f, "VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR"),
             -1000023005 => write!(f, "VIDEO_STD_VERSION_NOT_SUPPORTED_KHR"),
             -1000158000 => write!(f, "INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT"),
-            -1000174001 => write!(f, "NOT_PERMITTED_KHR"),
             -1000255000 => write!(f, "An operation on a swapchain created with VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT failed as it did not have exclusive full-screen access. This may occur due to implementation-dependent reasons, outside of the application's control."),
             -1000299000 => write!(f, "INVALID_VIDEO_STD_PARAMETERS_KHR"),
             -1000338000 => write!(f, "COMPRESSION_EXHAUSTED_EXT"),
