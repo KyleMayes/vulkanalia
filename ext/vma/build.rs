@@ -116,8 +116,8 @@ fn bind() {
         }
     }
 
-    let major = 1;
-    let minor = 73;
+    let major = 73;
+    let minor = 0;
     let rust_target = if let Ok(rust_target) = bindgen::RustTarget::stable(major, minor) {
         rust_target
     } else {
