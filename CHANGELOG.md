@@ -1,5 +1,8 @@
 ## [0.26.0] - UNRELEASED
 
+### Changed
+- Bumped MSRV to 1.73
+
 ### Bindings Updates
 - [Add discussion of processing frameworks being responsible for all defined attributes and tags (#2417)](https://github.com/KhronosGroup/Vulkan-Docs/commit/58d38a51ca9d1b4132af54c88b89481e7fe27dc9)
 - [Reserve extension #604 (#2419)](https://github.com/KhronosGroup/Vulkan-Docs/commit/55255e28e68016d9861cb134dcc9db9255670a5d)
