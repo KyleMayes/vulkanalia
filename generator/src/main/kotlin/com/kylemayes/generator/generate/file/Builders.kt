@@ -2,10 +2,12 @@
 
 package com.kylemayes.generator.generate.file
 
+import com.kylemayes.generator.generate.support.generateCustomBuilderMethods
 import com.kylemayes.generator.generate.support.generatePtr
 import com.kylemayes.generator.generate.support.generateRef
 import com.kylemayes.generator.generate.support.getStructExtensions
 import com.kylemayes.generator.generate.support.getStructLifetime
+import com.kylemayes.generator.generate.support.skipBuilderMethods
 import com.kylemayes.generator.registry.ArrayType
 import com.kylemayes.generator.registry.Identifier
 import com.kylemayes.generator.registry.Member
@@ -193,10 +195,11 @@ private fun Registry.generateMethods(struct: Structure): String {
 
     // Filter out the fields that do not require builder methods since they will
     // be set by other builder methods (i.e., array length fields for
-    // non-optional array fields).
+    // non-optional array fields) or have custom handling.
+    val skip = skipBuilderMethods[struct.name.original] ?: setOf()
     val requireBuilders =
         members.values.filter {
-            arraysByLength[it.name].let { a -> a?.optional ?: true }
+            !skip.contains(it.name.original) && arraysByLength[it.name].let { a -> a?.optional ?: true }
         }
 
     // Generate the builder methods.
@@ -234,6 +237,8 @@ private fun Registry.generateMethods(struct: Structure): String {
             }
         }
     }
+
+    methods.addAll(generateCustomBuilderMethods(struct))
 
     return methods.joinToString("")
 }

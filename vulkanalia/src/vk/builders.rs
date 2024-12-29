@@ -30003,13 +30003,64 @@ impl<'b> LayerSettingEXTBuilder<'b> {
     }
 
     #[inline]
-    pub fn type_(mut self, type_: LayerSettingTypeEXT) -> Self {
-        self.value.type_ = type_;
+    pub fn values_bool32(mut self, values: &[Bool32]) -> Self {
+        self.value.type_ = LayerSettingTypeEXT::BOOL32;
+        self.value.value_count = values.len() as u32;
+        self.value.values = values.as_ptr().cast();
         self
     }
 
     #[inline]
-    pub fn values(mut self, values: &'b [u8]) -> Self {
+    pub fn values_int32(mut self, values: &[i32]) -> Self {
+        self.value.type_ = LayerSettingTypeEXT::INT32;
+        self.value.value_count = values.len() as u32;
+        self.value.values = values.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn values_int64(mut self, values: &[i64]) -> Self {
+        self.value.type_ = LayerSettingTypeEXT::INT64;
+        self.value.value_count = values.len() as u32;
+        self.value.values = values.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn values_uint32(mut self, values: &[u32]) -> Self {
+        self.value.type_ = LayerSettingTypeEXT::UINT32;
+        self.value.value_count = values.len() as u32;
+        self.value.values = values.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn values_uint64(mut self, values: &[u64]) -> Self {
+        self.value.type_ = LayerSettingTypeEXT::UINT64;
+        self.value.value_count = values.len() as u32;
+        self.value.values = values.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn values_float32(mut self, values: &[f32]) -> Self {
+        self.value.type_ = LayerSettingTypeEXT::FLOAT32;
+        self.value.value_count = values.len() as u32;
+        self.value.values = values.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn values_float64(mut self, values: &[f64]) -> Self {
+        self.value.type_ = LayerSettingTypeEXT::FLOAT64;
+        self.value.value_count = values.len() as u32;
+        self.value.values = values.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn values_string(mut self, values: &[*const u8]) -> Self {
+        self.value.type_ = LayerSettingTypeEXT::STRING;
         self.value.value_count = values.len() as u32;
         self.value.values = values.as_ptr().cast();
         self
