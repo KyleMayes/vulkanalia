@@ -36,7 +36,7 @@ private fun Registry.generateLayerSettingBuilderMethods(struct: Structure): List
     return this.enums["VkLayerSettingTypeEXT".intern()]!!.variants.map {
         """
 #[inline]
-pub fn values_${it.name.value.lowercase()}(mut self, values: &[${generateType(it.name.value)}]) -> Self {
+pub fn values_${it.name.value.lowercase()}(mut self, values: &'b [${generateType(it.name.value)}]) -> Self {
     self.value.type_ = LayerSettingTypeEXT::${it.name.value};
     self.value.value_count = values.len() as u32;
     self.value.values = values.as_ptr().cast();
