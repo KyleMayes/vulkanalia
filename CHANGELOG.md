@@ -1,3 +1,8 @@
+## [0.27.0] - 2024-12-28
+
+### Changed
+- Reworked builder for `vk::LayerSettingEXT` with different builder methods for different value types
+
 ## [0.26.0] - 2024-12-28
 
 ### Changed
