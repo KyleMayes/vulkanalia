@@ -136,6 +136,15 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccessFlags3KHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct AccessFlags3KHR: Flags {
+        const NONE = 0;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAcquireProfilingLockFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -431,6 +440,7 @@ bitflags! {
         const VIEW_LOCAL = 1 << 1;
         const DEVICE_GROUP = 1 << 2;
         const FEEDBACK_LOOP_EXT = 1 << 3;
+        const QUEUE_FAMILY_OWNERSHIP_TRANSFER_USE_ALL_STAGES_KHR = 1 << 5;
     }
 }
 
@@ -1284,6 +1294,7 @@ bitflags! {
     #[derive(Default)]
     pub struct PipelineCacheCreateFlags: Flags {
         const EXTERNALLY_SYNCHRONIZED = 1;
+        const INTERNALLY_SYNCHRONIZED_MERGE_KHR = 1 << 3;
     }
 }
 
@@ -1402,6 +1413,7 @@ bitflags! {
         const CAPTURE_DATA_KHR = 1 << 31;
         const EXECUTION_GRAPH_AMDX = 1 << 32;
         const ENABLE_LEGACY_DITHERING_EXT = 1 << 34;
+        const DISALLOW_OPACITY_MICROMAP_ARM = 1 << 37;
         const INDIRECT_BINDABLE_EXT = 1 << 38;
     }
 }

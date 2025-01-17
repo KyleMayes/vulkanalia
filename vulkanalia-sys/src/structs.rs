@@ -8920,6 +8920,28 @@ impl Default for MemoryBarrier2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryBarrierAccessFlags3KHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryBarrierAccessFlags3KHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub src_access_mask3: AccessFlags3KHR,
+    pub dst_access_mask3: AccessFlags3KHR,
+}
+
+impl Default for MemoryBarrierAccessFlags3KHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_BARRIER_ACCESS_FLAGS_3_KHR,
+            next: ptr::null(),
+            src_access_mask3: AccessFlags3KHR::default(),
+            dst_access_mask3: AccessFlags3KHR::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryDedicatedAllocateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11063,20 +11085,20 @@ impl Default for PhysicalDeviceDepthClampControlFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceDepthClampZeroOneFeaturesEXT {
+pub struct PhysicalDeviceDepthClampZeroOneFeaturesKHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub depth_clamp_zero_one: Bool32,
 }
 
-impl Default for PhysicalDeviceDepthClampZeroOneFeaturesEXT {
+impl Default for PhysicalDeviceDepthClampZeroOneFeaturesKHR {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT,
+            s_type: StructureType::PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR,
             next: ptr::null_mut(),
             depth_clamp_zero_one: Bool32::default(),
         }
@@ -13987,6 +14009,26 @@ impl Default for PhysicalDeviceMaintenance7PropertiesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance8FeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMaintenance8FeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub maintenance8: Bool32,
+}
+
+impl Default for PhysicalDeviceMaintenance8FeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_8_FEATURES_KHR,
+            next: ptr::null_mut(),
+            maintenance8: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14884,6 +14926,26 @@ impl Default for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {
             s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT,
             next: ptr::null_mut(),
             pipeline_library_group_handles: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineOpacityMicromapFeaturesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePipelineOpacityMicromapFeaturesARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub pipeline_opacity_micromap: Bool32,
+}
+
+impl Default for PhysicalDevicePipelineOpacityMicromapFeaturesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_OPACITY_MICROMAP_FEATURES_ARM,
+            next: ptr::null_mut(),
+            pipeline_opacity_micromap: Bool32::default(),
         }
     }
 }
@@ -26341,6 +26403,8 @@ pub type PhysicalDeviceBufferDeviceAddressFeaturesKHR = PhysicalDeviceBufferDevi
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.html>
 pub type PhysicalDeviceComputeShaderDerivativesFeaturesNV =
     PhysicalDeviceComputeShaderDerivativesFeaturesKHR;
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.html>
+pub type PhysicalDeviceDepthClampZeroOneFeaturesEXT = PhysicalDeviceDepthClampZeroOneFeaturesKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthStencilResolvePropertiesKHR.html>
 pub type PhysicalDeviceDepthStencilResolvePropertiesKHR =
     PhysicalDeviceDepthStencilResolveProperties;

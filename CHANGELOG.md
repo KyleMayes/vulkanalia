@@ -1,3 +1,14 @@
+## [0.28.0] - UNRELEASED
+
+### Bindings Updates
+- [Fix GN include checks](https://github.com/KhronosGroup/Vulkan-Headers/commit/9dff1f571ce25b92639854b89b28539602b6b97b)
+- [Update for Vulkan-Docs 1.4.303](https://github.com/KhronosGroup/Vulkan-Headers/commit/49af1bfe467dd5a9efc22f7867d95fdde50e2b00)
+- [Add missing validusage.json and fix Makefile.release for new registry structure](https://github.com/KhronosGroup/Vulkan-Headers/commit/6a74a7d65cafa19e38ec116651436cce6efd5b2e)
+- [Update for Vulkan-Docs 1.4.304](https://github.com/KhronosGroup/Vulkan-Headers/commit/d4a196d8c84e032d27f999adcea3075517c1c97f)
+- [Remove Ash CI (#2479)](https://github.com/KhronosGroup/Vulkan-Docs/commit/921585827e7f60123c5a5eb1820ddabb984076c5)
+- [January 17, 2025 Vulkan 1.4.305 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/840c7b817f7ff0e61a047a842c2569a1ecf5d807)
+- [Update for Vulkan-Docs 1.4.305](https://github.com/KhronosGroup/Vulkan-Headers/commit/a03d2f6d5753b365d704d58161825890baad0755)
+
 ## [0.27.0] - 2024-12-28
 
 ### Changed

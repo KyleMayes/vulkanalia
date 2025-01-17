@@ -595,6 +595,15 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
 
 impl AndroidExternalMemoryAndroidHardwareBufferExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_ARM_pipeline_opacity_micromap.html>
+pub trait ArmPipelineOpacityMicromapExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = ARM_PIPELINE_OPACITY_MICROMAP_EXTENSION;
+}
+
+impl ArmPipelineOpacityMicromapExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_ARM_rasterization_order_attachment_access.html>
 pub trait ArmRasterizationOrderAttachmentAccessExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -6912,6 +6921,15 @@ pub trait KhrDeferredHostOperationsExtension: DeviceV1_0 {
 
 impl KhrDeferredHostOperationsExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_depth_clamp_zero_one.html>
+pub trait KhrDepthClampZeroOneExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_DEPTH_CLAMP_ZERO_ONE_EXTENSION;
+}
+
+impl KhrDepthClampZeroOneExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_depth_stencil_resolve.html>
 pub trait KhrDepthStencilResolveExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -8824,6 +8842,15 @@ pub trait KhrMaintenance7Extension: DeviceV1_0 {
 }
 
 impl KhrMaintenance7Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_maintenance8.html>
+pub trait KhrMaintenance8Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_MAINTENANCE8_EXTENSION;
+}
+
+impl KhrMaintenance8Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_map_memory2.html>
 pub trait KhrMapMemory2Extension: DeviceV1_0 {

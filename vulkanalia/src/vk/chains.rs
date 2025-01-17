@@ -4980,6 +4980,20 @@ unsafe impl InputChainStruct for MemoryBarrier2 {
     }
 }
 
+unsafe impl InputChainStruct for MemoryBarrierAccessFlags3KHR {
+    const TYPE: StructureType = StructureType::MEMORY_BARRIER_ACCESS_FLAGS_3_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for MemoryDedicatedAllocateInfo {
     const TYPE: StructureType = StructureType::MEMORY_DEDICATED_ALLOCATE_INFO;
 
@@ -6653,8 +6667,8 @@ unsafe impl OutputChainStruct for PhysicalDeviceDepthClampControlFeaturesEXT {
     }
 }
 
-unsafe impl InputChainStruct for PhysicalDeviceDepthClampZeroOneFeaturesEXT {
-    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT;
+unsafe impl InputChainStruct for PhysicalDeviceDepthClampZeroOneFeaturesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -6667,7 +6681,7 @@ unsafe impl InputChainStruct for PhysicalDeviceDepthClampZeroOneFeaturesEXT {
     }
 }
 
-unsafe impl OutputChainStruct for PhysicalDeviceDepthClampZeroOneFeaturesEXT {
+unsafe impl OutputChainStruct for PhysicalDeviceDepthClampZeroOneFeaturesKHR {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -8998,6 +9012,27 @@ unsafe impl OutputChainStruct for PhysicalDeviceMaintenance7PropertiesKHR {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceMaintenance8FeaturesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_MAINTENANCE_8_FEATURES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceMaintenance8FeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceMapMemoryPlacedFeaturesEXT {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_MAP_MEMORY_PLACED_FEATURES_EXT;
 
@@ -9777,6 +9812,28 @@ unsafe impl InputChainStruct for PhysicalDevicePipelineLibraryGroupHandlesFeatur
 }
 
 unsafe impl OutputChainStruct for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDevicePipelineOpacityMicromapFeaturesARM {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_PIPELINE_OPACITY_MICROMAP_FEATURES_ARM;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDevicePipelineOpacityMicromapFeaturesARM {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
