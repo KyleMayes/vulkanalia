@@ -542,6 +542,8 @@ pub struct DeviceCommands {
     pub get_memory_fd_khr: PFN_vkGetMemoryFdKHR,
     pub get_memory_fd_properties_khr: PFN_vkGetMemoryFdPropertiesKHR,
     pub get_memory_host_pointer_properties_ext: PFN_vkGetMemoryHostPointerPropertiesEXT,
+    pub get_memory_metal_handle_ext: PFN_vkGetMemoryMetalHandleEXT,
+    pub get_memory_metal_handle_properties_ext: PFN_vkGetMemoryMetalHandlePropertiesEXT,
     pub get_memory_remote_address_nv: PFN_vkGetMemoryRemoteAddressNV,
     pub get_memory_sci_buf_nv: PFN_vkGetMemorySciBufNV,
     pub get_memory_win32_handle_khr: PFN_vkGetMemoryWin32HandleKHR,
@@ -8376,6 +8378,37 @@ impl DeviceCommands {
                         _memory_host_pointer_properties: *mut MemoryHostPointerPropertiesEXT,
                     ) -> Result {
                         panic!("could not load vkGetMemoryHostPointerPropertiesEXT")
+                    }
+                    fallback
+                }
+            },
+            get_memory_metal_handle_ext: {
+                let value = loader(b"vkGetMemoryMetalHandleEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _get_metal_handle_info: *const MemoryGetMetalHandleInfoEXT,
+                        _handle: *mut *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetMemoryMetalHandleEXT")
+                    }
+                    fallback
+                }
+            },
+            get_memory_metal_handle_properties_ext: {
+                let value = loader(b"vkGetMemoryMetalHandlePropertiesEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _handle_type: ExternalMemoryHandleTypeFlags,
+                        _handle: *const c_void,
+                        _memory_metal_handle_properties: *mut MemoryMetalHandlePropertiesEXT,
+                    ) -> Result {
+                        panic!("could not load vkGetMemoryMetalHandlePropertiesEXT")
                     }
                     fallback
                 }

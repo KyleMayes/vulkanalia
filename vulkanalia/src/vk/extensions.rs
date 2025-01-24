@@ -595,6 +595,15 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
 
 impl AndroidExternalMemoryAndroidHardwareBufferExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_ARM_pipeline_opacity_micromap.html>
+pub trait ArmPipelineOpacityMicromapExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = ARM_PIPELINE_OPACITY_MICROMAP_EXTENSION;
+}
+
+impl ArmPipelineOpacityMicromapExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_ARM_rasterization_order_attachment_access.html>
 pub trait ArmRasterizationOrderAttachmentAccessExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -2759,6 +2768,58 @@ pub trait ExtExternalMemoryHostExtension: DeviceV1_0 {
 }
 
 impl ExtExternalMemoryHostExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_external_memory_metal.html>
+pub trait ExtExternalMemoryMetalExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_EXTERNAL_MEMORY_METAL_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/vkGetMemoryMetalHandleEXT.html>
+    #[inline]
+    unsafe fn get_memory_metal_handle_ext(
+        &self,
+        get_metal_handle_info: &MemoryGetMetalHandleInfoEXT,
+    ) -> crate::VkResult<*mut c_void> {
+        let mut handle = MaybeUninit::<*mut c_void>::uninit();
+
+        let __result = (self.commands().get_memory_metal_handle_ext)(
+            self.handle(),
+            get_metal_handle_info,
+            handle.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(handle.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/vkGetMemoryMetalHandlePropertiesEXT.html>
+    #[inline]
+    unsafe fn get_memory_metal_handle_properties_ext(
+        &self,
+        handle_type: ExternalMemoryHandleTypeFlags,
+        handle: &c_void,
+        memory_metal_handle_properties: &mut MemoryMetalHandlePropertiesEXT,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().get_memory_metal_handle_properties_ext)(
+            self.handle(),
+            handle_type,
+            handle,
+            memory_metal_handle_properties,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl ExtExternalMemoryMetalExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_filter_cubic.html>
 pub trait ExtFilterCubicExtension: DeviceV1_0 {
@@ -6912,6 +6973,15 @@ pub trait KhrDeferredHostOperationsExtension: DeviceV1_0 {
 
 impl KhrDeferredHostOperationsExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_depth_clamp_zero_one.html>
+pub trait KhrDepthClampZeroOneExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_DEPTH_CLAMP_ZERO_ONE_EXTENSION;
+}
+
+impl KhrDepthClampZeroOneExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_depth_stencil_resolve.html>
 pub trait KhrDepthStencilResolveExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -8825,6 +8895,15 @@ pub trait KhrMaintenance7Extension: DeviceV1_0 {
 
 impl KhrMaintenance7Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_maintenance8.html>
+pub trait KhrMaintenance8Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_MAINTENANCE8_EXTENSION;
+}
+
+impl KhrMaintenance8Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_map_memory2.html>
 pub trait KhrMapMemory2Extension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -10578,6 +10657,15 @@ pub trait KhrVideoMaintenance1Extension: DeviceV1_0 {
 }
 
 impl KhrVideoMaintenance1Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_maintenance2.html>
+pub trait KhrVideoMaintenance2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_VIDEO_MAINTENANCE2_EXTENSION;
+}
+
+impl KhrVideoMaintenance2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_queue.html>
 pub trait KhrVideoQueueExtension: DeviceV1_0 {

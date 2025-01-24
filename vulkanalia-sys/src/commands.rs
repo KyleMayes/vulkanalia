@@ -3548,6 +3548,21 @@ pub type PFN_vkGetMemoryHostPointerPropertiesEXT = unsafe extern "system" fn(
     _memory_host_pointer_properties: *mut MemoryHostPointerPropertiesEXT,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/vkGetMemoryMetalHandleEXT.html>
+pub type PFN_vkGetMemoryMetalHandleEXT = unsafe extern "system" fn(
+    _device: Device,
+    _get_metal_handle_info: *const MemoryGetMetalHandleInfoEXT,
+    _handle: *mut *mut c_void,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/vkGetMemoryMetalHandlePropertiesEXT.html>
+pub type PFN_vkGetMemoryMetalHandlePropertiesEXT = unsafe extern "system" fn(
+    _device: Device,
+    _handle_type: ExternalMemoryHandleTypeFlags,
+    _handle: *const c_void,
+    _memory_metal_handle_properties: *mut MemoryMetalHandlePropertiesEXT,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/vkGetMemoryRemoteAddressNV.html>
 pub type PFN_vkGetMemoryRemoteAddressNV = unsafe extern "system" fn(
     _device: Device,

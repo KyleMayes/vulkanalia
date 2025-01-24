@@ -7976,6 +7976,28 @@ impl Default for ImportMemoryHostPointerInfoEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMemoryMetalHandleInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImportMemoryMetalHandleInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub handle_type: ExternalMemoryHandleTypeFlags,
+    pub handle: *mut c_void,
+}
+
+impl Default for ImportMemoryMetalHandleInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMPORT_MEMORY_METAL_HANDLE_INFO_EXT,
+            next: ptr::null(),
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
+            handle: ptr::null_mut(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMemorySciBufInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8920,6 +8942,28 @@ impl Default for MemoryBarrier2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryBarrierAccessFlags3KHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryBarrierAccessFlags3KHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub src_access_mask3: AccessFlags3KHR,
+    pub dst_access_mask3: AccessFlags3KHR,
+}
+
+impl Default for MemoryBarrierAccessFlags3KHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_BARRIER_ACCESS_FLAGS_3_KHR,
+            next: ptr::null(),
+            src_access_mask3: AccessFlags3KHR::default(),
+            dst_access_mask3: AccessFlags3KHR::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryDedicatedAllocateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9019,6 +9063,28 @@ impl Default for MemoryGetFdInfoKHR {
     fn default() -> Self {
         Self {
             s_type: StructureType::MEMORY_GET_FD_INFO_KHR,
+            next: ptr::null(),
+            memory: DeviceMemory::default(),
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryGetMetalHandleInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryGetMetalHandleInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub memory: DeviceMemory,
+    pub handle_type: ExternalMemoryHandleTypeFlags,
+}
+
+impl Default for MemoryGetMetalHandleInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_GET_METAL_HANDLE_INFO_EXT,
             next: ptr::null(),
             memory: DeviceMemory::default(),
             handle_type: ExternalMemoryHandleTypeFlags::default(),
@@ -9184,6 +9250,26 @@ impl Default for MemoryMapPlacedInfoEXT {
             s_type: StructureType::MEMORY_MAP_PLACED_INFO_EXT,
             next: ptr::null(),
             placed_address: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryMetalHandlePropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryMetalHandlePropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub memory_type_bits: u32,
+}
+
+impl Default for MemoryMetalHandlePropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_METAL_HANDLE_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            memory_type_bits: u32::default(),
         }
     }
 }
@@ -11063,20 +11149,20 @@ impl Default for PhysicalDeviceDepthClampControlFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceDepthClampZeroOneFeaturesEXT {
+pub struct PhysicalDeviceDepthClampZeroOneFeaturesKHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub depth_clamp_zero_one: Bool32,
 }
 
-impl Default for PhysicalDeviceDepthClampZeroOneFeaturesEXT {
+impl Default for PhysicalDeviceDepthClampZeroOneFeaturesKHR {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT,
+            s_type: StructureType::PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR,
             next: ptr::null_mut(),
             depth_clamp_zero_one: Bool32::default(),
         }
@@ -13987,6 +14073,26 @@ impl Default for PhysicalDeviceMaintenance7PropertiesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance8FeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMaintenance8FeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub maintenance8: Bool32,
+}
+
+impl Default for PhysicalDeviceMaintenance8FeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_8_FEATURES_KHR,
+            next: ptr::null_mut(),
+            maintenance8: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14884,6 +14990,26 @@ impl Default for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {
             s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT,
             next: ptr::null_mut(),
             pipeline_library_group_handles: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineOpacityMicromapFeaturesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePipelineOpacityMicromapFeaturesARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub pipeline_opacity_micromap: Bool32,
+}
+
+impl Default for PhysicalDevicePipelineOpacityMicromapFeaturesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_OPACITY_MICROMAP_FEATURES_ARM,
+            next: ptr::null_mut(),
+            pipeline_opacity_micromap: Bool32::default(),
         }
     }
 }
@@ -17592,6 +17718,26 @@ impl Default for PhysicalDeviceVideoMaintenance1FeaturesKHR {
             s_type: StructureType::PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR,
             next: ptr::null_mut(),
             video_maintenance1: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVideoMaintenance2FeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceVideoMaintenance2FeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub video_maintenance2: Bool32,
+}
+
+impl Default for PhysicalDeviceVideoMaintenance2FeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_VIDEO_MAINTENANCE_2_FEATURES_KHR,
+            next: ptr::null_mut(),
+            video_maintenance2: Bool32::default(),
         }
     }
 }
@@ -23550,6 +23696,26 @@ impl Default for VideoDecodeAV1DpbSlotInfoKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeAV1InlineSessionParametersInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeAV1InlineSessionParametersInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_sequence_header: *const video::StdVideoAV1SequenceHeader,
+}
+
+impl Default for VideoDecodeAV1InlineSessionParametersInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_AV1_INLINE_SESSION_PARAMETERS_INFO_KHR,
+            next: ptr::null(),
+            std_sequence_header: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeAV1PictureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23680,6 +23846,28 @@ impl Default for VideoDecodeH264DpbSlotInfoKHR {
             s_type: StructureType::VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR,
             next: ptr::null(),
             std_reference_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH264InlineSessionParametersInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH264InlineSessionParametersInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_sps: *const video::StdVideoH264SequenceParameterSet,
+    pub std_pps: *const video::StdVideoH264PictureParameterSet,
+}
+
+impl Default for VideoDecodeH264InlineSessionParametersInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H264_INLINE_SESSION_PARAMETERS_INFO_KHR,
+            next: ptr::null(),
+            std_sps: ptr::null(),
+            std_pps: ptr::null(),
         }
     }
 }
@@ -23816,6 +24004,30 @@ impl Default for VideoDecodeH265DpbSlotInfoKHR {
             s_type: StructureType::VIDEO_DECODE_H265_DPB_SLOT_INFO_KHR,
             next: ptr::null(),
             std_reference_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH265InlineSessionParametersInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH265InlineSessionParametersInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_vps: *const video::StdVideoH265VideoParameterSet,
+    pub std_sps: *const video::StdVideoH265SequenceParameterSet,
+    pub std_pps: *const video::StdVideoH265PictureParameterSet,
+}
+
+impl Default for VideoDecodeH265InlineSessionParametersInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H265_INLINE_SESSION_PARAMETERS_INFO_KHR,
+            next: ptr::null(),
+            std_vps: ptr::null(),
+            std_sps: ptr::null(),
+            std_pps: ptr::null(),
         }
     }
 }
@@ -26341,6 +26553,8 @@ pub type PhysicalDeviceBufferDeviceAddressFeaturesKHR = PhysicalDeviceBufferDevi
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.html>
 pub type PhysicalDeviceComputeShaderDerivativesFeaturesNV =
     PhysicalDeviceComputeShaderDerivativesFeaturesKHR;
+/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.html>
+pub type PhysicalDeviceDepthClampZeroOneFeaturesEXT = PhysicalDeviceDepthClampZeroOneFeaturesKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthStencilResolvePropertiesKHR.html>
 pub type PhysicalDeviceDepthStencilResolvePropertiesKHR =
     PhysicalDeviceDepthStencilResolveProperties;
