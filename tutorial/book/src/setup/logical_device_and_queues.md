@@ -13,7 +13,7 @@ struct App {
 }
 ```
 
-Next, add a `create_logical_device` function that is called from `App:create` and add the resulting logical device to the `App` initializer:
+Next, add a `create_logical_device` function that is called from `App::create` and add the resulting logical device to the `App` initializer:
 
 ```rust,noplaypen
 impl App {
