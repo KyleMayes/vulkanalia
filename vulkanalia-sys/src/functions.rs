@@ -23,12 +23,12 @@ use core::ffi::{c_char, c_void};
 
 use crate::*;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/PFN_vkAllocationFunction.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/PFN_vkAllocationFunction.html>
 pub type PFN_vkAllocationFunction = Option<
     unsafe extern "system" fn(*mut c_void, usize, usize, SystemAllocationScope) -> *mut c_void,
 >;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/PFN_vkDebugReportCallbackEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/PFN_vkDebugReportCallbackEXT.html>
 pub type PFN_vkDebugReportCallbackEXT = Option<
     unsafe extern "system" fn(
         DebugReportFlagsEXT,
@@ -42,7 +42,7 @@ pub type PFN_vkDebugReportCallbackEXT = Option<
     ) -> Bool32,
 >;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/PFN_vkDebugUtilsMessengerCallbackEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/PFN_vkDebugUtilsMessengerCallbackEXT.html>
 pub type PFN_vkDebugUtilsMessengerCallbackEXT = Option<
     unsafe extern "system" fn(
         DebugUtilsMessageSeverityFlagsEXT,
@@ -52,28 +52,28 @@ pub type PFN_vkDebugUtilsMessengerCallbackEXT = Option<
     ) -> Bool32,
 >;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/PFN_vkDeviceMemoryReportCallbackEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/PFN_vkDeviceMemoryReportCallbackEXT.html>
 pub type PFN_vkDeviceMemoryReportCallbackEXT =
     Option<unsafe extern "system" fn(*const DeviceMemoryReportCallbackDataEXT, *mut c_void)>;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/PFN_vkFreeFunction.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/PFN_vkFreeFunction.html>
 pub type PFN_vkFreeFunction = Option<unsafe extern "system" fn(*mut c_void, *mut c_void)>;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/PFN_vkGetInstanceProcAddrLUNARG.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/PFN_vkGetInstanceProcAddrLUNARG.html>
 pub type PFN_vkGetInstanceProcAddrLUNARG =
     Option<unsafe extern "system" fn(Instance, *const c_char) -> PFN_vkVoidFunction>;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/PFN_vkInternalAllocationNotification.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/PFN_vkInternalAllocationNotification.html>
 pub type PFN_vkInternalAllocationNotification = Option<
     unsafe extern "system" fn(*mut c_void, usize, InternalAllocationType, SystemAllocationScope),
 >;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/PFN_vkInternalFreeNotification.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/PFN_vkInternalFreeNotification.html>
 pub type PFN_vkInternalFreeNotification = Option<
     unsafe extern "system" fn(*mut c_void, usize, InternalAllocationType, SystemAllocationScope),
 >;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/PFN_vkReallocationFunction.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/PFN_vkReallocationFunction.html>
 pub type PFN_vkReallocationFunction = Option<
     unsafe extern "system" fn(
         *mut c_void,
@@ -84,5 +84,5 @@ pub type PFN_vkReallocationFunction = Option<
     ) -> *mut c_void,
 >;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/PFN_vkVoidFunction.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/PFN_vkVoidFunction.html>
 pub type PFN_vkVoidFunction = Option<unsafe extern "system" fn()>;

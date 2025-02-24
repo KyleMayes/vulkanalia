@@ -25,7 +25,7 @@ use core::mem::MaybeUninit;
 
 use crate::*;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureGeometryDataKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryDataKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union AccelerationStructureGeometryDataKHR {
@@ -47,7 +47,7 @@ impl fmt::Debug for AccelerationStructureGeometryDataKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureMotionInstanceDataNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInstanceDataNV.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union AccelerationStructureMotionInstanceDataNV {
@@ -69,7 +69,7 @@ impl fmt::Debug for AccelerationStructureMotionInstanceDataNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkClearColorValue.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClearColorValue.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union ClearColorValue {
@@ -91,7 +91,7 @@ impl fmt::Debug for ClearColorValue {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkClearValue.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClearValue.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union ClearValue {
@@ -112,7 +112,7 @@ impl fmt::Debug for ClearValue {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorDataEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorDataEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union DescriptorDataEXT {
@@ -141,7 +141,7 @@ impl fmt::Debug for DescriptorDataEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceOrHostAddressConstAMDX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceOrHostAddressConstAMDX.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union DeviceOrHostAddressConstAMDX {
@@ -162,7 +162,7 @@ impl fmt::Debug for DeviceOrHostAddressConstAMDX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceOrHostAddressConstKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceOrHostAddressConstKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union DeviceOrHostAddressConstKHR {
@@ -183,7 +183,7 @@ impl fmt::Debug for DeviceOrHostAddressConstKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceOrHostAddressKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceOrHostAddressKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union DeviceOrHostAddressKHR {
@@ -204,7 +204,7 @@ impl fmt::Debug for DeviceOrHostAddressKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsTokenDataEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsTokenDataEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union IndirectCommandsTokenDataEXT {
@@ -227,7 +227,7 @@ impl fmt::Debug for IndirectCommandsTokenDataEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectExecutionSetInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectExecutionSetInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union IndirectExecutionSetInfoEXT {
@@ -248,7 +248,7 @@ impl fmt::Debug for IndirectExecutionSetInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceCounterResultKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceCounterResultKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union PerformanceCounterResultKHR {
@@ -273,7 +273,7 @@ impl fmt::Debug for PerformanceCounterResultKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceValueDataINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceValueDataINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union PerformanceValueDataINTEL {
@@ -297,7 +297,7 @@ impl fmt::Debug for PerformanceValueDataINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineExecutableStatisticValueKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineExecutableStatisticValueKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union PipelineExecutableStatisticValueKHR {
