@@ -7,8 +7,10 @@
 
 extern crate alloc;
 
-mod arrays;
+#[macro_use]
 mod bitfields;
+
+mod arrays;
 
 #[rustfmt::skip]
 mod bitmasks;
@@ -37,7 +39,6 @@ mod unions;
 pub mod video;
 
 pub use self::arrays::*;
-pub use self::bitfields::*;
 pub use self::bitmasks::*;
 pub use self::commands::*;
 pub use self::constants::*;

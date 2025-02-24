@@ -1231,17 +1231,15 @@ impl AccelerationStructureInstanceKHRBuilder {
 
     #[inline]
     pub fn instance_custom_index<T>(mut self, instance_custom_index: u32) -> Self {
-        self.instance_custom_index_and_mask = Bitfield24_8::new(
-            instance_custom_index,
-            self.instance_custom_index_and_mask.high(),
-        );
+        self.bitfields0 = self
+            .bitfields0
+            .with_instance_custom_index(instance_custom_index);
         self
     }
 
     #[inline]
-    pub fn mask<T>(mut self, mask: u8) -> Self {
-        self.instance_custom_index_and_mask =
-            Bitfield24_8::new(self.instance_custom_index_and_mask.low(), mask);
+    pub fn mask<T>(mut self, mask: u32) -> Self {
+        self.bitfields0 = self.bitfields0.with_mask(mask);
         self
     }
 
@@ -1250,21 +1248,17 @@ impl AccelerationStructureInstanceKHRBuilder {
         mut self,
         instance_shader_binding_table_record_offset: u32,
     ) -> Self {
-        self.instance_shader_binding_table_record_offset_and_flags = Bitfield24_8::new(
-            instance_shader_binding_table_record_offset,
-            self.instance_shader_binding_table_record_offset_and_flags
-                .high(),
-        );
+        self.bitfields1 = self
+            .bitfields1
+            .with_instance_shader_binding_table_record_offset(
+                instance_shader_binding_table_record_offset,
+            );
         self
     }
 
     #[inline]
-    pub fn flags<T>(mut self, flags: u8) -> Self {
-        self.instance_shader_binding_table_record_offset_and_flags = Bitfield24_8::new(
-            self.instance_shader_binding_table_record_offset_and_flags
-                .low(),
-            flags,
-        );
+    pub fn flags<T>(mut self, flags: u32) -> Self {
+        self.bitfields1 = self.bitfields1.with_flags(flags);
         self
     }
 
@@ -1343,17 +1337,15 @@ impl AccelerationStructureMatrixMotionInstanceNVBuilder {
 
     #[inline]
     pub fn instance_custom_index<T>(mut self, instance_custom_index: u32) -> Self {
-        self.instance_custom_index_and_mask = Bitfield24_8::new(
-            instance_custom_index,
-            self.instance_custom_index_and_mask.high(),
-        );
+        self.bitfields0 = self
+            .bitfields0
+            .with_instance_custom_index(instance_custom_index);
         self
     }
 
     #[inline]
-    pub fn mask<T>(mut self, mask: u8) -> Self {
-        self.instance_custom_index_and_mask =
-            Bitfield24_8::new(self.instance_custom_index_and_mask.low(), mask);
+    pub fn mask<T>(mut self, mask: u32) -> Self {
+        self.bitfields0 = self.bitfields0.with_mask(mask);
         self
     }
 
@@ -1362,21 +1354,17 @@ impl AccelerationStructureMatrixMotionInstanceNVBuilder {
         mut self,
         instance_shader_binding_table_record_offset: u32,
     ) -> Self {
-        self.instance_shader_binding_table_record_offset_and_flags = Bitfield24_8::new(
-            instance_shader_binding_table_record_offset,
-            self.instance_shader_binding_table_record_offset_and_flags
-                .high(),
-        );
+        self.bitfields1 = self
+            .bitfields1
+            .with_instance_shader_binding_table_record_offset(
+                instance_shader_binding_table_record_offset,
+            );
         self
     }
 
     #[inline]
-    pub fn flags<T>(mut self, flags: u8) -> Self {
-        self.instance_shader_binding_table_record_offset_and_flags = Bitfield24_8::new(
-            self.instance_shader_binding_table_record_offset_and_flags
-                .low(),
-            flags,
-        );
+    pub fn flags<T>(mut self, flags: u32) -> Self {
+        self.bitfields1 = self.bitfields1.with_flags(flags);
         self
     }
 
@@ -1656,17 +1644,15 @@ impl AccelerationStructureSRTMotionInstanceNVBuilder {
 
     #[inline]
     pub fn instance_custom_index<T>(mut self, instance_custom_index: u32) -> Self {
-        self.instance_custom_index_and_mask = Bitfield24_8::new(
-            instance_custom_index,
-            self.instance_custom_index_and_mask.high(),
-        );
+        self.bitfields0 = self
+            .bitfields0
+            .with_instance_custom_index(instance_custom_index);
         self
     }
 
     #[inline]
-    pub fn mask<T>(mut self, mask: u8) -> Self {
-        self.instance_custom_index_and_mask =
-            Bitfield24_8::new(self.instance_custom_index_and_mask.low(), mask);
+    pub fn mask<T>(mut self, mask: u32) -> Self {
+        self.bitfields0 = self.bitfields0.with_mask(mask);
         self
     }
 
@@ -1675,21 +1661,17 @@ impl AccelerationStructureSRTMotionInstanceNVBuilder {
         mut self,
         instance_shader_binding_table_record_offset: u32,
     ) -> Self {
-        self.instance_shader_binding_table_record_offset_and_flags = Bitfield24_8::new(
-            instance_shader_binding_table_record_offset,
-            self.instance_shader_binding_table_record_offset_and_flags
-                .high(),
-        );
+        self.bitfields1 = self
+            .bitfields1
+            .with_instance_shader_binding_table_record_offset(
+                instance_shader_binding_table_record_offset,
+            );
         self
     }
 
     #[inline]
-    pub fn flags<T>(mut self, flags: u8) -> Self {
-        self.instance_shader_binding_table_record_offset_and_flags = Bitfield24_8::new(
-            self.instance_shader_binding_table_record_offset_and_flags
-                .low(),
-            flags,
-        );
+    pub fn flags<T>(mut self, flags: u32) -> Self {
+        self.bitfields1 = self.bitfields1.with_flags(flags);
         self
     }
 

@@ -3,6 +3,7 @@
 package com.kylemayes.generator.generate.support
 
 import com.kylemayes.generator.registry.Identifier
+import com.kylemayes.generator.registry.Member
 import com.kylemayes.generator.registry.PointerType
 import com.kylemayes.generator.registry.Registry
 import com.kylemayes.generator.registry.Structure
@@ -11,7 +12,59 @@ import com.kylemayes.generator.registry.getBaseIdentifier
 import com.kylemayes.generator.registry.getElement
 import com.kylemayes.generator.registry.getIdentifier
 import com.kylemayes.generator.registry.isPointer
+import java.lang.IllegalArgumentException
 import kotlin.math.max
+
+data class StructBitfields(
+    val memberToIndex: MutableMap<Identifier, Int> = mutableMapOf(),
+    val indexToMembers: MutableMap<Int, List<Pair<Int, Member>>> = mutableMapOf(),
+)
+
+/** Gets the bitfield members of a Vulkan struct. */
+val getStructBitfields =
+    thunk { struct: Structure ->
+        val chunks = mutableListOf<List<Member>>()
+        var chunk = mutableListOf<Member>()
+
+        for (member in struct.members) {
+            if (member.bits != null) {
+                chunk.add(member)
+                if (chunk.sumOf { it.bits!! } >= 32) {
+                    chunks.add(chunk)
+                    chunk = mutableListOf()
+                }
+            } else if (chunk.isNotEmpty()) {
+                chunks.add(chunk)
+                chunk = mutableListOf()
+            }
+        }
+
+        if (chunk.isNotEmpty()) {
+            chunks.add(chunk)
+        }
+
+        val bitfields = StructBitfields(mutableMapOf(), mutableMapOf())
+
+        for ((index, chunk) in chunks.withIndex()) {
+            val length = chunk.sumOf { it.bits!! }
+            if (chunk.sumOf { it.bits!! } == 32) {
+                chunk.forEach { bitfields.memberToIndex[it.name] = index }
+
+                var start = 0
+                val members = mutableListOf<Pair<Int, Member>>()
+                for (member in chunk) {
+                    members.add(start to member)
+                    start += member.bits!!
+                }
+
+                bitfields.indexToMembers[index] = members
+            } else {
+                throw IllegalArgumentException("Invalid bitfields in ${struct.name} (length = $length)")
+            }
+        }
+
+        bitfields
+    }
 
 /** Gets the non-pointer dependencies of a Vulkan struct on other Vulkan structs. */
 val getStructDependencies =

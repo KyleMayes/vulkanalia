@@ -5,6 +5,7 @@ package com.kylemayes.generator.generate.file
 import com.kylemayes.generator.generate.support.generateCustomBuilderMethods
 import com.kylemayes.generator.generate.support.generatePtr
 import com.kylemayes.generator.generate.support.generateRef
+import com.kylemayes.generator.generate.support.getStructBitfields
 import com.kylemayes.generator.generate.support.getStructExtensions
 import com.kylemayes.generator.generate.support.getStructLifetime
 import com.kylemayes.generator.generate.support.skipBuilderMethods
@@ -209,11 +210,7 @@ private fun Registry.generateMethods(struct: Structure): String {
         val member = iterator.advance()
         val len = member.len?.get(0)
         if (member.bits != null) {
-            // Create separate builder methods for adjacent bitfields that
-            // merge the provided values into the combined bitfield field
-            // (`Bitfield24_8`). It is assumed that only 24-bit and 8-bit
-            // bitfields are present (asserted when generating structs).
-            methods.add(generateBitfieldMethods(member, iterator.advance()))
+            methods.add(generateBitfieldMethod(struct, member))
         } else if (len != null && len.value != "null-terminated" && member.type !is ArrayType) {
             if (arraysByLength.containsKey(len)) {
                 val lengthMember = members[len] ?: error("Missing length member.")
@@ -272,21 +269,15 @@ pub fn ${member.name}(mut self, ${member.name}: $type) -> Self {
 }
 
 /** Generates a Rust builder method for adjacent bitfield values. */
-private fun Registry.generateBitfieldMethods(
-    bf24: Member,
-    bf8: Member,
+private fun Registry.generateBitfieldMethod(
+    struct: Structure,
+    member: Member,
 ): String {
-    val combined = "${bf24.name}_and_${bf8.name}"
+    val index = getStructBitfields(struct).memberToIndex[member.name]!!
     return """
 #[inline]
-pub fn ${bf24.name}<T>(mut self, ${bf24.name}: u32) -> Self {
-    self.$combined = Bitfield24_8::new(${bf24.name}, self.$combined.high());
-    self
-}
-
-#[inline]
-pub fn ${bf8.name}<T>(mut self, ${bf8.name}: u8) -> Self {
-    self.$combined = Bitfield24_8::new(self.$combined.low(), ${bf8.name});
+pub fn ${member.name}<T>(mut self, ${member.name}: u32) -> Self {
+    self.bitfields$index = self.bitfields$index.with_${member.name}(${member.name});
     self
 }
     """

@@ -1,3 +1,8 @@
+## [0.28.0] - UNRELEASED
+
+### Changed
+- Reworked handling of bitfields in Vulkan structs to use custom structs for each 32-bit sequence of bitfields
+
 ## [0.27.0] - 2025-02-23
 
 ### Changed
