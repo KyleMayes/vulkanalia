@@ -3,6 +3,26 @@
 ### Changed
 - Reworked handling of bitfields in Vulkan structs to use custom structs for each 32-bit sequence of bitfields
 
+### Bindings Updates
+- [Fix GN include checks](https://github.com/KhronosGroup/Vulkan-Headers/commit/9dff1f571ce25b92639854b89b28539602b6b97b)
+- [Update for Vulkan-Docs 1.4.303](https://github.com/KhronosGroup/Vulkan-Headers/commit/49af1bfe467dd5a9efc22f7867d95fdde50e2b00)
+- [Add missing validusage.json and fix Makefile.release for new registry structure](https://github.com/KhronosGroup/Vulkan-Headers/commit/6a74a7d65cafa19e38ec116651436cce6efd5b2e)
+- [Update for Vulkan-Docs 1.4.304](https://github.com/KhronosGroup/Vulkan-Headers/commit/d4a196d8c84e032d27f999adcea3075517c1c97f)
+- [Remove Ash CI (#2479)](https://github.com/KhronosGroup/Vulkan-Docs/commit/921585827e7f60123c5a5eb1820ddabb984076c5)
+- [January 17, 2025 Vulkan 1.4.305 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/840c7b817f7ff0e61a047a842c2569a1ecf5d807)
+- [Update for Vulkan-Docs 1.4.305](https://github.com/KhronosGroup/Vulkan-Headers/commit/a03d2f6d5753b365d704d58161825890baad0755)
+- [Add VK_EXT_external_memory_metal (#2414)](https://github.com/KhronosGroup/Vulkan-Docs/commit/25ec2b708ae742276fc3a28890f415b14fe0334c)
+- [January 24, 2025 Vulkan 1.4.306 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/faf3ba598d6339c5590e544ffb3fdd182b46c544)
+- [Remov rogue link (#2485)](https://github.com/KhronosGroup/Vulkan-Docs/commit/9ff93266ddde23a389004ae34459d629558677f2)
+- [January 30, 2025 Vulkan 1.4.307 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/645c59c70e826d9738b6bb103316c03d887dfed3)
+- [Fix small typo in proposal for VK_KHR_compute_shader_derivatives (#2493)](https://github.com/KhronosGroup/Vulkan-Docs/commit/0bfe685840b35fa727e108c8283ac8e24b185c09)
+- [Remove superfluous semicolon in `VK_NV_optical_flow` (#2489)](https://github.com/KhronosGroup/Vulkan-Docs/commit/459e391899375ad9905cd27900146792d7e3fda3)
+- [Replace fetches with fetch (#2494)](https://github.com/KhronosGroup/Vulkan-Docs/commit/a370995727451e75c44ed4af99c0d95c33ff906f)
+- [February 7, 2025 Vulkan 1.4.308 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ccac48a1126828018e570331999b9a7c2e17d742)
+- [Fix promoted extension dependencies (#2492)](https://github.com/KhronosGroup/Vulkan-Docs/commit/80128cc302e96a191f452c15bd0d0a0c79312149)
+- [Fix the CullPrimitiveEXT VUID's (#2475)](https://github.com/KhronosGroup/Vulkan-Docs/commit/54195f705c624cc58ada10b73e80ea3e1c126c37)
+- [February 21, 2025 Vulkan 1.4.309 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/5a38e1f41285241a29f6428978aae6d1cf13fd16)
+
 ## [0.27.0] - 2025-02-23
 
 ### Changed

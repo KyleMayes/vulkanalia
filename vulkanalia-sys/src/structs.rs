@@ -269,6 +269,46 @@ impl Default for AccelerationStructureGeometryKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryLinearSweptSpheresDataNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+pub struct AccelerationStructureGeometryLinearSweptSpheresDataNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub vertex_format: Format,
+    pub vertex_data: DeviceOrHostAddressConstKHR,
+    pub vertex_stride: DeviceSize,
+    pub radius_format: Format,
+    pub radius_data: DeviceOrHostAddressConstKHR,
+    pub radius_stride: DeviceSize,
+    pub index_type: IndexType,
+    pub index_data: DeviceOrHostAddressConstKHR,
+    pub index_stride: DeviceSize,
+    pub indexing_mode: RayTracingLssIndexingModeNV,
+    pub end_caps_mode: RayTracingLssPrimitiveEndCapsModeNV,
+}
+
+impl Default for AccelerationStructureGeometryLinearSweptSpheresDataNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::ACCELERATION_STRUCTURE_GEOMETRY_LINEAR_SWEPT_SPHERES_DATA_NV,
+            next: ptr::null(),
+            vertex_format: Format::default(),
+            vertex_data: DeviceOrHostAddressConstKHR::default(),
+            vertex_stride: DeviceSize::default(),
+            radius_format: Format::default(),
+            radius_data: DeviceOrHostAddressConstKHR::default(),
+            radius_stride: DeviceSize::default(),
+            index_type: IndexType::default(),
+            index_data: DeviceOrHostAddressConstKHR::default(),
+            index_stride: DeviceSize::default(),
+            indexing_mode: RayTracingLssIndexingModeNV::default(),
+            end_caps_mode: RayTracingLssPrimitiveEndCapsModeNV::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryMotionTrianglesDataNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
@@ -285,6 +325,42 @@ impl Default for AccelerationStructureGeometryMotionTrianglesDataNV {
             s_type: StructureType::ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV,
             next: ptr::null(),
             vertex_data: DeviceOrHostAddressConstKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometrySpheresDataNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+pub struct AccelerationStructureGeometrySpheresDataNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub vertex_format: Format,
+    pub vertex_data: DeviceOrHostAddressConstKHR,
+    pub vertex_stride: DeviceSize,
+    pub radius_format: Format,
+    pub radius_data: DeviceOrHostAddressConstKHR,
+    pub radius_stride: DeviceSize,
+    pub index_type: IndexType,
+    pub index_data: DeviceOrHostAddressConstKHR,
+    pub index_stride: DeviceSize,
+}
+
+impl Default for AccelerationStructureGeometrySpheresDataNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::ACCELERATION_STRUCTURE_GEOMETRY_SPHERES_DATA_NV,
+            next: ptr::null(),
+            vertex_format: Format::default(),
+            vertex_data: DeviceOrHostAddressConstKHR::default(),
+            vertex_stride: DeviceSize::default(),
+            radius_format: Format::default(),
+            radius_data: DeviceOrHostAddressConstKHR::default(),
+            radius_stride: DeviceSize::default(),
+            index_type: IndexType::default(),
+            index_data: DeviceOrHostAddressConstKHR::default(),
+            index_stride: DeviceSize::default(),
         }
     }
 }
@@ -2027,6 +2103,45 @@ impl Default for BufferViewCreateInfo {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBuildPartitionedAccelerationStructureIndirectCommandNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct BuildPartitionedAccelerationStructureIndirectCommandNV {
+    pub op_type: PartitionedAccelerationStructureOpTypeNV,
+    pub arg_count: u32,
+    pub arg_data: StridedDeviceAddressNV,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBuildPartitionedAccelerationStructureInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BuildPartitionedAccelerationStructureInfoNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub input: PartitionedAccelerationStructureInstancesInputNV,
+    pub src_acceleration_structure_data: DeviceAddress,
+    pub dst_acceleration_structure_data: DeviceAddress,
+    pub scratch_data: DeviceAddress,
+    pub src_infos: DeviceAddress,
+    pub src_infos_count: DeviceAddress,
+}
+
+impl Default for BuildPartitionedAccelerationStructureInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::BUILD_PARTITIONED_ACCELERATION_STRUCTURE_INFO_NV,
+            next: ptr::null_mut(),
+            input: PartitionedAccelerationStructureInstancesInputNV::default(),
+            src_acceleration_structure_data: DeviceAddress::default(),
+            dst_acceleration_structure_data: DeviceAddress::default(),
+            scratch_data: DeviceAddress::default(),
+            src_infos: DeviceAddress::default(),
+            src_infos_count: DeviceAddress::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCalibratedTimestampInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2115,6 +2230,258 @@ pub struct ClearRect {
     pub rect: Rect2D,
     pub base_array_layer: u32,
     pub layer_count: u32,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureBuildClustersBottomLevelInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct ClusterAccelerationStructureBuildClustersBottomLevelInfoNV {
+    pub cluster_references_count: u32,
+    pub cluster_references_stride: u32,
+    pub cluster_references: DeviceAddress,
+}
+
+bitfields32! {
+    struct ClusterAccelerationStructureBuildTriangleClusterInfoNVBitfields0 {
+        (triangle_count, with_triangle_count)[0 .. 9],
+        (vertex_count, with_vertex_count)[9 .. 18],
+        (position_truncate_bit_count, with_position_truncate_bit_count)[18 .. 24],
+        (index_type, with_index_type)[24 .. 28],
+        (opacity_micromap_index_type, with_opacity_micromap_index_type)[28 .. 32],
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureBuildTriangleClusterInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct ClusterAccelerationStructureBuildTriangleClusterInfoNV {
+    pub cluster_id: u32,
+    pub cluster_flags: ClusterAccelerationStructureClusterFlagsNV,
+    pub base_geometry_index_and_geometry_flags:
+        ClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV,
+    pub index_buffer_stride: u16,
+    pub vertex_buffer_stride: u16,
+    pub geometry_index_and_flags_buffer_stride: u16,
+    pub opacity_micromap_index_buffer_stride: u16,
+    pub index_buffer: DeviceAddress,
+    pub vertex_buffer: DeviceAddress,
+    pub geometry_index_and_flags_buffer: DeviceAddress,
+    pub opacity_micromap_array: DeviceAddress,
+    pub opacity_micromap_index_buffer: DeviceAddress,
+    pub bitfields0: ClusterAccelerationStructureBuildTriangleClusterInfoNVBitfields0,
+}
+
+bitfields32! {
+    struct ClusterAccelerationStructureBuildTriangleClusterTemplateInfoNVBitfields0 {
+        (triangle_count, with_triangle_count)[0 .. 9],
+        (vertex_count, with_vertex_count)[9 .. 18],
+        (position_truncate_bit_count, with_position_truncate_bit_count)[18 .. 24],
+        (index_type, with_index_type)[24 .. 28],
+        (opacity_micromap_index_type, with_opacity_micromap_index_type)[28 .. 32],
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct ClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV {
+    pub cluster_id: u32,
+    pub cluster_flags: ClusterAccelerationStructureClusterFlagsNV,
+    pub base_geometry_index_and_geometry_flags:
+        ClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV,
+    pub index_buffer_stride: u16,
+    pub vertex_buffer_stride: u16,
+    pub geometry_index_and_flags_buffer_stride: u16,
+    pub opacity_micromap_index_buffer_stride: u16,
+    pub index_buffer: DeviceAddress,
+    pub vertex_buffer: DeviceAddress,
+    pub geometry_index_and_flags_buffer: DeviceAddress,
+    pub opacity_micromap_array: DeviceAddress,
+    pub opacity_micromap_index_buffer: DeviceAddress,
+    pub instantiation_bounding_box_limit: DeviceAddress,
+    pub bitfields0: ClusterAccelerationStructureBuildTriangleClusterTemplateInfoNVBitfields0,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureClustersBottomLevelInputNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ClusterAccelerationStructureClustersBottomLevelInputNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_total_cluster_count: u32,
+    pub max_cluster_count_per_acceleration_structure: u32,
+}
+
+impl Default for ClusterAccelerationStructureClustersBottomLevelInputNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::CLUSTER_ACCELERATION_STRUCTURE_CLUSTERS_BOTTOM_LEVEL_INPUT_NV,
+            next: ptr::null_mut(),
+            max_total_cluster_count: u32::default(),
+            max_cluster_count_per_acceleration_structure: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureCommandsInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+pub struct ClusterAccelerationStructureCommandsInfoNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub input: ClusterAccelerationStructureInputInfoNV,
+    pub dst_implicit_data: DeviceAddress,
+    pub scratch_data: DeviceAddress,
+    pub dst_addresses_array: StridedDeviceAddressRegionKHR,
+    pub dst_sizes_array: StridedDeviceAddressRegionKHR,
+    pub src_infos_array: StridedDeviceAddressRegionKHR,
+    pub src_infos_count: DeviceAddress,
+    pub address_resolution_flags: ClusterAccelerationStructureAddressResolutionFlagsNV,
+}
+
+impl Default for ClusterAccelerationStructureCommandsInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::CLUSTER_ACCELERATION_STRUCTURE_COMMANDS_INFO_NV,
+            next: ptr::null_mut(),
+            input: ClusterAccelerationStructureInputInfoNV::default(),
+            dst_implicit_data: DeviceAddress::default(),
+            scratch_data: DeviceAddress::default(),
+            dst_addresses_array: StridedDeviceAddressRegionKHR::default(),
+            dst_sizes_array: StridedDeviceAddressRegionKHR::default(),
+            src_infos_array: StridedDeviceAddressRegionKHR::default(),
+            src_infos_count: DeviceAddress::default(),
+            address_resolution_flags: ClusterAccelerationStructureAddressResolutionFlagsNV::default(
+            ),
+        }
+    }
+}
+
+bitfields32! {
+    struct ClusterAccelerationStructureGeometryIndexAndGeometryFlagsNVBitfields0 {
+        (geometry_index, with_geometry_index)[0 .. 24],
+        (reserved, with_reserved)[24 .. 29],
+        (geometry_flags, with_geometry_flags)[29 .. 32],
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct ClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV {
+    pub bitfields0: ClusterAccelerationStructureGeometryIndexAndGeometryFlagsNVBitfields0,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureInputInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+pub struct ClusterAccelerationStructureInputInfoNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_acceleration_structure_count: u32,
+    pub flags: BuildAccelerationStructureFlagsKHR,
+    pub op_type: ClusterAccelerationStructureOpTypeNV,
+    pub op_mode: ClusterAccelerationStructureOpModeNV,
+    pub op_input: ClusterAccelerationStructureOpInputNV,
+}
+
+impl Default for ClusterAccelerationStructureInputInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::CLUSTER_ACCELERATION_STRUCTURE_INPUT_INFO_NV,
+            next: ptr::null_mut(),
+            max_acceleration_structure_count: u32::default(),
+            flags: BuildAccelerationStructureFlagsKHR::default(),
+            op_type: ClusterAccelerationStructureOpTypeNV::default(),
+            op_mode: ClusterAccelerationStructureOpModeNV::default(),
+            op_input: ClusterAccelerationStructureOpInputNV::default(),
+        }
+    }
+}
+
+bitfields32! {
+    struct ClusterAccelerationStructureInstantiateClusterInfoNVBitfields0 {
+        (geometry_index_offset, with_geometry_index_offset)[0 .. 24],
+        (reserved, with_reserved)[24 .. 32],
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureInstantiateClusterInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct ClusterAccelerationStructureInstantiateClusterInfoNV {
+    pub cluster_id_offset: u32,
+    pub cluster_template_address: DeviceAddress,
+    pub vertex_buffer: StridedDeviceAddressNV,
+    pub bitfields0: ClusterAccelerationStructureInstantiateClusterInfoNVBitfields0,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureMoveObjectsInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct ClusterAccelerationStructureMoveObjectsInfoNV {
+    pub src_acceleration_structure: DeviceAddress,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureMoveObjectsInputNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ClusterAccelerationStructureMoveObjectsInputNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub type_: ClusterAccelerationStructureTypeNV,
+    pub no_move_overlap: Bool32,
+    pub max_moved_bytes: DeviceSize,
+}
+
+impl Default for ClusterAccelerationStructureMoveObjectsInputNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::CLUSTER_ACCELERATION_STRUCTURE_MOVE_OBJECTS_INPUT_NV,
+            next: ptr::null_mut(),
+            type_: ClusterAccelerationStructureTypeNV::default(),
+            no_move_overlap: Bool32::default(),
+            max_moved_bytes: DeviceSize::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureTriangleClusterInputNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ClusterAccelerationStructureTriangleClusterInputNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub vertex_format: Format,
+    pub max_geometry_index_value: u32,
+    pub max_cluster_unique_geometry_count: u32,
+    pub max_cluster_triangle_count: u32,
+    pub max_cluster_vertex_count: u32,
+    pub max_total_triangle_count: u32,
+    pub max_total_vertex_count: u32,
+    pub min_position_truncate_bit_count: u32,
+}
+
+impl Default for ClusterAccelerationStructureTriangleClusterInputNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::CLUSTER_ACCELERATION_STRUCTURE_TRIANGLE_CLUSTER_INPUT_NV,
+            next: ptr::null_mut(),
+            vertex_format: Format::default(),
+            max_geometry_index_value: u32::default(),
+            max_cluster_unique_geometry_count: u32::default(),
+            max_cluster_triangle_count: u32::default(),
+            max_cluster_vertex_count: u32::default(),
+            max_total_triangle_count: u32::default(),
+            max_total_vertex_count: u32::default(),
+            min_position_truncate_bit_count: u32::default(),
+        }
+    }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCoarseSampleLocationNV.html>
@@ -2485,6 +2852,48 @@ pub struct ConformanceVersion {
     pub patch: u8,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkConvertCooperativeVectorMatrixInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+pub struct ConvertCooperativeVectorMatrixInfoNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub src_size: usize,
+    pub src_data: DeviceOrHostAddressConstKHR,
+    pub dst_size: *mut usize,
+    pub dst_data: DeviceOrHostAddressKHR,
+    pub src_component_type: ComponentTypeKHR,
+    pub dst_component_type: ComponentTypeKHR,
+    pub num_rows: u32,
+    pub num_columns: u32,
+    pub src_layout: CooperativeVectorMatrixLayoutNV,
+    pub src_stride: usize,
+    pub dst_layout: CooperativeVectorMatrixLayoutNV,
+    pub dst_stride: usize,
+}
+
+impl Default for ConvertCooperativeVectorMatrixInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::CONVERT_COOPERATIVE_VECTOR_MATRIX_INFO_NV,
+            next: ptr::null(),
+            src_size: usize::default(),
+            src_data: DeviceOrHostAddressConstKHR::default(),
+            dst_size: ptr::null_mut(),
+            dst_data: DeviceOrHostAddressKHR::default(),
+            src_component_type: ComponentTypeKHR::default(),
+            dst_component_type: ComponentTypeKHR::default(),
+            num_rows: u32::default(),
+            num_columns: u32::default(),
+            src_layout: CooperativeVectorMatrixLayoutNV::default(),
+            src_stride: usize::default(),
+            dst_layout: CooperativeVectorMatrixLayoutNV::default(),
+            dst_stride: usize::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCooperativeMatrixFlexibleDimensionsPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -2589,6 +2998,36 @@ impl Default for CooperativeMatrixPropertiesNV {
             c_type: ComponentTypeNV::default(),
             d_type: ComponentTypeNV::default(),
             scope: ScopeNV::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCooperativeVectorPropertiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct CooperativeVectorPropertiesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub input_type: ComponentTypeKHR,
+    pub input_interpretation: ComponentTypeKHR,
+    pub matrix_interpretation: ComponentTypeKHR,
+    pub bias_interpretation: ComponentTypeKHR,
+    pub result_type: ComponentTypeKHR,
+    pub transpose: Bool32,
+}
+
+impl Default for CooperativeVectorPropertiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::COOPERATIVE_VECTOR_PROPERTIES_NV,
+            next: ptr::null_mut(),
+            input_type: ComponentTypeKHR::default(),
+            input_interpretation: ComponentTypeKHR::default(),
+            matrix_interpretation: ComponentTypeKHR::default(),
+            bias_interpretation: ComponentTypeKHR::default(),
+            result_type: ComponentTypeKHR::default(),
+            transpose: Bool32::default(),
         }
     }
 }
@@ -8018,6 +8457,28 @@ impl Default for ImportMemoryHostPointerInfoEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryMetalHandleInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct ImportMemoryMetalHandleInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub handle_type: ExternalMemoryHandleTypeFlags,
+    pub handle: *mut c_void,
+}
+
+impl Default for ImportMemoryMetalHandleInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::IMPORT_MEMORY_METAL_HANDLE_INFO_EXT,
+            next: ptr::null(),
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
+            handle: ptr::null_mut(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemorySciBufInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -8962,6 +9423,28 @@ impl Default for MemoryBarrier2 {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryBarrierAccessFlags3KHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryBarrierAccessFlags3KHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub src_access_mask3: AccessFlags3KHR,
+    pub dst_access_mask3: AccessFlags3KHR,
+}
+
+impl Default for MemoryBarrierAccessFlags3KHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_BARRIER_ACCESS_FLAGS_3_KHR,
+            next: ptr::null(),
+            src_access_mask3: AccessFlags3KHR::default(),
+            dst_access_mask3: AccessFlags3KHR::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryDedicatedAllocateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -9061,6 +9544,28 @@ impl Default for MemoryGetFdInfoKHR {
     fn default() -> Self {
         Self {
             s_type: StructureType::MEMORY_GET_FD_INFO_KHR,
+            next: ptr::null(),
+            memory: DeviceMemory::default(),
+            handle_type: ExternalMemoryHandleTypeFlags::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetMetalHandleInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryGetMetalHandleInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub memory: DeviceMemory,
+    pub handle_type: ExternalMemoryHandleTypeFlags,
+}
+
+impl Default for MemoryGetMetalHandleInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_GET_METAL_HANDLE_INFO_EXT,
             next: ptr::null(),
             memory: DeviceMemory::default(),
             handle_type: ExternalMemoryHandleTypeFlags::default(),
@@ -9226,6 +9731,26 @@ impl Default for MemoryMapPlacedInfoEXT {
             s_type: StructureType::MEMORY_MAP_PLACED_INFO_EXT,
             next: ptr::null(),
             placed_address: ptr::null_mut(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryMetalHandlePropertiesEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct MemoryMetalHandlePropertiesEXT {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub memory_type_bits: u32,
+}
+
+impl Default for MemoryMetalHandlePropertiesEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::MEMORY_METAL_HANDLE_PROPERTIES_EXT,
+            next: ptr::null_mut(),
+            memory_type_bits: u32::default(),
         }
     }
 }
@@ -9897,6 +10422,86 @@ impl Default for OutOfBandQueueTypeInfoNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPartitionedAccelerationStructureFlagsNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PartitionedAccelerationStructureFlagsNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub enable_partition_translation: Bool32,
+}
+
+impl Default for PartitionedAccelerationStructureFlagsNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PARTITIONED_ACCELERATION_STRUCTURE_FLAGS_NV,
+            next: ptr::null_mut(),
+            enable_partition_translation: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPartitionedAccelerationStructureInstancesInputNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PartitionedAccelerationStructureInstancesInputNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub flags: BuildAccelerationStructureFlagsKHR,
+    pub instance_count: u32,
+    pub max_instance_per_partition_count: u32,
+    pub partition_count: u32,
+    pub max_instance_in_global_partition_count: u32,
+}
+
+impl Default for PartitionedAccelerationStructureInstancesInputNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PARTITIONED_ACCELERATION_STRUCTURE_INSTANCES_INPUT_NV,
+            next: ptr::null_mut(),
+            flags: BuildAccelerationStructureFlagsKHR::default(),
+            instance_count: u32::default(),
+            max_instance_per_partition_count: u32::default(),
+            partition_count: u32::default(),
+            max_instance_in_global_partition_count: u32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPartitionedAccelerationStructureUpdateInstanceDataNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct PartitionedAccelerationStructureUpdateInstanceDataNV {
+    pub instance_index: u32,
+    pub instance_contribution_to_hit_group_index: u32,
+    pub acceleration_structure: DeviceAddress,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPartitionedAccelerationStructureWriteInstanceDataNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, PartialEq)]
+pub struct PartitionedAccelerationStructureWriteInstanceDataNV {
+    pub transform: TransformMatrixKHR,
+    pub explicit_aabb: [f32; 6],
+    pub instance_id: u32,
+    pub instance_mask: u32,
+    pub instance_contribution_to_hit_group_index: u32,
+    pub instance_flags: PartitionedAccelerationStructureInstanceFlagsNV,
+    pub instance_index: u32,
+    pub partition_index: u32,
+    pub acceleration_structure: DeviceAddress,
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPartitionedAccelerationStructureWritePartitionTranslationDataNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, PartialEq)]
+pub struct PartitionedAccelerationStructureWritePartitionTranslationDataNV {
+    pub partition_index: u32,
+    pub partition_translation: [f32; 3],
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPastPresentationTimingGOOGLE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -10467,6 +11072,60 @@ impl Default for PhysicalDeviceBufferDeviceAddressFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceClusterAccelerationStructureFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceClusterAccelerationStructureFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub cluster_acceleration_structure: Bool32,
+}
+
+impl Default for PhysicalDeviceClusterAccelerationStructureFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_CLUSTER_ACCELERATION_STRUCTURE_FEATURES_NV,
+            next: ptr::null_mut(),
+            cluster_acceleration_structure: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceClusterAccelerationStructurePropertiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceClusterAccelerationStructurePropertiesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_vertices_per_cluster: u32,
+    pub max_triangles_per_cluster: u32,
+    pub cluster_scratch_byte_alignment: u32,
+    pub cluster_byte_alignment: u32,
+    pub cluster_template_byte_alignment: u32,
+    pub cluster_bottom_level_byte_alignment: u32,
+    pub cluster_template_bounds_byte_alignment: u32,
+    pub max_cluster_geometry_index: u32,
+}
+
+impl Default for PhysicalDeviceClusterAccelerationStructurePropertiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_CLUSTER_ACCELERATION_STRUCTURE_PROPERTIES_NV,
+            next: ptr::null_mut(),
+            max_vertices_per_cluster: u32::default(),
+            max_triangles_per_cluster: u32::default(),
+            cluster_scratch_byte_alignment: u32::default(),
+            cluster_byte_alignment: u32::default(),
+            cluster_template_byte_alignment: u32::default(),
+            cluster_bottom_level_byte_alignment: u32::default(),
+            cluster_template_bounds_byte_alignment: u32::default(),
+            max_cluster_geometry_index: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -10835,6 +11494,54 @@ impl Default for PhysicalDeviceCooperativeMatrixPropertiesNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeVectorFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceCooperativeVectorFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub cooperative_vector: Bool32,
+    pub cooperative_vector_training: Bool32,
+}
+
+impl Default for PhysicalDeviceCooperativeVectorFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COOPERATIVE_VECTOR_FEATURES_NV,
+            next: ptr::null_mut(),
+            cooperative_vector: Bool32::default(),
+            cooperative_vector_training: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeVectorPropertiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceCooperativeVectorPropertiesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub cooperative_vector_supported_stages: ShaderStageFlags,
+    pub cooperative_vector_training_float16_accumulation: Bool32,
+    pub cooperative_vector_training_float32_accumulation: Bool32,
+    pub max_cooperative_vector_components: u32,
+}
+
+impl Default for PhysicalDeviceCooperativeVectorPropertiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_COOPERATIVE_VECTOR_PROPERTIES_NV,
+            next: ptr::null_mut(),
+            cooperative_vector_supported_stages: ShaderStageFlags::default(),
+            cooperative_vector_training_float16_accumulation: Bool32::default(),
+            cooperative_vector_training_float32_accumulation: Bool32::default(),
+            max_cooperative_vector_components: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -11105,20 +11812,20 @@ impl Default for PhysicalDeviceDepthClampControlFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceDepthClampZeroOneFeaturesEXT {
+pub struct PhysicalDeviceDepthClampZeroOneFeaturesKHR {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub depth_clamp_zero_one: Bool32,
 }
 
-impl Default for PhysicalDeviceDepthClampZeroOneFeaturesEXT {
+impl Default for PhysicalDeviceDepthClampZeroOneFeaturesKHR {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT,
+            s_type: StructureType::PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR,
             next: ptr::null_mut(),
             depth_clamp_zero_one: Bool32::default(),
         }
@@ -14029,6 +14736,26 @@ impl Default for PhysicalDeviceMaintenance7PropertiesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance8FeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceMaintenance8FeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub maintenance8: Bool32,
+}
+
+impl Default for PhysicalDeviceMaintenance8FeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_MAINTENANCE_8_FEATURES_KHR,
+            next: ptr::null_mut(),
+            maintenance8: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14758,6 +15485,46 @@ impl Default for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePartitionedAccelerationStructureFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub partitioned_acceleration_structure: Bool32,
+}
+
+impl Default for PhysicalDevicePartitionedAccelerationStructureFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PARTITIONED_ACCELERATION_STRUCTURE_FEATURES_NV,
+            next: ptr::null_mut(),
+            partitioned_acceleration_structure: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePartitionedAccelerationStructurePropertiesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub max_partition_count: u32,
+}
+
+impl Default for PhysicalDevicePartitionedAccelerationStructurePropertiesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PARTITIONED_ACCELERATION_STRUCTURE_PROPERTIES_NV,
+            next: ptr::null_mut(),
+            max_partition_count: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePerStageDescriptorSetFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -14926,6 +15693,26 @@ impl Default for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {
             s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT,
             next: ptr::null_mut(),
             pipeline_library_group_handles: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineOpacityMicromapFeaturesARM.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePipelineOpacityMicromapFeaturesARM {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub pipeline_opacity_micromap: Bool32,
+}
+
+impl Default for PhysicalDevicePipelineOpacityMicromapFeaturesARM {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PIPELINE_OPACITY_MICROMAP_FEATURES_ARM,
+            next: ptr::null_mut(),
+            pipeline_opacity_micromap: Bool32::default(),
         }
     }
 }
@@ -15140,6 +15927,26 @@ impl Default for PhysicalDevicePresentIdFeaturesKHR {
             s_type: StructureType::PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR,
             next: ptr::null_mut(),
             present_id: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentMeteringFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDevicePresentMeteringFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub present_metering: Bool32,
+}
+
+impl Default for PhysicalDevicePresentMeteringFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV,
+            next: ptr::null_mut(),
+            present_metering: Bool32::default(),
         }
     }
 }
@@ -15511,6 +16318,28 @@ impl Default for PhysicalDeviceRayTracingInvocationReorderPropertiesNV {
             next: ptr::null_mut(),
             ray_tracing_invocation_reorder_reordering_hint:
                 RayTracingInvocationReorderModeNV::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub spheres: Bool32,
+    pub linear_swept_spheres: Bool32,
+}
+
+impl Default for PhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_RAY_TRACING_LINEAR_SWEPT_SPHERES_FEATURES_NV,
+            next: ptr::null_mut(),
+            spheres: Bool32::default(),
+            linear_swept_spheres: Bool32::default(),
         }
     }
 }
@@ -17634,6 +18463,26 @@ impl Default for PhysicalDeviceVideoMaintenance1FeaturesKHR {
             s_type: StructureType::PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR,
             next: ptr::null_mut(),
             video_maintenance1: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoMaintenance2FeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceVideoMaintenance2FeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub video_maintenance2: Bool32,
+}
+
+impl Default for PhysicalDeviceVideoMaintenance2FeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_VIDEO_MAINTENANCE_2_FEATURES_KHR,
+            next: ptr::null_mut(),
+            video_maintenance2: Bool32::default(),
         }
     }
 }
@@ -20327,6 +21176,27 @@ impl Default for QueueFamilyVideoPropertiesKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RayTracingPipelineClusterAccelerationStructureCreateInfoNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub allow_cluster_acceleration_structure: Bool32,
+}
+
+impl Default for RayTracingPipelineClusterAccelerationStructureCreateInfoNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type:
+                StructureType::RAY_TRACING_PIPELINE_CLUSTER_ACCELERATION_STRUCTURE_CREATE_INFO_NV,
+            next: ptr::null_mut(),
+            allow_cluster_acceleration_structure: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingPipelineCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21910,6 +22780,28 @@ impl Default for SetLatencyMarkerInfoNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSetPresentConfigNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SetPresentConfigNV {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub num_frames_per_batch: u32,
+    pub present_config_feedback: u32,
+}
+
+impl Default for SetPresentConfigNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SET_PRESENT_CONFIG_NV,
+            next: ptr::null(),
+            num_frames_per_batch: u32::default(),
+            present_config_feedback: u32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSetStateFlagsIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -22294,6 +23186,14 @@ impl Default for StreamDescriptorSurfaceCreateInfoGGP {
             stream_descriptor: GgpStreamDescriptor::default(),
         }
     }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkStridedDeviceAddressNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
+pub struct StridedDeviceAddressNV {
+    pub start_address: DeviceAddress,
+    pub stride_in_bytes: DeviceSize,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkStridedDeviceAddressRegionKHR.html>
@@ -23592,6 +24492,26 @@ impl Default for VideoDecodeAV1DpbSlotInfoKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1InlineSessionParametersInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeAV1InlineSessionParametersInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_sequence_header: *const video::StdVideoAV1SequenceHeader,
+}
+
+impl Default for VideoDecodeAV1InlineSessionParametersInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_AV1_INLINE_SESSION_PARAMETERS_INFO_KHR,
+            next: ptr::null(),
+            std_sequence_header: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1PictureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -23722,6 +24642,28 @@ impl Default for VideoDecodeH264DpbSlotInfoKHR {
             s_type: StructureType::VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR,
             next: ptr::null(),
             std_reference_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264InlineSessionParametersInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH264InlineSessionParametersInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_sps: *const video::StdVideoH264SequenceParameterSet,
+    pub std_pps: *const video::StdVideoH264PictureParameterSet,
+}
+
+impl Default for VideoDecodeH264InlineSessionParametersInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H264_INLINE_SESSION_PARAMETERS_INFO_KHR,
+            next: ptr::null(),
+            std_sps: ptr::null(),
+            std_pps: ptr::null(),
         }
     }
 }
@@ -23858,6 +24800,30 @@ impl Default for VideoDecodeH265DpbSlotInfoKHR {
             s_type: StructureType::VIDEO_DECODE_H265_DPB_SLOT_INFO_KHR,
             next: ptr::null(),
             std_reference_info: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265InlineSessionParametersInfoKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoDecodeH265InlineSessionParametersInfoKHR {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub std_vps: *const video::StdVideoH265VideoParameterSet,
+    pub std_sps: *const video::StdVideoH265SequenceParameterSet,
+    pub std_pps: *const video::StdVideoH265PictureParameterSet,
+}
+
+impl Default for VideoDecodeH265InlineSessionParametersInfoKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_DECODE_H265_INLINE_SESSION_PARAMETERS_INFO_KHR,
+            next: ptr::null(),
+            std_vps: ptr::null(),
+            std_sps: ptr::null(),
+            std_pps: ptr::null(),
         }
     }
 }
@@ -26078,6 +27044,28 @@ impl Default for WriteDescriptorSetInlineUniformBlock {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteDescriptorSetPartitionedAccelerationStructureNV.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct WriteDescriptorSetPartitionedAccelerationStructureNV {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub acceleration_structure_count: u32,
+    pub acceleration_structures: *const DeviceAddress,
+}
+
+impl Default for WriteDescriptorSetPartitionedAccelerationStructureNV {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::WRITE_DESCRIPTOR_SET_PARTITIONED_ACCELERATION_STRUCTURE_NV,
+            next: ptr::null_mut(),
+            acceleration_structure_count: u32::default(),
+            acceleration_structures: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteIndirectExecutionSetPipelineEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -26383,6 +27371,8 @@ pub type PhysicalDeviceBufferDeviceAddressFeaturesKHR = PhysicalDeviceBufferDevi
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.html>
 pub type PhysicalDeviceComputeShaderDerivativesFeaturesNV =
     PhysicalDeviceComputeShaderDerivativesFeaturesKHR;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.html>
+pub type PhysicalDeviceDepthClampZeroOneFeaturesEXT = PhysicalDeviceDepthClampZeroOneFeaturesKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthStencilResolvePropertiesKHR.html>
 pub type PhysicalDeviceDepthStencilResolvePropertiesKHR =
     PhysicalDeviceDepthStencilResolveProperties;

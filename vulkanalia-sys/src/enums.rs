@@ -730,6 +730,112 @@ impl fmt::Debug for ChromaLocation {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureOpModeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct ClusterAccelerationStructureOpModeNV(i32);
+
+impl ClusterAccelerationStructureOpModeNV {
+    pub const IMPLICIT_DESTINATIONS: Self = Self(0);
+    pub const EXPLICIT_DESTINATIONS: Self = Self(1);
+    pub const COMPUTE_SIZES: Self = Self(2);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for ClusterAccelerationStructureOpModeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "IMPLICIT_DESTINATIONS"),
+            1 => write!(f, "EXPLICIT_DESTINATIONS"),
+            2 => write!(f, "COMPUTE_SIZES"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureOpTypeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct ClusterAccelerationStructureOpTypeNV(i32);
+
+impl ClusterAccelerationStructureOpTypeNV {
+    pub const MOVE_OBJECTS: Self = Self(0);
+    pub const BUILD_CLUSTERS_BOTTOM_LEVEL: Self = Self(1);
+    pub const BUILD_TRIANGLE_CLUSTER: Self = Self(2);
+    pub const BUILD_TRIANGLE_CLUSTER_TEMPLATE: Self = Self(3);
+    pub const INSTANTIATE_TRIANGLE_CLUSTER: Self = Self(4);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for ClusterAccelerationStructureOpTypeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "MOVE_OBJECTS"),
+            1 => write!(f, "BUILD_CLUSTERS_BOTTOM_LEVEL"),
+            2 => write!(f, "BUILD_TRIANGLE_CLUSTER"),
+            3 => write!(f, "BUILD_TRIANGLE_CLUSTER_TEMPLATE"),
+            4 => write!(f, "INSTANTIATE_TRIANGLE_CLUSTER"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureTypeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct ClusterAccelerationStructureTypeNV(i32);
+
+impl ClusterAccelerationStructureTypeNV {
+    pub const CLUSTERS_BOTTOM_LEVEL: Self = Self(0);
+    pub const TRIANGLE_CLUSTER: Self = Self(1);
+    pub const TRIANGLE_CLUSTER_TEMPLATE: Self = Self(2);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for ClusterAccelerationStructureTypeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "CLUSTERS_BOTTOM_LEVEL"),
+            1 => write!(f, "TRIANGLE_CLUSTER"),
+            2 => write!(f, "TRIANGLE_CLUSTER_TEMPLATE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCoarseSampleOrderTypeNV.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -961,6 +1067,10 @@ impl ComponentTypeKHR {
     pub const UINT16: Self = Self(8);
     pub const UINT32: Self = Self(9);
     pub const UINT64: Self = Self(10);
+    pub const SINT8_PACKED_NV: Self = Self(1000491000);
+    pub const UINT8_PACKED_NV: Self = Self(1000491001);
+    pub const FLOAT_E4M3_NV: Self = Self(1000491002);
+    pub const FLOAT_E5M2_NV: Self = Self(1000491003);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -989,6 +1099,10 @@ impl fmt::Debug for ComponentTypeKHR {
             8 => write!(f, "UINT16"),
             9 => write!(f, "UINT32"),
             10 => write!(f, "UINT64"),
+            1000491000 => write!(f, "SINT8_PACKED_NV"),
+            1000491001 => write!(f, "UINT8_PACKED_NV"),
+            1000491002 => write!(f, "FLOAT_E4M3_NV"),
+            1000491003 => write!(f, "FLOAT_E5M2_NV"),
             _ => self.0.fmt(f),
         }
     }
@@ -1023,6 +1137,42 @@ impl fmt::Debug for ConservativeRasterizationModeEXT {
             0 => write!(f, "DISABLED"),
             1 => write!(f, "OVERESTIMATE"),
             2 => write!(f, "UNDERESTIMATE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCooperativeVectorMatrixLayoutNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct CooperativeVectorMatrixLayoutNV(i32);
+
+impl CooperativeVectorMatrixLayoutNV {
+    pub const ROW_MAJOR: Self = Self(0);
+    pub const COLUMN_MAJOR: Self = Self(1);
+    pub const INFERENCING_OPTIMAL: Self = Self(2);
+    pub const TRAINING_OPTIMAL: Self = Self(3);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for CooperativeVectorMatrixLayoutNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "ROW_MAJOR"),
+            1 => write!(f, "COLUMN_MAJOR"),
+            2 => write!(f, "INFERENCING_OPTIMAL"),
+            3 => write!(f, "TRAINING_OPTIMAL"),
             _ => self.0.fmt(f),
         }
     }
@@ -1403,6 +1553,7 @@ impl DescriptorType {
     pub const SAMPLE_WEIGHT_IMAGE_QCOM: Self = Self(1000440000);
     pub const BLOCK_MATCH_IMAGE_QCOM: Self = Self(1000440001);
     pub const MUTABLE_EXT: Self = Self(1000351000);
+    pub const PARTITIONED_ACCELERATION_STRUCTURE_NV: Self = Self(1000570000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -1437,6 +1588,7 @@ impl fmt::Debug for DescriptorType {
             1000440000 => write!(f, "SAMPLE_WEIGHT_IMAGE_QCOM"),
             1000440001 => write!(f, "BLOCK_MATCH_IMAGE_QCOM"),
             1000351000 => write!(f, "MUTABLE_EXT"),
+            1000570000 => write!(f, "PARTITIONED_ACCELERATION_STRUCTURE_NV"),
             _ => self.0.fmt(f),
         }
     }
@@ -2861,6 +3013,8 @@ impl GeometryTypeKHR {
     pub const TRIANGLES: Self = Self(0);
     pub const AABBS: Self = Self(1);
     pub const INSTANCES: Self = Self(2);
+    pub const SPHERES_NV: Self = Self(1000429004);
+    pub const LINEAR_SWEPT_SPHERES_NV: Self = Self(1000429005);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -2881,6 +3035,8 @@ impl fmt::Debug for GeometryTypeKHR {
             0 => write!(f, "TRIANGLES"),
             1 => write!(f, "AABBS"),
             2 => write!(f, "INSTANCES"),
+            1000429004 => write!(f, "SPHERES_NV"),
+            1000429005 => write!(f, "LINEAR_SWEPT_SPHERES_NV"),
             _ => self.0.fmt(f),
         }
     }
@@ -3760,6 +3916,7 @@ impl OpacityMicromapSpecialIndexEXT {
     pub const FULLY_OPAQUE: Self = Self(-2);
     pub const FULLY_UNKNOWN_TRANSPARENT: Self = Self(-3);
     pub const FULLY_UNKNOWN_OPAQUE: Self = Self(-4);
+    pub const CLUSTER_GEOMETRY_DISABLE_OPACITY_MICROMAP_NV: Self = Self(-5);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -3781,6 +3938,7 @@ impl fmt::Debug for OpacityMicromapSpecialIndexEXT {
             -2 => write!(f, "FULLY_OPAQUE"),
             -3 => write!(f, "FULLY_UNKNOWN_TRANSPARENT"),
             -4 => write!(f, "FULLY_UNKNOWN_OPAQUE"),
+            -5 => write!(f, "CLUSTER_GEOMETRY_DISABLE_OPACITY_MICROMAP_NV"),
             _ => self.0.fmt(f),
         }
     }
@@ -3895,6 +4053,40 @@ impl fmt::Debug for OutOfBandQueueTypeNV {
         match self.0 {
             0 => write!(f, "RENDER"),
             1 => write!(f, "PRESENT"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPartitionedAccelerationStructureOpTypeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct PartitionedAccelerationStructureOpTypeNV(i32);
+
+impl PartitionedAccelerationStructureOpTypeNV {
+    pub const WRITE_INSTANCE: Self = Self(0);
+    pub const UPDATE_INSTANCE: Self = Self(1);
+    pub const WRITE_PARTITION_TRANSLATION: Self = Self(2);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for PartitionedAccelerationStructureOpTypeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "WRITE_INSTANCE"),
+            1 => write!(f, "UPDATE_INSTANCE"),
+            2 => write!(f, "WRITE_PARTITION_TRANSLATION"),
             _ => self.0.fmt(f),
         }
     }
@@ -4827,6 +5019,70 @@ impl fmt::Debug for RayTracingInvocationReorderModeNV {
         match self.0 {
             0 => write!(f, "NONE"),
             1 => write!(f, "REORDER"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingLssIndexingModeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct RayTracingLssIndexingModeNV(i32);
+
+impl RayTracingLssIndexingModeNV {
+    pub const LIST: Self = Self(0);
+    pub const SUCCESSIVE: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for RayTracingLssIndexingModeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "LIST"),
+            1 => write!(f, "SUCCESSIVE"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingLssPrimitiveEndCapsModeNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct RayTracingLssPrimitiveEndCapsModeNV(i32);
+
+impl RayTracingLssPrimitiveEndCapsModeNV {
+    pub const NONE: Self = Self(0);
+    pub const CHAINED: Self = Self(1);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for RayTracingLssPrimitiveEndCapsModeNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "NONE"),
+            1 => write!(f, "CHAINED"),
             _ => self.0.fmt(f),
         }
     }
@@ -6436,7 +6692,6 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE: Self = Self(1000420000);
     pub const DESCRIPTOR_SET_BINDING_REFERENCE_VALVE: Self = Self(1000420001);
     pub const DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE: Self = Self(1000420002);
-    pub const PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT: Self = Self(1000421000);
     pub const PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT: Self = Self(1000422000);
     pub const PHYSICAL_DEVICE_RENDER_PASS_STRIPED_FEATURES_ARM: Self = Self(1000424000);
     pub const PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM: Self = Self(1000424001);
@@ -6454,6 +6709,9 @@ impl StructureType {
         Self(1000428000);
     pub const COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV: Self = Self(1000428001);
     pub const PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV: Self = Self(1000428002);
+    pub const PHYSICAL_DEVICE_RAY_TRACING_LINEAR_SWEPT_SPHERES_FEATURES_NV: Self = Self(1000429008);
+    pub const ACCELERATION_STRUCTURE_GEOMETRY_LINEAR_SWEPT_SPHERES_DATA_NV: Self = Self(1000429009);
+    pub const ACCELERATION_STRUCTURE_GEOMETRY_SPHERES_DATA_NV: Self = Self(1000429010);
     pub const PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV: Self = Self(1000430000);
     pub const PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR: Self = Self(1000434000);
     pub const APPLICATION_PARAMETERS_EXT: Self = Self(1000435000);
@@ -6518,6 +6776,10 @@ impl StructureType {
     pub const DEVICE_SEMAPHORE_SCI_SYNC_POOL_RESERVATION_CREATE_INFO_NV: Self = Self(1000489003);
     pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV: Self = Self(1000490000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV: Self = Self(1000490001);
+    pub const PHYSICAL_DEVICE_COOPERATIVE_VECTOR_FEATURES_NV: Self = Self(1000491000);
+    pub const PHYSICAL_DEVICE_COOPERATIVE_VECTOR_PROPERTIES_NV: Self = Self(1000491001);
+    pub const COOPERATIVE_VECTOR_PROPERTIES_NV: Self = Self(1000491002);
+    pub const CONVERT_COOPERATIVE_VECTOR_MATRIX_INFO_NV: Self = Self(1000491004);
     pub const PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_FEATURES_NV: Self = Self(1000492000);
     pub const PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV: Self = Self(1000492001);
     pub const PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT: Self = Self(1000351000);
@@ -6612,6 +6874,24 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV: Self = Self(1000563000);
     pub const PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT: Self = Self(1000564000);
     pub const PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV: Self = Self(1000568000);
+    pub const PHYSICAL_DEVICE_CLUSTER_ACCELERATION_STRUCTURE_FEATURES_NV: Self = Self(1000569000);
+    pub const PHYSICAL_DEVICE_CLUSTER_ACCELERATION_STRUCTURE_PROPERTIES_NV: Self = Self(1000569001);
+    pub const CLUSTER_ACCELERATION_STRUCTURE_CLUSTERS_BOTTOM_LEVEL_INPUT_NV: Self =
+        Self(1000569002);
+    pub const CLUSTER_ACCELERATION_STRUCTURE_TRIANGLE_CLUSTER_INPUT_NV: Self = Self(1000569003);
+    pub const CLUSTER_ACCELERATION_STRUCTURE_MOVE_OBJECTS_INPUT_NV: Self = Self(1000569004);
+    pub const CLUSTER_ACCELERATION_STRUCTURE_INPUT_INFO_NV: Self = Self(1000569005);
+    pub const CLUSTER_ACCELERATION_STRUCTURE_COMMANDS_INFO_NV: Self = Self(1000569006);
+    pub const RAY_TRACING_PIPELINE_CLUSTER_ACCELERATION_STRUCTURE_CREATE_INFO_NV: Self =
+        Self(1000569007);
+    pub const PHYSICAL_DEVICE_PARTITIONED_ACCELERATION_STRUCTURE_FEATURES_NV: Self =
+        Self(1000570000);
+    pub const PHYSICAL_DEVICE_PARTITIONED_ACCELERATION_STRUCTURE_PROPERTIES_NV: Self =
+        Self(1000570001);
+    pub const WRITE_DESCRIPTOR_SET_PARTITIONED_ACCELERATION_STRUCTURE_NV: Self = Self(1000570002);
+    pub const PARTITIONED_ACCELERATION_STRUCTURE_INSTANCES_INPUT_NV: Self = Self(1000570003);
+    pub const BUILD_PARTITIONED_ACCELERATION_STRUCTURE_INFO_NV: Self = Self(1000570004);
+    pub const PARTITIONED_ACCELERATION_STRUCTURE_FLAGS_NV: Self = Self(1000570005);
     pub const PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT: Self = Self(1000572000);
     pub const PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT: Self = Self(1000572001);
     pub const GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT: Self = Self(1000572002);
@@ -6626,17 +6906,30 @@ impl StructureType {
     pub const INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT: Self = Self(1000572012);
     pub const GENERATED_COMMANDS_PIPELINE_INFO_EXT: Self = Self(1000572013);
     pub const GENERATED_COMMANDS_SHADER_INFO_EXT: Self = Self(1000572014);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_8_FEATURES_KHR: Self = Self(1000574000);
+    pub const MEMORY_BARRIER_ACCESS_FLAGS_3_KHR: Self = Self(1000574002);
     pub const PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA: Self = Self(1000575000);
     pub const PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA: Self = Self(1000575001);
     pub const IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA: Self = Self(1000575002);
     pub const PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT: Self = Self(1000582000);
     pub const PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT: Self = Self(1000582001);
+    pub const PHYSICAL_DEVICE_VIDEO_MAINTENANCE_2_FEATURES_KHR: Self = Self(1000586000);
+    pub const VIDEO_DECODE_H264_INLINE_SESSION_PARAMETERS_INFO_KHR: Self = Self(1000586001);
+    pub const VIDEO_DECODE_H265_INLINE_SESSION_PARAMETERS_INFO_KHR: Self = Self(1000586002);
+    pub const VIDEO_DECODE_AV1_INLINE_SESSION_PARAMETERS_INFO_KHR: Self = Self(1000586003);
     pub const PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI: Self = Self(1000590000);
     pub const HDR_VIVID_DYNAMIC_METADATA_HUAWEI: Self = Self(1000590001);
     pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV: Self = Self(1000593000);
     pub const COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV: Self = Self(1000593001);
     pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV: Self = Self(1000593002);
+    pub const PHYSICAL_DEVICE_PIPELINE_OPACITY_MICROMAP_FEATURES_ARM: Self = Self(1000596000);
+    pub const IMPORT_MEMORY_METAL_HANDLE_INFO_EXT: Self = Self(1000602000);
+    pub const MEMORY_METAL_HANDLE_PROPERTIES_EXT: Self = Self(1000602001);
+    pub const MEMORY_GET_METAL_HANDLE_INFO_EXT: Self = Self(1000602002);
+    pub const PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR: Self = Self(1000421000);
     pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT: Self = Self(1000608000);
+    pub const SET_PRESENT_CONFIG_NV: Self = Self(1000613000);
+    pub const PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV: Self = Self(1000613001);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -7566,7 +7859,6 @@ impl fmt::Debug for StructureType {
             ),
             1000420001 => write!(f, "DESCRIPTOR_SET_BINDING_REFERENCE_VALVE"),
             1000420002 => write!(f, "DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE"),
-            1000421000 => write!(f, "PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT"),
             1000422000 => write!(f, "PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT"),
             1000424000 => write!(f, "PHYSICAL_DEVICE_RENDER_PASS_STRIPED_FEATURES_ARM"),
             1000424001 => write!(f, "PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM"),
@@ -7592,6 +7884,15 @@ impl fmt::Debug for StructureType {
             ),
             1000428001 => write!(f, "COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV"),
             1000428002 => write!(f, "PIPELINE_INDIRECT_DEVICE_ADDRESS_INFO_NV"),
+            1000429008 => write!(
+                f,
+                "PHYSICAL_DEVICE_RAY_TRACING_LINEAR_SWEPT_SPHERES_FEATURES_NV"
+            ),
+            1000429009 => write!(
+                f,
+                "ACCELERATION_STRUCTURE_GEOMETRY_LINEAR_SWEPT_SPHERES_DATA_NV"
+            ),
+            1000429010 => write!(f, "ACCELERATION_STRUCTURE_GEOMETRY_SPHERES_DATA_NV"),
             1000430000 => write!(f, "PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV"),
             1000434000 => write!(
                 f,
@@ -7684,6 +7985,10 @@ impl fmt::Debug for StructureType {
                 f,
                 "PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV"
             ),
+            1000491000 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_VECTOR_FEATURES_NV"),
+            1000491001 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_VECTOR_PROPERTIES_NV"),
+            1000491002 => write!(f, "COOPERATIVE_VECTOR_PROPERTIES_NV"),
+            1000491004 => write!(f, "CONVERT_COOPERATIVE_VECTOR_MATRIX_INFO_NV"),
             1000492000 => write!(
                 f,
                 "PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_FEATURES_NV"
@@ -7818,6 +8123,44 @@ impl fmt::Debug for StructureType {
                 "PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT"
             ),
             1000568000 => write!(f, "PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV"),
+            1000569000 => write!(
+                f,
+                "PHYSICAL_DEVICE_CLUSTER_ACCELERATION_STRUCTURE_FEATURES_NV"
+            ),
+            1000569001 => write!(
+                f,
+                "PHYSICAL_DEVICE_CLUSTER_ACCELERATION_STRUCTURE_PROPERTIES_NV"
+            ),
+            1000569002 => write!(
+                f,
+                "CLUSTER_ACCELERATION_STRUCTURE_CLUSTERS_BOTTOM_LEVEL_INPUT_NV"
+            ),
+            1000569003 => write!(
+                f,
+                "CLUSTER_ACCELERATION_STRUCTURE_TRIANGLE_CLUSTER_INPUT_NV"
+            ),
+            1000569004 => write!(f, "CLUSTER_ACCELERATION_STRUCTURE_MOVE_OBJECTS_INPUT_NV"),
+            1000569005 => write!(f, "CLUSTER_ACCELERATION_STRUCTURE_INPUT_INFO_NV"),
+            1000569006 => write!(f, "CLUSTER_ACCELERATION_STRUCTURE_COMMANDS_INFO_NV"),
+            1000569007 => write!(
+                f,
+                "RAY_TRACING_PIPELINE_CLUSTER_ACCELERATION_STRUCTURE_CREATE_INFO_NV"
+            ),
+            1000570000 => write!(
+                f,
+                "PHYSICAL_DEVICE_PARTITIONED_ACCELERATION_STRUCTURE_FEATURES_NV"
+            ),
+            1000570001 => write!(
+                f,
+                "PHYSICAL_DEVICE_PARTITIONED_ACCELERATION_STRUCTURE_PROPERTIES_NV"
+            ),
+            1000570002 => write!(
+                f,
+                "WRITE_DESCRIPTOR_SET_PARTITIONED_ACCELERATION_STRUCTURE_NV"
+            ),
+            1000570003 => write!(f, "PARTITIONED_ACCELERATION_STRUCTURE_INSTANCES_INPUT_NV"),
+            1000570004 => write!(f, "BUILD_PARTITIONED_ACCELERATION_STRUCTURE_INFO_NV"),
+            1000570005 => write!(f, "PARTITIONED_ACCELERATION_STRUCTURE_FLAGS_NV"),
             1000572000 => write!(f, "PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT"),
             1000572001 => write!(
                 f,
@@ -7835,20 +8178,33 @@ impl fmt::Debug for StructureType {
             1000572012 => write!(f, "INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT"),
             1000572013 => write!(f, "GENERATED_COMMANDS_PIPELINE_INFO_EXT"),
             1000572014 => write!(f, "GENERATED_COMMANDS_SHADER_INFO_EXT"),
+            1000574000 => write!(f, "PHYSICAL_DEVICE_MAINTENANCE_8_FEATURES_KHR"),
+            1000574002 => write!(f, "MEMORY_BARRIER_ACCESS_FLAGS_3_KHR"),
             1000575000 => write!(f, "PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_FEATURES_MESA"),
             1000575001 => write!(f, "PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA"),
             1000575002 => write!(f, "IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA"),
             1000582000 => write!(f, "PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT"),
             1000582001 => write!(f, "PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT"),
+            1000586000 => write!(f, "PHYSICAL_DEVICE_VIDEO_MAINTENANCE_2_FEATURES_KHR"),
+            1000586001 => write!(f, "VIDEO_DECODE_H264_INLINE_SESSION_PARAMETERS_INFO_KHR"),
+            1000586002 => write!(f, "VIDEO_DECODE_H265_INLINE_SESSION_PARAMETERS_INFO_KHR"),
+            1000586003 => write!(f, "VIDEO_DECODE_AV1_INLINE_SESSION_PARAMETERS_INFO_KHR"),
             1000590000 => write!(f, "PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI"),
             1000590001 => write!(f, "HDR_VIVID_DYNAMIC_METADATA_HUAWEI"),
             1000593000 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV"),
             1000593001 => write!(f, "COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV"),
             1000593002 => write!(f, "PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV"),
+            1000596000 => write!(f, "PHYSICAL_DEVICE_PIPELINE_OPACITY_MICROMAP_FEATURES_ARM"),
+            1000602000 => write!(f, "IMPORT_MEMORY_METAL_HANDLE_INFO_EXT"),
+            1000602001 => write!(f, "MEMORY_METAL_HANDLE_PROPERTIES_EXT"),
+            1000602002 => write!(f, "MEMORY_GET_METAL_HANDLE_INFO_EXT"),
+            1000421000 => write!(f, "PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR"),
             1000608000 => write!(
                 f,
                 "PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT"
             ),
+            1000613000 => write!(f, "SET_PRESENT_CONFIG_NV"),
+            1000613001 => write!(f, "PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV"),
             _ => self.0.fmt(f),
         }
     }
