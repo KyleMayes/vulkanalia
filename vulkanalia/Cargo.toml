@@ -5,7 +5,7 @@ edition = "2021"
 name = "vulkanalia"
 authors = ["Kyle Mayes <kyle@mayeses.com>"]
 
-version = "0.26.0"
+version = "0.27.0"
 
 readme = "../README.md"
 license = "Apache-2.0"
@@ -32,7 +32,7 @@ window = ["raw-window-handle", "cocoa", "metal", "objc"]
 
 libloading = { version = "0.8.5", optional = true }
 raw-window-handle = { version = "0.6", optional = true }
-vulkanalia-sys = { version = "0.26", path = "../vulkanalia-sys", default-features = false }
+vulkanalia-sys = { version = "0.27", path = "../vulkanalia-sys", default-features = false }
 
 [target.'cfg(target_os = "macos")'.dependencies]
 
