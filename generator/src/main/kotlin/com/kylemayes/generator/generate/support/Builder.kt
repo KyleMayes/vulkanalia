@@ -8,17 +8,19 @@ import com.kylemayes.generator.registry.intern
 val skipBuilderMethods =
     mapOf(
         "VkLayerSettingEXT" to setOf("type", "pValues"),
+        "ShaderModuleCreateInfo" to setOf("code", "code_size"),
     )
 
 /** Generates builder methods for special cases. */
 fun Registry.generateCustomBuilderMethods(struct: Structure): List<String> =
     when (struct.name.original) {
-        "VkLayerSettingEXT" -> generateLayerSettingBuilderMethods(struct)
+        "VkLayerSettingEXT" -> generateLayerSettingBuilderMethods()
+        "ShaderModuleCreateInfo" -> generateShaderModuleCreateInfoCodeArrayMethod()
         else -> listOf()
     }
 
 /** Generate one method per type since the type and values fields are linked. */
-private fun Registry.generateLayerSettingBuilderMethods(struct: Structure): List<String> {
+private fun Registry.generateLayerSettingBuilderMethods(): List<String> {
     val generateType = { type: String ->
         when (type) {
             "BOOL32" -> "Bool32"
@@ -44,4 +46,18 @@ pub fn values_${it.name.value.lowercase()}(mut self, values: &'b [${generateType
 }
         """
     }
+}
+
+/** Generates ShaderModuleCreateInfoBuilder::code() that sets both code and code_size. */
+private fun Registry.generateShaderModuleCreateInfoCodeArrayMethod(): List<String> {
+    return listOf(
+        """
+#[inline]
+pub fn code(mut self, code: &'b [u32]) -> Self {
+    self.value.code_size = code_size.as_ptr() * 4;
+    self.value.code      = code.as_ptr();
+    self
+}
+        """,
+    )
 }

@@ -658,11 +658,7 @@ unsafe fn create_pipeline(device: &Device, data: &mut AppData) -> Result<()> {
 
 unsafe fn create_shader_module(device: &Device, bytecode: &[u8]) -> Result<vk::ShaderModule> {
     let bytecode = Bytecode::new(bytecode).unwrap();
-
-    let info = vk::ShaderModuleCreateInfo::builder()
-        .code_size(bytecode.code_size())
-        .code(bytecode.code());
-
+    let info = vk::ShaderModuleCreateInfo::builder().code(bytecode.code());
     Ok(device.create_shader_module(&info, None)?)
 }
 
