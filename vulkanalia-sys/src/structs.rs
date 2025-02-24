@@ -349,14 +349,42 @@ impl Default for AccelerationStructureInfoNV {
     }
 }
 
+bitfields32! {
+    struct AccelerationStructureInstanceKHRBitfields0 {
+        (instance_custom_index, with_instance_custom_index)[0 .. 24],
+        (mask, with_mask)[24 .. 32],
+    }
+}
+
+bitfields32! {
+    struct AccelerationStructureInstanceKHRBitfields1 {
+        (instance_shader_binding_table_record_offset, with_instance_shader_binding_table_record_offset)[0 .. 24],
+        (flags, with_flags)[24 .. 32],
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureInstanceKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct AccelerationStructureInstanceKHR {
     pub transform: TransformMatrixKHR,
-    pub instance_custom_index_and_mask: Bitfield24_8,
-    pub instance_shader_binding_table_record_offset_and_flags: Bitfield24_8,
     pub acceleration_structure_reference: u64,
+    pub bitfields0: AccelerationStructureInstanceKHRBitfields0,
+    pub bitfields1: AccelerationStructureInstanceKHRBitfields1,
+}
+
+bitfields32! {
+    struct AccelerationStructureMatrixMotionInstanceNVBitfields0 {
+        (instance_custom_index, with_instance_custom_index)[0 .. 24],
+        (mask, with_mask)[24 .. 32],
+    }
+}
+
+bitfields32! {
+    struct AccelerationStructureMatrixMotionInstanceNVBitfields1 {
+        (instance_shader_binding_table_record_offset, with_instance_shader_binding_table_record_offset)[0 .. 24],
+        (flags, with_flags)[24 .. 32],
+    }
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureMatrixMotionInstanceNV.html>
@@ -365,9 +393,9 @@ pub struct AccelerationStructureInstanceKHR {
 pub struct AccelerationStructureMatrixMotionInstanceNV {
     pub transform_t0: TransformMatrixKHR,
     pub transform_t1: TransformMatrixKHR,
-    pub instance_custom_index_and_mask: Bitfield24_8,
-    pub instance_shader_binding_table_record_offset_and_flags: Bitfield24_8,
     pub acceleration_structure_reference: u64,
+    pub bitfields0: AccelerationStructureMatrixMotionInstanceNVBitfields0,
+    pub bitfields1: AccelerationStructureMatrixMotionInstanceNVBitfields1,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureMemoryRequirementsInfoNV.html>
@@ -423,15 +451,29 @@ pub struct AccelerationStructureMotionInstanceNV {
     pub data: AccelerationStructureMotionInstanceDataNV,
 }
 
+bitfields32! {
+    struct AccelerationStructureSRTMotionInstanceNVBitfields0 {
+        (instance_custom_index, with_instance_custom_index)[0 .. 24],
+        (mask, with_mask)[24 .. 32],
+    }
+}
+
+bitfields32! {
+    struct AccelerationStructureSRTMotionInstanceNVBitfields1 {
+        (instance_shader_binding_table_record_offset, with_instance_shader_binding_table_record_offset)[0 .. 24],
+        (flags, with_flags)[24 .. 32],
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureSRTMotionInstanceNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct AccelerationStructureSRTMotionInstanceNV {
     pub transform_t0: SRTDataNV,
     pub transform_t1: SRTDataNV,
-    pub instance_custom_index_and_mask: Bitfield24_8,
-    pub instance_shader_binding_table_record_offset_and_flags: Bitfield24_8,
     pub acceleration_structure_reference: u64,
+    pub bitfields0: AccelerationStructureSRTMotionInstanceNVBitfields0,
+    pub bitfields1: AccelerationStructureSRTMotionInstanceNVBitfields1,
 }
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureTrianglesDisplacementMicromapNV.html>
