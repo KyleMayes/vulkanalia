@@ -79,26 +79,28 @@ private fun Registry.generateEnum(
     enum: Enum,
     documentation: String? = null,
 ): String {
-    val debug = if (enum.name.value == "SuccessCode" || enum.name.value == "ErrorCode") {
-            generateFalseFmtImpl(enum, "Debug")
+    val debug =
+        if (enum.name.value == "SuccessCode" || enum.name.value == "ErrorCode") {
+            generateResultFmtImpl(enum, "Debug")
         } else {
             generateFmtImpl(enum, "Debug", "self.0.fmt(f)") { "\"${it.name}\"" }
         }
 
-    val error = if (enum.name.value == "Result" || enum.name.value == "ErrorCode") {
+    val error =
+        if (enum.name.value == "Result" || enum.name.value == "ErrorCode") {
             "#[cfg(any(feature=\"std\", feature=\"no_std_error\"))] impl error::Error for ${enum.name} { }"
         } else {
             ""
         }
 
     val display =
-        if (enum.name.value == "Result") {
-            val default = "write!(f, \"unknown Vulkan result (code = {})\", self.0)"
-            generateFmtImpl(enum, "Display", default) { "\"${results[it.value] ?: it.name.value}\"" }
-        } else if (enum.name.value == "ErrorCode") {
-            generateFalseFmtImpl(enum, "Display")
-        } else {
-            ""
+        when (enum.name.value) {
+            "Result" -> {
+                val default = "write!(f, \"unknown Vulkan result (code = {})\", self.0)"
+                generateFmtImpl(enum, "Display", default) { "\"${results[it.value] ?: it.name.value}\"" }
+            }
+            "SuccessCode", "ErrorCode" -> generateResultFmtImpl(enum, "Display")
+            else -> ""
         }
 
     return """
@@ -146,8 +148,8 @@ impl fmt::$trait for ${enum.name} {
 }
     """
 
-/** Generates a Rust `Debug` or `Display` trait that defers to Result's. */
-private fun generateFalseFmtImpl(
+/** Generates a Rust `Debug` or `Display` trait that defers to the existing implementation for `vk::Result`. */
+private fun generateResultFmtImpl(
     enum: Enum,
     trait: String,
 ) = """
@@ -156,7 +158,7 @@ impl fmt::$trait for ${enum.name} {
         Result::from_raw(self.as_raw()).fmt(f)
     }
 }
-            """
+    """
 
 /** The descriptions for Vulkan result codes. */
 @Suppress("ktlint:standard:max-line-length")
