@@ -210,7 +210,7 @@ unsafe fn update_command_buffer(&mut self, image_index: usize) -> Result<()> {
 
 Now when you run the program you should see stable memory usage instead of the program trying to gobble up all of the RAM on your system as if it thinks it's an Electron application.
 
-We no longer need the `vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER` flag for our command pool since we aren't resetting command pools any more. Leaving this flag wouldn't affect the correctness of our program, but it could have a negative performance impact since it forces the command pool to allocate command buffers in such a way that they are resettable.
+We no longer need the `vk::CommandPoolCreateFlags::RESET_COMMAND_BUFFER` flag for our command pool since we aren't resetting command buffers any more. Leaving this flag wouldn't affect the correctness of our program, but it could have a negative performance impact since it forces the command pool to allocate command buffers in such a way that they are resettable.
 
 We'll replace this flag with `vk::CommandPoolCreateFlags::TRANSIENT` which tells Vulkan that the command buffers we'll be allocating with this command pool will be "transient", i.e. short-lived.
 
