@@ -141,7 +141,7 @@
     device: Device,
 }
 </code></pre>
-<p>Next, add a <code>create_logical_device</code> function that is called from <code>App:create</code> and add the resulting logical device to the <code>App</code> initializer:</p>
+<p>Next, add a <code>create_logical_device</code> function that is called from <code>App::create</code> and add the resulting logical device to the <code>App</code> initializer:</p>
 <pre><code class="language-rust noplaypen">impl App {
     unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
         // ...
