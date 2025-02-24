@@ -151,7 +151,7 @@ struct UniformBufferObject {
     proj: Mat4,
 }
 </code></pre>
-<p>Then we can copy the data to a <a href="https://docs.rs/vulkanalia/0.26.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a> and access it through a uniform buffer object descriptor from the vertex shader like this:</p>
+<p>Then we can copy the data to a <a href="https://docs.rs/vulkanalia/0.27.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a> and access it through a uniform buffer object descriptor from the vertex shader like this:</p>
 <pre><code class="language-glsl">layout(binding = 0) uniform UniformBufferObject {
     mat4 model;
     mat4 view;
@@ -202,7 +202,7 @@ struct UniformBufferObject {
     proj: Mat4,
 }
 </code></pre>
-<p>We can exactly match the definition in the shader using data types in the <code>cgmath</code> crate. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a <code>UniformBufferObject</code> to a <a href="https://docs.rs/vulkanalia/0.26.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>.</p>
+<p>We can exactly match the definition in the shader using data types in the <code>cgmath</code> crate. The data in the matrices is binary compatible with the way the shader expects it, so we can later just copy a <code>UniformBufferObject</code> to a <a href="https://docs.rs/vulkanalia/0.27.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>.</p>
 <p>We need to provide details about every descriptor binding used in the shaders for pipeline creation, just like we had to do for every vertex attribute and its <code>location</code> index. We'll set up a new function to define all of this information called <code>create_descriptor_set_layout</code>. It should be called right before pipeline creation, because we're going to need it there.</p>
 <pre><code class="language-rust noplaypen">impl App {
     unsafe fn create(window: &amp;Window) -&gt; Result&lt;Self&gt; {
@@ -221,7 +221,7 @@ unsafe fn create_descriptor_set_layout(
     Ok(())
 }
 </code></pre>
-<p>Every binding needs to be described through a <a href="https://docs.rs/vulkanalia/0.26.0/vulkanalia/vk/struct.DescriptorSetLayoutBinding.html"><code class="hljs">vk::DescriptorSetLayoutBinding</code></a> struct.</p>
+<p>Every binding needs to be described through a <a href="https://docs.rs/vulkanalia/0.27.0/vulkanalia/vk/struct.DescriptorSetLayoutBinding.html"><code class="hljs">vk::DescriptorSetLayoutBinding</code></a> struct.</p>
 <pre><code class="language-rust noplaypen">unsafe fn create_descriptor_set_layout(
     device: &amp;Device,
     data: &amp;mut AppData,
@@ -236,9 +236,9 @@ unsafe fn create_descriptor_set_layout(
 }
 </code></pre>
 <p>The first two fields specify the <code>binding</code> used in the shader and the type of descriptor, which is a uniform buffer object. It is possible for the shader variable to represent an array of uniform buffer objects, and <code>descriptor_count</code> specifies the number of values in the array. This could be used to specify a transformation for each of the bones in a skeleton for skeletal animation, for example. Our MVP transformation is in a single uniform buffer object, so we're using a <code>descriptor_count</code> of <code>1</code>.</p>
-<p>We also need to specify in which shader stages the descriptor is going to be referenced. The <code>stage_flags</code> field can be a combination of <a href="https://docs.rs/vulkanalia/0.26.0/vulkanalia/vk/struct.ShaderStageFlags.html"><code class="hljs">vk::ShaderStageFlags</code></a> values or the value <a href="https://docs.rs/vulkanalia/0.26.0/vulkanalia/vk/struct.ShaderStageFlags.html#associatedconstant.ALL_GRAPHICS"><code class="hljs">vk::ShaderStageFlags::ALL_GRAPHICS</code></a>. In our case, we're only referencing the descriptor from the vertex shader.</p>
+<p>We also need to specify in which shader stages the descriptor is going to be referenced. The <code>stage_flags</code> field can be a combination of <a href="https://docs.rs/vulkanalia/0.27.0/vulkanalia/vk/struct.ShaderStageFlags.html"><code class="hljs">vk::ShaderStageFlags</code></a> values or the value <a href="https://docs.rs/vulkanalia/0.27.0/vulkanalia/vk/struct.ShaderStageFlags.html#associatedconstant.ALL_GRAPHICS"><code class="hljs">vk::ShaderStageFlags::ALL_GRAPHICS</code></a>. In our case, we're only referencing the descriptor from the vertex shader.</p>
 <p>There is also an <code>immutable_samplers</code> field which is only relevant for image sampling related descriptors, which we'll look at later. You can leave this to its default value.</p>
-<p>All of the descriptor bindings are combined into a single <a href="https://docs.rs/vulkanalia/0.26.0/vulkanalia/vk/struct.DescriptorSetLayout.html"><code class="hljs">vk::DescriptorSetLayout</code></a> object. Define a new <code>AppData</code> field above <code>pipeline_layout</code>:</p>
+<p>All of the descriptor bindings are combined into a single <a href="https://docs.rs/vulkanalia/0.27.0/vulkanalia/vk/struct.DescriptorSetLayout.html"><code class="hljs">vk::DescriptorSetLayout</code></a> object. Define a new <code>AppData</code> field above <code>pipeline_layout</code>:</p>
 <pre><code class="language-rust noplaypen">struct AppData {
     // ...
     descriptor_set_layout: vk::DescriptorSetLayout,
@@ -246,14 +246,14 @@ unsafe fn create_descriptor_set_layout(
     // ...
 }
 </code></pre>
-<p>We can then create it using <a href="https://docs.rs/vulkanalia/0.26.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_descriptor_set_layout"><code class="hljs">create_descriptor_set_layout</code></a>. This function accepts a simple <a href="https://docs.rs/vulkanalia/0.26.0/vulkanalia/vk/struct.DescriptorSetLayoutCreateInfo.html"><code class="hljs">vk::DescriptorSetLayoutCreateInfo</code></a> with the array of bindings:</p>
+<p>We can then create it using <a href="https://docs.rs/vulkanalia/0.27.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_descriptor_set_layout"><code class="hljs">create_descriptor_set_layout</code></a>. This function accepts a simple <a href="https://docs.rs/vulkanalia/0.27.0/vulkanalia/vk/struct.DescriptorSetLayoutCreateInfo.html"><code class="hljs">vk::DescriptorSetLayoutCreateInfo</code></a> with the array of bindings:</p>
 <pre><code class="language-rust noplaypen">let bindings = &amp;[ubo_binding];
 let info = vk::DescriptorSetLayoutCreateInfo::builder()
     .bindings(bindings);
 
 data.descriptor_set_layout = device.create_descriptor_set_layout(&amp;info, None)?;
 </code></pre>
-<p>We need to specify the descriptor set layout during pipeline creation to tell Vulkan which descriptors the shaders will be using. Descriptor set layouts are specified in the pipeline layout object. Modify the <a href="https://docs.rs/vulkanalia/0.26.0/vulkanalia/vk/struct.PipelineLayoutCreateInfo.html"><code class="hljs">vk::PipelineLayoutCreateInfo</code></a> to reference the layout object:</p>
+<p>We need to specify the descriptor set layout during pipeline creation to tell Vulkan which descriptors the shaders will be using. Descriptor set layouts are specified in the pipeline layout object. Modify the <a href="https://docs.rs/vulkanalia/0.27.0/vulkanalia/vk/struct.PipelineLayoutCreateInfo.html"><code class="hljs">vk::PipelineLayoutCreateInfo</code></a> to reference the layout object:</p>
 <pre><code class="language-rust noplaypen">let set_layouts = &amp;[data.descriptor_set_layout];
 let layout_info = vk::PipelineLayoutCreateInfo::builder()
     .set_layouts(set_layouts);
@@ -315,7 +315,7 @@ unsafe fn create_uniform_buffers(
     Ok(())
 }
 </code></pre>
-<p>We're going to write a separate function that updates the uniform buffer with a new transformation every frame, so there will be no <a href="https://docs.rs/vulkanalia/0.26.0/vulkanalia/vk/trait.DeviceV1_0.html#method.map_memory"><code class="hljs">map_memory</code></a> here. The uniform data will be used for all draw calls, so the buffer containing it should only be destroyed when we stop rendering. Since it also depends on the number of swapchain images, which could change after a recreation, we'll clean it up in <code>destroy_swapchain</code>:</p>
+<p>We're going to write a separate function that updates the uniform buffer with a new transformation every frame, so there will be no <a href="https://docs.rs/vulkanalia/0.27.0/vulkanalia/vk/trait.DeviceV1_0.html#method.map_memory"><code class="hljs">map_memory</code></a> here. The uniform data will be used for all draw calls, so the buffer containing it should only be destroyed when we stop rendering. Since it also depends on the number of swapchain images, which could change after a recreation, we'll clean it up in <code>destroy_swapchain</code>:</p>
 <pre><code class="language-rust noplaypen">unsafe fn destroy_swapchain(&amp;mut self) {
     self.data.uniform_buffers
         .iter()
@@ -422,7 +422,7 @@ memcpy(&amp;ubo, memory.cast(), 1);
 self.device.unmap_memory(self.data.uniform_buffers_memory[image_index]);
 </code></pre>
 <p>Using a UBO this way is not the most efficient way to pass frequently changing values to the shader. A more efficient way to pass a small buffer of data to shaders are <em>push constants</em>. We may look at these in a future chapter.</p>
-<p>If you run the program now, you'll get errors about unbound descriptor sets from the validation layer and nothing will be rendered. In the next chapter we'll look at these descriptor sets, which will actually bind the <a href="https://docs.rs/vulkanalia/0.26.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>s to the uniform buffer descriptors so that the shader can access this transformation data and get our program in running order again.</p>
+<p>If you run the program now, you'll get errors about unbound descriptor sets from the validation layer and nothing will be rendered. In the next chapter we'll look at these descriptor sets, which will actually bind the <a href="https://docs.rs/vulkanalia/0.27.0/vulkanalia/vk/struct.Buffer.html"><code class="hljs">vk::Buffer</code></a>s to the uniform buffer descriptors so that the shader can access this transformation data and get our program in running order again.</p>
 
                     </main>
 
