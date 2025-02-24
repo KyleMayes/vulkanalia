@@ -79,15 +79,28 @@ private fun Registry.generateEnum(
     enum: Enum,
     documentation: String? = null,
 ): String {
-    val debug = generateFmtImpl(enum, "Debug", "self.0.fmt(f)") { "\"${it.name}\"" }
-
-    val (display, error) =
-        if (enum.name.value == "Result" || enum.name.value == "ErrorCode") {
-            val default = "write!(f, \"unknown Vulkan result (code = {})\", self.0)"
-            val display = generateFmtImpl(enum, "Display", default) { "\"${results[it.value] ?: it.name.value}\"" }
-            display to "#[cfg(any(feature=\"std\", feature=\"no_std_error\"))] impl error::Error for ${enum.name} { }"
+    val debug =
+        if (enum.name.value == "SuccessCode" || enum.name.value == "ErrorCode") {
+            generateResultFmtImpl(enum, "Debug")
         } else {
-            "" to ""
+            generateFmtImpl(enum, "Debug", "self.0.fmt(f)") { "\"${it.name}\"" }
+        }
+
+    val error =
+        if (enum.name.value == "Result" || enum.name.value == "ErrorCode") {
+            "#[cfg(any(feature=\"std\", feature=\"no_std_error\"))] impl error::Error for ${enum.name} { }"
+        } else {
+            ""
+        }
+
+    val display =
+        when (enum.name.value) {
+            "Result" -> {
+                val default = "write!(f, \"unknown Vulkan result (code = {})\", self.0)"
+                generateFmtImpl(enum, "Display", default) { "\"${results[it.value] ?: it.name.value}\"" }
+            }
+            "SuccessCode", "ErrorCode" -> generateResultFmtImpl(enum, "Display")
+            else -> ""
         }
 
     return """
@@ -131,6 +144,18 @@ impl fmt::$trait for ${enum.name} {
             ${enum.variants.joinToString(",\n            ") { "${it.value} => write!(f, ${f(it)})" }},
             _ => $default,
         }
+    }
+}
+    """
+
+/** Generates a Rust `Debug` or `Display` trait that defers to the existing implementation for `vk::Result`. */
+private fun generateResultFmtImpl(
+    enum: Enum,
+    trait: String,
+) = """
+impl fmt::$trait for ${enum.name} {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        Result::from_raw(self.as_raw()).fmt(f)
     }
 }
     """
