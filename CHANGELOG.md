@@ -1,7 +1,14 @@
-## [0.27.0] - 2024-12-28
+## [0.27.0] - 2025-02-23
 
 ### Changed
 - Reworked builder for `vk::LayerSettingEXT` with different builder methods for different value types
+
+### Added
+- Added `fmt::Display` implementation for `vk::SuccessCode`
+
+### Fixed
+- Added missing descriptions (returned by `fmt::Display`) for `vk::Result`
+- Fixed `fmt::Debug` implementation for `vk::SuccessCode` not always printing appropriate Vulkan result
 
 ## [0.26.0] - 2024-12-28
 
