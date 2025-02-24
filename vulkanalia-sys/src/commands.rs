@@ -433,11 +433,23 @@ pub type PFN_vkCmdBuildAccelerationStructuresKHR = unsafe extern "system" fn(
     _build_range_infos: *const *const AccelerationStructureBuildRangeInfoKHR,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBuildClusterAccelerationStructureIndirectNV.html>
+pub type PFN_vkCmdBuildClusterAccelerationStructureIndirectNV = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _command_infos: *const ClusterAccelerationStructureCommandsInfoNV,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBuildMicromapsEXT.html>
 pub type PFN_vkCmdBuildMicromapsEXT = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _info_count: u32,
     _infos: *const MicromapBuildInfoEXT,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBuildPartitionedAccelerationStructuresNV.html>
+pub type PFN_vkCmdBuildPartitionedAccelerationStructuresNV = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _build_info: *const BuildPartitionedAccelerationStructureInfoNV,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdClearAttachments.html>
@@ -473,6 +485,13 @@ pub type PFN_vkCmdClearDepthStencilImage = unsafe extern "system" fn(
 pub type PFN_vkCmdControlVideoCodingKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _coding_control_info: *const VideoCodingControlInfoKHR,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdConvertCooperativeVectorMatrixNV.html>
+pub type PFN_vkCmdConvertCooperativeVectorMatrixNV = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _info_count: u32,
+    _infos: *const ConvertCooperativeVectorMatrixInfoNV,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyAccelerationStructureKHR.html>
@@ -1882,6 +1901,12 @@ pub type PFN_vkCmdWriteTimestamp2KHR = PFN_vkCmdWriteTimestamp2;
 pub type PFN_vkCompileDeferredNV =
     unsafe extern "system" fn(_device: Device, _pipeline: Pipeline, _shader: u32) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkConvertCooperativeVectorMatrixNV.html>
+pub type PFN_vkConvertCooperativeVectorMatrixNV = unsafe extern "system" fn(
+    _device: Device,
+    _info: *const ConvertCooperativeVectorMatrixInfoNV,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCopyAccelerationStructureKHR.html>
 pub type PFN_vkCopyAccelerationStructureKHR = unsafe extern "system" fn(
     _device: Device,
@@ -3079,6 +3104,13 @@ pub type PFN_vkGetCalibratedTimestampsKHR = unsafe extern "system" fn(
     _max_deviation: *mut u64,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetClusterAccelerationStructureBuildSizesNV.html>
+pub type PFN_vkGetClusterAccelerationStructureBuildSizesNV = unsafe extern "system" fn(
+    _device: Device,
+    _info: *const ClusterAccelerationStructureInputInfoNV,
+    _size_info: *mut AccelerationStructureBuildSizesInfoKHR,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetCudaModuleCacheNV.html>
 pub type PFN_vkGetCudaModuleCacheNV = unsafe extern "system" fn(
     _device: Device,
@@ -3548,6 +3580,21 @@ pub type PFN_vkGetMemoryHostPointerPropertiesEXT = unsafe extern "system" fn(
     _memory_host_pointer_properties: *mut MemoryHostPointerPropertiesEXT,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryMetalHandleEXT.html>
+pub type PFN_vkGetMemoryMetalHandleEXT = unsafe extern "system" fn(
+    _device: Device,
+    _get_metal_handle_info: *const MemoryGetMetalHandleInfoEXT,
+    _handle: *mut *mut c_void,
+) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryMetalHandlePropertiesEXT.html>
+pub type PFN_vkGetMemoryMetalHandlePropertiesEXT = unsafe extern "system" fn(
+    _device: Device,
+    _handle_type: ExternalMemoryHandleTypeFlags,
+    _handle: *const c_void,
+    _memory_metal_handle_properties: *mut MemoryMetalHandlePropertiesEXT,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryRemoteAddressNV.html>
 pub type PFN_vkGetMemoryRemoteAddressNV = unsafe extern "system" fn(
     _device: Device,
@@ -3608,6 +3655,13 @@ pub type PFN_vkGetMicromapBuildSizesEXT = unsafe extern "system" fn(
     _size_info: *mut MicromapBuildSizesInfoEXT,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPartitionedAccelerationStructuresBuildSizesNV.html>
+pub type PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV = unsafe extern "system" fn(
+    _device: Device,
+    _info: *const PartitionedAccelerationStructureInstancesInputNV,
+    _size_info: *mut AccelerationStructureBuildSizesInfoKHR,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPastPresentationTimingGOOGLE.html>
 pub type PFN_vkGetPastPresentationTimingGOOGLE = unsafe extern "system" fn(
     _device: Device,
@@ -3655,6 +3709,14 @@ pub type PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = unsafe extern "s
     _physical_device: PhysicalDevice,
     _property_count: *mut u32,
     _properties: *mut CooperativeMatrixPropertiesNV,
+)
+    -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeVectorPropertiesNV.html>
+pub type PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV = unsafe extern "system" fn(
+    _physical_device: PhysicalDevice,
+    _property_count: *mut u32,
+    _properties: *mut CooperativeVectorPropertiesNV,
 )
     -> Result;
 

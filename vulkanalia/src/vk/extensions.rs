@@ -595,6 +595,15 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
 
 impl AndroidExternalMemoryAndroidHardwareBufferExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_pipeline_opacity_micromap.html>
+pub trait ArmPipelineOpacityMicromapExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = ARM_PIPELINE_OPACITY_MICROMAP_EXTENSION;
+}
+
+impl ArmPipelineOpacityMicromapExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_rasterization_order_attachment_access.html>
 pub trait ArmRasterizationOrderAttachmentAccessExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -2759,6 +2768,58 @@ pub trait ExtExternalMemoryHostExtension: DeviceV1_0 {
 }
 
 impl ExtExternalMemoryHostExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_external_memory_metal.html>
+pub trait ExtExternalMemoryMetalExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_EXTERNAL_MEMORY_METAL_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryMetalHandleEXT.html>
+    #[inline]
+    unsafe fn get_memory_metal_handle_ext(
+        &self,
+        get_metal_handle_info: &MemoryGetMetalHandleInfoEXT,
+    ) -> crate::VkResult<*mut c_void> {
+        let mut handle = MaybeUninit::<*mut c_void>::uninit();
+
+        let __result = (self.commands().get_memory_metal_handle_ext)(
+            self.handle(),
+            get_metal_handle_info,
+            handle.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(handle.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetMemoryMetalHandlePropertiesEXT.html>
+    #[inline]
+    unsafe fn get_memory_metal_handle_properties_ext(
+        &self,
+        handle_type: ExternalMemoryHandleTypeFlags,
+        handle: &c_void,
+        memory_metal_handle_properties: &mut MemoryMetalHandlePropertiesEXT,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().get_memory_metal_handle_properties_ext)(
+            self.handle(),
+            handle_type,
+            handle,
+            memory_metal_handle_properties,
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl ExtExternalMemoryMetalExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_filter_cubic.html>
 pub trait ExtFilterCubicExtension: DeviceV1_0 {
@@ -6912,6 +6973,15 @@ pub trait KhrDeferredHostOperationsExtension: DeviceV1_0 {
 
 impl KhrDeferredHostOperationsExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_depth_clamp_zero_one.html>
+pub trait KhrDepthClampZeroOneExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_DEPTH_CLAMP_ZERO_ONE_EXTENSION;
+}
+
+impl KhrDepthClampZeroOneExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_depth_stencil_resolve.html>
 pub trait KhrDepthStencilResolveExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -8825,6 +8895,15 @@ pub trait KhrMaintenance7Extension: DeviceV1_0 {
 
 impl KhrMaintenance7Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance8.html>
+pub trait KhrMaintenance8Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_MAINTENANCE8_EXTENSION;
+}
+
+impl KhrMaintenance8Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_map_memory2.html>
 pub trait KhrMapMemory2Extension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -10579,6 +10658,15 @@ pub trait KhrVideoMaintenance1Extension: DeviceV1_0 {
 
 impl KhrVideoMaintenance1Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_maintenance2.html>
+pub trait KhrVideoMaintenance2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_VIDEO_MAINTENANCE2_EXTENSION;
+}
+
+impl KhrVideoMaintenance2Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_queue.html>
 pub trait KhrVideoQueueExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -11414,6 +11502,43 @@ pub trait NvClipSpaceWScalingExtension: DeviceV1_0 {
 
 impl NvClipSpaceWScalingExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_cluster_acceleration_structure.html>
+pub trait NvClusterAccelerationStructureExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_CLUSTER_ACCELERATION_STRUCTURE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBuildClusterAccelerationStructureIndirectNV.html>
+    #[inline]
+    unsafe fn cmd_build_cluster_acceleration_structure_indirect_nv(
+        &self,
+        command_buffer: CommandBuffer,
+        command_infos: &ClusterAccelerationStructureCommandsInfoNV,
+    ) {
+        let __result = (self
+            .commands()
+            .cmd_build_cluster_acceleration_structure_indirect_nv)(
+            command_buffer, command_infos
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetClusterAccelerationStructureBuildSizesNV.html>
+    #[inline]
+    unsafe fn get_cluster_acceleration_structure_build_sizes_nv(
+        &self,
+        info: &ClusterAccelerationStructureInputInfoNV,
+        size_info: &mut AccelerationStructureBuildSizesInfoKHR,
+    ) {
+        let __result = (self
+            .commands()
+            .get_cluster_acceleration_structure_build_sizes_nv)(
+            self.handle(), info, size_info
+        );
+    }
+}
+
+impl NvClusterAccelerationStructureExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_command_buffer_inheritance.html>
 pub trait NvCommandBufferInheritanceExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -11521,6 +11646,80 @@ pub trait NvCooperativeMatrix2Extension: DeviceV1_0 {
 }
 
 impl NvCooperativeMatrix2Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_cooperative_vector.html>
+pub trait NvCooperativeVectorExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_COOPERATIVE_VECTOR_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdConvertCooperativeVectorMatrixNV.html>
+    #[inline]
+    unsafe fn cmd_convert_cooperative_vector_matrix_nv(
+        &self,
+        command_buffer: CommandBuffer,
+        infos: &[impl Cast<Target = ConvertCooperativeVectorMatrixInfoNV>],
+    ) {
+        let __result = (self.commands().cmd_convert_cooperative_vector_matrix_nv)(
+            command_buffer,
+            infos.len() as u32,
+            infos.as_ptr().cast(),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkConvertCooperativeVectorMatrixNV.html>
+    #[inline]
+    unsafe fn convert_cooperative_vector_matrix_nv(
+        &self,
+        info: &ConvertCooperativeVectorMatrixInfoNV,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().convert_cooperative_vector_matrix_nv)(self.handle(), info);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceCooperativeVectorPropertiesNV.html>
+    #[inline]
+    unsafe fn get_physical_device_cooperative_vector_properties_nv(
+        &self,
+        physical_device: PhysicalDevice,
+    ) -> crate::VkResult<Vec<CooperativeVectorPropertiesNV>> {
+        let mut property_count = 0;
+
+        (self
+            .commands()
+            .get_physical_device_cooperative_vector_properties_nv)(
+            physical_device,
+            &mut property_count,
+            ptr::null_mut(),
+        );
+
+        let mut properties = Vec::with_capacity(property_count as usize);
+
+        let __result = (self
+            .commands()
+            .get_physical_device_cooperative_vector_properties_nv)(
+            physical_device,
+            &mut property_count,
+            properties.as_mut_ptr(),
+        );
+
+        debug_assert!(properties.capacity() == property_count as usize);
+        properties.set_len(property_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(properties)
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl NvCooperativeVectorExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_copy_memory_indirect.html>
 pub trait NvCopyMemoryIndirectExtension: DeviceV1_0 {
@@ -12952,6 +13151,45 @@ pub trait NvOpticalFlowExtension: DeviceV1_0 {
 
 impl NvOpticalFlowExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_partitioned_acceleration_structure.html>
+pub trait NvPartitionedAccelerationStructureExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_PARTITIONED_ACCELERATION_STRUCTURE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBuildPartitionedAccelerationStructuresNV.html>
+    #[inline]
+    unsafe fn cmd_build_partitioned_acceleration_structures_nv(
+        &self,
+        command_buffer: CommandBuffer,
+        build_info: &BuildPartitionedAccelerationStructureInfoNV,
+    ) {
+        let __result = (self
+            .commands()
+            .cmd_build_partitioned_acceleration_structures_nv)(
+            command_buffer, build_info
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPartitionedAccelerationStructuresBuildSizesNV.html>
+    #[inline]
+    unsafe fn get_partitioned_acceleration_structures_build_sizes_nv(
+        &self,
+        info: &PartitionedAccelerationStructureInstancesInputNV,
+        size_info: &mut AccelerationStructureBuildSizesInfoKHR,
+    ) {
+        let __result = (self
+            .commands()
+            .get_partitioned_acceleration_structures_build_sizes_nv)(
+            self.handle(),
+            info,
+            size_info,
+        );
+    }
+}
+
+impl NvPartitionedAccelerationStructureExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_per_stage_descriptor_set.html>
 pub trait NvPerStageDescriptorSetExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -12969,6 +13207,24 @@ pub trait NvPresentBarrierExtension: DeviceV1_0 {
 }
 
 impl NvPresentBarrierExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_present_metering.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+pub trait NvPresentMeteringExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_PRESENT_METERING_EXTENSION;
+}
+
+#[cfg(feature = "provisional")]
+impl NvPresentMeteringExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_private_vendor_info.html>
 pub trait NvPrivateVendorInfoExtension: DeviceV1_0 {
@@ -13269,6 +13525,15 @@ pub trait NvRayTracingInvocationReorderExtension: DeviceV1_0 {
 }
 
 impl NvRayTracingInvocationReorderExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_ray_tracing_linear_swept_spheres.html>
+pub trait NvRayTracingLinearSweptSpheresExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_RAY_TRACING_LINEAR_SWEPT_SPHERES_EXTENSION;
+}
+
+impl NvRayTracingLinearSweptSpheresExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_ray_tracing_motion_blur.html>
 pub trait NvRayTracingMotionBlurExtension: DeviceV1_0 {

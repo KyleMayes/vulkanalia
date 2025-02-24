@@ -112,6 +112,28 @@ impl fmt::Debug for ClearValue {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClusterAccelerationStructureOpInputNV.html>
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union ClusterAccelerationStructureOpInputNV {
+    pub clusters_bottom_level: *mut ClusterAccelerationStructureClustersBottomLevelInputNV,
+    pub triangle_clusters: *mut ClusterAccelerationStructureTriangleClusterInputNV,
+    pub move_objects: *mut ClusterAccelerationStructureMoveObjectsInputNV,
+}
+
+impl Default for ClusterAccelerationStructureOpInputNV {
+    #[inline]
+    fn default() -> Self {
+        unsafe { MaybeUninit::zeroed().assume_init() }
+    }
+}
+
+impl fmt::Debug for ClusterAccelerationStructureOpInputNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "ClusterAccelerationStructureOpInputNV")
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorDataEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone)]

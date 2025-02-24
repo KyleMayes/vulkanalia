@@ -86,11 +86,16 @@ pub struct DeviceCommands {
     pub cmd_build_acceleration_structures_indirect_khr:
         PFN_vkCmdBuildAccelerationStructuresIndirectKHR,
     pub cmd_build_acceleration_structures_khr: PFN_vkCmdBuildAccelerationStructuresKHR,
+    pub cmd_build_cluster_acceleration_structure_indirect_nv:
+        PFN_vkCmdBuildClusterAccelerationStructureIndirectNV,
     pub cmd_build_micromaps_ext: PFN_vkCmdBuildMicromapsEXT,
+    pub cmd_build_partitioned_acceleration_structures_nv:
+        PFN_vkCmdBuildPartitionedAccelerationStructuresNV,
     pub cmd_clear_attachments: PFN_vkCmdClearAttachments,
     pub cmd_clear_color_image: PFN_vkCmdClearColorImage,
     pub cmd_clear_depth_stencil_image: PFN_vkCmdClearDepthStencilImage,
     pub cmd_control_video_coding_khr: PFN_vkCmdControlVideoCodingKHR,
+    pub cmd_convert_cooperative_vector_matrix_nv: PFN_vkCmdConvertCooperativeVectorMatrixNV,
     pub cmd_copy_acceleration_structure_khr: PFN_vkCmdCopyAccelerationStructureKHR,
     pub cmd_copy_acceleration_structure_nv: PFN_vkCmdCopyAccelerationStructureNV,
     pub cmd_copy_acceleration_structure_to_memory_khr:
@@ -324,6 +329,7 @@ pub struct DeviceCommands {
     pub cmd_write_timestamp2: PFN_vkCmdWriteTimestamp2,
     pub cmd_write_timestamp2_khr: PFN_vkCmdWriteTimestamp2KHR,
     pub compile_deferred_nv: PFN_vkCompileDeferredNV,
+    pub convert_cooperative_vector_matrix_nv: PFN_vkConvertCooperativeVectorMatrixNV,
     pub copy_acceleration_structure_khr: PFN_vkCopyAccelerationStructureKHR,
     pub copy_acceleration_structure_to_memory_khr: PFN_vkCopyAccelerationStructureToMemoryKHR,
     pub copy_image_to_image: PFN_vkCopyImageToImage,
@@ -468,6 +474,8 @@ pub struct DeviceCommands {
         PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT,
     pub get_calibrated_timestamps_ext: PFN_vkGetCalibratedTimestampsEXT,
     pub get_calibrated_timestamps_khr: PFN_vkGetCalibratedTimestampsKHR,
+    pub get_cluster_acceleration_structure_build_sizes_nv:
+        PFN_vkGetClusterAccelerationStructureBuildSizesNV,
     pub get_cuda_module_cache_nv: PFN_vkGetCudaModuleCacheNV,
     pub get_deferred_operation_max_concurrency_khr: PFN_vkGetDeferredOperationMaxConcurrencyKHR,
     pub get_deferred_operation_result_khr: PFN_vkGetDeferredOperationResultKHR,
@@ -542,6 +550,8 @@ pub struct DeviceCommands {
     pub get_memory_fd_khr: PFN_vkGetMemoryFdKHR,
     pub get_memory_fd_properties_khr: PFN_vkGetMemoryFdPropertiesKHR,
     pub get_memory_host_pointer_properties_ext: PFN_vkGetMemoryHostPointerPropertiesEXT,
+    pub get_memory_metal_handle_ext: PFN_vkGetMemoryMetalHandleEXT,
+    pub get_memory_metal_handle_properties_ext: PFN_vkGetMemoryMetalHandlePropertiesEXT,
     pub get_memory_remote_address_nv: PFN_vkGetMemoryRemoteAddressNV,
     pub get_memory_sci_buf_nv: PFN_vkGetMemorySciBufNV,
     pub get_memory_win32_handle_khr: PFN_vkGetMemoryWin32HandleKHR,
@@ -550,6 +560,8 @@ pub struct DeviceCommands {
     pub get_memory_zircon_handle_fuchsia: PFN_vkGetMemoryZirconHandleFUCHSIA,
     pub get_memory_zircon_handle_properties_fuchsia: PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA,
     pub get_micromap_build_sizes_ext: PFN_vkGetMicromapBuildSizesEXT,
+    pub get_partitioned_acceleration_structures_build_sizes_nv:
+        PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV,
     pub get_past_presentation_timing_google: PFN_vkGetPastPresentationTimingGOOGLE,
     pub get_performance_parameter_intel: PFN_vkGetPerformanceParameterINTEL,
     pub get_physical_device_calibrateable_time_domains_ext:
@@ -562,6 +574,8 @@ pub struct DeviceCommands {
         PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR,
     pub get_physical_device_cooperative_matrix_properties_nv:
         PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV,
+    pub get_physical_device_cooperative_vector_properties_nv:
+        PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV,
     pub get_physical_device_external_memory_sci_buf_properties_nv:
         PFN_vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV,
     pub get_physical_device_fragment_shading_rates_khr:
@@ -1608,6 +1622,24 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_build_cluster_acceleration_structure_indirect_nv: {
+                let value = loader(
+                    b"vkCmdBuildClusterAccelerationStructureIndirectNV\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _command_infos: *const ClusterAccelerationStructureCommandsInfoNV,
+                    ) {
+                        panic!("could not load vkCmdBuildClusterAccelerationStructureIndirectNV")
+                    }
+                    fallback
+                }
+            },
             cmd_build_micromaps_ext: {
                 let value = loader(b"vkCmdBuildMicromapsEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -1619,6 +1651,24 @@ impl DeviceCommands {
                         _infos: *const MicromapBuildInfoEXT,
                     ) {
                         panic!("could not load vkCmdBuildMicromapsEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_build_partitioned_acceleration_structures_nv: {
+                let value = loader(
+                    b"vkCmdBuildPartitionedAccelerationStructuresNV\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _build_info: *const BuildPartitionedAccelerationStructureInfoNV,
+                    ) {
+                        panic!("could not load vkCmdBuildPartitionedAccelerationStructuresNV")
                     }
                     fallback
                 }
@@ -1686,6 +1736,21 @@ impl DeviceCommands {
                         _coding_control_info: *const VideoCodingControlInfoKHR,
                     ) {
                         panic!("could not load vkCmdControlVideoCodingKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_convert_cooperative_vector_matrix_nv: {
+                let value = loader(b"vkCmdConvertCooperativeVectorMatrixNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _info_count: u32,
+                        _infos: *const ConvertCooperativeVectorMatrixInfoNV,
+                    ) {
+                        panic!("could not load vkCmdConvertCooperativeVectorMatrixNV")
                     }
                     fallback
                 }
@@ -5183,6 +5248,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            convert_cooperative_vector_matrix_nv: {
+                let value = loader(b"vkConvertCooperativeVectorMatrixNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const ConvertCooperativeVectorMatrixInfoNV,
+                    ) -> Result {
+                        panic!("could not load vkConvertCooperativeVectorMatrixNV")
+                    }
+                    fallback
+                }
+            },
             copy_acceleration_structure_khr: {
                 let value = loader(b"vkCopyAccelerationStructureKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -7326,6 +7405,25 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_cluster_acceleration_structure_build_sizes_nv: {
+                let value = loader(
+                    b"vkGetClusterAccelerationStructureBuildSizesNV\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const ClusterAccelerationStructureInputInfoNV,
+                        _size_info: *mut AccelerationStructureBuildSizesInfoKHR,
+                    ) {
+                        panic!("could not load vkGetClusterAccelerationStructureBuildSizesNV")
+                    }
+                    fallback
+                }
+            },
             get_cuda_module_cache_nv: {
                 let value = loader(b"vkGetCudaModuleCacheNV\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -8380,6 +8478,37 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_memory_metal_handle_ext: {
+                let value = loader(b"vkGetMemoryMetalHandleEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _get_metal_handle_info: *const MemoryGetMetalHandleInfoEXT,
+                        _handle: *mut *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetMemoryMetalHandleEXT")
+                    }
+                    fallback
+                }
+            },
+            get_memory_metal_handle_properties_ext: {
+                let value = loader(b"vkGetMemoryMetalHandlePropertiesEXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _handle_type: ExternalMemoryHandleTypeFlags,
+                        _handle: *const c_void,
+                        _memory_metal_handle_properties: *mut MemoryMetalHandlePropertiesEXT,
+                    ) -> Result {
+                        panic!("could not load vkGetMemoryMetalHandlePropertiesEXT")
+                    }
+                    fallback
+                }
+            },
             get_memory_remote_address_nv: {
                 let value = loader(b"vkGetMemoryRemoteAddressNV\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -8508,6 +8637,25 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_partitioned_acceleration_structures_build_sizes_nv: {
+                let value = loader(
+                    b"vkGetPartitionedAccelerationStructuresBuildSizesNV\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const PartitionedAccelerationStructureInstancesInputNV,
+                        _size_info: *mut AccelerationStructureBuildSizesInfoKHR,
+                    ) {
+                        panic!("could not load vkGetPartitionedAccelerationStructuresBuildSizesNV")
+                    }
+                    fallback
+                }
+            },
             get_past_presentation_timing_google: {
                 let value = loader(b"vkGetPastPresentationTimingGOOGLE\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -8630,6 +8778,25 @@ impl DeviceCommands {
                         _properties: *mut CooperativeMatrixPropertiesNV,
                     ) -> Result {
                         panic!("could not load vkGetPhysicalDeviceCooperativeMatrixPropertiesNV")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_cooperative_vector_properties_nv: {
+                let value = instance_loader(
+                    b"vkGetPhysicalDeviceCooperativeVectorPropertiesNV\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _property_count: *mut u32,
+                        _properties: *mut CooperativeVectorPropertiesNV,
+                    ) -> Result {
+                        panic!("could not load vkGetPhysicalDeviceCooperativeVectorPropertiesNV")
                     }
                     fallback
                 }
