@@ -24,7 +24,7 @@ use bitflags::bitflags;
 use crate::{Flags, Flags64};
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureCreateFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct AccelerationStructureCreateFlagsKHR: Flags {
@@ -35,21 +35,21 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureMotionInfoFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInfoFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct AccelerationStructureMotionInfoFlagsNV: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureMotionInstanceFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInstanceFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct AccelerationStructureMotionInstanceFlagsNV: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccessFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccessFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct AccessFlags: Flags {
@@ -85,7 +85,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccessFlags2.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccessFlags2.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct AccessFlags2: Flags64 {
@@ -136,21 +136,21 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAcquireProfilingLockFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAcquireProfilingLockFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct AcquireProfilingLockFlagsKHR: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAndroidSurfaceCreateFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidSurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct AndroidSurfaceCreateFlagsKHR: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentDescriptionFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentDescriptionFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct AttachmentDescriptionFlags: Flags {
@@ -159,7 +159,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct BufferCreateFlags: Flags {
@@ -174,7 +174,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferUsageFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferUsageFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct BufferUsageFlags: Flags {
@@ -208,7 +208,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferUsageFlags2.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferUsageFlags2.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct BufferUsageFlags2: Flags {
@@ -243,14 +243,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferViewCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferViewCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct BufferViewCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBuildAccelerationStructureFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBuildAccelerationStructureFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct BuildAccelerationStructureFlagsKHR: Flags {
@@ -269,7 +269,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBuildMicromapFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBuildMicromapFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct BuildMicromapFlagsEXT: Flags {
@@ -280,7 +280,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkColorComponentFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkColorComponentFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ColorComponentFlags: Flags {
@@ -292,7 +292,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferResetFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferResetFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct CommandBufferResetFlags: Flags {
@@ -301,7 +301,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferUsageFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferUsageFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct CommandBufferUsageFlags: Flags {
@@ -312,7 +312,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandPoolCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandPoolCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct CommandPoolCreateFlags: Flags {
@@ -323,7 +323,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandPoolResetFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandPoolResetFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct CommandPoolResetFlags: Flags {
@@ -332,14 +332,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandPoolTrimFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandPoolTrimFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct CommandPoolTrimFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCompositeAlphaFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCompositeAlphaFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct CompositeAlphaFlagsKHR: Flags {
@@ -351,7 +351,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkConditionalRenderingFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkConditionalRenderingFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ConditionalRenderingFlagsEXT: Flags {
@@ -360,7 +360,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCullModeFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCullModeFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct CullModeFlags: Flags {
@@ -372,7 +372,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugReportFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugReportFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DebugReportFlagsEXT: Flags {
@@ -385,7 +385,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugUtilsMessageSeverityFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsMessageSeverityFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DebugUtilsMessageSeverityFlagsEXT: Flags {
@@ -397,7 +397,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugUtilsMessageTypeFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsMessageTypeFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DebugUtilsMessageTypeFlagsEXT: Flags {
@@ -409,21 +409,21 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugUtilsMessengerCallbackDataFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsMessengerCallbackDataFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DebugUtilsMessengerCallbackDataFlagsEXT: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugUtilsMessengerCreateFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsMessengerCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DebugUtilsMessengerCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDependencyFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDependencyFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DependencyFlags: Flags {
@@ -435,7 +435,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorBindingFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorBindingFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DescriptorBindingFlags: Flags {
@@ -447,7 +447,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorPoolCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorPoolCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DescriptorPoolCreateFlags: Flags {
@@ -460,14 +460,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorPoolResetFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorPoolResetFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DescriptorPoolResetFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetLayoutCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DescriptorSetLayoutCreateFlags: Flags {
@@ -482,14 +482,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorUpdateTemplateCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DescriptorUpdateTemplateCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceAddressBindingFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceAddressBindingFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DeviceAddressBindingFlagsEXT: Flags {
@@ -498,14 +498,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DeviceCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceDiagnosticsConfigFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceDiagnosticsConfigFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DeviceDiagnosticsConfigFlagsNV: Flags {
@@ -517,7 +517,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupPresentModeFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupPresentModeFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DeviceGroupPresentModeFlagsKHR: Flags {
@@ -529,14 +529,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceMemoryReportFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceMemoryReportFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DeviceMemoryReportFlagsEXT: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceQueueCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceQueueCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DeviceQueueCreateFlags: Flags {
@@ -545,28 +545,28 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDirectDriverLoadingFlagsLUNARG.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDirectDriverLoadingFlagsLUNARG.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DirectDriverLoadingFlagsLUNARG: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDirectFBSurfaceCreateFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDirectFBSurfaceCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DirectFBSurfaceCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayModeCreateFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayModeCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DisplayModeCreateFlagsKHR: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayPlaneAlphaFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPlaneAlphaFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DisplayPlaneAlphaFlagsKHR: Flags {
@@ -578,14 +578,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplaySurfaceCreateFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplaySurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct DisplaySurfaceCreateFlagsKHR: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkEventCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkEventCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct EventCreateFlags: Flags {
@@ -594,7 +594,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMetalObjectTypeFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalObjectTypeFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ExportMetalObjectTypeFlagsEXT: Flags {
@@ -608,7 +608,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalFenceFeatureFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFenceFeatureFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ExternalFenceFeatureFlags: Flags {
@@ -618,7 +618,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalFenceHandleTypeFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFenceHandleTypeFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ExternalFenceHandleTypeFlags: Flags {
@@ -632,7 +632,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryFeatureFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryFeatureFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ExternalMemoryFeatureFlags: Flags {
@@ -643,7 +643,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryFeatureFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryFeatureFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ExternalMemoryFeatureFlagsNV: Flags {
@@ -654,7 +654,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryHandleTypeFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryHandleTypeFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ExternalMemoryHandleTypeFlags: Flags {
@@ -677,7 +677,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryHandleTypeFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryHandleTypeFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ExternalMemoryHandleTypeFlagsNV: Flags {
@@ -689,7 +689,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalSemaphoreFeatureFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalSemaphoreFeatureFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ExternalSemaphoreFeatureFlags: Flags {
@@ -699,7 +699,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalSemaphoreHandleTypeFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalSemaphoreHandleTypeFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ExternalSemaphoreHandleTypeFlags: Flags {
@@ -714,7 +714,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFenceCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFenceCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct FenceCreateFlags: Flags {
@@ -723,7 +723,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFenceImportFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFenceImportFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct FenceImportFlags: Flags {
@@ -732,7 +732,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFormatFeatureFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFormatFeatureFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct FormatFeatureFlags: Flags {
@@ -771,7 +771,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFormatFeatureFlags2.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFormatFeatureFlags2.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct FormatFeatureFlags2: Flags64 {
@@ -824,7 +824,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFrameBoundaryFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFrameBoundaryFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct FrameBoundaryFlagsEXT: Flags {
@@ -833,7 +833,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFramebufferCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFramebufferCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct FramebufferCreateFlags: Flags {
@@ -842,7 +842,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeometryFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeometryFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct GeometryFlagsKHR: Flags {
@@ -852,7 +852,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeometryInstanceFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeometryInstanceFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct GeometryInstanceFlagsKHR: Flags {
@@ -866,7 +866,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGraphicsPipelineLibraryFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGraphicsPipelineLibraryFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct GraphicsPipelineLibraryFlagsEXT: Flags {
@@ -878,14 +878,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkHeadlessSurfaceCreateFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHeadlessSurfaceCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct HeadlessSurfaceCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkHostImageCopyFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHostImageCopyFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct HostImageCopyFlags: Flags {
@@ -894,14 +894,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIOSSurfaceCreateFlagsMVK.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIOSSurfaceCreateFlagsMVK.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct IOSSurfaceCreateFlagsMVK: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageAspectFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageAspectFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ImageAspectFlags: Flags {
@@ -920,7 +920,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageCompressionFixedRateFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCompressionFixedRateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ImageCompressionFixedRateFlagsEXT: Flags {
@@ -953,7 +953,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageCompressionFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCompressionFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ImageCompressionFlagsEXT: Flags {
@@ -965,7 +965,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageConstraintsInfoFlagsFUCHSIA.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageConstraintsInfoFlagsFUCHSIA.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ImageConstraintsInfoFlagsFUCHSIA: Flags {
@@ -978,7 +978,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ImageCreateFlags: Flags {
@@ -1006,21 +1006,21 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageFormatConstraintsFlagsFUCHSIA.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageFormatConstraintsFlagsFUCHSIA.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ImageFormatConstraintsFlagsFUCHSIA: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImagePipeSurfaceCreateFlagsFUCHSIA.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImagePipeSurfaceCreateFlagsFUCHSIA.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ImagePipeSurfaceCreateFlagsFUCHSIA: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageUsageFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageUsageFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ImageUsageFlags: Flags {
@@ -1051,7 +1051,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageViewCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ImageViewCreateFlags: Flags {
@@ -1062,7 +1062,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsInputModeFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsInputModeFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct IndirectCommandsInputModeFlagsEXT: Flags {
@@ -1072,7 +1072,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsLayoutUsageFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutUsageFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct IndirectCommandsLayoutUsageFlagsEXT: Flags {
@@ -1082,7 +1082,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsLayoutUsageFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutUsageFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct IndirectCommandsLayoutUsageFlagsNV: Flags {
@@ -1093,7 +1093,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectStateFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectStateFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct IndirectStateFlagsNV: Flags {
@@ -1102,7 +1102,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkInstanceCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkInstanceCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct InstanceCreateFlags: Flags {
@@ -1111,14 +1111,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMacOSSurfaceCreateFlagsMVK.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMacOSSurfaceCreateFlagsMVK.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct MacOSSurfaceCreateFlagsMVK: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryAllocateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryAllocateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct MemoryAllocateFlags: Flags {
@@ -1129,7 +1129,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryDecompressionMethodFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryDecompressionMethodFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct MemoryDecompressionMethodFlagsNV: Flags {
@@ -1138,7 +1138,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryHeapFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryHeapFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct MemoryHeapFlags: Flags {
@@ -1148,7 +1148,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryMapFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryMapFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct MemoryMapFlags: Flags {
@@ -1157,7 +1157,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryPropertyFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryPropertyFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct MemoryPropertyFlags: Flags {
@@ -1174,7 +1174,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryUnmapFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryUnmapFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct MemoryUnmapFlags: Flags {
@@ -1183,14 +1183,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMetalSurfaceCreateFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMetalSurfaceCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct MetalSurfaceCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMicromapCreateFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMicromapCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct MicromapCreateFlagsEXT: Flags {
@@ -1199,7 +1199,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpticalFlowExecuteFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowExecuteFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct OpticalFlowExecuteFlagsNV: Flags {
@@ -1208,7 +1208,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpticalFlowGridSizeFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowGridSizeFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct OpticalFlowGridSizeFlagsNV: Flags {
@@ -1221,7 +1221,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpticalFlowSessionCreateFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowSessionCreateFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct OpticalFlowSessionCreateFlagsNV: Flags {
@@ -1234,7 +1234,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpticalFlowUsageFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowUsageFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct OpticalFlowUsageFlagsNV: Flags {
@@ -1248,7 +1248,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPeerMemoryFeatureFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPeerMemoryFeatureFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PeerMemoryFeatureFlags: Flags {
@@ -1260,7 +1260,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceCounterDescriptionFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceCounterDescriptionFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PerformanceCounterDescriptionFlagsKHR: Flags {
@@ -1270,7 +1270,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSchedulingControlsFlagsARM.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSchedulingControlsFlagsARM.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PhysicalDeviceSchedulingControlsFlagsARM: Flags {
@@ -1279,7 +1279,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCacheCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCacheCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineCacheCreateFlags: Flags {
@@ -1288,7 +1288,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineColorBlendStateCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineColorBlendStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineColorBlendStateCreateFlags: Flags {
@@ -1297,35 +1297,35 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCompilerControlFlagsAMD.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCompilerControlFlagsAMD.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineCompilerControlFlagsAMD: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCoverageModulationStateCreateFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCoverageModulationStateCreateFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineCoverageModulationStateCreateFlagsNV: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCoverageReductionStateCreateFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCoverageReductionStateCreateFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineCoverageReductionStateCreateFlagsNV: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCoverageToColorStateCreateFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCoverageToColorStateCreateFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineCoverageToColorStateCreateFlagsNV: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineCreateFlags: Flags {
@@ -1364,7 +1364,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCreateFlags2.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreateFlags2.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineCreateFlags2: Flags64 {
@@ -1407,7 +1407,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCreationFeedbackFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreationFeedbackFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineCreationFeedbackFlags: Flags {
@@ -1418,7 +1418,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineDepthStencilStateCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineDepthStencilStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineDepthStencilStateCreateFlags: Flags {
@@ -1428,28 +1428,28 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineDiscardRectangleStateCreateFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineDiscardRectangleStateCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineDiscardRectangleStateCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineDynamicStateCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineDynamicStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineDynamicStateCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineInputAssemblyStateCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineInputAssemblyStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineInputAssemblyStateCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineLayoutCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineLayoutCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineLayoutCreateFlags: Flags {
@@ -1458,42 +1458,42 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineMultisampleStateCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineMultisampleStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineMultisampleStateCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationConservativeStateCreateFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationConservativeStateCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineRasterizationConservativeStateCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationDepthClipStateCreateFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationDepthClipStateCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineRasterizationDepthClipStateCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationStateCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineRasterizationStateCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationStateStreamCreateFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationStateStreamCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineRasterizationStateStreamCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineShaderStageCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineShaderStageCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineShaderStageCreateFlags: Flags {
@@ -1503,7 +1503,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineStageFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineStageFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineStageFlags: Flags {
@@ -1537,7 +1537,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineStageFlags2.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineStageFlags2.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineStageFlags2: Flags64 {
@@ -1587,35 +1587,35 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineTessellationStateCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineTessellationStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineTessellationStateCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineVertexInputStateCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineVertexInputStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineVertexInputStateCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineViewportStateCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportStateCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineViewportStateCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineViewportSwizzleStateCreateFlagsNV.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportSwizzleStateCreateFlagsNV.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PipelineViewportSwizzleStateCreateFlagsNV: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPresentGravityFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentGravityFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PresentGravityFlagsEXT: Flags {
@@ -1626,7 +1626,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPresentScalingFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentScalingFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PresentScalingFlagsEXT: Flags {
@@ -1637,14 +1637,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPrivateDataSlotCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPrivateDataSlotCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct PrivateDataSlotCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryControlFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryControlFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct QueryControlFlags: Flags {
@@ -1653,7 +1653,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryPipelineStatisticFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryPipelineStatisticFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct QueryPipelineStatisticFlags: Flags {
@@ -1675,14 +1675,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryPoolCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryPoolCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct QueryPoolCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryResultFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryResultFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct QueryResultFlags: Flags {
@@ -1695,7 +1695,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct QueueFlags: Flags {
@@ -1711,14 +1711,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRefreshObjectFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRefreshObjectFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct RefreshObjectFlagsKHR: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct RenderPassCreateFlags: Flags {
@@ -1727,7 +1727,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct RenderingFlags: Flags {
@@ -1740,7 +1740,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkResolveModeFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkResolveModeFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ResolveModeFlags: Flags {
@@ -1754,7 +1754,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSampleCountFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSampleCountFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SampleCountFlags: Flags {
@@ -1769,7 +1769,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SamplerCreateFlags: Flags {
@@ -1782,21 +1782,21 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkScreenSurfaceCreateFlagsQNX.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkScreenSurfaceCreateFlagsQNX.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ScreenSurfaceCreateFlagsQNX: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SemaphoreCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreImportFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreImportFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SemaphoreImportFlags: Flags {
@@ -1805,7 +1805,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreWaitFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreWaitFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SemaphoreWaitFlags: Flags {
@@ -1814,14 +1814,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderCorePropertiesFlagsAMD.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderCorePropertiesFlagsAMD.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ShaderCorePropertiesFlagsAMD: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderCreateFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ShaderCreateFlagsEXT: Flags {
@@ -1837,14 +1837,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderModuleCreateFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderModuleCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ShaderModuleCreateFlags: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderStageFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderStageFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ShaderStageFlags: Flags {
@@ -1870,7 +1870,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseImageFormatFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageFormatFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SparseImageFormatFlags: Flags {
@@ -1881,7 +1881,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseMemoryBindFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseMemoryBindFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SparseMemoryBindFlags: Flags {
@@ -1890,7 +1890,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkStencilFaceFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkStencilFaceFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct StencilFaceFlags: Flags {
@@ -1901,14 +1901,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkStreamDescriptorSurfaceCreateFlagsGGP.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkStreamDescriptorSurfaceCreateFlagsGGP.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct StreamDescriptorSurfaceCreateFlagsGGP: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubgroupFeatureFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubgroupFeatureFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SubgroupFeatureFlags: Flags {
@@ -1927,7 +1927,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubmitFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubmitFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SubmitFlags: Flags {
@@ -1936,7 +1936,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassDescriptionFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDescriptionFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SubpassDescriptionFlags: Flags {
@@ -1952,7 +1952,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfaceCounterFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCounterFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SurfaceCounterFlagsEXT: Flags {
@@ -1961,7 +1961,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfaceTransformFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceTransformFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SurfaceTransformFlagsKHR: Flags {
@@ -1978,7 +1978,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSwapchainCreateFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct SwapchainCreateFlagsKHR: Flags {
@@ -1990,7 +1990,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkToolPurposeFlags.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkToolPurposeFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ToolPurposeFlags: Flags {
@@ -2005,28 +2005,28 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkValidationCacheCreateFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkValidationCacheCreateFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ValidationCacheCreateFlagsEXT: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkViSurfaceCreateFlagsNN.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkViSurfaceCreateFlagsNN.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ViSurfaceCreateFlagsNN: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoBeginCodingFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoBeginCodingFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoBeginCodingFlagsKHR: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoCapabilityFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoCapabilityFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoCapabilityFlagsKHR: Flags {
@@ -2036,7 +2036,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoChromaSubsamplingFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoChromaSubsamplingFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoChromaSubsamplingFlagsKHR: Flags {
@@ -2049,7 +2049,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoCodecOperationFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoCodecOperationFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoCodecOperationFlagsKHR: Flags {
@@ -2064,7 +2064,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoCodingControlFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoCodingControlFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoCodingControlFlagsKHR: Flags {
@@ -2075,7 +2075,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoComponentBitDepthFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoComponentBitDepthFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoComponentBitDepthFlagsKHR: Flags {
@@ -2087,7 +2087,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeCapabilityFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeCapabilityFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoDecodeCapabilityFlagsKHR: Flags {
@@ -2097,14 +2097,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoDecodeFlagsKHR: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH264PictureLayoutFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264PictureLayoutFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoDecodeH264PictureLayoutFlagsKHR: Flags {
@@ -2115,7 +2115,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeUsageFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeUsageFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoDecodeUsageFlagsKHR: Flags {
@@ -2127,7 +2127,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1CapabilityFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1CapabilityFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeAV1CapabilityFlagsKHR: Flags {
@@ -2140,7 +2140,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1RateControlFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1RateControlFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeAV1RateControlFlagsKHR: Flags {
@@ -2152,7 +2152,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1StdFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1StdFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeAV1StdFlagsKHR: Flags {
@@ -2164,7 +2164,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1SuperblockSizeFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1SuperblockSizeFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeAV1SuperblockSizeFlagsKHR: Flags {
@@ -2174,7 +2174,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeCapabilityFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeCapabilityFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeCapabilityFlagsKHR: Flags {
@@ -2186,7 +2186,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeContentFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeContentFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeContentFlagsKHR: Flags {
@@ -2198,7 +2198,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeFeedbackFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeFeedbackFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeFeedbackFlagsKHR: Flags {
@@ -2209,7 +2209,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeFlagsKHR: Flags {
@@ -2219,7 +2219,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264CapabilityFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264CapabilityFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeH264CapabilityFlagsKHR: Flags {
@@ -2237,7 +2237,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264RateControlFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264RateControlFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeH264RateControlFlagsKHR: Flags {
@@ -2250,7 +2250,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264StdFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264StdFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeH264StdFlagsKHR: Flags {
@@ -2278,7 +2278,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265CapabilityFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265CapabilityFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeH265CapabilityFlagsKHR: Flags {
@@ -2297,7 +2297,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265CtbSizeFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265CtbSizeFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeH265CtbSizeFlagsKHR: Flags {
@@ -2308,7 +2308,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265RateControlFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265RateControlFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeH265RateControlFlagsKHR: Flags {
@@ -2321,7 +2321,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265StdFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265StdFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeH265StdFlagsKHR: Flags {
@@ -2350,7 +2350,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265TransformBlockSizeFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265TransformBlockSizeFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeH265TransformBlockSizeFlagsKHR: Flags {
@@ -2362,14 +2362,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeRateControlFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeRateControlFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeRateControlFlagsKHR: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeRateControlModeFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeRateControlModeFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeRateControlModeFlagsKHR: Flags {
@@ -2381,7 +2381,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeUsageFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeUsageFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEncodeUsageFlagsKHR: Flags {
@@ -2394,14 +2394,14 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEndCodingFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEndCodingFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoEndCodingFlagsKHR: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoSessionCreateFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoSessionCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoSessionCreateFlagsKHR: Flags {
@@ -2414,7 +2414,7 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoSessionParametersCreateFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoSessionParametersCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct VideoSessionParametersCreateFlagsKHR: Flags {
@@ -2423,90 +2423,90 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWaylandSurfaceCreateFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWaylandSurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct WaylandSurfaceCreateFlagsKHR: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWin32SurfaceCreateFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWin32SurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct Win32SurfaceCreateFlagsKHR: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkXcbSurfaceCreateFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkXcbSurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct XcbSurfaceCreateFlagsKHR: Flags { }
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkXlibSurfaceCreateFlagsKHR.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkXlibSurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
     pub struct XlibSurfaceCreateFlagsKHR: Flags { }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccessFlags2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccessFlags2KHR.html>
 pub type AccessFlags2KHR = AccessFlags2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferUsageFlags2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferUsageFlags2KHR.html>
 pub type BufferUsageFlags2KHR = BufferUsageFlags2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBuildAccelerationStructureFlagsNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBuildAccelerationStructureFlagsNV.html>
 pub type BuildAccelerationStructureFlagsNV = BuildAccelerationStructureFlagsKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandPoolTrimFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandPoolTrimFlagsKHR.html>
 pub type CommandPoolTrimFlagsKHR = CommandPoolTrimFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorBindingFlagsEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorBindingFlagsEXT.html>
 pub type DescriptorBindingFlagsEXT = DescriptorBindingFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorUpdateTemplateCreateFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateCreateFlagsKHR.html>
 pub type DescriptorUpdateTemplateCreateFlagsKHR = DescriptorUpdateTemplateCreateFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalFenceFeatureFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFenceFeatureFlagsKHR.html>
 pub type ExternalFenceFeatureFlagsKHR = ExternalFenceFeatureFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalFenceHandleTypeFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFenceHandleTypeFlagsKHR.html>
 pub type ExternalFenceHandleTypeFlagsKHR = ExternalFenceHandleTypeFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryFeatureFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryFeatureFlagsKHR.html>
 pub type ExternalMemoryFeatureFlagsKHR = ExternalMemoryFeatureFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryHandleTypeFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryHandleTypeFlagsKHR.html>
 pub type ExternalMemoryHandleTypeFlagsKHR = ExternalMemoryHandleTypeFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalSemaphoreFeatureFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalSemaphoreFeatureFlagsKHR.html>
 pub type ExternalSemaphoreFeatureFlagsKHR = ExternalSemaphoreFeatureFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalSemaphoreHandleTypeFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalSemaphoreHandleTypeFlagsKHR.html>
 pub type ExternalSemaphoreHandleTypeFlagsKHR = ExternalSemaphoreHandleTypeFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFenceImportFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFenceImportFlagsKHR.html>
 pub type FenceImportFlagsKHR = FenceImportFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFormatFeatureFlags2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFormatFeatureFlags2KHR.html>
 pub type FormatFeatureFlags2KHR = FormatFeatureFlags2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeometryFlagsNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeometryFlagsNV.html>
 pub type GeometryFlagsNV = GeometryFlagsKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeometryInstanceFlagsNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeometryInstanceFlagsNV.html>
 pub type GeometryInstanceFlagsNV = GeometryInstanceFlagsKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkHostImageCopyFlagsEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHostImageCopyFlagsEXT.html>
 pub type HostImageCopyFlagsEXT = HostImageCopyFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryAllocateFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryAllocateFlagsKHR.html>
 pub type MemoryAllocateFlagsKHR = MemoryAllocateFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryUnmapFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryUnmapFlagsKHR.html>
 pub type MemoryUnmapFlagsKHR = MemoryUnmapFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPeerMemoryFeatureFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPeerMemoryFeatureFlagsKHR.html>
 pub type PeerMemoryFeatureFlagsKHR = PeerMemoryFeatureFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCreateFlags2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreateFlags2KHR.html>
 pub type PipelineCreateFlags2KHR = PipelineCreateFlags2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCreationFeedbackFlagsEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreationFeedbackFlagsEXT.html>
 pub type PipelineCreationFeedbackFlagsEXT = PipelineCreationFeedbackFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineStageFlags2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineStageFlags2KHR.html>
 pub type PipelineStageFlags2KHR = PipelineStageFlags2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPrivateDataSlotCreateFlagsEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPrivateDataSlotCreateFlagsEXT.html>
 pub type PrivateDataSlotCreateFlagsEXT = PrivateDataSlotCreateFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingFlagsKHR.html>
 pub type RenderingFlagsKHR = RenderingFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkResolveModeFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkResolveModeFlagsKHR.html>
 pub type ResolveModeFlagsKHR = ResolveModeFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreImportFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreImportFlagsKHR.html>
 pub type SemaphoreImportFlagsKHR = SemaphoreImportFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreWaitFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreWaitFlagsKHR.html>
 pub type SemaphoreWaitFlagsKHR = SemaphoreWaitFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubmitFlagsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubmitFlagsKHR.html>
 pub type SubmitFlagsKHR = SubmitFlags;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkToolPurposeFlagsEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkToolPurposeFlagsEXT.html>
 pub type ToolPurposeFlagsEXT = ToolPurposeFlags;

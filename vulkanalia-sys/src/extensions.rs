@@ -56,7 +56,7 @@ pub struct Extension {
     pub promoted_to: Option<&'static str>,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMDX_shader_enqueue.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMDX_shader_enqueue.html>
 ///
 /// ## WARNING
 ///
@@ -80,7 +80,7 @@ pub const AMDX_SHADER_ENQUEUE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_anti_lag.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_anti_lag.html>
 #[allow(deprecated)]
 pub const AMD_ANTI_LAG_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_anti_lag"),
@@ -96,7 +96,7 @@ pub const AMD_ANTI_LAG_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_buffer_marker.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_buffer_marker.html>
 #[allow(deprecated)]
 pub const AMD_BUFFER_MARKER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_buffer_marker"),
@@ -112,7 +112,7 @@ pub const AMD_BUFFER_MARKER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_device_coherent_memory.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_device_coherent_memory.html>
 #[allow(deprecated)]
 pub const AMD_DEVICE_COHERENT_MEMORY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_device_coherent_memory"),
@@ -128,7 +128,7 @@ pub const AMD_DEVICE_COHERENT_MEMORY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_display_native_hdr.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_display_native_hdr.html>
 #[allow(deprecated)]
 pub const AMD_DISPLAY_NATIVE_HDR_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_display_native_hdr"),
@@ -144,7 +144,7 @@ pub const AMD_DISPLAY_NATIVE_HDR_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_draw_indirect_count.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_draw_indirect_count.html>
 #[allow(deprecated)]
 pub const AMD_DRAW_INDIRECT_COUNT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_draw_indirect_count"),
@@ -160,7 +160,7 @@ pub const AMD_DRAW_INDIRECT_COUNT_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_draw_indirect_count"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_gcn_shader.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_gcn_shader.html>
 #[allow(deprecated)]
 pub const AMD_GCN_SHADER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_gcn_shader"),
@@ -176,7 +176,7 @@ pub const AMD_GCN_SHADER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_gpu_shader_half_float.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_gpu_shader_half_float.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_shader_float16_int8`")]
 #[allow(deprecated)]
 pub const AMD_GPU_SHADER_HALF_FLOAT_EXTENSION: Extension = Extension {
@@ -193,7 +193,7 @@ pub const AMD_GPU_SHADER_HALF_FLOAT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_gpu_shader_int16.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_gpu_shader_int16.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_shader_float16_int8`")]
 #[allow(deprecated)]
 pub const AMD_GPU_SHADER_INT16_EXTENSION: Extension = Extension {
@@ -210,7 +210,7 @@ pub const AMD_GPU_SHADER_INT16_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_memory_overallocation_behavior.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_memory_overallocation_behavior.html>
 #[allow(deprecated)]
 pub const AMD_MEMORY_OVERALLOCATION_BEHAVIOR_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_memory_overallocation_behavior"),
@@ -226,7 +226,7 @@ pub const AMD_MEMORY_OVERALLOCATION_BEHAVIOR_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_mixed_attachment_samples.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_mixed_attachment_samples.html>
 #[allow(deprecated)]
 pub const AMD_MIXED_ATTACHMENT_SAMPLES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_mixed_attachment_samples"),
@@ -242,7 +242,7 @@ pub const AMD_MIXED_ATTACHMENT_SAMPLES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_negative_viewport_height.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_negative_viewport_height.html>
 #[allow(deprecated)]
 pub const AMD_NEGATIVE_VIEWPORT_HEIGHT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_negative_viewport_height"),
@@ -258,7 +258,7 @@ pub const AMD_NEGATIVE_VIEWPORT_HEIGHT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_pipeline_compiler_control.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_pipeline_compiler_control.html>
 #[allow(deprecated)]
 pub const AMD_PIPELINE_COMPILER_CONTROL_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_pipeline_compiler_control"),
@@ -274,7 +274,7 @@ pub const AMD_PIPELINE_COMPILER_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_rasterization_order.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_rasterization_order.html>
 #[allow(deprecated)]
 pub const AMD_RASTERIZATION_ORDER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_rasterization_order"),
@@ -290,7 +290,7 @@ pub const AMD_RASTERIZATION_ORDER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_shader_ballot.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_ballot.html>
 #[allow(deprecated)]
 pub const AMD_SHADER_BALLOT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_shader_ballot"),
@@ -306,7 +306,7 @@ pub const AMD_SHADER_BALLOT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_shader_core_properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_core_properties.html>
 #[allow(deprecated)]
 pub const AMD_SHADER_CORE_PROPERTIES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_shader_core_properties"),
@@ -322,7 +322,7 @@ pub const AMD_SHADER_CORE_PROPERTIES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_shader_core_properties2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_core_properties2.html>
 #[allow(deprecated)]
 pub const AMD_SHADER_CORE_PROPERTIES2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_shader_core_properties2"),
@@ -338,7 +338,7 @@ pub const AMD_SHADER_CORE_PROPERTIES2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_shader_early_and_late_fragment_tests.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_early_and_late_fragment_tests.html>
 #[allow(deprecated)]
 pub const AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_shader_early_and_late_fragment_tests"),
@@ -354,7 +354,7 @@ pub const AMD_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_EXTENSION: Extension = Extens
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_shader_explicit_vertex_parameter.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_explicit_vertex_parameter.html>
 #[allow(deprecated)]
 pub const AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_shader_explicit_vertex_parameter"),
@@ -370,7 +370,7 @@ pub const AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION: Extension = Extension 
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_shader_fragment_mask.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_fragment_mask.html>
 #[allow(deprecated)]
 pub const AMD_SHADER_FRAGMENT_MASK_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_shader_fragment_mask"),
@@ -386,7 +386,7 @@ pub const AMD_SHADER_FRAGMENT_MASK_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_shader_image_load_store_lod.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_image_load_store_lod.html>
 #[allow(deprecated)]
 pub const AMD_SHADER_IMAGE_LOAD_STORE_LOD_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_shader_image_load_store_lod"),
@@ -402,7 +402,7 @@ pub const AMD_SHADER_IMAGE_LOAD_STORE_LOD_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_shader_info.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_info.html>
 #[allow(deprecated)]
 pub const AMD_SHADER_INFO_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_shader_info"),
@@ -418,7 +418,7 @@ pub const AMD_SHADER_INFO_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_shader_trinary_minmax.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_shader_trinary_minmax.html>
 #[allow(deprecated)]
 pub const AMD_SHADER_TRINARY_MINMAX_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_shader_trinary_minmax"),
@@ -434,7 +434,7 @@ pub const AMD_SHADER_TRINARY_MINMAX_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_AMD_texture_gather_bias_lod.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMD_texture_gather_bias_lod.html>
 #[allow(deprecated)]
 pub const AMD_TEXTURE_GATHER_BIAS_LOD_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_AMD_texture_gather_bias_lod"),
@@ -450,7 +450,7 @@ pub const AMD_TEXTURE_GATHER_BIAS_LOD_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_ANDROID_external_format_resolve.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ANDROID_external_format_resolve.html>
 #[allow(deprecated)]
 pub const ANDROID_EXTERNAL_FORMAT_RESOLVE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_ANDROID_external_format_resolve"),
@@ -466,7 +466,7 @@ pub const ANDROID_EXTERNAL_FORMAT_RESOLVE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_ANDROID_external_memory_android_hardware_buffer.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ANDROID_external_memory_android_hardware_buffer.html>
 #[allow(deprecated)]
 pub const ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_ANDROID_external_memory_android_hardware_buffer"),
@@ -482,7 +482,7 @@ pub const ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION: Extension =
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_ARM_rasterization_order_attachment_access.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_rasterization_order_attachment_access.html>
 #[allow(deprecated)]
 pub const ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_ARM_rasterization_order_attachment_access"),
@@ -498,7 +498,7 @@ pub const ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION: Extension = Exten
     promoted_to: Some("VK_EXT_rasterization_order_attachment_access"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_ARM_render_pass_striped.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_render_pass_striped.html>
 #[allow(deprecated)]
 pub const ARM_RENDER_PASS_STRIPED_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_ARM_render_pass_striped"),
@@ -514,7 +514,7 @@ pub const ARM_RENDER_PASS_STRIPED_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_ARM_scheduling_controls.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_scheduling_controls.html>
 #[allow(deprecated)]
 pub const ARM_SCHEDULING_CONTROLS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_ARM_scheduling_controls"),
@@ -530,7 +530,7 @@ pub const ARM_SCHEDULING_CONTROLS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_ARM_shader_core_builtins.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_shader_core_builtins.html>
 #[allow(deprecated)]
 pub const ARM_SHADER_CORE_BUILTINS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_ARM_shader_core_builtins"),
@@ -546,7 +546,7 @@ pub const ARM_SHADER_CORE_BUILTINS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_ARM_shader_core_properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_shader_core_properties.html>
 #[allow(deprecated)]
 pub const ARM_SHADER_CORE_PROPERTIES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_ARM_shader_core_properties"),
@@ -562,7 +562,7 @@ pub const ARM_SHADER_CORE_PROPERTIES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_4444_formats.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_4444_formats.html>
 #[allow(deprecated)]
 pub const EXT_4444_FORMATS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_4444_formats"),
@@ -578,7 +578,7 @@ pub const EXT_4444_FORMATS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_acquire_drm_display.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_acquire_drm_display.html>
 #[allow(deprecated)]
 pub const EXT_ACQUIRE_DRM_DISPLAY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_acquire_drm_display"),
@@ -594,7 +594,7 @@ pub const EXT_ACQUIRE_DRM_DISPLAY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_acquire_xlib_display.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_acquire_xlib_display.html>
 #[allow(deprecated)]
 pub const EXT_ACQUIRE_XLIB_DISPLAY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_acquire_xlib_display"),
@@ -610,7 +610,7 @@ pub const EXT_ACQUIRE_XLIB_DISPLAY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_application_parameters.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_application_parameters.html>
 #[allow(deprecated)]
 pub const EXT_APPLICATION_PARAMETERS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_application_parameters"),
@@ -626,7 +626,7 @@ pub const EXT_APPLICATION_PARAMETERS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_astc_decode_mode.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_astc_decode_mode.html>
 #[allow(deprecated)]
 pub const EXT_ASTC_DECODE_MODE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_astc_decode_mode"),
@@ -642,7 +642,7 @@ pub const EXT_ASTC_DECODE_MODE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_attachment_feedback_loop_dynamic_state.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_attachment_feedback_loop_dynamic_state.html>
 #[allow(deprecated)]
 pub const EXT_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_attachment_feedback_loop_dynamic_state"),
@@ -658,7 +658,7 @@ pub const EXT_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_EXTENSION: Extension = Exte
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_attachment_feedback_loop_layout.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_attachment_feedback_loop_layout.html>
 #[allow(deprecated)]
 pub const EXT_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_attachment_feedback_loop_layout"),
@@ -674,7 +674,7 @@ pub const EXT_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_blend_operation_advanced.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_blend_operation_advanced.html>
 #[allow(deprecated)]
 pub const EXT_BLEND_OPERATION_ADVANCED_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_blend_operation_advanced"),
@@ -690,7 +690,7 @@ pub const EXT_BLEND_OPERATION_ADVANCED_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_border_color_swizzle.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_border_color_swizzle.html>
 #[allow(deprecated)]
 pub const EXT_BORDER_COLOR_SWIZZLE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_border_color_swizzle"),
@@ -706,7 +706,7 @@ pub const EXT_BORDER_COLOR_SWIZZLE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_buffer_device_address.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_buffer_device_address.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_buffer_device_address`")]
 #[allow(deprecated)]
 pub const EXT_BUFFER_DEVICE_ADDRESS_EXTENSION: Extension = Extension {
@@ -723,7 +723,7 @@ pub const EXT_BUFFER_DEVICE_ADDRESS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_calibrated_timestamps.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_calibrated_timestamps.html>
 #[allow(deprecated)]
 pub const EXT_CALIBRATED_TIMESTAMPS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_calibrated_timestamps"),
@@ -739,7 +739,7 @@ pub const EXT_CALIBRATED_TIMESTAMPS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_calibrated_timestamps"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_color_write_enable.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_color_write_enable.html>
 #[allow(deprecated)]
 pub const EXT_COLOR_WRITE_ENABLE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_color_write_enable"),
@@ -755,7 +755,7 @@ pub const EXT_COLOR_WRITE_ENABLE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_conditional_rendering.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_conditional_rendering.html>
 #[allow(deprecated)]
 pub const EXT_CONDITIONAL_RENDERING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_conditional_rendering"),
@@ -771,7 +771,7 @@ pub const EXT_CONDITIONAL_RENDERING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_conservative_rasterization.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_conservative_rasterization.html>
 #[allow(deprecated)]
 pub const EXT_CONSERVATIVE_RASTERIZATION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_conservative_rasterization"),
@@ -787,7 +787,7 @@ pub const EXT_CONSERVATIVE_RASTERIZATION_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_custom_border_color.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_custom_border_color.html>
 #[allow(deprecated)]
 pub const EXT_CUSTOM_BORDER_COLOR_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_custom_border_color"),
@@ -803,7 +803,7 @@ pub const EXT_CUSTOM_BORDER_COLOR_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_debug_marker.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_debug_marker.html>
 #[allow(deprecated)]
 pub const EXT_DEBUG_MARKER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_debug_marker"),
@@ -819,7 +819,7 @@ pub const EXT_DEBUG_MARKER_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_EXT_debug_utils"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_debug_report.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_debug_report.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_debug_utils`")]
 #[allow(deprecated)]
 pub const EXT_DEBUG_REPORT_EXTENSION: Extension = Extension {
@@ -836,7 +836,7 @@ pub const EXT_DEBUG_REPORT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_debug_utils.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_debug_utils.html>
 #[allow(deprecated)]
 pub const EXT_DEBUG_UTILS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_debug_utils"),
@@ -852,7 +852,7 @@ pub const EXT_DEBUG_UTILS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_depth_bias_control.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_depth_bias_control.html>
 #[allow(deprecated)]
 pub const EXT_DEPTH_BIAS_CONTROL_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_depth_bias_control"),
@@ -868,7 +868,7 @@ pub const EXT_DEPTH_BIAS_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_depth_clamp_control.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_depth_clamp_control.html>
 #[allow(deprecated)]
 pub const EXT_DEPTH_CLAMP_CONTROL_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_depth_clamp_control"),
@@ -884,7 +884,7 @@ pub const EXT_DEPTH_CLAMP_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_depth_clamp_zero_one.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_depth_clamp_zero_one.html>
 #[allow(deprecated)]
 pub const EXT_DEPTH_CLAMP_ZERO_ONE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_depth_clamp_zero_one"),
@@ -900,7 +900,7 @@ pub const EXT_DEPTH_CLAMP_ZERO_ONE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_depth_clip_control.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_depth_clip_control.html>
 #[allow(deprecated)]
 pub const EXT_DEPTH_CLIP_CONTROL_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_depth_clip_control"),
@@ -916,7 +916,7 @@ pub const EXT_DEPTH_CLIP_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_depth_clip_enable.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_depth_clip_enable.html>
 #[allow(deprecated)]
 pub const EXT_DEPTH_CLIP_ENABLE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_depth_clip_enable"),
@@ -932,7 +932,7 @@ pub const EXT_DEPTH_CLIP_ENABLE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_depth_range_unrestricted.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_depth_range_unrestricted.html>
 #[allow(deprecated)]
 pub const EXT_DEPTH_RANGE_UNRESTRICTED_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_depth_range_unrestricted"),
@@ -948,7 +948,7 @@ pub const EXT_DEPTH_RANGE_UNRESTRICTED_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_descriptor_buffer.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_descriptor_buffer.html>
 #[allow(deprecated)]
 pub const EXT_DESCRIPTOR_BUFFER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_descriptor_buffer"),
@@ -964,7 +964,7 @@ pub const EXT_DESCRIPTOR_BUFFER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_descriptor_indexing.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_descriptor_indexing.html>
 #[allow(deprecated)]
 pub const EXT_DESCRIPTOR_INDEXING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_descriptor_indexing"),
@@ -980,7 +980,7 @@ pub const EXT_DESCRIPTOR_INDEXING_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_device_address_binding_report.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_device_address_binding_report.html>
 #[allow(deprecated)]
 pub const EXT_DEVICE_ADDRESS_BINDING_REPORT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_device_address_binding_report"),
@@ -996,7 +996,7 @@ pub const EXT_DEVICE_ADDRESS_BINDING_REPORT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_device_fault.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_device_fault.html>
 #[allow(deprecated)]
 pub const EXT_DEVICE_FAULT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_device_fault"),
@@ -1012,7 +1012,7 @@ pub const EXT_DEVICE_FAULT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_device_generated_commands.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_device_generated_commands.html>
 #[allow(deprecated)]
 pub const EXT_DEVICE_GENERATED_COMMANDS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_device_generated_commands"),
@@ -1028,7 +1028,7 @@ pub const EXT_DEVICE_GENERATED_COMMANDS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_device_memory_report.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_device_memory_report.html>
 #[allow(deprecated)]
 pub const EXT_DEVICE_MEMORY_REPORT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_device_memory_report"),
@@ -1044,7 +1044,7 @@ pub const EXT_DEVICE_MEMORY_REPORT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_direct_mode_display.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_direct_mode_display.html>
 #[allow(deprecated)]
 pub const EXT_DIRECT_MODE_DISPLAY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_direct_mode_display"),
@@ -1060,7 +1060,7 @@ pub const EXT_DIRECT_MODE_DISPLAY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_directfb_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_directfb_surface.html>
 #[allow(deprecated)]
 pub const EXT_DIRECTFB_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_directfb_surface"),
@@ -1076,7 +1076,7 @@ pub const EXT_DIRECTFB_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_discard_rectangles.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_discard_rectangles.html>
 #[allow(deprecated)]
 pub const EXT_DISCARD_RECTANGLES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_discard_rectangles"),
@@ -1092,7 +1092,7 @@ pub const EXT_DISCARD_RECTANGLES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_display_control.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_display_control.html>
 #[allow(deprecated)]
 pub const EXT_DISPLAY_CONTROL_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_display_control"),
@@ -1108,7 +1108,7 @@ pub const EXT_DISPLAY_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_display_surface_counter.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_display_surface_counter.html>
 #[allow(deprecated)]
 pub const EXT_DISPLAY_SURFACE_COUNTER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_display_surface_counter"),
@@ -1124,7 +1124,7 @@ pub const EXT_DISPLAY_SURFACE_COUNTER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_dynamic_rendering_unused_attachments.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_dynamic_rendering_unused_attachments.html>
 #[allow(deprecated)]
 pub const EXT_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_dynamic_rendering_unused_attachments"),
@@ -1140,7 +1140,7 @@ pub const EXT_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_EXTENSION: Extension = Extens
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_extended_dynamic_state.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_extended_dynamic_state.html>
 #[allow(deprecated)]
 pub const EXT_EXTENDED_DYNAMIC_STATE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_extended_dynamic_state"),
@@ -1156,7 +1156,7 @@ pub const EXT_EXTENDED_DYNAMIC_STATE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_extended_dynamic_state2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_extended_dynamic_state2.html>
 #[allow(deprecated)]
 pub const EXT_EXTENDED_DYNAMIC_STATE2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_extended_dynamic_state2"),
@@ -1172,7 +1172,7 @@ pub const EXT_EXTENDED_DYNAMIC_STATE2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_extended_dynamic_state3.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_extended_dynamic_state3.html>
 #[allow(deprecated)]
 pub const EXT_EXTENDED_DYNAMIC_STATE3_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_extended_dynamic_state3"),
@@ -1188,7 +1188,7 @@ pub const EXT_EXTENDED_DYNAMIC_STATE3_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_external_memory_acquire_unmodified.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_external_memory_acquire_unmodified.html>
 #[allow(deprecated)]
 pub const EXT_EXTERNAL_MEMORY_ACQUIRE_UNMODIFIED_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_external_memory_acquire_unmodified"),
@@ -1204,7 +1204,7 @@ pub const EXT_EXTERNAL_MEMORY_ACQUIRE_UNMODIFIED_EXTENSION: Extension = Extensio
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_external_memory_dma_buf.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_external_memory_dma_buf.html>
 #[allow(deprecated)]
 pub const EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_external_memory_dma_buf"),
@@ -1220,7 +1220,7 @@ pub const EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_external_memory_host.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_external_memory_host.html>
 #[allow(deprecated)]
 pub const EXT_EXTERNAL_MEMORY_HOST_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_external_memory_host"),
@@ -1236,7 +1236,7 @@ pub const EXT_EXTERNAL_MEMORY_HOST_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_filter_cubic.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_filter_cubic.html>
 #[allow(deprecated)]
 pub const EXT_FILTER_CUBIC_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_filter_cubic"),
@@ -1252,7 +1252,7 @@ pub const EXT_FILTER_CUBIC_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_fragment_density_map.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_density_map.html>
 #[allow(deprecated)]
 pub const EXT_FRAGMENT_DENSITY_MAP_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_fragment_density_map"),
@@ -1268,7 +1268,7 @@ pub const EXT_FRAGMENT_DENSITY_MAP_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_fragment_density_map2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_density_map2.html>
 #[allow(deprecated)]
 pub const EXT_FRAGMENT_DENSITY_MAP2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_fragment_density_map2"),
@@ -1284,7 +1284,7 @@ pub const EXT_FRAGMENT_DENSITY_MAP2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_fragment_shader_interlock.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_shader_interlock.html>
 #[allow(deprecated)]
 pub const EXT_FRAGMENT_SHADER_INTERLOCK_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_fragment_shader_interlock"),
@@ -1300,7 +1300,7 @@ pub const EXT_FRAGMENT_SHADER_INTERLOCK_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_frame_boundary.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_frame_boundary.html>
 #[allow(deprecated)]
 pub const EXT_FRAME_BOUNDARY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_frame_boundary"),
@@ -1316,7 +1316,7 @@ pub const EXT_FRAME_BOUNDARY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_full_screen_exclusive.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_full_screen_exclusive.html>
 #[allow(deprecated)]
 pub const EXT_FULL_SCREEN_EXCLUSIVE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_full_screen_exclusive"),
@@ -1332,7 +1332,7 @@ pub const EXT_FULL_SCREEN_EXCLUSIVE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_global_priority.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_global_priority.html>
 #[allow(deprecated)]
 pub const EXT_GLOBAL_PRIORITY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_global_priority"),
@@ -1348,7 +1348,7 @@ pub const EXT_GLOBAL_PRIORITY_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_global_priority"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_global_priority_query.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_global_priority_query.html>
 #[allow(deprecated)]
 pub const EXT_GLOBAL_PRIORITY_QUERY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_global_priority_query"),
@@ -1364,7 +1364,7 @@ pub const EXT_GLOBAL_PRIORITY_QUERY_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_global_priority"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_graphics_pipeline_library.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_graphics_pipeline_library.html>
 #[allow(deprecated)]
 pub const EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_graphics_pipeline_library"),
@@ -1380,7 +1380,7 @@ pub const EXT_GRAPHICS_PIPELINE_LIBRARY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_hdr_metadata.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_hdr_metadata.html>
 #[allow(deprecated)]
 pub const EXT_HDR_METADATA_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_hdr_metadata"),
@@ -1396,7 +1396,7 @@ pub const EXT_HDR_METADATA_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_headless_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_headless_surface.html>
 #[allow(deprecated)]
 pub const EXT_HEADLESS_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_headless_surface"),
@@ -1412,7 +1412,7 @@ pub const EXT_HEADLESS_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_host_image_copy.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_host_image_copy.html>
 #[allow(deprecated)]
 pub const EXT_HOST_IMAGE_COPY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_host_image_copy"),
@@ -1428,7 +1428,7 @@ pub const EXT_HOST_IMAGE_COPY_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_host_query_reset.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_host_query_reset.html>
 #[allow(deprecated)]
 pub const EXT_HOST_QUERY_RESET_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_host_query_reset"),
@@ -1444,7 +1444,7 @@ pub const EXT_HOST_QUERY_RESET_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_image_2d_view_of_3d.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_2d_view_of_3d.html>
 #[allow(deprecated)]
 pub const EXT_IMAGE_2D_VIEW_OF_3D_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_image_2d_view_of_3d"),
@@ -1460,7 +1460,7 @@ pub const EXT_IMAGE_2D_VIEW_OF_3D_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_image_compression_control.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_compression_control.html>
 #[allow(deprecated)]
 pub const EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_image_compression_control"),
@@ -1476,7 +1476,7 @@ pub const EXT_IMAGE_COMPRESSION_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_image_compression_control_swapchain.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_compression_control_swapchain.html>
 #[allow(deprecated)]
 pub const EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_image_compression_control_swapchain"),
@@ -1492,7 +1492,7 @@ pub const EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_EXTENSION: Extension = Extensi
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_image_drm_format_modifier.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_drm_format_modifier.html>
 #[allow(deprecated)]
 pub const EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_image_drm_format_modifier"),
@@ -1508,7 +1508,7 @@ pub const EXT_IMAGE_DRM_FORMAT_MODIFIER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_image_robustness.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_robustness.html>
 #[allow(deprecated)]
 pub const EXT_IMAGE_ROBUSTNESS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_image_robustness"),
@@ -1524,7 +1524,7 @@ pub const EXT_IMAGE_ROBUSTNESS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_image_sliced_view_of_3d.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_sliced_view_of_3d.html>
 #[allow(deprecated)]
 pub const EXT_IMAGE_SLICED_VIEW_OF_3D_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_image_sliced_view_of_3d"),
@@ -1540,7 +1540,7 @@ pub const EXT_IMAGE_SLICED_VIEW_OF_3D_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_image_view_min_lod.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_image_view_min_lod.html>
 #[allow(deprecated)]
 pub const EXT_IMAGE_VIEW_MIN_LOD_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_image_view_min_lod"),
@@ -1556,7 +1556,7 @@ pub const EXT_IMAGE_VIEW_MIN_LOD_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_index_type_uint8.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_index_type_uint8.html>
 #[allow(deprecated)]
 pub const EXT_INDEX_TYPE_UINT8_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_index_type_uint8"),
@@ -1572,7 +1572,7 @@ pub const EXT_INDEX_TYPE_UINT8_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_index_type_uint8"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_inline_uniform_block.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_inline_uniform_block.html>
 #[allow(deprecated)]
 pub const EXT_INLINE_UNIFORM_BLOCK_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_inline_uniform_block"),
@@ -1588,7 +1588,7 @@ pub const EXT_INLINE_UNIFORM_BLOCK_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_layer_settings.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_layer_settings.html>
 #[allow(deprecated)]
 pub const EXT_LAYER_SETTINGS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_layer_settings"),
@@ -1604,7 +1604,7 @@ pub const EXT_LAYER_SETTINGS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_legacy_dithering.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_legacy_dithering.html>
 #[allow(deprecated)]
 pub const EXT_LEGACY_DITHERING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_legacy_dithering"),
@@ -1620,7 +1620,7 @@ pub const EXT_LEGACY_DITHERING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_legacy_vertex_attributes.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_legacy_vertex_attributes.html>
 #[allow(deprecated)]
 pub const EXT_LEGACY_VERTEX_ATTRIBUTES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_legacy_vertex_attributes"),
@@ -1636,7 +1636,7 @@ pub const EXT_LEGACY_VERTEX_ATTRIBUTES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_line_rasterization.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_line_rasterization.html>
 #[allow(deprecated)]
 pub const EXT_LINE_RASTERIZATION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_line_rasterization"),
@@ -1652,7 +1652,7 @@ pub const EXT_LINE_RASTERIZATION_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_line_rasterization"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_load_store_op_none.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_load_store_op_none.html>
 #[allow(deprecated)]
 pub const EXT_LOAD_STORE_OP_NONE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_load_store_op_none"),
@@ -1668,7 +1668,7 @@ pub const EXT_LOAD_STORE_OP_NONE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_load_store_op_none"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_map_memory_placed.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_map_memory_placed.html>
 #[allow(deprecated)]
 pub const EXT_MAP_MEMORY_PLACED_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_map_memory_placed"),
@@ -1684,7 +1684,7 @@ pub const EXT_MAP_MEMORY_PLACED_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_memory_budget.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_memory_budget.html>
 #[allow(deprecated)]
 pub const EXT_MEMORY_BUDGET_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_memory_budget"),
@@ -1700,7 +1700,7 @@ pub const EXT_MEMORY_BUDGET_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_memory_priority.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_memory_priority.html>
 #[allow(deprecated)]
 pub const EXT_MEMORY_PRIORITY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_memory_priority"),
@@ -1716,7 +1716,7 @@ pub const EXT_MEMORY_PRIORITY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_mesh_shader.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_mesh_shader.html>
 #[allow(deprecated)]
 pub const EXT_MESH_SHADER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_mesh_shader"),
@@ -1732,7 +1732,7 @@ pub const EXT_MESH_SHADER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_metal_objects.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_metal_objects.html>
 #[allow(deprecated)]
 pub const EXT_METAL_OBJECTS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_metal_objects"),
@@ -1748,7 +1748,7 @@ pub const EXT_METAL_OBJECTS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_metal_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_metal_surface.html>
 #[allow(deprecated)]
 pub const EXT_METAL_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_metal_surface"),
@@ -1764,7 +1764,7 @@ pub const EXT_METAL_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_multi_draw.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_multi_draw.html>
 #[allow(deprecated)]
 pub const EXT_MULTI_DRAW_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_multi_draw"),
@@ -1780,7 +1780,7 @@ pub const EXT_MULTI_DRAW_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_multisampled_render_to_single_sampled.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_multisampled_render_to_single_sampled.html>
 #[allow(deprecated)]
 pub const EXT_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_multisampled_render_to_single_sampled"),
@@ -1796,7 +1796,7 @@ pub const EXT_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXTENSION: Extension = Exten
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_mutable_descriptor_type.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_mutable_descriptor_type.html>
 #[allow(deprecated)]
 pub const EXT_MUTABLE_DESCRIPTOR_TYPE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_mutable_descriptor_type"),
@@ -1812,7 +1812,7 @@ pub const EXT_MUTABLE_DESCRIPTOR_TYPE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_nested_command_buffer.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_nested_command_buffer.html>
 #[allow(deprecated)]
 pub const EXT_NESTED_COMMAND_BUFFER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_nested_command_buffer"),
@@ -1828,7 +1828,7 @@ pub const EXT_NESTED_COMMAND_BUFFER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_non_seamless_cube_map.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_non_seamless_cube_map.html>
 #[allow(deprecated)]
 pub const EXT_NON_SEAMLESS_CUBE_MAP_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_non_seamless_cube_map"),
@@ -1844,7 +1844,7 @@ pub const EXT_NON_SEAMLESS_CUBE_MAP_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_opacity_micromap.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_opacity_micromap.html>
 #[allow(deprecated)]
 pub const EXT_OPACITY_MICROMAP_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_opacity_micromap"),
@@ -1860,7 +1860,7 @@ pub const EXT_OPACITY_MICROMAP_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_pageable_device_local_memory.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pageable_device_local_memory.html>
 #[allow(deprecated)]
 pub const EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_pageable_device_local_memory"),
@@ -1876,7 +1876,7 @@ pub const EXT_PAGEABLE_DEVICE_LOCAL_MEMORY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_pci_bus_info.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pci_bus_info.html>
 #[allow(deprecated)]
 pub const EXT_PCI_BUS_INFO_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_pci_bus_info"),
@@ -1892,7 +1892,7 @@ pub const EXT_PCI_BUS_INFO_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_physical_device_drm.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_physical_device_drm.html>
 #[allow(deprecated)]
 pub const EXT_PHYSICAL_DEVICE_DRM_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_physical_device_drm"),
@@ -1908,7 +1908,7 @@ pub const EXT_PHYSICAL_DEVICE_DRM_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_pipeline_creation_cache_control.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pipeline_creation_cache_control.html>
 #[allow(deprecated)]
 pub const EXT_PIPELINE_CREATION_CACHE_CONTROL_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_pipeline_creation_cache_control"),
@@ -1924,7 +1924,7 @@ pub const EXT_PIPELINE_CREATION_CACHE_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_pipeline_creation_feedback.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pipeline_creation_feedback.html>
 #[allow(deprecated)]
 pub const EXT_PIPELINE_CREATION_FEEDBACK_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_pipeline_creation_feedback"),
@@ -1940,7 +1940,7 @@ pub const EXT_PIPELINE_CREATION_FEEDBACK_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_pipeline_library_group_handles.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pipeline_library_group_handles.html>
 #[allow(deprecated)]
 pub const EXT_PIPELINE_LIBRARY_GROUP_HANDLES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_pipeline_library_group_handles"),
@@ -1956,7 +1956,7 @@ pub const EXT_PIPELINE_LIBRARY_GROUP_HANDLES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_pipeline_properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pipeline_properties.html>
 #[allow(deprecated)]
 pub const EXT_PIPELINE_PROPERTIES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_pipeline_properties"),
@@ -1972,7 +1972,7 @@ pub const EXT_PIPELINE_PROPERTIES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_pipeline_protected_access.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pipeline_protected_access.html>
 #[allow(deprecated)]
 pub const EXT_PIPELINE_PROTECTED_ACCESS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_pipeline_protected_access"),
@@ -1988,7 +1988,7 @@ pub const EXT_PIPELINE_PROTECTED_ACCESS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_pipeline_robustness.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_pipeline_robustness.html>
 #[allow(deprecated)]
 pub const EXT_PIPELINE_ROBUSTNESS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_pipeline_robustness"),
@@ -2004,7 +2004,7 @@ pub const EXT_PIPELINE_ROBUSTNESS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_post_depth_coverage.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_post_depth_coverage.html>
 #[allow(deprecated)]
 pub const EXT_POST_DEPTH_COVERAGE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_post_depth_coverage"),
@@ -2020,7 +2020,7 @@ pub const EXT_POST_DEPTH_COVERAGE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_present_mode_fifo_latest_ready.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_present_mode_fifo_latest_ready.html>
 #[allow(deprecated)]
 pub const EXT_PRESENT_MODE_FIFO_LATEST_READY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_present_mode_fifo_latest_ready"),
@@ -2036,7 +2036,7 @@ pub const EXT_PRESENT_MODE_FIFO_LATEST_READY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_primitive_topology_list_restart.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_primitive_topology_list_restart.html>
 #[allow(deprecated)]
 pub const EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_primitive_topology_list_restart"),
@@ -2052,7 +2052,7 @@ pub const EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_primitives_generated_query.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_primitives_generated_query.html>
 #[allow(deprecated)]
 pub const EXT_PRIMITIVES_GENERATED_QUERY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_primitives_generated_query"),
@@ -2068,7 +2068,7 @@ pub const EXT_PRIMITIVES_GENERATED_QUERY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_private_data.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_private_data.html>
 #[allow(deprecated)]
 pub const EXT_PRIVATE_DATA_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_private_data"),
@@ -2084,7 +2084,7 @@ pub const EXT_PRIVATE_DATA_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_provoking_vertex.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_provoking_vertex.html>
 #[allow(deprecated)]
 pub const EXT_PROVOKING_VERTEX_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_provoking_vertex"),
@@ -2100,7 +2100,7 @@ pub const EXT_PROVOKING_VERTEX_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_queue_family_foreign.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_queue_family_foreign.html>
 #[allow(deprecated)]
 pub const EXT_QUEUE_FAMILY_FOREIGN_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_queue_family_foreign"),
@@ -2116,7 +2116,7 @@ pub const EXT_QUEUE_FAMILY_FOREIGN_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_rasterization_order_attachment_access.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_rasterization_order_attachment_access.html>
 #[allow(deprecated)]
 pub const EXT_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_rasterization_order_attachment_access"),
@@ -2132,7 +2132,7 @@ pub const EXT_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION: Extension = Exten
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_rgba10x6_formats.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_rgba10x6_formats.html>
 #[allow(deprecated)]
 pub const EXT_RGBA10X6_FORMATS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_rgba10x6_formats"),
@@ -2148,7 +2148,7 @@ pub const EXT_RGBA10X6_FORMATS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_robustness2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_robustness2.html>
 #[allow(deprecated)]
 pub const EXT_ROBUSTNESS2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_robustness2"),
@@ -2164,7 +2164,7 @@ pub const EXT_ROBUSTNESS2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_sample_locations.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_sample_locations.html>
 #[allow(deprecated)]
 pub const EXT_SAMPLE_LOCATIONS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_sample_locations"),
@@ -2180,7 +2180,7 @@ pub const EXT_SAMPLE_LOCATIONS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_sampler_filter_minmax.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_sampler_filter_minmax.html>
 #[allow(deprecated)]
 pub const EXT_SAMPLER_FILTER_MINMAX_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_sampler_filter_minmax"),
@@ -2196,7 +2196,7 @@ pub const EXT_SAMPLER_FILTER_MINMAX_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_scalar_block_layout.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_scalar_block_layout.html>
 #[allow(deprecated)]
 pub const EXT_SCALAR_BLOCK_LAYOUT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_scalar_block_layout"),
@@ -2212,7 +2212,7 @@ pub const EXT_SCALAR_BLOCK_LAYOUT_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_separate_stencil_usage.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_separate_stencil_usage.html>
 #[allow(deprecated)]
 pub const EXT_SEPARATE_STENCIL_USAGE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_separate_stencil_usage"),
@@ -2228,7 +2228,7 @@ pub const EXT_SEPARATE_STENCIL_USAGE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_shader_atomic_float.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_atomic_float.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_ATOMIC_FLOAT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_shader_atomic_float"),
@@ -2244,7 +2244,7 @@ pub const EXT_SHADER_ATOMIC_FLOAT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_shader_atomic_float2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_atomic_float2.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_ATOMIC_FLOAT2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_shader_atomic_float2"),
@@ -2260,7 +2260,7 @@ pub const EXT_SHADER_ATOMIC_FLOAT2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_shader_demote_to_helper_invocation.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_demote_to_helper_invocation.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_shader_demote_to_helper_invocation"),
@@ -2276,7 +2276,7 @@ pub const EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_EXTENSION: Extension = Extensio
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_shader_image_atomic_int64.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_image_atomic_int64.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_IMAGE_ATOMIC_INT64_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_shader_image_atomic_int64"),
@@ -2292,7 +2292,7 @@ pub const EXT_SHADER_IMAGE_ATOMIC_INT64_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_shader_module_identifier.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_module_identifier.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_MODULE_IDENTIFIER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_shader_module_identifier"),
@@ -2308,7 +2308,7 @@ pub const EXT_SHADER_MODULE_IDENTIFIER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_shader_object.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_object.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_OBJECT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_shader_object"),
@@ -2324,7 +2324,7 @@ pub const EXT_SHADER_OBJECT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_shader_replicated_composites.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_replicated_composites.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_REPLICATED_COMPOSITES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_shader_replicated_composites"),
@@ -2340,7 +2340,7 @@ pub const EXT_SHADER_REPLICATED_COMPOSITES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_shader_stencil_export.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_stencil_export.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_STENCIL_EXPORT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_shader_stencil_export"),
@@ -2356,7 +2356,7 @@ pub const EXT_SHADER_STENCIL_EXPORT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_shader_subgroup_ballot.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_subgroup_ballot.html>
 #[deprecated(note = "deprecated in favor of `VK_VERSION_1_2`")]
 #[allow(deprecated)]
 pub const EXT_SHADER_SUBGROUP_BALLOT_EXTENSION: Extension = Extension {
@@ -2373,7 +2373,7 @@ pub const EXT_SHADER_SUBGROUP_BALLOT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_shader_subgroup_vote.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_subgroup_vote.html>
 #[deprecated(note = "deprecated in favor of `VK_VERSION_1_1`")]
 #[allow(deprecated)]
 pub const EXT_SHADER_SUBGROUP_VOTE_EXTENSION: Extension = Extension {
@@ -2390,7 +2390,7 @@ pub const EXT_SHADER_SUBGROUP_VOTE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_shader_tile_image.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_tile_image.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_TILE_IMAGE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_shader_tile_image"),
@@ -2406,7 +2406,7 @@ pub const EXT_SHADER_TILE_IMAGE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_shader_viewport_index_layer.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_viewport_index_layer.html>
 #[allow(deprecated)]
 pub const EXT_SHADER_VIEWPORT_INDEX_LAYER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_shader_viewport_index_layer"),
@@ -2422,7 +2422,7 @@ pub const EXT_SHADER_VIEWPORT_INDEX_LAYER_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_subgroup_size_control.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_subgroup_size_control.html>
 #[allow(deprecated)]
 pub const EXT_SUBGROUP_SIZE_CONTROL_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_subgroup_size_control"),
@@ -2438,7 +2438,7 @@ pub const EXT_SUBGROUP_SIZE_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_subpass_merge_feedback.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_subpass_merge_feedback.html>
 #[allow(deprecated)]
 pub const EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_subpass_merge_feedback"),
@@ -2454,7 +2454,7 @@ pub const EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_surface_maintenance1.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_surface_maintenance1.html>
 #[allow(deprecated)]
 pub const EXT_SURFACE_MAINTENANCE1_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_surface_maintenance1"),
@@ -2470,7 +2470,7 @@ pub const EXT_SURFACE_MAINTENANCE1_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_swapchain_colorspace.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_swapchain_colorspace.html>
 #[allow(deprecated)]
 pub const EXT_SWAPCHAIN_COLORSPACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_swapchain_colorspace"),
@@ -2486,7 +2486,7 @@ pub const EXT_SWAPCHAIN_COLORSPACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_swapchain_maintenance1.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_swapchain_maintenance1.html>
 #[allow(deprecated)]
 pub const EXT_SWAPCHAIN_MAINTENANCE1_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_swapchain_maintenance1"),
@@ -2502,7 +2502,7 @@ pub const EXT_SWAPCHAIN_MAINTENANCE1_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_texel_buffer_alignment.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_texel_buffer_alignment.html>
 #[allow(deprecated)]
 pub const EXT_TEXEL_BUFFER_ALIGNMENT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_texel_buffer_alignment"),
@@ -2518,7 +2518,7 @@ pub const EXT_TEXEL_BUFFER_ALIGNMENT_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_texture_compression_astc_hdr.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_texture_compression_astc_hdr.html>
 #[allow(deprecated)]
 pub const EXT_TEXTURE_COMPRESSION_ASTC_HDR_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_texture_compression_astc_hdr"),
@@ -2534,7 +2534,7 @@ pub const EXT_TEXTURE_COMPRESSION_ASTC_HDR_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_tooling_info.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_tooling_info.html>
 #[allow(deprecated)]
 pub const EXT_TOOLING_INFO_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_tooling_info"),
@@ -2550,7 +2550,7 @@ pub const EXT_TOOLING_INFO_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_transform_feedback.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_transform_feedback.html>
 #[allow(deprecated)]
 pub const EXT_TRANSFORM_FEEDBACK_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_transform_feedback"),
@@ -2566,7 +2566,7 @@ pub const EXT_TRANSFORM_FEEDBACK_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_validation_cache.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_validation_cache.html>
 #[allow(deprecated)]
 pub const EXT_VALIDATION_CACHE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_validation_cache"),
@@ -2582,7 +2582,7 @@ pub const EXT_VALIDATION_CACHE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_validation_features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_validation_features.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_layer_settings`")]
 #[allow(deprecated)]
 pub const EXT_VALIDATION_FEATURES_EXTENSION: Extension = Extension {
@@ -2599,7 +2599,7 @@ pub const EXT_VALIDATION_FEATURES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_validation_flags.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_validation_flags.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_layer_settings`")]
 #[allow(deprecated)]
 pub const EXT_VALIDATION_FLAGS_EXTENSION: Extension = Extension {
@@ -2616,7 +2616,7 @@ pub const EXT_VALIDATION_FLAGS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_vertex_attribute_divisor.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_vertex_attribute_divisor.html>
 #[allow(deprecated)]
 pub const EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_vertex_attribute_divisor"),
@@ -2632,7 +2632,7 @@ pub const EXT_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_vertex_attribute_divisor"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_vertex_attribute_robustness.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_vertex_attribute_robustness.html>
 #[allow(deprecated)]
 pub const EXT_VERTEX_ATTRIBUTE_ROBUSTNESS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_vertex_attribute_robustness"),
@@ -2648,7 +2648,7 @@ pub const EXT_VERTEX_ATTRIBUTE_ROBUSTNESS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_vertex_input_dynamic_state.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_vertex_input_dynamic_state.html>
 #[allow(deprecated)]
 pub const EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_vertex_input_dynamic_state"),
@@ -2664,7 +2664,7 @@ pub const EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_ycbcr_2plane_444_formats.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_ycbcr_2plane_444_formats.html>
 #[allow(deprecated)]
 pub const EXT_YCBCR_2PLANE_444_FORMATS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_ycbcr_2plane_444_formats"),
@@ -2680,7 +2680,7 @@ pub const EXT_YCBCR_2PLANE_444_FORMATS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_EXT_ycbcr_image_arrays.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_ycbcr_image_arrays.html>
 #[allow(deprecated)]
 pub const EXT_YCBCR_IMAGE_ARRAYS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_EXT_ycbcr_image_arrays"),
@@ -2696,7 +2696,7 @@ pub const EXT_YCBCR_IMAGE_ARRAYS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_FUCHSIA_buffer_collection.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_FUCHSIA_buffer_collection.html>
 #[allow(deprecated)]
 pub const FUCHSIA_BUFFER_COLLECTION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_FUCHSIA_buffer_collection"),
@@ -2712,7 +2712,7 @@ pub const FUCHSIA_BUFFER_COLLECTION_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_FUCHSIA_external_memory.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_FUCHSIA_external_memory.html>
 #[allow(deprecated)]
 pub const FUCHSIA_EXTERNAL_MEMORY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_FUCHSIA_external_memory"),
@@ -2728,7 +2728,7 @@ pub const FUCHSIA_EXTERNAL_MEMORY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_FUCHSIA_external_semaphore.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_FUCHSIA_external_semaphore.html>
 #[allow(deprecated)]
 pub const FUCHSIA_EXTERNAL_SEMAPHORE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_FUCHSIA_external_semaphore"),
@@ -2744,7 +2744,7 @@ pub const FUCHSIA_EXTERNAL_SEMAPHORE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_FUCHSIA_imagepipe_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_FUCHSIA_imagepipe_surface.html>
 #[allow(deprecated)]
 pub const FUCHSIA_IMAGEPIPE_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_FUCHSIA_imagepipe_surface"),
@@ -2760,7 +2760,7 @@ pub const FUCHSIA_IMAGEPIPE_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_GGP_frame_token.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GGP_frame_token.html>
 #[allow(deprecated)]
 pub const GGP_FRAME_TOKEN_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_GGP_frame_token"),
@@ -2776,7 +2776,7 @@ pub const GGP_FRAME_TOKEN_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_GGP_stream_descriptor_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GGP_stream_descriptor_surface.html>
 #[allow(deprecated)]
 pub const GGP_STREAM_DESCRIPTOR_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_GGP_stream_descriptor_surface"),
@@ -2792,7 +2792,7 @@ pub const GGP_STREAM_DESCRIPTOR_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_GOOGLE_decorate_string.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GOOGLE_decorate_string.html>
 #[allow(deprecated)]
 pub const GOOGLE_DECORATE_STRING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_GOOGLE_decorate_string"),
@@ -2808,7 +2808,7 @@ pub const GOOGLE_DECORATE_STRING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_GOOGLE_display_timing.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GOOGLE_display_timing.html>
 #[allow(deprecated)]
 pub const GOOGLE_DISPLAY_TIMING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_GOOGLE_display_timing"),
@@ -2824,7 +2824,7 @@ pub const GOOGLE_DISPLAY_TIMING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_GOOGLE_hlsl_functionality1.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GOOGLE_hlsl_functionality1.html>
 #[allow(deprecated)]
 pub const GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_GOOGLE_hlsl_functionality1"),
@@ -2840,7 +2840,7 @@ pub const GOOGLE_HLSL_FUNCTIONALITY1_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_GOOGLE_surfaceless_query.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GOOGLE_surfaceless_query.html>
 #[allow(deprecated)]
 pub const GOOGLE_SURFACELESS_QUERY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_GOOGLE_surfaceless_query"),
@@ -2856,7 +2856,7 @@ pub const GOOGLE_SURFACELESS_QUERY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_GOOGLE_user_type.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_GOOGLE_user_type.html>
 #[allow(deprecated)]
 pub const GOOGLE_USER_TYPE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_GOOGLE_user_type"),
@@ -2872,7 +2872,7 @@ pub const GOOGLE_USER_TYPE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_HUAWEI_cluster_culling_shader.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_HUAWEI_cluster_culling_shader.html>
 #[allow(deprecated)]
 pub const HUAWEI_CLUSTER_CULLING_SHADER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_HUAWEI_cluster_culling_shader"),
@@ -2888,7 +2888,7 @@ pub const HUAWEI_CLUSTER_CULLING_SHADER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_HUAWEI_hdr_vivid.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_HUAWEI_hdr_vivid.html>
 #[allow(deprecated)]
 pub const HUAWEI_HDR_VIVID_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_HUAWEI_hdr_vivid"),
@@ -2904,7 +2904,7 @@ pub const HUAWEI_HDR_VIVID_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_HUAWEI_invocation_mask.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_HUAWEI_invocation_mask.html>
 #[allow(deprecated)]
 pub const HUAWEI_INVOCATION_MASK_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_HUAWEI_invocation_mask"),
@@ -2920,7 +2920,7 @@ pub const HUAWEI_INVOCATION_MASK_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_HUAWEI_subpass_shading.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_HUAWEI_subpass_shading.html>
 #[allow(deprecated)]
 pub const HUAWEI_SUBPASS_SHADING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_HUAWEI_subpass_shading"),
@@ -2936,7 +2936,7 @@ pub const HUAWEI_SUBPASS_SHADING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_IMG_filter_cubic.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_IMG_filter_cubic.html>
 #[allow(deprecated)]
 pub const IMG_FILTER_CUBIC_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_IMG_filter_cubic"),
@@ -2952,7 +2952,7 @@ pub const IMG_FILTER_CUBIC_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_IMG_format_pvrtc.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_IMG_format_pvrtc.html>
 #[deprecated]
 #[allow(deprecated)]
 pub const IMG_FORMAT_PVRTC_EXTENSION: Extension = Extension {
@@ -2969,7 +2969,7 @@ pub const IMG_FORMAT_PVRTC_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_IMG_relaxed_line_rasterization.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_IMG_relaxed_line_rasterization.html>
 #[allow(deprecated)]
 pub const IMG_RELAXED_LINE_RASTERIZATION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_IMG_relaxed_line_rasterization"),
@@ -2985,7 +2985,7 @@ pub const IMG_RELAXED_LINE_RASTERIZATION_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_INTEL_performance_query.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_INTEL_performance_query.html>
 #[allow(deprecated)]
 pub const INTEL_PERFORMANCE_QUERY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_INTEL_performance_query"),
@@ -3001,7 +3001,7 @@ pub const INTEL_PERFORMANCE_QUERY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_INTEL_shader_integer_functions2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_INTEL_shader_integer_functions2.html>
 #[allow(deprecated)]
 pub const INTEL_SHADER_INTEGER_FUNCTIONS2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_INTEL_shader_integer_functions2"),
@@ -3017,7 +3017,7 @@ pub const INTEL_SHADER_INTEGER_FUNCTIONS2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_16bit_storage.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_16bit_storage.html>
 #[allow(deprecated)]
 pub const KHR_16BIT_STORAGE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_16bit_storage"),
@@ -3033,7 +3033,7 @@ pub const KHR_16BIT_STORAGE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_8bit_storage.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_8bit_storage.html>
 #[allow(deprecated)]
 pub const KHR_8BIT_STORAGE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_8bit_storage"),
@@ -3049,7 +3049,7 @@ pub const KHR_8BIT_STORAGE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_acceleration_structure.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_acceleration_structure.html>
 #[allow(deprecated)]
 pub const KHR_ACCELERATION_STRUCTURE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_acceleration_structure"),
@@ -3065,7 +3065,7 @@ pub const KHR_ACCELERATION_STRUCTURE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_android_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_android_surface.html>
 #[allow(deprecated)]
 pub const KHR_ANDROID_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_android_surface"),
@@ -3081,7 +3081,7 @@ pub const KHR_ANDROID_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_bind_memory2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_bind_memory2.html>
 #[allow(deprecated)]
 pub const KHR_BIND_MEMORY2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_bind_memory2"),
@@ -3097,7 +3097,7 @@ pub const KHR_BIND_MEMORY2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_buffer_device_address.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_buffer_device_address.html>
 #[allow(deprecated)]
 pub const KHR_BUFFER_DEVICE_ADDRESS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_buffer_device_address"),
@@ -3113,7 +3113,7 @@ pub const KHR_BUFFER_DEVICE_ADDRESS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_calibrated_timestamps.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_calibrated_timestamps.html>
 #[allow(deprecated)]
 pub const KHR_CALIBRATED_TIMESTAMPS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_calibrated_timestamps"),
@@ -3129,7 +3129,7 @@ pub const KHR_CALIBRATED_TIMESTAMPS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_compute_shader_derivatives.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_compute_shader_derivatives.html>
 #[allow(deprecated)]
 pub const KHR_COMPUTE_SHADER_DERIVATIVES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_compute_shader_derivatives"),
@@ -3145,7 +3145,7 @@ pub const KHR_COMPUTE_SHADER_DERIVATIVES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_cooperative_matrix.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_cooperative_matrix.html>
 #[allow(deprecated)]
 pub const KHR_COOPERATIVE_MATRIX_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_cooperative_matrix"),
@@ -3161,7 +3161,7 @@ pub const KHR_COOPERATIVE_MATRIX_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_copy_commands2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_copy_commands2.html>
 #[allow(deprecated)]
 pub const KHR_COPY_COMMANDS2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_copy_commands2"),
@@ -3177,7 +3177,7 @@ pub const KHR_COPY_COMMANDS2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_create_renderpass2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_create_renderpass2.html>
 #[allow(deprecated)]
 pub const KHR_CREATE_RENDERPASS2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_create_renderpass2"),
@@ -3193,7 +3193,7 @@ pub const KHR_CREATE_RENDERPASS2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_dedicated_allocation.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_dedicated_allocation.html>
 #[allow(deprecated)]
 pub const KHR_DEDICATED_ALLOCATION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_dedicated_allocation"),
@@ -3209,7 +3209,7 @@ pub const KHR_DEDICATED_ALLOCATION_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_deferred_host_operations.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_deferred_host_operations.html>
 #[allow(deprecated)]
 pub const KHR_DEFERRED_HOST_OPERATIONS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_deferred_host_operations"),
@@ -3225,7 +3225,7 @@ pub const KHR_DEFERRED_HOST_OPERATIONS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_depth_stencil_resolve.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_depth_stencil_resolve.html>
 #[allow(deprecated)]
 pub const KHR_DEPTH_STENCIL_RESOLVE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_depth_stencil_resolve"),
@@ -3241,7 +3241,7 @@ pub const KHR_DEPTH_STENCIL_RESOLVE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_descriptor_update_template.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_descriptor_update_template.html>
 #[allow(deprecated)]
 pub const KHR_DESCRIPTOR_UPDATE_TEMPLATE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_descriptor_update_template"),
@@ -3257,7 +3257,7 @@ pub const KHR_DESCRIPTOR_UPDATE_TEMPLATE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_device_group.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_device_group.html>
 #[allow(deprecated)]
 pub const KHR_DEVICE_GROUP_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_device_group"),
@@ -3273,7 +3273,7 @@ pub const KHR_DEVICE_GROUP_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_device_group_creation.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_device_group_creation.html>
 #[allow(deprecated)]
 pub const KHR_DEVICE_GROUP_CREATION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_device_group_creation"),
@@ -3289,7 +3289,7 @@ pub const KHR_DEVICE_GROUP_CREATION_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_display.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_display.html>
 #[allow(deprecated)]
 pub const KHR_DISPLAY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_display"),
@@ -3305,7 +3305,7 @@ pub const KHR_DISPLAY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_display_swapchain.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_display_swapchain.html>
 #[allow(deprecated)]
 pub const KHR_DISPLAY_SWAPCHAIN_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_display_swapchain"),
@@ -3321,7 +3321,7 @@ pub const KHR_DISPLAY_SWAPCHAIN_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_draw_indirect_count.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_draw_indirect_count.html>
 #[allow(deprecated)]
 pub const KHR_DRAW_INDIRECT_COUNT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_draw_indirect_count"),
@@ -3337,7 +3337,7 @@ pub const KHR_DRAW_INDIRECT_COUNT_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_driver_properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_driver_properties.html>
 #[allow(deprecated)]
 pub const KHR_DRIVER_PROPERTIES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_driver_properties"),
@@ -3353,7 +3353,7 @@ pub const KHR_DRIVER_PROPERTIES_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_dynamic_rendering.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_dynamic_rendering.html>
 #[allow(deprecated)]
 pub const KHR_DYNAMIC_RENDERING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_dynamic_rendering"),
@@ -3369,7 +3369,7 @@ pub const KHR_DYNAMIC_RENDERING_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_dynamic_rendering_local_read.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_dynamic_rendering_local_read.html>
 #[allow(deprecated)]
 pub const KHR_DYNAMIC_RENDERING_LOCAL_READ_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_dynamic_rendering_local_read"),
@@ -3385,7 +3385,7 @@ pub const KHR_DYNAMIC_RENDERING_LOCAL_READ_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_external_fence.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_fence.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_FENCE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_external_fence"),
@@ -3401,7 +3401,7 @@ pub const KHR_EXTERNAL_FENCE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_external_fence_capabilities.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_fence_capabilities.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_FENCE_CAPABILITIES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_external_fence_capabilities"),
@@ -3417,7 +3417,7 @@ pub const KHR_EXTERNAL_FENCE_CAPABILITIES_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_external_fence_fd.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_fence_fd.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_FENCE_FD_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_external_fence_fd"),
@@ -3433,7 +3433,7 @@ pub const KHR_EXTERNAL_FENCE_FD_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_external_fence_win32.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_fence_win32.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_FENCE_WIN32_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_external_fence_win32"),
@@ -3449,7 +3449,7 @@ pub const KHR_EXTERNAL_FENCE_WIN32_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_external_memory.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_memory.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_MEMORY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_external_memory"),
@@ -3465,7 +3465,7 @@ pub const KHR_EXTERNAL_MEMORY_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_external_memory_capabilities.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_memory_capabilities.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_external_memory_capabilities"),
@@ -3481,7 +3481,7 @@ pub const KHR_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_external_memory_fd.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_memory_fd.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_MEMORY_FD_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_external_memory_fd"),
@@ -3497,7 +3497,7 @@ pub const KHR_EXTERNAL_MEMORY_FD_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_external_memory_win32.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_memory_win32.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_MEMORY_WIN32_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_external_memory_win32"),
@@ -3513,7 +3513,7 @@ pub const KHR_EXTERNAL_MEMORY_WIN32_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_external_semaphore.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_semaphore.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_SEMAPHORE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_external_semaphore"),
@@ -3529,7 +3529,7 @@ pub const KHR_EXTERNAL_SEMAPHORE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_external_semaphore_capabilities.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_semaphore_capabilities.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_external_semaphore_capabilities"),
@@ -3545,7 +3545,7 @@ pub const KHR_EXTERNAL_SEMAPHORE_CAPABILITIES_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_external_semaphore_fd.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_semaphore_fd.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_external_semaphore_fd"),
@@ -3561,7 +3561,7 @@ pub const KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_external_semaphore_win32.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_external_semaphore_win32.html>
 #[allow(deprecated)]
 pub const KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_external_semaphore_win32"),
@@ -3577,7 +3577,7 @@ pub const KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_format_feature_flags2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_format_feature_flags2.html>
 #[allow(deprecated)]
 pub const KHR_FORMAT_FEATURE_FLAGS2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_format_feature_flags2"),
@@ -3593,7 +3593,7 @@ pub const KHR_FORMAT_FEATURE_FLAGS2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_fragment_shader_barycentric.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_fragment_shader_barycentric.html>
 #[allow(deprecated)]
 pub const KHR_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_fragment_shader_barycentric"),
@@ -3609,7 +3609,7 @@ pub const KHR_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_fragment_shading_rate.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_fragment_shading_rate.html>
 #[allow(deprecated)]
 pub const KHR_FRAGMENT_SHADING_RATE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_fragment_shading_rate"),
@@ -3625,7 +3625,7 @@ pub const KHR_FRAGMENT_SHADING_RATE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_get_display_properties2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_get_display_properties2.html>
 #[allow(deprecated)]
 pub const KHR_GET_DISPLAY_PROPERTIES2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_get_display_properties2"),
@@ -3641,7 +3641,7 @@ pub const KHR_GET_DISPLAY_PROPERTIES2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_get_memory_requirements2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_get_memory_requirements2.html>
 #[allow(deprecated)]
 pub const KHR_GET_MEMORY_REQUIREMENTS2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_get_memory_requirements2"),
@@ -3657,7 +3657,7 @@ pub const KHR_GET_MEMORY_REQUIREMENTS2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_get_physical_device_properties2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_get_physical_device_properties2.html>
 #[allow(deprecated)]
 pub const KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_get_physical_device_properties2"),
@@ -3673,7 +3673,7 @@ pub const KHR_GET_PHYSICAL_DEVICE_PROPERTIES2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_get_surface_capabilities2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_get_surface_capabilities2.html>
 #[allow(deprecated)]
 pub const KHR_GET_SURFACE_CAPABILITIES2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_get_surface_capabilities2"),
@@ -3689,7 +3689,7 @@ pub const KHR_GET_SURFACE_CAPABILITIES2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_global_priority.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_global_priority.html>
 #[allow(deprecated)]
 pub const KHR_GLOBAL_PRIORITY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_global_priority"),
@@ -3705,7 +3705,7 @@ pub const KHR_GLOBAL_PRIORITY_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_image_format_list.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_image_format_list.html>
 #[allow(deprecated)]
 pub const KHR_IMAGE_FORMAT_LIST_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_image_format_list"),
@@ -3721,7 +3721,7 @@ pub const KHR_IMAGE_FORMAT_LIST_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_imageless_framebuffer.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_imageless_framebuffer.html>
 #[allow(deprecated)]
 pub const KHR_IMAGELESS_FRAMEBUFFER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_imageless_framebuffer"),
@@ -3737,7 +3737,7 @@ pub const KHR_IMAGELESS_FRAMEBUFFER_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_incremental_present.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_incremental_present.html>
 #[allow(deprecated)]
 pub const KHR_INCREMENTAL_PRESENT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_incremental_present"),
@@ -3753,7 +3753,7 @@ pub const KHR_INCREMENTAL_PRESENT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_index_type_uint8.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_index_type_uint8.html>
 #[allow(deprecated)]
 pub const KHR_INDEX_TYPE_UINT8_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_index_type_uint8"),
@@ -3769,7 +3769,7 @@ pub const KHR_INDEX_TYPE_UINT8_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_line_rasterization.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_line_rasterization.html>
 #[allow(deprecated)]
 pub const KHR_LINE_RASTERIZATION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_line_rasterization"),
@@ -3785,7 +3785,7 @@ pub const KHR_LINE_RASTERIZATION_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_load_store_op_none.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_load_store_op_none.html>
 #[allow(deprecated)]
 pub const KHR_LOAD_STORE_OP_NONE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_load_store_op_none"),
@@ -3801,7 +3801,7 @@ pub const KHR_LOAD_STORE_OP_NONE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_maintenance1.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance1.html>
 #[allow(deprecated)]
 pub const KHR_MAINTENANCE1_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_maintenance1"),
@@ -3817,7 +3817,7 @@ pub const KHR_MAINTENANCE1_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_maintenance2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance2.html>
 #[allow(deprecated)]
 pub const KHR_MAINTENANCE2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_maintenance2"),
@@ -3833,7 +3833,7 @@ pub const KHR_MAINTENANCE2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_maintenance3.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance3.html>
 #[allow(deprecated)]
 pub const KHR_MAINTENANCE3_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_maintenance3"),
@@ -3849,7 +3849,7 @@ pub const KHR_MAINTENANCE3_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_maintenance4.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance4.html>
 #[allow(deprecated)]
 pub const KHR_MAINTENANCE4_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_maintenance4"),
@@ -3865,7 +3865,7 @@ pub const KHR_MAINTENANCE4_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_maintenance5.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance5.html>
 #[allow(deprecated)]
 pub const KHR_MAINTENANCE5_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_maintenance5"),
@@ -3881,7 +3881,7 @@ pub const KHR_MAINTENANCE5_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_maintenance6.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance6.html>
 #[allow(deprecated)]
 pub const KHR_MAINTENANCE6_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_maintenance6"),
@@ -3897,7 +3897,7 @@ pub const KHR_MAINTENANCE6_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_maintenance7.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance7.html>
 #[allow(deprecated)]
 pub const KHR_MAINTENANCE7_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_maintenance7"),
@@ -3913,7 +3913,7 @@ pub const KHR_MAINTENANCE7_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_map_memory2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_map_memory2.html>
 #[allow(deprecated)]
 pub const KHR_MAP_MEMORY2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_map_memory2"),
@@ -3929,7 +3929,7 @@ pub const KHR_MAP_MEMORY2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_multiview.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_multiview.html>
 #[allow(deprecated)]
 pub const KHR_MULTIVIEW_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_multiview"),
@@ -3945,7 +3945,7 @@ pub const KHR_MULTIVIEW_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_object_refresh.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_object_refresh.html>
 #[allow(deprecated)]
 pub const KHR_OBJECT_REFRESH_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_object_refresh"),
@@ -3961,7 +3961,7 @@ pub const KHR_OBJECT_REFRESH_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_performance_query.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_performance_query.html>
 #[allow(deprecated)]
 pub const KHR_PERFORMANCE_QUERY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_performance_query"),
@@ -3977,7 +3977,7 @@ pub const KHR_PERFORMANCE_QUERY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_pipeline_binary.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_pipeline_binary.html>
 #[allow(deprecated)]
 pub const KHR_PIPELINE_BINARY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_pipeline_binary"),
@@ -3993,7 +3993,7 @@ pub const KHR_PIPELINE_BINARY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_pipeline_executable_properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_pipeline_executable_properties.html>
 #[allow(deprecated)]
 pub const KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_pipeline_executable_properties"),
@@ -4009,7 +4009,7 @@ pub const KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_pipeline_library.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_pipeline_library.html>
 #[allow(deprecated)]
 pub const KHR_PIPELINE_LIBRARY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_pipeline_library"),
@@ -4025,7 +4025,7 @@ pub const KHR_PIPELINE_LIBRARY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_portability_enumeration.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_portability_enumeration.html>
 #[allow(deprecated)]
 pub const KHR_PORTABILITY_ENUMERATION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_portability_enumeration"),
@@ -4041,7 +4041,7 @@ pub const KHR_PORTABILITY_ENUMERATION_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_portability_subset.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_portability_subset.html>
 ///
 /// ## WARNING
 ///
@@ -4065,7 +4065,7 @@ pub const KHR_PORTABILITY_SUBSET_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_present_id.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_present_id.html>
 #[allow(deprecated)]
 pub const KHR_PRESENT_ID_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_present_id"),
@@ -4081,7 +4081,7 @@ pub const KHR_PRESENT_ID_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_present_wait.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_present_wait.html>
 #[allow(deprecated)]
 pub const KHR_PRESENT_WAIT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_present_wait"),
@@ -4097,7 +4097,7 @@ pub const KHR_PRESENT_WAIT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_push_descriptor.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_push_descriptor.html>
 #[allow(deprecated)]
 pub const KHR_PUSH_DESCRIPTOR_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_push_descriptor"),
@@ -4113,7 +4113,7 @@ pub const KHR_PUSH_DESCRIPTOR_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_ray_query.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_ray_query.html>
 #[allow(deprecated)]
 pub const KHR_RAY_QUERY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_ray_query"),
@@ -4129,7 +4129,7 @@ pub const KHR_RAY_QUERY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_ray_tracing_maintenance1.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_ray_tracing_maintenance1.html>
 #[allow(deprecated)]
 pub const KHR_RAY_TRACING_MAINTENANCE1_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_ray_tracing_maintenance1"),
@@ -4145,7 +4145,7 @@ pub const KHR_RAY_TRACING_MAINTENANCE1_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_ray_tracing_pipeline.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_ray_tracing_pipeline.html>
 #[allow(deprecated)]
 pub const KHR_RAY_TRACING_PIPELINE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_ray_tracing_pipeline"),
@@ -4161,7 +4161,7 @@ pub const KHR_RAY_TRACING_PIPELINE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_ray_tracing_position_fetch.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_ray_tracing_position_fetch.html>
 #[allow(deprecated)]
 pub const KHR_RAY_TRACING_POSITION_FETCH_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_ray_tracing_position_fetch"),
@@ -4177,7 +4177,7 @@ pub const KHR_RAY_TRACING_POSITION_FETCH_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_relaxed_block_layout.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_relaxed_block_layout.html>
 #[allow(deprecated)]
 pub const KHR_RELAXED_BLOCK_LAYOUT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_relaxed_block_layout"),
@@ -4193,7 +4193,7 @@ pub const KHR_RELAXED_BLOCK_LAYOUT_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_sampler_mirror_clamp_to_edge.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_sampler_mirror_clamp_to_edge.html>
 #[allow(deprecated)]
 pub const KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_sampler_mirror_clamp_to_edge"),
@@ -4209,7 +4209,7 @@ pub const KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_sampler_ycbcr_conversion.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_sampler_ycbcr_conversion.html>
 #[allow(deprecated)]
 pub const KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_sampler_ycbcr_conversion"),
@@ -4225,7 +4225,7 @@ pub const KHR_SAMPLER_YCBCR_CONVERSION_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_separate_depth_stencil_layouts.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_separate_depth_stencil_layouts.html>
 #[allow(deprecated)]
 pub const KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_separate_depth_stencil_layouts"),
@@ -4241,7 +4241,7 @@ pub const KHR_SEPARATE_DEPTH_STENCIL_LAYOUTS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_atomic_int64.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_atomic_int64.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_ATOMIC_INT64_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_atomic_int64"),
@@ -4257,7 +4257,7 @@ pub const KHR_SHADER_ATOMIC_INT64_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_clock.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_clock.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_CLOCK_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_clock"),
@@ -4273,7 +4273,7 @@ pub const KHR_SHADER_CLOCK_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_draw_parameters.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_draw_parameters.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_DRAW_PARAMETERS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_draw_parameters"),
@@ -4289,7 +4289,7 @@ pub const KHR_SHADER_DRAW_PARAMETERS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_expect_assume.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_expect_assume.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_EXPECT_ASSUME_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_expect_assume"),
@@ -4305,7 +4305,7 @@ pub const KHR_SHADER_EXPECT_ASSUME_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_float16_int8.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_float16_int8.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_FLOAT16_INT8_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_float16_int8"),
@@ -4321,7 +4321,7 @@ pub const KHR_SHADER_FLOAT16_INT8_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_float_controls.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_float_controls.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_FLOAT_CONTROLS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_float_controls"),
@@ -4337,7 +4337,7 @@ pub const KHR_SHADER_FLOAT_CONTROLS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_float_controls2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_float_controls2.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_FLOAT_CONTROLS2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_float_controls2"),
@@ -4353,7 +4353,7 @@ pub const KHR_SHADER_FLOAT_CONTROLS2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_integer_dot_product.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_integer_dot_product.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_integer_dot_product"),
@@ -4369,7 +4369,7 @@ pub const KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_maximal_reconvergence.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_maximal_reconvergence.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_MAXIMAL_RECONVERGENCE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_maximal_reconvergence"),
@@ -4385,7 +4385,7 @@ pub const KHR_SHADER_MAXIMAL_RECONVERGENCE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_non_semantic_info.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_non_semantic_info.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_NON_SEMANTIC_INFO_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_non_semantic_info"),
@@ -4401,7 +4401,7 @@ pub const KHR_SHADER_NON_SEMANTIC_INFO_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_quad_control.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_quad_control.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_QUAD_CONTROL_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_quad_control"),
@@ -4417,7 +4417,7 @@ pub const KHR_SHADER_QUAD_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_relaxed_extended_instruction.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_relaxed_extended_instruction.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_RELAXED_EXTENDED_INSTRUCTION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_relaxed_extended_instruction"),
@@ -4433,7 +4433,7 @@ pub const KHR_SHADER_RELAXED_EXTENDED_INSTRUCTION_EXTENSION: Extension = Extensi
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_subgroup_extended_types.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_subgroup_extended_types.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_SUBGROUP_EXTENDED_TYPES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_subgroup_extended_types"),
@@ -4449,7 +4449,7 @@ pub const KHR_SHADER_SUBGROUP_EXTENDED_TYPES_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_subgroup_rotate.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_subgroup_rotate.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_SUBGROUP_ROTATE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_subgroup_rotate"),
@@ -4465,7 +4465,7 @@ pub const KHR_SHADER_SUBGROUP_ROTATE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_subgroup_uniform_control_flow.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_subgroup_uniform_control_flow.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_subgroup_uniform_control_flow"),
@@ -4481,7 +4481,7 @@ pub const KHR_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_EXTENSION: Extension = Extens
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shader_terminate_invocation.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_terminate_invocation.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_TERMINATE_INVOCATION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shader_terminate_invocation"),
@@ -4497,7 +4497,7 @@ pub const KHR_SHADER_TERMINATE_INVOCATION_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_shared_presentable_image.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shared_presentable_image.html>
 #[allow(deprecated)]
 pub const KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_shared_presentable_image"),
@@ -4513,7 +4513,7 @@ pub const KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_spirv_1_4.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_spirv_1_4.html>
 #[allow(deprecated)]
 pub const KHR_SPIRV_1_4_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_spirv_1_4"),
@@ -4529,7 +4529,7 @@ pub const KHR_SPIRV_1_4_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_storage_buffer_storage_class.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_storage_buffer_storage_class.html>
 #[allow(deprecated)]
 pub const KHR_STORAGE_BUFFER_STORAGE_CLASS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_storage_buffer_storage_class"),
@@ -4545,7 +4545,7 @@ pub const KHR_STORAGE_BUFFER_STORAGE_CLASS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_surface.html>
 #[allow(deprecated)]
 pub const KHR_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_surface"),
@@ -4561,7 +4561,7 @@ pub const KHR_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_surface_protected_capabilities.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_surface_protected_capabilities.html>
 #[allow(deprecated)]
 pub const KHR_SURFACE_PROTECTED_CAPABILITIES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_surface_protected_capabilities"),
@@ -4577,7 +4577,7 @@ pub const KHR_SURFACE_PROTECTED_CAPABILITIES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_swapchain.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_swapchain.html>
 #[allow(deprecated)]
 pub const KHR_SWAPCHAIN_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_swapchain"),
@@ -4593,7 +4593,7 @@ pub const KHR_SWAPCHAIN_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_swapchain_mutable_format.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_swapchain_mutable_format.html>
 #[allow(deprecated)]
 pub const KHR_SWAPCHAIN_MUTABLE_FORMAT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_swapchain_mutable_format"),
@@ -4609,7 +4609,7 @@ pub const KHR_SWAPCHAIN_MUTABLE_FORMAT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_synchronization2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_synchronization2.html>
 #[allow(deprecated)]
 pub const KHR_SYNCHRONIZATION2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_synchronization2"),
@@ -4625,7 +4625,7 @@ pub const KHR_SYNCHRONIZATION2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_timeline_semaphore.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_timeline_semaphore.html>
 #[allow(deprecated)]
 pub const KHR_TIMELINE_SEMAPHORE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_timeline_semaphore"),
@@ -4641,7 +4641,7 @@ pub const KHR_TIMELINE_SEMAPHORE_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_uniform_buffer_standard_layout.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_uniform_buffer_standard_layout.html>
 #[allow(deprecated)]
 pub const KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_uniform_buffer_standard_layout"),
@@ -4657,7 +4657,7 @@ pub const KHR_UNIFORM_BUFFER_STANDARD_LAYOUT_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_variable_pointers.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_variable_pointers.html>
 #[allow(deprecated)]
 pub const KHR_VARIABLE_POINTERS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_variable_pointers"),
@@ -4673,7 +4673,7 @@ pub const KHR_VARIABLE_POINTERS_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_vertex_attribute_divisor.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_vertex_attribute_divisor.html>
 #[allow(deprecated)]
 pub const KHR_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_vertex_attribute_divisor"),
@@ -4689,7 +4689,7 @@ pub const KHR_VERTEX_ATTRIBUTE_DIVISOR_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_4"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_decode_av1.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_decode_av1.html>
 #[allow(deprecated)]
 pub const KHR_VIDEO_DECODE_AV1_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_video_decode_av1"),
@@ -4705,7 +4705,7 @@ pub const KHR_VIDEO_DECODE_AV1_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_decode_h264.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_decode_h264.html>
 #[allow(deprecated)]
 pub const KHR_VIDEO_DECODE_H264_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_video_decode_h264"),
@@ -4721,7 +4721,7 @@ pub const KHR_VIDEO_DECODE_H264_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_decode_h265.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_decode_h265.html>
 #[allow(deprecated)]
 pub const KHR_VIDEO_DECODE_H265_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_video_decode_h265"),
@@ -4737,7 +4737,7 @@ pub const KHR_VIDEO_DECODE_H265_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_decode_queue.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_decode_queue.html>
 #[allow(deprecated)]
 pub const KHR_VIDEO_DECODE_QUEUE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_video_decode_queue"),
@@ -4753,7 +4753,7 @@ pub const KHR_VIDEO_DECODE_QUEUE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_encode_av1.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_av1.html>
 #[allow(deprecated)]
 pub const KHR_VIDEO_ENCODE_AV1_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_video_encode_av1"),
@@ -4769,7 +4769,7 @@ pub const KHR_VIDEO_ENCODE_AV1_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_encode_h264.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_h264.html>
 #[allow(deprecated)]
 pub const KHR_VIDEO_ENCODE_H264_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_video_encode_h264"),
@@ -4785,7 +4785,7 @@ pub const KHR_VIDEO_ENCODE_H264_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_encode_h265.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_h265.html>
 #[allow(deprecated)]
 pub const KHR_VIDEO_ENCODE_H265_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_video_encode_h265"),
@@ -4801,7 +4801,7 @@ pub const KHR_VIDEO_ENCODE_H265_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_encode_quantization_map.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_quantization_map.html>
 #[allow(deprecated)]
 pub const KHR_VIDEO_ENCODE_QUANTIZATION_MAP_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_video_encode_quantization_map"),
@@ -4817,7 +4817,7 @@ pub const KHR_VIDEO_ENCODE_QUANTIZATION_MAP_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_encode_queue.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_queue.html>
 #[allow(deprecated)]
 pub const KHR_VIDEO_ENCODE_QUEUE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_video_encode_queue"),
@@ -4833,7 +4833,7 @@ pub const KHR_VIDEO_ENCODE_QUEUE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_maintenance1.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_maintenance1.html>
 #[allow(deprecated)]
 pub const KHR_VIDEO_MAINTENANCE1_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_video_maintenance1"),
@@ -4849,7 +4849,7 @@ pub const KHR_VIDEO_MAINTENANCE1_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_video_queue.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_queue.html>
 #[allow(deprecated)]
 pub const KHR_VIDEO_QUEUE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_video_queue"),
@@ -4865,7 +4865,7 @@ pub const KHR_VIDEO_QUEUE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_vulkan_memory_model.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_vulkan_memory_model.html>
 #[allow(deprecated)]
 pub const KHR_VULKAN_MEMORY_MODEL_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_vulkan_memory_model"),
@@ -4881,7 +4881,7 @@ pub const KHR_VULKAN_MEMORY_MODEL_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_wayland_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_wayland_surface.html>
 #[allow(deprecated)]
 pub const KHR_WAYLAND_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_wayland_surface"),
@@ -4897,7 +4897,7 @@ pub const KHR_WAYLAND_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_win32_keyed_mutex.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_win32_keyed_mutex.html>
 #[allow(deprecated)]
 pub const KHR_WIN32_KEYED_MUTEX_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_win32_keyed_mutex"),
@@ -4913,7 +4913,7 @@ pub const KHR_WIN32_KEYED_MUTEX_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_win32_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_win32_surface.html>
 #[allow(deprecated)]
 pub const KHR_WIN32_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_win32_surface"),
@@ -4929,7 +4929,7 @@ pub const KHR_WIN32_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_workgroup_memory_explicit_layout.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_workgroup_memory_explicit_layout.html>
 #[allow(deprecated)]
 pub const KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_workgroup_memory_explicit_layout"),
@@ -4945,7 +4945,7 @@ pub const KHR_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_EXTENSION: Extension = Extension 
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_xcb_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_xcb_surface.html>
 #[allow(deprecated)]
 pub const KHR_XCB_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_xcb_surface"),
@@ -4961,7 +4961,7 @@ pub const KHR_XCB_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_xlib_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_xlib_surface.html>
 #[allow(deprecated)]
 pub const KHR_XLIB_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_xlib_surface"),
@@ -4977,7 +4977,7 @@ pub const KHR_XLIB_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_KHR_zero_initialize_workgroup_memory.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_zero_initialize_workgroup_memory.html>
 #[allow(deprecated)]
 pub const KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_KHR_zero_initialize_workgroup_memory"),
@@ -4993,7 +4993,7 @@ pub const KHR_ZERO_INITIALIZE_WORKGROUP_MEMORY_EXTENSION: Extension = Extension 
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_LUNARG_direct_driver_loading.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_LUNARG_direct_driver_loading.html>
 #[allow(deprecated)]
 pub const LUNARG_DIRECT_DRIVER_LOADING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_LUNARG_direct_driver_loading"),
@@ -5009,7 +5009,7 @@ pub const LUNARG_DIRECT_DRIVER_LOADING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_MESA_image_alignment_control.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_MESA_image_alignment_control.html>
 #[allow(deprecated)]
 pub const MESA_IMAGE_ALIGNMENT_CONTROL_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_MESA_image_alignment_control"),
@@ -5025,7 +5025,7 @@ pub const MESA_IMAGE_ALIGNMENT_CONTROL_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_MSFT_layered_driver.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_MSFT_layered_driver.html>
 #[allow(deprecated)]
 pub const MSFT_LAYERED_DRIVER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_MSFT_layered_driver"),
@@ -5041,7 +5041,7 @@ pub const MSFT_LAYERED_DRIVER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_MVK_ios_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_MVK_ios_surface.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_metal_surface`")]
 #[allow(deprecated)]
 pub const MVK_IOS_SURFACE_EXTENSION: Extension = Extension {
@@ -5058,7 +5058,7 @@ pub const MVK_IOS_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_MVK_macos_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_MVK_macos_surface.html>
 #[deprecated(note = "deprecated in favor of `VK_EXT_metal_surface`")]
 #[allow(deprecated)]
 pub const MVK_MACOS_SURFACE_EXTENSION: Extension = Extension {
@@ -5075,7 +5075,7 @@ pub const MVK_MACOS_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NN_vi_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NN_vi_surface.html>
 #[allow(deprecated)]
 pub const NN_VI_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NN_vi_surface"),
@@ -5091,7 +5091,7 @@ pub const NN_VI_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NVX_binary_import.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NVX_binary_import.html>
 #[allow(deprecated)]
 pub const NVX_BINARY_IMPORT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NVX_binary_import"),
@@ -5107,7 +5107,7 @@ pub const NVX_BINARY_IMPORT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NVX_image_view_handle.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NVX_image_view_handle.html>
 #[allow(deprecated)]
 pub const NVX_IMAGE_VIEW_HANDLE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NVX_image_view_handle"),
@@ -5123,7 +5123,7 @@ pub const NVX_IMAGE_VIEW_HANDLE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NVX_multiview_per_view_attributes.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NVX_multiview_per_view_attributes.html>
 #[allow(deprecated)]
 pub const NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NVX_multiview_per_view_attributes"),
@@ -5139,7 +5139,7 @@ pub const NVX_MULTIVIEW_PER_VIEW_ATTRIBUTES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_acquire_winrt_display.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_acquire_winrt_display.html>
 #[allow(deprecated)]
 pub const NV_ACQUIRE_WINRT_DISPLAY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_acquire_winrt_display"),
@@ -5155,7 +5155,7 @@ pub const NV_ACQUIRE_WINRT_DISPLAY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_clip_space_w_scaling.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_clip_space_w_scaling.html>
 #[allow(deprecated)]
 pub const NV_CLIP_SPACE_W_SCALING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_clip_space_w_scaling"),
@@ -5171,7 +5171,7 @@ pub const NV_CLIP_SPACE_W_SCALING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_command_buffer_inheritance.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_command_buffer_inheritance.html>
 #[allow(deprecated)]
 pub const NV_COMMAND_BUFFER_INHERITANCE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_command_buffer_inheritance"),
@@ -5187,7 +5187,7 @@ pub const NV_COMMAND_BUFFER_INHERITANCE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_compute_shader_derivatives.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_compute_shader_derivatives.html>
 #[allow(deprecated)]
 pub const NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_compute_shader_derivatives"),
@@ -5203,7 +5203,7 @@ pub const NV_COMPUTE_SHADER_DERIVATIVES_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_compute_shader_derivatives"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_cooperative_matrix.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_cooperative_matrix.html>
 #[allow(deprecated)]
 pub const NV_COOPERATIVE_MATRIX_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_cooperative_matrix"),
@@ -5219,7 +5219,7 @@ pub const NV_COOPERATIVE_MATRIX_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_cooperative_matrix2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_cooperative_matrix2.html>
 #[allow(deprecated)]
 pub const NV_COOPERATIVE_MATRIX2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_cooperative_matrix2"),
@@ -5235,7 +5235,7 @@ pub const NV_COOPERATIVE_MATRIX2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_copy_memory_indirect.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_copy_memory_indirect.html>
 #[allow(deprecated)]
 pub const NV_COPY_MEMORY_INDIRECT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_copy_memory_indirect"),
@@ -5251,7 +5251,7 @@ pub const NV_COPY_MEMORY_INDIRECT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_corner_sampled_image.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_corner_sampled_image.html>
 #[allow(deprecated)]
 pub const NV_CORNER_SAMPLED_IMAGE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_corner_sampled_image"),
@@ -5267,7 +5267,7 @@ pub const NV_CORNER_SAMPLED_IMAGE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_coverage_reduction_mode.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_coverage_reduction_mode.html>
 #[allow(deprecated)]
 pub const NV_COVERAGE_REDUCTION_MODE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_coverage_reduction_mode"),
@@ -5283,7 +5283,7 @@ pub const NV_COVERAGE_REDUCTION_MODE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_cuda_kernel_launch.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_cuda_kernel_launch.html>
 ///
 /// ## WARNING
 ///
@@ -5307,7 +5307,7 @@ pub const NV_CUDA_KERNEL_LAUNCH_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_dedicated_allocation.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_dedicated_allocation.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_dedicated_allocation`")]
 #[allow(deprecated)]
 pub const NV_DEDICATED_ALLOCATION_EXTENSION: Extension = Extension {
@@ -5324,7 +5324,7 @@ pub const NV_DEDICATED_ALLOCATION_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_dedicated_allocation_image_aliasing.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_dedicated_allocation_image_aliasing.html>
 #[allow(deprecated)]
 pub const NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_dedicated_allocation_image_aliasing"),
@@ -5340,7 +5340,7 @@ pub const NV_DEDICATED_ALLOCATION_IMAGE_ALIASING_EXTENSION: Extension = Extensio
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_descriptor_pool_overallocation.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_descriptor_pool_overallocation.html>
 #[allow(deprecated)]
 pub const NV_DESCRIPTOR_POOL_OVERALLOCATION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_descriptor_pool_overallocation"),
@@ -5356,7 +5356,7 @@ pub const NV_DESCRIPTOR_POOL_OVERALLOCATION_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_device_diagnostic_checkpoints.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_device_diagnostic_checkpoints.html>
 #[allow(deprecated)]
 pub const NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_device_diagnostic_checkpoints"),
@@ -5372,7 +5372,7 @@ pub const NV_DEVICE_DIAGNOSTIC_CHECKPOINTS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_device_diagnostics_config.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_device_diagnostics_config.html>
 #[allow(deprecated)]
 pub const NV_DEVICE_DIAGNOSTICS_CONFIG_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_device_diagnostics_config"),
@@ -5388,7 +5388,7 @@ pub const NV_DEVICE_DIAGNOSTICS_CONFIG_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_device_generated_commands.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_device_generated_commands.html>
 #[allow(deprecated)]
 pub const NV_DEVICE_GENERATED_COMMANDS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_device_generated_commands"),
@@ -5404,7 +5404,7 @@ pub const NV_DEVICE_GENERATED_COMMANDS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_device_generated_commands_compute.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_device_generated_commands_compute.html>
 #[allow(deprecated)]
 pub const NV_DEVICE_GENERATED_COMMANDS_COMPUTE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_device_generated_commands_compute"),
@@ -5420,7 +5420,7 @@ pub const NV_DEVICE_GENERATED_COMMANDS_COMPUTE_EXTENSION: Extension = Extension 
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_displacement_micromap.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_displacement_micromap.html>
 ///
 /// ## WARNING
 ///
@@ -5444,7 +5444,7 @@ pub const NV_DISPLACEMENT_MICROMAP_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_display_stereo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_display_stereo.html>
 #[allow(deprecated)]
 pub const NV_DISPLAY_STEREO_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_display_stereo"),
@@ -5460,7 +5460,7 @@ pub const NV_DISPLAY_STEREO_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_extended_sparse_address_space.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_extended_sparse_address_space.html>
 #[allow(deprecated)]
 pub const NV_EXTENDED_SPARSE_ADDRESS_SPACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_extended_sparse_address_space"),
@@ -5476,7 +5476,7 @@ pub const NV_EXTENDED_SPARSE_ADDRESS_SPACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_external_memory.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_memory.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory`")]
 #[allow(deprecated)]
 pub const NV_EXTERNAL_MEMORY_EXTENSION: Extension = Extension {
@@ -5493,7 +5493,7 @@ pub const NV_EXTERNAL_MEMORY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_external_memory_capabilities.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_memory_capabilities.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory_capabilities`")]
 #[allow(deprecated)]
 pub const NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION: Extension = Extension {
@@ -5510,7 +5510,7 @@ pub const NV_EXTERNAL_MEMORY_CAPABILITIES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_external_memory_rdma.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_memory_rdma.html>
 #[allow(deprecated)]
 pub const NV_EXTERNAL_MEMORY_RDMA_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_external_memory_rdma"),
@@ -5526,7 +5526,7 @@ pub const NV_EXTERNAL_MEMORY_RDMA_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_external_memory_sci_buf.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_memory_sci_buf.html>
 #[allow(deprecated)]
 pub const NV_EXTERNAL_MEMORY_SCI_BUF_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_external_memory_sci_buf"),
@@ -5542,7 +5542,7 @@ pub const NV_EXTERNAL_MEMORY_SCI_BUF_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_external_memory_win32.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_memory_win32.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory_win32`")]
 #[allow(deprecated)]
 pub const NV_EXTERNAL_MEMORY_WIN32_EXTENSION: Extension = Extension {
@@ -5559,7 +5559,7 @@ pub const NV_EXTERNAL_MEMORY_WIN32_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_external_sci_sync.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_sci_sync.html>
 #[deprecated(note = "deprecated in favor of `VK_NV_external_sci_sync2`")]
 #[allow(deprecated)]
 pub const NV_EXTERNAL_SCI_SYNC_EXTENSION: Extension = Extension {
@@ -5576,7 +5576,7 @@ pub const NV_EXTERNAL_SCI_SYNC_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_external_sci_sync2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_sci_sync2.html>
 #[allow(deprecated)]
 pub const NV_EXTERNAL_SCI_SYNC2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_external_sci_sync2"),
@@ -5592,7 +5592,7 @@ pub const NV_EXTERNAL_SCI_SYNC2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_fill_rectangle.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_fill_rectangle.html>
 #[allow(deprecated)]
 pub const NV_FILL_RECTANGLE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_fill_rectangle"),
@@ -5608,7 +5608,7 @@ pub const NV_FILL_RECTANGLE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_fragment_coverage_to_color.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_fragment_coverage_to_color.html>
 #[allow(deprecated)]
 pub const NV_FRAGMENT_COVERAGE_TO_COLOR_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_fragment_coverage_to_color"),
@@ -5624,7 +5624,7 @@ pub const NV_FRAGMENT_COVERAGE_TO_COLOR_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_fragment_shader_barycentric.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_fragment_shader_barycentric.html>
 #[allow(deprecated)]
 pub const NV_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_fragment_shader_barycentric"),
@@ -5640,7 +5640,7 @@ pub const NV_FRAGMENT_SHADER_BARYCENTRIC_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_fragment_shader_barycentric"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_fragment_shading_rate_enums.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_fragment_shading_rate_enums.html>
 #[allow(deprecated)]
 pub const NV_FRAGMENT_SHADING_RATE_ENUMS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_fragment_shading_rate_enums"),
@@ -5656,7 +5656,7 @@ pub const NV_FRAGMENT_SHADING_RATE_ENUMS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_framebuffer_mixed_samples.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_framebuffer_mixed_samples.html>
 #[allow(deprecated)]
 pub const NV_FRAMEBUFFER_MIXED_SAMPLES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_framebuffer_mixed_samples"),
@@ -5672,7 +5672,7 @@ pub const NV_FRAMEBUFFER_MIXED_SAMPLES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_geometry_shader_passthrough.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_geometry_shader_passthrough.html>
 #[allow(deprecated)]
 pub const NV_GEOMETRY_SHADER_PASSTHROUGH_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_geometry_shader_passthrough"),
@@ -5688,7 +5688,7 @@ pub const NV_GEOMETRY_SHADER_PASSTHROUGH_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_glsl_shader.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_glsl_shader.html>
 #[deprecated]
 #[allow(deprecated)]
 pub const NV_GLSL_SHADER_EXTENSION: Extension = Extension {
@@ -5705,7 +5705,7 @@ pub const NV_GLSL_SHADER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_inherited_viewport_scissor.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_inherited_viewport_scissor.html>
 #[allow(deprecated)]
 pub const NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_inherited_viewport_scissor"),
@@ -5721,7 +5721,7 @@ pub const NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_linear_color_attachment.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_linear_color_attachment.html>
 #[allow(deprecated)]
 pub const NV_LINEAR_COLOR_ATTACHMENT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_linear_color_attachment"),
@@ -5737,7 +5737,7 @@ pub const NV_LINEAR_COLOR_ATTACHMENT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_low_latency.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_low_latency.html>
 #[allow(deprecated)]
 pub const NV_LOW_LATENCY_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_low_latency"),
@@ -5753,7 +5753,7 @@ pub const NV_LOW_LATENCY_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_low_latency2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_low_latency2.html>
 #[allow(deprecated)]
 pub const NV_LOW_LATENCY2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_low_latency2"),
@@ -5769,7 +5769,7 @@ pub const NV_LOW_LATENCY2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_memory_decompression.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_memory_decompression.html>
 #[allow(deprecated)]
 pub const NV_MEMORY_DECOMPRESSION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_memory_decompression"),
@@ -5785,7 +5785,7 @@ pub const NV_MEMORY_DECOMPRESSION_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_mesh_shader.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_mesh_shader.html>
 #[allow(deprecated)]
 pub const NV_MESH_SHADER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_mesh_shader"),
@@ -5801,7 +5801,7 @@ pub const NV_MESH_SHADER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_optical_flow.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_optical_flow.html>
 #[allow(deprecated)]
 pub const NV_OPTICAL_FLOW_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_optical_flow"),
@@ -5817,7 +5817,7 @@ pub const NV_OPTICAL_FLOW_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_per_stage_descriptor_set.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_per_stage_descriptor_set.html>
 #[allow(deprecated)]
 pub const NV_PER_STAGE_DESCRIPTOR_SET_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_per_stage_descriptor_set"),
@@ -5833,7 +5833,7 @@ pub const NV_PER_STAGE_DESCRIPTOR_SET_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_present_barrier.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_present_barrier.html>
 #[allow(deprecated)]
 pub const NV_PRESENT_BARRIER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_present_barrier"),
@@ -5849,7 +5849,7 @@ pub const NV_PRESENT_BARRIER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_private_vendor_info.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_private_vendor_info.html>
 #[allow(deprecated)]
 pub const NV_PRIVATE_VENDOR_INFO_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_private_vendor_info"),
@@ -5865,7 +5865,7 @@ pub const NV_PRIVATE_VENDOR_INFO_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_raw_access_chains.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_raw_access_chains.html>
 #[allow(deprecated)]
 pub const NV_RAW_ACCESS_CHAINS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_raw_access_chains"),
@@ -5881,7 +5881,7 @@ pub const NV_RAW_ACCESS_CHAINS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_ray_tracing.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_ray_tracing.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_ray_tracing_pipeline`")]
 #[allow(deprecated)]
 pub const NV_RAY_TRACING_EXTENSION: Extension = Extension {
@@ -5898,7 +5898,7 @@ pub const NV_RAY_TRACING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_ray_tracing_invocation_reorder.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_ray_tracing_invocation_reorder.html>
 #[allow(deprecated)]
 pub const NV_RAY_TRACING_INVOCATION_REORDER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_ray_tracing_invocation_reorder"),
@@ -5914,7 +5914,7 @@ pub const NV_RAY_TRACING_INVOCATION_REORDER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_ray_tracing_motion_blur.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_ray_tracing_motion_blur.html>
 #[allow(deprecated)]
 pub const NV_RAY_TRACING_MOTION_BLUR_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_ray_tracing_motion_blur"),
@@ -5930,7 +5930,7 @@ pub const NV_RAY_TRACING_MOTION_BLUR_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_ray_tracing_validation.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_ray_tracing_validation.html>
 #[allow(deprecated)]
 pub const NV_RAY_TRACING_VALIDATION_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_ray_tracing_validation"),
@@ -5946,7 +5946,7 @@ pub const NV_RAY_TRACING_VALIDATION_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_representative_fragment_test.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_representative_fragment_test.html>
 #[allow(deprecated)]
 pub const NV_REPRESENTATIVE_FRAGMENT_TEST_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_representative_fragment_test"),
@@ -5962,7 +5962,7 @@ pub const NV_REPRESENTATIVE_FRAGMENT_TEST_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_sample_mask_override_coverage.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_sample_mask_override_coverage.html>
 #[allow(deprecated)]
 pub const NV_SAMPLE_MASK_OVERRIDE_COVERAGE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_sample_mask_override_coverage"),
@@ -5978,7 +5978,7 @@ pub const NV_SAMPLE_MASK_OVERRIDE_COVERAGE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_scissor_exclusive.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_scissor_exclusive.html>
 #[allow(deprecated)]
 pub const NV_SCISSOR_EXCLUSIVE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_scissor_exclusive"),
@@ -5994,7 +5994,7 @@ pub const NV_SCISSOR_EXCLUSIVE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_shader_atomic_float16_vector.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_shader_atomic_float16_vector.html>
 #[allow(deprecated)]
 pub const NV_SHADER_ATOMIC_FLOAT16_VECTOR_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_shader_atomic_float16_vector"),
@@ -6010,7 +6010,7 @@ pub const NV_SHADER_ATOMIC_FLOAT16_VECTOR_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_shader_image_footprint.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_shader_image_footprint.html>
 #[allow(deprecated)]
 pub const NV_SHADER_IMAGE_FOOTPRINT_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_shader_image_footprint"),
@@ -6026,7 +6026,7 @@ pub const NV_SHADER_IMAGE_FOOTPRINT_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_shader_sm_builtins.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_shader_sm_builtins.html>
 #[allow(deprecated)]
 pub const NV_SHADER_SM_BUILTINS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_shader_sm_builtins"),
@@ -6042,7 +6042,7 @@ pub const NV_SHADER_SM_BUILTINS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_shader_subgroup_partitioned.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_shader_subgroup_partitioned.html>
 #[allow(deprecated)]
 pub const NV_SHADER_SUBGROUP_PARTITIONED_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_shader_subgroup_partitioned"),
@@ -6058,7 +6058,7 @@ pub const NV_SHADER_SUBGROUP_PARTITIONED_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_shading_rate_image.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_shading_rate_image.html>
 #[allow(deprecated)]
 pub const NV_SHADING_RATE_IMAGE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_shading_rate_image"),
@@ -6074,7 +6074,7 @@ pub const NV_SHADING_RATE_IMAGE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_viewport_array2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_viewport_array2.html>
 #[allow(deprecated)]
 pub const NV_VIEWPORT_ARRAY2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_viewport_array2"),
@@ -6090,7 +6090,7 @@ pub const NV_VIEWPORT_ARRAY2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_viewport_swizzle.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_viewport_swizzle.html>
 #[allow(deprecated)]
 pub const NV_VIEWPORT_SWIZZLE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_viewport_swizzle"),
@@ -6106,7 +6106,7 @@ pub const NV_VIEWPORT_SWIZZLE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_NV_win32_keyed_mutex.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_win32_keyed_mutex.html>
 #[allow(deprecated)]
 pub const NV_WIN32_KEYED_MUTEX_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_win32_keyed_mutex"),
@@ -6122,7 +6122,7 @@ pub const NV_WIN32_KEYED_MUTEX_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_KHR_win32_keyed_mutex"),
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_filter_cubic_clamp.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_filter_cubic_clamp.html>
 #[allow(deprecated)]
 pub const QCOM_FILTER_CUBIC_CLAMP_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_filter_cubic_clamp"),
@@ -6138,7 +6138,7 @@ pub const QCOM_FILTER_CUBIC_CLAMP_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_filter_cubic_weights.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_filter_cubic_weights.html>
 #[allow(deprecated)]
 pub const QCOM_FILTER_CUBIC_WEIGHTS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_filter_cubic_weights"),
@@ -6154,7 +6154,7 @@ pub const QCOM_FILTER_CUBIC_WEIGHTS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_fragment_density_map_offset.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_fragment_density_map_offset.html>
 #[allow(deprecated)]
 pub const QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_fragment_density_map_offset"),
@@ -6170,7 +6170,7 @@ pub const QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_image_processing.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_image_processing.html>
 #[allow(deprecated)]
 pub const QCOM_IMAGE_PROCESSING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_image_processing"),
@@ -6186,7 +6186,7 @@ pub const QCOM_IMAGE_PROCESSING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_image_processing2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_image_processing2.html>
 #[allow(deprecated)]
 pub const QCOM_IMAGE_PROCESSING2_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_image_processing2"),
@@ -6202,7 +6202,7 @@ pub const QCOM_IMAGE_PROCESSING2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_multiview_per_view_render_areas.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_multiview_per_view_render_areas.html>
 #[allow(deprecated)]
 pub const QCOM_MULTIVIEW_PER_VIEW_RENDER_AREAS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_multiview_per_view_render_areas"),
@@ -6218,7 +6218,7 @@ pub const QCOM_MULTIVIEW_PER_VIEW_RENDER_AREAS_EXTENSION: Extension = Extension 
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_multiview_per_view_viewports.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_multiview_per_view_viewports.html>
 #[allow(deprecated)]
 pub const QCOM_MULTIVIEW_PER_VIEW_VIEWPORTS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_multiview_per_view_viewports"),
@@ -6234,7 +6234,7 @@ pub const QCOM_MULTIVIEW_PER_VIEW_VIEWPORTS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_render_pass_shader_resolve.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_render_pass_shader_resolve.html>
 #[allow(deprecated)]
 pub const QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_render_pass_shader_resolve"),
@@ -6250,7 +6250,7 @@ pub const QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_render_pass_store_ops.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_render_pass_store_ops.html>
 #[allow(deprecated)]
 pub const QCOM_RENDER_PASS_STORE_OPS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_render_pass_store_ops"),
@@ -6266,7 +6266,7 @@ pub const QCOM_RENDER_PASS_STORE_OPS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_render_pass_transform.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_render_pass_transform.html>
 #[allow(deprecated)]
 pub const QCOM_RENDER_PASS_TRANSFORM_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_render_pass_transform"),
@@ -6282,7 +6282,7 @@ pub const QCOM_RENDER_PASS_TRANSFORM_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_rotated_copy_commands.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_rotated_copy_commands.html>
 #[allow(deprecated)]
 pub const QCOM_ROTATED_COPY_COMMANDS_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_rotated_copy_commands"),
@@ -6298,7 +6298,7 @@ pub const QCOM_ROTATED_COPY_COMMANDS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_tile_properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_properties.html>
 #[allow(deprecated)]
 pub const QCOM_TILE_PROPERTIES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_tile_properties"),
@@ -6314,7 +6314,7 @@ pub const QCOM_TILE_PROPERTIES_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QCOM_ycbcr_degamma.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_ycbcr_degamma.html>
 #[allow(deprecated)]
 pub const QCOM_YCBCR_DEGAMMA_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_ycbcr_degamma"),
@@ -6330,7 +6330,7 @@ pub const QCOM_YCBCR_DEGAMMA_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QNX_external_memory_screen_buffer.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QNX_external_memory_screen_buffer.html>
 #[allow(deprecated)]
 pub const QNX_EXTERNAL_MEMORY_SCREEN_BUFFER_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QNX_external_memory_screen_buffer"),
@@ -6346,7 +6346,7 @@ pub const QNX_EXTERNAL_MEMORY_SCREEN_BUFFER_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_QNX_screen_surface.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QNX_screen_surface.html>
 #[allow(deprecated)]
 pub const QNX_SCREEN_SURFACE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QNX_screen_surface"),
@@ -6362,7 +6362,7 @@ pub const QNX_SCREEN_SURFACE_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_SEC_amigo_profiling.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_SEC_amigo_profiling.html>
 #[allow(deprecated)]
 pub const SEC_AMIGO_PROFILING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_SEC_amigo_profiling"),
@@ -6378,7 +6378,7 @@ pub const SEC_AMIGO_PROFILING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_VALVE_descriptor_set_host_mapping.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_VALVE_descriptor_set_host_mapping.html>
 #[allow(deprecated)]
 pub const VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_VALVE_descriptor_set_host_mapping"),
@@ -6394,7 +6394,7 @@ pub const VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VK_VALVE_mutable_descriptor_type.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_VALVE_mutable_descriptor_type.html>
 #[allow(deprecated)]
 pub const VALVE_MUTABLE_DESCRIPTOR_TYPE_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_VALVE_mutable_descriptor_type"),

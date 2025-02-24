@@ -21,19 +21,19 @@
 
 use core::ffi::{c_ulong, c_void};
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBool32.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBool32.html>
 pub type Bool32 = u32;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceAddress.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceAddress.html>
 pub type DeviceAddress = u64;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceSize.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceSize.html>
 pub type DeviceSize = u64;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFlags.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFlags.html>
 pub type Flags = u32;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFlags64.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFlags64.html>
 pub type Flags64 = u64;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRemoteAddressNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRemoteAddressNV.html>
 pub type RemoteAddressNV = c_void;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSampleMask.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSampleMask.html>
 pub type SampleMask = u32;
 
 // Android

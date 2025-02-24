@@ -25,7 +25,7 @@ use core::ptr;
 
 use crate::*;
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAabbPositionsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAabbPositionsKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct AabbPositionsKHR {
@@ -37,7 +37,7 @@ pub struct AabbPositionsKHR {
     pub max_z: f32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureBuildGeometryInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureBuildGeometryInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct AccelerationStructureBuildGeometryInfoKHR {
@@ -73,7 +73,7 @@ impl Default for AccelerationStructureBuildGeometryInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureBuildRangeInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureBuildRangeInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct AccelerationStructureBuildRangeInfoKHR {
@@ -83,7 +83,7 @@ pub struct AccelerationStructureBuildRangeInfoKHR {
     pub transform_offset: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureBuildSizesInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureBuildSizesInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AccelerationStructureBuildSizesInfoKHR {
@@ -107,7 +107,7 @@ impl Default for AccelerationStructureBuildSizesInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureCaptureDescriptorDataInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureCaptureDescriptorDataInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AccelerationStructureCaptureDescriptorDataInfoEXT {
@@ -129,7 +129,7 @@ impl Default for AccelerationStructureCaptureDescriptorDataInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AccelerationStructureCreateInfoKHR {
@@ -159,7 +159,7 @@ impl Default for AccelerationStructureCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AccelerationStructureCreateInfoNV {
@@ -181,7 +181,7 @@ impl Default for AccelerationStructureCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureDeviceAddressInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureDeviceAddressInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AccelerationStructureDeviceAddressInfoKHR {
@@ -201,7 +201,7 @@ impl Default for AccelerationStructureDeviceAddressInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureGeometryAabbsDataKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryAabbsDataKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct AccelerationStructureGeometryAabbsDataKHR {
@@ -223,7 +223,7 @@ impl Default for AccelerationStructureGeometryAabbsDataKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureGeometryInstancesDataKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryInstancesDataKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct AccelerationStructureGeometryInstancesDataKHR {
@@ -245,7 +245,7 @@ impl Default for AccelerationStructureGeometryInstancesDataKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureGeometryKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct AccelerationStructureGeometryKHR {
@@ -269,7 +269,7 @@ impl Default for AccelerationStructureGeometryKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureGeometryMotionTrianglesDataNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryMotionTrianglesDataNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct AccelerationStructureGeometryMotionTrianglesDataNV {
@@ -289,7 +289,7 @@ impl Default for AccelerationStructureGeometryMotionTrianglesDataNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureGeometryTrianglesDataKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureGeometryTrianglesDataKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct AccelerationStructureGeometryTrianglesDataKHR {
@@ -321,7 +321,7 @@ impl Default for AccelerationStructureGeometryTrianglesDataKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AccelerationStructureInfoNV {
@@ -349,7 +349,7 @@ impl Default for AccelerationStructureInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureInstanceKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureInstanceKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct AccelerationStructureInstanceKHR {
@@ -359,7 +359,7 @@ pub struct AccelerationStructureInstanceKHR {
     pub acceleration_structure_reference: u64,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureMatrixMotionInstanceNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureMatrixMotionInstanceNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct AccelerationStructureMatrixMotionInstanceNV {
@@ -370,7 +370,7 @@ pub struct AccelerationStructureMatrixMotionInstanceNV {
     pub acceleration_structure_reference: u64,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureMemoryRequirementsInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureMemoryRequirementsInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AccelerationStructureMemoryRequirementsInfoNV {
@@ -392,7 +392,7 @@ impl Default for AccelerationStructureMemoryRequirementsInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureMotionInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AccelerationStructureMotionInfoNV {
@@ -414,7 +414,7 @@ impl Default for AccelerationStructureMotionInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureMotionInstanceNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureMotionInstanceNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug)]
 pub struct AccelerationStructureMotionInstanceNV {
@@ -423,7 +423,7 @@ pub struct AccelerationStructureMotionInstanceNV {
     pub data: AccelerationStructureMotionInstanceDataNV,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureSRTMotionInstanceNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureSRTMotionInstanceNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct AccelerationStructureSRTMotionInstanceNV {
@@ -434,7 +434,7 @@ pub struct AccelerationStructureSRTMotionInstanceNV {
     pub acceleration_structure_reference: u64,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureTrianglesDisplacementMicromapNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureTrianglesDisplacementMicromapNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct AccelerationStructureTrianglesDisplacementMicromapNV {
@@ -484,7 +484,7 @@ impl Default for AccelerationStructureTrianglesDisplacementMicromapNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureTrianglesOpacityMicromapEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureTrianglesOpacityMicromapEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct AccelerationStructureTrianglesOpacityMicromapEXT {
@@ -518,7 +518,7 @@ impl Default for AccelerationStructureTrianglesOpacityMicromapEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureVersionInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureVersionInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AccelerationStructureVersionInfoKHR {
@@ -538,7 +538,7 @@ impl Default for AccelerationStructureVersionInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAcquireNextImageInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAcquireNextImageInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AcquireNextImageInfoKHR {
@@ -566,7 +566,7 @@ impl Default for AcquireNextImageInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAcquireProfilingLockInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAcquireProfilingLockInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AcquireProfilingLockInfoKHR {
@@ -588,7 +588,7 @@ impl Default for AcquireProfilingLockInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAllocationCallbacks.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAllocationCallbacks.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct AllocationCallbacks {
@@ -633,7 +633,7 @@ impl Default for AllocationCallbacks {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAmigoProfilingSubmitInfoSEC.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAmigoProfilingSubmitInfoSEC.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AmigoProfilingSubmitInfoSEC {
@@ -655,7 +655,7 @@ impl Default for AmigoProfilingSubmitInfoSEC {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAndroidHardwareBufferFormatProperties2ANDROID.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidHardwareBufferFormatProperties2ANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AndroidHardwareBufferFormatProperties2ANDROID {
@@ -689,7 +689,7 @@ impl Default for AndroidHardwareBufferFormatProperties2ANDROID {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAndroidHardwareBufferFormatPropertiesANDROID.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidHardwareBufferFormatPropertiesANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AndroidHardwareBufferFormatPropertiesANDROID {
@@ -723,7 +723,7 @@ impl Default for AndroidHardwareBufferFormatPropertiesANDROID {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAndroidHardwareBufferFormatResolvePropertiesANDROID.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidHardwareBufferFormatResolvePropertiesANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AndroidHardwareBufferFormatResolvePropertiesANDROID {
@@ -743,7 +743,7 @@ impl Default for AndroidHardwareBufferFormatResolvePropertiesANDROID {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAndroidHardwareBufferPropertiesANDROID.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidHardwareBufferPropertiesANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AndroidHardwareBufferPropertiesANDROID {
@@ -765,7 +765,7 @@ impl Default for AndroidHardwareBufferPropertiesANDROID {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAndroidHardwareBufferUsageANDROID.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidHardwareBufferUsageANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AndroidHardwareBufferUsageANDROID {
@@ -785,7 +785,7 @@ impl Default for AndroidHardwareBufferUsageANDROID {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAndroidSurfaceCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidSurfaceCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AndroidSurfaceCreateInfoKHR {
@@ -807,7 +807,7 @@ impl Default for AndroidSurfaceCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAntiLagDataAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAntiLagDataAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AntiLagDataAMD {
@@ -831,7 +831,7 @@ impl Default for AntiLagDataAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAntiLagPresentationInfoAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAntiLagPresentationInfoAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AntiLagPresentationInfoAMD {
@@ -853,7 +853,7 @@ impl Default for AntiLagPresentationInfoAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkApplicationInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkApplicationInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ApplicationInfo {
@@ -881,7 +881,7 @@ impl Default for ApplicationInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkApplicationParametersEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkApplicationParametersEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ApplicationParametersEXT {
@@ -907,7 +907,7 @@ impl Default for ApplicationParametersEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentDescription.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentDescription.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct AttachmentDescription {
@@ -922,7 +922,7 @@ pub struct AttachmentDescription {
     pub final_layout: ImageLayout,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentDescription2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentDescription2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AttachmentDescription2 {
@@ -958,7 +958,7 @@ impl Default for AttachmentDescription2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentDescriptionStencilLayout.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentDescriptionStencilLayout.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AttachmentDescriptionStencilLayout {
@@ -980,7 +980,7 @@ impl Default for AttachmentDescriptionStencilLayout {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentReference.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentReference.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct AttachmentReference {
@@ -988,7 +988,7 @@ pub struct AttachmentReference {
     pub layout: ImageLayout,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentReference2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentReference2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AttachmentReference2 {
@@ -1012,7 +1012,7 @@ impl Default for AttachmentReference2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentReferenceStencilLayout.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentReferenceStencilLayout.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AttachmentReferenceStencilLayout {
@@ -1032,7 +1032,7 @@ impl Default for AttachmentReferenceStencilLayout {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentSampleCountInfoAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentSampleCountInfoAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct AttachmentSampleCountInfoAMD {
@@ -1056,7 +1056,7 @@ impl Default for AttachmentSampleCountInfoAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentSampleLocationsEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentSampleLocationsEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct AttachmentSampleLocationsEXT {
@@ -1064,7 +1064,7 @@ pub struct AttachmentSampleLocationsEXT {
     pub sample_locations_info: SampleLocationsInfoEXT,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBaseInStructure.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBaseInStructure.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BaseInStructure {
@@ -1082,7 +1082,7 @@ impl Default for BaseInStructure {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBaseOutStructure.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBaseOutStructure.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BaseOutStructure {
@@ -1100,7 +1100,7 @@ impl Default for BaseOutStructure {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindAccelerationStructureMemoryInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindAccelerationStructureMemoryInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BindAccelerationStructureMemoryInfoNV {
@@ -1128,7 +1128,7 @@ impl Default for BindAccelerationStructureMemoryInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindBufferMemoryDeviceGroupInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindBufferMemoryDeviceGroupInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BindBufferMemoryDeviceGroupInfo {
@@ -1150,7 +1150,7 @@ impl Default for BindBufferMemoryDeviceGroupInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindBufferMemoryInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindBufferMemoryInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BindBufferMemoryInfo {
@@ -1174,7 +1174,7 @@ impl Default for BindBufferMemoryInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindDescriptorBufferEmbeddedSamplersInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindDescriptorBufferEmbeddedSamplersInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BindDescriptorBufferEmbeddedSamplersInfoEXT {
@@ -1198,7 +1198,7 @@ impl Default for BindDescriptorBufferEmbeddedSamplersInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindDescriptorSetsInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindDescriptorSetsInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BindDescriptorSetsInfo {
@@ -1230,7 +1230,7 @@ impl Default for BindDescriptorSetsInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindImageMemoryDeviceGroupInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindImageMemoryDeviceGroupInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BindImageMemoryDeviceGroupInfo {
@@ -1256,7 +1256,7 @@ impl Default for BindImageMemoryDeviceGroupInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindImageMemoryInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindImageMemoryInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BindImageMemoryInfo {
@@ -1280,7 +1280,7 @@ impl Default for BindImageMemoryInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindImageMemorySwapchainInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindImageMemorySwapchainInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BindImageMemorySwapchainInfoKHR {
@@ -1302,7 +1302,7 @@ impl Default for BindImageMemorySwapchainInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindImagePlaneMemoryInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindImagePlaneMemoryInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BindImagePlaneMemoryInfo {
@@ -1322,7 +1322,7 @@ impl Default for BindImagePlaneMemoryInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindIndexBufferIndirectCommandEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindIndexBufferIndirectCommandEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct BindIndexBufferIndirectCommandEXT {
@@ -1331,7 +1331,7 @@ pub struct BindIndexBufferIndirectCommandEXT {
     pub index_type: IndexType,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindIndexBufferIndirectCommandNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindIndexBufferIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct BindIndexBufferIndirectCommandNV {
@@ -1340,7 +1340,7 @@ pub struct BindIndexBufferIndirectCommandNV {
     pub index_type: IndexType,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindMemoryStatus.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindMemoryStatus.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BindMemoryStatus {
@@ -1360,21 +1360,21 @@ impl Default for BindMemoryStatus {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindPipelineIndirectCommandNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindPipelineIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct BindPipelineIndirectCommandNV {
     pub pipeline_address: DeviceAddress,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindShaderGroupIndirectCommandNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindShaderGroupIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct BindShaderGroupIndirectCommandNV {
     pub group_index: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindSparseInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindSparseInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BindSparseInfo {
@@ -1412,7 +1412,7 @@ impl Default for BindSparseInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindVertexBufferIndirectCommandEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindVertexBufferIndirectCommandEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct BindVertexBufferIndirectCommandEXT {
@@ -1421,7 +1421,7 @@ pub struct BindVertexBufferIndirectCommandEXT {
     pub stride: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindVertexBufferIndirectCommandNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindVertexBufferIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct BindVertexBufferIndirectCommandNV {
@@ -1430,7 +1430,7 @@ pub struct BindVertexBufferIndirectCommandNV {
     pub stride: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindVideoSessionMemoryInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindVideoSessionMemoryInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BindVideoSessionMemoryInfoKHR {
@@ -1456,7 +1456,7 @@ impl Default for BindVideoSessionMemoryInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBlitImageCubicWeightsInfoQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBlitImageCubicWeightsInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BlitImageCubicWeightsInfoQCOM {
@@ -1476,7 +1476,7 @@ impl Default for BlitImageCubicWeightsInfoQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBlitImageInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBlitImageInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BlitImageInfo2 {
@@ -1508,7 +1508,7 @@ impl Default for BlitImageInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferCaptureDescriptorDataInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCaptureDescriptorDataInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferCaptureDescriptorDataInfoEXT {
@@ -1528,7 +1528,7 @@ impl Default for BufferCaptureDescriptorDataInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferCollectionBufferCreateInfoFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCollectionBufferCreateInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferCollectionBufferCreateInfoFUCHSIA {
@@ -1550,7 +1550,7 @@ impl Default for BufferCollectionBufferCreateInfoFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferCollectionConstraintsInfoFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCollectionConstraintsInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferCollectionConstraintsInfoFUCHSIA {
@@ -1578,7 +1578,7 @@ impl Default for BufferCollectionConstraintsInfoFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferCollectionCreateInfoFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCollectionCreateInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferCollectionCreateInfoFUCHSIA {
@@ -1598,7 +1598,7 @@ impl Default for BufferCollectionCreateInfoFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferCollectionImageCreateInfoFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCollectionImageCreateInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferCollectionImageCreateInfoFUCHSIA {
@@ -1620,7 +1620,7 @@ impl Default for BufferCollectionImageCreateInfoFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferCollectionPropertiesFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCollectionPropertiesFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferCollectionPropertiesFUCHSIA {
@@ -1660,7 +1660,7 @@ impl Default for BufferCollectionPropertiesFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferConstraintsInfoFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferConstraintsInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferConstraintsInfoFUCHSIA {
@@ -1684,7 +1684,7 @@ impl Default for BufferConstraintsInfoFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferCopy.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCopy.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct BufferCopy {
@@ -1693,7 +1693,7 @@ pub struct BufferCopy {
     pub size: DeviceSize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferCopy2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCopy2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferCopy2 {
@@ -1717,7 +1717,7 @@ impl Default for BufferCopy2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferCreateInfo {
@@ -1747,7 +1747,7 @@ impl Default for BufferCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferDeviceAddressCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferDeviceAddressCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferDeviceAddressCreateInfoEXT {
@@ -1767,7 +1767,7 @@ impl Default for BufferDeviceAddressCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferDeviceAddressInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferDeviceAddressInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferDeviceAddressInfo {
@@ -1787,7 +1787,7 @@ impl Default for BufferDeviceAddressInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferImageCopy.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferImageCopy.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct BufferImageCopy {
@@ -1799,7 +1799,7 @@ pub struct BufferImageCopy {
     pub image_extent: Extent3D,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferImageCopy2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferImageCopy2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferImageCopy2 {
@@ -1829,7 +1829,7 @@ impl Default for BufferImageCopy2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferMemoryBarrier.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferMemoryBarrier.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferMemoryBarrier {
@@ -1861,7 +1861,7 @@ impl Default for BufferMemoryBarrier {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferMemoryBarrier2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferMemoryBarrier2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferMemoryBarrier2 {
@@ -1897,7 +1897,7 @@ impl Default for BufferMemoryBarrier2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferMemoryRequirementsInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferMemoryRequirementsInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferMemoryRequirementsInfo2 {
@@ -1917,7 +1917,7 @@ impl Default for BufferMemoryRequirementsInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferOpaqueCaptureAddressCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferOpaqueCaptureAddressCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferOpaqueCaptureAddressCreateInfo {
@@ -1937,7 +1937,7 @@ impl Default for BufferOpaqueCaptureAddressCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferUsageFlags2CreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferUsageFlags2CreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferUsageFlags2CreateInfo {
@@ -1957,7 +1957,7 @@ impl Default for BufferUsageFlags2CreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferViewCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferViewCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BufferViewCreateInfo {
@@ -1985,7 +1985,7 @@ impl Default for BufferViewCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCalibratedTimestampInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCalibratedTimestampInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CalibratedTimestampInfoKHR {
@@ -2005,7 +2005,7 @@ impl Default for CalibratedTimestampInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCheckpointData2NV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCheckpointData2NV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CheckpointData2NV {
@@ -2027,7 +2027,7 @@ impl Default for CheckpointData2NV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCheckpointDataNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCheckpointDataNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CheckpointDataNV {
@@ -2049,7 +2049,7 @@ impl Default for CheckpointDataNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkClearAttachment.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClearAttachment.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug)]
 pub struct ClearAttachment {
@@ -2058,7 +2058,7 @@ pub struct ClearAttachment {
     pub clear_value: ClearValue,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkClearDepthStencilValue.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClearDepthStencilValue.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct ClearDepthStencilValue {
@@ -2066,7 +2066,7 @@ pub struct ClearDepthStencilValue {
     pub stencil: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkClearRect.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkClearRect.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ClearRect {
@@ -2075,7 +2075,7 @@ pub struct ClearRect {
     pub layer_count: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCoarseSampleLocationNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCoarseSampleLocationNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct CoarseSampleLocationNV {
@@ -2084,7 +2084,7 @@ pub struct CoarseSampleLocationNV {
     pub sample: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCoarseSampleOrderCustomNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCoarseSampleOrderCustomNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CoarseSampleOrderCustomNV {
@@ -2106,7 +2106,7 @@ impl Default for CoarseSampleOrderCustomNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkColorBlendAdvancedEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkColorBlendAdvancedEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ColorBlendAdvancedEXT {
@@ -2117,7 +2117,7 @@ pub struct ColorBlendAdvancedEXT {
     pub clamp_results: Bool32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkColorBlendEquationEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkColorBlendEquationEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ColorBlendEquationEXT {
@@ -2129,7 +2129,7 @@ pub struct ColorBlendEquationEXT {
     pub alpha_blend_op: BlendOp,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferAllocateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferAllocateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CommandBufferAllocateInfo {
@@ -2153,7 +2153,7 @@ impl Default for CommandBufferAllocateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferBeginInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferBeginInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CommandBufferBeginInfo {
@@ -2175,7 +2175,7 @@ impl Default for CommandBufferBeginInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferInheritanceConditionalRenderingInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferInheritanceConditionalRenderingInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CommandBufferInheritanceConditionalRenderingInfoEXT {
@@ -2195,7 +2195,7 @@ impl Default for CommandBufferInheritanceConditionalRenderingInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferInheritanceInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferInheritanceInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CommandBufferInheritanceInfo {
@@ -2225,7 +2225,7 @@ impl Default for CommandBufferInheritanceInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferInheritanceRenderPassTransformInfoQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferInheritanceRenderPassTransformInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CommandBufferInheritanceRenderPassTransformInfoQCOM {
@@ -2247,7 +2247,7 @@ impl Default for CommandBufferInheritanceRenderPassTransformInfoQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferInheritanceRenderingInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferInheritanceRenderingInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CommandBufferInheritanceRenderingInfo {
@@ -2279,7 +2279,7 @@ impl Default for CommandBufferInheritanceRenderingInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferInheritanceViewportScissorInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferInheritanceViewportScissorInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CommandBufferInheritanceViewportScissorInfoNV {
@@ -2303,7 +2303,7 @@ impl Default for CommandBufferInheritanceViewportScissorInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferSubmitInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferSubmitInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CommandBufferSubmitInfo {
@@ -2325,7 +2325,7 @@ impl Default for CommandBufferSubmitInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandPoolCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandPoolCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CommandPoolCreateInfo {
@@ -2347,7 +2347,7 @@ impl Default for CommandPoolCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkComponentMapping.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkComponentMapping.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ComponentMapping {
@@ -2357,7 +2357,7 @@ pub struct ComponentMapping {
     pub a: ComponentSwizzle,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkComputePipelineCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkComputePipelineCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ComputePipelineCreateInfo {
@@ -2385,7 +2385,7 @@ impl Default for ComputePipelineCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkComputePipelineIndirectBufferInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkComputePipelineIndirectBufferInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ComputePipelineIndirectBufferInfoNV {
@@ -2409,7 +2409,7 @@ impl Default for ComputePipelineIndirectBufferInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkConditionalRenderingBeginInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkConditionalRenderingBeginInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ConditionalRenderingBeginInfoEXT {
@@ -2433,7 +2433,7 @@ impl Default for ConditionalRenderingBeginInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkConformanceVersion.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkConformanceVersion.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ConformanceVersion {
@@ -2443,7 +2443,7 @@ pub struct ConformanceVersion {
     pub patch: u8,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCooperativeMatrixFlexibleDimensionsPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCooperativeMatrixFlexibleDimensionsPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CooperativeMatrixFlexibleDimensionsPropertiesNV {
@@ -2481,7 +2481,7 @@ impl Default for CooperativeMatrixFlexibleDimensionsPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCooperativeMatrixPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCooperativeMatrixPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CooperativeMatrixPropertiesKHR {
@@ -2517,7 +2517,7 @@ impl Default for CooperativeMatrixPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCooperativeMatrixPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCooperativeMatrixPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CooperativeMatrixPropertiesNV {
@@ -2551,7 +2551,7 @@ impl Default for CooperativeMatrixPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyAccelerationStructureInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyAccelerationStructureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CopyAccelerationStructureInfoKHR {
@@ -2575,7 +2575,7 @@ impl Default for CopyAccelerationStructureInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyAccelerationStructureToMemoryInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyAccelerationStructureToMemoryInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct CopyAccelerationStructureToMemoryInfoKHR {
@@ -2599,7 +2599,7 @@ impl Default for CopyAccelerationStructureToMemoryInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyBufferInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyBufferInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CopyBufferInfo2 {
@@ -2625,7 +2625,7 @@ impl Default for CopyBufferInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyBufferToImageInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyBufferToImageInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CopyBufferToImageInfo2 {
@@ -2653,7 +2653,7 @@ impl Default for CopyBufferToImageInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyCommandTransformInfoQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyCommandTransformInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CopyCommandTransformInfoQCOM {
@@ -2673,7 +2673,7 @@ impl Default for CopyCommandTransformInfoQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyDescriptorSet.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyDescriptorSet.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CopyDescriptorSet {
@@ -2705,7 +2705,7 @@ impl Default for CopyDescriptorSet {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyImageInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CopyImageInfo2 {
@@ -2735,7 +2735,7 @@ impl Default for CopyImageInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyImageToBufferInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageToBufferInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CopyImageToBufferInfo2 {
@@ -2763,7 +2763,7 @@ impl Default for CopyImageToBufferInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyImageToImageInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageToImageInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CopyImageToImageInfo {
@@ -2795,7 +2795,7 @@ impl Default for CopyImageToImageInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyImageToMemoryInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageToMemoryInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CopyImageToMemoryInfo {
@@ -2823,7 +2823,7 @@ impl Default for CopyImageToMemoryInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyMemoryIndirectCommandNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMemoryIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct CopyMemoryIndirectCommandNV {
@@ -2832,7 +2832,7 @@ pub struct CopyMemoryIndirectCommandNV {
     pub size: DeviceSize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyMemoryToAccelerationStructureInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMemoryToAccelerationStructureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct CopyMemoryToAccelerationStructureInfoKHR {
@@ -2856,7 +2856,7 @@ impl Default for CopyMemoryToAccelerationStructureInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyMemoryToImageIndirectCommandNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMemoryToImageIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct CopyMemoryToImageIndirectCommandNV {
@@ -2868,7 +2868,7 @@ pub struct CopyMemoryToImageIndirectCommandNV {
     pub image_extent: Extent3D,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyMemoryToImageInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMemoryToImageInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CopyMemoryToImageInfo {
@@ -2896,7 +2896,7 @@ impl Default for CopyMemoryToImageInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyMemoryToMicromapInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMemoryToMicromapInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct CopyMemoryToMicromapInfoEXT {
@@ -2920,7 +2920,7 @@ impl Default for CopyMemoryToMicromapInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyMicromapInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMicromapInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CopyMicromapInfoEXT {
@@ -2944,7 +2944,7 @@ impl Default for CopyMicromapInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyMicromapToMemoryInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMicromapToMemoryInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct CopyMicromapToMemoryInfoEXT {
@@ -2968,7 +2968,7 @@ impl Default for CopyMicromapToMemoryInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCuFunctionCreateInfoNVX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCuFunctionCreateInfoNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CuFunctionCreateInfoNVX {
@@ -2990,7 +2990,7 @@ impl Default for CuFunctionCreateInfoNVX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCuLaunchInfoNVX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCuLaunchInfoNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CuLaunchInfoNVX {
@@ -3032,7 +3032,7 @@ impl Default for CuLaunchInfoNVX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCuModuleCreateInfoNVX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCuModuleCreateInfoNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CuModuleCreateInfoNVX {
@@ -3054,7 +3054,7 @@ impl Default for CuModuleCreateInfoNVX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCuModuleTexturingModeCreateInfoNVX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCuModuleTexturingModeCreateInfoNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CuModuleTexturingModeCreateInfoNVX {
@@ -3074,7 +3074,7 @@ impl Default for CuModuleTexturingModeCreateInfoNVX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCudaFunctionCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCudaFunctionCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CudaFunctionCreateInfoNV {
@@ -3096,7 +3096,7 @@ impl Default for CudaFunctionCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCudaLaunchInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCudaLaunchInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CudaLaunchInfoNV {
@@ -3138,7 +3138,7 @@ impl Default for CudaLaunchInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCudaModuleCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCudaModuleCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct CudaModuleCreateInfoNV {
@@ -3160,7 +3160,7 @@ impl Default for CudaModuleCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkD3D12FenceSubmitInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkD3D12FenceSubmitInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct D3D12FenceSubmitInfoKHR {
@@ -3186,7 +3186,7 @@ impl Default for D3D12FenceSubmitInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugMarkerMarkerInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugMarkerMarkerInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct DebugMarkerMarkerInfoEXT {
@@ -3208,7 +3208,7 @@ impl Default for DebugMarkerMarkerInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugMarkerObjectNameInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugMarkerObjectNameInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DebugMarkerObjectNameInfoEXT {
@@ -3232,7 +3232,7 @@ impl Default for DebugMarkerObjectNameInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugMarkerObjectTagInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugMarkerObjectTagInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DebugMarkerObjectTagInfoEXT {
@@ -3260,7 +3260,7 @@ impl Default for DebugMarkerObjectTagInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugReportCallbackCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugReportCallbackCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct DebugReportCallbackCreateInfoEXT {
@@ -3296,7 +3296,7 @@ impl Default for DebugReportCallbackCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugUtilsLabelEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsLabelEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct DebugUtilsLabelEXT {
@@ -3318,7 +3318,7 @@ impl Default for DebugUtilsLabelEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugUtilsMessengerCallbackDataEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsMessengerCallbackDataEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DebugUtilsMessengerCallbackDataEXT {
@@ -3356,7 +3356,7 @@ impl Default for DebugUtilsMessengerCallbackDataEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugUtilsMessengerCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsMessengerCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct DebugUtilsMessengerCreateInfoEXT {
@@ -3401,7 +3401,7 @@ impl Default for DebugUtilsMessengerCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugUtilsObjectNameInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsObjectNameInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DebugUtilsObjectNameInfoEXT {
@@ -3425,7 +3425,7 @@ impl Default for DebugUtilsObjectNameInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDebugUtilsObjectTagInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugUtilsObjectTagInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DebugUtilsObjectTagInfoEXT {
@@ -3453,7 +3453,7 @@ impl Default for DebugUtilsObjectTagInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDecompressMemoryRegionNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDecompressMemoryRegionNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DecompressMemoryRegionNV {
@@ -3464,7 +3464,7 @@ pub struct DecompressMemoryRegionNV {
     pub decompression_method: MemoryDecompressionMethodFlagsNV,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDedicatedAllocationBufferCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDedicatedAllocationBufferCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DedicatedAllocationBufferCreateInfoNV {
@@ -3484,7 +3484,7 @@ impl Default for DedicatedAllocationBufferCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDedicatedAllocationImageCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDedicatedAllocationImageCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DedicatedAllocationImageCreateInfoNV {
@@ -3504,7 +3504,7 @@ impl Default for DedicatedAllocationImageCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDedicatedAllocationMemoryAllocateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDedicatedAllocationMemoryAllocateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DedicatedAllocationMemoryAllocateInfoNV {
@@ -3526,7 +3526,7 @@ impl Default for DedicatedAllocationMemoryAllocateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDependencyInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDependencyInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DependencyInfo {
@@ -3558,7 +3558,7 @@ impl Default for DependencyInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDepthBiasInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDepthBiasInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct DepthBiasInfoEXT {
@@ -3582,7 +3582,7 @@ impl Default for DepthBiasInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDepthBiasRepresentationInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDepthBiasRepresentationInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DepthBiasRepresentationInfoEXT {
@@ -3604,7 +3604,7 @@ impl Default for DepthBiasRepresentationInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDepthClampRangeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDepthClampRangeEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct DepthClampRangeEXT {
@@ -3612,7 +3612,7 @@ pub struct DepthClampRangeEXT {
     pub max_depth_clamp: f32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorAddressInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorAddressInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorAddressInfoEXT {
@@ -3636,7 +3636,7 @@ impl Default for DescriptorAddressInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorBufferBindingInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorBufferBindingInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorBufferBindingInfoEXT {
@@ -3658,7 +3658,7 @@ impl Default for DescriptorBufferBindingInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorBufferBindingPushDescriptorBufferHandleEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorBufferBindingPushDescriptorBufferHandleEXT {
@@ -3678,7 +3678,7 @@ impl Default for DescriptorBufferBindingPushDescriptorBufferHandleEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorBufferInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorBufferInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorBufferInfo {
@@ -3687,7 +3687,7 @@ pub struct DescriptorBufferInfo {
     pub range: DeviceSize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorGetInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorGetInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct DescriptorGetInfoEXT {
@@ -3709,7 +3709,7 @@ impl Default for DescriptorGetInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorImageInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorImageInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorImageInfo {
@@ -3718,7 +3718,7 @@ pub struct DescriptorImageInfo {
     pub image_layout: ImageLayout,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorPoolCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorPoolCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorPoolCreateInfo {
@@ -3744,7 +3744,7 @@ impl Default for DescriptorPoolCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorPoolInlineUniformBlockCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorPoolInlineUniformBlockCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorPoolInlineUniformBlockCreateInfo {
@@ -3764,7 +3764,7 @@ impl Default for DescriptorPoolInlineUniformBlockCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorPoolSize.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorPoolSize.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorPoolSize {
@@ -3772,7 +3772,7 @@ pub struct DescriptorPoolSize {
     pub descriptor_count: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetAllocateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetAllocateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorSetAllocateInfo {
@@ -3796,7 +3796,7 @@ impl Default for DescriptorSetAllocateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetBindingReferenceVALVE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetBindingReferenceVALVE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorSetBindingReferenceVALVE {
@@ -3818,7 +3818,7 @@ impl Default for DescriptorSetBindingReferenceVALVE {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetLayoutBinding.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutBinding.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorSetLayoutBinding {
@@ -3842,7 +3842,7 @@ impl Default for DescriptorSetLayoutBinding {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetLayoutBindingFlagsCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutBindingFlagsCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorSetLayoutBindingFlagsCreateInfo {
@@ -3864,7 +3864,7 @@ impl Default for DescriptorSetLayoutBindingFlagsCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetLayoutCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorSetLayoutCreateInfo {
@@ -3888,7 +3888,7 @@ impl Default for DescriptorSetLayoutCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetLayoutHostMappingInfoVALVE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutHostMappingInfoVALVE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorSetLayoutHostMappingInfoVALVE {
@@ -3910,7 +3910,7 @@ impl Default for DescriptorSetLayoutHostMappingInfoVALVE {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetLayoutSupport.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutSupport.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorSetLayoutSupport {
@@ -3930,7 +3930,7 @@ impl Default for DescriptorSetLayoutSupport {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetVariableDescriptorCountAllocateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetVariableDescriptorCountAllocateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorSetVariableDescriptorCountAllocateInfo {
@@ -3952,7 +3952,7 @@ impl Default for DescriptorSetVariableDescriptorCountAllocateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetVariableDescriptorCountLayoutSupport.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetVariableDescriptorCountLayoutSupport.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorSetVariableDescriptorCountLayoutSupport {
@@ -3972,7 +3972,7 @@ impl Default for DescriptorSetVariableDescriptorCountLayoutSupport {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorUpdateTemplateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorUpdateTemplateCreateInfo {
@@ -4006,7 +4006,7 @@ impl Default for DescriptorUpdateTemplateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorUpdateTemplateEntry.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateEntry.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DescriptorUpdateTemplateEntry {
@@ -4018,7 +4018,7 @@ pub struct DescriptorUpdateTemplateEntry {
     pub stride: usize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceAddressBindingCallbackDataEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceAddressBindingCallbackDataEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceAddressBindingCallbackDataEXT {
@@ -4044,7 +4044,7 @@ impl Default for DeviceAddressBindingCallbackDataEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceBufferMemoryRequirements.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceBufferMemoryRequirements.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceBufferMemoryRequirements {
@@ -4064,7 +4064,7 @@ impl Default for DeviceBufferMemoryRequirements {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceCreateInfo {
@@ -4098,7 +4098,7 @@ impl Default for DeviceCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceDeviceMemoryReportCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceDeviceMemoryReportCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct DeviceDeviceMemoryReportCreateInfoEXT {
@@ -4137,7 +4137,7 @@ impl Default for DeviceDeviceMemoryReportCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceDiagnosticsConfigCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceDiagnosticsConfigCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceDiagnosticsConfigCreateInfoNV {
@@ -4157,7 +4157,7 @@ impl Default for DeviceDiagnosticsConfigCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceEventInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceEventInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceEventInfoEXT {
@@ -4177,7 +4177,7 @@ impl Default for DeviceEventInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceFaultAddressInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultAddressInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceFaultAddressInfoEXT {
@@ -4186,7 +4186,7 @@ pub struct DeviceFaultAddressInfoEXT {
     pub address_precision: DeviceSize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceFaultCountsEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultCountsEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceFaultCountsEXT {
@@ -4210,7 +4210,7 @@ impl Default for DeviceFaultCountsEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceFaultInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceFaultInfoEXT {
@@ -4236,7 +4236,7 @@ impl Default for DeviceFaultInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceFaultVendorBinaryHeaderVersionOneEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultVendorBinaryHeaderVersionOneEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceFaultVendorBinaryHeaderVersionOneEXT {
@@ -4253,7 +4253,7 @@ pub struct DeviceFaultVendorBinaryHeaderVersionOneEXT {
     pub api_version: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceFaultVendorInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceFaultVendorInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceFaultVendorInfoEXT {
@@ -4262,7 +4262,7 @@ pub struct DeviceFaultVendorInfoEXT {
     pub vendor_fault_data: u64,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupBindSparseInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupBindSparseInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceGroupBindSparseInfo {
@@ -4284,7 +4284,7 @@ impl Default for DeviceGroupBindSparseInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupCommandBufferBeginInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupCommandBufferBeginInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceGroupCommandBufferBeginInfo {
@@ -4304,7 +4304,7 @@ impl Default for DeviceGroupCommandBufferBeginInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupDeviceCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupDeviceCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceGroupDeviceCreateInfo {
@@ -4326,7 +4326,7 @@ impl Default for DeviceGroupDeviceCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupPresentCapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupPresentCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceGroupPresentCapabilitiesKHR {
@@ -4348,7 +4348,7 @@ impl Default for DeviceGroupPresentCapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupPresentInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupPresentInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceGroupPresentInfoKHR {
@@ -4372,7 +4372,7 @@ impl Default for DeviceGroupPresentInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupRenderPassBeginInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupRenderPassBeginInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceGroupRenderPassBeginInfo {
@@ -4396,7 +4396,7 @@ impl Default for DeviceGroupRenderPassBeginInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupSubmitInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupSubmitInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceGroupSubmitInfo {
@@ -4426,7 +4426,7 @@ impl Default for DeviceGroupSubmitInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupSwapchainCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupSwapchainCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceGroupSwapchainCreateInfoKHR {
@@ -4446,7 +4446,7 @@ impl Default for DeviceGroupSwapchainCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceImageMemoryRequirements.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceImageMemoryRequirements.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceImageMemoryRequirements {
@@ -4468,7 +4468,7 @@ impl Default for DeviceImageMemoryRequirements {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceImageSubresourceInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceImageSubresourceInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceImageSubresourceInfo {
@@ -4490,7 +4490,7 @@ impl Default for DeviceImageSubresourceInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceMemoryOpaqueCaptureAddressInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceMemoryOpaqueCaptureAddressInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceMemoryOpaqueCaptureAddressInfo {
@@ -4510,7 +4510,7 @@ impl Default for DeviceMemoryOpaqueCaptureAddressInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceMemoryOverallocationCreateInfoAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceMemoryOverallocationCreateInfoAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceMemoryOverallocationCreateInfoAMD {
@@ -4530,7 +4530,7 @@ impl Default for DeviceMemoryOverallocationCreateInfoAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceMemoryReportCallbackDataEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceMemoryReportCallbackDataEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceMemoryReportCallbackDataEXT {
@@ -4562,7 +4562,7 @@ impl Default for DeviceMemoryReportCallbackDataEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDevicePipelineBinaryInternalCacheControlKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDevicePipelineBinaryInternalCacheControlKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DevicePipelineBinaryInternalCacheControlKHR {
@@ -4582,7 +4582,7 @@ impl Default for DevicePipelineBinaryInternalCacheControlKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDevicePrivateDataCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDevicePrivateDataCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DevicePrivateDataCreateInfo {
@@ -4602,7 +4602,7 @@ impl Default for DevicePrivateDataCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceQueueCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceQueueCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceQueueCreateInfo {
@@ -4628,7 +4628,7 @@ impl Default for DeviceQueueCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceQueueGlobalPriorityCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceQueueGlobalPriorityCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceQueueGlobalPriorityCreateInfo {
@@ -4648,7 +4648,7 @@ impl Default for DeviceQueueGlobalPriorityCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceQueueInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceQueueInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceQueueInfo2 {
@@ -4672,7 +4672,7 @@ impl Default for DeviceQueueInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceQueueShaderCoreControlCreateInfoARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceQueueShaderCoreControlCreateInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceQueueShaderCoreControlCreateInfoARM {
@@ -4692,7 +4692,7 @@ impl Default for DeviceQueueShaderCoreControlCreateInfoARM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DeviceSemaphoreSciSyncPoolReservationCreateInfoNV {
@@ -4712,7 +4712,7 @@ impl Default for DeviceSemaphoreSciSyncPoolReservationCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDirectDriverLoadingInfoLUNARG.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDirectDriverLoadingInfoLUNARG.html>
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct DirectDriverLoadingInfoLUNARG {
@@ -4748,7 +4748,7 @@ impl Default for DirectDriverLoadingInfoLUNARG {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDirectDriverLoadingListLUNARG.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDirectDriverLoadingListLUNARG.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DirectDriverLoadingListLUNARG {
@@ -4772,7 +4772,7 @@ impl Default for DirectDriverLoadingListLUNARG {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDirectFBSurfaceCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDirectFBSurfaceCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DirectFBSurfaceCreateInfoEXT {
@@ -4796,7 +4796,7 @@ impl Default for DirectFBSurfaceCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDispatchGraphCountInfoAMDX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDispatchGraphCountInfoAMDX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug)]
 pub struct DispatchGraphCountInfoAMDX {
@@ -4805,7 +4805,7 @@ pub struct DispatchGraphCountInfoAMDX {
     pub stride: u64,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDispatchGraphInfoAMDX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDispatchGraphInfoAMDX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug)]
 pub struct DispatchGraphInfoAMDX {
@@ -4815,7 +4815,7 @@ pub struct DispatchGraphInfoAMDX {
     pub payload_stride: u64,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDispatchIndirectCommand.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDispatchIndirectCommand.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DispatchIndirectCommand {
@@ -4824,7 +4824,7 @@ pub struct DispatchIndirectCommand {
     pub z: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayEventInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayEventInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayEventInfoEXT {
@@ -4844,7 +4844,7 @@ impl Default for DisplayEventInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayModeCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayModeCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayModeCreateInfoKHR {
@@ -4866,7 +4866,7 @@ impl Default for DisplayModeCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayModeParametersKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayModeParametersKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayModeParametersKHR {
@@ -4874,7 +4874,7 @@ pub struct DisplayModeParametersKHR {
     pub refresh_rate: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayModeProperties2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayModeProperties2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayModeProperties2KHR {
@@ -4894,7 +4894,7 @@ impl Default for DisplayModeProperties2KHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayModePropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayModePropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayModePropertiesKHR {
@@ -4902,7 +4902,7 @@ pub struct DisplayModePropertiesKHR {
     pub parameters: DisplayModeParametersKHR,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayModeStereoPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayModeStereoPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayModeStereoPropertiesNV {
@@ -4922,7 +4922,7 @@ impl Default for DisplayModeStereoPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayNativeHdrSurfaceCapabilitiesAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayNativeHdrSurfaceCapabilitiesAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayNativeHdrSurfaceCapabilitiesAMD {
@@ -4942,7 +4942,7 @@ impl Default for DisplayNativeHdrSurfaceCapabilitiesAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayPlaneCapabilities2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPlaneCapabilities2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayPlaneCapabilities2KHR {
@@ -4962,7 +4962,7 @@ impl Default for DisplayPlaneCapabilities2KHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayPlaneCapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPlaneCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayPlaneCapabilitiesKHR {
@@ -4977,7 +4977,7 @@ pub struct DisplayPlaneCapabilitiesKHR {
     pub max_dst_extent: Extent2D,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayPlaneInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPlaneInfo2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayPlaneInfo2KHR {
@@ -4999,7 +4999,7 @@ impl Default for DisplayPlaneInfo2KHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayPlaneProperties2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPlaneProperties2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayPlaneProperties2KHR {
@@ -5019,7 +5019,7 @@ impl Default for DisplayPlaneProperties2KHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayPlanePropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPlanePropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayPlanePropertiesKHR {
@@ -5027,7 +5027,7 @@ pub struct DisplayPlanePropertiesKHR {
     pub current_stack_index: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayPowerInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPowerInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayPowerInfoEXT {
@@ -5047,7 +5047,7 @@ impl Default for DisplayPowerInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayPresentInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPresentInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayPresentInfoKHR {
@@ -5071,7 +5071,7 @@ impl Default for DisplayPresentInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayProperties2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayProperties2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayProperties2KHR {
@@ -5091,7 +5091,7 @@ impl Default for DisplayProperties2KHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplayPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplayPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplayPropertiesKHR {
@@ -5119,7 +5119,7 @@ impl Default for DisplayPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplaySurfaceCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplaySurfaceCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct DisplaySurfaceCreateInfoKHR {
@@ -5153,7 +5153,7 @@ impl Default for DisplaySurfaceCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDisplaySurfaceStereoCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDisplaySurfaceStereoCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DisplaySurfaceStereoCreateInfoNV {
@@ -5173,7 +5173,7 @@ impl Default for DisplaySurfaceStereoCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDrawIndexedIndirectCommand.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrawIndexedIndirectCommand.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DrawIndexedIndirectCommand {
@@ -5184,7 +5184,7 @@ pub struct DrawIndexedIndirectCommand {
     pub first_instance: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDrawIndirectCommand.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrawIndirectCommand.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DrawIndirectCommand {
@@ -5194,7 +5194,7 @@ pub struct DrawIndirectCommand {
     pub first_instance: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDrawIndirectCountIndirectCommandEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrawIndirectCountIndirectCommandEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DrawIndirectCountIndirectCommandEXT {
@@ -5203,7 +5203,7 @@ pub struct DrawIndirectCountIndirectCommandEXT {
     pub command_count: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDrawMeshTasksIndirectCommandEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrawMeshTasksIndirectCommandEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DrawMeshTasksIndirectCommandEXT {
@@ -5212,7 +5212,7 @@ pub struct DrawMeshTasksIndirectCommandEXT {
     pub group_count_z: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDrawMeshTasksIndirectCommandNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrawMeshTasksIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DrawMeshTasksIndirectCommandNV {
@@ -5220,7 +5220,7 @@ pub struct DrawMeshTasksIndirectCommandNV {
     pub first_task: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDrmFormatModifierProperties2EXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrmFormatModifierProperties2EXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DrmFormatModifierProperties2EXT {
@@ -5229,7 +5229,7 @@ pub struct DrmFormatModifierProperties2EXT {
     pub drm_format_modifier_tiling_features: FormatFeatureFlags2,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDrmFormatModifierPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrmFormatModifierPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct DrmFormatModifierPropertiesEXT {
@@ -5238,7 +5238,7 @@ pub struct DrmFormatModifierPropertiesEXT {
     pub drm_format_modifier_tiling_features: FormatFeatureFlags,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDrmFormatModifierPropertiesList2EXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrmFormatModifierPropertiesList2EXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DrmFormatModifierPropertiesList2EXT {
@@ -5260,7 +5260,7 @@ impl Default for DrmFormatModifierPropertiesList2EXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDrmFormatModifierPropertiesListEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDrmFormatModifierPropertiesListEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct DrmFormatModifierPropertiesListEXT {
@@ -5282,7 +5282,7 @@ impl Default for DrmFormatModifierPropertiesListEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkEventCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkEventCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct EventCreateInfo {
@@ -5302,7 +5302,7 @@ impl Default for EventCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExecutionGraphPipelineCreateInfoAMDX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExecutionGraphPipelineCreateInfoAMDX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExecutionGraphPipelineCreateInfoAMDX {
@@ -5334,7 +5334,7 @@ impl Default for ExecutionGraphPipelineCreateInfoAMDX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExecutionGraphPipelineScratchSizeAMDX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExecutionGraphPipelineScratchSizeAMDX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExecutionGraphPipelineScratchSizeAMDX {
@@ -5358,7 +5358,7 @@ impl Default for ExecutionGraphPipelineScratchSizeAMDX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportFenceCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportFenceCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportFenceCreateInfo {
@@ -5378,7 +5378,7 @@ impl Default for ExportFenceCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportFenceSciSyncInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportFenceSciSyncInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportFenceSciSyncInfoNV {
@@ -5398,7 +5398,7 @@ impl Default for ExportFenceSciSyncInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportFenceWin32HandleInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportFenceWin32HandleInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportFenceWin32HandleInfoKHR {
@@ -5422,7 +5422,7 @@ impl Default for ExportFenceWin32HandleInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMemoryAllocateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMemoryAllocateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMemoryAllocateInfo {
@@ -5442,7 +5442,7 @@ impl Default for ExportMemoryAllocateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMemoryAllocateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMemoryAllocateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMemoryAllocateInfoNV {
@@ -5462,7 +5462,7 @@ impl Default for ExportMemoryAllocateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMemorySciBufInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMemorySciBufInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMemorySciBufInfoNV {
@@ -5482,7 +5482,7 @@ impl Default for ExportMemorySciBufInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMemoryWin32HandleInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMemoryWin32HandleInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMemoryWin32HandleInfoKHR {
@@ -5506,7 +5506,7 @@ impl Default for ExportMemoryWin32HandleInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMemoryWin32HandleInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMemoryWin32HandleInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMemoryWin32HandleInfoNV {
@@ -5528,7 +5528,7 @@ impl Default for ExportMemoryWin32HandleInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMetalBufferInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalBufferInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMetalBufferInfoEXT {
@@ -5550,7 +5550,7 @@ impl Default for ExportMetalBufferInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMetalCommandQueueInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalCommandQueueInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMetalCommandQueueInfoEXT {
@@ -5572,7 +5572,7 @@ impl Default for ExportMetalCommandQueueInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMetalDeviceInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalDeviceInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMetalDeviceInfoEXT {
@@ -5592,7 +5592,7 @@ impl Default for ExportMetalDeviceInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMetalIOSurfaceInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalIOSurfaceInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMetalIOSurfaceInfoEXT {
@@ -5614,7 +5614,7 @@ impl Default for ExportMetalIOSurfaceInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMetalObjectCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalObjectCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMetalObjectCreateInfoEXT {
@@ -5634,7 +5634,7 @@ impl Default for ExportMetalObjectCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMetalObjectsInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalObjectsInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMetalObjectsInfoEXT {
@@ -5652,7 +5652,7 @@ impl Default for ExportMetalObjectsInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMetalSharedEventInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalSharedEventInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMetalSharedEventInfoEXT {
@@ -5676,7 +5676,7 @@ impl Default for ExportMetalSharedEventInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMetalTextureInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMetalTextureInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportMetalTextureInfoEXT {
@@ -5704,7 +5704,7 @@ impl Default for ExportMetalTextureInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportSemaphoreCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportSemaphoreCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportSemaphoreCreateInfo {
@@ -5724,7 +5724,7 @@ impl Default for ExportSemaphoreCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportSemaphoreSciSyncInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportSemaphoreSciSyncInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportSemaphoreSciSyncInfoNV {
@@ -5744,7 +5744,7 @@ impl Default for ExportSemaphoreSciSyncInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportSemaphoreWin32HandleInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportSemaphoreWin32HandleInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExportSemaphoreWin32HandleInfoKHR {
@@ -5768,7 +5768,7 @@ impl Default for ExportSemaphoreWin32HandleInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExtensionProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExtensionProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ExtensionProperties {
@@ -5776,7 +5776,7 @@ pub struct ExtensionProperties {
     pub spec_version: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExtent2D.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExtent2D.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct Extent2D {
@@ -5784,7 +5784,7 @@ pub struct Extent2D {
     pub height: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExtent3D.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExtent3D.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct Extent3D {
@@ -5793,7 +5793,7 @@ pub struct Extent3D {
     pub depth: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalBufferProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalBufferProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExternalBufferProperties {
@@ -5813,7 +5813,7 @@ impl Default for ExternalBufferProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalFenceProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFenceProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExternalFenceProperties {
@@ -5837,7 +5837,7 @@ impl Default for ExternalFenceProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalFormatANDROID.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFormatANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExternalFormatANDROID {
@@ -5857,7 +5857,7 @@ impl Default for ExternalFormatANDROID {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalFormatQNX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFormatQNX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExternalFormatQNX {
@@ -5877,7 +5877,7 @@ impl Default for ExternalFormatQNX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalImageFormatProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalImageFormatProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExternalImageFormatProperties {
@@ -5897,7 +5897,7 @@ impl Default for ExternalImageFormatProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalImageFormatPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalImageFormatPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ExternalImageFormatPropertiesNV {
@@ -5907,7 +5907,7 @@ pub struct ExternalImageFormatPropertiesNV {
     pub compatible_handle_types: ExternalMemoryHandleTypeFlagsNV,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryAcquireUnmodifiedEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryAcquireUnmodifiedEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExternalMemoryAcquireUnmodifiedEXT {
@@ -5927,7 +5927,7 @@ impl Default for ExternalMemoryAcquireUnmodifiedEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryBufferCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryBufferCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExternalMemoryBufferCreateInfo {
@@ -5947,7 +5947,7 @@ impl Default for ExternalMemoryBufferCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryImageCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryImageCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExternalMemoryImageCreateInfo {
@@ -5967,7 +5967,7 @@ impl Default for ExternalMemoryImageCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryImageCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryImageCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExternalMemoryImageCreateInfoNV {
@@ -5987,7 +5987,7 @@ impl Default for ExternalMemoryImageCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ExternalMemoryProperties {
@@ -5996,7 +5996,7 @@ pub struct ExternalMemoryProperties {
     pub compatible_handle_types: ExternalMemoryHandleTypeFlags,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalSemaphoreProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalSemaphoreProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ExternalSemaphoreProperties {
@@ -6020,7 +6020,7 @@ impl Default for ExternalSemaphoreProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFenceCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFenceCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FenceCreateInfo {
@@ -6040,7 +6040,7 @@ impl Default for FenceCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFenceGetFdInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFenceGetFdInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FenceGetFdInfoKHR {
@@ -6062,7 +6062,7 @@ impl Default for FenceGetFdInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFenceGetSciSyncInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFenceGetSciSyncInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FenceGetSciSyncInfoNV {
@@ -6084,7 +6084,7 @@ impl Default for FenceGetSciSyncInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFenceGetWin32HandleInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFenceGetWin32HandleInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FenceGetWin32HandleInfoKHR {
@@ -6106,7 +6106,7 @@ impl Default for FenceGetWin32HandleInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFilterCubicImageViewImageFormatPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFilterCubicImageViewImageFormatPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FilterCubicImageViewImageFormatPropertiesEXT {
@@ -6128,7 +6128,7 @@ impl Default for FilterCubicImageViewImageFormatPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFormatProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFormatProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct FormatProperties {
@@ -6137,7 +6137,7 @@ pub struct FormatProperties {
     pub buffer_features: FormatFeatureFlags,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFormatProperties2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFormatProperties2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FormatProperties2 {
@@ -6157,7 +6157,7 @@ impl Default for FormatProperties2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFormatProperties3.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFormatProperties3.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FormatProperties3 {
@@ -6181,7 +6181,7 @@ impl Default for FormatProperties3 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFragmentShadingRateAttachmentInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFragmentShadingRateAttachmentInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FragmentShadingRateAttachmentInfoKHR {
@@ -6203,7 +6203,7 @@ impl Default for FragmentShadingRateAttachmentInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFrameBoundaryEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFrameBoundaryEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FrameBoundaryEXT {
@@ -6239,7 +6239,7 @@ impl Default for FrameBoundaryEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFramebufferAttachmentImageInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFramebufferAttachmentImageInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FramebufferAttachmentImageInfo {
@@ -6271,7 +6271,7 @@ impl Default for FramebufferAttachmentImageInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFramebufferAttachmentsCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFramebufferAttachmentsCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FramebufferAttachmentsCreateInfo {
@@ -6293,7 +6293,7 @@ impl Default for FramebufferAttachmentsCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFramebufferCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFramebufferCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FramebufferCreateInfo {
@@ -6325,7 +6325,7 @@ impl Default for FramebufferCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFramebufferMixedSamplesCombinationNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFramebufferMixedSamplesCombinationNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct FramebufferMixedSamplesCombinationNV {
@@ -6351,7 +6351,7 @@ impl Default for FramebufferMixedSamplesCombinationNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeneratedCommandsInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeneratedCommandsInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GeneratedCommandsInfoEXT {
@@ -6389,7 +6389,7 @@ impl Default for GeneratedCommandsInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeneratedCommandsInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeneratedCommandsInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GeneratedCommandsInfoNV {
@@ -6433,7 +6433,7 @@ impl Default for GeneratedCommandsInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeneratedCommandsMemoryRequirementsInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeneratedCommandsMemoryRequirementsInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GeneratedCommandsMemoryRequirementsInfoEXT {
@@ -6459,7 +6459,7 @@ impl Default for GeneratedCommandsMemoryRequirementsInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeneratedCommandsMemoryRequirementsInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeneratedCommandsMemoryRequirementsInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GeneratedCommandsMemoryRequirementsInfoNV {
@@ -6485,7 +6485,7 @@ impl Default for GeneratedCommandsMemoryRequirementsInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeneratedCommandsPipelineInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeneratedCommandsPipelineInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GeneratedCommandsPipelineInfoEXT {
@@ -6505,7 +6505,7 @@ impl Default for GeneratedCommandsPipelineInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeneratedCommandsShaderInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeneratedCommandsShaderInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GeneratedCommandsShaderInfoEXT {
@@ -6527,7 +6527,7 @@ impl Default for GeneratedCommandsShaderInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeometryAABBNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeometryAABBNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GeometryAABBNV {
@@ -6553,7 +6553,7 @@ impl Default for GeometryAABBNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeometryDataNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeometryDataNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct GeometryDataNV {
@@ -6561,7 +6561,7 @@ pub struct GeometryDataNV {
     pub aabbs: GeometryAABBNV,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeometryNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeometryNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GeometryNV {
@@ -6585,7 +6585,7 @@ impl Default for GeometryNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGeometryTrianglesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGeometryTrianglesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GeometryTrianglesNV {
@@ -6625,7 +6625,7 @@ impl Default for GeometryTrianglesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGetLatencyMarkerInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGetLatencyMarkerInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GetLatencyMarkerInfoNV {
@@ -6647,7 +6647,7 @@ impl Default for GetLatencyMarkerInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGraphicsPipelineCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGraphicsPipelineCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GraphicsPipelineCreateInfo {
@@ -6699,7 +6699,7 @@ impl Default for GraphicsPipelineCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGraphicsPipelineLibraryCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGraphicsPipelineLibraryCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GraphicsPipelineLibraryCreateInfoEXT {
@@ -6719,7 +6719,7 @@ impl Default for GraphicsPipelineLibraryCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGraphicsPipelineShaderGroupsCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGraphicsPipelineShaderGroupsCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GraphicsPipelineShaderGroupsCreateInfoNV {
@@ -6745,7 +6745,7 @@ impl Default for GraphicsPipelineShaderGroupsCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkGraphicsShaderGroupCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkGraphicsShaderGroupCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct GraphicsShaderGroupCreateInfoNV {
@@ -6771,7 +6771,7 @@ impl Default for GraphicsShaderGroupCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkHdrMetadataEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHdrMetadataEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct HdrMetadataEXT {
@@ -6805,7 +6805,7 @@ impl Default for HdrMetadataEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkHdrVividDynamicMetadataHUAWEI.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHdrVividDynamicMetadataHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct HdrVividDynamicMetadataHUAWEI {
@@ -6827,7 +6827,7 @@ impl Default for HdrVividDynamicMetadataHUAWEI {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkHeadlessSurfaceCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHeadlessSurfaceCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct HeadlessSurfaceCreateInfoEXT {
@@ -6847,7 +6847,7 @@ impl Default for HeadlessSurfaceCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkHostImageCopyDevicePerformanceQuery.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHostImageCopyDevicePerformanceQuery.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct HostImageCopyDevicePerformanceQuery {
@@ -6869,7 +6869,7 @@ impl Default for HostImageCopyDevicePerformanceQuery {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkHostImageLayoutTransitionInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHostImageLayoutTransitionInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct HostImageLayoutTransitionInfo {
@@ -6895,7 +6895,7 @@ impl Default for HostImageLayoutTransitionInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIOSSurfaceCreateInfoMVK.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIOSSurfaceCreateInfoMVK.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct IOSSurfaceCreateInfoMVK {
@@ -6917,7 +6917,7 @@ impl Default for IOSSurfaceCreateInfoMVK {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageAlignmentControlCreateInfoMESA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageAlignmentControlCreateInfoMESA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageAlignmentControlCreateInfoMESA {
@@ -6937,7 +6937,7 @@ impl Default for ImageAlignmentControlCreateInfoMESA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageBlit.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageBlit.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ImageBlit {
@@ -6947,7 +6947,7 @@ pub struct ImageBlit {
     pub dst_offsets: [Offset3D; 2],
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageBlit2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageBlit2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageBlit2 {
@@ -6973,7 +6973,7 @@ impl Default for ImageBlit2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageCaptureDescriptorDataInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCaptureDescriptorDataInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageCaptureDescriptorDataInfoEXT {
@@ -6993,7 +6993,7 @@ impl Default for ImageCaptureDescriptorDataInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageCompressionControlEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCompressionControlEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageCompressionControlEXT {
@@ -7017,7 +7017,7 @@ impl Default for ImageCompressionControlEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageCompressionPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCompressionPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageCompressionPropertiesEXT {
@@ -7039,7 +7039,7 @@ impl Default for ImageCompressionPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageConstraintsInfoFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageConstraintsInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageConstraintsInfoFUCHSIA {
@@ -7065,7 +7065,7 @@ impl Default for ImageConstraintsInfoFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageCopy.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCopy.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ImageCopy {
@@ -7076,7 +7076,7 @@ pub struct ImageCopy {
     pub extent: Extent3D,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageCopy2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCopy2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageCopy2 {
@@ -7104,7 +7104,7 @@ impl Default for ImageCopy2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageCreateInfo {
@@ -7148,7 +7148,7 @@ impl Default for ImageCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageDrmFormatModifierExplicitCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageDrmFormatModifierExplicitCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageDrmFormatModifierExplicitCreateInfoEXT {
@@ -7172,7 +7172,7 @@ impl Default for ImageDrmFormatModifierExplicitCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageDrmFormatModifierListCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageDrmFormatModifierListCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageDrmFormatModifierListCreateInfoEXT {
@@ -7194,7 +7194,7 @@ impl Default for ImageDrmFormatModifierListCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageDrmFormatModifierPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageDrmFormatModifierPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageDrmFormatModifierPropertiesEXT {
@@ -7214,7 +7214,7 @@ impl Default for ImageDrmFormatModifierPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageFormatConstraintsInfoFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageFormatConstraintsInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageFormatConstraintsInfoFUCHSIA {
@@ -7244,7 +7244,7 @@ impl Default for ImageFormatConstraintsInfoFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageFormatListCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageFormatListCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageFormatListCreateInfo {
@@ -7266,7 +7266,7 @@ impl Default for ImageFormatListCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageFormatProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageFormatProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ImageFormatProperties {
@@ -7277,7 +7277,7 @@ pub struct ImageFormatProperties {
     pub max_resource_size: DeviceSize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageFormatProperties2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageFormatProperties2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageFormatProperties2 {
@@ -7297,7 +7297,7 @@ impl Default for ImageFormatProperties2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageMemoryBarrier.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageMemoryBarrier.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageMemoryBarrier {
@@ -7331,7 +7331,7 @@ impl Default for ImageMemoryBarrier {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageMemoryBarrier2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageMemoryBarrier2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageMemoryBarrier2 {
@@ -7369,7 +7369,7 @@ impl Default for ImageMemoryBarrier2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageMemoryRequirementsInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageMemoryRequirementsInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageMemoryRequirementsInfo2 {
@@ -7389,7 +7389,7 @@ impl Default for ImageMemoryRequirementsInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImagePipeSurfaceCreateInfoFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImagePipeSurfaceCreateInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImagePipeSurfaceCreateInfoFUCHSIA {
@@ -7411,7 +7411,7 @@ impl Default for ImagePipeSurfaceCreateInfoFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImagePlaneMemoryRequirementsInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImagePlaneMemoryRequirementsInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImagePlaneMemoryRequirementsInfo {
@@ -7431,7 +7431,7 @@ impl Default for ImagePlaneMemoryRequirementsInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageResolve.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageResolve.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ImageResolve {
@@ -7442,7 +7442,7 @@ pub struct ImageResolve {
     pub extent: Extent3D,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageResolve2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageResolve2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageResolve2 {
@@ -7470,7 +7470,7 @@ impl Default for ImageResolve2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageSparseMemoryRequirementsInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageSparseMemoryRequirementsInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageSparseMemoryRequirementsInfo2 {
@@ -7490,7 +7490,7 @@ impl Default for ImageSparseMemoryRequirementsInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageStencilUsageCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageStencilUsageCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageStencilUsageCreateInfo {
@@ -7510,7 +7510,7 @@ impl Default for ImageStencilUsageCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageSubresource.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageSubresource.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ImageSubresource {
@@ -7519,7 +7519,7 @@ pub struct ImageSubresource {
     pub array_layer: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageSubresource2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageSubresource2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageSubresource2 {
@@ -7539,7 +7539,7 @@ impl Default for ImageSubresource2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageSubresourceLayers.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageSubresourceLayers.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ImageSubresourceLayers {
@@ -7549,7 +7549,7 @@ pub struct ImageSubresourceLayers {
     pub layer_count: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageSubresourceRange.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageSubresourceRange.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ImageSubresourceRange {
@@ -7560,7 +7560,7 @@ pub struct ImageSubresourceRange {
     pub layer_count: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageSwapchainCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageSwapchainCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageSwapchainCreateInfoKHR {
@@ -7580,7 +7580,7 @@ impl Default for ImageSwapchainCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageToMemoryCopy.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageToMemoryCopy.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageToMemoryCopy {
@@ -7610,7 +7610,7 @@ impl Default for ImageToMemoryCopy {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageViewASTCDecodeModeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewASTCDecodeModeEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageViewASTCDecodeModeEXT {
@@ -7630,7 +7630,7 @@ impl Default for ImageViewASTCDecodeModeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageViewAddressPropertiesNVX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewAddressPropertiesNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageViewAddressPropertiesNVX {
@@ -7652,7 +7652,7 @@ impl Default for ImageViewAddressPropertiesNVX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageViewCaptureDescriptorDataInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewCaptureDescriptorDataInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageViewCaptureDescriptorDataInfoEXT {
@@ -7672,7 +7672,7 @@ impl Default for ImageViewCaptureDescriptorDataInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageViewCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageViewCreateInfo {
@@ -7702,7 +7702,7 @@ impl Default for ImageViewCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageViewHandleInfoNVX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewHandleInfoNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageViewHandleInfoNVX {
@@ -7726,7 +7726,7 @@ impl Default for ImageViewHandleInfoNVX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageViewMinLodCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewMinLodCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct ImageViewMinLodCreateInfoEXT {
@@ -7746,7 +7746,7 @@ impl Default for ImageViewMinLodCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageViewSampleWeightCreateInfoQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewSampleWeightCreateInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageViewSampleWeightCreateInfoQCOM {
@@ -7770,7 +7770,7 @@ impl Default for ImageViewSampleWeightCreateInfoQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageViewSlicedCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewSlicedCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageViewSlicedCreateInfoEXT {
@@ -7792,7 +7792,7 @@ impl Default for ImageViewSlicedCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageViewUsageCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewUsageCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImageViewUsageCreateInfo {
@@ -7812,7 +7812,7 @@ impl Default for ImageViewUsageCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportAndroidHardwareBufferInfoANDROID.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportAndroidHardwareBufferInfoANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportAndroidHardwareBufferInfoANDROID {
@@ -7832,7 +7832,7 @@ impl Default for ImportAndroidHardwareBufferInfoANDROID {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportFenceFdInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportFenceFdInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportFenceFdInfoKHR {
@@ -7858,7 +7858,7 @@ impl Default for ImportFenceFdInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportFenceSciSyncInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportFenceSciSyncInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportFenceSciSyncInfoNV {
@@ -7882,7 +7882,7 @@ impl Default for ImportFenceSciSyncInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportFenceWin32HandleInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportFenceWin32HandleInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportFenceWin32HandleInfoKHR {
@@ -7910,7 +7910,7 @@ impl Default for ImportFenceWin32HandleInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMemoryBufferCollectionFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryBufferCollectionFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportMemoryBufferCollectionFUCHSIA {
@@ -7932,7 +7932,7 @@ impl Default for ImportMemoryBufferCollectionFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMemoryFdInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryFdInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportMemoryFdInfoKHR {
@@ -7954,7 +7954,7 @@ impl Default for ImportMemoryFdInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMemoryHostPointerInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryHostPointerInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportMemoryHostPointerInfoEXT {
@@ -7976,7 +7976,7 @@ impl Default for ImportMemoryHostPointerInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMemorySciBufInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemorySciBufInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportMemorySciBufInfoNV {
@@ -7998,7 +7998,7 @@ impl Default for ImportMemorySciBufInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMemoryWin32HandleInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryWin32HandleInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportMemoryWin32HandleInfoKHR {
@@ -8022,7 +8022,7 @@ impl Default for ImportMemoryWin32HandleInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMemoryWin32HandleInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryWin32HandleInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportMemoryWin32HandleInfoNV {
@@ -8044,7 +8044,7 @@ impl Default for ImportMemoryWin32HandleInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMemoryZirconHandleInfoFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMemoryZirconHandleInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportMemoryZirconHandleInfoFUCHSIA {
@@ -8066,7 +8066,7 @@ impl Default for ImportMemoryZirconHandleInfoFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMetalBufferInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMetalBufferInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportMetalBufferInfoEXT {
@@ -8086,7 +8086,7 @@ impl Default for ImportMetalBufferInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMetalIOSurfaceInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMetalIOSurfaceInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportMetalIOSurfaceInfoEXT {
@@ -8106,7 +8106,7 @@ impl Default for ImportMetalIOSurfaceInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMetalSharedEventInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMetalSharedEventInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportMetalSharedEventInfoEXT {
@@ -8126,7 +8126,7 @@ impl Default for ImportMetalSharedEventInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportMetalTextureInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportMetalTextureInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportMetalTextureInfoEXT {
@@ -8148,7 +8148,7 @@ impl Default for ImportMetalTextureInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportScreenBufferInfoQNX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportScreenBufferInfoQNX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportScreenBufferInfoQNX {
@@ -8168,7 +8168,7 @@ impl Default for ImportScreenBufferInfoQNX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportSemaphoreFdInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportSemaphoreFdInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportSemaphoreFdInfoKHR {
@@ -8194,7 +8194,7 @@ impl Default for ImportSemaphoreFdInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportSemaphoreSciSyncInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportSemaphoreSciSyncInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportSemaphoreSciSyncInfoNV {
@@ -8218,7 +8218,7 @@ impl Default for ImportSemaphoreSciSyncInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportSemaphoreWin32HandleInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportSemaphoreWin32HandleInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportSemaphoreWin32HandleInfoKHR {
@@ -8246,7 +8246,7 @@ impl Default for ImportSemaphoreWin32HandleInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImportSemaphoreZirconHandleInfoFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImportSemaphoreZirconHandleInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ImportSemaphoreZirconHandleInfoFUCHSIA {
@@ -8272,7 +8272,7 @@ impl Default for ImportSemaphoreZirconHandleInfoFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsExecutionSetTokenEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsExecutionSetTokenEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct IndirectCommandsExecutionSetTokenEXT {
@@ -8280,14 +8280,14 @@ pub struct IndirectCommandsExecutionSetTokenEXT {
     pub shader_stages: ShaderStageFlags,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsIndexBufferTokenEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsIndexBufferTokenEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct IndirectCommandsIndexBufferTokenEXT {
     pub mode: IndirectCommandsInputModeFlagsEXT,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsLayoutCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct IndirectCommandsLayoutCreateInfoEXT {
@@ -8317,7 +8317,7 @@ impl Default for IndirectCommandsLayoutCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsLayoutCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct IndirectCommandsLayoutCreateInfoNV {
@@ -8347,7 +8347,7 @@ impl Default for IndirectCommandsLayoutCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsLayoutTokenEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutTokenEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct IndirectCommandsLayoutTokenEXT {
@@ -8371,7 +8371,7 @@ impl Default for IndirectCommandsLayoutTokenEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsLayoutTokenNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsLayoutTokenNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct IndirectCommandsLayoutTokenNV {
@@ -8415,14 +8415,14 @@ impl Default for IndirectCommandsLayoutTokenNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsPushConstantTokenEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsPushConstantTokenEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct IndirectCommandsPushConstantTokenEXT {
     pub update_range: PushConstantRange,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsStreamNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsStreamNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct IndirectCommandsStreamNV {
@@ -8430,14 +8430,14 @@ pub struct IndirectCommandsStreamNV {
     pub offset: DeviceSize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectCommandsVertexBufferTokenEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectCommandsVertexBufferTokenEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct IndirectCommandsVertexBufferTokenEXT {
     pub vertex_binding_unit: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectExecutionSetCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectExecutionSetCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct IndirectExecutionSetCreateInfoEXT {
@@ -8459,7 +8459,7 @@ impl Default for IndirectExecutionSetCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectExecutionSetPipelineInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectExecutionSetPipelineInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct IndirectExecutionSetPipelineInfoEXT {
@@ -8481,7 +8481,7 @@ impl Default for IndirectExecutionSetPipelineInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectExecutionSetShaderInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectExecutionSetShaderInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct IndirectExecutionSetShaderInfoEXT {
@@ -8511,7 +8511,7 @@ impl Default for IndirectExecutionSetShaderInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkIndirectExecutionSetShaderLayoutInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkIndirectExecutionSetShaderLayoutInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct IndirectExecutionSetShaderLayoutInfoEXT {
@@ -8533,7 +8533,7 @@ impl Default for IndirectExecutionSetShaderLayoutInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkInitializePerformanceApiInfoINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkInitializePerformanceApiInfoINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct InitializePerformanceApiInfoINTEL {
@@ -8553,7 +8553,7 @@ impl Default for InitializePerformanceApiInfoINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkInputAttachmentAspectReference.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkInputAttachmentAspectReference.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct InputAttachmentAspectReference {
@@ -8562,7 +8562,7 @@ pub struct InputAttachmentAspectReference {
     pub aspect_mask: ImageAspectFlags,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkInstanceCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkInstanceCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct InstanceCreateInfo {
@@ -8592,7 +8592,7 @@ impl Default for InstanceCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLatencySleepInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLatencySleepInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct LatencySleepInfoNV {
@@ -8614,7 +8614,7 @@ impl Default for LatencySleepInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLatencySleepModeInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLatencySleepModeInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct LatencySleepModeInfoNV {
@@ -8638,7 +8638,7 @@ impl Default for LatencySleepModeInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLatencySubmissionPresentIdNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLatencySubmissionPresentIdNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct LatencySubmissionPresentIdNV {
@@ -8658,7 +8658,7 @@ impl Default for LatencySubmissionPresentIdNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLatencySurfaceCapabilitiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLatencySurfaceCapabilitiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct LatencySurfaceCapabilitiesNV {
@@ -8680,7 +8680,7 @@ impl Default for LatencySurfaceCapabilitiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLatencyTimingsFrameReportNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLatencyTimingsFrameReportNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct LatencyTimingsFrameReportNV {
@@ -8726,7 +8726,7 @@ impl Default for LatencyTimingsFrameReportNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLayerProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLayerProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct LayerProperties {
@@ -8736,7 +8736,7 @@ pub struct LayerProperties {
     pub description: StringArray<MAX_DESCRIPTION_SIZE>,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLayerSettingEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLayerSettingEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct LayerSettingEXT {
@@ -8760,7 +8760,7 @@ impl Default for LayerSettingEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkLayerSettingsCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkLayerSettingsCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct LayerSettingsCreateInfoEXT {
@@ -8782,7 +8782,7 @@ impl Default for LayerSettingsCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMacOSSurfaceCreateInfoMVK.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMacOSSurfaceCreateInfoMVK.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MacOSSurfaceCreateInfoMVK {
@@ -8804,7 +8804,7 @@ impl Default for MacOSSurfaceCreateInfoMVK {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMappedMemoryRange.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMappedMemoryRange.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MappedMemoryRange {
@@ -8828,7 +8828,7 @@ impl Default for MappedMemoryRange {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryAllocateFlagsInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryAllocateFlagsInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryAllocateFlagsInfo {
@@ -8850,7 +8850,7 @@ impl Default for MemoryAllocateFlagsInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryAllocateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryAllocateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryAllocateInfo {
@@ -8872,7 +8872,7 @@ impl Default for MemoryAllocateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryBarrier.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryBarrier.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryBarrier {
@@ -8894,7 +8894,7 @@ impl Default for MemoryBarrier {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryBarrier2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryBarrier2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryBarrier2 {
@@ -8920,7 +8920,7 @@ impl Default for MemoryBarrier2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryDedicatedAllocateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryDedicatedAllocateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryDedicatedAllocateInfo {
@@ -8942,7 +8942,7 @@ impl Default for MemoryDedicatedAllocateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryDedicatedRequirements.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryDedicatedRequirements.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryDedicatedRequirements {
@@ -8964,7 +8964,7 @@ impl Default for MemoryDedicatedRequirements {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryFdPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryFdPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryFdPropertiesKHR {
@@ -8984,7 +8984,7 @@ impl Default for MemoryFdPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryGetAndroidHardwareBufferInfoANDROID.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetAndroidHardwareBufferInfoANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryGetAndroidHardwareBufferInfoANDROID {
@@ -9004,7 +9004,7 @@ impl Default for MemoryGetAndroidHardwareBufferInfoANDROID {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryGetFdInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetFdInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryGetFdInfoKHR {
@@ -9026,7 +9026,7 @@ impl Default for MemoryGetFdInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryGetRemoteAddressInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetRemoteAddressInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryGetRemoteAddressInfoNV {
@@ -9048,7 +9048,7 @@ impl Default for MemoryGetRemoteAddressInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryGetSciBufInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetSciBufInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryGetSciBufInfoNV {
@@ -9070,7 +9070,7 @@ impl Default for MemoryGetSciBufInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryGetWin32HandleInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetWin32HandleInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryGetWin32HandleInfoKHR {
@@ -9092,7 +9092,7 @@ impl Default for MemoryGetWin32HandleInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryGetZirconHandleInfoFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryGetZirconHandleInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryGetZirconHandleInfoFUCHSIA {
@@ -9114,7 +9114,7 @@ impl Default for MemoryGetZirconHandleInfoFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryHeap.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryHeap.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryHeap {
@@ -9122,7 +9122,7 @@ pub struct MemoryHeap {
     pub flags: MemoryHeapFlags,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryHostPointerPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryHostPointerPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryHostPointerPropertiesEXT {
@@ -9142,7 +9142,7 @@ impl Default for MemoryHostPointerPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryMapInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryMapInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryMapInfo {
@@ -9168,7 +9168,7 @@ impl Default for MemoryMapInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryMapPlacedInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryMapPlacedInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryMapPlacedInfoEXT {
@@ -9188,7 +9188,7 @@ impl Default for MemoryMapPlacedInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryOpaqueCaptureAddressAllocateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryOpaqueCaptureAddressAllocateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryOpaqueCaptureAddressAllocateInfo {
@@ -9208,7 +9208,7 @@ impl Default for MemoryOpaqueCaptureAddressAllocateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryPriorityAllocateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryPriorityAllocateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct MemoryPriorityAllocateInfoEXT {
@@ -9228,7 +9228,7 @@ impl Default for MemoryPriorityAllocateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryRequirements.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryRequirements.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryRequirements {
@@ -9237,7 +9237,7 @@ pub struct MemoryRequirements {
     pub memory_type_bits: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryRequirements2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryRequirements2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryRequirements2 {
@@ -9257,7 +9257,7 @@ impl Default for MemoryRequirements2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemorySciBufPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemorySciBufPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemorySciBufPropertiesNV {
@@ -9277,7 +9277,7 @@ impl Default for MemorySciBufPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryToImageCopy.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryToImageCopy.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryToImageCopy {
@@ -9307,7 +9307,7 @@ impl Default for MemoryToImageCopy {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryType.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryType.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryType {
@@ -9315,7 +9315,7 @@ pub struct MemoryType {
     pub heap_index: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryUnmapInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryUnmapInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryUnmapInfo {
@@ -9337,7 +9337,7 @@ impl Default for MemoryUnmapInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryWin32HandlePropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryWin32HandlePropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryWin32HandlePropertiesKHR {
@@ -9357,7 +9357,7 @@ impl Default for MemoryWin32HandlePropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryZirconHandlePropertiesFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryZirconHandlePropertiesFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MemoryZirconHandlePropertiesFUCHSIA {
@@ -9377,7 +9377,7 @@ impl Default for MemoryZirconHandlePropertiesFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMetalSurfaceCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMetalSurfaceCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MetalSurfaceCreateInfoEXT {
@@ -9399,7 +9399,7 @@ impl Default for MetalSurfaceCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMicromapBuildInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMicromapBuildInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct MicromapBuildInfoEXT {
@@ -9439,7 +9439,7 @@ impl Default for MicromapBuildInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMicromapBuildSizesInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMicromapBuildSizesInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MicromapBuildSizesInfoEXT {
@@ -9463,7 +9463,7 @@ impl Default for MicromapBuildSizesInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMicromapCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMicromapCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MicromapCreateInfoEXT {
@@ -9493,7 +9493,7 @@ impl Default for MicromapCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMicromapTriangleEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMicromapTriangleEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct MicromapTriangleEXT {
@@ -9502,7 +9502,7 @@ pub struct MicromapTriangleEXT {
     pub format: u16,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMicromapUsageEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMicromapUsageEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct MicromapUsageEXT {
@@ -9511,7 +9511,7 @@ pub struct MicromapUsageEXT {
     pub format: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMicromapVersionInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMicromapVersionInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MicromapVersionInfoEXT {
@@ -9531,7 +9531,7 @@ impl Default for MicromapVersionInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMultiDrawIndexedInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMultiDrawIndexedInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct MultiDrawIndexedInfoEXT {
@@ -9540,7 +9540,7 @@ pub struct MultiDrawIndexedInfoEXT {
     pub vertex_offset: i32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMultiDrawInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMultiDrawInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct MultiDrawInfoEXT {
@@ -9548,7 +9548,7 @@ pub struct MultiDrawInfoEXT {
     pub vertex_count: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMultisamplePropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMultisamplePropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MultisamplePropertiesEXT {
@@ -9568,7 +9568,7 @@ impl Default for MultisamplePropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMultisampledRenderToSingleSampledInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMultisampledRenderToSingleSampledInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MultisampledRenderToSingleSampledInfoEXT {
@@ -9590,7 +9590,7 @@ impl Default for MultisampledRenderToSingleSampledInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMultiviewPerViewAttributesInfoNVX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMultiviewPerViewAttributesInfoNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MultiviewPerViewAttributesInfoNVX {
@@ -9612,7 +9612,7 @@ impl Default for MultiviewPerViewAttributesInfoNVX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {
@@ -9634,7 +9634,7 @@ impl Default for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMutableDescriptorTypeCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMutableDescriptorTypeCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MutableDescriptorTypeCreateInfoEXT {
@@ -9656,7 +9656,7 @@ impl Default for MutableDescriptorTypeCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMutableDescriptorTypeListEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMutableDescriptorTypeListEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct MutableDescriptorTypeListEXT {
@@ -9674,7 +9674,7 @@ impl Default for MutableDescriptorTypeListEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOffset2D.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOffset2D.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct Offset2D {
@@ -9682,7 +9682,7 @@ pub struct Offset2D {
     pub y: i32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOffset3D.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOffset3D.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct Offset3D {
@@ -9691,7 +9691,7 @@ pub struct Offset3D {
     pub z: i32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpaqueCaptureDescriptorDataCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpaqueCaptureDescriptorDataCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct OpaqueCaptureDescriptorDataCreateInfoEXT {
@@ -9711,7 +9711,7 @@ impl Default for OpaqueCaptureDescriptorDataCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpticalFlowExecuteInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowExecuteInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct OpticalFlowExecuteInfoNV {
@@ -9735,7 +9735,7 @@ impl Default for OpticalFlowExecuteInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpticalFlowImageFormatInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowImageFormatInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct OpticalFlowImageFormatInfoNV {
@@ -9755,7 +9755,7 @@ impl Default for OpticalFlowImageFormatInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpticalFlowImageFormatPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowImageFormatPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct OpticalFlowImageFormatPropertiesNV {
@@ -9775,7 +9775,7 @@ impl Default for OpticalFlowImageFormatPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpticalFlowSessionCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowSessionCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct OpticalFlowSessionCreateInfoNV {
@@ -9811,7 +9811,7 @@ impl Default for OpticalFlowSessionCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOpticalFlowSessionCreatePrivateDataInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOpticalFlowSessionCreatePrivateDataInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct OpticalFlowSessionCreatePrivateDataInfoNV {
@@ -9835,7 +9835,7 @@ impl Default for OpticalFlowSessionCreatePrivateDataInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkOutOfBandQueueTypeInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOutOfBandQueueTypeInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct OutOfBandQueueTypeInfoNV {
@@ -9855,7 +9855,7 @@ impl Default for OutOfBandQueueTypeInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPastPresentationTimingGOOGLE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPastPresentationTimingGOOGLE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct PastPresentationTimingGOOGLE {
@@ -9866,7 +9866,7 @@ pub struct PastPresentationTimingGOOGLE {
     pub present_margin: u64,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceConfigurationAcquireInfoINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceConfigurationAcquireInfoINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PerformanceConfigurationAcquireInfoINTEL {
@@ -9886,7 +9886,7 @@ impl Default for PerformanceConfigurationAcquireInfoINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceCounterDescriptionKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceCounterDescriptionKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PerformanceCounterDescriptionKHR {
@@ -9912,7 +9912,7 @@ impl Default for PerformanceCounterDescriptionKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceCounterKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceCounterKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PerformanceCounterKHR {
@@ -9938,7 +9938,7 @@ impl Default for PerformanceCounterKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceMarkerInfoINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceMarkerInfoINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PerformanceMarkerInfoINTEL {
@@ -9958,7 +9958,7 @@ impl Default for PerformanceMarkerInfoINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceOverrideInfoINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceOverrideInfoINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PerformanceOverrideInfoINTEL {
@@ -9982,7 +9982,7 @@ impl Default for PerformanceOverrideInfoINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceQueryReservationInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceQueryReservationInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PerformanceQueryReservationInfoKHR {
@@ -10002,7 +10002,7 @@ impl Default for PerformanceQueryReservationInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceQuerySubmitInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceQuerySubmitInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PerformanceQuerySubmitInfoKHR {
@@ -10022,7 +10022,7 @@ impl Default for PerformanceQuerySubmitInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceStreamMarkerInfoINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceStreamMarkerInfoINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PerformanceStreamMarkerInfoINTEL {
@@ -10042,7 +10042,7 @@ impl Default for PerformanceStreamMarkerInfoINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPerformanceValueINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPerformanceValueINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug)]
 pub struct PerformanceValueINTEL {
@@ -10050,7 +10050,7 @@ pub struct PerformanceValueINTEL {
     pub data: PerformanceValueDataINTEL,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevice16BitStorageFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevice16BitStorageFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevice16BitStorageFeatures {
@@ -10076,7 +10076,7 @@ impl Default for PhysicalDevice16BitStorageFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevice4444FormatsFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevice4444FormatsFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevice4444FormatsFeaturesEXT {
@@ -10098,7 +10098,7 @@ impl Default for PhysicalDevice4444FormatsFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevice8BitStorageFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevice8BitStorageFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevice8BitStorageFeatures {
@@ -10122,7 +10122,7 @@ impl Default for PhysicalDevice8BitStorageFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceASTCDecodeFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceASTCDecodeFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceASTCDecodeFeaturesEXT {
@@ -10142,7 +10142,7 @@ impl Default for PhysicalDeviceASTCDecodeFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceAccelerationStructureFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAccelerationStructureFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceAccelerationStructureFeaturesKHR {
@@ -10170,7 +10170,7 @@ impl Default for PhysicalDeviceAccelerationStructureFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceAccelerationStructurePropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAccelerationStructurePropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceAccelerationStructurePropertiesKHR {
@@ -10204,7 +10204,7 @@ impl Default for PhysicalDeviceAccelerationStructurePropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceAddressBindingReportFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAddressBindingReportFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceAddressBindingReportFeaturesEXT {
@@ -10224,7 +10224,7 @@ impl Default for PhysicalDeviceAddressBindingReportFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceAmigoProfilingFeaturesSEC.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAmigoProfilingFeaturesSEC.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceAmigoProfilingFeaturesSEC {
@@ -10244,7 +10244,7 @@ impl Default for PhysicalDeviceAmigoProfilingFeaturesSEC {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceAntiLagFeaturesAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAntiLagFeaturesAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceAntiLagFeaturesAMD {
@@ -10264,7 +10264,7 @@ impl Default for PhysicalDeviceAntiLagFeaturesAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT {
@@ -10285,7 +10285,7 @@ impl Default for PhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {
@@ -10305,7 +10305,7 @@ impl Default for PhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceBlendOperationAdvancedFeaturesEXT {
@@ -10325,7 +10325,7 @@ impl Default for PhysicalDeviceBlendOperationAdvancedFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceBlendOperationAdvancedPropertiesEXT {
@@ -10355,7 +10355,7 @@ impl Default for PhysicalDeviceBlendOperationAdvancedPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceBorderColorSwizzleFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceBorderColorSwizzleFeaturesEXT {
@@ -10377,7 +10377,7 @@ impl Default for PhysicalDeviceBorderColorSwizzleFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceBufferDeviceAddressFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceBufferDeviceAddressFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceBufferDeviceAddressFeatures {
@@ -10401,7 +10401,7 @@ impl Default for PhysicalDeviceBufferDeviceAddressFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceBufferDeviceAddressFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceBufferDeviceAddressFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceBufferDeviceAddressFeaturesEXT {
@@ -10425,7 +10425,7 @@ impl Default for PhysicalDeviceBufferDeviceAddressFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {
@@ -10447,7 +10447,7 @@ impl Default for PhysicalDeviceClusterCullingShaderFeaturesHUAWEI {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceClusterCullingShaderPropertiesHUAWEI {
@@ -10473,7 +10473,7 @@ impl Default for PhysicalDeviceClusterCullingShaderPropertiesHUAWEI {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI {
@@ -10493,7 +10493,7 @@ impl Default for PhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCoherentMemoryFeaturesAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCoherentMemoryFeaturesAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCoherentMemoryFeaturesAMD {
@@ -10513,7 +10513,7 @@ impl Default for PhysicalDeviceCoherentMemoryFeaturesAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceColorWriteEnableFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceColorWriteEnableFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceColorWriteEnableFeaturesEXT {
@@ -10533,7 +10533,7 @@ impl Default for PhysicalDeviceColorWriteEnableFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCommandBufferInheritanceFeaturesNV {
@@ -10553,7 +10553,7 @@ impl Default for PhysicalDeviceCommandBufferInheritanceFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceComputeShaderDerivativesFeaturesKHR {
@@ -10575,7 +10575,7 @@ impl Default for PhysicalDeviceComputeShaderDerivativesFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceComputeShaderDerivativesPropertiesKHR {
@@ -10595,7 +10595,7 @@ impl Default for PhysicalDeviceComputeShaderDerivativesPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceConditionalRenderingFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceConditionalRenderingFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceConditionalRenderingFeaturesEXT {
@@ -10617,7 +10617,7 @@ impl Default for PhysicalDeviceConditionalRenderingFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceConservativeRasterizationPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceConservativeRasterizationPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct PhysicalDeviceConservativeRasterizationPropertiesEXT {
@@ -10653,7 +10653,7 @@ impl Default for PhysicalDeviceConservativeRasterizationPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCooperativeMatrix2FeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrix2FeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCooperativeMatrix2FeaturesNV {
@@ -10685,7 +10685,7 @@ impl Default for PhysicalDeviceCooperativeMatrix2FeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCooperativeMatrix2PropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrix2PropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCooperativeMatrix2PropertiesNV {
@@ -10709,7 +10709,7 @@ impl Default for PhysicalDeviceCooperativeMatrix2PropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCooperativeMatrixFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrixFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCooperativeMatrixFeaturesKHR {
@@ -10731,7 +10731,7 @@ impl Default for PhysicalDeviceCooperativeMatrixFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCooperativeMatrixFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrixFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCooperativeMatrixFeaturesNV {
@@ -10753,7 +10753,7 @@ impl Default for PhysicalDeviceCooperativeMatrixFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCooperativeMatrixPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrixPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCooperativeMatrixPropertiesKHR {
@@ -10773,7 +10773,7 @@ impl Default for PhysicalDeviceCooperativeMatrixPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCooperativeMatrixPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCooperativeMatrixPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCooperativeMatrixPropertiesNV {
@@ -10793,7 +10793,7 @@ impl Default for PhysicalDeviceCooperativeMatrixPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCopyMemoryIndirectFeaturesNV {
@@ -10813,7 +10813,7 @@ impl Default for PhysicalDeviceCopyMemoryIndirectFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCopyMemoryIndirectPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCopyMemoryIndirectPropertiesNV {
@@ -10833,7 +10833,7 @@ impl Default for PhysicalDeviceCopyMemoryIndirectPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCornerSampledImageFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCornerSampledImageFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCornerSampledImageFeaturesNV {
@@ -10853,7 +10853,7 @@ impl Default for PhysicalDeviceCornerSampledImageFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCoverageReductionModeFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCoverageReductionModeFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCoverageReductionModeFeaturesNV {
@@ -10873,7 +10873,7 @@ impl Default for PhysicalDeviceCoverageReductionModeFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCubicClampFeaturesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCubicClampFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCubicClampFeaturesQCOM {
@@ -10893,7 +10893,7 @@ impl Default for PhysicalDeviceCubicClampFeaturesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCubicWeightsFeaturesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCubicWeightsFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCubicWeightsFeaturesQCOM {
@@ -10913,7 +10913,7 @@ impl Default for PhysicalDeviceCubicWeightsFeaturesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCudaKernelLaunchFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCudaKernelLaunchFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCudaKernelLaunchFeaturesNV {
@@ -10933,7 +10933,7 @@ impl Default for PhysicalDeviceCudaKernelLaunchFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCudaKernelLaunchPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCudaKernelLaunchPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCudaKernelLaunchPropertiesNV {
@@ -10955,7 +10955,7 @@ impl Default for PhysicalDeviceCudaKernelLaunchPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCustomBorderColorFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCustomBorderColorFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCustomBorderColorFeaturesEXT {
@@ -10977,7 +10977,7 @@ impl Default for PhysicalDeviceCustomBorderColorFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceCustomBorderColorPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceCustomBorderColorPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceCustomBorderColorPropertiesEXT {
@@ -10997,7 +10997,7 @@ impl Default for PhysicalDeviceCustomBorderColorPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {
@@ -11017,7 +11017,7 @@ impl Default for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthBiasControlFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthBiasControlFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDepthBiasControlFeaturesEXT {
@@ -11043,7 +11043,7 @@ impl Default for PhysicalDeviceDepthBiasControlFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthClampControlFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClampControlFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDepthClampControlFeaturesEXT {
@@ -11063,7 +11063,7 @@ impl Default for PhysicalDeviceDepthClampControlFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDepthClampZeroOneFeaturesEXT {
@@ -11083,7 +11083,7 @@ impl Default for PhysicalDeviceDepthClampZeroOneFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthClipControlFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClipControlFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDepthClipControlFeaturesEXT {
@@ -11103,7 +11103,7 @@ impl Default for PhysicalDeviceDepthClipControlFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthClipEnableFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthClipEnableFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDepthClipEnableFeaturesEXT {
@@ -11123,7 +11123,7 @@ impl Default for PhysicalDeviceDepthClipEnableFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthStencilResolveProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthStencilResolveProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDepthStencilResolveProperties {
@@ -11149,7 +11149,7 @@ impl Default for PhysicalDeviceDepthStencilResolveProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT {
@@ -11169,7 +11169,7 @@ impl Default for PhysicalDeviceDescriptorBufferDensityMapPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDescriptorBufferFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDescriptorBufferFeaturesEXT {
@@ -11195,7 +11195,7 @@ impl Default for PhysicalDeviceDescriptorBufferFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDescriptorBufferPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorBufferPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDescriptorBufferPropertiesEXT {
@@ -11279,7 +11279,7 @@ impl Default for PhysicalDeviceDescriptorBufferPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDescriptorIndexingFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorIndexingFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDescriptorIndexingFeatures {
@@ -11337,7 +11337,7 @@ impl Default for PhysicalDeviceDescriptorIndexingFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDescriptorIndexingProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorIndexingProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDescriptorIndexingProperties {
@@ -11401,7 +11401,7 @@ impl Default for PhysicalDeviceDescriptorIndexingProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {
@@ -11421,7 +11421,7 @@ impl Default for PhysicalDeviceDescriptorPoolOverallocationFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
@@ -11441,7 +11441,7 @@ impl Default for PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {
@@ -11465,7 +11465,7 @@ impl Default for PhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT {
@@ -11487,7 +11487,7 @@ impl Default for PhysicalDeviceDeviceGeneratedCommandsFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {
@@ -11507,7 +11507,7 @@ impl Default for PhysicalDeviceDeviceGeneratedCommandsFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDeviceGeneratedCommandsPropertiesEXT {
@@ -11549,7 +11549,7 @@ impl Default for PhysicalDeviceDeviceGeneratedCommandsPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDeviceGeneratedCommandsPropertiesNV {
@@ -11585,7 +11585,7 @@ impl Default for PhysicalDeviceDeviceGeneratedCommandsPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDeviceMemoryReportFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDeviceMemoryReportFeaturesEXT {
@@ -11605,7 +11605,7 @@ impl Default for PhysicalDeviceDeviceMemoryReportFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDiagnosticsConfigFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDiagnosticsConfigFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDiagnosticsConfigFeaturesNV {
@@ -11625,7 +11625,7 @@ impl Default for PhysicalDeviceDiagnosticsConfigFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDiscardRectanglePropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDiscardRectanglePropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDiscardRectanglePropertiesEXT {
@@ -11645,7 +11645,7 @@ impl Default for PhysicalDeviceDiscardRectanglePropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDisplacementMicromapFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDisplacementMicromapFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDisplacementMicromapFeaturesNV {
@@ -11665,7 +11665,7 @@ impl Default for PhysicalDeviceDisplacementMicromapFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDisplacementMicromapPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDisplacementMicromapPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDisplacementMicromapPropertiesNV {
@@ -11685,7 +11685,7 @@ impl Default for PhysicalDeviceDisplacementMicromapPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDriverProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDriverProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDriverProperties {
@@ -11711,7 +11711,7 @@ impl Default for PhysicalDeviceDriverProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDrmPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDrmPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDrmPropertiesEXT {
@@ -11741,7 +11741,7 @@ impl Default for PhysicalDeviceDrmPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDynamicRenderingFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDynamicRenderingFeatures {
@@ -11761,7 +11761,7 @@ impl Default for PhysicalDeviceDynamicRenderingFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDynamicRenderingLocalReadFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingLocalReadFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDynamicRenderingLocalReadFeatures {
@@ -11781,7 +11781,7 @@ impl Default for PhysicalDeviceDynamicRenderingLocalReadFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {
@@ -11802,7 +11802,7 @@ impl Default for PhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExclusiveScissorFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExclusiveScissorFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExclusiveScissorFeaturesNV {
@@ -11822,7 +11822,7 @@ impl Default for PhysicalDeviceExclusiveScissorFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExtendedDynamicState2FeaturesEXT {
@@ -11846,7 +11846,7 @@ impl Default for PhysicalDeviceExtendedDynamicState2FeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedDynamicState3FeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExtendedDynamicState3FeaturesEXT {
@@ -11926,7 +11926,7 @@ impl Default for PhysicalDeviceExtendedDynamicState3FeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExtendedDynamicState3PropertiesEXT {
@@ -11946,7 +11946,7 @@ impl Default for PhysicalDeviceExtendedDynamicState3PropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedDynamicStateFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExtendedDynamicStateFeaturesEXT {
@@ -11966,7 +11966,7 @@ impl Default for PhysicalDeviceExtendedDynamicStateFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {
@@ -11986,7 +11986,7 @@ impl Default for PhysicalDeviceExtendedSparseAddressSpaceFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
@@ -12010,7 +12010,7 @@ impl Default for PhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalBufferInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalBufferInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExternalBufferInfo {
@@ -12034,7 +12034,7 @@ impl Default for PhysicalDeviceExternalBufferInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalFenceInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalFenceInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExternalFenceInfo {
@@ -12054,7 +12054,7 @@ impl Default for PhysicalDeviceExternalFenceInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExternalFormatResolveFeaturesANDROID {
@@ -12074,7 +12074,7 @@ impl Default for PhysicalDeviceExternalFormatResolveFeaturesANDROID {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExternalFormatResolvePropertiesANDROID {
@@ -12098,7 +12098,7 @@ impl Default for PhysicalDeviceExternalFormatResolvePropertiesANDROID {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalImageFormatInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalImageFormatInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExternalImageFormatInfo {
@@ -12118,7 +12118,7 @@ impl Default for PhysicalDeviceExternalImageFormatInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalMemoryHostPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalMemoryHostPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExternalMemoryHostPropertiesEXT {
@@ -12138,7 +12138,7 @@ impl Default for PhysicalDeviceExternalMemoryHostPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalMemoryRDMAFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalMemoryRDMAFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExternalMemoryRDMAFeaturesNV {
@@ -12158,7 +12158,7 @@ impl Default for PhysicalDeviceExternalMemoryRDMAFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalMemorySciBufFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalMemorySciBufFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExternalMemorySciBufFeaturesNV {
@@ -12180,7 +12180,7 @@ impl Default for PhysicalDeviceExternalMemorySciBufFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {
@@ -12200,7 +12200,7 @@ impl Default for PhysicalDeviceExternalMemoryScreenBufferFeaturesQNX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalSciSync2FeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalSciSync2FeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExternalSciSync2FeaturesNV {
@@ -12226,7 +12226,7 @@ impl Default for PhysicalDeviceExternalSciSync2FeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalSciSyncFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalSciSyncFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExternalSciSyncFeaturesNV {
@@ -12252,7 +12252,7 @@ impl Default for PhysicalDeviceExternalSciSyncFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalSemaphoreInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalSemaphoreInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceExternalSemaphoreInfo {
@@ -12272,7 +12272,7 @@ impl Default for PhysicalDeviceExternalSemaphoreInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFaultFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFaultFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFaultFeaturesEXT {
@@ -12294,7 +12294,7 @@ impl Default for PhysicalDeviceFaultFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFeatures {
@@ -12355,7 +12355,7 @@ pub struct PhysicalDeviceFeatures {
     pub inherited_queries: Bool32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFeatures2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFeatures2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFeatures2 {
@@ -12375,7 +12375,7 @@ impl Default for PhysicalDeviceFeatures2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFloatControlsProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFloatControlsProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFloatControlsProperties {
@@ -12427,7 +12427,7 @@ impl Default for PhysicalDeviceFloatControlsProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMap2FeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentDensityMap2FeaturesEXT {
@@ -12447,7 +12447,7 @@ impl Default for PhysicalDeviceFragmentDensityMap2FeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMap2PropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentDensityMap2PropertiesEXT {
@@ -12473,7 +12473,7 @@ impl Default for PhysicalDeviceFragmentDensityMap2PropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentDensityMapFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentDensityMapFeaturesEXT {
@@ -12497,7 +12497,7 @@ impl Default for PhysicalDeviceFragmentDensityMapFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {
@@ -12517,7 +12517,7 @@ impl Default for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM {
@@ -12537,7 +12537,7 @@ impl Default for PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentDensityMapPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentDensityMapPropertiesEXT {
@@ -12561,7 +12561,7 @@ impl Default for PhysicalDeviceFragmentDensityMapPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {
@@ -12581,7 +12581,7 @@ impl Default for PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentShaderBarycentricPropertiesKHR {
@@ -12601,7 +12601,7 @@ impl Default for PhysicalDeviceFragmentShaderBarycentricPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentShaderInterlockFeaturesEXT {
@@ -12625,7 +12625,7 @@ impl Default for PhysicalDeviceFragmentShaderInterlockFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {
@@ -12649,7 +12649,7 @@ impl Default for PhysicalDeviceFragmentShadingRateEnumsFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentShadingRateEnumsPropertiesNV {
@@ -12669,7 +12669,7 @@ impl Default for PhysicalDeviceFragmentShadingRateEnumsPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentShadingRateFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRateFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentShadingRateFeaturesKHR {
@@ -12693,7 +12693,7 @@ impl Default for PhysicalDeviceFragmentShadingRateFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentShadingRateKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRateKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentShadingRateKHR {
@@ -12715,7 +12715,7 @@ impl Default for PhysicalDeviceFragmentShadingRateKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentShadingRatePropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShadingRatePropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFragmentShadingRatePropertiesKHR {
@@ -12767,7 +12767,7 @@ impl Default for PhysicalDeviceFragmentShadingRatePropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFrameBoundaryFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFrameBoundaryFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceFrameBoundaryFeaturesEXT {
@@ -12787,7 +12787,7 @@ impl Default for PhysicalDeviceFrameBoundaryFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceGlobalPriorityQueryFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceGlobalPriorityQueryFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceGlobalPriorityQueryFeatures {
@@ -12807,7 +12807,7 @@ impl Default for PhysicalDeviceGlobalPriorityQueryFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {
@@ -12827,7 +12827,7 @@ impl Default for PhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT {
@@ -12849,7 +12849,7 @@ impl Default for PhysicalDeviceGraphicsPipelineLibraryPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceGroupProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceGroupProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceGroupProperties {
@@ -12873,7 +12873,7 @@ impl Default for PhysicalDeviceGroupProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceHdrVividFeaturesHUAWEI.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHdrVividFeaturesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceHdrVividFeaturesHUAWEI {
@@ -12893,7 +12893,7 @@ impl Default for PhysicalDeviceHdrVividFeaturesHUAWEI {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceHostImageCopyFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHostImageCopyFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceHostImageCopyFeatures {
@@ -12913,7 +12913,7 @@ impl Default for PhysicalDeviceHostImageCopyFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceHostImageCopyProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHostImageCopyProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceHostImageCopyProperties {
@@ -12943,7 +12943,7 @@ impl Default for PhysicalDeviceHostImageCopyProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceHostQueryResetFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHostQueryResetFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceHostQueryResetFeatures {
@@ -12963,7 +12963,7 @@ impl Default for PhysicalDeviceHostQueryResetFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceIDProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceIDProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceIDProperties {
@@ -12991,7 +12991,7 @@ impl Default for PhysicalDeviceIDProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImage2DViewOf3DFeaturesEXT {
@@ -13013,7 +13013,7 @@ impl Default for PhysicalDeviceImage2DViewOf3DFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageAlignmentControlFeaturesMESA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageAlignmentControlFeaturesMESA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageAlignmentControlFeaturesMESA {
@@ -13033,7 +13033,7 @@ impl Default for PhysicalDeviceImageAlignmentControlFeaturesMESA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageAlignmentControlPropertiesMESA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageAlignmentControlPropertiesMESA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageAlignmentControlPropertiesMESA {
@@ -13053,7 +13053,7 @@ impl Default for PhysicalDeviceImageAlignmentControlPropertiesMESA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageCompressionControlFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageCompressionControlFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageCompressionControlFeaturesEXT {
@@ -13073,7 +13073,7 @@ impl Default for PhysicalDeviceImageCompressionControlFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT {
@@ -13093,7 +13093,7 @@ impl Default for PhysicalDeviceImageCompressionControlSwapchainFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageDrmFormatModifierInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageDrmFormatModifierInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageDrmFormatModifierInfoEXT {
@@ -13119,7 +13119,7 @@ impl Default for PhysicalDeviceImageDrmFormatModifierInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageFormatInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageFormatInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageFormatInfo2 {
@@ -13147,7 +13147,7 @@ impl Default for PhysicalDeviceImageFormatInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageProcessing2FeaturesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageProcessing2FeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageProcessing2FeaturesQCOM {
@@ -13167,7 +13167,7 @@ impl Default for PhysicalDeviceImageProcessing2FeaturesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageProcessing2PropertiesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageProcessing2PropertiesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageProcessing2PropertiesQCOM {
@@ -13187,7 +13187,7 @@ impl Default for PhysicalDeviceImageProcessing2PropertiesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageProcessingFeaturesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageProcessingFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageProcessingFeaturesQCOM {
@@ -13211,7 +13211,7 @@ impl Default for PhysicalDeviceImageProcessingFeaturesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageProcessingPropertiesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageProcessingPropertiesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageProcessingPropertiesQCOM {
@@ -13237,7 +13237,7 @@ impl Default for PhysicalDeviceImageProcessingPropertiesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageRobustnessFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageRobustnessFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageRobustnessFeatures {
@@ -13257,7 +13257,7 @@ impl Default for PhysicalDeviceImageRobustnessFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {
@@ -13277,7 +13277,7 @@ impl Default for PhysicalDeviceImageSlicedViewOf3DFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageViewImageFormatInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageViewImageFormatInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageViewImageFormatInfoEXT {
@@ -13297,7 +13297,7 @@ impl Default for PhysicalDeviceImageViewImageFormatInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageViewMinLodFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageViewMinLodFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImageViewMinLodFeaturesEXT {
@@ -13317,7 +13317,7 @@ impl Default for PhysicalDeviceImageViewMinLodFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImagelessFramebufferFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImagelessFramebufferFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceImagelessFramebufferFeatures {
@@ -13337,7 +13337,7 @@ impl Default for PhysicalDeviceImagelessFramebufferFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceIndexTypeUint8Features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceIndexTypeUint8Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceIndexTypeUint8Features {
@@ -13357,7 +13357,7 @@ impl Default for PhysicalDeviceIndexTypeUint8Features {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceInheritedViewportScissorFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInheritedViewportScissorFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceInheritedViewportScissorFeaturesNV {
@@ -13377,7 +13377,7 @@ impl Default for PhysicalDeviceInheritedViewportScissorFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceInlineUniformBlockFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInlineUniformBlockFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceInlineUniformBlockFeatures {
@@ -13399,7 +13399,7 @@ impl Default for PhysicalDeviceInlineUniformBlockFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceInlineUniformBlockProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInlineUniformBlockProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceInlineUniformBlockProperties {
@@ -13427,7 +13427,7 @@ impl Default for PhysicalDeviceInlineUniformBlockProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInvocationMaskFeaturesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceInvocationMaskFeaturesHUAWEI {
@@ -13447,7 +13447,7 @@ impl Default for PhysicalDeviceInvocationMaskFeaturesHUAWEI {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLayeredApiPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLayeredApiPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceLayeredApiPropertiesKHR {
@@ -13473,7 +13473,7 @@ impl Default for PhysicalDeviceLayeredApiPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLayeredApiPropertiesListKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLayeredApiPropertiesListKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceLayeredApiPropertiesListKHR {
@@ -13495,7 +13495,7 @@ impl Default for PhysicalDeviceLayeredApiPropertiesListKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct PhysicalDeviceLayeredApiVulkanPropertiesKHR {
@@ -13515,7 +13515,7 @@ impl Default for PhysicalDeviceLayeredApiVulkanPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLayeredDriverPropertiesMSFT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLayeredDriverPropertiesMSFT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceLayeredDriverPropertiesMSFT {
@@ -13535,7 +13535,7 @@ impl Default for PhysicalDeviceLayeredDriverPropertiesMSFT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLegacyDitheringFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLegacyDitheringFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceLegacyDitheringFeaturesEXT {
@@ -13555,7 +13555,7 @@ impl Default for PhysicalDeviceLegacyDitheringFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
@@ -13575,7 +13575,7 @@ impl Default for PhysicalDeviceLegacyVertexAttributesFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
@@ -13595,7 +13595,7 @@ impl Default for PhysicalDeviceLegacyVertexAttributesPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLimits.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLimits.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct PhysicalDeviceLimits {
@@ -13707,7 +13707,7 @@ pub struct PhysicalDeviceLimits {
     pub non_coherent_atom_size: DeviceSize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLineRasterizationFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceLineRasterizationFeatures {
@@ -13737,7 +13737,7 @@ impl Default for PhysicalDeviceLineRasterizationFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLineRasterizationProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceLineRasterizationProperties {
@@ -13757,7 +13757,7 @@ impl Default for PhysicalDeviceLineRasterizationProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLinearColorAttachmentFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLinearColorAttachmentFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceLinearColorAttachmentFeaturesNV {
@@ -13777,7 +13777,7 @@ impl Default for PhysicalDeviceLinearColorAttachmentFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance3Properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance3Properties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMaintenance3Properties {
@@ -13799,7 +13799,7 @@ impl Default for PhysicalDeviceMaintenance3Properties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance4Features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance4Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMaintenance4Features {
@@ -13819,7 +13819,7 @@ impl Default for PhysicalDeviceMaintenance4Features {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance4Properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance4Properties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMaintenance4Properties {
@@ -13839,7 +13839,7 @@ impl Default for PhysicalDeviceMaintenance4Properties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance5Features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance5Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMaintenance5Features {
@@ -13859,7 +13859,7 @@ impl Default for PhysicalDeviceMaintenance5Features {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance5Properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance5Properties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMaintenance5Properties {
@@ -13889,7 +13889,7 @@ impl Default for PhysicalDeviceMaintenance5Properties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance6Features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance6Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMaintenance6Features {
@@ -13909,7 +13909,7 @@ impl Default for PhysicalDeviceMaintenance6Features {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance6Properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance6Properties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMaintenance6Properties {
@@ -13933,7 +13933,7 @@ impl Default for PhysicalDeviceMaintenance6Properties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance7FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance7FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMaintenance7FeaturesKHR {
@@ -13953,7 +13953,7 @@ impl Default for PhysicalDeviceMaintenance7FeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance7PropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance7PropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMaintenance7PropertiesKHR {
@@ -13987,7 +13987,7 @@ impl Default for PhysicalDeviceMaintenance7PropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMapMemoryPlacedFeaturesEXT {
@@ -14011,7 +14011,7 @@ impl Default for PhysicalDeviceMapMemoryPlacedFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMapMemoryPlacedPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMapMemoryPlacedPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMapMemoryPlacedPropertiesEXT {
@@ -14031,7 +14031,7 @@ impl Default for PhysicalDeviceMapMemoryPlacedPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMemoryBudgetPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryBudgetPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMemoryBudgetPropertiesEXT {
@@ -14053,7 +14053,7 @@ impl Default for PhysicalDeviceMemoryBudgetPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMemoryDecompressionFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryDecompressionFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMemoryDecompressionFeaturesNV {
@@ -14073,7 +14073,7 @@ impl Default for PhysicalDeviceMemoryDecompressionFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMemoryDecompressionPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryDecompressionPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMemoryDecompressionPropertiesNV {
@@ -14095,7 +14095,7 @@ impl Default for PhysicalDeviceMemoryDecompressionPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMemoryPriorityFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryPriorityFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMemoryPriorityFeaturesEXT {
@@ -14115,7 +14115,7 @@ impl Default for PhysicalDeviceMemoryPriorityFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMemoryProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMemoryProperties {
@@ -14125,7 +14125,7 @@ pub struct PhysicalDeviceMemoryProperties {
     pub memory_heaps: [MemoryHeap; MAX_MEMORY_HEAPS],
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMemoryProperties2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryProperties2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMemoryProperties2 {
@@ -14145,7 +14145,7 @@ impl Default for PhysicalDeviceMemoryProperties2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMeshShaderFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMeshShaderFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMeshShaderFeaturesEXT {
@@ -14173,7 +14173,7 @@ impl Default for PhysicalDeviceMeshShaderFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMeshShaderFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMeshShaderFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMeshShaderFeaturesNV {
@@ -14195,7 +14195,7 @@ impl Default for PhysicalDeviceMeshShaderFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMeshShaderPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMeshShaderPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMeshShaderPropertiesEXT {
@@ -14269,7 +14269,7 @@ impl Default for PhysicalDeviceMeshShaderPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMeshShaderPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMeshShaderPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMeshShaderPropertiesNV {
@@ -14313,7 +14313,7 @@ impl Default for PhysicalDeviceMeshShaderPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMultiDrawFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiDrawFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMultiDrawFeaturesEXT {
@@ -14333,7 +14333,7 @@ impl Default for PhysicalDeviceMultiDrawFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMultiDrawPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiDrawPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMultiDrawPropertiesEXT {
@@ -14353,7 +14353,7 @@ impl Default for PhysicalDeviceMultiDrawPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {
@@ -14374,7 +14374,7 @@ impl Default for PhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMultiviewFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMultiviewFeatures {
@@ -14398,7 +14398,7 @@ impl Default for PhysicalDeviceMultiviewFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX {
@@ -14418,7 +14418,7 @@ impl Default for PhysicalDeviceMultiviewPerViewAttributesPropertiesNVX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {
@@ -14438,7 +14438,7 @@ impl Default for PhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {
@@ -14458,7 +14458,7 @@ impl Default for PhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMultiviewProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMultiviewProperties {
@@ -14480,7 +14480,7 @@ impl Default for PhysicalDeviceMultiviewProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceMutableDescriptorTypeFeaturesEXT {
@@ -14500,7 +14500,7 @@ impl Default for PhysicalDeviceMutableDescriptorTypeFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceNestedCommandBufferFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceNestedCommandBufferFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceNestedCommandBufferFeaturesEXT {
@@ -14524,7 +14524,7 @@ impl Default for PhysicalDeviceNestedCommandBufferFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceNestedCommandBufferPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceNestedCommandBufferPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceNestedCommandBufferPropertiesEXT {
@@ -14544,7 +14544,7 @@ impl Default for PhysicalDeviceNestedCommandBufferPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {
@@ -14564,7 +14564,7 @@ impl Default for PhysicalDeviceNonSeamlessCubeMapFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceOpacityMicromapFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceOpacityMicromapFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceOpacityMicromapFeaturesEXT {
@@ -14588,7 +14588,7 @@ impl Default for PhysicalDeviceOpacityMicromapFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceOpacityMicromapPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceOpacityMicromapPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceOpacityMicromapPropertiesEXT {
@@ -14610,7 +14610,7 @@ impl Default for PhysicalDeviceOpacityMicromapPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceOpticalFlowFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceOpticalFlowFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceOpticalFlowFeaturesNV {
@@ -14630,7 +14630,7 @@ impl Default for PhysicalDeviceOpticalFlowFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceOpticalFlowPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceOpticalFlowPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceOpticalFlowPropertiesNV {
@@ -14670,7 +14670,7 @@ impl Default for PhysicalDeviceOpticalFlowPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePCIBusInfoPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePCIBusInfoPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePCIBusInfoPropertiesEXT {
@@ -14696,7 +14696,7 @@ impl Default for PhysicalDevicePCIBusInfoPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {
@@ -14716,7 +14716,7 @@ impl Default for PhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePerStageDescriptorSetFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePerStageDescriptorSetFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePerStageDescriptorSetFeaturesNV {
@@ -14738,7 +14738,7 @@ impl Default for PhysicalDevicePerStageDescriptorSetFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePerformanceQueryFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePerformanceQueryFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePerformanceQueryFeaturesKHR {
@@ -14760,7 +14760,7 @@ impl Default for PhysicalDevicePerformanceQueryFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePerformanceQueryPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePerformanceQueryPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePerformanceQueryPropertiesKHR {
@@ -14780,7 +14780,7 @@ impl Default for PhysicalDevicePerformanceQueryPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineBinaryFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineBinaryFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePipelineBinaryFeaturesKHR {
@@ -14800,7 +14800,7 @@ impl Default for PhysicalDevicePipelineBinaryFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineBinaryPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineBinaryPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePipelineBinaryPropertiesKHR {
@@ -14828,7 +14828,7 @@ impl Default for PhysicalDevicePipelineBinaryPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineCreationCacheControlFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineCreationCacheControlFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePipelineCreationCacheControlFeatures {
@@ -14848,7 +14848,7 @@ impl Default for PhysicalDevicePipelineCreationCacheControlFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {
@@ -14868,7 +14868,7 @@ impl Default for PhysicalDevicePipelineExecutablePropertiesFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {
@@ -14888,7 +14888,7 @@ impl Default for PhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelinePropertiesFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelinePropertiesFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePipelinePropertiesFeaturesEXT {
@@ -14908,7 +14908,7 @@ impl Default for PhysicalDevicePipelinePropertiesFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineProtectedAccessFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineProtectedAccessFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePipelineProtectedAccessFeatures {
@@ -14928,7 +14928,7 @@ impl Default for PhysicalDevicePipelineProtectedAccessFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineRobustnessFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineRobustnessFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePipelineRobustnessFeatures {
@@ -14948,7 +14948,7 @@ impl Default for PhysicalDevicePipelineRobustnessFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineRobustnessProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineRobustnessProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePipelineRobustnessProperties {
@@ -14974,7 +14974,7 @@ impl Default for PhysicalDevicePipelineRobustnessProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePointClippingProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePointClippingProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePointClippingProperties {
@@ -14994,7 +14994,7 @@ impl Default for PhysicalDevicePointClippingProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePortabilitySubsetFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePortabilitySubsetFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePortabilitySubsetFeaturesKHR {
@@ -15042,7 +15042,7 @@ impl Default for PhysicalDevicePortabilitySubsetFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePortabilitySubsetPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePortabilitySubsetPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePortabilitySubsetPropertiesKHR {
@@ -15062,7 +15062,7 @@ impl Default for PhysicalDevicePortabilitySubsetPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePresentBarrierFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentBarrierFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePresentBarrierFeaturesNV {
@@ -15082,7 +15082,7 @@ impl Default for PhysicalDevicePresentBarrierFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePresentIdFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentIdFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePresentIdFeaturesKHR {
@@ -15102,7 +15102,7 @@ impl Default for PhysicalDevicePresentIdFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT {
@@ -15122,7 +15122,7 @@ impl Default for PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePresentWaitFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePresentWaitFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePresentWaitFeaturesKHR {
@@ -15142,7 +15142,7 @@ impl Default for PhysicalDevicePresentWaitFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {
@@ -15164,7 +15164,7 @@ impl Default for PhysicalDevicePrimitiveTopologyListRestartFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {
@@ -15188,7 +15188,7 @@ impl Default for PhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePrivateDataFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePrivateDataFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePrivateDataFeatures {
@@ -15208,7 +15208,7 @@ impl Default for PhysicalDevicePrivateDataFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct PhysicalDeviceProperties {
@@ -15223,7 +15223,7 @@ pub struct PhysicalDeviceProperties {
     pub sparse_properties: PhysicalDeviceSparseProperties,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceProperties2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceProperties2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct PhysicalDeviceProperties2 {
@@ -15243,7 +15243,7 @@ impl Default for PhysicalDeviceProperties2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceProtectedMemoryFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceProtectedMemoryFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceProtectedMemoryFeatures {
@@ -15263,7 +15263,7 @@ impl Default for PhysicalDeviceProtectedMemoryFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceProtectedMemoryProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceProtectedMemoryProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceProtectedMemoryProperties {
@@ -15283,7 +15283,7 @@ impl Default for PhysicalDeviceProtectedMemoryProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceProvokingVertexFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceProvokingVertexFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceProvokingVertexFeaturesEXT {
@@ -15305,7 +15305,7 @@ impl Default for PhysicalDeviceProvokingVertexFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceProvokingVertexPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceProvokingVertexPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceProvokingVertexPropertiesEXT {
@@ -15327,7 +15327,7 @@ impl Default for PhysicalDeviceProvokingVertexPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePushDescriptorProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePushDescriptorProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDevicePushDescriptorProperties {
@@ -15347,7 +15347,7 @@ impl Default for PhysicalDevicePushDescriptorProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRGBA10X6FormatsFeaturesEXT {
@@ -15367,7 +15367,7 @@ impl Default for PhysicalDeviceRGBA10X6FormatsFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT {
@@ -15392,7 +15392,7 @@ impl Default for PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRawAccessChainsFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRawAccessChainsFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRawAccessChainsFeaturesNV {
@@ -15412,7 +15412,7 @@ impl Default for PhysicalDeviceRawAccessChainsFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRayQueryFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayQueryFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRayQueryFeaturesKHR {
@@ -15432,7 +15432,7 @@ impl Default for PhysicalDeviceRayQueryFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
@@ -15452,7 +15452,7 @@ impl Default for PhysicalDeviceRayTracingInvocationReorderFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRayTracingInvocationReorderPropertiesNV {
@@ -15473,7 +15473,7 @@ impl Default for PhysicalDeviceRayTracingInvocationReorderPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRayTracingMaintenance1FeaturesKHR {
@@ -15495,7 +15495,7 @@ impl Default for PhysicalDeviceRayTracingMaintenance1FeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRayTracingMotionBlurFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingMotionBlurFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRayTracingMotionBlurFeaturesNV {
@@ -15517,7 +15517,7 @@ impl Default for PhysicalDeviceRayTracingMotionBlurFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRayTracingPipelineFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingPipelineFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRayTracingPipelineFeaturesKHR {
@@ -15545,7 +15545,7 @@ impl Default for PhysicalDeviceRayTracingPipelineFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRayTracingPipelinePropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingPipelinePropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRayTracingPipelinePropertiesKHR {
@@ -15579,7 +15579,7 @@ impl Default for PhysicalDeviceRayTracingPipelinePropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
@@ -15599,7 +15599,7 @@ impl Default for PhysicalDeviceRayTracingPositionFetchFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRayTracingPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRayTracingPropertiesNV {
@@ -15633,7 +15633,7 @@ impl Default for PhysicalDeviceRayTracingPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRayTracingValidationFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRayTracingValidationFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRayTracingValidationFeaturesNV {
@@ -15653,7 +15653,7 @@ impl Default for PhysicalDeviceRayTracingValidationFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRelaxedLineRasterizationFeaturesIMG {
@@ -15673,7 +15673,7 @@ impl Default for PhysicalDeviceRelaxedLineRasterizationFeaturesIMG {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRenderPassStripedFeaturesARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRenderPassStripedFeaturesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRenderPassStripedFeaturesARM {
@@ -15693,7 +15693,7 @@ impl Default for PhysicalDeviceRenderPassStripedFeaturesARM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRenderPassStripedPropertiesARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRenderPassStripedPropertiesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRenderPassStripedPropertiesARM {
@@ -15715,7 +15715,7 @@ impl Default for PhysicalDeviceRenderPassStripedPropertiesARM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRepresentativeFragmentTestFeaturesNV {
@@ -15735,7 +15735,7 @@ impl Default for PhysicalDeviceRepresentativeFragmentTestFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRobustness2FeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRobustness2FeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRobustness2FeaturesEXT {
@@ -15759,7 +15759,7 @@ impl Default for PhysicalDeviceRobustness2FeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRobustness2PropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRobustness2PropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceRobustness2PropertiesEXT {
@@ -15781,7 +15781,7 @@ impl Default for PhysicalDeviceRobustness2PropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSampleLocationsPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSampleLocationsPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct PhysicalDeviceSampleLocationsPropertiesEXT {
@@ -15809,7 +15809,7 @@ impl Default for PhysicalDeviceSampleLocationsPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSamplerFilterMinmaxProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSamplerFilterMinmaxProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSamplerFilterMinmaxProperties {
@@ -15831,7 +15831,7 @@ impl Default for PhysicalDeviceSamplerFilterMinmaxProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSamplerYcbcrConversionFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSamplerYcbcrConversionFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSamplerYcbcrConversionFeatures {
@@ -15851,7 +15851,7 @@ impl Default for PhysicalDeviceSamplerYcbcrConversionFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceScalarBlockLayoutFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceScalarBlockLayoutFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceScalarBlockLayoutFeatures {
@@ -15871,7 +15871,7 @@ impl Default for PhysicalDeviceScalarBlockLayoutFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSchedulingControlsFeaturesARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSchedulingControlsFeaturesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSchedulingControlsFeaturesARM {
@@ -15891,7 +15891,7 @@ impl Default for PhysicalDeviceSchedulingControlsFeaturesARM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSchedulingControlsPropertiesARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSchedulingControlsPropertiesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSchedulingControlsPropertiesARM {
@@ -15911,7 +15911,7 @@ impl Default for PhysicalDeviceSchedulingControlsPropertiesARM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSeparateDepthStencilLayoutsFeatures {
@@ -15931,7 +15931,7 @@ impl Default for PhysicalDeviceSeparateDepthStencilLayoutsFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderAtomicFloat16VectorFeaturesNV {
@@ -15951,7 +15951,7 @@ impl Default for PhysicalDeviceShaderAtomicFloat16VectorFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderAtomicFloat2FeaturesEXT {
@@ -15993,7 +15993,7 @@ impl Default for PhysicalDeviceShaderAtomicFloat2FeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAtomicFloatFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderAtomicFloatFeaturesEXT {
@@ -16035,7 +16035,7 @@ impl Default for PhysicalDeviceShaderAtomicFloatFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderAtomicInt64Features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAtomicInt64Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderAtomicInt64Features {
@@ -16057,7 +16057,7 @@ impl Default for PhysicalDeviceShaderAtomicInt64Features {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderClockFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderClockFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderClockFeaturesKHR {
@@ -16079,7 +16079,7 @@ impl Default for PhysicalDeviceShaderClockFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderCoreBuiltinsFeaturesARM {
@@ -16099,7 +16099,7 @@ impl Default for PhysicalDeviceShaderCoreBuiltinsFeaturesARM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderCoreBuiltinsPropertiesARM {
@@ -16123,7 +16123,7 @@ impl Default for PhysicalDeviceShaderCoreBuiltinsPropertiesARM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderCoreProperties2AMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderCoreProperties2AMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderCoreProperties2AMD {
@@ -16145,7 +16145,7 @@ impl Default for PhysicalDeviceShaderCoreProperties2AMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderCorePropertiesAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderCorePropertiesAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderCorePropertiesAMD {
@@ -16191,7 +16191,7 @@ impl Default for PhysicalDeviceShaderCorePropertiesAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderCorePropertiesARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderCorePropertiesARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderCorePropertiesARM {
@@ -16215,7 +16215,7 @@ impl Default for PhysicalDeviceShaderCorePropertiesARM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderDemoteToHelperInvocationFeatures {
@@ -16235,7 +16235,7 @@ impl Default for PhysicalDeviceShaderDemoteToHelperInvocationFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderDrawParametersFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderDrawParametersFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderDrawParametersFeatures {
@@ -16255,7 +16255,7 @@ impl Default for PhysicalDeviceShaderDrawParametersFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {
@@ -16276,7 +16276,7 @@ impl Default for PhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderEnqueueFeaturesAMDX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderEnqueueFeaturesAMDX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderEnqueueFeaturesAMDX {
@@ -16298,7 +16298,7 @@ impl Default for PhysicalDeviceShaderEnqueueFeaturesAMDX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderEnqueuePropertiesAMDX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderEnqueuePropertiesAMDX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderEnqueuePropertiesAMDX {
@@ -16330,7 +16330,7 @@ impl Default for PhysicalDeviceShaderEnqueuePropertiesAMDX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderExpectAssumeFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderExpectAssumeFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderExpectAssumeFeatures {
@@ -16350,7 +16350,7 @@ impl Default for PhysicalDeviceShaderExpectAssumeFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderFloat16Int8Features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderFloat16Int8Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderFloat16Int8Features {
@@ -16372,7 +16372,7 @@ impl Default for PhysicalDeviceShaderFloat16Int8Features {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderFloatControls2Features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderFloatControls2Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderFloatControls2Features {
@@ -16392,7 +16392,7 @@ impl Default for PhysicalDeviceShaderFloatControls2Features {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {
@@ -16414,7 +16414,7 @@ impl Default for PhysicalDeviceShaderImageAtomicInt64FeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderImageFootprintFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderImageFootprintFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderImageFootprintFeaturesNV {
@@ -16434,7 +16434,7 @@ impl Default for PhysicalDeviceShaderImageFootprintFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderIntegerDotProductFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderIntegerDotProductFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderIntegerDotProductFeatures {
@@ -16454,7 +16454,7 @@ impl Default for PhysicalDeviceShaderIntegerDotProductFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderIntegerDotProductProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderIntegerDotProductProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderIntegerDotProductProperties {
@@ -16500,7 +16500,7 @@ impl Default for PhysicalDeviceShaderIntegerDotProductProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {
@@ -16520,7 +16520,7 @@ impl Default for PhysicalDeviceShaderIntegerFunctions2FeaturesINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {
@@ -16540,7 +16540,7 @@ impl Default for PhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderModuleIdentifierFeaturesEXT {
@@ -16560,7 +16560,7 @@ impl Default for PhysicalDeviceShaderModuleIdentifierFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderModuleIdentifierPropertiesEXT {
@@ -16580,7 +16580,7 @@ impl Default for PhysicalDeviceShaderModuleIdentifierPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderObjectFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderObjectFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderObjectFeaturesEXT {
@@ -16600,7 +16600,7 @@ impl Default for PhysicalDeviceShaderObjectFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderObjectPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderObjectPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderObjectPropertiesEXT {
@@ -16622,7 +16622,7 @@ impl Default for PhysicalDeviceShaderObjectPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderQuadControlFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderQuadControlFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderQuadControlFeaturesKHR {
@@ -16642,7 +16642,7 @@ impl Default for PhysicalDeviceShaderQuadControlFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
@@ -16662,7 +16662,7 @@ impl Default for PhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {
@@ -16682,7 +16682,7 @@ impl Default for PhysicalDeviceShaderReplicatedCompositesFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSMBuiltinsFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderSMBuiltinsFeaturesNV {
@@ -16702,7 +16702,7 @@ impl Default for PhysicalDeviceShaderSMBuiltinsFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSMBuiltinsPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderSMBuiltinsPropertiesNV {
@@ -16724,7 +16724,7 @@ impl Default for PhysicalDeviceShaderSMBuiltinsPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderSubgroupExtendedTypesFeatures {
@@ -16744,7 +16744,7 @@ impl Default for PhysicalDeviceShaderSubgroupExtendedTypesFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderSubgroupRotateFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSubgroupRotateFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderSubgroupRotateFeatures {
@@ -16766,7 +16766,7 @@ impl Default for PhysicalDeviceShaderSubgroupRotateFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {
@@ -16787,7 +16787,7 @@ impl Default for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderTerminateInvocationFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderTerminateInvocationFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderTerminateInvocationFeatures {
@@ -16807,7 +16807,7 @@ impl Default for PhysicalDeviceShaderTerminateInvocationFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderTileImageFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderTileImageFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderTileImageFeaturesEXT {
@@ -16831,7 +16831,7 @@ impl Default for PhysicalDeviceShaderTileImageFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderTileImagePropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderTileImagePropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShaderTileImagePropertiesEXT {
@@ -16855,7 +16855,7 @@ impl Default for PhysicalDeviceShaderTileImagePropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShadingRateImageFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShadingRateImageFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShadingRateImageFeaturesNV {
@@ -16877,7 +16877,7 @@ impl Default for PhysicalDeviceShadingRateImageFeaturesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShadingRateImagePropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShadingRateImagePropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceShadingRateImagePropertiesNV {
@@ -16901,7 +16901,7 @@ impl Default for PhysicalDeviceShadingRateImagePropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSparseImageFormatInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSparseImageFormatInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSparseImageFormatInfo2 {
@@ -16929,7 +16929,7 @@ impl Default for PhysicalDeviceSparseImageFormatInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSparseProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSparseProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSparseProperties {
@@ -16940,7 +16940,7 @@ pub struct PhysicalDeviceSparseProperties {
     pub residency_non_resident_strict: Bool32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSubgroupProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubgroupProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSubgroupProperties {
@@ -16966,7 +16966,7 @@ impl Default for PhysicalDeviceSubgroupProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSubgroupSizeControlFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubgroupSizeControlFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSubgroupSizeControlFeatures {
@@ -16988,7 +16988,7 @@ impl Default for PhysicalDeviceSubgroupSizeControlFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSubgroupSizeControlProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubgroupSizeControlProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSubgroupSizeControlProperties {
@@ -17014,7 +17014,7 @@ impl Default for PhysicalDeviceSubgroupSizeControlProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {
@@ -17034,7 +17034,7 @@ impl Default for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubpassShadingFeaturesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSubpassShadingFeaturesHUAWEI {
@@ -17054,7 +17054,7 @@ impl Default for PhysicalDeviceSubpassShadingFeaturesHUAWEI {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSubpassShadingPropertiesHUAWEI {
@@ -17074,7 +17074,7 @@ impl Default for PhysicalDeviceSubpassShadingPropertiesHUAWEI {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSurfaceInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSurfaceInfo2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSurfaceInfo2KHR {
@@ -17094,7 +17094,7 @@ impl Default for PhysicalDeviceSurfaceInfo2KHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSwapchainMaintenance1FeaturesEXT {
@@ -17114,7 +17114,7 @@ impl Default for PhysicalDeviceSwapchainMaintenance1FeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSynchronization2Features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSynchronization2Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceSynchronization2Features {
@@ -17134,7 +17134,7 @@ impl Default for PhysicalDeviceSynchronization2Features {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceTexelBufferAlignmentFeaturesEXT {
@@ -17154,7 +17154,7 @@ impl Default for PhysicalDeviceTexelBufferAlignmentFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceTexelBufferAlignmentProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTexelBufferAlignmentProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceTexelBufferAlignmentProperties {
@@ -17180,7 +17180,7 @@ impl Default for PhysicalDeviceTexelBufferAlignmentProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceTextureCompressionASTCHDRFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTextureCompressionASTCHDRFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceTextureCompressionASTCHDRFeatures {
@@ -17200,7 +17200,7 @@ impl Default for PhysicalDeviceTextureCompressionASTCHDRFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceTilePropertiesFeaturesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTilePropertiesFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceTilePropertiesFeaturesQCOM {
@@ -17220,7 +17220,7 @@ impl Default for PhysicalDeviceTilePropertiesFeaturesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceTimelineSemaphoreFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTimelineSemaphoreFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceTimelineSemaphoreFeatures {
@@ -17240,7 +17240,7 @@ impl Default for PhysicalDeviceTimelineSemaphoreFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceTimelineSemaphoreProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTimelineSemaphoreProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceTimelineSemaphoreProperties {
@@ -17260,7 +17260,7 @@ impl Default for PhysicalDeviceTimelineSemaphoreProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceToolProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceToolProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceToolProperties {
@@ -17288,7 +17288,7 @@ impl Default for PhysicalDeviceToolProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceTransformFeedbackFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTransformFeedbackFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceTransformFeedbackFeaturesEXT {
@@ -17310,7 +17310,7 @@ impl Default for PhysicalDeviceTransformFeedbackFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceTransformFeedbackPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTransformFeedbackPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceTransformFeedbackPropertiesEXT {
@@ -17348,7 +17348,7 @@ impl Default for PhysicalDeviceTransformFeedbackPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceUniformBufferStandardLayoutFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceUniformBufferStandardLayoutFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceUniformBufferStandardLayoutFeatures {
@@ -17368,7 +17368,7 @@ impl Default for PhysicalDeviceUniformBufferStandardLayoutFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVariablePointersFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVariablePointersFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVariablePointersFeatures {
@@ -17390,7 +17390,7 @@ impl Default for PhysicalDeviceVariablePointersFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVertexAttributeDivisorFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeDivisorFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVertexAttributeDivisorFeatures {
@@ -17412,7 +17412,7 @@ impl Default for PhysicalDeviceVertexAttributeDivisorFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVertexAttributeDivisorProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeDivisorProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVertexAttributeDivisorProperties {
@@ -17434,7 +17434,7 @@ impl Default for PhysicalDeviceVertexAttributeDivisorProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVertexAttributeDivisorPropertiesEXT {
@@ -17454,7 +17454,7 @@ impl Default for PhysicalDeviceVertexAttributeDivisorPropertiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVertexAttributeRobustnessFeaturesEXT {
@@ -17474,7 +17474,7 @@ impl Default for PhysicalDeviceVertexAttributeRobustnessFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVertexInputDynamicStateFeaturesEXT {
@@ -17494,7 +17494,7 @@ impl Default for PhysicalDeviceVertexInputDynamicStateFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVideoEncodeAV1FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoEncodeAV1FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVideoEncodeAV1FeaturesKHR {
@@ -17514,7 +17514,7 @@ impl Default for PhysicalDeviceVideoEncodeAV1FeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVideoEncodeQualityLevelInfoKHR {
@@ -17536,7 +17536,7 @@ impl Default for PhysicalDeviceVideoEncodeQualityLevelInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR {
@@ -17556,7 +17556,7 @@ impl Default for PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVideoFormatInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoFormatInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVideoFormatInfoKHR {
@@ -17576,7 +17576,7 @@ impl Default for PhysicalDeviceVideoFormatInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVideoMaintenance1FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoMaintenance1FeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVideoMaintenance1FeaturesKHR {
@@ -17596,7 +17596,7 @@ impl Default for PhysicalDeviceVideoMaintenance1FeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVulkan11Features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan11Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVulkan11Features {
@@ -17638,7 +17638,7 @@ impl Default for PhysicalDeviceVulkan11Features {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVulkan11Properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan11Properties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVulkan11Properties {
@@ -17686,7 +17686,7 @@ impl Default for PhysicalDeviceVulkan11Properties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVulkan12Features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan12Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVulkan12Features {
@@ -17798,7 +17798,7 @@ impl Default for PhysicalDeviceVulkan12Features {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVulkan12Properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan12Properties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVulkan12Properties {
@@ -17920,7 +17920,7 @@ impl Default for PhysicalDeviceVulkan12Properties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVulkan13Features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan13Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVulkan13Features {
@@ -17968,7 +17968,7 @@ impl Default for PhysicalDeviceVulkan13Features {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVulkan13Properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan13Properties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVulkan13Properties {
@@ -18029,7 +18029,7 @@ impl Default for PhysicalDeviceVulkan13Properties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVulkan14Features.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan14Features.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVulkan14Features {
@@ -18089,7 +18089,7 @@ impl Default for PhysicalDeviceVulkan14Features {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVulkan14Properties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkan14Properties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVulkan14Properties {
@@ -18157,7 +18157,7 @@ impl Default for PhysicalDeviceVulkan14Properties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVulkanMemoryModelFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkanMemoryModelFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceVulkanMemoryModelFeatures {
@@ -18181,7 +18181,7 @@ impl Default for PhysicalDeviceVulkanMemoryModelFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {
@@ -18207,7 +18207,7 @@ impl Default for PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {
@@ -18227,7 +18227,7 @@ impl Default for PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceYcbcrDegammaFeaturesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceYcbcrDegammaFeaturesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceYcbcrDegammaFeaturesQCOM {
@@ -18247,7 +18247,7 @@ impl Default for PhysicalDeviceYcbcrDegammaFeaturesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceYcbcrImageArraysFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceYcbcrImageArraysFeaturesEXT {
@@ -18267,7 +18267,7 @@ impl Default for PhysicalDeviceYcbcrImageArraysFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {
@@ -18287,7 +18287,7 @@ impl Default for PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineBinaryCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineBinaryCreateInfoKHR {
@@ -18311,7 +18311,7 @@ impl Default for PipelineBinaryCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineBinaryDataInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryDataInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineBinaryDataInfoKHR {
@@ -18331,7 +18331,7 @@ impl Default for PipelineBinaryDataInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineBinaryDataKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryDataKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineBinaryDataKHR {
@@ -18349,7 +18349,7 @@ impl Default for PipelineBinaryDataKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineBinaryHandlesInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryHandlesInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineBinaryHandlesInfoKHR {
@@ -18371,7 +18371,7 @@ impl Default for PipelineBinaryHandlesInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineBinaryInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineBinaryInfoKHR {
@@ -18393,7 +18393,7 @@ impl Default for PipelineBinaryInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineBinaryKeyKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryKeyKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineBinaryKeyKHR {
@@ -18415,7 +18415,7 @@ impl Default for PipelineBinaryKeyKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineBinaryKeysAndDataKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineBinaryKeysAndDataKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineBinaryKeysAndDataKHR {
@@ -18435,7 +18435,7 @@ impl Default for PipelineBinaryKeysAndDataKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCacheCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCacheCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineCacheCreateInfo {
@@ -18459,7 +18459,7 @@ impl Default for PipelineCacheCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCacheHeaderVersionOne.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCacheHeaderVersionOne.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineCacheHeaderVersionOne {
@@ -18470,7 +18470,7 @@ pub struct PipelineCacheHeaderVersionOne {
     pub pipeline_cache_uuid: ByteArray<UUID_SIZE>,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineColorBlendAdvancedStateCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineColorBlendAdvancedStateCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineColorBlendAdvancedStateCreateInfoEXT {
@@ -18494,7 +18494,7 @@ impl Default for PipelineColorBlendAdvancedStateCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineColorBlendAttachmentState.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineColorBlendAttachmentState.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineColorBlendAttachmentState {
@@ -18508,7 +18508,7 @@ pub struct PipelineColorBlendAttachmentState {
     pub color_write_mask: ColorComponentFlags,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineColorBlendStateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineColorBlendStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct PipelineColorBlendStateCreateInfo {
@@ -18538,7 +18538,7 @@ impl Default for PipelineColorBlendStateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineColorWriteCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineColorWriteCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineColorWriteCreateInfoEXT {
@@ -18560,7 +18560,7 @@ impl Default for PipelineColorWriteCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCompilerControlCreateInfoAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCompilerControlCreateInfoAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineCompilerControlCreateInfoAMD {
@@ -18580,7 +18580,7 @@ impl Default for PipelineCompilerControlCreateInfoAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCoverageModulationStateCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCoverageModulationStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineCoverageModulationStateCreateInfoNV {
@@ -18608,7 +18608,7 @@ impl Default for PipelineCoverageModulationStateCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCoverageReductionStateCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCoverageReductionStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineCoverageReductionStateCreateInfoNV {
@@ -18630,7 +18630,7 @@ impl Default for PipelineCoverageReductionStateCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCoverageToColorStateCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCoverageToColorStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineCoverageToColorStateCreateInfoNV {
@@ -18654,7 +18654,7 @@ impl Default for PipelineCoverageToColorStateCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCreateFlags2CreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreateFlags2CreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineCreateFlags2CreateInfo {
@@ -18674,7 +18674,7 @@ impl Default for PipelineCreateFlags2CreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineCreateInfoKHR {
@@ -18692,7 +18692,7 @@ impl Default for PipelineCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCreationFeedback.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreationFeedback.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineCreationFeedback {
@@ -18700,7 +18700,7 @@ pub struct PipelineCreationFeedback {
     pub duration: u64,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCreationFeedbackCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreationFeedbackCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineCreationFeedbackCreateInfo {
@@ -18724,7 +18724,7 @@ impl Default for PipelineCreationFeedbackCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineDepthStencilStateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineDepthStencilStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct PipelineDepthStencilStateCreateInfo {
@@ -18762,7 +18762,7 @@ impl Default for PipelineDepthStencilStateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineDiscardRectangleStateCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineDiscardRectangleStateCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineDiscardRectangleStateCreateInfoEXT {
@@ -18788,7 +18788,7 @@ impl Default for PipelineDiscardRectangleStateCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineDynamicStateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineDynamicStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineDynamicStateCreateInfo {
@@ -18812,7 +18812,7 @@ impl Default for PipelineDynamicStateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineExecutableInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineExecutableInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineExecutableInfoKHR {
@@ -18834,7 +18834,7 @@ impl Default for PipelineExecutableInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineExecutableInternalRepresentationKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineExecutableInternalRepresentationKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineExecutableInternalRepresentationKHR {
@@ -18862,7 +18862,7 @@ impl Default for PipelineExecutableInternalRepresentationKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineExecutablePropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineExecutablePropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineExecutablePropertiesKHR {
@@ -18888,7 +18888,7 @@ impl Default for PipelineExecutablePropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineExecutableStatisticKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineExecutableStatisticKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct PipelineExecutableStatisticKHR {
@@ -18914,7 +18914,7 @@ impl Default for PipelineExecutableStatisticKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineFragmentShadingRateEnumStateCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineFragmentShadingRateEnumStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineFragmentShadingRateEnumStateCreateInfoNV {
@@ -18938,7 +18938,7 @@ impl Default for PipelineFragmentShadingRateEnumStateCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineFragmentShadingRateStateCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineFragmentShadingRateStateCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineFragmentShadingRateStateCreateInfoKHR {
@@ -18960,7 +18960,7 @@ impl Default for PipelineFragmentShadingRateStateCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineIndirectDeviceAddressInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineIndirectDeviceAddressInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineIndirectDeviceAddressInfoNV {
@@ -18982,7 +18982,7 @@ impl Default for PipelineIndirectDeviceAddressInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineInfoKHR {
@@ -19002,7 +19002,7 @@ impl Default for PipelineInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineInputAssemblyStateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineInputAssemblyStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineInputAssemblyStateCreateInfo {
@@ -19026,7 +19026,7 @@ impl Default for PipelineInputAssemblyStateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineLayoutCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineLayoutCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineLayoutCreateInfo {
@@ -19054,7 +19054,7 @@ impl Default for PipelineLayoutCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineLibraryCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineLibraryCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineLibraryCreateInfoKHR {
@@ -19076,7 +19076,7 @@ impl Default for PipelineLibraryCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineMultisampleStateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineMultisampleStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct PipelineMultisampleStateCreateInfo {
@@ -19108,7 +19108,7 @@ impl Default for PipelineMultisampleStateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelinePropertiesIdentifierEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelinePropertiesIdentifierEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelinePropertiesIdentifierEXT {
@@ -19128,7 +19128,7 @@ impl Default for PipelinePropertiesIdentifierEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationConservativeStateCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationConservativeStateCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct PipelineRasterizationConservativeStateCreateInfoEXT {
@@ -19152,7 +19152,7 @@ impl Default for PipelineRasterizationConservativeStateCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationDepthClipStateCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationDepthClipStateCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineRasterizationDepthClipStateCreateInfoEXT {
@@ -19174,7 +19174,7 @@ impl Default for PipelineRasterizationDepthClipStateCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationLineStateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationLineStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineRasterizationLineStateCreateInfo {
@@ -19200,7 +19200,7 @@ impl Default for PipelineRasterizationLineStateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationProvokingVertexStateCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationProvokingVertexStateCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineRasterizationProvokingVertexStateCreateInfoEXT {
@@ -19220,7 +19220,7 @@ impl Default for PipelineRasterizationProvokingVertexStateCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationStateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct PipelineRasterizationStateCreateInfo {
@@ -19260,7 +19260,7 @@ impl Default for PipelineRasterizationStateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationStateRasterizationOrderAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationStateRasterizationOrderAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineRasterizationStateRasterizationOrderAMD {
@@ -19280,7 +19280,7 @@ impl Default for PipelineRasterizationStateRasterizationOrderAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationStateStreamCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationStateStreamCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineRasterizationStateStreamCreateInfoEXT {
@@ -19302,7 +19302,7 @@ impl Default for PipelineRasterizationStateStreamCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRenderingCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRenderingCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineRenderingCreateInfo {
@@ -19330,7 +19330,7 @@ impl Default for PipelineRenderingCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRepresentativeFragmentTestStateCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRepresentativeFragmentTestStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineRepresentativeFragmentTestStateCreateInfoNV {
@@ -19350,7 +19350,7 @@ impl Default for PipelineRepresentativeFragmentTestStateCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRobustnessCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRobustnessCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineRobustnessCreateInfo {
@@ -19376,7 +19376,7 @@ impl Default for PipelineRobustnessCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineSampleLocationsStateCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineSampleLocationsStateCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineSampleLocationsStateCreateInfoEXT {
@@ -19398,7 +19398,7 @@ impl Default for PipelineSampleLocationsStateCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineShaderStageCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineShaderStageCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineShaderStageCreateInfo {
@@ -19426,7 +19426,7 @@ impl Default for PipelineShaderStageCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineShaderStageModuleIdentifierCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineShaderStageModuleIdentifierCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineShaderStageModuleIdentifierCreateInfoEXT {
@@ -19448,7 +19448,7 @@ impl Default for PipelineShaderStageModuleIdentifierCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineShaderStageNodeCreateInfoAMDX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineShaderStageNodeCreateInfoAMDX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineShaderStageNodeCreateInfoAMDX {
@@ -19470,7 +19470,7 @@ impl Default for PipelineShaderStageNodeCreateInfoAMDX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineShaderStageRequiredSubgroupSizeCreateInfo {
@@ -19490,7 +19490,7 @@ impl Default for PipelineShaderStageRequiredSubgroupSizeCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineTessellationDomainOriginStateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineTessellationDomainOriginStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineTessellationDomainOriginStateCreateInfo {
@@ -19510,7 +19510,7 @@ impl Default for PipelineTessellationDomainOriginStateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineTessellationStateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineTessellationStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineTessellationStateCreateInfo {
@@ -19532,7 +19532,7 @@ impl Default for PipelineTessellationStateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineVertexInputDivisorStateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineVertexInputDivisorStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineVertexInputDivisorStateCreateInfo {
@@ -19554,7 +19554,7 @@ impl Default for PipelineVertexInputDivisorStateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineVertexInputStateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineVertexInputStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineVertexInputStateCreateInfo {
@@ -19582,7 +19582,7 @@ impl Default for PipelineVertexInputStateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportCoarseSampleOrderStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineViewportCoarseSampleOrderStateCreateInfoNV {
@@ -19606,7 +19606,7 @@ impl Default for PipelineViewportCoarseSampleOrderStateCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineViewportDepthClampControlCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportDepthClampControlCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineViewportDepthClampControlCreateInfoEXT {
@@ -19628,7 +19628,7 @@ impl Default for PipelineViewportDepthClampControlCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineViewportDepthClipControlCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportDepthClipControlCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineViewportDepthClipControlCreateInfoEXT {
@@ -19648,7 +19648,7 @@ impl Default for PipelineViewportDepthClipControlCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineViewportExclusiveScissorStateCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportExclusiveScissorStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineViewportExclusiveScissorStateCreateInfoNV {
@@ -19670,7 +19670,7 @@ impl Default for PipelineViewportExclusiveScissorStateCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineViewportShadingRateImageStateCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportShadingRateImageStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineViewportShadingRateImageStateCreateInfoNV {
@@ -19694,7 +19694,7 @@ impl Default for PipelineViewportShadingRateImageStateCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineViewportStateCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportStateCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineViewportStateCreateInfo {
@@ -19722,7 +19722,7 @@ impl Default for PipelineViewportStateCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineViewportSwizzleStateCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportSwizzleStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineViewportSwizzleStateCreateInfoNV {
@@ -19746,7 +19746,7 @@ impl Default for PipelineViewportSwizzleStateCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineViewportWScalingStateCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineViewportWScalingStateCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineViewportWScalingStateCreateInfoNV {
@@ -19770,7 +19770,7 @@ impl Default for PipelineViewportWScalingStateCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPresentFrameTokenGGP.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentFrameTokenGGP.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PresentFrameTokenGGP {
@@ -19790,7 +19790,7 @@ impl Default for PresentFrameTokenGGP {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPresentIdKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentIdKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PresentIdKHR {
@@ -19812,7 +19812,7 @@ impl Default for PresentIdKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPresentInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PresentInfoKHR {
@@ -19842,7 +19842,7 @@ impl Default for PresentInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPresentRegionKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentRegionKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PresentRegionKHR {
@@ -19860,7 +19860,7 @@ impl Default for PresentRegionKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPresentRegionsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentRegionsKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PresentRegionsKHR {
@@ -19882,7 +19882,7 @@ impl Default for PresentRegionsKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPresentTimeGOOGLE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentTimeGOOGLE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct PresentTimeGOOGLE {
@@ -19890,7 +19890,7 @@ pub struct PresentTimeGOOGLE {
     pub desired_present_time: u64,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPresentTimesInfoGOOGLE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentTimesInfoGOOGLE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PresentTimesInfoGOOGLE {
@@ -19912,7 +19912,7 @@ impl Default for PresentTimesInfoGOOGLE {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPrivateDataSlotCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPrivateDataSlotCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PrivateDataSlotCreateInfo {
@@ -19932,7 +19932,7 @@ impl Default for PrivateDataSlotCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkProtectedSubmitInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkProtectedSubmitInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ProtectedSubmitInfo {
@@ -19952,7 +19952,7 @@ impl Default for ProtectedSubmitInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPushConstantRange.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPushConstantRange.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct PushConstantRange {
@@ -19961,7 +19961,7 @@ pub struct PushConstantRange {
     pub size: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPushConstantsInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPushConstantsInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PushConstantsInfo {
@@ -19989,7 +19989,7 @@ impl Default for PushConstantsInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPushDescriptorSetInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPushDescriptorSetInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PushDescriptorSetInfo {
@@ -20017,7 +20017,7 @@ impl Default for PushDescriptorSetInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPushDescriptorSetWithTemplateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPushDescriptorSetWithTemplateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PushDescriptorSetWithTemplateInfo {
@@ -20043,7 +20043,7 @@ impl Default for PushDescriptorSetWithTemplateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryLowLatencySupportNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryLowLatencySupportNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct QueryLowLatencySupportNV {
@@ -20063,7 +20063,7 @@ impl Default for QueryLowLatencySupportNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryPoolCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryPoolCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct QueryPoolCreateInfo {
@@ -20089,7 +20089,7 @@ impl Default for QueryPoolCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryPoolPerformanceCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryPoolPerformanceCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct QueryPoolPerformanceCreateInfoKHR {
@@ -20113,7 +20113,7 @@ impl Default for QueryPoolPerformanceCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryPoolPerformanceQueryCreateInfoINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryPoolPerformanceQueryCreateInfoINTEL.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct QueryPoolPerformanceQueryCreateInfoINTEL {
@@ -20133,7 +20133,7 @@ impl Default for QueryPoolPerformanceQueryCreateInfoINTEL {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryPoolVideoEncodeFeedbackCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct QueryPoolVideoEncodeFeedbackCreateInfoKHR {
@@ -20153,7 +20153,7 @@ impl Default for QueryPoolVideoEncodeFeedbackCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueFamilyCheckpointProperties2NV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyCheckpointProperties2NV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct QueueFamilyCheckpointProperties2NV {
@@ -20173,7 +20173,7 @@ impl Default for QueueFamilyCheckpointProperties2NV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueFamilyCheckpointPropertiesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyCheckpointPropertiesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct QueueFamilyCheckpointPropertiesNV {
@@ -20193,7 +20193,7 @@ impl Default for QueueFamilyCheckpointPropertiesNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueFamilyGlobalPriorityProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyGlobalPriorityProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct QueueFamilyGlobalPriorityProperties {
@@ -20215,7 +20215,7 @@ impl Default for QueueFamilyGlobalPriorityProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueFamilyProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct QueueFamilyProperties {
@@ -20225,7 +20225,7 @@ pub struct QueueFamilyProperties {
     pub min_image_transfer_granularity: Extent3D,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueFamilyProperties2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyProperties2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct QueueFamilyProperties2 {
@@ -20245,7 +20245,7 @@ impl Default for QueueFamilyProperties2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueFamilyQueryResultStatusPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyQueryResultStatusPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct QueueFamilyQueryResultStatusPropertiesKHR {
@@ -20265,7 +20265,7 @@ impl Default for QueueFamilyQueryResultStatusPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueFamilyVideoPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyVideoPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct QueueFamilyVideoPropertiesKHR {
@@ -20285,7 +20285,7 @@ impl Default for QueueFamilyVideoPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRayTracingPipelineCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingPipelineCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RayTracingPipelineCreateInfoKHR {
@@ -20327,7 +20327,7 @@ impl Default for RayTracingPipelineCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRayTracingPipelineCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingPipelineCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RayTracingPipelineCreateInfoNV {
@@ -20363,7 +20363,7 @@ impl Default for RayTracingPipelineCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRayTracingPipelineInterfaceCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingPipelineInterfaceCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RayTracingPipelineInterfaceCreateInfoKHR {
@@ -20385,7 +20385,7 @@ impl Default for RayTracingPipelineInterfaceCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRayTracingShaderGroupCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingShaderGroupCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RayTracingShaderGroupCreateInfoKHR {
@@ -20415,7 +20415,7 @@ impl Default for RayTracingShaderGroupCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRayTracingShaderGroupCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRayTracingShaderGroupCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RayTracingShaderGroupCreateInfoNV {
@@ -20443,7 +20443,7 @@ impl Default for RayTracingShaderGroupCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRect2D.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRect2D.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct Rect2D {
@@ -20451,7 +20451,7 @@ pub struct Rect2D {
     pub extent: Extent2D,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRectLayerKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRectLayerKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct RectLayerKHR {
@@ -20460,14 +20460,14 @@ pub struct RectLayerKHR {
     pub layer: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRefreshCycleDurationGOOGLE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRefreshCycleDurationGOOGLE.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct RefreshCycleDurationGOOGLE {
     pub refresh_duration: u64,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRefreshObjectKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRefreshObjectKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct RefreshObjectKHR {
@@ -20476,7 +20476,7 @@ pub struct RefreshObjectKHR {
     pub flags: RefreshObjectFlagsKHR,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRefreshObjectListKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRefreshObjectListKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RefreshObjectListKHR {
@@ -20498,7 +20498,7 @@ impl Default for RefreshObjectListKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkReleaseCapturedPipelineDataInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkReleaseCapturedPipelineDataInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ReleaseCapturedPipelineDataInfoKHR {
@@ -20518,7 +20518,7 @@ impl Default for ReleaseCapturedPipelineDataInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkReleaseSwapchainImagesInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkReleaseSwapchainImagesInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ReleaseSwapchainImagesInfoEXT {
@@ -20542,7 +20542,7 @@ impl Default for ReleaseSwapchainImagesInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassAttachmentBeginInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassAttachmentBeginInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassAttachmentBeginInfo {
@@ -20564,7 +20564,7 @@ impl Default for RenderPassAttachmentBeginInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassBeginInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassBeginInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassBeginInfo {
@@ -20592,7 +20592,7 @@ impl Default for RenderPassBeginInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassCreateInfo {
@@ -20624,7 +20624,7 @@ impl Default for RenderPassCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassCreateInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassCreateInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassCreateInfo2 {
@@ -20660,7 +20660,7 @@ impl Default for RenderPassCreateInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassCreationControlEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassCreationControlEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassCreationControlEXT {
@@ -20680,7 +20680,7 @@ impl Default for RenderPassCreationControlEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassCreationFeedbackCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassCreationFeedbackCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassCreationFeedbackCreateInfoEXT {
@@ -20700,14 +20700,14 @@ impl Default for RenderPassCreationFeedbackCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassCreationFeedbackInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassCreationFeedbackInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassCreationFeedbackInfoEXT {
     pub post_merge_subpass_count: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassFragmentDensityMapCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassFragmentDensityMapCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassFragmentDensityMapCreateInfoEXT {
@@ -20727,7 +20727,7 @@ impl Default for RenderPassFragmentDensityMapCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassInputAttachmentAspectCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassInputAttachmentAspectCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassInputAttachmentAspectCreateInfo {
@@ -20749,7 +20749,7 @@ impl Default for RenderPassInputAttachmentAspectCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassMultiviewCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassMultiviewCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassMultiviewCreateInfo {
@@ -20779,7 +20779,7 @@ impl Default for RenderPassMultiviewCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassSampleLocationsBeginInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassSampleLocationsBeginInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassSampleLocationsBeginInfoEXT {
@@ -20805,7 +20805,7 @@ impl Default for RenderPassSampleLocationsBeginInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassStripeBeginInfoARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassStripeBeginInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassStripeBeginInfoARM {
@@ -20827,7 +20827,7 @@ impl Default for RenderPassStripeBeginInfoARM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassStripeInfoARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassStripeInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassStripeInfoARM {
@@ -20847,7 +20847,7 @@ impl Default for RenderPassStripeInfoARM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassStripeSubmitInfoARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassStripeSubmitInfoARM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassStripeSubmitInfoARM {
@@ -20869,7 +20869,7 @@ impl Default for RenderPassStripeSubmitInfoARM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassSubpassFeedbackCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassSubpassFeedbackCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassSubpassFeedbackCreateInfoEXT {
@@ -20889,7 +20889,7 @@ impl Default for RenderPassSubpassFeedbackCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassSubpassFeedbackInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassSubpassFeedbackInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassSubpassFeedbackInfoEXT {
@@ -20898,7 +20898,7 @@ pub struct RenderPassSubpassFeedbackInfoEXT {
     pub post_merge_index: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassTransformBeginInfoQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassTransformBeginInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderPassTransformBeginInfoQCOM {
@@ -20918,7 +20918,7 @@ impl Default for RenderPassTransformBeginInfoQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingAreaInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAreaInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderingAreaInfo {
@@ -20946,7 +20946,7 @@ impl Default for RenderingAreaInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingAttachmentInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAttachmentInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct RenderingAttachmentInfo {
@@ -20980,7 +20980,7 @@ impl Default for RenderingAttachmentInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingAttachmentLocationInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAttachmentLocationInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderingAttachmentLocationInfo {
@@ -21002,7 +21002,7 @@ impl Default for RenderingAttachmentLocationInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingFragmentDensityMapAttachmentInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingFragmentDensityMapAttachmentInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderingFragmentDensityMapAttachmentInfoEXT {
@@ -21024,7 +21024,7 @@ impl Default for RenderingFragmentDensityMapAttachmentInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingFragmentShadingRateAttachmentInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingFragmentShadingRateAttachmentInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderingFragmentShadingRateAttachmentInfoKHR {
@@ -21048,7 +21048,7 @@ impl Default for RenderingFragmentShadingRateAttachmentInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderingInfo {
@@ -21082,7 +21082,7 @@ impl Default for RenderingInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingInputAttachmentIndexInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingInputAttachmentIndexInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct RenderingInputAttachmentIndexInfo {
@@ -21108,7 +21108,7 @@ impl Default for RenderingInputAttachmentIndexInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkResolveImageInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkResolveImageInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ResolveImageInfo2 {
@@ -21138,7 +21138,7 @@ impl Default for ResolveImageInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSRTDataNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSRTDataNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct SRTDataNV {
@@ -21160,7 +21160,7 @@ pub struct SRTDataNV {
     pub tz: f32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSampleLocationEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSampleLocationEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct SampleLocationEXT {
@@ -21168,7 +21168,7 @@ pub struct SampleLocationEXT {
     pub y: f32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSampleLocationsInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSampleLocationsInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SampleLocationsInfoEXT {
@@ -21194,7 +21194,7 @@ impl Default for SampleLocationsInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerBlockMatchWindowCreateInfoQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerBlockMatchWindowCreateInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SamplerBlockMatchWindowCreateInfoQCOM {
@@ -21216,7 +21216,7 @@ impl Default for SamplerBlockMatchWindowCreateInfoQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerBorderColorComponentMappingCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerBorderColorComponentMappingCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SamplerBorderColorComponentMappingCreateInfoEXT {
@@ -21238,7 +21238,7 @@ impl Default for SamplerBorderColorComponentMappingCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerCaptureDescriptorDataInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerCaptureDescriptorDataInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SamplerCaptureDescriptorDataInfoEXT {
@@ -21258,7 +21258,7 @@ impl Default for SamplerCaptureDescriptorDataInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct SamplerCreateInfo {
@@ -21308,7 +21308,7 @@ impl Default for SamplerCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerCubicWeightsCreateInfoQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerCubicWeightsCreateInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SamplerCubicWeightsCreateInfoQCOM {
@@ -21328,7 +21328,7 @@ impl Default for SamplerCubicWeightsCreateInfoQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerCustomBorderColorCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerCustomBorderColorCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug)]
 pub struct SamplerCustomBorderColorCreateInfoEXT {
@@ -21350,7 +21350,7 @@ impl Default for SamplerCustomBorderColorCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerReductionModeCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerReductionModeCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SamplerReductionModeCreateInfo {
@@ -21370,7 +21370,7 @@ impl Default for SamplerReductionModeCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerYcbcrConversionCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SamplerYcbcrConversionCreateInfo {
@@ -21404,7 +21404,7 @@ impl Default for SamplerYcbcrConversionCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerYcbcrConversionImageFormatProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionImageFormatProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SamplerYcbcrConversionImageFormatProperties {
@@ -21424,7 +21424,7 @@ impl Default for SamplerYcbcrConversionImageFormatProperties {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerYcbcrConversionInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SamplerYcbcrConversionInfo {
@@ -21444,7 +21444,7 @@ impl Default for SamplerYcbcrConversionInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
@@ -21466,7 +21466,7 @@ impl Default for SamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSciSyncAttributesInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSciSyncAttributesInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SciSyncAttributesInfoNV {
@@ -21488,7 +21488,7 @@ impl Default for SciSyncAttributesInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkScreenBufferFormatPropertiesQNX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkScreenBufferFormatPropertiesQNX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ScreenBufferFormatPropertiesQNX {
@@ -21524,7 +21524,7 @@ impl Default for ScreenBufferFormatPropertiesQNX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkScreenBufferPropertiesQNX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkScreenBufferPropertiesQNX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ScreenBufferPropertiesQNX {
@@ -21546,7 +21546,7 @@ impl Default for ScreenBufferPropertiesQNX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkScreenSurfaceCreateInfoQNX.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkScreenSurfaceCreateInfoQNX.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ScreenSurfaceCreateInfoQNX {
@@ -21570,7 +21570,7 @@ impl Default for ScreenSurfaceCreateInfoQNX {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SemaphoreCreateInfo {
@@ -21590,7 +21590,7 @@ impl Default for SemaphoreCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreGetFdInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreGetFdInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SemaphoreGetFdInfoKHR {
@@ -21612,7 +21612,7 @@ impl Default for SemaphoreGetFdInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreGetSciSyncInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreGetSciSyncInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SemaphoreGetSciSyncInfoNV {
@@ -21634,7 +21634,7 @@ impl Default for SemaphoreGetSciSyncInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreGetWin32HandleInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreGetWin32HandleInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SemaphoreGetWin32HandleInfoKHR {
@@ -21656,7 +21656,7 @@ impl Default for SemaphoreGetWin32HandleInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreGetZirconHandleInfoFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreGetZirconHandleInfoFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SemaphoreGetZirconHandleInfoFUCHSIA {
@@ -21678,7 +21678,7 @@ impl Default for SemaphoreGetZirconHandleInfoFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreSciSyncCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreSciSyncCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SemaphoreSciSyncCreateInfoNV {
@@ -21700,7 +21700,7 @@ impl Default for SemaphoreSciSyncCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreSciSyncPoolCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreSciSyncPoolCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SemaphoreSciSyncPoolCreateInfoNV {
@@ -21720,7 +21720,7 @@ impl Default for SemaphoreSciSyncPoolCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreSignalInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreSignalInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SemaphoreSignalInfo {
@@ -21742,7 +21742,7 @@ impl Default for SemaphoreSignalInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreSubmitInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreSubmitInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SemaphoreSubmitInfo {
@@ -21768,7 +21768,7 @@ impl Default for SemaphoreSubmitInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreTypeCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreTypeCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SemaphoreTypeCreateInfo {
@@ -21790,7 +21790,7 @@ impl Default for SemaphoreTypeCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreWaitInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreWaitInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SemaphoreWaitInfo {
@@ -21816,7 +21816,7 @@ impl Default for SemaphoreWaitInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSetDescriptorBufferOffsetsInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSetDescriptorBufferOffsetsInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SetDescriptorBufferOffsetsInfoEXT {
@@ -21846,7 +21846,7 @@ impl Default for SetDescriptorBufferOffsetsInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSetLatencyMarkerInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSetLatencyMarkerInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SetLatencyMarkerInfoNV {
@@ -21868,14 +21868,14 @@ impl Default for SetLatencyMarkerInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSetStateFlagsIndirectCommandNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSetStateFlagsIndirectCommandNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct SetStateFlagsIndirectCommandNV {
     pub data: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ShaderCreateInfoEXT {
@@ -21917,7 +21917,7 @@ impl Default for ShaderCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderModuleCreateInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderModuleCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ShaderModuleCreateInfo {
@@ -21941,7 +21941,7 @@ impl Default for ShaderModuleCreateInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderModuleIdentifierEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderModuleIdentifierEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ShaderModuleIdentifierEXT {
@@ -21963,7 +21963,7 @@ impl Default for ShaderModuleIdentifierEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderModuleValidationCacheCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderModuleValidationCacheCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ShaderModuleValidationCacheCreateInfoEXT {
@@ -21983,7 +21983,7 @@ impl Default for ShaderModuleValidationCacheCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderResourceUsageAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderResourceUsageAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ShaderResourceUsageAMD {
@@ -21994,7 +21994,7 @@ pub struct ShaderResourceUsageAMD {
     pub scratch_mem_usage_in_bytes: usize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderStatisticsInfoAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderStatisticsInfoAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ShaderStatisticsInfoAMD {
@@ -22007,7 +22007,7 @@ pub struct ShaderStatisticsInfoAMD {
     pub compute_work_group_size: [u32; 3],
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShadingRatePaletteNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShadingRatePaletteNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ShadingRatePaletteNV {
@@ -22025,7 +22025,7 @@ impl Default for ShadingRatePaletteNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSharedPresentSurfaceCapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSharedPresentSurfaceCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SharedPresentSurfaceCapabilitiesKHR {
@@ -22045,7 +22045,7 @@ impl Default for SharedPresentSurfaceCapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseBufferMemoryBindInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseBufferMemoryBindInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SparseBufferMemoryBindInfo {
@@ -22065,7 +22065,7 @@ impl Default for SparseBufferMemoryBindInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseImageFormatProperties.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageFormatProperties.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct SparseImageFormatProperties {
@@ -22074,7 +22074,7 @@ pub struct SparseImageFormatProperties {
     pub flags: SparseImageFormatFlags,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseImageFormatProperties2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageFormatProperties2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SparseImageFormatProperties2 {
@@ -22094,7 +22094,7 @@ impl Default for SparseImageFormatProperties2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseImageMemoryBind.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageMemoryBind.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct SparseImageMemoryBind {
@@ -22106,7 +22106,7 @@ pub struct SparseImageMemoryBind {
     pub flags: SparseMemoryBindFlags,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseImageMemoryBindInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageMemoryBindInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SparseImageMemoryBindInfo {
@@ -22126,7 +22126,7 @@ impl Default for SparseImageMemoryBindInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseImageMemoryRequirements.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageMemoryRequirements.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct SparseImageMemoryRequirements {
@@ -22137,7 +22137,7 @@ pub struct SparseImageMemoryRequirements {
     pub image_mip_tail_stride: DeviceSize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseImageMemoryRequirements2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageMemoryRequirements2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SparseImageMemoryRequirements2 {
@@ -22157,7 +22157,7 @@ impl Default for SparseImageMemoryRequirements2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseImageOpaqueMemoryBindInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageOpaqueMemoryBindInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SparseImageOpaqueMemoryBindInfo {
@@ -22177,7 +22177,7 @@ impl Default for SparseImageOpaqueMemoryBindInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseMemoryBind.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseMemoryBind.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct SparseMemoryBind {
@@ -22188,7 +22188,7 @@ pub struct SparseMemoryBind {
     pub flags: SparseMemoryBindFlags,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSpecializationInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSpecializationInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SpecializationInfo {
@@ -22210,7 +22210,7 @@ impl Default for SpecializationInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSpecializationMapEntry.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSpecializationMapEntry.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct SpecializationMapEntry {
@@ -22219,7 +22219,7 @@ pub struct SpecializationMapEntry {
     pub size: usize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkStencilOpState.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkStencilOpState.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct StencilOpState {
@@ -22232,7 +22232,7 @@ pub struct StencilOpState {
     pub reference: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkStreamDescriptorSurfaceCreateInfoGGP.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkStreamDescriptorSurfaceCreateInfoGGP.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct StreamDescriptorSurfaceCreateInfoGGP {
@@ -22254,7 +22254,7 @@ impl Default for StreamDescriptorSurfaceCreateInfoGGP {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkStridedDeviceAddressRegionKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkStridedDeviceAddressRegionKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct StridedDeviceAddressRegionKHR {
@@ -22263,7 +22263,7 @@ pub struct StridedDeviceAddressRegionKHR {
     pub size: DeviceSize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubmitInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubmitInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubmitInfo {
@@ -22295,7 +22295,7 @@ impl Default for SubmitInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubmitInfo2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubmitInfo2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubmitInfo2 {
@@ -22327,7 +22327,7 @@ impl Default for SubmitInfo2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassBeginInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassBeginInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubpassBeginInfo {
@@ -22347,7 +22347,7 @@ impl Default for SubpassBeginInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassDependency.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDependency.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct SubpassDependency {
@@ -22360,7 +22360,7 @@ pub struct SubpassDependency {
     pub dependency_flags: DependencyFlags,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassDependency2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDependency2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubpassDependency2 {
@@ -22394,7 +22394,7 @@ impl Default for SubpassDependency2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassDescription.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDescription.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubpassDescription {
@@ -22428,7 +22428,7 @@ impl Default for SubpassDescription {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassDescription2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDescription2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubpassDescription2 {
@@ -22468,7 +22468,7 @@ impl Default for SubpassDescription2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassDescriptionDepthStencilResolve.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDescriptionDepthStencilResolve.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubpassDescriptionDepthStencilResolve {
@@ -22492,7 +22492,7 @@ impl Default for SubpassDescriptionDepthStencilResolve {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassEndInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassEndInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubpassEndInfo {
@@ -22510,7 +22510,7 @@ impl Default for SubpassEndInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassFragmentDensityMapOffsetEndInfoQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassFragmentDensityMapOffsetEndInfoQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubpassFragmentDensityMapOffsetEndInfoQCOM {
@@ -22532,7 +22532,7 @@ impl Default for SubpassFragmentDensityMapOffsetEndInfoQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassResolvePerformanceQueryEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassResolvePerformanceQueryEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubpassResolvePerformanceQueryEXT {
@@ -22552,7 +22552,7 @@ impl Default for SubpassResolvePerformanceQueryEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassSampleLocationsEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassSampleLocationsEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct SubpassSampleLocationsEXT {
@@ -22560,7 +22560,7 @@ pub struct SubpassSampleLocationsEXT {
     pub sample_locations_info: SampleLocationsInfoEXT,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassShadingPipelineCreateInfoHUAWEI.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassShadingPipelineCreateInfoHUAWEI.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubpassShadingPipelineCreateInfoHUAWEI {
@@ -22582,7 +22582,7 @@ impl Default for SubpassShadingPipelineCreateInfoHUAWEI {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubresourceHostMemcpySize.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubresourceHostMemcpySize.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubresourceHostMemcpySize {
@@ -22602,7 +22602,7 @@ impl Default for SubresourceHostMemcpySize {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubresourceLayout.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubresourceLayout.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct SubresourceLayout {
@@ -22613,7 +22613,7 @@ pub struct SubresourceLayout {
     pub depth_pitch: DeviceSize,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubresourceLayout2.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubresourceLayout2.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SubresourceLayout2 {
@@ -22633,7 +22633,7 @@ impl Default for SubresourceLayout2 {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfaceCapabilities2EXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilities2EXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SurfaceCapabilities2EXT {
@@ -22673,7 +22673,7 @@ impl Default for SurfaceCapabilities2EXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfaceCapabilities2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilities2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SurfaceCapabilities2KHR {
@@ -22693,7 +22693,7 @@ impl Default for SurfaceCapabilities2KHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfaceCapabilitiesFullScreenExclusiveEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilitiesFullScreenExclusiveEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SurfaceCapabilitiesFullScreenExclusiveEXT {
@@ -22713,7 +22713,7 @@ impl Default for SurfaceCapabilitiesFullScreenExclusiveEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfaceCapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct SurfaceCapabilitiesKHR {
@@ -22729,7 +22729,7 @@ pub struct SurfaceCapabilitiesKHR {
     pub supported_usage_flags: ImageUsageFlags,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfaceCapabilitiesPresentBarrierNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCapabilitiesPresentBarrierNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SurfaceCapabilitiesPresentBarrierNV {
@@ -22749,7 +22749,7 @@ impl Default for SurfaceCapabilitiesPresentBarrierNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfaceFormat2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceFormat2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SurfaceFormat2KHR {
@@ -22769,7 +22769,7 @@ impl Default for SurfaceFormat2KHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfaceFormatKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceFormatKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct SurfaceFormatKHR {
@@ -22777,7 +22777,7 @@ pub struct SurfaceFormatKHR {
     pub color_space: ColorSpaceKHR,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfaceFullScreenExclusiveInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceFullScreenExclusiveInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SurfaceFullScreenExclusiveInfoEXT {
@@ -22797,7 +22797,7 @@ impl Default for SurfaceFullScreenExclusiveInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfaceFullScreenExclusiveWin32InfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceFullScreenExclusiveWin32InfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SurfaceFullScreenExclusiveWin32InfoEXT {
@@ -22817,7 +22817,7 @@ impl Default for SurfaceFullScreenExclusiveWin32InfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfacePresentModeCompatibilityEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfacePresentModeCompatibilityEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SurfacePresentModeCompatibilityEXT {
@@ -22839,7 +22839,7 @@ impl Default for SurfacePresentModeCompatibilityEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfacePresentModeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfacePresentModeEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SurfacePresentModeEXT {
@@ -22859,7 +22859,7 @@ impl Default for SurfacePresentModeEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfacePresentScalingCapabilitiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfacePresentScalingCapabilitiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SurfacePresentScalingCapabilitiesEXT {
@@ -22887,7 +22887,7 @@ impl Default for SurfacePresentScalingCapabilitiesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSurfaceProtectedCapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceProtectedCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SurfaceProtectedCapabilitiesKHR {
@@ -22907,7 +22907,7 @@ impl Default for SurfaceProtectedCapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSwapchainCounterCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainCounterCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SwapchainCounterCreateInfoEXT {
@@ -22927,7 +22927,7 @@ impl Default for SwapchainCounterCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSwapchainCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SwapchainCreateInfoKHR {
@@ -22977,7 +22977,7 @@ impl Default for SwapchainCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSwapchainDisplayNativeHdrCreateInfoAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainDisplayNativeHdrCreateInfoAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SwapchainDisplayNativeHdrCreateInfoAMD {
@@ -22997,7 +22997,7 @@ impl Default for SwapchainDisplayNativeHdrCreateInfoAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSwapchainLatencyCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainLatencyCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SwapchainLatencyCreateInfoNV {
@@ -23017,7 +23017,7 @@ impl Default for SwapchainLatencyCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSwapchainPresentBarrierCreateInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainPresentBarrierCreateInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SwapchainPresentBarrierCreateInfoNV {
@@ -23037,7 +23037,7 @@ impl Default for SwapchainPresentBarrierCreateInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSwapchainPresentFenceInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainPresentFenceInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SwapchainPresentFenceInfoEXT {
@@ -23059,7 +23059,7 @@ impl Default for SwapchainPresentFenceInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSwapchainPresentModeInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainPresentModeInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SwapchainPresentModeInfoEXT {
@@ -23081,7 +23081,7 @@ impl Default for SwapchainPresentModeInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSwapchainPresentModesCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainPresentModesCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SwapchainPresentModesCreateInfoEXT {
@@ -23103,7 +23103,7 @@ impl Default for SwapchainPresentModesCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSwapchainPresentScalingCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSwapchainPresentScalingCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SwapchainPresentScalingCreateInfoEXT {
@@ -23127,7 +23127,7 @@ impl Default for SwapchainPresentScalingCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSysmemColorSpaceFUCHSIA.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSysmemColorSpaceFUCHSIA.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct SysmemColorSpaceFUCHSIA {
@@ -23147,7 +23147,7 @@ impl Default for SysmemColorSpaceFUCHSIA {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkTextureLODGatherFormatPropertiesAMD.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTextureLODGatherFormatPropertiesAMD.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct TextureLODGatherFormatPropertiesAMD {
@@ -23167,7 +23167,7 @@ impl Default for TextureLODGatherFormatPropertiesAMD {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkTilePropertiesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTilePropertiesQCOM.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct TilePropertiesQCOM {
@@ -23191,7 +23191,7 @@ impl Default for TilePropertiesQCOM {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkTimelineSemaphoreSubmitInfo.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTimelineSemaphoreSubmitInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct TimelineSemaphoreSubmitInfo {
@@ -23217,7 +23217,7 @@ impl Default for TimelineSemaphoreSubmitInfo {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkTraceRaysIndirectCommand2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTraceRaysIndirectCommand2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct TraceRaysIndirectCommand2KHR {
@@ -23237,7 +23237,7 @@ pub struct TraceRaysIndirectCommand2KHR {
     pub depth: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkTraceRaysIndirectCommandKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTraceRaysIndirectCommandKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct TraceRaysIndirectCommandKHR {
@@ -23246,14 +23246,14 @@ pub struct TraceRaysIndirectCommandKHR {
     pub depth: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkTransformMatrixKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTransformMatrixKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct TransformMatrixKHR {
     pub matrix: [[f32; 4]; 3],
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkValidationCacheCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkValidationCacheCreateInfoEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ValidationCacheCreateInfoEXT {
@@ -23277,7 +23277,7 @@ impl Default for ValidationCacheCreateInfoEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkValidationFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkValidationFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ValidationFeaturesEXT {
@@ -23303,7 +23303,7 @@ impl Default for ValidationFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkValidationFlagsEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkValidationFlagsEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ValidationFlagsEXT {
@@ -23325,7 +23325,7 @@ impl Default for ValidationFlagsEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVertexInputAttributeDescription.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVertexInputAttributeDescription.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct VertexInputAttributeDescription {
@@ -23335,7 +23335,7 @@ pub struct VertexInputAttributeDescription {
     pub offset: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVertexInputAttributeDescription2EXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVertexInputAttributeDescription2EXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VertexInputAttributeDescription2EXT {
@@ -23361,7 +23361,7 @@ impl Default for VertexInputAttributeDescription2EXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVertexInputBindingDescription.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVertexInputBindingDescription.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct VertexInputBindingDescription {
@@ -23370,7 +23370,7 @@ pub struct VertexInputBindingDescription {
     pub input_rate: VertexInputRate,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVertexInputBindingDescription2EXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVertexInputBindingDescription2EXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VertexInputBindingDescription2EXT {
@@ -23396,7 +23396,7 @@ impl Default for VertexInputBindingDescription2EXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVertexInputBindingDivisorDescription.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVertexInputBindingDivisorDescription.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct VertexInputBindingDivisorDescription {
@@ -23404,7 +23404,7 @@ pub struct VertexInputBindingDivisorDescription {
     pub divisor: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkViSurfaceCreateInfoNN.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkViSurfaceCreateInfoNN.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct ViSurfaceCreateInfoNN {
@@ -23426,7 +23426,7 @@ impl Default for ViSurfaceCreateInfoNN {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoBeginCodingInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoBeginCodingInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoBeginCodingInfoKHR {
@@ -23454,7 +23454,7 @@ impl Default for VideoBeginCodingInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoCapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoCapabilitiesKHR {
@@ -23490,7 +23490,7 @@ impl Default for VideoCapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoCodingControlInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoCodingControlInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoCodingControlInfoKHR {
@@ -23510,7 +23510,7 @@ impl Default for VideoCodingControlInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeAV1CapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1CapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeAV1CapabilitiesKHR {
@@ -23530,7 +23530,7 @@ impl Default for VideoDecodeAV1CapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeAV1DpbSlotInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1DpbSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeAV1DpbSlotInfoKHR {
@@ -23550,7 +23550,7 @@ impl Default for VideoDecodeAV1DpbSlotInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeAV1PictureInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1PictureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeAV1PictureInfoKHR {
@@ -23580,7 +23580,7 @@ impl Default for VideoDecodeAV1PictureInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeAV1ProfileInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeAV1ProfileInfoKHR {
@@ -23602,7 +23602,7 @@ impl Default for VideoDecodeAV1ProfileInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeAV1SessionParametersCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeAV1SessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeAV1SessionParametersCreateInfoKHR {
@@ -23622,7 +23622,7 @@ impl Default for VideoDecodeAV1SessionParametersCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeCapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeCapabilitiesKHR {
@@ -23642,7 +23642,7 @@ impl Default for VideoDecodeCapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH264CapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264CapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeH264CapabilitiesKHR {
@@ -23664,7 +23664,7 @@ impl Default for VideoDecodeH264CapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH264DpbSlotInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264DpbSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeH264DpbSlotInfoKHR {
@@ -23684,7 +23684,7 @@ impl Default for VideoDecodeH264DpbSlotInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH264PictureInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264PictureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeH264PictureInfoKHR {
@@ -23708,7 +23708,7 @@ impl Default for VideoDecodeH264PictureInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH264ProfileInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeH264ProfileInfoKHR {
@@ -23730,7 +23730,7 @@ impl Default for VideoDecodeH264ProfileInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH264SessionParametersAddInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264SessionParametersAddInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeH264SessionParametersAddInfoKHR {
@@ -23756,7 +23756,7 @@ impl Default for VideoDecodeH264SessionParametersAddInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH264SessionParametersCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH264SessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeH264SessionParametersCreateInfoKHR {
@@ -23780,7 +23780,7 @@ impl Default for VideoDecodeH264SessionParametersCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH265CapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265CapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeH265CapabilitiesKHR {
@@ -23800,7 +23800,7 @@ impl Default for VideoDecodeH265CapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH265DpbSlotInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265DpbSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeH265DpbSlotInfoKHR {
@@ -23820,7 +23820,7 @@ impl Default for VideoDecodeH265DpbSlotInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH265PictureInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265PictureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeH265PictureInfoKHR {
@@ -23844,7 +23844,7 @@ impl Default for VideoDecodeH265PictureInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH265ProfileInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeH265ProfileInfoKHR {
@@ -23864,7 +23864,7 @@ impl Default for VideoDecodeH265ProfileInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH265SessionParametersAddInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265SessionParametersAddInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeH265SessionParametersAddInfoKHR {
@@ -23894,7 +23894,7 @@ impl Default for VideoDecodeH265SessionParametersAddInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeH265SessionParametersCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeH265SessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeH265SessionParametersCreateInfoKHR {
@@ -23920,7 +23920,7 @@ impl Default for VideoDecodeH265SessionParametersCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeInfoKHR {
@@ -23954,7 +23954,7 @@ impl Default for VideoDecodeInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoDecodeUsageInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoDecodeUsageInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoDecodeUsageInfoKHR {
@@ -23974,7 +23974,7 @@ impl Default for VideoDecodeUsageInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1CapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1CapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1CapabilitiesKHR {
@@ -24040,7 +24040,7 @@ impl Default for VideoEncodeAV1CapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1DpbSlotInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1DpbSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1DpbSlotInfoKHR {
@@ -24060,7 +24060,7 @@ impl Default for VideoEncodeAV1DpbSlotInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1FrameSizeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1FrameSizeKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1FrameSizeKHR {
@@ -24069,7 +24069,7 @@ pub struct VideoEncodeAV1FrameSizeKHR {
     pub bipredictive_frame_size: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1GopRemainingFrameInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1GopRemainingFrameInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1GopRemainingFrameInfoKHR {
@@ -24095,7 +24095,7 @@ impl Default for VideoEncodeAV1GopRemainingFrameInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1PictureInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1PictureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1PictureInfoKHR {
@@ -24127,7 +24127,7 @@ impl Default for VideoEncodeAV1PictureInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1ProfileInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1ProfileInfoKHR {
@@ -24147,7 +24147,7 @@ impl Default for VideoEncodeAV1ProfileInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1QIndexKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1QIndexKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1QIndexKHR {
@@ -24156,7 +24156,7 @@ pub struct VideoEncodeAV1QIndexKHR {
     pub bipredictive_q_index: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1QualityLevelPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1QualityLevelPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1QualityLevelPropertiesKHR {
@@ -24204,7 +24204,7 @@ impl Default for VideoEncodeAV1QualityLevelPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1QuantizationMapCapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1QuantizationMapCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1QuantizationMapCapabilitiesKHR {
@@ -24226,7 +24226,7 @@ impl Default for VideoEncodeAV1QuantizationMapCapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1RateControlInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1RateControlInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1RateControlInfoKHR {
@@ -24254,7 +24254,7 @@ impl Default for VideoEncodeAV1RateControlInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1RateControlLayerInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1RateControlLayerInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1RateControlLayerInfoKHR {
@@ -24284,7 +24284,7 @@ impl Default for VideoEncodeAV1RateControlLayerInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1SessionCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1SessionCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1SessionCreateInfoKHR {
@@ -24306,7 +24306,7 @@ impl Default for VideoEncodeAV1SessionCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeAV1SessionParametersCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeAV1SessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeAV1SessionParametersCreateInfoKHR {
@@ -24332,7 +24332,7 @@ impl Default for VideoEncodeAV1SessionParametersCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeCapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeCapabilitiesKHR {
@@ -24364,7 +24364,7 @@ impl Default for VideoEncodeCapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264CapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264CapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264CapabilitiesKHR {
@@ -24408,7 +24408,7 @@ impl Default for VideoEncodeH264CapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264DpbSlotInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264DpbSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264DpbSlotInfoKHR {
@@ -24428,7 +24428,7 @@ impl Default for VideoEncodeH264DpbSlotInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264FrameSizeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264FrameSizeKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264FrameSizeKHR {
@@ -24437,7 +24437,7 @@ pub struct VideoEncodeH264FrameSizeKHR {
     pub frame_b_size: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264GopRemainingFrameInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264GopRemainingFrameInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264GopRemainingFrameInfoKHR {
@@ -24463,7 +24463,7 @@ impl Default for VideoEncodeH264GopRemainingFrameInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264NaluSliceInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264NaluSliceInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264NaluSliceInfoKHR {
@@ -24485,7 +24485,7 @@ impl Default for VideoEncodeH264NaluSliceInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264PictureInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264PictureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264PictureInfoKHR {
@@ -24511,7 +24511,7 @@ impl Default for VideoEncodeH264PictureInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264ProfileInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264ProfileInfoKHR {
@@ -24531,7 +24531,7 @@ impl Default for VideoEncodeH264ProfileInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264QpKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264QpKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264QpKHR {
@@ -24540,7 +24540,7 @@ pub struct VideoEncodeH264QpKHR {
     pub qp_b: i32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264QualityLevelPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264QualityLevelPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264QualityLevelPropertiesKHR {
@@ -24576,7 +24576,7 @@ impl Default for VideoEncodeH264QualityLevelPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264QuantizationMapCapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264QuantizationMapCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264QuantizationMapCapabilitiesKHR {
@@ -24598,7 +24598,7 @@ impl Default for VideoEncodeH264QuantizationMapCapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264RateControlInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264RateControlInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264RateControlInfoKHR {
@@ -24626,7 +24626,7 @@ impl Default for VideoEncodeH264RateControlInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264RateControlLayerInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264RateControlLayerInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264RateControlLayerInfoKHR {
@@ -24656,7 +24656,7 @@ impl Default for VideoEncodeH264RateControlLayerInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264SessionCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264SessionCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264SessionCreateInfoKHR {
@@ -24678,7 +24678,7 @@ impl Default for VideoEncodeH264SessionCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264SessionParametersAddInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264SessionParametersAddInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264SessionParametersAddInfoKHR {
@@ -24704,7 +24704,7 @@ impl Default for VideoEncodeH264SessionParametersAddInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264SessionParametersCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264SessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264SessionParametersCreateInfoKHR {
@@ -24728,7 +24728,7 @@ impl Default for VideoEncodeH264SessionParametersCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264SessionParametersFeedbackInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264SessionParametersFeedbackInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264SessionParametersFeedbackInfoKHR {
@@ -24750,7 +24750,7 @@ impl Default for VideoEncodeH264SessionParametersFeedbackInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH264SessionParametersGetInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH264SessionParametersGetInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH264SessionParametersGetInfoKHR {
@@ -24776,7 +24776,7 @@ impl Default for VideoEncodeH264SessionParametersGetInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265CapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265CapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265CapabilitiesKHR {
@@ -24826,7 +24826,7 @@ impl Default for VideoEncodeH265CapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265DpbSlotInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265DpbSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265DpbSlotInfoKHR {
@@ -24846,7 +24846,7 @@ impl Default for VideoEncodeH265DpbSlotInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265FrameSizeKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265FrameSizeKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265FrameSizeKHR {
@@ -24855,7 +24855,7 @@ pub struct VideoEncodeH265FrameSizeKHR {
     pub frame_b_size: u32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265GopRemainingFrameInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265GopRemainingFrameInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265GopRemainingFrameInfoKHR {
@@ -24881,7 +24881,7 @@ impl Default for VideoEncodeH265GopRemainingFrameInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265NaluSliceSegmentInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265NaluSliceSegmentInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265NaluSliceSegmentInfoKHR {
@@ -24903,7 +24903,7 @@ impl Default for VideoEncodeH265NaluSliceSegmentInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265PictureInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265PictureInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265PictureInfoKHR {
@@ -24927,7 +24927,7 @@ impl Default for VideoEncodeH265PictureInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265ProfileInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265ProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265ProfileInfoKHR {
@@ -24947,7 +24947,7 @@ impl Default for VideoEncodeH265ProfileInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265QpKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265QpKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265QpKHR {
@@ -24956,7 +24956,7 @@ pub struct VideoEncodeH265QpKHR {
     pub qp_b: i32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265QualityLevelPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265QualityLevelPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265QualityLevelPropertiesKHR {
@@ -24990,7 +24990,7 @@ impl Default for VideoEncodeH265QualityLevelPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265QuantizationMapCapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265QuantizationMapCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265QuantizationMapCapabilitiesKHR {
@@ -25012,7 +25012,7 @@ impl Default for VideoEncodeH265QuantizationMapCapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265RateControlInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265RateControlInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265RateControlInfoKHR {
@@ -25040,7 +25040,7 @@ impl Default for VideoEncodeH265RateControlInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265RateControlLayerInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265RateControlLayerInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265RateControlLayerInfoKHR {
@@ -25070,7 +25070,7 @@ impl Default for VideoEncodeH265RateControlLayerInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265SessionCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265SessionCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265SessionCreateInfoKHR {
@@ -25092,7 +25092,7 @@ impl Default for VideoEncodeH265SessionCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265SessionParametersAddInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265SessionParametersAddInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265SessionParametersAddInfoKHR {
@@ -25122,7 +25122,7 @@ impl Default for VideoEncodeH265SessionParametersAddInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265SessionParametersCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265SessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265SessionParametersCreateInfoKHR {
@@ -25148,7 +25148,7 @@ impl Default for VideoEncodeH265SessionParametersCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265SessionParametersFeedbackInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265SessionParametersFeedbackInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265SessionParametersFeedbackInfoKHR {
@@ -25172,7 +25172,7 @@ impl Default for VideoEncodeH265SessionParametersFeedbackInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeH265SessionParametersGetInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeH265SessionParametersGetInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeH265SessionParametersGetInfoKHR {
@@ -25202,7 +25202,7 @@ impl Default for VideoEncodeH265SessionParametersGetInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeInfoKHR {
@@ -25238,7 +25238,7 @@ impl Default for VideoEncodeInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeQualityLevelInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeQualityLevelInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeQualityLevelInfoKHR {
@@ -25258,7 +25258,7 @@ impl Default for VideoEncodeQualityLevelInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeQualityLevelPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeQualityLevelPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeQualityLevelPropertiesKHR {
@@ -25280,7 +25280,7 @@ impl Default for VideoEncodeQualityLevelPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeQuantizationMapCapabilitiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeQuantizationMapCapabilitiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeQuantizationMapCapabilitiesKHR {
@@ -25300,7 +25300,7 @@ impl Default for VideoEncodeQuantizationMapCapabilitiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeQuantizationMapInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeQuantizationMapInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeQuantizationMapInfoKHR {
@@ -25322,7 +25322,7 @@ impl Default for VideoEncodeQuantizationMapInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeQuantizationMapSessionParametersCreateInfoKHR {
@@ -25342,7 +25342,7 @@ impl Default for VideoEncodeQuantizationMapSessionParametersCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeRateControlInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeRateControlInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeRateControlInfoKHR {
@@ -25372,7 +25372,7 @@ impl Default for VideoEncodeRateControlInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeRateControlLayerInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeRateControlLayerInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeRateControlLayerInfoKHR {
@@ -25398,7 +25398,7 @@ impl Default for VideoEncodeRateControlLayerInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeSessionParametersFeedbackInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeSessionParametersFeedbackInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeSessionParametersFeedbackInfoKHR {
@@ -25418,7 +25418,7 @@ impl Default for VideoEncodeSessionParametersFeedbackInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeSessionParametersGetInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeSessionParametersGetInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeSessionParametersGetInfoKHR {
@@ -25438,7 +25438,7 @@ impl Default for VideoEncodeSessionParametersGetInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEncodeUsageInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeUsageInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEncodeUsageInfoKHR {
@@ -25462,7 +25462,7 @@ impl Default for VideoEncodeUsageInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoEndCodingInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEndCodingInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoEndCodingInfoKHR {
@@ -25482,7 +25482,7 @@ impl Default for VideoEndCodingInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoFormatAV1QuantizationMapPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoFormatAV1QuantizationMapPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoFormatAV1QuantizationMapPropertiesKHR {
@@ -25502,7 +25502,7 @@ impl Default for VideoFormatAV1QuantizationMapPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoFormatH265QuantizationMapPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoFormatH265QuantizationMapPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoFormatH265QuantizationMapPropertiesKHR {
@@ -25522,7 +25522,7 @@ impl Default for VideoFormatH265QuantizationMapPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoFormatPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoFormatPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoFormatPropertiesKHR {
@@ -25552,7 +25552,7 @@ impl Default for VideoFormatPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoFormatQuantizationMapPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoFormatQuantizationMapPropertiesKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoFormatQuantizationMapPropertiesKHR {
@@ -25572,7 +25572,7 @@ impl Default for VideoFormatQuantizationMapPropertiesKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoInlineQueryInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoInlineQueryInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoInlineQueryInfoKHR {
@@ -25596,7 +25596,7 @@ impl Default for VideoInlineQueryInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoPictureResourceInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoPictureResourceInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoPictureResourceInfoKHR {
@@ -25622,7 +25622,7 @@ impl Default for VideoPictureResourceInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoProfileInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoProfileInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoProfileInfoKHR {
@@ -25648,7 +25648,7 @@ impl Default for VideoProfileInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoProfileListInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoProfileListInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoProfileListInfoKHR {
@@ -25670,7 +25670,7 @@ impl Default for VideoProfileListInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoReferenceSlotInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoReferenceSlotInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoReferenceSlotInfoKHR {
@@ -25692,7 +25692,7 @@ impl Default for VideoReferenceSlotInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoSessionCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoSessionCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoSessionCreateInfoKHR {
@@ -25728,7 +25728,7 @@ impl Default for VideoSessionCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoSessionMemoryRequirementsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoSessionMemoryRequirementsKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoSessionMemoryRequirementsKHR {
@@ -25750,7 +25750,7 @@ impl Default for VideoSessionMemoryRequirementsKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoSessionParametersCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoSessionParametersCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoSessionParametersCreateInfoKHR {
@@ -25774,7 +25774,7 @@ impl Default for VideoSessionParametersCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVideoSessionParametersUpdateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoSessionParametersUpdateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct VideoSessionParametersUpdateInfoKHR {
@@ -25794,7 +25794,7 @@ impl Default for VideoSessionParametersUpdateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkViewport.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkViewport.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct Viewport {
@@ -25806,7 +25806,7 @@ pub struct Viewport {
     pub max_depth: f32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkViewportSwizzleNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkViewportSwizzleNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
 pub struct ViewportSwizzleNV {
@@ -25816,7 +25816,7 @@ pub struct ViewportSwizzleNV {
     pub w: ViewportCoordinateSwizzleNV,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkViewportWScalingNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkViewportWScalingNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct ViewportWScalingNV {
@@ -25824,7 +25824,7 @@ pub struct ViewportWScalingNV {
     pub ycoeff: f32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWaylandSurfaceCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWaylandSurfaceCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct WaylandSurfaceCreateInfoKHR {
@@ -25848,7 +25848,7 @@ impl Default for WaylandSurfaceCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWin32KeyedMutexAcquireReleaseInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWin32KeyedMutexAcquireReleaseInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct Win32KeyedMutexAcquireReleaseInfoKHR {
@@ -25880,7 +25880,7 @@ impl Default for Win32KeyedMutexAcquireReleaseInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWin32KeyedMutexAcquireReleaseInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWin32KeyedMutexAcquireReleaseInfoNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct Win32KeyedMutexAcquireReleaseInfoNV {
@@ -25912,7 +25912,7 @@ impl Default for Win32KeyedMutexAcquireReleaseInfoNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWin32SurfaceCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWin32SurfaceCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct Win32SurfaceCreateInfoKHR {
@@ -25936,7 +25936,7 @@ impl Default for Win32SurfaceCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWriteDescriptorSet.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteDescriptorSet.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct WriteDescriptorSet {
@@ -25970,7 +25970,7 @@ impl Default for WriteDescriptorSet {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWriteDescriptorSetAccelerationStructureKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteDescriptorSetAccelerationStructureKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct WriteDescriptorSetAccelerationStructureKHR {
@@ -25992,7 +25992,7 @@ impl Default for WriteDescriptorSetAccelerationStructureKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWriteDescriptorSetAccelerationStructureNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteDescriptorSetAccelerationStructureNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct WriteDescriptorSetAccelerationStructureNV {
@@ -26014,7 +26014,7 @@ impl Default for WriteDescriptorSetAccelerationStructureNV {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWriteDescriptorSetInlineUniformBlock.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteDescriptorSetInlineUniformBlock.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct WriteDescriptorSetInlineUniformBlock {
@@ -26036,7 +26036,7 @@ impl Default for WriteDescriptorSetInlineUniformBlock {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWriteIndirectExecutionSetPipelineEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteIndirectExecutionSetPipelineEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct WriteIndirectExecutionSetPipelineEXT {
@@ -26058,7 +26058,7 @@ impl Default for WriteIndirectExecutionSetPipelineEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWriteIndirectExecutionSetShaderEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteIndirectExecutionSetShaderEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct WriteIndirectExecutionSetShaderEXT {
@@ -26080,7 +26080,7 @@ impl Default for WriteIndirectExecutionSetShaderEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkXYColorEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkXYColorEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, PartialEq)]
 pub struct XYColorEXT {
@@ -26088,7 +26088,7 @@ pub struct XYColorEXT {
     pub y: f32,
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkXcbSurfaceCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkXcbSurfaceCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct XcbSurfaceCreateInfoKHR {
@@ -26112,7 +26112,7 @@ impl Default for XcbSurfaceCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkXlibSurfaceCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkXlibSurfaceCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct XlibSurfaceCreateInfoKHR {
@@ -26136,517 +26136,517 @@ impl Default for XlibSurfaceCreateInfoKHR {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAabbPositionsNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAabbPositionsNV.html>
 pub type AabbPositionsNV = AabbPositionsKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAccelerationStructureInstanceNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureInstanceNV.html>
 pub type AccelerationStructureInstanceNV = AccelerationStructureInstanceKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentDescription2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentDescription2KHR.html>
 pub type AttachmentDescription2KHR = AttachmentDescription2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentDescriptionStencilLayoutKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentDescriptionStencilLayoutKHR.html>
 pub type AttachmentDescriptionStencilLayoutKHR = AttachmentDescriptionStencilLayout;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentReference2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentReference2KHR.html>
 pub type AttachmentReference2KHR = AttachmentReference2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentReferenceStencilLayoutKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentReferenceStencilLayoutKHR.html>
 pub type AttachmentReferenceStencilLayoutKHR = AttachmentReferenceStencilLayout;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkAttachmentSampleCountInfoNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAttachmentSampleCountInfoNV.html>
 pub type AttachmentSampleCountInfoNV = AttachmentSampleCountInfoAMD;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindBufferMemoryDeviceGroupInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindBufferMemoryDeviceGroupInfoKHR.html>
 pub type BindBufferMemoryDeviceGroupInfoKHR = BindBufferMemoryDeviceGroupInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindBufferMemoryInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindBufferMemoryInfoKHR.html>
 pub type BindBufferMemoryInfoKHR = BindBufferMemoryInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindDescriptorSetsInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindDescriptorSetsInfoKHR.html>
 pub type BindDescriptorSetsInfoKHR = BindDescriptorSetsInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindImageMemoryDeviceGroupInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindImageMemoryDeviceGroupInfoKHR.html>
 pub type BindImageMemoryDeviceGroupInfoKHR = BindImageMemoryDeviceGroupInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindImageMemoryInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindImageMemoryInfoKHR.html>
 pub type BindImageMemoryInfoKHR = BindImageMemoryInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindImagePlaneMemoryInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindImagePlaneMemoryInfoKHR.html>
 pub type BindImagePlaneMemoryInfoKHR = BindImagePlaneMemoryInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBindMemoryStatusKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBindMemoryStatusKHR.html>
 pub type BindMemoryStatusKHR = BindMemoryStatus;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBlitImageInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBlitImageInfo2KHR.html>
 pub type BlitImageInfo2KHR = BlitImageInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferCopy2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferCopy2KHR.html>
 pub type BufferCopy2KHR = BufferCopy2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferDeviceAddressInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferDeviceAddressInfoEXT.html>
 pub type BufferDeviceAddressInfoEXT = BufferDeviceAddressInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferDeviceAddressInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferDeviceAddressInfoKHR.html>
 pub type BufferDeviceAddressInfoKHR = BufferDeviceAddressInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferImageCopy2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferImageCopy2KHR.html>
 pub type BufferImageCopy2KHR = BufferImageCopy2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferMemoryBarrier2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferMemoryBarrier2KHR.html>
 pub type BufferMemoryBarrier2KHR = BufferMemoryBarrier2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferMemoryRequirementsInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferMemoryRequirementsInfo2KHR.html>
 pub type BufferMemoryRequirementsInfo2KHR = BufferMemoryRequirementsInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferOpaqueCaptureAddressCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferOpaqueCaptureAddressCreateInfoKHR.html>
 pub type BufferOpaqueCaptureAddressCreateInfoKHR = BufferOpaqueCaptureAddressCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkBufferUsageFlags2CreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferUsageFlags2CreateInfoKHR.html>
 pub type BufferUsageFlags2CreateInfoKHR = BufferUsageFlags2CreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCalibratedTimestampInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCalibratedTimestampInfoEXT.html>
 pub type CalibratedTimestampInfoEXT = CalibratedTimestampInfoKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferInheritanceRenderingInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferInheritanceRenderingInfoKHR.html>
 pub type CommandBufferInheritanceRenderingInfoKHR = CommandBufferInheritanceRenderingInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCommandBufferSubmitInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCommandBufferSubmitInfoKHR.html>
 pub type CommandBufferSubmitInfoKHR = CommandBufferSubmitInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkConformanceVersionKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkConformanceVersionKHR.html>
 pub type ConformanceVersionKHR = ConformanceVersion;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyBufferInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyBufferInfo2KHR.html>
 pub type CopyBufferInfo2KHR = CopyBufferInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyBufferToImageInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyBufferToImageInfo2KHR.html>
 pub type CopyBufferToImageInfo2KHR = CopyBufferToImageInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyImageInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageInfo2KHR.html>
 pub type CopyImageInfo2KHR = CopyImageInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyImageToBufferInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageToBufferInfo2KHR.html>
 pub type CopyImageToBufferInfo2KHR = CopyImageToBufferInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyImageToImageInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageToImageInfoEXT.html>
 pub type CopyImageToImageInfoEXT = CopyImageToImageInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyImageToMemoryInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyImageToMemoryInfoEXT.html>
 pub type CopyImageToMemoryInfoEXT = CopyImageToMemoryInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkCopyMemoryToImageInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCopyMemoryToImageInfoEXT.html>
 pub type CopyMemoryToImageInfoEXT = CopyMemoryToImageInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDependencyInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDependencyInfoKHR.html>
 pub type DependencyInfoKHR = DependencyInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorPoolInlineUniformBlockCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorPoolInlineUniformBlockCreateInfoEXT.html>
 pub type DescriptorPoolInlineUniformBlockCreateInfoEXT = DescriptorPoolInlineUniformBlockCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutBindingFlagsCreateInfoEXT.html>
 pub type DescriptorSetLayoutBindingFlagsCreateInfoEXT = DescriptorSetLayoutBindingFlagsCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetLayoutSupportKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetLayoutSupportKHR.html>
 pub type DescriptorSetLayoutSupportKHR = DescriptorSetLayoutSupport;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetVariableDescriptorCountAllocateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetVariableDescriptorCountAllocateInfoEXT.html>
 pub type DescriptorSetVariableDescriptorCountAllocateInfoEXT =
     DescriptorSetVariableDescriptorCountAllocateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorSetVariableDescriptorCountLayoutSupportEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorSetVariableDescriptorCountLayoutSupportEXT.html>
 pub type DescriptorSetVariableDescriptorCountLayoutSupportEXT =
     DescriptorSetVariableDescriptorCountLayoutSupport;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorUpdateTemplateCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateCreateInfoKHR.html>
 pub type DescriptorUpdateTemplateCreateInfoKHR = DescriptorUpdateTemplateCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDescriptorUpdateTemplateEntryKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDescriptorUpdateTemplateEntryKHR.html>
 pub type DescriptorUpdateTemplateEntryKHR = DescriptorUpdateTemplateEntry;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceBufferMemoryRequirementsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceBufferMemoryRequirementsKHR.html>
 pub type DeviceBufferMemoryRequirementsKHR = DeviceBufferMemoryRequirements;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupBindSparseInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupBindSparseInfoKHR.html>
 pub type DeviceGroupBindSparseInfoKHR = DeviceGroupBindSparseInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupCommandBufferBeginInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupCommandBufferBeginInfoKHR.html>
 pub type DeviceGroupCommandBufferBeginInfoKHR = DeviceGroupCommandBufferBeginInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupDeviceCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupDeviceCreateInfoKHR.html>
 pub type DeviceGroupDeviceCreateInfoKHR = DeviceGroupDeviceCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupRenderPassBeginInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupRenderPassBeginInfoKHR.html>
 pub type DeviceGroupRenderPassBeginInfoKHR = DeviceGroupRenderPassBeginInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceGroupSubmitInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceGroupSubmitInfoKHR.html>
 pub type DeviceGroupSubmitInfoKHR = DeviceGroupSubmitInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceImageMemoryRequirementsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceImageMemoryRequirementsKHR.html>
 pub type DeviceImageMemoryRequirementsKHR = DeviceImageMemoryRequirements;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceImageSubresourceInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceImageSubresourceInfoKHR.html>
 pub type DeviceImageSubresourceInfoKHR = DeviceImageSubresourceInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceMemoryOpaqueCaptureAddressInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceMemoryOpaqueCaptureAddressInfoKHR.html>
 pub type DeviceMemoryOpaqueCaptureAddressInfoKHR = DeviceMemoryOpaqueCaptureAddressInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDevicePrivateDataCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDevicePrivateDataCreateInfoEXT.html>
 pub type DevicePrivateDataCreateInfoEXT = DevicePrivateDataCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceQueueGlobalPriorityCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceQueueGlobalPriorityCreateInfoEXT.html>
 pub type DeviceQueueGlobalPriorityCreateInfoEXT = DeviceQueueGlobalPriorityCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkDeviceQueueGlobalPriorityCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDeviceQueueGlobalPriorityCreateInfoKHR.html>
 pub type DeviceQueueGlobalPriorityCreateInfoKHR = DeviceQueueGlobalPriorityCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportFenceCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportFenceCreateInfoKHR.html>
 pub type ExportFenceCreateInfoKHR = ExportFenceCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportMemoryAllocateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportMemoryAllocateInfoKHR.html>
 pub type ExportMemoryAllocateInfoKHR = ExportMemoryAllocateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExportSemaphoreCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExportSemaphoreCreateInfoKHR.html>
 pub type ExportSemaphoreCreateInfoKHR = ExportSemaphoreCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalBufferPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalBufferPropertiesKHR.html>
 pub type ExternalBufferPropertiesKHR = ExternalBufferProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalFencePropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalFencePropertiesKHR.html>
 pub type ExternalFencePropertiesKHR = ExternalFenceProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalImageFormatPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalImageFormatPropertiesKHR.html>
 pub type ExternalImageFormatPropertiesKHR = ExternalImageFormatProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryBufferCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryBufferCreateInfoKHR.html>
 pub type ExternalMemoryBufferCreateInfoKHR = ExternalMemoryBufferCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryImageCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryImageCreateInfoKHR.html>
 pub type ExternalMemoryImageCreateInfoKHR = ExternalMemoryImageCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalMemoryPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalMemoryPropertiesKHR.html>
 pub type ExternalMemoryPropertiesKHR = ExternalMemoryProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkExternalSemaphorePropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalSemaphorePropertiesKHR.html>
 pub type ExternalSemaphorePropertiesKHR = ExternalSemaphoreProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFormatProperties2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFormatProperties2KHR.html>
 pub type FormatProperties2KHR = FormatProperties2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFormatProperties3KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFormatProperties3KHR.html>
 pub type FormatProperties3KHR = FormatProperties3;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFramebufferAttachmentImageInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFramebufferAttachmentImageInfoKHR.html>
 pub type FramebufferAttachmentImageInfoKHR = FramebufferAttachmentImageInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkFramebufferAttachmentsCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFramebufferAttachmentsCreateInfoKHR.html>
 pub type FramebufferAttachmentsCreateInfoKHR = FramebufferAttachmentsCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkHostImageCopyDevicePerformanceQueryEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHostImageCopyDevicePerformanceQueryEXT.html>
 pub type HostImageCopyDevicePerformanceQueryEXT = HostImageCopyDevicePerformanceQuery;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkHostImageLayoutTransitionInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkHostImageLayoutTransitionInfoEXT.html>
 pub type HostImageLayoutTransitionInfoEXT = HostImageLayoutTransitionInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageBlit2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageBlit2KHR.html>
 pub type ImageBlit2KHR = ImageBlit2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageCopy2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageCopy2KHR.html>
 pub type ImageCopy2KHR = ImageCopy2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageFormatListCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageFormatListCreateInfoKHR.html>
 pub type ImageFormatListCreateInfoKHR = ImageFormatListCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageFormatProperties2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageFormatProperties2KHR.html>
 pub type ImageFormatProperties2KHR = ImageFormatProperties2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageMemoryBarrier2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageMemoryBarrier2KHR.html>
 pub type ImageMemoryBarrier2KHR = ImageMemoryBarrier2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageMemoryRequirementsInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageMemoryRequirementsInfo2KHR.html>
 pub type ImageMemoryRequirementsInfo2KHR = ImageMemoryRequirementsInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImagePlaneMemoryRequirementsInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImagePlaneMemoryRequirementsInfoKHR.html>
 pub type ImagePlaneMemoryRequirementsInfoKHR = ImagePlaneMemoryRequirementsInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageResolve2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageResolve2KHR.html>
 pub type ImageResolve2KHR = ImageResolve2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageSparseMemoryRequirementsInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageSparseMemoryRequirementsInfo2KHR.html>
 pub type ImageSparseMemoryRequirementsInfo2KHR = ImageSparseMemoryRequirementsInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageStencilUsageCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageStencilUsageCreateInfoEXT.html>
 pub type ImageStencilUsageCreateInfoEXT = ImageStencilUsageCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageSubresource2EXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageSubresource2EXT.html>
 pub type ImageSubresource2EXT = ImageSubresource2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageSubresource2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageSubresource2KHR.html>
 pub type ImageSubresource2KHR = ImageSubresource2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageToMemoryCopyEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageToMemoryCopyEXT.html>
 pub type ImageToMemoryCopyEXT = ImageToMemoryCopy;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkImageViewUsageCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkImageViewUsageCreateInfoKHR.html>
 pub type ImageViewUsageCreateInfoKHR = ImageViewUsageCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkInputAttachmentAspectReferenceKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkInputAttachmentAspectReferenceKHR.html>
 pub type InputAttachmentAspectReferenceKHR = InputAttachmentAspectReference;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryAllocateFlagsInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryAllocateFlagsInfoKHR.html>
 pub type MemoryAllocateFlagsInfoKHR = MemoryAllocateFlagsInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryBarrier2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryBarrier2KHR.html>
 pub type MemoryBarrier2KHR = MemoryBarrier2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryDedicatedAllocateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryDedicatedAllocateInfoKHR.html>
 pub type MemoryDedicatedAllocateInfoKHR = MemoryDedicatedAllocateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryDedicatedRequirementsKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryDedicatedRequirementsKHR.html>
 pub type MemoryDedicatedRequirementsKHR = MemoryDedicatedRequirements;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryMapInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryMapInfoKHR.html>
 pub type MemoryMapInfoKHR = MemoryMapInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryOpaqueCaptureAddressAllocateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryOpaqueCaptureAddressAllocateInfoKHR.html>
 pub type MemoryOpaqueCaptureAddressAllocateInfoKHR = MemoryOpaqueCaptureAddressAllocateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryRequirements2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryRequirements2KHR.html>
 pub type MemoryRequirements2KHR = MemoryRequirements2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryToImageCopyEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryToImageCopyEXT.html>
 pub type MemoryToImageCopyEXT = MemoryToImageCopy;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMemoryUnmapInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMemoryUnmapInfoKHR.html>
 pub type MemoryUnmapInfoKHR = MemoryUnmapInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMutableDescriptorTypeCreateInfoVALVE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMutableDescriptorTypeCreateInfoVALVE.html>
 pub type MutableDescriptorTypeCreateInfoVALVE = MutableDescriptorTypeCreateInfoEXT;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkMutableDescriptorTypeListVALVE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkMutableDescriptorTypeListVALVE.html>
 pub type MutableDescriptorTypeListVALVE = MutableDescriptorTypeListEXT;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevice16BitStorageFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevice16BitStorageFeaturesKHR.html>
 pub type PhysicalDevice16BitStorageFeaturesKHR = PhysicalDevice16BitStorageFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevice8BitStorageFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevice8BitStorageFeaturesKHR.html>
 pub type PhysicalDevice8BitStorageFeaturesKHR = PhysicalDevice8BitStorageFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceBufferAddressFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceBufferAddressFeaturesEXT.html>
 pub type PhysicalDeviceBufferAddressFeaturesEXT = PhysicalDeviceBufferDeviceAddressFeaturesEXT;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceBufferDeviceAddressFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceBufferDeviceAddressFeaturesKHR.html>
 pub type PhysicalDeviceBufferDeviceAddressFeaturesKHR = PhysicalDeviceBufferDeviceAddressFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceComputeShaderDerivativesFeaturesNV.html>
 pub type PhysicalDeviceComputeShaderDerivativesFeaturesNV =
     PhysicalDeviceComputeShaderDerivativesFeaturesKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDepthStencilResolvePropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDepthStencilResolvePropertiesKHR.html>
 pub type PhysicalDeviceDepthStencilResolvePropertiesKHR =
     PhysicalDeviceDepthStencilResolveProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDescriptorIndexingFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorIndexingFeaturesEXT.html>
 pub type PhysicalDeviceDescriptorIndexingFeaturesEXT = PhysicalDeviceDescriptorIndexingFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDescriptorIndexingPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDescriptorIndexingPropertiesEXT.html>
 pub type PhysicalDeviceDescriptorIndexingPropertiesEXT = PhysicalDeviceDescriptorIndexingProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDriverPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDriverPropertiesKHR.html>
 pub type PhysicalDeviceDriverPropertiesKHR = PhysicalDeviceDriverProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDynamicRenderingFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingFeaturesKHR.html>
 pub type PhysicalDeviceDynamicRenderingFeaturesKHR = PhysicalDeviceDynamicRenderingFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR.html>
 pub type PhysicalDeviceDynamicRenderingLocalReadFeaturesKHR =
     PhysicalDeviceDynamicRenderingLocalReadFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalBufferInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalBufferInfoKHR.html>
 pub type PhysicalDeviceExternalBufferInfoKHR = PhysicalDeviceExternalBufferInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalFenceInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalFenceInfoKHR.html>
 pub type PhysicalDeviceExternalFenceInfoKHR = PhysicalDeviceExternalFenceInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalImageFormatInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalImageFormatInfoKHR.html>
 pub type PhysicalDeviceExternalImageFormatInfoKHR = PhysicalDeviceExternalImageFormatInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalSciBufFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalSciBufFeaturesNV.html>
 pub type PhysicalDeviceExternalSciBufFeaturesNV = PhysicalDeviceExternalMemorySciBufFeaturesNV;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceExternalSemaphoreInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceExternalSemaphoreInfoKHR.html>
 pub type PhysicalDeviceExternalSemaphoreInfoKHR = PhysicalDeviceExternalSemaphoreInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFeatures2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFeatures2KHR.html>
 pub type PhysicalDeviceFeatures2KHR = PhysicalDeviceFeatures2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFloat16Int8FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFloat16Int8FeaturesKHR.html>
 pub type PhysicalDeviceFloat16Int8FeaturesKHR = PhysicalDeviceShaderFloat16Int8Features;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFloatControlsPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFloatControlsPropertiesKHR.html>
 pub type PhysicalDeviceFloatControlsPropertiesKHR = PhysicalDeviceFloatControlsProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.html>
 pub type PhysicalDeviceFragmentShaderBarycentricFeaturesNV =
     PhysicalDeviceFragmentShaderBarycentricFeaturesKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT.html>
 pub type PhysicalDeviceGlobalPriorityQueryFeaturesEXT = PhysicalDeviceGlobalPriorityQueryFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR.html>
 pub type PhysicalDeviceGlobalPriorityQueryFeaturesKHR = PhysicalDeviceGlobalPriorityQueryFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceGroupPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceGroupPropertiesKHR.html>
 pub type PhysicalDeviceGroupPropertiesKHR = PhysicalDeviceGroupProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceHostImageCopyFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHostImageCopyFeaturesEXT.html>
 pub type PhysicalDeviceHostImageCopyFeaturesEXT = PhysicalDeviceHostImageCopyFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceHostImageCopyPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHostImageCopyPropertiesEXT.html>
 pub type PhysicalDeviceHostImageCopyPropertiesEXT = PhysicalDeviceHostImageCopyProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceHostQueryResetFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceHostQueryResetFeaturesEXT.html>
 pub type PhysicalDeviceHostQueryResetFeaturesEXT = PhysicalDeviceHostQueryResetFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceIDPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceIDPropertiesKHR.html>
 pub type PhysicalDeviceIDPropertiesKHR = PhysicalDeviceIDProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageFormatInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageFormatInfo2KHR.html>
 pub type PhysicalDeviceImageFormatInfo2KHR = PhysicalDeviceImageFormatInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImageRobustnessFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImageRobustnessFeaturesEXT.html>
 pub type PhysicalDeviceImageRobustnessFeaturesEXT = PhysicalDeviceImageRobustnessFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceImagelessFramebufferFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceImagelessFramebufferFeaturesKHR.html>
 pub type PhysicalDeviceImagelessFramebufferFeaturesKHR = PhysicalDeviceImagelessFramebufferFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceIndexTypeUint8FeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceIndexTypeUint8FeaturesEXT.html>
 pub type PhysicalDeviceIndexTypeUint8FeaturesEXT = PhysicalDeviceIndexTypeUint8Features;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceIndexTypeUint8FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceIndexTypeUint8FeaturesKHR.html>
 pub type PhysicalDeviceIndexTypeUint8FeaturesKHR = PhysicalDeviceIndexTypeUint8Features;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceInlineUniformBlockFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInlineUniformBlockFeaturesEXT.html>
 pub type PhysicalDeviceInlineUniformBlockFeaturesEXT = PhysicalDeviceInlineUniformBlockFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceInlineUniformBlockPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceInlineUniformBlockPropertiesEXT.html>
 pub type PhysicalDeviceInlineUniformBlockPropertiesEXT = PhysicalDeviceInlineUniformBlockProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLineRasterizationFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationFeaturesEXT.html>
 pub type PhysicalDeviceLineRasterizationFeaturesEXT = PhysicalDeviceLineRasterizationFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLineRasterizationFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationFeaturesKHR.html>
 pub type PhysicalDeviceLineRasterizationFeaturesKHR = PhysicalDeviceLineRasterizationFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLineRasterizationPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationPropertiesEXT.html>
 pub type PhysicalDeviceLineRasterizationPropertiesEXT = PhysicalDeviceLineRasterizationProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceLineRasterizationPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceLineRasterizationPropertiesKHR.html>
 pub type PhysicalDeviceLineRasterizationPropertiesKHR = PhysicalDeviceLineRasterizationProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance3PropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance3PropertiesKHR.html>
 pub type PhysicalDeviceMaintenance3PropertiesKHR = PhysicalDeviceMaintenance3Properties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance4FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance4FeaturesKHR.html>
 pub type PhysicalDeviceMaintenance4FeaturesKHR = PhysicalDeviceMaintenance4Features;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance4PropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance4PropertiesKHR.html>
 pub type PhysicalDeviceMaintenance4PropertiesKHR = PhysicalDeviceMaintenance4Properties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance5FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance5FeaturesKHR.html>
 pub type PhysicalDeviceMaintenance5FeaturesKHR = PhysicalDeviceMaintenance5Features;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance5PropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance5PropertiesKHR.html>
 pub type PhysicalDeviceMaintenance5PropertiesKHR = PhysicalDeviceMaintenance5Properties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance6FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance6FeaturesKHR.html>
 pub type PhysicalDeviceMaintenance6FeaturesKHR = PhysicalDeviceMaintenance6Features;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMaintenance6PropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMaintenance6PropertiesKHR.html>
 pub type PhysicalDeviceMaintenance6PropertiesKHR = PhysicalDeviceMaintenance6Properties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMemoryProperties2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMemoryProperties2KHR.html>
 pub type PhysicalDeviceMemoryProperties2KHR = PhysicalDeviceMemoryProperties2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMultiviewFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewFeaturesKHR.html>
 pub type PhysicalDeviceMultiviewFeaturesKHR = PhysicalDeviceMultiviewFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMultiviewPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMultiviewPropertiesKHR.html>
 pub type PhysicalDeviceMultiviewPropertiesKHR = PhysicalDeviceMultiviewProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE.html>
 pub type PhysicalDeviceMutableDescriptorTypeFeaturesVALVE =
     PhysicalDeviceMutableDescriptorTypeFeaturesEXT;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT.html>
 pub type PhysicalDevicePipelineCreationCacheControlFeaturesEXT =
     PhysicalDevicePipelineCreationCacheControlFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineProtectedAccessFeaturesEXT.html>
 pub type PhysicalDevicePipelineProtectedAccessFeaturesEXT =
     PhysicalDevicePipelineProtectedAccessFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineRobustnessFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineRobustnessFeaturesEXT.html>
 pub type PhysicalDevicePipelineRobustnessFeaturesEXT = PhysicalDevicePipelineRobustnessFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePipelineRobustnessPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePipelineRobustnessPropertiesEXT.html>
 pub type PhysicalDevicePipelineRobustnessPropertiesEXT = PhysicalDevicePipelineRobustnessProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePointClippingPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePointClippingPropertiesKHR.html>
 pub type PhysicalDevicePointClippingPropertiesKHR = PhysicalDevicePointClippingProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePrivateDataFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePrivateDataFeaturesEXT.html>
 pub type PhysicalDevicePrivateDataFeaturesEXT = PhysicalDevicePrivateDataFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceProperties2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceProperties2KHR.html>
 pub type PhysicalDeviceProperties2KHR = PhysicalDeviceProperties2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDevicePushDescriptorPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDevicePushDescriptorPropertiesKHR.html>
 pub type PhysicalDevicePushDescriptorPropertiesKHR = PhysicalDevicePushDescriptorProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM.html>
 pub type PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM =
     PhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.html>
 pub type PhysicalDeviceSamplerFilterMinmaxPropertiesEXT =
     PhysicalDeviceSamplerFilterMinmaxProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR.html>
 pub type PhysicalDeviceSamplerYcbcrConversionFeaturesKHR =
     PhysicalDeviceSamplerYcbcrConversionFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceScalarBlockLayoutFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceScalarBlockLayoutFeaturesEXT.html>
 pub type PhysicalDeviceScalarBlockLayoutFeaturesEXT = PhysicalDeviceScalarBlockLayoutFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR.html>
 pub type PhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR =
     PhysicalDeviceSeparateDepthStencilLayoutsFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderAtomicInt64FeaturesKHR.html>
 pub type PhysicalDeviceShaderAtomicInt64FeaturesKHR = PhysicalDeviceShaderAtomicInt64Features;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT.html>
 pub type PhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT =
     PhysicalDeviceShaderDemoteToHelperInvocationFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderDrawParameterFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderDrawParameterFeatures.html>
 pub type PhysicalDeviceShaderDrawParameterFeatures = PhysicalDeviceShaderDrawParametersFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderExpectAssumeFeaturesKHR.html>
 pub type PhysicalDeviceShaderExpectAssumeFeaturesKHR = PhysicalDeviceShaderExpectAssumeFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderFloat16Int8FeaturesKHR.html>
 pub type PhysicalDeviceShaderFloat16Int8FeaturesKHR = PhysicalDeviceShaderFloat16Int8Features;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderFloatControls2FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderFloatControls2FeaturesKHR.html>
 pub type PhysicalDeviceShaderFloatControls2FeaturesKHR = PhysicalDeviceShaderFloatControls2Features;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR.html>
 pub type PhysicalDeviceShaderIntegerDotProductFeaturesKHR =
     PhysicalDeviceShaderIntegerDotProductFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR.html>
 pub type PhysicalDeviceShaderIntegerDotProductPropertiesKHR =
     PhysicalDeviceShaderIntegerDotProductProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR.html>
 pub type PhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR =
     PhysicalDeviceShaderSubgroupExtendedTypesFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR.html>
 pub type PhysicalDeviceShaderSubgroupRotateFeaturesKHR = PhysicalDeviceShaderSubgroupRotateFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR.html>
 pub type PhysicalDeviceShaderTerminateInvocationFeaturesKHR =
     PhysicalDeviceShaderTerminateInvocationFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSparseImageFormatInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSparseImageFormatInfo2KHR.html>
 pub type PhysicalDeviceSparseImageFormatInfo2KHR = PhysicalDeviceSparseImageFormatInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubgroupSizeControlFeaturesEXT.html>
 pub type PhysicalDeviceSubgroupSizeControlFeaturesEXT = PhysicalDeviceSubgroupSizeControlFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSubgroupSizeControlPropertiesEXT.html>
 pub type PhysicalDeviceSubgroupSizeControlPropertiesEXT =
     PhysicalDeviceSubgroupSizeControlProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceSynchronization2FeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceSynchronization2FeaturesKHR.html>
 pub type PhysicalDeviceSynchronization2FeaturesKHR = PhysicalDeviceSynchronization2Features;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.html>
 pub type PhysicalDeviceTexelBufferAlignmentPropertiesEXT =
     PhysicalDeviceTexelBufferAlignmentProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT.html>
 pub type PhysicalDeviceTextureCompressionASTCHDRFeaturesEXT =
     PhysicalDeviceTextureCompressionASTCHDRFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceTimelineSemaphoreFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTimelineSemaphoreFeaturesKHR.html>
 pub type PhysicalDeviceTimelineSemaphoreFeaturesKHR = PhysicalDeviceTimelineSemaphoreFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceTimelineSemaphorePropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceTimelineSemaphorePropertiesKHR.html>
 pub type PhysicalDeviceTimelineSemaphorePropertiesKHR = PhysicalDeviceTimelineSemaphoreProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceToolPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceToolPropertiesEXT.html>
 pub type PhysicalDeviceToolPropertiesEXT = PhysicalDeviceToolProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR.html>
 pub type PhysicalDeviceUniformBufferStandardLayoutFeaturesKHR =
     PhysicalDeviceUniformBufferStandardLayoutFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVariablePointerFeatures.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVariablePointerFeatures.html>
 pub type PhysicalDeviceVariablePointerFeatures = PhysicalDeviceVariablePointersFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVariablePointerFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVariablePointerFeaturesKHR.html>
 pub type PhysicalDeviceVariablePointerFeaturesKHR = PhysicalDeviceVariablePointersFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVariablePointersFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVariablePointersFeaturesKHR.html>
 pub type PhysicalDeviceVariablePointersFeaturesKHR = PhysicalDeviceVariablePointersFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT.html>
 pub type PhysicalDeviceVertexAttributeDivisorFeaturesEXT =
     PhysicalDeviceVertexAttributeDivisorFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR.html>
 pub type PhysicalDeviceVertexAttributeDivisorFeaturesKHR =
     PhysicalDeviceVertexAttributeDivisorFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR.html>
 pub type PhysicalDeviceVertexAttributeDivisorPropertiesKHR =
     PhysicalDeviceVertexAttributeDivisorProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVulkanMemoryModelFeaturesKHR.html>
 pub type PhysicalDeviceVulkanMemoryModelFeaturesKHR = PhysicalDeviceVulkanMemoryModelFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR.html>
 pub type PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR =
     PhysicalDeviceZeroInitializeWorkgroupMemoryFeatures;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCreateFlags2CreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreateFlags2CreateInfoKHR.html>
 pub type PipelineCreateFlags2CreateInfoKHR = PipelineCreateFlags2CreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCreationFeedbackCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreationFeedbackCreateInfoEXT.html>
 pub type PipelineCreationFeedbackCreateInfoEXT = PipelineCreationFeedbackCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineCreationFeedbackEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineCreationFeedbackEXT.html>
 pub type PipelineCreationFeedbackEXT = PipelineCreationFeedback;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineInfoEXT.html>
 pub type PipelineInfoEXT = PipelineInfoKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationLineStateCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationLineStateCreateInfoEXT.html>
 pub type PipelineRasterizationLineStateCreateInfoEXT = PipelineRasterizationLineStateCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRasterizationLineStateCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRasterizationLineStateCreateInfoKHR.html>
 pub type PipelineRasterizationLineStateCreateInfoKHR = PipelineRasterizationLineStateCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRenderingCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRenderingCreateInfoKHR.html>
 pub type PipelineRenderingCreateInfoKHR = PipelineRenderingCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineRobustnessCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineRobustnessCreateInfoEXT.html>
 pub type PipelineRobustnessCreateInfoEXT = PipelineRobustnessCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT.html>
 pub type PipelineShaderStageRequiredSubgroupSizeCreateInfoEXT =
     PipelineShaderStageRequiredSubgroupSizeCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineTessellationDomainOriginStateCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineTessellationDomainOriginStateCreateInfoKHR.html>
 pub type PipelineTessellationDomainOriginStateCreateInfoKHR =
     PipelineTessellationDomainOriginStateCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineVertexInputDivisorStateCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineVertexInputDivisorStateCreateInfoEXT.html>
 pub type PipelineVertexInputDivisorStateCreateInfoEXT = PipelineVertexInputDivisorStateCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPipelineVertexInputDivisorStateCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineVertexInputDivisorStateCreateInfoKHR.html>
 pub type PipelineVertexInputDivisorStateCreateInfoKHR = PipelineVertexInputDivisorStateCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPrivateDataSlotCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPrivateDataSlotCreateInfoEXT.html>
 pub type PrivateDataSlotCreateInfoEXT = PrivateDataSlotCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPushConstantsInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPushConstantsInfoKHR.html>
 pub type PushConstantsInfoKHR = PushConstantsInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPushDescriptorSetInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPushDescriptorSetInfoKHR.html>
 pub type PushDescriptorSetInfoKHR = PushDescriptorSetInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkPushDescriptorSetWithTemplateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPushDescriptorSetWithTemplateInfoKHR.html>
 pub type PushDescriptorSetWithTemplateInfoKHR = PushDescriptorSetWithTemplateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueryPoolCreateInfoINTEL.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryPoolCreateInfoINTEL.html>
 pub type QueryPoolCreateInfoINTEL = QueryPoolPerformanceQueryCreateInfoINTEL;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueFamilyGlobalPriorityPropertiesEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyGlobalPriorityPropertiesEXT.html>
 pub type QueueFamilyGlobalPriorityPropertiesEXT = QueueFamilyGlobalPriorityProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueFamilyGlobalPriorityPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyGlobalPriorityPropertiesKHR.html>
 pub type QueueFamilyGlobalPriorityPropertiesKHR = QueueFamilyGlobalPriorityProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkQueueFamilyProperties2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueueFamilyProperties2KHR.html>
 pub type QueueFamilyProperties2KHR = QueueFamilyProperties2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassAttachmentBeginInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassAttachmentBeginInfoKHR.html>
 pub type RenderPassAttachmentBeginInfoKHR = RenderPassAttachmentBeginInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassCreateInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassCreateInfo2KHR.html>
 pub type RenderPassCreateInfo2KHR = RenderPassCreateInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassInputAttachmentAspectCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassInputAttachmentAspectCreateInfoKHR.html>
 pub type RenderPassInputAttachmentAspectCreateInfoKHR = RenderPassInputAttachmentAspectCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderPassMultiviewCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassMultiviewCreateInfoKHR.html>
 pub type RenderPassMultiviewCreateInfoKHR = RenderPassMultiviewCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingAreaInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAreaInfoKHR.html>
 pub type RenderingAreaInfoKHR = RenderingAreaInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingAttachmentInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAttachmentInfoKHR.html>
 pub type RenderingAttachmentInfoKHR = RenderingAttachmentInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingAttachmentLocationInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingAttachmentLocationInfoKHR.html>
 pub type RenderingAttachmentLocationInfoKHR = RenderingAttachmentLocationInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingInfoKHR.html>
 pub type RenderingInfoKHR = RenderingInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkRenderingInputAttachmentIndexInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingInputAttachmentIndexInfoKHR.html>
 pub type RenderingInputAttachmentIndexInfoKHR = RenderingInputAttachmentIndexInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkResolveImageInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkResolveImageInfo2KHR.html>
 pub type ResolveImageInfo2KHR = ResolveImageInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerReductionModeCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerReductionModeCreateInfoEXT.html>
 pub type SamplerReductionModeCreateInfoEXT = SamplerReductionModeCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerYcbcrConversionCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionCreateInfoKHR.html>
 pub type SamplerYcbcrConversionCreateInfoKHR = SamplerYcbcrConversionCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerYcbcrConversionImageFormatPropertiesKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionImageFormatPropertiesKHR.html>
 pub type SamplerYcbcrConversionImageFormatPropertiesKHR =
     SamplerYcbcrConversionImageFormatProperties;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSamplerYcbcrConversionInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSamplerYcbcrConversionInfoKHR.html>
 pub type SamplerYcbcrConversionInfoKHR = SamplerYcbcrConversionInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreSignalInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreSignalInfoKHR.html>
 pub type SemaphoreSignalInfoKHR = SemaphoreSignalInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreSubmitInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreSubmitInfoKHR.html>
 pub type SemaphoreSubmitInfoKHR = SemaphoreSubmitInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreTypeCreateInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreTypeCreateInfoKHR.html>
 pub type SemaphoreTypeCreateInfoKHR = SemaphoreTypeCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSemaphoreWaitInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSemaphoreWaitInfoKHR.html>
 pub type SemaphoreWaitInfoKHR = SemaphoreWaitInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkShaderRequiredSubgroupSizeCreateInfoEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkShaderRequiredSubgroupSizeCreateInfoEXT.html>
 pub type ShaderRequiredSubgroupSizeCreateInfoEXT =
     PipelineShaderStageRequiredSubgroupSizeCreateInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseImageFormatProperties2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageFormatProperties2KHR.html>
 pub type SparseImageFormatProperties2KHR = SparseImageFormatProperties2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSparseImageMemoryRequirements2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSparseImageMemoryRequirements2KHR.html>
 pub type SparseImageMemoryRequirements2KHR = SparseImageMemoryRequirements2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubmitInfo2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubmitInfo2KHR.html>
 pub type SubmitInfo2KHR = SubmitInfo2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassBeginInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassBeginInfoKHR.html>
 pub type SubpassBeginInfoKHR = SubpassBeginInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassDependency2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDependency2KHR.html>
 pub type SubpassDependency2KHR = SubpassDependency2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassDescription2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDescription2KHR.html>
 pub type SubpassDescription2KHR = SubpassDescription2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassDescriptionDepthStencilResolveKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassDescriptionDepthStencilResolveKHR.html>
 pub type SubpassDescriptionDepthStencilResolveKHR = SubpassDescriptionDepthStencilResolve;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubpassEndInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassEndInfoKHR.html>
 pub type SubpassEndInfoKHR = SubpassEndInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubresourceHostMemcpySizeEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubresourceHostMemcpySizeEXT.html>
 pub type SubresourceHostMemcpySizeEXT = SubresourceHostMemcpySize;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubresourceLayout2EXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubresourceLayout2EXT.html>
 pub type SubresourceLayout2EXT = SubresourceLayout2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkSubresourceLayout2KHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubresourceLayout2KHR.html>
 pub type SubresourceLayout2KHR = SubresourceLayout2;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkTimelineSemaphoreSubmitInfoKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTimelineSemaphoreSubmitInfoKHR.html>
 pub type TimelineSemaphoreSubmitInfoKHR = TimelineSemaphoreSubmitInfo;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkTransformMatrixNV.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTransformMatrixNV.html>
 pub type TransformMatrixNV = TransformMatrixKHR;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVertexInputBindingDivisorDescriptionEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVertexInputBindingDivisorDescriptionEXT.html>
 pub type VertexInputBindingDivisorDescriptionEXT = VertexInputBindingDivisorDescription;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkVertexInputBindingDivisorDescriptionKHR.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVertexInputBindingDivisorDescriptionKHR.html>
 pub type VertexInputBindingDivisorDescriptionKHR = VertexInputBindingDivisorDescription;
-/// <https://www.khronos.org/registry/vulkan/specs/1.4-extensions/man/html/VkWriteDescriptorSetInlineUniformBlockEXT.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkWriteDescriptorSetInlineUniformBlockEXT.html>
 pub type WriteDescriptorSetInlineUniformBlockEXT = WriteDescriptorSetInlineUniformBlock;
