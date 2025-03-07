@@ -42,7 +42,7 @@ jobs:
           components: rustfmt
       - name: Cache mdbook
         id: cache-mdbook
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.cargo/bin/mdbook
           key: ${{ runner.os }}-${{ env.RUST_VERSION }}-${{ env.MDBOOK_VERSION }}
@@ -55,7 +55,7 @@ jobs:
         run: ./gradlew run --args="--directory=.. index"
       - name: Cache Preprocessor
         id: cache-preprocessor
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.cargo/bin/vk-preprocessor
           key: ${{ hashFiles('index.txt', 'tutorial/book/preprocessor/**') }}
