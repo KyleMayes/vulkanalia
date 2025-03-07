@@ -1,3 +1,9 @@
+## [0.29.0] - UNRELEASED
+
+### Bindings Updates
+- [Add VUID for relaxed control barrier with storage class semantics (#2495)](https://github.com/KhronosGroup/Vulkan-Docs/commit/e21e798a5e106519cb50cd7f12aab6bf55a30b45)
+- [March 7, 2025 Vulkan 1.4.310 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ab5fa3690263718c4c4dc8f7110ba4a52528e063)
+
 ## [0.28.0] - 2025-03-06
 
 ### Changed

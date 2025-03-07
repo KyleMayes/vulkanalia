@@ -70,8 +70,8 @@ bitflags! {
         const HOST_WRITE = 1 << 14;
         const MEMORY_READ = 1 << 15;
         const MEMORY_WRITE = 1 << 16;
-        const COMMAND_PREPROCESS_READ_NV = 1 << 17;
-        const COMMAND_PREPROCESS_WRITE_NV = 1 << 18;
+        const COMMAND_PREPROCESS_READ_EXT = 1 << 17;
+        const COMMAND_PREPROCESS_WRITE_EXT = 1 << 18;
         const COLOR_ATTACHMENT_READ_NONCOHERENT_EXT = 1 << 19;
         const CONDITIONAL_RENDERING_READ_EXT = 1 << 20;
         const ACCELERATION_STRUCTURE_READ_KHR = 1 << 21;
@@ -107,8 +107,8 @@ bitflags! {
         const HOST_WRITE = 1 << 14;
         const MEMORY_READ = 1 << 15;
         const MEMORY_WRITE = 1 << 16;
-        const COMMAND_PREPROCESS_READ_NV = 1 << 17;
-        const COMMAND_PREPROCESS_WRITE_NV = 1 << 18;
+        const COMMAND_PREPROCESS_READ_EXT = 1 << 17;
+        const COMMAND_PREPROCESS_WRITE_EXT = 1 << 18;
         const COLOR_ATTACHMENT_READ_NONCOHERENT_EXT = 1 << 19;
         const CONDITIONAL_RENDERING_READ_EXT = 1 << 20;
         const ACCELERATION_STRUCTURE_READ_KHR = 1 << 21;
@@ -1599,7 +1599,7 @@ bitflags! {
         const HOST = 1 << 14;
         const ALL_GRAPHICS = 1 << 15;
         const ALL_COMMANDS = 1 << 16;
-        const COMMAND_PREPROCESS_NV = 1 << 17;
+        const COMMAND_PREPROCESS_EXT = 1 << 17;
         const CONDITIONAL_RENDERING_EXT = 1 << 18;
         const TASK_SHADER_EXT = 1 << 19;
         const MESH_SHADER_EXT = 1 << 20;
@@ -1634,7 +1634,7 @@ bitflags! {
         const HOST = 1 << 14;
         const ALL_GRAPHICS = 1 << 15;
         const ALL_COMMANDS = 1 << 16;
-        const COMMAND_PREPROCESS_NV = 1 << 17;
+        const COMMAND_PREPROCESS_EXT = 1 << 17;
         const CONDITIONAL_RENDERING_EXT = 1 << 18;
         const TASK_SHADER_EXT = 1 << 19;
         const MESH_SHADER_EXT = 1 << 20;
