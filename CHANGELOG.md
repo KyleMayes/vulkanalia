@@ -1,6 +1,7 @@
 ## [0.28.0] - UNRELEASED
 
 ### Changed
+- Bumped MSRV to 1.81
 - Reworked handling of bitfields in Vulkan structs to use custom structs for each 32-bit sequence of bitfields
 
 ### Bindings Updates
