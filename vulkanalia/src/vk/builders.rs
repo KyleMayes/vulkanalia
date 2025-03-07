@@ -32292,10 +32292,6 @@ unsafe impl Cast for MemoryBarrierBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`MemoryBarrier2`].
-pub unsafe trait ExtendsMemoryBarrier2: fmt::Debug {}
-unsafe impl ExtendsMemoryBarrier2 for MemoryBarrierAccessFlags3KHR {}
-
 unsafe impl Cast for MemoryBarrier2 {
     type Target = MemoryBarrier2;
 
@@ -32305,28 +32301,18 @@ unsafe impl Cast for MemoryBarrier2 {
     }
 }
 
-impl<'b> HasBuilder<'b> for MemoryBarrier2 {
-    type Builder = MemoryBarrier2Builder<'b>;
+impl HasBuilder<'static> for MemoryBarrier2 {
+    type Builder = MemoryBarrier2Builder;
 }
 
 /// A builder for a [`MemoryBarrier2`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct MemoryBarrier2Builder<'b> {
+pub struct MemoryBarrier2Builder {
     value: MemoryBarrier2,
-    _marker: PhantomData<&'b ()>,
 }
 
-impl<'b> MemoryBarrier2Builder<'b> {
-    #[inline]
-    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
-    where
-        T: ExtendsMemoryBarrier2,
-    {
-        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
-        self
-    }
-
+impl MemoryBarrier2Builder {
     #[inline]
     pub fn src_stage_mask(mut self, src_stage_mask: PipelineStageFlags2) -> Self {
         self.value.src_stage_mask = src_stage_mask;
@@ -32357,7 +32343,7 @@ impl<'b> MemoryBarrier2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MemoryBarrier2Builder<'b> {
+impl ops::Deref for MemoryBarrier2Builder {
     type Target = MemoryBarrier2;
 
     #[inline]
@@ -32366,14 +32352,14 @@ impl<'b> ops::Deref for MemoryBarrier2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for MemoryBarrier2Builder<'b> {
+impl ops::DerefMut for MemoryBarrier2Builder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MemoryBarrier2Builder<'b> {
+unsafe impl Cast for MemoryBarrier2Builder {
     type Target = MemoryBarrier2;
 
     #[inline]
@@ -79560,6 +79546,7 @@ unsafe impl Cast for SubpassDependencyBuilder {
 /// A Vulkan struct that can be used to extend a [`SubpassDependency2`].
 pub unsafe trait ExtendsSubpassDependency2: fmt::Debug {}
 unsafe impl ExtendsSubpassDependency2 for MemoryBarrier2 {}
+unsafe impl ExtendsSubpassDependency2 for MemoryBarrierAccessFlags3KHR {}
 
 unsafe impl Cast for SubpassDependency2 {
     type Target = SubpassDependency2;
