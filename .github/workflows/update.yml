@@ -21,8 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RUST_LOG: info
-      RUST_VERSION: 1.81..0
-      BINDGEN_VERSION: .68.1
+      RUST_VERSION: 1.81.0
+      BINDGEN_VERSION: 0.68.1
     steps:
       # Checkout
       - name: Checkout Repository
