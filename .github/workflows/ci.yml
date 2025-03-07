@@ -144,7 +144,7 @@ jobs:
           components: rustfmt
       - name: Cache Bindgen
         id: cache-bindgen
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.cargo/bin/bindgen
           key: ${{ runner.os }}-${{ env.RUST_VERSION }}-${{ env.BINDGEN_VERSION }}
