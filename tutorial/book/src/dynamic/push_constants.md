@@ -96,7 +96,7 @@ We need to tell Vulkan about our new push constant by describing it in the layou
 let vert_push_constant_range = vk::PushConstantRange::builder()
     .stage_flags(vk::ShaderStageFlags::VERTEX)
     .offset(0)
-    .size(64 /* 16 × 4 byte floats */);
+    .size(size_of::<Mat4>();
 
 let set_layouts = &[data.descriptor_set_layout];
 let push_constant_ranges = &[vert_push_constant_range];
