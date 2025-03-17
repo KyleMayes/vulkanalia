@@ -231,7 +231,8 @@ We can then construct a `vk::ShaderModuleCreateInfo` and use it to call `create_
 
 ```rust,noplaypen
 let info = vk::ShaderModuleCreateInfo::builder()
-    .code(bytecode.code());
+    .code(bytecode.code())
+    .code_size(bytecode.code_size());
 
 Ok(device.create_shader_module(&info, None)?)
 ```
