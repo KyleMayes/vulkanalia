@@ -2848,6 +2848,28 @@ pub trait ExtFragmentDensityMap2Extension: DeviceV1_0 {
 
 impl ExtFragmentDensityMap2Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_density_map_offset.html>
+pub trait ExtFragmentDensityMapOffsetExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRendering2EXT.html>
+    #[inline]
+    unsafe fn cmd_end_rendering2_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        rendering_end_info: Option<&RenderingEndInfoEXT>,
+    ) {
+        let __result = (self.commands().cmd_end_rendering2_ext)(
+            command_buffer,
+            rendering_end_info.map_or(ptr::null(), |v| v),
+        );
+    }
+}
+
+impl ExtFragmentDensityMapOffsetExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_shader_interlock.html>
 pub trait ExtFragmentShaderInterlockExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -9754,6 +9776,15 @@ pub trait KhrShaderAtomicInt64Extension: DeviceV1_0 {
 }
 
 impl KhrShaderAtomicInt64Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_bfloat16.html>
+pub trait KhrShaderBfloat16Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_SHADER_BFLOAT16_EXTENSION;
+}
+
+impl KhrShaderBfloat16Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_clock.html>
 pub trait KhrShaderClockExtension: DeviceV1_0 {

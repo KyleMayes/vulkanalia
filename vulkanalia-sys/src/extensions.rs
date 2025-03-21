@@ -1316,6 +1316,22 @@ pub const EXT_FRAGMENT_DENSITY_MAP2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_density_map_offset.html>
+#[allow(deprecated)]
+pub const EXT_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_fragment_density_map_offset"),
+    number: 620,
+    type_: "device",
+    author: "EXT",
+    contact: "Connor Abbott @cwabbott0",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_shader_interlock.html>
 #[allow(deprecated)]
 pub const EXT_FRAGMENT_SHADER_INTERLOCK_EXTENSION: Extension = Extension {
@@ -4321,6 +4337,22 @@ pub const KHR_SHADER_ATOMIC_INT64_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_2"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_bfloat16.html>
+#[allow(deprecated)]
+pub const KHR_SHADER_BFLOAT16_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_shader_bfloat16"),
+    number: 142,
+    type_: "device",
+    author: "KHR",
+    contact: "Tobias Hector @tobski",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_clock.html>
 #[allow(deprecated)]
 pub const KHR_SHADER_CLOCK_EXTENSION: Extension = Extension {
@@ -6335,7 +6367,7 @@ pub const QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION: Extension = Extension {
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
-    promoted_to: None,
+    promoted_to: Some("VK_EXT_fragment_density_map_offset"),
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_image_processing.html>

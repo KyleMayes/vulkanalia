@@ -1067,6 +1067,7 @@ impl ComponentTypeKHR {
     pub const UINT16: Self = Self(8);
     pub const UINT32: Self = Self(9);
     pub const UINT64: Self = Self(10);
+    pub const BFLOAT16: Self = Self(1000141000);
     pub const SINT8_PACKED_NV: Self = Self(1000491000);
     pub const UINT8_PACKED_NV: Self = Self(1000491001);
     pub const FLOAT_E4M3_NV: Self = Self(1000491002);
@@ -1099,6 +1100,7 @@ impl fmt::Debug for ComponentTypeKHR {
             8 => write!(f, "UINT16"),
             9 => write!(f, "UINT32"),
             10 => write!(f, "UINT64"),
+            1000141000 => write!(f, "BFLOAT16"),
             1000491000 => write!(f, "SINT8_PACKED_NV"),
             1000491001 => write!(f, "UINT8_PACKED_NV"),
             1000491002 => write!(f, "FLOAT_E4M3_NV"),
@@ -6332,6 +6334,7 @@ impl StructureType {
     pub const EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX: Self = Self(1000134003);
     pub const PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX: Self = Self(1000134004);
     pub const ATTACHMENT_SAMPLE_COUNT_INFO_AMD: Self = Self(1000044008);
+    pub const PHYSICAL_DEVICE_SHADER_BFLOAT16_FEATURES_KHR: Self = Self(1000141000);
     pub const SAMPLE_LOCATIONS_INFO_EXT: Self = Self(1000143000);
     pub const RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT: Self = Self(1000143001);
     pub const PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT: Self = Self(1000143002);
@@ -6698,9 +6701,6 @@ impl StructureType {
     pub const RENDER_PASS_STRIPE_BEGIN_INFO_ARM: Self = Self(1000424002);
     pub const RENDER_PASS_STRIPE_INFO_ARM: Self = Self(1000424003);
     pub const RENDER_PASS_STRIPE_SUBMIT_INFO_ARM: Self = Self(1000424004);
-    pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM: Self = Self(1000425000);
-    pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM: Self = Self(1000425001);
-    pub const SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM: Self = Self(1000425002);
     pub const PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV: Self = Self(1000426000);
     pub const PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV: Self = Self(1000426001);
     pub const PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV: Self = Self(1000427000);
@@ -6930,6 +6930,10 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_ROBUSTNESS_FEATURES_EXT: Self = Self(1000608000);
     pub const SET_PRESENT_CONFIG_NV: Self = Self(1000613000);
     pub const PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV: Self = Self(1000613001);
+    pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_EXT: Self = Self(1000425000);
+    pub const PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_EXT: Self = Self(1000425001);
+    pub const RENDER_PASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_EXT: Self = Self(1000425002);
+    pub const RENDERING_END_INFO_EXT: Self = Self(1000619003);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -7415,6 +7419,7 @@ impl fmt::Debug for StructureType {
             1000134003 => write!(f, "EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX"),
             1000134004 => write!(f, "PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX"),
             1000044008 => write!(f, "ATTACHMENT_SAMPLE_COUNT_INFO_AMD"),
+            1000141000 => write!(f, "PHYSICAL_DEVICE_SHADER_BFLOAT16_FEATURES_KHR"),
             1000143000 => write!(f, "SAMPLE_LOCATIONS_INFO_EXT"),
             1000143001 => write!(f, "RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT"),
             1000143002 => write!(f, "PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT"),
@@ -7865,15 +7870,6 @@ impl fmt::Debug for StructureType {
             1000424002 => write!(f, "RENDER_PASS_STRIPE_BEGIN_INFO_ARM"),
             1000424003 => write!(f, "RENDER_PASS_STRIPE_INFO_ARM"),
             1000424004 => write!(f, "RENDER_PASS_STRIPE_SUBMIT_INFO_ARM"),
-            1000425000 => write!(
-                f,
-                "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM"
-            ),
-            1000425001 => write!(
-                f,
-                "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM"
-            ),
-            1000425002 => write!(f, "SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM"),
             1000426000 => write!(f, "PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV"),
             1000426001 => write!(f, "PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV"),
             1000427000 => write!(f, "PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV"),
@@ -8205,6 +8201,16 @@ impl fmt::Debug for StructureType {
             ),
             1000613000 => write!(f, "SET_PRESENT_CONFIG_NV"),
             1000613001 => write!(f, "PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV"),
+            1000425000 => write!(
+                f,
+                "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_EXT"
+            ),
+            1000425001 => write!(
+                f,
+                "PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_EXT"
+            ),
+            1000425002 => write!(f, "RENDER_PASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_EXT"),
+            1000619003 => write!(f, "RENDERING_END_INFO_EXT"),
             _ => self.0.fmt(f),
         }
     }

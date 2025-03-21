@@ -13246,40 +13246,40 @@ impl Default for PhysicalDeviceFragmentDensityMapFeaturesEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {
+pub struct PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub fragment_density_map_offset: Bool32,
 }
 
-impl Default for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {
+impl Default for PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM,
+            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_EXT,
             next: ptr::null_mut(),
             fragment_density_map_offset: Bool32::default(),
         }
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM.html>
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM {
+pub struct PhysicalDeviceFragmentDensityMapOffsetPropertiesEXT {
     pub s_type: StructureType,
     pub next: *mut c_void,
     pub fragment_density_offset_granularity: Extent2D,
 }
 
-impl Default for PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM {
+impl Default for PhysicalDeviceFragmentDensityMapOffsetPropertiesEXT {
     #[inline]
     fn default() -> Self {
         Self {
-            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM,
+            s_type: StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_EXT,
             next: ptr::null_mut(),
             fragment_density_offset_granularity: Extent2D::default(),
         }
@@ -16924,6 +16924,30 @@ impl Default for PhysicalDeviceShaderAtomicInt64Features {
             next: ptr::null_mut(),
             shader_buffer_int64_atomics: Bool32::default(),
             shader_shared_int64_atomics: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderBfloat16FeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderBfloat16FeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_b_float16_type: Bool32,
+    pub shader_b_float_16dot_product: Bool32,
+    pub shader_b_float16_cooperative_matrix: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderBfloat16FeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_BFLOAT16_FEATURES_KHR,
+            next: ptr::null_mut(),
+            shader_b_float16_type: Bool32::default(),
+            shader_b_float_16dot_product: Bool32::default(),
+            shader_b_float16_cooperative_matrix: Bool32::default(),
         }
     }
 }
@@ -21639,6 +21663,28 @@ impl Default for RenderPassFragmentDensityMapCreateInfoEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassFragmentDensityMapOffsetEndInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RenderPassFragmentDensityMapOffsetEndInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub fragment_density_offset_count: u32,
+    pub fragment_density_offsets: *const Offset2D,
+}
+
+impl Default for RenderPassFragmentDensityMapOffsetEndInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RENDER_PASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_EXT,
+            next: ptr::null(),
+            fragment_density_offset_count: u32::default(),
+            fragment_density_offsets: ptr::null(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderPassInputAttachmentAspectCreateInfo.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -21910,6 +21956,24 @@ impl Default for RenderingAttachmentLocationInfo {
             next: ptr::null(),
             color_attachment_count: u32::default(),
             color_attachment_locations: ptr::null(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingEndInfoEXT.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RenderingEndInfoEXT {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+}
+
+impl Default for RenderingEndInfoEXT {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::RENDERING_END_INFO_EXT,
+            next: ptr::null(),
         }
     }
 }
@@ -23448,28 +23512,6 @@ impl Default for SubpassEndInfo {
         Self {
             s_type: StructureType::SUBPASS_END_INFO,
             next: ptr::null(),
-        }
-    }
-}
-
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassFragmentDensityMapOffsetEndInfoQCOM.html>
-#[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct SubpassFragmentDensityMapOffsetEndInfoQCOM {
-    pub s_type: StructureType,
-    pub next: *const c_void,
-    pub fragment_density_offset_count: u32,
-    pub fragment_density_offsets: *const Offset2D,
-}
-
-impl Default for SubpassFragmentDensityMapOffsetEndInfoQCOM {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            s_type: StructureType::SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM,
-            next: ptr::null(),
-            fragment_density_offset_count: u32::default(),
-            fragment_density_offsets: ptr::null(),
         }
     }
 }
@@ -27403,6 +27445,12 @@ pub type PhysicalDeviceFeatures2KHR = PhysicalDeviceFeatures2;
 pub type PhysicalDeviceFloat16Int8FeaturesKHR = PhysicalDeviceShaderFloat16Int8Features;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFloatControlsPropertiesKHR.html>
 pub type PhysicalDeviceFloatControlsPropertiesKHR = PhysicalDeviceFloatControlsProperties;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM.html>
+pub type PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM =
+    PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM.html>
+pub type PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM =
+    PhysicalDeviceFragmentDensityMapOffsetPropertiesEXT;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV.html>
 pub type PhysicalDeviceFragmentShaderBarycentricFeaturesNV =
     PhysicalDeviceFragmentShaderBarycentricFeaturesKHR;
@@ -27666,6 +27714,8 @@ pub type SubpassDescription2KHR = SubpassDescription2;
 pub type SubpassDescriptionDepthStencilResolveKHR = SubpassDescriptionDepthStencilResolve;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassEndInfoKHR.html>
 pub type SubpassEndInfoKHR = SubpassEndInfo;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubpassFragmentDensityMapOffsetEndInfoQCOM.html>
+pub type SubpassFragmentDensityMapOffsetEndInfoQCOM = RenderPassFragmentDensityMapOffsetEndInfoEXT;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubresourceHostMemcpySizeEXT.html>
 pub type SubresourceHostMemcpySizeEXT = SubresourceHostMemcpySize;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubresourceLayout2EXT.html>

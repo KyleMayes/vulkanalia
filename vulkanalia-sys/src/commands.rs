@@ -946,6 +946,12 @@ pub type PFN_vkCmdEndRenderPass2KHR = PFN_vkCmdEndRenderPass2;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRendering.html>
 pub type PFN_vkCmdEndRendering = unsafe extern "system" fn(_command_buffer: CommandBuffer);
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRendering2EXT.html>
+pub type PFN_vkCmdEndRendering2EXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _rendering_end_info: *const RenderingEndInfoEXT,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRenderingKHR.html>
 pub type PFN_vkCmdEndRenderingKHR = PFN_vkCmdEndRendering;
 

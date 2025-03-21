@@ -8099,9 +8099,9 @@ unsafe impl OutputChainStruct for PhysicalDeviceFragmentDensityMapFeaturesEXT {
     }
 }
 
-unsafe impl InputChainStruct for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {
+unsafe impl InputChainStruct for PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT {
     const TYPE: StructureType =
-        StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM;
+        StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_EXT;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -8114,16 +8114,16 @@ unsafe impl InputChainStruct for PhysicalDeviceFragmentDensityMapOffsetFeaturesQ
     }
 }
 
-unsafe impl OutputChainStruct for PhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM {
+unsafe impl OutputChainStruct for PhysicalDeviceFragmentDensityMapOffsetFeaturesEXT {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
 
-unsafe impl InputChainStruct for PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM {
+unsafe impl InputChainStruct for PhysicalDeviceFragmentDensityMapOffsetPropertiesEXT {
     const TYPE: StructureType =
-        StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM;
+        StructureType::PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_EXT;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -8136,7 +8136,7 @@ unsafe impl InputChainStruct for PhysicalDeviceFragmentDensityMapOffsetPropertie
     }
 }
 
-unsafe impl OutputChainStruct for PhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM {
+unsafe impl OutputChainStruct for PhysicalDeviceFragmentDensityMapOffsetPropertiesEXT {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -11359,6 +11359,27 @@ unsafe impl OutputChainStruct for PhysicalDeviceShaderAtomicInt64Features {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceShaderBfloat16FeaturesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_BFLOAT16_FEATURES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderBfloat16FeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceShaderClockFeaturesKHR {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR;
 
@@ -14564,6 +14585,20 @@ unsafe impl InputChainStruct for RenderPassFragmentDensityMapCreateInfoEXT {
     }
 }
 
+unsafe impl InputChainStruct for RenderPassFragmentDensityMapOffsetEndInfoEXT {
+    const TYPE: StructureType = StructureType::RENDER_PASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_EXT;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for RenderPassInputAttachmentAspectCreateInfo {
     const TYPE: StructureType = StructureType::RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO;
 
@@ -14713,6 +14748,20 @@ unsafe impl InputChainStruct for RenderingAttachmentInfo {
 
 unsafe impl InputChainStruct for RenderingAttachmentLocationInfo {
     const TYPE: StructureType = StructureType::RENDERING_ATTACHMENT_LOCATION_INFO;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for RenderingEndInfoEXT {
+    const TYPE: StructureType = StructureType::RENDERING_END_INFO_EXT;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -15471,20 +15520,6 @@ unsafe impl InputChainStruct for SubpassDescriptionDepthStencilResolve {
 
 unsafe impl InputChainStruct for SubpassEndInfo {
     const TYPE: StructureType = StructureType::SUBPASS_END_INFO;
-
-    #[inline]
-    fn s_type(&self) -> StructureType {
-        self.s_type
-    }
-
-    #[inline]
-    fn next(&self) -> *const c_void {
-        self.next
-    }
-}
-
-unsafe impl InputChainStruct for SubpassFragmentDensityMapOffsetEndInfoQCOM {
-    const TYPE: StructureType = StructureType::SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM;
 
     #[inline]
     fn s_type(&self) -> StructureType {

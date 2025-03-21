@@ -164,6 +164,7 @@ pub struct DeviceCommands {
     pub cmd_end_render_pass2: PFN_vkCmdEndRenderPass2,
     pub cmd_end_render_pass2_khr: PFN_vkCmdEndRenderPass2KHR,
     pub cmd_end_rendering: PFN_vkCmdEndRendering,
+    pub cmd_end_rendering2_ext: PFN_vkCmdEndRendering2EXT,
     pub cmd_end_rendering_khr: PFN_vkCmdEndRenderingKHR,
     pub cmd_end_transform_feedback_ext: PFN_vkCmdEndTransformFeedbackEXT,
     pub cmd_end_video_coding_khr: PFN_vkCmdEndVideoCodingKHR,
@@ -2806,6 +2807,20 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) {
                         panic!("could not load vkCmdEndRendering")
+                    }
+                    fallback
+                }
+            },
+            cmd_end_rendering2_ext: {
+                let value = loader(b"vkCmdEndRendering2EXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _rendering_end_info: *const RenderingEndInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdEndRendering2EXT")
                     }
                     fallback
                 }
