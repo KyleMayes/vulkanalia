@@ -3,6 +3,10 @@
 ### Bindings Updates
 - [Add VUID for relaxed control barrier with storage class semantics (#2495)](https://github.com/KhronosGroup/Vulkan-Docs/commit/e21e798a5e106519cb50cd7f12aab6bf55a30b45)
 - [March 7, 2025 Vulkan 1.4.310 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ab5fa3690263718c4c4dc8f7110ba4a52528e063)
+- [add VkPushConstantRange link in VkPipelineLayoutCreateInfo (#2508)](https://github.com/KhronosGroup/Vulkan-Docs/commit/33c2f285d9100da435a9bc040dea42bddebd0b62)
+- [All _identically defined_ link to glossary-identically-defined (#2510)](https://github.com/KhronosGroup/Vulkan-Docs/commit/876240690b465fda5300929940f8d171133ce5e9)
+- [March 21, 2025 Vulkan 1.4.311 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/7719d5eb8eb1df49469cdf684c6b370d0ee56a34)
+- [April 4, 2025 Vulkan 1.4.312 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ec56ad8828af2b089de2fc7a64cf59c588d8c753)
 
 ## [0.28.0] - 2025-03-06
 

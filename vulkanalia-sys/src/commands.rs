@@ -194,6 +194,12 @@ pub type PFN_vkCmdBeginDebugUtilsLabelEXT = unsafe extern "system" fn(
     _label_info: *const DebugUtilsLabelEXT,
 );
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginPerTileExecutionQCOM.html>
+pub type PFN_vkCmdBeginPerTileExecutionQCOM = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _per_tile_begin_info: *const PerTileBeginInfoQCOM,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginQuery.html>
 pub type PFN_vkCmdBeginQuery = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -739,6 +745,9 @@ pub type PFN_vkCmdDispatchGraphIndirectCountAMDX = unsafe extern "system" fn(
 pub type PFN_vkCmdDispatchIndirect =
     unsafe extern "system" fn(_command_buffer: CommandBuffer, _buffer: Buffer, _offset: DeviceSize);
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDispatchTileQCOM.html>
+pub type PFN_vkCmdDispatchTileQCOM = unsafe extern "system" fn(_command_buffer: CommandBuffer);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDraw.html>
 pub type PFN_vkCmdDraw = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -919,6 +928,12 @@ pub type PFN_vkCmdEndConditionalRenderingEXT =
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndDebugUtilsLabelEXT.html>
 pub type PFN_vkCmdEndDebugUtilsLabelEXT = unsafe extern "system" fn(_command_buffer: CommandBuffer);
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndPerTileExecutionQCOM.html>
+pub type PFN_vkCmdEndPerTileExecutionQCOM = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _per_tile_end_info: *const PerTileEndInfoQCOM,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndQuery.html>
 pub type PFN_vkCmdEndQuery =
     unsafe extern "system" fn(_command_buffer: CommandBuffer, _query_pool: QueryPool, _query: u32);
@@ -945,6 +960,12 @@ pub type PFN_vkCmdEndRenderPass2KHR = PFN_vkCmdEndRenderPass2;
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRendering.html>
 pub type PFN_vkCmdEndRendering = unsafe extern "system" fn(_command_buffer: CommandBuffer);
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRendering2EXT.html>
+pub type PFN_vkCmdEndRendering2EXT = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _rendering_end_info: *const RenderingEndInfoEXT,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRenderingKHR.html>
 pub type PFN_vkCmdEndRenderingKHR = PFN_vkCmdEndRendering;
@@ -2175,6 +2196,14 @@ pub type PFN_vkCreateExecutionGraphPipelinesAMDX = unsafe extern "system" fn(
     _pipelines: *mut Pipeline,
 ) -> Result;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateExternalComputeQueueNV.html>
+pub type PFN_vkCreateExternalComputeQueueNV = unsafe extern "system" fn(
+    _device: Device,
+    _create_info: *const ExternalComputeQueueCreateInfoNV,
+    _allocator: *const AllocationCallbacks,
+    _external_queue: *mut ExternalComputeQueueNV,
+) -> Result;
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateFence.html>
 pub type PFN_vkCreateFence = unsafe extern "system" fn(
     _device: Device,
@@ -2687,6 +2716,13 @@ pub type PFN_vkDestroyDevice =
 pub type PFN_vkDestroyEvent = unsafe extern "system" fn(
     _device: Device,
     _event: Event,
+    _allocator: *const AllocationCallbacks,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkDestroyExternalComputeQueueNV.html>
+pub type PFN_vkDestroyExternalComputeQueueNV = unsafe extern "system" fn(
+    _device: Device,
+    _external_queue: ExternalComputeQueueNV,
     _allocator: *const AllocationCallbacks,
 );
 
@@ -3391,6 +3427,13 @@ pub type PFN_vkGetExecutionGraphPipelineScratchSizeAMDX = unsafe extern "system"
     _execution_graph: Pipeline,
     _size_info: *mut ExecutionGraphPipelineScratchSizeAMDX,
 ) -> Result;
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetExternalComputeQueueDataNV.html>
+pub type PFN_vkGetExternalComputeQueueDataNV = unsafe extern "system" fn(
+    _external_queue: ExternalComputeQueueNV,
+    _params: *mut ExternalComputeQueueDataParamsNV,
+    _data: *mut c_void,
+);
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetFenceFdKHR.html>
 pub type PFN_vkGetFenceFdKHR = unsafe extern "system" fn(

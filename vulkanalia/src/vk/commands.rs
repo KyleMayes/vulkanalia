@@ -50,6 +50,7 @@ pub struct DeviceCommands {
     pub build_acceleration_structures_khr: PFN_vkBuildAccelerationStructuresKHR,
     pub build_micromaps_ext: PFN_vkBuildMicromapsEXT,
     pub cmd_begin_conditional_rendering_ext: PFN_vkCmdBeginConditionalRenderingEXT,
+    pub cmd_begin_per_tile_execution_qcom: PFN_vkCmdBeginPerTileExecutionQCOM,
     pub cmd_begin_query: PFN_vkCmdBeginQuery,
     pub cmd_begin_query_indexed_ext: PFN_vkCmdBeginQueryIndexedEXT,
     pub cmd_begin_render_pass: PFN_vkCmdBeginRenderPass,
@@ -135,6 +136,7 @@ pub struct DeviceCommands {
     pub cmd_dispatch_graph_indirect_amdx: PFN_vkCmdDispatchGraphIndirectAMDX,
     pub cmd_dispatch_graph_indirect_count_amdx: PFN_vkCmdDispatchGraphIndirectCountAMDX,
     pub cmd_dispatch_indirect: PFN_vkCmdDispatchIndirect,
+    pub cmd_dispatch_tile_qcom: PFN_vkCmdDispatchTileQCOM,
     pub cmd_draw: PFN_vkCmdDraw,
     pub cmd_draw_cluster_huawei: PFN_vkCmdDrawClusterHUAWEI,
     pub cmd_draw_cluster_indirect_huawei: PFN_vkCmdDrawClusterIndirectHUAWEI,
@@ -158,12 +160,14 @@ pub struct DeviceCommands {
     pub cmd_draw_multi_indexed_ext: PFN_vkCmdDrawMultiIndexedEXT,
     pub cmd_encode_video_khr: PFN_vkCmdEncodeVideoKHR,
     pub cmd_end_conditional_rendering_ext: PFN_vkCmdEndConditionalRenderingEXT,
+    pub cmd_end_per_tile_execution_qcom: PFN_vkCmdEndPerTileExecutionQCOM,
     pub cmd_end_query: PFN_vkCmdEndQuery,
     pub cmd_end_query_indexed_ext: PFN_vkCmdEndQueryIndexedEXT,
     pub cmd_end_render_pass: PFN_vkCmdEndRenderPass,
     pub cmd_end_render_pass2: PFN_vkCmdEndRenderPass2,
     pub cmd_end_render_pass2_khr: PFN_vkCmdEndRenderPass2KHR,
     pub cmd_end_rendering: PFN_vkCmdEndRendering,
+    pub cmd_end_rendering2_ext: PFN_vkCmdEndRendering2EXT,
     pub cmd_end_rendering_khr: PFN_vkCmdEndRenderingKHR,
     pub cmd_end_transform_feedback_ext: PFN_vkCmdEndTransformFeedbackEXT,
     pub cmd_end_video_coding_khr: PFN_vkCmdEndVideoCodingKHR,
@@ -360,6 +364,7 @@ pub struct DeviceCommands {
     pub create_descriptor_update_template_khr: PFN_vkCreateDescriptorUpdateTemplateKHR,
     pub create_event: PFN_vkCreateEvent,
     pub create_execution_graph_pipelines_amdx: PFN_vkCreateExecutionGraphPipelinesAMDX,
+    pub create_external_compute_queue_nv: PFN_vkCreateExternalComputeQueueNV,
     pub create_fence: PFN_vkCreateFence,
     pub create_framebuffer: PFN_vkCreateFramebuffer,
     pub create_graphics_pipelines: PFN_vkCreateGraphicsPipelines,
@@ -413,6 +418,7 @@ pub struct DeviceCommands {
     pub destroy_descriptor_update_template_khr: PFN_vkDestroyDescriptorUpdateTemplateKHR,
     pub destroy_device: PFN_vkDestroyDevice,
     pub destroy_event: PFN_vkDestroyEvent,
+    pub destroy_external_compute_queue_nv: PFN_vkDestroyExternalComputeQueueNV,
     pub destroy_fence: PFN_vkDestroyFence,
     pub destroy_framebuffer: PFN_vkDestroyFramebuffer,
     pub destroy_image: PFN_vkDestroyImage,
@@ -518,6 +524,7 @@ pub struct DeviceCommands {
     pub get_execution_graph_pipeline_node_index_amdx: PFN_vkGetExecutionGraphPipelineNodeIndexAMDX,
     pub get_execution_graph_pipeline_scratch_size_amdx:
         PFN_vkGetExecutionGraphPipelineScratchSizeAMDX,
+    pub get_external_compute_queue_data_nv: PFN_vkGetExternalComputeQueueDataNV,
     pub get_fence_fd_khr: PFN_vkGetFenceFdKHR,
     pub get_fence_sci_sync_fence_nv: PFN_vkGetFenceSciSyncFenceNV,
     pub get_fence_sci_sync_obj_nv: PFN_vkGetFenceSciSyncObjNV,
@@ -1073,6 +1080,20 @@ impl DeviceCommands {
                         _conditional_rendering_begin: *const ConditionalRenderingBeginInfoEXT,
                     ) {
                         panic!("could not load vkCmdBeginConditionalRenderingEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_begin_per_tile_execution_qcom: {
+                let value = loader(b"vkCmdBeginPerTileExecutionQCOM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _per_tile_begin_info: *const PerTileBeginInfoQCOM,
+                    ) {
+                        panic!("could not load vkCmdBeginPerTileExecutionQCOM")
                     }
                     fallback
                 }
@@ -2331,6 +2352,17 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_dispatch_tile_qcom: {
+                let value = loader(b"vkCmdDispatchTileQCOM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) {
+                        panic!("could not load vkCmdDispatchTileQCOM")
+                    }
+                    fallback
+                }
+            },
             cmd_draw: {
                 let value = loader(b"vkCmdDraw\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2729,6 +2761,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_end_per_tile_execution_qcom: {
+                let value = loader(b"vkCmdEndPerTileExecutionQCOM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _per_tile_end_info: *const PerTileEndInfoQCOM,
+                    ) {
+                        panic!("could not load vkCmdEndPerTileExecutionQCOM")
+                    }
+                    fallback
+                }
+            },
             cmd_end_query: {
                 let value = loader(b"vkCmdEndQuery\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2806,6 +2852,20 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) {
                         panic!("could not load vkCmdEndRendering")
+                    }
+                    fallback
+                }
+            },
+            cmd_end_rendering2_ext: {
+                let value = loader(b"vkCmdEndRendering2EXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _rendering_end_info: *const RenderingEndInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdEndRendering2EXT")
                     }
                     fallback
                 }
@@ -5727,6 +5787,22 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            create_external_compute_queue_nv: {
+                let value = loader(b"vkCreateExternalComputeQueueNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const ExternalComputeQueueCreateInfoNV,
+                        _allocator: *const AllocationCallbacks,
+                        _external_queue: *mut ExternalComputeQueueNV,
+                    ) -> Result {
+                        panic!("could not load vkCreateExternalComputeQueueNV")
+                    }
+                    fallback
+                }
+            },
             create_fence: {
                 let value = loader(b"vkCreateFence\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -6556,6 +6632,21 @@ impl DeviceCommands {
                         _allocator: *const AllocationCallbacks,
                     ) {
                         panic!("could not load vkDestroyEvent")
+                    }
+                    fallback
+                }
+            },
+            destroy_external_compute_queue_nv: {
+                let value = loader(b"vkDestroyExternalComputeQueueNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _external_queue: ExternalComputeQueueNV,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyExternalComputeQueueNV")
                     }
                     fallback
                 }
@@ -8015,6 +8106,21 @@ impl DeviceCommands {
                         _size_info: *mut ExecutionGraphPipelineScratchSizeAMDX,
                     ) -> Result {
                         panic!("could not load vkGetExecutionGraphPipelineScratchSizeAMDX")
+                    }
+                    fallback
+                }
+            },
+            get_external_compute_queue_data_nv: {
+                let value = loader(b"vkGetExternalComputeQueueDataNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _external_queue: ExternalComputeQueueNV,
+                        _params: *mut ExternalComputeQueueDataParamsNV,
+                        _data: *mut c_void,
+                    ) {
+                        panic!("could not load vkGetExternalComputeQueueDataNV")
                     }
                     fallback
                 }

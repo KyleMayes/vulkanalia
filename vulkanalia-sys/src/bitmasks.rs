@@ -132,6 +132,8 @@ bitflags! {
         const OPTICAL_FLOW_WRITE_NV = 1 << 43;
         const MICROMAP_READ_EXT = 1 << 44;
         const MICROMAP_WRITE_EXT = 1 << 45;
+        const SHADER_TILE_ATTACHMENT_READ_QCOM = 1 << 51;
+        const SHADER_TILE_ATTACHMENT_WRITE_QCOM = 1 << 52;
     }
 }
 
@@ -1056,7 +1058,7 @@ bitflags! {
         const SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_EXT = 1 << 12;
         const CORNER_SAMPLED_NV = 1 << 13;
         const SUBSAMPLED_EXT = 1 << 14;
-        const FRAGMENT_DENSITY_MAP_OFFSET_QCOM = 1 << 15;
+        const FRAGMENT_DENSITY_MAP_OFFSET_EXT = 1 << 15;
         const DESCRIPTOR_BUFFER_CAPTURE_REPLAY_EXT = 1 << 16;
         const _2D_VIEW_COMPATIBLE_EXT = 1 << 17;
         const MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXT = 1 << 18;
@@ -2024,6 +2026,7 @@ bitflags! {
         const RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_EXT = 1 << 5;
         const RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_EXT = 1 << 6;
         const ENABLE_LEGACY_DITHERING_EXT = 1 << 7;
+        const TILE_SHADING_APRON_QCOM = 1 << 8;
     }
 }
 
@@ -2062,6 +2065,16 @@ bitflags! {
         const PROTECTED = 1 << 1;
         const MUTABLE_FORMAT = 1 << 2;
         const DEFERRED_MEMORY_ALLOCATION_EXT = 1 << 3;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTileShadingRenderPassFlagsQCOM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct TileShadingRenderPassFlagsQCOM: Flags {
+        const ENABLE = 1;
+        const PER_TILE_EXECUTION = 1 << 1;
     }
 }
 
