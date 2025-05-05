@@ -1057,6 +1057,50 @@ impl fmt::Debug for Event {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalComputeQueueNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct ExternalComputeQueueNV(usize);
+
+impl Handle for ExternalComputeQueueNV {
+    type Repr = usize;
+
+    const TYPE: ObjectType = ObjectType::EXTERNAL_COMPUTE_QUEUE_NV;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for ExternalComputeQueueNV {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for ExternalComputeQueueNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "ExternalComputeQueueNV({:p})", self.0 as *const u8)
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkFence.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]

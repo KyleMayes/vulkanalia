@@ -2848,6 +2848,28 @@ pub trait ExtFragmentDensityMap2Extension: DeviceV1_0 {
 
 impl ExtFragmentDensityMap2Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_density_map_offset.html>
+pub trait ExtFragmentDensityMapOffsetExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRendering2EXT.html>
+    #[inline]
+    unsafe fn cmd_end_rendering2_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        rendering_end_info: Option<&RenderingEndInfoEXT>,
+    ) {
+        let __result = (self.commands().cmd_end_rendering2_ext)(
+            command_buffer,
+            rendering_end_info.map_or(ptr::null(), |v| v),
+        );
+    }
+}
+
+impl ExtFragmentDensityMapOffsetExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_shader_interlock.html>
 pub trait ExtFragmentShaderInterlockExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -9682,6 +9704,15 @@ pub trait KhrRelaxedBlockLayoutExtension: DeviceV1_0 {
 
 impl KhrRelaxedBlockLayoutExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_robustness2.html>
+pub trait KhrRobustness2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_ROBUSTNESS2_EXTENSION;
+}
+
+impl KhrRobustness2Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_sampler_mirror_clamp_to_edge.html>
 pub trait KhrSamplerMirrorClampToEdgeExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -9754,6 +9785,15 @@ pub trait KhrShaderAtomicInt64Extension: DeviceV1_0 {
 }
 
 impl KhrShaderAtomicInt64Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_bfloat16.html>
+pub trait KhrShaderBfloat16Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_SHADER_BFLOAT16_EXTENSION;
+}
+
+impl KhrShaderBfloat16Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_clock.html>
 pub trait KhrShaderClockExtension: DeviceV1_0 {
@@ -12230,6 +12270,7 @@ impl NvDeviceGeneratedCommandsComputeExtension for crate::Device {}
 /// Provisional extensions are not guaranteed to be backwards compatible and are
 /// not intended to be used in production applications.
 #[cfg(feature = "provisional")]
+#[deprecated(note = "deprecated in favor of `VK_NV_cluster_acceleration_structure`")]
 pub trait NvDisplacementMicromapExtension: DeviceV1_0 {
     /// The metadata for this extension.
     #[allow(deprecated)]
@@ -12237,6 +12278,7 @@ pub trait NvDisplacementMicromapExtension: DeviceV1_0 {
 }
 
 #[cfg(feature = "provisional")]
+#[allow(deprecated)]
 impl NvDisplacementMicromapExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_display_stereo.html>
@@ -12256,6 +12298,70 @@ pub trait NvExtendedSparseAddressSpaceExtension: DeviceV1_0 {
 }
 
 impl NvExtendedSparseAddressSpaceExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_compute_queue.html>
+pub trait NvExternalComputeQueueExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_EXTERNAL_COMPUTE_QUEUE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateExternalComputeQueueNV.html>
+    #[inline]
+    unsafe fn create_external_compute_queue_nv(
+        &self,
+        create_info: &ExternalComputeQueueCreateInfoNV,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<ExternalComputeQueueNV> {
+        let mut external_queue = MaybeUninit::<ExternalComputeQueueNV>::uninit();
+
+        let __result = (self.commands().create_external_compute_queue_nv)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            external_queue.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(external_queue.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkDestroyExternalComputeQueueNV.html>
+    #[inline]
+    unsafe fn destroy_external_compute_queue_nv(
+        &self,
+        external_queue: ExternalComputeQueueNV,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_external_compute_queue_nv)(
+            self.handle(),
+            external_queue,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetExternalComputeQueueDataNV.html>
+    #[inline]
+    unsafe fn get_external_compute_queue_data_nv(
+        &self,
+        external_queue: ExternalComputeQueueNV,
+        params: &mut ExternalComputeQueueDataParamsNV,
+    ) -> c_void {
+        let mut data = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self.commands().get_external_compute_queue_data_nv)(
+            external_queue,
+            params,
+            data.as_mut_ptr(),
+        );
+
+        data.assume_init()
+    }
+}
+
+impl NvExternalComputeQueueExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_memory.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory`")]
@@ -13830,6 +13936,28 @@ pub trait QcomRotatedCopyCommandsExtension: DeviceV1_0 {
 
 impl QcomRotatedCopyCommandsExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_memory_heap.html>
+pub trait QcomTileMemoryHeapExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_TILE_MEMORY_HEAP_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindTileMemoryQCOM.html>
+    #[inline]
+    unsafe fn cmd_bind_tile_memory_qcom(
+        &self,
+        command_buffer: CommandBuffer,
+        tile_memory_bind_info: Option<&TileMemoryBindInfoQCOM>,
+    ) {
+        let __result = (self.commands().cmd_bind_tile_memory_qcom)(
+            command_buffer,
+            tile_memory_bind_info.map_or(ptr::null(), |v| v),
+        );
+    }
+}
+
+impl QcomTileMemoryHeapExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_properties.html>
 pub trait QcomTilePropertiesExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -13892,6 +14020,45 @@ pub trait QcomTilePropertiesExtension: DeviceV1_0 {
 }
 
 impl QcomTilePropertiesExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_shading.html>
+pub trait QcomTileShadingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_TILE_SHADING_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginPerTileExecutionQCOM.html>
+    #[inline]
+    unsafe fn cmd_begin_per_tile_execution_qcom(
+        &self,
+        command_buffer: CommandBuffer,
+        per_tile_begin_info: &PerTileBeginInfoQCOM,
+    ) {
+        let __result = (self.commands().cmd_begin_per_tile_execution_qcom)(
+            command_buffer,
+            per_tile_begin_info,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDispatchTileQCOM.html>
+    #[inline]
+    unsafe fn cmd_dispatch_tile_qcom(&self, command_buffer: CommandBuffer) {
+        let __result = (self.commands().cmd_dispatch_tile_qcom)(command_buffer);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndPerTileExecutionQCOM.html>
+    #[inline]
+    unsafe fn cmd_end_per_tile_execution_qcom(
+        &self,
+        command_buffer: CommandBuffer,
+        per_tile_end_info: &PerTileEndInfoQCOM,
+    ) {
+        let __result =
+            (self.commands().cmd_end_per_tile_execution_qcom)(command_buffer, per_tile_end_info);
+    }
+}
+
+impl QcomTileShadingExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_ycbcr_degamma.html>
 pub trait QcomYcbcrDegammaExtension: DeviceV1_0 {

@@ -1316,6 +1316,22 @@ pub const EXT_FRAGMENT_DENSITY_MAP2_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_density_map_offset.html>
+#[allow(deprecated)]
+pub const EXT_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_EXT_fragment_density_map_offset"),
+    number: 620,
+    type_: "device",
+    author: "EXT",
+    contact: "Connor Abbott @cwabbott0",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_shader_interlock.html>
 #[allow(deprecated)]
 pub const EXT_FRAGMENT_SHADER_INTERLOCK_EXTENSION: Extension = Extension {
@@ -2193,7 +2209,7 @@ pub const EXT_ROBUSTNESS2_EXTENSION: Extension = Extension {
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
-    promoted_to: None,
+    promoted_to: Some("VK_KHR_robustness2"),
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_sample_locations.html>
@@ -4257,6 +4273,22 @@ pub const KHR_RELAXED_BLOCK_LAYOUT_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_1"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_robustness2.html>
+#[allow(deprecated)]
+pub const KHR_ROBUSTNESS2_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_robustness2"),
+    number: 613,
+    type_: "device",
+    author: "KHR",
+    contact: "Piers Daniell @pdaniell-nv",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_sampler_mirror_clamp_to_edge.html>
 #[allow(deprecated)]
 pub const KHR_SAMPLER_MIRROR_CLAMP_TO_EDGE_EXTENSION: Extension = Extension {
@@ -4319,6 +4351,22 @@ pub const KHR_SHADER_ATOMIC_INT64_EXTENSION: Extension = Extension {
     deprecated_by: None,
     obsoleted_by: None,
     promoted_to: Some("VK_VERSION_1_2"),
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_bfloat16.html>
+#[allow(deprecated)]
+pub const KHR_SHADER_BFLOAT16_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_shader_bfloat16"),
+    number: 142,
+    type_: "device",
+    author: "KHR",
+    contact: "Tobias Hector @tobski",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_clock.html>
@@ -5541,6 +5589,7 @@ pub const NV_DEVICE_GENERATED_COMMANDS_COMPUTE_EXTENSION: Extension = Extension 
 /// Provisional extensions are not guaranteed to be backwards compatible and are
 /// not intended to be used in production applications.
 #[cfg(feature = "provisional")]
+#[deprecated(note = "deprecated in favor of `VK_NV_cluster_acceleration_structure`")]
 #[allow(deprecated)]
 pub const NV_DISPLACEMENT_MICROMAP_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_NV_displacement_micromap"),
@@ -5551,7 +5600,7 @@ pub const NV_DISPLACEMENT_MICROMAP_EXTENSION: Extension = Extension {
     platform: Some("provisional"),
     required_extensions: None,
     required_version: None,
-    deprecated_by: None,
+    deprecated_by: Some("VK_NV_cluster_acceleration_structure"),
     obsoleted_by: None,
     promoted_to: None,
 };
@@ -5580,6 +5629,22 @@ pub const NV_EXTENDED_SPARSE_ADDRESS_SPACE_EXTENSION: Extension = Extension {
     type_: "device",
     author: "NV",
     contact: "Russell Chou @russellcnv",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_compute_queue.html>
+#[allow(deprecated)]
+pub const NV_EXTERNAL_COMPUTE_QUEUE_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_NV_external_compute_queue"),
+    number: 557,
+    type_: "device",
+    author: "NV",
+    contact: "Chris Lentini @clentini",
     platform: None,
     required_extensions: None,
     required_version: None,
@@ -6335,7 +6400,7 @@ pub const QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION: Extension = Extension {
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
-    promoted_to: None,
+    promoted_to: Some("VK_EXT_fragment_density_map_offset"),
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_image_processing.html>
@@ -6466,11 +6531,43 @@ pub const QCOM_ROTATED_COPY_COMMANDS_EXTENSION: Extension = Extension {
     promoted_to: None,
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_memory_heap.html>
+#[allow(deprecated)]
+pub const QCOM_TILE_MEMORY_HEAP_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_QCOM_tile_memory_heap"),
+    number: 548,
+    type_: "device",
+    author: "QCOM",
+    contact: "Patrick Boyle @pboyleQCOM",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_properties.html>
 #[allow(deprecated)]
 pub const QCOM_TILE_PROPERTIES_EXTENSION: Extension = Extension {
     name: ExtensionName::from_bytes(b"VK_QCOM_tile_properties"),
     number: 485,
+    type_: "device",
+    author: "QCOM",
+    contact: "Matthew Netsch @mnetsch",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_shading.html>
+#[allow(deprecated)]
+pub const QCOM_TILE_SHADING_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_QCOM_tile_shading"),
+    number: 310,
     type_: "device",
     author: "QCOM",
     contact: "Matthew Netsch @mnetsch",
