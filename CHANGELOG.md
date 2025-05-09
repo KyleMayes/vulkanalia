@@ -3,6 +3,17 @@
 ### Bindings Updates
 - [Add VUID for relaxed control barrier with storage class semantics (#2495)](https://github.com/KhronosGroup/Vulkan-Docs/commit/e21e798a5e106519cb50cd7f12aab6bf55a30b45)
 - [March 7, 2025 Vulkan 1.4.310 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ab5fa3690263718c4c4dc8f7110ba4a52528e063)
+- [add VkPushConstantRange link in VkPipelineLayoutCreateInfo (#2508)](https://github.com/KhronosGroup/Vulkan-Docs/commit/33c2f285d9100da435a9bc040dea42bddebd0b62)
+- [All _identically defined_ link to glossary-identically-defined (#2510)](https://github.com/KhronosGroup/Vulkan-Docs/commit/876240690b465fda5300929940f8d171133ce5e9)
+- [March 21, 2025 Vulkan 1.4.311 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/7719d5eb8eb1df49469cdf684c6b370d0ee56a34)
+- [April 4, 2025 Vulkan 1.4.312 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/ec56ad8828af2b089de2fc7a64cf59c588d8c753)
+- [Fix "If If" in Texel Replacement section (#2521)](https://github.com/KhronosGroup/Vulkan-Docs/commit/1049a264d1067cb3f9f0f05aebf1464c347b750b)
+- [April 18, 2025 Vulkan 1.4.313 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/19b765119a9ddef1034e95442f82f94235167f36)
+- [Match pname with vk.xml. (#2527)](https://github.com/KhronosGroup/Vulkan-Docs/commit/50f4a2392e2dd6c64565b55079c1a8f5b922c7c0)
+- [Fix member names. (#2526)](https://github.com/KhronosGroup/Vulkan-Docs/commit/b56aa5eff855d7e738cde5786b32e587a7742a3f)
+- [May 2, 2025 Vulkan 1.4.314 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/86c8fd72055a859f08fff20182ef758089dd180a)
+- [Rework and expand docs site landing page (#2524)](https://github.com/KhronosGroup/Vulkan-Docs/commit/d37aee96ac460fb46c26227be8832eb7fd9fa0fb)
+- [May 9, 2025 Vulkan 1.4.315 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/112aee75d162412a4623e7d22a3de52e0233cbf5)
 
 ## [0.28.0] - 2025-03-06
 
