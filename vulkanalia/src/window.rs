@@ -57,6 +57,12 @@ pub fn get_required_instance_extensions(
             &vk::KHR_SURFACE_EXTENSION.name,
             &vk::KHR_WIN32_SURFACE_EXTENSION.name,
         ],
+        // Android
+        #[cfg(target_os = "android")]
+        Ok(RawWindowHandle::AndroidNdk(_window)) => &[
+            &vk::KHR_SURFACE_EXTENSION.name,
+            &vk::KHR_ANDROID_SURFACE_EXTENSION.name,
+        ],
         // Unsupported (currently)
         _ => unimplemented!(),
     }
@@ -182,6 +188,18 @@ pub unsafe fn create_surface(
                 .hwnd(hwnd_ptr);
 
             instance.create_win32_surface_khr(&info, None)
+        }
+        // Android
+        #[cfg(target_os = "android")]
+        (Ok(RawDisplayHandle::Android(_)), Ok(RawWindowHandle::AndroidNdk(window))) => {
+            use vk::KhrAndroidSurfaceExtension;
+
+            // let flags : AndroidSurfaceCreateFlagsKHR::default(); // reserved for future use
+            let info = vk::AndroidSurfaceCreateInfoKHR::builder()
+                // .flags(flags)
+                .window(window.a_native_window.cast().as_mut());
+
+            instance.create_android_surface_khr(&info, None)
         }
         // Unsupported (currently)
         _ => unimplemented!(),
