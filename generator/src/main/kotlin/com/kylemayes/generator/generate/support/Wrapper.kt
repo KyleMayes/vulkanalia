@@ -133,10 +133,18 @@ fun Registry.generateCommandWrapper(command: Command): String {
                     postActualStmts.add("${slice.name}.set_len($length as usize);")
                 } else {
                     // Input slice parameter.
+
+                    val conv =
+                        if (pointer.const) {
+                            ".as_ptr()"
+                        } else {
+                            ".as_mut_ptr()"
+                        }
+
                     val (item, cast) = generateInputSliceTypeAndCast(pointer)
                     params.add("${slice.name}: ${"[$item]".generateRef(pointer.const)}")
                     if (index == 0) addArgument("${slice.name}.len() as ${current.type.generate()}")
-                    addArgument("${slice.name}.as_ptr()$cast")
+                    addArgument("${slice.name}$conv$cast")
                 }
             }
         } else if (current.len?.value == "null-terminated") {
