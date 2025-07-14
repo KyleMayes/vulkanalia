@@ -5,7 +5,7 @@ edition = "2021"
 name = "vulkanalia-vma"
 authors = ["Kyle Mayes <kyle@mayeses.com>"]
 
-version = "0.2.0"
+version = "0.3.0"
 
 readme = "README.md"
 license = "Apache-2.0"

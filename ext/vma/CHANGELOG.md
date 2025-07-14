@@ -1,3 +1,8 @@
+## [0.3.0] - 2025-07-14
+
+### Changed
+- Bumped `vulkanalia` version to `0.29`
+
 ## [0.2.0] - 2024-09-07
 
 ### Changed
