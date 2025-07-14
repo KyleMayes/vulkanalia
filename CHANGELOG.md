@@ -1,6 +1,7 @@
 ## [0.29.0] - UNRELEASED
 
 ### Added
+- Added support for Android windowing
 - Added `vulkanalia::prelude::v1_4` module (a prelude module for Vulkan 1.4+)
 
 ### Bindings Updates
