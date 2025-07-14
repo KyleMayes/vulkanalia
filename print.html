@@ -1802,7 +1802,8 @@ pause
 </code></pre>
 <p>We can then construct a <a href="https://docs.rs/vulkanalia/0.28.0/vulkanalia/vk/struct.ShaderModuleCreateInfo.html"><code class="hljs">vk::ShaderModuleCreateInfo</code></a> and use it to call <a href="https://docs.rs/vulkanalia/0.28.0/vulkanalia/vk/trait.DeviceV1_0.html#method.create_shader_module"><code class="hljs">create_shader_module</code></a> to create the shader module:</p>
 <pre><code class="language-rust noplaypen">let info = vk::ShaderModuleCreateInfo::builder()
-    .code(bytecode.code());
+    .code(bytecode.code())
+    .code_size(bytecode.code_size());
 
 Ok(device.create_shader_module(&amp;info, None)?)
 </code></pre>
