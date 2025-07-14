@@ -132,6 +132,10 @@ bitflags! {
         const OPTICAL_FLOW_WRITE_NV = 1 << 43;
         const MICROMAP_READ_EXT = 1 << 44;
         const MICROMAP_WRITE_EXT = 1 << 45;
+        const DATA_GRAPH_READ_ARM = 1 << 47;
+        const DATA_GRAPH_WRITE_ARM = 1 << 48;
+        const SHADER_TILE_ATTACHMENT_READ_QCOM = 1 << 51;
+        const SHADER_TILE_ATTACHMENT_WRITE_QCOM = 1 << 52;
     }
 }
 
@@ -213,6 +217,7 @@ bitflags! {
         const MICROMAP_STORAGE_EXT = 1 << 24;
         const EXECUTION_GRAPH_SCRATCH_AMDX = 1 << 25;
         const PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_EXT = 1 << 26;
+        const TILE_MEMORY_QCOM = 1 << 27;
     }
 }
 
@@ -247,6 +252,8 @@ bitflags! {
         const MICROMAP_STORAGE_EXT = 1 << 24;
         const EXECUTION_GRAPH_SCRATCH_AMDX = 1 << 25;
         const PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_EXT = 1 << 26;
+        const TILE_MEMORY_QCOM = 1 << 27;
+        const DATA_GRAPH_FOREIGN_DESCRIPTOR_ARM = 1 << 29;
         const PREPROCESS_BUFFER_EXT = 1 << 31;
     }
 }
@@ -293,6 +300,7 @@ bitflags! {
     #[repr(transparent)]
     #[derive(Default)]
     pub struct ClusterAccelerationStructureAddressResolutionFlagsNV: Flags {
+        const NONE = 0;
         const INDIRECTED_DST_IMPLICIT_DATA = 1;
         const INDIRECTED_SCRATCH_DATA = 1 << 1;
         const INDIRECTED_DST_ADDRESS_ARRAY = 1 << 2;
@@ -426,6 +434,22 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineDispatchFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct DataGraphPipelineDispatchFlagsARM: Flags { }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineSessionCreateFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct DataGraphPipelineSessionCreateFlagsARM: Flags {
+        const PROTECTED = 1;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugReportFlagsEXT.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -486,6 +510,7 @@ bitflags! {
         const DEVICE_GROUP = 1 << 2;
         const FEEDBACK_LOOP_EXT = 1 << 3;
         const QUEUE_FAMILY_OWNERSHIP_TRANSFER_USE_ALL_STAGES_KHR = 1 << 5;
+        const ASYMMETRIC_EVENT_KHR = 1 << 6;
     }
 }
 
@@ -872,10 +897,13 @@ bitflags! {
         const BLOCK_MATCHING_QCOM = 1 << 36;
         const BOX_FILTER_SAMPLED_QCOM = 1 << 37;
         const LINEAR_COLOR_ATTACHMENT_NV = 1 << 38;
+        const TENSOR_SHADER_ARM = 1 << 39;
         const OPTICAL_FLOW_IMAGE_NV = 1 << 40;
         const OPTICAL_FLOW_VECTOR_NV = 1 << 41;
         const OPTICAL_FLOW_COST_NV = 1 << 42;
+        const TENSOR_IMAGE_ALIASING_ARM = 1 << 43;
         const HOST_IMAGE_TRANSFER = 1 << 46;
+        const TENSOR_DATA_GRAPH_ARM = 1 << 48;
         const VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_KHR = 1 << 49;
         const VIDEO_ENCODE_EMPHASIS_MAP_KHR = 1 << 50;
         const ACCELERATION_STRUCTURE_RADIUS_BUFFER_NV = 1 << 51;
@@ -1056,7 +1084,7 @@ bitflags! {
         const SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_EXT = 1 << 12;
         const CORNER_SAMPLED_NV = 1 << 13;
         const SUBSAMPLED_EXT = 1 << 14;
-        const FRAGMENT_DENSITY_MAP_OFFSET_QCOM = 1 << 15;
+        const FRAGMENT_DENSITY_MAP_OFFSET_EXT = 1 << 15;
         const DESCRIPTOR_BUFFER_CAPTURE_REPLAY_EXT = 1 << 16;
         const _2D_VIEW_COMPATIBLE_EXT = 1 << 17;
         const MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXT = 1 << 18;
@@ -1104,8 +1132,10 @@ bitflags! {
         const SAMPLE_WEIGHT_QCOM = 1 << 20;
         const SAMPLE_BLOCK_MATCH_QCOM = 1 << 21;
         const HOST_TRANSFER = 1 << 22;
+        const TENSOR_ALIASING_ARM = 1 << 23;
         const VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_KHR = 1 << 25;
         const VIDEO_ENCODE_EMPHASIS_MAP_KHR = 1 << 26;
+        const TILE_MEMORY_QCOM = 1 << 27;
     }
 }
 
@@ -1184,6 +1214,7 @@ bitflags! {
         const DEVICE_MASK = 1;
         const DEVICE_ADDRESS = 1 << 1;
         const DEVICE_ADDRESS_CAPTURE_REPLAY = 1 << 2;
+        const ZERO_INITIALIZE_EXT = 1 << 3;
     }
 }
 
@@ -1203,6 +1234,7 @@ bitflags! {
     pub struct MemoryHeapFlags: Flags {
         const DEVICE_LOCAL = 1;
         const MULTI_INSTANCE = 1 << 1;
+        const TILE_MEMORY_QCOM = 1 << 3;
     }
 }
 
@@ -1478,6 +1510,7 @@ bitflags! {
         const ENABLE_LEGACY_DITHERING_EXT = 1 << 34;
         const DISALLOW_OPACITY_MICROMAP_ARM = 1 << 37;
         const INDIRECT_BINDABLE_EXT = 1 << 38;
+        const PER_LAYER_FRAGMENT_DENSITY_VALVE = 1 << 40;
     }
 }
 
@@ -1658,6 +1691,7 @@ bitflags! {
         const SUBPASS_SHADER_HUAWEI = 1 << 39;
         const INVOCATION_MASK_HUAWEI = 1 << 40;
         const CLUSTER_CULLING_SHADER_HUAWEI = 1 << 41;
+        const DATA_GRAPH_ARM = 1 << 42;
         const CONVERT_COOPERATIVE_VECTOR_MATRIX_NV = 1 << 44;
     }
 }
@@ -1691,10 +1725,10 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentGravityFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentGravityFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PresentGravityFlagsEXT: Flags {
+    pub struct PresentGravityFlagsKHR: Flags {
         const MIN = 1;
         const MAX = 1 << 1;
         const CENTERED = 1 << 2;
@@ -1702,10 +1736,10 @@ bitflags! {
 }
 
 bitflags! {
-    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentScalingFlagsEXT.html>
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentScalingFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct PresentScalingFlagsEXT: Flags {
+    pub struct PresentScalingFlagsKHR: Flags {
         const ONE_TO_ONE = 1;
         const ASPECT_RATIO_STRETCH = 1 << 1;
         const STRETCH = 1 << 2;
@@ -1754,7 +1788,9 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkQueryPoolCreateFlags.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct QueryPoolCreateFlags: Flags { }
+    pub struct QueryPoolCreateFlags: Flags {
+        const RESET_KHR = 1;
+    }
 }
 
 bitflags! {
@@ -1783,6 +1819,7 @@ bitflags! {
         const VIDEO_DECODE_KHR = 1 << 5;
         const VIDEO_ENCODE_KHR = 1 << 6;
         const OPTICAL_FLOW_NV = 1 << 8;
+        const DATA_GRAPH_ARM = 1 << 10;
     }
 }
 
@@ -1799,6 +1836,7 @@ bitflags! {
     #[derive(Default)]
     pub struct RenderPassCreateFlags: Flags {
         const TRANSFORM_QCOM = 1 << 1;
+        const PER_LAYER_FRAGMENT_DENSITY_VALVE = 1 << 2;
     }
 }
 
@@ -1812,6 +1850,7 @@ bitflags! {
         const RESUMING = 1 << 2;
         const ENABLE_LEGACY_DITHERING_EXT = 1 << 3;
         const CONTENTS_INLINE_KHR = 1 << 4;
+        const PER_LAYER_FRAGMENT_DENSITY_VALVE = 1 << 5;
     }
 }
 
@@ -2024,6 +2063,7 @@ bitflags! {
         const RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_EXT = 1 << 5;
         const RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_EXT = 1 << 6;
         const ENABLE_LEGACY_DITHERING_EXT = 1 << 7;
+        const TILE_SHADING_APRON_QCOM = 1 << 8;
     }
 }
 
@@ -2034,6 +2074,13 @@ bitflags! {
     pub struct SurfaceCounterFlagsEXT: Flags {
         const VBLANK = 1;
     }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCreateFlagsOHOS.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct SurfaceCreateFlagsOHOS: Flags { }
 }
 
 bitflags! {
@@ -2061,7 +2108,52 @@ bitflags! {
         const SPLIT_INSTANCE_BIND_REGIONS = 1;
         const PROTECTED = 1 << 1;
         const MUTABLE_FORMAT = 1 << 2;
-        const DEFERRED_MEMORY_ALLOCATION_EXT = 1 << 3;
+        const DEFERRED_MEMORY_ALLOCATION = 1 << 3;
+        const PRESENT_ID_2 = 1 << 6;
+        const PRESENT_WAIT_2 = 1 << 7;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorCreateFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct TensorCreateFlagsARM: Flags {
+        const MUTABLE_FORMAT = 1;
+        const PROTECTED = 1 << 1;
+        const DESCRIPTOR_BUFFER_CAPTURE_REPLAY = 1 << 2;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorUsageFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct TensorUsageFlagsARM: Flags {
+        const SHADER = 1 << 1;
+        const TRANSFER_SRC = 1 << 2;
+        const TRANSFER_DST = 1 << 3;
+        const IMAGE_ALIASING = 1 << 4;
+        const DATA_GRAPH = 1 << 5;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorViewCreateFlagsARM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct TensorViewCreateFlagsARM: Flags {
+        const DESCRIPTOR_BUFFER_CAPTURE_REPLAY = 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTileShadingRenderPassFlagsQCOM.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct TileShadingRenderPassFlagsQCOM: Flags {
+        const ENABLE = 1;
+        const PER_TILE_EXECUTION = 1 << 1;
     }
 }
 
@@ -2133,6 +2225,7 @@ bitflags! {
         const DECODE_H264 = 1;
         const DECODE_H265 = 1 << 1;
         const DECODE_AV1 = 1 << 2;
+        const DECODE_VP9 = 1 << 3;
         const ENCODE_H264 = 1 << 16;
         const ENCODE_H265 = 1 << 17;
         const ENCODE_AV1 = 1 << 18;
@@ -2212,6 +2305,7 @@ bitflags! {
         const VIDEO_ENCODE_AV1_CAPABILITY_PRIMARY_REFERENCE_CDF_ONLY = 1 << 2;
         const VIDEO_ENCODE_AV1_CAPABILITY_FRAME_SIZE_OVERRIDE = 1 << 3;
         const VIDEO_ENCODE_AV1_CAPABILITY_MOTION_VECTOR_SCALING = 1 << 4;
+        const VIDEO_ENCODE_AV1_CAPABILITY_COMPOUND_PREDICTION_INTRA_REFRESH = 1 << 5;
     }
 }
 
@@ -2291,6 +2385,7 @@ bitflags! {
     pub struct VideoEncodeFlagsKHR: Flags {
         const WITH_QUANTIZATION_DELTA_MAP = 1;
         const WITH_EMPHASIS_MAP = 1 << 1;
+        const INTRA_REFRESH = 1 << 2;
     }
 }
 
@@ -2309,6 +2404,7 @@ bitflags! {
         const PER_SLICE_CONSTANT_QP = 1 << 7;
         const GENERATE_PREFIX_NALU = 1 << 8;
         const MB_QP_DIFF_WRAPAROUND = 1 << 9;
+        const B_PICTURE_INTRA_REFRESH = 1 << 10;
     }
 }
 
@@ -2369,6 +2465,7 @@ bitflags! {
         const MULTIPLE_TILES_PER_SLICE_SEGMENT = 1 << 8;
         const MULTIPLE_SLICE_SEGMENTS_PER_TILE = 1 << 9;
         const CU_QP_DIFF_WRAPAROUND = 1 << 10;
+        const B_PICTURE_INTRA_REFRESH = 1 << 11;
     }
 }
 
@@ -2434,6 +2531,19 @@ bitflags! {
         const _8 = 1 << 1;
         const _16 = 1 << 2;
         const _32 = 1 << 3;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeIntraRefreshModeFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeIntraRefreshModeFlagsKHR: Flags {
+        const NONE = 0;
+        const PER_PICTURE_PARTITION = 1;
+        const BLOCK_BASED = 1 << 1;
+        const BLOCK_ROW_BASED = 1 << 2;
+        const BLOCK_COLUMN_BASED = 1 << 3;
     }
 }
 
@@ -2573,6 +2683,10 @@ pub type PipelineCreateFlags2KHR = PipelineCreateFlags2;
 pub type PipelineCreationFeedbackFlagsEXT = PipelineCreationFeedbackFlags;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPipelineStageFlags2KHR.html>
 pub type PipelineStageFlags2KHR = PipelineStageFlags2;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentGravityFlagsEXT.html>
+pub type PresentGravityFlagsEXT = PresentGravityFlagsKHR;
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPresentScalingFlagsEXT.html>
+pub type PresentScalingFlagsEXT = PresentScalingFlagsKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPrivateDataSlotCreateFlagsEXT.html>
 pub type PrivateDataSlotCreateFlagsEXT = PrivateDataSlotCreateFlags;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkRenderingFlagsKHR.html>

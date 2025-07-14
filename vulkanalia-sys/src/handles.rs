@@ -529,6 +529,50 @@ impl fmt::Debug for CudaModuleNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDataGraphPipelineSessionARM.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct DataGraphPipelineSessionARM(u64);
+
+impl Handle for DataGraphPipelineSessionARM {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::DATA_GRAPH_PIPELINE_SESSION_ARM;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for DataGraphPipelineSessionARM {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for DataGraphPipelineSessionARM {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "DataGraphPipelineSessionARM({:p})", self.0 as *const u8)
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkDebugReportCallbackEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
@@ -1054,6 +1098,50 @@ impl Default for Event {
 impl fmt::Debug for Event {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "Event({:p})", self.0 as *const u8)
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkExternalComputeQueueNV.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct ExternalComputeQueueNV(usize);
+
+impl Handle for ExternalComputeQueueNV {
+    type Repr = usize;
+
+    const TYPE: ObjectType = ObjectType::EXTERNAL_COMPUTE_QUEUE_NV;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for ExternalComputeQueueNV {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for ExternalComputeQueueNV {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "ExternalComputeQueueNV({:p})", self.0 as *const u8)
     }
 }
 
@@ -2290,6 +2378,94 @@ impl Default for SwapchainKHR {
 impl fmt::Debug for SwapchainKHR {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "SwapchainKHR({:p})", self.0 as *const u8)
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorARM.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct TensorARM(u64);
+
+impl Handle for TensorARM {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::TENSOR_ARM;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for TensorARM {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for TensorARM {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "TensorARM({:p})", self.0 as *const u8)
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkTensorViewARM.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
+pub struct TensorViewARM(u64);
+
+impl Handle for TensorViewARM {
+    type Repr = u64;
+
+    const TYPE: ObjectType = ObjectType::TENSOR_VIEW_ARM;
+
+    #[inline]
+    fn null() -> Self {
+        Self(0)
+    }
+
+    #[inline]
+    fn from_raw(value: Self::Repr) -> Self {
+        Self(value)
+    }
+
+    #[inline]
+    fn as_raw(self) -> Self::Repr {
+        self.0
+    }
+
+    #[inline]
+    fn is_null(self) -> bool {
+        self.0 == 0
+    }
+}
+
+impl Default for TensorViewARM {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl fmt::Debug for TensorViewARM {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "TensorViewARM({:p})", self.0 as *const u8)
     }
 }
 
