@@ -79,6 +79,10 @@ pub type NvSciSyncObj = *mut c_void;
 pub struct NvSciSyncFence {
     pub payload: [u64; 6],
 }
+
+// Open Harmony OS
+
+pub type OHNativeWindow = c_void;
     """
 
 /** Generates a Rust type alias for a Vulkan typedef. */
