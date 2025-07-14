@@ -154,7 +154,7 @@ jobs:
       # Check
       - name: Check Bindings
         working-directory: ./generator
-        run: ./gradlew run --args="--directory=.. check"
+        run: ./gradlew run --args="--directory=.. --token=${{ secrets.PERSONAL_ACCESS_TOKEN }} check"
       # Debug
       - name: Debug
         uses: mxschmitt/action-tmate@v3
