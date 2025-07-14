@@ -689,6 +689,7 @@ private val opaque =
         "wl_surface",
         "SECURITY_ATTRIBUTES",
         "xcb_connection_t",
+        "OHNativeWindow",
     )
 
 /** The platform typedefs which are aliases of pointer types. */
