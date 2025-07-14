@@ -52,7 +52,7 @@ jobs:
       # Publish
       - name: Build Index
         working-directory: ./generator
-        run: ./gradlew run --args="--directory=.. index"
+        run: ./gradlew run --args="--directory=.. --token=${{ secrets.PERSONAL_ACCESS_TOKEN }} index"
       - name: Cache Preprocessor
         id: cache-preprocessor
         uses: actions/cache@v4
