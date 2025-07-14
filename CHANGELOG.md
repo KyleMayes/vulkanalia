@@ -1,4 +1,4 @@
-## [0.29.0] - UNRELEASED
+## [0.29.0] - 2025-07-14
 
 ### Added
 - Added support for Android windowing

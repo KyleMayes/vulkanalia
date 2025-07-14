@@ -29,7 +29,7 @@ bind = ["bindgen", "doxygen-rs"]
 [dependencies]
 
 bitflags = "2"
-vulkanalia = { path = "../../vulkanalia", version = "0.28", default-features = false }
+vulkanalia = { path = "../../vulkanalia", version = "0.29", default-features = false }
 
 [build-dependencies]
 
