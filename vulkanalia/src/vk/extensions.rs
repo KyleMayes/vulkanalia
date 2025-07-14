@@ -595,6 +595,298 @@ pub trait AndroidExternalMemoryAndroidHardwareBufferExtension: DeviceV1_0 {
 
 impl AndroidExternalMemoryAndroidHardwareBufferExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_data_graph.html>
+pub trait ArmDataGraphExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = ARM_DATA_GRAPH_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkBindDataGraphPipelineSessionMemoryARM.html>
+    #[inline]
+    unsafe fn bind_data_graph_pipeline_session_memory_arm(
+        &self,
+        bind_infos: &[impl Cast<Target = BindDataGraphPipelineSessionMemoryInfoARM>],
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().bind_data_graph_pipeline_session_memory_arm)(
+            self.handle(),
+            bind_infos.len() as u32,
+            bind_infos.as_ptr().cast(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDispatchDataGraphARM.html>
+    #[inline]
+    unsafe fn cmd_dispatch_data_graph_arm(
+        &self,
+        command_buffer: CommandBuffer,
+        session: DataGraphPipelineSessionARM,
+        info: Option<&DataGraphPipelineDispatchInfoARM>,
+    ) {
+        let __result = (self.commands().cmd_dispatch_data_graph_arm)(
+            command_buffer,
+            session,
+            info.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateDataGraphPipelineSessionARM.html>
+    #[inline]
+    unsafe fn create_data_graph_pipeline_session_arm(
+        &self,
+        create_info: &DataGraphPipelineSessionCreateInfoARM,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<DataGraphPipelineSessionARM> {
+        let mut session = MaybeUninit::<DataGraphPipelineSessionARM>::uninit();
+
+        let __result = (self.commands().create_data_graph_pipeline_session_arm)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            session.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(session.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateDataGraphPipelinesARM.html>
+    #[inline]
+    unsafe fn create_data_graph_pipelines_arm(
+        &self,
+        deferred_operation: DeferredOperationKHR,
+        pipeline_cache: PipelineCache,
+        create_infos: &[impl Cast<Target = DataGraphPipelineCreateInfoARM>],
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkSuccessResult<Vec<Pipeline>> {
+        let mut pipelines = Vec::with_capacity(create_infos.len() as usize);
+
+        let __result = (self.commands().create_data_graph_pipelines_arm)(
+            self.handle(),
+            deferred_operation,
+            pipeline_cache,
+            create_infos.len() as u32,
+            create_infos.as_ptr().cast(),
+            allocator.map_or(ptr::null(), |v| v),
+            pipelines.as_mut_ptr(),
+        );
+
+        pipelines.set_len(create_infos.len() as usize);
+
+        if __result >= Result::SUCCESS {
+            Ok((pipelines, __result.into()))
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkDestroyDataGraphPipelineSessionARM.html>
+    #[inline]
+    unsafe fn destroy_data_graph_pipeline_session_arm(
+        &self,
+        session: DataGraphPipelineSessionARM,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_data_graph_pipeline_session_arm)(
+            self.handle(),
+            session,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDataGraphPipelineAvailablePropertiesARM.html>
+    #[inline]
+    unsafe fn get_data_graph_pipeline_available_properties_arm(
+        &self,
+        pipeline_info: &DataGraphPipelineInfoARM,
+    ) -> crate::VkResult<Vec<DataGraphPipelinePropertyARM>> {
+        let mut properties_count = 0;
+
+        (self
+            .commands()
+            .get_data_graph_pipeline_available_properties_arm)(
+            self.handle(),
+            pipeline_info,
+            &mut properties_count,
+            ptr::null_mut(),
+        );
+
+        let mut properties = Vec::with_capacity(properties_count as usize);
+
+        let __result = (self
+            .commands()
+            .get_data_graph_pipeline_available_properties_arm)(
+            self.handle(),
+            pipeline_info,
+            &mut properties_count,
+            properties.as_mut_ptr(),
+        );
+
+        debug_assert!(properties.capacity() == properties_count as usize);
+        properties.set_len(properties_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(properties)
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDataGraphPipelinePropertiesARM.html>
+    #[inline]
+    unsafe fn get_data_graph_pipeline_properties_arm(
+        &self,
+        pipeline_info: &DataGraphPipelineInfoARM,
+        properties: &mut [impl Cast<Target = DataGraphPipelinePropertyQueryResultARM>],
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().get_data_graph_pipeline_properties_arm)(
+            self.handle(),
+            pipeline_info,
+            properties.len() as u32,
+            properties.as_mut_ptr().cast(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDataGraphPipelineSessionBindPointRequirementsARM.html>
+    #[inline]
+    unsafe fn get_data_graph_pipeline_session_bind_point_requirements_arm(
+        &self,
+        info: &DataGraphPipelineSessionBindPointRequirementsInfoARM,
+    ) -> crate::VkResult<Vec<DataGraphPipelineSessionBindPointRequirementARM>> {
+        let mut bind_point_requirement_count = 0;
+
+        (self
+            .commands()
+            .get_data_graph_pipeline_session_bind_point_requirements_arm)(
+            self.handle(),
+            info,
+            &mut bind_point_requirement_count,
+            ptr::null_mut(),
+        );
+
+        let mut bind_point_requirements = Vec::with_capacity(bind_point_requirement_count as usize);
+
+        let __result = (self
+            .commands()
+            .get_data_graph_pipeline_session_bind_point_requirements_arm)(
+            self.handle(),
+            info,
+            &mut bind_point_requirement_count,
+            bind_point_requirements.as_mut_ptr(),
+        );
+
+        debug_assert!(bind_point_requirements.capacity() == bind_point_requirement_count as usize);
+        bind_point_requirements.set_len(bind_point_requirement_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(bind_point_requirements)
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDataGraphPipelineSessionMemoryRequirementsARM.html>
+    #[inline]
+    unsafe fn get_data_graph_pipeline_session_memory_requirements_arm(
+        &self,
+        info: &DataGraphPipelineSessionMemoryRequirementsInfoARM,
+        memory_requirements: &mut MemoryRequirements2,
+    ) {
+        let __result = (self
+            .commands()
+            .get_data_graph_pipeline_session_memory_requirements_arm)(
+            self.handle(),
+            info,
+            memory_requirements,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM.html>
+    #[inline]
+    unsafe fn get_physical_device_queue_family_data_graph_processing_engine_properties_arm(
+        &self,
+        physical_device: PhysicalDevice,
+        queue_family_data_graph_processing_engine_info: &PhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM,
+        queue_family_data_graph_processing_engine_properties: &mut QueueFamilyDataGraphProcessingEnginePropertiesARM,
+    ) {
+        let __result = (self
+            .commands()
+            .get_physical_device_queue_family_data_graph_processing_engine_properties_arm)(
+            physical_device,
+            queue_family_data_graph_processing_engine_info,
+            queue_family_data_graph_processing_engine_properties,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM.html>
+    #[inline]
+    unsafe fn get_physical_device_queue_family_data_graph_properties_arm(
+        &self,
+        physical_device: PhysicalDevice,
+        queue_family_index: u32,
+    ) -> crate::VkResult<Vec<QueueFamilyDataGraphPropertiesARM>> {
+        let mut queue_family_data_graph_property_count = 0;
+
+        (self
+            .commands()
+            .get_physical_device_queue_family_data_graph_properties_arm)(
+            physical_device,
+            queue_family_index,
+            &mut queue_family_data_graph_property_count,
+            ptr::null_mut(),
+        );
+
+        let mut queue_family_data_graph_properties =
+            Vec::with_capacity(queue_family_data_graph_property_count as usize);
+
+        let __result = (self
+            .commands()
+            .get_physical_device_queue_family_data_graph_properties_arm)(
+            physical_device,
+            queue_family_index,
+            &mut queue_family_data_graph_property_count,
+            queue_family_data_graph_properties.as_mut_ptr(),
+        );
+
+        debug_assert!(
+            queue_family_data_graph_properties.capacity()
+                == queue_family_data_graph_property_count as usize
+        );
+        queue_family_data_graph_properties.set_len(queue_family_data_graph_property_count as usize);
+
+        if __result == Result::SUCCESS {
+            Ok(queue_family_data_graph_properties)
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl ArmDataGraphExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_format_pack.html>
+pub trait ArmFormatPackExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = ARM_FORMAT_PACK_EXTENSION;
+}
+
+impl ArmFormatPackExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_pipeline_opacity_micromap.html>
 pub trait ArmPipelineOpacityMicromapExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -648,6 +940,207 @@ pub trait ArmShaderCorePropertiesExtension: DeviceV1_0 {
 }
 
 impl ArmShaderCorePropertiesExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_ARM_tensors.html>
+pub trait ArmTensorsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = ARM_TENSORS_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkBindTensorMemoryARM.html>
+    #[inline]
+    unsafe fn bind_tensor_memory_arm(
+        &self,
+        bind_infos: &[impl Cast<Target = BindTensorMemoryInfoARM>],
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().bind_tensor_memory_arm)(
+            self.handle(),
+            bind_infos.len() as u32,
+            bind_infos.as_ptr().cast(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyTensorARM.html>
+    #[inline]
+    unsafe fn cmd_copy_tensor_arm(
+        &self,
+        command_buffer: CommandBuffer,
+        copy_tensor_info: &CopyTensorInfoARM,
+    ) {
+        let __result = (self.commands().cmd_copy_tensor_arm)(command_buffer, copy_tensor_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateTensorARM.html>
+    #[inline]
+    unsafe fn create_tensor_arm(
+        &self,
+        create_info: &TensorCreateInfoARM,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<TensorARM> {
+        let mut tensor = MaybeUninit::<TensorARM>::uninit();
+
+        let __result = (self.commands().create_tensor_arm)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            tensor.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(tensor.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateTensorViewARM.html>
+    #[inline]
+    unsafe fn create_tensor_view_arm(
+        &self,
+        create_info: &TensorViewCreateInfoARM,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<TensorViewARM> {
+        let mut view = MaybeUninit::<TensorViewARM>::uninit();
+
+        let __result = (self.commands().create_tensor_view_arm)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            view.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(view.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkDestroyTensorARM.html>
+    #[inline]
+    unsafe fn destroy_tensor_arm(
+        &self,
+        tensor: TensorARM,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_tensor_arm)(
+            self.handle(),
+            tensor,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkDestroyTensorViewARM.html>
+    #[inline]
+    unsafe fn destroy_tensor_view_arm(
+        &self,
+        tensor_view: TensorViewARM,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_tensor_view_arm)(
+            self.handle(),
+            tensor_view,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetDeviceTensorMemoryRequirementsARM.html>
+    #[inline]
+    unsafe fn get_device_tensor_memory_requirements_arm(
+        &self,
+        info: &DeviceTensorMemoryRequirementsARM,
+        memory_requirements: &mut MemoryRequirements2,
+    ) {
+        let __result = (self.commands().get_device_tensor_memory_requirements_arm)(
+            self.handle(),
+            info,
+            memory_requirements,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetPhysicalDeviceExternalTensorPropertiesARM.html>
+    #[inline]
+    unsafe fn get_physical_device_external_tensor_properties_arm(
+        &self,
+        physical_device: PhysicalDevice,
+        external_tensor_info: &PhysicalDeviceExternalTensorInfoARM,
+        external_tensor_properties: &mut ExternalTensorPropertiesARM,
+    ) {
+        let __result = (self
+            .commands()
+            .get_physical_device_external_tensor_properties_arm)(
+            physical_device,
+            external_tensor_info,
+            external_tensor_properties,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetTensorMemoryRequirementsARM.html>
+    #[inline]
+    unsafe fn get_tensor_memory_requirements_arm(
+        &self,
+        info: &TensorMemoryRequirementsInfoARM,
+        memory_requirements: &mut MemoryRequirements2,
+    ) {
+        let __result = (self.commands().get_tensor_memory_requirements_arm)(
+            self.handle(),
+            info,
+            memory_requirements,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetTensorOpaqueCaptureDescriptorDataARM.html>
+    #[inline]
+    unsafe fn get_tensor_opaque_capture_descriptor_data_arm(
+        &self,
+        info: &TensorCaptureDescriptorDataInfoARM,
+    ) -> crate::VkResult<c_void> {
+        let mut data = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_tensor_opaque_capture_descriptor_data_arm)(
+            self.handle(), info, data.as_mut_ptr()
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(data.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetTensorViewOpaqueCaptureDescriptorDataARM.html>
+    #[inline]
+    unsafe fn get_tensor_view_opaque_capture_descriptor_data_arm(
+        &self,
+        info: &TensorViewCaptureDescriptorDataInfoARM,
+    ) -> crate::VkResult<c_void> {
+        let mut data = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self
+            .commands()
+            .get_tensor_view_opaque_capture_descriptor_data_arm)(
+            self.handle(),
+            info,
+            data.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(data.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl ArmTensorsExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_4444_formats.html>
 pub trait Ext4444FormatsExtension: DeviceV1_0 {
@@ -1470,7 +1963,7 @@ pub trait ExtDescriptorBufferExtension: DeviceV1_0 {
             self.handle(),
             descriptor_info,
             descriptor.len() as usize,
-            descriptor.as_ptr() as *mut c_void,
+            descriptor.as_mut_ptr() as *mut c_void,
         );
     }
 
@@ -2848,6 +3341,28 @@ pub trait ExtFragmentDensityMap2Extension: DeviceV1_0 {
 
 impl ExtFragmentDensityMap2Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_density_map_offset.html>
+pub trait ExtFragmentDensityMapOffsetExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndRendering2EXT.html>
+    #[inline]
+    unsafe fn cmd_end_rendering2_ext(
+        &self,
+        command_buffer: CommandBuffer,
+        rendering_end_info: Option<&RenderingEndInfoEXT>,
+    ) {
+        let __result = (self.commands().cmd_end_rendering2_ext)(
+            command_buffer,
+            rendering_end_info.map_or(ptr::null(), |v| v),
+        );
+    }
+}
+
+impl ExtFragmentDensityMapOffsetExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_fragment_shader_interlock.html>
 pub trait ExtFragmentShaderInterlockExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -3800,7 +4315,7 @@ pub trait ExtOpacityMicromapExtension: DeviceV1_0 {
             micromaps.as_ptr(),
             query_type,
             data.len() as usize,
-            data.as_ptr() as *mut c_void,
+            data.as_mut_ptr() as *mut c_void,
             stride,
         );
 
@@ -4185,6 +4700,15 @@ pub trait ExtShaderDemoteToHelperInvocationExtension: DeviceV1_0 {
 }
 
 impl ExtShaderDemoteToHelperInvocationExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_float8.html>
+pub trait ExtShaderFloat8Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_SHADER_FLOAT8_EXTENSION;
+}
+
+impl ExtShaderFloat8Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_shader_image_atomic_int64.html>
 pub trait ExtShaderImageAtomicInt64Extension: DeviceV1_0 {
@@ -5100,7 +5624,7 @@ pub trait ExtSwapchainMaintenance1Extension: DeviceV1_0 {
     #[inline]
     unsafe fn release_swapchain_images_ext(
         &self,
-        release_info: &ReleaseSwapchainImagesInfoEXT,
+        release_info: &ReleaseSwapchainImagesInfoKHR,
     ) -> crate::VkResult<()> {
         let __result = (self.commands().release_swapchain_images_ext)(self.handle(), release_info);
 
@@ -5477,6 +6001,15 @@ pub trait ExtYcbcrImageArraysExtension: DeviceV1_0 {
 }
 
 impl ExtYcbcrImageArraysExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_EXT_zero_initialize_device_memory.html>
+pub trait ExtZeroInitializeDeviceMemoryExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = EXT_ZERO_INITIALIZE_DEVICE_MEMORY_EXTENSION;
+}
+
+impl ExtZeroInitializeDeviceMemoryExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_FUCHSIA_buffer_collection.html>
 pub trait FuchsiaBufferCollectionExtension: DeviceV1_0 {
@@ -6471,7 +7004,7 @@ pub trait KhrAccelerationStructureExtension: DeviceV1_0 {
             acceleration_structures.as_ptr(),
             query_type,
             data.len() as usize,
-            data.as_ptr() as *mut c_void,
+            data.as_mut_ptr() as *mut c_void,
             stride,
         );
 
@@ -8904,6 +9437,15 @@ pub trait KhrMaintenance8Extension: DeviceV1_0 {
 
 impl KhrMaintenance8Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_maintenance9.html>
+pub trait KhrMaintenance9Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_MAINTENANCE9_EXTENSION;
+}
+
+impl KhrMaintenance9Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_map_memory2.html>
 pub trait KhrMapMemory2Extension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -9392,6 +9934,24 @@ pub trait KhrPresentIdExtension: DeviceV1_0 {
 
 impl KhrPresentIdExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_present_id2.html>
+pub trait KhrPresentId2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_PRESENT_ID2_EXTENSION;
+}
+
+impl KhrPresentId2Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_present_mode_fifo_latest_ready.html>
+pub trait KhrPresentModeFifoLatestReadyExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_PRESENT_MODE_FIFO_LATEST_READY_EXTENSION;
+}
+
+impl KhrPresentModeFifoLatestReadyExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_present_wait.html>
 pub trait KhrPresentWaitExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -9418,6 +9978,32 @@ pub trait KhrPresentWaitExtension: DeviceV1_0 {
 }
 
 impl KhrPresentWaitExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_present_wait2.html>
+pub trait KhrPresentWait2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_PRESENT_WAIT2_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkWaitForPresent2KHR.html>
+    #[inline]
+    unsafe fn wait_for_present2_khr(
+        &self,
+        swapchain: SwapchainKHR,
+        present_wait2_info: &PresentWait2InfoKHR,
+    ) -> crate::VkResult<SuccessCode> {
+        let __result =
+            (self.commands().wait_for_present2_khr)(self.handle(), swapchain, present_wait2_info);
+
+        if __result >= Result::SUCCESS {
+            Ok(__result.into())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl KhrPresentWait2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_push_descriptor.html>
 pub trait KhrPushDescriptorExtension: DeviceV1_0 {
@@ -9608,7 +10194,7 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
             first_group,
             group_count,
             data.len() as usize,
-            data.as_ptr() as *mut c_void,
+            data.as_mut_ptr() as *mut c_void,
         );
 
         if __result == Result::SUCCESS {
@@ -9633,7 +10219,7 @@ pub trait KhrRayTracingPipelineExtension: DeviceV1_0 {
             first_group,
             group_count,
             data.len() as usize,
-            data.as_ptr() as *mut c_void,
+            data.as_mut_ptr() as *mut c_void,
         );
 
         if __result == Result::SUCCESS {
@@ -9681,6 +10267,15 @@ pub trait KhrRelaxedBlockLayoutExtension: DeviceV1_0 {
 }
 
 impl KhrRelaxedBlockLayoutExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_robustness2.html>
+pub trait KhrRobustness2Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_ROBUSTNESS2_EXTENSION;
+}
+
+impl KhrRobustness2Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_sampler_mirror_clamp_to_edge.html>
 pub trait KhrSamplerMirrorClampToEdgeExtension: DeviceV1_0 {
@@ -9754,6 +10349,15 @@ pub trait KhrShaderAtomicInt64Extension: DeviceV1_0 {
 }
 
 impl KhrShaderAtomicInt64Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_bfloat16.html>
+pub trait KhrShaderBfloat16Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_SHADER_BFLOAT16_EXTENSION;
+}
+
+impl KhrShaderBfloat16Extension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_clock.html>
 pub trait KhrShaderClockExtension: DeviceV1_0 {
@@ -10075,6 +10679,15 @@ pub trait KhrSurfaceExtension: InstanceV1_0 {
 
 impl KhrSurfaceExtension for crate::Instance {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_surface_maintenance1.html>
+pub trait KhrSurfaceMaintenance1Extension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_SURFACE_MAINTENANCE1_EXTENSION;
+}
+
+impl KhrSurfaceMaintenance1Extension for crate::Instance {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_surface_protected_capabilities.html>
 pub trait KhrSurfaceProtectedCapabilitiesExtension: InstanceV1_0 {
     /// The metadata for this extension.
@@ -10302,6 +10915,30 @@ pub trait KhrSwapchainExtension: DeviceV1_0 {
 
 impl KhrSwapchainExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_swapchain_maintenance1.html>
+pub trait KhrSwapchainMaintenance1Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_SWAPCHAIN_MAINTENANCE1_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkReleaseSwapchainImagesKHR.html>
+    #[inline]
+    unsafe fn release_swapchain_images_khr(
+        &self,
+        release_info: &ReleaseSwapchainImagesInfoKHR,
+    ) -> crate::VkResult<()> {
+        let __result = (self.commands().release_swapchain_images_khr)(self.handle(), release_info);
+
+        if __result == Result::SUCCESS {
+            Ok(())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl KhrSwapchainMaintenance1Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_swapchain_mutable_format.html>
 pub trait KhrSwapchainMutableFormatExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -10461,6 +11098,15 @@ pub trait KhrTimelineSemaphoreExtension: DeviceV1_0 {
 
 impl KhrTimelineSemaphoreExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_unified_image_layouts.html>
+pub trait KhrUnifiedImageLayoutsExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_UNIFIED_IMAGE_LAYOUTS_EXTENSION;
+}
+
+impl KhrUnifiedImageLayoutsExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_uniform_buffer_standard_layout.html>
 pub trait KhrUniformBufferStandardLayoutExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -10534,6 +11180,15 @@ pub trait KhrVideoDecodeQueueExtension: DeviceV1_0 {
 
 impl KhrVideoDecodeQueueExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_decode_vp9.html>
+pub trait KhrVideoDecodeVp9Extension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_VIDEO_DECODE_VP9_EXTENSION;
+}
+
+impl KhrVideoDecodeVp9Extension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_av1.html>
 pub trait KhrVideoEncodeAv1Extension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -10560,6 +11215,15 @@ pub trait KhrVideoEncodeH265Extension: DeviceV1_0 {
 }
 
 impl KhrVideoEncodeH265Extension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_intra_refresh.html>
+pub trait KhrVideoEncodeIntraRefreshExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_VIDEO_ENCODE_INTRA_REFRESH_EXTENSION;
+}
+
+impl KhrVideoEncodeIntraRefreshExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_video_encode_quantization_map.html>
 pub trait KhrVideoEncodeQuantizationMapExtension: DeviceV1_0 {
@@ -12230,6 +12894,7 @@ impl NvDeviceGeneratedCommandsComputeExtension for crate::Device {}
 /// Provisional extensions are not guaranteed to be backwards compatible and are
 /// not intended to be used in production applications.
 #[cfg(feature = "provisional")]
+#[deprecated(note = "deprecated in favor of `VK_NV_cluster_acceleration_structure`")]
 pub trait NvDisplacementMicromapExtension: DeviceV1_0 {
     /// The metadata for this extension.
     #[allow(deprecated)]
@@ -12237,6 +12902,7 @@ pub trait NvDisplacementMicromapExtension: DeviceV1_0 {
 }
 
 #[cfg(feature = "provisional")]
+#[allow(deprecated)]
 impl NvDisplacementMicromapExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_display_stereo.html>
@@ -12256,6 +12922,70 @@ pub trait NvExtendedSparseAddressSpaceExtension: DeviceV1_0 {
 }
 
 impl NvExtendedSparseAddressSpaceExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_compute_queue.html>
+pub trait NvExternalComputeQueueExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = NV_EXTERNAL_COMPUTE_QUEUE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateExternalComputeQueueNV.html>
+    #[inline]
+    unsafe fn create_external_compute_queue_nv(
+        &self,
+        create_info: &ExternalComputeQueueCreateInfoNV,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<ExternalComputeQueueNV> {
+        let mut external_queue = MaybeUninit::<ExternalComputeQueueNV>::uninit();
+
+        let __result = (self.commands().create_external_compute_queue_nv)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            external_queue.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(external_queue.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkDestroyExternalComputeQueueNV.html>
+    #[inline]
+    unsafe fn destroy_external_compute_queue_nv(
+        &self,
+        external_queue: ExternalComputeQueueNV,
+        allocator: Option<&AllocationCallbacks>,
+    ) {
+        let __result = (self.commands().destroy_external_compute_queue_nv)(
+            self.handle(),
+            external_queue,
+            allocator.map_or(ptr::null(), |v| v),
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkGetExternalComputeQueueDataNV.html>
+    #[inline]
+    unsafe fn get_external_compute_queue_data_nv(
+        &self,
+        external_queue: ExternalComputeQueueNV,
+        params: &mut ExternalComputeQueueDataParamsNV,
+    ) -> c_void {
+        let mut data = MaybeUninit::<c_void>::uninit();
+
+        let __result = (self.commands().get_external_compute_queue_data_nv)(
+            external_queue,
+            params,
+            data.as_mut_ptr(),
+        );
+
+        data.assume_init()
+    }
+}
+
+impl NvExternalComputeQueueExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_external_memory.html>
 #[deprecated(note = "deprecated in favor of `VK_KHR_external_memory`")]
@@ -13459,7 +14189,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
             self.handle(),
             acceleration_structure,
             data.len() as usize,
-            data.as_ptr() as *mut c_void,
+            data.as_mut_ptr() as *mut c_void,
         );
 
         if __result == Result::SUCCESS {
@@ -13503,7 +14233,7 @@ pub trait NvRayTracingExtension: DeviceV1_0 {
             first_group,
             group_count,
             data.len() as usize,
-            data.as_ptr() as *mut c_void,
+            data.as_mut_ptr() as *mut c_void,
         );
 
         if __result == Result::SUCCESS {
@@ -13731,6 +14461,38 @@ pub trait NvWin32KeyedMutexExtension: DeviceV1_0 {
 
 impl NvWin32KeyedMutexExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_OHOS_surface.html>
+pub trait OhosSurfaceExtension: InstanceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = OHOS_SURFACE_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCreateSurfaceOHOS.html>
+    #[inline]
+    unsafe fn create_surface_ohos(
+        &self,
+        create_info: &SurfaceCreateInfoOHOS,
+        allocator: Option<&AllocationCallbacks>,
+    ) -> crate::VkResult<SurfaceKHR> {
+        let mut surface = MaybeUninit::<SurfaceKHR>::uninit();
+
+        let __result = (self.commands().create_surface_ohos)(
+            self.handle(),
+            create_info,
+            allocator.map_or(ptr::null(), |v| v),
+            surface.as_mut_ptr(),
+        );
+
+        if __result == Result::SUCCESS {
+            Ok(surface.assume_init())
+        } else {
+            Err(__result.into())
+        }
+    }
+}
+
+impl OhosSurfaceExtension for crate::Instance {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_filter_cubic_clamp.html>
 pub trait QcomFilterCubicClampExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -13830,6 +14592,28 @@ pub trait QcomRotatedCopyCommandsExtension: DeviceV1_0 {
 
 impl QcomRotatedCopyCommandsExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_memory_heap.html>
+pub trait QcomTileMemoryHeapExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_TILE_MEMORY_HEAP_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBindTileMemoryQCOM.html>
+    #[inline]
+    unsafe fn cmd_bind_tile_memory_qcom(
+        &self,
+        command_buffer: CommandBuffer,
+        tile_memory_bind_info: Option<&TileMemoryBindInfoQCOM>,
+    ) {
+        let __result = (self.commands().cmd_bind_tile_memory_qcom)(
+            command_buffer,
+            tile_memory_bind_info.map_or(ptr::null(), |v| v),
+        );
+    }
+}
+
+impl QcomTileMemoryHeapExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_properties.html>
 pub trait QcomTilePropertiesExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -13892,6 +14676,49 @@ pub trait QcomTilePropertiesExtension: DeviceV1_0 {
 }
 
 impl QcomTilePropertiesExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_tile_shading.html>
+pub trait QcomTileShadingExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = QCOM_TILE_SHADING_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdBeginPerTileExecutionQCOM.html>
+    #[inline]
+    unsafe fn cmd_begin_per_tile_execution_qcom(
+        &self,
+        command_buffer: CommandBuffer,
+        per_tile_begin_info: &PerTileBeginInfoQCOM,
+    ) {
+        let __result = (self.commands().cmd_begin_per_tile_execution_qcom)(
+            command_buffer,
+            per_tile_begin_info,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdDispatchTileQCOM.html>
+    #[inline]
+    unsafe fn cmd_dispatch_tile_qcom(
+        &self,
+        command_buffer: CommandBuffer,
+        dispatch_tile_info: &DispatchTileInfoQCOM,
+    ) {
+        let __result = (self.commands().cmd_dispatch_tile_qcom)(command_buffer, dispatch_tile_info);
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdEndPerTileExecutionQCOM.html>
+    #[inline]
+    unsafe fn cmd_end_per_tile_execution_qcom(
+        &self,
+        command_buffer: CommandBuffer,
+        per_tile_end_info: &PerTileEndInfoQCOM,
+    ) {
+        let __result =
+            (self.commands().cmd_end_per_tile_execution_qcom)(command_buffer, per_tile_end_info);
+    }
+}
+
+impl QcomTileShadingExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_QCOM_ycbcr_degamma.html>
 pub trait QcomYcbcrDegammaExtension: DeviceV1_0 {
@@ -13988,6 +14815,15 @@ pub trait SecAmigoProfilingExtension: DeviceV1_0 {
 
 impl SecAmigoProfilingExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_SEC_pipeline_cache_incremental_mode.html>
+pub trait SecPipelineCacheIncrementalModeExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = SEC_PIPELINE_CACHE_INCREMENTAL_MODE_EXTENSION;
+}
+
+impl SecPipelineCacheIncrementalModeExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_VALVE_descriptor_set_host_mapping.html>
 pub trait ValveDescriptorSetHostMappingExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -14029,6 +14865,15 @@ pub trait ValveDescriptorSetHostMappingExtension: DeviceV1_0 {
 }
 
 impl ValveDescriptorSetHostMappingExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_VALVE_fragment_density_map_layered.html>
+pub trait ValveFragmentDensityMapLayeredExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = VALVE_FRAGMENT_DENSITY_MAP_LAYERED_EXTENSION;
+}
+
+impl ValveFragmentDensityMapLayeredExtension for crate::Device {}
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_VALVE_mutable_descriptor_type.html>
 pub trait ValveMutableDescriptorTypeExtension: DeviceV1_0 {

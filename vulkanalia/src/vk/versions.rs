@@ -2229,7 +2229,7 @@ pub trait DeviceV1_0 {
             first_query,
             query_count,
             data.len() as usize,
-            data.as_ptr() as *mut c_void,
+            data.as_mut_ptr() as *mut c_void,
             stride,
             flags,
         );

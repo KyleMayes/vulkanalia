@@ -42,14 +42,17 @@ pub struct DeviceCommands {
     pub bind_buffer_memory: PFN_vkBindBufferMemory,
     pub bind_buffer_memory2: PFN_vkBindBufferMemory2,
     pub bind_buffer_memory2_khr: PFN_vkBindBufferMemory2KHR,
+    pub bind_data_graph_pipeline_session_memory_arm: PFN_vkBindDataGraphPipelineSessionMemoryARM,
     pub bind_image_memory: PFN_vkBindImageMemory,
     pub bind_image_memory2: PFN_vkBindImageMemory2,
     pub bind_image_memory2_khr: PFN_vkBindImageMemory2KHR,
     pub bind_optical_flow_session_image_nv: PFN_vkBindOpticalFlowSessionImageNV,
+    pub bind_tensor_memory_arm: PFN_vkBindTensorMemoryARM,
     pub bind_video_session_memory_khr: PFN_vkBindVideoSessionMemoryKHR,
     pub build_acceleration_structures_khr: PFN_vkBuildAccelerationStructuresKHR,
     pub build_micromaps_ext: PFN_vkBuildMicromapsEXT,
     pub cmd_begin_conditional_rendering_ext: PFN_vkCmdBeginConditionalRenderingEXT,
+    pub cmd_begin_per_tile_execution_qcom: PFN_vkCmdBeginPerTileExecutionQCOM,
     pub cmd_begin_query: PFN_vkCmdBeginQuery,
     pub cmd_begin_query_indexed_ext: PFN_vkCmdBeginQueryIndexedEXT,
     pub cmd_begin_render_pass: PFN_vkCmdBeginRenderPass,
@@ -75,6 +78,7 @@ pub struct DeviceCommands {
     pub cmd_bind_pipeline_shader_group_nv: PFN_vkCmdBindPipelineShaderGroupNV,
     pub cmd_bind_shaders_ext: PFN_vkCmdBindShadersEXT,
     pub cmd_bind_shading_rate_image_nv: PFN_vkCmdBindShadingRateImageNV,
+    pub cmd_bind_tile_memory_qcom: PFN_vkCmdBindTileMemoryQCOM,
     pub cmd_bind_transform_feedback_buffers_ext: PFN_vkCmdBindTransformFeedbackBuffersEXT,
     pub cmd_bind_vertex_buffers: PFN_vkCmdBindVertexBuffers,
     pub cmd_bind_vertex_buffers2: PFN_vkCmdBindVertexBuffers2,
@@ -120,6 +124,7 @@ pub struct DeviceCommands {
     pub cmd_copy_micromap_ext: PFN_vkCmdCopyMicromapEXT,
     pub cmd_copy_micromap_to_memory_ext: PFN_vkCmdCopyMicromapToMemoryEXT,
     pub cmd_copy_query_pool_results: PFN_vkCmdCopyQueryPoolResults,
+    pub cmd_copy_tensor_arm: PFN_vkCmdCopyTensorARM,
     pub cmd_cu_launch_kernel_nvx: PFN_vkCmdCuLaunchKernelNVX,
     pub cmd_cuda_launch_kernel_nv: PFN_vkCmdCudaLaunchKernelNV,
     pub cmd_debug_marker_begin_ext: PFN_vkCmdDebugMarkerBeginEXT,
@@ -131,10 +136,12 @@ pub struct DeviceCommands {
     pub cmd_dispatch: PFN_vkCmdDispatch,
     pub cmd_dispatch_base: PFN_vkCmdDispatchBase,
     pub cmd_dispatch_base_khr: PFN_vkCmdDispatchBaseKHR,
+    pub cmd_dispatch_data_graph_arm: PFN_vkCmdDispatchDataGraphARM,
     pub cmd_dispatch_graph_amdx: PFN_vkCmdDispatchGraphAMDX,
     pub cmd_dispatch_graph_indirect_amdx: PFN_vkCmdDispatchGraphIndirectAMDX,
     pub cmd_dispatch_graph_indirect_count_amdx: PFN_vkCmdDispatchGraphIndirectCountAMDX,
     pub cmd_dispatch_indirect: PFN_vkCmdDispatchIndirect,
+    pub cmd_dispatch_tile_qcom: PFN_vkCmdDispatchTileQCOM,
     pub cmd_draw: PFN_vkCmdDraw,
     pub cmd_draw_cluster_huawei: PFN_vkCmdDrawClusterHUAWEI,
     pub cmd_draw_cluster_indirect_huawei: PFN_vkCmdDrawClusterIndirectHUAWEI,
@@ -158,12 +165,14 @@ pub struct DeviceCommands {
     pub cmd_draw_multi_indexed_ext: PFN_vkCmdDrawMultiIndexedEXT,
     pub cmd_encode_video_khr: PFN_vkCmdEncodeVideoKHR,
     pub cmd_end_conditional_rendering_ext: PFN_vkCmdEndConditionalRenderingEXT,
+    pub cmd_end_per_tile_execution_qcom: PFN_vkCmdEndPerTileExecutionQCOM,
     pub cmd_end_query: PFN_vkCmdEndQuery,
     pub cmd_end_query_indexed_ext: PFN_vkCmdEndQueryIndexedEXT,
     pub cmd_end_render_pass: PFN_vkCmdEndRenderPass,
     pub cmd_end_render_pass2: PFN_vkCmdEndRenderPass2,
     pub cmd_end_render_pass2_khr: PFN_vkCmdEndRenderPass2KHR,
     pub cmd_end_rendering: PFN_vkCmdEndRendering,
+    pub cmd_end_rendering2_ext: PFN_vkCmdEndRendering2EXT,
     pub cmd_end_rendering_khr: PFN_vkCmdEndRenderingKHR,
     pub cmd_end_transform_feedback_ext: PFN_vkCmdEndTransformFeedbackEXT,
     pub cmd_end_video_coding_khr: PFN_vkCmdEndVideoCodingKHR,
@@ -353,6 +362,8 @@ pub struct DeviceCommands {
     pub create_cu_module_nvx: PFN_vkCreateCuModuleNVX,
     pub create_cuda_function_nv: PFN_vkCreateCudaFunctionNV,
     pub create_cuda_module_nv: PFN_vkCreateCudaModuleNV,
+    pub create_data_graph_pipeline_session_arm: PFN_vkCreateDataGraphPipelineSessionARM,
+    pub create_data_graph_pipelines_arm: PFN_vkCreateDataGraphPipelinesARM,
     pub create_deferred_operation_khr: PFN_vkCreateDeferredOperationKHR,
     pub create_descriptor_pool: PFN_vkCreateDescriptorPool,
     pub create_descriptor_set_layout: PFN_vkCreateDescriptorSetLayout,
@@ -360,6 +371,7 @@ pub struct DeviceCommands {
     pub create_descriptor_update_template_khr: PFN_vkCreateDescriptorUpdateTemplateKHR,
     pub create_event: PFN_vkCreateEvent,
     pub create_execution_graph_pipelines_amdx: PFN_vkCreateExecutionGraphPipelinesAMDX,
+    pub create_external_compute_queue_nv: PFN_vkCreateExternalComputeQueueNV,
     pub create_fence: PFN_vkCreateFence,
     pub create_framebuffer: PFN_vkCreateFramebuffer,
     pub create_graphics_pipelines: PFN_vkCreateGraphicsPipelines,
@@ -390,6 +402,8 @@ pub struct DeviceCommands {
     pub create_shaders_ext: PFN_vkCreateShadersEXT,
     pub create_shared_swapchains_khr: PFN_vkCreateSharedSwapchainsKHR,
     pub create_swapchain_khr: PFN_vkCreateSwapchainKHR,
+    pub create_tensor_arm: PFN_vkCreateTensorARM,
+    pub create_tensor_view_arm: PFN_vkCreateTensorViewARM,
     pub create_validation_cache_ext: PFN_vkCreateValidationCacheEXT,
     pub create_video_session_khr: PFN_vkCreateVideoSessionKHR,
     pub create_video_session_parameters_khr: PFN_vkCreateVideoSessionParametersKHR,
@@ -406,6 +420,7 @@ pub struct DeviceCommands {
     pub destroy_cu_module_nvx: PFN_vkDestroyCuModuleNVX,
     pub destroy_cuda_function_nv: PFN_vkDestroyCudaFunctionNV,
     pub destroy_cuda_module_nv: PFN_vkDestroyCudaModuleNV,
+    pub destroy_data_graph_pipeline_session_arm: PFN_vkDestroyDataGraphPipelineSessionARM,
     pub destroy_deferred_operation_khr: PFN_vkDestroyDeferredOperationKHR,
     pub destroy_descriptor_pool: PFN_vkDestroyDescriptorPool,
     pub destroy_descriptor_set_layout: PFN_vkDestroyDescriptorSetLayout,
@@ -413,6 +428,7 @@ pub struct DeviceCommands {
     pub destroy_descriptor_update_template_khr: PFN_vkDestroyDescriptorUpdateTemplateKHR,
     pub destroy_device: PFN_vkDestroyDevice,
     pub destroy_event: PFN_vkDestroyEvent,
+    pub destroy_external_compute_queue_nv: PFN_vkDestroyExternalComputeQueueNV,
     pub destroy_fence: PFN_vkDestroyFence,
     pub destroy_framebuffer: PFN_vkDestroyFramebuffer,
     pub destroy_image: PFN_vkDestroyImage,
@@ -438,6 +454,8 @@ pub struct DeviceCommands {
     pub destroy_shader_ext: PFN_vkDestroyShaderEXT,
     pub destroy_shader_module: PFN_vkDestroyShaderModule,
     pub destroy_swapchain_khr: PFN_vkDestroySwapchainKHR,
+    pub destroy_tensor_arm: PFN_vkDestroyTensorARM,
+    pub destroy_tensor_view_arm: PFN_vkDestroyTensorViewARM,
     pub destroy_validation_cache_ext: PFN_vkDestroyValidationCacheEXT,
     pub destroy_video_session_khr: PFN_vkDestroyVideoSessionKHR,
     pub destroy_video_session_parameters_khr: PFN_vkDestroyVideoSessionParametersKHR,
@@ -477,6 +495,13 @@ pub struct DeviceCommands {
     pub get_cluster_acceleration_structure_build_sizes_nv:
         PFN_vkGetClusterAccelerationStructureBuildSizesNV,
     pub get_cuda_module_cache_nv: PFN_vkGetCudaModuleCacheNV,
+    pub get_data_graph_pipeline_available_properties_arm:
+        PFN_vkGetDataGraphPipelineAvailablePropertiesARM,
+    pub get_data_graph_pipeline_properties_arm: PFN_vkGetDataGraphPipelinePropertiesARM,
+    pub get_data_graph_pipeline_session_bind_point_requirements_arm:
+        PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM,
+    pub get_data_graph_pipeline_session_memory_requirements_arm:
+        PFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM,
     pub get_deferred_operation_max_concurrency_khr: PFN_vkGetDeferredOperationMaxConcurrencyKHR,
     pub get_deferred_operation_result_khr: PFN_vkGetDeferredOperationResultKHR,
     pub get_descriptor_ext: PFN_vkGetDescriptorEXT,
@@ -512,12 +537,14 @@ pub struct DeviceCommands {
     pub get_device_queue2: PFN_vkGetDeviceQueue2,
     pub get_device_subpass_shading_max_workgroup_size_huawei:
         PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI,
+    pub get_device_tensor_memory_requirements_arm: PFN_vkGetDeviceTensorMemoryRequirementsARM,
     pub get_dynamic_rendering_tile_properties_qcom: PFN_vkGetDynamicRenderingTilePropertiesQCOM,
     pub get_encoded_video_session_parameters_khr: PFN_vkGetEncodedVideoSessionParametersKHR,
     pub get_event_status: PFN_vkGetEventStatus,
     pub get_execution_graph_pipeline_node_index_amdx: PFN_vkGetExecutionGraphPipelineNodeIndexAMDX,
     pub get_execution_graph_pipeline_scratch_size_amdx:
         PFN_vkGetExecutionGraphPipelineScratchSizeAMDX,
+    pub get_external_compute_queue_data_nv: PFN_vkGetExternalComputeQueueDataNV,
     pub get_fence_fd_khr: PFN_vkGetFenceFdKHR,
     pub get_fence_sci_sync_fence_nv: PFN_vkGetFenceSciSyncFenceNV,
     pub get_fence_sci_sync_obj_nv: PFN_vkGetFenceSciSyncObjNV,
@@ -578,6 +605,8 @@ pub struct DeviceCommands {
         PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV,
     pub get_physical_device_external_memory_sci_buf_properties_nv:
         PFN_vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV,
+    pub get_physical_device_external_tensor_properties_arm:
+        PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM,
     pub get_physical_device_fragment_shading_rates_khr:
         PFN_vkGetPhysicalDeviceFragmentShadingRatesKHR,
     pub get_physical_device_multisample_properties_ext:
@@ -585,6 +614,10 @@ pub struct DeviceCommands {
     pub get_physical_device_optical_flow_image_formats_nv:
         PFN_vkGetPhysicalDeviceOpticalFlowImageFormatsNV,
     pub get_physical_device_present_rectangles_khr: PFN_vkGetPhysicalDevicePresentRectanglesKHR,
+    pub get_physical_device_queue_family_data_graph_processing_engine_properties_arm:
+        PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM,
+    pub get_physical_device_queue_family_data_graph_properties_arm:
+        PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM,
     pub get_physical_device_queue_family_performance_query_passes_khr:
         PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR,
     pub get_physical_device_refreshable_object_types_khr:
@@ -641,6 +674,11 @@ pub struct DeviceCommands {
     pub get_swapchain_counter_ext: PFN_vkGetSwapchainCounterEXT,
     pub get_swapchain_images_khr: PFN_vkGetSwapchainImagesKHR,
     pub get_swapchain_status_khr: PFN_vkGetSwapchainStatusKHR,
+    pub get_tensor_memory_requirements_arm: PFN_vkGetTensorMemoryRequirementsARM,
+    pub get_tensor_opaque_capture_descriptor_data_arm:
+        PFN_vkGetTensorOpaqueCaptureDescriptorDataARM,
+    pub get_tensor_view_opaque_capture_descriptor_data_arm:
+        PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM,
     pub get_validation_cache_data_ext: PFN_vkGetValidationCacheDataEXT,
     pub get_video_session_memory_requirements_khr: PFN_vkGetVideoSessionMemoryRequirementsKHR,
     pub get_winrt_display_nv: PFN_vkGetWinrtDisplayNV,
@@ -675,6 +713,7 @@ pub struct DeviceCommands {
     pub release_performance_configuration_intel: PFN_vkReleasePerformanceConfigurationINTEL,
     pub release_profiling_lock_khr: PFN_vkReleaseProfilingLockKHR,
     pub release_swapchain_images_ext: PFN_vkReleaseSwapchainImagesEXT,
+    pub release_swapchain_images_khr: PFN_vkReleaseSwapchainImagesKHR,
     pub reset_command_buffer: PFN_vkResetCommandBuffer,
     pub reset_command_pool: PFN_vkResetCommandPool,
     pub reset_descriptor_pool: PFN_vkResetDescriptorPool,
@@ -711,6 +750,7 @@ pub struct DeviceCommands {
     pub update_indirect_execution_set_shader_ext: PFN_vkUpdateIndirectExecutionSetShaderEXT,
     pub update_video_session_parameters_khr: PFN_vkUpdateVideoSessionParametersKHR,
     pub wait_for_fences: PFN_vkWaitForFences,
+    pub wait_for_present2_khr: PFN_vkWaitForPresent2KHR,
     pub wait_for_present_khr: PFN_vkWaitForPresentKHR,
     pub wait_semaphores: PFN_vkWaitSemaphores,
     pub wait_semaphores_khr: PFN_vkWaitSemaphoresKHR,
@@ -951,6 +991,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            bind_data_graph_pipeline_session_memory_arm: {
+                let value = loader(b"vkBindDataGraphPipelineSessionMemoryARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _bind_info_count: u32,
+                        _bind_infos: *const BindDataGraphPipelineSessionMemoryInfoARM,
+                    ) -> Result {
+                        panic!("could not load vkBindDataGraphPipelineSessionMemoryARM")
+                    }
+                    fallback
+                }
+            },
             bind_image_memory: {
                 let value = loader(b"vkBindImageMemory\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -1014,6 +1069,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            bind_tensor_memory_arm: {
+                let value = loader(b"vkBindTensorMemoryARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _bind_info_count: u32,
+                        _bind_infos: *const BindTensorMemoryInfoARM,
+                    ) -> Result {
+                        panic!("could not load vkBindTensorMemoryARM")
+                    }
+                    fallback
+                }
+            },
             bind_video_session_memory_khr: {
                 let value = loader(b"vkBindVideoSessionMemoryKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -1073,6 +1143,20 @@ impl DeviceCommands {
                         _conditional_rendering_begin: *const ConditionalRenderingBeginInfoEXT,
                     ) {
                         panic!("could not load vkCmdBeginConditionalRenderingEXT")
+                    }
+                    fallback
+                }
+            },
+            cmd_begin_per_tile_execution_qcom: {
+                let value = loader(b"vkCmdBeginPerTileExecutionQCOM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _per_tile_begin_info: *const PerTileBeginInfoQCOM,
+                    ) {
+                        panic!("could not load vkCmdBeginPerTileExecutionQCOM")
                     }
                     fallback
                 }
@@ -1438,6 +1522,20 @@ impl DeviceCommands {
                         _image_layout: ImageLayout,
                     ) {
                         panic!("could not load vkCmdBindShadingRateImageNV")
+                    }
+                    fallback
+                }
+            },
+            cmd_bind_tile_memory_qcom: {
+                let value = loader(b"vkCmdBindTileMemoryQCOM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _tile_memory_bind_info: *const TileMemoryBindInfoQCOM,
+                    ) {
+                        panic!("could not load vkCmdBindTileMemoryQCOM")
                     }
                     fallback
                 }
@@ -2102,6 +2200,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_copy_tensor_arm: {
+                let value = loader(b"vkCmdCopyTensorARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _copy_tensor_info: *const CopyTensorInfoARM,
+                    ) {
+                        panic!("could not load vkCmdCopyTensorARM")
+                    }
+                    fallback
+                }
+            },
             cmd_cu_launch_kernel_nvx: {
                 let value = loader(b"vkCmdCuLaunchKernelNVX\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2268,6 +2380,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_dispatch_data_graph_arm: {
+                let value = loader(b"vkCmdDispatchDataGraphARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _session: DataGraphPipelineSessionARM,
+                        _info: *const DataGraphPipelineDispatchInfoARM,
+                    ) {
+                        panic!("could not load vkCmdDispatchDataGraphARM")
+                    }
+                    fallback
+                }
+            },
             cmd_dispatch_graph_amdx: {
                 let value = loader(b"vkCmdDispatchGraphAMDX\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2327,6 +2454,20 @@ impl DeviceCommands {
                         _offset: DeviceSize,
                     ) {
                         panic!("could not load vkCmdDispatchIndirect")
+                    }
+                    fallback
+                }
+            },
+            cmd_dispatch_tile_qcom: {
+                let value = loader(b"vkCmdDispatchTileQCOM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _dispatch_tile_info: *const DispatchTileInfoQCOM,
+                    ) {
+                        panic!("could not load vkCmdDispatchTileQCOM")
                     }
                     fallback
                 }
@@ -2729,6 +2870,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_end_per_tile_execution_qcom: {
+                let value = loader(b"vkCmdEndPerTileExecutionQCOM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _per_tile_end_info: *const PerTileEndInfoQCOM,
+                    ) {
+                        panic!("could not load vkCmdEndPerTileExecutionQCOM")
+                    }
+                    fallback
+                }
+            },
             cmd_end_query: {
                 let value = loader(b"vkCmdEndQuery\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -2806,6 +2961,20 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(_command_buffer: CommandBuffer) {
                         panic!("could not load vkCmdEndRendering")
+                    }
+                    fallback
+                }
+            },
+            cmd_end_rendering2_ext: {
+                let value = loader(b"vkCmdEndRendering2EXT\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _rendering_end_info: *const RenderingEndInfoEXT,
+                    ) {
+                        panic!("could not load vkCmdEndRendering2EXT")
                     }
                     fallback
                 }
@@ -5614,6 +5783,41 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            create_data_graph_pipeline_session_arm: {
+                let value = loader(b"vkCreateDataGraphPipelineSessionARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const DataGraphPipelineSessionCreateInfoARM,
+                        _allocator: *const AllocationCallbacks,
+                        _session: *mut DataGraphPipelineSessionARM,
+                    ) -> Result {
+                        panic!("could not load vkCreateDataGraphPipelineSessionARM")
+                    }
+                    fallback
+                }
+            },
+            create_data_graph_pipelines_arm: {
+                let value = loader(b"vkCreateDataGraphPipelinesARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _deferred_operation: DeferredOperationKHR,
+                        _pipeline_cache: PipelineCache,
+                        _create_info_count: u32,
+                        _create_infos: *const DataGraphPipelineCreateInfoARM,
+                        _allocator: *const AllocationCallbacks,
+                        _pipelines: *mut Pipeline,
+                    ) -> Result {
+                        panic!("could not load vkCreateDataGraphPipelinesARM")
+                    }
+                    fallback
+                }
+            },
             create_deferred_operation_khr: {
                 let value = loader(b"vkCreateDeferredOperationKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -5723,6 +5927,22 @@ impl DeviceCommands {
                         _pipelines: *mut Pipeline,
                     ) -> Result {
                         panic!("could not load vkCreateExecutionGraphPipelinesAMDX")
+                    }
+                    fallback
+                }
+            },
+            create_external_compute_queue_nv: {
+                let value = loader(b"vkCreateExternalComputeQueueNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const ExternalComputeQueueCreateInfoNV,
+                        _allocator: *const AllocationCallbacks,
+                        _external_queue: *mut ExternalComputeQueueNV,
+                    ) -> Result {
+                        panic!("could not load vkCreateExternalComputeQueueNV")
                     }
                     fallback
                 }
@@ -6216,6 +6436,38 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            create_tensor_arm: {
+                let value = loader(b"vkCreateTensorARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const TensorCreateInfoARM,
+                        _allocator: *const AllocationCallbacks,
+                        _tensor: *mut TensorARM,
+                    ) -> Result {
+                        panic!("could not load vkCreateTensorARM")
+                    }
+                    fallback
+                }
+            },
+            create_tensor_view_arm: {
+                let value = loader(b"vkCreateTensorViewARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _create_info: *const TensorViewCreateInfoARM,
+                        _allocator: *const AllocationCallbacks,
+                        _view: *mut TensorViewARM,
+                    ) -> Result {
+                        panic!("could not load vkCreateTensorViewARM")
+                    }
+                    fallback
+                }
+            },
             create_validation_cache_ext: {
                 let value = loader(b"vkCreateValidationCacheEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -6456,6 +6708,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            destroy_data_graph_pipeline_session_arm: {
+                let value = loader(b"vkDestroyDataGraphPipelineSessionARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _session: DataGraphPipelineSessionARM,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyDataGraphPipelineSessionARM")
+                    }
+                    fallback
+                }
+            },
             destroy_deferred_operation_khr: {
                 let value = loader(b"vkDestroyDeferredOperationKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -6556,6 +6823,21 @@ impl DeviceCommands {
                         _allocator: *const AllocationCallbacks,
                     ) {
                         panic!("could not load vkDestroyEvent")
+                    }
+                    fallback
+                }
+            },
+            destroy_external_compute_queue_nv: {
+                let value = loader(b"vkDestroyExternalComputeQueueNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _external_queue: ExternalComputeQueueNV,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyExternalComputeQueueNV")
                     }
                     fallback
                 }
@@ -6931,6 +7213,36 @@ impl DeviceCommands {
                         _allocator: *const AllocationCallbacks,
                     ) {
                         panic!("could not load vkDestroySwapchainKHR")
+                    }
+                    fallback
+                }
+            },
+            destroy_tensor_arm: {
+                let value = loader(b"vkDestroyTensorARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _tensor: TensorARM,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyTensorARM")
+                    }
+                    fallback
+                }
+            },
+            destroy_tensor_view_arm: {
+                let value = loader(b"vkDestroyTensorViewARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _tensor_view: TensorViewARM,
+                        _allocator: *const AllocationCallbacks,
+                    ) {
+                        panic!("could not load vkDestroyTensorViewARM")
                     }
                     fallback
                 }
@@ -7440,6 +7752,83 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_data_graph_pipeline_available_properties_arm: {
+                let value = loader(
+                    b"vkGetDataGraphPipelineAvailablePropertiesARM\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _pipeline_info: *const DataGraphPipelineInfoARM,
+                        _properties_count: *mut u32,
+                        _properties: *mut DataGraphPipelinePropertyARM,
+                    ) -> Result {
+                        panic!("could not load vkGetDataGraphPipelineAvailablePropertiesARM")
+                    }
+                    fallback
+                }
+            },
+            get_data_graph_pipeline_properties_arm: {
+                let value = loader(b"vkGetDataGraphPipelinePropertiesARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _pipeline_info: *const DataGraphPipelineInfoARM,
+                        _properties_count: u32,
+                        _properties: *mut DataGraphPipelinePropertyQueryResultARM,
+                    ) -> Result {
+                        panic!("could not load vkGetDataGraphPipelinePropertiesARM")
+                    }
+                    fallback
+                }
+            },
+            get_data_graph_pipeline_session_bind_point_requirements_arm: {
+                let value = loader(
+                    b"vkGetDataGraphPipelineSessionBindPointRequirementsARM\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const DataGraphPipelineSessionBindPointRequirementsInfoARM,
+                        _bind_point_requirement_count: *mut u32,
+                        _bind_point_requirements: *mut DataGraphPipelineSessionBindPointRequirementARM,
+                    ) -> Result {
+                        panic!(
+                            "could not load vkGetDataGraphPipelineSessionBindPointRequirementsARM"
+                        )
+                    }
+                    fallback
+                }
+            },
+            get_data_graph_pipeline_session_memory_requirements_arm: {
+                let value = loader(
+                    b"vkGetDataGraphPipelineSessionMemoryRequirementsARM\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const DataGraphPipelineSessionMemoryRequirementsInfoARM,
+                        _memory_requirements: *mut MemoryRequirements2,
+                    ) {
+                        panic!("could not load vkGetDataGraphPipelineSessionMemoryRequirementsARM")
+                    }
+                    fallback
+                }
+            },
             get_deferred_operation_max_concurrency_khr: {
                 let value = loader(b"vkGetDeferredOperationMaxConcurrencyKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -7937,6 +8326,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_device_tensor_memory_requirements_arm: {
+                let value = loader(b"vkGetDeviceTensorMemoryRequirementsARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const DeviceTensorMemoryRequirementsARM,
+                        _memory_requirements: *mut MemoryRequirements2,
+                    ) {
+                        panic!("could not load vkGetDeviceTensorMemoryRequirementsARM")
+                    }
+                    fallback
+                }
+            },
             get_dynamic_rendering_tile_properties_qcom: {
                 let value = loader(b"vkGetDynamicRenderingTilePropertiesQCOM\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -8015,6 +8419,21 @@ impl DeviceCommands {
                         _size_info: *mut ExecutionGraphPipelineScratchSizeAMDX,
                     ) -> Result {
                         panic!("could not load vkGetExecutionGraphPipelineScratchSizeAMDX")
+                    }
+                    fallback
+                }
+            },
+            get_external_compute_queue_data_nv: {
+                let value = loader(b"vkGetExternalComputeQueueDataNV\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _external_queue: ExternalComputeQueueNV,
+                        _params: *mut ExternalComputeQueueDataParamsNV,
+                        _data: *mut c_void,
+                    ) {
+                        panic!("could not load vkGetExternalComputeQueueDataNV")
                     }
                     fallback
                 }
@@ -8821,6 +9240,25 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_physical_device_external_tensor_properties_arm: {
+                let value = instance_loader(
+                    b"vkGetPhysicalDeviceExternalTensorPropertiesARM\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _external_tensor_info: *const PhysicalDeviceExternalTensorInfoARM,
+                        _external_tensor_properties: *mut ExternalTensorPropertiesARM,
+                    ) {
+                        panic!("could not load vkGetPhysicalDeviceExternalTensorPropertiesARM")
+                    }
+                    fallback
+                }
+            },
             get_physical_device_fragment_shading_rates_khr: {
                 let value = instance_loader(
                     b"vkGetPhysicalDeviceFragmentShadingRatesKHR\0"
@@ -8892,6 +9330,47 @@ impl DeviceCommands {
                         _rects: *mut Rect2D,
                     ) -> Result {
                         panic!("could not load vkGetPhysicalDevicePresentRectanglesKHR")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_queue_family_data_graph_processing_engine_properties_arm: {
+                let value = instance_loader(
+                    b"vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _queue_family_data_graph_processing_engine_info: *const PhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM,
+                        _queue_family_data_graph_processing_engine_properties: *mut QueueFamilyDataGraphProcessingEnginePropertiesARM,
+                    ) {
+                        panic!("could not load vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM")
+                    }
+                    fallback
+                }
+            },
+            get_physical_device_queue_family_data_graph_properties_arm: {
+                let value = instance_loader(
+                    b"vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _physical_device: PhysicalDevice,
+                        _queue_family_index: u32,
+                        _queue_family_data_graph_property_count: *mut u32,
+                        _queue_family_data_graph_properties: *mut QueueFamilyDataGraphPropertiesARM,
+                    ) -> Result {
+                        panic!(
+                            "could not load vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM"
+                        )
                     }
                     fallback
                 }
@@ -9679,6 +10158,59 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            get_tensor_memory_requirements_arm: {
+                let value = loader(b"vkGetTensorMemoryRequirementsARM\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const TensorMemoryRequirementsInfoARM,
+                        _memory_requirements: *mut MemoryRequirements2,
+                    ) {
+                        panic!("could not load vkGetTensorMemoryRequirementsARM")
+                    }
+                    fallback
+                }
+            },
+            get_tensor_opaque_capture_descriptor_data_arm: {
+                let value = loader(
+                    b"vkGetTensorOpaqueCaptureDescriptorDataARM\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const TensorCaptureDescriptorDataInfoARM,
+                        _data: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetTensorOpaqueCaptureDescriptorDataARM")
+                    }
+                    fallback
+                }
+            },
+            get_tensor_view_opaque_capture_descriptor_data_arm: {
+                let value = loader(
+                    b"vkGetTensorViewOpaqueCaptureDescriptorDataARM\0"
+                        .as_ptr()
+                        .cast(),
+                );
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _info: *const TensorViewCaptureDescriptorDataInfoARM,
+                        _data: *mut c_void,
+                    ) -> Result {
+                        panic!("could not load vkGetTensorViewOpaqueCaptureDescriptorDataARM")
+                    }
+                    fallback
+                }
+            },
             get_validation_cache_data_ext: {
                 let value = loader(b"vkGetValidationCacheDataEXT\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -10173,9 +10705,23 @@ impl DeviceCommands {
                 } else {
                     unsafe extern "system" fn fallback(
                         _device: Device,
-                        _release_info: *const ReleaseSwapchainImagesInfoEXT,
+                        _release_info: *const ReleaseSwapchainImagesInfoKHR,
                     ) -> Result {
                         panic!("could not load vkReleaseSwapchainImagesEXT")
+                    }
+                    fallback
+                }
+            },
+            release_swapchain_images_khr: {
+                let value = loader(b"vkReleaseSwapchainImagesKHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _release_info: *const ReleaseSwapchainImagesInfoKHR,
+                    ) -> Result {
+                        panic!("could not load vkReleaseSwapchainImagesKHR")
                     }
                     fallback
                 }
@@ -10692,6 +11238,21 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            wait_for_present2_khr: {
+                let value = loader(b"vkWaitForPresent2KHR\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _device: Device,
+                        _swapchain: SwapchainKHR,
+                        _present_wait2_info: *const PresentWait2InfoKHR,
+                    ) -> Result {
+                        panic!("could not load vkWaitForPresent2KHR")
+                    }
+                    fallback
+                }
+            },
             wait_for_present_khr: {
                 let value = loader(b"vkWaitForPresentKHR\0".as_ptr().cast());
                 if let Some(value) = value {
@@ -10880,6 +11441,7 @@ pub struct InstanceCommands {
     pub create_metal_surface_ext: PFN_vkCreateMetalSurfaceEXT,
     pub create_screen_surface_qnx: PFN_vkCreateScreenSurfaceQNX,
     pub create_stream_descriptor_surface_ggp: PFN_vkCreateStreamDescriptorSurfaceGGP,
+    pub create_surface_ohos: PFN_vkCreateSurfaceOHOS,
     pub create_vi_surface_nn: PFN_vkCreateViSurfaceNN,
     pub create_wayland_surface_khr: PFN_vkCreateWaylandSurfaceKHR,
     pub create_win32_surface_khr: PFN_vkCreateWin32SurfaceKHR,
@@ -11276,6 +11838,22 @@ impl InstanceCommands {
                         _surface: *mut SurfaceKHR,
                     ) -> Result {
                         panic!("could not load vkCreateStreamDescriptorSurfaceGGP")
+                    }
+                    fallback
+                }
+            },
+            create_surface_ohos: {
+                let value = loader(b"vkCreateSurfaceOHOS\0".as_ptr().cast());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _instance: Instance,
+                        _create_info: *const SurfaceCreateInfoOHOS,
+                        _allocator: *const AllocationCallbacks,
+                        _surface: *mut SurfaceKHR,
+                    ) -> Result {
+                        panic!("could not load vkCreateSurfaceOHOS")
                     }
                     fallback
                 }

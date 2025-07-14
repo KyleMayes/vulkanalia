@@ -155,6 +155,14 @@ pub const STD_VIDEO_H265_MAX_LONG_TERM_PICS: u32 = 16;
 pub const STD_VIDEO_H265_MAX_DELTA_POC: u32 = 48;
 pub const STD_VIDEO_H265_NO_REFERENCE_PICTURE: u32 = 255;
 pub const STD_VIDEO_DECODE_H265_REF_PIC_SET_LIST_SIZE: u32 = 8;
+pub const STD_VIDEO_VP9_NUM_REF_FRAMES: u32 = 8;
+pub const STD_VIDEO_VP9_REFS_PER_FRAME: u32 = 3;
+pub const STD_VIDEO_VP9_MAX_REF_FRAMES: u32 = 4;
+pub const STD_VIDEO_VP9_LOOP_FILTER_ADJUSTMENTS: u32 = 2;
+pub const STD_VIDEO_VP9_MAX_SEGMENTS: u32 = 8;
+pub const STD_VIDEO_VP9_SEG_LVL_MAX: u32 = 4;
+pub const STD_VIDEO_VP9_MAX_SEGMENTATION_TREE_PROBS: u32 = 7;
+pub const STD_VIDEO_VP9_MAX_SEGMENTATION_PRED_PROB: u32 = 3;
 pub const STD_VIDEO_AV1_PROFILE_MAIN: StdVideoAV1Profile = StdVideoAV1Profile(0);
 pub const STD_VIDEO_AV1_PROFILE_HIGH: StdVideoAV1Profile = StdVideoAV1Profile(1);
 pub const STD_VIDEO_AV1_PROFILE_PROFESSIONAL: StdVideoAV1Profile = StdVideoAV1Profile(2);
@@ -7031,4 +7039,509 @@ pub struct StdVideoEncodeH265ReferenceInfo {
     pub pic_type: StdVideoH265PictureType,
     pub PicOrderCntVal: i32,
     pub TemporalId: u8,
+}
+pub const STD_VIDEO_VP9_PROFILE_0: StdVideoVP9Profile = StdVideoVP9Profile(0);
+pub const STD_VIDEO_VP9_PROFILE_1: StdVideoVP9Profile = StdVideoVP9Profile(1);
+pub const STD_VIDEO_VP9_PROFILE_2: StdVideoVP9Profile = StdVideoVP9Profile(2);
+pub const STD_VIDEO_VP9_PROFILE_3: StdVideoVP9Profile = StdVideoVP9Profile(3);
+pub const STD_VIDEO_VP9_PROFILE_INVALID: StdVideoVP9Profile = StdVideoVP9Profile(2147483647);
+pub const STD_VIDEO_VP9_PROFILE_MAX_ENUM: StdVideoVP9Profile = StdVideoVP9Profile(2147483647);
+#[repr(transparent)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq, Default)]
+pub struct StdVideoVP9Profile(pub ::core::ffi::c_int);
+pub const STD_VIDEO_VP9_LEVEL_1_0: StdVideoVP9Level = StdVideoVP9Level(0);
+pub const STD_VIDEO_VP9_LEVEL_1_1: StdVideoVP9Level = StdVideoVP9Level(1);
+pub const STD_VIDEO_VP9_LEVEL_2_0: StdVideoVP9Level = StdVideoVP9Level(2);
+pub const STD_VIDEO_VP9_LEVEL_2_1: StdVideoVP9Level = StdVideoVP9Level(3);
+pub const STD_VIDEO_VP9_LEVEL_3_0: StdVideoVP9Level = StdVideoVP9Level(4);
+pub const STD_VIDEO_VP9_LEVEL_3_1: StdVideoVP9Level = StdVideoVP9Level(5);
+pub const STD_VIDEO_VP9_LEVEL_4_0: StdVideoVP9Level = StdVideoVP9Level(6);
+pub const STD_VIDEO_VP9_LEVEL_4_1: StdVideoVP9Level = StdVideoVP9Level(7);
+pub const STD_VIDEO_VP9_LEVEL_5_0: StdVideoVP9Level = StdVideoVP9Level(8);
+pub const STD_VIDEO_VP9_LEVEL_5_1: StdVideoVP9Level = StdVideoVP9Level(9);
+pub const STD_VIDEO_VP9_LEVEL_5_2: StdVideoVP9Level = StdVideoVP9Level(10);
+pub const STD_VIDEO_VP9_LEVEL_6_0: StdVideoVP9Level = StdVideoVP9Level(11);
+pub const STD_VIDEO_VP9_LEVEL_6_1: StdVideoVP9Level = StdVideoVP9Level(12);
+pub const STD_VIDEO_VP9_LEVEL_6_2: StdVideoVP9Level = StdVideoVP9Level(13);
+pub const STD_VIDEO_VP9_LEVEL_INVALID: StdVideoVP9Level = StdVideoVP9Level(2147483647);
+pub const STD_VIDEO_VP9_LEVEL_MAX_ENUM: StdVideoVP9Level = StdVideoVP9Level(2147483647);
+#[repr(transparent)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq, Default)]
+pub struct StdVideoVP9Level(pub ::core::ffi::c_int);
+pub const STD_VIDEO_VP9_FRAME_TYPE_KEY: StdVideoVP9FrameType = StdVideoVP9FrameType(0);
+pub const STD_VIDEO_VP9_FRAME_TYPE_NON_KEY: StdVideoVP9FrameType = StdVideoVP9FrameType(1);
+pub const STD_VIDEO_VP9_FRAME_TYPE_INVALID: StdVideoVP9FrameType = StdVideoVP9FrameType(2147483647);
+pub const STD_VIDEO_VP9_FRAME_TYPE_MAX_ENUM: StdVideoVP9FrameType =
+    StdVideoVP9FrameType(2147483647);
+#[repr(transparent)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq, Default)]
+pub struct StdVideoVP9FrameType(pub ::core::ffi::c_int);
+pub const STD_VIDEO_VP9_REFERENCE_NAME_INTRA_FRAME: StdVideoVP9ReferenceName =
+    StdVideoVP9ReferenceName(0);
+pub const STD_VIDEO_VP9_REFERENCE_NAME_LAST_FRAME: StdVideoVP9ReferenceName =
+    StdVideoVP9ReferenceName(1);
+pub const STD_VIDEO_VP9_REFERENCE_NAME_GOLDEN_FRAME: StdVideoVP9ReferenceName =
+    StdVideoVP9ReferenceName(2);
+pub const STD_VIDEO_VP9_REFERENCE_NAME_ALTREF_FRAME: StdVideoVP9ReferenceName =
+    StdVideoVP9ReferenceName(3);
+pub const STD_VIDEO_VP9_REFERENCE_NAME_INVALID: StdVideoVP9ReferenceName =
+    StdVideoVP9ReferenceName(2147483647);
+pub const STD_VIDEO_VP9_REFERENCE_NAME_MAX_ENUM: StdVideoVP9ReferenceName =
+    StdVideoVP9ReferenceName(2147483647);
+#[repr(transparent)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq, Default)]
+pub struct StdVideoVP9ReferenceName(pub ::core::ffi::c_int);
+pub const STD_VIDEO_VP9_INTERPOLATION_FILTER_EIGHTTAP: StdVideoVP9InterpolationFilter =
+    StdVideoVP9InterpolationFilter(0);
+pub const STD_VIDEO_VP9_INTERPOLATION_FILTER_EIGHTTAP_SMOOTH: StdVideoVP9InterpolationFilter =
+    StdVideoVP9InterpolationFilter(1);
+pub const STD_VIDEO_VP9_INTERPOLATION_FILTER_EIGHTTAP_SHARP: StdVideoVP9InterpolationFilter =
+    StdVideoVP9InterpolationFilter(2);
+pub const STD_VIDEO_VP9_INTERPOLATION_FILTER_BILINEAR: StdVideoVP9InterpolationFilter =
+    StdVideoVP9InterpolationFilter(3);
+pub const STD_VIDEO_VP9_INTERPOLATION_FILTER_SWITCHABLE: StdVideoVP9InterpolationFilter =
+    StdVideoVP9InterpolationFilter(4);
+pub const STD_VIDEO_VP9_INTERPOLATION_FILTER_INVALID: StdVideoVP9InterpolationFilter =
+    StdVideoVP9InterpolationFilter(2147483647);
+pub const STD_VIDEO_VP9_INTERPOLATION_FILTER_MAX_ENUM: StdVideoVP9InterpolationFilter =
+    StdVideoVP9InterpolationFilter(2147483647);
+#[repr(transparent)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq, Default)]
+pub struct StdVideoVP9InterpolationFilter(pub ::core::ffi::c_int);
+pub const STD_VIDEO_VP9_COLOR_SPACE_UNKNOWN: StdVideoVP9ColorSpace = StdVideoVP9ColorSpace(0);
+pub const STD_VIDEO_VP9_COLOR_SPACE_BT_601: StdVideoVP9ColorSpace = StdVideoVP9ColorSpace(1);
+pub const STD_VIDEO_VP9_COLOR_SPACE_BT_709: StdVideoVP9ColorSpace = StdVideoVP9ColorSpace(2);
+pub const STD_VIDEO_VP9_COLOR_SPACE_SMPTE_170: StdVideoVP9ColorSpace = StdVideoVP9ColorSpace(3);
+pub const STD_VIDEO_VP9_COLOR_SPACE_SMPTE_240: StdVideoVP9ColorSpace = StdVideoVP9ColorSpace(4);
+pub const STD_VIDEO_VP9_COLOR_SPACE_BT_2020: StdVideoVP9ColorSpace = StdVideoVP9ColorSpace(5);
+pub const STD_VIDEO_VP9_COLOR_SPACE_RESERVED: StdVideoVP9ColorSpace = StdVideoVP9ColorSpace(6);
+pub const STD_VIDEO_VP9_COLOR_SPACE_RGB: StdVideoVP9ColorSpace = StdVideoVP9ColorSpace(7);
+pub const STD_VIDEO_VP9_COLOR_SPACE_INVALID: StdVideoVP9ColorSpace =
+    StdVideoVP9ColorSpace(2147483647);
+pub const STD_VIDEO_VP9_COLOR_SPACE_MAX_ENUM: StdVideoVP9ColorSpace =
+    StdVideoVP9ColorSpace(2147483647);
+#[repr(transparent)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq, Default)]
+pub struct StdVideoVP9ColorSpace(pub ::core::ffi::c_int);
+#[repr(C)]
+#[repr(align(4))]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoVP9ColorConfigFlags {
+    pub _bitfield_align_1: [u32; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 4usize]>,
+}
+impl StdVideoVP9ColorConfigFlags {
+    #[inline]
+    pub fn color_range(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_color_range(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn reserved(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 31u8) as u32) }
+    }
+    #[inline]
+    pub fn set_reserved(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 31u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(color_range: u32, reserved: u32) -> __BindgenBitfieldUnit<[u8; 4usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 4usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let color_range: u32 = unsafe { ::core::mem::transmute(color_range) };
+            color_range as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 31u8, {
+            let reserved: u32 = unsafe { ::core::mem::transmute(reserved) };
+            reserved as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoVP9ColorConfig {
+    pub flags: StdVideoVP9ColorConfigFlags,
+    pub BitDepth: u8,
+    pub subsampling_x: u8,
+    pub subsampling_y: u8,
+    pub reserved1: u8,
+    pub color_space: StdVideoVP9ColorSpace,
+}
+#[repr(C)]
+#[repr(align(4))]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoVP9LoopFilterFlags {
+    pub _bitfield_align_1: [u32; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 4usize]>,
+}
+impl StdVideoVP9LoopFilterFlags {
+    #[inline]
+    pub fn loop_filter_delta_enabled(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_loop_filter_delta_enabled(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn loop_filter_delta_update(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_loop_filter_delta_update(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn reserved(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 30u8) as u32) }
+    }
+    #[inline]
+    pub fn set_reserved(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(2usize, 30u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        loop_filter_delta_enabled: u32,
+        loop_filter_delta_update: u32,
+        reserved: u32,
+    ) -> __BindgenBitfieldUnit<[u8; 4usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 4usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let loop_filter_delta_enabled: u32 =
+                unsafe { ::core::mem::transmute(loop_filter_delta_enabled) };
+            loop_filter_delta_enabled as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 1u8, {
+            let loop_filter_delta_update: u32 =
+                unsafe { ::core::mem::transmute(loop_filter_delta_update) };
+            loop_filter_delta_update as u64
+        });
+        __bindgen_bitfield_unit.set(2usize, 30u8, {
+            let reserved: u32 = unsafe { ::core::mem::transmute(reserved) };
+            reserved as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoVP9LoopFilter {
+    pub flags: StdVideoVP9LoopFilterFlags,
+    pub loop_filter_level: u8,
+    pub loop_filter_sharpness: u8,
+    pub update_ref_delta: u8,
+    pub loop_filter_ref_deltas: [i8; 4usize],
+    pub update_mode_delta: u8,
+    pub loop_filter_mode_deltas: [i8; 2usize],
+}
+#[repr(C)]
+#[repr(align(4))]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoVP9SegmentationFlags {
+    pub _bitfield_align_1: [u32; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 4usize]>,
+}
+impl StdVideoVP9SegmentationFlags {
+    #[inline]
+    pub fn segmentation_update_map(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_segmentation_update_map(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn segmentation_temporal_update(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_segmentation_temporal_update(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn segmentation_update_data(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_segmentation_update_data(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(2usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn segmentation_abs_or_delta_update(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_segmentation_abs_or_delta_update(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(3usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn reserved(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 28u8) as u32) }
+    }
+    #[inline]
+    pub fn set_reserved(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(4usize, 28u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        segmentation_update_map: u32,
+        segmentation_temporal_update: u32,
+        segmentation_update_data: u32,
+        segmentation_abs_or_delta_update: u32,
+        reserved: u32,
+    ) -> __BindgenBitfieldUnit<[u8; 4usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 4usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let segmentation_update_map: u32 =
+                unsafe { ::core::mem::transmute(segmentation_update_map) };
+            segmentation_update_map as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 1u8, {
+            let segmentation_temporal_update: u32 =
+                unsafe { ::core::mem::transmute(segmentation_temporal_update) };
+            segmentation_temporal_update as u64
+        });
+        __bindgen_bitfield_unit.set(2usize, 1u8, {
+            let segmentation_update_data: u32 =
+                unsafe { ::core::mem::transmute(segmentation_update_data) };
+            segmentation_update_data as u64
+        });
+        __bindgen_bitfield_unit.set(3usize, 1u8, {
+            let segmentation_abs_or_delta_update: u32 =
+                unsafe { ::core::mem::transmute(segmentation_abs_or_delta_update) };
+            segmentation_abs_or_delta_update as u64
+        });
+        __bindgen_bitfield_unit.set(4usize, 28u8, {
+            let reserved: u32 = unsafe { ::core::mem::transmute(reserved) };
+            reserved as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoVP9Segmentation {
+    pub flags: StdVideoVP9SegmentationFlags,
+    pub segmentation_tree_probs: [u8; 7usize],
+    pub segmentation_pred_prob: [u8; 3usize],
+    pub FeatureEnabled: [u8; 8usize],
+    pub FeatureData: [[i16; 4usize]; 8usize],
+}
+#[repr(C)]
+#[repr(align(4))]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoDecodeVP9PictureInfoFlags {
+    pub _bitfield_align_1: [u32; 0],
+    pub _bitfield_1: __BindgenBitfieldUnit<[u8; 4usize]>,
+}
+impl StdVideoDecodeVP9PictureInfoFlags {
+    #[inline]
+    pub fn error_resilient_mode(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(0usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_error_resilient_mode(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(0usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn intra_only(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(1usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_intra_only(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(1usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn allow_high_precision_mv(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(2usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_allow_high_precision_mv(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(2usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn refresh_frame_context(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(3usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_refresh_frame_context(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(3usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn frame_parallel_decoding_mode(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(4usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_frame_parallel_decoding_mode(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(4usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn segmentation_enabled(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(5usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_segmentation_enabled(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(5usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn show_frame(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(6usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_show_frame(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(6usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn UsePrevFrameMvs(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(7usize, 1u8) as u32) }
+    }
+    #[inline]
+    pub fn set_UsePrevFrameMvs(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(7usize, 1u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn reserved(&self) -> u32 {
+        unsafe { ::core::mem::transmute(self._bitfield_1.get(8usize, 24u8) as u32) }
+    }
+    #[inline]
+    pub fn set_reserved(&mut self, val: u32) {
+        unsafe {
+            let val: u32 = ::core::mem::transmute(val);
+            self._bitfield_1.set(8usize, 24u8, val as u64)
+        }
+    }
+    #[inline]
+    pub fn new_bitfield_1(
+        error_resilient_mode: u32,
+        intra_only: u32,
+        allow_high_precision_mv: u32,
+        refresh_frame_context: u32,
+        frame_parallel_decoding_mode: u32,
+        segmentation_enabled: u32,
+        show_frame: u32,
+        UsePrevFrameMvs: u32,
+        reserved: u32,
+    ) -> __BindgenBitfieldUnit<[u8; 4usize]> {
+        let mut __bindgen_bitfield_unit: __BindgenBitfieldUnit<[u8; 4usize]> = Default::default();
+        __bindgen_bitfield_unit.set(0usize, 1u8, {
+            let error_resilient_mode: u32 = unsafe { ::core::mem::transmute(error_resilient_mode) };
+            error_resilient_mode as u64
+        });
+        __bindgen_bitfield_unit.set(1usize, 1u8, {
+            let intra_only: u32 = unsafe { ::core::mem::transmute(intra_only) };
+            intra_only as u64
+        });
+        __bindgen_bitfield_unit.set(2usize, 1u8, {
+            let allow_high_precision_mv: u32 =
+                unsafe { ::core::mem::transmute(allow_high_precision_mv) };
+            allow_high_precision_mv as u64
+        });
+        __bindgen_bitfield_unit.set(3usize, 1u8, {
+            let refresh_frame_context: u32 =
+                unsafe { ::core::mem::transmute(refresh_frame_context) };
+            refresh_frame_context as u64
+        });
+        __bindgen_bitfield_unit.set(4usize, 1u8, {
+            let frame_parallel_decoding_mode: u32 =
+                unsafe { ::core::mem::transmute(frame_parallel_decoding_mode) };
+            frame_parallel_decoding_mode as u64
+        });
+        __bindgen_bitfield_unit.set(5usize, 1u8, {
+            let segmentation_enabled: u32 = unsafe { ::core::mem::transmute(segmentation_enabled) };
+            segmentation_enabled as u64
+        });
+        __bindgen_bitfield_unit.set(6usize, 1u8, {
+            let show_frame: u32 = unsafe { ::core::mem::transmute(show_frame) };
+            show_frame as u64
+        });
+        __bindgen_bitfield_unit.set(7usize, 1u8, {
+            let UsePrevFrameMvs: u32 = unsafe { ::core::mem::transmute(UsePrevFrameMvs) };
+            UsePrevFrameMvs as u64
+        });
+        __bindgen_bitfield_unit.set(8usize, 24u8, {
+            let reserved: u32 = unsafe { ::core::mem::transmute(reserved) };
+            reserved as u64
+        });
+        __bindgen_bitfield_unit
+    }
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct StdVideoDecodeVP9PictureInfo {
+    pub flags: StdVideoDecodeVP9PictureInfoFlags,
+    pub profile: StdVideoVP9Profile,
+    pub frame_type: StdVideoVP9FrameType,
+    pub frame_context_idx: u8,
+    pub reset_frame_context: u8,
+    pub refresh_frame_flags: u8,
+    pub ref_frame_sign_bias_mask: u8,
+    pub interpolation_filter: StdVideoVP9InterpolationFilter,
+    pub base_q_idx: u8,
+    pub delta_q_y_dc: i8,
+    pub delta_q_uv_dc: i8,
+    pub delta_q_uv_ac: i8,
+    pub tile_cols_log2: u8,
+    pub tile_rows_log2: u8,
+    pub reserved1: [u16; 3usize],
+    pub pColorConfig: *const StdVideoVP9ColorConfig,
+    pub pLoopFilter: *const StdVideoVP9LoopFilter,
+    pub pSegmentation: *const StdVideoVP9Segmentation,
 }
