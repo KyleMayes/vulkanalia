@@ -5381,6 +5381,7 @@ impl Result {
     pub const ERROR_FORMAT_NOT_SUPPORTED: Self = Self(-11);
     pub const ERROR_FRAGMENTED_POOL: Self = Self(-12);
     pub const ERROR_UNKNOWN: Self = Self(-13);
+    pub const ERROR_VALIDATION_FAILED: Self = Self(-1000011001);
     pub const ERROR_OUT_OF_POOL_MEMORY: Self = Self(-1000069000);
     pub const ERROR_INVALID_EXTERNAL_HANDLE: Self = Self(-1000072003);
     pub const ERROR_FRAGMENTATION: Self = Self(-1000161000);
@@ -5392,7 +5393,6 @@ impl Result {
     pub const SUBOPTIMAL_KHR: Self = Self(1000001003);
     pub const ERROR_OUT_OF_DATE_KHR: Self = Self(-1000001004);
     pub const ERROR_INCOMPATIBLE_DISPLAY_KHR: Self = Self(-1000003001);
-    pub const ERROR_VALIDATION_FAILED_EXT: Self = Self(-1000011001);
     pub const ERROR_INVALID_SHADER_NV: Self = Self(-1000012000);
     pub const ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR: Self = Self(-1000023000);
     pub const ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR: Self = Self(-1000023001);
@@ -5447,6 +5447,7 @@ impl fmt::Debug for Result {
             -11 => write!(f, "ERROR_FORMAT_NOT_SUPPORTED"),
             -12 => write!(f, "ERROR_FRAGMENTED_POOL"),
             -13 => write!(f, "ERROR_UNKNOWN"),
+            -1000011001 => write!(f, "ERROR_VALIDATION_FAILED"),
             -1000069000 => write!(f, "ERROR_OUT_OF_POOL_MEMORY"),
             -1000072003 => write!(f, "ERROR_INVALID_EXTERNAL_HANDLE"),
             -1000161000 => write!(f, "ERROR_FRAGMENTATION"),
@@ -5458,7 +5459,6 @@ impl fmt::Debug for Result {
             1000001003 => write!(f, "SUBOPTIMAL_KHR"),
             -1000001004 => write!(f, "ERROR_OUT_OF_DATE_KHR"),
             -1000003001 => write!(f, "ERROR_INCOMPATIBLE_DISPLAY_KHR"),
-            -1000011001 => write!(f, "ERROR_VALIDATION_FAILED_EXT"),
             -1000012000 => write!(f, "ERROR_INVALID_SHADER_NV"),
             -1000023000 => write!(f, "ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR"),
             -1000023001 => write!(f, "ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR"),
@@ -5504,6 +5504,7 @@ impl fmt::Display for Result {
             -11 => write!(f, "A requested format is not supported on this device."),
             -12 => write!(f, "A pool allocation has failed due to fragmentation of the pool's memory. This must only be returned if no attempt to allocate host or device memory was made to accommodate the new allocation. This should be returned in preference to VK_ERROR_OUT_OF_POOL_MEMORY, but only if the implementation is certain that the pool allocation failure was due to fragmentation."),
             -13 => write!(f, "An unknown error has occurred; either the application has provided invalid input, or an implementation failure has occurred."),
+            -1000011001 => write!(f, "A command failed because invalid usage was detected by the implementation or a validation-layer."),
             -1000069000 => write!(f, "A pool memory allocation has failed. This must only be returned if no attempt to allocate host or device memory was made to accommodate the new allocation. If the failure was definitely due to fragmentation of the pool, VK_ERROR_FRAGMENTED_POOL should be returned instead."),
             -1000072003 => write!(f, "An external handle is not a valid handle of the specified type."),
             -1000161000 => write!(f, "A descriptor pool creation has failed due to fragmentation."),
@@ -5515,7 +5516,6 @@ impl fmt::Display for Result {
             1000001003 => write!(f, "A swapchain no longer matches the surface properties exactly, but can still be used to present to the surface successfully."),
             -1000001004 => write!(f, "A surface has changed in such a way that it is no longer compatible with the swapchain, and further presentation requests using the swapchain will fail. Applications must query the new surface properties and recreate their swapchain if they wish to continue presenting to the surface."),
             -1000003001 => write!(f, "The display used by a swapchain does not use the same presentable image layout, or is incompatible in a way that prevents sharing an image."),
-            -1000011001 => write!(f, "A command failed because invalid usage was detected by the implementation or a validation-layer."),
             -1000012000 => write!(f, "One or more shaders failed to compile or link. More details are reported back to the application via VK_EXT_debug_report if enabled."),
             -1000023000 => write!(f, "The requested VkImageUsageFlags are not supported."),
             -1000023001 => write!(f, "The requested video picture layout is not supported."),
