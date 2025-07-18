@@ -1,3 +1,19 @@
+## [0.30.0] - UNRELEASED
+
+### Bindings Updates
+- [gn: Add vpn9std headers to GN build](https://github.com/KhronosGroup/Vulkan-Headers/commit/1d6c53f65443ceeb97d3bdc695aaecc7ea6cc441)
+- [Update for Vulkan-Docs 1.4.318](https://github.com/KhronosGroup/Vulkan-Headers/commit/b39ab380a44b6c8df462c34e976ea9ce2d2c336b)
+- [Update for Vulkan-Docs 1.4.319](https://github.com/KhronosGroup/Vulkan-Headers/commit/10739e8e00a7b6f74d22dd0a547f1406ff1f5eb9)
+- [Update for Vulkan-Docs 1.4.320](https://github.com/KhronosGroup/Vulkan-Headers/commit/16cedde3564629c43808401ad1eb3ca6ef24709a)
+- [Update for Vulkan-Docs 1.4.321](https://github.com/KhronosGroup/Vulkan-Headers/commit/2cd90f9d20df57eac214c148f3aed885372ddcfe)
+- [Build script updates](https://github.com/KhronosGroup/Vulkan-Headers/commit/a2ab2a76125d7fc076ae1398a2c29a4cf0586e43)
+- [Update release Makefile to refer to ../Vulkan-Docs/Vulkan-Hpp instead of](https://github.com/KhronosGroup/Vulkan-Headers/commit/4fcc684c7ed8535b7018830f3f7c3e6c5b8b89f3)
+- [Update for Vulkan-Docs 1.4.](https://github.com/KhronosGroup/Vulkan-Headers/commit/7cff847503174e2049b08253ee5f30428866fea3)
+- [Update release Makefile again](https://github.com/KhronosGroup/Vulkan-Headers/commit/f69f0433bae0b30598380ef0420b9d2d02dbac4d)
+- [Chzange log for July 18, 2025 Vulkan 1.4.323 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/5d386163f25cca10d2af7be2bbea07d1e6fb52ba)
+- [Fix REVISION expansion in Makefile.release](https://github.com/KhronosGroup/Vulkan-Headers/commit/00a752019b1dc1419164a24be069e4eb03cef01b)
+- [Update for Vulkan-Docs 1.4.323](https://github.com/KhronosGroup/Vulkan-Headers/commit/088a00d81d1fc30ff77aacf31485871aebec7cb2)
+
 ## [0.29.0] - 2025-07-14
 
 ### Added

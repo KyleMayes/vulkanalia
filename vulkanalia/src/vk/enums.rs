@@ -107,6 +107,7 @@ impl ErrorCode {
     pub const FORMAT_NOT_SUPPORTED: Self = Self(-11);
     pub const FRAGMENTED_POOL: Self = Self(-12);
     pub const UNKNOWN: Self = Self(-13);
+    pub const VALIDATION_FAILED: Self = Self(-1000011001);
     pub const OUT_OF_POOL_MEMORY: Self = Self(-1000069000);
     pub const INVALID_EXTERNAL_HANDLE: Self = Self(-1000072003);
     pub const FRAGMENTATION: Self = Self(-1000161000);
@@ -116,7 +117,6 @@ impl ErrorCode {
     pub const NATIVE_WINDOW_IN_USE_KHR: Self = Self(-1000000001);
     pub const OUT_OF_DATE_KHR: Self = Self(-1000001004);
     pub const INCOMPATIBLE_DISPLAY_KHR: Self = Self(-1000003001);
-    pub const VALIDATION_FAILED_EXT: Self = Self(-1000011001);
     pub const INVALID_SHADER_NV: Self = Self(-1000012000);
     pub const IMAGE_USAGE_NOT_SUPPORTED_KHR: Self = Self(-1000023000);
     pub const VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR: Self = Self(-1000023001);
