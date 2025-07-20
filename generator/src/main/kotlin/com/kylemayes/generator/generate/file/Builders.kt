@@ -102,7 +102,9 @@ ${structs.values
 
 /** Generates a Rust struct to build a Vulkan struct. */
 fun Registry.generateBuilder(struct: Structure): String {
-    val lifetime = if (getStructLifetime(struct)) "<'b>" else ""
+    val hasLifetime = getStructLifetime(struct)
+    val lifetime = if (hasLifetime) "<'b>" else ""
+    val anonymousLifetime = if (hasLifetime) "<'_>" else ""
     val traitLifetime = if (lifetime.isNotEmpty()) "<'b>" else "<'static>"
     val marker = if (lifetime.isNotEmpty()) "_marker: PhantomData<&'b ()>," else ""
     val methods = generateMethods(struct)
@@ -138,7 +140,7 @@ impl$lifetime ${struct.name}Builder$lifetime {
     }
 }
 
-impl$lifetime ops::Deref for ${struct.name}Builder$lifetime {
+impl ops::Deref for ${struct.name}Builder$anonymousLifetime {
     type Target = ${struct.name};
 
     #[inline]
@@ -147,14 +149,14 @@ impl$lifetime ops::Deref for ${struct.name}Builder$lifetime {
     }
 }
 
-impl$lifetime ops::DerefMut for ${struct.name}Builder$lifetime {
+impl ops::DerefMut for ${struct.name}Builder$anonymousLifetime {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl$lifetime Cast for ${struct.name}Builder$lifetime {
+unsafe impl Cast for ${struct.name}Builder$anonymousLifetime {
     type Target = ${struct.name};
 
     #[inline]

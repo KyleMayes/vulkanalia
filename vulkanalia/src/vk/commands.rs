@@ -12,6 +12,7 @@
     clippy::let_unit_value,
     clippy::missing_safety_doc,
     clippy::missing_transmute_annotations,
+    clippy::needless_lifetimes,
     clippy::too_many_arguments,
     clippy::type_complexity,
     clippy::unnecessary_cast,
@@ -767,7 +768,7 @@ impl DeviceCommands {
     ) -> Self {
         Self {
             acquire_full_screen_exclusive_mode_ext: {
-                let value = loader(b"vkAcquireFullScreenExclusiveModeEXT\0".as_ptr().cast());
+                let value = loader(c"vkAcquireFullScreenExclusiveModeEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -781,7 +782,7 @@ impl DeviceCommands {
                 }
             },
             acquire_next_image2_khr: {
-                let value = loader(b"vkAcquireNextImage2KHR\0".as_ptr().cast());
+                let value = loader(c"vkAcquireNextImage2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -796,7 +797,7 @@ impl DeviceCommands {
                 }
             },
             acquire_next_image_khr: {
-                let value = loader(b"vkAcquireNextImageKHR\0".as_ptr().cast());
+                let value = loader(c"vkAcquireNextImageKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -814,7 +815,7 @@ impl DeviceCommands {
                 }
             },
             acquire_performance_configuration_intel: {
-                let value = loader(b"vkAcquirePerformanceConfigurationINTEL\0".as_ptr().cast());
+                let value = loader(c"vkAcquirePerformanceConfigurationINTEL".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -829,7 +830,7 @@ impl DeviceCommands {
                 }
             },
             acquire_profiling_lock_khr: {
-                let value = loader(b"vkAcquireProfilingLockKHR\0".as_ptr().cast());
+                let value = loader(c"vkAcquireProfilingLockKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -843,7 +844,7 @@ impl DeviceCommands {
                 }
             },
             acquire_winrt_display_nv: {
-                let value = instance_loader(b"vkAcquireWinrtDisplayNV\0".as_ptr().cast());
+                let value = instance_loader(c"vkAcquireWinrtDisplayNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -857,7 +858,7 @@ impl DeviceCommands {
                 }
             },
             allocate_command_buffers: {
-                let value = loader(b"vkAllocateCommandBuffers\0".as_ptr().cast());
+                let value = loader(c"vkAllocateCommandBuffers".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -872,7 +873,7 @@ impl DeviceCommands {
                 }
             },
             allocate_descriptor_sets: {
-                let value = loader(b"vkAllocateDescriptorSets\0".as_ptr().cast());
+                let value = loader(c"vkAllocateDescriptorSets".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -887,7 +888,7 @@ impl DeviceCommands {
                 }
             },
             allocate_memory: {
-                let value = loader(b"vkAllocateMemory\0".as_ptr().cast());
+                let value = loader(c"vkAllocateMemory".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -903,7 +904,7 @@ impl DeviceCommands {
                 }
             },
             anti_lag_update_amd: {
-                let value = loader(b"vkAntiLagUpdateAMD\0".as_ptr().cast());
+                let value = loader(c"vkAntiLagUpdateAMD".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -917,7 +918,7 @@ impl DeviceCommands {
                 }
             },
             begin_command_buffer: {
-                let value = loader(b"vkBeginCommandBuffer\0".as_ptr().cast());
+                let value = loader(c"vkBeginCommandBuffer".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -931,7 +932,7 @@ impl DeviceCommands {
                 }
             },
             bind_acceleration_structure_memory_nv: {
-                let value = loader(b"vkBindAccelerationStructureMemoryNV\0".as_ptr().cast());
+                let value = loader(c"vkBindAccelerationStructureMemoryNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -946,7 +947,7 @@ impl DeviceCommands {
                 }
             },
             bind_buffer_memory: {
-                let value = loader(b"vkBindBufferMemory\0".as_ptr().cast());
+                let value = loader(c"vkBindBufferMemory".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -962,7 +963,7 @@ impl DeviceCommands {
                 }
             },
             bind_buffer_memory2: {
-                let value = loader(b"vkBindBufferMemory2\0".as_ptr().cast());
+                let value = loader(c"vkBindBufferMemory2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -977,7 +978,7 @@ impl DeviceCommands {
                 }
             },
             bind_buffer_memory2_khr: {
-                let value = loader(b"vkBindBufferMemory2KHR\0".as_ptr().cast());
+                let value = loader(c"vkBindBufferMemory2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -992,7 +993,7 @@ impl DeviceCommands {
                 }
             },
             bind_data_graph_pipeline_session_memory_arm: {
-                let value = loader(b"vkBindDataGraphPipelineSessionMemoryARM\0".as_ptr().cast());
+                let value = loader(c"vkBindDataGraphPipelineSessionMemoryARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1007,7 +1008,7 @@ impl DeviceCommands {
                 }
             },
             bind_image_memory: {
-                let value = loader(b"vkBindImageMemory\0".as_ptr().cast());
+                let value = loader(c"vkBindImageMemory".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1023,7 +1024,7 @@ impl DeviceCommands {
                 }
             },
             bind_image_memory2: {
-                let value = loader(b"vkBindImageMemory2\0".as_ptr().cast());
+                let value = loader(c"vkBindImageMemory2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1038,7 +1039,7 @@ impl DeviceCommands {
                 }
             },
             bind_image_memory2_khr: {
-                let value = loader(b"vkBindImageMemory2KHR\0".as_ptr().cast());
+                let value = loader(c"vkBindImageMemory2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1053,7 +1054,7 @@ impl DeviceCommands {
                 }
             },
             bind_optical_flow_session_image_nv: {
-                let value = loader(b"vkBindOpticalFlowSessionImageNV\0".as_ptr().cast());
+                let value = loader(c"vkBindOpticalFlowSessionImageNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1070,7 +1071,7 @@ impl DeviceCommands {
                 }
             },
             bind_tensor_memory_arm: {
-                let value = loader(b"vkBindTensorMemoryARM\0".as_ptr().cast());
+                let value = loader(c"vkBindTensorMemoryARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1085,7 +1086,7 @@ impl DeviceCommands {
                 }
             },
             bind_video_session_memory_khr: {
-                let value = loader(b"vkBindVideoSessionMemoryKHR\0".as_ptr().cast());
+                let value = loader(c"vkBindVideoSessionMemoryKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1101,7 +1102,7 @@ impl DeviceCommands {
                 }
             },
             build_acceleration_structures_khr: {
-                let value = loader(b"vkBuildAccelerationStructuresKHR\0".as_ptr().cast());
+                let value = loader(c"vkBuildAccelerationStructuresKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1118,7 +1119,7 @@ impl DeviceCommands {
                 }
             },
             build_micromaps_ext: {
-                let value = loader(b"vkBuildMicromapsEXT\0".as_ptr().cast());
+                let value = loader(c"vkBuildMicromapsEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1134,7 +1135,7 @@ impl DeviceCommands {
                 }
             },
             cmd_begin_conditional_rendering_ext: {
-                let value = loader(b"vkCmdBeginConditionalRenderingEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdBeginConditionalRenderingEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1148,7 +1149,7 @@ impl DeviceCommands {
                 }
             },
             cmd_begin_per_tile_execution_qcom: {
-                let value = loader(b"vkCmdBeginPerTileExecutionQCOM\0".as_ptr().cast());
+                let value = loader(c"vkCmdBeginPerTileExecutionQCOM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1162,7 +1163,7 @@ impl DeviceCommands {
                 }
             },
             cmd_begin_query: {
-                let value = loader(b"vkCmdBeginQuery\0".as_ptr().cast());
+                let value = loader(c"vkCmdBeginQuery".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1178,7 +1179,7 @@ impl DeviceCommands {
                 }
             },
             cmd_begin_query_indexed_ext: {
-                let value = loader(b"vkCmdBeginQueryIndexedEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdBeginQueryIndexedEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1195,7 +1196,7 @@ impl DeviceCommands {
                 }
             },
             cmd_begin_render_pass: {
-                let value = loader(b"vkCmdBeginRenderPass\0".as_ptr().cast());
+                let value = loader(c"vkCmdBeginRenderPass".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1210,7 +1211,7 @@ impl DeviceCommands {
                 }
             },
             cmd_begin_render_pass2: {
-                let value = loader(b"vkCmdBeginRenderPass2\0".as_ptr().cast());
+                let value = loader(c"vkCmdBeginRenderPass2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1225,7 +1226,7 @@ impl DeviceCommands {
                 }
             },
             cmd_begin_render_pass2_khr: {
-                let value = loader(b"vkCmdBeginRenderPass2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdBeginRenderPass2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1240,7 +1241,7 @@ impl DeviceCommands {
                 }
             },
             cmd_begin_rendering: {
-                let value = loader(b"vkCmdBeginRendering\0".as_ptr().cast());
+                let value = loader(c"vkCmdBeginRendering".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1254,7 +1255,7 @@ impl DeviceCommands {
                 }
             },
             cmd_begin_rendering_khr: {
-                let value = loader(b"vkCmdBeginRenderingKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdBeginRenderingKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1268,7 +1269,7 @@ impl DeviceCommands {
                 }
             },
             cmd_begin_transform_feedback_ext: {
-                let value = loader(b"vkCmdBeginTransformFeedbackEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdBeginTransformFeedbackEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1285,7 +1286,7 @@ impl DeviceCommands {
                 }
             },
             cmd_begin_video_coding_khr: {
-                let value = loader(b"vkCmdBeginVideoCodingKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdBeginVideoCodingKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1299,11 +1300,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_descriptor_buffer_embedded_samplers2_ext: {
-                let value = loader(
-                    b"vkCmdBindDescriptorBufferEmbeddedSamplers2EXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdBindDescriptorBufferEmbeddedSamplers2EXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1317,11 +1314,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_descriptor_buffer_embedded_samplers_ext: {
-                let value = loader(
-                    b"vkCmdBindDescriptorBufferEmbeddedSamplersEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdBindDescriptorBufferEmbeddedSamplersEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1337,7 +1330,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_descriptor_buffers_ext: {
-                let value = loader(b"vkCmdBindDescriptorBuffersEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindDescriptorBuffersEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1352,7 +1345,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_descriptor_sets: {
-                let value = loader(b"vkCmdBindDescriptorSets\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindDescriptorSets".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1372,7 +1365,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_descriptor_sets2: {
-                let value = loader(b"vkCmdBindDescriptorSets2\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindDescriptorSets2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1386,7 +1379,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_descriptor_sets2_khr: {
-                let value = loader(b"vkCmdBindDescriptorSets2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindDescriptorSets2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1400,7 +1393,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_index_buffer: {
-                let value = loader(b"vkCmdBindIndexBuffer\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindIndexBuffer".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1416,7 +1409,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_index_buffer2: {
-                let value = loader(b"vkCmdBindIndexBuffer2\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindIndexBuffer2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1433,7 +1426,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_index_buffer2_khr: {
-                let value = loader(b"vkCmdBindIndexBuffer2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindIndexBuffer2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1450,7 +1443,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_invocation_mask_huawei: {
-                let value = loader(b"vkCmdBindInvocationMaskHUAWEI\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindInvocationMaskHUAWEI".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1465,7 +1458,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_pipeline: {
-                let value = loader(b"vkCmdBindPipeline\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindPipeline".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1480,7 +1473,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_pipeline_shader_group_nv: {
-                let value = loader(b"vkCmdBindPipelineShaderGroupNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindPipelineShaderGroupNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1496,7 +1489,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_shaders_ext: {
-                let value = loader(b"vkCmdBindShadersEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindShadersEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1512,7 +1505,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_shading_rate_image_nv: {
-                let value = loader(b"vkCmdBindShadingRateImageNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindShadingRateImageNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1527,7 +1520,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_tile_memory_qcom: {
-                let value = loader(b"vkCmdBindTileMemoryQCOM\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindTileMemoryQCOM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1541,7 +1534,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_transform_feedback_buffers_ext: {
-                let value = loader(b"vkCmdBindTransformFeedbackBuffersEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindTransformFeedbackBuffersEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1559,7 +1552,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_vertex_buffers: {
-                let value = loader(b"vkCmdBindVertexBuffers\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindVertexBuffers".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1576,7 +1569,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_vertex_buffers2: {
-                let value = loader(b"vkCmdBindVertexBuffers2\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindVertexBuffers2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1595,7 +1588,7 @@ impl DeviceCommands {
                 }
             },
             cmd_bind_vertex_buffers2_ext: {
-                let value = loader(b"vkCmdBindVertexBuffers2EXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdBindVertexBuffers2EXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1614,7 +1607,7 @@ impl DeviceCommands {
                 }
             },
             cmd_blit_image: {
-                let value = loader(b"vkCmdBlitImage\0".as_ptr().cast());
+                let value = loader(c"vkCmdBlitImage".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1634,7 +1627,7 @@ impl DeviceCommands {
                 }
             },
             cmd_blit_image2: {
-                let value = loader(b"vkCmdBlitImage2\0".as_ptr().cast());
+                let value = loader(c"vkCmdBlitImage2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1648,7 +1641,7 @@ impl DeviceCommands {
                 }
             },
             cmd_blit_image2_khr: {
-                let value = loader(b"vkCmdBlitImage2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdBlitImage2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1662,7 +1655,7 @@ impl DeviceCommands {
                 }
             },
             cmd_build_acceleration_structure_nv: {
-                let value = loader(b"vkCmdBuildAccelerationStructureNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdBuildAccelerationStructureNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1683,11 +1676,7 @@ impl DeviceCommands {
                 }
             },
             cmd_build_acceleration_structures_indirect_khr: {
-                let value = loader(
-                    b"vkCmdBuildAccelerationStructuresIndirectKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdBuildAccelerationStructuresIndirectKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1705,7 +1694,7 @@ impl DeviceCommands {
                 }
             },
             cmd_build_acceleration_structures_khr: {
-                let value = loader(b"vkCmdBuildAccelerationStructuresKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdBuildAccelerationStructuresKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1721,11 +1710,7 @@ impl DeviceCommands {
                 }
             },
             cmd_build_cluster_acceleration_structure_indirect_nv: {
-                let value = loader(
-                    b"vkCmdBuildClusterAccelerationStructureIndirectNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdBuildClusterAccelerationStructureIndirectNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1739,7 +1724,7 @@ impl DeviceCommands {
                 }
             },
             cmd_build_micromaps_ext: {
-                let value = loader(b"vkCmdBuildMicromapsEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdBuildMicromapsEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1754,11 +1739,7 @@ impl DeviceCommands {
                 }
             },
             cmd_build_partitioned_acceleration_structures_nv: {
-                let value = loader(
-                    b"vkCmdBuildPartitionedAccelerationStructuresNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdBuildPartitionedAccelerationStructuresNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1772,7 +1753,7 @@ impl DeviceCommands {
                 }
             },
             cmd_clear_attachments: {
-                let value = loader(b"vkCmdClearAttachments\0".as_ptr().cast());
+                let value = loader(c"vkCmdClearAttachments".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1789,7 +1770,7 @@ impl DeviceCommands {
                 }
             },
             cmd_clear_color_image: {
-                let value = loader(b"vkCmdClearColorImage\0".as_ptr().cast());
+                let value = loader(c"vkCmdClearColorImage".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1807,7 +1788,7 @@ impl DeviceCommands {
                 }
             },
             cmd_clear_depth_stencil_image: {
-                let value = loader(b"vkCmdClearDepthStencilImage\0".as_ptr().cast());
+                let value = loader(c"vkCmdClearDepthStencilImage".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1825,7 +1806,7 @@ impl DeviceCommands {
                 }
             },
             cmd_control_video_coding_khr: {
-                let value = loader(b"vkCmdControlVideoCodingKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdControlVideoCodingKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1839,7 +1820,7 @@ impl DeviceCommands {
                 }
             },
             cmd_convert_cooperative_vector_matrix_nv: {
-                let value = loader(b"vkCmdConvertCooperativeVectorMatrixNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdConvertCooperativeVectorMatrixNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1854,7 +1835,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_acceleration_structure_khr: {
-                let value = loader(b"vkCmdCopyAccelerationStructureKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyAccelerationStructureKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1868,7 +1849,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_acceleration_structure_nv: {
-                let value = loader(b"vkCmdCopyAccelerationStructureNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyAccelerationStructureNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1884,11 +1865,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_acceleration_structure_to_memory_khr: {
-                let value = loader(
-                    b"vkCmdCopyAccelerationStructureToMemoryKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdCopyAccelerationStructureToMemoryKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1902,7 +1879,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_buffer: {
-                let value = loader(b"vkCmdCopyBuffer\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyBuffer".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1919,7 +1896,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_buffer2: {
-                let value = loader(b"vkCmdCopyBuffer2\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyBuffer2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1933,7 +1910,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_buffer2_khr: {
-                let value = loader(b"vkCmdCopyBuffer2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyBuffer2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1947,7 +1924,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_buffer_to_image: {
-                let value = loader(b"vkCmdCopyBufferToImage\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyBufferToImage".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1965,7 +1942,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_buffer_to_image2: {
-                let value = loader(b"vkCmdCopyBufferToImage2\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyBufferToImage2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1979,7 +1956,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_buffer_to_image2_khr: {
-                let value = loader(b"vkCmdCopyBufferToImage2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyBufferToImage2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -1993,7 +1970,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_image: {
-                let value = loader(b"vkCmdCopyImage\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyImage".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2012,7 +1989,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_image2: {
-                let value = loader(b"vkCmdCopyImage2\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyImage2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2026,7 +2003,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_image2_khr: {
-                let value = loader(b"vkCmdCopyImage2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyImage2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2040,7 +2017,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_image_to_buffer: {
-                let value = loader(b"vkCmdCopyImageToBuffer\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyImageToBuffer".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2058,7 +2035,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_image_to_buffer2: {
-                let value = loader(b"vkCmdCopyImageToBuffer2\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyImageToBuffer2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2072,7 +2049,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_image_to_buffer2_khr: {
-                let value = loader(b"vkCmdCopyImageToBuffer2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyImageToBuffer2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2086,7 +2063,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_memory_indirect_nv: {
-                let value = loader(b"vkCmdCopyMemoryIndirectNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyMemoryIndirectNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2102,11 +2079,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_memory_to_acceleration_structure_khr: {
-                let value = loader(
-                    b"vkCmdCopyMemoryToAccelerationStructureKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdCopyMemoryToAccelerationStructureKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2120,7 +2093,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_memory_to_image_indirect_nv: {
-                let value = loader(b"vkCmdCopyMemoryToImageIndirectNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyMemoryToImageIndirectNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2139,7 +2112,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_memory_to_micromap_ext: {
-                let value = loader(b"vkCmdCopyMemoryToMicromapEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyMemoryToMicromapEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2153,7 +2126,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_micromap_ext: {
-                let value = loader(b"vkCmdCopyMicromapEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyMicromapEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2167,7 +2140,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_micromap_to_memory_ext: {
-                let value = loader(b"vkCmdCopyMicromapToMemoryEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyMicromapToMemoryEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2181,7 +2154,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_query_pool_results: {
-                let value = loader(b"vkCmdCopyQueryPoolResults\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyQueryPoolResults".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2201,7 +2174,7 @@ impl DeviceCommands {
                 }
             },
             cmd_copy_tensor_arm: {
-                let value = loader(b"vkCmdCopyTensorARM\0".as_ptr().cast());
+                let value = loader(c"vkCmdCopyTensorARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2215,7 +2188,7 @@ impl DeviceCommands {
                 }
             },
             cmd_cu_launch_kernel_nvx: {
-                let value = loader(b"vkCmdCuLaunchKernelNVX\0".as_ptr().cast());
+                let value = loader(c"vkCmdCuLaunchKernelNVX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2229,7 +2202,7 @@ impl DeviceCommands {
                 }
             },
             cmd_cuda_launch_kernel_nv: {
-                let value = loader(b"vkCmdCudaLaunchKernelNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdCudaLaunchKernelNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2243,7 +2216,7 @@ impl DeviceCommands {
                 }
             },
             cmd_debug_marker_begin_ext: {
-                let value = loader(b"vkCmdDebugMarkerBeginEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdDebugMarkerBeginEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2257,7 +2230,7 @@ impl DeviceCommands {
                 }
             },
             cmd_debug_marker_end_ext: {
-                let value = loader(b"vkCmdDebugMarkerEndEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdDebugMarkerEndEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2268,7 +2241,7 @@ impl DeviceCommands {
                 }
             },
             cmd_debug_marker_insert_ext: {
-                let value = loader(b"vkCmdDebugMarkerInsertEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdDebugMarkerInsertEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2282,7 +2255,7 @@ impl DeviceCommands {
                 }
             },
             cmd_decode_video_khr: {
-                let value = loader(b"vkCmdDecodeVideoKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdDecodeVideoKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2296,7 +2269,7 @@ impl DeviceCommands {
                 }
             },
             cmd_decompress_memory_indirect_count_nv: {
-                let value = loader(b"vkCmdDecompressMemoryIndirectCountNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdDecompressMemoryIndirectCountNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2312,7 +2285,7 @@ impl DeviceCommands {
                 }
             },
             cmd_decompress_memory_nv: {
-                let value = loader(b"vkCmdDecompressMemoryNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdDecompressMemoryNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2327,7 +2300,7 @@ impl DeviceCommands {
                 }
             },
             cmd_dispatch: {
-                let value = loader(b"vkCmdDispatch\0".as_ptr().cast());
+                let value = loader(c"vkCmdDispatch".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2343,7 +2316,7 @@ impl DeviceCommands {
                 }
             },
             cmd_dispatch_base: {
-                let value = loader(b"vkCmdDispatchBase\0".as_ptr().cast());
+                let value = loader(c"vkCmdDispatchBase".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2362,7 +2335,7 @@ impl DeviceCommands {
                 }
             },
             cmd_dispatch_base_khr: {
-                let value = loader(b"vkCmdDispatchBaseKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdDispatchBaseKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2381,7 +2354,7 @@ impl DeviceCommands {
                 }
             },
             cmd_dispatch_data_graph_arm: {
-                let value = loader(b"vkCmdDispatchDataGraphARM\0".as_ptr().cast());
+                let value = loader(c"vkCmdDispatchDataGraphARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2396,7 +2369,7 @@ impl DeviceCommands {
                 }
             },
             cmd_dispatch_graph_amdx: {
-                let value = loader(b"vkCmdDispatchGraphAMDX\0".as_ptr().cast());
+                let value = loader(c"vkCmdDispatchGraphAMDX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2412,7 +2385,7 @@ impl DeviceCommands {
                 }
             },
             cmd_dispatch_graph_indirect_amdx: {
-                let value = loader(b"vkCmdDispatchGraphIndirectAMDX\0".as_ptr().cast());
+                let value = loader(c"vkCmdDispatchGraphIndirectAMDX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2428,7 +2401,7 @@ impl DeviceCommands {
                 }
             },
             cmd_dispatch_graph_indirect_count_amdx: {
-                let value = loader(b"vkCmdDispatchGraphIndirectCountAMDX\0".as_ptr().cast());
+                let value = loader(c"vkCmdDispatchGraphIndirectCountAMDX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2444,7 +2417,7 @@ impl DeviceCommands {
                 }
             },
             cmd_dispatch_indirect: {
-                let value = loader(b"vkCmdDispatchIndirect\0".as_ptr().cast());
+                let value = loader(c"vkCmdDispatchIndirect".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2459,7 +2432,7 @@ impl DeviceCommands {
                 }
             },
             cmd_dispatch_tile_qcom: {
-                let value = loader(b"vkCmdDispatchTileQCOM\0".as_ptr().cast());
+                let value = loader(c"vkCmdDispatchTileQCOM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2473,7 +2446,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw: {
-                let value = loader(b"vkCmdDraw\0".as_ptr().cast());
+                let value = loader(c"vkCmdDraw".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2490,7 +2463,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_cluster_huawei: {
-                let value = loader(b"vkCmdDrawClusterHUAWEI\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawClusterHUAWEI".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2506,7 +2479,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_cluster_indirect_huawei: {
-                let value = loader(b"vkCmdDrawClusterIndirectHUAWEI\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawClusterIndirectHUAWEI".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2521,7 +2494,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_indexed: {
-                let value = loader(b"vkCmdDrawIndexed\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawIndexed".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2539,7 +2512,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_indexed_indirect: {
-                let value = loader(b"vkCmdDrawIndexedIndirect\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawIndexedIndirect".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2556,7 +2529,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_indexed_indirect_count: {
-                let value = loader(b"vkCmdDrawIndexedIndirectCount\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawIndexedIndirectCount".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2575,7 +2548,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_indexed_indirect_count_amd: {
-                let value = loader(b"vkCmdDrawIndexedIndirectCountAMD\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawIndexedIndirectCountAMD".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2594,7 +2567,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_indexed_indirect_count_khr: {
-                let value = loader(b"vkCmdDrawIndexedIndirectCountKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawIndexedIndirectCountKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2613,7 +2586,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_indirect: {
-                let value = loader(b"vkCmdDrawIndirect\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawIndirect".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2630,7 +2603,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_indirect_byte_count_ext: {
-                let value = loader(b"vkCmdDrawIndirectByteCountEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawIndirectByteCountEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2649,7 +2622,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_indirect_count: {
-                let value = loader(b"vkCmdDrawIndirectCount\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawIndirectCount".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2668,7 +2641,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_indirect_count_amd: {
-                let value = loader(b"vkCmdDrawIndirectCountAMD\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawIndirectCountAMD".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2687,7 +2660,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_indirect_count_khr: {
-                let value = loader(b"vkCmdDrawIndirectCountKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawIndirectCountKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2706,7 +2679,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_mesh_tasks_ext: {
-                let value = loader(b"vkCmdDrawMeshTasksEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawMeshTasksEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2722,7 +2695,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_mesh_tasks_indirect_count_ext: {
-                let value = loader(b"vkCmdDrawMeshTasksIndirectCountEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawMeshTasksIndirectCountEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2741,7 +2714,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_mesh_tasks_indirect_count_nv: {
-                let value = loader(b"vkCmdDrawMeshTasksIndirectCountNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawMeshTasksIndirectCountNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2760,7 +2733,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_mesh_tasks_indirect_ext: {
-                let value = loader(b"vkCmdDrawMeshTasksIndirectEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawMeshTasksIndirectEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2777,7 +2750,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_mesh_tasks_indirect_nv: {
-                let value = loader(b"vkCmdDrawMeshTasksIndirectNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawMeshTasksIndirectNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2794,7 +2767,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_mesh_tasks_nv: {
-                let value = loader(b"vkCmdDrawMeshTasksNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawMeshTasksNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2809,7 +2782,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_multi_ext: {
-                let value = loader(b"vkCmdDrawMultiEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawMultiEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2827,7 +2800,7 @@ impl DeviceCommands {
                 }
             },
             cmd_draw_multi_indexed_ext: {
-                let value = loader(b"vkCmdDrawMultiIndexedEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdDrawMultiIndexedEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2846,7 +2819,7 @@ impl DeviceCommands {
                 }
             },
             cmd_encode_video_khr: {
-                let value = loader(b"vkCmdEncodeVideoKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdEncodeVideoKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2860,7 +2833,7 @@ impl DeviceCommands {
                 }
             },
             cmd_end_conditional_rendering_ext: {
-                let value = loader(b"vkCmdEndConditionalRenderingEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndConditionalRenderingEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2871,7 +2844,7 @@ impl DeviceCommands {
                 }
             },
             cmd_end_per_tile_execution_qcom: {
-                let value = loader(b"vkCmdEndPerTileExecutionQCOM\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndPerTileExecutionQCOM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2885,7 +2858,7 @@ impl DeviceCommands {
                 }
             },
             cmd_end_query: {
-                let value = loader(b"vkCmdEndQuery\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndQuery".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2900,7 +2873,7 @@ impl DeviceCommands {
                 }
             },
             cmd_end_query_indexed_ext: {
-                let value = loader(b"vkCmdEndQueryIndexedEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndQueryIndexedEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2916,7 +2889,7 @@ impl DeviceCommands {
                 }
             },
             cmd_end_render_pass: {
-                let value = loader(b"vkCmdEndRenderPass\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndRenderPass".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2927,7 +2900,7 @@ impl DeviceCommands {
                 }
             },
             cmd_end_render_pass2: {
-                let value = loader(b"vkCmdEndRenderPass2\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndRenderPass2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2941,7 +2914,7 @@ impl DeviceCommands {
                 }
             },
             cmd_end_render_pass2_khr: {
-                let value = loader(b"vkCmdEndRenderPass2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndRenderPass2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2955,7 +2928,7 @@ impl DeviceCommands {
                 }
             },
             cmd_end_rendering: {
-                let value = loader(b"vkCmdEndRendering\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndRendering".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2966,7 +2939,7 @@ impl DeviceCommands {
                 }
             },
             cmd_end_rendering2_ext: {
-                let value = loader(b"vkCmdEndRendering2EXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndRendering2EXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2980,7 +2953,7 @@ impl DeviceCommands {
                 }
             },
             cmd_end_rendering_khr: {
-                let value = loader(b"vkCmdEndRenderingKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndRenderingKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -2991,7 +2964,7 @@ impl DeviceCommands {
                 }
             },
             cmd_end_transform_feedback_ext: {
-                let value = loader(b"vkCmdEndTransformFeedbackEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndTransformFeedbackEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3008,7 +2981,7 @@ impl DeviceCommands {
                 }
             },
             cmd_end_video_coding_khr: {
-                let value = loader(b"vkCmdEndVideoCodingKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndVideoCodingKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3022,7 +2995,7 @@ impl DeviceCommands {
                 }
             },
             cmd_execute_commands: {
-                let value = loader(b"vkCmdExecuteCommands\0".as_ptr().cast());
+                let value = loader(c"vkCmdExecuteCommands".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3037,7 +3010,7 @@ impl DeviceCommands {
                 }
             },
             cmd_execute_generated_commands_ext: {
-                let value = loader(b"vkCmdExecuteGeneratedCommandsEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdExecuteGeneratedCommandsEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3052,7 +3025,7 @@ impl DeviceCommands {
                 }
             },
             cmd_execute_generated_commands_nv: {
-                let value = loader(b"vkCmdExecuteGeneratedCommandsNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdExecuteGeneratedCommandsNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3067,7 +3040,7 @@ impl DeviceCommands {
                 }
             },
             cmd_fill_buffer: {
-                let value = loader(b"vkCmdFillBuffer\0".as_ptr().cast());
+                let value = loader(c"vkCmdFillBuffer".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3084,7 +3057,7 @@ impl DeviceCommands {
                 }
             },
             cmd_initialize_graph_scratch_memory_amdx: {
-                let value = loader(b"vkCmdInitializeGraphScratchMemoryAMDX\0".as_ptr().cast());
+                let value = loader(c"vkCmdInitializeGraphScratchMemoryAMDX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3100,7 +3073,7 @@ impl DeviceCommands {
                 }
             },
             cmd_next_subpass: {
-                let value = loader(b"vkCmdNextSubpass\0".as_ptr().cast());
+                let value = loader(c"vkCmdNextSubpass".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3114,7 +3087,7 @@ impl DeviceCommands {
                 }
             },
             cmd_next_subpass2: {
-                let value = loader(b"vkCmdNextSubpass2\0".as_ptr().cast());
+                let value = loader(c"vkCmdNextSubpass2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3129,7 +3102,7 @@ impl DeviceCommands {
                 }
             },
             cmd_next_subpass2_khr: {
-                let value = loader(b"vkCmdNextSubpass2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdNextSubpass2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3144,7 +3117,7 @@ impl DeviceCommands {
                 }
             },
             cmd_optical_flow_execute_nv: {
-                let value = loader(b"vkCmdOpticalFlowExecuteNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdOpticalFlowExecuteNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3159,7 +3132,7 @@ impl DeviceCommands {
                 }
             },
             cmd_pipeline_barrier: {
-                let value = loader(b"vkCmdPipelineBarrier\0".as_ptr().cast());
+                let value = loader(c"vkCmdPipelineBarrier".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3181,7 +3154,7 @@ impl DeviceCommands {
                 }
             },
             cmd_pipeline_barrier2: {
-                let value = loader(b"vkCmdPipelineBarrier2\0".as_ptr().cast());
+                let value = loader(c"vkCmdPipelineBarrier2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3195,7 +3168,7 @@ impl DeviceCommands {
                 }
             },
             cmd_pipeline_barrier2_khr: {
-                let value = loader(b"vkCmdPipelineBarrier2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdPipelineBarrier2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3209,7 +3182,7 @@ impl DeviceCommands {
                 }
             },
             cmd_preprocess_generated_commands_ext: {
-                let value = loader(b"vkCmdPreprocessGeneratedCommandsEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdPreprocessGeneratedCommandsEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3224,7 +3197,7 @@ impl DeviceCommands {
                 }
             },
             cmd_preprocess_generated_commands_nv: {
-                let value = loader(b"vkCmdPreprocessGeneratedCommandsNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdPreprocessGeneratedCommandsNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3238,7 +3211,7 @@ impl DeviceCommands {
                 }
             },
             cmd_push_constants: {
-                let value = loader(b"vkCmdPushConstants\0".as_ptr().cast());
+                let value = loader(c"vkCmdPushConstants".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3256,7 +3229,7 @@ impl DeviceCommands {
                 }
             },
             cmd_push_constants2: {
-                let value = loader(b"vkCmdPushConstants2\0".as_ptr().cast());
+                let value = loader(c"vkCmdPushConstants2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3270,7 +3243,7 @@ impl DeviceCommands {
                 }
             },
             cmd_push_constants2_khr: {
-                let value = loader(b"vkCmdPushConstants2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdPushConstants2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3284,7 +3257,7 @@ impl DeviceCommands {
                 }
             },
             cmd_push_descriptor_set: {
-                let value = loader(b"vkCmdPushDescriptorSet\0".as_ptr().cast());
+                let value = loader(c"vkCmdPushDescriptorSet".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3302,7 +3275,7 @@ impl DeviceCommands {
                 }
             },
             cmd_push_descriptor_set2: {
-                let value = loader(b"vkCmdPushDescriptorSet2\0".as_ptr().cast());
+                let value = loader(c"vkCmdPushDescriptorSet2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3316,7 +3289,7 @@ impl DeviceCommands {
                 }
             },
             cmd_push_descriptor_set2_khr: {
-                let value = loader(b"vkCmdPushDescriptorSet2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdPushDescriptorSet2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3330,7 +3303,7 @@ impl DeviceCommands {
                 }
             },
             cmd_push_descriptor_set_khr: {
-                let value = loader(b"vkCmdPushDescriptorSetKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdPushDescriptorSetKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3348,7 +3321,7 @@ impl DeviceCommands {
                 }
             },
             cmd_push_descriptor_set_with_template: {
-                let value = loader(b"vkCmdPushDescriptorSetWithTemplate\0".as_ptr().cast());
+                let value = loader(c"vkCmdPushDescriptorSetWithTemplate".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3365,7 +3338,7 @@ impl DeviceCommands {
                 }
             },
             cmd_push_descriptor_set_with_template2: {
-                let value = loader(b"vkCmdPushDescriptorSetWithTemplate2\0".as_ptr().cast());
+                let value = loader(c"vkCmdPushDescriptorSetWithTemplate2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3379,7 +3352,7 @@ impl DeviceCommands {
                 }
             },
             cmd_push_descriptor_set_with_template2_khr: {
-                let value = loader(b"vkCmdPushDescriptorSetWithTemplate2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdPushDescriptorSetWithTemplate2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3393,7 +3366,7 @@ impl DeviceCommands {
                 }
             },
             cmd_push_descriptor_set_with_template_khr: {
-                let value = loader(b"vkCmdPushDescriptorSetWithTemplateKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdPushDescriptorSetWithTemplateKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3410,7 +3383,7 @@ impl DeviceCommands {
                 }
             },
             cmd_refresh_objects_khr: {
-                let value = loader(b"vkCmdRefreshObjectsKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdRefreshObjectsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3424,7 +3397,7 @@ impl DeviceCommands {
                 }
             },
             cmd_reset_event: {
-                let value = loader(b"vkCmdResetEvent\0".as_ptr().cast());
+                let value = loader(c"vkCmdResetEvent".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3439,7 +3412,7 @@ impl DeviceCommands {
                 }
             },
             cmd_reset_event2: {
-                let value = loader(b"vkCmdResetEvent2\0".as_ptr().cast());
+                let value = loader(c"vkCmdResetEvent2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3454,7 +3427,7 @@ impl DeviceCommands {
                 }
             },
             cmd_reset_event2_khr: {
-                let value = loader(b"vkCmdResetEvent2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdResetEvent2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3469,7 +3442,7 @@ impl DeviceCommands {
                 }
             },
             cmd_reset_query_pool: {
-                let value = loader(b"vkCmdResetQueryPool\0".as_ptr().cast());
+                let value = loader(c"vkCmdResetQueryPool".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3485,7 +3458,7 @@ impl DeviceCommands {
                 }
             },
             cmd_resolve_image: {
-                let value = loader(b"vkCmdResolveImage\0".as_ptr().cast());
+                let value = loader(c"vkCmdResolveImage".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3504,7 +3477,7 @@ impl DeviceCommands {
                 }
             },
             cmd_resolve_image2: {
-                let value = loader(b"vkCmdResolveImage2\0".as_ptr().cast());
+                let value = loader(c"vkCmdResolveImage2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3518,7 +3491,7 @@ impl DeviceCommands {
                 }
             },
             cmd_resolve_image2_khr: {
-                let value = loader(b"vkCmdResolveImage2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdResolveImage2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3532,7 +3505,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_alpha_to_coverage_enable_ext: {
-                let value = loader(b"vkCmdSetAlphaToCoverageEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetAlphaToCoverageEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3546,7 +3519,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_alpha_to_one_enable_ext: {
-                let value = loader(b"vkCmdSetAlphaToOneEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetAlphaToOneEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3560,7 +3533,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_attachment_feedback_loop_enable_ext: {
-                let value = loader(b"vkCmdSetAttachmentFeedbackLoopEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetAttachmentFeedbackLoopEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3574,7 +3547,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_blend_constants: {
-                let value = loader(b"vkCmdSetBlendConstants\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetBlendConstants".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3588,7 +3561,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_checkpoint_nv: {
-                let value = loader(b"vkCmdSetCheckpointNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetCheckpointNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3602,7 +3575,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_coarse_sample_order_nv: {
-                let value = loader(b"vkCmdSetCoarseSampleOrderNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetCoarseSampleOrderNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3618,7 +3591,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_color_blend_advanced_ext: {
-                let value = loader(b"vkCmdSetColorBlendAdvancedEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetColorBlendAdvancedEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3634,7 +3607,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_color_blend_enable_ext: {
-                let value = loader(b"vkCmdSetColorBlendEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetColorBlendEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3650,7 +3623,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_color_blend_equation_ext: {
-                let value = loader(b"vkCmdSetColorBlendEquationEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetColorBlendEquationEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3666,7 +3639,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_color_write_enable_ext: {
-                let value = loader(b"vkCmdSetColorWriteEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetColorWriteEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3681,7 +3654,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_color_write_mask_ext: {
-                let value = loader(b"vkCmdSetColorWriteMaskEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetColorWriteMaskEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3697,11 +3670,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_conservative_rasterization_mode_ext: {
-                let value = loader(
-                    b"vkCmdSetConservativeRasterizationModeEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdSetConservativeRasterizationModeEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3715,7 +3684,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_coverage_modulation_mode_nv: {
-                let value = loader(b"vkCmdSetCoverageModulationModeNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetCoverageModulationModeNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3729,7 +3698,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_coverage_modulation_table_enable_nv: {
-                let value = loader(b"vkCmdSetCoverageModulationTableEnableNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetCoverageModulationTableEnableNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3743,7 +3712,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_coverage_modulation_table_nv: {
-                let value = loader(b"vkCmdSetCoverageModulationTableNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetCoverageModulationTableNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3758,7 +3727,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_coverage_reduction_mode_nv: {
-                let value = loader(b"vkCmdSetCoverageReductionModeNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetCoverageReductionModeNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3772,7 +3741,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_coverage_to_color_enable_nv: {
-                let value = loader(b"vkCmdSetCoverageToColorEnableNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetCoverageToColorEnableNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3786,7 +3755,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_coverage_to_color_location_nv: {
-                let value = loader(b"vkCmdSetCoverageToColorLocationNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetCoverageToColorLocationNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3800,7 +3769,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_cull_mode: {
-                let value = loader(b"vkCmdSetCullMode\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetCullMode".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3814,7 +3783,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_cull_mode_ext: {
-                let value = loader(b"vkCmdSetCullModeEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetCullModeEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3828,7 +3797,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_bias: {
-                let value = loader(b"vkCmdSetDepthBias\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthBias".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3844,7 +3813,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_bias2_ext: {
-                let value = loader(b"vkCmdSetDepthBias2EXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthBias2EXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3858,7 +3827,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_bias_enable: {
-                let value = loader(b"vkCmdSetDepthBiasEnable\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthBiasEnable".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3872,7 +3841,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_bias_enable_ext: {
-                let value = loader(b"vkCmdSetDepthBiasEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthBiasEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3886,7 +3855,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_bounds: {
-                let value = loader(b"vkCmdSetDepthBounds\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthBounds".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3901,7 +3870,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_bounds_test_enable: {
-                let value = loader(b"vkCmdSetDepthBoundsTestEnable\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthBoundsTestEnable".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3915,7 +3884,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_bounds_test_enable_ext: {
-                let value = loader(b"vkCmdSetDepthBoundsTestEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthBoundsTestEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3929,7 +3898,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_clamp_enable_ext: {
-                let value = loader(b"vkCmdSetDepthClampEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthClampEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3943,7 +3912,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_clamp_range_ext: {
-                let value = loader(b"vkCmdSetDepthClampRangeEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthClampRangeEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3958,7 +3927,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_clip_enable_ext: {
-                let value = loader(b"vkCmdSetDepthClipEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthClipEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3972,7 +3941,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_clip_negative_one_to_one_ext: {
-                let value = loader(b"vkCmdSetDepthClipNegativeOneToOneEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthClipNegativeOneToOneEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -3986,7 +3955,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_compare_op: {
-                let value = loader(b"vkCmdSetDepthCompareOp\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthCompareOp".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4000,7 +3969,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_compare_op_ext: {
-                let value = loader(b"vkCmdSetDepthCompareOpEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthCompareOpEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4014,7 +3983,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_test_enable: {
-                let value = loader(b"vkCmdSetDepthTestEnable\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthTestEnable".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4028,7 +3997,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_test_enable_ext: {
-                let value = loader(b"vkCmdSetDepthTestEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthTestEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4042,7 +4011,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_write_enable: {
-                let value = loader(b"vkCmdSetDepthWriteEnable\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthWriteEnable".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4056,7 +4025,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_depth_write_enable_ext: {
-                let value = loader(b"vkCmdSetDepthWriteEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDepthWriteEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4070,7 +4039,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_descriptor_buffer_offsets2_ext: {
-                let value = loader(b"vkCmdSetDescriptorBufferOffsets2EXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDescriptorBufferOffsets2EXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4084,7 +4053,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_descriptor_buffer_offsets_ext: {
-                let value = loader(b"vkCmdSetDescriptorBufferOffsetsEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDescriptorBufferOffsetsEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4103,7 +4072,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_device_mask: {
-                let value = loader(b"vkCmdSetDeviceMask\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDeviceMask".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4117,7 +4086,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_device_mask_khr: {
-                let value = loader(b"vkCmdSetDeviceMaskKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDeviceMaskKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4131,7 +4100,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_discard_rectangle_ext: {
-                let value = loader(b"vkCmdSetDiscardRectangleEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDiscardRectangleEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4147,7 +4116,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_discard_rectangle_enable_ext: {
-                let value = loader(b"vkCmdSetDiscardRectangleEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDiscardRectangleEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4161,7 +4130,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_discard_rectangle_mode_ext: {
-                let value = loader(b"vkCmdSetDiscardRectangleModeEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetDiscardRectangleModeEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4175,7 +4144,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_event: {
-                let value = loader(b"vkCmdSetEvent\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetEvent".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4190,7 +4159,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_event2: {
-                let value = loader(b"vkCmdSetEvent2\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetEvent2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4205,7 +4174,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_event2_khr: {
-                let value = loader(b"vkCmdSetEvent2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetEvent2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4220,7 +4189,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_exclusive_scissor_enable_nv: {
-                let value = loader(b"vkCmdSetExclusiveScissorEnableNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetExclusiveScissorEnableNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4236,7 +4205,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_exclusive_scissor_nv: {
-                let value = loader(b"vkCmdSetExclusiveScissorNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetExclusiveScissorNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4252,11 +4221,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_extra_primitive_overestimation_size_ext: {
-                let value = loader(
-                    b"vkCmdSetExtraPrimitiveOverestimationSizeEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdSetExtraPrimitiveOverestimationSizeEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4270,7 +4235,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_fragment_shading_rate_enum_nv: {
-                let value = loader(b"vkCmdSetFragmentShadingRateEnumNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetFragmentShadingRateEnumNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4285,7 +4250,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_fragment_shading_rate_khr: {
-                let value = loader(b"vkCmdSetFragmentShadingRateKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetFragmentShadingRateKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4300,7 +4265,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_front_face: {
-                let value = loader(b"vkCmdSetFrontFace\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetFrontFace".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4314,7 +4279,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_front_face_ext: {
-                let value = loader(b"vkCmdSetFrontFaceEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetFrontFaceEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4328,7 +4293,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_line_rasterization_mode_ext: {
-                let value = loader(b"vkCmdSetLineRasterizationModeEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetLineRasterizationModeEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4342,7 +4307,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_line_stipple: {
-                let value = loader(b"vkCmdSetLineStipple\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetLineStipple".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4357,7 +4322,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_line_stipple_ext: {
-                let value = loader(b"vkCmdSetLineStippleEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetLineStippleEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4372,7 +4337,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_line_stipple_enable_ext: {
-                let value = loader(b"vkCmdSetLineStippleEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetLineStippleEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4386,7 +4351,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_line_stipple_khr: {
-                let value = loader(b"vkCmdSetLineStippleKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetLineStippleKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4401,7 +4366,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_line_width: {
-                let value = loader(b"vkCmdSetLineWidth\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetLineWidth".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4415,7 +4380,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_logic_op_ext: {
-                let value = loader(b"vkCmdSetLogicOpEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetLogicOpEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4429,7 +4394,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_logic_op_enable_ext: {
-                let value = loader(b"vkCmdSetLogicOpEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetLogicOpEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4443,7 +4408,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_patch_control_points_ext: {
-                let value = loader(b"vkCmdSetPatchControlPointsEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetPatchControlPointsEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4457,7 +4422,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_performance_marker_intel: {
-                let value = loader(b"vkCmdSetPerformanceMarkerINTEL\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetPerformanceMarkerINTEL".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4471,7 +4436,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_performance_override_intel: {
-                let value = loader(b"vkCmdSetPerformanceOverrideINTEL\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetPerformanceOverrideINTEL".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4485,7 +4450,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_performance_stream_marker_intel: {
-                let value = loader(b"vkCmdSetPerformanceStreamMarkerINTEL\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetPerformanceStreamMarkerINTEL".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4499,7 +4464,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_polygon_mode_ext: {
-                let value = loader(b"vkCmdSetPolygonModeEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetPolygonModeEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4513,7 +4478,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_primitive_restart_enable: {
-                let value = loader(b"vkCmdSetPrimitiveRestartEnable\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetPrimitiveRestartEnable".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4527,7 +4492,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_primitive_restart_enable_ext: {
-                let value = loader(b"vkCmdSetPrimitiveRestartEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetPrimitiveRestartEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4541,7 +4506,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_primitive_topology: {
-                let value = loader(b"vkCmdSetPrimitiveTopology\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetPrimitiveTopology".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4555,7 +4520,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_primitive_topology_ext: {
-                let value = loader(b"vkCmdSetPrimitiveTopologyEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetPrimitiveTopologyEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4569,7 +4534,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_provoking_vertex_mode_ext: {
-                let value = loader(b"vkCmdSetProvokingVertexModeEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetProvokingVertexModeEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4583,7 +4548,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_rasterization_samples_ext: {
-                let value = loader(b"vkCmdSetRasterizationSamplesEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetRasterizationSamplesEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4597,7 +4562,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_rasterization_stream_ext: {
-                let value = loader(b"vkCmdSetRasterizationStreamEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetRasterizationStreamEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4611,7 +4576,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_rasterizer_discard_enable: {
-                let value = loader(b"vkCmdSetRasterizerDiscardEnable\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetRasterizerDiscardEnable".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4625,7 +4590,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_rasterizer_discard_enable_ext: {
-                let value = loader(b"vkCmdSetRasterizerDiscardEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetRasterizerDiscardEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4639,7 +4604,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_ray_tracing_pipeline_stack_size_khr: {
-                let value = loader(b"vkCmdSetRayTracingPipelineStackSizeKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetRayTracingPipelineStackSizeKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4653,7 +4618,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_rendering_attachment_locations: {
-                let value = loader(b"vkCmdSetRenderingAttachmentLocations\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetRenderingAttachmentLocations".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4667,7 +4632,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_rendering_attachment_locations_khr: {
-                let value = loader(b"vkCmdSetRenderingAttachmentLocationsKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetRenderingAttachmentLocationsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4681,7 +4646,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_rendering_input_attachment_indices: {
-                let value = loader(b"vkCmdSetRenderingInputAttachmentIndices\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetRenderingInputAttachmentIndices".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4695,11 +4660,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_rendering_input_attachment_indices_khr: {
-                let value = loader(
-                    b"vkCmdSetRenderingInputAttachmentIndicesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdSetRenderingInputAttachmentIndicesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4713,11 +4674,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_representative_fragment_test_enable_nv: {
-                let value = loader(
-                    b"vkCmdSetRepresentativeFragmentTestEnableNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdSetRepresentativeFragmentTestEnableNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4731,7 +4688,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_sample_locations_ext: {
-                let value = loader(b"vkCmdSetSampleLocationsEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetSampleLocationsEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4745,7 +4702,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_sample_locations_enable_ext: {
-                let value = loader(b"vkCmdSetSampleLocationsEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetSampleLocationsEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4759,7 +4716,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_sample_mask_ext: {
-                let value = loader(b"vkCmdSetSampleMaskEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetSampleMaskEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4774,7 +4731,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_scissor: {
-                let value = loader(b"vkCmdSetScissor\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetScissor".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4790,7 +4747,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_scissor_with_count: {
-                let value = loader(b"vkCmdSetScissorWithCount\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetScissorWithCount".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4805,7 +4762,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_scissor_with_count_ext: {
-                let value = loader(b"vkCmdSetScissorWithCountEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetScissorWithCountEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4820,7 +4777,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_shading_rate_image_enable_nv: {
-                let value = loader(b"vkCmdSetShadingRateImageEnableNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetShadingRateImageEnableNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4834,7 +4791,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_stencil_compare_mask: {
-                let value = loader(b"vkCmdSetStencilCompareMask\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetStencilCompareMask".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4849,7 +4806,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_stencil_op: {
-                let value = loader(b"vkCmdSetStencilOp\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetStencilOp".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4867,7 +4824,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_stencil_op_ext: {
-                let value = loader(b"vkCmdSetStencilOpEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetStencilOpEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4885,7 +4842,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_stencil_reference: {
-                let value = loader(b"vkCmdSetStencilReference\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetStencilReference".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4900,7 +4857,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_stencil_test_enable: {
-                let value = loader(b"vkCmdSetStencilTestEnable\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetStencilTestEnable".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4914,7 +4871,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_stencil_test_enable_ext: {
-                let value = loader(b"vkCmdSetStencilTestEnableEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetStencilTestEnableEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4928,7 +4885,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_stencil_write_mask: {
-                let value = loader(b"vkCmdSetStencilWriteMask\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetStencilWriteMask".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4943,7 +4900,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_tessellation_domain_origin_ext: {
-                let value = loader(b"vkCmdSetTessellationDomainOriginEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetTessellationDomainOriginEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4957,7 +4914,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_vertex_input_ext: {
-                let value = loader(b"vkCmdSetVertexInputEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetVertexInputEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4974,7 +4931,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_viewport: {
-                let value = loader(b"vkCmdSetViewport\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetViewport".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -4990,7 +4947,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_viewport_shading_rate_palette_nv: {
-                let value = loader(b"vkCmdSetViewportShadingRatePaletteNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetViewportShadingRatePaletteNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5006,7 +4963,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_viewport_swizzle_nv: {
-                let value = loader(b"vkCmdSetViewportSwizzleNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetViewportSwizzleNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5022,7 +4979,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_viewport_w_scaling_enable_nv: {
-                let value = loader(b"vkCmdSetViewportWScalingEnableNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetViewportWScalingEnableNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5036,7 +4993,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_viewport_w_scaling_nv: {
-                let value = loader(b"vkCmdSetViewportWScalingNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetViewportWScalingNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5052,7 +5009,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_viewport_with_count: {
-                let value = loader(b"vkCmdSetViewportWithCount\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetViewportWithCount".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5067,7 +5024,7 @@ impl DeviceCommands {
                 }
             },
             cmd_set_viewport_with_count_ext: {
-                let value = loader(b"vkCmdSetViewportWithCountEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdSetViewportWithCountEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5082,7 +5039,7 @@ impl DeviceCommands {
                 }
             },
             cmd_subpass_shading_huawei: {
-                let value = loader(b"vkCmdSubpassShadingHUAWEI\0".as_ptr().cast());
+                let value = loader(c"vkCmdSubpassShadingHUAWEI".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5093,7 +5050,7 @@ impl DeviceCommands {
                 }
             },
             cmd_trace_rays_indirect2_khr: {
-                let value = loader(b"vkCmdTraceRaysIndirect2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdTraceRaysIndirect2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5107,7 +5064,7 @@ impl DeviceCommands {
                 }
             },
             cmd_trace_rays_indirect_khr: {
-                let value = loader(b"vkCmdTraceRaysIndirectKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdTraceRaysIndirectKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5125,7 +5082,7 @@ impl DeviceCommands {
                 }
             },
             cmd_trace_rays_khr: {
-                let value = loader(b"vkCmdTraceRaysKHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdTraceRaysKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5145,7 +5102,7 @@ impl DeviceCommands {
                 }
             },
             cmd_trace_rays_nv: {
-                let value = loader(b"vkCmdTraceRaysNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdTraceRaysNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5172,7 +5129,7 @@ impl DeviceCommands {
                 }
             },
             cmd_update_buffer: {
-                let value = loader(b"vkCmdUpdateBuffer\0".as_ptr().cast());
+                let value = loader(c"vkCmdUpdateBuffer".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5189,7 +5146,7 @@ impl DeviceCommands {
                 }
             },
             cmd_update_pipeline_indirect_buffer_nv: {
-                let value = loader(b"vkCmdUpdatePipelineIndirectBufferNV\0".as_ptr().cast());
+                let value = loader(c"vkCmdUpdatePipelineIndirectBufferNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5204,7 +5161,7 @@ impl DeviceCommands {
                 }
             },
             cmd_wait_events: {
-                let value = loader(b"vkCmdWaitEvents\0".as_ptr().cast());
+                let value = loader(c"vkCmdWaitEvents".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5227,7 +5184,7 @@ impl DeviceCommands {
                 }
             },
             cmd_wait_events2: {
-                let value = loader(b"vkCmdWaitEvents2\0".as_ptr().cast());
+                let value = loader(c"vkCmdWaitEvents2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5243,7 +5200,7 @@ impl DeviceCommands {
                 }
             },
             cmd_wait_events2_khr: {
-                let value = loader(b"vkCmdWaitEvents2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdWaitEvents2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5259,11 +5216,7 @@ impl DeviceCommands {
                 }
             },
             cmd_write_acceleration_structures_properties_khr: {
-                let value = loader(
-                    b"vkCmdWriteAccelerationStructuresPropertiesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdWriteAccelerationStructuresPropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5281,11 +5234,7 @@ impl DeviceCommands {
                 }
             },
             cmd_write_acceleration_structures_properties_nv: {
-                let value = loader(
-                    b"vkCmdWriteAccelerationStructuresPropertiesNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkCmdWriteAccelerationStructuresPropertiesNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5303,7 +5252,7 @@ impl DeviceCommands {
                 }
             },
             cmd_write_buffer_marker2_amd: {
-                let value = loader(b"vkCmdWriteBufferMarker2AMD\0".as_ptr().cast());
+                let value = loader(c"vkCmdWriteBufferMarker2AMD".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5320,7 +5269,7 @@ impl DeviceCommands {
                 }
             },
             cmd_write_buffer_marker_amd: {
-                let value = loader(b"vkCmdWriteBufferMarkerAMD\0".as_ptr().cast());
+                let value = loader(c"vkCmdWriteBufferMarkerAMD".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5337,7 +5286,7 @@ impl DeviceCommands {
                 }
             },
             cmd_write_micromaps_properties_ext: {
-                let value = loader(b"vkCmdWriteMicromapsPropertiesEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdWriteMicromapsPropertiesEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5355,7 +5304,7 @@ impl DeviceCommands {
                 }
             },
             cmd_write_timestamp: {
-                let value = loader(b"vkCmdWriteTimestamp\0".as_ptr().cast());
+                let value = loader(c"vkCmdWriteTimestamp".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5371,7 +5320,7 @@ impl DeviceCommands {
                 }
             },
             cmd_write_timestamp2: {
-                let value = loader(b"vkCmdWriteTimestamp2\0".as_ptr().cast());
+                let value = loader(c"vkCmdWriteTimestamp2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5387,7 +5336,7 @@ impl DeviceCommands {
                 }
             },
             cmd_write_timestamp2_khr: {
-                let value = loader(b"vkCmdWriteTimestamp2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCmdWriteTimestamp2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5403,7 +5352,7 @@ impl DeviceCommands {
                 }
             },
             compile_deferred_nv: {
-                let value = loader(b"vkCompileDeferredNV\0".as_ptr().cast());
+                let value = loader(c"vkCompileDeferredNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5418,7 +5367,7 @@ impl DeviceCommands {
                 }
             },
             convert_cooperative_vector_matrix_nv: {
-                let value = loader(b"vkConvertCooperativeVectorMatrixNV\0".as_ptr().cast());
+                let value = loader(c"vkConvertCooperativeVectorMatrixNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5432,7 +5381,7 @@ impl DeviceCommands {
                 }
             },
             copy_acceleration_structure_khr: {
-                let value = loader(b"vkCopyAccelerationStructureKHR\0".as_ptr().cast());
+                let value = loader(c"vkCopyAccelerationStructureKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5447,7 +5396,7 @@ impl DeviceCommands {
                 }
             },
             copy_acceleration_structure_to_memory_khr: {
-                let value = loader(b"vkCopyAccelerationStructureToMemoryKHR\0".as_ptr().cast());
+                let value = loader(c"vkCopyAccelerationStructureToMemoryKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5462,7 +5411,7 @@ impl DeviceCommands {
                 }
             },
             copy_image_to_image: {
-                let value = loader(b"vkCopyImageToImage\0".as_ptr().cast());
+                let value = loader(c"vkCopyImageToImage".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5476,7 +5425,7 @@ impl DeviceCommands {
                 }
             },
             copy_image_to_image_ext: {
-                let value = loader(b"vkCopyImageToImageEXT\0".as_ptr().cast());
+                let value = loader(c"vkCopyImageToImageEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5490,7 +5439,7 @@ impl DeviceCommands {
                 }
             },
             copy_image_to_memory: {
-                let value = loader(b"vkCopyImageToMemory\0".as_ptr().cast());
+                let value = loader(c"vkCopyImageToMemory".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5504,7 +5453,7 @@ impl DeviceCommands {
                 }
             },
             copy_image_to_memory_ext: {
-                let value = loader(b"vkCopyImageToMemoryEXT\0".as_ptr().cast());
+                let value = loader(c"vkCopyImageToMemoryEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5518,7 +5467,7 @@ impl DeviceCommands {
                 }
             },
             copy_memory_to_acceleration_structure_khr: {
-                let value = loader(b"vkCopyMemoryToAccelerationStructureKHR\0".as_ptr().cast());
+                let value = loader(c"vkCopyMemoryToAccelerationStructureKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5533,7 +5482,7 @@ impl DeviceCommands {
                 }
             },
             copy_memory_to_image: {
-                let value = loader(b"vkCopyMemoryToImage\0".as_ptr().cast());
+                let value = loader(c"vkCopyMemoryToImage".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5547,7 +5496,7 @@ impl DeviceCommands {
                 }
             },
             copy_memory_to_image_ext: {
-                let value = loader(b"vkCopyMemoryToImageEXT\0".as_ptr().cast());
+                let value = loader(c"vkCopyMemoryToImageEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5561,7 +5510,7 @@ impl DeviceCommands {
                 }
             },
             copy_memory_to_micromap_ext: {
-                let value = loader(b"vkCopyMemoryToMicromapEXT\0".as_ptr().cast());
+                let value = loader(c"vkCopyMemoryToMicromapEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5576,7 +5525,7 @@ impl DeviceCommands {
                 }
             },
             copy_micromap_ext: {
-                let value = loader(b"vkCopyMicromapEXT\0".as_ptr().cast());
+                let value = loader(c"vkCopyMicromapEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5591,7 +5540,7 @@ impl DeviceCommands {
                 }
             },
             copy_micromap_to_memory_ext: {
-                let value = loader(b"vkCopyMicromapToMemoryEXT\0".as_ptr().cast());
+                let value = loader(c"vkCopyMicromapToMemoryEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5606,7 +5555,7 @@ impl DeviceCommands {
                 }
             },
             create_acceleration_structure_khr: {
-                let value = loader(b"vkCreateAccelerationStructureKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateAccelerationStructureKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5622,7 +5571,7 @@ impl DeviceCommands {
                 }
             },
             create_acceleration_structure_nv: {
-                let value = loader(b"vkCreateAccelerationStructureNV\0".as_ptr().cast());
+                let value = loader(c"vkCreateAccelerationStructureNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5638,7 +5587,7 @@ impl DeviceCommands {
                 }
             },
             create_buffer: {
-                let value = loader(b"vkCreateBuffer\0".as_ptr().cast());
+                let value = loader(c"vkCreateBuffer".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5654,7 +5603,7 @@ impl DeviceCommands {
                 }
             },
             create_buffer_collection_fuchsia: {
-                let value = loader(b"vkCreateBufferCollectionFUCHSIA\0".as_ptr().cast());
+                let value = loader(c"vkCreateBufferCollectionFUCHSIA".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5670,7 +5619,7 @@ impl DeviceCommands {
                 }
             },
             create_buffer_view: {
-                let value = loader(b"vkCreateBufferView\0".as_ptr().cast());
+                let value = loader(c"vkCreateBufferView".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5686,7 +5635,7 @@ impl DeviceCommands {
                 }
             },
             create_command_pool: {
-                let value = loader(b"vkCreateCommandPool\0".as_ptr().cast());
+                let value = loader(c"vkCreateCommandPool".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5702,7 +5651,7 @@ impl DeviceCommands {
                 }
             },
             create_compute_pipelines: {
-                let value = loader(b"vkCreateComputePipelines\0".as_ptr().cast());
+                let value = loader(c"vkCreateComputePipelines".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5720,7 +5669,7 @@ impl DeviceCommands {
                 }
             },
             create_cu_function_nvx: {
-                let value = loader(b"vkCreateCuFunctionNVX\0".as_ptr().cast());
+                let value = loader(c"vkCreateCuFunctionNVX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5736,7 +5685,7 @@ impl DeviceCommands {
                 }
             },
             create_cu_module_nvx: {
-                let value = loader(b"vkCreateCuModuleNVX\0".as_ptr().cast());
+                let value = loader(c"vkCreateCuModuleNVX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5752,7 +5701,7 @@ impl DeviceCommands {
                 }
             },
             create_cuda_function_nv: {
-                let value = loader(b"vkCreateCudaFunctionNV\0".as_ptr().cast());
+                let value = loader(c"vkCreateCudaFunctionNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5768,7 +5717,7 @@ impl DeviceCommands {
                 }
             },
             create_cuda_module_nv: {
-                let value = loader(b"vkCreateCudaModuleNV\0".as_ptr().cast());
+                let value = loader(c"vkCreateCudaModuleNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5784,7 +5733,7 @@ impl DeviceCommands {
                 }
             },
             create_data_graph_pipeline_session_arm: {
-                let value = loader(b"vkCreateDataGraphPipelineSessionARM\0".as_ptr().cast());
+                let value = loader(c"vkCreateDataGraphPipelineSessionARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5800,7 +5749,7 @@ impl DeviceCommands {
                 }
             },
             create_data_graph_pipelines_arm: {
-                let value = loader(b"vkCreateDataGraphPipelinesARM\0".as_ptr().cast());
+                let value = loader(c"vkCreateDataGraphPipelinesARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5819,7 +5768,7 @@ impl DeviceCommands {
                 }
             },
             create_deferred_operation_khr: {
-                let value = loader(b"vkCreateDeferredOperationKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateDeferredOperationKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5834,7 +5783,7 @@ impl DeviceCommands {
                 }
             },
             create_descriptor_pool: {
-                let value = loader(b"vkCreateDescriptorPool\0".as_ptr().cast());
+                let value = loader(c"vkCreateDescriptorPool".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5850,7 +5799,7 @@ impl DeviceCommands {
                 }
             },
             create_descriptor_set_layout: {
-                let value = loader(b"vkCreateDescriptorSetLayout\0".as_ptr().cast());
+                let value = loader(c"vkCreateDescriptorSetLayout".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5866,7 +5815,7 @@ impl DeviceCommands {
                 }
             },
             create_descriptor_update_template: {
-                let value = loader(b"vkCreateDescriptorUpdateTemplate\0".as_ptr().cast());
+                let value = loader(c"vkCreateDescriptorUpdateTemplate".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5882,7 +5831,7 @@ impl DeviceCommands {
                 }
             },
             create_descriptor_update_template_khr: {
-                let value = loader(b"vkCreateDescriptorUpdateTemplateKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateDescriptorUpdateTemplateKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5898,7 +5847,7 @@ impl DeviceCommands {
                 }
             },
             create_event: {
-                let value = loader(b"vkCreateEvent\0".as_ptr().cast());
+                let value = loader(c"vkCreateEvent".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5914,7 +5863,7 @@ impl DeviceCommands {
                 }
             },
             create_execution_graph_pipelines_amdx: {
-                let value = loader(b"vkCreateExecutionGraphPipelinesAMDX\0".as_ptr().cast());
+                let value = loader(c"vkCreateExecutionGraphPipelinesAMDX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5932,7 +5881,7 @@ impl DeviceCommands {
                 }
             },
             create_external_compute_queue_nv: {
-                let value = loader(b"vkCreateExternalComputeQueueNV\0".as_ptr().cast());
+                let value = loader(c"vkCreateExternalComputeQueueNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5948,7 +5897,7 @@ impl DeviceCommands {
                 }
             },
             create_fence: {
-                let value = loader(b"vkCreateFence\0".as_ptr().cast());
+                let value = loader(c"vkCreateFence".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5964,7 +5913,7 @@ impl DeviceCommands {
                 }
             },
             create_framebuffer: {
-                let value = loader(b"vkCreateFramebuffer\0".as_ptr().cast());
+                let value = loader(c"vkCreateFramebuffer".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5980,7 +5929,7 @@ impl DeviceCommands {
                 }
             },
             create_graphics_pipelines: {
-                let value = loader(b"vkCreateGraphicsPipelines\0".as_ptr().cast());
+                let value = loader(c"vkCreateGraphicsPipelines".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -5998,7 +5947,7 @@ impl DeviceCommands {
                 }
             },
             create_image: {
-                let value = loader(b"vkCreateImage\0".as_ptr().cast());
+                let value = loader(c"vkCreateImage".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6014,7 +5963,7 @@ impl DeviceCommands {
                 }
             },
             create_image_view: {
-                let value = loader(b"vkCreateImageView\0".as_ptr().cast());
+                let value = loader(c"vkCreateImageView".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6030,7 +5979,7 @@ impl DeviceCommands {
                 }
             },
             create_indirect_commands_layout_ext: {
-                let value = loader(b"vkCreateIndirectCommandsLayoutEXT\0".as_ptr().cast());
+                let value = loader(c"vkCreateIndirectCommandsLayoutEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6046,7 +5995,7 @@ impl DeviceCommands {
                 }
             },
             create_indirect_commands_layout_nv: {
-                let value = loader(b"vkCreateIndirectCommandsLayoutNV\0".as_ptr().cast());
+                let value = loader(c"vkCreateIndirectCommandsLayoutNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6062,7 +6011,7 @@ impl DeviceCommands {
                 }
             },
             create_indirect_execution_set_ext: {
-                let value = loader(b"vkCreateIndirectExecutionSetEXT\0".as_ptr().cast());
+                let value = loader(c"vkCreateIndirectExecutionSetEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6078,7 +6027,7 @@ impl DeviceCommands {
                 }
             },
             create_micromap_ext: {
-                let value = loader(b"vkCreateMicromapEXT\0".as_ptr().cast());
+                let value = loader(c"vkCreateMicromapEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6094,7 +6043,7 @@ impl DeviceCommands {
                 }
             },
             create_optical_flow_session_nv: {
-                let value = loader(b"vkCreateOpticalFlowSessionNV\0".as_ptr().cast());
+                let value = loader(c"vkCreateOpticalFlowSessionNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6110,7 +6059,7 @@ impl DeviceCommands {
                 }
             },
             create_pipeline_binaries_khr: {
-                let value = loader(b"vkCreatePipelineBinariesKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreatePipelineBinariesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6126,7 +6075,7 @@ impl DeviceCommands {
                 }
             },
             create_pipeline_cache: {
-                let value = loader(b"vkCreatePipelineCache\0".as_ptr().cast());
+                let value = loader(c"vkCreatePipelineCache".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6142,7 +6091,7 @@ impl DeviceCommands {
                 }
             },
             create_pipeline_layout: {
-                let value = loader(b"vkCreatePipelineLayout\0".as_ptr().cast());
+                let value = loader(c"vkCreatePipelineLayout".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6158,7 +6107,7 @@ impl DeviceCommands {
                 }
             },
             create_private_data_slot: {
-                let value = loader(b"vkCreatePrivateDataSlot\0".as_ptr().cast());
+                let value = loader(c"vkCreatePrivateDataSlot".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6174,7 +6123,7 @@ impl DeviceCommands {
                 }
             },
             create_private_data_slot_ext: {
-                let value = loader(b"vkCreatePrivateDataSlotEXT\0".as_ptr().cast());
+                let value = loader(c"vkCreatePrivateDataSlotEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6190,7 +6139,7 @@ impl DeviceCommands {
                 }
             },
             create_query_pool: {
-                let value = loader(b"vkCreateQueryPool\0".as_ptr().cast());
+                let value = loader(c"vkCreateQueryPool".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6206,7 +6155,7 @@ impl DeviceCommands {
                 }
             },
             create_ray_tracing_pipelines_khr: {
-                let value = loader(b"vkCreateRayTracingPipelinesKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateRayTracingPipelinesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6225,7 +6174,7 @@ impl DeviceCommands {
                 }
             },
             create_ray_tracing_pipelines_nv: {
-                let value = loader(b"vkCreateRayTracingPipelinesNV\0".as_ptr().cast());
+                let value = loader(c"vkCreateRayTracingPipelinesNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6243,7 +6192,7 @@ impl DeviceCommands {
                 }
             },
             create_render_pass: {
-                let value = loader(b"vkCreateRenderPass\0".as_ptr().cast());
+                let value = loader(c"vkCreateRenderPass".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6259,7 +6208,7 @@ impl DeviceCommands {
                 }
             },
             create_render_pass2: {
-                let value = loader(b"vkCreateRenderPass2\0".as_ptr().cast());
+                let value = loader(c"vkCreateRenderPass2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6275,7 +6224,7 @@ impl DeviceCommands {
                 }
             },
             create_render_pass2_khr: {
-                let value = loader(b"vkCreateRenderPass2KHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateRenderPass2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6291,7 +6240,7 @@ impl DeviceCommands {
                 }
             },
             create_sampler: {
-                let value = loader(b"vkCreateSampler\0".as_ptr().cast());
+                let value = loader(c"vkCreateSampler".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6307,7 +6256,7 @@ impl DeviceCommands {
                 }
             },
             create_sampler_ycbcr_conversion: {
-                let value = loader(b"vkCreateSamplerYcbcrConversion\0".as_ptr().cast());
+                let value = loader(c"vkCreateSamplerYcbcrConversion".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6323,7 +6272,7 @@ impl DeviceCommands {
                 }
             },
             create_sampler_ycbcr_conversion_khr: {
-                let value = loader(b"vkCreateSamplerYcbcrConversionKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateSamplerYcbcrConversionKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6339,7 +6288,7 @@ impl DeviceCommands {
                 }
             },
             create_semaphore: {
-                let value = loader(b"vkCreateSemaphore\0".as_ptr().cast());
+                let value = loader(c"vkCreateSemaphore".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6355,7 +6304,7 @@ impl DeviceCommands {
                 }
             },
             create_semaphore_sci_sync_pool_nv: {
-                let value = loader(b"vkCreateSemaphoreSciSyncPoolNV\0".as_ptr().cast());
+                let value = loader(c"vkCreateSemaphoreSciSyncPoolNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6371,7 +6320,7 @@ impl DeviceCommands {
                 }
             },
             create_shader_module: {
-                let value = loader(b"vkCreateShaderModule\0".as_ptr().cast());
+                let value = loader(c"vkCreateShaderModule".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6387,7 +6336,7 @@ impl DeviceCommands {
                 }
             },
             create_shaders_ext: {
-                let value = loader(b"vkCreateShadersEXT\0".as_ptr().cast());
+                let value = loader(c"vkCreateShadersEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6404,7 +6353,7 @@ impl DeviceCommands {
                 }
             },
             create_shared_swapchains_khr: {
-                let value = loader(b"vkCreateSharedSwapchainsKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateSharedSwapchainsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6421,7 +6370,7 @@ impl DeviceCommands {
                 }
             },
             create_swapchain_khr: {
-                let value = loader(b"vkCreateSwapchainKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateSwapchainKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6437,7 +6386,7 @@ impl DeviceCommands {
                 }
             },
             create_tensor_arm: {
-                let value = loader(b"vkCreateTensorARM\0".as_ptr().cast());
+                let value = loader(c"vkCreateTensorARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6453,7 +6402,7 @@ impl DeviceCommands {
                 }
             },
             create_tensor_view_arm: {
-                let value = loader(b"vkCreateTensorViewARM\0".as_ptr().cast());
+                let value = loader(c"vkCreateTensorViewARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6469,7 +6418,7 @@ impl DeviceCommands {
                 }
             },
             create_validation_cache_ext: {
-                let value = loader(b"vkCreateValidationCacheEXT\0".as_ptr().cast());
+                let value = loader(c"vkCreateValidationCacheEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6485,7 +6434,7 @@ impl DeviceCommands {
                 }
             },
             create_video_session_khr: {
-                let value = loader(b"vkCreateVideoSessionKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateVideoSessionKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6501,7 +6450,7 @@ impl DeviceCommands {
                 }
             },
             create_video_session_parameters_khr: {
-                let value = loader(b"vkCreateVideoSessionParametersKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateVideoSessionParametersKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6517,7 +6466,7 @@ impl DeviceCommands {
                 }
             },
             debug_marker_set_object_name_ext: {
-                let value = loader(b"vkDebugMarkerSetObjectNameEXT\0".as_ptr().cast());
+                let value = loader(c"vkDebugMarkerSetObjectNameEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6531,7 +6480,7 @@ impl DeviceCommands {
                 }
             },
             debug_marker_set_object_tag_ext: {
-                let value = loader(b"vkDebugMarkerSetObjectTagEXT\0".as_ptr().cast());
+                let value = loader(c"vkDebugMarkerSetObjectTagEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6545,7 +6494,7 @@ impl DeviceCommands {
                 }
             },
             deferred_operation_join_khr: {
-                let value = loader(b"vkDeferredOperationJoinKHR\0".as_ptr().cast());
+                let value = loader(c"vkDeferredOperationJoinKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6559,7 +6508,7 @@ impl DeviceCommands {
                 }
             },
             destroy_acceleration_structure_khr: {
-                let value = loader(b"vkDestroyAccelerationStructureKHR\0".as_ptr().cast());
+                let value = loader(c"vkDestroyAccelerationStructureKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6574,7 +6523,7 @@ impl DeviceCommands {
                 }
             },
             destroy_acceleration_structure_nv: {
-                let value = loader(b"vkDestroyAccelerationStructureNV\0".as_ptr().cast());
+                let value = loader(c"vkDestroyAccelerationStructureNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6589,7 +6538,7 @@ impl DeviceCommands {
                 }
             },
             destroy_buffer: {
-                let value = loader(b"vkDestroyBuffer\0".as_ptr().cast());
+                let value = loader(c"vkDestroyBuffer".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6604,7 +6553,7 @@ impl DeviceCommands {
                 }
             },
             destroy_buffer_collection_fuchsia: {
-                let value = loader(b"vkDestroyBufferCollectionFUCHSIA\0".as_ptr().cast());
+                let value = loader(c"vkDestroyBufferCollectionFUCHSIA".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6619,7 +6568,7 @@ impl DeviceCommands {
                 }
             },
             destroy_buffer_view: {
-                let value = loader(b"vkDestroyBufferView\0".as_ptr().cast());
+                let value = loader(c"vkDestroyBufferView".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6634,7 +6583,7 @@ impl DeviceCommands {
                 }
             },
             destroy_command_pool: {
-                let value = loader(b"vkDestroyCommandPool\0".as_ptr().cast());
+                let value = loader(c"vkDestroyCommandPool".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6649,7 +6598,7 @@ impl DeviceCommands {
                 }
             },
             destroy_cu_function_nvx: {
-                let value = loader(b"vkDestroyCuFunctionNVX\0".as_ptr().cast());
+                let value = loader(c"vkDestroyCuFunctionNVX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6664,7 +6613,7 @@ impl DeviceCommands {
                 }
             },
             destroy_cu_module_nvx: {
-                let value = loader(b"vkDestroyCuModuleNVX\0".as_ptr().cast());
+                let value = loader(c"vkDestroyCuModuleNVX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6679,7 +6628,7 @@ impl DeviceCommands {
                 }
             },
             destroy_cuda_function_nv: {
-                let value = loader(b"vkDestroyCudaFunctionNV\0".as_ptr().cast());
+                let value = loader(c"vkDestroyCudaFunctionNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6694,7 +6643,7 @@ impl DeviceCommands {
                 }
             },
             destroy_cuda_module_nv: {
-                let value = loader(b"vkDestroyCudaModuleNV\0".as_ptr().cast());
+                let value = loader(c"vkDestroyCudaModuleNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6709,7 +6658,7 @@ impl DeviceCommands {
                 }
             },
             destroy_data_graph_pipeline_session_arm: {
-                let value = loader(b"vkDestroyDataGraphPipelineSessionARM\0".as_ptr().cast());
+                let value = loader(c"vkDestroyDataGraphPipelineSessionARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6724,7 +6673,7 @@ impl DeviceCommands {
                 }
             },
             destroy_deferred_operation_khr: {
-                let value = loader(b"vkDestroyDeferredOperationKHR\0".as_ptr().cast());
+                let value = loader(c"vkDestroyDeferredOperationKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6739,7 +6688,7 @@ impl DeviceCommands {
                 }
             },
             destroy_descriptor_pool: {
-                let value = loader(b"vkDestroyDescriptorPool\0".as_ptr().cast());
+                let value = loader(c"vkDestroyDescriptorPool".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6754,7 +6703,7 @@ impl DeviceCommands {
                 }
             },
             destroy_descriptor_set_layout: {
-                let value = loader(b"vkDestroyDescriptorSetLayout\0".as_ptr().cast());
+                let value = loader(c"vkDestroyDescriptorSetLayout".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6769,7 +6718,7 @@ impl DeviceCommands {
                 }
             },
             destroy_descriptor_update_template: {
-                let value = loader(b"vkDestroyDescriptorUpdateTemplate\0".as_ptr().cast());
+                let value = loader(c"vkDestroyDescriptorUpdateTemplate".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6784,7 +6733,7 @@ impl DeviceCommands {
                 }
             },
             destroy_descriptor_update_template_khr: {
-                let value = loader(b"vkDestroyDescriptorUpdateTemplateKHR\0".as_ptr().cast());
+                let value = loader(c"vkDestroyDescriptorUpdateTemplateKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6799,7 +6748,7 @@ impl DeviceCommands {
                 }
             },
             destroy_device: {
-                let value = loader(b"vkDestroyDevice\0".as_ptr().cast());
+                let value = loader(c"vkDestroyDevice".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6813,7 +6762,7 @@ impl DeviceCommands {
                 }
             },
             destroy_event: {
-                let value = loader(b"vkDestroyEvent\0".as_ptr().cast());
+                let value = loader(c"vkDestroyEvent".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6828,7 +6777,7 @@ impl DeviceCommands {
                 }
             },
             destroy_external_compute_queue_nv: {
-                let value = loader(b"vkDestroyExternalComputeQueueNV\0".as_ptr().cast());
+                let value = loader(c"vkDestroyExternalComputeQueueNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6843,7 +6792,7 @@ impl DeviceCommands {
                 }
             },
             destroy_fence: {
-                let value = loader(b"vkDestroyFence\0".as_ptr().cast());
+                let value = loader(c"vkDestroyFence".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6858,7 +6807,7 @@ impl DeviceCommands {
                 }
             },
             destroy_framebuffer: {
-                let value = loader(b"vkDestroyFramebuffer\0".as_ptr().cast());
+                let value = loader(c"vkDestroyFramebuffer".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6873,7 +6822,7 @@ impl DeviceCommands {
                 }
             },
             destroy_image: {
-                let value = loader(b"vkDestroyImage\0".as_ptr().cast());
+                let value = loader(c"vkDestroyImage".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6888,7 +6837,7 @@ impl DeviceCommands {
                 }
             },
             destroy_image_view: {
-                let value = loader(b"vkDestroyImageView\0".as_ptr().cast());
+                let value = loader(c"vkDestroyImageView".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6903,7 +6852,7 @@ impl DeviceCommands {
                 }
             },
             destroy_indirect_commands_layout_ext: {
-                let value = loader(b"vkDestroyIndirectCommandsLayoutEXT\0".as_ptr().cast());
+                let value = loader(c"vkDestroyIndirectCommandsLayoutEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6918,7 +6867,7 @@ impl DeviceCommands {
                 }
             },
             destroy_indirect_commands_layout_nv: {
-                let value = loader(b"vkDestroyIndirectCommandsLayoutNV\0".as_ptr().cast());
+                let value = loader(c"vkDestroyIndirectCommandsLayoutNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6933,7 +6882,7 @@ impl DeviceCommands {
                 }
             },
             destroy_indirect_execution_set_ext: {
-                let value = loader(b"vkDestroyIndirectExecutionSetEXT\0".as_ptr().cast());
+                let value = loader(c"vkDestroyIndirectExecutionSetEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6948,7 +6897,7 @@ impl DeviceCommands {
                 }
             },
             destroy_micromap_ext: {
-                let value = loader(b"vkDestroyMicromapEXT\0".as_ptr().cast());
+                let value = loader(c"vkDestroyMicromapEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6963,7 +6912,7 @@ impl DeviceCommands {
                 }
             },
             destroy_optical_flow_session_nv: {
-                let value = loader(b"vkDestroyOpticalFlowSessionNV\0".as_ptr().cast());
+                let value = loader(c"vkDestroyOpticalFlowSessionNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6978,7 +6927,7 @@ impl DeviceCommands {
                 }
             },
             destroy_pipeline: {
-                let value = loader(b"vkDestroyPipeline\0".as_ptr().cast());
+                let value = loader(c"vkDestroyPipeline".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -6993,7 +6942,7 @@ impl DeviceCommands {
                 }
             },
             destroy_pipeline_binary_khr: {
-                let value = loader(b"vkDestroyPipelineBinaryKHR\0".as_ptr().cast());
+                let value = loader(c"vkDestroyPipelineBinaryKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7008,7 +6957,7 @@ impl DeviceCommands {
                 }
             },
             destroy_pipeline_cache: {
-                let value = loader(b"vkDestroyPipelineCache\0".as_ptr().cast());
+                let value = loader(c"vkDestroyPipelineCache".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7023,7 +6972,7 @@ impl DeviceCommands {
                 }
             },
             destroy_pipeline_layout: {
-                let value = loader(b"vkDestroyPipelineLayout\0".as_ptr().cast());
+                let value = loader(c"vkDestroyPipelineLayout".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7038,7 +6987,7 @@ impl DeviceCommands {
                 }
             },
             destroy_private_data_slot: {
-                let value = loader(b"vkDestroyPrivateDataSlot\0".as_ptr().cast());
+                let value = loader(c"vkDestroyPrivateDataSlot".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7053,7 +7002,7 @@ impl DeviceCommands {
                 }
             },
             destroy_private_data_slot_ext: {
-                let value = loader(b"vkDestroyPrivateDataSlotEXT\0".as_ptr().cast());
+                let value = loader(c"vkDestroyPrivateDataSlotEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7068,7 +7017,7 @@ impl DeviceCommands {
                 }
             },
             destroy_query_pool: {
-                let value = loader(b"vkDestroyQueryPool\0".as_ptr().cast());
+                let value = loader(c"vkDestroyQueryPool".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7083,7 +7032,7 @@ impl DeviceCommands {
                 }
             },
             destroy_render_pass: {
-                let value = loader(b"vkDestroyRenderPass\0".as_ptr().cast());
+                let value = loader(c"vkDestroyRenderPass".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7098,7 +7047,7 @@ impl DeviceCommands {
                 }
             },
             destroy_sampler: {
-                let value = loader(b"vkDestroySampler\0".as_ptr().cast());
+                let value = loader(c"vkDestroySampler".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7113,7 +7062,7 @@ impl DeviceCommands {
                 }
             },
             destroy_sampler_ycbcr_conversion: {
-                let value = loader(b"vkDestroySamplerYcbcrConversion\0".as_ptr().cast());
+                let value = loader(c"vkDestroySamplerYcbcrConversion".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7128,7 +7077,7 @@ impl DeviceCommands {
                 }
             },
             destroy_sampler_ycbcr_conversion_khr: {
-                let value = loader(b"vkDestroySamplerYcbcrConversionKHR\0".as_ptr().cast());
+                let value = loader(c"vkDestroySamplerYcbcrConversionKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7143,7 +7092,7 @@ impl DeviceCommands {
                 }
             },
             destroy_semaphore: {
-                let value = loader(b"vkDestroySemaphore\0".as_ptr().cast());
+                let value = loader(c"vkDestroySemaphore".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7158,7 +7107,7 @@ impl DeviceCommands {
                 }
             },
             destroy_semaphore_sci_sync_pool_nv: {
-                let value = loader(b"vkDestroySemaphoreSciSyncPoolNV\0".as_ptr().cast());
+                let value = loader(c"vkDestroySemaphoreSciSyncPoolNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7173,7 +7122,7 @@ impl DeviceCommands {
                 }
             },
             destroy_shader_ext: {
-                let value = loader(b"vkDestroyShaderEXT\0".as_ptr().cast());
+                let value = loader(c"vkDestroyShaderEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7188,7 +7137,7 @@ impl DeviceCommands {
                 }
             },
             destroy_shader_module: {
-                let value = loader(b"vkDestroyShaderModule\0".as_ptr().cast());
+                let value = loader(c"vkDestroyShaderModule".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7203,7 +7152,7 @@ impl DeviceCommands {
                 }
             },
             destroy_swapchain_khr: {
-                let value = loader(b"vkDestroySwapchainKHR\0".as_ptr().cast());
+                let value = loader(c"vkDestroySwapchainKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7218,7 +7167,7 @@ impl DeviceCommands {
                 }
             },
             destroy_tensor_arm: {
-                let value = loader(b"vkDestroyTensorARM\0".as_ptr().cast());
+                let value = loader(c"vkDestroyTensorARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7233,7 +7182,7 @@ impl DeviceCommands {
                 }
             },
             destroy_tensor_view_arm: {
-                let value = loader(b"vkDestroyTensorViewARM\0".as_ptr().cast());
+                let value = loader(c"vkDestroyTensorViewARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7248,7 +7197,7 @@ impl DeviceCommands {
                 }
             },
             destroy_validation_cache_ext: {
-                let value = loader(b"vkDestroyValidationCacheEXT\0".as_ptr().cast());
+                let value = loader(c"vkDestroyValidationCacheEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7263,7 +7212,7 @@ impl DeviceCommands {
                 }
             },
             destroy_video_session_khr: {
-                let value = loader(b"vkDestroyVideoSessionKHR\0".as_ptr().cast());
+                let value = loader(c"vkDestroyVideoSessionKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7278,7 +7227,7 @@ impl DeviceCommands {
                 }
             },
             destroy_video_session_parameters_khr: {
-                let value = loader(b"vkDestroyVideoSessionParametersKHR\0".as_ptr().cast());
+                let value = loader(c"vkDestroyVideoSessionParametersKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7293,7 +7242,7 @@ impl DeviceCommands {
                 }
             },
             device_wait_idle: {
-                let value = loader(b"vkDeviceWaitIdle\0".as_ptr().cast());
+                let value = loader(c"vkDeviceWaitIdle".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7304,7 +7253,7 @@ impl DeviceCommands {
                 }
             },
             display_power_control_ext: {
-                let value = loader(b"vkDisplayPowerControlEXT\0".as_ptr().cast());
+                let value = loader(c"vkDisplayPowerControlEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7319,7 +7268,7 @@ impl DeviceCommands {
                 }
             },
             end_command_buffer: {
-                let value = loader(b"vkEndCommandBuffer\0".as_ptr().cast());
+                let value = loader(c"vkEndCommandBuffer".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7331,9 +7280,7 @@ impl DeviceCommands {
             },
             enumerate_physical_device_queue_family_performance_query_counters_khr: {
                 let value = instance_loader(
-                    b"vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR\0"
-                        .as_ptr()
-                        .cast(),
+                    c"vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR".as_ptr(),
                 );
                 if let Some(value) = value {
                     mem::transmute(value)
@@ -7351,7 +7298,7 @@ impl DeviceCommands {
                 }
             },
             export_metal_objects_ext: {
-                let value = loader(b"vkExportMetalObjectsEXT\0".as_ptr().cast());
+                let value = loader(c"vkExportMetalObjectsEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7365,7 +7312,7 @@ impl DeviceCommands {
                 }
             },
             flush_mapped_memory_ranges: {
-                let value = loader(b"vkFlushMappedMemoryRanges\0".as_ptr().cast());
+                let value = loader(c"vkFlushMappedMemoryRanges".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7380,7 +7327,7 @@ impl DeviceCommands {
                 }
             },
             free_command_buffers: {
-                let value = loader(b"vkFreeCommandBuffers\0".as_ptr().cast());
+                let value = loader(c"vkFreeCommandBuffers".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7396,7 +7343,7 @@ impl DeviceCommands {
                 }
             },
             free_descriptor_sets: {
-                let value = loader(b"vkFreeDescriptorSets\0".as_ptr().cast());
+                let value = loader(c"vkFreeDescriptorSets".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7412,7 +7359,7 @@ impl DeviceCommands {
                 }
             },
             free_memory: {
-                let value = loader(b"vkFreeMemory\0".as_ptr().cast());
+                let value = loader(c"vkFreeMemory".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7427,7 +7374,7 @@ impl DeviceCommands {
                 }
             },
             get_acceleration_structure_build_sizes_khr: {
-                let value = loader(b"vkGetAccelerationStructureBuildSizesKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetAccelerationStructureBuildSizesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7444,11 +7391,7 @@ impl DeviceCommands {
                 }
             },
             get_acceleration_structure_device_address_khr: {
-                let value = loader(
-                    b"vkGetAccelerationStructureDeviceAddressKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetAccelerationStructureDeviceAddressKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7462,7 +7405,7 @@ impl DeviceCommands {
                 }
             },
             get_acceleration_structure_handle_nv: {
-                let value = loader(b"vkGetAccelerationStructureHandleNV\0".as_ptr().cast());
+                let value = loader(c"vkGetAccelerationStructureHandleNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7478,11 +7421,7 @@ impl DeviceCommands {
                 }
             },
             get_acceleration_structure_memory_requirements_nv: {
-                let value = loader(
-                    b"vkGetAccelerationStructureMemoryRequirementsNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetAccelerationStructureMemoryRequirementsNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7497,11 +7436,8 @@ impl DeviceCommands {
                 }
             },
             get_acceleration_structure_opaque_capture_descriptor_data_ext: {
-                let value = loader(
-                    b"vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value =
+                    loader(c"vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7516,11 +7452,7 @@ impl DeviceCommands {
                 }
             },
             get_android_hardware_buffer_properties_android: {
-                let value = loader(
-                    b"vkGetAndroidHardwareBufferPropertiesANDROID\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetAndroidHardwareBufferPropertiesANDROID".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7535,7 +7467,7 @@ impl DeviceCommands {
                 }
             },
             get_buffer_collection_properties_fuchsia: {
-                let value = loader(b"vkGetBufferCollectionPropertiesFUCHSIA\0".as_ptr().cast());
+                let value = loader(c"vkGetBufferCollectionPropertiesFUCHSIA".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7550,7 +7482,7 @@ impl DeviceCommands {
                 }
             },
             get_buffer_device_address: {
-                let value = loader(b"vkGetBufferDeviceAddress\0".as_ptr().cast());
+                let value = loader(c"vkGetBufferDeviceAddress".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7564,7 +7496,7 @@ impl DeviceCommands {
                 }
             },
             get_buffer_device_address_ext: {
-                let value = loader(b"vkGetBufferDeviceAddressEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetBufferDeviceAddressEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7578,7 +7510,7 @@ impl DeviceCommands {
                 }
             },
             get_buffer_device_address_khr: {
-                let value = loader(b"vkGetBufferDeviceAddressKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetBufferDeviceAddressKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7592,7 +7524,7 @@ impl DeviceCommands {
                 }
             },
             get_buffer_memory_requirements: {
-                let value = loader(b"vkGetBufferMemoryRequirements\0".as_ptr().cast());
+                let value = loader(c"vkGetBufferMemoryRequirements".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7607,7 +7539,7 @@ impl DeviceCommands {
                 }
             },
             get_buffer_memory_requirements2: {
-                let value = loader(b"vkGetBufferMemoryRequirements2\0".as_ptr().cast());
+                let value = loader(c"vkGetBufferMemoryRequirements2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7622,7 +7554,7 @@ impl DeviceCommands {
                 }
             },
             get_buffer_memory_requirements2_khr: {
-                let value = loader(b"vkGetBufferMemoryRequirements2KHR\0".as_ptr().cast());
+                let value = loader(c"vkGetBufferMemoryRequirements2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7637,7 +7569,7 @@ impl DeviceCommands {
                 }
             },
             get_buffer_opaque_capture_address: {
-                let value = loader(b"vkGetBufferOpaqueCaptureAddress\0".as_ptr().cast());
+                let value = loader(c"vkGetBufferOpaqueCaptureAddress".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7651,7 +7583,7 @@ impl DeviceCommands {
                 }
             },
             get_buffer_opaque_capture_address_khr: {
-                let value = loader(b"vkGetBufferOpaqueCaptureAddressKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetBufferOpaqueCaptureAddressKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7665,11 +7597,7 @@ impl DeviceCommands {
                 }
             },
             get_buffer_opaque_capture_descriptor_data_ext: {
-                let value = loader(
-                    b"vkGetBufferOpaqueCaptureDescriptorDataEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetBufferOpaqueCaptureDescriptorDataEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7684,7 +7612,7 @@ impl DeviceCommands {
                 }
             },
             get_calibrated_timestamps_ext: {
-                let value = loader(b"vkGetCalibratedTimestampsEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetCalibratedTimestampsEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7701,7 +7629,7 @@ impl DeviceCommands {
                 }
             },
             get_calibrated_timestamps_khr: {
-                let value = loader(b"vkGetCalibratedTimestampsKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetCalibratedTimestampsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7718,11 +7646,7 @@ impl DeviceCommands {
                 }
             },
             get_cluster_acceleration_structure_build_sizes_nv: {
-                let value = loader(
-                    b"vkGetClusterAccelerationStructureBuildSizesNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetClusterAccelerationStructureBuildSizesNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7737,7 +7661,7 @@ impl DeviceCommands {
                 }
             },
             get_cuda_module_cache_nv: {
-                let value = loader(b"vkGetCudaModuleCacheNV\0".as_ptr().cast());
+                let value = loader(c"vkGetCudaModuleCacheNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7753,11 +7677,7 @@ impl DeviceCommands {
                 }
             },
             get_data_graph_pipeline_available_properties_arm: {
-                let value = loader(
-                    b"vkGetDataGraphPipelineAvailablePropertiesARM\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetDataGraphPipelineAvailablePropertiesARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7773,7 +7693,7 @@ impl DeviceCommands {
                 }
             },
             get_data_graph_pipeline_properties_arm: {
-                let value = loader(b"vkGetDataGraphPipelinePropertiesARM\0".as_ptr().cast());
+                let value = loader(c"vkGetDataGraphPipelinePropertiesARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7789,11 +7709,8 @@ impl DeviceCommands {
                 }
             },
             get_data_graph_pipeline_session_bind_point_requirements_arm: {
-                let value = loader(
-                    b"vkGetDataGraphPipelineSessionBindPointRequirementsARM\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value =
+                    loader(c"vkGetDataGraphPipelineSessionBindPointRequirementsARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7811,11 +7728,7 @@ impl DeviceCommands {
                 }
             },
             get_data_graph_pipeline_session_memory_requirements_arm: {
-                let value = loader(
-                    b"vkGetDataGraphPipelineSessionMemoryRequirementsARM\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetDataGraphPipelineSessionMemoryRequirementsARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7830,7 +7743,7 @@ impl DeviceCommands {
                 }
             },
             get_deferred_operation_max_concurrency_khr: {
-                let value = loader(b"vkGetDeferredOperationMaxConcurrencyKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDeferredOperationMaxConcurrencyKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7844,7 +7757,7 @@ impl DeviceCommands {
                 }
             },
             get_deferred_operation_result_khr: {
-                let value = loader(b"vkGetDeferredOperationResultKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDeferredOperationResultKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7858,7 +7771,7 @@ impl DeviceCommands {
                 }
             },
             get_descriptor_ext: {
-                let value = loader(b"vkGetDescriptorEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetDescriptorEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7874,7 +7787,7 @@ impl DeviceCommands {
                 }
             },
             get_descriptor_set_host_mapping_valve: {
-                let value = loader(b"vkGetDescriptorSetHostMappingVALVE\0".as_ptr().cast());
+                let value = loader(c"vkGetDescriptorSetHostMappingVALVE".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7889,11 +7802,7 @@ impl DeviceCommands {
                 }
             },
             get_descriptor_set_layout_binding_offset_ext: {
-                let value = loader(
-                    b"vkGetDescriptorSetLayoutBindingOffsetEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetDescriptorSetLayoutBindingOffsetEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7909,11 +7818,7 @@ impl DeviceCommands {
                 }
             },
             get_descriptor_set_layout_host_mapping_info_valve: {
-                let value = loader(
-                    b"vkGetDescriptorSetLayoutHostMappingInfoVALVE\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetDescriptorSetLayoutHostMappingInfoVALVE".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7928,7 +7833,7 @@ impl DeviceCommands {
                 }
             },
             get_descriptor_set_layout_size_ext: {
-                let value = loader(b"vkGetDescriptorSetLayoutSizeEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetDescriptorSetLayoutSizeEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7943,7 +7848,7 @@ impl DeviceCommands {
                 }
             },
             get_descriptor_set_layout_support: {
-                let value = loader(b"vkGetDescriptorSetLayoutSupport\0".as_ptr().cast());
+                let value = loader(c"vkGetDescriptorSetLayoutSupport".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7958,7 +7863,7 @@ impl DeviceCommands {
                 }
             },
             get_descriptor_set_layout_support_khr: {
-                let value = loader(b"vkGetDescriptorSetLayoutSupportKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDescriptorSetLayoutSupportKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7973,11 +7878,7 @@ impl DeviceCommands {
                 }
             },
             get_device_acceleration_structure_compatibility_khr: {
-                let value = loader(
-                    b"vkGetDeviceAccelerationStructureCompatibilityKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetDeviceAccelerationStructureCompatibilityKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -7992,7 +7893,7 @@ impl DeviceCommands {
                 }
             },
             get_device_buffer_memory_requirements: {
-                let value = loader(b"vkGetDeviceBufferMemoryRequirements\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceBufferMemoryRequirements".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8007,7 +7908,7 @@ impl DeviceCommands {
                 }
             },
             get_device_buffer_memory_requirements_khr: {
-                let value = loader(b"vkGetDeviceBufferMemoryRequirementsKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceBufferMemoryRequirementsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8022,7 +7923,7 @@ impl DeviceCommands {
                 }
             },
             get_device_fault_info_ext: {
-                let value = loader(b"vkGetDeviceFaultInfoEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceFaultInfoEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8037,7 +7938,7 @@ impl DeviceCommands {
                 }
             },
             get_device_group_peer_memory_features: {
-                let value = loader(b"vkGetDeviceGroupPeerMemoryFeatures\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceGroupPeerMemoryFeatures".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8054,7 +7955,7 @@ impl DeviceCommands {
                 }
             },
             get_device_group_peer_memory_features_khr: {
-                let value = loader(b"vkGetDeviceGroupPeerMemoryFeaturesKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceGroupPeerMemoryFeaturesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8071,7 +7972,7 @@ impl DeviceCommands {
                 }
             },
             get_device_group_present_capabilities_khr: {
-                let value = loader(b"vkGetDeviceGroupPresentCapabilitiesKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceGroupPresentCapabilitiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8085,7 +7986,7 @@ impl DeviceCommands {
                 }
             },
             get_device_group_surface_present_modes2_ext: {
-                let value = loader(b"vkGetDeviceGroupSurfacePresentModes2EXT\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceGroupSurfacePresentModes2EXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8100,7 +8001,7 @@ impl DeviceCommands {
                 }
             },
             get_device_group_surface_present_modes_khr: {
-                let value = loader(b"vkGetDeviceGroupSurfacePresentModesKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceGroupSurfacePresentModesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8115,7 +8016,7 @@ impl DeviceCommands {
                 }
             },
             get_device_image_memory_requirements: {
-                let value = loader(b"vkGetDeviceImageMemoryRequirements\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceImageMemoryRequirements".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8130,7 +8031,7 @@ impl DeviceCommands {
                 }
             },
             get_device_image_memory_requirements_khr: {
-                let value = loader(b"vkGetDeviceImageMemoryRequirementsKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceImageMemoryRequirementsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8145,11 +8046,7 @@ impl DeviceCommands {
                 }
             },
             get_device_image_sparse_memory_requirements: {
-                let value = loader(
-                    b"vkGetDeviceImageSparseMemoryRequirements\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetDeviceImageSparseMemoryRequirements".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8165,11 +8062,7 @@ impl DeviceCommands {
                 }
             },
             get_device_image_sparse_memory_requirements_khr: {
-                let value = loader(
-                    b"vkGetDeviceImageSparseMemoryRequirementsKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetDeviceImageSparseMemoryRequirementsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8185,7 +8078,7 @@ impl DeviceCommands {
                 }
             },
             get_device_image_subresource_layout: {
-                let value = loader(b"vkGetDeviceImageSubresourceLayout\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceImageSubresourceLayout".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8200,7 +8093,7 @@ impl DeviceCommands {
                 }
             },
             get_device_image_subresource_layout_khr: {
-                let value = loader(b"vkGetDeviceImageSubresourceLayoutKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceImageSubresourceLayoutKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8215,7 +8108,7 @@ impl DeviceCommands {
                 }
             },
             get_device_memory_commitment: {
-                let value = loader(b"vkGetDeviceMemoryCommitment\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceMemoryCommitment".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8230,7 +8123,7 @@ impl DeviceCommands {
                 }
             },
             get_device_memory_opaque_capture_address: {
-                let value = loader(b"vkGetDeviceMemoryOpaqueCaptureAddress\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceMemoryOpaqueCaptureAddress".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8244,11 +8137,7 @@ impl DeviceCommands {
                 }
             },
             get_device_memory_opaque_capture_address_khr: {
-                let value = loader(
-                    b"vkGetDeviceMemoryOpaqueCaptureAddressKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetDeviceMemoryOpaqueCaptureAddressKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8262,7 +8151,7 @@ impl DeviceCommands {
                 }
             },
             get_device_micromap_compatibility_ext: {
-                let value = loader(b"vkGetDeviceMicromapCompatibilityEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceMicromapCompatibilityEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8277,7 +8166,7 @@ impl DeviceCommands {
                 }
             },
             get_device_queue: {
-                let value = loader(b"vkGetDeviceQueue\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceQueue".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8293,7 +8182,7 @@ impl DeviceCommands {
                 }
             },
             get_device_queue2: {
-                let value = loader(b"vkGetDeviceQueue2\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceQueue2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8308,11 +8197,7 @@ impl DeviceCommands {
                 }
             },
             get_device_subpass_shading_max_workgroup_size_huawei: {
-                let value = loader(
-                    b"vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8327,7 +8212,7 @@ impl DeviceCommands {
                 }
             },
             get_device_tensor_memory_requirements_arm: {
-                let value = loader(b"vkGetDeviceTensorMemoryRequirementsARM\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceTensorMemoryRequirementsARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8342,7 +8227,7 @@ impl DeviceCommands {
                 }
             },
             get_dynamic_rendering_tile_properties_qcom: {
-                let value = loader(b"vkGetDynamicRenderingTilePropertiesQCOM\0".as_ptr().cast());
+                let value = loader(c"vkGetDynamicRenderingTilePropertiesQCOM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8357,7 +8242,7 @@ impl DeviceCommands {
                 }
             },
             get_encoded_video_session_parameters_khr: {
-                let value = loader(b"vkGetEncodedVideoSessionParametersKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetEncodedVideoSessionParametersKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8374,7 +8259,7 @@ impl DeviceCommands {
                 }
             },
             get_event_status: {
-                let value = loader(b"vkGetEventStatus\0".as_ptr().cast());
+                let value = loader(c"vkGetEventStatus".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8385,11 +8270,7 @@ impl DeviceCommands {
                 }
             },
             get_execution_graph_pipeline_node_index_amdx: {
-                let value = loader(
-                    b"vkGetExecutionGraphPipelineNodeIndexAMDX\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetExecutionGraphPipelineNodeIndexAMDX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8405,11 +8286,7 @@ impl DeviceCommands {
                 }
             },
             get_execution_graph_pipeline_scratch_size_amdx: {
-                let value = loader(
-                    b"vkGetExecutionGraphPipelineScratchSizeAMDX\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetExecutionGraphPipelineScratchSizeAMDX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8424,7 +8301,7 @@ impl DeviceCommands {
                 }
             },
             get_external_compute_queue_data_nv: {
-                let value = loader(b"vkGetExternalComputeQueueDataNV\0".as_ptr().cast());
+                let value = loader(c"vkGetExternalComputeQueueDataNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8439,7 +8316,7 @@ impl DeviceCommands {
                 }
             },
             get_fence_fd_khr: {
-                let value = loader(b"vkGetFenceFdKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetFenceFdKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8454,7 +8331,7 @@ impl DeviceCommands {
                 }
             },
             get_fence_sci_sync_fence_nv: {
-                let value = loader(b"vkGetFenceSciSyncFenceNV\0".as_ptr().cast());
+                let value = loader(c"vkGetFenceSciSyncFenceNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8469,7 +8346,7 @@ impl DeviceCommands {
                 }
             },
             get_fence_sci_sync_obj_nv: {
-                let value = loader(b"vkGetFenceSciSyncObjNV\0".as_ptr().cast());
+                let value = loader(c"vkGetFenceSciSyncObjNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8484,7 +8361,7 @@ impl DeviceCommands {
                 }
             },
             get_fence_status: {
-                let value = loader(b"vkGetFenceStatus\0".as_ptr().cast());
+                let value = loader(c"vkGetFenceStatus".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8495,7 +8372,7 @@ impl DeviceCommands {
                 }
             },
             get_fence_win32_handle_khr: {
-                let value = loader(b"vkGetFenceWin32HandleKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetFenceWin32HandleKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8510,7 +8387,7 @@ impl DeviceCommands {
                 }
             },
             get_framebuffer_tile_properties_qcom: {
-                let value = loader(b"vkGetFramebufferTilePropertiesQCOM\0".as_ptr().cast());
+                let value = loader(c"vkGetFramebufferTilePropertiesQCOM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8526,11 +8403,7 @@ impl DeviceCommands {
                 }
             },
             get_generated_commands_memory_requirements_ext: {
-                let value = loader(
-                    b"vkGetGeneratedCommandsMemoryRequirementsEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetGeneratedCommandsMemoryRequirementsEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8545,11 +8418,7 @@ impl DeviceCommands {
                 }
             },
             get_generated_commands_memory_requirements_nv: {
-                let value = loader(
-                    b"vkGetGeneratedCommandsMemoryRequirementsNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetGeneratedCommandsMemoryRequirementsNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8564,11 +8433,7 @@ impl DeviceCommands {
                 }
             },
             get_image_drm_format_modifier_properties_ext: {
-                let value = loader(
-                    b"vkGetImageDrmFormatModifierPropertiesEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetImageDrmFormatModifierPropertiesEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8583,7 +8448,7 @@ impl DeviceCommands {
                 }
             },
             get_image_memory_requirements: {
-                let value = loader(b"vkGetImageMemoryRequirements\0".as_ptr().cast());
+                let value = loader(c"vkGetImageMemoryRequirements".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8598,7 +8463,7 @@ impl DeviceCommands {
                 }
             },
             get_image_memory_requirements2: {
-                let value = loader(b"vkGetImageMemoryRequirements2\0".as_ptr().cast());
+                let value = loader(c"vkGetImageMemoryRequirements2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8613,7 +8478,7 @@ impl DeviceCommands {
                 }
             },
             get_image_memory_requirements2_khr: {
-                let value = loader(b"vkGetImageMemoryRequirements2KHR\0".as_ptr().cast());
+                let value = loader(c"vkGetImageMemoryRequirements2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8628,11 +8493,7 @@ impl DeviceCommands {
                 }
             },
             get_image_opaque_capture_descriptor_data_ext: {
-                let value = loader(
-                    b"vkGetImageOpaqueCaptureDescriptorDataEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetImageOpaqueCaptureDescriptorDataEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8647,7 +8508,7 @@ impl DeviceCommands {
                 }
             },
             get_image_sparse_memory_requirements: {
-                let value = loader(b"vkGetImageSparseMemoryRequirements\0".as_ptr().cast());
+                let value = loader(c"vkGetImageSparseMemoryRequirements".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8663,7 +8524,7 @@ impl DeviceCommands {
                 }
             },
             get_image_sparse_memory_requirements2: {
-                let value = loader(b"vkGetImageSparseMemoryRequirements2\0".as_ptr().cast());
+                let value = loader(c"vkGetImageSparseMemoryRequirements2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8679,7 +8540,7 @@ impl DeviceCommands {
                 }
             },
             get_image_sparse_memory_requirements2_khr: {
-                let value = loader(b"vkGetImageSparseMemoryRequirements2KHR\0".as_ptr().cast());
+                let value = loader(c"vkGetImageSparseMemoryRequirements2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8695,7 +8556,7 @@ impl DeviceCommands {
                 }
             },
             get_image_subresource_layout: {
-                let value = loader(b"vkGetImageSubresourceLayout\0".as_ptr().cast());
+                let value = loader(c"vkGetImageSubresourceLayout".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8711,7 +8572,7 @@ impl DeviceCommands {
                 }
             },
             get_image_subresource_layout2: {
-                let value = loader(b"vkGetImageSubresourceLayout2\0".as_ptr().cast());
+                let value = loader(c"vkGetImageSubresourceLayout2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8727,7 +8588,7 @@ impl DeviceCommands {
                 }
             },
             get_image_subresource_layout2_ext: {
-                let value = loader(b"vkGetImageSubresourceLayout2EXT\0".as_ptr().cast());
+                let value = loader(c"vkGetImageSubresourceLayout2EXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8743,7 +8604,7 @@ impl DeviceCommands {
                 }
             },
             get_image_subresource_layout2_khr: {
-                let value = loader(b"vkGetImageSubresourceLayout2KHR\0".as_ptr().cast());
+                let value = loader(c"vkGetImageSubresourceLayout2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8759,7 +8620,7 @@ impl DeviceCommands {
                 }
             },
             get_image_view_address_nvx: {
-                let value = loader(b"vkGetImageViewAddressNVX\0".as_ptr().cast());
+                let value = loader(c"vkGetImageViewAddressNVX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8774,7 +8635,7 @@ impl DeviceCommands {
                 }
             },
             get_image_view_handle64_nvx: {
-                let value = loader(b"vkGetImageViewHandle64NVX\0".as_ptr().cast());
+                let value = loader(c"vkGetImageViewHandle64NVX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8788,7 +8649,7 @@ impl DeviceCommands {
                 }
             },
             get_image_view_handle_nvx: {
-                let value = loader(b"vkGetImageViewHandleNVX\0".as_ptr().cast());
+                let value = loader(c"vkGetImageViewHandleNVX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8802,11 +8663,7 @@ impl DeviceCommands {
                 }
             },
             get_image_view_opaque_capture_descriptor_data_ext: {
-                let value = loader(
-                    b"vkGetImageViewOpaqueCaptureDescriptorDataEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetImageViewOpaqueCaptureDescriptorDataEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8821,7 +8678,7 @@ impl DeviceCommands {
                 }
             },
             get_latency_timings_nv: {
-                let value = loader(b"vkGetLatencyTimingsNV\0".as_ptr().cast());
+                let value = loader(c"vkGetLatencyTimingsNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8836,7 +8693,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_android_hardware_buffer_android: {
-                let value = loader(b"vkGetMemoryAndroidHardwareBufferANDROID\0".as_ptr().cast());
+                let value = loader(c"vkGetMemoryAndroidHardwareBufferANDROID".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8851,7 +8708,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_fd_khr: {
-                let value = loader(b"vkGetMemoryFdKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetMemoryFdKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8866,7 +8723,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_fd_properties_khr: {
-                let value = loader(b"vkGetMemoryFdPropertiesKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetMemoryFdPropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8882,7 +8739,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_host_pointer_properties_ext: {
-                let value = loader(b"vkGetMemoryHostPointerPropertiesEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetMemoryHostPointerPropertiesEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8898,7 +8755,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_metal_handle_ext: {
-                let value = loader(b"vkGetMemoryMetalHandleEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetMemoryMetalHandleEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8913,7 +8770,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_metal_handle_properties_ext: {
-                let value = loader(b"vkGetMemoryMetalHandlePropertiesEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetMemoryMetalHandlePropertiesEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8929,7 +8786,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_remote_address_nv: {
-                let value = loader(b"vkGetMemoryRemoteAddressNV\0".as_ptr().cast());
+                let value = loader(c"vkGetMemoryRemoteAddressNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8944,7 +8801,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_sci_buf_nv: {
-                let value = loader(b"vkGetMemorySciBufNV\0".as_ptr().cast());
+                let value = loader(c"vkGetMemorySciBufNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8959,7 +8816,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_win32_handle_khr: {
-                let value = loader(b"vkGetMemoryWin32HandleKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetMemoryWin32HandleKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8974,7 +8831,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_win32_handle_nv: {
-                let value = loader(b"vkGetMemoryWin32HandleNV\0".as_ptr().cast());
+                let value = loader(c"vkGetMemoryWin32HandleNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -8990,7 +8847,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_win32_handle_properties_khr: {
-                let value = loader(b"vkGetMemoryWin32HandlePropertiesKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetMemoryWin32HandlePropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9006,7 +8863,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_zircon_handle_fuchsia: {
-                let value = loader(b"vkGetMemoryZirconHandleFUCHSIA\0".as_ptr().cast());
+                let value = loader(c"vkGetMemoryZirconHandleFUCHSIA".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9021,11 +8878,7 @@ impl DeviceCommands {
                 }
             },
             get_memory_zircon_handle_properties_fuchsia: {
-                let value = loader(
-                    b"vkGetMemoryZirconHandlePropertiesFUCHSIA\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetMemoryZirconHandlePropertiesFUCHSIA".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9041,7 +8894,7 @@ impl DeviceCommands {
                 }
             },
             get_micromap_build_sizes_ext: {
-                let value = loader(b"vkGetMicromapBuildSizesEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetMicromapBuildSizesEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9057,11 +8910,7 @@ impl DeviceCommands {
                 }
             },
             get_partitioned_acceleration_structures_build_sizes_nv: {
-                let value = loader(
-                    b"vkGetPartitionedAccelerationStructuresBuildSizesNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPartitionedAccelerationStructuresBuildSizesNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9076,7 +8925,7 @@ impl DeviceCommands {
                 }
             },
             get_past_presentation_timing_google: {
-                let value = loader(b"vkGetPastPresentationTimingGOOGLE\0".as_ptr().cast());
+                let value = loader(c"vkGetPastPresentationTimingGOOGLE".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9092,7 +8941,7 @@ impl DeviceCommands {
                 }
             },
             get_performance_parameter_intel: {
-                let value = loader(b"vkGetPerformanceParameterINTEL\0".as_ptr().cast());
+                let value = loader(c"vkGetPerformanceParameterINTEL".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9107,11 +8956,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_calibrateable_time_domains_ext: {
-                let value = instance_loader(
-                    b"vkGetPhysicalDeviceCalibrateableTimeDomainsEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value =
+                    instance_loader(c"vkGetPhysicalDeviceCalibrateableTimeDomainsEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9126,11 +8972,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_calibrateable_time_domains_khr: {
-                let value = instance_loader(
-                    b"vkGetPhysicalDeviceCalibrateableTimeDomainsKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value =
+                    instance_loader(c"vkGetPhysicalDeviceCalibrateableTimeDomainsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9146,9 +8989,7 @@ impl DeviceCommands {
             },
             get_physical_device_cooperative_matrix_flexible_dimensions_properties_nv: {
                 let value = instance_loader(
-                    b"vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV\0"
-                        .as_ptr()
-                        .cast(),
+                    c"vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV".as_ptr(),
                 );
                 if let Some(value) = value {
                     mem::transmute(value)
@@ -9164,11 +9005,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_cooperative_matrix_properties_khr: {
-                let value = instance_loader(
-                    b"vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value =
+                    instance_loader(c"vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9183,11 +9021,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_cooperative_matrix_properties_nv: {
-                let value = instance_loader(
-                    b"vkGetPhysicalDeviceCooperativeMatrixPropertiesNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value =
+                    instance_loader(c"vkGetPhysicalDeviceCooperativeMatrixPropertiesNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9202,11 +9037,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_cooperative_vector_properties_nv: {
-                let value = instance_loader(
-                    b"vkGetPhysicalDeviceCooperativeVectorPropertiesNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value =
+                    instance_loader(c"vkGetPhysicalDeviceCooperativeVectorPropertiesNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9222,9 +9054,7 @@ impl DeviceCommands {
             },
             get_physical_device_external_memory_sci_buf_properties_nv: {
                 let value = instance_loader(
-                    b"vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV\0"
-                        .as_ptr()
-                        .cast(),
+                    c"vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV".as_ptr(),
                 );
                 if let Some(value) = value {
                     mem::transmute(value)
@@ -9241,11 +9071,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_external_tensor_properties_arm: {
-                let value = instance_loader(
-                    b"vkGetPhysicalDeviceExternalTensorPropertiesARM\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value =
+                    instance_loader(c"vkGetPhysicalDeviceExternalTensorPropertiesARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9260,11 +9087,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_fragment_shading_rates_khr: {
-                let value = instance_loader(
-                    b"vkGetPhysicalDeviceFragmentShadingRatesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = instance_loader(c"vkGetPhysicalDeviceFragmentShadingRatesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9279,11 +9102,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_multisample_properties_ext: {
-                let value = instance_loader(
-                    b"vkGetPhysicalDeviceMultisamplePropertiesEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value =
+                    instance_loader(c"vkGetPhysicalDeviceMultisamplePropertiesEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9298,11 +9118,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_optical_flow_image_formats_nv: {
-                let value = instance_loader(
-                    b"vkGetPhysicalDeviceOpticalFlowImageFormatsNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value =
+                    instance_loader(c"vkGetPhysicalDeviceOpticalFlowImageFormatsNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9318,8 +9135,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_present_rectangles_khr: {
-                let value =
-                    instance_loader(b"vkGetPhysicalDevicePresentRectanglesKHR\0".as_ptr().cast());
+                let value = instance_loader(c"vkGetPhysicalDevicePresentRectanglesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9336,9 +9152,8 @@ impl DeviceCommands {
             },
             get_physical_device_queue_family_data_graph_processing_engine_properties_arm: {
                 let value = instance_loader(
-                    b"vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM\0"
-                        .as_ptr()
-                        .cast(),
+                    c"vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM"
+                        .as_ptr(),
                 );
                 if let Some(value) = value {
                     mem::transmute(value)
@@ -9355,9 +9170,7 @@ impl DeviceCommands {
             },
             get_physical_device_queue_family_data_graph_properties_arm: {
                 let value = instance_loader(
-                    b"vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM\0"
-                        .as_ptr()
-                        .cast(),
+                    c"vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM".as_ptr(),
                 );
                 if let Some(value) = value {
                     mem::transmute(value)
@@ -9377,9 +9190,7 @@ impl DeviceCommands {
             },
             get_physical_device_queue_family_performance_query_passes_khr: {
                 let value = instance_loader(
-                    b"vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR\0"
-                        .as_ptr()
-                        .cast(),
+                    c"vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR".as_ptr(),
                 );
                 if let Some(value) = value {
                     mem::transmute(value)
@@ -9395,11 +9206,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_refreshable_object_types_khr: {
-                let value = instance_loader(
-                    b"vkGetPhysicalDeviceRefreshableObjectTypesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value =
+                    instance_loader(c"vkGetPhysicalDeviceRefreshableObjectTypesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9414,8 +9222,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_sci_buf_attributes_nv: {
-                let value =
-                    instance_loader(b"vkGetPhysicalDeviceSciBufAttributesNV\0".as_ptr().cast());
+                let value = instance_loader(c"vkGetPhysicalDeviceSciBufAttributesNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9429,8 +9236,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_sci_sync_attributes_nv: {
-                let value =
-                    instance_loader(b"vkGetPhysicalDeviceSciSyncAttributesNV\0".as_ptr().cast());
+                let value = instance_loader(c"vkGetPhysicalDeviceSciSyncAttributesNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9446,9 +9252,7 @@ impl DeviceCommands {
             },
             get_physical_device_supported_framebuffer_mixed_samples_combinations_nv: {
                 let value = instance_loader(
-                    b"vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV\0"
-                        .as_ptr()
-                        .cast(),
+                    c"vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV".as_ptr(),
                 );
                 if let Some(value) = value {
                     mem::transmute(value)
@@ -9464,11 +9268,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_surface_present_modes2_ext: {
-                let value = instance_loader(
-                    b"vkGetPhysicalDeviceSurfacePresentModes2EXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = instance_loader(c"vkGetPhysicalDeviceSurfacePresentModes2EXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9484,8 +9284,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_tool_properties_ext: {
-                let value =
-                    instance_loader(b"vkGetPhysicalDeviceToolPropertiesEXT\0".as_ptr().cast());
+                let value = instance_loader(c"vkGetPhysicalDeviceToolPropertiesEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9500,8 +9299,7 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_video_capabilities_khr: {
-                let value =
-                    instance_loader(b"vkGetPhysicalDeviceVideoCapabilitiesKHR\0".as_ptr().cast());
+                let value = instance_loader(c"vkGetPhysicalDeviceVideoCapabilitiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9517,9 +9315,7 @@ impl DeviceCommands {
             },
             get_physical_device_video_encode_quality_level_properties_khr: {
                 let value = instance_loader(
-                    b"vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR\0"
-                        .as_ptr()
-                        .cast(),
+                    c"vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR".as_ptr(),
                 );
                 if let Some(value) = value {
                     mem::transmute(value)
@@ -9535,11 +9331,8 @@ impl DeviceCommands {
                 }
             },
             get_physical_device_video_format_properties_khr: {
-                let value = instance_loader(
-                    b"vkGetPhysicalDeviceVideoFormatPropertiesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value =
+                    instance_loader(c"vkGetPhysicalDeviceVideoFormatPropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9555,7 +9348,7 @@ impl DeviceCommands {
                 }
             },
             get_pipeline_binary_data_khr: {
-                let value = loader(b"vkGetPipelineBinaryDataKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetPipelineBinaryDataKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9572,7 +9365,7 @@ impl DeviceCommands {
                 }
             },
             get_pipeline_cache_data: {
-                let value = loader(b"vkGetPipelineCacheData\0".as_ptr().cast());
+                let value = loader(c"vkGetPipelineCacheData".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9588,11 +9381,7 @@ impl DeviceCommands {
                 }
             },
             get_pipeline_executable_internal_representations_khr: {
-                let value = loader(
-                    b"vkGetPipelineExecutableInternalRepresentationsKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPipelineExecutableInternalRepresentationsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9608,7 +9397,7 @@ impl DeviceCommands {
                 }
             },
             get_pipeline_executable_properties_khr: {
-                let value = loader(b"vkGetPipelineExecutablePropertiesKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetPipelineExecutablePropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9624,7 +9413,7 @@ impl DeviceCommands {
                 }
             },
             get_pipeline_executable_statistics_khr: {
-                let value = loader(b"vkGetPipelineExecutableStatisticsKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetPipelineExecutableStatisticsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9640,7 +9429,7 @@ impl DeviceCommands {
                 }
             },
             get_pipeline_indirect_device_address_nv: {
-                let value = loader(b"vkGetPipelineIndirectDeviceAddressNV\0".as_ptr().cast());
+                let value = loader(c"vkGetPipelineIndirectDeviceAddressNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9654,11 +9443,7 @@ impl DeviceCommands {
                 }
             },
             get_pipeline_indirect_memory_requirements_nv: {
-                let value = loader(
-                    b"vkGetPipelineIndirectMemoryRequirementsNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPipelineIndirectMemoryRequirementsNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9673,7 +9458,7 @@ impl DeviceCommands {
                 }
             },
             get_pipeline_key_khr: {
-                let value = loader(b"vkGetPipelineKeyKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetPipelineKeyKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9688,7 +9473,7 @@ impl DeviceCommands {
                 }
             },
             get_pipeline_properties_ext: {
-                let value = loader(b"vkGetPipelinePropertiesEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetPipelinePropertiesEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9703,7 +9488,7 @@ impl DeviceCommands {
                 }
             },
             get_private_data: {
-                let value = loader(b"vkGetPrivateData\0".as_ptr().cast());
+                let value = loader(c"vkGetPrivateData".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9720,7 +9505,7 @@ impl DeviceCommands {
                 }
             },
             get_private_data_ext: {
-                let value = loader(b"vkGetPrivateDataEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetPrivateDataEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9737,7 +9522,7 @@ impl DeviceCommands {
                 }
             },
             get_query_pool_results: {
-                let value = loader(b"vkGetQueryPoolResults\0".as_ptr().cast());
+                let value = loader(c"vkGetQueryPoolResults".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9757,7 +9542,7 @@ impl DeviceCommands {
                 }
             },
             get_queue_checkpoint_data2_nv: {
-                let value = loader(b"vkGetQueueCheckpointData2NV\0".as_ptr().cast());
+                let value = loader(c"vkGetQueueCheckpointData2NV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9772,7 +9557,7 @@ impl DeviceCommands {
                 }
             },
             get_queue_checkpoint_data_nv: {
-                let value = loader(b"vkGetQueueCheckpointDataNV\0".as_ptr().cast());
+                let value = loader(c"vkGetQueueCheckpointDataNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9787,11 +9572,7 @@ impl DeviceCommands {
                 }
             },
             get_ray_tracing_capture_replay_shader_group_handles_khr: {
-                let value = loader(
-                    b"vkGetRayTracingCaptureReplayShaderGroupHandlesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetRayTracingCaptureReplayShaderGroupHandlesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9809,7 +9590,7 @@ impl DeviceCommands {
                 }
             },
             get_ray_tracing_shader_group_handles_khr: {
-                let value = loader(b"vkGetRayTracingShaderGroupHandlesKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetRayTracingShaderGroupHandlesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9827,7 +9608,7 @@ impl DeviceCommands {
                 }
             },
             get_ray_tracing_shader_group_handles_nv: {
-                let value = loader(b"vkGetRayTracingShaderGroupHandlesNV\0".as_ptr().cast());
+                let value = loader(c"vkGetRayTracingShaderGroupHandlesNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9845,7 +9626,7 @@ impl DeviceCommands {
                 }
             },
             get_ray_tracing_shader_group_stack_size_khr: {
-                let value = loader(b"vkGetRayTracingShaderGroupStackSizeKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetRayTracingShaderGroupStackSizeKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9861,7 +9642,7 @@ impl DeviceCommands {
                 }
             },
             get_refresh_cycle_duration_google: {
-                let value = loader(b"vkGetRefreshCycleDurationGOOGLE\0".as_ptr().cast());
+                let value = loader(c"vkGetRefreshCycleDurationGOOGLE".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9876,7 +9657,7 @@ impl DeviceCommands {
                 }
             },
             get_render_area_granularity: {
-                let value = loader(b"vkGetRenderAreaGranularity\0".as_ptr().cast());
+                let value = loader(c"vkGetRenderAreaGranularity".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9891,7 +9672,7 @@ impl DeviceCommands {
                 }
             },
             get_rendering_area_granularity: {
-                let value = loader(b"vkGetRenderingAreaGranularity\0".as_ptr().cast());
+                let value = loader(c"vkGetRenderingAreaGranularity".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9906,7 +9687,7 @@ impl DeviceCommands {
                 }
             },
             get_rendering_area_granularity_khr: {
-                let value = loader(b"vkGetRenderingAreaGranularityKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetRenderingAreaGranularityKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9921,11 +9702,7 @@ impl DeviceCommands {
                 }
             },
             get_sampler_opaque_capture_descriptor_data_ext: {
-                let value = loader(
-                    b"vkGetSamplerOpaqueCaptureDescriptorDataEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetSamplerOpaqueCaptureDescriptorDataEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9940,7 +9717,7 @@ impl DeviceCommands {
                 }
             },
             get_screen_buffer_properties_qnx: {
-                let value = loader(b"vkGetScreenBufferPropertiesQNX\0".as_ptr().cast());
+                let value = loader(c"vkGetScreenBufferPropertiesQNX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9955,7 +9732,7 @@ impl DeviceCommands {
                 }
             },
             get_semaphore_counter_value: {
-                let value = loader(b"vkGetSemaphoreCounterValue\0".as_ptr().cast());
+                let value = loader(c"vkGetSemaphoreCounterValue".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9970,7 +9747,7 @@ impl DeviceCommands {
                 }
             },
             get_semaphore_counter_value_khr: {
-                let value = loader(b"vkGetSemaphoreCounterValueKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetSemaphoreCounterValueKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -9985,7 +9762,7 @@ impl DeviceCommands {
                 }
             },
             get_semaphore_fd_khr: {
-                let value = loader(b"vkGetSemaphoreFdKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetSemaphoreFdKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10000,7 +9777,7 @@ impl DeviceCommands {
                 }
             },
             get_semaphore_sci_sync_obj_nv: {
-                let value = loader(b"vkGetSemaphoreSciSyncObjNV\0".as_ptr().cast());
+                let value = loader(c"vkGetSemaphoreSciSyncObjNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10015,7 +9792,7 @@ impl DeviceCommands {
                 }
             },
             get_semaphore_win32_handle_khr: {
-                let value = loader(b"vkGetSemaphoreWin32HandleKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetSemaphoreWin32HandleKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10030,7 +9807,7 @@ impl DeviceCommands {
                 }
             },
             get_semaphore_zircon_handle_fuchsia: {
-                let value = loader(b"vkGetSemaphoreZirconHandleFUCHSIA\0".as_ptr().cast());
+                let value = loader(c"vkGetSemaphoreZirconHandleFUCHSIA".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10045,7 +9822,7 @@ impl DeviceCommands {
                 }
             },
             get_shader_binary_data_ext: {
-                let value = loader(b"vkGetShaderBinaryDataEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetShaderBinaryDataEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10061,7 +9838,7 @@ impl DeviceCommands {
                 }
             },
             get_shader_info_amd: {
-                let value = loader(b"vkGetShaderInfoAMD\0".as_ptr().cast());
+                let value = loader(c"vkGetShaderInfoAMD".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10079,11 +9856,7 @@ impl DeviceCommands {
                 }
             },
             get_shader_module_create_info_identifier_ext: {
-                let value = loader(
-                    b"vkGetShaderModuleCreateInfoIdentifierEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetShaderModuleCreateInfoIdentifierEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10098,7 +9871,7 @@ impl DeviceCommands {
                 }
             },
             get_shader_module_identifier_ext: {
-                let value = loader(b"vkGetShaderModuleIdentifierEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetShaderModuleIdentifierEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10113,7 +9886,7 @@ impl DeviceCommands {
                 }
             },
             get_swapchain_counter_ext: {
-                let value = loader(b"vkGetSwapchainCounterEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetSwapchainCounterEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10129,7 +9902,7 @@ impl DeviceCommands {
                 }
             },
             get_swapchain_images_khr: {
-                let value = loader(b"vkGetSwapchainImagesKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetSwapchainImagesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10145,7 +9918,7 @@ impl DeviceCommands {
                 }
             },
             get_swapchain_status_khr: {
-                let value = loader(b"vkGetSwapchainStatusKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetSwapchainStatusKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10159,7 +9932,7 @@ impl DeviceCommands {
                 }
             },
             get_tensor_memory_requirements_arm: {
-                let value = loader(b"vkGetTensorMemoryRequirementsARM\0".as_ptr().cast());
+                let value = loader(c"vkGetTensorMemoryRequirementsARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10174,11 +9947,7 @@ impl DeviceCommands {
                 }
             },
             get_tensor_opaque_capture_descriptor_data_arm: {
-                let value = loader(
-                    b"vkGetTensorOpaqueCaptureDescriptorDataARM\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetTensorOpaqueCaptureDescriptorDataARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10193,11 +9962,7 @@ impl DeviceCommands {
                 }
             },
             get_tensor_view_opaque_capture_descriptor_data_arm: {
-                let value = loader(
-                    b"vkGetTensorViewOpaqueCaptureDescriptorDataARM\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetTensorViewOpaqueCaptureDescriptorDataARM".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10212,7 +9977,7 @@ impl DeviceCommands {
                 }
             },
             get_validation_cache_data_ext: {
-                let value = loader(b"vkGetValidationCacheDataEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetValidationCacheDataEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10228,7 +9993,7 @@ impl DeviceCommands {
                 }
             },
             get_video_session_memory_requirements_khr: {
-                let value = loader(b"vkGetVideoSessionMemoryRequirementsKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetVideoSessionMemoryRequirementsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10244,7 +10009,7 @@ impl DeviceCommands {
                 }
             },
             get_winrt_display_nv: {
-                let value = instance_loader(b"vkGetWinrtDisplayNV\0".as_ptr().cast());
+                let value = instance_loader(c"vkGetWinrtDisplayNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10259,7 +10024,7 @@ impl DeviceCommands {
                 }
             },
             import_fence_fd_khr: {
-                let value = loader(b"vkImportFenceFdKHR\0".as_ptr().cast());
+                let value = loader(c"vkImportFenceFdKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10273,7 +10038,7 @@ impl DeviceCommands {
                 }
             },
             import_fence_sci_sync_fence_nv: {
-                let value = loader(b"vkImportFenceSciSyncFenceNV\0".as_ptr().cast());
+                let value = loader(c"vkImportFenceSciSyncFenceNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10287,7 +10052,7 @@ impl DeviceCommands {
                 }
             },
             import_fence_sci_sync_obj_nv: {
-                let value = loader(b"vkImportFenceSciSyncObjNV\0".as_ptr().cast());
+                let value = loader(c"vkImportFenceSciSyncObjNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10301,7 +10066,7 @@ impl DeviceCommands {
                 }
             },
             import_fence_win32_handle_khr: {
-                let value = loader(b"vkImportFenceWin32HandleKHR\0".as_ptr().cast());
+                let value = loader(c"vkImportFenceWin32HandleKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10315,7 +10080,7 @@ impl DeviceCommands {
                 }
             },
             import_semaphore_fd_khr: {
-                let value = loader(b"vkImportSemaphoreFdKHR\0".as_ptr().cast());
+                let value = loader(c"vkImportSemaphoreFdKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10329,7 +10094,7 @@ impl DeviceCommands {
                 }
             },
             import_semaphore_sci_sync_obj_nv: {
-                let value = loader(b"vkImportSemaphoreSciSyncObjNV\0".as_ptr().cast());
+                let value = loader(c"vkImportSemaphoreSciSyncObjNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10343,7 +10108,7 @@ impl DeviceCommands {
                 }
             },
             import_semaphore_win32_handle_khr: {
-                let value = loader(b"vkImportSemaphoreWin32HandleKHR\0".as_ptr().cast());
+                let value = loader(c"vkImportSemaphoreWin32HandleKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10357,7 +10122,7 @@ impl DeviceCommands {
                 }
             },
             import_semaphore_zircon_handle_fuchsia: {
-                let value = loader(b"vkImportSemaphoreZirconHandleFUCHSIA\0".as_ptr().cast());
+                let value = loader(c"vkImportSemaphoreZirconHandleFUCHSIA".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10371,7 +10136,7 @@ impl DeviceCommands {
                 }
             },
             initialize_performance_api_intel: {
-                let value = loader(b"vkInitializePerformanceApiINTEL\0".as_ptr().cast());
+                let value = loader(c"vkInitializePerformanceApiINTEL".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10385,7 +10150,7 @@ impl DeviceCommands {
                 }
             },
             invalidate_mapped_memory_ranges: {
-                let value = loader(b"vkInvalidateMappedMemoryRanges\0".as_ptr().cast());
+                let value = loader(c"vkInvalidateMappedMemoryRanges".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10400,7 +10165,7 @@ impl DeviceCommands {
                 }
             },
             latency_sleep_nv: {
-                let value = loader(b"vkLatencySleepNV\0".as_ptr().cast());
+                let value = loader(c"vkLatencySleepNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10415,7 +10180,7 @@ impl DeviceCommands {
                 }
             },
             map_memory: {
-                let value = loader(b"vkMapMemory\0".as_ptr().cast());
+                let value = loader(c"vkMapMemory".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10433,7 +10198,7 @@ impl DeviceCommands {
                 }
             },
             map_memory2: {
-                let value = loader(b"vkMapMemory2\0".as_ptr().cast());
+                let value = loader(c"vkMapMemory2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10448,7 +10213,7 @@ impl DeviceCommands {
                 }
             },
             map_memory2_khr: {
-                let value = loader(b"vkMapMemory2KHR\0".as_ptr().cast());
+                let value = loader(c"vkMapMemory2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10463,7 +10228,7 @@ impl DeviceCommands {
                 }
             },
             merge_pipeline_caches: {
-                let value = loader(b"vkMergePipelineCaches\0".as_ptr().cast());
+                let value = loader(c"vkMergePipelineCaches".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10479,7 +10244,7 @@ impl DeviceCommands {
                 }
             },
             merge_validation_caches_ext: {
-                let value = loader(b"vkMergeValidationCachesEXT\0".as_ptr().cast());
+                let value = loader(c"vkMergeValidationCachesEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10495,7 +10260,7 @@ impl DeviceCommands {
                 }
             },
             queue_bind_sparse: {
-                let value = loader(b"vkQueueBindSparse\0".as_ptr().cast());
+                let value = loader(c"vkQueueBindSparse".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10511,7 +10276,7 @@ impl DeviceCommands {
                 }
             },
             queue_notify_out_of_band_nv: {
-                let value = loader(b"vkQueueNotifyOutOfBandNV\0".as_ptr().cast());
+                let value = loader(c"vkQueueNotifyOutOfBandNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10525,7 +10290,7 @@ impl DeviceCommands {
                 }
             },
             queue_present_khr: {
-                let value = loader(b"vkQueuePresentKHR\0".as_ptr().cast());
+                let value = loader(c"vkQueuePresentKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10539,7 +10304,7 @@ impl DeviceCommands {
                 }
             },
             queue_set_performance_configuration_intel: {
-                let value = loader(b"vkQueueSetPerformanceConfigurationINTEL\0".as_ptr().cast());
+                let value = loader(c"vkQueueSetPerformanceConfigurationINTEL".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10553,7 +10318,7 @@ impl DeviceCommands {
                 }
             },
             queue_submit: {
-                let value = loader(b"vkQueueSubmit\0".as_ptr().cast());
+                let value = loader(c"vkQueueSubmit".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10569,7 +10334,7 @@ impl DeviceCommands {
                 }
             },
             queue_submit2: {
-                let value = loader(b"vkQueueSubmit2\0".as_ptr().cast());
+                let value = loader(c"vkQueueSubmit2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10585,7 +10350,7 @@ impl DeviceCommands {
                 }
             },
             queue_submit2_khr: {
-                let value = loader(b"vkQueueSubmit2KHR\0".as_ptr().cast());
+                let value = loader(c"vkQueueSubmit2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10601,7 +10366,7 @@ impl DeviceCommands {
                 }
             },
             queue_wait_idle: {
-                let value = loader(b"vkQueueWaitIdle\0".as_ptr().cast());
+                let value = loader(c"vkQueueWaitIdle".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10612,7 +10377,7 @@ impl DeviceCommands {
                 }
             },
             register_device_event_ext: {
-                let value = loader(b"vkRegisterDeviceEventEXT\0".as_ptr().cast());
+                let value = loader(c"vkRegisterDeviceEventEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10628,7 +10393,7 @@ impl DeviceCommands {
                 }
             },
             register_display_event_ext: {
-                let value = loader(b"vkRegisterDisplayEventEXT\0".as_ptr().cast());
+                let value = loader(c"vkRegisterDisplayEventEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10645,7 +10410,7 @@ impl DeviceCommands {
                 }
             },
             release_captured_pipeline_data_khr: {
-                let value = loader(b"vkReleaseCapturedPipelineDataKHR\0".as_ptr().cast());
+                let value = loader(c"vkReleaseCapturedPipelineDataKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10660,7 +10425,7 @@ impl DeviceCommands {
                 }
             },
             release_full_screen_exclusive_mode_ext: {
-                let value = loader(b"vkReleaseFullScreenExclusiveModeEXT\0".as_ptr().cast());
+                let value = loader(c"vkReleaseFullScreenExclusiveModeEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10674,7 +10439,7 @@ impl DeviceCommands {
                 }
             },
             release_performance_configuration_intel: {
-                let value = loader(b"vkReleasePerformanceConfigurationINTEL\0".as_ptr().cast());
+                let value = loader(c"vkReleasePerformanceConfigurationINTEL".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10688,7 +10453,7 @@ impl DeviceCommands {
                 }
             },
             release_profiling_lock_khr: {
-                let value = loader(b"vkReleaseProfilingLockKHR\0".as_ptr().cast());
+                let value = loader(c"vkReleaseProfilingLockKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10699,7 +10464,7 @@ impl DeviceCommands {
                 }
             },
             release_swapchain_images_ext: {
-                let value = loader(b"vkReleaseSwapchainImagesEXT\0".as_ptr().cast());
+                let value = loader(c"vkReleaseSwapchainImagesEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10713,7 +10478,7 @@ impl DeviceCommands {
                 }
             },
             release_swapchain_images_khr: {
-                let value = loader(b"vkReleaseSwapchainImagesKHR\0".as_ptr().cast());
+                let value = loader(c"vkReleaseSwapchainImagesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10727,7 +10492,7 @@ impl DeviceCommands {
                 }
             },
             reset_command_buffer: {
-                let value = loader(b"vkResetCommandBuffer\0".as_ptr().cast());
+                let value = loader(c"vkResetCommandBuffer".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10741,7 +10506,7 @@ impl DeviceCommands {
                 }
             },
             reset_command_pool: {
-                let value = loader(b"vkResetCommandPool\0".as_ptr().cast());
+                let value = loader(c"vkResetCommandPool".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10756,7 +10521,7 @@ impl DeviceCommands {
                 }
             },
             reset_descriptor_pool: {
-                let value = loader(b"vkResetDescriptorPool\0".as_ptr().cast());
+                let value = loader(c"vkResetDescriptorPool".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10771,7 +10536,7 @@ impl DeviceCommands {
                 }
             },
             reset_event: {
-                let value = loader(b"vkResetEvent\0".as_ptr().cast());
+                let value = loader(c"vkResetEvent".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10782,7 +10547,7 @@ impl DeviceCommands {
                 }
             },
             reset_fences: {
-                let value = loader(b"vkResetFences\0".as_ptr().cast());
+                let value = loader(c"vkResetFences".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10797,7 +10562,7 @@ impl DeviceCommands {
                 }
             },
             reset_query_pool: {
-                let value = loader(b"vkResetQueryPool\0".as_ptr().cast());
+                let value = loader(c"vkResetQueryPool".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10813,7 +10578,7 @@ impl DeviceCommands {
                 }
             },
             reset_query_pool_ext: {
-                let value = loader(b"vkResetQueryPoolEXT\0".as_ptr().cast());
+                let value = loader(c"vkResetQueryPoolEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10829,11 +10594,7 @@ impl DeviceCommands {
                 }
             },
             set_buffer_collection_buffer_constraints_fuchsia: {
-                let value = loader(
-                    b"vkSetBufferCollectionBufferConstraintsFUCHSIA\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkSetBufferCollectionBufferConstraintsFUCHSIA".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10848,11 +10609,7 @@ impl DeviceCommands {
                 }
             },
             set_buffer_collection_image_constraints_fuchsia: {
-                let value = loader(
-                    b"vkSetBufferCollectionImageConstraintsFUCHSIA\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkSetBufferCollectionImageConstraintsFUCHSIA".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10867,7 +10624,7 @@ impl DeviceCommands {
                 }
             },
             set_device_memory_priority_ext: {
-                let value = loader(b"vkSetDeviceMemoryPriorityEXT\0".as_ptr().cast());
+                let value = loader(c"vkSetDeviceMemoryPriorityEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10882,7 +10639,7 @@ impl DeviceCommands {
                 }
             },
             set_event: {
-                let value = loader(b"vkSetEvent\0".as_ptr().cast());
+                let value = loader(c"vkSetEvent".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10893,7 +10650,7 @@ impl DeviceCommands {
                 }
             },
             set_hdr_metadata_ext: {
-                let value = loader(b"vkSetHdrMetadataEXT\0".as_ptr().cast());
+                let value = loader(c"vkSetHdrMetadataEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10909,7 +10666,7 @@ impl DeviceCommands {
                 }
             },
             set_latency_marker_nv: {
-                let value = loader(b"vkSetLatencyMarkerNV\0".as_ptr().cast());
+                let value = loader(c"vkSetLatencyMarkerNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10924,7 +10681,7 @@ impl DeviceCommands {
                 }
             },
             set_latency_sleep_mode_nv: {
-                let value = loader(b"vkSetLatencySleepModeNV\0".as_ptr().cast());
+                let value = loader(c"vkSetLatencySleepModeNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10939,7 +10696,7 @@ impl DeviceCommands {
                 }
             },
             set_local_dimming_amd: {
-                let value = loader(b"vkSetLocalDimmingAMD\0".as_ptr().cast());
+                let value = loader(c"vkSetLocalDimmingAMD".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10954,7 +10711,7 @@ impl DeviceCommands {
                 }
             },
             set_private_data: {
-                let value = loader(b"vkSetPrivateData\0".as_ptr().cast());
+                let value = loader(c"vkSetPrivateData".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10971,7 +10728,7 @@ impl DeviceCommands {
                 }
             },
             set_private_data_ext: {
-                let value = loader(b"vkSetPrivateDataEXT\0".as_ptr().cast());
+                let value = loader(c"vkSetPrivateDataEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -10988,7 +10745,7 @@ impl DeviceCommands {
                 }
             },
             signal_semaphore: {
-                let value = loader(b"vkSignalSemaphore\0".as_ptr().cast());
+                let value = loader(c"vkSignalSemaphore".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11002,7 +10759,7 @@ impl DeviceCommands {
                 }
             },
             signal_semaphore_khr: {
-                let value = loader(b"vkSignalSemaphoreKHR\0".as_ptr().cast());
+                let value = loader(c"vkSignalSemaphoreKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11016,7 +10773,7 @@ impl DeviceCommands {
                 }
             },
             transition_image_layout: {
-                let value = loader(b"vkTransitionImageLayout\0".as_ptr().cast());
+                let value = loader(c"vkTransitionImageLayout".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11031,7 +10788,7 @@ impl DeviceCommands {
                 }
             },
             transition_image_layout_ext: {
-                let value = loader(b"vkTransitionImageLayoutEXT\0".as_ptr().cast());
+                let value = loader(c"vkTransitionImageLayoutEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11046,7 +10803,7 @@ impl DeviceCommands {
                 }
             },
             trim_command_pool: {
-                let value = loader(b"vkTrimCommandPool\0".as_ptr().cast());
+                let value = loader(c"vkTrimCommandPool".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11061,7 +10818,7 @@ impl DeviceCommands {
                 }
             },
             trim_command_pool_khr: {
-                let value = loader(b"vkTrimCommandPoolKHR\0".as_ptr().cast());
+                let value = loader(c"vkTrimCommandPoolKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11076,7 +10833,7 @@ impl DeviceCommands {
                 }
             },
             uninitialize_performance_api_intel: {
-                let value = loader(b"vkUninitializePerformanceApiINTEL\0".as_ptr().cast());
+                let value = loader(c"vkUninitializePerformanceApiINTEL".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11087,7 +10844,7 @@ impl DeviceCommands {
                 }
             },
             unmap_memory: {
-                let value = loader(b"vkUnmapMemory\0".as_ptr().cast());
+                let value = loader(c"vkUnmapMemory".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11098,7 +10855,7 @@ impl DeviceCommands {
                 }
             },
             unmap_memory2: {
-                let value = loader(b"vkUnmapMemory2\0".as_ptr().cast());
+                let value = loader(c"vkUnmapMemory2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11112,7 +10869,7 @@ impl DeviceCommands {
                 }
             },
             unmap_memory2_khr: {
-                let value = loader(b"vkUnmapMemory2KHR\0".as_ptr().cast());
+                let value = loader(c"vkUnmapMemory2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11126,7 +10883,7 @@ impl DeviceCommands {
                 }
             },
             update_descriptor_set_with_template: {
-                let value = loader(b"vkUpdateDescriptorSetWithTemplate\0".as_ptr().cast());
+                let value = loader(c"vkUpdateDescriptorSetWithTemplate".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11142,7 +10899,7 @@ impl DeviceCommands {
                 }
             },
             update_descriptor_set_with_template_khr: {
-                let value = loader(b"vkUpdateDescriptorSetWithTemplateKHR\0".as_ptr().cast());
+                let value = loader(c"vkUpdateDescriptorSetWithTemplateKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11158,7 +10915,7 @@ impl DeviceCommands {
                 }
             },
             update_descriptor_sets: {
-                let value = loader(b"vkUpdateDescriptorSets\0".as_ptr().cast());
+                let value = loader(c"vkUpdateDescriptorSets".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11175,7 +10932,7 @@ impl DeviceCommands {
                 }
             },
             update_indirect_execution_set_pipeline_ext: {
-                let value = loader(b"vkUpdateIndirectExecutionSetPipelineEXT\0".as_ptr().cast());
+                let value = loader(c"vkUpdateIndirectExecutionSetPipelineEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11191,7 +10948,7 @@ impl DeviceCommands {
                 }
             },
             update_indirect_execution_set_shader_ext: {
-                let value = loader(b"vkUpdateIndirectExecutionSetShaderEXT\0".as_ptr().cast());
+                let value = loader(c"vkUpdateIndirectExecutionSetShaderEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11207,7 +10964,7 @@ impl DeviceCommands {
                 }
             },
             update_video_session_parameters_khr: {
-                let value = loader(b"vkUpdateVideoSessionParametersKHR\0".as_ptr().cast());
+                let value = loader(c"vkUpdateVideoSessionParametersKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11222,7 +10979,7 @@ impl DeviceCommands {
                 }
             },
             wait_for_fences: {
-                let value = loader(b"vkWaitForFences\0".as_ptr().cast());
+                let value = loader(c"vkWaitForFences".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11239,7 +10996,7 @@ impl DeviceCommands {
                 }
             },
             wait_for_present2_khr: {
-                let value = loader(b"vkWaitForPresent2KHR\0".as_ptr().cast());
+                let value = loader(c"vkWaitForPresent2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11254,7 +11011,7 @@ impl DeviceCommands {
                 }
             },
             wait_for_present_khr: {
-                let value = loader(b"vkWaitForPresentKHR\0".as_ptr().cast());
+                let value = loader(c"vkWaitForPresentKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11270,7 +11027,7 @@ impl DeviceCommands {
                 }
             },
             wait_semaphores: {
-                let value = loader(b"vkWaitSemaphores\0".as_ptr().cast());
+                let value = loader(c"vkWaitSemaphores".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11285,7 +11042,7 @@ impl DeviceCommands {
                 }
             },
             wait_semaphores_khr: {
-                let value = loader(b"vkWaitSemaphoresKHR\0".as_ptr().cast());
+                let value = loader(c"vkWaitSemaphoresKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11300,11 +11057,7 @@ impl DeviceCommands {
                 }
             },
             write_acceleration_structures_properties_khr: {
-                let value = loader(
-                    b"vkWriteAccelerationStructuresPropertiesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkWriteAccelerationStructuresPropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11323,7 +11076,7 @@ impl DeviceCommands {
                 }
             },
             write_micromaps_properties_ext: {
-                let value = loader(b"vkWriteMicromapsPropertiesEXT\0".as_ptr().cast());
+                let value = loader(c"vkWriteMicromapsPropertiesEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11361,7 +11114,7 @@ impl EntryCommands {
     ) -> Self {
         Self {
             create_instance: {
-                let value = loader(b"vkCreateInstance\0".as_ptr().cast());
+                let value = loader(c"vkCreateInstance".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11376,7 +11129,7 @@ impl EntryCommands {
                 }
             },
             enumerate_instance_extension_properties: {
-                let value = loader(b"vkEnumerateInstanceExtensionProperties\0".as_ptr().cast());
+                let value = loader(c"vkEnumerateInstanceExtensionProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11391,7 +11144,7 @@ impl EntryCommands {
                 }
             },
             enumerate_instance_layer_properties: {
-                let value = loader(b"vkEnumerateInstanceLayerProperties\0".as_ptr().cast());
+                let value = loader(c"vkEnumerateInstanceLayerProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11405,7 +11158,7 @@ impl EntryCommands {
                 }
             },
             enumerate_instance_version: {
-                let value = loader(b"vkEnumerateInstanceVersion\0".as_ptr().cast());
+                let value = loader(c"vkEnumerateInstanceVersion".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11549,7 +11302,7 @@ impl InstanceCommands {
     ) -> Self {
         Self {
             acquire_drm_display_ext: {
-                let value = loader(b"vkAcquireDrmDisplayEXT\0".as_ptr().cast());
+                let value = loader(c"vkAcquireDrmDisplayEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11564,7 +11317,7 @@ impl InstanceCommands {
                 }
             },
             acquire_xlib_display_ext: {
-                let value = loader(b"vkAcquireXlibDisplayEXT\0".as_ptr().cast());
+                let value = loader(c"vkAcquireXlibDisplayEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11579,7 +11332,7 @@ impl InstanceCommands {
                 }
             },
             cmd_begin_debug_utils_label_ext: {
-                let value = loader(b"vkCmdBeginDebugUtilsLabelEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdBeginDebugUtilsLabelEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11593,7 +11346,7 @@ impl InstanceCommands {
                 }
             },
             cmd_end_debug_utils_label_ext: {
-                let value = loader(b"vkCmdEndDebugUtilsLabelEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdEndDebugUtilsLabelEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11604,7 +11357,7 @@ impl InstanceCommands {
                 }
             },
             cmd_insert_debug_utils_label_ext: {
-                let value = loader(b"vkCmdInsertDebugUtilsLabelEXT\0".as_ptr().cast());
+                let value = loader(c"vkCmdInsertDebugUtilsLabelEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11618,7 +11371,7 @@ impl InstanceCommands {
                 }
             },
             create_android_surface_khr: {
-                let value = loader(b"vkCreateAndroidSurfaceKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateAndroidSurfaceKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11634,7 +11387,7 @@ impl InstanceCommands {
                 }
             },
             create_debug_report_callback_ext: {
-                let value = loader(b"vkCreateDebugReportCallbackEXT\0".as_ptr().cast());
+                let value = loader(c"vkCreateDebugReportCallbackEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11650,7 +11403,7 @@ impl InstanceCommands {
                 }
             },
             create_debug_utils_messenger_ext: {
-                let value = loader(b"vkCreateDebugUtilsMessengerEXT\0".as_ptr().cast());
+                let value = loader(c"vkCreateDebugUtilsMessengerEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11666,7 +11419,7 @@ impl InstanceCommands {
                 }
             },
             create_device: {
-                let value = loader(b"vkCreateDevice\0".as_ptr().cast());
+                let value = loader(c"vkCreateDevice".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11682,7 +11435,7 @@ impl InstanceCommands {
                 }
             },
             create_direct_fb_surface_ext: {
-                let value = loader(b"vkCreateDirectFBSurfaceEXT\0".as_ptr().cast());
+                let value = loader(c"vkCreateDirectFBSurfaceEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11698,7 +11451,7 @@ impl InstanceCommands {
                 }
             },
             create_display_mode_khr: {
-                let value = loader(b"vkCreateDisplayModeKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateDisplayModeKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11715,7 +11468,7 @@ impl InstanceCommands {
                 }
             },
             create_display_plane_surface_khr: {
-                let value = loader(b"vkCreateDisplayPlaneSurfaceKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateDisplayPlaneSurfaceKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11731,7 +11484,7 @@ impl InstanceCommands {
                 }
             },
             create_headless_surface_ext: {
-                let value = loader(b"vkCreateHeadlessSurfaceEXT\0".as_ptr().cast());
+                let value = loader(c"vkCreateHeadlessSurfaceEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11747,7 +11500,7 @@ impl InstanceCommands {
                 }
             },
             create_ios_surface_mvk: {
-                let value = loader(b"vkCreateIOSSurfaceMVK\0".as_ptr().cast());
+                let value = loader(c"vkCreateIOSSurfaceMVK".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11763,7 +11516,7 @@ impl InstanceCommands {
                 }
             },
             create_image_pipe_surface_fuchsia: {
-                let value = loader(b"vkCreateImagePipeSurfaceFUCHSIA\0".as_ptr().cast());
+                let value = loader(c"vkCreateImagePipeSurfaceFUCHSIA".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11779,7 +11532,7 @@ impl InstanceCommands {
                 }
             },
             create_mac_os_surface_mvk: {
-                let value = loader(b"vkCreateMacOSSurfaceMVK\0".as_ptr().cast());
+                let value = loader(c"vkCreateMacOSSurfaceMVK".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11795,7 +11548,7 @@ impl InstanceCommands {
                 }
             },
             create_metal_surface_ext: {
-                let value = loader(b"vkCreateMetalSurfaceEXT\0".as_ptr().cast());
+                let value = loader(c"vkCreateMetalSurfaceEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11811,7 +11564,7 @@ impl InstanceCommands {
                 }
             },
             create_screen_surface_qnx: {
-                let value = loader(b"vkCreateScreenSurfaceQNX\0".as_ptr().cast());
+                let value = loader(c"vkCreateScreenSurfaceQNX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11827,7 +11580,7 @@ impl InstanceCommands {
                 }
             },
             create_stream_descriptor_surface_ggp: {
-                let value = loader(b"vkCreateStreamDescriptorSurfaceGGP\0".as_ptr().cast());
+                let value = loader(c"vkCreateStreamDescriptorSurfaceGGP".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11843,7 +11596,7 @@ impl InstanceCommands {
                 }
             },
             create_surface_ohos: {
-                let value = loader(b"vkCreateSurfaceOHOS\0".as_ptr().cast());
+                let value = loader(c"vkCreateSurfaceOHOS".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11859,7 +11612,7 @@ impl InstanceCommands {
                 }
             },
             create_vi_surface_nn: {
-                let value = loader(b"vkCreateViSurfaceNN\0".as_ptr().cast());
+                let value = loader(c"vkCreateViSurfaceNN".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11875,7 +11628,7 @@ impl InstanceCommands {
                 }
             },
             create_wayland_surface_khr: {
-                let value = loader(b"vkCreateWaylandSurfaceKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateWaylandSurfaceKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11891,7 +11644,7 @@ impl InstanceCommands {
                 }
             },
             create_win32_surface_khr: {
-                let value = loader(b"vkCreateWin32SurfaceKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateWin32SurfaceKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11907,7 +11660,7 @@ impl InstanceCommands {
                 }
             },
             create_xcb_surface_khr: {
-                let value = loader(b"vkCreateXcbSurfaceKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateXcbSurfaceKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11923,7 +11676,7 @@ impl InstanceCommands {
                 }
             },
             create_xlib_surface_khr: {
-                let value = loader(b"vkCreateXlibSurfaceKHR\0".as_ptr().cast());
+                let value = loader(c"vkCreateXlibSurfaceKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11939,7 +11692,7 @@ impl InstanceCommands {
                 }
             },
             debug_report_message_ext: {
-                let value = loader(b"vkDebugReportMessageEXT\0".as_ptr().cast());
+                let value = loader(c"vkDebugReportMessageEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11959,7 +11712,7 @@ impl InstanceCommands {
                 }
             },
             destroy_debug_report_callback_ext: {
-                let value = loader(b"vkDestroyDebugReportCallbackEXT\0".as_ptr().cast());
+                let value = loader(c"vkDestroyDebugReportCallbackEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11974,7 +11727,7 @@ impl InstanceCommands {
                 }
             },
             destroy_debug_utils_messenger_ext: {
-                let value = loader(b"vkDestroyDebugUtilsMessengerEXT\0".as_ptr().cast());
+                let value = loader(c"vkDestroyDebugUtilsMessengerEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -11989,7 +11742,7 @@ impl InstanceCommands {
                 }
             },
             destroy_instance: {
-                let value = loader(b"vkDestroyInstance\0".as_ptr().cast());
+                let value = loader(c"vkDestroyInstance".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12003,7 +11756,7 @@ impl InstanceCommands {
                 }
             },
             destroy_surface_khr: {
-                let value = loader(b"vkDestroySurfaceKHR\0".as_ptr().cast());
+                let value = loader(c"vkDestroySurfaceKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12018,7 +11771,7 @@ impl InstanceCommands {
                 }
             },
             enumerate_device_extension_properties: {
-                let value = loader(b"vkEnumerateDeviceExtensionProperties\0".as_ptr().cast());
+                let value = loader(c"vkEnumerateDeviceExtensionProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12034,7 +11787,7 @@ impl InstanceCommands {
                 }
             },
             enumerate_device_layer_properties: {
-                let value = loader(b"vkEnumerateDeviceLayerProperties\0".as_ptr().cast());
+                let value = loader(c"vkEnumerateDeviceLayerProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12049,7 +11802,7 @@ impl InstanceCommands {
                 }
             },
             enumerate_physical_device_groups: {
-                let value = loader(b"vkEnumeratePhysicalDeviceGroups\0".as_ptr().cast());
+                let value = loader(c"vkEnumeratePhysicalDeviceGroups".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12064,7 +11817,7 @@ impl InstanceCommands {
                 }
             },
             enumerate_physical_device_groups_khr: {
-                let value = loader(b"vkEnumeratePhysicalDeviceGroupsKHR\0".as_ptr().cast());
+                let value = loader(c"vkEnumeratePhysicalDeviceGroupsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12079,7 +11832,7 @@ impl InstanceCommands {
                 }
             },
             enumerate_physical_devices: {
-                let value = loader(b"vkEnumeratePhysicalDevices\0".as_ptr().cast());
+                let value = loader(c"vkEnumeratePhysicalDevices".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12094,7 +11847,7 @@ impl InstanceCommands {
                 }
             },
             get_display_mode_properties2_khr: {
-                let value = loader(b"vkGetDisplayModeProperties2KHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDisplayModeProperties2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12110,7 +11863,7 @@ impl InstanceCommands {
                 }
             },
             get_display_mode_properties_khr: {
-                let value = loader(b"vkGetDisplayModePropertiesKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDisplayModePropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12126,7 +11879,7 @@ impl InstanceCommands {
                 }
             },
             get_display_plane_capabilities2_khr: {
-                let value = loader(b"vkGetDisplayPlaneCapabilities2KHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDisplayPlaneCapabilities2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12141,7 +11894,7 @@ impl InstanceCommands {
                 }
             },
             get_display_plane_capabilities_khr: {
-                let value = loader(b"vkGetDisplayPlaneCapabilitiesKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDisplayPlaneCapabilitiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12157,7 +11910,7 @@ impl InstanceCommands {
                 }
             },
             get_display_plane_supported_displays_khr: {
-                let value = loader(b"vkGetDisplayPlaneSupportedDisplaysKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetDisplayPlaneSupportedDisplaysKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12173,7 +11926,7 @@ impl InstanceCommands {
                 }
             },
             get_drm_display_ext: {
-                let value = loader(b"vkGetDrmDisplayEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetDrmDisplayEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12189,11 +11942,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_direct_fb_presentation_support_ext: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceDirectFBPresentationSupportEXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceDirectFBPresentationSupportEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12208,11 +11957,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_display_plane_properties2_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceDisplayPlaneProperties2KHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceDisplayPlaneProperties2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12227,11 +11972,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_display_plane_properties_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceDisplayPlanePropertiesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceDisplayPlanePropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12246,11 +11987,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_display_properties2_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceDisplayProperties2KHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceDisplayProperties2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12265,7 +12002,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_display_properties_khr: {
-                let value = loader(b"vkGetPhysicalDeviceDisplayPropertiesKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceDisplayPropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12280,11 +12017,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_external_buffer_properties: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceExternalBufferProperties\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceExternalBufferProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12299,11 +12032,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_external_buffer_properties_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceExternalBufferPropertiesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceExternalBufferPropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12318,11 +12047,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_external_fence_properties: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceExternalFenceProperties\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceExternalFenceProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12337,11 +12062,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_external_fence_properties_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceExternalFencePropertiesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceExternalFencePropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12356,11 +12077,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_external_image_format_properties_nv: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceExternalImageFormatPropertiesNV\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceExternalImageFormatPropertiesNV".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12380,11 +12097,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_external_semaphore_properties: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceExternalSemaphoreProperties\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceExternalSemaphoreProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12399,11 +12112,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_external_semaphore_properties_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceExternalSemaphorePropertiesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceExternalSemaphorePropertiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12418,7 +12127,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_features: {
-                let value = loader(b"vkGetPhysicalDeviceFeatures\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceFeatures".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12432,7 +12141,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_features2: {
-                let value = loader(b"vkGetPhysicalDeviceFeatures2\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceFeatures2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12446,7 +12155,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_features2_khr: {
-                let value = loader(b"vkGetPhysicalDeviceFeatures2KHR\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceFeatures2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12460,7 +12169,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_format_properties: {
-                let value = loader(b"vkGetPhysicalDeviceFormatProperties\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceFormatProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12475,7 +12184,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_format_properties2: {
-                let value = loader(b"vkGetPhysicalDeviceFormatProperties2\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceFormatProperties2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12490,7 +12199,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_format_properties2_khr: {
-                let value = loader(b"vkGetPhysicalDeviceFormatProperties2KHR\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceFormatProperties2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12505,11 +12214,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_image_format_properties: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceImageFormatProperties\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceImageFormatProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12528,11 +12233,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_image_format_properties2: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceImageFormatProperties2\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceImageFormatProperties2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12547,11 +12248,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_image_format_properties2_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceImageFormatProperties2KHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceImageFormatProperties2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12566,7 +12263,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_memory_properties: {
-                let value = loader(b"vkGetPhysicalDeviceMemoryProperties\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceMemoryProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12580,7 +12277,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_memory_properties2: {
-                let value = loader(b"vkGetPhysicalDeviceMemoryProperties2\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceMemoryProperties2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12594,7 +12291,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_memory_properties2_khr: {
-                let value = loader(b"vkGetPhysicalDeviceMemoryProperties2KHR\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceMemoryProperties2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12608,7 +12305,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_properties: {
-                let value = loader(b"vkGetPhysicalDeviceProperties\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12622,7 +12319,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_properties2: {
-                let value = loader(b"vkGetPhysicalDeviceProperties2\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceProperties2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12636,7 +12333,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_properties2_khr: {
-                let value = loader(b"vkGetPhysicalDeviceProperties2KHR\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceProperties2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12650,11 +12347,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_queue_family_properties: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceQueueFamilyProperties\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceQueueFamilyProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12669,11 +12362,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_queue_family_properties2: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceQueueFamilyProperties2\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceQueueFamilyProperties2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12688,11 +12377,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_queue_family_properties2_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceQueueFamilyProperties2KHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceQueueFamilyProperties2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12707,11 +12392,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_screen_presentation_support_qnx: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceScreenPresentationSupportQNX\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceScreenPresentationSupportQNX".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12726,11 +12407,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_sparse_image_format_properties: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceSparseImageFormatProperties\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceSparseImageFormatProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12750,11 +12427,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_sparse_image_format_properties2: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceSparseImageFormatProperties2\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceSparseImageFormatProperties2".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12770,11 +12443,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_sparse_image_format_properties2_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceSparseImageFormatProperties2KHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceSparseImageFormatProperties2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12790,11 +12459,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_surface_capabilities2_ext: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceSurfaceCapabilities2EXT\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceSurfaceCapabilities2EXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12809,11 +12474,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_surface_capabilities2_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceSurfaceCapabilities2KHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceSurfaceCapabilities2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12828,11 +12489,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_surface_capabilities_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceSurfaceCapabilitiesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceSurfaceCapabilitiesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12847,7 +12504,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_surface_formats2_khr: {
-                let value = loader(b"vkGetPhysicalDeviceSurfaceFormats2KHR\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceSurfaceFormats2KHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12863,7 +12520,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_surface_formats_khr: {
-                let value = loader(b"vkGetPhysicalDeviceSurfaceFormatsKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceSurfaceFormatsKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12879,11 +12536,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_surface_present_modes_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceSurfacePresentModesKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceSurfacePresentModesKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12899,7 +12552,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_surface_support_khr: {
-                let value = loader(b"vkGetPhysicalDeviceSurfaceSupportKHR\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceSurfaceSupportKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12915,7 +12568,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_tool_properties: {
-                let value = loader(b"vkGetPhysicalDeviceToolProperties\0".as_ptr().cast());
+                let value = loader(c"vkGetPhysicalDeviceToolProperties".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12930,11 +12583,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_wayland_presentation_support_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceWaylandPresentationSupportKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceWaylandPresentationSupportKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12949,11 +12598,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_win32_presentation_support_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceWin32PresentationSupportKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceWin32PresentationSupportKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12967,11 +12612,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_xcb_presentation_support_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceXcbPresentationSupportKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceXcbPresentationSupportKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -12987,11 +12628,7 @@ impl InstanceCommands {
                 }
             },
             get_physical_device_xlib_presentation_support_khr: {
-                let value = loader(
-                    b"vkGetPhysicalDeviceXlibPresentationSupportKHR\0"
-                        .as_ptr()
-                        .cast(),
-                );
+                let value = loader(c"vkGetPhysicalDeviceXlibPresentationSupportKHR".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -13007,7 +12644,7 @@ impl InstanceCommands {
                 }
             },
             get_rand_r_output_display_ext: {
-                let value = loader(b"vkGetRandROutputDisplayEXT\0".as_ptr().cast());
+                let value = loader(c"vkGetRandROutputDisplayEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -13023,7 +12660,7 @@ impl InstanceCommands {
                 }
             },
             queue_begin_debug_utils_label_ext: {
-                let value = loader(b"vkQueueBeginDebugUtilsLabelEXT\0".as_ptr().cast());
+                let value = loader(c"vkQueueBeginDebugUtilsLabelEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -13037,7 +12674,7 @@ impl InstanceCommands {
                 }
             },
             queue_end_debug_utils_label_ext: {
-                let value = loader(b"vkQueueEndDebugUtilsLabelEXT\0".as_ptr().cast());
+                let value = loader(c"vkQueueEndDebugUtilsLabelEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -13048,7 +12685,7 @@ impl InstanceCommands {
                 }
             },
             queue_insert_debug_utils_label_ext: {
-                let value = loader(b"vkQueueInsertDebugUtilsLabelEXT\0".as_ptr().cast());
+                let value = loader(c"vkQueueInsertDebugUtilsLabelEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -13062,7 +12699,7 @@ impl InstanceCommands {
                 }
             },
             release_display_ext: {
-                let value = loader(b"vkReleaseDisplayEXT\0".as_ptr().cast());
+                let value = loader(c"vkReleaseDisplayEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -13076,7 +12713,7 @@ impl InstanceCommands {
                 }
             },
             set_debug_utils_object_name_ext: {
-                let value = loader(b"vkSetDebugUtilsObjectNameEXT\0".as_ptr().cast());
+                let value = loader(c"vkSetDebugUtilsObjectNameEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -13090,7 +12727,7 @@ impl InstanceCommands {
                 }
             },
             set_debug_utils_object_tag_ext: {
-                let value = loader(b"vkSetDebugUtilsObjectTagEXT\0".as_ptr().cast());
+                let value = loader(c"vkSetDebugUtilsObjectTagEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -13104,7 +12741,7 @@ impl InstanceCommands {
                 }
             },
             submit_debug_utils_message_ext: {
-                let value = loader(b"vkSubmitDebugUtilsMessageEXT\0".as_ptr().cast());
+                let value = loader(c"vkSubmitDebugUtilsMessageEXT".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -13137,7 +12774,7 @@ impl StaticCommands {
     ) -> Self {
         Self {
             get_device_proc_addr: {
-                let value = loader(b"vkGetDeviceProcAddr\0".as_ptr().cast());
+                let value = loader(c"vkGetDeviceProcAddr".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {
@@ -13151,7 +12788,7 @@ impl StaticCommands {
                 }
             },
             get_instance_proc_addr: {
-                let value = loader(b"vkGetInstanceProcAddr\0".as_ptr().cast());
+                let value = loader(c"vkGetInstanceProcAddr".as_ptr());
                 if let Some(value) = value {
                     mem::transmute(value)
                 } else {

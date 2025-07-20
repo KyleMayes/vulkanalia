@@ -28,7 +28,7 @@ fun git(
 }
 
 /** Executes the `rustfmt` command and returns the output. */
-fun rustfmt(rust: String): String = execute("rustfmt", emptyArray(), input = rust)
+fun rustfmt(rust: String): String = execute("rustfmt", arrayOf("--edition", "2021"), input = rust)
 
 /** Executes a command (with a time limit) and returns the output. */
 private fun execute(

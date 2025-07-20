@@ -136,6 +136,7 @@ private const val PREFIX =
     clippy::let_unit_value,
     clippy::missing_safety_doc,
     clippy::missing_transmute_annotations,
+    clippy::needless_lifetimes,
     clippy::too_many_arguments,
     clippy::type_complexity,
     clippy::unnecessary_cast,
