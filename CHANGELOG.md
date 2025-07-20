@@ -1,5 +1,9 @@
 ## [0.30.0] - UNRELEASED
 
+### Changed
+- Bumped `cocoa` to `0.26`
+- Bumped `metao` to `0.32`
+
 ### Bindings Updates
 - [gn: Add vpn9std headers to GN build](https://github.com/KhronosGroup/Vulkan-Headers/commit/1d6c53f65443ceeb97d3bdc695aaecc7ea6cc441)
 - [Update for Vulkan-Docs 1.4.318](https://github.com/KhronosGroup/Vulkan-Headers/commit/b39ab380a44b6c8df462c34e976ea9ce2d2c336b)

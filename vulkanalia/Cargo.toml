@@ -36,8 +36,8 @@ vulkanalia-sys = { version = "0.29", path = "../vulkanalia-sys", default-feature
 
 [target.'cfg(target_os = "macos")'.dependencies]
 
-cocoa = { version = "0.25", optional = true }
-metal = { version = "0.27", optional = true }
+cocoa = { version = "0.26", optional = true }
+metal = { version = "0.32", optional = true }
 objc = { version = "0.2", optional = true }
 
 [package.metadata.docs.rs]
