@@ -20,10 +20,11 @@ use vulkanalia::loader::{LibloadingLoader, LIBRARY};
 use vulkanalia::prelude::v1_0::*;
 use vulkanalia::window as vk_window;
 use vulkanalia::Version;
+use winit::application::ApplicationHandler;
 use winit::dpi::LogicalSize;
-use winit::event::{Event, WindowEvent};
-use winit::event_loop::EventLoop;
-use winit::window::{Window, WindowBuilder};
+use winit::event::WindowEvent;
+use winit::event_loop::{ActiveEventLoop, EventLoop};
+use winit::window::{Window, WindowId};
 
 use vulkanalia::vk::ExtDebugUtilsExtension;
 use vulkanalia::vk::KhrSurfaceExtension;
@@ -42,52 +43,65 @@ const PORTABILITY_MACOS_VERSION: Version = Version::new(1, 3, 216);
 /// The maximum number of frames that can be processed concurrently.
 const MAX_FRAMES_IN_FLIGHT: usize = 2;
 
-#[rustfmt::skip]
 fn main() -> Result<()> {
     pretty_env_logger::init();
 
-    // Window
-
     let event_loop = EventLoop::new()?;
-    let window = WindowBuilder::new()
-        .with_title("Vulkan Tutorial (Rust)")
-        .with_inner_size(LogicalSize::new(1024, 768))
-        .build(&event_loop)?;
+    event_loop.run_app(&mut AppWindow::default())?;
 
-    // App
+    Ok(())
+}
 
-    let mut app = unsafe { App::create(&window)? };
-    let mut minimized = false;
-    event_loop.run(move |event, elwt| {
+// The window for our Vulkan app.
+#[derive(Default)]
+struct AppWindow {
+    window: Option<(Window, App)>,
+    minimized: bool,
+}
+
+impl ApplicationHandler<()> for AppWindow {
+    fn resumed(&mut self, event_loop: &ActiveEventLoop) {
+        // Create a window and initialize our Vulkan app.
+        let attrs = Window::default_attributes()
+            .with_title("Vulkan Tutorial (Rust)")
+            .with_inner_size(LogicalSize::new(1024, 768));
+        let window = event_loop.create_window(attrs).unwrap();
+        let app = unsafe { App::create(&window) }.unwrap();
+        self.window = Some((window, app));
+    }
+
+    fn about_to_wait(&mut self, _: &ActiveEventLoop) {
+        // Request a redraw when all events were processed.
+        let (window, _) = self.window.as_ref().expect("about_to_wait() without window + app");
+        window.request_redraw();
+    }
+
+    #[rustfmt::skip]
+    fn window_event(&mut self, event_loop: &ActiveEventLoop, _: WindowId, event: WindowEvent) {
+        // Handle window events.
+        let (window, app) = self.window.as_mut().expect("window_event() without window + app");
         match event {
-            // Request a redraw when all events were processed.
-            Event::AboutToWait => window.request_redraw(),
-            Event::WindowEvent { event, .. } => match event {
-                // Render a frame if our Vulkan app is not being destroyed.
-                WindowEvent::RedrawRequested if !elwt.exiting() && !minimized => {
-                    unsafe { app.render(&window) }.unwrap();
-                },
-                // Mark the window as having been resized.
-                WindowEvent::Resized(size) => {
-                    if size.width == 0 || size.height == 0 {
-                        minimized = true;
-                    } else {
-                        minimized = false;
-                        app.resized = true;
-                    }
+            // Render a frame if our Vulkan app is not being destroyed.
+            WindowEvent::RedrawRequested if !event_loop.exiting() && !self.minimized => {
+                unsafe { app.render(&window) }.unwrap();
+            },
+            // Mark the window as having been resized.
+            WindowEvent::Resized(size) => {
+                if size.width == 0 || size.height == 0 {
+                    self.minimized = true;
+                } else {
+                    self.minimized = false;
+                    app.resized = true;
                 }
-                // Destroy our Vulkan app.
-                WindowEvent::CloseRequested => {
-                    elwt.exit();
-                    unsafe { app.destroy(); }
-                }
-                _ => {}
+            }
+            // Destroy our Vulkan app.
+            WindowEvent::CloseRequested => {
+                event_loop.exit();
+                unsafe { app.destroy() };
             }
             _ => {}
         }
-    })?;
-
-    Ok(())
+    }
 }
 
 /// Our Vulkan app.
