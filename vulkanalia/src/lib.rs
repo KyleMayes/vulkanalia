@@ -251,7 +251,7 @@ impl Entry {
     /// Gets the instance-level version of this Vulkan entry point.
     #[inline]
     pub fn version(&self) -> VkResult<Version> {
-        let name = b"vkEnumerateInstanceVersion\0".as_ptr() as *const c_char;
+        let name = c"vkEnumerateInstanceVersion".as_ptr();
         let raw = unsafe { (self.get_instance)(vk::Instance::null(), name) };
         let enumerate: Option<vk::PFN_vkEnumerateInstanceVersion> = unsafe { mem::transmute(raw) };
         if let Some(enumerate) = enumerate {

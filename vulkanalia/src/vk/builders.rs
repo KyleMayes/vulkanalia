@@ -12,6 +12,7 @@
     clippy::let_unit_value,
     clippy::missing_safety_doc,
     clippy::missing_transmute_annotations,
+    clippy::needless_lifetimes,
     clippy::too_many_arguments,
     clippy::type_complexity,
     clippy::unnecessary_cast,
@@ -266,7 +267,7 @@ impl<'b> AccelerationStructureBuildGeometryInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AccelerationStructureBuildGeometryInfoKHRBuilder<'b> {
+impl ops::Deref for AccelerationStructureBuildGeometryInfoKHRBuilder<'_> {
     type Target = AccelerationStructureBuildGeometryInfoKHR;
 
     #[inline]
@@ -275,14 +276,14 @@ impl<'b> ops::Deref for AccelerationStructureBuildGeometryInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AccelerationStructureBuildGeometryInfoKHRBuilder<'b> {
+impl ops::DerefMut for AccelerationStructureBuildGeometryInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AccelerationStructureBuildGeometryInfoKHRBuilder<'b> {
+unsafe impl Cast for AccelerationStructureBuildGeometryInfoKHRBuilder<'_> {
     type Target = AccelerationStructureBuildGeometryInfoKHR;
 
     #[inline]
@@ -585,7 +586,7 @@ impl<'b> AccelerationStructureCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AccelerationStructureCreateInfoKHRBuilder<'b> {
+impl ops::Deref for AccelerationStructureCreateInfoKHRBuilder<'_> {
     type Target = AccelerationStructureCreateInfoKHR;
 
     #[inline]
@@ -594,14 +595,14 @@ impl<'b> ops::Deref for AccelerationStructureCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AccelerationStructureCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for AccelerationStructureCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AccelerationStructureCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for AccelerationStructureCreateInfoKHRBuilder<'_> {
     type Target = AccelerationStructureCreateInfoKHR;
 
     #[inline]
@@ -663,7 +664,7 @@ impl<'b> AccelerationStructureCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AccelerationStructureCreateInfoNVBuilder<'b> {
+impl ops::Deref for AccelerationStructureCreateInfoNVBuilder<'_> {
     type Target = AccelerationStructureCreateInfoNV;
 
     #[inline]
@@ -672,14 +673,14 @@ impl<'b> ops::Deref for AccelerationStructureCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AccelerationStructureCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for AccelerationStructureCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AccelerationStructureCreateInfoNVBuilder<'b> {
+unsafe impl Cast for AccelerationStructureCreateInfoNVBuilder<'_> {
     type Target = AccelerationStructureCreateInfoNV;
 
     #[inline]
@@ -940,7 +941,7 @@ impl<'b> AccelerationStructureGeometryKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AccelerationStructureGeometryKHRBuilder<'b> {
+impl ops::Deref for AccelerationStructureGeometryKHRBuilder<'_> {
     type Target = AccelerationStructureGeometryKHR;
 
     #[inline]
@@ -949,14 +950,14 @@ impl<'b> ops::Deref for AccelerationStructureGeometryKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AccelerationStructureGeometryKHRBuilder<'b> {
+impl ops::DerefMut for AccelerationStructureGeometryKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AccelerationStructureGeometryKHRBuilder<'b> {
+unsafe impl Cast for AccelerationStructureGeometryKHRBuilder<'_> {
     type Target = AccelerationStructureGeometryKHR;
 
     #[inline]
@@ -1341,7 +1342,7 @@ impl<'b> AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
+impl ops::Deref for AccelerationStructureGeometryTrianglesDataKHRBuilder<'_> {
     type Target = AccelerationStructureGeometryTrianglesDataKHR;
 
     #[inline]
@@ -1350,14 +1351,14 @@ impl<'b> ops::Deref for AccelerationStructureGeometryTrianglesDataKHRBuilder<'b>
     }
 }
 
-impl<'b> ops::DerefMut for AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
+impl ops::DerefMut for AccelerationStructureGeometryTrianglesDataKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AccelerationStructureGeometryTrianglesDataKHRBuilder<'b> {
+unsafe impl Cast for AccelerationStructureGeometryTrianglesDataKHRBuilder<'_> {
     type Target = AccelerationStructureGeometryTrianglesDataKHR;
 
     #[inline]
@@ -1419,7 +1420,7 @@ impl<'b> AccelerationStructureInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AccelerationStructureInfoNVBuilder<'b> {
+impl ops::Deref for AccelerationStructureInfoNVBuilder<'_> {
     type Target = AccelerationStructureInfoNV;
 
     #[inline]
@@ -1428,14 +1429,14 @@ impl<'b> ops::Deref for AccelerationStructureInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AccelerationStructureInfoNVBuilder<'b> {
+impl ops::DerefMut for AccelerationStructureInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AccelerationStructureInfoNVBuilder<'b> {
+unsafe impl Cast for AccelerationStructureInfoNVBuilder<'_> {
     type Target = AccelerationStructureInfoNV;
 
     #[inline]
@@ -2102,7 +2103,7 @@ impl<'b> AccelerationStructureTrianglesDisplacementMicromapNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AccelerationStructureTrianglesDisplacementMicromapNVBuilder<'b> {
+impl ops::Deref for AccelerationStructureTrianglesDisplacementMicromapNVBuilder<'_> {
     type Target = AccelerationStructureTrianglesDisplacementMicromapNV;
 
     #[inline]
@@ -2111,14 +2112,14 @@ impl<'b> ops::Deref for AccelerationStructureTrianglesDisplacementMicromapNVBuil
     }
 }
 
-impl<'b> ops::DerefMut for AccelerationStructureTrianglesDisplacementMicromapNVBuilder<'b> {
+impl ops::DerefMut for AccelerationStructureTrianglesDisplacementMicromapNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AccelerationStructureTrianglesDisplacementMicromapNVBuilder<'b> {
+unsafe impl Cast for AccelerationStructureTrianglesDisplacementMicromapNVBuilder<'_> {
     type Target = AccelerationStructureTrianglesDisplacementMicromapNV;
 
     #[inline]
@@ -2205,7 +2206,7 @@ impl<'b> AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'b> {
+impl ops::Deref for AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'_> {
     type Target = AccelerationStructureTrianglesOpacityMicromapEXT;
 
     #[inline]
@@ -2214,14 +2215,14 @@ impl<'b> ops::Deref for AccelerationStructureTrianglesOpacityMicromapEXTBuilder<
     }
 }
 
-impl<'b> ops::DerefMut for AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'b> {
+impl ops::DerefMut for AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'b> {
+unsafe impl Cast for AccelerationStructureTrianglesOpacityMicromapEXTBuilder<'_> {
     type Target = AccelerationStructureTrianglesOpacityMicromapEXT;
 
     #[inline]
@@ -2264,7 +2265,7 @@ impl<'b> AccelerationStructureVersionInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AccelerationStructureVersionInfoKHRBuilder<'b> {
+impl ops::Deref for AccelerationStructureVersionInfoKHRBuilder<'_> {
     type Target = AccelerationStructureVersionInfoKHR;
 
     #[inline]
@@ -2273,14 +2274,14 @@ impl<'b> ops::Deref for AccelerationStructureVersionInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AccelerationStructureVersionInfoKHRBuilder<'b> {
+impl ops::DerefMut for AccelerationStructureVersionInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AccelerationStructureVersionInfoKHRBuilder<'b> {
+unsafe impl Cast for AccelerationStructureVersionInfoKHRBuilder<'_> {
     type Target = AccelerationStructureVersionInfoKHR;
 
     #[inline]
@@ -2502,7 +2503,7 @@ impl<'b> AllocationCallbacksBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AllocationCallbacksBuilder<'b> {
+impl ops::Deref for AllocationCallbacksBuilder<'_> {
     type Target = AllocationCallbacks;
 
     #[inline]
@@ -2511,14 +2512,14 @@ impl<'b> ops::Deref for AllocationCallbacksBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AllocationCallbacksBuilder<'b> {
+impl ops::DerefMut for AllocationCallbacksBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AllocationCallbacksBuilder<'b> {
+unsafe impl Cast for AllocationCallbacksBuilder<'_> {
     type Target = AllocationCallbacks;
 
     #[inline]
@@ -2925,7 +2926,7 @@ impl<'b> AndroidHardwareBufferPropertiesANDROIDBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AndroidHardwareBufferPropertiesANDROIDBuilder<'b> {
+impl ops::Deref for AndroidHardwareBufferPropertiesANDROIDBuilder<'_> {
     type Target = AndroidHardwareBufferPropertiesANDROID;
 
     #[inline]
@@ -2934,14 +2935,14 @@ impl<'b> ops::Deref for AndroidHardwareBufferPropertiesANDROIDBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AndroidHardwareBufferPropertiesANDROIDBuilder<'b> {
+impl ops::DerefMut for AndroidHardwareBufferPropertiesANDROIDBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AndroidHardwareBufferPropertiesANDROIDBuilder<'b> {
+unsafe impl Cast for AndroidHardwareBufferPropertiesANDROIDBuilder<'_> {
     type Target = AndroidHardwareBufferPropertiesANDROID;
 
     #[inline]
@@ -3048,7 +3049,7 @@ impl<'b> AndroidSurfaceCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AndroidSurfaceCreateInfoKHRBuilder<'b> {
+impl ops::Deref for AndroidSurfaceCreateInfoKHRBuilder<'_> {
     type Target = AndroidSurfaceCreateInfoKHR;
 
     #[inline]
@@ -3057,14 +3058,14 @@ impl<'b> ops::Deref for AndroidSurfaceCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AndroidSurfaceCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for AndroidSurfaceCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AndroidSurfaceCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for AndroidSurfaceCreateInfoKHRBuilder<'_> {
     type Target = AndroidSurfaceCreateInfoKHR;
 
     #[inline]
@@ -3122,7 +3123,7 @@ impl<'b> AntiLagDataAMDBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AntiLagDataAMDBuilder<'b> {
+impl ops::Deref for AntiLagDataAMDBuilder<'_> {
     type Target = AntiLagDataAMD;
 
     #[inline]
@@ -3131,14 +3132,14 @@ impl<'b> ops::Deref for AntiLagDataAMDBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AntiLagDataAMDBuilder<'b> {
+impl ops::DerefMut for AntiLagDataAMDBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AntiLagDataAMDBuilder<'b> {
+unsafe impl Cast for AntiLagDataAMDBuilder<'_> {
     type Target = AntiLagDataAMD;
 
     #[inline]
@@ -3282,7 +3283,7 @@ impl<'b> ApplicationInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ApplicationInfoBuilder<'b> {
+impl ops::Deref for ApplicationInfoBuilder<'_> {
     type Target = ApplicationInfo;
 
     #[inline]
@@ -3291,14 +3292,14 @@ impl<'b> ops::Deref for ApplicationInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ApplicationInfoBuilder<'b> {
+impl ops::DerefMut for ApplicationInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ApplicationInfoBuilder<'b> {
+unsafe impl Cast for ApplicationInfoBuilder<'_> {
     type Target = ApplicationInfo;
 
     #[inline]
@@ -3585,7 +3586,7 @@ impl<'b> AttachmentDescription2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AttachmentDescription2Builder<'b> {
+impl ops::Deref for AttachmentDescription2Builder<'_> {
     type Target = AttachmentDescription2;
 
     #[inline]
@@ -3594,14 +3595,14 @@ impl<'b> ops::Deref for AttachmentDescription2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AttachmentDescription2Builder<'b> {
+impl ops::DerefMut for AttachmentDescription2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AttachmentDescription2Builder<'b> {
+unsafe impl Cast for AttachmentDescription2Builder<'_> {
     type Target = AttachmentDescription2;
 
     #[inline]
@@ -3855,7 +3856,7 @@ impl<'b> AttachmentReference2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AttachmentReference2Builder<'b> {
+impl ops::Deref for AttachmentReference2Builder<'_> {
     type Target = AttachmentReference2;
 
     #[inline]
@@ -3864,14 +3865,14 @@ impl<'b> ops::Deref for AttachmentReference2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AttachmentReference2Builder<'b> {
+impl ops::DerefMut for AttachmentReference2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AttachmentReference2Builder<'b> {
+unsafe impl Cast for AttachmentReference2Builder<'_> {
     type Target = AttachmentReference2;
 
     #[inline]
@@ -3985,7 +3986,7 @@ impl<'b> AttachmentSampleCountInfoAMDBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AttachmentSampleCountInfoAMDBuilder<'b> {
+impl ops::Deref for AttachmentSampleCountInfoAMDBuilder<'_> {
     type Target = AttachmentSampleCountInfoAMD;
 
     #[inline]
@@ -3994,14 +3995,14 @@ impl<'b> ops::Deref for AttachmentSampleCountInfoAMDBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AttachmentSampleCountInfoAMDBuilder<'b> {
+impl ops::DerefMut for AttachmentSampleCountInfoAMDBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AttachmentSampleCountInfoAMDBuilder<'b> {
+unsafe impl Cast for AttachmentSampleCountInfoAMDBuilder<'_> {
     type Target = AttachmentSampleCountInfoAMD;
 
     #[inline]
@@ -4053,7 +4054,7 @@ impl<'b> AttachmentSampleLocationsEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for AttachmentSampleLocationsEXTBuilder<'b> {
+impl ops::Deref for AttachmentSampleLocationsEXTBuilder<'_> {
     type Target = AttachmentSampleLocationsEXT;
 
     #[inline]
@@ -4062,14 +4063,14 @@ impl<'b> ops::Deref for AttachmentSampleLocationsEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for AttachmentSampleLocationsEXTBuilder<'b> {
+impl ops::DerefMut for AttachmentSampleLocationsEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for AttachmentSampleLocationsEXTBuilder<'b> {
+unsafe impl Cast for AttachmentSampleLocationsEXTBuilder<'_> {
     type Target = AttachmentSampleLocationsEXT;
 
     #[inline]
@@ -4250,7 +4251,7 @@ impl<'b> BindAccelerationStructureMemoryInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BindAccelerationStructureMemoryInfoNVBuilder<'b> {
+impl ops::Deref for BindAccelerationStructureMemoryInfoNVBuilder<'_> {
     type Target = BindAccelerationStructureMemoryInfoNV;
 
     #[inline]
@@ -4259,14 +4260,14 @@ impl<'b> ops::Deref for BindAccelerationStructureMemoryInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BindAccelerationStructureMemoryInfoNVBuilder<'b> {
+impl ops::DerefMut for BindAccelerationStructureMemoryInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BindAccelerationStructureMemoryInfoNVBuilder<'b> {
+unsafe impl Cast for BindAccelerationStructureMemoryInfoNVBuilder<'_> {
     type Target = BindAccelerationStructureMemoryInfoNV;
 
     #[inline]
@@ -4310,7 +4311,7 @@ impl<'b> BindBufferMemoryDeviceGroupInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BindBufferMemoryDeviceGroupInfoBuilder<'b> {
+impl ops::Deref for BindBufferMemoryDeviceGroupInfoBuilder<'_> {
     type Target = BindBufferMemoryDeviceGroupInfo;
 
     #[inline]
@@ -4319,14 +4320,14 @@ impl<'b> ops::Deref for BindBufferMemoryDeviceGroupInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BindBufferMemoryDeviceGroupInfoBuilder<'b> {
+impl ops::DerefMut for BindBufferMemoryDeviceGroupInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BindBufferMemoryDeviceGroupInfoBuilder<'b> {
+unsafe impl Cast for BindBufferMemoryDeviceGroupInfoBuilder<'_> {
     type Target = BindBufferMemoryDeviceGroupInfo;
 
     #[inline]
@@ -4395,7 +4396,7 @@ impl<'b> BindBufferMemoryInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BindBufferMemoryInfoBuilder<'b> {
+impl ops::Deref for BindBufferMemoryInfoBuilder<'_> {
     type Target = BindBufferMemoryInfo;
 
     #[inline]
@@ -4404,14 +4405,14 @@ impl<'b> ops::Deref for BindBufferMemoryInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BindBufferMemoryInfoBuilder<'b> {
+impl ops::DerefMut for BindBufferMemoryInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BindBufferMemoryInfoBuilder<'b> {
+unsafe impl Cast for BindBufferMemoryInfoBuilder<'_> {
     type Target = BindBufferMemoryInfo;
 
     #[inline]
@@ -4561,7 +4562,7 @@ impl<'b> BindDescriptorBufferEmbeddedSamplersInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BindDescriptorBufferEmbeddedSamplersInfoEXTBuilder<'b> {
+impl ops::Deref for BindDescriptorBufferEmbeddedSamplersInfoEXTBuilder<'_> {
     type Target = BindDescriptorBufferEmbeddedSamplersInfoEXT;
 
     #[inline]
@@ -4570,14 +4571,14 @@ impl<'b> ops::Deref for BindDescriptorBufferEmbeddedSamplersInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BindDescriptorBufferEmbeddedSamplersInfoEXTBuilder<'b> {
+impl ops::DerefMut for BindDescriptorBufferEmbeddedSamplersInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BindDescriptorBufferEmbeddedSamplersInfoEXTBuilder<'b> {
+unsafe impl Cast for BindDescriptorBufferEmbeddedSamplersInfoEXTBuilder<'_> {
     type Target = BindDescriptorBufferEmbeddedSamplersInfoEXT;
 
     #[inline]
@@ -4659,7 +4660,7 @@ impl<'b> BindDescriptorSetsInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BindDescriptorSetsInfoBuilder<'b> {
+impl ops::Deref for BindDescriptorSetsInfoBuilder<'_> {
     type Target = BindDescriptorSetsInfo;
 
     #[inline]
@@ -4668,14 +4669,14 @@ impl<'b> ops::Deref for BindDescriptorSetsInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BindDescriptorSetsInfoBuilder<'b> {
+impl ops::DerefMut for BindDescriptorSetsInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BindDescriptorSetsInfoBuilder<'b> {
+unsafe impl Cast for BindDescriptorSetsInfoBuilder<'_> {
     type Target = BindDescriptorSetsInfo;
 
     #[inline]
@@ -4729,7 +4730,7 @@ impl<'b> BindImageMemoryDeviceGroupInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BindImageMemoryDeviceGroupInfoBuilder<'b> {
+impl ops::Deref for BindImageMemoryDeviceGroupInfoBuilder<'_> {
     type Target = BindImageMemoryDeviceGroupInfo;
 
     #[inline]
@@ -4738,14 +4739,14 @@ impl<'b> ops::Deref for BindImageMemoryDeviceGroupInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BindImageMemoryDeviceGroupInfoBuilder<'b> {
+impl ops::DerefMut for BindImageMemoryDeviceGroupInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BindImageMemoryDeviceGroupInfoBuilder<'b> {
+unsafe impl Cast for BindImageMemoryDeviceGroupInfoBuilder<'_> {
     type Target = BindImageMemoryDeviceGroupInfo;
 
     #[inline]
@@ -4816,7 +4817,7 @@ impl<'b> BindImageMemoryInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BindImageMemoryInfoBuilder<'b> {
+impl ops::Deref for BindImageMemoryInfoBuilder<'_> {
     type Target = BindImageMemoryInfo;
 
     #[inline]
@@ -4825,14 +4826,14 @@ impl<'b> ops::Deref for BindImageMemoryInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BindImageMemoryInfoBuilder<'b> {
+impl ops::DerefMut for BindImageMemoryInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BindImageMemoryInfoBuilder<'b> {
+unsafe impl Cast for BindImageMemoryInfoBuilder<'_> {
     type Target = BindImageMemoryInfo;
 
     #[inline]
@@ -5137,7 +5138,7 @@ impl<'b> BindMemoryStatusBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BindMemoryStatusBuilder<'b> {
+impl ops::Deref for BindMemoryStatusBuilder<'_> {
     type Target = BindMemoryStatus;
 
     #[inline]
@@ -5146,14 +5147,14 @@ impl<'b> ops::Deref for BindMemoryStatusBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BindMemoryStatusBuilder<'b> {
+impl ops::DerefMut for BindMemoryStatusBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BindMemoryStatusBuilder<'b> {
+unsafe impl Cast for BindMemoryStatusBuilder<'_> {
     type Target = BindMemoryStatus;
 
     #[inline]
@@ -5366,7 +5367,7 @@ impl<'b> BindSparseInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BindSparseInfoBuilder<'b> {
+impl ops::Deref for BindSparseInfoBuilder<'_> {
     type Target = BindSparseInfo;
 
     #[inline]
@@ -5375,14 +5376,14 @@ impl<'b> ops::Deref for BindSparseInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BindSparseInfoBuilder<'b> {
+impl ops::DerefMut for BindSparseInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BindSparseInfoBuilder<'b> {
+unsafe impl Cast for BindSparseInfoBuilder<'_> {
     type Target = BindSparseInfo;
 
     #[inline]
@@ -5813,7 +5814,7 @@ impl<'b> BlitImageInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BlitImageInfo2Builder<'b> {
+impl ops::Deref for BlitImageInfo2Builder<'_> {
     type Target = BlitImageInfo2;
 
     #[inline]
@@ -5822,14 +5823,14 @@ impl<'b> ops::Deref for BlitImageInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BlitImageInfo2Builder<'b> {
+impl ops::DerefMut for BlitImageInfo2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BlitImageInfo2Builder<'b> {
+unsafe impl Cast for BlitImageInfo2Builder<'_> {
     type Target = BlitImageInfo2;
 
     #[inline]
@@ -6349,7 +6350,7 @@ impl<'b> BufferConstraintsInfoFUCHSIABuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BufferConstraintsInfoFUCHSIABuilder<'b> {
+impl ops::Deref for BufferConstraintsInfoFUCHSIABuilder<'_> {
     type Target = BufferConstraintsInfoFUCHSIA;
 
     #[inline]
@@ -6358,14 +6359,14 @@ impl<'b> ops::Deref for BufferConstraintsInfoFUCHSIABuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BufferConstraintsInfoFUCHSIABuilder<'b> {
+impl ops::DerefMut for BufferConstraintsInfoFUCHSIABuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BufferConstraintsInfoFUCHSIABuilder<'b> {
+unsafe impl Cast for BufferConstraintsInfoFUCHSIABuilder<'_> {
     type Target = BufferConstraintsInfoFUCHSIA;
 
     #[inline]
@@ -6593,7 +6594,7 @@ impl<'b> BufferCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BufferCreateInfoBuilder<'b> {
+impl ops::Deref for BufferCreateInfoBuilder<'_> {
     type Target = BufferCreateInfo;
 
     #[inline]
@@ -6602,14 +6603,14 @@ impl<'b> ops::Deref for BufferCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BufferCreateInfoBuilder<'b> {
+impl ops::DerefMut for BufferCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BufferCreateInfoBuilder<'b> {
+unsafe impl Cast for BufferCreateInfoBuilder<'_> {
     type Target = BufferCreateInfo;
 
     #[inline]
@@ -6905,7 +6906,7 @@ impl<'b> BufferImageCopy2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BufferImageCopy2Builder<'b> {
+impl ops::Deref for BufferImageCopy2Builder<'_> {
     type Target = BufferImageCopy2;
 
     #[inline]
@@ -6914,14 +6915,14 @@ impl<'b> ops::Deref for BufferImageCopy2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BufferImageCopy2Builder<'b> {
+impl ops::DerefMut for BufferImageCopy2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BufferImageCopy2Builder<'b> {
+unsafe impl Cast for BufferImageCopy2Builder<'_> {
     type Target = BufferImageCopy2;
 
     #[inline]
@@ -7013,7 +7014,7 @@ impl<'b> BufferMemoryBarrierBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BufferMemoryBarrierBuilder<'b> {
+impl ops::Deref for BufferMemoryBarrierBuilder<'_> {
     type Target = BufferMemoryBarrier;
 
     #[inline]
@@ -7022,14 +7023,14 @@ impl<'b> ops::Deref for BufferMemoryBarrierBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BufferMemoryBarrierBuilder<'b> {
+impl ops::DerefMut for BufferMemoryBarrierBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BufferMemoryBarrierBuilder<'b> {
+unsafe impl Cast for BufferMemoryBarrierBuilder<'_> {
     type Target = BufferMemoryBarrier;
 
     #[inline]
@@ -7134,7 +7135,7 @@ impl<'b> BufferMemoryBarrier2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BufferMemoryBarrier2Builder<'b> {
+impl ops::Deref for BufferMemoryBarrier2Builder<'_> {
     type Target = BufferMemoryBarrier2;
 
     #[inline]
@@ -7143,14 +7144,14 @@ impl<'b> ops::Deref for BufferMemoryBarrier2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BufferMemoryBarrier2Builder<'b> {
+impl ops::DerefMut for BufferMemoryBarrier2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BufferMemoryBarrier2Builder<'b> {
+unsafe impl Cast for BufferMemoryBarrier2Builder<'_> {
     type Target = BufferMemoryBarrier2;
 
     #[inline]
@@ -7405,7 +7406,7 @@ impl<'b> BufferViewCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BufferViewCreateInfoBuilder<'b> {
+impl ops::Deref for BufferViewCreateInfoBuilder<'_> {
     type Target = BufferViewCreateInfo;
 
     #[inline]
@@ -7414,14 +7415,14 @@ impl<'b> ops::Deref for BufferViewCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BufferViewCreateInfoBuilder<'b> {
+impl ops::DerefMut for BufferViewCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BufferViewCreateInfoBuilder<'b> {
+unsafe impl Cast for BufferViewCreateInfoBuilder<'_> {
     type Target = BufferViewCreateInfo;
 
     #[inline]
@@ -7573,7 +7574,7 @@ impl<'b> BuildPartitionedAccelerationStructureInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for BuildPartitionedAccelerationStructureInfoNVBuilder<'b> {
+impl ops::Deref for BuildPartitionedAccelerationStructureInfoNVBuilder<'_> {
     type Target = BuildPartitionedAccelerationStructureInfoNV;
 
     #[inline]
@@ -7582,14 +7583,14 @@ impl<'b> ops::Deref for BuildPartitionedAccelerationStructureInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for BuildPartitionedAccelerationStructureInfoNVBuilder<'b> {
+impl ops::DerefMut for BuildPartitionedAccelerationStructureInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for BuildPartitionedAccelerationStructureInfoNVBuilder<'b> {
+unsafe impl Cast for BuildPartitionedAccelerationStructureInfoNVBuilder<'_> {
     type Target = BuildPartitionedAccelerationStructureInfoNV;
 
     #[inline]
@@ -7696,7 +7697,7 @@ impl<'b> CheckpointData2NVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CheckpointData2NVBuilder<'b> {
+impl ops::Deref for CheckpointData2NVBuilder<'_> {
     type Target = CheckpointData2NV;
 
     #[inline]
@@ -7705,14 +7706,14 @@ impl<'b> ops::Deref for CheckpointData2NVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CheckpointData2NVBuilder<'b> {
+impl ops::DerefMut for CheckpointData2NVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CheckpointData2NVBuilder<'b> {
+unsafe impl Cast for CheckpointData2NVBuilder<'_> {
     type Target = CheckpointData2NV;
 
     #[inline]
@@ -7761,7 +7762,7 @@ impl<'b> CheckpointDataNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CheckpointDataNVBuilder<'b> {
+impl ops::Deref for CheckpointDataNVBuilder<'_> {
     type Target = CheckpointDataNV;
 
     #[inline]
@@ -7770,14 +7771,14 @@ impl<'b> ops::Deref for CheckpointDataNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CheckpointDataNVBuilder<'b> {
+impl ops::DerefMut for CheckpointDataNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CheckpointDataNVBuilder<'b> {
+unsafe impl Cast for CheckpointDataNVBuilder<'_> {
     type Target = CheckpointDataNV;
 
     #[inline]
@@ -9261,7 +9262,7 @@ impl<'b> CoarseSampleOrderCustomNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CoarseSampleOrderCustomNVBuilder<'b> {
+impl ops::Deref for CoarseSampleOrderCustomNVBuilder<'_> {
     type Target = CoarseSampleOrderCustomNV;
 
     #[inline]
@@ -9270,14 +9271,14 @@ impl<'b> ops::Deref for CoarseSampleOrderCustomNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CoarseSampleOrderCustomNVBuilder<'b> {
+impl ops::DerefMut for CoarseSampleOrderCustomNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CoarseSampleOrderCustomNVBuilder<'b> {
+unsafe impl Cast for CoarseSampleOrderCustomNVBuilder<'_> {
     type Target = CoarseSampleOrderCustomNV;
 
     #[inline]
@@ -9582,7 +9583,7 @@ impl<'b> CommandBufferBeginInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CommandBufferBeginInfoBuilder<'b> {
+impl ops::Deref for CommandBufferBeginInfoBuilder<'_> {
     type Target = CommandBufferBeginInfo;
 
     #[inline]
@@ -9591,14 +9592,14 @@ impl<'b> ops::Deref for CommandBufferBeginInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CommandBufferBeginInfoBuilder<'b> {
+impl ops::DerefMut for CommandBufferBeginInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CommandBufferBeginInfoBuilder<'b> {
+unsafe impl Cast for CommandBufferBeginInfoBuilder<'_> {
     type Target = CommandBufferBeginInfo;
 
     #[inline]
@@ -9758,7 +9759,7 @@ impl<'b> CommandBufferInheritanceInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CommandBufferInheritanceInfoBuilder<'b> {
+impl ops::Deref for CommandBufferInheritanceInfoBuilder<'_> {
     type Target = CommandBufferInheritanceInfo;
 
     #[inline]
@@ -9767,14 +9768,14 @@ impl<'b> ops::Deref for CommandBufferInheritanceInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CommandBufferInheritanceInfoBuilder<'b> {
+impl ops::DerefMut for CommandBufferInheritanceInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CommandBufferInheritanceInfoBuilder<'b> {
+unsafe impl Cast for CommandBufferInheritanceInfoBuilder<'_> {
     type Target = CommandBufferInheritanceInfo;
 
     #[inline]
@@ -9912,7 +9913,7 @@ impl<'b> CommandBufferInheritanceRenderingInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CommandBufferInheritanceRenderingInfoBuilder<'b> {
+impl ops::Deref for CommandBufferInheritanceRenderingInfoBuilder<'_> {
     type Target = CommandBufferInheritanceRenderingInfo;
 
     #[inline]
@@ -9921,14 +9922,14 @@ impl<'b> ops::Deref for CommandBufferInheritanceRenderingInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CommandBufferInheritanceRenderingInfoBuilder<'b> {
+impl ops::DerefMut for CommandBufferInheritanceRenderingInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CommandBufferInheritanceRenderingInfoBuilder<'b> {
+unsafe impl Cast for CommandBufferInheritanceRenderingInfoBuilder<'_> {
     type Target = CommandBufferInheritanceRenderingInfo;
 
     #[inline]
@@ -9983,7 +9984,7 @@ impl<'b> CommandBufferInheritanceViewportScissorInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CommandBufferInheritanceViewportScissorInfoNVBuilder<'b> {
+impl ops::Deref for CommandBufferInheritanceViewportScissorInfoNVBuilder<'_> {
     type Target = CommandBufferInheritanceViewportScissorInfoNV;
 
     #[inline]
@@ -9992,14 +9993,14 @@ impl<'b> ops::Deref for CommandBufferInheritanceViewportScissorInfoNVBuilder<'b>
     }
 }
 
-impl<'b> ops::DerefMut for CommandBufferInheritanceViewportScissorInfoNVBuilder<'b> {
+impl ops::DerefMut for CommandBufferInheritanceViewportScissorInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CommandBufferInheritanceViewportScissorInfoNVBuilder<'b> {
+unsafe impl Cast for CommandBufferInheritanceViewportScissorInfoNVBuilder<'_> {
     type Target = CommandBufferInheritanceViewportScissorInfoNV;
 
     #[inline]
@@ -10061,7 +10062,7 @@ impl<'b> CommandBufferSubmitInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CommandBufferSubmitInfoBuilder<'b> {
+impl ops::Deref for CommandBufferSubmitInfoBuilder<'_> {
     type Target = CommandBufferSubmitInfo;
 
     #[inline]
@@ -10070,14 +10071,14 @@ impl<'b> ops::Deref for CommandBufferSubmitInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CommandBufferSubmitInfoBuilder<'b> {
+impl ops::DerefMut for CommandBufferSubmitInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CommandBufferSubmitInfoBuilder<'b> {
+unsafe impl Cast for CommandBufferSubmitInfoBuilder<'_> {
     type Target = CommandBufferSubmitInfo;
 
     #[inline]
@@ -10139,7 +10140,7 @@ impl<'b> CommandPoolCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CommandPoolCreateInfoBuilder<'b> {
+impl ops::Deref for CommandPoolCreateInfoBuilder<'_> {
     type Target = CommandPoolCreateInfo;
 
     #[inline]
@@ -10148,14 +10149,14 @@ impl<'b> ops::Deref for CommandPoolCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CommandPoolCreateInfoBuilder<'b> {
+impl ops::DerefMut for CommandPoolCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CommandPoolCreateInfoBuilder<'b> {
+unsafe impl Cast for CommandPoolCreateInfoBuilder<'_> {
     type Target = CommandPoolCreateInfo;
 
     #[inline]
@@ -10317,7 +10318,7 @@ impl<'b> ComputePipelineCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ComputePipelineCreateInfoBuilder<'b> {
+impl ops::Deref for ComputePipelineCreateInfoBuilder<'_> {
     type Target = ComputePipelineCreateInfo;
 
     #[inline]
@@ -10326,14 +10327,14 @@ impl<'b> ops::Deref for ComputePipelineCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ComputePipelineCreateInfoBuilder<'b> {
+impl ops::DerefMut for ComputePipelineCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ComputePipelineCreateInfoBuilder<'b> {
+unsafe impl Cast for ComputePipelineCreateInfoBuilder<'_> {
     type Target = ComputePipelineCreateInfo;
 
     #[inline]
@@ -10661,7 +10662,7 @@ impl<'b> ConvertCooperativeVectorMatrixInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ConvertCooperativeVectorMatrixInfoNVBuilder<'b> {
+impl ops::Deref for ConvertCooperativeVectorMatrixInfoNVBuilder<'_> {
     type Target = ConvertCooperativeVectorMatrixInfoNV;
 
     #[inline]
@@ -10670,14 +10671,14 @@ impl<'b> ops::Deref for ConvertCooperativeVectorMatrixInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ConvertCooperativeVectorMatrixInfoNVBuilder<'b> {
+impl ops::DerefMut for ConvertCooperativeVectorMatrixInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ConvertCooperativeVectorMatrixInfoNVBuilder<'b> {
+unsafe impl Cast for ConvertCooperativeVectorMatrixInfoNVBuilder<'_> {
     type Target = ConvertCooperativeVectorMatrixInfoNV;
 
     #[inline]
@@ -11279,7 +11280,7 @@ impl<'b> CopyBufferInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CopyBufferInfo2Builder<'b> {
+impl ops::Deref for CopyBufferInfo2Builder<'_> {
     type Target = CopyBufferInfo2;
 
     #[inline]
@@ -11288,14 +11289,14 @@ impl<'b> ops::Deref for CopyBufferInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CopyBufferInfo2Builder<'b> {
+impl ops::DerefMut for CopyBufferInfo2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CopyBufferInfo2Builder<'b> {
+unsafe impl Cast for CopyBufferInfo2Builder<'_> {
     type Target = CopyBufferInfo2;
 
     #[inline]
@@ -11357,7 +11358,7 @@ impl<'b> CopyBufferToImageInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CopyBufferToImageInfo2Builder<'b> {
+impl ops::Deref for CopyBufferToImageInfo2Builder<'_> {
     type Target = CopyBufferToImageInfo2;
 
     #[inline]
@@ -11366,14 +11367,14 @@ impl<'b> ops::Deref for CopyBufferToImageInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CopyBufferToImageInfo2Builder<'b> {
+impl ops::DerefMut for CopyBufferToImageInfo2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CopyBufferToImageInfo2Builder<'b> {
+unsafe impl Cast for CopyBufferToImageInfo2Builder<'_> {
     type Target = CopyBufferToImageInfo2;
 
     #[inline]
@@ -11593,7 +11594,7 @@ impl<'b> CopyImageInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CopyImageInfo2Builder<'b> {
+impl ops::Deref for CopyImageInfo2Builder<'_> {
     type Target = CopyImageInfo2;
 
     #[inline]
@@ -11602,14 +11603,14 @@ impl<'b> ops::Deref for CopyImageInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CopyImageInfo2Builder<'b> {
+impl ops::DerefMut for CopyImageInfo2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CopyImageInfo2Builder<'b> {
+unsafe impl Cast for CopyImageInfo2Builder<'_> {
     type Target = CopyImageInfo2;
 
     #[inline]
@@ -11671,7 +11672,7 @@ impl<'b> CopyImageToBufferInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CopyImageToBufferInfo2Builder<'b> {
+impl ops::Deref for CopyImageToBufferInfo2Builder<'_> {
     type Target = CopyImageToBufferInfo2;
 
     #[inline]
@@ -11680,14 +11681,14 @@ impl<'b> ops::Deref for CopyImageToBufferInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CopyImageToBufferInfo2Builder<'b> {
+impl ops::DerefMut for CopyImageToBufferInfo2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CopyImageToBufferInfo2Builder<'b> {
+unsafe impl Cast for CopyImageToBufferInfo2Builder<'_> {
     type Target = CopyImageToBufferInfo2;
 
     #[inline]
@@ -11761,7 +11762,7 @@ impl<'b> CopyImageToImageInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CopyImageToImageInfoBuilder<'b> {
+impl ops::Deref for CopyImageToImageInfoBuilder<'_> {
     type Target = CopyImageToImageInfo;
 
     #[inline]
@@ -11770,14 +11771,14 @@ impl<'b> ops::Deref for CopyImageToImageInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CopyImageToImageInfoBuilder<'b> {
+impl ops::DerefMut for CopyImageToImageInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CopyImageToImageInfoBuilder<'b> {
+unsafe impl Cast for CopyImageToImageInfoBuilder<'_> {
     type Target = CopyImageToImageInfo;
 
     #[inline]
@@ -11839,7 +11840,7 @@ impl<'b> CopyImageToMemoryInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CopyImageToMemoryInfoBuilder<'b> {
+impl ops::Deref for CopyImageToMemoryInfoBuilder<'_> {
     type Target = CopyImageToMemoryInfo;
 
     #[inline]
@@ -11848,14 +11849,14 @@ impl<'b> ops::Deref for CopyImageToMemoryInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CopyImageToMemoryInfoBuilder<'b> {
+impl ops::DerefMut for CopyImageToMemoryInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CopyImageToMemoryInfoBuilder<'b> {
+unsafe impl Cast for CopyImageToMemoryInfoBuilder<'_> {
     type Target = CopyImageToMemoryInfo;
 
     #[inline]
@@ -12148,7 +12149,7 @@ impl<'b> CopyMemoryToImageInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CopyMemoryToImageInfoBuilder<'b> {
+impl ops::Deref for CopyMemoryToImageInfoBuilder<'_> {
     type Target = CopyMemoryToImageInfo;
 
     #[inline]
@@ -12157,14 +12158,14 @@ impl<'b> ops::Deref for CopyMemoryToImageInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CopyMemoryToImageInfoBuilder<'b> {
+impl ops::DerefMut for CopyMemoryToImageInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CopyMemoryToImageInfoBuilder<'b> {
+unsafe impl Cast for CopyMemoryToImageInfoBuilder<'_> {
     type Target = CopyMemoryToImageInfo;
 
     #[inline]
@@ -12430,7 +12431,7 @@ impl<'b> CopyTensorInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CopyTensorInfoARMBuilder<'b> {
+impl ops::Deref for CopyTensorInfoARMBuilder<'_> {
     type Target = CopyTensorInfoARM;
 
     #[inline]
@@ -12439,14 +12440,14 @@ impl<'b> ops::Deref for CopyTensorInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CopyTensorInfoARMBuilder<'b> {
+impl ops::DerefMut for CopyTensorInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CopyTensorInfoARMBuilder<'b> {
+unsafe impl Cast for CopyTensorInfoARMBuilder<'_> {
     type Target = CopyTensorInfoARM;
 
     #[inline]
@@ -12495,7 +12496,7 @@ impl<'b> CuFunctionCreateInfoNVXBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CuFunctionCreateInfoNVXBuilder<'b> {
+impl ops::Deref for CuFunctionCreateInfoNVXBuilder<'_> {
     type Target = CuFunctionCreateInfoNVX;
 
     #[inline]
@@ -12504,14 +12505,14 @@ impl<'b> ops::Deref for CuFunctionCreateInfoNVXBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CuFunctionCreateInfoNVXBuilder<'b> {
+impl ops::DerefMut for CuFunctionCreateInfoNVXBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CuFunctionCreateInfoNVXBuilder<'b> {
+unsafe impl Cast for CuFunctionCreateInfoNVXBuilder<'_> {
     type Target = CuFunctionCreateInfoNVX;
 
     #[inline]
@@ -12610,7 +12611,7 @@ impl<'b> CuLaunchInfoNVXBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CuLaunchInfoNVXBuilder<'b> {
+impl ops::Deref for CuLaunchInfoNVXBuilder<'_> {
     type Target = CuLaunchInfoNVX;
 
     #[inline]
@@ -12619,14 +12620,14 @@ impl<'b> ops::Deref for CuLaunchInfoNVXBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CuLaunchInfoNVXBuilder<'b> {
+impl ops::DerefMut for CuLaunchInfoNVXBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CuLaunchInfoNVXBuilder<'b> {
+unsafe impl Cast for CuLaunchInfoNVXBuilder<'_> {
     type Target = CuLaunchInfoNVX;
 
     #[inline]
@@ -12683,7 +12684,7 @@ impl<'b> CuModuleCreateInfoNVXBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CuModuleCreateInfoNVXBuilder<'b> {
+impl ops::Deref for CuModuleCreateInfoNVXBuilder<'_> {
     type Target = CuModuleCreateInfoNVX;
 
     #[inline]
@@ -12692,14 +12693,14 @@ impl<'b> ops::Deref for CuModuleCreateInfoNVXBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CuModuleCreateInfoNVXBuilder<'b> {
+impl ops::DerefMut for CuModuleCreateInfoNVXBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CuModuleCreateInfoNVXBuilder<'b> {
+unsafe impl Cast for CuModuleCreateInfoNVXBuilder<'_> {
     type Target = CuModuleCreateInfoNVX;
 
     #[inline]
@@ -12806,7 +12807,7 @@ impl<'b> CudaFunctionCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CudaFunctionCreateInfoNVBuilder<'b> {
+impl ops::Deref for CudaFunctionCreateInfoNVBuilder<'_> {
     type Target = CudaFunctionCreateInfoNV;
 
     #[inline]
@@ -12815,14 +12816,14 @@ impl<'b> ops::Deref for CudaFunctionCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CudaFunctionCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for CudaFunctionCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CudaFunctionCreateInfoNVBuilder<'b> {
+unsafe impl Cast for CudaFunctionCreateInfoNVBuilder<'_> {
     type Target = CudaFunctionCreateInfoNV;
 
     #[inline]
@@ -12921,7 +12922,7 @@ impl<'b> CudaLaunchInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CudaLaunchInfoNVBuilder<'b> {
+impl ops::Deref for CudaLaunchInfoNVBuilder<'_> {
     type Target = CudaLaunchInfoNV;
 
     #[inline]
@@ -12930,14 +12931,14 @@ impl<'b> ops::Deref for CudaLaunchInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CudaLaunchInfoNVBuilder<'b> {
+impl ops::DerefMut for CudaLaunchInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CudaLaunchInfoNVBuilder<'b> {
+unsafe impl Cast for CudaLaunchInfoNVBuilder<'_> {
     type Target = CudaLaunchInfoNV;
 
     #[inline]
@@ -12981,7 +12982,7 @@ impl<'b> CudaModuleCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for CudaModuleCreateInfoNVBuilder<'b> {
+impl ops::Deref for CudaModuleCreateInfoNVBuilder<'_> {
     type Target = CudaModuleCreateInfoNV;
 
     #[inline]
@@ -12990,14 +12991,14 @@ impl<'b> ops::Deref for CudaModuleCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for CudaModuleCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for CudaModuleCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for CudaModuleCreateInfoNVBuilder<'b> {
+unsafe impl Cast for CudaModuleCreateInfoNVBuilder<'_> {
     type Target = CudaModuleCreateInfoNV;
 
     #[inline]
@@ -13060,7 +13061,7 @@ impl<'b> D3D12FenceSubmitInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for D3D12FenceSubmitInfoKHRBuilder<'b> {
+impl ops::Deref for D3D12FenceSubmitInfoKHRBuilder<'_> {
     type Target = D3D12FenceSubmitInfoKHR;
 
     #[inline]
@@ -13069,14 +13070,14 @@ impl<'b> ops::Deref for D3D12FenceSubmitInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for D3D12FenceSubmitInfoKHRBuilder<'b> {
+impl ops::DerefMut for D3D12FenceSubmitInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for D3D12FenceSubmitInfoKHRBuilder<'b> {
+unsafe impl Cast for D3D12FenceSubmitInfoKHRBuilder<'_> {
     type Target = D3D12FenceSubmitInfoKHR;
 
     #[inline]
@@ -13119,7 +13120,7 @@ impl<'b> DataGraphPipelineCompilerControlCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DataGraphPipelineCompilerControlCreateInfoARMBuilder<'b> {
+impl ops::Deref for DataGraphPipelineCompilerControlCreateInfoARMBuilder<'_> {
     type Target = DataGraphPipelineCompilerControlCreateInfoARM;
 
     #[inline]
@@ -13128,14 +13129,14 @@ impl<'b> ops::Deref for DataGraphPipelineCompilerControlCreateInfoARMBuilder<'b>
     }
 }
 
-impl<'b> ops::DerefMut for DataGraphPipelineCompilerControlCreateInfoARMBuilder<'b> {
+impl ops::DerefMut for DataGraphPipelineCompilerControlCreateInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DataGraphPipelineCompilerControlCreateInfoARMBuilder<'b> {
+unsafe impl Cast for DataGraphPipelineCompilerControlCreateInfoARMBuilder<'_> {
     type Target = DataGraphPipelineCompilerControlCreateInfoARM;
 
     #[inline]
@@ -13201,7 +13202,7 @@ impl<'b> DataGraphPipelineConstantARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DataGraphPipelineConstantARMBuilder<'b> {
+impl ops::Deref for DataGraphPipelineConstantARMBuilder<'_> {
     type Target = DataGraphPipelineConstantARM;
 
     #[inline]
@@ -13210,14 +13211,14 @@ impl<'b> ops::Deref for DataGraphPipelineConstantARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DataGraphPipelineConstantARMBuilder<'b> {
+impl ops::DerefMut for DataGraphPipelineConstantARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DataGraphPipelineConstantARMBuilder<'b> {
+unsafe impl Cast for DataGraphPipelineConstantARMBuilder<'_> {
     type Target = DataGraphPipelineConstantARM;
 
     #[inline]
@@ -13366,7 +13367,7 @@ impl<'b> DataGraphPipelineCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DataGraphPipelineCreateInfoARMBuilder<'b> {
+impl ops::Deref for DataGraphPipelineCreateInfoARMBuilder<'_> {
     type Target = DataGraphPipelineCreateInfoARM;
 
     #[inline]
@@ -13375,14 +13376,14 @@ impl<'b> ops::Deref for DataGraphPipelineCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DataGraphPipelineCreateInfoARMBuilder<'b> {
+impl ops::DerefMut for DataGraphPipelineCreateInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DataGraphPipelineCreateInfoARMBuilder<'b> {
+unsafe impl Cast for DataGraphPipelineCreateInfoARMBuilder<'_> {
     type Target = DataGraphPipelineCreateInfoARM;
 
     #[inline]
@@ -13484,7 +13485,7 @@ impl<'b> DataGraphPipelineIdentifierCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DataGraphPipelineIdentifierCreateInfoARMBuilder<'b> {
+impl ops::Deref for DataGraphPipelineIdentifierCreateInfoARMBuilder<'_> {
     type Target = DataGraphPipelineIdentifierCreateInfoARM;
 
     #[inline]
@@ -13493,14 +13494,14 @@ impl<'b> ops::Deref for DataGraphPipelineIdentifierCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DataGraphPipelineIdentifierCreateInfoARMBuilder<'b> {
+impl ops::DerefMut for DataGraphPipelineIdentifierCreateInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DataGraphPipelineIdentifierCreateInfoARMBuilder<'b> {
+unsafe impl Cast for DataGraphPipelineIdentifierCreateInfoARMBuilder<'_> {
     type Target = DataGraphPipelineIdentifierCreateInfoARM;
 
     #[inline]
@@ -13620,7 +13621,7 @@ impl<'b> DataGraphPipelinePropertyQueryResultARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DataGraphPipelinePropertyQueryResultARMBuilder<'b> {
+impl ops::Deref for DataGraphPipelinePropertyQueryResultARMBuilder<'_> {
     type Target = DataGraphPipelinePropertyQueryResultARM;
 
     #[inline]
@@ -13629,14 +13630,14 @@ impl<'b> ops::Deref for DataGraphPipelinePropertyQueryResultARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DataGraphPipelinePropertyQueryResultARMBuilder<'b> {
+impl ops::DerefMut for DataGraphPipelinePropertyQueryResultARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DataGraphPipelinePropertyQueryResultARMBuilder<'b> {
+unsafe impl Cast for DataGraphPipelinePropertyQueryResultARMBuilder<'_> {
     type Target = DataGraphPipelinePropertyQueryResultARM;
 
     #[inline]
@@ -13704,7 +13705,7 @@ impl<'b> DataGraphPipelineResourceInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DataGraphPipelineResourceInfoARMBuilder<'b> {
+impl ops::Deref for DataGraphPipelineResourceInfoARMBuilder<'_> {
     type Target = DataGraphPipelineResourceInfoARM;
 
     #[inline]
@@ -13713,14 +13714,14 @@ impl<'b> ops::Deref for DataGraphPipelineResourceInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DataGraphPipelineResourceInfoARMBuilder<'b> {
+impl ops::DerefMut for DataGraphPipelineResourceInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DataGraphPipelineResourceInfoARMBuilder<'b> {
+unsafe impl Cast for DataGraphPipelineResourceInfoARMBuilder<'_> {
     type Target = DataGraphPipelineResourceInfoARM;
 
     #[inline]
@@ -14072,7 +14073,7 @@ impl<'b> DataGraphPipelineShaderModuleCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DataGraphPipelineShaderModuleCreateInfoARMBuilder<'b> {
+impl ops::Deref for DataGraphPipelineShaderModuleCreateInfoARMBuilder<'_> {
     type Target = DataGraphPipelineShaderModuleCreateInfoARM;
 
     #[inline]
@@ -14081,14 +14082,14 @@ impl<'b> ops::Deref for DataGraphPipelineShaderModuleCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DataGraphPipelineShaderModuleCreateInfoARMBuilder<'b> {
+impl ops::DerefMut for DataGraphPipelineShaderModuleCreateInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DataGraphPipelineShaderModuleCreateInfoARMBuilder<'b> {
+unsafe impl Cast for DataGraphPipelineShaderModuleCreateInfoARMBuilder<'_> {
     type Target = DataGraphPipelineShaderModuleCreateInfoARM;
 
     #[inline]
@@ -14135,7 +14136,7 @@ impl<'b> DataGraphProcessingEngineCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DataGraphProcessingEngineCreateInfoARMBuilder<'b> {
+impl ops::Deref for DataGraphProcessingEngineCreateInfoARMBuilder<'_> {
     type Target = DataGraphProcessingEngineCreateInfoARM;
 
     #[inline]
@@ -14144,14 +14145,14 @@ impl<'b> ops::Deref for DataGraphProcessingEngineCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DataGraphProcessingEngineCreateInfoARMBuilder<'b> {
+impl ops::DerefMut for DataGraphProcessingEngineCreateInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DataGraphProcessingEngineCreateInfoARMBuilder<'b> {
+unsafe impl Cast for DataGraphProcessingEngineCreateInfoARMBuilder<'_> {
     type Target = DataGraphProcessingEngineCreateInfoARM;
 
     #[inline]
@@ -14200,7 +14201,7 @@ impl<'b> DebugMarkerMarkerInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DebugMarkerMarkerInfoEXTBuilder<'b> {
+impl ops::Deref for DebugMarkerMarkerInfoEXTBuilder<'_> {
     type Target = DebugMarkerMarkerInfoEXT;
 
     #[inline]
@@ -14209,14 +14210,14 @@ impl<'b> ops::Deref for DebugMarkerMarkerInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DebugMarkerMarkerInfoEXTBuilder<'b> {
+impl ops::DerefMut for DebugMarkerMarkerInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DebugMarkerMarkerInfoEXTBuilder<'b> {
+unsafe impl Cast for DebugMarkerMarkerInfoEXTBuilder<'_> {
     type Target = DebugMarkerMarkerInfoEXT;
 
     #[inline]
@@ -14271,7 +14272,7 @@ impl<'b> DebugMarkerObjectNameInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DebugMarkerObjectNameInfoEXTBuilder<'b> {
+impl ops::Deref for DebugMarkerObjectNameInfoEXTBuilder<'_> {
     type Target = DebugMarkerObjectNameInfoEXT;
 
     #[inline]
@@ -14280,14 +14281,14 @@ impl<'b> ops::Deref for DebugMarkerObjectNameInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DebugMarkerObjectNameInfoEXTBuilder<'b> {
+impl ops::DerefMut for DebugMarkerObjectNameInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DebugMarkerObjectNameInfoEXTBuilder<'b> {
+unsafe impl Cast for DebugMarkerObjectNameInfoEXTBuilder<'_> {
     type Target = DebugMarkerObjectNameInfoEXT;
 
     #[inline]
@@ -14349,7 +14350,7 @@ impl<'b> DebugMarkerObjectTagInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DebugMarkerObjectTagInfoEXTBuilder<'b> {
+impl ops::Deref for DebugMarkerObjectTagInfoEXTBuilder<'_> {
     type Target = DebugMarkerObjectTagInfoEXT;
 
     #[inline]
@@ -14358,14 +14359,14 @@ impl<'b> ops::Deref for DebugMarkerObjectTagInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DebugMarkerObjectTagInfoEXTBuilder<'b> {
+impl ops::DerefMut for DebugMarkerObjectTagInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DebugMarkerObjectTagInfoEXTBuilder<'b> {
+unsafe impl Cast for DebugMarkerObjectTagInfoEXTBuilder<'_> {
     type Target = DebugMarkerObjectTagInfoEXT;
 
     #[inline]
@@ -14420,7 +14421,7 @@ impl<'b> DebugReportCallbackCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DebugReportCallbackCreateInfoEXTBuilder<'b> {
+impl ops::Deref for DebugReportCallbackCreateInfoEXTBuilder<'_> {
     type Target = DebugReportCallbackCreateInfoEXT;
 
     #[inline]
@@ -14429,14 +14430,14 @@ impl<'b> ops::Deref for DebugReportCallbackCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DebugReportCallbackCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for DebugReportCallbackCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DebugReportCallbackCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for DebugReportCallbackCreateInfoEXTBuilder<'_> {
     type Target = DebugReportCallbackCreateInfoEXT;
 
     #[inline]
@@ -14485,7 +14486,7 @@ impl<'b> DebugUtilsLabelEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DebugUtilsLabelEXTBuilder<'b> {
+impl ops::Deref for DebugUtilsLabelEXTBuilder<'_> {
     type Target = DebugUtilsLabelEXT;
 
     #[inline]
@@ -14494,14 +14495,14 @@ impl<'b> ops::Deref for DebugUtilsLabelEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DebugUtilsLabelEXTBuilder<'b> {
+impl ops::DerefMut for DebugUtilsLabelEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DebugUtilsLabelEXTBuilder<'b> {
+unsafe impl Cast for DebugUtilsLabelEXTBuilder<'_> {
     type Target = DebugUtilsLabelEXT;
 
     #[inline]
@@ -14605,7 +14606,7 @@ impl<'b> DebugUtilsMessengerCallbackDataEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DebugUtilsMessengerCallbackDataEXTBuilder<'b> {
+impl ops::Deref for DebugUtilsMessengerCallbackDataEXTBuilder<'_> {
     type Target = DebugUtilsMessengerCallbackDataEXT;
 
     #[inline]
@@ -14614,14 +14615,14 @@ impl<'b> ops::Deref for DebugUtilsMessengerCallbackDataEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DebugUtilsMessengerCallbackDataEXTBuilder<'b> {
+impl ops::DerefMut for DebugUtilsMessengerCallbackDataEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DebugUtilsMessengerCallbackDataEXTBuilder<'b> {
+unsafe impl Cast for DebugUtilsMessengerCallbackDataEXTBuilder<'_> {
     type Target = DebugUtilsMessengerCallbackDataEXT;
 
     #[inline]
@@ -14688,7 +14689,7 @@ impl<'b> DebugUtilsMessengerCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DebugUtilsMessengerCreateInfoEXTBuilder<'b> {
+impl ops::Deref for DebugUtilsMessengerCreateInfoEXTBuilder<'_> {
     type Target = DebugUtilsMessengerCreateInfoEXT;
 
     #[inline]
@@ -14697,14 +14698,14 @@ impl<'b> ops::Deref for DebugUtilsMessengerCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DebugUtilsMessengerCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for DebugUtilsMessengerCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DebugUtilsMessengerCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for DebugUtilsMessengerCreateInfoEXTBuilder<'_> {
     type Target = DebugUtilsMessengerCreateInfoEXT;
 
     #[inline]
@@ -14759,7 +14760,7 @@ impl<'b> DebugUtilsObjectNameInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DebugUtilsObjectNameInfoEXTBuilder<'b> {
+impl ops::Deref for DebugUtilsObjectNameInfoEXTBuilder<'_> {
     type Target = DebugUtilsObjectNameInfoEXT;
 
     #[inline]
@@ -14768,14 +14769,14 @@ impl<'b> ops::Deref for DebugUtilsObjectNameInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DebugUtilsObjectNameInfoEXTBuilder<'b> {
+impl ops::DerefMut for DebugUtilsObjectNameInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DebugUtilsObjectNameInfoEXTBuilder<'b> {
+unsafe impl Cast for DebugUtilsObjectNameInfoEXTBuilder<'_> {
     type Target = DebugUtilsObjectNameInfoEXT;
 
     #[inline]
@@ -14837,7 +14838,7 @@ impl<'b> DebugUtilsObjectTagInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DebugUtilsObjectTagInfoEXTBuilder<'b> {
+impl ops::Deref for DebugUtilsObjectTagInfoEXTBuilder<'_> {
     type Target = DebugUtilsObjectTagInfoEXT;
 
     #[inline]
@@ -14846,14 +14847,14 @@ impl<'b> ops::Deref for DebugUtilsObjectTagInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DebugUtilsObjectTagInfoEXTBuilder<'b> {
+impl ops::DerefMut for DebugUtilsObjectTagInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DebugUtilsObjectTagInfoEXTBuilder<'b> {
+unsafe impl Cast for DebugUtilsObjectTagInfoEXTBuilder<'_> {
     type Target = DebugUtilsObjectTagInfoEXT;
 
     #[inline]
@@ -15205,7 +15206,7 @@ impl<'b> DependencyInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DependencyInfoBuilder<'b> {
+impl ops::Deref for DependencyInfoBuilder<'_> {
     type Target = DependencyInfo;
 
     #[inline]
@@ -15214,14 +15215,14 @@ impl<'b> ops::Deref for DependencyInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DependencyInfoBuilder<'b> {
+impl ops::DerefMut for DependencyInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DependencyInfoBuilder<'b> {
+unsafe impl Cast for DependencyInfoBuilder<'_> {
     type Target = DependencyInfo;
 
     #[inline]
@@ -15289,7 +15290,7 @@ impl<'b> DepthBiasInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DepthBiasInfoEXTBuilder<'b> {
+impl ops::Deref for DepthBiasInfoEXTBuilder<'_> {
     type Target = DepthBiasInfoEXT;
 
     #[inline]
@@ -15298,14 +15299,14 @@ impl<'b> ops::Deref for DepthBiasInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DepthBiasInfoEXTBuilder<'b> {
+impl ops::DerefMut for DepthBiasInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DepthBiasInfoEXTBuilder<'b> {
+unsafe impl Cast for DepthBiasInfoEXTBuilder<'_> {
     type Target = DepthBiasInfoEXT;
 
     #[inline]
@@ -15572,7 +15573,7 @@ impl<'b> DescriptorBufferBindingInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DescriptorBufferBindingInfoEXTBuilder<'b> {
+impl ops::Deref for DescriptorBufferBindingInfoEXTBuilder<'_> {
     type Target = DescriptorBufferBindingInfoEXT;
 
     #[inline]
@@ -15581,14 +15582,14 @@ impl<'b> ops::Deref for DescriptorBufferBindingInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DescriptorBufferBindingInfoEXTBuilder<'b> {
+impl ops::DerefMut for DescriptorBufferBindingInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DescriptorBufferBindingInfoEXTBuilder<'b> {
+unsafe impl Cast for DescriptorBufferBindingInfoEXTBuilder<'_> {
     type Target = DescriptorBufferBindingInfoEXT;
 
     #[inline]
@@ -15778,7 +15779,7 @@ impl<'b> DescriptorGetInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DescriptorGetInfoEXTBuilder<'b> {
+impl ops::Deref for DescriptorGetInfoEXTBuilder<'_> {
     type Target = DescriptorGetInfoEXT;
 
     #[inline]
@@ -15787,14 +15788,14 @@ impl<'b> ops::Deref for DescriptorGetInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DescriptorGetInfoEXTBuilder<'b> {
+impl ops::DerefMut for DescriptorGetInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DescriptorGetInfoEXTBuilder<'b> {
+unsafe impl Cast for DescriptorGetInfoEXTBuilder<'_> {
     type Target = DescriptorGetInfoEXT;
 
     #[inline]
@@ -15993,7 +15994,7 @@ impl<'b> DescriptorPoolCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DescriptorPoolCreateInfoBuilder<'b> {
+impl ops::Deref for DescriptorPoolCreateInfoBuilder<'_> {
     type Target = DescriptorPoolCreateInfo;
 
     #[inline]
@@ -16002,14 +16003,14 @@ impl<'b> ops::Deref for DescriptorPoolCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DescriptorPoolCreateInfoBuilder<'b> {
+impl ops::DerefMut for DescriptorPoolCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DescriptorPoolCreateInfoBuilder<'b> {
+unsafe impl Cast for DescriptorPoolCreateInfoBuilder<'_> {
     type Target = DescriptorPoolCreateInfo;
 
     #[inline]
@@ -16197,7 +16198,7 @@ impl<'b> DescriptorSetAllocateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DescriptorSetAllocateInfoBuilder<'b> {
+impl ops::Deref for DescriptorSetAllocateInfoBuilder<'_> {
     type Target = DescriptorSetAllocateInfo;
 
     #[inline]
@@ -16206,14 +16207,14 @@ impl<'b> ops::Deref for DescriptorSetAllocateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DescriptorSetAllocateInfoBuilder<'b> {
+impl ops::DerefMut for DescriptorSetAllocateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DescriptorSetAllocateInfoBuilder<'b> {
+unsafe impl Cast for DescriptorSetAllocateInfoBuilder<'_> {
     type Target = DescriptorSetAllocateInfo;
 
     #[inline]
@@ -16345,7 +16346,7 @@ impl<'b> DescriptorSetLayoutBindingBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DescriptorSetLayoutBindingBuilder<'b> {
+impl ops::Deref for DescriptorSetLayoutBindingBuilder<'_> {
     type Target = DescriptorSetLayoutBinding;
 
     #[inline]
@@ -16354,14 +16355,14 @@ impl<'b> ops::Deref for DescriptorSetLayoutBindingBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DescriptorSetLayoutBindingBuilder<'b> {
+impl ops::DerefMut for DescriptorSetLayoutBindingBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DescriptorSetLayoutBindingBuilder<'b> {
+unsafe impl Cast for DescriptorSetLayoutBindingBuilder<'_> {
     type Target = DescriptorSetLayoutBinding;
 
     #[inline]
@@ -16405,7 +16406,7 @@ impl<'b> DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'b> {
+impl ops::Deref for DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'_> {
     type Target = DescriptorSetLayoutBindingFlagsCreateInfo;
 
     #[inline]
@@ -16414,14 +16415,14 @@ impl<'b> ops::Deref for DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'b> {
+impl ops::DerefMut for DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'b> {
+unsafe impl Cast for DescriptorSetLayoutBindingFlagsCreateInfoBuilder<'_> {
     type Target = DescriptorSetLayoutBindingFlagsCreateInfo;
 
     #[inline]
@@ -16488,7 +16489,7 @@ impl<'b> DescriptorSetLayoutCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DescriptorSetLayoutCreateInfoBuilder<'b> {
+impl ops::Deref for DescriptorSetLayoutCreateInfoBuilder<'_> {
     type Target = DescriptorSetLayoutCreateInfo;
 
     #[inline]
@@ -16497,14 +16498,14 @@ impl<'b> ops::Deref for DescriptorSetLayoutCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DescriptorSetLayoutCreateInfoBuilder<'b> {
+impl ops::DerefMut for DescriptorSetLayoutCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DescriptorSetLayoutCreateInfoBuilder<'b> {
+unsafe impl Cast for DescriptorSetLayoutCreateInfoBuilder<'_> {
     type Target = DescriptorSetLayoutCreateInfo;
 
     #[inline]
@@ -16627,7 +16628,7 @@ impl<'b> DescriptorSetLayoutSupportBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DescriptorSetLayoutSupportBuilder<'b> {
+impl ops::Deref for DescriptorSetLayoutSupportBuilder<'_> {
     type Target = DescriptorSetLayoutSupport;
 
     #[inline]
@@ -16636,14 +16637,14 @@ impl<'b> ops::Deref for DescriptorSetLayoutSupportBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DescriptorSetLayoutSupportBuilder<'b> {
+impl ops::DerefMut for DescriptorSetLayoutSupportBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DescriptorSetLayoutSupportBuilder<'b> {
+unsafe impl Cast for DescriptorSetLayoutSupportBuilder<'_> {
     type Target = DescriptorSetLayoutSupport;
 
     #[inline]
@@ -16687,7 +16688,7 @@ impl<'b> DescriptorSetVariableDescriptorCountAllocateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DescriptorSetVariableDescriptorCountAllocateInfoBuilder<'b> {
+impl ops::Deref for DescriptorSetVariableDescriptorCountAllocateInfoBuilder<'_> {
     type Target = DescriptorSetVariableDescriptorCountAllocateInfo;
 
     #[inline]
@@ -16696,14 +16697,14 @@ impl<'b> ops::Deref for DescriptorSetVariableDescriptorCountAllocateInfoBuilder<
     }
 }
 
-impl<'b> ops::DerefMut for DescriptorSetVariableDescriptorCountAllocateInfoBuilder<'b> {
+impl ops::DerefMut for DescriptorSetVariableDescriptorCountAllocateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DescriptorSetVariableDescriptorCountAllocateInfoBuilder<'b> {
+unsafe impl Cast for DescriptorSetVariableDescriptorCountAllocateInfoBuilder<'_> {
     type Target = DescriptorSetVariableDescriptorCountAllocateInfo;
 
     #[inline]
@@ -16844,7 +16845,7 @@ impl<'b> DescriptorUpdateTemplateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DescriptorUpdateTemplateCreateInfoBuilder<'b> {
+impl ops::Deref for DescriptorUpdateTemplateCreateInfoBuilder<'_> {
     type Target = DescriptorUpdateTemplateCreateInfo;
 
     #[inline]
@@ -16853,14 +16854,14 @@ impl<'b> ops::Deref for DescriptorUpdateTemplateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DescriptorUpdateTemplateCreateInfoBuilder<'b> {
+impl ops::DerefMut for DescriptorUpdateTemplateCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DescriptorUpdateTemplateCreateInfoBuilder<'b> {
+unsafe impl Cast for DescriptorUpdateTemplateCreateInfoBuilder<'_> {
     type Target = DescriptorUpdateTemplateCreateInfo;
 
     #[inline]
@@ -17067,7 +17068,7 @@ impl<'b> DeviceBufferMemoryRequirementsBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DeviceBufferMemoryRequirementsBuilder<'b> {
+impl ops::Deref for DeviceBufferMemoryRequirementsBuilder<'_> {
     type Target = DeviceBufferMemoryRequirements;
 
     #[inline]
@@ -17076,14 +17077,14 @@ impl<'b> ops::Deref for DeviceBufferMemoryRequirementsBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DeviceBufferMemoryRequirementsBuilder<'b> {
+impl ops::DerefMut for DeviceBufferMemoryRequirementsBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DeviceBufferMemoryRequirementsBuilder<'b> {
+unsafe impl Cast for DeviceBufferMemoryRequirementsBuilder<'_> {
     type Target = DeviceBufferMemoryRequirements;
 
     #[inline]
@@ -17421,7 +17422,7 @@ impl<'b> DeviceCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DeviceCreateInfoBuilder<'b> {
+impl ops::Deref for DeviceCreateInfoBuilder<'_> {
     type Target = DeviceCreateInfo;
 
     #[inline]
@@ -17430,14 +17431,14 @@ impl<'b> ops::Deref for DeviceCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DeviceCreateInfoBuilder<'b> {
+impl ops::DerefMut for DeviceCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DeviceCreateInfoBuilder<'b> {
+unsafe impl Cast for DeviceCreateInfoBuilder<'_> {
     type Target = DeviceCreateInfo;
 
     #[inline]
@@ -17492,7 +17493,7 @@ impl<'b> DeviceDeviceMemoryReportCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DeviceDeviceMemoryReportCreateInfoEXTBuilder<'b> {
+impl ops::Deref for DeviceDeviceMemoryReportCreateInfoEXTBuilder<'_> {
     type Target = DeviceDeviceMemoryReportCreateInfoEXT;
 
     #[inline]
@@ -17501,14 +17502,14 @@ impl<'b> ops::Deref for DeviceDeviceMemoryReportCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DeviceDeviceMemoryReportCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for DeviceDeviceMemoryReportCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DeviceDeviceMemoryReportCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for DeviceDeviceMemoryReportCreateInfoEXTBuilder<'_> {
     type Target = DeviceDeviceMemoryReportCreateInfoEXT;
 
     #[inline]
@@ -17834,7 +17835,7 @@ impl<'b> DeviceFaultInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DeviceFaultInfoEXTBuilder<'b> {
+impl ops::Deref for DeviceFaultInfoEXTBuilder<'_> {
     type Target = DeviceFaultInfoEXT;
 
     #[inline]
@@ -17843,14 +17844,14 @@ impl<'b> ops::Deref for DeviceFaultInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DeviceFaultInfoEXTBuilder<'b> {
+impl ops::DerefMut for DeviceFaultInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DeviceFaultInfoEXTBuilder<'b> {
+unsafe impl Cast for DeviceFaultInfoEXTBuilder<'_> {
     type Target = DeviceFaultInfoEXT;
 
     #[inline]
@@ -18213,7 +18214,7 @@ impl<'b> DeviceGroupDeviceCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DeviceGroupDeviceCreateInfoBuilder<'b> {
+impl ops::Deref for DeviceGroupDeviceCreateInfoBuilder<'_> {
     type Target = DeviceGroupDeviceCreateInfo;
 
     #[inline]
@@ -18222,14 +18223,14 @@ impl<'b> ops::Deref for DeviceGroupDeviceCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DeviceGroupDeviceCreateInfoBuilder<'b> {
+impl ops::DerefMut for DeviceGroupDeviceCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DeviceGroupDeviceCreateInfoBuilder<'b> {
+unsafe impl Cast for DeviceGroupDeviceCreateInfoBuilder<'_> {
     type Target = DeviceGroupDeviceCreateInfo;
 
     #[inline]
@@ -18343,7 +18344,7 @@ impl<'b> DeviceGroupPresentInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DeviceGroupPresentInfoKHRBuilder<'b> {
+impl ops::Deref for DeviceGroupPresentInfoKHRBuilder<'_> {
     type Target = DeviceGroupPresentInfoKHR;
 
     #[inline]
@@ -18352,14 +18353,14 @@ impl<'b> ops::Deref for DeviceGroupPresentInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DeviceGroupPresentInfoKHRBuilder<'b> {
+impl ops::DerefMut for DeviceGroupPresentInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DeviceGroupPresentInfoKHRBuilder<'b> {
+unsafe impl Cast for DeviceGroupPresentInfoKHRBuilder<'_> {
     type Target = DeviceGroupPresentInfoKHR;
 
     #[inline]
@@ -18412,7 +18413,7 @@ impl<'b> DeviceGroupRenderPassBeginInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DeviceGroupRenderPassBeginInfoBuilder<'b> {
+impl ops::Deref for DeviceGroupRenderPassBeginInfoBuilder<'_> {
     type Target = DeviceGroupRenderPassBeginInfo;
 
     #[inline]
@@ -18421,14 +18422,14 @@ impl<'b> ops::Deref for DeviceGroupRenderPassBeginInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DeviceGroupRenderPassBeginInfoBuilder<'b> {
+impl ops::DerefMut for DeviceGroupRenderPassBeginInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DeviceGroupRenderPassBeginInfoBuilder<'b> {
+unsafe impl Cast for DeviceGroupRenderPassBeginInfoBuilder<'_> {
     type Target = DeviceGroupRenderPassBeginInfo;
 
     #[inline]
@@ -18492,7 +18493,7 @@ impl<'b> DeviceGroupSubmitInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DeviceGroupSubmitInfoBuilder<'b> {
+impl ops::Deref for DeviceGroupSubmitInfoBuilder<'_> {
     type Target = DeviceGroupSubmitInfo;
 
     #[inline]
@@ -18501,14 +18502,14 @@ impl<'b> ops::Deref for DeviceGroupSubmitInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DeviceGroupSubmitInfoBuilder<'b> {
+impl ops::DerefMut for DeviceGroupSubmitInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DeviceGroupSubmitInfoBuilder<'b> {
+unsafe impl Cast for DeviceGroupSubmitInfoBuilder<'_> {
     type Target = DeviceGroupSubmitInfo;
 
     #[inline]
@@ -18615,7 +18616,7 @@ impl<'b> DeviceImageMemoryRequirementsBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DeviceImageMemoryRequirementsBuilder<'b> {
+impl ops::Deref for DeviceImageMemoryRequirementsBuilder<'_> {
     type Target = DeviceImageMemoryRequirements;
 
     #[inline]
@@ -18624,14 +18625,14 @@ impl<'b> ops::Deref for DeviceImageMemoryRequirementsBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DeviceImageMemoryRequirementsBuilder<'b> {
+impl ops::DerefMut for DeviceImageMemoryRequirementsBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DeviceImageMemoryRequirementsBuilder<'b> {
+unsafe impl Cast for DeviceImageMemoryRequirementsBuilder<'_> {
     type Target = DeviceImageMemoryRequirements;
 
     #[inline]
@@ -18680,7 +18681,7 @@ impl<'b> DeviceImageSubresourceInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DeviceImageSubresourceInfoBuilder<'b> {
+impl ops::Deref for DeviceImageSubresourceInfoBuilder<'_> {
     type Target = DeviceImageSubresourceInfo;
 
     #[inline]
@@ -18689,14 +18690,14 @@ impl<'b> ops::Deref for DeviceImageSubresourceInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DeviceImageSubresourceInfoBuilder<'b> {
+impl ops::DerefMut for DeviceImageSubresourceInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DeviceImageSubresourceInfoBuilder<'b> {
+unsafe impl Cast for DeviceImageSubresourceInfoBuilder<'_> {
     type Target = DeviceImageSubresourceInfo;
 
     #[inline]
@@ -19095,7 +19096,7 @@ impl<'b> DeviceQueueCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DeviceQueueCreateInfoBuilder<'b> {
+impl ops::Deref for DeviceQueueCreateInfoBuilder<'_> {
     type Target = DeviceQueueCreateInfo;
 
     #[inline]
@@ -19104,14 +19105,14 @@ impl<'b> ops::Deref for DeviceQueueCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DeviceQueueCreateInfoBuilder<'b> {
+impl ops::DerefMut for DeviceQueueCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DeviceQueueCreateInfoBuilder<'b> {
+unsafe impl Cast for DeviceQueueCreateInfoBuilder<'_> {
     type Target = DeviceQueueCreateInfo;
 
     #[inline]
@@ -19401,7 +19402,7 @@ impl<'b> DeviceTensorMemoryRequirementsARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DeviceTensorMemoryRequirementsARMBuilder<'b> {
+impl ops::Deref for DeviceTensorMemoryRequirementsARMBuilder<'_> {
     type Target = DeviceTensorMemoryRequirementsARM;
 
     #[inline]
@@ -19410,14 +19411,14 @@ impl<'b> ops::Deref for DeviceTensorMemoryRequirementsARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DeviceTensorMemoryRequirementsARMBuilder<'b> {
+impl ops::DerefMut for DeviceTensorMemoryRequirementsARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DeviceTensorMemoryRequirementsARMBuilder<'b> {
+unsafe impl Cast for DeviceTensorMemoryRequirementsARMBuilder<'_> {
     type Target = DeviceTensorMemoryRequirementsARM;
 
     #[inline]
@@ -19537,7 +19538,7 @@ impl<'b> DirectDriverLoadingListLUNARGBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DirectDriverLoadingListLUNARGBuilder<'b> {
+impl ops::Deref for DirectDriverLoadingListLUNARGBuilder<'_> {
     type Target = DirectDriverLoadingListLUNARG;
 
     #[inline]
@@ -19546,14 +19547,14 @@ impl<'b> ops::Deref for DirectDriverLoadingListLUNARGBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DirectDriverLoadingListLUNARGBuilder<'b> {
+impl ops::DerefMut for DirectDriverLoadingListLUNARGBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DirectDriverLoadingListLUNARGBuilder<'b> {
+unsafe impl Cast for DirectDriverLoadingListLUNARGBuilder<'_> {
     type Target = DirectDriverLoadingListLUNARG;
 
     #[inline]
@@ -19608,7 +19609,7 @@ impl<'b> DirectFBSurfaceCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DirectFBSurfaceCreateInfoEXTBuilder<'b> {
+impl ops::Deref for DirectFBSurfaceCreateInfoEXTBuilder<'_> {
     type Target = DirectFBSurfaceCreateInfoEXT;
 
     #[inline]
@@ -19617,14 +19618,14 @@ impl<'b> ops::Deref for DirectFBSurfaceCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DirectFBSurfaceCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for DirectFBSurfaceCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DirectFBSurfaceCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for DirectFBSurfaceCreateInfoEXTBuilder<'_> {
     type Target = DirectFBSurfaceCreateInfoEXT;
 
     #[inline]
@@ -20137,7 +20138,7 @@ impl<'b> DisplayModeProperties2KHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DisplayModeProperties2KHRBuilder<'b> {
+impl ops::Deref for DisplayModeProperties2KHRBuilder<'_> {
     type Target = DisplayModeProperties2KHR;
 
     #[inline]
@@ -20146,14 +20147,14 @@ impl<'b> ops::Deref for DisplayModeProperties2KHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DisplayModeProperties2KHRBuilder<'b> {
+impl ops::DerefMut for DisplayModeProperties2KHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DisplayModeProperties2KHRBuilder<'b> {
+unsafe impl Cast for DisplayModeProperties2KHRBuilder<'_> {
     type Target = DisplayModeProperties2KHR;
 
     #[inline]
@@ -20863,7 +20864,7 @@ impl<'b> DisplayProperties2KHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DisplayProperties2KHRBuilder<'b> {
+impl ops::Deref for DisplayProperties2KHRBuilder<'_> {
     type Target = DisplayProperties2KHR;
 
     #[inline]
@@ -20872,14 +20873,14 @@ impl<'b> ops::Deref for DisplayProperties2KHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DisplayProperties2KHRBuilder<'b> {
+impl ops::DerefMut for DisplayProperties2KHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DisplayProperties2KHRBuilder<'b> {
+unsafe impl Cast for DisplayProperties2KHRBuilder<'_> {
     type Target = DisplayProperties2KHR;
 
     #[inline]
@@ -20964,7 +20965,7 @@ impl<'b> DisplayPropertiesKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DisplayPropertiesKHRBuilder<'b> {
+impl ops::Deref for DisplayPropertiesKHRBuilder<'_> {
     type Target = DisplayPropertiesKHR;
 
     #[inline]
@@ -20973,14 +20974,14 @@ impl<'b> ops::Deref for DisplayPropertiesKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DisplayPropertiesKHRBuilder<'b> {
+impl ops::DerefMut for DisplayPropertiesKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DisplayPropertiesKHRBuilder<'b> {
+unsafe impl Cast for DisplayPropertiesKHRBuilder<'_> {
     type Target = DisplayPropertiesKHR;
 
     #[inline]
@@ -21078,7 +21079,7 @@ impl<'b> DisplaySurfaceCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DisplaySurfaceCreateInfoKHRBuilder<'b> {
+impl ops::Deref for DisplaySurfaceCreateInfoKHRBuilder<'_> {
     type Target = DisplaySurfaceCreateInfoKHR;
 
     #[inline]
@@ -21087,14 +21088,14 @@ impl<'b> ops::Deref for DisplaySurfaceCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DisplaySurfaceCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for DisplaySurfaceCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DisplaySurfaceCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for DisplaySurfaceCreateInfoKHRBuilder<'_> {
     type Target = DisplaySurfaceCreateInfoKHR;
 
     #[inline]
@@ -21714,7 +21715,7 @@ impl<'b> DrmFormatModifierPropertiesList2EXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DrmFormatModifierPropertiesList2EXTBuilder<'b> {
+impl ops::Deref for DrmFormatModifierPropertiesList2EXTBuilder<'_> {
     type Target = DrmFormatModifierPropertiesList2EXT;
 
     #[inline]
@@ -21723,14 +21724,14 @@ impl<'b> ops::Deref for DrmFormatModifierPropertiesList2EXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DrmFormatModifierPropertiesList2EXTBuilder<'b> {
+impl ops::DerefMut for DrmFormatModifierPropertiesList2EXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DrmFormatModifierPropertiesList2EXTBuilder<'b> {
+unsafe impl Cast for DrmFormatModifierPropertiesList2EXTBuilder<'_> {
     type Target = DrmFormatModifierPropertiesList2EXT;
 
     #[inline]
@@ -21784,7 +21785,7 @@ impl<'b> DrmFormatModifierPropertiesListEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for DrmFormatModifierPropertiesListEXTBuilder<'b> {
+impl ops::Deref for DrmFormatModifierPropertiesListEXTBuilder<'_> {
     type Target = DrmFormatModifierPropertiesListEXT;
 
     #[inline]
@@ -21793,14 +21794,14 @@ impl<'b> ops::Deref for DrmFormatModifierPropertiesListEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for DrmFormatModifierPropertiesListEXTBuilder<'b> {
+impl ops::DerefMut for DrmFormatModifierPropertiesListEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for DrmFormatModifierPropertiesListEXTBuilder<'b> {
+unsafe impl Cast for DrmFormatModifierPropertiesListEXTBuilder<'_> {
     type Target = DrmFormatModifierPropertiesListEXT;
 
     #[inline]
@@ -21857,7 +21858,7 @@ impl<'b> EventCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for EventCreateInfoBuilder<'b> {
+impl ops::Deref for EventCreateInfoBuilder<'_> {
     type Target = EventCreateInfo;
 
     #[inline]
@@ -21866,14 +21867,14 @@ impl<'b> ops::Deref for EventCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for EventCreateInfoBuilder<'b> {
+impl ops::DerefMut for EventCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for EventCreateInfoBuilder<'b> {
+unsafe impl Cast for EventCreateInfoBuilder<'_> {
     type Target = EventCreateInfo;
 
     #[inline]
@@ -21973,7 +21974,7 @@ impl<'b> ExecutionGraphPipelineCreateInfoAMDXBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ExecutionGraphPipelineCreateInfoAMDXBuilder<'b> {
+impl ops::Deref for ExecutionGraphPipelineCreateInfoAMDXBuilder<'_> {
     type Target = ExecutionGraphPipelineCreateInfoAMDX;
 
     #[inline]
@@ -21982,14 +21983,14 @@ impl<'b> ops::Deref for ExecutionGraphPipelineCreateInfoAMDXBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ExecutionGraphPipelineCreateInfoAMDXBuilder<'b> {
+impl ops::DerefMut for ExecutionGraphPipelineCreateInfoAMDXBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ExecutionGraphPipelineCreateInfoAMDXBuilder<'b> {
+unsafe impl Cast for ExecutionGraphPipelineCreateInfoAMDXBuilder<'_> {
     type Target = ExecutionGraphPipelineCreateInfoAMDX;
 
     #[inline]
@@ -22230,7 +22231,7 @@ impl<'b> ExportFenceWin32HandleInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ExportFenceWin32HandleInfoKHRBuilder<'b> {
+impl ops::Deref for ExportFenceWin32HandleInfoKHRBuilder<'_> {
     type Target = ExportFenceWin32HandleInfoKHR;
 
     #[inline]
@@ -22239,14 +22240,14 @@ impl<'b> ops::Deref for ExportFenceWin32HandleInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ExportFenceWin32HandleInfoKHRBuilder<'b> {
+impl ops::DerefMut for ExportFenceWin32HandleInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ExportFenceWin32HandleInfoKHRBuilder<'b> {
+unsafe impl Cast for ExportFenceWin32HandleInfoKHRBuilder<'_> {
     type Target = ExportFenceWin32HandleInfoKHR;
 
     #[inline]
@@ -22475,7 +22476,7 @@ impl<'b> ExportMemoryWin32HandleInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ExportMemoryWin32HandleInfoKHRBuilder<'b> {
+impl ops::Deref for ExportMemoryWin32HandleInfoKHRBuilder<'_> {
     type Target = ExportMemoryWin32HandleInfoKHR;
 
     #[inline]
@@ -22484,14 +22485,14 @@ impl<'b> ops::Deref for ExportMemoryWin32HandleInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ExportMemoryWin32HandleInfoKHRBuilder<'b> {
+impl ops::DerefMut for ExportMemoryWin32HandleInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ExportMemoryWin32HandleInfoKHRBuilder<'b> {
+unsafe impl Cast for ExportMemoryWin32HandleInfoKHRBuilder<'_> {
     type Target = ExportMemoryWin32HandleInfoKHR;
 
     #[inline]
@@ -22540,7 +22541,7 @@ impl<'b> ExportMemoryWin32HandleInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ExportMemoryWin32HandleInfoNVBuilder<'b> {
+impl ops::Deref for ExportMemoryWin32HandleInfoNVBuilder<'_> {
     type Target = ExportMemoryWin32HandleInfoNV;
 
     #[inline]
@@ -22549,14 +22550,14 @@ impl<'b> ops::Deref for ExportMemoryWin32HandleInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ExportMemoryWin32HandleInfoNVBuilder<'b> {
+impl ops::DerefMut for ExportMemoryWin32HandleInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ExportMemoryWin32HandleInfoNVBuilder<'b> {
+unsafe impl Cast for ExportMemoryWin32HandleInfoNVBuilder<'_> {
     type Target = ExportMemoryWin32HandleInfoNV;
 
     #[inline]
@@ -22919,7 +22920,7 @@ impl<'b> ExportMetalObjectsInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ExportMetalObjectsInfoEXTBuilder<'b> {
+impl ops::Deref for ExportMetalObjectsInfoEXTBuilder<'_> {
     type Target = ExportMetalObjectsInfoEXT;
 
     #[inline]
@@ -22928,14 +22929,14 @@ impl<'b> ops::Deref for ExportMetalObjectsInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ExportMetalObjectsInfoEXTBuilder<'b> {
+impl ops::DerefMut for ExportMetalObjectsInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ExportMetalObjectsInfoEXTBuilder<'b> {
+unsafe impl Cast for ExportMetalObjectsInfoEXTBuilder<'_> {
     type Target = ExportMetalObjectsInfoEXT;
 
     #[inline]
@@ -23258,7 +23259,7 @@ impl<'b> ExportSemaphoreWin32HandleInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ExportSemaphoreWin32HandleInfoKHRBuilder<'b> {
+impl ops::Deref for ExportSemaphoreWin32HandleInfoKHRBuilder<'_> {
     type Target = ExportSemaphoreWin32HandleInfoKHR;
 
     #[inline]
@@ -23267,14 +23268,14 @@ impl<'b> ops::Deref for ExportSemaphoreWin32HandleInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ExportSemaphoreWin32HandleInfoKHRBuilder<'b> {
+impl ops::DerefMut for ExportSemaphoreWin32HandleInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ExportSemaphoreWin32HandleInfoKHRBuilder<'b> {
+unsafe impl Cast for ExportSemaphoreWin32HandleInfoKHRBuilder<'_> {
     type Target = ExportSemaphoreWin32HandleInfoKHR;
 
     #[inline]
@@ -24621,7 +24622,7 @@ impl<'b> FenceCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for FenceCreateInfoBuilder<'b> {
+impl ops::Deref for FenceCreateInfoBuilder<'_> {
     type Target = FenceCreateInfo;
 
     #[inline]
@@ -24630,14 +24631,14 @@ impl<'b> ops::Deref for FenceCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for FenceCreateInfoBuilder<'b> {
+impl ops::DerefMut for FenceCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for FenceCreateInfoBuilder<'b> {
+unsafe impl Cast for FenceCreateInfoBuilder<'_> {
     type Target = FenceCreateInfo;
 
     #[inline]
@@ -25026,7 +25027,7 @@ impl<'b> FormatProperties2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for FormatProperties2Builder<'b> {
+impl ops::Deref for FormatProperties2Builder<'_> {
     type Target = FormatProperties2;
 
     #[inline]
@@ -25035,14 +25036,14 @@ impl<'b> ops::Deref for FormatProperties2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for FormatProperties2Builder<'b> {
+impl ops::DerefMut for FormatProperties2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for FormatProperties2Builder<'b> {
+unsafe impl Cast for FormatProperties2Builder<'_> {
     type Target = FormatProperties2;
 
     #[inline]
@@ -25167,7 +25168,7 @@ impl<'b> FragmentShadingRateAttachmentInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for FragmentShadingRateAttachmentInfoKHRBuilder<'b> {
+impl ops::Deref for FragmentShadingRateAttachmentInfoKHRBuilder<'_> {
     type Target = FragmentShadingRateAttachmentInfoKHR;
 
     #[inline]
@@ -25176,14 +25177,14 @@ impl<'b> ops::Deref for FragmentShadingRateAttachmentInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for FragmentShadingRateAttachmentInfoKHRBuilder<'b> {
+impl ops::DerefMut for FragmentShadingRateAttachmentInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for FragmentShadingRateAttachmentInfoKHRBuilder<'b> {
+unsafe impl Cast for FragmentShadingRateAttachmentInfoKHRBuilder<'_> {
     type Target = FragmentShadingRateAttachmentInfoKHR;
 
     #[inline]
@@ -25277,7 +25278,7 @@ impl<'b> FrameBoundaryEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for FrameBoundaryEXTBuilder<'b> {
+impl ops::Deref for FrameBoundaryEXTBuilder<'_> {
     type Target = FrameBoundaryEXT;
 
     #[inline]
@@ -25286,14 +25287,14 @@ impl<'b> ops::Deref for FrameBoundaryEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for FrameBoundaryEXTBuilder<'b> {
+impl ops::DerefMut for FrameBoundaryEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for FrameBoundaryEXTBuilder<'b> {
+unsafe impl Cast for FrameBoundaryEXTBuilder<'_> {
     type Target = FrameBoundaryEXT;
 
     #[inline]
@@ -25337,7 +25338,7 @@ impl<'b> FrameBoundaryTensorsARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for FrameBoundaryTensorsARMBuilder<'b> {
+impl ops::Deref for FrameBoundaryTensorsARMBuilder<'_> {
     type Target = FrameBoundaryTensorsARM;
 
     #[inline]
@@ -25346,14 +25347,14 @@ impl<'b> ops::Deref for FrameBoundaryTensorsARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for FrameBoundaryTensorsARMBuilder<'b> {
+impl ops::DerefMut for FrameBoundaryTensorsARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for FrameBoundaryTensorsARMBuilder<'b> {
+unsafe impl Cast for FrameBoundaryTensorsARMBuilder<'_> {
     type Target = FrameBoundaryTensorsARM;
 
     #[inline]
@@ -25427,7 +25428,7 @@ impl<'b> FramebufferAttachmentImageInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for FramebufferAttachmentImageInfoBuilder<'b> {
+impl ops::Deref for FramebufferAttachmentImageInfoBuilder<'_> {
     type Target = FramebufferAttachmentImageInfo;
 
     #[inline]
@@ -25436,14 +25437,14 @@ impl<'b> ops::Deref for FramebufferAttachmentImageInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for FramebufferAttachmentImageInfoBuilder<'b> {
+impl ops::DerefMut for FramebufferAttachmentImageInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for FramebufferAttachmentImageInfoBuilder<'b> {
+unsafe impl Cast for FramebufferAttachmentImageInfoBuilder<'_> {
     type Target = FramebufferAttachmentImageInfo;
 
     #[inline]
@@ -25490,7 +25491,7 @@ impl<'b> FramebufferAttachmentsCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for FramebufferAttachmentsCreateInfoBuilder<'b> {
+impl ops::Deref for FramebufferAttachmentsCreateInfoBuilder<'_> {
     type Target = FramebufferAttachmentsCreateInfo;
 
     #[inline]
@@ -25499,14 +25500,14 @@ impl<'b> ops::Deref for FramebufferAttachmentsCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for FramebufferAttachmentsCreateInfoBuilder<'b> {
+impl ops::DerefMut for FramebufferAttachmentsCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for FramebufferAttachmentsCreateInfoBuilder<'b> {
+unsafe impl Cast for FramebufferAttachmentsCreateInfoBuilder<'_> {
     type Target = FramebufferAttachmentsCreateInfo;
 
     #[inline]
@@ -25593,7 +25594,7 @@ impl<'b> FramebufferCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for FramebufferCreateInfoBuilder<'b> {
+impl ops::Deref for FramebufferCreateInfoBuilder<'_> {
     type Target = FramebufferCreateInfo;
 
     #[inline]
@@ -25602,14 +25603,14 @@ impl<'b> ops::Deref for FramebufferCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for FramebufferCreateInfoBuilder<'b> {
+impl ops::DerefMut for FramebufferCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for FramebufferCreateInfoBuilder<'b> {
+unsafe impl Cast for FramebufferCreateInfoBuilder<'_> {
     type Target = FramebufferCreateInfo;
 
     #[inline]
@@ -25805,7 +25806,7 @@ impl<'b> GeneratedCommandsInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for GeneratedCommandsInfoEXTBuilder<'b> {
+impl ops::Deref for GeneratedCommandsInfoEXTBuilder<'_> {
     type Target = GeneratedCommandsInfoEXT;
 
     #[inline]
@@ -25814,14 +25815,14 @@ impl<'b> ops::Deref for GeneratedCommandsInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for GeneratedCommandsInfoEXTBuilder<'b> {
+impl ops::DerefMut for GeneratedCommandsInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for GeneratedCommandsInfoEXTBuilder<'b> {
+unsafe impl Cast for GeneratedCommandsInfoEXTBuilder<'_> {
     type Target = GeneratedCommandsInfoEXT;
 
     #[inline]
@@ -25934,7 +25935,7 @@ impl<'b> GeneratedCommandsInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for GeneratedCommandsInfoNVBuilder<'b> {
+impl ops::Deref for GeneratedCommandsInfoNVBuilder<'_> {
     type Target = GeneratedCommandsInfoNV;
 
     #[inline]
@@ -25943,14 +25944,14 @@ impl<'b> ops::Deref for GeneratedCommandsInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for GeneratedCommandsInfoNVBuilder<'b> {
+impl ops::DerefMut for GeneratedCommandsInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for GeneratedCommandsInfoNVBuilder<'b> {
+unsafe impl Cast for GeneratedCommandsInfoNVBuilder<'_> {
     type Target = GeneratedCommandsInfoNV;
 
     #[inline]
@@ -26031,7 +26032,7 @@ impl<'b> GeneratedCommandsMemoryRequirementsInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for GeneratedCommandsMemoryRequirementsInfoEXTBuilder<'b> {
+impl ops::Deref for GeneratedCommandsMemoryRequirementsInfoEXTBuilder<'_> {
     type Target = GeneratedCommandsMemoryRequirementsInfoEXT;
 
     #[inline]
@@ -26040,14 +26041,14 @@ impl<'b> ops::Deref for GeneratedCommandsMemoryRequirementsInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for GeneratedCommandsMemoryRequirementsInfoEXTBuilder<'b> {
+impl ops::DerefMut for GeneratedCommandsMemoryRequirementsInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for GeneratedCommandsMemoryRequirementsInfoEXTBuilder<'b> {
+unsafe impl Cast for GeneratedCommandsMemoryRequirementsInfoEXTBuilder<'_> {
     type Target = GeneratedCommandsMemoryRequirementsInfoEXT;
 
     #[inline]
@@ -26228,7 +26229,7 @@ impl<'b> GeneratedCommandsShaderInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for GeneratedCommandsShaderInfoEXTBuilder<'b> {
+impl ops::Deref for GeneratedCommandsShaderInfoEXTBuilder<'_> {
     type Target = GeneratedCommandsShaderInfoEXT;
 
     #[inline]
@@ -26237,14 +26238,14 @@ impl<'b> ops::Deref for GeneratedCommandsShaderInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for GeneratedCommandsShaderInfoEXTBuilder<'b> {
+impl ops::DerefMut for GeneratedCommandsShaderInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for GeneratedCommandsShaderInfoEXTBuilder<'b> {
+unsafe impl Cast for GeneratedCommandsShaderInfoEXTBuilder<'_> {
     type Target = GeneratedCommandsShaderInfoEXT;
 
     #[inline]
@@ -26625,7 +26626,7 @@ impl<'b> GetLatencyMarkerInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for GetLatencyMarkerInfoNVBuilder<'b> {
+impl ops::Deref for GetLatencyMarkerInfoNVBuilder<'_> {
     type Target = GetLatencyMarkerInfoNV;
 
     #[inline]
@@ -26634,14 +26635,14 @@ impl<'b> ops::Deref for GetLatencyMarkerInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for GetLatencyMarkerInfoNVBuilder<'b> {
+impl ops::DerefMut for GetLatencyMarkerInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for GetLatencyMarkerInfoNVBuilder<'b> {
+unsafe impl Cast for GetLatencyMarkerInfoNVBuilder<'_> {
     type Target = GetLatencyMarkerInfoNV;
 
     #[inline]
@@ -26845,7 +26846,7 @@ impl<'b> GraphicsPipelineCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for GraphicsPipelineCreateInfoBuilder<'b> {
+impl ops::Deref for GraphicsPipelineCreateInfoBuilder<'_> {
     type Target = GraphicsPipelineCreateInfo;
 
     #[inline]
@@ -26854,14 +26855,14 @@ impl<'b> ops::Deref for GraphicsPipelineCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for GraphicsPipelineCreateInfoBuilder<'b> {
+impl ops::DerefMut for GraphicsPipelineCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for GraphicsPipelineCreateInfoBuilder<'b> {
+unsafe impl Cast for GraphicsPipelineCreateInfoBuilder<'_> {
     type Target = GraphicsPipelineCreateInfo;
 
     #[inline]
@@ -26973,7 +26974,7 @@ impl<'b> GraphicsPipelineShaderGroupsCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for GraphicsPipelineShaderGroupsCreateInfoNVBuilder<'b> {
+impl ops::Deref for GraphicsPipelineShaderGroupsCreateInfoNVBuilder<'_> {
     type Target = GraphicsPipelineShaderGroupsCreateInfoNV;
 
     #[inline]
@@ -26982,14 +26983,14 @@ impl<'b> ops::Deref for GraphicsPipelineShaderGroupsCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for GraphicsPipelineShaderGroupsCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for GraphicsPipelineShaderGroupsCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for GraphicsPipelineShaderGroupsCreateInfoNVBuilder<'b> {
+unsafe impl Cast for GraphicsPipelineShaderGroupsCreateInfoNVBuilder<'_> {
     type Target = GraphicsPipelineShaderGroupsCreateInfoNV;
 
     #[inline]
@@ -27054,7 +27055,7 @@ impl<'b> GraphicsShaderGroupCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for GraphicsShaderGroupCreateInfoNVBuilder<'b> {
+impl ops::Deref for GraphicsShaderGroupCreateInfoNVBuilder<'_> {
     type Target = GraphicsShaderGroupCreateInfoNV;
 
     #[inline]
@@ -27063,14 +27064,14 @@ impl<'b> ops::Deref for GraphicsShaderGroupCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for GraphicsShaderGroupCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for GraphicsShaderGroupCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for GraphicsShaderGroupCreateInfoNVBuilder<'b> {
+unsafe impl Cast for GraphicsShaderGroupCreateInfoNVBuilder<'_> {
     type Target = GraphicsShaderGroupCreateInfoNV;
 
     #[inline]
@@ -27177,7 +27178,7 @@ impl<'b> HdrMetadataEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for HdrMetadataEXTBuilder<'b> {
+impl ops::Deref for HdrMetadataEXTBuilder<'_> {
     type Target = HdrMetadataEXT;
 
     #[inline]
@@ -27186,14 +27187,14 @@ impl<'b> ops::Deref for HdrMetadataEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for HdrMetadataEXTBuilder<'b> {
+impl ops::DerefMut for HdrMetadataEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for HdrMetadataEXTBuilder<'b> {
+unsafe impl Cast for HdrMetadataEXTBuilder<'_> {
     type Target = HdrMetadataEXT;
 
     #[inline]
@@ -27237,7 +27238,7 @@ impl<'b> HdrVividDynamicMetadataHUAWEIBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for HdrVividDynamicMetadataHUAWEIBuilder<'b> {
+impl ops::Deref for HdrVividDynamicMetadataHUAWEIBuilder<'_> {
     type Target = HdrVividDynamicMetadataHUAWEI;
 
     #[inline]
@@ -27246,14 +27247,14 @@ impl<'b> ops::Deref for HdrVividDynamicMetadataHUAWEIBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for HdrVividDynamicMetadataHUAWEIBuilder<'b> {
+impl ops::DerefMut for HdrVividDynamicMetadataHUAWEIBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for HdrVividDynamicMetadataHUAWEIBuilder<'b> {
+unsafe impl Cast for HdrVividDynamicMetadataHUAWEIBuilder<'_> {
     type Target = HdrVividDynamicMetadataHUAWEI;
 
     #[inline]
@@ -27503,7 +27504,7 @@ impl<'b> IOSSurfaceCreateInfoMVKBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for IOSSurfaceCreateInfoMVKBuilder<'b> {
+impl ops::Deref for IOSSurfaceCreateInfoMVKBuilder<'_> {
     type Target = IOSSurfaceCreateInfoMVK;
 
     #[inline]
@@ -27512,14 +27513,14 @@ impl<'b> ops::Deref for IOSSurfaceCreateInfoMVKBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for IOSSurfaceCreateInfoMVKBuilder<'b> {
+impl ops::DerefMut for IOSSurfaceCreateInfoMVKBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for IOSSurfaceCreateInfoMVKBuilder<'b> {
+unsafe impl Cast for IOSSurfaceCreateInfoMVKBuilder<'_> {
     type Target = IOSSurfaceCreateInfoMVK;
 
     #[inline]
@@ -27739,7 +27740,7 @@ impl<'b> ImageBlit2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageBlit2Builder<'b> {
+impl ops::Deref for ImageBlit2Builder<'_> {
     type Target = ImageBlit2;
 
     #[inline]
@@ -27748,14 +27749,14 @@ impl<'b> ops::Deref for ImageBlit2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageBlit2Builder<'b> {
+impl ops::DerefMut for ImageBlit2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageBlit2Builder<'b> {
+unsafe impl Cast for ImageBlit2Builder<'_> {
     type Target = ImageBlit2;
 
     #[inline]
@@ -27866,7 +27867,7 @@ impl<'b> ImageCompressionControlEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageCompressionControlEXTBuilder<'b> {
+impl ops::Deref for ImageCompressionControlEXTBuilder<'_> {
     type Target = ImageCompressionControlEXT;
 
     #[inline]
@@ -27875,14 +27876,14 @@ impl<'b> ops::Deref for ImageCompressionControlEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageCompressionControlEXTBuilder<'b> {
+impl ops::DerefMut for ImageCompressionControlEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageCompressionControlEXTBuilder<'b> {
+unsafe impl Cast for ImageCompressionControlEXTBuilder<'_> {
     type Target = ImageCompressionControlEXT;
 
     #[inline]
@@ -28014,7 +28015,7 @@ impl<'b> ImageConstraintsInfoFUCHSIABuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageConstraintsInfoFUCHSIABuilder<'b> {
+impl ops::Deref for ImageConstraintsInfoFUCHSIABuilder<'_> {
     type Target = ImageConstraintsInfoFUCHSIA;
 
     #[inline]
@@ -28023,14 +28024,14 @@ impl<'b> ops::Deref for ImageConstraintsInfoFUCHSIABuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageConstraintsInfoFUCHSIABuilder<'b> {
+impl ops::DerefMut for ImageConstraintsInfoFUCHSIABuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageConstraintsInfoFUCHSIABuilder<'b> {
+unsafe impl Cast for ImageConstraintsInfoFUCHSIABuilder<'_> {
     type Target = ImageConstraintsInfoFUCHSIA;
 
     #[inline]
@@ -28347,7 +28348,7 @@ impl<'b> ImageCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageCreateInfoBuilder<'b> {
+impl ops::Deref for ImageCreateInfoBuilder<'_> {
     type Target = ImageCreateInfo;
 
     #[inline]
@@ -28356,14 +28357,14 @@ impl<'b> ops::Deref for ImageCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageCreateInfoBuilder<'b> {
+impl ops::DerefMut for ImageCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageCreateInfoBuilder<'b> {
+unsafe impl Cast for ImageCreateInfoBuilder<'_> {
     type Target = ImageCreateInfo;
 
     #[inline]
@@ -28416,7 +28417,7 @@ impl<'b> ImageDrmFormatModifierExplicitCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageDrmFormatModifierExplicitCreateInfoEXTBuilder<'b> {
+impl ops::Deref for ImageDrmFormatModifierExplicitCreateInfoEXTBuilder<'_> {
     type Target = ImageDrmFormatModifierExplicitCreateInfoEXT;
 
     #[inline]
@@ -28425,14 +28426,14 @@ impl<'b> ops::Deref for ImageDrmFormatModifierExplicitCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageDrmFormatModifierExplicitCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for ImageDrmFormatModifierExplicitCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageDrmFormatModifierExplicitCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for ImageDrmFormatModifierExplicitCreateInfoEXTBuilder<'_> {
     type Target = ImageDrmFormatModifierExplicitCreateInfoEXT;
 
     #[inline]
@@ -28476,7 +28477,7 @@ impl<'b> ImageDrmFormatModifierListCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageDrmFormatModifierListCreateInfoEXTBuilder<'b> {
+impl ops::Deref for ImageDrmFormatModifierListCreateInfoEXTBuilder<'_> {
     type Target = ImageDrmFormatModifierListCreateInfoEXT;
 
     #[inline]
@@ -28485,14 +28486,14 @@ impl<'b> ops::Deref for ImageDrmFormatModifierListCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageDrmFormatModifierListCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for ImageDrmFormatModifierListCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageDrmFormatModifierListCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for ImageDrmFormatModifierListCreateInfoEXTBuilder<'_> {
     type Target = ImageDrmFormatModifierListCreateInfoEXT;
 
     #[inline]
@@ -28627,7 +28628,7 @@ impl<'b> ImageFormatConstraintsInfoFUCHSIABuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageFormatConstraintsInfoFUCHSIABuilder<'b> {
+impl ops::Deref for ImageFormatConstraintsInfoFUCHSIABuilder<'_> {
     type Target = ImageFormatConstraintsInfoFUCHSIA;
 
     #[inline]
@@ -28636,14 +28637,14 @@ impl<'b> ops::Deref for ImageFormatConstraintsInfoFUCHSIABuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageFormatConstraintsInfoFUCHSIABuilder<'b> {
+impl ops::DerefMut for ImageFormatConstraintsInfoFUCHSIABuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageFormatConstraintsInfoFUCHSIABuilder<'b> {
+unsafe impl Cast for ImageFormatConstraintsInfoFUCHSIABuilder<'_> {
     type Target = ImageFormatConstraintsInfoFUCHSIA;
 
     #[inline]
@@ -28687,7 +28688,7 @@ impl<'b> ImageFormatListCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageFormatListCreateInfoBuilder<'b> {
+impl ops::Deref for ImageFormatListCreateInfoBuilder<'_> {
     type Target = ImageFormatListCreateInfo;
 
     #[inline]
@@ -28696,14 +28697,14 @@ impl<'b> ops::Deref for ImageFormatListCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageFormatListCreateInfoBuilder<'b> {
+impl ops::DerefMut for ImageFormatListCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageFormatListCreateInfoBuilder<'b> {
+unsafe impl Cast for ImageFormatListCreateInfoBuilder<'_> {
     type Target = ImageFormatListCreateInfo;
 
     #[inline]
@@ -28850,7 +28851,7 @@ impl<'b> ImageFormatProperties2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageFormatProperties2Builder<'b> {
+impl ops::Deref for ImageFormatProperties2Builder<'_> {
     type Target = ImageFormatProperties2;
 
     #[inline]
@@ -28859,14 +28860,14 @@ impl<'b> ops::Deref for ImageFormatProperties2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageFormatProperties2Builder<'b> {
+impl ops::DerefMut for ImageFormatProperties2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageFormatProperties2Builder<'b> {
+unsafe impl Cast for ImageFormatProperties2Builder<'_> {
     type Target = ImageFormatProperties2;
 
     #[inline]
@@ -28968,7 +28969,7 @@ impl<'b> ImageMemoryBarrierBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageMemoryBarrierBuilder<'b> {
+impl ops::Deref for ImageMemoryBarrierBuilder<'_> {
     type Target = ImageMemoryBarrier;
 
     #[inline]
@@ -28977,14 +28978,14 @@ impl<'b> ops::Deref for ImageMemoryBarrierBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageMemoryBarrierBuilder<'b> {
+impl ops::DerefMut for ImageMemoryBarrierBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageMemoryBarrierBuilder<'b> {
+unsafe impl Cast for ImageMemoryBarrierBuilder<'_> {
     type Target = ImageMemoryBarrier;
 
     #[inline]
@@ -29099,7 +29100,7 @@ impl<'b> ImageMemoryBarrier2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageMemoryBarrier2Builder<'b> {
+impl ops::Deref for ImageMemoryBarrier2Builder<'_> {
     type Target = ImageMemoryBarrier2;
 
     #[inline]
@@ -29108,14 +29109,14 @@ impl<'b> ops::Deref for ImageMemoryBarrier2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageMemoryBarrier2Builder<'b> {
+impl ops::DerefMut for ImageMemoryBarrier2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageMemoryBarrier2Builder<'b> {
+unsafe impl Cast for ImageMemoryBarrier2Builder<'_> {
     type Target = ImageMemoryBarrier2;
 
     #[inline]
@@ -29171,7 +29172,7 @@ impl<'b> ImageMemoryRequirementsInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageMemoryRequirementsInfo2Builder<'b> {
+impl ops::Deref for ImageMemoryRequirementsInfo2Builder<'_> {
     type Target = ImageMemoryRequirementsInfo2;
 
     #[inline]
@@ -29180,14 +29181,14 @@ impl<'b> ops::Deref for ImageMemoryRequirementsInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageMemoryRequirementsInfo2Builder<'b> {
+impl ops::DerefMut for ImageMemoryRequirementsInfo2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageMemoryRequirementsInfo2Builder<'b> {
+unsafe impl Cast for ImageMemoryRequirementsInfo2Builder<'_> {
     type Target = ImageMemoryRequirementsInfo2;
 
     #[inline]
@@ -30024,7 +30025,7 @@ impl<'b> ImageToMemoryCopyBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageToMemoryCopyBuilder<'b> {
+impl ops::Deref for ImageToMemoryCopyBuilder<'_> {
     type Target = ImageToMemoryCopy;
 
     #[inline]
@@ -30033,14 +30034,14 @@ impl<'b> ops::Deref for ImageToMemoryCopyBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageToMemoryCopyBuilder<'b> {
+impl ops::DerefMut for ImageToMemoryCopyBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageToMemoryCopyBuilder<'b> {
+unsafe impl Cast for ImageToMemoryCopyBuilder<'_> {
     type Target = ImageToMemoryCopy;
 
     #[inline]
@@ -30316,7 +30317,7 @@ impl<'b> ImageViewCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImageViewCreateInfoBuilder<'b> {
+impl ops::Deref for ImageViewCreateInfoBuilder<'_> {
     type Target = ImageViewCreateInfo;
 
     #[inline]
@@ -30325,14 +30326,14 @@ impl<'b> ops::Deref for ImageViewCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImageViewCreateInfoBuilder<'b> {
+impl ops::DerefMut for ImageViewCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImageViewCreateInfoBuilder<'b> {
+unsafe impl Cast for ImageViewCreateInfoBuilder<'_> {
     type Target = ImageViewCreateInfo;
 
     #[inline]
@@ -30695,7 +30696,7 @@ impl<'b> ImportAndroidHardwareBufferInfoANDROIDBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImportAndroidHardwareBufferInfoANDROIDBuilder<'b> {
+impl ops::Deref for ImportAndroidHardwareBufferInfoANDROIDBuilder<'_> {
     type Target = ImportAndroidHardwareBufferInfoANDROID;
 
     #[inline]
@@ -30704,14 +30705,14 @@ impl<'b> ops::Deref for ImportAndroidHardwareBufferInfoANDROIDBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImportAndroidHardwareBufferInfoANDROIDBuilder<'b> {
+impl ops::DerefMut for ImportAndroidHardwareBufferInfoANDROIDBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImportAndroidHardwareBufferInfoANDROIDBuilder<'b> {
+unsafe impl Cast for ImportAndroidHardwareBufferInfoANDROIDBuilder<'_> {
     type Target = ImportAndroidHardwareBufferInfoANDROID;
 
     #[inline]
@@ -30842,7 +30843,7 @@ impl<'b> ImportFenceSciSyncInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImportFenceSciSyncInfoNVBuilder<'b> {
+impl ops::Deref for ImportFenceSciSyncInfoNVBuilder<'_> {
     type Target = ImportFenceSciSyncInfoNV;
 
     #[inline]
@@ -30851,14 +30852,14 @@ impl<'b> ops::Deref for ImportFenceSciSyncInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImportFenceSciSyncInfoNVBuilder<'b> {
+impl ops::DerefMut for ImportFenceSciSyncInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImportFenceSciSyncInfoNVBuilder<'b> {
+unsafe impl Cast for ImportFenceSciSyncInfoNVBuilder<'_> {
     type Target = ImportFenceSciSyncInfoNV;
 
     #[inline]
@@ -31117,7 +31118,7 @@ impl<'b> ImportMemoryHostPointerInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImportMemoryHostPointerInfoEXTBuilder<'b> {
+impl ops::Deref for ImportMemoryHostPointerInfoEXTBuilder<'_> {
     type Target = ImportMemoryHostPointerInfoEXT;
 
     #[inline]
@@ -31126,14 +31127,14 @@ impl<'b> ops::Deref for ImportMemoryHostPointerInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImportMemoryHostPointerInfoEXTBuilder<'b> {
+impl ops::DerefMut for ImportMemoryHostPointerInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImportMemoryHostPointerInfoEXTBuilder<'b> {
+unsafe impl Cast for ImportMemoryHostPointerInfoEXTBuilder<'_> {
     type Target = ImportMemoryHostPointerInfoEXT;
 
     #[inline]
@@ -31182,7 +31183,7 @@ impl<'b> ImportMemoryMetalHandleInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImportMemoryMetalHandleInfoEXTBuilder<'b> {
+impl ops::Deref for ImportMemoryMetalHandleInfoEXTBuilder<'_> {
     type Target = ImportMemoryMetalHandleInfoEXT;
 
     #[inline]
@@ -31191,14 +31192,14 @@ impl<'b> ops::Deref for ImportMemoryMetalHandleInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImportMemoryMetalHandleInfoEXTBuilder<'b> {
+impl ops::DerefMut for ImportMemoryMetalHandleInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImportMemoryMetalHandleInfoEXTBuilder<'b> {
+unsafe impl Cast for ImportMemoryMetalHandleInfoEXTBuilder<'_> {
     type Target = ImportMemoryMetalHandleInfoEXT;
 
     #[inline]
@@ -31741,7 +31742,7 @@ impl<'b> ImportScreenBufferInfoQNXBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImportScreenBufferInfoQNXBuilder<'b> {
+impl ops::Deref for ImportScreenBufferInfoQNXBuilder<'_> {
     type Target = ImportScreenBufferInfoQNX;
 
     #[inline]
@@ -31750,14 +31751,14 @@ impl<'b> ops::Deref for ImportScreenBufferInfoQNXBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImportScreenBufferInfoQNXBuilder<'b> {
+impl ops::DerefMut for ImportScreenBufferInfoQNXBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImportScreenBufferInfoQNXBuilder<'b> {
+unsafe impl Cast for ImportScreenBufferInfoQNXBuilder<'_> {
     type Target = ImportScreenBufferInfoQNX;
 
     #[inline]
@@ -31888,7 +31889,7 @@ impl<'b> ImportSemaphoreSciSyncInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ImportSemaphoreSciSyncInfoNVBuilder<'b> {
+impl ops::Deref for ImportSemaphoreSciSyncInfoNVBuilder<'_> {
     type Target = ImportSemaphoreSciSyncInfoNV;
 
     #[inline]
@@ -31897,14 +31898,14 @@ impl<'b> ops::Deref for ImportSemaphoreSciSyncInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ImportSemaphoreSciSyncInfoNVBuilder<'b> {
+impl ops::DerefMut for ImportSemaphoreSciSyncInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ImportSemaphoreSciSyncInfoNVBuilder<'b> {
+unsafe impl Cast for ImportSemaphoreSciSyncInfoNVBuilder<'_> {
     type Target = ImportSemaphoreSciSyncInfoNV;
 
     #[inline]
@@ -32268,7 +32269,7 @@ impl<'b> IndirectCommandsLayoutCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for IndirectCommandsLayoutCreateInfoEXTBuilder<'b> {
+impl ops::Deref for IndirectCommandsLayoutCreateInfoEXTBuilder<'_> {
     type Target = IndirectCommandsLayoutCreateInfoEXT;
 
     #[inline]
@@ -32277,14 +32278,14 @@ impl<'b> ops::Deref for IndirectCommandsLayoutCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for IndirectCommandsLayoutCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for IndirectCommandsLayoutCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for IndirectCommandsLayoutCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for IndirectCommandsLayoutCreateInfoEXTBuilder<'_> {
     type Target = IndirectCommandsLayoutCreateInfoEXT;
 
     #[inline]
@@ -32350,7 +32351,7 @@ impl<'b> IndirectCommandsLayoutCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for IndirectCommandsLayoutCreateInfoNVBuilder<'b> {
+impl ops::Deref for IndirectCommandsLayoutCreateInfoNVBuilder<'_> {
     type Target = IndirectCommandsLayoutCreateInfoNV;
 
     #[inline]
@@ -32359,14 +32360,14 @@ impl<'b> ops::Deref for IndirectCommandsLayoutCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for IndirectCommandsLayoutCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for IndirectCommandsLayoutCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for IndirectCommandsLayoutCreateInfoNVBuilder<'b> {
+unsafe impl Cast for IndirectCommandsLayoutCreateInfoNVBuilder<'_> {
     type Target = IndirectCommandsLayoutCreateInfoNV;
 
     #[inline]
@@ -32553,7 +32554,7 @@ impl<'b> IndirectCommandsLayoutTokenNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for IndirectCommandsLayoutTokenNVBuilder<'b> {
+impl ops::Deref for IndirectCommandsLayoutTokenNVBuilder<'_> {
     type Target = IndirectCommandsLayoutTokenNV;
 
     #[inline]
@@ -32562,14 +32563,14 @@ impl<'b> ops::Deref for IndirectCommandsLayoutTokenNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for IndirectCommandsLayoutTokenNVBuilder<'b> {
+impl ops::DerefMut for IndirectCommandsLayoutTokenNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for IndirectCommandsLayoutTokenNVBuilder<'b> {
+unsafe impl Cast for IndirectCommandsLayoutTokenNVBuilder<'_> {
     type Target = IndirectCommandsLayoutTokenNV;
 
     #[inline]
@@ -32953,7 +32954,7 @@ impl<'b> IndirectExecutionSetShaderInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for IndirectExecutionSetShaderInfoEXTBuilder<'b> {
+impl ops::Deref for IndirectExecutionSetShaderInfoEXTBuilder<'_> {
     type Target = IndirectExecutionSetShaderInfoEXT;
 
     #[inline]
@@ -32962,14 +32963,14 @@ impl<'b> ops::Deref for IndirectExecutionSetShaderInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for IndirectExecutionSetShaderInfoEXTBuilder<'b> {
+impl ops::DerefMut for IndirectExecutionSetShaderInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for IndirectExecutionSetShaderInfoEXTBuilder<'b> {
+unsafe impl Cast for IndirectExecutionSetShaderInfoEXTBuilder<'_> {
     type Target = IndirectExecutionSetShaderInfoEXT;
 
     #[inline]
@@ -33013,7 +33014,7 @@ impl<'b> IndirectExecutionSetShaderLayoutInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for IndirectExecutionSetShaderLayoutInfoEXTBuilder<'b> {
+impl ops::Deref for IndirectExecutionSetShaderLayoutInfoEXTBuilder<'_> {
     type Target = IndirectExecutionSetShaderLayoutInfoEXT;
 
     #[inline]
@@ -33022,14 +33023,14 @@ impl<'b> ops::Deref for IndirectExecutionSetShaderLayoutInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for IndirectExecutionSetShaderLayoutInfoEXTBuilder<'b> {
+impl ops::DerefMut for IndirectExecutionSetShaderLayoutInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for IndirectExecutionSetShaderLayoutInfoEXTBuilder<'b> {
+unsafe impl Cast for IndirectExecutionSetShaderLayoutInfoEXTBuilder<'_> {
     type Target = IndirectExecutionSetShaderLayoutInfoEXT;
 
     #[inline]
@@ -33072,7 +33073,7 @@ impl<'b> InitializePerformanceApiInfoINTELBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for InitializePerformanceApiInfoINTELBuilder<'b> {
+impl ops::Deref for InitializePerformanceApiInfoINTELBuilder<'_> {
     type Target = InitializePerformanceApiInfoINTEL;
 
     #[inline]
@@ -33081,14 +33082,14 @@ impl<'b> ops::Deref for InitializePerformanceApiInfoINTELBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for InitializePerformanceApiInfoINTELBuilder<'b> {
+impl ops::DerefMut for InitializePerformanceApiInfoINTELBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for InitializePerformanceApiInfoINTELBuilder<'b> {
+unsafe impl Cast for InitializePerformanceApiInfoINTELBuilder<'_> {
     type Target = InitializePerformanceApiInfoINTEL;
 
     #[inline]
@@ -33243,7 +33244,7 @@ impl<'b> InstanceCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for InstanceCreateInfoBuilder<'b> {
+impl ops::Deref for InstanceCreateInfoBuilder<'_> {
     type Target = InstanceCreateInfo;
 
     #[inline]
@@ -33252,14 +33253,14 @@ impl<'b> ops::Deref for InstanceCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for InstanceCreateInfoBuilder<'b> {
+impl ops::DerefMut for InstanceCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for InstanceCreateInfoBuilder<'b> {
+unsafe impl Cast for InstanceCreateInfoBuilder<'_> {
     type Target = InstanceCreateInfo;
 
     #[inline]
@@ -33501,7 +33502,7 @@ impl<'b> LatencySurfaceCapabilitiesNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for LatencySurfaceCapabilitiesNVBuilder<'b> {
+impl ops::Deref for LatencySurfaceCapabilitiesNVBuilder<'_> {
     type Target = LatencySurfaceCapabilitiesNV;
 
     #[inline]
@@ -33510,14 +33511,14 @@ impl<'b> ops::Deref for LatencySurfaceCapabilitiesNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for LatencySurfaceCapabilitiesNVBuilder<'b> {
+impl ops::DerefMut for LatencySurfaceCapabilitiesNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for LatencySurfaceCapabilitiesNVBuilder<'b> {
+unsafe impl Cast for LatencySurfaceCapabilitiesNVBuilder<'_> {
     type Target = LatencySurfaceCapabilitiesNV;
 
     #[inline]
@@ -33848,7 +33849,7 @@ impl<'b> LayerSettingEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for LayerSettingEXTBuilder<'b> {
+impl ops::Deref for LayerSettingEXTBuilder<'_> {
     type Target = LayerSettingEXT;
 
     #[inline]
@@ -33857,14 +33858,14 @@ impl<'b> ops::Deref for LayerSettingEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for LayerSettingEXTBuilder<'b> {
+impl ops::DerefMut for LayerSettingEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for LayerSettingEXTBuilder<'b> {
+unsafe impl Cast for LayerSettingEXTBuilder<'_> {
     type Target = LayerSettingEXT;
 
     #[inline]
@@ -33908,7 +33909,7 @@ impl<'b> LayerSettingsCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for LayerSettingsCreateInfoEXTBuilder<'b> {
+impl ops::Deref for LayerSettingsCreateInfoEXTBuilder<'_> {
     type Target = LayerSettingsCreateInfoEXT;
 
     #[inline]
@@ -33917,14 +33918,14 @@ impl<'b> ops::Deref for LayerSettingsCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for LayerSettingsCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for LayerSettingsCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for LayerSettingsCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for LayerSettingsCreateInfoEXTBuilder<'_> {
     type Target = LayerSettingsCreateInfoEXT;
 
     #[inline]
@@ -33973,7 +33974,7 @@ impl<'b> MacOSSurfaceCreateInfoMVKBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MacOSSurfaceCreateInfoMVKBuilder<'b> {
+impl ops::Deref for MacOSSurfaceCreateInfoMVKBuilder<'_> {
     type Target = MacOSSurfaceCreateInfoMVK;
 
     #[inline]
@@ -33982,14 +33983,14 @@ impl<'b> ops::Deref for MacOSSurfaceCreateInfoMVKBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for MacOSSurfaceCreateInfoMVKBuilder<'b> {
+impl ops::DerefMut for MacOSSurfaceCreateInfoMVKBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MacOSSurfaceCreateInfoMVKBuilder<'b> {
+unsafe impl Cast for MacOSSurfaceCreateInfoMVKBuilder<'_> {
     type Target = MacOSSurfaceCreateInfoMVK;
 
     #[inline]
@@ -34207,7 +34208,7 @@ impl<'b> MemoryAllocateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MemoryAllocateInfoBuilder<'b> {
+impl ops::Deref for MemoryAllocateInfoBuilder<'_> {
     type Target = MemoryAllocateInfo;
 
     #[inline]
@@ -34216,14 +34217,14 @@ impl<'b> ops::Deref for MemoryAllocateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for MemoryAllocateInfoBuilder<'b> {
+impl ops::DerefMut for MemoryAllocateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MemoryAllocateInfoBuilder<'b> {
+unsafe impl Cast for MemoryAllocateInfoBuilder<'_> {
     type Target = MemoryAllocateInfo;
 
     #[inline]
@@ -35309,7 +35310,7 @@ impl<'b> MemoryMapInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MemoryMapInfoBuilder<'b> {
+impl ops::Deref for MemoryMapInfoBuilder<'_> {
     type Target = MemoryMapInfo;
 
     #[inline]
@@ -35318,14 +35319,14 @@ impl<'b> ops::Deref for MemoryMapInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for MemoryMapInfoBuilder<'b> {
+impl ops::DerefMut for MemoryMapInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MemoryMapInfoBuilder<'b> {
+unsafe impl Cast for MemoryMapInfoBuilder<'_> {
     type Target = MemoryMapInfo;
 
     #[inline]
@@ -35368,7 +35369,7 @@ impl<'b> MemoryMapPlacedInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MemoryMapPlacedInfoEXTBuilder<'b> {
+impl ops::Deref for MemoryMapPlacedInfoEXTBuilder<'_> {
     type Target = MemoryMapPlacedInfoEXT;
 
     #[inline]
@@ -35377,14 +35378,14 @@ impl<'b> ops::Deref for MemoryMapPlacedInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for MemoryMapPlacedInfoEXTBuilder<'b> {
+impl ops::DerefMut for MemoryMapPlacedInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MemoryMapPlacedInfoEXTBuilder<'b> {
+unsafe impl Cast for MemoryMapPlacedInfoEXTBuilder<'_> {
     type Target = MemoryMapPlacedInfoEXT;
 
     #[inline]
@@ -35688,7 +35689,7 @@ impl<'b> MemoryRequirements2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MemoryRequirements2Builder<'b> {
+impl ops::Deref for MemoryRequirements2Builder<'_> {
     type Target = MemoryRequirements2;
 
     #[inline]
@@ -35697,14 +35698,14 @@ impl<'b> ops::Deref for MemoryRequirements2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for MemoryRequirements2Builder<'b> {
+impl ops::DerefMut for MemoryRequirements2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MemoryRequirements2Builder<'b> {
+unsafe impl Cast for MemoryRequirements2Builder<'_> {
     type Target = MemoryRequirements2;
 
     #[inline]
@@ -35838,7 +35839,7 @@ impl<'b> MemoryToImageCopyBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MemoryToImageCopyBuilder<'b> {
+impl ops::Deref for MemoryToImageCopyBuilder<'_> {
     type Target = MemoryToImageCopy;
 
     #[inline]
@@ -35847,14 +35848,14 @@ impl<'b> ops::Deref for MemoryToImageCopyBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for MemoryToImageCopyBuilder<'b> {
+impl ops::DerefMut for MemoryToImageCopyBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MemoryToImageCopyBuilder<'b> {
+unsafe impl Cast for MemoryToImageCopyBuilder<'_> {
     type Target = MemoryToImageCopy;
 
     #[inline]
@@ -36147,7 +36148,7 @@ impl<'b> MetalSurfaceCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MetalSurfaceCreateInfoEXTBuilder<'b> {
+impl ops::Deref for MetalSurfaceCreateInfoEXTBuilder<'_> {
     type Target = MetalSurfaceCreateInfoEXT;
 
     #[inline]
@@ -36156,14 +36157,14 @@ impl<'b> ops::Deref for MetalSurfaceCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for MetalSurfaceCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for MetalSurfaceCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MetalSurfaceCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for MetalSurfaceCreateInfoEXTBuilder<'_> {
     type Target = MetalSurfaceCreateInfoEXT;
 
     #[inline]
@@ -36268,7 +36269,7 @@ impl<'b> MicromapBuildInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MicromapBuildInfoEXTBuilder<'b> {
+impl ops::Deref for MicromapBuildInfoEXTBuilder<'_> {
     type Target = MicromapBuildInfoEXT;
 
     #[inline]
@@ -36277,14 +36278,14 @@ impl<'b> ops::Deref for MicromapBuildInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for MicromapBuildInfoEXTBuilder<'b> {
+impl ops::DerefMut for MicromapBuildInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MicromapBuildInfoEXTBuilder<'b> {
+unsafe impl Cast for MicromapBuildInfoEXTBuilder<'_> {
     type Target = MicromapBuildInfoEXT;
 
     #[inline]
@@ -36625,7 +36626,7 @@ impl<'b> MicromapVersionInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MicromapVersionInfoEXTBuilder<'b> {
+impl ops::Deref for MicromapVersionInfoEXTBuilder<'_> {
     type Target = MicromapVersionInfoEXT;
 
     #[inline]
@@ -36634,14 +36635,14 @@ impl<'b> ops::Deref for MicromapVersionInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for MicromapVersionInfoEXTBuilder<'b> {
+impl ops::DerefMut for MicromapVersionInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MicromapVersionInfoEXTBuilder<'b> {
+unsafe impl Cast for MicromapVersionInfoEXTBuilder<'_> {
     type Target = MicromapVersionInfoEXT;
 
     #[inline]
@@ -37019,7 +37020,7 @@ impl<'b> MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'b> {
+impl ops::Deref for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'_> {
     type Target = MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM;
 
     #[inline]
@@ -37028,14 +37029,14 @@ impl<'b> ops::Deref for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilde
     }
 }
 
-impl<'b> ops::DerefMut for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'b> {
+impl ops::DerefMut for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'b> {
+unsafe impl Cast for MultiviewPerViewRenderAreasRenderPassBeginInfoQCOMBuilder<'_> {
     type Target = MultiviewPerViewRenderAreasRenderPassBeginInfoQCOM;
 
     #[inline]
@@ -37082,7 +37083,7 @@ impl<'b> MutableDescriptorTypeCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MutableDescriptorTypeCreateInfoEXTBuilder<'b> {
+impl ops::Deref for MutableDescriptorTypeCreateInfoEXTBuilder<'_> {
     type Target = MutableDescriptorTypeCreateInfoEXT;
 
     #[inline]
@@ -37091,14 +37092,14 @@ impl<'b> ops::Deref for MutableDescriptorTypeCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for MutableDescriptorTypeCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for MutableDescriptorTypeCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MutableDescriptorTypeCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for MutableDescriptorTypeCreateInfoEXTBuilder<'_> {
     type Target = MutableDescriptorTypeCreateInfoEXT;
 
     #[inline]
@@ -37142,7 +37143,7 @@ impl<'b> MutableDescriptorTypeListEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for MutableDescriptorTypeListEXTBuilder<'b> {
+impl ops::Deref for MutableDescriptorTypeListEXTBuilder<'_> {
     type Target = MutableDescriptorTypeListEXT;
 
     #[inline]
@@ -37151,14 +37152,14 @@ impl<'b> ops::Deref for MutableDescriptorTypeListEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for MutableDescriptorTypeListEXTBuilder<'b> {
+impl ops::DerefMut for MutableDescriptorTypeListEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for MutableDescriptorTypeListEXTBuilder<'b> {
+unsafe impl Cast for MutableDescriptorTypeListEXTBuilder<'_> {
     type Target = MutableDescriptorTypeListEXT;
 
     #[inline]
@@ -37207,7 +37208,7 @@ impl<'b> OHSurfaceCreateInfoOHOSBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for OHSurfaceCreateInfoOHOSBuilder<'b> {
+impl ops::Deref for OHSurfaceCreateInfoOHOSBuilder<'_> {
     type Target = OHSurfaceCreateInfoOHOS;
 
     #[inline]
@@ -37216,14 +37217,14 @@ impl<'b> ops::Deref for OHSurfaceCreateInfoOHOSBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for OHSurfaceCreateInfoOHOSBuilder<'b> {
+impl ops::DerefMut for OHSurfaceCreateInfoOHOSBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for OHSurfaceCreateInfoOHOSBuilder<'b> {
+unsafe impl Cast for OHSurfaceCreateInfoOHOSBuilder<'_> {
     type Target = OHSurfaceCreateInfoOHOS;
 
     #[inline]
@@ -37404,7 +37405,7 @@ impl<'b> OpaqueCaptureDescriptorDataCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for OpaqueCaptureDescriptorDataCreateInfoEXTBuilder<'b> {
+impl ops::Deref for OpaqueCaptureDescriptorDataCreateInfoEXTBuilder<'_> {
     type Target = OpaqueCaptureDescriptorDataCreateInfoEXT;
 
     #[inline]
@@ -37413,14 +37414,14 @@ impl<'b> ops::Deref for OpaqueCaptureDescriptorDataCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for OpaqueCaptureDescriptorDataCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for OpaqueCaptureDescriptorDataCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for OpaqueCaptureDescriptorDataCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for OpaqueCaptureDescriptorDataCreateInfoEXTBuilder<'_> {
     type Target = OpaqueCaptureDescriptorDataCreateInfoEXT;
 
     #[inline]
@@ -37470,7 +37471,7 @@ impl<'b> OpticalFlowExecuteInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for OpticalFlowExecuteInfoNVBuilder<'b> {
+impl ops::Deref for OpticalFlowExecuteInfoNVBuilder<'_> {
     type Target = OpticalFlowExecuteInfoNV;
 
     #[inline]
@@ -37479,14 +37480,14 @@ impl<'b> ops::Deref for OpticalFlowExecuteInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for OpticalFlowExecuteInfoNVBuilder<'b> {
+impl ops::DerefMut for OpticalFlowExecuteInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for OpticalFlowExecuteInfoNVBuilder<'b> {
+unsafe impl Cast for OpticalFlowExecuteInfoNVBuilder<'_> {
     type Target = OpticalFlowExecuteInfoNV;
 
     #[inline]
@@ -37706,7 +37707,7 @@ impl<'b> OpticalFlowSessionCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for OpticalFlowSessionCreateInfoNVBuilder<'b> {
+impl ops::Deref for OpticalFlowSessionCreateInfoNVBuilder<'_> {
     type Target = OpticalFlowSessionCreateInfoNV;
 
     #[inline]
@@ -37715,14 +37716,14 @@ impl<'b> ops::Deref for OpticalFlowSessionCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for OpticalFlowSessionCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for OpticalFlowSessionCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for OpticalFlowSessionCreateInfoNVBuilder<'b> {
+unsafe impl Cast for OpticalFlowSessionCreateInfoNVBuilder<'_> {
     type Target = OpticalFlowSessionCreateInfoNV;
 
     #[inline]
@@ -37777,7 +37778,7 @@ impl<'b> OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b> {
+impl ops::Deref for OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'_> {
     type Target = OpticalFlowSessionCreatePrivateDataInfoNV;
 
     #[inline]
@@ -37786,14 +37787,14 @@ impl<'b> ops::Deref for OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b> {
+impl ops::DerefMut for OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'b> {
+unsafe impl Cast for OpticalFlowSessionCreatePrivateDataInfoNVBuilder<'_> {
     type Target = OpticalFlowSessionCreatePrivateDataInfoNV;
 
     #[inline]
@@ -38001,7 +38002,7 @@ impl<'b> PartitionedAccelerationStructureInstancesInputNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PartitionedAccelerationStructureInstancesInputNVBuilder<'b> {
+impl ops::Deref for PartitionedAccelerationStructureInstancesInputNVBuilder<'_> {
     type Target = PartitionedAccelerationStructureInstancesInputNV;
 
     #[inline]
@@ -38010,14 +38011,14 @@ impl<'b> ops::Deref for PartitionedAccelerationStructureInstancesInputNVBuilder<
     }
 }
 
-impl<'b> ops::DerefMut for PartitionedAccelerationStructureInstancesInputNVBuilder<'b> {
+impl ops::DerefMut for PartitionedAccelerationStructureInstancesInputNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PartitionedAccelerationStructureInstancesInputNVBuilder<'b> {
+unsafe impl Cast for PartitionedAccelerationStructureInstancesInputNVBuilder<'_> {
     type Target = PartitionedAccelerationStructureInstancesInputNV;
 
     #[inline]
@@ -40456,7 +40457,7 @@ impl<'b> PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder<'b> {
+impl ops::Deref for PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder<'_> {
     type Target = PhysicalDeviceClusterCullingShaderFeaturesHUAWEI;
 
     #[inline]
@@ -40465,14 +40466,14 @@ impl<'b> ops::Deref for PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder<
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceClusterCullingShaderFeaturesHUAWEIBuilder<'_> {
     type Target = PhysicalDeviceClusterCullingShaderFeaturesHUAWEI;
 
     #[inline]
@@ -46266,7 +46267,7 @@ impl<'b> PhysicalDeviceExternalBufferInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceExternalBufferInfoBuilder<'b> {
+impl ops::Deref for PhysicalDeviceExternalBufferInfoBuilder<'_> {
     type Target = PhysicalDeviceExternalBufferInfo;
 
     #[inline]
@@ -46275,14 +46276,14 @@ impl<'b> ops::Deref for PhysicalDeviceExternalBufferInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceExternalBufferInfoBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceExternalBufferInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceExternalBufferInfoBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceExternalBufferInfoBuilder<'_> {
     type Target = PhysicalDeviceExternalBufferInfo;
 
     #[inline]
@@ -47052,7 +47053,7 @@ impl<'b> PhysicalDeviceExternalSemaphoreInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceExternalSemaphoreInfoBuilder<'b> {
+impl ops::Deref for PhysicalDeviceExternalSemaphoreInfoBuilder<'_> {
     type Target = PhysicalDeviceExternalSemaphoreInfo;
 
     #[inline]
@@ -47061,14 +47062,14 @@ impl<'b> ops::Deref for PhysicalDeviceExternalSemaphoreInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceExternalSemaphoreInfoBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceExternalSemaphoreInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceExternalSemaphoreInfoBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceExternalSemaphoreInfoBuilder<'_> {
     type Target = PhysicalDeviceExternalSemaphoreInfo;
 
     #[inline]
@@ -47126,7 +47127,7 @@ impl<'b> PhysicalDeviceExternalTensorInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceExternalTensorInfoARMBuilder<'b> {
+impl ops::Deref for PhysicalDeviceExternalTensorInfoARMBuilder<'_> {
     type Target = PhysicalDeviceExternalTensorInfoARM;
 
     #[inline]
@@ -47135,14 +47136,14 @@ impl<'b> ops::Deref for PhysicalDeviceExternalTensorInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceExternalTensorInfoARMBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceExternalTensorInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceExternalTensorInfoARMBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceExternalTensorInfoARMBuilder<'_> {
     type Target = PhysicalDeviceExternalTensorInfoARM;
 
     #[inline]
@@ -47983,7 +47984,7 @@ impl<'b> PhysicalDeviceFeatures2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceFeatures2Builder<'b> {
+impl ops::Deref for PhysicalDeviceFeatures2Builder<'_> {
     type Target = PhysicalDeviceFeatures2;
 
     #[inline]
@@ -47992,14 +47993,14 @@ impl<'b> ops::Deref for PhysicalDeviceFeatures2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceFeatures2Builder<'b> {
+impl ops::DerefMut for PhysicalDeviceFeatures2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceFeatures2Builder<'b> {
+unsafe impl Cast for PhysicalDeviceFeatures2Builder<'_> {
     type Target = PhysicalDeviceFeatures2;
 
     #[inline]
@@ -50003,7 +50004,7 @@ impl<'b> PhysicalDeviceHostImageCopyPropertiesBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceHostImageCopyPropertiesBuilder<'b> {
+impl ops::Deref for PhysicalDeviceHostImageCopyPropertiesBuilder<'_> {
     type Target = PhysicalDeviceHostImageCopyProperties;
 
     #[inline]
@@ -50012,14 +50013,14 @@ impl<'b> ops::Deref for PhysicalDeviceHostImageCopyPropertiesBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceHostImageCopyPropertiesBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceHostImageCopyPropertiesBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceHostImageCopyPropertiesBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceHostImageCopyPropertiesBuilder<'_> {
     type Target = PhysicalDeviceHostImageCopyProperties;
 
     #[inline]
@@ -50515,7 +50516,7 @@ impl<'b> PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'b> {
+impl ops::Deref for PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'_> {
     type Target = PhysicalDeviceImageDrmFormatModifierInfoEXT;
 
     #[inline]
@@ -50524,14 +50525,14 @@ impl<'b> ops::Deref for PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceImageDrmFormatModifierInfoEXTBuilder<'_> {
     type Target = PhysicalDeviceImageDrmFormatModifierInfoEXT;
 
     #[inline]
@@ -50618,7 +50619,7 @@ impl<'b> PhysicalDeviceImageFormatInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceImageFormatInfo2Builder<'b> {
+impl ops::Deref for PhysicalDeviceImageFormatInfo2Builder<'_> {
     type Target = PhysicalDeviceImageFormatInfo2;
 
     #[inline]
@@ -50627,14 +50628,14 @@ impl<'b> ops::Deref for PhysicalDeviceImageFormatInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceImageFormatInfo2Builder<'b> {
+impl ops::DerefMut for PhysicalDeviceImageFormatInfo2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceImageFormatInfo2Builder<'b> {
+unsafe impl Cast for PhysicalDeviceImageFormatInfo2Builder<'_> {
     type Target = PhysicalDeviceImageFormatInfo2;
 
     #[inline]
@@ -51621,7 +51622,7 @@ impl<'b> PhysicalDeviceLayeredApiPropertiesKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceLayeredApiPropertiesKHRBuilder<'b> {
+impl ops::Deref for PhysicalDeviceLayeredApiPropertiesKHRBuilder<'_> {
     type Target = PhysicalDeviceLayeredApiPropertiesKHR;
 
     #[inline]
@@ -51630,14 +51631,14 @@ impl<'b> ops::Deref for PhysicalDeviceLayeredApiPropertiesKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceLayeredApiPropertiesKHRBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceLayeredApiPropertiesKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceLayeredApiPropertiesKHRBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceLayeredApiPropertiesKHRBuilder<'_> {
     type Target = PhysicalDeviceLayeredApiPropertiesKHR;
 
     #[inline]
@@ -51690,7 +51691,7 @@ impl<'b> PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'b> {
+impl ops::Deref for PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'_> {
     type Target = PhysicalDeviceLayeredApiPropertiesListKHR;
 
     #[inline]
@@ -51699,14 +51700,14 @@ impl<'b> ops::Deref for PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceLayeredApiPropertiesListKHRBuilder<'_> {
     type Target = PhysicalDeviceLayeredApiPropertiesListKHR;
 
     #[inline]
@@ -51749,7 +51750,7 @@ impl<'b> PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'b> {
+impl ops::Deref for PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'_> {
     type Target = PhysicalDeviceLayeredApiVulkanPropertiesKHR;
 
     #[inline]
@@ -51758,14 +51759,14 @@ impl<'b> ops::Deref for PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceLayeredApiVulkanPropertiesKHRBuilder<'_> {
     type Target = PhysicalDeviceLayeredApiVulkanPropertiesKHR;
 
     #[inline]
@@ -54410,7 +54411,7 @@ impl<'b> PhysicalDeviceMemoryProperties2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceMemoryProperties2Builder<'b> {
+impl ops::Deref for PhysicalDeviceMemoryProperties2Builder<'_> {
     type Target = PhysicalDeviceMemoryProperties2;
 
     #[inline]
@@ -54419,14 +54420,14 @@ impl<'b> ops::Deref for PhysicalDeviceMemoryProperties2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceMemoryProperties2Builder<'b> {
+impl ops::DerefMut for PhysicalDeviceMemoryProperties2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceMemoryProperties2Builder<'b> {
+unsafe impl Cast for PhysicalDeviceMemoryProperties2Builder<'_> {
     type Target = PhysicalDeviceMemoryProperties2;
 
     #[inline]
@@ -58421,7 +58422,7 @@ impl<'b> PhysicalDeviceProperties2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceProperties2Builder<'b> {
+impl ops::Deref for PhysicalDeviceProperties2Builder<'_> {
     type Target = PhysicalDeviceProperties2;
 
     #[inline]
@@ -58430,14 +58431,14 @@ impl<'b> ops::Deref for PhysicalDeviceProperties2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceProperties2Builder<'b> {
+impl ops::DerefMut for PhysicalDeviceProperties2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceProperties2Builder<'b> {
+unsafe impl Cast for PhysicalDeviceProperties2Builder<'_> {
     type Target = PhysicalDeviceProperties2;
 
     #[inline]
@@ -64632,7 +64633,7 @@ impl<'b> PhysicalDeviceSurfaceInfo2KHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceSurfaceInfo2KHRBuilder<'b> {
+impl ops::Deref for PhysicalDeviceSurfaceInfo2KHRBuilder<'_> {
     type Target = PhysicalDeviceSurfaceInfo2KHR;
 
     #[inline]
@@ -64641,14 +64642,14 @@ impl<'b> ops::Deref for PhysicalDeviceSurfaceInfo2KHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceSurfaceInfo2KHRBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceSurfaceInfo2KHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceSurfaceInfo2KHRBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceSurfaceInfo2KHRBuilder<'_> {
     type Target = PhysicalDeviceSurfaceInfo2KHR;
 
     #[inline]
@@ -66769,7 +66770,7 @@ impl<'b> PhysicalDeviceVideoEncodeQualityLevelInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceVideoEncodeQualityLevelInfoKHRBuilder<'b> {
+impl ops::Deref for PhysicalDeviceVideoEncodeQualityLevelInfoKHRBuilder<'_> {
     type Target = PhysicalDeviceVideoEncodeQualityLevelInfoKHR;
 
     #[inline]
@@ -66778,14 +66779,14 @@ impl<'b> ops::Deref for PhysicalDeviceVideoEncodeQualityLevelInfoKHRBuilder<'b> 
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceVideoEncodeQualityLevelInfoKHRBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceVideoEncodeQualityLevelInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceVideoEncodeQualityLevelInfoKHRBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceVideoEncodeQualityLevelInfoKHRBuilder<'_> {
     type Target = PhysicalDeviceVideoEncodeQualityLevelInfoKHR;
 
     #[inline]
@@ -66899,7 +66900,7 @@ impl<'b> PhysicalDeviceVideoFormatInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceVideoFormatInfoKHRBuilder<'b> {
+impl ops::Deref for PhysicalDeviceVideoFormatInfoKHRBuilder<'_> {
     type Target = PhysicalDeviceVideoFormatInfoKHR;
 
     #[inline]
@@ -66908,14 +66909,14 @@ impl<'b> ops::Deref for PhysicalDeviceVideoFormatInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceVideoFormatInfoKHRBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceVideoFormatInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceVideoFormatInfoKHRBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceVideoFormatInfoKHRBuilder<'_> {
     type Target = PhysicalDeviceVideoFormatInfoKHR;
 
     #[inline]
@@ -69414,7 +69415,7 @@ impl<'b> PhysicalDeviceVulkan14PropertiesBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PhysicalDeviceVulkan14PropertiesBuilder<'b> {
+impl ops::Deref for PhysicalDeviceVulkan14PropertiesBuilder<'_> {
     type Target = PhysicalDeviceVulkan14Properties;
 
     #[inline]
@@ -69423,14 +69424,14 @@ impl<'b> ops::Deref for PhysicalDeviceVulkan14PropertiesBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PhysicalDeviceVulkan14PropertiesBuilder<'b> {
+impl ops::DerefMut for PhysicalDeviceVulkan14PropertiesBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PhysicalDeviceVulkan14PropertiesBuilder<'b> {
+unsafe impl Cast for PhysicalDeviceVulkan14PropertiesBuilder<'_> {
     type Target = PhysicalDeviceVulkan14Properties;
 
     #[inline]
@@ -69955,7 +69956,7 @@ impl<'b> PipelineBinaryCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineBinaryCreateInfoKHRBuilder<'b> {
+impl ops::Deref for PipelineBinaryCreateInfoKHRBuilder<'_> {
     type Target = PipelineBinaryCreateInfoKHR;
 
     #[inline]
@@ -69964,14 +69965,14 @@ impl<'b> ops::Deref for PipelineBinaryCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineBinaryCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for PipelineBinaryCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineBinaryCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for PipelineBinaryCreateInfoKHRBuilder<'_> {
     type Target = PipelineBinaryCreateInfoKHR;
 
     #[inline]
@@ -70073,7 +70074,7 @@ impl<'b> PipelineBinaryDataKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineBinaryDataKHRBuilder<'b> {
+impl ops::Deref for PipelineBinaryDataKHRBuilder<'_> {
     type Target = PipelineBinaryDataKHR;
 
     #[inline]
@@ -70082,14 +70083,14 @@ impl<'b> ops::Deref for PipelineBinaryDataKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineBinaryDataKHRBuilder<'b> {
+impl ops::DerefMut for PipelineBinaryDataKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineBinaryDataKHRBuilder<'b> {
+unsafe impl Cast for PipelineBinaryDataKHRBuilder<'_> {
     type Target = PipelineBinaryDataKHR;
 
     #[inline]
@@ -70139,7 +70140,7 @@ impl<'b> PipelineBinaryHandlesInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineBinaryHandlesInfoKHRBuilder<'b> {
+impl ops::Deref for PipelineBinaryHandlesInfoKHRBuilder<'_> {
     type Target = PipelineBinaryHandlesInfoKHR;
 
     #[inline]
@@ -70148,14 +70149,14 @@ impl<'b> ops::Deref for PipelineBinaryHandlesInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineBinaryHandlesInfoKHRBuilder<'b> {
+impl ops::DerefMut for PipelineBinaryHandlesInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineBinaryHandlesInfoKHRBuilder<'b> {
+unsafe impl Cast for PipelineBinaryHandlesInfoKHRBuilder<'_> {
     type Target = PipelineBinaryHandlesInfoKHR;
 
     #[inline]
@@ -70199,7 +70200,7 @@ impl<'b> PipelineBinaryInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineBinaryInfoKHRBuilder<'b> {
+impl ops::Deref for PipelineBinaryInfoKHRBuilder<'_> {
     type Target = PipelineBinaryInfoKHR;
 
     #[inline]
@@ -70208,14 +70209,14 @@ impl<'b> ops::Deref for PipelineBinaryInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineBinaryInfoKHRBuilder<'b> {
+impl ops::DerefMut for PipelineBinaryInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineBinaryInfoKHRBuilder<'b> {
+unsafe impl Cast for PipelineBinaryInfoKHRBuilder<'_> {
     type Target = PipelineBinaryInfoKHR;
 
     #[inline]
@@ -70336,7 +70337,7 @@ impl<'b> PipelineBinaryKeysAndDataKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineBinaryKeysAndDataKHRBuilder<'b> {
+impl ops::Deref for PipelineBinaryKeysAndDataKHRBuilder<'_> {
     type Target = PipelineBinaryKeysAndDataKHR;
 
     #[inline]
@@ -70345,14 +70346,14 @@ impl<'b> ops::Deref for PipelineBinaryKeysAndDataKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineBinaryKeysAndDataKHRBuilder<'b> {
+impl ops::DerefMut for PipelineBinaryKeysAndDataKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineBinaryKeysAndDataKHRBuilder<'b> {
+unsafe impl Cast for PipelineBinaryKeysAndDataKHRBuilder<'_> {
     type Target = PipelineBinaryKeysAndDataKHR;
 
     #[inline]
@@ -70402,7 +70403,7 @@ impl<'b> PipelineCacheCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineCacheCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineCacheCreateInfoBuilder<'_> {
     type Target = PipelineCacheCreateInfo;
 
     #[inline]
@@ -70411,14 +70412,14 @@ impl<'b> ops::Deref for PipelineCacheCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineCacheCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineCacheCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineCacheCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineCacheCreateInfoBuilder<'_> {
     type Target = PipelineCacheCreateInfo;
 
     #[inline]
@@ -70767,7 +70768,7 @@ impl<'b> PipelineColorBlendStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineColorBlendStateCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineColorBlendStateCreateInfoBuilder<'_> {
     type Target = PipelineColorBlendStateCreateInfo;
 
     #[inline]
@@ -70776,14 +70777,14 @@ impl<'b> ops::Deref for PipelineColorBlendStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineColorBlendStateCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineColorBlendStateCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineColorBlendStateCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineColorBlendStateCreateInfoBuilder<'_> {
     type Target = PipelineColorBlendStateCreateInfo;
 
     #[inline]
@@ -70827,7 +70828,7 @@ impl<'b> PipelineColorWriteCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineColorWriteCreateInfoEXTBuilder<'b> {
+impl ops::Deref for PipelineColorWriteCreateInfoEXTBuilder<'_> {
     type Target = PipelineColorWriteCreateInfoEXT;
 
     #[inline]
@@ -70836,14 +70837,14 @@ impl<'b> ops::Deref for PipelineColorWriteCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineColorWriteCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for PipelineColorWriteCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineColorWriteCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for PipelineColorWriteCreateInfoEXTBuilder<'_> {
     type Target = PipelineColorWriteCreateInfoEXT;
 
     #[inline]
@@ -70978,7 +70979,7 @@ impl<'b> PipelineCoverageModulationStateCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineCoverageModulationStateCreateInfoNVBuilder<'b> {
+impl ops::Deref for PipelineCoverageModulationStateCreateInfoNVBuilder<'_> {
     type Target = PipelineCoverageModulationStateCreateInfoNV;
 
     #[inline]
@@ -70987,14 +70988,14 @@ impl<'b> ops::Deref for PipelineCoverageModulationStateCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineCoverageModulationStateCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for PipelineCoverageModulationStateCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineCoverageModulationStateCreateInfoNVBuilder<'b> {
+unsafe impl Cast for PipelineCoverageModulationStateCreateInfoNVBuilder<'_> {
     type Target = PipelineCoverageModulationStateCreateInfoNV;
 
     #[inline]
@@ -71363,7 +71364,7 @@ impl<'b> PipelineCreationFeedbackCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineCreationFeedbackCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineCreationFeedbackCreateInfoBuilder<'_> {
     type Target = PipelineCreationFeedbackCreateInfo;
 
     #[inline]
@@ -71372,14 +71373,14 @@ impl<'b> ops::Deref for PipelineCreationFeedbackCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineCreationFeedbackCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineCreationFeedbackCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineCreationFeedbackCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineCreationFeedbackCreateInfoBuilder<'_> {
     type Target = PipelineCreationFeedbackCreateInfo;
 
     #[inline]
@@ -71553,7 +71554,7 @@ impl<'b> PipelineDiscardRectangleStateCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineDiscardRectangleStateCreateInfoEXTBuilder<'b> {
+impl ops::Deref for PipelineDiscardRectangleStateCreateInfoEXTBuilder<'_> {
     type Target = PipelineDiscardRectangleStateCreateInfoEXT;
 
     #[inline]
@@ -71562,14 +71563,14 @@ impl<'b> ops::Deref for PipelineDiscardRectangleStateCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineDiscardRectangleStateCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for PipelineDiscardRectangleStateCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineDiscardRectangleStateCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for PipelineDiscardRectangleStateCreateInfoEXTBuilder<'_> {
     type Target = PipelineDiscardRectangleStateCreateInfoEXT;
 
     #[inline]
@@ -71619,7 +71620,7 @@ impl<'b> PipelineDynamicStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineDynamicStateCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineDynamicStateCreateInfoBuilder<'_> {
     type Target = PipelineDynamicStateCreateInfo;
 
     #[inline]
@@ -71628,14 +71629,14 @@ impl<'b> ops::Deref for PipelineDynamicStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineDynamicStateCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineDynamicStateCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineDynamicStateCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineDynamicStateCreateInfoBuilder<'_> {
     type Target = PipelineDynamicStateCreateInfo;
 
     #[inline]
@@ -71770,7 +71771,7 @@ impl<'b> PipelineExecutableInternalRepresentationKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineExecutableInternalRepresentationKHRBuilder<'b> {
+impl ops::Deref for PipelineExecutableInternalRepresentationKHRBuilder<'_> {
     type Target = PipelineExecutableInternalRepresentationKHR;
 
     #[inline]
@@ -71779,14 +71780,14 @@ impl<'b> ops::Deref for PipelineExecutableInternalRepresentationKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineExecutableInternalRepresentationKHRBuilder<'b> {
+impl ops::DerefMut for PipelineExecutableInternalRepresentationKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineExecutableInternalRepresentationKHRBuilder<'b> {
+unsafe impl Cast for PipelineExecutableInternalRepresentationKHRBuilder<'_> {
     type Target = PipelineExecutableInternalRepresentationKHR;
 
     #[inline]
@@ -72388,7 +72389,7 @@ impl<'b> PipelineLayoutCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineLayoutCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineLayoutCreateInfoBuilder<'_> {
     type Target = PipelineLayoutCreateInfo;
 
     #[inline]
@@ -72397,14 +72398,14 @@ impl<'b> ops::Deref for PipelineLayoutCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineLayoutCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineLayoutCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineLayoutCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineLayoutCreateInfoBuilder<'_> {
     type Target = PipelineLayoutCreateInfo;
 
     #[inline]
@@ -72448,7 +72449,7 @@ impl<'b> PipelineLibraryCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineLibraryCreateInfoKHRBuilder<'b> {
+impl ops::Deref for PipelineLibraryCreateInfoKHRBuilder<'_> {
     type Target = PipelineLibraryCreateInfoKHR;
 
     #[inline]
@@ -72457,14 +72458,14 @@ impl<'b> ops::Deref for PipelineLibraryCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineLibraryCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for PipelineLibraryCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineLibraryCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for PipelineLibraryCreateInfoKHRBuilder<'_> {
     type Target = PipelineLibraryCreateInfoKHR;
 
     #[inline]
@@ -72568,7 +72569,7 @@ impl<'b> PipelineMultisampleStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineMultisampleStateCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineMultisampleStateCreateInfoBuilder<'_> {
     type Target = PipelineMultisampleStateCreateInfo;
 
     #[inline]
@@ -72577,14 +72578,14 @@ impl<'b> ops::Deref for PipelineMultisampleStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineMultisampleStateCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineMultisampleStateCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineMultisampleStateCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineMultisampleStateCreateInfoBuilder<'_> {
     type Target = PipelineMultisampleStateCreateInfo;
 
     #[inline]
@@ -73062,7 +73063,7 @@ impl<'b> PipelineRasterizationStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineRasterizationStateCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineRasterizationStateCreateInfoBuilder<'_> {
     type Target = PipelineRasterizationStateCreateInfo;
 
     #[inline]
@@ -73071,14 +73072,14 @@ impl<'b> ops::Deref for PipelineRasterizationStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineRasterizationStateCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineRasterizationStateCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineRasterizationStateCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineRasterizationStateCreateInfoBuilder<'_> {
     type Target = PipelineRasterizationStateCreateInfo;
 
     #[inline]
@@ -73262,7 +73263,7 @@ impl<'b> PipelineRenderingCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineRenderingCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineRenderingCreateInfoBuilder<'_> {
     type Target = PipelineRenderingCreateInfo;
 
     #[inline]
@@ -73271,14 +73272,14 @@ impl<'b> ops::Deref for PipelineRenderingCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineRenderingCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineRenderingCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineRenderingCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineRenderingCreateInfoBuilder<'_> {
     type Target = PipelineRenderingCreateInfo;
 
     #[inline]
@@ -73468,7 +73469,7 @@ impl<'b> PipelineSampleLocationsStateCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineSampleLocationsStateCreateInfoEXTBuilder<'b> {
+impl ops::Deref for PipelineSampleLocationsStateCreateInfoEXTBuilder<'_> {
     type Target = PipelineSampleLocationsStateCreateInfoEXT;
 
     #[inline]
@@ -73477,14 +73478,14 @@ impl<'b> ops::Deref for PipelineSampleLocationsStateCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineSampleLocationsStateCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for PipelineSampleLocationsStateCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineSampleLocationsStateCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for PipelineSampleLocationsStateCreateInfoEXTBuilder<'_> {
     type Target = PipelineSampleLocationsStateCreateInfoEXT;
 
     #[inline]
@@ -73579,7 +73580,7 @@ impl<'b> PipelineShaderStageCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineShaderStageCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineShaderStageCreateInfoBuilder<'_> {
     type Target = PipelineShaderStageCreateInfo;
 
     #[inline]
@@ -73588,14 +73589,14 @@ impl<'b> ops::Deref for PipelineShaderStageCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineShaderStageCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineShaderStageCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineShaderStageCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineShaderStageCreateInfoBuilder<'_> {
     type Target = PipelineShaderStageCreateInfo;
 
     #[inline]
@@ -73639,7 +73640,7 @@ impl<'b> PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'b> {
+impl ops::Deref for PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'_> {
     type Target = PipelineShaderStageModuleIdentifierCreateInfoEXT;
 
     #[inline]
@@ -73648,14 +73649,14 @@ impl<'b> ops::Deref for PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<
     }
 }
 
-impl<'b> ops::DerefMut for PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for PipelineShaderStageModuleIdentifierCreateInfoEXTBuilder<'_> {
     type Target = PipelineShaderStageModuleIdentifierCreateInfoEXT;
 
     #[inline]
@@ -73704,7 +73705,7 @@ impl<'b> PipelineShaderStageNodeCreateInfoAMDXBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineShaderStageNodeCreateInfoAMDXBuilder<'b> {
+impl ops::Deref for PipelineShaderStageNodeCreateInfoAMDXBuilder<'_> {
     type Target = PipelineShaderStageNodeCreateInfoAMDX;
 
     #[inline]
@@ -73713,14 +73714,14 @@ impl<'b> ops::Deref for PipelineShaderStageNodeCreateInfoAMDXBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineShaderStageNodeCreateInfoAMDXBuilder<'b> {
+impl ops::DerefMut for PipelineShaderStageNodeCreateInfoAMDXBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineShaderStageNodeCreateInfoAMDXBuilder<'b> {
+unsafe impl Cast for PipelineShaderStageNodeCreateInfoAMDXBuilder<'_> {
     type Target = PipelineShaderStageNodeCreateInfoAMDX;
 
     #[inline]
@@ -73901,7 +73902,7 @@ impl<'b> PipelineTessellationStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineTessellationStateCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineTessellationStateCreateInfoBuilder<'_> {
     type Target = PipelineTessellationStateCreateInfo;
 
     #[inline]
@@ -73910,14 +73911,14 @@ impl<'b> ops::Deref for PipelineTessellationStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineTessellationStateCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineTessellationStateCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineTessellationStateCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineTessellationStateCreateInfoBuilder<'_> {
     type Target = PipelineTessellationStateCreateInfo;
 
     #[inline]
@@ -73964,7 +73965,7 @@ impl<'b> PipelineVertexInputDivisorStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineVertexInputDivisorStateCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineVertexInputDivisorStateCreateInfoBuilder<'_> {
     type Target = PipelineVertexInputDivisorStateCreateInfo;
 
     #[inline]
@@ -73973,14 +73974,14 @@ impl<'b> ops::Deref for PipelineVertexInputDivisorStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineVertexInputDivisorStateCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineVertexInputDivisorStateCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineVertexInputDivisorStateCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineVertexInputDivisorStateCreateInfoBuilder<'_> {
     type Target = PipelineVertexInputDivisorStateCreateInfo;
 
     #[inline]
@@ -74059,7 +74060,7 @@ impl<'b> PipelineVertexInputStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineVertexInputStateCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineVertexInputStateCreateInfoBuilder<'_> {
     type Target = PipelineVertexInputStateCreateInfo;
 
     #[inline]
@@ -74068,14 +74069,14 @@ impl<'b> ops::Deref for PipelineVertexInputStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineVertexInputStateCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineVertexInputStateCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineVertexInputStateCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineVertexInputStateCreateInfoBuilder<'_> {
     type Target = PipelineVertexInputStateCreateInfo;
 
     #[inline]
@@ -74128,7 +74129,7 @@ impl<'b> PipelineViewportCoarseSampleOrderStateCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineViewportCoarseSampleOrderStateCreateInfoNVBuilder<'b> {
+impl ops::Deref for PipelineViewportCoarseSampleOrderStateCreateInfoNVBuilder<'_> {
     type Target = PipelineViewportCoarseSampleOrderStateCreateInfoNV;
 
     #[inline]
@@ -74137,14 +74138,14 @@ impl<'b> ops::Deref for PipelineViewportCoarseSampleOrderStateCreateInfoNVBuilde
     }
 }
 
-impl<'b> ops::DerefMut for PipelineViewportCoarseSampleOrderStateCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for PipelineViewportCoarseSampleOrderStateCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineViewportCoarseSampleOrderStateCreateInfoNVBuilder<'b> {
+unsafe impl Cast for PipelineViewportCoarseSampleOrderStateCreateInfoNVBuilder<'_> {
     type Target = PipelineViewportCoarseSampleOrderStateCreateInfoNV;
 
     #[inline]
@@ -74196,7 +74197,7 @@ impl<'b> PipelineViewportDepthClampControlCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineViewportDepthClampControlCreateInfoEXTBuilder<'b> {
+impl ops::Deref for PipelineViewportDepthClampControlCreateInfoEXTBuilder<'_> {
     type Target = PipelineViewportDepthClampControlCreateInfoEXT;
 
     #[inline]
@@ -74205,14 +74206,14 @@ impl<'b> ops::Deref for PipelineViewportDepthClampControlCreateInfoEXTBuilder<'b
     }
 }
 
-impl<'b> ops::DerefMut for PipelineViewportDepthClampControlCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for PipelineViewportDepthClampControlCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineViewportDepthClampControlCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for PipelineViewportDepthClampControlCreateInfoEXTBuilder<'_> {
     type Target = PipelineViewportDepthClampControlCreateInfoEXT;
 
     #[inline]
@@ -74317,7 +74318,7 @@ impl<'b> PipelineViewportExclusiveScissorStateCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineViewportExclusiveScissorStateCreateInfoNVBuilder<'b> {
+impl ops::Deref for PipelineViewportExclusiveScissorStateCreateInfoNVBuilder<'_> {
     type Target = PipelineViewportExclusiveScissorStateCreateInfoNV;
 
     #[inline]
@@ -74326,14 +74327,14 @@ impl<'b> ops::Deref for PipelineViewportExclusiveScissorStateCreateInfoNVBuilder
     }
 }
 
-impl<'b> ops::DerefMut for PipelineViewportExclusiveScissorStateCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for PipelineViewportExclusiveScissorStateCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineViewportExclusiveScissorStateCreateInfoNVBuilder<'b> {
+unsafe impl Cast for PipelineViewportExclusiveScissorStateCreateInfoNVBuilder<'_> {
     type Target = PipelineViewportExclusiveScissorStateCreateInfoNV;
 
     #[inline]
@@ -74386,7 +74387,7 @@ impl<'b> PipelineViewportShadingRateImageStateCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineViewportShadingRateImageStateCreateInfoNVBuilder<'b> {
+impl ops::Deref for PipelineViewportShadingRateImageStateCreateInfoNVBuilder<'_> {
     type Target = PipelineViewportShadingRateImageStateCreateInfoNV;
 
     #[inline]
@@ -74395,14 +74396,14 @@ impl<'b> ops::Deref for PipelineViewportShadingRateImageStateCreateInfoNVBuilder
     }
 }
 
-impl<'b> ops::DerefMut for PipelineViewportShadingRateImageStateCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for PipelineViewportShadingRateImageStateCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineViewportShadingRateImageStateCreateInfoNVBuilder<'b> {
+unsafe impl Cast for PipelineViewportShadingRateImageStateCreateInfoNVBuilder<'_> {
     type Target = PipelineViewportShadingRateImageStateCreateInfoNV;
 
     #[inline]
@@ -74505,7 +74506,7 @@ impl<'b> PipelineViewportStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineViewportStateCreateInfoBuilder<'b> {
+impl ops::Deref for PipelineViewportStateCreateInfoBuilder<'_> {
     type Target = PipelineViewportStateCreateInfo;
 
     #[inline]
@@ -74514,14 +74515,14 @@ impl<'b> ops::Deref for PipelineViewportStateCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineViewportStateCreateInfoBuilder<'b> {
+impl ops::DerefMut for PipelineViewportStateCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineViewportStateCreateInfoBuilder<'b> {
+unsafe impl Cast for PipelineViewportStateCreateInfoBuilder<'_> {
     type Target = PipelineViewportStateCreateInfo;
 
     #[inline]
@@ -74574,7 +74575,7 @@ impl<'b> PipelineViewportSwizzleStateCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineViewportSwizzleStateCreateInfoNVBuilder<'b> {
+impl ops::Deref for PipelineViewportSwizzleStateCreateInfoNVBuilder<'_> {
     type Target = PipelineViewportSwizzleStateCreateInfoNV;
 
     #[inline]
@@ -74583,14 +74584,14 @@ impl<'b> ops::Deref for PipelineViewportSwizzleStateCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineViewportSwizzleStateCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for PipelineViewportSwizzleStateCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineViewportSwizzleStateCreateInfoNVBuilder<'b> {
+unsafe impl Cast for PipelineViewportSwizzleStateCreateInfoNVBuilder<'_> {
     type Target = PipelineViewportSwizzleStateCreateInfoNV;
 
     #[inline]
@@ -74649,7 +74650,7 @@ impl<'b> PipelineViewportWScalingStateCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PipelineViewportWScalingStateCreateInfoNVBuilder<'b> {
+impl ops::Deref for PipelineViewportWScalingStateCreateInfoNVBuilder<'_> {
     type Target = PipelineViewportWScalingStateCreateInfoNV;
 
     #[inline]
@@ -74658,14 +74659,14 @@ impl<'b> ops::Deref for PipelineViewportWScalingStateCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PipelineViewportWScalingStateCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for PipelineViewportWScalingStateCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PipelineViewportWScalingStateCreateInfoNVBuilder<'b> {
+unsafe impl Cast for PipelineViewportWScalingStateCreateInfoNVBuilder<'_> {
     type Target = PipelineViewportWScalingStateCreateInfoNV;
 
     #[inline]
@@ -74773,7 +74774,7 @@ impl<'b> PresentId2KHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PresentId2KHRBuilder<'b> {
+impl ops::Deref for PresentId2KHRBuilder<'_> {
     type Target = PresentId2KHR;
 
     #[inline]
@@ -74782,14 +74783,14 @@ impl<'b> ops::Deref for PresentId2KHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PresentId2KHRBuilder<'b> {
+impl ops::DerefMut for PresentId2KHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PresentId2KHRBuilder<'b> {
+unsafe impl Cast for PresentId2KHRBuilder<'_> {
     type Target = PresentId2KHR;
 
     #[inline]
@@ -74839,7 +74840,7 @@ impl<'b> PresentIdKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PresentIdKHRBuilder<'b> {
+impl ops::Deref for PresentIdKHRBuilder<'_> {
     type Target = PresentIdKHR;
 
     #[inline]
@@ -74848,14 +74849,14 @@ impl<'b> ops::Deref for PresentIdKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PresentIdKHRBuilder<'b> {
+impl ops::DerefMut for PresentIdKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PresentIdKHRBuilder<'b> {
+unsafe impl Cast for PresentIdKHRBuilder<'_> {
     type Target = PresentIdKHR;
 
     #[inline]
@@ -74950,7 +74951,7 @@ impl<'b> PresentInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PresentInfoKHRBuilder<'b> {
+impl ops::Deref for PresentInfoKHRBuilder<'_> {
     type Target = PresentInfoKHR;
 
     #[inline]
@@ -74959,14 +74960,14 @@ impl<'b> ops::Deref for PresentInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PresentInfoKHRBuilder<'b> {
+impl ops::DerefMut for PresentInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PresentInfoKHRBuilder<'b> {
+unsafe impl Cast for PresentInfoKHRBuilder<'_> {
     type Target = PresentInfoKHR;
 
     #[inline]
@@ -75016,7 +75017,7 @@ impl<'b> PresentRegionKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PresentRegionKHRBuilder<'b> {
+impl ops::Deref for PresentRegionKHRBuilder<'_> {
     type Target = PresentRegionKHR;
 
     #[inline]
@@ -75025,14 +75026,14 @@ impl<'b> ops::Deref for PresentRegionKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PresentRegionKHRBuilder<'b> {
+impl ops::DerefMut for PresentRegionKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PresentRegionKHRBuilder<'b> {
+unsafe impl Cast for PresentRegionKHRBuilder<'_> {
     type Target = PresentRegionKHR;
 
     #[inline]
@@ -75082,7 +75083,7 @@ impl<'b> PresentRegionsKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PresentRegionsKHRBuilder<'b> {
+impl ops::Deref for PresentRegionsKHRBuilder<'_> {
     type Target = PresentRegionsKHR;
 
     #[inline]
@@ -75091,14 +75092,14 @@ impl<'b> ops::Deref for PresentRegionsKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PresentRegionsKHRBuilder<'b> {
+impl ops::DerefMut for PresentRegionsKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PresentRegionsKHRBuilder<'b> {
+unsafe impl Cast for PresentRegionsKHRBuilder<'_> {
     type Target = PresentRegionsKHR;
 
     #[inline]
@@ -75212,7 +75213,7 @@ impl<'b> PresentTimesInfoGOOGLEBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PresentTimesInfoGOOGLEBuilder<'b> {
+impl ops::Deref for PresentTimesInfoGOOGLEBuilder<'_> {
     type Target = PresentTimesInfoGOOGLE;
 
     #[inline]
@@ -75221,14 +75222,14 @@ impl<'b> ops::Deref for PresentTimesInfoGOOGLEBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PresentTimesInfoGOOGLEBuilder<'b> {
+impl ops::DerefMut for PresentTimesInfoGOOGLEBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PresentTimesInfoGOOGLEBuilder<'b> {
+unsafe impl Cast for PresentTimesInfoGOOGLEBuilder<'_> {
     type Target = PresentTimesInfoGOOGLE;
 
     #[inline]
@@ -75553,7 +75554,7 @@ impl<'b> PushConstantsInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PushConstantsInfoBuilder<'b> {
+impl ops::Deref for PushConstantsInfoBuilder<'_> {
     type Target = PushConstantsInfo;
 
     #[inline]
@@ -75562,14 +75563,14 @@ impl<'b> ops::Deref for PushConstantsInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PushConstantsInfoBuilder<'b> {
+impl ops::DerefMut for PushConstantsInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PushConstantsInfoBuilder<'b> {
+unsafe impl Cast for PushConstantsInfoBuilder<'_> {
     type Target = PushConstantsInfo;
 
     #[inline]
@@ -75647,7 +75648,7 @@ impl<'b> PushDescriptorSetInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PushDescriptorSetInfoBuilder<'b> {
+impl ops::Deref for PushDescriptorSetInfoBuilder<'_> {
     type Target = PushDescriptorSetInfo;
 
     #[inline]
@@ -75656,14 +75657,14 @@ impl<'b> ops::Deref for PushDescriptorSetInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PushDescriptorSetInfoBuilder<'b> {
+impl ops::DerefMut for PushDescriptorSetInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PushDescriptorSetInfoBuilder<'b> {
+unsafe impl Cast for PushDescriptorSetInfoBuilder<'_> {
     type Target = PushDescriptorSetInfo;
 
     #[inline]
@@ -75740,7 +75741,7 @@ impl<'b> PushDescriptorSetWithTemplateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for PushDescriptorSetWithTemplateInfoBuilder<'b> {
+impl ops::Deref for PushDescriptorSetWithTemplateInfoBuilder<'_> {
     type Target = PushDescriptorSetWithTemplateInfo;
 
     #[inline]
@@ -75749,14 +75750,14 @@ impl<'b> ops::Deref for PushDescriptorSetWithTemplateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for PushDescriptorSetWithTemplateInfoBuilder<'b> {
+impl ops::DerefMut for PushDescriptorSetWithTemplateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for PushDescriptorSetWithTemplateInfoBuilder<'b> {
+unsafe impl Cast for PushDescriptorSetWithTemplateInfoBuilder<'_> {
     type Target = PushDescriptorSetWithTemplateInfo;
 
     #[inline]
@@ -75799,7 +75800,7 @@ impl<'b> QueryLowLatencySupportNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for QueryLowLatencySupportNVBuilder<'b> {
+impl ops::Deref for QueryLowLatencySupportNVBuilder<'_> {
     type Target = QueryLowLatencySupportNV;
 
     #[inline]
@@ -75808,14 +75809,14 @@ impl<'b> ops::Deref for QueryLowLatencySupportNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for QueryLowLatencySupportNVBuilder<'b> {
+impl ops::DerefMut for QueryLowLatencySupportNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for QueryLowLatencySupportNVBuilder<'b> {
+unsafe impl Cast for QueryLowLatencySupportNVBuilder<'_> {
     type Target = QueryLowLatencySupportNV;
 
     #[inline]
@@ -75901,7 +75902,7 @@ impl<'b> QueryPoolCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for QueryPoolCreateInfoBuilder<'b> {
+impl ops::Deref for QueryPoolCreateInfoBuilder<'_> {
     type Target = QueryPoolCreateInfo;
 
     #[inline]
@@ -75910,14 +75911,14 @@ impl<'b> ops::Deref for QueryPoolCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for QueryPoolCreateInfoBuilder<'b> {
+impl ops::DerefMut for QueryPoolCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for QueryPoolCreateInfoBuilder<'b> {
+unsafe impl Cast for QueryPoolCreateInfoBuilder<'_> {
     type Target = QueryPoolCreateInfo;
 
     #[inline]
@@ -75967,7 +75968,7 @@ impl<'b> QueryPoolPerformanceCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for QueryPoolPerformanceCreateInfoKHRBuilder<'b> {
+impl ops::Deref for QueryPoolPerformanceCreateInfoKHRBuilder<'_> {
     type Target = QueryPoolPerformanceCreateInfoKHR;
 
     #[inline]
@@ -75976,14 +75977,14 @@ impl<'b> ops::Deref for QueryPoolPerformanceCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for QueryPoolPerformanceCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for QueryPoolPerformanceCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for QueryPoolPerformanceCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for QueryPoolPerformanceCreateInfoKHRBuilder<'_> {
     type Target = QueryPoolPerformanceCreateInfoKHR;
 
     #[inline]
@@ -76639,7 +76640,7 @@ impl<'b> QueueFamilyProperties2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for QueueFamilyProperties2Builder<'b> {
+impl ops::Deref for QueueFamilyProperties2Builder<'_> {
     type Target = QueueFamilyProperties2;
 
     #[inline]
@@ -76648,14 +76649,14 @@ impl<'b> ops::Deref for QueueFamilyProperties2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for QueueFamilyProperties2Builder<'b> {
+impl ops::DerefMut for QueueFamilyProperties2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for QueueFamilyProperties2Builder<'b> {
+unsafe impl Cast for QueueFamilyProperties2Builder<'_> {
     type Target = QueueFamilyProperties2;
 
     #[inline]
@@ -76973,7 +76974,7 @@ impl<'b> RayTracingPipelineCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RayTracingPipelineCreateInfoKHRBuilder<'b> {
+impl ops::Deref for RayTracingPipelineCreateInfoKHRBuilder<'_> {
     type Target = RayTracingPipelineCreateInfoKHR;
 
     #[inline]
@@ -76982,14 +76983,14 @@ impl<'b> ops::Deref for RayTracingPipelineCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RayTracingPipelineCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for RayTracingPipelineCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RayTracingPipelineCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for RayTracingPipelineCreateInfoKHRBuilder<'_> {
     type Target = RayTracingPipelineCreateInfoKHR;
 
     #[inline]
@@ -77090,7 +77091,7 @@ impl<'b> RayTracingPipelineCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RayTracingPipelineCreateInfoNVBuilder<'b> {
+impl ops::Deref for RayTracingPipelineCreateInfoNVBuilder<'_> {
     type Target = RayTracingPipelineCreateInfoNV;
 
     #[inline]
@@ -77099,14 +77100,14 @@ impl<'b> ops::Deref for RayTracingPipelineCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RayTracingPipelineCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for RayTracingPipelineCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RayTracingPipelineCreateInfoNVBuilder<'b> {
+unsafe impl Cast for RayTracingPipelineCreateInfoNVBuilder<'_> {
     type Target = RayTracingPipelineCreateInfoNV;
 
     #[inline]
@@ -77250,7 +77251,7 @@ impl<'b> RayTracingShaderGroupCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RayTracingShaderGroupCreateInfoKHRBuilder<'b> {
+impl ops::Deref for RayTracingShaderGroupCreateInfoKHRBuilder<'_> {
     type Target = RayTracingShaderGroupCreateInfoKHR;
 
     #[inline]
@@ -77259,14 +77260,14 @@ impl<'b> ops::Deref for RayTracingShaderGroupCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RayTracingShaderGroupCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for RayTracingShaderGroupCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RayTracingShaderGroupCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for RayTracingShaderGroupCreateInfoKHRBuilder<'_> {
     type Target = RayTracingShaderGroupCreateInfoKHR;
 
     #[inline]
@@ -77654,7 +77655,7 @@ impl<'b> RefreshObjectListKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RefreshObjectListKHRBuilder<'b> {
+impl ops::Deref for RefreshObjectListKHRBuilder<'_> {
     type Target = RefreshObjectListKHR;
 
     #[inline]
@@ -77663,14 +77664,14 @@ impl<'b> ops::Deref for RefreshObjectListKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RefreshObjectListKHRBuilder<'b> {
+impl ops::DerefMut for RefreshObjectListKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RefreshObjectListKHRBuilder<'b> {
+unsafe impl Cast for RefreshObjectListKHRBuilder<'_> {
     type Target = RefreshObjectListKHR;
 
     #[inline]
@@ -77778,7 +77779,7 @@ impl<'b> ReleaseSwapchainImagesInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ReleaseSwapchainImagesInfoKHRBuilder<'b> {
+impl ops::Deref for ReleaseSwapchainImagesInfoKHRBuilder<'_> {
     type Target = ReleaseSwapchainImagesInfoKHR;
 
     #[inline]
@@ -77787,14 +77788,14 @@ impl<'b> ops::Deref for ReleaseSwapchainImagesInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ReleaseSwapchainImagesInfoKHRBuilder<'b> {
+impl ops::DerefMut for ReleaseSwapchainImagesInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ReleaseSwapchainImagesInfoKHRBuilder<'b> {
+unsafe impl Cast for ReleaseSwapchainImagesInfoKHRBuilder<'_> {
     type Target = ReleaseSwapchainImagesInfoKHR;
 
     #[inline]
@@ -77838,7 +77839,7 @@ impl<'b> RenderPassAttachmentBeginInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassAttachmentBeginInfoBuilder<'b> {
+impl ops::Deref for RenderPassAttachmentBeginInfoBuilder<'_> {
     type Target = RenderPassAttachmentBeginInfo;
 
     #[inline]
@@ -77847,14 +77848,14 @@ impl<'b> ops::Deref for RenderPassAttachmentBeginInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassAttachmentBeginInfoBuilder<'b> {
+impl ops::DerefMut for RenderPassAttachmentBeginInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassAttachmentBeginInfoBuilder<'b> {
+unsafe impl Cast for RenderPassAttachmentBeginInfoBuilder<'_> {
     type Target = RenderPassAttachmentBeginInfo;
 
     #[inline]
@@ -77934,7 +77935,7 @@ impl<'b> RenderPassBeginInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassBeginInfoBuilder<'b> {
+impl ops::Deref for RenderPassBeginInfoBuilder<'_> {
     type Target = RenderPassBeginInfo;
 
     #[inline]
@@ -77943,14 +77944,14 @@ impl<'b> ops::Deref for RenderPassBeginInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassBeginInfoBuilder<'b> {
+impl ops::DerefMut for RenderPassBeginInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassBeginInfoBuilder<'b> {
+unsafe impl Cast for RenderPassBeginInfoBuilder<'_> {
     type Target = RenderPassBeginInfo;
 
     #[inline]
@@ -78037,7 +78038,7 @@ impl<'b> RenderPassCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassCreateInfoBuilder<'b> {
+impl ops::Deref for RenderPassCreateInfoBuilder<'_> {
     type Target = RenderPassCreateInfo;
 
     #[inline]
@@ -78046,14 +78047,14 @@ impl<'b> ops::Deref for RenderPassCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassCreateInfoBuilder<'b> {
+impl ops::DerefMut for RenderPassCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassCreateInfoBuilder<'b> {
+unsafe impl Cast for RenderPassCreateInfoBuilder<'_> {
     type Target = RenderPassCreateInfo;
 
     #[inline]
@@ -78147,7 +78148,7 @@ impl<'b> RenderPassCreateInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassCreateInfo2Builder<'b> {
+impl ops::Deref for RenderPassCreateInfo2Builder<'_> {
     type Target = RenderPassCreateInfo2;
 
     #[inline]
@@ -78156,14 +78157,14 @@ impl<'b> ops::Deref for RenderPassCreateInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassCreateInfo2Builder<'b> {
+impl ops::DerefMut for RenderPassCreateInfo2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassCreateInfo2Builder<'b> {
+unsafe impl Cast for RenderPassCreateInfo2Builder<'_> {
     type Target = RenderPassCreateInfo2;
 
     #[inline]
@@ -78267,7 +78268,7 @@ impl<'b> RenderPassCreationFeedbackCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassCreationFeedbackCreateInfoEXTBuilder<'b> {
+impl ops::Deref for RenderPassCreationFeedbackCreateInfoEXTBuilder<'_> {
     type Target = RenderPassCreationFeedbackCreateInfoEXT;
 
     #[inline]
@@ -78276,14 +78277,14 @@ impl<'b> ops::Deref for RenderPassCreationFeedbackCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassCreationFeedbackCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for RenderPassCreationFeedbackCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassCreationFeedbackCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for RenderPassCreationFeedbackCreateInfoEXTBuilder<'_> {
     type Target = RenderPassCreationFeedbackCreateInfoEXT;
 
     #[inline]
@@ -78449,7 +78450,7 @@ impl<'b> RenderPassFragmentDensityMapOffsetEndInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassFragmentDensityMapOffsetEndInfoEXTBuilder<'b> {
+impl ops::Deref for RenderPassFragmentDensityMapOffsetEndInfoEXTBuilder<'_> {
     type Target = RenderPassFragmentDensityMapOffsetEndInfoEXT;
 
     #[inline]
@@ -78458,14 +78459,14 @@ impl<'b> ops::Deref for RenderPassFragmentDensityMapOffsetEndInfoEXTBuilder<'b> 
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassFragmentDensityMapOffsetEndInfoEXTBuilder<'b> {
+impl ops::DerefMut for RenderPassFragmentDensityMapOffsetEndInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassFragmentDensityMapOffsetEndInfoEXTBuilder<'b> {
+unsafe impl Cast for RenderPassFragmentDensityMapOffsetEndInfoEXTBuilder<'_> {
     type Target = RenderPassFragmentDensityMapOffsetEndInfoEXT;
 
     #[inline]
@@ -78512,7 +78513,7 @@ impl<'b> RenderPassInputAttachmentAspectCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassInputAttachmentAspectCreateInfoBuilder<'b> {
+impl ops::Deref for RenderPassInputAttachmentAspectCreateInfoBuilder<'_> {
     type Target = RenderPassInputAttachmentAspectCreateInfo;
 
     #[inline]
@@ -78521,14 +78522,14 @@ impl<'b> ops::Deref for RenderPassInputAttachmentAspectCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassInputAttachmentAspectCreateInfoBuilder<'b> {
+impl ops::DerefMut for RenderPassInputAttachmentAspectCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassInputAttachmentAspectCreateInfoBuilder<'b> {
+unsafe impl Cast for RenderPassInputAttachmentAspectCreateInfoBuilder<'_> {
     type Target = RenderPassInputAttachmentAspectCreateInfo;
 
     #[inline]
@@ -78586,7 +78587,7 @@ impl<'b> RenderPassMultiviewCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassMultiviewCreateInfoBuilder<'b> {
+impl ops::Deref for RenderPassMultiviewCreateInfoBuilder<'_> {
     type Target = RenderPassMultiviewCreateInfo;
 
     #[inline]
@@ -78595,14 +78596,14 @@ impl<'b> ops::Deref for RenderPassMultiviewCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassMultiviewCreateInfoBuilder<'b> {
+impl ops::DerefMut for RenderPassMultiviewCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassMultiviewCreateInfoBuilder<'b> {
+unsafe impl Cast for RenderPassMultiviewCreateInfoBuilder<'_> {
     type Target = RenderPassMultiviewCreateInfo;
 
     #[inline]
@@ -78661,7 +78662,7 @@ impl<'b> RenderPassSampleLocationsBeginInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassSampleLocationsBeginInfoEXTBuilder<'b> {
+impl ops::Deref for RenderPassSampleLocationsBeginInfoEXTBuilder<'_> {
     type Target = RenderPassSampleLocationsBeginInfoEXT;
 
     #[inline]
@@ -78670,14 +78671,14 @@ impl<'b> ops::Deref for RenderPassSampleLocationsBeginInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassSampleLocationsBeginInfoEXTBuilder<'b> {
+impl ops::DerefMut for RenderPassSampleLocationsBeginInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassSampleLocationsBeginInfoEXTBuilder<'b> {
+unsafe impl Cast for RenderPassSampleLocationsBeginInfoEXTBuilder<'_> {
     type Target = RenderPassSampleLocationsBeginInfoEXT;
 
     #[inline]
@@ -78724,7 +78725,7 @@ impl<'b> RenderPassStripeBeginInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassStripeBeginInfoARMBuilder<'b> {
+impl ops::Deref for RenderPassStripeBeginInfoARMBuilder<'_> {
     type Target = RenderPassStripeBeginInfoARM;
 
     #[inline]
@@ -78733,14 +78734,14 @@ impl<'b> ops::Deref for RenderPassStripeBeginInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassStripeBeginInfoARMBuilder<'b> {
+impl ops::DerefMut for RenderPassStripeBeginInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassStripeBeginInfoARMBuilder<'b> {
+unsafe impl Cast for RenderPassStripeBeginInfoARMBuilder<'_> {
     type Target = RenderPassStripeBeginInfoARM;
 
     #[inline]
@@ -78845,7 +78846,7 @@ impl<'b> RenderPassStripeSubmitInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassStripeSubmitInfoARMBuilder<'b> {
+impl ops::Deref for RenderPassStripeSubmitInfoARMBuilder<'_> {
     type Target = RenderPassStripeSubmitInfoARM;
 
     #[inline]
@@ -78854,14 +78855,14 @@ impl<'b> ops::Deref for RenderPassStripeSubmitInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassStripeSubmitInfoARMBuilder<'b> {
+impl ops::DerefMut for RenderPassStripeSubmitInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassStripeSubmitInfoARMBuilder<'b> {
+unsafe impl Cast for RenderPassStripeSubmitInfoARMBuilder<'_> {
     type Target = RenderPassStripeSubmitInfoARM;
 
     #[inline]
@@ -78907,7 +78908,7 @@ impl<'b> RenderPassSubpassFeedbackCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderPassSubpassFeedbackCreateInfoEXTBuilder<'b> {
+impl ops::Deref for RenderPassSubpassFeedbackCreateInfoEXTBuilder<'_> {
     type Target = RenderPassSubpassFeedbackCreateInfoEXT;
 
     #[inline]
@@ -78916,14 +78917,14 @@ impl<'b> ops::Deref for RenderPassSubpassFeedbackCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderPassSubpassFeedbackCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for RenderPassSubpassFeedbackCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderPassSubpassFeedbackCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for RenderPassSubpassFeedbackCreateInfoEXTBuilder<'_> {
     type Target = RenderPassSubpassFeedbackCreateInfoEXT;
 
     #[inline]
@@ -79180,7 +79181,7 @@ impl<'b> RenderingAreaInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderingAreaInfoBuilder<'b> {
+impl ops::Deref for RenderingAreaInfoBuilder<'_> {
     type Target = RenderingAreaInfo;
 
     #[inline]
@@ -79189,14 +79190,14 @@ impl<'b> ops::Deref for RenderingAreaInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderingAreaInfoBuilder<'b> {
+impl ops::DerefMut for RenderingAreaInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderingAreaInfoBuilder<'b> {
+unsafe impl Cast for RenderingAreaInfoBuilder<'_> {
     type Target = RenderingAreaInfo;
 
     #[inline]
@@ -79294,7 +79295,7 @@ impl<'b> RenderingAttachmentInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderingAttachmentInfoBuilder<'b> {
+impl ops::Deref for RenderingAttachmentInfoBuilder<'_> {
     type Target = RenderingAttachmentInfo;
 
     #[inline]
@@ -79303,14 +79304,14 @@ impl<'b> ops::Deref for RenderingAttachmentInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderingAttachmentInfoBuilder<'b> {
+impl ops::DerefMut for RenderingAttachmentInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderingAttachmentInfoBuilder<'b> {
+unsafe impl Cast for RenderingAttachmentInfoBuilder<'_> {
     type Target = RenderingAttachmentInfo;
 
     #[inline]
@@ -79354,7 +79355,7 @@ impl<'b> RenderingAttachmentLocationInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderingAttachmentLocationInfoBuilder<'b> {
+impl ops::Deref for RenderingAttachmentLocationInfoBuilder<'_> {
     type Target = RenderingAttachmentLocationInfo;
 
     #[inline]
@@ -79363,14 +79364,14 @@ impl<'b> ops::Deref for RenderingAttachmentLocationInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderingAttachmentLocationInfoBuilder<'b> {
+impl ops::DerefMut for RenderingAttachmentLocationInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderingAttachmentLocationInfoBuilder<'b> {
+unsafe impl Cast for RenderingAttachmentLocationInfoBuilder<'_> {
     type Target = RenderingAttachmentLocationInfo;
 
     #[inline]
@@ -79420,7 +79421,7 @@ impl<'b> RenderingEndInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderingEndInfoEXTBuilder<'b> {
+impl ops::Deref for RenderingEndInfoEXTBuilder<'_> {
     type Target = RenderingEndInfoEXT;
 
     #[inline]
@@ -79429,14 +79430,14 @@ impl<'b> ops::Deref for RenderingEndInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderingEndInfoEXTBuilder<'b> {
+impl ops::DerefMut for RenderingEndInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderingEndInfoEXTBuilder<'b> {
+unsafe impl Cast for RenderingEndInfoEXTBuilder<'_> {
     type Target = RenderingEndInfoEXT;
 
     #[inline]
@@ -79683,7 +79684,7 @@ impl<'b> RenderingInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderingInfoBuilder<'b> {
+impl ops::Deref for RenderingInfoBuilder<'_> {
     type Target = RenderingInfo;
 
     #[inline]
@@ -79692,14 +79693,14 @@ impl<'b> ops::Deref for RenderingInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderingInfoBuilder<'b> {
+impl ops::DerefMut for RenderingInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderingInfoBuilder<'b> {
+unsafe impl Cast for RenderingInfoBuilder<'_> {
     type Target = RenderingInfo;
 
     #[inline]
@@ -79767,7 +79768,7 @@ impl<'b> RenderingInputAttachmentIndexInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for RenderingInputAttachmentIndexInfoBuilder<'b> {
+impl ops::Deref for RenderingInputAttachmentIndexInfoBuilder<'_> {
     type Target = RenderingInputAttachmentIndexInfo;
 
     #[inline]
@@ -79776,14 +79777,14 @@ impl<'b> ops::Deref for RenderingInputAttachmentIndexInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for RenderingInputAttachmentIndexInfoBuilder<'b> {
+impl ops::DerefMut for RenderingInputAttachmentIndexInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for RenderingInputAttachmentIndexInfoBuilder<'b> {
+unsafe impl Cast for RenderingInputAttachmentIndexInfoBuilder<'_> {
     type Target = RenderingInputAttachmentIndexInfo;
 
     #[inline]
@@ -79851,7 +79852,7 @@ impl<'b> ResolveImageInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ResolveImageInfo2Builder<'b> {
+impl ops::Deref for ResolveImageInfo2Builder<'_> {
     type Target = ResolveImageInfo2;
 
     #[inline]
@@ -79860,14 +79861,14 @@ impl<'b> ops::Deref for ResolveImageInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ResolveImageInfo2Builder<'b> {
+impl ops::DerefMut for ResolveImageInfo2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ResolveImageInfo2Builder<'b> {
+unsafe impl Cast for ResolveImageInfo2Builder<'_> {
     type Target = ResolveImageInfo2;
 
     #[inline]
@@ -80144,7 +80145,7 @@ impl<'b> SampleLocationsInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SampleLocationsInfoEXTBuilder<'b> {
+impl ops::Deref for SampleLocationsInfoEXTBuilder<'_> {
     type Target = SampleLocationsInfoEXT;
 
     #[inline]
@@ -80153,14 +80154,14 @@ impl<'b> ops::Deref for SampleLocationsInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SampleLocationsInfoEXTBuilder<'b> {
+impl ops::DerefMut for SampleLocationsInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SampleLocationsInfoEXTBuilder<'b> {
+unsafe impl Cast for SampleLocationsInfoEXTBuilder<'_> {
     type Target = SampleLocationsInfoEXT;
 
     #[inline]
@@ -80501,7 +80502,7 @@ impl<'b> SamplerCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SamplerCreateInfoBuilder<'b> {
+impl ops::Deref for SamplerCreateInfoBuilder<'_> {
     type Target = SamplerCreateInfo;
 
     #[inline]
@@ -80510,14 +80511,14 @@ impl<'b> ops::Deref for SamplerCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SamplerCreateInfoBuilder<'b> {
+impl ops::DerefMut for SamplerCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SamplerCreateInfoBuilder<'b> {
+unsafe impl Cast for SamplerCreateInfoBuilder<'_> {
     type Target = SamplerCreateInfo;
 
     #[inline]
@@ -80800,7 +80801,7 @@ impl<'b> SamplerYcbcrConversionCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SamplerYcbcrConversionCreateInfoBuilder<'b> {
+impl ops::Deref for SamplerYcbcrConversionCreateInfoBuilder<'_> {
     type Target = SamplerYcbcrConversionCreateInfo;
 
     #[inline]
@@ -80809,14 +80810,14 @@ impl<'b> ops::Deref for SamplerYcbcrConversionCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SamplerYcbcrConversionCreateInfoBuilder<'b> {
+impl ops::DerefMut for SamplerYcbcrConversionCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SamplerYcbcrConversionCreateInfoBuilder<'b> {
+unsafe impl Cast for SamplerYcbcrConversionCreateInfoBuilder<'_> {
     type Target = SamplerYcbcrConversionCreateInfo;
 
     #[inline]
@@ -81238,7 +81239,7 @@ impl<'b> ScreenBufferPropertiesQNXBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ScreenBufferPropertiesQNXBuilder<'b> {
+impl ops::Deref for ScreenBufferPropertiesQNXBuilder<'_> {
     type Target = ScreenBufferPropertiesQNX;
 
     #[inline]
@@ -81247,14 +81248,14 @@ impl<'b> ops::Deref for ScreenBufferPropertiesQNXBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ScreenBufferPropertiesQNXBuilder<'b> {
+impl ops::DerefMut for ScreenBufferPropertiesQNXBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ScreenBufferPropertiesQNXBuilder<'b> {
+unsafe impl Cast for ScreenBufferPropertiesQNXBuilder<'_> {
     type Target = ScreenBufferPropertiesQNX;
 
     #[inline]
@@ -81309,7 +81310,7 @@ impl<'b> ScreenSurfaceCreateInfoQNXBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ScreenSurfaceCreateInfoQNXBuilder<'b> {
+impl ops::Deref for ScreenSurfaceCreateInfoQNXBuilder<'_> {
     type Target = ScreenSurfaceCreateInfoQNX;
 
     #[inline]
@@ -81318,14 +81319,14 @@ impl<'b> ops::Deref for ScreenSurfaceCreateInfoQNXBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ScreenSurfaceCreateInfoQNXBuilder<'b> {
+impl ops::DerefMut for ScreenSurfaceCreateInfoQNXBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ScreenSurfaceCreateInfoQNXBuilder<'b> {
+unsafe impl Cast for ScreenSurfaceCreateInfoQNXBuilder<'_> {
     type Target = ScreenSurfaceCreateInfoQNX;
 
     #[inline]
@@ -81388,7 +81389,7 @@ impl<'b> SemaphoreCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SemaphoreCreateInfoBuilder<'b> {
+impl ops::Deref for SemaphoreCreateInfoBuilder<'_> {
     type Target = SemaphoreCreateInfo;
 
     #[inline]
@@ -81397,14 +81398,14 @@ impl<'b> ops::Deref for SemaphoreCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SemaphoreCreateInfoBuilder<'b> {
+impl ops::DerefMut for SemaphoreCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SemaphoreCreateInfoBuilder<'b> {
+unsafe impl Cast for SemaphoreCreateInfoBuilder<'_> {
     type Target = SemaphoreCreateInfo;
 
     #[inline]
@@ -81709,7 +81710,7 @@ impl<'b> SemaphoreSciSyncCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SemaphoreSciSyncCreateInfoNVBuilder<'b> {
+impl ops::Deref for SemaphoreSciSyncCreateInfoNVBuilder<'_> {
     type Target = SemaphoreSciSyncCreateInfoNV;
 
     #[inline]
@@ -81718,14 +81719,14 @@ impl<'b> ops::Deref for SemaphoreSciSyncCreateInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SemaphoreSciSyncCreateInfoNVBuilder<'b> {
+impl ops::DerefMut for SemaphoreSciSyncCreateInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SemaphoreSciSyncCreateInfoNVBuilder<'b> {
+unsafe impl Cast for SemaphoreSciSyncCreateInfoNVBuilder<'_> {
     type Target = SemaphoreSciSyncCreateInfoNV;
 
     #[inline]
@@ -82044,7 +82045,7 @@ impl<'b> SemaphoreWaitInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SemaphoreWaitInfoBuilder<'b> {
+impl ops::Deref for SemaphoreWaitInfoBuilder<'_> {
     type Target = SemaphoreWaitInfo;
 
     #[inline]
@@ -82053,14 +82054,14 @@ impl<'b> ops::Deref for SemaphoreWaitInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SemaphoreWaitInfoBuilder<'b> {
+impl ops::DerefMut for SemaphoreWaitInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SemaphoreWaitInfoBuilder<'b> {
+unsafe impl Cast for SemaphoreWaitInfoBuilder<'_> {
     type Target = SemaphoreWaitInfo;
 
     #[inline]
@@ -82142,7 +82143,7 @@ impl<'b> SetDescriptorBufferOffsetsInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SetDescriptorBufferOffsetsInfoEXTBuilder<'b> {
+impl ops::Deref for SetDescriptorBufferOffsetsInfoEXTBuilder<'_> {
     type Target = SetDescriptorBufferOffsetsInfoEXT;
 
     #[inline]
@@ -82151,14 +82152,14 @@ impl<'b> ops::Deref for SetDescriptorBufferOffsetsInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SetDescriptorBufferOffsetsInfoEXTBuilder<'b> {
+impl ops::DerefMut for SetDescriptorBufferOffsetsInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SetDescriptorBufferOffsetsInfoEXTBuilder<'b> {
+unsafe impl Cast for SetDescriptorBufferOffsetsInfoEXTBuilder<'_> {
     type Target = SetDescriptorBufferOffsetsInfoEXT;
 
     #[inline]
@@ -82470,7 +82471,7 @@ impl<'b> ShaderCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ShaderCreateInfoEXTBuilder<'b> {
+impl ops::Deref for ShaderCreateInfoEXTBuilder<'_> {
     type Target = ShaderCreateInfoEXT;
 
     #[inline]
@@ -82479,14 +82480,14 @@ impl<'b> ops::Deref for ShaderCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ShaderCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for ShaderCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ShaderCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for ShaderCreateInfoEXTBuilder<'_> {
     type Target = ShaderCreateInfoEXT;
 
     #[inline]
@@ -82555,7 +82556,7 @@ impl<'b> ShaderModuleCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ShaderModuleCreateInfoBuilder<'b> {
+impl ops::Deref for ShaderModuleCreateInfoBuilder<'_> {
     type Target = ShaderModuleCreateInfo;
 
     #[inline]
@@ -82564,14 +82565,14 @@ impl<'b> ops::Deref for ShaderModuleCreateInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ShaderModuleCreateInfoBuilder<'b> {
+impl ops::DerefMut for ShaderModuleCreateInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ShaderModuleCreateInfoBuilder<'b> {
+unsafe impl Cast for ShaderModuleCreateInfoBuilder<'_> {
     type Target = ShaderModuleCreateInfo;
 
     #[inline]
@@ -82922,7 +82923,7 @@ impl<'b> ShadingRatePaletteNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ShadingRatePaletteNVBuilder<'b> {
+impl ops::Deref for ShadingRatePaletteNVBuilder<'_> {
     type Target = ShadingRatePaletteNV;
 
     #[inline]
@@ -82931,14 +82932,14 @@ impl<'b> ops::Deref for ShadingRatePaletteNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ShadingRatePaletteNVBuilder<'b> {
+impl ops::DerefMut for ShadingRatePaletteNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ShadingRatePaletteNVBuilder<'b> {
+unsafe impl Cast for ShadingRatePaletteNVBuilder<'_> {
     type Target = ShadingRatePaletteNV;
 
     #[inline]
@@ -83049,7 +83050,7 @@ impl<'b> SparseBufferMemoryBindInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SparseBufferMemoryBindInfoBuilder<'b> {
+impl ops::Deref for SparseBufferMemoryBindInfoBuilder<'_> {
     type Target = SparseBufferMemoryBindInfo;
 
     #[inline]
@@ -83058,14 +83059,14 @@ impl<'b> ops::Deref for SparseBufferMemoryBindInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SparseBufferMemoryBindInfoBuilder<'b> {
+impl ops::DerefMut for SparseBufferMemoryBindInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SparseBufferMemoryBindInfoBuilder<'b> {
+unsafe impl Cast for SparseBufferMemoryBindInfoBuilder<'_> {
     type Target = SparseBufferMemoryBindInfo;
 
     #[inline]
@@ -83334,7 +83335,7 @@ impl<'b> SparseImageMemoryBindInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SparseImageMemoryBindInfoBuilder<'b> {
+impl ops::Deref for SparseImageMemoryBindInfoBuilder<'_> {
     type Target = SparseImageMemoryBindInfo;
 
     #[inline]
@@ -83343,14 +83344,14 @@ impl<'b> ops::Deref for SparseImageMemoryBindInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SparseImageMemoryBindInfoBuilder<'b> {
+impl ops::DerefMut for SparseImageMemoryBindInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SparseImageMemoryBindInfoBuilder<'b> {
+unsafe impl Cast for SparseImageMemoryBindInfoBuilder<'_> {
     type Target = SparseImageMemoryBindInfo;
 
     #[inline]
@@ -83546,7 +83547,7 @@ impl<'b> SparseImageOpaqueMemoryBindInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SparseImageOpaqueMemoryBindInfoBuilder<'b> {
+impl ops::Deref for SparseImageOpaqueMemoryBindInfoBuilder<'_> {
     type Target = SparseImageOpaqueMemoryBindInfo;
 
     #[inline]
@@ -83555,14 +83556,14 @@ impl<'b> ops::Deref for SparseImageOpaqueMemoryBindInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SparseImageOpaqueMemoryBindInfoBuilder<'b> {
+impl ops::DerefMut for SparseImageOpaqueMemoryBindInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SparseImageOpaqueMemoryBindInfoBuilder<'b> {
+unsafe impl Cast for SparseImageOpaqueMemoryBindInfoBuilder<'_> {
     type Target = SparseImageOpaqueMemoryBindInfo;
 
     #[inline]
@@ -83698,7 +83699,7 @@ impl<'b> SpecializationInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SpecializationInfoBuilder<'b> {
+impl ops::Deref for SpecializationInfoBuilder<'_> {
     type Target = SpecializationInfo;
 
     #[inline]
@@ -83707,14 +83708,14 @@ impl<'b> ops::Deref for SpecializationInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SpecializationInfoBuilder<'b> {
+impl ops::DerefMut for SpecializationInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SpecializationInfoBuilder<'b> {
+unsafe impl Cast for SpecializationInfoBuilder<'_> {
     type Target = SpecializationInfo;
 
     #[inline]
@@ -84164,7 +84165,7 @@ impl<'b> SubmitInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SubmitInfoBuilder<'b> {
+impl ops::Deref for SubmitInfoBuilder<'_> {
     type Target = SubmitInfo;
 
     #[inline]
@@ -84173,14 +84174,14 @@ impl<'b> ops::Deref for SubmitInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SubmitInfoBuilder<'b> {
+impl ops::DerefMut for SubmitInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SubmitInfoBuilder<'b> {
+unsafe impl Cast for SubmitInfoBuilder<'_> {
     type Target = SubmitInfo;
 
     #[inline]
@@ -84271,7 +84272,7 @@ impl<'b> SubmitInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SubmitInfo2Builder<'b> {
+impl ops::Deref for SubmitInfo2Builder<'_> {
     type Target = SubmitInfo2;
 
     #[inline]
@@ -84280,14 +84281,14 @@ impl<'b> ops::Deref for SubmitInfo2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SubmitInfo2Builder<'b> {
+impl ops::DerefMut for SubmitInfo2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SubmitInfo2Builder<'b> {
+unsafe impl Cast for SubmitInfo2Builder<'_> {
     type Target = SubmitInfo2;
 
     #[inline]
@@ -84538,7 +84539,7 @@ impl<'b> SubpassDependency2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SubpassDependency2Builder<'b> {
+impl ops::Deref for SubpassDependency2Builder<'_> {
     type Target = SubpassDependency2;
 
     #[inline]
@@ -84547,14 +84548,14 @@ impl<'b> ops::Deref for SubpassDependency2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SubpassDependency2Builder<'b> {
+impl ops::DerefMut for SubpassDependency2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SubpassDependency2Builder<'b> {
+unsafe impl Cast for SubpassDependency2Builder<'_> {
     type Target = SubpassDependency2;
 
     #[inline]
@@ -84655,7 +84656,7 @@ impl<'b> SubpassDescriptionBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SubpassDescriptionBuilder<'b> {
+impl ops::Deref for SubpassDescriptionBuilder<'_> {
     type Target = SubpassDescription;
 
     #[inline]
@@ -84664,14 +84665,14 @@ impl<'b> ops::Deref for SubpassDescriptionBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SubpassDescriptionBuilder<'b> {
+impl ops::DerefMut for SubpassDescriptionBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SubpassDescriptionBuilder<'b> {
+unsafe impl Cast for SubpassDescriptionBuilder<'_> {
     type Target = SubpassDescription;
 
     #[inline]
@@ -84795,7 +84796,7 @@ impl<'b> SubpassDescription2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SubpassDescription2Builder<'b> {
+impl ops::Deref for SubpassDescription2Builder<'_> {
     type Target = SubpassDescription2;
 
     #[inline]
@@ -84804,14 +84805,14 @@ impl<'b> ops::Deref for SubpassDescription2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SubpassDescription2Builder<'b> {
+impl ops::DerefMut for SubpassDescription2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SubpassDescription2Builder<'b> {
+unsafe impl Cast for SubpassDescription2Builder<'_> {
     type Target = SubpassDescription2;
 
     #[inline]
@@ -84869,7 +84870,7 @@ impl<'b> SubpassDescriptionDepthStencilResolveBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SubpassDescriptionDepthStencilResolveBuilder<'b> {
+impl ops::Deref for SubpassDescriptionDepthStencilResolveBuilder<'_> {
     type Target = SubpassDescriptionDepthStencilResolve;
 
     #[inline]
@@ -84878,14 +84879,14 @@ impl<'b> ops::Deref for SubpassDescriptionDepthStencilResolveBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SubpassDescriptionDepthStencilResolveBuilder<'b> {
+impl ops::DerefMut for SubpassDescriptionDepthStencilResolveBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SubpassDescriptionDepthStencilResolveBuilder<'b> {
+unsafe impl Cast for SubpassDescriptionDepthStencilResolveBuilder<'_> {
     type Target = SubpassDescriptionDepthStencilResolve;
 
     #[inline]
@@ -84935,7 +84936,7 @@ impl<'b> SubpassEndInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SubpassEndInfoBuilder<'b> {
+impl ops::Deref for SubpassEndInfoBuilder<'_> {
     type Target = SubpassEndInfo;
 
     #[inline]
@@ -84944,14 +84945,14 @@ impl<'b> ops::Deref for SubpassEndInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SubpassEndInfoBuilder<'b> {
+impl ops::DerefMut for SubpassEndInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SubpassEndInfoBuilder<'b> {
+unsafe impl Cast for SubpassEndInfoBuilder<'_> {
     type Target = SubpassEndInfo;
 
     #[inline]
@@ -85061,7 +85062,7 @@ impl<'b> SubpassSampleLocationsEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SubpassSampleLocationsEXTBuilder<'b> {
+impl ops::Deref for SubpassSampleLocationsEXTBuilder<'_> {
     type Target = SubpassSampleLocationsEXT;
 
     #[inline]
@@ -85070,14 +85071,14 @@ impl<'b> ops::Deref for SubpassSampleLocationsEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SubpassSampleLocationsEXTBuilder<'b> {
+impl ops::DerefMut for SubpassSampleLocationsEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SubpassSampleLocationsEXTBuilder<'b> {
+unsafe impl Cast for SubpassSampleLocationsEXTBuilder<'_> {
     type Target = SubpassSampleLocationsEXT;
 
     #[inline]
@@ -85341,7 +85342,7 @@ impl<'b> SubresourceLayout2Builder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SubresourceLayout2Builder<'b> {
+impl ops::Deref for SubresourceLayout2Builder<'_> {
     type Target = SubresourceLayout2;
 
     #[inline]
@@ -85350,14 +85351,14 @@ impl<'b> ops::Deref for SubresourceLayout2Builder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SubresourceLayout2Builder<'b> {
+impl ops::DerefMut for SubresourceLayout2Builder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SubresourceLayout2Builder<'b> {
+unsafe impl Cast for SubresourceLayout2Builder<'_> {
     type Target = SubresourceLayout2;
 
     #[inline]
@@ -85549,7 +85550,7 @@ impl<'b> SurfaceCapabilities2KHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SurfaceCapabilities2KHRBuilder<'b> {
+impl ops::Deref for SurfaceCapabilities2KHRBuilder<'_> {
     type Target = SurfaceCapabilities2KHR;
 
     #[inline]
@@ -85558,14 +85559,14 @@ impl<'b> ops::Deref for SurfaceCapabilities2KHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SurfaceCapabilities2KHRBuilder<'b> {
+impl ops::DerefMut for SurfaceCapabilities2KHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SurfaceCapabilities2KHRBuilder<'b> {
+unsafe impl Cast for SurfaceCapabilities2KHRBuilder<'_> {
     type Target = SurfaceCapabilities2KHR;
 
     #[inline]
@@ -85971,7 +85972,7 @@ impl<'b> SurfaceFormat2KHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SurfaceFormat2KHRBuilder<'b> {
+impl ops::Deref for SurfaceFormat2KHRBuilder<'_> {
     type Target = SurfaceFormat2KHR;
 
     #[inline]
@@ -85980,14 +85981,14 @@ impl<'b> ops::Deref for SurfaceFormat2KHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SurfaceFormat2KHRBuilder<'b> {
+impl ops::DerefMut for SurfaceFormat2KHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SurfaceFormat2KHRBuilder<'b> {
+unsafe impl Cast for SurfaceFormat2KHRBuilder<'_> {
     type Target = SurfaceFormat2KHR;
 
     #[inline]
@@ -86217,7 +86218,7 @@ impl<'b> SurfacePresentModeCompatibilityKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SurfacePresentModeCompatibilityKHRBuilder<'b> {
+impl ops::Deref for SurfacePresentModeCompatibilityKHRBuilder<'_> {
     type Target = SurfacePresentModeCompatibilityKHR;
 
     #[inline]
@@ -86226,14 +86227,14 @@ impl<'b> ops::Deref for SurfacePresentModeCompatibilityKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SurfacePresentModeCompatibilityKHRBuilder<'b> {
+impl ops::DerefMut for SurfacePresentModeCompatibilityKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SurfacePresentModeCompatibilityKHRBuilder<'b> {
+unsafe impl Cast for SurfacePresentModeCompatibilityKHRBuilder<'_> {
     type Target = SurfacePresentModeCompatibilityKHR;
 
     #[inline]
@@ -86655,7 +86656,7 @@ impl<'b> SwapchainCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SwapchainCreateInfoKHRBuilder<'b> {
+impl ops::Deref for SwapchainCreateInfoKHRBuilder<'_> {
     type Target = SwapchainCreateInfoKHR;
 
     #[inline]
@@ -86664,14 +86665,14 @@ impl<'b> ops::Deref for SwapchainCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SwapchainCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for SwapchainCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SwapchainCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for SwapchainCreateInfoKHRBuilder<'_> {
     type Target = SwapchainCreateInfoKHR;
 
     #[inline]
@@ -86889,7 +86890,7 @@ impl<'b> SwapchainPresentFenceInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SwapchainPresentFenceInfoKHRBuilder<'b> {
+impl ops::Deref for SwapchainPresentFenceInfoKHRBuilder<'_> {
     type Target = SwapchainPresentFenceInfoKHR;
 
     #[inline]
@@ -86898,14 +86899,14 @@ impl<'b> ops::Deref for SwapchainPresentFenceInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SwapchainPresentFenceInfoKHRBuilder<'b> {
+impl ops::DerefMut for SwapchainPresentFenceInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SwapchainPresentFenceInfoKHRBuilder<'b> {
+unsafe impl Cast for SwapchainPresentFenceInfoKHRBuilder<'_> {
     type Target = SwapchainPresentFenceInfoKHR;
 
     #[inline]
@@ -86949,7 +86950,7 @@ impl<'b> SwapchainPresentModeInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SwapchainPresentModeInfoKHRBuilder<'b> {
+impl ops::Deref for SwapchainPresentModeInfoKHRBuilder<'_> {
     type Target = SwapchainPresentModeInfoKHR;
 
     #[inline]
@@ -86958,14 +86959,14 @@ impl<'b> ops::Deref for SwapchainPresentModeInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SwapchainPresentModeInfoKHRBuilder<'b> {
+impl ops::DerefMut for SwapchainPresentModeInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SwapchainPresentModeInfoKHRBuilder<'b> {
+unsafe impl Cast for SwapchainPresentModeInfoKHRBuilder<'_> {
     type Target = SwapchainPresentModeInfoKHR;
 
     #[inline]
@@ -87009,7 +87010,7 @@ impl<'b> SwapchainPresentModesCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for SwapchainPresentModesCreateInfoKHRBuilder<'b> {
+impl ops::Deref for SwapchainPresentModesCreateInfoKHRBuilder<'_> {
     type Target = SwapchainPresentModesCreateInfoKHR;
 
     #[inline]
@@ -87018,14 +87019,14 @@ impl<'b> ops::Deref for SwapchainPresentModesCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for SwapchainPresentModesCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for SwapchainPresentModesCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for SwapchainPresentModesCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for SwapchainPresentModesCreateInfoKHRBuilder<'_> {
     type Target = SwapchainPresentModesCreateInfoKHR;
 
     #[inline]
@@ -87275,7 +87276,7 @@ impl<'b> TensorCopyARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for TensorCopyARMBuilder<'b> {
+impl ops::Deref for TensorCopyARMBuilder<'_> {
     type Target = TensorCopyARM;
 
     #[inline]
@@ -87284,14 +87285,14 @@ impl<'b> ops::Deref for TensorCopyARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for TensorCopyARMBuilder<'b> {
+impl ops::DerefMut for TensorCopyARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for TensorCopyARMBuilder<'b> {
+unsafe impl Cast for TensorCopyARMBuilder<'_> {
     type Target = TensorCopyARM;
 
     #[inline]
@@ -87370,7 +87371,7 @@ impl<'b> TensorCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for TensorCreateInfoARMBuilder<'b> {
+impl ops::Deref for TensorCreateInfoARMBuilder<'_> {
     type Target = TensorCreateInfoARM;
 
     #[inline]
@@ -87379,14 +87380,14 @@ impl<'b> ops::Deref for TensorCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for TensorCreateInfoARMBuilder<'b> {
+impl ops::DerefMut for TensorCreateInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for TensorCreateInfoARMBuilder<'b> {
+unsafe impl Cast for TensorCreateInfoARMBuilder<'_> {
     type Target = TensorCreateInfoARM;
 
     #[inline]
@@ -87438,7 +87439,7 @@ impl<'b> TensorDependencyInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for TensorDependencyInfoARMBuilder<'b> {
+impl ops::Deref for TensorDependencyInfoARMBuilder<'_> {
     type Target = TensorDependencyInfoARM;
 
     #[inline]
@@ -87447,14 +87448,14 @@ impl<'b> ops::Deref for TensorDependencyInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for TensorDependencyInfoARMBuilder<'b> {
+impl ops::DerefMut for TensorDependencyInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for TensorDependencyInfoARMBuilder<'b> {
+unsafe impl Cast for TensorDependencyInfoARMBuilder<'_> {
     type Target = TensorDependencyInfoARM;
 
     #[inline]
@@ -87529,7 +87530,7 @@ impl<'b> TensorDescriptionARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for TensorDescriptionARMBuilder<'b> {
+impl ops::Deref for TensorDescriptionARMBuilder<'_> {
     type Target = TensorDescriptionARM;
 
     #[inline]
@@ -87538,14 +87539,14 @@ impl<'b> ops::Deref for TensorDescriptionARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for TensorDescriptionARMBuilder<'b> {
+impl ops::DerefMut for TensorDescriptionARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for TensorDescriptionARMBuilder<'b> {
+unsafe impl Cast for TensorDescriptionARMBuilder<'_> {
     type Target = TensorDescriptionARM;
 
     #[inline]
@@ -87893,7 +87894,7 @@ impl<'b> TensorViewCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for TensorViewCreateInfoARMBuilder<'b> {
+impl ops::Deref for TensorViewCreateInfoARMBuilder<'_> {
     type Target = TensorViewCreateInfoARM;
 
     #[inline]
@@ -87902,14 +87903,14 @@ impl<'b> ops::Deref for TensorViewCreateInfoARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for TensorViewCreateInfoARMBuilder<'b> {
+impl ops::DerefMut for TensorViewCreateInfoARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for TensorViewCreateInfoARMBuilder<'b> {
+unsafe impl Cast for TensorViewCreateInfoARMBuilder<'_> {
     type Target = TensorViewCreateInfoARM;
 
     #[inline]
@@ -88284,7 +88285,7 @@ impl<'b> TimelineSemaphoreSubmitInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for TimelineSemaphoreSubmitInfoBuilder<'b> {
+impl ops::Deref for TimelineSemaphoreSubmitInfoBuilder<'_> {
     type Target = TimelineSemaphoreSubmitInfo;
 
     #[inline]
@@ -88293,14 +88294,14 @@ impl<'b> ops::Deref for TimelineSemaphoreSubmitInfoBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for TimelineSemaphoreSubmitInfoBuilder<'b> {
+impl ops::DerefMut for TimelineSemaphoreSubmitInfoBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for TimelineSemaphoreSubmitInfoBuilder<'b> {
+unsafe impl Cast for TimelineSemaphoreSubmitInfoBuilder<'_> {
     type Target = TimelineSemaphoreSubmitInfo;
 
     #[inline]
@@ -88644,7 +88645,7 @@ impl<'b> ValidationCacheCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ValidationCacheCreateInfoEXTBuilder<'b> {
+impl ops::Deref for ValidationCacheCreateInfoEXTBuilder<'_> {
     type Target = ValidationCacheCreateInfoEXT;
 
     #[inline]
@@ -88653,14 +88654,14 @@ impl<'b> ops::Deref for ValidationCacheCreateInfoEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ValidationCacheCreateInfoEXTBuilder<'b> {
+impl ops::DerefMut for ValidationCacheCreateInfoEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ValidationCacheCreateInfoEXTBuilder<'b> {
+unsafe impl Cast for ValidationCacheCreateInfoEXTBuilder<'_> {
     type Target = ValidationCacheCreateInfoEXT;
 
     #[inline]
@@ -88717,7 +88718,7 @@ impl<'b> ValidationFeaturesEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ValidationFeaturesEXTBuilder<'b> {
+impl ops::Deref for ValidationFeaturesEXTBuilder<'_> {
     type Target = ValidationFeaturesEXT;
 
     #[inline]
@@ -88726,14 +88727,14 @@ impl<'b> ops::Deref for ValidationFeaturesEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ValidationFeaturesEXTBuilder<'b> {
+impl ops::DerefMut for ValidationFeaturesEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ValidationFeaturesEXTBuilder<'b> {
+unsafe impl Cast for ValidationFeaturesEXTBuilder<'_> {
     type Target = ValidationFeaturesEXT;
 
     #[inline]
@@ -88780,7 +88781,7 @@ impl<'b> ValidationFlagsEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ValidationFlagsEXTBuilder<'b> {
+impl ops::Deref for ValidationFlagsEXTBuilder<'_> {
     type Target = ValidationFlagsEXT;
 
     #[inline]
@@ -88789,14 +88790,14 @@ impl<'b> ops::Deref for ValidationFlagsEXTBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ValidationFlagsEXTBuilder<'b> {
+impl ops::DerefMut for ValidationFlagsEXTBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ValidationFlagsEXTBuilder<'b> {
+unsafe impl Cast for ValidationFlagsEXTBuilder<'_> {
     type Target = ValidationFlagsEXT;
 
     #[inline]
@@ -89207,7 +89208,7 @@ impl<'b> ViSurfaceCreateInfoNNBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for ViSurfaceCreateInfoNNBuilder<'b> {
+impl ops::Deref for ViSurfaceCreateInfoNNBuilder<'_> {
     type Target = ViSurfaceCreateInfoNN;
 
     #[inline]
@@ -89216,14 +89217,14 @@ impl<'b> ops::Deref for ViSurfaceCreateInfoNNBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for ViSurfaceCreateInfoNNBuilder<'b> {
+impl ops::DerefMut for ViSurfaceCreateInfoNNBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for ViSurfaceCreateInfoNNBuilder<'b> {
+unsafe impl Cast for ViSurfaceCreateInfoNNBuilder<'_> {
     type Target = ViSurfaceCreateInfoNN;
 
     #[inline]
@@ -89310,7 +89311,7 @@ impl<'b> VideoBeginCodingInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoBeginCodingInfoKHRBuilder<'b> {
+impl ops::Deref for VideoBeginCodingInfoKHRBuilder<'_> {
     type Target = VideoBeginCodingInfoKHR;
 
     #[inline]
@@ -89319,14 +89320,14 @@ impl<'b> ops::Deref for VideoBeginCodingInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoBeginCodingInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoBeginCodingInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoBeginCodingInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoBeginCodingInfoKHRBuilder<'_> {
     type Target = VideoBeginCodingInfoKHR;
 
     #[inline]
@@ -89455,7 +89456,7 @@ impl<'b> VideoCapabilitiesKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoCapabilitiesKHRBuilder<'b> {
+impl ops::Deref for VideoCapabilitiesKHRBuilder<'_> {
     type Target = VideoCapabilitiesKHR;
 
     #[inline]
@@ -89464,14 +89465,14 @@ impl<'b> ops::Deref for VideoCapabilitiesKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoCapabilitiesKHRBuilder<'b> {
+impl ops::DerefMut for VideoCapabilitiesKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoCapabilitiesKHRBuilder<'b> {
+unsafe impl Cast for VideoCapabilitiesKHRBuilder<'_> {
     type Target = VideoCapabilitiesKHR;
 
     #[inline]
@@ -89531,7 +89532,7 @@ impl<'b> VideoCodingControlInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoCodingControlInfoKHRBuilder<'b> {
+impl ops::Deref for VideoCodingControlInfoKHRBuilder<'_> {
     type Target = VideoCodingControlInfoKHR;
 
     #[inline]
@@ -89540,14 +89541,14 @@ impl<'b> ops::Deref for VideoCodingControlInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoCodingControlInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoCodingControlInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoCodingControlInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoCodingControlInfoKHRBuilder<'_> {
     type Target = VideoCodingControlInfoKHR;
 
     #[inline]
@@ -89652,7 +89653,7 @@ impl<'b> VideoDecodeAV1DpbSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeAV1DpbSlotInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeAV1DpbSlotInfoKHRBuilder<'_> {
     type Target = VideoDecodeAV1DpbSlotInfoKHR;
 
     #[inline]
@@ -89661,14 +89662,14 @@ impl<'b> ops::Deref for VideoDecodeAV1DpbSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeAV1DpbSlotInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeAV1DpbSlotInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeAV1DpbSlotInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeAV1DpbSlotInfoKHRBuilder<'_> {
     type Target = VideoDecodeAV1DpbSlotInfoKHR;
 
     #[inline]
@@ -89715,7 +89716,7 @@ impl<'b> VideoDecodeAV1InlineSessionParametersInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeAV1InlineSessionParametersInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeAV1InlineSessionParametersInfoKHRBuilder<'_> {
     type Target = VideoDecodeAV1InlineSessionParametersInfoKHR;
 
     #[inline]
@@ -89724,14 +89725,14 @@ impl<'b> ops::Deref for VideoDecodeAV1InlineSessionParametersInfoKHRBuilder<'b> 
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeAV1InlineSessionParametersInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeAV1InlineSessionParametersInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeAV1InlineSessionParametersInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeAV1InlineSessionParametersInfoKHRBuilder<'_> {
     type Target = VideoDecodeAV1InlineSessionParametersInfoKHR;
 
     #[inline]
@@ -89807,7 +89808,7 @@ impl<'b> VideoDecodeAV1PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeAV1PictureInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeAV1PictureInfoKHRBuilder<'_> {
     type Target = VideoDecodeAV1PictureInfoKHR;
 
     #[inline]
@@ -89816,14 +89817,14 @@ impl<'b> ops::Deref for VideoDecodeAV1PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeAV1PictureInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeAV1PictureInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeAV1PictureInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeAV1PictureInfoKHRBuilder<'_> {
     type Target = VideoDecodeAV1PictureInfoKHR;
 
     #[inline]
@@ -89934,7 +89935,7 @@ impl<'b> VideoDecodeAV1SessionParametersCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeAV1SessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeAV1SessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoDecodeAV1SessionParametersCreateInfoKHR;
 
     #[inline]
@@ -89943,14 +89944,14 @@ impl<'b> ops::Deref for VideoDecodeAV1SessionParametersCreateInfoKHRBuilder<'b> 
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeAV1SessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeAV1SessionParametersCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeAV1SessionParametersCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeAV1SessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoDecodeAV1SessionParametersCreateInfoKHR;
 
     #[inline]
@@ -90122,7 +90123,7 @@ impl<'b> VideoDecodeH264DpbSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeH264DpbSlotInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeH264DpbSlotInfoKHRBuilder<'_> {
     type Target = VideoDecodeH264DpbSlotInfoKHR;
 
     #[inline]
@@ -90131,14 +90132,14 @@ impl<'b> ops::Deref for VideoDecodeH264DpbSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeH264DpbSlotInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeH264DpbSlotInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeH264DpbSlotInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeH264DpbSlotInfoKHRBuilder<'_> {
     type Target = VideoDecodeH264DpbSlotInfoKHR;
 
     #[inline]
@@ -90187,7 +90188,7 @@ impl<'b> VideoDecodeH264InlineSessionParametersInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeH264InlineSessionParametersInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeH264InlineSessionParametersInfoKHRBuilder<'_> {
     type Target = VideoDecodeH264InlineSessionParametersInfoKHR;
 
     #[inline]
@@ -90196,14 +90197,14 @@ impl<'b> ops::Deref for VideoDecodeH264InlineSessionParametersInfoKHRBuilder<'b>
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeH264InlineSessionParametersInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeH264InlineSessionParametersInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeH264InlineSessionParametersInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeH264InlineSessionParametersInfoKHRBuilder<'_> {
     type Target = VideoDecodeH264InlineSessionParametersInfoKHR;
 
     #[inline]
@@ -90257,7 +90258,7 @@ impl<'b> VideoDecodeH264PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeH264PictureInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeH264PictureInfoKHRBuilder<'_> {
     type Target = VideoDecodeH264PictureInfoKHR;
 
     #[inline]
@@ -90266,14 +90267,14 @@ impl<'b> ops::Deref for VideoDecodeH264PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeH264PictureInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeH264PictureInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeH264PictureInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeH264PictureInfoKHRBuilder<'_> {
     type Target = VideoDecodeH264PictureInfoKHR;
 
     #[inline]
@@ -90388,7 +90389,7 @@ impl<'b> VideoDecodeH264SessionParametersAddInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeH264SessionParametersAddInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeH264SessionParametersAddInfoKHRBuilder<'_> {
     type Target = VideoDecodeH264SessionParametersAddInfoKHR;
 
     #[inline]
@@ -90397,14 +90398,14 @@ impl<'b> ops::Deref for VideoDecodeH264SessionParametersAddInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeH264SessionParametersAddInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeH264SessionParametersAddInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeH264SessionParametersAddInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeH264SessionParametersAddInfoKHRBuilder<'_> {
     type Target = VideoDecodeH264SessionParametersAddInfoKHR;
 
     #[inline]
@@ -90462,7 +90463,7 @@ impl<'b> VideoDecodeH264SessionParametersCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeH264SessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeH264SessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoDecodeH264SessionParametersCreateInfoKHR;
 
     #[inline]
@@ -90471,14 +90472,14 @@ impl<'b> ops::Deref for VideoDecodeH264SessionParametersCreateInfoKHRBuilder<'b>
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeH264SessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeH264SessionParametersCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeH264SessionParametersCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeH264SessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoDecodeH264SessionParametersCreateInfoKHR;
 
     #[inline]
@@ -90583,7 +90584,7 @@ impl<'b> VideoDecodeH265DpbSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeH265DpbSlotInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeH265DpbSlotInfoKHRBuilder<'_> {
     type Target = VideoDecodeH265DpbSlotInfoKHR;
 
     #[inline]
@@ -90592,14 +90593,14 @@ impl<'b> ops::Deref for VideoDecodeH265DpbSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeH265DpbSlotInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeH265DpbSlotInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeH265DpbSlotInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeH265DpbSlotInfoKHRBuilder<'_> {
     type Target = VideoDecodeH265DpbSlotInfoKHR;
 
     #[inline]
@@ -90654,7 +90655,7 @@ impl<'b> VideoDecodeH265InlineSessionParametersInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeH265InlineSessionParametersInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeH265InlineSessionParametersInfoKHRBuilder<'_> {
     type Target = VideoDecodeH265InlineSessionParametersInfoKHR;
 
     #[inline]
@@ -90663,14 +90664,14 @@ impl<'b> ops::Deref for VideoDecodeH265InlineSessionParametersInfoKHRBuilder<'b>
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeH265InlineSessionParametersInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeH265InlineSessionParametersInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeH265InlineSessionParametersInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeH265InlineSessionParametersInfoKHRBuilder<'_> {
     type Target = VideoDecodeH265InlineSessionParametersInfoKHR;
 
     #[inline]
@@ -90724,7 +90725,7 @@ impl<'b> VideoDecodeH265PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeH265PictureInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeH265PictureInfoKHRBuilder<'_> {
     type Target = VideoDecodeH265PictureInfoKHR;
 
     #[inline]
@@ -90733,14 +90734,14 @@ impl<'b> ops::Deref for VideoDecodeH265PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeH265PictureInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeH265PictureInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeH265PictureInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeH265PictureInfoKHRBuilder<'_> {
     type Target = VideoDecodeH265PictureInfoKHR;
 
     #[inline]
@@ -90856,7 +90857,7 @@ impl<'b> VideoDecodeH265SessionParametersAddInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeH265SessionParametersAddInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeH265SessionParametersAddInfoKHRBuilder<'_> {
     type Target = VideoDecodeH265SessionParametersAddInfoKHR;
 
     #[inline]
@@ -90865,14 +90866,14 @@ impl<'b> ops::Deref for VideoDecodeH265SessionParametersAddInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeH265SessionParametersAddInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeH265SessionParametersAddInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeH265SessionParametersAddInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeH265SessionParametersAddInfoKHRBuilder<'_> {
     type Target = VideoDecodeH265SessionParametersAddInfoKHR;
 
     #[inline]
@@ -90936,7 +90937,7 @@ impl<'b> VideoDecodeH265SessionParametersCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeH265SessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeH265SessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoDecodeH265SessionParametersCreateInfoKHR;
 
     #[inline]
@@ -90945,14 +90946,14 @@ impl<'b> ops::Deref for VideoDecodeH265SessionParametersCreateInfoKHRBuilder<'b>
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeH265SessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeH265SessionParametersCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeH265SessionParametersCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeH265SessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoDecodeH265SessionParametersCreateInfoKHR;
 
     #[inline]
@@ -91061,7 +91062,7 @@ impl<'b> VideoDecodeInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeInfoKHRBuilder<'_> {
     type Target = VideoDecodeInfoKHR;
 
     #[inline]
@@ -91070,14 +91071,14 @@ impl<'b> ops::Deref for VideoDecodeInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeInfoKHRBuilder<'_> {
     type Target = VideoDecodeInfoKHR;
 
     #[inline]
@@ -91267,7 +91268,7 @@ impl<'b> VideoDecodeVP9PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoDecodeVP9PictureInfoKHRBuilder<'b> {
+impl ops::Deref for VideoDecodeVP9PictureInfoKHRBuilder<'_> {
     type Target = VideoDecodeVP9PictureInfoKHR;
 
     #[inline]
@@ -91276,14 +91277,14 @@ impl<'b> ops::Deref for VideoDecodeVP9PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoDecodeVP9PictureInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoDecodeVP9PictureInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoDecodeVP9PictureInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoDecodeVP9PictureInfoKHRBuilder<'_> {
     type Target = VideoDecodeVP9PictureInfoKHR;
 
     #[inline]
@@ -91619,7 +91620,7 @@ impl<'b> VideoEncodeAV1DpbSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeAV1DpbSlotInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeAV1DpbSlotInfoKHRBuilder<'_> {
     type Target = VideoEncodeAV1DpbSlotInfoKHR;
 
     #[inline]
@@ -91628,14 +91629,14 @@ impl<'b> ops::Deref for VideoEncodeAV1DpbSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeAV1DpbSlotInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeAV1DpbSlotInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeAV1DpbSlotInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeAV1DpbSlotInfoKHRBuilder<'_> {
     type Target = VideoEncodeAV1DpbSlotInfoKHR;
 
     #[inline]
@@ -91870,7 +91871,7 @@ impl<'b> VideoEncodeAV1PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeAV1PictureInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeAV1PictureInfoKHRBuilder<'_> {
     type Target = VideoEncodeAV1PictureInfoKHR;
 
     #[inline]
@@ -91879,14 +91880,14 @@ impl<'b> ops::Deref for VideoEncodeAV1PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeAV1PictureInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeAV1PictureInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeAV1PictureInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeAV1PictureInfoKHRBuilder<'_> {
     type Target = VideoEncodeAV1PictureInfoKHR;
 
     #[inline]
@@ -92584,7 +92585,7 @@ impl<'b> VideoEncodeAV1SessionParametersCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeAV1SessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeAV1SessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoEncodeAV1SessionParametersCreateInfoKHR;
 
     #[inline]
@@ -92593,14 +92594,14 @@ impl<'b> ops::Deref for VideoEncodeAV1SessionParametersCreateInfoKHRBuilder<'b> 
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeAV1SessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeAV1SessionParametersCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeAV1SessionParametersCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeAV1SessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoEncodeAV1SessionParametersCreateInfoKHR;
 
     #[inline]
@@ -92890,7 +92891,7 @@ impl<'b> VideoEncodeH264DpbSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeH264DpbSlotInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeH264DpbSlotInfoKHRBuilder<'_> {
     type Target = VideoEncodeH264DpbSlotInfoKHR;
 
     #[inline]
@@ -92899,14 +92900,14 @@ impl<'b> ops::Deref for VideoEncodeH264DpbSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeH264DpbSlotInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeH264DpbSlotInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeH264DpbSlotInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeH264DpbSlotInfoKHRBuilder<'_> {
     type Target = VideoEncodeH264DpbSlotInfoKHR;
 
     #[inline]
@@ -93105,7 +93106,7 @@ impl<'b> VideoEncodeH264NaluSliceInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeH264NaluSliceInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeH264NaluSliceInfoKHRBuilder<'_> {
     type Target = VideoEncodeH264NaluSliceInfoKHR;
 
     #[inline]
@@ -93114,14 +93115,14 @@ impl<'b> ops::Deref for VideoEncodeH264NaluSliceInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeH264NaluSliceInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeH264NaluSliceInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeH264NaluSliceInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeH264NaluSliceInfoKHRBuilder<'_> {
     type Target = VideoEncodeH264NaluSliceInfoKHR;
 
     #[inline]
@@ -93184,7 +93185,7 @@ impl<'b> VideoEncodeH264PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeH264PictureInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeH264PictureInfoKHRBuilder<'_> {
     type Target = VideoEncodeH264PictureInfoKHR;
 
     #[inline]
@@ -93193,14 +93194,14 @@ impl<'b> ops::Deref for VideoEncodeH264PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeH264PictureInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeH264PictureInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeH264PictureInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeH264PictureInfoKHRBuilder<'_> {
     type Target = VideoEncodeH264PictureInfoKHR;
 
     #[inline]
@@ -93817,7 +93818,7 @@ impl<'b> VideoEncodeH264SessionParametersAddInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeH264SessionParametersAddInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeH264SessionParametersAddInfoKHRBuilder<'_> {
     type Target = VideoEncodeH264SessionParametersAddInfoKHR;
 
     #[inline]
@@ -93826,14 +93827,14 @@ impl<'b> ops::Deref for VideoEncodeH264SessionParametersAddInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeH264SessionParametersAddInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeH264SessionParametersAddInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeH264SessionParametersAddInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeH264SessionParametersAddInfoKHRBuilder<'_> {
     type Target = VideoEncodeH264SessionParametersAddInfoKHR;
 
     #[inline]
@@ -93891,7 +93892,7 @@ impl<'b> VideoEncodeH264SessionParametersCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeH264SessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeH264SessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoEncodeH264SessionParametersCreateInfoKHR;
 
     #[inline]
@@ -93900,14 +93901,14 @@ impl<'b> ops::Deref for VideoEncodeH264SessionParametersCreateInfoKHRBuilder<'b>
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeH264SessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeH264SessionParametersCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeH264SessionParametersCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeH264SessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoEncodeH264SessionParametersCreateInfoKHR;
 
     #[inline]
@@ -94255,7 +94256,7 @@ impl<'b> VideoEncodeH265DpbSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeH265DpbSlotInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeH265DpbSlotInfoKHRBuilder<'_> {
     type Target = VideoEncodeH265DpbSlotInfoKHR;
 
     #[inline]
@@ -94264,14 +94265,14 @@ impl<'b> ops::Deref for VideoEncodeH265DpbSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeH265DpbSlotInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeH265DpbSlotInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeH265DpbSlotInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeH265DpbSlotInfoKHRBuilder<'_> {
     type Target = VideoEncodeH265DpbSlotInfoKHR;
 
     #[inline]
@@ -94470,7 +94471,7 @@ impl<'b> VideoEncodeH265NaluSliceSegmentInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeH265NaluSliceSegmentInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeH265NaluSliceSegmentInfoKHRBuilder<'_> {
     type Target = VideoEncodeH265NaluSliceSegmentInfoKHR;
 
     #[inline]
@@ -94479,14 +94480,14 @@ impl<'b> ops::Deref for VideoEncodeH265NaluSliceSegmentInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeH265NaluSliceSegmentInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeH265NaluSliceSegmentInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeH265NaluSliceSegmentInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeH265NaluSliceSegmentInfoKHRBuilder<'_> {
     type Target = VideoEncodeH265NaluSliceSegmentInfoKHR;
 
     #[inline]
@@ -94543,7 +94544,7 @@ impl<'b> VideoEncodeH265PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeH265PictureInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeH265PictureInfoKHRBuilder<'_> {
     type Target = VideoEncodeH265PictureInfoKHR;
 
     #[inline]
@@ -94552,14 +94553,14 @@ impl<'b> ops::Deref for VideoEncodeH265PictureInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeH265PictureInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeH265PictureInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeH265PictureInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeH265PictureInfoKHRBuilder<'_> {
     type Target = VideoEncodeH265PictureInfoKHR;
 
     #[inline]
@@ -95179,7 +95180,7 @@ impl<'b> VideoEncodeH265SessionParametersAddInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeH265SessionParametersAddInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeH265SessionParametersAddInfoKHRBuilder<'_> {
     type Target = VideoEncodeH265SessionParametersAddInfoKHR;
 
     #[inline]
@@ -95188,14 +95189,14 @@ impl<'b> ops::Deref for VideoEncodeH265SessionParametersAddInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeH265SessionParametersAddInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeH265SessionParametersAddInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeH265SessionParametersAddInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeH265SessionParametersAddInfoKHRBuilder<'_> {
     type Target = VideoEncodeH265SessionParametersAddInfoKHR;
 
     #[inline]
@@ -95259,7 +95260,7 @@ impl<'b> VideoEncodeH265SessionParametersCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeH265SessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeH265SessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoEncodeH265SessionParametersCreateInfoKHR;
 
     #[inline]
@@ -95268,14 +95269,14 @@ impl<'b> ops::Deref for VideoEncodeH265SessionParametersCreateInfoKHRBuilder<'b>
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeH265SessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeH265SessionParametersCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeH265SessionParametersCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeH265SessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoEncodeH265SessionParametersCreateInfoKHR;
 
     #[inline]
@@ -95549,7 +95550,7 @@ impl<'b> VideoEncodeInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeInfoKHRBuilder<'_> {
     type Target = VideoEncodeInfoKHR;
 
     #[inline]
@@ -95558,14 +95559,14 @@ impl<'b> ops::Deref for VideoEncodeInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeInfoKHRBuilder<'_> {
     type Target = VideoEncodeInfoKHR;
 
     #[inline]
@@ -95866,7 +95867,7 @@ impl<'b> VideoEncodeQualityLevelPropertiesKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeQualityLevelPropertiesKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeQualityLevelPropertiesKHRBuilder<'_> {
     type Target = VideoEncodeQualityLevelPropertiesKHR;
 
     #[inline]
@@ -95875,14 +95876,14 @@ impl<'b> ops::Deref for VideoEncodeQualityLevelPropertiesKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeQualityLevelPropertiesKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeQualityLevelPropertiesKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeQualityLevelPropertiesKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeQualityLevelPropertiesKHRBuilder<'_> {
     type Target = VideoEncodeQualityLevelPropertiesKHR;
 
     #[inline]
@@ -96148,7 +96149,7 @@ impl<'b> VideoEncodeRateControlInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeRateControlInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeRateControlInfoKHRBuilder<'_> {
     type Target = VideoEncodeRateControlInfoKHR;
 
     #[inline]
@@ -96157,14 +96158,14 @@ impl<'b> ops::Deref for VideoEncodeRateControlInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeRateControlInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeRateControlInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeRateControlInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeRateControlInfoKHRBuilder<'_> {
     type Target = VideoEncodeRateControlInfoKHR;
 
     #[inline]
@@ -96240,7 +96241,7 @@ impl<'b> VideoEncodeRateControlLayerInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeRateControlLayerInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeRateControlLayerInfoKHRBuilder<'_> {
     type Target = VideoEncodeRateControlLayerInfoKHR;
 
     #[inline]
@@ -96249,14 +96250,14 @@ impl<'b> ops::Deref for VideoEncodeRateControlLayerInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeRateControlLayerInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeRateControlLayerInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeRateControlLayerInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeRateControlLayerInfoKHRBuilder<'_> {
     type Target = VideoEncodeRateControlLayerInfoKHR;
 
     #[inline]
@@ -96380,7 +96381,7 @@ impl<'b> VideoEncodeSessionParametersFeedbackInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeSessionParametersFeedbackInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeSessionParametersFeedbackInfoKHRBuilder<'_> {
     type Target = VideoEncodeSessionParametersFeedbackInfoKHR;
 
     #[inline]
@@ -96389,14 +96390,14 @@ impl<'b> ops::Deref for VideoEncodeSessionParametersFeedbackInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeSessionParametersFeedbackInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeSessionParametersFeedbackInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeSessionParametersFeedbackInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeSessionParametersFeedbackInfoKHRBuilder<'_> {
     type Target = VideoEncodeSessionParametersFeedbackInfoKHR;
 
     #[inline]
@@ -96462,7 +96463,7 @@ impl<'b> VideoEncodeSessionParametersGetInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoEncodeSessionParametersGetInfoKHRBuilder<'b> {
+impl ops::Deref for VideoEncodeSessionParametersGetInfoKHRBuilder<'_> {
     type Target = VideoEncodeSessionParametersGetInfoKHR;
 
     #[inline]
@@ -96471,14 +96472,14 @@ impl<'b> ops::Deref for VideoEncodeSessionParametersGetInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoEncodeSessionParametersGetInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoEncodeSessionParametersGetInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoEncodeSessionParametersGetInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoEncodeSessionParametersGetInfoKHRBuilder<'_> {
     type Target = VideoEncodeSessionParametersGetInfoKHR;
 
     #[inline]
@@ -96819,7 +96820,7 @@ impl<'b> VideoFormatPropertiesKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoFormatPropertiesKHRBuilder<'b> {
+impl ops::Deref for VideoFormatPropertiesKHRBuilder<'_> {
     type Target = VideoFormatPropertiesKHR;
 
     #[inline]
@@ -96828,14 +96829,14 @@ impl<'b> ops::Deref for VideoFormatPropertiesKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoFormatPropertiesKHRBuilder<'b> {
+impl ops::DerefMut for VideoFormatPropertiesKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoFormatPropertiesKHRBuilder<'b> {
+unsafe impl Cast for VideoFormatPropertiesKHRBuilder<'_> {
     type Target = VideoFormatPropertiesKHR;
 
     #[inline]
@@ -97130,7 +97131,7 @@ impl<'b> VideoProfileInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoProfileInfoKHRBuilder<'b> {
+impl ops::Deref for VideoProfileInfoKHRBuilder<'_> {
     type Target = VideoProfileInfoKHR;
 
     #[inline]
@@ -97139,14 +97140,14 @@ impl<'b> ops::Deref for VideoProfileInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoProfileInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoProfileInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoProfileInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoProfileInfoKHRBuilder<'_> {
     type Target = VideoProfileInfoKHR;
 
     #[inline]
@@ -97190,7 +97191,7 @@ impl<'b> VideoProfileListInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoProfileListInfoKHRBuilder<'b> {
+impl ops::Deref for VideoProfileListInfoKHRBuilder<'_> {
     type Target = VideoProfileListInfoKHR;
 
     #[inline]
@@ -97199,14 +97200,14 @@ impl<'b> ops::Deref for VideoProfileListInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoProfileListInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoProfileListInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoProfileListInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoProfileListInfoKHRBuilder<'_> {
     type Target = VideoProfileListInfoKHR;
 
     #[inline]
@@ -97335,7 +97336,7 @@ impl<'b> VideoReferenceSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoReferenceSlotInfoKHRBuilder<'b> {
+impl ops::Deref for VideoReferenceSlotInfoKHRBuilder<'_> {
     type Target = VideoReferenceSlotInfoKHR;
 
     #[inline]
@@ -97344,14 +97345,14 @@ impl<'b> ops::Deref for VideoReferenceSlotInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoReferenceSlotInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoReferenceSlotInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoReferenceSlotInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoReferenceSlotInfoKHRBuilder<'_> {
     type Target = VideoReferenceSlotInfoKHR;
 
     #[inline]
@@ -97464,7 +97465,7 @@ impl<'b> VideoSessionCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoSessionCreateInfoKHRBuilder<'b> {
+impl ops::Deref for VideoSessionCreateInfoKHRBuilder<'_> {
     type Target = VideoSessionCreateInfoKHR;
 
     #[inline]
@@ -97473,14 +97474,14 @@ impl<'b> ops::Deref for VideoSessionCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoSessionCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoSessionCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoSessionCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoSessionCreateInfoKHRBuilder<'_> {
     type Target = VideoSessionCreateInfoKHR;
 
     #[inline]
@@ -97646,7 +97647,7 @@ impl<'b> VideoSessionParametersCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoSessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::Deref for VideoSessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoSessionParametersCreateInfoKHR;
 
     #[inline]
@@ -97655,14 +97656,14 @@ impl<'b> ops::Deref for VideoSessionParametersCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoSessionParametersCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoSessionParametersCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoSessionParametersCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoSessionParametersCreateInfoKHRBuilder<'_> {
     type Target = VideoSessionParametersCreateInfoKHR;
 
     #[inline]
@@ -97733,7 +97734,7 @@ impl<'b> VideoSessionParametersUpdateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for VideoSessionParametersUpdateInfoKHRBuilder<'b> {
+impl ops::Deref for VideoSessionParametersUpdateInfoKHRBuilder<'_> {
     type Target = VideoSessionParametersUpdateInfoKHR;
 
     #[inline]
@@ -97742,14 +97743,14 @@ impl<'b> ops::Deref for VideoSessionParametersUpdateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for VideoSessionParametersUpdateInfoKHRBuilder<'b> {
+impl ops::DerefMut for VideoSessionParametersUpdateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for VideoSessionParametersUpdateInfoKHRBuilder<'b> {
+unsafe impl Cast for VideoSessionParametersUpdateInfoKHRBuilder<'_> {
     type Target = VideoSessionParametersUpdateInfoKHR;
 
     #[inline]
@@ -98032,7 +98033,7 @@ impl<'b> WaylandSurfaceCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for WaylandSurfaceCreateInfoKHRBuilder<'b> {
+impl ops::Deref for WaylandSurfaceCreateInfoKHRBuilder<'_> {
     type Target = WaylandSurfaceCreateInfoKHR;
 
     #[inline]
@@ -98041,14 +98042,14 @@ impl<'b> ops::Deref for WaylandSurfaceCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for WaylandSurfaceCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for WaylandSurfaceCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for WaylandSurfaceCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for WaylandSurfaceCreateInfoKHRBuilder<'_> {
     type Target = WaylandSurfaceCreateInfoKHR;
 
     #[inline]
@@ -98120,7 +98121,7 @@ impl<'b> Win32KeyedMutexAcquireReleaseInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for Win32KeyedMutexAcquireReleaseInfoKHRBuilder<'b> {
+impl ops::Deref for Win32KeyedMutexAcquireReleaseInfoKHRBuilder<'_> {
     type Target = Win32KeyedMutexAcquireReleaseInfoKHR;
 
     #[inline]
@@ -98129,14 +98130,14 @@ impl<'b> ops::Deref for Win32KeyedMutexAcquireReleaseInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for Win32KeyedMutexAcquireReleaseInfoKHRBuilder<'b> {
+impl ops::DerefMut for Win32KeyedMutexAcquireReleaseInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for Win32KeyedMutexAcquireReleaseInfoKHRBuilder<'b> {
+unsafe impl Cast for Win32KeyedMutexAcquireReleaseInfoKHRBuilder<'_> {
     type Target = Win32KeyedMutexAcquireReleaseInfoKHR;
 
     #[inline]
@@ -98208,7 +98209,7 @@ impl<'b> Win32KeyedMutexAcquireReleaseInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for Win32KeyedMutexAcquireReleaseInfoNVBuilder<'b> {
+impl ops::Deref for Win32KeyedMutexAcquireReleaseInfoNVBuilder<'_> {
     type Target = Win32KeyedMutexAcquireReleaseInfoNV;
 
     #[inline]
@@ -98217,14 +98218,14 @@ impl<'b> ops::Deref for Win32KeyedMutexAcquireReleaseInfoNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for Win32KeyedMutexAcquireReleaseInfoNVBuilder<'b> {
+impl ops::DerefMut for Win32KeyedMutexAcquireReleaseInfoNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for Win32KeyedMutexAcquireReleaseInfoNVBuilder<'b> {
+unsafe impl Cast for Win32KeyedMutexAcquireReleaseInfoNVBuilder<'_> {
     type Target = Win32KeyedMutexAcquireReleaseInfoNV;
 
     #[inline]
@@ -98396,7 +98397,7 @@ impl<'b> WriteDescriptorSetBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for WriteDescriptorSetBuilder<'b> {
+impl ops::Deref for WriteDescriptorSetBuilder<'_> {
     type Target = WriteDescriptorSet;
 
     #[inline]
@@ -98405,14 +98406,14 @@ impl<'b> ops::Deref for WriteDescriptorSetBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for WriteDescriptorSetBuilder<'b> {
+impl ops::DerefMut for WriteDescriptorSetBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for WriteDescriptorSetBuilder<'b> {
+unsafe impl Cast for WriteDescriptorSetBuilder<'_> {
     type Target = WriteDescriptorSet;
 
     #[inline]
@@ -98459,7 +98460,7 @@ impl<'b> WriteDescriptorSetAccelerationStructureKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for WriteDescriptorSetAccelerationStructureKHRBuilder<'b> {
+impl ops::Deref for WriteDescriptorSetAccelerationStructureKHRBuilder<'_> {
     type Target = WriteDescriptorSetAccelerationStructureKHR;
 
     #[inline]
@@ -98468,14 +98469,14 @@ impl<'b> ops::Deref for WriteDescriptorSetAccelerationStructureKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for WriteDescriptorSetAccelerationStructureKHRBuilder<'b> {
+impl ops::DerefMut for WriteDescriptorSetAccelerationStructureKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for WriteDescriptorSetAccelerationStructureKHRBuilder<'b> {
+unsafe impl Cast for WriteDescriptorSetAccelerationStructureKHRBuilder<'_> {
     type Target = WriteDescriptorSetAccelerationStructureKHR;
 
     #[inline]
@@ -98522,7 +98523,7 @@ impl<'b> WriteDescriptorSetAccelerationStructureNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for WriteDescriptorSetAccelerationStructureNVBuilder<'b> {
+impl ops::Deref for WriteDescriptorSetAccelerationStructureNVBuilder<'_> {
     type Target = WriteDescriptorSetAccelerationStructureNV;
 
     #[inline]
@@ -98531,14 +98532,14 @@ impl<'b> ops::Deref for WriteDescriptorSetAccelerationStructureNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for WriteDescriptorSetAccelerationStructureNVBuilder<'b> {
+impl ops::DerefMut for WriteDescriptorSetAccelerationStructureNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for WriteDescriptorSetAccelerationStructureNVBuilder<'b> {
+unsafe impl Cast for WriteDescriptorSetAccelerationStructureNVBuilder<'_> {
     type Target = WriteDescriptorSetAccelerationStructureNV;
 
     #[inline]
@@ -98582,7 +98583,7 @@ impl<'b> WriteDescriptorSetInlineUniformBlockBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for WriteDescriptorSetInlineUniformBlockBuilder<'b> {
+impl ops::Deref for WriteDescriptorSetInlineUniformBlockBuilder<'_> {
     type Target = WriteDescriptorSetInlineUniformBlock;
 
     #[inline]
@@ -98591,14 +98592,14 @@ impl<'b> ops::Deref for WriteDescriptorSetInlineUniformBlockBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for WriteDescriptorSetInlineUniformBlockBuilder<'b> {
+impl ops::DerefMut for WriteDescriptorSetInlineUniformBlockBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for WriteDescriptorSetInlineUniformBlockBuilder<'b> {
+unsafe impl Cast for WriteDescriptorSetInlineUniformBlockBuilder<'_> {
     type Target = WriteDescriptorSetInlineUniformBlock;
 
     #[inline]
@@ -98642,7 +98643,7 @@ impl<'b> WriteDescriptorSetPartitionedAccelerationStructureNVBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for WriteDescriptorSetPartitionedAccelerationStructureNVBuilder<'b> {
+impl ops::Deref for WriteDescriptorSetPartitionedAccelerationStructureNVBuilder<'_> {
     type Target = WriteDescriptorSetPartitionedAccelerationStructureNV;
 
     #[inline]
@@ -98651,14 +98652,14 @@ impl<'b> ops::Deref for WriteDescriptorSetPartitionedAccelerationStructureNVBuil
     }
 }
 
-impl<'b> ops::DerefMut for WriteDescriptorSetPartitionedAccelerationStructureNVBuilder<'b> {
+impl ops::DerefMut for WriteDescriptorSetPartitionedAccelerationStructureNVBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for WriteDescriptorSetPartitionedAccelerationStructureNVBuilder<'b> {
+unsafe impl Cast for WriteDescriptorSetPartitionedAccelerationStructureNVBuilder<'_> {
     type Target = WriteDescriptorSetPartitionedAccelerationStructureNV;
 
     #[inline]
@@ -98702,7 +98703,7 @@ impl<'b> WriteDescriptorSetTensorARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for WriteDescriptorSetTensorARMBuilder<'b> {
+impl ops::Deref for WriteDescriptorSetTensorARMBuilder<'_> {
     type Target = WriteDescriptorSetTensorARM;
 
     #[inline]
@@ -98711,14 +98712,14 @@ impl<'b> ops::Deref for WriteDescriptorSetTensorARMBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for WriteDescriptorSetTensorARMBuilder<'b> {
+impl ops::DerefMut for WriteDescriptorSetTensorARMBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for WriteDescriptorSetTensorARMBuilder<'b> {
+unsafe impl Cast for WriteDescriptorSetTensorARMBuilder<'_> {
     type Target = WriteDescriptorSetTensorARM;
 
     #[inline]
@@ -98965,7 +98966,7 @@ impl<'b> XcbSurfaceCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for XcbSurfaceCreateInfoKHRBuilder<'b> {
+impl ops::Deref for XcbSurfaceCreateInfoKHRBuilder<'_> {
     type Target = XcbSurfaceCreateInfoKHR;
 
     #[inline]
@@ -98974,14 +98975,14 @@ impl<'b> ops::Deref for XcbSurfaceCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for XcbSurfaceCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for XcbSurfaceCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for XcbSurfaceCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for XcbSurfaceCreateInfoKHRBuilder<'_> {
     type Target = XcbSurfaceCreateInfoKHR;
 
     #[inline]
@@ -99036,7 +99037,7 @@ impl<'b> XlibSurfaceCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::Deref for XlibSurfaceCreateInfoKHRBuilder<'b> {
+impl ops::Deref for XlibSurfaceCreateInfoKHRBuilder<'_> {
     type Target = XlibSurfaceCreateInfoKHR;
 
     #[inline]
@@ -99045,14 +99046,14 @@ impl<'b> ops::Deref for XlibSurfaceCreateInfoKHRBuilder<'b> {
     }
 }
 
-impl<'b> ops::DerefMut for XlibSurfaceCreateInfoKHRBuilder<'b> {
+impl ops::DerefMut for XlibSurfaceCreateInfoKHRBuilder<'_> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl<'b> Cast for XlibSurfaceCreateInfoKHRBuilder<'b> {
+unsafe impl Cast for XlibSurfaceCreateInfoKHRBuilder<'_> {
     type Target = XlibSurfaceCreateInfoKHR;
 
     #[inline]

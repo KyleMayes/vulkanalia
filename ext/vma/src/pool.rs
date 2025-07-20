@@ -46,7 +46,7 @@ impl<'a> PoolOptions<'a> {
     }
 }
 
-impl<'a> Default for PoolOptions<'a> {
+impl Default for PoolOptions<'_> {
     fn default() -> Self {
         Self {
             memory_type_index: 0,

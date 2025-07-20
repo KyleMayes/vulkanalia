@@ -93,7 +93,7 @@ private fun Registry.generateLoad(
 
     return """
 ${command.name}: {
-    let value = $loader(b"${command.name.original}\0".as_ptr().cast());
+    let value = $loader(c"${command.name.original}".as_ptr());
     if let Some(value) = value {
         mem::transmute(value)
     } else {
