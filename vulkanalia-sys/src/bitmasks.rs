@@ -226,7 +226,7 @@ bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkBufferUsageFlags2.html>
     #[repr(transparent)]
     #[derive(Default)]
-    pub struct BufferUsageFlags2: Flags {
+    pub struct BufferUsageFlags2: Flags64 {
         const TRANSFER_SRC = 1;
         const TRANSFER_DST = 1 << 1;
         const UNIFORM_TEXEL_BUFFER = 1 << 2;
@@ -256,6 +256,7 @@ bitflags! {
         const TILE_MEMORY_QCOM = 1 << 27;
         const DATA_GRAPH_FOREIGN_DESCRIPTOR_ARM = 1 << 29;
         const PREPROCESS_BUFFER_EXT = 1 << 31;
+        const COMPRESSED_DATA_DGF1_AMDX = 1 << 33;
     }
 }
 

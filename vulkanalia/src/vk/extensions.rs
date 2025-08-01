@@ -27,6 +27,24 @@ use core::ptr;
 
 use super::*;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMDX_dense_geometry_format.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+pub trait AmdxDenseGeometryFormatExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = AMDX_DENSE_GEOMETRY_FORMAT_EXTENSION;
+}
+
+#[cfg(feature = "provisional")]
+impl AmdxDenseGeometryFormatExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMDX_shader_enqueue.html>
 ///
 /// ## WARNING

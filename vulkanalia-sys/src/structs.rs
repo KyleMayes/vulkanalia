@@ -182,6 +182,38 @@ impl Default for AccelerationStructureCreateInfoNV {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug)]
+pub struct AccelerationStructureDenseGeometryFormatTrianglesDataAMDX {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub compressed_data: DeviceOrHostAddressConstKHR,
+    pub data_size: DeviceSize,
+    pub num_triangles: u32,
+    pub num_vertices: u32,
+    pub max_primitive_index: u32,
+    pub max_geometry_index: u32,
+    pub format: CompressedTriangleFormatAMDX,
+}
+
+impl Default for AccelerationStructureDenseGeometryFormatTrianglesDataAMDX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::ACCELERATION_STRUCTURE_DENSE_GEOMETRY_FORMAT_TRIANGLES_DATA_AMDX,
+            next: ptr::null(),
+            compressed_data: DeviceOrHostAddressConstKHR::default(),
+            data_size: DeviceSize::default(),
+            num_triangles: u32::default(),
+            num_vertices: u32::default(),
+            max_primitive_index: u32::default(),
+            max_geometry_index: u32::default(),
+            format: CompressedTriangleFormatAMDX::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAccelerationStructureDeviceAddressInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -12516,6 +12548,26 @@ impl Default for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {
             s_type: StructureType::PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV,
             next: ptr::null_mut(),
             dedicated_allocation_image_aliasing: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceDenseGeometryFormatFeaturesAMDX {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub dense_geometry_format: Bool32,
+}
+
+impl Default for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_DENSE_GEOMETRY_FORMAT_FEATURES_AMDX,
+            next: ptr::null_mut(),
+            dense_geometry_format: Bool32::default(),
         }
     }
 }
