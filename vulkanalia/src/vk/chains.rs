@@ -113,6 +113,21 @@ unsafe impl InputChainStruct for AccelerationStructureCreateInfoNV {
     }
 }
 
+unsafe impl InputChainStruct for AccelerationStructureDenseGeometryFormatTrianglesDataAMDX {
+    const TYPE: StructureType =
+        StructureType::ACCELERATION_STRUCTURE_DENSE_GEOMETRY_FORMAT_TRIANGLES_DATA_AMDX;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for AccelerationStructureDeviceAddressInfoKHR {
     const TYPE: StructureType = StructureType::ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR;
 
@@ -7463,6 +7478,27 @@ unsafe impl InputChainStruct for PhysicalDeviceDedicatedAllocationImageAliasingF
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_DENSE_GEOMETRY_FORMAT_FEATURES_AMDX;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next

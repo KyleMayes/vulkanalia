@@ -689,6 +689,120 @@ unsafe impl Cast for AccelerationStructureCreateInfoNVBuilder<'_> {
     }
 }
 
+/// A Vulkan struct that can be used to extend a [`AccelerationStructureDenseGeometryFormatTrianglesDataAMDX`].
+pub unsafe trait ExtendsAccelerationStructureDenseGeometryFormatTrianglesDataAMDX:
+    fmt::Debug
+{
+}
+unsafe impl ExtendsAccelerationStructureDenseGeometryFormatTrianglesDataAMDX
+    for AccelerationStructureTrianglesOpacityMicromapEXT
+{
+}
+
+unsafe impl Cast for AccelerationStructureDenseGeometryFormatTrianglesDataAMDX {
+    type Target = AccelerationStructureDenseGeometryFormatTrianglesDataAMDX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for AccelerationStructureDenseGeometryFormatTrianglesDataAMDX {
+    type Builder = AccelerationStructureDenseGeometryFormatTrianglesDataAMDXBuilder<'b>;
+}
+
+/// A builder for a [`AccelerationStructureDenseGeometryFormatTrianglesDataAMDX`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct AccelerationStructureDenseGeometryFormatTrianglesDataAMDXBuilder<'b> {
+    value: AccelerationStructureDenseGeometryFormatTrianglesDataAMDX,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> AccelerationStructureDenseGeometryFormatTrianglesDataAMDXBuilder<'b> {
+    #[inline]
+    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
+    where
+        T: ExtendsAccelerationStructureDenseGeometryFormatTrianglesDataAMDX,
+    {
+        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
+        self
+    }
+
+    #[inline]
+    pub fn compressed_data(mut self, compressed_data: DeviceOrHostAddressConstKHR) -> Self {
+        self.value.compressed_data = compressed_data;
+        self
+    }
+
+    #[inline]
+    pub fn data_size(mut self, data_size: DeviceSize) -> Self {
+        self.value.data_size = data_size;
+        self
+    }
+
+    #[inline]
+    pub fn num_triangles(mut self, num_triangles: u32) -> Self {
+        self.value.num_triangles = num_triangles;
+        self
+    }
+
+    #[inline]
+    pub fn num_vertices(mut self, num_vertices: u32) -> Self {
+        self.value.num_vertices = num_vertices;
+        self
+    }
+
+    #[inline]
+    pub fn max_primitive_index(mut self, max_primitive_index: u32) -> Self {
+        self.value.max_primitive_index = max_primitive_index;
+        self
+    }
+
+    #[inline]
+    pub fn max_geometry_index(mut self, max_geometry_index: u32) -> Self {
+        self.value.max_geometry_index = max_geometry_index;
+        self
+    }
+
+    #[inline]
+    pub fn format(mut self, format: CompressedTriangleFormatAMDX) -> Self {
+        self.value.format = format;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> AccelerationStructureDenseGeometryFormatTrianglesDataAMDX {
+        self.value
+    }
+}
+
+impl ops::Deref for AccelerationStructureDenseGeometryFormatTrianglesDataAMDXBuilder<'_> {
+    type Target = AccelerationStructureDenseGeometryFormatTrianglesDataAMDX;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for AccelerationStructureDenseGeometryFormatTrianglesDataAMDXBuilder<'_> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for AccelerationStructureDenseGeometryFormatTrianglesDataAMDXBuilder<'_> {
+    type Target = AccelerationStructureDenseGeometryFormatTrianglesDataAMDX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for AccelerationStructureDeviceAddressInfoKHR {
     type Target = AccelerationStructureDeviceAddressInfoKHR;
 
@@ -880,6 +994,10 @@ unsafe impl Cast for AccelerationStructureGeometryInstancesDataKHRBuilder {
 
 /// A Vulkan struct that can be used to extend a [`AccelerationStructureGeometryKHR`].
 pub unsafe trait ExtendsAccelerationStructureGeometryKHR: fmt::Debug {}
+unsafe impl ExtendsAccelerationStructureGeometryKHR
+    for AccelerationStructureDenseGeometryFormatTrianglesDataAMDX
+{
+}
 unsafe impl ExtendsAccelerationStructureGeometryKHR
     for AccelerationStructureGeometryLinearSweptSpheresDataNV
 {
@@ -17143,6 +17261,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCudaKernelLaunchFeaturesNV
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCustomBorderColorFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDataGraphFeaturesARM {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthBiasControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClampControlFeaturesEXT {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDepthClampZeroOneFeaturesKHR {}
@@ -42611,6 +42730,64 @@ unsafe impl Cast for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNVBui
     }
 }
 
+unsafe impl Cast for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {
+    type Target = PhysicalDeviceDenseGeometryFormatFeaturesAMDX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {
+    type Builder = PhysicalDeviceDenseGeometryFormatFeaturesAMDXBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceDenseGeometryFormatFeaturesAMDX`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceDenseGeometryFormatFeaturesAMDXBuilder {
+    value: PhysicalDeviceDenseGeometryFormatFeaturesAMDX,
+}
+
+impl PhysicalDeviceDenseGeometryFormatFeaturesAMDXBuilder {
+    #[inline]
+    pub fn dense_geometry_format(mut self, dense_geometry_format: bool) -> Self {
+        self.value.dense_geometry_format = dense_geometry_format as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceDenseGeometryFormatFeaturesAMDX {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceDenseGeometryFormatFeaturesAMDXBuilder {
+    type Target = PhysicalDeviceDenseGeometryFormatFeaturesAMDX;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceDenseGeometryFormatFeaturesAMDXBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceDenseGeometryFormatFeaturesAMDXBuilder {
+    type Target = PhysicalDeviceDenseGeometryFormatFeaturesAMDX;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceDepthBiasControlFeaturesEXT {
     type Target = PhysicalDeviceDepthBiasControlFeaturesEXT;
 
@@ -47685,6 +47862,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
     for PhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV
 {
 }
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDenseGeometryFormatFeaturesAMDX {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthBiasControlFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClampControlFeaturesEXT {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDepthClampZeroOneFeaturesKHR {}
