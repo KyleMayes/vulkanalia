@@ -17,6 +17,9 @@
 - [Chzange log for July 18, 2025 Vulkan 1.4.323 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/5d386163f25cca10d2af7be2bbea07d1e6fb52ba)
 - [Fix REVISION expansion in Makefile.release](https://github.com/KhronosGroup/Vulkan-Headers/commit/00a752019b1dc1419164a24be069e4eb03cef01b)
 - [Update for Vulkan-Docs 1.4.323](https://github.com/KhronosGroup/Vulkan-Headers/commit/088a00d81d1fc30ff77aacf31485871aebec7cb2)
+- [Fixed missing type reference `VkPipelineCacheCreateFlagBits` (#2558)](https://github.com/KhronosGroup/Vulkan-Docs/commit/40d05246e3c29fb81522dd4c76e3fd28943a1fc9)
+- [August 1, 2025 Vulkan 1.4.324 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/f8cc250718793afb6c15db69980ba5ff7c24920f)
+- [August 1, 2025 Vulkan 1.4.324 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/0a5f2a25dabcb343417cc8c8a91a015e9d8fc2db)
 
 ## [0.29.0] - 2025-07-14
 

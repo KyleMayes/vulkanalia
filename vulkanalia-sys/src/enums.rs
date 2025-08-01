@@ -1113,6 +1113,36 @@ impl fmt::Debug for ComponentTypeKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkCompressedTriangleFormatAMDX.html>
+#[repr(transparent)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+pub struct CompressedTriangleFormatAMDX(i32);
+
+impl CompressedTriangleFormatAMDX {
+    pub const DGF1: Self = Self(0);
+
+    /// Constructs an instance of this enum with the supplied underlying value.
+    #[inline]
+    pub const fn from_raw(value: i32) -> Self {
+        Self(value)
+    }
+
+    /// Gets the underlying value for this enum instance.
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+
+impl fmt::Debug for CompressedTriangleFormatAMDX {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.0 {
+            0 => write!(f, "DGF1"),
+            _ => self.0.fmt(f),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkConservativeRasterizationModeEXT.html>
 #[repr(transparent)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
@@ -3176,6 +3206,7 @@ impl GeometryTypeKHR {
     pub const INSTANCES: Self = Self(2);
     pub const SPHERES_NV: Self = Self(1000429004);
     pub const LINEAR_SWEPT_SPHERES_NV: Self = Self(1000429005);
+    pub const DENSE_GEOMETRY_FORMAT_TRIANGLES_AMDX: Self = Self(1000478000);
 
     /// Constructs an instance of this enum with the supplied underlying value.
     #[inline]
@@ -3198,6 +3229,7 @@ impl fmt::Debug for GeometryTypeKHR {
             2 => write!(f, "INSTANCES"),
             1000429004 => write!(f, "SPHERES_NV"),
             1000429005 => write!(f, "LINEAR_SWEPT_SPHERES_NV"),
+            1000478000 => write!(f, "DENSE_GEOMETRY_FORMAT_TRIANGLES_AMDX"),
             _ => self.0.fmt(f),
         }
     }
@@ -7002,6 +7034,9 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD: Self = Self(1000476000);
     pub const ANTI_LAG_DATA_AMD: Self = Self(1000476001);
     pub const ANTI_LAG_PRESENTATION_INFO_AMD: Self = Self(1000476002);
+    pub const PHYSICAL_DEVICE_DENSE_GEOMETRY_FORMAT_FEATURES_AMDX: Self = Self(1000478000);
+    pub const ACCELERATION_STRUCTURE_DENSE_GEOMETRY_FORMAT_TRIANGLES_DATA_AMDX: Self =
+        Self(1000478001);
     pub const SURFACE_CAPABILITIES_PRESENT_ID_2_KHR: Self = Self(1000479000);
     pub const PRESENT_ID_2_KHR: Self = Self(1000479001);
     pub const PHYSICAL_DEVICE_PRESENT_ID_2_FEATURES_KHR: Self = Self(1000479002);
@@ -8282,6 +8317,11 @@ impl fmt::Debug for StructureType {
             1000476000 => write!(f, "PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD"),
             1000476001 => write!(f, "ANTI_LAG_DATA_AMD"),
             1000476002 => write!(f, "ANTI_LAG_PRESENTATION_INFO_AMD"),
+            1000478000 => write!(f, "PHYSICAL_DEVICE_DENSE_GEOMETRY_FORMAT_FEATURES_AMDX"),
+            1000478001 => write!(
+                f,
+                "ACCELERATION_STRUCTURE_DENSE_GEOMETRY_FORMAT_TRIANGLES_DATA_AMDX"
+            ),
             1000479000 => write!(f, "SURFACE_CAPABILITIES_PRESENT_ID_2_KHR"),
             1000479001 => write!(f, "PRESENT_ID_2_KHR"),
             1000479002 => write!(f, "PHYSICAL_DEVICE_PRESENT_ID_2_FEATURES_KHR"),

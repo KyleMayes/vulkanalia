@@ -57,6 +57,30 @@ pub struct Extension {
     pub promoted_to: Option<&'static str>,
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMDX_dense_geometry_format.html>
+///
+/// ## WARNING
+///
+/// This is a
+/// [provisional extension](https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/provisional-headers.html).
+/// Provisional extensions are not guaranteed to be backwards compatible and are
+/// not intended to be used in production applications.
+#[cfg(feature = "provisional")]
+#[allow(deprecated)]
+pub const AMDX_DENSE_GEOMETRY_FORMAT_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_AMDX_dense_geometry_format"),
+    number: 479,
+    type_: "device",
+    author: "AMD",
+    contact: "Stu Smith @stu-s",
+    platform: Some("provisional"),
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_AMDX_shader_enqueue.html>
 ///
 /// ## WARNING
