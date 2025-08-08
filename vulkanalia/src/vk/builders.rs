@@ -17427,6 +17427,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupRotateFeatur
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderTerminateInvocationFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderTileImageFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderUntypedPointersFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShadingRateImageFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSubgroupSizeControlFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {}
@@ -48078,6 +48079,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderTerminateInvocationFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderTileImageFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderUntypedPointersFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShadingRateImageFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSubgroupSizeControlFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {}
@@ -64044,6 +64046,64 @@ impl ops::DerefMut for PhysicalDeviceShaderTileImagePropertiesEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceShaderTileImagePropertiesEXTBuilder {
     type Target = PhysicalDeviceShaderTileImagePropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    type Target = PhysicalDeviceShaderUntypedPointersFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    type Builder = PhysicalDeviceShaderUntypedPointersFeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderUntypedPointersFeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderUntypedPointersFeaturesKHRBuilder {
+    value: PhysicalDeviceShaderUntypedPointersFeaturesKHR,
+}
+
+impl PhysicalDeviceShaderUntypedPointersFeaturesKHRBuilder {
+    #[inline]
+    pub fn shader_untyped_pointers(mut self, shader_untyped_pointers: bool) -> Self {
+        self.value.shader_untyped_pointers = shader_untyped_pointers as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderUntypedPointersFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderUntypedPointersFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderUntypedPointersFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderUntypedPointersFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderUntypedPointersFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {

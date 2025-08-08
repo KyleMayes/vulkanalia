@@ -20,6 +20,11 @@
 - [Fixed missing type reference `VkPipelineCacheCreateFlagBits` (#2558)](https://github.com/KhronosGroup/Vulkan-Docs/commit/40d05246e3c29fb81522dd4c76e3fd28943a1fc9)
 - [August 1, 2025 Vulkan 1.4.324 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/f8cc250718793afb6c15db69980ba5ff7c24920f)
 - [August 1, 2025 Vulkan 1.4.324 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/0a5f2a25dabcb343417cc8c8a91a015e9d8fc2db)
+- [Merge branch 'main' of github.com:KhronosGroup/Vulkan-Docs into github-main](https://github.com/KhronosGroup/Vulkan-Docs/commit/f2678d2d6dbf7d76527671ca357b12c22b11c5b9)
+- [Editorial update.](https://github.com/KhronosGroup/Vulkan-Docs/commit/2972f5070950d07bab91f7f7bc9553a75129bad0)
+- [Add test matrix to hpp-compile CI stage to target multiple C++ standards (#2566)](https://github.com/KhronosGroup/Vulkan-Docs/commit/9f9fe5848047990219934e441646e42040bc51f9)
+- [Add newlines at EOF to avoid gitlab conflicts](https://github.com/KhronosGroup/Vulkan-Docs/commit/701b4e19ade2744005fcc4855f5287a38e473b3a)
+- [August 8, 2025 Vulkan 1.4.325 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/72cd1f587fe55c80873fe6430d667056048a5113)
 
 ## [0.29.0] - 2025-07-14
 
