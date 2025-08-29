@@ -10924,28 +10924,6 @@ impl Default for MutableDescriptorTypeListEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOHSurfaceCreateInfoOHOS.html>
-#[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct OHSurfaceCreateInfoOHOS {
-    pub s_type: StructureType,
-    pub next: *const c_void,
-    pub flags: SurfaceCreateFlagsOHOS,
-    pub window: *mut OHNativeWindow,
-}
-
-impl Default for OHSurfaceCreateInfoOHOS {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            s_type: StructureType::OH_SURFACE_CREATE_INFO_OHOS,
-            next: ptr::null(),
-            flags: SurfaceCreateFlagsOHOS::default(),
-            window: ptr::null_mut(),
-        }
-    }
-}
-
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOffset2D.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -18853,6 +18831,26 @@ impl Default for PhysicalDeviceShaderTileImagePropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderUntypedPointersFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_untyped_pointers: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_UNTYPED_POINTERS_FEATURES_KHR,
+            next: ptr::null_mut(),
+            shader_untyped_pointers: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShadingRateImageFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -25296,6 +25294,28 @@ impl Default for SurfaceCapabilitiesPresentWait2KHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCreateInfoOHOS.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SurfaceCreateInfoOHOS {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: SurfaceCreateFlagsOHOS,
+    pub window: *mut OHNativeWindow,
+}
+
+impl Default for SurfaceCreateInfoOHOS {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SURFACE_CREATE_INFO_OHOS,
+            next: ptr::null(),
+            flags: SurfaceCreateFlagsOHOS::default(),
+            window: ptr::null_mut(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceFormat2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -29783,8 +29803,6 @@ pub type SubresourceHostMemcpySizeEXT = SubresourceHostMemcpySize;
 pub type SubresourceLayout2EXT = SubresourceLayout2;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubresourceLayout2KHR.html>
 pub type SubresourceLayout2KHR = SubresourceLayout2;
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCreateInfoOHOS.html>
-pub type SurfaceCreateInfoOHOS = OHSurfaceCreateInfoOHOS;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfacePresentModeCompatibilityEXT.html>
 pub type SurfacePresentModeCompatibilityEXT = SurfacePresentModeCompatibilityKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfacePresentModeEXT.html>

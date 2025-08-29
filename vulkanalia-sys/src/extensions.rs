@@ -4778,6 +4778,22 @@ pub const KHR_SHADER_TERMINATE_INVOCATION_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_untyped_pointers.html>
+#[allow(deprecated)]
+pub const KHR_SHADER_UNTYPED_POINTERS_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_shader_untyped_pointers"),
+    number: 388,
+    type_: "device",
+    author: "KHR",
+    contact: "Alan Baker @alan-baker",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shared_presentable_image.html>
 #[allow(deprecated)]
 pub const KHR_SHARED_PRESENTABLE_IMAGE_EXTENSION: Extension = Extension {

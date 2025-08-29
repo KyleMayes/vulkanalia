@@ -13425,6 +13425,7 @@ unsafe impl ExtendsDataGraphPipelineCreateInfoARM for DataGraphPipelineIdentifie
 unsafe impl ExtendsDataGraphPipelineCreateInfoARM for DataGraphPipelineShaderModuleCreateInfoARM {}
 unsafe impl ExtendsDataGraphPipelineCreateInfoARM for DataGraphProcessingEngineCreateInfoARM {}
 unsafe impl ExtendsDataGraphPipelineCreateInfoARM for PipelineCreationFeedbackCreateInfo {}
+unsafe impl ExtendsDataGraphPipelineCreateInfoARM for ShaderModuleCreateInfo {}
 
 unsafe impl Cast for DataGraphPipelineCreateInfoARM {
     type Target = DataGraphPipelineCreateInfoARM;
@@ -14113,10 +14114,6 @@ unsafe impl Cast for DataGraphPipelineSessionMemoryRequirementsInfoARMBuilder {
     }
 }
 
-/// A Vulkan struct that can be used to extend a [`DataGraphPipelineShaderModuleCreateInfoARM`].
-pub unsafe trait ExtendsDataGraphPipelineShaderModuleCreateInfoARM: fmt::Debug {}
-unsafe impl ExtendsDataGraphPipelineShaderModuleCreateInfoARM for ShaderModuleCreateInfo {}
-
 unsafe impl Cast for DataGraphPipelineShaderModuleCreateInfoARM {
     type Target = DataGraphPipelineShaderModuleCreateInfoARM;
 
@@ -14139,15 +14136,6 @@ pub struct DataGraphPipelineShaderModuleCreateInfoARMBuilder<'b> {
 }
 
 impl<'b> DataGraphPipelineShaderModuleCreateInfoARMBuilder<'b> {
-    #[inline]
-    pub fn push_next<T>(mut self, next: &'b mut impl Cast<Target = T>) -> Self
-    where
-        T: ExtendsDataGraphPipelineShaderModuleCreateInfoARM,
-    {
-        self.next = merge(self.next as *mut c_void, NonNull::from(next).cast());
-        self
-    }
-
     #[inline]
     pub fn module(mut self, module: ShaderModule) -> Self {
         self.value.module = module;
@@ -17427,6 +17415,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupRotateFeatur
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderTerminateInvocationFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderTileImageFeaturesEXT {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderUntypedPointersFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShadingRateImageFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSubgroupSizeControlFeatures {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {}
@@ -37287,71 +37276,6 @@ unsafe impl Cast for MutableDescriptorTypeListEXTBuilder<'_> {
     }
 }
 
-unsafe impl Cast for OHSurfaceCreateInfoOHOS {
-    type Target = OHSurfaceCreateInfoOHOS;
-
-    #[inline]
-    fn into(self) -> Self::Target {
-        self
-    }
-}
-
-impl<'b> HasBuilder<'b> for OHSurfaceCreateInfoOHOS {
-    type Builder = OHSurfaceCreateInfoOHOSBuilder<'b>;
-}
-
-/// A builder for a [`OHSurfaceCreateInfoOHOS`].
-#[repr(transparent)]
-#[derive(Copy, Clone, Debug, Default)]
-pub struct OHSurfaceCreateInfoOHOSBuilder<'b> {
-    value: OHSurfaceCreateInfoOHOS,
-    _marker: PhantomData<&'b ()>,
-}
-
-impl<'b> OHSurfaceCreateInfoOHOSBuilder<'b> {
-    #[inline]
-    pub fn flags(mut self, flags: SurfaceCreateFlagsOHOS) -> Self {
-        self.value.flags = flags;
-        self
-    }
-
-    #[inline]
-    pub fn window(mut self, window: *mut OHNativeWindow) -> Self {
-        self.value.window = window;
-        self
-    }
-
-    #[inline]
-    pub fn build(self) -> OHSurfaceCreateInfoOHOS {
-        self.value
-    }
-}
-
-impl ops::Deref for OHSurfaceCreateInfoOHOSBuilder<'_> {
-    type Target = OHSurfaceCreateInfoOHOS;
-
-    #[inline]
-    fn deref(&self) -> &Self::Target {
-        &self.value
-    }
-}
-
-impl ops::DerefMut for OHSurfaceCreateInfoOHOSBuilder<'_> {
-    #[inline]
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.value
-    }
-}
-
-unsafe impl Cast for OHSurfaceCreateInfoOHOSBuilder<'_> {
-    type Target = OHSurfaceCreateInfoOHOS;
-
-    #[inline]
-    fn into(self) -> Self::Target {
-        self.value
-    }
-}
-
 unsafe impl Cast for Offset2D {
     type Target = Offset2D;
 
@@ -48078,6 +48002,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2
 }
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderTerminateInvocationFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderTileImageFeaturesEXT {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShaderUntypedPointersFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceShadingRateImageFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSubgroupSizeControlFeatures {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceSubpassMergeFeedbackFeaturesEXT {}
@@ -64044,6 +63969,64 @@ impl ops::DerefMut for PhysicalDeviceShaderTileImagePropertiesEXTBuilder {
 
 unsafe impl Cast for PhysicalDeviceShaderTileImagePropertiesEXTBuilder {
     type Target = PhysicalDeviceShaderTileImagePropertiesEXT;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    type Target = PhysicalDeviceShaderUntypedPointersFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    type Builder = PhysicalDeviceShaderUntypedPointersFeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceShaderUntypedPointersFeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceShaderUntypedPointersFeaturesKHRBuilder {
+    value: PhysicalDeviceShaderUntypedPointersFeaturesKHR,
+}
+
+impl PhysicalDeviceShaderUntypedPointersFeaturesKHRBuilder {
+    #[inline]
+    pub fn shader_untyped_pointers(mut self, shader_untyped_pointers: bool) -> Self {
+        self.value.shader_untyped_pointers = shader_untyped_pointers as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceShaderUntypedPointersFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderUntypedPointersFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceShaderUntypedPointersFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceShaderUntypedPointersFeaturesKHRBuilder {
+    type Target = PhysicalDeviceShaderUntypedPointersFeaturesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -86096,6 +86079,71 @@ impl ops::DerefMut for SurfaceCapabilitiesPresentWait2KHRBuilder {
 
 unsafe impl Cast for SurfaceCapabilitiesPresentWait2KHRBuilder {
     type Target = SurfaceCapabilitiesPresentWait2KHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for SurfaceCreateInfoOHOS {
+    type Target = SurfaceCreateInfoOHOS;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for SurfaceCreateInfoOHOS {
+    type Builder = SurfaceCreateInfoOHOSBuilder<'b>;
+}
+
+/// A builder for a [`SurfaceCreateInfoOHOS`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct SurfaceCreateInfoOHOSBuilder<'b> {
+    value: SurfaceCreateInfoOHOS,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> SurfaceCreateInfoOHOSBuilder<'b> {
+    #[inline]
+    pub fn flags(mut self, flags: SurfaceCreateFlagsOHOS) -> Self {
+        self.value.flags = flags;
+        self
+    }
+
+    #[inline]
+    pub fn window(mut self, window: *mut OHNativeWindow) -> Self {
+        self.value.window = window;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> SurfaceCreateInfoOHOS {
+        self.value
+    }
+}
+
+impl ops::Deref for SurfaceCreateInfoOHOSBuilder<'_> {
+    type Target = SurfaceCreateInfoOHOS;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for SurfaceCreateInfoOHOSBuilder<'_> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for SurfaceCreateInfoOHOSBuilder<'_> {
+    type Target = SurfaceCreateInfoOHOS;
 
     #[inline]
     fn into(self) -> Self::Target {

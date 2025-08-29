@@ -6131,20 +6131,6 @@ unsafe impl InputChainStruct for MutableDescriptorTypeCreateInfoEXT {
     }
 }
 
-unsafe impl InputChainStruct for OHSurfaceCreateInfoOHOS {
-    const TYPE: StructureType = StructureType::OH_SURFACE_CREATE_INFO_OHOS;
-
-    #[inline]
-    fn s_type(&self) -> StructureType {
-        self.s_type
-    }
-
-    #[inline]
-    fn next(&self) -> *const c_void {
-        self.next
-    }
-}
-
 unsafe impl InputChainStruct for OpaqueCaptureDescriptorDataCreateInfoEXT {
     const TYPE: StructureType = StructureType::OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT;
 
@@ -12923,6 +12909,27 @@ unsafe impl OutputChainStruct for PhysicalDeviceShaderTileImagePropertiesEXT {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_UNTYPED_POINTERS_FEATURES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceShadingRateImageFeaturesNV {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV;
 
@@ -16846,6 +16853,20 @@ unsafe impl InputChainStruct for SurfaceCapabilitiesPresentWait2KHR {
 unsafe impl OutputChainStruct for SurfaceCapabilitiesPresentWait2KHR {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for SurfaceCreateInfoOHOS {
+    const TYPE: StructureType = StructureType::SURFACE_CREATE_INFO_OHOS;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
         self.next
     }
 }
