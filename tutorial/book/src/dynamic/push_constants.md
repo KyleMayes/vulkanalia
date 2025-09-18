@@ -62,7 +62,7 @@ struct UniformBufferObject {
 }
 ```
 
-Also remove `model` from the `App::update_command_buffers` method.
+Also remove `model` from the `App::update_uniform_buffer` method.
 
 ```rust,noplaypen
 let view = Mat4::look_at_rh(
