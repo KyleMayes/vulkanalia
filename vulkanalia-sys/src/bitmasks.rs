@@ -2570,6 +2570,39 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeRgbChromaOffsetFlagsVALVE.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeRgbChromaOffsetFlagsVALVE: Flags {
+        const COSITED_EVEN = 1;
+        const MIDPOINT = 1 << 1;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeRgbModelConversionFlagsVALVE.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeRgbModelConversionFlagsVALVE: Flags {
+        const RGB_IDENTITY = 1;
+        const YCBCR_IDENTITY = 1 << 1;
+        const YCBCR_709 = 1 << 2;
+        const YCBCR_601 = 1 << 3;
+        const YCBCR_2020 = 1 << 4;
+    }
+}
+
+bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeRgbRangeCompressionFlagsVALVE.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct VideoEncodeRgbRangeCompressionFlagsVALVE: Flags {
+        const FULL_RANGE = 1;
+        const NARROW_RANGE = 1 << 1;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeUsageFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]

@@ -6131,20 +6131,6 @@ unsafe impl InputChainStruct for MutableDescriptorTypeCreateInfoEXT {
     }
 }
 
-unsafe impl InputChainStruct for OHSurfaceCreateInfoOHOS {
-    const TYPE: StructureType = StructureType::OH_SURFACE_CREATE_INFO_OHOS;
-
-    #[inline]
-    fn s_type(&self) -> StructureType {
-        self.s_type
-    }
-
-    #[inline]
-    fn next(&self) -> *const c_void {
-        self.next
-    }
-}
-
 unsafe impl InputChainStruct for OpaqueCaptureDescriptorDataCreateInfoEXT {
     const TYPE: StructureType = StructureType::OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT;
 
@@ -12923,6 +12909,27 @@ unsafe impl OutputChainStruct for PhysicalDeviceShaderTileImagePropertiesEXT {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADER_UNTYPED_POINTERS_FEATURES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceShadingRateImageFeaturesNV {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV;
 
@@ -13743,6 +13750,28 @@ unsafe impl InputChainStruct for PhysicalDeviceVideoEncodeQuantizationMapFeature
 }
 
 unsafe impl OutputChainStruct for PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for PhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE {
+    const TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_VIDEO_ENCODE_RGB_CONVERSION_FEATURES_VALVE;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next
@@ -14849,13 +14878,6 @@ unsafe impl InputChainStruct for PipelineShaderStageRequiredSubgroupSizeCreateIn
 
     #[inline]
     fn next(&self) -> *const c_void {
-        self.next
-    }
-}
-
-unsafe impl OutputChainStruct for PipelineShaderStageRequiredSubgroupSizeCreateInfo {
-    #[inline]
-    fn next_mut(&self) -> *mut c_void {
         self.next
     }
 }
@@ -16850,6 +16872,20 @@ unsafe impl OutputChainStruct for SurfaceCapabilitiesPresentWait2KHR {
     }
 }
 
+unsafe impl InputChainStruct for SurfaceCreateInfoOHOS {
+    const TYPE: StructureType = StructureType::SURFACE_CREATE_INFO_OHOS;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for SurfaceFormat2KHR {
     const TYPE: StructureType = StructureType::SURFACE_FORMAT_2_KHR;
 
@@ -18644,6 +18680,20 @@ unsafe impl InputChainStruct for VideoEncodeIntraRefreshInfoKHR {
     }
 }
 
+unsafe impl InputChainStruct for VideoEncodeProfileRgbConversionInfoVALVE {
+    const TYPE: StructureType = StructureType::VIDEO_ENCODE_PROFILE_RGB_CONVERSION_INFO_VALVE;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for VideoEncodeQualityLevelInfoKHR {
     const TYPE: StructureType = StructureType::VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR;
 
@@ -18757,6 +18807,27 @@ unsafe impl InputChainStruct for VideoEncodeRateControlLayerInfoKHR {
     }
 }
 
+unsafe impl InputChainStruct for VideoEncodeRgbConversionCapabilitiesVALVE {
+    const TYPE: StructureType = StructureType::VIDEO_ENCODE_RGB_CONVERSION_CAPABILITIES_VALVE;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for VideoEncodeRgbConversionCapabilitiesVALVE {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for VideoEncodeSessionIntraRefreshCreateInfoKHR {
     const TYPE: StructureType = StructureType::VIDEO_ENCODE_SESSION_INTRA_REFRESH_CREATE_INFO_KHR;
 
@@ -18794,6 +18865,21 @@ unsafe impl OutputChainStruct for VideoEncodeSessionParametersFeedbackInfoKHR {
 
 unsafe impl InputChainStruct for VideoEncodeSessionParametersGetInfoKHR {
     const TYPE: StructureType = StructureType::VIDEO_ENCODE_SESSION_PARAMETERS_GET_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for VideoEncodeSessionRgbConversionCreateInfoVALVE {
+    const TYPE: StructureType =
+        StructureType::VIDEO_ENCODE_SESSION_RGB_CONVERSION_CREATE_INFO_VALVE;
 
     #[inline]
     fn s_type(&self) -> StructureType {

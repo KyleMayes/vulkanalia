@@ -10513,6 +10513,15 @@ pub trait KhrShaderTerminateInvocationExtension: DeviceV1_0 {
 
 impl KhrShaderTerminateInvocationExtension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shader_untyped_pointers.html>
+pub trait KhrShaderUntypedPointersExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_SHADER_UNTYPED_POINTERS_EXTENSION;
+}
+
+impl KhrShaderUntypedPointersExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_shared_presentable_image.html>
 pub trait KhrSharedPresentableImageExtension: DeviceV1_0 {
     /// The metadata for this extension.
@@ -14902,3 +14911,12 @@ pub trait ValveMutableDescriptorTypeExtension: DeviceV1_0 {
 }
 
 impl ValveMutableDescriptorTypeExtension for crate::Device {}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_VALVE_video_encode_rgb_conversion.html>
+pub trait ValveVideoEncodeRgbConversionExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = VALVE_VIDEO_ENCODE_RGB_CONVERSION_EXTENSION;
+}
+
+impl ValveVideoEncodeRgbConversionExtension for crate::Device {}
