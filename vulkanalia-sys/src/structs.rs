@@ -10924,28 +10924,6 @@ impl Default for MutableDescriptorTypeListEXT {
     }
 }
 
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOHSurfaceCreateInfoOHOS.html>
-#[repr(C)]
-#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
-pub struct OHSurfaceCreateInfoOHOS {
-    pub s_type: StructureType,
-    pub next: *const c_void,
-    pub flags: SurfaceCreateFlagsOHOS,
-    pub window: *mut OHNativeWindow,
-}
-
-impl Default for OHSurfaceCreateInfoOHOS {
-    #[inline]
-    fn default() -> Self {
-        Self {
-            s_type: StructureType::OH_SURFACE_CREATE_INFO_OHOS,
-            next: ptr::null(),
-            flags: SurfaceCreateFlagsOHOS::default(),
-            window: ptr::null_mut(),
-        }
-    }
-}
-
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkOffset2D.html>
 #[repr(C)]
 #[derive(Copy, Clone, Default, Debug, Eq, Hash, PartialEq)]
@@ -18853,6 +18831,26 @@ impl Default for PhysicalDeviceShaderTileImagePropertiesEXT {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShaderUntypedPointersFeaturesKHR.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub shader_untyped_pointers: Bool32,
+}
+
+impl Default for PhysicalDeviceShaderUntypedPointersFeaturesKHR {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_SHADER_UNTYPED_POINTERS_FEATURES_KHR,
+            next: ptr::null_mut(),
+            shader_untyped_pointers: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceShadingRateImageFeaturesNV.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -19800,6 +19798,26 @@ impl Default for PhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR {
             s_type: StructureType::PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR,
             next: ptr::null_mut(),
             video_encode_quantization_map: Bool32::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct PhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub video_encode_rgb_conversion: Bool32,
+}
+
+impl Default for PhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::PHYSICAL_DEVICE_VIDEO_ENCODE_RGB_CONVERSION_FEATURES_VALVE,
+            next: ptr::null_mut(),
+            video_encode_rgb_conversion: Bool32::default(),
         }
     }
 }
@@ -21783,7 +21801,7 @@ impl Default for PipelineShaderStageNodeCreateInfoAMDX {
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct PipelineShaderStageRequiredSubgroupSizeCreateInfo {
     pub s_type: StructureType,
-    pub next: *mut c_void,
+    pub next: *const c_void,
     pub required_subgroup_size: u32,
 }
 
@@ -21792,7 +21810,7 @@ impl Default for PipelineShaderStageRequiredSubgroupSizeCreateInfo {
     fn default() -> Self {
         Self {
             s_type: StructureType::PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO,
-            next: ptr::null_mut(),
+            next: ptr::null(),
             required_subgroup_size: u32::default(),
         }
     }
@@ -25296,6 +25314,28 @@ impl Default for SurfaceCapabilitiesPresentWait2KHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCreateInfoOHOS.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct SurfaceCreateInfoOHOS {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub flags: SurfaceCreateFlagsOHOS,
+    pub window: *mut OHNativeWindow,
+}
+
+impl Default for SurfaceCreateInfoOHOS {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::SURFACE_CREATE_INFO_OHOS,
+            next: ptr::null(),
+            flags: SurfaceCreateFlagsOHOS::default(),
+            window: ptr::null_mut(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceFormat2KHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28275,6 +28315,26 @@ impl Default for VideoEncodeIntraRefreshInfoKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeProfileRgbConversionInfoVALVE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeProfileRgbConversionInfoVALVE {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub perform_encode_rgb_conversion: Bool32,
+}
+
+impl Default for VideoEncodeProfileRgbConversionInfoVALVE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_PROFILE_RGB_CONVERSION_INFO_VALVE,
+            next: ptr::null(),
+            perform_encode_rgb_conversion: Bool32::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeQualityLevelInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28435,6 +28495,32 @@ impl Default for VideoEncodeRateControlLayerInfoKHR {
     }
 }
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeRgbConversionCapabilitiesVALVE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeRgbConversionCapabilitiesVALVE {
+    pub s_type: StructureType,
+    pub next: *mut c_void,
+    pub rgb_models: VideoEncodeRgbModelConversionFlagsVALVE,
+    pub rgb_ranges: VideoEncodeRgbRangeCompressionFlagsVALVE,
+    pub x_chroma_offsets: VideoEncodeRgbChromaOffsetFlagsVALVE,
+    pub y_chroma_offsets: VideoEncodeRgbChromaOffsetFlagsVALVE,
+}
+
+impl Default for VideoEncodeRgbConversionCapabilitiesVALVE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_RGB_CONVERSION_CAPABILITIES_VALVE,
+            next: ptr::null_mut(),
+            rgb_models: VideoEncodeRgbModelConversionFlagsVALVE::default(),
+            rgb_ranges: VideoEncodeRgbRangeCompressionFlagsVALVE::default(),
+            x_chroma_offsets: VideoEncodeRgbChromaOffsetFlagsVALVE::default(),
+            y_chroma_offsets: VideoEncodeRgbChromaOffsetFlagsVALVE::default(),
+        }
+    }
+}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeSessionIntraRefreshCreateInfoKHR.html>
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
@@ -28491,6 +28577,32 @@ impl Default for VideoEncodeSessionParametersGetInfoKHR {
             s_type: StructureType::VIDEO_ENCODE_SESSION_PARAMETERS_GET_INFO_KHR,
             next: ptr::null(),
             video_session_parameters: VideoSessionParametersKHR::default(),
+        }
+    }
+}
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkVideoEncodeSessionRgbConversionCreateInfoVALVE.html>
+#[repr(C)]
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct VideoEncodeSessionRgbConversionCreateInfoVALVE {
+    pub s_type: StructureType,
+    pub next: *const c_void,
+    pub rgb_model: VideoEncodeRgbModelConversionFlagsVALVE,
+    pub rgb_range: VideoEncodeRgbRangeCompressionFlagsVALVE,
+    pub x_chroma_offset: VideoEncodeRgbChromaOffsetFlagsVALVE,
+    pub y_chroma_offset: VideoEncodeRgbChromaOffsetFlagsVALVE,
+}
+
+impl Default for VideoEncodeSessionRgbConversionCreateInfoVALVE {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: StructureType::VIDEO_ENCODE_SESSION_RGB_CONVERSION_CREATE_INFO_VALVE,
+            next: ptr::null(),
+            rgb_model: VideoEncodeRgbModelConversionFlagsVALVE::default(),
+            rgb_range: VideoEncodeRgbRangeCompressionFlagsVALVE::default(),
+            x_chroma_offset: VideoEncodeRgbChromaOffsetFlagsVALVE::default(),
+            y_chroma_offset: VideoEncodeRgbChromaOffsetFlagsVALVE::default(),
         }
     }
 }
@@ -29783,8 +29895,6 @@ pub type SubresourceHostMemcpySizeEXT = SubresourceHostMemcpySize;
 pub type SubresourceLayout2EXT = SubresourceLayout2;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSubresourceLayout2KHR.html>
 pub type SubresourceLayout2KHR = SubresourceLayout2;
-/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfaceCreateInfoOHOS.html>
-pub type SurfaceCreateInfoOHOS = OHSurfaceCreateInfoOHOS;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfacePresentModeCompatibilityEXT.html>
 pub type SurfacePresentModeCompatibilityEXT = SurfacePresentModeCompatibilityKHR;
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkSurfacePresentModeEXT.html>

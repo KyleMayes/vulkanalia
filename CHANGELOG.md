@@ -20,6 +20,21 @@
 - [Fixed missing type reference `VkPipelineCacheCreateFlagBits` (#2558)](https://github.com/KhronosGroup/Vulkan-Docs/commit/40d05246e3c29fb81522dd4c76e3fd28943a1fc9)
 - [August 1, 2025 Vulkan 1.4.324 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/f8cc250718793afb6c15db69980ba5ff7c24920f)
 - [August 1, 2025 Vulkan 1.4.324 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/0a5f2a25dabcb343417cc8c8a91a015e9d8fc2db)
+- [Merge branch 'main' of github.com:KhronosGroup/Vulkan-Docs into github-main](https://github.com/KhronosGroup/Vulkan-Docs/commit/f2678d2d6dbf7d76527671ca357b12c22b11c5b9)
+- [Editorial update.](https://github.com/KhronosGroup/Vulkan-Docs/commit/2972f5070950d07bab91f7f7bc9553a75129bad0)
+- [Add test matrix to hpp-compile CI stage to target multiple C++ standards (#2566)](https://github.com/KhronosGroup/Vulkan-Docs/commit/9f9fe5848047990219934e441646e42040bc51f9)
+- [Add newlines at EOF to avoid gitlab conflicts](https://github.com/KhronosGroup/Vulkan-Docs/commit/701b4e19ade2744005fcc4855f5287a38e473b3a)
+- [August 8, 2025 Vulkan 1.4.325 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/72cd1f587fe55c80873fe6430d667056048a5113)
+- [Framework for adding refpages to docs.vulkan.org (#2553)](https://github.com/KhronosGroup/Vulkan-Docs/commit/31a398b34ec314e62a2d96cea68227430b86e4ae)
+- [Fix typo: missing `be` in `must be less than` (#2572)](https://github.com/KhronosGroup/Vulkan-Docs/commit/1d815e3a93a24b112ba4d360ac316015b0795ae3)
+- [Update present_wait.adoc (#2569)](https://github.com/KhronosGroup/Vulkan-Docs/commit/f6e45bbfa4284695ad4d67ecafb082417f04bef4)
+- [August 29, 2025 Vulkan 1.4.326 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/9c6d565f72ba6929c239c3e20f90b6375acad3bd)
+- [Fix typos in "Acceleration Structures" chapter (#2580)](https://github.com/KhronosGroup/Vulkan-Docs/commit/fa19a89518c936181ec4b8044dc10c4b3226de66)
+- [Resolve malformed cross-reference in `spirvenv.adoc` appendix (#2581)](https://github.com/KhronosGroup/Vulkan-Docs/commit/d66177a6ddc6a626e32826036bdd2d55704cf0e4)
+- [Remove extraneous backticks (#2583)](https://github.com/KhronosGroup/Vulkan-Docs/commit/6fd91a4743abe2d7ae82f429e20e7510b2effd7f)
+- [Fix mention of "C++" in "API Registry" (#2582)](https://github.com/KhronosGroup/Vulkan-Docs/commit/d6e7f443f8abca606b3f312b84bc8903d14e08e8)
+- [Modify genRef.py to respect the 'type' attribute for 'consts' instead of (#2584)](https://github.com/KhronosGroup/Vulkan-Docs/commit/d0b382477df0120f24277ab345124b0796fd8803)
+- [September 19, 2025 Vulkan 1.4.327 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/d2893929769fe6e3a7d9ef96672da551c35d4cd9)
 
 ## [0.29.0] - 2025-07-14
 
