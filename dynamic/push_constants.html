@@ -176,7 +176,7 @@ struct UniformBufferObject {
     proj: Mat4,
 }
 </code></pre>
-<p>Also remove <code>model</code> from the <code>App::update_command_buffers</code> method.</p>
+<p>Also remove <code>model</code> from the <code>App::update_uniform_buffer</code> method.</p>
 <pre><code class="language-rust noplaypen">let view = Mat4::look_at_rh(
     point3(2.0, 2.0, 2.0),
     point3(0.0, 0.0, 0.0),
