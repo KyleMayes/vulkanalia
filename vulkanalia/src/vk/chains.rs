@@ -1740,8 +1740,36 @@ unsafe impl InputChainStruct for CopyImageToMemoryInfo {
     }
 }
 
+unsafe impl InputChainStruct for CopyMemoryIndirectInfoKHR {
+    const TYPE: StructureType = StructureType::COPY_MEMORY_INDIRECT_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for CopyMemoryToAccelerationStructureInfoKHR {
     const TYPE: StructureType = StructureType::COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl InputChainStruct for CopyMemoryToImageIndirectInfoKHR {
+    const TYPE: StructureType = StructureType::COPY_MEMORY_TO_IMAGE_INDIRECT_INFO_KHR;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -7217,6 +7245,27 @@ unsafe impl OutputChainStruct for PhysicalDeviceCooperativeVectorPropertiesNV {
     }
 }
 
+unsafe impl InputChainStruct for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_KHR;
+
+    #[inline]
+    fn s_type(&self) -> StructureType {
+        self.s_type
+    }
+
+    #[inline]
+    fn next(&self) -> *const c_void {
+        self.next
+    }
+}
+
+unsafe impl OutputChainStruct for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {
+    #[inline]
+    fn next_mut(&self) -> *mut c_void {
+        self.next
+    }
+}
+
 unsafe impl InputChainStruct for PhysicalDeviceCopyMemoryIndirectFeaturesNV {
     const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV;
 
@@ -7238,8 +7287,8 @@ unsafe impl OutputChainStruct for PhysicalDeviceCopyMemoryIndirectFeaturesNV {
     }
 }
 
-unsafe impl InputChainStruct for PhysicalDeviceCopyMemoryIndirectPropertiesNV {
-    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_NV;
+unsafe impl InputChainStruct for PhysicalDeviceCopyMemoryIndirectPropertiesKHR {
+    const TYPE: StructureType = StructureType::PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_PROPERTIES_KHR;
 
     #[inline]
     fn s_type(&self) -> StructureType {
@@ -7252,7 +7301,7 @@ unsafe impl InputChainStruct for PhysicalDeviceCopyMemoryIndirectPropertiesNV {
     }
 }
 
-unsafe impl OutputChainStruct for PhysicalDeviceCopyMemoryIndirectPropertiesNV {
+unsafe impl OutputChainStruct for PhysicalDeviceCopyMemoryIndirectPropertiesKHR {
     #[inline]
     fn next_mut(&self) -> *mut c_void {
         self.next

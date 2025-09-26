@@ -11983,8 +11983,8 @@ unsafe impl Cast for CopyImageToMemoryInfoBuilder<'_> {
     }
 }
 
-unsafe impl Cast for CopyMemoryIndirectCommandNV {
-    type Target = CopyMemoryIndirectCommandNV;
+unsafe impl Cast for CopyMemoryIndirectCommandKHR {
+    type Target = CopyMemoryIndirectCommandKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -11992,18 +11992,18 @@ unsafe impl Cast for CopyMemoryIndirectCommandNV {
     }
 }
 
-impl HasBuilder<'static> for CopyMemoryIndirectCommandNV {
-    type Builder = CopyMemoryIndirectCommandNVBuilder;
+impl HasBuilder<'static> for CopyMemoryIndirectCommandKHR {
+    type Builder = CopyMemoryIndirectCommandKHRBuilder;
 }
 
-/// A builder for a [`CopyMemoryIndirectCommandNV`].
+/// A builder for a [`CopyMemoryIndirectCommandKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct CopyMemoryIndirectCommandNVBuilder {
-    value: CopyMemoryIndirectCommandNV,
+pub struct CopyMemoryIndirectCommandKHRBuilder {
+    value: CopyMemoryIndirectCommandKHR,
 }
 
-impl CopyMemoryIndirectCommandNVBuilder {
+impl CopyMemoryIndirectCommandKHRBuilder {
     #[inline]
     pub fn src_address(mut self, src_address: DeviceAddress) -> Self {
         self.value.src_address = src_address;
@@ -12023,13 +12023,13 @@ impl CopyMemoryIndirectCommandNVBuilder {
     }
 
     #[inline]
-    pub fn build(self) -> CopyMemoryIndirectCommandNV {
+    pub fn build(self) -> CopyMemoryIndirectCommandKHR {
         self.value
     }
 }
 
-impl ops::Deref for CopyMemoryIndirectCommandNVBuilder {
-    type Target = CopyMemoryIndirectCommandNV;
+impl ops::Deref for CopyMemoryIndirectCommandKHRBuilder {
+    type Target = CopyMemoryIndirectCommandKHR;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -12037,15 +12037,94 @@ impl ops::Deref for CopyMemoryIndirectCommandNVBuilder {
     }
 }
 
-impl ops::DerefMut for CopyMemoryIndirectCommandNVBuilder {
+impl ops::DerefMut for CopyMemoryIndirectCommandKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for CopyMemoryIndirectCommandNVBuilder {
-    type Target = CopyMemoryIndirectCommandNV;
+unsafe impl Cast for CopyMemoryIndirectCommandKHRBuilder {
+    type Target = CopyMemoryIndirectCommandKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CopyMemoryIndirectInfoKHR {
+    type Target = CopyMemoryIndirectInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for CopyMemoryIndirectInfoKHR {
+    type Builder = CopyMemoryIndirectInfoKHRBuilder;
+}
+
+/// A builder for a [`CopyMemoryIndirectInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CopyMemoryIndirectInfoKHRBuilder {
+    value: CopyMemoryIndirectInfoKHR,
+}
+
+impl CopyMemoryIndirectInfoKHRBuilder {
+    #[inline]
+    pub fn src_copy_flags(mut self, src_copy_flags: AddressCopyFlagsKHR) -> Self {
+        self.value.src_copy_flags = src_copy_flags;
+        self
+    }
+
+    #[inline]
+    pub fn dst_copy_flags(mut self, dst_copy_flags: AddressCopyFlagsKHR) -> Self {
+        self.value.dst_copy_flags = dst_copy_flags;
+        self
+    }
+
+    #[inline]
+    pub fn copy_count(mut self, copy_count: u32) -> Self {
+        self.value.copy_count = copy_count;
+        self
+    }
+
+    #[inline]
+    pub fn copy_address_range(
+        mut self,
+        copy_address_range: impl Cast<Target = StridedDeviceAddressRangeKHR>,
+    ) -> Self {
+        self.value.copy_address_range = copy_address_range.into();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CopyMemoryIndirectInfoKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for CopyMemoryIndirectInfoKHRBuilder {
+    type Target = CopyMemoryIndirectInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for CopyMemoryIndirectInfoKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for CopyMemoryIndirectInfoKHRBuilder {
+    type Target = CopyMemoryIndirectInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -12123,8 +12202,8 @@ unsafe impl Cast for CopyMemoryToAccelerationStructureInfoKHRBuilder {
     }
 }
 
-unsafe impl Cast for CopyMemoryToImageIndirectCommandNV {
-    type Target = CopyMemoryToImageIndirectCommandNV;
+unsafe impl Cast for CopyMemoryToImageIndirectCommandKHR {
+    type Target = CopyMemoryToImageIndirectCommandKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -12132,18 +12211,18 @@ unsafe impl Cast for CopyMemoryToImageIndirectCommandNV {
     }
 }
 
-impl HasBuilder<'static> for CopyMemoryToImageIndirectCommandNV {
-    type Builder = CopyMemoryToImageIndirectCommandNVBuilder;
+impl HasBuilder<'static> for CopyMemoryToImageIndirectCommandKHR {
+    type Builder = CopyMemoryToImageIndirectCommandKHRBuilder;
 }
 
-/// A builder for a [`CopyMemoryToImageIndirectCommandNV`].
+/// A builder for a [`CopyMemoryToImageIndirectCommandKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct CopyMemoryToImageIndirectCommandNVBuilder {
-    value: CopyMemoryToImageIndirectCommandNV,
+pub struct CopyMemoryToImageIndirectCommandKHRBuilder {
+    value: CopyMemoryToImageIndirectCommandKHR,
 }
 
-impl CopyMemoryToImageIndirectCommandNVBuilder {
+impl CopyMemoryToImageIndirectCommandKHRBuilder {
     #[inline]
     pub fn src_address(mut self, src_address: DeviceAddress) -> Self {
         self.value.src_address = src_address;
@@ -12184,13 +12263,13 @@ impl CopyMemoryToImageIndirectCommandNVBuilder {
     }
 
     #[inline]
-    pub fn build(self) -> CopyMemoryToImageIndirectCommandNV {
+    pub fn build(self) -> CopyMemoryToImageIndirectCommandKHR {
         self.value
     }
 }
 
-impl ops::Deref for CopyMemoryToImageIndirectCommandNVBuilder {
-    type Target = CopyMemoryToImageIndirectCommandNV;
+impl ops::Deref for CopyMemoryToImageIndirectCommandKHRBuilder {
+    type Target = CopyMemoryToImageIndirectCommandKHR;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -12198,15 +12277,105 @@ impl ops::Deref for CopyMemoryToImageIndirectCommandNVBuilder {
     }
 }
 
-impl ops::DerefMut for CopyMemoryToImageIndirectCommandNVBuilder {
+impl ops::DerefMut for CopyMemoryToImageIndirectCommandKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for CopyMemoryToImageIndirectCommandNVBuilder {
-    type Target = CopyMemoryToImageIndirectCommandNV;
+unsafe impl Cast for CopyMemoryToImageIndirectCommandKHRBuilder {
+    type Target = CopyMemoryToImageIndirectCommandKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for CopyMemoryToImageIndirectInfoKHR {
+    type Target = CopyMemoryToImageIndirectInfoKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl<'b> HasBuilder<'b> for CopyMemoryToImageIndirectInfoKHR {
+    type Builder = CopyMemoryToImageIndirectInfoKHRBuilder<'b>;
+}
+
+/// A builder for a [`CopyMemoryToImageIndirectInfoKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct CopyMemoryToImageIndirectInfoKHRBuilder<'b> {
+    value: CopyMemoryToImageIndirectInfoKHR,
+    _marker: PhantomData<&'b ()>,
+}
+
+impl<'b> CopyMemoryToImageIndirectInfoKHRBuilder<'b> {
+    #[inline]
+    pub fn src_copy_flags(mut self, src_copy_flags: AddressCopyFlagsKHR) -> Self {
+        self.value.src_copy_flags = src_copy_flags;
+        self
+    }
+
+    #[inline]
+    pub fn copy_address_range(
+        mut self,
+        copy_address_range: impl Cast<Target = StridedDeviceAddressRangeKHR>,
+    ) -> Self {
+        self.value.copy_address_range = copy_address_range.into();
+        self
+    }
+
+    #[inline]
+    pub fn dst_image(mut self, dst_image: Image) -> Self {
+        self.value.dst_image = dst_image;
+        self
+    }
+
+    #[inline]
+    pub fn dst_image_layout(mut self, dst_image_layout: ImageLayout) -> Self {
+        self.value.dst_image_layout = dst_image_layout;
+        self
+    }
+
+    #[inline]
+    pub fn image_subresources(
+        mut self,
+        image_subresources: &'b [impl Cast<Target = ImageSubresourceLayers>],
+    ) -> Self {
+        self.value.copy_count = image_subresources.len() as u32;
+        self.value.image_subresources = image_subresources.as_ptr().cast();
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> CopyMemoryToImageIndirectInfoKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for CopyMemoryToImageIndirectInfoKHRBuilder<'_> {
+    type Target = CopyMemoryToImageIndirectInfoKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for CopyMemoryToImageIndirectInfoKHRBuilder<'_> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for CopyMemoryToImageIndirectInfoKHRBuilder<'_> {
+    type Target = CopyMemoryToImageIndirectInfoKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -17240,6 +17409,7 @@ unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrix2Features
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeVectorFeaturesNV {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCornerSampledImageFeaturesNV {}
 unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCoverageReductionModeFeaturesNV {}
@@ -41768,6 +41938,70 @@ unsafe impl Cast for PhysicalDeviceCooperativeVectorPropertiesNVBuilder {
     }
 }
 
+unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {
+    type Target = PhysicalDeviceCopyMemoryIndirectFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {
+    type Builder = PhysicalDeviceCopyMemoryIndirectFeaturesKHRBuilder;
+}
+
+/// A builder for a [`PhysicalDeviceCopyMemoryIndirectFeaturesKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct PhysicalDeviceCopyMemoryIndirectFeaturesKHRBuilder {
+    value: PhysicalDeviceCopyMemoryIndirectFeaturesKHR,
+}
+
+impl PhysicalDeviceCopyMemoryIndirectFeaturesKHRBuilder {
+    #[inline]
+    pub fn indirect_memory_copy(mut self, indirect_memory_copy: bool) -> Self {
+        self.value.indirect_memory_copy = indirect_memory_copy as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn indirect_memory_to_image_copy(mut self, indirect_memory_to_image_copy: bool) -> Self {
+        self.value.indirect_memory_to_image_copy = indirect_memory_to_image_copy as Bool32;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> PhysicalDeviceCopyMemoryIndirectFeaturesKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for PhysicalDeviceCopyMemoryIndirectFeaturesKHRBuilder {
+    type Target = PhysicalDeviceCopyMemoryIndirectFeaturesKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for PhysicalDeviceCopyMemoryIndirectFeaturesKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectFeaturesKHRBuilder {
+    type Target = PhysicalDeviceCopyMemoryIndirectFeaturesKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
 unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectFeaturesNV {
     type Target = PhysicalDeviceCopyMemoryIndirectFeaturesNV;
 
@@ -41826,8 +42060,8 @@ unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectFeaturesNVBuilder {
     }
 }
 
-unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectPropertiesNV {
-    type Target = PhysicalDeviceCopyMemoryIndirectPropertiesNV;
+unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectPropertiesKHR {
+    type Target = PhysicalDeviceCopyMemoryIndirectPropertiesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -41835,18 +42069,18 @@ unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectPropertiesNV {
     }
 }
 
-impl HasBuilder<'static> for PhysicalDeviceCopyMemoryIndirectPropertiesNV {
-    type Builder = PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder;
+impl HasBuilder<'static> for PhysicalDeviceCopyMemoryIndirectPropertiesKHR {
+    type Builder = PhysicalDeviceCopyMemoryIndirectPropertiesKHRBuilder;
 }
 
-/// A builder for a [`PhysicalDeviceCopyMemoryIndirectPropertiesNV`].
+/// A builder for a [`PhysicalDeviceCopyMemoryIndirectPropertiesKHR`].
 #[repr(transparent)]
 #[derive(Copy, Clone, Debug, Default)]
-pub struct PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder {
-    value: PhysicalDeviceCopyMemoryIndirectPropertiesNV,
+pub struct PhysicalDeviceCopyMemoryIndirectPropertiesKHRBuilder {
+    value: PhysicalDeviceCopyMemoryIndirectPropertiesKHR,
 }
 
-impl PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder {
+impl PhysicalDeviceCopyMemoryIndirectPropertiesKHRBuilder {
     #[inline]
     pub fn supported_queues(mut self, supported_queues: QueueFlags) -> Self {
         self.value.supported_queues = supported_queues;
@@ -41854,13 +42088,13 @@ impl PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder {
     }
 
     #[inline]
-    pub fn build(self) -> PhysicalDeviceCopyMemoryIndirectPropertiesNV {
+    pub fn build(self) -> PhysicalDeviceCopyMemoryIndirectPropertiesKHR {
         self.value
     }
 }
 
-impl ops::Deref for PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder {
-    type Target = PhysicalDeviceCopyMemoryIndirectPropertiesNV;
+impl ops::Deref for PhysicalDeviceCopyMemoryIndirectPropertiesKHRBuilder {
+    type Target = PhysicalDeviceCopyMemoryIndirectPropertiesKHR;
 
     #[inline]
     fn deref(&self) -> &Self::Target {
@@ -41868,15 +42102,15 @@ impl ops::Deref for PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder {
     }
 }
 
-impl ops::DerefMut for PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder {
+impl ops::DerefMut for PhysicalDeviceCopyMemoryIndirectPropertiesKHRBuilder {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.value
     }
 }
 
-unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectPropertiesNVBuilder {
-    type Target = PhysicalDeviceCopyMemoryIndirectPropertiesNV;
+unsafe impl Cast for PhysicalDeviceCopyMemoryIndirectPropertiesKHRBuilder {
+    type Target = PhysicalDeviceCopyMemoryIndirectPropertiesKHR;
 
     #[inline]
     fn into(self) -> Self::Target {
@@ -47775,6 +48009,7 @@ unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrix2F
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrixFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeMatrixFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCooperativeVectorFeaturesNV {}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCopyMemoryIndirectFeaturesKHR {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCopyMemoryIndirectFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCornerSampledImageFeaturesNV {}
 unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceCoverageReductionModeFeaturesNV {}
@@ -58349,7 +58584,7 @@ unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCooperativeMatrix
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCooperativeMatrixPropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCooperativeMatrixPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCooperativeVectorPropertiesNV {}
-unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCopyMemoryIndirectPropertiesNV {}
+unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCopyMemoryIndirectPropertiesKHR {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCudaKernelLaunchPropertiesNV {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceCustomBorderColorPropertiesEXT {}
 unsafe impl ExtendsPhysicalDeviceProperties2 for PhysicalDeviceDepthStencilResolveProperties {}
@@ -84230,6 +84465,76 @@ impl ops::DerefMut for StridedDeviceAddressNVBuilder {
 
 unsafe impl Cast for StridedDeviceAddressNVBuilder {
     type Target = StridedDeviceAddressNV;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self.value
+    }
+}
+
+unsafe impl Cast for StridedDeviceAddressRangeKHR {
+    type Target = StridedDeviceAddressRangeKHR;
+
+    #[inline]
+    fn into(self) -> Self::Target {
+        self
+    }
+}
+
+impl HasBuilder<'static> for StridedDeviceAddressRangeKHR {
+    type Builder = StridedDeviceAddressRangeKHRBuilder;
+}
+
+/// A builder for a [`StridedDeviceAddressRangeKHR`].
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Default)]
+pub struct StridedDeviceAddressRangeKHRBuilder {
+    value: StridedDeviceAddressRangeKHR,
+}
+
+impl StridedDeviceAddressRangeKHRBuilder {
+    #[inline]
+    pub fn address(mut self, address: DeviceAddress) -> Self {
+        self.value.address = address;
+        self
+    }
+
+    #[inline]
+    pub fn size(mut self, size: DeviceSize) -> Self {
+        self.value.size = size;
+        self
+    }
+
+    #[inline]
+    pub fn stride(mut self, stride: DeviceSize) -> Self {
+        self.value.stride = stride;
+        self
+    }
+
+    #[inline]
+    pub fn build(self) -> StridedDeviceAddressRangeKHR {
+        self.value
+    }
+}
+
+impl ops::Deref for StridedDeviceAddressRangeKHRBuilder {
+    type Target = StridedDeviceAddressRangeKHR;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+impl ops::DerefMut for StridedDeviceAddressRangeKHRBuilder {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.value
+    }
+}
+
+unsafe impl Cast for StridedDeviceAddressRangeKHRBuilder {
+    type Target = StridedDeviceAddressRangeKHR;
 
     #[inline]
     fn into(self) -> Self::Target {

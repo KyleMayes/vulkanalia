@@ -3330,6 +3330,22 @@ pub const KHR_COPY_COMMANDS2_EXTENSION: Extension = Extension {
     promoted_to: Some("VK_VERSION_1_3"),
 };
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_copy_memory_indirect.html>
+#[allow(deprecated)]
+pub const KHR_COPY_MEMORY_INDIRECT_EXTENSION: Extension = Extension {
+    name: ExtensionName::from_bytes(b"VK_KHR_copy_memory_indirect"),
+    number: 550,
+    type_: "device",
+    author: "KHR",
+    contact: "Vikram Kushwaha @vkushwaha-nv",
+    platform: None,
+    required_extensions: None,
+    required_version: None,
+    deprecated_by: None,
+    obsoleted_by: None,
+    promoted_to: None,
+};
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_create_renderpass2.html>
 #[allow(deprecated)]
 pub const KHR_CREATE_RENDERPASS2_EXTENSION: Extension = Extension {
@@ -5673,7 +5689,7 @@ pub const NV_COPY_MEMORY_INDIRECT_EXTENSION: Extension = Extension {
     required_version: None,
     deprecated_by: None,
     obsoleted_by: None,
-    promoted_to: None,
+    promoted_to: Some("VK_KHR_copy_memory_indirect"),
 };
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_NV_corner_sampled_image.html>

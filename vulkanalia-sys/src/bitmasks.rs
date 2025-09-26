@@ -157,6 +157,17 @@ bitflags! {
 }
 
 bitflags! {
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAddressCopyFlagsKHR.html>
+    #[repr(transparent)]
+    #[derive(Default)]
+    pub struct AddressCopyFlagsKHR: Flags {
+        const DEVICE_LOCAL = 1;
+        const SPARSE = 1 << 1;
+        const PROTECTED = 1 << 2;
+    }
+}
+
+bitflags! {
     /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VkAndroidSurfaceCreateFlagsKHR.html>
     #[repr(transparent)]
     #[derive(Default)]
@@ -910,6 +921,7 @@ bitflags! {
         const VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_KHR = 1 << 49;
         const VIDEO_ENCODE_EMPHASIS_MAP_KHR = 1 << 50;
         const ACCELERATION_STRUCTURE_RADIUS_BUFFER_NV = 1 << 51;
+        const COPY_IMAGE_INDIRECT_DST_KHR = 1 << 59;
     }
 }
 
@@ -1696,6 +1708,7 @@ bitflags! {
         const CLUSTER_CULLING_SHADER_HUAWEI = 1 << 41;
         const DATA_GRAPH_ARM = 1 << 42;
         const CONVERT_COOPERATIVE_VECTOR_MATRIX_NV = 1 << 44;
+        const COPY_INDIRECT_KHR = 1 << 46;
     }
 }
 
