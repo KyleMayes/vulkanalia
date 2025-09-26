@@ -7357,6 +7357,41 @@ pub trait KhrCopyCommands2Extension: DeviceV1_0 {
 
 impl KhrCopyCommands2Extension for crate::Device {}
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_copy_memory_indirect.html>
+pub trait KhrCopyMemoryIndirectExtension: DeviceV1_0 {
+    /// The metadata for this extension.
+    #[allow(deprecated)]
+    const METADATA: Extension = KHR_COPY_MEMORY_INDIRECT_EXTENSION;
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyMemoryIndirectKHR.html>
+    #[inline]
+    unsafe fn cmd_copy_memory_indirect_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        copy_memory_indirect_info: &CopyMemoryIndirectInfoKHR,
+    ) {
+        let __result = (self.commands().cmd_copy_memory_indirect_khr)(
+            command_buffer,
+            copy_memory_indirect_info,
+        );
+    }
+
+    /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyMemoryToImageIndirectKHR.html>
+    #[inline]
+    unsafe fn cmd_copy_memory_to_image_indirect_khr(
+        &self,
+        command_buffer: CommandBuffer,
+        copy_memory_to_image_indirect_info: &CopyMemoryToImageIndirectInfoKHR,
+    ) {
+        let __result = (self.commands().cmd_copy_memory_to_image_indirect_khr)(
+            command_buffer,
+            copy_memory_to_image_indirect_info,
+        );
+    }
+}
+
+impl KhrCopyMemoryIndirectExtension for crate::Device {}
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/VK_KHR_create_renderpass2.html>
 pub trait KhrCreateRenderpass2Extension: DeviceV1_0 {
     /// The metadata for this extension.

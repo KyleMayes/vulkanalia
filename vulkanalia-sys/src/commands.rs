@@ -617,6 +617,12 @@ pub type PFN_vkCmdCopyImageToBuffer2 = unsafe extern "system" fn(
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyImageToBuffer2KHR.html>
 pub type PFN_vkCmdCopyImageToBuffer2KHR = PFN_vkCmdCopyImageToBuffer2;
 
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyMemoryIndirectKHR.html>
+pub type PFN_vkCmdCopyMemoryIndirectKHR = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _copy_memory_indirect_info: *const CopyMemoryIndirectInfoKHR,
+);
+
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyMemoryIndirectNV.html>
 pub type PFN_vkCmdCopyMemoryIndirectNV = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
@@ -629,6 +635,12 @@ pub type PFN_vkCmdCopyMemoryIndirectNV = unsafe extern "system" fn(
 pub type PFN_vkCmdCopyMemoryToAccelerationStructureKHR = unsafe extern "system" fn(
     _command_buffer: CommandBuffer,
     _info: *const CopyMemoryToAccelerationStructureInfoKHR,
+);
+
+/// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyMemoryToImageIndirectKHR.html>
+pub type PFN_vkCmdCopyMemoryToImageIndirectKHR = unsafe extern "system" fn(
+    _command_buffer: CommandBuffer,
+    _copy_memory_to_image_indirect_info: *const CopyMemoryToImageIndirectInfoKHR,
 );
 
 /// <https://www.khronos.org/registry/vulkan/specs/latest/man/html/vkCmdCopyMemoryToImageIndirectNV.html>

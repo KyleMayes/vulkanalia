@@ -117,9 +117,11 @@ pub struct DeviceCommands {
     pub cmd_copy_image_to_buffer: PFN_vkCmdCopyImageToBuffer,
     pub cmd_copy_image_to_buffer2: PFN_vkCmdCopyImageToBuffer2,
     pub cmd_copy_image_to_buffer2_khr: PFN_vkCmdCopyImageToBuffer2KHR,
+    pub cmd_copy_memory_indirect_khr: PFN_vkCmdCopyMemoryIndirectKHR,
     pub cmd_copy_memory_indirect_nv: PFN_vkCmdCopyMemoryIndirectNV,
     pub cmd_copy_memory_to_acceleration_structure_khr:
         PFN_vkCmdCopyMemoryToAccelerationStructureKHR,
+    pub cmd_copy_memory_to_image_indirect_khr: PFN_vkCmdCopyMemoryToImageIndirectKHR,
     pub cmd_copy_memory_to_image_indirect_nv: PFN_vkCmdCopyMemoryToImageIndirectNV,
     pub cmd_copy_memory_to_micromap_ext: PFN_vkCmdCopyMemoryToMicromapEXT,
     pub cmd_copy_micromap_ext: PFN_vkCmdCopyMicromapEXT,
@@ -2062,6 +2064,20 @@ impl DeviceCommands {
                     fallback
                 }
             },
+            cmd_copy_memory_indirect_khr: {
+                let value = loader(c"vkCmdCopyMemoryIndirectKHR".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _copy_memory_indirect_info: *const CopyMemoryIndirectInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdCopyMemoryIndirectKHR")
+                    }
+                    fallback
+                }
+            },
             cmd_copy_memory_indirect_nv: {
                 let value = loader(c"vkCmdCopyMemoryIndirectNV".as_ptr());
                 if let Some(value) = value {
@@ -2088,6 +2104,20 @@ impl DeviceCommands {
                         _info: *const CopyMemoryToAccelerationStructureInfoKHR,
                     ) {
                         panic!("could not load vkCmdCopyMemoryToAccelerationStructureKHR")
+                    }
+                    fallback
+                }
+            },
+            cmd_copy_memory_to_image_indirect_khr: {
+                let value = loader(c"vkCmdCopyMemoryToImageIndirectKHR".as_ptr());
+                if let Some(value) = value {
+                    mem::transmute(value)
+                } else {
+                    unsafe extern "system" fn fallback(
+                        _command_buffer: CommandBuffer,
+                        _copy_memory_to_image_indirect_info: *const CopyMemoryToImageIndirectInfoKHR,
+                    ) {
+                        panic!("could not load vkCmdCopyMemoryToImageIndirectKHR")
                     }
                     fallback
                 }

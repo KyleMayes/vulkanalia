@@ -35,6 +35,9 @@
 - [Fix mention of "C++" in "API Registry" (#2582)](https://github.com/KhronosGroup/Vulkan-Docs/commit/d6e7f443f8abca606b3f312b84bc8903d14e08e8)
 - [Modify genRef.py to respect the 'type' attribute for 'consts' instead of (#2584)](https://github.com/KhronosGroup/Vulkan-Docs/commit/d0b382477df0120f24277ab345124b0796fd8803)
 - [September 19, 2025 Vulkan 1.4.327 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/d2893929769fe6e3a7d9ef96672da551c35d4cd9)
+- [Merge branch 'main' of github.com:KhronosGroup/Vulkan-Docs into github-main](https://github.com/KhronosGroup/Vulkan-Docs/commit/ef2dd227fb7310db03a7d2d40579226c4280b84b)
+- [Fix bunch of issues in `ChangeLog.adoc` (#2587)](https://github.com/KhronosGroup/Vulkan-Docs/commit/dad8cec7a33e672d3a575072b75da6261686e2d2)
+- [September 25, 2025 Vulkan 1.4.328 spec update](https://github.com/KhronosGroup/Vulkan-Docs/commit/39961b9409730ee4edb8b5ad0ab1fc9b552f9044)
 
 ## [0.29.0] - 2025-07-14
 
