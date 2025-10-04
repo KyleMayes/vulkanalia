@@ -1,4 +1,4 @@
-## [0.30.0] - UNRELEASED
+## [0.30.0] - 2025-10-04
 
 ### Added
 - Added `DispatchableHandle` and `NonDispatchableHandle` trait aliases for `Handle` trait
