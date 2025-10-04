@@ -201,7 +201,7 @@ private fun extractConstant(e: Element): Constant {
     val type =
         when {
             name == "VK_TRUE" || name == "VK_FALSE" -> "uint32_t"
-            name != "WHOLE_SIZE" && (name.startsWith("VK_MAX") || name.endsWith("SIZE")) -> "size_t"
+            name != "VK_WHOLE_SIZE" && (name.startsWith("VK_MAX") || name.endsWith("SIZE")) -> "size_t"
             value.contains("ULL") -> "uint64_t"
             value.contains("U") -> "uint32_t"
             value.contains(Regex("[fF]$")) -> "float"
